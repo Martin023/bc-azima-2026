@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:cl="http://schemas.microsoft.com/sqlserver/reporting/2010/01/componentdefinition" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>6ef4d6b0-af38-4285-9a50-98006569cbf7</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <PageHeader>
+          <Height>1.00677in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="Textbox14">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>P9</Value>
+                      <Style>
+                        <FontFamily>Verdana</FontFamily>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox4</rd:DefaultName>
+              <Left>2.3976in</Left>
+              <Height>0.25in</Height>
+              <Width>1.90253in</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox90">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>KENYA REVENUE AUTHORITY</Value>
+                      <Style>
+                        <FontFamily>Verdana</FontFamily>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>DOMESTIC TAXES DEPARTMENT</Value>
+                      <Style>
+                        <FontFamily>Verdana</FontFamily>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value />
+                      <Style>
+                        <FontFamily>Verdana</FontFamily>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox89</rd:DefaultName>
+              <Top>0.45805in</Top>
+              <Left>2.3976in</Left>
+              <Height>0.31249in</Height>
+              <Width>2.91404in</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Image Name="Image1">
+              <Source>Database</Source>
+              <Value>=First(Fields!CompanyInfoPicture.Value, "DataSet_Result")</Value>
+              <MIMEType>image/bmp</MIMEType>
+              <Top>0.00001cm</Top>
+              <Left>3.01843cm</Left>
+              <Height>2.55719cm</Height>
+              <Width>2.89509cm</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Image>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1000000000">
+          <DataField>ReportForNavId_1000000000</DataField>
+        </Field>
+        <Field Name="HREmpPR_ContType">
+          <DataField>HREmpPR_ContType</DataField>
+        </Field>
+        <Field Name="HREmpPR_FName">
+          <DataField>HREmpPR_FName</DataField>
+        </Field>
+        <Field Name="HREmpPR_MName">
+          <DataField>HREmpPR_MName</DataField>
+        </Field>
+        <Field Name="HREmpPR_LName">
+          <DataField>HREmpPR_LName</DataField>
+        </Field>
+        <Field Name="HREmpPR_PinNo">
+          <DataField>HREmpPR_PinNo</DataField>
+        </Field>
+        <Field Name="EmployeeNo">
+          <DataField>EmployeeNo</DataField>
+        </Field>
+        <Field Name="EmployeeName">
+          <DataField>EmployeeName</DataField>
+        </Field>
+        <Field Name="CompInfo_Name">
+          <DataField>CompInfo_Name</DataField>
+        </Field>
+        <Field Name="CompInfo_PINNo">
+          <DataField>CompInfo_PINNo</DataField>
+        </Field>
+        <Field Name="CompanyInfoPicture">
+          <DataField>CompanyInfoPicture</DataField>
+        </Field>
+        <Field Name="HREmpPR_No">
+          <DataField>HREmpPR_No</DataField>
+        </Field>
+        <Field Name="PensionContr">
+          <DataField>PensionContr</DataField>
+        </Field>
+        <Field Name="PensionContrFormat">
+          <DataField>PensionContrFormat</DataField>
+        </Field>
+        <Field Name="InsuranceRelief">
+          <DataField>InsuranceRelief</DataField>
+        </Field>
+        <Field Name="InsuranceReliefFormat">
+          <DataField>InsuranceReliefFormat</DataField>
+        </Field>
+        <Field Name="BasicPay">
+          <DataField>BasicPay</DataField>
+        </Field>
+        <Field Name="BasicPayFormat">
+          <DataField>BasicPayFormat</DataField>
+        </Field>
+        <Field Name="SelectedYear">
+          <DataField>SelectedYear</DataField>
+        </Field>
+        <Field Name="BPAY_LessPension">
+          <DataField>BPAY_LessPension</DataField>
+        </Field>
+        <Field Name="BPAY_LessPensionFormat">
+          <DataField>BPAY_LessPensionFormat</DataField>
+        </Field>
+        <Field Name="TotPensionContr">
+          <DataField>TotPensionContr</DataField>
+        </Field>
+        <Field Name="TotPensionContrFormat">
+          <DataField>TotPensionContrFormat</DataField>
+        </Field>
+        <Field Name="ReportForNavId_1000000001">
+          <DataField>ReportForNavId_1000000001</DataField>
+        </Field>
+        <Field Name="EmployeeCode_PREmployeeP9Info">
+          <DataField>EmployeeCode_PREmployeeP9Info</DataField>
+        </Field>
+        <Field Name="P9Info_EmployeeCode">
+          <DataField>P9Info_EmployeeCode</DataField>
+        </Field>
+        <Field Name="P9Info_PayrollPeriod">
+          <DataField>P9Info_PayrollPeriod</DataField>
+        </Field>
+        <Field Name="P9Info_BasicPay">
+          <DataField>P9Info_BasicPay</DataField>
+        </Field>
+        <Field Name="P9Info_BasicPayFormat">
+          <DataField>P9Info_BasicPayFormat</DataField>
+        </Field>
+        <Field Name="P9Info_Benefits">
+          <DataField>P9Info_Benefits</DataField>
+        </Field>
+        <Field Name="P9Info_BenefitsFormat">
+          <DataField>P9Info_BenefitsFormat</DataField>
+        </Field>
+        <Field Name="P9Info_ValueQuarters">
+          <DataField>P9Info_ValueQuarters</DataField>
+        </Field>
+        <Field Name="P9Info_ValueQuartersFormat">
+          <DataField>P9Info_ValueQuartersFormat</DataField>
+        </Field>
+        <Field Name="P9Info_GrossPay">
+          <DataField>P9Info_GrossPay</DataField>
+        </Field>
+        <Field Name="P9Info_GrossPayFormat">
+          <DataField>P9Info_GrossPayFormat</DataField>
+        </Field>
+        <Field Name="P9Info_NSSF">
+          <DataField>P9Info_NSSF</DataField>
+        </Field>
+        <Field Name="P9Info_NSSFFormat">
+          <DataField>P9Info_NSSFFormat</DataField>
+        </Field>
+        <Field Name="P9Info_OwnerOccupier">
+          <DataField>P9Info_OwnerOccupier</DataField>
+        </Field>
+        <Field Name="P9Info_OwnerOccupierFormat">
+          <DataField>P9Info_OwnerOccupierFormat</DataField>
+        </Field>
+        <Field Name="P9Info_TaxablePay">
+          <DataField>P9Info_TaxablePay</DataField>
+        </Field>
+        <Field Name="P9Info_TaxablePayFormat">
+          <DataField>P9Info_TaxablePayFormat</DataField>
+        </Field>
+        <Field Name="P9Info_TaxCharged">
+          <DataField>P9Info_TaxCharged</DataField>
+        </Field>
+        <Field Name="P9Info_TaxChargedFormat">
+          <DataField>P9Info_TaxChargedFormat</DataField>
+        </Field>
+        <Field Name="P9Info_TaxRelief">
+          <DataField>P9Info_TaxRelief</DataField>
+        </Field>
+        <Field Name="P9Info_TaxReliefFormat">
+          <DataField>P9Info_TaxReliefFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+  </Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="CompName">
+          <DataField>CompName</DataField>
+        </Field>
+        <Field Name="CompPic">
+          <DataField>CompPic</DataField>
+        </Field>
+        <Field Name="ApplicationNo_OnlineLoansApplications">
+          <DataField>ApplicationNo_OnlineLoansApplications</DataField>
+        </Field>
+        <Field Name="ApplicationDate_OnlineLoansApplications">
+          <DataField>ApplicationDate_OnlineLoansApplications</DataField>
+        </Field>
+        <Field Name="MembershipNo_OnlineLoansApplications">
+          <DataField>MembershipNo_OnlineLoansApplications</DataField>
+        </Field>
+        <Field Name="MemberNames_OnlineLoansApplications">
+          <DataField>MemberNames_OnlineLoansApplications</DataField>
+        </Field>
+        <Field Name="EmploymentNo_OnlineLoansApplications">
+          <DataField>EmploymentNo_OnlineLoansApplications</DataField>
+        </Field>
+        <Field Name="Telephone_OnlineLoansApplications">
+          <DataField>Telephone_OnlineLoansApplications</DataField>
+        </Field>
+        <Field Name="Email_OnlineLoansApplications">
+          <DataField>Email_OnlineLoansApplications</DataField>
+        </Field>
+        <Field Name="LoanTypeDescription_OnlineLoansApplications">
+          <DataField>LoanTypeDescription_OnlineLoansApplications</DataField>
+        </Field>
+        <Field Name="LoanType_OnlineLoansApplications">
+          <DataField>LoanType_OnlineLoansApplications</DataField>
+        </Field>
+        <Field Name="LoanAmount_OnlineLoansApplications">
+          <DataField>LoanAmount_OnlineLoansApplications</DataField>
+        </Field>
+        <Field Name="LoanAmount_OnlineLoansApplicationsFormat">
+          <DataField>LoanAmount_OnlineLoansApplicationsFormat</DataField>
+        </Field>
+        <Field Name="RepaymentPeriod_OnlineLoansApplications">
+          <DataField>RepaymentPeriod_OnlineLoansApplications</DataField>
+        </Field>
+        <Field Name="Approved_OnlineLoansApplications">
+          <DataField>Approved_OnlineLoansApplications</DataField>
+        </Field>
+        <Field Name="BasicPay_OnlineLoansApplications">
+          <DataField>BasicPay_OnlineLoansApplications</DataField>
+        </Field>
+        <Field Name="BasicPay_OnlineLoansApplicationsFormat">
+          <DataField>BasicPay_OnlineLoansApplicationsFormat</DataField>
+        </Field>
+        <Field Name="TotalAllowances_OnlineLoansApplications">
+          <DataField>TotalAllowances_OnlineLoansApplications</DataField>
+        </Field>
+        <Field Name="TotalAllowances_OnlineLoansApplicationsFormat">
+          <DataField>TotalAllowances_OnlineLoansApplicationsFormat</DataField>
+        </Field>
+        <Field Name="TotalDeduction_OnlineLoansApplications">
+          <DataField>TotalDeduction_OnlineLoansApplications</DataField>
+        </Field>
+        <Field Name="TotalDeduction_OnlineLoansApplicationsFormat">
+          <DataField>TotalDeduction_OnlineLoansApplicationsFormat</DataField>
+        </Field>
+        <Field Name="InterestRate_OnlineLoansApplications">
+          <DataField>InterestRate_OnlineLoansApplications</DataField>
+        </Field>
+        <Field Name="InterestRate_OnlineLoansApplicationsFormat">
+          <DataField>InterestRate_OnlineLoansApplicationsFormat</DataField>
+        </Field>
+        <Field Name="GuarantorsApproved_OnlineLoansApplications">
+          <DataField>GuarantorsApproved_OnlineLoansApplications</DataField>
+        </Field>
+        <Field Name="topup_OnlineLoansApplications">
+          <DataField>topup_OnlineLoansApplications</DataField>
+        </Field>
+        <Field Name="topupref_OnlineLoansApplications">
+          <DataField>topupref_OnlineLoansApplications</DataField>
+        </Field>
+        <Field Name="submitted_OnlineLoansApplications">
+          <DataField>submitted_OnlineLoansApplications</DataField>
+        </Field>
+        <Field Name="IdNo_OnlineLoansApplications">
+          <DataField>IdNo_OnlineLoansApplications</DataField>
+        </Field>
+        <Field Name="LoanNo_OnlineLoansApplications">
+          <DataField>LoanNo_OnlineLoansApplications</DataField>
+        </Field>
+        <Field Name="Rejected_OnlineLoansApplications">
+          <DataField>Rejected_OnlineLoansApplications</DataField>
+        </Field>
+        <Field Name="ReportForNavId_23">
+          <DataField>ReportForNavId_23</DataField>
+        </Field>
+        <Field Name="EntryNo_OnlineLoanGuarantors">
+          <DataField>EntryNo_OnlineLoanGuarantors</DataField>
+        </Field>
+        <Field Name="LoanApplicationNo_OnlineLoanGuarantors">
+          <DataField>LoanApplicationNo_OnlineLoanGuarantors</DataField>
+        </Field>
+        <Field Name="GuarantorNo_OnlineLoanGuarantors">
+          <DataField>GuarantorNo_OnlineLoanGuarantors</DataField>
+        </Field>
+        <Field Name="GuarantorNames_OnlineLoanGuarantors">
+          <DataField>GuarantorNames_OnlineLoanGuarantors</DataField>
+        </Field>
+        <Field Name="GuarantorEmail_OnlineLoanGuarantors">
+          <DataField>GuarantorEmail_OnlineLoanGuarantors</DataField>
+        </Field>
+        <Field Name="GuarantorIDNo_OnlineLoanGuarantors">
+          <DataField>GuarantorIDNo_OnlineLoanGuarantors</DataField>
+        </Field>
+        <Field Name="GuarantorAmount_OnlineLoanGuarantors">
+          <DataField>GuarantorAmount_OnlineLoanGuarantors</DataField>
+        </Field>
+        <Field Name="GuarantorAmount_OnlineLoanGuarantorsFormat">
+          <DataField>GuarantorAmount_OnlineLoanGuarantorsFormat</DataField>
+        </Field>
+        <Field Name="GuarantorPhone_OnlineLoanGuarantors">
+          <DataField>GuarantorPhone_OnlineLoanGuarantors</DataField>
+        </Field>
+        <Field Name="Approved_OnlineLoanGuarantors">
+          <DataField>Approved_OnlineLoanGuarantors</DataField>
+        </Field>
+        <Field Name="ApprovalStatus_OnlineLoanGuarantors">
+          <DataField>ApprovalStatus_OnlineLoanGuarantors</DataField>
+        </Field>
+        <Field Name="GuarantorStatus">
+          <DataField>GuarantorStatus</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

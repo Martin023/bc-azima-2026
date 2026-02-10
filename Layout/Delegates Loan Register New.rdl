@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+  </Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_39">
+          <DataField>ReportForNavId_39</DataField>
+        </Field>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="LoanNo_Loans">
+          <DataField>LoanNo_Loans</DataField>
+        </Field>
+        <Field Name="ApplicationDate_Loans">
+          <DataField>ApplicationDate_Loans</DataField>
+        </Field>
+        <Field Name="DisburmentDate">
+          <DataField>DisburmentDate</DataField>
+        </Field>
+        <Field Name="LoansCategorySASRA_Loans">
+          <DataField>LoansCategorySASRA_Loans</DataField>
+        </Field>
+        <Field Name="LoanProductType_Loans">
+          <DataField>LoanProductType_Loans</DataField>
+        </Field>
+        <Field Name="LoanProductTypeName_Loans">
+          <DataField>LoanProductTypeName_Loans</DataField>
+        </Field>
+        <Field Name="MemberNo_Loans">
+          <DataField>MemberNo_Loans</DataField>
+        </Field>
+        <Field Name="MemberName_Loans">
+          <DataField>MemberName_Loans</DataField>
+        </Field>
+        <Field Name="Installemnt">
+          <DataField>Installemnt</DataField>
+        </Field>
+        <Field Name="RequestedAmount">
+          <DataField>RequestedAmount</DataField>
+        </Field>
+        <Field Name="RequestedAmountFormat">
+          <DataField>RequestedAmountFormat</DataField>
+        </Field>
+        <Field Name="ApprovedAmount">
+          <DataField>ApprovedAmount</DataField>
+        </Field>
+        <Field Name="ApprovedAmountFormat">
+          <DataField>ApprovedAmountFormat</DataField>
+        </Field>
+        <Field Name="OutBal">
+          <DataField>OutBal</DataField>
+        </Field>
+        <Field Name="OutBalFormat">
+          <DataField>OutBalFormat</DataField>
+        </Field>
+        <Field Name="OutInt">
+          <DataField>OutInt</DataField>
+        </Field>
+        <Field Name="OutIntFormat">
+          <DataField>OutIntFormat</DataField>
+        </Field>
+        <Field Name="OutBill">
+          <DataField>OutBill</DataField>
+        </Field>
+        <Field Name="OutBillFormat">
+          <DataField>OutBillFormat</DataField>
+        </Field>
+        <Field Name="Picture">
+          <DataField>Picture</DataField>
+        </Field>
+        <Field Name="Address">
+          <DataField>Address</DataField>
+        </Field>
+        <Field Name="Company_Name">
+          <DataField>Company_Name</DataField>
+        </Field>
+        <Field Name="EmployerLoanNo">
+          <DataField>EmployerLoanNo</DataField>
+        </Field>
+        <Field Name="BatchNo_Loans">
+          <DataField>BatchNo_Loans</DataField>
+        </Field>
+        <Field Name="ShareBoostedAmount">
+          <DataField>ShareBoostedAmount</DataField>
+        </Field>
+        <Field Name="ShareBoostedAmountFormat">
+          <DataField>ShareBoostedAmountFormat</DataField>
+        </Field>
+        <Field Name="ShareBoostedAmount1">
+          <DataField>ShareBoostedAmount1</DataField>
+        </Field>
+        <Field Name="ShareBoostedAmount1Format">
+          <DataField>ShareBoostedAmount1Format</DataField>
+        </Field>
+        <Field Name="EmployerCode">
+          <DataField>EmployerCode</DataField>
+        </Field>
+        <Field Name="AmntTp">
+          <DataField>AmntTp</DataField>
+        </Field>
+        <Field Name="AmntTpFormat">
+          <DataField>AmntTpFormat</DataField>
+        </Field>
+        <Field Name="StaffNo">
+          <DataField>StaffNo</DataField>
+        </Field>
+        <Field Name="Days">
+          <DataField>Days</DataField>
+        </Field>
+        <Field Name="ProductType">
+          <DataField>ProductType</DataField>
+        </Field>
+        <Field Name="EmployerName">
+          <DataField>EmployerName</DataField>
+        </Field>
+        <Field Name="MaturityDate">
+          <DataField>MaturityDate</DataField>
+        </Field>
+        <Field Name="LatestDatePaid">
+          <DataField>LatestDatePaid</DataField>
+        </Field>
+        <Field Name="LatestAmount">
+          <DataField>LatestAmount</DataField>
+        </Field>
+        <Field Name="LatestAmountFormat">
+          <DataField>LatestAmountFormat</DataField>
+        </Field>
+        <Field Name="LoanClassification">
+          <DataField>LoanClassification</DataField>
+        </Field>
+        <Field Name="Frequecy">
+          <DataField>Frequecy</DataField>
+        </Field>
+        <Field Name="Interest">
+          <DataField>Interest</DataField>
+        </Field>
+        <Field Name="InterestFormat">
+          <DataField>InterestFormat</DataField>
+        </Field>
+        <Field Name="Installments">
+          <DataField>Installments</DataField>
+        </Field>
+        <Field Name="FirstRepaymentDate">
+          <DataField>FirstRepaymentDate</DataField>
+        </Field>
+        <Field Name="DaysArreas">
+          <DataField>DaysArreas</DataField>
+        </Field>
+        <Field Name="InterestCalculationMethod">
+          <DataField>InterestCalculationMethod</DataField>
+        </Field>
+        <Field Name="DisbursementDate">
+          <DataField>DisbursementDate</DataField>
+        </Field>
+        <Field Name="Regname">
+          <DataField>Regname</DataField>
+        </Field>
+        <Field Name="SalaryPassesThruFOSA">
+          <DataField>SalaryPassesThruFOSA</DataField>
+        </Field>
+        <Field Name="DateLastCredited">
+          <DataField>DateLastCredited</DataField>
+        </Field>
+        <Field Name="RecoveryMode_Loans">
+          <DataField>RecoveryMode_Loans</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

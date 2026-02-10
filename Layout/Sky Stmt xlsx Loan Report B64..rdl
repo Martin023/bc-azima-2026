@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+  </Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="EntryNo_CreditLedgerEntry">
+          <DataField>EntryNo_CreditLedgerEntry</DataField>
+        </Field>
+        <Field Name="PostingDate_CreditLedgerEntry">
+          <DataField>PostingDate_CreditLedgerEntry</DataField>
+        </Field>
+        <Field Name="DocumentNo_CreditLedgerEntry">
+          <DataField>DocumentNo_CreditLedgerEntry</DataField>
+        </Field>
+        <Field Name="Description_CreditLedgerEntry">
+          <DataField>Description_CreditLedgerEntry</DataField>
+        </Field>
+        <Field Name="Amount_CreditLedgerEntry">
+          <DataField>Amount_CreditLedgerEntry</DataField>
+        </Field>
+        <Field Name="Amount_CreditLedgerEntryFormat">
+          <DataField>Amount_CreditLedgerEntryFormat</DataField>
+        </Field>
+        <Field Name="DebitAmount_CreditLedgerEntry">
+          <DataField>DebitAmount_CreditLedgerEntry</DataField>
+        </Field>
+        <Field Name="DebitAmount_CreditLedgerEntryFormat">
+          <DataField>DebitAmount_CreditLedgerEntryFormat</DataField>
+        </Field>
+        <Field Name="CreditAmount_CreditLedgerEntry">
+          <DataField>CreditAmount_CreditLedgerEntry</DataField>
+        </Field>
+        <Field Name="CreditAmount_CreditLedgerEntryFormat">
+          <DataField>CreditAmount_CreditLedgerEntryFormat</DataField>
+        </Field>
+        <Field Name="RunningBalance">
+          <DataField>RunningBalance</DataField>
+        </Field>
+        <Field Name="RunningBalanceFormat">
+          <DataField>RunningBalanceFormat</DataField>
+        </Field>
+        <Field Name="EntryType">
+          <DataField>EntryType</DataField>
+        </Field>
+        <Field Name="SaccoName">
+          <DataField>SaccoName</DataField>
+        </Field>
+        <Field Name="SaccoAddress">
+          <DataField>SaccoAddress</DataField>
+        </Field>
+        <Field Name="MemberName">
+          <DataField>MemberName</DataField>
+        </Field>
+        <Field Name="MemberAccountName">
+          <DataField>MemberAccountName</DataField>
+        </Field>
+        <Field Name="MemberAccountNumber">
+          <DataField>MemberAccountNumber</DataField>
+        </Field>
+        <Field Name="Slogan">
+          <DataField>Slogan</DataField>
+        </Field>
+        <Field Name="SaccoPhone">
+          <DataField>SaccoPhone</DataField>
+        </Field>
+        <Field Name="OpeningBal">
+          <DataField>OpeningBal</DataField>
+        </Field>
+        <Field Name="OpeningBalFormat">
+          <DataField>OpeningBalFormat</DataField>
+        </Field>
+        <Field Name="DateRange">
+          <DataField>DateRange</DataField>
+        </Field>
+        <Field Name="TotalCredits">
+          <DataField>TotalCredits</DataField>
+        </Field>
+        <Field Name="TotalCreditsFormat">
+          <DataField>TotalCreditsFormat</DataField>
+        </Field>
+        <Field Name="TotalDebits">
+          <DataField>TotalDebits</DataField>
+        </Field>
+        <Field Name="TotalDebitsFormat">
+          <DataField>TotalDebitsFormat</DataField>
+        </Field>
+        <Field Name="ClosingBal">
+          <DataField>ClosingBal</DataField>
+        </Field>
+        <Field Name="ClosingBalFormat">
+          <DataField>ClosingBalFormat</DataField>
+        </Field>
+        <Field Name="DateIssued">
+          <DataField>DateIssued</DataField>
+        </Field>
+        <Field Name="WholeDate">
+          <DataField>WholeDate</DataField>
+        </Field>
+        <Field Name="Image">
+          <DataField>Image</DataField>
+        </Field>
+        <Field Name="PostingDate">
+          <DataField>PostingDate</DataField>
+        </Field>
+        <Field Name="MemberPhone">
+          <DataField>MemberPhone</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

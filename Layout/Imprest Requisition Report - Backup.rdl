@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_58">
+          <DataField>ReportForNavId_58</DataField>
+        </Field>
+        <Field Name="Name_CompanyInformation">
+          <DataField>Name_CompanyInformation</DataField>
+        </Field>
+        <Field Name="Address_CompanyInformation">
+          <DataField>Address_CompanyInformation</DataField>
+        </Field>
+        <Field Name="Picture_CompanyInformation">
+          <DataField>Picture_CompanyInformation</DataField>
+        </Field>
+        <Field Name="Dim1Code">
+          <DataField>Dim1Code</DataField>
+        </Field>
+        <Field Name="Dim2Code">
+          <DataField>Dim2Code</DataField>
+        </Field>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="No_StaffAdvanceHeader">
+          <DataField>No_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="Date_StaffAdvanceHeader">
+          <DataField>Date_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="CurrencyCode_StaffAdvanceHeader">
+          <DataField>CurrencyCode_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="Cashier_StaffAdvanceHeader">
+          <DataField>Cashier_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="PayingBankAccount_StaffAdvanceHeader">
+          <DataField>PayingBankAccount_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="GlobalDimension1Code_StaffAdvanceHeader">
+          <DataField>GlobalDimension1Code_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="Status_StaffAdvanceHeader">
+          <DataField>Status_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="PaymentType_StaffAdvanceHeader">
+          <DataField>PaymentType_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="ShortcutDimension2Code_StaffAdvanceHeader">
+          <DataField>ShortcutDimension2Code_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="FunctionName_StaffAdvanceHeader">
+          <DataField>FunctionName_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="BudgetCenterName_StaffAdvanceHeader">
+          <DataField>BudgetCenterName_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="BankName_StaffAdvanceHeader">
+          <DataField>BankName_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="TotalVATAmount_StaffAdvanceHeader">
+          <DataField>TotalVATAmount_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="TotalVATAmount_StaffAdvanceHeaderFormat">
+          <DataField>TotalVATAmount_StaffAdvanceHeaderFormat</DataField>
+        </Field>
+        <Field Name="TotalWitholdingTaxAmount_StaffAdvanceHeader">
+          <DataField>TotalWitholdingTaxAmount_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="TotalWitholdingTaxAmount_StaffAdvanceHeaderFormat">
+          <DataField>TotalWitholdingTaxAmount_StaffAdvanceHeaderFormat</DataField>
+        </Field>
+        <Field Name="TotalNetAmount_StaffAdvanceHeader">
+          <DataField>TotalNetAmount_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="TotalNetAmount_StaffAdvanceHeaderFormat">
+          <DataField>TotalNetAmount_StaffAdvanceHeaderFormat</DataField>
+        </Field>
+        <Field Name="PayMode_StaffAdvanceHeader">
+          <DataField>PayMode_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="PaymentReleaseDate_StaffAdvanceHeader">
+          <DataField>PaymentReleaseDate_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="NoPrinted_StaffAdvanceHeader">
+          <DataField>NoPrinted_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="ResponsibilityCenter_StaffAdvanceHeader">
+          <DataField>ResponsibilityCenter_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="Purpose_StaffAdvanceHeader">
+          <DataField>Purpose_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="Payee_StaffAdvanceHeader">
+          <DataField>Payee_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="ReportLabel">
+          <DataField>ReportLabel</DataField>
+        </Field>
+        <Field Name="ChequeNo_StaffAdvanceHeader">
+          <DataField>ChequeNo_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="NumberText_1_">
+          <DataField>NumberText_1_</DataField>
+        </Field>
+        <Field Name="StrCopyText">
+          <DataField>StrCopyText</DataField>
+        </Field>
+        <Field Name="ReportForNavId_2">
+          <DataField>ReportForNavId_2</DataField>
+        </Field>
+        <Field Name="No_StaffAdvanceLines">
+          <DataField>No_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="AccountNo_StaffAdvanceLines">
+          <DataField>AccountNo_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="AccountName_StaffAdvanceLines">
+          <DataField>AccountName_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="Amount_StaffAdvanceLines">
+          <DataField>Amount_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="Amount_StaffAdvanceLinesFormat">
+          <DataField>Amount_StaffAdvanceLinesFormat</DataField>
+        </Field>
+        <Field Name="DueDate_StaffAdvanceLines">
+          <DataField>DueDate_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="ActualSpent_StaffAdvanceLines">
+          <DataField>ActualSpent_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="ActualSpent_StaffAdvanceLinesFormat">
+          <DataField>ActualSpent_StaffAdvanceLinesFormat</DataField>
+        </Field>
+        <Field Name="GlobalDimension1Code_StaffAdvanceLines">
+          <DataField>GlobalDimension1Code_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="Applyto_StaffAdvanceLines">
+          <DataField>Applyto_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="ApplytoID_StaffAdvanceLines">
+          <DataField>ApplytoID_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="SurrenderDate_StaffAdvanceLines">
+          <DataField>SurrenderDate_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="Surrendered_StaffAdvanceLines">
+          <DataField>Surrendered_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="MRNo_StaffAdvanceLines">
+          <DataField>MRNo_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="DateIssued_StaffAdvanceLines">
+          <DataField>DateIssued_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="TypeofSurrender_StaffAdvanceLines">
+          <DataField>TypeofSurrender_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="DeptVchNo_StaffAdvanceLines">
+          <DataField>DeptVchNo_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="CashSurrenderAmt_StaffAdvanceLines">
+          <DataField>CashSurrenderAmt_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="CashSurrenderAmt_StaffAdvanceLinesFormat">
+          <DataField>CashSurrenderAmt_StaffAdvanceLinesFormat</DataField>
+        </Field>
+        <Field Name="BankPettyCash_StaffAdvanceLines">
+          <DataField>BankPettyCash_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="SurrenderDocNo_StaffAdvanceLines">
+          <DataField>SurrenderDocNo_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="DateTaken_StaffAdvanceLines">
+          <DataField>DateTaken_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="Purpose_StaffAdvanceLines">
+          <DataField>Purpose_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="ShortcutDimension2Code_StaffAdvanceLines">
+          <DataField>ShortcutDimension2Code_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="BudgetaryControlAC_StaffAdvanceLines">
+          <DataField>BudgetaryControlAC_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="Committed_StaffAdvanceLines">
+          <DataField>Committed_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="AdvanceType_StaffAdvanceLines">
+          <DataField>AdvanceType_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="CurrencyFactor_StaffAdvanceLines">
+          <DataField>CurrencyFactor_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="CurrencyFactor_StaffAdvanceLinesFormat">
+          <DataField>CurrencyFactor_StaffAdvanceLinesFormat</DataField>
+        </Field>
+        <Field Name="CurrencyCode_StaffAdvanceLines">
+          <DataField>CurrencyCode_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="AmountLCY_StaffAdvanceLines">
+          <DataField>AmountLCY_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="AmountLCY_StaffAdvanceLinesFormat">
+          <DataField>AmountLCY_StaffAdvanceLinesFormat</DataField>
+        </Field>
+        <Field Name="LineNo_StaffAdvanceLines">
+          <DataField>LineNo_StaffAdvanceLines</DataField>
+        </Field>
+        <Field Name="ReportForNavId_60">
+          <DataField>ReportForNavId_60</DataField>
+        </Field>
+        <Field Name="DocumentNo_ApprovalEntry">
+          <DataField>DocumentNo_ApprovalEntry</DataField>
+        </Field>
+        <Field Name="SequenceNo_ApprovalEntry">
+          <DataField>SequenceNo_ApprovalEntry</DataField>
+        </Field>
+        <Field Name="SenderID_ApprovalEntry">
+          <DataField>SenderID_ApprovalEntry</DataField>
+        </Field>
+        <Field Name="ApproverID_ApprovalEntry">
+          <DataField>ApproverID_ApprovalEntry</DataField>
+        </Field>
+        <Field Name="Status_ApprovalEntry">
+          <DataField>Status_ApprovalEntry</DataField>
+        </Field>
+        <Field Name="DateTimeSentforApproval_ApprovalEntry">
+          <DataField>DateTimeSentforApproval_ApprovalEntry</DataField>
+        </Field>
+        <Field Name="LastDateTimeModified_ApprovalEntry">
+          <DataField>LastDateTimeModified_ApprovalEntry</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

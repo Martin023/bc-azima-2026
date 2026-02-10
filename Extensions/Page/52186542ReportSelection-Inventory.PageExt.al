@@ -1,0 +1,151 @@
+#pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
+PageExtension 52186542 pageextension52186542 extends "Report Selection - Inventory" 
+{
+    layout
+    {
+        modify(ReportUsage2)
+        {
+            OptionCaption = 'Transfer Order,Transfer Shipment,Transfer Receipt,Inventory Period Test';
+            ApplicationArea = Basic;
+        }
+        modify(Sequence)
+        {
+            ApplicationArea = Basic;
+        }
+        modify("Report ID")
+        {
+            ApplicationArea = Basic;
+        }
+        modify("Report Caption")
+        {
+            ApplicationArea = Basic;
+        }
+
+        //Unsupported feature: Code Modification on "ReportUsage2(Control 11).OnValidate".
+
+        //trigger OnValidate()
+        //Parameters and return type have not been exported.
+        //>>>> ORIGINAL CODE:
+        //begin
+            /*
+            SetUsageFilter(TRUE);
+            */
+        //end;
+        //>>>> MODIFIED CODE:
+        //begin
+            /*
+            SetUsageFilter;
+            ReportUsage2OnAfterValidate;
+            */
+        //end;
+
+        //Unsupported feature: Property Deletion (ToolTipML) on "ReportUsage2(Control 11)".
+
+
+        //Unsupported feature: Property Deletion (ToolTipML) on "Sequence(Control 2)".
+
+
+        //Unsupported feature: Property Deletion (ToolTipML) on ""Report ID"(Control 9)".
+
+
+        //Unsupported feature: Property Deletion (ToolTipML) on ""Report Caption"(Control 4)".
+
+
+        //Unsupported feature: Property Deletion (ApplicationArea) on "Control1900383207(Control 1900383207)".
+
+
+        //Unsupported feature: Property Deletion (ApplicationArea) on "Control1905767507(Control 1905767507)".
+
+    }
+
+
+    //Unsupported feature: Property Modification (OptionString) on "ReportUsage2(Variable 1000)".
+
+    //var
+        //>>>> ORIGINAL VALUE:
+        //ReportUsage2 : "Transfer Order","Transfer Shipment","Transfer Receipt","Inventory Period Test","Assembly Order","Posted Assembly Order","Phys. Invt. Order Test","Phys. Invt. Order","Posted Phys. Invt. Order","Phys. Invt. Recording","Posted Phys. Invt. Recording";
+        //Variable type has not been exported.
+        //>>>> MODIFIED VALUE:
+        //ReportUsage2 : "Transfer Order","Transfer Shipment","Transfer Receipt","Inventory Period Test";
+        //Variable type has not been exported.
+
+
+    //Unsupported feature: Code Modification on "OnOpenPage".
+
+    //trigger OnOpenPage()
+    //>>>> ORIGINAL CODE:
+    //begin
+        /*
+        SetUsageFilter(FALSE);
+        */
+    //end;
+    //>>>> MODIFIED CODE:
+    //begin
+        /*
+        SetUsageFilter;
+        */
+    //end;
+
+
+    //Unsupported feature: Code Modification on "SetUsageFilter(PROCEDURE 1)".
+
+    //procedure SetUsageFilter();
+    //Parameters and return type have not been exported.
+    //>>>> ORIGINAL CODE:
+    //begin
+        /*
+        IF ModifyRec THEN
+          IF MODIFY THEN;
+        FILTERGROUP(2);
+        CASE ReportUsage2 OF
+          ReportUsage2::"Transfer Order":
+            SETRANGE(Usage,Usage::Inv1);
+          ReportUsage2::"Transfer Shipment":
+            SETRANGE(Usage,Usage::Inv2);
+          ReportUsage2::"Transfer Receipt":
+            SETRANGE(Usage,Usage::Inv3);
+          ReportUsage2::"Inventory Period Test":
+            SETRANGE(Usage,Usage::"Invt.Period Test");
+          ReportUsage2::"Assembly Order":
+            SETRANGE(Usage,Usage::"Asm.Order");
+          ReportUsage2::"Posted Assembly Order":
+            SETRANGE(Usage,Usage::"P.Asm.Order");
+          ReportUsage2::"Phys. Invt. Order":
+            SETRANGE(Usage,Usage::"Phys.Invt.Order");
+          ReportUsage2::"Phys. Invt. Order Test":
+            SETRANGE(Usage,Usage::"Phys.Invt.Order Test");
+          ReportUsage2::"Phys. Invt. Recording":
+            SETRANGE(Usage,Usage::"Phys.Invt.Rec.");
+          ReportUsage2::"Posted Phys. Invt. Order":
+            SETRANGE(Usage,Usage::"P.Phys.Invt.Order");
+          ReportUsage2::"Posted Phys. Invt. Recording":
+            SETRANGE(Usage,Usage::"P.Phys.Invt.Rec.");
+        END;
+        FILTERGROUP(0);
+        CurrPage.UPDATE;
+        */
+    //end;
+    //>>>> MODIFIED CODE:
+    //begin
+        /*
+        #3..11
+            SETRANGE(Usage,Usage::"Invt. Period Test");
+        END;
+        FILTERGROUP(0);
+        */
+    //end;
+
+    local procedure ReportUsage2OnAfterValidate()
+    begin
+        CurrPage.Update;
+    end;
+
+    //Unsupported feature: Deletion (ParameterCollection) on "SetUsageFilter(PROCEDURE 1).ModifyRec(Parameter 1000)".
+
+
+    //Unsupported feature: Property Deletion (ApplicationArea).
+
+
+    //Unsupported feature: Property Deletion (UsageCategory).
+
+}

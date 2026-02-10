@@ -1,0 +1,2334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>67ebf5d1-f828-46c0-9fe6-c718d82faf44</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="Textbox2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>                                                               LEASE AGREEMENT</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value EvaluationMode="Constant">                                                                       =BETWEEN=</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>LESSOR:               MWALIMU NATIONAL SAVINGS AND CREDIT CO-OPERATIVE SOCIETY LIMITED</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <HangingIndent>-2in</HangingIndent>
+                <Style>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>                                P.O. BOX ,</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value xml:space="preserve">                                </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>NAIROBI</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value xml:space="preserve">                                               </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>                                                                       AND</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>LEASEE:                 </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>Leasee Name</Label>
+                    <Value>=First(Fields!Contractor_Name.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>                                 P.O.BOX </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>Leasee Address</Label>
+                    <Value>=First(Fields!Address.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value xml:space="preserve">                                 </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>City</Label>
+                    <Value>=First(Fields!City.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>13pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <LeftIndent>2in</LeftIndent>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <LeftIndent>2in</LeftIndent>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>                             OVER</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <LeftIndent>2in</LeftIndent>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <LeftIndent>2in</LeftIndent>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>TITLE NUMBER: L.R NUMBER</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>Land Ref No.</Label>
+                    <Value>=First(Fields!L_R_No_.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>12pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>12pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>12pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>DRAWN BY:</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>12pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Label>Legal Officer Name</Label>
+                    <Value>=First(Fields!LegalOfficerName.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>12pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Label>LegalOfficerTitle</Label>
+                    <Value>=First(Fields!LegalOfficerTitle.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>12pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Label>SACCOName</Label>
+                    <Value>=First(Fields!CompanyName.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>12pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Label>BuildingName</Label>
+                    <Value>=First(Fields!BuildingName.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>12pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Label>CompanyAddress</Label>
+                    <Value>=First(Fields!CompanyAddress.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>12pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Label>PhysicalAddress</Label>
+                    <Value>=First(Fields!CompanyPhysical_Address.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>12pt</LineHeight>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Label>CompanyCity</Label>
+                    <Value>=First(Fields!City.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>14pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                      <Color>#000000</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <LineHeight>12pt</LineHeight>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>0.14111cm</Top>
+            <Left>0.28787cm</Left>
+            <Height>28.36897cm</Height>
+            <Width>20.19181cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Tablix Name="Tablix1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>20.19181cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>24.00431cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>WHEREAS</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <TextDecoration>Underline</TextDecoration>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>:-</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <TextDecoration>Underline</TextDecoration>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>The Lessor is the registered owner of ALL THAT office accommodation space known as Mwalimu Towers, L.R Number 209/5459 in Upper Hill, Nairobi ( “the Building”); and </Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <ListStyle>Numbered</ListStyle>
+                              <ListLevel>1</ListLevel>
+                              <Style />
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>The Lessee is interested in leasing space (hereinafter referred to as “the Premises”) from the Lessor subject to the terms and conditions set under this Agreement.</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <ListStyle>Numbered</ListStyle>
+                              <ListLevel>1</ListLevel>
+                              <Style />
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>NOW THIS LEASE WITNESSETH as follows:-</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>DEFINITIONS AND INTERPRETATION
+1.	The expressions defined in this Clause shall for all purposes of this lease (hereinafter referred to as "this Lease") unless the context otherwise requires have the meanings assigned to them by this Clause and the general provisions herein contained shall be read into and govern the interpretation of this lease.
+1.1	"Property" means Land Reference No. 209/5459 as the same is for identification purposes more particularly described in the Schedule.
+1.2	"Building" shall mean the building known as Mwalimu Towers of which the Premises are part of comprising shops, offices, car parking, buildings or basements, restaurants and other usual conveniences connected therewith.
+1.3	"Shop/Office block" shall mean the building including all open space verandas yards lawns paths internal roads and parking in open spaces or in buildings.
+1.4	"Premises" shall mean all that area of floor space comprising of Three Thousand Eight Hundred (3800) square feet or thereabouts forming part of the B1 floor, of the building shall include: -
+(a)	all the Lessor's fixtures and fittings and other fixtures of every kind therein or thereon (whether originally affixed or fastened to or upon the same or otherwise) except such fixtures of the Lessee as can be removed therefrom without defacing the same;
+(b)	the window frames glass sash cords doors pipes and electrical and heating installations therein; and
+(c)	any pipes that exclusively serve the said Premises but that are not within the provisions of (b) hereof.
+1.5	“Lease” means this Lease whether the same be a Lease, Sub-Lease or an Under lease and includes any document which is supplementary hereto or which is expressed to be collateral herewith or which is entered into pursuant to or in accordance with terms hereof.
+1.6	"Common areas" shall be deemed to mean such areas improvements space equipment and special services in or on the Property as determined by the Lessor from time to time to be devoted to the general usage of all the Lessees of the Property and their employees customers and other invitees including without limitation all parking areas (open or within a basement or within the main or adjacent building or within additions to the Property) loading unloading and delivery areas service areas roofs exterior of outside walls shop fronts windows doors and plate glass of the Property access roads drive-ways entrances and exits passenger and service lifts escalators retaining walls boundary walls landscaped areas roads pathways accommodation areas side walks and signs directional signals malls corridors stairs ramps landings pantries lavatories and other sanitary and washing conveniences.
+1.7	"Pipes" shall mean and include pipes sewers drains conduits gutters watercourses wire 	cables 	channels and all other conducting media.
+1.10	“Car park” shall mean One (1) parking space in the basement of the building allocated to the Lessee which is chargeable (separately from the rent, service charge or other charges). 
+1.11	"Accounting year" shall mean a period of Twelve (12) consecutive calendar months as determined by the Lessor and notified to the Lessee.
+1.12	"Lessee's pro rata share" shall mean and include the percentage factor computed by dividing the total square feet of the floor area of the Premises by the total square feet of the space in the building leased out by the Lessor.
+1.13	 "Service charge" shall mean the Lessee's pro rata share of:
+(i)	All rates’ taxes charges duties assessments impositions and outgoings whatsoever which now are or shall at any time hereafter during the Term be assessed imposed on or payable in respect of the Retained Parts or any part thereof and to pay a proportionate part of any such assessment imposed or payable in respect of the Retained Parts;
+(ii)	Costs for the removal of refuse and garbage from the Property and the Lessee shall have first ensured that its own refuse is contained in a sealed bag is placed in such part of the Property as the Lessor and/or Managing Agent shall from time to time designate;
+(iii)	Costs of employing staff including cleaners and gardeners or outside contractors and other professionals as shall be both reasonable and necessary including the maintenance of the common areas of the Property and to pay or make provisions for such persons as may be reasonable or required in law and to pay any redundancy payment that may become payable in respect of any such staff;
+(iv)	Costs of redecorating the Retained Parts but at any event not less than once in any period of (5) years, unless determined otherwise by the Lessor and/or the board of the Managing Agent, with suitable materials in a proper and workmanlike manner;
+(v)	Costs of insuring and to keep insured the Property against damage or destruction;
+(vi)	The bills for the usage of electricity, water and other utilities on the common areas of the Property as and when the same falls due;
+(vii)	Costs of uniforms sanitary gloves moppers other instruments and gears used by such labour as the Lessor may from time to time consider necessary;
+(viii)	Costs of providing security arrangements and services including the setting up and maintaining such signs and security and emergency systems as shall from time to time appear to the Lessor and/or the Board of the Managing Agent to be necessary or desirable for the preservation and good order of the Property and the safety of the Lessee, the Lessee’s visitors and occupiers therein;
+(ix)	Amortised costs of supplying providing purchasing hiring maintaining renewing replacing repairing servicing overhauling and keeping in good serviceable order and condition of all furniture fixtures and fittings bins receptacles tools appliances materials equipment and other items which the Lessor may deem desirable or necessary for maintenance appearance upkeep or cleanliness of the Building;
+(x)	Costs of entering into any contracts for the carrying out of all or any of the services and other functions and duties that the Lessor in its absolute discretion deems desirable or necessary.
+1.14	Where the Lessor or the Lessee for the time being are two or more individuals the expressions the Lessor and the Lessee shall include the plural number and obligations expressed or implied made by or with them respectively shall be deemed to be made by or with such individuals jointly and severally.
+1.15	Words importing the neuter gender include the masculine or feminine gender (as the case may be) and words importing the masculine gender include the feminine gender and vice versa and words importing the singular number include the plural number and vice versa.
+1.16    Any reference to an Act shall include any statutory extension amendment or modification or re-enactment of such Act and any regulations or orders made thereunder during the term.
+1.17	Any covenant by the Lessee to indemnify the Lessor shall be deemed to extend to reimbursement to the Lessor against indemnity any covenant by the Lessee not to do an act or thing shall be deemed to include an obligation not to permit or suffer such act or thing to be done and any covenant by the Lessee to do an act or thing shall be deemed to include an obligation not to omit such an act or thing to be done or to suffer a default in performance of such act or thing.
+1.18	Wherever under this lease the Lessee is liable to make any payment whether as a stipulated payment for some specific matter or by way of reimbursement for costs incurred by the Lessor or otherwise or as damages or otherwise ascertained in manner prescribed the same at the Lessor's option without being obliged so to do may be recovered as rent whether specifically so stated in any relevant clause or not without prejudicing in any way the Lessor's right of re-entry or termination reserved for breach or non-observance of any covenant agreement condition or stipulation of this lease.
+2.	In consideration of the rent hereinafter reserved and of the covenants and agreements by the Lessee hereinafter contained the Lessor DOES HEREBY LEASE to the Lessee ALL THAT the Premises TOGETHER WITH the right for the Lessee to use the common areas during such reasonable hours as may from time to time be determined by the Lessor for the purpose only of egress and ingress from and to the Premises with liberty reserved to the Lessor to use the common areas without hindering such egress and ingress from time to time or allow the use of the common areas for any purpose at the Lessor's sole discretion including holding of exhibitions therein TO BE HELD by the Lessee for the term determinable nevertheless as hereinafter provided YIELDING AND PAYING therefore without any deductions whatsoever unto the Lessor throughout the term the service charge and all other amounts payable under this lease together with the following quarterly rent namely:-
+a)	Throughout the first period of Twelve (12) months effective from the First day of April Two Thousand and Twenty-Three the monthly rent shall be Ksh.380,000/= (Three Hundred and Eighty thousand and the quarterly rent of Kshs. 1,140,000/- (Kenya Shilling One Million, One Hundred and Forty Thousand) calculated at Ksh 100/- per square foot, to which its inclusive of service charge but exclusive of Value Added Tax (V.A.T) which shall be paid at the prevailing rate.
+b)	The Escalation on rent shall be at the rate of 5% annually with the first such escalation taking effect on the 1st day of April 2024
+c)	Throughout the term, the Lessee shall pay on demand and indemnify the Lessor against any Value Added Tax (or for any tax of a similar nature that 	may be substituted for it or levied in addition to it) which the Lessor may become liable to pay in respect of the rental of the Premises.
+3.	The Lessee hereby covenants and agrees with the Lessor that throughout the term:-
+(a) The Lessee shall:-
+i.	make all payments required to be made to the Lessor under this Lease either by cash, bankers order or telegraphic transfer for the credit of the Lessor’s account which initially is; MWALIMU NATIONAL SACCO’S UPPERHILL BRANCH FOSA RENT ACCOUNT
+ii.	pay on demand interest on all rent and all other amounts which become due and payable under this lease and which are more than Five (5) days in arrears at the rate of Four (4) per cent per annum (or for any lesser period than  a year) over the base rate offered by KCB Bank or in the event that the said Bank has ceased to have operations in Kenya, Barclays Bank Limited or in the event that the said Bank has ceased to have operations in Kenya, Standard Chartered Bank Limited and in the event that the rate hereby stipulated is found in a Court of Law to be excessive the maximum rate allowed by Law from time to time from the date when such sums become due and payable until payment thereof in full both before and after any court judgement (and this shall be paid as rent).
+3.2	The Lessee specifically agrees to use the said Premises for such purpose as are reasonable and expedient for the Lessee  in the usual trade undertaking or business of the Lessee and the Lessee will not do or permit anything which would become a nuisance, annoyance, inconvenience or disturbance to the Lessor or its Lessees or the owners or occupiers of neighboring Premises, IT BEING AGREED AND UNDERSTOOD that a change of user shall not be permitted during the term of the Lease.
+3.3	The Lessee will obtain at its sole cost all necessary consents certificates licences or approvals from the Nairobi Municipal Council or other duly constituted authority for the use of the Premises and will observe the provisions of all Act and By-laws relating thereto including the carrying out from time to time of all such construction works as may be required under or by virtue of such Acts or By-laws in connection with such user and in the event of the Lessor being made liable for any breach thereof attributable to any act or default of the Lessee then the Lessee will indemnify the Lessor against all fines penalties damages and costs incurred paid or suffered by the Lessor directly  in consequence of all such breaches or non-compliance of any such Acts or By-laws.
+3.4	The Lessee shall:-
+i)	in the use and occupation of the Premises and in the prosecution or conduct of its business comply with all By-laws and Acts and with any direction or certificate of occupation issued pursuant to any Act by any county or public officer;
+ii)	comply with and abide by all protective covenants restrictions and other standing orders relating to the Property including all rules or regulations made amended or substituted from time to time by the Lessor;
+iii)	not to use or permit the use of any part of the Premises for any dangerous noxious noisy or offensive trade or business or as a betting office or for residential purposes or for any illegal or immoral act or purpose;
+iv)	not permit any person to sleep in or reside on the Premises;
+v)	not permit the Premises or any part thereof to be used for the purpose of storing the personal or other effects of any director principal partner officer or employee of the Lessee;
+vi)	not permit or suffer upon the Premises or the Property anything or any person which in the opinion of the Lessor may be or become a nuisance inconvenience embarrassment or annoyance to the Lessor or to any other Lessee in the shop/office block or adjacent buildings;
+vii)	not permit any part of the Premises to be occupied used or shared by any other party or person.
+3.5	The Lessee shall:-
+i)	use and occupy the Premises in a careful safe and proper manner and shall keep the Premises in a clean and safe condition in accordance with this lease and all laws and By-laws and the Lessor's rules and regulations;
+ii)	use and maintain the Premises in conformity with such reasonable standards of good shop/office block operations as may from time to time be specified by the Lessor and the Lessee shall not permit solicitations demonstrations itinerant vending or any other activities inconsistent with such standards;
+iii)	not use the Premises for any disreputable or immoral purpose nor employ or permit participation in the conduct of the business or the presence therein in association with those engaged in the day to day conduct of the business any person convicted of any offence involving fraud or other moral turpitude nor in any other way injure the reputation of the shop/office block or permit the same or occur;
+iv)	not store in or bring into or use upon any part of the Shop/office block any article material substance or liquid of a combustible inflammable or dangerous nature and will comply with all recommendations of the insurers of the Shop/office block and fire authority as to fire precautions relating to the shop/office block;
+v)	not permit any open or internal combustion fire to be burned upon within or about the Premises or any other part of the Shop/office block;
+vi)	not do or keep anything in upon or about the Premises or any other part of the Shop/office block which may or will contravene the Lessor's policies insuring against loss or damage by fire or other hazards or which will prevent the Lessor from procuring such policies in companies acceptable to the Lessor or cause cancellation of any insurance for the time being held by the Lessor and if anything done omitted to be done or suffered to be done by the Lessee or kept upon within or about the Premises or any other part of the shop/office block shall cause the rate of fire or other insurance on any portion of the shop/office block or any part thereof to be increased beyond the minimum rate which would be applicable for the least hazardous use of the Premises permitted by law the Lessee shall pay the amount of such increase to the Lessor promptly upon the Lessor's demand AND ALSO will in the event of any insurance moneys being withheld or wholly or partially irrecoverable by reason of any breach or non-observance hereof indemnify the Lessor in respect of the cost of rebuilding or reinstating the shop/office block or any part thereof
+vii)	ensure that the use of electricity current within the Premises shall not exceed the capacity of the existing feeders and wiring installation. The Lessee hereby undertakes to ensure that all methods of safety to avoid power surges and outages are in place including but not limited to installing a meter circuit breaker and shall keep the Lessor indemnified against all claims damages costs and expenses in any way relating to loss occasioned by a breach of this sub-clause.
+3.6	The Lessee shall:-
+i)	not obstruct the common areas and shall refrain from committing any act or thing upon the Premises or the common areas which disturbs the quiet enjoyment of any other Lessee of the shop/office block or inhibits or detracts from the Lessor's or other lessees ‘ability to use the common areas or lease other parts of the shop/office block;
+ii)	ensure that no goods articles or merchandise are at any time stored or left lying in the 	common areas or outside the Premises or carry out any activity which obstructs the entrance to the Premises and the Lessor hereby reserves the right to remove and store as it sees fit (at the Lessee's expense and sole risk) all such goods articles and merchandise.
+iii)	The Lessee hereby undertakes not to use or permit the use of any equipment instrument or apparatus producing reproducing or transmitting sound which is audible or vibration detectable 	beyond the interior of the Premises;
+3.7	The Lessee shall at all times during the term observe and comply with all rules and regulations which may be adopted published and amended from time to time by the Lessor for the operation safety care reputation advertising promotion marketing cleanliness and efficient running of the Shop/office block and the Premises and the preservation of good order therein.
+3.8	The Lessee agrees:-
+i)	 not to permit the accumulation of any rubbish trash garbage or other refuse in or around the Premises or the Property;
+ii)	to remove from the Property its own rubbish garbage trash and other debris in suitable disposable bags of size and weight to the incinerator provided by the Lessor or to the County dump sites or private tips as directed by the Lessor;	
+iii)	to use only those receptacles outside the Premises allocated for the Lessee's use by the Lessor wherever placed of whatever type or size as determined by the Lessor (whose decision shall be final) and not to use them for deposit of garbage trash which is not suitable or fit to go therein.
+3.9	The Lessee shall not place erect or maintain on the doors windows roofs or on any exterior surface of the Premises or in any vestibule or anywhere in the shop/office block outside of the Premises nor in any areas inside the Premises which can be seen from outside the Premises any name writing sign signboard sign lettering placard decoration or advertisement whatsoever without the prior written consent of the Lessor and (if necessary) the municipal authorities.  The Lessee accepts the right of the Lessor to restrict the location, format, design, lettering and language of all signs and advertisements, and all methods of illuminating signs and displays.
+3.10	The Lessee shall refrain from distributing any handbills or other advertising matter on or about any part of the shop/office block including the Premises and shall not use any sidewalks walkways or other portions of the shop/office block for the sale of merchandise or any business occupation or undertaking.
+3.11	The Lessee before embarking on any advertising promotion or marketing be it print motion audio electronic mail or otherwise relating to its business at the shop/office block shall submit to the Lessor full details of all such proposed advertising promotion or marketing for scrutiny and approval by the Lessor for the purpose of ensuring that the shop/office block standards rules and regulations are complied with and that the shop/office block theme is embodied and reflected in or on all such proposed advertising promotion or marketing. The Lessee further agrees that the Lessor retains the right to reject any and all such proposals and in such event until such proposals meet with the Lessor's approval the Lessee shall not proceed with such advertising promotion and marketing proposals. For the purpose of this sub-clause the Lessor right to reject any and all such advertising and marketing proposals would only arise if in its reasonable opinion they lower the public esteem of the Shop/office block or impact negatively on the Lessee mix concept.
+3.12	Subject to the laws rules regulations or directions pertaining to the opening and closing of business for the time being in force the Lessee agrees throughout the term:-
+i)	to open for business not earlier than 5.00 a.m. and to remain open for business not later than 11 p.m;
+ii)	not to vacate or leave empty or abandon the Premises;
+3.13	The Lessee shall be solely responsible for and promptly pay all charges for heat water gas electricity telephone and other utilities used or consumed on the Premises and any connection charges relating therewith including the cost of installing separate meters where applicable AND IT IS HEREBY AGREED  that:-
+i)	the Lessor shall not be liable to the Lessee for interference in or interruption of any utility service nor shall any curtailment or interruption constitute a constructive eviction or grounds for rental abatement in whole or in part hereunder PROVIDED that where the interruption or interference results from construction or other works being done by the Lessor, the Lessor shall use its best endeavours to ensure that such interruption shall not exceed five (5) working days.  In the event that an interruption or interference resulting from such works continues or is expected to continue for more than five days the Lessee and the Lessor will in good faith negotiate and agree upon any abatement of rent for the relevant period or a relocation of the Lessee or other remedy as the case may warrant;
+ii)	in the event of heat water gas electricity telephone and other utilities not being separately metered the Lessee will promptly reimburse the Lessor upon demand the total cost to the Lessor (as conclusively determined by the Lessor) for the provision and maintenance thereof. Such reimbursement shall be recoverable from the Lessee as rent;
+iii)	in the event of the Lessee being in arrears in respect of any amount whatsoever due and payable under this lease by the Lessee to the Lessor then the Lessor may in its sole and unfettered discretion (and at the Lessee's expense) cut off the supply to the Lessee of all or any of the utilities until such time as full payment has been made to the Lessor of all overdue amounts and the Lessee shall have no claim whatsoever for restraining the Lessor's action or compelling the Lessor to resume supplies or for damages or otherwise in the event of the Lessor exercising its rights herein.
+3.14	The Lessee shall perform and observe all the covenants on the part of the Lessee contained in this lease and shall keep the Lessor indemnified against all claims damages costs and expenses in any way relating thereto.
+3.15	The Lessee shall not go into liquidation or (being an individual be adjudicated bankrupt) or permit a winding up order to be made against it or go into receivership or allow itself to remain in receivership or enter into any agreement with creditors for liquidation of debts by any arrangement or composition or suffer any distress for rent or execution proceedings to be levied upon any assets of the Lessee.
+4	The Lessee hereby further covenants and agrees with the Lessor that:-
+4.1	Subject to the provisions of Sub-Clause 1.13(ix) hereof the Lessee shall at its sole cost and expense during the term keep and maintain and yield up at the expiration or determination of the term clean and in good and Lessee able repair and condition the Premises and every part thereof complete with fixtures fittings fastenings and all keys including but not limited to all pipes fixtures interior walls fronts floors ceilings sides windows doors plate glass showcases all electrical facilities and equipment lighting fixtures bulbs fluorescent tubes fans and electrical motors locks all other appliances and equipment of every kind and nature other than those which are the Property of and were supplied by the Lessee.  The Lessee's obligations shall include but shall not be limited to the obligation to replace when necessary any of the items required to be maintained by the Lessee at its sole cost and expense and such replacement items shall be of comparable quality and of a type approved by the Lessor.   On termination of the lease (whenever and however determined) the Lessee shall paint with at least two coats thereof in a workmanlike manner with the same high quality paint all the parts of the interior of the Premises now so painted and will grain varnish paint wash stop whiten and colour all such parts as have previously been so dealt with to the satisfaction of the Lessor and in default make good the cost thereof and the rent (if any) lost for the period it takes to so redecorate the Premises.  If the Lessee fails to perform any of its obligations under this lease the Lessor may at its option enter upon the Premises and put the same in good order condition and repair both substantial and decorative and make such replacements as may be necessary and take such steps as may be expedient to abate any nuisance created by the Lessee or found in or around the Premises or the Property including the removal of all rubbish trash garbage refuse packing materials or other goods and all costs thereof together with all damages (if any) as shall have been sustained by the Lessor shall become due and payable on demand and recoverable as rent from the Lessee by the Lessor but nothing in this Clause contained shall be deemed to impose any duty upon the Lessor or affect in any manner any obligation placed upon the Lessee by this lease and any such entry by the Lessor shall not be deemed to be an interference with the quiet enjoyment of the Lessee and the Lessee does hereby expressly release the Lessor from any and all liability for such entry and steps taken including loss of business through interruption consequent thereon.
+4.2	The Lessee shall subject to the prior written consent of the Lessor having been obtained be permitted to erect such additional partitions to those installed by the Lessor as shall be desired for further sub-dividing the Premises for the purpose of the Lessee's business together with all the requisite shelves counters and other fixtures and the Lessor may enter upon the Premises and put a stop to any work of alterations or additions or any nails or wedges attempted to be done or driven into the walls or floors of the Premises for which the written consent of the Lessor has not been obtained and evict all workmen and others and remove all equipment and appliances from the Premises and recover the costs of so doing from the Lessee as if it were rent and the Lessee covenants to remove such additional permitted partitions shelves counters and fixtures prior to the expiration or sooner determination of the term (unless otherwise agreed with the Lessor in writing) at the Lessee's own expense and shall make good to the satisfaction of the Lessor all damage occasioned by such installation or removal.
+4.3	All specifications and designs for partitioning shall be submitted by the Lessee to the Lessor for approval by the Lessor and any necessary local government/county government approval through the Lessor and all architects and other fees for the same reasonably incurred by the Lessor shall be paid by the Lessee prior to the issue and procuration of such approvals.
+4.4	The Lessee shall be required to obtain the Lessor's approval to the proposed design and layout of the interior of the Premises.  The Lessee shall submit to the Lessor plans of the intended layout and design specifying the materials to be used and pay for all costs incurred by the Lessor for consulting architects thereon and shall not carry out any improvements or alterations without the Lessor's prior written consent.
+4.5	The Lessee shall not use any passenger lift in the building for the carriage of any goods packages merchandise or office furniture.  Such goods or other things shall be conveyed through the service areas or lifts provided for that purpose and no goods or other things shall be loaded or unloaded into or from any vehicle or conveyed into or from the Premises except at the area of the building specially provided by the Lessor for such loading and unloading provided that no such load shall be conveyed into the service lifts unless and until its weight has been assessed and found not to exceed the margin of safety prescribed therefore (which margin of safety it shall be the sole responsibility of the Lessee to ascertain from the Lessor).  The Lessee shall also observe at all times the rules as displayed for the operation of such lifts.
+4.6	The Lessee shall not introduce into the Premises or any part thereof any safe package article of furniture piece of machinery engine or other equipment or thing whatsoever having a weight in each case in excess of that allowed per square foot unless and until the individual weight of each such thing shall have first been approved in writing by the Lessor or the Lessor's architects and will place all safes on beams and near the walls to the satisfaction of the Lessor's architects and will indemnify the Lessor against all actions claims and demands arising from any breach of this sub-clause or resulting from the maximum floor stress of the Premises (which it shall be the responsibility of the Lessee to ascertain from the said architects) being at any time exceeded.
+4.7	The Lessee shall:-
+i)	not use nor suffer the use of any lavatories and water closets for the disposal of refuse or for any purpose which may cause a blockage or stoppage in the pipes;
+ii)	keep the Premises free from vermin.
+4.8	The Lessee shall permit the Lessor with or without workmen and others and with all necessary tools appliances and apparatus at any time with or without notice to enter upon the Premises for the purpose of examining the condition thereof or of rectifying any infractions of this lease or doing (subject to recovering costs thereof and damages occasioned thereby in accordance with Clause 4.2 hereof) such repairs alterations additions improvements renewals works or other things as may be required to the Premises or to the electricity or water supply or pipes in or under any parts of the Property and the Lessor shall be at liberty to effect the same to any other part of the Property including lifts therein and any such entry by the Lessor shall not be deemed to be an interference with the quiet enjoyment of the Lessee and the Lessee does hereby expressly release the Lessor from any and all liability for such entry and steps taken including loss of business through interruption consequent thereon.
+4.9	The Lessee shall insure and keep insured the plate glass windows (if any) of the Premises against damage or destruction in the full insurable value thereof with an insurance company or underwriters of good repute to be approved in writings by the Lessor and shall pay all premiums necessary for maintaining such insurance cover and produce to the Lessor on demand the policy of such insurance cover and the receipts for each premium payment and cause all moneys received by virtue of any such insurance cover to be forthwith laid out in reinstating the said plate glass windows and will make any deficiency out of its own moneys provided always that if the Lessee shall at any time fail to keep such insurance cover on foot the Lessor shall be at liberty to do all things necessary to effect and maintain such insurance cover and all moneys expended by the Lessor for that purpose shall be payable by the Lessee on demand and shall be recoverable from the Lessee as rent.
+4.10 i)     The Lessee agrees to indemnify the Lessor from and against any and all claims by or on behalf of any persons firms or corporations arising from the use occupation conduct management of or from any work or thing whatsoever done in or about the Premises during the term and will further indemnify the Lessor from and against any and all claims arising during the term resulting from any condition of the Premises or arising from any breach or default on the part of the Lessee in the performance of any covenant or agreement on the part of the Lessee to be performed pursuant to the term of this lease or the head lease or arising from any act or negligence of the Lessee or arising from any accident injury or damage whatsoever caused to any person firm or corporation occurring during the term in or about the Premises and the Shop/office block being attributable to the act of negligence, breach or default of the Lessee and from and against all costs 	advocates fees expenses and liabilities incurred in connection with any such claim or action or proceeding brought thereon and in case any action or proceeding be brought against the Lessor by reason of any such claim the Lessee upon notice from the Lessor covenants at the Lessee's own cost and expense to resist or defend such action or proceeding by an advocate satisfactory to the Lessor and at all times to indemnify and keep indemnified the Lessor in relation to all such claims demands actions proceedings or anything connected therewith;
+ii)            The Lessor shall not be liable for any loss damage or injury to the Lessee or the directors Managing Agents servants licensees invitees customers or suppliers of the Lessee 	arising from any of the following (unless such loss injury or damage shall be caused by the negligent act or omission of the Lessor):-
+a)	Any defects in or defective or negligent working construction or maintenance of any of the lifts in or the lighting of or the building operations at or of any part of the equipment at or the structure of the Shop/office block;
+b)	        Any lack or shortage of electricity water or drainage     whatsoever;
+c)	      The overflow of water to the Premises from other parts of the Shop/office block or from any other source whatsoever;
+d)	Any burglary theft shop office or store breaking;
+e)	Any fire howsoever occurring; or
+f)	Any injury to death or theft to the Lessee the directors Managing Agents servants licensees invitees customers suppliers of the Lessee or any visitor to the shop/office block caused by incidences of thuggery whether such incidences occur in the building the Shop/office block or the Premises.
+g)	Any act or default of any other Lessee in the building or of any director Managing Agent servant licensee invitee customer or supplier of such Lessee with reference to the maintenance or use of any pipes or sanitary water or electrical apparatus therein or the overloading of any floor of any part of the building;
+AND the Lessee shall indemnify the Lessor against all claims actions and proceedings by any director Managing Agent servant licensee invitee customer or supplier of the Lessee and by all officers and employees of the Lessor and by all others lawfully upon the Premises or in the vicinity thereof or affected by any such occurrences at the Shop/office block in respect of any loss damage or injury;
+iii) The Lessee agrees to carry at its own expense throughout the term comprehensive public liability insurance covering the Premises and the Lessee's use thereof with recognised and reputable insurance companies on account of (i) bodily injuries to or death of one or more persons (ii) Property damage.  Should the Lessee fail to carry such public liability insurance the Lessor may at its option (but shall not be  obliged so to do) cause comprehensive public liability insurance as aforesaid to be issued and to recover from the Lessee on demand the cost of so doing as rent.
+4.11	All goods possession and assets of the Lessee of any kind or description whatsoever including all fixtures equipment and merchandise located anywhere in or on the Premises and the Property shall be at the Lessee's sole risk and the Lessee hereby expressly releases and 	discharges the Lessor from any and all liability for any damage or loss to the same caused by 	fire water explosion or sewer back up or from bursting overflowing or leaking of pipes or from wall or floor leaks caused in any manner whatsoever or from any other cause whatsoever arising from any act or neglect of co-Lessees or other occupants of the Property or their employees or by any other persons or otherwise howsoever and the Lessee hereby expressly releases the Lessor from all liability whatsoever for such damage or loss and also all loss of business suffered by the business or occupation of the Lessee through interruption consequent thereon and shall indemnify and at all times keep indemnified and save harmless the Lessor against all claims demands actions proceedings arising thereout or anything relating thereto.
+4.12	The Lessee and its employees shall not park vehicles on the streets or internal drives or customer car parks or in any alley or court in the shop/office block. The Lessee and its employees shall park its vehicles and pay for such parking such fees as the Lessor shall by licenses issued determine in areas as designated by the Lessor from time to time. Where there is a rear entrance to the building all loading and unloading of goods shall be made at such rear entrance from designated bays. The Lessor shall have the right from time to time to establish modify and enforce rules and regulations including traffic control charges with respect to vehicle parking of Lessees and employees vehicles and controlling the entry into and the period of remaining within the loading areas by passes and by imposing a time charge for entry by tradesmen and others. The Lessee further agrees that:-
+i) 	upon written notice from the Lessor it will within Seven (7) days furnish the make and registration numbers of all its vehicles and those of all its employees including changes in the employed personnel;
+ii)	the Lessor is hereby exempt from all liability and responsibility in respect of any damage other than damage arising from the negligent act or omission of the Lessor and to any vehicle belonging to or in the custody of the Lessee or any employee supplier or customer of the Lessee
+iii)	the Lessee will on demand indemnify the Lessor in respect of any claim whatsoever made against the Lessor or any employee supplier or customer of the Lessee in respect of any vehicle or any damage sustained other than damage arising from the negligent acts or omission of the Lessor thereto and shall reimburse the Lessor in respect of all costs of removal and storage.
+4.13		The Lessee shall pay on demand to the Lessor:-
+i.)	all legal costs  and disbursements incurred by the Lessor together with all stamp duties registration fees head Lessor's and the mortgagee's advocates' fees for consent (if any) incurred in connection with the preparation completion and registration of this lease and two counterparts thereof, surrender of this lease and variation of this lease where necessary;
+ii)	all costs and expenses incurred by the Lessor in the employment of advocates surveyors valuers or otherwise for the purpose of enforcing any covenant condition or other obligation of the Lessee whatsoever herein whether waived or not by the Lessor or whether the Lessee is relieved hereunder or not.
+iii)	The Lessee shall produce on demand to the Lessor such evidence as the Lessor may reasonably require to satisfy itself that the provisions of this lease have been duly complied with.
+4.14	The Lessee shall not assign sublet or part with possession of the Premises or any part thereof nor hold the same in trust for another nor assign transfer or mortgage this lease or any interest therein without the prior written consent of the Lessor which consent shall not be unreasonably withheld. Any transfer of this lease from the Lessee by merger consolidation liquidation bankruptcy or otherwise by operation of law shall constitute an assignment for the purpose of this sub-clause and shall in any event be subject to automatic defeasance upon the happening of any of the foregoing events and require the written consent of the Lessor in any event for its condonation which consent shall not be unreasonably withheld may be given upon such reasonable conditions as the Lessor shall think fit and more particularly among others upon the covenants that any such person shall not in his turn assign sub-let or part with possession of the Premises or any part thereof without the prior written consent of the Lessor which consent shall not be unreasonably withheld and in any event be subject to all the covenants and agreements of this lease as if he were the original Lessee and shall pay all legal expenses incurred by the Lessor together with the Lessors fee for noting in the records of the Lessor the substitution of Lessees. If this lease shall be assigned or if the Premises or any part thereof shall be sub-leased or occupied by anybody other than the Lessee whether as a licensee or otherwise or shared with the Lessee the Lessor may collect from the assignee sub-Lessee or occupant any rent or other service charges and payments due from the Lessee under this lease and apply the amount collected to the rent or service charge or payment herein reserved or falling due but such collection by the Lessor shall not be deemed an acceptance of the assignee sub-Lessee or occupant as a Lessee or a permissive occupant nor a release of the Lessee from the performance by the Lessee of the Lessee's obligations under this lease. Any consent by the Lessor to any assignment or subletting shall not constitute a waiver of the necessity for such consents to any subsequent assignment or subletting.
+No assignment or subletting shall relieve the Lessee of its obligations herein and the Lessee shall continue to be liable as a principal and not as a guarantor or surety to the same extent as though no assignment or sub-lease had been made.
+If the Lessee herein is a Company within the meaning of the Companies Act No. 17 of 2015 Laws of Kenya or any legislation replacing the same and if by sale or other disposition whether at once or by stages the shareholding thereof changes to the extent of more than 25% of the nominal value of the issued shares of the Company without the consent of the Lessor at any time during the term hereof then in that event an assignment of this lease shall be deemed to have taken place and shall give rise to the right to re-enter or terminate this lease hereinafter reserved.  For the purpose of this paragraph if the Lessee is a partnership the transfer whether at once or by stages without the consent of the Lessor of more than 25% of the interest of the partners in the partnership shall be deemed to be an assignment of this lease and shall give rise to the right to re-enter or terminate this lease hereinafter reserved.
+Notice of any intended sale or other disposition of shares in the Company or interest in the partnership by the Lessee must be given to the Lessor at least Twenty (20) days prior to the effective date thereof.  And it is hereby agreed by the Lessee that neither this lease nor any interest therein nor any automatically defeasible estate hereby created shall pass to any trustee or receiver in bankruptcy or to any other receiver or assignee for the benefit of creditors or otherwise by operation of law.
+4.15	The Lessor shall however have the absolute right to require Lessee on sixty (60) days notice to relocate to another location (the “Relocated Premises”) in the existing  building within the Property. The location, size and configuration of the Relocated Premises shall be in Lessor’s sole discretion. On the date of the relocation the Base Rent shall be adjusted based on the size of the Relocated Premises, and all references in this Lease to “Premises” shall be taken to refer to the Relocated Premises.  Lessor may reimburse Lessee for its reasonable out-of pocket relocation expenses. Lessor’s failure to deliver possession of the Premises as required shall constitute an immediate and material default hereunder. The Lessor shall not be liable for any loss of business or profit occasioned by the relocation. 
+4.16	On the date of execution by the Lessee of this lease the Lessee shall deposit if not already deposited prior to such date with the Lessor a sum equal to Three (3) Months deposit and Four (4) month rent of the last month of the term (i.e. the maximum monthly rent of the lease term) and throughout the term shall ensure that such deposit is maintained at the level of the maximum monthly rent of the last term. The deposit shall form additional security for the full and faithful performance of every provision in this lease to be performed by the Lessee.  If the Lessee defaults with respect to any provision of this lease including but not limited to the provisions relating to the payment of rent or any other amounts payable by the Lessee herein the Lessor may in its sole and unfettered discretion decide to use apply or retain all or any part of the deposit for payment of any such rent or other amount or for the payment of any other sum which the Lessor may spend or become obligated to spend by reason of the Lessee's default or to compensate the Lessor for any loss cost or damage which the Lessor may suffer by reasons of the Lessee's default. Whenever during the term the said deposit shall fall below the maximum monthly rent of the lease term or if it be so used or applied the Lessee shall within Ten (10) days after demand therefore deposit in cash with the Lessor a further payment sufficient to restore the deposit to the correct amount and the Lessee's failure to do so shall constitute a default by the Lessee in the due observance and performance of the covenants conditions and provisions of this lease. The Lessor shall not be required to keep the deposit separate from its general funds and the Lessee shall not be entitled to any interest whatsoever on such deposit. If the Lessee shall fully and faithfully perform every provision of this lease to be performed by it the deposit or any balance thereof shall after the expiration of the term be returned to the Lessee without interest after the Lessee has delivered up and surrendered in vacant possession the Premises unto the Lessor in proper condition and in accordance with the provisions of this lease.
+4.17	At the termination of this lease whether by expiration of time, compulsory acquisition or forfeiture the Lessee shall remove all of its own goods possession and assets from the Premises and upon failure to do so the same shall be deemed to be abandoned by and of no value to the Lessee and the same shall thereupon automatically become the sole Property of the Lessor for disposal as it sees fit and the Lessee further agrees to pay to the Lessor on demand the full costs of removal of all the same.
+4.18	 The Lessee has had prior to the commencement date hereof full opportunity to examine the Premises and plans therefore including sidewalks (if any) adjacent to the Premises and the Lessee's occupation shall be an acknowledgement that there is in and about them nothing dangerous to life limb health or possessions and the Lessee hereby waives any claim for damages that may arise 	from defects of that character after occupation and the Lessee takes the Premises as being so.
+4.19	By occupying the Premises as Lessee the Lessee formally accepts the same and acknowledges that the Lessor has complied with all requirements imposed upon it under the terms of this lease to 	render the Premises ready for occupation and it is understood and agreed by the Lessee that any changes from the plans that might be necessary during further construction will not affect or 	change this lease or invalidate the same but if the area of the Premises is substantially reduced or increased the rent and service charge shall be adjusted proportionately unless otherwise agreed in writing by and between the parties.
+4.20	The Lessor shall have the right at any time without the same constituting an actual or constructive eviction and without incurring any liability to the Lessee therefor but causing the minimum interruption as the circumstances shall permit to change the arrangement and/or location of all entrances passageways doors doorways corridors lifts staircases lavatories washing conveniences and the common areas of the Shop/office block and the Property and also to change the name number and designation by which it is commonly known.
+
+4.21	During the last three (3) months of the term the Lessor shall be entitled and the Lessee will freely permit:-
+i.)	during all normal working hours the Lessor and its agents to escort prospective Lessees through the Premises in order to view and inspect the same;
+ii.)	the Lessor to place and keep on the exterior windows doors and walls of the Premises all such signs notices and advertisements for inter alia reletting the same as the Lessor may from time to time require.
+5.	The Lessor covenants and agrees with the Lessee that throughout the term:-
+5.1	The Lessor shall pay the rent and other charges(if any) and perform the Lessee's covenants and conditions contained therein.
+5.2	That the Lessee upon paying the rent and all other dues recoverable from the Lessee as herein provided and performing and observing the covenants agreements and conditions of this lease on the Lessee's part to be performed and observed shall peaceably and quietly hold occupy and enjoy the Premises during the term without hindrance by the Lessor or any person claiming under the Lessor subject however at all times to the terms and conditions of this lease.
+5.3	The Lessor shall pay all water and conservancy charges and for electricity consumed in the common areas subject to reimbursement by the Lessee in accordance with sub-clause 3.13 (ii) and 4.10(iii)
+5.4	The Lessor shall keep the Shop/office block insured against all the insurable risks enumerated in sub-clause 1.13(v) in such amounts and with such endorsements as stated therein subject to reimbursement by the Lessee in accordance with sub-clause 3.13 (ii).
+5.5	The Lessor shall unless prevented by any cause beyond its control keep adequately lighted such parts of the common areas as shall require to be lighted during such hours as the Lessor may reasonably decide and will keep such parts of the common areas and all windows affording light to the same clean and in good and Lesseeable repair subject to reimbursement by the Lessee in accordance with sub-clause 3.13 (ii).
+5.6	The Lessor shall subject to reimbursement by the Lessee employ and maintain such staff or sub-contractors as may be necessary for the efficient running cleanliness and protection of the Property including day and night watchmen as the Lessor may from time to time consider 	necessary it being understood and agreed by both parties hereto that the Lessor shall not incur any liability to the Lessee for any neglect default or criminal act of any such personnel sub-contractors or their employees.
+6.	The parties hereto hereby further covenant and agree as follows:-
+6.1	That if the Premises or any part thereof are damaged or destroyed by fire or other calamity during the term so as to render the Premises or a substantial part thereof unfit for occupation or use and the insurance in respect thereof has not become vitiated by any act or omission of the Lessee,  the Lessor will until such time as the Premises shall be fit for occupation or use allow the Lessee a total or proportionate abatement in such sum as the Lessor shall in its absolute discretion determine of the rent hereby reserved as the case may be but the Lessee shall not have any such right of determination of the term hereby created as is contemplated by section 65 (e) of the Land Act 2012.
+6.2		That if any of the following events shall occur to wit:-
+i)	if any instalment of rent or any other sums required to be paid by the Lessee hereunder or any part thereof shall at any time be in arrears and unpaid for Ten (10) days after becoming payable (whether demanded or not); 
+ii)	if the lessee is adjudicated bankrupt; 
+iii)	If the lessee being a company, goes into liquidation, or;
+iv)	if there be any other default on the part of the Lessee in the observance or performance of any of the other covenants, agreements or conditions of this lease on the part of the Lessee to be observed and performed.
+then in any such event at the Lessor's option and without limiting the Lessor in the exercise of any other right or remedy open to the Lessor on account of any default by the Lessee the Lessor may:
+a)	exercise the right of forfeiture in accordance to Sections 73 -77 of the Land act 2012, upon the issuance of a thirty days’ notice to the Lessee, if the Lessee fails to remedy the breach within thirty days thereafter, if it is capable of remedy, and to make reasonable compensation in money, which exercise may be by entering upon and remaining in possession of the Premises where neither the Lessee nor any person claiming through or under the Lessee is in occupation, or otherwise by enforcement of such right of forfeiture by action in the court.
+b)	Subject to the provisions of the Distress for Rent Act and any other written law, the lessor shall have a remedy for distress for the recovery of any instalment of rent or any other sums required to be paid by the Lessee . 
+c)	That if any term covenant or condition of this lease or the application thereof to any person or circumstance shall to any extent be invalid or unenforceable the other terms covenants or conditions or portions thereof severed from those to which they are invalid or unenforceable the remainder of this lease or the application of such term covenant or condition to perso ns or circumstances other than those as to which it is invalid or unenforceable shall not be affected thereby and each term covenant and condition of this lease shall be valid and enforceable to the fullest extent permitted by law.
+d)	That in the event that the Lessor shall at any time during the continuation of this lease transfer its rights under and the benefit of this lease to any third party then and in any such case the Lessee shall upon the completion of such transfer be deemed to have released the Lessor from all further obligations as Lessor under this lease automatically without the need to execute any instrument in that behalf without prejudice to the mutual rights and obligations of the transferee and the Lessee inter se PROVIDED ALWAYS that no release shall be deemed to take place if there shall be any outstanding dues, payment or obligations due to the Lessee by the Lessor under the lease which the Transferee shall not under such instrument of Transfer have undertaken to pay or discharge.
+e)	That this lease and all covenants provisions and conditions herein contained shall endure for the benefit of and be binding upon the heirs executors administrators personal representatives successors and assigns respectively of the parties hereto provided however that any sub lease assignment or transfer by from through or under the Lessee in violation of the provisions hereof shall operate in defeasance of the estate hereby vested in the Lessee so that the sub lessee assignee or transferee shall not acquire any right title or interest whatever.
+f)	That no acceptance by the Lessor of a lesser sum than the rent dues or any other charge accrued shall be deemed to be other than on account and in part payment of the earlier instalment of such rent or dues or charge accrued nor shall any endorsement or statement on any cheque or payment as rent or dues or other charge accrued be deemed an accord and satisfaction and the Lessor may accept such cheque or payment without prejudice to the Lessor's right to recover the balance of any such instalment or dues or charge accrued or any other monies owing by the Lessee or pursue any other remedies in this lease provided.
+g)	That all obligations of the Lessee which by their nature involve performance in any particular manner after the end of the term or which cannot be ascertained to have been fully performed until after the end of the term shall survive the expiration or sooner determination of the term.
+h)	That nothing herein contained shall be deemed or construed by the parties hereto nor by any third party as creating a relationship between the parties hereto other than the relationship of Lessor and Lessee.
+i)	Nothing contained in or implied by this lease shall give the Lessee the benefit of or the right to enforce (or to prevent the release or modification of) any covenant agreement or condition entered into by any other Lessee of the Shop/office block and all covenants provisions and conditions shall remain in full force even if the Lessor has waived or temporarily released that covenant provision or condition or waived or released (whether temporarily or permanently) a similar covenant in a lease of any other Premises in the Shop/office block.
+j)	That this lease is and shall be subject and subordinate to any and all charges mortgages deeds of trust and lease now existing upon or that may hereafter be registered against the Premises or the piece of land upon which they are situate and to all advances made or to be made thereon and all renewals modifications consolidations replacements or extensions thereof and the lien of any such charges mortgages deeds of trust and leases shall be superior to all rights hereby or hereunder vested in the Lessee to the full extent of all sums secured thereby provided however that each such charge mortgage or deed of trust now or hereafter encumbering the Premises and the piece of land upon which they are situated shall provide by its terms or the holder of such mortgage or deed of trust shall by a separate agreement agree that in the event of  foreclosure of  such charge mortgage or deed of trust the Lessee shall remain undisturbed under this lease so long as the Lessee complies with all of the terms obligations and conditions hereunder.   This provision shall be self operative and no further instrument of subordination shall be necessary to effectuate such subordination and the registration of such charge mortgage or deed of trust shall have preference and precedence and be superior and prior to lien to this lease irrespective of the date of registration.  In confirmation of such subordination the Lessee shall on request of the Lessor  or the holder of any such charge mortgage or deed of trust execute and deliver to the Lessor within Ten (10) days any instrument that the Lessor or such holder may reasonably request.
+k)	That the Lessor shall have the right at any time as it may think fit during the term but causing the minimum nuisance and disruption to the Lessee possible to rebuild or to execute any other works alterations additions or improvements and to erect scaffolding and hoarding in connection therewith in or to any part of the Shop/office block and the Property or in or to any fixtures appurtenances or equipment thereof notwithstanding any interference with the access to light and air thereto or the Premises or to the timbers walls floors ceilings doors windows fixtures or fittings thereof and notwithstanding any suffering or offensive or disagreeable noise nuisance scaffolding or annoyance caused to the Lessee by any such works alterations additions or improvements PROVIDED ALWAYS that the Lessor shall be under no liability to pay any compensation whatsoever to the Lessee for any damage or loss caused by or resulting from the same unless the loss or damage shall be caused by the negligent act or omission of the Lessor.
+l)	That this Lease shall be governed by and construed in all respects in accordance with the Kenyan Law
+m)	That the provisions of Part VI of the Land Act 2012 (General Provisions relating to Leases) shall not apply to this Lease unless expressly so stated to apply.
+n)	That after the expiry of this lease no new relationship of Lessor and Lessee shall arise or be capable of arising otherwise than by agreement in writing signed by both parties and duly exchanged.  The Lessor shall not be obliged to return any payment of purported rent after the expiry of this lease but shall be entitled to set-off against mesne profits for holding over after expiry of this lease.
+o)	That all notices provided for in this lease shall be in writing and shall be delivered personally or sent by registered post or under certificate of posting, courier service or facsimile addressed to the Lessor at the last known post office address of the Lessor and to the Lessee at the last known post office address of the Lessee or at the Premises.  Notice shall be deemed to be given when delivered and when posted as aforesaid to have been served within four (4) days after the posting thereof.  Any notice or demand sent by facsimile shall be deemed to have been served at the time of transmission.
+The Lessee hereby accepts this lease subject to the covenants agreements conditions restrictions and provisions hereinbefore set forth.
+IN WITNESS whereof the parties hereto have executed this lease on the day and year first hereinabove written.
+SEALED with the COMMON SEAL of the LESSOR, MWALIMU NATIONAL SAVINGS AND CREDIT COOPERATIVE SOCIETY LIMITED in the presence of:-				
+			
+	
+
+
+
+			
+Name: …………………………………………
+ID/Passport Number: ……………………….
+Signature...........................................................					
+	
+
+
+
+
+
+
+Name: ……………………………………….
+ID/Passport Number: ……………………..
+Signature...........................................................	
+
+
+
+
+
+
+
+
+
+
+
+Name: ………………………………………..
+ID Number: …………………………………. 	
+Signature...........................................................	
+
+
+	
+
+
+
+
+
+Name: ………………………………………..
+ID Number: …………………………………. 	
+Signature...........................................................	
+
+Certificate of Verification under Section 45 of the Land Registration Act
+I CERTIFY that the above ................................................................ (Directors) and ………………………………………. (CEO) being the persons witnessing the affixing of the Common Seal of the Lessor appeared before me on the …………………………………………………………. and being known to me/ identified by……………………………………………………………… acknowledge the above signatures or marks to be theirs and that they freely and voluntarily executed this instrument and understood it contents.
+Signed: 								
+			 Name and signature of person certifying
+
+
+
+
+
+
+
+
+
+
+SIGNED BY THE LESSEE- </Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Label>Contractor Name</Label>
+                                  <Value>=First(Fields!Contractor_Name.Value, "DataSet_Result")</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>
+In the presence of
+	
+
+
+
+
+
+
+
+Name: ………………………………………..
+ID/Passport Number: ………………………	
+Signature...........................................................
+
+
+
+
+
+
+
+
+Name: ………………………………………..
+ID/Passport Number: ………………………	
+Signature...........................................................
+
+Certificate of Verification under Section 45 of the Land Registration Act
+
+
+I CERTIFY that the above ................................................................ being the persons witnessing the affixing of the Common Seal of the Lessee appeared before me on the …………………………………………………………. and being known to me/ identified by……………………………………………………………… acknowledge the above signatures or marks to be theirs and that they freely and voluntarily executed this instrument and understood it contents.
+
+ Signed: 								
+	Name and signature of person certifying
+				
+Registered this ………………………… day of ……………………………………. 20…………
+
+LAND REGISTRAR Seal: …………………………………………………………………………..
+
+Name: ………………………………………………………………… 
+
+Registrar’s Stamp/No: …………………………………………
+
+Signature: ………………………………..…………………..
+
+</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>DRAWN BY:</Value>
+                                  <Style>
+                                    <FontStyle>Normal</FontStyle>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <TextDecoration>Underline</TextDecoration>
+                                    <Color>#000000</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Label>Legal Officer Name</Label>
+                                  <Value>=First(Fields!LegalOfficerName.Value, "DataSet_Result")</Value>
+                                  <Style>
+                                    <FontStyle>Normal</FontStyle>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Normal</FontWeight>
+                                    <TextDecoration>None</TextDecoration>
+                                    <Color>#000000</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <LineHeight>12pt</LineHeight>
+                              </Style>
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Label>LegalOfficerTitle</Label>
+                                  <Value>=First(Fields!LegalOfficerTitle.Value, "DataSet_Result")</Value>
+                                  <Style>
+                                    <FontStyle>Normal</FontStyle>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Normal</FontWeight>
+                                    <TextDecoration>None</TextDecoration>
+                                    <Color>#000000</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <LineHeight>12pt</LineHeight>
+                              </Style>
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Label>SACCOName</Label>
+                                  <Value>=First(Fields!CompanyName.Value, "DataSet_Result")</Value>
+                                  <Style>
+                                    <FontStyle>Normal</FontStyle>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Normal</FontWeight>
+                                    <TextDecoration>None</TextDecoration>
+                                    <Color>#000000</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <LineHeight>12pt</LineHeight>
+                              </Style>
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Label>BuildingName</Label>
+                                  <Value>=First(Fields!BuildingName.Value, "DataSet_Result")</Value>
+                                  <Style>
+                                    <FontStyle>Normal</FontStyle>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Normal</FontWeight>
+                                    <TextDecoration>None</TextDecoration>
+                                    <Color>#000000</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <LineHeight>12pt</LineHeight>
+                              </Style>
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Label>CompanyAddress</Label>
+                                  <Value>=First(Fields!CompanyAddress.Value, "DataSet_Result")</Value>
+                                  <Style>
+                                    <FontStyle>Normal</FontStyle>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Normal</FontWeight>
+                                    <TextDecoration>None</TextDecoration>
+                                    <Color>#000000</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <LineHeight>12pt</LineHeight>
+                              </Style>
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Label>PhysicalAddress</Label>
+                                  <Value>=First(Fields!CompanyPhysical_Address.Value, "DataSet_Result")</Value>
+                                  <Style>
+                                    <FontStyle>Normal</FontStyle>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Normal</FontWeight>
+                                    <TextDecoration>None</TextDecoration>
+                                    <Color>#000000</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <LineHeight>12pt</LineHeight>
+                              </Style>
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Label>CompanyCity</Label>
+                                  <Value>=First(Fields!City.Value, "DataSet_Result")</Value>
+                                  <Style>
+                                    <FontStyle>Normal</FontStyle>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Normal</FontWeight>
+                                    <TextDecoration>Underline</TextDecoration>
+                                    <Color>#000000</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <LineHeight>12pt</LineHeight>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox3</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Details" />
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <Top>46.41605cm</Top>
+            <Left>0.28787cm</Left>
+            <Height>24.00431cm</Height>
+            <Width>20.19181cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+          <Line Name="Line1">
+            <Top>29.12662cm</Top>
+            <Left>0.28787cm</Left>
+            <Height>0cm</Height>
+            <Width>20.19181cm</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <TopBorder>
+                <Color>Black</Color>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Black</Color>
+              </BottomBorder>
+              <LeftBorder>
+                <Color>Black</Color>
+              </LeftBorder>
+              <RightBorder>
+                <Color>Black</Color>
+              </RightBorder>
+            </Style>
+          </Line>
+          <Textbox Name="Textbox9">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>REPUBLIC OF KENYA
+THE LAND REGISTRATION ACT NO. 3 OF 2012
+THE LAND REGISTRATION (GENERAL) REGULATIONS, 2017</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox9</rd:DefaultName>
+            <Top>29.23245cm</Top>
+            <Left>0.28787cm</Left>
+            <Height>1.72889cm</Height>
+            <Width>20.19181cm</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Line Name="Line2">
+            <Top>32.39037cm</Top>
+            <Left>0.28787cm</Left>
+            <Height>0cm</Height>
+            <Width>20.19181cm</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <TopBorder>
+                <Color>Black</Color>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Black</Color>
+              </BottomBorder>
+              <LeftBorder>
+                <Color>Black</Color>
+              </LeftBorder>
+              <RightBorder>
+                <Color>Black</Color>
+              </RightBorder>
+            </Style>
+          </Line>
+          <Textbox Name="Textbox10">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Date Received		                        Presentation Book		       Official Fees Paid
+_______20 __	                                      No. _______20 ___	                     KShs. _______ /=                   </Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>11pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox10</rd:DefaultName>
+            <Top>31.10245cm</Top>
+            <Left>0.28787cm</Left>
+            <Height>1.21736cm</Height>
+            <Width>20.19181cm</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Line Name="Line3">
+            <Top>31.03189cm</Top>
+            <Left>0.28787cm</Left>
+            <Height>0cm</Height>
+            <Width>20.19181cm</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+              <TopBorder>
+                <Color>Black</Color>
+              </TopBorder>
+              <BottomBorder>
+                <Color>Black</Color>
+              </BottomBorder>
+              <LeftBorder>
+                <Color>Black</Color>
+              </LeftBorder>
+              <RightBorder>
+                <Color>Black</Color>
+              </RightBorder>
+            </Style>
+          </Line>
+          <Textbox Name="Textbox11">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>LEASE</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>
+TITLE NUMBER: LAND REFERENCE NO.  </Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>L.R No</Label>
+                    <Value>=First(Fields!L_R_No_.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox11</rd:DefaultName>
+            <Top>32.42564cm</Top>
+            <Left>0.28787cm</Left>
+            <Height>1.19972cm</Height>
+            <Width>20.19181cm</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Tablix Name="Tablix3">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>5.09292cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>15.09889cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Date of Lease: </Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox4">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Label>Commencement Date</Label>
+                                  <Value>=First(Fields!Lease_Start_Date.Value, "DataSet_Result")</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>, (hereinafter referred to as the “Commencement Date”)</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox4</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>2.71667cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox18">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>The Lessor:	</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox18</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox19">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>MWALIMU NATIONAL SAVINGS AND CREDIT CO-OPERATIVE SOCIETY LIMITED a savings and credit cooperative society registered under the Co-operative Societies Act and licensed under the SACCO Societies Act, of Post Office Box Number 62641-00200 NAIROBI (hereinafter referred to as the “Lessor” which expression shall, where the context so requires, include its successors in title and permitted assigns).</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox19</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>1.65833cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox20">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>The Lessee:</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox20</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox21">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>NAME a Limited Liability Company duly registered in the Republic of Kenya and of P.O. Box XXXX, NAIROBI (hereinafter referred to as “the Lessee”, which expression shall where the context so admits include its successors and permitted assigns)</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox21</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>2.1875cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox22">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Demised Premises</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox22</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox23">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>	Means office space measuring approximately Size in words and numbers (3800) square feet of the Lessor’s Premises (at the rate Kenya Shillings One Hundred (Kshs. 100/-) per square foot of office accommodation space on ….. Floor Wing A in the building erected on Land Reference NO. </Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Label>L.R No.</Label>
+                                  <Value>=First(Fields!L_R_No_.Value, "DataSet_Result")</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox23</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox24">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Term </Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox24</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox25">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>	The Term of the lease is Six years (6 years) from the commencement Date.</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox25</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox26">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Rent/stand Premium</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox26</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox27">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>	As provided in Clause 2 hereto:</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox27</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.70583cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox28">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Service Charge	</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox28</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox29">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>The service charge shall form part of the rent payable</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox29</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>1.69361cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox30">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Cadastral Plan of the Demised Premises (where applicable)</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox30</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox31">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>N/A</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox31</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>1.71125cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox32">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Sectional Plans(s) of the Demised Premises (where applicable)</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox32</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox33">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>N/A</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>11pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox33</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <Top>33.62536cm</Top>
+            <Left>0.28787cm</Left>
+            <Height>12.47319cm</Height>
+            <Width>20.19181cm</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+        </ReportItems>
+        <Height>70.42036cm</Height>
+        <Style />
+      </Body>
+      <Width>20.93829cm</Width>
+      <Page>
+        <PageHeader>
+          <Height>0.68792cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
+        <PageFooter>
+          <Height>1.02305cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="PageNumber">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Page </Value>
+                      <Style>
+                        <FontFamily>Times New Roman</FontFamily>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>=Globals!PageNumber</Value>
+                      <Style>
+                        <FontFamily>Times New Roman</FontFamily>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>PageNumber</rd:DefaultName>
+              <Top>0.17639cm</Top>
+              <Left>0cm</Left>
+              <Height>0.71756cm</Height>
+              <Width>20.47968cm</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>21cm</PageWidth>
+        <LeftMargin>0cm</LeftMargin>
+        <RightMargin>0cm</RightMargin>
+        <TopMargin>0cm</TopMargin>
+        <BottomMargin>0cm</BottomMargin>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Contract_No">
+          <DataField>Contract_No</DataField>
+        </Field>
+        <Field Name="Contractor_Name">
+          <DataField>Contractor_Name</DataField>
+        </Field>
+        <Field Name="Address">
+          <DataField>Address</DataField>
+        </Field>
+        <Field Name="Tel_No_">
+          <DataField>Tel_No_</DataField>
+        </Field>
+        <Field Name="Lease_Start_Date">
+          <DataField>Lease_Start_Date</DataField>
+        </Field>
+        <Field Name="L_R_No_">
+          <DataField>L_R_No_</DataField>
+        </Field>
+        <Field Name="Physical_Address">
+          <DataField>Physical_Address</DataField>
+        </Field>
+        <Field Name="LegalOfficerName">
+          <DataField>LegalOfficerName</DataField>
+        </Field>
+        <Field Name="LegalOfficerTitle">
+          <DataField>LegalOfficerTitle</DataField>
+        </Field>
+        <Field Name="CompanyName">
+          <DataField>CompanyName</DataField>
+        </Field>
+        <Field Name="BuildingName">
+          <DataField>BuildingName</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyPhysical_Address">
+          <DataField>CompanyPhysical_Address</DataField>
+        </Field>
+        <Field Name="City">
+          <DataField>City</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

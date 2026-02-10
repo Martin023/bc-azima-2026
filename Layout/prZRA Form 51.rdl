@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="CI_NameCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>CI_NameCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>CI_NameCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="CI_AddressCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>CI_AddressCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>CI_AddressCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="CI_Address2Caption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>CI_Address2Caption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>CI_Address2Caption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="CI_PhoneNoCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>CI_PhoneNoCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>CI_PhoneNoCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="CI_PictureCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>CI_PictureCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>CI_PictureCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="CI_CityCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>CI_CityCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>CI_CityCaption</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+  </Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_7769">
+          <DataField>ReportForNavId_7769</DataField>
+        </Field>
+        <Field Name="CI_Name">
+          <DataField>CI_Name</DataField>
+        </Field>
+        <Field Name="CI_Address">
+          <DataField>CI_Address</DataField>
+        </Field>
+        <Field Name="CI_Address2">
+          <DataField>CI_Address2</DataField>
+        </Field>
+        <Field Name="CI_PhoneNo">
+          <DataField>CI_PhoneNo</DataField>
+        </Field>
+        <Field Name="CI_Picture">
+          <DataField>CI_Picture</DataField>
+        </Field>
+        <Field Name="CI_City">
+          <DataField>CI_City</DataField>
+        </Field>
+        <Field Name="CI_Company_TIN">
+          <DataField>CI_Company_TIN</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="TODAY">
+          <DataField>TODAY</DataField>
+        </Field>
+        <Field Name="PeriodName">
+          <DataField>PeriodName</DataField>
+        </Field>
+        <Field Name="Prepared_by_______________________________________Date_________________Caption">
+          <DataField>Prepared_by_______________________________________Date_________________Caption</DataField>
+        </Field>
+        <Field Name="Checked_by________________________________________Date_________________Caption">
+          <DataField>Checked_by________________________________________Date_________________Caption</DataField>
+        </Field>
+        <Field Name="Authorized_by____________________________________Date_________________Caption">
+          <DataField>Authorized_by____________________________________Date_________________Caption</DataField>
+        </Field>
+        <Field Name="Approved_by______________________________________Date_________________Caption">
+          <DataField>Approved_by______________________________________Date_________________Caption</DataField>
+        </Field>
+        <Field Name="Employee_No">
+          <DataField>Employee_No</DataField>
+        </Field>
+        <Field Name="Employee_Name">
+          <DataField>Employee_Name</DataField>
+        </Field>
+        <Field Name="Salary_Grade">
+          <DataField>Salary_Grade</DataField>
+        </Field>
+        <Field Name="Employee_TIN">
+          <DataField>Employee_TIN</DataField>
+        </Field>
+        <Field Name="Basic_Salary">
+          <DataField>Basic_Salary</DataField>
+        </Field>
+        <Field Name="Basic_SalaryFormat">
+          <DataField>Basic_SalaryFormat</DataField>
+        </Field>
+        <Field Name="Allowances">
+          <DataField>Allowances</DataField>
+        </Field>
+        <Field Name="AllowancesFormat">
+          <DataField>AllowancesFormat</DataField>
+        </Field>
+        <Field Name="Vehicle_Element">
+          <DataField>Vehicle_Element</DataField>
+        </Field>
+        <Field Name="Vehicle_ElementFormat">
+          <DataField>Vehicle_ElementFormat</DataField>
+        </Field>
+        <Field Name="Accomodation">
+          <DataField>Accomodation</DataField>
+        </Field>
+        <Field Name="AccomodationFormat">
+          <DataField>AccomodationFormat</DataField>
+        </Field>
+        <Field Name="Other_Benefits">
+          <DataField>Other_Benefits</DataField>
+        </Field>
+        <Field Name="Other_BenefitsFormat">
+          <DataField>Other_BenefitsFormat</DataField>
+        </Field>
+        <Field Name="Total_Emoluments">
+          <DataField>Total_Emoluments</DataField>
+        </Field>
+        <Field Name="Total_EmolumentsFormat">
+          <DataField>Total_EmolumentsFormat</DataField>
+        </Field>
+        <Field Name="SSF_Employee">
+          <DataField>SSF_Employee</DataField>
+        </Field>
+        <Field Name="SSF_EmployeeFormat">
+          <DataField>SSF_EmployeeFormat</DataField>
+        </Field>
+        <Field Name="Deductible_Relief">
+          <DataField>Deductible_Relief</DataField>
+        </Field>
+        <Field Name="Deductible_ReliefFormat">
+          <DataField>Deductible_ReliefFormat</DataField>
+        </Field>
+        <Field Name="Net_Taxable_Pay">
+          <DataField>Net_Taxable_Pay</DataField>
+        </Field>
+        <Field Name="Net_Taxable_PayFormat">
+          <DataField>Net_Taxable_PayFormat</DataField>
+        </Field>
+        <Field Name="Tax_Deductible">
+          <DataField>Tax_Deductible</DataField>
+        </Field>
+        <Field Name="Tax_DeductibleFormat">
+          <DataField>Tax_DeductibleFormat</DataField>
+        </Field>
+        <Field Name="Tax_Deducted_Paid">
+          <DataField>Tax_Deducted_Paid</DataField>
+        </Field>
+        <Field Name="Tax_Deducted_PaidFormat">
+          <DataField>Tax_Deducted_PaidFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

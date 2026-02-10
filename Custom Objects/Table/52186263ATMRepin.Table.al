@@ -1,0 +1,394 @@
+table 52186263 "ATM Repin Table"
+{
+    DrillDownPageID = "ATM Repin Application List";
+    LookupPageID = "ATM Repin Application List";
+
+    fields
+    {
+        field(1; "No."; Code[20])
+        {
+            Editable = false;
+
+            trigger OnValidate()
+            begin
+                if "No." <> xRec."No." then begin
+                    BankingNoSetup.Get;
+                    NoSeriesMgt.TestManual(BankingNoSetup."ATM Repin");
+                    "No. Series" := '';
+                end;
+            end;
+        }
+        field(2; "Account No"; Code[20])
+        {
+            // TableRelation = "Savings Accounts"."No." WHERE("Product Category" = FILTER("FOSA Account"));
+            TableRelation = "ATM Inventory"."Account No.";
+
+
+            trigger OnValidate()
+            begin
+                SavingsAccounts.get("Account No");
+                SavingsAccounts.CalcFields("Balance (LCY)");
+                if SavingsAccounts.GetAvailableBalance(SavingsAccounts."No.") < TransCharges."Charge Amount" then
+                    Error('There is no enough balance in the account for the card application');
+            end;
+        }
+        field(3; "Branch Code"; Code[20])
+        {
+            Editable = false;
+        }
+        field(4; "Account Type"; Option)
+        {
+            OptionCaption = 'Savings,Current';
+            OptionMembers = Savings,Current;
+        }
+        field(5; "Account Name"; Text[50])
+        {
+            Editable = false;
+        }
+        field(6; Address; Text[35])
+        {
+            Editable = false;
+        }
+        field(7; "Customer ID"; Code[11])
+        {
+            Editable = false;
+        }
+        field(8; "Relation Indicator"; Option)
+        {
+            OptionCaption = 'Primary,Suplimentary';
+            OptionMembers = Primary,Suplimentary;
+        }
+        field(9; "Card Type"; Code[10])
+        {
+            TableRelation = "ATM Card Types".Code;
+        }
+        field(10; "Request Type"; Option)
+        {
+            OptionCaption = 'New,Replacement,Re-Pin';
+            OptionMembers = New,Replacement,"Re-Pin",Supplementary;
+        }
+        field(11; "Application Date"; Date)
+        {
+            Editable = false;
+        }
+        field(12; "Card No"; Code[30])
+        {
+            Editable = false;
+
+            trigger OnValidate()
+            begin
+                GeneralSetUp.Get();
+                if StrLen("Card No") <> GeneralSetUp."ATM Card No Characters" then
+                    Error('ATM Card No %1 MUST be equal to %2 characters.', "Card No", GeneralSetUp."ATM Card No Characters");
+                TestField("Account No");
+                ATMLinkingApplications.Reset;
+                ATMLinkingApplications.SetRange("Card No", "Card No");
+                if ATMLinkingApplications.Find('-') then begin
+                    Error('This card is already linked to ' + ATMLinkingApplications."Account No");
+                end;
+
+                //send sms
+                SavingsACC.Reset;
+                SavingsACC.SetRange("No.", "Account No");
+                if SavingsACC.Find('-') then begin
+                    //SendSMS.SendSms(SourceType::"ATM Collection", SavingsACC."Mobile Phone No", Txt004, "No.", "Account No", false);
+                end;
+            end;
+        }
+        field(13; "Date Issued"; Date)
+        {
+            Editable = false;
+        }
+        field(14; Limit; Decimal)
+        {
+        }
+        field(15; "Terms Read and Understood"; Boolean)
+        {
+        }
+        field(16; "Card Issued"; Boolean)
+        {
+            Editable = false;
+        }
+        field(17; "Form No"; Code[30])
+        {
+        }
+        field(18; "Sent To External File"; Option)
+        {
+            OptionMembers = No,Yes;
+        }
+        field(19; "Card Status"; Option)
+        {
+            Editable = false;
+            OptionMembers = Pending,Active,Frozen;
+        }
+        field(20; "Date Activated"; Date)
+        {
+            Editable = false;
+        }
+        field(21; "Date Frozen"; Date)
+        {
+            Editable = false;
+        }
+        field(22; "Replacement For Card No"; Code[20])
+        {
+        }
+        field(23; "Phone No."; Code[20])
+        {
+        }
+        field(24; "No. Series"; Code[10])
+        {
+            Editable = false;
+        }
+        field(25; Collected; Boolean)
+        {
+            Editable = false;
+        }
+        field(26; "Application Approved"; Boolean)
+        {
+            Editable = false;
+        }
+        field(27; "Date Collected"; Date)
+        {
+            Editable = false;
+        }
+        field(28; "Card Issued By"; Code[50])
+        {
+            Editable = false;
+        }
+        field(29; "Approval Date"; Date)
+        {
+            Editable = false;
+        }
+        field(30; Status; Option)
+        {
+            Editable = false;
+            OptionCaption = 'Open,Pending Approval,Approved,Rejected';
+            OptionMembers = Open,"Pending Approval",Approved,Rejected;
+        }
+        field(31; "Card Expiry Date"; Date)
+        {
+            Editable = false;
+
+            trigger OnValidate()
+            begin
+                if "Card Expiry Date" < Today then Error('This card has already expired');
+            end;
+        }
+        field(32; "Posted By."; Code[80])
+        {
+            Editable = false;
+            TableRelation = "User Setup";
+        }
+        field(33; "Responsibility Center"; Code[10])
+        {
+            Editable = false;
+            TableRelation = "Responsibility Center";
+        }
+        field(34; "Shortcut Dimension 1 Code"; Code[20])
+        {
+            CaptionClass = '1,2,1';
+            Caption = 'Shortcut Dimension 1 Code';
+            Editable = false;
+            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1));
+        }
+        field(35; "Shortcut Dimension 2 Code"; Code[20])
+        {
+            CaptionClass = '1,2,2';
+            Caption = 'Shortcut Dimension 2 Code';
+            Editable = false;
+            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2));
+        }
+        field(36; "Card Issued Date"; Date)
+        {
+            Editable = false;
+        }
+        field(37; "RePIN Issued Date"; Date)
+        {
+            Editable = false;
+        }
+        field(38; "RePIN Issued By"; Code[50])
+        {
+            Editable = false;
+        }
+        field(39; "Linked Date"; Date)
+        {
+            Editable = false;
+        }
+        field(40; "ATM Linked"; Boolean)
+        {
+            Editable = false;
+        }
+        field(41; "ATM Charges Applied"; Boolean)
+        {
+        }
+        field(42; "ATM Charged Date"; Date)
+        {
+        }
+        field(43; "RePIN Issued"; Boolean)
+        {
+            Editable = false;
+        }
+        field(44; "Linked By"; Code[50])
+        {
+            Editable = false;
+        }
+        field(45; "Delinked By"; Code[50])
+        {
+            Editable = false;
+        }
+        field(46; "ATM Delinked"; Boolean)
+        {
+            Editable = false;
+        }
+        field(47; "ATM Delinked Date"; Date)
+        {
+            Editable = false;
+        }
+
+        field(49; "ATM Linking Statistics"; Integer)
+        {
+            CalcFormula = Count("ATM Linking  Statistics" WHERE("Account No." = FIELD("Account No")));
+            Editable = false;
+            FieldClass = FlowField;
+        }
+        field(50; "Sales Agent"; Code[20])
+        {
+            TableRelation = "Salesperson/Purchaser".Code;
+        }
+        field(51; "Captured By"; Code[50])
+        {
+            Editable = false;
+        }
+        field(52; "Capture Date"; Date)
+        {
+            Editable = false;
+        }
+        field(53; "Approved  By"; Code[50])
+        {
+            Editable = false;
+        }
+
+        field(54; "ATM No."; Code[20])
+        {
+            TableRelation = "ATM Inventory"."Card Number" WHERE("Account No." = FIELD("Account No"), Status = filter(Linked | Pending));
+            trigger OnValidate()
+            var
+                ATMInventory: Record "ATM Inventory";
+                SavAccount: Record "Savings Accounts";
+                UserSetup: Record "User Setup";
+            begin
+                "Card No" := Rec."ATM No.";
+                if ATMInventory.Get("ATM No.") then begin
+                    "Card Expiry Date" := ATMInventory."Expiry Date";
+                end;
+
+                ATMInventory.Reset();
+                ATMInventory.SetRange("Account No.", rec."Account No");
+                ATMInventory.SetRange(Status, ATMInventory.Status::Linked);
+                if ATMInventory.FindFirst() then begin
+                    // rec."Card Type" := ATMLink."Card Type";
+                    // rec."Account Type" := ATMLink."Account Type";
+                    rec."Account Name" := ATMInventory."Member Name";
+                    // rec."Customer ID" := ATMLink."Customer ID";
+                    // rec."Responsibility Center" := ATMLink."Responsibility Center";
+                    // rec."Shortcut Dimension 1 Code" := ATMLink."Shortcut Dimension 1 Code";
+                    // rec."Shortcut Dimension 2 Code" := ATMLink."Shortcut Dimension 2 Code";
+                    // "Application Date" := ATMLink."Application Date";
+                    rec."Card Status" := ATMInventory.Status::Linked;
+                    rec."Card No" := ATMInventory."Card Number";
+                    rec."Card Expiry Date" := ATMInventory."Expiry Date";
+                    rec."ATM Linked" := true;
+                    rec.Collected := true;
+                    // rec."Date Collected" := ATMLink."Date Collected";
+                    // rec.Address := ATMLink.Address;
+                    // rec."Phone No." := ATMLink."Phone No.";
+                    // rec."Capture Date" := ATMLink."Capture Date";
+                    // rec."Captured By" := ATMLink."Captured By";
+                    // rec."Linked Date" := ATMLink."Linked Date";
+                    // rec."Date Issued" := ATMLink."Date Issued";
+                    // rec."Card Issued" := ATMLink."Card Issued";
+
+                    SavAccount.Reset();
+                    SavAccount.SetRange("No.", ATMInventory."Account No.");
+                    if SavAccount.FindFirst() then begin
+                        rec."Customer ID" := SavAccount."Member No.";
+                        rec."Shortcut Dimension 1 Code" := SavAccount."Global Dimension 1 Code";
+                        rec."Shortcut Dimension 2 Code" := SavAccount."Global Dimension 2 Code";
+                        rec.Address := SavAccount."Current Address";
+                    end;
+                end;
+
+                UserSetup.Reset();
+                UserSetup.SetRange("User ID", rec."Captured By");
+                if UserSetup.FindFirst() then
+                    Rec."Responsibility Center" := UserSetup."Responsibility Centre";
+            end;
+        }
+        field(55; "RePIN Processed"; Boolean)
+        {
+
+        }
+        field(56; "RePIN Requested"; Boolean)
+        {
+
+        }
+    }
+
+    keys
+    {
+        key(Key1; "No.")
+        {
+            Clustered = true;
+        }
+    }
+
+    fieldgroups
+    {
+    }
+
+    trigger OnInsert()
+    begin
+        if "No." = '' then begin
+            BankingNoSetup.Get();
+            BankingNoSetup.TestField(BankingNoSetup."ATM Repin");
+            NoSeriesMgt.InitSeries(BankingNoSetup."ATM Repin", xRec."No. Series", 0D, "No.", "No. Series");
+        end;
+        "Application Date" := Today;
+        "Captured By" := UserId;
+        "Capture Date" := Today;
+    end;
+
+    var
+        GeneralSetUp: Record "General Set-Up";
+        BankingNoSetup: Record "Banking No Setup";
+        NoSeriesMgt: Codeunit NoSeriesManagement;
+        SavingsAccounts: Record "Savings Accounts";
+        Members: Record Members;
+        SavingsAccountss: Record "Savings Accounts";
+        TChargeAmount: Decimal;
+        TCharges: Decimal;
+        TransactionCharges: Record "Transaction Charges";
+        ChargeAmount: Decimal;
+        TariffDetails: Record "Tiered Charges Lines";
+        Trans: Record "Cashier Transactions";
+        GenSetup: Record "General Set-Up";
+        AccountTypes: Record "Product Factory";
+        TransType: Record "Transaction Types";
+        Account: Record "Savings Accounts";
+        AvailableBalance: Decimal;
+        MinBalance: Decimal;
+        ProdType: Record "Product Factory";
+        ErrRejectCard: Label 'This account do not have minimum balance of %1 to apply for ATM Card.';
+        ATMCardTypes: Record "ATM Card Types";
+        UserSetup: Record "User Setup";
+        ATMApplications: Record "ATM Linking Applications";
+        ATMApp: Record "ATM Applications";
+        SavingsACC: Record "Savings Accounts";
+        SendSMS: Codeunit SendSms;
+        SourceType: Option "New Member","New Account","Loan Account Approval","Deposit Confirmation","Cash Withdrawal Confirm","Loan Application","Loan Appraisal","Loan Guarantors","Loan Rejected","Loan Posted","Loan defaulted","Salary Processing","Teller Cash Deposit"," Teller Cash Withdrawal","Teller Cheque Deposit","Fixed Deposit Maturity","InterAccount Transfer","Account Status","Status Order","EFT Effected"," ATM Application Failed","ATM Collection",MSACCO,"Member Changes","Cashier Below Limit","Cashier Above Limit";
+        Txt004: Label 'Dear Member, Your Sacco Link ATM Card is ready for collection. Kindly visit your branch with Original copy of ID.';
+        ATMCount: Integer;
+        ATMLinkingApplications: Record "ATM Linking Applications";
+        TransCharges: Record "Transaction Charges";
+}
+

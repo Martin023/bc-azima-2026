@@ -1,0 +1,2376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>b2369aa0-502c-4551-9c82-6212edac7972</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="Textbox126">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Take Home Amount : </Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!NetTakeAwayHome.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>#,0;(#,0)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>4.31963in</Top>
+            <Left>1.03879in</Left>
+            <Height>0.2257in</Height>
+            <Width>2.49349in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
+              <BackgroundColor>#a9d08e</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox8">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Member: </Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!MemberName.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>0.1037in</Top>
+            <Left>1.08319in</Left>
+            <Height>0.20833in</Height>
+            <Width>2.45326in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox21">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Current Deposits: </Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!MemberDeposits.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <Format>#,0;(#,0)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>0.32592in</Top>
+            <Left>1.08282in</Left>
+            <Height>0.20833in</Height>
+            <Width>2.45363in</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox23">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Required Deposits:</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <Format>#,0.00;(#,0.00)</Format>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!RequiredDeposit.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <Format>#,0;(#,0)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>0.54897in</Top>
+            <Left>1.09191in</Left>
+            <Height>0.20833in</Height>
+            <Width>2.44454in</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox53">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Installment.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <Format>0;(0)</Format>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> Months</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <Format>0;(0)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>4.83764in</Top>
+            <Left>1.04295in</Left>
+            <Height>0.20833in</Height>
+            <Width>2.48933in</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox79">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Take Home</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>  : </Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!NetTakeAwayHome.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <Format>#,0;(#,0)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>6.75473in</Top>
+            <Left>1.04295in</Left>
+            <Height>0.2257in</Height>
+            <Width>2.48933in</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox93">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Repayment :</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!LoanRepayment.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <Format>#,0;(#,0)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>4.55638in</Top>
+            <Left>1.04295in</Left>
+            <Height>0.2257in</Height>
+            <Width>2.48933in</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>#a9d08e</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox99">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Deposit Bosting:   </Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!PossibleBoost.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <Format>#,0;(#,0)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>0.82675in</Top>
+            <Left>1.09191in</Left>
+            <Height>0.21181in</Height>
+            <Width>2.44454in</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox100">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Processing Fees:  </Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>#,0.00;(#,0.00)</Format>
+                      <Color>Red</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!LoanProcessingAmt.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>n0</Format>
+                      <Color>Red</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>1.86603in</Top>
+            <Left>1.04296in</Left>
+            <Height>0.22223in</Height>
+            <Width>2.49349in</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox104">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Boosting Commission:  </Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!DepPurchaseComm.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <Format>n0</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>2.32784in</Top>
+            <Left>1.04296in</Left>
+            <Height>0.21983in</Height>
+            <Width>2.49349in</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox105">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Recovery </Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>n2</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <Format>n2</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Checkoff: </Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <Format>n2</Format>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!CheckOffAmount.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <Format>n0</Format>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <Format>n2</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Payment Via Fosa:</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!SalaryAmount.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <Format>0;(0)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <Format>#,0.00;(#,0.00)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <Format>n2</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>7.00821in</Top>
+            <Left>1.04295in</Left>
+            <Height>0.87047in</Height>
+            <Width>2.49349in</Width>
+            <ZIndex>10</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>#ffc000</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox158">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>GOK Tax  :  </Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!DepPurchaseCommExc.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <Format>n0</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox158</rd:DefaultName>
+            <Top>2.57545in</Top>
+            <Left>1.04296in</Left>
+            <Height>0.25in</Height>
+            <Width>2.49349in</Width>
+            <ZIndex>11</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox67">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Gross Salary before loans:  </Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!TotalBasic.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <Format>#,0;(#,0)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>5.41056in</Top>
+            <Left>1.03879in</Left>
+            <Height>0.20191in</Height>
+            <Width>2.49349in</Width>
+            <ZIndex>12</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox84">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Deposit Banding:</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!MonthlyContr.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <Format>n0</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>6.12522in</Top>
+            <Left>1.03879in</Left>
+            <Height>0.20191in</Height>
+            <Width>2.49349in</Width>
+            <ZIndex>13</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox86">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Less</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox86</rd:DefaultName>
+            <Top>4.06915cm</Top>
+            <Left>2.64911cm</Left>
+            <Height>0.49418cm</Height>
+            <Width>6.33346cm</Width>
+            <ZIndex>14</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox106">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Deposit Bosting:</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!PossibleBoost.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <Format>#,0;(#,0)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>2.11603in</Top>
+            <Left>1.04296in</Left>
+            <Height>0.21181in</Height>
+            <Width>2.49349in</Width>
+            <ZIndex>15</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox88">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Less</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox86</rd:DefaultName>
+            <Top>14.32306cm</Top>
+            <Left>2.63854cm</Left>
+            <Height>0.6cm</Height>
+            <Width>6.33345cm</Width>
+            <ZIndex>16</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox18">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!LoanProductName.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>:  </Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!LoanRepayment.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <Format>#,0;(#,0)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>5.91689in</Top>
+            <Left>1.03879in</Left>
+            <Height>0.20833in</Height>
+            <Width>2.49349in</Width>
+            <ZIndex>17</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox20">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!LoanProductName.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>:  </Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!LoanRequestedAmount.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <Format>n0</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>1.35203in</Top>
+            <Left>1.04712in</Left>
+            <Height>0.20833in</Height>
+            <Width>2.48933in</Width>
+            <ZIndex>18</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BackgroundColor>#a9d08e</BackgroundColor>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Tablix Name="Tablix1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>1.12851in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.36498in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.23622in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox6">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Loans Topup</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                    <TextDecoration>Underline</TextDecoration>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox6</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>2</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox55">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Loan No.</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <TextDecoration>Underline</TextDecoration>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox52</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox113">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!LoanTopUp_LoansTopup.Value</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox94</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.23622in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox7">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Loan Amount</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <TextDecoration>Underline</TextDecoration>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox7</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="TotalTopUp_LoansTopup">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!TotalTopUp_LoansTopup.Value</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <Format>n0</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>TotalTopUp_LoansTopup</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.23622in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Offsetting Charges</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <TextDecoration>Underline</TextDecoration>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!IntCom.Value</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <Format>n0</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox2</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.23622in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Excise Duty</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <TextDecoration>Underline</TextDecoration>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox3</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="IntComExcise">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!IntComExcise.Value</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <Format>n0</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>IntComExcise</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>DataSet_Result</DataSetName>
+            <Filters>
+              <Filter>
+                <FilterExpression>=Fields!LoanTopUp_LoansTopup.Value</FilterExpression>
+                <Operator>GreaterThan</Operator>
+                <FilterValues>
+                  <FilterValue>00000000000000000</FilterValue>
+                </FilterValues>
+              </Filter>
+            </Filters>
+            <Top>2.89489in</Top>
+            <Left>1.04296in</Left>
+            <Height>1.19488in</Height>
+            <Width>2.49349in</Width>
+            <ZIndex>19</ZIndex>
+            <Visibility>
+              <Hidden>=First(Fields!IsTopUp.Value, "DataSet_Result")=False</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+        </ReportItems>
+        <Height>20.15429cm</Height>
+        <Style />
+      </Body>
+      <Width>11.54494cm</Width>
+      <Page>
+        <PageHeader>
+          <Height>4.02167cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Image Name="Picture">
+              <Source>Database</Source>
+              <Value>=First(Fields!CPicture.Value, "DataSet_Result")</Value>
+              <MIMEType>image/jpeg</MIMEType>
+              <Sizing>FitProportional</Sizing>
+              <Top>0.13334in</Top>
+              <Left>3.37796in</Left>
+              <Height>1.0354in</Height>
+              <Width>1.16729in</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Image>
+            <Textbox Name="Textbox31">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CompanyAddress.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox6</rd:DefaultName>
+              <Top>0.35821in</Top>
+              <Left>0.18034in</Left>
+              <Height>0.21875in</Height>
+              <Width>2.8541in</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox35">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Globals!ExecutionTime</Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox6</rd:DefaultName>
+              <Top>0.63251in</Top>
+              <Left>0.18034in</Left>
+              <Height>0.21875in</Height>
+              <Width>2.84709in</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox4">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>LOAN ELIGIBILITY BREKDOWN REPORT</Value>
+                      <Style>
+                        <FontStyle>Normal</FontStyle>
+                        <FontFamily>Times New Roman</FontFamily>
+                        <FontSize>12pt</FontSize>
+                        <FontWeight>Normal</FontWeight>
+                        <TextDecoration>None</TextDecoration>
+                        <Color>#000000</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox4</rd:DefaultName>
+              <Top>1.23818in</Top>
+              <Left>0.18034in</Left>
+              <Height>0.25in</Height>
+              <Width>4.36491in</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox9">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CompanyNam.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox9</rd:DefaultName>
+              <Top>0.33868cm</Top>
+              <Left>0.45806cm</Left>
+              <Height>0.6cm</Height>
+              <Width>7.24941cm</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>21cm</PageWidth>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="CName">
+          <DataField>CName</DataField>
+        </Field>
+        <Field Name="EmployerName">
+          <DataField>EmployerName</DataField>
+        </Field>
+        <Field Name="CAdress">
+          <DataField>CAdress</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyNam">
+          <DataField>CompanyNam</DataField>
+        </Field>
+        <Field Name="Approved_Amount">
+          <DataField>Approved_Amount</DataField>
+        </Field>
+        <Field Name="Approved_AmountFormat">
+          <DataField>Approved_AmountFormat</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="CPicture">
+          <DataField>CPicture</DataField>
+        </Field>
+        <Field Name="LoanNo">
+          <DataField>LoanNo</DataField>
+        </Field>
+        <Field Name="MemberNo">
+          <DataField>MemberNo</DataField>
+        </Field>
+        <Field Name="MemberName">
+          <DataField>MemberName</DataField>
+        </Field>
+        <Field Name="LoanProduct">
+          <DataField>LoanProduct</DataField>
+        </Field>
+        <Field Name="LoanProductName">
+          <DataField>LoanProductName</DataField>
+        </Field>
+        <Field Name="ApplicationDate">
+          <DataField>ApplicationDate</DataField>
+        </Field>
+        <Field Name="LoanRequestedAmount">
+          <DataField>LoanRequestedAmount</DataField>
+        </Field>
+        <Field Name="LoanRequestedAmountFormat">
+          <DataField>LoanRequestedAmountFormat</DataField>
+        </Field>
+        <Field Name="Installment">
+          <DataField>Installment</DataField>
+        </Field>
+        <Field Name="LoanRepayment">
+          <DataField>LoanRepayment</DataField>
+        </Field>
+        <Field Name="LoanRepaymentFormat">
+          <DataField>LoanRepaymentFormat</DataField>
+        </Field>
+        <Field Name="LPrincipal">
+          <DataField>LPrincipal</DataField>
+        </Field>
+        <Field Name="LPrincipalFormat">
+          <DataField>LPrincipalFormat</DataField>
+        </Field>
+        <Field Name="LInterest">
+          <DataField>LInterest</DataField>
+        </Field>
+        <Field Name="LInterestFormat">
+          <DataField>LInterestFormat</DataField>
+        </Field>
+        <Field Name="Loan_Principle_Repayment">
+          <DataField>Loan_Principle_Repayment</DataField>
+        </Field>
+        <Field Name="Loan_Principle_RepaymentFormat">
+          <DataField>Loan_Principle_RepaymentFormat</DataField>
+        </Field>
+        <Field Name="Interest">
+          <DataField>Interest</DataField>
+        </Field>
+        <Field Name="InterestFormat">
+          <DataField>InterestFormat</DataField>
+        </Field>
+        <Field Name="Loan_Interest_Repayment">
+          <DataField>Loan_Interest_Repayment</DataField>
+        </Field>
+        <Field Name="Loan_Interest_RepaymentFormat">
+          <DataField>Loan_Interest_RepaymentFormat</DataField>
+        </Field>
+        <Field Name="TotalProcessingAmt">
+          <DataField>TotalProcessingAmt</DataField>
+        </Field>
+        <Field Name="TotalProcessingAmtFormat">
+          <DataField>TotalProcessingAmtFormat</DataField>
+        </Field>
+        <Field Name="Loan_Product_Type">
+          <DataField>Loan_Product_Type</DataField>
+        </Field>
+        <Field Name="Employer_Code">
+          <DataField>Employer_Code</DataField>
+        </Field>
+        <Field Name="CapturedBy_Loans">
+          <DataField>CapturedBy_Loans</DataField>
+        </Field>
+        <Field Name="ApplicationDate_Loans">
+          <DataField>ApplicationDate_Loans</DataField>
+        </Field>
+        <Field Name="ApprovalDate_Loans">
+          <DataField>ApprovalDate_Loans</DataField>
+        </Field>
+        <Field Name="LoanAppraisedBy_Loans">
+          <DataField>LoanAppraisedBy_Loans</DataField>
+        </Field>
+        <Field Name="DisbursementDate_Loans">
+          <DataField>DisbursementDate_Loans</DataField>
+        </Field>
+        <Field Name="RepReq">
+          <DataField>RepReq</DataField>
+        </Field>
+        <Field Name="RepReqFormat">
+          <DataField>RepReqFormat</DataField>
+        </Field>
+        <Field Name="IntReq">
+          <DataField>IntReq</DataField>
+        </Field>
+        <Field Name="IntReqFormat">
+          <DataField>IntReqFormat</DataField>
+        </Field>
+        <Field Name="AverageInt">
+          <DataField>AverageInt</DataField>
+        </Field>
+        <Field Name="AverageIntFormat">
+          <DataField>AverageIntFormat</DataField>
+        </Field>
+        <Field Name="RecommendedAmt">
+          <DataField>RecommendedAmt</DataField>
+        </Field>
+        <Field Name="RecommendedAmtFormat">
+          <DataField>RecommendedAmtFormat</DataField>
+        </Field>
+        <Field Name="StaffNo">
+          <DataField>StaffNo</DataField>
+        </Field>
+        <Field Name="MemberDeposits">
+          <DataField>MemberDeposits</DataField>
+        </Field>
+        <Field Name="MemberDepositsFormat">
+          <DataField>MemberDepositsFormat</DataField>
+        </Field>
+        <Field Name="DepPurchaseCommExc">
+          <DataField>DepPurchaseCommExc</DataField>
+        </Field>
+        <Field Name="DepPurchaseCommExcFormat">
+          <DataField>DepPurchaseCommExcFormat</DataField>
+        </Field>
+        <Field Name="DepPurchaseComm">
+          <DataField>DepPurchaseComm</DataField>
+        </Field>
+        <Field Name="DepPurchaseCommFormat">
+          <DataField>DepPurchaseCommFormat</DataField>
+        </Field>
+        <Field Name="DepositPurchase">
+          <DataField>DepositPurchase</DataField>
+        </Field>
+        <Field Name="DepositPurchaseFormat">
+          <DataField>DepositPurchaseFormat</DataField>
+        </Field>
+        <Field Name="TotalLoanBal">
+          <DataField>TotalLoanBal</DataField>
+        </Field>
+        <Field Name="TotalLoanBalFormat">
+          <DataField>TotalLoanBalFormat</DataField>
+        </Field>
+        <Field Name="CountNo">
+          <DataField>CountNo</DataField>
+        </Field>
+        <Field Name="LoanRecoverd">
+          <DataField>LoanRecoverd</DataField>
+        </Field>
+        <Field Name="MemberDueRetire">
+          <DataField>MemberDueRetire</DataField>
+        </Field>
+        <Field Name="GuarantorMax">
+          <DataField>GuarantorMax</DataField>
+        </Field>
+        <Field Name="SecurityRisk">
+          <DataField>SecurityRisk</DataField>
+        </Field>
+        <Field Name="LoanProcessingAmt">
+          <DataField>LoanProcessingAmt</DataField>
+        </Field>
+        <Field Name="LoanProcessingAmtFormat">
+          <DataField>LoanProcessingAmtFormat</DataField>
+        </Field>
+        <Field Name="SecurityTotal">
+          <DataField>SecurityTotal</DataField>
+        </Field>
+        <Field Name="SecurityTotalFormat">
+          <DataField>SecurityTotalFormat</DataField>
+        </Field>
+        <Field Name="ReapplicationPeriod">
+          <DataField>ReapplicationPeriod</DataField>
+        </Field>
+        <Field Name="LoanDepositRation">
+          <DataField>LoanDepositRation</DataField>
+        </Field>
+        <Field Name="TotalBasic">
+          <DataField>TotalBasic</DataField>
+        </Field>
+        <Field Name="TotalBasicFormat">
+          <DataField>TotalBasicFormat</DataField>
+        </Field>
+        <Field Name="TotalEarning">
+          <DataField>TotalEarning</DataField>
+        </Field>
+        <Field Name="TotalEarningFormat">
+          <DataField>TotalEarningFormat</DataField>
+        </Field>
+        <Field Name="TotalAllowance">
+          <DataField>TotalAllowance</DataField>
+        </Field>
+        <Field Name="TotalAllowanceFormat">
+          <DataField>TotalAllowanceFormat</DataField>
+        </Field>
+        <Field Name="TotalDeductions">
+          <DataField>TotalDeductions</DataField>
+        </Field>
+        <Field Name="TotalDeductionsFormat">
+          <DataField>TotalDeductionsFormat</DataField>
+        </Field>
+        <Field Name="NetSalary">
+          <DataField>NetSalary</DataField>
+        </Field>
+        <Field Name="NetSalaryFormat">
+          <DataField>NetSalaryFormat</DataField>
+        </Field>
+        <Field Name="AdjNet">
+          <DataField>AdjNet</DataField>
+        </Field>
+        <Field Name="AdjNetFormat">
+          <DataField>AdjNetFormat</DataField>
+        </Field>
+        <Field Name="NetOnSalary">
+          <DataField>NetOnSalary</DataField>
+        </Field>
+        <Field Name="NetOnSalaryFormat">
+          <DataField>NetOnSalaryFormat</DataField>
+        </Field>
+        <Field Name="NetOnDeposits">
+          <DataField>NetOnDeposits</DataField>
+        </Field>
+        <Field Name="NetOnDepositsFormat">
+          <DataField>NetOnDepositsFormat</DataField>
+        </Field>
+        <Field Name="ExternalRecovered">
+          <DataField>ExternalRecovered</DataField>
+        </Field>
+        <Field Name="ExternalRecoveredFormat">
+          <DataField>ExternalRecoveredFormat</DataField>
+        </Field>
+        <Field Name="ExternalCharges2">
+          <DataField>ExternalCharges2</DataField>
+        </Field>
+        <Field Name="ExternalCharges2Format">
+          <DataField>ExternalCharges2Format</DataField>
+        </Field>
+        <Field Name="ExerciseDuty">
+          <DataField>ExerciseDuty</DataField>
+        </Field>
+        <Field Name="ExerciseDutyFormat">
+          <DataField>ExerciseDutyFormat</DataField>
+        </Field>
+        <Field Name="TopupRepayments">
+          <DataField>TopupRepayments</DataField>
+        </Field>
+        <Field Name="TopupRepaymentsFormat">
+          <DataField>TopupRepaymentsFormat</DataField>
+        </Field>
+        <Field Name="NewRep">
+          <DataField>NewRep</DataField>
+        </Field>
+        <Field Name="NewRepFormat">
+          <DataField>NewRepFormat</DataField>
+        </Field>
+        <Field Name="Dim1">
+          <DataField>Dim1</DataField>
+        </Field>
+        <Field Name="Dim2">
+          <DataField>Dim2</DataField>
+        </Field>
+        <Field Name="Mult">
+          <DataField>Mult</DataField>
+        </Field>
+        <Field Name="MultFormat">
+          <DataField>MultFormat</DataField>
+        </Field>
+        <Field Name="DepositMult">
+          <DataField>DepositMult</DataField>
+        </Field>
+        <Field Name="DepositMultFormat">
+          <DataField>DepositMultFormat</DataField>
+        </Field>
+        <Field Name="SalProcessed">
+          <DataField>SalProcessed</DataField>
+        </Field>
+        <Field Name="SelfGua">
+          <DataField>SelfGua</DataField>
+        </Field>
+        <Field Name="CurrBal">
+          <DataField>CurrBal</DataField>
+        </Field>
+        <Field Name="CurrBalFormat">
+          <DataField>CurrBalFormat</DataField>
+        </Field>
+        <Field Name="RelatedBal">
+          <DataField>RelatedBal</DataField>
+        </Field>
+        <Field Name="RelatedBalFormat">
+          <DataField>RelatedBalFormat</DataField>
+        </Field>
+        <Field Name="TakeHome">
+          <DataField>TakeHome</DataField>
+        </Field>
+        <Field Name="TakeHomeFormat">
+          <DataField>TakeHomeFormat</DataField>
+        </Field>
+        <Field Name="OffsetTotal">
+          <DataField>OffsetTotal</DataField>
+        </Field>
+        <Field Name="OffsetTotalFormat">
+          <DataField>OffsetTotalFormat</DataField>
+        </Field>
+        <Field Name="TopUpComms">
+          <DataField>TopUpComms</DataField>
+        </Field>
+        <Field Name="TopUpCommsFormat">
+          <DataField>TopUpCommsFormat</DataField>
+        </Field>
+        <Field Name="MaxDeposit">
+          <DataField>MaxDeposit</DataField>
+        </Field>
+        <Field Name="MaxDepositFormat">
+          <DataField>MaxDepositFormat</DataField>
+        </Field>
+        <Field Name="MonthlyContr">
+          <DataField>MonthlyContr</DataField>
+        </Field>
+        <Field Name="MonthlyContrFormat">
+          <DataField>MonthlyContrFormat</DataField>
+        </Field>
+        <Field Name="DirectorWarning">
+          <DataField>DirectorWarning</DataField>
+        </Field>
+        <Field Name="TwoThird">
+          <DataField>TwoThird</DataField>
+        </Field>
+        <Field Name="IsTopUp">
+          <DataField>IsTopUp</DataField>
+        </Field>
+        <Field Name="Discmt">
+          <DataField>Discmt</DataField>
+        </Field>
+        <Field Name="DiscmtFormat">
+          <DataField>DiscmtFormat</DataField>
+        </Field>
+        <Field Name="TExternalEffects">
+          <DataField>TExternalEffects</DataField>
+        </Field>
+        <Field Name="TExternalEffectsFormat">
+          <DataField>TExternalEffectsFormat</DataField>
+        </Field>
+        <Field Name="Inactive">
+          <DataField>Inactive</DataField>
+        </Field>
+        <Field Name="ShareBoost">
+          <DataField>ShareBoost</DataField>
+        </Field>
+        <Field Name="ShareBoostFormat">
+          <DataField>ShareBoostFormat</DataField>
+        </Field>
+        <Field Name="DiffSec">
+          <DataField>DiffSec</DataField>
+        </Field>
+        <Field Name="DiffSecFormat">
+          <DataField>DiffSecFormat</DataField>
+        </Field>
+        <Field Name="ExternalCharges">
+          <DataField>ExternalCharges</DataField>
+        </Field>
+        <Field Name="ExternalChargesFormat">
+          <DataField>ExternalChargesFormat</DataField>
+        </Field>
+        <Field Name="OtherCharges">
+          <DataField>OtherCharges</DataField>
+        </Field>
+        <Field Name="OtherChargesFormat">
+          <DataField>OtherChargesFormat</DataField>
+        </Field>
+        <Field Name="AthirdDisplay">
+          <DataField>AthirdDisplay</DataField>
+        </Field>
+        <Field Name="AthirdAmt">
+          <DataField>AthirdAmt</DataField>
+        </Field>
+        <Field Name="AthirdAmtFormat">
+          <DataField>AthirdAmtFormat</DataField>
+        </Field>
+        <Field Name="SalNotThroughSacco">
+          <DataField>SalNotThroughSacco</DataField>
+        </Field>
+        <Field Name="PossibleBoost">
+          <DataField>PossibleBoost</DataField>
+        </Field>
+        <Field Name="PossibleBoostFormat">
+          <DataField>PossibleBoostFormat</DataField>
+        </Field>
+        <Field Name="RequiredDeposit">
+          <DataField>RequiredDeposit</DataField>
+        </Field>
+        <Field Name="RequiredDepositFormat">
+          <DataField>RequiredDepositFormat</DataField>
+        </Field>
+        <Field Name="GrossAmount">
+          <DataField>GrossAmount</DataField>
+        </Field>
+        <Field Name="GrossAmountFormat">
+          <DataField>GrossAmountFormat</DataField>
+        </Field>
+        <Field Name="AssetValue">
+          <DataField>AssetValue</DataField>
+        </Field>
+        <Field Name="AssetValueFormat">
+          <DataField>AssetValueFormat</DataField>
+        </Field>
+        <Field Name="AssetFinCharges">
+          <DataField>AssetFinCharges</DataField>
+        </Field>
+        <Field Name="AssetFinChargesFormat">
+          <DataField>AssetFinChargesFormat</DataField>
+        </Field>
+        <Field Name="AssetFinComms">
+          <DataField>AssetFinComms</DataField>
+        </Field>
+        <Field Name="AssetFinCommsFormat">
+          <DataField>AssetFinCommsFormat</DataField>
+        </Field>
+        <Field Name="AssetFinExerciseDuty">
+          <DataField>AssetFinExerciseDuty</DataField>
+        </Field>
+        <Field Name="AssetFinExerciseDutyFormat">
+          <DataField>AssetFinExerciseDutyFormat</DataField>
+        </Field>
+        <Field Name="NetTakeAwayHome">
+          <DataField>NetTakeAwayHome</DataField>
+        </Field>
+        <Field Name="NetTakeAwayHomeFormat">
+          <DataField>NetTakeAwayHomeFormat</DataField>
+        </Field>
+        <Field Name="TotalExciseDuty">
+          <DataField>TotalExciseDuty</DataField>
+        </Field>
+        <Field Name="TotalExciseDutyFormat">
+          <DataField>TotalExciseDutyFormat</DataField>
+        </Field>
+        <Field Name="SalaryAmount">
+          <DataField>SalaryAmount</DataField>
+        </Field>
+        <Field Name="SalaryAmountFormat">
+          <DataField>SalaryAmountFormat</DataField>
+        </Field>
+        <Field Name="CheckOffAmount">
+          <DataField>CheckOffAmount</DataField>
+        </Field>
+        <Field Name="CheckOffAmountFormat">
+          <DataField>CheckOffAmountFormat</DataField>
+        </Field>
+        <Field Name="NetAfterCharges">
+          <DataField>NetAfterCharges</DataField>
+        </Field>
+        <Field Name="NetAfterChargesFormat">
+          <DataField>NetAfterChargesFormat</DataField>
+        </Field>
+        <Field Name="TotalAssetValue">
+          <DataField>TotalAssetValue</DataField>
+        </Field>
+        <Field Name="TotalAssetValueFormat">
+          <DataField>TotalAssetValueFormat</DataField>
+        </Field>
+        <Field Name="ReportForNavId_18">
+          <DataField>ReportForNavId_18</DataField>
+        </Field>
+        <Field Name="LoansLoanNo">
+          <DataField>LoansLoanNo</DataField>
+        </Field>
+        <Field Name="LoansProductType">
+          <DataField>LoansProductType</DataField>
+        </Field>
+        <Field Name="LoansProductName">
+          <DataField>LoansProductName</DataField>
+        </Field>
+        <Field Name="ApprovedAmount">
+          <DataField>ApprovedAmount</DataField>
+        </Field>
+        <Field Name="ApprovedAmountFormat">
+          <DataField>ApprovedAmountFormat</DataField>
+        </Field>
+        <Field Name="PrincipalRepayment">
+          <DataField>PrincipalRepayment</DataField>
+        </Field>
+        <Field Name="PrincipalRepaymentFormat">
+          <DataField>PrincipalRepaymentFormat</DataField>
+        </Field>
+        <Field Name="OutstandingInterest">
+          <DataField>OutstandingInterest</DataField>
+        </Field>
+        <Field Name="OutstandingInterestFormat">
+          <DataField>OutstandingInterestFormat</DataField>
+        </Field>
+        <Field Name="OutStandingBalance">
+          <DataField>OutStandingBalance</DataField>
+        </Field>
+        <Field Name="OutStandingBalanceFormat">
+          <DataField>OutStandingBalanceFormat</DataField>
+        </Field>
+        <Field Name="Defaulted">
+          <DataField>Defaulted</DataField>
+        </Field>
+        <Field Name="RemPeriod">
+          <DataField>RemPeriod</DataField>
+        </Field>
+        <Field Name="RemPeriodFormat">
+          <DataField>RemPeriodFormat</DataField>
+        </Field>
+        <Field Name="Repayment">
+          <DataField>Repayment</DataField>
+        </Field>
+        <Field Name="RepaymentFormat">
+          <DataField>RepaymentFormat</DataField>
+        </Field>
+        <Field Name="LoansProductTyp">
+          <DataField>LoansProductTyp</DataField>
+        </Field>
+        <Field Name="ReportForNavId_14">
+          <DataField>ReportForNavId_14</DataField>
+        </Field>
+        <Field Name="AccountNo">
+          <DataField>AccountNo</DataField>
+        </Field>
+        <Field Name="GuarantorName">
+          <DataField>GuarantorName</DataField>
+        </Field>
+        <Field Name="PayrollNo">
+          <DataField>PayrollNo</DataField>
+        </Field>
+        <Field Name="LoanBalance">
+          <DataField>LoanBalance</DataField>
+        </Field>
+        <Field Name="LoanBalanceFormat">
+          <DataField>LoanBalanceFormat</DataField>
+        </Field>
+        <Field Name="Deposits">
+          <DataField>Deposits</DataField>
+        </Field>
+        <Field Name="DepositsFormat">
+          <DataField>DepositsFormat</DataField>
+        </Field>
+        <Field Name="NoOfLoanGuranteed">
+          <DataField>NoOfLoanGuranteed</DataField>
+        </Field>
+        <Field Name="GuarantorType">
+          <DataField>GuarantorType</DataField>
+        </Field>
+        <Field Name="PercentageGur">
+          <DataField>PercentageGur</DataField>
+        </Field>
+        <Field Name="PercentageGurFormat">
+          <DataField>PercentageGurFormat</DataField>
+        </Field>
+        <Field Name="GuAmt">
+          <DataField>GuAmt</DataField>
+        </Field>
+        <Field Name="GuAmtFormat">
+          <DataField>GuAmtFormat</DataField>
+        </Field>
+        <Field Name="GuaStatus">
+          <DataField>GuaStatus</DataField>
+        </Field>
+        <Field Name="GuarantBal">
+          <DataField>GuarantBal</DataField>
+        </Field>
+        <Field Name="GuarantBalFormat">
+          <DataField>GuarantBalFormat</DataField>
+        </Field>
+        <Field Name="AmtGuaranteed">
+          <DataField>AmtGuaranteed</DataField>
+        </Field>
+        <Field Name="AmtGuaranteedFormat">
+          <DataField>AmtGuaranteedFormat</DataField>
+        </Field>
+        <Field Name="CollateralValue">
+          <DataField>CollateralValue</DataField>
+        </Field>
+        <Field Name="CollateralValueFormat">
+          <DataField>CollateralValueFormat</DataField>
+        </Field>
+        <Field Name="CountNo2">
+          <DataField>CountNo2</DataField>
+        </Field>
+        <Field Name="ReportForNavId_36">
+          <DataField>ReportForNavId_36</DataField>
+        </Field>
+        <Field Name="DocumentType">
+          <DataField>DocumentType</DataField>
+        </Field>
+        <Field Name="DocumentNo">
+          <DataField>DocumentNo</DataField>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+        </Field>
+        <Field Name="SingleMultiple">
+          <DataField>SingleMultiple</DataField>
+        </Field>
+        <Field Name="Provided">
+          <DataField>Provided</DataField>
+        </Field>
+        <Field Name="LicenseExpiryDate">
+          <DataField>LicenseExpiryDate</DataField>
+        </Field>
+        <Field Name="ReportForNavId_97">
+          <DataField>ReportForNavId_97</DataField>
+        </Field>
+        <Field Name="LoanNo_LoansTopup">
+          <DataField>LoanNo_LoansTopup</DataField>
+        </Field>
+        <Field Name="IntCom">
+          <DataField>IntCom</DataField>
+        </Field>
+        <Field Name="IntComFormat">
+          <DataField>IntComFormat</DataField>
+        </Field>
+        <Field Name="IntComExcise">
+          <DataField>IntComExcise</DataField>
+        </Field>
+        <Field Name="IntComExciseFormat">
+          <DataField>IntComExciseFormat</DataField>
+        </Field>
+        <Field Name="LoanTopUp_LoansTopup">
+          <DataField>LoanTopUp_LoansTopup</DataField>
+        </Field>
+        <Field Name="ClientCode_LoansTopup">
+          <DataField>ClientCode_LoansTopup</DataField>
+        </Field>
+        <Field Name="LoanType_LoansTopup">
+          <DataField>LoanType_LoansTopup</DataField>
+        </Field>
+        <Field Name="PrincipleTopUp_LoansTopup">
+          <DataField>PrincipleTopUp_LoansTopup</DataField>
+        </Field>
+        <Field Name="PrincipleTopUp_LoansTopupFormat">
+          <DataField>PrincipleTopUp_LoansTopupFormat</DataField>
+        </Field>
+        <Field Name="InterestTopUp_LoansTopup">
+          <DataField>InterestTopUp_LoansTopup</DataField>
+        </Field>
+        <Field Name="InterestTopUp_LoansTopupFormat">
+          <DataField>InterestTopUp_LoansTopupFormat</DataField>
+        </Field>
+        <Field Name="TotalTopUp_LoansTopup">
+          <DataField>TotalTopUp_LoansTopup</DataField>
+        </Field>
+        <Field Name="TotalTopUp_LoansTopupFormat">
+          <DataField>TotalTopUp_LoansTopupFormat</DataField>
+        </Field>
+        <Field Name="MonthlyRepayment_LoansTopup">
+          <DataField>MonthlyRepayment_LoansTopup</DataField>
+        </Field>
+        <Field Name="MonthlyRepayment_LoansTopupFormat">
+          <DataField>MonthlyRepayment_LoansTopupFormat</DataField>
+        </Field>
+        <Field Name="InterestPaid_LoansTopup">
+          <DataField>InterestPaid_LoansTopup</DataField>
+        </Field>
+        <Field Name="InterestPaid_LoansTopupFormat">
+          <DataField>InterestPaid_LoansTopupFormat</DataField>
+        </Field>
+        <Field Name="OutstandingBalance_LoansTopup">
+          <DataField>OutstandingBalance_LoansTopup</DataField>
+        </Field>
+        <Field Name="OutstandingBalance_LoansTopupFormat">
+          <DataField>OutstandingBalance_LoansTopupFormat</DataField>
+        </Field>
+        <Field Name="IDNO_LoansTopup">
+          <DataField>IDNO_LoansTopup</DataField>
+        </Field>
+        <Field Name="ReportForNavId_109">
+          <DataField>ReportForNavId_109</DataField>
+        </Field>
+        <Field Name="Description_OtherCommitementsClearance">
+          <DataField>Description_OtherCommitementsClearance</DataField>
+        </Field>
+        <Field Name="Payee_OtherCommitementsClearance">
+          <DataField>Payee_OtherCommitementsClearance</DataField>
+        </Field>
+        <Field Name="Amount_OtherCommitementsClearance">
+          <DataField>Amount_OtherCommitementsClearance</DataField>
+        </Field>
+        <Field Name="Amount_OtherCommitementsClearanceFormat">
+          <DataField>Amount_OtherCommitementsClearanceFormat</DataField>
+        </Field>
+        <Field Name="BatchNo_OtherCommitementsClearance">
+          <DataField>BatchNo_OtherCommitementsClearance</DataField>
+        </Field>
+        <Field Name="VendorNo_OtherCommitementsClearance">
+          <DataField>VendorNo_OtherCommitementsClearance</DataField>
+        </Field>
+        <Field Name="VendorName_OtherCommitementsClearance">
+          <DataField>VendorName_OtherCommitementsClearance</DataField>
+        </Field>
+        <Field Name="STO_No">
+          <DataField>STO_No</DataField>
+        </Field>
+        <Field Name="STO_Source_Account_No_">
+          <DataField>STO_Source_Account_No_</DataField>
+        </Field>
+        <Field Name="STO_Amount">
+          <DataField>STO_Amount</DataField>
+        </Field>
+        <Field Name="STO_AmountFormat">
+          <DataField>STO_AmountFormat</DataField>
+        </Field>
+        <Field Name="STOL_Destination_Account_Type">
+          <DataField>STOL_Destination_Account_Type</DataField>
+        </Field>
+        <Field Name="STOL_Destination_Account_No_">
+          <DataField>STOL_Destination_Account_No_</DataField>
+        </Field>
+        <Field Name="STOL_Transaction_Type">
+          <DataField>STOL_Transaction_Type</DataField>
+        </Field>
+        <Field Name="STOL_Amount">
+          <DataField>STOL_Amount</DataField>
+        </Field>
+        <Field Name="STOL_AmountFormat">
+          <DataField>STOL_AmountFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

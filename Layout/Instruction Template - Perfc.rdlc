@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CollateralStatus">
+          <DataField>CollateralStatus</DataField>
+        </Field>
+        <Field Name="Collateral_Value_Sum">
+          <DataField>Collateral_Value_Sum</DataField>
+        </Field>
+        <Field Name="Collateral_Value_SumFormat">
+          <DataField>Collateral_Value_SumFormat</DataField>
+        </Field>
+        <Field Name="Amount_To_Charge">
+          <DataField>Amount_To_Charge</DataField>
+        </Field>
+        <Field Name="Amount_To_ChargeFormat">
+          <DataField>Amount_To_ChargeFormat</DataField>
+        </Field>
+        <Field Name="Loan_Offer_Letter_Date">
+          <DataField>Loan_Offer_Letter_Date</DataField>
+        </Field>
+        <Field Name="Charge_Type">
+          <DataField>Charge_Type</DataField>
+        </Field>
+        <Field Name="Security_No_">
+          <DataField>Security_No_</DataField>
+        </Field>
+        <Field Name="Property_Number">
+          <DataField>Property_Number</DataField>
+        </Field>
+        <Field Name="CollateralTypes">
+          <DataField>CollateralTypes</DataField>
+        </Field>
+        <Field Name="DateofIssuanceInstructions">
+          <DataField>DateofIssuanceInstructions</DataField>
+        </Field>
+        <Field Name="Discharged">
+          <DataField>Discharged</DataField>
+        </Field>
+        <Field Name="LawFirmHanldingtheMatter">
+          <DataField>LawFirmHanldingtheMatter</DataField>
+        </Field>
+        <Field Name="LoanName">
+          <DataField>LoanName</DataField>
+        </Field>
+        <Field Name="LoanNo">
+          <DataField>LoanNo</DataField>
+        </Field>
+        <Field Name="MemberName">
+          <DataField>MemberName</DataField>
+        </Field>
+        <Field Name="MemberNo">
+          <DataField>MemberNo</DataField>
+        </Field>
+        <Field Name="PerfectedBy">
+          <DataField>PerfectedBy</DataField>
+        </Field>
+        <Field Name="SecurityNo">
+          <DataField>SecurityNo</DataField>
+        </Field>
+        <Field Name="Status">
+          <DataField>Status</DataField>
+        </Field>
+        <Field Name="StatusoftheFees">
+          <DataField>StatusoftheFees</DataField>
+        </Field>
+        <Field Name="Perfection_Summary">
+          <DataField>Perfection_Summary</DataField>
+        </Field>
+        <Field Name="Perfection_Attachements">
+          <DataField>Perfection_Attachements</DataField>
+        </Field>
+        <Field Name="ValuationComments">
+          <DataField>ValuationComments</DataField>
+        </Field>
+        <Field Name="MemberTelephone">
+          <DataField>MemberTelephone</DataField>
+        </Field>
+        <Field Name="MemberEmail">
+          <DataField>MemberEmail</DataField>
+        </Field>
+        <Field Name="MemberAddress">
+          <DataField>MemberAddress</DataField>
+        </Field>
+        <Field Name="MemberTown">
+          <DataField>MemberTown</DataField>
+        </Field>
+        <Field Name="LinesSeurityNo">
+          <DataField>LinesSeurityNo</DataField>
+        </Field>
+        <Field Name="LinesPropertyNo">
+          <DataField>LinesPropertyNo</DataField>
+        </Field>
+        <Field Name="LegalOfficer">
+          <DataField>LegalOfficer</DataField>
+        </Field>
+        <Field Name="LegalOfficerTitle">
+          <DataField>LegalOfficerTitle</DataField>
+        </Field>
+        <Field Name="LegalOfficerSiganature">
+          <DataField>LegalOfficerSiganature</DataField>
+        </Field>
+        <Field Name="Law_Firm_Address">
+          <DataField>Law_Firm_Address</DataField>
+        </Field>
+        <Field Name="Law_Firm_Physical_Address">
+          <DataField>Law_Firm_Physical_Address</DataField>
+        </Field>
+        <Field Name="MembNumber">
+          <DataField>MembNumber</DataField>
+        </Field>
+        <Field Name="MembName">
+          <DataField>MembName</DataField>
+        </Field>
+        <Field Name="MembAddress">
+          <DataField>MembAddress</DataField>
+        </Field>
+        <Field Name="MembTown">
+          <DataField>MembTown</DataField>
+        </Field>
+        <Field Name="MembTelephone">
+          <DataField>MembTelephone</DataField>
+        </Field>
+        <Field Name="MembEmail">
+          <DataField>MembEmail</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

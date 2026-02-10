@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CRB Metropol</title>
+        <script>
+            function render(){
+                const data = JSON.parse(`{
+    "api_code": 200,
+    "api_code_description": null,
+    "citizenship": null,
+    "clan": null,
+    "date_of_birth": null,
+    "date_of_death": null,
+    "date_of_issue": null,
+    "dob": "1978-01-01",
+    "dod": null,
+    "error": null,
+    "error_message": null,
+    "ethnic_group": null,
+    "family": null,
+    "fingerprint": null,
+    "first_name": "Peter",
+    "gender": "M",
+    "has_error": false,
+    "id_number": "880000088",
+    "identity_number": "880000088",
+    "identity_type": "001",
+    "last_name": "Marangi",
+    "occupation": null,
+    "other_name": null,
+    "photo": null,
+    "place_of_birth": null,
+    "place_of_death": null,
+    "place_of_live": null,
+    "regoffice": null,
+    "serial_number": null,
+    "signature": null,
+    "surname": null,
+    "trx_id": "03db1e5d-30fd-4d10-aa09-def4e567781c"
+}`);
+                const tableData = Object.entries(data).filter(([key, value]) => {
+                        return !!value;
+                    }).map(([key, value]) => {
+                        return [
+                            key.toUpperCase().replace('_',' '),
+                            value
+                        ]
+                    });
+                    
+                console.log(tableData);
+
+                const theTable = document.createElement('table');
+                // thead
+                const theThead = document.createElement('thead');
+                const theTheadRow = document.createElement('tr');
+
+                let theTheadItem = document.createElement('th');
+                theTheadItem.innerHTML = 'Name';
+                theTheadRow.append(theTheadItem);
+
+                theTheadItem = document.createElement('th');
+                theTheadItem.innerHTML = 'Value';
+                theTheadRow.append(theTheadItem);
+
+                theThead.append(theTheadRow);
+
+                theTable.append(theThead);
+
+                // tbody
+                const theTbody = document.createElement('tbody');
+
+                tableData.forEach(([key,value]) => {
+                    const theTbodyRow = document.createElement('tr');
+
+                    let theTbodyItem = document.createElement('td');
+                    theTbodyItem.setAttribute('class', 'key');
+                    theTbodyItem.innerHTML = key;
+                    theTbodyRow.append(theTbodyItem);
+
+                    theTbodyItem = document.createElement('td');
+                    theTbodyItem.innerHTML = value;
+                    theTbodyRow.append(theTbodyItem);
+
+                    theTbody.append(theTbodyRow);
+                });
+
+                theTable.append(theTbody);
+
+                document.body.append(theTable);
+            }
+        </script>
+        <style>
+            table, tr, td, th {
+                border: solid 1px gray;
+            }
+            table {
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 0.25rem;
+            }
+
+            th {
+                background: #80008080;
+            }
+
+            .key {
+                font-weight: bold;
+                background: #ECECEC;
+            }
+        </style>
+    </head>
+    <body id="crb_main" onload="render()">
+        <h1>CRB Metropol - Reports</h1>
+    </body>
+</html>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="en-US" original="Please update this value">
+    <body>
+      <group id="body">
+        <trans-unit id="Report 3452667902 - Control 2346885236 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Options</source>
+          <target>Options</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Loan Offer Letter - Control Options - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3452667902 - Control 1992870141 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Design</source>
+          <target>Design</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Loan Offer Letter - Control ForNavOpenDesigner - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Report 3452667902 - NamedType 2018001435" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total for </source>
+          <target>Total for </target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Loan Offer Letter - NamedType TotalFor</note>
+        </trans-unit>
+        <trans-unit id="Report 3452667902 - NamedType 721092797" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Intallments (Months)</source>
+          <target>Intallments (Months)</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Loan Offer Letter - NamedType Intallments__Months_CaptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3452667902 - NamedType 3718821423" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Disbursment Date</source>
+          <target>Disbursment Date</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Loan Offer Letter - NamedType Disbursment_DateCaptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3452667902 - NamedType 2276797704" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Current Interest</source>
+          <target>Current Interest</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Loan Offer Letter - NamedType Current_InterestCaptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3452667902 - NamedType 1964027101" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Loan Amount</source>
+          <target>Loan Amount</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Loan Offer Letter - NamedType Loan_AmountCaptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3452667902 - NamedType 2385073544" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Loan Product</source>
+          <target>Loan Product</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Loan Offer Letter - NamedType Loan_ProductCaptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3452667902 - NamedType 125916755" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Loan No.</source>
+          <target>Loan No.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Loan Offer Letter - NamedType Loan_No_CaptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3452667902 - NamedType 600525888" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Account No.</source>
+          <target>Account No.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Loan Offer Letter - NamedType Account_No_CaptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3452667902 - NamedType 625913909" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Monthly Repayment</source>
+          <target>Monthly Repayment</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Loan Offer Letter - NamedType Monthly_RepaymentCaptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3452667902 - NamedType 1344037838" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Interest</source>
+          <target>Interest</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Loan Offer Letter - NamedType InterestCaptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3452667902 - NamedType 1548718144" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Principal Repayment</source>
+          <target>Principal Repayment</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Loan Offer Letter - NamedType Principal_RepaymentCaptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3452667902 - NamedType 4153422933" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Due Date</source>
+          <target>Due Date</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Loan Offer Letter - NamedType Due_DateCaptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3452667902 - NamedType 4046765355" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Loan Balance</source>
+          <target>Loan Balance</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Loan Offer Letter - NamedType Loan_BalanceCaptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3452667902 - NamedType 1339049070" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Loan Repayment</source>
+          <target>Loan Repayment</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Loan Offer Letter - NamedType Loan_RepaymentCaptionLbl</note>
+        </trans-unit>
+        <trans-unit id="Report 3452667902 - NamedType 1583171122" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total</source>
+          <target>Total</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Loan Offer Letter - NamedType TotalCaptionLbl</note>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

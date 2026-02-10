@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="AccountNo">
+          <DataField>AccountNo</DataField>
+        </Field>
+        <Field Name="AmountGuaranteed">
+          <DataField>AmountGuaranteed</DataField>
+        </Field>
+        <Field Name="AmountGuaranteedFormat">
+          <DataField>AmountGuaranteedFormat</DataField>
+        </Field>
+        <Field Name="AvailableShares">
+          <DataField>AvailableShares</DataField>
+        </Field>
+        <Field Name="AvailableSharesFormat">
+          <DataField>AvailableSharesFormat</DataField>
+        </Field>
+        <Field Name="CollateralRegNo">
+          <DataField>CollateralRegNo</DataField>
+        </Field>
+        <Field Name="CollateralValue">
+          <DataField>CollateralValue</DataField>
+        </Field>
+        <Field Name="CollateralValueFormat">
+          <DataField>CollateralValueFormat</DataField>
+        </Field>
+        <Field Name="Comments">
+          <DataField>Comments</DataField>
+        </Field>
+        <Field Name="Date">
+          <DataField>Date</DataField>
+        </Field>
+        <Field Name="DateSubstituted">
+          <DataField>DateSubstituted</DataField>
+        </Field>
+        <Field Name="Deceased">
+          <DataField>Deceased</DataField>
+        </Field>
+        <Field Name="DepositsShares">
+          <DataField>DepositsShares</DataField>
+        </Field>
+        <Field Name="DepositsSharesFormat">
+          <DataField>DepositsSharesFormat</DataField>
+        </Field>
+        <Field Name="GuaranteedBalance">
+          <DataField>GuaranteedBalance</DataField>
+        </Field>
+        <Field Name="GuaranteedBalanceFormat">
+          <DataField>GuaranteedBalanceFormat</DataField>
+        </Field>
+        <Field Name="GuarantorStatus">
+          <DataField>GuarantorStatus</DataField>
+        </Field>
+        <Field Name="GuarantorType">
+          <DataField>GuarantorType</DataField>
+        </Field>
+        <Field Name="IDNo">
+          <DataField>IDNo</DataField>
+        </Field>
+        <Field Name="LoanBalance">
+          <DataField>LoanBalance</DataField>
+        </Field>
+        <Field Name="LoanBalanceFormat">
+          <DataField>LoanBalanceFormat</DataField>
+        </Field>
+        <Field Name="LoanNo">
+          <DataField>LoanNo</DataField>
+        </Field>
+        <Field Name="LoanProductName">
+          <DataField>LoanProductName</DataField>
+        </Field>
+        <Field Name="LoanType">
+          <DataField>LoanType</DataField>
+        </Field>
+        <Field Name="LoaneeName">
+          <DataField>LoaneeName</DataField>
+        </Field>
+        <Field Name="MemberGuaranteed">
+          <DataField>MemberGuaranteed</DataField>
+        </Field>
+        <Field Name="MemberNo">
+          <DataField>MemberNo</DataField>
+        </Field>
+        <Field Name="Name">
+          <DataField>Name</DataField>
+        </Field>
+        <Field Name="NewUpload">
+          <DataField>NewUpload</DataField>
+        </Field>
+        <Field Name="NoOfLoansGuaranteed">
+          <DataField>NoOfLoansGuaranteed</DataField>
+        </Field>
+        <Field Name="NoOfMajorLoansGuaranteed">
+          <DataField>NoOfMajorLoansGuaranteed</DataField>
+        </Field>
+        <Field Name="NoOfMinorLoansGuaranteed">
+          <DataField>NoOfMinorLoansGuaranteed</DataField>
+        </Field>
+        <Field Name="OutstandingBalance">
+          <DataField>OutstandingBalance</DataField>
+        </Field>
+        <Field Name="OutstandingBalanceFormat">
+          <DataField>OutstandingBalanceFormat</DataField>
+        </Field>
+        <Field Name="PercentageGuaranteed">
+          <DataField>PercentageGuaranteed</DataField>
+        </Field>
+        <Field Name="PercentageGuaranteedFormat">
+          <DataField>PercentageGuaranteedFormat</DataField>
+        </Field>
+        <Field Name="PercentageGur">
+          <DataField>PercentageGur</DataField>
+        </Field>
+        <Field Name="PercentageGurFormat">
+          <DataField>PercentageGurFormat</DataField>
+        </Field>
+        <Field Name="PhoneNo">
+          <DataField>PhoneNo</DataField>
+        </Field>
+        <Field Name="ProportionGuaranteed">
+          <DataField>ProportionGuaranteed</DataField>
+        </Field>
+        <Field Name="ProportionGuaranteedFormat">
+          <DataField>ProportionGuaranteedFormat</DataField>
+        </Field>
+        <Field Name="SMSSent">
+          <DataField>SMSSent</DataField>
+        </Field>
+        <Field Name="SavingsAccountNoMemberNo">
+          <DataField>SavingsAccountNoMemberNo</DataField>
+        </Field>
+        <Field Name="SelfGuarantee">
+          <DataField>SelfGuarantee</DataField>
+        </Field>
+        <Field Name="SharesRecovery">
+          <DataField>SharesRecovery</DataField>
+        </Field>
+        <Field Name="Signature">
+          <DataField>Signature</DataField>
+        </Field>
+        <Field Name="SourceUnit">
+          <DataField>SourceUnit</DataField>
+        </Field>
+        <Field Name="StaffPayrollNo">
+          <DataField>StaffPayrollNo</DataField>
+        </Field>
+        <Field Name="Substituted">
+          <DataField>Substituted</DataField>
+        </Field>
+        <Field Name="SubstitutedBy">
+          <DataField>SubstitutedBy</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

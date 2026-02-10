@@ -1,0 +1,1424 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:cl="http://schemas.microsoft.com/sqlserver/reporting/2010/01/componentdefinition" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>80b0a33a-48d3-427c-b9cb-a982c8a50605</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="Textbox9">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Amount in words : </Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!NumberText.Value</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Receiving officer:</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>.</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!CashierName.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve">   </Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>Signature:.....................................</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox9</rd:DefaultName>
+            <Top>2.75278cm</Top>
+            <Left>0.87207cm</Left>
+            <Height>1.92292cm</Height>
+            <Width>15cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Tablix Name="Tablix1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>3.05033cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>6.06022cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.89209cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>6.14789cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="AccountNo_ReceiptLine">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Instituition:</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>AccountNo_ReceiptLine</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Institution">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Institution.Value</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Institution</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PayMode_ReceiptLine">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Invested Amount:</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>PayMode_ReceiptLine</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Invested_Amount">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Invested_Amount.Value</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <Format>#,0.00</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Invested_Amount</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox27">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Instituition Name:</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox27</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Institution_Name">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Institution_Name.Value</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Institution_Name</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Received Amount:</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox3</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="AmountRecieved_ReceiptHeader">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!AmountRecieved_ReceiptHeader.Value</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <Format>#,0.00</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>AmountRecieved_ReceiptHeader</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox25">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Pay Mode:</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox25</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="PayMode_ReceiptLine1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!PayMode_ReceiptLine.Value</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>PayMode_ReceiptLine1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox28">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Cheque/Deposit Slip No:</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox28</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="ChequeDepositSlipNo_ReceiptLine">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!ChequeDepositSlipNo_ReceiptLine.Value</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>ChequeDepositSlipNo_ReceiptLine</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox32">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Cashier:</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox32</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Cashier_ReceiptHeader">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Cashier_ReceiptHeader.Value</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Cashier_ReceiptHeader</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox34">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Date Received:</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox34</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="DatePosted_ReceiptHeader">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!DatePosted_ReceiptHeader.Value</Value>
+                                  <Style>
+                                    <FontFamily>calibri</FontFamily>
+                                    <Format>M/d/yyyy</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>DatePosted_ReceiptHeader</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="Details" />
+                </TablixMember>
+                <TablixMember>
+                  <KeepWithGroup>Before</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <KeepWithGroup>Before</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <KeepWithGroup>Before</KeepWithGroup>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>DataSet_Result</DataSetName>
+            <Top>0.17639cm</Top>
+            <Left>0.87207cm</Left>
+            <Height>2.4cm</Height>
+            <Width>19.15053cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+        </ReportItems>
+        <Height>4.826cm</Height>
+        <Style />
+      </Body>
+      <Width>20.1295cm</Width>
+      <Page>
+        <PageHeader>
+          <Height>3.937cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Image Name="CompanyLogo">
+              <Source>Database</Source>
+              <Value>=First(Fields!CompanyInformation_Picture.Value, "DataSet_Result")</Value>
+              <MIMEType>image/jpeg</MIMEType>
+              <Sizing>FitProportional</Sizing>
+              <Top>0.10486in</Top>
+              <Left>0.34333in</Left>
+              <Height>0.875in</Height>
+              <Width>1.76167in</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Image>
+            <Textbox Name="Textbox534">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CompanyInformation_Name.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox528</rd:DefaultName>
+              <Top>0.10486in</Top>
+              <Left>4.42458in</Left>
+              <Height>0.23264in</Height>
+              <Width>3.45833in</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox535">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CompanyAddress.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox528</rd:DefaultName>
+              <Top>0.3375in</Top>
+              <Left>4.42458in</Left>
+              <Height>0.21528in</Height>
+              <Width>3.45833in</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox536">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CompanyTelephone.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox528</rd:DefaultName>
+              <Top>0.55277in</Top>
+              <Left>4.42458in</Left>
+              <Height>0.18403in</Height>
+              <Width>3.45833in</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox537">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CommunicationOnline.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox528</rd:DefaultName>
+              <Top>0.76458in</Top>
+              <Left>4.42458in</Left>
+              <Height>0.18403in</Height>
+              <Width>3.45833in</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox36">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Investment Receipt</Value>
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox36</rd:DefaultName>
+              <Top>3.16061cm</Top>
+              <Left>5.7277cm</Left>
+              <Height>0.6cm</Height>
+              <Width>5.25167cm</Width>
+              <ZIndex>5</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>21cm</PageWidth>
+        <LeftMargin>0cm</LeftMargin>
+        <RightMargin>0cm</RightMargin>
+        <TopMargin>0cm</TopMargin>
+        <BottomMargin>0cm</BottomMargin>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_3632">
+          <DataField>ReportForNavId_3632</DataField>
+        </Field>
+        <Field Name="No_ReceiptHeader">
+          <DataField>No_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="Date_ReceiptHeader">
+          <DataField>Date_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="CashierName">
+          <DataField>CashierName</DataField>
+        </Field>
+        <Field Name="Cashier_ReceiptHeader">
+          <DataField>Cashier_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="DatePosted_ReceiptHeader">
+          <DataField>DatePosted_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="TimePosted_ReceiptHeader">
+          <DataField>TimePosted_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="Posted_ReceiptHeader">
+          <DataField>Posted_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="NoSeries_ReceiptHeader">
+          <DataField>NoSeries_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="BankCode_ReceiptHeader">
+          <DataField>BankCode_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="ReceivedFrom_ReceiptHeader">
+          <DataField>ReceivedFrom_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="OnBehalfOf_ReceiptHeader">
+          <DataField>OnBehalfOf_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="AmountRecieved_ReceiptHeader">
+          <DataField>AmountRecieved_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="AmountRecieved_ReceiptHeaderFormat">
+          <DataField>AmountRecieved_ReceiptHeaderFormat</DataField>
+        </Field>
+        <Field Name="GlobalDimension1Code_ReceiptHeader">
+          <DataField>GlobalDimension1Code_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="ShortcutDimension2Code_ReceiptHeader">
+          <DataField>ShortcutDimension2Code_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="Institution">
+          <DataField>Institution</DataField>
+        </Field>
+        <Field Name="Institution_Name">
+          <DataField>Institution_Name</DataField>
+        </Field>
+        <Field Name="Invested_Amount">
+          <DataField>Invested_Amount</DataField>
+        </Field>
+        <Field Name="Invested_AmountFormat">
+          <DataField>Invested_AmountFormat</DataField>
+        </Field>
+        <Field Name="PostedBy_ReceiptHeader">
+          <DataField>PostedBy_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="PrintNo_ReceiptHeader">
+          <DataField>PrintNo_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="Status_ReceiptHeader">
+          <DataField>Status_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="ChequeNo_ReceiptHeader">
+          <DataField>ChequeNo_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="NoPrinted_ReceiptHeader">
+          <DataField>NoPrinted_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="CreatedBy_ReceiptHeader">
+          <DataField>CreatedBy_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="CreatedDateTime_ReceiptHeader">
+          <DataField>CreatedDateTime_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="RegisterNo_ReceiptHeader">
+          <DataField>RegisterNo_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="FromEntryNo_ReceiptHeader">
+          <DataField>FromEntryNo_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="ToEntryNo_ReceiptHeader">
+          <DataField>ToEntryNo_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="DocumentDate_ReceiptHeader">
+          <DataField>DocumentDate_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="ResponsibilityCenter_ReceiptHeader">
+          <DataField>ResponsibilityCenter_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="ShortcutDimension3Code_ReceiptHeader">
+          <DataField>ShortcutDimension3Code_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="ShortcutDimension4Code_ReceiptHeader">
+          <DataField>ShortcutDimension4Code_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="Dim3_ReceiptHeader">
+          <DataField>Dim3_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="Dim4_ReceiptHeader">
+          <DataField>Dim4_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="BankName_ReceiptHeader">
+          <DataField>BankName_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="ReceiptType_ReceiptHeader">
+          <DataField>ReceiptType_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="DimensionSetID_ReceiptHeader">
+          <DataField>DimensionSetID_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="Dim1_ReceiptHeader">
+          <DataField>Dim1_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="Dim2_ReceiptHeader">
+          <DataField>Dim2_ReceiptHeader</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Name">
+          <DataField>CompanyInformation_Name</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Picture">
+          <DataField>CompanyInformation_Picture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="Dim1Code">
+          <DataField>Dim1Code</DataField>
+        </Field>
+        <Field Name="Dim2Code">
+          <DataField>Dim2Code</DataField>
+        </Field>
+        <Field Name="ReportForNavId_7160">
+          <DataField>ReportForNavId_7160</DataField>
+        </Field>
+        <Field Name="No_ReceiptLine">
+          <DataField>No_ReceiptLine</DataField>
+        </Field>
+        <Field Name="Date_ReceiptLine">
+          <DataField>Date_ReceiptLine</DataField>
+        </Field>
+        <Field Name="Type_ReceiptLine">
+          <DataField>Type_ReceiptLine</DataField>
+        </Field>
+        <Field Name="PayMode_ReceiptLine">
+          <DataField>PayMode_ReceiptLine</DataField>
+        </Field>
+        <Field Name="ChequeDepositSlipNo_ReceiptLine">
+          <DataField>ChequeDepositSlipNo_ReceiptLine</DataField>
+        </Field>
+        <Field Name="ChequeDepositSlipDate_ReceiptLine">
+          <DataField>ChequeDepositSlipDate_ReceiptLine</DataField>
+        </Field>
+        <Field Name="ChequeDepositSlipType_ReceiptLine">
+          <DataField>ChequeDepositSlipType_ReceiptLine</DataField>
+        </Field>
+        <Field Name="BankCode_ReceiptLine">
+          <DataField>BankCode_ReceiptLine</DataField>
+        </Field>
+        <Field Name="ReceivedFrom_ReceiptLine">
+          <DataField>ReceivedFrom_ReceiptLine</DataField>
+        </Field>
+        <Field Name="OnBehalfOf_ReceiptLine">
+          <DataField>OnBehalfOf_ReceiptLine</DataField>
+        </Field>
+        <Field Name="Cashier_ReceiptLine">
+          <DataField>Cashier_ReceiptLine</DataField>
+        </Field>
+        <Field Name="AccountType_ReceiptLine">
+          <DataField>AccountType_ReceiptLine</DataField>
+        </Field>
+        <Field Name="AccountNo_ReceiptLine">
+          <DataField>AccountNo_ReceiptLine</DataField>
+        </Field>
+        <Field Name="NoSeries_ReceiptLine">
+          <DataField>NoSeries_ReceiptLine</DataField>
+        </Field>
+        <Field Name="AccountName_ReceiptLine">
+          <DataField>AccountName_ReceiptLine</DataField>
+        </Field>
+        <Field Name="Posted_ReceiptLine">
+          <DataField>Posted_ReceiptLine</DataField>
+        </Field>
+        <Field Name="DatePosted_ReceiptLine">
+          <DataField>DatePosted_ReceiptLine</DataField>
+        </Field>
+        <Field Name="TimePosted_ReceiptLine">
+          <DataField>TimePosted_ReceiptLine</DataField>
+        </Field>
+        <Field Name="PostedBy_ReceiptLine">
+          <DataField>PostedBy_ReceiptLine</DataField>
+        </Field>
+        <Field Name="Amount_ReceiptLine">
+          <DataField>Amount_ReceiptLine</DataField>
+        </Field>
+        <Field Name="Amount_ReceiptLineFormat">
+          <DataField>Amount_ReceiptLineFormat</DataField>
+        </Field>
+        <Field Name="Remarks_ReceiptLine">
+          <DataField>Remarks_ReceiptLine</DataField>
+        </Field>
+        <Field Name="TransactionName_ReceiptLine">
+          <DataField>TransactionName_ReceiptLine</DataField>
+        </Field>
+        <Field Name="BranchCode_ReceiptLine">
+          <DataField>BranchCode_ReceiptLine</DataField>
+        </Field>
+        <Field Name="AgentCode_ReceiptLine">
+          <DataField>AgentCode_ReceiptLine</DataField>
+        </Field>
+        <Field Name="Grouping_ReceiptLine">
+          <DataField>Grouping_ReceiptLine</DataField>
+        </Field>
+        <Field Name="GlobalDimension1Code_ReceiptLine">
+          <DataField>GlobalDimension1Code_ReceiptLine</DataField>
+        </Field>
+        <Field Name="ShortcutDimension2Code_ReceiptLine">
+          <DataField>ShortcutDimension2Code_ReceiptLine</DataField>
+        </Field>
+        <Field Name="VAT_ReceiptLine">
+          <DataField>VAT_ReceiptLine</DataField>
+        </Field>
+        <Field Name="VAT_ReceiptLineFormat">
+          <DataField>VAT_ReceiptLineFormat</DataField>
+        </Field>
+        <Field Name="CurrencyCode_ReceiptLine">
+          <DataField>CurrencyCode_ReceiptLine</DataField>
+        </Field>
+        <Field Name="CurrencyFactor_ReceiptLine">
+          <DataField>CurrencyFactor_ReceiptLine</DataField>
+        </Field>
+        <Field Name="CurrencyFactor_ReceiptLineFormat">
+          <DataField>CurrencyFactor_ReceiptLineFormat</DataField>
+        </Field>
+        <Field Name="VATBusPostingGroup_ReceiptLine">
+          <DataField>VATBusPostingGroup_ReceiptLine</DataField>
+        </Field>
+        <Field Name="VATProdPostingGroup_ReceiptLine">
+          <DataField>VATProdPostingGroup_ReceiptLine</DataField>
+        </Field>
+        <Field Name="GenPostingType_ReceiptLine">
+          <DataField>GenPostingType_ReceiptLine</DataField>
+        </Field>
+        <Field Name="GenBusPostingGroup_ReceiptLine">
+          <DataField>GenBusPostingGroup_ReceiptLine</DataField>
+        </Field>
+        <Field Name="GenProdPostingGroup_ReceiptLine">
+          <DataField>GenProdPostingGroup_ReceiptLine</DataField>
+        </Field>
+        <Field Name="VATCalculationType_ReceiptLine">
+          <DataField>VATCalculationType_ReceiptLine</DataField>
+        </Field>
+        <Field Name="VATAmount_ReceiptLine">
+          <DataField>VATAmount_ReceiptLine</DataField>
+        </Field>
+        <Field Name="VATAmount_ReceiptLineFormat">
+          <DataField>VATAmount_ReceiptLineFormat</DataField>
+        </Field>
+        <Field Name="TotalAmount_ReceiptLine">
+          <DataField>TotalAmount_ReceiptLine</DataField>
+        </Field>
+        <Field Name="TotalAmount_ReceiptLineFormat">
+          <DataField>TotalAmount_ReceiptLineFormat</DataField>
+        </Field>
+        <Field Name="UserID_ReceiptLine">
+          <DataField>UserID_ReceiptLine</DataField>
+        </Field>
+        <Field Name="Applyto_ReceiptLine">
+          <DataField>Applyto_ReceiptLine</DataField>
+        </Field>
+        <Field Name="ApplytoID_ReceiptLine">
+          <DataField>ApplytoID_ReceiptLine</DataField>
+        </Field>
+        <Field Name="DestGlobalDimension1Code_ReceiptLine">
+          <DataField>DestGlobalDimension1Code_ReceiptLine</DataField>
+        </Field>
+        <Field Name="DestShortcutDimension2Code_ReceiptLine">
+          <DataField>DestShortcutDimension2Code_ReceiptLine</DataField>
+        </Field>
+        <Field Name="LineNo_ReceiptLine">
+          <DataField>LineNo_ReceiptLine</DataField>
+        </Field>
+        <Field Name="PrintNo_ReceiptLine">
+          <DataField>PrintNo_ReceiptLine</DataField>
+        </Field>
+        <Field Name="Status_ReceiptLine">
+          <DataField>Status_ReceiptLine</DataField>
+        </Field>
+        <Field Name="DepositSlipTime_ReceiptLine">
+          <DataField>DepositSlipTime_ReceiptLine</DataField>
+        </Field>
+        <Field Name="TellerID_ReceiptLine">
+          <DataField>TellerID_ReceiptLine</DataField>
+        </Field>
+        <Field Name="CustomerPaymentOnAccount_ReceiptLine">
+          <DataField>CustomerPaymentOnAccount_ReceiptLine</DataField>
+        </Field>
+        <Field Name="Select_ReceiptLine">
+          <DataField>Select_ReceiptLine</DataField>
+        </Field>
+        <Field Name="BatchPosted_ReceiptLine">
+          <DataField>BatchPosted_ReceiptLine</DataField>
+        </Field>
+        <Field Name="TransactionNo_ReceiptLine">
+          <DataField>TransactionNo_ReceiptLine</DataField>
+        </Field>
+        <Field Name="ChequeDepositSlipBank_ReceiptLine">
+          <DataField>ChequeDepositSlipBank_ReceiptLine</DataField>
+        </Field>
+        <Field Name="BankAccount_ReceiptLine">
+          <DataField>BankAccount_ReceiptLine</DataField>
+        </Field>
+        <Field Name="Confirmed_ReceiptLine">
+          <DataField>Confirmed_ReceiptLine</DataField>
+        </Field>
+        <Field Name="Reconciled_ReceiptLine">
+          <DataField>Reconciled_ReceiptLine</DataField>
+        </Field>
+        <Field Name="OrigCashier_ReceiptLine">
+          <DataField>OrigCashier_ReceiptLine</DataField>
+        </Field>
+        <Field Name="Cancelled_ReceiptLine">
+          <DataField>Cancelled_ReceiptLine</DataField>
+        </Field>
+        <Field Name="CancelledBy_ReceiptLine">
+          <DataField>CancelledBy_ReceiptLine</DataField>
+        </Field>
+        <Field Name="CancelledDate_ReceiptLine">
+          <DataField>CancelledDate_ReceiptLine</DataField>
+        </Field>
+        <Field Name="CancelledTime_ReceiptLine">
+          <DataField>CancelledTime_ReceiptLine</DataField>
+        </Field>
+        <Field Name="PostDated_ReceiptLine">
+          <DataField>PostDated_ReceiptLine</DataField>
+        </Field>
+        <Field Name="ChequeRetrieved_ReceiptLine">
+          <DataField>ChequeRetrieved_ReceiptLine</DataField>
+        </Field>
+        <Field Name="RegisterNumber_ReceiptLine">
+          <DataField>RegisterNumber_ReceiptLine</DataField>
+        </Field>
+        <Field Name="FromEntryNo_ReceiptLine">
+          <DataField>FromEntryNo_ReceiptLine</DataField>
+        </Field>
+        <Field Name="ToEntryNo_ReceiptLine">
+          <DataField>ToEntryNo_ReceiptLine</DataField>
+        </Field>
+        <Field Name="BatchPostedUserID_ReceiptLine">
+          <DataField>BatchPostedUserID_ReceiptLine</DataField>
+        </Field>
+        <Field Name="BDRegisterNumber_ReceiptLine">
+          <DataField>BDRegisterNumber_ReceiptLine</DataField>
+        </Field>
+        <Field Name="BDFromNumber_ReceiptLine">
+          <DataField>BDFromNumber_ReceiptLine</DataField>
+        </Field>
+        <Field Name="BDToNumber_ReceiptLine">
+          <DataField>BDToNumber_ReceiptLine</DataField>
+        </Field>
+        <Field Name="ReversalBy_ReceiptLine">
+          <DataField>ReversalBy_ReceiptLine</DataField>
+        </Field>
+        <Field Name="ReversalDate_ReceiptLine">
+          <DataField>ReversalDate_ReceiptLine</DataField>
+        </Field>
+        <Field Name="ReversalTime_ReceiptLine">
+          <DataField>ReversalTime_ReceiptLine</DataField>
+        </Field>
+        <Field Name="ReversalRegisterNo_ReceiptLine">
+          <DataField>ReversalRegisterNo_ReceiptLine</DataField>
+        </Field>
+        <Field Name="ReversalFromEntryNo_ReceiptLine">
+          <DataField>ReversalFromEntryNo_ReceiptLine</DataField>
+        </Field>
+        <Field Name="ReversalToEntryNo_ReceiptLine">
+          <DataField>ReversalToEntryNo_ReceiptLine</DataField>
+        </Field>
+        <Field Name="Reversed_ReceiptLine">
+          <DataField>Reversed_ReceiptLine</DataField>
+        </Field>
+        <Field Name="AppliestoDocType_ReceiptLine">
+          <DataField>AppliestoDocType_ReceiptLine</DataField>
+        </Field>
+        <Field Name="AppliestoDocNo_ReceiptLine">
+          <DataField>AppliestoDocNo_ReceiptLine</DataField>
+        </Field>
+        <Field Name="AppliestoID_ReceiptLine">
+          <DataField>AppliestoID_ReceiptLine</DataField>
+        </Field>
+        <Field Name="GrantNo_ReceiptLine">
+          <DataField>GrantNo_ReceiptLine</DataField>
+        </Field>
+        <Field Name="InstallmentNumber_ReceiptLine">
+          <DataField>InstallmentNumber_ReceiptLine</DataField>
+        </Field>
+        <Field Name="NextInstallmentDate_ReceiptLine">
+          <DataField>NextInstallmentDate_ReceiptLine</DataField>
+        </Field>
+        <Field Name="DimensionSetID_ReceiptLine">
+          <DataField>DimensionSetID_ReceiptLine</DataField>
+        </Field>
+        <Field Name="Donor_ReceiptLine">
+          <DataField>Donor_ReceiptLine</DataField>
+        </Field>
+        <Field Name="LoanNo_ReceiptLine">
+          <DataField>LoanNo_ReceiptLine</DataField>
+        </Field>
+        <Field Name="TransactionType_ReceiptLine">
+          <DataField>TransactionType_ReceiptLine</DataField>
+        </Field>
+        <Field Name="NumberText">
+          <DataField>NumberText</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

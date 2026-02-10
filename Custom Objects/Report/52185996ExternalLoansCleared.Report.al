@@ -1,0 +1,54 @@
+// #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
+// Report 52185996 "External Loans Cleared"
+// {
+//     DefaultLayout = RDLC;
+//     RDLCLayout = './bc-kenpipe-2024/Layout/External Loans Cleared.rdl';
+
+//     dataset
+//     {
+//         dataitem(Loans; Loans)
+//         {
+//             column(ReportForNavId_11; 11)
+//             {
+//             }
+//             column(MemberNo_Loans; Loans."Member No.")
+//             {
+//             }
+//              //dataitem(52185743;52185743)
+//             // {
+//             //     DataItemLink = "Loan No." = field("Loan No.");
+//             //     column(ReportForNavId_1; 1)
+//             //     {
+//             //     }
+//             //     column(LoanNo; "Other Commitements Clearance"."Loan No.")
+//             //     {
+//             //     }
+//             //     column(BankName; "Other Commitements Clearance"."Vendor Name")
+//             //     {
+//             //     }
+//             //     column(Amount; "Other Commitements Clearance".Amount)
+//             //     {
+//             //     }
+//             //     column(BankNo; "Other Commitements Clearance"."Vendor No.")
+//             //     {
+//             //     }
+//             // }
+//         }
+//     }
+
+//     requestpage
+//     {
+
+//         layout
+//         {
+//         }
+
+//         actions
+//         {
+//         }
+//     }
+
+//     labels
+//     {
+//     }
+// }

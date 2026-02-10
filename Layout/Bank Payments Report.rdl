@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+  </Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1102755000">
+          <DataField>ReportForNavId_1102755000</DataField>
+        </Field>
+        <Field Name="ReportForNavId_1102755001">
+          <DataField>ReportForNavId_1102755001</DataField>
+        </Field>
+        <Field Name="No_PaymentsHeader">
+          <DataField>No_PaymentsHeader</DataField>
+        </Field>
+        <Field Name="Cashier_PaymentsHeader">
+          <DataField>Cashier_PaymentsHeader</DataField>
+        </Field>
+        <Field Name="TotalNetAmount_PaymentsHeader">
+          <DataField>TotalNetAmount_PaymentsHeader</DataField>
+        </Field>
+        <Field Name="TotalNetAmount_PaymentsHeaderFormat">
+          <DataField>TotalNetAmount_PaymentsHeaderFormat</DataField>
+        </Field>
+        <Field Name="ChequeNo_PaymentsHeader">
+          <DataField>ChequeNo_PaymentsHeader</DataField>
+        </Field>
+        <Field Name="PayMode_PaymentsHeader">
+          <DataField>PayMode_PaymentsHeader</DataField>
+        </Field>
+        <Field Name="ReportForNavId_1102755030">
+          <DataField>ReportForNavId_1102755030</DataField>
+        </Field>
+        <Field Name="EntryNo_PVLedgers">
+          <DataField>EntryNo_PVLedgers</DataField>
+        </Field>
+        <Field Name="BankAccountNo_PVLedgers">
+          <DataField>BankAccountNo_PVLedgers</DataField>
+        </Field>
+        <Field Name="PostingDate_PVLedgers">
+          <DataField>PostingDate_PVLedgers</DataField>
+        </Field>
+        <Field Name="DocumentType_PVLedgers">
+          <DataField>DocumentType_PVLedgers</DataField>
+        </Field>
+        <Field Name="DocumentNo_PVLedgers">
+          <DataField>DocumentNo_PVLedgers</DataField>
+        </Field>
+        <Field Name="Description_PVLedgers">
+          <DataField>Description_PVLedgers</DataField>
+        </Field>
+        <Field Name="CurrencyCode_PVLedgers">
+          <DataField>CurrencyCode_PVLedgers</DataField>
+        </Field>
+        <Field Name="Amount_PVLedgers">
+          <DataField>Amount_PVLedgers</DataField>
+        </Field>
+        <Field Name="Amount_PVLedgersFormat">
+          <DataField>Amount_PVLedgersFormat</DataField>
+        </Field>
+        <Field Name="RemainingAmount_PVLedgers">
+          <DataField>RemainingAmount_PVLedgers</DataField>
+        </Field>
+        <Field Name="RemainingAmount_PVLedgersFormat">
+          <DataField>RemainingAmount_PVLedgersFormat</DataField>
+        </Field>
+        <Field Name="ReportForNavId_1102755002">
+          <DataField>ReportForNavId_1102755002</DataField>
+        </Field>
+        <Field Name="No_StaffAdvanceHeader">
+          <DataField>No_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="Cashier_StaffAdvanceHeader">
+          <DataField>Cashier_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="TotalNetAmount_StaffAdvanceHeader">
+          <DataField>TotalNetAmount_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="TotalNetAmount_StaffAdvanceHeaderFormat">
+          <DataField>TotalNetAmount_StaffAdvanceHeaderFormat</DataField>
+        </Field>
+        <Field Name="ChequeNo_StaffAdvanceHeader">
+          <DataField>ChequeNo_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="PayMode_StaffAdvanceHeader">
+          <DataField>PayMode_StaffAdvanceHeader</DataField>
+        </Field>
+        <Field Name="ReportForNavId_1102755003">
+          <DataField>ReportForNavId_1102755003</DataField>
+        </Field>
+        <Field Name="ExternalDocNo_InterBankTransfers">
+          <DataField>ExternalDocNo_InterBankTransfers</DataField>
+        </Field>
+        <Field Name="No_InterBankTransfers">
+          <DataField>No_InterBankTransfers</DataField>
+        </Field>
+        <Field Name="PayMode_InterBankTransfers">
+          <DataField>PayMode_InterBankTransfers</DataField>
+        </Field>
+        <Field Name="Amount_InterBankTransfers">
+          <DataField>Amount_InterBankTransfers</DataField>
+        </Field>
+        <Field Name="Amount_InterBankTransfersFormat">
+          <DataField>Amount_InterBankTransfersFormat</DataField>
+        </Field>
+        <Field Name="ReportForNavId_1102755004">
+          <DataField>ReportForNavId_1102755004</DataField>
+        </Field>
+        <Field Name="Cashier_ImprestHeader">
+          <DataField>Cashier_ImprestHeader</DataField>
+        </Field>
+        <Field Name="No_ImprestHeader">
+          <DataField>No_ImprestHeader</DataField>
+        </Field>
+        <Field Name="TotalNetAmount_ImprestHeader">
+          <DataField>TotalNetAmount_ImprestHeader</DataField>
+        </Field>
+        <Field Name="TotalNetAmount_ImprestHeaderFormat">
+          <DataField>TotalNetAmount_ImprestHeaderFormat</DataField>
+        </Field>
+        <Field Name="ChequeNo_ImprestHeader">
+          <DataField>ChequeNo_ImprestHeader</DataField>
+        </Field>
+        <Field Name="PayMode_ImprestHeader">
+          <DataField>PayMode_ImprestHeader</DataField>
+        </Field>
+        <Field Name="ReportForNavId_1102755005">
+          <DataField>ReportForNavId_1102755005</DataField>
+        </Field>
+        <Field Name="No_StaffAdvanceSurrenderHeader">
+          <DataField>No_StaffAdvanceSurrenderHeader</DataField>
+        </Field>
+        <Field Name="PayMode_StaffAdvanceSurrenderHeader">
+          <DataField>PayMode_StaffAdvanceSurrenderHeader</DataField>
+        </Field>
+        <Field Name="ChequeNo_StaffAdvanceSurrenderHeader">
+          <DataField>ChequeNo_StaffAdvanceSurrenderHeader</DataField>
+        </Field>
+        <Field Name="Cashier_StaffAdvanceSurrenderHeader">
+          <DataField>Cashier_StaffAdvanceSurrenderHeader</DataField>
+        </Field>
+        <Field Name="Amount_StaffAdvanceSurrenderHeader">
+          <DataField>Amount_StaffAdvanceSurrenderHeader</DataField>
+        </Field>
+        <Field Name="Amount_StaffAdvanceSurrenderHeaderFormat">
+          <DataField>Amount_StaffAdvanceSurrenderHeaderFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="en-GB" original="Please update this value">
+    <body>
+      <group id="body">
+        <trans-unit id="Report 3341451417 - NamedType 107086291" size-unit="char" translate="yes" xml:space="preserve">
+          <source>3</source>
+          <target>3</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report pr Loans Deductions Report - NamedType GroupOrder</note>
+        </trans-unit>
+        <trans-unit id="Report 251098105 - NamedType 107086291" size-unit="char" translate="yes" xml:space="preserve">
+          <source>3</source>
+          <target>3</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report prAllowances Report - NamedType GroupOrder</note>
+        </trans-unit>
+        <trans-unit id="Report 4175305372 - NamedType 107086291" size-unit="char" translate="yes" xml:space="preserve">
+          <source>3</source>
+          <target>3</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report prDeductions Report - NamedType GroupOrder</note>
+        </trans-unit>
+        <trans-unit id="Report 2612040231 - NamedType 107086291" size-unit="char" translate="yes" xml:space="preserve">
+          <source>3</source>
+          <target>3</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report prPayroll Details - NamedType GroupOrder</note>
+        </trans-unit>
+        <trans-unit id="Report 3356321584 - NamedType 107086291" size-unit="char" translate="yes" xml:space="preserve">
+          <source>3</source>
+          <target>3</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report prGRA Form 51 - NamedType GroupOrder</note>
+        </trans-unit>
+        <trans-unit id="Report 1068846211 - NamedType 107086291" size-unit="char" translate="yes" xml:space="preserve">
+          <source>3</source>
+          <target>3</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report prZRA Form 51 - NamedType GroupOrder</note>
+        </trans-unit>
+        <trans-unit id="Report 3691537590 - NamedType 107086291" size-unit="char" translate="yes" xml:space="preserve">
+          <source>3</source>
+          <target>3</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report prPayroll Cheque Details - NamedType GroupOrder</note>
+        </trans-unit>
+        <trans-unit id="Report 2206886772 - NamedType 107086291" size-unit="char" translate="yes" xml:space="preserve">
+          <source>3</source>
+          <target>3</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report Staff Clearance Report - NamedType GroupOrder</note>
+        </trans-unit>
+        <trans-unit id="Report 3266273143 - NamedType 107086291" size-unit="char" translate="yes" xml:space="preserve">
+          <source>3</source>
+          <target>3</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report PrAllowances Summary - NamedType GroupOrder</note>
+        </trans-unit>
+        <trans-unit id="Report 83245078 - NamedType 107086291" size-unit="char" translate="yes" xml:space="preserve">
+          <source>3</source>
+          <target>3</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Report PrDeductions Summary - NamedType GroupOrder</note>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

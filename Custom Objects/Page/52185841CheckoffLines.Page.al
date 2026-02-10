@@ -1,0 +1,101 @@
+page 52185841 "Checkoff Lines"
+{
+    PageType = ListPart;
+    SourceTable = "Checkoff Lines";
+    ApplicationArea = Basic, Suite;
+    //UsageCategory = Lists;
+
+
+    layout
+    {
+        area(content)
+        {
+            repeater(Group)
+            {
+                field("Entry No"; Rec."Entry No")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Member No."; Rec."Member No.")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field(Name; Rec.Name)
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Account No."; Rec."Account No.")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Payroll No."; Rec."Payroll No.")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field(Amount; Rec.Amount)
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Loan No."; Rec."Loan No.")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field(Remarks; Rec.Remarks)
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field(Multiple; Rec.Multiple)
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Savings Account"; Rec."Savings Account")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Credit Account"; Rec."Credit Account")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field(Type; Rec.Type)
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field(Posted; Rec.Posted)
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+
+                field("Employer Code"; Rec."Employer Code")
+                {
+                    Editable = false;
+                    ApplicationArea = Basic, Suite;
+                }
+                // field("Clears Loan"; Rec."Clears Loan")
+                // {
+                //     Editable = false;
+                //     ApplicationArea = Basic, Suite;
+                // // }
+                // field("Refundable Amount"; Rec."Refundable Amount")
+                // {
+                //     Editable = false;
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("Transaction Type"; Rec."Transaction Type")
+                // {
+                //     Editable = false;
+                //     ApplicationArea = Basic, Suite;
+                // }
+                field("Loan Underpayment amount"; Rec."Loan Underpayment amount")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+
+            }
+        }
+    }
+
+    actions
+    {
+    }
+}
+

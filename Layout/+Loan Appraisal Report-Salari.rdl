@@ -1,0 +1,416 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+  </Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="CName">
+          <DataField>CName</DataField>
+        </Field>
+        <Field Name="CAdress">
+          <DataField>CAdress</DataField>
+        </Field>
+        <Field Name="CPicture">
+          <DataField>CPicture</DataField>
+        </Field>
+        <Field Name="LoanNo">
+          <DataField>LoanNo</DataField>
+        </Field>
+        <Field Name="MemberNo">
+          <DataField>MemberNo</DataField>
+        </Field>
+        <Field Name="MemberName">
+          <DataField>MemberName</DataField>
+        </Field>
+        <Field Name="LoanProduct">
+          <DataField>LoanProduct</DataField>
+        </Field>
+        <Field Name="LoanProductName">
+          <DataField>LoanProductName</DataField>
+        </Field>
+        <Field Name="ApplicationDate">
+          <DataField>ApplicationDate</DataField>
+        </Field>
+        <Field Name="LoanRequestedAmount">
+          <DataField>LoanRequestedAmount</DataField>
+        </Field>
+        <Field Name="LoanRequestedAmountFormat">
+          <DataField>LoanRequestedAmountFormat</DataField>
+        </Field>
+        <Field Name="Installment">
+          <DataField>Installment</DataField>
+        </Field>
+        <Field Name="LoanRepayment">
+          <DataField>LoanRepayment</DataField>
+        </Field>
+        <Field Name="LoanRepaymentFormat">
+          <DataField>LoanRepaymentFormat</DataField>
+        </Field>
+        <Field Name="AverageInt">
+          <DataField>AverageInt</DataField>
+        </Field>
+        <Field Name="AverageIntFormat">
+          <DataField>AverageIntFormat</DataField>
+        </Field>
+        <Field Name="RecommendedAmt">
+          <DataField>RecommendedAmt</DataField>
+        </Field>
+        <Field Name="RecommendedAmtFormat">
+          <DataField>RecommendedAmtFormat</DataField>
+        </Field>
+        <Field Name="StaffNo">
+          <DataField>StaffNo</DataField>
+        </Field>
+        <Field Name="MemberDeposits">
+          <DataField>MemberDeposits</DataField>
+        </Field>
+        <Field Name="MemberDepositsFormat">
+          <DataField>MemberDepositsFormat</DataField>
+        </Field>
+        <Field Name="TotalLoanBal">
+          <DataField>TotalLoanBal</DataField>
+        </Field>
+        <Field Name="TotalLoanBalFormat">
+          <DataField>TotalLoanBalFormat</DataField>
+        </Field>
+        <Field Name="CountNo">
+          <DataField>CountNo</DataField>
+        </Field>
+        <Field Name="LoanRecoverd">
+          <DataField>LoanRecoverd</DataField>
+        </Field>
+        <Field Name="MemberDueRetire">
+          <DataField>MemberDueRetire</DataField>
+        </Field>
+        <Field Name="GuarantorMax">
+          <DataField>GuarantorMax</DataField>
+        </Field>
+        <Field Name="SecurityRisk">
+          <DataField>SecurityRisk</DataField>
+        </Field>
+        <Field Name="ReapplicationPeriod">
+          <DataField>ReapplicationPeriod</DataField>
+        </Field>
+        <Field Name="LoanDepositRation">
+          <DataField>LoanDepositRation</DataField>
+        </Field>
+        <Field Name="TotalBasic">
+          <DataField>TotalBasic</DataField>
+        </Field>
+        <Field Name="TotalBasicFormat">
+          <DataField>TotalBasicFormat</DataField>
+        </Field>
+        <Field Name="TotalEarning">
+          <DataField>TotalEarning</DataField>
+        </Field>
+        <Field Name="TotalEarningFormat">
+          <DataField>TotalEarningFormat</DataField>
+        </Field>
+        <Field Name="TotalAllowance">
+          <DataField>TotalAllowance</DataField>
+        </Field>
+        <Field Name="TotalAllowanceFormat">
+          <DataField>TotalAllowanceFormat</DataField>
+        </Field>
+        <Field Name="TotalDeductions">
+          <DataField>TotalDeductions</DataField>
+        </Field>
+        <Field Name="TotalDeductionsFormat">
+          <DataField>TotalDeductionsFormat</DataField>
+        </Field>
+        <Field Name="NetSalary">
+          <DataField>NetSalary</DataField>
+        </Field>
+        <Field Name="NetSalaryFormat">
+          <DataField>NetSalaryFormat</DataField>
+        </Field>
+        <Field Name="AdjNet">
+          <DataField>AdjNet</DataField>
+        </Field>
+        <Field Name="AdjNetFormat">
+          <DataField>AdjNetFormat</DataField>
+        </Field>
+        <Field Name="NetOnSalary">
+          <DataField>NetOnSalary</DataField>
+        </Field>
+        <Field Name="NetOnSalaryFormat">
+          <DataField>NetOnSalaryFormat</DataField>
+        </Field>
+        <Field Name="NetOnDeposits">
+          <DataField>NetOnDeposits</DataField>
+        </Field>
+        <Field Name="NetOnDepositsFormat">
+          <DataField>NetOnDepositsFormat</DataField>
+        </Field>
+        <Field Name="ExternalRecovered">
+          <DataField>ExternalRecovered</DataField>
+        </Field>
+        <Field Name="ExternalRecoveredFormat">
+          <DataField>ExternalRecoveredFormat</DataField>
+        </Field>
+        <Field Name="TopupRepayments">
+          <DataField>TopupRepayments</DataField>
+        </Field>
+        <Field Name="TopupRepaymentsFormat">
+          <DataField>TopupRepaymentsFormat</DataField>
+        </Field>
+        <Field Name="NewRep">
+          <DataField>NewRep</DataField>
+        </Field>
+        <Field Name="NewRepFormat">
+          <DataField>NewRepFormat</DataField>
+        </Field>
+        <Field Name="Dim1">
+          <DataField>Dim1</DataField>
+        </Field>
+        <Field Name="Dim2">
+          <DataField>Dim2</DataField>
+        </Field>
+        <Field Name="Mult">
+          <DataField>Mult</DataField>
+        </Field>
+        <Field Name="MultFormat">
+          <DataField>MultFormat</DataField>
+        </Field>
+        <Field Name="DepositMult">
+          <DataField>DepositMult</DataField>
+        </Field>
+        <Field Name="DepositMultFormat">
+          <DataField>DepositMultFormat</DataField>
+        </Field>
+        <Field Name="SalProcessed">
+          <DataField>SalProcessed</DataField>
+        </Field>
+        <Field Name="SelfGua">
+          <DataField>SelfGua</DataField>
+        </Field>
+        <Field Name="CurrBal">
+          <DataField>CurrBal</DataField>
+        </Field>
+        <Field Name="CurrBalFormat">
+          <DataField>CurrBalFormat</DataField>
+        </Field>
+        <Field Name="RelatedBal">
+          <DataField>RelatedBal</DataField>
+        </Field>
+        <Field Name="RelatedBalFormat">
+          <DataField>RelatedBalFormat</DataField>
+        </Field>
+        <Field Name="TakeHome">
+          <DataField>TakeHome</DataField>
+        </Field>
+        <Field Name="TakeHomeFormat">
+          <DataField>TakeHomeFormat</DataField>
+        </Field>
+        <Field Name="OffsetTotal">
+          <DataField>OffsetTotal</DataField>
+        </Field>
+        <Field Name="OffsetTotalFormat">
+          <DataField>OffsetTotalFormat</DataField>
+        </Field>
+        <Field Name="MaxDeposit">
+          <DataField>MaxDeposit</DataField>
+        </Field>
+        <Field Name="MaxDepositFormat">
+          <DataField>MaxDepositFormat</DataField>
+        </Field>
+        <Field Name="MonthlyContr">
+          <DataField>MonthlyContr</DataField>
+        </Field>
+        <Field Name="MonthlyContrFormat">
+          <DataField>MonthlyContrFormat</DataField>
+        </Field>
+        <Field Name="DirectorWarning">
+          <DataField>DirectorWarning</DataField>
+        </Field>
+        <Field Name="TwoThird">
+          <DataField>TwoThird</DataField>
+        </Field>
+        <Field Name="TopUpComms">
+          <DataField>TopUpComms</DataField>
+        </Field>
+        <Field Name="TopUpCommsFormat">
+          <DataField>TopUpCommsFormat</DataField>
+        </Field>
+        <Field Name="Discmt">
+          <DataField>Discmt</DataField>
+        </Field>
+        <Field Name="DiscmtFormat">
+          <DataField>DiscmtFormat</DataField>
+        </Field>
+        <Field Name="TExternalEffects">
+          <DataField>TExternalEffects</DataField>
+        </Field>
+        <Field Name="TExternalEffectsFormat">
+          <DataField>TExternalEffectsFormat</DataField>
+        </Field>
+        <Field Name="Inactive">
+          <DataField>Inactive</DataField>
+        </Field>
+        <Field Name="ReportForNavId_18">
+          <DataField>ReportForNavId_18</DataField>
+        </Field>
+        <Field Name="LoansLoanNo">
+          <DataField>LoansLoanNo</DataField>
+        </Field>
+        <Field Name="LoansProductType">
+          <DataField>LoansProductType</DataField>
+        </Field>
+        <Field Name="LoansProductName">
+          <DataField>LoansProductName</DataField>
+        </Field>
+        <Field Name="ApprovedAmount">
+          <DataField>ApprovedAmount</DataField>
+        </Field>
+        <Field Name="ApprovedAmountFormat">
+          <DataField>ApprovedAmountFormat</DataField>
+        </Field>
+        <Field Name="PrincipalRepayment">
+          <DataField>PrincipalRepayment</DataField>
+        </Field>
+        <Field Name="PrincipalRepaymentFormat">
+          <DataField>PrincipalRepaymentFormat</DataField>
+        </Field>
+        <Field Name="OutstandingInterest">
+          <DataField>OutstandingInterest</DataField>
+        </Field>
+        <Field Name="OutstandingInterestFormat">
+          <DataField>OutstandingInterestFormat</DataField>
+        </Field>
+        <Field Name="OutStandingBalance">
+          <DataField>OutStandingBalance</DataField>
+        </Field>
+        <Field Name="OutStandingBalanceFormat">
+          <DataField>OutStandingBalanceFormat</DataField>
+        </Field>
+        <Field Name="Defaulted">
+          <DataField>Defaulted</DataField>
+        </Field>
+        <Field Name="Repayment">
+          <DataField>Repayment</DataField>
+        </Field>
+        <Field Name="RepaymentFormat">
+          <DataField>RepaymentFormat</DataField>
+        </Field>
+        <Field Name="ReportForNavId_14">
+          <DataField>ReportForNavId_14</DataField>
+        </Field>
+        <Field Name="AccountNo">
+          <DataField>AccountNo</DataField>
+        </Field>
+        <Field Name="GuarantorName">
+          <DataField>GuarantorName</DataField>
+        </Field>
+        <Field Name="PayrollNo">
+          <DataField>PayrollNo</DataField>
+        </Field>
+        <Field Name="LoanBalance">
+          <DataField>LoanBalance</DataField>
+        </Field>
+        <Field Name="LoanBalanceFormat">
+          <DataField>LoanBalanceFormat</DataField>
+        </Field>
+        <Field Name="Deposits">
+          <DataField>Deposits</DataField>
+        </Field>
+        <Field Name="DepositsFormat">
+          <DataField>DepositsFormat</DataField>
+        </Field>
+        <Field Name="NoOfLoanGuranteed">
+          <DataField>NoOfLoanGuranteed</DataField>
+        </Field>
+        <Field Name="DifferenceSecurity">
+          <DataField>DifferenceSecurity</DataField>
+        </Field>
+        <Field Name="DifferenceSecurityFormat">
+          <DataField>DifferenceSecurityFormat</DataField>
+        </Field>
+        <Field Name="ReportForNavId_36">
+          <DataField>ReportForNavId_36</DataField>
+        </Field>
+        <Field Name="DocumentType">
+          <DataField>DocumentType</DataField>
+        </Field>
+        <Field Name="DocumentNo">
+          <DataField>DocumentNo</DataField>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+        </Field>
+        <Field Name="SingleMultiple">
+          <DataField>SingleMultiple</DataField>
+        </Field>
+        <Field Name="LicenseExpiryDate">
+          <DataField>LicenseExpiryDate</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

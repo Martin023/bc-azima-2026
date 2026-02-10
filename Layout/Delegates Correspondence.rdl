@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+  </Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="PrintedBy">
+          <DataField>PrintedBy</DataField>
+        </Field>
+        <Field Name="PrintedAt">
+          <DataField>PrintedAt</DataField>
+        </Field>
+        <Field Name="BookNo">
+          <DataField>BookNo</DataField>
+        </Field>
+        <Field Name="TotalBranchMembers">
+          <DataField>TotalBranchMembers</DataField>
+        </Field>
+        <Field Name="BranchName">
+          <DataField>BranchName</DataField>
+        </Field>
+        <Field Name="MonthText">
+          <DataField>MonthText</DataField>
+        </Field>
+        <Field Name="Date">
+          <DataField>Date</DataField>
+        </Field>
+        <Field Name="ReportForNavId_32">
+          <DataField>ReportForNavId_32</DataField>
+        </Field>
+        <Field Name="HeaderNo_DelegatesMeetingAttendees">
+          <DataField>HeaderNo_DelegatesMeetingAttendees</DataField>
+        </Field>
+        <Field Name="DelegateNo_DelegatesMeetingAttendees">
+          <DataField>DelegateNo_DelegatesMeetingAttendees</DataField>
+        </Field>
+        <Field Name="DelegateName_DelegatesMeetingAttendees">
+          <DataField>DelegateName_DelegatesMeetingAttendees</DataField>
+        </Field>
+        <Field Name="DelegateEmail_DelegatesMeetingAttendees">
+          <DataField>DelegateEmail_DelegatesMeetingAttendees</DataField>
+        </Field>
+        <Field Name="DelegatePhone_DelegatesMeetingAttendees">
+          <DataField>DelegatePhone_DelegatesMeetingAttendees</DataField>
+        </Field>
+        <Field Name="DelegatePosition_DelegatesMeetingAttendees">
+          <DataField>DelegatePosition_DelegatesMeetingAttendees</DataField>
+        </Field>
+        <Field Name="HeaderNo_DelegatesMonthlyReturns">
+          <DataField>HeaderNo_DelegatesMonthlyReturns</DataField>
+        </Field>
+        <Field Name="Caption_DelegatesMonthlyReturns">
+          <DataField>Caption_DelegatesMonthlyReturns</DataField>
+        </Field>
+        <Field Name="CaptionType_DelegatesMonthlyReturns">
+          <DataField>CaptionType_DelegatesMonthlyReturns</DataField>
+        </Field>
+        <Field Name="TotalBranchMembers_DelegatesMonthlyReturns">
+          <DataField>TotalBranchMembers_DelegatesMonthlyReturns</DataField>
+        </Field>
+        <Field Name="RecordsSubmitted_DelegatesMonthlyReturns">
+          <DataField>RecordsSubmitted_DelegatesMonthlyReturns</DataField>
+        </Field>
+        <Field Name="LinesMemberNumbers">
+          <DataField>LinesMemberNumbers</DataField>
+        </Field>
+        <Field Name="LinesCount">
+          <DataField>LinesCount</DataField>
+        </Field>
+        <Field Name="ReportForNavId_8">
+          <DataField>ReportForNavId_8</DataField>
+        </Field>
+        <Field Name="HeaderNo_ComplainandRemarks">
+          <DataField>HeaderNo_ComplainandRemarks</DataField>
+        </Field>
+        <Field Name="LineNo_ComplainandRemarks">
+          <DataField>LineNo_ComplainandRemarks</DataField>
+        </Field>
+        <Field Name="Type_ComplainandRemarks">
+          <DataField>Type_ComplainandRemarks</DataField>
+        </Field>
+        <Field Name="Complain_ComplainandRemarks">
+          <DataField>Complain_ComplainandRemarks</DataField>
+        </Field>
+        <Field Name="Suggestion_ComplainandRemarks">
+          <DataField>Suggestion_ComplainandRemarks</DataField>
+        </Field>
+        <Field Name="Remark_ComplainandRemarks">
+          <DataField>Remark_ComplainandRemarks</DataField>
+        </Field>
+        <Field Name="ComplaintCatagory_ComplainandRemarks">
+          <DataField>ComplaintCatagory_ComplainandRemarks</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

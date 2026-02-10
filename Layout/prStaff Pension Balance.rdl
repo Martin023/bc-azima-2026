@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+  </Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_6207">
+          <DataField>ReportForNavId_6207</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="GETFILTERS">
+          <DataField>GETFILTERS</DataField>
+        </Field>
+        <Field Name="Companyinfo_Picture">
+          <DataField>Companyinfo_Picture</DataField>
+        </Field>
+        <Field Name="prSalary_Card__prSalary_Card___Employee_Code_">
+          <DataField>prSalary_Card__prSalary_Card___Employee_Code_</DataField>
+        </Field>
+        <Field Name="SelfContrib">
+          <DataField>SelfContrib</DataField>
+        </Field>
+        <Field Name="SelfContribFormat">
+          <DataField>SelfContribFormat</DataField>
+        </Field>
+        <Field Name="EmployeeName">
+          <DataField>EmployeeName</DataField>
+        </Field>
+        <Field Name="CompanyContrib">
+          <DataField>CompanyContrib</DataField>
+        </Field>
+        <Field Name="CompanyContribFormat">
+          <DataField>CompanyContribFormat</DataField>
+        </Field>
+        <Field Name="SelfContrib_CompanyContrib">
+          <DataField>SelfContrib_CompanyContrib</DataField>
+        </Field>
+        <Field Name="SelfContrib_CompanyContribFormat">
+          <DataField>SelfContrib_CompanyContribFormat</DataField>
+        </Field>
+        <Field Name="PINNo">
+          <DataField>PINNo</DataField>
+        </Field>
+        <Field Name="PensionH">
+          <DataField>PensionH</DataField>
+        </Field>
+        <Field Name="RCount">
+          <DataField>RCount</DataField>
+        </Field>
+        <Field Name="SelfContrib_Control1102755022">
+          <DataField>SelfContrib_Control1102755022</DataField>
+        </Field>
+        <Field Name="SelfContrib_Control1102755022Format">
+          <DataField>SelfContrib_Control1102755022Format</DataField>
+        </Field>
+        <Field Name="CompanyContrib_Control1102755021">
+          <DataField>CompanyContrib_Control1102755021</DataField>
+        </Field>
+        <Field Name="CompanyContrib_Control1102755021Format">
+          <DataField>CompanyContrib_Control1102755021Format</DataField>
+        </Field>
+        <Field Name="SelfContrib_CompanyContrib_Control1102755023">
+          <DataField>SelfContrib_CompanyContrib_Control1102755023</DataField>
+        </Field>
+        <Field Name="SelfContrib_CompanyContrib_Control1102755023Format">
+          <DataField>SelfContrib_CompanyContrib_Control1102755023Format</DataField>
+        </Field>
+        <Field Name="Cumm__Self_ContributionCaption">
+          <DataField>Cumm__Self_ContributionCaption</DataField>
+        </Field>
+        <Field Name="Cumm__Employer_Contr_Caption">
+          <DataField>Cumm__Employer_Contr_Caption</DataField>
+        </Field>
+        <Field Name="Cumm__Total_ContributionCaption">
+          <DataField>Cumm__Total_ContributionCaption</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="Staff_Pension_BalancesCaption">
+          <DataField>Staff_Pension_BalancesCaption</DataField>
+        </Field>
+        <Field Name="Employee_No_Caption">
+          <DataField>Employee_No_Caption</DataField>
+        </Field>
+        <Field Name="NameCaption">
+          <DataField>NameCaption</DataField>
+        </Field>
+        <Field Name="Pension_HouseCaption">
+          <DataField>Pension_HouseCaption</DataField>
+        </Field>
+        <Field Name="PIN_No_Caption">
+          <DataField>PIN_No_Caption</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

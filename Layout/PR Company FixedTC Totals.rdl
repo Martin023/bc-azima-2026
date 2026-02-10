@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_4">
+          <DataField>ReportForNavId_4</DataField>
+        </Field>
+        <Field Name="NonTaxableIncome">
+          <DataField>NonTaxableIncome</DataField>
+        </Field>
+        <Field Name="NonTaxableIncomeFormat">
+          <DataField>NonTaxableIncomeFormat</DataField>
+        </Field>
+        <Field Name="InsuranceReliefs">
+          <DataField>InsuranceReliefs</DataField>
+        </Field>
+        <Field Name="InsuranceReliefsFormat">
+          <DataField>InsuranceReliefsFormat</DataField>
+        </Field>
+        <Field Name="PersonalReliefs">
+          <DataField>PersonalReliefs</DataField>
+        </Field>
+        <Field Name="PersonalReliefsFormat">
+          <DataField>PersonalReliefsFormat</DataField>
+        </Field>
+        <Field Name="NumStaff">
+          <DataField>NumStaff</DataField>
+        </Field>
+        <Field Name="nssf">
+          <DataField>nssf</DataField>
+        </Field>
+        <Field Name="nssfFormat">
+          <DataField>nssfFormat</DataField>
+        </Field>
+        <Field Name="ChargeablePay">
+          <DataField>ChargeablePay</DataField>
+        </Field>
+        <Field Name="ChargeablePayFormat">
+          <DataField>ChargeablePayFormat</DataField>
+        </Field>
+        <Field Name="BPAY">
+          <DataField>BPAY</DataField>
+        </Field>
+        <Field Name="BPAYFormat">
+          <DataField>BPAYFormat</DataField>
+        </Field>
+        <Field Name="GPAY">
+          <DataField>GPAY</DataField>
+        </Field>
+        <Field Name="GPAYFormat">
+          <DataField>GPAYFormat</DataField>
+        </Field>
+        <Field Name="NPAY">
+          <DataField>NPAY</DataField>
+        </Field>
+        <Field Name="NPAYFormat">
+          <DataField>NPAYFormat</DataField>
+        </Field>
+        <Field Name="Taxcharged">
+          <DataField>Taxcharged</DataField>
+        </Field>
+        <Field Name="TaxchargedFormat">
+          <DataField>TaxchargedFormat</DataField>
+        </Field>
+        <Field Name="TODAY">
+          <DataField>TODAY</DataField>
+        </Field>
+        <Field Name="PeriodName">
+          <DataField>PeriodName</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="PeriodName_Control1102756011">
+          <DataField>PeriodName_Control1102756011</DataField>
+        </Field>
+        <Field Name="StrPAyrollStatus">
+          <DataField>StrPAyrollStatus</DataField>
+        </Field>
+        <Field Name="TOTDED">
+          <DataField>TOTDED</DataField>
+        </Field>
+        <Field Name="TOTDEDFormat">
+          <DataField>TOTDEDFormat</DataField>
+        </Field>
+        <Field Name="PAYEAmount">
+          <DataField>PAYEAmount</DataField>
+        </Field>
+        <Field Name="PAYEAmountFormat">
+          <DataField>PAYEAmountFormat</DataField>
+        </Field>
+        <Field Name="NHIFAmount">
+          <DataField>NHIFAmount</DataField>
+        </Field>
+        <Field Name="NHIFAmountFormat">
+          <DataField>NHIFAmountFormat</DataField>
+        </Field>
+        <Field Name="GratuityBal">
+          <DataField>GratuityBal</DataField>
+        </Field>
+        <Field Name="GratuityBalFormat">
+          <DataField>GratuityBalFormat</DataField>
+        </Field>
+        <Field Name="PensioncompanyInfoBal">
+          <DataField>PensioncompanyInfoBal</DataField>
+        </Field>
+        <Field Name="PensioncompanyInfoBalFormat">
+          <DataField>PensioncompanyInfoBalFormat</DataField>
+        </Field>
+        <Field Name="intCount">
+          <DataField>intCount</DataField>
+        </Field>
+        <Field Name="TransactionCode_prTransactionCodes">
+          <DataField>TransactionCode_prTransactionCodes</DataField>
+        </Field>
+        <Field Name="TransactionName_prTransactionCodes">
+          <DataField>TransactionName_prTransactionCodes</DataField>
+        </Field>
+        <Field Name="TransactionType_prTransactionCodes">
+          <DataField>TransactionType_prTransactionCodes</DataField>
+        </Field>
+        <Field Name="decAmount">
+          <DataField>decAmount</DataField>
+        </Field>
+        <Field Name="decAmountFormat">
+          <DataField>decAmountFormat</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Picture">
+          <DataField>CompanyInfo_Picture</DataField>
+        </Field>
+        <Field Name="Report_Name">
+          <DataField>Report_Name</DataField>
+        </Field>
+        <Field Name="DateOpened">
+          <DataField>DateOpened</DataField>
+        </Field>
+        <Field Name="PeriodMonth">
+          <DataField>PeriodMonth</DataField>
+        </Field>
+        <Field Name="PeriodYear">
+          <DataField>PeriodYear</DataField>
+        </Field>
+        <Field Name="PrintDate">
+          <DataField>PrintDate</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

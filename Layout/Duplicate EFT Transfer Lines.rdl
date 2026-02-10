@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+  </Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_26">
+          <DataField>ReportForNavId_26</DataField>
+        </Field>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="EntryNo_RTGSTransferLines">
+          <DataField>EntryNo_RTGSTransferLines</DataField>
+        </Field>
+        <Field Name="DocumentNo_RTGSTransferLines">
+          <DataField>DocumentNo_RTGSTransferLines</DataField>
+        </Field>
+        <Field Name="EnteredBy_RTGSTransferLines">
+          <DataField>EnteredBy_RTGSTransferLines</DataField>
+        </Field>
+        <Field Name="AccountType_RTGSTransferLines">
+          <DataField>AccountType_RTGSTransferLines</DataField>
+        </Field>
+        <Field Name="AccountNo_RTGSTransferLines">
+          <DataField>AccountNo_RTGSTransferLines</DataField>
+        </Field>
+        <Field Name="AccountName_RTGSTransferLines">
+          <DataField>AccountName_RTGSTransferLines</DataField>
+        </Field>
+        <Field Name="MemberNo_RTGSTransferLines">
+          <DataField>MemberNo_RTGSTransferLines</DataField>
+        </Field>
+        <Field Name="ExternalAccountName_RTGSTransferLines">
+          <DataField>ExternalAccountName_RTGSTransferLines</DataField>
+        </Field>
+        <Field Name="ChargeAmount_RTGSTransferLines">
+          <DataField>ChargeAmount_RTGSTransferLines</DataField>
+        </Field>
+        <Field Name="ChargeAmount_RTGSTransferLinesFormat">
+          <DataField>ChargeAmount_RTGSTransferLinesFormat</DataField>
+        </Field>
+        <Field Name="DontCharge_RTGSTransferLines">
+          <DataField>DontCharge_RTGSTransferLines</DataField>
+        </Field>
+        <Field Name="PhoneNo_RTGSTransferLines">
+          <DataField>PhoneNo_RTGSTransferLines</DataField>
+        </Field>
+        <Field Name="Amount_RTGSTransferLines">
+          <DataField>Amount_RTGSTransferLines</DataField>
+        </Field>
+        <Field Name="Amount_RTGSTransferLinesFormat">
+          <DataField>Amount_RTGSTransferLinesFormat</DataField>
+        </Field>
+        <Field Name="AmountText_RTGSTransferLines">
+          <DataField>AmountText_RTGSTransferLines</DataField>
+        </Field>
+        <Field Name="BankCode_RTGSTransferLines">
+          <DataField>BankCode_RTGSTransferLines</DataField>
+        </Field>
+        <Field Name="BranchCode_RTGSTransferLines">
+          <DataField>BranchCode_RTGSTransferLines</DataField>
+        </Field>
+        <Field Name="BankName_RTGSTransferLines">
+          <DataField>BankName_RTGSTransferLines</DataField>
+        </Field>
+        <Field Name="OverDrawn_RTGSTransferLines">
+          <DataField>OverDrawn_RTGSTransferLines</DataField>
+        </Field>
+        <Field Name="StandingOrderNo_RTGSTransferLines">
+          <DataField>StandingOrderNo_RTGSTransferLines</DataField>
+        </Field>
+        <Field Name="StandingOrderRegisterNo_RTGSTransferLines">
+          <DataField>StandingOrderRegisterNo_RTGSTransferLines</DataField>
+        </Field>
+        <Field Name="NotAvailable_RTGSTransferLines">
+          <DataField>NotAvailable_RTGSTransferLines</DataField>
+        </Field>
+        <Field Name="ChargeAccount_RTGSTransferLines">
+          <DataField>ChargeAccount_RTGSTransferLines</DataField>
+        </Field>
+        <Field Name="Transferred_RTGSTransferLines">
+          <DataField>Transferred_RTGSTransferLines</DataField>
+        </Field>
+        <Field Name="ExportFormat_RTGSTransferLines">
+          <DataField>ExportFormat_RTGSTransferLines</DataField>
+        </Field>
+        <Field Name="ExternalAccountNo_RTGSTransferLines">
+          <DataField>ExternalAccountNo_RTGSTransferLines</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

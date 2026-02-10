@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="ApplicationNo_HRTrainingAppHeader">
+          <DataField>ApplicationNo_HRTrainingAppHeader</DataField>
+        </Field>
+        <Field Name="Createdby_HRTrainingAppHeader">
+          <DataField>Createdby_HRTrainingAppHeader</DataField>
+        </Field>
+        <Field Name="NoSeries_HRTrainingAppHeader">
+          <DataField>NoSeries_HRTrainingAppHeader</DataField>
+        </Field>
+        <Field Name="ApplicationDate_HRTrainingAppHeader">
+          <DataField>ApplicationDate_HRTrainingAppHeader</DataField>
+        </Field>
+        <Field Name="CourseTitle_HRTrainingAppHeader">
+          <DataField>CourseTitle_HRTrainingAppHeader</DataField>
+        </Field>
+        <Field Name="CourseDescription_HRTrainingAppHeader">
+          <DataField>CourseDescription_HRTrainingAppHeader</DataField>
+        </Field>
+        <Field Name="NoofParticipants_HRTrainingAppHeader">
+          <DataField>NoofParticipants_HRTrainingAppHeader</DataField>
+        </Field>
+        <Field Name="StartDate_HRTrainingAppHeader">
+          <DataField>StartDate_HRTrainingAppHeader</DataField>
+        </Field>
+        <Field Name="EndDate_HRTrainingAppHeader">
+          <DataField>EndDate_HRTrainingAppHeader</DataField>
+        </Field>
+        <Field Name="Duration_HRTrainingAppHeader">
+          <DataField>Duration_HRTrainingAppHeader</DataField>
+        </Field>
+        <Field Name="ResponsibilityCenter_HRTrainingAppHeader">
+          <DataField>ResponsibilityCenter_HRTrainingAppHeader</DataField>
+        </Field>
+        <Field Name="Status_HRTrainingAppHeader">
+          <DataField>Status_HRTrainingAppHeader</DataField>
+        </Field>
+        <Field Name="TrainingInstitution_HRTrainingAppHeader">
+          <DataField>TrainingInstitution_HRTrainingAppHeader</DataField>
+        </Field>
+        <Field Name="TrainingVenue_HRTrainingAppHeaders">
+          <DataField>TrainingVenue_HRTrainingAppHeaders</DataField>
+        </Field>
+        <Field Name="TrainingCostCstimated_HRTrainingAppHeader">
+          <DataField>TrainingCostCstimated_HRTrainingAppHeader</DataField>
+        </Field>
+        <Field Name="TrainingCostCstimated_HRTrainingAppHeaderFormat">
+          <DataField>TrainingCostCstimated_HRTrainingAppHeaderFormat</DataField>
+        </Field>
+        <Field Name="BondedTraining_HRTrainingAppHeader">
+          <DataField>BondedTraining_HRTrainingAppHeader</DataField>
+        </Field>
+        <Field Name="GlobalDimension1Code_HRTrainingAppHeader">
+          <DataField>GlobalDimension1Code_HRTrainingAppHeader</DataField>
+        </Field>
+        <Field Name="GlobalDimension2Code_HRTrainingAppHeader">
+          <DataField>GlobalDimension2Code_HRTrainingAppHeader</DataField>
+        </Field>
+        <Field Name="TrainingStatus_HRTrainingAppHeader">
+          <DataField>TrainingStatus_HRTrainingAppHeader</DataField>
+        </Field>
+        <Field Name="ActualStartDate_HRTrainingAppHeader">
+          <DataField>ActualStartDate_HRTrainingAppHeader</DataField>
+        </Field>
+        <Field Name="ActualDuration_HRTrainingAppHeader">
+          <DataField>ActualDuration_HRTrainingAppHeader</DataField>
+        </Field>
+        <Field Name="ActualEndDate_HRTrainingAppHeader">
+          <DataField>ActualEndDate_HRTrainingAppHeader</DataField>
+        </Field>
+        <Field Name="Courseapplying_HRTrainingAppHeader">
+          <DataField>Courseapplying_HRTrainingAppHeader</DataField>
+        </Field>
+        <Field Name="Justification_HRTrainingAppHeader">
+          <DataField>Justification_HRTrainingAppHeader</DataField>
+        </Field>
+        <Field Name="ReportForNavId_32">
+          <DataField>ReportForNavId_32</DataField>
+        </Field>
+        <Field Name="LineNo">
+          <DataField>LineNo</DataField>
+        </Field>
+        <Field Name="AppNo">
+          <DataField>AppNo</DataField>
+        </Field>
+        <Field Name="EmpNo">
+          <DataField>EmpNo</DataField>
+        </Field>
+        <Field Name="Names">
+          <DataField>Names</DataField>
+        </Field>
+        <Field Name="Title">
+          <DataField>Title</DataField>
+        </Field>
+        <Field Name="Email">
+          <DataField>Email</DataField>
+        </Field>
+        <Field Name="ReportForNavId_46">
+          <DataField>ReportForNavId_46</DataField>
+        </Field>
+        <Field Name="ApproverID_ApprovalEntry">
+          <DataField>ApproverID_ApprovalEntry</DataField>
+        </Field>
+        <Field Name="LastDateTimeModified_ApprovalEntry">
+          <DataField>LastDateTimeModified_ApprovalEntry</DataField>
+        </Field>
+        <Field Name="ReportForNavId_43">
+          <DataField>ReportForNavId_43</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

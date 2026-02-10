@@ -1,0 +1,512 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+  </Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_8631">
+          <DataField>ReportForNavId_8631</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="FORMAT_TODAY_0_4_">
+          <DataField>FORMAT_TODAY_0_4_</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="CompanyInfoPicture">
+          <DataField>CompanyInfoPicture</DataField>
+        </Field>
+        <Field Name="cHeader_1_">
+          <DataField>cHeader_1_</DataField>
+        </Field>
+        <Field Name="cHeader_2_">
+          <DataField>cHeader_2_</DataField>
+        </Field>
+        <Field Name="cHeader_3_">
+          <DataField>cHeader_3_</DataField>
+        </Field>
+        <Field Name="cHeader_7_">
+          <DataField>cHeader_7_</DataField>
+        </Field>
+        <Field Name="cHeader_6_">
+          <DataField>cHeader_6_</DataField>
+        </Field>
+        <Field Name="cHeader_5_">
+          <DataField>cHeader_5_</DataField>
+        </Field>
+        <Field Name="cHeader_4_">
+          <DataField>cHeader_4_</DataField>
+        </Field>
+        <Field Name="cHeader_11_">
+          <DataField>cHeader_11_</DataField>
+        </Field>
+        <Field Name="cHeader_10_">
+          <DataField>cHeader_10_</DataField>
+        </Field>
+        <Field Name="cHeader_9_">
+          <DataField>cHeader_9_</DataField>
+        </Field>
+        <Field Name="cHeader_8_">
+          <DataField>cHeader_8_</DataField>
+        </Field>
+        <Field Name="cHeader_12_">
+          <DataField>cHeader_12_</DataField>
+        </Field>
+        <Field Name="cHeader_13_">
+          <DataField>cHeader_13_</DataField>
+        </Field>
+        <Field Name="cHeader_14_">
+          <DataField>cHeader_14_</DataField>
+        </Field>
+        <Field Name="cHeader_15_">
+          <DataField>cHeader_15_</DataField>
+        </Field>
+        <Field Name="cHeader_17_">
+          <DataField>cHeader_17_</DataField>
+        </Field>
+        <Field Name="cHeader_16_">
+          <DataField>cHeader_16_</DataField>
+        </Field>
+        <Field Name="cHeader_18_">
+          <DataField>cHeader_18_</DataField>
+        </Field>
+        <Field Name="cHeader_19_">
+          <DataField>cHeader_19_</DataField>
+        </Field>
+        <Field Name="cHeader_20_">
+          <DataField>cHeader_20_</DataField>
+        </Field>
+        <Field Name="cHeader_21_">
+          <DataField>cHeader_21_</DataField>
+        </Field>
+        <Field Name="cHeader_22_">
+          <DataField>cHeader_22_</DataField>
+        </Field>
+        <Field Name="cHeader_23_">
+          <DataField>cHeader_23_</DataField>
+        </Field>
+        <Field Name="cHeader_24_">
+          <DataField>cHeader_24_</DataField>
+        </Field>
+        <Field Name="cHeader_25_">
+          <DataField>cHeader_25_</DataField>
+        </Field>
+        <Field Name="strEmpName">
+          <DataField>strEmpName</DataField>
+        </Field>
+        <Field Name="HR_Employee__HR_Employee___No__">
+          <DataField>HR_Employee__HR_Employee___No__</DataField>
+        </Field>
+        <Field Name="cValue_1_">
+          <DataField>cValue_1_</DataField>
+        </Field>
+        <Field Name="cValue_1_Format">
+          <DataField>cValue_1_Format</DataField>
+        </Field>
+        <Field Name="cValue_2_">
+          <DataField>cValue_2_</DataField>
+        </Field>
+        <Field Name="cValue_2_Format">
+          <DataField>cValue_2_Format</DataField>
+        </Field>
+        <Field Name="cValue_3_">
+          <DataField>cValue_3_</DataField>
+        </Field>
+        <Field Name="cValue_3_Format">
+          <DataField>cValue_3_Format</DataField>
+        </Field>
+        <Field Name="cValue_6_">
+          <DataField>cValue_6_</DataField>
+        </Field>
+        <Field Name="cValue_6_Format">
+          <DataField>cValue_6_Format</DataField>
+        </Field>
+        <Field Name="cValue_5_">
+          <DataField>cValue_5_</DataField>
+        </Field>
+        <Field Name="cValue_5_Format">
+          <DataField>cValue_5_Format</DataField>
+        </Field>
+        <Field Name="cValue_4_">
+          <DataField>cValue_4_</DataField>
+        </Field>
+        <Field Name="cValue_4_Format">
+          <DataField>cValue_4_Format</DataField>
+        </Field>
+        <Field Name="cValue_9_">
+          <DataField>cValue_9_</DataField>
+        </Field>
+        <Field Name="cValue_9_Format">
+          <DataField>cValue_9_Format</DataField>
+        </Field>
+        <Field Name="cValue_8_">
+          <DataField>cValue_8_</DataField>
+        </Field>
+        <Field Name="cValue_8_Format">
+          <DataField>cValue_8_Format</DataField>
+        </Field>
+        <Field Name="cValue_7_">
+          <DataField>cValue_7_</DataField>
+        </Field>
+        <Field Name="cValue_7_Format">
+          <DataField>cValue_7_Format</DataField>
+        </Field>
+        <Field Name="cValue_11_">
+          <DataField>cValue_11_</DataField>
+        </Field>
+        <Field Name="cValue_11_Format">
+          <DataField>cValue_11_Format</DataField>
+        </Field>
+        <Field Name="cValue_12_">
+          <DataField>cValue_12_</DataField>
+        </Field>
+        <Field Name="cValue_12_Format">
+          <DataField>cValue_12_Format</DataField>
+        </Field>
+        <Field Name="cValue_13_">
+          <DataField>cValue_13_</DataField>
+        </Field>
+        <Field Name="cValue_13_Format">
+          <DataField>cValue_13_Format</DataField>
+        </Field>
+        <Field Name="cValue_14_">
+          <DataField>cValue_14_</DataField>
+        </Field>
+        <Field Name="cValue_14_Format">
+          <DataField>cValue_14_Format</DataField>
+        </Field>
+        <Field Name="cValue_15_">
+          <DataField>cValue_15_</DataField>
+        </Field>
+        <Field Name="cValue_15_Format">
+          <DataField>cValue_15_Format</DataField>
+        </Field>
+        <Field Name="cValue_10_">
+          <DataField>cValue_10_</DataField>
+        </Field>
+        <Field Name="cValue_10_Format">
+          <DataField>cValue_10_Format</DataField>
+        </Field>
+        <Field Name="cValue_19_">
+          <DataField>cValue_19_</DataField>
+        </Field>
+        <Field Name="cValue_19_Format">
+          <DataField>cValue_19_Format</DataField>
+        </Field>
+        <Field Name="cValue_18_">
+          <DataField>cValue_18_</DataField>
+        </Field>
+        <Field Name="cValue_18_Format">
+          <DataField>cValue_18_Format</DataField>
+        </Field>
+        <Field Name="cValue_17_">
+          <DataField>cValue_17_</DataField>
+        </Field>
+        <Field Name="cValue_17_Format">
+          <DataField>cValue_17_Format</DataField>
+        </Field>
+        <Field Name="cValue_16_">
+          <DataField>cValue_16_</DataField>
+        </Field>
+        <Field Name="cValue_16_Format">
+          <DataField>cValue_16_Format</DataField>
+        </Field>
+        <Field Name="cValue_20_">
+          <DataField>cValue_20_</DataField>
+        </Field>
+        <Field Name="cValue_20_Format">
+          <DataField>cValue_20_Format</DataField>
+        </Field>
+        <Field Name="cValue_21_">
+          <DataField>cValue_21_</DataField>
+        </Field>
+        <Field Name="cValue_21_Format">
+          <DataField>cValue_21_Format</DataField>
+        </Field>
+        <Field Name="cValue_22_">
+          <DataField>cValue_22_</DataField>
+        </Field>
+        <Field Name="cValue_22_Format">
+          <DataField>cValue_22_Format</DataField>
+        </Field>
+        <Field Name="cValue_23_">
+          <DataField>cValue_23_</DataField>
+        </Field>
+        <Field Name="cValue_23_Format">
+          <DataField>cValue_23_Format</DataField>
+        </Field>
+        <Field Name="cValue_24_">
+          <DataField>cValue_24_</DataField>
+        </Field>
+        <Field Name="cValue_24_Format">
+          <DataField>cValue_24_Format</DataField>
+        </Field>
+        <Field Name="cValue_25_">
+          <DataField>cValue_25_</DataField>
+        </Field>
+        <Field Name="cValue_25_Format">
+          <DataField>cValue_25_Format</DataField>
+        </Field>
+        <Field Name="HR_Employee__Department_Code_">
+          <DataField>HR_Employee__Department_Code_</DataField>
+        </Field>
+        <Field Name="cValue_19__Control1102755024">
+          <DataField>cValue_19__Control1102755024</DataField>
+        </Field>
+        <Field Name="cValue_19__Control1102755024Format">
+          <DataField>cValue_19__Control1102755024Format</DataField>
+        </Field>
+        <Field Name="cValue_18__Control1102755029">
+          <DataField>cValue_18__Control1102755029</DataField>
+        </Field>
+        <Field Name="cValue_18__Control1102755029Format">
+          <DataField>cValue_18__Control1102755029Format</DataField>
+        </Field>
+        <Field Name="cValue_17__Control1102755030">
+          <DataField>cValue_17__Control1102755030</DataField>
+        </Field>
+        <Field Name="cValue_17__Control1102755030Format">
+          <DataField>cValue_17__Control1102755030Format</DataField>
+        </Field>
+        <Field Name="cValue_16__Control1102755031">
+          <DataField>cValue_16__Control1102755031</DataField>
+        </Field>
+        <Field Name="cValue_16__Control1102755031Format">
+          <DataField>cValue_16__Control1102755031Format</DataField>
+        </Field>
+        <Field Name="cValue_15__Control1102755052">
+          <DataField>cValue_15__Control1102755052</DataField>
+        </Field>
+        <Field Name="cValue_15__Control1102755052Format">
+          <DataField>cValue_15__Control1102755052Format</DataField>
+        </Field>
+        <Field Name="cValue_14__Control1102755053">
+          <DataField>cValue_14__Control1102755053</DataField>
+        </Field>
+        <Field Name="cValue_14__Control1102755053Format">
+          <DataField>cValue_14__Control1102755053Format</DataField>
+        </Field>
+        <Field Name="cValue_13__Control1102755054">
+          <DataField>cValue_13__Control1102755054</DataField>
+        </Field>
+        <Field Name="cValue_13__Control1102755054Format">
+          <DataField>cValue_13__Control1102755054Format</DataField>
+        </Field>
+        <Field Name="cValue_12__Control1102755055">
+          <DataField>cValue_12__Control1102755055</DataField>
+        </Field>
+        <Field Name="cValue_12__Control1102755055Format">
+          <DataField>cValue_12__Control1102755055Format</DataField>
+        </Field>
+        <Field Name="cValue_11__Control1102755056">
+          <DataField>cValue_11__Control1102755056</DataField>
+        </Field>
+        <Field Name="cValue_11__Control1102755056Format">
+          <DataField>cValue_11__Control1102755056Format</DataField>
+        </Field>
+        <Field Name="cValue_10__Control1102755057">
+          <DataField>cValue_10__Control1102755057</DataField>
+        </Field>
+        <Field Name="cValue_10__Control1102755057Format">
+          <DataField>cValue_10__Control1102755057Format</DataField>
+        </Field>
+        <Field Name="cValue_9__Control1102755058">
+          <DataField>cValue_9__Control1102755058</DataField>
+        </Field>
+        <Field Name="cValue_9__Control1102755058Format">
+          <DataField>cValue_9__Control1102755058Format</DataField>
+        </Field>
+        <Field Name="cValue_8__Control1102755059">
+          <DataField>cValue_8__Control1102755059</DataField>
+        </Field>
+        <Field Name="cValue_8__Control1102755059Format">
+          <DataField>cValue_8__Control1102755059Format</DataField>
+        </Field>
+        <Field Name="cValue_7__Control1102755060">
+          <DataField>cValue_7__Control1102755060</DataField>
+        </Field>
+        <Field Name="cValue_7__Control1102755060Format">
+          <DataField>cValue_7__Control1102755060Format</DataField>
+        </Field>
+        <Field Name="cValue_6__Control1102755061">
+          <DataField>cValue_6__Control1102755061</DataField>
+        </Field>
+        <Field Name="cValue_6__Control1102755061Format">
+          <DataField>cValue_6__Control1102755061Format</DataField>
+        </Field>
+        <Field Name="cValue_5__Control1102755062">
+          <DataField>cValue_5__Control1102755062</DataField>
+        </Field>
+        <Field Name="cValue_5__Control1102755062Format">
+          <DataField>cValue_5__Control1102755062Format</DataField>
+        </Field>
+        <Field Name="cValue_4__Control1102755063">
+          <DataField>cValue_4__Control1102755063</DataField>
+        </Field>
+        <Field Name="cValue_4__Control1102755063Format">
+          <DataField>cValue_4__Control1102755063Format</DataField>
+        </Field>
+        <Field Name="cValue_3__Control1102755064">
+          <DataField>cValue_3__Control1102755064</DataField>
+        </Field>
+        <Field Name="cValue_3__Control1102755064Format">
+          <DataField>cValue_3__Control1102755064Format</DataField>
+        </Field>
+        <Field Name="cValue_2__Control1102755065">
+          <DataField>cValue_2__Control1102755065</DataField>
+        </Field>
+        <Field Name="cValue_2__Control1102755065Format">
+          <DataField>cValue_2__Control1102755065Format</DataField>
+        </Field>
+        <Field Name="cValue_1__Control1102755066">
+          <DataField>cValue_1__Control1102755066</DataField>
+        </Field>
+        <Field Name="cValue_1__Control1102755066Format">
+          <DataField>cValue_1__Control1102755066Format</DataField>
+        </Field>
+        <Field Name="RCount">
+          <DataField>RCount</DataField>
+        </Field>
+        <Field Name="cValue_21__Control1102755086">
+          <DataField>cValue_21__Control1102755086</DataField>
+        </Field>
+        <Field Name="cValue_21__Control1102755086Format">
+          <DataField>cValue_21__Control1102755086Format</DataField>
+        </Field>
+        <Field Name="cValue_20__Control1102755071">
+          <DataField>cValue_20__Control1102755071</DataField>
+        </Field>
+        <Field Name="cValue_20__Control1102755071Format">
+          <DataField>cValue_20__Control1102755071Format</DataField>
+        </Field>
+        <Field Name="Employee_NameCaption">
+          <DataField>Employee_NameCaption</DataField>
+        </Field>
+        <Field Name="Employee_CodeCaption">
+          <DataField>Employee_CodeCaption</DataField>
+        </Field>
+        <Field Name="CurrReport_PAGENOCaption">
+          <DataField>CurrReport_PAGENOCaption</DataField>
+        </Field>
+        <Field Name="Payroll_SummaryCaption">
+          <DataField>Payroll_SummaryCaption</DataField>
+        </Field>
+        <Field Name="HR_Employee__Department_Code_Caption">
+          <DataField>HR_Employee__Department_Code_Caption</DataField>
+        </Field>
+        <Field Name="Prepared_by_Caption">
+          <DataField>Prepared_by_Caption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption">
+          <DataField>EmptyStringCaption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control1102755072">
+          <DataField>EmptyStringCaption_Control1102755072</DataField>
+        </Field>
+        <Field Name="NameCaption">
+          <DataField>NameCaption</DataField>
+        </Field>
+        <Field Name="Signature_and_DateCaption">
+          <DataField>Signature_and_DateCaption</DataField>
+        </Field>
+        <Field Name="Signature_and_DateCaption_Control1102755076">
+          <DataField>Signature_and_DateCaption_Control1102755076</DataField>
+        </Field>
+        <Field Name="NameCaption_Control1102755077">
+          <DataField>NameCaption_Control1102755077</DataField>
+        </Field>
+        <Field Name="Authorised_by_Caption">
+          <DataField>Authorised_by_Caption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control1102755079">
+          <DataField>EmptyStringCaption_Control1102755079</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control1102755080">
+          <DataField>EmptyStringCaption_Control1102755080</DataField>
+        </Field>
+        <Field Name="Signature_and_DateCaption_Control1102755081">
+          <DataField>Signature_and_DateCaption_Control1102755081</DataField>
+        </Field>
+        <Field Name="NameCaption_Control1102755082">
+          <DataField>NameCaption_Control1102755082</DataField>
+        </Field>
+        <Field Name="Approved_by_Caption">
+          <DataField>Approved_by_Caption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control1102755084">
+          <DataField>EmptyStringCaption_Control1102755084</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control1102755085">
+          <DataField>EmptyStringCaption_Control1102755085</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

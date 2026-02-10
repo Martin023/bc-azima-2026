@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="en-US" original="Please update this value">
+    <body>
+      <group id="body">
+        <trans-unit id="Query 2196010896 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sales Dashboard</source>
+          <target>Sales Dashboard</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Query Sales Dashboard - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Query 290073310 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item Sales by Customer</source>
+          <target>Item Sales by Customer</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Query Item Sales by Customer - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Query 3725972565 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Sales Orders by Sales Person</source>
+          <target>Sales Orders by Sales Person</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Query Sales Orders by Sales Person - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Query 1091427891 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Bank Rec. Match Candidates</source>
+          <target>Bank Rec. Match Candidates</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Query Bank Rec. Match Candidates - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Query 2686412910 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Workflow Instance</source>
+          <target>Workflow Instance</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Query Workflow Instance - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Query 3791894762 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Workflow Definition</source>
+          <target>Workflow Definition</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Query Workflow Definition - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Query 473401739 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Gen. Jnl. Line Approval Entry</source>
+          <target>Gen. Jnl. Line Approval Entry</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Query Gen. Jnl. Line Approval Entry - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Query 2208341123 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Lot Numbers by Bin</source>
+          <target>Lot Numbers by Bin</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Query Lot Numbers by Bin - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Query 1815919530 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Count Sales Orders</source>
+          <target>Count Sales Orders</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Query Count Sales Orders - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Query 4208586367 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Count Purchase Orders</source>
+          <target>Count Purchase Orders</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Query Count Purchase Orders - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Query 123620639 - QueryElement 2238817011 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>&lt;&lt;ID_Number&gt;&gt;</source>
+          <target>&lt;&lt;ID_Number&gt;&gt;</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Query Online Users - QueryElement ID_Number - Property Caption</note>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

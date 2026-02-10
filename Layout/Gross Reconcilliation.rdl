@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+  </Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_8631">
+          <DataField>ReportForNavId_8631</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="TODAY">
+          <DataField>TODAY</DataField>
+        </Field>
+        <Field Name="ReportForNavId_5750">
+          <DataField>ReportForNavId_5750</DataField>
+        </Field>
+        <Field Name="Monthly_Reconcilliation_TransCode">
+          <DataField>Monthly_Reconcilliation_TransCode</DataField>
+        </Field>
+        <Field Name="Monthly_Reconcilliation_Description">
+          <DataField>Monthly_Reconcilliation_Description</DataField>
+        </Field>
+        <Field Name="Monthly_Reconcilliation_CurrAmount">
+          <DataField>Monthly_Reconcilliation_CurrAmount</DataField>
+        </Field>
+        <Field Name="Monthly_Reconcilliation_CurrAmountFormat">
+          <DataField>Monthly_Reconcilliation_CurrAmountFormat</DataField>
+        </Field>
+        <Field Name="Monthly_Reconcilliation_PrevAmount">
+          <DataField>Monthly_Reconcilliation_PrevAmount</DataField>
+        </Field>
+        <Field Name="Monthly_Reconcilliation_PrevAmountFormat">
+          <DataField>Monthly_Reconcilliation_PrevAmountFormat</DataField>
+        </Field>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="CurrAmount_PrevAmount">
+          <DataField>CurrAmount_PrevAmount</DataField>
+        </Field>
+        <Field Name="CurrAmount_PrevAmountFormat">
+          <DataField>CurrAmount_PrevAmountFormat</DataField>
+        </Field>
+        <Field Name="Monthly_Reconcilliation_Employee">
+          <DataField>Monthly_Reconcilliation_Employee</DataField>
+        </Field>
+        <Field Name="Monthly_Reconcilliation_Group_Order">
+          <DataField>Monthly_Reconcilliation_Group_Order</DataField>
+        </Field>
+        <Field Name="Monthly_Reconcilliation_Refference_Code">
+          <DataField>Monthly_Reconcilliation_Refference_Code</DataField>
+        </Field>
+        <Field Name="Monthly_Reconcilliation_Entry_Exit">
+          <DataField>Monthly_Reconcilliation_Entry_Exit</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

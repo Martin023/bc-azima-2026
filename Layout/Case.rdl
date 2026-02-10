@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+  </Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="CaseNumber_Legal">
+          <DataField>CaseNumber_Legal</DataField>
+        </Field>
+        <Field Name="DateofComplaint_Legal">
+          <DataField>DateofComplaint_Legal</DataField>
+        </Field>
+        <Field Name="TypeofComplainant_Legal">
+          <DataField>TypeofComplainant_Legal</DataField>
+        </Field>
+        <Field Name="RecommendedAction_Legal">
+          <DataField>RecommendedAction_Legal</DataField>
+        </Field>
+        <Field Name="DescriptionofComplaint_Legal">
+          <DataField>DescriptionofComplaint_Legal</DataField>
+        </Field>
+        <Field Name="Reporter_Legal">
+          <DataField>Reporter_Legal</DataField>
+        </Field>
+        <Field Name="Witness_Legal">
+          <DataField>Witness_Legal</DataField>
+        </Field>
+        <Field Name="ActionTaken_Legal">
+          <DataField>ActionTaken_Legal</DataField>
+        </Field>
+        <Field Name="DateToDiscussCase_Legal">
+          <DataField>DateToDiscussCase_Legal</DataField>
+        </Field>
+        <Field Name="DisciplinaryRemarks_Legal">
+          <DataField>DisciplinaryRemarks_Legal</DataField>
+        </Field>
+        <Field Name="Comments_Legal">
+          <DataField>Comments_Legal</DataField>
+        </Field>
+        <Field Name="CaseDiscussion_Legal">
+          <DataField>CaseDiscussion_Legal</DataField>
+        </Field>
+        <Field Name="BodyHandlingTheComplaint_Legal">
+          <DataField>BodyHandlingTheComplaint_Legal</DataField>
+        </Field>
+        <Field Name="Recomendations_Legal">
+          <DataField>Recomendations_Legal</DataField>
+        </Field>
+        <Field Name="AccusedEmployee_Legal">
+          <DataField>AccusedEmployee_Legal</DataField>
+        </Field>
+        <Field Name="PolicyDescription_Legal">
+          <DataField>PolicyDescription_Legal</DataField>
+        </Field>
+        <Field Name="TakenActionDescription_Legal">
+          <DataField>TakenActionDescription_Legal</DataField>
+        </Field>
+        <Field Name="ReporterName_Legal">
+          <DataField>ReporterName_Legal</DataField>
+        </Field>
+        <Field Name="Witness1Name_Legal">
+          <DataField>Witness1Name_Legal</DataField>
+        </Field>
+        <Field Name="LegalType_Legal">
+          <DataField>LegalType_Legal</DataField>
+        </Field>
+        <Field Name="AccusedName_Legal">
+          <DataField>AccusedName_Legal</DataField>
+        </Field>
+        <Field Name="ActionDurationStartDate_Legal">
+          <DataField>ActionDurationStartDate_Legal</DataField>
+        </Field>
+        <Field Name="ActionDurationEndDate_Legal">
+          <DataField>ActionDurationEndDate_Legal</DataField>
+        </Field>
+        <Field Name="Status_Legal">
+          <DataField>Status_Legal</DataField>
+        </Field>
+        <Field Name="PlaintiffType_Legal">
+          <DataField>PlaintiffType_Legal</DataField>
+        </Field>
+        <Field Name="Plaintiff_Legal">
+          <DataField>Plaintiff_Legal</DataField>
+        </Field>
+        <Field Name="Name_Legal">
+          <DataField>Name_Legal</DataField>
+        </Field>
+        <Field Name="AccusedType_Legal">
+          <DataField>AccusedType_Legal</DataField>
+        </Field>
+        <Field Name="TotalCost_Legal">
+          <DataField>TotalCost_Legal</DataField>
+        </Field>
+        <Field Name="TotalCost_LegalFormat">
+          <DataField>TotalCost_LegalFormat</DataField>
+        </Field>
+        <Field Name="CaseLevel_Legal">
+          <DataField>CaseLevel_Legal</DataField>
+        </Field>
+        <Field Name="Appealed_Legal">
+          <DataField>Appealed_Legal</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

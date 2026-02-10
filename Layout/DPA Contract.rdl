@@ -1,0 +1,609 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>95ea5081-a7f1-4e1e-b4e7-59924038591f</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="Textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>
+This Data Processing Agreement is made on this </Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>Date of Execution</Label>
+                    <Value>=First(Fields!Date_of_Excecution.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <Format>D</Format>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> Between
+Mwalimu National Savings and Credit Cooperative Society Limited a cooperative society registered under the Cooperative Societies Act No. 14 of 1997 Reg. No. CS/2265 and licensed to undertake Sacco business under the Sacco Societies Act 2008, of P.O Box number 62641-00200 Nairobi, Kenya and having its registered office at Mwalimu Towers, Hill Lane off Mara Road (hereinafter called “the Data Controller” which expression shall where the context so requires, include its successors in title and permitted assigns ) of the one part </Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>                                                                                           and
+</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>Contractor Name</Label>
+                    <Value>=First(Fields!ContractorName.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> Limited, </Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>Contractor Description</Label>
+                    <Value>=First(Fields!Contractor_Description.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> (hereinafter called “the Data Processor” which expression shall where the context so requires, include its successors in title and permitted assigns) of the other part.
+
+WHEREAS
+(A)	The Data Controller has engaged the Data Processor a bank licensed by the Central Bank of Kenya to provide Direct Debit Services electronically.
+(B)	The provision of the Direct Debit Services implies the processing of personal data, to the Data Processor.
+(C)	The Parties seek to implement a data processing agreement that complies with the requirements of the current legal framework in relation to data processing and with the Data Protection Act of 2019 and the Regulations thereto.
+(D)	The Parties wish to lay down their rights and obligations.
+
+IT IS AGREED AS FOLLOWS:
+
+1.	Definitions and Interpretation
+
+1.1	Unless otherwise defined herein, capitalized terms and expressions used in this Agreement shall have the following meaning:
+
+1.1.1	"Agreement" means this Data Processing Agreement (DPA) and all Schedules.
+
+1.1.2	"Personal Data" means any Personal Data Processed by a Contracted Processor on behalf of controller pursuant to or in connection with the Principal Agreement. 
+
+1.1.3	"Contracted Processor" means a natural or legal person, public authority, agency, or other body which processes personal data on behalf of the data controller. For the purposes of this Agreement, it means </Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>Contractor Name</Label>
+                    <Value>=First(Fields!ContractorName.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> Limited.
+
+1.1.4	"Data Protection Laws" means the General Data Protection Regulation (EU) 2016/679 (GDPR), the Kenyan Data Protection Act 2019 and any legislation and/or regulation implementing or made pursuant, or which amends, replaces, re-enacts or consolidates them, including legislation of any relevant jurisdiction, and all other applicable laws relating to processing of Personal Data and privacy that may exist in any relevant jurisdiction, including, where applicable, the binding guidance and codes of practice issued by supervisory authorities.
+
+1.1.5	"Data Transfer" means:
+
+1.1.5.1	a transfer of Controllers Personal Data from the Controller to a Contracted Processor; or
+
+1.1.5.2	an onward transfer of the Controller’s Personal Data from a Contracted Processor to a Subcontracted Processor, or between two establishments of a Contracted Processor,
+
+in each case, where such transfer would be prohibited by Data Protection Laws (or by the terms of data transfer agreements put in place to address the data transfer restrictions of Data Protection Laws).
+1.1.6	“Purpose” means for the provision of services under the principal agreements.
+1.1.7	"Sub processor" means any person appointed by or on behalf of Processor to process Personal Data on behalf of the Controller in connection with the Agreement.
+
+1.2	The terms, "Commissioner", "Controller", "Data Subject", "Personal Data Breach", and "Processing" shall have the same meaning as in the Data Protection Act, 2019, and their cognate terms shall be construed accordingly.
+1.3	The types of Personal Data to be Processed shall include, personal data, and sensitive personal data that the Processor may collect or come across as part of implementing the Principal Agreement. 
+1.4	The categories of Data Subjects shall include Controller’s Contacts and other end users including Controller’s employees, contractors, customers, prospects, suppliers, and subcontractors.
+
+2.	Rights and Responsibilities of the Data Controller
+2.1	The Data Controller is the controller of the data that the Data Processor processes on behalf of the Data Controller.
+2.2	The Data Controller is responsible for ensuring that the Processor is entitled to process personal data on behalf of the Data Controller, including that this processing is legal. The Data Controller has the rights and obligations granted to a data controller pursuant to the General Data Protection Regulation
+
+3.	Processing of Controllers Personal Data
+
+3.1	Processor shall:
+
+3.1.1	comply with all applicable Data Protection Laws in the Processing of Controllers Personal Data;
+
+3.1.2	on execution of this Agreement provide the Controller with its Policies on Data Protection and Privacy; and
+
+3.1.3	not Process Controller’s Personal Data other than on the relevant Controller’s documented instructions.
+
+3.2	The Controller instructs Processor to
+3.2.1	Process the authorized data in accordance with the Data Protection Laws;
+3.2.2	Only process data that is absolutely necessary for implementation of the Principal Agreement. The Processor shall seek the Controller’s written authority on the categories of data to be processed; 
+3.2.3	Ensure that any electronic processing of personal data shall be encrypted; and
+3.2.4	Any other written instructions by the Controller. 
+
+4.	Processor Personnel
+
+Processor shall take reasonable steps to ensure the reliability of any employee, agent or contractor of any Contracted Processor who may have access to the Controller’s Personal Data, ensuring in each case that access is strictly limited to those individuals who need to know / access the relevant Controller Personal Data, as strictly necessary for the purposes of the Principal Agreement, and to comply with Applicable Laws in the context of that individual's duties to the Contracted Processor, ensuring that all such individuals are subject to confidentiality undertakings or professional or statutory obligations of confidentiality.
+5.	Security
+
+5.1	The Processor shall be subject to the same requirements as those of the Controller in relation to keeping personal data secure.
+5.2	The Processor shall in relation to the Controller data implement appropriate technical and organizational measures to ensure a level of security appropriate to the risk in processing the data. 
+
+5.3	In assessing the appropriate level of security, Processor shall take account of the risks that are presented by Processing, in particular from a Personal Data Breach.
+
+6.	Sub processing
+
+6.1	The Processor shall not appoint (or disclose any Controllers Personal Data) to any Sub-processor unless required or authorized by the Controller. Where authorization is granted, the Processor shall cause the Sub-processor to execute a Data Processing Agreement that aligns in form and substance with the provisions of this agreement.
+6.2	where sub-processing is permitted, the transfer of Personal Data to the subcontractor and the processing of such Personal Data shall only take place upon satisfaction of the sharing Party that the Sub-processor will comply with all the applicable Data Protection requirements.
+
+7.	Data Subject Rights
+
+7.1	Taking into account the nature of the Processing, Processor shall assist the Controller by implementing appropriate technical and organizational measures, insofar as this is possible, for the fulfilment of the Controller obligations, as reasonably understood by Controller, to respond to requests to exercise Data Subject rights under the Data Protection Laws.
+
+7.2	Processor shall:
+
+7.2.1	promptly notify Controller if it receives a request from a Data Subject under any Data Protection Law in respect of Controller Personal Data; and
+
+7.2.2	ensure that it does not respond to that request except on the documented instructions of Controller or as required by Applicable Laws to which the Processor is subject, in which case Processor shall to the extent permitted by Applicable Laws inform Controller of that legal requirement before the Contracted Processor responds to the request.
+
+7.2.3	promptly inform the Controller of any complaints from any third party (including but not limited to End Users) concerning the processing of Personal Data.
+8.	Personal Data Breach
+
+8.1	Processor shall notify Controller without undue delay upon Processor becoming aware of a Personal Data Breach affecting Controller Personal Data, providing Controller with sufficient information to allow the Controller to meet any obligations to report or inform Data Subjects of the Personal Data Breach under the Data Protection Laws.
+8.2	in the event of a Personal Data Breach affecting Personal Data exchanged in the context of the Agreement, the Party having discovered such Personal Data Breach shall unless prohibited by applicable law:
+i.	notify the other Party without undue delay and provide the other Party with a description of the Personal Data Breach.
+ii.	promptly implement and maintain all measures and steps that are necessary to remedy the Personal Data Breach, mitigate its impact, and minimize the likelihood of a future Personal Data Breach; and
+iii.	promptly restore any affected Personal Data, to the extent possible.
+
+8.3	The Processor shall not use the Personal Data for sending unsolicited electronic marketing communications to End Users.
+8.4	Processor shall co-operate with the Controller and take reasonable commercial steps as are directed by Controller to assist in the investigation, mitigation and remediation of each such Personal Data Breach.
+
+9.	Data Protection Impact Assessment and Prior Consultation
+Processor shall provide reasonable assistance to the Controller with any data protection impact assessments, and prior consultations with Supervising Authorities or other competent data privacy authorities, which Controller reasonably considers to be required the Data Protection Law, in each case solely in relation to Processing of Controller’s Personal Data by and taking into account the nature of the Processing and information available to, the Contracted Processors.
+
+10.	Deletion or return of Controllers Personal Data
+
+10.1	When the Agreement expires or terminates, the Processor shall, based on Controller's instructions, delete or return to Controller without any additional cost, in a manner acceptable to the Controller, all personal data, and delete existing copies unless storage of personal data is required pursuant to the law. The Processor undertakes to actively seek instructions from the Controller without delay.
+10.2	Subject to this section 10 Processor shall promptly and in any event within
+10 business days of the date of cessation of any Services involving the Processing of Controllers Personal Data (the "Cessation Date"), delete and procure the deletion of all copies of those Controller Personal Data.
+
+10.3	Processor shall provide written certification to Controller that it has fully complied with this section 10 within 10 business days of the Cessation Date.
+
+11.	Audit rights
+
+11.1	Subject to this section 11, Processor shall make available to the Controller on request all information necessary to demonstrate compliance with this Agreement, and shall allow for and contribute to audits, including inspections, by the Controller or an auditor mandated by the Controller in relation to the Processing of the Controller’s Personal Data by the Contracted Processors.
+
+11.2	Information and audit rights of the Controller only arise under section 11.1 to the extent that the Agreement does not otherwise give them information and audit rights meeting the relevant requirements of Data Protection Law.
+
+12.	Data Transfer
+
+12.1	The Processor shall not transfer or authorize the transfer of Data to countries outside Kenya without the prior written consent of the Controller. If personal data processed under this Agreement is transferred outside Kenya, the Parties shall ensure that the personal data are adequately protected.
+
+12.2	The Processor shall not transfer or authorize the transfer of Data to third parties without the prior written consent of the Controller. If personal data processed under this Agreement is transferred to third parties, the Parties shall ensure that the personal data are adequately protected.
+
+13.	General Terms
+
+13.1	Confidentiality. Each Party must keep this Agreement and information it receives about the other Party and its business in connection with this Agreement (“Confidential Information”) confidential and must not use or disclose that Confidential Information without the prior written consent of the other Party except to the extent that:
+
+(a)	disclosure is required by law;
+
+(b)	the relevant information is already in the public domain.
+
+13.2	Notices. All notices and communications given under this Agreement must be in writing and will be delivered personally, sent by post or sent by email to the address or email address set out in the heading of this Agreement at such other address as notified from time to time by the Parties changing address.
+14.	Term
+	This Data Processing Agreement is effective from its signing and for as long as the 	Processor processes personal data on Controller's behalf. 
+	
+	In the event that the Processor is in breach of its obligations under the DPA or Data 	Protection Law and fails to remedy the deficiency within thirty (30) days of the 	Processor being notified of the breach, or within the time period agreed between 	the Parties, the Bank has the right to terminate the Agreement with immediate 	effect or the longer period of notice notified by Bank.
+15.	Damages and Compensation
+
+The Processor shall, without limitation, hold harmless and indemnify Controller in the event of damage or loss of data that is attributable to Processor's or Sub-processor’s processing of personal data in breach of the Data Processing Agreement or the Data Protection Laws. For the avoidance of doubt, administrative fines are imposed on the Party in breach of its obligations and, in consequence, neither Party will bear the other Party’s administrative fines. 
+
+16.	Governing Law and Jurisdiction
+
+16.1	This Agreement is governed by the Laws of Kenya
+
+16.2	Any dispute arising in connection with this Agreement, which the Parties will not be able to resolve amicably, will be submitted to the exclusive jurisdiction of the courts of Kenya.
+
+17.	The Agreement shall be read in tandem with the Principal Agreement and the Non-Disclosure Agreement (where applicable)
+
+
+IN WITNESS WHEREOF the parties have executed the Agreement on the date hereinbefore acknowledged.
+			           
+SIGNED and SEALED with the Common Seal of 
+MWALIMU NATIONAL SAVINGS AND CREDIT COOPERATIVE SOCIETY LIMITED	           			
+
+  </Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>ChairMan</Label>
+                    <Value>=First(Fields!Chairman.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>                  …………………………..
+CHAIRMAN					      
+                                                                                    </Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Label>Secretary</Label>
+                    <Value>=First(Fields!Secretary.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>				      
+SECRETARY	                …………………………..    
+							      
+							      </Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value xml:space="preserve">	</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>Treasurer</Label>
+                    <Value>=First(Fields!Treasurer.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>			      
+TREASURER                 …………………………   
+							      
+</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>CEO</Label>
+                    <Value>=First(Fields!CEO.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>		      
+CEO		                              ……………………………   
+
+
+And Before me:
+
+
+Advocate
+
+
+				
+
+ SIGNED by the duly authorised Attorney of
+</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>Contractor</Label>
+                    <Value>=First(Fields!ContractorName.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> LIMITED
+		</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>
+Name………………………………..    				
+Designation………………………...			
+Signature…………………………….		      
+		  
+
+
+
+And before me:
+
+
+Advocate
+
+
+
+
+
+
+</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>11.04861in</Top>
+            <Height>45.70139in</Height>
+            <Width>8.10417in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>
+MWALIMU NATIONAL SAVINGS AND CREDIT COOPERATIVE SOCIETY LIMITED
+
+
+
+AND
+
+
+
+
+</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>16pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>Contractor Name</Label>
+                    <Value>=First(Fields!ContractorName.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>16pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>
+
+
+
+
+
+DATA PROCESSING AGREEMENT
+
+
+</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>16pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>0.17639cm</Top>
+            <Left>0.34078cm</Left>
+            <Height>27.71069cm</Height>
+            <Width>19.94486cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>145.80306cm</Height>
+        <Style />
+      </Body>
+      <Width>20.58459cm</Width>
+      <Page>
+        <PageHeader>
+          <Height>2.72203cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
+        <PageFooter>
+          <Height>2.54cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>22cm</PageWidth>
+        <LeftMargin>1cm</LeftMargin>
+        <RightMargin>0cm</RightMargin>
+        <TopMargin>0cm</TopMargin>
+        <BottomMargin>0cm</BottomMargin>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ContractNo">
+          <DataField>ContractNo</DataField>
+        </Field>
+        <Field Name="ContractorNo">
+          <DataField>ContractorNo</DataField>
+        </Field>
+        <Field Name="ContractorType">
+          <DataField>ContractorType</DataField>
+        </Field>
+        <Field Name="ContractorName">
+          <DataField>ContractorName</DataField>
+        </Field>
+        <Field Name="ContractType">
+          <DataField>ContractType</DataField>
+        </Field>
+        <Field Name="Contractor_Description">
+          <DataField>Contractor_Description</DataField>
+        </Field>
+        <Field Name="Date_of_Excecution">
+          <DataField>Date_of_Excecution</DataField>
+        </Field>
+        <Field Name="PartytotheContract">
+          <DataField>PartytotheContract</DataField>
+        </Field>
+        <Field Name="Chairman">
+          <DataField>Chairman</DataField>
+        </Field>
+        <Field Name="CEO">
+          <DataField>CEO</DataField>
+        </Field>
+        <Field Name="Secretary">
+          <DataField>Secretary</DataField>
+        </Field>
+        <Field Name="Treasurer">
+          <DataField>Treasurer</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

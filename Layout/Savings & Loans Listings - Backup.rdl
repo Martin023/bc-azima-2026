@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+  </Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="PayrollStaffNo_Members">
+          <DataField>PayrollStaffNo_Members</DataField>
+        </Field>
+        <Field Name="No_Members">
+          <DataField>No_Members</DataField>
+        </Field>
+        <Field Name="Name_Members">
+          <DataField>Name_Members</DataField>
+        </Field>
+        <Field Name="InvBalance">
+          <DataField>InvBalance</DataField>
+        </Field>
+        <Field Name="InvBalanceFormat">
+          <DataField>InvBalanceFormat</DataField>
+        </Field>
+        <Field Name="RMFBalance">
+          <DataField>RMFBalance</DataField>
+        </Field>
+        <Field Name="RMFBalanceFormat">
+          <DataField>RMFBalanceFormat</DataField>
+        </Field>
+        <Field Name="SharesCap">
+          <DataField>SharesCap</DataField>
+        </Field>
+        <Field Name="SharesCapFormat">
+          <DataField>SharesCapFormat</DataField>
+        </Field>
+        <Field Name="DepositBal">
+          <DataField>DepositBal</DataField>
+        </Field>
+        <Field Name="DepositBalFormat">
+          <DataField>DepositBalFormat</DataField>
+        </Field>
+        <Field Name="DevLoanBal">
+          <DataField>DevLoanBal</DataField>
+        </Field>
+        <Field Name="DevLoanBalFormat">
+          <DataField>DevLoanBalFormat</DataField>
+        </Field>
+        <Field Name="SchFeeLoanBal">
+          <DataField>SchFeeLoanBal</DataField>
+        </Field>
+        <Field Name="SchFeeLoanBalFormat">
+          <DataField>SchFeeLoanBalFormat</DataField>
+        </Field>
+        <Field Name="EmergLoanBal">
+          <DataField>EmergLoanBal</DataField>
+        </Field>
+        <Field Name="EmergLoanBalFormat">
+          <DataField>EmergLoanBalFormat</DataField>
+        </Field>
+        <Field Name="DefLoanBal">
+          <DataField>DefLoanBal</DataField>
+        </Field>
+        <Field Name="DefLoanBalFormat">
+          <DataField>DefLoanBalFormat</DataField>
+        </Field>
+        <Field Name="SerialNo">
+          <DataField>SerialNo</DataField>
+        </Field>
+        <Field Name="TotalLoans">
+          <DataField>TotalLoans</DataField>
+        </Field>
+        <Field Name="TotalLoansFormat">
+          <DataField>TotalLoansFormat</DataField>
+        </Field>
+        <Field Name="BBFBalance">
+          <DataField>BBFBalance</DataField>
+        </Field>
+        <Field Name="BBFBalanceFormat">
+          <DataField>BBFBalanceFormat</DataField>
+        </Field>
+        <Field Name="KaribuLoan">
+          <DataField>KaribuLoan</DataField>
+        </Field>
+        <Field Name="KaribuLoanFormat">
+          <DataField>KaribuLoanFormat</DataField>
+        </Field>
+        <Field Name="JisaidieTopUp">
+          <DataField>JisaidieTopUp</DataField>
+        </Field>
+        <Field Name="JisaidieTopUpFormat">
+          <DataField>JisaidieTopUpFormat</DataField>
+        </Field>
+        <Field Name="MkomboziLoan">
+          <DataField>MkomboziLoan</DataField>
+        </Field>
+        <Field Name="MkomboziLoanFormat">
+          <DataField>MkomboziLoanFormat</DataField>
+        </Field>
+        <Field Name="Jisaidie72Loan">
+          <DataField>Jisaidie72Loan</DataField>
+        </Field>
+        <Field Name="Jisaidie72LoanFormat">
+          <DataField>Jisaidie72LoanFormat</DataField>
+        </Field>
+        <Field Name="FosaAdvance">
+          <DataField>FosaAdvance</DataField>
+        </Field>
+        <Field Name="FosaAdvanceFormat">
+          <DataField>FosaAdvanceFormat</DataField>
+        </Field>
+        <Field Name="PersonalLoan">
+          <DataField>PersonalLoan</DataField>
+        </Field>
+        <Field Name="PersonalLoanFormat">
+          <DataField>PersonalLoanFormat</DataField>
+        </Field>
+        <Field Name="SalaryInAdvance">
+          <DataField>SalaryInAdvance</DataField>
+        </Field>
+        <Field Name="SalaryInAdvanceFormat">
+          <DataField>SalaryInAdvanceFormat</DataField>
+        </Field>
+        <Field Name="MboostaLoan">
+          <DataField>MboostaLoan</DataField>
+        </Field>
+        <Field Name="MboostaLoanFormat">
+          <DataField>MboostaLoanFormat</DataField>
+        </Field>
+        <Field Name="MOULoan">
+          <DataField>MOULoan</DataField>
+        </Field>
+        <Field Name="MOULoanFormat">
+          <DataField>MOULoanFormat</DataField>
+        </Field>
+        <Field Name="MaendeleoLoan">
+          <DataField>MaendeleoLoan</DataField>
+        </Field>
+        <Field Name="MaendeleoLoanFormat">
+          <DataField>MaendeleoLoanFormat</DataField>
+        </Field>
+        <Field Name="RefinancingLoan">
+          <DataField>RefinancingLoan</DataField>
+        </Field>
+        <Field Name="RefinancingLoanFormat">
+          <DataField>RefinancingLoanFormat</DataField>
+        </Field>
+        <Field Name="SalaryAdvance">
+          <DataField>SalaryAdvance</DataField>
+        </Field>
+        <Field Name="SalaryAdvanceFormat">
+          <DataField>SalaryAdvanceFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

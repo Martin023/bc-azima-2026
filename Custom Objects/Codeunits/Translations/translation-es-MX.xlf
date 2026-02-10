@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="es-MX" original="Please update this value">
+    <body>
+      <group id="body">
+        <trans-unit id="Codeunit 1412708984 - NamedType 3752334001" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Do you want to reverse the entries?</source>
+          <target>¿Desea revertir estos movimientos?</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Silent Reversal-Post - NamedType Text002</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1412708984 - NamedType 95063322" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The entries were successfully reversed.</source>
+          <target>Movimientos revertidos correctamente.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Silent Reversal-Post - NamedType Text003</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1412708984 - NamedType 732759939" size-unit="char" translate="yes" xml:space="preserve">
+          <source>To reverse these entries, correcting entries will be posted.</source>
+          <target>Para revertir los movimientos, se registrarán los movimientos que los corrijan.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Silent Reversal-Post - NamedType Text004</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1412708984 - NamedType 1370456556" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Do you want to reverse the entries and print the report?</source>
+          <target>¿Desea revertir los movimientos e imprimir el informe?</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Silent Reversal-Post - NamedType Text005</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1412708984 - NamedType 2008153173" size-unit="char" translate="yes" xml:space="preserve">
+          <source>There is nothing to reverse.</source>
+          <target>No hay movimientos para revertir.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Silent Reversal-Post - NamedType Text006</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1412708984 - NamedType 2645849790" size-unit="char" translate="yes" xml:space="preserve">
+          <source>\There are one or more FA Ledger Entries. You should consider using the fixed asset function Cancel Entries.</source>
+          <target>\Hay uno o varios movimientos de A/F. Es recomendable usar la función de activos fijos de cancelar movimientos.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Silent Reversal-Post - NamedType Text007</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1412708984 - NamedType 3283546407" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Changes have been made to posted entries after the window was opened.\Close and reopen the window to continue.</source>
+          <target>Se han modificado entradas registradas después de abrir la ventana.\Cierre la ventana y vuelva a abrirla para continuar.</target>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit Silent Reversal-Post - NamedType Text008</note>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="NoofdaysRemaining">
+          <DataField>NoofdaysRemaining</DataField>
+        </Field>
+        <Field Name="Notice_Type">
+          <DataField>Notice_Type</DataField>
+        </Field>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="Employer_Liability">
+          <DataField>Employer_Liability</DataField>
+        </Field>
+        <Field Name="Employer_LiabilityFormat">
+          <DataField>Employer_LiabilityFormat</DataField>
+        </Field>
+        <Field Name="MemberNo">
+          <DataField>MemberNo</DataField>
+        </Field>
+        <Field Name="CRM_Application_No_">
+          <DataField>CRM_Application_No_</DataField>
+        </Field>
+        <Field Name="MemberName">
+          <DataField>MemberName</DataField>
+        </Field>
+        <Field Name="Reasonforwithdrawal">
+          <DataField>Reasonforwithdrawal</DataField>
+        </Field>
+        <Field Name="WithdrawaNoticelDate">
+          <DataField>WithdrawaNoticelDate</DataField>
+        </Field>
+        <Field Name="MaturityDate">
+          <DataField>MaturityDate</DataField>
+        </Field>
+        <Field Name="DateApproved">
+          <DataField>DateApproved</DataField>
+        </Field>
+        <Field Name="ApprovedBy">
+          <DataField>ApprovedBy</DataField>
+        </Field>
+        <Field Name="PostedBy">
+          <DataField>PostedBy</DataField>
+        </Field>
+        <Field Name="PostedDate">
+          <DataField>PostedDate</DataField>
+        </Field>
+        <Field Name="Status">
+          <DataField>Status</DataField>
+        </Field>
+        <Field Name="BranchCode">
+          <DataField>BranchCode</DataField>
+        </Field>
+        <Field Name="ClosureFees">
+          <DataField>ClosureFees</DataField>
+        </Field>
+        <Field Name="ClosureFeesFormat">
+          <DataField>ClosureFeesFormat</DataField>
+        </Field>
+        <Field Name="LoansOutstandingBalance">
+          <DataField>LoansOutstandingBalance</DataField>
+        </Field>
+        <Field Name="LoansOutstandingBalanceFormat">
+          <DataField>LoansOutstandingBalanceFormat</DataField>
+        </Field>
+        <Field Name="LoansOutstandingInterest">
+          <DataField>LoansOutstandingInterest</DataField>
+        </Field>
+        <Field Name="LoansOutstandingInterestFormat">
+          <DataField>LoansOutstandingInterestFormat</DataField>
+        </Field>
+        <Field Name="TotalLoansOutstandingBalance">
+          <DataField>TotalLoansOutstandingBalance</DataField>
+        </Field>
+        <Field Name="TotalLoansOutstandingBalanceFormat">
+          <DataField>TotalLoansOutstandingBalanceFormat</DataField>
+        </Field>
+        <Field Name="MemberDeposit">
+          <DataField>MemberDeposit</DataField>
+        </Field>
+        <Field Name="MemberDepositFormat">
+          <DataField>MemberDepositFormat</DataField>
+        </Field>
+        <Field Name="ClosureDate">
+          <DataField>ClosureDate</DataField>
+        </Field>
+        <Field Name="Paid">
+          <DataField>Paid</DataField>
+        </Field>
+        <Field Name="Age">
+          <DataField>Age</DataField>
+        </Field>
+        <Field Name="Gender">
+          <DataField>Gender</DataField>
+        </Field>
+        <Field Name="PhoneNumber">
+          <DataField>PhoneNumber</DataField>
+        </Field>
+        <Field Name="EmployerCode">
+          <DataField>EmployerCode</DataField>
+        </Field>
+        <Field Name="MemberShares">
+          <DataField>MemberShares</DataField>
+        </Field>
+        <Field Name="MemberSharesFormat">
+          <DataField>MemberSharesFormat</DataField>
+        </Field>
+        <Field Name="MemberDeposits">
+          <DataField>MemberDeposits</DataField>
+        </Field>
+        <Field Name="MemberDepositsFormat">
+          <DataField>MemberDepositsFormat</DataField>
+        </Field>
+        <Field Name="PFNo">
+          <DataField>PFNo</DataField>
+        </Field>
+        <Field Name="DatePaid">
+          <DataField>DatePaid</DataField>
+        </Field>
+        <Field Name="DepositRefunded">
+          <DataField>DepositRefunded</DataField>
+        </Field>
+        <Field Name="DepositRefundedFormat">
+          <DataField>DepositRefundedFormat</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Name">
+          <DataField>CompanyInformation_Name</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Picture">
+          <DataField>CompanyInformation_Picture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="TODAY">
+          <DataField>TODAY</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

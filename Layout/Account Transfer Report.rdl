@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+  </Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="SourceNo">
+          <DataField>SourceNo</DataField>
+        </Field>
+        <Field Name="SourceName">
+          <DataField>SourceName</DataField>
+        </Field>
+        <Field Name="Sourceamnt">
+          <DataField>Sourceamnt</DataField>
+        </Field>
+        <Field Name="SourceamntFormat">
+          <DataField>SourceamntFormat</DataField>
+        </Field>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="SourceAccountNo">
+          <DataField>SourceAccountNo</DataField>
+        </Field>
+        <Field Name="SourceAccountNam">
+          <DataField>SourceAccountNam</DataField>
+        </Field>
+        <Field Name="SourceTransactionType">
+          <DataField>SourceTransactionType</DataField>
+        </Field>
+        <Field Name="SourceLoanNo">
+          <DataField>SourceLoanNo</DataField>
+        </Field>
+        <Field Name="SourceAmount">
+          <DataField>SourceAmount</DataField>
+        </Field>
+        <Field Name="SourceAmountFormat">
+          <DataField>SourceAmountFormat</DataField>
+        </Field>
+        <Field Name="SourceAccountType">
+          <DataField>SourceAccountType</DataField>
+        </Field>
+        <Field Name="ExternalDocumentNo">
+          <DataField>ExternalDocumentNo</DataField>
+        </Field>
+        <Field Name="EntryNo">
+          <DataField>EntryNo</DataField>
+        </Field>
+        <Field Name="ProductName">
+          <DataField>ProductName</DataField>
+        </Field>
+        <Field Name="Balance">
+          <DataField>Balance</DataField>
+        </Field>
+        <Field Name="BalanceFormat">
+          <DataField>BalanceFormat</DataField>
+        </Field>
+        <Field Name="AvailableBalance">
+          <DataField>AvailableBalance</DataField>
+        </Field>
+        <Field Name="AvailableBalanceFormat">
+          <DataField>AvailableBalanceFormat</DataField>
+        </Field>
+        <Field Name="ProductCode">
+          <DataField>ProductCode</DataField>
+        </Field>
+        <Field Name="TransferType">
+          <DataField>TransferType</DataField>
+        </Field>
+        <Field Name="MemberNo">
+          <DataField>MemberNo</DataField>
+        </Field>
+        <Field Name="ReportForNavId_17">
+          <DataField>ReportForNavId_17</DataField>
+        </Field>
+        <Field Name="No1">
+          <DataField>No1</DataField>
+        </Field>
+        <Field Name="DestinationAccountType">
+          <DataField>DestinationAccountType</DataField>
+        </Field>
+        <Field Name="DestinationAccountNo">
+          <DataField>DestinationAccountNo</DataField>
+        </Field>
+        <Field Name="DestinationLoanNo">
+          <DataField>DestinationLoanNo</DataField>
+        </Field>
+        <Field Name="DestinationTransactionType">
+          <DataField>DestinationTransactionType</DataField>
+        </Field>
+        <Field Name="DestinationAccountName">
+          <DataField>DestinationAccountName</DataField>
+        </Field>
+        <Field Name="DestinationAmount">
+          <DataField>DestinationAmount</DataField>
+        </Field>
+        <Field Name="DestinationAmountFormat">
+          <DataField>DestinationAmountFormat</DataField>
+        </Field>
+        <Field Name="ExternalDocumentNo2">
+          <DataField>ExternalDocumentNo2</DataField>
+        </Field>
+        <Field Name="EntryNo2">
+          <DataField>EntryNo2</DataField>
+        </Field>
+        <Field Name="ProductNam">
+          <DataField>ProductNam</DataField>
+        </Field>
+        <Field Name="ProductCode2">
+          <DataField>ProductCode2</DataField>
+        </Field>
+        <Field Name="TransferType2">
+          <DataField>TransferType2</DataField>
+        </Field>
+        <Field Name="MemberNo2">
+          <DataField>MemberNo2</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

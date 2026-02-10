@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+  </Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="AccountNo_SkyMobileLoanAppraisal">
+          <DataField>AccountNo_SkyMobileLoanAppraisal</DataField>
+        </Field>
+        <Field Name="Name_SkyMobileLoanAppraisal">
+          <DataField>Name_SkyMobileLoanAppraisal</DataField>
+        </Field>
+        <Field Name="MemberNo_SkyMobileLoanAppraisal">
+          <DataField>MemberNo_SkyMobileLoanAppraisal</DataField>
+        </Field>
+        <Field Name="PhoneNo_SkyMobileLoanAppraisal">
+          <DataField>PhoneNo_SkyMobileLoanAppraisal</DataField>
+        </Field>
+        <Field Name="IDNo_SkyMobileLoanAppraisal">
+          <DataField>IDNo_SkyMobileLoanAppraisal</DataField>
+        </Field>
+        <Field Name="MBoosta_SkyMobileLoanAppraisal">
+          <DataField>MBoosta_SkyMobileLoanAppraisal</DataField>
+        </Field>
+        <Field Name="MBoosta_SkyMobileLoanAppraisalFormat">
+          <DataField>MBoosta_SkyMobileLoanAppraisalFormat</DataField>
+        </Field>
+        <Field Name="SaccoName">
+          <DataField>SaccoName</DataField>
+        </Field>
+        <Field Name="SaccoAddress">
+          <DataField>SaccoAddress</DataField>
+        </Field>
+        <Field Name="Slogan">
+          <DataField>Slogan</DataField>
+        </Field>
+        <Field Name="SaccoPhone">
+          <DataField>SaccoPhone</DataField>
+        </Field>
+        <Field Name="DateIssued">
+          <DataField>DateIssued</DataField>
+        </Field>
+        <Field Name="Email">
+          <DataField>Email</DataField>
+        </Field>
+        <Field Name="Website">
+          <DataField>Website</DataField>
+        </Field>
+        <Field Name="PrintedBy">
+          <DataField>PrintedBy</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

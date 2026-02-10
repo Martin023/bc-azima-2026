@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+  </Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1000000000">
+          <DataField>ReportForNavId_1000000000</DataField>
+        </Field>
+        <Field Name="OpBal">
+          <DataField>OpBal</DataField>
+        </Field>
+        <Field Name="OpBalFormat">
+          <DataField>OpBalFormat</DataField>
+        </Field>
+        <Field Name="ReportForNavId_1102755000">
+          <DataField>ReportForNavId_1102755000</DataField>
+        </Field>
+        <Field Name="ReportForNavId_1102755001">
+          <DataField>ReportForNavId_1102755001</DataField>
+        </Field>
+        <Field Name="EntryNo_Receipts">
+          <DataField>EntryNo_Receipts</DataField>
+        </Field>
+        <Field Name="PostingDate_Receipts">
+          <DataField>PostingDate_Receipts</DataField>
+        </Field>
+        <Field Name="DocumentNo_Receipts">
+          <DataField>DocumentNo_Receipts</DataField>
+        </Field>
+        <Field Name="Description_Receipts">
+          <DataField>Description_Receipts</DataField>
+        </Field>
+        <Field Name="BalAccountNo_Receipts">
+          <DataField>BalAccountNo_Receipts</DataField>
+        </Field>
+        <Field Name="Amount_Receipts">
+          <DataField>Amount_Receipts</DataField>
+        </Field>
+        <Field Name="Amount_ReceiptsFormat">
+          <DataField>Amount_ReceiptsFormat</DataField>
+        </Field>
+        <Field Name="UserID_Receipts">
+          <DataField>UserID_Receipts</DataField>
+        </Field>
+        <Field Name="ReportForNavId_1102755002">
+          <DataField>ReportForNavId_1102755002</DataField>
+        </Field>
+        <Field Name="EntryNo_OtherPayments">
+          <DataField>EntryNo_OtherPayments</DataField>
+        </Field>
+        <Field Name="PostingDate_OtherPayments">
+          <DataField>PostingDate_OtherPayments</DataField>
+        </Field>
+        <Field Name="DocumentNo_OtherPayments">
+          <DataField>DocumentNo_OtherPayments</DataField>
+        </Field>
+        <Field Name="Description_OtherPayments">
+          <DataField>Description_OtherPayments</DataField>
+        </Field>
+        <Field Name="UserID_OtherPayments">
+          <DataField>UserID_OtherPayments</DataField>
+        </Field>
+        <Field Name="BalAccountNo_OtherPayments">
+          <DataField>BalAccountNo_OtherPayments</DataField>
+        </Field>
+        <Field Name="Amount_OtherPayments">
+          <DataField>Amount_OtherPayments</DataField>
+        </Field>
+        <Field Name="Amount_OtherPaymentsFormat">
+          <DataField>Amount_OtherPaymentsFormat</DataField>
+        </Field>
+        <Field Name="ReportForNavId_1102755003">
+          <DataField>ReportForNavId_1102755003</DataField>
+        </Field>
+        <Field Name="EntryNo_IOUPayments">
+          <DataField>EntryNo_IOUPayments</DataField>
+        </Field>
+        <Field Name="Amount_IOUPayments">
+          <DataField>Amount_IOUPayments</DataField>
+        </Field>
+        <Field Name="Amount_IOUPaymentsFormat">
+          <DataField>Amount_IOUPaymentsFormat</DataField>
+        </Field>
+        <Field Name="PostingDate_IOUPayments">
+          <DataField>PostingDate_IOUPayments</DataField>
+        </Field>
+        <Field Name="DocumentNo_IOUPayments">
+          <DataField>DocumentNo_IOUPayments</DataField>
+        </Field>
+        <Field Name="Description_IOUPayments">
+          <DataField>Description_IOUPayments</DataField>
+        </Field>
+        <Field Name="UserID_IOUPayments">
+          <DataField>UserID_IOUPayments</DataField>
+        </Field>
+        <Field Name="BalAccountNo_IOUPayments">
+          <DataField>BalAccountNo_IOUPayments</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

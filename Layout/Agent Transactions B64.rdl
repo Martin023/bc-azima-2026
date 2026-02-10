@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+  </Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="TransactionID_SkyAgentsTransactions">
+          <DataField>TransactionID_SkyAgentsTransactions</DataField>
+        </Field>
+        <Field Name="TransactionDate_SkyAgentsTransactions">
+          <DataField>TransactionDate_SkyAgentsTransactions</DataField>
+        </Field>
+        <Field Name="AgentCode_SkyAgentsTransactions">
+          <DataField>AgentCode_SkyAgentsTransactions</DataField>
+        </Field>
+        <Field Name="MemberAccount_SkyAgentsTransactions">
+          <DataField>MemberAccount_SkyAgentsTransactions</DataField>
+        </Field>
+        <Field Name="MemberNo_SkyAgentsTransactions">
+          <DataField>MemberNo_SkyAgentsTransactions</DataField>
+        </Field>
+        <Field Name="VendorCommission_SkyAgentsTransactions">
+          <DataField>VendorCommission_SkyAgentsTransactions</DataField>
+        </Field>
+        <Field Name="VendorCommission_SkyAgentsTransactionsFormat">
+          <DataField>VendorCommission_SkyAgentsTransactionsFormat</DataField>
+        </Field>
+        <Field Name="SaccoFee_SkyAgentsTransactions">
+          <DataField>SaccoFee_SkyAgentsTransactions</DataField>
+        </Field>
+        <Field Name="SaccoFee_SkyAgentsTransactionsFormat">
+          <DataField>SaccoFee_SkyAgentsTransactionsFormat</DataField>
+        </Field>
+        <Field Name="Description_SkyAgentsTransactions">
+          <DataField>Description_SkyAgentsTransactions</DataField>
+        </Field>
+        <Field Name="Amount_SkyAgentsTransactions">
+          <DataField>Amount_SkyAgentsTransactions</DataField>
+        </Field>
+        <Field Name="Amount_SkyAgentsTransactionsFormat">
+          <DataField>Amount_SkyAgentsTransactionsFormat</DataField>
+        </Field>
+        <Field Name="DatePosted_SkyAgentsTransactions">
+          <DataField>DatePosted_SkyAgentsTransactions</DataField>
+        </Field>
+        <Field Name="TransactionType_SkyAgentsTransactions">
+          <DataField>TransactionType_SkyAgentsTransactions</DataField>
+        </Field>
+        <Field Name="TransactionName_SkyAgentsTransactions">
+          <DataField>TransactionName_SkyAgentsTransactions</DataField>
+        </Field>
+        <Field Name="LoanNo_SkyAgentsTransactions">
+          <DataField>LoanNo_SkyAgentsTransactions</DataField>
+        </Field>
+        <Field Name="MobileNo_SkyAgentsTransactions">
+          <DataField>MobileNo_SkyAgentsTransactions</DataField>
+        </Field>
+        <Field Name="ClientName_SkyAgentsTransactions">
+          <DataField>ClientName_SkyAgentsTransactions</DataField>
+        </Field>
+        <Field Name="AgentComm">
+          <DataField>AgentComm</DataField>
+        </Field>
+        <Field Name="AgentCommFormat">
+          <DataField>AgentCommFormat</DataField>
+        </Field>
+        <Field Name="PrintedAt">
+          <DataField>PrintedAt</DataField>
+        </Field>
+        <Field Name="PrintedBy">
+          <DataField>PrintedBy</DataField>
+        </Field>
+        <Field Name="TransactionTime_SkyAgentsTransactions">
+          <DataField>TransactionTime_SkyAgentsTransactions</DataField>
+        </Field>
+        <Field Name="AgentCode">
+          <DataField>AgentCode</DataField>
+        </Field>
+        <Field Name="AgentName">
+          <DataField>AgentName</DataField>
+        </Field>
+        <Field Name="MemberName">
+          <DataField>MemberName</DataField>
+        </Field>
+        <Field Name="DateAndTime">
+          <DataField>DateAndTime</DataField>
+        </Field>
+        <Field Name="MobileNumberName">
+          <DataField>MobileNumberName</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

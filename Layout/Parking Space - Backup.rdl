@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="AvailableParkingSlots">
+          <DataField>AvailableParkingSlots</DataField>
+        </Field>
+        <Field Name="ExpectedPaymentamounts">
+          <DataField>ExpectedPaymentamounts</DataField>
+        </Field>
+        <Field Name="ExpectedPaymentamountsFormat">
+          <DataField>ExpectedPaymentamountsFormat</DataField>
+        </Field>
+        <Field Name="ExpectedPyamentDate">
+          <DataField>ExpectedPyamentDate</DataField>
+        </Field>
+        <Field Name="ExternalClientDetails">
+          <DataField>ExternalClientDetails</DataField>
+        </Field>
+        <Field Name="LastPaymentAmount">
+          <DataField>LastPaymentAmount</DataField>
+        </Field>
+        <Field Name="LastPaymentAmountFormat">
+          <DataField>LastPaymentAmountFormat</DataField>
+        </Field>
+        <Field Name="LastPaymentDate">
+          <DataField>LastPaymentDate</DataField>
+        </Field>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="NoSeries">
+          <DataField>NoSeries</DataField>
+        </Field>
+        <Field Name="ParkingAreaAllocated">
+          <DataField>ParkingAreaAllocated</DataField>
+        </Field>
+        <Field Name="ParkingSlotNumberAllocated">
+          <DataField>ParkingSlotNumberAllocated</DataField>
+        </Field>
+        <Field Name="StaffDepartment">
+          <DataField>StaffDepartment</DataField>
+        </Field>
+        <Field Name="StaffFullName">
+          <DataField>StaffFullName</DataField>
+        </Field>
+        <Field Name="StaffTelephoneNumber">
+          <DataField>StaffTelephoneNumber</DataField>
+        </Field>
+        <Field Name="SystemCreatedAt">
+          <DataField>SystemCreatedAt</DataField>
+        </Field>
+        <Field Name="SystemCreatedBy">
+          <DataField>SystemCreatedBy</DataField>
+        </Field>
+        <Field Name="SystemId">
+          <DataField>SystemId</DataField>
+        </Field>
+        <Field Name="SystemModifiedAt">
+          <DataField>SystemModifiedAt</DataField>
+        </Field>
+        <Field Name="SystemModifiedBy">
+          <DataField>SystemModifiedBy</DataField>
+        </Field>
+        <Field Name="TenantPaymentSchedule">
+          <DataField>TenantPaymentSchedule</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

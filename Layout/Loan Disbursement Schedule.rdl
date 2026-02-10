@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+  </Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="HeaderNo">
+          <DataField>HeaderNo</DataField>
+        </Field>
+        <Field Name="DisDate">
+          <DataField>DisDate</DataField>
+        </Field>
+        <Field Name="TotalAmount_LoanDisbursementHeader">
+          <DataField>TotalAmount_LoanDisbursementHeader</DataField>
+        </Field>
+        <Field Name="TotalAmount_LoanDisbursementHeaderFormat">
+          <DataField>TotalAmount_LoanDisbursementHeaderFormat</DataField>
+        </Field>
+        <Field Name="GlobalDimension1Code_LoanDisbursementHeader">
+          <DataField>GlobalDimension1Code_LoanDisbursementHeader</DataField>
+        </Field>
+        <Field Name="Status_LoanDisbursementHeader">
+          <DataField>Status_LoanDisbursementHeader</DataField>
+        </Field>
+        <Field Name="PaymentType_LoanDisbursementHeader">
+          <DataField>PaymentType_LoanDisbursementHeader</DataField>
+        </Field>
+        <Field Name="GlobalDimension2Code_LoanDisbursementHeader">
+          <DataField>GlobalDimension2Code_LoanDisbursementHeader</DataField>
+        </Field>
+        <Field Name="ResponsibilityCenter_LoanDisbursementHeader">
+          <DataField>ResponsibilityCenter_LoanDisbursementHeader</DataField>
+        </Field>
+        <Field Name="NoofLoans_LoanDisbursementHeader">
+          <DataField>NoofLoans_LoanDisbursementHeader</DataField>
+        </Field>
+        <Field Name="DateCreated_LoanDisbursementHeader">
+          <DataField>DateCreated_LoanDisbursementHeader</DataField>
+        </Field>
+        <Field Name="PreparedBy_LoanDisbursementHeader">
+          <DataField>PreparedBy_LoanDisbursementHeader</DataField>
+        </Field>
+        <Field Name="ReportForNavId_12">
+          <DataField>ReportForNavId_12</DataField>
+        </Field>
+        <Field Name="PayMode_LoanDisbursementLines">
+          <DataField>PayMode_LoanDisbursementLines</DataField>
+        </Field>
+        <Field Name="ChequeNo_LoanDisbursementLines">
+          <DataField>ChequeNo_LoanDisbursementLines</DataField>
+        </Field>
+        <Field Name="ChequeDate_LoanDisbursementLines">
+          <DataField>ChequeDate_LoanDisbursementLines</DataField>
+        </Field>
+        <Field Name="BankCode_LoanDisbursementLines">
+          <DataField>BankCode_LoanDisbursementLines</DataField>
+        </Field>
+        <Field Name="AccountNo_LoanDisbursementLines">
+          <DataField>AccountNo_LoanDisbursementLines</DataField>
+        </Field>
+        <Field Name="NoSeries_LoanDisbursementLines">
+          <DataField>NoSeries_LoanDisbursementLines</DataField>
+        </Field>
+        <Field Name="AccountName_LoanDisbursementLines">
+          <DataField>AccountName_LoanDisbursementLines</DataField>
+        </Field>
+        <Field Name="Posted_LoanDisbursementLines">
+          <DataField>Posted_LoanDisbursementLines</DataField>
+        </Field>
+        <Field Name="DatePosted_LoanDisbursementLines">
+          <DataField>DatePosted_LoanDisbursementLines</DataField>
+        </Field>
+        <Field Name="TimePosted_LoanDisbursementLines">
+          <DataField>TimePosted_LoanDisbursementLines</DataField>
+        </Field>
+        <Field Name="PostedBy_LoanDisbursementLines">
+          <DataField>PostedBy_LoanDisbursementLines</DataField>
+        </Field>
+        <Field Name="Amount_LoanDisbursementLines">
+          <DataField>Amount_LoanDisbursementLines</DataField>
+        </Field>
+        <Field Name="Amount_LoanDisbursementLinesFormat">
+          <DataField>Amount_LoanDisbursementLinesFormat</DataField>
+        </Field>
+        <Field Name="GlobalDimension1Code_LoanDisbursementLines">
+          <DataField>GlobalDimension1Code_LoanDisbursementLines</DataField>
+        </Field>
+        <Field Name="LoanNo_LoanDisbursementLines">
+          <DataField>LoanNo_LoanDisbursementLines</DataField>
+        </Field>
+        <Field Name="GlobalDimension2Code_LoanDisbursementLines">
+          <DataField>GlobalDimension2Code_LoanDisbursementLines</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

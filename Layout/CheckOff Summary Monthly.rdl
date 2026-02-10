@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+  </Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="Date_Entered">
+          <DataField>Date_Entered</DataField>
+        </Field>
+        <Field Name="Entered_By">
+          <DataField>Entered_By</DataField>
+        </Field>
+        <Field Name="Posting_Date">
+          <DataField>Posting_Date</DataField>
+        </Field>
+        <Field Name="Account_Type">
+          <DataField>Account_Type</DataField>
+        </Field>
+        <Field Name="Account_No">
+          <DataField>Account_No</DataField>
+        </Field>
+        <Field Name="Account_Name">
+          <DataField>Account_Name</DataField>
+        </Field>
+        <Field Name="Document_No">
+          <DataField>Document_No</DataField>
+        </Field>
+        <Field Name="Amount">
+          <DataField>Amount</DataField>
+        </Field>
+        <Field Name="AmountFormat">
+          <DataField>AmountFormat</DataField>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+        </Field>
+        <Field Name="Sceduled_Amount">
+          <DataField>Sceduled_Amount</DataField>
+        </Field>
+        <Field Name="Sceduled_AmountFormat">
+          <DataField>Sceduled_AmountFormat</DataField>
+        </Field>
+        <Field Name="Total_Caount">
+          <DataField>Total_Caount</DataField>
+        </Field>
+        <Field Name="Comapny_Name">
+          <DataField>Comapny_Name</DataField>
+        </Field>
+        <Field Name="Comapny_Picture">
+          <DataField>Comapny_Picture</DataField>
+        </Field>
+        <Field Name="LoansCount">
+          <DataField>LoansCount</DataField>
+        </Field>
+        <Field Name="LoanAmount">
+          <DataField>LoanAmount</DataField>
+        </Field>
+        <Field Name="LoanAmountFormat">
+          <DataField>LoanAmountFormat</DataField>
+        </Field>
+        <Field Name="sShareCount">
+          <DataField>sShareCount</DataField>
+        </Field>
+        <Field Name="sShareAmount">
+          <DataField>sShareAmount</DataField>
+        </Field>
+        <Field Name="sShareAmountFormat">
+          <DataField>sShareAmountFormat</DataField>
+        </Field>
+        <Field Name="IntCount">
+          <DataField>IntCount</DataField>
+        </Field>
+        <Field Name="IntAmount">
+          <DataField>IntAmount</DataField>
+        </Field>
+        <Field Name="IntAmountFormat">
+          <DataField>IntAmountFormat</DataField>
+        </Field>
+        <Field Name="sInvestCount">
+          <DataField>sInvestCount</DataField>
+        </Field>
+        <Field Name="sInvestAmount">
+          <DataField>sInvestAmount</DataField>
+        </Field>
+        <Field Name="sInvestAmountFormat">
+          <DataField>sInvestAmountFormat</DataField>
+        </Field>
+        <Field Name="sFundCount">
+          <DataField>sFundCount</DataField>
+        </Field>
+        <Field Name="sFundAmount">
+          <DataField>sFundAmount</DataField>
+        </Field>
+        <Field Name="sFundAmountFormat">
+          <DataField>sFundAmountFormat</DataField>
+        </Field>
+        <Field Name="sJoiningCount">
+          <DataField>sJoiningCount</DataField>
+        </Field>
+        <Field Name="sJoiningAmount">
+          <DataField>sJoiningAmount</DataField>
+        </Field>
+        <Field Name="sJoiningAmountFormat">
+          <DataField>sJoiningAmountFormat</DataField>
+        </Field>
+        <Field Name="Posted">
+          <DataField>Posted</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

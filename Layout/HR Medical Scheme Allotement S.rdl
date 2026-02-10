@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+  </Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1">
+          <DataField>ReportForNavId_1</DataField>
+        </Field>
+        <Field Name="SchemeNo_HRMedicalSchemes">
+          <DataField>SchemeNo_HRMedicalSchemes</DataField>
+        </Field>
+        <Field Name="MedicalInsurer_HRMedicalSchemes">
+          <DataField>MedicalInsurer_HRMedicalSchemes</DataField>
+        </Field>
+        <Field Name="SchemeName_HRMedicalSchemes">
+          <DataField>SchemeName_HRMedicalSchemes</DataField>
+        </Field>
+        <Field Name="Inpatientlimit_HRMedicalSchemes">
+          <DataField>Inpatientlimit_HRMedicalSchemes</DataField>
+        </Field>
+        <Field Name="Inpatientlimit_HRMedicalSchemesFormat">
+          <DataField>Inpatientlimit_HRMedicalSchemesFormat</DataField>
+        </Field>
+        <Field Name="Outpatientlimit_HRMedicalSchemes">
+          <DataField>Outpatientlimit_HRMedicalSchemes</DataField>
+        </Field>
+        <Field Name="Outpatientlimit_HRMedicalSchemesFormat">
+          <DataField>Outpatientlimit_HRMedicalSchemesFormat</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="TODAY">
+          <DataField>TODAY</DataField>
+        </Field>
+        <Field Name="COMPANYNAME">
+          <DataField>COMPANYNAME</DataField>
+        </Field>
+        <Field Name="ReportForNavId_7">
+          <DataField>ReportForNavId_7</DataField>
+        </Field>
+        <Field Name="EmployeeNo_HRMedicalSchemeMembers">
+          <DataField>EmployeeNo_HRMedicalSchemeMembers</DataField>
+        </Field>
+        <Field Name="FirstName_HRMedicalSchemeMembers">
+          <DataField>FirstName_HRMedicalSchemeMembers</DataField>
+        </Field>
+        <Field Name="LastName_HRMedicalSchemeMembers">
+          <DataField>LastName_HRMedicalSchemeMembers</DataField>
+        </Field>
+        <Field Name="SchemeJoinDate_HRMedicalSchemeMembers">
+          <DataField>SchemeJoinDate_HRMedicalSchemeMembers</DataField>
+        </Field>
+        <Field Name="m">
+          <DataField>m</DataField>
+        </Field>
+        <Field Name="mFormat">
+          <DataField>mFormat</DataField>
+        </Field>
+        <Field Name="m1">
+          <DataField>m1</DataField>
+        </Field>
+        <Field Name="m1Format">
+          <DataField>m1Format</DataField>
+        </Field>
+        <Field Name="m2">
+          <DataField>m2</DataField>
+        </Field>
+        <Field Name="m2Format">
+          <DataField>m2Format</DataField>
+        </Field>
+        <Field Name="m3">
+          <DataField>m3</DataField>
+        </Field>
+        <Field Name="m3Format">
+          <DataField>m3Format</DataField>
+        </Field>
+        <Field Name="m4">
+          <DataField>m4</DataField>
+        </Field>
+        <Field Name="m4Format">
+          <DataField>m4Format</DataField>
+        </Field>
+        <Field Name="m5">
+          <DataField>m5</DataField>
+        </Field>
+        <Field Name="m5Format">
+          <DataField>m5Format</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

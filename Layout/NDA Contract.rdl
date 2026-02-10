@@ -1,0 +1,388 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>05618989-9037-478a-a05f-03bcc4135f8f</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="Textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>                    MUTUAL NON-DISCLOSURE AND CONFIDENTIALITY AGREEMENT 
+</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>
+
+THIS AGREEMENT is made on </Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>Date of Execution</Label>
+                    <Value>=First(Fields!Date_of_Excecution.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <Format>dddd, d MMMM, yyyy</Format>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> 
+
+BETWEEN:
+
+(1)	</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>Contractor Name</Label>
+                    <Value>=First(Fields!ContractorName.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> a </Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Label>Contractor Description</Label>
+                    <Value>=First(Fields!Contractor_Description.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>; and
+
+(2)	Mwalimu National Savings and Credit Co-operative Society Limited, a SACCO registered under the Cooperatives Act of Kenya Registration No. CS/2265, and licensed under the SACCO Societies Act, having its registered offices at Mwalimu Towers, Hill Lane, Upper Hill  and of Post Office Box Number 62641-00200Nairobi, Kenya (hereinafter referred to as “the SACCO” which description shall, where the context admits, include its permitted assigns and successors in title).        
+
+WHEREAS 
+
+(i)	Energypro and the SACCO (each a ‘Party’ and together the “Parties”) have entered into discussions regarding the Proposal (as defined below) and it is envisaged that the Parties may from time to time receive Information (as defined below) relating to each other (including such of their clients who may also be involved in the Proposal) in respect thereof and the Parties wish to ensure the confidentiality of the Information they may receive from each other
+
+(ii)	In consideration of the Parties making available to each other such Information, the Parties agree that any dealings between them shall be subject to the terms and conditions of this Agreement.
+
+IT IS HEREBY AGREED
+
+1.	Interpretation
+
+1.1	In this Agreement:
+
+“Agents” means directors, officers, employees or any group member (“Internal Agents”) and agents or professional advisers, contractors or sub-contractors (“External Agents”);
+
+“Confidential Information” includes the existence of this Agreement and means Information relating to the Parties or their clients and/or the business carried on or proposed or intended to be carried on by the Parties and their clients which is made available for the purposes of the Proposal to the Parties or their Agents or recorded in agreed minutes following oral disclosure and any other information otherwise made available by the Parties or their Agents, whether before, on or after the date of this Agreement, and whether in writing or otherwise, including any information, analysis or specifications derived from, containing or reflecting such information but excluding information which:
+
+(i)	is publicly available at the time of its disclosure or becomes publicly available (other than as result of disclosure by the Parties or its Agents contrary to the terms of this Agreement); or
+
+(ii)	was lawfully in the possession of the Parties or their Agents (as can be demonstrated by their written records or other reasonable evidence) free of any restriction as to its use or disclosure prior to its being so disclosed; or
+
+(iii)	following such disclosure, becomes available to the Parties or their Agents (as can be demonstrated by their written records or other reasonable evidence) from a source other than the Parties or their Agents, which source is not bound by any duty of confidentiality owed, directly or indirectly, to either of the Parties in relation to such information;
+
+“Group” means any subsidiary, any holding company and any subsidiary of any holding company as defined in the Companies Act 2015;
+
+“Information” means all information in whatever form including, without limitation, any information relating to systems, operations, plans, intentions, market opportunities, know-how, trade secrets and business affairs whether in writing, conveyed orally or by machine readable medium;
+
+“Proposal” means any discussions pertaining to possible areas of equity and/private debt placement for its subsidiary Spire Bank.
+
+2.	Confidential Information
+
+2.1	The Parties shall treat and keep all Confidential Information as secret and confidential and shall not, without each other’s written consent, directly or indirectly communicate or disclose (whether in writing or orally or in any other manner) Confidential Information to any other person other than in accordance with the terms of this Agreement.  
+
+2.2	The Parties shall only use the Confidential Information in relation to the Proposal or for the subsequent performance of any contract between the Parties in relation to the Proposal.
+
+2.3	Notwithstanding clause 2.1, the Parties may disclose Confidential Information:
+
+(i)    to those of their Agents who strictly need to know the Confidential Information for the sole purpose set out in clause 2.2 provided that (a) the identity of any External Agents is made known to either Party in advance of any disclosure and each Party consents to the use of such External Agents; and (b) the Parties shall ensure that such Agents (i) are made aware prior to the disclosure of any part of the Confidential Information that the same is confidential and that they owe a duty of confidence to the other Party and (ii) all  External Agents execute a Confidentiality Undertaking in the form attached as Schedule 1 to this Agreement. The Parties shall at all times remain liable for any actions of their Agents that would constitute a breach of this Agreement; or
+
+(ii)	to the extent required by law or the rules of any applicable regulatory authority, subject to clause 2.4 below.
+
+2.4	In the event that either Party is required to disclose any Confidential Information in accordance with clause 2.3 (ii) above, it shall promptly notify the other Party and shall co-operate with that Party regarding the form, nature, content and purpose of such disclosure or any action which that Party may reasonably take to challenge the validity of such requirement.
+
+2.5	In the event that any Confidential Information provided by the Parties shall be copied, disclosed or used otherwise than as permitted under this Agreement then, upon becoming aware of the same, without prejudice to any rights or remedies of either Party, the relevant Party shall as soon as practicable notify the other Party of such event and if requested take such steps (including the institution of legal proceedings) as shall be necessary to remedy (if capable of remedy) the default and/or to prevent further unauthorised copying, disclosure or use.
+
+2.6     	All Confidential Information shall remain the property of the Party providing it and its disclosure shall not confer on the other Party any rights, including intellectual property rights, over the Confidential Information whatsoever beyond those contained in this Agreement.
+
+3.	Records and return of Information
+
+3.1	The Parties agree to ensure proper and secure storage of all Confidential Information and any copies thereof to at least the same standard as they keep their own Confidential Information. Neither Party shall make any copies or reproduce in any form any Confidential Information except for the purpose of disclosure as permitted in accordance with this Agreement.
+
+3.2	Each Party shall keep a written record of all Confidential Information provided by the other Party and any copies made thereof and, so far as is reasonably practicable, of the location of such Confidential Information and any copies thereof.
+
+3.3	The Parties shall, immediately upon receipt of a written demand from the other Party or on its ceasing to be interested in the Proposal:
+
+(i)	return all written Confidential Information (including all copies); and
+
+(ii)	expunge or destroy any Confidential Information from any computer, word processor or other device whatsoever into which it was copied, read or programmed by the Party or on its behalf (including by any person to whom disclosure has been made as permitted under clause 2.3(i) above).
+
+The obligations in this clause 3.3 shall not apply to the extent that (but only for so long as) it is necessary to retain copies for the purpose of providing information to any regulatory authority in accordance with clause 2.3 (ii) above.
+
+3.4	Either Party shall on request supply a certificate signed by a director as to its full compliance with the requirements of clause 3.3 (ii) above.
+
+4.	Announcements 
+
+4.1	Neither Party shall make or permit to be made any announcement or disclosure of its prospective interest in or the fact that discussions are being held regarding the Proposal without the prior written consent of the other Party. 
+
+4.2	Neither Party shall disclose the identity of or make use of the other Party’s name or any Information acquired through its dealings with the other Party for publicity or marketing purposes without the prior written consent of the other Party. 
+
+5.	Duration
+
+	The obligations of each Party and their respective Agents under this Agreement shall be continuing and shall survive the termination of any discussions or negotiations between the Parties regarding the Proposal.
+
+6.	Principal
+
+The Parties confirm that they are each acting as principal and not as nominee, agent or broker for any other person and that they shall, respectively, be responsible for any costs incurred by them or their advisers in considering or pursuing the Proposal and in complying with the terms of this Agreement.
+
+7.	Representations
+
+7.1	Each Party agrees that any Information made available to the other Party or its Agents for the purpose of negotiations or discussions in relation to the Proposal shall not form the basis of, or any representation in relation to, any contract, nor constitute an offer or invitation by either Party.
+
+7.2	Except in the case of fraudulent misrepresentation, neither Party accepts responsibility for nor makes any representation or warranty, express or implied, with respect to the accuracy, reliability or completeness of any Information made available to the other Party or its Agents. 
+
+
+8.	Adequacy of damages
+
+8.1	Without prejudice to any other rights or remedies of either Party, the Parties acknowledge and agree that damages may not be an adequate remedy for any breach by it of the provisions of this Agreement and that either Party shall be entitled to seek the remedies of injunction, specific performance and other equitable relief for any threatened or actual breach of any such provision by a Party or its Agents.  No proof of special damages shall be necessary for the enforcement of any rights under this Agreement.
+
+8.2	Nothing contained in this Agreement shall be construed as prohibiting either Party from pursuing any other remedies available by it, either at law or in equity, for any such threatened or actual breach of this Agreement including specific performance, recovery of damages or any right to indemnity under the terms of this Agreement or otherwise.
+
+9.	Indemnity 
+
+Any Party breaching this Agreement agrees to indemnify the other Party against any costs, claims, demands or liabilities (excluding any special, consequential, incidental or indirect damages including but not limited to loss of profit or revenue) of whatsoever nature arising out of a breach of its obligations under this Agreement.
+
+10.       	Governing Law and Jurisdiction 
+
+              This Agreement shall be governed by and interpreted in accordance with the laws of Kenya and the Parties irrevocably submit to the exclusive jurisdiction of Kenyan courts.
+
+11.	General
+
+11.1	Nothing in this Agreement constitutes a commitment by either Party to accept any proposals made by the other Party in connection with the Proposal.  Unless and until a contract arising from the Proposal has been executed by both Parties, neither Party nor any of its Agents shall have any liability to the other Party whether by virtue of this Agreement, any other written or oral expression with respect to the Proposal or otherwise.
+
+11.2	Neither Party may assign the benefit of this Agreement or any interest hereunder except with the prior written consent of the other.
+
+11.3    No failure or delay in exercising any right, power or privilege under this Agreement shall operate as a waiver of it, nor shall any single or partial exercise of it preclude any further exercise or the exercise of any right, power or privilege under this Agreement or otherwise.
+
+11.4	The provisions of this Agreement shall be severable in the event that any of its provisions are held by a court of competent jurisdiction or other applicable authority to be invalid, void or otherwise unenforceable, and the remaining provisions shall remain enforceable to the fullest extent permitted by law.
+
+11.5	This Agreement may only be modified by a written agreement duly signed by persons authorised on behalf of each Party.
+
+11.6	Nothing in this Agreement shall constitute the creation of a partnership, joint venture or agency between the parties.
+
+
+IN WITNESS WHEREOF, the Parties hereto have caused this Agreement to be executed by their respective duly authorised representatives.
+
+
+
+
+
+
+
+SCHEDULE 1
+
+To:  [Named party]
+
+I, the Undersigned 
+
+Of	[Address]
+
+
+1.	Confirm that:
+
+a.   I am a duly appointed agent of [			] engaged for the purposes of assisting [		] to evaluate the Proposal (as defined on the Agreement referred to in (b) below);
+
+b.	I am aware of the general terms of the Mutual Non-Disclosure and Confidentiality Agreement ( “the Agreement”)between XX and the SACCO dated ______________________________ 2019; and
+
+c.	I hereby undertake to [                    ] to keep confidential and not to disclose or make available to any third party, except with the express prior written consent of [            ], any Confidential Information relating to the business, customers or staff of [            ] including any of its clients, on whose behalf it may be acting which is disclosed to me or to which I may have access.
+
+2.	Upon a request by [XX/the SACCO], I shall return to all documents, books, discs, tapes or other records (in whatever medium) which I may have in my possession, custody or control and which are the property of [XX/other party], its customers, staff or agents and any of its clients on whose behalf it may be acting and any copies thereof which relate to the Proposal and I shall provide such written confirmation that I have done so as may be required.
+
+3.	The Agreement shall continue in full force and effect from the date hereof and shall survive the termination of any discussions or negotiations between the Parties regarding the Proposal.
+.
+
+
+
+
+Signed	………………………………………………………….
+
+
+
+Print name  ……………………………………………………..
+
+
+</Value>
+                    <Style>
+                      <FontFamily>Book Antiqua</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>0.34944in</Top>
+            <Height>5.44444in</Height>
+            <Width>8in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>40.30486cm</Height>
+        <Style />
+      </Body>
+      <Width>20.60222cm</Width>
+      <Page>
+        <PageHeader>
+          <Height>2.54cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
+        <PageFooter>
+          <Height>2.54cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>23cm</PageWidth>
+        <LeftMargin>1cm</LeftMargin>
+        <RightMargin>1cm</RightMargin>
+        <TopMargin>0cm</TopMargin>
+        <BottomMargin>0cm</BottomMargin>
+        <ColumnSpacing>1.27cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Code>Public Function BlankZero(ByVal Value As Decimal)
+    if Value = 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankPos(ByVal Value As Decimal)
+    if Value &gt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankZeroAndPos(ByVal Value As Decimal)
+    if Value &gt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNeg(ByVal Value As Decimal)
+    if Value &lt; 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+
+Public Function BlankNegAndZero(ByVal Value As Decimal)
+    if Value &lt;= 0 then
+        Return ""
+    end if
+    Return Value
+End Function
+</Code>
+  <Language>=User!Language</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ContractorNo">
+          <DataField>ContractorNo</DataField>
+        </Field>
+        <Field Name="ContractorType">
+          <DataField>ContractorType</DataField>
+        </Field>
+        <Field Name="NatureOfService">
+          <DataField>NatureOfService</DataField>
+        </Field>
+        <Field Name="PartytotheContract">
+          <DataField>PartytotheContract</DataField>
+        </Field>
+        <Field Name="Date_of_Excecution">
+          <DataField>Date_of_Excecution</DataField>
+        </Field>
+        <Field Name="ContractorName">
+          <DataField>ContractorName</DataField>
+        </Field>
+        <Field Name="ContractType">
+          <DataField>ContractType</DataField>
+        </Field>
+        <Field Name="Contractor_Description">
+          <DataField>Contractor_Description</DataField>
+        </Field>
+        <Field Name="Chairman">
+          <DataField>Chairman</DataField>
+        </Field>
+        <Field Name="CEO">
+          <DataField>CEO</DataField>
+        </Field>
+        <Field Name="Secretary">
+          <DataField>Secretary</DataField>
+        </Field>
+        <Field Name="Treasurer">
+          <DataField>Treasurer</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

@@ -1,0 +1,290 @@
+page 52185661 "HR Employee List - Active"
+{
+    CardPageID = "HR Employee Card";
+    DeleteAllowed = false;
+    Editable = false;
+    InsertAllowed = false;
+    ModifyAllowed = false;
+    PageType = List;
+    SourceTable = "HR Employees";
+    SourceTableView = SORTING("No.")
+                      ORDER(Ascending)
+                      WHERE(Status = CONST(Active)
+                            // "Contract Type" = FILTER(<> 'FIXEDTC')
+                            );
+    UsageCategory = Lists;
+    ApplicationArea = Basic;
+
+    layout
+    {
+        area(content)
+        {
+            repeater(Control12)
+            {
+                Editable = false;
+                ShowCaption = false;
+                field("No."; Rec."No.")
+                {
+                    ApplicationArea = Basic;
+                    StyleExpr = TRUE;
+                }
+                field("Member No."; Rec."Member No.")
+                {
+                    ApplicationArea = all;
+                }
+                field("Full Name"; Rec."Full Name")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("User ID"; Rec."User ID")
+                {
+                    ApplicationArea = Basic;
+                    Enabled = false;
+                }
+                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Company E-Mail"; Rec."Company E-Mail")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Contract Type"; Rec."Contract Type")
+                {
+                    ApplicationArea = Basic;
+                }
+                field(Grade; Rec.Grade)
+                {
+                    ApplicationArea = Basic;
+                }
+                field(Status; Rec.Status)
+                {
+                    ApplicationArea = Basic;
+                    Enabled = false;
+                    Style = Attention;
+                    StyleExpr = TRUE;
+                    Editable = true;
+                }
+                field("Termination Grounds"; Rec."Termination Grounds")
+                {
+                    Caption = 'Reason';
+                }
+            }
+        }
+        area(factboxes)
+        {
+            part(Control1; "HR Employees Factbox")
+            {
+                SubPageLink = "No." = FIELD("No.");
+                ApplicationArea = Basic;
+            }
+            part("Approved Images"; "Member Picture & Signature")
+            {
+                ApplicationArea = Basic;
+
+                Caption = 'Approved Images';
+                SubPageLink = "Member No" = FIELD("Member No.");
+            }
+            systempart(Control2; Outlook)
+            {
+                ApplicationArea = Basic;
+            }
+        }
+    }
+
+    actions
+    {
+        area(processing)
+        {
+            action("Import Notches")
+            {
+                ApplicationArea = Basic;
+                Caption = 'Import Notches';
+                ////RunObject = XMLport XMLport50051;
+            }
+            action("Import Notch Transactions")
+            {
+                ApplicationArea = Basic;
+                Caption = 'Import Notch Transactions';
+                ////RunObject = XMLport XMLport50061;
+            }
+            action("Import Payroll Variations")
+            {
+                ApplicationArea = Basic;
+                Caption = 'Import Payroll Variations';
+                RunObject = XMLport "Checkoff Buffer";
+            }
+            action("Import Employee Trans")
+            {
+                ApplicationArea = Basic;
+                Caption = 'Import Employee Trans';
+                // RunObject = XMLport XMLport50060;
+            }
+            action(Abscence)
+            {
+                ApplicationArea = Basic;
+                Caption = 'Abscence';
+                Image = Absence;
+                Promoted = true;
+                RunObject = Page "Employee Absences";
+                RunPageLink = "Employee No." = FIELD("No.");
+                Visible = false;
+            }
+            action(Lateness)
+            {
+                ApplicationArea = Basic;
+                Caption = 'Lateness';
+                Image = AbsenceCalendar;
+                Promoted = true;
+                RunObject = Page prLatenessLedger;
+                RunPageLink = "Employee Code" = FIELD("No.");
+                Visible = false;
+            }
+
+        }
+        area(Reporting)
+        {
+            group(Report)
+            {
+                action("Employee List")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Employee list';
+                    RunObject = report "HR Employee List";
+                }
+                action("Employee NOK")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Employee Next of Kin';
+                    RunObject = report "HR Employee List Report";
+                }
+                action(Update)
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Sync Employees With Members';
+                    RunObject = report "Update Employee Members";
+                }
+
+
+            }
+        }
+    }
+
+    trigger OnAfterGetRecord()
+    begin
+        DepName := '';
+        DValues.Reset;
+        DValues.SetRange(DValues.Code, Rec."Department Code");
+        if DValues.Find('-') then
+            DepName := DValues.Name;
+
+        BankName := '';
+        Banks.Reset;
+        Banks.SetRange(Banks."Branch Code", Rec."Main Bank");
+        Banks.SetRange(Banks."Branch Name", Rec."Branch Bank");
+        if Banks.Find('-') then
+            BankName := Banks."Bank Name";
+        if (rec."Member No." = '') or (rec."Member Status" = rec."Member Status"::" ") then begin
+            rec.CalcFields(Picture);
+            customer.reset();
+            customer.setrange("Internal Staff Employer", true);
+            if customer.FindFirst() then begin
+                member.reset();
+                member.setrange("Employer Code", customer."No.");
+                member.SetRange("Payroll/Staff No.", rec."No.");
+                if member.FindFirst() then begin
+                    rec."Member No." := member."No.";
+                    rec."Member Status" := member.Status;
+
+
+                    Rec.Modify(true);
+                end;
+            end;
+        end;
+    end;
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        if (rec."Member No." = '') or (rec."Member Status" = rec."Member Status"::" ") then begin
+            rec.CalcFields(Picture);
+            customer.reset();
+            customer.setrange("Internal Staff Employer", true);
+            if customer.FindFirst() then begin
+                member.reset();
+                member.setrange("Employer Code", customer."No.");
+                member.SetRange("Payroll/Staff No.", rec."No.");
+                if member.FindFirst() then begin
+                    rec."Member No." := member."No.";
+                    rec."Member Status" := member.Status;
+
+
+
+                    Rec.Modify(true);
+                end;
+            end;
+        end;
+    end;
+
+    trigger OnOpenPage()
+    begin
+        /*
+        IF (DepCode <> '') THEN
+           SETFILTER("Department Code", ' = %1', DepCode);
+        IF (OfficeCode <> '') THEN
+           SETFILTER(Office, ' = %1', OfficeCode);
+           */
+        //ViewEmployeeData();
+        // OnViewCurrRec();
+
+    end;
+
+    var
+        Mail: Codeunit Mail;
+        PictureExists: Boolean;
+        DepCode: Code[10];
+        OfficeCode: Code[10];
+        DepName: Text[100];
+        BankName: Text[200];
+        DValues: Record "Dimension Value";
+        Banks: Record "PR Bank Branches";
+        Member: record Members;
+        Body: Text[1024];
+        customer: record Customer;
+    //[Scope('OnPrem')]
+    procedure SetNewFilter(var DepartmentCode: Code[10]; var "Office Code": Code[10])
+    begin
+        DepCode := DepartmentCode;
+        OfficeCode := "Office Code";
+    end;
+
+    local procedure ViewEmployeeData()
+    var
+        StatusPermissions: Record "Status Change Permissions.";
+        Text000: Label 'Sending Alert to the Human Resource Department.';
+    begin
+
+        StatusPermissions.Reset;
+        StatusPermissions.SetRange(StatusPermissions."User ID", UserId);
+        StatusPermissions.SetRange(StatusPermissions."Function", StatusPermissions."Function"::"View Employee Record");
+        if not StatusPermissions.Find('-') then
+            Error(Text000);
+    end;
+
+    //[Scope('OnPrem')]
+    procedure OnViewCurrRec()
+    var
+        ChangePermission: Record "Status Change Permissions.";
+        ErrorOnRestricViewTxt: Label 'You do not have Permissions to VIEW,MODIFY or DELETE on this record. Contact system administrator for assistance. %';
+    begin
+        ChangePermission.Reset;
+        ChangePermission.SetRange("User ID", UserId);
+        ChangePermission.SetRange("View Payroll", true);
+        if not ChangePermission.Find('-') then
+            Error(ErrorOnRestricViewTxt, UserId);
+    end;
+}
+
