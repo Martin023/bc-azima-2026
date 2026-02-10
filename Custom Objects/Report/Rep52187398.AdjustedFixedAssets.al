@@ -4,7 +4,7 @@ report 52187398 "Adjusted Fixed Assets"
     Caption = 'Adjusted Fixed Assets';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = rdlc;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Adjusted Fixed Assets.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Adjusted Fixed Assets.rdl';
     dataset
     {
         dataitem(FixedAsset; "Fixed Asset")

@@ -2,7 +2,7 @@
 Report 52185972 "Msacco Loans Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Msacco Loans Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Msacco Loans Report.rdl';
 
     dataset
     {

@@ -1,7 +1,7 @@
 report 52186039 "Employer Email Status"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Employer Email Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Employer Email Report.rdl';
 
 
     dataset

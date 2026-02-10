@@ -2,7 +2,7 @@
 // Report 52185979 "Salary Through FOSA"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Salary Through FOSA.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Salary Through FOSA.rdl';
 
 //     dataset
 //     {

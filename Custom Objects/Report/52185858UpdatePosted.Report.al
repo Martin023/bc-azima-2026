@@ -2,7 +2,7 @@
 Report 52185858 "Update Posted"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Update Posted.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Update Posted.rdl';
 
     dataset
     {

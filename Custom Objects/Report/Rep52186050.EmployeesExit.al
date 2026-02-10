@@ -1,7 +1,7 @@
 report 52186050 EmployeesExit
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Employee Exit Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Employee Exit Report.rdl';
     dataset
     {
         dataitem(HREmployees; "HR Employees")

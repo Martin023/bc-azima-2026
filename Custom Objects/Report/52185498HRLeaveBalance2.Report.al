@@ -2,7 +2,7 @@
 Report 52185498 "HR Leave Balance2"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Leave Balance2.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Leave Balance2.rdl';
 
     dataset
     {

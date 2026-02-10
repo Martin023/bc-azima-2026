@@ -2,7 +2,7 @@
 Report 52185549 "Overtime Analysis"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Overtime Analysis.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Overtime Analysis.rdl';
 
     dataset
     {

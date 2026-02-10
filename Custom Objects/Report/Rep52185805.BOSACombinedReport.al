@@ -7,7 +7,7 @@ report 52185805 "BOSA Combined Report"
     Caption = 'BOSA Combined Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/BOSA Combined Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/BOSA Combined Report.rdl';
     dataset
     {
         dataitem(Members; Members)

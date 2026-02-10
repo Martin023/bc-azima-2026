@@ -10,7 +10,7 @@ report 52186195 "Employer Movement Report"
     ApplicationArea = All;
     Caption = 'Employer Movement';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Employer Movement.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Employer Movement.rdl';
     dataset
     {
         dataitem(Customer; Customer)

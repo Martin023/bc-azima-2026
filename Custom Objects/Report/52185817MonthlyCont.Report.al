@@ -2,7 +2,7 @@
 Report 52185817 "Monthly Cont."
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Monthly Cont..rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Monthly Cont..rdl';
 
     dataset
     {

@@ -3,7 +3,7 @@ report 52185898 "Staff Claims Report"
     ApplicationArea = All;
     Caption = 'Staff Claims Report';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Staff Claims Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Staff Claims Report.rdl';
     dataset
     {
         dataitem(StaffClaimsHeader; "Staff Claims Header")

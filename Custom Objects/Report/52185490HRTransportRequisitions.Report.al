@@ -2,7 +2,7 @@
 Report 52185490 "HR Transport Requisitions"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Transport Requisitions.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Transport Requisitions.rdl';
 
     dataset
     {

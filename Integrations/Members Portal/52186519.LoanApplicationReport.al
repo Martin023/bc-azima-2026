@@ -4,7 +4,7 @@ report 52186519 "Loan Application Report"
     Caption = 'Loan Application Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/LoanApplicationReport.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/LoanApplicationReport.rdl';
     //RDLCLayout = './MPortalApi/test.rdl';
     dataset
     {

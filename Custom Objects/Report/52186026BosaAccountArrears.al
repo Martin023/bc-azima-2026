@@ -1,7 +1,7 @@
 report 52186026 "Employer Shares and Loans"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Employer Shares and Loans Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Employer Shares and Loans Report.rdl';
 
 
     dataset

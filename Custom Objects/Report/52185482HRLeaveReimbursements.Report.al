@@ -2,7 +2,7 @@
 Report 52185482 "HR Leave Reimbursements"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Leave Reimbursements.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Leave Reimbursements.rdl';
 
     dataset
     {

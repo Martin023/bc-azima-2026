@@ -2,7 +2,7 @@
 Report 52185617 "Accounts Application Register"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Accounts Application Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Accounts Application Register.rdl';
 
     dataset
     {

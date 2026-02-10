@@ -3,7 +3,7 @@
 report 52186400 "EmployeeAppointment report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Appointment Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Appointment Report.rdl';
     dataset
     {
         dataitem(hremployees; "hr employees")

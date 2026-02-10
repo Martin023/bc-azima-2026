@@ -4,7 +4,7 @@ report 52185649 "Edits Applications"
     Caption = 'Edits Applications';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Edits Applications.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Edits Applications.rdl';
 
     dataset
     {

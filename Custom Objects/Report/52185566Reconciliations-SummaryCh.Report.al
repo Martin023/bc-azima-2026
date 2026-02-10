@@ -2,7 +2,7 @@
 // Report 52185566 "Reconciliations - Summary Ch"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Reconciliations - Summary Ch.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Reconciliations - Summary Ch.rdl';
 
 //     dataset
 //     {

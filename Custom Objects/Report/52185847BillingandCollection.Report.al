@@ -2,7 +2,7 @@
 Report 52185847 "Billing and Collection"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Billing and Collection.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Billing and Collection.rdl';
 
     dataset
     {

@@ -12,7 +12,7 @@ report 52185986 "Fixed Asset Movement Schedule"
     Caption = 'Fixed Asset Movement Schedule';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Fixed Asset Movement Schedule.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Fixed Asset Movement Schedule.rdl';
     dataset
     {
         dataitem("Fixed Asset"; "Fixed Asset")

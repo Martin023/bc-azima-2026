@@ -2,7 +2,7 @@
 Report 52185519 P9
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/P9.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/P9.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

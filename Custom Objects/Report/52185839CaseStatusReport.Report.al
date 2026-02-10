@@ -2,7 +2,7 @@
 Report 52185839 "Case Status Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Case Status Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Case Status Report.rdl';
     Caption = 'Case Status Report';
 
     dataset

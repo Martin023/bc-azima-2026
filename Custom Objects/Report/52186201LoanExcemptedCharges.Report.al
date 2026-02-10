@@ -4,7 +4,7 @@ report 52186201 "Loan Excempted Charges"
     Caption = 'Loan Excempted Charges';
     ApplicationArea = All;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Excempted Charges.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Excempted Charges.rdl';
 
     dataset
     {

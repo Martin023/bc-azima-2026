@@ -2,7 +2,7 @@
 Report 52185435 "Past Due Accounts"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Past Due Accounts.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Past Due Accounts.rdl';
 
     dataset
     {

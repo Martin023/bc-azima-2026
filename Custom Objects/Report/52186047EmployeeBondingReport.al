@@ -1,7 +1,7 @@
 report 52186047 "Employee Bonding"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Employee Bonding Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Employee Bonding Report.rdl';
     dataset
     {
 

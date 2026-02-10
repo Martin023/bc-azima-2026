@@ -2,7 +2,7 @@
 Report 52185791 "Outstanding IOU Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Outstanding IOU Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Outstanding IOU Report.rdl';
 
     dataset
     {

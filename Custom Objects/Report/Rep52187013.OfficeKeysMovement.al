@@ -4,7 +4,7 @@ report 52187014 "Office Keys Movement"
     Caption = 'Office Keys Movement';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Office Keys Movement.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Office Keys Movement.rdl';
     dataset
     {
         dataitem(KeyDetails; "Office Keys List")

@@ -2,7 +2,7 @@
 Report 52185480 "HR Leave Application"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Leave Application.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Leave Application.rdl';
 
     dataset
     {

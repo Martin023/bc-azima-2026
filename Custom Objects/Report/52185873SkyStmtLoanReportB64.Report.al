@@ -2,7 +2,7 @@
 Report 52185873 "Sky Stmt Loan Report B64."
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Sky Stmt Loan Report B64..rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Sky Stmt Loan Report B64..rdl';
 
     dataset
     {

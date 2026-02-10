@@ -4,7 +4,7 @@ report 52187012 "Conf Hall & Meeting Booking St"
     Caption = 'Conf Hall & Meeting Booking St';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Conference Hall & Meeting Booking St.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Conference Hall & Meeting Booking St.rdl';
     dataset
     {
         dataitem(ConferenceMeetingRoomsT; "Conference & Meeting Rooms-T")

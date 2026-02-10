@@ -2,7 +2,7 @@
 Report 52185841 "Partial Resignation Slip"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Partial Resignation Slip.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Partial Resignation Slip.rdl';
 
     dataset
     {

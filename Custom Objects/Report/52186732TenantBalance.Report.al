@@ -1,7 +1,7 @@
 Report 52186732 "Tenant Debtor Listing"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Tenant Debtor Listing.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Tenant Debtor Listing.rdl';
 
     dataset
     {

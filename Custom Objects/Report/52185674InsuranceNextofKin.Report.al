@@ -2,7 +2,7 @@
 Report 52185674 "Insurance Next of Kin"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Insurance Next of Kin.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Insurance Next of Kin.rdl';
 
     dataset
     {

@@ -1,7 +1,7 @@
 report 52186049 SeparationTypes
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Separation Types.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Separation Types.rdl';
     dataset
     {
         dataitem(HREmployeeExitInterviews; "HR Employee Exit Interviews")

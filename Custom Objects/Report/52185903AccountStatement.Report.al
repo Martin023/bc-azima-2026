@@ -2,7 +2,7 @@
 Report 52185903 "Account Statement"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Account Statement.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Account Statement.rdl';
 
     dataset
     {

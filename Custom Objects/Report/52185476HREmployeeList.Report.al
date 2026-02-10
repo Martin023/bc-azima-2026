@@ -2,7 +2,7 @@
 Report 52185476 "HR Employee List"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Employee List.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Employee List.rdl';
 
     dataset
     {

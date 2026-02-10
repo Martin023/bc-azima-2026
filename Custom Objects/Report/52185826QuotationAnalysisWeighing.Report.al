@@ -2,7 +2,7 @@
 Report 52185826 "Quotation Analysis Weighing"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Quotation Analysis Weighing.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Quotation Analysis Weighing.rdl';
 
     dataset
     {

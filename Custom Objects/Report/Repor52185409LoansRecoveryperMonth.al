@@ -1,7 +1,7 @@
 Report 52187409 "Loans Recovery Per Month"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loans Recovery Per Month.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loans Recovery Per Month.rdl';
     Caption = 'Loans Recovery per Month';
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;

@@ -1,7 +1,7 @@
 Report 52185651 "Checkoff Advice - Savings"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Checkoff Advice - Savings.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Checkoff Advice - Savings.rdl';
     UsageCategory = Lists;
     ApplicationArea = All;
     dataset

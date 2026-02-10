@@ -2,7 +2,7 @@
 Report 52185976 "prBoard Summary"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/prBoard Summary.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/prBoard Summary.rdl';
 
     dataset
     {

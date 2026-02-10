@@ -1,7 +1,7 @@
 // report 52186010 "Paid Delegates Claim Report"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Paid Delegates Claim Report.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Paid Delegates Claim Report.rdl';
 
 
 //     dataset

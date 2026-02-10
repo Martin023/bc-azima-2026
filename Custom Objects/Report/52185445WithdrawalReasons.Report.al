@@ -2,7 +2,7 @@
 Report 52185445 "Withdrawal Reasons"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Withdrawal Reasons.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Withdrawal Reasons.rdl';
 
     dataset
     {

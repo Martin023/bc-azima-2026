@@ -2,7 +2,7 @@
 Report 52185446 "Order 2"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Order 2.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Order 2.rdl';
     Caption = 'Order';
     PreviewMode = PrintLayout;
 

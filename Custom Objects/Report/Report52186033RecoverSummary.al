@@ -1,7 +1,7 @@
 Report 52186078 "Recovery Fresh Loans Summary"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Recovery Fresh Loans Summary.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Recovery Fresh Loans Summary.rdl';
     Caption = 'Recovery Fresh Loans Summary';
     UsageCategory = ReportsAndAnalysis;
 

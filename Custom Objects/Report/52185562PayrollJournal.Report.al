@@ -2,7 +2,7 @@
 Report 52185562 "Payroll Journal"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Payroll Journal.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Payroll Journal.rdl';
 
     dataset
     {

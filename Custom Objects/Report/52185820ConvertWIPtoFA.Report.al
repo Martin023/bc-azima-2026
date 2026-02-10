@@ -2,7 +2,7 @@
 // Report 52185820 "Convert WIP to FA"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Convert WIP to FA.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Convert WIP to FA.rdl';
 
 //     dataset
 //     {

@@ -2,7 +2,7 @@
 Report 52185564 "pr1/3 Basic Pay"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/pr13 Basic Pay.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/pr13 Basic Pay.rdl';
 
     dataset
     {

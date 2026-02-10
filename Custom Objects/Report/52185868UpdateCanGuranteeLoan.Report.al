@@ -2,7 +2,7 @@
 Report 52185868 "Update Can Gurantee Loan"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Update Can Gurantee Loan.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Update Can Gurantee Loan.rdl';
 
     dataset
     {

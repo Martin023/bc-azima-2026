@@ -2,7 +2,7 @@
 Report 52187371 "Matured Investments"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Matured Investments.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Matured Investments.rdl';
 
     dataset
     {

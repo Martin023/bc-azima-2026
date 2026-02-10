@@ -2,7 +2,7 @@
 Report 52185578 "Pension Advice Summary"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Pension Advice Summary.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Pension Advice Summary.rdl';
 
     dataset
     {

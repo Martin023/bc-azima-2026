@@ -2,7 +2,7 @@
 Report 52185792 "Cash Payment Vouchers"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Cash Payment Vouchers.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Cash Payment Vouchers.rdl';
 
     dataset
     {

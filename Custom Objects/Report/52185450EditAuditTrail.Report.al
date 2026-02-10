@@ -2,7 +2,7 @@
 Report 52185450 "Edit Audit Trail"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Edit Audit Trail.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Edit Audit Trail.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52185783 "Imprest Voucher"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Imprest Voucher.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Imprest Voucher.rdl';
 
     dataset
     {

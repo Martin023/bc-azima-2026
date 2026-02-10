@@ -2,7 +2,7 @@
 Report 52185852 "Staff On Leave"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Staff On Leave.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Staff On Leave.rdl';
 
     dataset
     {

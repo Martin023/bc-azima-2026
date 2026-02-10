@@ -2,7 +2,7 @@
 Report 52185913 "Generate CRB Data"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Generate CRB Data.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Generate CRB Data.rdl';
 
     dataset
     {

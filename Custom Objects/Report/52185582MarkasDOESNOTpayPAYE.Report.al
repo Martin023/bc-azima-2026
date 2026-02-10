@@ -2,7 +2,7 @@
 Report 52185582 "Mark as DOES NOT pay PAYE"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Mark as DOES NOT pay PAYE.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Mark as DOES NOT pay PAYE.rdl';
 
     dataset
     {

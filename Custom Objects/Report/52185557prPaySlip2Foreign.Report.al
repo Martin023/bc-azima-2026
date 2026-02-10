@@ -2,7 +2,7 @@
 Report 52185557 prPaySlip2Foreign
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/prPaySlip2Foreign.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/prPaySlip2Foreign.rdl';
     Caption = 'PaySlip';
 
     dataset

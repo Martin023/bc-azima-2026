@@ -7,7 +7,7 @@ report 52186157 "Finance Share Certificate"
     Caption = 'Finance Share Certificate';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = Word;
-    WordLayout = './bc-kenpipe-2024/Layout/Finance Share Certificate.docx';
+    WordLayout = './bc-azima-2026/Layout/Finance Share Certificate.docx';
     dataset
     {
         dataitem(Members; Members)
@@ -59,7 +59,7 @@ report 52186157 "Finance Share Certificate"
             column(Picture; CompanyInformation.Picture)
             {
             }
-            
+
             column(CompanyName; CompanyInformation."Name")
             {
             }

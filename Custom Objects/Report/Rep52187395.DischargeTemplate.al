@@ -4,7 +4,7 @@ report 52187395 "Discharge Template"
     Caption = 'Discharge Template';
     // UsageCategory = ReportsAndAnalysis;
     DefaultLayout = Word;
-    WordLayout = './bc-kenpipe-2024/Layout/Discharge Template.docx';
+    WordLayout = './bc-azima-2026/Layout/Discharge Template.docx';
     dataset
     {
         //dataitem(SecurityPerfection; "Security Perfection")

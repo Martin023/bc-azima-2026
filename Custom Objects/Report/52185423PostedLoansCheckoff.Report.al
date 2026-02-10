@@ -2,7 +2,7 @@
 Report 52185423 "Posted Loans Checkoff"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Posted Loans Checkoff.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Posted Loans Checkoff.rdl';
 
     dataset
     {

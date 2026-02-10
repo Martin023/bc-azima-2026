@@ -4,7 +4,7 @@ using Microsoft.Foundation.Company;
 report 52186085 "Training Evaluation"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Training Evaluation Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Training Evaluation Report.rdl';
     dataset
     {
         dataitem(HRTrainingFeedbackForm; "HR Training Feedback Form")

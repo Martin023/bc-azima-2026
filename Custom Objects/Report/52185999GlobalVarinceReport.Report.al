@@ -4,7 +4,7 @@ Report 52185999 "Global Variance Report"
     ApplicationArea = all;
     DefaultLayout = RDLC;
     Caption = 'Monthly Global Deposit Variance Report';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Global Variance Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Global Variance Report.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {
@@ -392,7 +392,7 @@ Report 52185999 "Global Variance Report"
 // Report 52185999 "Update STO Income Type"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Update STO Income Type.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Update STO Income Type.rdl';
 
 //     dataset
 //     {

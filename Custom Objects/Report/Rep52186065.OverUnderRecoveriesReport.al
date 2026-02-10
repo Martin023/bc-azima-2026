@@ -8,7 +8,7 @@ report 52186065 "Over/Under Recovery Loans Rep"
     Caption = 'Over/Under Recoveries Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Over&Under Recoveries Report Loans.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Over&Under Recoveries Report Loans.rdl';
     dataset
     {
         dataitem(CheckoffHeader; "Checkoff Header")

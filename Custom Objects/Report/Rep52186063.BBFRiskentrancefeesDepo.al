@@ -7,7 +7,7 @@ report 52186063 "BBF/Risk/entrance fees/Depo"
     Caption = 'BBF/Risk/entrance fees/Depo';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/BBFRiskentrancefeesDepo.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/BBFRiskentrancefeesDepo.rdl';
     dataset
     {
         dataitem(Members; "Members")

@@ -2,7 +2,7 @@
 Report 52186003 "Membership Declaration"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Membership Declaration.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Membership Declaration.rdl';
 
     dataset
     {

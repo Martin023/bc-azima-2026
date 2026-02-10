@@ -2,7 +2,7 @@
 Report 52185479 "HR Leave Schedule"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Leave Schedule.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Leave Schedule.rdl';
 
     dataset
     {

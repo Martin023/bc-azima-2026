@@ -6,7 +6,7 @@ report 52186145 "Loan Products Report"
     ApplicationArea = All;
     Caption = 'Loan Products Report';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Products Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Products Report.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

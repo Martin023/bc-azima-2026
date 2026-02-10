@@ -2,7 +2,7 @@
 Report 52185667 "Loans Datasheet Employer"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loans Datasheet Employer.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loans Datasheet Employer.rdl';
 
     dataset
     {

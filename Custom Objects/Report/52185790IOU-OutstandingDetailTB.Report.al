@@ -2,7 +2,7 @@
 Report 52185790 "IOU - Outstanding Detail TB"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/IOU - Outstanding Detail TB.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/IOU - Outstanding Detail TB.rdl';
     Caption = 'IOU - Outstanding';
 
     dataset

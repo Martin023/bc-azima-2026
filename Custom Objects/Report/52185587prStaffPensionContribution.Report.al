@@ -2,7 +2,7 @@
 Report 52185587 "prStaff Pension Contribution"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/prStaff Pension Contribution.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/prStaff Pension Contribution.rdl';
 
     dataset
     {

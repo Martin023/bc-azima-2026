@@ -2,7 +2,7 @@
 Report 52186042 "Delegate PaySlip"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Delegate PaySlip.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Delegate PaySlip.rdl';
 
     dataset
     {

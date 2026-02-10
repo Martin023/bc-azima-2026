@@ -2,7 +2,7 @@
 Report 52185782 "Payment Voucher"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Payment Voucher.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Payment Voucher.rdl';
 
     dataset
     {

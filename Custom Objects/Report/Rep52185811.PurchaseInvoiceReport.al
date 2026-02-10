@@ -1,7 +1,7 @@
 report 52185811 "Purchase Invoice Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Purchase Invoice Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Purchase Invoice Report.rdl';
 
     dataset
     {

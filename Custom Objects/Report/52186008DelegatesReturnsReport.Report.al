@@ -2,7 +2,7 @@
 Report 52186008 "Delegates Returns Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Delegates Returns Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Delegates Returns Report.rdl';
 
     dataset
     {

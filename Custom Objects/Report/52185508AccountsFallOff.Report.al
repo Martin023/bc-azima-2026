@@ -2,7 +2,7 @@
 Report 52185508 "Accounts FallOff Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Accounts Falloff.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Accounts Falloff.rdl';
 
 
     dataset

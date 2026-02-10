@@ -2,7 +2,7 @@
 Report 52185594 "SSNIT TIER 2"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/SSNIT TIER 2.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/SSNIT TIER 2.rdl';
 
     dataset
     {

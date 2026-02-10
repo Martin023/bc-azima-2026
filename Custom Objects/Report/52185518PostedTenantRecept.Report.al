@@ -2,7 +2,7 @@
 Report 52185518 "Posted Tenant Receipt"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Posted Tenant Receipt.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Posted Tenant Receipt.rdl';
 
     dataset
     {

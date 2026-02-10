@@ -2,7 +2,7 @@
 Report 52185551 "prStaff Pension Balance"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/prStaff Pension Balance.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/prStaff Pension Balance.rdl';
 
     dataset
     {

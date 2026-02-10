@@ -7,7 +7,7 @@ report 52185784 Datasheet
     Caption = 'Datasheet';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/DataSheet.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/DataSheet.rdl';
     dataset
     {
         dataitem(Members; Members)

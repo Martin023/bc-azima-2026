@@ -1,7 +1,7 @@
 report 52186055 "Petty Cash"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Petty Cash.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Petty Cash.rdl';
     dataset
     {
         dataitem(CashPaymentsHeader; "Payments Header")

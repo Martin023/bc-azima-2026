@@ -4,7 +4,7 @@ report 52187003 "Society Vehicle Request"
     Caption = 'Society Vehicle Request';
     //UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Society Vehicle Request.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Society Vehicle Request.rdl';
     dataset
     {
         dataitem(MotorVehicleRequest; "Motor Vehicle Request")

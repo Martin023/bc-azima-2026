@@ -2,7 +2,7 @@
 Report 52185428 PostBatches2
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/PostBatches2.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/PostBatches2.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52185560 "Validate Salary Card"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Validate Salary Card.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Validate Salary Card.rdl';
 
     dataset
     {

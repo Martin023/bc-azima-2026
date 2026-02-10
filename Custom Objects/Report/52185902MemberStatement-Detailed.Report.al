@@ -2,7 +2,7 @@
 Report 52185902 "Member Statement-Detailed"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Statement-Detailed.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Statement-Detailed.rdl';
 
     dataset
     {

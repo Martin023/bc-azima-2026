@@ -2,7 +2,7 @@
 Report 52185807 "OverTimeClaims Voucher"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/OverTimeClaims Voucher.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/OverTimeClaims Voucher.rdl';
 
     dataset
     {

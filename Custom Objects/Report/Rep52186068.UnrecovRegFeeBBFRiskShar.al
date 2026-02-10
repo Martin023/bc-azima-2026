@@ -6,7 +6,7 @@ report 52186068 "Unrecov. Reg Fee/BBF/Risk/Shar"
     ApplicationArea = All;
     Caption = 'Unrecov. Reg Fee/BBF/Risk/Shar';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Unrecov. Reg FeeBBFRiskShar.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Unrecov. Reg FeeBBFRiskShar.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

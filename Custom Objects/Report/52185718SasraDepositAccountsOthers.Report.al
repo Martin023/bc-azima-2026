@@ -2,7 +2,7 @@
 Report 52185718 "Sasra Deposit Accounts Others"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Sasra Deposit Accounts Others.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Sasra Deposit Accounts Others.rdl';
 
     dataset
     {

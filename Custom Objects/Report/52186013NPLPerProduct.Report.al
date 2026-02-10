@@ -2,7 +2,7 @@
 Report 52186013 "NPL Per Product"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/NPL Per Product.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/NPL Per Product.rdl';
 
     dataset
     {

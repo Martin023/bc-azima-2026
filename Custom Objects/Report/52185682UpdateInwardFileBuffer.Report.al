@@ -2,7 +2,7 @@
 Report 52185682 "Update Inward File Buffer"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Update Inward File Buffer.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Update Inward File Buffer.rdl';
 
     dataset
     {

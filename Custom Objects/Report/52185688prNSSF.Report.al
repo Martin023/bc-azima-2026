@@ -2,7 +2,7 @@
 Report 52185688 prNSSF
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/prNSSF.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/prNSSF.rdl';
 
     dataset
     {

@@ -11,7 +11,7 @@ report 52185951 "Assets Marked For Disposal"
     ApplicationArea = All;
     Caption = 'Assets Marked For Disposal';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Assets Marked For Disposal.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Assets Marked For Disposal.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

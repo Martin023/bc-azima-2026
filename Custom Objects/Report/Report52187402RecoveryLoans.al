@@ -4,7 +4,7 @@ Report 52187402 "Recovery Fresh Loans"
     ApplicationArea = All;
     DefaultLayout = RDLC;
     Caption = 'Recovery Loans Report';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Recovery Loans Resport.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Recovery Loans Resport.rdl';
 
     dataset
     {

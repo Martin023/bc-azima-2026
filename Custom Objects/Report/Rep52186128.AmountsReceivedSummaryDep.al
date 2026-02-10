@@ -6,7 +6,7 @@ report 52186128 "Amounts Received Summary - Dep"
     ApplicationArea = All;
     Caption = 'Amounts Received Summary - Dep';
     DefaultLayout = RDLC;
-    RDLClayout = './bc-kenpipe-2024/Layout/Amounts Received Summary - Dep.rdl';
+    RDLClayout = './bc-azima-2026/Layout/Amounts Received Summary - Dep.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

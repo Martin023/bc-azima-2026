@@ -6,7 +6,7 @@ report 52186069 "Unallocated Amounts Report"
     ApplicationArea = All;
     Caption = 'Unallocated Amounts Report';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Unallocated Amounts Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Unallocated Amounts Report.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

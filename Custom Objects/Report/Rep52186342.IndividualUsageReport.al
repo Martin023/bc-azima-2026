@@ -1,7 +1,7 @@
 report 52186342 "Individual Usage Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Individual Usage Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Individual Usage Report.rdl';
 
     dataset
     {

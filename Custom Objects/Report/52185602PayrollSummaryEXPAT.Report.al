@@ -2,7 +2,7 @@
 Report 52185602 "Payroll Summary EXPAT"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Payroll Summary EXPAT.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Payroll Summary EXPAT.rdl';
 
     dataset
     {

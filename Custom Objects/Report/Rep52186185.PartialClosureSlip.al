@@ -7,7 +7,7 @@ report 52186185 "Partial Closure Slip"
     Caption = 'Partial Closure Slip';
 
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Partial Closure Slip.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Partial Closure Slip.rdl';
 
     dataset
     {

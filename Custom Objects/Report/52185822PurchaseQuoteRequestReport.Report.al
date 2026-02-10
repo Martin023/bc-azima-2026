@@ -2,7 +2,7 @@
 // Report 52185822 "Purchase Quote Request Report"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Purchase Quote Request Report.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Purchase Quote Request Report.rdl';
 
 //     dataset
 //     {

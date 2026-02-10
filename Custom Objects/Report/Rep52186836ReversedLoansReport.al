@@ -3,7 +3,7 @@ report 52186836 "Reversed Loans Report"
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Reversed Loans Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Reversed Loans Report.rdl';
 
     dataset
     {

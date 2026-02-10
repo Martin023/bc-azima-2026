@@ -2,7 +2,7 @@
 Report 52185753 "ATM Activation Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/ATM Activation Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/ATM Activation Report.rdl';
 
     dataset
     {

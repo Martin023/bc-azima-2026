@@ -5,7 +5,7 @@ Report 52186792 "Notices Report"
     DefaultLayout = RDLC;
     ApplicationArea = Basic, suite;
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Notices.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Notices.rdl';
 
     dataset
     {

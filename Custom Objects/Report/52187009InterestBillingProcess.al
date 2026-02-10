@@ -5,7 +5,7 @@ report 52187009 "Dailly Billing Process"
     ProcessingOnly = true;
     Caption = 'GeneratecDaily Interest Entries';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Dailly Billing Process.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Dailly Billing Process.rdl';
     dataset
     {
 

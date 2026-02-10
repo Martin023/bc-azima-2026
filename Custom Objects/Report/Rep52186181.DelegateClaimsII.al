@@ -7,7 +7,7 @@ report 52186181 "Delegate Claims II"
     Caption = 'Dalegate Claims II';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Delegate Claims II.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Delegate Claims II.rdl';
 
     dataset
     {

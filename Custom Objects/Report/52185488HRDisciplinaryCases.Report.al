@@ -2,7 +2,7 @@
 Report 52185488 "HR Disciplinary Cases"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Disciplinary Cases.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Disciplinary Cases.rdl';
 
     dataset
     {

@@ -5,7 +5,7 @@ report 52186117 "Guarantor Substitution TAT"
 {
     ApplicationArea = All;
     Caption = 'Guarantor Substitution TAT';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Guarantor Substitution TAT Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Guarantor Substitution TAT Report.rdl';
 
     UsageCategory = ReportsAndAnalysis;
     dataset

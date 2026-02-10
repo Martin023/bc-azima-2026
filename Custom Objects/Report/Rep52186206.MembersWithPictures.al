@@ -6,7 +6,7 @@ report 52186206 "Members With Pictures"
     ApplicationArea = All;
     Caption = 'Members With Pictures';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Members With Pictures.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Members With Pictures.rdl';
     dataset
     {
         dataitem(Members; Members)

@@ -4,7 +4,7 @@ using Microsoft.Foundation.Company;
 report 52186971 "ClearedUncleared Cheques"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Uncleared Cheques.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Uncleared Cheques.rdl';
     dataset
     {
         dataitem(CashierTransactions; "Cashier Transactions")

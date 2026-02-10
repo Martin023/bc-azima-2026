@@ -2,7 +2,7 @@
 Report 52185874 "Sky Stmt xlsx Report B64 B."
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Sky Stmt xlsx Report B64 B..rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Sky Stmt xlsx Report B64 B..rdl';
 
     dataset
     {

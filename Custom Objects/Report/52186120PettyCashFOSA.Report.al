@@ -2,7 +2,7 @@
 Report 52186120 "Petty Cash FOSA Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Petty Cash FOSA Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Petty Cash FOSA Report.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

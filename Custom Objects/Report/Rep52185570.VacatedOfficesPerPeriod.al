@@ -4,7 +4,7 @@ report 52185570 "Vacated Offices Per Period"
     Caption = 'Vacated Offices Per Period';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Vacated Offices Per Period.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Vacated Offices Per Period.rdl';
     dataset
     {
         dataitem("Property Details"; "Property Details")

@@ -3,7 +3,7 @@
 Report 52185640 "Loan Appraisal Report-Salaried"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Appraisal Report-Salaried.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Appraisal Report-Salaried.rdl';
 
     dataset
     {

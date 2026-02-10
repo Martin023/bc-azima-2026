@@ -2,7 +2,7 @@
 Report 52186000 "Anti-Money Laundering Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Anti-Money Laundering Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Anti-Money Laundering Report.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

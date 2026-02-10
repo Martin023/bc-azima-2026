@@ -2,7 +2,7 @@
 Report 52185864 "Loan Appraisal Haramb-Shamba"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Appraisal Haramb-Shamba.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Appraisal Haramb-Shamba.rdl';
 
     dataset
     {

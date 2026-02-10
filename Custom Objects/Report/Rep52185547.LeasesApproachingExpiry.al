@@ -4,7 +4,7 @@ report 52185547 "Leases Approaching Expiry"
     Caption = 'Leases Approaching Expiry';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Leases Approaching Expiry.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Leases Approaching Expiry.rdl';
     dataset
     {
         dataitem(Lease; Lease)

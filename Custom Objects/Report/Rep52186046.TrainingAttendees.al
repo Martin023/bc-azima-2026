@@ -1,7 +1,7 @@
 report 52186046 TrainingAttendees
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Training Attendees Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Training Attendees Report.rdl';
     dataset
     {
 

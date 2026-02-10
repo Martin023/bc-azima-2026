@@ -2,7 +2,7 @@
 Report 52185683 "Cashier Withdrawal Slip"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Cashier Withdrawal Slip.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Cashier Withdrawal Slip.rdl';
 
     dataset
     {

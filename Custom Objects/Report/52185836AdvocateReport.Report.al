@@ -2,7 +2,7 @@
 Report 52185836 "Advocate Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Advocate Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Advocate Report.rdl';
 
     dataset
     {

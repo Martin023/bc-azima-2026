@@ -2,7 +2,7 @@
 Report 52185854 "Savings Accounts List"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Savings Accounts List.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Savings Accounts List.rdl';
 
     dataset
     {

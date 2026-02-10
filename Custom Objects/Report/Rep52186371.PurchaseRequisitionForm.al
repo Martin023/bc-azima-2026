@@ -1,7 +1,7 @@
 report 52186371 "Purchase Requisition Form"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Purchase Requisition Form.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Purchase Requisition Form.rdl';
 
     dataset
     {

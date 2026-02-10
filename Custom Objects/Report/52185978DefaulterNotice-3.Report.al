@@ -2,7 +2,7 @@
 Report 52185978 "Defaulter Notice-3"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Defaulter Notice-3.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Defaulter Notice-3.rdl';
 
     dataset
     {

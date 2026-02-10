@@ -4,7 +4,7 @@ report 52187415 "Witheld Tax Obligations On PV"
     Caption = 'Witheld Tax Obligations On PV';
     UsageCategory = Lists;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/WitheldTaxObligationsOnPV.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/WitheldTaxObligationsOnPV.rdl';
     dataset
     {
         dataitem(WitheldTaxObligationsOnPV; "Witheld Tax Obligations On PV")

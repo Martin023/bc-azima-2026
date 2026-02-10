@@ -2,7 +2,7 @@
 Report 52185448 "Ideal Repayment Schedule"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Ideal Repayment Schedule.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Ideal Repayment Schedule.rdl';
 
     dataset
     {

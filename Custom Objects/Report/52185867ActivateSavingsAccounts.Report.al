@@ -2,8 +2,8 @@
 Report 52185867 "Activate Savings Accounts"
 {
     // DefaultLayout = RDLC;
-    // RDLCLayout = './bc-kenpipe-2024/Layout/Activate Savings Accounts.rdl';
-    
+    // RDLCLayout = './bc-azima-2026/Layout/Activate Savings Accounts.rdl';
+
 
     ProcessingOnly = true;
 

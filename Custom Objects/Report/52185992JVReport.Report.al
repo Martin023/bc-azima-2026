@@ -2,7 +2,7 @@
 Report 52185992 "JV Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/JV Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/JV Report.rdl';
 
     dataset
     {

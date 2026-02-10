@@ -2,7 +2,7 @@
 Report 52186797 "Guarantor Notice"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Guarantor Notice.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Guarantor Notice.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

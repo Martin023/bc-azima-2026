@@ -3,7 +3,7 @@ Report 52185931 "Summary Unlocated A/C"
 {
     DefaultLayout = RDLC;
     Caption = 'Unallocated Fund Report';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Summary Unlocated AC.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Summary Unlocated AC.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

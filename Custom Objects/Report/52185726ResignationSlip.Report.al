@@ -2,7 +2,7 @@
 Report 52185726 "Resignation Slip"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Closure Slip.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Closure Slip.rdl';
     Caption = 'Closure Slip';
 
     dataset

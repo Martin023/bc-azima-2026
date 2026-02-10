@@ -2,7 +2,7 @@
 // Report 52185935 "RFQ Report-new"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/RFQ Report-new.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/RFQ Report-new.rdl';
 
 //     dataset
 //     {

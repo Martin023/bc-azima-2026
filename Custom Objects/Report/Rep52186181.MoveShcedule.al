@@ -10,7 +10,7 @@ report 52186182 MoveShcedule
     Caption = 'MoveShcedule';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/MoveShcedule.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/MoveShcedule.rdl';
     dataset
     {
         dataitem(FADepreciationBook; "FA Depreciation Book")

@@ -7,7 +7,7 @@ report 52186151 "Salary Accounts Report"
     Caption = 'Salary Accounts Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Salary Accounts Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Salary Accounts Report.rdl';
 
     dataset
     {

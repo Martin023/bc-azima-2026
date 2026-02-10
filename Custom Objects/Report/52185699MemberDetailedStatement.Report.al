@@ -2,7 +2,7 @@
 Report 52185699 "Member Detailed Statement"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Detailed Statement.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Detailed Statement.rdl';
 
     UsageCategory = ReportsAndAnalysis;
 

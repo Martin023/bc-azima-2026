@@ -4,7 +4,7 @@ report 52187006 "Society Vehicle Service"
     Caption = 'Society Vehicle Service';
     //UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Society Vehicle Service.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Society Vehicle Service.rdl';
     dataset
     {
         dataitem("Company Vehicles"; "Company Vehicles")

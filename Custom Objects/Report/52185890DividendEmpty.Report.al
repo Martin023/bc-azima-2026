@@ -2,7 +2,7 @@
 // Report 52185890 "Dividend Empty"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Dividend Empty.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Dividend Empty.rdl';
 
 //     dataset
 //     {

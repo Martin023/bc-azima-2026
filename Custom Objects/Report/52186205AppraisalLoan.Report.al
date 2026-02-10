@@ -1,6 +1,6 @@
 Report 52186205 "Appraisal Loan Report"
 {
-    RDLCLayout = './bc-kenpipe-2024/Layout/Appraisal Loan.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Appraisal Loan.rdl';
     Caption = 'Loan Appraised';
     DefaultLayout = RDLC;
     ApplicationArea = Basic, suite;

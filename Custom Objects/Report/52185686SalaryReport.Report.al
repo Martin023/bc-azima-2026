@@ -2,7 +2,7 @@
 // Report 52185686 "Salary Report"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Salary Report.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Salary Report.rdl';
 
 //     dataset
 //     {

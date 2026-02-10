@@ -2,7 +2,7 @@
 Report 52185987 "Term Loan-Offer Letter"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Term Loan-Offer Letter.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Term Loan-Offer Letter.rdl';
 
     dataset
     {

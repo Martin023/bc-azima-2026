@@ -6,7 +6,7 @@ report 52186118 "Member Withdrawal TAT"
     ApplicationArea = All;
     Caption = 'Member Withdrawal TAT';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Withdrawal TAT Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Withdrawal TAT Report.rdl';
 
     dataset
     {

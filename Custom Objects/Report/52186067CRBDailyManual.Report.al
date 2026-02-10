@@ -3,7 +3,7 @@
 Report 52186067 "CRB Daily Manual"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/CRB Daily Manual.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/CRB Daily Manual.rdl';
     ProcessingOnly = true;
 
     dataset

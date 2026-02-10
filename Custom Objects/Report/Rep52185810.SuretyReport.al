@@ -6,7 +6,7 @@ report 52185810 "Surety Report"
     ApplicationArea = All;
     Caption = 'Surety Report';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Surety Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Surety Report.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

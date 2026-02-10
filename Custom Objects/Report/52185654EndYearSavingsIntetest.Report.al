@@ -2,7 +2,7 @@
 Report 52185654 "End Year Savings Intetest"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/End Year Savings Intetest.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/End Year Savings Intetest.rdl';
 
     dataset
     {

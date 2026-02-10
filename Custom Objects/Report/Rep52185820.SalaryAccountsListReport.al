@@ -3,7 +3,7 @@ report 52185820 "Salary Accounts List Report"
     ApplicationArea = All;
     Caption = 'Salary Accounts List Report';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Salary Accounts List.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Salary Accounts List.rdl';
     dataset
     {
         dataitem("Savings Accounts"; "Savings Accounts")

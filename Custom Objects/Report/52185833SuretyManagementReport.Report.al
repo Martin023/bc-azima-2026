@@ -2,7 +2,7 @@
 Report 52185833 "Surety Management Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Surety Management Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Surety Management Report.rdl';
 
     dataset
     {

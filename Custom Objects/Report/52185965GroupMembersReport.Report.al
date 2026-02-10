@@ -2,7 +2,7 @@
 Report 52185965 "Group Members Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Group Members Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Group Members Report.rdl';
 
     dataset
     {

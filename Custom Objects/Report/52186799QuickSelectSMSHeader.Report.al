@@ -2,7 +2,7 @@
 Report 52186799 "Quick Select SMS Header"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Quck Select.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Quck Select.rdl';
 
     dataset
     {

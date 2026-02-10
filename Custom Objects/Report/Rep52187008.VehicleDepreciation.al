@@ -4,7 +4,7 @@ report 52187008 "Vehicle Depreciation"
     Caption = 'Vehicle Depreciation';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Vehicle Depreciation.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Vehicle Depreciation.rdl';
     dataset
     {
         dataitem(CompanyVehicles; "Company Vehicles")

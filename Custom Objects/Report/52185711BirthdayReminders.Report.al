@@ -2,7 +2,7 @@
 Report 52185711 "Birthday Reminders"
 {
     DefaultLayout = RDLC;
-    //RDLCLayout = './bc-kenpipe-2024/Layout/Birthday Reminders.rdl';
+    //RDLCLayout = './bc-azima-2026/Layout/Birthday Reminders.rdl';
     UsageCategory = Tasks;
     Caption = 'Send Birthday reminders';
     ProcessingOnly = true;

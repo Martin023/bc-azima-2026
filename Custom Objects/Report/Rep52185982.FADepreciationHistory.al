@@ -13,7 +13,7 @@ report 52185996 "FA Depreciation History"
     UsageCategory = ReportsAndAnalysis;
 
     DefaultLayout = rdlc;
-    RDLCLayout = './bc-kenpipe-2024/Layout/FA Depreciation History.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/FA Depreciation History.rdl';
 
     dataset
     {

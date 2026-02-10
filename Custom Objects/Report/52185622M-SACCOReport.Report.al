@@ -2,7 +2,7 @@
 Report 52185622 "M-SACCO Report."
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/M-SACCO Report..rdl';
+    RDLCLayout = './bc-azima-2026/Layout/M-SACCO Report..rdl';
 
     dataset
     {

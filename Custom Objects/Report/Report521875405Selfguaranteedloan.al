@@ -4,7 +4,7 @@ report 52187405 "Self Guaranteed Loans Report"
     ApplicationArea = All;
     DefaultLayout = RDLC;
     Caption = 'Self Guaranteed loans Report';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Disbursed Loans Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Disbursed Loans Report.rdl';
     dataset
     {
         dataitem(Loans; Loans)

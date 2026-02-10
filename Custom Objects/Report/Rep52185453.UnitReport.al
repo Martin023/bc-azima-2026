@@ -2,7 +2,7 @@ report 52185453 "Unit Report"
 {
     ApplicationArea = All;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Unit Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Unit Report.rdl';
     Caption = 'Office Spaces Report';
     dataset
     {

@@ -2,7 +2,7 @@
 // Report 52185704 "BBF Refunds"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/BBF Refunds.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/BBF Refunds.rdl';
 
 //     dataset
 //     {

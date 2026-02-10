@@ -1,7 +1,7 @@
 report 52186164 "New Customer Aging Report"
 {
     Caption = 'Customer Aging Report';
-    RDLCLayout = './bc-kenpipe-2024/Layout/New Customer Aging.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/New Customer Aging.rdl';
 
     dataset
     {

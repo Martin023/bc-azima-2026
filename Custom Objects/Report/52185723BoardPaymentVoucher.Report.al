@@ -2,7 +2,7 @@
 Report 52185723 "Board Payment Voucher"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Board Payment Voucher.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Board Payment Voucher.rdl';
 
     dataset
     {

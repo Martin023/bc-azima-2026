@@ -2,7 +2,7 @@
 Report 52185642 "FOSA Loan Register"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/FOSA Loan Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/FOSA Loan Register.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52186166 "Teller Specifications Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Teller Specifications Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Teller Specifications Report.rdl';
 
     dataset
     {

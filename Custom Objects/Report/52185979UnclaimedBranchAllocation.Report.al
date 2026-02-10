@@ -1,7 +1,7 @@
 Report 52185982 "UnClaimed Branch Allocation"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/UnClaimed Branch Allocation.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/UnClaimed Branch Allocation.rdl';
 
     dataset
     {

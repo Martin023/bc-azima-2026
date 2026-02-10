@@ -2,7 +2,7 @@
 Report 52185830 "Cheque Confirmation"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Cheque Confirmation.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Cheque Confirmation.rdl';
 
     dataset
     {

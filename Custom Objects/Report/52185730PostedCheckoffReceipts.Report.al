@@ -3,7 +3,7 @@ Report 52185730 "Posted Checkoff Receipts"
 {
     DefaultLayout = RDLC;
     Caption = 'Posted Checkoff Receipts';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Posted Checkoff Receipts.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Posted Checkoff Receipts.rdl';
     ApplicationArea = all;
     UsageCategory = ReportsAndAnalysis;
 

@@ -2,7 +2,7 @@
 Report 52185821 "RFQ Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/RFQ Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/RFQ Report.rdl';
 
     dataset
     {

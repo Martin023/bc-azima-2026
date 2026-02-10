@@ -3,7 +3,7 @@ Report 52185725 "Actual Repayment Schedule"
 {
     Caption = ' Repayment Schedule';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Actual Repayment Schedule.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Actual Repayment Schedule.rdl';
 
     dataset
     {

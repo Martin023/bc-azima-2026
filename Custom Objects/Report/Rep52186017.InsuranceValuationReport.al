@@ -11,7 +11,7 @@ report 52186017 "Insurance Valuation Report"
     Caption = 'Insurance Valuation Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Insurance Valuation Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Insurance Valuation Report.rdl';
 
     dataset
     {

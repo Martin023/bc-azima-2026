@@ -2,7 +2,7 @@
 Report 52185452 "Upgrade Member Class"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Upgrade Member Class.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Upgrade Member Class.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

@@ -2,7 +2,7 @@
 Report 52185529 "PR Individual Payslip"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/PR Individual Payslip.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/PR Individual Payslip.rdl';
 
 
     dataset

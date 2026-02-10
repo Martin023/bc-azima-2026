@@ -2,7 +2,7 @@
 Report 52185719 "Unpaid Deposits Claims"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Unpaid Deposits Claims.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Unpaid Deposits Claims.rdl';
 
     dataset
     {

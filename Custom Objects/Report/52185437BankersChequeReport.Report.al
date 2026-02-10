@@ -2,7 +2,7 @@
 Report 52185437 "Bankers Cheque Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Bankers Cheque Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Bankers Cheque Report.rdl';
 
     dataset
     {

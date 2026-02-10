@@ -2,7 +2,7 @@
 // Report 52185814 "Variance Report"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Variance Report.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Variance Report.rdl';
 
 //     dataset
 //     {

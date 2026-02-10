@@ -2,7 +2,7 @@ report 52186856 "Checkoff Advice Consolidated"
 {
     Caption = 'CheckoffAdvice Consolidated';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Checkoff Advice Consolidated.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Checkoff Advice Consolidated.rdl';
 
     dataset
     {

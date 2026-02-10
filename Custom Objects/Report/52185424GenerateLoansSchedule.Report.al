@@ -2,7 +2,7 @@
 Report 52185424 "Generate Loans Schedule"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Generate Loans Schedule.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Generate Loans Schedule.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

@@ -3,7 +3,7 @@ report 52186131 "AML First Transactions"
     ApplicationArea = All;
     Caption = 'AML First Transactions';
     UsageCategory = ReportsAndAnalysis;
-    RDLClayout = './bc-kenpipe-2024/Layout/AML First Transactions.rdl';
+    RDLClayout = './bc-azima-2026/Layout/AML First Transactions.rdl';
     dataset
     {
         dataitem(Savings_Ledger_Entry; "Savings Ledger Entry")

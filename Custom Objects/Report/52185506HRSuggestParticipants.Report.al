@@ -2,7 +2,7 @@
 Report 52185506 "HR Suggest Participants"
 {
     //DefaultLayout = RDLC;
-    //RDLCLayout = './bc-kenpipe-2024/Layout/HR Suggest Participants.rdl';
+    //RDLCLayout = './bc-azima-2026/Layout/HR Suggest Participants.rdl';
     ProcessingOnly = true;
 
     dataset

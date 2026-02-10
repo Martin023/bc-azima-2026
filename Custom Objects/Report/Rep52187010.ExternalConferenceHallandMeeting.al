@@ -4,7 +4,7 @@ report 52187010 "External Conf Hall and Mtng"
     Caption = 'External Conference Hall and Meeting';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/External Conference Hall and Meeting.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/External Conference Hall and Meeting.rdl';
     dataset
     {
         dataitem(ConferenceMeetingRoomsT; "Conference & Meeting Rooms-T")

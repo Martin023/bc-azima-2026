@@ -6,7 +6,7 @@
 Report 52186035 "CRB Daily Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/CRB Daily Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/CRB Daily Report.rdl';
 
     dataset
     {

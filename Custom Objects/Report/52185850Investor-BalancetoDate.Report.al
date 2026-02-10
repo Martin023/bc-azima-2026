@@ -2,7 +2,7 @@
 Report 52185850 "Investor - Balance to Date"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Investor - Balance to Date.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Investor - Balance to Date.rdl';
     Caption = 'Customer - Balance to Date';
 
     dataset

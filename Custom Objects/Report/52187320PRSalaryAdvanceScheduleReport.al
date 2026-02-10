@@ -4,7 +4,7 @@ report 52187320 "PRSalaryAdvanceSchedule"
     ApplicationArea = All;
     //DefaultRenderingLayout = LayoutName;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/PRSalaryAdvanceSchedule.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/PRSalaryAdvanceSchedule.rdl';
 
     dataset
     {

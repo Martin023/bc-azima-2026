@@ -3,7 +3,7 @@ report 52186096 "Bank Transactions Aging report"
     ApplicationArea = All;
     Caption = 'Bank Transactions Aging report';
     UsageCategory = ReportsAndAnalysis;
-    RdLcLayout = './bc-kenpipe-2024/Layout/Bank Transactions Aging report.rdl';
+    RdLcLayout = './bc-azima-2026/Layout/Bank Transactions Aging report.rdl';
     dataset
     {
         dataitem(BankAccountLedgerEntry; "Bank Account Ledger Entry")

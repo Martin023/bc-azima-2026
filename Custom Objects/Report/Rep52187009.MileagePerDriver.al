@@ -4,7 +4,7 @@ report 52187015 "Mileage Per Driver"
     ApplicationArea = all;
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Mileage Per Driver.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Mileage Per Driver.rdl';
 
     dataset
     {

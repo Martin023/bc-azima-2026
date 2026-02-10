@@ -2,7 +2,7 @@
 Report 52185660 "Loans Defaulter Aging - SASRA"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loans Defaulter Aging - SASRA.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loans Defaulter Aging - SASRA.rdl';
 
     dataset
     {

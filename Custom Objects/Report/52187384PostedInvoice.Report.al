@@ -2,7 +2,7 @@
 Report 52186064 "Posted Invoices"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Posted Invoices.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Posted Invoices.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52185531 "prGRA Form 51"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/prGRA Form 51.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/prGRA Form 51.rdl';
 
     dataset
     {

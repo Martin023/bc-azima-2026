@@ -6,7 +6,7 @@
 //     ApplicationArea = Basic, suite;
 //     UsageCategory = ReportsAndAnalysis;
 //     Caption = 'Tenant Revenue Collection';
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Tenant Revenue Collection.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Tenant Revenue Collection.rdl';
 
 //     dataset
 //     {

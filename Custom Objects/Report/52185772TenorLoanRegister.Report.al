@@ -2,7 +2,7 @@
 Report 52185772 "Tenor Loan Register"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Tenor Loan Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Tenor Loan Register.rdl';
 
     dataset
     {

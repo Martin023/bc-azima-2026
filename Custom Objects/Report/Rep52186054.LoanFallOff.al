@@ -1,7 +1,7 @@
 report 52186054 "Loan Fall Off"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Fall Off.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Fall Off.rdl';
     dataset
     {
         dataitem(Loans; Loans)

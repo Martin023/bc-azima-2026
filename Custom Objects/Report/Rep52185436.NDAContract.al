@@ -4,9 +4,9 @@ report 52185436 "NDA Contract"
     Caption = 'NDA Contract';
     //UsageCategory = Documents;
     // DefaultLayout = RDLC;
-    // RDLCLayout = './bc-kenpipe-2024/Layout/NDA Contract.rdl';
+    // RDLCLayout = './bc-azima-2026/Layout/NDA Contract.rdl';
     DefaultLayout = Word;
-    WordLayout = './bc-kenpipe-2024/Layout/NDA Contract.docx';
+    WordLayout = './bc-azima-2026/Layout/NDA Contract.docx';
     dataset
     {
         dataitem(Contracts; Contracts)

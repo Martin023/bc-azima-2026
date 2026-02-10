@@ -3,7 +3,7 @@ Report 52186789 "FOSA Account Change Logs"
     DefaultLayout = RDLC;
     ApplicationArea = Basic, suite;
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/FOSA Account Change Logs.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/FOSA Account Change Logs.rdl';
 
     dataset
     {

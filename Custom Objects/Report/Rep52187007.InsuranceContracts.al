@@ -4,7 +4,7 @@ report 52187007 "Insurance Contracts"
     Caption = 'Insurance Contracts';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Insurance Details Per Vehicle.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Insurance Details Per Vehicle.rdl';
     dataset
     {
         dataitem(Insurance; Insurance)

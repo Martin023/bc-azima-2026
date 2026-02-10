@@ -2,7 +2,7 @@
 Report 52186012 "Pre Dividend Checks"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Pre Dividend Checks.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Pre Dividend Checks.rdl';
 
     dataset
     {

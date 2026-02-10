@@ -2,7 +2,7 @@
 Report 52185447 "DMU Case Forwarded"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/DMU Case Forwarded.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/DMU Case Forwarded.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52185496 "pr Loans Deductions Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/pr Loans Deductions Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/pr Loans Deductions Report.rdl';
 
     dataset
     {

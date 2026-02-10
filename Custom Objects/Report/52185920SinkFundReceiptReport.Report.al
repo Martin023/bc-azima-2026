@@ -2,7 +2,7 @@
 Report 52185920 "Sink Fund Receipt Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Sink Fund Receipt Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Sink Fund Receipt Report.rdl';
 
     dataset
     {

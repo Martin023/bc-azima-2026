@@ -2,7 +2,7 @@
 // Report 52185872 "Sky Statement Report B64 B."
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Sky Statement Report B64 B..rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Sky Statement Report B64 B..rdl';
 
 //     dataset
 //     {

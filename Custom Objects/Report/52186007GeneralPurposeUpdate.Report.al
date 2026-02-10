@@ -2,7 +2,7 @@
 Report 52186007 "General Purpose Update"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/General Purpose Update.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/General Purpose Update.rdl';
 
     dataset
     {

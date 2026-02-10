@@ -2,7 +2,7 @@
 Report 52185757 "Premier Loan Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Premier Loan Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Premier Loan Report.rdl';
 
     dataset
     {

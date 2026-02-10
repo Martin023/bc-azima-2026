@@ -2,7 +2,7 @@
 Report 52185819 "Standing Order II"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Standing Order II.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Standing Order II.rdl';
 
     dataset
     {

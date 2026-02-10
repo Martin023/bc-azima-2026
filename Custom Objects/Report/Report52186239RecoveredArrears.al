@@ -4,7 +4,7 @@ Report 52186239 "Recovered Arrears"
     ApplicationArea = All;
     DefaultLayout = RDLC;
     Caption = 'Recovered Arrears Report';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Recovered Arrears.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Recovered Arrears.rdl';
 
     dataset
     {

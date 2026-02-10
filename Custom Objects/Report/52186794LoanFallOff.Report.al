@@ -5,7 +5,7 @@ Report 52186794 "Loan FallOff Report"
     DefaultLayout = RDLC;
     ApplicationArea = Basic, suite;
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan FallOff Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan FallOff Report.rdl';
 
     dataset
     {

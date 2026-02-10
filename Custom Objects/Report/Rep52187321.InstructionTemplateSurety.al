@@ -4,7 +4,7 @@ report 52187332 "Instruction Template - Surety"
     Caption = 'Instruction Template - Surety CEO';
     //UsageCategory = ReportsAndAnalysis;
     DefaultLayout = Word;
-    WordLayout = './bc-kenpipe-2024/Layout/Instruction Template Surety.docx';
+    WordLayout = './bc-azima-2026/Layout/Instruction Template Surety.docx';
     dataset
     {
         dataitem(SuretyManagement; "Surety Management")

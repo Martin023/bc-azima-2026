@@ -2,7 +2,7 @@
 Report 52186880 "All Investments Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/All Investments Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/All Investments Report.rdl';
 
     dataset
     {

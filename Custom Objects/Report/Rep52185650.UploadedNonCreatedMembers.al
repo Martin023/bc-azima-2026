@@ -4,7 +4,7 @@ report 52185650 "Uploaded Non Created Members"
     Caption = 'Uploaded Non Created Members';
     UsageCategory = ReportsAndAnalysis;
     DeFaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Uploaded Non Created Members.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Uploaded Non Created Members.rdl';
     dataset
     {
         dataitem(Members; Members)

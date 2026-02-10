@@ -2,7 +2,7 @@
 Report 52185910 "Net Salary Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Net Salary Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Net Salary Report.rdl';
 
     dataset
     {

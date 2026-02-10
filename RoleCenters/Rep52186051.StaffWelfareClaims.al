@@ -1,7 +1,7 @@
 report 52186051 "Staff Welfare Claims"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Staff Welfare Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Staff Welfare Report.rdl';
     dataset
     {
         dataitem(StaffWelfare; "Staff Welfare")

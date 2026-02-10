@@ -4,7 +4,7 @@ Report 52187401 "Member Deposits Report"
     ApplicationArea = All;
     DefaultLayout = RDLC;
     Caption = 'Member Deposits Report';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Deposits resport.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Deposits resport.rdl';
 
 
 

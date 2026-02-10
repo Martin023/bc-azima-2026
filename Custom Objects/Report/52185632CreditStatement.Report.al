@@ -2,7 +2,7 @@
 // Report 52185632 "Credit Statement"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Credit Statement.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Credit Statement.rdl';
 
 //     dataset
 //     {

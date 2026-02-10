@@ -2,7 +2,7 @@
 Report 52185548 "Payment History"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Payment History.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Payment History.rdl';
 
     dataset
     {

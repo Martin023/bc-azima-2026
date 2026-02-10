@@ -2,7 +2,7 @@
 report 52186876 "Loan Ageing Per Last Pay Date"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Aging Last Pay Date.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Aging Last Pay Date.rdl';
     UsageCategory = ReportsAndAnalysis;
     Caption = 'Loan Ageing Per Last Pay Date';
 

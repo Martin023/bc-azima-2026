@@ -2,7 +2,7 @@
 Report 52185507 OSIncident
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/OSIncident.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/OSIncident.rdl';
 
     dataset
     {

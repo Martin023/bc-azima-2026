@@ -2,7 +2,7 @@
 Report 52185503 "Victims on Incident List"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Victims on Incident List.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Victims on Incident List.rdl';
 
     dataset
     {

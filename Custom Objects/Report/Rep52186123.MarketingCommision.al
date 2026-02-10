@@ -4,7 +4,7 @@ report 52186123 "Marketing Commission"
     Caption = 'Marketing Commission ';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Marketing Commission .rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Marketing Commission .rdl';
 
     dataset
     {

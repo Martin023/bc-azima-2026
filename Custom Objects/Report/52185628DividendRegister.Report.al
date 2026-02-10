@@ -2,7 +2,7 @@
 Report 52185628 "Dividend Register"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Dividend Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Dividend Register.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52185768 "Sink Fund Notice Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Sink Fund Notice Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Sink Fund Notice Report.rdl';
     caption = 'Deceased Member Report';
 
     dataset

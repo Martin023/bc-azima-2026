@@ -2,7 +2,7 @@
 Report 52186005 "Checkoff Advice Manual"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Checkoff Advice Manual.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Checkoff Advice Manual.rdl';
 
     dataset
     {

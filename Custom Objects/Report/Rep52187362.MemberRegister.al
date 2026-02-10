@@ -4,7 +4,7 @@
 //     Caption = 'Member Listing';
 //     UsageCategory = ReportsAndAnalysis;
 //     DeFaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Members Register Active.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Members Register Active.rdl';
 //     dataset
 //     {
 //         dataitem(Members; Members)

@@ -2,7 +2,7 @@
 Report 52185567 "Negative Pay List"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Negative Pay List.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Negative Pay List.rdl';
 
     dataset
     {

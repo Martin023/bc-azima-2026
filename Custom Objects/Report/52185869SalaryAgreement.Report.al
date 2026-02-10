@@ -2,7 +2,7 @@
 Report 52185869 "Salary Agreement"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Salary Agreement.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Salary Agreement.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52185685 "Cashier CHDeposit Slip"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Cashier CHDeposit Slip.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Cashier CHDeposit Slip.rdl';
 
     dataset
     {

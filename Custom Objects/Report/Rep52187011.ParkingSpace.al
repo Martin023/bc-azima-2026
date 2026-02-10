@@ -4,7 +4,7 @@ report 52187011 "Parking Space"
     Caption = 'Parking Space - Internal';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Parking Space.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Parking Space.rdl';
     dataset
     {
         dataitem(ParkingSpace; "Parking Space")

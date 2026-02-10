@@ -2,7 +2,7 @@
 Report 52185533 "prPayroll Cheque Details"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/prPayroll Cheque Details.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/prPayroll Cheque Details.rdl';
 
     dataset
     {

@@ -4,7 +4,7 @@ using Microsoft.Foundation.Company;
 report 52186843 "Separation dues"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Separation dues.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Separation dues.rdl';
     dataset
     {
         dataitem(HREmployeeExitInterviews; "HR Employee Exit Interviews")

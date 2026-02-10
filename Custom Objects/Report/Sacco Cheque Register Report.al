@@ -2,7 +2,7 @@
 Report 52186172 "Sacco Cheque Register"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Sacco Cheque Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Sacco Cheque Register.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

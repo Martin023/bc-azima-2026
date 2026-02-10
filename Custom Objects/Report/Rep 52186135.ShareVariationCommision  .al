@@ -5,7 +5,7 @@ report 52186135 "Shares Commission"
     Caption = 'Shares Commission ';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Shares Commission .rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Shares Commission .rdl';
 
     dataset
     {

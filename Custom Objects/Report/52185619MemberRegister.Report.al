@@ -4,7 +4,7 @@ Report 52185619 "Member Register"
     DefaultLayout = RDLC;
     UsageCategory = ReportsAndAnalysis;
     Caption = 'Member Register Fosa';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Register.rdl';
 
     dataset
     {

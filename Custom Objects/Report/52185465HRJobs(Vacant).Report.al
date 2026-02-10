@@ -2,7 +2,7 @@
 Report 52185465 "HR Jobs (Vacant)"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Jobs (Vacant).rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Jobs (Vacant).rdl';
     Caption = 'HR Jobs (Vacant)';
 
     dataset

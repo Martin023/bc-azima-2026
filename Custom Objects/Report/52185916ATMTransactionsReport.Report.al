@@ -2,7 +2,7 @@
 Report 52185916 "ATM Transactions Report."
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/ATM Transactions Report..rdl';
+    RDLCLayout = './bc-azima-2026/Layout/ATM Transactions Report..rdl';
 
     dataset
     {

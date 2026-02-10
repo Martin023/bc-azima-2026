@@ -5,7 +5,7 @@ report 52186199 "Loan Monthly Receipt Report"
 {
     ApplicationArea = All;
     Caption = 'Loan Monthly Receipt Report';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loans Monthly Receipt Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loans Monthly Receipt Report.rdl';
 
     dataset
     {

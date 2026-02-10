@@ -2,7 +2,7 @@
 Report 52185586 "Gross Reconcilliation"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Gross Reconcilliation.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Gross Reconcilliation.rdl';
 
     dataset
     {

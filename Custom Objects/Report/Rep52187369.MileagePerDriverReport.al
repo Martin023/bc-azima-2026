@@ -4,7 +4,7 @@ report 52187369 "Mileage Per Driver Report"
     Caption = 'Mileage Per Driver Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Mileage Per Driver Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Mileage Per Driver Report.rdl';
     dataset
     {
         dataitem(VehicleMovement; "Vehicle Movement")

@@ -2,7 +2,7 @@
 Report 52185795 "Leave Approvers Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Leave Approvers Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Leave Approvers Report.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52185994 "Delegates Loan Register New"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Delegates Loan Register New.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Delegates Loan Register New.rdl';
 
     dataset
     {

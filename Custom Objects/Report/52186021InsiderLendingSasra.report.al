@@ -2,7 +2,7 @@ Report 52186021 "Insider Lending Report"
 {
 
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Insider Lending Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Insider Lending Report.rdl';
 
     dataset
     {

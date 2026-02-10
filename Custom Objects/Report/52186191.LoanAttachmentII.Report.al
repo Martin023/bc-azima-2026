@@ -4,7 +4,7 @@ using Microsoft.Foundation.Company;
 report 52186191 "Loan Attachment II"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Attachment II.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Attachment II.rdl';
 
     dataset
     {

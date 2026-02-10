@@ -2,7 +2,7 @@
 Report 52185502 "HR Medical Scheme Allotement S"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Medical Scheme Allotement S.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Medical Scheme Allotement S.rdl';
 
     dataset
     {

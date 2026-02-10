@@ -7,7 +7,7 @@ report 52185814 "Execution Form"
     Caption = 'Execution Form';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = Word;
-    WordLayout = './bc-kenpipe-2024/Layout/Execution Form.docx';
+    WordLayout = './bc-azima-2026/Layout/Execution Form.docx';
 
     dataset
     {

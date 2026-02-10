@@ -2,7 +2,7 @@
 Report 52185806 "Adjust Bank Ledger To Open"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Adjust Bank Ledger To Open.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Adjust Bank Ledger To Open.rdl';
 
     dataset
     {

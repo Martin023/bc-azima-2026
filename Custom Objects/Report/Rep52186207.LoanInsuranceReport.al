@@ -7,7 +7,7 @@ report 52186207 "Loan Insurance Report"
     Caption = 'Loan Insurance Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Insurance Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Insurance Register.rdl';
     dataset
     {
         dataitem(Loans; Loans)

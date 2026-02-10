@@ -2,7 +2,7 @@
 Report 52185692 "Checkoff Advice  Effectiveness"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Checkoff Advice  Effectiveness.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Checkoff Advice  Effectiveness.rdl';
 
     dataset
     {

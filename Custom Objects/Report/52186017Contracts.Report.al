@@ -2,7 +2,7 @@
 // Report 52186017 Contracts
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Contracts.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Contracts.rdl';
 
 //     dataset
 //     {

@@ -1,7 +1,7 @@
 Report 52186396 "Tenant Income Earned"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Tenant Income Earned.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Tenant Income Earned.rdl';
 
     dataset
     {

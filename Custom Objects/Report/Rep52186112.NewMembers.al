@@ -4,7 +4,7 @@ report 52186112 "New Members Report"
     Caption = 'New Members';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/NewMembers.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/NewMembers.rdl';
     dataset
     {
         dataitem(Members; Members)

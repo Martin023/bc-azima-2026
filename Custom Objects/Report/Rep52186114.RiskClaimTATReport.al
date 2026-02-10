@@ -6,7 +6,7 @@ report 52186114 "Risk Claim TAT Report"
     ApplicationArea = All;
 
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Risk Claim TAT Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Risk Claim TAT Report.rdl';
     dataset
     {
         dataitem(SinkfundReportInformation; "Sinkfund Report Information")

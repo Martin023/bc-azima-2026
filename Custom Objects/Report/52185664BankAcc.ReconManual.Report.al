@@ -2,7 +2,7 @@
 Report 52185664 "Bank Acc. Recon Manual"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Bank Acc. Recon Manual.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Bank Acc. Recon Manual.rdl';
 
     dataset
     {

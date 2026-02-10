@@ -7,7 +7,7 @@ report 52186153 "Ind Member Lifetime Value Rep"
     Caption = 'Ind. Member Lifetime Value Rep';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Ind Member Lifetime Value Rep.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Ind Member Lifetime Value Rep.rdl';
     dataset
     {
         dataitem(Members; Members)

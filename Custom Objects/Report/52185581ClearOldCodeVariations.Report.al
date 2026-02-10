@@ -2,7 +2,7 @@
 Report 52185581 "Clear Old Code Variations"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Clear Old Code Variations.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Clear Old Code Variations.rdl';
 
     dataset
     {

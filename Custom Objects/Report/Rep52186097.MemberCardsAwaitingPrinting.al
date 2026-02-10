@@ -7,7 +7,7 @@ report 52186097 "Member Cards Awaiting Printing"
     Caption = 'Member Cards Awaiting Printing';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Cards Awaiting Printing.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Cards Awaiting Printing.rdl';
     dataset
     {
         dataitem(Members; Members)

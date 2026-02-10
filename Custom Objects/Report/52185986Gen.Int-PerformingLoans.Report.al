@@ -2,7 +2,7 @@
 // Report 52185986 "Gen.Int-Performing Loans"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Gen.Int-Performing Loans.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Gen.Int-Performing Loans.rdl';
 
 //     dataset
 //     {

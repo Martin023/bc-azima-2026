@@ -2,7 +2,7 @@
 Report 52185511 "Individual Scorecard Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Individual Scorecard Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Individual Scorecard Report.rdl';
 
     dataset
     {

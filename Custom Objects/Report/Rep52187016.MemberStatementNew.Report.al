@@ -6,7 +6,7 @@ Report 52187016 "Member and loan Statement"
     ApplicationArea = Basic, suite;
     UsageCategory = ReportsAndAnalysis;
     Caption = 'Member statement';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Statement New.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Statement New.rdl';
 
     dataset
     {

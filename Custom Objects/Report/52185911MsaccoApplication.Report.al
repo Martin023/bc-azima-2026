@@ -2,7 +2,7 @@
 Report 52185911 "Msacco Application"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Msacco Application.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Msacco Application.rdl';
 
     dataset
     {

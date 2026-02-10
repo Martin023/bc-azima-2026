@@ -4,7 +4,7 @@ report 52186110 "Risk Claims Report"
     Caption = 'Risk Claims Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Risk Claim Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Risk Claim Report.rdl';
     dataset
     {
         dataitem(SinkFundReportInformation; "SinkFund Report Information")

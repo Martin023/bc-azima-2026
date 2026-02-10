@@ -2,7 +2,7 @@
 Report 52185781 Receipt
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Receipt.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Receipt.rdl';
 
     dataset
     {

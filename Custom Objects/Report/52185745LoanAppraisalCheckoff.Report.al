@@ -1,6 +1,6 @@
 Report 52185745 "Loan Appraisal Checkoff"
 {
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Appraisal Checkoff.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Appraisal Checkoff.rdl';
     Caption = 'Loan Appraisal Check-off & Salaried';
     DefaultLayout = RDLC;
     ApplicationArea = Basic, suite;

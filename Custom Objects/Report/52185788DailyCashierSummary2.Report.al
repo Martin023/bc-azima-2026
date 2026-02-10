@@ -2,7 +2,7 @@
 Report 52185788 "Daily Cashier Summary 2"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Daily Cashier Summary 2.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Daily Cashier Summary 2.rdl';
 
     dataset
     {

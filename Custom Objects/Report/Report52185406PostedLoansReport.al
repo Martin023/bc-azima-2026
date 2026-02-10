@@ -4,7 +4,7 @@ Report 52187406 "Posted Loans Report"
     ApplicationArea = All;
     DefaultLayout = RDLC;
     Caption = 'Posted Loans Report';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Posted Loans Resport.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Posted Loans Resport.rdl';
 
     dataset
     {

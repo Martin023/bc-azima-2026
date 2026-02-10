@@ -4,7 +4,7 @@ report 52187396 "Vehicle Accidents - Multiple"
     Caption = 'Vehicle Accidents - Multiple';
     //UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Vehicle Accidents - Multiple.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Vehicle Accidents - Multiple.rdl';
     dataset
     {
 

@@ -2,7 +2,7 @@
 Report 52185535 "prOther Payments"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/prOther Payments.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/prOther Payments.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52185882 "Update Virtual Members"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Update Virtual Members.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Update Virtual Members.rdl';
 
     dataset
     {

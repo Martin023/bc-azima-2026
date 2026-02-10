@@ -2,7 +2,7 @@
 // // Report 52185812 "Purchase Document Test"
 // // {
 // //     DefaultLayout = RDLC;
-// //     RDLCLayout = './bc-kenpipe-2024/Layout/Purchase Document Test.rdl';
+// //     RDLCLayout = './bc-azima-2026/Layout/Purchase Document Test.rdl';
 // //     Caption = 'Purchase Document Test';
 
 // //     dataset

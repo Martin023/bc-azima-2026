@@ -1,7 +1,7 @@
 report 52186061 "Share Capital fee"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Share Capital Transfer fee Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Share Capital Transfer fee Report.rdl';
     dataset
     {
         dataitem(ShareCapitalTransferBuffer; "Share Capital Transfer Buffer")

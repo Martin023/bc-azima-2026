@@ -2,7 +2,7 @@
 Report 52185846 "Tenant Leases"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Tenant Leases.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Tenant Leases.rdl';
 
     dataset
     {

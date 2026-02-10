@@ -2,7 +2,7 @@
 Report 52185940 "Members Age"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Members Age.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Members Age.rdl';
 
     dataset
     {

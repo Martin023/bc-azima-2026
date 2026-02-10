@@ -2,7 +2,7 @@
 // Report 52186022 "TOTO No Name"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/TOTO No Name.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/TOTO No Name.rdl';
 
 //     dataset
 //     {

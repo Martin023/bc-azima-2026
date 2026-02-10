@@ -2,7 +2,7 @@
 Report 52185509 "Separation report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Separation report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Separation report.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52186045 "StaffPosition"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Staff Position.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Staff Position.rdl';
 
     dataset
     {

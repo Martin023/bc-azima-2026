@@ -2,7 +2,7 @@
 Report 52185530 "prMonthly Variance"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/prMonthly Variance.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/prMonthly Variance.rdl';
 
     dataset
     {

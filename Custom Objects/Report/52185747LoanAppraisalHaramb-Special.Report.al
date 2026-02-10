@@ -2,7 +2,7 @@
 Report 52185747 "Loan Appraisal Bus-Special"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Appraisal Business-Special2.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Appraisal Business-Special2.rdl';
 
     dataset
     {
@@ -1078,7 +1078,7 @@ Report 52185747 "Loan Appraisal Bus-Special"
             end;
         }
     }
-    
+
 
     requestpage
     {
@@ -1096,7 +1096,7 @@ Report 52185747 "Loan Appraisal Bus-Special"
     labels
     {
     }
- procedure CreateLoanAppraisalBackup(LoanNo: Code[20])
+    procedure CreateLoanAppraisalBackup(LoanNo: Code[20])
     var
         LoanRec: Record "Loan Appraisal";
     begin

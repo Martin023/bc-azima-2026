@@ -2,7 +2,7 @@
 Report 52185565 "Reconciliation - By Entry/Exit"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Reconciliation - By EntryExit.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Reconciliation - By EntryExit.rdl';
 
     dataset
     {

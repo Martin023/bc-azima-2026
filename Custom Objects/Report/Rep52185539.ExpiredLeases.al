@@ -4,7 +4,7 @@ report 52185539 "Expired Leases"
     Caption = 'Expired Leases';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Expired Leases.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Expired Leases.rdl';
     dataset
     {
         dataitem(Lease; Lease)

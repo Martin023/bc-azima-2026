@@ -1,7 +1,7 @@
 Report 52186105 "Deposit FOSA List Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Deposit FOSA List New.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Deposit FOSA List New.rdl';
 
     dataset
     {

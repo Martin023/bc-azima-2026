@@ -2,7 +2,7 @@
 Report 52185601 "Payroll Summary RED"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Payroll Summary RED.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Payroll Summary RED.rdl';
 
     dataset
     {

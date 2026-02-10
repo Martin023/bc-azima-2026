@@ -2,7 +2,7 @@
 Report 52185926 "Direct Debit Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Direct Debit Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Direct Debit Report.rdl';
 
     dataset
     {

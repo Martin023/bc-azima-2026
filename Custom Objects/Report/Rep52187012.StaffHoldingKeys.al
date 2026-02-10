@@ -4,7 +4,7 @@ report 52187013 "Staff Holding Keys"
     Caption = 'Staff Holding Keys';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Staff Holding Keys.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Staff Holding Keys.rdl';
     dataset
     {
         dataitem(OfficeKeys; "Key Request Table")

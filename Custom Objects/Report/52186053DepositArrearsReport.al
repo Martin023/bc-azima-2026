@@ -1,7 +1,7 @@
 report 52186053 "Deposits Arreas Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Deposit Arrears Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Deposit Arrears Report.rdl';
     ApplicationArea = All;
     UsageCategory = ReportsAndAnalysis;
 

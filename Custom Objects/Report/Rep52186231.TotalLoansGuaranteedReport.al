@@ -7,7 +7,7 @@ report 52186231 "Total Loans Guaranteed Report"
     Caption = 'Total Loans Guaranteed Report';
     UsageCategory = Lists;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Total Loans Guaranteed Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Total Loans Guaranteed Report.rdl';
     dataset
     {
         dataitem(Members; Members)

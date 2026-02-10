@@ -2,7 +2,7 @@
 Report 52185955 "NOK With Principle Mem ID No."
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/NOK With Principle Mem ID No..rdl';
+    RDLCLayout = './bc-azima-2026/Layout/NOK With Principle Mem ID No..rdl';
 
     dataset
     {

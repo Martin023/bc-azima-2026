@@ -4,7 +4,7 @@ Report 52186134 "Sales Invoice Printout"
     DefaultLayout = RDLC;
     ApplicationArea = Basic, suite;
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Sales Invoice Printout.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Sales Invoice Printout.rdl';
 
     dataset
     {

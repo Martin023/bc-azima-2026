@@ -3,7 +3,7 @@ Report 52186505 "Loan Summary Register"
 {
     Caption = 'Branch Loans Summary';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Summary Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Summary Register.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

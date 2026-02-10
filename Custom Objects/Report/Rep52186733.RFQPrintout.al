@@ -2,7 +2,7 @@ report 52186733 "RFQ Printout"
 {
 
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/RFQ Printout.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/RFQ Printout.rdl';
     dataset
     {
         dataitem(PurchaseQuoteHeader; "Purchase Quote Header")

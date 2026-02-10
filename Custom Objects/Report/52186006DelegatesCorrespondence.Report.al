@@ -2,7 +2,7 @@
 Report 52186006 "Delegates Correspondence"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Delegates Correspondence.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Delegates Correspondence.rdl';
 
     dataset
     {

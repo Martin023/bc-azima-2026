@@ -2,7 +2,7 @@
 Report 52185456 "Validate translation Table"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Validate translation Table.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Validate translation Table.rdl';
 
     dataset
     {

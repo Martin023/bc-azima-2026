@@ -4,7 +4,7 @@ Report 52185933 "Member Withdrawal Notice"
     DefaultLayout = RDLC;
 
     Caption = 'Member Withdrawal Notices';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Withdrawal Notice.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Withdrawal Notice.rdl';
 
     UsageCategory = ReportsAndAnalysis;
 

@@ -1,7 +1,7 @@
 Report 52186032 "Recovered Fresh Loans"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Recovery Fresh Loans.rdlc';
+    RDLCLayout = './bc-azima-2026/Layout/Recovery Fresh Loans.rdlc';
     UsageCategory = ReportsAndAnalysis;
     Caption = 'Loan FallOff Variance';
 

@@ -2,7 +2,7 @@
 Report 52185957 "Loan Appraisal Haramb-Mortgage"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Appraisal Haramb-Mortgage.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Appraisal Haramb-Mortgage.rdl';
 
     dataset
     {

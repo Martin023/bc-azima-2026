@@ -2,7 +2,7 @@
 Report 52185702 "Member Details Check Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Details Check Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Details Check Report.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52185829 "Staff Training Request Form"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Staff Training Request Form.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Staff Training Request Form.rdl';
 
     dataset
     {

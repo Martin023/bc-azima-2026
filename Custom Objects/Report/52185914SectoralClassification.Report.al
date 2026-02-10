@@ -2,7 +2,7 @@
 Report 52185914 "Sectoral Classification"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Sectoral Classification.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Sectoral Classification.rdl';
 
     dataset
     {

@@ -4,7 +4,7 @@ Report 52185748 "Update Payroll Deductions"
     DefaultLayout = RDLC;
     UsageCategory = ReportsAndAnalysis;
     Caption = 'Update Payroll Deductions';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Update Payroll Deductions.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Update Payroll Deductions.rdl';
 
     dataset
     {

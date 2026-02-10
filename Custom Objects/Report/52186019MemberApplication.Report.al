@@ -2,7 +2,7 @@
 Report 52186019 "Member Application"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Application.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Application.rdl';
 
     dataset
     {

@@ -4,7 +4,7 @@ report 50110 Sendingemails
     ApplicationArea = All;
     Caption = 'MemberSendMail';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/emailstatement.rdlc';
+    RDLCLayout = './bc-azima-2026/Layout/emailstatement.rdlc';
 
     dataset
     {

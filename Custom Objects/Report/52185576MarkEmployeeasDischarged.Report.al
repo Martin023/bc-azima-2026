@@ -2,7 +2,7 @@
 Report 52185576 "Mark Employee as Discharged"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Mark Employee as Discharged.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Mark Employee as Discharged.rdl';
 
     dataset
     {

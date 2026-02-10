@@ -2,7 +2,7 @@
 Report 52185823 "Purchase Requisition"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Purchase Requisition.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Purchase Requisition.rdl';
 
     dataset
     {

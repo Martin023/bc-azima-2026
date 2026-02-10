@@ -2,7 +2,7 @@
 Report 52185932 "Deligates Registration"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Deligates Registration.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Deligates Registration.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52185525 "PR Other PR Customers (Listin)"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/PR Other PR Customers (Listin).rdl';
+    RDLCLayout = './bc-azima-2026/Layout/PR Other PR Customers (Listin).rdl';
 
     dataset
     {

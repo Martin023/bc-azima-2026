@@ -9,7 +9,7 @@ report 52186232 "EX member Creditors"
     Caption = 'EX member Creditors Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/EX member Creditors Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/EX member Creditors Report.rdl';
     dataset
     {
         dataitem(GLEntry; "G/L Entry")

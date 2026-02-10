@@ -1,6 +1,6 @@
 Report 52187420 "HR Loans Appraisal  Checkoff"
 {
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Loans Appraissal Checkoff.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Loans Appraissal Checkoff.rdl';
     Caption = 'HR Loan Appraisal Check-off';
     DefaultLayout = RDLC;
     ApplicationArea = Basic, suite;

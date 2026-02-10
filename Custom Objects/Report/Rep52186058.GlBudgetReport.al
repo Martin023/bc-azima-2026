@@ -1,7 +1,7 @@
 report 52186058 "G/l Budget Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/GL Budget Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/GL Budget Report.rdl';
     dataset
     {
         dataitem(GLAccount; "G/L Account")

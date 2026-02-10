@@ -4,7 +4,7 @@ report 52187358 "Member Status"
     Caption = 'Member Status';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Status.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Status.rdl';
 
     dataset
     {

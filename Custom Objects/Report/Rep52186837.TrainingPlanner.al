@@ -1,7 +1,7 @@
 report 52186837 "Training Planner"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Training Planner.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Training Planner.rdl';
     dataset
     {
         dataitem(HrTrainingPlanner; "Hr Training Planner")

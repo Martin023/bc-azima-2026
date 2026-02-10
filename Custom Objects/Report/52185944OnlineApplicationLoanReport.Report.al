@@ -2,7 +2,7 @@
 // Report 52185944 "Online Application Loan Report"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Online Application Loan Report.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Online Application Loan Report.rdl';
 
 //     dataset
 //     {

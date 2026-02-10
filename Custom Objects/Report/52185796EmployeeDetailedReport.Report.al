@@ -2,7 +2,7 @@
 Report 52185796 "Employee Detailed Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Employee Detailed Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Employee Detailed Report.rdl';
 
     dataset
     {

@@ -1,7 +1,7 @@
 report 52186183 "Mobile Banking Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/ Mobile Banking Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/ Mobile Banking Report.rdl';
 
     dataset
     {

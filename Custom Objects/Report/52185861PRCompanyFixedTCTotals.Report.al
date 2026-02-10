@@ -2,7 +2,7 @@
 Report 52185861 "PR Company FixedTC Totals"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/PR Company FixedTC Totals.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/PR Company FixedTC Totals.rdl';
 
     dataset
     {

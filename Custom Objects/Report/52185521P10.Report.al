@@ -2,7 +2,7 @@
 Report 52185521 P10
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/P10.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/P10.rdl';
 
     dataset
     {

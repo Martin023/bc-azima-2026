@@ -2,7 +2,7 @@
 Report 52185615 "Bank Acc. Recons"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Bank Acc. Recons.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Bank Acc. Recons.rdl';
     Caption = 'Posted Bank Account Reconciliation Report';
 
     dataset

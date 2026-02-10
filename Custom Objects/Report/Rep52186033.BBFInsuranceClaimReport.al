@@ -7,7 +7,7 @@ report 52186033 "BBF - Insurance Claim Report"
     Caption = 'BBF - Insurance Claim Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/BBF - Insurance Claim Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/BBF - Insurance Claim Report.rdl';
     dataset
     {
         dataitem(SinkFundReportInformation; "SinkFund Report Information")

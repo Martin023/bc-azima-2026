@@ -2,7 +2,7 @@
 Report 52185728 "Loan Guaranteed"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Guaranteed.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Guaranteed.rdl';
 
     dataset
     {

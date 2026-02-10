@@ -3,7 +3,7 @@
 Report 52186793 "Attachment Certtificate"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Attachment Certificate.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Attachment Certificate.rdl';
 
     dataset
     {

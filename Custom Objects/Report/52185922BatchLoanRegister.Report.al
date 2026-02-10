@@ -2,7 +2,7 @@
 Report 52185922 "Batch Loan Register"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Batch Loan Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Batch Loan Register.rdl';
 
     dataset
     {

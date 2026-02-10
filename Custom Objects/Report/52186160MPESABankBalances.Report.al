@@ -2,7 +2,7 @@
 Report 52186160 "MPESA Bank Bal Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/MPESA Bank Bal Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/MPESA Bank Bal Report.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

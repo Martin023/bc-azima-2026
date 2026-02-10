@@ -2,7 +2,7 @@
 Report 52185695 "Employee Requisiton Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Employee Requisiton Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Employee Requisiton Report.rdl';
 
     dataset
     {

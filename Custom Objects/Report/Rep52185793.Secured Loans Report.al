@@ -7,7 +7,7 @@ report 52185793 "Secured Loans Report"
     Caption = 'Secured Loans Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Secured Loans Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Secured Loans Report.rdl';
 
 
     dataset

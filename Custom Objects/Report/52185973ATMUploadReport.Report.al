@@ -2,7 +2,7 @@
 Report 52185973 "ATM Upload Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/ATM Upload Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/ATM Upload Report.rdl';
 
     dataset
     {

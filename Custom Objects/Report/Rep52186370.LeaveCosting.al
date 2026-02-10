@@ -1,7 +1,7 @@
 report 52186370 "Leave Costing"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Leave Costing.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Leave Costing.rdl';
     dataset
     {
         dataitem(Hremployees; "Hr employees")

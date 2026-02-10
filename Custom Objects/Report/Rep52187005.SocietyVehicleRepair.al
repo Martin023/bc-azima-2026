@@ -4,7 +4,7 @@ report 52187005 "Society Vehicle Repair"
     Caption = 'Society Vehicle Repair';
     //UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Society Vehicle Repair.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Society Vehicle Repair.rdl';
     dataset
     {
         dataitem(MaintainMachneVehicles; "Maintain Machne/Vehicles")

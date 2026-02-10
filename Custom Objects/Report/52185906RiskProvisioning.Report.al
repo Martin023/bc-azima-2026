@@ -2,7 +2,7 @@
 Report 52185906 "Risk Provisioning"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Risks Provisioning.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Risks Provisioning.rdl';
 
     dataset
     {

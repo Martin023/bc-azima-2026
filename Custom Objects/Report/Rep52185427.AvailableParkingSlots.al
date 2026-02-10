@@ -4,7 +4,7 @@ report 52185427 "Available Parking Slots"
     Caption = 'Available Parking Slots';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Available Parking Slots.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Available Parking Slots.rdl';
     dataset
     {
         dataitem(ParkingListTable; "Parking List Table")

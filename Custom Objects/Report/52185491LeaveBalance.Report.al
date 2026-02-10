@@ -2,7 +2,7 @@
 Report 52185491 "Leave Balance"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Leave Balance.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Leave Balance.rdl';
 
     dataset
     {

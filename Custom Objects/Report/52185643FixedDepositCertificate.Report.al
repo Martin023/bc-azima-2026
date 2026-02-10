@@ -2,7 +2,7 @@
 Report 52185643 "Fixed Deposit Certificate"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Fixed Deposit Certificate.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Fixed Deposit Certificate.rdl';
 
     dataset
     {

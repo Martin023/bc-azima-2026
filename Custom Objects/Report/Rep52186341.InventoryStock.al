@@ -1,7 +1,7 @@
 report 52186341 InventoryStock
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Inventory Stock.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Inventory Stock.rdl';
     dataset
     {
         dataitem(Item; Item)

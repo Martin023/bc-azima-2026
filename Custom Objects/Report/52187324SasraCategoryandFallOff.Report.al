@@ -2,7 +2,7 @@ report 52187324 "Loans Arrears HISTORICAL"
 {
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loans Arrearr HISTORICAL.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loans Arrearr HISTORICAL.rdl';
     dataset
     {
         dataitem(Loans; Loans)

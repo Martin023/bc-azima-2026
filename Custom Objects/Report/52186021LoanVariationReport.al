@@ -1,7 +1,7 @@
 report 52186029 "Loan Variation Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Variation Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Variation Report.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

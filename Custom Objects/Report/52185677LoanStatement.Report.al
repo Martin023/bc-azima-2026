@@ -2,7 +2,7 @@
 Report 52185677 "Loan Statement"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Statement.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Statement.rdl';
     dataset
     {
         dataitem(Loans; Loans)

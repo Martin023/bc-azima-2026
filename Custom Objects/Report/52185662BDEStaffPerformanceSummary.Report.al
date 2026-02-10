@@ -2,7 +2,7 @@
 Report 52185662 "BDE Staff Performance Summary"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/BDE Staff Performance Summary.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/BDE Staff Performance Summary.rdl';
 
     dataset
     {

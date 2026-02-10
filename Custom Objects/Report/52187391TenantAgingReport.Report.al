@@ -1,7 +1,7 @@
 report 52187381 "Tenant Aging Report"
 {
     Caption = 'Tenant Aging Report';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Tenant Aging.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Tenant Aging.rdl';
 
     dataset
     {

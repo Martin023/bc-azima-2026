@@ -2,7 +2,7 @@
 Report 52185477 "HR Staff Supervisor"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Employees Statistics.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Employees Statistics.rdl';
 
     dataset
     {

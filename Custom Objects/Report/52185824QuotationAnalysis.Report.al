@@ -2,7 +2,7 @@
 // // Report 52185824 "Quotation Analysis"
 // // {
 // //     DefaultLayout = RDLC;
-// //     RDLCLayout = './bc-kenpipe-2024/Layout/Quotation Analysis.rdl';
+// //     RDLCLayout = './bc-azima-2026/Layout/Quotation Analysis.rdl';
 
 // //     dataset
 // //     {

@@ -2,7 +2,7 @@
 Report 52186066 "Membership Closure TAT Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Membership Closure TAT Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Membership Closure TAT Report.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

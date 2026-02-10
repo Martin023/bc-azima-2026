@@ -2,7 +2,7 @@
 Report 52185538 "Other Deductions"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Other Deductions.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Other Deductions.rdl';
 
     dataset
     {

@@ -1,7 +1,7 @@
 report 52186842 "Overtime Needs Request"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Overtime Needs Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Overtime Needs Report.rdl';
     dataset
     {
         dataitem(hrovertimeheader; "hr overtime header")

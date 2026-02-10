@@ -2,7 +2,7 @@
 Report 52187322 "Savings Account Types Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Savings Account Types Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Savings Account Types Report.rdl';
 
     dataset
     {

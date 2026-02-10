@@ -2,7 +2,7 @@
 Report 52185656 "Checkoff Advice - Loans"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Checkoff Advice - Loans.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Checkoff Advice - Loans.rdl';
 
     dataset
     {

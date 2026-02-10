@@ -2,8 +2,8 @@
 Report 52186010 "Loans Listing Report"
 {
     DefaultLayout = RDLC;
-    // RDLCLayout = './bc-kenpipe-2024/Layout/Loans Listings Report.rdl';
-    RDLCLayout = './bc-kenpipe-2024/Layout/For the sake.rdl';
+    // RDLCLayout = './bc-azima-2026/Layout/Loans Listings Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/For the sake.rdl';
     ProcessingOnly = true;
 
     dataset

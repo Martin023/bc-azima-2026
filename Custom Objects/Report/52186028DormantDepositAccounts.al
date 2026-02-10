@@ -1,7 +1,7 @@
 report 52186028 "Dormant Deposit Listing Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/ Dormant Deposit Listing Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/ Dormant Deposit Listing Report.rdl';
 
     dataset
     {

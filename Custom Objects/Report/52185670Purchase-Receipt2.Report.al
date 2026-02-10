@@ -2,7 +2,7 @@
 Report 52185670 "Purchase - Receipt2"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Purchase - Receipt2.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Purchase - Receipt2.rdl';
     Caption = 'Purchase - Receipt';
     PreviewMode = PrintLayout;
 

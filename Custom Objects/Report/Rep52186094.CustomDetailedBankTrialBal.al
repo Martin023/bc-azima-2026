@@ -7,7 +7,7 @@ using System.Utilities;
 report 52186094 "Custom Bank Detail Trial Bal."
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/BankAccDetailTrialBal.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/BankAccDetailTrialBal.rdl';
     ApplicationArea = Basic, Suite;
     Caption = 'Bank Cust Detail Trial Balance';
     UsageCategory = ReportsAndAnalysis;

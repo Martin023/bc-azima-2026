@@ -7,7 +7,7 @@ report 52186146 "Deposits Accumulated Over Time"
     Caption = 'Deposits Accumulated Over Time';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Deposits Accumulated Over Time.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Deposits Accumulated Over Time.rdl';
     dataset
     {
         dataitem(Members; Members)

@@ -14,7 +14,7 @@ using System.Utilities;
 report 52186092 "Bank Recon Custom"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/BankAccReconTest.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/BankAccReconTest.rdl';
     Caption = 'Bank Acc. Recon. - Test';
     EnableHyperlinks = true;
     UsageCategory = ReportsAndAnalysis;
@@ -837,7 +837,7 @@ report 52186092 "Bank Recon Custom"
               "Total Outstd Payments",
               "Total Applied Amount",
               "Total Unposted Applied Amount");
-            //   "Total Negative Difference");
+        //   "Total Negative Difference");
 #else
             CalcFields("Total Balance on Bank Account",
               "Bank Account Balance (LCY)",

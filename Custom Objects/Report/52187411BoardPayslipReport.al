@@ -4,7 +4,7 @@ report 52187411 "Board Payslip Report"
     ApplicationArea = All;
     DefaultLayout = RDLC;
 
-    RDLCLayout = './bc-kenpipe-2024/Layout/Board Payslip Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Board Payslip Report.rdl';
 
     dataset
     {

@@ -10,7 +10,7 @@ report 52186197 "Investment Movement Report"
     ApplicationArea = All;
     Caption = 'Investment Movement Report';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Investment Movement.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Investment Movement.rdl';
     dataset
     {
         dataitem(Customer; Customer)

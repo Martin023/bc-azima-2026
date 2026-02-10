@@ -2,7 +2,7 @@
 Report 52185878 "Mobile Loan Appraisal Analysis"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Mobile Loan Appraisal Analysis.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Mobile Loan Appraisal Analysis.rdl';
 
     dataset
     {

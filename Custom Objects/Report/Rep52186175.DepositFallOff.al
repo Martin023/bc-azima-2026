@@ -7,7 +7,7 @@ report 52186175 "Deposit Fall Off"
     ApplicationArea = All;
     Caption = 'BOSA Savings Fall Off';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Deposit Fall-Off.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Deposit Fall-Off.rdl';
     dataset
     {
         dataitem("Savings Accounts"; "Savings Accounts")

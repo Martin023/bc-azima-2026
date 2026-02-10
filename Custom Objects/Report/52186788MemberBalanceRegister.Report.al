@@ -4,7 +4,7 @@ Report 52186788 "Member Balance Register"
     DefaultLayout = RDLC;
     ApplicationArea = Basic, suite;
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Balance Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Balance Register.rdl';
 
     dataset
     {

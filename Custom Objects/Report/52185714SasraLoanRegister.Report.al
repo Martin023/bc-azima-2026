@@ -2,7 +2,7 @@
 Report 52185714 "Sasra Loan Register"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Sasra Loan Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Sasra Loan Register.rdl';
 
     dataset
     {

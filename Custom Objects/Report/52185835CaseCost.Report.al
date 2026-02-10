@@ -2,7 +2,7 @@
 Report 52185835 "Case Cost"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Case Cost.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Case Cost.rdl';
 
     dataset
     {

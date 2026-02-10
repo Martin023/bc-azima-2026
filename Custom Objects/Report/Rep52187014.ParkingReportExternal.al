@@ -4,7 +4,7 @@ report 52187017 "Parking Report - External"
     Caption = 'Parking Report - External';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Parking Report - External.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Parking Report - External.rdl';
     dataset
     {
         dataitem(ParkingSpace; "Parking Space")

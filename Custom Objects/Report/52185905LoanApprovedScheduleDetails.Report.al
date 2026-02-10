@@ -2,7 +2,7 @@
 Report 52185905 "Loan Approved Schedule Details"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Approved Schedule Details.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Approved Schedule Details.rdl';
 
     dataset
     {

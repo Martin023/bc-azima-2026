@@ -4,7 +4,7 @@ report 52185590 "Litigaton Cases By Cost"
     Caption = 'Litigaton Cases By Cost';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Litigaton Cases By Cost.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Litigaton Cases By Cost.rdl';
     dataset
     {
         dataitem(Legal; Legal)

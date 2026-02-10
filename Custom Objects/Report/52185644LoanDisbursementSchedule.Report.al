@@ -3,7 +3,7 @@ Report 52185644 "Loan Disbursement Schedule"
 {
     // show the following: member no, employer code, applied and approved amount,external clearnce, top up and place to sign
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Disbursement Schedule.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Disbursement Schedule.rdl';
 
 
     dataset

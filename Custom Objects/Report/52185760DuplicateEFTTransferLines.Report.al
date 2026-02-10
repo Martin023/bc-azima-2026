@@ -2,7 +2,7 @@
 Report 52185760 "Duplicate RTGS Transfer Lines"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Duplicate EFT Transfer Lines.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Duplicate EFT Transfer Lines.rdl';
 
     dataset
     {

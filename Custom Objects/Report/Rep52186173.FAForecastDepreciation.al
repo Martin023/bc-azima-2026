@@ -9,7 +9,7 @@ report 52186173 "FA Forecast Depreciation"
     ApplicationArea = All;
     Caption = 'FA Forecast Depreciation';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/FA Forecast Depreciation.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/FA Forecast Depreciation.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

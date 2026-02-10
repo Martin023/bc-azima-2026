@@ -6,7 +6,7 @@ report 52186165 "Loan Variance Report"
     ApplicationArea = All;
     Caption = 'Loan Variance Report';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Variance Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Variance Report.rdl';
     dataset
     {
         dataitem(Loans; Loans)

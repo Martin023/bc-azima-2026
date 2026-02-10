@@ -2,7 +2,7 @@
 Report 52186034 "Staff Daily Transactions"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Staff Daily Transactions DMU.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Staff Daily Transactions DMU.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

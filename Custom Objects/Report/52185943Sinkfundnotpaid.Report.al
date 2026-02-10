@@ -2,7 +2,7 @@
 Report 52185943 "Sinkfund not paid"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Sinkfund not paid.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Sinkfund not paid.rdl';
 
     dataset
     {

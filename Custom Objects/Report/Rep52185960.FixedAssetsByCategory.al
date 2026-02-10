@@ -9,7 +9,7 @@ report 52185960 "Fixed Assets By Category"
 {
     ApplicationArea = All;
     Caption = 'Fixed Assets By Category';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Fixed Assets By Category.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Fixed Assets By Category.rdl';
 
     UsageCategory = ReportsAndAnalysis;
     dataset

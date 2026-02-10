@@ -2,7 +2,7 @@
 Report 52185857 "Change member status deceased"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Change member status deceased.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Change member status deceased.rdl';
 
     dataset
     {

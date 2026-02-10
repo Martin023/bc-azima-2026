@@ -3,7 +3,7 @@ report 52186090 "Unreconcilled Transactions"
     ApplicationArea = All;
     Caption = 'Unreconcilled Transactions';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Unreconcilled Transactions.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Unreconcilled Transactions.rdl';
     dataset
     {
         dataitem(BankAccountLedgerEntry; "Bank Account Ledger Entry")

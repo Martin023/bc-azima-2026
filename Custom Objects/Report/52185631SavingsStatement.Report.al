@@ -2,7 +2,7 @@
 Report 52185631 "Savings Statement"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Savings Statement.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Savings Statement.rdl';
 
     dataset
     {

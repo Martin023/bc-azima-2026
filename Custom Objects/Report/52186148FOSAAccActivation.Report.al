@@ -2,7 +2,7 @@
 Report 52186148 "FOSA Account Activation"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/FOSA Account Activation.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/FOSA Account Activation.rdl';
 
     dataset
     {

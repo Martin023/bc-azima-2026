@@ -10,7 +10,7 @@ report 52186198 "Tenant Movement Report"
     ApplicationArea = All;
     Caption = 'Tenant Movement Report';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Tenant Movement.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Tenant Movement.rdl';
     dataset
     {
         dataitem(Customer; Customer)

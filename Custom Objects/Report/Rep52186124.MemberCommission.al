@@ -7,7 +7,7 @@ report 52186124 "Member Commission"
     Caption = 'Member Commission ';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Commission .rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Commission .rdl';
 
     dataset
     {

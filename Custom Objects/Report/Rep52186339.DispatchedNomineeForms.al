@@ -4,7 +4,7 @@ report 52186339 "Dispatched Nominee Forms"
     Caption = 'Dispatched Nominee Forms';
     UsageCategory = ReportsAndAnalysis;
     Defaultlayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Dispatched Nominee Forms.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Dispatched Nominee Forms.rdl';
 
     dataset
     {

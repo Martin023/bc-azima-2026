@@ -4,7 +4,7 @@ using Microsoft.Foundation.Company;
 report 52186986 "Tax Exemption Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Tax Exemption.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Tax Exemption.rdl';
     dataset
     {
 

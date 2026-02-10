@@ -2,7 +2,7 @@
 Report 52185834 "Avocate Cost Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Avocate Cost Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Avocate Cost Report.rdl';
     Caption = 'Advocate Cost Report';
 
     dataset

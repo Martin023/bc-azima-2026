@@ -2,7 +2,7 @@
 // Report 52185877 "Sky P9 B64"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Sky P9 B64.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Sky P9 B64.rdl';
 
 //     dataset
 //     {

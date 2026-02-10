@@ -2,7 +2,7 @@
 Report 52185733 "Agent Tarriffs Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Agent Tarriffs Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Agent Tarriffs Report.rdl';
 
     dataset
     {

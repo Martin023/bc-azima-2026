@@ -2,7 +2,7 @@
 Report 52185997 "Update Temp Loans"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Update Temp Loans.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Update Temp Loans.rdl';
 
     dataset
     {

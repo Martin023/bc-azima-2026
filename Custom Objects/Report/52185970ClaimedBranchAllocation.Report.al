@@ -1,7 +1,7 @@
 Report 52185970 "Claimed Branch Allocation"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Claimed Branch Allocation.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Claimed Branch Allocation.rdl';
 
     dataset
     {

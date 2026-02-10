@@ -2,7 +2,7 @@
 Report 52186215 "Loans Listing_Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Register.rdl';
 
     dataset
     {
@@ -235,8 +235,8 @@ Report 52186215 "Loans Listing_Report"
                 Appdate := '';
                 LNInterest := 0;
                 ExpectedDate := '';
-                
-      
+
+
             end;
         }
 

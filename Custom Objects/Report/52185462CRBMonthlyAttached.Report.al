@@ -2,7 +2,7 @@
 Report 52185462 "CRB Monthly Attached"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/CRB Monthly Attached.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/CRB Monthly Attached.rdl';
 
     dataset
     {

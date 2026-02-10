@@ -2,7 +2,7 @@
 Report 52185860 "Reimburse Recalled Leave Days"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Reimburse Recalled Leave Days.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Reimburse Recalled Leave Days.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

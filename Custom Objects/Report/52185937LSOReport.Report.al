@@ -2,7 +2,7 @@
 Report 52185937 "LSO Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/LSO Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/LSO Report.rdl';
     Caption = 'Order';
     PreviewMode = PrintLayout;
 

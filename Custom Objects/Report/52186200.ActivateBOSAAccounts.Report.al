@@ -7,7 +7,7 @@ report 52186200 "Activate BOSA Accounts"
     Caption = 'Activate BOSA Accounts';
     UsageCategory = ReportsAndAnalysis;
     ProcessingOnly = true;
-    //RDLCLayout = './bc-kenpipe-2024/Layout/AccountActivation.rdl';
+    //RDLCLayout = './bc-azima-2026/Layout/AccountActivation.rdl';
     dataset
     {
         dataitem(SavingsAccounts; "Savings Accounts")

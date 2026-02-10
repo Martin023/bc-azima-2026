@@ -2,7 +2,7 @@
 Report 52185715 "Sasra Deposit Accounts BOSA"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Sasra Deposit Accounts BOSA.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Sasra Deposit Accounts BOSA.rdl';
 
     dataset
     {

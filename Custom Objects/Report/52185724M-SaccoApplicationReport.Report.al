@@ -2,7 +2,7 @@
 Report 52185724 "M-Sacco Application Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/M-Sacco Application Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/M-Sacco Application Report.rdl';
 
     dataset
     {

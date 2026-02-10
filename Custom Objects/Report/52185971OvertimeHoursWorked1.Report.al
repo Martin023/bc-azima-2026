@@ -2,7 +2,7 @@
 Report 52185971 "Overtime Hours Worked1"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Overtime Hours Worked1.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Overtime Hours Worked1.rdl';
 
     dataset
     {

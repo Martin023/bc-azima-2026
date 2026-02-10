@@ -2,7 +2,7 @@
 Report 52185585 "NHF Schedule"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/NHF Schedule.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/NHF Schedule.rdl';
 
     dataset
     {

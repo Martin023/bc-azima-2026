@@ -2,7 +2,7 @@
 Report 52185550 "Deductions to Organizations"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Deductions to Organizations.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Deductions to Organizations.rdl';
 
     dataset
     {

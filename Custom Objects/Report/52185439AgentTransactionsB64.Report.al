@@ -2,7 +2,7 @@
 Report 52185439 "Agent Transactions B64"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Agent Transactions B64.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Agent Transactions B64.rdl';
 
     dataset
     {

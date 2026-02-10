@@ -4,7 +4,7 @@ using Microsoft.Foundation.Company;
 report 52186030 "Disposal Requisition Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Disposal Requisition Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Disposal Requisition Report.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

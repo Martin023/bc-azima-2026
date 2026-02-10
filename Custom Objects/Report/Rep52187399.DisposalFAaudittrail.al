@@ -3,7 +3,7 @@ report 52187399 "Disposal FA audit trail"
     ApplicationArea = All;
     Caption = 'Depreciation FA audit trail';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Disposal FA audit trail.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Disposal FA audit trail.rdl';
     defaultlayout = RDLC;
 
     dataset

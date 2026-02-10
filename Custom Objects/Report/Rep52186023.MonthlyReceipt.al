@@ -5,7 +5,7 @@ using System.Utilities;
 report 52186391 "Monthly Receipt "
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Monthly Receipt Per Product.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Monthly Receipt Per Product.rdl';
 
     dataset
     {

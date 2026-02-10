@@ -2,7 +2,7 @@
 Report 52185871 "Count Of Users"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Count Of Users.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Count Of Users.rdl';
 
     dataset
     {

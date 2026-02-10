@@ -2,7 +2,7 @@
 Report 52185669 "Position on Borrowers in Sacco"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Position on Borrowers in Sacco.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Position on Borrowers in Sacco.rdl';
 
     dataset
     {

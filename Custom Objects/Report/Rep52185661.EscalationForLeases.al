@@ -4,7 +4,7 @@ report 52185661 "Escalation For Leases"
     Caption = 'Escalation For Leases';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Escalation For Leases.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Escalation For Leases.rdl';
     dataset
     {
         dataitem(Lease; Lease)

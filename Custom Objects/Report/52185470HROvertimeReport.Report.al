@@ -2,7 +2,7 @@
 Report 52185470 "HR Overtime Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Overtime Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Overtime Report.rdl';
 
     dataset
     {

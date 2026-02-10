@@ -2,7 +2,7 @@
 Report 52186180 "Daily Transactions Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Daily Transactions Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Daily Transactions Report.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

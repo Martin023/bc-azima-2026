@@ -2,7 +2,7 @@
 Report 52185663 "Cheque Print"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Cheque Print.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Cheque Print.rdl';
 
     dataset
     {

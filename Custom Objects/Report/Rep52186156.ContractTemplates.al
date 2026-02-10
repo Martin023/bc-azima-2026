@@ -7,7 +7,7 @@ report 52186156 "Contract Templates"
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = Word;
 
-    WordLayout = './bc-kenpipe-2024/Layout/Contract Templates.docx';
+    WordLayout = './bc-azima-2026/Layout/Contract Templates.docx';
     dataset
     {
         dataitem(ContractTemplates; "Contract Templates")

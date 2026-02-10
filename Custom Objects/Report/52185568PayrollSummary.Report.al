@@ -2,7 +2,7 @@
 Report 52185568 "Payroll Summary"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Payroll Summary.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Payroll Summary.rdl';
 
     dataset
     {

@@ -12,7 +12,7 @@ report 52186072 "Right To Use Assets"
     Caption = 'Right To Use Assets';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Right To Use Assets.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Right To Use Assets.rdl';
     dataset
     {
         dataitem(FixedAsset; "Fixed Asset")

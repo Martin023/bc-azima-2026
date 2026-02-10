@@ -2,7 +2,7 @@
 Report 52185534 "prBank Payments"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/prBank Payments.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/prBank Payments.rdl';
 
     dataset
     {

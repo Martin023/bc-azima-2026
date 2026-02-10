@@ -2,7 +2,7 @@
 Report 52185948 "Member W/T Beneficiary"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member WT Beneficiary.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member WT Beneficiary.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52185571 "Transactions - Detailed"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Transactions - Detailed.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Transactions - Detailed.rdl';
 
     dataset
     {

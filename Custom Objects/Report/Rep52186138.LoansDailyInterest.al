@@ -6,7 +6,7 @@ report 52186138 "Loans Daily Interest"
     Caption = 'Manual Daily Interest Generation';
     //UsageCategory = Tasks;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loans Daily Interest.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loans Daily Interest.rdl';
     dataset
     {
         dataitem(Loans; Loans)

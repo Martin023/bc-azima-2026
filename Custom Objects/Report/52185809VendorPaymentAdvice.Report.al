@@ -2,7 +2,7 @@
 Report 52185809 "Vendor Payment Advice"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Vendor Payment Advice.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Vendor Payment Advice.rdl';
     Caption = 'Vendor Payment Advice';
 
     dataset

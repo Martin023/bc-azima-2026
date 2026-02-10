@@ -2,7 +2,7 @@
 Report 52185583 "Mark as PAYS PAYE"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Mark as PAYS PAYE.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Mark as PAYS PAYE.rdl';
 
     dataset
     {

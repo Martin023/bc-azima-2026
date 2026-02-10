@@ -3,7 +3,7 @@ report 52186093 "Bank Reconcilliation report"
     ApplicationArea = All;
     Caption = 'Bank Reconcilliation report';
     UsageCategory = ReportsAndAnalysis;
-    RdlcLayout = './bc-kenpipe-2024/Layout/Bank Reconcilliation report.rdl';
+    RdlcLayout = './bc-azima-2026/Layout/Bank Reconcilliation report.rdl';
     dataset
     {
         dataitem(BankAccReconciliation; "Bank Acc. Reconciliation")

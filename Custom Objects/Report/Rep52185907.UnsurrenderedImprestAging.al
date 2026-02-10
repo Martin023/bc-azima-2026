@@ -2,7 +2,7 @@ report 52186106 "Unsurrendered Imprest Aging"
 {
     Caption = 'Customer Summary Aging Report';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Unsurrendered Imprest Aging.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Unsurrendered Imprest Aging.rdl';
 
     dataset
     {

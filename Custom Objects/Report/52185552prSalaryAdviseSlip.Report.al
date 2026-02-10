@@ -2,7 +2,7 @@
 Report 52185552 "prSalary Advise Slip"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/prSalary Advise Slip.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/prSalary Advise Slip.rdl';
 
     dataset
     {

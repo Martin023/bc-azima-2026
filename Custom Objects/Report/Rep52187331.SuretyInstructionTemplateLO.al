@@ -4,7 +4,7 @@ report 52187331 "Surety Instruction Template LO"
     Caption = 'Surety Instruction Template Legal Officer';
     //UsageCategory = ReportsAndAnalysis;
     DefaultLayout = Word;
-    WordLayout = './bc-kenpipe-2024/Layout/Surety Instruction Template LO.docx';
+    WordLayout = './bc-azima-2026/Layout/Surety Instruction Template LO.docx';
     dataset
     {
         dataitem(SuretyManagement; "Surety Management")

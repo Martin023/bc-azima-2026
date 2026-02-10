@@ -3,7 +3,7 @@ report 52186835 "Restructured Loans report"
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Restructured Loans report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Restructured Loans report.rdl';
     dataset
     {
         dataitem("Loan Rescheduling"; "Loan Rescheduling")

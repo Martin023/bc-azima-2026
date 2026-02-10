@@ -15,7 +15,7 @@ report 52185964 "Fixed Asset Register"
     Caption = 'Fixed Asset Register';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Fixed Asset Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Fixed Asset Register.rdl';
     dataset
     {
         dataitem(FixedAsset; "Fixed Asset")

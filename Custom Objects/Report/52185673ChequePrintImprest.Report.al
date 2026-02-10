@@ -2,7 +2,7 @@
 Report 52185673 "Cheque Print Imprest"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Cheque Print Imprest.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Cheque Print Imprest.rdl';
 
     dataset
     {

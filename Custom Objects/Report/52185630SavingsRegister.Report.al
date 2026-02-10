@@ -2,7 +2,7 @@
 Report 52185630 "FOSA Savings Register"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Savings Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Savings Register.rdl';
 
     dataset
     {

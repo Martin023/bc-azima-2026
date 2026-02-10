@@ -2,7 +2,7 @@
 Report 52185569 "Bank Payment Schedule"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Bank Payment Schedule.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Bank Payment Schedule.rdl';
 
     dataset
     {

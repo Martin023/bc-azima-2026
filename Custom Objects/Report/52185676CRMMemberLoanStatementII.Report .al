@@ -1,7 +1,7 @@
 Report 52186082 "CRM Member Loan Statement"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/CRM Member Loan Statement.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/CRM Member Loan Statement.rdl';
     PreviewMode = Normal;
     UsageCategory = ReportsAndAnalysis;
     Caption = 'CRM Member Loan Statement';

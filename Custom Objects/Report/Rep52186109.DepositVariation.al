@@ -6,7 +6,7 @@ report 52186109 "Deposit Variation "
     ApplicationArea = All;
 
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Deposit Variation TAT Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Deposit Variation TAT Report.rdl';
 
 
     dataset

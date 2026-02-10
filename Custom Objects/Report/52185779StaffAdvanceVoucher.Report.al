@@ -2,7 +2,7 @@
 // Report 52185779 "Staff Advance Voucher"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Staff Advance Voucher.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Staff Advance Voucher.rdl';
 
 //     dataset
 //     {

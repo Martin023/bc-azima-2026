@@ -3,7 +3,7 @@ Report 52186083 "CRM Checkoff Advice Variance"
 
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/CRM Checkoff Advice Variance.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/CRM Checkoff Advice Variance.rdl';
     UsageCategory = ReportsAndAnalysis;
     Caption = 'CRM Checkoff Advice Variance';
 

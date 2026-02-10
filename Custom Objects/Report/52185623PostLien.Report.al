@@ -2,7 +2,7 @@
 Report 52185623 "Post Lien"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Post Lien.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Post Lien.rdl';
 
     dataset
     {

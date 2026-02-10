@@ -4,7 +4,7 @@ report 52187390 "Instruction Template Ltg"
     Caption = 'Instruction Template Litigation';
     //UsageCategory = ReportsAndAnalysis;
     DefaultLayout = Word;
-    WordLayout = './bc-kenpipe-2024/Layout/Instruction Template Ltg.docx';
+    WordLayout = './bc-azima-2026/Layout/Instruction Template Ltg.docx';
 
     dataset
     {

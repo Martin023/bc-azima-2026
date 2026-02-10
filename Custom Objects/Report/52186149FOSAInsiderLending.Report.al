@@ -2,7 +2,7 @@ Report 52186150 "FOSA Insider Lending"
 {
 
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/FOSA Insider Lending.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/FOSA Insider Lending.rdl';
 
     dataset
     {

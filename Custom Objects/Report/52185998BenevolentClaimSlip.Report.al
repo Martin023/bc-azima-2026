@@ -2,7 +2,7 @@
 Report 52185998 "Benevolent Claim Slip"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Benevolent Claim Slip.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Benevolent Claim Slip.rdl';
     Caption = 'Claim Slip';
 
     dataset

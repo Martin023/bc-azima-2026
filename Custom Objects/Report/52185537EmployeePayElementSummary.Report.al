@@ -2,7 +2,7 @@
 Report 52185537 "Employee Pay Element Summary"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Employee Pay Element Summary.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Employee Pay Element Summary.rdl';
 
     dataset
     {

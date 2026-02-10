@@ -1,7 +1,7 @@
 Report 52185958 "Loan Movement Summary"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Movement Summary.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Movement Summary.rdl';
 
     dataset
     {

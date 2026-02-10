@@ -4,7 +4,7 @@ report 52186038 "Surrendered Imprests Report"
     ApplicationArea = All;
     Caption = 'Surrendered Imprests Report';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Surrendered Imprests Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Surrendered Imprests Report.rdl';
     dataset
     {
         dataitem(ImprestSurrenderHeader; "Imprest Surrender Header")

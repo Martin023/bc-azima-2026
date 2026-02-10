@@ -2,7 +2,7 @@
 Report 52185789 "IOU - Detail Trial Bal."
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/IOU - Detail Trial Bal..rdl';
+    RDLCLayout = './bc-azima-2026/Layout/IOU - Detail Trial Bal..rdl';
     Caption = 'IOU - Detail Trial Bal.';
 
     dataset

@@ -4,7 +4,7 @@ report 52186849 "FA Period Depreciation Report"
     Caption = 'FA Period Depreciation Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Period Depreciation Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Period Depreciation Report.rdl';
     dataset
     {
         dataitem("Fixed Asset"; "Fixed Asset")

@@ -1,7 +1,7 @@
 Report 52185727 "Loan Guarators Reports"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Guarators Reports.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Guarators Reports.rdl';
     UsageCategory = ReportsAndAnalysis;
     Caption = 'Loan Guarantors Report';
     dataset

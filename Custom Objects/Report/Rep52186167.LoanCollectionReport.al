@@ -6,7 +6,7 @@ report 52186167 "Loan Collection Report"
     ApplicationArea = All;
     Caption = 'Loan Collection Report';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Collection.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Collection.rdl';
     dataset
     {
 

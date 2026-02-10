@@ -6,7 +6,7 @@ report 52186129 "Amounts Receiv Summary - Loans"
     ApplicationArea = All;
     Caption = 'Amounts Receiv Summary - Loans';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Amounts Receiv Summary - Loans.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Amounts Receiv Summary - Loans.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

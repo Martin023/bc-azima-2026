@@ -2,7 +2,7 @@
 Report 52185888 "Delegate Meeting Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Delegate Meeting Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Delegate Meeting Report.rdl';
 
     dataset
     {

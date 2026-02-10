@@ -5,7 +5,7 @@ Report 52186162 "Loan Offer Letter"
     DefaultLayout = RDLC;
     ApplicationArea = Basic, suite;
     //UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Offer Letter.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Offer Letter.rdl';
     dataset
     {
         dataitem(Loans; Loans)

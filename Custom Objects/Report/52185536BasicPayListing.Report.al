@@ -2,7 +2,7 @@
 Report 52185536 "Basic Pay Listing"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Basic Pay Listing.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Basic Pay Listing.rdl';
 
     dataset
     {

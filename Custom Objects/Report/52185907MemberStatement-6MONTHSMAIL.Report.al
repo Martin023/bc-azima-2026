@@ -2,7 +2,7 @@
 // Report 52185907 "Member Statement-6MONTHS MAIL"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Member Statement-6MONTHS MAIL.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Member Statement-6MONTHS MAIL.rdl';
 
 //     dataset
 //     {

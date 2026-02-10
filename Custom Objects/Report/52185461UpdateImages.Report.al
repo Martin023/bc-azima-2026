@@ -3,7 +3,7 @@ Report 52185461 "Update Images"
 {
     DefaultLayout = RDLC;
     Caption = '2. Update Images';
-    //RDLCLayout = './bc-kenpipe-2024/Layout/Update Images.rdl';
+    //RDLCLayout = './bc-azima-2026/Layout/Update Images.rdl';
     UsageCategory = ReportsAndAnalysis;
     ProcessingOnly = true;
 

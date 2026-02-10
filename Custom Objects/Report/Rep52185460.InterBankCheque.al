@@ -6,7 +6,7 @@ report 52185460 "Inter Bank Cheque"
     ApplicationArea = All;
     Caption = 'Inter Bank Cheque';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Inter Bank Cheque Print.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Inter Bank Cheque Print.rdl';
     dataset
     {
         dataitem(InterBankTransfers; "InterBank Transfers")

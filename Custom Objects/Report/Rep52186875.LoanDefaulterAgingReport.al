@@ -2,7 +2,7 @@
 report 52186875 "Loan Defaulter Aging Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Defaulter Aging Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Defaulter Aging Report.rdl';
     UsageCategory = ReportsAndAnalysis;
     Caption = 'Loan Defaulter Aging Report';
     dataset

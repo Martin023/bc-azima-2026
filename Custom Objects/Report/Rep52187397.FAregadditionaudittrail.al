@@ -4,7 +4,7 @@ report 52187397 "FA reg addition audit trail"
     Caption = 'Fixed Asset Register addition audit trail';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Fixed Asset Register addition audit trail.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Fixed Asset Register addition audit trail.rdl';
     dataset
     {
         dataitem(FixedAsset; "Fixed Asset")

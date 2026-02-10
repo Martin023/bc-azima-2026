@@ -2,7 +2,7 @@
 Report 52185440 "Bank Acc. Recononciliation"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Bank Acc. Recononciliation.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Bank Acc. Recononciliation.rdl';
 
     dataset
     {

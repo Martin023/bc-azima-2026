@@ -2,7 +2,7 @@
 Report 52185655 "Business Evaluation"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Business Evaluation.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Business Evaluation.rdl';
 
     dataset
     {

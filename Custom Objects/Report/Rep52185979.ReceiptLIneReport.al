@@ -5,7 +5,7 @@ report 52185979 "ReceiptLIne Report"
 {
     Caption = 'ReceiptLIne Report';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Cheque Allocation.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Cheque Allocation.rdl';
     dataset
     {
         dataitem(ReceiptLine; "Receipt Line")

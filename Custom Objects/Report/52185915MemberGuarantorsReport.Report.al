@@ -3,7 +3,7 @@
 Report 52185915 "Member Guarantors Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Guarantors Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Guarantors Report.rdl';
 
     dataset
     {

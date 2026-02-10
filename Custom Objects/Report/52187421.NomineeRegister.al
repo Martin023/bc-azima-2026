@@ -4,7 +4,7 @@ report 52187421 "Nominee Register"
     Caption = 'Nominee Register/BBF Register';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Nominee Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Nominee Register.rdl';
     dataset
     {
         dataitem(Next_of_KIN; "Next of KIN")

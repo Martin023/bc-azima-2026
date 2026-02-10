@@ -1,7 +1,7 @@
 report 52186020 "BOSA Accounts Fall-Off Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/BOSA Accounts Fall-Off.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/BOSA Accounts Fall-Off.rdl';
     UsageCategory = ReportsAndAnalysis;
     Caption = 'Deposit/Risk/BBF/Falloff Report';
 

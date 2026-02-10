@@ -2,7 +2,7 @@
 Report 52185927 "Loan Repayment Schedule-calc"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Repayment Schedule-calc.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Repayment Schedule-calc.rdl';
 
     dataset
     {

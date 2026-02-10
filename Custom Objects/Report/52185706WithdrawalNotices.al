@@ -3,7 +3,7 @@ Report 52185706 "Withdrawal Notices"
 {
     Caption = 'Withdrawal Report';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Withdrawal Notices.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Withdrawal Notices.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

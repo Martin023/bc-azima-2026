@@ -2,7 +2,7 @@
 // Report 52185885 "Update Account Category"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Update Account Category.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Update Account Category.rdl';
 
 //     dataset
 //     {

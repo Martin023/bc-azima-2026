@@ -2,7 +2,7 @@
 Report 52185831 "Posted Cheque Confirmation"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Posted Cheque Confirmation.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Posted Cheque Confirmation.rdl';
 
     dataset
     {

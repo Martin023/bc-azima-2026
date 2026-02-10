@@ -9,7 +9,7 @@ report 52186187 "Vendor Payments"
     ApplicationArea = All;
     Caption = 'Vendor Payments';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Vendor Payments.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Vendor Payments.rdl';
     dataset
     {
         dataitem(Vendor; Vendor)

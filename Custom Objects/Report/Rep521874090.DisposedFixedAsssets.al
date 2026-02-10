@@ -4,7 +4,7 @@ report 52187422 "Disposed Fixed Assets"
     Caption = 'Disposed Fixed Asssets';
     UsageCategory = ReportsAndAnalysis;
     Defaultlayout = rdlc;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Disposed Fixed Asssets.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Disposed Fixed Asssets.rdl';
     dataset
     {
         dataitem(FixedAsset; "Fixed Asset")

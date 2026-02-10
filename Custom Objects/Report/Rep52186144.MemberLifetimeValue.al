@@ -6,7 +6,7 @@ report 52186144 "Member Lifetime Value"
     ApplicationArea = All;
     Caption = 'Member Lifetime Value';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Lifetime Value.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Lifetime Value.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

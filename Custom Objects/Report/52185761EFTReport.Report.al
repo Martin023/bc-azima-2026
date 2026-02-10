@@ -2,7 +2,7 @@
 Report 52185761 "RTGS Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/EFT Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/EFT Report.rdl';
 
     dataset
     {

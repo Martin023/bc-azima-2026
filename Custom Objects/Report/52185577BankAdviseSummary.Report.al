@@ -2,7 +2,7 @@
 Report 52185577 "Bank Advise Summary"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Bank Advise Summary.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Bank Advise Summary.rdl';
 
     dataset
     {

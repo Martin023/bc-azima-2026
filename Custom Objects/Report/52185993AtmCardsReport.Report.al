@@ -2,7 +2,7 @@
 Report 52185993 "Atm Cards Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Atm Cards Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Atm Cards Report.rdl';
 
     dataset
     {

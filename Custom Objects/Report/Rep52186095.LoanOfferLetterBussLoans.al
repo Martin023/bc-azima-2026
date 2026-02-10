@@ -7,7 +7,7 @@ report 52186095 "Loan Offer Letter Buss Loans"
     ApplicationArea = All;
     Caption = 'Loan Offer Letter Buss Loans';
     DefaultLayout = Word;
-    WordLayout = './bc-kenpipe-2024/Layout/Loan Offer Letter Buss Loans.docx';
+    WordLayout = './bc-azima-2026/Layout/Loan Offer Letter Buss Loans.docx';
     //UsageCategory = Documents;
     dataset
     {

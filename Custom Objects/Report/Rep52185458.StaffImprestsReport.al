@@ -3,7 +3,7 @@ report 52185458 "Staff Imprests Report"
     ApplicationArea = All;
     Caption = 'Staff Imprests Report';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Staff Imprests Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Staff Imprests Report.rdl';
     dataset
     {
         dataitem(ImprestHeader; "Imprest Header")

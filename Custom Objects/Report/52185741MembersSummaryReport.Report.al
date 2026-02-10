@@ -2,7 +2,7 @@
 Report 52185741 "Members Summary Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Members Summary Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Members Summary Report.rdl';
 
     dataset
     {

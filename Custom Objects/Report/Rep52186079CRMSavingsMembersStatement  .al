@@ -3,7 +3,7 @@ report 52186079 "CRM Savings's Statement"
     Caption = 'CRM Savings''s Statement';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/CRM Savings''s Statement.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/CRM Savings''s Statement.rdl';
     dataset
     {
         dataitem(SavingsAccounts; "Savings Accounts")

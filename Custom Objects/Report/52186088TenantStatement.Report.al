@@ -4,7 +4,7 @@ Report 52186088 "Tenant Statement"
     DefaultLayout = RDLC;
     ApplicationArea = Basic, suite;
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Tenant Statement.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Tenant Statement.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52185901 "Update Status"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Update Status.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Update Status.rdl';
 
     dataset
     {

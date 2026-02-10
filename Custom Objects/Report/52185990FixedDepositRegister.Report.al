@@ -2,7 +2,7 @@
 Report 52185990 "Fixed Deposit Register"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Savings Contribution Variance.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Savings Contribution Variance.rdl';
 
     dataset
     {

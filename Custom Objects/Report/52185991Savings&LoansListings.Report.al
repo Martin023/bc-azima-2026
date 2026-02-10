@@ -2,7 +2,7 @@
 Report 52185991 "Savings & Loans Listings"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Savings & Loans Listings.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Savings & Loans Listings.rdl';
 
     dataset
     {

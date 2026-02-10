@@ -2,7 +2,7 @@
 Report 52186004 "Sectoral Lending"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Sector Lending.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Sector Lending.rdl';
 
     dataset
     {

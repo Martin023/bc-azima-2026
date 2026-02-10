@@ -6,7 +6,7 @@ Report 52186795 "Process FallOff"
     ApplicationArea = Basic, suite;
     UsageCategory = ReportsAndAnalysis;
     ProcessingOnly = true;
-    RDLCLayout = './bc-kenpipe-2024/Layout/FallOff Run.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/FallOff Run.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52185803 "GL Entry Modify"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/GL Entry Modify.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/GL Entry Modify.rdl';
 
     dataset
     {

@@ -8,7 +8,7 @@ report 52185762 "Pending Insurance Claims"
     Caption = 'Pending Insurance Claims';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Pending Insurance Claims.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Pending Insurance Claims.rdl';
     dataset
     {
         dataitem(InsuranceClaims; "Insurance Claims")

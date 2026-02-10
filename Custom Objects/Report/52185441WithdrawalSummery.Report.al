@@ -2,7 +2,7 @@
 Report 52185441 "Withdrawal Summary"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Withdrawal Summary.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Withdrawal Summary.rdl';
 
     dataset
     {

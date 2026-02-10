@@ -2,7 +2,7 @@
 Report 52185556 "Validate Employee Transactions"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Validate Employee Transactions.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Validate Employee Transactions.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52187368 "Treasury Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Treasury Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Treasury Report.rdl';
 
     dataset
     {

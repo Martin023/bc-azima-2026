@@ -3,7 +3,7 @@ report 52185800 "Share Variation"
     ApplicationArea = All;
     Caption = 'Share Variation';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Share Variation Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Share Variation Report.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

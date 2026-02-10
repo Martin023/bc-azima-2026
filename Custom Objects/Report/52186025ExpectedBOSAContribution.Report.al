@@ -1,7 +1,7 @@
 report 52186394 "Expected BOSA Contributions"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Expected BOSA Contributions.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Expected BOSA Contributions.rdl';
 
     dataset
     {

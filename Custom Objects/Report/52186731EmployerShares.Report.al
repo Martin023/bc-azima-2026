@@ -4,7 +4,7 @@ Report 52186731 "Employer Member Register"
     DefaultLayout = RDLC;
     ApplicationArea = Basic, suite;
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Employer Member Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Employer Member Register.rdl';
 
     dataset
     {

@@ -4,7 +4,7 @@ report 52187364 "Members Missing Photos"
     Caption = 'Member Missing Photos';
     UsageCategory = ReportsAndAnalysis;
     DeFaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Members Missing Photos.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Members Missing Photos.rdl';
     dataset
     {
         dataitem(Members; Members)

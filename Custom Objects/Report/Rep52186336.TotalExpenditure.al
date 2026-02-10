@@ -1,7 +1,7 @@
 report 52186336 "Total Expenditure"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Total Ependiture Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Total Ependiture Report.rdl';
     dataset
     {
         dataitem(Item; Item)

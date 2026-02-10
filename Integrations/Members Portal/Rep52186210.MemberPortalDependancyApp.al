@@ -4,7 +4,7 @@ report 52186210 "Member Portal Dependancy App"
     Caption = 'Member Portal Dependancy App';
     UsageCategory = ReportsAndAnalysis;
 
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Portal Dependancy App.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Portal Dependancy App.rdl';
 
     dataset
     {
@@ -50,24 +50,25 @@ report 52186210 "Member Portal Dependancy App"
             {
             }
 
-            dataitem(NOK; "Next of KIN Application") {
+            dataitem(NOK; "Next of KIN Application")
+            {
                 DataItemLink = "Record ID" = field("No.");
 
-                column(NOKIdentificationType; "Identification Type"){}
-                column(NOKIdentification; "Identification"){}
-                column(NOKName; "Name"){}
-                column(NOKRelationship; "Relationship"){}
-                column(NOKDateOfBirth; "Date of Birth"){}
-                column(NOKAddress; "Address"){}
-                column(NOKTelephone; "Telephone"){}
-                column(NOKEmail; "Email"){}
+                column(NOKIdentificationType; "Identification Type") { }
+                column(NOKIdentification; "Identification") { }
+                column(NOKName; "Name") { }
+                column(NOKRelationship; "Relationship") { }
+                column(NOKDateOfBirth; "Date of Birth") { }
+                column(NOKAddress; "Address") { }
+                column(NOKTelephone; "Telephone") { }
+                column(NOKEmail; "Email") { }
 
-                column(NOKIsNextOfKin; "Is Next of Kin"){}
-                column(NOKIsBeneficiary; "Is a Beneficiary"){}
-                column(NOKIsContactPerson; "Is Contact Person"){}
-                column(NOKIsNominee; "Is Nominee"){}
-                column(NOKAllocation; "Allocation"){}
-                column(NOKIsToBeDeleted; Removed){}
+                column(NOKIsNextOfKin; "Is Next of Kin") { }
+                column(NOKIsBeneficiary; "Is a Beneficiary") { }
+                column(NOKIsContactPerson; "Is Contact Person") { }
+                column(NOKIsNominee; "Is Nominee") { }
+                column(NOKAllocation; "Allocation") { }
+                column(NOKIsToBeDeleted; Removed) { }
             }
         }
     }

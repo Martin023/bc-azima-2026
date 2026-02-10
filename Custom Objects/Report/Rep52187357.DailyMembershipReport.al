@@ -4,7 +4,7 @@ report 52187357 "Daily Membership Report"
     Caption = 'Daily Membership Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Daily Membership Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Daily Membership Report.rdl';
     dataset
     {
         dataitem(Members; Members)

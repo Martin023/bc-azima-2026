@@ -4,9 +4,9 @@ report 52187391 "Instruction Template - Perfc"
     Caption = 'Instruction Template - Perfc';
     UsageCategory = ReportsAndAnalysis;
     // DefaultLayout = Word;
-    // WordLayout = './bc-kenpipe-2024/Layout/Instruction Template - Perfc.docx';
+    // WordLayout = './bc-azima-2026/Layout/Instruction Template - Perfc.docx';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Instruction Template - Perfc.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Instruction Template - Perfc.rdl';
     dataset
     {
 

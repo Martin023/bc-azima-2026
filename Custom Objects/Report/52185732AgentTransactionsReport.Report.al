@@ -2,7 +2,7 @@
 Report 52185732 "Agent Transactions Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Agent Transactions Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Agent Transactions Report.rdl';
 
     dataset
     {

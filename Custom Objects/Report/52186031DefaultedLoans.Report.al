@@ -1,7 +1,7 @@
 Report 52186031 "Defaulted Fresh Loans"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Defaulted Fresh Loans.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Defaulted Fresh Loans.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52185614 "Bank Income Statement Lists"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Bank Income Statement Lists.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Bank Income Statement Lists.rdl';
     Caption = 'Posted Bank Account Reconciliation Report';
 
     dataset

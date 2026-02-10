@@ -1,7 +1,7 @@
 report 52186043 "Staff Member Balances"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Staff Member Balance Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Staff Member Balance Report.rdl';
 
     dataset
     {

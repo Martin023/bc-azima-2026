@@ -2,7 +2,7 @@
 Report 52185735 "Anniversary Reminders"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Anniversary Reminders.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Anniversary Reminders.rdl';
 
     dataset
     {

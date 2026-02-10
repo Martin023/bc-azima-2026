@@ -4,7 +4,7 @@ using Microsoft.Foundation.Company;
 report 52186121 "CRM Member TAT Report "
 {
     Caption = 'CRM Member TAT Report ';
-    RDLCLayout = './bc-kenpipe-2024/Layout/ CRM Member TAT Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/ CRM Member TAT Report.rdl';
     dataset
     {
         dataitem(Members; Members)

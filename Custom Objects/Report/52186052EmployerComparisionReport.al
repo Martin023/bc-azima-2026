@@ -2,7 +2,7 @@
 report 52186052 "Employer Comparison Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Employer Comparison.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Employer Comparison.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

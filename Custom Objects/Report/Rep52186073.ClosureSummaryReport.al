@@ -4,7 +4,7 @@ report 52186073 "Membership Closure Summary"
     Caption = 'Membership Closure Summary Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/ClosureSummaryReport.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/ClosureSummaryReport.rdl';
     dataset
     {
         dataitem(Date; "Date")

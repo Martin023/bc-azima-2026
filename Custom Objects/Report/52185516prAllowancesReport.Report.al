@@ -2,7 +2,7 @@
 Report 52185516 "prAllowances Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/prAllowances Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/prAllowances Report.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset
@@ -149,7 +149,7 @@ Report 52185516 "prAllowances Report"
                     CurrReport.Skip;
                 if "PR Period Transactions"."Transaction Code" = 'GPAY' then
                     CurrReport.Skip;
-                    
+
                 TotalsAllowances := TotalsAllowances + "PR Period Transactions".Amount;
 
                 Employees.Reset;

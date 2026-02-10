@@ -2,7 +2,7 @@
 Report 52185734 "Agent Applications Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Agent Applications Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Agent Applications Report.rdl';
 
     dataset
     {

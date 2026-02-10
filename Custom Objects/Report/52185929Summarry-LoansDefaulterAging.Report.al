@@ -2,7 +2,7 @@
 Report 52185929 "Summarry-Loans Defaulter Aging"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Summarry-Loans Defaulter Aging.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Summarry-Loans Defaulter Aging.rdl';
     UsageCategory = ReportsAndAnalysis;
     Caption = 'Summarry-Loans Defaulter Aging';
 

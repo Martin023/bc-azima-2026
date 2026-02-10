@@ -2,7 +2,7 @@
 Report 52186024 "Leave Discrepancy Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Leave Discrepancy Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Leave Discrepancy Report.rdl';
 
     dataset
     {

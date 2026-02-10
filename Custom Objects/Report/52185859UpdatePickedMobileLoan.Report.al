@@ -2,7 +2,7 @@
 Report 52185859 "Update Picked Mobile Loan"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Update Picked Mobile Loan.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Update Picked Mobile Loan.rdl';
 
     dataset
     {

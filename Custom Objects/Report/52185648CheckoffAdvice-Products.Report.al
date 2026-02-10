@@ -2,7 +2,7 @@
 Report 52185648 "Checkoff Advice - Products"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Checkoff Advice - Products.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Checkoff Advice - Products.rdl';
 
     dataset
     {

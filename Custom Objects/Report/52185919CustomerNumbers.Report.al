@@ -2,7 +2,7 @@
 Report 52185919 "Customer Numbers"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Cust Nos.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Cust Nos.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

@@ -2,7 +2,7 @@
 Report 52185703 "BBF Claim TAT Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/BBF Claim Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/BBF Claim Report.rdl';
 
     dataset
     {

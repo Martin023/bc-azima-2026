@@ -3,7 +3,7 @@ report 52187356 "Delegate/Board Member Position"
     ApplicationArea = All;
     Caption = 'Delegate/Board Member Position';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/DelegateBoard Member Position.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/DelegateBoard Member Position.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

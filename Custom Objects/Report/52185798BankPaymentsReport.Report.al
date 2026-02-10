@@ -2,7 +2,7 @@
 Report 52185798 "Bank Payments Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Bank Payments Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Bank Payments Report.rdl';
 
     dataset
     {

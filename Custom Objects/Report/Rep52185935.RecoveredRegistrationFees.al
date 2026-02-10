@@ -3,7 +3,7 @@ report 52185935 "Recovered Registration Fees"
     ApplicationArea = All;
     Caption = 'Recovered Registration Fees';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Recovered Registration Fees.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Recovered Registration Fees.rdl';
     dataset
     {
         dataitem(Members; Members)

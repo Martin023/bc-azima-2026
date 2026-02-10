@@ -2,7 +2,7 @@
 Report 52186169 "Cashier Deposits Withdrawals"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Cashier Deposits Withdrawals Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Cashier Deposits Withdrawals Report.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

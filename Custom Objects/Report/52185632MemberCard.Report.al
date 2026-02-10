@@ -2,8 +2,8 @@
 Report 52185632 "Member Card"
 {
     DefaultLayout = RDLC;
-    // RDLCLayout = './bc-kenpipe-2024/Layout/CustomerAging.rdl';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Card.rdl';
+    // RDLCLayout = './bc-azima-2026/Layout/CustomerAging.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Card.rdl';
 
     Caption = 'Member Card';
     UsageCategory = ReportsAndAnalysis;
@@ -47,7 +47,7 @@ Report 52185632 "Member Card"
             column(Picture; CompanyInformation.Picture)
             {
             }
-            
+
             column(CompanyName; CompanyInformation."Name")
             {
             }

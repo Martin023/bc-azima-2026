@@ -2,7 +2,7 @@
 Report 52185887 "Staff Payment Voucher Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Staff Payment Voucher Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Staff Payment Voucher Report.rdl';
 
     dataset
     {

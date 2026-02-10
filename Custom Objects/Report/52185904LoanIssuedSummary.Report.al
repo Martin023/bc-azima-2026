@@ -2,7 +2,7 @@
 Report 52185904 "Loan Issued Summary"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Issued Summary.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Issued Summary.rdl';
 
     dataset
     {

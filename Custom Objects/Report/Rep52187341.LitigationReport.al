@@ -4,7 +4,7 @@ report 52187341 "Litigation Report"
     Caption = 'Litigation Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Litigation Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Litigation Report.rdl';
 
     dataset
     {

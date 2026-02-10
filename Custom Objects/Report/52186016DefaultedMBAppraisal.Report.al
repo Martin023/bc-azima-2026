@@ -2,7 +2,7 @@
 Report 52186016 "Defaulted MB Appraisal"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Defaulted MB Appraisal.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Defaulted MB Appraisal.rdl';
 
     dataset
     {

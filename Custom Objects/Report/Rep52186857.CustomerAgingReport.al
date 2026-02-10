@@ -2,7 +2,7 @@ report 52186857 "Customer Summary Aging Report"
 {
     Caption = 'Customer Summary Aging Report';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/CustomerSummaryAging.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/CustomerSummaryAging.rdl';
 
     dataset
     {

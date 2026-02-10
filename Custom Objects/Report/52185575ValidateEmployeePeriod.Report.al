@@ -2,7 +2,7 @@
 Report 52185575 "Validate Employee Period"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Validate Employee Period.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Validate Employee Period.rdl';
 
     dataset
     {

@@ -2,8 +2,8 @@
 Report 52185599 prPaySlip2Local
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/prPaySlip2Local.rdl';
-    WordLayout = './bc-kenpipe-2024/Layout/prPaySlip2Local.docx';
+    RDLCLayout = './bc-azima-2026/Layout/prPaySlip2Local.rdl';
+    WordLayout = './bc-azima-2026/Layout/prPaySlip2Local.docx';
     Caption = 'PaySlip';
 
     dataset

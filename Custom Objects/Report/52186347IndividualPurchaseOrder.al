@@ -3,7 +3,7 @@
 // report 52186347 "Individual Purchase Order"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Order 2.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Order 2.rdl';
 
 //     dataset
 //     {

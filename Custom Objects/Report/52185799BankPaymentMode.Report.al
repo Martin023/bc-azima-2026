@@ -2,7 +2,7 @@
 Report 52185799 "Bank Payment Mode"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Bank Payment Mode.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Bank Payment Mode.rdl';
     Caption = 'Bank Acc. - Detail Trial Bal.';
 
     dataset

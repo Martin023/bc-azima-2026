@@ -8,7 +8,7 @@ report 52186142 "Loan Arrears Report - Finance"
     Caption = 'Loan Arrears Report - Finance';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Arrears Finance Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Arrears Finance Report.rdl';
 
     //Arrears report for different accounts (loan, share, risk, BBF, interest); 
     //(Expected-Paid; variance/arrears; Interest expected- Actual paid + unrealized interest). 

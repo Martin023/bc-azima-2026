@@ -4,7 +4,7 @@ report 52185559 "Online M Application Report"
     Caption = 'Online Member Application Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/onlineMemberApplication.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/onlineMemberApplication.rdl';
     dataset
     {
         dataitem("Member Application"; "Member Application")

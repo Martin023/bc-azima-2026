@@ -3,7 +3,7 @@ report 52186800 "Commercial Loan buyoffs"
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Commercial Buyoff report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Commercial Buyoff report.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 // Report 52185774 "Employer Checkoff Receipt-2"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Employer Checkoff Receipt-2.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Employer Checkoff Receipt-2.rdl';
 
 //     dataset
 //     {

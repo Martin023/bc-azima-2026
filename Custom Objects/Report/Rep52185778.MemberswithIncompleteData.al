@@ -7,7 +7,7 @@ report 52185778 "Members with Incomplete Data"
     Caption = 'Members with Incomplete Data';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Members with Incomplete Data.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Members with Incomplete Data.rdl';
     dataset
     {
         dataitem(MemberApplication; "Member Application")

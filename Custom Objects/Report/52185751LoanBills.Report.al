@@ -2,7 +2,7 @@
 Report 52185751 "Loan Bills"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Bills.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Bills.rdl';
 
     dataset
     {

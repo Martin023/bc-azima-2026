@@ -5,7 +5,7 @@ report 52186213 "Loans without STO"
     ApplicationArea = All;
     Caption = 'Loans without STO';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan without STO.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan without STO.rdl';
     DefaultLayout = RDLC;
     dataset
     {

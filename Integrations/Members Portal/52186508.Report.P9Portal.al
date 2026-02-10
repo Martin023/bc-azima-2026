@@ -2,7 +2,7 @@
 Report 52186508 "P9 Portal"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/P9 Portal.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/P9 Portal.rdl';
     // UsageCategory = Lists;
 
     dataset

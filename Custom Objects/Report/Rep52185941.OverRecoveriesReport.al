@@ -3,7 +3,7 @@ report 52185941 "Over Recoveries Report"
     ApplicationArea = All;
     Caption = 'Over Recoveries Report';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Over Recoveries Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Over Recoveries Report.rdl';
     dataset
     {
         dataitem(CheckoffLines; "Checkoff Lines")

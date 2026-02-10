@@ -2,7 +2,7 @@
 Report 52185721 "Loan Repayment Dues Summaries"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Repayment Dues Summaries.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Repayment Dues Summaries.rdl';
 
     dataset
     {

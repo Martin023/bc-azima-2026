@@ -4,7 +4,7 @@ report 52187370 "Share Capital Certificate"
     Caption = 'Share Capital Certificate';
     //UsageCategory = ReportsAndAnalysis;
     DefaultLayout = Word;
-    WordLayout = './bc-kenpipe-2024/Layout/Share Capital Certificate.docx';
+    WordLayout = './bc-azima-2026/Layout/Share Capital Certificate.docx';
     dataset
     {
         dataitem(Members; Members)
@@ -56,7 +56,7 @@ report 52187370 "Share Capital Certificate"
             column(Picture; CompanyInformation.Picture)
             {
             }
-            
+
             column(CompanyName; CompanyInformation."Name")
             {
             }

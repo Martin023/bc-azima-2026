@@ -1,7 +1,7 @@
 report 52186343 "Disposal Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Disposal Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Disposal Report.rdl';
 
     dataset
     {

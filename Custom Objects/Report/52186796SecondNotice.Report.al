@@ -2,7 +2,7 @@
 Report 52186796 "Second Notice"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Second Notice.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Second Notice.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

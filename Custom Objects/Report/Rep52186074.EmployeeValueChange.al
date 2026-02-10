@@ -6,7 +6,7 @@ using Microsoft.Foundation.Company;
 report 52186074 "Employee Value Change"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Employee Value Change Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Employee Value Change Report.rdl';
     dataset
     {
         dataitem(Employee; "HR Employees")

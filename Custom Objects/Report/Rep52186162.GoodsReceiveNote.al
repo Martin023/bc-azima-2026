@@ -8,7 +8,7 @@ report 52186170 "Goods Receive Note"
 {
 
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Goods Receive Note.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Goods Receive Note.rdl';
 
 
 

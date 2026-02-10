@@ -2,7 +2,7 @@
 Report 52186171 "Cashier Cheque Deposits"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Cashier Cheque Deposits Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Cashier Cheque Deposits Report.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

@@ -4,7 +4,7 @@ report 52186378 "Checkoff Report"
     Caption = 'Checkoff Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/CheckoffReport.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/CheckoffReport.rdl';
     dataset
     {
         dataitem(CheckoffHeader; "Checkoff Header")

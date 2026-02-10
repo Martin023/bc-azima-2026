@@ -3,7 +3,7 @@ Report 52186060 "Withdrawal TAT Report"
 {
     Caption = 'Withdrawal TAT Report';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Withdrawal TAT Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Withdrawal TAT Report.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

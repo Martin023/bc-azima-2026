@@ -2,7 +2,7 @@
 Report 52186001 "Delegates Payment Voucher"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Delegates Payment Voucher Slip.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Delegates Payment Voucher Slip.rdl';
     //UsageCategory = ReportsAndAnalysis;
     dataset
     {

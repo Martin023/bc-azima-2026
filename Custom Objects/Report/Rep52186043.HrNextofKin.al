@@ -1,7 +1,7 @@
 report 52186044 HrNextofKin
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Next Of Kin Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Next Of Kin Report.rdl';
 
 
     dataset

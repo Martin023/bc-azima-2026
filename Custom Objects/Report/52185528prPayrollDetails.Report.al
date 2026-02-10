@@ -2,7 +2,7 @@
 Report 52185528 "prPayroll Details"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/prPayroll Details.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/prPayroll Details.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

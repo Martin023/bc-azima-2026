@@ -2,7 +2,7 @@
 Report 52185595 prUpdateNetPay
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/prUpdateNetPay.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/prUpdateNetPay.rdl';
 
     dataset
     {

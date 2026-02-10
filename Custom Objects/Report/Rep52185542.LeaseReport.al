@@ -4,7 +4,7 @@ report 52185542 "Lease Report"
     Caption = 'Lease Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Lease Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Lease Report.rdl';
     dataset
     {
         dataitem(Lease; Lease)

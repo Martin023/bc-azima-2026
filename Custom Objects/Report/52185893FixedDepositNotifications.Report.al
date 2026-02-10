@@ -2,7 +2,7 @@
 // Report 52185893 "Fixed Deposit Notifications"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Fixed Deposit Notifications.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Fixed Deposit Notifications.rdl';
 
 //     dataset
 //     {

@@ -2,7 +2,7 @@
 Report 52185804 "Modify Item Ledger"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Modify Item Ledger.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Modify Item Ledger.rdl';
 
     dataset
     {

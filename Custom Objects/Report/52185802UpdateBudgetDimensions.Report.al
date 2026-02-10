@@ -2,7 +2,7 @@
 Report 52185802 "Update Budget Dimensions"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Update Budget Dimensions.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Update Budget Dimensions.rdl';
 
     dataset
     {

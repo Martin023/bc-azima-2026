@@ -2,7 +2,7 @@
 Report 52185681 "Process Cheques"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Process Cheques.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Process Cheques.rdl';
 
     dataset
     {

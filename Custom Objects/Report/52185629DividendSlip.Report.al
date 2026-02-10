@@ -2,7 +2,7 @@
 Report 52185629 "Dividend Slip"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Dividend Slip.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Dividend Slip.rdl';
 
     dataset
     {

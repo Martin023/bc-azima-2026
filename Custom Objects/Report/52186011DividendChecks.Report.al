@@ -2,7 +2,7 @@
 Report 52186011 "Dividend Checks"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Dividend Checks.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Dividend Checks.rdl';
 
     dataset
     {

@@ -4,7 +4,7 @@ report 52187404 "Rescheduled Loans report"
     ApplicationArea = All;
     DefaultLayout = RDLC;
     Caption = 'Loan Resheduling Report';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Rescheduling Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Rescheduling Report.rdl';
 
     dataset
     {

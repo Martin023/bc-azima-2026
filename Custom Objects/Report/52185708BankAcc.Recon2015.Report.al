@@ -2,7 +2,7 @@
 Report 52185708 "Bank Acc. Recon 2015"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Bank Acc. Recon 2015.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Bank Acc. Recon 2015.rdl';
 
     dataset
     {

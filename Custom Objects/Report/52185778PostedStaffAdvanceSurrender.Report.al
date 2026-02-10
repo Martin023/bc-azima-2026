@@ -2,7 +2,7 @@
 // Report 52185778 "Posted Staff Advance Surrender"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Posted Staff Advance Surrender.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Posted Staff Advance Surrender.rdl';
 
 //     dataset
 //     {

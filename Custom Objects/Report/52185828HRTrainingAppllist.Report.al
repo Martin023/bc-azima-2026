@@ -2,7 +2,7 @@
 Report 52185828 "HR Training Appl list"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Training Appl list.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Training Appl list.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52185604 "Appraisal Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Appraisal Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Appraisal Report.rdl';
 
     dataset
     {

@@ -3,7 +3,7 @@ Report 52185773 "Pending Withdrawal Notices"
 {
     DefaultLayout = RDLC;
     Caption = 'Pending Member Withdrawal Notices';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Withdrawal Notices.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Withdrawal Notices.rdl';
     UsageCategory = ReportsAndAnalysis;
 
 

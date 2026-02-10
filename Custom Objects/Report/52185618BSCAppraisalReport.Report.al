@@ -2,7 +2,7 @@
 Report 52185618 "BSC Appraisal Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/BSC Appraisal Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/BSC Appraisal Report.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52186027 "Loan Arrears Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Arrears Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Arrears Report.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52185483 "HR Leave Applications List"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Leave Applications List.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Leave Applications List.rdl';
 
     dataset
     {

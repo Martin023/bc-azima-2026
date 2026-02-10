@@ -2,7 +2,7 @@
 Report 52185968 "Salary Not Through FOSA"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Salary Not Through FOSA.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Salary Not Through FOSA.rdl';
 
     dataset
     {

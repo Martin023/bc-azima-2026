@@ -4,7 +4,7 @@ report 52185561 "Buildings Report"
     Caption = 'Buildings Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Buildings Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Buildings Report.rdl';
     dataset
     {
         dataitem(PropertyDetails; "Property Details")

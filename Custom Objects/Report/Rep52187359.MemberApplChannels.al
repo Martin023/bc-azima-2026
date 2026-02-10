@@ -4,7 +4,7 @@ report 52187359 "Member Appl Channels"
     Caption = 'Member Appl Channels';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Appl Channels.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Appl Channels.rdl';
     dataset
     {
         dataitem(Members; Members)

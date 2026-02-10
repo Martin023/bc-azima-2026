@@ -4,7 +4,7 @@ report 52187002 "Society Vehicle Movement"
     Caption = 'Society Vehicle Movement';
     //UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Society Vehicle Movement.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Society Vehicle Movement.rdl';
     dataset
     {
         dataitem(VehicleMovement; "Vehicle Movement")

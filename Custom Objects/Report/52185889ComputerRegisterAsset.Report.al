@@ -2,7 +2,7 @@
 Report 52185889 "Computer Register Asset"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Computer Register Asset.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Computer Register Asset.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52185544 "Schedule All Loans"
 {
     DefaultLayout = RDLC;
-    //RDLCLayout = './bc-kenpipe-2024/Layout/Schedule All Loans.rdl';
+    //RDLCLayout = './bc-azima-2026/Layout/Schedule All Loans.rdl';
     UsageCategory = ReportsAndAnalysis;
     ProcessingOnly = true;
 

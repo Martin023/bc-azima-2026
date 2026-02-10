@@ -2,7 +2,7 @@
 Report 52186014 "Dividend Advance Checks"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Dividend Advance Checks.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Dividend Advance Checks.rdl';
 
     dataset
     {

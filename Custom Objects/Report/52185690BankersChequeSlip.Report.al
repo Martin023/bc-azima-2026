@@ -2,7 +2,7 @@
 Report 52185690 "Bankers Cheque Slip"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Bankers Cheque Slip.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Bankers Cheque Slip.rdl';
     UseRequestPage = true;
 
     dataset

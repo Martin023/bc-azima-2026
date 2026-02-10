@@ -2,7 +2,7 @@
 Report 52185988 "Loan Interest  Register"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Interest  Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Interest  Register.rdl';
     Caption = 'Posted Loans Register';
 
     dataset

@@ -1,7 +1,7 @@
 Report 52185676 "Member Loan Statement II"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Loan Statement II.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Loan Statement II.rdl';
     PreviewMode = Normal;
     UsageCategory = ReportsAndAnalysis;
     Caption = 'Member Loan Statement';

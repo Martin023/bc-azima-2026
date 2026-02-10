@@ -1,7 +1,7 @@
 Report 52186397 "Tenant Receipt"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Tenant Receipt.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Tenant Receipt.rdl';
 
     dataset
     {

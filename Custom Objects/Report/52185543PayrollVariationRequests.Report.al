@@ -2,7 +2,7 @@
 Report 52185543 "Payroll Variation Requests"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Payroll Variation Requests.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Payroll Variation Requests.rdl';
 
     dataset
     {

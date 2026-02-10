@@ -2,7 +2,7 @@
 Report 52186015 "Categorised Complaints"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Categorised Complaints.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Categorised Complaints.rdl';
 
     dataset
     {

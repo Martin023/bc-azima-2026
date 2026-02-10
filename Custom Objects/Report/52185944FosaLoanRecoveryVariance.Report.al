@@ -2,7 +2,7 @@
 Report 52185944 "Loan Recovery Variance"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Recovery Variance.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Recovery Variance.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52185853 "PR NSSF NEW"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/PR NSSF NEW.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/PR NSSF NEW.rdl';
 
     dataset
     {

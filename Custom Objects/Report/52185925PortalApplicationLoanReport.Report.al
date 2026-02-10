@@ -2,7 +2,7 @@
 Report 52185925 "Portal Application Loan Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Portal Application Loan Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Portal Application Loan Report.rdl';
 
     dataset
     {

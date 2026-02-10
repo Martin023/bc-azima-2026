@@ -3,7 +3,7 @@ report 52186136 "Share Variation Commission"
     ApplicationArea = All;
     Caption = 'Share Variation Commission Report';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Share Variation Commission Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Share Variation Commission Report.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

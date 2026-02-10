@@ -4,7 +4,7 @@ report 52185736 "Unpaid Delegate Claims"
     Caption = 'Unpaid Delegate Claims';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Unpaid Delegate Claims.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Unpaid Delegate Claims.rdl';
 
     dataset
     {

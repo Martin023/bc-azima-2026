@@ -2,7 +2,7 @@
 Report 52185776 "PR iTax Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/PR iTax Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/PR iTax Report.rdl';
 
     dataset
     {

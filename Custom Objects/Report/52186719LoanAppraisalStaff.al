@@ -1,6 +1,6 @@
 Report 52186719 "Loan Appraisal Staff"
 {
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Appraisal Staff.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Appraisal Staff.rdl';
     Caption = 'Loan Appraisal Staff';
     DefaultLayout = RDLC;
     ApplicationArea = Basic, suite;

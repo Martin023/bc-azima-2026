@@ -11,7 +11,7 @@ report 52185995 "Leased Assets & Obligations"
     Caption = 'Leased Assets & Obligations';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Leased Assets & Obligations.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Leased Assets & Obligations.rdl';
     //The system should be able to capture leased assets with their obligations i.e., monthly amount payable, location, 
     //officer in charge, description, serial number, lease period, expiry date etc.
     dataset

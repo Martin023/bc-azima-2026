@@ -3,7 +3,7 @@
 report 52186062 "Purchase Order"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Purchase Order.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Purchase Order.rdl';
 
 
 

@@ -2,7 +2,7 @@
 Report 52185620 "Accounts Application Summary"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Accounts Application Summary.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Accounts Application Summary.rdl';
 
     dataset
     {

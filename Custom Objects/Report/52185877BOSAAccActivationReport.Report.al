@@ -2,7 +2,7 @@
 Report 52185877 "BOSA Account Activation Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/BOSA Account Activation.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/BOSA Account Activation.rdl';
 
     dataset
     {

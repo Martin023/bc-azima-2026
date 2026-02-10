@@ -4,7 +4,7 @@ report 52186340 "ADR Report"
     Caption = 'ADR Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/ADR Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/ADR Report.rdl';
     dataset
     {
         dataitem("Legal"; "Legal")

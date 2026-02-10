@@ -3,7 +3,7 @@ report 52186130 "AML Report Transactions"
     ApplicationArea = All;
     Caption = 'AML Report Transactions';
     UsageCategory = ReportsAndAnalysis;
-    RDLClayout = './bc-kenpipe-2024/Layout/AML Report (ALL).rdl';
+    RDLClayout = './bc-azima-2026/Layout/AML Report (ALL).rdl';
     dataset
     {
         dataitem(Savings_Ledger_Entry; "Savings Ledger Entry")

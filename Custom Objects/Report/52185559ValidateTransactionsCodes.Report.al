@@ -2,7 +2,7 @@
 // Report 52185559 "Validate Transactions Codes"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Validate Transactions Codes.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Validate Transactions Codes.rdl';
 
 //     dataset
 //     {

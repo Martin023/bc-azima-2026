@@ -9,7 +9,7 @@ report 52186104 "Self Service Slip"
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
 
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Self Service Individual Payslip.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Self Service Individual Payslip.rdl';
 
 
     dataset
@@ -967,7 +967,7 @@ report 52186104 "Self Service Slip"
     trigger OnPreReport()
     begin
         PeriodFilter := "PR Salary Card".GetFilter("Period Filter");
-        
+
         strEmpCode := "PR Salary Card".GetFilter("Employee Code");
         if strEmpCode = '' then Error('You must specify the employee code');
 

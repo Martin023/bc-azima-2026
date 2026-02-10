@@ -4,7 +4,7 @@ report 52185696 "Fixed Asset Transfer Report"
     Caption = 'Fixed Asset Transfer Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Fixed Asset Transfer Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Fixed Asset Transfer Report.rdl';
     dataset
     {
         dataitem(AssetTransfer; "Asset Transfer")

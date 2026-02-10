@@ -2,7 +2,7 @@
 Report 52185816 "Training needs"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Training needs.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Training needs.rdl';
 
     dataset
     {

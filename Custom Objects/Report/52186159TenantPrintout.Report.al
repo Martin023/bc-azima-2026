@@ -2,7 +2,7 @@
 Report 52186159 "Tenant Printout"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Tenant Printout.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Tenant Printout.rdl';
 
     dataset
     {

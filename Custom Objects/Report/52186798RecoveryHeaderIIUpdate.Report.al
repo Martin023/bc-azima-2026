@@ -2,7 +2,7 @@
 Report 52186798 "Recovery Header II Update"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Rec Header Update.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Rec Header Update.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

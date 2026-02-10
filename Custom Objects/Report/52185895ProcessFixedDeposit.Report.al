@@ -2,7 +2,7 @@
 Report 52185895 "Process Fixed Deposit"
 {
     // DefaultLayout = RDLC;
-    // RDLCLayout = './bc-kenpipe-2024/Layout/Process Fixed Deposit.rdl';
+    // RDLCLayout = './bc-azima-2026/Layout/Process Fixed Deposit.rdl';
     ProcessingOnly = true;
 
     dataset

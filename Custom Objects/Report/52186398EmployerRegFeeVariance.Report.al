@@ -4,7 +4,7 @@ Report 52186398 "Reg Fee Arrears"
     DefaultLayout = RDLC;
     UsageCategory = ReportsAndAnalysis;
     Caption = 'Member Register Fosa';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Reg Fee Arrears.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Reg Fee Arrears.rdl';
 
     dataset
     {

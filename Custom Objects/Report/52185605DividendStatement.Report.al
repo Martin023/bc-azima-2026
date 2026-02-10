@@ -2,7 +2,7 @@
 Report 52185605 "Dividend Statement"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Dividend Statement.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Dividend Statement.rdl';
 
     dataset
     {

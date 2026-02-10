@@ -2,7 +2,7 @@
 Report 52185883 "Salary Agreement Counter"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Salary Agreement Counter.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Salary Agreement Counter.rdl';
 
     dataset
     {

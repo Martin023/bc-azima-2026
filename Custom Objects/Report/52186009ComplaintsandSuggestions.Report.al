@@ -2,7 +2,7 @@
 Report 52186009 "Complaints and Suggestions"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Complaints and Suggestions.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Complaints and Suggestions.rdl';
 
     dataset
     {

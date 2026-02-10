@@ -2,7 +2,7 @@
 Report 52185936 "Online Loan Application Form"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Online Loan Application Form.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Online Loan Application Form.rdl';
     PreviewMode = PrintLayout;
 
     dataset

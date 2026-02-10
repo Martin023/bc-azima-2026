@@ -6,7 +6,7 @@ report 52186147 "Savings Products Report"
     ApplicationArea = All;
     Caption = 'Savings Products Report';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Savings Products Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Savings Products Report.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

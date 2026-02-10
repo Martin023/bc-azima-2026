@@ -2,7 +2,7 @@
 Report 52185962 "CheckOff Summary Monthly"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/CheckOff Summary Monthly.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/CheckOff Summary Monthly.rdl';
 
     dataset
     {

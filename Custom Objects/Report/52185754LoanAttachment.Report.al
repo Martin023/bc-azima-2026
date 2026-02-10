@@ -2,7 +2,7 @@
 Report 52185754 "Loan Attachment"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Attachment.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Attachment.rdl';
 
     dataset
     {

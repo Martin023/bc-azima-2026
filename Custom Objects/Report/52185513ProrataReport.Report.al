@@ -2,7 +2,7 @@
 Report 52185513 "Prorata Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Prorata Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Prorata Report.rdl';
 
     dataset
     {

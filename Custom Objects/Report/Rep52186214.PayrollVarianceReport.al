@@ -6,7 +6,7 @@ report 52186214 "Payroll Variance Report"
 {
     ApplicationArea = All;
     Caption = 'Payroll Variance Report';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Payroll Variance Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Payroll Variance Report.rdl';
     UsageCategory = ReportsAndAnalysis;
     //Basic,Gross and Net Pay changes.
     dataset
@@ -15,7 +15,7 @@ report 52186214 "Payroll Variance Report"
         dataitem("PR Period Transactions"; "PR Period Transactions")
         {
             RequestFilterFields = "Employee Code";
-            
+
             column(Transaction_Code; "Transaction Code") { }
             column(Transaction_Name; "Transaction Name") { }
             column(Employee_Code; "Employee Code") { }
@@ -47,7 +47,7 @@ report 52186214 "Payroll Variance Report"
                 HRTable.Reset();
                 HRTable.SetRange("No.", "PR Period Transactions"."Employee Code");
                 if HRTable.Find('-') then
-                    Employee_Name := HRTable."First Name" + ' ' +HRTable."Middle Name" + ' ' + HRTable."Last Name";
+                    Employee_Name := HRTable."First Name" + ' ' + HRTable."Middle Name" + ' ' + HRTable."Last Name";
 
 
                 //BPAY|NPAY|GPAY

@@ -2,7 +2,7 @@
 Report 52186155 "Fosa Overdrawn Accounts"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Fosa Overdrawn Accounts.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Fosa Overdrawn Accounts.rdl';
 
     dataset
     {

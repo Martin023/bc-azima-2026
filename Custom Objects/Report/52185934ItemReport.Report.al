@@ -2,7 +2,7 @@
 Report 52185934 "Item Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Item Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Item Report.rdl';
 
     dataset
     {

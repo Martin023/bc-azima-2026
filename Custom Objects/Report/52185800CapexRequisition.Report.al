@@ -2,7 +2,7 @@
 // Report 52185800 "Capex Requisition"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Capex Requisition.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Capex Requisition.rdl';
 
 //     dataset
 //     {

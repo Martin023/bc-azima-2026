@@ -2,7 +2,7 @@
 Report 52185759 "Sales Agents Performance"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Sales Agents Performance.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Sales Agents Performance.rdl';
 
     dataset
     {

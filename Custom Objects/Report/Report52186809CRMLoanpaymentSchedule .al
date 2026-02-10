@@ -4,7 +4,7 @@ Report 52186084 "CRM Loan RePayment Schedule"
     DefaultLayout = RDLC;
     Caption = 'CRM Loan RePayment Schedule';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/CRM Loan RePayment Schedule.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/CRM Loan RePayment Schedule.rdl';
     dataset
     {
         dataitem(Loans; Loans)

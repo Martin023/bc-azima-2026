@@ -2,7 +2,7 @@
 Report 52185720 "Monthly Bill Summary"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Monthly Bill Summary.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Monthly Bill Summary.rdl';
 
     dataset
     {

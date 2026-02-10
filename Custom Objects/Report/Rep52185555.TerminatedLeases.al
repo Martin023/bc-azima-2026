@@ -4,7 +4,7 @@ report 52185555 "Terminated Leases"
     Caption = 'Terminated Leases';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Terminated Leases.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Terminated Leases.rdl';
     dataset
     {
         dataitem(Lease; Lease)

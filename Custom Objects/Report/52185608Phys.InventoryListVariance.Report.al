@@ -2,7 +2,7 @@
 Report 52185608 "Phys. Inventory List Variance"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Phys. Inventory List Variance.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Phys. Inventory List Variance.rdl';
     Caption = 'Phys. Inventory List';
 
     dataset

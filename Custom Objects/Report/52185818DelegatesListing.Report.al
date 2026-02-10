@@ -2,7 +2,7 @@
 Report 52185818 "Delegates Listing"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Delegates Listing.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Delegates Listing.rdl';
 
     dataset
     {

@@ -4,7 +4,7 @@ report 52187403 "Total Liabilities report"
     ApplicationArea = All;
     DefaultLayout = RDLC;
     Caption = 'Total Liabilities Report';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Total Liabilities Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Total Liabilities Report.rdl';
 
     dataset
     {

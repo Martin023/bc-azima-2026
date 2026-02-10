@@ -4,7 +4,7 @@ report 52186567 "Fully Depreciated Assets"
     Caption = 'Fully Depreciated Assets';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = Rdlc;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Fully Depreciated Assets.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Fully Depreciated Assets.rdl';
     dataset
     {
         dataitem(FixedAsset; "Fixed Asset")

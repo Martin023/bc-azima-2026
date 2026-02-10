@@ -4,7 +4,7 @@ report 52187001 "Society Active Vehicles"
     Caption = 'Society Active Vehicles';
     //UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Society Active Vehicles.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Society Active Vehicles.rdl';
     dataset
     {
         dataitem(CompanyVehicles; "Company Vehicles")

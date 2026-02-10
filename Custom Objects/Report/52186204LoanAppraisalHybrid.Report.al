@@ -1,6 +1,6 @@
 Report 52186204 "Loan Appraisal Hybrid"
 {
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Appraisal Hybrid.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Appraisal Hybrid.rdl';
     Caption = 'Loan Appraisal Hybrid';
     DefaultLayout = RDLC;
     ApplicationArea = Basic, suite;

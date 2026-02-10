@@ -2,7 +2,7 @@
 Report 52185572 "Employee Earnings Summary"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Employee Earnings Summary.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Employee Earnings Summary.rdl';
 
     dataset
     {

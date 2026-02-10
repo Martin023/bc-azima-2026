@@ -1,7 +1,7 @@
 Report 52186080 "CRM Loan Guaranteed Reports"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/CRM Loan Guaranteed Reports.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/CRM Loan Guaranteed Reports.rdl';
     UsageCategory = ReportsAndAnalysis;
     Caption = 'CRM Loan Guaranteed Reports';
     dataset

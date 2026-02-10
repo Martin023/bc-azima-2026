@@ -2,7 +2,7 @@
 Report 52185454 "Bank Acc. Recon. - Test new3"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Bank Acc. Recon. - Test new3.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Bank Acc. Recon. - Test new3.rdl';
 
     dataset
     {

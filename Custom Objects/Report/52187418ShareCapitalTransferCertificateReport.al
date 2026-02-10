@@ -2,7 +2,7 @@ report 52187418 "Share Capital Transfer"
 {
     DefaultLayout = RDLC;
 
-    RDLCLayout = './bc-kenpipe-2024/Layout/Share Capital Transfer.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Share Capital Transfer.rdl';
 
     dataset
     {

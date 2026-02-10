@@ -2,7 +2,7 @@
 Report 52185432 "Release Guarantor"
 {
     DefaultLayout = RDLC;
-    //RDLCLayout = './bc-kenpipe-2024/Layout/Release Guarantor.rdl';
+    //RDLCLayout = './bc-azima-2026/Layout/Release Guarantor.rdl';
     ProcessingOnly = true;
 
     dataset

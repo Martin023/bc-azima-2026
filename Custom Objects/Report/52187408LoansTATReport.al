@@ -2,7 +2,7 @@
 Report 52187408 "Loan TAT Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Listings Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Listings Report.rdl';
 
     dataset
     {

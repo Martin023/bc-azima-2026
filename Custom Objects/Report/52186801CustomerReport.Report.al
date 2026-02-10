@@ -2,7 +2,7 @@
 Report 52186801 "Customer Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Customer Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Customer Report.rdl';
 
     dataset
     {
@@ -205,5 +205,5 @@ Report 52186801 "Customer Report"
         BalanceBF: Decimal;
         GlobalFunctions: Codeunit "Global Functions";
 
-    
+
 }

@@ -4,7 +4,7 @@ report 52187004 "Society Vehicle Fueling"
     Caption = 'Society Vehicle Fueling';
     //UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Society Vehicle Fueling.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Society Vehicle Fueling.rdl';
 
     dataset
     {

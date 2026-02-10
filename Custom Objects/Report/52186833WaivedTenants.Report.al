@@ -1,7 +1,7 @@
 Report 52186833 "Waived Tenants"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Waived Tenants.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Waived Tenants.rdl';
 
     dataset
     {

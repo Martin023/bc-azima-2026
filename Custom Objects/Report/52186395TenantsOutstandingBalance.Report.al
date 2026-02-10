@@ -1,7 +1,7 @@
 Report 52186395 "Tenant Outstanding Balance"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Tenant Outstanding Balance.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Tenant Outstanding Balance.rdl';
 
     dataset
     {

@@ -4,7 +4,7 @@ using Microsoft.Foundation.Company;
 report 52186216 "Business Loans TAT"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Business Loans TAT Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Business Loans TAT Report.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

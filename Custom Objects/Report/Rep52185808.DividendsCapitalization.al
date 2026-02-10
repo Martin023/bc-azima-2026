@@ -6,7 +6,7 @@ report 52185808 "Dividends Capitalization"
     ApplicationArea = All;
     Caption = 'Dividends Capitalization';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Dividends Capitalization.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Dividends Capitalization.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

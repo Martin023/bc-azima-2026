@@ -2,7 +2,7 @@
 Report 52185641 "Loan Appraisal - Bus"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Appraisal - Bus.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Appraisal - Bus.rdl';
 
     dataset
     {

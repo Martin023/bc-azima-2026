@@ -3,7 +3,7 @@ report 52187394 "Leave types report"
     ApplicationArea = All;
     Caption = 'Leave types report';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/LeaveTypes.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/LeaveTypes.rdl';
     dataset
     {
         dataitem(HrLeaveTypes; "Hr Leave Types")

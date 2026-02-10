@@ -2,7 +2,7 @@
 Report 52185492 "HR Training Needs"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Training Needs.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Training Needs.rdl';
 
     dataset
     {

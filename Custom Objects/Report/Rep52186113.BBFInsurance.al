@@ -6,7 +6,7 @@ report 52186113 "BBF Insurance TAT"
     ApplicationArea = All;
 
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/BBF Insurance TAT Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/BBF Insurance TAT Report.rdl';
     dataset
     {
         dataitem(SinkfundReportInformation; "Sinkfund Report Information")

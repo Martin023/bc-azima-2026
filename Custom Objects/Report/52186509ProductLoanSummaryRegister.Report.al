@@ -2,7 +2,7 @@
 Report 52186509 "Product Loan Summary Register"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Product Loan Summary Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Product Loan Summary Register.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

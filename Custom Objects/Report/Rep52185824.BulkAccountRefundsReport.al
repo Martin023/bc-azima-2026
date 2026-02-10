@@ -4,7 +4,7 @@ report 52185824 "Bulk Account Refunds Report"
     ApplicationArea = All;
     Caption = 'Bulk Account Refunds Report';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/BulkAccountRefundReport.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/BulkAccountRefundReport.rdl';
     UsageCategory = Lists;
     dataset
     {

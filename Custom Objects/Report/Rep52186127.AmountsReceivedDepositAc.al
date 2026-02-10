@@ -6,7 +6,7 @@ report 52186127 "Amounts Received - Deposit A/c"
     ApplicationArea = All;
     Caption = 'Amounts Received - Deposit A/c';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Amounts Received - Deposit Ac.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Amounts Received - Deposit Ac.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

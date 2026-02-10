@@ -2,7 +2,7 @@
 Report 52185961 "CheckOff Summary"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/CheckOff Summary.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/CheckOff Summary.rdl';
 
     dataset
     {

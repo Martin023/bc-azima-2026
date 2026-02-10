@@ -4,7 +4,7 @@ report 52187385 "Share Capital Register"
     Caption = 'Share Capital Register';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Share Capital Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Share Capital Register.rdl';
     ///FOR FINANCE
     dataset
     {

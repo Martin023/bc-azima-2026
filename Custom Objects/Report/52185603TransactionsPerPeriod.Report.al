@@ -2,7 +2,7 @@
 // Report 52185603 "Transactions Per Period"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Transactions Per Period.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Transactions Per Period.rdl';
 
 //     dataset
 //     {

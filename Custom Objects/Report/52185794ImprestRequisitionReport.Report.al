@@ -2,7 +2,7 @@
 Report 52185794 "Imprest Requisition Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Imprest Requisition Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Imprest Requisition Report.rdl';
 
     dataset
     {

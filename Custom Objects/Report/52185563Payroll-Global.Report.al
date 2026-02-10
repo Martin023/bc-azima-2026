@@ -2,7 +2,7 @@
 Report 52185563 "Payroll - Global"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Payroll - Global.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Payroll - Global.rdl';
 
     dataset
     {

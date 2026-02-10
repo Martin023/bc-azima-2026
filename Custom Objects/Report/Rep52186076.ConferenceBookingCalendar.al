@@ -9,9 +9,9 @@ report 52186076 "Conference Booking Calendar"
     Caption = 'Conference Booking Calendar';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Conference Booking Calendar.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Conference Booking Calendar.rdl';
     // DefaultLayout = Word;
-    // WordLayout = './bc-kenpipe-2024/Layout/Conference Booking Calendar.docx';
+    // WordLayout = './bc-azima-2026/Layout/Conference Booking Calendar.docx';
 
     dataset
     {

@@ -6,7 +6,7 @@ using Microsoft.Finance.Dimension;
 report 52186179 "Pr Variance Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/PR Variance2.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/PR Variance2.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

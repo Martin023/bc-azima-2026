@@ -2,7 +2,7 @@
 Report 52185444 "Missing Ba Ledgers Entry Recon"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Missing Ba Ledgers Entry Recon.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Missing Ba Ledgers Entry Recon.rdl';
 
     dataset
     {

@@ -4,7 +4,7 @@ Report 52186036 "Reappotionment Report"
     DefaultLayout = RDLC;
     ApplicationArea = Basic, suite;
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Reappotionment.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Reappotionment.rdl';
 
     dataset
     {

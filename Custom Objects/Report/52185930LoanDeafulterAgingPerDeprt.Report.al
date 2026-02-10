@@ -2,7 +2,7 @@
 Report 52185930 "Loan Deafulter Aging Per Deprt"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Deafulter Aging Per Deprt.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Deafulter Aging Per Deprt.rdl';
     UsageCategory = ReportsAndAnalysis;
     Caption = 'Loan Deafulter Aging Per Deprt';
 

@@ -4,7 +4,7 @@ using Microsoft.Foundation.Company;
 report 52185825 "Exit Clearance"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Employee Separation.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Employee Separation.rdl';
     ApplicationArea = All;
     Caption = 'Exit Clearance';
     UsageCategory = ReportsAndAnalysis;

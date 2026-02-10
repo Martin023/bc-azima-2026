@@ -2,7 +2,7 @@
 Report 52185917 "First Notice"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/First Notice.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/First Notice.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

@@ -4,7 +4,7 @@ Report 52186098 "Customer Statement1"
     DefaultLayout = RDLC;
     ApplicationArea = Basic, suite;
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Customer Statement1.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Customer Statement1.rdl';
 
     dataset
     {

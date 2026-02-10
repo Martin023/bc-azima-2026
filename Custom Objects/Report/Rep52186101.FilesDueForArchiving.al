@@ -7,7 +7,7 @@ report 52186101 "Files Due For Archiving"
     Caption = 'Files Due For Archiving';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Files Due For Archiving.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Files Due For Archiving.rdl';
     dataset
     {
         dataitem(FileVolumes; "File Volumes")

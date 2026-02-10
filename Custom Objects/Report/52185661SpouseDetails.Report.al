@@ -2,7 +2,7 @@
 // Report 52185661 "Spouse Details"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Spouse Details.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Spouse Details.rdl';
 
 //     dataset
 //     {

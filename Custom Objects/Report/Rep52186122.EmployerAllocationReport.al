@@ -9,7 +9,7 @@ report 52186122 "Employer Allocation Report"
     Caption = 'Employer Allocation Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Employer Allocation Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Employer Allocation Report.rdl';
     dataset
     {
         dataitem(Customer; Customer)

@@ -7,7 +7,7 @@ report 52185812 "Perfection Template II"
     Caption = 'Perfection Template II';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = Word;
-    WordLayout = './bc-kenpipe-2024/Layout/Perfection Template II.docx';
+    WordLayout = './bc-azima-2026/Layout/Perfection Template II.docx';
     dataset
     {
         dataitem(SecurityPerfection; "Security Perfection")

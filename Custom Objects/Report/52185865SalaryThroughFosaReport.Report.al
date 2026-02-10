@@ -2,7 +2,7 @@
 Report 52185865 "Salary Through Fosa Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Salary Through Fosa Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Salary Through Fosa Report.rdl';
 
     dataset
     {

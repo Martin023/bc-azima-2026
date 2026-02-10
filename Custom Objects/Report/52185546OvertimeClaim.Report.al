@@ -2,7 +2,7 @@
 Report 52185546 "Overtime Claim"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Overtime Claim.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Overtime Claim.rdl';
 
     dataset
     {

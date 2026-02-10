@@ -2,7 +2,7 @@
 Report 52185949 "Member W/T KIN"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member WT KIN.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member WT KIN.rdl';
 
     dataset
     {

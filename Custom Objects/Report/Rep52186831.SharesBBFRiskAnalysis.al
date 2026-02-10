@@ -4,7 +4,7 @@ report 52186831 "Shares, BBF & Risk Analysis"
     Caption = 'Shares, BBF & Risk Analysis';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Shares_BBF_Risk_Analysis.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Shares_BBF_Risk_Analysis.rdl';
     dataset
     {
         dataitem(Members; Members)

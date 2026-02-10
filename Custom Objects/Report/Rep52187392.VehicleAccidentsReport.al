@@ -4,7 +4,7 @@ report 52187392 "Vehicle Accidents - Single"
     Caption = 'Vehicle Accidents Report - Single';
     //UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Vehicle Accidents Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Vehicle Accidents Report.rdl';
     dataset
     {
 

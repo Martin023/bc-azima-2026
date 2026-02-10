@@ -2,7 +2,7 @@
 // Report 52185811 "Purchase Invoice"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Purchase Invoice.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Purchase Invoice.rdl';
 //     Caption = 'Purchase Invoice';
 //     PreviewMode = PrintLayout;
 

@@ -2,7 +2,7 @@
 Report 52185469 "HR Job Applications"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Job Applications.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Job Applications.rdl';
 
     dataset
     {

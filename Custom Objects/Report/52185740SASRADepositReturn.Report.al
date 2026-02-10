@@ -2,7 +2,7 @@
 Report 52185740 "SASRA Deposit Return"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/SASRA Deposit Return.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/SASRA Deposit Return.rdl';
 
     dataset
     {

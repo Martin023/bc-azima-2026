@@ -2,7 +2,7 @@
 Report 52185912 "Member Portfolio"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Portfolio.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Portfolio.rdl';
 
     dataset
     {

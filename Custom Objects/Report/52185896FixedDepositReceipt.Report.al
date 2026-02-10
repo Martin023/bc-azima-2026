@@ -2,7 +2,7 @@
 Report 52185896 "Fixed Deposit Receipt"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Fixed Deposit Receipt.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Fixed Deposit Receipt.rdl';
 
     dataset
     {

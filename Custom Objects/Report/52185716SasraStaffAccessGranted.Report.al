@@ -2,7 +2,7 @@
 Report 52185716 "Sasra Staff Access Granted"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Sasra Staff Access Granted.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Sasra Staff Access Granted.rdl';
 
     dataset
     {

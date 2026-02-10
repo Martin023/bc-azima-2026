@@ -2,7 +2,7 @@
 Report 52185722 "ATM Link Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/ATM Link Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/ATM Link Report.rdl';
 
     dataset
     {

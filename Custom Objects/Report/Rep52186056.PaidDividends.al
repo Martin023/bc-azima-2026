@@ -1,7 +1,7 @@
 report 52186056 "Paid Dividends"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Paid Dividends.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Paid Dividends.rdl';
     dataset
     {
         dataitem(DividendProgression; "Dividend Progression")

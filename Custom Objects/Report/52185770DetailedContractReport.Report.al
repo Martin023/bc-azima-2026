@@ -2,7 +2,7 @@
 Report 52185770 "Detailed Contract Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Detailed Contract Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Detailed Contract Report.rdl';
 
     dataset
     {

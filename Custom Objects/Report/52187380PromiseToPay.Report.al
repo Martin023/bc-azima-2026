@@ -4,7 +4,7 @@ report 52187380 "Promise To Pay Report"
     Caption = 'Finance Member Listing';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Promise To Pay.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Promise To Pay.rdl';
 
 
     dataset

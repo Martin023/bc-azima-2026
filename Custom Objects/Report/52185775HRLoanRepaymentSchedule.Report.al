@@ -2,7 +2,7 @@
 Report 52185775 "HR Loan Repayment Schedule"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Loan Repayment Schedule.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Loan Repayment Schedule.rdl';
 
     dataset
     {

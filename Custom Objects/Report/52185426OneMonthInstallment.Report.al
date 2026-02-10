@@ -2,7 +2,7 @@
 Report 52185426 "One Month Installment"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/One Month Installment.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/One Month Installment.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

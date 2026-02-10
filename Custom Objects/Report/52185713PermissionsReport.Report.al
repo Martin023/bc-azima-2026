@@ -2,7 +2,7 @@
 Report 52185713 "Permissions Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Permissions Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Permissions Report.rdl';
 
     dataset
     {

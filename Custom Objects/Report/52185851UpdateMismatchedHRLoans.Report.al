@@ -2,7 +2,7 @@
 Report 52185851 "Update Mismatched HR Loans"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Update Mismatched HR Loans.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Update Mismatched HR Loans.rdl';
 
     dataset
     {

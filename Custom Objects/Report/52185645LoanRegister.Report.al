@@ -2,7 +2,7 @@
 Report 52185645 "Loan Register"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Register.rdl';
 
     dataset
     {

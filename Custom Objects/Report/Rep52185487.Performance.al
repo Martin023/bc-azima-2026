@@ -1,7 +1,7 @@
 report 52185487 "Performance"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Performance.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Performance.rdl';
     dataset
     {
         dataitem(hrappraisalheader; "hr appraisal header")

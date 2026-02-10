@@ -2,7 +2,7 @@
 Report 52185588 "Period Trans without Employee"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Period Trans without Employee.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Period Trans without Employee.rdl';
 
     dataset
     {

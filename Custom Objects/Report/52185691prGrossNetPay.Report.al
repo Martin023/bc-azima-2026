@@ -2,7 +2,7 @@
 Report 52185691 prGrossNetPay
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/prGrossNetPay.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/prGrossNetPay.rdl';
 
     dataset
     {

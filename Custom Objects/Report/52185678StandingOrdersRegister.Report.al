@@ -2,7 +2,7 @@
 Report 52185678 "Standing Orders Register"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Standing Orders Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Standing Orders Register.rdl';
 
     dataset
     {

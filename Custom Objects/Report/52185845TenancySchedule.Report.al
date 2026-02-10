@@ -2,7 +2,7 @@
 Report 52185845 "Tenancy Schedule"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Tenancy Schedule.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Tenancy Schedule.rdl';
 
     dataset
     {

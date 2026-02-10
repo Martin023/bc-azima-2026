@@ -2,7 +2,7 @@
 Report 52185474 "Leave Carry Forward"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Leave Carry Forward.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Leave Carry Forward.rdl';
 
     dataset
     {

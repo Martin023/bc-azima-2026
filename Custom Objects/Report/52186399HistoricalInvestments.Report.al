@@ -2,7 +2,7 @@
 Report 52186399 "Invest Historical Comparison"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Invest Historical Comparison.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Invest Historical Comparison.rdl';
 
     dataset
     {

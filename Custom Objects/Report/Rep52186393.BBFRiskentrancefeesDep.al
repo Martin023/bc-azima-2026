@@ -4,7 +4,7 @@ using Microsoft.Foundation.Company;
 report 52186393 "BBF_Risk_entr fees_Dep Falloff"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/BBF_Risk_Entrance_Summary.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/BBF_Risk_Entrance_Summary.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

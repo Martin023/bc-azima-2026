@@ -3,7 +3,7 @@ Report 52186099 "Revenue Collection Report"
 {
     DefaultLayout = RDLC;
     Caption = 'Revenue Collection Report';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Revenue Collection Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Revenue Collection Report.rdl';
     ApplicationArea = all;
     UsageCategory = ReportsAndAnalysis;
 

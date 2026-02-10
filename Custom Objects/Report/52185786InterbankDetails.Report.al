@@ -2,7 +2,7 @@
 Report 52185786 "Interbank Details"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Interbank Detail New.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Interbank Detail New.rdl';
 
     dataset
     {

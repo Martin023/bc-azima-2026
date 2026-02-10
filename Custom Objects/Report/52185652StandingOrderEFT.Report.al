@@ -2,7 +2,7 @@
 Report 52185652 "Standing Order RTGS"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Standing Order EFT.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Standing Order EFT.rdl';
 
     dataset
     {

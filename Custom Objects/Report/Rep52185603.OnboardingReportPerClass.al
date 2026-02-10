@@ -4,7 +4,7 @@ report 52185603 "Onboarding Report Per Class"
     Caption = 'Member Onboarding Report Per Class';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Onboarding Report Per Class.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Onboarding Report Per Class.rdl';
     dataset
     {
         dataitem(Members; Members)

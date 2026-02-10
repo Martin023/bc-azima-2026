@@ -2,7 +2,7 @@
 Report 52185731 "Delegates Payments Reports"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Delegates Payments Reports.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Delegates Payments Reports.rdl';
 
     dataset
     {

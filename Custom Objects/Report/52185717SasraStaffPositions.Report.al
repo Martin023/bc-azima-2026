@@ -2,7 +2,7 @@
 Report 52185717 "Sasra Staff Positions"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Sasra Staff Positions.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Sasra Staff Positions.rdl';
 
     dataset
     {

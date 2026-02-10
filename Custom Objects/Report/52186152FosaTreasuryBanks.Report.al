@@ -2,7 +2,7 @@
 Report 52186152 "FOSA Treasury Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/FOSA Treasury Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/FOSA Treasury Report.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

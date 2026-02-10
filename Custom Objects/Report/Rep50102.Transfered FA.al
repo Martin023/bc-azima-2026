@@ -4,7 +4,7 @@ report 52186075 "Transfered Fixed Assets"
     Caption = 'Transfered Fixed Assets';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RdlcLayout = './bc-kenpipe-2024/Layout/Transfered Fixed Assets.rdl';
+    RdlcLayout = './bc-azima-2026/Layout/Transfered Fixed Assets.rdl';
     dataset
     {
         dataitem(AssetTransfer; "Asset Transfer")

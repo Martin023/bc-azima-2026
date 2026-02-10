@@ -7,7 +7,7 @@ report 52185455 ClearedCheques
 
 
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/cleared Cheques.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/cleared Cheques.rdl';
     dataset
     {
         dataitem(CashierTransactions; "Cashier Transactions")

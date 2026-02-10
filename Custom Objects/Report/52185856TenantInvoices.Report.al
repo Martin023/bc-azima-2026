@@ -2,7 +2,7 @@
 Report 52185856 "Tenant Invoices"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Tenant Invoices.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Tenant Invoices.rdl';
 
     dataset
     {

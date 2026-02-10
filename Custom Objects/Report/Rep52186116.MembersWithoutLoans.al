@@ -4,7 +4,7 @@ report 52186116 "Members Without Loan Report"
     Caption = 'Members Without Loan';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/MembersWithoutLoans.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/MembersWithoutLoans.rdl';
     dataset
     {
         dataitem(Members; Members)

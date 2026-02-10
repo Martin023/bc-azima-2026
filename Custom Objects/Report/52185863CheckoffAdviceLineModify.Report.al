@@ -2,7 +2,7 @@
 Report 52185863 "Checkoff Advice Line Modify"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Checkoff Advice Line Modify.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Checkoff Advice Line Modify.rdl';
 
     dataset
     {

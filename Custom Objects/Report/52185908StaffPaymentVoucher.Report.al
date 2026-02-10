@@ -2,7 +2,7 @@
 // Report 52185908 "Staff Payment Voucher"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Staff Payment Voucher.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Staff Payment Voucher.rdl';
 
 //     dataset
 //     {

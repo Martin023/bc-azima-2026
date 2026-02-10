@@ -2,7 +2,7 @@
 Report 52185473 "Poppulate Image Data"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Update Images+.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Update Images+.rdl';
     UsageCategory = Administration;
     Caption = '1.1. Poppulate Image Data';
 

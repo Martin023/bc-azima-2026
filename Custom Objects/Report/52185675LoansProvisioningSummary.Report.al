@@ -2,7 +2,7 @@
 Report 52185675 "Loans Provisioning Summary"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loans Provisioning Summary.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loans Provisioning Summary.rdl';
 
     dataset
     {

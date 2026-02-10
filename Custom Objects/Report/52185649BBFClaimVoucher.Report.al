@@ -2,7 +2,7 @@
 // Report 52185649 "BBF Claim Voucher"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/BBF Claim Voucher.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/BBF Claim Voucher.rdl';
 
 //     dataset
 //     {

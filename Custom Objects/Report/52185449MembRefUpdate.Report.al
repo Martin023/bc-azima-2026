@@ -2,7 +2,7 @@
 Report 52185449 "Incomplete Application Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Incomplete Application Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Incomplete Application Report.rdl';
 
     dataset
     {

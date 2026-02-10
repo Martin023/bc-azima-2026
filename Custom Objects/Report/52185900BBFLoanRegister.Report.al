@@ -2,7 +2,7 @@
 Report 52185900 "BBF Loan Register"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/BBF Loan Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/BBF Loan Register.rdl';
 
     dataset
     {

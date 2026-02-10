@@ -3,7 +3,7 @@ Report 52185451 "Closure Listing"
 {
 
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Closure Listing.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Closure Listing.rdl';
 
     dataset
     {

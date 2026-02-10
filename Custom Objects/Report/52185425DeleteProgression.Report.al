@@ -2,7 +2,7 @@
 Report 52185425 "Delete Progression"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Delete Progression.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Delete Progression.rdl';
 
     dataset
     {

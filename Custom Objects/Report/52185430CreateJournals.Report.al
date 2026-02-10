@@ -2,7 +2,7 @@
 Report 52185430 "Create Journals"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Create Journals.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Create Journals.rdl';
     //Permissions = TableData UnknownTableData52186213 = rimd;
 
     dataset

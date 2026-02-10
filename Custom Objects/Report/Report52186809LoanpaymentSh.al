@@ -4,7 +4,7 @@ Report 52186809 "Loan Actual Payment Schedule"
     DefaultLayout = RDLC;
     Caption = 'Actual Repayment Schedules';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Actual Schedule.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Actual Schedule.rdl';
     dataset
     {
         dataitem(Loans; Loans)

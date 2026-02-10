@@ -1,7 +1,7 @@
 Report 52186832 "Tenant Listing"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Tenant Listing.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Tenant Listing.rdl';
 
     dataset
     {

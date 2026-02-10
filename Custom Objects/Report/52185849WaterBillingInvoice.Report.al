@@ -2,7 +2,7 @@
 // Report 52185849 "Water Billing Invoice"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Water Billing Invoice.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Water Billing Invoice.rdl';
 
 //     dataset
 //     {

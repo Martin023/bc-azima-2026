@@ -2,7 +2,7 @@
 Report 52185514 "Asset Finance Loans"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Asset Finance Loans.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Asset Finance Loans.rdl';
 
     dataset
     {

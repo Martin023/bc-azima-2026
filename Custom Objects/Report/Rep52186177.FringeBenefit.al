@@ -4,7 +4,7 @@ using Microsoft.Foundation.Company;
 report 52186177 "Fringe Benefit"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Fringe Benefit Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Fringe Benefit Report.rdl';
     dataset
     {
         dataitem(Loans; Loans)

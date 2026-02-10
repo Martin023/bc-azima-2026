@@ -8,7 +8,7 @@ report 52185822 "Transferred Share Capital Cert"
     Caption = 'Transferred Share Capital';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = Word;
-    WordLayout = './bc-kenpipe-2024/Layout/Transferred Share Capital.docx';
+    WordLayout = './bc-azima-2026/Layout/Transferred Share Capital.docx';
     dataset
     {
         dataitem(Members; Members)
@@ -57,7 +57,7 @@ report 52185822 "Transferred Share Capital Cert"
             column(Picture; CompanyInformation.Picture)
             {
             }
-            
+
             column(CompanyName; CompanyInformation."Name")
             {
             }

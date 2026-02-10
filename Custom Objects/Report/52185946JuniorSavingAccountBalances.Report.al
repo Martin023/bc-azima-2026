@@ -2,7 +2,7 @@
 Report 52185946 "Junior Saving Account Balances"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Junior Saving Account Balances.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Junior Saving Account Balances.rdl';
 
     dataset
     {

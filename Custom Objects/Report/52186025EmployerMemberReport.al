@@ -4,7 +4,7 @@ report 52186025 "Employer Member Report"
     Caption = 'Employer Members';
     UsageCategory = ReportsAndAnalysis;
     DeFaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Employer Members.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Employer Members.rdl';
     dataset
     {
         dataitem(Members; Members)

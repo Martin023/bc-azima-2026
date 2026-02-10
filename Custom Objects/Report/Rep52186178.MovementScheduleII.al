@@ -9,7 +9,7 @@ report 52186178 MovementScheduleII
     Caption = 'MovementScheduleII';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/MovementScheduleII.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/MovementScheduleII.rdl';
 
     dataset
     {

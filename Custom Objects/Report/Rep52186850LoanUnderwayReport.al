@@ -2,7 +2,7 @@
 Report 52186850 "Loans Underway Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loans Underway Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loans Underway Report.rdl';
 
     dataset
     {

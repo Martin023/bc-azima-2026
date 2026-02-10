@@ -9,7 +9,7 @@ report 52186184 "Reccurring FA Journals Report"
     Caption = 'Reccurring FA Report';
     UsageCategory = History;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Reccurring FA Journals Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Reccurring FA Journals Report.rdl';
     dataset
     {
         dataitem(GenJournalLine; "Gen. Journal Line")

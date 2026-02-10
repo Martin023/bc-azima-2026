@@ -6,7 +6,7 @@ report 52186115 "Institutional Capital TAT"
     ApplicationArea = All;
     Caption = 'Institutional Capital TAT';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Institutional Capital TAT Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Institutional Capital TAT Report.rdl';
 
     dataset
     {

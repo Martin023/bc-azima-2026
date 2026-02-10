@@ -7,7 +7,7 @@ report 52185763 "Closed Insurance Claims"
     Caption = 'Closed Insurance Claims';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Closed Insurance Claims.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Closed Insurance Claims.rdl';
     dataset
     {
         dataitem(InsuranceClaims; "Insurance Claims")

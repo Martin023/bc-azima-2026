@@ -4,7 +4,7 @@ report 52186132 "Sub Accounts Commission"
     Caption = 'Sub Accounts Commission ';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Sub Accounts Commission .rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Sub Accounts Commission .rdl';
 
     dataset
     {

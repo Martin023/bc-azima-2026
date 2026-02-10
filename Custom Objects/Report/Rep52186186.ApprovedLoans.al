@@ -6,7 +6,7 @@ report 52186186 "Approved  Loans"
     ApplicationArea = All;
     Caption = 'Loan Appraised By';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Approved Loans.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Approved Loans.rdl';
     dataset
     {
 

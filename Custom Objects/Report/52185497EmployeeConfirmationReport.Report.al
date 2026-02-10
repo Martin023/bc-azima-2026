@@ -2,7 +2,7 @@
 Report 52185497 "Employee Confirmation Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Employee Confirmation Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Employee Confirmation Report.rdl';
 
     dataset
     {

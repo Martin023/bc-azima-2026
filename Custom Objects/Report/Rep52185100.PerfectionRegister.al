@@ -4,7 +4,7 @@ report 52185429 "Perfection Register"
     Caption = 'Perfection Register';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Perfection Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Perfection Register.rdl';
     dataset
     {
         dataitem(SecurityPerfection; "Security Perfection")

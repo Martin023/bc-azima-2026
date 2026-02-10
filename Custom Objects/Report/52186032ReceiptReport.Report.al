@@ -1,7 +1,7 @@
 report 52186037 "Member Receipt Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Receipt Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Receipt Report.rdl';
 
     dataset
     {

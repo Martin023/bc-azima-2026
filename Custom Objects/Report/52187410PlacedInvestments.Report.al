@@ -2,7 +2,7 @@
 Report 52187410 "Current Placed Investments"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Current Placed Investments.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Current Placed Investments.rdl';
 
     dataset
     {

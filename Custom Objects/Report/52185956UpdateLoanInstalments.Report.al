@@ -2,7 +2,7 @@
 Report 52185956 "Update Loan Instalments"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Update Loan Instalments.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Update Loan Instalments.rdl';
 
     dataset
     {

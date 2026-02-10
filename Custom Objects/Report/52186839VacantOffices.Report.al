@@ -2,7 +2,7 @@
 Report 52186839 "Vacant Offices Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Vacant Offices Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Vacant Offices Report.rdl';
 
     dataset
     {

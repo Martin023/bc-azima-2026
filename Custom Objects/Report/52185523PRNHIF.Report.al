@@ -2,7 +2,7 @@
 Report 52185523 "PR NHIF"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/PR NHIF.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/PR NHIF.rdl';
 
     dataset
     {

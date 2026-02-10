@@ -2,7 +2,7 @@
 Report 52185484 "Actual Loan Schedule"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Actual RepaymentSchedule.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Actual RepaymentSchedule.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

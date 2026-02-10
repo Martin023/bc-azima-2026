@@ -2,7 +2,7 @@
 Report 52185777 "Helb Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Helb Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Helb Report.rdl';
 
     dataset
     {

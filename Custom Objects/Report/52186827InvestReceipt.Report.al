@@ -2,7 +2,7 @@
 Report 52186827 "Investment Receipt"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Investment Receipt.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Investment Receipt.rdl';
 
     dataset
     {

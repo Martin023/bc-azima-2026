@@ -7,7 +7,7 @@ report 52186100 "File Movement Report"
     Caption = 'File Movement Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/File Movement Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/File Movement Report.rdl';
 
     dataset
     {

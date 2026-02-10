@@ -7,7 +7,7 @@ report 52186158 "Legal Share Capital Register"
     Caption = 'Legal Share Capital Register';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Legal Share Capital Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Legal Share Capital Register.rdl';
     dataset
     {
         dataitem(Members; Members)

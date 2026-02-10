@@ -2,7 +2,7 @@
 Report 52185466 "HR Jobs (Occupied)"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Jobs (Occupied).rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Jobs (Occupied).rdl';
 
     dataset
     {

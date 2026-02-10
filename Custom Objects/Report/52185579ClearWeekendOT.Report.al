@@ -2,7 +2,7 @@
 Report 52185579 "Clear Weekend OT"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Clear Weekend OT.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Clear Weekend OT.rdl';
 
     dataset
     {

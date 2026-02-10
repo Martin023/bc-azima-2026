@@ -1,6 +1,6 @@
 Report 52186209 "Eligibilty Check"
 {
-    RDLCLayout = './bc-kenpipe-2024/Layout/Eligibility.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Eligibility.rdl';
     Caption = 'Loan Appraisal Breakdown';
     DefaultLayout = RDLC;
     ApplicationArea = Basic, suite;

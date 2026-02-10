@@ -2,7 +2,7 @@
 Report 52185750 "Employers Expected Due"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Employers Expected Due.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Employers Expected Due.rdl';
 
     dataset
     {

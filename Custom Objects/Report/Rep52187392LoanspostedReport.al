@@ -4,7 +4,7 @@ report 52187400 "Loan Disbursement Report"
     ApplicationArea = All;
     DefaultLayout = RDLC;
     Caption = 'Loan Disbursement Report';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Disbursed Loans.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Disbursed Loans.rdl';
 
 
 

@@ -2,7 +2,7 @@
 // Report 52185842 "Process Batch Invoices"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Process Batch Invoices.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Process Batch Invoices.rdl';
 
 //     dataset
 //     {

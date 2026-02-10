@@ -2,7 +2,7 @@
 Report 52186077 "Reversed Invoices & Receipts"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Reversed Invoices & Receipts.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Reversed Invoices & Receipts.rdl';
 
     dataset
     {

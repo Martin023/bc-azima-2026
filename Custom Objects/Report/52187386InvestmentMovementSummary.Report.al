@@ -1,7 +1,7 @@
 Report 52187386 "Investment Movement Summary"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Investment Movement Summary.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Investment Movement Summary.rdl';
 
     dataset
     {

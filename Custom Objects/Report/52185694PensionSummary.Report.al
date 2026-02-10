@@ -2,7 +2,7 @@
 Report 52185694 "Pension Summary"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Pension Summary.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Pension Summary.rdl';
 
     dataset
     {

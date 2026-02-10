@@ -2,7 +2,7 @@
 Report 52185464 "HR Job Occupants"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Job Occupants.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Job Occupants.rdl';
     Caption = 'HR Job Occupants Report';
 
     dataset

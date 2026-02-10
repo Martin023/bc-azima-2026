@@ -2,7 +2,7 @@
 // Report 52185996 "External Loans Cleared"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/External Loans Cleared.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/External Loans Cleared.rdl';
 
 //     dataset
 //     {

@@ -2,7 +2,7 @@
 Report 52186506 "Unit Loan Summary Register"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Unit Loan Summary Register.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Unit Loan Summary Register.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

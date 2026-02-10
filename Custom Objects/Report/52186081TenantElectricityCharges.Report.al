@@ -2,7 +2,7 @@
 Report 52186081 "Tenants Electricity Charges"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Tenants Electricity Charges.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Tenants Electricity Charges.rdl';
 
     dataset
     {

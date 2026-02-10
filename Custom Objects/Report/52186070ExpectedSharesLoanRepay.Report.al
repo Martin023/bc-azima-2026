@@ -2,7 +2,7 @@
 Report 52186070 "Expected Loan Repayment"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Expected Loan Repayment.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Expected Loan Repayment.rdl';
 
     dataset
     {

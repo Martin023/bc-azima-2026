@@ -2,7 +2,7 @@
 Report 52185680 "Treasury Coinage."
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Treasury Coinage..rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Treasury Coinage..rdl';
 
     dataset
     {

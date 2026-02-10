@@ -2,7 +2,7 @@
 Report 52185591 "Shortlisting Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Shortlisting Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Shortlisting Report.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52185769 "Contract Status"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Contract Status.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Contract Status.rdl';
 
     dataset
     {

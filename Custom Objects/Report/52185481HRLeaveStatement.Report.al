@@ -2,7 +2,7 @@
 Report 52185481 "HR Leave Statement"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Leave Statement.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Leave Statement.rdl';
 
     dataset
     {

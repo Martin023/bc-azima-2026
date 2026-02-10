@@ -4,7 +4,7 @@ report 52187361 "Member Appl. Pending Approval"
     Caption = 'Member Appl. Pending Approval';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Appl. Pending Approval.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Appl. Pending Approval.rdl';
     dataset
     {
         dataitem(MemberApplication; "Member Application")

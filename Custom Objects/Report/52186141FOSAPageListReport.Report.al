@@ -2,7 +2,7 @@
 Report 52186141 "FOSA Account Page List"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/FOSA Account Page List.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/FOSA Account Page List.rdl';
 
     dataset
     {

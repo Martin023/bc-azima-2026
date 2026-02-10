@@ -6,7 +6,7 @@ Report 52185621 "Member Statement"
     ApplicationArea = all;
     Caption = 'member Statement';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Statement.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Statement.rdl';
 
     dataset
     {

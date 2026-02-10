@@ -2,7 +2,7 @@
 Report 52186140 "FOSA Loan Disbursement"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/FOSA Loan Disbursement.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/FOSA Loan Disbursement.rdl';
 
     dataset
     {

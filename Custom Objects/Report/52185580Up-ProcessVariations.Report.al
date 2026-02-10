@@ -2,7 +2,7 @@
 Report 52185580 "Up-Process Variations"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Up-Process Variations.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Up-Process Variations.rdl';
 
     dataset
     {

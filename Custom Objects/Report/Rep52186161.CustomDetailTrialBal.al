@@ -9,7 +9,7 @@ report 52186163 "Custom Detail Trial Bal."
     DefaultLayout = RDLC;
     //RDLCLayout = './FinancialMgt/GeneralLedger/Reports/DetailTrialBalance.rdlc';
 
-    RDLCLayout = './bc-kenpipe-2024/Layout/ReportLayoutReplacements/CustDetailTrialBalance.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/ReportLayoutReplacements/CustDetailTrialBalance.rdl';
 
     AdditionalSearchTerms = 'payment due,order status';
     ApplicationArea = Basic, Suite;

@@ -4,7 +4,7 @@ Report 52185928 "Member Statement-H.Users"
     DefaultLayout = RDLC;
     ApplicationArea = Basic, suite;
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Statement-H.Users.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Statement-H.Users.rdl';
     Caption = 'Member statement -Historical';
 
     dataset

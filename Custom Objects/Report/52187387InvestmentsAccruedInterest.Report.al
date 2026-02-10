@@ -2,7 +2,7 @@
 Report 52187387 "Invest Accumulated Interest"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Investment Accumulated Interest.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Investment Accumulated Interest.rdl';
 
     dataset
     {

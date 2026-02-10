@@ -2,7 +2,7 @@
 Report 52185975 "prBoard Payslip 2"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/prBoard Payslip 2.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/prBoard Payslip 2.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 // Report 52185570 "Transactions Summary"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Transactions Summary.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Transactions Summary.rdl';
 
 //     dataset
 //     {

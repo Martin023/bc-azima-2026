@@ -3,7 +3,7 @@ report 52187360 "Member's Statement"
     Caption = 'Member''s Statement';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member''s Statement.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member''s Statement.rdl';
     dataset
     {
         dataitem(SavingsAccounts; "Savings Accounts")

@@ -2,7 +2,7 @@
 Report 52186154 "FOSA Treasury Controls"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/FOSA Treasury Controls.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/FOSA Treasury Controls.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

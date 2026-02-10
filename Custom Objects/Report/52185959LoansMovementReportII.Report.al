@@ -2,7 +2,7 @@
 Report 52185959 "Loans Movement Report II"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loans Movement Report II.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loans Movement Report II.rdl';
 
     dataset
     {

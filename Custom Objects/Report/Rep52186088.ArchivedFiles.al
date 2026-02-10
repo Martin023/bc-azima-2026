@@ -7,7 +7,7 @@ report 52186089 "Archived Files"
     Caption = 'Archived Files';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Archived Files.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Archived Files.rdl';
     dataset
     {
         dataitem("Files Table"; "Files Table")

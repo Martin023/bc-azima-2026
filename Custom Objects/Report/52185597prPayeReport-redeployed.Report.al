@@ -2,7 +2,7 @@
 Report 52185597 "prPaye Report-redeployed"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/prPaye Report-redeployed.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/prPaye Report-redeployed.rdl';
 
     dataset
     {

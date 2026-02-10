@@ -2,7 +2,7 @@
 // Report 52185909 "Staff Allowance  P9"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Staff Allowance  P9.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Staff Allowance  P9.rdl';
 
 //     dataset
 //     {

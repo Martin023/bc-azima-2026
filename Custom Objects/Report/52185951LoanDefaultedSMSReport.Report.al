@@ -2,7 +2,7 @@
 // Report 52185951 "Loan Defaulted SMS Report"
 // {
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Loan Defaulted SMS Report.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Loan Defaulted SMS Report.rdl';
 
 //     dataset
 //     {

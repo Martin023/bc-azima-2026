@@ -2,7 +2,7 @@
 Report 52185801 "Payment Request"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Payment Request.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Payment Request.rdl';
 
     dataset
     {

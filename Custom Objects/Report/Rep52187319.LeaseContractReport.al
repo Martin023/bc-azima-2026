@@ -3,7 +3,7 @@ report 52187319 "Lease Contract Report"
     ApplicationArea = All;
     Caption = 'Lease Contract Report';
     DefaultLayout = Word;
-    WordLayout = './bc-kenpipe-2024/Layout/Lease Contract Report.docx';
+    WordLayout = './bc-azima-2026/Layout/Lease Contract Report.docx';
 
     //UsageCategory = ReportsAndAnalysis;
     dataset

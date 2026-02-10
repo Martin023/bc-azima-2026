@@ -4,7 +4,7 @@ using Microsoft.Foundation.Company;
 report 52186392 " Loan Monthly Receipt "
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Monthly Receipt Per Category.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Monthly Receipt Per Category.rdl';
     dataset
     {
         dataitem(Members; Members)

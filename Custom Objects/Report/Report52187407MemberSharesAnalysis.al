@@ -4,7 +4,7 @@ Report 52187407 "Member Shares Analysis"
     ApplicationArea = All;
     DefaultLayout = RDLC;
     Caption = 'Member Shares Analysis';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member shares Analysis.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member shares Analysis.rdl';
 
     dataset
     {

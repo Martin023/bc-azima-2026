@@ -2,7 +2,7 @@
 Report 52187388 "Fosa Voucher Print"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Payment Voucher Print.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Payment Voucher Print.rdl';
 
     dataset
     {

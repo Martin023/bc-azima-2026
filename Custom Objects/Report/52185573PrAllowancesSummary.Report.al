@@ -2,7 +2,7 @@
 Report 52185573 "PrAllowances Summary"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/PrAllowances Summary.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/PrAllowances Summary.rdl';
 
     dataset
     {

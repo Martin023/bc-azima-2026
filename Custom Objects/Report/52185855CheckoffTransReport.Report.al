@@ -2,7 +2,7 @@
 Report 52185855 "Checkoff Trans Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Checkoff Trans Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Checkoff Trans Report.rdl';
 
     dataset
     {

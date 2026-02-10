@@ -6,7 +6,7 @@ report 52186143 "Member Share By Category"
     ApplicationArea = All;
     Caption = 'Member Share By Category';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Share By Category.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Share By Category.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

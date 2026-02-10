@@ -2,7 +2,7 @@
 Report 52185945 "Process Rejected Loans"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Process Rejected Loans.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Process Rejected Loans.rdl';
 
     dataset
     {

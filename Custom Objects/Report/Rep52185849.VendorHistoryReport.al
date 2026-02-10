@@ -3,7 +3,7 @@
 report 52185849 "Vendor History Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Vendor History.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Vendor History.rdl';
     ApplicationArea = All;
     Caption = 'Vendor History Report';
     UsageCategory = ReportsAndAnalysis;

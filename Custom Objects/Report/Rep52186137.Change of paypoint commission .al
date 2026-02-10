@@ -3,7 +3,7 @@ report 52186137 "Change Paypoint Commission"
     ApplicationArea = All;
     Caption = 'Change Paypoint Commission Report';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Change Paypoint Commission Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Change Paypoint Commission Report.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

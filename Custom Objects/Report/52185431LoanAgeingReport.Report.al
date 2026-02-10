@@ -2,7 +2,7 @@
 Report 52185431 "Loan Ageing Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Ageing Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Ageing Report.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

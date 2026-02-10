@@ -2,7 +2,7 @@
 Report 52185881 "Update Dividend Payslip Loans"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Update Dividend Payslip Loans.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Update Dividend Payslip Loans.rdl';
 
     dataset
     {

@@ -7,7 +7,7 @@ report 52185774 "KYC Report"
     Caption = 'KYC Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/KYC Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/KYC Report.rdl';
     dataset
     {
         dataitem(Members; Members)

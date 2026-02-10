@@ -1,7 +1,7 @@
 report 52186344 "Shortlisted Candidates"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/ShortListed Candidates Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/ShortListed Candidates Report.rdl';
     dataset
     {
         dataitem(hrjobApplications; "hr job Applications")

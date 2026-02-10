@@ -2,7 +2,7 @@
 Report 52185442 "Mod Already Approved Batches"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Mod Already Approved Batches.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Mod Already Approved Batches.rdl';
 
     dataset
     {

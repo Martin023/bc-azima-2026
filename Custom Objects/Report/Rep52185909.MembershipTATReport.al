@@ -4,7 +4,7 @@ report 52185909 "Membership TAT Report"
     Caption = 'Membership TAT Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Membership TAT Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Membership TAT Report.rdl';
     dataset
     {
         dataitem(Members; Members)

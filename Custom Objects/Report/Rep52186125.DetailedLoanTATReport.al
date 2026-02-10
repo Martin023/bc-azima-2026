@@ -6,7 +6,7 @@ report 52186125 "Detailed Loan TAT Report"
     ApplicationArea = All;
     Caption = 'Detailed Loan TAT Report';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Detailed Loan TAT Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Detailed Loan TAT Report.rdl';
     dataset
     {
         dataitem(Loans; Loans)

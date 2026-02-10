@@ -2,7 +2,7 @@
 Report 52185771 "Case"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Case.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Case.rdl';
 
     dataset
     {

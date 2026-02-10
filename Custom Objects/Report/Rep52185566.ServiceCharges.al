@@ -4,7 +4,7 @@ report 52185566 "Service Charges"
     Caption = 'Service Charges';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Service Charges.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Service Charges.rdl';
 
     dataset
     {

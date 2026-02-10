@@ -3,7 +3,7 @@ report 52187315 MembAppReport
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/MembAppReport.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/MembAppReport.rdl';
     Caption = 'MembAppReport';
 
 

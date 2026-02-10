@@ -2,7 +2,7 @@
 Report 52186103 "CRM Dividend Slip"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/CRM Dividend Slip.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/CRM Dividend Slip.rdl';
 
     dataset
     {

@@ -4,7 +4,7 @@ report 52186149 "All Loans Product"
     Caption = 'All Loan Products';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/All Loan Products.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/All Loan Products.rdl';
     dataset
     {
         dataitem("Product Factory"; "Product Factory")

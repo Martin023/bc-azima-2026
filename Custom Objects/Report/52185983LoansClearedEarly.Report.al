@@ -2,7 +2,7 @@
 Report 52185983 "Loans Cleared Early"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loans Cleared Early.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loans Cleared Early.rdl';
     Caption = 'Closed Loans Report';
 
     dataset

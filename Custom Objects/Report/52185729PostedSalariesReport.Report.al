@@ -2,7 +2,7 @@
 Report 52185729 "Posted Salaries Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Posted Salaries Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Posted Salaries Report.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52185471 "HR Company Activities"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Company Activities.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Company Activities.rdl';
 
     dataset
     {

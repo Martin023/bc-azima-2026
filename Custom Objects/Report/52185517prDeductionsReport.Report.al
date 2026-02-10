@@ -2,7 +2,7 @@
 Report 52185517 "prDeductions Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/prDeductions Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/prDeductions Report.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

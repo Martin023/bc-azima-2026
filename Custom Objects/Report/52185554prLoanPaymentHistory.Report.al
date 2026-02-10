@@ -2,7 +2,7 @@
 Report 52185554 "prLoan Payment History"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/prLoan Payment History.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/prLoan Payment History.rdl';
 
     dataset
     {

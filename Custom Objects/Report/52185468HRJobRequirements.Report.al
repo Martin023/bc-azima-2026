@@ -2,7 +2,7 @@
 Report 52185468 "HR Job Requirements"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Job Requirements.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Job Requirements.rdl';
 
     dataset
     {

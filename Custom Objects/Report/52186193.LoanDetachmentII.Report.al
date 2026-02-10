@@ -6,7 +6,7 @@ report 52186193 "Loan Detachment II"
     DefaultLayout = RDLC;
     ApplicationArea = Basic, suite;
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Loan Detachment II.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Loan Detachment II.rdl';
 
     dataset
     {

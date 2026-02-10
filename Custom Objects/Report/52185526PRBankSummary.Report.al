@@ -2,7 +2,7 @@
 Report 52185526 "PR Bank Summary"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/PR Bank Summary.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/PR Bank Summary.rdl';
 
     dataset
     {

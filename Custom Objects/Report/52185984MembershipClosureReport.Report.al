@@ -3,7 +3,7 @@
 Report 52185984 "Membership Closure Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Membership Closure Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Membership Closure Report.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

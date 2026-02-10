@@ -4,9 +4,9 @@ report 52185443 "DPA Contract"
     Caption = 'DPA Contract';
     //UsageCategory = ReportsAndAnalysis;
     // DefaultLayout = RDLC;
-    // RDLCLayout = './bc-kenpipe-2024/Layout/DPA Contract.rdl';
+    // RDLCLayout = './bc-azima-2026/Layout/DPA Contract.rdl';
     DefaultLayout = Word;
-    WordLayout = './bc-kenpipe-2024/Layout/DPA Contract.docx';
+    WordLayout = './bc-azima-2026/Layout/DPA Contract.docx';
     dataset
     {
         dataitem(Contracts; Contracts)

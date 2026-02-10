@@ -2,7 +2,7 @@
 Report 52185510 "Performance Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Performance Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Performance Report.rdl';
 
     dataset
     {

@@ -3,7 +3,7 @@
 // {
 
 //     DefaultLayout = RDLC;
-//     RDLCLayout = './bc-kenpipe-2024/Layout/Posted Imprest Surrender.rdl';
+//     RDLCLayout = './bc-azima-2026/Layout/Posted Imprest Surrender.rdl';
 
 //     dataset
 //     {

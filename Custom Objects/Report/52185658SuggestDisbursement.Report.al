@@ -2,7 +2,7 @@
 Report 52185658 "Suggest Disbursement"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Suggest Disbursement.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Suggest Disbursement.rdl';
 
     dataset
     {

@@ -2,7 +2,7 @@
 Report 52185545 "New Employee Advise"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/New Employee Advise.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/New Employee Advise.rdl';
 
     dataset
     {

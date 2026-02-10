@@ -5,7 +5,7 @@ Report 52186791 "CRB Monthly Report"
     DefaultLayout = RDLC;
     ApplicationArea = Basic, suite;
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/CRB Mothly Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/CRB Mothly Report.rdl';
 
     dataset
     {

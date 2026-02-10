@@ -2,7 +2,7 @@
 Report 52185467 "HR Job Responsibilities"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/HR Job Responsibilities.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/HR Job Responsibilities.rdl';
 
     dataset
     {

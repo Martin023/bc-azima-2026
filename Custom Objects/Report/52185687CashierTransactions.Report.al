@@ -2,7 +2,7 @@
 Report 52185687 "Cashier Transactions"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Cashier Transactions.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Cashier Transactions.rdl';
 
     dataset
     {

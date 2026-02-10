@@ -2,7 +2,7 @@
 Report 52185532 "prZRA Form 51"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/prZRA Form 51.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/prZRA Form 51.rdl';
 
     dataset
     {

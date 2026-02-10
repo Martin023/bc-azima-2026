@@ -2,7 +2,7 @@
 Report 52185797 "Update Central Payment"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Update Central Payment.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Update Central Payment.rdl';
 
     dataset
     {

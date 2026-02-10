@@ -2,7 +2,7 @@
 Report 52186023 "Recruited By Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Recruited By Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Recruited By Report.rdl';
 
     dataset
     {

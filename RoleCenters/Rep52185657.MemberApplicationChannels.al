@@ -4,7 +4,7 @@ report 52185657 "Member Application Channels"
     Caption = 'Member Application Channels';
     UsageCategory = ReportsAndAnalysis;
     DeFaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Application Channels.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Application Channels.rdl';
     dataset
     {
         dataitem(Members; Members)

@@ -5,7 +5,7 @@ report 52187340 "Appeals Report"
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
     MaximumDatasetSize = 1000000;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Appeals Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Appeals Report.rdl';
     dataset
     {
         dataitem("Appeals Table"; "Appeals Table")

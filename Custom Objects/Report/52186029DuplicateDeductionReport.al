@@ -2,7 +2,7 @@
 Report 52186022 "Duplicate Deduction Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Duplicate Deduction Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Duplicate Deduction Report.rdl';
     UsageCategory = ReportsAndAnalysis;
 
     dataset

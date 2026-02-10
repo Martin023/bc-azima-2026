@@ -1,7 +1,7 @@
 report 52186059 "Discrepancies Report "
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Discrepancies Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Discrepancies Report.rdl';
     dataset
     {
         dataitem(BankAccReconciliation; "Bank Acc. Reconciliation")

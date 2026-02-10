@@ -5,7 +5,7 @@ using Microsoft.Sales.Customer;
 report 52186194 "Triggered Checkoff Advice"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Triggered Checkoff Advice.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Triggered Checkoff Advice.rdl';
 
     dataset
     {

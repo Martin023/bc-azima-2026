@@ -6,7 +6,7 @@ report 52186220 "Member Readmission TAT"
     ApplicationArea = All;
     Caption = 'Member Readmission TAT';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Readmission TAT Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Readmission TAT Report.rdl';
     dataset
     {
         dataitem(Memberapplication; "Member application")

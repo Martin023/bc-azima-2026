@@ -7,7 +7,7 @@ report 52185737 "Security Report"
     Caption = 'Security Report';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Security Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Security Report.rdl';
 
     dataset
     {

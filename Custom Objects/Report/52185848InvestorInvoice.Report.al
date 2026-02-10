@@ -2,7 +2,7 @@
 Report 52185848 "Investor Invoice"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Investor Invoice.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Investor Invoice.rdl';
 
     dataset
     {

@@ -1,7 +1,7 @@
 report 52185939 "Employer Statement"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Employer Statement Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Employer Statement Report.rdl';
 
 
     dataset

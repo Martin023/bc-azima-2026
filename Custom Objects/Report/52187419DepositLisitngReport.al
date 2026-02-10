@@ -2,8 +2,8 @@ report 52187419 "Deposit Listing Report"
 {
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    // RDLCLayout = './bc-kenpipe-2024/Layout/Deposit Listing Report.rdl';
-    RDLCLayout = './bc-kenpipe-2024/Layout/Deposit Listing Test.rdl';
+    // RDLCLayout = './bc-azima-2026/Layout/Deposit Listing Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Deposit Listing Test.rdl';
 
     dataset
     {

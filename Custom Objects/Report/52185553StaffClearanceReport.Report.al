@@ -2,7 +2,7 @@
 Report 52185553 "Staff Clearance Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Staff Clearance Report.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Staff Clearance Report.rdl';
 
     dataset
     {

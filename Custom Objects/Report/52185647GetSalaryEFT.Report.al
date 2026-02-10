@@ -2,7 +2,7 @@
 Report 52185647 "Get Salary RTGS"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Get Salary EFT.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Get Salary EFT.rdl';
 
     dataset
     {

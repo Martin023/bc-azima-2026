@@ -2,7 +2,7 @@
 Report 52185969 "Non Salaried Loans Granted"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Non Salaried Loans Granted.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Non Salaried Loans Granted.rdl';
 
     dataset
     {

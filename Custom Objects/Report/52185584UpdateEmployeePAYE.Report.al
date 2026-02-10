@@ -2,7 +2,7 @@
 Report 52185584 "Update Employee PAYE"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Update Employee PAYE.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Update Employee PAYE.rdl';
 
     dataset
     {

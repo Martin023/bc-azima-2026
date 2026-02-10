@@ -2,7 +2,7 @@
 Report 52186048 "Overtime Claim Cost"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Overtime Claim Cost.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Overtime Claim Cost.rdl';
 
     dataset
     {

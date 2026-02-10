@@ -3,7 +3,7 @@ report 52185893 "Un-Surrendered Imprests"
     ApplicationArea = All;
     Caption = 'Un-Surrendered Imprests';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Un-Surrendered Imprests.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Un-Surrendered Imprests.rdl';
     dataset
     {
         dataitem("Imprest Header"; "Imprest Header")
