@@ -509,7 +509,8 @@ codeunit 52186500 "CRM Integration"
 
         SeriesSetup.Get;
         SeriesSetup.TestField(SeriesSetup."Member Application Nos.");
-        NoSeriesMgt.InitSeries(SeriesSetup."Member Application Nos.", SeriesSetup."Member Application Nos.", 0D, NewNo, NewNoSeriesCode);
+        NewNo := NoSeriesMgt.GetNextNo(SeriesSetup."Member Application Nos.");
+        // NoSeriesMgt.InitSeries(SeriesSetup."Member Application Nos.", SeriesSetup."Member Application Nos.", 0D, NewNo, NewNoSeriesCode);
 
         MemberApplication."No." := NewNo;
         MemberApplication."No. Series" := NewNoSeriesCode;
@@ -5399,7 +5400,8 @@ codeunit 52186500 "CRM Integration"
 
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Withdrawal Notice");
-            NoSeriesMgt.InitSeries(SeriesSetup."Withdrawal Notice", SeriesSetup."Withdrawal Notice", 0D, NewNo, NewNoSeriesCode);
+            NewNo := NoSeriesMgt.GetNextNo(SeriesSetup."Withdrawal Notice");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Withdrawal Notice", SeriesSetup."Withdrawal Notice", 0D, NewNo, NewNoSeriesCode);
 
             MemberWithdrawalApplication."No." := NewNo;
 
@@ -6164,11 +6166,14 @@ codeunit 52186500 "CRM Integration"
                 SeriesSetup.TestField(SeriesSetup."BBF Report");
 
             if SinkFundApplication."Claim Type" = SinkFundApplication."Claim Type"::"Risk Claim" then
-                NoSeriesMgt.InitSeries(SeriesSetup."Sink Fund Nos.", SeriesSetup."Sink Fund Nos.", 0D, SinkFundApplication.No, SinkFundApplication."No. Series")
+                SinkFundApplication.No := NoSeriesMgt.GetNextNo(SeriesSetup."Sink Fund Nos.")
+                // NoSeriesMgt.InitSeries(SeriesSetup."Sink Fund Nos.", SeriesSetup."Sink Fund Nos.", 0D, SinkFundApplication.No, SinkFundApplication."No. Series")
             else if SinkFundApplication."Claim Type" = SinkFundApplication."Claim Type"::"BBF - Insurance Claim" then
-                NoSeriesMgt.InitSeries(SeriesSetup."BBF Insurance Nos.", SeriesSetup."BBF Insurance Nos.", 0D, SinkFundApplication.No, SinkFundApplication."No. Series")
+                SinkFundApplication.No := NoSeriesMgt.GetNextNo(SeriesSetup."BBF Insurance Nos.")
+                // NoSeriesMgt.InitSeries(SeriesSetup."BBF Insurance Nos.", SeriesSetup."BBF Insurance Nos.", 0D, SinkFundApplication.No, SinkFundApplication."No. Series")
             else
-                NoSeriesMgt.InitSeries(SeriesSetup."BBF Report", SeriesSetup."BBF Report", 0D, SinkFundApplication.No, SinkFundApplication."No. Series");
+                SinkFundApplication.No := NoSeriesMgt.GetNextNo(SeriesSetup."BBF Report");
+                // NoSeriesMgt.InitSeries(SeriesSetup."BBF Report", SeriesSetup."BBF Report", 0D, SinkFundApplication.No, SinkFundApplication."No. Series");
 
             // SinkFundApplication."CRM Application No." := crm_application_no.AsValue.AsText;
             SinkFundApplication."CRM Created By" := crm_created_by.AsValue.AsText;
@@ -7323,7 +7328,8 @@ codeunit 52186500 "CRM Integration"
 
                 SeriesSetup.Get;
                 SeriesSetup.TestField(SeriesSetup."Guarantors Substitution");
-                NoSeriesMgt.InitSeries(SeriesSetup."Guarantors Substitution", SeriesSetup."Guarantors Substitution", 0D, NewNo, NewNoSeriesCode);
+                NewNo := NoSeriesMgt.GetNextNo(SeriesSetup."Guarantors Substitution");
+                // NoSeriesMgt.InitSeries(SeriesSetup."Guarantors Substitution", SeriesSetup."Guarantors Substitution", 0D, NewNo, NewNoSeriesCode);
 
                 LoanGuarantorSubstitution."No." := NewNo;
                 LoanGuarantorSubstitution."No. Series" := NewNoSeriesCode;
@@ -8194,7 +8200,8 @@ codeunit 52186500 "CRM Integration"
 
         SeriesSetup.Get;
         SeriesSetup.TestField(SeriesSetup."Accounts Application");
-        NoSeriesMgt.InitSeries(SeriesSetup."Accounts Application", SeriesSetup."Accounts Application", 0D, NewNo, NewNoSeriesCode);
+        NewNo := NoSeriesMgt.GetNextNo(SeriesSetup."Accounts Application");
+        // NoSeriesMgt.InitSeries(SeriesSetup."Accounts Application", SeriesSetup."Accounts Application", 0D, NewNo, NewNoSeriesCode);
 
         SavingsAccountApplication."No." := NewNo;
         SavingsAccountApplication."No. Series" := NewNoSeriesCode;
@@ -10590,7 +10597,8 @@ codeunit 52186500 "CRM Integration"
 
                 SeriesSetup.Get;
                 SeriesSetup.TestField(SeriesSetup."Share Capital Transfer No");
-                NoSeriesMgt.InitSeries(SeriesSetup."Share Capital Transfer No", SeriesSetup."Share Capital Transfer No", 0D, NewNo, NewNoSeriesCode);
+                NewNo := NoSeriesMgt.GetNextNo(SeriesSetup."Share Capital Transfer No");
+                // NoSeriesMgt.InitSeries(SeriesSetup."Share Capital Transfer No", SeriesSetup."Share Capital Transfer No", 0D, NewNo, NewNoSeriesCode);
 
                 ShareCapitalTransfer."Document No" := NewNo;
                 ShareCapitalTransfer."No. Series" := NewNoSeriesCode;

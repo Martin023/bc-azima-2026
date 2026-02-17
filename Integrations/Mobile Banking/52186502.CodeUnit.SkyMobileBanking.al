@@ -7274,7 +7274,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
             SeriesSetup.Get;
             SeriesSetup.TestField("Standing Order Nos.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Standing Order Nos.", '', 0D, TheSTORequest."No.", TheSTORequest."No. Series");
+            TheSTORequest."No." := NoSeriesMgt.GetNextNo(SeriesSetup."Standing Order Nos.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Standing Order Nos.", '', 0D, TheSTORequest."No.", TheSTORequest."No. Series");
 
             TheSTORequest."Source Account Type" := TheSTORequest."Source Account Type"::Savings;
 

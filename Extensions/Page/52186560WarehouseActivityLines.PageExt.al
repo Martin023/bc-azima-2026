@@ -250,10 +250,10 @@ PageExtension 52186560 pageextension52186560 extends "Warehouse Activity Lines"
     }
     actions
     {
-        modify(Card)
-        {
-            ApplicationArea = Basic;
-        }
+        // modify(Card)
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("Show &Whse. Document")
         {
             ApplicationArea = Basic;

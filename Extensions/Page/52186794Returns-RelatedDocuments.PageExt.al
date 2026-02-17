@@ -26,10 +26,10 @@ PageExtension 52186794 pageextension52186794 extends "Returns-Related Documents"
     }
     actions
     {
-        modify(Card)
-        {
-            ApplicationArea = Basic;
-        }
+        // modify(Card)
+        // {
+        //     ApplicationArea = Basic;
+        // }
 
         //Unsupported feature: Property Deletion (ToolTipML) on "Card(Action 10)".
 

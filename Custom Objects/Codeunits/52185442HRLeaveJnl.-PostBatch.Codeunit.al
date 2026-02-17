@@ -30,7 +30,8 @@ Codeunit 52185442 "HR Leave Jnl.- Post Batch"
         InsuranceJnlCheckLine: Codeunit "HR Leave Jnl.- Check Line";
         // NoSeriesMgt: Codeunit NoSeriesManagement;
         NoSeriesMgt: Codeunit "No. Series";
-        NoSeriesMgt2: array[10] of Codeunit "NoSeriesManagement";
+        // NoSeriesMgt2: array[10] of Codeunit "NoSeriesManagement";
+        NoSeriesBatch: Codeunit "No. Series - Batch";  // NEW - handles all series in batch, no array needed
         DimMgt: Codeunit DimensionManagement;
         Window: Dialog;
         LineCount: Integer;
@@ -121,7 +122,10 @@ Codeunit 52185442 "HR Leave Jnl.- Post Batch"
                    (InsuranceJnlBatch."No. Series" <> '') and
                    (InsuranceJnlLine."Document No." <> LastDocNo2)
                 then
-                    InsuranceJnlLine.TestField("Document No.", NoSeriesMgt.GetNextNo(InsuranceJnlBatch."No. Series", InsuranceJnlLine."Posting Date", false));
+                    // OLD:
+                    // InsuranceJnlLine.TestField("Document No.", NoSeriesMgt.GetNextNo(InsuranceJnlBatch."No. Series", InsuranceJnlLine."Posting Date", false));
+                    // NEW:
+                    InsuranceJnlLine.TestField("Document No.", NoSeriesBatch.GetNextNo(InsuranceJnlBatch."No. Series", InsuranceJnlLine."Posting Date"));
                 LastDocNo2 := InsuranceJnlLine."Document No.";
                 if InsuranceJnlLine."Posting No. Series" = '' then
                     InsuranceJnlLine."Posting No. Series" := InsuranceJnlBatch."No. Series"
@@ -132,17 +136,19 @@ Codeunit 52185442 "HR Leave Jnl.- Post Batch"
                         else begin
                             if not NoSeries.Get(InsuranceJnlLine."Posting No. Series") then begin
                                 NoOfPostingNoSeries := NoOfPostingNoSeries + 1;
-                                if NoOfPostingNoSeries > ArrayLen(NoSeriesMgt2) then
-                                    Error(
-                                      Text004,
-                                      ArrayLen(NoSeriesMgt2));
+                                // OLD limit check removed - new Batch codeunit handles many series without array limit
+                                // if NoOfPostingNoSeries > ArrayLen(NoSeriesMgt2) then
+                                //     Error(Text004, ArrayLen(NoSeriesMgt2));
                                 NoSeries.Code := InsuranceJnlLine."Posting No. Series";
                                 NoSeries.Description := Format(NoOfPostingNoSeries);
                                 NoSeries.Insert;
                             end;
                             LastDocNo := InsuranceJnlLine."Document No.";
                             Evaluate(PostingNoSeriesNo, NoSeries.Description);
-                            InsuranceJnlLine."Document No." := NoSeriesMgt2[PostingNoSeriesNo].GetNextNo(InsuranceJnlLine."Posting No. Series", InsuranceJnlLine."Posting Date", false);
+                            // OLD:
+                            // InsuranceJnlLine."Document No." := NoSeriesMgt2[PostingNoSeriesNo].GetNextNo(InsuranceJnlLine."Posting No. Series", InsuranceJnlLine."Posting Date", false);
+                            // NEW:
+                            InsuranceJnlLine."Document No." := NoSeriesBatch.GetNextNo(InsuranceJnlLine."Posting No. Series", InsuranceJnlLine."Posting Date");
                             LastPostedDocNo := InsuranceJnlLine."Document No.";
                         end;
                 JnlLineDim.SetRange("Table ID", Database::"Insurance Journal Line");
@@ -207,13 +213,16 @@ Codeunit 52185442 "HR Leave Jnl.- Post Batch"
                     InsuranceJnlLine3.Modify;
                 end;
             end;
-            if InsuranceJnlBatch."No. Series" <> '' then
-                NoSeriesMgt.SaveNoSeries;
-            if NoSeries.Find('-') then
-                repeat
-                    Evaluate(PostingNoSeriesNo, NoSeries.Description);
-                    NoSeriesMgt2[PostingNoSeriesNo].SaveNoSeries;
-                until NoSeries.Next = 0;
+            // OLD:
+            // if InsuranceJnlBatch."No. Series" <> '' then
+            //     NoSeriesMgt.SaveNoSeries;
+            // if NoSeries.Find('-') then
+            //     repeat
+            //         Evaluate(PostingNoSeriesNo, NoSeries.Description);
+            //         NoSeriesMgt2[PostingNoSeriesNo].SaveNoSeries;
+            //     until NoSeries.Next = 0;
+            // NEW: One call saves state for ALL series used during the batch (main + overrides)
+            NoSeriesBatch.SaveState();
 
             Commit;
             Clear(InsuranceJnlCheckLine);

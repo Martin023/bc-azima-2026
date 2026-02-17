@@ -33,12 +33,12 @@ PageExtension 52186990 pageextension52186990 extends "Sales Manager Role Center"
         // {
         //     Visible = false;
         // }
-        addfirst(Control1900724808)
-        {
-            part(Control21; "Copy Profile")
-            {
-            }
-        }
+        // addfirst(Control1900724808)
+        // {
+        //     part(Control21; "Copy Profile")
+        //     {
+        //     }
+        // }
     }
     actions
     {

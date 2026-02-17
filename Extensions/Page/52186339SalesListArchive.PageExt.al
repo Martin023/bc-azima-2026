@@ -194,10 +194,10 @@ PageExtension 52186339 pageextension52186339 extends "Sales List Archive"
     }
     actions
     {
-        modify(Card)
-        {
-            ApplicationArea = Basic;
-        }
+        // modify(Card)
+        // {
+        //     ApplicationArea = Basic;
+        // }
 
         //Unsupported feature: Property Deletion (ToolTipML) on "Card(Action 56)".
 

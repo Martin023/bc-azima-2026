@@ -15,21 +15,21 @@ page 52187340 "Legal Cue Page"
             {
                 Caption = 'Activity';
                 //CuegroupLayout = wide;
-                field("Open Contracts"; Rec.NewContracts)
-                {
-                    ApplicationArea = All;
+                // field("Open Contracts"; Rec.NewContracts)
+                // {
+                //     ApplicationArea = All;
                     
-                    DrillDownPageId = "Contract List";
-                    trigger OnDrillDown()
-                    var
-                        myInt: Integer;
-                        Contracts: Record Contracts;
-                    begin
-                        Contracts.RESET;
-                        Contracts.SETRANGE("Status", Contracts.Status::New);
-                        Page.Run(Page::"Contract List", Contracts);
-                    end;
-                }
+                //     DrillDownPageId = "Contract List";
+                //     trigger OnDrillDown()
+                //     var
+                //         myInt: Integer;
+                //         Contracts: Record Contracts;
+                //     begin
+                //         Contracts.RESET;
+                //         Contracts.SETRANGE("Status", Contracts.Status::New);
+                //         Page.Run(Page::"Contract List", Contracts);
+                //     end;
+                // }
                 field("Open Legal Cases"; Rec."Open Legal Cases")
                 {
                     ApplicationArea = All;

@@ -3617,7 +3617,8 @@ codeunit 52186507 "Members Portal Integration"
 
         SeriesSetup.Get;
         SeriesSetup.TestField(SeriesSetup."Member Application Nos.");
-        NoSeriesMgt.InitSeries(SeriesSetup."Member Application Nos.", SeriesSetup."Member Application Nos.", 0D, NewNo, NewNoSeriesCode);
+        SeriesSetup."Member Application Nos." := NoSeriesMgt.GetNextNo(SeriesSetup."Member Application Nos.");
+        // NoSeriesMgt.InitSeries(SeriesSetup."Member Application Nos.", SeriesSetup."Member Application Nos.", 0D, NewNo, NewNoSeriesCode);
 
         MemberApplication."No." := NewNo;
         MemberApplication."No. Series" := NewNoSeriesCode;
@@ -4250,7 +4251,8 @@ codeunit 52186507 "Members Portal Integration"
 
         SeriesSetup.Get;
         SeriesSetup.TestField(SeriesSetup."Member Application Nos.");
-        NoSeriesMgt.InitSeries(SeriesSetup."Member Application Nos.", SeriesSetup."Member Application Nos.", 0D, NewNo, NewNoSeriesCode);
+        SeriesSetup."Member Application Nos." := NoSeriesMgt.GetNextNo(SeriesSetup."Member Application Nos.");
+        // NoSeriesMgt.InitSeries(SeriesSetup."Member Application Nos.", SeriesSetup."Member Application Nos.", 0D, NewNo, NewNoSeriesCode);
 
         MemberApplication."No." := NewNo;
         MemberApplication."No. Series" := NewNoSeriesCode;
@@ -5330,7 +5332,8 @@ codeunit 52186507 "Members Portal Integration"
 
                 HRSetup.Get;
                 HRSetup.TestField(HRSetup."Leave Application Nos.");
-                NoSeriesMgt.InitSeries(HRSetup."Leave Application Nos.", '', 0D, theLeaveApplication."Application Code", theLeaveApplication."No series");
+                 theLeaveApplication."Application Code" := NoSeriesMgt.GetNextNo(HRSetup."Leave Application Nos.");
+                // NoSeriesMgt.InitSeries(HRSetup."Leave Application Nos.", '', 0D, theLeaveApplication."Application Code", theLeaveApplication."No series");
 
                 theLeaveApplication."Source of Application" := theLeaveApplication."Source of Application"::"Staff Portal";
                 theLeaveApplication."Applicant Staff No." := Employee."No.";
@@ -9166,7 +9169,9 @@ codeunit 52186507 "Members Portal Integration"
 
                 SeriesSetup.Get;
                 SeriesSetup.TestField(SeriesSetup."Dependancy Application Nos.");
-                NoSeriesMgt.InitSeries(SeriesSetup."Dependancy Application Nos.", SeriesSetup."Dependancy Application Nos.", 0D, NewNo, NewNoSeriesCode);
+                SeriesSetup."Dependancy Application Nos." := NoSeriesMgt.GetNextNo(SeriesSetup."Dependancy Application Nos.");
+
+                // NoSeriesMgt.InitSeries(SeriesSetup."Dependancy Application Nos.", SeriesSetup."Dependancy Application Nos.", 0D, NewNo, NewNoSeriesCode);
 
                 DepApplication."No." := NewNo;
                 DepApplication."No. Series" := NewNoSeriesCode;
@@ -9378,7 +9383,8 @@ codeunit 52186507 "Members Portal Integration"
 
                 SeriesSetup.Get;
                 SeriesSetup.TestField(SeriesSetup."Dependancy Application Nos.");
-                NoSeriesMgt.InitSeries(SeriesSetup."Dependancy Application Nos.", SeriesSetup."Dependancy Application Nos.", 0D, NewNo, NewNoSeriesCode);
+                SeriesSetup."Dependancy Application Nos." := NoSeriesMgt.GetNextNo(SeriesSetup."Dependancy Application Nos.");
+                // NoSeriesMgt.InitSeries(SeriesSetup."Dependancy Application Nos.", SeriesSetup."Dependancy Application Nos.", 0D, NewNo, NewNoSeriesCode);
 
                 DepApplication."No." := NewNo;
                 DepApplication."No. Series" := NewNoSeriesCode;
@@ -9589,7 +9595,8 @@ codeunit 52186507 "Members Portal Integration"
 
                 SeriesSetup.Get;
                 SeriesSetup.TestField(SeriesSetup."Dependancy Application Nos.");
-                NoSeriesMgt.InitSeries(SeriesSetup."Dependancy Application Nos.", SeriesSetup."Dependancy Application Nos.", 0D, NewNo, NewNoSeriesCode);
+                SeriesSetup."Dependancy Application Nos." := NoSeriesMgt.GetNextNo(SeriesSetup."Dependancy Application Nos.");
+                // NoSeriesMgt.InitSeries(SeriesSetup."Dependancy Application Nos.", SeriesSetup."Dependancy Application Nos.", 0D, NewNo, NewNoSeriesCode);
 
                 DepApplication."No." := NewNo;
                 DepApplication."No. Series" := NewNoSeriesCode;
@@ -10050,7 +10057,8 @@ codeunit 52186507 "Members Portal Integration"
 
             SeriesSetup.Get;
             SeriesSetup.TestField("Standing Order Nos.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Standing Order Nos.", '', 0D, TheSTORequest."No.", TheSTORequest."No. Series");
+            TheSTORequest."No." := NoSeriesMgt.GetNextNo(SeriesSetup."Standing Order Nos.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Standing Order Nos.", '', 0D, TheSTORequest."No.", TheSTORequest."No. Series");
 
             TheSTORequest."Source Account Type" := TheSTORequest."Source Account Type"::Savings;
 
@@ -10572,7 +10580,8 @@ codeunit 52186507 "Members Portal Integration"
 
                 GenLedgerSetup.Get;
                 GenLedgerSetup.TestField("Stores Requisition No");
-                NoSeriesMgt.InitSeries(GenLedgerSetup."Stores Requisition No", '', 0D, TheStoreRequisition."No.", TheStoreRequisition."No. Series");
+                TheStoreRequisition."No." := NoSeriesMgt.GetNextNo(GenLedgerSetup."Stores Requisition No");
+                // NoSeriesMgt.InitSeries(GenLedgerSetup."Stores Requisition No", '', 0D, TheStoreRequisition."No.", TheStoreRequisition."No. Series");
 
                 TheStoreRequisition."Request date" := Today;
                 TheStoreRequisition.Validate("Request date");
@@ -12724,7 +12733,8 @@ codeunit 52186507 "Members Portal Integration"
 
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."System Edits");
-            NoSeriesMgt.InitSeries(SeriesSetup."System Edits", '', 0D, SystemEdits."No.", SystemEdits."No. Series");
+            SystemEdits."No." := SeriesSetup."System Edits";
+            // NoSeriesMgt.InitSeries(SeriesSetup."System Edits", '', 0D, SystemEdits."No.", SystemEdits."No. Series");
 
             SystemEdits."Table ID" := database::"Image Data";
             SystemEdits.Validate("Table ID");
@@ -12894,7 +12904,8 @@ codeunit 52186507 "Members Portal Integration"
 
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."System Edits");
-            NoSeriesMgt.InitSeries(SeriesSetup."System Edits", '', 0D, SystemEdits."No.", SystemEdits."No. Series");
+            SystemEdits."No." := NoSeriesMgt.GetNextNo(SeriesSetup."System Edits");
+            // NoSeriesMgt.InitSeries(SeriesSetup."System Edits", '', 0D, SystemEdits."No.", SystemEdits."No. Series");
 
             SystemEdits."Table ID" := database::"Image Data";
             SystemEdits.Validate("Table ID");

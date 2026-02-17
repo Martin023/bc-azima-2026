@@ -131,13 +131,13 @@ PageExtension 52185524 pageextension52185524 extends "Posted Sales Invoices"
         {
             ApplicationArea = Basic;
         }
-        modify("<Document Exchange Status>")
-        {
+        // modify("<Document Exchange Status>")
+        // {
 
-            //Unsupported feature: Property Modification (Name) on ""<Document Exchange Status>"(Control 18)".
+        //     //Unsupported feature: Property Modification (Name) on ""<Document Exchange Status>"(Control 18)".
 
-            ApplicationArea = Basic;
-        }
+        //     ApplicationArea = Basic;
+        // }
 
         //Unsupported feature: Property Insertion (Visible) on "Control1905767507(Control 1905767507)".
 

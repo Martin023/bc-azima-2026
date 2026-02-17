@@ -99,7 +99,8 @@ table 52186544 "M-Smart Documents"
 
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."M-Smart Documents Nos.");
-            NoSeriesMgt.InitSeries(SeriesSetup."M-Smart Documents Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."M-Smart Documents Nos.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."M-Smart Documents Nos.", xRec."No. Series", 0D, "No.", "No. Series");
 
         end;
 

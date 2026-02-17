@@ -390,10 +390,10 @@ PageExtension 52187005 pageextension52187005 extends "Small Business Owner RC"
         {
             ApplicationArea = Basic;
         }
-        modify("Extended Texts")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Extended Texts")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("C&ustomer")
         {
             ApplicationArea = Basic;

@@ -217,7 +217,7 @@ page 52187235 "CRM Member Edit"
                     DepApplication: Record "Dependancies Applications";
 
                     SeriesSetup: Record "Credit Nos. Series";
-                    NoSeriesMgt: Codeunit NoSeriesManagement;
+                    NoSeriesMgt: Codeunit "No. Series";
                     NewNo: Code[20];
                     NewNoSeriesCode: Code[20];
                     CRMNewNo: Code[20];

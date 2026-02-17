@@ -200,10 +200,10 @@ PageExtension 52185454 pageextension52185454 extends "Sales List"
     }
     actions
     {
-        modify(Card)
-        {
-            ApplicationArea = Basic;
-        }
+        // modify(Card)
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("Sales Reservation Avail.")
         {
             ApplicationArea = Basic;

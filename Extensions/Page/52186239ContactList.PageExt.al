@@ -632,14 +632,14 @@ PageExtension 52186239 pageextension52186239 extends "Contact List"
         {
             Visible = false;
         }
-        modify(SyncWithExchange)
-        {
-            Visible = false;
-        }
-        modify(FullSyncWithExchange)
-        {
-            Visible = false;
-        }
+        // modify(SyncWithExchange)
+        // {
+        //     Visible = false;
+        // }
+        // modify(FullSyncWithExchange)
+        // {
+        //     Visible = false;
+        // }
         modify(NewSalesQuote)
         {
             Visible = false;

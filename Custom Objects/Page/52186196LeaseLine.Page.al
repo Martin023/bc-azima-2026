@@ -255,7 +255,7 @@ page 52186196 "Lease Line"
         //ApprovalEntries: Page "Approval Entries";
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition,Lease;
         Lease: Record Lease;
-        FrmCalendar: Page "Units Meter Rating";
+        // FrmCalendar: Page "Units Meter Rating";
         D: Date;
 }
 

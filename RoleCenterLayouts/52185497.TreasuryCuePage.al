@@ -13,12 +13,12 @@ page 52185497 "Treasury Cue Page"
             {
                 ShowCaption = true;
                 //CuegroupLayout = Wide;
-                field("Tenants List"; Rec."Tenants List")
-                {
-                    Image = none;
-                    ApplicationArea = All;
-                    DrillDownPageId = "Tenant List";
-                }
+                // field("Tenants List"; Rec."Tenants List")
+                // {
+                //     Image = none;
+                //     ApplicationArea = All;
+                //     DrillDownPageId = "Tenant List";
+                // }
                 field("Sales Invoice"; Rec."Sales Invoice")
                 {
                     ApplicationArea = All;

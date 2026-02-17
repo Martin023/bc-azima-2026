@@ -222,10 +222,10 @@ PageExtension 52186880 pageextension52186880 extends "Whse. Shipment Lines"
     }
     actions
     {
-        modify("Show &Whse. Document")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Show &Whse. Document")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify(ShowSourceDocumentLine)
         {
 

@@ -179,7 +179,8 @@ page 52186574 "M-Smart Document"
 
                                         MembNoSeries.Get;
                                         MembNoSeries.TestField(MembNoSeries."FOSA Loan Nos.");
-                                        NoSeriesMgt.InitSeries(MembNoSeries."FOSA Loan Nos.", xRec."No. Series", 0D, theLoanApplication."Loan No.", theLoanApplication."No. Series");
+                                        theLoanApplication."Loan No." := NoSeriesMgt.GetNextNo(MembNoSeries."FOSA Loan Nos.");
+                                        // NoSeriesMgt.InitSeries(MembNoSeries."FOSA Loan Nos.", xRec."No. Series", 0D, theLoanApplication."Loan No.", theLoanApplication."No. Series");
 
                                         theLoanApplication.Insert();
 
@@ -225,7 +226,8 @@ page 52186574 "M-Smart Document"
 
                                         MembNoSeries.Get;
                                         MembNoSeries.TestField(MembNoSeries."Loan Nos.");
-                                        NoSeriesMgt.InitSeries(MembNoSeries."Loan Nos.", xRec."No. Series", 0D, theLoanApplication."Loan No.", theLoanApplication."No. Series");
+                                        theLoanApplication."Loan No." := NoSeriesMgt.GetNextNo(MembNoSeries."Loan Nos.");
+                                        // NoSeriesMgt.InitSeries(MembNoSeries."Loan Nos.", xRec."No. Series", 0D, theLoanApplication."Loan No.", theLoanApplication."No. Series");
 
                                         theLoanApplication.Insert();
 

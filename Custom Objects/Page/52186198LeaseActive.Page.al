@@ -551,7 +551,7 @@ page 52186198 "Lease-Active"
         DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition,ImprestSurrender,Interbank,Receipt,"Staff Claim","Staff Advance",AdvanceSurrender,Lease;
         Status1: Boolean;
         StatusTrue: Option;
-        FrmCalendar: Page "Units Meter Rating";
+        // FrmCalendar: Page "Units Meter Rating";
         D: Date;
         SalesHeader: Record "Sales Header";
         SalesLine: Record "Sales Line";
