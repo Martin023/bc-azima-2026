@@ -128,7 +128,8 @@ table 52186520 "Sky Guarantor Sub Applications"
         GlobalFunctions: Codeunit "Global Functions";
 
         CreditNosSeries: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
     begin
         ExistingLoanApplications.Reset;
         ExistingLoanApplications.SetRange("Member No.", Rec."Member No.");

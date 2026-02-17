@@ -126,14 +126,16 @@ table 52186042 "Computer Asset Register"
 
             CashOfficeSetup.Get();
             CashOfficeSetup.TestField(CashOfficeSetup."Computer Asset Requisition");
-            NoSeriesMgt.InitSeries(CashOfficeSetup."Computer Asset Requisition", xRec."No.Series", 0D, No, "No.Series");
+            No := NoSeriesMgt.GetNextNo(CashOfficeSetup."Computer Asset Requisition");
+            // NoSeriesMgt.InitSeries(CashOfficeSetup."Computer Asset Requisition", xRec."No.Series", 0D, No, "No.Series");
         end;
         "Created By" := UserId;
     end;
 
     var
         SalesSetup: Record "Sales & Receivables Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Members: Record Members;
         SavingsAccounts: Record "Savings Accounts";
         Txt001: Label 'With Effect Date Cannot be less than Capture date';

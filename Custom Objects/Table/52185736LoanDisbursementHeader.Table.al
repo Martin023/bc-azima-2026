@@ -368,7 +368,8 @@ table 52185736 "Loan Disbursement Header"
         if "No." = '' then begin
             MembNoSeries.Get;
             MembNoSeries.TestField(MembNoSeries."Loan Batch Nos");
-            NoSeriesMgt.InitSeries(MembNoSeries."Loan Batch Nos", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(MembNoSeries."Loan Batch Nos");
+            // NoSeriesMgt.InitSeries(MembNoSeries."Loan Batch Nos", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         if UserSetup.Get(UpperCase(UserId)) then begin
@@ -396,7 +397,8 @@ table 52185736 "Loan Disbursement Header"
 
     var
         MembNoSeries: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         ErrMod: Label 'Cannot modify a posted batch';
         DisbLines: Record "Loan Disbursement Lines";
         LoanApp: Record Loans;

@@ -320,7 +320,8 @@ table 52186205 "HR Training Feedback Form"
         if "Document No" = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Back To Office Nos");
-            NoSeriesMgt.InitSeries(HRSetup."Back To Office Nos", xRec."No. Series", 0D, "Document No", "No. Series");
+            "Document No" := NoSeriesMgt.GetNextNo(HRSetup."Back To Office Nos");
+            // NoSeriesMgt.InitSeries(HRSetup."Back To Office Nos", xRec."No. Series", 0D, "Document No", "No. Series");
         end;
 
         "User ID" := UserId;
@@ -380,7 +381,8 @@ table 52186205 "HR Training Feedback Form"
     var
         HRTrainingNeeds: Record "HR Training Needs";
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         mcontent: Label 'Status must be new on Training Application No.';
         mcontent2: Label 'You cannot modify approved request, Please cancel the approval request and try again';
         HREmp: Record "HR Employees";

@@ -134,7 +134,9 @@ table 52187070 "User Creation Requests"
 
             SeriesSetup.Get();
             SeriesSetup.TestField(SeriesSetup."User Creation");
-            NoSeriesMgt.InitSeries(SeriesSetup."User Creation", xRec."No.Series", 0D, "Request ID", "No.Series");
+            // NoSeriesMgt.InitSeries(SeriesSetup."User Creation", xRec."No.Series", 0D, "Request ID", "No.Series");
+
+            "Request ID" := NoSeriesMgt.GetNextNo(SeriesSetup."User Creation");
         end;
 
         "Date Captured" := Today;
@@ -163,6 +165,6 @@ table 52187070 "User Creation Requests"
     var
         HREmployees: Record "HR Employees";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record "User Setup";
 }

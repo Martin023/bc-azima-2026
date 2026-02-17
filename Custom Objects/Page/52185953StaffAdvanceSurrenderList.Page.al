@@ -963,8 +963,8 @@ page 52185953 "Staff Advance Surrender List"
     var
         SClaimHdr: Record "Staff Claims Header";
         SClaimLines: Record "Staff Claim Lines";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
         GenLedgerSetup: Record "Cash Office Setup";
+        NoSeriesMgt: Codeunit "No. Series";
     begin
         GenLedgerSetup.Get;
         SClaimHdr.Init;

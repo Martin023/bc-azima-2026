@@ -231,7 +231,8 @@ table 52186145 "HR Appraisal Journal Line"
     var
         Insurance: Record "HR Individual Targets Header";
         InsuranceJnlLine: Record "HR Appraisal Journal Line";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         //DimMgt: Codeunit DimensionManagement;
         Text001: Label 'You can not post more than maximum days allowed for this leave type %1';
 

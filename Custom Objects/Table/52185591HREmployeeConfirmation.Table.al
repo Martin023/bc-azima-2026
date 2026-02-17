@@ -97,14 +97,16 @@ table 52185591 "HR Employee Confirmation"
         if No = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Employee Confirmation No.");
-            NoSeriesMgt.InitSeries(HRSetup."Employee Confirmation No.", xRec."No series", 0D, No, "No series");
+            No := NoSeriesMgt.GetNextNo(HRSetup."Employee Confirmation No.");
+            // NoSeriesMgt.InitSeries(HRSetup."Employee Confirmation No.", xRec."No series", 0D, No, "No series");
         end;
     end;
 
     var
         HREmployees: Record "HR Employees";
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Txt001: Label 'Confirmation date can not be before Probation end date';
 }
 

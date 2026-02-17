@@ -89,7 +89,8 @@ table 52185971 "HRDisciplinary Case Withdrawal"
         if "No." = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Disciplinary Withdrawal Nos.");
-            NoSeriesMgt.InitSeries(HRSetup."Disciplinary Withdrawal Nos.", xRec."No Series", 0D, "No.", "No Series");
+            "No." := NoSeriesMgt.GetNextNo(HRSetup."Disciplinary Withdrawal Nos.");
+            // NoSeriesMgt.InitSeries(HRSetup."Disciplinary Withdrawal Nos.", xRec."No Series", 0D, "No.", "No Series");
         end;
 
         HREmployees.Reset;
@@ -107,7 +108,8 @@ table 52185971 "HRDisciplinary Case Withdrawal"
     var
         HREmployees: Record "HR Employees";
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Disc: Record "HR Disciplinary Cases NCA";
 }
 

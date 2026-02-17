@@ -17,11 +17,14 @@ table 52185692 "Next of KIN Application"
             var
                 PasswordHandler: Codeunit "Password Handler";
                 MyUniqueID: Text;
+                secretText: SecretText;
             begin
                 if xRec."Identification Type" <> "Identification Type"::" " then begin
                     if "Identification Type" = "Identification Type"::"System UID" then begin
                         if "System UID" = '' then begin
-                            MyUniqueID := PasswordHandler.GeneratePassword(10);
+
+                            secretText := PasswordHandler.GenerateSecretPassword(10);
+                            MyUniqueID := Format(secretText);
                             "System UID" := MyUniqueID;
                         end else
                             MyUniqueID := "System UID";

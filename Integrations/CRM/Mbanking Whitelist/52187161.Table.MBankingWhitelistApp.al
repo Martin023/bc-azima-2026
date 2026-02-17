@@ -275,5 +275,6 @@ table 52187161 "M-Banking Whitelist App"
 
     var
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 }

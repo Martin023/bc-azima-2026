@@ -48,7 +48,8 @@ table 52185958 Damages
     begin
         if "No." = '' then begin
             GenLedgerSetup.Get;
-            NoSeriesMgt.InitSeries(GenLedgerSetup."Damage Number", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(GenLedgerSetup."Damage Number");
+            // NoSeriesMgt.InitSeries(GenLedgerSetup."Damage Number", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         "User ID" := UserId;
@@ -57,7 +58,8 @@ table 52185958 Damages
     var
         Emp: Record "HR Employees";
         GenLedgerSetup: Record "Cash Office Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Vend: Record Vendor;
         Cust: Record Customer;
         Memb: Record Members;

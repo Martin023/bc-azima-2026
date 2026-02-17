@@ -116,7 +116,8 @@ table 52187402 "Office Keys List"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Key No.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Key No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Key No.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Key No.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
         Rec."Created at" := CURRENTDATETIME;
         Rec."Created By" := UserId;
@@ -135,7 +136,7 @@ table 52187402 "Office Keys List"
 
     var
         seriessetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         HREmployees: Record "HR Employees";
         //OfficeKeysList: Record "Office Keys List";
         UserSetup: Record "User Setup";

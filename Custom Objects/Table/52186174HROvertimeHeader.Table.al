@@ -153,7 +153,8 @@ table 52186174 "HR Overtime Header"
         if "Application Code" = '' then begin
             HRSetup.Get();
             HRSetup.TestField(HRSetup."Overtime Req Nos.");
-            NoSeriesMgt.InitSeries(HRSetup."Overtime Req Nos.", xRec."No. series", 0D, "Application Code", "No. series");
+            "Application Code" := NoSeriesMgt.GetNextNo(HRSetup."Overtime Req Nos.");
+            // NoSeriesMgt.InitSeries(HRSetup."Overtime Req Nos.", xRec."No. series", 0D, "Application Code", "No. series");
         end;
         "User ID":=UserId;
         "Application Date" := Today;
@@ -177,7 +178,8 @@ table 52186174 "HR Overtime Header"
     var
         HREmp: Record "HR Employees";
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         OT: Record "HR Overtime Header";
         usersetup: Record "User Setup";
         HrLeavePeriods: Record "HR Leave Periods";

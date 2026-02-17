@@ -215,7 +215,9 @@ page 52186744 "Clearance Form"//52185654
         if rec."Clearance No" = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Clearance No");
-            NoSeriesMgt.InitSeries(HRSetup."Clearance No", xRec."No Series", 0D, rec."Clearance No", rec."No Series");
+            // NoSeriesMgt.InitSeries(HRSetup."Clearance No", xRec."No Series", 0D, rec."Clearance No", rec."No Series");
+
+            rec."Clearance No" := NoSeriesMgt.GetNextNo(HRSetup."Clearance No");
         end;
         HREmp.Reset;
         HREmp.SetRange(HREmp."User ID", UserId);
@@ -328,12 +330,10 @@ page 52186744 "Clearance Form"//52185654
 
 
     var
+        noSeriesMgt: Codeunit "No. Series";
         HrSetup: record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
         UserSetup: record "User Setup";
         HrEmp: record "HR Employees";
-        ResponsibilityCentre: record "Responsibility CenterBR";
-        ClearanceHeader: record "Clearance Form";
         ClearanceLines: record "Clearance Lines";
         LoansProcess: Codeunit "Loans Process";
         HrLoanArrears: decimal;
@@ -342,8 +342,6 @@ page 52186744 "Clearance Form"//52185654
         FosaLoans: decimal;
         Members: record Members;
         MemberNo: code[100];
-        ExitClearance: record "HR Employee Exit Interviews";
-        OpenApprovalEntriesExistCurrUser: Boolean;
         OpenApprovalEntriesExist: Boolean;
         OpenApprovalEntriesExistForCurrUser: Boolean;
         VarVariant: Variant;

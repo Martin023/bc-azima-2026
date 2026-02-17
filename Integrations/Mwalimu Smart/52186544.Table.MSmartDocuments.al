@@ -118,5 +118,6 @@ table 52186544 "M-Smart Documents"
 
     var
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 }

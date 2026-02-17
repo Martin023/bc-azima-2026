@@ -183,7 +183,7 @@ table 52187100 "CRM Member Edit"
 
     var
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         GlobalFunctions: Codeunit "Global Functions";
         UserSet: Record "User Setup";
         CrmMemberedit: Record "CRM Member Edit";
@@ -215,7 +215,8 @@ table 52187100 "CRM Member Edit"
 
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."CRM Member Edit App Nos.");
-            NoSeriesMgt.InitSeries(SeriesSetup."CRM Member Edit App Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."CRM Member Edit App Nos.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."CRM Member Edit App Nos.", xRec."No. Series", 0D, "No.", "No. Series");
 
         end;
 

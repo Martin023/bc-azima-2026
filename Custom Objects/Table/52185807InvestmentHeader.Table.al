@@ -276,7 +276,8 @@ table 52185807 "Investment Header"
         if "Investment No" = '' then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."Investment Nos");
-            NoSeriesMgt.InitSeries(NoSetup."Investment Nos", xRec."No. Series", 0D, "Investment No", "No. Series");
+            "Investment No" := NoSeriesMgt.GetNextNo(NoSetup."Investment Nos");
+             // NoSeriesMgt.InitSeries(NoSetup."Investment Nos.", xRec."No. Series", 0D, "Investment No", "No. Series");
         end;
 
         "Transaction Date" := Today;
@@ -285,7 +286,8 @@ table 52185807 "Investment Header"
 
     var
         NoSetup: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         InvestType: Record "Investment Type";
         Customer: Record Customer;
         CompInfo: Record "Company Information";
@@ -371,7 +373,8 @@ table 52185807 "Investment Header"
     begin
         CashOffficeSetup.Get();
         CashOffficeSetup.TestField(CashOffficeSetup."Normal Payments No");
-        NoSeriesMgt.InitSeries(CashOffficeSetup."Normal Payments No", xRec."No. Series", 0D, PaymentHeaderNo, "No. Series");
+        PaymentHeaderNo := NoSeriesMgt.GetNextNo(CashOffficeSetup."Normal Payments No");
+        // NoSeriesMgt.InitSeries(CashOffficeSetup."Normal Payments No", xRec."No. Series", 0D, PaymentHeaderNo, "No. Series");
         PaymentsHeader.Init;
         PaymentsHeader."No." := PaymentHeaderNo;
         PaymentsHeader.Date := Today;

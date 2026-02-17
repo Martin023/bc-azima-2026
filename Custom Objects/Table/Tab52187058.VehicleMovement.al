@@ -213,7 +213,8 @@ table 52187058 "Vehicle Movement"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Motor Vehicle Movement No.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Motor Vehicle Movement No.", xRec."Movement No. Series", 0D, "No.", "Movement No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Motor Vehicle Movement No.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Motor Vehicle Movement No.", xRec."Movement No. Series", 0D, "No.", "Movement No. Series");
         end;
         "Created At" := Today;
         "Created By" := UserId;
@@ -233,7 +234,7 @@ table 52187058 "Vehicle Movement"
     var
         FA: Record "Fixed Asset";
         MembNoSeries: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         XValue: code[50];
         RecordID: Code[50];
         HRDrivers: Record "HR Drivers";

@@ -213,7 +213,6 @@ page 52186257 "Terminated Active Lease-List"
         SaleLine: Record "Sales Line";
         SRSetup: Record "Sales & Receivables Setup";
         NextNo: Code[20];
-        NoSeriesMgt: Codeunit NoSeriesManagement;
         LineNo: Integer;
         FType: Text[30];
         FValue: Integer;

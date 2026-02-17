@@ -118,7 +118,8 @@ table 52185804 "Delegate Groups Application"
         if Code = '' then begin
             MembNoSeries.Get;
             MembNoSeries.TestField(MembNoSeries."Delegate Application Nos.");
-            NoSeriesMgt.InitSeries(MembNoSeries."Delegate Application Nos.", xRec."No. Series", 0D, Code, "No. Series");
+            Code := NoSeriesMgt.GetNextNo(MembNoSeries."Delegate Application Nos.");
+            // NoSeriesMgt.InitSeries(MembNoSeries."Delegate Application Nos.", xRec."No. Series", 0D, Code, "No. Series");
             "Created By" := UserId;
             "Creation Date" := Today;
         end;
@@ -127,7 +128,8 @@ table 52185804 "Delegate Groups Application"
     var
         ElectrolZonesAreaSvrCenter: Record "Electrol Zones/Area Svr Center";
         MembNoSeries: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         SegmentCountyDividendSignat: Record "Segment/County/Dividend/Signat";
 }
 

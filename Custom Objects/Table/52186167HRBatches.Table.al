@@ -196,7 +196,8 @@ table 52186167 "HR Batches"
         if "Batch No." = '' then begin
             SalesSetup.Get();
             SalesSetup.TestField(SalesSetup."Loan Batch Nos.");
-            NoSeriesMgt.InitSeries(SalesSetup."Loan Batch Nos.", xRec."No. Series", 0D, "Batch No.", "No. Series");
+            "Batch No." := NoSeriesMgt.GetNextNo(SalesSetup."Loan Batch Nos.");
+            // NoSeriesMgt.InitSeries(SalesSetup."Loan Batch Nos.", xRec."No. Series", 0D, "Batch No.", "No. Series");
 
         end;
         //ERROR('You dont have permission to create %1 batches',"Batch Type")
@@ -210,7 +211,8 @@ table 52186167 "HR Batches"
 
     var
         SalesSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         EntryNo: Integer;
 }
 

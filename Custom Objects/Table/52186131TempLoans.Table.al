@@ -1321,7 +1321,8 @@ table 52186131 "Temp Loans"
         if "Loan No." = '' then begin
             MembNoSeries.Get;
             MembNoSeries.TestField(MembNoSeries."Loan Nos.");
-            NoSeriesMgt.InitSeries(MembNoSeries."Loan Nos.", xRec."No. Series", 0D, "Loan No.", "No. Series");
+            "Loan No." := NoSeriesMgt.GetNextNo(MembNoSeries."Loan Nos.");
+            // NoSeriesMgt.InitSeries(MembNoSeries."Loan Nos.", xRec."No. Series", 0D, "Loan No.", "No. Series");
 
             "Application Date" := Today;
             Advice := true;
@@ -1373,7 +1374,8 @@ table 52186131 "Temp Loans"
     var
         RejectionReason: Record "Exceptions/ Rejection Reason";
         MembNoSeries: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         ProdFac: Record "Product Factory";
         SavAcc: Record "Savings Accounts";
         LoanApp: Record Loans;

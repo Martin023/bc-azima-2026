@@ -716,7 +716,6 @@ page 52185904 "Internal Requisitions"
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
         PurchSetup: Record "Purchases & Payables Setup";
         No: code[20];
     begin
@@ -732,7 +731,6 @@ page 52185904 "Internal Requisitions"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
         PurchSetup: Record "Purchases & Payables Setup";
         No: code[20];
     begin

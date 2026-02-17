@@ -180,7 +180,8 @@ table 52185936 "Overtime Claim Header"
         if "Claim No" = '' then begin
             HrSetup.Get;
             HrSetup.TestField(HrSetup."Overtime Claim");
-            NoSeriesMgt.InitSeries(HrSetup."Overtime Claim", xRec."No. Series", 0D, "Claim No", "No. Series");
+            "Claim No" := NoSeriesMgt.GetNextNo(HrSetup."Overtime Claim");
+            // NoSeriesMgt.InitSeries(HrSetup."Overtime Claim", xRec."No. Series", 0D, "Claim No", "No. Series");
         end;
         UserSetUp.Get(UserId);
         "Staff No." := UserSetup."Employee No.";
@@ -204,7 +205,8 @@ table 52185936 "Overtime Claim Header"
     var
         DimMgt: Codeunit DimensionManagement;
         GenLedgerSetup: Record "Cash Office Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserMgt: Codeunit "User Setup Management BR";
         UserSetup: Record "User Setup";
         Employee: Record Employee;

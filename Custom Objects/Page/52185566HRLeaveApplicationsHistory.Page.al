@@ -136,22 +136,13 @@ page 52185566 "HR Leave Applications History1"
 
         "Date of ExamEditable": Boolean;
         NumberofPreviousAttemptsEditab: Boolean;
-        NoSeriesMgt: Codeunit NoSeriesManagement;
-        UserSetup: Record "User Setup";
         varDaysApplied: Integer;
         HRLeaveTypes: Record "HR Leave Types";
         BaseCalendarChange: Record "Base Calendar Change";
         ReturnDateLoop: Boolean;
-        mSubject: Text[250];
-        ApplicantsEmail: Text[30];
         LeaveGjline: Record "HR Leave Journal Line";
         "LineNo.": Integer;
-        sDate: Record Date;
-        Customized: Record "HR Leave Calendar Lines";
         HREmailParameters: Record "HR E-Mail Parameters";
-        HRJournalBatch: Record "HR Leave Journal Batch";
-        Text19010232: Label 'Leave Statistics';
-        Text1: Label 'Reliver Details';
 
     //[Scope('OnPrem')]
     procedure TESTFIELDS()

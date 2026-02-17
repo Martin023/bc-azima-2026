@@ -1005,7 +1005,6 @@ page 52186078 "Legal Card"
     // end;
 
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
         Legal: Record Legal;
         AdvisoryEditable: Boolean;
         EditableADR: Boolean;

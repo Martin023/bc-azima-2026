@@ -659,7 +659,8 @@ table 52185840 "Securities Register"
         if "No." = '' then begin
             SalesSetup.Get;
             SalesSetup.TestField(SalesSetup."Loan Security Nos.");
-            NoSeriesMgt.InitSeries(SalesSetup."Loan Security Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SalesSetup."Loan Security Nos.");
+            // NoSeriesMgt.InitSeries(SalesSetup."Loan Security Nos.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
         Validate("Captured By");
         Validate("Date Captured");
@@ -693,7 +694,8 @@ table 52185840 "Securities Register"
         CFStations: Record "CF Station Actions";
         Comments: Record Comments;
         SalesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         CusMembr: Record Members;
         SecurityRegSetUp: Record "Loan Securities Set-up";
         Text001: Label 'This collateral is blocked thus not avaialable for use.';

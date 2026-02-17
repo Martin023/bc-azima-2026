@@ -193,11 +193,13 @@ table 52187413 "Refund,Account Transfer Header"
             NoSetup.Get();
             if Rec."Refund Type" = "Refund Type"::"Loan Clearance" then begin
                 NoSetup.TestField(NoSetup."Loan Refund No.");
-                NoSeriesMgt.InitSeries(NoSetup."Loan Refund No.", xRec."No. Series", 0D, No, "No. Series");
+               No := NoSeriesMgt.GetNextNo(NoSetup."Loan Refund No.");
+                // NoSeriesMgt.InitSeries(NoSetup."Loan Refund No.", xRec."No. Series", 0D, No, "No. Series");
             end
             else begin
                 NoSetup.TestField(NoSetup."Refunds No.");
-                NoSeriesMgt.InitSeries(NoSetup."Refunds No.", xRec."No. Series", 0D, No, "No. Series");
+               No := NoSeriesMgt.GetNextNo(NoSetup."Refunds No.");
+                // NoSeriesMgt.InitSeries(NoSetup."Refunds No.", xRec."No. Series", 0D, No, "No. Series");
             end;
         end;
 
@@ -239,7 +241,8 @@ table 52187413 "Refund,Account Transfer Header"
 
     var
         NoSetup: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         "GL Account": Record "G/L Account";
         BANKACC: Record "Bank Account";
         cust: Record Customer;

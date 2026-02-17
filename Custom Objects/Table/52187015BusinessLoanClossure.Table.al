@@ -439,7 +439,8 @@ table 52187015 "Business Loan Clossure"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Business Loan Account Closure");
-            NoSeriesMgt.InitSeries(SeriesSetup."Business Loan Account Closure", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Business Loan Account Closure");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Business Loan Account Closure", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         "Created At" := CurrentDateTime;
@@ -456,7 +457,8 @@ table 52187015 "Business Loan Clossure"
 
     var
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         ProductFactory: Record "Product Factory";
         GeneralSetUp: Record "General Set-Up";
         UserSetup: Record "User Setup";

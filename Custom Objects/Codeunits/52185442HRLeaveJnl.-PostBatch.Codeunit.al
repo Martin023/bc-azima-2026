@@ -28,8 +28,9 @@ Codeunit 52185442 "HR Leave Jnl.- Post Batch"
         FAJnlSetup: Record "HR Setup";
         InsuranceJnlPostLine: Codeunit "HR Leave Jnl.- Post Line";
         InsuranceJnlCheckLine: Codeunit "HR Leave Jnl.- Check Line";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
-        NoSeriesMgt2: array[10] of Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
+        NoSeriesMgt2: array[10] of Codeunit "NoSeriesManagement";
         DimMgt: Codeunit DimensionManagement;
         Window: Dialog;
         LineCount: Integer;

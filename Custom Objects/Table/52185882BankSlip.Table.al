@@ -310,7 +310,8 @@ table 52185882 "Bank Slip"
         if No = '' then begin
             GenLedgerSetup.Get;
             GenLedgerSetup.TestField(GenLedgerSetup."Bank Deposit No.");
-            NoSeriesMgt.InitSeries(GenLedgerSetup."Bank Deposit No.", xRec."No. Series", 0D, No, "No. Series");
+            No := NoSeriesMgt.GetNextNo(GenLedgerSetup."Bank Deposit No.");
+            // NoSeriesMgt.InitSeries(GenLedgerSetup."Bank Deposit No.", xRec."No. Series", 0D, No, "No. Series");
 
             //get the creation details
             "Created By" := UserId;
@@ -326,7 +327,8 @@ table 52185882 "Bank Slip"
         Vend: Record Vendor;
         FA: Record "Fixed Asset";
         BankAcc: Record "Bank Account";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         GenLedgerSetup: Record "Cash Office Setup";
         RecPayTypes: Record "Receipts and Payment Types";
         CashierLinks: Record "Cash Office User Template";

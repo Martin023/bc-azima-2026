@@ -295,7 +295,8 @@ table 52185964 "Surety Management"
     begin
         if "Surety No" = '' then begin
             GenLedgerSetup.Get;
-            NoSeriesMgt.InitSeries(GenLedgerSetup."Case Number", xRec."No. Series", 0D, "Surety No", "No. Series");
+            "Surety No" := NoSeriesMgt.GetNextNo(GenLedgerSetup."Case Number");
+            // NoSeriesMgt.InitSeries(GenLedgerSetup."Case Number", xRec."No. Series", 0D, "Surety No", "No. Series");
         end;
 
         "User ID" := UserId;
@@ -319,7 +320,8 @@ table 52185964 "Surety Management"
         SavingsAccounts: Record "Savings Accounts";
         Emp: Record "HR Employees";
         GenLedgerSetup: Record "Cash Office Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Vend: Record Vendor;
         Cust: Record Customer;
         Memb: Record Members;

@@ -111,7 +111,8 @@ table 52186509 "Sky Channels Loan Applications"
         GlobalFunctions: Codeunit "Global Functions";
 
         MembNoSeries: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         LoanProduct: Record "Product Factory";
     begin
         ExistingLoanApplications.Reset;

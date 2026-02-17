@@ -217,7 +217,8 @@ table 52187364 "Key Request Table"
 
     var
         seriessetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         HREmployees: Record "HR Employees";
         OfficeKeysList: Record "Office Keys List";
         UserSetup : Record "User Setup";

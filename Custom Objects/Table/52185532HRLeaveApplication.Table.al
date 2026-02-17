@@ -525,7 +525,8 @@ table 52185532 "HR Leave Application"
         if "Application Code" = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Leave Application Nos.");
-            NoSeriesMgt.InitSeries(HRSetup."Leave Application Nos.", xRec."No series", 0D, "Application Code", "No series");
+            "Application Code" := NoSeriesMgt.GetNextNo(HRSetup."Leave Application Nos.");
+            // NoSeriesMgt.InitSeries(HRSetup."Leave Application Nos.", xRec."No series", 0D, "Application Code", "No series");
         end;
 
         if "Source of Application" = "Source of Application"::BC then begin
@@ -633,7 +634,8 @@ table 52185532 "HR Leave Application"
 
     var
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
         HREmp: Record "HR Employees";
         varDaysApplied: Integer;
         HRLeaveTypes: Record "HR Leave Types";

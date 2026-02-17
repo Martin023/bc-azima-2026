@@ -141,7 +141,8 @@ table 52185710 "Dividend Simulation Header"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Dividend Rate No.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Dividend Rate No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Dividend Rate No.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Dividend Rate No.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         "Created By" := UserId;
@@ -151,7 +152,8 @@ table 52185710 "Dividend Simulation Header"
         ExitProcessErr: Label 'You have selected to abort process date Change will be rolled back';
         ConfirmChange: Label 'The Change you want to will  affect any processed data do you wish to continue?';
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 
     local procedure ClearDividendLines(No: Code[20])
     var

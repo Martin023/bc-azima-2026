@@ -128,7 +128,8 @@ table 52185765 "Bulk SMS Header"
         if No = '' then begin
             NoSetup.Get;
             NoSetup.TestField(NoSetup."BULK SMS Nos");
-            NoSeriesMgt.InitSeries(NoSetup."BULK SMS Nos", xRec."No. Series", 0D, No, "No. Series");
+            No := NoSeriesMgt.GetNextNo(NoSetup."BULK SMS Nos");
+            // NoSeriesMgt.InitSeries(NoSetup."BULK SMS Nos", xRec."No. Series", 0D, No, "No. Series");
         end;
 
         "Date Entered" := Today;
@@ -139,7 +140,8 @@ table 52185765 "Bulk SMS Header"
 
     var
         NoSetup: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         BulkSMSLine: Record "Bulk SMS Lines";
 }
 

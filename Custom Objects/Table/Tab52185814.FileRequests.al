@@ -257,7 +257,8 @@ table 52185814 "File Requests"
 
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."File Request");
-            NoSeriesMgt.InitSeries(SeriesSetup."File Request", xRec."No. Series", 0D, "Request Number", "No. Series");
+            "Request Number" := NoSeriesMgt.GetNextNo(SeriesSetup."File Request");
+            // NoSeriesMgt.InitSeries(SeriesSetup."File Request", xRec."No. Series", 0D, "Request Number", "No. Series");
 
         end;
         userSetup.get(UserId);
@@ -272,7 +273,7 @@ table 52185814 "File Requests"
     var
         ElectrolZonesAreaSvrCenter: Record "Electrol Zones/Area Svr Center";
         MembNoSeries: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         SegmentCountyDividendSignat: Record "Segment/County/Dividend/Signat";
         Cust: Record Members;
         APPSET: Record "File Stations";

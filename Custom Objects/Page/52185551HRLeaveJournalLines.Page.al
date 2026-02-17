@@ -193,7 +193,6 @@ page 52185551 "HR Leave Journal Lines"
                     var
                         GenLedgSetup: Record "General Ledger Setup";
                         CustomApprovals: Codeunit "Custom Approvals Codeunit";
-                        NoSeriesMgt: Codeunit NoSeriesManagement;
                         Text001: Label 'This batch is already pending approval';
                     begin
                         if Rec."Document No." = '' then Error('Document number must have a value');

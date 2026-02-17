@@ -143,7 +143,8 @@ table 52185559 "HR OSIncident"
         if "Incident No" = '' then begin
             HrSetup.Get;
             HrSetup.TestField("Incident Nos.");
-            NoSeriesMgt.InitSeries(HrSetup."Incident Nos.", xRec."No. Series", 0D, "Incident No", "No. Series");
+            "Incident No" := NoSeriesMgt.GetNextNo(HrSetup."Incident Nos.");
+            // NoSeriesMgt.InitSeries(HrSetup."Incident Nos.", xRec."No. Series", 0D, "Incident No", "No. Series");
         end;
 
         "User ID" := UserId;
@@ -151,7 +152,8 @@ table 52185559 "HR OSIncident"
 
     var
         HrSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         HREmp: Record "HR Employees";
 }
 

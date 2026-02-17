@@ -130,7 +130,8 @@ table 52187051 "Nominee Legal"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Nominee Legal No.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Nominee Legal No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Nominee Legal No.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Nominee Legal No.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
         Rec."Created at" := CURRENTDATETIME;
         Rec."Created By" := UserId;
@@ -149,7 +150,7 @@ table 52187051 "Nominee Legal"
 
     var
         MembNoSeries: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Members: Record "Members";
         NextofKin: Record "Next of KIN";
         NomineeLines: Record "Nominee Lines Table";

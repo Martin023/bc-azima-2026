@@ -366,12 +366,14 @@ table 52186032 "Leases Billed New"
         if "No." = '' then begin
             GSetup.Get();
             GSetup.TestField(GSetup."Lease Nos.");
-            NoSeriesMgt.InitSeries(GSetup."Lease Nos.", xRec."No. Series", Today, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(GSetup."Lease Nos.");
+            // NoSeriesMgt.InitSeries(GSetup."Lease Nos.", xRec."No. Series", Today, "No.", "No. Series");
         end;
     end;
 
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         GSetup: Record "General Setup";
         Prop: Record "Property Details";
         Flr: Record Floor;

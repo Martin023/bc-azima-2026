@@ -81,7 +81,8 @@ table 52185970 "HRDisciplinary Appeal"
         if "No." = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Disciplinary Appeal Nos");
-            NoSeriesMgt.InitSeries(HRSetup."Disciplinary Appeal Nos", xRec."No Series", 0D, "No.", "No Series");
+            "No." := NoSeriesMgt.GetNextNo(HRSetup."Disciplinary Appeal Nos");
+            // NoSeriesMgt.InitSeries(HRSetup."Disciplinary Appeal Nos", xRec."No Series", 0D, "No.", "No Series");
         end;
 
 
@@ -103,6 +104,7 @@ table 52185970 "HRDisciplinary Appeal"
     var
         HREmployees: Record "HR Employees";
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 }
 

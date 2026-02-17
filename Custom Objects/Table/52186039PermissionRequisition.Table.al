@@ -142,7 +142,8 @@ table 52186039 "Permission Requisition"
 
             SeriesSetup.Get();
             SeriesSetup.TestField(SeriesSetup."Permission Requisitions Nos");
-            NoSeriesMgt.InitSeries(SeriesSetup."Permission Requisitions Nos", xRec."No.Series", 0D, No, "No.Series");
+            No := NoSeriesMgt.GetNextNo(SeriesSetup."Permission Requisitions Nos");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Permission Requisitions Nos", xRec."No.Series", 0D, No, "No.Series");
         end;
 
         "Date Captured" := Today;
@@ -181,7 +182,8 @@ table 52186039 "Permission Requisition"
 
     var
         SalesSetup: Record "Sales & Receivables Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Members: Record Members;
         SavingsAccounts: Record "Savings Accounts";
         Txt001: Label 'With Effect Date Cannot be less than Capture date';

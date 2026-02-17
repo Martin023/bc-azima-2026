@@ -770,16 +770,21 @@ page 52186180 "Customer Card-Tenant"
     end;
 
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
+    var
+        NoSeriesMgt: Codeunit "No. Series";
     begin
         if rec."No." = '' then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."Tenant Nos");
-            NoSeriesMgt.InitSeries(NoSetup."Tenant Nos", xRec."No. Series", 0D, rec."No.", NoSetup."Tenant Nos");
+            // NoSeriesMgt.InitSeries(NoSetup."Tenant Nos", xRec."No. Series", 0D, rec."No.", NoSetup."Tenant Nos");
+
+            rec."No." := NoSeriesMgt.GetNextNo(NoSetup."Tenant Nos");
+
+
         end;
     end;
 
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
         NoSetup: Record "Sales & Receivables Setup";
         CaseTracker: Record "CF Tracker";
         CFPage: Page "DMU CF Page";

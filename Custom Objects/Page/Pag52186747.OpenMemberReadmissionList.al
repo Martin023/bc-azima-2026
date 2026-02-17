@@ -134,7 +134,7 @@ page 52186747 "Open Member Readmission List"
 
     procedure CRMSimulation(): Boolean
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         XValue: code[50];
         RecordID: Code[50];
         SeriesSetup: Record "Credit Nos. Series";
@@ -148,11 +148,15 @@ page 52186747 "Open Member Readmission List"
     begin
         SeriesSetup.Get;
         SeriesSetup.TestField(SeriesSetup."Member Application Nos.");
-        NoSeriesMgt.InitSeries(SeriesSetup."Member Application Nos.", xRec."No. Series", 0D, RecordID, Rec."No. Series");
+        // NoSeriesMgt.InitSeries(SeriesSetup."Member Application Nos.", xRec."No. Series", 0D, RecordID, Rec."No. Series");
+
+        RecordID := NoSeriesMgt.GetNextNo(SeriesSetup."Member Application Nos.");
 
         MemberApplication.Init();
         MemberApplication."No." := RecordID;
-        NoSeriesMgt.InitSeries('MEMCRM', XValue, 0D, RecordID, Rec."No. Series");
+        // NoSeriesMgt.InitSeries('MEMCRM', XValue, 0D, RecordID, Rec."No. Series");
+
+        RecordID := NoSeriesMgt.GetNextNo('MEMCRM');
         MemberApplication."CRM Application No." := RecordID;
 
         if UserSet.Get(UserId) then begin

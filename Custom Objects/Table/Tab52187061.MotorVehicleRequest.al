@@ -283,7 +283,8 @@ table 52187061 "Motor Vehicle Request"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Motor Vehicle Request No.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Motor Vehicle Request No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Motor Vehicle Request No.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Motor Vehicle Request No.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         Rec."Created Date" := CURRENTDATETIME;
@@ -307,7 +308,7 @@ table 52187061 "Motor Vehicle Request"
 
     var
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         HrEmployees: Record "HR Employees";
         Drivers: Record "HR Drivers";
         UserSetup: Record "User Setup";

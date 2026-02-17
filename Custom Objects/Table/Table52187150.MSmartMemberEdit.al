@@ -176,7 +176,7 @@ table 52187150 "M-Smart Member Edit"
 
     var
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         GlobalFunctions: Codeunit "Global Functions";
         UserSet: Record "User Setup";
         MSmartMemberedit: Record "M-Smart Member Edit";
@@ -200,7 +200,8 @@ table 52187150 "M-Smart Member Edit"
 
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."M-Smart Member Edit App Nos.");
-            NoSeriesMgt.InitSeries(SeriesSetup."M-Smart Member Edit App Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."M-Smart Member Edit App Nos.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."M-Smart Member Edit App Nos.", xRec."No. Series", 0D, "No.", "No. Series");
 
         end;
 

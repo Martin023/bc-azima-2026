@@ -447,7 +447,8 @@ table 52187029 "Fixed Deposit Contract"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Fixed Deposit Contract");
-            NoSeriesMgt.InitSeries(SeriesSetup."Fixed Deposit Contract", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Fixed Deposit Contract");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Fixed Deposit Contract", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         "Application Date" := Today;
@@ -475,7 +476,8 @@ table 52187029 "Fixed Deposit Contract"
 
     var
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Cust: Record Members;
         ProductFactory: Record "Product Factory";
         ImageData: Record "Image Data";

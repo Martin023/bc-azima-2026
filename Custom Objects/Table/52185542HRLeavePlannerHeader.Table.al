@@ -161,13 +161,14 @@ table 52185542 "HR Leave Planner Header"
         if No = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Leave Planner Nos.");
-            NoSeriesMgt.InitSeries(HRSetup."Leave Planner Nos.", xRec."No series", 0D, No, "No series");
+            No := NoSeriesMgt.GetNextNo(HRSetup."Leave Planner Nos.");
+            // NoSeriesMgt.InitSeries(HRSetup."Leave Planner Nos.", xRec."No series", 0D, No, "No series");
         end;
     end;
 
     var
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record "User Setup";
         HREmp: Record "HR Succession Job Rotation";
         varDaysApplied: Integer;

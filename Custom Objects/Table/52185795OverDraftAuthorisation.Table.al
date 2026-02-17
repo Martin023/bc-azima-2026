@@ -253,7 +253,8 @@ table 52185795 "Over Draft Authorisation"
         if "No." = '' then begin
             NoSetup.Get;
             NoSetup.TestField(NoSetup."Overdraft Nos");
-            NoSeriesMgt.InitSeries(NoSetup."Overdraft Nos", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(NoSetup."Overdraft Nos");
+            // NoSeriesMgt.InitSeries(NoSetup."Overdraft Nos", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
 
@@ -275,7 +276,8 @@ table 52185795 "Over Draft Authorisation"
 
     var
         NoSetup: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Account: Record "Savings Accounts";
         UsersID: Record User;
         "Bank Name": Text[30];

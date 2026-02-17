@@ -74,7 +74,9 @@ table 52186056 "Delegates Minutes Header"
                 if Code = '' then begin
                     MembNoSeries.Get;
                     MembNoSeries.TestField(MembNoSeries."Delegate Minutes Nos.");
-                    NoSeriesMgt.InitSeries(MembNoSeries."Delegate Minutes Nos.", xRec."No. Series", 0D, Code, "No. Series");
+                    Code := NoSeriesMgt.GetNextNo(MembNoSeries."Delegate Minutes Nos.");
+                    
+                    // NoSeriesMgt.InitSeries(MembNoSeries."Delegate Minutes Nos.", xRec."No. Series", 0D, Code, "No. Series");
                     "Created By" := UserId;
                     "Created Date" := Today;
                 end;
@@ -180,7 +182,8 @@ table 52186056 "Delegates Minutes Header"
                     if Code = '' then begin
                         MembNoSeries.Get;
                         MembNoSeries.TestField(MembNoSeries."Delegate Minutes Nos.");
-                        NoSeriesMgt.InitSeries(MembNoSeries."Delegate Minutes Nos.", xRec."No. Series", 0D, Code, "No. Series");
+                        Code := NoSeriesMgt.GetNextNo(MembNoSeries."Delegate Minutes Nos.");
+                        // NoSeriesMgt.InitSeries(MembNoSeries."Delegate Minutes Nos.", xRec."No. Series", 0D, Code, "No. Series");
                         "Created By" := UserId;
                         "Created Date" := Today;
                     end;
@@ -338,7 +341,8 @@ table 52186056 "Delegates Minutes Header"
         if Code = '' then begin
             MembNoSeries.Get;
             MembNoSeries.TestField(MembNoSeries."Delegate Minutes Nos.");
-            NoSeriesMgt.InitSeries(MembNoSeries."Delegate Minutes Nos.", xRec."No. Series", 0D, Code, "No. Series");
+            Code := NoSeriesMgt.GetNextNo(MembNoSeries."Delegate Minutes Nos.");
+            // NoSeriesMgt.InitSeries(MembNoSeries."Delegate Minutes Nos.", xRec."No. Series", 0D, Code, "No. Series");
             "Created By" := UserId;
             "Created Date" := Today;
         end;
@@ -398,7 +402,8 @@ table 52186056 "Delegates Minutes Header"
 
     var
         MembNoSeries: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         DelegateRegion: Record "Delegate Region";
         Err0001: Label 'You cannot make payment for a month in future.';
         DelegatesMeetingAttendees: Record "Delegates Meeting Attendees";

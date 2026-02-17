@@ -145,7 +145,8 @@ table 52185612 "HR Interns Requisition"
         if "Requisition No." = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Interns Req. Nos");
-            NoSeriesMgt.InitSeries(HRSetup."Interns Req. Nos", xRec."No. Series", 0D, "Requisition No.", "No. Series");
+            "Requisition No." := NoSeriesMgt.GetNextNo(HRSetup."Interns Req. Nos");
+            // NoSeriesMgt.InitSeries(HRSetup."Interns Req. Nos", xRec."No. Series", 0D, "Requisition No.", "No. Series");
         end;
 
         "Requisition Date" := Today;
@@ -163,6 +164,7 @@ table 52185612 "HR Interns Requisition"
     var
         HREmp: Record "HR Employees";
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 }
 

@@ -147,7 +147,8 @@ table 52185845 "Savings Interest Header"
         if "No." = '' then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."FOSA Interest Nos");
-            NoSeriesMgt.InitSeries(NoSetup."FOSA Interest Nos", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(NoSetup."FOSA Interest Nos");
+            // NoSeriesMgt.InitSeries(NoSetup."FOSA Interest Nos", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         Cashier := UserId;
@@ -164,7 +165,8 @@ table 52185845 "Savings Interest Header"
     end;
 
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record "User Setup";
         NoSetup: Record "Banking No Setup";
         CUST: Record Customer;

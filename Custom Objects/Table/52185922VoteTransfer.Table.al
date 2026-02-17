@@ -110,13 +110,15 @@ table 52185922 "Vote Transfer"
         if No = '' then begin
             GenLedgerSetup.Get;
             GenLedgerSetup.TestField(GenLedgerSetup."Vote Transfer Nos.");
-            NoSeriesMgt.InitSeries(GenLedgerSetup."Vote Transfer Nos.", xRec."No. Series", 0D, No, "No. Series");
+            No := NoSeriesMgt.GetNextNo(GenLedgerSetup."Vote Transfer Nos.");
+            // NoSeriesMgt.InitSeries(GenLedgerSetup."Vote Transfer Nos.", xRec."No. Series", 0D, No, "No. Series");
 
         end;
     end;
 
     var
         GenLedgerSetup: Record "General Ledger Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 }
 

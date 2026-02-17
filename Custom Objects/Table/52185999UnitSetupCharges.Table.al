@@ -49,12 +49,14 @@ table 52185999 "Unit Setup Charges"
         if "Charge Code" = '' then begin
             GSetup.Get();
             GSetup.TestField(GSetup."Charge Code");
-            NoSeriesMgt.InitSeries(GSetup."Charge Code", xRec."No. Series", Today, "Charge Code", "No. Series");
+            "Charge Code" := NoSeriesMgt.GetNextNo(GSetup."Charge Code");
+            // NoSeriesMgt.InitSeries(GSetup."Charge Code", xRec."No. Series", Today, "Charge Code", "No. Series");
         end;
     end;
 
     var
         GSetup: Record "General Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 }
 

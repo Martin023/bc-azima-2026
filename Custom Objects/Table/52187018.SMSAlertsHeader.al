@@ -218,7 +218,8 @@ table 52187018 "SMS Alerts Header"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."DMU SMS Alerts");
-            NoSeriesMgt.InitSeries(SeriesSetup."DMU SMS Alerts", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."DMU SMS Alerts");
+            // NoSeriesMgt.InitSeries(SeriesSetup."DMU SMS Alerts", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         "Created At" := CurrentDateTime;
@@ -309,7 +310,8 @@ table 52187018 "SMS Alerts Header"
 
     var
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         ProductFactory: Record "Product Factory";
         GeneralSetUp: Record "General Set-Up";
         UserSetup: Record "User Setup";

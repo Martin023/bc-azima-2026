@@ -663,7 +663,9 @@ table 52185940 "SinkFund Report Information"
             //     SeriesSetup.TestField(SeriesSetup."BBF Report");
 
             // if "Claim Type" = "Claim Type"::"Risk Claim" then
-            NoSeriesMgt.InitSeries(SeriesSetup."Sink Fund Nos.", SeriesSetup."Sink Fund Nos.", 0D, No, "No. Series")
+            
+            No := NoSeriesMgt.GetNextNo(SeriesSetup."Sink Fund Nos.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Sink Fund Nos.", SeriesSetup."Sink Fund Nos.", 0D, No, "No. Series")
             // else if "Claim Type" = "Claim Type"::"BBF - Insurance Claim" then
             //     NoSeriesMgt.InitSeries(SeriesSetup."BBF Insurance Nos.", SeriesSetup."BBF Insurance Nos.", 0D, No, "No. Series")
             // else
@@ -859,7 +861,8 @@ table 52185940 "SinkFund Report Information"
         Comments: Record Comments;
         Members: Record Members;
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record "User Setup";
         BBFRequisationHeader2: Record "SinkFund Report Information";
         Counts: Integer;

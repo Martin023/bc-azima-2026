@@ -229,14 +229,16 @@ table 52185576 "HR Employee Transfer Header"
         if "Request No" = '' then begin
             hrsetup.Get;
             hrsetup.TestField(hrsetup."Employee Transfer Nos.");
-            NoSeriesMgt.InitSeries(hrsetup."Employee Transfer Nos.", xRec."No. Series", 0D, "Request No", "No. Series");
+            "Request No" := NoSeriesMgt.GetNextNo(hrsetup."Employee Transfer Nos.");
+            // NoSeriesMgt.InitSeries(hrsetup."Employee Transfer Nos.", xRec."No. Series", 0D, "Request No", "No. Series");
             "Date Requested" := Today;
         end;
     end;
 
     var
         hrsetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Employees: Record "HR Employees";
         Jobs: Record "HR Jobs";
         DimVal: Record "Dimension Value";

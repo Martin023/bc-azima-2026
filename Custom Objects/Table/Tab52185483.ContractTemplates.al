@@ -96,7 +96,8 @@ table 52185483 "Contract Templates"
         if "Template No." = '' then begin
             CreditNosSeries.Get;
             CreditNosSeries.TestField(CreditNosSeries."Template No.");
-            NoSeriesMgt.InitSeries(CreditNosSeries."Template No.", xRec."No. Series", 0D, "Template No.", "No. Series");
+            "Template No." := NoSeriesMgt.GetNextNo(CreditNosSeries."Template No.");
+            // NoSeriesMgt.InitSeries(CreditNosSeries."Template No.", xRec."No. Series", 0D, "Template No.", "No. Series");
         end;
         
         Rec."Global Dimension 1 Code" := UserSetup."Global Dimension 1 Code";
@@ -118,5 +119,5 @@ table 52185483 "Contract Templates"
     end;
 
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 }

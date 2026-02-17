@@ -47,7 +47,8 @@ table 52187074 "System Edits"
                 if "No." = '' then begin
                     SeriesSetup.Get;
                     SeriesSetup.TestField(SeriesSetup."System Edits");
-                    NoSeriesMgt.InitSeries(SeriesSetup."System Edits", xRec."No. Series", 0D, "No.", "No. Series");
+                    "No." := NoSeriesMgt.GetNextNo(SeriesSetup."System Edits");
+                    // NoSeriesMgt.InitSeries(SeriesSetup."System Edits", xRec."No. Series", 0D, "No.", "No. Series");
                 end;
                 Message(SystemEditsCodeunit.Setfilters("Table ID", "No.", false, ''));
 
@@ -317,7 +318,8 @@ table 52187074 "System Edits"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."System Edits");
-            NoSeriesMgt.InitSeries(SeriesSetup."System Edits", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."System Edits");
+            // NoSeriesMgt.InitSeries(SeriesSetup."System Edits", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         "Innitiating Officer" := UserId;
@@ -497,7 +499,8 @@ table 52187074 "System Edits"
         ConfigPackageMgt: Codeunit "Config. Package Management";
         Text001: Label 'You cannot use system table %1 in the package.';
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         SystemEditsCodeunit: Codeunit "System Editss";
         CreditNoSeries: Record "Credit Nos. Series";
         UserSetup: Record "User Setup";

@@ -180,7 +180,8 @@ table 52186277 "Group Member Exit & Update"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Driver No.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Driver No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Driver No.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Driver No.", xRec."No. Series", 0D, "No.", "No. Series");
 
         end;
         "Created By" := userID;
@@ -200,7 +201,7 @@ table 52186277 "Group Member Exit & Update"
 
     var
         MembNoSeries: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         AccountSignatories: Record "Account Signatories";
         GroupEdit: Record "Group Members Edit";
         EntryNo: Integer;

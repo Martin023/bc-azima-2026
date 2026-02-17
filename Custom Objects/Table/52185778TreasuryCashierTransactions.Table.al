@@ -461,7 +461,8 @@ table 52185778 "Treasury Cashier Transactions"
         if No = '' then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."Treasury & Teller Trans Nos.");
-            NoSeriesMgt.InitSeries(NoSetup."Treasury & Teller Trans Nos.", xRec."No. Series", 0D, No, "No. Series");
+            No := NoSeriesMgt.GetNextNo(NoSetup."Treasury & Teller Trans Nos.");
+            // NoSeriesMgt.InitSeries(NoSetup."Treasury & Teller Trans Nos.", xRec."No. Series", 0D, No, "No. Series");
         end;
 
 
@@ -547,7 +548,8 @@ table 52185778 "Treasury Cashier Transactions"
 
     var
         NoSetup: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Denominations: Record Denominations;
         TransactionCoinage: Record Coinage;
         IssuetoTeller: Label 'ISSUE TO TELLER';

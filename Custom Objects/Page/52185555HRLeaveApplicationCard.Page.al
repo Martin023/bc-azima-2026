@@ -839,7 +839,6 @@ page 52185555 "HR Leave Application Card"
         HRLeaveLedgerEntries: Record "HR Leave Ledger Entries";
         EmpName: Text[70];
         ApprovalComments: Page "Approval Comments";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
         UserSetup: Record "User Setup";
         varDaysApplied: Integer;
         HRLeaveTypes: Record "HR Leave Types";

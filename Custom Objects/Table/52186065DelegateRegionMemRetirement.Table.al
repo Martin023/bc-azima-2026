@@ -187,7 +187,8 @@ table 52186065 "Delegate Region Mem Retirement"
         if Code = '' then begin
             MembNoSeries.Get;
             MembNoSeries.TestField(MembNoSeries."Delegate Sub Nos.");
-            NoSeriesMgt.InitSeries(MembNoSeries."Delegate Sub Nos.", xRec."No. Series", 0D, Code, "No. Series");
+            Code := NoSeriesMgt.GetNextNo(MembNoSeries."Delegate Sub Nos.");
+            // NoSeriesMgt.InitSeries(MembNoSeries."Delegate Sub Nos.", xRec."No. Series", 0D, Code, "No. Series");
             "Created By" := UserId;
             "Creation Date" := Today;
         end;
@@ -196,7 +197,8 @@ table 52186065 "Delegate Region Mem Retirement"
     var
         ElectrolZonesAreaSvrCenter: Record "Electrol Zones/Area Svr Center";
         MembNoSeries: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         SegmentCountyDividendSignat: Record "Segment/County/Dividend/Signat";
         DelegateGroups: Record "Delegate Region";
         DelegateMembers: Record "Delegate Members";

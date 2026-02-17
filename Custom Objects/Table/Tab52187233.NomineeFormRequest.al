@@ -122,7 +122,8 @@ table 52187233 "Nominee Form Request"
         if "No." = '' then begin
             MembNoSeries.Get;
             MembNoSeries.TestField(MembNoSeries."Nominee Form Req No");
-            NoSeriesMgt.InitSeries(MembNoSeries."Nominee Form Req No", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(MembNoSeries."Nominee Form Req No");
+            // NoSeriesMgt.InitSeries(MembNoSeries."Nominee Form Req No", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         "User ID" := UserId;
@@ -147,7 +148,7 @@ table 52187233 "Nominee Form Request"
 
     var
         GenLedgerSetup: Record "Cash Office Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Usersetup: Record "User Setup";
         MembNoSeries: Record "Credit Nos. Series";
         Members: Record "Members";

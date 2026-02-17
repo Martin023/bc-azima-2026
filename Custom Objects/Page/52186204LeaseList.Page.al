@@ -200,18 +200,5 @@ page 52186204 "Lease-List"
         CurrPage.LookupMode := true;
     end;
 
-    var
-        L: Record Lease;
-        LL: Record "Lease Line";
-        IntC: Integer;
-        BL: Record "Lease Bill Lines";
-        SaleHeader: Record "Sales Header";
-        SaleLine: Record "Sales Line";
-        SRSetup: Record "Sales & Receivables Setup";
-        NextNo: Code[20];
-        NoSeriesMgt: Codeunit NoSeriesManagement;
-        LineNo: Integer;
-        FType: Text[30];
-        FValue: Integer;
 }
 

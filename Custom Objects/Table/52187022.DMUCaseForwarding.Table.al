@@ -171,7 +171,8 @@ table 52187022 "DMU Case Forwarding"
         if "No." = '' then begin
             CreditNosSeries.Get;
             CreditNosSeries.TestField(CreditNosSeries."DMU Case Forwarding");
-            NoSeriesMgt.InitSeries(CreditNosSeries."DMU Case Forwarding", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(CreditNosSeries."DMU Case Forwarding");
+            // NoSeriesMgt.InitSeries(CreditNosSeries."DMU Case Forwarding", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         if UserSetup.Get(UserId) then begin
@@ -196,7 +197,8 @@ table 52187022 "DMU Case Forwarding"
         ConfigPackageMgt: Codeunit "Config. Package Management";
         Text001: Label 'You cannot use system table %1 in the package.';
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         SystemEditsCodeunit: Codeunit "System Editss";
         CreditNoSeries: Record "Credit Nos. Series";
         CFPage: Page "DMU CF Page";

@@ -3391,7 +3391,8 @@ table 52185729 Loans
 
                     if "Loan No." = '' then begin
                         MembNoSeries.Get;
-                        NoSeriesMgt.InitSeries(ProdFac."Loan Nos", xRec."No. Series", 0D, "Loan No.", "No. Series");
+                        "Loan No." := NoSeriesMgt.GetNextNo(ProdFac."Loan Nos");
+                        // NoSeriesMgt.InitSeries(ProdFac."Loan Nos", xRec."No. Series", 0D, "Loan No.", "No. Series");
                     end;
                 end
                 else begin
@@ -3401,18 +3402,22 @@ table 52185729 Loans
 
                         if "Source Unit" = "Source Unit"::FOSA then begin
                             MembNoSeries.TestField(MembNoSeries."FOSA Loan Nos.");
-                            NoSeriesMgt.InitSeries(MembNoSeries."FOSA Loan Nos.", xRec."No. Series", 0D, "Loan No.", "No. Series");
+                            "Loan No." := NoSeriesMgt.GetNextNo(MembNoSeries."FOSA Loan Nos.");
+                            // NoSeriesMgt.InitSeries(MembNoSeries."FOSA Loan Nos.", xRec."No. Series", 0D, "Loan No.", "No. Series");
                         end else
                             if "Source Unit" = "Source Unit"::"BUSINESS LOANS" then begin
                                 MembNoSeries.TestField(MembNoSeries."Business Loan Nos.");
-                                NoSeriesMgt.InitSeries(MembNoSeries."Business Loan Nos.", xRec."No. Series", 0D, "Loan No.", "No. Series");
+                                "Loan No." := NoSeriesMgt.GetNextNo(MembNoSeries."Business Loan Nos.");
+                                // NoSeriesMgt.InitSeries(MembNoSeries."Business Loan Nos.", xRec."No. Series", 0D, "Loan No.", "No. Series");
                             end else
                                 if "Source Unit" = "Source Unit"::"HR LOANS" then begin
                                     MembNoSeries.TestField(MembNoSeries."HR Loan Nos.");
-                                    NoSeriesMgt.InitSeries(MembNoSeries."HR Loan Nos.", xRec."No. Series", 0D, "Loan No.", "No. Series");
+                                    "Loan No." := NoSeriesMgt.GetNextNo(MembNoSeries."HR Loan Nos.");
+                                    // NoSeriesMgt.InitSeries(MembNoSeries."HR Loan Nos.", xRec."No. Series", 0D, "Loan No.", "No. Series");
                                 end else begin
                                     MembNoSeries.TestField(MembNoSeries."Loan Nos.");
-                                    NoSeriesMgt.InitSeries(MembNoSeries."Loan Nos.", xRec."No. Series", 0D, "Loan No.", "No. Series");
+                                    "Loan No." := NoSeriesMgt.GetNextNo(MembNoSeries."Loan Nos.");
+                                    // NoSeriesMgt.InitSeries(MembNoSeries."Loan Nos.", xRec."No. Series", 0D, "Loan No.", "No. Series");
                                 end;
 
                     end;
@@ -3427,18 +3432,22 @@ table 52185729 Loans
                 //NoSeriesMgt.InitSeries(MembNoSeries."Loan Nos.", xRec."No. Series", 0D, "Loan No.", "No. Series");
                 if "Source Unit" = "Source Unit"::FOSA then begin
                     MembNoSeries.TestField(MembNoSeries."FOSA Loan Nos.");
-                    NoSeriesMgt.InitSeries(MembNoSeries."FOSA Loan Nos.", xRec."No. Series", 0D, "Loan No.", "No. Series");
+                    "Loan No." := NoSeriesMgt.GetNextNo(MembNoSeries."FOSA Loan Nos.");
+                    // NoSeriesMgt.InitSeries(MembNoSeries."FOSA Loan Nos.", xRec."No. Series", 0D, "Loan No.", "No. Series");
                 end else
                     if "Source Unit" = "Source Unit"::"BUSINESS LOANS" then begin
                         MembNoSeries.TestField(MembNoSeries."Business Loan Nos.");
-                        NoSeriesMgt.InitSeries(MembNoSeries."Business Loan Nos.", xRec."No. Series", 0D, "Loan No.", "No. Series");
+                        "Loan No." := NoSeriesMgt.GetNextNo(MembNoSeries."Business Loan Nos.");
+                        // NoSeriesMgt.InitSeries(MembNoSeries."Business Loan Nos.", xRec."No. Series", 0D, "Loan No.", "No. Series");
                     end else
                         if "Source Unit" = "Source Unit"::"HR LOANS" then begin
                             MembNoSeries.TestField(MembNoSeries."HR Loan Nos.");
-                            NoSeriesMgt.InitSeries(MembNoSeries."HR Loan Nos.", xRec."No. Series", 0D, "Loan No.", "No. Series");
+                            "Loan No." := NoSeriesMgt.GetNextNo(MembNoSeries."HR Loan Nos.");
+                            // NoSeriesMgt.InitSeries(MembNoSeries."HR Loan Nos.", xRec."No. Series", 0D, "Loan No.", "No. Series");
                         end else begin
                             MembNoSeries.TestField(MembNoSeries."Loan Nos.");
-                            NoSeriesMgt.InitSeries(MembNoSeries."Loan Nos.", xRec."No. Series", 0D, "Loan No.", "No. Series");
+                            "Loan No." := NoSeriesMgt.GetNextNo(MembNoSeries."Loan Nos.");
+                            // NoSeriesMgt.InitSeries(MembNoSeries."Loan Nos.", xRec."No. Series", 0D, "Loan No.", "No. Series");
                         end;
 
 
@@ -3795,7 +3804,8 @@ table 52185729 Loans
         EmployerProducts: Record "52187008 Employer Product Attr";
         RejectionReason: Record "Exceptions/ Rejection Reason";
         MembNoSeries: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         TargetEmployers: Record "Target Employers";
         TargetEmployersII: Record "Target Employers";
         ProdFac: Record "Product Factory";

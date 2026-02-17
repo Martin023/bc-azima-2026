@@ -134,7 +134,8 @@ table 52185577 "HR Employee Transfer Lines"
 
     var
         hrsetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Employees: Record "HR Employees";
 }
 

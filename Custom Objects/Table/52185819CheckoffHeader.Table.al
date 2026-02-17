@@ -255,7 +255,8 @@ table 52185819 "Checkoff Header"
         if "No." = '' then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."Checkoff No.");
-            NoSeriesMgt.InitSeries(NoSetup."Checkoff No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(NoSetup."Checkoff No.");
+            // NoSeriesMgt.InitSeries(NoSetup."Checkoff No.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
         i := 0;
         CashierTrans.RESET;
@@ -281,7 +282,8 @@ table 52185819 "Checkoff Header"
 
     var
         NoSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Customer: Record Customer;
         CashierTrans: Record "Checkoff Header";
         OPenrecords: Code[200];

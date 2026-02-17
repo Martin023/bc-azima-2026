@@ -185,7 +185,8 @@ table 52185768 "M-SACCO Change PIN No"
         if No = '' then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."Change M-SACCO PIN Nos");
-            NoSeriesMgt.InitSeries(NoSetup."Change M-SACCO PIN Nos", xRec."No. Series", 0D, No, "No. Series");
+            No := NoSeriesMgt.GetNextNo(NoSetup."Change M-SACCO PIN Nos");
+            // NoSeriesMgt.InitSeries(NoSetup."Change M-SACCO PIN Nos", xRec."No. Series", 0D, No, "No. Series");
         end;
 
 
@@ -196,7 +197,8 @@ table 52185768 "M-SACCO Change PIN No"
 
     var
         NoSetup: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         MPESAApp: Record "M-SACCO Applications";
         MSACCOApplicationDetails: Record "M-SACCO Application Details";
         SavingsAccounts: Record "Savings Accounts";

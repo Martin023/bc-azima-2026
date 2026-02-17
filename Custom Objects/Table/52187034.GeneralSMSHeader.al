@@ -143,7 +143,8 @@ table 52187034 "General SMS Header"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."General SMS Nos.");
-            NoSeriesMgt.InitSeries(SeriesSetup."General SMS Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."General SMS Nos.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."General SMS Nos.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         "Created At" := CurrentDateTime;
@@ -233,7 +234,8 @@ table 52187034 "General SMS Header"
 
     var
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         ProductFactory: Record "Product Factory";
         GeneralSetUp: Record "General Set-Up";
         UserSetup: Record "User Setup";

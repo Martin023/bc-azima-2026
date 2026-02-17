@@ -431,7 +431,8 @@ codeunit 52186500 "CRM Integration"
         KeyExists: Boolean;
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -4294,7 +4295,8 @@ codeunit 52186500 "CRM Integration"
         KeyExists: Boolean;
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         // CRMNewNo: Code[20];
         // CRMNewNoSeriesCode: Code[20];
 
@@ -4588,7 +4590,8 @@ codeunit 52186500 "CRM Integration"
         KeyExists: Boolean;
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         // CRMNewNo: Code[20];
         // CRMNewNoSeriesCode: Code[20];
 
@@ -5359,7 +5362,8 @@ codeunit 52186500 "CRM Integration"
         KeyExists: Boolean;
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -5553,7 +5557,8 @@ codeunit 52186500 "CRM Integration"
         KeyExists: Boolean;
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -6097,7 +6102,8 @@ codeunit 52186500 "CRM Integration"
         KeyExists: Boolean;
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -7275,7 +7281,8 @@ codeunit 52186500 "CRM Integration"
         KeyExists: Boolean;
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -8157,7 +8164,8 @@ codeunit 52186500 "CRM Integration"
         SavingsAccountApplication: Record "Savings Account Application";
         SignatoryApplication: Record "Signatory Application";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -8428,7 +8436,8 @@ codeunit 52186500 "CRM Integration"
         SavingsAccountApplication: Record "Savings Account Application";
         SignatoryApplication: Record "Signatory Application";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -8882,7 +8891,8 @@ codeunit 52186500 "CRM Integration"
 
         Variations: Record "Product Variations";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -9034,7 +9044,8 @@ codeunit 52186500 "CRM Integration"
 
         Variations: Record "Product Variations";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -9919,7 +9930,8 @@ codeunit 52186500 "CRM Integration"
 
         Variations: Record "Product Variations";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -10079,7 +10091,8 @@ codeunit 52186500 "CRM Integration"
 
         Variations: Record "Product Variations";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -10532,7 +10545,8 @@ codeunit 52186500 "CRM Integration"
         KeyExists: Boolean;
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -10744,7 +10758,8 @@ codeunit 52186500 "CRM Integration"
         KeyExists: Boolean;
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];

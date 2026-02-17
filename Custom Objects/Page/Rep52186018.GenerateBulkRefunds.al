@@ -141,7 +141,6 @@ report 52186018 "Generate Bulk Refunds"
     trigger OnPreReport()
     var
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
     begin
         LoansInterest.Reset();
         LoansInterest.SetRange(LoansInterest."Refund Header No.", "Interest Header"."No");

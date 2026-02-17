@@ -123,13 +123,15 @@ table 52185833 "SMS Account Subscription"
         if "No." = '' then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."SMS Subscription");
-            NoSeriesMgt.InitSeries(NoSetup."SMS Subscription", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(NoSetup."SMS Subscription");
+            // NoSeriesMgt.InitSeries(NoSetup."SMS Subscription", xRec."No. Series", 0D, "No.", "No. Series");
         end;
     end;
 
     var
         Members: Record Members;
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NoSetup: Record "Credit Nos. Series";
 }
 

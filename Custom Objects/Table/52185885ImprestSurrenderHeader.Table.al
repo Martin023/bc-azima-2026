@@ -555,7 +555,8 @@ table 52185885 "Imprest Surrender Header"
             GenLedgerSetup.Get;
 
             GenLedgerSetup.TestField(GenLedgerSetup."Imprest Surrender No");
-            NoSeriesMgt.InitSeries(GenLedgerSetup."Imprest Surrender No", xRec."No. Series", 0D, No, "No. Series");
+            No := NoSeriesMgt.GetNextNo(GenLedgerSetup."Imprest Surrender No");
+            // NoSeriesMgt.InitSeries(GenLedgerSetup."Imprest Surrender No", xRec."No. Series", 0D, No, "No. Series");
         end;
 
         "Account Type" := "Account Type"::Customer;
@@ -580,7 +581,8 @@ table 52185885 "Imprest Surrender Header"
         Vend: Record Vendor;
         FA: Record "Fixed Asset";
         BankAcc: Record "Bank Account";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         GenLedgerSetup: Record "Cash Office Setup";
         RecPayTypes: Record "Receipts and Payment Types";
         CashierLinks: Record "Cash Office User Template";

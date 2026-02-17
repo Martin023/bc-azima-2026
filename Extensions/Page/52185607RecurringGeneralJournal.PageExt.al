@@ -577,7 +577,8 @@ PageExtension 52185607 pageextension52185607 extends "Recurring General Journal"
         ReportPrint: Codeunit "Test Report-Print";
         PayrollManagement: Codeunit "Payroll Management";
         ClientTypeManagement: Codeunit "Client Type Management";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         JournalErrorsMgt: Codeunit "Journal Errors Mgt.";
         BackgroundErrorHandlingMgt: Codeunit "Background Error Handling Mgt.";
         PrivacyNotice: Codeunit "Privacy Notice";

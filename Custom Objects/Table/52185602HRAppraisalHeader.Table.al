@@ -427,7 +427,8 @@ table 52185602 "HR Appraisal Header"
         if "Appraisal No" = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Appraisal Nos");
-            NoSeriesMgt.InitSeries(HRSetup."Appraisal Nos", xRec."No Series", 0D, "Appraisal No", "No Series");
+            "Appraisal No" := NoSeriesMgt.GetNextNo(HRSetup."Appraisal Nos");
+            // NoSeriesMgt.InitSeries(HRSetup."Appraisal Nos", xRec."No Series", 0D, "Appraisal No", "No Series");
         end;
         "Appraisal Date" := Today;
 
@@ -496,7 +497,8 @@ table 52185602 "HR Appraisal Header"
     var
         HREmp: Record "HR Employees";
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         //HREmpCard: Page "HR Employee Card";
         HRAppraisalRatings: Record "HR Appraisal Company Target";
         HRAppraisalGoalSettingH: Record "HR Appraisal Header";

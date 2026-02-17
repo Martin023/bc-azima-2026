@@ -3494,7 +3494,8 @@ codeunit 52186507 "Members Portal Integration"
         KeyExists: Boolean;
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -4142,7 +4143,8 @@ codeunit 52186507 "Members Portal Integration"
         KeyExists: Boolean;
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -5296,7 +5298,8 @@ codeunit 52186507 "Members Portal Integration"
         Employee: record "HR Employees";
         theLeaveApplication: Record "HR Leave Application";
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         VarVariant: Variant;
         CustomApprovals: Codeunit "Custom Approvals Codeunit";
 
@@ -9121,7 +9124,8 @@ codeunit 52186507 "Members Portal Integration"
         theApp: Record "Dependancies Applications";
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
 
@@ -9332,7 +9336,8 @@ codeunit 52186507 "Members Portal Integration"
         NextOfKin: Record "Next of Kin";
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
 
@@ -9558,7 +9563,8 @@ codeunit 52186507 "Members Portal Integration"
         NextOfKin: Record "Next of Kin";
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
 
@@ -10014,7 +10020,8 @@ codeunit 52186507 "Members Portal Integration"
         SearchMember: record Members;
         TheSTORequest: Record "Standing Order Header";
         TheSTOLines: Record "Standing Order Lines";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         SeriesSetup: Record "Banking No Setup";
         TheMemberFosaAccount: Record "Savings Accounts";
         TheMemberLoan: Record Loans;
@@ -10530,7 +10537,8 @@ codeunit 52186507 "Members Portal Integration"
         Employee: record "HR Employees";
         TheStoreRequisitionLine: Record "Store Requistion Lines";
 
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         TheMemberFosaAccount: Record "Savings Accounts";
         TheMemberLoan: Record Loans;
 
@@ -12663,7 +12671,8 @@ codeunit 52186507 "Members Portal Integration"
 
         EDMSFileTypes: enum "EDMS File Types";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 
         ResponseObject: JsonObject;
         Datum: JsonObject;
@@ -12832,7 +12841,8 @@ codeunit 52186507 "Members Portal Integration"
 
         EDMSFileTypes: enum "EDMS File Types";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 
         ResponseObject: JsonObject;
         Datum: JsonObject;

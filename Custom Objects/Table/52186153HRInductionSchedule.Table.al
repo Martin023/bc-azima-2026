@@ -145,7 +145,8 @@ table 52186153 "HR Induction Schedule"
         if "Induction Code" = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Induction Nos");
-            NoSeriesMgt.InitSeries(HRSetup."Induction Nos", xRec."No series", 0D, "Induction Code", xRec."No series");
+            "Induction Code" := NoSeriesMgt.GetNextNo(HRSetup."Induction Nos");
+            // NoSeriesMgt.InitSeries(HRSetup."Induction Nos", xRec."No series", 0D, "Induction Code", xRec."No series");
         end;
 
         "Created By" := UserId;
@@ -155,7 +156,8 @@ table 52186153 "HR Induction Schedule"
     var
         Induction: Record "HR Induction Schedule";
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         HREmp: Record "HR Employees";
         Txt001: Label 'The User ID %1 is not assigned to any employee';
         DimValue: Record "Dimension Value";

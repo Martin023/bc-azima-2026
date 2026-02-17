@@ -522,7 +522,8 @@ table 52187301 "Self Loan Application"
         if "Application Code" = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Self Service Loan Nos.");
-            NoSeriesMgt.InitSeries(HRSetup."Self Service Loan Nos.", xRec."No series", 0D, "Application Code", "No series");
+            "Application Code" := NoSeriesMgt.GetNextNo(HRSetup."Self Service Loan Nos.");
+            // NoSeriesMgt.InitSeries(HRSetup."Self Service Loan Nos.", xRec."No series", 0D, "Application Code", "No series");
         end;
 
         HREmp.Reset;
@@ -547,7 +548,8 @@ table 52187301 "Self Loan Application"
 
     var
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         HREmp: Record "HR Employees";
 
         ApprovalComments: Record "Approval Comment Line";

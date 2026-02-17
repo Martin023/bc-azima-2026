@@ -948,7 +948,8 @@ table 52186164 "Job-Journal Line"
         PurchPriceCalcMgt: Codeunit "Purch. Price Calc. Mgt.";
         ResFindUnitCost: Codeunit "Resource-Find Cost";
         ItemCheckAvail: Codeunit "Item-Check Avail.";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UOMMgt: Codeunit "Unit of Measure Management";
         DimMgt: Codeunit DimensionManagement;
         ReserveJobJnlLine: Codeunit "Job Jnl. Line-Reserve";

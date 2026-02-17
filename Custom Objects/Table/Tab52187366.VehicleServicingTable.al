@@ -164,7 +164,8 @@ table 52187366 "Vehicle Servicing Table"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Motor Vehicle Request No.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Motor Vehicle Request No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Motor Vehicle Request No.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Motor Vehicle Request No.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
         "Created by" := USERID;
         "Created at" := CURRENTDATETIME;
@@ -179,7 +180,7 @@ table 52187366 "Vehicle Servicing Table"
 
     var
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         HREmployees: Record "HR Employees";
         Vendor: Record Vendor;
         FA: Record "Fixed Asset";

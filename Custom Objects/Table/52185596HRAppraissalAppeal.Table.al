@@ -87,7 +87,8 @@ table 52185596 "HR Appraissal Appeal"
         if "No." = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Appraisal Appeal Nos");
-            NoSeriesMgt.InitSeries(HRSetup."Appraisal Appeal Nos", xRec."No Series", 0D, "No.", "No Series");
+            "No." := NoSeriesMgt.GetNextNo(HRSetup."Appraisal Appeal Nos");
+            // NoSeriesMgt.InitSeries(HRSetup."Appraisal Appeal Nos", xRec."No Series", 0D, "No.", "No Series");
         end;
 
         HREmployees.Reset;
@@ -113,6 +114,7 @@ table 52185596 "HR Appraissal Appeal"
     var
         HREmployees: Record "HR Employees";
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 }
 

@@ -142,7 +142,8 @@ page 52186574 "M-Smart Document"
                         theLoanApplication: Record Loans;
                         theMSmartMemberEdit: Record "M-Smart Member Edit";
                         MembNoSeries: Record "Credit Nos. Series";
-                        NoSeriesMgt: Codeunit NoSeriesManagement;
+                        // NoSeriesMgt: Codeunit NoSeriesManagement;
+                        NoSeriesMgt: Codeunit "No. Series";
                     begin
 
                         case Rec."Document Type" of

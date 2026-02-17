@@ -87,12 +87,14 @@ table 52187031 "Digital Signature"
     trigger OnInsert()
     var
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
     begin
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Digital Signature Nos.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Digital Signature Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Digital Signature Nos.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Digital Signature Nos.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
         "Entered By" := UserId;
         "Date Entered" := CurrentDateTime;

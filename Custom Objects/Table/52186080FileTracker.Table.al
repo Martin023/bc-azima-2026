@@ -394,7 +394,8 @@ table 52186080 "File Tracker"
         if "File Request Number" = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."File Request");
-            NoSeriesMgt.InitSeries(SeriesSetup."File Request", xRec."No. Series", 0D, "File Request Number", "No. Series");
+            "File Request Number" := NoSeriesMgt.GetNextNo(SeriesSetup."File Request");
+            // NoSeriesMgt.InitSeries(SeriesSetup."File Request", xRec."No. Series", 0D, "File Request Number", "No. Series");
         end;
         userSetup.get(UserId);
         "Current Responsibility Centre" := userSetup."Responsibility Centre";
@@ -410,7 +411,8 @@ table 52186080 "File Tracker"
     var
         ElectrolZonesAreaSvrCenter: Record "Electrol Zones/Area Svr Center";
         MembNoSeries: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         SeriesSetup: Record "Credit Nos. Series";
         SegmentCountyDividendSignat: Record "Segment/County/Dividend/Signat";
         Cust: Record Members;

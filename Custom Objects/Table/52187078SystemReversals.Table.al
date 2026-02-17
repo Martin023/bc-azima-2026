@@ -203,7 +203,8 @@ table 52187078 "System Reversal"
     trigger OnInsert()
     begin
         if "No." = '' then
-            NoSeriesMgt.InitSeries('EDITS', xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo('EDITS');
+            // NoSeriesMgt.InitSeries('EDITS', xRec."No. Series", 0D, "No.", "No. Series");
 
         "Created by User ID" := UserId;
         "Created By" := UserId;
@@ -228,7 +229,8 @@ table 52187078 "System Reversal"
         ConfigPackageMgt: Codeunit "Config. Package Management";
         Text001: Label 'You cannot use system table %1 in the package.';
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         SystemEditsCodeunit: Codeunit "System Editss";
         CreditNoSeries: Record "Credit Nos. Series";
         RegisterNo: Integer;

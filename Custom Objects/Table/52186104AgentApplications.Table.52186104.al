@@ -350,7 +350,8 @@ table 52186104 "Agent Applications"
         GeneralSetUp.TestField(GeneralSetUp."Agency No Series");
         RandomizeNoSeriesIncrementNo(GeneralSetUp."Agency No Series");
         if "Agent Code" = '' then begin
-            NoSeriesMgt.InitSeries(GeneralSetUp."Agency No Series", xRec."No. Series", 0D, "Agent Code", "No. Series");
+            "Agent Code" := NoSeriesMgt.GetNextNo(GeneralSetUp."Agency No Series");
+            // NoSeriesMgt.InitSeries(GeneralSetUp."Agency No Series", xRec."No. Series", 0D, "Agent Code", "No. Series");
         end;
 
 
@@ -368,7 +369,8 @@ table 52186104 "Agent Applications"
 
     var
         GeneralSetUp: Record "General Set-Up";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         WithdrawLimit: Record "M-SACCO Withdrawal Limits";
         MPESAAppDetails: Record "M-SACCO Applications";
         SavingsAccounts: Record "Savings Accounts";

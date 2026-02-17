@@ -79,13 +79,15 @@ table 52186188 "HR Shift Management"
         if Code = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Shift Nos");
-            NoSeriesMgt.InitSeries(HRSetup."Shift Nos", xRec."No. Series", 0D, Code, "No. Series");
+            Code := NoSeriesMgt.GetNextNo(HRSetup."Shift Nos");
+            // NoSeriesMgt.InitSeries(HRSetup."Shift Nos", xRec."No. Series", 0D, Code, "No. Series");
         end;
     end;
 
     var
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 
     local procedure fnCalculateDuration()
     begin

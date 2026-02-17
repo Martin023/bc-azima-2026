@@ -103,10 +103,5 @@ table 52185841 "Loan Securities Set-up"
     begin
         "Last Date Modified" := Today;
     end;
-
-    var
-        LoanApplications: Record EDMS;
-        SeriesSetup: Record "Credit Nos. Series";
-        SeriesMagt: Codeunit NoSeriesManagement;
 }
 

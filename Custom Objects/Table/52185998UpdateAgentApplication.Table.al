@@ -283,7 +283,8 @@ table 52185998 "Update Agent Application"
         NoSetup.TestField("Agency Update Nos.");
         RandomizeNoSeriesIncrementNo(NoSetup."Agency Update Nos.");
         if "Update No" = '' then begin
-            NoSeriesMgt.InitSeries(NoSetup."Agency Update Nos.", xRec."No. Series", 0D, "Update No", "No. Series");
+            "Update No" := NoSeriesMgt.GetNextNo(NoSetup."Agency Update Nos.");
+            // NoSeriesMgt.InitSeries(NoSetup."Agency Update Nos.", xRec."No. Series", 0D, "Update No", "No. Series");
         end;
 
 
@@ -301,7 +302,8 @@ table 52185998 "Update Agent Application"
 
     var
         GeneralSetUp: Record "General Set-Up";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         WithdrawLimit: Record "M-SACCO Withdrawal Limits";
         MPESAAppDetails: Record "M-SACCO Applications";
         SavingsAccounts: Record "Savings Accounts";

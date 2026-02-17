@@ -224,7 +224,8 @@ table 52185676 "Staff Loan Types"
         if Code = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."HR Loan Nos.");
-            NoSeriesMgt.InitSeries(HRSetup."HR Loan Nos.", xRec."No. Series", 0D, Code, "No. Series");
+            Code := NoSeriesMgt.GetNextNo(HRSetup."HR Loan Nos.");
+            // NoSeriesMgt.InitSeries(HRSetup."HR Loan Nos.", xRec."No. Series", 0D, Code, "No. Series");
         end;
     end;
 
@@ -240,7 +241,8 @@ table 52185676 "Staff Loan Types"
 
     var
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Text000: Label 'You cannot change %1 because there are one or more ledger entries associated with this account.';
 
     [Scope('OnPrem')]

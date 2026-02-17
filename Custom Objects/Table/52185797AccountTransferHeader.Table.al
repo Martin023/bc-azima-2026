@@ -522,7 +522,8 @@ table 52185797 "Account Transfer Header"
         if No = '' then begin
             NoSetup.Get;
             NoSetup.TestField(NoSetup."Account Transfer Nos");
-            NoSeriesMgt.InitSeries(NoSetup."Account Transfer Nos", xRec.Remarks, 0D, No, Remarks);
+            No := NoSeriesMgt.GetNextNo(NoSetup."Account Transfer Nos");
+            // NoSeriesMgt.InitSeries(NoSetup."Account Transfer Nos", xRec.Remarks, 0D, No, Remarks);
         end;
         "Transaction Date" := Today;
         "Transaction Time" := Time;
@@ -557,7 +558,8 @@ table 52185797 "Account Transfer Header"
 
     var
         NoSetup: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record "User Setup";
         SavingsREC: Record "Savings Accounts";
         TransSource: Record "Account Transfer Source";

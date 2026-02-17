@@ -1325,7 +1325,8 @@ table 52185691 "Member Application"
 
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Member Application Nos.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Member Application Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Member Application Nos.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Member Application Nos.", xRec."No. Series", 0D, "No.", "No. Series");
 
             // if MemberApplication.Get(Rec."No.") then begin
             //     Productfactory.Reset;
@@ -1604,7 +1605,8 @@ table 52185691 "Member Application"
         SMSSource: enum "SMS Source";
         GlobalFunctions: Codeunit "Global Functions";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSet: Record "User Setup";
         Cust: Record Members;
         StrTel: Text[30];

@@ -225,7 +225,8 @@ table 52186126 "BBF Requisation Header"
         if No = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."BBF Claims");
-            NoSeriesMgt.InitSeries(SeriesSetup."BBF Claims", xRec."No. Series", 0D, No, "No. Series");
+            No := NoSeriesMgt.GetNextNo(SeriesSetup."BBF Claims");
+            // NoSeriesMgt.InitSeries(SeriesSetup."BBF Claims", xRec."No. Series", 0D, No, "No. Series");
         end;
 
         if not UserSetup.Get(UserId) then Error('Kindly have System Admin set you in User Set-up');
@@ -265,7 +266,8 @@ table 52186126 "BBF Requisation Header"
 
     var
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record "User Setup";
         Members: Record Members;
         Loans: Record Loans;

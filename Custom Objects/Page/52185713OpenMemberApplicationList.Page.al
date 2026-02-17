@@ -128,10 +128,67 @@ page 52185713 "Open Member Application List"
         }
     }
 
+    // procedure CRMSimulation(): Boolean
+    // var
+    //     XValue: code[50];
+    //     RecordID: Code[50];
+    //     SeriesSetup: Record "Credit Nos. Series";
+    //     MemberApplication: Record "Member Application";
+    //     GlobalFunctions: Codeunit "Global Functions";
+    //     SubDepartments: Enum "Sub Module";
+    //     UserSet: Record "User Setup";
+    //     ProductFactory: Record "Product Factory";
+    //     AutoOpenSavingAccs: Record "Savings Account Registration";
+    //     DepartMent: Enum "Responsibility Center Enum";
+    // begin
+    //     SeriesSetup.Get;
+    //     SeriesSetup.TestField(SeriesSetup."Member Application Nos.");
+    //     NoSeriesMgt.InitSeries(SeriesSetup."Member Application Nos.", xRec."No. Series", 0D, RecordID, Rec."No. Series");
+    //     MemberApplication.Init();
+    //     MemberApplication."No." := RecordID;
+    //     NoSeriesMgt.InitSeries('MEMCRM', XValue, 0D, RecordID, Rec."No. Series");
+    //     MemberApplication."CRM Application No." := RecordID;
+
+    //     if UserSet.Get(UserId) then begin
+    //         MemberApplication."Responsibility Center" := UserSet."Shortcut Dimension 3 Code";
+    //     end;
+
+    //     ProductFactory.SetFilter(ProductFactory.Status, '%1', ProductFactory.Status::Active);
+    //     ProductFactory.SetFilter(ProductFactory."Auto Open Account", '%1', true);
+    //     if ProductFactory.Find('-') then begin
+    //         repeat
+    //             AutoOpenSavingAccs.Init;
+    //             AutoOpenSavingAccs."No." := MemberApplication."No.";
+    //             AutoOpenSavingAccs.Validate(AutoOpenSavingAccs."Product Type", ProductFactory."Product ID");
+    //             AutoOpenSavingAccs."Monthly Contribution" := ProductFactory."Minimum Contribution";
+    //             AutoOpenSavingAccs.Insert;
+    //         until ProductFactory.Next = 0;
+    //     end;
+
+
+    //     MemberApplication."Application Date" := Today;
+    //     MemberApplication."Created By" := UserId;
+
+    //     if UserSet.Get(UserId) then begin
+    //         UserSet.TestField(UserSet."Global Dimension 1 Code");
+    //         UserSet.TestField(UserSet."Global Dimension 2 Code");
+    //         MemberApplication."Global Dimension 1 Code" := UserSet."Global Dimension 1 Code";
+    //         MemberApplication."Global Dimension 2 Code" := UserSet."Global Dimension 2 Code";
+    //         MemberApplication."Responsibility Center" := UserSet."Responsibility Centre";
+    //     end else
+    //         Error('%1 must be set up in user setup', UserId);
+
+
+    //     if MemberApplication.Insert() then begin
+    //         if not GlobalFunctions.AssignUserTasks(DepartMent::RECORDS, SubDepartments::"Members Applications", RecordID) then
+    //             exit(false)
+    //         else
+    //             exit(true);
+    //     end;
+    // end;
+
     procedure CRMSimulation(): Boolean
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
-        XValue: code[50];
         RecordID: Code[50];
         SeriesSetup: Record "Credit Nos. Series";
         MemberApplication: Record "Member Application";
@@ -141,48 +198,74 @@ page 52185713 "Open Member Application List"
         ProductFactory: Record "Product Factory";
         AutoOpenSavingAccs: Record "Savings Account Registration";
         DepartMent: Enum "Responsibility Center Enum";
+        NoSeries: Codeunit "No. Series";
     begin
         SeriesSetup.Get;
         SeriesSetup.TestField(SeriesSetup."Member Application Nos.");
-        NoSeriesMgt.InitSeries(SeriesSetup."Member Application Nos.", xRec."No. Series", 0D, RecordID, Rec."No. Series");
 
+        // --- Member Application No. ---
         MemberApplication.Init();
+
+        RecordID := NoSeries.GetNextNo(
+            SeriesSetup."Member Application Nos.",
+            WorkDate());
+
         MemberApplication."No." := RecordID;
-        NoSeriesMgt.InitSeries('MEMCRM', XValue, 0D, RecordID, Rec."No. Series");
+        MemberApplication."No. Series" :=
+            SeriesSetup."Member Application Nos.";
+
+        // --- CRM Application No. ---
+        RecordID := NoSeries.GetNextNo(
+            'MEMCRM',
+            WorkDate());
+
         MemberApplication."CRM Application No." := RecordID;
 
         if UserSet.Get(UserId) then begin
-            MemberApplication."Responsibility Center" := UserSet."Shortcut Dimension 3 Code";
+            MemberApplication."Responsibility Center" :=
+                UserSet."Shortcut Dimension 3 Code";
         end;
 
-        ProductFactory.SetFilter(ProductFactory.Status, '%1', ProductFactory.Status::Active);
-        ProductFactory.SetFilter(ProductFactory."Auto Open Account", '%1', true);
+        ProductFactory.SetFilter(Status, '%1',
+            ProductFactory.Status::Active);
+        ProductFactory.SetFilter("Auto Open Account",
+            '%1', true);
+
         if ProductFactory.Find('-') then begin
             repeat
                 AutoOpenSavingAccs.Init;
-                AutoOpenSavingAccs."No." := MemberApplication."No.";
-                AutoOpenSavingAccs.Validate(AutoOpenSavingAccs."Product Type", ProductFactory."Product ID");
-                AutoOpenSavingAccs."Monthly Contribution" := ProductFactory."Minimum Contribution";
+                AutoOpenSavingAccs."No." :=
+                    MemberApplication."No.";
+                AutoOpenSavingAccs.Validate(
+                    "Product Type",
+                    ProductFactory."Product ID");
+                AutoOpenSavingAccs."Monthly Contribution" :=
+                    ProductFactory."Minimum Contribution";
                 AutoOpenSavingAccs.Insert;
             until ProductFactory.Next = 0;
         end;
-
 
         MemberApplication."Application Date" := Today;
         MemberApplication."Created By" := UserId;
 
         if UserSet.Get(UserId) then begin
-            UserSet.TestField(UserSet."Global Dimension 1 Code");
-            UserSet.TestField(UserSet."Global Dimension 2 Code");
-            MemberApplication."Global Dimension 1 Code" := UserSet."Global Dimension 1 Code";
-            MemberApplication."Global Dimension 2 Code" := UserSet."Global Dimension 2 Code";
-            MemberApplication."Responsibility Center" := UserSet."Responsibility Centre";
+            UserSet.TestField("Global Dimension 1 Code");
+            UserSet.TestField("Global Dimension 2 Code");
+
+            MemberApplication."Global Dimension 1 Code" :=
+                UserSet."Global Dimension 1 Code";
+            MemberApplication."Global Dimension 2 Code" :=
+                UserSet."Global Dimension 2 Code";
+            MemberApplication."Responsibility Center" :=
+                UserSet."Responsibility Centre";
         end else
             Error('%1 must be set up in user setup', UserId);
 
-
         if MemberApplication.Insert() then begin
-            if not GlobalFunctions.AssignUserTasks(DepartMent::RECORDS, SubDepartments::"Members Applications", RecordID) then
+            if not GlobalFunctions.AssignUserTasks(
+                DepartMent::RECORDS,
+                SubDepartments::"Members Applications",
+                MemberApplication."No.") then
                 exit(false)
             else
                 exit(true);

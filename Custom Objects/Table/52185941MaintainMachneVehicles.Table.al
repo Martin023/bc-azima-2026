@@ -151,13 +151,15 @@ table 52185941 "Maintain Machne/Vehicles"
     Trigger OnInsert()
     var
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
     begin
 
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Repair No.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Repair No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Repair No.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Repair No.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
         Rec."Created at" := CURRENTDATETIME;
         Rec."Created by" := USERID;
@@ -174,7 +176,8 @@ table 52185941 "Maintain Machne/Vehicles"
     var
         ASSET: Record "Fixed Asset";
         Contracts: Record Contracts;
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         MembNoSeries: Record "Credit Nos. Series";
         CompanyVehicles: Record "Company Vehicles";
         Vendor : Record Vendor;

@@ -581,7 +581,8 @@ table 52185914 "Staff Advance Header"
             GenLedgerSetup.Get;
             TestNoSeries;
             //NoSeriesMgt.InitSeries(GetNoSeriesCode,xRec."No. Series",0D,"No.","No. Series");
-            NoSeriesMgt.InitSeries(GenLedgerSetup."Other Staff Advance No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(GenLedgerSetup."Other Staff Advance No.");
+            // NoSeriesMgt.InitSeries(GenLedgerSetup."Other Staff Advance No.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         /*
@@ -633,7 +634,8 @@ table 52185914 "Staff Advance Header"
         Vend: Record Vendor;
         FA: Record "Fixed Asset";
         BankAcc: Record "Bank Account";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         GenLedgerSetup: Record "Cash Office Setup";
         RecPayTypes: Record "Receipts and Payment Types";
         GLAccount: Record "G/L Account";

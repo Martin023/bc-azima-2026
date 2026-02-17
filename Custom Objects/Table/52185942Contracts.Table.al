@@ -444,7 +444,8 @@ table 52185942 Contracts
         if "Contract No" = '' then begin
             NoseriesSetup.Get;
             NoseriesSetup.TestField(NoseriesSetup."Contract No");
-            NoSeriesMgt.InitSeries(NoseriesSetup."Contract No", xRec."No. Series", 0D, "Contract No", "No. Series");
+            "Contract No" := NoSeriesMgt.GetNextNo(NoseriesSetup."Contract No");
+            // NoSeriesMgt.InitSeries(NoseriesSetup."Contract No", xRec."No. Series", 0D, "Contract No", "No. Series");
         end;
 
         UserSetup.Reset;
@@ -473,7 +474,8 @@ table 52185942 Contracts
         Cust: Record Customer;
         Vend: Record Vendor;
         PurchSetup: Record "Purchases & Payables Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Hrempl: Record "HR Employees";
         ContractLineType: Record "Contract Lines Types";
         UserSetup: Record "User Setup";

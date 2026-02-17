@@ -133,13 +133,15 @@ table 52185592 "HR Promo. Recommend Header"
         if No = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Employee Promotion No.");
-            NoSeriesMgt.InitSeries(HRSetup."Employee Promotion No.", xRec."No Series", 0D, No, "No Series");
+            No := NoSeriesMgt.GetNextNo(HRSetup."Employee Promotion No.");
+            // NoSeriesMgt.InitSeries(HRSetup."Employee Promotion No.", xRec."No Series", 0D, No, "No Series");
         end;
     end;
 
     var
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         HREmployees: Record "HR Employees";
         Jobs: Record "HR Jobs";
 }

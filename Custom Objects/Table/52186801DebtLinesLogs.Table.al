@@ -77,7 +77,8 @@ table 52186801 "Debt Lines Logs"
     var
         RecoveryHeader: Record "Loan Recovery Header";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record "User Setup";
 
     procedure CalculateAmount()

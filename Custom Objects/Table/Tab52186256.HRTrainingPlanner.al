@@ -106,7 +106,8 @@ table 52186256 "HR Training Planner"
         if No = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Training Planner Nos.");
-            NoSeriesMgt.InitSeries(HRSetup."Training Planner Nos.", xRec."No series", 0D, No, "No series");
+            No := NoSeriesMgt.GetNextNo(HRSetup."Training Planner Nos.");
+            // NoSeriesMgt.InitSeries(HRSetup."Training Planner Nos.", xRec."No series", 0D, No, "No series");
 
             "User ID" := UserId;
         end;
@@ -114,6 +115,6 @@ table 52186256 "HR Training Planner"
 
     var
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         GlobalFunctions: Codeunit "Global Functions";
 }

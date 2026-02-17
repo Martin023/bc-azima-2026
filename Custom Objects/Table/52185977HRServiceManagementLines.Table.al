@@ -101,14 +101,16 @@ table 52185977 "HR Service Management Lines"
             HrSetup.Get;
             begin
                 TestNoSeries;
-                NoSeriesMgt.InitSeries(HrSetup."Service Management No", xRec."No. Series", 0D, Code, "No. Series");
+                Code := NoSeriesMgt.GetNextNo(HrSetup."Service Management No");
+                // NoSeriesMgt.InitSeries(HrSetup."Service Management No", xRec."No. Series", 0D, Code, "No. Series");
             end;
         end;
     end;
 
     var
         FixedAsset: Record "Fixed Asset";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         HrSetup: Record "HR Setup";
 
     local procedure TestNoSeries(): Boolean

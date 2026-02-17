@@ -3237,42 +3237,42 @@ page 52186583 "Audit Role center"
                                 RunObject = Page "Online Users";
                             }
                         }
-                        group("Internet Loans")
-                        {
-                            Caption = 'Internet Loans';
+                        // group("Internet Loans")
+                        // {
+                        //     Caption = 'Internet Loans';
 
-                            group("Internet Loans Lists")
-                            {
-                                action("Online Loans")
-                                {
-                                    ApplicationArea = Basic;
-                                    Caption = 'Online Loans';
-                                    RunObject = Page "Online Loans";
-                                }
-                                action("Internet Loan Application List")
-                                {
-                                    ApplicationArea = Basic;
-                                    Caption = 'Internet Loan Application List';
-                                    RunObject = Page "Internet Loan Application List";
-                                }
-                                action("Approved Portal Loan App List")
-                                {
-                                    ApplicationArea = Basic;
-                                    Caption = 'Approved Portal Loan App List';
-                                    RunObject = Page "Approved Portal Loan App List";
-                                }
-                            }
-                            group("Internet Loan Task")
-                            {
-                                Caption = 'Internet Loan Task';
+                        //     group("Internet Loans Lists")
+                        //     {
+                        //         action("Online Loans")
+                        //         {
+                        //             ApplicationArea = Basic;
+                        //             Caption = 'Online Loans';
+                        //             RunObject = Page "Online Loans";
+                        //         }
+                        //         action("Internet Loan Application List")
+                        //         {
+                        //             ApplicationArea = Basic;
+                        //             Caption = 'Internet Loan Application List';
+                        //             RunObject = Page "Internet Loan Application List";
+                        //         }
+                        //         action("Approved Portal Loan App List")
+                        //         {
+                        //             ApplicationArea = Basic;
+                        //             Caption = 'Approved Portal Loan App List';
+                        //             RunObject = Page "Approved Portal Loan App List";
+                        //         }
+                        //     }
+                        //     group("Internet Loan Task")
+                        //     {
+                        //         Caption = 'Internet Loan Task';
 
-                                action("Rejected Portal Loan App List")
-                                {
-                                    ApplicationArea = Basic;
-                                    Caption = 'Rejected Portal Loan App List';
-                                    RunObject = Page "Rejected Internet Loan List";
-                                }
-                            }
+                        //         action("Rejected Portal Loan App List")
+                        //         {
+                        //             ApplicationArea = Basic;
+                        //             Caption = 'Rejected Portal Loan App List';
+                        //             RunObject = Page "Rejected Internet Loan List";
+                        //         }
+                        //     }
                             group("Loans Archive")
                             {
                                 Caption = 'Loans Archive';

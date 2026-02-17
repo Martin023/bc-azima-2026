@@ -493,8 +493,9 @@ table 52185912 "Staff Claims Header"
             GenLedgerSetup.Get;
             if "Payment Type" = "Payment Type"::Imprest then begin
                 TestNoSeries;
-                //NoSeriesMgt.InitSeries(GetNoSeriesCode,xRec."No. Series",0D,"No.","No. Series");
-                NoSeriesMgt.InitSeries(GenLedgerSetup."Staff Claim No.", xRec."No. Series", 0D, "No.", "No. Series");
+                //was commented //NoSeriesMgt.InitSeries(GetNoSeriesCode,xRec."No. Series",0D,"No.","No. Series");
+                "No." := NoSeriesMgt.GetNextNo(GenLedgerSetup."Staff Claim No.");
+                // NoSeriesMgt.InitSeries(GenLedgerSetup."Staff Claim No.", xRec."No. Series", 0D, "No.", "No. Series");
             end
         end;
 
@@ -549,7 +550,8 @@ table 52185912 "Staff Claims Header"
         Vend: Record Vendor;
         FA: Record "Fixed Asset";
         BankAcc: Record "Bank Account";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         GenLedgerSetup: Record "Cash Office Setup";
         RecPayTypes: Record "Receipts and Payment Types";
         GLAccount: Record "G/L Account";

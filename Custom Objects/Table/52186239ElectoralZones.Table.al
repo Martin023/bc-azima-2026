@@ -161,7 +161,8 @@ table 52186239 "Electoral Zones"
         if Code = '' then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."ECLT Zones");
-            NoSeriesMgt.InitSeries(NoSetup."ECLT Zones", xRec.code, 0D, code, "No. Series");
+            Code := NoSeriesMgt.GetNextNo(NoSetup."ECLT Zones");
+            // NoSeriesMgt.InitSeries(NoSetup."ECLT Zones", xRec.code, 0D, code, "No. Series");
             "Created By" := UserId;
             "Date Entered" := Today;
         end;
@@ -170,7 +171,8 @@ table 52186239 "Electoral Zones"
     var
         ElectrolZonesAreaSvrCenter: Record "Electrol Zones/Area Svr Center";
         MembNoSeries: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         SegmentCountyDividendSignat: Record "Segment/County/Dividend/Signat";
         DimensionValue: Record "Dimension Value";
         Members: Record Members;

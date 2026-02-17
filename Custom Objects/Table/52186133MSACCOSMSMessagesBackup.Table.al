@@ -78,6 +78,7 @@ table 52186133 "M-SACCO SMS MessagesBackup"
     
     var
         NoSetup: Record "General Ledger Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 }
 

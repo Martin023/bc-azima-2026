@@ -179,7 +179,7 @@ table 52185701 "Next of KIN"
 
         if Identification = '' then begin
             if "System UID" = '' then begin
-                Identification := PasswordHandler.GeneratePassword(10);
+                Identification := PasswordHandler.GenerateSecretPassword(10);
                 "System UID" := Identification;
             end else begin
                 Identification := "System UID";

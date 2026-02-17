@@ -574,8 +574,9 @@ table 52185889 "Receipts Header"
         if "No." = '' then begin
             GenLedgerSetup.Get;
             TestNoSeries;
-            //NoSeriesMgt.InitSeries(GetNoSeriesCode,xRec."No. Series",0D,"No.","No. Series");
-            NoSeriesMgt.InitSeries(GenLedgerSetup."Receipts No", xRec."No. Series", 0D, "No.", "No. Series");
+            // was commented//NoSeriesMgt.InitSeries(GetNoSeriesCode,xRec."No. Series",0D,"No.","No. Series");
+                "No." := NoSeriesMgt.GetNextNo(GenLedgerSetup."Receipts No");
+            // NoSeriesMgt.InitSeries(GenLedgerSetup."Receipts No", xRec."No. Series", 0D, "No.", "No. Series");
         end;
         Cashier := UserId;
         UserTemplate.Reset;
@@ -629,7 +630,8 @@ table 52185889 "Receipts Header"
 
     var
         GenLedgerSetup: Record "Cash Office Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserTemplate: Record "Cash Office User Template";
         RLine: Record "Receipt Line";
         RespCenter: Record "Responsibility CenterBR";

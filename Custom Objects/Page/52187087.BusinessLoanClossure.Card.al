@@ -1140,11 +1140,6 @@ page 52187087 "Business Loan Clossure Card"
         OpenApprovalEntriesExistForCurrUser: Boolean;
         OpenApprovalEntriesExist: Boolean;
         PageEitable: Boolean;
-        RecRef: RecordRef;
-        NoSeriesMgt: Codeunit NoSeriesManagement;
-        CreditNoSeries: Record "Credit Nos. Series";
-        //SeriesSetup: Record "Credit Nos. Series";
-        SystemEditsCodeunit: Codeunit "System Editss";
         SavingsAccounts: Record "Savings Accounts";
         Loans: Record Loans;
         JournalPosting: Codeunit "Journal Posting";

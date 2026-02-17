@@ -670,25 +670,14 @@ page 52187118 "MKey Page"
 
 
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
         UserSetUp: Record "User Setup";
         CaseTracker: Record "CF Tracker";
         CFPage: Page "DMU CF Page";
         CFStations: Record "CF Station Actions";
         Comments: Record Comments;
-        Loans: Record Loans;
         DMUCFLines: Record "DMU Case Forwarding Lines";
-        CFLines: Record "DMU Case Forwarding Lines";
-        LoanRecoveryHeader: Record "Loan Recovery Header";
-        DMUCFHeader: Record "DMU Case Forwarding";
-        AvailableUsers: Record "Present Users";
-        SMSHeaders: Dictionary of [Integer, Code[50]];
         GlobalFunctions: Codeunit "Global Functions";
-        SubDepartments: Enum "Sub Module";
         MkeyLines: Record "MKey Lines";
-
-        ActionedVisible: Boolean;
-        Closed: Boolean;
         GeneralTabEditable: Boolean;
         LinesTabEditable: Boolean;
         SendCaseVisible: Boolean;
@@ -702,16 +691,6 @@ page 52187118 "MKey Page"
         PeriodEditable: Boolean;
         PeriodNameEditable: Boolean;
         CaseInstructionEditable: Boolean;
-
-
-        intProgressTotal: Integer;
-        intProgressI: Integer;
-        TimeProgress: TIME;
-        NoOfRecsProgress: Decimal;
-        NoOfProgressed: Integer;
-        diaProgress: Dialog;
-        intProgress: Integer;
-
         //Workflows
         SendApprovalVisible: Boolean;
         ReopenVisible: Boolean;

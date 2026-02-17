@@ -471,7 +471,8 @@ table 52186072 "Loan Calculator"
     var
         RejectionReason: Record "Exceptions/ Rejection Reason";
         MembNoSeries: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         ProdFac: Record "Product Factory";
         SavAcc: Record "Savings Accounts";
         LoanApp: Record Loans;

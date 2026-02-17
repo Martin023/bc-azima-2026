@@ -118,7 +118,6 @@ page 52185565 "HR Leave Reimbursment List1"
         HRJobs: Record "HR Jobs";
         SupervisorName: Text[60];
         //SMTP: Codeunit "SMTP Mail";
-        URL: Text[500];
         dAlloc: Decimal;
         dEarnd: Decimal;
         dTaken: Decimal;
@@ -128,12 +127,7 @@ page 52185565 "HR Leave Reimbursment List1"
         cbf: Decimal;
         HRSetup: Record "HR Setup";
         EmpDept: Text[30];
-        HRLeaveApp: Record "HR Leave Application";
-        DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition,ImprestSurrender,Interbank,Receipt,"Staff Claim","Staff Advance",AdvanceSurrender,"Store Requisition","Employee Requisition","Leave Application","Transport Requisition","Training Requisition","Job Approval";
-        //// //ApprovalEntries: Page "Approval Entries";
-        HRLeaveLedgerEntries: Record "HR Leave Ledger Entries";
         EmpName: Text[70];
-        ApprovalComments: Page "Approval Comments";
 
         "Application CodeEditable": Boolean;
 
@@ -160,22 +154,13 @@ page 52185565 "HR Leave Reimbursment List1"
         "Date of ExamEditable": Boolean;
 
         NumberofPreviousAttemptsEditab: Boolean;
-        Text19010232: Label 'Leave Statistics';
-        Text1: Label 'Reliver Details';
-        NoSeriesMgt: Codeunit NoSeriesManagement;
-        UserSetup: Record "User Setup";
         varDaysApplied: Integer;
         HRLeaveTypes: Record "HR Leave Types";
         BaseCalendarChange: Record "Base Calendar Change";
         ReturnDateLoop: Boolean;
-        mSubject: Text[250];
-        ApplicantsEmail: Text[30];
         LeaveGjline: Record "HR Leave Journal Line";
         "LineNo.": Integer;
-        sDate: Record Date;
-        Customized: Record "HR Leave Calendar Lines";
         HREmailParameters: Record "HR E-Mail Parameters";
-        HRJournalBatch: Record "HR Leave Journal Batch";
 
     //[Scope('OnPrem')]
     procedure FillVariables()

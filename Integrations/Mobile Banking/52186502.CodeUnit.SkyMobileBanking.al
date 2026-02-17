@@ -7244,7 +7244,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         SearchMember: record Members;
         TheSTORequest: Record "Standing Order Header";
         TheSTOLines: Record "Standing Order Lines";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         SeriesSetup: Record "Banking No Setup";
         TheMemberFosaAccount: Record "Savings Accounts";
         TheMemberLoan: Record Loans;

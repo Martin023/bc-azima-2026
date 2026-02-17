@@ -266,7 +266,8 @@ table 52185586 "HR Individual Targets Header"
         if "Appraisal No" = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Appraisal Nos");
-            NoSeriesMgt.InitSeries(HRSetup."Appraisal Nos", xRec."No series", 0D, "Appraisal No", "No series");
+            "Appraisal No" := NoSeriesMgt.GetNextNo(HRSetup."Appraisal Nos");
+            // NoSeriesMgt.InitSeries(HRSetup."Appraisal Nos", xRec."No series", 0D, "Appraisal No", "No series");
         end;
         /*
          //check if period is for capturing target setting or achievement then fill the necessary fields----
@@ -299,7 +300,8 @@ table 52185586 "HR Individual Targets Header"
 
     var
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record "User Setup";
         HREmp: Record "HR Employees";
         BaseCalendarChange: Record "Base Calendar Change";

@@ -270,7 +270,8 @@ table 52187059 "Conference & Meeting Rooms-T"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Conference/Meeting Room No.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Conference/Meeting Room No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Conference/Meeting Room No.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Conference/Meeting Room No.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
         Rec."Created at" := CURRENTDATETIME;
         Rec."Created By" := UserId;
@@ -292,7 +293,7 @@ table 52187059 "Conference & Meeting Rooms-T"
     end;
 
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         SeriesSetup: Record "Credit Nos. Series";
         ConfAndMeetingRoomList: Record "Conf & Meeting Rooms List";
         ConferenceAndMeetingRoom: Record "Conference & Meeting Rooms-T";

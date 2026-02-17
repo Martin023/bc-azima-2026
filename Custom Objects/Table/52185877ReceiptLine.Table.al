@@ -970,7 +970,8 @@ table 52185877 "Receipt Line"
         BankAcc: Record "Bank Account";
         SavingsAcc: Record "Savings Accounts";
         CreditAcc: Record "Credit Accounts";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         GenLedgerSetup: Record "Cash Office Setup";
         RecPayTypes: Record "Receipts and Payment Types";
         VATPostingSetup: Record "VAT Posting Setup";

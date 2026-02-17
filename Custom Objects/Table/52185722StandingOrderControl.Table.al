@@ -165,7 +165,8 @@ table 52185722 "Standing Order Control"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Standing Order Control Nos.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Standing Order Control Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Standing Order Control Nos.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Standing Order Control Nos.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         "Document Date" := Today;
@@ -174,6 +175,7 @@ table 52185722 "Standing Order Control"
 
     var
         SeriesSetup: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 }
 

@@ -212,7 +212,8 @@ table 52186037 "Salary Agreement"
         if No = '' then begin
             SeriesSetup.Get();
             SeriesSetup.TestField(SeriesSetup."Salary Agreement No");
-            NoSeriesMgt.InitSeries(SeriesSetup."Salary Agreement No", xRec."No.Series", 0D, No, "No.Series");
+            No := NoSeriesMgt.GetNextNo(SeriesSetup."Salary Agreement No");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Salary Agreement No", xRec."No.Series", 0D, No, "No.Series");
         end;
 
         "Date Captured" := Today;
@@ -246,7 +247,8 @@ table 52186037 "Salary Agreement"
         SalesSetup: Record "Sales & Receivables Setup";
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Members: Record Members;
         SavingsAccounts: Record "Savings Accounts";
         Txt001: Label 'With Effect Date Cannot be less than Capture date';

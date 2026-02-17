@@ -170,14 +170,15 @@ table 52186246 "Batching Process Table"
             if "No." = '' then begin
                 SeriesSetup.Get;
                 SeriesSetup.TestField(SeriesSetup."File Batching No.");
-                NoSeriesMgt.InitSeries(SeriesSetup."File Batching No.", xRec."No. Series", 0D, "No.", "No. Series");
+                "No." := NoSeriesMgt.GetNextNo(SeriesSetup."File Batching No.");
+                // NoSeriesMgt.InitSeries(SeriesSetup."File Batching No.", xRec."No. Series", 0D, "No.", "No. Series");
             end;
         end;
     end;
 
     var
         MembNoSeries: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         FileVolumes: Record "File Volumes";
         BatchLines: Record "Batch Lines Table";
         FilesTable: Record "Files Table";

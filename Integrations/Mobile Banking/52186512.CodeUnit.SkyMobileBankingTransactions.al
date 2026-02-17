@@ -1894,7 +1894,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
         CreditAccounts: record "Credit Accounts";
         LoansProcess: Codeunit "Loans Process";
         NoSeries: record "No. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         LoanNo: Code[50];
         MobileLnNoSeries: record "Credit Nos. Series";
         Members: Record Members;

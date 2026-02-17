@@ -174,7 +174,8 @@ table 52185580 "HR Training App Header"
         if "Application No" = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Training Application Nos.");
-            NoSeriesMgt.InitSeries(HRSetup."Training Application Nos.", xRec."No. Series", 0D, "Application No", "No. Series");
+            "Application No" := NoSeriesMgt.GetNextNo(HRSetup."Training Application Nos.");
+            // NoSeriesMgt.InitSeries(HRSetup."Training Application Nos.", xRec."No. Series", 0D, "Application No", "No. Series");
         end;
 
         "Application Date" := Today;
@@ -184,7 +185,8 @@ table 52185580 "HR Training App Header"
     var
         HRTrainingNeeds: Record "HR Training Needs";
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         mcontent: Label 'Status must be new on Training Application No.';
         mcontent2: Label '. Please cancel the approval request and try again';
         HREmp: Record "HR Employees";

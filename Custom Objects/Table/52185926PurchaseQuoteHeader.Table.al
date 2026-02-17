@@ -778,7 +778,8 @@ table 52185926 "Purchase Quote Header"
             PurchSetup.Reset;
             PurchSetup.Get();
             PurchSetup.TestField(PurchSetup."Quotation Request No");
-            NoSeriesMgt.InitSeries(PurchSetup."Quotation Request No", xRec."No. Series", Today, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(PurchSetup."Quotation Request No");
+            // NoSeriesMgt.InitSeries(PurchSetup."Quotation Request No", xRec."No. Series", Today, "No.", "No. Series");
         end;
 
 
@@ -846,7 +847,8 @@ table 52185926 "Purchase Quote Header"
         Text049: Label '%1 is set up to process from %2 %3 only.';
         Text050: Label 'Reservations exist for this order. These reservations will be canceled if a date conflict is caused by this change.\\';
         PurchSetup: Record "Purchases & Payables Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         location: Record Location;
         PurchHeader: Record "Purchase Header";
         PurchLine: Record "Purchase Quote Line";

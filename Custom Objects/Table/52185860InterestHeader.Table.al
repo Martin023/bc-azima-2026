@@ -172,7 +172,8 @@ table 52185860 "Interest Header"
         if "No." = '' then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."Billing Nos.");
-            NoSeriesMgt.InitSeries(NoSetup."Billing Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(NoSetup."Billing Nos.");
+            // NoSeriesMgt.InitSeries(NoSetup."Billing Nos.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         Cashier := UserId;
@@ -192,7 +193,8 @@ table 52185860 "Interest Header"
     end;
 
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record "User Setup";
         NoSetup: Record "Credit Nos. Series";
         CUST: Record Customer;

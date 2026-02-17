@@ -564,7 +564,8 @@ table 52187415 "Fosa Payments Header"
         if "No." = '' then begin
             GenLedgerSetup.Get;
             GenLedgerSetup.TestField(GenLedgerSetup."FOSA Payments No");
-            NoSeriesMgt.InitSeries(GenLedgerSetup."FOSA Payments No", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(GenLedgerSetup."FOSA Payments No");
+            // NoSeriesMgt.InitSeries(GenLedgerSetup."FOSA Payments No", xRec."No. Series", 0D, "No.", "No. Series");
 
         end;
 
@@ -610,7 +611,8 @@ table 52187415 "Fosa Payments Header"
         Vend: Record Vendor;
         FA: Record "Fixed Asset";
         BankAcc: Record "Bank Account";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         GenLedgerSetup: Record "Cash Office Setup";
         RecPayTypes: Record "Receipts and Payment Types";
         GLAccount: Record "G/L Account";

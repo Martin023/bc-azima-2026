@@ -761,7 +761,6 @@ page 52187098 "DMU CF Page"
     end;
 
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
         UserSetUp: Record "User Setup";
         CaseTracker: Record "CF Tracker";
         CFPage: Page "DMU CF Page";
@@ -776,24 +775,18 @@ page 52187098 "DMU CF Page"
         SMSHeaders: Dictionary of [Integer, Code[50]];
         GlobalFunctions: Codeunit "Global Functions";
         SubDepartments: Enum "Sub Module";
-
-        ActionedVisible: Boolean;
-        Closed: Boolean;
         GeneralTabEditable: Boolean;
         LinesTabEditable: Boolean;
         SendCaseVisible: Boolean;
         RecallVisible: Boolean;
         CurrentUsersDept: Code[30];
         EmployerCodeEditable: Boolean;
-
         RunSasraandFallOffVisible: Boolean;
         CloseCaseVisible: Boolean;
         ActionCaseVisible: Boolean;
         PeriodEditable: Boolean;
         PeriodNameEditable: Boolean;
         CaseInstructionEditable: Boolean;
-
-
         intProgressTotal: Integer;
         intProgressI: Integer;
         TimeProgress: TIME;

@@ -364,7 +364,8 @@ table 52185508 "HR Jobs"
         if "Job ID" = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Job ID Nos");
-            NoSeriesMgt.InitSeries(HRSetup."Job ID Nos", xRec."No. Series", 0D, "Job ID", "No. Series");
+            "Job ID" := NoSeriesMgt.GetNextNo(HRSetup."Job ID Nos");
+            // NoSeriesMgt.InitSeries(HRSetup."Job ID Nos", xRec."No. Series", 0D, "Job ID", "No. Series");
         end;
 
 
@@ -404,7 +405,8 @@ table 52185508 "HR Jobs"
         RespCenter: Record "Responsibility Center";
         HRJobs: Record "HR Jobs";
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        noSeriesMgt: Codeunit "No. Series";
         HRJobResponsiblities: Record "HR Job Responsiblities";
         HRJobRequirements: Record "HR Job Requirements";
         UserSetup: record "User Setup";

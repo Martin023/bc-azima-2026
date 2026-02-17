@@ -778,9 +778,6 @@ page 52187081 "System Edits Card"
         CustomApprovals: Codeunit "Custom Approvals Codeunit";
         VarVariant: Variant;
         RecRef: RecordRef;
-        NoSeriesMgt: Codeunit NoSeriesManagement;
-        CreditNoSeries: Record "Credit Nos. Series";
-        SystemEditsCodeunit: Codeunit "System Editss";
         GeneralTabEditable: Boolean;
         ControlTabEditable: Boolean;
         SetFiltersVisible: boolean;

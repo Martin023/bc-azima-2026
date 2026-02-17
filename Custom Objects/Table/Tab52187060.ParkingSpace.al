@@ -284,7 +284,8 @@ table 52187060 "Parking Space"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Parking Space No.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Parking Space No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Parking Space No.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Parking Space No.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
         Rec."Created at" := CURRENTDATETIME;
         Rec."Created By" := UserId;
@@ -308,7 +309,7 @@ table 52187060 "Parking Space"
 
     var
         MembNoSeries: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         HREmployees: Record "HR Employees";
         Customer: Record Customer;
         ParkingList: Record "Parking List Table";

@@ -26,28 +26,31 @@ page 52186805 "Loan Recovery Header II"
                     trigger OnValidate()
                     var
                         CreditNosSeries: Record "Credit Nos. Series";
-                        NoSeriesMgt: Codeunit NoSeriesManagement;
+                        NoSeriesMgt: Codeunit "No. Series";
                     begin
 
                         if Rec."Recovery Type" = Rec."Recovery Type"::"Recovery and Attachment" then begin
                             if Rec."No." = '' then begin
                                 CreditNosSeries.Get;
                                 CreditNosSeries.TestField(CreditNosSeries."Loan Attachment");
-                                NoSeriesMgt.InitSeries(CreditNosSeries."Loan Attachment", xRec."No. Series", 0D, Rec."No.", Rec."No. Series");
+                                // NoSeriesMgt.InitSeries(CreditNosSeries."Loan Attachment", xRec."No. Series", 0D, Rec."No.", Rec."No. Series");
+                                Rec."No." := NoSeriesMgt.GetNextNo(CreditNosSeries."Loan Attachment");
                             end;
                         end;
                         if Rec."Recovery Type" = Rec."Recovery Type"::Reappotionment then begin
                             if Rec."No." = '' then begin
                                 CreditNosSeries.Get;
                                 CreditNosSeries.TestField(CreditNosSeries."Loan Reappotionment");
-                                NoSeriesMgt.InitSeries(CreditNosSeries."Loan Reappotionment", xRec."No. Series", 0D, Rec."No.", Rec."No. Series");
+                                // NoSeriesMgt.InitSeries(CreditNosSeries."Loan Reappotionment", xRec."No. Series", 0D, Rec."No.", Rec."No. Series");
+                                Rec."No." :=NoSeriesMgt.GetNextNo(CreditNosSeries."Loan Reappotionment");
                             end;
                         end;
                         if Rec."Recovery Type" = Rec."Recovery Type"::Reversal then begin
                             if Rec."No." = '' then begin
                                 CreditNosSeries.Get;
                                 CreditNosSeries.TestField(CreditNosSeries."Loan Reversal");
-                                NoSeriesMgt.InitSeries(CreditNosSeries."Loan Reversal", xRec."No. Series", 0D, Rec."No.", Rec."No. Series");
+                                // NoSeriesMgt.InitSeries(CreditNosSeries."Loan Reversal", xRec."No. Series", 0D, Rec."No.", Rec."No. Series");
+                                Rec."No." := NoSeriesMgt.GetNextNo(CreditNosSeries."Loan Reversal");
                             end;
                         end;
                     end;

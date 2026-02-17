@@ -164,7 +164,8 @@ table 52185809 "Investment Lines"
 
     var
         InstitutionRec: Record Vendor;
-        NoseriesMgt: Codeunit NoSeriesManagement;
+        // NoseriesMgt: Codeunit NoSeriesManagement;
+        NoseriesMgt: Codeunit "No. Series";
         Invheader: Record "Investment Header";
         TarrifCodes: Record "Tariff Code s";
         NoofDays: Integer;

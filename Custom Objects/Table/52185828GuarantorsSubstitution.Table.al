@@ -289,7 +289,8 @@ table 52185828 "Guarantors Substitution"
         if "No." = '' then begin
             CreditNosSeries.Get;
             CreditNosSeries.TestField(CreditNosSeries."Guarantors Substitution");
-            NoSeriesMgt.InitSeries(CreditNosSeries."Guarantors Substitution", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(CreditNosSeries."Guarantors Substitution");
+            // NoSeriesMgt.InitSeries(CreditNosSeries."Guarantors Substitution", xRec."No. Series", 0D, "No.", "No. Series");
 
         end;
         GlobalFunctions.AssignUserTasks(DepartMent::BOSA, SubDepartments::"Guarantor Substitution", Rec."No.");
@@ -417,7 +418,8 @@ table 52185828 "Guarantors Substitution"
         SkySendEmail: CodeUnit "Sky Send Email";
         SMSSource: Enum "SMS Source";
         CreditNosSeries: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         LGuarant: Record "Loan Guarantors Sub";
         Lguarantx: Record "Loan Guarantors and Security";
         Loan: Record Loans;

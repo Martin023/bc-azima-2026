@@ -123,7 +123,9 @@ table 52187071 "User Termination"
 
             SeriesSetup.Get();
             SeriesSetup.TestField(SeriesSetup."User Termination");
-            NoSeriesMgt.InitSeries(SeriesSetup."User Termination", xRec."No.Series", 0D, "Request ID", "No.Series");
+            // NoSeriesMgt.InitSeries(SeriesSetup."User Termination", xRec."No.Series", 0D, "Request ID", "No.Series");
+
+            "Request ID" := NoSeriesMgt.GetNextNo(SeriesSetup."User Termination");
         end;
 
         "Request Date" := Today;
@@ -146,7 +148,7 @@ table 52187071 "User Termination"
     var
         HREmployees: Record "HR Employees";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+       NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record "User Setup";
         users: Record User;
 

@@ -172,7 +172,8 @@ table 52185811 "Teller Transheader"
 
     var
         NoSetup: Record "Dividend Instructions - Member";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         cust: Record "Social Listening Sites App.";
         "GL Account": Record "G/L Account";
         BANKACC: Record "Bank Account";

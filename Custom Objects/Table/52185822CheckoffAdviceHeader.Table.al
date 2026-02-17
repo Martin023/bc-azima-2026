@@ -116,7 +116,8 @@ table 52185822 "Checkoff Advice Header"
         if "No." = '' then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."Advice No.");
-            NoSeriesMgt.InitSeries(NoSetup."Advice No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(NoSetup."Advice No.");
+            // NoSeriesMgt.InitSeries(NoSetup."Advice No.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         "Date Entered" := Today;
@@ -125,7 +126,8 @@ table 52185822 "Checkoff Advice Header"
 
     var
         NoSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Text000: Label '<Month Text>';
         Emp: Record Customer;
         Txt0001: Label 'You cannot delete processed buffer';
