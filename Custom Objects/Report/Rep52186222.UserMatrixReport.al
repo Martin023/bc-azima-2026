@@ -4,7 +4,7 @@ report 52186222 "User Matrix Report"
     ApplicationArea = All;
     Caption = 'User Roles Report';
     DefaultLayout = RDLC;
-    RdlcLayout = './bc-kenpipe-2024\Layout\UserRolesReport.rdl';
+    RdlcLayout = './bc-azima-2026\Layout\UserRolesReport.rdl';
 
     dataset
     {

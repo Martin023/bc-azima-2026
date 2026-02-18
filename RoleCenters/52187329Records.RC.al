@@ -1662,7 +1662,7 @@ page 52187329 "Records"
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'General Set-Up';
-                        RunObject = page "Gen set-up card";
+                        // RunObject = page "Gen set-up card";
                     }
                     action("No. Setup")
                     {

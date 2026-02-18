@@ -6,7 +6,7 @@ report 52186241 "End Year Interest Report"
     ApplicationArea = All;
     Caption = 'End Year Interest Report';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = './bc-kenpipe-2024/Layout/End Year Account Interest.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/End Year Account Interest.rdl';
     dataset
     {
         dataitem(EndYearTransferHeader; "End Year Transfer Header")

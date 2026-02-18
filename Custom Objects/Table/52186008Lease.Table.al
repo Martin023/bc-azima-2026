@@ -340,7 +340,6 @@ table 52186008 Lease
 
             trigger OnValidate()
             var
-                DOPaymentTransLogEntry: Record "DO Payment Trans. Log Entry";
             begin
                 if not (CurrFieldNo in [0, FieldNo("Date Registered")]) or ("Currency Code" <> xRec."Currency Code") then
                     TestField(Status, Status::Open);

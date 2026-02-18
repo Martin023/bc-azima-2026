@@ -1,8 +1,8 @@
 controladdin "Image Viewer"
 {
-    Scripts = 'bc-kenpipe-2024/Integrations/EDMS/ImageViewer/script.js';
-    StartupScript = 'bc-kenpipe-2024/Integrations/EDMS/ImageViewer/Startup.js';
-    StyleSheets = 'bc-kenpipe-2024/Integrations/EDMS/ImageViewer/stylesheet.css';
+    Scripts = 'bc-azima-2026/Integrations/EDMS/ImageViewer/script.js';
+    StartupScript = 'bc-azima-2026/Integrations/EDMS/ImageViewer/Startup.js';
+    StyleSheets = 'bc-azima-2026/Integrations/EDMS/ImageViewer/stylesheet.css';
 
     MinimumHeight = 400;
     MinimumWidth = 100;
