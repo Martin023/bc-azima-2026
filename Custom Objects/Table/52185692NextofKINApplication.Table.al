@@ -24,7 +24,7 @@ table 52185692 "Next of KIN Application"
                         if "System UID" = '' then begin
 
                             secretText := PasswordHandler.GenerateSecretPassword(10);
-                            MyUniqueID := Format(secretText);
+                            MyUniqueID := UnwrapSecretPassword(secretText);
                             "System UID" := MyUniqueID;
                         end else
                             MyUniqueID := "System UID";
@@ -338,6 +338,12 @@ table 52185692 "Next of KIN Application"
         if Rec."From Member Register" then begin
             Error('You cannot delete this value because it''s from member register');
         end;
+    end;
+
+    [NonDebuggable]
+    local procedure UnwrapSecretPassword(SecretPassword: SecretText): Text
+    begin
+        exit(SecretPassword.Unwrap());
     end;
 }
 
