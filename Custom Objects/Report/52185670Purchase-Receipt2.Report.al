@@ -536,7 +536,7 @@ Report 52185670 "Purchase - Receipt2"
         SalesPurchPerson: Record "Salesperson/Purchaser";
         DimSetEntry1: Record "Dimension Set Entry";
         DimSetEntry2: Record "Dimension Set Entry";
-        Language: Record Language;
+        // Language: Record Language;
         RespCenter: Record "Responsibility CenterBR";
         RcptCountPrinted: Codeunit "Purch.Rcpt.-Printed";
         SegManagement: Codeunit SegManagement;

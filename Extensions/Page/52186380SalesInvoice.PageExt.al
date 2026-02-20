@@ -243,12 +243,12 @@ PageExtension 52187230 pageextension52187230 extends "Sales Invoice"
             end;
     end;
 
-    [IntegrationEvent(false, false)]
+    // [IntegrationEvent(false, false)]   ← removed attribute only (to fix AL0819)
     local procedure OnPostOnAfterSetDocumentIsPosted(SalesHeader: Record "Sales Header"; var IsScheduledPosting: Boolean; var DocumentIsPosted: Boolean)
     begin
     end;
 
-    [IntegrationEvent(true, false)]
+    // [IntegrationEvent(true, false)]   ← removed attribute only (to fix AL0819)
     local procedure OnPostDocumentBeforeNavigateAfterPosting(var SalesHeader: Record "Sales Header"; var PostingCodeunitID: Integer; var Navigate: Enum "Navigate After Posting"; DocumentIsPosted: Boolean; var IsHandled: Boolean)
     begin
     end;
@@ -280,7 +280,7 @@ PageExtension 52187230 pageextension52187230 extends "Sales Invoice"
         end;
     end;
 
-    [IntegrationEvent(false, false)]
+    // [IntegrationEvent(false, false)]   ← removed attribute only (to fix AL0819)
     local procedure OnPostOnBeforeSalesHeaderInsert(var SalesHeader: Record "Sales Header")
     begin
     end;
