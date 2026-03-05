@@ -1244,7 +1244,7 @@ table 52187416 "FOSA Payment Line"
         "Date To": Text[30];
         LastDay: Date;
         ImprestReqDet: Record "Imprest Details-User";
-        LoadImprestDetails: Record "Cash Payment Line";
+        // LoadImprestDetails: Record "Cash Payment Line";
         TotAmt: Decimal;
         DimVal: Record "Dimension Value";
         PHead: Record "FOSA Payments Header";

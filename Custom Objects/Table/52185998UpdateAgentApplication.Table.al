@@ -40,10 +40,10 @@ table 52185998 "Update Agent Application"
         field(9; "Mobile No"; Text[50])
         {
         }
-        field(11; "Approval Status"; Option)
+        field(11; "Approval Status"; Enum "Approval Status")
         {
-            OptionCaption = 'Open,Pending,Approved,Rejected';
-            OptionMembers = Open,Pending,Approved,Rejected;
+            // OptionCaption = 'Open,Pending,Approved,Rejected';
+            // OptionMembers = Open,Pending,Approved,Rejected;
 
             trigger OnValidate()
             begin

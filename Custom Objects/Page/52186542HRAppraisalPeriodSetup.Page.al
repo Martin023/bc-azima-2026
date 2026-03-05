@@ -48,7 +48,7 @@ page 52186542 "HR Appraisal Period Setup"
             action("Open / Close Period")
             {
                 Caption = 'Open / Close Period';
-                Image = Closeperiod;
+                Image = ClosePeriod;
                 Promoted = true;
                 PromotedCategory = Process;
 

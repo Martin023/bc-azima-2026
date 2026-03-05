@@ -343,10 +343,10 @@ table 52185730 "Savings Accounts"
             Caption = 'Base Calendar Code';
             TableRelation = "Base Calendar";
         }
-        field(40; Status; Option)
+        field(40; Status; Enum "Savings Account Status")
         {
-            OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
-            OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+            // OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
+            // OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
 
             trigger OnValidate()
             var

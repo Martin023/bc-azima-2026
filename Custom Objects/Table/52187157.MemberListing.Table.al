@@ -144,11 +144,11 @@ table 52187157 "Member Listing"
         {
             DataClassification = ToBeClassified;
         }
-        field(36; "FOSA Account Status"; Option)
+        field(36; "FOSA Account Status"; Enum "Savings Account Status")
         {
             DataClassification = ToBeClassified;
-            OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
-            OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+            // OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
+            // OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
         }
         field(37; "FOSA Balance"; Decimal)
         {
@@ -166,11 +166,11 @@ table 52187157 "Member Listing"
         {
             DataClassification = ToBeClassified;
         }
-        field(41; "BOSA Deposit Account Status"; Option)
+        field(41; "BOSA Deposit Account Status"; Enum "Savings Account Status")
         {
             DataClassification = ToBeClassified;
-            OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
-            OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+            // OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
+            // OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
         }
         field(42; "BOSA Deposits Monthly Contr."; Decimal)
         {
@@ -188,11 +188,11 @@ table 52187157 "Member Listing"
         {
             DataClassification = ToBeClassified;
         }
-        field(46; "BBF Account Status"; Option)
+        field(46; "BBF Account Status"; Enum "Savings Account Status")
         {
             DataClassification = ToBeClassified;
-            OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
-            OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+            // OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
+            // OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
         }
         field(47; "Transfer Share Capital"; Decimal)
         {
@@ -202,11 +202,11 @@ table 52187157 "Member Listing"
         {
             DataClassification = ToBeClassified;
         }
-        field(49; "Share Capital Ac Status"; Option)
+        field(49; "Share Capital Ac Status"; Enum "Savings Account Status")//Option)
         {
             DataClassification = ToBeClassified;
-            OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
-            OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+            // OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
+            // OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
         }
         field(50; "Share Capital Balance"; Decimal)
         {

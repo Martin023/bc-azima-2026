@@ -1,6 +1,6 @@
 page 52186098 "Performance Attributes Sheet"
 {
-    PageType = List;
+    PageType = ListPart;
     SourceTable = "Performance Attributes";
 
     layout

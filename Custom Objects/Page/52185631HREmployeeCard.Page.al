@@ -852,7 +852,7 @@ page 52185631 "HR Employee Card"
                 Caption = 'Approved Images';
                 SubPageLink = "Member No" = FIELD("Member No.");
             }
-            part("Attached Documents"; "Document Attachment Factbox")
+            part("Attached Documents"; "Doc. Attachment List Factbox")
             {
                 ApplicationArea = basic;
                 Caption = 'Attachments';

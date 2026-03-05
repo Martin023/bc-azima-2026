@@ -869,7 +869,8 @@ Codeunit 52185470 "Periodic Activities"
                             //Check status - sasra
                             GeneralSetUp.Get();
                             Loans.CalcFields("Loans Category-SASRA");
-                            if Loans."Loans Category-SASRA" < GeneralSetUp."Allowed Loan Cat Billing" then begin
+                            // if Loans."Loans Category-SASRA" < GeneralSetUp."Allowed Loan Cat Billing"
+                            if Loans."Loans Category-SASRA".AsInteger() <= GeneralSetUp."Allowed Loan Cat Billing".AsInteger() then begin
                                 Counter1 += 1;
                                 diaProgress.Update(1, ROUND((Counter1 / Counter2), 1, '>') * 100);
                                 LoanType.Get(Loans."Loan Product Type");
@@ -2483,7 +2484,7 @@ Codeunit 52185470 "Periodic Activities"
                                     Buffer."Credit Account" := false;
                                     Buffer."Savings Account" := false;
                                     Buffer."Record Found" := true;
-                                    Buffer.Status := MembersII.Status;
+                                    // Buffer.Status := MembersII.Status;
                                 end else
                                     Buffer."Other Comments" := 'Member No. Not found.';
                             end;
@@ -2501,7 +2502,7 @@ Codeunit 52185470 "Periodic Activities"
                             Buffer."Credit Account" := false;
                             Buffer."Savings Account" := false;
                             Buffer."Record Found" := true;
-                            Buffer.Status := MembersII.Status;
+                            // Buffer.Status := MembersII.Status;
                         end else
                             Buffer."Other Comments" := 'Member No. Not found.';
                         // end;

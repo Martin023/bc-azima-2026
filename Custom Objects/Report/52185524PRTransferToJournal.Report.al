@@ -54,16 +54,16 @@ Report 52185524 "PR Transfer To Journal"
                             if PeriodTrans."Post As" = PeriodTrans."post as"::Credit then
                                 AmountToCredit := PeriodTrans.Amount;
 
-                            if PeriodTrans."Journal Account Type" = Jac::"G/L Account" then  //GL
-                                IntegerPostAs := 0;   //0 debit
-                            if PeriodTrans."Journal Account Type" = Jac::Customer then
-                                IntegerPostAs := 1;  // 1 =
-                            if PeriodTrans."Journal Account Type" = Jac::Vendor then
-                                IntegerPostAs := 2;  // 1 =
-                            if PeriodTrans."Journal Account Type" = Jac::Savings then
-                                IntegerPostAs := 6;  // 1 =
-                            if PeriodTrans."Journal Account Type" = Jac::Credit then
-                                IntegerPostAs := 7;  // 1 =
+                            if PeriodTrans."Journal Account Type".AsInteger() = Jac::"G/L Account" then  //GL
+                                IntegerPostAs := IntegerPostAs::"G/L Account";   //0 debit
+                            if PeriodTrans."Journal Account Type".AsInteger() = Jac::Customer then
+                                IntegerPostAs := IntegerPostAs::Customer;  // 1 =
+                            if PeriodTrans."Journal Account Type".AsInteger() = Jac::Vendor then
+                                IntegerPostAs := IntegerPostAs::Vendor;  // 1 =
+                            if PeriodTrans."Journal Account Type".AsInteger() = Jac::Savings then
+                                IntegerPostAs := IntegerPostAs::Savings;  // 1 =
+                            if PeriodTrans."Journal Account Type".AsInteger() = Jac::Credit then
+                                IntegerPostAs := IntegerPostAs::Credit;  // 1 =
 
                             SaccoTransactionType := Saccotransactiontype::" ";
 
@@ -87,17 +87,17 @@ Report 52185524 "PR Transfer To Journal"
                                 //LoanPrinc:=AmountToCredit-LoanInterest;
                                 LoanPrinc := AmountToCredit;
                                 if LoanPrinc < 0 then LoanPrinc := 0;
-                                CreateJnlEntry(7, PeriodTrans."Journal Account Code",
+                                CreateJnlEntry("Gen. Journal Account Type"::"Credit", PeriodTrans."Journal Account Code",
                                 GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + '-' + PeriodTrans."Employee Code", AmountToDebit, LoanPrinc,
                                 PeriodTrans."Post As", PeriodTrans."Loan Number", SaccoTransactionType);
 
 
 
                                 SaccoTransactionType := Saccotransactiontype::Bills;
-                                CreateJnlEntry(7, PeriodTrans."Journal Account Code",
+                                CreateJnlEntry("Gen. Journal Account Type"::"Credit", PeriodTrans."Journal Account Code",
                                 GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + '-' + PeriodTrans."Employee Code", AmountToDebit, LoanPrinc,
                                 PeriodTrans."Post As", PeriodTrans."Loan Number", SaccoTransactionType);
-                                CreateJnlEntry(0, ProductFactory."Billed Account",
+                                CreateJnlEntry("Gen. Journal Account Type"::"G/L Account", ProductFactory."Billed Account",
                                 GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + '-' + PeriodTrans."Employee Code", LoanPrinc * 1, 0, 1, '',
                                 SaccoTransactionType);
 
@@ -129,12 +129,12 @@ Report 52185524 "PR Transfer To Journal"
                                 EmployerDed.SetRange(EmployerDed."Payroll Period", PeriodTrans."Payroll Period");
                                 if EmployerDed.Find('-') then begin
                                     //Credit Payables
-                                    CreateJnlEntry(0, PostingGroup."Pension Employee Acc",
+                                    CreateJnlEntry("Gen. Journal Account Type"::"G/L Account", PostingGroup."Pension Employee Acc",
                                     GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + '-' + PeriodTrans."Employee Code", 0,
                                    EmployerDed.Amount, PeriodTrans."Post As", '', SaccoTransactionType);
 
                                     //Debit Staff Expense
-                                    CreateJnlEntry(0, PostingGroup."Pension Employer Acc",
+                                    CreateJnlEntry("Gen. Journal Account Type":: "G/L Account", PostingGroup."Pension Employer Acc",
                                     GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + '-' + PeriodTrans."Employee Code", EmployerDed.Amount, 0, 1, '',
                                     SaccoTransactionType);
 
@@ -147,13 +147,13 @@ Report 52185524 "PR Transfer To Journal"
                             if PeriodTrans."coop parameters" = PeriodTrans."coop parameters"::NSSF then begin
                                 //Credit Payables
 
-                                CreateJnlEntry(0, PostingGroup."SSF Employee Account",
+                                CreateJnlEntry("Gen. Journal Account Type":: "G/L Account", PostingGroup."SSF Employee Account",
                                 GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + '-' + PeriodTrans."Employee Code", 0, PeriodTrans.Amount,
                                 PeriodTrans."Post As", '', SaccoTransactionType);
 
                                 //Debit Staff Expense
 
-                                CreateJnlEntry(0, PostingGroup."SSF Employer Account",
+                                CreateJnlEntry("Gen. Journal Account Type":: "G/L Account", PostingGroup."SSF Employer Account",
                                 GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + '-' + PeriodTrans."Employee Code", PeriodTrans.Amount, 0, 1, '',
                                 SaccoTransactionType);
                             end;
@@ -344,8 +344,8 @@ Report 52185524 "PR Transfer To Journal"
         strEmpName: Text[150];
         AmountToDebit: Decimal;
         AmountToCredit: Decimal;
-        IntegerPostAs: Integer;
-        SaccoTransactionType: Option " ",Loan,Repayment,"Interest Due","Interest Paid",Bills,Appraisal;
+        IntegerPostAs: Enum "Gen. Journal Account Type";
+        SaccoTransactionType: Enum "Transaction Types";//Option " ",Loan,Repayment,"Interest Due","Interest Paid",Bills,Appraisal;
         PostingDate: Date;
         GlobalDim1: Code[20];
         GlobalDim2: Code[20];
@@ -364,7 +364,7 @@ Report 52185524 "PR Transfer To Journal"
         Members: Record "Members";
 
 
-    procedure CreateJnlEntry(AccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Savings,Credit; AccountNo: Code[20]; GlobalDime1: Code[20]; GlobalDime2: Code[20]; Description: Text[150]; DebitAmount: Decimal; CreditAmount: Decimal; PostAs: Option " ",Debit,Credit; LoanNo: Code[20]; TransType: Option " ","Registration Fee",Loan,Repayment,Withdrawal,"Interest Due","Interest Paid","Benevolent Fund","Deposit Contribution","Loan Penalty","Application Fee","Appraisal Fee",Investment,"Unallocated Funds","Shares Capital","Loan Adjustment",Dividend,"Withholding Tax","Administration Fee Due","Loan Guard",Prepayment,"Administration Fee Paid","Car Savings","SchFees Savings","Holiday Savings","CIC Fixed Deposit","Withdrawable Savings","Children Savings","KMA Investment","KMA Fixed Deposit","UAP Premiums","UAP Admin Fee","Direct Debit")
+    procedure CreateJnlEntry(AccountType: Enum "Gen. Journal Account Type"; AccountNo: Code[20]; GlobalDime1: Code[20]; GlobalDime2: Code[20]; Description: Text[150]; DebitAmount: Decimal; CreditAmount: Decimal; PostAs: Option " ",Debit,Credit; LoanNo: Code[20]; TransType: Enum "Transaction Types") // " ","Registration Fee",Loan,Repayment,Withdrawal,"Interest Due","Interest Paid","Benevolent Fund","Deposit Contribution","Loan Penalty","Application Fee","Appraisal Fee",Investment,"Unallocated Funds","Shares Capital","Loan Adjustment",Dividend,"Withholding Tax","Administration Fee Due","Loan Guard",Prepayment,"Administration Fee Paid","Car Savings","SchFees Savings","Holiday Savings","CIC Fixed Deposit","Withdrawable Savings","Children Savings","KMA Investment","KMA Fixed Deposit","UAP Premiums","UAP Admin Fee","Direct Debit")
     begin
 
 

@@ -246,7 +246,7 @@ Report 52185629 "Dividend Slip"
         DivRate: Decimal;
         IntRate: Decimal;
         WthTax: Decimal;
-        Status: Option " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+        Status: Enum "Member Status";//"Savings Account Status";// Option " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
         Retained: Decimal;
         DividendProgression1: Record "Dividend Progression";
         RetainedTotal: Decimal;

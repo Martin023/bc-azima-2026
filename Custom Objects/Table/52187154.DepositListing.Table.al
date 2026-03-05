@@ -58,10 +58,10 @@ table 52187154 "Deposit Listing"
             DataClassification = ToBeClassified;
             OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
         }
-        field(13; Status; Option)
+        field(13; Status; Enum "Savings Account Status")
         {
-            OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
-            OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+            // OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
+            // OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
             DataClassification = ToBeClassified;
         }
         field(14; "Member Status"; Enum "Member Status")

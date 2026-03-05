@@ -171,7 +171,7 @@ page 52186171 "Update Agent Applications"
                     var
                         ApprovalMgt: Codeunit "Approvals Mgmt.";
                     begin
-                        if Rec."Approval Status" <> rec."Approval Status"::Pending then
+                        if Rec."Approval Status" <> rec."Approval Status"::"Pending Approval" then
                             Error(DocMustbePending);
 
                         VarVariant := Rec;

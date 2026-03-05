@@ -134,11 +134,11 @@ table 52186260 "Credit Ledger Temp"
         {
             Caption = 'On Hold';
         }
-        field(34; "Applies-to Doc. Type"; Option)
+        field(34; "Applies-to Doc. Type"; Enum "Gen. Journal Document Type")//Option)
         {
             Caption = 'Applies-to Doc. Type';
-            OptionCaption = ' ,Payment,Invoice,Credit Memo,Finance Charge Memo,Reminder,Refund';
-            OptionMembers = " ",Payment,Invoice,"Credit Memo","Finance Charge Memo",Reminder,Refund;
+            // OptionCaption = ' ,Payment,Invoice,Credit Memo,Finance Charge Memo,Reminder,Refund';
+            // OptionMembers = " ",Payment,Invoice,"Credit Memo","Finance Charge Memo",Reminder,Refund;
         }
         field(35; "Applies-to Doc. No."; Code[20])
         {

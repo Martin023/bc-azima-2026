@@ -3,7 +3,7 @@ page 52186204 "Lease-List"
     CardPageID = Lease;
     DeleteAllowed = false;
     Editable = false;
-    PageType = List;
+    PageType = ListPart;
     SourceTable = Lease;
     //SourceTableView = WHERE(Commenced = CONST(false));
     UsageCategory = Lists;

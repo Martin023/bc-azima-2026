@@ -21,12 +21,12 @@ page 52185495 "Banking Activities"
                 field("Total Cashier Transactions"; Rec."T/Cashier Transactions")
                 {
                     ApplicationArea = Basic;
-                    Image = None;
+                    // Image = None;
                 }
                 field("Cashier Transactions"; Rec."Cashier Transactions")
                 {
                     ApplicationArea = Basic;
-                    Image = None;
+                    // Image = None;
                 }
                 // field("Total Processed Salaries"; Rec."Total Processed Salaries")
                 // {
@@ -44,28 +44,28 @@ page 52185495 "Banking Activities"
                 field("Savings Accounts"; Rec."Savings Accounts")
                 {
                     ApplicationArea = Basic;
-                    Image = None;
+                    // Image = None;
                 }
                 field("EFT Trasfers"; Rec."EFT Transfer List")
                 {
                     ApplicationArea = Basic;
-                    Image = None;
+                    // Image = None;
                 }
                 field("Posted Account Tranfers"; Rec."Posted Account Transfers")
                 {
                     ApplicationArea = Basic;
-                    Image = None;
+                    // Image = None;
                 }
                 field("Authorized Bank Overdrafts"; Rec."Authorized Bank Overdrafts")
                 {
                     ApplicationArea = Basic;
-                    Image = None;
+                    // Image = None;
                 }
                 field("Banking Closure"; Rec."Banking Closure")
                 {
                     ApplicationArea = Basic;
                     style = Unfavorable;
-                    Image = None;
+                    // Image = None;
                 }
                 // field("Bonds"; Rec."Active Bonds")
                 // {
@@ -94,7 +94,7 @@ page 52185495 "Banking Activities"
                 {
                     Caption = 'Kenpipe IPesa';
                     ApplicationArea = Basic;
-                    Image = None;
+                    // Image = None;
                 }
 
             }
@@ -124,24 +124,24 @@ page 52185495 "Banking Activities"
                 field("Processed Salaries"; Rec."Processed Salaries")
                 {
                     ApplicationArea = Basic;
-                    Image = None;
+                    // Image = None;
                 }
                 field("SStanding Order"; Rec."Successful Standing Orders")
                 {
                     ApplicationArea = Basic;
-                    Image = None;
+                    // Image = None;
 
                 }
                 field("Standing Order"; Rec."Partial Deduction STO")
                 {
                     ApplicationArea = Basic;
-                    Image = None;
+                    // Image = None;
 
                 }
                 field("Standing Orders"; Rec."Unsuccessful Standing Order")
                 {
                     ApplicationArea = Basic;
-                    Image = None;
+                    // Image = None;
                 }
             }
             cuegroup("Members Portal")
@@ -150,12 +150,12 @@ page 52185495 "Banking Activities"
                 field("Portal Standing Orders"; Rec."Portal Standing Orders")
                 {
                     ApplicationArea = Basic;
-                    //Image = None;
+                    // Image = None;
                 }
                 field("Portal Depedancy Applications"; Rec."Open Dependacy Application")
                 {
                     ApplicationArea = Basic;
-                    //Image = None;
+                    // Image = None;
                 }
             }
 

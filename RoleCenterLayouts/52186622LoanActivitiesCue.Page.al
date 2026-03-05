@@ -115,23 +115,23 @@ page 52186622 "Loan Processing Activities"
                 field("Applied Loans"; Rec."Applied Loans")
                 {
                     ApplicationArea = Basic;
-                    Image = none;
+                    // Image = none;
                 }
                 field("Appraised Loans"; Rec."Appraised Loans")
                 {
                     ApplicationArea = Basic;
-                    Image = none;
+                    // Image = none;
                     Caption = 'Pending Approvals';
                 }
                 field("Loan Approvals"; Rec."Approved Loans")
                 {
-                    Image = none;
+                    // Image = none;
 
                 }
                 field("Rejected Loans"; Rec."Rejected Loans")
                 {
                     ApplicationArea = Basic;
-                    Image = none;
+                    // Image = none;
 
                 }
                 field("Deffered Loans"; Rec."Deffered Loans")
@@ -150,13 +150,13 @@ page 52186622 "Loan Processing Activities"
                 {
                     ApplicationArea = Basic;
 
-                    Image = none;
+                    // Image = none;
                     LookupPageId = "Loan Posted List";
                     DrillDownPageId = "Loan Posted list";
                 }
                 field("Overdue Loans"; Rec."Overdue Loans")
                 {
-                    Image = none;
+                    // Image = none;
                     Style = Unfavorable;
                     ApplicationArea = Basic;
                 }
@@ -169,12 +169,12 @@ page 52186622 "Loan Processing Activities"
                 {
                     ApplicationArea = Basic, Suite;
                     //AutoFormatType = 11;
-                    Image = none;
+                    // Image = none;
                 }
                 field("Dormant Members"; Rec."Dormant Members")
                 {
                     ApplicationArea = Basic, Suite;
-                    Image = none;
+                    // Image = none;
                 }
             }
             cuegroup("Withdrawal Notices")

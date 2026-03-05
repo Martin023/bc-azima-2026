@@ -1306,15 +1306,15 @@ codeunit 52187325 "Bulk Processing"
         //Fields
         RiskAccountNo: Code[20];
         FOSAAccountNo: Code[20];
-        FOSAAccountStatus: Option " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+        FOSAAccountStatus: Enum "Savings Account Status";//Option " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
         BOSAAccountNo: Code[20];
-        BOSAAccountStatus: Option " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+        BOSAAccountStatus: Enum "Savings Account Status";//Option " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
         BBFAccountNo: Code[20];
-        BBFAccountStatus: Option " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+        BBFAccountStatus: Enum "Savings Account Status";//Option " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
         ShareCapitalAccountNo: Code[20];
-        ShareCapitalAcStatus: Option " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+        ShareCapitalAcStatus: Enum "Savings Account Status";//Option " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
         TransferredShareCapNo: Code[20];
-        TransferredShareCapStatus: Option " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+        TransferredShareCapStatus: Enum "Savings Account Status";//Option " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
         Prorata: Decimal;
         MemberAge: Integer;
 
@@ -1455,7 +1455,7 @@ codeunit 52187325 "Bulk Processing"
         MemberListing."Share Capital Balance" := MemberFactBox."Share Capital";//Done
         MemberListing."Trasferred Share Cap No" := TransferredShareCapNo;//Done
         MemberListing."Trasferred Share Cap Bal" := MemberFactBox."Transferred Share Capital";//Done
-        MemberListing."Trasferred Share Cap Status" := TransferredShareCapStatus;//Done
+        // MemberListing."Trasferred Share Cap Status" := TransferredShareCapStatus;//Done
         MemberListing.Prorata := CustomCuesCodeunit.Prorata(Members."No.", '1');//Done
         MemberListing.County := Members.County;//Done
         MemberListing."Transactional Mobile Number" := Members."Transactional Mobile Number";//Done

@@ -119,11 +119,11 @@ table 52187007 "Share Capital Transfer Buffer"
             Caption = 'Global Dimension 2 Code';
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2));
         }
-        field(21; "Status"; Option)
+        field(21; "Status"; Enum "Workflow Status Main Flags")//Option)
         {
             DataClassification = ToBeClassified;
-            OptionCaption = 'Open,Pending Approval,Approved,Rejected';
-            OptionMembers = Open,Pending,Approved,Rejected;
+            // OptionCaption = 'Open,Pending Approval,Approved,Rejected';
+            // OptionMembers = Open,Pending,Approved,Rejected;
 
             trigger OnValidate()
             var

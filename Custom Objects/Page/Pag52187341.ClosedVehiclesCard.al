@@ -170,7 +170,7 @@ page 52187341 "Closed Vehicles Card"
             {
                 ApplicationArea = All;
                 Caption = 'Activate Vehicle';
-                Image = ActivateVehicle;
+                // Image = ActivateVehicle;
                 Promoted = true;
                 PromotedCategory = Process;
                 trigger OnAction()
@@ -194,7 +194,7 @@ page 52187341 "Closed Vehicles Card"
             {
                 ApplicationArea = All;
                 Caption = 'Dectivate Vehicle';
-                Image = DeactivateVehicle;
+                // Image = DeactivateVehicle;
                 Promoted = true;
                 PromotedCategory = Process;
                 trigger OnAction()

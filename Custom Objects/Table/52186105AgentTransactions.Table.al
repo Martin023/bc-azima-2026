@@ -137,10 +137,10 @@ table 52186105 "Agent Transactions"
         field(43; Longitude; Decimal)
         {
         }
-        field(44; Gender; Option)
+        field(44; Gender; Enum "Gender")
         {
-            OptionCaption = '  ,Male,Female';
-            OptionMembers = "  ",Male,Female;
+            // OptionCaption = '  ,Male,Female';
+            // OptionMembers = "  ",Male,Female;
         }
         field(45; "Date Of Birth"; Date)
         {
@@ -148,10 +148,10 @@ table 52186105 "Agent Transactions"
         field(46; Salutation; Text[10])
         {
         }
-        field(47; "Marital Status"; Option)
+        field(47; "Marital Status"; Enum "Marital Status")
         {
-            OptionCaption = ' ,Single,Married,Divorced,Widower,Widow';
-            OptionMembers = " ",Single,Married,Divorced,Widower,Widow;
+            // OptionCaption = ' ,Single,Married,Divorced,Widower,Widow';
+            // OptionMembers = " ",Single,Married,Divorced,Widower,Widow;
         }
         field(48; Locality; Text[100])
         {

@@ -5159,7 +5159,7 @@ codeunit 52186500 "CRM Integration"
             Datum.Add('source_unit', SearchLoan."Source Unit");
             Datum.Add('source_unit_desc', Format(SearchLoan."Source Unit"));
             Datum.Add('captured_by', SearchLoan."Captured By");
-            Datum.Add('status', SearchLoan.Status);
+            Datum.Add('status', Format(SearchLoan.Status));
             Datum.Add('status_desc', Format(SearchLoan.Status));
 
             if SearchLoan."Responsible Officer" <> '' then begin
@@ -7949,7 +7949,7 @@ codeunit 52186500 "CRM Integration"
             Datum.Add('crm_notes', LoanGuarantorSubstitutionRequest."CRM Notes");
             Datum.Add('account_status', LoanGuarantorSubstitutionRequest."Account Status");
             Datum.Add('account_status_desc', Format(LoanGuarantorSubstitutionRequest."Account Status"));
-            Datum.Add('status', LoanGuarantorSubstitutionRequest.Status);
+            Datum.Add('status', Format(LoanGuarantorSubstitutionRequest.Status));
             Datum.Add('status_desc', Format(LoanGuarantorSubstitutionRequest.Status));
             Datum.Add('captured_by', LoanGuarantorSubstitutionRequest."Captured By");
             Datum.Add('posted', LoanGuarantorSubstitutionRequest.Posted);
@@ -11190,7 +11190,7 @@ codeunit 52186500 "CRM Integration"
             Datum.Add('crm_created_by', ShareCapitalTransfer."CRM Created By");
             Datum.Add('crm_notes', ShareCapitalTransfer."CRM Notes");
             Datum.Add('crm_originating_branch', ShareCapitalTransfer."CRM Originating Branch");
-            Datum.Add('status', ShareCapitalTransfer.Status);
+            Datum.Add('status', Format(ShareCapitalTransfer.Status));
             Datum.Add('status_desc', Format(ShareCapitalTransfer.Status));
             Datum.Add('application_date', GlobalFunctions.FormatISODate(ShareCapitalTransfer."Application Date"));
 

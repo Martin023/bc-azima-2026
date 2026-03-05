@@ -1,6 +1,6 @@
 page 52186450 "DCS Product Parameter Matrix"
 {
-    PageType = List;
+    PageType = ListPart;
     SourceTable = "DCS Parameter Matrix";
     ApplicationArea = All;
     UsageCategory = Lists;

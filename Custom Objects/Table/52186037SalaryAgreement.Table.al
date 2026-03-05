@@ -109,10 +109,10 @@ table 52186037 "Salary Agreement"
         field(17; Comment; Code[250])
         {
         }
-        field(18; "Member Status"; Option)
+        field(18; "Member Status"; Enum "Member Status")
         {
-            OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Applicant,Withdrawn,Deceased,Defaulter,Closed,Withdrawn Shareholder';
-            OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Applicant",Withdrawn,Deceased,Defaulter,Closed,"Withdrawn Shareholder";
+            // OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Applicant,Withdrawn,Deceased,Defaulter,Closed,Withdrawn Shareholder';
+            // OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Applicant",Withdrawn,Deceased,Defaulter,Closed,"Withdrawn Shareholder";
         }
         field(19; "Recruited By"; Code[10])
         {

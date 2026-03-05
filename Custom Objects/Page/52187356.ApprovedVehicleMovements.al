@@ -135,7 +135,7 @@ page 52187356 "Approved Vehicle Movt Card"
             action("Send for Approval")
             {
                 ApplicationArea = all;
-                Image = Send;
+                Image = SendApprovalRequest;
                 Promoted = true;
                 PromotedCategory = Category4;
                 trigger OnAction()
@@ -220,7 +220,7 @@ page 52187356 "Approved Vehicle Movt Card"
             {
                 ApplicationArea = Basic, Suite;
                 Promoted = true;
-                Image = Defer;
+                Image = Pause;
                 PromotedCategory = Category4;
 
                 trigger OnAction()
@@ -239,7 +239,7 @@ page 52187356 "Approved Vehicle Movt Card"
             {
                 ApplicationArea = Basic, Suite;
                 Promoted = true;
-                Image = Reopen;
+                Image = ReOpen;
                 PromotedCategory = Category4;
                 trigger OnAction()
                 begin

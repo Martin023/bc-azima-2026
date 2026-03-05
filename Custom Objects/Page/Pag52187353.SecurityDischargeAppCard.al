@@ -154,7 +154,7 @@ page 52187353 "Security Discharge App Card"
                 Caption = 'Discharge';
                 Promoted = true;
                 PromotedCategory = Process;
-                Image = Discharge;
+                Image = ReleaseDoc;
                 trigger OnAction()
                 begin
                     Rec.Discharged := true;
@@ -171,7 +171,7 @@ page 52187353 "Security Discharge App Card"
                 Caption = 'Send for Approval';
                 Promoted = true;
                 PromotedCategory = Category5;
-                Image = SendforApproval;
+                Image = SendApprovalRequest;
                 trigger OnAction()
                 begin
                     Rec.Status := Rec.Status::Approved;
@@ -186,7 +186,7 @@ page 52187353 "Security Discharge App Card"
                 Caption = 'Cancel Approval';
                 Promoted = true;
                 PromotedCategory = Category5;
-                Image = CancelApproval;
+                Image = CancelApprovalRequest;
                 trigger OnAction()
                 begin
                     //Rec.Status := Rec.Status::Created;

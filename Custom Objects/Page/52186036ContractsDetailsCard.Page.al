@@ -412,7 +412,7 @@ page 52186036 "Contracts Details Card"
         }
         area(FactBoxes)
         {
-            part("Attached Documents"; "Document Attachment Factbox")
+            part("Attached Documents"; "Doc. Attachment List Factbox")
             {
                 ApplicationArea = All;
                 Caption = 'Attachments';

@@ -131,11 +131,11 @@ table 52185784 "Salary Lines"
         field(20; "Member No."; Code[20])
         {
         }
-        field(21; Status; Option)
+        field(21; Status; Enum "Savings Account Status")//Option)
         {
             Editable = true;
-            OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
-            OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+            // OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
+            // OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
 
             trigger OnValidate()
             begin

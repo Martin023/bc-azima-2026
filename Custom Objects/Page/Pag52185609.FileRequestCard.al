@@ -205,7 +205,7 @@ page 52185609 "File Request Card"
         }
         area(FactBoxes)
         {
-            part("Attached Documents"; "Document Attachment Factbox")
+            part("Attached Documents"; "Doc. Attachment List Factbox")
             {
                 ApplicationArea = All;
                 Caption = 'Attachments';

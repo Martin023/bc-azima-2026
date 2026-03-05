@@ -108,7 +108,7 @@ table 52186072 "Loan Calculator"
 
                         //Check status - sasra
                         LoanApp.CalcFields("Loans Category-SASRA");
-                        if LoanApp."Loans Category-SASRA" > GenSetup."Allowed Loan Categories" then
+                        if LoanApp."Loans Category-SASRA".AsInteger() > GenSetup."Allowed Loan Categories".AsInteger() then
                             Message(Text012, LoanApp."Loan No.");
 
                         CreditLedger.Reset;

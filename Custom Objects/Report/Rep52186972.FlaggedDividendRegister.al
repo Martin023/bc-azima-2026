@@ -1,5 +1,6 @@
 namespace ALProject.ALProject;
 using Microsoft.Foundation.Company;
+using azima.azima;
 
 report 52186972 FlaggedDividendRegister
 {
@@ -253,9 +254,9 @@ report 52186972 FlaggedDividendRegister
         DividendsYear: Integer;
         Sno: Integer;
         Loans: Record Loans;
-        LoanCat: Option Perfoming,Watch,Substandard,Doubtful,Loss;
+        LoanCat:  Enum "Loan Sasra categories";//Option Perfoming,Watch,Substandard,Doubtful,Loss;
         SavingsAccounts: Record "Savings Accounts";
-        SavingsStatus: Option " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+        SavingsStatus: Enum "Savings Account Status";//Option " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
         Shares: Decimal;
         Deposits: Decimal;
         MemberFactBox: record "Member FactBox";

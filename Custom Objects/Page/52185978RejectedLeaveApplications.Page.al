@@ -273,14 +273,14 @@ page 52185978 "Rejected Leave Applications"
     end;
 
     //[Scope('OnPrem')]
-    procedure DetermineLeaveReturnDate(var fBeginDate: Date; var fDays: Decimal) fReturnDate: Date
+    procedure NewDetermineLeaveReturnDate(var fBeginDate: Date; var fDays: Decimal) fReturnDate: Date
     begin
         varDaysApplied := fDays;
         fReturnDate := fBeginDate;
         repeat
-            if DetermineIfIncludesNonWorking(Rec."Leave Type") = false then begin
+            if NewDetermineIfIncludesNonWorking(Rec."Leave Type") = false then begin
                 fReturnDate := CalcDate('1D', fReturnDate);
-                if DetermineIfIsNonWorking(fReturnDate) then
+                if NewDetermineIfIsNonWorking(fReturnDate) then
                     varDaysApplied := varDaysApplied + 1
                 else
                     varDaysApplied := varDaysApplied;
@@ -295,7 +295,7 @@ page 52185978 "Rejected Leave Applications"
     end;
 
     //[Scope('OnPrem')]
-    procedure DetermineIfIncludesNonWorking(var fLeaveCode: Code[10]): Boolean
+    procedure NewDetermineIfIncludesNonWorking(var fLeaveCode: Code[10]): Boolean
     begin
         if HRLeaveTypes.Get(fLeaveCode) then begin
             if HRLeaveTypes."Inclusive of Non Working Days" = true then
@@ -304,7 +304,7 @@ page 52185978 "Rejected Leave Applications"
     end;
 
     //[Scope('OnPrem')]
-    procedure DetermineIfIsNonWorking(var bcDate: Date) Isnonworking: Boolean
+    procedure NewDetermineIfIsNonWorking(var bcDate: Date) Isnonworking: Boolean
     begin
 
         HRSetup.Find('-');
@@ -332,14 +332,14 @@ page 52185978 "Rejected Leave Applications"
     end;
 
     //[Scope('OnPrem')]
-    procedure DeterminethisLeaveEndDate(var fDate: Date) fEndDate: Date
+    procedure NewDeterminethisLeaveEndDate(var fDate: Date) fEndDate: Date
     begin
         ReturnDateLoop := true;
         fEndDate := fDate;
         if fEndDate <> 0D then begin
             fEndDate := CalcDate('-1D', fEndDate);
             while (ReturnDateLoop) do begin
-                if DetermineIfIsNonWorking(fEndDate) then
+                if NewDetermineIfIsNonWorking(fEndDate) then
                     fEndDate := CalcDate('-1D', fEndDate)
                 else
                     ReturnDateLoop := false;
@@ -349,7 +349,7 @@ page 52185978 "Rejected Leave Applications"
     end;
 
     //[Scope('OnPrem')]
-    procedure CreateLeaveLedgerEntries()
+    procedure NewCreateLeaveLedgerEntries()
     begin
         Rec.TestField("Approved days");
         HRSetup.Reset;
@@ -409,13 +409,13 @@ page 52185978 "Rejected Leave Applications"
             ERROR('You must specify no of days');
             END;
             END;*/
-            //NotifyApplicant;
+            //NewNotifyApplicant;
         end;
 
     end;
 
     //[Scope('OnPrem')]
-    procedure NotifyApplicant()
+    procedure NewNotifyApplicant()
     begin
         HREmp.Get(Rec."Applicant Staff No.");
         HREmp.TestField(HREmp."Company E-Mail");

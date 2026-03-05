@@ -50,7 +50,7 @@ table 52185454 "Document Attachment Table"
                     Error(EmptyFileNameErr);
 
                 if DocumentAttachmentMgmt.IsDuplicateFile(
-                    "Table ID", "No.", "Document Type".AsInteger(), "Line No.", "File Name", "File Extension")
+                    "Table ID", "No.", "Document Type", "Line No.", "File Name", "File Extension")
                 then
                     Error(DuplicateErr);
             end;
@@ -364,7 +364,7 @@ table 52185454 "Document Attachment Table"
         SourceFileName: Text[250];
     begin
         SourceFileName := CopyStr(FileName, 1, MaxStrLen(SourceFileName));
-        while DocumentAttachmentMgmt.IsDuplicateFile("Table ID", "No.", "Document Type".AsInteger(), "Line No.", FileName, FileExtension) do begin
+        while DocumentAttachmentMgmt.IsDuplicateFile("Table ID", "No.", "Document Type", "Line No.", FileName, FileExtension) do begin
             FileIndex += 1;
             FileName := GetNextFileName(SourceFileName, FileIndex);
         end;

@@ -160,7 +160,7 @@ page 52186565 "HR Company Activities Card"
             {
                 ApplicationArea = Basic;
             }
-            part("Attached Documents"; "Document Attachment Factbox")
+            part("Attached Documents"; "Doc. Attachment List Factbox")//"Document Attachment Factbox")
             {
                 ApplicationArea = basic;
                 Caption = 'Attachments';

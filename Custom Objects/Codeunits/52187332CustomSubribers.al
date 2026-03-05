@@ -67,7 +67,8 @@ codeunit 52187332 MySubscribers
             SavingsLedgerEntry.SetFilter("Document No.", DocNoFilter);
             SavingsLedgerEntry.SetFilter("Posting Date", PostingDateFilter);
             //SavingsLedgerEntry.SetFilter("External Document No.", ExtDocNo);
-            NavigatePage.InsertIntoDocEntry(DocumentEntry, DATABASE::"Savings Ledger Entry", SavingsLedgerEntry.TableCaption, SavingsLedgerEntry.Count);
+            // NavigatePage.InsertIntoDocEntry(DocumentEntry, DATABASE::"Savings Ledger Entry", SavingsLedgerEntry.TableCaption, SavingsLedgerEntry.Count);
+            DocumentEntry.InsertIntoDocEntry( DATABASE::"Savings Ledger Entry", SavingsLedgerEntry.TableCaption, SavingsLedgerEntry.Count);
         end;
         if CreditLedgerEntry.ReadPermission() then begin
             CreditLedgerEntry.Reset();
@@ -75,7 +76,8 @@ codeunit 52187332 MySubscribers
             CreditLedgerEntry.SetFilter("Document No.", DocNoFilter);
             CreditLedgerEntry.SetFilter("Posting Date", PostingDateFilter);
             //CreditLedgerEntry.SetFilter("External Document No.", ExtDocNo);
-            NavigatePage.InsertIntoDocEntry(DocumentEntry, DATABASE::"Credit Ledger Entry", CreditLedgerEntry.TableCaption, CreditLedgerEntry.Count);
+            // NavigatePage.InsertIntoDocEntry(DocumentEntry, DATABASE::"Credit Ledger Entry", CreditLedgerEntry.TableCaption, CreditLedgerEntry.Count);
+            DocumentEntry.InsertIntoDocEntry( DATABASE::"Credit Ledger Entry", CreditLedgerEntry.TableCaption, CreditLedgerEntry.Count);
         end;
 
     end;

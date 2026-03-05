@@ -971,10 +971,10 @@ table 52185690 "Product Factory"
             OptionCaption = 'Normal,Group Loan';
             DataClassification = ToBeClassified;
         }
-        field(10025; "Auto Openning Account Status"; Option)
+        field(10025; "Auto Openning Account Status"; Enum "Savings Account Status")
         {
-            OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
-            OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+            // OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
+            // OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
         }
 
         field(10026; "Account Group"; Option)

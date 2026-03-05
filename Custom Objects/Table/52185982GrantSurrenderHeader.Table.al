@@ -89,11 +89,11 @@ table 52185982 "Grant Surrender Header"
         field(11; Cashier; Code[50])
         {
         }
-        field(12; "Account Type"; Option)
+        field(12; "Account Type"; Enum "Gen. Journal Account Type")//Option)
         {
             Caption = 'Account Type';
-            OptionCaption = 'G/L Account,Customer,Vendor,Bank Account,Fixed Asset,IC Partner';
-            OptionMembers = "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner";
+            // OptionCaption = 'G/L Account,Customer,Vendor,Bank Account,Fixed Asset,IC Partner';
+            // OptionMembers = "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner";
         }
         field(13; "Account No."; Code[20])
         {

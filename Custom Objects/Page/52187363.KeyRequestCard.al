@@ -290,7 +290,7 @@ page 52187363 "Key Request Card"
                 Caption = 'Receive Key';    
                 Promoted = true;
                 PromotedCategory = Process;
-                Image = Receive;
+                // Image = ;
                 trigger OnAction()
                 begin
                     Rec.TestField(Status, Rec.Status::Approved);
@@ -337,7 +337,7 @@ page 52187363 "Key Request Card"
                 Caption = 'Dispatch Key';
                 Promoted = true;
                 PromotedCategory = Process;
-                Image = Dispatch;
+                // Image = Dispatch;
                 trigger OnAction()
                 begin
                     Rec.TestField(Status, Rec.Status::Approved);
@@ -373,7 +373,7 @@ page 52187363 "Key Request Card"
                 Caption = 'Receive Key Back';
                 Promoted = true;
                 PromotedCategory = Process;
-                Image = ReceiveBack;
+                // Image = ReceiveBack;
                 trigger OnAction()
                 begin
                     Rec.TestField(Status, Rec.Status::Approved);

@@ -2,7 +2,7 @@ page 52186186 "Property List"
 {
     CardPageID = "Property Details";
     Editable = false;
-    PageType = List;
+    PageType = ListPart;
     SourceTable = "Property Details";
     // SourceTableView = WHERE("Agreement Status" = CONST(Pending),
     //                         "Property Type" = FILTER(<> 'LAND'));

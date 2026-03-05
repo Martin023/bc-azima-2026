@@ -341,7 +341,7 @@ page 52185947 "Staff Claims"
                 {
                     ApplicationArea = Basic;
                     Caption = 'Upload Document';
-                    Image = Upload;
+                    Image = Import;
 
                     trigger OnAction()
                     var

@@ -639,7 +639,7 @@ table 52185916 "Staff Advance Surrender Header"
         "Date From": Text[30];
         "Date To": Text[30];
         LastDay: Date;
-        LoadImprestDetails: Record "Cash Payment Line";
+        // LoadImprestDetails: Record "Cash Payment Line";
         TotAmt: Decimal;
         DimVal: Record "Dimension Value";
         "VAT Code": Code[20];

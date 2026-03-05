@@ -645,10 +645,10 @@ table 52185776 "Cashier Transactions"
         {
 
         }
-        field(50024; "Account Status"; Option)
+        field(50024; "Account Status"; Enum "Savings Account status")//Option)
         {
-            OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
-            OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+            // OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
+            // OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
             //TableRelation = "Savings Accounts" where("No." = field("Account No"));
         }
         field(50025; "Cashier Till Balance"; Decimal)

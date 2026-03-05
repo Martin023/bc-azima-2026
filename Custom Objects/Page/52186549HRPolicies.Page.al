@@ -74,7 +74,7 @@ page 52186549 "HR Policies"
                 Applicationarea = Basic;
                 Caption = 'Create';
                 Ellipsis = true;
-                Image = Create_Movement;
+                Image = CreateMovement;
                 Promoted = true;
                 PromotedCategory = Category4;
                 Visible = false;

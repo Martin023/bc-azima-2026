@@ -652,7 +652,7 @@ page 52185953 "Staff Advance Surrender List"
         ImprestAmt: Decimal;
         DimName1: Text[60];
         DimName2: Text[60];
-        CashPaymentLine: Record "Cash Payment Line";
+        // CashPaymentLine: Record "Cash Payment Line";
         PaymentLine: Record "Staff Advance Lines";
         CurrSurrDocNo: Code[20];
         //JournalPostSuccessful: Codeunit "Journal Post Successful";

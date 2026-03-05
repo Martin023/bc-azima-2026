@@ -175,10 +175,10 @@ table 52185682 "Checkoff  Receipt Transactions"
         field(16; Remarks; Text[50])
         {
         }
-        field(17; Type; Option)
+        field(17; Type; Enum "Fosa Transaction Types")//Option)
         {
-            OptionCaption = 'Credit Receipt,Credit Cheque';
-            OptionMembers = "Credit Receipt","Credit Cheque";
+            // OptionCaption = 'Credit Receipt,Credit Cheque';
+            // OptionMembers = "Credit Receipt","Credit Cheque";
 
             trigger OnValidate()
             begin

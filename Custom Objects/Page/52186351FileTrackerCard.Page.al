@@ -444,7 +444,7 @@ page 52186351 "File Tracker Card"
         }
         area(FactBoxes)
         {
-            part("Attached Documents"; "Document Attachment Factbox")
+            part("Attached Documents"; "Doc. Attachment List Factbox")//"Document Attachment Factbox")
             {
                 ApplicationArea = All;
                 Caption = 'Attachments';

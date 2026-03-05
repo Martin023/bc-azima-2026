@@ -162,11 +162,17 @@ page 52185919 "Released Store Requisitions Li"
 
                     trigger OnAction()
                     var
-                    ApprovalEntries: Page "Approval Entries";
+                        // ApprovalEntries: Page "Approval Entries";
+                        ApprovalEntries: Record "Approval Entry";
                     begin
-                        DocumentType := DocumentType::Requisition;
-                        ApprovalEntries.SetRecordFilters(DATABASE::"Store Requistion Header", DocumentType, Rec."No.");
-                        ApprovalEntries.Run;
+                        // DocumentType := DocumentType::Requisition;
+                        // ApprovalEntries.SetRecordFilters(DATABASE::"Store Requistion Header", DocumentType, Rec."No.");
+                        // ApprovalEntries.Run;
+
+                        ApprovalEntries.Reset();
+                        ApprovalEntries.SetRange("Table ID", Database::"Store Requistion Header");
+                        ApprovalEntries.SetRange("Document No.", Rec."No.");
+                        Page.Run(Page::"Approval Entries", ApprovalEntries);
                     end;
                 }
                 separator(Action1102755014)

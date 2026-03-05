@@ -1838,10 +1838,12 @@ table 52185729 Loans
             OptionCaption = 'Daily,Weekly,Monthly,Quarterly,Bi-Annual,Yearly';
             OptionMembers = Daily,Weekly,Monthly,Quarterly,"Bi-Annual",Yearly;
         }
-        field(51; Status; Option)
+        field(51; Status; enum "Workflow Status Main Flags")
         {
-            OptionCaption = 'Open,Pending Approval,Approved,Rejected,Deffered,Archived,Posted';
-            OptionMembers = Open,Pending,Approved,Rejected,Deffered,Archived,Posted;
+
+           
+            // OptionCaption = 'Open,Pending Approval,Approved,Rejected,Deffered,Archived,Posted';
+            // OptionMembers = Open,Pending,Approved,Rejected,Deffered,Archived,Posted;
             trigger OnValidate()
             begin
                 GlobalFunctions.DisplayLienMessage("Member No.");

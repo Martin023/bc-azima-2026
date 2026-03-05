@@ -33,11 +33,11 @@ table 52185828 "Guarantors Substitution"
             OptionCaption = 'Active,Non-Active,Blocked,Dormant,Re-instated,Deceased,Withdrawal,Retired,Termination,Resigned,Ex-Company,Casuals,Family Member,Defaulter,Apportioned,Suspended,Awaiting Verdict';
             OptionMembers = Active,"Non-Active",Blocked,Dormant,"Re-instated",Deceased,Withdrawal,Retired,Termination,Resigned,"Ex-Company",Casuals,"Family Member",Defaulter,Apportioned,Suspended,"Awaiting Verdict";
         }
-        field(5; Status; Option)
+        field(5; Status; Enum "Workflow Status Main Flags")
         {
             Editable = false;
-            OptionCaption = 'Open,Pending,Approved,Rejected,Deffered,Posted,Cancelled';
-            OptionMembers = Open,Pending,Approved,Rejected,Deffered,Posted,Cancelled;
+            // OptionCaption = 'Open,Pending,Approved,Rejected,Deffered,Posted,Cancelled';
+            // OptionMembers = Open,Pending,Approved,Rejected,Deffered,Posted,Cancelled;
         }
         field(6; "Current Savings"; Decimal)
         {

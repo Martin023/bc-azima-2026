@@ -790,7 +790,7 @@ page 52186342 "Loan Application Card Dummy"
             action("Business Evaluation Report")
             {
                 ApplicationArea = Basic, Suite;
-                Image = "REPORT";
+                Image = Report;
                 Promoted = true;
                 PromotedCategory = "Report";
                 PromotedIsBig = true;

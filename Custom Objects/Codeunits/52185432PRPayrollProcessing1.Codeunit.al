@@ -208,7 +208,7 @@ Codeunit 52185432 "PR Payroll Processing1"
         curPensionReliefAmount: Decimal;
         curIncludeinNet: Decimal;
         JournalPostAs: Option ,Debit,Credit;
-        JournalPostingType: Option " ","G/L Account",Customer,Vendor;
+        JournalPostingType: Enum "Gen. Journal Account Type";
         JournalAc: Code[20];
         Customer: Record Customer;
         curIncludeGross: Decimal;
@@ -1206,7 +1206,7 @@ Codeunit 52185432 "PR Payroll Processing1"
     end;
 
 
-    procedure fnUpdatePeriodTrans(EmpCode: Code[20]; TCode: Code[20]; TGroup: Code[20]; GroupOrder: Integer; SubGroupOrder: Integer; Description: Text[50]; curAmount: Decimal; curBalance: Decimal; Month: Integer; Year: Integer; mMembership: Text[30]; ReferenceNo: Text[30]; dtOpenPeriod: Date; Department: Code[50]; JournalAC: Code[20]; PostAs: Option " ",Debit,Credit; JournalACType: Option " ","G/L Account",Customer,Vendor; LoanNo: Code[10]; CoopParam: Option "none",shares,loan,"loan Interest","Emergency loan","Emergency loan Interest","School Fees loan","School Fees loan Interest",Welfare,Pension)
+    procedure fnUpdatePeriodTrans(EmpCode: Code[20]; TCode: Code[20]; TGroup: Code[20]; GroupOrder: Integer; SubGroupOrder: Integer; Description: Text[50]; curAmount: Decimal; curBalance: Decimal; Month: Integer; Year: Integer; mMembership: Text[30]; ReferenceNo: Text[30]; dtOpenPeriod: Date; Department: Code[50]; JournalAC: Code[20]; PostAs: Option " ",Debit,Credit; JournalACType: Enum "Gen. Journal Account Type"; LoanNo: Code[10]; CoopParam: Option "none",shares,loan,"loan Interest","Emergency loan","Emergency loan Interest","School Fees loan","School Fees loan Interest",Welfare,Pension)
     var
         PRPeriodTransactions: Record "PR Period Transactions";
         HRBankAccounts: Record "HR Employee Bank Accounts";

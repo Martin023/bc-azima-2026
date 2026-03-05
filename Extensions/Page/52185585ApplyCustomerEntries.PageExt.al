@@ -1511,7 +1511,7 @@ PageExtension 52185585 pageextension52185585 extends "Apply Customer Entries"
                                     AppliedCustLedgEntry.SETRANGE(Open, TRUE);
                                     AppliedCustLedgEntry.SETRANGE("Applies-to ID", ReceiptLine."Applies-to ID");
 
-                                    HandleChosenEntries(2,
+                                    HandleChosenEntries("Customer Apply Calculation Type"::"Sales Header",
                                       GenJnlLine.Amount,
                                       GenJnlLine."Currency Code",
                                       GenJnlLine."Posting Date");
