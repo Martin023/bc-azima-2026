@@ -166,7 +166,7 @@ Report 52185743 "Dividend Register Filtered"
         ProductName: Text[150];
         "Dividend Year": Integer;
         Loans: Record Loans;
-        LoanCat: Option Perfoming,Watch,Substandard,Doubtful,Loss;
-        FosaStatus: Option " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+        LoanCat: Enum "Loan Sasra Categories";//Option Perfoming,Watch,Substandard,Doubtful,Loss;
+        FosaStatus: Enum "Savings Account Status";//Option " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
         SavingsAccounts: Record "Savings Accounts";
 }

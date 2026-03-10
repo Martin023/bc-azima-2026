@@ -353,7 +353,7 @@ Report 52186103 "CRM Dividend Slip"
         DivRate: Decimal;
         IntRate: Decimal;
         WthTax: Decimal;
-        Status: Option " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+        Status: Enum "Member Status";//Option " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
         Retained: Decimal;
         DividendProgression1: Record "Dividend Progression";
         RetainedTotal: Decimal;

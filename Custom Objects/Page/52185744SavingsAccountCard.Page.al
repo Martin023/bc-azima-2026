@@ -85,7 +85,7 @@ page 52185744 "Savings Account Card"
                 field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic, Suite;
-                    OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
+                    // OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
                 }
                 field("Status Change Reason"; Rec."Status Change Reason")
                 {

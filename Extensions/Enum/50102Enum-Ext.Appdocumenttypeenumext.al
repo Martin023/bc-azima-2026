@@ -49,5 +49,13 @@ enumextension 50102 "App document type enum ext" extends "Approval Document Type
     {
         Caption = 'Discharge';
     }
+    Value(24; "Salary Details")
+    {
+        Caption = 'Salary Details';
+    }
+    value(25; "Job Approval")
+    {
+        Caption = 'Job Approval';
+    }
 
 }
