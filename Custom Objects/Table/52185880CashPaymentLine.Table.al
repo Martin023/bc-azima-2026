@@ -90,11 +90,11 @@ table 52185880 "Cash Payment Line"
         field(11; Cashier; Code[50])
         {
         }
-        field(12; "Account Type"; Option)
+        field(12; "Account Type"; Enum "Gen. Journal Account Type")//Option)
         {
             Caption = 'Account Type';
-            OptionCaption = 'G/L Account,Customer,Vendor,Bank Account,Fixed Asset,IC Partner,Staff';
-            OptionMembers = "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Staff;
+            // OptionCaption = 'G/L Account,Customer,Vendor,Bank Account,Fixed Asset,IC Partner,Staff';
+            // OptionMembers = "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Staff;
         }
         field(13; "Account No."; Code[20])
         {

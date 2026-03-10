@@ -358,9 +358,9 @@ table 52185888 "Payments Header"
             CalcFormula = Sum("Payment Line"."NetAmount LCY" WHERE(No = FIELD("No.")));
             FieldClass = FlowField;
         }
-        field(80; "Document Type"; Option)
+        field(80; "Document Type"; Enum "Approval Document Type")//Option)
         {
-            OptionMembers = "Payment Voucher","Petty Cash","Cash Purchase";
+            // OptionMembers = "Payment Voucher","Petty Cash","Cash Purchase";
         }
         field(81; "Shortcut Dimension 3 Code"; Code[20])
         {

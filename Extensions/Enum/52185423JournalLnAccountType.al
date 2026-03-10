@@ -7,4 +7,8 @@ enumextension 52185423 "Gen. Journal Account Type Ext" extends "Gen. Journal Acc
     {
         Caption = ' ';
     }   
+    value(12; Staff)
+    {
+        Caption = 'Staff';
+    }
 }

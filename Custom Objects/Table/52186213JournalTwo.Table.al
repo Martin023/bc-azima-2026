@@ -41,10 +41,10 @@ table 52186213 "Journal Two"
         field(3; Description; Code[50])
         {
         }
-        field(4; "Accout Type"; Option)
+        field(4; "Accout Type"; Enum "Gen. Journal Account Type")//Option)
         {
-            OptionCaption = 'G/L Account,Customer,Vendor,Bank Account,Fixed Asset,IC Partner,Savings,Credit,Member';
-            OptionMembers = "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Savings,Credit,Member;
+            // OptionCaption = 'G/L Account,Customer,Vendor,Bank Account,Fixed Asset,IC Partner,Savings,Credit,Member';
+            // OptionMembers = "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Savings,Credit,Member;
         }
         field(8; "Posting Date"; Date)
         {
@@ -87,10 +87,10 @@ table 52186213 "Journal Two"
         field(69022; "bal Account No"; Code[30])
         {
         }
-        field(69023; "TransaCTION tYPE"; Option)
+        field(69023; "TransaCTION tYPE"; Enum "Transaction Types")//Option)
         {
-            OptionCaption = ' ,Loan,Repayment,Interest Due,Interest Paid,Bills,Appraisal';
-            OptionMembers = " ",Loan,Repayment,"Interest Due","Interest Paid",Bills,Appraisal;
+            // OptionCaption = ' ,Loan,Repayment,Interest Due,Interest Paid,Bills,Appraisal';
+            // OptionMembers = " ",Loan,Repayment,"Interest Due","Interest Paid",Bills,Appraisal;
         }
         field(69024; "Loan No"; Code[21])
         {

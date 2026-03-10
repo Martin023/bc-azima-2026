@@ -18,12 +18,12 @@ table 52185857 "Document Exemptions Auth."
                 end;
             end;
         }
-        field(2; "Document Type"; Option)
+        field(2; "Document Type"; Enum "Approval Document Type")//Option)
         {
             Caption = 'Document Type';
             Editable = false;
-            OptionCaption = 'Loan,Others';
-            OptionMembers = Loan,Others;
+            // OptionCaption = 'Loan,Others';
+            // OptionMembers = Loan,Others;
         }
         field(3; "Document No."; Code[20])
         {
