@@ -9425,7 +9425,7 @@ codeunit 52186500 "CRM Integration"
             Datum.Add('crm_notes', LoanVariationRequest."CRM Notes");
             Datum.Add('crm_created_by', LoanVariationRequest."CRM Created By");
             Datum.Add('crm_originating_branch', LoanVariationRequest."CRM Originating Branch");
-            Datum.Add('status', LoanVariationRequest.Status);
+            Datum.Add('status', Format(LoanVariationRequest.Status));
             Datum.Add('status_desc', Format(LoanVariationRequest.Status));
             Datum.Add('application_date', GlobalFunctions.FormatISODate(LoanVariationRequest."Application Date"));
             Datum.Add('effective_date', GlobalFunctions.FormatISODate(LoanVariationRequest."Effective month"));
@@ -10472,7 +10472,7 @@ codeunit 52186500 "CRM Integration"
             Datum.Add('crm_notes', DepositVariationRequest."CRM Notes");
             Datum.Add('crm_created_by', DepositVariationRequest."CRM Created By");
             Datum.Add('crm_originating_branch', DepositVariationRequest."CRM Originating Branch");
-            Datum.Add('status', DepositVariationRequest.Status);
+            Datum.Add('status', Format(DepositVariationRequest.Status));
             Datum.Add('status_desc', Format(DepositVariationRequest.Status));
             Datum.Add('application_date', GlobalFunctions.FormatISODate(DepositVariationRequest."Application Date"));
             Datum.Add('effective_date', GlobalFunctions.FormatISODate(DepositVariationRequest."Effective month"));

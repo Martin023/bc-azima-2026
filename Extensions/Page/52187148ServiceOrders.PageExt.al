@@ -274,13 +274,13 @@ PageExtension 52187148 pageextension52187148 extends "Service Orders"
         {
             ApplicationArea = Basic;
         }
-        modify(Statistics)
-        {
-            ApplicationArea = Basic;
+        // modify(Statistics)
+        // {
+        //     ApplicationArea = Basic;
 
-            //Unsupported feature: Property Modification (PromotedCategory) on "Statistics(Action 1102601016)".
+        //     //Unsupported feature: Property Modification (PromotedCategory) on "Statistics(Action 1102601016)".
 
-        }
+        // }
         modify("S&hipments")
         {
             ApplicationArea = Basic;
@@ -505,7 +505,7 @@ PageExtension 52187148 pageextension52187148 extends "Service Orders"
         //         Caption = '';
         //     }
         // }
-        addafter(Statistics)
+        addafter(ServiceOrderStatistics )
         {
             separator(Action1102601017)
             {

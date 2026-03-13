@@ -286,13 +286,13 @@ PageExtension 52187141 pageextension52187141 extends "Purchase Return Order List
     }
     actions
     {
-        modify(Statistics)
-        {
-            ApplicationArea = Basic;
+        // modify(Statistics)
+        // {
+        //     ApplicationArea = Basic;
 
-            //Unsupported feature: Property Modification (PromotedCategory) on "Statistics(Action 1102601027)".
+        //     //Unsupported feature: Property Modification (PromotedCategory) on "Statistics(Action 1102601027)".
 
-        }
+        // }
         modify(Dimensions)
         {
             ApplicationArea = Basic;

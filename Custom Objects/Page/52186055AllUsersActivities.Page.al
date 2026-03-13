@@ -157,7 +157,7 @@ page 52186055 "All Users Activities"
                         ProdVar: record "Product Variations";
                     begin
                         ProdVar.reset;
-                        ProdVar.setfilter(Status, '%1|%2', ProdVar.Status::Open, ProdVar.Status::"Pending Approval");
+                        ProdVar.setfilter(Status, '%1|%2', ProdVar.Status::Open, ProdVar.Status::"Pending");
                         ProdVar.setrange(Posted, false);
                         Page.run(Page::"Savings Variations List", ProdVar);
                     end;
@@ -170,7 +170,7 @@ page 52186055 "All Users Activities"
                         ProdVar: record "Product Variations";
                     begin
                         ProdVar.reset;
-                        ProdVar.setfilter(Status, '%1|%2', ProdVar.Status::Open, ProdVar.Status::"Pending Approval");
+                        ProdVar.setfilter(Status, '%1|%2', ProdVar.Status::Open, ProdVar.Status::"Pending");
                         ProdVar.setrange(Posted, false);
                         Page.run(Page::"Variations List", ProdVar);
                     end;

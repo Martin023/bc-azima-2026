@@ -525,7 +525,7 @@ PageExtension 52186635 pageextension52186635 extends "Service Invoice"
     }
     actions
     {
-        modify(Statistics)
+        modify(ServiceStatistics)
         {
             ApplicationArea = Basic;
 

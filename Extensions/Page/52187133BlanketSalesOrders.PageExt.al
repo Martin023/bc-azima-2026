@@ -198,7 +198,7 @@ PageExtension 52187133 pageextension52187133 extends "Blanket Sales Orders"
     }
     actions
     {
-        modify(Statistics)
+        modify(SalesOrderStatistics)
         {
             ApplicationArea = Basic;
 

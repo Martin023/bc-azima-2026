@@ -48,7 +48,7 @@ table 52187421 "Product Variations"
                 end;
                 Productva.Reset();
                 Productva.SetRange(Productva."Member No.", Rec."Member No.");
-                Productva.SetFilter(Status, '%1|%2', Productva.Status::Open, Productva.Status::"Pending Approval");
+                Productva.SetFilter(Status, '%1|%2', Productva.Status::Open, Productva.Status::"Pending");
                 Productva.SetRange("Variation Type", Rec."Variation Type");
                 if Productva.FindFirst() then begin
                     if Productva."No." <> Rec."No." then begin
@@ -91,10 +91,10 @@ table 52187421 "Product Variations"
         {
 
         }
-        field(25; Status; Option)
+        field(25; Status; Enum "Workflow Status Main Flags") //Option)
 
         {
-            OptionMembers = Open,"Pending Approval",Approved,Rejected,Cancelled;
+            // OptionMembers = Open,"Pending Approval",Approved,Rejected,Cancelled;
             Editable = False;
             // trigger OnValidate() begin
             //     if Status=Status::Approved then begin

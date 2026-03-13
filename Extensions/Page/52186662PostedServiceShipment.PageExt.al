@@ -608,10 +608,10 @@ PageExtension 52186662 pageextension52186662 extends "Posted Service Shipment"
         {
             ApplicationArea = Basic;
         }
-        modify("S&tatistics")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("S&tatistics")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("Co&mments")
         {
             ApplicationArea = Basic;

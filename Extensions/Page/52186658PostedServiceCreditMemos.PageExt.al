@@ -192,7 +192,7 @@ PageExtension 52186658 pageextension52186658 extends "Posted Service Credit Memo
     }
     actions
     {
-        modify(Statistics)
+        modify(ServiceStatistics)
         {
             ApplicationArea = Basic;
         }

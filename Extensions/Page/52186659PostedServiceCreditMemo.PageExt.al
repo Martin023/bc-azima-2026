@@ -420,7 +420,7 @@ PageExtension 52186659 pageextension52186659 extends "Posted Service Credit Memo
     }
     actions
     {
-        modify(Statistics)
+        modify(ServiceStatistics)
         {
             ApplicationArea = Basic;
         }

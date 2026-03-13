@@ -734,7 +734,7 @@ PageExtension 52186653 pageextension52186653 extends "Service Quote"
         {
             ApplicationArea = Basic;
         }
-        modify(Statistics)
+        modify(ServiceStatistics)
         {
             ApplicationArea = Basic;
 

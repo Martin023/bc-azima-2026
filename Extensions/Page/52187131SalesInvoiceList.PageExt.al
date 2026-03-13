@@ -300,10 +300,10 @@ PageExtension 52187131 pageextension52187131 extends "Sales Invoice List"
     }
     actions
     {
-        modify(Statistics)
-        {
-            ApplicationArea = Basic;
-        }
+        // modify(Statistics)
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("Co&mments")
         {
             ApplicationArea = Basic;

@@ -254,7 +254,7 @@ page 52185600 "Savings Variations"
                     ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                 begin
 
-                    if Rec.Status <> Rec.Status::"Pending Approval" then
+                    if Rec.Status <> Rec.Status::"Pending" then
                         Error(DocMustbePending);
 
                     VarVariant := Rec;

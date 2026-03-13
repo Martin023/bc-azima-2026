@@ -366,11 +366,11 @@ PageExtension 52187138 pageextension52187138 extends "Purchase Invoice"
             }
         }
 
-        modify(Statistics)
-        {
-            ApplicationArea = Basic;
+        // modify(SalesOrderStatistics)
+        // {
+        //     ApplicationArea = Basic;
 
-        }
+        // }
         modify("Co&mments")
         {
             ApplicationArea = Basic;
