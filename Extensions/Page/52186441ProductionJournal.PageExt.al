@@ -37,7 +37,7 @@ PageExtension 52186441 pageextension52186441 extends "Production Journal"
         }
         modify(Type)
         {
-            OptionCaption = 'Work Center,Machine Center';
+            // OptionCaption = 'Work Center,Machine Center';
             ApplicationArea = Basic;
         }
         modify("Flushing Method")

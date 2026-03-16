@@ -232,7 +232,7 @@ PageExtension 52187216 pageextension52187216 extends "Permission Set by User"
     }
 
     var
-        PermissionSet: Record "Permission Set";
+        PermissionSet: Record "Aggregate Permission Set";
         CopyPermissionSet: Report "Copy Permission Set";
 
     var

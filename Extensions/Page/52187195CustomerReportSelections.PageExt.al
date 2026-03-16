@@ -5,7 +5,7 @@ PageExtension 52187195 pageextension52187195 extends "Customer Report Selections
     {
         modify(Usage2)
         {
-            OptionCaption = 'Quote,Confirmation Order,Invoice,Credit Memo,Customer Statement';
+            // OptionCaption = 'Quote,Confirmation Order,Invoice,Credit Memo,Customer Statement';
             ApplicationArea = Basic;
         }
         modify(ReportID)

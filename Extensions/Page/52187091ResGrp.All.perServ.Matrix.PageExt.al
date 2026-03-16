@@ -155,14 +155,14 @@ PageExtension 52187091 pageextension52187091 extends "ResGrp. All. per Serv.  Ma
         {
             ApplicationArea = Basic;
         }
-        modify(Costs)
-        {
-            ApplicationArea = Basic;
-        }
-        modify(Prices)
-        {
-            ApplicationArea = Basic;
-        }
+        // modify(Costs)
+        // {
+        //     ApplicationArea = Basic;
+        // }
+        // modify(Prices)
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("Resource Gr. A&vailability")
         {
             ApplicationArea = Basic;

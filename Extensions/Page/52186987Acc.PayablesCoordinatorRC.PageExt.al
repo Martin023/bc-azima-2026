@@ -60,18 +60,18 @@ PageExtension 52186987 pageextension52186987 extends "Acc. Payables Coordinator 
         // {
         //     ApplicationArea = Basic;
         // }
-        modify("Vendor &Document Nos.")
-        {
-            ApplicationArea = Basic;
-        }
-        modify("Purchase &Invoice Nos.")
-        {
-            ApplicationArea = Basic;
-        }
-        modify("Purchase &Credit Memo Nos.")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Vendor &Document Nos.")
+        // {
+        //     ApplicationArea = Basic;
+        // }
+        // modify("Purchase &Invoice Nos.")
+        // {
+        //     ApplicationArea = Basic;
+        // }
+        // modify("Purchase &Credit Memo Nos.")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify(Vendors)
         {
             ApplicationArea = Basic;

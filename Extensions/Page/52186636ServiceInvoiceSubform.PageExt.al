@@ -266,10 +266,10 @@ PageExtension 52186636 pageextension52186636 extends "Service Invoice Subform"
         {
             ApplicationArea = Basic;
         }
-        modify("Get Li&ne Discount")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Get Li&ne Discount")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("Insert &Ext. Texts")
         {
             ApplicationArea = Basic;

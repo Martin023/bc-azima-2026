@@ -8,7 +8,7 @@ codeunit 52186420 "52186420 NavigateExte"
  
     end;
 
-    [EventSubscriber(ObjectType::Page, page::Navigate, 'OnBeforeNavigateShowRecords', '', false, false)]
+    [EventSubscriber(ObjectType::Page, page::Navigate, 'OnBeforeShowRecords', '', false, false)]
     procedure ShowRecordsSacco()
     var
         IsHandled: Boolean;

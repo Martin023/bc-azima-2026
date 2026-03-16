@@ -37,7 +37,7 @@ PageExtension 52186996 pageextension52186996 extends "Shop Supervisor Mfg Founda
         {
             ApplicationArea = Basic;
         }
-        modify("Production &Order Calculation")
+        modify("Production Order Statistics")
         {
             ApplicationArea = Basic;
         }

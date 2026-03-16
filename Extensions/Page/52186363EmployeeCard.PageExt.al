@@ -433,10 +433,10 @@ PageExtension 52186363 pageextension52186363 extends "Employee Card"
         {
             Visible = false;
         }
-        modify("Attached Documents")
-        {
-            Visible = false;
-        }
+        // modify("Attached Documents")
+        // {
+        //     Visible = false;
+        // }
 
         //Unsupported feature: Property Deletion (ApplicationArea) on "Control1900383207(Control 1900383207)".
 
