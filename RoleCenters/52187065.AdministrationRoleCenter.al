@@ -470,224 +470,224 @@ page 52187065 "Administration Role Center"
                             RunPageLink = Status = CONST(Approved);
                         }
                     }
-                    group("Tenants")
-                    {
-                        Caption = 'Tenants';
-                        action("Open Tenants")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Open Tenants';
-                            RunObject = page "Tenant List";
-                            //RunPageLink = "Account Type" = CONST(Tenant);
-                            RunPageView = WHERE(Status = CONST(New), "Account Type" = CONST(Tenant));
-                        }
-                        action("Tenants Pending Approval")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Tenants Pending Approval';
-                            RunObject = page "Tenant List";
-                            //RunPageLink = "Account Type" = CONST(Tenant);
-                            RunPageView = WHERE(Status = CONST("Pending Approval"), "Account Type" = CONST(Tenant));
-                        }
-                        action("Rejected Tenant")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Rejected Tenants';
-                            RunObject = page "Tenant List";
-                            //RunPageLink = "Account Type" = CONST(Tenant);
-                            RunPageView = WHERE(Status = CONST(Rejected), "Account Type" = CONST(Tenant));
-                        }
-                        action("Approved Tenant")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Approved Tenants';
-                            RunObject = page "Tenant List";
-                            //RunPageLink = "Account Type" = CONST(Tenant);
-                            RunPageView = WHERE(Status = CONST(Approved), "Account Type" = CONST(Tenant));
-                        }
-                    }
-                    group("New Tenants")
-                    {
-                        Caption = 'Tenants';
-                        action("Open Tenant")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Open Tenants';
-                            RunObject = page "Customer List";
-                            //RunPageLink = "Account Type" = CONST(Tenant);
-                            RunPageView = WHERE(Status = CONST(New), "Account Type" = CONST(Tenant));
-                        }
-                        action("Tenant Pending Approval")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Tenants Pending Approval';
-                            RunObject = page "Customer List";
-                            //RunPageLink = "Account Type" = CONST(Tenant);
-                            RunPageView = WHERE(Status = CONST("Pending Approval"), "Account Type" = CONST(Tenant));
-                        }
-                        action("Rejecteds  Tenants")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Rejected Tenants';
-                            RunObject = page "Customer List";
-                            //RunPageLink = "Account Type" = CONST(Tenant);
-                            RunPageView = WHERE(Status = CONST(Rejected), "Account Type" = CONST(Tenant));
-                        }
-                        action("Approveds Tenants")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Approved Tenants';
-                            RunObject = page "Customer List";
-                            //RunPageLink = "Account Type" = CONST(Tenant);
-                            RunPageView = WHERE(Status = CONST(Approved), "Account Type" = CONST(Tenant));
-                        }
-                    }
-                    group("Buildings & Property")
-                    {
-                        Caption = 'Buildings & Property';
-                        action("Building List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Building List';
-                            runobject = page "Property List";
-                        }
-                        action("Units")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Offices List';
-                            runobject = page "Unit List";
-                        }
-
-                        action("Land List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Land List';
-                            RunObject = page "Land Property List";
-                        }
-                        action("Active Property List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Active Property List';
-                            RunObject = page "Active Property List";
-                        }
-                    }
-                }
-                group("Lease Management")
-                {
-                    caption = 'Lease Management';
-                    action("Lease List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Open Lease List';
-                        RunObject = page "Lease-List";
-                        //RunPageLink = Status = CONST(Open);
-                        RunPageView = Where(Status = CONST(Open), "Lease Status" = CONST("Open"));
-                    }
-                    action("Pending Lease List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Pending Lease List';
-                        RunObject = page "Lease-List";
-                        //RunPageLink = Status = CONST(Pending);
-                        RunPageView = Where(Status = CONST(Pending), "Lease Status" = CONST("Open"));
-                    }
-                    action("Rejected Lease List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Rejected Lease List';
-                        RunObject = page "Lease-List";
-                        //RunPageLink = Status = CONST(Rejected);
-                        RunPageView = Where(Status = CONST(Rejected), "Lease Status" = CONST("Open"));
-                    }
-                    action("Approved Lease List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Approved Lease List';
-                        RunObject = page "Lease-List";
-                        //RunPageLink = Status = CONST(Approved);
-                        RunPageView = Where(Status = CONST(Approved), "Lease Status" = CONST("Open"));
-                    }
-                }
-                group("Lease Commencement")
-                {
-                    Caption = 'Lease Commencement';
-
-                    action("Lease-Commencement")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Lease-Commencement All Leases';
-                        RunObject = page "Lease-Commencement";
-                    }
-                    // action("Active Lease-List")
-                    // {
-                    //     ApplicationArea = Basic, Suite;
-                    //     Caption = 'Active Lease-List';
-                    //     runobject = page "Active Lease-List";
-                    // }
-                    // action("Terminated Leases")
-                    // {
-                    //     ApplicationArea = Basic, Suite;
-                    //     Caption = 'Terminated Leases';
-                    //     RunObject = page "Terminate Active Lease-List";
-                    // }
-                    action("Active Leases")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Active Leases List';
-                        RunObject = page "Lease-List";
-                        //RunPageLink = Terminated = CONST(TRUE);
-                        RunPageLink = "Lease Status" = CONST("Active");
-                    }
-                    action("Terminated Leases List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Terminated Leases List';
-                        RunObject = page "Lease-List";
-                        RunPageLink = Terminated = CONST(TRUE);
-                    }
-                    action("Expired Leases")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Expired Leases';
-                        RunObject = page "Lease-list";
-                        RunPageLink = Expired = CONST(true);
-                    }
-                    action("Renewed Leases")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Renewed Leases';
-                        RunObject = page "Lease-list";
-                        RunPageLink = "Renew Lease" = CONST(true);
-                    }
-                    // action("Bills List")
-                    // {
-                    //     ApplicationArea = Basic, Suite;
-                    //     Caption = 'Bills List';
-                    //     RunObject = page "Bills List";
-                    // }
-                    // action("Posted Bills List")
-                    // {
-                    //     ApplicationArea = Basic, Suite;
-                    //     Caption = 'Posted Bills List';
-                    //     RunObject = page "Posted Bills List";
-                    // }
-                }
-                // group("Approvals")
-                // {
-                //     Caption = 'Approvals';
-                //     action("Approval Entries")
+                //     group("Tenants")
                 //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Approval Entries';
-                //         RunObject = page "Approval Entries";
+                //         Caption = 'Tenants';
+                //         action("Open Tenants")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Open Tenants';
+                //             RunObject = page "Tenant List";
+                //             //RunPageLink = "Account Type" = CONST(Tenant);
+                //             RunPageView = WHERE(Status = CONST(New), "Account Type" = CONST(Tenant));
+                //         }
+                //         action("Tenants Pending Approval")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Tenants Pending Approval';
+                //             RunObject = page "Tenant List";
+                //             //RunPageLink = "Account Type" = CONST(Tenant);
+                //             RunPageView = WHERE(Status = CONST("Pending Approval"), "Account Type" = CONST(Tenant));
+                //         }
+                //         action("Rejected Tenant")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Rejected Tenants';
+                //             RunObject = page "Tenant List";
+                //             //RunPageLink = "Account Type" = CONST(Tenant);
+                //             RunPageView = WHERE(Status = CONST(Rejected), "Account Type" = CONST(Tenant));
+                //         }
+                //         action("Approved Tenant")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Approved Tenants';
+                //             RunObject = page "Tenant List";
+                //             //RunPageLink = "Account Type" = CONST(Tenant);
+                //             RunPageView = WHERE(Status = CONST(Approved), "Account Type" = CONST(Tenant));
+                //         }
                 //     }
-                //     action("Approval Request Entries")
+                //     group("New Tenants")
                 //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Approval Request Entries';
-                //         RunObject = page "Approval Request Entries";
+                //         Caption = 'Tenants';
+                //         action("Open Tenant")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Open Tenants';
+                //             RunObject = page "Customer List";
+                //             //RunPageLink = "Account Type" = CONST(Tenant);
+                //             RunPageView = WHERE(Status = CONST(New), "Account Type" = CONST(Tenant));
+                //         }
+                //         action("Tenant Pending Approval")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Tenants Pending Approval';
+                //             RunObject = page "Customer List";
+                //             //RunPageLink = "Account Type" = CONST(Tenant);
+                //             RunPageView = WHERE(Status = CONST("Pending Approval"), "Account Type" = CONST(Tenant));
+                //         }
+                //         action("Rejecteds  Tenants")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Rejected Tenants';
+                //             RunObject = page "Customer List";
+                //             //RunPageLink = "Account Type" = CONST(Tenant);
+                //             RunPageView = WHERE(Status = CONST(Rejected), "Account Type" = CONST(Tenant));
+                //         }
+                //         action("Approveds Tenants")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Approved Tenants';
+                //             RunObject = page "Customer List";
+                //             //RunPageLink = "Account Type" = CONST(Tenant);
+                //             RunPageView = WHERE(Status = CONST(Approved), "Account Type" = CONST(Tenant));
+                //         }
+                //     }
+                //     group("Buildings & Property")
+                //     {
+                //         Caption = 'Buildings & Property';
+                //         action("Building List")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Building List';
+                //             runobject = page "Property List";
+                //         }
+                //         action("Units")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Offices List';
+                //             runobject = page "Unit List";
+                //         }
+
+                //         action("Land List")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Land List';
+                //             RunObject = page "Land Property List";
+                //         }
+                //         action("Active Property List")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Active Property List';
+                //             RunObject = page "Active Property List";
+                //         }
                 //     }
                 // }
+                // group("Lease Management")
+                // {
+                //     caption = 'Lease Management';
+                //     action("Lease List")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Open Lease List';
+                //         RunObject = page "Lease-List";
+                //         //RunPageLink = Status = CONST(Open);
+                //         RunPageView = Where(Status = CONST(Open), "Lease Status" = CONST("Open"));
+                //     }
+                //     action("Pending Lease List")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Pending Lease List';
+                //         RunObject = page "Lease-List";
+                //         //RunPageLink = Status = CONST(Pending);
+                //         RunPageView = Where(Status = CONST(Pending), "Lease Status" = CONST("Open"));
+                //     }
+                //     action("Rejected Lease List")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Rejected Lease List';
+                //         RunObject = page "Lease-List";
+                //         //RunPageLink = Status = CONST(Rejected);
+                //         RunPageView = Where(Status = CONST(Rejected), "Lease Status" = CONST("Open"));
+                //     }
+                //     action("Approved Lease List")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Approved Lease List';
+                //         RunObject = page "Lease-List";
+                //         //RunPageLink = Status = CONST(Approved);
+                //         RunPageView = Where(Status = CONST(Approved), "Lease Status" = CONST("Open"));
+                //     }
+                // }
+                // group("Lease Commencement")
+                // {
+                //     Caption = 'Lease Commencement';
+
+                //     action("Lease-Commencement")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Lease-Commencement All Leases';
+                //         RunObject = page "Lease-Commencement";
+                //     }
+                //     // action("Active Lease-List")
+                //     // {
+                //     //     ApplicationArea = Basic, Suite;
+                //     //     Caption = 'Active Lease-List';
+                //     //     runobject = page "Active Lease-List";
+                //     // }
+                //     // action("Terminated Leases")
+                //     // {
+                //     //     ApplicationArea = Basic, Suite;
+                //     //     Caption = 'Terminated Leases';
+                //     //     RunObject = page "Terminate Active Lease-List";
+                //     // }
+                //     action("Active Leases")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Active Leases List';
+                //         RunObject = page "Lease-List";
+                //         //RunPageLink = Terminated = CONST(TRUE);
+                //         RunPageLink = "Lease Status" = CONST("Active");
+                //     }
+                //     action("Terminated Leases List")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Terminated Leases List';
+                //         RunObject = page "Lease-List";
+                //         RunPageLink = Terminated = CONST(TRUE);
+                //     }
+                //     action("Expired Leases")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Expired Leases';
+                //         RunObject = page "Lease-list";
+                //         RunPageLink = Expired = CONST(true);
+                //     }
+                //     action("Renewed Leases")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Renewed Leases';
+                //         RunObject = page "Lease-list";
+                //         RunPageLink = "Renew Lease" = CONST(true);
+                //     }
+                //     // action("Bills List")
+                //     // {
+                //     //     ApplicationArea = Basic, Suite;
+                //     //     Caption = 'Bills List';
+                //     //     RunObject = page "Bills List";
+                //     // }
+                //     // action("Posted Bills List")
+                //     // {
+                //     //     ApplicationArea = Basic, Suite;
+                //     //     Caption = 'Posted Bills List';
+                //     //     RunObject = page "Posted Bills List";
+                //     // }
+                // }
+                // // group("Approvals")
+                // // {
+                // //     Caption = 'Approvals';
+                // //     action("Approval Entries")
+                // //     {
+                // //         ApplicationArea = Basic, Suite;
+                // //         Caption = 'Approval Entries';
+                // //         RunObject = page "Approval Entries";
+                // //     }
+                // //     action("Approval Request Entries")
+                // //     {
+                // //         ApplicationArea = Basic, Suite;
+                // //         Caption = 'Approval Request Entries';
+                // //         RunObject = page "Approval Request Entries";
+                // //     }
+                // // }
                 group("Setup")
                 {
                     caption = 'Property Management Setups';
@@ -981,127 +981,127 @@ page 52187065 "Administration Role Center"
                 //     }
                 // }
             }
-            group("Parking Management")
-            {
-                Caption = 'Parking';
-                group("Parking Tenants Creation")
-                {
-                    action("Open Parking Tenants")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Parking Tenants Creation';
-                        RunObject = page "Tenant List";
-                        RunPageLink = Status = CONST(New), "Account Type" = CONST("Parking Customer");
-                    }
-                    action("Approved Tenants")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Approved Parking Tenants';
-                        RunObject = page "Tenant List";
-                        RunPageLink = Status = CONST(Approved), "Account Type" = CONST("Parking Customer");
-                    }
-                    action("Closed Tenants")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Pending Parking Tenants';
-                        RunObject = page "Tenant List";
-                        RunPageLink = Status = CONST("Pending Approval"), "Account Type" = CONST("Parking Customer");
-                    }
-                    action("Rejected Tenants")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Rejected Parking Tenants';
-                        RunObject = page "Tenant List";
-                        RunPageLink = Status = CONST(Rejected), "Account Type" = CONST("Parking Customer");
-                    }
-                }
-                group("Parking Space Creation")
-                {
-                    action("Parking Spaces")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Parking Space';
-                        RunObject = page "MNS Parking Space List";
-                    }
+            // group("Parking Management")
+            // {
+            //     Caption = 'Parking';
+            //     group("Parking Tenants Creation")
+            //     {
+            //         action("Open Parking Tenants")
+            //         {
+            //             ApplicationArea = All;
+            //             Caption = 'Parking Tenants Creation';
+            //             RunObject = page "Tenant List";
+            //             RunPageLink = Status = CONST(New), "Account Type" = CONST("Parking Customer");
+            //         }
+            //         action("Approved Tenants")
+            //         {
+            //             ApplicationArea = All;
+            //             Caption = 'Approved Parking Tenants';
+            //             RunObject = page "Tenant List";
+            //             RunPageLink = Status = CONST(Approved), "Account Type" = CONST("Parking Customer");
+            //         }
+            //         action("Closed Tenants")
+            //         {
+            //             ApplicationArea = All;
+            //             Caption = 'Pending Parking Tenants';
+            //             RunObject = page "Tenant List";
+            //             RunPageLink = Status = CONST("Pending Approval"), "Account Type" = CONST("Parking Customer");
+            //         }
+            //         action("Rejected Tenants")
+            //         {
+            //             ApplicationArea = All;
+            //             Caption = 'Rejected Parking Tenants';
+            //             RunObject = page "Tenant List";
+            //             RunPageLink = Status = CONST(Rejected), "Account Type" = CONST("Parking Customer");
+            //         }
+            //     }
+            //     group("Parking Space Creation")
+            //     {
+            //         action("Parking Spaces")
+            //         {
+            //             ApplicationArea = All;
+            //             Caption = 'Parking Space';
+            //             RunObject = page "MNS Parking Space List";
+            //         }
 
-                    // action("Approved Parking Spaces")
-                    // {
-                    //     ApplicationArea = All;
-                    //     Caption = 'Approved Parking Space';
-                    //     RunObject = page "MNS Parking Space List";
-                    //     RunPageLink = Status = const(Approved); 
-                    // }
-                    // action("Pending Parking Spaces")
-                    // {
-                    //     ApplicationArea = All;
-                    //     Caption = 'Pending Parking Space';
-                    //     RunObject = page "MNS Parking Space List";
-                    //     RunPageLink = Status = CONST(Pending);
-                    // }
-                    // action("Rejected Parking Spaces")
-                    // {
-                    //     ApplicationArea = All;
-                    //     Caption = 'Rejected Parking Space';
-                    //     RunObject = page "MNS Parking Space List";
-                    // }
-                }
-                group("Parking Space Application")
-                {
-                    Group("Parking Allocation")
-                    {
-                        action("Parking Space List")
-                        {
-                            ApplicationArea = All;
-                            Caption = 'Open Parking Application';
-                            RunObject = page "Parking Space List";
-                            RunPageLink = Status = CONST(Open);
-                        }
-                        action("Pending Parking Space Application")
-                        {
-                            ApplicationArea = All;
-                            Caption = 'Pending Parking Allocation';
-                            //RunObject = page "Approved Parking - List";
-                            RunObject = page "Parking Space List";
-                            RunPageLink = Status = CONST(Pending);
-                        }
-                        action("Approved Parking Space Application")
-                        {
-                            ApplicationArea = All;
-                            Caption = 'Approved Parking Allocation';
-                            //RunObject = page "Approved Parking - List";
-                            RunObject = page "Parking Space List";
-                            RunPageLink = Status = CONST(Approved);
-                        }
-                        action("Rejected Parking Space Application")
-                        {
-                            ApplicationArea = All;
-                            Caption = 'Rejected Parking Allocation';
-                            //RunObject = page "Rejected Parking Space - List";
-                            RunObject = page "Parking Space List";
-                            RunPageLink = Status = CONST(Rejected);
-                        }
+            //         // action("Approved Parking Spaces")
+            //         // {
+            //         //     ApplicationArea = All;
+            //         //     Caption = 'Approved Parking Space';
+            //         //     RunObject = page "MNS Parking Space List";
+            //         //     RunPageLink = Status = const(Approved); 
+            //         // }
+            //         // action("Pending Parking Spaces")
+            //         // {
+            //         //     ApplicationArea = All;
+            //         //     Caption = 'Pending Parking Space';
+            //         //     RunObject = page "MNS Parking Space List";
+            //         //     RunPageLink = Status = CONST(Pending);
+            //         // }
+            //         // action("Rejected Parking Spaces")
+            //         // {
+            //         //     ApplicationArea = All;
+            //         //     Caption = 'Rejected Parking Space';
+            //         //     RunObject = page "MNS Parking Space List";
+            //         // }
+            //     }
+            //     group("Parking Space Application")
+            //     {
+            //         Group("Parking Allocation")
+            //         {
+            //             action("Parking Space List")
+            //             {
+            //                 ApplicationArea = All;
+            //                 Caption = 'Open Parking Application';
+            //                 RunObject = page "Parking Space List";
+            //                 RunPageLink = Status = CONST(Open);
+            //             }
+            //             action("Pending Parking Space Application")
+            //             {
+            //                 ApplicationArea = All;
+            //                 Caption = 'Pending Parking Allocation';
+            //                 //RunObject = page "Approved Parking - List";
+            //                 RunObject = page "Parking Space List";
+            //                 RunPageLink = Status = CONST(Pending);
+            //             }
+            //             action("Approved Parking Space Application")
+            //             {
+            //                 ApplicationArea = All;
+            //                 Caption = 'Approved Parking Allocation';
+            //                 //RunObject = page "Approved Parking - List";
+            //                 RunObject = page "Parking Space List";
+            //                 RunPageLink = Status = CONST(Approved);
+            //             }
+            //             action("Rejected Parking Space Application")
+            //             {
+            //                 ApplicationArea = All;
+            //                 Caption = 'Rejected Parking Allocation';
+            //                 //RunObject = page "Rejected Parking Space - List";
+            //                 RunObject = page "Parking Space List";
+            //                 RunPageLink = Status = CONST(Rejected);
+            //             }
 
-                        action("Closed Parking Space Application")
-                        {
-                            ApplicationArea = All;
-                            Caption = 'Closed Parking Allocations';
-                            RunObject = page "Parking Space List";
-                            //RunObject = page "Closed Parking Spaces - List";
-                            RunPageLink = "Booking Status" = CONST(Closed);
-                        }
-                    }
-                    group("Parking Allocation Edits")
-                    {
-                        action("Parking Allocations Edits")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Parking Allocations Edits';
-                            RunObject = Page "System Edits List";
-                            RunPageLink = "Table ID" = CONST(52187060);
-                        }
-                    }
-                }
-            }
+            //             action("Closed Parking Space Application")
+            //             {
+            //                 ApplicationArea = All;
+            //                 Caption = 'Closed Parking Allocations';
+            //                 RunObject = page "Parking Space List";
+            //                 //RunObject = page "Closed Parking Spaces - List";
+            //                 RunPageLink = "Booking Status" = CONST(Closed);
+            //             }
+            //         }
+            //         group("Parking Allocation Edits")
+            //         {
+            //             action("Parking Allocations Edits")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Parking Allocations Edits';
+            //                 RunObject = Page "System Edits List";
+            //                 RunPageLink = "Table ID" = CONST(52187060);
+            //             }
+            //         }
+            //     }
+            // }
             group("SACCO Insurance")
             {
                 Caption = 'Insurance Contracts';
@@ -1835,7 +1835,7 @@ page 52187065 "Administration Role Center"
         }
 
     }
-}
+}}
 profile "Administration Role Center"
 {
     Caption = 'Administration Role Center';

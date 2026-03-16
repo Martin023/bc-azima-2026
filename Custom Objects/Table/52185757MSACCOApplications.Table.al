@@ -330,7 +330,8 @@ table 52185757 "M-SACCO Applications"
         if No = '' then begin
             NoSetup.Get;
             NoSetup.TestField(NoSetup."M-SACCO Application Nos");
-            NoSeriesMgt.InitSeries(NoSetup."M-SACCO Application Nos", xRec."No. Series", 0D, No, "No. Series");
+            No := NoSeriesMgt.GetNextNo(NoSetup."M-SACCO Application Nos");
+            // NoSeriesMgt.InitSeries(NoSetup."M-SACCO Application Nos", xRec."No. Series", 0D, No, "No. Series");
         end;
 
 
@@ -342,7 +343,8 @@ table 52185757 "M-SACCO Applications"
 
     var
         NoSetup: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         WithdrawLimit: Record "M-SACCO Withdrawal Limits";
         MPESAApp: Record "M-SACCO Applications";
         MPESAAppDetails: Record "M-SACCO Application Details";

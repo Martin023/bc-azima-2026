@@ -413,7 +413,8 @@ table 52185674 "prSalary Advance"
         if "Loan No." = '' then begin
             prSetup.Get;
             prSetup.TestField("Salary Advance Nos.");
-            NoSeriesMgt.InitSeries(prSetup."Salary Advance Nos.", xRec."No. Series", 0D, "Loan No.", "No. Series");
+            "Loan No." := NoSeriesMgt.GetNextNo(prSetup."Salary Advance Nos.");
+            // NoSeriesMgt.InitSeries(prSetup."Salary Advance Nos.", xRec."No. Series", 0D, "Loan No.", "No. Series");
         end;
 
 
@@ -452,7 +453,8 @@ table 52185674 "prSalary Advance"
         if "Loan No." = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Loan Application Nos.");
-            NoSeriesMgt.InitSeries(HRSetup."Loan Application Nos.", xRec."No. Series", 0D, "Loan No.", "No. Series");
+            "Loan No." := NoSeriesMgt.GetNextNo(HRSetup."Loan Application Nos.");
+            // NoSeriesMgt.InitSeries(HRSetup."Loan Application Nos.", xRec."No. Series", 0D, "Loan No.", "No. Series");
         end;
         //GET APPLICANT DETAILS FROM HR EMPLOYEES TABLE AND COPY THEM TO THE LEAVE APPLICATION TABLE
         HREmp.Reset;
@@ -519,7 +521,8 @@ table 52185674 "prSalary Advance"
         HREmp: Record "HR Employees";
         Txt001: Label 'User must be Setup as an employee first. Consult the HR Officer so as to be setup as an employee';
         prSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         prSalary: Record "PR Salary Card";
         EmpDate: Date;
         objLoanApps: Record "prSalary Advance";
@@ -545,10 +548,22 @@ table 52185674 "prSalary Advance"
 
         prSetup.Get;
         prSetup.TestField("Salary Advance Nos.");
-        if NoSeriesMgt.SelectSeries(prSetup."Salary Advance Nos.", xRec."No. Series", "No. Series") then begin
-            NoSeriesMgt.SetSeries("Requisition No.");
+        if Rec."No. Series" = '' then
+            Rec."No. Series" := prSetup."Salary Advance Nos.";
+
+        if Rec."No. Series" <> '' then begin
+            Rec."Requisition No." := NoSeriesMgt.GetNextNo(
+                Rec."No. Series",
+                WorkDate(),
+                true
+            );
             exit(true);
         end;
+        
+        // if NoSeriesMgt.SelectSeries(prSetup."Salary Advance Nos.", xRec."No. Series", "No. Series") then begin
+        //     NoSeriesMgt.SetSeries("Requisition No.");
+        //     exit(true);
+        // end;
     end;
 }
 

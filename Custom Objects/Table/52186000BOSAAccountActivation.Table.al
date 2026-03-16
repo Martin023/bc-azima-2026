@@ -251,7 +251,8 @@ table 52186000 "BOSA Account Activation"
         if No = '' then begin
             MembNoSeries.Get;
             MembNoSeries.TestField(MembNoSeries."BOSA Account Activation");
-            NoSeriesMgt.InitSeries(MembNoSeries."BOSA Account Activation", xRec.No, 0D, No, "No. Series");
+            No := NoSeriesMgt.GetNextNo(MembNoSeries."BOSA Account Activation");
+            // NoSeriesMgt.InitSeries(MembNoSeries."BOSA Account Activation", xRec.No, 0D, No, "No. Series");
             "User Id" := UserId;
             "Activation Date" := Today;
             rec.Date := Today;
@@ -269,7 +270,8 @@ table 52186000 "BOSA Account Activation"
         Members: Record Members;
         SavingsAccounts: Record "Savings Accounts";
         MembNoSeries: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record "User Setup";
         GlobalFunctions: Codeunit "Global Functions";
         ProdFact: Record "Product Factory";

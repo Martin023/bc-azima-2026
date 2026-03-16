@@ -226,7 +226,7 @@ Codeunit 52185493 "POST ATM Transactions"
 
                         if ExciseDuty <> 0 then
                             POSTJOURNAL.PostJournal(JTemplate, JBatch, LineNo, Optionsaccounts::"G/L Account", DocNo, TransDescription, ExciseDuty
-                               , GenSetup."Excise Duty G/L", Today, Optionsaccounts::"G/L Account", '', ATMTrans."Account No", savingAcct."Global Dimension 1 Code", savingAcct."Global Dimension 2 Code", 0, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                               , GenSetup."Excise Duty G/L", Today, Optionsaccounts::"G/L Account", '', ATMTrans."Account No", savingAcct."Global Dimension 1 Code", savingAcct."Global Dimension 2 Code", TransType::" ", '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
 
                         // -- send SMS alert -- //
                         PhoneNo := '';

@@ -174,12 +174,14 @@ table 52185701 "Next of KIN"
     trigger OnInsert()
     var
         PasswordHandler: Codeunit "Password Handler";
+        plainuuid: SecretText;
     begin
         "Date Modified" := Today;
 
         if Identification = '' then begin
             if "System UID" = '' then begin
-                Identification := PasswordHandler.GeneratePassword(10);
+                plainuuid := PasswordHandler.GenerateSecretPassword(10);
+                Identification := UnwrapSecretPassword(plainuuid);
                 "System UID" := Identification;
             end else begin
                 Identification := "System UID";
@@ -206,6 +208,12 @@ table 52185701 "Next of KIN"
     begin
         if StrLen(VarVariant) > FldLength then
             Error(FieldLengthError, FldLength);
+    end;
+
+    [NonDebuggable]
+    local procedure UnwrapSecretPassword(SecretPassword: SecretText): Text
+    begin
+        exit(SecretPassword.Unwrap());
     end;
 }
 

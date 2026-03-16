@@ -279,7 +279,7 @@ PageExtension 52187134 pageextension52187134 extends "Sales Return Order List"
     }
     actions
     {
-        modify(Statistics)
+        modify(SalesOrderStatistics)
         {
             ApplicationArea = Basic;
 

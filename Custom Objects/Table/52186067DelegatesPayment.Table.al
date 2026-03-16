@@ -19,7 +19,8 @@ table 52186067 "Delegates Payment"
                 if Code = '' then begin
                     MembNoSeries.Get;
                     MembNoSeries.TestField(MembNoSeries."Delegate Payment Nos.");
-                    NoSeriesMgt.InitSeries(MembNoSeries."Delegate Payment Nos.", xRec."No. Series", 0D, Code, "No. Series");
+
+                    // NoSeriesMgt.InitSeries(MembNoSeries."Delegate Payment Nos.", xRec."No. Series", 0D, Code, "No. Series");
                     "Created By" := UserId;
                     "Creation Date" := Today;
                 end;
@@ -179,7 +180,8 @@ table 52186067 "Delegates Payment"
         if Code = '' then begin
             MembNoSeries.Get;
             MembNoSeries.TestField(MembNoSeries."Delegate Payment Nos.");
-            NoSeriesMgt.InitSeries(MembNoSeries."Delegate Payment Nos.", xRec."No. Series", 0D, Code, "No. Series");
+            Code := NoSeriesMgt.GetNextNo(MembNoSeries."Delegate Payment Nos.");
+            // NoSeriesMgt.InitSeries(MembNoSeries."Delegate Payment Nos.", xRec."No. Series", 0D, Code, "No. Series");
             "Created By" := UserId;
             "Creation Date" := Today;
             "Document Date" := Today;
@@ -271,7 +273,8 @@ table 52186067 "Delegates Payment"
     var
         ElectrolZones: Record "Electoral Zones";
         MembNoSeries: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         SegmentCountyDividendSignat: Record "Segment/County/Dividend/Signat";
         DelegateGroupss: Record "Delegate Region";
         DelegateMemberss: Record "Delegate Members";

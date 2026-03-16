@@ -222,7 +222,7 @@ PageExtension 52186664 pageextension52186664 extends "Posted Service Invoices"
     }
     actions
     {
-        modify(Statistics)
+        modify(ServiceStatistics)
         {
             ApplicationArea = Basic;
         }

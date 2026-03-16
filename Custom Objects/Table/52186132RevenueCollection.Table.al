@@ -91,7 +91,8 @@ table 52186132 "Revenue Collection"
         if "No." = '' then begin
             CreditNosSeries.Get;
             CreditNosSeries.TestField(CreditNosSeries."Revenue Collection Nos.");
-            NoSeriesMgt.InitSeries(CreditNosSeries."Revenue Collection Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(CreditNosSeries."Revenue Collection Nos.");  
+            // NoSeriesMgt.InitSeries(CreditNosSeries."Revenue Collection Nos.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
 
@@ -104,5 +105,6 @@ table 52186132 "Revenue Collection"
     end;
 
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 }

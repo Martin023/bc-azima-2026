@@ -101,7 +101,8 @@ table 52186186 "Master Record Creation Header"
 
     var
         GenLedgerSetup: Record "General Ledger Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         DimVal: Record "Dimension Value";
         Visible: Boolean;
 }

@@ -92,7 +92,8 @@ table 52186267 "ATM Return Table"
         if "No." = '' then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."Dispatch ATM Header No.");
-            NoSeriesMgt.InitSeries(NoSetup."ATM Return No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(NoSetup."Dispatch ATM Header No.");
+            // NoSeriesMgt.InitSeries(NoSetup."ATM Return No.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         "User ID" := UpperCase(UserId);
@@ -102,7 +103,8 @@ table 52186267 "ATM Return Table"
 
     var
         NoSetup: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 
 }
 

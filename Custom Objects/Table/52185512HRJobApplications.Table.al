@@ -448,7 +448,9 @@ table 52185512 "HR Job Applications"
         if "Job Application No." = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Job Application Nos");
-            NoSeriesMgt.InitSeries(HRSetup."Job Application Nos", xRec."No. Series", 0D, "Job Application No.", "No. Series");
+            "Job Application No." := NoSeriesMgt.GetNextNo(HRSetup."Job Application Nos");
+
+            // NoSeriesMgt.InitSeries(HRSetup."Job Application Nos", xRec."No. Series", 0D, "Job Application No.", "No. Series");
         end;
 
         "Date Applied" := Today;
@@ -466,7 +468,8 @@ table 52185512 "HR Job Applications"
     var
         HREmpReq: Record "HR Employee Requisitions";
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        noSeriesMgt: Codeunit "No. Series";
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
         HREmpQual: Record "HR Employee Qualifications";
         HRAppQual: Record "HR Applicant Qualifications";
         HRAppReff: Record "HR Applicant Referees";

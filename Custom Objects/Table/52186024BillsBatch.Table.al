@@ -61,7 +61,8 @@ table 52186024 "Bills Batch"
         if "Batch No." = '' then begin
             GeneralSetup.Get;
             GeneralSetup.TestField(GeneralSetup."Bill Batch No.");
-            NoSeriesMgt.InitSeries(GeneralSetup."Bill Batch No.", xRec."No. Series", 0D, "Batch No.", "No. Series");
+            "Batch No." := NoSeriesMgt.GetNextNo(GeneralSetup."Bill Batch No.");
+            // NoSeriesMgt.InitSeries(GeneralSetup."Bill Batch No.", xRec."No. Series", 0D, "Batch No.", "No. Series");
         end;
     end;
 
@@ -72,7 +73,8 @@ table 52186024 "Bills Batch"
 
     var
         SalesSetup: Record "Sales & Receivables Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         GeneralSetup: Record "General Setup";
 }
 

@@ -136,7 +136,7 @@ page 52185564 "HR Leave Reimbursment Card"
 
                     trigger OnAction()
                     var
-                        DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order",Jobs,"Employee Req",Employees,Promotion,Confirmation,"Employee Transfer","Asset Transfer","Transport Req",Overtime,"Training App","Leave App","Leave Reimb";
+                        DocumentType: Enum "Approval Document Type";//Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order",Jobs,"Employee Req",Employees,Promotion,Confirmation,"Employee Transfer","Asset Transfer","Transport Req",Overtime,"Training App","Leave App","Leave Reimb";
                     ApprovalEntries: Page "Approval Entries";
                     begin
 

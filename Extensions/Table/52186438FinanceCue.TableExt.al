@@ -205,12 +205,12 @@ TableExtension 52186438 tableextension52186438 extends "Finance Cue"
         }
         field(50083; "Open/Pending Saving Variations"; Integer)
         {
-            CalcFormula = count("Product Variations" where(Status = filter(Open | "Pending Approval"), Posted = const(false), "Variation Type" = const(Savings), "Sent Back to CRM" = CONST(false)));
+            CalcFormula = count("Product Variations" where(Status = filter(Open | "Pending"), Posted = const(false), "Variation Type" = const(Savings), "Sent Back to CRM" = CONST(false)));
             FieldClass = FlowField;
         }
         field(50084; "Open/Pending Loan Variations"; Integer)
         {
-            CalcFormula = count("Product Variations" where(Status = filter(Open | "Pending Approval"), Posted = const(false), "Variation Type" = const(Loan), "Sent Back to CRM" = CONST(false)));
+            CalcFormula = count("Product Variations" where(Status = filter(Open | "Pending"), Posted = const(false), "Variation Type" = const(Loan), "Sent Back to CRM" = CONST(false)));
             FieldClass = FlowField;
         }
 

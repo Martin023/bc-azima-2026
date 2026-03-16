@@ -328,7 +328,7 @@ page 52186262 "Land Property Details"
     end;
 
     var
-        FrmCalendar: Page "Units Meter Rating";
+        // FrmCalendar: Page "Units Meter Rating";
         D: Date;
 
         "Total Area sq ftVisible": Boolean;

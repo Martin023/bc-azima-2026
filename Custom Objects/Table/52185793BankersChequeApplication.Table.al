@@ -100,7 +100,8 @@ table 52185793 "Bankers Cheque Application"
         if "No." = '' then begin
             SalesSetup.Get;
             SalesSetup.TestField(SalesSetup."Bankers Cheque Application Nos");
-            Noseriesmgt.InitSeries(SalesSetup."Bankers Cheque Application Nos", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SalesSetup."Bankers Cheque Application Nos");
+            // Noseriesmgt.InitSeries(SalesSetup."Bankers Cheque Application Nos", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
 
@@ -128,7 +129,8 @@ table 52185793 "Bankers Cheque Application"
     end;
 
     var
-        Noseriesmgt: Codeunit NoSeriesManagement;
+        // Noseriesmgt: Codeunit NoSeriesManagement;
+        Noseriesmgt: Codeunit "No. Series";
         SalesSetup: Record "Banking No Setup";
         UserSetup: Record "User Setup";
         GeneralSetUp: Record "General Set-Up";

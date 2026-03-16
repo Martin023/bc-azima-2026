@@ -402,7 +402,8 @@ table 52186117 "Product Factory Application"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Product Factory");
-            NoSeriesMgt.InitSeries(SeriesSetup."Product Factory", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Product Factory");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Product Factory", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         /*IF UserSet.GET(USERID) THEN BEGIN
@@ -418,7 +419,8 @@ table 52186117 "Product Factory Application"
 
     var
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         ProductFactory: Record "Product Factory";
 }
 

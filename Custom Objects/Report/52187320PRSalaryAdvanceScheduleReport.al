@@ -117,31 +117,4 @@ report 52187320 "PRSalaryAdvanceSchedule"
             }
         }
     }
-
-
-
-    var
-
-
-
-        NoSeriesMgt: Codeunit NoSeriesManagement;
-        prSalary: Record "PR Salary Card";
-        EmpDate: Date;
-        objLoanApps: Record "prSalary Advance";
-        "flat rate interest": Integer;
-        "Flat Rate Principal": Integer;
-        Repayment: Decimal;
-        "Total Repayment": Decimal;
-        TotalMRepay: Decimal;
-        lPrincipal: Decimal;
-        linterest: Decimal;
-        InterestRate: Decimal;
-        RepayPeriod: Decimal;
-        LoanAmount: Decimal;
-        LBalance: Decimal;
-        HRSetup: Record "HR Setup";
-        UserSetup: Record "User Setup";
-        prperiodtrans: Record "PR Period Transactions";
-        prPayPeriod: Record "PR Payroll Periods";
-
 }

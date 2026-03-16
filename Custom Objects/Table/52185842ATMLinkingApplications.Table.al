@@ -468,7 +468,8 @@ table 52185842 "ATM Linking Applications"
         if "No." = '' then begin
             BankingNoSetup.Get();
             BankingNoSetup.TestField(BankingNoSetup."ATM Linking Application Nos");
-            NoSeriesMgt.InitSeries(BankingNoSetup."ATM Linking Application Nos", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(BankingNoSetup."ATM Linking Application Nos");
+            // NoSeriesMgt.InitSeries(BankingNoSetup."ATM Linking Application Nos", xRec."No. Series", 0D, "No.", "No. Series");
         end;
         "Application Date" := Today;
         "Captured By" := UserId;
@@ -481,7 +482,8 @@ table 52185842 "ATM Linking Applications"
     var
         GeneralSetUp: Record "General Set-Up";
         BankingNoSetup: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         SavingsAccounts: Record "Savings Accounts";
         Members: Record Members;
         SavingsAccountss: Record "Savings Accounts";

@@ -402,7 +402,8 @@ table 52186162 "HR Disciplinary Cases NCA"
         if "Case Number" = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Disciplinary Cases Nos.");
-            NoSeriesMgt.InitSeries(HRSetup."Disciplinary Cases Nos.", xRec."No. Series", 0D, "Case Number", "No. Series");
+            "Case Number" := NoSeriesMgt.GetNextNo(HRSetup."Disciplinary Cases Nos.");
+            // NoSeriesMgt.InitSeries(HRSetup."Disciplinary Cases Nos.", xRec."No. Series", 0D, "Case Number", "No. Series");
         end;
 
         "User ID" := UserId;
@@ -429,7 +430,8 @@ table 52186162 "HR Disciplinary Cases NCA"
 
     var
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Emp: Record "HR Employees";
         Committees: Record "HR Committees";
         Policies: Record "HR Policies";

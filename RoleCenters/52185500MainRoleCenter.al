@@ -1271,7 +1271,7 @@ page 52185500 "Main Role Center"
                         {
                             ApplicationArea = Basic, Suite;
                             Caption = 'General Set-Up';
-                            RunObject = page "Gen set-up card";
+                            // RunObject = page "Gen set-up card";
                         }
                         action("No. Setup")
                         {
@@ -3037,54 +3037,54 @@ page 52185500 "Main Role Center"
                             RunObject = Page "Online Users";
                         }
                     }
-                    group("Internet Loans")
-                    {
-                        Caption = 'Internet Loans';
+                    // group("Internet Loans")
+                    // {
+                    //     Caption = 'Internet Loans';
 
-                        group("Internet Loans Lists")
-                        {
-                            action("Online Loans")
-                            {
-                                ApplicationArea = Basic;
-                                Caption = 'Online Loans';
-                                RunObject = Page "Online Loans";
-                            }
-                            action("Internet Loan Application List")
-                            {
-                                ApplicationArea = Basic;
-                                Caption = 'Internet Loan Application List';
-                                RunObject = Page "Internet Loan Application List";
-                            }
-                            action("Approved Portal Loan App List")
-                            {
-                                ApplicationArea = Basic;
-                                Caption = 'Approved Portal Loan App List';
-                                RunObject = Page "Approved Portal Loan App List";
-                            }
-                        }
-                        group("Internet Loan Task")
-                        {
-                            Caption = 'Internet Loan Task';
+                    //     group("Internet Loans Lists")
+                    //     {
+                    //         action("Online Loans")
+                    //         {
+                    //             ApplicationArea = Basic;
+                    //             Caption = 'Online Loans';
+                    //             RunObject = Page "Online Loans";
+                    //         }
+                    //         action("Internet Loan Application List")
+                    //         {
+                    //             ApplicationArea = Basic;
+                    //             Caption = 'Internet Loan Application List';
+                    //             RunObject = Page "Internet Loan Application List";
+                    //         }
+                    //         action("Approved Portal Loan App List")
+                    //         {
+                    //             ApplicationArea = Basic;
+                    //             Caption = 'Approved Portal Loan App List';
+                    //             RunObject = Page "Approved Portal Loan App List";
+                    //         }
+                    //     }
+                    //     group("Internet Loan Task")
+                    //     {
+                    //         Caption = 'Internet Loan Task';
 
-                            action("Rejected Portal Loan App List")
-                            {
-                                ApplicationArea = Basic;
-                                Caption = 'Rejected Portal Loan App List';
-                                RunObject = Page "Rejected Internet Loan List";
-                            }
-                        }
-                        group("Loans Archive")
-                        {
-                            Caption = 'Loans Archive';
+                    //         action("Rejected Portal Loan App List")
+                    //         {
+                    //             ApplicationArea = Basic;
+                    //             Caption = 'Rejected Portal Loan App List';
+                    //             RunObject = Page "Rejected Internet Loan List";
+                    //         }
+                    //     }
+                    //     group("Loans Archive")
+                    //     {
+                    //         Caption = 'Loans Archive';
 
-                            action("Validated/Posted Online Loans")
-                            {
-                                ApplicationArea = Basic;
-                                Caption = 'Validated/Posted Online Loans';
-                                RunObject = Page "Online Loans Posted";
-                            }
-                        }
-                    }
+                    //         action("Validated/Posted Online Loans")
+                    //         {
+                    //             ApplicationArea = Basic;
+                    //             Caption = 'Validated/Posted Online Loans';
+                    //             RunObject = Page "Online Loans Posted";
+                    //         }
+                    //     }
+                    // }
                     group("Internet Transactions")
                     {
                         Caption = 'Internet Transactions';

@@ -109,10 +109,10 @@ table 52186037 "Salary Agreement"
         field(17; Comment; Code[250])
         {
         }
-        field(18; "Member Status"; Option)
+        field(18; "Member Status"; Enum "Member Status")
         {
-            OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Applicant,Withdrawn,Deceased,Defaulter,Closed,Withdrawn Shareholder';
-            OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Applicant",Withdrawn,Deceased,Defaulter,Closed,"Withdrawn Shareholder";
+            // OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Applicant,Withdrawn,Deceased,Defaulter,Closed,Withdrawn Shareholder';
+            // OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Applicant",Withdrawn,Deceased,Defaulter,Closed,"Withdrawn Shareholder";
         }
         field(19; "Recruited By"; Code[10])
         {
@@ -212,7 +212,8 @@ table 52186037 "Salary Agreement"
         if No = '' then begin
             SeriesSetup.Get();
             SeriesSetup.TestField(SeriesSetup."Salary Agreement No");
-            NoSeriesMgt.InitSeries(SeriesSetup."Salary Agreement No", xRec."No.Series", 0D, No, "No.Series");
+            No := NoSeriesMgt.GetNextNo(SeriesSetup."Salary Agreement No");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Salary Agreement No", xRec."No.Series", 0D, No, "No.Series");
         end;
 
         "Date Captured" := Today;
@@ -246,7 +247,8 @@ table 52186037 "Salary Agreement"
         SalesSetup: Record "Sales & Receivables Setup";
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Members: Record Members;
         SavingsAccounts: Record "Savings Accounts";
         Txt001: Label 'With Effect Date Cannot be less than Capture date';

@@ -1476,7 +1476,7 @@ page 52186583 "Audit Role center"
                             {
                                 ApplicationArea = Basic, Suite;
                                 Caption = 'General Set-Up';
-                                RunObject = page "Gen set-up card";
+                                // RunObject = page "Gen set-up card";
                             }
                             action("No. Setup")
                             {
@@ -3237,2682 +3237,2681 @@ page 52186583 "Audit Role center"
                                 RunObject = Page "Online Users";
                             }
                         }
-                        group("Internet Loans")
+                        // group("Internet Loans")
+                        // {
+                        //     Caption = 'Internet Loans';
+
+                        //     group("Internet Loans Lists")
+                        //     {
+                        //         action("Online Loans")
+                        //         {
+                        //             ApplicationArea = Basic;
+                        //             Caption = 'Online Loans';
+                        //             RunObject = Page "Online Loans";
+                        //         }
+                        //         action("Internet Loan Application List")
+                        //         {
+                        //             ApplicationArea = Basic;
+                        //             Caption = 'Internet Loan Application List';
+                        //             RunObject = Page "Internet Loan Application List";
+                        //         }
+                        //         action("Approved Portal Loan App List")
+                        //         {
+                        //             ApplicationArea = Basic;
+                        //             Caption = 'Approved Portal Loan App List';
+                        //             RunObject = Page "Approved Portal Loan App List";
+                        //         }
+                        //     }
+                        //     group("Internet Loan Task")
+                        //     {
+                        //         Caption = 'Internet Loan Task';
+
+                        //         action("Rejected Portal Loan App List")
+                        //         {
+                        //             ApplicationArea = Basic;
+                        //             Caption = 'Rejected Portal Loan App List';
+                        //             RunObject = Page "Rejected Internet Loan List";
+                        //         }
+                        //     }
+                        group("Loans Archive")
                         {
-                            Caption = 'Internet Loans';
+                            Caption = 'Loans Archive';
 
-                            group("Internet Loans Lists")
-                            {
-                                action("Online Loans")
-                                {
-                                    ApplicationArea = Basic;
-                                    Caption = 'Online Loans';
-                                    RunObject = Page "Online Loans";
-                                }
-                                action("Internet Loan Application List")
-                                {
-                                    ApplicationArea = Basic;
-                                    Caption = 'Internet Loan Application List';
-                                    RunObject = Page "Internet Loan Application List";
-                                }
-                                action("Approved Portal Loan App List")
-                                {
-                                    ApplicationArea = Basic;
-                                    Caption = 'Approved Portal Loan App List';
-                                    RunObject = Page "Approved Portal Loan App List";
-                                }
-                            }
-                            group("Internet Loan Task")
-                            {
-                                Caption = 'Internet Loan Task';
-
-                                action("Rejected Portal Loan App List")
-                                {
-                                    ApplicationArea = Basic;
-                                    Caption = 'Rejected Portal Loan App List';
-                                    RunObject = Page "Rejected Internet Loan List";
-                                }
-                            }
-                            group("Loans Archive")
-                            {
-                                Caption = 'Loans Archive';
-
-                                action("Validated/Posted Online Loans")
-                                {
-                                    ApplicationArea = Basic;
-                                    Caption = 'Validated/Posted Online Loans';
-                                    RunObject = Page "Online Loans Posted";
-                                }
-                            }
-                        }
-                        group("Internet Transactions")
-                        {
-                            Caption = 'Internet Transactions';
-
-                            action("Internet Banking Transactions ")
+                            action("Validated/Posted Online Loans")
                             {
                                 ApplicationArea = Basic;
-                                Caption = 'Internet Banking Transactions ';
-                                RunObject = Page "Internet Banking Transactions";
+                                Caption = 'Validated/Posted Online Loans';
+                                // RunObject = Page "Online Loans Posted";
                             }
                         }
                     }
-                    group("PESA Banking")
+                    group("Internet Transactions")
                     {
-                        Caption = 'PESA Banking';
+                        Caption = 'Internet Transactions';
 
-                        // group("Agency")
-                        // {
-                        //     Caption = 'Agency';
-
-                        //     group("Agency List")
-                        //     {
-                        //         Caption = 'Agency List';
-
-                        //         action(AgentApplicationList)
-                        //         {
-                        //             ApplicationArea = Basic;
-                        //             Caption = 'Agent Application List';
-                        //             RunObject = Page "Agent Applications List";
-                        //         }
-                        //         action(ApprovedAgentsList)
-                        //         {
-                        //             ApplicationArea = Basic;
-                        //             Caption = 'Approved Agents List';
-                        //             RunObject = Page "Approved Agents List";
-                        //         }
-                        //     }
-                        //     group(Admin)
-                        //     {
-                        //         Caption = 'Administration';
-
-                        //         action(AgentSentSmsMessages)
-                        //         {
-                        //             ApplicationArea = Basic;
-                        //             Caption = 'Agent Sent Sms Messages';
-                        //             RunObject = Page "Agent Sent Sms Messages";
-                        //         }
-                        //         action(AgentErrorMessages)
-                        //         {
-                        //             ApplicationArea = Basic;
-                        //             Caption = 'Agent Error Messages';
-                        //             RunObject = Page "Agent Error Messages";
-                        //         }
-                        //     }
-                        // }
-                        // group("PESA Transactions")
-                        // {
-                        //     Caption = 'Transactions';
-
-                        //     group("Transaction Lists")
-                        //     {
-                        //         action(AgentTransactions)
-                        //         {
-                        //             ApplicationArea = Basic;
-                        //             Caption = 'Agent Transactions';
-                        //             RunObject = Page "Sky Agent Transactions";
-                        //         }
-                        //         action(Agencies)
-                        //         {
-                        //             ApplicationArea = Basic;
-                        //             Caption = 'Agent Transactions List';
-                        //             RunObject = Page "Sky Agencies";
-                        //         }
-                        //         action("Agent Withdrawals Buffer")
-                        //         {
-                        //             ApplicationArea = Basic;
-                        //             Caption = 'Agent Withdrawals Buffer';
-                        //             RunObject = Page "Agent Withdrawals Buffer";
-                        //         }
-                        //         action("Agent Transfer List")
-                        //         {
-                        //             ApplicationArea = Basic;
-                        //             Caption = 'Agent Transfer List';
-                        //             RunObject = Page "Sky Agent Transfer List";
-                        //         }
-                        //     }
-                        // }
-                        // group("PESA Setups")
-                        // {
-                        //     Caption = 'PESA Setups';
-
-                        //     action(AgentTarrifBuffer)
-                        //     {
-                        //         ApplicationArea = Basic;
-                        //         Caption = 'Agent Tarrif Buffer';
-                        //         RunObject = Page "Agent Tariff Header";
-                        //     }
-                        // }
-                    }
-                    group("Web Portal")
-                    {
-                        Caption = 'Web Portal';
-
-                        group("Manual Portal Onboarding")
-                        {
-                            Caption = 'Manual Portal Onboarding';
-
-                            action("Member Onboarding List")
-                            {
-                                ApplicationArea = Basic;
-                                Caption = 'Member Onboarding List';
-                                RunObject = Page "Member Onboarding List";
-                            }
-                            action("On Boarded Members")
-                            {
-                                ApplicationArea = Basic;
-                                Caption = 'On Boarded Members';
-                                RunObject = Page "On Boarded Members";
-                            }
-                        }
-                        group("Set Up")
-                        {
-                            action("Portal Setup")
-                            {
-                                ApplicationArea = Basic;
-                                Caption = 'Portal Setup';
-                                RunObject = Page "Portal Setup";
-                            }
-                        }
-                        group("Portal Users")
-                        {
-                            // action(PortalUsers)
-                            // {
-                            //     ApplicationArea = Basic;
-                            //     Caption = 'Portal Users';
-                            //     RunObject = Page "Sky Portal Users";
-                            // }
-                        }
-                        group(" Web Portal Transactions")
-                        {
-                            action("Portal Transactions")
-                            {
-                                ApplicationArea = Basic;
-                                Caption = 'Portal Transactions';
-                                RunObject = Page "Sky Portal Transactions";
-                            }
-                        }
-                        group("Checkoff Advice")
-                        {
-                            action(CheckOffAdvice)
-                            {
-                                ApplicationArea = Basic;
-                                Caption = 'Checkoff Advice';
-                                RunObject = Page "Sky Checkoff Advice";
-                            }
-                        }
-                    }
-                    group("Reports And Analysis")
-                    {
-                        Caption = 'Reports and Analysis';
-
-                        action(AgentTransactionsReport)
+                        action("Internet Banking Transactions ")
                         {
                             ApplicationArea = Basic;
-                            Caption = 'Agent Transactions Report';
-                            RunObject = report "Agent Transactions Report";
-                        }
-                        action(AgentTransactionsRep)
-                        {
-                            ApplicationArea = Basic;
-                            Caption = 'Agent Transactions Report';
-                            RunObject = report "Agent Transactions";
-                        }
-                    }
-                    group(Setups)
-                    {
-                        Caption = 'Setups';
-
-                        group("Setups Lists")
-                        {
-                            Caption = 'Setups Lists';
-
-                            action("Mobile Setup")
-                            {
-                                ApplicationArea = Basic;
-                                Caption = 'Mobile Set UP';
-                                RunObject = Page "Sky Mobile Setup List";
-                            }
-                        }
-                        group("Setup Tasks")
-                        {
-                            Caption = 'Tasks';
-
-                            action("MBankingPermissions")
-                            {
-                                ApplicationArea = Basic;
-                                Caption = 'M-Banking Permissions';
-                                RunObject = Page "Sky Permissions";
-                            }
-                            // action("CoopTransactionCodes")
-                            // {
-                            //     ApplicationArea = Basic;
-                            //     Caption = 'Coop Transaction Codes';
-                            //     RunObject = Page "Coop Transaction Codes";
-                            // }
-                            // action("Coop ATM Setup")
-                            // {
-                            //     ApplicationArea = Basic;
-                            //     Caption = 'Coop ATM Setup';
-                            //     RunObject = Page "Coop ATM Setup";
-                            // }
-                            // action("Mobile Guarantor Setup")
-                            // {
-                            //     ApplicationArea = Basic;
-                            //     Caption = 'Mobile Guarantor Setup ';
-                            //     RunObject = Page "Mobile Guarantor Setup";
-                            // }
+                            Caption = 'Internet Banking Transactions ';
+                            RunObject = Page "Internet Banking Transactions";
                         }
                     }
                 }
-                // group("Payroll Processing")
-                // {
-                //     group("Payroll")
-                //     {
-                //         Caption = 'Payroll processing';
-                //         action(PRsalaryListAll)
-                //         {
-                //             Caption = 'PR Salary List (All)';
-                //             RunObject = Page "PR Salary List (ALL)";
-                //             ApplicationArea = Basic, Suite;
-                //         }
-                //         action(PRsalaryListCasual)
-                //         {
-                //             Caption = 'PR Salary List Casual';
-                //             RunObject = Page "PrSalary List Casual";
-                //             ApplicationArea = Basic, Suite;
-                //         }
-                //         action("Hr Employees - Active")
-                //         {
-                //             Caption = 'Hr Employees - Active';
-                //             //RunObject = Page "HR Employee List - Active";
-                //             ApplicationArea = Basic, Suite;
-                //         }
-                //         action("Board Pay Card")
-                //         {
-                //             Caption = 'Board Pay Card';
-                //             RunObject = Page "prBoard employee list";
-                //             ApplicationArea = Basic, Suite;
-                //         }
-                //         action("PR Bank Summary")
-                //         {
-                //             Caption = 'PR Bank Summary';
-                //             RunObject = Page "PR Bank Summary";
-                //             ApplicationArea = Basic, Suite;
-                //         }
-                //         group("PR Reports and Analysis")
-                //         {
-                //             Caption = 'Reports and Analysis';
-                //             action("PR NHIF")
-                //             {
-                //                 Caption = 'PR NHIF report';
-                //                 RunObject = report "pr NHIF";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("PR NSSF")
-                //             {
-                //                 Caption = 'PR NSSF report';
-                //                 RunObject = report prNSSF;
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action(p9)
-                //             {
-                //                 Caption = 'P9';
-                //                 RunObject = report P9;
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action(P10)
-                //             {
-                //                 Caption = 'P10';
-                //                 RunObject = report P10;
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action(P10A)
-                //             {
-                //                 Caption = 'P10A';
-                //                 RunObject = report P10A;
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("PR Payroll Summary")
-                //             {
-                //                 Caption = 'PR Payroll Summary';
-                //                 RunObject = report "PR Payroll Summary";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("PR Other PR Customers (Listing)")
-                //             {
-                //                 Caption = 'PR Other PR Customers (Listing)';
-                //                 RunObject = report "PR Other PR Customers (Listin)";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("PR BankSummary")
-                //             {
-                //                 Caption = 'PR Bank summary';
-                //                 RunObject = report "PR Bank Summary";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("PR Email Individual payslip")
-                //             {
-                //                 Caption = 'PR E-Mail Individual Payslip';
-                //                 ApplicationArea = Basic, Suite;
-                //                 RunObject = report "PR E-Mail Individual Payslip";
-                //             }
-                //             action("PR NSSF NEW")
-                //             {
-                //                 Caption = 'PRE NSSF NEW';
-                //                 RunObject = report "PR NSSF NEW";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-
-                //         }
-                //     }
-                //     group(PayrollSetup)
-                //     {
-                //         Caption = 'Payroll Setup';
-                //         action("Employee Posting Groups")
-                //         {
-                //             Caption = 'Employee Posting Groups';
-                //             RunObject = page "prEmployee Posting Group";
-                //             ApplicationArea = Basic, Suite;
-                //         }
-                //         action("Transaction Codes")
-                //         {
-                //             Caption = 'Transaction Codes';
-                //             RunObject = page "PR Transaction Codes List";
-                //             ApplicationArea = Basic, Suite;
-                //         }
-                //         action("PR Rates & Ceilings")
-                //         {
-                //             Caption = 'Rates and Ceilings';
-                //             RunObject = page "PR Rates & Ceilings";
-                //             ApplicationArea = Basic, Suite;
-                //         }
-                //         action("PR Bank Accounts")
-                //         {
-                //             Caption = 'Bank Accounts';
-                //             RunObject = page "PR Bank Accounts";
-                //             ApplicationArea = Basic, Suite;
-                //         }
-                //         action("PR Bank Branches")
-                //         {
-                //             Caption = 'Bank Branches';
-                //             RunObject = page "PR Bank Branches";
-                //             ApplicationArea = Basic, Suite;
-                //         }
-                //         action("prP.A.Y.E Setup")
-                //         {
-                //             Caption = 'prP.A.Y.E Setup';
-                //             RunObject = page "prP.A.Y.E Setup";
-                //             ApplicationArea = Basic, Suite;
-                //         }
-                //         action("Salary Grades List")
-                //         {
-                //             Caption = 'Salary Grades List';
-                //             RunObject = page "Salary Grades List";
-                //             ApplicationArea = Basic, Suite;
-                //         }
-                //         action("prNSSF List")
-                //         {
-                //             Caption = 'prNSSF List';
-                //             RunObject = page "prNSSF List";
-                //             ApplicationArea = Basic, Suite;
-                //         }
-                //         action("prNHIF SetUp")
-                //         {
-                //             Caption = 'prNHIF SetUp';
-                //             RunObject = page "prNHIF SetUp";
-                //             ApplicationArea = Basic, Suite;
-                //         }
-                //         action("prBoard Earning")
-                //         {
-                //             Caption = 'prBoard Earning';
-                //             RunObject = page "prBoard Earning";
-                //             ApplicationArea = Basic, Suite;
-                //         }
-                //         action("PrCasual Payroll Setup")
-                //         {
-                //             Caption = 'PrCasual Payroll Setup';
-                //             RunObject = page "PrCasual Payroll Setup";
-                //             ApplicationArea = Basic, Suite;
-                //         }
-                //         action("PR Employee Allowances List")
-                //         {
-                //             Caption = 'PR Employee Allowances List';
-                //             RunObject = page "PR Employee Allowances List";
-                //             ApplicationArea = Basic, Suite;
-                //         }
-                //         action("Status Change Permssion.")
-                //         {
-                //             Caption = 'Status Change Permssion.';
-                //             RunObject = page "Status Change Permssion.";
-                //             ApplicationArea = Basic, Suite;
-                //         }
-
-                //     }
-                //     group(PeriodicActivities)
-                //     {
-                //         Caption = 'Periodic Activities';
-                //         action("PR Payroll Periods")
-                //         {
-                //             Caption = 'PR Payroll Periods';
-                //             RunObject = page "PR Payroll Periods";
-                //             ApplicationArea = Basic, Suite;
-                //         }
-                //         action("Leave Allowances")
-                //         {
-                //             Caption = 'Leave Allowances';
-                //             RunObject = page "Leave Allowances";
-                //             ApplicationArea = Basic, Suite;
-                //         }
-                //         group("PR Tasks")
-                //         {
-                //             Caption = 'Tasks';
-                //             action("Payroll Salary Process")
-                //             {
-                //                 Caption = 'Payroll Salary Process';
-                //                 RunObject = page "Payroll Salary Process";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //         }
-                //         group("Reports & Analysis")
-                //         {
-                //             Caption = 'Reports and Analysis';
-                //             action("Transfer Net Pay To Fosa")
-                //             {
-                //                 Caption = 'Transfer Net Pay To Fosa';
-                //                 RunObject = report "Transfer Net Pay To Fosa";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("PR Transfer To Journal Bills")
-                //             {
-                //                 Caption = 'PR Transfer To Journal Bills';
-                //                 RunObject = report "PR Transfer To Journal Bills";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //         }
-                //     }
-                //     group("PR Reports")
-                //     {
-                //         Caption = 'Reports';
-                //         group("Ta sks")
-                //         {
-                //             Caption = 'Tasks';
-                //             action("Update Payroll Credit Accounts")
-                //             {
-                //                 Caption = 'Update Payroll Credit Accounts';
-                //                 //RunObject = report "Update Payroll Credit Accounts";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //         }
-                //         group("Rep and Analysis")
-                //         {
-                //             Caption = 'Reports and Analysis';
-                //             action("PR E-Mail Individual Payslip")
-                //             {
-                //                 Caption = 'PR E-Mail Individual Payslip';
-                //                 //RunObject = report "PR E-Mail Individual Payslip";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-
-                //             action("PRPayroll Summary")
-                //             {
-                //                 Caption = 'PR Payroll Summary';
-                //                 RunObject = report "PR Payroll Summary";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("prPaye Report")
-                //             {
-                //                 Caption = 'PAYE Schedule';
-                //                 RunObject = report "prPaye Report";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("prDeductions Report")
-                //             {
-                //                 Caption = 'Deductions Report';
-                //                 // RunObject = report "prDeductions Report";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("prAllowances Report")
-                //             {
-                //                 Caption = 'prAllowances Report';
-                //                 //RunObject = report "prAllowances Report";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action(prGrossNetPay)
-                //             {
-                //                 Caption = 'Gross NetPay';
-                //                 ApplicationArea = Basic, Suite;
-                //                 RunObject = report prGrossNetPay;
-                //             }
-                //             action("prGrossNetPay FxedTC")
-                //             {
-                //                 Caption = 'prGrossNetPay FxedTC';
-                //                 RunObject = report "prGrossNetPay FxedTC";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("prPayrollSummary-List")
-                //             {
-                //                 Caption = 'prPayrollSummary-List';
-                //                 //RunObject = report "prPayrollSummary-List";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("Pension Summary")
-                //             {
-                //                 Caption = 'Pension Summary';
-                //                 RunObject = report "Pension Summary";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("prBank Payments")
-                //             {
-                //                 Caption = 'prBank Payments';
-                //                 RunObject = report "prBank Payments";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("PrAllowances Summary")
-                //             {
-                //                 Caption = 'PrAllowances Summary';
-                //                 // RunObject = report "PrAllowances Summary";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action(" PrDeductions Summary")
-                //             {
-                //                 Caption = 'PrDeductions Summary';
-                //                 // RunObject = report "PrDeductions Summary";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("pr Loans Deductions Report")
-                //             {
-                //                 Caption = 'pr Loans Deductions Report';
-                //                 // RunObject = report "pr Loans Deductions Report";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("Helb Report")
-                //             {
-                //                 Caption = 'Helb Report';
-                //                 RunObject = report "Helb Report";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("PR iTax Report")
-                //             {
-                //                 Caption = 'PR iTax Report';
-                //                 RunObject = report "PR iTax Report";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("PR Company Totals")
-                //             {
-                //                 Caption = 'PR Company Totals';
-                //                 // RunObject = report "PR Company Totals";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("prP9A-test  new")
-                //             {
-                //                 Caption = 'prP9A-test  new';
-                //                 // RunObject = report "prP9A-test  new";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("PR Company FixedTC Totals")
-                //             {
-                //                 Caption = 'PR Company FixedTC Totals';
-                //                 //RunObject = report "PR Company FixedTC Totals";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("Detailed Payroll Transactions")
-                //             {
-                //                 Caption = 'Detailed Payroll Transactions';
-                //                 RunObject = report "Detailed Payroll Transactions";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("Staff Allowance  P9")
-                //             {
-                //                 Caption = 'Staff Allowance  P9';
-                //                 // RunObject = report "Staff Allowance  P9";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("Overtime Hours Worked1")
-                //             {
-                //                 Caption = 'Overtime Hours Worked1';
-                //                 RunObject = report "Overtime Hours Worked1";
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             group("PR Admin")
-                //             {
-                //                 Caption = 'Administration';
-                //                 action("Update Mismatched HR Loans")
-                //                 {
-                //                     Caption = 'Update Mismatched HR Loans';
-                //                     RunObject = report "Update Mismatched HR Loans";
-                //                     ApplicationArea = Basic, Suite;
-                //                 }
-                //             }
-                //         }
-                //     }
-                //     group(TaxReturns)
-                //     {
-                //         Caption = 'Tax Returns';
-                //         group("Repo and analysis")
-                //         {
-                //             Caption = 'Reports And analysis';
-                //             action("P 10A")
-                //             {
-                //                 Caption = 'P 10A';
-                //                 RunObject = report P10A;
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("P1 0")
-                //             {
-                //                 Caption = 'P10';
-                //                 RunObject = report P10;
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("P 9")
-                //             {
-                //                 Caption = 'P9';
-                //                 RunObject = report P9;
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-                //             action("priTax")
-                //             {
-                //                 Caption = 'priTax';
-                //                 // RunObject = report priTax;
-                //                 ApplicationArea = Basic, Suite;
-                //             }
-
-                //         }
-                //     }
-                // }
-                group("Advanced HR")
+                group("PESA Banking")
                 {
-                    group(HREmployeeManagement)
+                    Caption = 'PESA Banking';
+
+                    // group("Agency")
+                    // {
+                    //     Caption = 'Agency';
+
+                    //     group("Agency List")
+                    //     {
+                    //         Caption = 'Agency List';
+
+                    //         action(AgentApplicationList)
+                    //         {
+                    //             ApplicationArea = Basic;
+                    //             Caption = 'Agent Application List';
+                    //             RunObject = Page "Agent Applications List";
+                    //         }
+                    //         action(ApprovedAgentsList)
+                    //         {
+                    //             ApplicationArea = Basic;
+                    //             Caption = 'Approved Agents List';
+                    //             RunObject = Page "Approved Agents List";
+                    //         }
+                    //     }
+                    //     group(Admin)
+                    //     {
+                    //         Caption = 'Administration';
+
+                    //         action(AgentSentSmsMessages)
+                    //         {
+                    //             ApplicationArea = Basic;
+                    //             Caption = 'Agent Sent Sms Messages';
+                    //             RunObject = Page "Agent Sent Sms Messages";
+                    //         }
+                    //         action(AgentErrorMessages)
+                    //         {
+                    //             ApplicationArea = Basic;
+                    //             Caption = 'Agent Error Messages';
+                    //             RunObject = Page "Agent Error Messages";
+                    //         }
+                    //     }
+                    // }
+                    // group("PESA Transactions")
+                    // {
+                    //     Caption = 'Transactions';
+
+                    //     group("Transaction Lists")
+                    //     {
+                    //         action(AgentTransactions)
+                    //         {
+                    //             ApplicationArea = Basic;
+                    //             Caption = 'Agent Transactions';
+                    //             RunObject = Page "Sky Agent Transactions";
+                    //         }
+                    //         action(Agencies)
+                    //         {
+                    //             ApplicationArea = Basic;
+                    //             Caption = 'Agent Transactions List';
+                    //             RunObject = Page "Sky Agencies";
+                    //         }
+                    //         action("Agent Withdrawals Buffer")
+                    //         {
+                    //             ApplicationArea = Basic;
+                    //             Caption = 'Agent Withdrawals Buffer';
+                    //             RunObject = Page "Agent Withdrawals Buffer";
+                    //         }
+                    //         action("Agent Transfer List")
+                    //         {
+                    //             ApplicationArea = Basic;
+                    //             Caption = 'Agent Transfer List';
+                    //             RunObject = Page "Sky Agent Transfer List";
+                    //         }
+                    //     }
+                    // }
+                    // group("PESA Setups")
+                    // {
+                    //     Caption = 'PESA Setups';
+
+                    //     action(AgentTarrifBuffer)
+                    //     {
+                    //         ApplicationArea = Basic;
+                    //         Caption = 'Agent Tarrif Buffer';
+                    //         RunObject = Page "Agent Tariff Header";
+                    //     }
+                    // }
+                }
+                group("Web Portal")
+                {
+                    Caption = 'Web Portal';
+
+                    group("Manual Portal Onboarding")
                     {
-                        group("HR Employee recruitment")
+                        Caption = 'Manual Portal Onboarding';
+
+                        action("Member Onboarding List")
                         {
-                            action(HRemployeeRequisitions)
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'HR Employee Requisitions';
-
-                                RunObject = Page "HR Employee Requisitions List";
-                            }
-                            action(HRjobApplications)
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'HR job applications';
-
-                                RunObject = Page "HR Job Applications List";
-                            }
-                            action(Shortlisting)
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'HR Shortlisting';
-
-                                RunObject = Page "HR Shortlisting List1";
-                            }
-                            action(HRJobApplicantsQualified)
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'HR Job Applicants Qualified';
-
-                                RunObject = Page "HR Job Applicants QualifiedL1";
-                            }
-                            action(HRJobApplicantsNotQualified)
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'HR Job Applicants UnQualified';
-
-                                RunObject = Page "HR Applicants UnQualified L1";
-                            }
-                            action(SuccesfulJobApplicants)
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Qualified (Succesful) Job Applicants';
-
-                                RunObject = Page "HR  App Qualified Applicants1";
-                            }
-                            group(RepoAndanalysis)
-                            {
-                                Caption = 'Reports and Analysis';
-                                action(HRJobApplicants)
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'HR Job Applicantions';
-
-                                    RunObject = report "HR Job Applications";
-                                }
-                                action(JobInterviewReport)
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'Job Interview Report';
-
-                                    RunObject = report "Job Interview results";
-                                }
-                                action(Shortlistingreport)
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'Shortlisting Report';
-
-                                    RunObject = report "Shortlisting Report";
-                                }
-                            }
-                            // group("AHR Archive")
-                            // {
-                            //     Caption = 'Archive';
-                            //     action(HRjobApplicantsUploaded)
-                            //     {
-                            //         ApplicationArea = Basic, Suite;
-                            //         Caption = 'HR Job Applicants Uploaded';
-
-                            //         RunObject = Page "HR Job Applicants Uploaded1";
-                            //     }
-                            //     action(HRemployeereqapproved)
-                            //     {
-                            //         ApplicationArea = Basic, Suite;
-                            //         Caption = 'HR Employee Requisitions Approved';
-
-                            //         RunObject = Page "HR Employee ReqsListApproved1";
-                            //     }
-                            // }
+                            ApplicationArea = Basic;
+                            Caption = 'Member Onboarding List';
+                            RunObject = Page "Member Onboarding List";
                         }
-                        group("HR Employee Management")
+                        action("On Boarded Members")
                         {
-                            Caption = 'HR Employee Management';
-                            action(HRInductionSchedule)
+                            ApplicationArea = Basic;
+                            Caption = 'On Boarded Members';
+                            RunObject = Page "On Boarded Members";
+                        }
+                    }
+                    group("Set Up")
+                    {
+                        action("Portal Setup")
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'Portal Setup';
+                            RunObject = Page "Portal Setup";
+                        }
+                    }
+                    group("Portal Users")
+                    {
+                        // action(PortalUsers)
+                        // {
+                        //     ApplicationArea = Basic;
+                        //     Caption = 'Portal Users';
+                        //     RunObject = Page "Sky Portal Users";
+                        // }
+                    }
+                    group(" Web Portal Transactions")
+                    {
+                        action("Portal Transactions")
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'Portal Transactions';
+                            RunObject = Page "Sky Portal Transactions";
+                        }
+                    }
+                    group("Checkoff Advice")
+                    {
+                        action(CheckOffAdvice)
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'Checkoff Advice';
+                            RunObject = Page "Sky Checkoff Advice";
+                        }
+                    }
+                }
+                group("Reports And Analysis")
+                {
+                    Caption = 'Reports and Analysis';
+
+                    action(AgentTransactionsReport)
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'Agent Transactions Report';
+                        RunObject = report "Agent Transactions Report";
+                    }
+                    action(AgentTransactionsRep)
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'Agent Transactions Report';
+                        RunObject = report "Agent Transactions";
+                    }
+                }
+                group(Setups)
+                {
+                    Caption = 'Setups';
+
+                    group("Setups Lists")
+                    {
+                        Caption = 'Setups Lists';
+
+                        action("Mobile Setup")
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'Mobile Set UP';
+                            RunObject = Page "Sky Mobile Setup List";
+                        }
+                    }
+                    group("Setup Tasks")
+                    {
+                        Caption = 'Tasks';
+
+                        action("MBankingPermissions")
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'M-Banking Permissions';
+                            RunObject = Page "Sky Permissions";
+                        }
+                        // action("CoopTransactionCodes")
+                        // {
+                        //     ApplicationArea = Basic;
+                        //     Caption = 'Coop Transaction Codes';
+                        //     RunObject = Page "Coop Transaction Codes";
+                        // }
+                        // action("Coop ATM Setup")
+                        // {
+                        //     ApplicationArea = Basic;
+                        //     Caption = 'Coop ATM Setup';
+                        //     RunObject = Page "Coop ATM Setup";
+                        // }
+                        // action("Mobile Guarantor Setup")
+                        // {
+                        //     ApplicationArea = Basic;
+                        //     Caption = 'Mobile Guarantor Setup ';
+                        //     RunObject = Page "Mobile Guarantor Setup";
+                        // }
+                    }
+                }
+            }
+            // group("Payroll Processing")
+            // {
+            //     group("Payroll")
+            //     {
+            //         Caption = 'Payroll processing';
+            //         action(PRsalaryListAll)
+            //         {
+            //             Caption = 'PR Salary List (All)';
+            //             RunObject = Page "PR Salary List (ALL)";
+            //             ApplicationArea = Basic, Suite;
+            //         }
+            //         action(PRsalaryListCasual)
+            //         {
+            //             Caption = 'PR Salary List Casual';
+            //             RunObject = Page "PrSalary List Casual";
+            //             ApplicationArea = Basic, Suite;
+            //         }
+            //         action("Hr Employees - Active")
+            //         {
+            //             Caption = 'Hr Employees - Active';
+            //             //RunObject = Page "HR Employee List - Active";
+            //             ApplicationArea = Basic, Suite;
+            //         }
+            //         action("Board Pay Card")
+            //         {
+            //             Caption = 'Board Pay Card';
+            //             RunObject = Page "prBoard employee list";
+            //             ApplicationArea = Basic, Suite;
+            //         }
+            //         action("PR Bank Summary")
+            //         {
+            //             Caption = 'PR Bank Summary';
+            //             RunObject = Page "PR Bank Summary";
+            //             ApplicationArea = Basic, Suite;
+            //         }
+            //         group("PR Reports and Analysis")
+            //         {
+            //             Caption = 'Reports and Analysis';
+            //             action("PR NHIF")
+            //             {
+            //                 Caption = 'PR NHIF report';
+            //                 RunObject = report "pr NHIF";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("PR NSSF")
+            //             {
+            //                 Caption = 'PR NSSF report';
+            //                 RunObject = report prNSSF;
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action(p9)
+            //             {
+            //                 Caption = 'P9';
+            //                 RunObject = report P9;
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action(P10)
+            //             {
+            //                 Caption = 'P10';
+            //                 RunObject = report P10;
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action(P10A)
+            //             {
+            //                 Caption = 'P10A';
+            //                 RunObject = report P10A;
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("PR Payroll Summary")
+            //             {
+            //                 Caption = 'PR Payroll Summary';
+            //                 RunObject = report "PR Payroll Summary";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("PR Other PR Customers (Listing)")
+            //             {
+            //                 Caption = 'PR Other PR Customers (Listing)';
+            //                 RunObject = report "PR Other PR Customers (Listin)";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("PR BankSummary")
+            //             {
+            //                 Caption = 'PR Bank summary';
+            //                 RunObject = report "PR Bank Summary";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("PR Email Individual payslip")
+            //             {
+            //                 Caption = 'PR E-Mail Individual Payslip';
+            //                 ApplicationArea = Basic, Suite;
+            //                 RunObject = report "PR E-Mail Individual Payslip";
+            //             }
+            //             action("PR NSSF NEW")
+            //             {
+            //                 Caption = 'PRE NSSF NEW';
+            //                 RunObject = report "PR NSSF NEW";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+
+            //         }
+            //     }
+            //     group(PayrollSetup)
+            //     {
+            //         Caption = 'Payroll Setup';
+            //         action("Employee Posting Groups")
+            //         {
+            //             Caption = 'Employee Posting Groups';
+            //             RunObject = page "prEmployee Posting Group";
+            //             ApplicationArea = Basic, Suite;
+            //         }
+            //         action("Transaction Codes")
+            //         {
+            //             Caption = 'Transaction Codes';
+            //             RunObject = page "PR Transaction Codes List";
+            //             ApplicationArea = Basic, Suite;
+            //         }
+            //         action("PR Rates & Ceilings")
+            //         {
+            //             Caption = 'Rates and Ceilings';
+            //             RunObject = page "PR Rates & Ceilings";
+            //             ApplicationArea = Basic, Suite;
+            //         }
+            //         action("PR Bank Accounts")
+            //         {
+            //             Caption = 'Bank Accounts';
+            //             RunObject = page "PR Bank Accounts";
+            //             ApplicationArea = Basic, Suite;
+            //         }
+            //         action("PR Bank Branches")
+            //         {
+            //             Caption = 'Bank Branches';
+            //             RunObject = page "PR Bank Branches";
+            //             ApplicationArea = Basic, Suite;
+            //         }
+            //         action("prP.A.Y.E Setup")
+            //         {
+            //             Caption = 'prP.A.Y.E Setup';
+            //             RunObject = page "prP.A.Y.E Setup";
+            //             ApplicationArea = Basic, Suite;
+            //         }
+            //         action("Salary Grades List")
+            //         {
+            //             Caption = 'Salary Grades List';
+            //             RunObject = page "Salary Grades List";
+            //             ApplicationArea = Basic, Suite;
+            //         }
+            //         action("prNSSF List")
+            //         {
+            //             Caption = 'prNSSF List';
+            //             RunObject = page "prNSSF List";
+            //             ApplicationArea = Basic, Suite;
+            //         }
+            //         action("prNHIF SetUp")
+            //         {
+            //             Caption = 'prNHIF SetUp';
+            //             RunObject = page "prNHIF SetUp";
+            //             ApplicationArea = Basic, Suite;
+            //         }
+            //         action("prBoard Earning")
+            //         {
+            //             Caption = 'prBoard Earning';
+            //             RunObject = page "prBoard Earning";
+            //             ApplicationArea = Basic, Suite;
+            //         }
+            //         action("PrCasual Payroll Setup")
+            //         {
+            //             Caption = 'PrCasual Payroll Setup';
+            //             RunObject = page "PrCasual Payroll Setup";
+            //             ApplicationArea = Basic, Suite;
+            //         }
+            //         action("PR Employee Allowances List")
+            //         {
+            //             Caption = 'PR Employee Allowances List';
+            //             RunObject = page "PR Employee Allowances List";
+            //             ApplicationArea = Basic, Suite;
+            //         }
+            //         action("Status Change Permssion.")
+            //         {
+            //             Caption = 'Status Change Permssion.';
+            //             RunObject = page "Status Change Permssion.";
+            //             ApplicationArea = Basic, Suite;
+            //         }
+
+            //     }
+            //     group(PeriodicActivities)
+            //     {
+            //         Caption = 'Periodic Activities';
+            //         action("PR Payroll Periods")
+            //         {
+            //             Caption = 'PR Payroll Periods';
+            //             RunObject = page "PR Payroll Periods";
+            //             ApplicationArea = Basic, Suite;
+            //         }
+            //         action("Leave Allowances")
+            //         {
+            //             Caption = 'Leave Allowances';
+            //             RunObject = page "Leave Allowances";
+            //             ApplicationArea = Basic, Suite;
+            //         }
+            //         group("PR Tasks")
+            //         {
+            //             Caption = 'Tasks';
+            //             action("Payroll Salary Process")
+            //             {
+            //                 Caption = 'Payroll Salary Process';
+            //                 RunObject = page "Payroll Salary Process";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //         }
+            //         group("Reports & Analysis")
+            //         {
+            //             Caption = 'Reports and Analysis';
+            //             action("Transfer Net Pay To Fosa")
+            //             {
+            //                 Caption = 'Transfer Net Pay To Fosa';
+            //                 RunObject = report "Transfer Net Pay To Fosa";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("PR Transfer To Journal Bills")
+            //             {
+            //                 Caption = 'PR Transfer To Journal Bills';
+            //                 RunObject = report "PR Transfer To Journal Bills";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //         }
+            //     }
+            //     group("PR Reports")
+            //     {
+            //         Caption = 'Reports';
+            //         group("Ta sks")
+            //         {
+            //             Caption = 'Tasks';
+            //             action("Update Payroll Credit Accounts")
+            //             {
+            //                 Caption = 'Update Payroll Credit Accounts';
+            //                 //RunObject = report "Update Payroll Credit Accounts";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //         }
+            //         group("Rep and Analysis")
+            //         {
+            //             Caption = 'Reports and Analysis';
+            //             action("PR E-Mail Individual Payslip")
+            //             {
+            //                 Caption = 'PR E-Mail Individual Payslip';
+            //                 //RunObject = report "PR E-Mail Individual Payslip";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+
+            //             action("PRPayroll Summary")
+            //             {
+            //                 Caption = 'PR Payroll Summary';
+            //                 RunObject = report "PR Payroll Summary";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("prPaye Report")
+            //             {
+            //                 Caption = 'PAYE Schedule';
+            //                 RunObject = report "prPaye Report";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("prDeductions Report")
+            //             {
+            //                 Caption = 'Deductions Report';
+            //                 // RunObject = report "prDeductions Report";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("prAllowances Report")
+            //             {
+            //                 Caption = 'prAllowances Report';
+            //                 //RunObject = report "prAllowances Report";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action(prGrossNetPay)
+            //             {
+            //                 Caption = 'Gross NetPay';
+            //                 ApplicationArea = Basic, Suite;
+            //                 RunObject = report prGrossNetPay;
+            //             }
+            //             action("prGrossNetPay FxedTC")
+            //             {
+            //                 Caption = 'prGrossNetPay FxedTC';
+            //                 RunObject = report "prGrossNetPay FxedTC";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("prPayrollSummary-List")
+            //             {
+            //                 Caption = 'prPayrollSummary-List';
+            //                 //RunObject = report "prPayrollSummary-List";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("Pension Summary")
+            //             {
+            //                 Caption = 'Pension Summary';
+            //                 RunObject = report "Pension Summary";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("prBank Payments")
+            //             {
+            //                 Caption = 'prBank Payments';
+            //                 RunObject = report "prBank Payments";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("PrAllowances Summary")
+            //             {
+            //                 Caption = 'PrAllowances Summary';
+            //                 // RunObject = report "PrAllowances Summary";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action(" PrDeductions Summary")
+            //             {
+            //                 Caption = 'PrDeductions Summary';
+            //                 // RunObject = report "PrDeductions Summary";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("pr Loans Deductions Report")
+            //             {
+            //                 Caption = 'pr Loans Deductions Report';
+            //                 // RunObject = report "pr Loans Deductions Report";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("Helb Report")
+            //             {
+            //                 Caption = 'Helb Report';
+            //                 RunObject = report "Helb Report";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("PR iTax Report")
+            //             {
+            //                 Caption = 'PR iTax Report';
+            //                 RunObject = report "PR iTax Report";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("PR Company Totals")
+            //             {
+            //                 Caption = 'PR Company Totals';
+            //                 // RunObject = report "PR Company Totals";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("prP9A-test  new")
+            //             {
+            //                 Caption = 'prP9A-test  new';
+            //                 // RunObject = report "prP9A-test  new";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("PR Company FixedTC Totals")
+            //             {
+            //                 Caption = 'PR Company FixedTC Totals';
+            //                 //RunObject = report "PR Company FixedTC Totals";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("Detailed Payroll Transactions")
+            //             {
+            //                 Caption = 'Detailed Payroll Transactions';
+            //                 RunObject = report "Detailed Payroll Transactions";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("Staff Allowance  P9")
+            //             {
+            //                 Caption = 'Staff Allowance  P9';
+            //                 // RunObject = report "Staff Allowance  P9";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("Overtime Hours Worked1")
+            //             {
+            //                 Caption = 'Overtime Hours Worked1';
+            //                 RunObject = report "Overtime Hours Worked1";
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             group("PR Admin")
+            //             {
+            //                 Caption = 'Administration';
+            //                 action("Update Mismatched HR Loans")
+            //                 {
+            //                     Caption = 'Update Mismatched HR Loans';
+            //                     RunObject = report "Update Mismatched HR Loans";
+            //                     ApplicationArea = Basic, Suite;
+            //                 }
+            //             }
+            //         }
+            //     }
+            //     group(TaxReturns)
+            //     {
+            //         Caption = 'Tax Returns';
+            //         group("Repo and analysis")
+            //         {
+            //             Caption = 'Reports And analysis';
+            //             action("P 10A")
+            //             {
+            //                 Caption = 'P 10A';
+            //                 RunObject = report P10A;
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("P1 0")
+            //             {
+            //                 Caption = 'P10';
+            //                 RunObject = report P10;
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("P 9")
+            //             {
+            //                 Caption = 'P9';
+            //                 RunObject = report P9;
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+            //             action("priTax")
+            //             {
+            //                 Caption = 'priTax';
+            //                 // RunObject = report priTax;
+            //                 ApplicationArea = Basic, Suite;
+            //             }
+
+            //         }
+            //     }
+            // }
+            group("Advanced HR")
+            {
+                group(HREmployeeManagement)
+                {
+                    group("HR Employee recruitment")
+                    {
+                        action(HRemployeeRequisitions)
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'HR Employee Requisitions';
+
+                            RunObject = Page "HR Employee Requisitions List";
+                        }
+                        action(HRjobApplications)
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'HR job applications';
+
+                            RunObject = Page "HR Job Applications List";
+                        }
+                        action(Shortlisting)
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'HR Shortlisting';
+
+                            RunObject = Page "HR Shortlisting List1";
+                        }
+                        action(HRJobApplicantsQualified)
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'HR Job Applicants Qualified';
+
+                            RunObject = Page "HR Job Applicants QualifiedL1";
+                        }
+                        action(HRJobApplicantsNotQualified)
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'HR Job Applicants UnQualified';
+
+                            RunObject = Page "HR Applicants UnQualified L1";
+                        }
+                        action(SuccesfulJobApplicants)
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Qualified (Succesful) Job Applicants';
+
+                            RunObject = Page "HR  App Qualified Applicants1";
+                        }
+                        group(RepoAndanalysis)
+                        {
+                            Caption = 'Reports and Analysis';
+                            action(HRJobApplicants)
                             {
                                 ApplicationArea = Basic, Suite;
-                                Caption = 'HR Induction Schedule';
+                                Caption = 'HR Job Applicantions';
 
-                                RunObject = Page "HR Induction Schedule List1";
+                                RunObject = report "HR Job Applications";
                             }
-                            action(HREmployeeList)
+                            action(JobInterviewReport)
                             {
                                 ApplicationArea = Basic, Suite;
-                                Caption = 'HR Employee List - New';
+                                Caption = 'Job Interview Report';
 
-                                RunObject = Page "HR Employee List - New1";
+                                RunObject = report "Job Interview results";
                             }
-                            action(HREmployeeList1)
+                            action(Shortlistingreport)
                             {
                                 ApplicationArea = Basic, Suite;
-                                Caption = 'HR Employees - Pending Approval';
+                                Caption = 'Shortlisting Report';
 
-                                RunObject = Page "HR Employee List-Pending App1";
-                            }
-                            action(HREmployeeList2)
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'HR Employees - Active';
-
-                                RunObject = Page "HR Employee List - Active";
-                            }
-                            action(HREmployeeList3)
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'HR Employees - Inactive';
-
-                                RunObject = Page "HR Employee List - Inactive";
-                            }
-                            action(HREmployeeList4)
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'HR Employees - Fixed TC';
-
-                                RunObject = Page "HR Employee List - (FixedTc)";
-                            }
-                            action(HREmployeeChangeLog)
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'HR Employees - Probation';
-
-                                RunObject = Page "HR Employee Change Log";
-                            }
-                            group("AHR Tasks")
-                            {
-                                Caption = 'Tasks';
-                                action(HrHeadOfDepartments)
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'HR Head of Departments';
-
-                                    RunObject = Page "HR Head of Departments List";
-                                }
-                            }
-                            group(RepandAnalysis)
-                            {
-                                Caption = 'Reports And Analysis';
-                                action(HREmployeeListReport)
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'HR Employee List Report';
-
-                                    RunObject = report "HR Employee List Report";
-                                }
-                                action(HREmployeeListdetailedReport)
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'HR Employee List Detailed Report';
-
-                                    RunObject = report "Employee Detailed Report";
-                                }
-                                action(HREmployeeListReport1)
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'HR Employee List ';
-
-                                    RunObject = report "HR Employee List";
-                                }
+                                RunObject = report "Shortlisting Report";
                             }
                         }
-                        group("HR Training Management")
+                        // group("AHR Archive")
+                        // {
+                        //     Caption = 'Archive';
+                        //     action(HRjobApplicantsUploaded)
+                        //     {
+                        //         ApplicationArea = Basic, Suite;
+                        //         Caption = 'HR Job Applicants Uploaded';
+
+                        //         RunObject = Page "HR Job Applicants Uploaded1";
+                        //     }
+                        //     action(HRemployeereqapproved)
+                        //     {
+                        //         ApplicationArea = Basic, Suite;
+                        //         Caption = 'HR Employee Requisitions Approved';
+
+                        //         RunObject = Page "HR Employee ReqsListApproved1";
+                        //     }
+                        // }
+                    }
+                    group("HR Employee Management")
+                    {
+                        Caption = 'HR Employee Management';
+                        action(HRInductionSchedule)
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'HR Induction Schedule';
+
+                            RunObject = Page "HR Induction Schedule List1";
+                        }
+                        action(HREmployeeList)
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'HR Employee List - New';
+
+                            RunObject = Page "HR Employee List - New1";
+                        }
+                        action(HREmployeeList1)
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'HR Employees - Pending Approval';
+
+                            RunObject = Page "HR Employee List-Pending App1";
+                        }
+                        action(HREmployeeList2)
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'HR Employees - Active';
+
+                            RunObject = Page "HR Employee List - Active";
+                        }
+                        action(HREmployeeList3)
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'HR Employees - Inactive';
+
+                            RunObject = Page "HR Employee List - Inactive";
+                        }
+                        action(HREmployeeList4)
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'HR Employees - Fixed TC';
+
+                            RunObject = Page "HR Employee List - (FixedTc)";
+                        }
+                        action(HREmployeeChangeLog)
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'HR Employees - Probation';
+
+                            RunObject = Page "HR Employee Change Log";
+                        }
+                        group("AHR Tasks")
+                        {
+                            Caption = 'Tasks';
+                            action(HrHeadOfDepartments)
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'HR Head of Departments';
+
+                                RunObject = Page "HR Head of Departments List";
+                            }
+                        }
+                        group(RepandAnalysis)
+                        {
+                            Caption = 'Reports And Analysis';
+                            action(HREmployeeListReport)
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'HR Employee List Report';
+
+                                RunObject = report "HR Employee List Report";
+                            }
+                            action(HREmployeeListdetailedReport)
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'HR Employee List Detailed Report';
+
+                                RunObject = report "Employee Detailed Report";
+                            }
+                            action(HREmployeeListReport1)
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'HR Employee List ';
+
+                                RunObject = report "HR Employee List";
+                            }
+                        }
+                    }
+                    group("HR Training Management")
+                    {
+                        Caption = 'HR Training Management';
+                        group(HrTrainingMgt)
                         {
                             Caption = 'HR Training Management';
-                            group(HrTrainingMgt)
+                            action(HRTrainingNeeds)
                             {
-                                Caption = 'HR Training Management';
-                                action(HRTrainingNeeds)
+                                Caption = 'HR Training Needs';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = Page "HR Training Needs List1";
+                            }
+                            action(HrTrainingApplications)
+                            {
+                                Caption = 'HR Training Applications';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = Page "HR Training ApplicationList";
+                            }
+                            group(Taskss)
+                            {
+                                Caption = 'Tasks';
+                                action(HRTrainingFeedBack)
                                 {
-                                    Caption = 'HR Training Needs';
+                                    Caption = 'HR Training FeedBack';
                                     ApplicationArea = Basic, Suite;
-                                    RunObject = Page "HR Training Needs List1";
+                                    RunObject = Page "HR Training Feedback";
                                 }
-                                action(HrTrainingApplications)
-                                {
-                                    Caption = 'HR Training Applications';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = Page "HR Training ApplicationList";
-                                }
-                                group(Taskss)
-                                {
-                                    Caption = 'Tasks';
-                                    action(HRTrainingFeedBack)
-                                    {
-                                        Caption = 'HR Training FeedBack';
-                                        ApplicationArea = Basic, Suite;
-                                        RunObject = Page "HR Training Feedback";
-                                    }
 
-                                }
-                                group(Archve)
+                            }
+                            group(Archve)
+                            {
+                                Caption = 'Archives';
+                                action(HrTrainingApplicationsArchive)
                                 {
-                                    Caption = 'Archives';
-                                    action(HrTrainingApplicationsArchive)
-                                    {
-                                        Caption = 'HR Training Applications Archive';
-                                        ApplicationArea = Basic, Suite;
-                                        RunObject = Page "HR Training Application Lines";
-                                    }
+                                    Caption = 'HR Training Applications Archive';
+                                    ApplicationArea = Basic, Suite;
+                                    RunObject = Page "HR Training Application Lines";
                                 }
                             }
-                            // group(HrInternsMgt)
-                            // {
-                            //     Caption = 'HR Interns Management';
-                            //     action(HrInterns)
-                            //     {
-                            //         Caption = 'HR Interns';
-                            //         ApplicationArea = Basic, Suite;
-                            //         RunObject = Page "HR Interns List";
-                            //     }
-                            //     action(HrInternsRequisitions)
-                            //     {
-                            //         Caption = 'HR Interns Requisitions';
-                            //         ApplicationArea = Basic, Suite;
-                            //         RunObject = Page "HR Intern Requisition List";
-                            //     }
-                            // }
-
                         }
-                        group("HR Disciplinary Management")
+                        // group(HrInternsMgt)
+                        // {
+                        //     Caption = 'HR Interns Management';
+                        //     action(HrInterns)
+                        //     {
+                        //         Caption = 'HR Interns';
+                        //         ApplicationArea = Basic, Suite;
+                        //         RunObject = Page "HR Interns List";
+                        //     }
+                        //     action(HrInternsRequisitions)
+                        //     {
+                        //         Caption = 'HR Interns Requisitions';
+                        //         ApplicationArea = Basic, Suite;
+                        //         RunObject = Page "HR Intern Requisition List";
+                        //     }
+                        // }
+
+                    }
+                    group("HR Disciplinary Management")
+                    {
+                        Caption = 'HR Disciplinary Management';
+                        action(HRDisciplinaryCases)
                         {
-                            Caption = 'HR Disciplinary Management';
-                            action(HRDisciplinaryCases)
+                            Caption = 'HR Disciplinary Cases';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = page "HR Disciplinary Cases List N1";
+                        }
+                        action(HRDiscWthdwaList)
+                        {
+                            Caption = 'HR Disciplinary Withdrawal List';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = page "HR Disc Withdrawal list";
+                        }
+                        action(HRDiscAppealList)
+                        {
+                            Caption = 'HR Disciplinary Appeal list';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = page "HR Disciplinary Appeal List";
+                        }
+                        action(HREmployeeGrievance)
+                        {
+                            Caption = 'HR Employee Grievance';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = page "HR Employee Grievance List";
+                        }
+                        group(Takss)
+                        {
+                            Caption = 'Tasks';
+                            action(HrDiscCasesLst)
+                            {
+                                Caption = 'HR Disciplinary Cases list';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = page "HR Disciplinary Cases List";
+
+                            }
+                        }
+                        group(RepAnalysis)
+                        {
+                            Caption = 'Reports and Analysis';
+                            action(HrDiscCasesList)
+                            {
+                                Caption = 'HR Disciplinary Cases list';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = report "HR Disciplinary Cases List";
+                            }
+                            action(HrDiscCases)
                             {
                                 Caption = 'HR Disciplinary Cases';
                                 ApplicationArea = Basic, Suite;
-                                RunObject = page "HR Disciplinary Cases List N1";
+                                RunObject = report "HR Disciplinary Cases";
                             }
-                            action(HRDiscWthdwaList)
+
+                        }
+                        group(Archves)
+                        {
+                            Caption = 'Archive';
+                            action(ClosedHrDiscCases)
                             {
-                                Caption = 'HR Disciplinary Withdrawal List';
+                                Caption = 'Closed HR Disciplinary Cases';
                                 ApplicationArea = Basic, Suite;
-                                RunObject = page "HR Disc Withdrawal list";
-                            }
-                            action(HRDiscAppealList)
-                            {
-                                Caption = 'HR Disciplinary Appeal list';
-                                ApplicationArea = Basic, Suite;
-                                RunObject = page "HR Disciplinary Appeal List";
-                            }
-                            action(HREmployeeGrievance)
-                            {
-                                Caption = 'HR Employee Grievance';
-                                ApplicationArea = Basic, Suite;
-                                RunObject = page "HR Employee Grievance List";
-                            }
-                            group(Takss)
-                            {
-                                Caption = 'Tasks';
-                                action(HrDiscCasesLst)
-                                {
-                                    Caption = 'HR Disciplinary Cases list';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = page "HR Disciplinary Cases List";
-
-                                }
-                            }
-                            group(RepAnalysis)
-                            {
-                                Caption = 'Reports and Analysis';
-                                action(HrDiscCasesList)
-                                {
-                                    Caption = 'HR Disciplinary Cases list';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = report "HR Disciplinary Cases List";
-                                }
-                                action(HrDiscCases)
-                                {
-                                    Caption = 'HR Disciplinary Cases';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = report "HR Disciplinary Cases";
-                                }
-
-                            }
-                            group(Archves)
-                            {
-                                Caption = 'Archive';
-                                action(ClosedHrDiscCases)
-                                {
-                                    Caption = 'Closed HR Disciplinary Cases';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = page "HR Disciplinary Cases ListCls1";
-
-                                }
-                            }
-                            group(Admini)
-                            {
-                                Caption = 'Administration';
-                                action(HrDiscActions)
-                                {
-                                    Caption = 'HR Disciplinary Actions';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = page "HR Disciplinary Actions1";
-
-                                }
-                            }
-                        }
-                        group("HR Perfomance Management")
-                        {
-                            Caption = 'Hr Perfomance Management';
-                            group("HR BSC Appraisal")
-                            {
-                                action("HR BSC List Target Setting")
-                                {
-                                    Caption = 'HR BSC List Target Setting';
-                                    ApplicationArea = Basic, suite;
-                                    RunObject = page "HR BSC List Targets1";
-                                }
-                                action("HR BSC List Targets-Supervisor")
-                                {
-                                    Caption = 'HR BSC List Targets-Supervisor';
-                                    ApplicationArea = Basic, suite;
-                                    RunObject = page "HR BSC List Targets-Supervisor";
-                                }
-                                action("HR BSC List Quater1")
-                                {
-                                    Caption = 'HR BSC List Quater1';
-                                    ApplicationArea = Basic, suite;
-                                    RunObject = page "HR BSC List Qaurter 1";
-                                }
-                                action("HR BSC List Review")
-                                {
-                                    Caption = 'HR BSC List Review';
-                                    ApplicationArea = Basic, suite;
-                                    RunObject = page "HR BSC List Review1";
-                                }
-                                action("HR BSC List Quater 3")
-                                {
-                                    Caption = 'HR BSC List Quater 3';
-                                    ApplicationArea = Basic, suite;
-                                    RunObject = page "HR BSC List Qaurter 3";
-                                }
-                                action("HR BSC List Approved")
-                                {
-                                    Caption = 'HR BSC List Approved';
-                                    ApplicationArea = Basic, suite;
-                                    RunObject = page "HR BSC List Approved";
-                                }
-                                action("HR BSC List End Year")
-                                {
-                                    Caption = 'HR BSC List End Year';
-                                    ApplicationArea = Basic, suite;
-                                    RunObject = page "HR BSC List End Year1";
-                                }
-                                action("HR BSC List Closed")
-                                {
-                                    Caption = 'HR BSC List Closed';
-                                    ApplicationArea = Basic, suite;
-                                    RunObject = page "HR BSC List Closed";
-                                }
-                                action("HR Appraisal Appeal List")
-                                {
-                                    Caption = 'HR Appraisal Appeal List';
-                                    ApplicationArea = Basic, suite;
-                                    RunObject = page "HR Appraissal Appeal list";
-                                }
-                            }
-                            group(Taskz)
-                            {
-                                Caption = 'Tasks';
-                                action("HR Appraisal Period Setup")
-                                {
-                                    Caption = 'HR Appraisal Period Setup';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = page "HR Appraisal Period Setup";
-
-                                }
-                            }
-                            group(randanalysis)
-                            {
-                                Caption = 'Reports and Analysis';
-                                action(PerfomanceReport)
-                                {
-                                    Caption = 'Perfomance Report';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = report "Performance Report";
-
-                                }
-                                action(AppraisalReport)
-                                {
-                                    Caption = 'Appraisal Report';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = report "Appraisal Report";
-
-                                }
-                            }
-                        }
-                        group("HR Leave Management")
-                        {
-                            group(Grp1Tasks)
-                            {
-                                Caption = 'Tasks';
-                                action(HRLeaveAdjustments)
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'HR Leave Adjustments';
-
-                                    RunObject = Page "HR Leave Journal Lines";
-                                }
-                                action(HrleaveJnrTemp)
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'HR Leave Journal Templates';
-
-                                    RunObject = Page "HR Leave Jnl. Template List";
-                                }
-                                action(HrLeaveReimbusementList)
-                                {
-                                    Caption = 'HR Leave Reimbusement List';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = Page "HR Leave Reimbursment List1";
-                                }
-                                action(HrLeavePlannerList)
-                                {
-                                    Caption = 'HR Leave Planner List';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = Page "HR Leave Planner List";
-                                }
-                                action(HrLeavePlannerLinesDrill)
-                                {
-                                    Caption = 'HR Leave Planner Lines dril';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = Page "HR Leave Planner Lines Drill";
-                                }
-
-                            }
-                            group(Grp2repansanalysis)
-                            {
-                                Caption = 'Reports and Analysis';
-                                action(HrLeaveApplication)
-                                {
-                                    Caption = 'HR Leave Application';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = report "HR Leave Application";
-                                }
-                                action(HrLeaveStatement)
-                                {
-                                    Caption = 'HR Leave Statement';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = report "HR Leave Statement";
-                                }
-
-                                action(StaffLeaveBalances)
-                                {
-                                    Caption = 'Staff Leave Balances';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = report "HR Leave Balance";
-                                }
-                                action(HrleaveBal2)
-                                {
-                                    Caption = 'HR Leave Balance2';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = report "HR Leave Balance2";
-                                }
-                                action(HrLeaveBalSummary)
-                                {
-                                    Caption = 'HR Leave Balance Summary';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = report "HR Leave Balance Summary";
-                                }
-                                action(StaffOnLeave)
-                                {
-                                    Caption = 'Staff On Leave';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = report "Staff On Leave";
-                                }
-                            }
-                            group(Archives)
-                            {
-                                Caption = 'Archives';
-                                action(HrLeavePlannerArchive)
-                                {
-                                    Caption = 'HR Leave Planner Archive';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = Page "Hr Leave Planner Lines";
-                                }
-                                action(Rejectedleaveapp)
-                                {
-                                    Caption = 'Rejected Leave Applications';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = Page "Rejected Leave Applications";
-                                }
-                            }
-                            group(Adm)
-                            {
-                                Caption = 'Administration';
-                                action(HrLeavePeriods)
-                                {
-                                    Caption = 'HR Leave Periods';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = Page "HR Leave Period List1";
-                                }
-
-                            }
-
-                        }
-                        group("Staff Loan")
-                        {
-                            Caption = 'Staff Loan';
-                            action(SalaryAdvance)
-                            {
-                                Caption = 'Salary Advance';
-                                ApplicationArea = Basic, Suite;
-                                RunObject = page "prSalary Advance List";
-                            }
-                            action(LnTypeList)
-                            {
-                                Caption = 'Loan Type List';
-                                ApplicationArea = Basic, Suite;
-                                RunObject = page "Loan Type List";
-                            }
-                        }
-                        group("HR Exit Interviews")
-                        {
-                            Caption = 'HR Exit Interviews';
-                            action("HR Employee Exit Interviews")
-                            {
-                                Caption = 'HR Employee Exit Interviews';
-                                ApplicationArea = Basic, Suite;
-                                // RunObject = page "HR Employee Exit Interviews1";
-                            }
-
-                            group(repandanaly)
-                            {
-                                Caption = 'Reports And Analysis';
-                                action(SeparationReport)
-                                {
-                                    Caption = 'Separation Report';
-                                    ApplicationArea = Basic, Suite;
-                                    // RunObject = report "Separation report1"; missing repo
-                                }
-                            }
-                            group(arch)
-                            {
-                                Caption = 'Archive';
-                                action("Closed HR Employee Exit Interviews")
-                                {
-                                    Caption = 'Separation Report';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = page "Closed HR Exit Interview list1";
-                                }
-                            }
-
-                        }
-                    }
-                    group("HR Activities")
-                    {
-                        Caption = 'HR Activities';
-                        group("HR jobs Management")
-                        {
-                            Caption = 'HR jobs Management';
-                            action("HR Jobs")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'HR Jobs';
-
-                                RunObject = Page "HR Jobs List";
-                            }
-                            action("HR Job Qualifications")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'HR Job Qualifications';
-
-                                RunObject = Page "HR Job Qualifications";
-                            }
-                            group("AHR Task")
-                            {
-                                Caption = 'Tasks';
-                                action("HR Job Requirements")
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'HR Job Requirements';
-
-                                    RunObject = Page "HR Job Requirements";
-                                }
-                                action("HR Job Responsibilities")
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'HR Job Responsibilities';
-
-                                    RunObject = Page "HR Job Responsibilities";
-                                }
-                                group(ReportsandAnalysis)
-                                {
-                                    Caption = 'Reports and Analysis';
-                                    action("HRJobs")
-                                    {
-                                        ApplicationArea = Basic, Suite;
-                                        Caption = 'HR Jobs';
-
-                                        RunObject = report "HR Jobs";
-                                    }
-                                    action("HRJobOccupants")
-                                    {
-                                        ApplicationArea = Basic, Suite;
-                                        Caption = 'HR Job Occupants';
-
-                                        RunObject = report "HR Job Occupants";
-                                    }
-                                    action(Hrjobsvacantandoccupied)
-                                    {
-                                        ApplicationArea = Basic, Suite;
-                                        Caption = 'HR Jobs vacant and occupied ';
-
-                                        RunObject = report "HR Jobs (Vacant)";
-                                    }
-                                    action("HRJobresponsibilities")
-                                    {
-                                        ApplicationArea = Basic, Suite;
-                                        Caption = 'HR Job responsibilities';
-
-                                        RunObject = report "HR Job responsibilities";
-                                    }
-                                    action("HRJobrequirements")
-                                    {
-                                        ApplicationArea = Basic, Suite;
-                                        Caption = 'HR Job requirements';
-
-                                        RunObject = report "HR Job requirements";
-                                    }
-                                }
+                                RunObject = page "HR Disciplinary Cases ListCls1";
 
                             }
                         }
-                        group("HR Professional Bodies")
-                        {
-                            Caption = 'HR Professional Bodies';
-                            action("HRProfessional Bodies")
-                            {
-
-                                Caption = 'HR Professional Bodies';
-                                ApplicationArea = Basic, Suite;
-                                RunObject = page "HR Professional Bodies List";
-                            }
-                        }
-                        group("HR Company Activities")
-                        {
-                            Caption = 'HR Company Activities';
-                            action(CompanyActivitieswelfare)
-                            {
-                                Caption = 'Company Activities/ Welfare';
-                                ApplicationArea = Basic, Suite;
-                                RunObject = page "HR Company Activities List1";
-                            }
-                            group(RepAndAnalys)
-                            {
-                                Caption = 'Reports and Analysis';
-                                action(CompActivitiesWelface)
-                                {
-                                    Caption = 'Company Activities/Welfare';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = report "HR Company Activities";
-                                }
-
-                            }
-                            group(Archv)
-                            {
-                                Caption = 'Archive';
-                                action(CompActivitiwelface)
-                                {
-                                    Caption = 'Company Activities/Welfare closed activities';
-                                    ApplicationArea = Basic, Suite;
-                                    RunObject = page "HR Company Activities List Cl1";
-                                }
-
-                            }
-                        }
-                        group("HR Promotion Recommendation")
-                        {
-                            Caption = 'HR Promotion Recommendation';
-                            action("HRPromotion Recommendations")
-                            {
-
-                                Caption = 'HR Promotion Recommendations';
-                                ApplicationArea = Basic, Suite;
-                                RunObject = page "HR Promotion Recommend List";
-                            }
-                            action("Effected Promotion Recommendations")
-                            {
-
-                                Caption = 'Effected Promotion Recommendations';
-                                ApplicationArea = Basic, Suite;
-                                RunObject = page "HR Promotion RecommendAppList";
-                            }
-                        }
-                        group("Salary Agreements")
-                        {
-                            group(GrpSalary)
-                            {
-                                Caption = 'Salary Agreements';
-                                action("Salary Agreement List")
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'Salary Agreement List';
-                                    RunObject = page "Salary Agreement List";
-                                }
-                                action("Approved Salary Agreement List")
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'Approved Salary Agreement List';
-                                    RunObject = page "Approved Salary Agreement List";
-                                }
-                                action("Rejected Salary Agreement List")
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'Rejected Salary Agreement List';
-                                    RunObject = page "Rejected Salary Agreement List";
-                                }
-                            }
-                            // group(SalAgreeRepos)
-                            // {
-                            //     Caption = 'Salary Agreements Reports';
-                            //     action("Salary Agreement")
-                            //     {
-                            //         ApplicationArea = Basic, Suite;
-                            //         Caption = 'Salary Agreement';
-                            //         RunObject = report "Salary Agreement";
-                            //     }
-                            //     action("Salary Agreement Report")
-                            //     {
-                            //         ApplicationArea = Basic, Suite;
-                            //         Caption = 'Salary Forms Report';
-                            //         RunObject = report "Salary Agreement Report";
-                            //     }
-                            //     action("Salary Agreement Counter")
-                            //     {
-                            //         ApplicationArea = Basic, Suite;
-                            //         Caption = 'Salary Agreement Counter';
-                            //         RunObject = report "Salary Agreement Counter";
-                            //     }
-                            //     action("RSalary Agreement List")
-                            //     {
-                            //         ApplicationArea = Basic, Suite;
-                            //         Caption = 'Salary Agreement List';
-                            //         RunObject = report "Salary Agreement List";
-                            //     }
-                            // }
-
-                        }
-
-                    }
-
-                    group("User / HR requests")
-                    {
-                        Caption = 'User / HR requests';
-                        group("Leave")
-                        {
-                            Caption = 'Leave Application';
-                            group("Leave Management Lists")
-                            {
-                                Caption = 'Lists';
-                                action("HR Leave Applications List")
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'HR Leave Applications List';
-                                    RunObject = page "HR Leave Applications List1";
-                                }
-                            }
-                            group("Arc")
-                            {
-                                action("HR Leave Applications")
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'HR Leave Applications List';
-                                    RunObject = page "HR Leave Applications History1";
-                                }
-                            }
-                        }
-                        group("Other Requisitions")
-                        {
-                            Caption = 'Other Requisitions';
-                            group("Other Requisition")
-                            {
-                                Caption = 'Lists';
-                                action("Overtime Claims List")
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'Other Requisitions';
-                                    RunObject = page "Overtime Claim List";
-                                }
-                                action("Purchase Requisition")
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'Purchase Requisitions';
-                                    RunObject = page "Purchase Requisitions";
-                                }
-                                action("System Rights Requisition")
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'System Rights Requisition';
-                                    RunObject = page "Permission Requisition Card";
-                                }
-                            }
-                        }
-                        group(group3)
-                        {
-                            Caption = 'Reports';
-                            group("AHR Reports")
-                            {
-                                Caption = 'Lists';
-                                action("Dividend Slip")
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'Dividend Slip';
-                                    RunObject = report "Dividend Slip B64";
-                                }
-                            }
-                        }
-
-                        // group(group4)
-                        // {
-                        //     Caption = 'Store Requisitions';
-                        //     group("Store Requisitions")
-                        //     {
-                        //         Caption = 'Lists';
-                        //         action("Store Requisition List")
-                        //         {
-                        //             ApplicationArea = Basic, Suite;
-                        //             Caption = 'Store Requisition List';
-                        //             RunObject = page "Store Requisitions List";
-                        //         }
-                        //         action("Cancelled Store Requisitions List")
-                        //         {
-                        //             ApplicationArea = Basic, Suite;
-                        //             Caption = 'Cancelled Store Requisitions List';
-                        //             RunObject = page "Cancelled Store Req List";
-                        //         }
-                        //     }
-                        //     group(Arkiv)
-                        //     {
-                        //         Caption = 'Lists';
-                        //         action("Store Requisition Released/Pending")
-                        //         {
-                        //             ApplicationArea = Basic, Suite;
-                        //             Caption = 'Store Requisition Released/Pending';
-                        //             RunObject = page "Store Requisition List";
-
-                        //         }
-                        //     }
-                        // }
-                    }
-                    group("HR General Setup")
-                    {
-
-                        Caption = 'HR General Setup';
-                        action("HR leave Calendar")
-                        {
-                            Caption = 'HR Leave Calendar';
-                            ApplicationArea = Basic, Suite;
-                            RunObject = page "HR Leave Calendar List";
-                        }
-                        action("HR Lookup Values")
-                        {
-                            Caption = 'HR Lookup Values';
-                            ApplicationArea = Basic, Suite;
-                            RunObject = page "HR Lookup Values List";
-                        }
-                        action("Hr Committees")
-                        {
-                            Caption = 'Hr Committees';
-                            ApplicationArea = Basic, Suite;
-                            RunObject = page "HR Committees";
-                        }
-                        action("Hr Policies")
-                        {
-                            Caption = 'Hr Policies';
-                            ApplicationArea = Basic, Suite;
-                            RunObject = page "HR Policy List";
-                        }
-                        action("Hr E-Mail Parameters")
-                        {
-                            Caption = 'Hr E-Mail Parameters';
-                            ApplicationArea = Basic, Suite;
-                            RunObject = page "HR E-Mail Parameters List";
-                        }
-                        group(Admn)
+                        group(Admini)
                         {
                             Caption = 'Administration';
-                            action("HR Setup")
+                            action(HrDiscActions)
                             {
-                                Caption = 'HR Setup';
+                                Caption = 'HR Disciplinary Actions';
                                 ApplicationArea = Basic, Suite;
-                                RunObject = page "HR Setup";
+                                RunObject = page "HR Disciplinary Actions1";
+
                             }
                         }
+                    }
+                    group("HR Perfomance Management")
+                    {
+                        Caption = 'Hr Perfomance Management';
+                        group("HR BSC Appraisal")
+                        {
+                            action("HR BSC List Target Setting")
+                            {
+                                Caption = 'HR BSC List Target Setting';
+                                ApplicationArea = Basic, suite;
+                                RunObject = page "HR BSC List Targets1";
+                            }
+                            action("HR BSC List Targets-Supervisor")
+                            {
+                                Caption = 'HR BSC List Targets-Supervisor';
+                                ApplicationArea = Basic, suite;
+                                RunObject = page "HR BSC List Targets-Supervisor";
+                            }
+                            action("HR BSC List Quater1")
+                            {
+                                Caption = 'HR BSC List Quater1';
+                                ApplicationArea = Basic, suite;
+                                RunObject = page "HR BSC List Qaurter 1";
+                            }
+                            action("HR BSC List Review")
+                            {
+                                Caption = 'HR BSC List Review';
+                                ApplicationArea = Basic, suite;
+                                RunObject = page "HR BSC List Review1";
+                            }
+                            action("HR BSC List Quater 3")
+                            {
+                                Caption = 'HR BSC List Quater 3';
+                                ApplicationArea = Basic, suite;
+                                RunObject = page "HR BSC List Qaurter 3";
+                            }
+                            action("HR BSC List Approved")
+                            {
+                                Caption = 'HR BSC List Approved';
+                                ApplicationArea = Basic, suite;
+                                RunObject = page "HR BSC List Approved";
+                            }
+                            action("HR BSC List End Year")
+                            {
+                                Caption = 'HR BSC List End Year';
+                                ApplicationArea = Basic, suite;
+                                RunObject = page "HR BSC List End Year1";
+                            }
+                            action("HR BSC List Closed")
+                            {
+                                Caption = 'HR BSC List Closed';
+                                ApplicationArea = Basic, suite;
+                                RunObject = page "HR BSC List Closed";
+                            }
+                            action("HR Appraisal Appeal List")
+                            {
+                                Caption = 'HR Appraisal Appeal List';
+                                ApplicationArea = Basic, suite;
+                                RunObject = page "HR Appraissal Appeal list";
+                            }
+                        }
+                        group(Taskz)
+                        {
+                            Caption = 'Tasks';
+                            action("HR Appraisal Period Setup")
+                            {
+                                Caption = 'HR Appraisal Period Setup';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = page "HR Appraisal Period Setup";
+
+                            }
+                        }
+                        group(randanalysis)
+                        {
+                            Caption = 'Reports and Analysis';
+                            action(PerfomanceReport)
+                            {
+                                Caption = 'Perfomance Report';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = report "Performance Report";
+
+                            }
+                            action(AppraisalReport)
+                            {
+                                Caption = 'Appraisal Report';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = report "Appraisal Report";
+
+                            }
+                        }
+                    }
+                    group("HR Leave Management")
+                    {
+                        group(Grp1Tasks)
+                        {
+                            Caption = 'Tasks';
+                            action(HRLeaveAdjustments)
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'HR Leave Adjustments';
+
+                                RunObject = Page "HR Leave Journal Lines";
+                            }
+                            action(HrleaveJnrTemp)
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'HR Leave Journal Templates';
+
+                                RunObject = Page "HR Leave Jnl. Template List";
+                            }
+                            action(HrLeaveReimbusementList)
+                            {
+                                Caption = 'HR Leave Reimbusement List';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = Page "HR Leave Reimbursment List1";
+                            }
+                            action(HrLeavePlannerList)
+                            {
+                                Caption = 'HR Leave Planner List';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = Page "HR Leave Planner List";
+                            }
+                            action(HrLeavePlannerLinesDrill)
+                            {
+                                Caption = 'HR Leave Planner Lines dril';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = Page "HR Leave Planner Lines Drill";
+                            }
+
+                        }
+                        group(Grp2repansanalysis)
+                        {
+                            Caption = 'Reports and Analysis';
+                            action(HrLeaveApplication)
+                            {
+                                Caption = 'HR Leave Application';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = report "HR Leave Application";
+                            }
+                            action(HrLeaveStatement)
+                            {
+                                Caption = 'HR Leave Statement';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = report "HR Leave Statement";
+                            }
+
+                            action(StaffLeaveBalances)
+                            {
+                                Caption = 'Staff Leave Balances';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = report "HR Leave Balance";
+                            }
+                            action(HrleaveBal2)
+                            {
+                                Caption = 'HR Leave Balance2';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = report "HR Leave Balance2";
+                            }
+                            action(HrLeaveBalSummary)
+                            {
+                                Caption = 'HR Leave Balance Summary';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = report "HR Leave Balance Summary";
+                            }
+                            action(StaffOnLeave)
+                            {
+                                Caption = 'Staff On Leave';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = report "Staff On Leave";
+                            }
+                        }
+                        group(Archives)
+                        {
+                            Caption = 'Archives';
+                            action(HrLeavePlannerArchive)
+                            {
+                                Caption = 'HR Leave Planner Archive';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = Page "Hr Leave Planner Lines";
+                            }
+                            action(Rejectedleaveapp)
+                            {
+                                Caption = 'Rejected Leave Applications';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = Page "Rejected Leave Applications";
+                            }
+                        }
+                        group(Adm)
+                        {
+                            Caption = 'Administration';
+                            action(HrLeavePeriods)
+                            {
+                                Caption = 'HR Leave Periods';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = Page "HR Leave Period List1";
+                            }
+
+                        }
+
+                    }
+                    group("Staff Loan")
+                    {
+                        Caption = 'Staff Loan';
+                        action(SalaryAdvance)
+                        {
+                            Caption = 'Salary Advance';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = page "prSalary Advance List";
+                        }
+                        action(LnTypeList)
+                        {
+                            Caption = 'Loan Type List';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = page "Loan Type List";
+                        }
+                    }
+                    group("HR Exit Interviews")
+                    {
+                        Caption = 'HR Exit Interviews';
+                        action("HR Employee Exit Interviews")
+                        {
+                            Caption = 'HR Employee Exit Interviews';
+                            ApplicationArea = Basic, Suite;
+                            // RunObject = page "HR Employee Exit Interviews1";
+                        }
+
+                        group(repandanaly)
+                        {
+                            Caption = 'Reports And Analysis';
+                            action(SeparationReport)
+                            {
+                                Caption = 'Separation Report';
+                                ApplicationArea = Basic, Suite;
+                                // RunObject = report "Separation report1"; missing repo
+                            }
+                        }
+                        group(arch)
+                        {
+                            Caption = 'Archive';
+                            action("Closed HR Employee Exit Interviews")
+                            {
+                                Caption = 'Separation Report';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = page "Closed HR Exit Interview list1";
+                            }
+                        }
+
+                    }
+                }
+                group("HR Activities")
+                {
+                    Caption = 'HR Activities';
+                    group("HR jobs Management")
+                    {
+                        Caption = 'HR jobs Management';
+                        action("HR Jobs")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'HR Jobs';
+
+                            RunObject = Page "HR Jobs List";
+                        }
+                        action("HR Job Qualifications")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'HR Job Qualifications';
+
+                            RunObject = Page "HR Job Qualifications";
+                        }
+                        group("AHR Task")
+                        {
+                            Caption = 'Tasks';
+                            action("HR Job Requirements")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'HR Job Requirements';
+
+                                RunObject = Page "HR Job Requirements";
+                            }
+                            action("HR Job Responsibilities")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'HR Job Responsibilities';
+
+                                RunObject = Page "HR Job Responsibilities";
+                            }
+                            group(ReportsandAnalysis)
+                            {
+                                Caption = 'Reports and Analysis';
+                                action("HRJobs")
+                                {
+                                    ApplicationArea = Basic, Suite;
+                                    Caption = 'HR Jobs';
+
+                                    RunObject = report "HR Jobs";
+                                }
+                                action("HRJobOccupants")
+                                {
+                                    ApplicationArea = Basic, Suite;
+                                    Caption = 'HR Job Occupants';
+
+                                    RunObject = report "HR Job Occupants";
+                                }
+                                action(Hrjobsvacantandoccupied)
+                                {
+                                    ApplicationArea = Basic, Suite;
+                                    Caption = 'HR Jobs vacant and occupied ';
+
+                                    RunObject = report "HR Jobs (Vacant)";
+                                }
+                                action("HRJobresponsibilities")
+                                {
+                                    ApplicationArea = Basic, Suite;
+                                    Caption = 'HR Job responsibilities';
+
+                                    RunObject = report "HR Job responsibilities";
+                                }
+                                action("HRJobrequirements")
+                                {
+                                    ApplicationArea = Basic, Suite;
+                                    Caption = 'HR Job requirements';
+
+                                    RunObject = report "HR Job requirements";
+                                }
+                            }
+
+                        }
+                    }
+                    group("HR Professional Bodies")
+                    {
+                        Caption = 'HR Professional Bodies';
+                        action("HRProfessional Bodies")
+                        {
+
+                            Caption = 'HR Professional Bodies';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = page "HR Professional Bodies List";
+                        }
+                    }
+                    group("HR Company Activities")
+                    {
+                        Caption = 'HR Company Activities';
+                        action(CompanyActivitieswelfare)
+                        {
+                            Caption = 'Company Activities/ Welfare';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = page "HR Company Activities List1";
+                        }
+                        group(RepAndAnalys)
+                        {
+                            Caption = 'Reports and Analysis';
+                            action(CompActivitiesWelface)
+                            {
+                                Caption = 'Company Activities/Welfare';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = report "HR Company Activities";
+                            }
+
+                        }
+                        group(Archv)
+                        {
+                            Caption = 'Archive';
+                            action(CompActivitiwelface)
+                            {
+                                Caption = 'Company Activities/Welfare closed activities';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = page "HR Company Activities List Cl1";
+                            }
+
+                        }
+                    }
+                    group("HR Promotion Recommendation")
+                    {
+                        Caption = 'HR Promotion Recommendation';
+                        action("HRPromotion Recommendations")
+                        {
+
+                            Caption = 'HR Promotion Recommendations';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = page "HR Promotion Recommend List";
+                        }
+                        action("Effected Promotion Recommendations")
+                        {
+
+                            Caption = 'Effected Promotion Recommendations';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = page "HR Promotion RecommendAppList";
+                        }
+                    }
+                    group("Salary Agreements")
+                    {
+                        group(GrpSalary)
+                        {
+                            Caption = 'Salary Agreements';
+                            action("Salary Agreement List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Salary Agreement List';
+                                RunObject = page "Salary Agreement List";
+                            }
+                            action("Approved Salary Agreement List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Approved Salary Agreement List';
+                                RunObject = page "Approved Salary Agreement List";
+                            }
+                            action("Rejected Salary Agreement List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Rejected Salary Agreement List';
+                                RunObject = page "Rejected Salary Agreement List";
+                            }
+                        }
+                        // group(SalAgreeRepos)
+                        // {
+                        //     Caption = 'Salary Agreements Reports';
+                        //     action("Salary Agreement")
+                        //     {
+                        //         ApplicationArea = Basic, Suite;
+                        //         Caption = 'Salary Agreement';
+                        //         RunObject = report "Salary Agreement";
+                        //     }
+                        //     action("Salary Agreement Report")
+                        //     {
+                        //         ApplicationArea = Basic, Suite;
+                        //         Caption = 'Salary Forms Report';
+                        //         RunObject = report "Salary Agreement Report";
+                        //     }
+                        //     action("Salary Agreement Counter")
+                        //     {
+                        //         ApplicationArea = Basic, Suite;
+                        //         Caption = 'Salary Agreement Counter';
+                        //         RunObject = report "Salary Agreement Counter";
+                        //     }
+                        //     action("RSalary Agreement List")
+                        //     {
+                        //         ApplicationArea = Basic, Suite;
+                        //         Caption = 'Salary Agreement List';
+                        //         RunObject = report "Salary Agreement List";
+                        //     }
+                        // }
+
                     }
 
                 }
-                // group(Procurement)
-                // {
-                //     group("Planning")
-                //     {
-                //         Caption = 'Planning';
-                //         group("Procurememnt Order Planning")
-                //         {
-                //             Caption = 'Order Planning';
-                //             action("Order Planning")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Order Planning';
-                //                 RunObject = page "Order Planning";
-                //             }
-                //         }
-                //         group("Planning Administration")
-                //         {
-                //             Caption = 'Administration';
-                //             action("Req. Worksheet")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Req. Worksheet';
-                //                 RunObject = page "Req. Worksheet";
-                //             }
-                //             action("Recurring Req. Worksheet")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Recurring Req. Worksheet';
-                //                 RunObject = page "Recurring Req. Worksheet";
-                //             }
-                //             action("Purchase Order List")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Purchase Order List';
-                //                 RunObject = page "Purchase Order List";
-                //             }
-                //             action("Service Orders")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Service Orders';
-                //                 RunObject = page "Service Orders";
-                //             }
-                //             action("Transfer Orders")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Transfer Orders';
-                //                 RunObject = page "Transfer Orders";
-                //             }
-                //         }
-                //     }
-                //     group("Order Processing")
-                //     {
-                //         Caption = 'Order Processing';
-                //         group("Order Processing List")
-                //         {
-                //             Caption = 'Order Processing';
-                //             action("Purchases Requisitions")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Purchase Requisitions';
-                //                 RunObject = page "Purchase Requisitions";
-                //             }
-                //             action("RFQ Lists")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'RFQ List';
-                //                 RunObject = page "RFQ List";
-                //             }
-                //             action("Local Purchase Orders")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Local Purchase Orders';
-                //                 RunObject = page "Purchase Order List";
-                //             }
-                //             action("Procurement Petty Cash List")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Procurement Petty Cash List';
-                //                 RunObject = page "ADM Registration List";
-                //             }
-                //             action("Local Service Orders")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Local Service Orders';
-                //                 RunObject = page "Purchase Order List";
-                //             }
-                //             action("Purchase Invoices")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Purchase Invoices';
-                //                 RunObject = page "Purchase Invoices";
-                //             }
-                //             action("Purchase Credit Memos")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Purchase Credit Memos';
-                //                 RunObject = page "Purchase Credit Memos";
-                //             }
-                //             action("Posted Purchase Receipts")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Good Received Note';
-                //                 RunObject = page "Posted Purchase Receipts";
-                //             }
-                //             action("Sales Invoice List")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Sales Invoice List';
-                //                 RunObject = page "Sales Invoice List";
-                //             }
-                //             action("Transfer List")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Transfer Orders';
-                //                 //RunObject = page "Transfer List";
-                //             }
-                //             action("Purchase Quotes")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Purchase Quotes';
-                //                 RunObject = page "Purchase Quotes";
-                //             }
-                //             action("Sales Quotes")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Disposal Requisition';
-                //                 RunObject = page "Sales Quotes";
-                //             }
-                //         }
-                //         group("Order Processing Task")
-                //         {
-                //             Caption = 'Order Processing Task';
-                //             action("Purchase Journal")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Purchase Journal';
-                //                 RunObject = page "Purchase Journal";
-                //             }
-                //         }
-                //         group("Order Processing Documents")
-                //         {
-                //             Caption = 'Documents';
-                //             action("Purchase - Quote")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Purchase - Quote';
-                //                 RunObject = report "Purchase - Quote";
-                //             }
-                //             action("Order")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Order';
-                //                 RunObject = report "Order";
-                //             }
-                //             action("Blanket Purchase Order")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Blanket Purchase Order';
-                //                 RunObject = report "Blanket Purchase Order";
-                //             }
-                //             action("Purchase - Invoice")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Purchase - Invoice';
-                //                 RunObject = report "Purchase - Invoice";
-                //             }
-                //             action("Purchase - Credit Memo")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Purchase - Credit Memo';
-                //                 RunObject = report "Purchase - Credit Memo";
-                //             }
-                //             action("Purchase - Receipt")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Purchase - Receipt';
-                //                 RunObject = report "Purchase - Receipt";
-                //             }
-                //             action("Purchase - Return Shipment")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Purchase - Return Shipment';
-                //                 RunObject = report "Purchase - Return Shipment";
-                //             }
-                //             action("Return Order Confirmation")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Return Order Confirmation';
-                //                 RunObject = report "Return Order Confirmation";
-                //             }
-                //             action("Vendor-Payment Receipt")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Vendor - Payment Receipt';
-                //                 RunObject = report "Vendor - Payment Receipt";
-                //             }
-                //             action("Purchase Document - Test")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Purchase Document - Test';
-                //                 RunObject = report "Purchase Document - Test";
-                //             }
-                //             action("Item Tracking Appendix")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Item Tracking Appendix';
-                //                 RunObject = report "Item Tracking Appendix";
-                //             }
-                //         }
-                //         group("P Administration")
-                //         {
-                //             Caption = 'Administration';
-                //             action("Subcontracting Worksheet")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Subcontracting Worksheet';
-                //                 RunObject = page "Subcontracting Worksheet";
-                //             }
-                //         }
-                //     }
-                //     group("Inventory and Costing")
-                //     {
-                //         Caption = 'Inventory & Costing';
-                //         group("Inventory and Costing List")
-                //         {
-                //             action("Nonstock Item List")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Nonstock Item List';
-                //                 //RunObject = page "Nonstock Item List";
-                //             }
-                //             action("Stockkeeping Unit List")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Stockkeeping Unit List';
-                //                 RunObject = page "Stockkeeping Unit List";
-                //             }
-                //         }
-                //         group("P Tasks")
-                //         {
-                //             Caption = 'Tasks';
-                //             action("Item Journal")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Item Journal';
-                //                 RunObject = page "Item Journal";
 
-                //             }
-
-                //             action("Phys. Inventory Journal")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Phys. Inventory Journal';
-                //                 RunObject = page "Phys. Inventory Journal";
-                //             }
-                //             action("Revaluation Journal")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Revaluation Journal';
-                //                 RunObject = page "Revaluation Journal";
-                //             }
-                //             action("Item Reclass. Journal")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Item Reclass. Journal';
-                //                 RunObject = page "Item Reclass. Journal";
-                //             }
-                //             action("Recurring Item Jnl.")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Recurring Item Jnl.';
-                //                 RunObject = page "Recurring Item Jnl.";
-                //             }
-                //         }
-                //         group("Costing")
-                //         {
-                //             Caption = 'Costing';
-                //             action("Standard Cost Worksheet")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Standard Cost Worksheet';
-                //                 //RunObject = page "Standard Cost Worksheet";
-                //             }
-                //         }
-
-                //     }
-                //     group("P Reports and Analysis")
-                //     {
-                //         Caption = 'Reports and Analysis';
-                //         group("Planning Reports")
-                //         {
-                //             Caption = 'Planning';
-                //             action("Vendor - Payment Receipt")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Vendor - Payment Receipt';
-                //                 RunObject = report "Vendor - Payment Receipt";
-                //             }
-                //             action("Purchase Reservation Avail.")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Purchase Reservation Avail.';
-                //                 RunObject = report "Purchase Reservation Avail.";
-                //             }
-                //             action("Purchase Statistics")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Purchase Statistics';
-                //                 RunObject = report "Purchase Statistics";
-                //             }
-                //             action("Vendor Item Catalog")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Vendor Item Catalog';
-                //                 RunObject = report "Vendor Item Catalog";
-                //             }
-                //             action("Vendor - Balance to Date")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Vendor - Balance to Date';
-                //                 RunObject = report "Vendor - Balance to Date";
-                //             }
-                //             action("Vendor - Detail Trial Balance")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Vendor - Detail Trial Balance';
-                //                 RunObject = report "Vendor - Detail Trial Balance";
-                //             }
-                //             action("Vendor - List")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Vendor - List';
-                //                 RunObject = report "Vendor - List";
-                //             }
-                //             action("Vendor - Purchase List")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Vendor - Purchase List';
-                //                 RunObject = report "Vendor - Purchase List";
-                //             }
-                //             action("Vendor - Summary Aging")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Vendor - Summary Aging';
-                //                 RunObject = report "Vendor - Summary Aging";
-                //             }
-                //             action("Vendor - Top 10 List")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Vendor - Top 10 List';
-                //                 RunObject = report "Vendor - Top 10 List";
-                //             }
-                //             action("Vendor - Trial Balance")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Vendor - Trial Balance';
-                //                 RunObject = report "Vendor - Trial Balance";
-                //             }
-                //             action("Vendor/Item Purchases")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Vendor/Item Purchases';
-                //                 RunObject = report "Vendor/Item Purchases";
-                //             }
-                //             action("Inventory Cost and Price List")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Inventory Cost and Price List';
-                //                 RunObject = report "Inventory Cost and Price List";
-                //             }
-                //             action("Inventory Purchase Orders")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Inventory Purchase Orders';
-                //                 RunObject = report "Inventory Purchase Orders";
-                //             }
-                //             action("Inventory - Availability Plan")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Inventory - Availability Plan';
-                //                 RunObject = report "Inventory - Availability Plan";
-                //             }
-                //             action("Inventory - Cost Variance")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Inventory - Cost Variance';
-                //                 RunObject = report "Inventory - Cost Variance";
-                //             }
-                //             action("Inventory - Inbound Transfer")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Inventory - Inbound Transfer';
-                //                 RunObject = report "Inventory - Inbound Transfer";
-                //             }
-                //             action("Inventory - List")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Inventory - List';
-                //                 RunObject = report "Inventory - List";
-                //             }
-                //             action("Inventory - Vendor Purchases")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Inventory - Vendor Purchases';
-                //                 RunObject = report "Inventory - Vendor Purchases";
-                //             }
-                //             action("Item Substitutions")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Item Substitutions';
-                //                 RunObject = report "Item Substitutions";
-                //             }
-                //             action("Item/Vendor Catalog")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Item/Vendor Catalog';
-                //                 RunObject = report "Item/Vendor Catalog";
-                //             }
-                //             action("Nonstock Item Sales")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Nonstock Item Sales';
-                //                 //RunObject = report "Nonstock Item Sales";
-                //             }
-                //             action("Prod. Order - Mat. Requisition")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Prod. Order - Mat. Requisition';
-                //                 RunObject = report "Prod. Order - Mat. Requisition";
-                //             }
-                //             action("Prod. Order - Shortage List")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Prod. Order - Shortage List';
-                //                 RunObject = report "Prod. Order - Shortage List";
-                //             }
-                //         }
-
-                //         group("Order Processing Reports")
-                //         {
-                //             Caption = 'Order Processing';
-                //             action("Vendor/Items Purchases")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Vendor/Item Purchases';
-                //                 RunObject = report "Vendor/Item Purchases";
-                //             }
-                //             action("Inventory Availability")
-                //             {
-                //                 ApplicationArea = Suite, Basic;
-                //                 Caption = 'Inventory Availability';
-                //                 RunObject = report "Inventory Availability";
-                //             }
-                //             action("Inventory Cost and Prices List")
-                //             {
-                //                 ApplicationArea = Suite, Basic;
-                //                 Caption = 'Inventory Cost and Price List';
-                //                 RunObject = report "Inventory Cost and Price List";
-                //             }
-                //             action("Inventory Posting - Test")
-                //             {
-                //                 ApplicationArea = Suite, Basic;
-                //                 Caption = 'Inventory Posting - Test';
-                //                 RunObject = report "Inventory Posting - Test";
-                //             }
-                //             action("Inventory Purchases Orders")
-                //             {
-                //                 ApplicationArea = Suite, Basic;
-                //                 Caption = 'Inventory Purchase Orders';
-                //                 RunObject = report "Inventory Purchase Orders";
-                //             }
-                //             action("Inventory-List")
-                //             {
-                //                 ApplicationArea = Suite, Basic;
-                //                 Caption = 'Inventory - List';
-                //                 RunObject = report "Inventory - List";
-                //             }
-                //             action("Inventory - Reorders")
-                //             {
-                //                 ApplicationArea = Suite, Basic;
-                //                 Caption = 'Inventory - Reorders';
-                //                 RunObject = report "Inventory - Reorders";
-                //             }
-                //             action("Inventory - Transaction Detail")
-                //             {
-                //                 ApplicationArea = Suite, Basic;
-                //                 Caption = 'Inventory - Transaction Detail';
-                //                 RunObject = report "Inventory - Transaction Detail";
-                //             }
-                //             action("Inventory - Vendors Purchases")
-                //             {
-                //                 ApplicationArea = Suite, Basic;
-                //                 Caption = 'Inventory - Vendor Purchases';
-                //                 RunObject = report "Inventory - Vendor Purchases";
-                //             }
-                //             action("Item Charges - Specification")
-                //             {
-                //                 ApplicationArea = Suite, Basic;
-                //                 Caption = 'Item Charges - Specification';
-                //                 RunObject = report "Item Charges - Specification";
-                //             }
-                //             action("Items Substitutions")
-                //             {
-                //                 ApplicationArea = Suite, Basic;
-                //                 Caption = 'Item Substitutions';
-                //                 RunObject = report "Item Substitutions";
-                //             }
-                //             action("Item/Vendors Catalog")
-                //             {
-                //                 ApplicationArea = Suite, Basic;
-                //                 Caption = 'Item/Vendor Catalog';
-                //                 RunObject = report "Item/Vendor Catalog";
-                //             }
-                //         }
-                //         // group("Inventory and Costing Reports")
-                //         // {
-                //         //     Caption = 'Inventrory and Costing';
-                //         //     action("Adjust Cost - Item Entries")
-                //         //     {
-                //         //         ApplicationArea = Basic, Suite;
-                //         //         Caption = 'Adjust Cost - Item Entries';
-                //         //         //RunObject = report "Adjust Cost - Item Entries";
-                //         //     }
-                //         //     action("Adjust Item Costs/Prices")
-                //         //     {
-                //         //         ApplicationArea = Basic, Suite;
-                //         //         Caption = 'Adjust Item Costs/Prices';
-                //         //         RunObject = report "Adjust Item Costs/Prices";
-                //         //     }
-                //         //     action("RInventory Availability")
-                //         //     {
-                //         //         ApplicationArea = Basic, Suite;
-                //         //         Caption = 'Inventory Availability';
-                //         //         RunObject = report "Inventory Availability";
-                //         //     }
-                //         //     action("RInventory - Cost Variance")
-                //         //     {
-                //         //         ApplicationArea = Basic, Suite;
-                //         //         Caption = 'Inventory - Cost Variance';
-                //         //         RunObject = report "Inventory - Cost Variance";
-                //         //     }
-                //         //     action("RInventory - Inbound Transfer")
-                //         //     {
-                //         //         ApplicationArea = Basic, Suite;
-                //         //         Caption = 'Inventory - Inbound Transfer';
-                //         //         RunObject = report "Inventory - Inbound Transfer";
-                //         //     }
-                //         //     action("RInventory - List")
-                //         //     {
-                //         //         ApplicationArea = Basic, Suite;
-                //         //         Caption = 'Inventory - List';
-                //         //         RunObject = report "Inventory - List";
-                //         //     }
-                //         //     action("Invt. Valuation - Cost Spec.")
-                //         //     {
-                //         //         ApplicationArea = Basic, Suite;
-                //         //         Caption = 'Invt. Valuation - Cost Spec.';
-                //         //         RunObject = report "Invt. Valuation - Cost Spec.";
-                //         //     }
-                //         //     action("Item Age Composition - Qty.")
-                //         //     {
-                //         //         ApplicationArea = Basic, Suite;
-                //         //         Caption = 'Item Age Composition - Qty.';
-                //         //         RunObject = report "Item Age Composition - Qty.";
-                //         //     }
-                //         //     action("Item Age Composition - Value")
-                //         //     {
-                //         //         ApplicationArea = Basic, Suite;
-                //         //         Caption = 'Item Age Composition - Value';
-                //         //         RunObject = report "Item Age Composition - Value";
-                //         //     }
-                //         //     action("Item Expiration - Quantity")
-                //         //     {
-                //         //         ApplicationArea = Basic, Suite;
-                //         //         Caption = 'Item Expiration - Quantity';
-                //         //         RunObject = report "Item Expiration - Quantity";
-                //         //     }
-                //         //     action("RItem Charges - Specification")
-                //         //     {
-                //         //         ApplicationArea = Basic, Suite;
-                //         //         Caption = 'Item Charges - Specification';
-                //         //         RunObject = report "Item Charges - Specification";
-                //         //     }
-                //         //     action("Item Register - Quantity")
-                //         //     {
-                //         //         ApplicationArea = Basic, Suite;
-                //         //         Caption = 'Item Register - Quantity';
-                //         //         RunObject = report "Item Register - Quantity";
-                //         //     }
-                //         //     action("Item Register - Value")
-                //         //     {
-                //         //         ApplicationArea = Basic, Suite;
-                //         //         Caption = 'Item Register - Value';
-                //         //         RunObject = report "Item Register - Value";
-                //         //     }
-                //         // }
-
-                //     }
-                //     group("Procurement Setup")
-                //     {
-                //         Caption = 'Setup';
-                //         group("Planning Setup")
-                //         {
-                //             Caption = 'Planning';
-                //             action("Salespeople/Purchasers")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Salespeople/Purchasers';
-                //                 RunObject = page "Salespersons/Purchasers";
-                //             }
-                //             action("Req. Worksheet Templates")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Req. Worksheet Templates';
-                //                 RunObject = page "Req. Worksheet Templates";
-                //             }
-                //         }
-                //         group("Order Processing Setup")
-                //         {
-                //             Caption = 'Order Processing';
-                //             action("Standard Purchase Codes")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Standard Purchase Codes';
-                //                 RunObject = page "Standard Purchase Codes";
-                //             }
-                //             action("Purchasing Codes")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Purchasing Codes';
-                //                 RunObject = page "Purchasing Codes";
-                //             }
-                //             action("Shipment Methods")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Shipment Methods';
-                //                 RunObject = page "Shipment Methods";
-                //             }
-                //             action("Return Reasons")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Return Reasons';
-                //                 RunObject = page "Return Reasons";
-                //             }
-                //             action("Report Selection - Purchase ")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Report Selection - Purchase ';
-                //                 //RunObject = page "Report Selection - Purchase ";
-                //             }
-                //         }
-                //         group("Inventory and Costing Setup")
-                //         {
-                //             Caption = 'Inventrory and Costing';
-                //             action("Units of Measure")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Units of Measure';
-                //                 RunObject = page "Units of Measure";
-                //             }
-                //             action("Manufacturers")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Manufacturers';
-                //                 RunObject = page Manufacturers;
-                //             }
-                //             action("Product Groups")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Product Groups';
-                //                 //RunObject = page "Product Groups";
-                //             }
-                //             action("Nonstock Item Setup")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Nonstock Item Setup';
-                //                 //RunObject = page "Nonstock Item Setup";
-                //             }
-                //         }
-                //     }
-
-                // }
-                // group(Legal)
-                // {
-                //     group("Legal Management")
-                //     {
-                //         group("Case Management")
-                //         {
-                //             Caption = 'Legal Case Managment';
-                //             group("Legal Case Management Lists")
-                //             {
-                //                 Caption = 'Lists';
-                //                 action("Case List")
-                //                 {
-                //                     ApplicationArea = Basic, Suite;
-                //                     Caption = 'Case List';
-                //                     RunObject = Page "Legal List";
-                //                 }
-                //                 action("Witness Line")
-                //                 {
-                //                     ApplicationArea = Basic, Suite;
-                //                     Caption = 'Witness Line';
-                //                     RunObject = Page "Witness Line";
-                //                 }
-                //                 action("Advocate List")
-                //                 {
-                //                     ApplicationArea = Basic, Suite;
-                //                     Caption = 'Advocate List';
-                //                     RunObject = Page "Advocate List";
-                //                 }
-                //                 action("Approved Cases")
-                //                 {
-                //                     ApplicationArea = Basic, Suite;
-                //                     Caption = 'Approved Cases';
-                //                     RunObject = Page "Legal List Aproved";
-                //                 }
-                //                 action("Verdict List")
-                //                 {
-                //                     ApplicationArea = Basic, Suite;
-                //                     Caption = 'Verdict List';
-                //                     RunObject = Page "Verdict List";
-                //                 }
-                //                 action("Damages List")
-                //                 {
-                //                     ApplicationArea = Basic, Suite;
-                //                     Caption = 'Damages List';
-                //                     RunObject = Page "Damages List";
-                //                 }
-
-                //             }
-                //         }
-
-                //         group("Legal Payments")
-                //         {
-                //             Caption = 'Payments';
-                //             group("Payment Lists")
-                //             {
-                //                 action("Case Invoices")
-                //                 {
-                //                     ApplicationArea = Basic, Suite;
-                //                     Caption = 'Case Invoices';
-                //                     RunObject = Page "Case Invoice";
-                //                 }
-                //                 action("Case Payment")
-                //                 {
-                //                     ApplicationArea = Basic, Suite;
-                //                     Caption = 'Case Payment';
-                //                     RunObject = Page "Case Payment List";
-                //                 }
-                //             }
-                //         }
-                //         group("Appealed Cases")
-                //         {
-                //             Caption = 'Appealed Cases';
-                //             group("Appealed Cases List")
-                //             {
-                //                 action("Appealed Case")
-                //                 {
-                //                     ApplicationArea = Basic, Suite;
-                //                     Caption = 'Appealed Cases';
-                //                     RunObject = Page "Appealed Legal List";
-                //                 }
-                //             }
-                //         }
-                //         group("Closed Case")
-                //         {
-                //             Caption = 'Closed Cases';
-                //             group("Closed Cases List")
-                //             {
-                //                 action("Closed Cases")
-                //                 {
-                //                     ApplicationArea = Basic, Suite;
-                //                     Caption = 'Appealed Cases';
-                //                     RunObject = Page "Legal List Aproved";
-                //                 }
-                //             }
-                //         }
-
-                //         group("Surety")
-                //         {
-                //             Caption = 'Surety Management';
-                //             group("Surety Lists")
-                //             {
-                //                 action("Surety Management List")
-                //                 {
-                //                     ApplicationArea = Basic, Suite;
-                //                     Caption = 'Surety Management List';
-                //                     RunObject = Page "Surety Management List";
-                //                 }
-                //                 action("Approved Surety Management")
-                //                 {
-                //                     ApplicationArea = Basic, Suite;
-                //                     Caption = 'Approved Surety Management';
-                //                     RunObject = page "Approved Surety Management";
-                //                 }
-
-                //             }
-                //             Group("L Reports")
-                //             {
-                //                 action("Surety Managemnt Report")
-                //                 {
-                //                     ApplicationArea = Basic, Suite;
-                //                     Caption = 'Advocate Report';
-                //                     RunObject = Report "Surety Management Report";
-                //                 }
-                //             }
-
-                //         }
-                //     }
-                //     group(ContractManagement)
-                //     {
-                //         Caption = 'Contracts Management';
-                //         ToolTip = 'Contract mgt signing, renewal, termination, payment, invoice, reports';
-                //         group("Contract Management")
-                //         {
-                //             Caption = 'Contract Management';
-                //             action("Contracts list")
-                //             {
-                //                 ApplicationArea = Basic;
-                //                 Caption = 'Contracts Details';
-                //                 RunObject = Page "Contracts list";
-                //             }
-                //             action("Renewed Contracts list")
-                //             {
-                //                 ApplicationArea = Basic;
-                //                 Caption = 'Renewed Contracts list';
-                //                 RunObject = Page "Renewed Contracts list";
-                //             }
-                //             action("Terminated Contracts list")
-                //             {
-                //                 ApplicationArea = Basic;
-                //                 Caption = 'Terminated Contracts list';
-                //                 RunObject = Page "Terminated Contracts list";
-                //             }
-                //             action("Contract Purchase Order List ")
-                //             {
-                //                 ApplicationArea = Basic;
-                //                 Caption = 'Contract Purchase Order List';
-                //                 RunObject = Page "Contract Purchase Order List";
-                //             }
-                //             action("Approved Contracts list")
-                //             {
-                //                 ApplicationArea = Basic;
-                //                 Caption = 'Approved Contracts list';
-                //                 RunObject = Page "Approved Contracts list";
-                //             }
-
-
-
-                //         }
-                //         group("Contract setUp")
-                //         {
-                //             Caption = 'Contract Setup';
-                //             action("Contract Type")
-                //             {
-                //                 ApplicationArea = Basic;
-                //                 Caption = 'Contract Classification';
-                //                 //RunObject = Page contract type
-
-                //             }
-                //             action("Contract Line")
-                //             {
-                //                 ApplicationArea = Basic;
-                //                 Caption = 'Contract Line';
-                //                 RunObject = Page "Contract Lines";
-
-                //             }
-                //             action("Contract Cycle")
-                //             {
-                //                 ApplicationArea = Basic;
-                //                 Caption = 'Contract Cycle';
-                //                 RunObject = Page "Contract Cycle";
-
-                //             }
-                //             action("Contract Lines Type")
-                //             {
-                //                 ApplicationArea = Basic;
-                //                 Caption = 'Contract Lines Type';
-                //                 RunObject = Page "Contract Lines Type";
-
-                //             }
-                //             action("Contracts Duration/ cycle")
-                //             {
-                //                 ApplicationArea = Basic;
-                //                 Caption = 'Contracts Duration/ cycle';
-                //                 RunObject = Page "Contract Cycle";
-                //             }
-                //             action("Contract Cycle Stage")
-                //             {
-                //                 ApplicationArea = Basic;
-                //                 Caption = 'Contract Cycle Stage';
-                //                 RunObject = Page "Contract Cycle Stage";
-                //             }
-
-                //         }
-                //         group(Invoice)
-                //         {
-                //             Caption = 'Invoice';
-                //             action("Contract Purchase Invoices")
-                //             {
-                //                 ApplicationArea = Basic;
-                //                 Caption = 'Contract Purchase Invoices';
-                //                 RunObject = Page "Contract Purchase Invoices";
-                //             }
-                //         }
-                //         group(Paiment)
-                //         {
-                //             Caption = 'Payment';
-                //             action(Payment)
-                //             {
-                //                 ApplicationArea = Basic;
-                //                 Caption = 'Payment';
-                //                 RunObject = Page "Payment Vouchers List";
-                //             }
-                //         }
-
-                //     }
-                //     group("Contract Reports")
-                //     {
-                //         Caption = 'Contract Reports';
-                //         action("Detailed Contract Report")
-                //         {
-                //             ApplicationArea = Basic;
-                //             Caption = 'Detailed Contract Report';
-                //             RunObject = report "Detailed Contract Report";
-                //         }
-                //         action("Contract Status")
-                //         {
-                //             ApplicationArea = Basic;
-                //             Caption = 'Contract Status';
-                //             RunObject = report "Contract Status";
-                //         }
-                //         action("Contract Report")
-                //         {
-                //             ApplicationArea = Basic;
-                //             Caption = 'Contract Report';
-                //             RunObject = report "Contract Report";
-                //         }
-                //     }
-                //     group("Reporting")
-                //     {
-                //         Caption = 'Legal Management Reports';
-                //         group("L Reports and Analysis")
-                //         {
-                //             action("Case Report")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Case Report';
-                //                 RunObject = Report "Case Report";
-                //             }
-                //             action("Advocate Cost Report")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Advocate Cost Report';
-                //                 RunObject = Report "Avocate Cost Report";
-                //             }
-                //             action("Case Status Report")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Case Status Report';
-                //                 RunObject = Report "Case Status Report";
-                //             }
-                //             action("Case Cost")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Case Cost';
-                //                 RunObject = Report "Case Cost";
-                //             }
-                //             action("Advocate Report")
-                //             {
-                //                 ApplicationArea = Basic, Suite;
-                //                 Caption = 'Advocate Report';
-                //                 RunObject = Report "Advocate Report";
-                //             }
-                //         }
-
-
-                //     }
-
-                // }
-
-                group("Global Functions & SetUps")
+                group("User / HR requests")
                 {
-                    group("System Edits Functions")
+                    Caption = 'User / HR requests';
+                    group("Leave")
                     {
-                        group("System Edits")
+                        Caption = 'Leave Application';
+                        group("Leave Management Lists")
                         {
-                            Caption = 'System Edits';
-
-                            action("System Edits  List")
+                            Caption = 'Lists';
+                            action("HR Leave Applications List")
                             {
                                 ApplicationArea = Basic, Suite;
-                                RunObject = Page "System Edits List";
+                                Caption = 'HR Leave Applications List';
+                                RunObject = page "HR Leave Applications List1";
                             }
-                            action("Posted System Edits")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                RunObject = Page "Posted System Edits List";
-                            }
-
                         }
-                        group("System Edits Setups")
+                        group("Arc")
                         {
-                            Caption = 'System Edits Set-Ups';
-
-                            action("System Edits Tables List")
+                            action("HR Leave Applications")
                             {
                                 ApplicationArea = Basic, Suite;
-                                RunObject = Page "System Edits Tables";
+                                Caption = 'HR Leave Applications List';
+                                RunObject = page "HR Leave Applications History1";
                             }
-
                         }
                     }
-                    group("System Reversals")
+                    group("Other Requisitions")
                     {
-                        Caption = 'System Reversals';
-
-                        action("System Reversal List")
+                        Caption = 'Other Requisitions';
+                        group("Other Requisition")
                         {
-                            ApplicationArea = Basic, Suite;
-                            RunObject = Page "System Reversal List";
+                            Caption = 'Lists';
+                            action("Overtime Claims List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Other Requisitions';
+                                RunObject = page "Overtime Claim List";
+                            }
+                            action("Purchase Requisition")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Purchase Requisitions';
+                                RunObject = page "Purchase Requisitions";
+                            }
+                            action("System Rights Requisition")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'System Rights Requisition';
+                                RunObject = page "Permission Requisition Card";
+                            }
                         }
-                        action("Reversed System Reversal List")
+                    }
+                    group(group3)
+                    {
+                        Caption = 'Reports';
+                        group("AHR Reports")
                         {
-                            ApplicationArea = Basic, Suite;
-                            RunObject = Page "Reversed System Reversal List";
+                            Caption = 'Lists';
+                            action("Dividend Slip")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Dividend Slip';
+                                RunObject = report "Dividend Slip B64";
+                            }
                         }
                     }
 
+                    // group(group4)
+                    // {
+                    //     Caption = 'Store Requisitions';
+                    //     group("Store Requisitions")
+                    //     {
+                    //         Caption = 'Lists';
+                    //         action("Store Requisition List")
+                    //         {
+                    //             ApplicationArea = Basic, Suite;
+                    //             Caption = 'Store Requisition List';
+                    //             RunObject = page "Store Requisitions List";
+                    //         }
+                    //         action("Cancelled Store Requisitions List")
+                    //         {
+                    //             ApplicationArea = Basic, Suite;
+                    //             Caption = 'Cancelled Store Requisitions List';
+                    //             RunObject = page "Cancelled Store Req List";
+                    //         }
+                    //     }
+                    //     group(Arkiv)
+                    //     {
+                    //         Caption = 'Lists';
+                    //         action("Store Requisition Released/Pending")
+                    //         {
+                    //             ApplicationArea = Basic, Suite;
+                    //             Caption = 'Store Requisition Released/Pending';
+                    //             RunObject = page "Store Requisition List";
+
+                    //         }
+                    //     }
+                    // }
                 }
-                group("ICT Dept")
+                group("HR General Setup")
                 {
 
-                    Group("Product Applications")
+                    Caption = 'HR General Setup';
+                    action("HR leave Calendar")
                     {
+                        Caption = 'HR Leave Calendar';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = page "HR Leave Calendar List";
+                    }
+                    action("HR Lookup Values")
+                    {
+                        Caption = 'HR Lookup Values';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = page "HR Lookup Values List";
+                    }
+                    action("Hr Committees")
+                    {
+                        Caption = 'Hr Committees';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = page "HR Committees";
+                    }
+                    action("Hr Policies")
+                    {
+                        Caption = 'Hr Policies';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = page "HR Policy List";
+                    }
+                    action("Hr E-Mail Parameters")
+                    {
+                        Caption = 'Hr E-Mail Parameters';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = page "HR E-Mail Parameters List";
+                    }
+                    group(Admn)
+                    {
+                        Caption = 'Administration';
+                        action("HR Setup")
+                        {
+                            Caption = 'HR Setup';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = page "HR Setup";
+                        }
+                    }
+                }
+
+            }
+            // group(Procurement)
+            // {
+            //     group("Planning")
+            //     {
+            //         Caption = 'Planning';
+            //         group("Procurememnt Order Planning")
+            //         {
+            //             Caption = 'Order Planning';
+            //             action("Order Planning")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Order Planning';
+            //                 RunObject = page "Order Planning";
+            //             }
+            //         }
+            //         group("Planning Administration")
+            //         {
+            //             Caption = 'Administration';
+            //             action("Req. Worksheet")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Req. Worksheet';
+            //                 RunObject = page "Req. Worksheet";
+            //             }
+            //             action("Recurring Req. Worksheet")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Recurring Req. Worksheet';
+            //                 RunObject = page "Recurring Req. Worksheet";
+            //             }
+            //             action("Purchase Order List")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Purchase Order List';
+            //                 RunObject = page "Purchase Order List";
+            //             }
+            //             action("Service Orders")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Service Orders';
+            //                 RunObject = page "Service Orders";
+            //             }
+            //             action("Transfer Orders")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Transfer Orders';
+            //                 RunObject = page "Transfer Orders";
+            //             }
+            //         }
+            //     }
+            //     group("Order Processing")
+            //     {
+            //         Caption = 'Order Processing';
+            //         group("Order Processing List")
+            //         {
+            //             Caption = 'Order Processing';
+            //             action("Purchases Requisitions")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Purchase Requisitions';
+            //                 RunObject = page "Purchase Requisitions";
+            //             }
+            //             action("RFQ Lists")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'RFQ List';
+            //                 RunObject = page "RFQ List";
+            //             }
+            //             action("Local Purchase Orders")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Local Purchase Orders';
+            //                 RunObject = page "Purchase Order List";
+            //             }
+            //             action("Procurement Petty Cash List")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Procurement Petty Cash List';
+            //                 RunObject = page "ADM Registration List";
+            //             }
+            //             action("Local Service Orders")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Local Service Orders';
+            //                 RunObject = page "Purchase Order List";
+            //             }
+            //             action("Purchase Invoices")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Purchase Invoices';
+            //                 RunObject = page "Purchase Invoices";
+            //             }
+            //             action("Purchase Credit Memos")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Purchase Credit Memos';
+            //                 RunObject = page "Purchase Credit Memos";
+            //             }
+            //             action("Posted Purchase Receipts")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Good Received Note';
+            //                 RunObject = page "Posted Purchase Receipts";
+            //             }
+            //             action("Sales Invoice List")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Sales Invoice List';
+            //                 RunObject = page "Sales Invoice List";
+            //             }
+            //             action("Transfer List")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Transfer Orders';
+            //                 //RunObject = page "Transfer List";
+            //             }
+            //             action("Purchase Quotes")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Purchase Quotes';
+            //                 RunObject = page "Purchase Quotes";
+            //             }
+            //             action("Sales Quotes")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Disposal Requisition';
+            //                 RunObject = page "Sales Quotes";
+            //             }
+            //         }
+            //         group("Order Processing Task")
+            //         {
+            //             Caption = 'Order Processing Task';
+            //             action("Purchase Journal")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Purchase Journal';
+            //                 RunObject = page "Purchase Journal";
+            //             }
+            //         }
+            //         group("Order Processing Documents")
+            //         {
+            //             Caption = 'Documents';
+            //             action("Purchase - Quote")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Purchase - Quote';
+            //                 RunObject = report "Purchase - Quote";
+            //             }
+            //             action("Order")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Order';
+            //                 RunObject = report "Order";
+            //             }
+            //             action("Blanket Purchase Order")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Blanket Purchase Order';
+            //                 RunObject = report "Blanket Purchase Order";
+            //             }
+            //             action("Purchase - Invoice")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Purchase - Invoice';
+            //                 RunObject = report "Purchase - Invoice";
+            //             }
+            //             action("Purchase - Credit Memo")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Purchase - Credit Memo';
+            //                 RunObject = report "Purchase - Credit Memo";
+            //             }
+            //             action("Purchase - Receipt")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Purchase - Receipt';
+            //                 RunObject = report "Purchase - Receipt";
+            //             }
+            //             action("Purchase - Return Shipment")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Purchase - Return Shipment';
+            //                 RunObject = report "Purchase - Return Shipment";
+            //             }
+            //             action("Return Order Confirmation")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Return Order Confirmation';
+            //                 RunObject = report "Return Order Confirmation";
+            //             }
+            //             action("Vendor-Payment Receipt")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Vendor - Payment Receipt';
+            //                 RunObject = report "Vendor - Payment Receipt";
+            //             }
+            //             action("Purchase Document - Test")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Purchase Document - Test';
+            //                 RunObject = report "Purchase Document - Test";
+            //             }
+            //             action("Item Tracking Appendix")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Item Tracking Appendix';
+            //                 RunObject = report "Item Tracking Appendix";
+            //             }
+            //         }
+            //         group("P Administration")
+            //         {
+            //             Caption = 'Administration';
+            //             action("Subcontracting Worksheet")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Subcontracting Worksheet';
+            //                 RunObject = page "Subcontracting Worksheet";
+            //             }
+            //         }
+            //     }
+            //     group("Inventory and Costing")
+            //     {
+            //         Caption = 'Inventory & Costing';
+            //         group("Inventory and Costing List")
+            //         {
+            //             action("Nonstock Item List")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Nonstock Item List';
+            //                 //RunObject = page "Nonstock Item List";
+            //             }
+            //             action("Stockkeeping Unit List")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Stockkeeping Unit List';
+            //                 RunObject = page "Stockkeeping Unit List";
+            //             }
+            //         }
+            //         group("P Tasks")
+            //         {
+            //             Caption = 'Tasks';
+            //             action("Item Journal")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Item Journal';
+            //                 RunObject = page "Item Journal";
+
+            //             }
+
+            //             action("Phys. Inventory Journal")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Phys. Inventory Journal';
+            //                 RunObject = page "Phys. Inventory Journal";
+            //             }
+            //             action("Revaluation Journal")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Revaluation Journal';
+            //                 RunObject = page "Revaluation Journal";
+            //             }
+            //             action("Item Reclass. Journal")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Item Reclass. Journal';
+            //                 RunObject = page "Item Reclass. Journal";
+            //             }
+            //             action("Recurring Item Jnl.")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Recurring Item Jnl.';
+            //                 RunObject = page "Recurring Item Jnl.";
+            //             }
+            //         }
+            //         group("Costing")
+            //         {
+            //             Caption = 'Costing';
+            //             action("Standard Cost Worksheet")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Standard Cost Worksheet';
+            //                 //RunObject = page "Standard Cost Worksheet";
+            //             }
+            //         }
+
+            //     }
+            //     group("P Reports and Analysis")
+            //     {
+            //         Caption = 'Reports and Analysis';
+            //         group("Planning Reports")
+            //         {
+            //             Caption = 'Planning';
+            //             action("Vendor - Payment Receipt")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Vendor - Payment Receipt';
+            //                 RunObject = report "Vendor - Payment Receipt";
+            //             }
+            //             action("Purchase Reservation Avail.")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Purchase Reservation Avail.';
+            //                 RunObject = report "Purchase Reservation Avail.";
+            //             }
+            //             action("Purchase Statistics")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Purchase Statistics';
+            //                 RunObject = report "Purchase Statistics";
+            //             }
+            //             action("Vendor Item Catalog")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Vendor Item Catalog';
+            //                 RunObject = report "Vendor Item Catalog";
+            //             }
+            //             action("Vendor - Balance to Date")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Vendor - Balance to Date';
+            //                 RunObject = report "Vendor - Balance to Date";
+            //             }
+            //             action("Vendor - Detail Trial Balance")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Vendor - Detail Trial Balance';
+            //                 RunObject = report "Vendor - Detail Trial Balance";
+            //             }
+            //             action("Vendor - List")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Vendor - List';
+            //                 RunObject = report "Vendor - List";
+            //             }
+            //             action("Vendor - Purchase List")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Vendor - Purchase List';
+            //                 RunObject = report "Vendor - Purchase List";
+            //             }
+            //             action("Vendor - Summary Aging")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Vendor - Summary Aging';
+            //                 RunObject = report "Vendor - Summary Aging";
+            //             }
+            //             action("Vendor - Top 10 List")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Vendor - Top 10 List';
+            //                 RunObject = report "Vendor - Top 10 List";
+            //             }
+            //             action("Vendor - Trial Balance")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Vendor - Trial Balance';
+            //                 RunObject = report "Vendor - Trial Balance";
+            //             }
+            //             action("Vendor/Item Purchases")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Vendor/Item Purchases';
+            //                 RunObject = report "Vendor/Item Purchases";
+            //             }
+            //             action("Inventory Cost and Price List")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Inventory Cost and Price List';
+            //                 RunObject = report "Inventory Cost and Price List";
+            //             }
+            //             action("Inventory Purchase Orders")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Inventory Purchase Orders';
+            //                 RunObject = report "Inventory Purchase Orders";
+            //             }
+            //             action("Inventory - Availability Plan")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Inventory - Availability Plan';
+            //                 RunObject = report "Inventory - Availability Plan";
+            //             }
+            //             action("Inventory - Cost Variance")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Inventory - Cost Variance';
+            //                 RunObject = report "Inventory - Cost Variance";
+            //             }
+            //             action("Inventory - Inbound Transfer")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Inventory - Inbound Transfer';
+            //                 RunObject = report "Inventory - Inbound Transfer";
+            //             }
+            //             action("Inventory - List")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Inventory - List';
+            //                 RunObject = report "Inventory - List";
+            //             }
+            //             action("Inventory - Vendor Purchases")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Inventory - Vendor Purchases';
+            //                 RunObject = report "Inventory - Vendor Purchases";
+            //             }
+            //             action("Item Substitutions")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Item Substitutions';
+            //                 RunObject = report "Item Substitutions";
+            //             }
+            //             action("Item/Vendor Catalog")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Item/Vendor Catalog';
+            //                 RunObject = report "Item/Vendor Catalog";
+            //             }
+            //             action("Nonstock Item Sales")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Nonstock Item Sales';
+            //                 //RunObject = report "Nonstock Item Sales";
+            //             }
+            //             action("Prod. Order - Mat. Requisition")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Prod. Order - Mat. Requisition';
+            //                 RunObject = report "Prod. Order - Mat. Requisition";
+            //             }
+            //             action("Prod. Order - Shortage List")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Prod. Order - Shortage List';
+            //                 RunObject = report "Prod. Order - Shortage List";
+            //             }
+            //         }
+
+            //         group("Order Processing Reports")
+            //         {
+            //             Caption = 'Order Processing';
+            //             action("Vendor/Items Purchases")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Vendor/Item Purchases';
+            //                 RunObject = report "Vendor/Item Purchases";
+            //             }
+            //             action("Inventory Availability")
+            //             {
+            //                 ApplicationArea = Suite, Basic;
+            //                 Caption = 'Inventory Availability';
+            //                 RunObject = report "Inventory Availability";
+            //             }
+            //             action("Inventory Cost and Prices List")
+            //             {
+            //                 ApplicationArea = Suite, Basic;
+            //                 Caption = 'Inventory Cost and Price List';
+            //                 RunObject = report "Inventory Cost and Price List";
+            //             }
+            //             action("Inventory Posting - Test")
+            //             {
+            //                 ApplicationArea = Suite, Basic;
+            //                 Caption = 'Inventory Posting - Test';
+            //                 RunObject = report "Inventory Posting - Test";
+            //             }
+            //             action("Inventory Purchases Orders")
+            //             {
+            //                 ApplicationArea = Suite, Basic;
+            //                 Caption = 'Inventory Purchase Orders';
+            //                 RunObject = report "Inventory Purchase Orders";
+            //             }
+            //             action("Inventory-List")
+            //             {
+            //                 ApplicationArea = Suite, Basic;
+            //                 Caption = 'Inventory - List';
+            //                 RunObject = report "Inventory - List";
+            //             }
+            //             action("Inventory - Reorders")
+            //             {
+            //                 ApplicationArea = Suite, Basic;
+            //                 Caption = 'Inventory - Reorders';
+            //                 RunObject = report "Inventory - Reorders";
+            //             }
+            //             action("Inventory - Transaction Detail")
+            //             {
+            //                 ApplicationArea = Suite, Basic;
+            //                 Caption = 'Inventory - Transaction Detail';
+            //                 RunObject = report "Inventory - Transaction Detail";
+            //             }
+            //             action("Inventory - Vendors Purchases")
+            //             {
+            //                 ApplicationArea = Suite, Basic;
+            //                 Caption = 'Inventory - Vendor Purchases';
+            //                 RunObject = report "Inventory - Vendor Purchases";
+            //             }
+            //             action("Item Charges - Specification")
+            //             {
+            //                 ApplicationArea = Suite, Basic;
+            //                 Caption = 'Item Charges - Specification';
+            //                 RunObject = report "Item Charges - Specification";
+            //             }
+            //             action("Items Substitutions")
+            //             {
+            //                 ApplicationArea = Suite, Basic;
+            //                 Caption = 'Item Substitutions';
+            //                 RunObject = report "Item Substitutions";
+            //             }
+            //             action("Item/Vendors Catalog")
+            //             {
+            //                 ApplicationArea = Suite, Basic;
+            //                 Caption = 'Item/Vendor Catalog';
+            //                 RunObject = report "Item/Vendor Catalog";
+            //             }
+            //         }
+            //         // group("Inventory and Costing Reports")
+            //         // {
+            //         //     Caption = 'Inventrory and Costing';
+            //         //     action("Adjust Cost - Item Entries")
+            //         //     {
+            //         //         ApplicationArea = Basic, Suite;
+            //         //         Caption = 'Adjust Cost - Item Entries';
+            //         //         //RunObject = report "Adjust Cost - Item Entries";
+            //         //     }
+            //         //     action("Adjust Item Costs/Prices")
+            //         //     {
+            //         //         ApplicationArea = Basic, Suite;
+            //         //         Caption = 'Adjust Item Costs/Prices';
+            //         //         RunObject = report "Adjust Item Costs/Prices";
+            //         //     }
+            //         //     action("RInventory Availability")
+            //         //     {
+            //         //         ApplicationArea = Basic, Suite;
+            //         //         Caption = 'Inventory Availability';
+            //         //         RunObject = report "Inventory Availability";
+            //         //     }
+            //         //     action("RInventory - Cost Variance")
+            //         //     {
+            //         //         ApplicationArea = Basic, Suite;
+            //         //         Caption = 'Inventory - Cost Variance';
+            //         //         RunObject = report "Inventory - Cost Variance";
+            //         //     }
+            //         //     action("RInventory - Inbound Transfer")
+            //         //     {
+            //         //         ApplicationArea = Basic, Suite;
+            //         //         Caption = 'Inventory - Inbound Transfer';
+            //         //         RunObject = report "Inventory - Inbound Transfer";
+            //         //     }
+            //         //     action("RInventory - List")
+            //         //     {
+            //         //         ApplicationArea = Basic, Suite;
+            //         //         Caption = 'Inventory - List';
+            //         //         RunObject = report "Inventory - List";
+            //         //     }
+            //         //     action("Invt. Valuation - Cost Spec.")
+            //         //     {
+            //         //         ApplicationArea = Basic, Suite;
+            //         //         Caption = 'Invt. Valuation - Cost Spec.';
+            //         //         RunObject = report "Invt. Valuation - Cost Spec.";
+            //         //     }
+            //         //     action("Item Age Composition - Qty.")
+            //         //     {
+            //         //         ApplicationArea = Basic, Suite;
+            //         //         Caption = 'Item Age Composition - Qty.';
+            //         //         RunObject = report "Item Age Composition - Qty.";
+            //         //     }
+            //         //     action("Item Age Composition - Value")
+            //         //     {
+            //         //         ApplicationArea = Basic, Suite;
+            //         //         Caption = 'Item Age Composition - Value';
+            //         //         RunObject = report "Item Age Composition - Value";
+            //         //     }
+            //         //     action("Item Expiration - Quantity")
+            //         //     {
+            //         //         ApplicationArea = Basic, Suite;
+            //         //         Caption = 'Item Expiration - Quantity';
+            //         //         RunObject = report "Item Expiration - Quantity";
+            //         //     }
+            //         //     action("RItem Charges - Specification")
+            //         //     {
+            //         //         ApplicationArea = Basic, Suite;
+            //         //         Caption = 'Item Charges - Specification';
+            //         //         RunObject = report "Item Charges - Specification";
+            //         //     }
+            //         //     action("Item Register - Quantity")
+            //         //     {
+            //         //         ApplicationArea = Basic, Suite;
+            //         //         Caption = 'Item Register - Quantity';
+            //         //         RunObject = report "Item Register - Quantity";
+            //         //     }
+            //         //     action("Item Register - Value")
+            //         //     {
+            //         //         ApplicationArea = Basic, Suite;
+            //         //         Caption = 'Item Register - Value';
+            //         //         RunObject = report "Item Register - Value";
+            //         //     }
+            //         // }
+
+            //     }
+            //     group("Procurement Setup")
+            //     {
+            //         Caption = 'Setup';
+            //         group("Planning Setup")
+            //         {
+            //             Caption = 'Planning';
+            //             action("Salespeople/Purchasers")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Salespeople/Purchasers';
+            //                 RunObject = page "Salespersons/Purchasers";
+            //             }
+            //             action("Req. Worksheet Templates")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Req. Worksheet Templates';
+            //                 RunObject = page "Req. Worksheet Templates";
+            //             }
+            //         }
+            //         group("Order Processing Setup")
+            //         {
+            //             Caption = 'Order Processing';
+            //             action("Standard Purchase Codes")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Standard Purchase Codes';
+            //                 RunObject = page "Standard Purchase Codes";
+            //             }
+            //             action("Purchasing Codes")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Purchasing Codes';
+            //                 RunObject = page "Purchasing Codes";
+            //             }
+            //             action("Shipment Methods")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Shipment Methods';
+            //                 RunObject = page "Shipment Methods";
+            //             }
+            //             action("Return Reasons")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Return Reasons';
+            //                 RunObject = page "Return Reasons";
+            //             }
+            //             action("Report Selection - Purchase ")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Report Selection - Purchase ';
+            //                 //RunObject = page "Report Selection - Purchase ";
+            //             }
+            //         }
+            //         group("Inventory and Costing Setup")
+            //         {
+            //             Caption = 'Inventrory and Costing';
+            //             action("Units of Measure")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Units of Measure';
+            //                 RunObject = page "Units of Measure";
+            //             }
+            //             action("Manufacturers")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Manufacturers';
+            //                 RunObject = page Manufacturers;
+            //             }
+            //             action("Product Groups")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Product Groups';
+            //                 //RunObject = page "Product Groups";
+            //             }
+            //             action("Nonstock Item Setup")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Nonstock Item Setup';
+            //                 //RunObject = page "Nonstock Item Setup";
+            //             }
+            //         }
+            //     }
+
+            // }
+            // group(Legal)
+            // {
+            //     group("Legal Management")
+            //     {
+            //         group("Case Management")
+            //         {
+            //             Caption = 'Legal Case Managment';
+            //             group("Legal Case Management Lists")
+            //             {
+            //                 Caption = 'Lists';
+            //                 action("Case List")
+            //                 {
+            //                     ApplicationArea = Basic, Suite;
+            //                     Caption = 'Case List';
+            //                     RunObject = Page "Legal List";
+            //                 }
+            //                 action("Witness Line")
+            //                 {
+            //                     ApplicationArea = Basic, Suite;
+            //                     Caption = 'Witness Line';
+            //                     RunObject = Page "Witness Line";
+            //                 }
+            //                 action("Advocate List")
+            //                 {
+            //                     ApplicationArea = Basic, Suite;
+            //                     Caption = 'Advocate List';
+            //                     RunObject = Page "Advocate List";
+            //                 }
+            //                 action("Approved Cases")
+            //                 {
+            //                     ApplicationArea = Basic, Suite;
+            //                     Caption = 'Approved Cases';
+            //                     RunObject = Page "Legal List Aproved";
+            //                 }
+            //                 action("Verdict List")
+            //                 {
+            //                     ApplicationArea = Basic, Suite;
+            //                     Caption = 'Verdict List';
+            //                     RunObject = Page "Verdict List";
+            //                 }
+            //                 action("Damages List")
+            //                 {
+            //                     ApplicationArea = Basic, Suite;
+            //                     Caption = 'Damages List';
+            //                     RunObject = Page "Damages List";
+            //                 }
+
+            //             }
+            //         }
+
+            //         group("Legal Payments")
+            //         {
+            //             Caption = 'Payments';
+            //             group("Payment Lists")
+            //             {
+            //                 action("Case Invoices")
+            //                 {
+            //                     ApplicationArea = Basic, Suite;
+            //                     Caption = 'Case Invoices';
+            //                     RunObject = Page "Case Invoice";
+            //                 }
+            //                 action("Case Payment")
+            //                 {
+            //                     ApplicationArea = Basic, Suite;
+            //                     Caption = 'Case Payment';
+            //                     RunObject = Page "Case Payment List";
+            //                 }
+            //             }
+            //         }
+            //         group("Appealed Cases")
+            //         {
+            //             Caption = 'Appealed Cases';
+            //             group("Appealed Cases List")
+            //             {
+            //                 action("Appealed Case")
+            //                 {
+            //                     ApplicationArea = Basic, Suite;
+            //                     Caption = 'Appealed Cases';
+            //                     RunObject = Page "Appealed Legal List";
+            //                 }
+            //             }
+            //         }
+            //         group("Closed Case")
+            //         {
+            //             Caption = 'Closed Cases';
+            //             group("Closed Cases List")
+            //             {
+            //                 action("Closed Cases")
+            //                 {
+            //                     ApplicationArea = Basic, Suite;
+            //                     Caption = 'Appealed Cases';
+            //                     RunObject = Page "Legal List Aproved";
+            //                 }
+            //             }
+            //         }
+
+            //         group("Surety")
+            //         {
+            //             Caption = 'Surety Management';
+            //             group("Surety Lists")
+            //             {
+            //                 action("Surety Management List")
+            //                 {
+            //                     ApplicationArea = Basic, Suite;
+            //                     Caption = 'Surety Management List';
+            //                     RunObject = Page "Surety Management List";
+            //                 }
+            //                 action("Approved Surety Management")
+            //                 {
+            //                     ApplicationArea = Basic, Suite;
+            //                     Caption = 'Approved Surety Management';
+            //                     RunObject = page "Approved Surety Management";
+            //                 }
+
+            //             }
+            //             Group("L Reports")
+            //             {
+            //                 action("Surety Managemnt Report")
+            //                 {
+            //                     ApplicationArea = Basic, Suite;
+            //                     Caption = 'Advocate Report';
+            //                     RunObject = Report "Surety Management Report";
+            //                 }
+            //             }
+
+            //         }
+            //     }
+            //     group(ContractManagement)
+            //     {
+            //         Caption = 'Contracts Management';
+            //         ToolTip = 'Contract mgt signing, renewal, termination, payment, invoice, reports';
+            //         group("Contract Management")
+            //         {
+            //             Caption = 'Contract Management';
+            //             action("Contracts list")
+            //             {
+            //                 ApplicationArea = Basic;
+            //                 Caption = 'Contracts Details';
+            //                 RunObject = Page "Contracts list";
+            //             }
+            //             action("Renewed Contracts list")
+            //             {
+            //                 ApplicationArea = Basic;
+            //                 Caption = 'Renewed Contracts list';
+            //                 RunObject = Page "Renewed Contracts list";
+            //             }
+            //             action("Terminated Contracts list")
+            //             {
+            //                 ApplicationArea = Basic;
+            //                 Caption = 'Terminated Contracts list';
+            //                 RunObject = Page "Terminated Contracts list";
+            //             }
+            //             action("Contract Purchase Order List ")
+            //             {
+            //                 ApplicationArea = Basic;
+            //                 Caption = 'Contract Purchase Order List';
+            //                 RunObject = Page "Contract Purchase Order List";
+            //             }
+            //             action("Approved Contracts list")
+            //             {
+            //                 ApplicationArea = Basic;
+            //                 Caption = 'Approved Contracts list';
+            //                 RunObject = Page "Approved Contracts list";
+            //             }
+
+
+
+            //         }
+            //         group("Contract setUp")
+            //         {
+            //             Caption = 'Contract Setup';
+            //             action("Contract Type")
+            //             {
+            //                 ApplicationArea = Basic;
+            //                 Caption = 'Contract Classification';
+            //                 //RunObject = Page contract type
+
+            //             }
+            //             action("Contract Line")
+            //             {
+            //                 ApplicationArea = Basic;
+            //                 Caption = 'Contract Line';
+            //                 RunObject = Page "Contract Lines";
+
+            //             }
+            //             action("Contract Cycle")
+            //             {
+            //                 ApplicationArea = Basic;
+            //                 Caption = 'Contract Cycle';
+            //                 RunObject = Page "Contract Cycle";
+
+            //             }
+            //             action("Contract Lines Type")
+            //             {
+            //                 ApplicationArea = Basic;
+            //                 Caption = 'Contract Lines Type';
+            //                 RunObject = Page "Contract Lines Type";
+
+            //             }
+            //             action("Contracts Duration/ cycle")
+            //             {
+            //                 ApplicationArea = Basic;
+            //                 Caption = 'Contracts Duration/ cycle';
+            //                 RunObject = Page "Contract Cycle";
+            //             }
+            //             action("Contract Cycle Stage")
+            //             {
+            //                 ApplicationArea = Basic;
+            //                 Caption = 'Contract Cycle Stage';
+            //                 RunObject = Page "Contract Cycle Stage";
+            //             }
+
+            //         }
+            //         group(Invoice)
+            //         {
+            //             Caption = 'Invoice';
+            //             action("Contract Purchase Invoices")
+            //             {
+            //                 ApplicationArea = Basic;
+            //                 Caption = 'Contract Purchase Invoices';
+            //                 RunObject = Page "Contract Purchase Invoices";
+            //             }
+            //         }
+            //         group(Paiment)
+            //         {
+            //             Caption = 'Payment';
+            //             action(Payment)
+            //             {
+            //                 ApplicationArea = Basic;
+            //                 Caption = 'Payment';
+            //                 RunObject = Page "Payment Vouchers List";
+            //             }
+            //         }
+
+            //     }
+            //     group("Contract Reports")
+            //     {
+            //         Caption = 'Contract Reports';
+            //         action("Detailed Contract Report")
+            //         {
+            //             ApplicationArea = Basic;
+            //             Caption = 'Detailed Contract Report';
+            //             RunObject = report "Detailed Contract Report";
+            //         }
+            //         action("Contract Status")
+            //         {
+            //             ApplicationArea = Basic;
+            //             Caption = 'Contract Status';
+            //             RunObject = report "Contract Status";
+            //         }
+            //         action("Contract Report")
+            //         {
+            //             ApplicationArea = Basic;
+            //             Caption = 'Contract Report';
+            //             RunObject = report "Contract Report";
+            //         }
+            //     }
+            //     group("Reporting")
+            //     {
+            //         Caption = 'Legal Management Reports';
+            //         group("L Reports and Analysis")
+            //         {
+            //             action("Case Report")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Case Report';
+            //                 RunObject = Report "Case Report";
+            //             }
+            //             action("Advocate Cost Report")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Advocate Cost Report';
+            //                 RunObject = Report "Avocate Cost Report";
+            //             }
+            //             action("Case Status Report")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Case Status Report';
+            //                 RunObject = Report "Case Status Report";
+            //             }
+            //             action("Case Cost")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Case Cost';
+            //                 RunObject = Report "Case Cost";
+            //             }
+            //             action("Advocate Report")
+            //             {
+            //                 ApplicationArea = Basic, Suite;
+            //                 Caption = 'Advocate Report';
+            //                 RunObject = Report "Advocate Report";
+            //             }
+            //         }
+
+
+            //     }
+
+            // }
+
+            group("Global Functions & SetUps")
+            {
+                group("System Edits Functions")
+                {
+                    group("System Edits")
+                    {
+                        Caption = 'System Edits';
+
+                        action("System Edits  List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            RunObject = Page "System Edits List";
+                        }
+                        action("Posted System Edits")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            RunObject = Page "Posted System Edits List";
+                        }
+
+                    }
+                    group("System Edits Setups")
+                    {
+                        Caption = 'System Edits Set-Ups';
+
+                        action("System Edits Tables List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            RunObject = Page "System Edits Tables";
+                        }
+
+                    }
+                }
+                group("System Reversals")
+                {
+                    Caption = 'System Reversals';
+
+                    action("System Reversal List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        RunObject = Page "System Reversal List";
+                    }
+                    action("Reversed System Reversal List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        RunObject = Page "Reversed System Reversal List";
+                    }
+                }
+
+            }
+            group("ICT Dept")
+            {
+
+                Group("Product Applications")
+                {
+                    Caption = 'Product Applications';
+                    action("Product Application")
+                    {
+                        ApplicationArea = Basic, Suite;
                         Caption = 'Product Applications';
-                        action("Product Application")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Product Applications';
-                            RunObject = page "Product Factory List";
-                        }
+                        RunObject = page "Product Factory List";
                     }
-                    group("User Creation")
-                    {
-                        Caption = 'User Creation Requests';
-                        action("User Creation Requests")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'User Creation Requests';
-                            RunObject = page "User Creation Request List";
-                        }
-                    }
-                    group("User Termination")
-                    {
-                        Caption = 'User Termination Requests';
-                        action("User Termination Requests List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'User Termination Requests';
-                            RunObject = page "User Termination Requests List";
-                        }
-                    }
-                    Group("Permsision Requests")
-                    {
-                        Caption = 'Permission Requests';
-                        action("Permission Requests")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Permission Requests';
-                            RunObject = page "Permission Requisition List";
-                        }
-                    }
-                    Group("User Reactivation Request")
-                    {
-                        Caption = 'User Reactivation Requests';
-                        action("User Reactivation Requests")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'User Reactivation Request';
-                            RunObject = page "User Reactivation List";
-                        }
-                    }
-
                 }
+                group("User Creation")
+                {
+                    Caption = 'User Creation Requests';
+                    action("User Creation Requests")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'User Creation Requests';
+                        RunObject = page "User Creation Request List";
+                    }
+                }
+                group("User Termination")
+                {
+                    Caption = 'User Termination Requests';
+                    action("User Termination Requests List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'User Termination Requests';
+                        RunObject = page "User Termination Requests List";
+                    }
+                }
+                Group("Permsision Requests")
+                {
+                    Caption = 'Permission Requests';
+                    action("Permission Requests")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Permission Requests';
+                        RunObject = page "Permission Requisition List";
+                    }
+                }
+                Group("User Reactivation Request")
+                {
+                    Caption = 'User Reactivation Requests';
+                    action("User Reactivation Requests")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'User Reactivation Request';
+                        RunObject = page "User Reactivation List";
+                    }
+                }
+
             }
             // group("Contract Request")
             // {
@@ -5947,516 +5946,515 @@ page 52186583 "Audit Role center"
             //     }
             // }
 
-            group(EmployeeSelfService)
-            {
+                group(EmployeeSelfService)
+                {
                 Caption = 'Employee Self Service';
-                group("Employee Fixed Assets")
-                {
-                    action("Employee Fixed Asset Transfer List")
+                    group("Employee Fixed Assets")
                     {
-                        ApplicationArea = FixedAssets;
-                        Caption = 'Fixed Assets Transfer List';
-                        RunObject = Page "Asset Transfer List";
-                        ToolTip = 'This module facilitates Transfer of FA location and responsible employee';
+                        action("Employee Fixed Asset Transfer List")
+                        {
+                            ApplicationArea = FixedAssets;
+                            Caption = 'Fixed Assets Transfer List';
+                            RunObject = Page "Asset Transfer List";
+                            ToolTip = 'This module facilitates Transfer of FA location and responsible employee';
+                        }
+                        action("Employee Transferred Fixed Assets")
+                        {
+                            ApplicationArea = FixedAssets;
+                            Caption = 'Transferred Fixed Assets';
+                            RunObject = Page "Asset Transfer List Effected";
+                            ToolTip = 'View the list of fixed assets that have been transferred.';
+                        }
                     }
-                    action("Employee Transferred Fixed Assets")
+                    action(StaffWelfare)
                     {
-                        ApplicationArea = FixedAssets;
-                        Caption = 'Transferred Fixed Assets';
-                        RunObject = Page "Asset Transfer List Effected";
-                        ToolTip = 'View the list of fixed assets that have been transferred.';
+                        Caption = 'Staff Welfare Claim';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = page "Staff Welfare List";
+                    }
+                    action(LeaveApplication1)
+                    {
+                        Caption = 'Employee Leave Application';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = page "HR Leave Applications List1";
+
+                    }
+                    action("Audit Overtime Claim List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Overtime';
+                        RunObject = page "Overtime Claim List";
+                    }
+
+                    action("Audit System Rights Requisition")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'System Rights Requisition';
+                        RunObject = page "Permission Requisition Card";
+                    }
+
+                    action("Loan Application")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Apply Staff Loan';
+                        RunObject = page "Self Loan Application List";
+                    }
+                    action("Payslip")
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Payslip';
+                        RunObject = report "Self Service Slip";
+                    }
+                    // group("Employee Requests")
+                    // {
+
+                    // group("File Requests.")
+                    // {
+                    //     action("Request File")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         Caption = 'Request File';
+                    //         RunObject = page "File Request List";
+                    //         RunPageView = where(Status = filter(open));
+                    //     }
+                    //     action("File Request")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         Caption = 'Files Requested';
+                    //         RunObject = page "File Request List";
+                    //         RunPageView = where(Status = filter(requested));
+                    //     }
+                    //     action("Closed File Request")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         Caption = 'Closed Files Requests.';
+                    //         RunObject = page "File Request List";
+                    //         RunPageView = where(Status = filter(closed));
+                    //     }
+                    //     action("File List")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         Caption = 'File Tracker List';
+                    //         RunObject = page "File Tracker List";
+                    //         RunPageView = where(Status = filter(<> archived));
+                    //     }
+                    // }
+                    //     group("Conf & Meeting Room Booking")
+                    //     {
+                    //         Caption = 'Conf & Meeting Room Aplications';
+                    //         action("Conference Hall & Meeting Rooms")
+                    //         {
+                    //             ApplicationArea = All;
+                    //             Caption = 'Open Bookings';
+                    //             RunObject = page "MNS Conf & Meetings Appl List";
+                    //             RunPageLink = Status = CONST(Open);
+                    //         }
+                    //         action("Pending Conf & Meeting Room Booking")
+                    //         {
+                    //             ApplicationArea = All;
+                    //             Caption = 'Pending Bookings';
+                    //             //RunObject = page "Pending Conf & Meeting - List";
+                    //             RunObject = page "MNS Conf & Meetings Appl List";
+                    //             RunPageLink = Status = CONST(Pending);
+                    //         }
+                    //         action("Approved Conf & Meeting Room Booking")
+                    //         {
+                    //             ApplicationArea = All;
+                    //             Caption = 'Approved Booking';
+                    //             //RunObject = page "Approved Conf & Meeting - List";
+                    //             RunObject = page "MNS Conf & Meetings Appl List";
+                    //             RunPageLink = Status = CONST(Approved);
+                    //         }
+                    //         action("Invoicing for Hire of Halls")
+                    //         {
+                    //             ApplicationArea = All;
+                    //             Caption = 'Invoicing for Hire of Halls';
+                    //             //RunObject = page "Approved Conf & Meeting - List";
+                    //             RunObject = page "MNS Conf & Meetings Appl List";
+                    //             //RunPageLink = Status = CONST(Approved);
+                    //             RunPageView = WHERE(Status = CONST(Approved), "Type of Meeting/Function" = Const(External));
+                    //         }
+                    //         action("Rejected Conf & Meeting Room Booking")
+                    //         {
+                    //             ApplicationArea = All;
+                    //             Caption = 'Declined Bookings';
+                    //             //RunObject = page "Rejected Conf & Meeting - List";
+                    //             RunObject = page "MNS Conf & Meetings Appl List";
+                    //             RunPageLink = Status = CONST(Rejected);
+                    //         }
+                    //         action("Closed Conf & Meeting Room Booking")
+                    //         {
+                    //             ApplicationArea = All;
+                    //             Caption = 'Closed Bookings';
+                    //             //RunObject = page "Closed Conf & Meeting - List";
+                    //             RunObject = page "MNS Conf & Meetings Appl List";
+                    //             RunPageLink = "Status of the Booking" = CONST(Closed);
+                    //         }
+                    //     }
+                    //     Group("Motor Vehicle Requests")
+                    //     {
+                    //         Caption = 'Motor Vehicle Requests';
+                    //         action("Vehicle Request Application")
+                    //         {
+                    //             ApplicationArea = all;
+                    //             Caption = 'Open Vehicle Requests';
+                    //             RunObject = page "Motor Vehicle Request List";
+                    //             RunPageLink = Status = CONST(Open);
+                    //         }
+                    //         action("Pending Vehicle Requests")
+                    //         {
+                    //             ApplicationArea = all;
+                    //             Caption = 'Pending Vehicle Requests';
+                    //             RunObject = page "Motor Vehicle Request List";
+                    //             RunPageLink = Status = CONST(Pending);
+                    //         }
+                    //         action("Approved Vehicle Requests")
+                    //         {
+                    //             ApplicationArea = all;
+                    //             Caption = 'Approved Vehicle Requests';
+                    //             //RunObject = page "Approved Vehicle Req - List";
+                    //             RunObject = page "Motor Vehicle Request List";
+                    //             RunpageLink = Status = CONST(Approved);
+                    //         }
+                    //         action("Deffered Vehicle Requests")
+                    //         {
+                    //             ApplicationArea = all;
+                    //             Caption = 'Deffered Vehicle Requests';
+                    //             RunObject = page "Deffered Vehicle Req - List";
+                    //         }
+                    //         action("Reject Vehicle Requests")
+                    //         {
+                    //             ApplicationArea = all;
+                    //             Caption = 'Rejected Vehicle Requests';
+                    //             //RunObject = page "Rejected Vehicle Req - List";
+                    //             RunObject = page "Motor Vehicle Request List";
+                    //             RunPageLink = Status = CONST(Rejected);
+                    //         }
+                    //         action("Closed Vehicle Request")
+                    //         {
+                    //             ApplicationArea = all;
+                    //             Caption = 'Closed Vehicle Request';
+                    //             //RunObject = page "Closed Vehicle Req - List";
+                    //             RunObject = page "Motor Vehicle Request List";
+                    //             RunPageLink = Status = CONST(Closed);
+                    //         }
+                    //         action("Reallocated Requests")
+                    //         {
+                    //             ApplicationArea = all;
+                    //             Caption = 'Reallocated Requests';
+                    //             RunObject = page "Motor Vehicle Request List";
+                    //             RunPageLink = Reallocated = CONST(TRUE);
+                    //         }
+                    //     }
+                    //     group("Key Requests")
+                    //     {
+                    //         action("Open Keys Request")
+                    //         {
+                    //             ApplicationArea = All;
+                    //             Caption = 'Office Keys Request';
+                    //             RunObject = page "Key Request List";
+                    //             RunPageLink = Status = CONST(Open);
+                    //         }
+                    //         action("Pending Keys Request")
+                    //         {
+                    //             ApplicationArea = All;
+                    //             Caption = 'Pending Requests';
+                    //             RunObject = page "Key Request List";
+                    //             RunPageLink = Status = CONST(Pending);
+                    //         }
+                    //         action("Approved Keys Request")
+                    //         {
+                    //             ApplicationArea = All;
+                    //             Caption = 'Approved Requests';
+                    //             RunObject = page "Key Request List";
+                    //             RunPageLink = Status = CONST(Approved);
+                    //         }
+                    //         action("Rejected Keys Request")
+                    //         {
+                    //             ApplicationArea = All;
+                    //             Caption = 'Rejected Key Request';
+                    //             RunObject = page "Key Request List";
+                    //             RunPageLink = Status = CONST(Rejected);
+                    //         }
+                    //         action("Closed Keys Request")
+                    //         {
+                    //             ApplicationArea = All;
+                    //             Caption = 'Closed Key Requests';
+                    //             RunObject = page "Key Request List";
+                    //             RunPageLink = "Key Status" = CONST(Received);
+                    //         }
+                    //     }
+                    //     Group("Parking Allocation")
+                    //     {
+                    //         action("Parking Space List")
+                    //         {
+                    //             ApplicationArea = All;
+                    //             Caption = 'Open Parking Application';
+                    //             RunObject = page "Parking Space List";
+                    //             RunPageLink = Status = CONST(Open);
+                    //         }
+                    //         action("Pending Parking Space Application")
+                    //         {
+                    //             ApplicationArea = All;
+                    //             Caption = 'Pending Parking Allocation';
+                    //             //RunObject = page "Approved Parking - List";
+                    //             RunObject = page "Parking Space List";
+                    //             RunPageLink = Status = CONST(Pending);
+                    //         }
+                    //         action("Approved Parking Space Application")
+                    //         {
+                    //             ApplicationArea = All;
+                    //             Caption = 'Approved Parking Allocation';
+                    //             //RunObject = page "Approved Parking - List";
+                    //             RunObject = page "Parking Space List";
+                    //             RunPageLink = Status = CONST(Approved);
+                    //         }
+                    //         action("Rejected Parking Space Application")
+                    //         {
+                    //             ApplicationArea = All;
+                    //             Caption = 'Rejected Parking Allocation';
+                    //             //RunObject = page "Rejected Parking Space - List";
+                    //             RunObject = page "Parking Space List";
+                    //             RunPageLink = Status = CONST(Rejected);
+                    //         }
+                    //     }
+                    // }
+
+                }
+                group(" Audit Setups")
+                {
+                    Caption = 'Setups';
+                    group("CRM")
+                    {
+                        Caption = 'CRM';
+                        action("CRM API Setup")
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'CRM API Setup';
+                            RunObject = Page "CRM API Setup";
+                        }
+                        action("CRM Landing Departments")
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'CRM Landing Departments';
+                            RunObject = Page "CRM Originations Setup";
+                        }
+                    }
+                    group("EDMS")
+                    {
+                        Caption = 'EDMS';
+                        action("EDMS API Setup")
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'EDMS API Setup';
+                            RunObject = Page "EDMS API Setup";
+                        }
+                    }
+                    group("CRB")
+                    {
+                        Caption = 'CRB';
+                        action("CRB Metropol")
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'CRB Metropol API Setup';
+                            RunObject = Page "CRB Metropol API Setup";
+                        }
+
+                        action("CRB Trans Union")
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'CRB Trans Union API Setup';
+                            RunObject = Page "CRB Trans Union API Setup";
+                        }
+                    }
+
+
+
+                    group("API")
+                    {
+                        Caption = 'API';
+                        action("API Logs")
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'API Logs';
+                            RunObject = Page "BC API Logs List";
+                        }
                     }
                 }
-                action(StaffWelfare)
+                group("Audit - Reports")
                 {
-                    Caption = 'Staff Welfare Claim';
-                    ApplicationArea = Basic, Suite;
-                    RunObject = page "Staff Welfare List";
-                }
-                action(LeaveApplication1)
-                {
-                    Caption = 'Employee Leave Application';
-                    ApplicationArea = Basic, Suite;
-                    RunObject = page "HR Leave Applications List1";
+                    Caption = 'Reports';
+                    action("Member Share By Category")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Member Share By Category';
+                        RunObject = report "Member Share By Category";
+                    }
+                    action("Loans Arr. HISTORICAL")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Loans Arrears HISTORICAL';
+                        RunObject = report "Loans Arrears HISTORICAL";
+                    }
+                    action("Ind Member Lifetime Value Rep")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Individual Member Lifetime Value Rep';
+                        RunObject = report "Ind Member Lifetime Value Rep";
+                    }
+                    action("Member Lifetime Value")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Member Lifetime Value';
+                        RunObject = report "Member Lifetime Value";
+                    }
+                    action("Loan Products Report")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Loan Products Report';
+                        RunObject = report "Loan Products Report";
+                    }
+                    action("Savings Products Report")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Savings Products Report';
+                        RunObject = report "Savings Products Report";
+                    }
+                    action("Savings Account Register")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Savings Account Register';
+                        RunObject = page "Savings Accounts";
+                    }
 
-                }
-                action("Audit Overtime Claim List")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Overtime';
-                    RunObject = page "Overtime Claim List";
-                }
+                    action("Deposits Accumulated Over Time")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Deposits Accumulated Over Time';
+                        RunObject = report "Deposits Accumulated Over Time";
+                    }
+                    action("Salary Accounts Report")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Salary Accounts Report';
+                        RunObject = report "Salary Accounts Report";
+                    }
+                    action("Loans TAT")
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'Loans TAT';
+                        RunObject = report "Loans TAT";
+                    }
+                    action("Loan Variation TAT")
+                    {
+                        ApplicationArea = Basic;
 
-                action("Audit System Rights Requisition")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'System Rights Requisition';
-                    RunObject = page "Permission Requisition Card";
-                }
+                        RunObject = report " Loan Variation TAT";
+                    }
+                    action("Deposit Variation TAT")
+                    {
+                        ApplicationArea = Basic;
 
-                action("Loan Application")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Apply Staff Loan';
-                    RunObject = page "Self Loan Application List";
-                }
-                action("Payslip")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Payslip';
-                    RunObject = report "Self Service Slip";
-                }
-                // group("Employee Requests")
-                // {
+                        RunObject = report "Deposit Variation ";
+                    }
+                    // action("BBF TAT")
+                    // {
+                    //     ApplicationArea = Basic;
 
-                // group("File Requests.")
-                // {
-                //     action("Request File")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Request File';
-                //         RunObject = page "File Request List";
-                //         RunPageView = where(Status = filter(open));
-                //     }
-                //     action("File Request")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Files Requested';
-                //         RunObject = page "File Request List";
-                //         RunPageView = where(Status = filter(requested));
-                //     }
-                //     action("Closed File Request")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Closed Files Requests.';
-                //         RunObject = page "File Request List";
-                //         RunPageView = where(Status = filter(closed));
-                //     }
-                //     action("File List")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'File Tracker List';
-                //         RunObject = page "File Tracker List";
-                //         RunPageView = where(Status = filter(<> archived));
-                //     }
-                // }
-                //     group("Conf & Meeting Room Booking")
-                //     {
-                //         Caption = 'Conf & Meeting Room Aplications';
-                //         action("Conference Hall & Meeting Rooms")
-                //         {
-                //             ApplicationArea = All;
-                //             Caption = 'Open Bookings';
-                //             RunObject = page "MNS Conf & Meetings Appl List";
-                //             RunPageLink = Status = CONST(Open);
-                //         }
-                //         action("Pending Conf & Meeting Room Booking")
-                //         {
-                //             ApplicationArea = All;
-                //             Caption = 'Pending Bookings';
-                //             //RunObject = page "Pending Conf & Meeting - List";
-                //             RunObject = page "MNS Conf & Meetings Appl List";
-                //             RunPageLink = Status = CONST(Pending);
-                //         }
-                //         action("Approved Conf & Meeting Room Booking")
-                //         {
-                //             ApplicationArea = All;
-                //             Caption = 'Approved Booking';
-                //             //RunObject = page "Approved Conf & Meeting - List";
-                //             RunObject = page "MNS Conf & Meetings Appl List";
-                //             RunPageLink = Status = CONST(Approved);
-                //         }
-                //         action("Invoicing for Hire of Halls")
-                //         {
-                //             ApplicationArea = All;
-                //             Caption = 'Invoicing for Hire of Halls';
-                //             //RunObject = page "Approved Conf & Meeting - List";
-                //             RunObject = page "MNS Conf & Meetings Appl List";
-                //             //RunPageLink = Status = CONST(Approved);
-                //             RunPageView = WHERE(Status = CONST(Approved), "Type of Meeting/Function" = Const(External));
-                //         }
-                //         action("Rejected Conf & Meeting Room Booking")
-                //         {
-                //             ApplicationArea = All;
-                //             Caption = 'Declined Bookings';
-                //             //RunObject = page "Rejected Conf & Meeting - List";
-                //             RunObject = page "MNS Conf & Meetings Appl List";
-                //             RunPageLink = Status = CONST(Rejected);
-                //         }
-                //         action("Closed Conf & Meeting Room Booking")
-                //         {
-                //             ApplicationArea = All;
-                //             Caption = 'Closed Bookings';
-                //             //RunObject = page "Closed Conf & Meeting - List";
-                //             RunObject = page "MNS Conf & Meetings Appl List";
-                //             RunPageLink = "Status of the Booking" = CONST(Closed);
-                //         }
-                //     }
-                //     Group("Motor Vehicle Requests")
-                //     {
-                //         Caption = 'Motor Vehicle Requests';
-                //         action("Vehicle Request Application")
-                //         {
-                //             ApplicationArea = all;
-                //             Caption = 'Open Vehicle Requests';
-                //             RunObject = page "Motor Vehicle Request List";
-                //             RunPageLink = Status = CONST(Open);
-                //         }
-                //         action("Pending Vehicle Requests")
-                //         {
-                //             ApplicationArea = all;
-                //             Caption = 'Pending Vehicle Requests';
-                //             RunObject = page "Motor Vehicle Request List";
-                //             RunPageLink = Status = CONST(Pending);
-                //         }
-                //         action("Approved Vehicle Requests")
-                //         {
-                //             ApplicationArea = all;
-                //             Caption = 'Approved Vehicle Requests';
-                //             //RunObject = page "Approved Vehicle Req - List";
-                //             RunObject = page "Motor Vehicle Request List";
-                //             RunpageLink = Status = CONST(Approved);
-                //         }
-                //         action("Deffered Vehicle Requests")
-                //         {
-                //             ApplicationArea = all;
-                //             Caption = 'Deffered Vehicle Requests';
-                //             RunObject = page "Deffered Vehicle Req - List";
-                //         }
-                //         action("Reject Vehicle Requests")
-                //         {
-                //             ApplicationArea = all;
-                //             Caption = 'Rejected Vehicle Requests';
-                //             //RunObject = page "Rejected Vehicle Req - List";
-                //             RunObject = page "Motor Vehicle Request List";
-                //             RunPageLink = Status = CONST(Rejected);
-                //         }
-                //         action("Closed Vehicle Request")
-                //         {
-                //             ApplicationArea = all;
-                //             Caption = 'Closed Vehicle Request';
-                //             //RunObject = page "Closed Vehicle Req - List";
-                //             RunObject = page "Motor Vehicle Request List";
-                //             RunPageLink = Status = CONST(Closed);
-                //         }
-                //         action("Reallocated Requests")
-                //         {
-                //             ApplicationArea = all;
-                //             Caption = 'Reallocated Requests';
-                //             RunObject = page "Motor Vehicle Request List";
-                //             RunPageLink = Reallocated = CONST(TRUE);
-                //         }
-                //     }
-                //     group("Key Requests")
-                //     {
-                //         action("Open Keys Request")
-                //         {
-                //             ApplicationArea = All;
-                //             Caption = 'Office Keys Request';
-                //             RunObject = page "Key Request List";
-                //             RunPageLink = Status = CONST(Open);
-                //         }
-                //         action("Pending Keys Request")
-                //         {
-                //             ApplicationArea = All;
-                //             Caption = 'Pending Requests';
-                //             RunObject = page "Key Request List";
-                //             RunPageLink = Status = CONST(Pending);
-                //         }
-                //         action("Approved Keys Request")
-                //         {
-                //             ApplicationArea = All;
-                //             Caption = 'Approved Requests';
-                //             RunObject = page "Key Request List";
-                //             RunPageLink = Status = CONST(Approved);
-                //         }
-                //         action("Rejected Keys Request")
-                //         {
-                //             ApplicationArea = All;
-                //             Caption = 'Rejected Key Request';
-                //             RunObject = page "Key Request List";
-                //             RunPageLink = Status = CONST(Rejected);
-                //         }
-                //         action("Closed Keys Request")
-                //         {
-                //             ApplicationArea = All;
-                //             Caption = 'Closed Key Requests';
-                //             RunObject = page "Key Request List";
-                //             RunPageLink = "Key Status" = CONST(Received);
-                //         }
-                //     }
-                //     Group("Parking Allocation")
-                //     {
-                //         action("Parking Space List")
-                //         {
-                //             ApplicationArea = All;
-                //             Caption = 'Open Parking Application';
-                //             RunObject = page "Parking Space List";
-                //             RunPageLink = Status = CONST(Open);
-                //         }
-                //         action("Pending Parking Space Application")
-                //         {
-                //             ApplicationArea = All;
-                //             Caption = 'Pending Parking Allocation';
-                //             //RunObject = page "Approved Parking - List";
-                //             RunObject = page "Parking Space List";
-                //             RunPageLink = Status = CONST(Pending);
-                //         }
-                //         action("Approved Parking Space Application")
-                //         {
-                //             ApplicationArea = All;
-                //             Caption = 'Approved Parking Allocation';
-                //             //RunObject = page "Approved Parking - List";
-                //             RunObject = page "Parking Space List";
-                //             RunPageLink = Status = CONST(Approved);
-                //         }
-                //         action("Rejected Parking Space Application")
-                //         {
-                //             ApplicationArea = All;
-                //             Caption = 'Rejected Parking Allocation';
-                //             //RunObject = page "Rejected Parking Space - List";
-                //             RunObject = page "Parking Space List";
-                //             RunPageLink = Status = CONST(Rejected);
-                //         }
-                //     }
-                // }
+                    //     RunObject = report "BBF TAT";
+                    // }
+                    // action("BBF Insurance TAT")
+                    // {
+                    //     ApplicationArea = Basic;
+
+                    //     RunObject = report "BBF Insurance TAT";
+                    // }
+                    // action("Risk Claim TAT")
+                    // {
+                    //     ApplicationArea = Basic;
+
+                    //     RunObject = report "Risk Claim TAT Report";
+                    // }
+                    action("Institutional Capital TAT")
+                    {
+                        ApplicationArea = Basic;
+
+                        RunObject = report "Institutional Capital TAT";
+                    }
+                    // action("Business Loans TAT")
+                    // {
+                    //     ApplicationArea = Basic;
+
+                    //     RunObject = report "Business Loans TAT";
+                    // }
+                    action("Guarantor Substitution TAT")
+                    {
+                        ApplicationArea = Basic;
+
+                        RunObject = report "Guarantor Substitution TAT";
+                    }
+                    action("Member Withdrawal TAT")
+                    {
+                        ApplicationArea = Basic;
+
+                        RunObject = report "Member Withdrawal TAT";
+                    }
+                    action("Member Readmission TAT")
+                    {
+                        ApplicationArea = Basic;
+
+                        RunObject = report "Member Readmission TAT";
+                    }
+                    action("Member Edit TAT")
+                    {
+                        ApplicationArea = Basic;
+
+                        RunObject = report "Member Edit TAT Report";
+                    }
+                    // action("Membership TAT")
+                    // {
+                    //     ApplicationArea = Basic;
+
+                    //     RunObject = report "CRM Member TAT Report ";
+                    // }
+                    // action("Member Commission")
+                    // {
+                    //     ApplicationArea = Basic;
+
+                    //     RunObject = report "Member Commission";
+                    // }
+
+                    action("Staff Daily Transactions")
+                    {
+                        ApplicationArea = Basic;
+                        RunObject = report "Staff Daily Transactions";
+                    }
+                }
 
             }
-            group(" Audit Setups")
-            {
-                Caption = 'Setups';
-                group("CRM")
-                {
-                    Caption = 'CRM';
-                    action("CRM API Setup")
-                    {
-                        ApplicationArea = Basic;
-                        Caption = 'CRM API Setup';
-                        RunObject = Page "CRM API Setup";
-                    }
-                    action("CRM Landing Departments")
-                    {
-                        ApplicationArea = Basic;
-                        Caption = 'CRM Landing Departments';
-                        RunObject = Page "CRM Originations Setup";
-                    }
-                }
-                group("EDMS")
-                {
-                    Caption = 'EDMS';
-                    action("EDMS API Setup")
-                    {
-                        ApplicationArea = Basic;
-                        Caption = 'EDMS API Setup';
-                        RunObject = Page "EDMS API Setup";
-                    }
-                }
-                group("CRB")
-                {
-                    Caption = 'CRB';
-                    action("CRB Metropol")
-                    {
-                        ApplicationArea = Basic;
-                        Caption = 'CRB Metropol API Setup';
-                        RunObject = Page "CRB Metropol API Setup";
-                    }
-
-                    action("CRB Trans Union")
-                    {
-                        ApplicationArea = Basic;
-                        Caption = 'CRB Trans Union API Setup';
-                        RunObject = Page "CRB Trans Union API Setup";
-                    }
-                }
-
-
-
-                group("API")
-                {
-                    Caption = 'API';
-                    action("API Logs")
-                    {
-                        ApplicationArea = Basic;
-                        Caption = 'API Logs';
-                        RunObject = Page "BC API Logs List";
-                    }
-                }
-            }
-            group("Audit - Reports")
-            {
-                Caption = 'Reports';
-                action("Member Share By Category")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Member Share By Category';
-                    RunObject = report "Member Share By Category";
-                }
-                action("Loans Arr. HISTORICAL")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Loans Arrears HISTORICAL';
-                    RunObject = report "Loans Arrears HISTORICAL";
-                }
-                action("Ind Member Lifetime Value Rep")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Individual Member Lifetime Value Rep';
-                    RunObject = report "Ind Member Lifetime Value Rep";
-                }
-                action("Member Lifetime Value")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Member Lifetime Value';
-                    RunObject = report "Member Lifetime Value";
-                }
-                action("Loan Products Report")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Loan Products Report';
-                    RunObject = report "Loan Products Report";
-                }
-                action("Savings Products Report")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Savings Products Report';
-                    RunObject = report "Savings Products Report";
-                }
-                action("Savings Account Register")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Savings Account Register';
-                    RunObject = page "Savings Accounts";
-                }
-
-                action("Deposits Accumulated Over Time")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Deposits Accumulated Over Time';
-                    RunObject = report "Deposits Accumulated Over Time";
-                }
-                action("Salary Accounts Report")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Salary Accounts Report';
-                    RunObject = report "Salary Accounts Report";
-                }
-                action("Loans TAT")
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Loans TAT';
-                    RunObject = report "Loans TAT";
-                }
-                action("Loan Variation TAT")
-                {
-                    ApplicationArea = Basic;
-
-                    RunObject = report " Loan Variation TAT";
-                }
-                action("Deposit Variation TAT")
-                {
-                    ApplicationArea = Basic;
-
-                    RunObject = report "Deposit Variation ";
-                }
-                // action("BBF TAT")
-                // {
-                //     ApplicationArea = Basic;
-
-                //     RunObject = report "BBF TAT";
-                // }
-                // action("BBF Insurance TAT")
-                // {
-                //     ApplicationArea = Basic;
-
-                //     RunObject = report "BBF Insurance TAT";
-                // }
-                // action("Risk Claim TAT")
-                // {
-                //     ApplicationArea = Basic;
-
-                //     RunObject = report "Risk Claim TAT Report";
-                // }
-                action("Institutional Capital TAT")
-                {
-                    ApplicationArea = Basic;
-
-                    RunObject = report "Institutional Capital TAT";
-                }
-                // action("Business Loans TAT")
-                // {
-                //     ApplicationArea = Basic;
-
-                //     RunObject = report "Business Loans TAT";
-                // }
-                action("Guarantor Substitution TAT")
-                {
-                    ApplicationArea = Basic;
-
-                    RunObject = report "Guarantor Substitution TAT";
-                }
-                action("Member Withdrawal TAT")
-                {
-                    ApplicationArea = Basic;
-
-                    RunObject = report "Member Withdrawal TAT";
-                }
-                action("Member Readmission TAT")
-                {
-                    ApplicationArea = Basic;
-
-                    RunObject = report "Member Readmission TAT";
-                }
-                action("Member Edit TAT")
-                {
-                    ApplicationArea = Basic;
-
-                    RunObject = report "Member Edit TAT Report";
-                }
-                // action("Membership TAT")
-                // {
-                //     ApplicationArea = Basic;
-
-                //     RunObject = report "CRM Member TAT Report ";
-                // }
-                // action("Member Commission")
-                // {
-                //     ApplicationArea = Basic;
-
-                //     RunObject = report "Member Commission";
-                // }
-
-                action("Staff Daily Transactions")
-                {
-                    ApplicationArea = Basic;
-                    RunObject = report "Staff Daily Transactions";
-                }
-            }
-
+            
         }
-        area(Reporting)
-        {
-            action("Members Portal")
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Members Portal';
-                RunObject = codeunit "Members Portal Link";
-            }
-            action("Customer Management Portal")
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Customer Management Portal';
-                RunObject = codeunit "Customer Management Portal Url";
-            }
-        }
-    }
+
+        // area(Reporting)
+        // {
+        //     action("Members Portal")
+        //     {
+        //         ApplicationArea = Basic, Suite;
+        //         Caption = 'Members Portal';
+        //         RunObject = codeunit "Members Portal Link";
+        //     }
+        //     action("Customer Management Portal")
+        //     {
+        //         ApplicationArea = Basic, Suite;
+        //         Caption = 'Customer Management Portal';
+        //         RunObject = codeunit "Customer Management Portal Url";
+        //     }
+        // }
 }
-
 profile "Audit Role Center"
 {
     Caption = 'Audit Role Center';
     RoleCenter = "Audit Role Center";
     ProfileDescription = 'Audit Role Center';
 }
-
-
 

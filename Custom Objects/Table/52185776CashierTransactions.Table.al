@@ -645,10 +645,10 @@ table 52185776 "Cashier Transactions"
         {
 
         }
-        field(50024; "Account Status"; Option)
+        field(50024; "Account Status"; Enum "Savings Account status")//Option)
         {
-            OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
-            OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+            // OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
+            // OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
             //TableRelation = "Savings Accounts" where("No." = field("Account No"));
         }
         field(50025; "Cashier Till Balance"; Decimal)
@@ -722,7 +722,8 @@ table 52185776 "Cashier Transactions"
         if No = '' then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."Cashier Transaction Nos.");
-            NoSeriesMgt.InitSeries(NoSetup."Cashier Transaction Nos.", xRec."No. Series", 0D, No, "No. Series");
+            No := NoSeriesMgt.GetNextNo(NoSetup."Cashier Transaction Nos.");
+            // NoSeriesMgt.InitSeries(NoSetup."Cashier Transaction Nos.", xRec."No. Series", 0D, No, "No. Series");
         end;
 
         Cashier := UpperCase(UserId);
@@ -777,7 +778,8 @@ table 52185776 "Cashier Transactions"
     var
         Dimension: Record "Dimension Value";
         NoSetup: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Account: Record "Savings Accounts";
         TransactionTypes: Record "Transaction Types";
         Text0001: Label 'The account is not active and therefore cannot be transacted upon.';

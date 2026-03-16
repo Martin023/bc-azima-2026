@@ -176,7 +176,8 @@ table 52186833 "Account Activation"
         if No = '' then begin
             MembNoSeries.Get;
             MembNoSeries.TestField(MembNoSeries."Account Activation");
-            NoSeriesMgt.InitSeries(MembNoSeries."Account Activation", xRec.No, 0D, No, "No. Series");
+            No := NoSeriesMgt.GetNextNo(MembNoSeries."Account Activation");
+            // NoSeriesMgt.InitSeries(MembNoSeries."Account Activation", xRec.No, 0D, No, "No. Series");
             "User Id" := UserId;
             "Activation Date" := Today;
             rec.Date := Today;
@@ -192,7 +193,8 @@ table 52186833 "Account Activation"
         Members: Record Members;
         SavingsAccounts: Record "Savings Accounts";
         MembNoSeries: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record "User Setup";
 }
 

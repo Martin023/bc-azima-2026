@@ -342,7 +342,8 @@ table 52185614 "PR Transaction Codes"
     var
         PRTransCodes: Record "PR Transaction Codes";
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         DimensionValue: Record "Dimension Value";
 }
 

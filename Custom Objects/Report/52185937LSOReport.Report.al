@@ -1192,7 +1192,7 @@ Report 52185937 "LSO Report"
         PrepmtDimSetEntry: Record "Dimension Set Entry";
         PrepmtInvBuf: Record "Prepayment Inv. Line Buffer" temporary;
         RespCenter: Record "Responsibility CenterBR";
-        Language: Record Language;
+        // Language: Record Language;
         CurrExchRate: Record "Currency Exchange Rate";
         PurchSetup: Record "Purchases & Payables Setup";
         PurchCountPrinted: Codeunit "Purch.Header-Printed";

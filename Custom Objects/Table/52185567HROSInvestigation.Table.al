@@ -92,13 +92,15 @@ table 52185567 "HR OSInvestigation"
         if "Investigation No" = '' then begin
             HrSetup.Get;
             HrSetup.TestField("Investigation Nos.");
-            NoSeriesMgt.InitSeries(HrSetup."Investigation Nos.", xRec."No. Series", 0D, "Investigation No", "No. Series");
+            "Investigation No" := NoSeriesMgt.GetNextNo(HrSetup."Incident Nos.");
+            // NoSeriesMgt.InitSeries(HrSetup."Investigation Nos.", xRec."No. Series", 0D, "Investigation No", "No. Series");
         end;
     end;
 
     var
         OSIncident: Record "HR OSIncident";
         HrSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 }
 

@@ -196,7 +196,7 @@ page 52185548 "Key Creation Card"
             {
                 ApplicationArea = Basic, Suite;
                 Caption = 'Create Key';
-                Image = CreateKey;
+                Image = Create;
                 Promoted = true;
                 PromotedCategory = Category7;
                 PromotedIsBig = true;
@@ -220,7 +220,7 @@ page 52185548 "Key Creation Card"
             {
                 ApplicationArea = Basic, Suite;
                 Caption = 'Deactivate Key';
-                Image = DeactivateKey;
+                Image = Cancel;
                 Promoted = true;
                 PromotedCategory = Category7;
                 PromotedIsBig = true;

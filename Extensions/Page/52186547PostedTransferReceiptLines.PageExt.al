@@ -55,10 +55,10 @@ PageExtension 52186547 pageextension52186547 extends "Posted Transfer Receipt Li
     }
     actions
     {
-        modify("Show Document")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Show Document")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify(Dimensions)
         {
             ApplicationArea = Basic;

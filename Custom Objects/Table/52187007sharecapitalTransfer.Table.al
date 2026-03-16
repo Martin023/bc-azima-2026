@@ -13,7 +13,8 @@ table 52187007 "Share Capital Transfer Buffer"
             var
                 myInt: Integer;
                 SeriesSetup: Record "Credit Nos. Series";
-                NoSeriesMgt: Codeunit NoSeriesManagement;
+                // NoSeriesMgt: Codeunit NoSeriesManagement;
+                NoSeriesMgt: Codeunit "No. Series";
             begin
                 if "Document No" <> xRec."Document No" then begin
                     SeriesSetup.Get;
@@ -118,11 +119,11 @@ table 52187007 "Share Capital Transfer Buffer"
             Caption = 'Global Dimension 2 Code';
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2));
         }
-        field(21; "Status"; Option)
+        field(21; "Status"; Enum "Workflow Status Main Flags")//Option)
         {
             DataClassification = ToBeClassified;
-            OptionCaption = 'Open,Pending Approval,Approved,Rejected';
-            OptionMembers = Open,Pending,Approved,Rejected;
+            // OptionCaption = 'Open,Pending Approval,Approved,Rejected';
+            // OptionMembers = Open,Pending,Approved,Rejected;
 
             trigger OnValidate()
             var
@@ -358,7 +359,8 @@ table 52187007 "Share Capital Transfer Buffer"
     var
         UserSet: Record "User Setup";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Sharecaps: Record "Share Capital Transfer Buffer";
         SubDepartments: Enum "Sub Module";
         GlobalFunctions: Codeunit "Global Functions";
@@ -369,7 +371,8 @@ table 52187007 "Share Capital Transfer Buffer"
         if "Document No" = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Share Capital Transfer No");
-            NoSeriesMgt.InitSeries(SeriesSetup."Share Capital Transfer No", xRec."No. Series", 0D, "Document No", "No. Series");
+            "Document No" := NoSeriesMgt.GetNextNo(SeriesSetup."Share Capital Transfer No");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Share Capital Transfer No", xRec."No. Series", 0D, "Document No", "No. Series");
         end;
 
         // if "Reference No" = '' then

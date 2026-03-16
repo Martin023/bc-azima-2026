@@ -111,7 +111,8 @@ table 52186509 "Sky Channels Loan Applications"
         GlobalFunctions: Codeunit "Global Functions";
 
         MembNoSeries: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         LoanProduct: Record "Product Factory";
     begin
         ExistingLoanApplications.Reset;
@@ -136,18 +137,22 @@ table 52186509 "Sky Channels Loan Applications"
             MembNoSeries.Get;
             if "Source Unit" = "Source Unit"::FOSA then begin
                 MembNoSeries.TestField(MembNoSeries."FOSA Loan Nos.");
-                NoSeriesMgt.InitSeries(MembNoSeries."FOSA Loan Nos.", xRec."No. Series", 0D, "Application No.", "No. Series");
+                "Application No." := NoSeriesMgt.GetNextNo(MembNoSeries."FOSA Loan Nos.");
+                // NoSeriesMgt.InitSeries(MembNoSeries."FOSA Loan Nos.", xRec."No. Series", 0D, "Application No.", "No. Series");
             end else
                 if "Source Unit" = "Source Unit"::"BUSINESS LOANS" then begin
                     MembNoSeries.TestField(MembNoSeries."Business Loan Nos.");
-                    NoSeriesMgt.InitSeries(MembNoSeries."Business Loan Nos.", xRec."No. Series", 0D, "Application No.", "No. Series");
+                    "Application No." := NoSeriesMgt.GetNextNo(MembNoSeries."Business Loan Nos.");
+                    // NoSeriesMgt.InitSeries(MembNoSeries."Business Loan Nos.", xRec."No. Series", 0D, "Application No.", "No. Series");
                 end else
                     if "Source Unit" = "Source Unit"::"HR LOANS" then begin
                         MembNoSeries.TestField(MembNoSeries."HR Loan Nos.");
-                        NoSeriesMgt.InitSeries(MembNoSeries."HR Loan Nos.", xRec."No. Series", 0D, "Application No.", "No. Series");
+                        "Application No." := NoSeriesMgt.GetNextNo(MembNoSeries."HR Loan Nos.");
+                        // NoSeriesMgt.InitSeries(MembNoSeries."HR Loan Nos.", xRec."No. Series", 0D, "Application No.", "No. Series");
                     end else begin
                         MembNoSeries.TestField(MembNoSeries."Loan Nos.");
-                        NoSeriesMgt.InitSeries(MembNoSeries."Loan Nos.", xRec."No. Series", 0D, "Application No.", "No. Series");
+                        "Application No." := NoSeriesMgt.GetNextNo(MembNoSeries."Loan Nos.");
+                        // NoSeriesMgt.InitSeries(MembNoSeries."Loan Nos.", xRec."No. Series", 0D, "Application No.", "No. Series");
                     end;
         end;
 

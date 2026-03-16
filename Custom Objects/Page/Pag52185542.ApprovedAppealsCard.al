@@ -640,9 +640,7 @@ page 52185542 "Approved Appeals Card"
 
 
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
         Legal: Record Legal;
-        UseLines: Boolean;
 }
 
 

@@ -402,7 +402,7 @@ page 52186010 "Posted Staff Advance Account"
         ImprestAmt: Decimal;
         DimName1: Text[60];
         DimName2: Text[60];
-        CashPaymentLine: Record "Cash Payment Line";
+        // CashPaymentLine: Record "Cash Payment Line";
         PaymentLine: Record "Staff Advance Lines";
         CurrSurrDocNo: Code[20];
         //here//JournalPostSuccessful: Codeunit "Journal Post Successful";

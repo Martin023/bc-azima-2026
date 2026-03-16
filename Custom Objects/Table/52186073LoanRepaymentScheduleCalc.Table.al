@@ -145,9 +145,6 @@ table 52186073 "Loan Repayment Schedule-Calc"
     end;
 
     var
-        NoSeriesMngnt: Codeunit NoSeriesManagement;
-        SACCOMember: Record Customer;
-        LoanCategory: Record "Loan Charges";
         LoanApp: Record Loans;
         Text001: Label 'Loan is already %1 and cannot modify';
 }

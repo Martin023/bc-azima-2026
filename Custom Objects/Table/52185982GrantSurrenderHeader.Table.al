@@ -89,11 +89,11 @@ table 52185982 "Grant Surrender Header"
         field(11; Cashier; Code[50])
         {
         }
-        field(12; "Account Type"; Option)
+        field(12; "Account Type"; Enum "Gen. Journal Account Type")//Option)
         {
             Caption = 'Account Type';
-            OptionCaption = 'G/L Account,Customer,Vendor,Bank Account,Fixed Asset,IC Partner';
-            OptionMembers = "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner";
+            // OptionCaption = 'G/L Account,Customer,Vendor,Bank Account,Fixed Asset,IC Partner';
+            // OptionMembers = "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner";
         }
         field(13; "Account No."; Code[20])
         {
@@ -592,7 +592,8 @@ table 52185982 "Grant Surrender Header"
             GenLedgerSetup.Get;
 
             GenLedgerSetup.TestField(GenLedgerSetup."Grant Surrender Nos");
-            NoSeriesMgt.InitSeries(GenLedgerSetup."Grant Surrender Nos", xRec."No. Series", 0D, No, "No. Series");
+            No := NoSeriesMgt.GetNextNo(GenLedgerSetup."Grant Surrender Nos");
+            // NoSeriesMgt.InitSeries(GenLedgerSetup."Grant Surrender Nos", xRec."No. Series", 0D, No, "No. Series");
         end;
 
         "Account Type" := "Account Type"::Customer;
@@ -624,7 +625,8 @@ table 52185982 "Grant Surrender Header"
         Vend: Record Vendor;
         FA: Record "Fixed Asset";
         BankAcc: Record "Bank Account";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         GenLedgerSetup: Record "Cash Office Setup";
         RecPayTypes: Record "Receipts and Payment Types";
         CashierLinks: Record "Cash Office User Template";

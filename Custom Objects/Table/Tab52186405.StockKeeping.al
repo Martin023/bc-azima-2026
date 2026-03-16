@@ -56,11 +56,13 @@ table 52186405 "Stock Keeping"
             if Types = Types::Stock then begin
                 InventorySetup.Get;
                 InventorySetup.TestField(InventorySetup."Stock Keeping Nos.");
-                NoSeriesMgt.InitSeries(InventorySetup."Stock Keeping Nos.", xRec."No. Series", 0D, "No", "No. Series");
+                "No" := NoSeriesMgt.GetNextNo(InventorySetup."Stock Keeping Nos.");
+                // NoSeriesMgt.InitSeries(InventorySetup."Stock Keeping Nos.", xRec."No. Series", 0D, "No", "No. Series");
             end else if Types = Types::Disposal then begin
                 InventorySetup.Get;
                 InventorySetup.TestField(InventorySetup."Disposal Nos.");
-                NoSeriesMgt.InitSeries(InventorySetup."Disposal Nos.", xRec."No. Series", 0D, "No", "No. Series");
+                "No" := NoSeriesMgt.GetNextNo(InventorySetup."Disposal Nos.");
+                // NoSeriesMgt.InitSeries(InventorySetup."Disposal Nos.", xRec."No. Series", 0D, "No", "No. Series");
 
             end;
         end;
@@ -71,5 +73,5 @@ table 52186405 "Stock Keeping"
 
     var
         InventorySetup: record "Inventory Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 }

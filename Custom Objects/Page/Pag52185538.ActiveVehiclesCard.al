@@ -184,7 +184,7 @@ page 52185538 "Active Vehicles Card"
             {
                 ApplicationArea = All;
                 Caption = 'Activate Vehicle';
-                Image = ActivateVehicle;
+                Image = Approve;
                 Promoted = true;
                 PromotedCategory = Process;
                 trigger OnAction()
@@ -208,7 +208,7 @@ page 52185538 "Active Vehicles Card"
             {
                 ApplicationArea = All;
                 Caption = 'Dectivate Vehicle';
-                Image = DeactivateVehicle;
+                Image = Stop;
                 Promoted = true;
                 PromotedCategory = Process;
                 trigger OnAction()

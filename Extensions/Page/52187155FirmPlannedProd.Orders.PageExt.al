@@ -35,52 +35,52 @@ PageExtension 52187155 pageextension52187155 extends "Firm Planned Prod. Orders"
         {
             ApplicationArea = Basic;
         }
-        modify("Starting Time")
-        {
+        // modify("Starting Time")
+        // {
 
-            //Unsupported feature: Property Modification (Name) on ""Starting Time"(Control 14)".
+        //     //Unsupported feature: Property Modification (Name) on ""Starting Time"(Control 14)".
 
-            ApplicationArea = Basic;
+        //     ApplicationArea = Basic;
 
-            //Unsupported feature: Property Modification (SourceExpr) on ""Starting Time"(Control 14)".
-
-
-            //Unsupported feature: Property Modification (Visible) on ""Starting Time"(Control 14)".
-
-        }
-        modify("Starting Date")
-        {
-
-            //Unsupported feature: Property Modification (Name) on ""Starting Date"(Control 16)".
-
-            ApplicationArea = Basic;
-
-            //Unsupported feature: Property Modification (SourceExpr) on ""Starting Date"(Control 16)".
-
-        }
-        modify("Ending Time")
-        {
-
-            //Unsupported feature: Property Modification (Name) on ""Ending Time"(Control 18)".
-
-            ApplicationArea = Basic;
-
-            //Unsupported feature: Property Modification (SourceExpr) on ""Ending Time"(Control 18)".
+        //     //Unsupported feature: Property Modification (SourceExpr) on ""Starting Time"(Control 14)".
 
 
-            //Unsupported feature: Property Modification (Visible) on ""Ending Time"(Control 18)".
+        //     //Unsupported feature: Property Modification (Visible) on ""Starting Time"(Control 14)".
 
-        }
-        modify("Ending Date")
-        {
+        // }
+        // modify("Starting Date")
+        // {
 
-            //Unsupported feature: Property Modification (Name) on ""Ending Date"(Control 20)".
+        //     //Unsupported feature: Property Modification (Name) on ""Starting Date"(Control 16)".
 
-            ApplicationArea = Basic;
+        //     ApplicationArea = Basic;
 
-            //Unsupported feature: Property Modification (SourceExpr) on ""Ending Date"(Control 20)".
+        //     //Unsupported feature: Property Modification (SourceExpr) on ""Starting Date"(Control 16)".
 
-        }
+        // }
+        // modify("Ending Time")
+        // {
+
+        //     //Unsupported feature: Property Modification (Name) on ""Ending Time"(Control 18)".
+
+        //     ApplicationArea = Basic;
+
+        //     //Unsupported feature: Property Modification (SourceExpr) on ""Ending Time"(Control 18)".
+
+
+        //     //Unsupported feature: Property Modification (Visible) on ""Ending Time"(Control 18)".
+
+        // }
+        // modify("Ending Date")
+        // {
+
+        //     //Unsupported feature: Property Modification (Name) on ""Ending Date"(Control 20)".
+
+        //     ApplicationArea = Basic;
+
+        //     //Unsupported feature: Property Modification (SourceExpr) on ""Ending Date"(Control 20)".
+
+        // }
         modify("Due Date")
         {
             ApplicationArea = Basic;

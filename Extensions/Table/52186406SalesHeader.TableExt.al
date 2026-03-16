@@ -12,11 +12,11 @@ TableExtension 52186406 tableextension52186406 extends "Sales Header"
         {
             Caption = 'Credit Card No.';
             DataClassification = ToBeClassified;
-            TableRelation = "DO Payment Credit Card" where("Customer No." = field("Bill-to Customer No."));
+            // TableRelation = "DO Payment Credit Card" where("Customer No." = field("Bill-to Customer No."));
 
             trigger OnValidate()
             var
-                DOPaymentTransLogEntry: Record "DO Payment Trans. Log Entry";
+                // DOPaymentTransLogEntry: Record "DO Payment Trans. Log Entry";
             begin
 
 

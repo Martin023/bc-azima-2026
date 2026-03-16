@@ -1843,7 +1843,8 @@ table 52185650 "HR Employees"
         if "No." = '' then begin
             HrSetup.Get;
             HrSetup.TestField("Employee Nos.");
-            NoSeriesMgt.InitSeries(HrSetup."Employee Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(HrSetup."Employee Nos.", WorkDate(), true);
+            // NoSeriesMgt.InitSeries(HrSetup."Employee Nos.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
     end;
 
@@ -1876,7 +1877,8 @@ table 52185650 "HR Employees"
         Res: Record Resource;
         PostCode: Record "Post Code";
         SalespersonPurchaser: Record "Salesperson/Purchaser";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         OK: Boolean;
         User: Record "User Setup";
         ERROR1: Label 'Employee Career History Starting Information already exist.';
@@ -1932,10 +1934,21 @@ table 52185650 "HR Employees"
     begin
         // GetHRSetup;
         HrSetup.TestField("Employee Nos.");
-        if NoSeriesMgt.SelectSeries(HrSetup."Employee Nos.", xRec."No. Series", "No. Series") then begin
-            NoSeriesMgt.SetSeries("No.");
+        if Rec."No. Series" = '' then
+            Rec."No. Series" := HrSetup."Employee Nos.";
+
+        if Rec."No. Series" <> '' then begin
+            Rec."No." := NoSeriesMgt.GetNextNo(
+                Rec."No. Series",
+                WorkDate(),
+                true
+            );
             exit(true);
         end;
+        // if NoSeriesMgt.SelectSeries(HrSetup."Employee Nos.", xRec."No. Series", "No. Series") then begin
+        //     NoSeriesMgt.SetSeries("No.");
+        //     exit(true);
+        // end;
     end;
 
     // [Scope('OnPrem')]

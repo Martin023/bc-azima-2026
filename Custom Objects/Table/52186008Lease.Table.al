@@ -340,7 +340,6 @@ table 52186008 Lease
 
             trigger OnValidate()
             var
-                DOPaymentTransLogEntry: Record "DO Payment Trans. Log Entry";
             begin
                 if not (CurrFieldNo in [0, FieldNo("Date Registered")]) or ("Currency Code" <> xRec."Currency Code") then
                     TestField(Status, Status::Open);
@@ -576,7 +575,8 @@ table 52186008 Lease
         if "No." = '' then begin
             GSetup.Get();
             GSetup.TestField(GSetup."Lease Nos.");
-            NoSeriesMgt.InitSeries(GSetup."Lease Nos.", xRec."No. Series", Today, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(GSetup."Lease Nos.");
+            // NoSeriesMgt.InitSeries(GSetup."Lease Nos.", xRec."No. Series", Today, "No.", "No. Series");
         end;
         User := UserId;
         Rec."Created at" := CurrentDateTime;
@@ -597,7 +597,8 @@ table 52186008 Lease
     end;
 
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         GSetup: Record "General Setup";
         Prop: Record "Property Details";
         Flr: Record Floor;
@@ -607,7 +608,7 @@ table 52186008 Lease
         Cust: Record Customer;
         GenSetup: Record "General Ledger Setup";
         DimVal: Record "Dimension Value";
-        BillUnits: Record "Bill Units meter Ratings";
+        // BillUnits: Record "Bill Units meter Ratings";
 
         CurrencyDate: Date;
         CurrExchRate: Record "Currency Exchange Rate";

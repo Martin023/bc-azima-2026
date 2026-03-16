@@ -231,12 +231,12 @@ page 52185727 "Member Group List"
     Var
         SavingsAccount: Record "Savings Accounts";
         BOSAAccNo: Code[20];
-        BOSAAccStatus: Option " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+        BOSAAccStatus: Enum "Savings Account Status";
         FOSAAccNo: Code[20];
-        FOSAAccStatus: Option " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+        FOSAAccStatus: Enum "Savings Account Status";
         ShareCapitalAccNo: Code[20];
-        ShareCapitalAccStatus: Option " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+        ShareCapitalAccStatus: Enum "Savings Account Status";
         GroupSavingsAccNo: Code[20];
-        GroupSavingsAccStatus: Option " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+        GroupSavingsAccStatus: Enum "Savings Account Status";
 }
 

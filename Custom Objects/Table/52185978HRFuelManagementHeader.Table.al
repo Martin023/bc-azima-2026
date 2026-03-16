@@ -229,7 +229,8 @@ table 52185978 "HR Fuel Management Header"
             begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Fueling No.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Fueling No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Fueling No.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Fueling No.", xRec."No. Series", 0D, "No.", "No. Series");
                 end;
                 Rec."Created at" := CURRENTDATETIME;
                 Rec."Created By" := UserId;
@@ -248,7 +249,8 @@ table 52185978 "HR Fuel Management Header"
     var
         FixedAsset: Record "Fixed Asset";
         HrSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         MembNoSeries: Record "Credit Nos. Series";
         CompanyVehicles: Record "Company Vehicles";
         HRDrivers: Record "HR Drivers";

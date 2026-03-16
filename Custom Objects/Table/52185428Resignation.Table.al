@@ -56,7 +56,6 @@ table 52185428 Resignation
     var
         emp: Record "HR Employees";
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
         Accounts: Record "Savings Accounts";
         Loans: Record Loans;
 }

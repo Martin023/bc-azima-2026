@@ -501,7 +501,8 @@ table 52185835 Bond
         if "Bond No." = '' then begin
             BondSetup.Get;
             BondSetup.TestField("Bond Nos.");
-            NoSeriesMgt.InitSeries(BondSetup."Bond Nos.", xRec."No. Series", 0D, "Bond No.", "No. Series");
+            "Bond No." := NoSeriesMgt.GetNextNo(BondSetup."Bond Nos.");
+            // NoSeriesMgt.InitSeries(BondSetup."Bond Nos.", xRec."No. Series", 0D, "Bond No.", "No. Series");
         end;
 
         "Created By" := UserId;
@@ -521,27 +522,51 @@ table 52185835 Bond
         Members: Record Members;
         PostCode: Record "Post Code";
         BondSetup: Record "Bond Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         BondCompany: Record "Bond Company";
         UserSetup: Record "User Setup";
         Bond: Record Bond;
         BondSecurity: Record "Bond Security";
 
     // [Scope('OnPrem')]
+    // procedure AssistEdit(OldBond: Record Bond): Boolean
+    // var
+    //     Bond: Record Bond;
+    // begin
+    //     with Bond do begin
+    //         Bond := Rec;
+    //         BondSetup.Get;
+    //         BondSetup.TestField("Bond Nos.");
+    //         if NoSeriesMgt.SelectSeries(BondSetup."Bond Nos.", OldBond."No. Series", "No. Series") then begin
+    //             NoSeriesMgt.SetSeries("Bond No.");
+    //             Rec := Bond;
+    //             exit(true);
+    //         end;
+    //     end;
+    // end;
+
     procedure AssistEdit(OldBond: Record Bond): Boolean
     var
         Bond: Record Bond;
+        NoSeries: Codeunit "No. Series";
+        BondSetup: Record "Bond Setup";
     begin
-        with Bond do begin
-            Bond := Rec;
-            BondSetup.Get;
-            BondSetup.TestField("Bond Nos.");
-            if NoSeriesMgt.SelectSeries(BondSetup."Bond Nos.", OldBond."No. Series", "No. Series") then begin
-                NoSeriesMgt.SetSeries("Bond No.");
-                Rec := Bond;
-                exit(true);
-            end;
+        Bond.Copy(Rec);
+
+        if not BondSetup.Get() then
+            Error('Bond Setup is missing.');
+
+        BondSetup.TestField("Bond Nos.");
+
+        if NoSeries.LookupRelatedNoSeries(BondSetup."Bond Nos.", OldBond."No. Series", Bond."No. Series")
+        then begin
+            Bond."Bond No." := NoSeries.GetNextNo(Bond."No. Series");
+            Rec := Bond;
+            exit(true);
         end;
+
+        exit(false);
     end;
 
     // [Scope('OnPrem')]

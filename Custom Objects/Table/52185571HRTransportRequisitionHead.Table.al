@@ -177,7 +177,8 @@ table 52185571 "HR Transport Requisition Head"
         if "Transport Request No" = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Transport Req Nos");
-            NoSeriesMgt.InitSeries(HRSetup."Transport Req Nos", xRec."No series", 0D, "Transport Request No", "No series");
+            "Transport Request No" := NoSeriesMgt.GetNextNo(HRSetup."Transport Req Nos");
+            // NoSeriesMgt.InitSeries(HRSetup."Transport Req Nos", xRec."No series", 0D, "Transport Request No", "No series");
         end;
 
         "Raised By" := UserId;
@@ -186,7 +187,8 @@ table 52185571 "HR Transport Requisition Head"
 
     var
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         HREmp: Record "HR Employees";
         Text003: Label 'UserID [%1] does not exist in [%2]';
         Dates: Codeunit "HR Codeunit2";

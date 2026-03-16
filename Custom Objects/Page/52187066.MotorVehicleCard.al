@@ -192,7 +192,7 @@ page 52187066 "Motor Vehicle Card"
             {
                 ApplicationArea = All;
                 Caption = 'Activate Vehicle';
-                Image = ActivateVehicle;
+                Image = Approve;
                 Promoted = true;
                 PromotedCategory = Process;
                 trigger OnAction()
@@ -216,7 +216,7 @@ page 52187066 "Motor Vehicle Card"
             {
                 ApplicationArea = All;
                 Caption = 'Dectivate Vehicle';
-                Image = DeactivateVehicle;
+                Image = Cancel;
                 Promoted = true;
                 PromotedCategory = Process;
                 trigger OnAction()

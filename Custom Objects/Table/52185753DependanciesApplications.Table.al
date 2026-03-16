@@ -214,7 +214,8 @@ table 52185753 "Dependancies Applications"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Dependancy Application Nos.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Dependancy Application Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Dependancy Application Nos.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Dependancy Application Nos.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         "Application Date" := Today;
@@ -389,7 +390,8 @@ table 52185753 "Dependancies Applications"
 
     var
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record "User Setup";
         GlobalFunctions: Codeunit "Global Functions";
         SubDepartment: Enum "Sub Module";

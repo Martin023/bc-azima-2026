@@ -141,7 +141,8 @@ table 52185598 "HR Succession Employee"
         if "Plan No." = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Succession Planning Nos.");
-            NoSeriesMgt.InitSeries(HRSetup."Succession Planning Nos.", xRec."No. Series", 0D, "Plan No.", "No. Series");
+            "Plan No." := NoSeriesMgt.GetNextNo(HRSetup."Succession Planning Nos.");
+            // NoSeriesMgt.InitSeries(HRSetup."Succession Planning Nos.", xRec."No. Series", 0D, "Plan No.", "No. Series");
         end;
     end;
 
@@ -149,6 +150,7 @@ table 52185598 "HR Succession Employee"
         Employee: Record "HR Employees";
         Jobs: Record "HR Jobs";
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 }
 

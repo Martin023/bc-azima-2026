@@ -626,7 +626,6 @@ page 52186100 "Legal Card Approved"
 
 
     var
-    NoSeriesMgt: Codeunit NoSeriesManagement;
     Legal: Record Legal;
 }
 

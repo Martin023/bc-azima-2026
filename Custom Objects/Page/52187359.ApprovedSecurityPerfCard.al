@@ -264,7 +264,7 @@ page 52187359 "Approved Security Perf. Card"
                 Caption = 'Discharge Security';
                 Promoted = true;
                 PromotedCategory = Process;
-                Image = Discharge;
+                Image = Delete;
                 trigger OnAction()
                 begin
 

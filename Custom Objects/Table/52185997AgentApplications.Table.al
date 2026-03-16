@@ -230,7 +230,8 @@ table 52185997 "Agent Applications.."
         if "Agent Code" = '' then begin
             NoSetup.Get;
             NoSetup.TestField(NoSetup."Account Closure");
-            NoSeriesMgt.InitSeries(NoSetup."Account Closure", xRec."No. Series", 0D, "Agent Code", "No. Series");
+            "Agent Code" := NoSeriesMgt.GetNextNo(NoSetup."Account Closure");
+            // NoSeriesMgt.InitSeries(NoSetup."Account Closure", xRec."No. Series", 0D, "Agent Code", "No. Series");
         end;
 
 
@@ -248,7 +249,8 @@ table 52185997 "Agent Applications.."
 
     var
         NoSetup: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         WithdrawLimit: Record "M-SACCO Withdrawal Limits";
         MPESAAppDetails: Record "M-SACCO Applications";
         SavingsAccounts: Record "Savings Accounts";

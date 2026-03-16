@@ -215,10 +215,10 @@ PageExtension 52185461 pageextension52185461 extends "Purchase List"
     }
     actions
     {
-        modify(Card)
-        {
-            ApplicationArea = Basic;
-        }
+        // modify(Card)
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("Purchase Reservation Avail.")
         {
             ApplicationArea = Basic;

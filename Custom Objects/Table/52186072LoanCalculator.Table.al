@@ -108,7 +108,7 @@ table 52186072 "Loan Calculator"
 
                         //Check status - sasra
                         LoanApp.CalcFields("Loans Category-SASRA");
-                        if LoanApp."Loans Category-SASRA" > GenSetup."Allowed Loan Categories" then
+                        if LoanApp."Loans Category-SASRA".AsInteger() > GenSetup."Allowed Loan Categories".AsInteger() then
                             Message(Text012, LoanApp."Loan No.");
 
                         CreditLedger.Reset;
@@ -471,7 +471,8 @@ table 52186072 "Loan Calculator"
     var
         RejectionReason: Record "Exceptions/ Rejection Reason";
         MembNoSeries: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         ProdFac: Record "Product Factory";
         SavAcc: Record "Savings Accounts";
         LoanApp: Record Loans;

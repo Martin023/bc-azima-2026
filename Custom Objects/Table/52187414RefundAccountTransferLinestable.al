@@ -147,11 +147,11 @@ table 52187414 "Refund,Account Transfer lines"
                     Rec.Validate(Rec."Product Type");
             end;
         }
-        field(21; Status; Option)
+        field(21; Status; Enum "Savings Account Status")//Option)
         {
             Editable = true;
-            OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
-            OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+            // OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
+            // OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
             trigger OnValidate()
             begin
                 //IF (Status<>Status::New) OR (Status<>Status::Closed) THEN

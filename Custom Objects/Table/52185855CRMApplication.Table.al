@@ -249,10 +249,10 @@ table 52185855 "CRM Application"
                 // "Mobile Phone No":=CountryRegion."County Phone Code";
             end;
         }
-        field(46; Gender; Option)
+        field(46; Gender; Enum "Gender")//Option)
         {
-            OptionCaption = ' ,Male,Female';
-            OptionMembers = " ",Male,Female;
+            // OptionCaption = ' ,Male,Female';
+            // OptionMembers = " ",Male,Female;
         }
         field(47; Occupation; Text[30])
         {

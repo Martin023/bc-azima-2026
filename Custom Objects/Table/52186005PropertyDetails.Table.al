@@ -351,7 +351,8 @@ table 52186005 "Property Details"
 
     var
         Vend: Record Vendor;
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         GenSetup: Record "General Ledger Setup";
         DimVal: Record "Dimension Value";
         GSetup: Record "General Setup";

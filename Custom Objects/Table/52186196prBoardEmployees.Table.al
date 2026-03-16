@@ -506,7 +506,8 @@ table 52186196 "Board members"
         if "No." = '' then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."Board PVs No.");
-            NoSeriesMgt.InitSeries(NoSetup."Board PVs No.", xRec."No.", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(NoSetup."Board PVs No.");
+            // NoSeriesMgt.InitSeries(NoSetup."Board PVs No.", xRec."No.", 0D, "No.", "No. Series");
         end;
 
     end;
@@ -529,7 +530,8 @@ table 52186196 "Board members"
         Ded: Record "prBoard Deductions";
         Amount: Decimal;
         NoSetup: Record "Cash Office Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         members: Record Members;
         ProductFactory: Record "Product Factory";
         Loans: Record Loans;

@@ -133,7 +133,8 @@ table 52185681 "Dividends Provision Header"
         if "No." = '' then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."Dividend Rate No.");
-            NoSeriesMgt.InitSeries(NoSetup."Dividend Rate No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(NoSetup."Dividend Rate No.");
+            // NoSeriesMgt.InitSeries(NoSetup."Dividend Rate No.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         Cashier := UserId;
@@ -150,7 +151,8 @@ table 52185681 "Dividends Provision Header"
     end;
 
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record "User Setup";
         NoSetup: Record "Credit Nos. Series";
         CUST: Record Customer;

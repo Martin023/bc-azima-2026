@@ -119,7 +119,8 @@ table 52187376 "Parking List Table"
         if "No" = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Parking Creation No.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Parking Creation No.", xRec."No. Series", 0D, "No", "No. Series");
+            "No" := NoSeriesMgt.GetNextNo(SeriesSetup."Parking Creation No.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Parking Creation No.", xRec."No. Series", 0D, "No", "No. Series");
         end;
         Rec."Created At" := Today;
         Rec."Created By" := UserId;
@@ -139,7 +140,7 @@ table 52187376 "Parking List Table"
     end;
 
     var
-    NoSeriesMgt: Codeunit NoSeriesManagement;
+    NoSeriesMgt: Codeunit "No. Series";
     XValue: code[50];
     RecordID: Code[50];
     SeriesSetup: Record "Credit Nos. Series";

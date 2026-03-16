@@ -321,8 +321,5 @@ page 52187092 "System Reversal Card"
         OpenApprovalEntriesExistForCurrUser: Boolean;
         OpenApprovalEntriesExist: Boolean;
         PageEitable: Boolean;
-        RecRef: RecordRef;
-        NoSeriesMgt: Codeunit NoSeriesManagement;
-        CreditNoSeries: Record "Credit Nos. Series";
         AllowPost: Boolean;
 }

@@ -335,7 +335,7 @@ PageExtension 52187135 pageextension52187135 extends "Sales Order List"
         {
             ApplicationArea = Basic;
         }
-        modify(Statistics)
+        modify(SalesOrderStatistics)
         {
             ApplicationArea = Basic;
 

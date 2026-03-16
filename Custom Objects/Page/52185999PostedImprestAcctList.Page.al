@@ -161,7 +161,7 @@ page 52185999 "Posted Imprest Acct. List"
         ImprestAmt: Decimal;
         DimName1: Text[60];
         DimName2: Text[60];
-        CashPaymentLine: Record "Cash Payment Line";
+        // CashPaymentLine: Record "Cash Payment Line";
         PaymentLine: Record "Imprest Lines";
         CurrSurrDocNo: Code[20];
         JournalPostSuccessful: Codeunit "Journal Post Successful";

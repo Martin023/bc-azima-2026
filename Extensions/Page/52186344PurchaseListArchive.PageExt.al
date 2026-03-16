@@ -218,10 +218,10 @@ PageExtension 52186344 pageextension52186344 extends "Purchase List Archive"
     }
     actions
     {
-        modify(Card)
-        {
-            ApplicationArea = Basic;
-        }
+        // modify(Card)
+        // {
+        //     ApplicationArea = Basic;
+        // }
 
         //Unsupported feature: Property Deletion (ToolTipML) on "Card(Action 64)".
 

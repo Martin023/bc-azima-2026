@@ -213,7 +213,7 @@ table 52185972 "Bank Acc. Statement Line"
             //    
             // end;
         }
-        field(50; "Match Confidence"; Option)
+        field(50; "Match Confidence"; Enum "Bank Rec. Match Confidence")
         {
             CalcFormula = Max("Applied Payment Entry"."Match Confidence" WHERE("Statement Type" = FIELD("Statement Type"),
                                                                                 "Bank Account No." = FIELD("Bank Account No."),
@@ -223,8 +223,8 @@ table 52185972 "Bank Acc. Statement Line"
             Editable = false;
             FieldClass = FlowField;
             InitValue = "None";
-            OptionCaption = 'None,Low,Medium,High,High - Text-to-Account Mapping,Manual,Accepted';
-            OptionMembers = "None",Low,Medium,High,"High - Text-to-Account Mapping",Manual,Accepted;
+            // OptionCaption = 'None,Low,Medium,High,High - Text-to-Account Mapping,Manual,Accepted';
+            // OptionMembers = "None",Low,Medium,High,"High - Text-to-Account Mapping",Manual,Accepted;
         }
         field(51; "Match Quality"; Integer)
         {

@@ -130,12 +130,14 @@ table 52185895 "Payments Header Board"
             NoSetup.Get();
             if "Payment Type" = "Payment Type"::Board then begin
                 NoSetup.TestField(NoSetup."Board PVs Nos.");
-                NoSeriesMgt.InitSeries(NoSetup."Board PVs Nos.", xRec."No. Series", 0D, "Transaction No.", "No. Series");
+                "Transaction No." := NoSeriesMgt.GetNextNo(NoSetup."Board PVs Nos.");
+                // NoSeriesMgt.InitSeries(NoSetup."Board PVs Nos.", xRec."No. Series", 0D, "Transaction No.", "No. Series");
             end
             else
                 if "Payment Type" = "Payment Type"::Staff then begin
                     NoSetup.TestField(NoSetup."Staff PVs Nos");
-                    NoSeriesMgt.InitSeries(NoSetup."Staff PVs Nos", xRec."No. Series", 0D, "Transaction No.", "No. Series");
+                    "Transaction No." := NoSeriesMgt.GetNextNo(NoSetup."Staff PVs Nos");
+                    // NoSeriesMgt.InitSeries(NoSetup."Staff PVs Nos", xRec."No. Series", 0D, "Transaction No.", "No. Series");
                 end
         end;
 
@@ -163,7 +165,8 @@ table 52185895 "Payments Header Board"
     var
         Cust: Record Members;
         NoSetup: Record "Cash Office Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         BOSARcpt: Record "Receipts and Payment Types";
         GLAcct: Record "G/L Account";
         UserSetup: Record "User Setup";

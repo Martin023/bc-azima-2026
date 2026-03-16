@@ -198,7 +198,8 @@ table 52187364 "Key Request Table"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Key Request No.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Key Request No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Key Request No.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Key Request No.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
         Rec."Created at" := CURRENTDATETIME;
         Rec."Created By" := UserId;
@@ -217,7 +218,8 @@ table 52187364 "Key Request Table"
 
     var
         seriessetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         HREmployees: Record "HR Employees";
         OfficeKeysList: Record "Office Keys List";
         UserSetup : Record "User Setup";

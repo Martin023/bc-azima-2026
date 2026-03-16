@@ -259,7 +259,7 @@ page 52186576 "HR Disciplinary Case Card N"
                 Caption = 'HR Disciplinary Cases Factbox';
                 SubPageLink = "Case Number" = FIELD("Case Number");
             }
-            part("Attached Documents"; "Document Attachment Factbox")
+            part("Attached Documents"; "Doc. Attachment List Factbox")//"Document Attachment Factbox")
             {
                 ApplicationArea = All;
                 Caption = 'Attachments';

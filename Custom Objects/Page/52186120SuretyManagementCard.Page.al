@@ -228,7 +228,7 @@ page 52186120 "Surety Management Card"
         }
         area(FactBoxes)
         {
-            part("Attached Documents"; "Document Attachment Factbox")
+            part("Attached Documents"; "Doc. Attachment List Factbox")//"Document Attachment Factbox")
             {
                 ApplicationArea = All;
                 Caption = 'Attachments';

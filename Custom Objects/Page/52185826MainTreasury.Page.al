@@ -33,10 +33,13 @@ page 52185826 "Main Treasury"
             group("Treasury View")
             {
                 Caption = 'Treasury View';
-                chartpart(TRS00001; TRS00001)
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // chartpart(TRS00001; TRS00001)
+                // {
+                //     Application
+                // part(TreasuryOverview; "Main Treasury Cues")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
             }
         }
     }

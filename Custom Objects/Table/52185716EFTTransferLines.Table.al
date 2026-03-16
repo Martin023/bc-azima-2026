@@ -314,7 +314,8 @@ table 52185716 "RTGS Transfer Lines"
         if No = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."EFT Line Nos");
-            NoSeriesMgt.InitSeries(SeriesSetup."EFT Line Nos", xRec."No. Series", 0D, No, "No. Series");
+            No := NoSeriesMgt.GetNextNo(SeriesSetup."EFT Line Nos");
+            // NoSeriesMgt.InitSeries(SeriesSetup."EFT Line Nos", xRec."No. Series", 0D, No, "No. Series");
         end;
         EFTHeader.Reset();
         EFTHeader.setrange("No.", rec.No);
@@ -353,7 +354,8 @@ table 52185716 "RTGS Transfer Lines"
 
     var
         SeriesSetup: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         BankCodes: Record "Bank Code Structure";
         TransType: Record "Transaction Types";
         TransactionCharges: Record "Transaction Charges";

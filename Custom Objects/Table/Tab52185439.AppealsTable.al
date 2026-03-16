@@ -459,7 +459,8 @@ table 52185439 "Appeals Table"
     begin
         if "No." = '' then begin
             MembNoSeries.Get;
-            NoSeriesMgt.InitSeries(MembNoSeries."Appeal No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(MembNoSeries."Appeal No.");
+            // NoSeriesMgt.InitSeries(MembNoSeries."Appeal No.", xRec."No. Series", 0D, "No.", "No. Series");
             // GenLedgerSetup.Get;
             // NoSeriesMgt.InitSeries(GenLedgerSetup."Case Number", xRec."No. Series", 0D, "Case Number", "No. Series");
         end;
@@ -483,7 +484,8 @@ table 52185439 "Appeals Table"
     var
         Emp: Record "HR Employees";
         GenLedgerSetup: Record "Cash Office Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Vend: Record Vendor;
         Cust: Record Customer;
         Memb: Record Members;

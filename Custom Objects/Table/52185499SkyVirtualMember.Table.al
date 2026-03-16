@@ -137,7 +137,7 @@ table 52185499 "Sky Virtual Member"
     var
         Customer: Record Customer;
         SaleSetp: Record "Sales & Receivables Setup";
-        NosMngtSet: Codeunit NoSeriesManagement;
+        // NosMngtSet: Codeunit NoSeriesManagement;
         "No. Series": Record Customer;
 }
 

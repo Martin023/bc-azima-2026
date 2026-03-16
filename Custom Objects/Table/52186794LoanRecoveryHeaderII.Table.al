@@ -27,7 +27,8 @@ table 52186794 "Loan Recovery Header II"
                 if "No." = '' then begin
                     CreditNosSeries.Get;
                     CreditNosSeries.TestField(CreditNosSeries."Loan Recovery II");
-                    NoSeriesMgt.InitSeries(CreditNosSeries."Loan Recovery II", xRec."No. Series", 0D, "No.", "No. Series");
+                    "No." := NoSeriesMgt.GetNextNo(CreditNosSeries."Loan Recovery II");
+                    // NoSeriesMgt.InitSeries(CreditNosSeries."Loan Recovery II", xRec."No. Series", 0D, "No.", "No. Series");
                 end;
 
                 CalcFields(Name);
@@ -345,7 +346,8 @@ table 52186794 "Loan Recovery Header II"
         if "No." = '' then begin
             CreditNosSeries.Get;
             CreditNosSeries.TestField(CreditNosSeries."Loan Recovery II");
-            NoSeriesMgt.InitSeries(CreditNosSeries."Loan Recovery II", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(CreditNosSeries."Loan Recovery II");
+            // NoSeriesMgt.InitSeries(CreditNosSeries."Loan Recovery II", xRec."No. Series", 0D, "No.", "No. Series");
         end;
         "Entered By" := UserId;
         GeneralSetUp.Get;
@@ -701,7 +703,8 @@ table 52186794 "Loan Recovery Header II"
     var
         ProductFactory: Record "Product Factory";
         CreditNosSeries: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Members: Record Members;
         Loans: Record Loans;
         SavingsAccounts: Record "Savings Accounts";

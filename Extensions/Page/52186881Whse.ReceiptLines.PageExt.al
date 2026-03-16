@@ -166,10 +166,10 @@ PageExtension 52186881 pageextension52186881 extends "Whse. Receipt Lines"
     }
     actions
     {
-        modify("Show &Whse. Document")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Show &Whse. Document")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("&Show Source Document Line")
         {
             ApplicationArea = Basic;

@@ -132,7 +132,8 @@ table 52185764 "Welfare Advance"
         if No = '' then begin
             HrSetup.Get();
             HrSetup.TestField(HrSetup."Welfare Advance No.");
-            NoSeriesMgt.InitSeries(HrSetup."Welfare Advance No.", xRec."No. Series", 0D, No, "No. Series");
+            No := NoSeriesMgt.GetNextNo(HrSetup."Welfare Advance No.");
+            // NoSeriesMgt.InitSeries(HrSetup."Welfare Advance No.", xRec."No. Series", 0D, No, "No. Series");
         end;
 
         "User ID" := UpperCase(UserId);
@@ -158,7 +159,7 @@ table 52185764 "Welfare Advance"
 
     var
         HrSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Employee: record "HR Employees";
         UserSetUp: record "User Setup";
         ProdFac:record "Product Factory";

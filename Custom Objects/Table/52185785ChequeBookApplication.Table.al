@@ -216,7 +216,8 @@ table 52185785 "Cheque Book Application"
         if "No." = '' then begin
             SalesSetup.Get;
             SalesSetup.TestField(SalesSetup."Cheque Application Nos");
-            Noseriesmgt.InitSeries(SalesSetup."Cheque Application Nos", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SalesSetup."Cheque Application Nos");
+            // Noseriesmgt.InitSeries(SalesSetup."Cheque Application Nos", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         "Application Date" := Today;
@@ -242,7 +243,8 @@ table 52185785 "Cheque Book Application"
 
     var
         Vend: Record "Savings Accounts";
-        Noseriesmgt: Codeunit NoSeriesManagement;
+        // Noseriesmgt: Codeunit NoSeriesManagement;
+        Noseriesmgt: Codeunit "No. Series";
         SalesSetup: Record "Banking No Setup";
         acctypes: Record "Product Factory";
         LASTNUMBER: Code[60];

@@ -1905,10 +1905,12 @@ table 52185700 Members
             SeriesSetup.Get;
             if Rec."Account Type" = Rec."Account Type"::"Single Member Account" then begin
                 SeriesSetup.TestField(SeriesSetup."Member Nos.");
-                NoSeriesMgt.InitSeries(SeriesSetup."Member Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+                "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Member Nos.", 0D, false);
+                // NoSeriesMgt.InitSeries(SeriesSetup."Member Nos.", xRec."No. Series", 0D, "No.", "No. Series");
             end else begin
                 SeriesSetup.TestField(SeriesSetup."Group Account Nos");
-                NoSeriesMgt.InitSeries(SeriesSetup."Group Account Nos", xRec."No. Series", 0D, "No.", "No. Series");
+                "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Member Nos.", 0D, false);
+                // NoSeriesMgt.InitSeries(SeriesSetup."Group Account Nos", xRec."No. Series", 0D, "No.", "No. Series");
             end;
         end;
 
@@ -1950,7 +1952,7 @@ table 52185700 Members
 
     var
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         SavingAccounts: Record "Savings Accounts";
         CreditAccounts: Record "Credit Accounts";
         CountryRegion: Record "Country/Region";

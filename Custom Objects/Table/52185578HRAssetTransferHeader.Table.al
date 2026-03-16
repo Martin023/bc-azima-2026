@@ -138,7 +138,8 @@ table 52185578 "HR Asset Transfer Header"
         if "No." = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Employee Asset Transfer No.");
-            NoSeriesMgt.InitSeries(HRSetup."Employee Asset Transfer No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(HRSetup."Employee Asset Transfer No.");
+            // NoSeriesMgt.InitSeries(HRSetup."Employee Asset Transfer No.", xRec."No. Series", 0D, "No.", "No. Series");
             "Document Date" := Today;
             "Raised by" := UserId;
         end;
@@ -148,7 +149,8 @@ table 52185578 "HR Asset Transfer Header"
         fasetup: Record "FA Setup";
         Employees: Record "HR Employees";
         fasset: Record "Fixed Asset";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         DimValue: Record "Dimension Value";
         EmployeeAssets: Record "Misc. Article Information";
         HRSetup: Record "HR Setup";

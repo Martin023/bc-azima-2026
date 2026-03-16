@@ -100,7 +100,8 @@ table 52185530 "HR Leave Carry Allocation"
         if "Application Code" = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Leave Carry Over App Nos.");
-            NoSeriesMgt.InitSeries(HRSetup."Leave Carry Over App Nos.", xRec."No series", 0D, "Application Code", "No series");
+            "Application Code" := NoSeriesMgt.GetNextNo(HRSetup."Leave Carry Over App Nos.");
+            // NoSeriesMgt.InitSeries(HRSetup."Leave Carry Over App Nos.", xRec."No series", 0D, "Application Code", "No series");
         end;
         //GET APPLICANT DETAILS FROM HR EMPLOYEES TABLE AND COPY THEM TO THE LEAVE APPLICATION TABLE
         HREmp.Reset;
@@ -139,7 +140,8 @@ table 52185530 "HR Leave Carry Allocation"
 
     var
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        noSeriesMgt: Codeunit "No. Series";
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
         UserSetup: Record "User Setup";
         HREmp: Record "HR Employees";
         varDaysApplied: Integer;

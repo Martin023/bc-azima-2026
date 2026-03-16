@@ -277,11 +277,13 @@ table 52185783 "Salary Header"
             NoSetup.Get();
             if Rec."Income Type" = Rec."Income Type"::SAYE then begin
                 NoSetup.TestField(NoSetup."Refunds No.");
-                NoSeriesMgt.InitSeries(NoSetup."Refunds No.", xRec."No. Series", 0D, No, "No. Series");
+                No := NoSeriesMgt.GetNextNo(NoSetup."Refunds No.");
+                // NoSeriesMgt.InitSeries(NoSetup."Refunds No.", xRec."No. Series", 0D, No, "No. Series");
             end
             else begin
                 NoSetup.TestField(NoSetup."Salary Nos.");
-                NoSeriesMgt.InitSeries(NoSetup."Salary Nos.", xRec."No. Series", 0D, No, "No. Series");
+                No := NoSeriesMgt.GetNextNo(NoSetup."Salary Nos.");
+                // NoSeriesMgt.InitSeries(NoSetup."Salary Nos.", xRec."No. Series", 0D, No, "No. Series");
             end;
         end;
 
@@ -305,7 +307,8 @@ table 52185783 "Salary Header"
 
     var
         NoSetup: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         "GL Account": Record "G/L Account";
         BANKACC: Record "Bank Account";
         cust: Record Customer;

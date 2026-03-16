@@ -48,7 +48,7 @@ table 52187421 "Product Variations"
                 end;
                 Productva.Reset();
                 Productva.SetRange(Productva."Member No.", Rec."Member No.");
-                Productva.SetFilter(Status, '%1|%2', Productva.Status::Open, Productva.Status::"Pending Approval");
+                Productva.SetFilter(Status, '%1|%2', Productva.Status::Open, Productva.Status::"Pending");
                 Productva.SetRange("Variation Type", Rec."Variation Type");
                 if Productva.FindFirst() then begin
                     if Productva."No." <> Rec."No." then begin
@@ -91,10 +91,10 @@ table 52187421 "Product Variations"
         {
 
         }
-        field(25; Status; Option)
+        field(25; Status; Enum "Workflow Status Main Flags") //Option)
 
         {
-            OptionMembers = Open,"Pending Approval",Approved,Rejected,Cancelled;
+            // OptionMembers = Open,"Pending Approval",Approved,Rejected,Cancelled;
             Editable = False;
             // trigger OnValidate() begin
             //     if Status=Status::Approved then begin
@@ -586,7 +586,8 @@ table 52187421 "Product Variations"
             if "No." = '' then begin
                 NoSetup.Get();
                 NoSetup.TestField(NoSetup."Variations");
-                NoSeriesMgt.InitSeries(NoSetup."Variations", NoSetup."Variations", 0D, "No.", "No. Series");
+                "No." := NoSeriesMgt.GetNextNo(NoSetup."Variations");
+                // NoSeriesMgt.InitSeries(NoSetup."Variations", NoSetup."Variations", 0D, "No.", "No. Series");
                 // "No." := NoSeriesCU.GetNextNo(NoSetup."Variations");
 
             end;
@@ -595,7 +596,7 @@ table 52187421 "Product Variations"
             if "No." = '' then begin
                 NoSetup.Get();
                 NoSetup.TestField(NoSetup."Savings Variations");
-                NoSeriesMgt.InitSeries(NoSetup."Savings Variations", NoSetup."Savings Variations", 0D, "No.", "No. Series");
+                // NoSeriesMgt.InitSeries(NoSetup."Savings Variations", NoSetup."Savings Variations", 0D, "No.", "No. Series");
                 // "No." := NoSeriesCU.GetNextNo(NoSetup."Savings Variations");
             end;
         end;
@@ -706,7 +707,8 @@ table 52187421 "Product Variations"
                 if "No." = '' then begin
                     NoSetup.Get();
                     NoSetup.TestField(NoSetup."Variations");
-                    NoSeriesMgt.InitSeries(NoSetup."Variations", NoSetup."Variations", 0D, "No.", "No. Series");
+                    "No." := NoSeriesMgt.GetNextNo(NoSetup."Variations");
+                    // NoSeriesMgt.InitSeries(NoSetup."Variations", NoSetup."Variations", 0D, "No.", "No. Series");
                     // "No." := NoSeriesCU.GetNextNo(NoSetup."Variations");
                 end;
             end;
@@ -714,7 +716,8 @@ table 52187421 "Product Variations"
                 if "No." = '' then begin
                     NoSetup.Get();
                     NoSetup.TestField(NoSetup."Savings Variations");
-                    NoSeriesMgt.InitSeries(NoSetup."Savings Variations", NoSetup."Savings Variations", 0D, "No.", "No. Series");
+                    "No." := NoSeriesMgt.GetNextNo(NoSetup."Savings Variations");
+                    // NoSeriesMgt.InitSeries(NoSetup."Savings Variations", NoSetup."Savings Variations", 0D, "No.", "No. Series");
                     // "No." := NoSeriesCU.GetNextNo(NoSetup."Savings Variations");
                 end;
             end;
@@ -813,7 +816,8 @@ table 52187421 "Product Variations"
     var
         NoSetup: Record "Credit Nos. Series";
         SkySendEmail: Codeunit "Sky Send Email";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         members: Record Members;
         ProductFactory: Record "Product Factory";
         Loans: Record Loans;

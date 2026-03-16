@@ -55,10 +55,10 @@ PageExtension 52186546 pageextension52186546 extends "Posted Transfer Shipment L
     }
     actions
     {
-        modify("Show Document")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Show Document")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify(Dimensions)
         {
             ApplicationArea = Basic;

@@ -208,7 +208,8 @@ table 52186157 "HR Company Activities"
         if Code = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Company Activities");
-            NoSeriesMgt.InitSeries(HRSetup."Company Activities", xRec."No. Series", 0D, Code, "No. Series");
+            Code := NoSeriesMgt.GetNextNo(HRSetup."Company Activities");
+            // NoSeriesMgt.InitSeries(HRSetup."Company Activities", xRec."No. Series", 0D, Code, "No. Series");
         end;
         if UserSetup.get(UserId) then begin
             "Global Dimension 1 Code":=UserSetup."Global Dimension 1 Code";
@@ -224,7 +225,8 @@ table 52186157 "HR Company Activities"
         Text001: Label 'Replace existing attachment?';
         Text002: Label 'You have canceled the import process.';
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         HREmp: Record "HR Employees";
         EmpName: Text;
 }

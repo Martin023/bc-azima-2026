@@ -47,10 +47,10 @@ PageExtension 52186656 pageextension52186656 extends "Service Document Registers
     }
     actions
     {
-        modify(Card)
-        {
-            ApplicationArea = Basic;
-        }
+        // modify(Card)
+        // {
+        //     ApplicationArea = Basic;
+        // }
 
         //Unsupported feature: Property Deletion (ToolTipML) on "Card(Action 14)".
 

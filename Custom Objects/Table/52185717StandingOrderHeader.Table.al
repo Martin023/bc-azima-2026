@@ -408,7 +408,8 @@ table 52185717 "Standing Order Header"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Standing Order Nos.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Standing Order Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Standing Order Nos.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Standing Order Nos.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         "Application Date" := Today;
@@ -429,7 +430,8 @@ table 52185717 "Standing Order Header"
 
     var
         SeriesSetup: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         StndingOrders: Record "Standing Order Header";
         Account: Record "Savings Accounts";
         BankAcc: Record "Bank Account";

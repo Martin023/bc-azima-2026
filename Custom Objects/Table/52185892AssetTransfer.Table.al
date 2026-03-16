@@ -249,7 +249,8 @@ table 52185892 "Asset Transfer"
         if "No." = '' then begin
             FASetup.Get;
             FASetup.TestField("Asset Transfer Nos.");
-            NoSeriesMgt.InitSeries(FASetup."Asset Transfer Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(FASetup."Asset Transfer Nos.");
+            // NoSeriesMgt.InitSeries(FASetup."Asset Transfer Nos.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
         "Raised By" := UserId;
     end;
@@ -259,7 +260,8 @@ table 52185892 "Asset Transfer"
         DimVal: Record "Dimension Value";
         HREmployees: Record "HR Employees";
         FASetup: Record "FA Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         FATranserLines: record "Asset Transfer Line";
 }
 

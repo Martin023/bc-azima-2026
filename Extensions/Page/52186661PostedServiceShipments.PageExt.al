@@ -257,7 +257,7 @@ PageExtension 52186661 pageextension52186661 extends "Posted Service Shipments"
     }
     actions
     {
-        modify(Statistics)
+        modify(ServiceStatistics)
         {
             ApplicationArea = Basic;
         }

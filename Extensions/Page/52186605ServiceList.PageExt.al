@@ -142,10 +142,10 @@ PageExtension 52186605 pageextension52186605 extends "Service List"
     }
     actions
     {
-        modify(Card)
-        {
-            ApplicationArea = Basic;
-        }
+        // modify(Card)
+        // {
+        //     ApplicationArea = Basic;
+        // }
 
         //Unsupported feature: Property Deletion (ToolTipML) on "Card(Action 29)".
 

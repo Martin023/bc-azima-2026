@@ -338,7 +338,7 @@ page 52187408 "Business Loans Members"
             action("Member Statement[ Historical ]")
             {
                 ApplicationArea = Basic, Suite;
-                Image = customer;
+                Image = Customer;
                 Promoted = true;
                 PromotedCategory = "Report";
 

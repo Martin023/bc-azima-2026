@@ -10,7 +10,8 @@ table 52185561 "HR OSAccident"
         {
         trigger OnValidate()
         var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
             begin
                 if "Accident No." <> xRec."Accident No." then begin
                     MembNoSeries.Get;
@@ -195,13 +196,15 @@ table 52185561 "HR OSAccident"
         var
         UserSetup: Record "User Setup";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
     
     begin
             if "Accident No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Accident No.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Accident No.", xRec."No. Series", 0D, "Accident No.", "No. Series");
+            "Accident No." := NoSeriesMgt.GetNextNo(SeriesSetup."Accident No.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Accident No.", xRec."No. Series", 0D, "Accident No.", "No. Series");
             end;
             Rec."Created at" := CURRENTDATETIME;
             Rec."Created By" := UserId;
@@ -221,7 +224,8 @@ table 52185561 "HR OSAccident"
 
 var
 MembNoSeries: Record "Credit Nos. Series";
-NoSeriesMgt: Codeunit NoSeriesManagement;
+// NoSeriesMgt: Codeunit NoSeriesManagement;
+NoSeriesMgt: Codeunit "No. Series";
 HRDrivers: Record "HR Drivers";
 CompanyVehicles: Record "Company Vehicles";
 SingleCollisionVisible : Boolean;

@@ -539,14 +539,16 @@ table 52185881 "InterBank Transfers"
             GenLedgerSetup.Get;
             //GenLedgerSetup.TESTFIELD(GenLedgerSetup."InterBank Transfer No.");
             TestNoSeries;
-            NoSeriesMgt.InitSeries(GetNoSeriesCode, xRec."No. Series", 0D, No, "No. Series");
-            //NoSeriesMgt.InitSeries(GenLedgerSetup."InterBank Transfer No.",xRec."No. Series",0D,No,"No. Series");
+            No := NoSeriesMgt.GetNextNo(GetNoSeriesCode());
+            // NoSeriesMgt.InitSeries(GetNoSeriesCode, xRec."No. Series", 0D, No, "No. Series");
+            //this was commented //NoSeriesMgt.InitSeries(GenLedgerSetup."InterBank Transfer No.",xRec."No. Series",0D,No,"No. Series");
         end;
     end;
 
     var
         GenLedgerSetup: Record "Cash Office Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         TempBatch: Record "Cash Office User Template";
         BankAcc: Record "Bank Account";
         DimVal: Record "Dimension Value";

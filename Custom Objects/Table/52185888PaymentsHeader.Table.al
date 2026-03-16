@@ -358,9 +358,9 @@ table 52185888 "Payments Header"
             CalcFormula = Sum("Payment Line"."NetAmount LCY" WHERE(No = FIELD("No.")));
             FieldClass = FlowField;
         }
-        field(80; "Document Type"; Option)
+        field(80; "Document Type"; Enum "Approval Document Type")//Option)
         {
-            OptionMembers = "Payment Voucher","Petty Cash","Cash Purchase";
+            // OptionMembers = "Payment Voucher","Petty Cash","Cash Purchase";
         }
         field(81; "Shortcut Dimension 3 Code"; Code[20])
         {
@@ -687,22 +687,26 @@ table 52185888 "Payments Header"
             GenLedgerSetup.Get;
             if "Payment Type" = "Payment Type"::Normal then begin
                 GenLedgerSetup.TestField(GenLedgerSetup."Normal Payments No");
-                NoSeriesMgt.InitSeries(GenLedgerSetup."Normal Payments No", xRec."No. Series", 0D, "No.", "No. Series");
+                   "No." := NoSeriesMgt.GetNextNo(GenLedgerSetup."Normal Payments No");
+                // NoSeriesMgt.InitSeries(GenLedgerSetup."Normal Payments No", xRec."No. Series", 0D, "No.", "No. Series");
             end
 
             else
                 if "Payment Type" = "Payment Type"::Express then begin
                     GenLedgerSetup.TestField(GenLedgerSetup."Board PVs Nos.");
-                    NoSeriesMgt.InitSeries(GenLedgerSetup."Board PVs Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+                    "No." := NoSeriesMgt.GetNextNo(GenLedgerSetup."Board PVs Nos.");
+                    // NoSeriesMgt.InitSeries(GenLedgerSetup."Board PVs Nos.", xRec."No. Series", 0D, "No.", "No. Series");
                 end
                 else
                     if "Payment Type" = "Payment Type"::"Cash Purchase" then begin
                         GenLedgerSetup.TestField(GenLedgerSetup."Cash Purchases");
-                        NoSeriesMgt.InitSeries(GenLedgerSetup."Cash Purchases", xRec."No. Series", 0D, "No.", "No. Series");
+                        "No." := NoSeriesMgt.GetNextNo(GenLedgerSetup."Cash Purchases");
+                        // NoSeriesMgt.InitSeries(GenLedgerSetup."Cash Purchases", xRec."No. Series", 0D, "No.", "No. Series");
                     end else
                         if "Payment Type" = "Payment Type"::"Benevolent Claim" then begin
                             GenLedgerSetup.TestField("Benevolent Claim Nos");
-                            NoSeriesMgt.InitSeries(GenLedgerSetup."Benevolent Claim Nos", xRec."No. Series", 0D, "No.", "No. Series");
+                            "No." := NoSeriesMgt.GetNextNo(GenLedgerSetup."Benevolent Claim Nos");
+                            // NoSeriesMgt.InitSeries(GenLedgerSetup."Benevolent Claim Nos", xRec."No. Series", 0D, "No.", "No. Series");
 
                             UserTemp.Get(UserId);
                             UserTemp.TestField("Responsibility Centre");
@@ -715,7 +719,8 @@ table 52185888 "Payments Header"
 
                         end else begin
                             GenLedgerSetup.TestField(GenLedgerSetup."Petty Cash Payments No");
-                            NoSeriesMgt.InitSeries(GenLedgerSetup."Petty Cash Payments No", xRec."No. Series", 0D, "No.", "No. Series");
+                            "No." := NoSeriesMgt.GetNextNo(GenLedgerSetup."Petty Cash Payments No");
+                            // NoSeriesMgt.InitSeries(GenLedgerSetup."Petty Cash Payments No", xRec."No. Series", 0D, "No.", "No. Series");
                         end;
 
         end;
@@ -767,7 +772,8 @@ table 52185888 "Payments Header"
         Vend: Record Vendor;
         FA: Record "Fixed Asset";
         BankAcc: Record "Bank Account";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         GenLedgerSetup: Record "Cash Office Setup";
         RecPayTypes: Record "Receipts and Payment Types";
         GLAccount: Record "G/L Account";

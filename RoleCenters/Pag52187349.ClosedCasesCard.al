@@ -607,7 +607,8 @@ page 52187349 "Closed Cases Card"
     end;
 
     var
-    NoSeriesMgt: Codeunit NoSeriesManagement;
+    // NoSeriesMgt: Codeunit NoSeriesManagement;
+    NoSeriesMgt: Codeunit "No. Series";
     Legal: Record Legal;
 }
 

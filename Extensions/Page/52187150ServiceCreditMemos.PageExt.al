@@ -149,7 +149,7 @@ PageExtension 52187150 pageextension52187150 extends "Service Credit Memos"
     }
     actions
     {
-        modify(Statistics)
+        modify(ServiceStatistics)
         {
             ApplicationArea = Basic;
         }

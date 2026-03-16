@@ -23,7 +23,10 @@ page 52187344 "Closed vehicles"
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                     trigger OnValidate() begin
-                    NoSeriesMgt.InitSeries('VEHICLE', XValue, 0D, RecordID, Rec."No. Series");
+                    // NoSeriesMgt.InitSeries('VEHICLE', XValue, 0D, RecordID, Rec."No. Series");
+
+                    RecordID := NoSeriesMgt.GetNextNo('VEHICLE');
+
                     Vehicle."No." := RecordID;
                     end;
                 }
@@ -62,7 +65,7 @@ page 52187344 "Closed vehicles"
     {
     }
     var
-    NoSeriesMgt: Codeunit NoSeriesManagement;
+    NoSeriesMgt: Codeunit "No. Series";
     XValue: code[50];
     RecordID: Code[50];
     Vehicle: Record "Company Vehicles";

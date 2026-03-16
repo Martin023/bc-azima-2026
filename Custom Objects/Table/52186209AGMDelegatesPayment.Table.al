@@ -376,7 +376,8 @@ table 52186209 "AGM Delegates Payment"
         if Code = '' then begin
             MembNoSeries.Get;
             MembNoSeries.TestField(MembNoSeries."Delegate Payment Nos.");
-            NoSeriesMgt.InitSeries(MembNoSeries."Delegate Payment Nos.", xRec."No. Series", 0D, Code, "No. Series");
+            Code := NoSeriesMgt.GetNextNo(MembNoSeries."Delegate Payment Nos.");
+            // NoSeriesMgt.InitSeries(MembNoSeries."Delegate Payment Nos.", xRec."No. Series", 0D, Code, "No. Series");
             "Created By" := UserId;
             "Creation Date" := Today;
             "Document No." := Code;
@@ -386,7 +387,8 @@ table 52186209 "AGM Delegates Payment"
     var
         ElectrolZonesAreaSvrCenter: Record "Electrol Zones/Area Svr Center";
         MembNoSeries: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         SegmentCountyDividendSignat: Record "Segment/County/Dividend/Signat";
         DelegateGroupss: Record "Delegate Region";
         DelegateMemberss: Record "Delegate Members";

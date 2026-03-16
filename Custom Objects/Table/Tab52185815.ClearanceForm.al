@@ -214,7 +214,9 @@ table 52187032 "Clearance Form"// 52185815
         if "Clearance No" = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Clearance No");
-            NoSeriesMgt.InitSeries(HRSetup."Clearance No", xRec."No Series", 0D, "Clearance No", "No Series");
+            "Clearance No" := NoSeriesMgt.GetNextNo(HRSetup."Clearance No");
+            
+            // NoSeriesMgt.InitSeries(HRSetup."Clearance No", xRec."No Series", 0D, "Clearance No", "No Series");
 
 
 
@@ -278,7 +280,7 @@ table 52187032 "Clearance Form"// 52185815
 
     var
         HrSetup: record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: record "User Setup";
         HrEmp: record "HR Employees";
         Characters: code[100];

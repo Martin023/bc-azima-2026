@@ -725,7 +725,8 @@ Codeunit 52185455 "Registration Process"
 
             FileExtension := CopyStr(FileManagement.GetExtension(EntryListKey), 1, MaxStrLen(FileExtension));
             TempBlob.CreateOutStream(EntryOutStream);
-            DataCompression.ExtractEntry(EntryListKey, EntryOutStream, Length);
+            // DataCompression.ExtractEntry(EntryListKey, EntryOutStream, Length);
+             Length := DataCompression.ExtractEntry(EntryListKey, EntryOutStream);
             TempBlob.CreateInStream(EntryInstream);
 
             if Members.Get(FileName) then begin

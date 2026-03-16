@@ -511,32 +511,13 @@ page 52186229 "HR Leave Approved Card"
         cReimbsd: Decimal;
         cPerDay: Decimal;
         cbf: Decimal;
-        HRSetup: Record "HR Setup";
-        EmpDimension_1: Text[60];
-        EmpDimension_2: Text[60];
         HRLeaveApp: Record "HR Leave Application";
         HRLeaveLedgerEntries: Record "HR Leave Ledger Entries";
-        EmpName: Text[70];
-        ApprovalComments: Page "Approval Comments";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
-        UserSetup: Record "User Setup";
-        varDaysApplied: Integer;
-        HRLeaveTypes: Record "HR Leave Types";
-        BaseCalendarChange: Record "Base Calendar Change";
-        ReturnDateLoop: Boolean;
-        mSubject: Text[250];
-        ApplicantsEmail: Text[30];
-        LeaveGjline: Record "HR Leave Journal Line";
-        "LineNo.": Integer;
-        sDate: Record Date;
-        Customized: Record "HR Leave Calendar Lines";
-        HREmailParameters: Record "HR E-Mail Parameters";
-        HRJournalBatch: Record "HR Leave Journal Batch";
+       
         // // ApprovalsMgmt: Codeunit "Approvals Mgmt.";
         HRLeaveCal: Record "HR Leave Calendar";
         OpenApprovalEntriesExistForCurrUser: Boolean;
         OpenApprovalEntriesExist: Boolean;
-        ShowWorkflowStatus: Boolean;
         EditableFields: Boolean;
 
     //[Scope('OnPrem')]

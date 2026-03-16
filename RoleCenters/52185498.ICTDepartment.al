@@ -1599,7 +1599,7 @@ page 52187058 "ICT Department"
                             {
                                 ApplicationArea = Basic, Suite;
                                 Caption = 'General Set-Up';
-                                RunObject = page "Gen set-up card";
+                                // RunObject = page "Gen set-up card";
                             }
                             action("No. Setup")
                             {
@@ -3371,46 +3371,46 @@ page 52187058 "ICT Department"
 
                             group("Internet Loans Lists")
                             {
-                                action("Online Loans")
-                                {
-                                    ApplicationArea = Basic;
-                                    Caption = 'Online Loans';
-                                    RunObject = Page "Online Loans";
-                                }
-                                action("Internet Loan Application List")
-                                {
-                                    ApplicationArea = Basic;
-                                    Caption = 'Internet Loan Application List';
-                                    RunObject = Page "Internet Loan Application List";
-                                }
-                                action("Approved Portal Loan App List")
-                                {
-                                    ApplicationArea = Basic;
-                                    Caption = 'Approved Portal Loan App List';
-                                    RunObject = Page "Approved Portal Loan App List";
-                                }
+                                // action("Online Loans")
+                                // {
+                                //     ApplicationArea = Basic;
+                                //     Caption = 'Online Loans';
+                                //     RunObject = Page "Online Loans";
+                                // }
+                                // action("Internet Loan Application List")
+                                // {
+                                //     ApplicationArea = Basic;
+                                //     Caption = 'Internet Loan Application List';
+                                //     RunObject = Page "Internet Loan Application List";
+                                // }
+                                // action("Approved Portal Loan App List")
+                                // {
+                                //     ApplicationArea = Basic;
+                                //     Caption = 'Approved Portal Loan App List';
+                                //     RunObject = Page "Approved Portal Loan App List";
+                                // }
                             }
                             group("Internet Loan Task")
                             {
                                 Caption = 'Internet Loan Task';
 
-                                action("Rejected Portal Loan App List")
-                                {
-                                    ApplicationArea = Basic;
-                                    Caption = 'Rejected Portal Loan App List';
-                                    RunObject = Page "Rejected Internet Loan List";
-                                }
+                                // action("Rejected Portal Loan App List")
+                                // {
+                                //     ApplicationArea = Basic;
+                                //     Caption = 'Rejected Portal Loan App List';
+                                //     RunObject = Page "Rejected Internet Loan List";
+                                // }
                             }
                             group("Loans Archive")
                             {
                                 Caption = 'Loans Archive';
 
-                                action("Validated/Posted Online Loans")
-                                {
-                                    ApplicationArea = Basic;
-                                    Caption = 'Validated/Posted Online Loans';
-                                    RunObject = Page "Online Loans Posted";
-                                }
+                                // action("Validated/Posted Online Loans")
+                                // {
+                                //     ApplicationArea = Basic;
+                                //     Caption = 'Validated/Posted Online Loans';
+                                //     RunObject = Page "Online Loans Posted";
+                                // }
                             }
                         }
                         group("Internet Transactions")

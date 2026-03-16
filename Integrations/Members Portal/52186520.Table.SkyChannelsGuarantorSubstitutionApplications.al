@@ -128,7 +128,8 @@ table 52186520 "Sky Guarantor Sub Applications"
         GlobalFunctions: Codeunit "Global Functions";
 
         CreditNosSeries: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
     begin
         ExistingLoanApplications.Reset;
         ExistingLoanApplications.SetRange("Member No.", Rec."Member No.");
@@ -144,7 +145,8 @@ table 52186520 "Sky Guarantor Sub Applications"
         if "No." = '' then begin
             CreditNosSeries.Get;
             CreditNosSeries.TestField(CreditNosSeries."Guarantors Substitution");
-            NoSeriesMgt.InitSeries(CreditNosSeries."Guarantors Substitution", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(CreditNosSeries."Guarantors Substitution");
+            // NoSeriesMgt.InitSeries(CreditNosSeries."Guarantors Substitution", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         Status := Status::Open;

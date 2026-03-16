@@ -702,77 +702,77 @@ page 52187314 "Legal Role Center"
                     }
                 }
 
-                group("Lease Agreement Requests")
-                {
-                    group(Tenants)
-                    {
-                        Caption = 'Lease Agreement Requests';
-                        action("Open Tenant")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Open Tenants';
-                            RunObject = page "Tenant List";
-                            RunPageLink = "Account Type" = CONST(Tenant);
-                            RunPageView = WHERE(Status = CONST(New));
-                        }
-                        action("Tenants Pending Approval")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Tenants Pedning Approval';
-                            RunObject = page "Tenant List";
-                            RunPageLink = "Account Type" = CONST(Tenant);
-                            RunPageView = WHERE(Status = CONST("pending approval"));
-                        }
-                        action("Rejected Tenant")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Rejected Tenants';
-                            RunObject = page "Tenant List";
-                            RunPageLink = "Account Type" = CONST(Tenant);
-                            RunPageView = WHERE(Status = CONST(Rejected));
-                        }
-                        action("Approved Tenant")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Approved Tenants';
-                            RunObject = page "Tenant List";
-                            RunPageLink = "Account Type" = CONST(Tenant);
-                            RunPageView = WHERE(Status = CONST(Approved));
-                        }
-                    }
-                    group("Lease Management")
-                    {
-                        caption = 'Lease Management';
-                        action("Open Lease List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Open Lease List';
-                            RunObject = page "Lease-List";
-                            RunPageLink = Status = CONST(Open);
-                        }
-                        action("Pending Lease List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Pending Lease List';
-                            RunObject = page "Lease-List";
-                            RunPageLink = Status = CONST(Pending);
-                        }
-                        action("Rejected Lease List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Rejected Lease List';
-                            RunObject = page "Lease-List";
-                            RunPageLink = Status = CONST(Rejected);
-                        }
-                        action("Approved Lease List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Approved Lease List';
-                            RunObject = page "Lease-List";
-                            RunPageLink = Status = CONST(Approved);
-                        }
-                    }
-                }
+                // group("Lease Agreement Requests")
+                // {
+                //     group(Tenants)
+                //     {
+                //         Caption = 'Lease Agreement Requests';
+                //         action("Open Tenant")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Open Tenants';
+                //             RunObject = page "Tenant List";
+                //             RunPageLink = "Account Type" = CONST(Tenant);
+                //             RunPageView = WHERE(Status = CONST(New));
+                //         }
+                //         action("Tenants Pending Approval")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Tenants Pedning Approval';
+                //             RunObject = page "Tenant List";
+                //             RunPageLink = "Account Type" = CONST(Tenant);
+                //             RunPageView = WHERE(Status = CONST("pending approval"));
+                //         }
+                //         action("Rejected Tenant")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Rejected Tenants';
+                //             RunObject = page "Tenant List";
+                //             RunPageLink = "Account Type" = CONST(Tenant);
+                //             RunPageView = WHERE(Status = CONST(Rejected));
+                //         }
+                //         action("Approved Tenant")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Approved Tenants';
+                //             RunObject = page "Tenant List";
+                //             RunPageLink = "Account Type" = CONST(Tenant);
+                //             RunPageView = WHERE(Status = CONST(Approved));
+                //         }
+                //     }
+                //     group("Lease Management")
+                //     {
+                //         caption = 'Lease Management';
+                //         action("Open Lease List")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Open Lease List';
+                //             RunObject = page "Lease-List";
+                //             RunPageLink = Status = CONST(Open);
+                //         }
+                //         action("Pending Lease List")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Pending Lease List';
+                //             RunObject = page "Lease-List";
+                //             RunPageLink = Status = CONST(Pending);
+                //         }
+                //         action("Rejected Lease List")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Rejected Lease List';
+                //             RunObject = page "Lease-List";
+                //             RunPageLink = Status = CONST(Rejected);
+                //         }
+                //         action("Approved Lease List")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Approved Lease List';
+                //             RunObject = page "Lease-List";
+                //             RunPageLink = Status = CONST(Approved);
+                //         }
+                //     }
+                // }
 
                 // group("Contract setUp")
                 // {

@@ -209,7 +209,8 @@ table 52185976 "HR Drivers"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Driver No.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Driver No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Driver No.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Driver No.", xRec."No. Series", 0D, "No.", "No. Series");
 
         end;
         "Created By" := userID;
@@ -232,6 +233,7 @@ table 52185976 "HR Drivers"
     var
         HREmp: Record "HR Employees";
         MembNoSeries: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 }
 

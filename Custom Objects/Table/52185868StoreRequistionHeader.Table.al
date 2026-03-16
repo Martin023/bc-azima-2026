@@ -374,7 +374,8 @@ table 52185868 "Store Requistion Header"
     begin
 
         if "No." = '' then begin
-            NoSeriesMgt.InitSeries(GetNoSeriesCode, xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(GetNoSeriesCode());
+            // NoSeriesMgt.InitSeries(GetNoSeriesCode, xRec."No. Series", 0D, "No.", "No. Series");
         end;
         //EXIT(GetNoSeriesRelCode(NoSeriesCode));
         "Request date" := Today;
@@ -419,7 +420,8 @@ table 52185868 "Store Requistion Header"
     end;
 
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         GenLedgerSetup: Record "Purchases & Payables Setup";
         UserDept: Record "Imprest Surrender Details";
         RespCenter: Record "Responsibility CenterBR";

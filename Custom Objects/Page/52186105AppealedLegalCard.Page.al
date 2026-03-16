@@ -812,7 +812,6 @@ page 52186105 "Appealed Legal Card"
 
 
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
         Legal: Record Legal;
         UseLines: Boolean;
         AdvisoryEditable: Boolean;

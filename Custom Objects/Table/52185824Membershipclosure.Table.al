@@ -565,12 +565,14 @@ table 52185824 "Membership Closure"
         if "Closure Type" = Rec."Closure Type"::"Withdrawal - Normal" then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."Normal Closure Nos.");
-            NoSeriesMgt.InitSeries(NoSetup."Normal Closure Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(NoSetup."Normal Closure Nos.");
+            // NoSeriesMgt.InitSeries(NoSetup."Normal Closure Nos.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
         if ("Closure Type" = Rec."Closure Type"::"Withdrawal - 1st Partial") or ("Closure Type" = Rec."Closure Type"::"Withdrawal - 2nd Partial") then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."Pertial Closure Nos.");
-            NoSeriesMgt.InitSeries(NoSetup."Pertial Closure Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(NoSetup."Pertial Closure Nos.");
+            // NoSeriesMgt.InitSeries(NoSetup."Pertial Closure Nos.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         //"Date Entered":=TODAY;
@@ -601,7 +603,8 @@ table 52185824 "Membership Closure"
         CFStations: Record "CF Station Actions";
         Comments: Record Comments;
         NoSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Members: Record Members;
         AccLine: Record "Account Closure Line";
         SavingsAccounts: Record "Savings Accounts";

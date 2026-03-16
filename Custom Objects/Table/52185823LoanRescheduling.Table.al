@@ -354,7 +354,8 @@ table 52185823 "Loan Rescheduling"
         if "No." = '' then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."Loan Reschedule");
-            NoSeriesMgt.InitSeries(NoSetup."Loan Reschedule", xRec."No.", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(NoSetup."Loan Reschedule");
+            // NoSeriesMgt.InitSeries(NoSetup."Loan Reschedule", xRec."No.", 0D, "No.", "No. Series");
         end;
 
         if UserSet.Get(UserId) then begin
@@ -370,7 +371,8 @@ table 52185823 "Loan Rescheduling"
         MinInterest: Decimal;
         MaxInterest: Decimal;
         NoSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Mem: Record Members;
         RemInstallments: Integer;
         Loan: Record Loans;

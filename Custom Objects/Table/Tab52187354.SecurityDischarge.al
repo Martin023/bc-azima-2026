@@ -231,14 +231,15 @@ table 52187354 "Security Discharge"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Security Discharge No.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Security Discharge No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Security Discharge No.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Security Discharge No.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
         Rec."Created at" := CURRENTDATETIME;
         Rec."Created By" := UserId;
     end;
 
     var
-    NoSeriesMgt: Codeunit NoSeriesManagement;
+    NoSeriesMgt: Codeunit "No. Series";
     XValue: code[50];
     RecordID: Code[50];
     SeriesSetup: Record "Credit Nos. Series";

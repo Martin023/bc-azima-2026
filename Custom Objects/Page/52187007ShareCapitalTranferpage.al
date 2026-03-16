@@ -344,7 +344,6 @@ page 52187007 "Share Capital Transfer Card"
                     myInt: Integer;
                     Loans: Record Loans;
                     Seriesset: Record "Credit Nos. Series";
-                    NoseriesMgt: Codeunit NoSeriesManagement;
                     TakeNos: Code[20];
                     LoanProcess: Codeunit "Loans Process";
                     Transfer: Boolean;

@@ -85,7 +85,8 @@ table 52187006 "Treasury Cheque Application"
         if "No." = '' then begin
             SalesSetup.Get;
             SalesSetup.TestField(SalesSetup."Treasury Control No.");
-            Noseriesmgt.InitSeries(SalesSetup."Treasury Control No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SalesSetup."Treasury Control No.");
+            // Noseriesmgt.InitSeries(SalesSetup."Treasury Control No.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
 
@@ -113,7 +114,8 @@ table 52187006 "Treasury Cheque Application"
     end;
 
     var
-        Noseriesmgt: Codeunit NoSeriesManagement;
+        // Noseriesmgt: Codeunit NoSeriesManagement;
+        Noseriesmgt: Codeunit "No. Series";
         SalesSetup: Record "Banking No Setup";
         UserSetup: Record "User Setup";
         GeneralSetUp: Record "General Set-Up";

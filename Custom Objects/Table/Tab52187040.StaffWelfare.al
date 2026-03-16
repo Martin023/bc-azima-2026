@@ -148,7 +148,8 @@ table 52187079 "Staff Welfare"
         if No = '' then begin
             HrSetup.Get();
             HrSetup.TestField(HrSetup."Welfare No");
-            NoSeriesMgt.InitSeries(HrSetup."Welfare No", xRec."No. Series", 0D, No, "No. Series");
+            No := NoSeriesMgt.GetNextNo(HrSetup."Welfare No");
+            // NoSeriesMgt.InitSeries(HrSetup."Welfare No", xRec."No. Series", 0D, No, "No. Series");
         end;
 
         "Entered By" := UpperCase(UserId);
@@ -158,7 +159,7 @@ table 52187079 "Staff Welfare"
 
     var
         HrSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Employee: record "HR Employees";
         Beneficiary: record  "HR Employee Kin";
         Member: Record Members;

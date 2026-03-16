@@ -134,7 +134,8 @@ table 52186211 "Banking Account Closure"
         if No = '' then begin
             MembNoSeries.Get;
             MembNoSeries.TestField(MembNoSeries."Account Closure");
-            NoSeriesMgt.InitSeries(MembNoSeries."Account Closure", xRec.No, 0D, No, "No. Series");
+            No := NoSeriesMgt.GetNextNo(MembNoSeries."Account Closure");
+            // NoSeriesMgt.InitSeries(MembNoSeries."Account Closure", xRec.No, 0D, No, "No. Series");
             "User Id" := UserId;
             "Application Date" := Today;
             //"Document No.":=Code;
@@ -149,7 +150,8 @@ table 52186211 "Banking Account Closure"
         Members: Record Members;
         SavingsAccounts: Record "Savings Accounts";
         MembNoSeries: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record "User Setup";
 }
 

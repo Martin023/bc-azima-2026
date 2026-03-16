@@ -193,7 +193,8 @@ table 52185715 "RTGS Transfer Header"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."RTGS Nos.");
-            NoSeriesMgt.InitSeries(SeriesSetup."RTGS Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."RTGS Nos.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."RTGS Nos.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         //*
@@ -208,7 +209,8 @@ table 52185715 "RTGS Transfer Header"
 
     var
         SeriesSetup: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Accounts: Record Vendor;
         Members: Record Vendor;
         AccountHolders: Record Vendor;

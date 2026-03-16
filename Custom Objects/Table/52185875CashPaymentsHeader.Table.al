@@ -256,11 +256,13 @@ table 52185875 "Cash Payments Header"
             GenLedgerSetup.Get;
             if "Payment Type" = "Payment Type"::Normal then begin
                 GenLedgerSetup.TestField(GenLedgerSetup."Normal Payments No");
-                NoSeriesMgt.InitSeries(GenLedgerSetup."Normal Payments No", xRec."No. Series", 0D, "No.", "No. Series");
+                "No." := NoSeriesMgt.GetNextNo(GenLedgerSetup."Normal Payments No");
+                // NoSeriesMgt.InitSeries(GenLedgerSetup."Normal Payments No", xRec."No. Series", 0D, "No.", "No. Series");
             end
             else begin
                 GenLedgerSetup.TestField(GenLedgerSetup."Petty Cash Payments No");
-                NoSeriesMgt.InitSeries(GenLedgerSetup."Petty Cash Payments No", xRec."No. Series", 0D, "No.", "No. Series");
+                "No." := NoSeriesMgt.GetNextNo(GenLedgerSetup."Petty Cash Payments No");
+                // NoSeriesMgt.InitSeries(GenLedgerSetup."Petty Cash Payments No", xRec."No. Series", 0D, "No.", "No. Series");
             end;
         end;
         UserTemplate.Reset;
@@ -296,7 +298,8 @@ table 52185875 "Cash Payments Header"
         Vend: Record Vendor;
         FA: Record "Fixed Asset";
         BankAcc: Record "Bank Account";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         GenLedgerSetup: Record "Cash Office Setup";
         RecPayTypes: Record "Receipts and Payment Types";
         GLAccount: Record "G/L Account";

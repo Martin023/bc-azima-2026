@@ -81,7 +81,8 @@ table 52185787 "Cheque Receipts"
         if "No." = '' then begin
             SalesSetup.Get;
             SalesSetup.TestField(SalesSetup."Cheque Receipts Nos");
-            NoSeriesmgt.InitSeries(SalesSetup."Cheque Receipts Nos", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesmgt.GetNextNo(SalesSetup."Cheque Receipts Nos");
+            // NoSeriesmgt.InitSeries(SalesSetup."Cheque Receipts Nos", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         "Transaction Time" := Time;
@@ -89,7 +90,8 @@ table 52185787 "Cheque Receipts"
     end;
 
     var
-        NoSeriesmgt: Codeunit NoSeriesManagement;
+        // NoSeriesmgt: Codeunit NoSeriesManagement;
+        NoSeriesmgt: Codeunit "No. Series";
         SalesSetup: Record "Banking No Setup";
 }
 

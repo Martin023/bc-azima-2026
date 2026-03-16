@@ -89,10 +89,10 @@ PageExtension 52186552 pageextension52186552 extends "Warehouse Activity List"
     }
     actions
     {
-        modify(Card)
-        {
-            ApplicationArea = Basic;
-        }
+        // modify(Card)
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("Put-away List")
         {
             ApplicationArea = Basic;

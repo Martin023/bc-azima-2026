@@ -128,12 +128,12 @@ table 52185452 "E-Channels Cue Table"
             FieldClass = Flowfield;
             CalcFormula = Count("Online Users" WHERE(Blocked = FILTER(FALSE)));
         }
-        field(20; "Online Loans"; Integer)
-        {
-            Caption = 'Online Loans Applications';
-            FieldClass = Flowfield;
-            CalcFormula = Count("Online Loans Applications");
-        }
+        // field(20; "Online Loans"; Integer)
+        // {
+        //     Caption = 'Online Loans Applications';
+        //     FieldClass = Flowfield;
+        //     // CalcFormula = Count("Online Loans Applications");
+        // }
         field(21; "Internet Banking Transactions"; Integer)
         {
             Caption = 'Internet Banking Transactions';

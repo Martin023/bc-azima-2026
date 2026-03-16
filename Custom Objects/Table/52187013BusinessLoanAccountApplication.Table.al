@@ -192,7 +192,8 @@ table 52187013 "B/S Loan Account Application"
 
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Business Loan Acc App");
-            NoSeriesMgt.InitSeries(SeriesSetup."Business Loan Acc App", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Business Loan Acc App");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Business Loan Acc App", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         "Application Date" := Today;
@@ -209,7 +210,8 @@ table 52187013 "B/S Loan Account Application"
 
     var
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         ProductFactory: Record "Product Factory";
         GeneralSetUp: Record "General Set-Up";
         UserSetup: Record "User Setup";

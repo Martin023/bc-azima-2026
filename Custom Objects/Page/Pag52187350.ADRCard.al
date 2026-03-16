@@ -621,7 +621,6 @@ page 52187350 "ADR Card"
 
 
     var
-    NoSeriesMgt: Codeunit NoSeriesManagement;
     Legal: Record Legal;
 }
 

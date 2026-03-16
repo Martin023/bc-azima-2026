@@ -7244,7 +7244,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         SearchMember: record Members;
         TheSTORequest: Record "Standing Order Header";
         TheSTOLines: Record "Standing Order Lines";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         SeriesSetup: Record "Banking No Setup";
         TheMemberFosaAccount: Record "Savings Accounts";
         TheMemberLoan: Record Loans;
@@ -7273,7 +7274,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
             SeriesSetup.Get;
             SeriesSetup.TestField("Standing Order Nos.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Standing Order Nos.", '', 0D, TheSTORequest."No.", TheSTORequest."No. Series");
+            TheSTORequest."No." := NoSeriesMgt.GetNextNo(SeriesSetup."Standing Order Nos.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Standing Order Nos.", '', 0D, TheSTORequest."No.", TheSTORequest."No. Series");
 
             TheSTORequest."Source Account Type" := TheSTORequest."Source Account Type"::Savings;
 

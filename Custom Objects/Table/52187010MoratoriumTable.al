@@ -14,7 +14,7 @@ table 52187010 "Moratorium Loan"
             var
                 myInt: Integer;
                 SeriesSetup: Record "Credit Nos. Series";
-                NoSeriesMgt: Codeunit NoSeriesManagement;
+                NoSeriesMgt: Codeunit "No. Series";
             begin
                 if "M-Num" <> xRec."M-Num" then begin
                     SeriesSetup.Get;
@@ -168,12 +168,13 @@ table 52187010 "Moratorium Loan"
     var
         UserSet: Record "User Setup";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
     begin
         if "M-Num" = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Mora-Num");
-            NoSeriesMgt.InitSeries(SeriesSetup."Mora-Num", xRec."No. Series", 0D, "M-Num", "No. Series");
+            "M-Num" := NoSeriesMgt.GetNextNo(SeriesSetup."Mora-Num");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Mora-Num", xRec."No. Series", 0D, "M-Num", "No. Series");
         end;
     end;
 

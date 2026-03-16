@@ -160,7 +160,8 @@ table 52186014 "Files Table"
         if "Entry No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."File Entry No.");
-            NoSeriesMgt.InitSeries(SeriesSetup."File Entry No.", xRec."No. Series", 0D, "Entry No.", "No. Series");
+            "Entry No." := NoSeriesMgt.GetNextNo(SeriesSetup."File Entry No.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."File Entry No.", xRec."No. Series", 0D, "Entry No.", "No. Series");
         end;
     end;
 
@@ -170,6 +171,6 @@ table 52186014 "Files Table"
         Loans: Record Loans;
         FileMovemementFiles: Record "Files Table";
         MembNoSeries: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         HRTable: Record "HR Employees";
 }

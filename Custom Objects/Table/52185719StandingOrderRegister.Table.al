@@ -121,12 +121,14 @@ table 52185719 "Standing Order Register"
         if "No." = '' then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."Standing Order Reg. Nos.");
-            NoSeriesMgt.InitSeries(NoSetup."Standing Order Reg. Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(NoSetup."Standing Order Reg. Nos.");
+            // NoSeriesMgt.InitSeries(NoSetup."Standing Order Reg. Nos.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
     end;
 
     var
         NoSetup: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 }
 

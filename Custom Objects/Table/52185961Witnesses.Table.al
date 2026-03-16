@@ -100,7 +100,8 @@ table 52185961 Witnesses
     begin
         if No = '' then begin
             MembNoSeries.Get;
-            NoSeriesMgt.InitSeries(MembNoSeries."Witness Nos.", xRec."No. Series", 0D, No, "No. Series");
+            NoSeriesMgt.TestManual(MembNoSeries."Witness Nos.");
+            // NoSeriesMgt.InitSeries(MembNoSeries."Witness Nos.", xRec."No. Series", 0D, No, "No. Series");
             
             // GLSetup.Get;
             // GLSetup.TestField(GLSetup."Witness Nos.");
@@ -114,7 +115,8 @@ table 52185961 Witnesses
     var
         Emp: Record "HR Employees";
         GenLedgerSetup: Record "Cash Office Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Vend: Record Vendor;
         Cust: Record Customer;
         Memb: Record Members;

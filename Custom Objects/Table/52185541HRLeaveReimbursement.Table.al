@@ -182,7 +182,8 @@ table 52185541 "HR Leave Reimbursement"
         if "Application Code" = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Leave Reimbursment Nos.");
-            NoSeriesMgt.InitSeries(HRSetup."Leave Reimbursment Nos.", xRec."No series", 0D, "Application Code", "No series");
+            "Application Code" := NoSeriesMgt.GetNextNo(HRSetup."Leave Reimbursment Nos.");
+            // NoSeriesMgt.InitSeries(HRSetup."Leave Reimbursment Nos.", xRec."No series", 0D, "Application Code", "No series");
         end;
         /*
         //GET APPLICANT DETAILS FROM HR EMPLOYEES TABLE AND COPY THEM TO THE LEAVE APPLICATION TABLE
@@ -205,7 +206,8 @@ table 52185541 "HR Leave Reimbursement"
 
     var
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
         HREmp: Record "HR Employees";
         TEXT001: Label 'Days Approved cannot be more than applied days';
         HRLeaveApp: Record "HR Leave Application";

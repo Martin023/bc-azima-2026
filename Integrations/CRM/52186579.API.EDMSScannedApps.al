@@ -110,6 +110,7 @@ page 52186579 "EDMS Scanned Apps. API"
             Rec."Type of Application"::"Loan Application", Rec."Type of Application"::"Business Loans Application":
                 begin
                     if theLnApp.Get(Rec."Application No.") then begin
+                        // theStatus := theLnApp.Status;
                         theStatus := theLnApp.Status;
                     end;
                 end;

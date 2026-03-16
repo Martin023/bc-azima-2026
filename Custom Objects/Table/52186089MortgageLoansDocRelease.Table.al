@@ -113,7 +113,8 @@ table 52186089 "Mortgage Loans Doc Release"
         if "No." = '' then begin
             MembNoSeries.Get;
             MembNoSeries.TestField(MembNoSeries."Mortage Doc Release");
-            NoSeriesMgt.InitSeries(MembNoSeries."Mortage Doc Release", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(MembNoSeries."Mortage Doc Release");
+            // NoSeriesMgt.InitSeries(MembNoSeries."Mortage Doc Release", xRec."No. Series", 0D, "No.", "No. Series");
             "Captured By" := UserId;
             "Date Captured" := Today;
         end;
@@ -121,7 +122,8 @@ table 52186089 "Mortgage Loans Doc Release"
 
     var
         MembNoSeries: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Loans: Record Loans;
         MortRegister: Record "Mortgage Loans Doc Register";
         MortDocRelease: Record "Mortgage Loans Doc Release";

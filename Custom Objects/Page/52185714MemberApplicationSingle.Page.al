@@ -863,7 +863,7 @@ page 52185714 "Member Application Single"
         area(factboxes)
         {
 
-            part("Attached Documents"; "Document Attachment Factbox")
+            part("Attached Documents"; "Doc. Attachment List Factbox")
             {
                 ApplicationArea = basic;
                 Caption = 'Attachments';

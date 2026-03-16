@@ -151,7 +151,8 @@ table 52185769 "M-PESA Change Transactions"
         if No = '' then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."M-SACCO Change Nos");
-            NoSeriesMgt.InitSeries(NoSetup."M-SACCO Change Nos", xRec."No. Series", 0D, No, "No. Series");
+            No := NoSeriesMgt.GetNextNo(NoSetup."M-SACCO Change Nos");
+            // NoSeriesMgt.InitSeries(NoSetup."M-SACCO Change Nos", xRec."No. Series", 0D, No, "No. Series");
         end;
 
         if UserSetUp.Get(UserId) then begin
@@ -163,7 +164,8 @@ table 52185769 "M-PESA Change Transactions"
 
     var
         NoSetup: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         MPESATrans: Record "Sky Transactions";
         BOSAAcct: Record "Savings Accounts";
         TransactionOptions: Option "Deposit Contribution","Share Capital","Loan Repayment","FOSA Deposit";

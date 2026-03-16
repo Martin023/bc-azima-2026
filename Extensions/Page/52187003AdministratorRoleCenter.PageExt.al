@@ -92,10 +92,10 @@ PageExtension 52187003 pageextension52187003 extends "Administrator Role Center"
         {
             ApplicationArea = Basic;
         }
-        modify("Extended Text")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Extended Text")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("JobQueue_JobQueueEntries")
         {
 

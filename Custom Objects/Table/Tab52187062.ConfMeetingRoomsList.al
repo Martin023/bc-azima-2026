@@ -115,7 +115,8 @@ table 52187062 "Conf & Meeting Rooms List"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Conference Creation Nos.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Conference Creation Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Conference Creation Nos.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Conference Creation Nos.", xRec."No. Series", 0D, "No.", "No. Series");
 
         end;
         "Created By" := userID;
@@ -137,7 +138,7 @@ table 52187062 "Conf & Meeting Rooms List"
 
     var
         MembNoSeries: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         XValue: code[50];
         RecordID: Code[50];
 }

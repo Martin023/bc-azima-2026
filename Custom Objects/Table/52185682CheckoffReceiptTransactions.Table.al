@@ -175,10 +175,10 @@ table 52185682 "Checkoff  Receipt Transactions"
         field(16; Remarks; Text[50])
         {
         }
-        field(17; Type; Option)
+        field(17; Type; Enum "Fosa Transaction Types")//Option)
         {
-            OptionCaption = 'Credit Receipt,Credit Cheque';
-            OptionMembers = "Credit Receipt","Credit Cheque";
+            // OptionCaption = 'Credit Receipt,Credit Cheque';
+            // OptionMembers = "Credit Receipt","Credit Cheque";
 
             trigger OnValidate()
             begin
@@ -437,7 +437,8 @@ table 52185682 "Checkoff  Receipt Transactions"
         if No = '' then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."Cashier Transaction Nos.");
-            NoSeriesMgt.InitSeries(GenLedgerSetup."Receipts No", xRec."No. Series", 0D, No, "No. Series");
+            No := NoSeriesMgt.GetNextNo(NoSetup."Cashier Transaction Nos.");
+            // NoSeriesMgt.InitSeries(GenLedgerSetup."Receipts No", xRec."No. Series", 0D, No, "No. Series");
 
         end;
 
@@ -485,7 +486,8 @@ table 52185682 "Checkoff  Receipt Transactions"
 
     var
         NoSetup: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Account: Record Members;
         TransactionTypes: Record "Transaction Types";
         Text0001: Label 'The account is not active and therefore cannot be transacted upon.';

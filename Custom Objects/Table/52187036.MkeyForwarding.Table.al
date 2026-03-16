@@ -137,7 +137,8 @@ table 52187036 "MKey Forwarding"
         if "No." = '' then begin
             CreditNosSeries.Get;
             CreditNosSeries.TestField(CreditNosSeries."MKey Case Forwarding");
-            NoSeriesMgt.InitSeries(CreditNosSeries."MKey Case Forwarding", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(CreditNosSeries."MKey Case Forwarding");
+            // NoSeriesMgt.InitSeries(CreditNosSeries."MKey Case Forwarding", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
 
@@ -165,7 +166,8 @@ table 52187036 "MKey Forwarding"
         ConfigPackageMgt: Codeunit "Config. Package Management";
         Text001: Label 'You cannot use system table %1 in the package.';
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         SystemEditsCodeunit: Codeunit "System Editss";
         CreditNoSeries: Record "Credit Nos. Series";
         CFPage: Page "DMU CF Page";

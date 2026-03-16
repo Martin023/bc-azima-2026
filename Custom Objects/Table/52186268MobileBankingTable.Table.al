@@ -315,7 +315,8 @@ table 52186268 "Mobile Banking Table"
         if "No." = '' then begin
             BankingNoSetup.Get();
             BankingNoSetup.TestField(BankingNoSetup."Mobile Banking No.");
-            NoSeriesMgt.InitSeries(BankingNoSetup."Mobile Banking No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(BankingNoSetup."Mobile Banking No.");
+            // NoSeriesMgt.InitSeries(BankingNoSetup."Mobile Banking No.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
         UserSetup.Get(UserId);
         UserSetup.TestField("Global Dimension 1 Code");
@@ -333,7 +334,8 @@ table 52186268 "Mobile Banking Table"
     var
         GeneralSetUp: Record "General Set-Up";
         BankingNoSetup: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         SavingsAccounts: Record "Savings Accounts";
         Members: Record Members;
         SavingsAccountss: Record "Savings Accounts";

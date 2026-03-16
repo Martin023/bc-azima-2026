@@ -343,10 +343,10 @@ table 52185730 "Savings Accounts"
             Caption = 'Base Calendar Code';
             TableRelation = "Base Calendar";
         }
-        field(40; Status; Option)
+        field(40; Status; Enum "Savings Account Status")
         {
-            OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
-            OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
+            // OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
+            // OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
 
             trigger OnValidate()
             var
@@ -1098,7 +1098,7 @@ table 52185730 "Savings Accounts"
         CampaignTargetGr: Record "Campaign Target Group";
         ContactBusRel: Record "Contact Business Relation";
         Job: Record Job;
-        CreditCards: Record "DO Payment Credit Card";
+        // CreditCards: Record "DO Payment Credit Card";
         CampaignTargetGrMgmt: Codeunit "Campaign Target Group Mgt";
         StdCustSalesCode: Record "Standard Customer Sales Code";
     begin
@@ -1205,7 +1205,8 @@ table 52185730 "Savings Accounts"
         ServContract: Record "Service Contract Header";
         ServHeader: Record "Service Header";
         ServiceItem: Record "Service Item";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         MoveEntries: Codeunit MoveEntries;
         UpdateContFromCust: Codeunit "CustCont-Update";
         DimMgt: Codeunit DimensionManagement;

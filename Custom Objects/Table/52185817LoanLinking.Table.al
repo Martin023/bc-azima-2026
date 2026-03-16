@@ -55,7 +55,8 @@ table 52185817 "Loan Linking"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Loan Linking");
-            NoSeriesMgt.InitSeries(SeriesSetup."Loan Linking", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Loan Linking");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Loan Linking", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         "Entered By" := UserId;
@@ -64,6 +65,7 @@ table 52185817 "Loan Linking"
 
     var
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 }
 

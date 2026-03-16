@@ -68,7 +68,8 @@ table 52186128 "BDE Management Header"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."BDE Application");
-            NoSeriesMgt.InitSeries(SeriesSetup."BDE Application", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."BDE Application");
+            // NoSeriesMgt.InitSeries(SeriesSetup."BDE Application", xRec."No. Series", 0D, "No.", "No. Series");
         end;
         "Captured By" := UserId;
         "Entered Date" := Today;
@@ -82,7 +83,8 @@ table 52186128 "BDE Management Header"
     var
         HREmployees: Record "HR Employees";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record "User Setup";
         BDEManagementHeader: Record "BDE Management Header";
         Err00: Label 'Employee application already exist No. %1';

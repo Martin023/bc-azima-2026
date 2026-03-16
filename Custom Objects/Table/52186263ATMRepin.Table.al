@@ -351,7 +351,8 @@ table 52186263 "ATM Repin Table"
         if "No." = '' then begin
             BankingNoSetup.Get();
             BankingNoSetup.TestField(BankingNoSetup."ATM Repin");
-            NoSeriesMgt.InitSeries(BankingNoSetup."ATM Repin", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(BankingNoSetup."ATM Repin");
+            // NoSeriesMgt.InitSeries(BankingNoSetup."ATM Repin", xRec."No. Series", 0D, "No.", "No. Series");
         end;
         "Application Date" := Today;
         "Captured By" := UserId;
@@ -361,7 +362,8 @@ table 52186263 "ATM Repin Table"
     var
         GeneralSetUp: Record "General Set-Up";
         BankingNoSetup: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         SavingsAccounts: Record "Savings Accounts";
         Members: Record Members;
         SavingsAccountss: Record "Savings Accounts";

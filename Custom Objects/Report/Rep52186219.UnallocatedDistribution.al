@@ -111,7 +111,7 @@ report 52186219 "Unallocated Distribution"
     trigger OnPreReport()
     var
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
     begin
         LoansInterest.Reset();
         LoansInterest.SetRange(LoansInterest."Refund Header No.", "Interest Header"."No");

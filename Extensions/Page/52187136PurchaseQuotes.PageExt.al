@@ -243,13 +243,13 @@ PageExtension 52187136 pageextension52187136 extends "Purchase Quotes"
     }
     actions
     {
-        modify(Statistics)
-        {
-            ApplicationArea = Basic;
+        // modify(SalesOrderStatistics)
+        // {
+        //     ApplicationArea = Basic;
 
-            //Unsupported feature: Property Modification (PromotedCategory) on "Statistics(Action 1102601020)".
+        //     //Unsupported feature: Property Modification (PromotedCategory) on "Statistics(Action 1102601020)".
 
-        }
+        // }
         modify("Co&mments")
         {
             ApplicationArea = Basic;

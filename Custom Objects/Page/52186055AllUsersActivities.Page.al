@@ -34,11 +34,11 @@ page 52186055 "All Users Activities"
                 field(Members; Rec.Members)
                 {
                     Caption = 'Active Members';
-                    image = None;
+                    // image = None;
                 }
                 field("Member Withdrawal"; Rec."Member Withdrawal")
                 {
-                    image = None;
+                    // image = None;
                 }
                 field("Member Closure"; Rec."Member Closure")
                 {
@@ -65,7 +65,7 @@ page 52186055 "All Users Activities"
                 }
                 field(Loans; Rec.Loans)
                 {
-                    image = None;
+                    // image = None;
                 }
                 field("My Staff Advance Surrender"; Rec."My Staff Advance Surrender")
                 {
@@ -113,7 +113,7 @@ page 52186055 "All Users Activities"
                 }
                 field("Pending Loans"; Rec."Pending Loans")
                 {
-                    image = None;
+                    // image = None;
                 }
                 field("Pending Member Closure"; Rec."Pending Member Closure")
                 {
@@ -157,7 +157,7 @@ page 52186055 "All Users Activities"
                         ProdVar: record "Product Variations";
                     begin
                         ProdVar.reset;
-                        ProdVar.setfilter(Status, '%1|%2', ProdVar.Status::Open, ProdVar.Status::"Pending Approval");
+                        ProdVar.setfilter(Status, '%1|%2', ProdVar.Status::Open, ProdVar.Status::"Pending");
                         ProdVar.setrange(Posted, false);
                         Page.run(Page::"Savings Variations List", ProdVar);
                     end;
@@ -170,7 +170,7 @@ page 52186055 "All Users Activities"
                         ProdVar: record "Product Variations";
                     begin
                         ProdVar.reset;
-                        ProdVar.setfilter(Status, '%1|%2', ProdVar.Status::Open, ProdVar.Status::"Pending Approval");
+                        ProdVar.setfilter(Status, '%1|%2', ProdVar.Status::Open, ProdVar.Status::"Pending");
                         ProdVar.setrange(Posted, false);
                         Page.run(Page::"Variations List", ProdVar);
                     end;

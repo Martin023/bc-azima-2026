@@ -963,13 +963,13 @@ PageExtension 52186775 pageextension52186775 extends "Purchase Return Order"
     }
     actions
     {
-        modify(Statistics)
-        {
-            ApplicationArea = Basic;
+        // modify(SalesOrderStatistics)
+        // {
+        //     ApplicationArea = Basic;
 
-            //Unsupported feature: Property Modification (PromotedCategory) on "Statistics(Action 49)".
+        //     //Unsupported feature: Property Modification (PromotedCategory) on "Statistics(Action 49)".
 
-        }
+        // }
         modify(Vendor)
         {
             ApplicationArea = Basic;

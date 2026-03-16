@@ -1511,7 +1511,7 @@ PageExtension 52185585 pageextension52185585 extends "Apply Customer Entries"
                                     AppliedCustLedgEntry.SETRANGE(Open, TRUE);
                                     AppliedCustLedgEntry.SETRANGE("Applies-to ID", ReceiptLine."Applies-to ID");
 
-                                    HandleChosenEntries(2,
+                                    HandleChosenEntries("Customer Apply Calculation Type"::"Sales Header",
                                       GenJnlLine.Amount,
                                       GenJnlLine."Currency Code",
                                       GenJnlLine."Posting Date");
@@ -1537,17 +1537,17 @@ PageExtension 52185585 pageextension52185585 extends "Apply Customer Entries"
     begin
     end;
 
-    [IntegrationEvent(true, false)]
+    // [IntegrationEvent(true, false)]
     local procedure OnAfterCalcApplnAmount(CustLedgerEntry: Record "Cust. Ledger Entry"; var AppliedAmount: Decimal; var ApplyingAmount: Decimal; var CalcType: Enum "Customer Apply Calculation Type"; var AppliedCustLedgEntry: Record "Cust. Ledger Entry"; var ReceiptLine: Record "Receipt Line")
     begin
     end;
 
-    [IntegrationEvent(false, false)]
+    // [IntegrationEvent(false, false)]
     local procedure OnBeforeCalcApplnAmount(var CustLedgerEntry: Record "Cust. Ledger Entry"; var ReceiptLine: Record "Receipt Line"; SalesHeader: Record "Sales Header"; var AppliedCustLedgerEntry: Record "Cust. Ledger Entry"; CalculationType: Option; ApplicationType: Option; var IsHandled: Boolean)
     begin
     end;
 
-    [IntegrationEvent(true, false)]
+    // [IntegrationEvent(true, false)]
     local procedure OnAfterSetApplyingCustLedgEntry(var ApplyingCustLedgEntry: Record "Cust. Ledger Entry"; ReceiptLine: Record "Receipt Line"; SalesHeader: Record "Sales Header")
     begin
     end;

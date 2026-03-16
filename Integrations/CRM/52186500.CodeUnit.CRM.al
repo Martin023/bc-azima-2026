@@ -431,7 +431,8 @@ codeunit 52186500 "CRM Integration"
         KeyExists: Boolean;
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -508,7 +509,8 @@ codeunit 52186500 "CRM Integration"
 
         SeriesSetup.Get;
         SeriesSetup.TestField(SeriesSetup."Member Application Nos.");
-        NoSeriesMgt.InitSeries(SeriesSetup."Member Application Nos.", SeriesSetup."Member Application Nos.", 0D, NewNo, NewNoSeriesCode);
+        NewNo := NoSeriesMgt.GetNextNo(SeriesSetup."Member Application Nos.");
+        // NoSeriesMgt.InitSeries(SeriesSetup."Member Application Nos.", SeriesSetup."Member Application Nos.", 0D, NewNo, NewNoSeriesCode);
 
         MemberApplication."No." := NewNo;
         MemberApplication."No. Series" := NewNoSeriesCode;
@@ -4294,7 +4296,8 @@ codeunit 52186500 "CRM Integration"
         KeyExists: Boolean;
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         // CRMNewNo: Code[20];
         // CRMNewNoSeriesCode: Code[20];
 
@@ -4588,7 +4591,8 @@ codeunit 52186500 "CRM Integration"
         KeyExists: Boolean;
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         // CRMNewNo: Code[20];
         // CRMNewNoSeriesCode: Code[20];
 
@@ -5155,7 +5159,7 @@ codeunit 52186500 "CRM Integration"
             Datum.Add('source_unit', SearchLoan."Source Unit");
             Datum.Add('source_unit_desc', Format(SearchLoan."Source Unit"));
             Datum.Add('captured_by', SearchLoan."Captured By");
-            Datum.Add('status', SearchLoan.Status);
+            Datum.Add('status', Format(SearchLoan.Status));
             Datum.Add('status_desc', Format(SearchLoan.Status));
 
             if SearchLoan."Responsible Officer" <> '' then begin
@@ -5359,7 +5363,8 @@ codeunit 52186500 "CRM Integration"
         KeyExists: Boolean;
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -5395,7 +5400,8 @@ codeunit 52186500 "CRM Integration"
 
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Withdrawal Notice");
-            NoSeriesMgt.InitSeries(SeriesSetup."Withdrawal Notice", SeriesSetup."Withdrawal Notice", 0D, NewNo, NewNoSeriesCode);
+            NewNo := NoSeriesMgt.GetNextNo(SeriesSetup."Withdrawal Notice");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Withdrawal Notice", SeriesSetup."Withdrawal Notice", 0D, NewNo, NewNoSeriesCode);
 
             MemberWithdrawalApplication."No." := NewNo;
 
@@ -5553,7 +5559,8 @@ codeunit 52186500 "CRM Integration"
         KeyExists: Boolean;
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -6097,7 +6104,8 @@ codeunit 52186500 "CRM Integration"
         KeyExists: Boolean;
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -6158,11 +6166,14 @@ codeunit 52186500 "CRM Integration"
                 SeriesSetup.TestField(SeriesSetup."BBF Report");
 
             if SinkFundApplication."Claim Type" = SinkFundApplication."Claim Type"::"Risk Claim" then
-                NoSeriesMgt.InitSeries(SeriesSetup."Sink Fund Nos.", SeriesSetup."Sink Fund Nos.", 0D, SinkFundApplication.No, SinkFundApplication."No. Series")
+                SinkFundApplication.No := NoSeriesMgt.GetNextNo(SeriesSetup."Sink Fund Nos.")
+                // NoSeriesMgt.InitSeries(SeriesSetup."Sink Fund Nos.", SeriesSetup."Sink Fund Nos.", 0D, SinkFundApplication.No, SinkFundApplication."No. Series")
             else if SinkFundApplication."Claim Type" = SinkFundApplication."Claim Type"::"BBF - Insurance Claim" then
-                NoSeriesMgt.InitSeries(SeriesSetup."BBF Insurance Nos.", SeriesSetup."BBF Insurance Nos.", 0D, SinkFundApplication.No, SinkFundApplication."No. Series")
+                SinkFundApplication.No := NoSeriesMgt.GetNextNo(SeriesSetup."BBF Insurance Nos.")
+                // NoSeriesMgt.InitSeries(SeriesSetup."BBF Insurance Nos.", SeriesSetup."BBF Insurance Nos.", 0D, SinkFundApplication.No, SinkFundApplication."No. Series")
             else
-                NoSeriesMgt.InitSeries(SeriesSetup."BBF Report", SeriesSetup."BBF Report", 0D, SinkFundApplication.No, SinkFundApplication."No. Series");
+                SinkFundApplication.No := NoSeriesMgt.GetNextNo(SeriesSetup."BBF Report");
+                // NoSeriesMgt.InitSeries(SeriesSetup."BBF Report", SeriesSetup."BBF Report", 0D, SinkFundApplication.No, SinkFundApplication."No. Series");
 
             // SinkFundApplication."CRM Application No." := crm_application_no.AsValue.AsText;
             SinkFundApplication."CRM Created By" := crm_created_by.AsValue.AsText;
@@ -7275,7 +7286,8 @@ codeunit 52186500 "CRM Integration"
         KeyExists: Boolean;
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -7316,7 +7328,8 @@ codeunit 52186500 "CRM Integration"
 
                 SeriesSetup.Get;
                 SeriesSetup.TestField(SeriesSetup."Guarantors Substitution");
-                NoSeriesMgt.InitSeries(SeriesSetup."Guarantors Substitution", SeriesSetup."Guarantors Substitution", 0D, NewNo, NewNoSeriesCode);
+                NewNo := NoSeriesMgt.GetNextNo(SeriesSetup."Guarantors Substitution");
+                // NoSeriesMgt.InitSeries(SeriesSetup."Guarantors Substitution", SeriesSetup."Guarantors Substitution", 0D, NewNo, NewNoSeriesCode);
 
                 LoanGuarantorSubstitution."No." := NewNo;
                 LoanGuarantorSubstitution."No. Series" := NewNoSeriesCode;
@@ -7936,7 +7949,7 @@ codeunit 52186500 "CRM Integration"
             Datum.Add('crm_notes', LoanGuarantorSubstitutionRequest."CRM Notes");
             Datum.Add('account_status', LoanGuarantorSubstitutionRequest."Account Status");
             Datum.Add('account_status_desc', Format(LoanGuarantorSubstitutionRequest."Account Status"));
-            Datum.Add('status', LoanGuarantorSubstitutionRequest.Status);
+            Datum.Add('status', Format(LoanGuarantorSubstitutionRequest.Status));
             Datum.Add('status_desc', Format(LoanGuarantorSubstitutionRequest.Status));
             Datum.Add('captured_by', LoanGuarantorSubstitutionRequest."Captured By");
             Datum.Add('posted', LoanGuarantorSubstitutionRequest.Posted);
@@ -8157,7 +8170,8 @@ codeunit 52186500 "CRM Integration"
         SavingsAccountApplication: Record "Savings Account Application";
         SignatoryApplication: Record "Signatory Application";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -8186,7 +8200,8 @@ codeunit 52186500 "CRM Integration"
 
         SeriesSetup.Get;
         SeriesSetup.TestField(SeriesSetup."Accounts Application");
-        NoSeriesMgt.InitSeries(SeriesSetup."Accounts Application", SeriesSetup."Accounts Application", 0D, NewNo, NewNoSeriesCode);
+        NewNo := NoSeriesMgt.GetNextNo(SeriesSetup."Accounts Application");
+        // NoSeriesMgt.InitSeries(SeriesSetup."Accounts Application", SeriesSetup."Accounts Application", 0D, NewNo, NewNoSeriesCode);
 
         SavingsAccountApplication."No." := NewNo;
         SavingsAccountApplication."No. Series" := NewNoSeriesCode;
@@ -8428,7 +8443,8 @@ codeunit 52186500 "CRM Integration"
         SavingsAccountApplication: Record "Savings Account Application";
         SignatoryApplication: Record "Signatory Application";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -8882,7 +8898,8 @@ codeunit 52186500 "CRM Integration"
 
         Variations: Record "Product Variations";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -9034,7 +9051,8 @@ codeunit 52186500 "CRM Integration"
 
         Variations: Record "Product Variations";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -9407,7 +9425,7 @@ codeunit 52186500 "CRM Integration"
             Datum.Add('crm_notes', LoanVariationRequest."CRM Notes");
             Datum.Add('crm_created_by', LoanVariationRequest."CRM Created By");
             Datum.Add('crm_originating_branch', LoanVariationRequest."CRM Originating Branch");
-            Datum.Add('status', LoanVariationRequest.Status);
+            Datum.Add('status', Format(LoanVariationRequest.Status));
             Datum.Add('status_desc', Format(LoanVariationRequest.Status));
             Datum.Add('application_date', GlobalFunctions.FormatISODate(LoanVariationRequest."Application Date"));
             Datum.Add('effective_date', GlobalFunctions.FormatISODate(LoanVariationRequest."Effective month"));
@@ -9919,7 +9937,8 @@ codeunit 52186500 "CRM Integration"
 
         Variations: Record "Product Variations";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -10079,7 +10098,8 @@ codeunit 52186500 "CRM Integration"
 
         Variations: Record "Product Variations";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -10452,7 +10472,7 @@ codeunit 52186500 "CRM Integration"
             Datum.Add('crm_notes', DepositVariationRequest."CRM Notes");
             Datum.Add('crm_created_by', DepositVariationRequest."CRM Created By");
             Datum.Add('crm_originating_branch', DepositVariationRequest."CRM Originating Branch");
-            Datum.Add('status', DepositVariationRequest.Status);
+            Datum.Add('status', Format(DepositVariationRequest.Status));
             Datum.Add('status_desc', Format(DepositVariationRequest.Status));
             Datum.Add('application_date', GlobalFunctions.FormatISODate(DepositVariationRequest."Application Date"));
             Datum.Add('effective_date', GlobalFunctions.FormatISODate(DepositVariationRequest."Effective month"));
@@ -10532,7 +10552,8 @@ codeunit 52186500 "CRM Integration"
         KeyExists: Boolean;
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -10576,7 +10597,8 @@ codeunit 52186500 "CRM Integration"
 
                 SeriesSetup.Get;
                 SeriesSetup.TestField(SeriesSetup."Share Capital Transfer No");
-                NoSeriesMgt.InitSeries(SeriesSetup."Share Capital Transfer No", SeriesSetup."Share Capital Transfer No", 0D, NewNo, NewNoSeriesCode);
+                NewNo := NoSeriesMgt.GetNextNo(SeriesSetup."Share Capital Transfer No");
+                // NoSeriesMgt.InitSeries(SeriesSetup."Share Capital Transfer No", SeriesSetup."Share Capital Transfer No", 0D, NewNo, NewNoSeriesCode);
 
                 ShareCapitalTransfer."Document No" := NewNo;
                 ShareCapitalTransfer."No. Series" := NewNoSeriesCode;
@@ -10744,7 +10766,8 @@ codeunit 52186500 "CRM Integration"
         KeyExists: Boolean;
 
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         NewNo: Code[20];
         NewNoSeriesCode: Code[20];
         // CRMNewNo: Code[20];
@@ -11167,7 +11190,7 @@ codeunit 52186500 "CRM Integration"
             Datum.Add('crm_created_by', ShareCapitalTransfer."CRM Created By");
             Datum.Add('crm_notes', ShareCapitalTransfer."CRM Notes");
             Datum.Add('crm_originating_branch', ShareCapitalTransfer."CRM Originating Branch");
-            Datum.Add('status', ShareCapitalTransfer.Status);
+            Datum.Add('status', Format(ShareCapitalTransfer.Status));
             Datum.Add('status_desc', Format(ShareCapitalTransfer.Status));
             Datum.Add('application_date', GlobalFunctions.FormatISODate(ShareCapitalTransfer."Application Date"));
 

@@ -644,7 +644,8 @@ table 52185826 "Member withdrawal Notice"
         if "No." = '' then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."Withdrawal Notice");
-            NoSeriesMgt.InitSeries(NoSetup."Withdrawal Notice", xRec."No. Series", 0D, "No.", "No. Series");
+            "No. Series" := NoSetup."Withdrawal Notice";
+            // NoSeriesMgt.InitSeries(NoSetup."Withdrawal Notice", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         // Validation
@@ -806,7 +807,8 @@ table 52185826 "Member withdrawal Notice"
         SkySendEmail: Codeunit "Sky Send Email";
         SMSSource: enum "SMS Source";
         NoSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Members: Record Members;
         GeneralSetUp: Record "General Set-Up";
         Txt00001: Label 'You cannot delete approved record';

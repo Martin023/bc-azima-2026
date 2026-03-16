@@ -82,10 +82,10 @@ PageExtension 52186714 pageextension52186714 extends "Service Contract List"
     }
     actions
     {
-        modify(Card)
-        {
-            ApplicationArea = Basic;
-        }
+        // modify(Card)
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("Service Items Out of Warranty")
         {
             ApplicationArea = Basic;

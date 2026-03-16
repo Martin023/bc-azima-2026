@@ -579,7 +579,8 @@ table 52185916 "Staff Advance Surrender Header"
             GenLedgerSetup.Get;
             TestNoSeries;
             //NoSeriesMgt.InitSeries(GetNoSeriesCode,xRec."No. Series",0D,No,"No. Series");
-            NoSeriesMgt.InitSeries(GenLedgerSetup."Staff Advance Surrender No.", xRec."No. Series", 0D, No, "No. Series");
+            No := NoSeriesMgt.GetNextNo(GenLedgerSetup."Staff Advance Surrender No.");
+            // NoSeriesMgt.InitSeries(GenLedgerSetup."Staff Advance Surrender No.", xRec."No. Series", 0D, No, "No. Series");
         end;
 
         "Account Type" := "Account Type"::Customer;
@@ -611,7 +612,8 @@ table 52185916 "Staff Advance Surrender Header"
         Vend: Record Vendor;
         FA: Record "Fixed Asset";
         BankAcc: Record "Bank Account";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         GenLedgerSetup: Record "Cash Office Setup";
         RecPayTypes: Record "Receipts and Payment Types";
         CashierLinks: Record "Cash Office User Template";
@@ -637,7 +639,7 @@ table 52185916 "Staff Advance Surrender Header"
         "Date From": Text[30];
         "Date To": Text[30];
         LastDay: Date;
-        LoadImprestDetails: Record "Cash Payment Line";
+        // LoadImprestDetails: Record "Cash Payment Line";
         TotAmt: Decimal;
         DimVal: Record "Dimension Value";
         "VAT Code": Code[20];

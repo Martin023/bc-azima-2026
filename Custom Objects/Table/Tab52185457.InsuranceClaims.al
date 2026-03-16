@@ -193,7 +193,8 @@ table 52185457 "Insurance Claims"
         if "Claim No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Insurance Claim No.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Insurance Claim No.", xRec."No. Series", 0D, "Claim No.", "No. Series");
+            "Claim No." := NoSeriesMgt.GetNextNo(SeriesSetup."Insurance Claim No.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Insurance Claim No.", xRec."No. Series", 0D, "Claim No.", "No. Series");
         end;
         Rec."Created Date" := CURRENTDATETIME;
         Rec."Created By" := UserId;
@@ -211,7 +212,7 @@ table 52185457 "Insurance Claims"
     end;
 
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         FA: Record "Fixed Asset";
         Employees: Record "HR Employees";
         Insurance: Record "Insurance";

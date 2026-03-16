@@ -318,7 +318,7 @@ page 52186366 "Micro Member  List"
             action("Member Statement[ Historical ]")
             {
                 ApplicationArea = Basic, Suite;
-                Image = customer;
+                Image = Customer;
                 Promoted = true;
                 PromotedCategory = "Report";
 

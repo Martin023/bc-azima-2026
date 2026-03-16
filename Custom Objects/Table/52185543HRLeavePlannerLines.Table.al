@@ -195,7 +195,8 @@ table 52185543 "HR Leave Planner Lines"
 
     var
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
         UserSetup: Record "User Setup";
         HREmp: Record "HR Employees";
         varDaysApplied: Integer;

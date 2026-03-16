@@ -209,14 +209,15 @@ table 52186219 "File Volumes"
         if "Volume Entry No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Volume Entry No.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Volume Entry No.", xRec."No. Series", 0D, "Volume Entry No.", "No. Series");
+            "Volume Entry No." := NoSeriesMgt.GetNextNo(SeriesSetup."Volume Entry No.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Volume Entry No.", xRec."No. Series", 0D, "Volume Entry No.", "No. Series");
         end;
     end;
 
     var
         FilesTable: Record "Files Table";
         MembNoSeries: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         BatchesTable: Record "Batch No Table";
 
 }

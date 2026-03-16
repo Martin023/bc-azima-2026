@@ -161,7 +161,8 @@ table 52185453 "Contract Request"
         if "No." = '' then begin
             NoseriesSetup.Get;
             NoseriesSetup.TestField(NoseriesSetup."Contract Request No.");
-            NoSeriesMgt.InitSeries(NoseriesSetup."Contract Request No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(NoseriesSetup."Contract Request No.");
+            // NoSeriesMgt.InitSeries(NoseriesSetup."Contract Request No.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         UserSetup.Reset;
@@ -188,7 +189,7 @@ table 52185453 "Contract Request"
         UserId: Code[20];
         UserSetup: Record "User Setup";
         NoseriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         CaseTracker: Record "CF Tracker";
         CFPage: Page "DMU CF Page";
         CFStations: Record "CF Station Actions";

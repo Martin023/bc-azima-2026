@@ -95,14 +95,15 @@ PageExtension 52186999 pageextension52186999 extends "Job Resource Manager RC"
         {
             ApplicationArea = Basic;
         }
-        modify("Resource Costs")
-        {
-            ApplicationArea = Basic;
-        }
-        modify("Resource Prices")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Resource Costs")
+        // {
+        //     ApplicationArea = Basic;
+        // }
+        // Deprecated: Replaced by V16 price calculation
+        // modify("Resource Prices")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("Resource Service Zones")
         {
             ApplicationArea = Basic;
@@ -119,22 +120,26 @@ PageExtension 52186999 pageextension52186999 extends "Job Resource Manager RC"
         {
             ApplicationArea = Basic;
         }
-        modify("Resource P&rice Changes")
-        {
-            ApplicationArea = Basic;
-        }
-        modify("Resource Pr&ice Chg from Resource")
-        {
-            ApplicationArea = Basic;
-        }
-        modify("Resource Pri&ce Chg from Prices")
-        {
-            ApplicationArea = Basic;
-        }
-        modify("I&mplement Resource Price Changes")
-        {
-            ApplicationArea = Basic;
-        }
+        // Deprecated: Replaced by V16 price calculation
+        // modify("Resource P&rice Changes")
+        // {
+        //     ApplicationArea = Basic;
+        // }
+        // Deprecated: Replaced by V16 price calculation
+        // modify("Resource Pr&ice Chg from Resource")
+        // {
+        //     ApplicationArea = Basic;
+        // }
+        // Deprecated: Replaced by V16 price calculation
+        // modify("Resource Pri&ce Chg from Prices")
+        // {
+        //     ApplicationArea = Basic;
+        // }
+        // Deprecated: Replaced by V16 price calculation
+        // modify("I&mplement Resource Price Changes")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("Create Time Sheets")
         {
             ApplicationArea = Basic;

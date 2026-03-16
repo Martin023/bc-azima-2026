@@ -3,7 +3,7 @@ report 52187363 "Member Rejoining"
     ApplicationArea = All;
     Caption = 'Member Rejoining';
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-kenpipe-2024/Layout/Member Rejoining.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Member Rejoining.rdl';
     UsageCategory = ReportsAndAnalysis;
     dataset
     {

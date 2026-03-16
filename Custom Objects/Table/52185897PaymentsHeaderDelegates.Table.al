@@ -131,7 +131,8 @@ table 52185897 "Payments Header Delegates"
         if "Transaction No." = '' then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."Delegate  PVs Nos.");
-            NoSeriesMgt.InitSeries(NoSetup."Delegate  PVs Nos.", xRec."No. Series", 0D, "Transaction No.", "No. Series");
+            "Transaction No." := NoSeriesMgt.GetNextNo(NoSetup."Delegate  PVs Nos.");   
+            // NoSeriesMgt.InitSeries(NoSetup."Delegate  PVs Nos.", xRec."No. Series", 0D, "Transaction No.", "No. Series");
         end;
 
         "Transaction Date" := Today;
@@ -158,7 +159,8 @@ table 52185897 "Payments Header Delegates"
     var
         Cust: Record Members;
         NoSetup: Record "Cash Office Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         BOSARcpt: Record "Receipts and Payment Types";
         GLAcct: Record "G/L Account";
         UserSetup: Record "User Setup";

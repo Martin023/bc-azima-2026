@@ -671,7 +671,7 @@ page 52187312 "Credit Management Role Center"
                             ApplicationArea = Basic, Suite;
                             Caption = 'Pending Loans Variations List';
                             RunObject = Page "Variations List";
-                            RunPageLink = Status = filter("Pending Approval"), "Variation Type" = filter(Loan);
+                            RunPageLink = Status = filter("Pending"), "Variation Type" = filter(Loan);
                         }
                         action("Approved Variations List")
                         {
@@ -709,7 +709,7 @@ page 52187312 "Credit Management Role Center"
                             ApplicationArea = Basic, Suite;
                             Caption = 'Pending Savings Variations List';
                             RunObject = Page "Savings Variations List";
-                            RunPageLink = Status = filter("Pending Approval"), "Variation Type" = filter(savings);
+                            RunPageLink = Status = filter("Pending"), "Variation Type" = filter(savings);
                         }
                         action("Savings  AppVariations List")
                         {

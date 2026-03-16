@@ -72,7 +72,8 @@ table 52185594 "HR Professional body Header"
         if "No." = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Proffessional Bodies Nos.");
-            NoSeriesMgt.InitSeries(HRSetup."Proffessional Bodies Nos.", xRec."No Series", 0D, "No.", "No Series");
+            "No." := NoSeriesMgt.GetNextNo(HRSetup."Proffessional Bodies Nos.");
+            // NoSeriesMgt.InitSeries(HRSetup."Proffessional Bodies Nos.", xRec."No Series", 0D, "No.", "No Series");
         end;
 
         "Created By" := UserId;
@@ -82,7 +83,8 @@ table 52185594 "HR Professional body Header"
     var
         HREmployees: Record "HR Employees";
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         EmployeeQaulifications: Record "HR Employee Qualifications";
 }
 

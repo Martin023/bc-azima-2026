@@ -162,7 +162,7 @@ table 52185443 "Actual Loan Shedule"
     end;
 
     var
-        NoSeriesMngnt: Codeunit NoSeriesManagement;
+        // NoSeriesMngnt: Codeunit NoSeriesManagement;
         SACCOMember: Record Customer;
         LoanCategory: Record "Loan Charges";
         LoanApp: Record Loans;

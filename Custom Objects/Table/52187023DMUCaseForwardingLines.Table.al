@@ -242,7 +242,8 @@ table 52187023 "DMU Case Forwarding Lines"
         ConfigPackageMgt: Codeunit "Config. Package Management";
         Text001: Label 'You cannot use system table %1 in the package.';
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         SystemEditsCodeunit: Codeunit "System Editss";
         CreditNoSeries: Record "Credit Nos. Series";
         CFHeader: Record "DMU Case Forwarding";

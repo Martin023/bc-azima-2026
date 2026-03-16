@@ -388,7 +388,7 @@ page 52186183 "Property Details"
     end;
 
     var
-        FrmCalendar: Page "Units Meter Rating";
+        // FrmCalendar: Page "Units Meter Rating";
         D: Date;
         "Total Area sq ftVisible": Boolean;
         PTypeErr: Label 'LAND Cannot be a Property Type for this Building';

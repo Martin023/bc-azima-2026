@@ -1,6 +1,6 @@
 page 52185511 "HR Job Responsiblities Lines"
 {
-    PageType = List;
+    PageType = ListPart;
     SourceTable = "HR Job Responsiblities";
     UsageCategory = Lists;
     ApplicationArea = Basic;

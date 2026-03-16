@@ -886,7 +886,8 @@ table 52185704 "Savings Account Application"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Accounts Application");
-            NoSeriesMgt.InitSeries(SeriesSetup."Accounts Application", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Accounts Application");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Accounts Application", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         "Application Date" := Today;
@@ -1018,7 +1019,8 @@ table 52185704 "Savings Account Application"
         SkySendEmail: CodeUnit "Sky Send Email";
         SMSSource: enum "SMS Source";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Cust: Record Members;
         ProductFactory: Record "Product Factory";
         ImageData: Record "Image Data";

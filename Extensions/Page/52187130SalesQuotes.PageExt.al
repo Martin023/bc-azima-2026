@@ -295,13 +295,13 @@ PageExtension 52187130 pageextension52187130 extends "Sales Quotes"
 
         //Unsupported feature: Property Modification (Name) on "ActionGroup1102601026(Action 1102601026)".
 
-        modify(Statistics)
-        {
-            ApplicationArea = Basic;
+        // modify(Statistics)
+        // {
+        //     ApplicationArea = Basic;
 
-            //Unsupported feature: Property Modification (PromotedCategory) on "Statistics(Action 1102601028)".
+        //     //Unsupported feature: Property Modification (PromotedCategory) on "Statistics(Action 1102601028)".
 
-        }
+        // }
         modify("Co&mments")
         {
             ApplicationArea = Basic;

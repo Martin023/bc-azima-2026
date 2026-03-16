@@ -20,7 +20,8 @@ table 52186792 "Promise Topay Header"
                 if "No." = '' then begin
                     SeriesSetup.Get;
                     SeriesSetup.TestField(SeriesSetup."Promise To Pay");
-                    NoSeriesMgt.InitSeries(SeriesSetup."Promise To Pay", xRec."No. Series", 0D, "No.", "No. Series");
+                    "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Promise To Pay");
+                    // NoSeriesMgt.InitSeries(SeriesSetup."Promise To Pay", xRec."No. Series", 0D, "No.", "No. Series");
 
                     "Created At" := CurrentDateTime;
                     "Created By" := UserId;
@@ -122,7 +123,8 @@ table 52186792 "Promise Topay Header"
     begin
         SeriesSetup.Get;
         SeriesSetup.TestField(SeriesSetup."Promise To Pay");
-        NoSeriesMgt.InitSeries(SeriesSetup."Promise To Pay", xRec."No. Series", 0D, "No.", "No. Series");
+        "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Promise To Pay");
+        // NoSeriesMgt.InitSeries(SeriesSetup."Promise To Pay", xRec."No. Series", 0D, "No.", "No. Series");
 
         "Created At" := CurrentDateTime;
         "Created By" := UserId;
@@ -131,7 +133,8 @@ table 52186792 "Promise Topay Header"
     end;
 
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         SeriesSetup: Record "Credit Nos. Series";
         GlobalFunctions: Codeunit "Global Functions";
         SubDepartments: Enum "Sub Module";

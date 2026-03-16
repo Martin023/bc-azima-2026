@@ -54,7 +54,8 @@ table 52186077 "Delegate AGM Update Header"
         if "No." = '' then begin
             MembNoSeries.Get;
             MembNoSeries.TestField(MembNoSeries."Delega Change");
-            NoSeriesMgt.InitSeries(MembNoSeries."Delega Change", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(MembNoSeries."Delega Change");
+            // NoSeriesMgt.InitSeries(MembNoSeries."Delega Change", xRec."No. Series", 0D, "No.", "No. Series");
             "Created By" := UserId;
             "Creation Date" := Today;
         end;
@@ -62,7 +63,8 @@ table 52186077 "Delegate AGM Update Header"
 
     var
         MembNoSeries: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
 
     [Scope('OnPrem')]
     procedure Tracker(DelegateMemberss: Record "Delegate Members")

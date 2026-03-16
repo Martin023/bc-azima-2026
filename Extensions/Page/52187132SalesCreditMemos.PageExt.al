@@ -277,10 +277,10 @@ PageExtension 52187132 pageextension52187132 extends "Sales Credit Memos"
     }
     actions
     {
-        modify(Statistics)
-        {
-            ApplicationArea = Basic;
-        }
+        // modify(Statistics)
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("Co&mments")
         {
             ApplicationArea = Basic;

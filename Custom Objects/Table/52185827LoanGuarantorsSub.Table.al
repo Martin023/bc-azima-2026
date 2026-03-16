@@ -22,7 +22,7 @@ table 52185827 "Loan Guarantors Sub"
                     if LoanApp.Get(GHeader."Loan No.") then begin
                         //Check status - sasra
                         LoanApp.CalcFields("Loans Category-SASRA");
-                        if LoanApp."Loans Category-SASRA" > GenSetUp."Allowed Loan Categories" then
+                        if LoanApp."Loans Category-SASRA".AsInteger() > GenSetUp."Allowed Loan Categories".AsInteger() then
                             Message(Text012, LoanApp."Loans Category-SASRA");
                     end;
                 end;
@@ -474,7 +474,7 @@ table 52185827 "Loan Guarantors Sub"
                     if LoanApp.Find('-') then begin
                         //Check status - sasra
                         LoanApp.CalcFields("Loans Category-SASRA");
-                        if LoanApp."Loans Category-SASRA" >= GenSetUp."Allowed Loan Categories" then
+                        if LoanApp."Loans Category-SASRA".AsInteger() >= GenSetUp."Allowed Loan Categories".AsInteger() then
                             Message(Text012, LoanApp."Loans Category-SASRA");
                     end;
                 end;

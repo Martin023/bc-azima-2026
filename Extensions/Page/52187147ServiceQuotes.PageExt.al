@@ -220,10 +220,10 @@ PageExtension 52187147 pageextension52187147 extends "Service Quotes"
         {
             ApplicationArea = Basic;
         }
-        modify(Statistics)
-        {
-            ApplicationArea = Basic;
-        }
+        // modify(Statistics)
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("Customer Card")
         {
             ApplicationArea = Basic;

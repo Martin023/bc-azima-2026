@@ -5,7 +5,7 @@ page 52185699 "Virtual Registrations List"
     Editable = false;
     InsertAllowed = false;
     ModifyAllowed = false;
-    PageType = List;
+    PageType = ListPart;
     SourceTable = "Virtual Registrations";
     ApplicationArea = Basic, Suite;
     UsageCategory = Lists;

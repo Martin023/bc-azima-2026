@@ -477,7 +477,8 @@ table 52187050 "Security Perfection"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."Security Perfection No.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Security Perfection No.", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."Security Perfection No.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Security Perfection No.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
         Rec."Created at" := CURRENTDATETIME;
         Rec."Created By" := UserId;
@@ -619,7 +620,7 @@ table 52187050 "Security Perfection"
     // end;
 
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         XValue: code[50];
         RecordID: Code[50];
         SeriesSetup: Record "Credit Nos. Series";

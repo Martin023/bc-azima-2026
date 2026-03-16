@@ -100,10 +100,5 @@ table 52186173 "HR Loan Repayment Schedule"
     fieldgroups
     {
     }
-
-    var
-        NoSeriesMngnt: Codeunit NoSeriesManagement;
-        SACCOMember: Record "HR Succession Job Rotation";
-        LoanCategory: Record "HR Staff Loan Typess";
 }
 

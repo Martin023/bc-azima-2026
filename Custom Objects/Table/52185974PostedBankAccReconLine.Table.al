@@ -90,11 +90,11 @@ table 52185974 "Posted Bank Acc. Recon Line"
             Caption = 'Posting Exch. Line No.';
             Editable = false;
         }
-        field(20; "Statement Type"; Option)
+        field(20; "Statement Type"; Enum "Bank Acc. Rec. Stmt. Type")// Option)
         {
             Caption = 'Statement Type';
-            OptionCaption = 'Bank Reconciliation,Payment Application';
-            OptionMembers = "Bank Reconciliation","Payment Application";
+            // OptionCaption = 'Bank Reconciliation,Payment Application';
+            // OptionMembers = "Bank Reconciliation","Payment Application";
         }
         field(21; "Account Type"; Option)
         {
@@ -146,7 +146,7 @@ table 52185974 "Posted Bank Acc. Recon Line"
             Caption = 'Shortcut Dimension 2 Code';
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2));
         }
-        field(50; "Match Confidence"; Option)
+        field(50; "Match Confidence"; Enum "Bank Rec. Match Confidence")
         {
             CalcFormula = Max("Applied Payment Entry"."Match Confidence" WHERE("Statement Type" = FIELD("Statement Type"),
                                                                                 "Bank Account No." = FIELD("Bank Account No."),
@@ -156,8 +156,8 @@ table 52185974 "Posted Bank Acc. Recon Line"
             Editable = false;
             FieldClass = FlowField;
             InitValue = "None";
-            OptionCaption = 'None,Low,Medium,High,High - Text-to-Account Mapping,Manual,Accepted';
-            OptionMembers = "None",Low,Medium,High,"High - Text-to-Account Mapping",Manual,Accepted;
+            // OptionCaption = 'None,Low,Medium,High,High - Text-to-Account Mapping,Manual,Accepted';
+            // OptionMembers = "None",Low,Medium,High,"High - Text-to-Account Mapping",Manual,Accepted;
         }
         field(51; "Match Quality"; Integer)
         {

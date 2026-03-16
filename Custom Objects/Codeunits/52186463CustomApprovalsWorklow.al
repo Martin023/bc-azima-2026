@@ -4960,7 +4960,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
             database::"Product Variations":
                 begin
                     recref.settable(VariationsRec);
-                    VariationsRec.validate(Status, VariationsRec.Status::"Pending Approval");
+                    VariationsRec.validate(Status, VariationsRec.Status::"Pending");
                     VariationsRec.modify(true);
                     Variant := VariationsRec;
                     IsHandled := true;
@@ -10490,7 +10490,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
             database::"Product Variations":
                 begin
                     recref.SetTable(VariationsRec);
-                    VariationsRec.Validate(Status, VariationsRec.Status::"Pending Approval");
+                    VariationsRec.Validate(Status, VariationsRec.Status::"Pending");
                     VariationsRec.modify(true);
                     Variant := VariationsRec;
 

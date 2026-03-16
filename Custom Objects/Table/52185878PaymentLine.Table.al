@@ -1367,7 +1367,8 @@ table 52185878 "Payment Line"
         if No = '' then begin
             GenLedgerSetup.Get;
             GenLedgerSetup.TestField(GenLedgerSetup."Normal Payments No");
-            NoSeriesMgt.InitSeries(GenLedgerSetup."Normal Payments No", xRec."No. Series", 0D, No, "No. Series");
+            No := NoSeriesMgt.GetNextNo(GenLedgerSetup."Normal Payments No");
+            // NoSeriesMgt.InitSeries(GenLedgerSetup."Normal Payments No", xRec."No. Series", 0D, No, "No. Series");
         end;
         PHead.Reset;
         PHead.SetRange(PHead."No.", No);
@@ -1425,7 +1426,8 @@ table 52185878 "Payment Line"
         Vend: Record Vendor;
         FA: Record "Fixed Asset";
         BankAcc: Record "Bank Account";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         GenLedgerSetup: Record "Cash Office Setup";
         RecPayTypes: Record "Receipts and Payment Types";
         CashierLinks: Record "Cash Office User Template";
@@ -1451,7 +1453,7 @@ table 52185878 "Payment Line"
         "Date To": Text[30];
         LastDay: Date;
         ImprestReqDet: Record "Imprest Details-User";
-        LoadImprestDetails: Record "Cash Payment Line";
+        // LoadImprestDetails: Record "Cash Payment Line";
         TotAmt: Decimal;
         DimVal: Record "Dimension Value";
         PHead: Record "Payments Header";

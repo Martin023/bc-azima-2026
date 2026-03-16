@@ -93,7 +93,7 @@ table 52185821 "Checkoff Buffer"
         field(23; "Other Comments"; Text[50])
         {
         }
-        field(40; Status; Enum "Member Status")
+        field(40; Status; Enum "Savings Account Status")
         {
             Caption = 'Member Status';
             // OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';

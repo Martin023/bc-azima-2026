@@ -343,7 +343,7 @@ Report 52185608 "Phys. Inventory List Variance"
     procedure PickSNLotFromWhseEntry(ItemNo: Code[20]; VariantCode: Code[10]; LocationCode: Code[10]; BinCode: Code[20]; UnitOM: Code[10])
     var
         WhseEntry: Record "Warehouse Entry";
-        ItemTrackg: Option "None","Lot No.","Lot and Serial No.","Serial No.";
+        ItemTrackg: Enum "Item Tracking Entry Type";//Option "None","Lot No.","Lot and Serial No.","Serial No.";
     begin
         WhseEntry.SetCurrentkey(
           "Item No.", "Bin Code", "Location Code", "Variant Code", "Unit of Measure Code",
@@ -371,7 +371,7 @@ Report 52185608 "Phys. Inventory List Variance"
     end;
 
 
-    procedure CreateReservEntry(ItemJournalLine: Record "Item Journal Line"; Qty: Decimal; SerialNo: Code[20]; LotNo: Code[20]; ItemTracking: Option "None","Lot No.","Lot and Serial No.","Serial No.")
+    procedure CreateReservEntry(ItemJournalLine: Record "Item Journal Line"; Qty: Decimal; SerialNo: Code[20]; LotNo: Code[20]; ItemTracking: Enum "Item Tracking Entry Type")// Option "None","Lot No.","Lot and Serial No.","Serial No.")
     var
         FoundRec: Boolean;
     begin

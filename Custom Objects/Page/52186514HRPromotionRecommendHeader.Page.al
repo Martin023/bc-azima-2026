@@ -205,37 +205,12 @@ page 52186514 "HR Promotion Recommend Header"
     end;
 
     var
-        HREmp: Record "HR Employees";
-        EmpJobDesc: Text[50];
-        HRJobs: Record "HR Jobs";
-        SupervisorName: Text[60];
-        //SMTP: Codeunit "SMTP Mail";
-        URL: Text[500];
-        HRSetup: Record "HR Setup";
-        EmpDept: Text[30];
-        //// //ApprovalEntries: Page "Approval Entries";
-        HRLeaveLedgerEntries: Record "HR Leave Ledger Entries";
-        EmpName: Text[70];
-        ApprovalComments: Page "Approval Comments";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
-        UserSetup: Record "User Setup";
-        varDaysApplied: Integer;
-        ReturnDateLoop: Boolean;
-        mSubject: Text[250];
-        ApplicantsEmail: Text[30];
-        "LineNo.": Integer;
-        sDate: Record Date;
-        Customized: Record "HR Leave Calendar";
-        HREmailParameters: Record "HR E-Mail Parameters";
-        HRJournalBatch: Record "HR Leave Journal Batch";
         PromoLinesrec: Record "HR Promo. Recommend Lines";
         Txt001: Label 'Do you want to promote this employee?';
         Txt002: Label 'Employee No. %1 has been successfully promoted';
         Employees: Record "HR Employees";
         // CustomApprovals: Codeunit "Custom Approvals Codeunit";
         VarVariant: Variant;
-        OpenApprovalEntriesExistForCurrUser: Boolean;
         OpenApprovalEntriesExist: Boolean;
-        ShowWorkflowStatus: Boolean;
 }
 

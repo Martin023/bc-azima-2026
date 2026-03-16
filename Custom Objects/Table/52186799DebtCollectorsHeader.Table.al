@@ -109,7 +109,8 @@ table 52186799 "Debt Collectors Header"
         if "No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField(SeriesSetup."External Debt Collectors");
-            NoSeriesMgt.InitSeries(SeriesSetup."External Debt Collectors", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(SeriesSetup."External Debt Collectors");
+            // NoSeriesMgt.InitSeries(SeriesSetup."External Debt Collectors", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         "Entered By" := UserId;
@@ -132,7 +133,8 @@ table 52186799 "Debt Collectors Header"
     var
         RecoveryHeader: Record "Loan Recovery Header";
         SeriesSetup: Record "Credit Nos. Series";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record "User Setup";
         DepartMent: Enum "Responsibility Center Enum";
 

@@ -18,12 +18,12 @@ table 52185857 "Document Exemptions Auth."
                 end;
             end;
         }
-        field(2; "Document Type"; Option)
+        field(2; "Document Type"; Enum "Approval Document Type")//Option)
         {
             Caption = 'Document Type';
             Editable = false;
-            OptionCaption = 'Loan,Others';
-            OptionMembers = Loan,Others;
+            // OptionCaption = 'Loan,Others';
+            // OptionMembers = Loan,Others;
         }
         field(3; "Document No."; Code[20])
         {
@@ -178,13 +178,15 @@ table 52185857 "Document Exemptions Auth."
         if "Entry No." = '' then begin
             SeriesSetup.Get;
             SeriesSetup.TestField("Document Apprvls.");
-            NoSeriesMgt.InitSeries(SeriesSetup."Document Apprvls.", xRec."No. Series", 0D, "Entry No.", "No. Series");
+            "Entry No." := NoSeriesMgt.GetNextNo(SeriesSetup."Document Apprvls.");
+            // NoSeriesMgt.InitSeries(SeriesSetup."Document Apprvls.", xRec."No. Series", 0D, "Entry No.", "No. Series");
         end;
     end;
 
     var
         SeriesSetup: Record "Banking No Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         Loans: Record Loans;
 }
 

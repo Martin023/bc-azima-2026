@@ -122,7 +122,8 @@ table 52187043 "Investment Interest Header"
         if "No." = '' then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."Investment Nos");
-            NoSeriesMgt.InitSeries(NoSetup."Investment Nos", xRec."No. Series", 0D, "No.", "No. Series");
+            "No." := NoSeriesMgt.GetNextNo(NoSetup."Investment Nos");
+            // NoSeriesMgt.InitSeries(NoSetup."Investment Nos", xRec."No. Series", 0D, "No.", "No. Series");
         end;
 
         "Posting Date" := Today;
@@ -130,7 +131,8 @@ table 52187043 "Investment Interest Header"
     end;
 
     var
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record "User Setup";
         NoSetup: Record "Banking No Setup";
         CUST: Record Customer;

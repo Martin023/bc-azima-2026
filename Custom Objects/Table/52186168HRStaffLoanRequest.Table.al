@@ -372,7 +372,8 @@ table 52186168 "HR Staff Loan Request"
         if "Loan No." = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Loan Application Nos.");
-            NoSeriesMgt.InitSeries(HRSetup."Loan Application Nos.", xRec."No series", 0D, "Loan No.", "No series");
+            "Loan No." := NoSeriesMgt.GetNextNo(HRSetup."Loan Application Nos.");
+            // NoSeriesMgt.InitSeries(HRSetup."Loan Application Nos.", xRec."No series", 0D, "Loan No.", "No series");
         end;
         //GET APPLICANT DETAILS FROM HR EMPLOYEES TABLE AND COPY THEM TO THE LEAVE APPLICATION TABLE
         HREmp.Reset;
@@ -423,7 +424,8 @@ table 52186168 "HR Staff Loan Request"
 
     var
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record "User Setup";
         HREmp: Record "HR Employees";
         HRLoanTypes: Record "HR Staff Loan Typess";

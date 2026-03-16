@@ -222,7 +222,7 @@ page 52186485 "HR Training Needs Card"
             {
                 ApplicationArea = Basic;
             }
-            part("Attached Documents"; "Document Attachment Factbox")
+            part("Attached Documents"; "Doc. Attachment List Factbox")//"Document Attachment Factbox")
             {
                 ApplicationArea = basic;
                 Caption = 'Attachments';
