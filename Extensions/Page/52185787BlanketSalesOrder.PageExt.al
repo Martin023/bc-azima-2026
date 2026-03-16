@@ -820,10 +820,10 @@ PageExtension 52185787 pageextension52185787 extends "Blanket Sales Order"
 
         //Unsupported feature: Property Deletion (ToolTipML) on "Area(Control 101)".
 
-        modify("Attached Documents")
-        {
-            Visible = false;
-        }
+        // modify("Attached Documents")
+        // {
+        //     Visible = false;
+        // }
 
         //Unsupported feature: Property Deletion (ApplicationArea) on "Control13(Control 13)".
 

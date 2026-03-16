@@ -166,18 +166,18 @@ PageExtension 52186990 pageextension52186990 extends "Sales Manager Role Center"
         {
             ApplicationArea = Basic;
         }
-        modify("Sales Price &Worksheet")
-        {
-            ApplicationArea = Basic;
-        }
-        modify("Sales &Prices")
-        {
-            ApplicationArea = Basic;
-        }
-        modify("Sales Line &Discounts")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Sales Price &Worksheet")
+        // {
+        //     ApplicationArea = Basic;
+        // }
+        // modify("Sales &Prices")
+        // {
+        //     ApplicationArea = Basic;
+        // }
+        // modify("Sales Line &Discounts")
+        // {
+        //     ApplicationArea = Basic;
+        // }
 
         //Unsupported feature: Property Deletion (ToolTipML) on ""Customer - &Order Summary"(Action 13)".
 

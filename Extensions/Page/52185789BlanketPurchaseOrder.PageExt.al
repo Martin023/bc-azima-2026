@@ -812,7 +812,7 @@ PageExtension 52185789 pageextension52185789 extends "Blanket Purchase Order"
     }
     actions
     {
-        modify(Statistics)
+        modify(PurchaseOrderStatistics)
         {
             ApplicationArea = Basic;
 

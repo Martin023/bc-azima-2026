@@ -226,14 +226,14 @@ PageExtension 52186992 pageextension52186992 extends "Purchasing Agent Role Cent
         {
             ApplicationArea = Basic;
         }
-        modify("Pur&chase Prices")
-        {
-            ApplicationArea = Basic;
-        }
-        modify("Purchase &Line Discounts")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Pur&chase Prices")
+        // {
+        //     ApplicationArea = Basic;
+        // }
+        // modify("Purchase &Line Discounts")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("Navi&gate")
         {
             ApplicationArea = Basic;

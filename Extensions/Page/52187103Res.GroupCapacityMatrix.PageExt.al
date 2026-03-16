@@ -80,14 +80,14 @@ PageExtension 52187103 pageextension52187103 extends "Res. Group Capacity Matrix
         {
             ApplicationArea = Basic;
         }
-        modify(Costs)
-        {
-            ApplicationArea = Basic;
-        }
-        modify(Prices)
-        {
-            ApplicationArea = Basic;
-        }
+        // modify(Costs)
+        // {
+        //     ApplicationArea = Basic;
+        // }
+        // modify(Prices)
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify(ResGroupAvailability)
         {
             ApplicationArea = Basic;
