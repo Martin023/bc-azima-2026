@@ -6,7 +6,7 @@ PageExtension 52186438 pageextension52186438 extends "Item Availability by Varia
         modify(PeriodType)
         {
             ToolTip = 'Day';
-            OptionCaption = 'Day,Week,Month,Quarter,Year,Period';
+            // OptionCaption = 'Day,Week,Month,Quarter,Year,Period';
             ApplicationArea = Basic;
 
             //Unsupported feature: Property Modification (SourceExpr) on "PeriodType(Control 33)".

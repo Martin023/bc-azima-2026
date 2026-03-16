@@ -155,14 +155,14 @@ PageExtension 52187090 pageextension52187090 extends "Res. All. per Service  Mat
         {
             ApplicationArea = Basic;
         }
-        modify(Costs)
-        {
-            ApplicationArea = Basic;
-        }
-        modify(Prices)
-        {
-            ApplicationArea = Basic;
-        }
+        // modify(Costs)
+        // {
+        //     ApplicationArea = Basic;
+        // }
+        // modify(Prices)
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("Resource A&vailability")
         {
             ApplicationArea = Basic;

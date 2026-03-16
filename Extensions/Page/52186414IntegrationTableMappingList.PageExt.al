@@ -26,14 +26,14 @@ PageExtension 52186414 pageextension52186414 extends "Integration Table Mapping 
         {
             ApplicationArea = Basic;
         }
-        modify("Table Config Template Code")
-        {
-            ApplicationArea = Basic;
-        }
-        modify("Int. Tbl. Config Template Code")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Table Config Template Code")
+        // {
+        //     ApplicationArea = Basic;
+        // }
+        // modify("Int. Tbl. Config Template Code")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("Synch. Only Coupled Records")
         {
             ApplicationArea = Basic;

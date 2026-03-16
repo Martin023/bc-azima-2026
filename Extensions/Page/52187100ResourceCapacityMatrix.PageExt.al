@@ -88,14 +88,14 @@ PageExtension 52187100 pageextension52187100 extends "Resource Capacity Matrix"
         {
             ApplicationArea = Basic;
         }
-        modify(Costs)
-        {
-            ApplicationArea = Basic;
-        }
-        modify(Prices)
-        {
-            ApplicationArea = Basic;
-        }
+        // modify(Costs)
+        // {
+        //     ApplicationArea = Basic;
+        // }
+        // modify(Prices)
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("&Set Capacity")
         {
             ApplicationArea = Basic;

@@ -65,7 +65,7 @@ page 52187100 "Staff Welfare "
         }
         area(factboxes)
         {
-            part("Attached Documents"; "Document Attachment Factbox")
+            part("Attached Documents"; "Doc. Attachment List Factbox")
             {
                 ApplicationArea = basic;
                 Caption = 'Attachments';
