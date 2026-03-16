@@ -150,7 +150,7 @@ page 52186120 "Surety Management Card"
                     trigger OnValidate()
                     var
                         myInt: Integer;
-                        
+
                     begin
                         Rec.TestField(Status, Rec.Status::Approved);
                     end;
@@ -228,7 +228,7 @@ page 52186120 "Surety Management Card"
         }
         area(FactBoxes)
         {
-            part("Attached Documents"; "Doc. Attachment List Factbox")//"Document Attachment Factbox")
+            part("Attached Documents"; "Doc. Attachment List Factbox")//"Doc. Attachment List Factbox")
             {
                 ApplicationArea = All;
                 Caption = 'Attachments';

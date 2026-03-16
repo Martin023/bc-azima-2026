@@ -489,9 +489,9 @@ Report 52185568 "Payroll Summary"
                 if "HR Employees".GetFilter("HR Employees"."Current Month Filter") = '' then
                     Error('You must specify current Period filter.');
 
-                CurrReport.CreateTotals(cValue[1], cValue[2], cValue[3], cValue[4], cValue[5], cValue[6], cValue[7], cValue[8], cValue[9], cValue[10]);
-                CurrReport.CreateTotals(cValue[11], cValue[12], cValue[13], cValue[14], cValue[15], cValue[16], cValue[17]);
-                CurrReport.CreateTotals(cValue[18], cValue[19], cValue[20]);
+                // CurrReport.CreateTotals(cValue[1], cValue[2], cValue[3], cValue[4], cValue[5], cValue[6], cValue[7], cValue[8], cValue[9], cValue[10]);
+                // CurrReport.CreateTotals(cValue[11], cValue[12], cValue[13], cValue[14], cValue[15], cValue[16], cValue[17]);
+                // CurrReport.CreateTotals(cValue[18], cValue[19], cValue[20]);
 
                 RCount := 0;
 

@@ -61,9 +61,6 @@ Report 52185509 "Separation report"
             column(No; no)
             {
             }
-            column(pageNo; CurrReport.PageNo)
-            {
-            }
             column(today; Today)
             {
             }

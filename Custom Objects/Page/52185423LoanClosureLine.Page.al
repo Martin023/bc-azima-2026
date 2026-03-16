@@ -61,8 +61,6 @@ page 52185423 "Loan Closure Line"
 
     var
         // MobileBanking: Codeunit "Sky Mbanking";
-        MpesaManualUpload: Record "Mpesa Manual Upload";
-        MBankingTransactions: Record "Sky Transactions";
         AccountNo: Text;
         LoanNo: Code[20];
         "Key": Text;

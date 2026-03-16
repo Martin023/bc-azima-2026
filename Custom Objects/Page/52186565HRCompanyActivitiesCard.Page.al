@@ -26,38 +26,38 @@ page 52186565 "HR Company Activities Card"
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
-                    Editable=InvTcode;
+                    Editable = InvTcode;
                 }
-                field(Jobs;Rec.Jobs)
+                field(Jobs; Rec.Jobs)
                 {
-                    Editable=Inst;
-                    
+                    Editable = Inst;
+
                 }
-                field("Job Description";Rec."Job Description")
+                field("Job Description"; Rec."Job Description")
                 {
-                    Editable=False;
+                    Editable = False;
                 }
                 field("Start Date"; Rec."Start Date")
                 {
                     ApplicationArea = Basic;
-                    Editable=DepType;
+                    Editable = DepType;
                 }
                 field("End Date"; Rec."End Date")
                 {
                     ApplicationArea = Basic;
-                    Editable=IntMode;
+                    Editable = IntMode;
                 }
                 field(Venue; Rec.Venue)
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
-                    Editable=CurrCode;
+                    Editable = CurrCode;
                 }
                 field("Employee Responsible"; Rec."Employee Responsible")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
-                    Editable=RespCenter;
+                    Editable = RespCenter;
                 }
                 field(Costs; Rec.Costs)
                 {
@@ -89,7 +89,7 @@ page 52186565 "HR Company Activities Card"
                 field("Responsibility Center"; Rec."Responsibility Center")
                 {
                     ApplicationArea = Basic;
-                    Editable=WtaxCode;
+                    Editable = WtaxCode;
                 }
 
                 field("Employee Name"; Rec."Employee Name")
@@ -102,7 +102,7 @@ page 52186565 "HR Company Activities Card"
                 {
                     ApplicationArea = Basic;
                     MultiLine = true;
-                    Editable=INVdate;
+                    Editable = INVdate;
                 }
                 field("Activity Status"; Rec."Activity Status")
                 {
@@ -112,7 +112,7 @@ page 52186565 "HR Company Activities Card"
                     StyleExpr = TRUE;
 
                 }
-                field(Status;Rec.Status)
+                field(Status; Rec.Status)
                 {
 
                 }
@@ -122,23 +122,23 @@ page 52186565 "HR Company Activities Card"
                 }
                 field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
-                    Editable=false;
+                    Editable = false;
 
                 }
                 field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
-                    Editable=false;
+                    Editable = false;
 
                 }
-                field(Comments;Rec.Comments)
+                field(Comments; Rec.Comments)
                 {
 
                 }
             }
             part(Control1102755011; "HR Activity Participants SF")
             {
-                
-                
+
+
                 ApplicationArea = basic;
 
                 SubPageLink = "Document No." = FIELD(Code);
@@ -151,7 +151,7 @@ page 52186565 "HR Company Activities Card"
                 ApplicationArea = Basic;
                 SubPageLink = Code = FIELD(Code);
             }
-           
+
             systempart(Control26; Outlook)
             {
                 ApplicationArea = Basic;
@@ -160,14 +160,14 @@ page 52186565 "HR Company Activities Card"
             {
                 ApplicationArea = Basic;
             }
-            part("Attached Documents"; "Doc. Attachment List Factbox")//"Document Attachment Factbox")
+            part("Attached Documents"; "Doc. Attachment List Factbox")//"Doc. Attachment List Factbox")
             {
                 ApplicationArea = basic;
                 Caption = 'Attachments';
             }
-              
+
         }
-        
+
     }
 
     actions
@@ -337,7 +337,7 @@ page 52186565 "HR Company Activities Card"
 
                     end;
                 }
-                  action("Defer")
+                action("Defer")
                 {
                     ApplicationArea = All;
                     Caption = 'Defer';
@@ -352,7 +352,7 @@ page 52186565 "HR Company Activities Card"
                         MESSAGE('Record Deferred');
                     end;
                 }
-                 action(Approvals)
+                action(Approvals)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Approvals';
@@ -362,14 +362,14 @@ page 52186565 "HR Company Activities Card"
 
                     trigger OnAction()
                     var
-                    ApprovalEntries: Page "Approval Entries";
-                     ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+                        ApprovalEntries: Page "Approval Entries";
+                        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                     begin
 
                         ApprovalsMgmt.OpenApprovalEntriesPage(rec.RecordId);
                     end;
                 }
-                 action(Reject)
+                action(Reject)
                 {
                     ApplicationArea = all;
                     Caption = 'Reject';
@@ -389,7 +389,7 @@ page 52186565 "HR Company Activities Card"
                         ApprovalsMgmt.RejectRecordApprovalRequest(Rec.RecordId);
                     end;
                 }
-              action(Approve)
+                action(Approve)
                 {
                     ApplicationArea = Basic;
                     Caption = 'Approve';
@@ -401,12 +401,12 @@ page 52186565 "HR Company Activities Card"
 
                     trigger OnAction()
                     var
-                    ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+                        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                     begin
-                          ApprovalsMgmt.ApproveRecordApprovalRequest(Rec.RecordId);
+                        ApprovalsMgmt.ApproveRecordApprovalRequest(Rec.RecordId);
                     end;
                 }
-               
+
                 action(Delegate)
                 {
                     ApplicationArea = Basic;
@@ -418,9 +418,9 @@ page 52186565 "HR Company Activities Card"
 
                     trigger OnAction()
                     var
-                     ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+                        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                     begin
-                         ApprovalsMgmt.DelegateRecordApprovalRequest(Rec.RecordId);
+                        ApprovalsMgmt.DelegateRecordApprovalRequest(Rec.RecordId);
                     end;
                 }
                 action(Comment)
@@ -430,7 +430,7 @@ page 52186565 "HR Company Activities Card"
                     Image = ViewComments;
                     Promoted = true;
                     PromotedCategory = Category9;
-                     RunObject = Page "Approval Comments";
+                    RunObject = Page "Approval Comments";
                     Visible = OpenApprovalEntriesExistForCurrUser;
                 }
 
@@ -441,7 +441,7 @@ page 52186565 "HR Company Activities Card"
                     Image = TaskList;
                     Promoted = true;
                     PromotedCategory = Category5;
-                    RunObject = Page  "Recruitment Costs";
+                    RunObject = Page "Recruitment Costs";
                     RunPageLink = "Training ID" = FIELD(Code);
                 }
                 action("Mark as Ongoing")
@@ -510,7 +510,7 @@ page 52186565 "HR Company Activities Card"
         end else begin
             CurrPage.Editable := true;
         end;
-         if Rec.Status = Rec.Status::New then begin
+        if Rec.Status = Rec.Status::New then begin
             InvTcode := true;
             Inst := true;
             DepType := true;
@@ -567,8 +567,9 @@ page 52186565 "HR Company Activities Card"
         end;
 
 
-    
-end;
+
+    end;
+
     var
         IntMode: Boolean;
         CurrCode: Boolean;
@@ -585,6 +586,6 @@ end;
         DepType: Boolean;
         Dimension: Boolean;
         MKS: Boolean;
-    
+
 }
 

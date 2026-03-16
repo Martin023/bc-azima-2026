@@ -1810,13 +1810,6 @@ page 52187328 "Business Loans"
                         Caption = 'Generate CRB Data';
                         RunObject = report "Generate CRB Data";
                     }
-                    action("Update Temp Loans")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Update Temp Loans';
-                        RunObject = report "Update Temp Loans";
-
-                    }
                     action("Business Loans TAT")
                     {
                         ApplicationArea = Basic, Suite;
@@ -1929,12 +1922,6 @@ page 52187328 "Business Loans"
                         ApplicationArea = Basic, Suite;
                         Caption = 'Transaction Log-Finance';
                         RunObject = XMLPort "Transaction Log-Finance";
-                    }
-                    action("Transaction Log-MBanking")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Transaction Log-MBanking';
-                        RunObject = xmlport "Transaction Log-Finance2";
                     }
                 }
 

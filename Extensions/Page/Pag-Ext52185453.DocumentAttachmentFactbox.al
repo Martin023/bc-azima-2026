@@ -1,4 +1,4 @@
-// pageextension 52185453 "Document Attachment Factbox" extends "Document Attachment Details"
+// pageextension 52185453 "Doc. Attachment List Factbox" extends "Document Attachment Details"
 // {   
 //     layout
 //     {

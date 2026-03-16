@@ -830,7 +830,7 @@ page 52186614 "Open Member Readmission"
         area(factboxes)
         {
 
-            part("Attached Documents"; "Document Attachment Factbox")
+            part("Attached Documents"; "Doc. Attachment List Factbox")
             {
                 ApplicationArea = basic;
                 Caption = 'Attachments';
@@ -1260,7 +1260,7 @@ page 52186614 "Open Member Readmission"
                         if Rec."Source Aplication" = Rec."Source Aplication"::CRM then begin
                             Rec.TestField("Sent Back to CRM", false);
                         end;
-                        
+
 
                         GlobalFunctions.CommentsManagement(Rec."No.");
                         if Rec.Status <> Rec.Status::Open then

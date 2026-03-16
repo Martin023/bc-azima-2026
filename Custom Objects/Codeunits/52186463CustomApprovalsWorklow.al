@@ -1118,8 +1118,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                 exit(CheckApprovalsWorkflowEnabledCode(Variant, RunWorkflowOnSendStoreRequisitionForApprovalCode));
             Database::"G/L Budget Name":
                 exit(CheckApprovalsWorkflowEnabledCode(Variant, RunWorkflowOnSendBudgetForApprovalCode));
-            Database::Workplan:
-                exit(CheckApprovalsWorkflowEnabledCode(Variant, RunWorkflowOnSendWorkplanForApprovalCode));
             Database::"Vote Transfer":
                 exit(CheckApprovalsWorkflowEnabledCode(Variant, RunWorkflowOnSendVoteForApprovalCode));
             Database::"Asset Transfer":
@@ -1212,9 +1210,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
             Database::Loans:
                 exit(CheckApprovalsWorkflowEnabledCode(Variant, RunWorkflowOnSendLoanAppForApprovalCode));
 
-            Database::"Document Exemptions Auth.":
-                exit(CheckApprovalsWorkflowEnabledCode(Variant, RunWorkflowOnSendDocExForApprovalCode));
-            //
             //Collateral collection
             Database::"Securities Collection Register":
                 exit(CheckApprovalsWorkflowEnabledCode(Variant, RunWorkflowOnSendCollateReturnForApprovalCode)); //
@@ -1383,13 +1378,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
             // Agency
             Database::"Agent Applications":
                 exit(CheckApprovalsWorkflowEnabledCode(Variant, RunWorkflowOnSendAgentApplicationForApprovalCode));
-
-            // M-SACCO TRANSACTION CHANGE
-
-            Database::"M-PESA Change Transactions":
-                exit(CheckApprovalsWorkflowEnabledCode(Variant, RunWorkflowOnSendMSACCOChangeApprovalCode));
-
-            // M-SACCO TRANSACTION CHANGE
 
             //Property Lease
             Database::Lease:
@@ -1811,10 +1799,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         WorkFlowEventHandling.AddEventToLibrary(
         RunWorkflowOnCancelBudgetForApprovalCode, Database::"G/L Budget Name", OnCancelBudgetApprovalRequestTxt, 0, false);
         WorkFlowEventHandling.AddEventToLibrary(
-        RunWorkflowOnSendWorkplanForApprovalCode, Database::Workplan, OnSendWorkplanApprovalRequestTxt, 0, false);
-        WorkFlowEventHandling.AddEventToLibrary(
-        RunWorkflowOnCancelWorkplanForApprovalCode, Database::Workplan, OnCancelWorkplanApprovalRequestTxt, 0, false);
-        WorkFlowEventHandling.AddEventToLibrary(
         RunWorkflowOnSendVoteForApprovalCode, Database::"Vote Transfer", OnSendVoteApprovalRequestTxt, 0, false);
         WorkFlowEventHandling.AddEventToLibrary(
         RunWorkflowOnCancelVoteForApprovalCode, Database::"Vote Transfer", OnCancelVoteApprovalRequestTxt, 0, false);
@@ -1878,22 +1862,12 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         RunWorkflowOnCancelODForApprovalCode, Database::"Over Draft Authorisation", OnCancelODApprovalRequestTxt, 0, false);
         //Overdraft
 
-        WorkFlowEventHandling.AddEventToLibrary(
-        RunWorkflowOnSendDocExForApprovalCode, Database::"Document Exemptions Auth.", OnSendDocExApprovalRequestTxt, 0, false);
-        WorkFlowEventHandling.AddEventToLibrary(
-        RunWorkflowOnCancelDocExForApprovalCode, Database::"Document Exemptions Auth.", OnCancelDocExApprovalRequestTxt, 0, false);
-
         //Account Transfers
         WorkFlowEventHandling.AddEventToLibrary(
         RunWorkflowOnSendACTForApprovalCode, Database::"Account Transfer Header", OnSendACTApprovalRequestTxt, 0, false);
         WorkFlowEventHandling.AddEventToLibrary(
         RunWorkflowOnCancelACTForApprovalCode, Database::"Account Transfer Header", OnCancelACTApprovalRequestTxt, 0, false);
         //Account Transfers
-
-        WorkFlowEventHandling.AddEventToLibrary(
-        RunWorkflowOnSendDocExForApprovalCode, Database::"Document Exemptions Auth.", OnSendDocExApprovalRequestTxt, 0, false);
-        WorkFlowEventHandling.AddEventToLibrary(
-        RunWorkflowOnCancelDocExForApprovalCode, Database::"Document Exemptions Auth.", OnCancelDocExApprovalRequestTxt, 0, false);
 
         //Inter Teller
         WorkFlowEventHandling.AddEventToLibrary(
@@ -2265,12 +2239,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         WorkFlowEventHandling.AddEventToLibrary(
         RunWorkflowOnCancelEmployeeRequisitionAppForApprovalCode, Database::"HR Employee Requisitions", OnCancelEmployeeRequisitionAppApprovalRequestTxt, 0, false); //
 
-        WorkFlowEventHandling.AddEventToLibrary(
-        RunWorkflowOnSendMSACCOChangeApprovalCode, Database::"M-PESA Change Transactions", OnSendMSACCOChangeApprovalRequest, 0, false);
-        WorkFlowEventHandling.AddEventToLibrary(
-        RunWorkflowOnCancelMSACCOChangeRequestApprovalCode, Database::"M-PESA Change Transactions", OnCancelMSACCOChangeApprovalRequest, 0, false);
-        //M-SACCO
-
         // Mortgage Doc Release
         WorkFlowEventHandling.AddEventToLibrary(
         RunWorkflowOnSendMortgageDocReleaseForApprovalCode, Database::"Mortgage Loans Doc Release", OnSendMortgageDocReleaseApprovalRequestTxt, 0, false);
@@ -2464,8 +2432,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                 WorkflowManagement.HandleEvent(RunWorkflowOnSendOvertimeForApprovalCode, Variant);
             Database::"G/L Budget Name":
                 WorkflowManagement.HandleEvent(RunWorkflowOnSendBudgetForApprovalCode, Variant);
-            Database::Workplan:
-                WorkflowManagement.HandleEvent(RunWorkflowOnSendWorkplanForApprovalCode, Variant);
+           
             Database::"Vote Transfer":
                 WorkflowManagement.HandleEvent(RunWorkflowOnSendVoteForApprovalCode, Variant);
             Database::"Asset Transfer":
@@ -2759,13 +2726,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
             Database::"Agent Applications":
                 WorkflowManagement.HandleEvent(RunWorkflowOnSendAgentApplicationForApprovalCode, Variant);
 
-            // M-PESA Changes DATABASE::"M-PESA Change Transactions":
-            Database::"M-PESA Change Transactions":
-                WorkflowManagement.HandleEvent(RunWorkflowOnSendMSACCOChangeApprovalCode, Variant); //
-
-
-            // MSACCO
-
             //Mortgage Release Doc
             Database::"Mortgage Loans Doc Release":
                 WorkflowManagement.HandleEvent(RunWorkflowOnSendMortgageDocReleaseForApprovalCode, Variant); //
@@ -2955,8 +2915,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                 WorkflowManagement.HandleEvent(RunWorkflowOnCancelOvertimeForApprovalCode, Variant);
             Database::"G/L Budget Name":
                 WorkflowManagement.HandleEvent(RunWorkflowOnCancelBudgetForApprovalCode, Variant);
-            Database::Workplan:
-                WorkflowManagement.HandleEvent(RunWorkflowOnCancelWorkplanForApprovalCode, Variant);
             Database::"Vote Transfer":
                 WorkflowManagement.HandleEvent(RunWorkflowOnCancelVoteForApprovalCode, Variant);
             Database::"Asset Transfer":
@@ -3089,8 +3047,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
             Database::"Loan Recovery Header II":
                 WorkflowManagement.HandleEvent(RunWorkflowOnCancelRecoveryHeaderIIAppForApprovalCode, Variant);
 
-            Database::"Document Exemptions Auth.":
-                WorkflowManagement.HandleEvent(RunWorkflowOnCancelDocExForApprovalCode, Variant);
             //Bond
             Database::Bond:
                 WorkflowManagement.HandleEvent(RunWorkflowOnCancelBondAppForApprovalCode, Variant); //
@@ -3229,12 +3185,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
             Database::"Agent Applications":
                 WorkflowManagement.HandleEvent(RunWorkflowOnCancelAgentApplicationForApprovalCode, Variant); //
 
-
-            //M-SACCO Applications DATABASE::"M-PESA Change Transactions":
-            Database::"M-PESA Change Transactions":
-                WorkflowManagement.HandleEvent(RunWorkflowOnCancelMSACCOChangeRequestApprovalCode, Variant); //
-
-            // MSACCO
 
             //Mortgage Release Doc
             Database::"Mortgage Loans Doc Release":
@@ -8481,8 +8431,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         InterBankTransfers: Record 52185881;
         OvertimeClaimHeader: Record 52185936;
         Budget: Record "G/L Budget Name";
-        Workplan: Record 52185981;
-        WorkplanActivities: Record 52185902;
         Vote: Record 52185922;
         AssetTransfer: Record 52185892;
         Vendor: Record Vendor;
@@ -8494,7 +8442,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         STOAppl: Record 52185717;
         StandingOrderControl: Record 52185722;
         Loans: Record 52185729;
-        DocExempts: Record 52185857;
         //ProductFactoryApplication: Record 52186117;
         BankersC: Record 52185793;
         BankC: Record 52185785;
@@ -8541,7 +8488,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         DisciplinaryAppeal: Record 52185970;
         DiscWithdrawal: Record 52185971;
         LeaseDoc: Record 52186008;
-        MpesaChange: Record 52185769;
         Sharetransfer: record "Share Capital Transfer Buffer";
         TFeed: Record 52186205;
         Intern: Record 52185611;
@@ -9290,13 +9236,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                     Budget.modify(true);
                     Variant := Budget;
                 end;
-            Database::Workplan:
-                begin
-                    RecRef.SetTable(Workplan);
-                    Workplan.Validate(Status, Workplan.Status::Pending);
-                    Workplan.modify(true);
-                    Variant := Workplan;
-                end;
+           
             Database::"Vote Transfer":
                 begin
                     RecRef.SetTable(Vote);
@@ -9341,15 +9281,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                     ctrans.Validate(Status, ctrans.Status::Open);
                     ctrans.modify(true);
                     Variant := ctrans;
-                end;
-
-            //Cashier Transactions
-            Database::"Document Exemptions Auth.":
-                begin
-                    RecRef.SetTable(DocExempts);
-                    DocExempts.Validate(Status, DocExempts.Status::Open);
-                    DocExempts.modify(true);
-                    Variant := DocExempts;
                 end;
 
             //Salary Transactions
@@ -9915,14 +9846,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                     Variant := AgentApplications;
                 end;
 
-            // M-PESA Change
-            Database::"M-PESA Change Transactions":
-                begin
-                    RecRef.SetTable(MpesaChange);
-                    MpesaChange.Validate(Status, MpesaChange.Status::Open);
-                    MpesaChange.modify(true);
-                    Variant := MpesaChange;
-                end;
+
             // Mortgage Release Doc
             Database::"Mortgage Loans Doc Release":
                 begin
@@ -9955,8 +9879,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         InterBankTransfers: Record 52185881;
         OvertimeClaimHeader: Record 52185936;
         Budget: Record "G/L Budget Name";
-        Workplan: Record 52185981;
-        WorkplanActivities: Record 52185902;
         Vote: Record "Vote Transfer";
         AssetTransfer: Record 52185892;
         PaymentsHeaderBoard: Record 52185895;
@@ -9969,7 +9891,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         STOAppl: Record 52185717;
         StandingOrderControl: Record 52185722;
         DeactivateReactivateHeader: Record 52185753;
-        DocExempts: Record 52185857;
         Loans: Record 52185729;
         ProductFactoryApplication: Record 52186117;
         BankersC: Record 52185793;
@@ -10017,7 +9938,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         DisciplinaryAppeal: Record 52185970;
         DiscWithdrawal: Record 52185971;
         LeaseDoc: Record 52186008;
-        MpesaChange: Record 52185769;
         TFeed: Record 52186205;
         Intern: Record 52185611;
         PropertyDetails: Record 52186005;
@@ -10823,13 +10743,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                     Budget.modify(true);
                     Variant := Budget;
                 end;
-            Database::Workplan:
-                begin
-                    RecRef.SetTable(Workplan);
-                    Workplan.Validate(Status, Workplan.Status::"Pending Approval");
-                    Workplan.modify(true);
-                    Variant := Workplan;
-                end;
             Database::"Vote Transfer":
                 begin
                     RecRef.SetTable(Vote);
@@ -10896,14 +10809,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                     Variant := PropertyDetails;
                 end;
             //Property
-
-            Database::"Document Exemptions Auth.":
-                begin
-                    RecRef.SetTable(DocExempts);
-                    DocExempts.Validate(Status, DocExempts.Status::"Pending Approval");
-                    DocExempts.modify(true);
-                    Variant := DocExempts;
-                end;
 
             //Salary Transactions
             Database::"Salary Header":
@@ -11459,15 +11364,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                     Cases1.Validate(Status, Cases1.Status::Pending);
                     Cases1.modify(true);
                     Variant := Cases1;
-                end;
-
-            //M-SACCO Change Transactions
-            Database::"M-PESA Change Transactions":
-                begin
-                    RecRef.SetTable(MpesaChange);
-                    MpesaChange.Validate(Status, MpesaChange.Status::Pending);
-                    MpesaChange.modify(true);
-                    Variant := MpesaChange;
                 end;
 
             //Mortgage Release Doc

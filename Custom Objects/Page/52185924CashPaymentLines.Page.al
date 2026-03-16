@@ -495,7 +495,6 @@ page 52185924 "Cash Payment Lines"
         Amt: Decimal;
         TotAmt: Decimal;
         ApplyInvoice: Codeunit "Purchase Header Apply";
-        AppliedEntries: Record "Workplan Activities";
         VendEntries: Record "Vendor Ledger Entry";
         PInv: Record "Purch. Inv. Header";
         VATPaid: Decimal;

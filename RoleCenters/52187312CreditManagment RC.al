@@ -2569,12 +2569,6 @@ page 52187312 "Credit Management Role Center"
                         Caption = 'Transaction Log-Finance';
                         RunObject = XMLPort "Transaction Log-Finance";
                     }
-                    action("Transaction Log-MBanking")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Transaction Log-MBanking';
-                        RunObject = xmlport "Transaction Log-Finance2";
-                    }
                 }
                 //*******************DMU-ADDITIONAL REPORTS*******************************************************//
                 action("Loan Attachment Report")

@@ -495,12 +495,6 @@ page 52185992 "Posted Payment Header"
     begin
     end;
 
-    //[Scope('OnPrem')]
-    procedure GetAppliedEntries(var LineNo: Integer) InvText: Text[100]
-    var
-        Appl: Record "Workplan Activities";
-    begin
-    end;
 
     //[Scope('OnPrem')]
     procedure InsertApproval()

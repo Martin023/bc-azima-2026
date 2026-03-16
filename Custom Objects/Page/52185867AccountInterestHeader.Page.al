@@ -172,7 +172,7 @@ page 52185867 "Account  Interest Header"
                 }
                 action("Generate Imported Entries")
                 {
-                    Image = generate;
+                    Image = GetEntries;
                     Promoted = true;
                     PromotedCategory = Process;
                     PromotedIsBig = true;
