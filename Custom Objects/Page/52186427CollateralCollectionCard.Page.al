@@ -220,7 +220,7 @@ page 52186427 "Collateral Collection Card"
         }
         area(FactBoxes)
         {
-            part("Attached Documents"; "Doc. Attachment List Factbox")//"Document Attachment Factbox")
+            part("Attached Documents"; "Doc. Attachment List Factbox")//"Doc. Attachment List Factbox")
             {
                 ApplicationArea = All;
                 Caption = 'Attachments';

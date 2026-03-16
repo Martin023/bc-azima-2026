@@ -487,14 +487,7 @@ page 52186483 "HR Collateral Register"
                 SubPageLink = "Table ID" = const(Database::"Document Attachment"), "No." = field("No."), "Document Type" = Filter(Contract);
                 //SubPageLink = "No." = field("Contract No"), "Document Type" = Filter(Contract);
             }
-            // part("Attached Documents"; "Document Attachment Factbox")
-            // {
-            //     ApplicationArea = All;
-            //     Caption = 'Attachments';
-            //     SubPageLink = "Table ID" = const(Database::"Purchase Header"),
-            //                   "No." = field("Contract No"),
-            //                   "Document Type" = field("Contract Type");
-            // }
+           
             part(IncomingDocAttachFactBox; "Incoming Doc. Attach. FactBox")
             {
                 ApplicationArea = Basic, Suite;

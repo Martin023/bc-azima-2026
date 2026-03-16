@@ -230,7 +230,6 @@ page 52186012 "Posted Receipt Header"
         FromNumber: Integer;
         ToNumber: Integer;
         StrInvoices: Text[250];
-        Appl: Record "Workplan Activities";
         UserMgt: Codeunit "User Setup Management BR";
         JournalPosted: Codeunit "Journal Post Successful";
         //  AdjustGenJnl: Codeunit "Adjust Gen. Journal Balance";

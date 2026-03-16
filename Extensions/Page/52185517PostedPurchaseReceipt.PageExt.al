@@ -1,5 +1,5 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-PageExtension 52185517 pageextension52185517 extends "Posted Purchase Receipt" 
+PageExtension 52185517 pageextension52185517 extends "Posted Purchase Receipt"
 {
 
     //Unsupported feature: Property Insertion (DeleteAllowed) on ""Posted Purchase Receipt"(Page 136)".
@@ -468,20 +468,20 @@ PageExtension 52185517 pageextension52185517 extends "Posted Purchase Receipt"
 
         //Unsupported feature: Property Deletion (ApplicationArea) on "Control1905767507(Control 1905767507)".
 
-        moveafter("Pay-to Address 2";"Pay-to Post Code")
-        moveafter("Ship-to Address 2";"Ship-to Post Code")
+        moveafter("Pay-to Address 2"; "Pay-to Post Code")
+        moveafter("Ship-to Address 2"; "Ship-to Post Code")
     }
 
-    
+
     // area(factboxes)
     // {
-    //        part("Attached Documents"; "Document Attachment Factbox")
+    //        part("Attached Documents"; "Doc. Attachment List Factbox")
     //         {
     //             ApplicationArea = basic;
     //             Caption = 'Attachments';
-              
+
     //     }
-    
+
     actions
     {
         modify(Statistics)
@@ -563,18 +563,18 @@ PageExtension 52185517 pageextension52185517 extends "Posted Purchase Receipt"
         //Parameters and return type have not been exported.
         //>>>> ORIGINAL CODE:
         //begin
-            /*
-            CurrPage.SETSELECTIONFILTER(PurchRcptHeader);
-            PurchRcptHeader.PrintRecords(TRUE);
-            */
+        /*
+        CurrPage.SETSELECTIONFILTER(PurchRcptHeader);
+        PurchRcptHeader.PrintRecords(TRUE);
+        */
         //end;
         //>>>> MODIFIED CODE:
         //begin
-            /*
-            CurrPage.SETSELECTIONFILTER(PurchRcptHeader);
-            //PurchRcptHeader.PrintRecords(TRUE);
-            REPORT.RUN(52185741,TRUE,FALSE,PurchRcptHeader);
-            */
+        /*
+        CurrPage.SETSELECTIONFILTER(PurchRcptHeader);
+        //PurchRcptHeader.PrintRecords(TRUE);
+        REPORT.RUN(52185741,TRUE,FALSE,PurchRcptHeader);
+        */
         //end;
 
         //Unsupported feature: Property Deletion (ToolTipML) on ""&Print"(Action 47)".
@@ -590,17 +590,17 @@ PageExtension 52185517 pageextension52185517 extends "Posted Purchase Receipt"
     //trigger OnOpenPage()
     //>>>> ORIGINAL CODE:
     //begin
-        /*
-        SetSecurityFilterOnRespCenter;
+    /*
+    SetSecurityFilterOnRespCenter;
 
-        ActivateFields;
-        */
+    ActivateFields;
+    */
     //end;
     //>>>> MODIFIED CODE:
     //begin
-        /*
-        SetSecurityFilterOnRespCenter;
-        */
+    /*
+    SetSecurityFilterOnRespCenter;
+    */
     //end;
 
     //Unsupported feature: Property Deletion (PromotedActionCategoriesML).

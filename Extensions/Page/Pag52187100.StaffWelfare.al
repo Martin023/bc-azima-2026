@@ -69,8 +69,8 @@ page 52187100 "Staff Welfare "
             {
                 ApplicationArea = basic;
                 Caption = 'Attachments';
-                SubPageLink="Table ID"=const(52187100),
-                "No."=field(No);
+                SubPageLink = "Table ID" = const(52187100),
+                "No." = field(No);
 
             }
         }

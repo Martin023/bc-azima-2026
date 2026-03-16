@@ -1703,11 +1703,9 @@ table 52185729 Loans
 
             trigger OnValidate()
             var
-                MngExemptionsDocApprvls: Codeunit "Mngt. Routine Processes";
                 VarVariant: Variant;
                 // CustomApprovals: Codeunit "Custom Approvals Codeunit";
                 CompInfo: Record "Company Information";
-                DocExemptionsApprvls: Record "Document Exemptions Auth.";
             begin
 
                 if ("Amount To Disburse" <> "Approved Amount") then begin
@@ -3943,20 +3941,7 @@ table 52185729 Loans
         "Amount To Disburse" := xRec."Amount To Disburse";
     end;
 
-    local procedure PassDocumentNo()
-    var
-        DocExemptionsApprvls: Record "Document Exemptions Auth.";
-    begin
-        /*
-        DocExemptionsApprvls.RESET;
-        DocExemptionsApprvls.SETRANGE("Document No.","Loan No.");
-        IF DocExemptionsApprvls.FIND('-') THEN
-          DocExemptionsApprvls.VALIDATE("Document No.");
-          */
-
-    end;
-
-    // [Scope('OnPrem')]
+  
     procedure ClearDataLoans()
     var
         AppraisalSalDetails: Record "Appraisal Salary Details";

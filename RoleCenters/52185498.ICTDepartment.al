@@ -1320,12 +1320,6 @@ page 52187058 "ICT Department"
                             //     Caption = 'E-Mail Dividend Statement';
                             //     RunObject = report "E-Mail Dividend Statement";
                             // }
-                            action("Update Temp Loans")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Update Temp Loans';
-                                RunObject = report "Update Temp Loans";
-                            }
                         }
                         group("Periodic Activitites Reports")
                         {
@@ -1579,12 +1573,7 @@ page 52187058 "ICT Department"
                                 Caption = 'Transaction Log-Finance';
                                 RunObject = XMLPort "Transaction Log-Finance";
                             }
-                            action("Transaction Log-MBanking")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Transaction Log-MBanking';
-                                RunObject = xmlport "Transaction Log-Finance2";
-                            }
+                           
                         }
                     }
                     group("Credit Management Setups")
@@ -3161,38 +3150,7 @@ page 52187058 "ICT Department"
                             //     RunObject = Page "Sky Mobile Users";
                             // }
                         }
-                        group("Transactions")
-                        {
-                            Caption = 'Transactions';
-
-                            group("Lists")
-                            {
-                                action(MobileTransactions)
-                                {
-                                    ApplicationArea = Basic;
-                                    Caption = 'Mobile Transactions';
-                                    RunObject = Page "Sky Mobile Transactions";
-                                }
-                                // action(PaybillTransactions)
-                                // {
-                                //     ApplicationArea = Basic;
-                                //     Caption = 'Paybill Transactions';
-                                //     RunObject = Page "Sky Paybill Transactions";
-                                // }
-                            }
-                            group("Tasks")
-                            {
-                                Caption = 'Tasks';
-
-
-                                action(PaybillNeedsChange)
-                                {
-                                    ApplicationArea = Basic;
-                                    Caption = 'Paybill Needs Change';
-                                    RunObject = Page "Paybill Needs Change";
-                                }
-                            }
-                        }
+                       
                         group("E-Loans")
                         {
                             Caption = 'Loans';
@@ -3328,29 +3286,7 @@ page 52187058 "ICT Department"
                                 RunObject = Page "Insurance Actioned List";
                             }
                         }
-                        group("Documents")
-                        {
-                            Caption = 'Documents';
-
-                            action("Black-Listed Phone Nos")
-                            {
-                                ApplicationArea = Basic;
-                                Caption = 'Black-Listed Phone Nos';
-                                RunObject = Page "Black-Listed Phone Nos";
-                            }
-                            action("Black-Listed Accounts")
-                            {
-                                ApplicationArea = Basic;
-                                Caption = 'Black-Listed Accounts';
-                                RunObject = Page "Black-Listed Accounts";
-                            }
-                            // action("Black-Listed Names")
-                            // {
-                            //     ApplicationArea = Basic;
-                            //     Caption = 'Black-Listed Names';
-                            //     RunObject = Page "Black-Listed Names";
-                            // }
-                        }
+                       
                     }
                     group("Internet Banking")
                     {
@@ -3587,51 +3523,7 @@ page 52187058 "ICT Department"
                             RunObject = report "Agent Transactions";
                         }
                     }
-                    group(MSetups)
-                    {
-                        Caption = 'Setups';
-
-                        group("Setups Lists")
-                        {
-                            Caption = 'Setups Lists';
-
-                            action("Mobile Setup")
-                            {
-                                ApplicationArea = Basic;
-                                Caption = 'Mobile Set UP';
-                                RunObject = Page "Sky Mobile Setup List";
-                            }
-                        }
-                        group("Setup Tasks")
-                        {
-                            Caption = 'Tasks';
-
-                            action("MBankingPermissions")
-                            {
-                                ApplicationArea = Basic;
-                                Caption = 'M-Banking Permissions';
-                                RunObject = Page "Sky Permissions";
-                            }
-                            action("CoopTransactionCodes")
-                            {
-                                ApplicationArea = Basic;
-                                Caption = 'Coop Transaction Codes';
-                                RunObject = Page "Coop Transaction Codes";
-                            }
-                            action("Coop ATM Setup")
-                            {
-                                ApplicationArea = Basic;
-                                Caption = 'Coop ATM Setup';
-                                RunObject = Page "Coop ATM Setup";
-                            }
-                            // action("Mobile Guarantor Setup")
-                            // {
-                            //     ApplicationArea = Basic;
-                            //     Caption = 'Mobile Guarantor Setup ';
-                            //     RunObject = Page "Mobile Guarantor Setup";
-                            // }
-                        }
-                    }
+                    
                 }
                 group("Payroll Processing")
                 {

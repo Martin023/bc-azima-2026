@@ -379,7 +379,7 @@ page 52186761 "Security Perfection Card"
         }
         area(FactBoxes)
         {
-            part("Attached Documents"; "Document Attachment Factbox")
+            part("Attached Documents"; "Doc. Attachment List Factbox")
             {
                 ApplicationArea = All;
                 Caption = 'Attachments';
@@ -453,8 +453,8 @@ page 52186761 "Security Perfection Card"
                     Rec.TestField("Collateral Owner");
 
                     //if Rec."Collateral Owner" = Rec."Collateral Owner"::Chargor then
-                        //Rec.TestField("Chargor/Owner Name");
-                        //Rec.TestField("Chargor Phone No.");
+                    //Rec.TestField("Chargor/Owner Name");
+                    //Rec.TestField("Chargor Phone No.");
 
                     VarVariant := Rec;
                     if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then
@@ -1095,7 +1095,7 @@ page 52186761 "Security Perfection Card"
     trigger OnAfterGetCurrRecord()
     begin
         RichText := Rec.GetRichText(Rec);
-        
+
     end;
 
     trigger OnAfterGetRecord()

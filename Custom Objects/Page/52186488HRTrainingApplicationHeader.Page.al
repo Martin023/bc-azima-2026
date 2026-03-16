@@ -87,7 +87,7 @@ page 52186488 "HR Training Application Header"
         }
         area(factboxes)
         {
-            part("Attached Documents"; "Doc. Attachment List Factbox")//"Document Attachment Factbox")
+            part("Attached Documents"; "Doc. Attachment List Factbox")//"Doc. Attachment List Factbox")
             {
                 ApplicationArea = basic;
                 Caption = 'Attachments';

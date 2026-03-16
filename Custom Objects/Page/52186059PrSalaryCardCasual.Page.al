@@ -164,14 +164,7 @@ page 52186059 "PrSalary Card Casual"
                 separator(Action1102756059)
                 {
                 }
-                action("Pension Details")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Pension Details';
-                    Image = PlanningWorksheet;
-                    RunObject = Page "Proc. Plan Activities Card";
-                }
-            }
+
             group(Transactions)
             {
                 Caption = 'Transactions';
@@ -260,6 +253,7 @@ page 52186059 "PrSalary Card Casual"
                         end
                     end;
                 }
+            }
             }
         }
         area(processing)

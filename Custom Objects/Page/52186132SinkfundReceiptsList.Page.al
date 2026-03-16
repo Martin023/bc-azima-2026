@@ -135,7 +135,7 @@ page 52186132 "Sinkfund Receipts List"
         FromNumber: Integer;
         ToNumber: Integer;
         StrInvoices: Text[250];
-        Appl: Record "Workplan Activities";
+
         //UserMgt: Codeunit "User Setup Management BR";
         //JournalPosted: Codeunit "Journal Post Successful";
         AdjustGenJnl: Codeunit "Adjust Gen. Journal Balance";

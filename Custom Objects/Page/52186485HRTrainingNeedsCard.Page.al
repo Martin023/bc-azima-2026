@@ -196,7 +196,7 @@ page 52186485 "HR Training Needs Card"
                 field("Bondage Duration"; Rec."Bondage Duration")
                 {
                     ApplicationArea = Basic;
-                
+
 
                 }
                 field("Bondage Release Date"; Rec."Bondage Release Date")
@@ -222,7 +222,7 @@ page 52186485 "HR Training Needs Card"
             {
                 ApplicationArea = Basic;
             }
-            part("Attached Documents"; "Doc. Attachment List Factbox")//"Document Attachment Factbox")
+            part("Attached Documents"; "Doc. Attachment List Factbox")//"Doc. Attachment List Factbox")
             {
                 ApplicationArea = basic;
                 Caption = 'Attachments';
@@ -343,11 +343,11 @@ page 52186485 "HR Training Needs Card"
                     begin
                         if Confirm(Txt002, true) = false then exit;
                         Rec.Closed := false;
-                        rec.Status:=rec.status::New;
+                        rec.Status := rec.status::New;
                         rec.modify(true);
                     end;
                 }
-                  action(Commentss)
+                action(Commentss)
                 {
                     ApplicationArea = Basic, Suite;
                     Image = ViewComments;

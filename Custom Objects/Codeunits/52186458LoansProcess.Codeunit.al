@@ -140,7 +140,6 @@ Codeunit 52186458 "Loans Process"
         SavAcc: Record "Savings Accounts";
         PeriodicActivities: Codeunit "Periodic Activities";
         Text001: label 'Did you know M-Cash now allows you to withdraw up to a maxmum of Kes 100,000?.';
-        TempLoans: Record "Temp Loans";
         CashierTransactions: Record "Cashier Transactions";
         OldAmount: Decimal;
         TopUPGL: Code[20];
@@ -1693,13 +1692,7 @@ Codeunit 52186458 "Loans Process"
                             LoanApps.Posted := true;
                             DepositProrata(LoanApps."Loan No.");
                             AdviceLoan(LoanApps."Loan No.", false, LoanApps."Loan No.");
-                            //**
-                            TempLoans.Reset;
-                            TempLoans.SetRange("Loan No.", LoanApps."Loan No.");
-                            if not TempLoans.Find('-') then begin
-                                TempLoans.TransferFields(LoanApps, true);
-                                TempLoans.Insert;
-                            end;
+                           
                             LoanApps."Disbursement Date" := Today;
                             LoanApps.Validate("Disbursement Date");
 
@@ -4414,7 +4407,6 @@ Codeunit 52186458 "Loans Process"
         SavAcc: Record "Savings Accounts";
         PeriodicActivities: Codeunit "Periodic Activities";
         Text001: label 'Did you know Mobile Banking allows you to withdraw up to a maxmum of Kes 150,000?.';
-        TempLoans: Record "Temp Loans";
         CashierTransactions: Record "Cashier Transactions";
         OldAmount: Decimal;
         TopUPGL: Code[20];
@@ -4523,7 +4515,6 @@ Codeunit 52186458 "Loans Process"
         SavAcc: Record "Savings Accounts";
         PeriodicActivities: Codeunit "Periodic Activities";
         Text001: label 'Did you know M-Sacco now allows you to withdraw up to a maxmum of Kes 70,000?.';
-        TempLoans: Record "Temp Loans";
         CashierTransactions: Record "Cashier Transactions";
         OldAmount: Decimal;
         TopUPGL: Code[20];
@@ -4752,7 +4743,6 @@ Codeunit 52186458 "Loans Process"
         SavAcc: Record "Savings Accounts";
         PeriodicActivities: Codeunit "Periodic Activities";
         Text001: label 'Did you know M-Sacco now allows you to withdraw up to a maxmum of Kes 70,000?.';
-        TempLoans: Record "Temp Loans";
         CashierTransactions: Record "Cashier Transactions";
         OldAmount: Decimal;
         TopUPGL: Code[20];
@@ -5128,7 +5118,6 @@ Codeunit 52186458 "Loans Process"
         SavAcc: Record "Savings Accounts";
         PeriodicActivities: Codeunit "Periodic Activities";
         Text001: label 'Did you know M-Sacco now allows you to withdraw up to a maxmum of Kes 70,000?.';
-        TempLoans: Record "Temp Loans";
         CashierTransactions: Record "Cashier Transactions";
         OldAmount: Decimal;
         TopUPGL: Code[20];
@@ -5507,7 +5496,6 @@ Codeunit 52186458 "Loans Process"
         SavAcc: Record "Savings Accounts";
         PeriodicActivities: Codeunit "Periodic Activities";
         Text001: label 'Did you know M-Sacco now allows you to withdraw up to a maxmum of Kes 70,000?.';
-        TempLoans: Record "Temp Loans";
         CashierTransactions: Record "Cashier Transactions";
         OldAmount: Decimal;
         TopUPGL: Code[20];
@@ -5626,7 +5614,6 @@ Codeunit 52186458 "Loans Process"
         SavAcc: Record "Savings Accounts";
         PeriodicActivities: Codeunit "Periodic Activities";
         Text001: label 'Did you know M-Sacco now allows you to withdraw up to a maxmum of Kes 70,000?.';
-        TempLoans: Record "Temp Loans";
         CashierTransactions: Record "Cashier Transactions";
         OldAmount: Decimal;
         TopUPGL: Code[20];
@@ -6083,7 +6070,6 @@ Codeunit 52186458 "Loans Process"
         SavAcc: Record "Savings Accounts";
         PeriodicActivities: Codeunit "Periodic Activities";
         Text001: label 'Mobile Banking Message';
-        TempLoans: Record "Temp Loans";
         CashierTransactions: Record "Cashier Transactions";
         OldAmount: Decimal;
         TopUPGL: Code[20];
@@ -7489,13 +7475,6 @@ Codeunit 52186458 "Loans Process"
                 DepositProrata(LoanApps."Loan No.");
                 HoldOneMonthInstallment(LoanApps."Loan No.");
                 AdviceLoan(LoanApps."Loan No.", false, LoanApps."Loan No.");
-                //**
-                TempLoans.Reset;
-                TempLoans.SetRange("Loan No.", LoanApps."Loan No.");
-                if not TempLoans.Find('-') then begin
-                    TempLoans.TransferFields(LoanApps, true);
-                    TempLoans.Insert;
-                end;
                 LoanApps."Disbursement Date" := Today;
                 LoanApps.Validate("Disbursement Date");
                 LoanApps."Posted By" := UserId;

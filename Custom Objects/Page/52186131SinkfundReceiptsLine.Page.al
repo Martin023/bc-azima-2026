@@ -356,7 +356,6 @@ page 52186131 "Sinkfund Receipts Line"
         Custledger: Record "Cust. Ledger Entry";
         CustLedger1: Record "Cust. Ledger Entry";
         ApplyEntry: Codeunit "Sales Header Apply";
-        AppliedEntries: Record "Workplan Activities";
         CustEntries: Record "Cust. Ledger Entry";
         LineNo: Integer;
 

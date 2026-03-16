@@ -321,7 +321,6 @@ page 52185939 "Cash Receipts Line"
         Custledger: Record "Cust. Ledger Entry";
         CustLedger1: Record "Cust. Ledger Entry";
         ApplyEntry: Codeunit "Sales Header Apply";
-        AppliedEntries: Record "Workplan Activities";
         CustEntries: Record "Cust. Ledger Entry";
         LineNo: Integer;
 

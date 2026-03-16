@@ -9,7 +9,6 @@ Codeunit 52185461 "Journal Posting"
     var
         GenJnl: Record "Gen. Journal Line";
         LoanInt: Record "Loans Interest";
-        DocExemptions: Record "Document Exemptions Auth.";
         GenJournalBatch: Record "Gen. Journal Batch";
 
 
@@ -137,32 +136,4 @@ Codeunit 52185461 "Journal Posting"
             LoanInt.Insert(true);
     end;
 
-
-    procedure InsertIntoExemptApprvls(EntryNo: Code[100]; DocType: Integer; DocNo: Code[100]; SequenceNo: Integer; ApprovalCode: Code[100]; SenderID: Code[100]; SalesPurchCode: Code[100]; Status: Integer; DateTimeSentforApproval: DateTime; LastDateTimeModified: DateTime; LastModifiedByID: Code[100]; Comment: Boolean; DueDate: Date; Amount: Decimal; AmountLCY: Decimal; ApprovalType: Integer; LimitType: Integer; AvailableCreditLimitLCY: Integer; TableID: Integer; ApproverID: Code[100]; ExempComments: Text[250])
-    begin
-        DocExemptions.Init;
-
-        DocExemptions."Entry No." := EntryNo;
-        DocExemptions."Document Type" := DocType;
-        DocExemptions."Document No." := DocNo;
-        DocExemptions."Sequence No." := SequenceNo;
-        DocExemptions."Approval Code" := ApprovalCode;
-
-        DocExemptions."Sender ID" := SenderID;
-        DocExemptions."Salespers./Purch. Code" := SalesPurchCode;
-        DocExemptions."Approver ID" := ApproverID;
-        DocExemptions."Date-Time Sent for Approval" := DateTimeSentforApproval;
-        DocExemptions."Last Date-Time Modified" := LastDateTimeModified;
-        DocExemptions."Last Modified By ID" := LastModifiedByID;
-        DocExemptions.Comment := Comment;
-        DocExemptions."Comments For Exemptions" := ExempComments;
-        DocExemptions."Due Date" := DueDate;
-        DocExemptions.Amount := Amount;
-        DocExemptions."Amount (LCY)" := AmountLCY;
-        DocExemptions."Approval Type" := ApprovalType;
-        DocExemptions."Available Credit Limit (LCY)" := AvailableCreditLimitLCY;
-        DocExemptions."Table ID" := TableID;
-
-        DocExemptions.Insert(true)
-    end;
 }

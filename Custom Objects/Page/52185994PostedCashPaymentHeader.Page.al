@@ -354,13 +354,6 @@ page 52185994 "Posted Cash Payment Header"
     end;
 
     //[Scope('OnPrem')]
-    procedure GetAppliedEntries(var LineNo: Integer) InvText: Text[100]
-    var
-        Appl: Record "Workplan Activities";
-    begin
-    end;
-
-    //[Scope('OnPrem')]
     procedure InsertApproval()
     begin
     end;

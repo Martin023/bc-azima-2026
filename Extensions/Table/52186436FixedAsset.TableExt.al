@@ -63,13 +63,7 @@ TableExtension 52186436 tableextension52186436 extends "Fixed Asset"
             FieldClass = FlowFilter;
             TableRelation = "G/L Budget Name";
         }
-        field(50016; "Budget Qty"; Decimal)
-        {
-            CalcFormula = sum("FA Budget Entry"."Cost Amount" where("FA No." = field("No."),
-                                                                     "Budget Name" = field("Budget Name"),
-                                                                     Date = field("Date Filter")));
-            FieldClass = FlowField;
-        }
+       
         field(50017; No2; Code[20])
         {
             DataClassification = ToBeClassified;
