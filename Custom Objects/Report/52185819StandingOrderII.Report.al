@@ -179,7 +179,7 @@ Report 52185819 "Standing Order II"
         Loans: Record Loans;
         LoanBal: Decimal;
         IntBal: Decimal;
-        LoanStatus: Option Perfoming,Watch,Substandard,Doubtful,Loss;
+        LoanStatus: Enum "Loan Sasra categories";//Option Perfoming,Watch,Substandard,Doubtful,Loss;
         Header: Record "Standing Order Header";
         StoNo: Code[20];
         SourceAcc: Code[20];
