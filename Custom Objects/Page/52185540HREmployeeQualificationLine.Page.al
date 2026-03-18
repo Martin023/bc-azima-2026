@@ -1,7 +1,7 @@
 page 52185540 "HR Employee Qualification Line"
 {
     Caption = 'Employee Qualification Lines';
-    PageType = List;
+    PageType = ListPart;
     SourceTable = "HR Employee Qualifications";
     
     ApplicationArea = Basic;
@@ -53,33 +53,6 @@ page 52185540 "HR Employee Qualification Line"
         }
     }
 
-    actions
-    {
-        area(navigation)
-        {
-            group("Q&ualification")
-            {
-                Caption = 'Q&ualification';
-                action("Co&mments")
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Co&mments';
-                    RunObject = Page "Human Resource Comment Sheet";
-                    RunPageLink = "Table Name" = CONST("Employee Qualification"),
-                                  "No." = FIELD("Employee No."),
-                                  "Table Line No." = FIELD("Line No.");
-                }
-                separator(Action1102755021)
-                {
-                }
-                action("Q&ualification Overview")
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Q&ualification Overview';
-                    RunObject = Page "Qualification Overview";
-                }
-            }
-        }
-    }
+   
 }
 

@@ -21,8 +21,7 @@ table 52186156 "Journal Line Dimension"
             // ELSE
             IF ("Table ID" = CONST(207)) "Res. Journal Template".Name
             ELSE
-            IF ("Table ID" = CONST(52185779)) "Job-Journal Line"."Journal Template Name"
-            ELSE
+           
             IF ("Table ID" = CONST(246)) "Req. Wksh. Template".Name
             ELSE
             IF ("Table ID" = CONST(5621)) "FA Journal Template".Name
@@ -171,7 +170,6 @@ table 52186156 "Journal Line Dimension"
         GenJnlLine: Record "Gen. Journal Line";
         ItemJnlLine: Record "Item Journal Line";
         ResJnlLine: Record "Res. Journal Line";
-        JobJnlLine: Record "Job-Journal Line";
         GenJnlAlloc: Record "Gen. Jnl. Allocation";
         ReqLine: Record "Requisition Line";
         FAJnlLine: Record "FA Journal Line";
@@ -236,18 +234,7 @@ table 52186156 "Journal Line Dimension"
                         ResJnlLine.Modify(true);
                     end;
                 end;
-            DATABASE::"Job Journal Line":
-                begin
-                    if JobJnlLine.Get("Journal Template Name", "Journal Batch Name", "Journal Line No.") then begin
-                        case GlobalDimCodeNo of
-                            1:
-                                JobJnlLine."Shortcut Dimension 1 Code" := NewDimValue;
-                            2:
-                                JobJnlLine."Shortcut Dimension 2 Code" := NewDimValue;
-                        end;
-                        JobJnlLine.Modify(true);
-                    end;
-                end;
+            
             DATABASE::"Gen. Jnl. Allocation":
                 begin
                     if GenJnlAlloc.Get(

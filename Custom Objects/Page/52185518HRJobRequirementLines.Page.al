@@ -1,10 +1,9 @@
 page 52185518 "HR Job Requirement Lines"
 {
-    PageType = List;
+    PageType = ListPart;
     SourceTable = "HR Job Requirements";
     UsageCategory = Lists;
     ApplicationArea = Basic;
-    PromotedActionCategories = 'Home, Reports, Process, Navigate, List';
 
     layout
     {
@@ -37,30 +36,10 @@ page 52185518 "HR Job Requirement Lines"
                 {
                     ApplicationArea = Basic;
                 }
-                field(Control4; Rec."Related Qualification")
-                {
-                    ApplicationArea = Basic;
-                }
+               
             }
         }
     }
 
-    actions
-    {
-        area(creation)
-        {
-            action(Action3)
-            {
-                ApplicationArea = Basic;
-                Caption = 'Related Qualification';
-                Image = JobLines;
-                Promoted = true;
-                PromotedCategory = Category4;
-                RunObject = Page "HR Related Job Qualification";
-                RunPageLink = "Qualification ID" = FIELD("Qualification Code"),
-                              "Qualification Type" = FIELD("Qualification Type");
-            }
-        }
-    }
 }
 

@@ -516,15 +516,6 @@ page 52186125 "Payment Header Contract"
 
                     end;
                 }
-                action("Co&mments")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Co&mments';
-                    Image = ViewComments;
-                    RunObject = Page "Funds Mgt Comment List";
-                    RunPageLink = "Document Type" = FIELD("Document Type"),
-                                  "Document No." = FIELD("No.");
-                }
                 separator(Action1102756005)
                 {
                 }

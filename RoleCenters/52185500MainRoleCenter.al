@@ -732,12 +732,7 @@ page 52185500 "Main Role Center"
                             Caption = 'Loans Register';
                             RunObject = report "Loan Register";
                         }
-                        action("Loan Register II")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Loans Register II';
-                            RunObject = report "Loan Register II";
-                        }
+                       
                         action("Loan Approved Schedule")
                         {
                             ApplicationArea = Basic, Suite;
@@ -786,18 +781,7 @@ page 52185500 "Main Role Center"
                             Caption = 'Loans Defaulter Aging - SASRA';
                             RunObject = report "Loans Defaulter Aging - SASRA";
                         }
-                        action("Summary - Loans Defaulter Aging (By product)")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Summary - Loans Defaulter Aging (By product)';
-                            RunObject = report "Summarry-Loans Defaulter Aging";
-                        }
-                        action("Loans Defaulter Aging Per Dept")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Loans Defaulter Aging Per Dept';
-                            RunObject = report "Loan Deafulter Aging Per Deprt";
-                        }
+                       
                         action("SASRA Deposit Return")
                         {
                             ApplicationArea = Basic, Suite;
@@ -848,12 +832,7 @@ page 52185500 "Main Role Center"
                             Caption = 'Loan Issued Summary';
                             RunObject = report "Loan Issued Summary";
                         }
-                        action("Loan Approved Schedule Details")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Loan Approved Schedule Details';
-                            RunObject = report "Loan Approved Schedule Details";
-                        }
+                      
                         action("Position on Borrowers in Sacco")
                         {
                             ApplicationArea = Basic, Suite;
@@ -1161,12 +1140,7 @@ page 52185500 "Main Role Center"
                             Caption = 'Sasra Staff Access Granted';
                             RunObject = report "Sasra Staff Access Granted";
                         }
-                        action("Permissions Report")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Permissions Report';
-                            RunObject = report "Permissions Report";
-                        }
+                       
                         action("Sasra Staff Positions")
                         {
                             ApplicationArea = Basic, Suite;
@@ -1398,12 +1372,7 @@ page 52185500 "Main Role Center"
                             Caption = 'Cashier Transactions';
                             runobject = page "Cashier Transactions List";
                         }
-                        action("T Cashier Report")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Cashier Report';
-                            RunObject = report "Cashier Report-New.";
-                        }
+                        
                         action("T Cashier Transactions Report")
                         {
                             ApplicationArea = Basic, Suite;
@@ -2016,18 +1985,7 @@ page 52185500 "Main Role Center"
                             Caption = 'Cashier Transactions';
                             RunObject = report "Cashier Transactions";
                         }
-                        action("Daily Cashier Summary")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Daily Cashier Summary';
-                            RunObject = report "Daily Cashier Summary";
-                        }
-                        action("Cashier Report")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Cashier Report';
-                            RunObject = report "Cashier Report-New.";
-                        }
+                       
                     }
                     action("EFT Reports")
                     {
@@ -2103,12 +2061,7 @@ page 52185500 "Main Role Center"
                             Caption = 'Standing Order';
                             RunObject = report "Standing Order";
                         }
-                        action("Standing Order II")
-                        {
-                            ApplicationArea = Suite;
-                            Caption = 'Standing Order II';
-                            RunObject = report "Standing Order II";
-                        }
+                        
                         action("Standing Order Register")
                         {
                             ApplicationArea = Basic, Suite;
@@ -3916,24 +3869,14 @@ page 52185500 "Main Role Center"
                                 ApplicationArea = Basic, suite;
                                 RunObject = page "HR BSC List Targets1";
                             }
-                            action("HR BSC List Targets-Supervisor")
-                            {
-                                Caption = 'HR BSC List Targets-Supervisor';
-                                ApplicationArea = Basic, suite;
-                                RunObject = page "HR BSC List Targets-Supervisor";
-                            }
+                            
                             action("HR BSC List Quater1")
                             {
                                 Caption = 'HR BSC List Quater1';
                                 ApplicationArea = Basic, suite;
                                 RunObject = page "HR BSC List Qaurter 1";
                             }
-                            action("HR BSC List Review")
-                            {
-                                Caption = 'HR BSC List Review';
-                                ApplicationArea = Basic, suite;
-                                RunObject = page "HR BSC List Review1";
-                            }
+                           
                             action("HR BSC List Quater 3")
                             {
                                 Caption = 'HR BSC List Quater 3';
@@ -5329,12 +5272,7 @@ page 52185500 "Main Role Center"
                             Caption = 'Terminated Contracts list';
                             RunObject = Page "Terminated Contracts list";
                         }
-                        action("Contract Purchase Order List ")
-                        {
-                            ApplicationArea = Basic;
-                            Caption = 'Contract Purchase Order List';
-                            RunObject = Page "Contract Purchase Order List";
-                        }
+                       
                         action("Approved Contracts list")
                         {
                             ApplicationArea = Basic;

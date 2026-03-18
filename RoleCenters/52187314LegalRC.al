@@ -1211,12 +1211,7 @@ page 52187314 "Legal Role Center"
                         Caption = 'Appeals Report';
                         RunObject = Report "Appeals Report";
                     }
-                    action("ADR Report")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'ADR Report';
-                        RunObject = Report "ADR Report";
-                    }
+                   
                     action("Litigaton Cases By Cost")
                     {
                         ApplicationArea = Basic, Suite;

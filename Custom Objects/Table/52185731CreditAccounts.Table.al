@@ -486,25 +486,6 @@ table 52185731 "Credit Accounts"
     var
         Text000: Label 'You cannot delete %1 %2 because there is at least one outstanding Sales %3 for this customer.';
         Text002: Label 'Do you wish to create a contact for %1 %2?';
-        CommentLine: Record "Comment Line";
-        SalesOrderLine: Record "Sales Line";
-        CustBankAcc: Record "Customer Bank Account";
-        ShipToAddr: Record "Ship-to Address";
-        PostCode: Record "Post Code";
-        GenBusPostingGrp: Record "Gen. Business Posting Group";
-        ShippingAgentService: Record "Shipping Agent Services";
-        ItemCrossReference: Record "Item Reference";
-        RMSetup: Record "Marketing Setup";
-        SalesPrice: Record "Sales Price";
-        SalesLineDisc: Record "Sales Line Discount";
-        SalesPrepmtPct: Record "Sales Prepayment %";
-        ServContract: Record "Service Contract Header";
-        ServHeader: Record "Service Header";
-        ServiceItem: Record "Service Item";
-        // NoSeriesMgt: Codeunit NoSeriesManagement;
-        NoSeriesMgt: Codeunit "No. Series";
-        MoveEntries: Codeunit MoveEntries;
-        UpdateContFromCust: Codeunit "CustCont-Update";
         //DimMgt: Codeunit DimensionManagement;
         InsertFromContact: Boolean;
         Text003: Label 'Contact %1 %2 is not related to customer %3 %4.';

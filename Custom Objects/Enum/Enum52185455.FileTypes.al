@@ -32,9 +32,4 @@ enum 52185455 "File Types"
         Caption = 'HR Files';
     }
     
-
-    
-
-    // "Member File","Policy File","Administrative Files","Business Loans File","Personnel Files","HR Files";
-    //         OptionCaption = 'Member File,Policy File, Administrative Files, Business Loans File, Personnel Files, HR Files';
 }

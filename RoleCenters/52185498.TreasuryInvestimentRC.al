@@ -931,12 +931,7 @@ page 52185498 "Treasury RC"
                         Caption = 'Expected BOSA Contributions Report';
                         RunObject = report "Expected BOSA Contributions";
                     }
-                    action("Loan Defaulter Aging")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Loans Defaulter Aging';
-                        RunObject = report "Summarry-Loans Defaulter Aging";
-                    }
+                   
                     action("Ideal Repayment Schedule")
                     {
                         ApplicationArea = Basic, Suite;

@@ -114,25 +114,7 @@ page 52186556 "HR Job Applicants Qualified Ca"
     {
         area(creation)
         {
-            action(Approvals)
-            {
-                ApplicationArea = Basic;
-                Caption = 'Approvals';
-                Image = Approvals;
-                Promoted = true;
-                PromotedCategory = Process;
-                Visible = false;
-
-                trigger OnAction()
-                var
-                    DocumentType: Option Quote,"Order",Invoice,"Credit Memo","Blanket Order","Return Order","None","Payment Voucher","Petty Cash",Imprest,Requisition,ImprestSurrender,Interbank,Receipt,"Staff Claim","Staff Advance",AdvanceSurrender,"Bank Slip",Grant,"Grant Surrender","Employee Requisition","Leave Application","Training Requisition","Transport Requisition",JV,"Grant Task","Concept Note",Proposal,"Job Approval","Disciplinary Approvals",GRN,Clearence,Donation,Transfer,PayChange,Budget,GL,"Cash Purchase","Leave Reimburse",Appraisal,Inspection,Closeout,"Lab Request",ProposalProjectsAreas,"Leave Carry over","IB Transfer",EmpTransfer,LeavePlanner,HrAssetTransfer;
-                ApprovalEntries: Page "Approval Entries";
-                begin
-                    DocumentType := DocumentType::"Job Approval";
-                    ApprovalEntries.SetRecordFilters(DATABASE::"HR Job Applications", DocumentType, HRJobApplicants."Job Application No.");
-                    ApprovalEntries.Run;
-                end;
-            }
+            
             action("Send Approval Request")
             {
                 ApplicationArea = Basic;
