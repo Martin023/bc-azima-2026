@@ -152,7 +152,6 @@ Report 52185540 "P.10 A"
                     GrossPay := "PR Salary Card"."Cumm GrossPay";
                     Index := Index + 1;
                 end;
-                CurrReport.CreateTotals(MyPAYE, GrossPay);
             end;
 
             trigger OnPreDataItem()

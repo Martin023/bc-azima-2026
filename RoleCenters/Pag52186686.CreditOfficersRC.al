@@ -1613,18 +1613,8 @@ page 52186686 "Credit Officers RC"
                         Caption = 'Cashier Transactions';
                         RunObject = report "Cashier Transactions";
                     }
-                    action("Daily Cashier Summary")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Daily Cashier Summary';
-                        RunObject = report "Daily Cashier Summary";
-                    }
-                    action("Cashier Report")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Cashier Report';
-                        RunObject = report "Cashier Report-New.";
-                    }
+                  
+                  
                     action("Daily Transactions Cashiers")
                     {
                         ApplicationArea = Basic, Suite;
@@ -1742,12 +1732,7 @@ page 52186686 "Credit Officers RC"
                         Caption = 'Petty Cash Report';
                         RunObject = report "Petty Cash FOSA Report";
                     }
-                    action("Deposit List Report")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Deposit FOSA List Report';
-                        RunObject = report "Deposit FOSA List Report";
-                    }
+                  
                     action("FOSA Account List Report")
                     {
                         ApplicationArea = Basic, Suite;

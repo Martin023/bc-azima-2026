@@ -324,13 +324,13 @@ page 52187326 "Procurement Role Center"
                 {
                     Caption = 'Planning';
 
-                    action("Purchase Invoice Report")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Purchase Invoice Report';
-                        RunObject = report "Purchase Invoice Report";
+                    // action("Purchase Invoice Report")
+                    // {
+                    //     ApplicationArea = all;
+                    //     Caption = 'Purchase Invoice Report';
+                    //     RunObject = report "Purchase Invoice Report";
 
-                    }
+                    // }
                     action("Purchase Order Report")
                     {
                         ApplicationArea = all;

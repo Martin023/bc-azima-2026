@@ -170,68 +170,7 @@ page 52185586 "HR Shortlisting Card"
                                 StageScore := 0;
                                 Rec.Score := 0;
                                 repeat
-                                    HRJobRequirements.CalcFields("Related Qualification");
-                                    //GET THE APPLICANTS QUALIFICATIONS AND COMPARE THEM WITH THE JOB REQUIREMENTS
-                                    if HRJobRequirements."Related Qualification" = false then begin
-                                        AppQualifications.Reset;
-                                        AppQualifications.SetRange(AppQualifications."Application No", HRJobApplications."Job Application No.");
-                                        AppQualifications.SetRange(AppQualifications."Qualification Code", HRJobRequirements."Qualification Code");
-                                        if AppQualifications.Find('-') then begin
-                                            Rec.Score := Rec.Score + AppQualifications."Score ID";
-                                            //Condition 1
-                                            if (AppQualifications."Score ID" < HRJobRequirements."Minimum Score") then
-                                              //OR //(AppQualifications."Score ID" < HRJobRequirements."Maximum Score")
-                                              begin
-                                                Qualified := false;
-                                            end;
-                                        end else begin
-                                            //IF WE DO NOT FIND ANY APPLICANT QUALIFICATIONS
-                                            Qualified := false;
-                                        end;
-                                    end else
-                                        if HRJobRequirements."Related Qualification" = true then begin
-                                            AppQualifications.Reset;
-                                            AppQualifications.SetRange(AppQualifications."Application No", HRJobApplications."Job Application No.");
-                                            AppQualifications.SetRange(AppQualifications."Qualification Code", HRJobRequirements."Qualification Code");
-                                            if AppQualifications.Find('-') then begin
-                                                Rec.Score := Rec.Score + AppQualifications."Score ID";
-                                                //Condition 1
-                                                if (AppQualifications."Score ID" < HRJobRequirements."Minimum Score") then
-                                                //OR //(AppQualifications."Score ID" < HRJobRequirements."Maximum Score")
-                                                  begin
-                                                    Qualified := false;
-                                                end;
-                                            end else
-                                                //check if related course also
-                                                //check if related course also
-                                                RelatedQualification.Reset;
-                                            RelatedQualification.SetRange(RelatedQualification."Qualification ID", HRJobRequirements."Qualification Code");
-                                            if RelatedQualification.Find('-') then begin
-                                                repeat
-                                                    //GET THE APPLICANTS QUALIFICATIONS AND COMPARE THEM WITH THE JOB REQUIREMENTS
-                                                    AppQualifications.Reset;
-                                                    AppQualifications.SetRange(AppQualifications."Application No", HRJobApplications."Job Application No.");
-                                                    AppQualifications.SetRange(AppQualifications."Qualification Code", RelatedQualification."Qualification Code");
-                                                    if AppQualifications.Find('-') then begin
-                                                        Rec.Score := Rec.Score + AppQualifications."Score ID";
-                                                        //Condition 1
-                                                        if (AppQualifications."Score ID" < RelatedQualification."Minimum Score") then
-                                                          //OR
-                                                          //(AppQualifications."Score ID" < HRJobRequirements."Maximum Score")
-                                                          begin
-                                                            Qualified := false;
-                                                        end;// ELSE
-
-                                                    end else begin
-                                                        //IF WE DO NOT FIND ANY APPLICANT QUALIFICATIONS
-                                                        Qualified := false;
-                                                    end;
-                                                until RelatedQualification.Next = 0;
-                                            end;
-                                        end else begin
-                                            //IF WE DO NOT FIND ANY APPLICANT QUALIFICATIONS
-                                            Qualified := false;
-                                        end;
+                                    
                                 until HRJobRequirements.Next = 0;
                             end;
                             HRShortlistedApplicants."Employee Requisition No" := Rec."Requisition No.";
@@ -346,7 +285,6 @@ page 52185586 "HR Shortlisting Card"
         RecCount: Integer;
         HREmpReq: Record "HR Employee Requisitions";
         Text19057439: Label 'Short Listed Candidates';
-        RelatedQualification: Record "HR Job Related Requirements";
         found: Integer;
         DMS: Record EDMS;
 }

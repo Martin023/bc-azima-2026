@@ -1525,28 +1525,7 @@ page 52187328 "Business Loans"
                         Caption = 'Loans Underway Report';
                         RunObject = report "Loans Underway Report";
                     }
-                    action("Summary - Loans Defaulter Aging (By product)")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Summary - Loans Defaulter Aging (By product)';
-                        RunObject = report "Summarry-Loans Defaulter Aging";
-
-                    }
-                    action("Loans Defaulter Aging Per Dept")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Loans Defaulter Aging Per Dept';
-                        RunObject = report "Loan Deafulter Aging Per Deprt";
-                    }
-
-                    action("Loan Register II")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Loans Register II';
-                        RunObject = report "Loan Register II";
-
-                    }
-                    action("Loan Approved Schedule")
+                                       action("Loan Approved Schedule")
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Loan Approved Schedule';
@@ -1653,13 +1632,7 @@ page 52187328 "Business Loans"
                         RunObject = report "Loan Issued Summary";
 
                     }
-                    action("Loan Approved Schedule Details")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Loan Approved Schedule Details';
-                        RunObject = report "Loan Approved Schedule Details";
-
-                    }
+                    
                     action("Position on Borrowers in Sacco")
                     {
                         ApplicationArea = Basic, Suite;
@@ -1873,12 +1846,7 @@ page 52187328 "Business Loans"
                         Caption = 'Sasra Staff Access Granted';
                         RunObject = report "Sasra Staff Access Granted";
                     }
-                    action("Permissions Report")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Permissions Report';
-                        RunObject = report "Permissions Report";
-                    }
+                  
                     action("Sasra Staff Positions")
                     {
                         ApplicationArea = Basic, Suite;

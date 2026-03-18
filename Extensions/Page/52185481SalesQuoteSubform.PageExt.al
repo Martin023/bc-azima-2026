@@ -941,14 +941,7 @@ PageExtension 52185481 pageextension52185481 extends "Sales Quote Subform"
         {
             ApplicationArea = Basic;
         }
-        modify("Get &Price")
-        {
-            ApplicationArea = Basic;
-        }
-        modify("Get Li&ne Discount")
-        {
-            ApplicationArea = Basic;
-        }
+      
         modify("E&xplode BOM")
         {
             ApplicationArea = Basic;
