@@ -2982,13 +2982,13 @@ page 52186778 "Finance Role Center"
                     {
                         Caption = 'Planning';
 
-                        action("Purchase Invoice Report")
-                        {
-                            ApplicationArea = all;
-                            Caption = 'Purchase Invoice Report';
-                            RunObject = report "Purchase Invoice Report";
+                        // action("Purchase Invoice Report")
+                        // {
+                        //     ApplicationArea = all;
+                        //     Caption = 'Purchase Invoice Report';
+                        //     RunObject = report "Purchase Invoice Report";
 
-                        }
+                        // }
                         action("Purchase Order Report")
                         {
                             ApplicationArea = all;
@@ -3949,12 +3949,7 @@ page 52186778 "Finance Role Center"
                             RunObject = report "PrDeductions Summary";
                             ApplicationArea = Basic, Suite;
                         }
-                        action("pr Loans Deductions Report")
-                        {
-                            Caption = 'pr Loans Deductions Report';
-                            RunObject = report "pr Loans Deductions Report";
-                            ApplicationArea = Basic, Suite;
-                        }
+                       
                         action("Helb Report")
                         {
                             Caption = 'Helb Report';
@@ -4477,30 +4472,13 @@ page 52186778 "Finance Role Center"
                         Caption = 'Loans Underway Report';
                         RunObject = report "Loans Underway Report";
                     }
-                    action("Summary - Loans Defaulter Aging (By product)")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Summary - Loans Defaulter Ageing (By product)';
-                        RunObject = report "Summarry-Loans Defaulter Aging";
-                    }
-                    // action("Loan Defaulter Ageing")
-                    // {
-                    //     ApplicationArea = Basic, Suite;
-                    //     Caption = 'Loan Defaulter Ageing';
-                    //     RunObject = report "Loan Defaulter Aging Report";
-                    // }
+                 
+                   
                     action("Loan Ageing")
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Loan Defaulter Ageing';
                         RunObject = report "Loan Ageing Report";
-                    }
-
-                    action("Loans Defaulter Aging Per Dept")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Loans Defaulter Ageing Per Dept';
-                        RunObject = report "Loan Deafulter Aging Per Deprt";
                     }
 
                     group("Loans Fall Off Report")
@@ -4554,13 +4532,7 @@ page 52186778 "Finance Role Center"
                         ApplicationArea = all;
                         RunObject = report "Loans Recovery Per Month";
                     }
-                    action("Loan Register II")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Loans Register II';
-                        RunObject = report "Loan Register II";
-                        Visible = false;
-                    }
+                 
                     action("Loan Approved Schedule")
                     {
                         ApplicationArea = Basic, Suite;
@@ -4653,13 +4625,7 @@ page 52186778 "Finance Role Center"
                         RunObject = report "Loan Issued Summary";
 
                     }
-                    action("Loan Approved Schedule Details")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Loan Approved Schedule Details';
-                        RunObject = report "Loan Approved Schedule Details";
 
-                    }
                     action("Position on Borrowers in Sacco")
                     {
                         ApplicationArea = Basic, Suite;
@@ -4818,13 +4784,7 @@ page 52186778 "Finance Role Center"
                         ApplicationArea = Basic, Suite;
                         RunObject = report "Past Due Accounts";
                     }
-                    action("Loan Aging Report Per Deprt")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Loan Aging Report';
-                        RunObject = report "Loan Deafulter Aging Per Deprt";
-                        Visible = false;
-                    }
+            
                     action("DMU Case Forwarded")
                     {
                         ApplicationArea = All;

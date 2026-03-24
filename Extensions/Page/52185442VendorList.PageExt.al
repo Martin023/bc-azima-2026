@@ -194,14 +194,7 @@ PageExtension 52185442 pageextension52185442 extends "Vendor List"
         {
             ApplicationArea = Basic;
         }
-        modify(Prices)
-        {
-            ApplicationArea = Basic;
-        }
-        modify("Line Discounts")
-        {
-            ApplicationArea = Basic;
-        }
+       
         modify("Prepa&yment Percentages")
         {
             ApplicationArea = Basic;

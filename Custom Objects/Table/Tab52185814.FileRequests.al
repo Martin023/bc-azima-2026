@@ -200,10 +200,10 @@ table 52185814 "File Requests"
             // OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Applicant,Withdrawn,Deceased,Defaulter,Closed,Withdrawn Shareholder';
             // OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Applicant",Withdrawn,Deceased,Defaulter,Closed,"Withdrawn Shareholder";
         }
-        field(34; "File Type"; Option)
+        field(34; "File Type";  Enum "File Types")
         {
-            OptionMembers = "Member File","Policy File";
-            OptionCaption = 'Member File,Policy File';
+            // OptionMembers = "Member File","Policy File";
+            // OptionCaption = 'Member File,Policy File';
             trigger OnValidate()
             begin
                 "File Number" := '';

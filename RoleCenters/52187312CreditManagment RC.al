@@ -1914,12 +1914,6 @@ page 52187312 "Credit Management Role Center"
                         Caption = 'Loan Insurance Report';
                         RunObject = report "Loan Insurance Report";
                     }
-                    action("Recovered Arrears Report")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Recovered Arrears Report';
-                        RunObject = report "Recovered Arrears";
-                    }
                     action("Loan Register")
                     {
                         ApplicationArea = Basic, Suite;
@@ -1927,7 +1921,6 @@ page 52187312 "Credit Management Role Center"
                         RunObject = report "Loan Register";
 
                     }
-
                     action("Branch Loan Summary")
                     {
                         ApplicationArea = Basic, Suite;
@@ -1991,33 +1984,8 @@ page 52187312 "Credit Management Role Center"
                         Caption = 'SASRA Loan Categorization';
                         RunObject = report "SASRA Loan Categorization";
                     }
-                    action("Summary - Loans Defaulter Aging (By product)")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Summary - Loans Defaulter Aging (By product)';
-                        RunObject = report "Summarry-Loans Defaulter Aging";
+                   
 
-                    }
-                    action("Loans Defaulter Aging Per Dept")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Loans Defaulter Aging Per Dept';
-                        RunObject = report "Loan Deafulter Aging Per Deprt";
-                    }
-                    // action("Loan FallOff")
-                    // {
-                    //     ApplicationArea = all;
-                    //     Caption = 'Loan FallOff Report';
-                    //     RunObject = report "Loan FallOff Report";
-                    // }
-
-                    action("Loan Register II")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Loans Register II';
-                        RunObject = report "Loan Register II";
-                        Visible = false;
-                    }
                     action("Loan Approved Schedule")
                     {
                         ApplicationArea = Basic, Suite;
@@ -2114,14 +2082,7 @@ page 52187312 "Credit Management Role Center"
                         Visible = true;
 
                     }
-                    action("Loan Approved Schedule Details")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Loan Approved Schedule Details';
-                        RunObject = report "Loan Approved Schedule Details";
-                        Visible = false;
-
-                    }
+                   
                     action("Position on Borrowers in Sacco")
                     {
                         ApplicationArea = Basic, Suite;
@@ -2518,12 +2479,6 @@ page 52187312 "Credit Management Role Center"
                         ApplicationArea = Basic, Suite;
                         Caption = 'Sasra Staff Access Granted';
                         RunObject = report "Sasra Staff Access Granted";
-                    }
-                    action("Permissions Report")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Permissions Report';
-                        RunObject = report "Permissions Report";
                     }
                     action("Sasra Staff Positions")
                     {

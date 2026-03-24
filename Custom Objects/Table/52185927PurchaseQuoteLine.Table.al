@@ -450,7 +450,7 @@ table 52185927 "Purchase Quote Line"
             CalcFormula = Sum("Reservation Entry".Quantity WHERE("Source ID" = FIELD("Document No."),
                                                                   "Source Ref. No." = FIELD("Line No."),
                                                                   "Source Type" = CONST(39),
-                                                                  "Source Subtype" = FIELD("Document Type"),
+                                                                
                                                                   "Reservation Status" = CONST(Reservation)));
             Caption = 'Reserved Quantity';
             DecimalPlaces = 0 : 5;
@@ -845,7 +845,7 @@ table 52185927 "Purchase Quote Line"
         field(5495; "Reserved Qty. (Base)"; Decimal)
         {
             CalcFormula = Sum("Reservation Entry"."Quantity (Base)" WHERE("Source Type" = CONST(39),
-                                                                           "Source Subtype" = FIELD("Document Type"),
+                                                                          
                                                                            "Source ID" = FIELD("Document No."),
                                                                            "Source Ref. No." = FIELD("Line No."),
                                                                            "Reservation Status" = CONST(Reservation)));
@@ -974,7 +974,7 @@ table 52185927 "Purchase Quote Line"
         {
             BlankZero = true;
             CalcFormula = Sum("Warehouse Receipt Line"."Qty. Outstanding (Base)" WHERE("Source Type" = CONST(39),
-                                                                                        "Source Subtype" = FIELD("Document Type"),
+                                                                                       
                                                                                         "Source No." = FIELD("Document No."),
                                                                                         "Source Line No." = FIELD("Line No.")));
             Caption = 'Whse. Outstanding Qty. (Base)';

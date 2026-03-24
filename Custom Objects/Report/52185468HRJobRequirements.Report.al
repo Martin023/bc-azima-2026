@@ -10,9 +10,7 @@ Report 52185468 "HR Job Requirements"
         {
             RequestFilterFields = "Job ID";
 
-            column(PageConst_________FORMAT_CurrReport_PAGENO_; PageConst + ' ' + Format(CurrReport.PageNo))
-            {
-            }
+            
             column(COMPANYNAME; COMPANYNAME)
             {
             }

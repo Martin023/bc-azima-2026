@@ -694,13 +694,13 @@ page 52187332 Procurement
                 group("Planning Reports")
                 {
                     Caption = 'Planning';
-                    action("Purchase Invoice Report")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Purchase Invoice Report';
-                        RunObject = report "Purchase Invoice Report";
+                    // action("Purchase Invoice Report")
+                    // {
+                    //     ApplicationArea = all;
+                    //     Caption = 'Purchase Invoice Report';
+                    //     RunObject = report "Purchase Invoice Report";
 
-                    }
+                    // }
                     action("Purchase Order Report")
                     {
                         ApplicationArea = all;

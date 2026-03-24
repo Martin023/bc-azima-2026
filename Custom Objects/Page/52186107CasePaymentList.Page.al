@@ -342,15 +342,7 @@ page 52186107 "Case Payment List"
 
                     end;
                 }
-                action("Co&mments")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Co&mments';
-                    Image = ViewComments;
-                    RunObject = Page "Funds Mgt Comment List";
-                    RunPageLink = "Document Type" = FIELD("Document Type"),
-                                  "Document No." = FIELD("No.");
-                }
+               
                 separator(Action6)
                 {
 
@@ -360,8 +352,6 @@ page 52186107 "Case Payment List"
                     ApplicationArea = Basic, Suite;
                     Caption = 'ReOpen Document';
                     Image = ReOpen;
-                    //The property 'PromotedCategory' can only be set if the property 'Promoted' is set to 'true'
-                    //PromotedCategory = Process;
 
                     trigger OnAction()
                     begin

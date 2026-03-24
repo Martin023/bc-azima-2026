@@ -220,8 +220,7 @@ table 52186080 "File Tracker"
         }
         field(34; "File Type"; Enum "File Types")
         {
-            // OptionMembers = "Member File","Policy File","Administrative Files","Business Loans File","Personnel Files","HR Files";
-            // OptionCaption = 'Member File,Policy File, Administrative Files, Business Loans File, Personnel Files, HR Files';
+          
             trigger OnValidate()
             begin
                 "File Number" := '';
@@ -256,7 +255,7 @@ table 52186080 "File Tracker"
             begin
                 if FileReq.get("File Request No.") then begin
                     "File Number" := FileReq."File Number";
-                    "File Type" := FileReq."Request Type";
+                    "File Type" := FileReq."File Type";
                     "Member Name" := FileReq."Member Name";
                     "ID No." := FileReq."ID No.";
                 end;

@@ -2,9 +2,7 @@
 PageExtension 52185441 pageextension52185441 extends "Vendor Card"
 {
 
-    //Unsupported feature: Property Modification (PromotedActionCategoriesML) on ""Vendor Card"(Page 26)".
     Editable = true;
-    //Unsupported feature: Property Insertion (DeleteAllowed) on ""Vendor Card"(Page 26)".
     layout
     {
         modify(General)
@@ -482,12 +480,7 @@ PageExtension 52185441 pageextension52185441 extends "Vendor Card"
         {
             Visible = false;
         }
-        modify("Attached Documents")
-        {
-            Visible = false;
-        }
-
-        //Unsupported feature: Property Deletion (ApplicationArea) on "VendorStatisticsFactBox(Control 1904651607)".
+       
 
         modify(AgedAccPayableChart)
         {
@@ -635,14 +628,7 @@ PageExtension 52185441 pageextension52185441 extends "Vendor Card"
         {
             ApplicationArea = Basic;
         }
-        modify(Prices)
-        {
-            ApplicationArea = Basic;
-        }
-        modify("Line Discounts")
-        {
-            ApplicationArea = Basic;
-        }
+      
         modify("Prepa&yment Percentages")
         {
             ApplicationArea = Basic;
@@ -674,22 +660,10 @@ PageExtension 52185441 pageextension52185441 extends "Vendor Card"
         modify("Ledger E&ntries")
         {
             ApplicationArea = Basic;
-
-            //Unsupported feature: Property Modification (RunPageView) on ""Ledger E&ntries"(Action 70)".
-
-
-            //Unsupported feature: Property Modification (Promoted) on ""Ledger E&ntries"(Action 70)".
-
-
-            //Unsupported feature: Property Modification (PromotedCategory) on ""Ledger E&ntries"(Action 70)".
-
         }
         modify(Statistics)
         {
             ApplicationArea = Basic;
-
-            //Unsupported feature: Property Modification (PromotedCategory) on "Statistics(Action 66)".
-
         }
         modify(Purchases)
         {
@@ -709,13 +683,7 @@ PageExtension 52185441 pageextension52185441 extends "Vendor Card"
         }
         modify(NewBlanketPurchaseOrder)
         {
-
-            //Unsupported feature: Property Modification (Name) on "NewBlanketPurchaseOrder(Action 1903213705)".
-
             ApplicationArea = Basic;
-
-            //Unsupported feature: Property Modification (PromotedCategory) on "NewBlanketPurchaseOrder(Action 1903213705)".
-
         }
         modify(NewPurchaseQuote)
         {
@@ -729,8 +697,6 @@ PageExtension 52185441 pageextension52185441 extends "Vendor Card"
         }
         modify(NewPurchaseInvoice)
         {
-
-            //Unsupported feature: Property Modification (Name) on "NewPurchaseInvoice(Action 1907709505)".
 
             ApplicationArea = Basic;
 
@@ -1132,12 +1098,6 @@ PageExtension 52185441 pageextension52185441 extends "Vendor Card"
             //     end;
             // }
         }
-        addfirst(reporting)
-        {
-        }
-        // moveafter("Cross References";ActionContainer102)
-        // moveafter(VendorReportSelections;Flow)
-        // moveafter("Request Approval";"Vendor - Summary Aging")
     }
 
     var

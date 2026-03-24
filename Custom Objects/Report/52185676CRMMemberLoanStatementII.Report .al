@@ -26,9 +26,7 @@ Report 52186082 "CRM Member Loan Statement"
             column(Name_Members; Members.Name)
             {
             }
-            column(PageNo_Members; CurrReport.PageNo)
-            {
-            }
+           
             column(IDNo_Members; Members."Primary Identification")
             {
             }

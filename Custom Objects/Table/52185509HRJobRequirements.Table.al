@@ -57,12 +57,7 @@ table 52185509 "HR Job Requirements"
         field(16; Relevant; Boolean)
         {
         }
-        field(17; "Related Qualification"; Boolean)
-        {
-            CalcFormula = Exist("HR Job Related Requirements" WHERE("Qualification ID" = FIELD("Qualification Code"),
-                                                                     "Qualification Type" = FIELD("Qualification Type")));
-            FieldClass = FlowField;
-        }
+        
     }
 
     keys

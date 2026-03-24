@@ -352,12 +352,7 @@ page 52187310 "Payroll processing Role Center"
                         RunObject = report "PrDeductions Summary";
                         ApplicationArea = Basic, Suite;
                     }
-                    action("pr Loans Deductions Report")
-                    {
-                        Caption = 'pr Loans Deductions Report';
-                        RunObject = report "pr Loans Deductions Report";
-                        ApplicationArea = Basic, Suite;
-                    }
+                   
                     action("Helb Report")
                     {
                         Caption = 'Helb Report';
