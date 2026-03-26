@@ -176,7 +176,7 @@ page 52186471 "Loan Appraisals"
             }
             group("Guarantors List")
             {
-                part("Loan Guarantors"; "Loan Guarantors and Security")
+                part("Loan Guarantors"; "Loan Guarantors ListPart")
                 {
                     SubPageLink = "Loan No" = field("Loan No.");
                     ApplicationArea = all;
@@ -188,7 +188,7 @@ page 52186471 "Loan Appraisals"
             {
 
 
-                part("loans Topped"; "Loan Top Up")
+                part("loans Topped"; "Loan Topup ListPart")
                 {
                     Caption = 'loans Topped';
                     SubPageLink = "Loan No." = field("Loan No.");

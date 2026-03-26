@@ -28,7 +28,7 @@ page 52185509 "HR Job Occupants"
                     Importance = Promoted;
                 }
             }
-            part("Job Occupants"; "HR Employee List - Active")
+            part("Job Occupants"; "HR Employees ListPart")
             {
                 Caption = 'Job Occupants';
                 Editable = false;

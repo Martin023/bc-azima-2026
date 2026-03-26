@@ -308,7 +308,7 @@ report 52186092 "Bank Recon Custom"
                                 BankAccLedgEntry.SetRange("Statement Line No.", "Statement Line No.");
                             OnBankAccReconciliationLineAfterGetRecordOnAfterBankAccLedgEntrySetFilters("Bank Acc. Reconciliation Line", BankAccLedgEntry);
 #if not CLEAN21
-                            OnBankAccReconciliationLineAfterGetRecordOnAfterCheckLedgEntrySetFilters("Bank Acc. Reconciliation Line", CheckLedgEntry);
+                            // OnBankAccReconciliationLineAfterGetRecordOnAfterCheckLedgEntrySetFilters("Bank Acc. Reconciliation Line", CheckLedgEntry);
 #endif
                             if not BankAccLedgEntry.IsEmpty() then begin
                                 BankAccLedgEntry.FindSet();

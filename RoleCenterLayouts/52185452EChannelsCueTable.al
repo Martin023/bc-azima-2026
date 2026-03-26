@@ -86,12 +86,7 @@ table 52185452 "E-Channels Cue Table"
             FieldClass = Flowfield;
             CalcFormula = Count("Sky Insurance" WHERE("Actioned" = FILTER(TRUE)));
         }
-        field(12; "Onboarded Web Portal Members"; Integer)
-        {
-            Caption = 'Onboarded Web Portal Members';
-            FieldClass = Flowfield;
-            CalcFormula = Count("On Board Members" WHERE(Created = FILTER(True)));
-        }
+        
         field(14; "Web Portal Users"; Integer)
         {
             Caption = 'Web Portal Users';
