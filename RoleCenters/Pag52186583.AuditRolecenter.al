@@ -3215,23 +3215,7 @@ page 52186583 "Audit Role center"
                 {
                     Caption = 'Web Portal';
 
-                    group("Manual Portal Onboarding")
-                    {
-                        Caption = 'Manual Portal Onboarding';
-
-                        action("Member Onboarding List")
-                        {
-                            ApplicationArea = Basic;
-                            Caption = 'Member Onboarding List';
-                            RunObject = Page "Member Onboarding List";
-                        }
-                        action("On Boarded Members")
-                        {
-                            ApplicationArea = Basic;
-                            Caption = 'On Boarded Members';
-                            RunObject = Page "On Boarded Members";
-                        }
-                    }
+                    
                     group("Set Up")
                     {
                         action("Portal Setup")

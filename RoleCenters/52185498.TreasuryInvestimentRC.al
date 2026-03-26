@@ -285,12 +285,12 @@ page 52185498 "Treasury RC"
                 group("Setup")
                 {
                     caption = 'Property Management Setups';
-                    action("General Setup")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'General Setup';
-                        RunObject = page "Property General Setup";
-                    }
+                    // action("General Setup")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'General Setup';
+                    //     RunObject = page "Property General Setup";
+                    // }
                     action("Floor Codes")
                     {
                         ApplicationArea = Basic, Suite;
@@ -931,7 +931,7 @@ page 52185498 "Treasury RC"
                         Caption = 'Expected BOSA Contributions Report';
                         RunObject = report "Expected BOSA Contributions";
                     }
-                   
+
                     action("Ideal Repayment Schedule")
                     {
                         ApplicationArea = Basic, Suite;
