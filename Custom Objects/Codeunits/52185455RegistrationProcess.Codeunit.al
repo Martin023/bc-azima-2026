@@ -595,67 +595,67 @@ Codeunit 52185455 "Registration Process"
         Commit();
 
         //Email Employer
-        if DisplayConfirm then begin
-            //if Confirm('Do you want to send employee datasheet tothe employer?') then begin
-            if (MemberApplication."Type of Application" <> MemberApplication."Type of Application"::Readmission) or
-            (MemberApplication."Type of Application" <> MemberApplication."Type of Application"::"New Registration") then begin
-                Members.Reset();
-                Members.SetRange("No.", Cust."No.");
-                if Members.FindFirst() then begin
-                    FileName := Cust."No." + '.xlsx';
-                    // Report.SaveAsPdf(52185779, FileName, Members);
+        // if DisplayConfirm then begin
+        //     //if Confirm('Do you want to send employee datasheet tothe employer?') then begin
+        //     if (MemberApplication."Type of Application" <> MemberApplication."Type of Application"::Readmission) or
+        //     (MemberApplication."Type of Application" <> MemberApplication."Type of Application"::"New Registration") then begin
+        //         Members.Reset();
+        //         Members.SetRange("No.", Cust."No.");
+        //         if Members.FindFirst() then begin
+        //             FileName := Cust."No." + '.xlsx';
+        //             // Report.SaveAsPdf(52185779, FileName, Members);
 
-                    // FileRecRef.GetTable(Members);
-                    // Report.SaveAs(Report::"Employer Data Sheet", '', ReportFormat::Excel, BlobOutStream, FileRecRef);
+        //             // FileRecRef.GetTable(Members);
+        //             // Report.SaveAs(Report::"Employer Data Sheet", '', ReportFormat::Excel, BlobOutStream, FileRecRef);
 
-                    Employer.Reset();
-                    Employer.SetRange("No.", Cust."Employer Code");
-                    if Employer.FindFirst() then begin
-                        RecRef.GetTable(Members);
-                        TempBlob.CreateOutStream(OutStr);
-                        Report.SaveAs(Report::Datasheet, '', ReportFormat::Excel, OutStr, RecRef);
+        //             Employer.Reset();
+        //             Employer.SetRange("No.", Cust."Employer Code");
+        //             if Employer.FindFirst() then begin
+        //                 RecRef.GetTable(Members);
+        //                 TempBlob.CreateOutStream(OutStr);
+        //                 Report.SaveAs(Report::Datasheet, '', ReportFormat::Excel, OutStr, RecRef);
 
-                        TempBlob.CreateInStream(InStr);
+        //                 TempBlob.CreateInStream(InStr);
 
-                        // TxtRecipientsList.Add(emailadress);
-                        EmailMsg.Create(Employer."E-Mail", 'DATASHEET', 'PFA Datasheet for employee ' + cust.Name);
-                        EmailMsg.AddAttachment(FileName, 'xlsx', InStr);
-                        Email.Send(EmailMsg, Enum::"Email Scenario"::Default);
-                    end;
+        //                 // TxtRecipientsList.Add(emailadress);
+        //                 EmailMsg.Create(Employer."E-Mail", 'DATASHEET', 'PFA Datasheet for employee ' + cust.Name);
+        //                 EmailMsg.AddAttachment(FileName, 'xlsx', InStr);
+        //                 Email.Send(EmailMsg, Enum::"Email Scenario"::Default);
+        //             end;
 
-                end;
-            end;
-            //end;
-        end;
+        //         end;
+        //     end;
+        //     //end;
+        // end;
 
-        //Email Member
-        if DisplayConfirm then begin
-            //if Confirm('Do you want to send employee datasheet to the member?') then begin
-            if Members."E-Mail" <> '' then begin
-                if (MemberApplication."Type of Application" <> MemberApplication."Type of Application"::Readmission) or
-                (MemberApplication."Type of Application" <> MemberApplication."Type of Application"::"New Registration") then begin
-                    Members.Reset();
-                    Members.SetRange("No.", Cust."No.");
-                    if Members.FindFirst() then begin
-                        FileName := Cust."No." + '.xlsx';
-                        // Report.SaveAsPdf(52185779, FileName, Members);
+        // //Email Member
+        // if DisplayConfirm then begin
+        //     //if Confirm('Do you want to send employee datasheet to the member?') then begin
+        //     if Members."E-Mail" <> '' then begin
+        //         if (MemberApplication."Type of Application" <> MemberApplication."Type of Application"::Readmission) or
+        //         (MemberApplication."Type of Application" <> MemberApplication."Type of Application"::"New Registration") then begin
+        //             Members.Reset();
+        //             Members.SetRange("No.", Cust."No.");
+        //             if Members.FindFirst() then begin
+        //                 FileName := Cust."No." + '.xlsx';
+        //                 // Report.SaveAsPdf(52185779, FileName, Members);
 
-                        RecRef.GetTable(Members);
-                        TempBlob.CreateOutStream(OutStr);
-                        Report.SaveAs(Report::Datasheet, '', ReportFormat::Excel, OutStr, RecRef);
+        //                 RecRef.GetTable(Members);
+        //                 TempBlob.CreateOutStream(OutStr);
+        //                 Report.SaveAs(Report::Datasheet, '', ReportFormat::Excel, OutStr, RecRef);
 
-                        TempBlob.CreateInStream(InStr);
+        //                 TempBlob.CreateInStream(InStr);
 
-                        // TxtRecipientsList.Add(emailadress);
-                        EmailMsg.Create(Members."E-Mail", 'DATASHEET', 'PFA Datasheet for employee ' + cust.Name);
-                        EmailMsg.AddAttachment(FileName, 'xlsx', InStr);
-                        Email.Send(EmailMsg, Enum::"Email Scenario"::Default);
-                    end;
-                end;
-            end else
-                Message('Member does not have an email');
-            //end;
-        end;
+        //                 // TxtRecipientsList.Add(emailadress);
+        //                 EmailMsg.Create(Members."E-Mail", 'DATASHEET', 'PFA Datasheet for employee ' + cust.Name);
+        //                 EmailMsg.AddAttachment(FileName, 'xlsx', InStr);
+        //                 Email.Send(EmailMsg, Enum::"Email Scenario"::Default);
+        //             end;
+        //         end;
+        //     end else
+        //         Message('Member does not have an email');
+        //     //end;
+        // end;
     end;
 
 
@@ -726,7 +726,7 @@ Codeunit 52185455 "Registration Process"
             FileExtension := CopyStr(FileManagement.GetExtension(EntryListKey), 1, MaxStrLen(FileExtension));
             TempBlob.CreateOutStream(EntryOutStream);
             // DataCompression.ExtractEntry(EntryListKey, EntryOutStream, Length);
-             Length := DataCompression.ExtractEntry(EntryListKey, EntryOutStream);
+            Length := DataCompression.ExtractEntry(EntryListKey, EntryOutStream);
             TempBlob.CreateInStream(EntryInstream);
 
             if Members.Get(FileName) then begin

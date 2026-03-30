@@ -1606,6 +1606,7 @@ page 52185714 "Member Application Single"
                     Image = Documents;
                     Promoted = true;
                     PromotedCategory = Category8;
+                    Caption = 'Channel Application Documents';
 
                     RunObject = page "Channel Application Documents";
                     RunPageLink = "Application No." = field("No.");
