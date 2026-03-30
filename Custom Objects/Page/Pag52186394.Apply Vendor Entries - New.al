@@ -1299,7 +1299,7 @@ page 52186394 "Apply Vendor Entries - New"
         if IsHandled then
             exit;
 
-        if not AppliedVendLedgEntry.FindSet(false, false) then
+        if not AppliedVendLedgEntry.FindSet() then
             exit;
 
         repeat

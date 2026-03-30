@@ -1324,6 +1324,7 @@ page 52185712 "Product Factory"
 
                 trigger OnAction()
                 var
+                  ApprovalsMgmt: Codeunit "Approvals Mgmt.";
 
                 begin
                     VarVariant := Rec;
@@ -1333,6 +1334,7 @@ page 52185712 "Product Factory"
                     Rec.Status := Rec.Status::Open;
                     Rec."Xrec Minimum Balance" := Rec."Minimum Balance";
                     rec.modify;
+                    ApprovalsMgmt.DeleteApprovalEntries(Rec.RecordId);
                     Message('The document have been opened successfully.');
                 end;
             }

@@ -24,29 +24,29 @@ Report 52185472 "Images Upload+"
 
 
                 PicFileName := StrSubstNo('%1%2.png', FilePath, "Pictures and Signtures"."Member No");
-                //PicFileName := 'D:\000002.png';
-                // if FILE.Exists(PicFileName) then begin
-                //     InputFile.Open(PicFileName);
-                //     InputFile.CreateInstream(InStream1);
-                //     "Pictures and Signtures".Picture.CreateOutstream(OutStream1);
-                //     CopyStream(OutStream1, InStream1);
-                //     "Pictures and Signtures".Modify;
-                //     InputFile.Close;
-                // end;
+                PicFileName := 'D:\000002.png';
+                if FILE.Exists(PicFileName) then begin
+                    InputFile.Open(PicFileName);
+                    InputFile.CreateInstream(InStream1);
+                    "Pictures and Signtures".Picture.CreateOutstream(OutStream1);
+                    CopyStream(OutStream1, InStream1);
+                    "Pictures and Signtures".Modify;
+                    InputFile.Close;
+                end;
 
-                // //Signature
-                // if "Pictures and Signtures".Signature.Hasvalue then
-                //     Clear("Pictures and Signtures".Signature);
+                //Signature
+                if "Pictures and Signtures".Signature.Hasvalue then
+                    Clear("Pictures and Signtures".Signature);
 
-                // PicFileName2 := StrSubstNo('%1%2.png', FilePath2, "Pictures and Signtures"."Member No");
-                // if FILE.Exists(PicFileName2) then begin
-                //     InputFile.Open(PicFileName2);
-                //     InputFile.CreateInstream(InStream1);
-                //     "Pictures and Signtures".Signature.CreateOutstream(OutStream1);
-                //     CopyStream(OutStream1, InStream1);
-                //     "Pictures and Signtures".Modify;
-                //     InputFile.Close;
-                // end;
+                PicFileName2 := StrSubstNo('%1%2.png', FilePath2, "Pictures and Signtures"."Member No");
+                if FILE.Exists(PicFileName2) then begin
+                    InputFile.Open(PicFileName2);
+                    InputFile.CreateInstream(InStream1);
+                    "Pictures and Signtures".Signature.CreateOutstream(OutStream1);
+                    CopyStream(OutStream1, InStream1);
+                    "Pictures and Signtures".Modify;
+                    InputFile.Close;
+                end;
 
             end;
 

@@ -262,29 +262,29 @@ page 52187329 "Records"
                 //         }
                 //     }
                 // }
-                //....to be del
-                group("Group Applications")
-                {
-                    Caption = 'Members'' Account Applocation';
-                    action("Group Application List")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Members'' Savings App List';
-                        RunObject = Page "Member Application Group List";
-                    }
-                    action("Approved Group App List")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Members'' Savings App List';
-                        RunObject = Page "Approved Group App List";
-                    }
-                    action("Rejected Group Applications")
-                    {
-                        ApplicationArea = All;
-                        Caption = ' Rejected Members'' Savings Applications';
-                        RunObject = Page "Rejected Group App List";
-                    }
-                }
+                //....Groups 
+                // group("Group Applications")
+                // {
+                //     Caption = 'Members'' Account Applocation';
+                //     action("Group Application List")
+                //     {
+                //         ApplicationArea = All;
+                //         Caption = 'Members'' Savings App List';
+                //         RunObject = Page "Member Application Group List";
+                //     }
+                //     action("Approved Group App List")
+                //     {
+                //         ApplicationArea = All;
+                //         Caption = 'Members'' Savings App List';
+                //         RunObject = Page "Approved Group App List";
+                //     }
+                //     action("Rejected Group Applications")
+                //     {
+                //         ApplicationArea = All;
+                //         Caption = ' Rejected Members'' Savings Applications';
+                //         RunObject = Page "Rejected Group App List";
+                //     }
+                // }
 
 
             }
@@ -639,36 +639,36 @@ page 52187329 "Records"
                     RunPageLink = "Fixed Deposit Status" = filter(Matured | Closed | "Not Matured" | Terminated);
                 }
             }
-            group("ATM Management")
-            {
-                Caption = 'ATM Management';
+            // group("ATM Management")
+            // {
+            //     Caption = 'ATM Management';
 
-                action("ATM Applications List")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'ATM Applications List';
-                    RunObject = page "ATM Application List";
-                }
-                action("Approved ATM Applications List")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Approved ATM Applications List';
-                    RunObject = page "Approved ATM Application List";
-                }
+            //     action("ATM Applications List")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         Caption = 'ATM Applications List';
+            //         RunObject = page "ATM Application List";
+            //     }
+            //     action("Approved ATM Applications List")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         Caption = 'Approved ATM Applications List';
+            //         RunObject = page "Approved ATM Application List";
+            //     }
 
-                action("Dispatch ATM List")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Dispatch ATM List';
-                    RunObject = page "Dispatch ATM Lists";
-                }
-                action("ATM Return List")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'ATM Return List';
-                    RunObject = page "ATM Returned List";
-                }
-            }
+            //     action("Dispatch ATM List")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         Caption = 'Dispatch ATM List';
+            //         RunObject = page "Dispatch ATM Lists";
+            //     }
+            //     action("ATM Return List")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         Caption = 'ATM Return List';
+            //         RunObject = page "ATM Returned List";
+            //     }
+            // }
 
             group("Member Files")
             {
