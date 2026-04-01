@@ -18,6 +18,10 @@ table 52186116 "Electrol Zones/Area Svr Center"
         {
             Description = '//To gather for delegates transport allowance computations';
         }
+        field(5; "Employer Code"; Code[20]) 
+        {
+            TableRelation = Customer."No.";
+        }
     }
 
     keys

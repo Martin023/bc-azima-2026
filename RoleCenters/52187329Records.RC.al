@@ -639,6 +639,16 @@ page 52187329 "Records"
                     RunPageLink = "Fixed Deposit Status" = filter(Matured | Closed | "Not Matured" | Terminated);
                 }
             }
+            group("Marketing")
+            {
+                Caption = 'Marketing';
+                // action("Campaign List")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Campaign List';
+                //     RunObject = page "Campaign List";
+                // }
+            }
             // group("ATM Management")
             // {
             //     Caption = 'ATM Management';
