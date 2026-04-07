@@ -550,12 +550,12 @@ page 52187329 "Records"
                 }
 
 
-                action("Account Activation List")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Account Activation List';
-                    RunObject = page "Account Activation List";
-                }
+                // action("Account Activation List")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Account Activation List';
+                //     RunObject = page "Account Activation List";
+                // }
                 action("Account Changes")
                 {
                     ApplicationArea = Basic, Suite;
@@ -1655,25 +1655,25 @@ page 52187329 "Records"
                 {
                     caption = 'General';
 
-                    action("Present Officers")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Present Officers Setups';
-                        RunObject = page "Present Users";
+                    // action("Present Officers")
+                    // {
+                    //     ApplicationArea = All;
+                    //     Caption = 'Present Officers Setups';
+                    //     RunObject = page "Present Users";
 
-                    }
+                    // }
                     action("System Edits Tables List")
                     {
                         ApplicationArea = Basic, Suite;
                         RunObject = Page "System Edits Tables";
                     }
 
-                    action("General Set-Up")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'General Set-Up';
-                        // RunObject = page "Gen set-up card";
-                    }
+                    // action("General Set-Up")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'General Set-Up';
+                    //     // RunObject = page "Gen set-up card";
+                    // }
                     action("No. Setup")
                     {
                         ApplicationArea = Basic, Suite;
@@ -1696,7 +1696,7 @@ page 52187329 "Records"
                     action("Electoral Zones/Area Svr Center")
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Eletoral Zones/Area Svr Center';
+                        Caption = 'Electoral Zones/Area Svr Center';
                         RunObject = page "Electrol Zones/Area Svr Center";
                     }
                     action("Salutation Tittles")
@@ -1712,13 +1712,13 @@ page 52187329 "Records"
                         RunObject = page "Exceptions/ Rejection Reason";
                     }
 
-                    action("Present Users")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Present Users Setups';
-                        RunObject = page "Present Users";
+                    // action("Present Users")
+                    // {
+                    //     ApplicationArea = All;
+                    //     Caption = 'Present Users Setups';
+                    //     RunObject = page "Present Users";
 
-                    }
+                    // }
                     action("System Edits Reasons")
                     {
                         ApplicationArea = All;
@@ -1750,16 +1750,7 @@ page 52187329 "Records"
 
 
                 }
-                group("Products Mngt.")
-                {
-                    caption = 'Credit Mngt.';
-                    action("Product Factory")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Product Setups';
-                        RunObject = page "Product Factory List";
-                    }
-                }
+               
 
                 Group("Audit Process")
                 {
@@ -1935,12 +1926,12 @@ page 52187329 "Records"
                         Caption = 'Members - Incomplete Data';
                         RunObject = report "Members With Incomplete Data";
                     }
-                    action("Employer DataSheet")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Employer DataSheet';
-                        RunObject = report "Employer Data Sheet";
-                    }
+                    // action("Employer DataSheet")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Employer DataSheet';
+                    //     RunObject = report "Employer Data Sheet";
+                    // }
                     action("Recovered Registration Fees")
                     {
                         ApplicationArea = Basic, Suite;
@@ -1948,18 +1939,18 @@ page 52187329 "Records"
                         RunObject = Report "Recovered Registration Fees";
                     }
 
-                    action("BBF/Risk/entrance fees/Depo")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'BBF/RISK/ENTRANCE/DEPOSIT Summary';
-                        RunObject = report "BBF/Risk/entrance fees/Depo";
-                    }
-                    action("Unrecov. Reg Fee/BBF/Risk/Shar")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Unrecoveres Reg Fee/BBF/Risk/Share';
-                        RunObject = report "Unrecov. Reg Fee/BBF/Risk/Shar";
-                    }
+                    // action("BBF/Risk/entrance fees/Depo")
+                    // {
+                    //     ApplicationArea = all;
+                    //     Caption = 'BBF/RISK/ENTRANCE/DEPOSIT Summary';
+                    //     RunObject = report "BBF/Risk/entrance fees/Depo";
+                    // }
+                    // action("Unrecov. Reg Fee/BBF/Risk/Shar")
+                    // {
+                    //     ApplicationArea = all;
+                    //     Caption = 'Unrecoveres Reg Fee/BBF/Risk/Share';
+                    //     RunObject = report "Unrecov. Reg Fee/BBF/Risk/Shar";
+                    // }
                 }
                 group(Edits)
                 {
@@ -2001,7 +1992,7 @@ page 52187329 "Records"
                     //     Caption = 'Nominee / BBF Register';
                     //     RunObject = Report "Nominee Register";
                     // }
-                    action("Nominee Report Parallel")
+                    action("Nominee Reports")
                     {
                         ApplicationArea = Basic;
                         RunObject = page "BBF/Nominee Register";
