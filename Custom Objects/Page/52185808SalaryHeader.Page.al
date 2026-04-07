@@ -254,7 +254,7 @@ page 52185808 "Salary Header"
                                     SavingsAccounts.SetFilter(SavingsAccounts."Employer Code", Rec."Employer Code");
                                     SavingsAccounts.SetRange(SavingsAccounts."Payroll/Staff No.", SalaryLines."Staff No.");
                                     SavingsAccounts.SetCurrentKey("Product Type");
-                                    SavingsAccounts.SetFilter(SavingsAccounts."Product Type", 'ODS');
+                                    SavingsAccounts.SetFilter(SavingsAccounts."Product Type", '191');
                                     if SavingsAccounts.Find('-') then begin
 
                                         SalaryLines."Account Not Found" := false;
@@ -304,7 +304,7 @@ page 52185808 "Salary Header"
                                     // if Rec."Donnot Recover" = false then
                                     // SavingsAccounts.SetFilter(SavingsAccounts."Employer Code", Rec."Employer Code");
                                     SavingsAccounts.SetRange(SavingsAccounts."No.", SalaryLines."Account No.");
-                                    SavingsAccounts.SetFilter(SavingsAccounts."Product Type", 'ODS');
+                                    SavingsAccounts.SetFilter(SavingsAccounts."Product Type", '191');
                                     SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"FOSA Account");
                                     if SavingsAccounts.Find('-') then begin
                                         SalaryLines."Account Not Found" := false;
@@ -342,7 +342,7 @@ page 52185808 "Salary Header"
                                 repeat
                                     SavingsAccounts.Reset;
                                     SavingsAccounts.SetRange(SavingsAccounts."Member No.", SalaryLines."Member No.");
-                                    SavingsAccounts.SetFilter(SavingsAccounts."Product Type", 'ODS');
+                                    SavingsAccounts.SetFilter(SavingsAccounts."Product Type", '191');
                                     SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"FOSA Account");
                                     if SavingsAccounts.Find('-') then begin
 

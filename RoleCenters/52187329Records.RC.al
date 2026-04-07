@@ -333,7 +333,7 @@ page 52187329 "Records"
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Savings Accounts';
-                    RunObject = page "Savings Account List";
+                    RunObject = page "Savings Accounts";;
                 }
                 // action("New Members")
                 // {
@@ -414,6 +414,86 @@ page 52187329 "Records"
                     }
                 }
 
+            }
+
+            group("Savings Account")
+            {
+                action("Saving Account Application")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Saving Account Application';
+                    RunObject = page "Savings Account Application";
+                }
+                action("Savings Accounts Register List")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Savings Accounts Register List';
+                    RunObject = page "Savings Accounts";
+                }
+
+
+                // action("Account Activation List")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Account Activation List';
+                //     RunObject = page "Account Activation List";
+                // }
+                action("Account Changes")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'FOSA Account Change Logs';
+                    RunObject = report "FOSA Account Change Logs";
+                }
+            }
+            group("Account Activation")
+            {
+                group("BOSA Account Activation")
+                {
+                    Caption = 'BOSA Account Activation';
+                    action("Open Account Activaion")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Open BOSA Account Activation';
+                        RunObject = Page "BOSA Account Activation List";
+                        RunPageView = where(Status = filter(Open));
+                    }
+                    action("Account Activaion Pending Approval")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'BOSA Account Activation Pending Approval';
+                        RunObject = Page "BOSA Account Activation List";
+                        RunPageView = where(Status = filter(Pending));
+                    }
+                    action("Rejected Account Activaion")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Rejected BOSA Account Activation';
+                        RunObject = Page "BOSA Account Activation List";
+                        RunPageView = where(Status = filter(Rejected));
+                    }
+                    action("Approved Account Activaion")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Approved BOSA Account Activation';
+                        RunObject = Page "BOSA Account Activation List";
+                        RunPageView = where(Status = filter(Approved));
+                    }
+                    action("Posted Account Activation")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Posted BOSA Account Activation';
+                        RunObject = Page "Posted BOSA Account Activation";
+                    }
+                }
+                group("FOSA Account Activation")
+                {
+                    action("FOSA Account Activation List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Account Activation List';
+                        RunObject = page "Account Activation List";
+                    }
+                }
             }
             group("Delegates Management")
             {
@@ -528,117 +608,32 @@ page 52187329 "Records"
                     RunObject = Page "Delegate Tariffs";
                 }
             }
-            group("Savings Account")
-            {
-                action("Saving Account Application")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Saving Account Application';
-                    RunObject = page "Savings Account Application";
-                }
-                action("Saving Accounts")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Savings Accounts List';
-                    RunObject = page "Savings Account List";
-                }
-                action("Savings Accounts Register List")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Savings Accounts Register List';
-                    RunObject = page "Savings Accounts";
-                }
-
-
-                action("Account Activation List")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Account Activation List';
-                    RunObject = page "Account Activation List";
-                }
-                action("Account Changes")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'FOSA Account Change Logs';
-                    RunObject = report "FOSA Account Change Logs";
-                }
-            }
-            group("Account Activation")
-            {
-                group("BOSA Account Activation")
-                {
-                    Caption = 'BOSA Account Activation';
-                    action("Open Account Activaion")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Open BOSA Account Activation';
-                        RunObject = Page "BOSA Account Activation List";
-                        RunPageView = where(Status = filter(Open));
-                    }
-                    action("Account Activaion Pending Approval")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'BOSA Account Activation Pending Approval';
-                        RunObject = Page "BOSA Account Activation List";
-                        RunPageView = where(Status = filter(Pending));
-                    }
-                    action("Rejected Account Activaion")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Rejected BOSA Account Activation';
-                        RunObject = Page "BOSA Account Activation List";
-                        RunPageView = where(Status = filter(Rejected));
-                    }
-                    action("Approved Account Activaion")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Approved BOSA Account Activation';
-                        RunObject = Page "BOSA Account Activation List";
-                        RunPageView = where(Status = filter(Approved));
-                    }
-                    action("Posted Account Activation")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Posted BOSA Account Activation';
-                        RunObject = Page "Posted BOSA Account Activation";
-                    }
-                }
-                group("FOSA Account Activation")
-                {
-                    action("FOSA Account Activation List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Account Activation List';
-                        RunObject = page "Account Activation List";
-                    }
-                }
-            }
-            group("FixedDepositContract")
-            {
-                Visible = false;
-                Caption = 'Fixed/Call Deposit Contracts';
-                action("Fixed Deposit")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Fixed/Call Deposit Contracts';
-                    RunObject = page "Fixed Deposit Contract List";
-                    RunPageLink = "Fixed Deposit Status" = CONST(" ");
-                }
-                action("ActiveFixed Deposit")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Running Fixed/Call Deposit Contracts';
-                    RunObject = page "Fixed Deposit Contract List";
-                    RunPageLink = "Fixed Deposit Status" = CONST(Active);
-                }
-                action("CTFixed Deposit")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Closed/Terminated Fixed/Call Deposit Contracts';
-                    RunObject = page "Fixed Deposit Contract List";
-                    RunPageLink = "Fixed Deposit Status" = filter(Matured | Closed | "Not Matured" | Terminated);
-                }
-            }
+            // group("FixedDepositContract")
+            // {
+            //     Visible = false;
+            //     Caption = 'Fixed/Call Deposit Contracts';
+            //     action("Fixed Deposit")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         Caption = 'Fixed/Call Deposit Contracts';
+            //         RunObject = page "Fixed Deposit Contract List";
+            //         RunPageLink = "Fixed Deposit Status" = CONST(" ");
+            //     }
+            //     action("ActiveFixed Deposit")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         Caption = 'Running Fixed/Call Deposit Contracts';
+            //         RunObject = page "Fixed Deposit Contract List";
+            //         RunPageLink = "Fixed Deposit Status" = CONST(Active);
+            //     }
+            //     action("CTFixed Deposit")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         Caption = 'Closed/Terminated Fixed/Call Deposit Contracts';
+            //         RunObject = page "Fixed Deposit Contract List";
+            //         RunPageLink = "Fixed Deposit Status" = filter(Matured | Closed | "Not Matured" | Terminated);
+            //     }
+            // }
             group("Marketing")
             {
                 Caption = 'Marketing';
@@ -1308,33 +1303,33 @@ page 52187329 "Records"
                     }
                 }
 
-                group("Exit and Transfer")
-                {
-                    Caption = 'Group Exit & Transfer';
-                    action("Exit and Transfer List")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Exit and Transfer List';
-                        RunObject = Page "Business Clossure List";
-                        RunPageView = where(Posted = const(false));
+                // group("Exit and Transfer")
+                // {
+                //     Caption = 'Group Exit & Transfer';
+                //     action("Exit and Transfer List")
+                //     {
+                //         ApplicationArea = All;
+                //         Caption = 'Exit and Transfer List';
+                //         RunObject = Page "Business Clossure List";
+                //         RunPageView = where(Posted = const(false));
 
-                    }
-                    action("Posted Exit and Transfer List")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Posted Exit and Transfer List';
-                        RunObject = Page "Business Clossure List";
-                        RunPageView = where(Posted = const(true));
+                //     }
+                //     action("Posted Exit and Transfer List")
+                //     {
+                //         ApplicationArea = All;
+                //         Caption = 'Posted Exit and Transfer List';
+                //         RunObject = Page "Business Clossure List";
+                //         RunPageView = where(Posted = const(true));
 
-                    }
+                //     }
 
-                    action("Group Mem Exit & Update List")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Group Mem Exit & Update List';
-                        RunObject = Page "Group Mem Exit & Update List";
-                    }
-                }
+                //     action("Group Mem Exit & Update List")
+                //     {
+                //         ApplicationArea = All;
+                //         Caption = 'Group Mem Exit & Update List';
+                //         RunObject = Page "Group Mem Exit & Update List";
+                //     }
+                // }
             }
 
             group(EmployeeSelfService)
@@ -1357,30 +1352,30 @@ page 52187329 "Records"
                         ToolTip = 'View the list of fixed assets that have been transferred.';
                     }
                 }
-                action(StaffWelfare)
-                {
-                    Caption = 'Staff Welfare Claim';
-                    ApplicationArea = Basic, Suite;
-                    RunObject = page "Staff Welfare List";
-                }
+                // action(StaffWelfare)
+                // {
+                //     Caption = 'Staff Welfare Claim';
+                //     ApplicationArea = Basic, Suite;
+                //     RunObject = page "Staff Welfare List";
+                // }
                 action(LeaveApplication1)
                 {
                     Caption = 'Employee Leave Application';
                     ApplicationArea = Basic, Suite;
                     RunObject = page "HR Leave Applications List1";
                 }
-                action("Store Requisition")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Store Requisition';
-                    RunObject = Page "Store Requisitions List";
-                }
-                action("Overtime Claim List")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Overtime';
-                    RunObject = page "Overtime Claim List";
-                }
+                // action("Store Requisition")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Store Requisition';
+                //     RunObject = Page "Store Requisitions List";
+                // }
+                // action("Overtime Claim List")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Overtime';
+                //     RunObject = page "Overtime Claim List";
+                // }
                 action("System Rights Requisition")
                 {
                     ApplicationArea = Basic, Suite;
@@ -1434,185 +1429,185 @@ page 52187329 "Records"
                     //         RunPageView = where(Status = filter(<> archived));
                     //     }
                     // }
-                    group("Conf & Meeting Room Booking")
-                    {
-                        Caption = 'Conf & Meeting Room Aplications';
-                        action("Conference Hall & Meeting Rooms")
-                        {
-                            ApplicationArea = All;
-                            Caption = 'Open Bookings';
-                            RunObject = page "MNS Conf & Meetings Appl List";
-                            RunPageLink = Status = CONST(Open);
-                        }
-                        action("Pending Conf & Meeting Room Booking")
-                        {
-                            ApplicationArea = All;
-                            Caption = 'Pending Bookings';
-                            //RunObject = page "Pending Conf & Meeting - List";
-                            RunObject = page "MNS Conf & Meetings Appl List";
-                            RunPageLink = Status = CONST(Pending);
-                        }
-                        action("Approved Conf & Meeting Room Booking")
-                        {
-                            ApplicationArea = All;
-                            Caption = 'Approved Booking';
-                            //RunObject = page "Approved Conf & Meeting - List";
-                            RunObject = page "MNS Conf & Meetings Appl List";
-                            RunPageLink = Status = CONST(Approved);
-                        }
-                        action("Invoicing for Hire of Halls")
-                        {
-                            ApplicationArea = All;
-                            Caption = 'Invoicing for Hire of Halls';
-                            //RunObject = page "Approved Conf & Meeting - List";
-                            RunObject = page "MNS Conf & Meetings Appl List";
-                            //RunPageLink = Status = CONST(Approved);
-                            RunPageView = WHERE(Status = CONST(Approved), "Type of Meeting/Function" = Const(External));
-                        }
-                        action("Rejected Conf & Meeting Room Booking")
-                        {
-                            ApplicationArea = All;
-                            Caption = 'Declined Bookings';
-                            //RunObject = page "Rejected Conf & Meeting - List";
-                            RunObject = page "MNS Conf & Meetings Appl List";
-                            RunPageLink = Status = CONST(Rejected);
-                        }
-                        action("Closed Conf & Meeting Room Booking")
-                        {
-                            ApplicationArea = All;
-                            Caption = 'Closed Bookings';
-                            //RunObject = page "Closed Conf & Meeting - List";
-                            RunObject = page "MNS Conf & Meetings Appl List";
-                            RunPageLink = "Status of the Booking" = CONST(Closed);
-                        }
-                    }
-                    Group("Motor Vehicle Requests")
-                    {
-                        Caption = 'Motor Vehicle Requests';
-                        action("Vehicle Request Application")
-                        {
-                            ApplicationArea = all;
-                            Caption = 'Open Vehicle Requests';
-                            RunObject = page "Motor Vehicle Request List";
-                            RunPageLink = Status = CONST(Open);
-                        }
-                        action("Pending Vehicle Requests")
-                        {
-                            ApplicationArea = all;
-                            Caption = 'Pending Vehicle Requests';
-                            RunObject = page "Motor Vehicle Request List";
-                            RunPageLink = Status = CONST(Pending);
-                        }
-                        action("Approved Vehicle Requests")
-                        {
-                            ApplicationArea = all;
-                            Caption = 'Approved Vehicle Requests';
-                            //RunObject = page "Approved Vehicle Req - List";
-                            RunObject = page "Motor Vehicle Request List";
-                            RunpageLink = Status = CONST(Approved);
-                        }
-                        action("Deffered Vehicle Requests")
-                        {
-                            ApplicationArea = all;
-                            Caption = 'Deffered Vehicle Requests';
-                            RunObject = page "Deffered Vehicle Req - List";
-                        }
-                        action("Reject Vehicle Requests")
-                        {
-                            ApplicationArea = all;
-                            Caption = 'Rejected Vehicle Requests';
-                            //RunObject = page "Rejected Vehicle Req - List";
-                            RunObject = page "Motor Vehicle Request List";
-                            RunPageLink = Status = CONST(Rejected);
-                        }
-                        action("Closed Vehicle Request")
-                        {
-                            ApplicationArea = all;
-                            Caption = 'Closed Vehicle Request';
-                            //RunObject = page "Closed Vehicle Req - List";
-                            RunObject = page "Motor Vehicle Request List";
-                            RunPageLink = Status = CONST(Closed);
-                        }
-                        action("Reallocated Requests")
-                        {
-                            ApplicationArea = all;
-                            Caption = 'Reallocated Requests';
-                            RunObject = page "Motor Vehicle Request List";
-                            RunPageLink = Reallocated = CONST(TRUE);
-                        }
-                    }
-                    group("Key Requests")
-                    {
-                        action("Open Keys Request")
-                        {
-                            ApplicationArea = All;
-                            Caption = 'Office Keys Request';
-                            RunObject = page "Key Request List";
-                            RunPageLink = Status = CONST(Open);
-                        }
-                        action("Pending Keys Request")
-                        {
-                            ApplicationArea = All;
-                            Caption = 'Pending Requests';
-                            RunObject = page "Key Request List";
-                            RunPageLink = Status = CONST(Pending);
-                        }
-                        action("Approved Keys Request")
-                        {
-                            ApplicationArea = All;
-                            Caption = 'Approved Requests';
-                            RunObject = page "Key Request List";
-                            RunPageLink = Status = CONST(Approved);
-                        }
-                        action("Rejected Keys Request")
-                        {
-                            ApplicationArea = All;
-                            Caption = 'Rejected Key Request';
-                            RunObject = page "Key Request List";
-                            RunPageLink = Status = CONST(Rejected);
-                        }
-                        action("Closed Keys Request")
-                        {
-                            ApplicationArea = All;
-                            Caption = 'Closed Key Requests';
-                            RunObject = page "Key Request List";
-                            RunPageLink = "Key Status" = CONST(Received);
-                        }
-                    }
-                    Group("Parking Allocation")
-                    {
-                        action("Parking Space List")
-                        {
-                            ApplicationArea = All;
-                            Caption = 'Open Parking Application';
-                            RunObject = page "Parking Space List";
-                            RunPageLink = Status = CONST(Open);
-                        }
-                        action("Pending Parking Space Application")
-                        {
-                            ApplicationArea = All;
-                            Caption = 'Pending Parking Allocation';
-                            //RunObject = page "Approved Parking - List";
-                            RunObject = page "Parking Space List";
-                            RunPageLink = Status = CONST(Pending);
-                        }
-                        action("Approved Parking Space Application")
-                        {
-                            ApplicationArea = All;
-                            Caption = 'Approved Parking Allocation';
-                            //RunObject = page "Approved Parking - List";
-                            RunObject = page "Parking Space List";
-                            RunPageLink = Status = CONST(Approved);
-                        }
-                        action("Rejected Parking Space Application")
-                        {
-                            ApplicationArea = All;
-                            Caption = 'Rejected Parking Allocation';
-                            //RunObject = page "Rejected Parking Space - List";
-                            RunObject = page "Parking Space List";
-                            RunPageLink = Status = CONST(Rejected);
-                        }
-                    }
+                    // group("Conf & Meeting Room Booking")
+                    // {
+                    //     Caption = 'Conf & Meeting Room Aplications';
+                    //     action("Conference Hall & Meeting Rooms")
+                    //     {
+                    //         ApplicationArea = All;
+                    //         Caption = 'Open Bookings';
+                    //         RunObject = page "MNS Conf & Meetings Appl List";
+                    //         RunPageLink = Status = CONST(Open);
+                    //     }
+                    //     action("Pending Conf & Meeting Room Booking")
+                    //     {
+                    //         ApplicationArea = All;
+                    //         Caption = 'Pending Bookings';
+                    //         //RunObject = page "Pending Conf & Meeting - List";
+                    //         RunObject = page "MNS Conf & Meetings Appl List";
+                    //         RunPageLink = Status = CONST(Pending);
+                    //     }
+                    //     action("Approved Conf & Meeting Room Booking")
+                    //     {
+                    //         ApplicationArea = All;
+                    //         Caption = 'Approved Booking';
+                    //         //RunObject = page "Approved Conf & Meeting - List";
+                    //         RunObject = page "MNS Conf & Meetings Appl List";
+                    //         RunPageLink = Status = CONST(Approved);
+                    //     }
+                    //     action("Invoicing for Hire of Halls")
+                    //     {
+                    //         ApplicationArea = All;
+                    //         Caption = 'Invoicing for Hire of Halls';
+                    //         //RunObject = page "Approved Conf & Meeting - List";
+                    //         RunObject = page "MNS Conf & Meetings Appl List";
+                    //         //RunPageLink = Status = CONST(Approved);
+                    //         RunPageView = WHERE(Status = CONST(Approved), "Type of Meeting/Function" = Const(External));
+                    //     }
+                    //     action("Rejected Conf & Meeting Room Booking")
+                    //     {
+                    //         ApplicationArea = All;
+                    //         Caption = 'Declined Bookings';
+                    //         //RunObject = page "Rejected Conf & Meeting - List";
+                    //         RunObject = page "MNS Conf & Meetings Appl List";
+                    //         RunPageLink = Status = CONST(Rejected);
+                    //     }
+                    //     action("Closed Conf & Meeting Room Booking")
+                    //     {
+                    //         ApplicationArea = All;
+                    //         Caption = 'Closed Bookings';
+                    //         //RunObject = page "Closed Conf & Meeting - List";
+                    //         RunObject = page "MNS Conf & Meetings Appl List";
+                    //         RunPageLink = "Status of the Booking" = CONST(Closed);
+                    //     }
+                    // }
+                    // Group("Motor Vehicle Requests")
+                    // {
+                    //     Caption = 'Motor Vehicle Requests';
+                    //     action("Vehicle Request Application")
+                    //     {
+                    //         ApplicationArea = all;
+                    //         Caption = 'Open Vehicle Requests';
+                    //         RunObject = page "Motor Vehicle Request List";
+                    //         RunPageLink = Status = CONST(Open);
+                    //     }
+                    //     action("Pending Vehicle Requests")
+                    //     {
+                    //         ApplicationArea = all;
+                    //         Caption = 'Pending Vehicle Requests';
+                    //         RunObject = page "Motor Vehicle Request List";
+                    //         RunPageLink = Status = CONST(Pending);
+                    //     }
+                    //     action("Approved Vehicle Requests")
+                    //     {
+                    //         ApplicationArea = all;
+                    //         Caption = 'Approved Vehicle Requests';
+                    //         //RunObject = page "Approved Vehicle Req - List";
+                    //         RunObject = page "Motor Vehicle Request List";
+                    //         RunpageLink = Status = CONST(Approved);
+                    //     }
+                    //     action("Deffered Vehicle Requests")
+                    //     {
+                    //         ApplicationArea = all;
+                    //         Caption = 'Deffered Vehicle Requests';
+                    //         RunObject = page "Deffered Vehicle Req - List";
+                    //     }
+                    //     action("Reject Vehicle Requests")
+                    //     {
+                    //         ApplicationArea = all;
+                    //         Caption = 'Rejected Vehicle Requests';
+                    //         //RunObject = page "Rejected Vehicle Req - List";
+                    //         RunObject = page "Motor Vehicle Request List";
+                    //         RunPageLink = Status = CONST(Rejected);
+                    //     }
+                    //     action("Closed Vehicle Request")
+                    //     {
+                    //         ApplicationArea = all;
+                    //         Caption = 'Closed Vehicle Request';
+                    //         //RunObject = page "Closed Vehicle Req - List";
+                    //         RunObject = page "Motor Vehicle Request List";
+                    //         RunPageLink = Status = CONST(Closed);
+                    //     }
+                    //     action("Reallocated Requests")
+                    //     {
+                    //         ApplicationArea = all;
+                    //         Caption = 'Reallocated Requests';
+                    //         RunObject = page "Motor Vehicle Request List";
+                    //         RunPageLink = Reallocated = CONST(TRUE);
+                    //     }
+                    // }
+                    // group("Key Requests")
+                    // {
+                    //     action("Open Keys Request")
+                    //     {
+                    //         ApplicationArea = All;
+                    //         Caption = 'Office Keys Request';
+                    //         RunObject = page "Key Request List";
+                    //         RunPageLink = Status = CONST(Open);
+                    //     }
+                    //     action("Pending Keys Request")
+                    //     {
+                    //         ApplicationArea = All;
+                    //         Caption = 'Pending Requests';
+                    //         RunObject = page "Key Request List";
+                    //         RunPageLink = Status = CONST(Pending);
+                    //     }
+                    //     action("Approved Keys Request")
+                    //     {
+                    //         ApplicationArea = All;
+                    //         Caption = 'Approved Requests';
+                    //         RunObject = page "Key Request List";
+                    //         RunPageLink = Status = CONST(Approved);
+                    //     }
+                    //     action("Rejected Keys Request")
+                    //     {
+                    //         ApplicationArea = All;
+                    //         Caption = 'Rejected Key Request';
+                    //         RunObject = page "Key Request List";
+                    //         RunPageLink = Status = CONST(Rejected);
+                    //     }
+                    //     action("Closed Keys Request")
+                    //     {
+                    //         ApplicationArea = All;
+                    //         Caption = 'Closed Key Requests';
+                    //         RunObject = page "Key Request List";
+                    //         RunPageLink = "Key Status" = CONST(Received);
+                    //     }
+                    // }
+                    // Group("Parking Allocation")
+                    // {
+                    //     action("Parking Space List")
+                    //     {
+                    //         ApplicationArea = All;
+                    //         Caption = 'Open Parking Application';
+                    //         RunObject = page "Parking Space List";
+                    //         RunPageLink = Status = CONST(Open);
+                    //     }
+                    //     action("Pending Parking Space Application")
+                    //     {
+                    //         ApplicationArea = All;
+                    //         Caption = 'Pending Parking Allocation';
+                    //         //RunObject = page "Approved Parking - List";
+                    //         RunObject = page "Parking Space List";
+                    //         RunPageLink = Status = CONST(Pending);
+                    //     }
+                    //     action("Approved Parking Space Application")
+                    //     {
+                    //         ApplicationArea = All;
+                    //         Caption = 'Approved Parking Allocation';
+                    //         //RunObject = page "Approved Parking - List";
+                    //         RunObject = page "Parking Space List";
+                    //         RunPageLink = Status = CONST(Approved);
+                    //     }
+                    //     action("Rejected Parking Space Application")
+                    //     {
+                    //         ApplicationArea = All;
+                    //         Caption = 'Rejected Parking Allocation';
+                    //         //RunObject = page "Rejected Parking Space - List";
+                    //         RunObject = page "Parking Space List";
+                    //         RunPageLink = Status = CONST(Rejected);
+                    //     }
+                    // }
                 }
             }
             // group("Contract Request")
@@ -1655,25 +1650,25 @@ page 52187329 "Records"
                 {
                     caption = 'General';
 
-                    action("Present Officers")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Present Officers Setups';
-                        RunObject = page "Present Users";
+                    // action("Present Officers")
+                    // {
+                    //     ApplicationArea = All;
+                    //     Caption = 'Present Officers Setups';
+                    //     RunObject = page "Present Users";
 
-                    }
+                    // }
                     action("System Edits Tables List")
                     {
                         ApplicationArea = Basic, Suite;
                         RunObject = Page "System Edits Tables";
                     }
 
-                    action("General Set-Up")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'General Set-Up';
-                        // RunObject = page "Gen set-up card";
-                    }
+                    // action("General Set-Up")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'General Set-Up';
+                    //     // RunObject = page "Gen set-up card";
+                    // }
                     action("No. Setup")
                     {
                         ApplicationArea = Basic, Suite;
@@ -1696,7 +1691,7 @@ page 52187329 "Records"
                     action("Electoral Zones/Area Svr Center")
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Eletoral Zones/Area Svr Center';
+                        Caption = 'Electoral Zones/Area Svr Center';
                         RunObject = page "Electrol Zones/Area Svr Center";
                     }
                     action("Salutation Tittles")
@@ -1712,13 +1707,13 @@ page 52187329 "Records"
                         RunObject = page "Exceptions/ Rejection Reason";
                     }
 
-                    action("Present Users")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Present Users Setups';
-                        RunObject = page "Present Users";
+                    // action("Present Users")
+                    // {
+                    //     ApplicationArea = All;
+                    //     Caption = 'Present Users Setups';
+                    //     RunObject = page "Present Users";
 
-                    }
+                    // }
                     action("System Edits Reasons")
                     {
                         ApplicationArea = All;
@@ -1750,16 +1745,7 @@ page 52187329 "Records"
 
 
                 }
-                group("Products Mngt.")
-                {
-                    caption = 'Credit Mngt.';
-                    action("Product Factory")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Product Setups';
-                        RunObject = page "Product Factory List";
-                    }
-                }
+
 
                 Group("Audit Process")
                 {
@@ -1935,12 +1921,12 @@ page 52187329 "Records"
                         Caption = 'Members - Incomplete Data';
                         RunObject = report "Members With Incomplete Data";
                     }
-                    action("Employer DataSheet")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Employer DataSheet';
-                        RunObject = report "Employer Data Sheet";
-                    }
+                    // action("Employer DataSheet")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Employer DataSheet';
+                    //     RunObject = report "Employer Data Sheet";
+                    // }
                     action("Recovered Registration Fees")
                     {
                         ApplicationArea = Basic, Suite;
@@ -1948,18 +1934,18 @@ page 52187329 "Records"
                         RunObject = Report "Recovered Registration Fees";
                     }
 
-                    action("BBF/Risk/entrance fees/Depo")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'BBF/RISK/ENTRANCE/DEPOSIT Summary';
-                        RunObject = report "BBF/Risk/entrance fees/Depo";
-                    }
-                    action("Unrecov. Reg Fee/BBF/Risk/Shar")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Unrecoveres Reg Fee/BBF/Risk/Share';
-                        RunObject = report "Unrecov. Reg Fee/BBF/Risk/Shar";
-                    }
+                    // action("BBF/Risk/entrance fees/Depo")
+                    // {
+                    //     ApplicationArea = all;
+                    //     Caption = 'BBF/RISK/ENTRANCE/DEPOSIT Summary';
+                    //     RunObject = report "BBF/Risk/entrance fees/Depo";
+                    // }
+                    // action("Unrecov. Reg Fee/BBF/Risk/Shar")
+                    // {
+                    //     ApplicationArea = all;
+                    //     Caption = 'Unrecoveres Reg Fee/BBF/Risk/Share';
+                    //     RunObject = report "Unrecov. Reg Fee/BBF/Risk/Shar";
+                    // }
                 }
                 group(Edits)
                 {
@@ -2001,7 +1987,7 @@ page 52187329 "Records"
                     //     Caption = 'Nominee / BBF Register';
                     //     RunObject = Report "Nominee Register";
                     // }
-                    action("Nominee Report Parallel")
+                    action("Nominee Reports")
                     {
                         ApplicationArea = Basic;
                         RunObject = page "BBF/Nominee Register";

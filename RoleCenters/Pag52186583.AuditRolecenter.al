@@ -393,7 +393,7 @@ page 52186583 "Audit Role center"
                         {
                             ApplicationArea = Basic, Suite;
                             Caption = 'Savings Accounts';
-                            RunObject = page "Savings Account List";
+                            RunObject = page "Savings Accounts";
                         }
                         action("Credit Accounts List")
                         {
@@ -1816,7 +1816,7 @@ page 52186583 "Audit Role center"
                         {
                             ApplicationArea = Basic, Suite;
                             Caption = 'Savings Accounts List';
-                            RunObject = page "Savings Account List";
+                            RunObject = page "Savings Accounts";;
                         }
                         action("Banking Closure List")
                         {

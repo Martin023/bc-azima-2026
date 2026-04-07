@@ -165,8 +165,8 @@ table 52185827 "Loan Guarantors Sub"
         }
         field(22; "Savings Account No."; Code[20])
         {
-            TableRelation = IF ("Guarantor Type" = CONST(Guarantor)) "Savings Accounts"."No." WHERE("Product Type" = CONST('DCS'), Status = FILTER(Active | Dormant))
-            // TableRelation = IF ("Guarantor Type" = CONST(Guarantor)) "Savings Accounts"."No." WHERE("Can Guarantee Loan" = const(true), "Product Type" = CONST('DCS'), Status = FILTER(Active | Dormant))//added product type and statuS
+            TableRelation = IF ("Guarantor Type" = CONST(Guarantor)) "Savings Accounts"."No." WHERE("Product Type" = CONST('1'), Status = FILTER(Active | Dormant))
+            // TableRelation = IF ("Guarantor Type" = CONST(Guarantor)) "Savings Accounts"."No." WHERE("Can Guarantee Loan" = const(true), "Product Type" = CONST('1'), Status = FILTER(Active | Dormant))//added product type and statuS
             // TableRelation = IF ("Guarantor Type" = CONST(Guarantor)) "Savings Accounts"."No." WHERE(Status = const(Active))// for my own testing purpos
 
 

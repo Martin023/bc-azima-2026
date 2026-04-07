@@ -9,7 +9,7 @@ Report 52185449 "Incomplete Application Report"
         //dataitem(52185700;52185700)
         dataitem("Member Application"; "Member Application")
         {
-            DataItemTableView = where("Sent Back to CRM" = const(true), Created = const(false));
+            DataItemTableView = where(Created = const(false));
             column(CompanyInformation_Picture; CompanyInformation.Picture)
             {
             }

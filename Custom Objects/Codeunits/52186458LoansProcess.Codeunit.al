@@ -9362,10 +9362,10 @@ Codeunit 52186458 "Loans Process"
         DividendProgression.SETRANGE("End Date", DivSetup."Discounting Start Date", DivSetup."Discounting End Date");
         DividendProgression.SetCurrentKey("Qualifying Shares");
         DividendProgression.SetAscending("Qualifying Shares", false);
-        DividendProgression.setrange("Product Type", 'DCS');
+        DividendProgression.setrange("Product Type", '1');
         if DividendProgression.FindFirst() then begin
             SavAcc.reset;
-            SavAcc.setrange("Product Type", 'DCS');
+            SavAcc.setrange("Product Type", '1');
             SavAcc.setrange("Member No.", MemberNo);
             if SavAcc.FindFirst() then begin
                 SavAcc.CalcFields("Balance (LCY)");

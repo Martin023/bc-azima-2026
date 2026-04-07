@@ -119,7 +119,7 @@ page 52186780 "Corporate Department"
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Member Accounts';
-                        RunObject = page "Savings Account List";
+                        RunObject = page"Savings Accounts";;
                     }
                 }
                 Group("Deposit Listings")

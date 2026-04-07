@@ -289,7 +289,7 @@ Report 52185676 "Member Loan Statement II"
                 // cHarges
                 SavAccII.reset;
                 SavAccII.setrange("Member No.", Members."No.");
-                SavAccII.SetRange("Product Type", 'ODS');
+                SavAccII.SetRange("Product Type", '191');
                 if SavAccII.FindFirst() then begin
                     AcctBal := SavAccII.GetAvailableBalance(SavAccII."No.");
                     if StatementCharge then begin
@@ -402,7 +402,7 @@ Report 52185676 "Member Loan Statement II"
     procedure PostStmtCharges(StatementType: Option Uncertified,Certified; AvailableBal: Decimal; Members: record Members; AccNo: Code[20])
     begin
         //Charges
-        if ProductFactory.get('ODS') then begin
+        if ProductFactory.get('191') then begin
             TCharges := 0;
             TransactionCharges.Reset;
             if StatementTypeII = StatementType::Certified then

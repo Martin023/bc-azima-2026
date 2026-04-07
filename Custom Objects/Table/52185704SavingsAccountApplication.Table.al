@@ -846,11 +846,6 @@ table 52185704 "Savings Account Application"
                 end;
             end;
         }
-        field(107; "CDSC Broker"; Code[30])
-        {
-            DataClassification = ToBeClassified;
-            TableRelation = "Broker Account list".Code;
-        }
     }
 
     keys

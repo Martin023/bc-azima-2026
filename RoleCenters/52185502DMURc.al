@@ -43,7 +43,7 @@ page 52185502 "Debt Management Unit"
                 action("Savings Accounts List")
                 {
                     ApplicationArea = Basic, Suite;
-                    RunObject = Page "Savings Account List";
+                    RunObject = Page "Savings Accounts";;
                 }
                 action("Loan List")
                 {

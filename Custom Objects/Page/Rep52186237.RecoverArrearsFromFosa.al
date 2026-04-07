@@ -20,7 +20,7 @@ report 52186237 "Recover Arrears"
                 if Product <> '' then
                     SavingsAccounts.SetRange("Product Type", Product)
                 else
-                    SavingsAccounts.setrange(SavingsAccounts."Product Type", 'ODS');
+                    SavingsAccounts.setrange(SavingsAccounts."Product Type", '191');
                 if SavingsAccounts.FindFirst() then begin
                     repeat
                         SavingsAccounts.CalcFields("Balance (LCY)");
@@ -97,9 +97,9 @@ report 52186237 "Recover Arrears"
                                 until loans.next = 0;
                             end;
                             //Post Excess to ordinary acc.
-                            if (Product <> '') and (Product = 'UFS') then begin
+                            if (Product <> '') and (Product = '10') then begin
                                 SavingAccII.reset();
-                                SavingAccII.setRange("Product Type", 'ODS');
+                                SavingAccII.setRange("Product Type", '191');
                                 SavingAccII.SetRange("Member No.", SavingsAccounts."Member No.");
                                 if SavingAccII.FindFirst() then begin
                                     LoansInterest.Reset();

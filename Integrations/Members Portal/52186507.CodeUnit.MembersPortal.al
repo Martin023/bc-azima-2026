@@ -6257,7 +6257,7 @@ codeunit 52186507 "Members Portal Integration"
                     //SelfGuaBal:=0;
                     SavAcc.Reset;
                     SavAcc.SetRange(SavAcc."Member No.", SearchMember."No.");
-                    SavAcc.SetRange(SavAcc."Product Type", 'DCS');
+                    SavAcc.SetRange(SavAcc."Product Type", '1');
                     if SavAcc.Find('-') then begin
                         SavAcc.CalcFields(SavAcc."Balance (LCY)");
                         GenSetup.Get;

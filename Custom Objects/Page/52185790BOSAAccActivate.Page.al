@@ -570,7 +570,7 @@ page 52186088 "BOSA Account Activation"
                     if SavAcc."Product Category" = SavAcc."Product Category"::"BOSA Deposits" then begin
                         //charge ODS not BOSA Acc.
                         FosaAcc.Reset();
-                        FosaAcc.SetRange("Product Type", 'ODS');
+                        FosaAcc.SetRange("Product Type", '191');
                         FosaAcc.SetRange("Member No.", SavAcc."Member No.");
                         if FosaAcc.FindFirst() then begin
                             SavBal := FosaAcc.GetAvailableBalance(FosaAcc."No.");

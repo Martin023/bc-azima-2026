@@ -11,7 +11,7 @@
 //     {
 //         dataitem(SavingsAccounts; "Savings Accounts")
 //         {
-//             DataItemTableView = where("Product Type" = const('ODS'));
+//             DataItemTableView = where("Product Type" = const('191'));
 //             column(No; "No.")
 //             {
 //             }

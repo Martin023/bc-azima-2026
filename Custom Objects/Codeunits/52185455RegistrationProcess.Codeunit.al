@@ -979,7 +979,6 @@ Codeunit 52185455 "Registration Process"
         SavingsAcc."Fixed Deposit Amount" := AccountApplication."Fixed Deposit Amount";
         SavingsAcc."Signing Instructions" := AccountApplication."Signing Instructions";
         SavingsAcc."Can Guarantee Loan" := ProductFactory."Can Guarantee Loan";
-        SavingsAcc."CDSC Broker" := AccountApplication."CDSC Broker";
         SavingsAcc.Insert;
 
         AccountSignApp.Reset();

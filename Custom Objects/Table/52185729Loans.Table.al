@@ -144,7 +144,7 @@ table 52185729 Loans
                     if ProdFac."Loan Disbt Account Code" <> '' then
                         SavAcc.SetRange("Product Type", ProdFac."Loan Disbt Account Code")
                     else
-                        SavAcc.SetRange("Product Type", 'ODS');
+                        SavAcc.SetRange("Product Type", '191');
                     if SavAcc.Find('-') then
                         "Disbursement Account No" := SavAcc."No."
                     else
@@ -700,7 +700,7 @@ table 52185729 Loans
                     SavAcc.Reset;
                     SavAcc.SetRange(SavAcc."Member No.", "Member No.");
                     // SavAcc.SetRange(SavAcc."Loan Disbursement Account", true);
-                    SavAcc.SetRange("Product Type", 'ODS');
+                    SavAcc.SetRange("Product Type", '191');
                     // SavAcc.SetRange(SavAcc."Product Category", SavAcc."Product Category"::"FOSA Account");
                     if SavAcc.Find('-') then
                         "Disbursement Account No" := SavAcc."No."
@@ -715,7 +715,7 @@ table 52185729 Loans
                 ShareCapAcc.RESET;
                 ShareCapAcc.SETRANGE(ShareCapAcc."Member No.", "Member No.");
                 // ShareCapAcc.SETRANGE(ShareCapAcc."Product Category", ShareCapAcc."Product Category"::"Share Capital");//reason for comment out:the data dont display share capital  category on saving account
-                ShareCapAcc.SETRANGE(ShareCapAcc."Product Type", 'SCS');
+                ShareCapAcc.SETRANGE(ShareCapAcc."Product Type", '4');
                 IF ShareCapAcc.FIND('-') THEN BEGIN
                     if SavProducts.Get(ShareCapAcc."Product Type") then begin
                         ShareCapAcc.CALCFIELDS(ShareCapAcc."Balance (LCY)");
@@ -736,7 +736,7 @@ table 52185729 Loans
                 // SavAcc.Reset;
                 // SavAcc.SetRange(SavAcc."Member No.", "Member No.");
                 // //SavAcc.SetRange(SavAcc."Loan Disbursement Account", true);
-                // SavAcc.SetRange("Product Type", 'ODS');
+                // SavAcc.SetRange("Product Type", '191');
                 // if SavAcc.Find('-') then
                 //     "Disbursement Account No" := SavAcc."No.";
                 //     end;
@@ -1080,7 +1080,7 @@ table 52185729 Loans
                 ShareCapAcc.RESET;
                 ShareCapAcc.SETRANGE(ShareCapAcc."Member No.", "Member No.");
                 // ShareCapAcc.SETRANGE(ShareCapAcc."Product Category", ShareCapAcc."Product Category"::"Share Capital");//reason for comment out:the data dont display share capital  category on saving account
-                ShareCapAcc.SETRANGE(ShareCapAcc."Product Type", 'SCS');
+                ShareCapAcc.SETRANGE(ShareCapAcc."Product Type", '4');
                 IF ShareCapAcc.FIND('-') THEN BEGIN
                     if SavProducts.Get(ShareCapAcc."Product Type") then begin
                         ShareCapAcc.CALCFIELDS(ShareCapAcc."Balance (LCY)");
@@ -1839,7 +1839,7 @@ table 52185729 Loans
         field(51; Status; enum "Workflow Status Main Flags")
         {
 
-           
+
             // OptionCaption = 'Open,Pending Approval,Approved,Rejected,Deffered,Archived,Posted';
             // OptionMembers = Open,Pending,Approved,Rejected,Deffered,Archived,Posted;
             trigger OnValidate()
@@ -3279,7 +3279,7 @@ table 52185729 Loans
         field(207; "BOSA Deposits"; Decimal)
         {
             AutoFormatType = 1;
-            CalcFormula = - Sum("Savings Ledger Entry"."Amount (LCY)" WHERE("Posting Date" = FIELD("Date Filter"), "Product Type" = const('DCS'), "Member No." = field("Member No.")));
+            CalcFormula = - Sum("Savings Ledger Entry"."Amount (LCY)" WHERE("Posting Date" = FIELD("Date Filter"), "Product Type" = const('1'), "Member No." = field("Member No.")));
             //Caption = 'Balance (LCY)';
             Editable = false;
             FieldClass = FlowField;
@@ -3941,7 +3941,7 @@ table 52185729 Loans
         "Amount To Disburse" := xRec."Amount To Disburse";
     end;
 
-  
+
     procedure ClearDataLoans()
     var
         AppraisalSalDetails: Record "Appraisal Salary Details";

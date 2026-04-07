@@ -105,7 +105,7 @@ Report 52186789 "FOSA Account Change Logs"
                 {
                     ApplicationArea = Basic;
                     Caption = 'Account No.';
-                    TableRelation = "Savings Accounts"."No." where("Product Type" = filter('ODS' | 'KSS'));
+                    TableRelation = "Savings Accounts"."No." where("Product Type" = filter('191'));
                 }
                 // field(EndDate; EndDate)
                 // {
