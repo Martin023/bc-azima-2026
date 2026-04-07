@@ -384,7 +384,7 @@ page 52185714 "Member Application Single"
                 {
                     ApplicationArea = all;
                     Editable = PINNumberEdit;
-                    // ShowMandatory = true;
+                    ShowMandatory = true;
                 }
                 field(Religion; Rec.Religion)
                 {
