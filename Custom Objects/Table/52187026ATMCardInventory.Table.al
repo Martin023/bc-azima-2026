@@ -14,7 +14,7 @@ table 52187026 "ATM Inventory"
         field(2; "Account No."; Code[50])
         {
             Caption = 'Account No.';
-            TableRelation = "Savings Accounts"."No." where("Product Type" = filter('ODS'));
+            TableRelation = "Savings Accounts"."No." where("Product Type" = filter('191'));
 
             trigger OnValidate()
             begin

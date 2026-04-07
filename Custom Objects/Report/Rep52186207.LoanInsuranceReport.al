@@ -125,7 +125,7 @@ report 52186207 "Loan Insurance Report"
                     MemberDOB := 0D;
                 SavAcc.reset();
                 SavAcc.setrange("Member No.", Loans."Member No.");
-                SavAcc.setrange(SavAcc."Product Type", 'ODS');
+                SavAcc.setrange(SavAcc."Product Type", '191');
                 if SavAcc.FindFirst() then
                     FosaAcc := SavAcc."No."
                 else

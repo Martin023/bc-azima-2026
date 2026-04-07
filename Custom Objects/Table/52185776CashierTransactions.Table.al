@@ -21,7 +21,7 @@ table 52185776 "Cashier Transactions"
         }
         field(2; "Account No"; Code[20])
         {
-            TableRelation = IF ("Account Type" = CONST(Account), type = filter(<> lien)) "Savings Accounts"."No." where("Product Type" = const('ODS'), Status = filter(<> Closed))
+            TableRelation = IF ("Account Type" = CONST(Account), type = filter(<> lien)) "Savings Accounts"."No." where("Product Category" = filter("FOSA Account"), Status = filter(<> Closed))
             ELSE
             IF ("Account Type" = CONST(Account), type = filter(lien)) "Savings Accounts"."No." where(Status = filter(<> Closed), "Product Category" = filter("FOSA Account")) else
             IF ("Account Type" = CONST(MPESA)) "Bank Account"."No." WHERE("Bank Type" = filter("Mobile Money"), "Global Dimension 1 Code" = field("Global Dimension 1 Code"));
@@ -567,7 +567,7 @@ table 52185776 "Cashier Transactions"
         {
             OptionCaption = 'Account,MPESA';
             OptionMembers = Account,MPESA;
-            ValuesAllowed = Account;
+            // ValuesAllowed = Account;
             trigger OnValidate()
             begin
                 //TESTFIELD(Status,Status::Open);

@@ -35,7 +35,7 @@ report 52186243 "Dividend SMS"
                 DivPostingBuffer.Reset;
                 DivPostingBuffer.SetRange("Member No.", Members."No.");
                 DivPostingBuffer.SetRange("Posted", true);
-                DivPostingBuffer.SetRange("Product Type", 'ODS');
+                DivPostingBuffer.SetRange("Product Type", '191');
                 DivPostingBuffer.SetRange(Year, Year);
                 DivPostingBuffer.setfilter(Amount, '<0');
                 if DivPostingBuffer.Findfirst then begin

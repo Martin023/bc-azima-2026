@@ -144,7 +144,7 @@ table 52185729 Loans
                     if ProdFac."Loan Disbt Account Code" <> '' then
                         SavAcc.SetRange("Product Type", ProdFac."Loan Disbt Account Code")
                     else
-                        SavAcc.SetRange("Product Type", 'ODS');
+                        SavAcc.SetRange("Product Type", '191');
                     if SavAcc.Find('-') then
                         "Disbursement Account No" := SavAcc."No."
                     else
@@ -700,7 +700,7 @@ table 52185729 Loans
                     SavAcc.Reset;
                     SavAcc.SetRange(SavAcc."Member No.", "Member No.");
                     // SavAcc.SetRange(SavAcc."Loan Disbursement Account", true);
-                    SavAcc.SetRange("Product Type", 'ODS');
+                    SavAcc.SetRange("Product Type", '191');
                     // SavAcc.SetRange(SavAcc."Product Category", SavAcc."Product Category"::"FOSA Account");
                     if SavAcc.Find('-') then
                         "Disbursement Account No" := SavAcc."No."
@@ -736,7 +736,7 @@ table 52185729 Loans
                 // SavAcc.Reset;
                 // SavAcc.SetRange(SavAcc."Member No.", "Member No.");
                 // //SavAcc.SetRange(SavAcc."Loan Disbursement Account", true);
-                // SavAcc.SetRange("Product Type", 'ODS');
+                // SavAcc.SetRange("Product Type", '191');
                 // if SavAcc.Find('-') then
                 //     "Disbursement Account No" := SavAcc."No.";
                 //     end;
@@ -3279,7 +3279,7 @@ table 52185729 Loans
         field(207; "BOSA Deposits"; Decimal)
         {
             AutoFormatType = 1;
-            CalcFormula = - Sum("Savings Ledger Entry"."Amount (LCY)" WHERE("Posting Date" = FIELD("Date Filter"), "Product Type" = const('DCS'), "Member No." = field("Member No.")));
+            CalcFormula = - Sum("Savings Ledger Entry"."Amount (LCY)" WHERE("Posting Date" = FIELD("Date Filter"), "Product Type" = const('1'), "Member No." = field("Member No.")));
             //Caption = 'Balance (LCY)';
             Editable = false;
             FieldClass = FlowField;

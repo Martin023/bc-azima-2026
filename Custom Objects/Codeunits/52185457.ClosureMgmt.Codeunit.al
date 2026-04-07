@@ -663,7 +663,7 @@ codeunit 52185457 "Membership Closure Mgmt"
                 // end;
             end
             else begin
-                AccNo := RegistrProcess.CreateSavingsAccountNo('DCS', 'NAIROBI', Members."No.");
+                AccNo := RegistrProcess.CreateSavingsAccountNo('1', '201', Members."No.");
                 LineNo := LineNo + 10000;
                 AcctType := AcctType::Savings;
                 TransType := TransType::" ";
@@ -693,7 +693,7 @@ codeunit 52185457 "Membership Closure Mgmt"
                 SavingsAccounts.Reset;
                 SavingsAccounts.SetRange(SavingsAccounts."Loan Disbursement Account", true);
                 SavingsAccounts.SetRange(SavingsAccounts."Member No.", "Member No.");
-                SavingsAccounts.SetRange("Product Type", 'ODS');
+                SavingsAccounts.SetRange("Product Type", '191');
                 if SavingsAccounts.Find('-') then begin
 
                     //ClosureFee := GetTransactionCharge(GeneralSetUp."Partial Account Fee", "Member Savings");

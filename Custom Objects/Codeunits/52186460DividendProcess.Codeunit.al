@@ -598,7 +598,7 @@ Codeunit 52186460 "Dividend Process"
 
             SavingsAccounts.RESET;
             SavingsAccounts.SETRANGE(SavingsAccounts."Member No.", CustMembr."No.");
-            SavingsAccounts.SetRange("Product Type", 'ODS');
+            SavingsAccounts.SetRange("Product Type", '191');
             SavingsAccounts.SETLOADFIELDS("No.", "Product Type", "Product Name");
             IF SavingsAccounts.FINDFIRST THEN BEGIN
                 SavingsAccountNo := SavingsAccounts."No.";
@@ -632,7 +632,7 @@ Codeunit 52186460 "Dividend Process"
             DividendProgression.SETRANGE(DividendProgression."Member No", CustMembr."No.");
             DividendProgression.SETRANGE(Year, PreviousYear);
             DividendProgression.SETRANGE(Forfeited, false);
-            DividendProgression.SETFILTER("Product Type", 'DCS');
+            DividendProgression.SETFILTER("Product Type", '1');
             DividendProgression.SETLOADFIELDS("Net Dividends"); // Load only required field
             DividendProgression.CALCSUMS(DividendProgression."Net Dividends");
             RebatesAmount := DividendProgression."Net Dividends";
@@ -661,9 +661,9 @@ Codeunit 52186460 "Dividend Process"
             // Apply filters based on PostingOptions
             CASE PostingOptions OF
                 PostingOptions::"BOSA Deposists":
-                    DividendProgression.SETFILTER("Product Type", 'DCS');
+                    DividendProgression.SETFILTER("Product Type", '1');
                 PostingOptions::"Share Capital":
-                    DividendProgression.SETRANGE("Product Type", 'SCS');
+                    DividendProgression.SETRANGE("Product Type", '4');
             END;
             DividendProgression.SETLOADFIELDS("Net Dividends", "Gross Dividends", "Witholding Tax");
             IF DividendProgression.FINDFIRST THEN BEGIN

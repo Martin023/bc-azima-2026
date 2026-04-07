@@ -9,7 +9,7 @@ Report 52185866 "Dormant Savings Accounts"
     {
         dataitem(SavingsAccounts; "Savings Accounts")
         {
-            DataItemTableView = where("Product Type" = filter('DCS'), Status = filter(Dormant));
+            DataItemTableView = where("Product Type" = filter('1'), Status = filter(Dormant));
             RequestFilterFields = "Member No.";
             trigger OnAfterGetRecord()
             begin
