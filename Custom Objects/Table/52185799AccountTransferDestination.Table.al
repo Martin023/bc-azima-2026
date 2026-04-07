@@ -166,7 +166,7 @@ table 52185799 "Account Transfer Destination"
                 if GenSetup."Control FOSA Posting" then begin
                     if "Destination Account Type" = "Destination Account Type"::Savings then begin
                         saving.Get("Destination Account No.");
-                        if saving."Product Type" = 'ODS' then begin
+                        if saving."Product Type" = '191' then begin
                             if "Destination Amount" > 0 then begin
                                 UserSetup.Get(UserId);
                                 if not UserSetup."Credit FOSA Account" then

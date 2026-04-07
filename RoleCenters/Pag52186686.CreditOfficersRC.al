@@ -59,7 +59,7 @@ page 52186686 "Credit Officers RC"
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Savings Accounts List';
-                    RunObject = page "Savings Account List";
+                    RunObject = page "Savings Accounts";;
                 }
                 action("Banking Closure List")
                 {

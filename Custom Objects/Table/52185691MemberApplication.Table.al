@@ -689,7 +689,7 @@ table 52185691 "Member Application"
 
         field(46; "Work Station"; Code[20])
         {
-            TableRelation = "Electrol Zones/Area Svr Center".Code WHERE(Type = CONST("Work Station"));
+            TableRelation = "Electrol Zones/Area Svr Center".Code WHERE(Type = CONST("Work Station"),"Employer Code" = field("Employer Code"));
         }
 
         field(47; "Employment Designation"; Text[50])

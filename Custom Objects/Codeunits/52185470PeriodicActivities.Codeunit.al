@@ -2827,12 +2827,12 @@ Codeunit 52185470 "Periodic Activities"
                                         UnallocatedAccount := '';
                                         SavingsAccounts.Reset;
                                         SavingsAccounts.SetRange(SavingsAccounts."Member No.", Members."No.");
-                                        SavingsAccounts.SetRange("Product Type", 'ODS');
+                                        SavingsAccounts.SetRange("Product Type", '191`');
                                         if SavingsAccounts.Find('-') then begin
                                             UnallocatedAccount := SavingsAccounts."No.";
                                         end else begin
                                             Pfact.reset;
-                                            Pfact.SetRange("Product ID", 'ODS');
+                                            Pfact.SetRange("Product ID", '191');
                                             Pfact.SetRange(status, Pfact.status::Active);
                                             if Pfact.find('-') then begin
 
@@ -6973,7 +6973,7 @@ Codeunit 52185470 "Periodic Activities"
                 SavingsAccounts.Reset();
                 SavingsAccounts.SetRange("Member No.", RpptLns."Guarantor Member No.");
                 //SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"FOSA Account");
-                SavingsAccounts.setrange("Product Type", 'ODS');
+                SavingsAccounts.setrange("Product Type", '191');
                 if SavingsAccounts.FindFirst() then begin
                     AccNo := SavingsAccounts."No.";
                     TransAmt := RpptLns."Money To FOSA";

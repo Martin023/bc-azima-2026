@@ -1,4 +1,3 @@
-namespace MNSProjectMwanga.MNSProjectMwanga;
 
 page 52186870 "Savings Accounts"
 {
@@ -79,8 +78,7 @@ page 52186870 "Savings Accounts"
                 field("Member Status"; Rec."Member Status") { }
                 field("Member Sub Status"; Rec."Member Sub Status") { }
                 field("Source Unit"; rec."Source Unit") { }
-                field("CDSC Broker"; Rec."CDSC Broker") { }
-                field("CDSC Broker Name"; Rec."CDSC Broker Name") { }
+            
             }
         }
     }

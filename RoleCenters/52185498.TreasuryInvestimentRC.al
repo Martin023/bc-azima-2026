@@ -544,7 +544,7 @@ page 52185498 "Treasury RC"
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Savings Accounts List';
-                        RunObject = page "Savings Account List";
+                        RunObject = page "Savings Accounts";
                     }
                     action(MemList)
                     {

@@ -30,7 +30,7 @@ report 52186208 ClearLoanBalless100
                 RunBal := Loans."Net Amount";
                 SavingAcc.reset();
                 SavingAcc.setrange("Member No.", Loans."Member No.");
-                SavingAcc.setrange(SavingAcc."Product Type", 'ODS');
+                SavingAcc.setrange(SavingAcc."Product Type", '191');
                 if SavingAcc.findfirst() then begin
                     if SavingAcc.GetAvailableBalance(SavingAcc."No.") <= RunBal then begin
                         RunBal := SavingAcc.GetAvailableBalance(SavingAcc."No.");

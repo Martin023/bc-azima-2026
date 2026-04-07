@@ -453,7 +453,7 @@ table 52185828 "Guarantors Substitution"
                 // SaVingAc.Get(LGuarant."Member No"); 
                 SaVingAc.Reset;
                 SaVingAc.SetRange("Member No.", LGuarant."Member No");
-                SaVingAc.SetRange("Product Type", 'DCS');
+                SaVingAc.SetRange("Product Type", '1');
                 if SaVingAc.FindFirst then begin
                     LGuarant."Savings Account No." := SaVingAc."No.";
                 end;

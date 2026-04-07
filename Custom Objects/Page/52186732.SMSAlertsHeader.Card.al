@@ -1099,7 +1099,7 @@ page 52186732 "SMS Alerts Header Card"
                     SavingsAccounts.SetLoadFields("Member No.", "Product Type");
                     SavingsAccounts.Reset();
                     SavingsAccounts.SetRange("Member No.", SMSAlertsLines."Member No");
-                    SavingsAccounts.setrange("Product Type", 'ODS');
+                    SavingsAccounts.setrange("Product Type", '191');
                     if SavingsAccounts.FindFirst() then begin
                         TransactionCharges.Reset;
                         TransactionCharges.SetRange(TransactionCharges."Transaction Type", Gensetup."Loan SMS Charge");

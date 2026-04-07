@@ -68,7 +68,7 @@ page 52186566 "Employer Code List"
                         SavAccs.SetRange("Employer Code", Rec."No.");
                         SavAccs.SetRange("Source Unit", SavAccs."Source Unit"::BOSA);
                         if SavAccs.FindSet() then
-                            page.run(page::"Savings Account List", SavAccs);
+                            page.run(page::"Savings Accounts", SavAccs);
                     end;
                 }
                 field("Number of Loans"; Rec."No of Loans (Employer)")

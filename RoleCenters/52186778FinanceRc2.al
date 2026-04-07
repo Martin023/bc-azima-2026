@@ -544,12 +544,7 @@ page 52186778 "Finance Role Center"
                         Caption = 'Member Detailed Balances';
                         RunObject = Page "Detailed Member Balance List";
                     }
-                    action("Member Accounts")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Member Accounts (Unrestricted)';
-                        RunObject = Page "Savings Account List";
-                    }
+                  
                     action("Savings Account Register")
                     {
                         ApplicationArea = All;
@@ -1303,54 +1298,54 @@ page 52186778 "Finance Role Center"
                     {
                         ApplicationArea = Basic;
                         Caption = 'Share Capital Register';
-                        RunObject = page "Savings Account List";
+                        RunObject = page "Savings Accounts";
                         RunPageView = WHERE("Product Category" = filter("Share Capital" | "Transfered Share Capital"), "Balance (LCY)" = filter(<> 0));
                     }
                 }
-                group("BBF & Risk Claims")
-                {
-                    Caption = 'Deceased Member Notice';
-                    // group("Risk Claims")
-                    // {
-                    action("Risk Claim List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Deceased Member Notice';
-                        RunObject = Page "Risk Claim List";
+                // group("BBF & Risk Claims")
+                // {
+                //     Caption = 'Deceased Member Notice';
+                //     // group("Risk Claims")
+                //     // {
+                //     action("Risk Claim List")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Deceased Member Notice';
+                //         RunObject = Page "Risk Claim List";
 
-                    }
-                    action("Approved Risk Claim List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Approved Deceased Member Notice';
-                        RunObject = Page "Approved Risk Claim List";
-                    }
-                    // action("Partially Posted Risk Claim List")
-                    // {
-                    //     ApplicationArea = Basic, Suite;
-                    //     Caption = 'Partially Posted Risk Claim List';
-                    //     RunObject = Page "Partially Posted Risk Claim";
-                    // }
-                    action("Posted Risk Claim List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Posted Deceased Member Notice';
-                        RunObject = Page "Posted Risk Claim List";
-                    }
-                    action("Cancelled/Archived Risk Claim List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Cancelled/Archived Member Notice List';
-                        RunObject = Page "Cancelled/Archived Risk Claim";
-                    }
-                    action("Risk Claim Report")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Deceased Member Notice Report';
-                        RunObject = Report "Risk Claims Report";
-                    }
-                    // }
-                }
+                //     }
+                //     action("Approved Risk Claim List")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Approved Deceased Member Notice';
+                //         RunObject = Page "Approved Risk Claim List";
+                //     }
+                //     // action("Partially Posted Risk Claim List")
+                //     // {
+                //     //     ApplicationArea = Basic, Suite;
+                //     //     Caption = 'Partially Posted Risk Claim List';
+                //     //     RunObject = Page "Partially Posted Risk Claim";
+                //     // }
+                //     action("Posted Risk Claim List")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Posted Deceased Member Notice';
+                //         RunObject = Page "Posted Risk Claim List";
+                //     }
+                //     action("Cancelled/Archived Risk Claim List")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Cancelled/Archived Member Notice List';
+                //         RunObject = Page "Cancelled/Archived Risk Claim";
+                //     }
+                //     action("Risk Claim Report")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Deceased Member Notice Report';
+                //         RunObject = Report "Risk Claims Report";
+                //     }
+                //     // }
+                // }
                 //     group("Insurance Claims")
                 //     {
                 //         action("Insurance Claim List")

@@ -213,7 +213,7 @@ page 52185500 "Main Role Center"
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Savings Accounts';
-                        RunObject = page "Savings Account List";
+                        RunObject = page "Savings Accounts";
                     }
                     action("Credit Accounts List")
                     {
@@ -732,7 +732,7 @@ page 52185500 "Main Role Center"
                             Caption = 'Loans Register';
                             RunObject = report "Loan Register";
                         }
-                       
+
                         action("Loan Approved Schedule")
                         {
                             ApplicationArea = Basic, Suite;
@@ -781,7 +781,7 @@ page 52185500 "Main Role Center"
                             Caption = 'Loans Defaulter Aging - SASRA';
                             RunObject = report "Loans Defaulter Aging - SASRA";
                         }
-                       
+
                         action("SASRA Deposit Return")
                         {
                             ApplicationArea = Basic, Suite;
@@ -793,9 +793,9 @@ page 52185500 "Main Role Center"
                             ApplicationArea = Basic, Suite;
                             Caption = 'Loan Provisioning Summary';
                             // RunObject = report "Loans Provisioning Summary";
-                              RunObject = report "Risk Provisioning";
+                            RunObject = report "Risk Provisioning";
                         }
-                        
+
                         action("Loan Product Summaries")
                         {
                             ApplicationArea = Basic, Suite;
@@ -832,7 +832,7 @@ page 52185500 "Main Role Center"
                             Caption = 'Loan Issued Summary';
                             RunObject = report "Loan Issued Summary";
                         }
-                      
+
                         action("Position on Borrowers in Sacco")
                         {
                             ApplicationArea = Basic, Suite;
@@ -965,7 +965,7 @@ page 52185500 "Main Role Center"
                             Caption = 'Generate CRB Data';
                             RunObject = report "Generate CRB Data";
                         }
-                      
+
                     }
                     group("Periodic Activitites Reports")
                     {
@@ -1140,7 +1140,7 @@ page 52185500 "Main Role Center"
                             Caption = 'Sasra Staff Access Granted';
                             RunObject = report "Sasra Staff Access Granted";
                         }
-                       
+
                         action("Sasra Staff Positions")
                         {
                             ApplicationArea = Basic, Suite;
@@ -1201,7 +1201,7 @@ page 52185500 "Main Role Center"
                             Caption = 'Anti-Money Laundering Report';
                             RunObject = report "Anti-Money Laundering Report";
                         }
-                     
+
                     }
                 }
                 group("Credit Management Setups")
@@ -1372,7 +1372,7 @@ page 52185500 "Main Role Center"
                             Caption = 'Cashier Transactions';
                             runobject = page "Cashier Transactions List";
                         }
-                        
+
                         action("T Cashier Transactions Report")
                         {
                             ApplicationArea = Basic, Suite;
@@ -1593,7 +1593,8 @@ page 52185500 "Main Role Center"
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Savings Accounts List';
-                        RunObject = page "Savings Account List";
+                        RunObject = page "Savings Accounts";
+                        ;
                     }
                     action("Banking Closure List")
                     {
@@ -1985,7 +1986,7 @@ page 52185500 "Main Role Center"
                             Caption = 'Cashier Transactions';
                             RunObject = report "Cashier Transactions";
                         }
-                       
+
                     }
                     action("EFT Reports")
                     {
@@ -2061,7 +2062,7 @@ page 52185500 "Main Role Center"
                             Caption = 'Standing Order';
                             RunObject = report "Standing Order";
                         }
-                        
+
                         action("Standing Order Register")
                         {
                             ApplicationArea = Basic, Suite;
@@ -2751,7 +2752,7 @@ page 52185500 "Main Role Center"
                         //     RunObject = Page "Sky Mobile Users";
                         // }
                     }
-                    
+
                     group("E-Loans")
                     {
                         Caption = 'Loans';
@@ -2821,9 +2822,9 @@ page 52185500 "Main Role Center"
                                 Caption = 'SMS Messages';
                                 RunObject = Page "Sky SMS Messages";
                             }
-                            
+
                         }
-                       
+
                     }
                     group(VirtualMembers)
                     {
@@ -2887,7 +2888,7 @@ page 52185500 "Main Role Center"
                             RunObject = Page "Insurance Actioned List";
                         }
                     }
-                   
+
                 }
                 group("Internet Banking")
                 {
@@ -3053,7 +3054,7 @@ page 52185500 "Main Role Center"
                 {
                     Caption = 'Web Portal';
 
-                    
+
                     group("Set Up")
                     {
                         action("Portal Setup")
@@ -3108,7 +3109,7 @@ page 52185500 "Main Role Center"
                         RunObject = report "Agent Transactions";
                     }
                 }
-                
+
             }
             group("Payroll Processing")
             {
@@ -3853,14 +3854,14 @@ page 52185500 "Main Role Center"
                                 ApplicationArea = Basic, suite;
                                 RunObject = page "HR BSC List Targets1";
                             }
-                            
+
                             action("HR BSC List Quater1")
                             {
                                 Caption = 'HR BSC List Quater1';
                                 ApplicationArea = Basic, suite;
                                 RunObject = page "HR BSC List Qaurter 1";
                             }
-                           
+
                             action("HR BSC List Quater 3")
                             {
                                 Caption = 'HR BSC List Quater 3';
@@ -5256,7 +5257,7 @@ page 52185500 "Main Role Center"
                             Caption = 'Terminated Contracts list';
                             RunObject = Page "Terminated Contracts list";
                         }
-                       
+
                         action("Approved Contracts list")
                         {
                             ApplicationArea = Basic;

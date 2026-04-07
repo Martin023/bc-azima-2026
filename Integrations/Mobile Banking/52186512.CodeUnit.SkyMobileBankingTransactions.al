@@ -1345,7 +1345,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
             saccoAccount.SETRANGE(saccoAccount."Member No.", Members."No.");
             saccoAccount.SetRange("Product Category", saccoAccount."Product Category"::"FOSA Account");
             saccoAccount.SetCurrentKey(Blocked);
-            saccoAccount.SetRange("Product Type", 'ODS');
+            saccoAccount.SetRange("Product Type", '191');
 
             saccoAccount.SetLoadFields(
                 "No.", "Member No.", Status, Blocked

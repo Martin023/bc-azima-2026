@@ -13,7 +13,7 @@ report 52186224 "Generate Actual progression"
             trigger OnAfterGetRecord()
             begin
                 SavAcc.reset;
-                SavAcc.SetRange("Product Type", 'DCS');
+                SavAcc.SetRange("Product Type", '1');
                 SavAcc.SetRange("Member No.", DividendProgressionImport."Member No.");
                 if SavAcc.FindFirst() then begin
                     CreateDividendLines(SavAcc."No.", today, SavAcc."Product Type", SavAcc."Product Name", SavAcc."Member No.", DividendProgressionImport."Qualifying Shares", DividendProgressionImport.Shares, DividendProgressionImport."Gross Div.", DividendProgressionImport.WTax, DividendProgressionImport."Net Div.", CalcDate('<CM>', DividendProgressionImport.Date), CalcDate('<-CM>', DividendProgressionImport.Date), DivCalcMethod::Prorated, '', SavAcc."Employer Code")

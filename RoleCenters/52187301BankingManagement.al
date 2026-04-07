@@ -48,12 +48,7 @@ page 52187301 "Banking Management Role Center"
                     Caption = 'Saving Account Application';
                     RunObject = page "Savings Account Application";
                 }
-                action("Savings Accounts")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Savings Accounts List(Unrestricted)';
-                    RunObject = page "Savings Account List";
-                }
+               
                 action("Savings Accounts Register List")
                 {
                     ApplicationArea = Basic, Suite;
@@ -1266,12 +1261,12 @@ page 52187301 "Banking Management Role Center"
                         ToolTip = 'View the list of fixed assets that have been transferred.';
                     }
                 }
-                action(StaffWelfare)
-                {
-                    Caption = 'Staff Welfare Claim';
-                    ApplicationArea = Basic, Suite;
-                    RunObject = page "Staff Welfare List";
-                }
+                // action(StaffWelfare)
+                // {
+                //     Caption = 'Staff Welfare Claim';
+                //     ApplicationArea = Basic, Suite;
+                //     RunObject = page "Staff Welfare List";
+                // }
                 action(LeaveApplication1)
                 {
                     Caption = 'Employee Leave Application';
@@ -1279,12 +1274,12 @@ page 52187301 "Banking Management Role Center"
                     RunObject = page "HR Leave Applications List1";
 
                 }
-                action("Overtime Claim List")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Overtime';
-                    RunObject = page "Overtime Claim List";
-                }
+                // action("Overtime Claim List")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Overtime';
+                //     RunObject = page "Overtime Claim List";
+                // }
 
                 action("System Rights Requisition")
                 {
@@ -1304,8 +1299,6 @@ page 52187301 "Banking Management Role Center"
                     ApplicationArea = Basic, Suite;
                     Caption = 'Store Requisition';
                     RunObject = Page "Store Requisitions List";
-
-
                 }
                 action("Payslip")
                 {

@@ -120,7 +120,7 @@ page 52185735 "Dividend Progression"
                 begin
                     theSavingsAccount.Reset();
 
-                    theSavingsAccount.SetFilter("Product Type", '%1|%2', 'DCS', 'SCS');
+                    theSavingsAccount.SetFilter("Product Type", '%1|%2', '1', '4');
 
                     Codeunit.Run(Codeunit::"Dividends Job Queue Manager", theSavingsAccount);
                 end;
@@ -222,7 +222,7 @@ page 52185735 "Dividend Progression"
 
                         Message('Qualified Amount %1', QualifiedAmount);
 
-                        NetAmt := Round((loansProcess.ComputeDividendsDiscounting(Members."No.", 'DCS',false)), 1, '<');
+                        NetAmt := Round((loansProcess.ComputeDividendsDiscounting(Members."No.", '1',false)), 1, '<');
                         Message('Net Amount %1', NetAmt);
 
 

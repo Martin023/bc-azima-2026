@@ -2,8 +2,8 @@ table 52185730 "Savings Accounts"
 {
     Caption = 'Savings Accounts';
     DataCaptionFields = "No.", Name;
-    DrillDownPageID = "Savings Account List";
-    LookupPageID = "Savings Account List";
+    DrillDownPageID = "Savings Accounts";
+    LookupPageID = "Savings Accounts";;
     Permissions = TableData "Cust. Ledger Entry" = r;
 
     fields
@@ -1015,15 +1015,6 @@ table 52185730 "Savings Accounts"
             Caption = 'Change Log Entries';
             FieldClass = FlowField;
             CalcFormula = count("Change Log Entry" where("Primary Key Field 1 Value" = field("No.")));
-        }
-        field(120; "CDSC Broker"; Code[30])
-        {
-        }
-        field(121; "CDSC Broker Name"; Text[100])
-        {
-            Editable = false;
-            FieldClass = FlowField;
-            CalcFormula = lookup("Broker Account list"."Broker Name" where(Code = field("CDSC Broker")));
         }
 
     }

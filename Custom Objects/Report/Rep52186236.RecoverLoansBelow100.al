@@ -20,7 +20,7 @@ report 52186236 "Recover Loans Below 100"
                     LoansInterest.DeleteAll();
 
                 SavAcc.reset;
-                SavAcc.SetRange("Product Type", 'ODS');
+                SavAcc.SetRange("Product Type", '191');
                 if EmployerCode <> '' then
                     SavAcc.SetRange("Employer Code", EmployerCode);
                 if SavAcc.Findset() then begin

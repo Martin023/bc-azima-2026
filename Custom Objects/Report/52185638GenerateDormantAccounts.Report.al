@@ -7,7 +7,7 @@ Report 52185638 "Generate Dormant Accounts"
     {
         dataitem(SavingsAccounts; "Savings Accounts")
         {
-            DataItemTableView = where("Product Type" = filter('DCS' | 'ODS'), Status = filter(Active | Dormant));
+            DataItemTableView = where("Product Type" = filter('1' | '191'), Status = filter(Active | Dormant));
 
             trigger OnAfterGetRecord()
             var
@@ -25,7 +25,7 @@ Report 52185638 "Generate Dormant Accounts"
                             SavingsAccounts."Last Date Modified" := Today;
                             SavingsAccounts.Modify;
 
-                            if SavingsAccounts."Product Type" = 'DCS' then begin
+                            if SavingsAccounts."Product Type" = '1' then begin
                                 if Members.Get(SavingsAccounts."Member No.") then begin
                                     if Members.Status = Members.Status::Active then begin
                                         Members.Status := Members.Status::Dormant;
@@ -37,7 +37,7 @@ Report 52185638 "Generate Dormant Accounts"
                             //MemberMgt.LogDormancy(SavingsAccounts."No.", Format(SavingsAccounts.Status), Format(SavingsAccounts.Status));
                         end
                         else begin
-                            if (SavingsAccounts."Product Type" = 'DCS') and (SavingsAccounts.Status = SavingsAccounts.Status::Dormant) then begin
+                            if (SavingsAccounts."Product Type" = '1') and (SavingsAccounts.Status = SavingsAccounts.Status::Dormant) then begin
                                 SavingsAccounts.Status := SavingsAccounts.Status::Active;
                                 SavingsAccounts."Status Change Reason" := 'Account Active';
                                 SavingsAccounts."Last Date Modified" := Today;

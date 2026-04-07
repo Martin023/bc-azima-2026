@@ -33,7 +33,7 @@ table 52186275 "NCBA Pension Buffer"
         field(6; "accountNo"; Code[30])
         {
             Caption = 'Account No';
-            TableRelation = "Savings Accounts"."No." WHERE("Product Type" = CONST('ODS'));
+            TableRelation = "Savings Accounts"."No." WHERE("Product Type" = CONST('191'));
         }
         field(7; Amount; Decimal)
         {

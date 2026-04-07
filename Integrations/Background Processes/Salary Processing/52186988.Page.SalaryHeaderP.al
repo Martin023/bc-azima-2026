@@ -242,7 +242,7 @@
 //                                     SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"FOSA Account");
 //                                     SavingsAccounts.SetFilter(SavingsAccounts."Employer Code", Rec."Employer Code");
 //                                     SavingsAccounts.SetRange(SavingsAccounts."Payroll/Staff No.", SalaryLines."Staff No.");
-//                                     SavingsAccounts.setrange(SavingsAccounts."Product Type", 'ODS');
+//                                     SavingsAccounts.setrange(SavingsAccounts."Product Type", '191');
 //                                     if SavingsAccounts.Find('-') then begin
 
 //                                         SalaryLines."Account Not Found" := false;
@@ -290,7 +290,7 @@
 //                                     // SavingsAccounts.SetFilter(SavingsAccounts."Employer Code", Rec."Employer Code");
 //                                     SavingsAccounts.SetRange(SavingsAccounts."No.", SalaryLines."Account No.");
 //                                     SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"FOSA Account");
-//                                     SavingsAccounts.setrange(SavingsAccounts."Product Type", 'ODS');
+//                                     SavingsAccounts.setrange(SavingsAccounts."Product Type", '191');
 //                                     if SavingsAccounts.Find('-') then begin
 //                                         SalaryLines."Account Not Found" := false;
 //                                         //SalaryLines.Posted := false;
@@ -327,7 +327,7 @@
 //                                 repeat
 //                                     SavingsAccounts.Reset;
 //                                     SavingsAccounts.SetRange(SavingsAccounts."ID No.", SalaryLines."ID No.");
-//                                     SavingsAccounts.setrange(SavingsAccounts."Product Type", 'ODS');
+//                                     SavingsAccounts.setrange(SavingsAccounts."Product Type", '191');
 //                                     //SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"FOSA Account");
 //                                     if SavingsAccounts.Find('-') then begin
 

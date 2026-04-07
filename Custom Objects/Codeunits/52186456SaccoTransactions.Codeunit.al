@@ -11944,7 +11944,7 @@ Codeunit 52186456 "Sacco Transactions"
                     Sav.CalcFields("Balance (LCY)");
                     // FosaAcc.Reset();
                     // FosaAcc.SetRange("Member No.", Sav."Member No.");
-                    // FosaAcc.setrange("Product Type", 'ODS');
+                    // FosaAcc.setrange("Product Type", '191');
                     // if FosaAcc.Find('-') then begin
                     //     if FosaAcc.Blocked <> FosaAcc.Blocked::" " then begin
                     //         Blocked := true;

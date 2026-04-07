@@ -16,7 +16,7 @@ report 52186238 "Recover FOSA Arrears"
 
                 SavingsAccounts.Reset();
                 SavingsAccounts.SetRange("Employer Code", EmployerCode);
-                SavingsAccounts.setrange(SavingsAccounts."Product Type", 'ODS');
+                SavingsAccounts.setrange(SavingsAccounts."Product Type", '191');
                 if SavingsAccounts.FindFirst() then begin
                     repeat
                         SavingsAccounts.CalcFields("Balance (LCY)");

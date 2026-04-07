@@ -30,7 +30,7 @@ report 52185842 "Recover Overpaid Loans"
                     repeat
                         SavAcc.reset;
                         SavAcc.SetRange("Member No.", loans."Member No.");
-                        SavAcc.SetRange("Product Type", 'ODS');
+                        SavAcc.SetRange("Product Type", '191');
                         if SavAcc.FindFirst() then begin
                             // if AvAmt > 0 then begin
                             Loans.CalcFields("Outstanding Interest");

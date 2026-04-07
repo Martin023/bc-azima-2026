@@ -11,7 +11,7 @@ report 52186221 UpdateDormantAccounts
     {
         // dataitem(SavingsAccounts; "Savings Accounts")
         // {
-        //     DataItemTableView = where("Product Type" = filter(<> 'ODS' & <> 'DCS'), Status = const(Dormant));
+        //     DataItemTableView = where("Product Type" = filter(<> '191' & <> '1'), Status = const(Dormant));
         //     column(MemberNo; "Member No.")
         //     {
         //     }
@@ -49,13 +49,13 @@ report 52186221 UpdateDormantAccounts
         // }
         dataitem(SaVacc; "Savings Accounts")
         {
-            DataItemTableView = where(Status = const(Active), "Product Type" = const('DCS'));
+            DataItemTableView = where(Status = const(Active), "Product Type" = const('1'));
 
             trigger OnAfterGetRecord()
             begin
                 OtherAcc.reset();
                 OtherAcc.SetRange("Member No.", SaVacc."Member No.");
-                OtherAcc.setfilter("Product Type", '<>%1', 'ODS');
+                OtherAcc.setfilter("Product Type", '<>%1', '191');
                 if OtherAcc.FindFirst() then begin
                     repeat
                         OtherAcc.Status := OtherAcc.Status::Active;

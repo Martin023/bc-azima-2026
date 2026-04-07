@@ -9,7 +9,7 @@ report 52186028 "Dormant Deposit Listing Report"
         dataitem("Savings Accounts"; "Savings Accounts")
         {
             RequestFilterFields = Status, "Employer Code";
-            DataItemTableView = where(Status = Filter(Dormant), "Product Type" = filter('DCS'));
+            DataItemTableView = where(Status = Filter(Dormant), "Product Type" = filter('1'));
 
             column(ReportForNavId_1; 1)
             {

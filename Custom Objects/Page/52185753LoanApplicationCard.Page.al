@@ -856,7 +856,7 @@ page 52185753 "Loan Application Card"
                         SavAcc.Reset;
                         SavAcc.SetRange(SavAcc."Member No.", loan."Member No.");
                         //SavAcc.SetRange(SavAcc."Loan Disbursement Account", true);
-                        SavAcc.SetRange("Product Type", 'ODS');
+                        SavAcc.SetRange("Product Type", '191');
                         if SavAcc.Find('-') then begin
                             loan."Disbursement Account No" := SavAcc."No.";
                             Loan.modify;
@@ -2406,7 +2406,7 @@ page 52185753 "Loan Application Card"
                     SavAcc.Reset;
                     SavAcc.SetRange("Member No.", Rec."Member No.");
                     SavAcc.SetRange("Product Category", SavAcc."Product Category"::"FOSA Account");
-                    SavAcc.SetRange("Product Type", 'ODS');
+                    SavAcc.SetRange("Product Type", '191');
                     if SavAcc.Find('-') then begin
                         FosaAcc := SavAcc."No.";
                         idno := SavAcc."ID No.";

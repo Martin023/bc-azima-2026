@@ -40,7 +40,7 @@ table 52185716 "RTGS Transfer Lines"
             ELSE
             IF ("Account Type" = CONST("IC Partner")) "IC Partner"
             ELSE
-            IF ("Account Type" = CONST(Savings)) "Savings Accounts" WHERE("Product Type" = filter('GAS' | 'ODS'),
+            IF ("Account Type" = CONST(Savings)) "Savings Accounts" WHERE("Product Type" = filter('191'),
                                                                                               Blocked = FILTER(<> Debit | All))
             ELSE
             IF ("Account Type" = CONST(Credit)) "Credit Accounts";
