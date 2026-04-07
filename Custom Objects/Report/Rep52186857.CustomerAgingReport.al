@@ -68,15 +68,15 @@ report 52186857 "Customer Summary Aging Report"
                     NoOfDays := 0;
                 case NoOfDays of
                     0 .. 30:
-                        "0-30 Days Performing (1%)" := Customer."Balance (LCY)"; //* 0.01;
+                        "0-30 Days Performing (1%)" := Customer."Net Change (LCY)"; //* 0.01;
                     31 .. 90:
-                        "31-90 Days Watch (5%)" := Customer."Balance (LCY)"; //;* 0.05;
+                        "31-90 Days Watch (5%)" := Customer."Net Change (LCY)"; //;* 0.05;
                     91 .. 180:
-                        "91-180 Days Substandard (25%)" := Customer."Balance (LCY)"; //* 0.25;
+                        "91-180 Days Substandard (25%)" := Customer."Net Change (LCY)"; //* 0.25;
                     181 .. 360:
-                        "181-360 Days Doubtful (50%)" := Customer."Balance (LCY)";// * 0.50;
+                        "181-360 Days Doubtful (50%)" := Customer."Net Change (LCY)";// * 0.50;
                     else
-                        "Over 360 Days Loss (100%)" := Customer."Balance (LCY)";
+                        "Over 360 Days Loss (100%)" := Customer."Net Change (LCY)";
                 end;
 
             end;

@@ -459,7 +459,7 @@ page 52185726 "Member Single"
                     ApplicationArea = Basic, Suite;
                 }
 
-                field ("Recruitment Location"; Rec."Recruitment Location")
+                field("Recruitment Location"; Rec."Recruitment Location")
                 {
                     ApplicationArea = Basic, Suite;
                 }
@@ -608,18 +608,18 @@ page 52185726 "Member Single"
             separator(Action28)
             {
             }
-            action(Sendmail)
-            {
-                ApplicationArea = all;
-                Promoted = true;
-                PromotedCategory = category4;
-                trigger OnAction()
-                var
-                    Sendmai: Codeunit EmailCodeunit;
-                begin
-                    Sendmai.SendEmails();
-                end;
-            }
+            // action(Sendmail)
+            // {
+            //     ApplicationArea = all;
+            //     Promoted = true;
+            //     PromotedCategory = category4;
+            //     trigger OnAction()
+            //     var
+            //         Sendmai: Codeunit EmailCodeunit;
+            //     begin
+            //         Sendmai.SendEmails();
+            //     end;
+            // }
             action(Dependancies)
             {
                 Caption = 'Next Of Kin List';
@@ -663,29 +663,29 @@ page 52185726 "Member Single"
             separator(Action41)
             {
             }
-            action("Information Base")
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Information Base';
-                Image = CancelAttachment;
-                Promoted = true;
-                PromotedCategory = Process;
-                RunObject = Page "Loanee Information Base";
-                RunPageLink = "Member No." = FIELD("No.");
-                Enabled = not HideAccount;
+            // action("Information Base")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Caption = 'Information Base';
+            //     Image = CancelAttachment;
+            //     Promoted = true;
+            //     PromotedCategory = Process;
+            //     RunObject = Page "Loanee Information Base";
+            //     RunPageLink = "Member No." = FIELD("No.");
+            //     Enabled = not HideAccount;
 
-            }
-            action("Member Document")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = Allocations;
-                Promoted = true;
-                PromotedCategory = Category4;
-                RunObject = Page "Member Documents";
-                RunPageLink = "Reference No." = FIELD("No.");
-                Enabled = not HideAccount;
+            // }
+            // action("Member Document")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = Allocations;
+            //     Promoted = true;
+            //     PromotedCategory = Category4;
+            //     RunObject = Page "Member Documents";
+            //     RunPageLink = "Reference No." = FIELD("No.");
+            //     Enabled = not HideAccount;
 
-            }
+            // }
             separator(Action78)
             {
             }
@@ -747,15 +747,15 @@ page 52185726 "Member Single"
             separator(Action89)
             {
             }
-            action("Social Listening Sites")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = Alerts;
-                Promoted = true;
-                PromotedCategory = Category4;
-                RunObject = Page "Social Listening Sites";
-                RunPageLink = "Account No." = FIELD("No.");
-            }
+            // action("Social Listening Sites")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = Alerts;
+            //     Promoted = true;
+            //     PromotedCategory = Category4;
+            //     RunObject = Page "Social Listening Sites";
+            //     RunPageLink = "Account No." = FIELD("No.");
+            // }
             separator(Action74)
             {
             }
@@ -914,44 +914,44 @@ page 52185726 "Member Single"
                     FingerprintProcessingFn.RunInputFingerPrints(Rec."No.", Rec.Name, Rec."Primary Identification");
                 end;
             }
-            action("Recover Loan From Deposits")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = ReceiveLoaner;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-                Visible = true;
-                Enabled = false;
-                trigger OnAction()
-                var
-                    RecoveryLines: Record "Loan Recovery Lines";
-                    GuarantorsAttached: Boolean;
-                    FirstName: Text;
-                    PhoneNumber: Text;
-                    Loans: Record Loans;
-                    PeriodicActivities: Codeunit "Periodic Activities";
-                begin
-                    if Confirm('Are you sure you want to recover this loan?') then begin
-                        // CheckLinesAmountAgainstLoan();
-                        // PostUpfrontInterests();
-                        // Commit();
+            // action("Recover Loan From Deposits")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = ReceiveLoaner;
+            //     Promoted = true;
+            //     PromotedCategory = Process;
+            //     PromotedIsBig = true;
+            //     Visible = true;
+            //     Enabled = false;
+            //     trigger OnAction()
+            //     var
+            //         RecoveryLines: Record "Loan Recovery Lines";
+            //         GuarantorsAttached: Boolean;
+            //         FirstName: Text;
+            //         PhoneNumber: Text;
+            //         Loans: Record Loans;
+            //         PeriodicActivities: Codeunit "Periodic Activities";
+            //     begin
+            //         if Confirm('Are you sure you want to recover this loan?') then begin
+            //             // CheckLinesAmountAgainstLoan();
+            //             // PostUpfrontInterests();
+            //             // Commit();
 
 
-                        GlobalFunctions.GetMemberData(Members."No.", FirstName, PhoneNumber);
-                        PeriodicActivities.RecoverLoanFromDeposit(Rec."No.");
+            //             GlobalFunctions.GetMemberData(Members."No.", FirstName, PhoneNumber);
+            //             PeriodicActivities.RecoverLoanFromDeposit(Rec."No.");
 
-                        // if Loans.Get(Rec."Loan No.") then begin
-                        //     if GuarantorsAttached then
-                        //         msg := 'Dear ' + FirstName + ' your defaulted ' + Loans."Loan Product Type Name" + ' KES ' + Format(Rec."Total Balance") + ' has been attached to your guarantors. ' + ForMoreInfo
-                        //     else
-                        //         msg := 'Dear ' + FirstName + ' your defaulted ' + Loans."Loan Product Type Name" + ' KES ' + Format(Rec."Total Balance") + ' has been attached to your deposits. ' + ForMoreInfo;
-                        // end;
-                        // SendSMS.SendSms(SMSSource::DMU, Members."Phone No.", msg, Format(Rec."No."), '', true, 0, false, 'CBS', Rec."No.", 'CBS');
-                        // Message('Process completed Successfully');
-                    end;
-                end;
-            }
+            //             // if Loans.Get(Rec."Loan No.") then begin
+            //             //     if GuarantorsAttached then
+            //             //         msg := 'Dear ' + FirstName + ' your defaulted ' + Loans."Loan Product Type Name" + ' KES ' + Format(Rec."Total Balance") + ' has been attached to your guarantors. ' + ForMoreInfo
+            //             //     else
+            //             //         msg := 'Dear ' + FirstName + ' your defaulted ' + Loans."Loan Product Type Name" + ' KES ' + Format(Rec."Total Balance") + ' has been attached to your deposits. ' + ForMoreInfo;
+            //             // end;
+            //             // SendSMS.SendSms(SMSSource::DMU, Members."Phone No.", msg, Format(Rec."No."), '', true, 0, false, 'CBS', Rec."No.", 'CBS');
+            //             // Message('Process completed Successfully');
+            //         end;
+            //     end;
+            // }
             action("Check Dividend Advance Qualification")
             {
                 ApplicationArea = All, Basic, Suite;
@@ -1131,21 +1131,21 @@ page 52185726 "Member Single"
 
 
             }
-            action(VerifyPrints)
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'VerifyPrints';
-                Image = ValidateEmailLoggingSetup;
-                Promoted = true;
-                PromotedCategory = Process;
+            // action(VerifyPrints)
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Caption = 'VerifyPrints';
+            //     Image = ValidateEmailLoggingSetup;
+            //     Promoted = true;
+            //     PromotedCategory = Process;
 
-                trigger OnAction()
-                var
-                    MyGuid: Guid;
-                begin
+            //     trigger OnAction()
+            //     var
+            //         MyGuid: Guid;
+            //     begin
 
-                end;
-            }
+            //     end;
+            // }
             separator(Action69)
             {
             }
@@ -1517,11 +1517,11 @@ page 52185726 "Member Single"
                 var
                     myInt: Integer;
                 begin
-                    // DividendProgression.RESET;
-                    // DividendProgression.SETRANGE("Member No", Rec."No.");
-                    // if DividendProgression.FIND('-') then begin
-                    REPORT.RUN(Report::"Dividend Slip B64", TRUE, FALSE, DividendProgression);
-                    //end;
+                    DividendProgression.RESET;
+                    DividendProgression.SETRANGE("Member No", Rec."No.");
+                    if DividendProgression.FIND('-') then begin
+                        REPORT.RUN(Report::"Dividend Slip B64", TRUE, FALSE, DividendProgression);
+                    end;
                 end;
             }
             action("Loans Guaranteed List")
@@ -1563,6 +1563,16 @@ page 52185726 "Member Single"
                 RunPageLink = "Member No." = field("No.");
                 Enabled = not HideAccount;
             }
+            action("SMS(es) Sent to Member")
+            {
+                ApplicationArea = Basic, Suite;
+                Image = Documents;
+                Promoted = true;
+                PromotedCategory = Category4;
+                RunObject = page "Sky SMS Messages";
+                RunPageLink = receiver = field("Phone No.");
+                Enabled = not HideAccount;
+            }
 
             // RunPageMode = Create;
             separator(Action25)
@@ -1585,24 +1595,24 @@ page 52185726 "Member Single"
                     CustMembr.EmailRecords(true);
                 end;
             }
-            action("MEMBER [FILE]")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = Document;
-                Promoted = true;
-                PromotedCategory = Category6;
+            // action("MEMBER [FILE]")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = Document;
+            //     Promoted = true;
+            //     PromotedCategory = Category6;
 
-                trigger OnAction()
-                var
-                    DMS: Record EDMS;
-                begin
-                    DMS.Reset;
-                    DMS.SetRange(DMS.Key, DMS.Key::"Member File");
-                    if DMS.Find('-') then begin
-                        HyperLink(DMS."url path" + Rec."No.");
-                    end;
-                end;
-            }
+            //     trigger OnAction()
+            //     var
+            //         DMS: Record EDMS;
+            //     begin
+            //         DMS.Reset;
+            //         DMS.SetRange(DMS.Key, DMS.Key::"Member File");
+            //         if DMS.Find('-') then begin
+            //             HyperLink(DMS."url path" + Rec."No.");
+            //         end;
+            //     end;
+            // }
             action("Verify Application")
             {
                 ApplicationArea = Basic, Suite;
@@ -1904,57 +1914,57 @@ page 52185726 "Member Single"
                 }
             }
 
-            group("EDMS Integration")
-            {
-                Visible = ShowEDMS;
-                action("Import")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Import File';
-                    Promoted = true;
-                    PromotedCategory = Category8;
-                    Image = Import;
+            // group("EDMS Integration")
+            // {
+            //     Visible = ShowEDMS;
+            //     action("Import")
+            //     {
+            //         ApplicationArea = All;
+            //         Caption = 'Import File';
+            //         Promoted = true;
+            //         PromotedCategory = Category8;
+            //         Image = Import;
 
-                    trigger OnAction()
-                    var
-                        Base64Convert: Codeunit "Base64 Convert";
-                        TempBlob: Codeunit "Temp Blob";
-                        InStr: InStream;
+            //         trigger OnAction()
+            //         var
+            //             Base64Convert: Codeunit "Base64 Convert";
+            //             TempBlob: Codeunit "Temp Blob";
+            //             InStr: InStream;
 
-                        EDMSFunctions: Codeunit "EDMS Functions";
-                        FileName: Text;
-                        FileContentsB64: Text;
+            //             EDMSFunctions: Codeunit "EDMS Functions";
+            //             FileName: Text;
+            //             FileContentsB64: Text;
 
-                        IDNumber: Text;
-                        ApplicationType: Label 'MA'; // Member Application
-                        PFNumber: Text;
-                    begin
-                        if Rec."Application No." <> '' then begin
-                            FileName := EDMSFunctions.PickEDMSFile(TempBlob);
+            //             IDNumber: Text;
+            //             ApplicationType: Label 'MA'; // Member Application
+            //             PFNumber: Text;
+            //         begin
+            //             if Rec."Application No." <> '' then begin
+            //                 FileName := EDMSFunctions.PickEDMSFile(TempBlob);
 
-                            TempBlob.CreateInStream(InStr);
-                            FileContentsB64 := Base64Convert.ToBase64(InStr);
+            //                 TempBlob.CreateInStream(InStr);
+            //                 FileContentsB64 := Base64Convert.ToBase64(InStr);
 
-                            if FileContentsB64 <> '' then begin
-                                UploadToEDMS(Rec, FileName, FileContentsB64);
-                            end;
-                        end else begin
-                            Error('Application No. is required for EDMS document upload');
-                        end;
-                    end;
-                }
-                action("EDMS File List")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Image = Documents;
-                    Promoted = true;
-                    PromotedCategory = Category8;
+            //                 if FileContentsB64 <> '' then begin
+            //                     UploadToEDMS(Rec, FileName, FileContentsB64);
+            //                 end;
+            //             end else begin
+            //                 Error('Application No. is required for EDMS document upload');
+            //             end;
+            //         end;
+            //     }
+            //     action("EDMS File List")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         Image = Documents;
+            //         Promoted = true;
+            //         PromotedCategory = Category8;
 
-                    RunObject = page "EDMS Files List";
-                    RunPageLink = "Application No." = field("Application No.");
-                    // RunPageMode = Create;
-                }
-            }
+            //         RunObject = page "EDMS Files List";
+            //         RunPageLink = "Application No." = field("Application No.");
+            //         // RunPageMode = Create;
+            //     }
+            // }
             group("IPRS Integration")
             {
                 action("IPRS File List")
