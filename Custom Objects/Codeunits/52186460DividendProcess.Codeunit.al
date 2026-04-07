@@ -641,7 +641,7 @@ Codeunit 52186460 "Dividend Process"
             DividendProgression.SETRANGE("Member No", CustMembr."No.");
             DividendProgression.SETRANGE(Year, PreviousYear);
             DividendProgression.SETRANGE(Forfeited, false);
-            DividendProgression.SETFILTER("Product Type", 'SCS');
+            DividendProgression.SETFILTER("Product Type", '4');
             DividendProgression.SETLOADFIELDS("Net Dividends");
             IF DividendProgression.FINDFIRST THEN BEGIN
                 DividendProgression.CALCSUMS(DividendProgression."Net Dividends");

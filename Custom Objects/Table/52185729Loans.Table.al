@@ -715,7 +715,7 @@ table 52185729 Loans
                 ShareCapAcc.RESET;
                 ShareCapAcc.SETRANGE(ShareCapAcc."Member No.", "Member No.");
                 // ShareCapAcc.SETRANGE(ShareCapAcc."Product Category", ShareCapAcc."Product Category"::"Share Capital");//reason for comment out:the data dont display share capital  category on saving account
-                ShareCapAcc.SETRANGE(ShareCapAcc."Product Type", 'SCS');
+                ShareCapAcc.SETRANGE(ShareCapAcc."Product Type", '4');
                 IF ShareCapAcc.FIND('-') THEN BEGIN
                     if SavProducts.Get(ShareCapAcc."Product Type") then begin
                         ShareCapAcc.CALCFIELDS(ShareCapAcc."Balance (LCY)");
@@ -1080,7 +1080,7 @@ table 52185729 Loans
                 ShareCapAcc.RESET;
                 ShareCapAcc.SETRANGE(ShareCapAcc."Member No.", "Member No.");
                 // ShareCapAcc.SETRANGE(ShareCapAcc."Product Category", ShareCapAcc."Product Category"::"Share Capital");//reason for comment out:the data dont display share capital  category on saving account
-                ShareCapAcc.SETRANGE(ShareCapAcc."Product Type", 'SCS');
+                ShareCapAcc.SETRANGE(ShareCapAcc."Product Type", '4');
                 IF ShareCapAcc.FIND('-') THEN BEGIN
                     if SavProducts.Get(ShareCapAcc."Product Type") then begin
                         ShareCapAcc.CALCFIELDS(ShareCapAcc."Balance (LCY)");
@@ -1839,7 +1839,7 @@ table 52185729 Loans
         field(51; Status; enum "Workflow Status Main Flags")
         {
 
-           
+
             // OptionCaption = 'Open,Pending Approval,Approved,Rejected,Deffered,Archived,Posted';
             // OptionMembers = Open,Pending,Approved,Rejected,Deffered,Archived,Posted;
             trigger OnValidate()
@@ -3941,7 +3941,7 @@ table 52185729 Loans
         "Amount To Disburse" := xRec."Amount To Disburse";
     end;
 
-  
+
     procedure ClearDataLoans()
     var
         AppraisalSalDetails: Record "Appraisal Salary Details";

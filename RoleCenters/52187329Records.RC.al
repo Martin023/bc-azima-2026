@@ -333,7 +333,7 @@ page 52187329 "Records"
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Savings Accounts';
-                    RunObject = page "Savings Account List";
+                    RunObject = page "Savings Accounts";;
                 }
                 // action("New Members")
                 // {
@@ -423,12 +423,6 @@ page 52187329 "Records"
                     ApplicationArea = Basic, Suite;
                     Caption = 'Saving Account Application';
                     RunObject = page "Savings Account Application";
-                }
-                action("Saving Accounts")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Savings Accounts List';
-                    RunObject = page "Savings Account List";
                 }
                 action("Savings Accounts Register List")
                 {

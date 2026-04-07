@@ -125,12 +125,6 @@ page 52187328 "Business Loans"
                     Caption = 'Member Groups';
                     RunObject = Page "Member Group List";
                 }
-                action("Savings Accounts")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Savings Accounts';
-                    RunObject = page "Savings Account List";
-                }
                 action("Savings Account Register")
                 {
                     ApplicationArea = All;

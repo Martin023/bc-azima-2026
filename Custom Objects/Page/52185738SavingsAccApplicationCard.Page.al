@@ -103,11 +103,6 @@ page 52185738 "Savings Acc. Application Card"
                     ApplicationArea = Basic, Suite;
                     Editable = AccNoEdit;
                 }
-                field("CDSC Broker"; Rec."CDSC Broker")
-                {
-                    ApplicationArea = All;
-                    Editable = AccNoEdit;
-                }
 
                 field("Date of Birth"; Rec."Date of Birth")
                 {
