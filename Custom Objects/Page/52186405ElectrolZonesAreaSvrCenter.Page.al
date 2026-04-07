@@ -28,6 +28,11 @@ page 52186405 "Electrol Zones/Area Svr Center"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Employer Code"; Rec."Employer Code")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+
             }
         }
         area(factboxes)

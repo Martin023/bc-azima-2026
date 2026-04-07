@@ -1293,6 +1293,10 @@ table 52185691 "Member Application"
         {
             Editable = False;
         }
+        field(1023; "Recruitment Location"; Code[100])
+        {
+            Editable = true;
+        }
     }
 
     keys

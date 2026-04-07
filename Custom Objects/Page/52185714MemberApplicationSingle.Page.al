@@ -627,7 +627,7 @@ page 52185714 "Member Application Single"
                 {
                     ApplicationArea = all;
                     Editable = SelfEmployed;
-                    //ShowMandatory = SelfEmployed;
+                    ShowMandatory = SelfEmployed;
 
 
                     trigger OnValidate()
@@ -772,6 +772,11 @@ page 52185714 "Member Application Single"
                     end;
                 }
                 field("Recruited By Name"; Rec."Recruited By Name")
+                {
+                    ApplicationArea = all;
+                    ShowMandatory = true;
+                }
+                field("recruitment Location"; Rec."Recruitment Location")
                 {
                     ApplicationArea = all;
                     ShowMandatory = true;

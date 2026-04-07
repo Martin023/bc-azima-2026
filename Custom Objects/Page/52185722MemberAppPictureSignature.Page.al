@@ -49,38 +49,38 @@ page 52185722 "Member App Picture & Signature"
         }
     }
 
-    actions
-    {
-        area(creation)
-        {
-            action("Take Picture")
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Take Picture';
-                Image = Camera;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
+    // actions
+    // {
+    //     area(creation)
+    //     {
+    //         action("Take Picture")
+    //         {
+    //             ApplicationArea = Basic, Suite;
+    //             Caption = 'Take Picture';
+    //             Image = Camera;
+    //             Promoted = true;
+    //             PromotedCategory = Process;
+    //             PromotedIsBig = true;
 
-                trigger OnAction()
-                var
-                    Camera: Codeunit Camera;
-                    Ins: InStream;
-                    Out: OutStream;
-                    FileName: Text;
-                begin
-                    // if Camera.IsAvailable() then begin
-                    //     if Camera.GetPicture(Ins, FileName) then begin
-                    //         Rec.Picture.CreateOutStream(Out);
-                    //         CopyStream(Out, Ins);
-                    //         Rec.Modify();
-                    //     end;
-                    // end else
-                    //     Message('Camera is not avalable');
-                end;
-            }
-        }
-    }
+    //             trigger OnAction()
+    //             var
+    //                 Camera: Codeunit Camera;
+    //                 Ins: InStream;
+    //                 Out: OutStream;
+    //                 FileName: Text;
+    //             begin
+    //                 // if Camera.IsAvailable() then begin
+    //                 //     if Camera.GetPicture(Ins, FileName) then begin
+    //                 //         Rec.Picture.CreateOutStream(Out);
+    //                 //         CopyStream(Out, Ins);
+    //                 //         Rec.Modify();
+    //                 //     end;
+    //                 // end else
+    //                 //     Message('Camera is not avalable');
+    //             end;
+    //         }
+    //     }
+    // }
 
     trigger OnAfterGetCurrRecord()
     begin

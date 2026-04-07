@@ -258,16 +258,22 @@ page 52185726 "Member Single"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("captured by"; Rec."captured by")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = false;
+                }
                 field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic, Suite;
                     Editable = true;
-                    Caption = 'Captured By';
+                    Caption = 'Created By';
                 }
                 field("Approved By"; Rec."Approved By")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'Approved and Created By';
+                    // Caption = 'Approved and Created By';
+
                 }
                 field("Date Approved"; Rec."Date Approved")
                 {
@@ -286,6 +292,27 @@ page 52185726 "Member Single"
                 field("Rejection Reason"; Rec."Rejection Reason")
                 {
 
+                }
+                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
+                {
+                    ApplicationArea = Basic, Suite;
+                    ShowMandatory = true;
+                }
+                field("Branch Name"; Rec."Branch Name")
+                {
+
+                }
+                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
+                {
+                    ApplicationArea = Basic, Suite;
+                    ShowMandatory = true;
+                }
+                field("Activity Name"; Rec."Activity Name")
+                { }
+                field("Phone No."; Rec."Phone No.")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = true;
                 }
 
             }
@@ -328,11 +355,11 @@ page 52185726 "Member Single"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Phone No."; Rec."Phone No.")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = true;
-                }
+                // field("Phone No."; Rec."Phone No.")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Editable = true;
+                // }
                 field("Office Telephone No."; Rec."Office Telephone No.")
                 {
                     ApplicationArea = Basic, Suite;
@@ -384,6 +411,7 @@ page 52185726 "Member Single"
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                     Caption = 'Company No.';
+                    ShowMandatory = true;
                 }
                 field("Allow Retiree M-Loans"; Rec."Allow Retiree M-Loans")
                 {
@@ -401,22 +429,22 @@ page 52185726 "Member Single"
                 }
                 field("Contribution Mode"; Rec."Contribution Mode")
                 { }
-                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ShowMandatory = true;
-                }
-                field("Branch Name"; Rec."Branch Name")
-                {
+                // field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     ShowMandatory = true;
+                // }
+                // field("Branch Name"; Rec."Branch Name")
+                // {
 
-                }
-                field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ShowMandatory = true;
-                }
-                field("Activity Name"; Rec."Activity Name")
-                { }
+                // }
+                // field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     ShowMandatory = true;
+                // }
+                // field("Activity Name"; Rec."Activity Name")
+                // { }
                 // field("Relationship Manager"; Rec."Relationship Manager")
                 // {
                 //     ApplicationArea = Basic, Suite;
@@ -427,6 +455,11 @@ page 52185726 "Member Single"
                     ApplicationArea = Basic, Suite;
                 }
                 field("Introduced By"; Rec."Recruited By")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+
+                field ("Recruitment Location"; Rec."Recruitment Location")
                 {
                     ApplicationArea = Basic, Suite;
                 }

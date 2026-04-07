@@ -976,6 +976,9 @@ table 52185700 Members
                 if "Approved By" = '' then Error(FieldEmptyError);
             end;
         }
+
+
+
         field(52; "Bank Code"; Code[20])
         {
             Description = 'LookUp to Banks Code Structure Table';
@@ -1822,6 +1825,19 @@ table 52185700 Members
         {
             Caption = 'Old Account Name';
             Editable = false;
+        }
+        field(1055; "Captured By"; Code[100])
+        {
+            trigger OnValidate()
+            var
+                myInt: Integer;
+            begin
+                if "Captured By" = '' then Error(FieldEmptyError);
+            end;
+        }
+        field(1056; "Recruitment Location"; Code[100]){
+                Caption = 'Recruitment Location';
+                Editable = true;
         }
     }
 
