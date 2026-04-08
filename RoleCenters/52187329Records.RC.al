@@ -66,6 +66,13 @@ page 52187329 "Records"
                         //RunPageLink = Status = CONST(Approved);
                         RunPageView = where(Status = const(Approved), "Account Type" = const("Single Member Account"));
                     }
+                    action("Created Member Application List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Created Member Application List';
+                        RunObject = Page "Open Member Readmission List";
+                        RunPageView = where(Created = const(true), "Account Type" = const("Single Member Account"));
+                    }
                     action("Rejected Member Applications")
                     {
                         Caption = 'Rejected Member Applications';
@@ -160,6 +167,14 @@ page 52187329 "Records"
                         Caption = 'Approved Member Application List';
                         RunObject = Page "Open Member Readmission List";
                         RunPageView = where("Type of Application" = const(Readmission), "Account Type" = const("Single Member Account"));
+                    }
+                    action("Created Member Readmission List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Created Member Readmission List';
+                        RunObject = Page "Open Member Readmission List";
+                        RunPageView = where("Type of Application" = const(Readmission), "Account Type" = const("Single Member Account"), Created = const(true));
+
                     }
                     action("Deffered Member Application List")
                     {
@@ -333,7 +348,8 @@ page 52187329 "Records"
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Savings Accounts';
-                    RunObject = page "Savings Accounts";;
+                    RunObject = page "Savings Accounts";
+                    ;
                 }
                 // action("New Members")
                 // {
