@@ -19,7 +19,9 @@ table 52185739 "Loan Guarantors and Security"
             else
             IF ("Guarantor Type" = CONST(Collateral)) Members."No." where(Status = filter(Active))
             ELSE
-            IF ("Guarantor Type" = FILTER(Lien)) "Savings Accounts"."No." WHERE("Lien Placed" = FILTER(<> 0));
+            IF ("Guarantor Type" = FILTER(Lien)) "Savings Accounts"."No." WHERE("Lien Placed" = FILTER(<> 0))
+            ELSE
+            IF ("Guarantor Type" = FILTER("Fixed Deposit")) "Fixed Deposit Contract"."No." WHERE("Fixed Deposit Status" = FILTER(Active));
 
             trigger OnValidate()
             var
@@ -37,6 +39,7 @@ table 52185739 "Loan Guarantors and Security"
                 AppliedAmount: Decimal;
                 GlobalFunctions: Codeunit "Global Functions";
                 LoanNo: Code[20];
+                FixedDeposit: Record "Fixed Deposit Contract";
             begin
 
                 GenSetUp.Get;
@@ -48,6 +51,13 @@ table 52185739 "Loan Guarantors and Security"
                     SaVingAc.SetRange(SaVingAc."No.", Rec."Savings Account No./Member No.");
                     if SaVingAc.FindFirst() then begin
                         Rec."Amount Guaranteed" := SaVingAc."Lien Placed";
+                    end;
+                end;
+                if "Guarantor Type" = "Guarantor Type"::"Fixed Deposit" then begin
+                    FixedDeposit.Reset();
+                    FixedDeposit.SetRange(FixedDeposit."No.", Rec."Savings Account No./Member No.");
+                    if FixedDeposit.FindFirst() then begin
+                        Rec."Amount Guaranteed" := FixedDeposit."Fixed Deposit Amount";
                     end;
                 end;
 
@@ -127,6 +137,18 @@ table 52185739 "Loan Guarantors and Security"
                         end;
                     end;
                 end;
+                if "Guarantor Type" = "Guarantor Type"::"Fixed Deposit" then begin
+                    if LoanApp.Get(Rec."Loan No") then begin
+                        ProductFactory.Reset();
+                        ProductFactory.SetRange("Product ID", LoanApp."Loan Product Type");
+                        // ProductFactory.SetRange("Source Unit", ProductFactory."Source Unit"::BOSA);
+                        if ProductFactory.FindFirst() then begin
+                            if (ProductFactory."Loan Security" <> ProductFactory."Loan Security"::"Guarantors and Collateral") and (ProductFactory."Loan Security" <> ProductFactory."Loan Security"::"Fixed Deposit Only") then begin
+                                Error('The ' + ProductFactory."Product Description" + '  product does not support Fixed deposits as loan security.');
+                            end;
+                        end;
+                    end;
+                end;
                 //*************************RESTRICT GUARANTOR TYPE BASED ON LOAN SECURITY*******************************//
 
                 //Set Member Guaranteed
@@ -139,15 +161,15 @@ table 52185739 "Loan Guarantors and Security"
                 if "Guarantor Type" = "Guarantor Type"::Guarantor then begin
                     SELFLOAN.Reset;
                     SELFLOAN.SetRange("Loan No.", "Loan No");
-                    if SELFLOAN.Find('-') then
+                    if SELFLOAN.Find('-') then begin
                         SavingsAccounts.Reset;
-                    SavingsAccounts.SetRange("Member No.", SELFLOAN."Member No.");
-                    SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
-                    if SavingsAccounts.Find('-') then begin
-                        if SavingsAccounts."No." = "Savings Account No./Member No." then
-                            "Self Guarantee" := true else
-                            "Self Guarantee" := false;
-
+                        SavingsAccounts.SetRange("Member No.", SELFLOAN."Member No.");
+                        SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
+                        if SavingsAccounts.Find('-') then begin
+                            if SavingsAccounts."No." = "Savings Account No./Member No." then
+                                "Self Guarantee" := true else
+                                "Self Guarantee" := false;
+                        end;
                     end;
 
                     //Evaluate guarantor basic info
@@ -270,6 +292,18 @@ table 52185739 "Loan Guarantors and Security"
                     // end;
                     GenSetUp.Get;
                     if LoanApp.Get(Rec."Loan No") then begin
+                        if FixedDeposit.get(rec."Savings Account No./Member No.") then begin
+                            Members.Get(FixedDeposit."Member No.");
+                            Name := Members.Name;
+                            "Staff/Payroll No." := Members."Payroll/Staff No.";
+                            // "Loan Balance":=Cust."Balance (LCY)";
+                            "Deposits/Shares" := FixedDeposit."Fixed Deposit Amount";
+                            // "Amount Guaranteed" := cust.GetAvailableBalance(cust."No.");
+                            "ID No." := Members."Primary Identification";
+                            "Member No" := Members."No.";
+                            Name := Members.Name;
+                            "Phone No." := Members."Phone No.";
+                        end;
 
                         // maxamountguarantee := GenSetUp."Maximum Amount to Guarantee";
                         // Totalguarantee := "Amount Guaranteed" + "Total Guaranteed";
@@ -567,8 +601,8 @@ table 52185739 "Loan Guarantors and Security"
         }
         field(26; "Guarantor Type"; Option)
         {
-            OptionCaption = 'Guarantor,Collateral,Lien';
-            OptionMembers = Guarantor,Collateral,Lien;
+            OptionCaption = 'Guarantor,Collateral,Lien,Fixed Deposit';
+            OptionMembers = Guarantor,Collateral,Lien,"Fixed Deposit";
 
             trigger OnValidate()
             begin

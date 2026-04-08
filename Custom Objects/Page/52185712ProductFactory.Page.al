@@ -34,10 +34,12 @@ page 52185712 "Product Factory"
                 field("Min. Customer Age"; Rec."Min. Customer Age")
                 {
                     ApplicationArea = Basic, Suite;
+                    ShowMandatory = true;
                 }
                 field("Max. Member Age"; Rec."Max. Member Age")
                 {
                     ApplicationArea = Basic, Suite;
+                    ShowMandatory = true;
                 }
                 field("Interest Rate (Min.)"; Rec."Interest Rate (Min.)")
                 {
@@ -1256,6 +1258,7 @@ page 52185712 "Product Factory"
                     if Rec."Product Class Type" = Rec."Product Class Type"::Loan then begin
                         Rec.TestField("Product ID");
                         Rec.TestField("Product Description");
+                        rec.TestField("Min. Customer Age");
                         if not Rec."Guarantor Loan" then
                             Rec.TestField("Interest Rate (Min.)");
 
@@ -1324,7 +1327,7 @@ page 52185712 "Product Factory"
 
                 trigger OnAction()
                 var
-                  ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+                    ApprovalsMgmt: Codeunit "Approvals Mgmt.";
 
                 begin
                     VarVariant := Rec;
