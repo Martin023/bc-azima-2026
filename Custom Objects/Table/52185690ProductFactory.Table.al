@@ -984,7 +984,8 @@ table 52185690 "Product Factory"
         }
         field(10027; "Loan Security"; Option)
         {
-            OptionMembers = " ","Guarantors and Collateral","Guarantors Only","Collateral Only";
+            OptionMembers = " ","Guarantors and Collateral","Guarantors Only","Collateral Only","Fixed Deposit Only";
+            OptionCaption = ' ,All,Guarantors Only,Collateral Only,Fixed Deposit Only';
         }
         field(10028; "Auto Open Group Account"; Boolean)
         {
