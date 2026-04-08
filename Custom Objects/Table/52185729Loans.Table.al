@@ -1553,7 +1553,7 @@ table 52185729 Loans
                         "Repayment Start Date" := CalcDate(ProdFac."Grace Period - Principle", "Disbursement Date");
 
                         // Apply repayment start date logic based on loan application date
-                        if Date2DMY("Repayment Start Date", 1) <= 10 then
+                        if Date2DMY("Repayment Start Date", 1) <= 15 then
                             "Repayment Start Date" := CalcDate('CM', "Repayment Start Date") // End of current month
                         else
                             "Repayment Start Date" := CalcDate('CM+1M', "Repayment Start Date"); // End of following month
@@ -1564,7 +1564,7 @@ table 52185729 Loans
 
                     end else begin
                         // No grace period, apply repayment start date logic
-                        if Date2DMY("Disbursement Date", 1) <= 10 then
+                        if Date2DMY("Disbursement Date", 1) <= 15 then
                             "Repayment Start Date" := CalcDate('CM', "Disbursement Date") // End of current month
                         else
                             "Repayment Start Date" := CalcDate('CM+1M', "Disbursement Date"); // End of following month

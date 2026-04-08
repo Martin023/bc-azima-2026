@@ -348,8 +348,8 @@ table 52185739 "Loan Guarantors and Security"
                         end;
                     end else begin
                         if Cust.Get("Savings Account No./Member No.") then begin
-                            if Cust.Status <> Cust.Status::Active then begin
-                                Error('Member %2 No. %1 is not an Active Member', Cust."No.", Cust.Name);
+                            if (Cust.Status <> Cust.Status::Active) and (Cust.Status <> Cust.Status::Dormant) then begin
+                                Error('Member %2 No. %1 is not an Active Member or Dormant Member and therefore cannot be a guarantor', Cust."No.", Cust.Name);
                             end;
                             Cust.CalcFields(Cust."Balance (LCY)");
                             Name := Cust.Name;
