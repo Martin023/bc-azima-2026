@@ -1098,8 +1098,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
             Database::"Payments Header Board":
                 exit(CheckApprovalsWorkflowEnabledCode(Variant, RunWorkflowOnSendBoardPaymentForApprovalCode));
 
-            Database::"Payments Header Delegates":
-                exit(CheckApprovalsWorkflowEnabledCode(Variant, RunWorkflowOnSendDelegatesAppForApprovalCode));
+           
             Database::"InterBank Transfers":
                 exit(CheckApprovalsWorkflowEnabledCode(Variant, RunWorkflowOnSendInterbankForApprovalCode));
             Database::"Staff Claims Header":
@@ -1756,11 +1755,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         RunWorkflowOnSendBoardPaymentForApprovalCode, Database::"Payments Header Board", OnSendBoardPaymentApprovalRequestTxt, 0, false);
         WorkFlowEventHandling.AddEventToLibrary(
         RunWorkflowOnCancelBoardPaymentForApprovalCode, Database::"Payments Header Board", OnCancelBoardPaymentApprovalRequestTxt, 0, false);
-        //Delegates
-        WorkFlowEventHandling.AddEventToLibrary(
-        RunWorkflowOnSendDelegatesAppForApprovalCode, Database::"Payments Header Delegates", OnSendDelegateAppApprovalRequestTxt, 0, false);
-        WorkFlowEventHandling.AddEventToLibrary(
-        RunWorkflowOnCancelDelegatesAppForApprovalCode, Database::"Payments Header Delegates", OnCancelDelegatesAppApprovalRequestTxt, 0, false);
 
         WorkFlowEventHandling.AddEventToLibrary(
         RunWorkflowOnSendInterbankForApprovalCode, Database::"InterBank Transfers", OnSendInterbankApprovalRequestTxt, 0, false);
@@ -2410,10 +2404,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
             Database::"Payments Header":
                 WorkflowManagement.HandleEvent(RunWorkflowOnSendPaymentForApprovalCode, Variant);
             Database::"Payments Header Board":
-                WorkflowManagement.HandleEvent(RunWorkflowOnSendBoardPaymentForApprovalCode, Variant);
-            //Delegates
-            Database::"Payments Header Delegates":
-                WorkflowManagement.HandleEvent(RunWorkflowOnSendDelegatesAppForApprovalCode, Variant);
+                WorkflowManagement.HandleEvent(RunWorkflowOnSendBoardPaymentForApprovalCode, Variant);           
             Database::"InterBank Transfers":
                 WorkflowManagement.HandleEvent(RunWorkflowOnSendInterbankForApprovalCode, Variant);
             Database::"Staff Claims Header":
@@ -2891,9 +2882,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                 WorkflowManagement.HandleEvent(RunWorkflowOnCancelPaymentForApprovalCode, Variant);
             Database::"Payments Header Board":
                 WorkflowManagement.HandleEvent(RunWorkflowOnCancelBoardPaymentForApprovalCode, Variant);
-            //Delegates
-            Database::"Payments Header Delegates":
-                WorkflowManagement.HandleEvent(RunWorkflowOnCancelDelegatesAppForApprovalCode, Variant);
+           
             Database::"Guarantors Substitution":
                 WorkflowManagement.HandleEvent(RunWorkflowOnCancelGuarantorSubstitutionAppForApprovalCode, Variant);
 
@@ -8505,8 +8494,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         MortDoc: Record 52186089;
         SalaryAgreement: Record 52186037;
         HREmployees: Record 52185650;
-        //PermissionRequisition: Record 52186039;
-        PaymentsHeaderDelegates: Record 52185897;
         SkyVirtualMember: Record 52185499;
         ElectoralZones: Record 52186239;
         DelegateOfficials: Record 52186240;
@@ -9258,15 +9245,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                     PaymentsHeaderBoard.modify(true);
                     Variant := PaymentsHeaderBoard;
                 end;
-            //Delegates
-            Database::"Payments Header Delegates":
-                begin
-                    RecRef.SetTable(PaymentsHeaderDelegates);
-                    PaymentsHeaderDelegates.Validate(Status, PaymentsHeaderDelegates.Status::Pending);
-                    PaymentsHeaderDelegates.modify(true);
-                    Variant := PaymentsHeaderDelegates;
-                end;
-
+            
             Database::Vendor:
                 begin
                     RecRef.SetTable(Vendor);
@@ -9954,7 +9933,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         SalaryAgreement: Record 52186037;
         HREmployees: Record 52185650;
         //PermissionRequisition: Record 52186039;
-        PaymentsHeaderDelegates: Record 52185897;
         SkyVirtualMember: Record 52185499;
         ElectoralZones: Record 52186239;
         DelegateOfficials: Record 52186240;
@@ -10763,14 +10741,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                     PaymentsHeaderBoard.Validate(Status, PaymentsHeaderBoard.Status::"Pending Approval");
                     PaymentsHeaderBoard.modify(true);
                     Variant := PaymentsHeaderBoard;
-                end;
-            //Delegates
-            Database::"Payments Header Delegates":
-                begin
-                    RecRef.SetTable(PaymentsHeaderDelegates);
-                    PaymentsHeaderDelegates.Validate(Status, PaymentsHeaderDelegates.Status::"Pending Approval");
-                    PaymentsHeaderDelegates.modify(true);
-                    Variant := PaymentsHeaderDelegates;
                 end;
 
             Database::Vendor:

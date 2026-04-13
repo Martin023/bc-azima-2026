@@ -344,18 +344,18 @@ table 52185729 Loans
                     until ApplDocs.Next = 0;
                 end;
 
-                //Fixed DepositType
-                if ProdFac."Repay Mode" = ProdFac."Repay Mode"::"Fixed Deposit" then begin
-                    SavingsAccounts.Reset;
-                    SavingsAccounts.SetRange(SavingsAccounts."Member No.", "Member No.");
-                    SavingsAccounts.SetRange(SavingsAccounts."Product Category", SavingsAccounts."Product Category"::"Fixed Deposit");
-                    SavingsAccounts.SetRange(SavingsAccounts."Fixed Deposit Status", SavingsAccounts."Fixed Deposit Status"::Active);
-                    if not SavingsAccounts.Find('-') then begin
-                        if "Dummy Appraisal" = false then
-                            Error(Text006, ProdFac."Ordinary Default Intallments") else
-                            Message(Text006, ProdFac."Ordinary Default Intallments")
-                    end;
-                end;
+                // //Fixed DepositType
+                // if ProdFac."Repay Mode" = ProdFac."Repay Mode"::"Fixed Deposit" then begin
+                //     SavingsAccounts.Reset;
+                //     SavingsAccounts.SetRange(SavingsAccounts."Member No.", "Member No.");
+                //     SavingsAccounts.SetRange(SavingsAccounts."Product Category", SavingsAccounts."Product Category"::"Fixed Deposit");
+                //     SavingsAccounts.SetRange(SavingsAccounts."Fixed Deposit Status", SavingsAccounts."Fixed Deposit Status"::Active);
+                //     if not SavingsAccounts.Find('-') then begin
+                //         if "Dummy Appraisal" = false then
+                //             Error(Text006, ProdFac."Ordinary Default Intallments") else
+                //             Message(Text006, ProdFac."Ordinary Default Intallments")
+                //     end;
+                // end;
                 if (ProdFac."Repay Mode" = ProdFac."Repay Mode"::Dividend) then begin
                     DivloanBal := 0;
 
@@ -951,20 +951,20 @@ table 52185729 Loans
                     end;
                 end;
 
-                //Fixed DepositType
-                if ProdFac."Repay Mode" = ProdFac."Repay Mode"::"Fixed Deposit" then begin
-                    SavingsAccounts.Reset;
-                    SavingsAccounts.SetRange(SavingsAccounts."Member No.", "Member No.");
-                    SavingsAccounts.SetRange(SavingsAccounts."Product Category", SavingsAccounts."Product Category"::"Fixed Deposit");
-                    SavingsAccounts.SetRange(SavingsAccounts."Fixed Deposit Status", SavingsAccounts."Fixed Deposit Status"::Active);
-                    if SavingsAccounts.Find('-') then begin
-                        // REPEAT
-                        if "Requested Amount" > SavingsAccounts."Fixed Deposit Amount" then begin
-                            if "Dummy Appraisal" = false then Error(Err008) else Message(Err008);
-                        end;
-                        //  UNTIL SavingsAccounts.NEXT=0;
-                    end;
-                end;
+                // //Fixed DepositType
+                // if ProdFac."Repay Mode" = ProdFac."Repay Mode"::"Fixed Deposit" then begin
+                //     SavingsAccounts.Reset;
+                //     SavingsAccounts.SetRange(SavingsAccounts."Member No.", "Member No.");
+                //     SavingsAccounts.SetRange(SavingsAccounts."Product Category", SavingsAccounts."Product Category"::"Fixed Deposit");
+                //     SavingsAccounts.SetRange(SavingsAccounts."Fixed Deposit Status", SavingsAccounts."Fixed Deposit Status"::Active);
+                //     if SavingsAccounts.Find('-') then begin
+                //         // REPEAT
+                //         if "Requested Amount" > SavingsAccounts."Fixed Deposit Amount" then begin
+                //             if "Dummy Appraisal" = false then Error(Err008) else Message(Err008);
+                //         end;
+                //         //  UNTIL SavingsAccounts.NEXT=0;
+                //     end;
+                // end;
 
                 //Div Discounting
                 IF ProdFac.GET("Loan Product Type") THEN BEGIN

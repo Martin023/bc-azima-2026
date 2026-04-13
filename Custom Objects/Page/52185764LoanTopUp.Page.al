@@ -4,6 +4,7 @@ page 52185764 "Loan Top Up"
     SourceTable = "Loans Top up";
     ApplicationArea = Basic, Suite;
     UsageCategory = Lists;
+    Caption = 'Loan Refinancing';
 
     layout
     {
@@ -48,38 +49,38 @@ page 52185764 "Loan Top Up"
                     ApplicationArea = Basic, Suite;
 
                 }
-                field("Daily Interest"; Rec."Daily Interest")
-                { ApplicationArea = Basic, Suite; }
+                // field("Daily Interest"; Rec."Daily Interest")
+                // { ApplicationArea = Basic, Suite; }
                 field("Total Top Up"; Rec."Total Top Up")
                 {
                     ApplicationArea = Basic, Suite;
 
                 }
-                field("Monthly Repayment"; Rec."Monthly Repayment")
-                {
-                    ApplicationArea = Basic, Suite;
+                // field("Monthly Repayment"; Rec."Monthly Repayment")
+                // {
+                //     ApplicationArea = Basic, Suite;
 
-                }
-                field("Interest Paid"; Rec."Interest Paid")
-                {
-                    ApplicationArea = Basic, Suite;
+                // }
+                // field("Interest Paid"; Rec."Interest Paid")
+                // {
+                //     ApplicationArea = Basic, Suite;
 
-                }
+                // }
                 field("Outstanding Balance"; Rec."Outstanding Balance")
                 {
                     ApplicationArea = Basic, Suite;
 
                 }
-                field("Interest Rate"; Rec."Interest Rate")
-                {
-                    ApplicationArea = Basic, Suite;
+                // field("Interest Rate"; Rec."Interest Rate")
+                // {
+                //     ApplicationArea = Basic, Suite;
 
-                }
-                field("ID. NO"; Rec."ID. NO")
-                {
-                    ApplicationArea = Basic, Suite;
+                // }
+                // field("ID. NO"; Rec."ID. NO")
+                // {
+                //     ApplicationArea = Basic, Suite;
 
-                }
+                // }
                 field(Commision; Rec.Commision)
                 {
                     ApplicationArea = Basic, Suite;
@@ -90,11 +91,11 @@ page 52185764 "Loan Top Up"
                     ApplicationArea = Basic, Suite;
 
                 }
-                field("Insurance rebate"; Rec."Insurance rebate")
-                {
-                    ApplicationArea = Basic, Suite;
+                // field("Insurance rebate"; Rec."Insurance rebate")
+                // {
+                //     ApplicationArea = Basic, Suite;
 
-                }
+                // }
                 field("Loan Account"; Rec."Loan Account")
                 {
                     ApplicationArea = Basic, Suite;

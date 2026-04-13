@@ -2630,12 +2630,6 @@ page 52187058 "ICT Department"
                             Caption = 'Payment Voucher Staff';
                             RunObject = page "Payment Voucher Staff List";
                         }
-                        action("Payment Voucher Delegate")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Payment Voucher Delegate';
-                            RunObject = page "Payment Voucher Delegate  List";
-                        }
                         action("Bank & Cash Transfers")
                         {
                             ApplicationArea = Basic, Suite;

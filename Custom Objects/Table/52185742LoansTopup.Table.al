@@ -149,7 +149,7 @@ table 52185742 "Loans Top up"
 
             trigger OnValidate()
             begin
-                "Total Top Up" := "Principle Top Up" + "Interest Top Up" + Commision;
+                "Total Top Up" := "Principle Top Up" + "Interest Top Up";
 
                 Loans.Reset;
                 Loans.SetRange(Loans."Loan No.", "Loan Top Up");

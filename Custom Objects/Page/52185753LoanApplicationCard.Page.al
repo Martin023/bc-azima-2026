@@ -28,12 +28,7 @@ page 52185753 "Loan Application Card"
                     Editable = false;
                 }
 
-                field("Staff No"; Rec."Staff No")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Staff No';
-                    Editable = ApplicationDetailsEdit;
-                }
+
                 field("Member No."; Rec."Member No.")
                 {
                     ApplicationArea = Basic, Suite;
@@ -67,17 +62,18 @@ page 52185753 "Loan Application Card"
                         end;
                     end;
                 }
+                field("Staff No"; Rec."Staff No")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Staff No';
+                    Editable = ApplicationDetailsEdit;
+                }
                 field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
-                field("SAD No."; Rec."SAD No.")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = SADVisible;
-                    Visible = false;
-                }
+               
                 field("Application Date"; Rec."Application Date")
                 {
                     ApplicationArea = Basic, Suite;
@@ -627,104 +623,6 @@ page 52185753 "Loan Application Card"
                     Editable = false;
                 }
             }
-            group("Mortage Loan Mandatory Requirement")
-            {
-                Caption = 'Mortage Loan Mandatory Requirement';
-                Editable = ApplicationDetailsEdit;
-                Visible = IsMortgageLoan;
-                field("Title/Lease Provided"; Rec."Title/Lease Provided")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Title/Lease No"; Rec."Title/Lease No")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Three Months Payslip"; Rec."Three Months Payslip")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Mortgage Protection Policy"; Rec."Mortgage Protection Policy")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Mortgage Protection Policy No"; Rec."Mortgage Protection Policy No")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Domestic Insurance Cover"; Rec."Domestic Insurance Cover")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Domestic Insurance Cover No"; Rec."Domestic Insurance Cover No")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Employer Introduction Letter"; Rec."Employer Introduction Letter")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Six Months Bank Statement"; Rec."Six Months Bank Statement")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("National ID"; Rec."National ID")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("ID No."; Rec."ID No.")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("KRA PIN Copy"; Rec."KRA PIN Copy")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("KRA PIN"; Rec."KRA PIN")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Vendor Letter/Sale Agreement"; Rec."Vendor Letter/Sale Agreement")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Offer Letter/Draft Sale agreement';
-                }
-                field("Injury Benefit Insurance"; Rec."Injury Benefit Insurance")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = IfJenga;
-                }
-                field("Drawdown Schedule"; Rec."Drawdown Schedule")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = IfJenga;
-                }
-                field("Mortgage Insurance Amount"; Rec."Mortgage Insurance Amount")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-            }
-            group("Shamba Loan Mandatory Requirements")
-            {
-                Caption = 'Shamba Loan Mandatory Requirements';
-                Visible = IsShambaLoan;
-                field("Sale Agreement"; Rec."Sale Agreement")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("20% Payment Slip"; Rec."20% Payment Slip")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Land Valuation Done"; Rec."Land Valuation Done")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Title Deed"; Rec."Title Deed")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-            }
             group("External STO Details")
             {
                 Caption = 'External STO Details';
@@ -782,7 +680,6 @@ page 52185753 "Loan Application Card"
                 Caption = 'Member Images';
                 SubPageLink = "Member No" = FIELD("Member No.");
             }
-            //As Requested for easier navigation
             part("Member FactBox"; "Member FactBox")
             {
                 ApplicationArea = Basic;
@@ -797,26 +694,26 @@ page 52185753 "Loan Application Card"
     {
         area(creation)
         {
-            action("Loan Payment Schedule")
-            {
-                Visible = false;
-                ApplicationArea = Basic, Suite;
-                Image = ReturnCustomerBill;
-                Promoted = true;
-                PromotedCategory = Process;
-                RunObject = Page "Loan Payment Schedule";
-                RunPageLink = "Loan No." = FIELD("Loan No.");
-            }
-            action(AssinedUser)
-            {
-                ApplicationArea = all;
-                Image = Task;
-                Promoted = true;
-                PromotedCategory = Process;
-                RunObject = Page "User Tasks";
-                RunPageLink = "Record ID" = FIELD("Loan No.");
-                Caption = 'User Assigned';
-            }
+            // action("Loan Payment Schedule")
+            // {
+            //     Visible = false;
+            //     ApplicationArea = Basic, Suite;
+            //     Image = ReturnCustomerBill;
+            //     Promoted = true;
+            //     PromotedCategory = Process;
+            //     RunObject = Page "Loan Payment Schedule";
+            //     RunPageLink = "Loan No." = FIELD("Loan No.");
+            // }
+            // action(AssinedUser)
+            // {
+            //     ApplicationArea = all;
+            //     Image = Task;
+            //     Promoted = true;
+            //     PromotedCategory = Process;
+            //     RunObject = Page "User Tasks";
+            //     RunPageLink = "Record ID" = FIELD("Loan No.");
+            //     Caption = 'User Assigned';
+            // }
             action("Create Loan Account")
             {
                 ApplicationArea = Basic, Suite;
@@ -835,6 +732,7 @@ page 52185753 "Loan Application Card"
 
                         end;
                     Rec.Modify;
+                    Message('Loan account created successfully');
                 end;
             }
             action("Update Disbursement Account")
@@ -901,6 +799,7 @@ page 52185753 "Loan Application Card"
             }
             action("Loan Top Ups")
             {
+                Caption = 'Loan Refinancing';
                 ApplicationArea = Basic, Suite;
                 Image = Add;
                 Promoted = true;
@@ -910,28 +809,28 @@ page 52185753 "Loan Application Card"
                 RunPageLink = "Loan No." = FIELD("Loan No."),
                               "Client Code" = FIELD("Member No.");
             }
-            action("Loan Appraisal Summary")
-            {
-                Image = Document;
-                ApplicationArea = Basic, Suite;
-                Promoted = true;
-                Visible = true;
-                PromotedCategory = Process;
-                Caption = 'Loan Appraisal Summary';
-                PromotedIsBig = true;
-                RunObject = Page "Loan Appraisals";
-                RunPageLink = "Loan No." = FIELD("Loan No.");
+            // action("Loan Appraisal Summary")
+            // {
+            //     Image = Document;
+            //     ApplicationArea = Basic, Suite;
+            //     Promoted = true;
+            //     Visible = true;
+            //     PromotedCategory = Process;
+            //     Caption = 'Loan Appraisal Summary';
+            //     PromotedIsBig = true;
+            //     RunObject = Page "Loan Appraisals";
+            //     RunPageLink = "Loan No." = FIELD("Loan No.");
 
-                trigger OnAction()
-                var
-                    myInt: Integer;
-                    GloabalFunc: Codeunit "Global Functions";
-                begin
-                    GloabalFunc.InsertAppraisalSummary(Rec."Loan No.");
+            //     trigger OnAction()
+            //     var
+            //         myInt: Integer;
+            //         GloabalFunc: Codeunit "Global Functions";
+            //     begin
+            //         GloabalFunc.InsertAppraisalSummary(Rec."Loan No.");
 
-                end;
+            //     end;
 
-            }
+            // }
 
             action("Repayment Method")
             {
@@ -958,6 +857,17 @@ page 52185753 "Loan Application Card"
                             RepMethods.Insert;
                         end;
                     end;
+                    if Rec."Appraisal Parameter Type" = Rec."Appraisal Parameter Type"::Salary then begin
+                        RepMethods.Reset;
+                        RepMethods.SetRange("Loan No.", Rec."Loan No.");
+                        if not RepMethods.Find('-') then begin
+                            RepMethods."Loan No." := Rec."Loan No.";
+                            RepMethods.Amount := Rec.Repayment;
+                            RepMethods."Member No." := Rec."Member No.";
+                            RepMethods."Payment Method" := RepMethods."Payment Method"::Salary;
+                            RepMethods.Insert;
+                        end;
+                    end;
                 end;
             }
 
@@ -972,16 +882,16 @@ page 52185753 "Loan Application Card"
                 RunObject = Page "Other Commitments Clearance";
                 RunPageLink = "Loan No." = FIELD("Loan No.");
             }
-            action("Asset Finance Deduction")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = BarCode;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-                RunObject = Page "Asset Finance Loans";
-                RunPageLink = "Loan No." = FIELD("Loan No.");
-            }
+            // action("Asset Finance Deduction")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = BarCode;
+            //     Promoted = true;
+            //     PromotedCategory = Process;
+            //     PromotedIsBig = true;
+            //     RunObject = Page "Asset Finance Loans";
+            //     RunPageLink = "Loan No." = FIELD("Loan No.");
+            // }
             action("Loan Appraisal Comments")
             {
                 ApplicationArea = Basic, Suite;
@@ -1049,18 +959,18 @@ page 52185753 "Loan Application Card"
                 end;
             }
 
-            action("Loan Collateral")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = SocialSecurity;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-                RunObject = Page "Loan Collaterals1";
-                RunPageLink = "Loan No." = FIELD("Loan No."),
-                              "Client Code" = FIELD("Member No.");
-                Visible = false;
-            }
+            // action("Loan Collateral")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = SocialSecurity;
+            //     Promoted = true;
+            //     PromotedCategory = Process;
+            //     PromotedIsBig = true;
+            //     RunObject = Page "Loan Collaterals1";
+            //     RunPageLink = "Loan No." = FIELD("Loan No."),
+            //                   "Client Code" = FIELD("Member No.");
+            //     Visible = false;
+            // }
             action("Generate Repayment  Schedule")
             {
                 ApplicationArea = Basic, Suite;
@@ -1255,95 +1165,79 @@ page 52185753 "Loan Application Card"
                 RunPageLink = "Loan Application No." = FIELD("Loan No.");
             }
 
-            action("Business Income")
-            {
-                ApplicationArea = Basic, Suite;
-                Promoted = true;
-                PromotedCategory = "Report";
-                PromotedIsBig = true;
-                RunObject = Page "Business Incomes";
-                RunPageLink = "Loan No." = FIELD("Loan No.");
+            // action("Business Income")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Promoted = true;
+            //     PromotedCategory = "Report";
+            //     PromotedIsBig = true;
+            //     RunObject = Page "Business Incomes";
+            //     RunPageLink = "Loan No." = FIELD("Loan No.");
 
-                trigger OnAction()
-                begin
-                    //LoanProcess.BusinessLoan(Rec);
-                end;
-            }
+            //     trigger OnAction()
+            //     begin
+            //         //LoanProcess.BusinessLoan(Rec);
+            //     end;
+            // }
 
-            action("Financial Business Appraisal")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = BankAccountStatement;
-                Promoted = true;
-                PromotedCategory = "Report";
-                PromotedIsBig = true;
-                RunObject = Page "Business Appraisals";
-                RunPageLink = "Loan No." = FIELD("Loan No.");
-                Visible = true;
+            // action("Financial Business Appraisal")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = BankAccountStatement;
+            //     Promoted = true;
+            //     PromotedCategory = "Report";
+            //     PromotedIsBig = true;
+            //     RunObject = Page "Business Appraisals";
+            //     RunPageLink = "Loan No." = FIELD("Loan No.");
+            //     Visible = true;
 
-                trigger OnAction()
-                begin
-                    //Load defaults
+            //     trigger OnAction()
+            //     begin
+            //         //Load defaults
 
-                    if Rec."Appraisal Parameter Type" = Rec."Appraisal Parameter Type"::"Corporate or Business" then begin
-                        BusApprDet.Reset;
-                        BusApprDet.SetRange("Loan No.", Rec."Loan No.");
-                        BusApprDet.SetRange(Position, BusAppr.Position);
-                        if BusApprDet.Find('-') then
-                            BusApprDet.DeleteAll;
-                        BusAppr.Reset;
-                        if BusAppr.Find('-') then begin
-                            repeat
-                                /*BusApprDet.RESET;
-                                BusApprDet.SETRANGE("Loan No.","Loan No.");
-                                BusApprDet.SETRANGE(Position,BusAppr.Position);
-                                IF BusApprDet.FIND('-') THEN
-                                  EXIT;*/
-                                TotalLoans := 0;
-                                BusApprDet.Init;
-                                BusApprDet.Code := BusAppr."Classifiaction Code";
-                                BusApprDet.Position := BusAppr.Position;
-                                BusApprDet.Description := BusAppr.Description;
-                                if BusApprDet.Code = 'LONG TERM LOANS' then begin
-                                    LoanApp.Reset;
-                                    LoanApp.SetRange("Member No.", Rec."Member No.");
-                                    if LoanApp.Find('-') then begin
-                                        repeat
-                                            LoanApp.CalcFields("Outstanding Balance");
-                                            TotalLoans := TotalLoans + LoanApp."Outstanding Balance";
-                                        until LoanApp.Next = 0;
-                                    end;
-                                end;
-                                BusApprDet."Loan With Sacco" := TotalLoans;
-                                BusApprDet."Financial Classification Code" := BusAppr."Financial Classifiaction";
-                                BusApprDet."Loan No." := Rec."Loan No.";
-                                BusApprDet.Insert;
-                            until BusAppr.Next = 0;
-                        end;
-                    end;
+            //         if Rec."Appraisal Parameter Type" = Rec."Appraisal Parameter Type"::"Corporate or Business" then begin
+            //             BusApprDet.Reset;
+            //             BusApprDet.SetRange("Loan No.", Rec."Loan No.");
+            //             BusApprDet.SetRange(Position, BusAppr.Position);
+            //             if BusApprDet.Find('-') then
+            //                 BusApprDet.DeleteAll;
+            //             BusAppr.Reset;
+            //             if BusAppr.Find('-') then begin
+            //                 repeat
+            //                     /*BusApprDet.RESET;
+            //                     BusApprDet.SETRANGE("Loan No.","Loan No.");
+            //                     BusApprDet.SETRANGE(Position,BusAppr.Position);
+            //                     IF BusApprDet.FIND('-') THEN
+            //                       EXIT;*/
+            //                     TotalLoans := 0;
+            //                     BusApprDet.Init;
+            //                     BusApprDet.Code := BusAppr."Classifiaction Code";
+            //                     BusApprDet.Position := BusAppr.Position;
+            //                     BusApprDet.Description := BusAppr.Description;
+            //                     if BusApprDet.Code = 'LONG TERM LOANS' then begin
+            //                         LoanApp.Reset;
+            //                         LoanApp.SetRange("Member No.", Rec."Member No.");
+            //                         if LoanApp.Find('-') then begin
+            //                             repeat
+            //                                 LoanApp.CalcFields("Outstanding Balance");
+            //                                 TotalLoans := TotalLoans + LoanApp."Outstanding Balance";
+            //                             until LoanApp.Next = 0;
+            //                         end;
+            //                     end;
+            //                     BusApprDet."Loan With Sacco" := TotalLoans;
+            //                     BusApprDet."Financial Classification Code" := BusAppr."Financial Classifiaction";
+            //                     BusApprDet."Loan No." := Rec."Loan No.";
+            //                     BusApprDet.Insert;
+            //                 until BusAppr.Next = 0;
+            //             end;
+            //         end;
 
-                end;
-            }
+            //     end;
+            // }
             separator(Action35)
             {
             }
-            action("Business Evaluation Report")
-            {
-                ApplicationArea = Basic, Suite;
-                //Image = "REPORT";
-                Promoted = true;
-                PromotedCategory = "Report";
-                PromotedIsBig = true;
-                Visible = false;
 
-                trigger OnAction()
-                begin
-                    LoanApp.Reset;
-                    LoanApp.SetRange(LoanApp."Loan No.", Rec."Loan No.");
-                    //if LoanApp.Find('-') then
-                    //REPORT.Run(52185726, true, false, LoanApp)
-                end;
-            }
             action("Loan Appraisal Report")
             {
                 ApplicationArea = Basic, Suite;
@@ -1357,20 +1251,7 @@ page 52185753 "Loan Application Card"
                     ProdFac.Get(Rec."Loan Product Type");
                     Rec.TestField("Recovery Mode");
 
-                    LoanApp.Reset;
-                    LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
-                    LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");
-                    LoanApp.SetFilter(LoanApp."Total Loan Balance", '>0');
-                    if LoanApp.Find('-') then begin
-                        LoanApp.CalcFields("Total Loan Balance");
-                        if LoanApp."Total Loan Balance" > LoanApp.Repayment then begin
-                            LoansTopup.Reset;
-                            LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
-                            LoansTopup.SetRange("Loan Top Up", LoanApp."Loan No.");
-                            if not LoansTopup.Find('-') then
-                                Error('Member has an existing %1 Loan No. %2, Kindly TopUp', Rec."Loan Product Type Name", LoanApp."Loan No.");
-                        end;
-                    end;
+                   
                     LoanApp.Reset;
                     LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
                     LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");
@@ -1520,27 +1401,27 @@ page 52185753 "Loan Application Card"
 
                 end;
             }
-            action("Post Advance")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = PostDocument;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-                Visible = false;
+            // action("Post Advance")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = PostDocument;
+            //     Promoted = true;
+            //     PromotedCategory = Process;
+            //     PromotedIsBig = true;
+            //     Visible = false;
 
-                trigger OnAction()
-                begin
-                    if Confirm('Are you sure you want to Post?', false) = true then begin
-                        if ProdFac.Get(Rec."Loan Product Type") then begin
-                            if ProdFac."Does not Require Batching" then
-                                LoanProcess.PostSingleLoan(Rec."Loan No.")
-                            else
-                                Error('This product requires a batch process');
-                        end;
-                    end;
-                end;
-            }
+            //     trigger OnAction()
+            //     begin
+            //         if Confirm('Are you sure you want to Post?', false) = true then begin
+            //             if ProdFac.Get(Rec."Loan Product Type") then begin
+            //                 if ProdFac."Does not Require Batching" then
+            //                     LoanProcess.PostSingleLoan(Rec."Loan No.")
+            //                 else
+            //                     Error('This product requires a batch process');
+            //             end;
+            //         end;
+            //     end;
+            // }
             action("Loan Terms And conditions")
             {
                 ApplicationArea = all;
@@ -1552,82 +1433,8 @@ page 52185753 "Loan Application Card"
                 RunPageLink = "Loan No." = FIELD("Loan No.");
                 RunObject = Page "loan Tearms And Conditions";
             }
-            action("Discount Loan")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = Discount;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-                Visible = false;
-                trigger OnAction()
-                begin
-                    if Confirm('Are you sure you want to discount loan?', false) = true then begin
-                        LoanProcess.PostDiscounting(Rec."Loan No.", Rec."Discounted Amount");
-
-                        //Reset
-                        Rec."Discounted Amount" := 0;
-                        Rec.Modify;
-                    end;
-                end;
-            }
-
-            action(Approve)
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Approve';
-                Image = Approve;
-                Promoted = true;
-                PromotedCategory = Category4;
-                PromotedIsBig = true;
-                Visible = false;
-                trigger OnAction()
-                var
-                // // ApprovalsMgmt: Codeunit "Approvals Mgmt.";
-                begin
-                    ProdFac.Get(Rec."Loan Product Type");
-                    if ProdFac."Shamba Loan" = true then begin
-                        Rec.TestField("Land Valuation Done", true);
-                        Rec.TestField("Sale Agreement", true);
-                        Rec.TestField("20% Payment Slip", true);
-                        Rec.TestField("Title Deed");
-                    end;
-
-                    FoundOne := false;
-                    Rec.TestField("Recovery Mode");
-                    Rec.TestField("Member No.");
-                    if Rec."Recovery Mode" = Rec."Recovery Mode"::Checkoff then begin
-                        StandingOrderHeader.Reset;
-                        StandingOrderHeader.SetRange("Member No.", Rec."Member No.");
-                        StandingOrderHeader.SetRange(Status, StandingOrderHeader.Status::Approved);
-                        if StandingOrderHeader.FindFirst then begin
-                            repeat
-                                StandingOrderLines.Reset;
-                                StandingOrderLines.SetRange("Document No.", StandingOrderHeader."No.");
-                                StandingOrderLines.SetRange("Destination Account Type", StandingOrderLines."Destination Account Type"::Credit);
-                                StandingOrderLines.SetRange("Loan No.", Rec."Loan No.");
-                                if StandingOrderLines.FindFirst then begin
-                                    FoundOne := true;
-                                end;
-                            until StandingOrderHeader.Next = 0;
-                        end;
-                        if FoundOne = false then Error('There is no standing order associated with this loan');
-                    end;
 
 
-                    if Rec."Captured By" = UserId then Error('You cannot approve  loan you captured!');
-
-                    if (Rec."Loan Product Type" <> '142') then
-                        if Rec."Loan Appraised By" <> UserId then Error('Kindly Run the appraisal report');
-
-
-                    if (Rec."Loan Product Type" <> '123') and (Rec."Loan Product Type" <> '137') and (Rec."Loan Product Type" <> '138') and (Rec."Loan Product Type" <> '142') then
-                        if Rec."Details Verified By" <> UserId then
-                            Error('Kindly Verify the Guarantor Details and Payslip Details');
-                    // ApprovalsMgmt.ApproveRecordApprovalRequest(Rec.RecordId);
-                    //MESSAGE('Approved');
-                end;
-            }
 
             action(SendApprovalRequest)
             {
@@ -2115,11 +1922,6 @@ page 52185753 "Loan Application Card"
                     if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then
                         CustomApprovals.OnSendDocForApproval(VarVariant);
 
-                    // Message('Approval Request Sent Successfully');
-                    // rec.Status := rec.Status::Approved;
-                    // rec.modify();
-                    // message('Loan Approved Successfully');
-
                 end;
             }
             action(Comments)
@@ -2133,27 +1935,27 @@ page 52185753 "Loan Application Card"
                 RunPageLink = "Header No." = field("Loan No.");
                 RunPageView = where(Types = CONST(comment));
             }
-            action("Change Current user'")
-            {
-                ApplicationArea = all;
-                Caption = 'Change Current User';
-                Promoted = true;
-                PromotedCategory = Category4;
-                PromotedIsBig = true;
-                Visible = false;
-                trigger OnAction()
-                var
-                    myInt: Integer;
-                begin
-                    if Rec."Current User" <> '' then begin
-                        Rec."Current User" := UserId;
-                        Rec.WorkTime := CurrentDateTime;
-                        rec.modify();
-                        Message('Changes Updated!');
-                    end;
+            // action("Change Current user'")
+            // {
+            //     ApplicationArea = all;
+            //     Caption = 'Update Current User';
+            //     Promoted = true;
+            //     PromotedCategory = Category4;
+            //     PromotedIsBig = true;
+            //     Visible = true;
+            //     trigger OnAction()
+            //     var
+            //         myInt: Integer;
+            //     begin
+            //         if Rec."Current User" <> '' then begin
+            //             Rec."Current User" := UserId;
+            //             Rec.WorkTime := CurrentDateTime;
+            //             rec.modify();
+            //             Message('Changes Updated!');
+            //         end;
 
-                end;
-            }
+            //     end;
+            // }
             action(CancelApprovalRequest)
             {
                 ApplicationArea = Basic, Suite;
@@ -2247,31 +2049,13 @@ page 52185753 "Loan Application Card"
 
                 trigger OnAction()
                 var
-                    //ApprovalEntries: Page "Approval Entries";
                     ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                 begin
 
                     ApprovalsMgmt.OpenApprovalEntriesPage(rec.RecordId);
                 end;
             }
-            action("Loan [File]")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = Document;
-                Promoted = true;
-                PromotedCategory = Category4;
 
-                trigger OnAction()
-                var
-                    DMS: Record EDMS;
-                begin
-                    DMS.Reset;
-                    DMS.SetRange(DMS.Key, DMS.Key::"Loan File");
-                    if DMS.Find('-') then begin
-                        HyperLink(DMS."url path" + Rec."Loan No.");
-                    end;
-                end;
-            }
             separator(Action67)
             {
             }
@@ -2308,40 +2092,8 @@ page 52185753 "Loan Application Card"
                     END;
                 end;
             }
-            action(Approves)
-            {
-                ApplicationArea = Basic, Suite;
-                Visible = false;
 
-                trigger OnAction()
-                begin
-                    Rec.Status := Rec.Status::Approved;
-                    Rec.Modify(true);
-                end;
-            }
-            action("Download Appraisal Used")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = Note;
-                Promoted = true;
-                Visible = AppraisalFile;
 
-                trigger OnAction()
-                var
-                    FromFile: Text[400];
-                    ToFolder: Text[300];
-                    Name: Text;
-                    EDMS: Record EDMS;
-                    url: Text;
-                begin
-                    EDMS.Reset;
-                    EDMS.SetRange(Key, EDMS.Key::"Appraisal File");
-                    if EDMS.FindFirst then url := EDMS."url path";
-                    FromFile := url + 'appraisal' + Rec."Member No." + Rec."Loan No." + '.pdf';
-                    Name := 'appraisal' + Format(Rec."Member No.") + Format(Rec."Loan No.");
-                    // Download(FromFile, 'Appraisal report', '', 'Text file(*.pdf)|*.pdf', Name);
-                end;
-            }
             action("Charge Excemptions.")
             {
                 ApplicationArea = all;
@@ -2351,7 +2103,6 @@ page 52185753 "Loan Application Card"
                 PromotedCategory = Process;
                 RunObject = page "Excempted Product Charges";
                 RunPageLink = "Loan No." = field("Loan No.");//, "Product Code" = field("Loan Product Type");
-                Visible = false;
                 trigger OnAction()
                 begin
                     //Load defaults
