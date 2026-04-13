@@ -88,7 +88,7 @@ Report 52185885 "CRM Loan Guaranteed"
                 column(MemberGuaranteed_LoanGuarantors; "Loan Guarantors and Security"."Member Guaranteed")
                 {
                 }
-                column(PercentageGuaranteed_LoanGuarantors; "Loan Guarantors and Security"."Percentage Guaranteed")
+                column(PercentageGuaranteed_LoanGuarantors; "Loan Guarantors and Security".PercentageGur)
                 {
                 }
                 column(TotalGuaranteed_LoanGuarantors; "Loan Guarantors and Security"."Total Guaranteed")

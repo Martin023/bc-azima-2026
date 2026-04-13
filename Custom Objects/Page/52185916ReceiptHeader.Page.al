@@ -436,6 +436,7 @@ page 52185916 "Receipt Header"
 
                     SavingsAccounts.Reset;
                     SavingsAccounts.SetRange(SavingsAccounts."Member No.", Rec."Member No");
+                    SavingsAccounts.Setfilter("Product Category", '');
                     if SavingsAccounts.Find('-') then begin
                         repeat
                             ReceiptLine.Init;
@@ -714,17 +715,6 @@ page 52185916 "Receipt Header"
             Rec."Account Type" := Rec."Account Type"::"Bank Account";
             //ERROR('Please contact the system administrator to be setup as a receipting user');
         end;
-
-        //***************************JACK***************************//
-        //  SETRANGE("Created By",USERID);
-        if UserMgt.GetSalesFilter() <> '' then begin
-            rec.FilterGroup(2);
-            rec.SetRange("Responsibility Center", UserMgt.GetSalesFilter());
-            rec.FilterGroup(0);
-        end;
-
-        //***************************END ***************************//
-        //SetDocNoVisible;
     end;
 
     var
@@ -816,17 +806,14 @@ page 52185916 "Receipt Header"
         USetup.SetRange(USetup.UserID, UserId);
         if USetup.FindFirst then begin
             if USetup."Receipt Journal Template" = '' then begin
-                Message('Please ensure that the Receipt Journal Template has avalue in Cash Office User Temp.');
+                Error('Please ensure that the Receipt Journal Template has avalue in Cash Office User Temp.');
             end;
             if USetup."Receipt Journal Batch" = '' then begin
-                Message('Please ensure that the Administrator sets you up as a cashier');
-            end;
-            if USetup."Default Receipts Bank" = '' then begin
-                Message('Please ensure that the Administrator sets you up as a cashier');
+                Error('Please ensure that the Receipt Journal Batch has avalue in Cash Office User Temp.');
             end;
         end
         else begin
-            Message('Please ensure that the Administrator sets you up as a cashier');
+            Error('Please ensure that the Administrator sets you up as a cashier in Cash office User Temp and assigns you a journal template and batch for receipting');
         end;
 
         //check if the receipt has any post dated cheques.

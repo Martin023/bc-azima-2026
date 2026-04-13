@@ -1,6 +1,6 @@
 page 52185771 "Appraisal Salary Set-up"
 {
-    PageType = Card;
+    PageType = List;
     SourceTable = "Appraisal Salary Set-up";
     UsageCategory = Administration;
     Caption = 'Appraisal Salary Set-up';

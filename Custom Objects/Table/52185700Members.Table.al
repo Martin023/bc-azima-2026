@@ -1835,9 +1835,10 @@ table 52185700 Members
                 if "Captured By" = '' then Error(FieldEmptyError);
             end;
         }
-        field(1056; "Recruitment Location"; Code[100]){
-                Caption = 'Recruitment Location';
-                Editable = true;
+        field(1056; "Recruitment Location"; Code[100])
+        {
+            Caption = 'Recruitment Location';
+            Editable = true;
         }
     }
 

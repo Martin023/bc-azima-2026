@@ -1553,7 +1553,7 @@ table 52185729 Loans
                         "Repayment Start Date" := CalcDate(ProdFac."Grace Period - Principle", "Disbursement Date");
 
                         // Apply repayment start date logic based on loan application date
-                        if Date2DMY("Repayment Start Date", 1) <= 10 then
+                        if Date2DMY("Repayment Start Date", 1) <= 15 then
                             "Repayment Start Date" := CalcDate('CM', "Repayment Start Date") // End of current month
                         else
                             "Repayment Start Date" := CalcDate('CM+1M', "Repayment Start Date"); // End of following month
@@ -1564,7 +1564,7 @@ table 52185729 Loans
 
                     end else begin
                         // No grace period, apply repayment start date logic
-                        if Date2DMY("Disbursement Date", 1) <= 10 then
+                        if Date2DMY("Disbursement Date", 1) <= 15 then
                             "Repayment Start Date" := CalcDate('CM', "Disbursement Date") // End of current month
                         else
                             "Repayment Start Date" := CalcDate('CM+1M', "Disbursement Date"); // End of following month
@@ -2104,56 +2104,18 @@ table 52185729 Loans
                         LoanGuara.DeleteAll;
                     end;
                 end;
-                //Topped up loans related product
-                OffsetBalance := 0;
-                LoansTopup.Reset;
-                LoansTopup.SetRange(LoansTopup."Loan No.", "Loan No.");
-                if LoansTopup.Find('-') then begin
-                    repeat
-                        OffsetBalance := OffsetBalance + LoansTopup."Principle Top Up";
-                    until LoansTopup.Next = 0;
-                end;
 
-
-                //Check own balance
-                SelfGuaBal := 0;
-                Loan.Reset;
-                Loan.SetRange(Loan."Member No.", "Member No.");
-                //Loan.SETRANGE(Loan."Self Guarantee",TRUE);
-                Loan.setfilter("Loan Product Type", '<>%1&<>%2', 'STD', 'SCL');
-                Loan.SetFilter(Loan."Outstanding Balance", '>0');
-                if Loan.Find('-') then begin
-                    repeat
-                        Loan.CalcFields("Outstanding Balance");
-                        SelfGuaBal := SelfGuaBal + Loan."Outstanding Balance" - OffsetBalance;
-                    until Loan.Next = 0;
-                end;
-
-
-                //Balance guaranteed loans
-                BalGuara := 0;
-                LoanGuara.Reset;
-                LoanGuara.SetRange("Member No", "Member No.");
-                LoanGuara.CalcFields("Loan Type");
-                LoanGuara.setfilter("Loan Type", '<>%1&<>%2', 'STD', 'SCL');
-                LoanGuara.SetFilter("Outstanding Balance", '>0');
-                if LoanGuara.Find('-') then begin
-                    LoanGuara.CalcFields("Outstanding Balance");
-                    BalGuara := BalGuara + LoanGuara."Amount Guaranteed";
-                end;
-
-                BalGuara := 0;
-                //SelfGuaBal:=0;
                 SavAcc.Reset;
                 SavAcc.SetRange(SavAcc."Member No.", "Member No.");
                 SavAcc.SetRange(SavAcc."Product Category", SavAcc."Product Category"::"BOSA Deposits");
                 if SavAcc.Find('-') then begin
-                    SavAcc.CalcFields(SavAcc."Balance (LCY)");
+
                     GenSetup.Get;
+                    GenSetup.testfield("Withdrawal Fee");
                     MaxSelfGuar := 0;
-                    MaxSelfGuar := (SavAcc."Balance (LCY)" * GenSetup."Self Guarantee %" * 0.01) - (BalGuara + SelfGuaBal);
-                    if "Requested Amount" > (SavAcc."Balance (LCY)" * GenSetup."Self Guarantee %" * 0.01) - (BalGuara + SelfGuaBal) then
-                        Error(Text015);
+                    MaxSelfGuar := LoanAppCodeunit.GetmaxSelfGuaranteeAmt(SavAcc."No.");
+                    if "Requested Amount" > MaxSelfGuar then
+                        Error(Text015 + ' of %1. Kindly apply for a lower amount.', MaxSelfGuar);
                     //"Recommended Amount":=SavAcc."Balance (LCY)"*GenSetup."Self Guarantee %"*0.01;
                     //"Approved Amount":=SavAcc."Balance (LCY)"*GenSetup."Self Guarantee %"*0.01;
                     LoanGuara.Init;
@@ -2163,9 +2125,13 @@ table 52185729 Loans
                     LoanGuara."Savings Account No./Member No." := SavAcc."No.";
                     LoanGuara.Validate(LoanGuara."Savings Account No./Member No.");
                     LoanGuara.Validate(LoanGuara."Member No");
-                    LoanGuara."Amount Guaranteed" := (SavAcc."Balance (LCY)" * GenSetup."Self Guarantee %" * 0.01) - (BalGuara + SelfGuaBal);
+                    LoanGuara."Deposits/Shares" := SavAcc.GetAvailableBalance(SavAcc."No.");
+                    LoanGuara."Available Shares" := MaxSelfGuar;
+                    LoanGuara."Amount Guaranteed" := MaxSelfGuar;
                     LoanGuara.Insert(true);
-                end;
+                end
+                else
+                    Error('The member does not have a BOSA savings account to be used as self guarantee!');
             end;
         }
         field(77; "Appraisal Fee"; Decimal)
@@ -3552,25 +3518,9 @@ table 52185729 Loans
         SMSSOURCE: enum "SMS Source";
     begin
 
-        /*
-        IF ("Discounted Amount"=xRec."Discounted Amount") AND ("Employer Loan No."=xRec."Employer Loan No.")AND ("Batch No."=xRec."Batch No.")THEN BEGIN
-        IF Posted THEN BEGIN
-           ERROR('A loan cannot be modified once it has been posted');
-        END;
-
-        IF "Employer Loan No."=xRec."Employer Loan No." THEN BEGIN
-        IF (Status=Status::Approved) OR (Status=Status::Pending) THEN
-          ERROR('Loan is not open for modification');
-         END;
-        END;  //
-        */
-
 
         if "Loan No." = UserId then
             "Dummy Appraisal" := true;
-
-
-
 
         // CRM API Updates
         thisApp.Reset();
@@ -3578,86 +3528,8 @@ table 52185729 Loans
         thisApp.SetRange(Posted, false);
 
         if thisApp.FindFirst() then begin
-            // Track Status changes
-            IF (thisApp.Status <> Status) OR (thisApp.Posted <> Posted) then begin
-                if "Disbursement Date" <> 0D then begin
-                    if "CRM Application No." <> '' then begin
-                        // CRM API update
-                        // CRMIntegration.CRMLoanApplicationUpdate(
-                        //     "CRM Application No.",
-                        //     "Loan No.",
-                        //     Format("Approved Amount"),
-                        //     GlobalFunctions.FormatISODate("Disbursement Date"),
-                        //     Format(Status),
-                        //     ''
-                        // );
-                    end;
-                end else begin
-                    if "CRM Application No." <> '' then begin
-                        // CRM API update
-                        // CRMIntegration.CRMLoanApplicationUpdate(
-                        //     "CRM Application No.",
-                        //     "Loan No.",
-                        //     Format("Approved Amount"),
-                        //     '',
-                        //     Format(Status),
-                        //     ''
-                        // );
-                    end;
-                end;
-            end;
 
             if thisApp.Status <> Status then begin
-                case Status of
-                    Status::Pending:
-                        begin
-                            // theSMS := 'Dear member, your loan application request has been approved. REF ' + "Loan No.";
-                            //message guarantors
-                            LoanGuar.Reset;
-                            LoanGuar.SetRange("Loan No", thisApp."Loan No.");
-                            LoanGuar.SetRange("Self Guarantee", false);
-                            if LoanGuar.FindFirst then begin
-                                if thisApp.Get(LoanGuar."Loan No") then begin
-                                    ProductType := thisApp."Loan Product Type Name";
-                                    AppAmount := thisApp."Approved Amount";
-                                end;
-                            end;
-
-                            // if confirm('Do you wish to Send Guarantor SMS ?', false) then begin
-                            //     LoanGuar.Reset;
-                            //     LoanGuar.SetRange("Loan No", thisApp."Loan No.");
-                            //     LoanGuar.SetRange("Self Guarantee", false);
-                            //     LoanGuar.SetRange("SMS Sent", false);
-                            //     if LoanGuar.FindFirst then begin
-                            //         repeat
-                            //             if Members.Get(LoanGuar."Member No") then begin
-                            //                 CompInfo.Get;
-
-                            //                 msg := 'Dear ' + LoanGuar.Name + ', you have guaranteed ' + LoanGuar."Loanee Name" + ' ' + ProductType + '  KES. ' + Format(AppAmount) + '. For info CALL 0710600999.';
-                            //                 SendSMS.SendSms(SMSSOURCE::LOAN_GUARANTORS, Members."Phone No.", msg, Format(thisApp."Disbursement Account No"), '', true, 0, false, 'CBS', thisApp."Disbursement Account No", 'CBS');
-                            //             end;
-                            //             LoanGuar."SMS Sent" := true;
-                            //             LoanGuar.Modify();
-                            //         until LoanGuar.Next = 0;
-                            //     end;
-                            // end;
-
-                            //message gurantors
-
-                            "Approval Date" := today;
-                        end;
-                    Status::Approved:
-                        begin
-                            //theSMS := 'Dear member, your loan application request for ' + "Loan Product Type Name" + ' has been approved. REF ' + "Loan No.";
-
-
-                            "Approval Date" := today;
-                        end;
-                    Status::Rejected:
-                        begin
-                            //theSMS := 'Dear applicant, your loan application request has been rejected. REF ' + "Loan No.";
-                        end;
-                end;
 
                 if Status = Status::Approved then begin
                     "Approved By" := UserId;
@@ -3891,8 +3763,6 @@ table 52185729 Loans
         CheckOffLines: Record "Checkoff Buffer";
         Text014: Label 'The member must be remmitting checkoff to the organization to qualify';
         Loan: Record Loans;
-        BalGuara: Decimal;
-        SelfGuaBal: Decimal;
         Text015: Label 'The requested amount is more than availabe deposit balance for self guarantee';
         MaxSelfGuar: Decimal;
         Text016: Label 'Maximum discounting percentage allowable must be defined';
@@ -3926,20 +3796,8 @@ table 52185729 Loans
         ProductFactory: Record "Product Factory";
         Otherdeposits: Decimal;
         OtherAppraisals: Record "Other Apprails products";
-        PossibleDeposits: Decimal;
-        ExistingLoan: Decimal;
+        LoanAppCodeunit: Codeunit "Loan Appraisal Codeunit";
 
-    local procedure ValidateShortcutDimCode(FieldNumber: Integer; var ShortcutDimCode: Code[20])
-    begin
-        DimMgt.ValidateDimValueCode(FieldNumber, ShortcutDimCode);
-        DimMgt.SaveDefaultDim(DATABASE::Loans, "Loan No.", FieldNumber, ShortcutDimCode);
-        Modify;
-    end;
-
-    local procedure AvailableCreditLimit()
-    begin
-        "Amount To Disburse" := xRec."Amount To Disburse";
-    end;
 
 
     procedure ClearDataLoans()
@@ -3996,17 +3854,6 @@ table 52185729 Loans
         "Injury Benefit Insurance" := false;
         "Drawdown Schedule" := false;
         "Title/Lease No" := '';
-    end;
-
-    procedure HasMoratorium(DateToVerify: Date) HasMoratorium: Boolean
-    var
-        MoratoriumLoan: Record "Moratorium Loan";
-    begin
-        MoratoriumLoan.Reset();
-        MoratoriumLoan.SetRange(Status, MoratoriumLoan.Status::Approved);
-        MoratoriumLoan.SetRange(MoratoriumLoan."Loan No", Rec."Loan No.");
-        MoratoriumLoan.SetFilter(MoratoriumLoan."End Date Moratorium", '>%1', DateToVerify);
-        HasMoratorium := MoratoriumLoan.FindFirst();
     end;
 
     local procedure InsertLoanGuarantorsForBusinessLoans()
@@ -4096,30 +3943,7 @@ table 52185729 Loans
 
     end;
 
-    Procedure SendSMSApproval()
-    var
-        FirstName: text;
-        Members: record Members;
-        smsSource: enum "SMS Source";
-        Emp: Record Customer;
-    begin
-        if (Rec.Status = Rec.Status::Approved) and (Rec.Posted = false) and (Rec."Recovery Mode" = Rec."Recovery Mode"::Checkoff) then begin
-            if StrPos(Rec."Member Name", ' ') > 0 then
-                FirstName := CopyStr(Rec."Member Name", 1, StrPos(Rec."Member Name", ' ') - 1)
-            else
-                FirstName := Rec."Member Name" + ' ';
 
-            if Members.Get(Rec."Member No.") then begin
-                if Emp.get(Members."Employer Code") then begin
-                    if Emp."Loan TPAY SMS Notification" = true then begin
-                        msg := 'Dear ' + FirstName + ',You loan application of KES ' + Format(Rec."Approved Amount") + ' has been approved. ' +
-                        'Please log in to the TSC portal and give consent before its disbursed. 0709898000';
-                        SendSMS.SendSms(smsSource::LOAN_ACCOUNT_APPROVAL, Members."Phone No.", msg, Format(Loan."Disbursement Account No"), '', true, 0, false, 'CBS', Loan."Disbursement Account No", 'CBS');
-                    end;
-                end;
-            end;
-        end;
-    end;
 
 }
 

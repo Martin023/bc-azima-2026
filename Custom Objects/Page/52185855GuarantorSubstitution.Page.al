@@ -192,7 +192,7 @@ page 52185855 "Guarantor Substitution"
                                 if Lguarantx.Find('-') then begin
                                     REPEAT
                                         Lguarantx.Substituted := Lguarant.Substituted;
-                                        Lguarantx."Proportion Guaranteed" := Lguarant."Proportion Guaranteed";
+                                        Lguarantx."Amount Guaranteed" := Lguarant."Proportion Guaranteed";
                                         Lguarantx.PercentageGur := Lguarant.PercentageGur;
                                         Lguarantx."Member Substituted" := Lguarant."Member Substituted";
                                         Lguarantx.Modify;
@@ -210,7 +210,7 @@ page 52185855 "Guarantor Substitution"
                                     Lguarantors."Collateral Reg. No." := Lguarant."Collateral Reg. No.";
                                     Lguarantors."Collateral Value" := Lguarant."Collateral Value";
                                     Lguarantors."Member No" := Lguarant."Member No";
-                                    Lguarantors."Proportion Guaranteed" := Lguarant."Proportion Guaranteed";
+                                    Lguarantors."Amount Guaranteed" := Lguarant."Proportion Guaranteed";
                                     Lguarantors."Savings Account No./Member No." := Lguarant."Savings Account No.";
                                     Lguarantors.Name := Lguarant.Name;
                                     Lguarantors."Amount Guaranteed" := Lguarant."Amount Guaranteed";

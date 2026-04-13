@@ -146,7 +146,7 @@ Report 52185727 "Loan Guarators Reports"
                     {
 
                     }
-                    column(Proportion_Guaranteed; "Proportion Guaranteed")
+                    column(Proportion_Guaranteed; "Amount Guaranteed")
                     {
 
                     }

@@ -36,7 +36,7 @@ report 52186229 "Update Guaranteed Amount"
                                 if LoanGuarSec."Amount Guaranteed" > SavAcc."Balance (LCY)" then
                                     LoanGuarSec."Amount Guaranteed" := SavAcc."Balance (LCY)";
                             end;
-                            LoanGuarSec."Percentage Guaranteed" := round((LoanGuarSec."Amount Guaranteed" / Loans."Outstanding Balance" * 100), 0.01, '=');
+                            LoanGuarSec.PercentageGur := round((LoanGuarSec."Amount Guaranteed" / Loans."Outstanding Balance" * 100), 0.01, '=');
                             LoanGuarSec.Modify(false);
                         //LoanGuarSec.Rename("Amount Guaranteed");
                         until LoanGuarSec.Next() = 0;
