@@ -1,72 +1,72 @@
-page 52186177 "Payment Voucher Delegate  List"
-{
-    CardPageID = "Payment Voucher Delegates";
-    DeleteAllowed = false;
-    Editable = false;
-    PageType = List;
-    SourceTable = "Payments Header Delegates";
-    SourceTableView = WHERE(Posted = CONST(false));
-    UsageCategory = Lists;
+// page 52186177 "Payment Voucher Delegate  List"
+// {
+//     CardPageID = "Payment Voucher Delegates";
+//     DeleteAllowed = false;
+//     Editable = false;
+//     PageType = List;
+//     SourceTable = "Payments Header Delegates";
+//     SourceTableView = WHERE(Posted = CONST(false));
+//     UsageCategory = Lists;
 
-    layout
-    {
-        area(content)
-        {
-            repeater(Group)
-            {
-                field("Transaction No."; Rec."Transaction No.")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field(Amount; Rec.Amount)
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field(Posted; Rec.Posted)
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Transaction Date"; Rec."Transaction Date")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Transaction Time"; Rec."Transaction Time")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Allocated Amount"; Rec."Allocated Amount")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("User ID"; Rec."User ID")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field(Status; Rec.Status)
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-            }
-        }
-    }
+//     layout
+//     {
+//         area(content)
+//         {
+//             repeater(Group)
+//             {
+//                 field("Transaction No."; Rec."Transaction No.")
+//                 {
+//                     ApplicationArea = Basic, Suite;
+//                 }
+//                 field(Amount; Rec.Amount)
+//                 {
+//                     ApplicationArea = Basic, Suite;
+//                 }
+//                 field(Posted; Rec.Posted)
+//                 {
+//                     ApplicationArea = Basic, Suite;
+//                 }
+//                 field("Transaction Date"; Rec."Transaction Date")
+//                 {
+//                     ApplicationArea = Basic, Suite;
+//                 }
+//                 field("Transaction Time"; Rec."Transaction Time")
+//                 {
+//                     ApplicationArea = Basic, Suite;
+//                 }
+//                 field("Allocated Amount"; Rec."Allocated Amount")
+//                 {
+//                     ApplicationArea = Basic, Suite;
+//                 }
+//                 field("User ID"; Rec."User ID")
+//                 {
+//                     ApplicationArea = Basic, Suite;
+//                 }
+//                 field(Status; Rec.Status)
+//                 {
+//                     ApplicationArea = Basic, Suite;
+//                 }
+//             }
+//         }
+//     }
 
-    actions
-    {
-    }
+//     actions
+//     {
+//     }
 
-    trigger OnOpenPage()
-    begin
-        /*
-        StatusPermissions.RESET;
-        StatusPermissions.SETRANGE(StatusPermissions."User ID",USERID);
-        StatusPermissions.SETRANGE(StatusPermissions."Function",StatusPermissions."Function"::Payments);
-        IF StatusPermissions.FIND('-') = FALSE THEN
-        ERROR('You do not have permissions to access this module.');
-        */
+//     trigger OnOpenPage()
+//     begin
+//         /*
+//         StatusPermissions.RESET;
+//         StatusPermissions.SETRANGE(StatusPermissions."User ID",USERID);
+//         StatusPermissions.SETRANGE(StatusPermissions."Function",StatusPermissions."Function"::Payments);
+//         IF StatusPermissions.FIND('-') = FALSE THEN
+//         ERROR('You do not have permissions to access this module.');
+//         */
 
-    end;
+//     end;
 
-    var
-        StatusPermissions: Record "Application Document Setup";
-}
+//     var
+//         StatusPermissions: Record "Application Document Setup";
+// }
 

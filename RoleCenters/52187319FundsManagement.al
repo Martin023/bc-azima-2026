@@ -102,12 +102,7 @@ page 52187319 "Funds Management Role Center"
                     Caption = 'Payment Voucher Staff';
                     RunObject = page "Payment Voucher Staff List";
                 }
-                action("Payment Voucher Delegate")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Payment Voucher Delegate';
-                    RunObject = page "Payment Voucher Delegate  List";
-                }
+               
                 action("Bank & Cash Transfers")
                 {
                     ApplicationArea = Basic, Suite;

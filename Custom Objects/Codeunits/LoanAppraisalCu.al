@@ -11,11 +11,16 @@ Codeunit 52185484 "Loan Appraisal Codeunit"
         SavingsAcc: Record "Savings Accounts";
         TotalDeposit: Decimal;
         GenSetup: Record "General Set-Up";
+        SavBal: Decimal;
     begin
         GenSetup.Get();
         GenSetup.TestField("Self Guarantee %");
         GenSetup.testField("Withdrawal Fee");
-        exit(SavingsAcc.GetAvailableBalance(Accno) - ((GenSetup."Self Guarantee %" * 0.01 * 3) + GenSetup."Withdrawal Fee"));
+        SavBal := SavingsAcc.GetAvailableBalance(Accno);
+        if SavBal > 0 then
+            exit(SavBal - ((GenSetup."Self Guarantee %" * 0.01 * SavBal) * 3) + GenSetup."Withdrawal Fee")
+        else
+            exit(0);
     end;
 
 
@@ -57,22 +62,6 @@ Codeunit 52185484 "Loan Appraisal Codeunit"
         end;
         exit(TotalGuar);
     end;
-
-    procedure GetNumberOfLoansGuaranteed(AccNo: Code[20]; GuarType: enum "Loan Guarantor Types Enum"): Integer
-    var
-        LoanGuar: Record "Loan Guarantors and Security";
-    begin
-        LoanGuar.Reset;
-        if GuarType <> GuarType::Collateral then
-            LoanGuar.SetRange("Savings Account No./Member No.", AccNo)
-        else
-            LoanGuar.SetRange("Member No", AccNo);
-        LoanGuar.SetFilter("Outstanding Balance", '>0');
-        if LoanGuar.FindSet() then begin
-            exit(LoanGuar.Count());
-        end;
-    end;
-
 
     var
         Members: Record "Members";

@@ -18,10 +18,10 @@ enum 52187007 "Loan Recovery Mode"
     {
         Caption = 'Dividend';
     }
-    value(4; "Fixed Deposit")
-    {
-        Caption = 'Fixed Deposit';
-    }
+    // value(4; "Fixed Deposit")
+    // {
+    //     Caption = 'Fixed Deposit';
+    // }
     // value(5; Cash)
     // {
     //     Caption = 'Cash';
@@ -58,6 +58,10 @@ enum 52187007 "Loan Recovery Mode"
     value(13; Pension)
     {
         Caption = 'Pension';
+    }
+    value(14; "Loan Account")
+    {
+        Caption = 'Loan Account';
     }
 
 }

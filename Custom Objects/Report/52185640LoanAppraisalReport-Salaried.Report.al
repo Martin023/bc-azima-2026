@@ -10,9 +10,6 @@ Report 52185640 "Loan Appraisal Report-Salaried"
         dataitem(Loans; Loans)
         {
             RequestFilterFields = "Loan No.";
-            column(ReportForNavId_1; 1)
-            {
-            }
             column(GuarantorMax; GuarantorMax)
             {
             }
@@ -327,80 +324,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
 
             }
 
-            dataitem(AllLoans; Loans)
-            {
-                DataItemLink = "Member No." = field("Member No.");
-                DataItemTableView = where(Posted = const(true), "Outstanding Balance" = filter(> 0));
-                column(ReportForNavId_18; 18)
-                {
-                }
-                column(LoansLoanNo; AllLoans."Loan No.")
-                {
-                }
 
-                column(RemPeriod; RemPeriod)
-                {
-
-                }
-                column(LoansProductType; AllLoans."Loan Product Type")
-                {
-                }
-                column(LoansProductName; AllLoans."Loan Product Type Name")
-                {
-                }
-                column(ApprovedAmount; AllLoans."Approved Amount")
-                {
-                }
-                column(PrincipalRepayment; AllLoans."Loan Principle Repayment")
-                {
-                }
-                column(OutstandingInterest; AllLoans."Outstanding Interest")
-                {
-                }
-                column(Allloanrepayment; AllLoans.Repayment)
-                {
-                }
-                column(OutStandingBalance; AllLoans."Outstanding Balance")
-                {
-                }
-                column(Defaulted; AllLoans.Defaulted)
-                {
-                }
-
-                column(Repayment; AllLoans.Repayment)
-                {
-                }
-
-
-                trigger OnAfterGetRecord()
-                var
-                    CredLedEntry: Record "Credit Ledger Entry";
-                    RemPeriod: Decimal;
-
-
-                begin
-
-                    CredLedEntry.Reset;
-                    CredLedEntry.SetRange("Loan No", Loans."Loan No.");
-                    CredLedEntry.SetFilter("Transaction Type", '%1|%2', CredLedEntry."transaction type"::"Interest Paid", CredLedEntry."transaction type"::Repayment);
-                    if CredLedEntry.Find('-') then begin
-                        CredLedEntry.CalcSums(Amount);
-                        RemPeriod := ROUND((((AllLoans.Repayment * AllLoans.Installments) - CredLedEntry.Amount) / AllLoans.Repayment), 0.0, '>');
-                    end else
-                        RemPeriod := AllLoans.Installments;
-                end;
-
-                trigger OnPreDataItem()
-                var
-                    LoansTopup: Record "Loans Top up";
-                    LoansProductTyp: Text[30];
-                begin
-                    if LoansTopup.Get(AllLoans."Loan No.") then
-                        CurrReport.Skip;
-                    LoansProductTyp := '';
-                    LoansProductTyp := AllLoans."Loan Product Type" + ' : ' + AllLoans."Loan Product Type Name";
-                end;
-            }
             dataitem("Loan Guarantors and Security"; "Loan Guarantors and Security")
             {
                 DataItemLink = "Loan No" = field("Loan No.");
@@ -499,9 +423,6 @@ Report 52185640 "Loan Appraisal Report-Salaried"
             dataitem("Loan Required Documents"; "Loan Required Documents")
             {
                 DataItemLink = "Loan No." = field("Loan No.");
-                column(ReportForNavId_36; 36)
-                {
-                }
                 column(DocumentType; "Loan Required Documents"."Document Type")
                 {
                 }
@@ -524,9 +445,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
             dataitem("Loans Top up"; "Loans Top up")
             {
                 DataItemLink = "Loan No." = field("Loan No."), "Client Code" = field("Member No.");
-                column(ReportForNavId_97; 97)
-                {
-                }
+
                 column(LoanNo_LoansTopup; "Loans Top up"."Loan No.")
                 {
                 }
@@ -851,32 +770,32 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                         SelfGuaranteedBal := SelfGuaranteedBal + Loans."Outstanding Balance";
                     until Loan.Next = 0;
                 end;
-                RelatedProduct.Reset;
-                RelatedProduct.SetRange("Product Code", ProductFactory."Product ID");
-                if RelatedProduct.Find('-') then begin
-                    repeat
-                        Loan.Reset;
-                        Loan.SetRange(Loan."Member No.", Loans."Member No.");
-                        Loan.SetRange(Loan.Posted, true);
-                        Loan.SetRange(Loan."Loan Product Type", RelatedProduct."Related Product Code");
-                        Loan.SetFilter("Outstanding Balance", '>0');
-                        if Loan.Find('-') then begin
-                            repeat
+                // RelatedProduct.Reset;
+                // RelatedProduct.SetRange("Product Code", ProductFactory."Product ID");
+                // if RelatedProduct.Find('-') then begin
+                //     repeat
+                //         Loan.Reset;
+                //         Loan.SetRange(Loan."Member No.", Loans."Member No.");
+                //         Loan.SetRange(Loan.Posted, true);
+                //         Loan.SetRange(Loan."Loan Product Type", RelatedProduct."Related Product Code");
+                //         Loan.SetFilter("Outstanding Balance", '>0');
+                //         if Loan.Find('-') then begin
+                //             repeat
 
-                                if ProductFactory.Get(Loan."Loan Product Type") then
-                                    Loan.CalcFields("Outstanding Balance");
-                                TopUp.Reset();
-                                TopUp.SetRange("Loan No.", Loans."Loan No.");
-                                TopUp.SetRange("Loan Top Up", loan."Loan No.");
-                                if not TopUp.Find('-') then begin
-                                    TotalRepayements := TotalRepayements + Loan.Repayment;
-                                    RelatedRepayments += Loan.Repayment;
-                                    RelatedBal := RelatedBal + Loan."Outstanding Balance";
-                                end;
-                            until Loan.Next = 0;
-                        end;
-                    until RelatedProduct.Next = 0;
-                end;
+                //                 if ProductFactory.Get(Loan."Loan Product Type") then
+                //                     Loan.CalcFields("Outstanding Balance");
+                //                 TopUp.Reset();
+                //                 TopUp.SetRange("Loan No.", Loans."Loan No.");
+                //                 TopUp.SetRange("Loan Top Up", loan."Loan No.");
+                //                 if not TopUp.Find('-') then begin
+                //                     TotalRepayements := TotalRepayements + Loan.Repayment;
+                //                     RelatedRepayments += Loan.Repayment;
+                //                     RelatedBal := RelatedBal + Loan."Outstanding Balance";
+                //                 end;
+                //             until Loan.Next = 0;
+                //         end;
+                //     until RelatedProduct.Next = 0;
+                // end;
                 //total topup amount
                 //Topped up loans related product
                 LoansTopup.Reset;
