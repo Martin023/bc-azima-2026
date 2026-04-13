@@ -28,6 +28,11 @@ page 52185631 "HR Employee Card"
 
                     end;
                 }
+                field("Member No."; Rec."Member No.")
+                {
+                    ApplicationArea = Basic;
+                    //Editable = false;
+                }
                 field("First Name"; Rec."First Name")
                 {
                     ApplicationArea = Basic;
@@ -676,11 +681,11 @@ page 52185631 "HR Employee Card"
                     ShowMandatory = true;
                     Editable = WtaxCode;
                 }
-                field("Member No."; Rec."Member No.")
-                {
-                    ApplicationArea = Basic;
-                    //Editable = false;
-                }
+                // field("Member No."; Rec."Member No.")
+                // {
+                //     ApplicationArea = Basic;
+                //     //Editable = false;
+                // }
                 field("Member Status"; Rec."Member Status")
                 {
 
@@ -1251,8 +1256,10 @@ page 52185631 "HR Employee Card"
                         end;
 
                         VarVariant := Rec;
-                        if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then
+                        if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then begin
                             CustomApprovals.OnSendDocForApproval(VarVariant);
+                            CurrPage.Close();
+                        end;
 
                     end;
                 }
