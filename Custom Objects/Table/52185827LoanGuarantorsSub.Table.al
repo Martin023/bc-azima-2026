@@ -315,7 +315,7 @@ table 52185827 "Loan Guarantors Sub"
                                 if Loans."Outstanding Balance" > 0 then begin
                                     LoansG := LoansG + 1;
                                     //Evaluate Available Shares
-                                    TotalGuaranteed += (LoanGuarantors."Percentage Guaranteed" / 100) * Loans."Outstanding Balance";
+                                    TotalGuaranteed += (LoanGuarantors.PercentageGur / 100) * Loans."Outstanding Balance";
                                     //END-Evaluate Available Shares
 
                                     if LoanGuarantors."Self Guarantee" = true then begin
@@ -504,10 +504,10 @@ table 52185827 "Loan Guarantors Sub"
                 end;
             end;
         }
-        field(26; "Guarantor Type"; Option)
+        field(26; "Guarantor Type"; Enum "Loan Guarantor Types Enum")
         {
-            OptionCaption = 'Guarantor,Collateral,Lien';
-            OptionMembers = Guarantor,Collateral,Lien;
+            // OptionCaption = 'Guarantor,Collateral,Lien';
+            // OptionMembers = Guarantor,Collateral,Lien;
 
             trigger OnValidate()
             begin
@@ -546,8 +546,8 @@ table 52185827 "Loan Guarantors Sub"
                     LoanGuar.SetFilter("Outstanding Balance", '>0');
                     LoanGuar.SetRange(LoanGuar."Collateral Reg. No.", rec."Collateral Reg. No.");
                     if LoanGuar.Find('-') then begin
-                        LoanGuar.CalcSums("Proportion Guaranteed");
-                        ColAllocaAmount := LoanGuar."Proportion Guaranteed";
+                        LoanGuar.CalcSums("Amount Guaranteed");
+                        ColAllocaAmount := LoanGuar."Amount Guaranteed";
                         SecReg.Reset;
                         SecReg.SetRange("No.", LoanGuar."Collateral Reg. No.");
                         if SecReg.FindFirst() then begin

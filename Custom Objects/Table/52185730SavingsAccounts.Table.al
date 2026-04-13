@@ -3,7 +3,7 @@ table 52185730 "Savings Accounts"
     Caption = 'Savings Accounts';
     DataCaptionFields = "No.", Name;
     DrillDownPageID = "Savings Accounts";
-    LookupPageID = "Savings Accounts";;
+    LookupPageID = "Savings Accounts";
     Permissions = TableData "Cust. Ledger Entry" = r;
 
     fields

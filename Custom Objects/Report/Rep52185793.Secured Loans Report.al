@@ -28,7 +28,7 @@ report 52185793 "Secured Loans Report"
             column(LoanBalance; "Loan Balance")
             {
             }
-            column(ProportionGuaranteed; "Proportion Guaranteed")
+            column(ProportionGuaranteed; "Amount Guaranteed")
             {
             }
             column(TotalSum; "Total Sum")

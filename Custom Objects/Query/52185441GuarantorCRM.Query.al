@@ -29,7 +29,7 @@ Query 52185441 GuarantorCRM
             column(Member_Guaranteed; "Member Guaranteed")
             {
             }
-            column(Percentage_Guaranteed; "Percentage Guaranteed")
+            column(Percentage_Guaranteed; PercentageGur)
             {
             }
             column(Available_Shares; "Available Shares")

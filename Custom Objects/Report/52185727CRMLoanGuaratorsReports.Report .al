@@ -104,7 +104,7 @@ Report 52185890 "CRM Loan Guarators Reports"
                 {
 
                 }
-                column(Proportion_Guaranteed; "Proportion Guaranteed")
+                column(Proportion_Guaranteed; "Amount Guaranteed")
                 {
 
                 }

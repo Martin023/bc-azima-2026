@@ -107,7 +107,7 @@ Report 52185915 "Member Guarantors Report"
                 {
 
                 }
-                column(Percentage_Guaranteed; "Percentage Guaranteed")
+                column(Percentage_Guaranteed; PercentageGur)
                 {
 
                 }

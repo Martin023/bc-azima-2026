@@ -126,7 +126,7 @@ Report 52185978 "Defaulter Notice-3"
                     column(MemberGuaranteed_LoanGuarantorsandSecurity; "Loan Guarantors and Security"."Member Guaranteed")
                     {
                     }
-                    column(PercentageGuaranteed_LoanGuarantorsandSecurity; "Loan Guarantors and Security"."Percentage Guaranteed")
+                    column(PercentageGuaranteed_LoanGuarantorsandSecurity; "Loan Guarantors and Security".PercentageGur)
                     {
                     }
                     column(TotalGuaranteed_LoanGuarantorsandSecurity; "Loan Guarantors and Security"."Total Guaranteed")

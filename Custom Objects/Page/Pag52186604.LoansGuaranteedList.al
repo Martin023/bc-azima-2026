@@ -77,16 +77,12 @@ page 52186604 "Loans Guaranteed List"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Amount Guaranteed field.';
                 }
-                field("Percentage Guaranteed"; Rec."Percentage Guaranteed")
+                field("Percentage Guaranteed"; Rec.PercentageGur)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Percentage Guaranteed field.', Comment = '%';
                 }
-                field("Proportion Guaranteed"; Rec."Proportion Guaranteed")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Proportion Guaranteed field.', Comment = '%';
-                }
+             
                 field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = All;

@@ -464,7 +464,7 @@ table 52185828 "Guarantors Substitution"
                 LGuarant.Date := Lguarantx.Date;
                 LGuarant."Amount Guaranteed" := Lguarantx."Amount Guaranteed";
                 LGuarant."Staff/Payroll No." := Lguarantx."Staff/Payroll No.";
-                LGuarant."Proportion Guaranteed" := Lguarantx."Proportion Guaranteed";
+                LGuarant."Proportion Guaranteed" := Lguarantx."Amount Guaranteed";
                 //LGuarant."Account No.":=Lguarantx."Account No.";
                 LGuarant."Self Guarantee" := Lguarantx."Self Guarantee";
                 LGuarant.PercentageGur := Lguarantx.PercentageGur;
