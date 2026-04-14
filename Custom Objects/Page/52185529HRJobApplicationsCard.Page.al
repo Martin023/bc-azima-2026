@@ -365,34 +365,103 @@ page 52185529 "HR Job Applications Card"
             //     RunObject = Page "HR Job Responsiblities Lines";
             //     RunPageLink = "Job ID" = FIELD("Job Applied For");
             // }
-            action(Approvals)
+
+            group("Request Approval")
             {
+                Caption = 'Request Approval';
+                action(SendApprovalRequest)
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Send A&pproval Request';
+                    Enabled = NOT OpenApprovalEntriesExist;
+                    Image = SendApprovalRequest;
+                    Promoted = true;
+                    PromotedCategory = Category9;
+
+                    trigger OnAction()
+                    var
+                        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+                    begin
+                        //TESTFIELD("No of Posts");
+                        /*TESTFIELD("Document No.");
+                        TESTFIELD(Description);
+                        TESTFIELD("Interest Due Date");*/
+                        VarVariant := Rec;
+                        if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then
+                            CustomApprovals.OnSendDocForApproval(VarVariant);
+
+                        // Rec."Approval Status" := Rec."Approval Status"::Approved;
+                        // Rec.MODIFY;
+                        //MESSAGE('Employee requisition Approved Now the job can be advertised');
 
 
-                ApplicationArea = Basic, Suite;
-                Caption = 'Information Verified';
-                Enabled = NOT OpenApprovalEntriesExist;
-                Image = SendApprovalRequest;
-                Promoted = true;
-                PromotedCategory = Category9;
+                    end;
+                }
+                action(CancelApprovalRequest)
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Cancel Approval Re&quest';
+                    Enabled = OpenApprovalEntriesExist;
+                    Image = Cancel;
+                    Promoted = true;
+                    PromotedCategory = Category9;
 
-                trigger OnAction()
+                    trigger OnAction()
+                    var
+                        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+                    begin
+                        VarVariant := Rec;
+                        CustomApprovals.OnCancelDocApprovalRequest(VarVariant);
+                    end;
+                }
+                action(Approvals)
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Approvals';
+                    Image = Approvals;
+                    Promoted = true;
+                    PromotedCategory = Category9;
 
-                var
-                    CustomApprovals: Codeunit "Custom Approvals Codeunit";
-                    ApprovalsMgmt: Codeunit "Approvals Mgmt.";
-                begin
+                    trigger OnAction()
+                    var
+                        ApprovalEntries: Page "Approval Entries";
+                        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+                    begin
 
-                    VarVariant := Rec;
-                    if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then
-                        CustomApprovals.OnSendDocForApproval(VarVariant);
-
-                    if rec.Status = rec.Status::Approved then
-                        CurrPage.Editable := false;
-                end;
-
-
+                        ApprovalsMgmt.OpenApprovalEntriesPage(rec.RecordId);
+                    end;
+                }
             }
+            // action(Approvals)
+            // {
+
+
+            //     ApplicationArea = Basic, Suite;
+            //     Caption = 'Information Verified';
+            //     Enabled = NOT OpenApprovalEntriesExist;
+            //     Image = SendApprovalRequest;
+            //     Promoted = true;
+            //     PromotedCategory = Category9;
+
+            //     trigger OnAction()
+
+            //     var
+            //         CustomApprovals: Codeunit "Custom Approvals Codeunit";
+            //         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+            //     begin
+
+            //         VarVariant := Rec;
+            //         if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then
+            //             CustomApprovals.OnSendDocForApproval(VarVariant);
+
+            //         if rec.Status = rec.Status::Approved then
+            //             CurrPage.Editable := false;
+            //     end;
+
+
+
+
+            // }
             action("Import Job Applications")
             {
                 ApplicationArea = Basic, Suite;
