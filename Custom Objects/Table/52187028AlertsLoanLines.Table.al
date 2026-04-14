@@ -140,10 +140,10 @@ table 52187028 "Alerts Loan Lines"
             CalcFormula = lookup("SMS Alerts Header"."Notice Type" where("No." = field("Header No.")));
             Editable = false;
         }
-        field(22; "Source Unit"; Option)
+        field(22; "Source Unit"; Enum "Source Unit")
         {
-            OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
-            OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
+            // OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
+            // OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
             FieldClass = FlowField;
             CalcFormula = lookup(Loans."Source Unit" where("Loan No." = field("Loan No.")));
 

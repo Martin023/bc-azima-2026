@@ -115,7 +115,7 @@ page 52185712 "Product Factory"
                 field("Source Unit"; Rec."Source Unit")
                 {
                     ApplicationArea = Basic, Suite;
-                    OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
+                    // OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
                 }
                 field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {

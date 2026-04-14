@@ -152,10 +152,8 @@ table 52187011 "Loans Interest Buffer"
         {
             DataClassification = ToBeClassified;
         }
-        field(45; "Source Unit"; Option)
+        field(45; "Source Unit"; Enum "Source Unit")
         {
-            OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
-            OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
             FieldClass = FlowField;
             CalcFormula = lookup(Loans."Source Unit" where("Loan No." = field("Loan No.")));
             Editable = false;
