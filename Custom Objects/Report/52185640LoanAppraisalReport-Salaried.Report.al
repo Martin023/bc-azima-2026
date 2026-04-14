@@ -9,13 +9,57 @@ Report 52185640 "Loan Appraisal Report-Salaried"
         dataitem(Loans; Loans)
         {
             RequestFilterFields = "Loan No.";
-            column(GuarantorMax; GuarantorMax)
+            //Company info
+            column(CompanyTelephone; CompanyTelephone)
             {
             }
-            column(CompanyTelephone; CompanyTelephone)
+            column(CompanyNam; CompanyNam)
             {
 
             }
+            column(CPicture; Company.Picture)
+            {
+            }
+            column(CommunicationOnline; CommunicationOnline)
+            {
+            }
+            column(TotalProcessingAmt; TotalProcessingAmt)
+            {
+            }
+            column(LoanFormFees; LoanFormFees)
+            {
+            }
+            column(LoanFormFeesExc; LoanFormFeesExc)
+            {
+            }
+            column(InsuranceFee; InsuranceFee)
+            {
+            }
+            column(InsuranceFeeExc; InsuranceFeeExc)
+            {
+            }
+            //
+            column(OneMonthInterest; OneMonthInterest)
+            {
+            }
+
+            column(OnethirdGross; OnethirdGross)
+            {
+            }
+            column(TwoThirdNet; TwoThirdNet)
+            {
+            }
+
+            column(TotalGuaranteed; TotalGuaranteed)
+            {
+            }
+            column(GuarantorMax; GuarantorMax)
+            {
+            }
+            column(SecurityTotal; SecurityTotal)
+            {
+            }
+
             column(Dim1; Dim1)
             {
 
@@ -29,17 +73,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
 
             }
 
-            column(CompanyNam; CompanyNam)
-            {
 
-            }
-            column(CommunicationOnline; CommunicationOnline)
-            {
-
-            }
-            column(CPicture; Company.Picture)
-            {
-            }
             column(Dim2; Dim2)
             {
 
@@ -218,9 +252,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
             column(MemberName; Loans."Member Name")
             {
             }
-            column(TotalProcessingAmt; TotalProcessingAmt)
-            {
-            }
+
             column(LoanProduct; Loans."Loan Product Type")
             {
             }
@@ -520,9 +552,6 @@ Report 52185640 "Loan Appraisal Report-Salaried"
             dataitem("Loans Top up"; "Loans Top up")
             {
                 DataItemLink = "Loan No." = field("Loan No."), "Client Code" = field("Member No.");
-                column(ReportForNavId_97; 97)
-                {
-                }
                 column(LoanNo_LoansTopup; "Loans Top up"."Loan No.")
                 {
                 }
@@ -531,9 +560,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 { }
                 column(TotalEarning; TotalEarning)
                 { }
-                column(TopUpCommss; TopUpComms)
 
-                { }
                 column(LoanTopUp_LoansTopup; "Loans Top up"."Loan Top Up")
                 {
                 }
@@ -569,6 +596,12 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 {
                 }
                 column(IDNO_LoansTopup; "Loans Top up"."ID. NO")
+                {
+                }
+                column(Commision; Commision)
+                {
+                }
+                column(OneMonthIn; "One Month Interest")
                 {
                 }
             }
@@ -651,67 +684,19 @@ Report 52185640 "Loan Appraisal Report-Salaried"
             }
             trigger OnAfterGetRecord()
             begin
-                DepPurchaseComm := 0;
-                // CountNo := 0;
-                DiffSec := 0;
-                SecurityTotal := 0;
-                SecurityRisk := false;
-                MemberDueRetire := false;
-                MonthsToRetire := 0;
-                GuarantorMax := false;
-                LoanRecoverd := false;
-                LoanDepositRation := false;
-                Twothird := false;
-                DepositMult := 0;
-                RelatedBal := 0;
-                RelatedRepayments := 0;
-                NetOnDeposits := 0;
-                TopupRepayments := 0;
-                AdjNet := 0;
-                NetSalary := 0;
-                TotalExteralRec := 0;
-                NetOnSalary := 0;
-                QualifyingAmount := 0;
-                TotalDeductions := 0;
-                TotalAllowance := 0;
-                TotalBasic := 0;
-                TDeductions := 0;
-                GrossAmount := 0;
-                CountAll := 0;
-                TotaLFosaIn := 0;
-                DiscAmt := 0;
-                MultP := 0;
-                AverageInt := 0;
-                NewRepayment := 0;
-                CurrLoanBal := 0;
-                ChargeExtraComms := false;
-                Dim1 := '';
-                Dim2 := '';
-                Mult := 0;
-                NetTakeHome := 0;
-                TExternalEffects := 0;
-                Inactive := false;
-                GuarLoanBal := 0;
-                GuarantorMax := false;
-                RepBasedOnRequested := 0;
-                IntBasedOnRequested := 0;
-                SelfGuaranteedBal := 0;
-                AthirdDisplay := '';
-                AthirdAmt := 0;
-                TotalExciseDuty := 0;
+                LoanFormFees := 0;
+                LoanFormFeesExc := 0;
+                LoanProcessingAmt := 0;
+                LoanProcessingAmtEx := 0;
+                InsuranceFee := 0;
+                InsuranceFeeExc := 0;
+                OneMonthInterest := 0;
                 DepPurchaseComm := 0;
                 DepPurchaseCommExc := 0;
-                TopUpCommExc := 0;
-                ShareBoostComm := 0;
-                ShareComm := 0;
-                SharecommExc := 0;
-                TotalRepayements := 0;
-                STOAmount := 0;
-                PossibleBoost := 0;
-                //TO DO:GETMONTHS TO RETIRE
-                // GenSetup.Get();
-                // DOB:=Cust.Get()
-                // yrs :=CalcDate(GenSetup."Max. Member Age",DOB)-TODAY;
+                GrossPay := 0;
+                OneThirdGross := 0;
+                TwoThirdNet := 0;
+
                 //TO DO:GETMONTHS TO RETIRE
                 StandingOrderHeader.RESET;
                 StandingOrderHeader.SETRANGE("Member No.", Loans."Member No.");
@@ -736,447 +721,49 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                         END;
                     UNTIL StandingOrderHeader.NEXT = 0;
                 END;
-                if Loans."Loans - Deposit Purchase" > 0 then begin
-                    PCharges.Reset;
-                    PCharges.SetRange(PCharges."Product Code", Loans."Loan Product Type");
-                    PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::Boosting);
-                    if PCharges.Find('-') then begin
-                        repeat
 
-                            if (PCharges."Charge Method" = PCharges."charge method"::"% of Amount") then
-                                DepPurchaseComm := (Loans."Loans - Deposit Purchase" * (PCharges.Percentage / 100))
-                            // ShareBoostComm := (Loans."Loans - Deposit Purchase" * (PCharges.Percentage / 100))
+                //Get Charges and commissions
+                //1. Form fees - this is applicable to all loan applications
+                PCharges.Reset;
+                PCharges.SetRange(PCharges."Product Code", Loans."Loan Product Type");
+                PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::"Form Fees");
+                if PCharges.Find('-') then begin
+                    repeat
 
+                        if (PCharges."Charge Method" = PCharges."charge method"::"% of Amount" = true) then
+                            LoanFormFees := Loans."Approved Amount" * (PCharges.Percentage / 100)
+                        else
+                            if PCharges."Charge Method" = PCharges."charge method"::"Flat Amount" then
+                                LoanFormFees := PCharges."Charge Amount"
                             else
-                                if PCharges."Charge Method" = PCharges."charge method"::"Flat Amount" then
-                                    DepPurchaseComm := PCharges."Charge Amount"
-                                else
-                                    if PCharges."Charge Method" = PCharges."charge method"::Staggered then begin
+                                if PCharges."Charge Method" = PCharges."charge method"::Staggered then begin
 
-                                        PCharges.TestField(PCharges."Staggered Charge Code");
+                                    PCharges.TestField(PCharges."Staggered Charge Code");
 
-                                        TariffDetails.Reset;
-                                        TariffDetails.SetRange(TariffDetails.Code, PCharges."Staggered Charge Code");
-                                        if TariffDetails.Find('-') then begin
-                                            repeat
-                                                if (Loans."Loans - Deposit Purchase" >= TariffDetails."Lower Limit") and (Loans."Loans - Deposit Purchase" <= TariffDetails."Upper Limit") then begin
-                                                    if TariffDetails."Use Percentage" = true then begin
-                                                        DepPurchaseComm := Loans."Loans - Deposit Purchase" * TariffDetails.Percentage * 0.01;
-                                                    end else begin
-                                                        DepPurchaseComm := TariffDetails."Charge Amount";
-                                                    end;
+                                    TariffDetails.Reset;
+                                    TariffDetails.SetRange(TariffDetails.Code, PCharges."Staggered Charge Code");
+                                    if TariffDetails.Find('-') then begin
+                                        repeat
+                                            if (Loans."Approved Amount" >= TariffDetails."Lower Limit") and (Loans."Approved Amount" <= TariffDetails."Upper Limit") then begin
+                                                if TariffDetails."Use Percentage" = true then begin
+                                                    LoanFormFees := Loans."Approved Amount" * TariffDetails.Percentage * 0.01;
+                                                end else begin
+                                                    LoanFormFees := TariffDetails."Charge Amount";
                                                 end;
-                                            until TariffDetails.Next = 0;
-                                        end;
+                                            end;
+                                        until TariffDetails.Next = 0;
                                     end;
-
-
-                            // if DepPurchaseComm < PCharges.Minimum then
-                            //     DepPurchaseComm := PCharges.Minimum;
-                            // if DepPurchaseComm > PCharges.Maximum then
-                            //     DepPurchaseComm := PCharges.Maximum;
-
-                            // DepPurchaseComm := DepPurchaseComm * -1;
-
-                            if ExcemptCharges = true then
-                                DepPurchaseComm := 0;
-
-                            //If excise duty involved
-                            if PCharges."Effect Excise Duty" = PCharges."effect excise duty"::Yes then begin
-                                GenSetup.Get();//TESTFIELD("Excise Duty G/L");
-                                DepPurchaseCommExc := DepPurchaseComm * GenSetup."Excise Duty (%)" * 0.01;
-                            end;
-                        until PCharges.Next = 0;
-
-                    end;
-                end;
-
-
-                SalProcessed := false;
-                OffsetTotal := 0;
-                if Loans."Interest Calculation Method" = Loans."interest calculation method"::Amortised then
-                    AverageInt := ((Loans.Repayment * Loans.Installments) - Loans."Requested Amount") / Loans.Installments
-                else
-                    AverageInt := Loans."Loan Interest Repayment";
-
-                RepBasedOnRequested := ROUND((Loans."Interest Calculation Method" / 12 / 100) / (1 - Power((1 + (Loans.Interest / 12 / 100)), -Loans.Installments)) * Loans."Requested Amount", 1, '>');
-
-
-                SalProc.Reset;
-                SalProc.SetRange("Member No.", Loans."Member No.");
-                if SalProc.Find('-') then
-                    SalProcessed := true;
-                ProductFactory.Get(Loans."Loan Product Type");
-
-                Mult := ProductFactory."Ordinary Deposits Multiplier";
-
-
-                //get share capital
-                SavAcc.Reset;
-                SavAcc.SetRange("Member No.", Loans."Member No.");
-                SavAcc.SetRange("Product Category", SavAcc."product category"::"Share Capital");
-                if SavAcc.Find('-') then begin
-                    // SavAcc.CalcFields(SavAcc.Balance);
-                    ShareCapital := SavAcc.GetAvailableBalance(SavAcc."No.");
-                end;
-                //get share capital
-
-                // //Qualification on deposits
-                // MemberDeposits := 0;
-                // SavingsAccounts.Reset;
-                // SavingsAccounts.SetRange(SavingsAccounts."Member No.", Loans."Member No.");
-                // SavingsAccounts.SetRange(SavingsAccounts."Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
-                // if SavingsAccounts.Find('-') then begin
-                //     SavingsAccounts.CalcFields(SavingsAccounts."Balance (LCY)");
-                //     MemberDeposits := SavingsAccounts."Balance (LCY)";//+Loans."Loans - Deposit Purchase";
-                // end;
-                // QualificationOnDeposits := (MemberDeposits + loans."Loans - Deposit Purchase") * Mult;
-
-                // if ProductFactory.Get(Loans."Loan Product Type") then begin
-                //     NetOnDeposits := QualificationOnDeposits;
-                //     if NetOnDeposits > ProductFactory."Maximum Loan Amount" then
-                //         NetOnDeposits := ProductFactory."Maximum Loan Amount";
-                // end;
-
-
-                Loan.Reset;
-                Loan.SetRange(Loan."Member No.", Loans."Member No.");
-                Loan.SetRange(Loan.Posted, true);
-                Loan.SetFilter("Outstanding Balance", '>0');
-                Loan.SetRange("Self Guarantee", true);
-                if Loan.Find('-') then begin
-                    repeat
-                        Loans.CalcFields("Outstanding Balance");
-                        SelfGuaranteedBal := SelfGuaranteedBal + Loans."Outstanding Balance";
-                    until Loan.Next = 0;
-                end;
-                RelatedProduct.Reset;
-                RelatedProduct.SetRange("Product Code", ProductFactory."Product ID");
-                if RelatedProduct.Find('-') then begin
-                    repeat
-                        Loan.Reset;
-                        Loan.SetRange(Loan."Member No.", Loans."Member No.");
-                        Loan.SetRange(Loan.Posted, true);
-                        Loan.SetRange(Loan."Loan Product Type", RelatedProduct."Related Product Code");
-                        Loan.SetFilter("Outstanding Balance", '>0');
-                        if Loan.Find('-') then begin
-                            repeat
-
-                                if ProductFactory.Get(Loan."Loan Product Type") then
-                                    Loan.CalcFields("Outstanding Balance");
-                                TopUp.Reset();
-                                TopUp.SetRange("Loan No.", Loans."Loan No.");
-                                TopUp.SetRange("Loan Top Up", loan."Loan No.");
-                                if not TopUp.Find('-') then begin
-                                    TotalRepayements := TotalRepayements + Loan.Repayment;
-                                    RelatedRepayments += Loan.Repayment;
-                                    RelatedBal := RelatedBal + Loan."Outstanding Balance";
-                                end;
-                            until Loan.Next = 0;
-                        end;
-                    until RelatedProduct.Next = 0;
-                end;
-                //total topup amount
-                //Topped up loans related product
-                LoansTopup.Reset;
-                LoansTopup.SetRange("Loan No.", "Loan No.");
-                if LoansTopup.Find('-') then begin
-                    repeat
-                        CurrLoanBal := CurrLoanBal + LoansTopup."Monthly Repayment";
-                        TopupRepayments := TopupRepayments + Loan.Repayment;
-                        OffsetTotal := OffsetTotal + LoansTopup."Total Top Up";
-                    until LoansTopup.Next = 0;
-                end;
-                //total topupamount
-                RelatedBal := RelatedBal - OffsetTotal;
-                if RelatedBal < 0 then
-                    RelatedBal := 0;
-
-
-                // NetOnDeposits := NetOnDeposits - OffsetTotal;
-
-                if Members.Get(Loans."Member No.") then begin
-                    Dim1 := Members."Global Dimension 1 Code";
-                    Dim2 := Members."Global Dimension 2 Code";
-                    if Members.Status <> Members.Status::Active then
-                        Inactive := true;
-                end;
-                BusinessIncome.Reset;
-                BusinessIncome.SetRange("Loan No.", Loans."Loan No.");
-                if BusinessIncome.Find('-') then begin
-                    BusinessIncome.CalcSums("Average Amount (Internal)");
-                    NetOnSalary := BusinessIncome."Average Amount (Internal)";
-
-                end;
-                ProductFactory.Get(Loans."Loan Product Type");
-                SavAcc.Reset;
-                SavAcc.SetRange("Member No.", Loans."Member No.");
-                SavAcc.SetRange("Product Category", SavAcc."Product Category"::"FOSA Account");
-                if SavAcc.Find('-') then begin
-                    SmallSalo := GlobalFunc.GetSmallestSalary(SavAcc."No.", ProductFactory."Salary Income Types");
-                end;
-                SavAcc.Reset;
-                SavAcc.SetRange("Member No.", Loans."Member No.");
-                SavAcc.SetRange("Product Category", SavAcc."Product Category"::"BOSA Deposits");
-                if SavAcc.Find('-') then begin
-                    MonthlyContr := ProductFactory."Maximum Deposit Contribution";
-                    if ProductFactory."Minimum Dep. Contribution %" > 0 then begin
-                        if ProductFactory."Minimum Dep. Contribution %" * Loans."Approved Amount" * 0.01 > ProductFactory."Maximum Deposit Contribution" then
-                            MaxDeposit := ProductFactory."Maximum Deposit Contribution"
-                        else
-                            MaxDeposit := ProductFactory."Minimum Dep. Contribution %" * Loans."Approved Amount" * 0.01;
-                    end;
-                end;
-
-                //MESSAGE('Curr Contr %1 New Contr %2 Prod fact %3',SavAcc."Monthly Contribution",NewContr,ProductFactory."Minimum Dep. Contribution %");
-                //Difference
-                if MaxDeposit < ProductFactory."Minimum Deposit Contribution" then
-                    MaxDeposit := ProductFactory."Minimum Deposit Contribution";
-
-
-                MaxDeposit := MaxDeposit - SavAcc."Monthly Contribution";
-
-
-
-                //IF NewContr<0 THEN
-                // NewContr:=0;
-
-                //end of contribution
-
-
-                //Qualification on salary
-                AppraisalSal.Reset;
-                AppraisalSal.SetRange("Loan No", "Loan No.");
-                if AppraisalSal.Find('-') then begin
-                    repeat
-                        if AppraisalSal.Type = AppraisalSal.Type::"Net Income" then
-                            TotalBasic := TotalBasic + AppraisalSal.Amount
-
-                        else
-                            if AppraisalSal.Type = AppraisalSal.Type::Earnings then
-                                TrEarni := TrEarni + AppraisalSal.Amount
-                            else
-                                if AppraisalSal.Type = AppraisalSal.Type::Deductions then
-                                    TDeductions := TDeductions + AppraisalSal.Amount
-                                else
-                                    if AppraisalSal.Type = AppraisalSal.Type::Pension then
-                                        TPension := TPension + AppraisalSal.Amount
-                    until AppraisalSal.Next = 0;
-                end;
-
-                //KKaimor
-                // TotaLFosaIn := TotalBasic + TotalSaye + TrEarni + TPension;
-
-                TotaLFosaIn := (TotalBasic + TrEarni + TPension) - TDeductions;//deductions for variables
-                if TotaLFosaIn < 0 then
-                    TotaLFosaIn := 0;
-
-
-
-                //Cleared external effects affecting qualification
-                ExternalEff.Reset;
-                ExternalEff.SetRange("Loan No.", "Loan No.");
-                ExternalEff.SetRange("Affects 2/3 Rule", true);
-                if ExternalEff.Find('-') then begin
-                    ExternalEff.CalcSums("Monthly Deduction");
-                    TotalExteralRec := ExternalEff."Monthly Deduction";
-                end;
-
-                // //Total cleared effects
-                // ExternalEff.Reset;
-                // ExternalEff.SetRange("Loan No.", "Loan No.");
-                // if ExternalEff.Find('-') then begin
-                //     ExternalEff.CalcSums(ExternalEff.Amount);
-                //     TExternalEffects := ExternalEff.Amount;
-                // end;
-                if ProductFactory.Get(Loans."Loan Product Type") then begin
-                    NetSalary := TotaLFosaIn;
-                    if NetSalary < 0 then
-                        NetSalary := 0;
-                end;
-                //TotalLoan := NetOnSalary * (1 - Power((1 + (Loans.Interest / 12 / 10)), -Loans.Installments)) / (Loans.Interest / 12 / 100);
-                // TotaLFosaIn := TotaLFosaIn - (TotalRepayements + STOAmount);
-                //TOTAL Loan Bal-TOPUP
-                //Total Loans
-                Loan.Reset;
-                Loan.SetRange(Loan."Member No.", Loans."Member No.");
-                Loan.SetRange(Loan.Posted, true);
-                Loan.SetRange(Loan."Source Unit", Loan."Source Unit"::FOSA);
-                //exclude BGL and FGL
-                Loan.SetFilter("Loan Product Type", '<>BGL&<>FGL');
-                Loan.SetFilter("Outstanding Balance", '>%1', 0);
-                if Loan.Find('-') then begin
-                    repeat
-                        if Loan."Loan Product Type" <> 'DAL' then begin
-                            Loan.CalcFields(Loan."Outstanding Balance", "Outstanding Interest");
-                            TotalLoanBal := TotalLoanBal + Loan."Outstanding Balance" + Loan."Outstanding Interest";
-                            TotalRepay := TotalRepay + Loan.Repayment;
-                        end;
-
-                    // if Loan."Recovered Loan" <> '' then
-                    // LoanRecoverd := true;
-                    until Loan.Next = 0;
-                    //check if topped up
-                    LoansTopup.Reset;
-                    LoansTopup.SetRange("Loan No.", "Loan No.");
-                    LoansTopup.SetRange(LoansTopup."Source Unit", LoansTopup."Source Unit"::FOSA);
-                    if LoansTopup.Find('-') then begin
-                        repeat
-                            if Loan."Loan Product Type" <> 'DAL' then begin
-                                CurrLoanBalf := CurrLoanBalf + LoansTopup."Monthly Repayment";
-                                // TopupRepayments := TopupRepayments + Loan.Repayment;
-                                TopupRepaymentsf := TopupRepaymentsf + LoansTopup."Monthly Repayment";
-                                OffsetTotalf := OffsetTotalf + LoansTopup."Total Top Up";
-                            end;
-                        until LoansTopup.Next = 0;
-
-                    end;
-                    //check if topped up
-                    TotalLoanBal := TotalLoanBal - OffsetTotalf;
-
-                    TotalRepay := TotalRepay - TopupRepaymentsf;
-                end;
-                //TOTAL Loan Bak-topup
-                //get Net on Deposit
-                //Qualification on deposits
-                MemberDeposits := 0;
-                SavingsAccounts.Reset;
-                SavingsAccounts.SetRange(SavingsAccounts."Member No.", Loans."Member No.");
-                SavingsAccounts.SetRange(SavingsAccounts."Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
-                if SavingsAccounts.Find('-') then begin
-                    SavingsAccounts.CalcFields(SavingsAccounts."Balance (LCY)");
-                    MemberDeposits := SavingsAccounts."Balance (LCY)";//+Loans."Loans - Deposit Purchase";
-                end;
-                QualificationOnDeposits := (MemberDeposits + loans."Loans - Deposit Purchase") * Mult;
-
-                if ProductFactory.Get(Loans."Loan Product Type") then begin
-                    NetOnDeposits := QualificationOnDeposits;
-                    
-                    if NetOnDeposits > ProductFactory."Maximum Loan Amount" then
-                        NetOnDeposits := ProductFactory."Maximum Loan Amount";
-                end;
-
-                //get Net on Deposit
-                GenSetup.Get();
-                MinFosaBal := GenSetup."FOSA Minimum";
-                //vuka n steppa loan excemption from fosa minimu appraisal
-                ProductFactory.Get(Loans."Loan Product Type");
-                if ProductFactory."Exempt From Fosa Minimum" = true then begin
-                    MinFosaBal := 0;
-                end;
-                TotaLFosaIn := TotaLFosaIn - (TotalRepay + STOAmount + MinFosaBal);
-                // NetOnSalary := TotaLFosaIn * ProductFactory."FosaLoan Multiplier";//wil not need this at t
-                //Kenpipe Computation on fosa loan eligibility
-                IF Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::Amortised THEN BEGIN
-                    PresentVAF := ((1 - POWER((1 + (Loans.Interest / 1200)), -Loans.Installments)) / (Loans.Interest / 1200));
-                END ELSE BEGIN
-                    PresentVAF := (Loans.Installments * 100) / ((Loans.Installments * (Loans.Interest / 12)) + 100);
-                END;
-                NetOnSalary := TotaLFosaIn * PresentVAF;
-                //fosa loan eligibilty
-
-                //check
-
-                //check to limit the maximum loan amount of the product
-                if NetOnSalary > ProductFactory."Maximum Loan Amount" then begin
-                    NetOnSalary := ProductFactory."Maximum Loan Amount";
-                end else begin
-                    // NetOnSalary := TotaLFosaIn * ProductFactory."FosaLoan Multiplier";
-                    NetOnSalary := TotaLFosaIn * PresentVAF;
-                end;
-                //NetOnSalary := NetOnSalary - 
-
-                //Take car 
-                if ProductFactory."Type of Discounting" = ProductFactory."Type of Discounting"::"Dividend Discounting" then begin
-                    QualifyingAmount := LoanProcess.ComputeDividendsDiscounting(Loans."Member No.", Loans."Loan Product Type", false);
-                    NetOnSalary := LoanProcess.ComputeDividendsDiscounting(Loans."Member No.", Loans."Loan Product Type", false);
-                end;
-                if (ProductFactory."Nature of Loan Type" = ProductFactory."Nature of Loan Type"::"Karibu Loan") or (ProductFactory."Nature of Loan Type" = ProductFactory."Nature of Loan Type"::"Commercial Bridging") then
-                    NetOnSalary := Loans."Requested Amount";
-                if Loans."Requested Amount" > NetOnSalary then begin
-                    QualifyingAmount := NetOnSalary;
-                    if QualifyingAmount > NetOnDeposits then
-                        QualifyingAmount := NetOnDeposits;
-                    Loans."Recommended Amount" := ROUND(QualifyingAmount, 1, '<');
-                    Loans."Approved Amount" := ROUND(QualifyingAmount, 1, '<');
-                    Loans."Amount To Disburse" := ROUND(QualifyingAmount, 1, '<');
-                end else begin
-                    QualifyingAmount := Loans."Requested Amount";
-                    if QualifyingAmount > NetOnDeposits then
-                        QualifyingAmount := NetOnDeposits;
-
-                    Loans."Recommended Amount" := ROUND(QualifyingAmount, 1, '<');
-                    Loans."Approved Amount" := ROUND(QualifyingAmount, 1, '<');
-                    Loans."Amount To Disburse" := ROUND(QualifyingAmount, 1, '<');
-                end;
-
-                //If any has not finished expected reapplication period
-                TopUp.Reset;
-                TopUp.SetRange("Loan No.", "Loan No.");
-                if TopUp.Find('-') then begin
-                    repeat
-                        if TopUp."Additional Top Up Commission" = true then
-                            ChargeExtraComms := true;
-                    until TopUp.Next = 0;
-                end;
-
-                //Toatl top ups
-                TopUp.Reset;
-                TopUp.SetRange("Loan No.", "Loan No.");
-                if TopUp.Find('-') then begin
-                    TopUpComms := 0;
-                    repeat
-                        PCharges.Reset;
-                        PCharges.SetRange(PCharges."Product Code", Loans."Loan Product Type");
-                        PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::"Top up");
-                        if PCharges.Find('-') then begin
-                            repeat
-                                if (PCharges."Charge Method" = PCharges."charge method"::"% of Amount") and (PCharges."Charging Option" = PCharges."charging option"::"On Approved Amount") then begin
-                                    if ChargeExtraComms = true then
-                                        Amt := (Loans."Approved Amount" * (PCharges.Percentage + PCharges."Additional Charge %") / 100)
-                                    else
-                                        Amt := (Loans."Approved Amount" * (PCharges.Percentage / 100));
-                                end else
-                                    if (PCharges."Charge Method" = PCharges."charge method"::"% of Amount") and (PCharges."Charging Option" = PCharges."charging option"::"On Net Amount") then begin
-                                        if ChargeExtraComms = true then
-                                            Amt := ((TopUp."Principle Top Up" + TopUp."Interest Top Up") * (PCharges.Percentage + PCharges."Additional Charge %") / 100)
-                                        else
-                                            Amt := ((TopUp."Principle Top Up" + TopUp."Interest Top Up") * (PCharges.Percentage / 100))
-                                    end else
-                                        Amt := PCharges."Charge Amount";
-
-
-                                if Amt < PCharges.Minimum then
-                                    Amt := PCharges.Minimum;
-
-                                if Amt > PCharges.Maximum then
-                                    Amt := PCharges.Maximum;
-
-                                TopUpComms := TopUpComms + Amt;
-
-                                if PCharges."Effect Excise Duty" = PCharges."effect excise duty"::Yes then begin
-                                    GenSetup.Get();//TESTFIELD("Excise Duty G/L");
-                                    TopUpCommExc := TopUpComms * GenSetup."Excise Duty (%)" * 0.01;
                                 end;
 
-                            until PCharges.Next = 0;
+                        //If excise duty involved
+                        if PCharges."Effect Excise Duty" = PCharges."effect excise duty"::Yes then begin
+                            GenSetup.Get();//TESTFIELD("Excise Duty G/L");
+                            LoanFormFeesExc := LoanFormFees * GenSetup."Excise Duty (%)" * 0.01;
                         end;
-
-
-                    until TopUp.Next = 0;
+                    until PCharges.Next = 0;
                 end;
 
-                //get no of guarantors
-                LoanGua.Reset;
-                LoanGua.SetRange("Loan No", Loans."Loan No.");
-                LoanGua.SetRange("Guarantor Type", LoanGua."guarantor type"::Guarantor);
-                if LoanGua.Find('-') then
-                    NofGuar := LoanGua.Count;
-
-
-
-                //get no of guarantors
-
+                //2. Processing fees - this is applicable to all loan applications
                 PCharges.Reset;
                 PCharges.SetRange(PCharges."Product Code", Loans."Loan Product Type");
                 PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::General);
@@ -1207,10 +794,6 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                                         until TariffDetails.Next = 0;
                                     end;
                                 end;
-                        // if LoanProcessingAmt < PCharges.Minimum then
-                        //     LoanProcessingAmt := PCharges.Minimum;
-                        // if LoanProcessingAmt > PCharges.Maximum then
-                        //     LoanProcessingAmt := PCharges.Maximum;
 
                         //If excise duty involved
                         if PCharges."Effect Excise Duty" = PCharges."effect excise duty"::Yes then begin
@@ -1218,46 +801,260 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                             LoanProcessingAmtEx := LoanProcessingAmt * GenSetup."Excise Duty (%)" * 0.01;
                         end;
                     until PCharges.Next = 0;
-
+                    TotalProcessingAmt := LoanProcessingAmt + LoanProcessingAmtEx;
                 end;
-                //END;
 
-                TotalProcessingAmt := LoanProcessingAmt + LoanProcessingAmtEx;
-                //
+                //3. Insurance fees
+                PCharges.Reset;
+                PCharges.SetRange(PCharges."Product Code", Loans."Loan Product Type");
+                PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::"Insurance Fees");
+                if PCharges.Find('-') then begin
+                    repeat
+                        if (PCharges."Charge Method" = PCharges."charge method"::"% of Amount" = true) then
+                            InsuranceFee := Loans."Approved Amount" * (PCharges.Percentage / 100)
+                        else
+                            if PCharges."Charge Method" = PCharges."charge method"::"Flat Amount" then
+                                InsuranceFee := PCharges."Charge Amount"
+                            else
+                                if PCharges."Charge Method" = PCharges."charge method"::Staggered then begin
+
+                                    PCharges.TestField(PCharges."Staggered Charge Code");
+
+                                    TariffDetails.Reset;
+                                    TariffDetails.SetRange(TariffDetails.Code, PCharges."Staggered Charge Code");
+                                    if TariffDetails.Find('-') then begin
+                                        repeat
+                                            if (Loans."Approved Amount" >= TariffDetails."Lower Limit") and (Loans."Approved Amount" <= TariffDetails."Upper Limit") then begin
+                                                if TariffDetails."Use Percentage" = true then begin
+                                                    InsuranceFee := Loans."Approved Amount" * TariffDetails.Percentage * 0.01;
+                                                end else begin
+                                                    InsuranceFeeExc := TariffDetails."Charge Amount";
+                                                end;
+                                            end;
+                                        until TariffDetails.Next = 0;
+                                    end;
+                                end;
+
+                        //If excise duty involved
+                        if PCharges."Effect Excise Duty" = PCharges."effect excise duty"::Yes then begin
+                            GenSetup.Get();//TESTFIELD("Excise Duty G/L");
+                            InsuranceFeeExc := InsuranceFee * GenSetup."Excise Duty (%)" * 0.01;
+                        end;
+                    until PCharges.Next = 0;
+                end;
+
+                if Loans."Loans - Deposit Purchase" > 0 then begin
+                    PCharges.Reset;
+                    PCharges.SetRange(PCharges."Product Code", Loans."Loan Product Type");
+                    PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::"Deposit Boosting");
+                    if PCharges.Find('-') then begin
+                        repeat
+
+                            if (PCharges."Charge Method" = PCharges."charge method"::"% of Amount") then
+                                DepPurchaseComm := (Loans."Loans - Deposit Purchase" * (PCharges.Percentage / 100))
+                            // ShareBoostComm := (Loans."Loans - Deposit Purchase" * (PCharges.Percentage / 100))
+
+                            else
+                                if PCharges."Charge Method" = PCharges."charge method"::"Flat Amount" then
+                                    DepPurchaseComm := PCharges."Charge Amount"
+                                else
+                                    if PCharges."Charge Method" = PCharges."charge method"::Staggered then begin
+
+                                        PCharges.TestField(PCharges."Staggered Charge Code");
+
+                                        TariffDetails.Reset;
+                                        TariffDetails.SetRange(TariffDetails.Code, PCharges."Staggered Charge Code");
+                                        if TariffDetails.Find('-') then begin
+                                            repeat
+                                                if (Loans."Loans - Deposit Purchase" >= TariffDetails."Lower Limit") and (Loans."Loans - Deposit Purchase" <= TariffDetails."Upper Limit") then begin
+                                                    if TariffDetails."Use Percentage" = true then begin
+                                                        DepPurchaseComm := Loans."Loans - Deposit Purchase" * TariffDetails.Percentage * 0.01;
+                                                    end else begin
+                                                        DepPurchaseComm := TariffDetails."Charge Amount";
+                                                    end;
+                                                end;
+                                            until TariffDetails.Next = 0;
+                                        end;
+                                    end;
+
+                            if ExcemptCharges = true then
+                                DepPurchaseComm := 0;
+
+                            //If excise duty involved
+                            if PCharges."Effect Excise Duty" = PCharges."effect excise duty"::Yes then begin
+                                GenSetup.Get();//TESTFIELD("Excise Duty G/L");
+                                DepPurchaseCommExc := DepPurchaseComm * GenSetup."Excise Duty (%)" * 0.01;
+                            end;
+                        until PCharges.Next = 0;
+                    end;
+                end;
+
+                TopUp.Reset;
+                TopUp.SetRange("Loan No.", "Loan No.");
+                if TopUp.Findset() then begin
+                    TopUpComms := 0;
+                    TopUp.CalcSums(Commision);
+                    TopUp.CalcSums("One Month Interest");
+                    TopUpComms := TopUp.Commision;
+                    OneMonthInterest := TopUp."One Month Interest";
+                end;
 
 
-                // Twothird rule
-                // if NewRepayment < Loans.Repayment then  // A third rule not applicable
-                //     Twothird := true;
-
-                //Review later if it will be necessary
-                //Total Loans
-                // Loan.Reset;
-                // Loan.SetRange(Loan."Member No.", Loans."Member No.");
-                // Loan.SetRange(Loan.Posted, true);
-                // Loan.SetRange(Loan."Source Unit", Loan."Source Unit"::FOSA);
-                // Loan.SetFilter("Outstanding Balance", '>%1', 0);
-                // if Loan.Find('-') then begin
-                //     repeat
-                //         Loan.CalcFields(Loan."Outstanding Balance");
-                //         TotalLoanBal := TotalLoanBal + Loan."Outstanding Balance";
-                //     // if Loan."Recovered Loan" <> '' then
-                //     // LoanRecoverd := true;
-                //     until Loan.Next = 0;
-                // end;
 
 
+                //get share capital
+                SavAcc.Reset;
+                SavAcc.SetRange("Member No.", Loans."Member No.");
+                SavAcc.SetRange("Product Category", SavAcc."product category"::"Share Capital");
+                if SavAcc.Find('-') then begin
+                    // SavAcc.CalcFields(SavAcc.Balance);
+                    ShareCapital := SavAcc.GetAvailableBalance(SavAcc."No.");
+                end;
 
-                // if NetOnDeposits < Loans."Requested Amount" then
-                //     LoanDepositRation := true;
 
-                // GeneralSetUp.Get;
+                Loan.Reset;
+                Loan.SetRange(Loan."Member No.", Loans."Member No.");
+                Loan.SetRange(Loan.Posted, true);
+                Loan.SetFilter("Outstanding Balance", '>0');
+                Loan.SetRange("Self Guarantee", true);
+                if Loan.Find('-') then begin
+                    repeat
+                        Loans.CalcFields("Outstanding Balance");
+                        SelfGuaranteedBal := SelfGuaranteedBal + Loans."Outstanding Balance";
+                    until Loan.Next = 0;
+                end;
 
-                // if Members.Get(Loans."Member No.") then begin
-                //     if Members."Account Type" = Members."Account Type"::"Single Member Account" then begin
-                //         //MESSAGE('Retires %1 Expect Comp%2 Setup %3 DOB %4',MemberDueRetire,Loans."Expected Date of Completion",GeneralSetUp."Max. Member Age",Members."Date of Birth");
-                //     end;
-                // end;
+                //Qualification on salary
+                AppraisalSal.Reset;
+                AppraisalSal.SetRange("Loan No", "Loan No.");
+                if AppraisalSal.Find('-') then begin
+                    repeat
+                        if AppraisalSal.Type = AppraisalSal.Type::Basic then
+                            TotalBasic := TotalBasic + AppraisalSal.Amount
+                        else
+                            if AppraisalSal.Type = AppraisalSal.Type::Earnings then
+                                TrEarni := TrEarni + AppraisalSal.Amount
+                            else
+                                if AppraisalSal.Type = AppraisalSal.Type::Deductions then
+                                    TDeductions := TDeductions + AppraisalSal.Amount
+                                else
+                                    if AppraisalSal.Type = AppraisalSal.Type::Pension then
+                                        TPension := TPension + AppraisalSal.Amount
+                    until AppraisalSal.Next = 0;
+                end;
+                GrossPay := round(((TotalBasic + TrEarni) - TDeductions), 0.01);
+
+                OneThirdGross := round((GrossPay * 0.33), 0.01);
+                TwoThirdNet := round((OneThirdGross * 0.66), 0.01);
+
+                //Existing Loans
+                Loan.Reset;
+                Loan.SetRange(Loan."Member No.", Loans."Member No.");
+                Loan.SetRange(Loan.Posted, true);
+                Loan.SetRange(Loan."Source Unit", Loan."Source Unit"::FOSA);
+                //exclude BGL and FGL
+                Loan.SetFilter("Loan Product Type", '<>BGL&<>FGL');
+                Loan.SetAutoCalcFields("Total Balance");
+                Loan.SetFilter("Outstanding Balance", '>%1', 0);
+                if Loan.Find('-') then begin
+                    repeat
+                        TotalRepay += Loan.Repayment;
+                        TotalLoanBal += Loan."Total Balance";
+                    until Loan.Next = 0;
+                end;
+
+                TwoThirdNet -= TotalRepay;
+                if TwoThirdNet < 0 then
+                    NetOnSalary := 0
+                else begin
+                    IF Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::Amortised THEN BEGIN
+                        PresentVAF := ((1 - POWER((1 + (Loans.Interest / 1200)), -Loans.Installments)) / (Loans.Interest / 1200));
+                    END ELSE BEGIN
+                        PresentVAF := (Loans.Installments * 100) / ((Loans.Installments * (Loans.Interest / 12)) + 100);
+                    END;
+                    NetOnSalary := TwoThirdNet * PresentVAF;
+                end;
+
+                //check to limit the maximum loan amount of the product
+                if NetOnSalary > ProductFactory."Maximum Loan Amount" then begin
+                    NetOnSalary := ProductFactory."Maximum Loan Amount";
+                end;
+
+                //total topupamount
+                if Members.Get(Loans."Member No.") then begin
+                    Dim1 := Members."Global Dimension 1 Code";
+                    Dim2 := Members."Global Dimension 2 Code";
+                    if Members.Status <> Members.Status::Active then
+                        Inactive := true;
+                end;
+                //Cleared external effects affecting qualification
+                ExternalEff.Reset;
+                ExternalEff.SetRange("Loan No.", "Loan No.");
+                ExternalEff.SetRange("Affects 2/3 Rule", true);
+                if ExternalEff.Find('-') then begin
+                    ExternalEff.CalcSums("Monthly Deduction");
+                    TotalExteralRec := ExternalEff."Monthly Deduction";
+                end;
+
+                //Qualification on deposits
+                MemberDeposits := 0;
+                Mult := ProductFactory."Ordinary Deposits Multiplier";
+                SavingsAccounts.Reset;
+                SavingsAccounts.SetRange(SavingsAccounts."Member No.", Loans."Member No.");
+                SavingsAccounts.SetRange(SavingsAccounts."Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
+                if SavingsAccounts.Find('-') then begin
+                    SavingsAccounts.CalcFields(SavingsAccounts."Balance (LCY)");
+                    MemberDeposits := SavingsAccounts."Balance (LCY)";//+Loans."Loans - Deposit Purchase";
+                end;
+                QualificationOnDeposits := (MemberDeposits + loans."Loans - Deposit Purchase") * Mult;
+
+                if ProductFactory.Get(Loans."Loan Product Type") then begin
+                    NetOnDeposits := QualificationOnDeposits;
+
+                    if NetOnDeposits > ProductFactory."Maximum Loan Amount" then
+                        NetOnDeposits := ProductFactory."Maximum Loan Amount";
+                end;
+
+                //get no of guarantors
+                LoanGua.Reset;
+                LoanGua.SetRange("Loan No", Loans."Loan No.");
+                LoanGua.SetRange("Guarantor Type", LoanGua."guarantor type"::Guarantor);
+                if LoanGua.Findset() then begin
+                    NofGuar := LoanGua.Count;
+                    Loangua.CalcSums("Amount Guaranteed");
+                    TotalGuaranteed := LoanGua."Amount Guaranteed";
+                end;
+
+                //Take car 
+                if ProductFactory."Type of Discounting" = ProductFactory."Type of Discounting"::"Dividend Discounting" then begin
+                    QualifyingAmount := LoanProcess.ComputeDividendsDiscounting(Loans."Member No.", Loans."Loan Product Type", false);
+                    NetOnSalary := LoanProcess.ComputeDividendsDiscounting(Loans."Member No.", Loans."Loan Product Type", false);
+                end;
+                if (ProductFactory."Nature of Loan Type" = ProductFactory."Nature of Loan Type"::"Karibu Loan") or (ProductFactory."Nature of Loan Type" = ProductFactory."Nature of Loan Type"::"Commercial Bridging") then
+                    NetOnSalary := Loans."Requested Amount";
+                if Loans."Requested Amount" > NetOnSalary then begin
+                    QualifyingAmount := NetOnSalary;
+
+                    if ProductFactory."Secured Loan" then begin
+                        if QualifyingAmount > NetOnDeposits then
+                            QualifyingAmount := NetOnDeposits;
+                    end;
+
+                    Loans."Recommended Amount" := ROUND(QualifyingAmount, 1, '<');
+                    Loans."Approved Amount" := ROUND(QualifyingAmount, 1, '<');
+                    Loans."Amount To Disburse" := ROUND(QualifyingAmount, 1, '<');
+                end else begin
+                    QualifyingAmount := Loans."Requested Amount";
+                    if ProductFactory."Secured Loan" then begin
+                        if QualifyingAmount > NetOnDeposits then
+                            QualifyingAmount := NetOnDeposits;
+                    end;
+                    Loans."Recommended Amount" := ROUND(QualifyingAmount, 1, '<');
+                    Loans."Approved Amount" := ROUND(QualifyingAmount, 1, '<');
+                    Loans."Amount To Disburse" := ROUND(QualifyingAmount, 1, '<');
+                end;
+
+
 
                 //get remaining months to retire
                 GeneralSetUp.Get;
@@ -1269,10 +1066,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
 
                         RetirementDate := CALCDATE(Format(GeneralSetUp."Max. Member Age"), Members."Date of Birth");
                         TodayDate := TODAY;
-                        // MonthsToRetire := ROUND((RetirementDate - TodayDate) / 30, 1);
                         MonthsToRetire := (RetirementDate - TodayDate) DIV 30;
-
-
 
                     end;
                 end;
@@ -1313,24 +1107,10 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                         upfrontrate := ProductFactory."Upfront Interest Rate";
                         if upfrontrate <> 0 then begin
                             UpfrontInterest += Round(((upfrontrate / 100) * Loans."Approved Amount"), 0.01, '>');
-
                         end;
                     end;
                 end;
-                //end of get upfroninterest
-                //get totaltopup
-                // LoansTopup.Reset;
-                // LoansTopup.SetRange(LoansTopup."Loan No.", Loans."Loan No.");
-                // LoansTopup.SetRange(LoansTopup."Client Code", Loans."Member No.");
-                // // LoansTopup.SetRange(LoansTopup."Loan Type", RelatedProduct."Related Product Code");
-                // if LoansTopup.FindFirst() then begin
-                //     repeat
-                //         CurrLoanBal := CurrLoanBal + LoansTopup."Monthly Repayment";
-                //         TopupRepayments := TopupRepayments + Loan.Repayment;
-                //         OffsetTotal := OffsetTotal + LoansTopup."Outstanding Balance";
-                //     until LoansTopup.Next = 0;
-                // end;
-                // //get total top up`
+
                 //recalculate repayment amount
                 TotalMRepay := 0;
                 LPrincipal := 0;
@@ -1406,67 +1186,9 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                     Loans."Loan Interest Repayment" := 0;
                 end;
                 Loans.Repayment := Round(Loans.Repayment, 1, '>');
-                //recalculate repayment amount
-                //UPFRONT INTEREST
-
-                // //otherclearence
-                //Toatl top ups
-                //exteral commitments
-                ExternalCharges := 0;
-                OtherComms := 0;
-                //Clearing external debts
-                OtherCommitments.Reset;
-                OtherCommitments.SetRange(OtherCommitments."Loan No.", Loans."Loan No.");
-                if OtherCommitments.Find('-') then begin
-                    repeat
-                        OtherCommitments.CalcSums(OtherCommitments.Amount);
-                        // OtherComms := OtherCommitments.Amount;
-                        TExternalEffects := TExternalEffects + OtherCommitments.Amount;
-                        ExternalCharges := 0;
-                        PCharges.Reset;
-                        PCharges.SetRange(PCharges."Product Code", Loans."Loan Product Type");
-                        PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::"External Loan");
-                        if PCharges.Find('-') then begin
-                            repeat
-                                //MESSAGE('Here1 %1',ExternalCharges);
-                                if (PCharges."Charge Method" = PCharges."charge method"::"% of Amount" = true) then begin
-                                    if ChargeExtraComms = true then
-                                        ExternalCharges := ExternalCharges + (OtherCommitments.Amount * ((PCharges.Percentage + PCharges."Additional Charge %") / 100))
-                                    else
-                                        ExternalCharges := ExternalCharges + (OtherCommitments.Amount * (PCharges.Percentage / 100))
-                                end else begin
-                                    ExternalCharges := ExternalCharges + OtherCommitments.Amount;
-                                end;
-                                if ExternalCharges > PCharges.Maximum then
-                                    ExternalCharges := PCharges.Maximum;
-                                if ExternalCharges < PCharges.Minimum then
-                                    ExternalCharges := PCharges.Minimum;
-                            //MESSAGE('Running Charge  other comms%1',ExternalCharges);
-                            until PCharges.Next = 0;
-                            //  GeneralSetUp.GET;
-                            //  IF ExternalCharges>GeneralSetUp."Max External Clearance Amount" THEN
-                            //  ExternalCharges:=GeneralSetUp."Max External Clearance Amount";
-                            if PCharges."Effect Excise Duty" = PCharges."effect excise duty"::Yes then begin
-                                GeneralSetUp.Get();
-                                ExerciseDuty := ExternalCharges * GeneralSetUp."Excise Duty (%)" * 0.01;
-                            end;
-                        end;
-                    until OtherCommitments.Next = 0;
-                    ExternalCharges2 := ExternalCharges;
-                    ExternalCharges := ExternalCharges + ExerciseDuty;
-                    //MESSAGE('Here %1',ExternalCharges);
-                end;
-                //otherclearence
-
-                if Loans."Recommended Amount" < 0 then begin
-                    Loans."Recommended Amount" := 0;
-                    Loans."Approved Amount" := 0;
-                    Loans."Amount To Disburse" := 0;
-                end;
 
                 NetTakeHome := LoanProcess.ComputeCharges(Loans."Approved Amount", Loans."Loan Product Type", Loans."Loan No.", 0);
-                // TotalExciseDuty := LoanProcess.ComputeExciseDuty(Loans."Approved Amount", Loans."Loan Product Type", Loans."Loan No.", 0);
-                TotalExciseDuty := DepPurchaseCommExc + TopUpCommExc + LoanProcessingAmtEx;
+                TotalExciseDuty := DepPurchaseCommExc + TopUpCommExc + LoanProcessingAmtEx + LoanFormFeesExc + InsuranceFeeExc;
                 TotalExciseDuty := Round(TotalExciseDuty, 1, '>');
 
                 //Net take Home
@@ -1490,8 +1212,6 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                     Loans2.CalcSums(Loans2."Approved Amount");
                     DiscAmt := Loans2."Approved Amount";
                 end;
-
-
 
                 //Insert Warnings---Directors
                 DirectorWarning := false;
@@ -1552,18 +1272,8 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 if SecurityTotal < Loans."Approved Amount" then begin
                     SecurityRisk := true;
                     DiffSec := Loans."Approved Amount" - SecurityTotal;
-
                 end;
 
-
-                // if (NetOnSalary > NetOnDeposits) and (NetOnDeposits < Loans."Requested Amount") then begin
-                //     //IF
-                //     if NetOnSalary > Loans."Requested Amount"
-                //       then
-                //         PossibleBoost := (NetOnSalary - Loans."Requested Amount") / Mult
-                //     else
-                //         PossibleBoost := (NetOnSalary - Loans."Recommended Amount") / Mult;
-                // end;
                 CreateLoanAppraisalBackup(Loans."Loan No.");
             end;
 
@@ -1604,44 +1314,6 @@ Report 52185640 "Loan Appraisal Report-Salaried"
             LoanRec.Delete();
         end;
 
-
-        // // Insert the new record
-        // LoanRec.Init();
-        // LoanRec."Loan No." := LoanNo;
-        // LoanRec."Member No" := Loans."Member No.";
-        // LoanRec."Staff No" := Loans."Staff No";
-        // LoanRec."Loan Product Type" := LoansProductTyp;
-        // LoanRec."Requested Amount" := Loans."Requested Amount";
-        // LoanRec."Approved Amount" := Loans."Approved Amount";
-        // LoanRec."Recommended Amount" := Loans."Recommended Amount";
-        // LoanRec."Member Deposits" := MemberDeposits;
-        // LoanRec."Deposit Boosting" := Loans."Loans - Deposit Purchase";
-        // LoanRec."Current Contribution" := MonthlyContr;
-        // LoanRec."Qualification on Deposits" := NetOnDeposits;
-        // LoanRec.Installments := Loans.Installments;
-        // LoanRec."Existing Loans" := TotalLoanBal;
-        // LoanRec."Deposit multiplier" := Mult;
-        // LoanRec."Qualification on Salary" := NetOnSalary;
-        // LoanRec."Qualification on Guarantors" := SecurityTotal;
-        // LoanRec."Possible Deposit Boost" := PossibleBoost;
-        // LoanRec."No. of Gurantors" := CountNo;
-        // LoanRec."Other Clearence" := TExternalEffects;
-        // LoanRec."Other Clearence Fee" := ExternalCharges;
-        // LoanRec."Other Clearence Duty" := TotalExciseDuty;
-        // LoanRec."Total excise Duty" := ExerciseDuty;
-        // LoanRec."Basic Income" := TotalBasic;
-        // LoanRec.Earnings := TotalEarning;
-        // LoanRec.Deductions := TotalDeductions;
-        // LoanRec."1/3 of Basic" := AthirdAmt;
-        // LoanRec."Net Salary" := NetSalary;
-        // LoanRec."Amt to Loan" := NetSalary - AthirdAmt;
-        // LoanRec."External Effects" := ExternalRecovered;
-        // LoanRec."New Net Salary" := NetSalary - Loans.Repayment;
-        // LoanRec."Cleared Loans Installment" := TopupRepayments;
-        // LoanRec."Adjusted Net" := AdjNet;
-        // LoanRec."New Repayment" := Loans.Repayment;
-        // LoanRec."Take Home Amount" := NetTakeHome;
-        // LoanRec.Insert();
         // Insert the new record
         LoanRec.Init();
         LoanRec."Loan No." := LoanNo;
@@ -1720,7 +1392,6 @@ Report 52185640 "Loan Appraisal Report-Salaried"
     var
         myInt: Integer;
     begin
-        // Message('TExternalEffects %1', TExternalEffects);
     end;
 
     trigger OnPreReport()
@@ -1734,14 +1405,31 @@ Report 52185640 "Loan Appraisal Report-Salaried"
     end;
 
     var
-        DCSParameterMatrix: Record "DCS Parameter Matrix";
 
-        ParameterBold: Boolean;
+        //Company Information
+        Company: Record "Company Information";
         CompanyTelephone: Text;
         CompanyAddress: Text;
-        Salstartend: Date;
-        ParamContribution: Option "Formula Factor","Flat Rate",Range,Ceiling,Multiplier,Divisor,Frequency,"Sum",Difference,"Graduated Range",Exponential,Terminate,Probability,Floor;
-        ParamFormula: Text;
+        CompanyNam: Text[100];
+        CommunicationOnline: Text[100];
+
+        //Deductions
+        TotalProcessingAmt: Decimal;
+        LoanFormFees: Decimal;
+        LoanFormFeesExc: Decimal;
+
+        LoanProcessingAmt: Decimal;
+        LoanProcessingAmtEx: Decimal;
+
+        InsuranceFee: Decimal;
+        InsuranceFeeExc: Decimal;
+
+        OneMonthInterest: Decimal;
+
+        GrossPay: Decimal;
+        OnethirdGross: Decimal;
+        TwoThirdNet: Decimal;
+        //
         SavingsAccounts: Record "Savings Accounts";
         MemberDeposits, QualificationOnDeposits, ShareCapital : Decimal;
         Loan: Record Loans;
@@ -1749,7 +1437,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
         TotalLoanBal: Decimal;
         TotalRepay: Decimal;
 
-        Company: Record "Company Information";
+
         LoansTopup: Record "Loans Top up";
         GlobalFunc: Codeunit "Global Functions";
         SmallSalo: Decimal;
@@ -1772,7 +1460,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
         ReapplicationPeriod: Boolean;
         DepositMult: Decimal;
         RelatedProduct: Record "Related Product";
-        RelatedBal, Relatedrepayments : Decimal;
+        RelatedBal, TotalGuaranteed : Decimal;
         NetOnDeposits: Decimal;
         AppraisalSal: Record "Appraisal Salary Details";
         TotalBasic: Decimal;
@@ -1780,7 +1468,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
         StandingOrderLines: Record "Standing Order Lines";
         TotalEarning: Decimal;
         TotalSaye: Decimal;
-        CompanyNam: Text[100];
+
 
         TotalDeductions: Decimal;
         LoanTopup: Record "Loans Top up";
@@ -1867,10 +1555,8 @@ Report 52185640 "Loan Appraisal Report-Salaried"
         TotalAllowance: Decimal;
         MultP: Integer;
         BusinessIncome: Record "Business Income";
-        LoanProcessingAmt: Decimal;
-        LoanProcessingAmtEx: Decimal;
-        TotalProcessingAmt: Decimal;
-        CommunicationOnline: Text[100];
+
+
         TrEarni: Decimal;
         Loanapp: Page "Loan Application Card";
         DOB: Date;
