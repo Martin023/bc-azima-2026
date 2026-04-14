@@ -1,7 +1,7 @@
 table 52185739 "Loan Guarantors and Security"
 {
     DrillDownPageID = "Loan Guarantors and Security";
-    LookupPageID = "Loan Guarantors and Security"; 
+    LookupPageID = "Loan Guarantors and Security";
 
     fields
     {
@@ -144,6 +144,10 @@ table 52185739 "Loan Guarantors and Security"
                             else
                                 "Self Guarantee" := false;
                         end;
+                    end
+                    else begin
+                        "Available Shares" := SavingsAccounts.GetAvailableBalance("Savings Account No./Member No.");
+                        "Amount Guaranteed" := "Available Shares";
                     end;
 
                     //Evaluate guarantor basic info

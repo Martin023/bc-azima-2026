@@ -9,7 +9,6 @@ Report 52185640 "Loan Appraisal Report-Salaried"
         dataitem(Loans; Loans)
         {
             RequestFilterFields = "Loan No.";
-            //Company info
             column(CompanyTelephone; CompanyTelephone)
             {
             }
@@ -68,10 +67,16 @@ Report 52185640 "Loan Appraisal Report-Salaried"
             {
 
             }
-            column(SmallSalo; SmallSalo)
+            column(THouseAllow; THouseAllow)
             {
 
             }
+            column(DisposableInc; DisposableInc)
+            {
+
+            }
+            column(GrossPay; GrossPay)
+            { }
 
 
             column(Dim2; Dim2)
@@ -100,8 +105,6 @@ Report 52185640 "Loan Appraisal Report-Salaried"
             column(TopUpComms; TopUpComms)
 
             { }
-            column(CountNo; CountNo)
-            { }
 
             column(NofGuar; NofGuar)
             { }
@@ -113,10 +116,6 @@ Report 52185640 "Loan Appraisal Report-Salaried"
             { }
             column(LoanRecoverd; LoanRecoverd)
 
-            {
-
-            }
-            column(NetOnDeposits; NetOnDeposits)
             {
 
             }
@@ -151,8 +150,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
             }
             column(TExternalEffects; TExternalEffects)
             { }
-            column(GrossAmount; GrossAmount)
-            { }
+
             column(AthirdDisplay; AthirdDisplay)
             { }
             column(SecurityRisk; SecurityRisk)
@@ -182,14 +180,6 @@ Report 52185640 "Loan Appraisal Report-Salaried"
 
             }
             column(LoanDepositRation; LoanDepositRation)
-            {
-
-            }
-            // column(RemPeriod; RemPeriod)
-            // {
-
-            // }
-            column(TotalSaye; TotalSaye)
             {
 
             }
@@ -638,50 +628,50 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 }
 
             }
-            dataitem("Standing Order Header"; "Standing Order Header")
-            {
-                DataItemLink = "Member No." = field("Member No.");
-                DataItemTableView = where(Status = const(Approved));
-                column(STO_No; "No.")
-                {
+            // dataitem("Standing Order Header"; "Standing Order Header")
+            // {
+            //     DataItemLink = "Member No." = field("Member No.");
+            //     DataItemTableView = where(Status = const(Approved));
+            //     column(STO_No; "No.")
+            //     {
 
-                }
-                column(STO_Source_Account_No_; "Source Account No.")
-                {
+            //     }
+            //     column(STO_Source_Account_No_; "Source Account No.")
+            //     {
 
-                }
-                column(STO_Amount; Amount)
-                {
+            //     }
+            //     column(STO_Amount; Amount)
+            //     {
 
-                }
-                // column(STOAmount; STOAmount)
-                // {
+            //     }
+            //     // column(STOAmount; STOAmount)
+            //     // {
 
-                // }
+            //     // }
 
-                dataitem("Standing Order Lines"; "Standing Order Lines")
-                {
-                    DataItemLink = "Document No." = field("No.");
-                    //DataItemTableView = where(Status = const(Approved));
-                    column(STOL_Destination_Account_Type; "Destination Account Type")
-                    {
+            //     dataitem("Standing Order Lines"; "Standing Order Lines")
+            //     {
+            //         DataItemLink = "Document No." = field("No.");
+            //         //DataItemTableView = where(Status = const(Approved));
+            //         column(STOL_Destination_Account_Type; "Destination Account Type")
+            //         {
 
-                    }
-                    column(STOL_Destination_Account_No_; "Destination Account No.")
-                    {
+            //         }
+            //         column(STOL_Destination_Account_No_; "Destination Account No.")
+            //         {
 
-                    }
-                    column(STOL_Transaction_Type; "Transaction Type")
-                    {
+            //         }
+            //         column(STOL_Transaction_Type; "Transaction Type")
+            //         {
 
-                    }
-                    column(STOL_Amount; Amount)
-                    {
+            //         }
+            //         column(STOL_Amount; Amount)
+            //         {
 
-                    }
-                }
+            //         }
+            //     }
 
-            }
+            // }
             trigger OnAfterGetRecord()
             begin
                 LoanFormFees := 0;
@@ -696,32 +686,14 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 GrossPay := 0;
                 OneThirdGross := 0;
                 TwoThirdNet := 0;
+                TotalRepay := 0;
+                TotalAllowance := 0;
+                THouseAllow := 0;
+                TotalBasic := 0;
+                TDeductions := 0;
+                TPension := 0;
 
-                //TO DO:GETMONTHS TO RETIRE
-                StandingOrderHeader.RESET;
-                StandingOrderHeader.SETRANGE("Member No.", Loans."Member No.");
-                StandingOrderHeader.SetRange("Income Type", StandingOrderHeader."Income Type"::Salary);
-                StandingOrderHeader.SETRANGE(Status, StandingOrderHeader.Status::Approved);
-                IF StandingOrderHeader.FINDFIRST THEN BEGIN
-                    REPEAT
-                        StandingOrderLines.RESET;
-                        StandingOrderLines.SETRANGE("Document No.", StandingOrderHeader."No.");
-                        IF StandingOrderLines.FINDFIRST THEN BEGIN
-                            REPEAT
-                                STOAmount += StandingOrderLines.Amount;
-                                LoansTopup.Reset;
-                                LoansTopup.SetRange("Loan No.", Loans."Loan No.");
-                                LoansTopup.SetRange("Loan Top Up", StandingOrderLines."Loan No.");
-                                if LoansTopup.Find('-') then begin
-                                    if Loans."Recovery Mode" = Loans."Recovery Mode"::Hybrid then begin
-                                        STOAmount := STOAmount - StandingOrderLines.Amount;
-                                    end;
-                                end;
-                            UNTIL StandingOrderLines.NEXT = 0;
-                        END;
-                    UNTIL StandingOrderHeader.NEXT = 0;
-                END;
-
+                ProductFactory.get(Loans."Loan Product Type");
                 //Get Charges and commissions
                 //1. Form fees - this is applicable to all loan applications
                 PCharges.Reset;
@@ -900,14 +872,11 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 end;
 
 
-
-
                 //get share capital
                 SavAcc.Reset;
                 SavAcc.SetRange("Member No.", Loans."Member No.");
                 SavAcc.SetRange("Product Category", SavAcc."product category"::"Share Capital");
                 if SavAcc.Find('-') then begin
-                    // SavAcc.CalcFields(SavAcc.Balance);
                     ShareCapital := SavAcc.GetAvailableBalance(SavAcc."No.");
                 end;
 
@@ -940,6 +909,8 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                                 else
                                     if AppraisalSal.Type = AppraisalSal.Type::Pension then
                                         TPension := TPension + AppraisalSal.Amount
+                                    else if AppraisalSal.type = AppraisalSal.type::"House Allowance" then
+                                        THouseAllow := THouseAllow + AppraisalSal.Amount
                     until AppraisalSal.Next = 0;
                 end;
                 GrossPay := round(((TotalBasic + TrEarni) - TDeductions), 0.01);
@@ -956,23 +927,28 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 Loan.SetFilter("Loan Product Type", '<>BGL&<>FGL');
                 Loan.SetAutoCalcFields("Total Balance");
                 Loan.SetFilter("Outstanding Balance", '>%1', 0);
-                if Loan.Find('-') then begin
+                if Loan.FindSet() then begin
                     repeat
-                        TotalRepay += Loan.Repayment;
-                        TotalLoanBal += Loan."Total Balance";
+                        LoanTopup.reset();
+                        LoanTopup.SetRange("Loan No.", Loans."Loan No.");
+                        LoanTopup.setrange("Loan Top Up", Loan."Member No.");
+                        if LoanTopup.IsEmpty() or (LoanTopup."Total Top Up" < Loan."Total Balance") then begin
+                            TotalRepay += Loan.Repayment;
+                            TotalLoanBal += Loan."Total Balance";
+                        end;
                     until Loan.Next = 0;
                 end;
 
-                TwoThirdNet -= TotalRepay;
-                if TwoThirdNet < 0 then
-                    NetOnSalary := 0
+                DisposableInc := TwoThirdNet - TotalRepay;
+                if DisposableInc < 0 then
+                    DisposableInc := 0
                 else begin
                     IF Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::Amortised THEN BEGIN
                         PresentVAF := ((1 - POWER((1 + (Loans.Interest / 1200)), -Loans.Installments)) / (Loans.Interest / 1200));
                     END ELSE BEGIN
                         PresentVAF := (Loans.Installments * 100) / ((Loans.Installments * (Loans.Interest / 12)) + 100);
                     END;
-                    NetOnSalary := TwoThirdNet * PresentVAF;
+                    NetOnSalary := DisposableInc * PresentVAF;
                 end;
 
                 //check to limit the maximum loan amount of the product
@@ -1009,10 +985,8 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 QualificationOnDeposits := (MemberDeposits + loans."Loans - Deposit Purchase") * Mult;
 
                 if ProductFactory.Get(Loans."Loan Product Type") then begin
-                    NetOnDeposits := QualificationOnDeposits;
-
-                    if NetOnDeposits > ProductFactory."Maximum Loan Amount" then
-                        NetOnDeposits := ProductFactory."Maximum Loan Amount";
+                    if QualificationOnDeposits > ProductFactory."Maximum Loan Amount" then
+                        QualificationOnDeposits := ProductFactory."Maximum Loan Amount";
                 end;
 
                 //get no of guarantors
@@ -1036,8 +1010,8 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                     QualifyingAmount := NetOnSalary;
 
                     if ProductFactory."Secured Loan" then begin
-                        if QualifyingAmount > NetOnDeposits then
-                            QualifyingAmount := NetOnDeposits;
+                        if QualifyingAmount > QualificationOnDeposits then
+                            QualifyingAmount := QualificationOnDeposits;
                     end;
 
                     Loans."Recommended Amount" := ROUND(QualifyingAmount, 1, '<');
@@ -1046,8 +1020,8 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 end else begin
                     QualifyingAmount := Loans."Requested Amount";
                     if ProductFactory."Secured Loan" then begin
-                        if QualifyingAmount > NetOnDeposits then
-                            QualifyingAmount := NetOnDeposits;
+                        if QualifyingAmount > QualificationOnDeposits then
+                            QualifyingAmount := QualificationOnDeposits;
                     end;
                     Loans."Recommended Amount" := ROUND(QualifyingAmount, 1, '<');
                     Loans."Approved Amount" := ROUND(QualifyingAmount, 1, '<');
@@ -1121,15 +1095,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 LBalance := Loans."Approved Amount";
 
                 if (InterestRate <> 0) and (not ProductFactory."Interest Recovered Upfront") then begin
-                    // EmployerProducts.Reset();
-                    // EmployerProducts.SetRange("Product ID", Rec."Loan Product Type");
-                    // if EmployerProducts.FindFirst() then begin
-                    //     Employerate := EmployerProducts.Interest;
-                    //     if Employerate = 0 then
-                    //         Employerate := InterestRate
-                    //     else
-                    //         Employerate := Employerate;
-                    // End;
+
                     if Loans."Interest Calculation Method" = "Interest Calculation Method"::Amortised then begin
                         TotalMRepay := Round((InterestRate / 12 / 100) / (1 - Power((1 + (InterestRate / 12 / 100)), -RepayPeriod)) * LoanAmount, 1, '>');
                         LInterest := Round(LBalance / 100 / 12 * InterestRate, 0.05, '>');
@@ -1191,7 +1157,6 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 TotalExciseDuty := DepPurchaseCommExc + TopUpCommExc + LoanProcessingAmtEx + LoanFormFeesExc + InsuranceFeeExc;
                 TotalExciseDuty := Round(TotalExciseDuty, 1, '>');
 
-                //Net take Home
                 // NetTakeHome := NetTakeHome - TotalExciseDuty;
                 NetTakeHome := NetTakeHome - (TotalExciseDuty + DepPurchaseComm + Loans."Loans - Deposit Purchase" + Loans."Share Boosted Amount");
                 if NetTakeHome > 0 then begin
@@ -1365,7 +1330,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
         LoanRec."1/3 Display" := AthirdDisplay;
         LoanRec."Net Salary" := NetSalary;
         LoanRec."Amt to Loan" := NetSalary - AthirdAmt;
-        LoanRec."Qualification on Deposits" := NetOnDeposits;
+        LoanRec."Qualification on Deposits" := qualificationOnDeposits;
         LoanRec."Qualification on Salary" := NetOnSalary;
         LoanRec."STO Amount" := STOAmount;
         LoanRec."Fosa Commitments" := TotalRepay;
@@ -1436,12 +1401,9 @@ Report 52185640 "Loan Appraisal Report-Salaried"
         STOAmount: Decimal;
         TotalLoanBal: Decimal;
         TotalRepay: Decimal;
-
-
         LoansTopup: Record "Loans Top up";
         GlobalFunc: Codeunit "Global Functions";
-        SmallSalo: Decimal;
-        CountNo: Integer;
+        DisposableInc: Decimal;
         StandingOrderHeader: Record "Standing Order Header";
         GuarantorMax: Boolean;
         ProductFactory: Record "Product Factory";
@@ -1461,15 +1423,11 @@ Report 52185640 "Loan Appraisal Report-Salaried"
         DepositMult: Decimal;
         RelatedProduct: Record "Related Product";
         RelatedBal, TotalGuaranteed : Decimal;
-        NetOnDeposits: Decimal;
         AppraisalSal: Record "Appraisal Salary Details";
         TotalBasic: Decimal;
         TDeductions: Decimal;
         StandingOrderLines: Record "Standing Order Lines";
         TotalEarning: Decimal;
-        TotalSaye: Decimal;
-
-
         TotalDeductions: Decimal;
         LoanTopup: Record "Loans Top up";
         TopupRepayments: Decimal;
@@ -1550,18 +1508,13 @@ Report 52185640 "Loan Appraisal Report-Salaried"
         GenSetup: Record "General Set-Up";
         PossibleBoost: Decimal;
         ExternalCharges2: Decimal;
-        GrossAmount: Decimal;
         LoansProductTyp: Text;
         TotalAllowance: Decimal;
         MultP: Integer;
         BusinessIncome: Record "Business Income";
-
-
+        THouseAllow: Decimal;
         TrEarni: Decimal;
-        Loanapp: Page "Loan Application Card";
-        DOB: Date;
         NofGuar: Integer;
-        Yrs: Integer;
         TotalMRepay: Decimal;
         LPrincipal: Decimal;
         LInterest: Decimal;
