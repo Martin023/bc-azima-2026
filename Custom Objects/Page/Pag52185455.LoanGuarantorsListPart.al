@@ -113,13 +113,7 @@ page 52185455 "Loan Guarantors ListPart"
                     Caption = '% Guaranteed';
                     Editable = false;
                 }
-                field("Percentage Guaranteed"; Rec."Percentage Guaranteed")
-                {
-                    ApplicationArea = all;
-                    //Caption = '% Guaranteed';
-                    Editable = false;
-                    visible = false;
-                }
+                
                 field("Loan Group"; Rec."Loan Groups")
                 {
                     Editable = false;

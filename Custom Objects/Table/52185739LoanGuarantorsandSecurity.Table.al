@@ -1,7 +1,7 @@
 table 52185739 "Loan Guarantors and Security"
 {
     DrillDownPageID = "Loan Guarantors and Security";
-    LookupPageID = "Loan Guarantors and Security";
+    LookupPageID = "Loan Guarantors and Security"; 
 
     fields
     {
@@ -12,6 +12,7 @@ table 52185739 "Loan Guarantors and Security"
         }
         field(2; "Savings Account No./Member No."; Code[20])
         {
+            Caption = 'Account/Collateral No.';
             TableRelation =
             IF ("Guarantor Type" = CONST(Guarantor), "Loan Groups" = FILTER(Normal)) "Savings Accounts"."No." WHERE("Product Category" = filter("Business Deposits" | "BOSA Deposits"))
             ELSE
@@ -50,14 +51,16 @@ table 52185739 "Loan Guarantors and Security"
                     SaVingAc.Reset();
                     SaVingAc.SetRange(SaVingAc."No.", Rec."Savings Account No./Member No.");
                     if SaVingAc.FindFirst() then begin
-                        Rec."Amount Guaranteed" := SaVingAc."Lien Placed";
+                        Rec."Amount Guaranteed" := SaVingAc."Lien Placed" - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.");
+                        rec."Deposits/Shares" := SaVingAc."Lien Placed";
                     end;
                 end;
                 if "Guarantor Type" = "Guarantor Type"::"Fixed Deposit" then begin
                     FixedDeposit.Reset();
                     FixedDeposit.SetRange(FixedDeposit."No.", Rec."Savings Account No./Member No.");
                     if FixedDeposit.FindFirst() then begin
-                        Rec."Amount Guaranteed" := FixedDeposit."Fixed Deposit Amount";
+                        Rec."Amount Guaranteed" := FixedDeposit."Fixed Deposit Amount" - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.");
+                        rec."Deposits/Shares" := FixedDeposit."Fixed Deposit Amount";
                     end;
                 end;
 
@@ -68,18 +71,7 @@ table 52185739 "Loan Guarantors and Security"
                     if SaVingAc.Balance <= 0 then begin
                         Error('Member ' + SaVingAc.Name + ' No. ' + SaVingAc."Member No." + ' has no deposits');
                     end;
-                    //*************Kenpipe Bypass::Allow Members with attached defaulted loans to guarantee
-                    // ProductFactory.Reset();
-                    // ProductFactory.SetRange("Nature of Loan Type", ProductFactory."Nature of Loan Type"::Defaulter);
-                    // if ProductFactory.FindFirst() then begin
-                    //     Lons.Reset();
-                    //     Lons.SetRange("Member No.", SaVingAc."Member No.");
-                    //     Lons.SetFilter("Outstanding Balance", '>%1', 0);
-                    //     Lons.SetRange("Loan Product Type", ProductFactory."Product ID");
-                    //     if Lons.FindFirst() then
-                    //         Error('Member ' + SaVingAc.Name + ' No. ' + Lons."Member No." + ' has an attached loan');
-                    // end;
-                    //*************Kenpipe Bypass::Allow Members with attached defaulted loans to guarantee
+
                     Membersrec.Reset();
                     Membersrec.SetRange("No.", SaVingAc."Member No.");
                     if Membersrec.Find('-') then begin
@@ -89,33 +81,11 @@ table 52185739 "Loan Guarantors and Security"
                         GlobalFunctions.FlagAccounts(Membersrec."No.");
                     end;
                 end;
-
-
-
-                // if LoanApp.Get(Rec."Loan No") then begin
-                //     ProductFactory.Reset();
-                //     ProductFactory.SetRange("Product ID", LoanApp."Loan Product Type");
-                //     ProductFactory.SetRange("Source Unit", ProductFactory."Source Unit"::FOSA);
-                //     if ProductFactory.FindFirst() then begin
-                //         SaVingAc.Reset();
-                //         SaVingAc.SetRange("No.", Rec."Savings Account No./Member No.");
-                //         if SaVingAc.FindFirst() then begin
-                //             SalaryLines.Reset();
-                //             SalaryLines.SetRange("Member No.", SaVingAc."Member No.");
-                //             SalaryLines.SetRange(Posted, true);
-                //             SalaryLines.SetFilter("Posting Date", '%1..%2', CalcDate('-40D', Today), Today);
-                //             if not SalaryLines.FindFirst() then begin
-                //                 Error('Salary for member ' + SaVingAc.Name + ' - ' + SaVingAc."Member No." + ' has not been received for the last 40 days');
-                //             end;
-                //         end;
-                //     end;
-                // end;
                 //***************RESTRICT GUARANTOR TYPE BASED ON LOAN SECURITY ***********************************************//
                 if "Guarantor Type" = "Guarantor Type"::Guarantor then begin
                     if LoanApp.Get(Rec."Loan No") then begin
                         ProductFactory.Reset();
                         ProductFactory.SetRange("Product ID", LoanApp."Loan Product Type");
-                        // ProductFactory.SetRange("Source Unit", ProductFactory."Source Unit"::BOSA);
                         if ProductFactory.FindFirst() then begin
                             if ProductFactory."Loan Security" = ProductFactory."Loan Security"::"Collateral Only" then begin
 
@@ -155,7 +125,6 @@ table 52185739 "Loan Guarantors and Security"
                 if LoansR.Get("Loan No") then begin
                     "Member Guaranteed" := LoansR."Member No.";
                     "Loanee Name" := LoansR."Member Name";
-
                 end;
 
                 if "Guarantor Type" = "Guarantor Type"::Guarantor then begin
@@ -166,8 +135,13 @@ table 52185739 "Loan Guarantors and Security"
                         SavingsAccounts.SetRange("Member No.", SELFLOAN."Member No.");
                         SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
                         if SavingsAccounts.Find('-') then begin
-                            if SavingsAccounts."No." = "Savings Account No./Member No." then
-                                "Self Guarantee" := true else
+                            if SavingsAccounts."No." = "Savings Account No./Member No." then begin
+                                "Self Guarantee" := true;
+                                "Available Shares" := LoanAppraisal.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.") - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.");
+                                "Amount Guaranteed" := LoanAppraisal.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.") - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.");
+                                LoansR."Self Guarantee" := true;
+                            end
+                            else
                                 "Self Guarantee" := false;
                         end;
                     end;
@@ -175,121 +149,32 @@ table 52185739 "Loan Guarantors and Security"
                     //Evaluate guarantor basic info
                     if Cust.Get("Savings Account No./Member No.") then begin
                         if Members.Get(Cust."Member No.") then begin
-                            if Members.Status <> Members.Status::Active then begin
-                                Error('Member %2 No. %1 is not an Active Member', Members."No.", Members.Name);
+                            if (Members.Status <> Members.Status::Active) and (Members.Status <> Members.Status::Dormant) then begin
+                                Error('Member %2 No. %1 is not an Active  or Dormant member hence cannot be a guarantor', Members."No.", Members.Name);
                             end;
                         end;
 
                         if Employer.Get(Cust."Employer Code") then begin
                             if Employer."Internal Staff Employer" = true then begin
-                                //Check if self guaranteed, allow
                                 if Members.Get(Cust."Member No.") then begin
                                     if "Member Guaranteed" <> cust."Member No." then
-                                        Error(cust."Employer Code" + ' are not allowed to guarantee');
-                                    // Error(Text001);
+                                        Error('Employer %1 are not allowed to guarantee.', Cust."Employer Code");
                                 end;
                             end;
                         end;
-                        // if Employer.Get(Cust."Employer Code") then begin
-                        //     if Employer."Internal Staff Employer" = true then begin
-                        //         //Check if self guaranteed, allow
-                        //         if LoansR.Get("Loan No") then begin
-                        //             // if "Member Guaranteed" <> LoansR."Member No." then
-                        //             if "Member Guaranteed" <> Rec."Member No" then
-                        //                 Error(Text001);
 
-                        //         end;
-
-                        //     end;
-                        // end;
                         Members.Get(Cust."Member No.");
                         Cust.CalcFields(Cust."Balance (LCY)");
                         Name := Cust.Name;
                         "Staff/Payroll No." := Cust."Payroll/Staff No.";
-                        // "Loan Balance":=Cust."Balance (LCY)";
-                        "Deposits/Shares" := Cust."Balance (LCY)";
-                        // "Amount Guaranteed" := cust.GetAvailableBalance(cust."No.");
+                        "Deposits/Shares" := Cust.GetAvailableBalance(Cust."No.");
                         "ID No." := Members."Primary Identification";
                         "Member No" := Cust."Member No.";
                         Name := Cust.Name;
                         "Phone No." := Members."Phone No.";
                         //Check if self gauarantee
-                        Loans.Reset;
-                        Loans.SetRange(Loans."Member No.", Cust."Member No.");
-                        Loans.SetRange(Loans."Self Guarantee", true);
-                        Loans.SetFilter(Loans."Outstanding Balance", '>0');
-                        if Loans.Find('-') then begin
-                            Loans.CalcFields(Loans."Outstanding Balance");
-                            if Loans."Outstanding Balance" >= GenSetUp."Self Guarantee %" * "Deposits/Shares" * 0.01 then begin
-                                LoansTopup.Reset;
-                                LoansTopup.SetRange("Loan Top Up", Loans."Loan No.");
-                                if not LoansTopup.Find('-') then begin
-                                    Error(Text002, Loans."Outstanding Balance", "Deposits/Shares");
-                                end;
-                            end
-                            else
-                                "Amount Guaranteed" := (GenSetUp."Self Guarantee %" * "Deposits/Shares" * 0.01) - Loans."Outstanding Balance";
-                        end;
-                    end;
-                    LoanGuar.Reset;
-                    LoanGuar.SetRange("Savings Account No./Member No.", "Savings Account No./Member No.");
-                    LoanGuar.SetFilter("Outstanding Balance", '>0');
-                    if LoanGuar.Find('-') then begin
-                        LoanGuar.CalcSums("Amount Guaranteed");
-                        TotalGuaranteed := LoanGuar."Amount Guaranteed";
-                        "No Of Loans Guaranteed" := LoanGuar.Count;
-                        //MESSAGE('Loans gua %1 Counter %2 Loan No. %3',TotalGuaranteed,"No Of Loans Guaranteed",LoanGuar."Loan No");
-                    end;
-                    "Available Shares" := "Deposits/Shares" - "Total Guaranteed";
-                    //Check for Minor and Major Loans
-                    "No Of Major Loans Guaranteed" := 0;
-                    "No Of Minor Loans Guaranteed" := 0;
-                    Majorloans := 0;
-                    MinerLoans := 0;
-                    //LoansOnpipe
-                    LoanGuar.Reset;
-                    LoanGuar.SetRange("Savings Account No./Member No.", "Savings Account No./Member No.");
-                    if LoanGuar.Find('-') then begin
-                        repeat
-                            if TheLoans.Get(LoanGuar."Loan No") then begin
-                                TheLoans.CalcFields("Loan Span");
-                                if pfac.get(TheLoans."Loan Product Type") then begin
-                                    if pfac."Source Unit" = pfac."Source Unit"::BOSA then begin
-                                        if TheLoans.Status <> TheLoans.Status::Rejected then begin
-                                            if TheLoans.Posted = false then begin
-                                                if TheLoans."Loan Span" = TheLoans."Loan Span"::Major then
-                                                    Majorloans += 1;
-                                                if TheLoans."Loan Span" = TheLoans."Loan Span"::Minor then
-                                                    MinerLoans += 1;
-                                            end;
-                                            //MESSAGE('Loans gua %1 Counter %2 Loan No. %3',TotalGuaranteed,"No Of Loans Guaranteed",LoanGuar."Loan No");
-                                        end;
-                                    end;
-                                end;
-                            end;
-                        until LoanGuar.Next = 0;
                     end;
 
-                    // //posted Loans
-                    // LoanGuar.Reset;
-                    // LoanGuar.SetRange("Savings Account No./Member No.", "Savings Account No./Member No.");
-                    // LoanGuar.SetFilter("Outstanding Balance", '>0');
-                    // if LoanGuar.Find('-') then begin
-                    //     repeat
-                    //         if TheLoans.Get(LoanGuar."Loan No") then begin
-                    //             if pfac.get(TheLoans."Loan Product Type") then begin
-                    //                 if pfac."Source Unit" = pfac."Source Unit"::BOSA then begin
-                    //                     TheLoans.CalcFields("Loan Span");
-                    //                     if TheLoans."Loan Span" = TheLoans."Loan Span"::Major then
-                    //                         "No Of Major Loans Guaranteed" += 1;
-                    //                     if TheLoans."Loan Span" = TheLoans."Loan Span"::Minor then
-                    //                         "No Of Minor Loans Guaranteed" += 1;
-                    //                     //MESSAGE('Loans gua %1 Counter %2 Loan No. %3',TotalGuaranteed,"No Of Loans Guaranteed",LoanGuar."Loan No");
-                    //                 end;
-                    //             end;
-                    //         end;
-                    //     until LoanGuar.Next = 0;
-                    // end;
                     GenSetUp.Get;
                     if LoanApp.Get(Rec."Loan No") then begin
                         if FixedDeposit.get(rec."Savings Account No./Member No.") then begin
@@ -303,128 +188,41 @@ table 52185739 "Loan Guarantors and Security"
                             "Member No" := Members."No.";
                             Name := Members.Name;
                             "Phone No." := Members."Phone No.";
+                            "Available Shares" := FixedDeposit."Fixed Deposit Amount" - LoanAppraisal.GetTotalGuaranteedAmt(Members."No.");
+                            "Amount Guaranteed" := FixedDeposit."Fixed Deposit Amount" - LoanAppraisal.GetTotalGuaranteedAmt(Members."No.");
                         end;
 
-                        // maxamountguarantee := GenSetUp."Maximum Amount to Guarantee";
-                        // Totalguarantee := "Amount Guaranteed" + "Total Guaranteed";
-                        // if Totalguarantee > maxamountguarantee then begin
-                        //     Error('The total loans  guaranteed have reached the maximum allowable limit of KES ' + Format(GenSetUp."Maximum Amount to Guarantee") + '.');
-                        // end;
 
-                        // LoanApp.CalcFields("Loan Span");
-                        // if LoanApp."Loan Span" = LoanApp."Loan Span"::Major then begin
-                        //     if LoanApp."Source Unit" <> LoanApp."Source Unit"::FOSA then begin
-                        //         if "No Of Major Loans Guaranteed" + Majorloans > GenSetUp."Max Major Loans To Guarantee" then begin
-                        //             Error('No of major Loan will exceed %1, the current major Loans guaranteed is %2.', GenSetUp."Max Major Loans To Guarantee", "No Of Major Loans Guaranteed");
-                        //         end;
-                        //     end;
-                        // end else
-                        //     if LoanApp."Loan Span" = LoanApp."Loan Span"::Minor then begin
-                        //         if LoanApp."Source Unit" <> LoanApp."Source Unit"::FOSA then begin
-                        //             if ("No Of Minor Loans Guaranteed" + MinerLoans) > GenSetUp."Max Minor Loans To Guarantee" then begin
-                        //                 Error('No of Minor Loan will exceed %1, the current Minor Loans guaranteed is %2.', GenSetUp."Max Minor Loans To Guarantee", "No Of Minor Loans Guaranteed");
-                        //             end;
-                        //         end;
-                        //     end;
-                        // if (LoanApp."Source Unit" = LoanApp."Source Unit"::FOSA) and ("Self Guarantee" = true) then
-                        //     Error('Self Guarantorship is not allowed on FOSA Loans.');
                     end
                 end else
                     if "Guarantor Type" = "Guarantor Type"::Collateral then begin
                         if Members.Get("Savings Account No./Member No.") then begin
-
                             Name := Members.Name;
                             "Staff/Payroll No." := Members."Payroll/Staff No.";
                             "ID No." := Members."Primary Identification";
                             "Member No" := "Savings Account No./Member No.";
-                            LoanGuar.Reset;
-                            LoanGuar.SetRange("Member No", "Savings Account No./Member No.");
-                            LoanGuar.SetFilter("Outstanding Balance", '>0');
-                            if LoanGuar.Find('-') then begin
-                                LoanGuar.CalcSums("Amount Guaranteed");
-                                "No Of Loans Guaranteed" := LoanGuar.Count;
-                            end;
-
+                            // "No Of Loans Guaranteed" := LoanAppraisal.GetNumberOfLoansGuaranteed("Savings Account No./Member No.", "Guarantor Type"::Collateral);
                         end;
                     end else begin
                         if Cust.Get("Savings Account No./Member No.") then begin
-                            if Cust.Status <> Cust.Status::Active then begin
-                                Error('Member %2 No. %1 is not an Active Member', Cust."No.", Cust.Name);
+                            if (Cust.Status <> Cust.Status::Active) and (Cust.Status <> Cust.Status::Dormant) then begin
+                                Error('Member %2 No. %1 is not an Active Member or Dormant Member and therefore cannot be a guarantor', Cust."No.", Cust.Name);
                             end;
                             Cust.CalcFields(Cust."Balance (LCY)");
                             Name := Cust.Name;
                             "Staff/Payroll No." := Cust."Payroll/Staff No.";
                             // "Loan Balance":=Cust."Balance (LCY)";
-                            "Deposits/Shares" := Cust."Balance (LCY)";
+                            "Deposits/Shares" := Cust.GetAvailableBalance(Cust."No.");
                             "Amount Guaranteed" := Cust."Lien Placed";
                             "ID No." := Cust."ID No.";
                             "Member No" := Cust."Member No.";
                             Name := Cust.Name;
                             Rec.CalcFields("Total Guaranteed");
                             "Total Guaranteed" := Round(Rec."Total Guaranteed", 0.01);
-                            LoanGuar.Reset;
-                            LoanGuar.SetRange("Member No", "Savings Account No./Member No.");
-                            LoanGuar.SetFilter("Outstanding Balance", '>0');
-                            if LoanGuar.Find('-') then begin
-                                LoanGuar.CalcSums("Amount Guaranteed");
-                                "No Of Loans Guaranteed" := LoanGuar.Count;
-                                // "Total Guaranteed" := LoanGuar."Amount Guaranteed";
-                            end;
+                            // "No Of Loans Guaranteed" := LoanAppraisal.GetNumberOfLoansGuaranteed(rec."Savings Account No./Member No.", Rec."Guarantor Type");
+                            // "Total Guaranteed" := LoanGuar."Amount Guaranteed";
                         end;
                     end;
-
-                LoanGuarantors.Reset;
-                LoanGuarantors.SetRange(LoanGuarantors."Loan No", "Loan No");
-                if LoanGuarantors.Find('-') then begin
-                    repeat
-                        "Total Sum" := "Total Sum" + LoanGuarantors."Amount Guaranteed";
-                    until LoanGuarantors.Next = 0;
-                end;
-                //Check Max garantors
-                LoansG := 0;
-                CalcFields("No Of Loans Guaranteed");
-                // LoansG := "No Of Loans Guaranteed";
-                Rec.CalcFields("Total Guaranteed");
-                LoansG := Round("Total Guaranteed");//kenpipe policy
-                //changed
-                if "Guarantor Type" = "Guarantor Type"::Guarantor then begin
-                    // if GenSetUp."Max Loans To Guarantee" > 0 then
-                    if GenSetUp."Maximum Amount to Guarantee" > 0 then  //kenpipe policy
-                        if LoansG >= GenSetUp."Maximum Amount to Guarantee" then begin
-                            Error('Member ' + Rec."Savings Account No./Member No." +
-      ' has reached the guarantorship limit of ' +
-      Format(GenSetUp."Maximum Amount to Guarantee") +
-      '. Current guaranteed amount: ' + Format(LoansG));
-
-                            exit;
-                        end;
-
-                    // maxamountguarantee := GenSetUp."Maximum Amount to Guarantee";
-                    // Totalguarantee := "Amount Guaranteed" + "Total Guaranteed";
-                    // if Totalguarantee > maxamountguarantee then begin
-                    //     Error('The total loans  guaranteed have reached the maximum allowable limit of KES ' + Format(GenSetUp."Maximum Amount to Guarantee") + '.');
-                    // end;
-                    //Check Max garantors - End
-                end;
-
-                // LoanApp.Reset;
-                // LoanApp.SetLoadFields("Member No.", Posted);
-                // LoanApp.SetRange("Member No.", "Member No");
-                // LoanApp.SetRange(Posted, true);
-                // LoanApp.SetAutoCalcFields("Outstanding Balance", "Loans Category-SASRA");
-                // LoanApp.SetFilter("Outstanding Balance", '>%1', 0);
-                // LoanApp.SetFilter("Loans Category-SASRA", '<>%1', LoanApp."Loans Category-SASRA"::Perfoming);
-                // LoanApp.setfilter("Loan Product Type", '<>%1&<>%2', 'FGL', 'BGL');
-                // if LoanApp.Find('-') then begin
-                //     // repeat
-                //     // LoansTopup.Reset;
-                //     // LoansTopup.SetRange("Loan Top Up", LoanApp."Loan No.");
-                //     // if not LoansTopup.Find('-') then begin
-                //     Error(Err0003, "Member No", LoanApp."Loan No.");
-                //     // end;
-
-                //     // until LoanApp.Next = 0;
-                // end;
             end;
         }
         field(3; Name; Text[200])
@@ -477,47 +275,8 @@ table 52185739 "Loan Guarantors and Security"
                 //MESSAGE('SHARE %1',Shares);
                 TotG := 0;
                 if "Amount Guaranteed" > ("Deposits/Shares") then
-                    // Error('You cannot guarantee more than your shares of %1', "Deposits/Shares");
-
-                GenSetUp.Get;
-                if LoanApp.Get(Rec."Loan No") then begin
-
-                    maxamountguarantee := GenSetUp."Maximum Amount to Guarantee";
-                    Rec.CalcFields("Total Guaranteed");
-                    Totalguarantee := "Amount Guaranteed" + "Total Guaranteed";
-                    if Totalguarantee > maxamountguarantee then begin
-                        Error('The total loans  guaranteed have reached the maximum allowable limit of KES ' + Format(GenSetUp."Maximum Amount to Guarantee") + '.');
-                    end;
-                end;
-                "Original Amount Guaranteed" := "Amount Guaranteed";
-                "User Specified" := true;
-
-
-
-                //CALCSUMS("Amount Guaranteed");
-                BalanceRemaining := 0;
-
-                TotG := TotG + "Amount Guaranteed";
-                //MESSAGE('AmtGuar outside loop %1',TotG);
-                //MESSAGE('Tot Guar %1',TotG);
-                //CALCSUMS("Amount Guaranteed");
-                if Loans.Get("Loan No") then begin
-                    BalanceRemaining := Loans."Approved Amount" - TotG;//LoanGuar."Amount Guaranteed";
-
-                    //MESSAGE('Balance not Guaranteed %1',BalanceRemaining);
-                end;
-                //"Percentage Guaranteed":=("Amount Guaranteed"/Loans."Approved Amount")*100;
-
-                LoanGuarantors.Reset;
-                LoanGuarantors.SetRange(LoanGuarantors."Loan No", "Loan No");
-                if LoanGuarantors.Find('-') then begin
-                    repeat
-                        "Total Sum" := "Total Sum" + LoanGuarantors."Amount Guaranteed";
-                    //LoanGuar.CALCSUMS(LoanGuar."Amount Guaranteed");
-                    //MESSAGE('AmtGuar loop %1',TotG);
-
-                    until LoanGuarantors.Next = 0;
-                end;
+                    Error('You cannot guarantee more than your shares of %1', "Deposits/Shares");
+                if "Amount Guaranteed" > "Available Shares" then Error('You cannot guarantee more than your available shares of %1', "Available Shares");
             end;
         }
         field(12; "Staff/Payroll No."; Code[20])
@@ -558,9 +317,9 @@ table 52185739 "Loan Guarantors and Security"
         field(17; "Member Guaranteed"; Code[50])
         {
         }
-        field(18; "Percentage Guaranteed"; Decimal)
-        {
-        }
+        // field(18; "Percentage Guaranteed"; Decimal)
+        // {
+        // }
         field(19; "Total Guaranteed"; Decimal)
         {
             CalcFormula = Sum("Loan Guarantors and Security"."Amount Guaranteed"
@@ -575,6 +334,7 @@ table 52185739 "Loan Guarantors and Security"
 
         field(20; "Available Shares"; Decimal)
         {
+            Editable = false;
         }
         field(21; Signature; BLOB)
         {
@@ -599,20 +359,17 @@ table 52185739 "Loan Guarantors and Security"
         {
             Editable = false;
         }
-        field(26; "Guarantor Type"; Option)
+        field(26; "Guarantor Type"; Enum "Loan Guarantor Types Enum")
         {
-            OptionCaption = 'Guarantor,Collateral,Lien,Fixed Deposit';
-            OptionMembers = Guarantor,Collateral,Lien,"Fixed Deposit";
+            // OptionCaption = 'Guarantor,Collateral,Lien,Fixed Deposit';
+            // OptionMembers = Guarantor,Collateral,Lien,"Fixed Deposit";
 
             trigger OnValidate()
             begin
                 if LoansR.Get("Loan No") then begin
                     LoansR.TestField("Member No.");
-
                     "Member Guaranteed" := LoansR."Member No.";
                     "Loanee Name" := LoansR."Member Name";
-
-
                 end;
             end;
         }
@@ -622,10 +379,11 @@ table 52185739 "Loan Guarantors and Security"
 
             trigger OnValidate()
             var
-                ColAmount: Decimal;
+                GuaranteedAmt: Decimal;
                 perfecion: Record "Securities Register";
             begin
                 if "Guarantor Type" = "Guarantor Type"::Collateral then begin
+                    GuaranteedAmt := 0;
                     LoanApp.Reset();
                     LoanApp.SetRange("Loan No.", Rec."Loan No");
                     LoanApp.SetRange("Source Unit", LoanApp."Source Unit"::"HR LOANS");
@@ -641,21 +399,17 @@ table 52185739 "Loan Guarantors and Security"
                     LoanGuar.SetRange(LoanGuar."Collateral Reg. No.", rec."Collateral Reg. No.");
                     LoanGuar.SetFilter(LoanGuar."Loan No", '<>%1', Rec."Loan No");
                     if LoanGuar.Find('-') then begin
-                        LoanGuar.CalcSums("Proportion Guaranteed");
-                        SecReg.Reset;
-                        SecReg.SetRange("No.", LoanGuar."Collateral Reg. No.");
-                        if SecReg.FindFirst() then begin
-                            ColAmount := SecReg."Collateral Value";
-                        end;
-                        if LoanGuar."Proportion Guaranteed" > ColAmount then
-                            Error('You cannot exceed the collateral Limit of %1.', ColAmount);
+                        LoanGuar.CalcSums("Amount Guaranteed");
+                        GuaranteedAmt := LoanGuar."Amount Guaranteed";
                     end;
-                end;
+                end
+                else
+                    Error('Collateral Registration Number is only applicable for collateral guarantors');
                 SecReg.Reset;
                 SecReg.SetRange("No.", "Collateral Reg. No.");
-                if SecReg.Find('-') then begin
-                    "Amount Guaranteed" := SecReg."Collateral Limit" - LoanGuar."Proportion Guaranteed";
-                    "Collateral Value" := SecReg."Collateral Value";
+                if SecReg.Findfirst then begin
+                    "Amount Guaranteed" := SecReg."Collateral Limit" - GuaranteedAmt;
+                    "Available Shares" := SecReg."Collateral Limit" - GuaranteedAmt;
                 end;
             end;
         }
@@ -720,11 +474,11 @@ table 52185739 "Loan Guarantors and Security"
         {
             DataClassification = ToBeClassified;
         }
-        field(41; "Proportion Guaranteed"; decimal)
-        {
-            DataClassification = ToBeClassified;
-            Editable = false;
-        }
+        // field(41; "Proportion Guaranteed"; decimal)
+        // {
+        //     DataClassification = ToBeClassified;
+        //     Editable = false;
+        // }
         field(42; "Phone No."; Code[30])
         {
             DataClassification = ToBeClassified;
@@ -741,10 +495,8 @@ table 52185739 "Loan Guarantors and Security"
             Editable = false;
 
         }
-        field(45; "Source Unit"; Option)
+        field(45; "Source Unit"; Enum "Source Unit")
         {
-            OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
-            OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
             FieldClass = FlowField;
             CalcFormula = lookup(Loans."Source Unit" where("Loan No." = field("Loan No")));
             Editable = false;
@@ -932,8 +684,6 @@ table 52185739 "Loan Guarantors and Security"
         LoansG: Decimal;
         GenSetUp: Record "General Set-Up";
         SelfGuaranteedA: Decimal;
-        StatusPermissions: Record "Credit Ledger Entry";
-        LoanProduct: Record "Loan Charges";
         TotalGuaranteed: Decimal;
         BalanceRemaining: Decimal;
         LoanGuar: Record "Loan Guarantors and Security";
@@ -941,31 +691,23 @@ table 52185739 "Loan Guarantors and Security"
         Members: Record Members;
         SecReg: Record "Securities Register";
         Employer: Record Customer;
-        Text001: Label 'Internal staff are not allowed to guarantee loans';
         Text002: Label 'This member has self guaranteed %1 and has a balance of %2';
         LoanApp: Record Loans;
         Text003: Label 'This Loan is already %1 and cannot modify';
         Text004: Label 'This collateral has been used for loan no. %1 and has a outstanding balance of %2';
         LoanGs: Record "Loan Guarantors and Security";
         SavingsAccounts: Record "Savings Accounts";
-        SalaryLines: Record "Salary Lines";
         ProductFactory: Record "Product Factory";
-        Err0001: Label 'Gurantor salary has not been processed for the past 2 Months';
-        Err0003: Label 'This guarantor No %1 has loan No, %2 that is not performing';
         SELFLOAN: Record Loans;
         LoansTopup: Record "Loans Top up";
         SecuritiesRegister: Record "Securities Register";
         MortgageError: Label 'This product is a mortgage Loan and does not require guarantors';
-        pfac: Record "Product Factory";
-        AmountApplied: Decimal;
-        AmountToBeGuaranteed: Decimal;
-        RemainingAmount: Decimal;
-        NumOfGuarantors: Integer;
-        EqualShare: Decimal;
-        AppliedAmount: Decimal;
-        InUpdateAmountGuaranteed: Boolean;
+
         maxamountguarantee: Decimal;
         Totalguarantee: Decimal;
+        LoanAppraisal: Codeunit "Loan Appraisal Codeunit";
+
+
 
 }
 

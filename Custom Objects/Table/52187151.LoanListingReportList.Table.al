@@ -303,12 +303,12 @@ table 52187151 "Loan Listing Report List"
             Caption = 'Business Loan Deposits';
             //60
         }
-        field(51; "Source Unit"; Option)
+        field(51; "Source Unit"; Enum "Source Unit")
         {
-            OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
-            OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
+            // OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
+            // OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
             Caption = 'Source Unit';
-            //61
+
         }
         field(53; "Amount On"; Decimal)
         {

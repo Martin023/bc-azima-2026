@@ -66,7 +66,7 @@ XmlPort 52185483 guarantors
                 }
 
 
-                fieldelement(m; "Loan Guarantors and Security"."Percentage Guaranteed")
+                fieldelement(m; "Loan Guarantors and Security".PercentageGur)
                 {
                     FieldValidate = no;
                 }

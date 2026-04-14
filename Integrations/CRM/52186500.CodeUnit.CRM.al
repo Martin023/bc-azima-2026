@@ -5156,7 +5156,7 @@ codeunit 52186500 "CRM Integration"
             Datum.Add('sasra_sub_sector_2_desc', SearchLoan."Sub Sector Level2 Description");
             Datum.Add('self_guarantee', SearchLoan."Self Guarantee");
             Datum.Add('application_date', GlobalFunctions.FormatDate(SearchLoan."Application Date"));
-            Datum.Add('source_unit', SearchLoan."Source Unit");
+            Datum.Add('source_unit', format(SearchLoan."Source Unit"));
             Datum.Add('source_unit_desc', Format(SearchLoan."Source Unit"));
             Datum.Add('captured_by', SearchLoan."Captured By");
             Datum.Add('status', Format(SearchLoan.Status));
@@ -6167,13 +6167,13 @@ codeunit 52186500 "CRM Integration"
 
             if SinkFundApplication."Claim Type" = SinkFundApplication."Claim Type"::"Risk Claim" then
                 SinkFundApplication.No := NoSeriesMgt.GetNextNo(SeriesSetup."Sink Fund Nos.")
-                // NoSeriesMgt.InitSeries(SeriesSetup."Sink Fund Nos.", SeriesSetup."Sink Fund Nos.", 0D, SinkFundApplication.No, SinkFundApplication."No. Series")
+            // NoSeriesMgt.InitSeries(SeriesSetup."Sink Fund Nos.", SeriesSetup."Sink Fund Nos.", 0D, SinkFundApplication.No, SinkFundApplication."No. Series")
             else if SinkFundApplication."Claim Type" = SinkFundApplication."Claim Type"::"BBF - Insurance Claim" then
                 SinkFundApplication.No := NoSeriesMgt.GetNextNo(SeriesSetup."BBF Insurance Nos.")
-                // NoSeriesMgt.InitSeries(SeriesSetup."BBF Insurance Nos.", SeriesSetup."BBF Insurance Nos.", 0D, SinkFundApplication.No, SinkFundApplication."No. Series")
+            // NoSeriesMgt.InitSeries(SeriesSetup."BBF Insurance Nos.", SeriesSetup."BBF Insurance Nos.", 0D, SinkFundApplication.No, SinkFundApplication."No. Series")
             else
                 SinkFundApplication.No := NoSeriesMgt.GetNextNo(SeriesSetup."BBF Report");
-                // NoSeriesMgt.InitSeries(SeriesSetup."BBF Report", SeriesSetup."BBF Report", 0D, SinkFundApplication.No, SinkFundApplication."No. Series");
+            // NoSeriesMgt.InitSeries(SeriesSetup."BBF Report", SeriesSetup."BBF Report", 0D, SinkFundApplication.No, SinkFundApplication."No. Series");
 
             // SinkFundApplication."CRM Application No." := crm_application_no.AsValue.AsText;
             SinkFundApplication."CRM Created By" := crm_created_by.AsValue.AsText;
@@ -7248,7 +7248,7 @@ codeunit 52186500 "CRM Integration"
                 Datum.Add('collateral_name', LoanGuarantorsList."Collateral Name");
 
                 LoanGuarantorsList.CalcFields("Source Unit", "Loan Type", "Loan Product Name");
-                Datum.Add('source_unit', LoanGuarantorsList."Source Unit");
+                Datum.Add('source_unit', format(LoanGuarantorsList."Source Unit"));
                 Datum.Add('loan_type', LoanGuarantorsList."Loan Type");
                 Datum.Add('loan_product_name', LoanGuarantorsList."Loan Product Name");
 
@@ -9888,7 +9888,7 @@ codeunit 52186500 "CRM Integration"
                 Datum.Add('loanee_name', LoanGuarantorsList."Loanee Name");
                 Datum.Add('loanee_member_number', LoanGuarantorsList."Member Guaranteed");
                 Datum.Add('amount_guaranteed', LoanGuarantorsList."Amount Guaranteed");
-                Datum.Add('guarantor_type', LoanGuarantorsList."Guarantor Type");
+                Datum.Add('guarantor_type', format(LoanGuarantorsList."Guarantor Type"));
                 Datum.Add('substituted', LoanGuarantorsList.Substituted);
                 Datum.Add('substituted_by', LoanGuarantorsList."Substituted By");
 

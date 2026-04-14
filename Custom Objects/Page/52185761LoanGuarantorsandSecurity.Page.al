@@ -75,15 +75,15 @@ page 52185761 "Loan Guarantors and Security"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("User Specified"; Rec."User Specified")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-
-                // field("Proportion Guaranteed"; Rec."Proportion Guaranteed")
+                // field("User Specified"; Rec."User Specified")
                 // {
-                //     ApplicationArea = all;
+                //     ApplicationArea = Basic, Suite;
                 // }
+
+                field("Available Shares"; Rec."Available Shares")
+                {
+                    ApplicationArea = all;
+                }
                 field("Deposits/Shares"; Rec."Deposits/Shares")
                 {
                     ApplicationArea = Basic, Suite;
@@ -116,25 +116,25 @@ page 52185761 "Loan Guarantors and Security"
                     Caption = '% Guaranteed';
                     Editable = false;
                 }
-                field("Percentage Guaranteed"; Rec."Percentage Guaranteed")
-                {
-                    ApplicationArea = all;
-                    //Caption = '% Guaranteed';
-                    Editable = false;
-                    visible = false;
-                }
-                field("Loan Group"; Rec."Loan Groups")
-                {
-                    Editable = false;
-                }
-                field("Group Account No"; Rec."Group Account Nos")
-                {
-                    Editable = false;
-                }
-                field(Verified; Rec.Verified)
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Percentage Guaranteed"; Rec."Percentage Guaranteed")
+                // {
+                //     ApplicationArea = all;
+                //     //Caption = '% Guaranteed';
+                //     Editable = false;
+                //     visible = false;
+                // }
+                // field("Loan Group"; Rec."Loan Groups")
+                // {
+                //     Editable = false;
+                // }
+                // field("Group Account No"; Rec."Group Account Nos")
+                // {
+                //     Editable = false;
+                // }
+                // field(Verified; Rec.Verified)
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
 
             }
             group(Control20)
@@ -407,7 +407,7 @@ page 52185761 "Loan Guarantors and Security"
                                     LONGU.SetRange(LONGU."Loan No", Rec."Loan No");
                                     if LONGU.Find('-') then begin
                                         LONGU.PercentageGur := 0;
-                                        LONGU."Proportion Guaranteed" := 0;
+                                        LONGU."Amount Guaranteed" := 0;
                                         repeat
                                             if TotaAmtGUR <> 0 then begin
                                                 LONGU.PercentageGur := Round((((LONGU."Amount Guaranteed" / TotaAmtGUR) * 100)), 0.01, '=');
@@ -418,7 +418,7 @@ page 52185761 "Loan Guarantors and Security"
                                                     end;
                                                 end;
 
-                                                LONGU."Proportion Guaranteed" := Round(((REqAmt * LONGU.PercentageGur / 100)), 0.01, '=');
+                                                LONGU."Amount Guaranteed" := Round(((REqAmt * LONGU.PercentageGur / 100)), 0.01, '=');
                                                 LONGU.Modify();
                                             end;
                                         until LONGU.Next() = 0;
@@ -435,80 +435,6 @@ page 52185761 "Loan Guarantors and Security"
         }
     }
 
-    trigger OnAfterGetRecord()
-    var
-        LoanGr: Record "Loan Guarantors and Security";
-        TotaAmtGUR: Decimal;
-        PercentageGur: Decimal;
-        GuAmt: Decimal;
-        LoanR: Record Loans;
-        Membersrec: Record Members;
-        REqAmt: Decimal;
-        LONGU: Record "Loan Guarantors and Security";
-        GuarNo: Integer;
-        TotalGuarantors: Integer;
-        AppliedAmount: Decimal;
-        maxamountguarantee: Decimal;
-        Totalguarantee: Decimal;
-        LoanNo: Code[20];
-        GlobalFunctions: Codeunit "Global Functions";
-    begin
-        if LoanR.Get(Rec."Loan No") then begin
-            if LoanR.Status = LoanR.Status::Open then begin
-                if Membersrec.Get(Rec."Member No") then
-                    if (Membersrec.Status <> Membersrec.Status::Deceased) and (Membersrec.Status <> Membersrec.Status::Closed) then begin
-
-                        // Get all Loan Guarantors
-                        LONGU.Reset();
-                        LONGU.SetRange(LONGU."Loan No", Rec."Loan No");
-
-                        if LONGU.FindSet() then begin
-                            TotalGuarantors := LONGU.Count();
-                            AppliedAmount := LoanR."Requested Amount";
-                            if LoanR."Approved Amount" = 0 then
-                                Error('Loan Approved Amount cannot be zero.');
-
-                            AppliedAmount := LoanR."Approved Amount";
-                            LoanNo := LoanR."Loan No.";
-
-                            // Update amount guaranteed using a global function
-                            GlobalFunctions.UpdateAmountGuaranteed(LoanNo, AppliedAmount);
-                        end;
-
-                        // If loan is not posted, proceed
-                        if LoanR.Posted = false then begin
-                            REqAmt := LoanR."Approved Amount";
-
-                            // Get total amount guaranteed
-                            LoanGua.Reset();
-                            LoanGua.SetRange("Loan No", Rec."Loan No");
-
-                            if LoanGua.FindSet() then begin
-                                LoanGua.CalcSums("Amount Guaranteed");
-                                TotaAmtGUR := LoanGua."Amount Guaranteed";
-                            end;
-
-                            // Calculate proportion guaranteed
-                            if LONGU.FindSet() then begin
-                                repeat
-                                    if TotaAmtGUR <> 0 then begin
-                                        PercentageGur := Round((LONGU."Amount Guaranteed" / TotaAmtGUR) * 100, 0.01, '=');
-                                        LONGU.Validate(PercentageGur);
-                                        LONGU."Proportion Guaranteed" := Round((REqAmt * PercentageGur / 100), 0.01, '=');
-
-                                        LONGU.Modify();
-                                    end;
-                                until LONGU.Next() = 0;
-                            end;
-                        end;
-                    end;
-            end;
-        end;
-
-        // Additional Business Logic
-        MSmartControl();
-        UpdateLoanGroup();
-    end;
 
 
     trigger OnOpenPage()
@@ -529,9 +455,6 @@ page 52185761 "Loan Guarantors and Security"
                     end;
             end;
         end;
-
-        MSmartControl();
-        UpdateLoanGroup();
     end;
 
     trigger OnDeleteRecord(): Boolean
@@ -623,176 +546,67 @@ page 52185761 "Loan Guarantors and Security"
     //     MSmartControl();
     //     UpdateLoanGroup();
     // end;
-    trigger OnAfterGetCurrRecord()
-    var
-        myInt: Integer;
-        LoanR: Record Loans;
-        Membersrec: Record Members;
-        LoanGua: Record "Loan Guarantors and Security";
-        LONGU: Record "Loan Guarantors and Security";
-        GuarNo: Integer;
-        TotaAmtGUR: Decimal;
-        REqAmt: Decimal;
-        GlobalFunctions: Codeunit "Global Functions";
-    begin
-        if LoanR.Get(Rec."Loan No") then begin
-            if LoanR.Status = LoanR.Status::Open then begin
-                if Membersrec.Get(Rec."Member No") then
-                    if (Membersrec.Status <> Membersrec.Status::Deceased) and (Membersrec.Status <> Membersrec.Status::Closed) then begin
-                        if not LoanR.Posted then begin
-                            REqAmt := LoanR."Approved Amount";
-                            GuarNo := 0;
+    // trigger OnAfterGetCurrRecord()
+    // var
+    //     myInt: Integer;
+    //     LoanR: Record Loans;
+    //     Membersrec: Record Members;
+    //     LoanGua: Record "Loan Guarantors and Security";
+    //     LONGU: Record "Loan Guarantors and Security";
+    //     GuarNo: Integer;
+    //     TotaAmtGUR: Decimal;
+    //     REqAmt: Decimal;
+    //     GlobalFunctions: Codeunit "Global Functions";
+    // begin
+    //     if LoanR.Get(Rec."Loan No") then begin
+    //         if LoanR.Status = LoanR.Status::Open then begin
+    //             if Membersrec.Get(Rec."Member No") then
+    //                 if (Membersrec.Status <> Membersrec.Status::Deceased) and (Membersrec.Status <> Membersrec.Status::Closed) then begin
+    //                     if not LoanR.Posted then begin
+    //                         REqAmt := LoanR."Approved Amount";
+    //                         GuarNo := 0;
 
-                            // Get the total amount guaranteed
-                            LoanGua.Reset();
-                            LoanGua.SetRange("Loan No", Rec."Loan No");
-                            if LoanGua.FindSet() then begin
-                                LoanGua.CalcSums("Amount Guaranteed");
-                                TotaAmtGUR := LoanGua."Amount Guaranteed";
-                            end;
+    //                         // Get the total amount guaranteed
+    //                         LoanGua.Reset();
+    //                         LoanGua.SetRange("Loan No", Rec."Loan No");
+    //                         if LoanGua.FindSet() then begin
+    //                             LoanGua.CalcSums("Amount Guaranteed");
+    //                             TotaAmtGUR := LoanGua."Amount Guaranteed";
+    //                         end;
 
-                            // Count the number of guarantors
-                            if LoanR."Source Unit" = LoanR."Source Unit"::FOSA then
-                                GuarNo := LoanGua.Count;
+    //                         // Count the number of guarantors
+    //                         if LoanR."Source Unit" = LoanR."Source Unit"::FOSA then
+    //                             GuarNo := LoanGua.Count;
 
-                            // Process Loan Guarantors
-                            LONGU.Reset();
-                            LONGU.SetRange("Loan No", Rec."Loan No");
-                            if LONGU.FindSet() then begin
-                                repeat
-                                    if TotaAmtGUR <> 0 then begin
-                                        LONGU.PercentageGur := Round(((LONGU."Amount Guaranteed" / TotaAmtGUR) * 100), 0.01, '=');
+    //                         // Process Loan Guarantors
+    //                         LONGU.Reset();
+    //                         LONGU.SetRange("Loan No", Rec."Loan No");
+    //                         if LONGU.FindSet() then begin
+    //                             repeat
+    //                                 if TotaAmtGUR <> 0 then begin
+    //                                     LONGU.PercentageGur := Round(((LONGU."Amount Guaranteed" / TotaAmtGUR) * 100), 0.01, '=');
 
-                                        if LoanR."Source Unit" = LoanR."Source Unit"::FOSA then
-                                            if GuarNo > 0 then
-                                                LONGU.PercentageGur := Round(((1 / GuarNo) * 100), 0.01, '=');
+    //                                     if LoanR."Source Unit" = LoanR."Source Unit"::FOSA then
+    //                                         if GuarNo > 0 then
+    //                                             LONGU.PercentageGur := Round(((1 / GuarNo) * 100), 0.01, '=');
 
-                                        LONGU."Proportion Guaranteed" := Round((REqAmt * LONGU.PercentageGur / 100), 0.01, '=');
+    //                                     LONGU."Amount Guaranteed" := Round((REqAmt * LONGU.PercentageGur / 100), 0.01, '=');
 
-                                        // Modify only if the values are changing
-                                        LONGU.Modify();
-                                    end;
-                                until LONGU.Next() = 0;
-                            end;
-                        end;
-                    end;
-            end;
-        end;
+    //                                     // Modify only if the values are changing
+    //                                     LONGU.Modify();
+    //                                 end;
+    //                             until LONGU.Next() = 0;
+    //                         end;
+    //                     end;
+    //                 end;
+    //         end;
+    //     end;
 
-        MSmartControl();
-        UpdateLoanGroup();
-    end;
+    //     MSmartControl();
+    //     UpdateLoanGroup();
+    // end;
 
-    trigger OnClosePage()
-    var
-        myInt: Integer;
-        LoanGr: Record "Loan Guarantors and Security";
-        TotaAmtGUR: Decimal;
-        PercentageGur: Decimal;
-        GuAmt: Decimal;
-        LoanR: Record Loans;
-        REqAmt: Decimal;
-        Membersrec: Record Members;
-        LONGU: Record "Loan Guarantors and Security";
-        LoanRecc: Record Loans;
-        GuarNo: Integer;
-    begin
-        if LoanR.Get(Rec."Loan No") then begin
-            if LoanR.Status = LoanR.Status::Open then begin
-                if Membersrec.Get(Rec."Member No") then
-                    if (Membersrec.Status <> Membersrec.Status::Deceased) and (Membersrec.Status <> Membersrec.Status::Closed) then begin
-                        if LoanR.Posted = false then begin
-                            // REqAmt := LoanR."Approved Amount";
-                            // LoanGua.Reset;
-                            // LoanGua.SetRange("Loan No", Rec."Loan No");
-                            // //LoanGua.SetRange("Guarantor Type", LoanGua."guarantor type"::Guarantor);
-                            // if LoanGua.Find('-') then begin
-                            //     LoanGua.CalcSums("Amount Guaranteed");
-                            //     TotaAmtGUR := LoanGua."Amount Guaranteed";
-                            // end;
-                            // PercentageGur := 0;
-                            // LONGU.Reset();
-                            // LONGU.SetRange(LONGU."Loan No", Rec."Loan No");
-                            // if LONGU.Find('-') then begin
-                            //     LONGU.PercentageGur := 0;
-                            //     LONGU."Proportion Guaranteed" := 0;
-                            //     repeat
-
-                            //         if TotaAmtGUR <> 0 then begin
-                            //             LONGU.PercentageGur := Round((((LONGU."Amount Guaranteed" / TotaAmtGUR) * 100)), 0.01, '=');
-                            //             LONGU."Proportion Guaranteed" := Round(((REqAmt * LONGU.PercentageGur / 100)), 0.01, '=');
-                            //             LONGU.Modify();
-                            //         end;
-                            //     until LONGU.Next() = 0;
-                            // end;
-
-                            REqAmt := LoanR."Approved Amount";
-                            GuarNo := 0;
-                            LoanGua.Reset;
-                            LoanGua.SetRange("Loan No", Rec."Loan No");
-                            //LoanGua.SetRange("Guarantor Type", LoanGua."guarantor type"::Guarantor);
-                            if LoanR."Source Unit" = LoanR."Source Unit"::FOSA then
-                                GuarNo := LoanGua.Count;
-                            if LoanGua.Find('-') then begin
-                                LoanGua.CalcSums("Amount Guaranteed");
-
-                                TotaAmtGUR := LoanGua."Amount Guaranteed";
-                            end;
-
-                            LONGU.Reset();
-                            LONGU.SetRange(LONGU."Loan No", Rec."Loan No");
-                            if LONGU.Find('-') then begin
-                                LONGU.PercentageGur := 0;
-                                LONGU."Proportion Guaranteed" := 0;
-                                repeat
-                                    if TotaAmtGUR <> 0 then begin
-                                        LONGU.PercentageGur := Round((((LONGU."Amount Guaranteed" / TotaAmtGUR) * 100)), 0.01, '=');
-                                        if LoanR."Source Unit" = LoanR."Source Unit"::FOSA then begin
-                                            if GuarNo > 0 then begin
-                                                LONGU.PercentageGur := Round((((1 / GuarNo) * 100)), 0.01, '=');
-
-                                            end;
-                                        end;
-
-                                        LONGU."Proportion Guaranteed" := Round(((REqAmt * LONGU.PercentageGur / 100)), 0.01, '=');
-                                        LONGU.Modify();
-                                    end;
-                                until LONGU.Next() = 0;
-                            end;
-                        end;
-                    end;
-            end;
-        end;
-    end;
-
-    local procedure MSmartControl()
-    var
-        Loan: Record Loans;
-    begin
-        Loan.Reset;
-
-        Loan.SetRange("Loan No.", Rec."Loan No");
-
-    end;
-
-    local procedure UpdateLoanGroup()
-    var
-        myInt: Integer;
-        loansrec: Record loans;
-        Mem: Record Members;
-    begin
-        if loansrec.Get((Rec."Loan No")) then begin
-
-            pfact.Get((loansrec."Loan Product Type"));
-            Rec."Loan Groups" := pfact."Loan Group";
-            if pfact."Loan Group" = pfact."Loan Group"::"Group Loan" then begin
-                if Mem.Get(loansrec."Member No.") then begin
-                    Rec."Group Account Nos" := Mem."Group Account No.";
-                end;
-
-            end;
-        end;
-    end;
+   
 
     var
         LoanGua: Record "Loan Guarantors and Security";

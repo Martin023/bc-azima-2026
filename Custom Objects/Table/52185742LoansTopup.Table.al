@@ -149,7 +149,7 @@ table 52185742 "Loans Top up"
 
             trigger OnValidate()
             begin
-                "Total Top Up" := "Principle Top Up" + "Interest Top Up" + Commision;
+                "Total Top Up" := "Principle Top Up" + "Interest Top Up";
 
                 Loans.Reset;
                 Loans.SetRange(Loans."Loan No.", "Loan Top Up");
@@ -217,10 +217,10 @@ table 52185742 "Loans Top up"
             CalcFormula = SUM("Loans Interest Buffer"."Interest Amount" where("Loan No." = FIELD("Loan Top Up"), Posted = const(false)));
             Editable = false;//
         }
-        field(619; "Source Unit"; Option)
+        field(619; "Source Unit"; Enum "Source Unit")
         {
-            OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
-            OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
+            // OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
+            // OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
         }
     }
 

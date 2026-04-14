@@ -53,10 +53,11 @@ table 52187154 "Deposit Listing"
         {
             DataClassification = ToBeClassified;
         }
-        field(12; "Source Unit"; Option)
+        field(12; "Source Unit"; Enum "Source Unit")
         {
             DataClassification = ToBeClassified;
-            OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
+            // OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
+            // OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
         }
         field(13; Status; Enum "Savings Account Status")
         {

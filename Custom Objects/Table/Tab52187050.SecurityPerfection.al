@@ -369,11 +369,11 @@ table 52187050 "Security Perfection"
         {
             Caption = 'SMS Sent';
         }
-        field(64; "Lending Unit"; Option)
+        field(64; "Lending Unit"; Enum "Source Unit")
         {
             Caption = 'Lending Unit';
-            OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
-            OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
+            // OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
+            // OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
         }
         field(66; "Loan Offer Letter Date"; Date)
         {

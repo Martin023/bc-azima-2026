@@ -37,7 +37,7 @@ page 52186688 "Your Loan Guarantors"
                     ToolTip = 'Specifies the value of the Percentage Guaranteed field.', Comment = '%';
                 }
 
-                field("Percentage Guaranteed"; Rec."Percentage Guaranteed")
+                field("Percentage Guaranteed"; Rec.PercentageGur)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Percentage Guaranteed field.', Comment = '%';

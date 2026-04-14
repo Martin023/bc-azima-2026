@@ -1,5 +1,4 @@
-#pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-#pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
+
 Report 52185640 "Loan Appraisal Report-Salaried"
 {
     DefaultLayout = RDLC;
@@ -10,9 +9,6 @@ Report 52185640 "Loan Appraisal Report-Salaried"
         dataitem(Loans; Loans)
         {
             RequestFilterFields = "Loan No.";
-            column(ReportForNavId_1; 1)
-            {
-            }
             column(GuarantorMax; GuarantorMax)
             {
             }
@@ -604,6 +600,9 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 column(VendorName_OtherCommitementsClearance; "Other Commitements Clearance"."Vendor Name")
                 {
                 }
+                column(Destination_Loan_No_; "Destination Loan No.")
+                {
+                }
 
             }
             dataitem("Standing Order Header"; "Standing Order Header")
@@ -1052,8 +1051,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
 
                 if ProductFactory.Get(Loans."Loan Product Type") then begin
                     NetOnDeposits := QualificationOnDeposits;
-                    if ProductFactory."Product ID" <> 'FML' then // Exclude fosa MAKAO from existing loans check - ticket#666 LOAN APPRAISAL ON FOSA OKOA LOAN
-                        NetOnDeposits := NetOnDeposits - TotalLoanBal;
+                    
                     if NetOnDeposits > ProductFactory."Maximum Loan Amount" then
                         NetOnDeposits := ProductFactory."Maximum Loan Amount";
                 end;

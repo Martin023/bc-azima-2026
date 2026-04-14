@@ -20,6 +20,15 @@ table 52185745 "Appraisal Salary Set-up"
             OptionMembers = " ",Earnings,Deductions,Basic,"Other Allowances","Gross Pay","Net Income",Pension;
 
         }
+        field(4; "Source Unit"; Enum "Source Unit")
+        {
+        }
+        field(5; "Base Hours"; Decimal)
+        {
+        }
+        field(6; "Base Rate"; Decimal)
+        {
+        }
     }
 
     keys

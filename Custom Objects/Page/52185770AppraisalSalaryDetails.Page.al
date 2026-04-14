@@ -35,6 +35,16 @@ page 52185770 "Appraisal Salary Details"
                     ApplicationArea = Basic, Suite;
                     StyleExpr = StyleText;
                 }
+                field(Rate; Rec.Rate)
+                {
+                    ApplicationArea = Basic, Suite;
+                    StyleExpr = StyleText;
+                }
+                field(Hours; Rec.Hours)
+                {
+                    ApplicationArea = Basic, Suite;
+                    StyleExpr = StyleText;
+                }
 
                 field(Amount; Rec.Amount)
                 {

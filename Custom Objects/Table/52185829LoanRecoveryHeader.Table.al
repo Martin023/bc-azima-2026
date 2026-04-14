@@ -650,10 +650,8 @@ table 52185829 "Loan Recovery Header"
             FieldClass = FlowField;
             CalcFormula = lookup(Loans."Disbursement Date" where("Loan No." = field("Loan No.")));
         }
-        field(48; "Source Unit"; Option)
+        field(48; "Source Unit"; Enum "Source Unit")
         {
-            OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
-            OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
             FieldClass = FlowField;
             CalcFormula = lookup(Loans."Source Unit" where("Loan No." = field("Loan No.")));
         }

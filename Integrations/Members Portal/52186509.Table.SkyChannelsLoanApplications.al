@@ -85,10 +85,10 @@ table 52186509 "Sky Channels Loan Applications"
         {
             DataClassification = ToBeClassified;
         }
-        field(54; "Source Unit"; Option)
+        field(54; "Source Unit"; Enum "Source Unit")
         {
-            OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
-            OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
+            // OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
+            // OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
         }
         field(55; "No. Series"; Code[20])
         {

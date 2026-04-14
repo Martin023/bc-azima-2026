@@ -73,11 +73,9 @@ table 52187153 "Loan FallOff"
         {
             DataClassification = ToBeClassified;
         }
-        field(18; "Loan Department"; Option)
+        field(18; "Loan Department"; Enum "Source Unit")
         {
             DataClassification = ToBeClassified;
-            OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
-            OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
         }
         field(19; "Member Status"; Enum "Member Status")
         {

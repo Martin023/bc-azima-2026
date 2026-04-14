@@ -1,6 +1,6 @@
 page 52185771 "Appraisal Salary Set-up"
 {
-    PageType = Card;
+    PageType = List;
     SourceTable = "Appraisal Salary Set-up";
     UsageCategory = Administration;
     Caption = 'Appraisal Salary Set-up';
@@ -21,6 +21,18 @@ page 52185771 "Appraisal Salary Set-up"
                     ApplicationArea = Basic, Suite;
                 }
                 field(Type; Rec.Type)
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Base Hours"; Rec."Base Hours")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Base Rate"; Rec."Base Rate")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Source Unit"; Rec."Source Unit")
                 {
                     ApplicationArea = Basic, Suite;
                 }
