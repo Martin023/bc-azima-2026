@@ -706,7 +706,7 @@ Codeunit 52186458 "Loans Process"
 
                                 PCharges.Reset;
                                 PCharges.SetRange(PCharges."Product Code", LoanApps."Loan Product Type");
-                                PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::Boosting);
+                                PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::"Deposit Boosting");
                                 if PCharges.Find('-') then begin
                                     repeat
                                         ExcemptProductCharges.Reset();
@@ -1692,7 +1692,7 @@ Codeunit 52186458 "Loans Process"
                             LoanApps.Posted := true;
                             DepositProrata(LoanApps."Loan No.");
                             AdviceLoan(LoanApps."Loan No.", false, LoanApps."Loan No.");
-                           
+
                             LoanApps."Disbursement Date" := Today;
                             LoanApps.Validate("Disbursement Date");
 
@@ -6532,7 +6532,7 @@ Codeunit 52186458 "Loans Process"
 
                     PCharges.Reset;
                     PCharges.SetRange(PCharges."Product Code", LoanApps."Loan Product Type");
-                    PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::Boosting);
+                    PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::"Deposit Boosting");
                     if PCharges.Find('-') then begin
                         repeat
                             ExcemptProductCharges.Reset();

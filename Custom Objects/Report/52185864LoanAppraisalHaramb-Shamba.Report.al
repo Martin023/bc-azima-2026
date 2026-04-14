@@ -554,7 +554,7 @@ Report 52185864 "Loan Appraisal Haramb-Shamba"
                 if Loans."Loans - Deposit Purchase" > 0 then begin
                     PCharges.Reset;
                     PCharges.SetRange(PCharges."Product Code", Loans."Loan Product Type");
-                    PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::Boosting);
+                    PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::"Deposit Boosting");
                     if PCharges.Find('-') then begin
                         repeat
 

@@ -32,10 +32,10 @@ table 52185734 "Loan Product Charges"
         field(5; Percentage; Decimal)
         {
         }
-        field(6; "Charge Type"; Option)
+        field(6; "Charge Type"; Enum "Loan Product Charge Types")
         {
-            OptionCaption = 'General,Top up,External Loan,Deposit Boosting,Asset Finance,Loan Restructure,Loan Reschedule';
-            OptionMembers = General,"Top up","External Loan",Boosting,"Asset Finance","Loan Restructure","Loan Reschedule",;
+            // OptionCaption = 'General,Top up,External Loan,Deposit Boosting,Asset Finance,Loan Restructure,Loan Reschedule';
+            // OptionMembers = General,"Top up","External Loan",Boosting,"Asset Finance","Loan Restructure","Loan Reschedule",;
         }
         field(7; "Charging Option"; Option)
         {
