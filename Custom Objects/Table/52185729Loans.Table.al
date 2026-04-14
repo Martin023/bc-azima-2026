@@ -623,26 +623,26 @@ table 52185729 Loans
                 end;
 
                 //Check if there is a loan never paid or is in arrears
-                LoanApp.Reset;
-                LoanApp.SetRange(LoanApp."Member No.", "Member No.");
-                LoanApp.SetRange(LoanApp.Posted, true);
-                LoanApp.SetFilter(LoanApp."Outstanding Balance", '>0');
-                if LoanApp.Find('-') then begin
-                    repeat
-                        CreditLedger.Reset;
-                        CreditLedger.SetRange(CreditLedger."Member No.", "Member No.");
-                        CreditLedger.SetRange(CreditLedger."Transaction Type", CreditLedger."Transaction Type"::Repayment);
-                        CreditLedger.SetRange(CreditLedger."Loan No", LoanApp."Loan No.");
-                        if not CreditLedger.Find('-') then
-                            // Message(Text003, LoanApp."Loan No.");//they dont want this pop up
+                // LoanApp.Reset;
+                // LoanApp.SetRange(LoanApp."Member No.", "Member No.");
+                // LoanApp.SetRange(LoanApp.Posted, true);
+                // LoanApp.SetFilter(LoanApp."Outstanding Balance", '>0');
+                // if LoanApp.Find('-') then begin
+                //     repeat
+                //         CreditLedger.Reset;
+                //         CreditLedger.SetRange(CreditLedger."Member No.", "Member No.");
+                //         CreditLedger.SetRange(CreditLedger."Transaction Type", CreditLedger."Transaction Type"::Repayment);
+                //         CreditLedger.SetRange(CreditLedger."Loan No", LoanApp."Loan No.");
+                //         if not CreditLedger.Find('-') then
+                //             // Message(Text003, LoanApp."Loan No.");//they dont want this pop up
 
-                        LoanApp.CalcFields(LoanApp."Outstanding Bills");
+                //         LoanApp.CalcFields(LoanApp."Outstanding Bills");
 
-                    // if LoanApp."Outstanding Bills" > 0 then//????revisit
-                    // if loanapp."Amount In Arreas SACCO" > 0 then
-                    //     Message(Text004, LoanApp."Loan No.");//they dont want this pop up
-                    until LoanApp.Next = 0;
-                end;
+                //     // if LoanApp."Outstanding Bills" > 0 then//????revisit
+                //     // if loanapp."Amount In Arreas SACCO" > 0 then
+                //     //     Message(Text004, LoanApp."Loan No.");//they dont want this pop up
+                //     until LoanApp.Next = 0;
+                // end;
 
                 if Mem.Get("Member No.") then begin
                     if "Dummy Appraisal" = false then begin
@@ -2103,35 +2103,37 @@ table 52185729 Loans
                     if LoanGuara.Find('-') then begin
                         LoanGuara.DeleteAll;
                     end;
+                    SavAcc.Reset;
+                    SavAcc.SetRange(SavAcc."Member No.", "Member No.");
+                    SavAcc.SetRange(SavAcc."Product Category", SavAcc."Product Category"::"BOSA Deposits");
+                    if SavAcc.Find('-') then begin
+
+                        GenSetup.Get;
+                        GenSetup.testfield("Withdrawal Fee");
+                        MaxSelfGuar := 0;
+                        MaxSelfGuar := LoanAppCodeunit.GetmaxSelfGuaranteeAmt(SavAcc."No.");
+                        if "Requested Amount" > MaxSelfGuar then
+                            Error(Text015 + ' of %1. Kindly apply for a lower amount.', MaxSelfGuar);
+                        //"Recommended Amount":=SavAcc."Balance (LCY)"*GenSetup."Self Guarantee %"*0.01;
+                        //"Approved Amount":=SavAcc."Balance (LCY)"*GenSetup."Self Guarantee %"*0.01;
+                        LoanGuara.Init;
+                        LoanGuara."Self Guarantee" := true;
+                        LoanGuara."Loan No" := "Loan No.";
+                        LoanGuara."Member No" := "Member No.";
+                        LoanGuara."Savings Account No./Member No." := SavAcc."No.";
+                        LoanGuara.Validate(LoanGuara."Savings Account No./Member No.");
+                        LoanGuara.Validate(LoanGuara."Member No");
+                        LoanGuara."Deposits/Shares" := SavAcc.GetAvailableBalance(SavAcc."No.");
+                        LoanGuara."Available Shares" := MaxSelfGuar;
+                        if MaxSelfGuar > rec."Requested Amount" then
+                            LoanGuara."Amount Guaranteed" := rec."Requested Amount"
+                        else
+                            LoanGuara."Amount Guaranteed" := MaxSelfGuar;
+                        LoanGuara.Insert(true);
+                    end
+                    else
+                        Error('The member does not have a BOSA savings account to be used as self guarantee!');
                 end;
-
-                SavAcc.Reset;
-                SavAcc.SetRange(SavAcc."Member No.", "Member No.");
-                SavAcc.SetRange(SavAcc."Product Category", SavAcc."Product Category"::"BOSA Deposits");
-                if SavAcc.Find('-') then begin
-
-                    GenSetup.Get;
-                    GenSetup.testfield("Withdrawal Fee");
-                    MaxSelfGuar := 0;
-                    MaxSelfGuar := LoanAppCodeunit.GetmaxSelfGuaranteeAmt(SavAcc."No.");
-                    if "Requested Amount" > MaxSelfGuar then
-                        Error(Text015 + ' of %1. Kindly apply for a lower amount.', MaxSelfGuar);
-                    //"Recommended Amount":=SavAcc."Balance (LCY)"*GenSetup."Self Guarantee %"*0.01;
-                    //"Approved Amount":=SavAcc."Balance (LCY)"*GenSetup."Self Guarantee %"*0.01;
-                    LoanGuara.Init;
-                    LoanGuara."Self Guarantee" := true;
-                    LoanGuara."Loan No" := "Loan No.";
-                    LoanGuara."Member No" := "Member No.";
-                    LoanGuara."Savings Account No./Member No." := SavAcc."No.";
-                    LoanGuara.Validate(LoanGuara."Savings Account No./Member No.");
-                    LoanGuara.Validate(LoanGuara."Member No");
-                    LoanGuara."Deposits/Shares" := SavAcc.GetAvailableBalance(SavAcc."No.");
-                    LoanGuara."Available Shares" := MaxSelfGuar;
-                    LoanGuara."Amount Guaranteed" := MaxSelfGuar;
-                    LoanGuara.Insert(true);
-                end
-                else
-                    Error('The member does not have a BOSA savings account to be used as self guarantee!');
             end;
         }
         field(77; "Appraisal Fee"; Decimal)
@@ -2277,10 +2279,10 @@ table 52185729 Loans
         field(109; "Title Deed"; Boolean)
         {
         }
-        field(110; "Source Unit"; Option)
+        field(110; "Source Unit"; Enum "Source Unit")
         {
-            OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
-            OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
+            // OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
+            // OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
         }
         field(111; "Responsible Officer"; Code[50])
         {
@@ -3244,11 +3246,22 @@ table 52185729 Loans
         }
         field(207; "BOSA Deposits"; Decimal)
         {
+            Caption = 'Current BOSA Deposits';
             AutoFormatType = 1;
             CalcFormula = - Sum("Savings Ledger Entry"."Amount (LCY)" WHERE("Posting Date" = FIELD("Date Filter"), "Product Type" = const('1'), "Member No." = field("Member No.")));
             //Caption = 'Balance (LCY)';
             Editable = false;
             FieldClass = FlowField;
+        }
+        field(208; "Work Station"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
+        field(209; "Work Station Name"; text[150])
+        {
+            fieldclass = flowfield;
+            CalcFormula = lookup("Electrol Zones/Area Svr Center".Description WHERE(Code = field("Work Station")));
         }
 
     }

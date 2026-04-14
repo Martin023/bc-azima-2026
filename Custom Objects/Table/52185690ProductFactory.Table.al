@@ -435,10 +435,10 @@ table 52185690 "Product Factory"
         {
             TableRelation = "Product Factory"."Product ID" where("Product Class Type" = filter(Savings));
         }
-        field(110; "Source Unit"; Option)
+        field(110; "Source Unit"; Enum "Source Unit")
         {
-            OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
-            OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
+            // OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
+            // OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
         }
         field(111; "Maximum Deposit Boost %"; Decimal)
         {

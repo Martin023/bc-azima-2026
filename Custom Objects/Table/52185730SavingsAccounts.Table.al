@@ -890,11 +890,11 @@ table 52185730 "Savings Accounts"
             OptionMembers = " ",Credit,Debit,All;
             Editable = false;
         }
-        field(105; "Source Unit"; Option)
+        field(105; "Source Unit"; Enum "Source Unit")
         {
             FieldClass = FlowField;
             CalcFormula = lookup("Product Factory"."Source Unit" where("Product ID" = field("Product Type")));
-            OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
+            // OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
         }
         field(106; "Last ov int Charged Date"; Date)
         {

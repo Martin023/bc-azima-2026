@@ -397,12 +397,12 @@ table 52185840 "Securities Register"
         {
             Caption = 'Law Firm Physical Address.';
         }
-        field(137; "Lending Unit"; Option)
+        field(137; "Lending Unit"; Enum "Source Unit")
         {
             Caption = 'Lending Unit';
 
-            OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
-            OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
+            // OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
+            // OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
         }
         field(139; "Loan Offer Letter Date"; Date)
         {

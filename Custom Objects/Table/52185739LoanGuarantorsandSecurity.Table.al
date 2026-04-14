@@ -1,7 +1,7 @@
 table 52185739 "Loan Guarantors and Security"
 {
     DrillDownPageID = "Loan Guarantors and Security";
-    LookupPageID = "Loan Guarantors and Security";
+    LookupPageID = "Loan Guarantors and Security"; 
 
     fields
     {
@@ -495,10 +495,8 @@ table 52185739 "Loan Guarantors and Security"
             Editable = false;
 
         }
-        field(45; "Source Unit"; Option)
+        field(45; "Source Unit"; Enum "Source Unit")
         {
-            OptionCaption = ' ,FOSA,BOSA,BUSINESS LOANS,HR LOANS';
-            OptionMembers = "",FOSA,BOSA,"BUSINESS LOANS","HR LOANS";
             FieldClass = FlowField;
             CalcFormula = lookup(Loans."Source Unit" where("Loan No." = field("Loan No")));
             Editable = false;

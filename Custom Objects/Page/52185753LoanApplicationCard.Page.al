@@ -68,12 +68,23 @@ page 52185753 "Loan Application Card"
                     Caption = 'Staff No';
                     Editable = ApplicationDetailsEdit;
                 }
+                field("Work Station"; Rec."Work Station")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Work Station';
+                }
+                field("Work Station Name"; Rec."Work Station Name")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Work Station Name';
+                    Editable = false;
+                }
                 field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
-               
+
                 field("Application Date"; Rec."Application Date")
                 {
                     ApplicationArea = Basic, Suite;
@@ -923,6 +934,8 @@ page 52185753 "Loan Application Card"
                     //Load defaults
                     AppraisalDetailsSetup.Reset;
                     if AppraisalDetailsSetup.Find('-') then begin
+                        if rec."Source Unit" = rec."Source Unit"::FOSA then
+                            AppraisalDetailsSetup.SetRange("Source Unit", Rec."Source Unit"::FOSA);
                         repeat
                             AppraisalSalDetails.Reset;
                             AppraisalSalDetails.SetRange(AppraisalSalDetails."Loan No", Rec."Loan No.");
@@ -937,6 +950,8 @@ page 52185753 "Loan Application Card"
                             AppraisalSalDetails.Code := AppraisalDetailsSetup.Code;
                             AppraisalSalDetails.Description := AppraisalDetailsSetup.Description;
                             AppraisalSalDetails.Type := AppraisalDetailsSetup.Type;
+                            AppraisalSalDetails.Rate := AppraisalDetailsSetup."Base Rate";
+                            AppraisalSalDetails.Hours := AppraisalDetailsSetup."Base Hours";
                             AppraisalSalDetails.Insert;
                         until AppraisalDetailsSetup.Next = 0;
                     end;
@@ -952,11 +967,6 @@ page 52185753 "Loan Application Card"
                 PromotedIsBig = true;
                 RunObject = Page "Exceptions/ Rejection Reason";
                 RunPageLink = Code = FIELD("Loan No.");
-
-                trigger OnAction()
-                begin
-                    //Load defaults
-                end;
             }
 
             // action("Loan Collateral")
@@ -1251,7 +1261,7 @@ page 52185753 "Loan Application Card"
                     ProdFac.Get(Rec."Loan Product Type");
                     Rec.TestField("Recovery Mode");
 
-                   
+
                     LoanApp.Reset;
                     LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
                     LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");

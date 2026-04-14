@@ -18,7 +18,7 @@ Codeunit 52185484 "Loan Appraisal Codeunit"
         GenSetup.testField("Withdrawal Fee");
         SavBal := SavingsAcc.GetAvailableBalance(Accno);
         if SavBal > 0 then
-            exit(SavBal - ((GenSetup."Self Guarantee %" * 0.01 * SavBal) * 3) + GenSetup."Withdrawal Fee")
+            exit(SavBal - (((GenSetup."Self Guarantee %" * 0.01 * SavBal) * 3) + GenSetup."Withdrawal Fee"))
         else
             exit(0);
     end;

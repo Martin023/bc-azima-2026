@@ -168,6 +168,21 @@ table 52185744 "Appraisal Salary Details"
             DataClassification = ToBeClassified;
             Editable = false;
         }
+        field(9; Rate; Decimal)
+        {
+            trigger OnValidate()
+            begin
+                if Rec.Rate > 0 then begin
+                    if rec.Hours = 0 then
+                        Error('Please enter hours to calculate amount')
+                    else
+                        Rec.Amount := round(Rec.Rate * Rec.Hours, 0.01);
+                end;
+            end;
+        }
+        field(10; Hours; Decimal)
+        {
+        }
     }
 
     keys

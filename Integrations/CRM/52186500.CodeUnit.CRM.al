@@ -5156,7 +5156,7 @@ codeunit 52186500 "CRM Integration"
             Datum.Add('sasra_sub_sector_2_desc', SearchLoan."Sub Sector Level2 Description");
             Datum.Add('self_guarantee', SearchLoan."Self Guarantee");
             Datum.Add('application_date', GlobalFunctions.FormatDate(SearchLoan."Application Date"));
-            Datum.Add('source_unit', SearchLoan."Source Unit");
+            Datum.Add('source_unit', format(SearchLoan."Source Unit"));
             Datum.Add('source_unit_desc', Format(SearchLoan."Source Unit"));
             Datum.Add('captured_by', SearchLoan."Captured By");
             Datum.Add('status', Format(SearchLoan.Status));
@@ -7248,7 +7248,7 @@ codeunit 52186500 "CRM Integration"
                 Datum.Add('collateral_name', LoanGuarantorsList."Collateral Name");
 
                 LoanGuarantorsList.CalcFields("Source Unit", "Loan Type", "Loan Product Name");
-                Datum.Add('source_unit', LoanGuarantorsList."Source Unit");
+                Datum.Add('source_unit', format(LoanGuarantorsList."Source Unit"));
                 Datum.Add('loan_type', LoanGuarantorsList."Loan Type");
                 Datum.Add('loan_product_name', LoanGuarantorsList."Loan Product Name");
 
