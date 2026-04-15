@@ -9,16 +9,23 @@ Codeunit 52185484 "Loan Appraisal Codeunit"
     var
         LoanGua: Record "Loan Guarantors and Security";
         SavingsAcc: Record "Savings Accounts";
-        TotalDeposit: Decimal;
+        Deductions: Decimal;
         GenSetup: Record "General Set-Up";
         SavBal: Decimal;
     begin
+        Deductions := 0;
+        SavBal := 0;
         GenSetup.Get();
         GenSetup.TestField("Self Guarantee %");
         GenSetup.testField("Withdrawal Fee");
         SavBal := SavingsAcc.GetAvailableBalance(Accno);
-        if SavBal > 0 then
-            exit(SavBal - (((GenSetup."Self Guarantee %" * 0.01 * SavBal) * 3) + GenSetup."Withdrawal Fee"))
+        if SavBal > 0 then begin
+            Deductions := (GenSetup."Self Guarantee %" * 0.01 * SavBal * 3) + GenSetup."Withdrawal Fee" + GetTotalGuaranteedAmt(Accno);
+            if Deductions > SavBal then
+                exit(0)
+            else
+                exit(SavBal - Deductions);
+        end
         else
             exit(0);
     end;
@@ -31,7 +38,7 @@ Codeunit 52185484 "Loan Appraisal Codeunit"
     begin
         TotalSelfGuar := 0;
         LoanGuar.Reset;
-        LoanGuar.SetRange(LoanGuar."Member No", MemberNo);
+        LoanGuar.SetRange(LoanGuar."Savings Account No./Member No.", MemberNo);
         LoanGuar.SetRange(Substituted, false);
         LoanGuar.SetRange(LoanGuar."Self Guarantee", true);
         LoanGuar.SetLoadFields(LoanGuar."Outstanding Balance");
@@ -44,22 +51,19 @@ Codeunit 52185484 "Loan Appraisal Codeunit"
         exit(TotalSelfGuar);
     end;
 
-    procedure GetTotalGuaranteedAmt(MemberNo: Code[20]): Decimal
+    procedure GetTotalGuaranteedAmt(AccNO: Code[20]): Decimal
     var
         TotalGuar: Decimal;
         LoanGuar: Record "Loan Guarantors and Security";
     begin
         TotalGuar := 0;
         LoanGuar.Reset;
-        LoanGuar.SetRange(LoanGuar."Member No", MemberNo);
+        LoanGuar.SetRange(LoanGuar."Savings Account No./Member No.", AccNO);
         LoanGuar.SetRange(Substituted, false);
         LoanGuar.SetLoadFields(LoanGuar."Outstanding Balance");
         LoanGuar.SetFilter(LoanGuar."Outstanding Balance", '>0');
-        if LoanGuar.FindSet() then begin
-            repeat
-                TotalGuar += LoanGuar."Amount Guaranteed";
-            until LoanGuar.Next() = 0;
-        end;
+        LoanGuar.CalcSums("Amount Guaranteed");
+        TotalGuar := LoanGuar."Amount Guaranteed";
         exit(TotalGuar);
     end;
 

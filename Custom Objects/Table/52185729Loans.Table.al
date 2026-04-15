@@ -2107,7 +2107,6 @@ table 52185729 Loans
                     SavAcc.SetRange(SavAcc."Member No.", "Member No.");
                     SavAcc.SetRange(SavAcc."Product Category", SavAcc."Product Category"::"BOSA Deposits");
                     if SavAcc.Find('-') then begin
-
                         GenSetup.Get;
                         GenSetup.testfield("Withdrawal Fee");
                         MaxSelfGuar := 0;

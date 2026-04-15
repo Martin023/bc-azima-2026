@@ -843,7 +843,7 @@ Report 52186209 "Eligibilty Check"
                 // if Loans."Loans - Deposit Purchase" > 0 then begin//for breakdown calculation
                 PCharges.Reset;
                 PCharges.SetRange(PCharges."Product Code", Loans."Loan Product Type");
-                PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::Boosting);
+                PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::"Deposit Boosting");
                 if PCharges.Find('-') then begin
                     repeat
                         if (PCharges."Charge Method" = PCharges."charge method"::"% of Amount") then
