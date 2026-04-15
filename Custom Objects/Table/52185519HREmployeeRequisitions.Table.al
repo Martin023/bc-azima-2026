@@ -184,6 +184,14 @@ table 52185519 "HR Employee Requisitions"
         {
             OptionMembers = Open,Closed;
         }
+        // ADDED FIELD FOR RECRUITMENT COST TRACKING
+        field(3974; "Total Recruitment Cost"; Decimal)
+        {
+            Caption = 'Total Recruitment Cost';
+            CalcFormula = Sum("Recruitment Costs".Cost WHERE("Requisition No." = FIELD("Requisition No.")));
+            Editable = false;
+            FieldClass = FlowField;
+        }
     }
 
     keys

@@ -318,6 +318,19 @@ page 52185529 "HR Job Applications Card"
                     PromotedCategory = Category5;
                     RunObject = Page "HR Applicant Qualifications";
                     RunPageLink = "Application No" = FIELD("Job Application No.");
+                    ToolTip = 'View and manage applicant qualifications. IMPORTANT: Add qualifications before shortlisting.';
+                    
+                    // ADDED VALIDATION TO ENSURE PROPER FLOW
+                    trigger OnAction()
+                    var
+                        AppQual: Record "HR Applicant Qualifications";
+                    begin
+                        // CHECK IF APPLICANT HAS QUALIFICATIONS
+                        AppQual.Reset();
+                        AppQual.SetRange("Application No", Rec."Job Application No.");
+                        if not AppQual.FindFirst() then
+                            Message('No qualifications found for this applicant. Please add qualifications to enable proper shortlisting.');
+                    end;
                 }
                 action(Referees)
                 {

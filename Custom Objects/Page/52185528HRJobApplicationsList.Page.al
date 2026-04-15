@@ -129,11 +129,11 @@ page 52185528 "HR Job Applications List"
 
     begin
         if rec.status = rec.status::Unqualified then begin
-            msg := 'Thank you for your interest in working with Kenpipe SACCO. Your application was carefully evaluated for consideration. However, this time you were not successful. Kindly try next time we have an opening.';
+            msg := 'Thank you for your interest in working with Azima SACCO. Your application was carefully evaluated for consideration. However, this time you were not successful. Kindly try next time we have an opening.';
             Subject := 'Rejection Offer';
         end else
             if rec.status = rec.status::Approved then begin
-                msg := 'Thank you for your interest in working with Kenpipe SACCO. Your application was carefully evaluated for consideration and was  successful';
+                msg := 'Thank you for your interest in working with Azima SACCO. Your application was carefully evaluated for consideration and was  successful';
                 Subject := 'Acceptance Offer';
             end;
 

@@ -1,7 +1,7 @@
 page 52185521 "HR Job Requirement Lines(RO)"
 {
     Caption = '<HR Job Requirements';
-    CardPageID = "HR Job Requirements";
+    // CardPageID = "HR Job Requirements"; // COMMENTED: CAUSES FILTER/SORT ERROR - SOURCE TABLE MISMATCH
     DeleteAllowed = false;
     Editable = true;
     InsertAllowed = true;
