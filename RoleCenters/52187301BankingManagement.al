@@ -42,17 +42,17 @@ page 52187301 "Banking Management Role Center"
             group("Accounts")
             {
                 Caption = 'Accounts';
-                action("Saving Account Application")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Saving Account Application';
-                    RunObject = page "Savings Account Application";
-                }
-               
+                // action("Saving Account Application")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Saving Account Application';
+                //     RunObject = page "Savings Account Application";
+                // }
+
                 action("Savings Accounts Register List")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'Savings Accounts Register List(All)';
+                    Caption = 'Savings Accounts Register List';
                     RunObject = page "Savings Accounts";
                 }
                 // action("Member Listing Report")
@@ -172,7 +172,6 @@ page 52187301 "Banking Management Role Center"
 
                     // }
                 }
-
 
             }
 
@@ -1608,7 +1607,7 @@ page 52187301 "Banking Management Role Center"
                         Caption = 'Cashier Transactions';
                         RunObject = report "Cashier Transactions";
                     }
-                   
+
 
                     action("Daily Transactions Cashiers")
                     {
@@ -1754,7 +1753,7 @@ page 52187301 "Banking Management Role Center"
                         Caption = 'Petty Cash Report';
                         RunObject = report "Petty Cash FOSA Report";
                     }
-                                      action("FOSA Account List Report")
+                    action("FOSA Account List Report")
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'FOSA Account List Report';

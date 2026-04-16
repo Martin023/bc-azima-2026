@@ -2278,7 +2278,7 @@ page 52185500 "Main Role Center"
                         Caption = 'Payment Voucher Staff';
                         RunObject = page "Payment Voucher Staff List";
                     }
-               
+
                     action("Bank & Cash Transfers")
                     {
                         ApplicationArea = Basic, Suite;
@@ -2791,12 +2791,12 @@ page 52185500 "Main Role Center"
                                 Caption = 'Bosa Mobile Loan Rejected';
                                 RunObject = Page "MBanking Loan Rejected List";
                             }
-                            action(DividendPayslipLoans)
-                            {
-                                ApplicationArea = Basic;
-                                Caption = 'Dividend Payslip Loans';
-                                RunObject = Page "Dividend Payslip Loans";
-                            }
+                            // action(DividendPayslipLoans)
+                            // {
+                            //     ApplicationArea = Basic;
+                            //     Caption = 'Dividend Payslip Loans';
+                            //     RunObject = Page "Dividend Payslip Loans";
+                            // }
                         }
                     }
                     group("E-SMS")
