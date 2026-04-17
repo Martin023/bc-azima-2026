@@ -92,10 +92,20 @@ page 52185529 "HR Job Applications Card"
                                 Importance = Promoted;
                                 StyleExpr = TRUE;
                             }
+
+                            field("Full Name"; Rec."Full Name")
+                            {
+                                ApplicationArea = Basic;
+                                Caption = 'Applicant Name';
+                                Editable = false;
+                                ShowMandatory = true;
+                            }
                             field(Initials; Rec.Initials)
                             {
                                 ApplicationArea = Basic;
-                                StyleExpr = TRUE;
+                                Caption = 'Applicant Initials';
+                                Editable = false;
+                                ShowMandatory = true;
                             }
                         }
                     }
@@ -319,7 +329,7 @@ page 52185529 "HR Job Applications Card"
                     RunObject = Page "HR Applicant Qualifications";
                     RunPageLink = "Application No" = FIELD("Job Application No.");
                     ToolTip = 'View and manage applicant qualifications. IMPORTANT: Add qualifications before shortlisting.';
-                    
+
                     // ADDED VALIDATION TO ENSURE PROPER FLOW
                     trigger OnAction()
                     var
@@ -353,6 +363,18 @@ page 52185529 "HR Job Applications Card"
                     PromotedIsBig = true;
                     RunObject = Page "HR Applicant Hobbies";
                     RunPageLink = "Job Application No" = FIELD("Job Application No.");
+                }
+                action(Interview)
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Interview Scores';
+                    Image = Evaluate;
+                    Promoted = true;
+                    PromotedCategory = Category5;
+                    PromotedIsBig = true;
+                    RunObject = Page "HR Job Interview";
+                    RunPageLink = "Applicant No" = FIELD("Job Application No.");
+                    ToolTip = 'View and add interview scores for this applicant. Each interview area can be scored up to 5 points.';
                 }
             }
             // group("Job Details")

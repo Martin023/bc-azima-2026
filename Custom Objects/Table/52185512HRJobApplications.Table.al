@@ -16,6 +16,7 @@ table 52185512 "HR Job Applications"
             trigger OnValidate()
             begin
                 fn_FullName;
+                fn_initials;
             end;
         }
         field(3; "Middle Name"; Text[50])
@@ -24,16 +25,18 @@ table 52185512 "HR Job Applications"
             trigger OnValidate()
             begin
                 fn_FullName;
+                fn_initials;
             end;
         }
         field(4; "Last Name"; Text[50])
         {
 
             trigger OnValidate()
-            var
-                Reason: Text[30];
+            // var
+            //     Reason: Text[30];
             begin
-                fn_FullName
+                fn_FullName;
+                fn_initials;
             end;
         }
         field(5; Initials; Text[15])
@@ -493,6 +496,17 @@ table 52185512 "HR Job Applications"
     local procedure fn_FullName()
     begin
         "Full Name" := "First Name" + ' ' + "Middle Name" + ' ' + "Last Name";
+    end;
+
+    local procedure fn_initials()
+    var
+        FstInitial: Text[1];
+        MidInitial: Text[1];
+        LstInitial: Text[1];
+    begin
+        FstInitial := CopyStr("First Name", 1, 1).ToUpper();
+        MidInitial := CopyStr("Middle Name", 1, 1).ToUpper();
+        LstInitial := CopyStr("Last Name", 1, 1).ToUpper();
     end;
 
     local procedure fn_PopulateStaffDetails()
