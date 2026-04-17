@@ -987,26 +987,41 @@ End Function
   <DataSets>
     <DataSet Name="DataSet_Result">
       <Fields>
-        <Field Name="JobApplicationNo">
-          <DataField>JobApplicationNo</DataField>
+        <Field Name="RequisitionNo">
+          <DataField>RequisitionNo</DataField>
         </Field>
-        <Field Name="FullName">
-          <DataField>FullName</DataField>
+        <Field Name="JobID">
+          <DataField>JobID</DataField>
         </Field>
-        <Field Name="DateApplied">
-          <DataField>DateApplied</DataField>
+        <Field Name="JobDescription">
+          <DataField>JobDescription</DataField>
         </Field>
-        <Field Name="Status">
-          <DataField>Status</DataField>
+        <Field Name="RequiredPositions">
+          <DataField>RequiredPositions</DataField>
         </Field>
-        <Field Name="Gender">
-          <DataField>Gender</DataField>
+        <Field Name="RequiredPositionsFormat">
+          <DataField>RequiredPositionsFormat</DataField>
         </Field>
-        <Field Name="JobAppliedFor">
-          <DataField>JobAppliedFor</DataField>
+        <Field Name="RequisitionDate">
+          <DataField>RequisitionDate</DataField>
         </Field>
-        <Field Name="JobAppliedforDescription">
-          <DataField>JobAppliedforDescription</DataField>
+        <Field Name="ClosingDate">
+          <DataField>ClosingDate</DataField>
+        </Field>
+        <Field Name="TotalRecruitmentCost">
+          <DataField>TotalRecruitmentCost</DataField>
+        </Field>
+        <Field Name="TotalRecruitmentCostFormat">
+          <DataField>TotalRecruitmentCostFormat</DataField>
+        </Field>
+        <Field Name="NoOfApplications">
+          <DataField>NoOfApplications</DataField>
+        </Field>
+        <Field Name="NoQualified">
+          <DataField>NoQualified</DataField>
+        </Field>
+        <Field Name="NoDisqualified">
+          <DataField>NoDisqualified</DataField>
         </Field>
         <Field Name="CompanyInformation_Name">
           <DataField>CompanyInformation_Name</DataField>
@@ -1022,6 +1037,33 @@ End Function
         </Field>
         <Field Name="CommunicationOnline">
           <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="JobApplicationNo">
+          <DataField>JobApplicationNo</DataField>
+        </Field>
+        <Field Name="FullName">
+          <DataField>FullName</DataField>
+        </Field>
+        <Field Name="IDNo">
+          <DataField>IDNo</DataField>
+        </Field>
+        <Field Name="Gender">
+          <DataField>Gender</DataField>
+        </Field>
+        <Field Name="MaritalStatus">
+          <DataField>MaritalStatus</DataField>
+        </Field>
+        <Field Name="StageScore">
+          <DataField>StageScore</DataField>
+        </Field>
+        <Field Name="StageScoreFormat">
+          <DataField>StageScoreFormat</DataField>
+        </Field>
+        <Field Name="Qualified">
+          <DataField>Qualified</DataField>
+        </Field>
+        <Field Name="QualificationStatus">
+          <DataField>QualificationStatus</DataField>
         </Field>
       </Fields>
       <Query>

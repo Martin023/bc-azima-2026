@@ -207,6 +207,10 @@ table 52185548 "HR Shortlisted Applicants"
         {
             Clustered = true;
         }
+        // ADDED KEY FOR SORTING BY STAGE SCORE IN REPORTS - IMPROVES PERFORMANCE
+        key(Key2; "Employee Requisition No", "Stage Score")
+        {
+        }
     }
 
     fieldgroups

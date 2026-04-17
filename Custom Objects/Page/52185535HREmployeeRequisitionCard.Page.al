@@ -91,6 +91,15 @@ page 52185535 "HR Employee Requisition Card"
                     Style = Attention;
                     StyleExpr = TRUE;
                 }
+                // ADDED FIELD FOR RECRUITMENT COST TRACKING
+                field(TotalRecruitmentCost; Rec."Total Recruitment Cost")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Total Recruitment Cost';
+                    Editable = false;
+                    Importance = Promoted;
+                    ToolTip = 'Total cost incurred for this recruitment process';
+                }
             }
             group("Additional Information")
             {
@@ -355,6 +364,19 @@ page 52185535 "HR Employee Requisition Card"
                     RunObject = Page "HR Job Interview";
                     RunPageLink = "Applicant No" = FIELD("Job ID");
                 }
+                // ADDED ACTION FOR RECRUITMENT COST TRACKING
+                action("Recruitment Costs")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Recruitment Costs';
+                    Image = Cost;
+                    Promoted = true;
+                    PromotedCategory = Category5;
+                    PromotedIsBig = true;
+                    RunObject = Page "Recruitment Costs";
+                    RunPageLink = "Requisition No." = FIELD("Requisition No.");
+                    ToolTip = 'Track all costs associated with this recruitment process';
+                }
             }
         }
     }
@@ -363,6 +385,8 @@ page 52185535 "HR Employee Requisition Card"
     begin
 
         UpdateControls;
+        // CALCULATE RECRUITMENT COST FLOWFIELD
+        Rec.CalcFields(Rec."Total Recruitment Cost");
     end;
 
     trigger OnOpenPage()

@@ -136,33 +136,54 @@ page 52185586 "HR Shortlisting Card"
                     begin
                         Rec.TestField("Completion Status", Rec."Completion Status"::Open);
 
-                        if Confirm('Shortlist Applicants for Employee Requisition %1 - %2', false, Rec."Requisition No.", Rec."Job Description") = false then exit;
+                        // VALIDATE THAT JOB REQUIREMENTS EXIST
+                        if Confirm('Shortlist Applicants for Employee Requisition %1 - %2?', false, Rec."Requisition No.", Rec."Job Description") = false then exit;
 
                         HRJobRequirements.Reset;
                         HRJobRequirements.SetRange(HRJobRequirements."Job ID", Rec."Job ID");
                         if HRJobRequirements.Count = 0 then begin
-                            Error('Job Requirements for the job ' + Rec."Job ID" + ' have not been setup');
+                            Error('Job Requirements for the job %1 have not been setup. Please define job requirements before shortlisting.', Rec."Job ID");
                         end;
 
-                        //DELETE ALL RECORDS FROM THE SHORTLISTED APPLICANTS TABLE
+                        // DELETE ALL RECORDS FROM THE SHORTLISTED APPLICANTS TABLE
                         HRShortlistedApplicants.Reset;
                         HRShortlistedApplicants.SetRange(HRShortlistedApplicants."Employee Requisition No", Rec."Requisition No.");
                         HRShortlistedApplicants.DeleteAll;
 
-                        //GET JOB APPLICANTS
+                        // GET JOB APPLICANTS
                         HRJobApplications.Reset;
                         HRJobApplications.SetRange(HRJobApplications."Employee Requisition No", Rec."Requisition No.");
                         if not HRJobApplications.Find('-') then begin
-                            Error('No Applicants have applied for this Job');
+                            Error('No Applicants have applied for this Job. Cannot proceed with shortlisting.');
                         end;
+                        
+                        // CHECK IF APPLICANTS HAVE QUALIFICATIONS
                         found := 0;
+                        HRJobApplications.FindFirst;
+                        repeat
+                            AppQualifications.Reset;
+                            AppQualifications.SetRange("Application No", HRJobApplications."Job Application No.");
+                            if AppQualifications.FindFirst() then
+                                found += 1;
+                        until HRJobApplications.Next = 0;
+                        
+                        if found = 0 then begin
+                            Error('None of the applicants have qualifications entered. Please add applicant qualifications before shortlisting.');
+                        end;
+                        
+                        if found < HRJobApplications.Count then begin
+                            if not Confirm('%1 out of %2 applicants have qualifications entered. Continue with shortlisting?', false, found, HRJobApplications.Count) then
+                                exit;
+                        end;
+
+                        // RESET ALL APPLICANTS TO NOT QUALIFIED
                         HRJobApplications.FindFirst;
                         repeat
                             HRJobApplications.Qualified := false;
                             HRJobApplications.Modify;
                         until HRJobApplications.Next = 0;
 
-                        //MOVE TO FIRST RECORD AGAIN
+                        // MOVE TO FIRST RECORD AGAIN AND START SHORTLISTING
                         HRJobApplications.FindFirst;
                         repeat
                             Qualified := true;
@@ -170,9 +191,31 @@ page 52185586 "HR Shortlisting Card"
                                 StageScore := 0;
                                 Rec.Score := 0;
                                 repeat
+                                    // CHECK IF APPLICANT HAS THIS QUALIFICATION
+                                    AppQualifications.Reset;
+                                    AppQualifications.SetRange("Application No", HRJobApplications."Job Application No.");
+                                    AppQualifications.SetRange("Qualification Type", HRJobRequirements."Qualification Type");
+                                    AppQualifications.SetRange("Qualification Code", HRJobRequirements."Qualification Code");
                                     
+                                    if AppQualifications.FindFirst then begin
+                                        // APPLICANT HAS THIS QUALIFICATION - ADD SCORE
+                                        if AppQualifications."Score ID" > 0 then
+                                            Rec.Score += AppQualifications."Score ID"
+                                        else if HRJobRequirements."Minimum Score" > 0 then
+                                            Rec.Score += HRJobRequirements."Minimum Score"
+                                        else
+                                            Rec.Score += 1; // DEFAULT SCORE FOR MATCH
+                                    end else begin
+                                        // APPLICANT DOESN'T HAVE THIS QUALIFICATION
+                                        if HRJobRequirements.Mandatory then begin
+                                            // MANDATORY REQUIREMENT NOT MET - DISQUALIFY
+                                            Qualified := false;
+                                        end;
+                                    end;
                                 until HRJobRequirements.Next = 0;
                             end;
+                            
+                            // INSERT INTO SHORTLISTED APPLICANTS TABLE
                             HRShortlistedApplicants."Employee Requisition No" := Rec."Requisition No.";
                             HRShortlistedApplicants."Job Application No" := HRJobApplications."Job Application No.";
                             HRShortlistedApplicants."Stage Score" := Rec.Score;
@@ -188,17 +231,13 @@ page 52185586 "HR Shortlisting Card"
                             HRShortlistedApplicants."ID No" := HRJobApplications."ID Number";
                             HRShortlistedApplicants.Gender := HRJobApplications.Gender;
                             HRShortlistedApplicants."Marital Status" := HRJobApplications."Marital Status";
-                            //MESSAGE(HRJobApplications."First Name");
                             HRShortlistedApplicants.Insert;
 
-                            //HRJobApplications.Shorlisted:=TRUE;
-                            //HRJobApplications."Total Score After Shortlisting":=Score;
                             HRJobApplications.Modify;
-
 
                         until HRJobApplications.Next = 0;
 
-                        //MARK QUALIFIED APPLICANTS AS QUALIFIED
+                        // MARK QUALIFIED APPLICANTS AS QUALIFIED IN JOB APPLICATIONS TABLE
                         HRShortlistedApplicants.SetRange(HRShortlistedApplicants.Qualified, true);
                         if HRShortlistedApplicants.Find('-') then
                             repeat
@@ -207,31 +246,15 @@ page 52185586 "HR Shortlisting Card"
                                 HRJobApplications.Modify;
                             until HRShortlistedApplicants.Next = 0;
 
-                        //SORT DESCENDING
-                        //HRShortlistedApplicants.SETCURRENTKEY(HRShortlistedApplicants."Stage Score");
-                        //HRShortlistedApplicants.ASCENDING;
-                        /*
-                        RecCount:= 0;
-                        MyCount:=0;
-                        StageShortlist.RESET;
-                        StageShortlist.SETRANGE(StageShortlist."Need Code","Need Code");
-                        StageShortlist.SETRANGE(StageShortlist."Stage Code","Stage Code");
-                        
-                        IF StageShortlist.FIND('-') THEN BEGIN
-                        RecCount:=StageShortlist.COUNT ;
-                        StageShortlist.SETCURRENTKEY(StageShortlist."Stage Score");
-                        StageShortlist.ASCENDING;
-                        REPEAT
-                        MyCount:=MyCount + 1;
-                        StageShortlist.Position:=RecCount - MyCount;
-                        StageShortlist.MODIFY;
-                        UNTIL StageShortlist.NEXT = 0;
-                        END;
-                        */
-                        Message('Shortlisting Competed Successfully for %1', Rec."Job ID");
-
-                        //END ELSE
-                        //MESSAGE('%1','You must select the stage you would like to shortlist.');
+                        // SHOW SUMMARY MESSAGE
+                        HRShortlistedApplicants.Reset;
+                        HRShortlistedApplicants.SetRange("Employee Requisition No", Rec."Requisition No.");
+                        HRShortlistedApplicants.SetRange(Qualified, true);
+                        Message('Shortlisting Completed Successfully!\Job: %1\Total Applicants: %2\Qualified: %3\Disqualified: %4', 
+                                Rec."Job ID", 
+                                HRJobApplications.Count, 
+                                HRShortlistedApplicants.Count,
+                                HRJobApplications.Count - HRShortlistedApplicants.Count);
 
                     end;
                 }
