@@ -326,6 +326,7 @@ page 52186182 "General Setup"
                 field("Self Guarantee %"; rec."Self Guarantee %")
                 {
                     ApplicationArea = Basic;
+                    Caption = 'One month % Self Guarantee Deposit';
                 }
                 field("Maximum Discounting %"; rec."Maximum Discounting %")
                 {

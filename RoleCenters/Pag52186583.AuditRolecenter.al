@@ -3014,12 +3014,12 @@ page 52186583 "Audit Role center"
                                     Caption = 'Bosa Mobile Loan Rejected';
                                     RunObject = Page "MBanking Loan Rejected List";
                                 }
-                                action(DividendPayslipLoans)
-                                {
-                                    ApplicationArea = Basic;
-                                    Caption = 'Dividend Payslip Loans';
-                                    RunObject = Page "Dividend Payslip Loans";
-                                }
+                                // action(DividendPayslipLoans)
+                                // {
+                                //     ApplicationArea = Basic;
+                                //     Caption = 'Dividend Payslip Loans';
+                                //     RunObject = Page "Dividend Payslip Loans";
+                                // }
                             }
                         }
                         group("E-SMS")

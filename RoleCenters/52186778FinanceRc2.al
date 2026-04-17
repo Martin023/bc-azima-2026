@@ -544,7 +544,7 @@ page 52186778 "Finance Role Center"
                         Caption = 'Member Detailed Balances';
                         RunObject = Page "Detailed Member Balance List";
                     }
-                  
+
                     action("Savings Account Register")
                     {
                         ApplicationArea = All;
@@ -598,71 +598,69 @@ page 52186778 "Finance Role Center"
                     }
 
                 }
-                group("Guarantor Substitution")
-                {
-                    action("Loan Guarantors List")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Guarantors Lists';
-                        RunObject = page "Guarantors List";
+                // group("Guarantor Substitution")
+                // {
+                //     action("Loan Guarantors List")
+                //     {
+                //         ApplicationArea = all;
+                //         Caption = 'Guarantors Lists';
+                //         RunObject = page "Guarantors List";
 
-                    }
-                    action("Open Guarantor Substitution")
-                    {
+                //     }
+                //     action("Open Guarantor Substitution")
+                //     {
 
-                        ApplicationArea = Basic, Suite;
-                        caption = 'Open Guarantor Substitution List';
-                        RunObject = page "Guarantor Subsitution List";
-                        RunPageLink = Status = filter(Open);//, "Sent Back to CRM" = const(false); Show all but provided a filter
-                    }
-                    action("Pending Guarantor Substitution")
-                    {
+                //         ApplicationArea = Basic, Suite;
+                //         caption = 'Open Guarantor Substitution List';
+                //         RunObject = page "Guarantor Subsitution List";
+                //         RunPageLink = Status = filter(Open);//, "Sent Back to CRM" = const(false); Show all but provided a filter
+                //     }
+                //     action("Pending Guarantor Substitution")
+                //     {
 
-                        ApplicationArea = Basic, Suite;
-                        caption = 'Pending Guarantor Substitution List';
-                        RunObject = page "Guarantor Subsitution List";
-                        RunPageLink = Status = filter(Pending), "Sent Back to CRM" = const(false);
-                    }
-                    action("Approved Guarantor Substitution")
-                    {
+                //         ApplicationArea = Basic, Suite;
+                //         caption = 'Pending Guarantor Substitution List';
+                //         RunObject = page "Guarantor Subsitution List";
+                //         RunPageLink = Status = filter(Pending), "Sent Back to CRM" = const(false);
+                //     }
+                //     action("Approved Guarantor Substitution")
+                //     {
 
-                        ApplicationArea = Basic, Suite;
-                        caption = 'Approved Guarantor Substitution List';
-                        RunObject = page "Guarantor Subsitution List";
-                        RunPageLink = Status = filter(Approved), Posted = const(false), "Sent Back to CRM" = const(false);
-                    }
-                    action("Posted Guarantor Substitution")
-                    {
+                //         ApplicationArea = Basic, Suite;
+                //         caption = 'Approved Guarantor Substitution List';
+                //         RunObject = page "Guarantor Subsitution List";
+                //         RunPageLink = Status = filter(Approved), Posted = const(false), "Sent Back to CRM" = const(false);
+                //     }
+                //     action("Posted Guarantor Substitution")
+                //     {
 
-                        ApplicationArea = Basic, Suite;
-                        caption = 'Posted Guarantor Substitution List';
-                        RunObject = page "Guarantor Subsitution List";
-                        RunPageLink = Status = filter(Posted), Posted = const(true), "Sent Back to CRM" = const(false);
-                    }
-                    action("Deffred Guantor Substitution")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Deffered Guarantor Substitution';
-                        RunObject = page "Guarantor Subsitution List";
-                        RunPageLink = Status = filter(Deffered), "Sent Back to CRM" = const(false);
-                    }
-                    action("Rejected Guarantor Substitution")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Rejected Guarantor Substitution';
-                        RunObject = page "Guarantor Subsitution List";
-                        RunPageLink = Status = filter(Rejected), "Sent Back to CRM" = const(false);
-                    }
-                    // action("Guarantor Substitution Sent Send Back to CRM")
-                    // {
-                    //     ApplicationArea = all;
-                    //     Caption = 'Guarantor Substitution Sent Send Back to CRM';
-                    //     RunObject = page "Guarantor Subsitution List";
-                    //     RunPageLink = "Sent Back to CRM" = const(true);
-                    // }
-                }
-
-
+                //         ApplicationArea = Basic, Suite;
+                //         caption = 'Posted Guarantor Substitution List';
+                //         RunObject = page "Guarantor Subsitution List";
+                //         RunPageLink = Status = filter(Posted), Posted = const(true), "Sent Back to CRM" = const(false);
+                //     }
+                //     action("Deffred Guantor Substitution")
+                //     {
+                //         ApplicationArea = all;
+                //         Caption = 'Deffered Guarantor Substitution';
+                //         RunObject = page "Guarantor Subsitution List";
+                //         RunPageLink = Status = filter(Deffered), "Sent Back to CRM" = const(false);
+                //     }
+                //     action("Rejected Guarantor Substitution")
+                //     {
+                //         ApplicationArea = all;
+                //         Caption = 'Rejected Guarantor Substitution';
+                //         RunObject = page "Guarantor Subsitution List";
+                //         RunPageLink = Status = filter(Rejected), "Sent Back to CRM" = const(false);
+                //     }
+                //     // action("Guarantor Substitution Sent Send Back to CRM")
+                //     // {
+                //     //     ApplicationArea = all;
+                //     //     Caption = 'Guarantor Substitution Sent Send Back to CRM';
+                //     //     RunObject = page "Guarantor Subsitution List";
+                //     //     RunPageLink = "Sent Back to CRM" = const(true);
+                //     // }
+                // }
 
                 group("Member closure Notices")
                 {
@@ -1475,13 +1473,7 @@ page 52186778 "Finance Role Center"
                     RunObject = page "File Tracker List";
                     RunPageView = where(Status = filter(<> archived));
                 }
-                action("Guarantors List")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Guarantors Lists';
-                    RunObject = page "Guarantors List";
 
-                }
             }
             group("Payments & Receipts")
             {
@@ -3944,7 +3936,7 @@ page 52186778 "Finance Role Center"
                             RunObject = report "PrDeductions Summary";
                             ApplicationArea = Basic, Suite;
                         }
-                       
+
                         action("Helb Report")
                         {
                             Caption = 'Helb Report';
@@ -4467,8 +4459,8 @@ page 52186778 "Finance Role Center"
                         Caption = 'Loans Underway Report';
                         RunObject = report "Loans Underway Report";
                     }
-                 
-                   
+
+
                     action("Loan Ageing")
                     {
                         ApplicationArea = Basic, Suite;
@@ -4527,7 +4519,7 @@ page 52186778 "Finance Role Center"
                         ApplicationArea = all;
                         RunObject = report "Loans Recovery Per Month";
                     }
-                 
+
                     action("Loan Approved Schedule")
                     {
                         ApplicationArea = Basic, Suite;
@@ -4779,7 +4771,7 @@ page 52186778 "Finance Role Center"
                         ApplicationArea = Basic, Suite;
                         RunObject = report "Past Due Accounts";
                     }
-            
+
                     action("DMU Case Forwarded")
                     {
                         ApplicationArea = All;

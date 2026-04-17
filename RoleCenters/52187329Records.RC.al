@@ -440,6 +440,13 @@ page 52187329 "Records"
                     Caption = 'Saving Account Application';
                     RunObject = page "Savings Account Application";
                 }
+
+                action("Account Closure List")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Account Closure List';
+                    RunObject = page "Banking Closure List";
+                }
                 action("Savings Accounts Register List")
                 {
                     ApplicationArea = Basic, Suite;
