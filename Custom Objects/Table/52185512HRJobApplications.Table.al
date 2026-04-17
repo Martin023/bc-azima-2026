@@ -507,6 +507,7 @@ table 52185512 "HR Job Applications"
         FstInitial := CopyStr("First Name", 1, 1).ToUpper();
         MidInitial := CopyStr("Middle Name", 1, 1).ToUpper();
         LstInitial := CopyStr("Last Name", 1, 1).ToUpper();
+        Initials := FstInitial + MidInitial + LstInitial;
     end;
 
     local procedure fn_PopulateStaffDetails()

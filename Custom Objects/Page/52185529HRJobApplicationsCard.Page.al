@@ -96,16 +96,16 @@ page 52185529 "HR Job Applications Card"
                             field("Full Name"; Rec."Full Name")
                             {
                                 ApplicationArea = Basic;
-                                Caption = 'Applicant Name';
+                                Caption = 'Applicant FullName';
+                                Importance = Promoted;
                                 Editable = false;
-                                ShowMandatory = true;
                             }
                             field(Initials; Rec.Initials)
                             {
                                 ApplicationArea = Basic;
                                 Caption = 'Applicant Initials';
+                                Importance = Promoted;
                                 Editable = false;
-                                ShowMandatory = true;
                             }
                         }
                     }
