@@ -1730,192 +1730,209 @@ Codeunit 52186458 "Loans Process"
         upfrontrate: Decimal;
         TotalInterest: Decimal;
         OtherCommitments: Record "Other Commitements Clearance";
+        ChargeAmount: Decimal;
+        TotalCharges: Decimal;
+        TotalExciseDuty: Decimal;
+        ExciseDuty: Decimal;
+        Balance: Decimal;
     begin
-        TotalComputedCharges := 0;
-        ChargeExtraComms := false;
-        TopUp.Reset;
-        TopUp.SetRange(TopUp."Loan No.", LoanNo);
-        if TopUp.FindSet then begin
-            repeat
-                if TopUp."Additional Top Up Commission" = true then
-                    ChargeExtraComms := true;
-            until TopUp.Next = 0;
-        end;
+        ExciseDuty := 0;
+        TotalExciseDuty := 0;
+        TotalCharges := 0;
+        ChargeAmount := 0;
+        Balance := 0;
+
+        // Form Fees
         PCharges.Reset;
-        PCharges.SetRange(PCharges."Product Code", ProdType);
-        PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::General);
-        if PCharges.FindSet then begin
+        PCharges.SetRange(PCharges."Product Code", LoanApps."Loan Product Type");
+        PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::"Form Fees");
+        if PCharges.Find('-') then begin
             repeat
-                if (PCharges."Charge Method" = PCharges."charge method"::"% of Amount") then
-                    TotalComputedCharges := TotalComputedCharges + (ApprovedAmt * PCharges.Percentage / 100)
-                else
-                    if PCharges."Charge Method" = PCharges."charge method"::"Flat Amount" then
-                        TotalComputedCharges := TotalComputedCharges + PCharges."Charge Amount"
-                    else
-                        if PCharges."Charge Method" = PCharges."charge method"::Staggered then begin
+                ExcemptProductCharges.Reset();
+                ExcemptProductCharges.SetRange("Loan No.", LoanNo);
+                ExcemptProductCharges.SetRange("Product Code", PCharges."Product Code");
+                ExcemptProductCharges.setrange("Charge Code", PCharges."Charge Code");
+                ExcemptProductCharges.setrange(Excempt, true);
+                if not ExcemptProductCharges.Find('-') then begin
+                    //Non Prorate
+                    if PCharges.Prorate = PCharges.Prorate::" " then begin
 
-                            PCharges.TestField(PCharges."Staggered Charge Code");
-
-                            TariffDetails.Reset;
-                            TariffDetails.SetRange(TariffDetails.Code, PCharges."Staggered Charge Code");
-                            if TariffDetails.FindSet then begin
-                                repeat
-                                    if (ApprovedAmt >= TariffDetails."Lower Limit") and (ApprovedAmt <= TariffDetails."Upper Limit") then begin
-                                        if TariffDetails."Use Percentage" = true then begin
-                                            TotalComputedCharges := TotalComputedCharges + ApprovedAmt * TariffDetails.Percentage * 0.01;
-                                        end else begin
-                                            TotalComputedCharges := TotalComputedCharges + TariffDetails."Charge Amount";
-                                        end;
+                        if (PCharges."Charge Method" = PCharges."charge method"::"% of Amount") then
+                            ChargeAmount := (LoanApps."Approved Amount" * (PCharges.Percentage / 100))
+                        else
+                            if PCharges."Charge Method" = PCharges."charge method"::"Flat Amount" then
+                                ChargeAmount := PCharges."Charge Amount"
+                            else
+                                if PCharges."Charge Method" = PCharges."charge method"::Staggered then begin
+                                    PCharges.TestField(PCharges."Staggered Charge Code");
+                                    TariffDetails.Reset;
+                                    TariffDetails.SetRange(TariffDetails.Code, PCharges."Staggered Charge Code");
+                                    if TariffDetails.Find('-') then begin
+                                        repeat
+                                            if (LoanApps."Approved Amount" >= TariffDetails."Lower Limit") and (LoanApps."Approved Amount" <= TariffDetails."Upper Limit") then begin
+                                                if TariffDetails."Use Percentage" = true then begin
+                                                    ChargeAmount := LoanApps."Approved Amount" * TariffDetails.Percentage * 0.01;
+                                                end else begin
+                                                    ChargeAmount := TariffDetails."Charge Amount";
+                                                end;
+                                            end
+                                        until TariffDetails.Next = 0;
                                     end;
-                                until TariffDetails.Next = 0;
-                            end;
+                                end;
+
+                        if ExcemptCharges = true then
+                            ChargeAmount := 0;
+
+                        TotalCharges += ChargeAmount;
+
+                        //If excise duty involved
+                        if PCharges."Effect Excise Duty" = PCharges."effect excise duty"::Yes then begin
+                            GenSetup.TestField("Excise Duty G/L");
+                            GenSetup.TestField("Excise Duty (%)");
+                            ExciseDuty := ChargeAmount * GenSetup."Excise Duty (%)" * 0.01;
+
+                            TotalExciseDuty += ExciseDuty;
                         end;
+                    end;
+                end;
+
             until PCharges.Next = 0;
         end;
 
-        ///MESSAGE('Running Charge general %1',TotalComputedCharges);
 
-
-        //End of general charges
-
-        TotalCleared := 0;
-        //Pass loan clearance principle and interest
-        TopUp.Reset;
-        TopUp.SetRange(TopUp."Loan No.", LoanNo);
-        if TopUp.FindSet then begin
+        // Form Fees
+        PCharges.Reset;
+        PCharges.SetRange(PCharges."Product Code", LoanApps."Loan Product Type");
+        PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::"Insurance Fees");
+        if PCharges.Find('-') then begin
             repeat
-                //TopUp.CALCSUMS(TopUp."Principle Top Up",TopUp."Interest Top Up");
-                TotalCleared := TotalCleared + TopUp."Principle Top Up" + TopUp."Interest Top Up";
+                ExcemptProductCharges.Reset();
+                ExcemptProductCharges.SetRange("Loan No.", LoanNo);
+                ExcemptProductCharges.SetRange("Product Code", PCharges."Product Code");
+                ExcemptProductCharges.setrange("Charge Code", PCharges."Charge Code");
+                ExcemptProductCharges.setrange(Excempt, true);
+                if not ExcemptProductCharges.Find('-') then begin
+                    //Non Prorate
+                    if PCharges.Prorate = PCharges.Prorate::" " then begin
 
-                PCharges.Reset;
-                PCharges.SetRange(PCharges."Product Code", ProdType);
-                PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::"Top up");
-                if PCharges.FindSet then begin
-                    repeat
-
-                        if (PCharges."Use Percentage" = true) and (PCharges."Charging Option" = PCharges."charging option"::"On Approved Amount") then begin
-                            if ChargeExtraComms = true then
-                                TotalComputedCharges := TotalComputedCharges + (ApprovedAmt * ((PCharges.Percentage + PCharges."Additional Charge %") / 100))
+                        if (PCharges."Charge Method" = PCharges."charge method"::"% of Amount") then
+                            ChargeAmount := (LoanApps."Approved Amount" * (PCharges.Percentage / 100))
+                        else
+                            if PCharges."Charge Method" = PCharges."charge method"::"Flat Amount" then
+                                ChargeAmount := PCharges."Charge Amount"
                             else
-                                TotalComputedCharges := TotalComputedCharges + (ApprovedAmt * (PCharges.Percentage / 100))
-                        end else
-                            if (PCharges."Use Percentage" = true) and (PCharges."Charging Option" = PCharges."charging option"::"On Net Amount") then begin
-                                if ChargeExtraComms = true then
-                                    TotalComputedCharges := TotalComputedCharges + ((TopUp."Principle Top Up" + TopUp."Interest Top Up") * ((PCharges.Percentage + PCharges."Additional Charge %") / 100))
-                                else
-                                    TotalComputedCharges := TotalComputedCharges + ((TopUp."Principle Top Up" + TopUp."Interest Top Up") * (PCharges.Percentage / 100))
-                            end else
-                                TotalComputedCharges := TotalComputedCharges + PCharges."Charge Amount";
-                    // MESSAGE('Running Charge topup %1',TotalComputedCharges);
-                    until PCharges.Next = 0;
+                                if PCharges."Charge Method" = PCharges."charge method"::Staggered then begin
+                                    PCharges.TestField(PCharges."Staggered Charge Code");
+                                    TariffDetails.Reset;
+                                    TariffDetails.SetRange(TariffDetails.Code, PCharges."Staggered Charge Code");
+                                    if TariffDetails.Find('-') then begin
+                                        repeat
+                                            if (LoanApps."Approved Amount" >= TariffDetails."Lower Limit") and (LoanApps."Approved Amount" <= TariffDetails."Upper Limit") then begin
+                                                if TariffDetails."Use Percentage" = true then begin
+                                                    ChargeAmount := LoanApps."Approved Amount" * TariffDetails.Percentage * 0.01;
+                                                end else begin
+                                                    ChargeAmount := TariffDetails."Charge Amount";
+                                                end;
+                                            end
+                                        until TariffDetails.Next = 0;
+                                    end;
+                                end;
+
+                        if ExcemptCharges = true then
+                            ChargeAmount := 0;
+
+                        TotalCharges += ChargeAmount;
+
+                        //If excise duty involved
+                        if PCharges."Effect Excise Duty" = PCharges."effect excise duty"::Yes then begin
+                            GenSetup.TestField("Excise Duty G/L");
+                            GenSetup.TestField("Excise Duty (%)");
+                            ExciseDuty := ChargeAmount * GenSetup."Excise Duty (%)" * 0.01;
+
+                            TotalExciseDuty += ExciseDuty;
+                        end;
+                    end;
                 end;
-            until TopUp.Next = 0;
+
+            until PCharges.Next = 0;
         end;
 
-        // if TotalComputedCharges > 50000 then
-        //    TotalComputedCharges := 50000;
 
-        OtherComms := 0;
-        //TotalCleared:=0;
-        //TotalComputedCharges:=0;
-        //Clearing external debts
-        OtherCommitments.Reset;
-        OtherCommitments.SetRange(OtherCommitments."Loan No.", LoanNo);
-        if OtherCommitments.FindSet then begin
+
+        // Form Fees
+        PCharges.Reset;
+        PCharges.SetRange(PCharges."Product Code", LoanApps."Loan Product Type");
+        PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::General);
+        if PCharges.Find('-') then begin
             repeat
-                TotalCleared := TotalCleared + OtherCommitments.Amount;
-            //OtherCommitments.CALCSUMS(OtherCommitments.Amount);
-            //OtherComms:=OtherCommitments.Amount;
+                ExcemptProductCharges.Reset();
+                ExcemptProductCharges.SetRange("Loan No.", LoanNo);
+                ExcemptProductCharges.SetRange("Product Code", PCharges."Product Code");
+                ExcemptProductCharges.setrange("Charge Code", PCharges."Charge Code");
+                ExcemptProductCharges.setrange(Excempt, true);
+                if not ExcemptProductCharges.Find('-') then begin
+                    //Non Prorate
+                    if PCharges.Prorate = PCharges.Prorate::" " then begin
 
-            //should not charge
-            // PCharges.Reset;
-            // PCharges.SetRange(PCharges."Product Code", ProdType);
-            // PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::"External Loan");
-            // if PCharges.Find('-') then begin
-            //     repeat
-            //         ExcemptProductCharges.Reset();
-            //         ExcemptProductCharges.SetRange("Loan No.", LoanNo);
-            //         ExcemptProductCharges.SetRange("Product Code", PCharges."Product Code");
-            //         ExcemptProductCharges.setrange("Charge Code", PCharges."Charge Code");
-            //         ExcemptProductCharges.setrange(Excempt, true);
-            //         if not ExcemptProductCharges.Find('-') then begin
-            //             if (PCharges."Use Percentage" = true) then begin
-            //                 if ChargeExtraComms = true then
-            //                     TotalComputedCharges := TotalComputedCharges + (OtherCommitments.Amount * ((PCharges.Percentage + PCharges."Additional Charge %") / 100))
-            //                 else
-            //                     TotalComputedCharges := TotalComputedCharges + (OtherCommitments.Amount * (PCharges.Percentage / 100))
-            //             end else
-            //                 TotalComputedCharges := TotalComputedCharges + OtherCommitments.Amount;
-            //         end;
-            //     until PCharges.Next = 0;
+                        if (PCharges."Charge Method" = PCharges."charge method"::"% of Amount") then
+                            ChargeAmount := (LoanApps."Approved Amount" * (PCharges.Percentage / 100))
+                        else
+                            if PCharges."Charge Method" = PCharges."charge method"::"Flat Amount" then
+                                ChargeAmount := PCharges."Charge Amount"
+                            else
+                                if PCharges."Charge Method" = PCharges."charge method"::Staggered then begin
+                                    PCharges.TestField(PCharges."Staggered Charge Code");
+                                    TariffDetails.Reset;
+                                    TariffDetails.SetRange(TariffDetails.Code, PCharges."Staggered Charge Code");
+                                    if TariffDetails.Find('-') then begin
+                                        repeat
+                                            if (LoanApps."Approved Amount" >= TariffDetails."Lower Limit") and (LoanApps."Approved Amount" <= TariffDetails."Upper Limit") then begin
+                                                if TariffDetails."Use Percentage" = true then begin
+                                                    ChargeAmount := LoanApps."Approved Amount" * TariffDetails.Percentage * 0.01;
+                                                end else begin
+                                                    ChargeAmount := TariffDetails."Charge Amount";
+                                                end;
+                                            end
+                                        until TariffDetails.Next = 0;
+                                    end;
+                                end;
 
-            // end;
-            until OtherCommitments.Next = 0;
+                        if ExcemptCharges = true then
+                            ChargeAmount := 0;
+
+                        TotalCharges += ChargeAmount;
+
+                        //If excise duty involved
+                        if PCharges."Effect Excise Duty" = PCharges."effect excise duty"::Yes then begin
+                            GenSetup.TestField("Excise Duty G/L");
+                            GenSetup.TestField("Excise Duty (%)");
+                            ExciseDuty := ChargeAmount * GenSetup."Excise Duty (%)" * 0.01;
+
+                            TotalExciseDuty += ExciseDuty;
+                        end;
+                    end;
+                end;
+
+            until PCharges.Next = 0;
         end;
 
-
-        /*//AssetFinComms
-        AssetFinComms:=0;
-        TotalAssetFin:=0;
-        AssetFinanceLoan.RESET;
-        AssetFinanceLoan.SETRANGE(AssetFinanceLoan."Loan No.",LoanNo);
-        IF AssetFinanceLoan.FIND('-') THEN BEGIN
-        REPEAT
-          TotalAssetFin:=TotalAssetFin+AssetFinanceLoan.Amount;
-        
-        PCharges.RESET;
-        PCharges.SETRANGE(PCharges."Product Code",ProdType);
-        PCharges.SETRANGE(PCharges."Charge Type",PCharges."Charge Type"::"Asset Finance");
-        IF PCharges.FIND('-') THEN BEGIN
-           REPEAT
-           IF (PCharges."Use Percentage"=TRUE) THEN BEGIN
-        
-               TotalComputedCharges :=TotalComputedCharges+(AssetFinanceLoan.Amount-(AssetFinanceLoan.Amount / (1+PCharges.Percentage/100)))
-           END ELSE
-               TotalComputedCharges:=TotalComputedCharges+AssetFinanceLoan.Amount;
-        
-           UNTIL PCharges.NEXT = 0;
-           MESSAGE('Running Charge  other comms%1,%2',TotalComputedCharges,TotalAssetFin);
-           END;
-        
-           TotalComputedCharges:=TotalAssetFin;
-        UNTIL AssetFinanceLoan.NEXT=0;
-        END;
-        */
-
-        LoanApps.Reset;
-        LoanApps.SetRange("Loan No.", LoanNo);
-        if LoanApps.Find('-') then begin
-            LoanApps."Total Charges and Commissions" := TotalComputedCharges;
-
-            if (LoanApps."Appraisal Parameter Type" = LoanApps."appraisal parameter type"::"Check Off") or (LoanApps."Appraisal Parameter Type" = LoanApps."appraisal parameter type"::"Corporate or Business") then
-                TotalComputedCharges := TotalComputedCharges;// + LoanApps."Share Boosted Amount";
-            //LoanApps.MODIFY;
-        end;
-        // PaySched.Reset;
-        // PaySched.SetRange(PaySched."Loan No.", LoanNo);
-        // if PaySched.Find('-') then begin
-        //     PaySched.CalcSums(PaySched.Amount);
-        //     TotalSched := PaySched.Amount;
-        // end;
-        //FAITHBIKETI
         // Get upfront INTEREST
         IF ProdFac.Get(ProdType) then begin
             if ProdFac."Interest Recovered Upfront" then begin
                 upfrontrate := ProdFac."Upfront Interest Rate";
                 if upfrontrate <> 0 then begin
                     TotalInterest += Round(((upfrontrate / 100) * ApprovedAmt), 0.01, '>');
-                    TotalComputedCharges := TotalComputedCharges + TotalInterest;
                 end;
             end;
         end;
 
-        //UPFRONT INTEREST
 
+        Balance := ApprovedAmt - (TotalCharges + TotalExciseDuty + TotalInterest);
 
-        Difference := ApprovedAmt - (TotalComputedCharges + TotalCleared + CurrValue);
+        if Balance < 0 then
+            Balance := 0;
 
-        exit(Difference);
+        exit(Balance);
 
     end;
 
@@ -6263,6 +6280,310 @@ Codeunit 52186458 "Loans Process"
                 PDate, BalAccType, BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
                 ShambaLoanProcFee := 0;
                 ShambaLoanExcise := 0;
+
+                // Form Fees
+                PCharges.Reset;
+                PCharges.SetRange(PCharges."Product Code", LoanApps."Loan Product Type");
+                PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::"Form Fees");
+                if PCharges.Find('-') then begin
+                    repeat
+                        ExcemptProductCharges.Reset();
+                        ExcemptProductCharges.SetRange("Loan No.", LoanNo);
+                        ExcemptProductCharges.SetRange("Product Code", PCharges."Product Code");
+                        ExcemptProductCharges.setrange("Charge Code", PCharges."Charge Code");
+                        ExcemptProductCharges.setrange(Excempt, true);
+                        if not ExcemptProductCharges.Find('-') then begin
+                            //Non Prorate
+                            if PCharges.Prorate = PCharges.Prorate::" " then begin
+                                LineNo := LineNo + 10000;
+                                AccType := Acctype::"G/L Account";
+                                AccNo := PCharges."Charges G_L Account";
+                                TransType := Transtype::" ";
+                                BalAccType := Balacctype::Savings;
+                                BalAccNo := LoanApps."Disbursement Account No";
+                                if (PCharges."Charge Method" = PCharges."charge method"::"% of Amount") then
+                                    Amt := (LoanApps."Approved Amount" * (PCharges.Percentage / 100))
+                                else
+                                    if PCharges."Charge Method" = PCharges."charge method"::"Flat Amount" then
+                                        Amt := PCharges."Charge Amount"
+                                    else
+                                        if PCharges."Charge Method" = PCharges."charge method"::Staggered then begin
+                                            PCharges.TestField(PCharges."Staggered Charge Code");
+                                            TariffDetails.Reset;
+                                            TariffDetails.SetRange(TariffDetails.Code, PCharges."Staggered Charge Code");
+                                            if TariffDetails.Find('-') then begin
+                                                repeat
+                                                    if (LoanApps."Approved Amount" >= TariffDetails."Lower Limit") and (LoanApps."Approved Amount" <= TariffDetails."Upper Limit") then begin
+                                                        if TariffDetails."Use Percentage" = true then begin
+                                                            Amt := LoanApps."Approved Amount" * TariffDetails.Percentage * 0.01;
+                                                        end else begin
+                                                            Amt := TariffDetails."Charge Amount";
+                                                        end;
+                                                    end
+                                                until TariffDetails.Next = 0;
+                                            end;
+                                        end;
+
+                                if Amt < PCharges.Minimum then
+                                    Amt := PCharges.Minimum;
+                                if Amt > PCharges.Maximum then
+                                    Amt := PCharges.Maximum;
+
+                                Amt := Amt * -1;
+
+                                if ExcemptCharges = true then
+                                    Amt := 0;
+
+
+                                JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AccType, LoanNo, PCharges."Charge Description", Amt, AccNo, PDate, BalAccType,
+                                BalAccNo, LoanApps."Loan No.", Dim1, Dim2, TransType, LoanApps."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+                                ShambaLoanProcFee += Amt;
+
+                                //If excise duty involved
+                                if PCharges."Effect Excise Duty" = PCharges."effect excise duty"::Yes then begin
+                                    GenSetup.TestField("Excise Duty G/L");
+                                    GenSetup.TestField("Excise Duty (%)");
+                                    LineNo := LineNo + 10000;
+                                    AccType := Acctype::"G/L Account";
+                                    AccNo := GenSetup."Excise Duty G/L";
+                                    TransType := Transtype::" ";
+                                    BalAccType := Balacctype::Savings;
+                                    BalAccNo := LoanApps."Disbursement Account No";
+                                    Amt := Amt * GenSetup."Excise Duty (%)" * 0.01;
+
+                                    JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AccType, LoanNo, CopyStr((PCharges."Charge Description" + '-Excise Duty'), 1, 50), Amt, AccNo, PDate, BalAccType,
+                                    BalAccNo, LoanApps."Loan No.", Dim1, Dim2, TransType, LoanApps."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                                    ShambaLoanExcise += Amt;
+                                end;
+                            end else
+                                if PCharges.Prorate = PCharges.Prorate::Appraisal then begin
+                                    //Prorate
+                                    LineNo := LineNo + 10000;
+                                    AccType := Acctype::Credit;
+                                    AccNo := LoanApps."Loan Account";
+                                    TransType := Transtype::Appraisal;
+                                    BalAccType := Balacctype::"G/L Account";
+                                    BalAccNo := '';
+                                    if (PCharges."Charge Method" = PCharges."charge method"::"% of Amount") then
+                                        Amt := (LoanApps."Approved Amount" * (PCharges.Percentage / 100))
+                                    else
+                                        if PCharges."Charge Method" = PCharges."charge method"::"Flat Amount" then
+                                            Amt := PCharges."Charge Amount"
+                                        else
+                                            if PCharges."Charge Method" = PCharges."charge method"::Staggered then begin
+
+                                                PCharges.TestField(PCharges."Staggered Charge Code");
+
+                                                TariffDetails.Reset;
+                                                TariffDetails.SetRange(TariffDetails.Code, PCharges."Staggered Charge Code");
+                                                if TariffDetails.Find('-') then begin
+                                                    repeat
+                                                        if (LoanApps."Approved Amount" >= TariffDetails."Lower Limit") and (LoanApps."Approved Amount" <= TariffDetails."Upper Limit") then begin
+                                                            if TariffDetails."Use Percentage" = true then begin
+                                                                Amt := LoanApps."Approved Amount" * TariffDetails.Percentage * 0.01;
+                                                            end else begin
+                                                                Amt := TariffDetails."Charge Amount";
+                                                            end;
+                                                        end;
+                                                    until TariffDetails.Next = 0;
+                                                end;
+                                            end;
+
+
+                                    if Amt < PCharges.Minimum then
+                                        Amt := PCharges.Minimum;
+                                    if Amt > PCharges.Maximum then
+                                        Amt := PCharges.Maximum;
+
+                                    if ExcemptCharges = true then
+                                        Amt := 0;
+
+                                    LoanApps."Appraisal Fee" := Amt;
+                                    Amt := Amt * -1;
+                                    LoanApps."Disbursement Date" := Today;
+                                    LoanApps."Posted By" := UserId;
+                                    LoanApps.Validate("Disbursement Date");
+                                    LoanApps.Modify;
+                                    Commit;
+                                    HoldOneMonthInstallment(LoanApps."Loan No.");
+                                    JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AccType, LoanNo, PCharges."Charge Description", Amt, AccNo, PDate, BalAccType,
+                                    BalAccNo, LoanApps."Loan No.", Dim1, Dim2, TransType, LoanApps."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+                                    ShambaLoanProcFee += Amt;
+
+                                    LineNo := LineNo + 10000;
+                                    AccType := Acctype::Savings;
+                                    AccNo := LoanApps."Disbursement Account No";
+                                    TransType := Transtype::" ";
+                                    BalAccType := Balacctype::"G/L Account";
+                                    BalAccNo := '';
+
+                                    Amt := Amt * -1;
+
+                                    if ExcemptCharges = true then
+                                        Amt := 0;
+
+                                    JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AccType, LoanNo, PCharges."Charge Description", Amt, AccNo, PDate, BalAccType,
+                                    BalAccNo, LoanApps."Loan No.", Dim1, Dim2, TransType, LoanApps."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                                end;
+                        end
+                    until PCharges.Next = 0;
+                end;
+
+                // Insurance Fees
+                // Form Fees
+                PCharges.Reset;
+                PCharges.SetRange(PCharges."Product Code", LoanApps."Loan Product Type");
+                PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::"Insurance Fees");
+                if PCharges.Find('-') then begin
+                    repeat
+                        ExcemptProductCharges.Reset();
+                        ExcemptProductCharges.SetRange("Loan No.", LoanNo);
+                        ExcemptProductCharges.SetRange("Product Code", PCharges."Product Code");
+                        ExcemptProductCharges.setrange("Charge Code", PCharges."Charge Code");
+                        ExcemptProductCharges.setrange(Excempt, true);
+                        if not ExcemptProductCharges.Find('-') then begin
+                            //Non Prorate
+                            if PCharges.Prorate = PCharges.Prorate::" " then begin
+                                LineNo := LineNo + 10000;
+                                AccType := Acctype::"G/L Account";
+                                AccNo := PCharges."Charges G_L Account";
+                                TransType := Transtype::" ";
+                                BalAccType := Balacctype::Savings;
+                                BalAccNo := LoanApps."Disbursement Account No";
+                                if (PCharges."Charge Method" = PCharges."charge method"::"% of Amount") then
+                                    Amt := (LoanApps."Approved Amount" * (PCharges.Percentage / 100))
+                                else
+                                    if PCharges."Charge Method" = PCharges."charge method"::"Flat Amount" then
+                                        Amt := PCharges."Charge Amount"
+                                    else
+                                        if PCharges."Charge Method" = PCharges."charge method"::Staggered then begin
+                                            PCharges.TestField(PCharges."Staggered Charge Code");
+                                            TariffDetails.Reset;
+                                            TariffDetails.SetRange(TariffDetails.Code, PCharges."Staggered Charge Code");
+                                            if TariffDetails.Find('-') then begin
+                                                repeat
+                                                    if (LoanApps."Approved Amount" >= TariffDetails."Lower Limit") and (LoanApps."Approved Amount" <= TariffDetails."Upper Limit") then begin
+                                                        if TariffDetails."Use Percentage" = true then begin
+                                                            Amt := LoanApps."Approved Amount" * TariffDetails.Percentage * 0.01;
+                                                        end else begin
+                                                            Amt := TariffDetails."Charge Amount";
+                                                        end;
+                                                    end
+                                                until TariffDetails.Next = 0;
+                                            end;
+                                        end;
+
+                                if Amt < PCharges.Minimum then
+                                    Amt := PCharges.Minimum;
+                                if Amt > PCharges.Maximum then
+                                    Amt := PCharges.Maximum;
+
+                                Amt := Amt * -1;
+
+                                if ExcemptCharges = true then
+                                    Amt := 0;
+
+
+                                JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AccType, LoanNo, PCharges."Charge Description", Amt, AccNo, PDate, BalAccType,
+                                BalAccNo, LoanApps."Loan No.", Dim1, Dim2, TransType, LoanApps."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+                                ShambaLoanProcFee += Amt;
+
+                                //If excise duty involved
+                                if PCharges."Effect Excise Duty" = PCharges."effect excise duty"::Yes then begin
+                                    GenSetup.TestField("Excise Duty G/L");
+                                    GenSetup.TestField("Excise Duty (%)");
+                                    LineNo := LineNo + 10000;
+                                    AccType := Acctype::"G/L Account";
+                                    AccNo := GenSetup."Excise Duty G/L";
+                                    TransType := Transtype::" ";
+                                    BalAccType := Balacctype::Savings;
+                                    BalAccNo := LoanApps."Disbursement Account No";
+                                    Amt := Amt * GenSetup."Excise Duty (%)" * 0.01;
+
+                                    JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AccType, LoanNo, CopyStr((PCharges."Charge Description" + '-Excise Duty'), 1, 50), Amt, AccNo, PDate, BalAccType,
+                                    BalAccNo, LoanApps."Loan No.", Dim1, Dim2, TransType, LoanApps."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                                    ShambaLoanExcise += Amt;
+                                end;
+                            end else
+                                if PCharges.Prorate = PCharges.Prorate::Appraisal then begin
+                                    //Prorate
+                                    LineNo := LineNo + 10000;
+                                    AccType := Acctype::Credit;
+                                    AccNo := LoanApps."Loan Account";
+                                    TransType := Transtype::Appraisal;
+                                    BalAccType := Balacctype::"G/L Account";
+                                    BalAccNo := '';
+                                    if (PCharges."Charge Method" = PCharges."charge method"::"% of Amount") then
+                                        Amt := (LoanApps."Approved Amount" * (PCharges.Percentage / 100))
+                                    else
+                                        if PCharges."Charge Method" = PCharges."charge method"::"Flat Amount" then
+                                            Amt := PCharges."Charge Amount"
+                                        else
+                                            if PCharges."Charge Method" = PCharges."charge method"::Staggered then begin
+
+                                                PCharges.TestField(PCharges."Staggered Charge Code");
+
+                                                TariffDetails.Reset;
+                                                TariffDetails.SetRange(TariffDetails.Code, PCharges."Staggered Charge Code");
+                                                if TariffDetails.Find('-') then begin
+                                                    repeat
+                                                        if (LoanApps."Approved Amount" >= TariffDetails."Lower Limit") and (LoanApps."Approved Amount" <= TariffDetails."Upper Limit") then begin
+                                                            if TariffDetails."Use Percentage" = true then begin
+                                                                Amt := LoanApps."Approved Amount" * TariffDetails.Percentage * 0.01;
+                                                            end else begin
+                                                                Amt := TariffDetails."Charge Amount";
+                                                            end;
+                                                        end;
+                                                    until TariffDetails.Next = 0;
+                                                end;
+                                            end;
+
+
+                                    if Amt < PCharges.Minimum then
+                                        Amt := PCharges.Minimum;
+                                    if Amt > PCharges.Maximum then
+                                        Amt := PCharges.Maximum;
+
+                                    if ExcemptCharges = true then
+                                        Amt := 0;
+
+                                    LoanApps."Appraisal Fee" := Amt;
+                                    Amt := Amt * -1;
+                                    LoanApps."Disbursement Date" := Today;
+                                    LoanApps."Posted By" := UserId;
+                                    LoanApps.Validate("Disbursement Date");
+                                    LoanApps.Modify;
+                                    Commit;
+                                    HoldOneMonthInstallment(LoanApps."Loan No.");
+                                    JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AccType, LoanNo, PCharges."Charge Description", Amt, AccNo, PDate, BalAccType,
+                                    BalAccNo, LoanApps."Loan No.", Dim1, Dim2, TransType, LoanApps."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+                                    ShambaLoanProcFee += Amt;
+
+                                    LineNo := LineNo + 10000;
+                                    AccType := Acctype::Savings;
+                                    AccNo := LoanApps."Disbursement Account No";
+                                    TransType := Transtype::" ";
+                                    BalAccType := Balacctype::"G/L Account";
+                                    BalAccNo := '';
+
+                                    Amt := Amt * -1;
+
+                                    if ExcemptCharges = true then
+                                        Amt := 0;
+
+                                    JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AccType, LoanNo, PCharges."Charge Description", Amt, AccNo, PDate, BalAccType,
+                                    BalAccNo, LoanApps."Loan No.", Dim1, Dim2, TransType, LoanApps."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                                end;
+                        end
+                    until PCharges.Next = 0;
+                end;
+
+
+                //Other Charges
                 PCharges.Reset;
                 PCharges.SetRange(PCharges."Product Code", LoanApps."Loan Product Type");
                 PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::General);
@@ -6411,6 +6732,7 @@ Codeunit 52186458 "Loans Process"
                         end
                     until PCharges.Next = 0;
                 end;
+
 
 
                 if (ProdFac."Mortgage Loan" = true) and (LoanApps."Loan Product Type" <> '138') then begin
@@ -6761,7 +7083,7 @@ Codeunit 52186458 "Loans Process"
                                 if not ExcemptProductCharges.Find('-') then begin
                                     if PCharges."Charging Option" = PCharges."Charging Option"::"On Approved Amount" then
                                         BaseAmount := LoanApp."Approved Amount" else
-                                        BaseAmount := TopUp."Total Top Up";
+                                        BaseAmount := TopUp."Principle Top Up";
                                     //Non Prorate
                                     LineNo := LineNo + 10000;
                                     AccType := Acctype::"G/L Account";
