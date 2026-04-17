@@ -867,8 +867,13 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                     TopUpComms := 0;
                     TopUp.CalcSums(Commision);
                     TopUp.CalcSums("One Month Interest");
+                    Topup.CalcSums("Principle Top Up");
+                    Topup.CalcSums("Interest Top Up");
                     TopUpComms := TopUp.Commision;
                     OneMonthInterest := TopUp."One Month Interest";
+                    // PrincipleTopup := TopUp."Principle Top Up";
+                    // InterestTopup := TopUp."Interest Top Up";
+                    // Totaltopup := PrincipleTopup + InterestTopup;
                 end;
 
 
@@ -956,7 +961,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                     NetOnSalary := ProductFactory."Maximum Loan Amount";
                 end;
 
-                //total topupamount
+                //CheckActive
                 if Members.Get(Loans."Member No.") then begin
                     Dim1 := Members."Global Dimension 1 Code";
                     Dim2 := Members."Global Dimension 2 Code";
@@ -1155,15 +1160,12 @@ Report 52185640 "Loan Appraisal Report-Salaried"
 
                 NetTakeHome := LoanProcess.ComputeCharges(Loans."Approved Amount", Loans."Loan Product Type", Loans."Loan No.", 0);
                 TotalExciseDuty := DepPurchaseCommExc + TopUpCommExc + LoanProcessingAmtEx + LoanFormFeesExc + InsuranceFeeExc;
-                TotalExciseDuty := Round(TotalExciseDuty, 1, '>');
+                //TotalExciseDuty := Round(TotalExciseDuty, 1, '>');
 
                 // NetTakeHome := NetTakeHome - TotalExciseDuty;
-                NetTakeHome := NetTakeHome - (TotalExciseDuty + DepPurchaseComm + Loans."Loans - Deposit Purchase" + Loans."Share Boosted Amount");
-                if NetTakeHome > 0 then begin
-                    NetTakeHome := NetTakeHome;
-                end else begin
+                NetTakeHome := NetTakeHome - (DepPurchaseComm + Loans."Loans - Deposit Purchase" + Loans."Share Boosted Amount" + OneMonthInterest + TopUpComms);
+                if NetTakeHome < 0 then
                     NetTakeHome := 0;
-                end;
                 // NetTakeHome := NetTakeHome;
                 Loans."Net Amount" := NetTakeHome;
                 if Loans.Status = Loans.Status::Open then

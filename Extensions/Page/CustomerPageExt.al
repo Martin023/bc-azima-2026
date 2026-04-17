@@ -279,7 +279,7 @@ pageextension 52187301 CustomerCardExtension extends "Customer Card"
     }
     trigger OnOpenPage()
     begin
-        CheckMemberInfomation();
+        //CheckMemberInfomation();
     end;
 
     procedure UploadFile(DocInstream: InStream; FileName: Text)

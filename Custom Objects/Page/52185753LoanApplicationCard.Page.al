@@ -2409,8 +2409,8 @@ page 52185753 "Loan Application Card"
                     Promoted = true;
                     PromotedCategory = Category10;
 
-                    RunObject = page "Channel Application Documents";
-                    RunPageLink = "Application No." = field("Loan No.");
+                    RunObject = page "Loan FIle Upload";
+                    RunPageLink = "Loan No" = field("Loan No.");
                 }
                 //     // action("Test")
                 //     // {
