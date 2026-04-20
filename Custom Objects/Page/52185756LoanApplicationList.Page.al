@@ -113,13 +113,13 @@ page 52185756 "Loan Application List"
                     ApplicationArea = Basic, Suite;
                     StyleExpr = StyleExprTxt;
                 }
-                field("Document Excalated"; Rec."Document Excalated")
-                {
-                    ApplicationArea = all;
-                    Editable = false;
-                    StyleExpr = StyleExprTxt;
+                // field("Document Excalated"; Rec."Document Excalated")
+                // {
+                //     ApplicationArea = all;
+                //     Editable = false;
+                //     StyleExpr = StyleExprTxt;
 
-                }
+                // }
             }
         }
     }
@@ -131,17 +131,17 @@ page 52185756 "Loan Application List"
     trigger OnOpenPage()
     begin
         RecoveryAccent;
-        if (Rec.Status = Rec.Status::Open) and (Rec."Application Date" <> 0D) then begin
+        // if (Rec.Status = Rec.Status::Open) and (Rec."Application Date" <> 0D) then begin
 
-            if CalcDate('60D', Rec."Application Date") >= Today then
-                Rec.Status := Rec.Status::Rejected;
-            Rec.Modify;
-        end;
-        Rec.FilterGroup(2);
-        Rec.SetFilter("Application Date", '%1..%2', CalcDate('-3M', Today), Today);
-        Rec.FilterGroup(0);
-        Rec.SetCurrentKey(Rec."Disbursement Priority", "Loan No.");
-        Rec.SetAscending("Disbursement Priority", true);
+        //     if CalcDate('60D', Rec."Application Date") >= Today then
+        //         Rec.Status := Rec.Status::Rejected;
+        //     Rec.Modify;
+        // end;
+        // Rec.FilterGroup(2);
+        // Rec.SetFilter("Application Date", '%1..%2', CalcDate('-3M', Today), Today);
+        // Rec.FilterGroup(0);
+        // Rec.SetCurrentKey(Rec."Disbursement Priority", "Loan No.");
+        // Rec.SetAscending("Disbursement Priority", true);
     end;
 
     trigger OnAfterGetRecord()

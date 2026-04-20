@@ -1741,10 +1741,10 @@ Codeunit 52186458 "Loans Process"
         TotalCharges := 0;
         ChargeAmount := 0;
         Balance := 0;
-
+        TotalInterest := 0;
         // Form Fees
         PCharges.Reset;
-        PCharges.SetRange(PCharges."Product Code", LoanApps."Loan Product Type");
+        PCharges.SetRange(PCharges."Product Code", ProdType);
         PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::"Form Fees");
         if PCharges.Find('-') then begin
             repeat
@@ -1758,7 +1758,7 @@ Codeunit 52186458 "Loans Process"
                     if PCharges.Prorate = PCharges.Prorate::" " then begin
 
                         if (PCharges."Charge Method" = PCharges."charge method"::"% of Amount") then
-                            ChargeAmount := (LoanApps."Approved Amount" * (PCharges.Percentage / 100))
+                            ChargeAmount := (ApprovedAmt * (PCharges.Percentage / 100))
                         else
                             if PCharges."Charge Method" = PCharges."charge method"::"Flat Amount" then
                                 ChargeAmount := PCharges."Charge Amount"
@@ -1779,10 +1779,6 @@ Codeunit 52186458 "Loans Process"
                                         until TariffDetails.Next = 0;
                                     end;
                                 end;
-
-                        if ExcemptCharges = true then
-                            ChargeAmount := 0;
-
                         TotalCharges += ChargeAmount;
 
                         //If excise duty involved
@@ -1802,7 +1798,7 @@ Codeunit 52186458 "Loans Process"
 
         // Form Fees
         PCharges.Reset;
-        PCharges.SetRange(PCharges."Product Code", LoanApps."Loan Product Type");
+        PCharges.SetRange(PCharges."Product Code", ProdType);
         PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::"Insurance Fees");
         if PCharges.Find('-') then begin
             repeat
@@ -1816,7 +1812,7 @@ Codeunit 52186458 "Loans Process"
                     if PCharges.Prorate = PCharges.Prorate::" " then begin
 
                         if (PCharges."Charge Method" = PCharges."charge method"::"% of Amount") then
-                            ChargeAmount := (LoanApps."Approved Amount" * (PCharges.Percentage / 100))
+                            ChargeAmount := (ApprovedAmt * (PCharges.Percentage / 100))
                         else
                             if PCharges."Charge Method" = PCharges."charge method"::"Flat Amount" then
                                 ChargeAmount := PCharges."Charge Amount"
@@ -1827,9 +1823,9 @@ Codeunit 52186458 "Loans Process"
                                     TariffDetails.SetRange(TariffDetails.Code, PCharges."Staggered Charge Code");
                                     if TariffDetails.Find('-') then begin
                                         repeat
-                                            if (LoanApps."Approved Amount" >= TariffDetails."Lower Limit") and (LoanApps."Approved Amount" <= TariffDetails."Upper Limit") then begin
+                                            if (ApprovedAmt >= TariffDetails."Lower Limit") and (LoanApps."Approved Amount" <= TariffDetails."Upper Limit") then begin
                                                 if TariffDetails."Use Percentage" = true then begin
-                                                    ChargeAmount := LoanApps."Approved Amount" * TariffDetails.Percentage * 0.01;
+                                                    ChargeAmount := ApprovedAmt * TariffDetails.Percentage * 0.01;
                                                 end else begin
                                                     ChargeAmount := TariffDetails."Charge Amount";
                                                 end;
@@ -1837,10 +1833,6 @@ Codeunit 52186458 "Loans Process"
                                         until TariffDetails.Next = 0;
                                     end;
                                 end;
-
-                        if ExcemptCharges = true then
-                            ChargeAmount := 0;
-
                         TotalCharges += ChargeAmount;
 
                         //If excise duty involved
@@ -1861,7 +1853,7 @@ Codeunit 52186458 "Loans Process"
 
         // Form Fees
         PCharges.Reset;
-        PCharges.SetRange(PCharges."Product Code", LoanApps."Loan Product Type");
+        PCharges.SetRange(PCharges."Product Code", ProdType);
         PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::General);
         if PCharges.Find('-') then begin
             repeat
@@ -1875,7 +1867,7 @@ Codeunit 52186458 "Loans Process"
                     if PCharges.Prorate = PCharges.Prorate::" " then begin
 
                         if (PCharges."Charge Method" = PCharges."charge method"::"% of Amount") then
-                            ChargeAmount := (LoanApps."Approved Amount" * (PCharges.Percentage / 100))
+                            ChargeAmount := (ApprovedAmt * (PCharges.Percentage / 100))
                         else
                             if PCharges."Charge Method" = PCharges."charge method"::"Flat Amount" then
                                 ChargeAmount := PCharges."Charge Amount"
@@ -1888,7 +1880,7 @@ Codeunit 52186458 "Loans Process"
                                         repeat
                                             if (LoanApps."Approved Amount" >= TariffDetails."Lower Limit") and (LoanApps."Approved Amount" <= TariffDetails."Upper Limit") then begin
                                                 if TariffDetails."Use Percentage" = true then begin
-                                                    ChargeAmount := LoanApps."Approved Amount" * TariffDetails.Percentage * 0.01;
+                                                    ChargeAmount := ApprovedAmt * TariffDetails.Percentage * 0.01;
                                                 end else begin
                                                     ChargeAmount := TariffDetails."Charge Amount";
                                                 end;
@@ -1896,10 +1888,6 @@ Codeunit 52186458 "Loans Process"
                                         until TariffDetails.Next = 0;
                                     end;
                                 end;
-
-                        if ExcemptCharges = true then
-                            ChargeAmount := 0;
-
                         TotalCharges += ChargeAmount;
 
                         //If excise duty involved
@@ -1925,7 +1913,6 @@ Codeunit 52186458 "Loans Process"
                 end;
             end;
         end;
-
 
         Balance := ApprovedAmt - (TotalCharges + TotalExciseDuty + TotalInterest);
 
