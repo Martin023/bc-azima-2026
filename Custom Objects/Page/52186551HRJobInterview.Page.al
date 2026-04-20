@@ -15,6 +15,12 @@ page 52186551 "HR Job Interview"
                 {
                   ApplicationArea = Basic;  
                 }
+                field("Requisition No."; Rec."Requisition No.")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    ToolTip = 'Shows the employee requisition this interview is linked to';
+                }
                 field("Interview Code"; Rec."Interview Code")
                 {
                     ApplicationArea = Basic;

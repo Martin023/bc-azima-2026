@@ -100,7 +100,7 @@ page 52185590 "HR Applicants UnQualified L1"
                                 // //HREmailParameters."Body 2"+' '+ FORMAT("Date Applied")+'. '+
                                 // // HREmailParameters.Body,TRUE);
                                 // SMTP.Send();
-                                //emailcod.SendRejectionEmail();
+                                // emailcod.SendRejectionEmail();
                             until HRJobApplications.Next = 0;
 
                             Message('All Unqualified  candidates have been sent regret alerts');

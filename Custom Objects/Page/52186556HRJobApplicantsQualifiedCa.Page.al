@@ -60,12 +60,16 @@ page 52186556 "HR Job Applicants Qualified Ca"
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                label("Interview Details")
-                {
-                    Caption = 'Interview Details';
-                    Style = StrongAccent;
-                    StyleExpr = TRUE;
-                }
+                // label("Interview Details")
+                // {
+                //     Caption = 'Interview Details';
+                //     Style = StrongAccent;
+                //     StyleExpr = TRUE;
+                // }
+            }
+
+            group("Interview Details")
+            {
                 field("Date of Interview"; Rec."Date of Interview")
                 {
                     ApplicationArea = Basic;
@@ -96,15 +100,15 @@ page 52186556 "HR Job Applicants Qualified Ca"
                 field("Approval Status"; Rec."Approval Status")
                 {
                     ApplicationArea = Basic;
-                    Editable=false;
+                    Editable = false;
                 }
-                field("Is Employee";Rec."Is Employee")
+                field("Is Employee"; Rec."Is Employee")
                 {
 
                 }
-                field(Reason;Rec.Reason)
+                field(Reason; Rec.Reason)
                 {
-                    
+
                 }
             }
         }
@@ -114,7 +118,7 @@ page 52186556 "HR Job Applicants Qualified Ca"
     {
         area(creation)
         {
-            
+
             action("Send Approval Request")
             {
                 ApplicationArea = Basic;
@@ -160,7 +164,7 @@ page 52186556 "HR Job Applicants Qualified Ca"
                 ApplicationArea = Basic;
                 Caption = 'Approve';
                 Image = Approvals;
-                Promoted = true; 
+                Promoted = true;
                 PromotedCategory = Process;
 
                 trigger OnAction()

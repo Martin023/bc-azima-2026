@@ -91,8 +91,7 @@ page 52187320 AdvancedHumanResources
                         ApplicationArea = Basic, Suite;
                         Caption = 'HR Job Applicants UnQualified';
 
-                        //RunObject = Page "HR Applicants UnQualified L1";
-                        RunObject = Page 145;
+                        RunObject = Page "HR Applicants UnQualified L1";
 
                     }
                     action(SuccesfulJobApplicants)
