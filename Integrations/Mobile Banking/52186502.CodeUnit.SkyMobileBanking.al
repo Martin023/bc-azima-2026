@@ -1387,6 +1387,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
         // Handle required validation
         if MpesaTrans.Insert(true) then begin
+            Commit;
+
             ResponseObject.Add('request_status', 'SUCCESS');
 
             Datum.Add('transaction_reference', MpesaTrans."Transaction ID");
@@ -1878,6 +1880,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         end;
 
         if MpesaTrans.Insert(true) then begin
+            Commit;
+
             ResponseObject.Add('request_status', 'SUCCESS');
 
             Datum.Add('transaction_reference', MpesaTrans."Transaction ID");
@@ -2171,6 +2175,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         end;
 
         if MpesaTrans.Insert(true) then begin
+            Commit;
+            
             ResponseObject.Add('request_status', 'SUCCESS');
 
             Datum.Add('transaction_reference', MpesaTrans."Transaction ID");
