@@ -2420,17 +2420,7 @@ page 52186583 "Audit Role center"
                                 RunObject = page "Banking User Setup";
                             }
                         }
-                        group("Notification")
-                        {
-                            Caption = 'Notification';
-                            action("E-Mail Notification")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'E-Mail Notification';
-                                RunObject = page "E-Mail Notification";
-                            }
-
-                        }
+                       
 
                     }
                 }

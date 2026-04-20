@@ -2197,17 +2197,7 @@ page 52185500 "Main Role Center"
                             RunObject = page "Banking User Setup";
                         }
                     }
-                    group("Notification")
-                    {
-                        Caption = 'Notification';
-                        action("E-Mail Notification")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'E-Mail Notification';
-                            RunObject = page "E-Mail Notification";
-                        }
-
-                    }
+                    
 
                 }
             }

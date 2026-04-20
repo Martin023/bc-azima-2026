@@ -918,7 +918,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                                         THouseAllow := THouseAllow + AppraisalSal.Amount
                     until AppraisalSal.Next = 0;
                 end;
-                GrossPay := round(((TotalBasic + TrEarni) - TDeductions), 0.01);
+                GrossPay := round(((TotalBasic + TrEarni + THouseAllow) - TDeductions), 0.01);
 
                 OneThirdGross := round((GrossPay * 0.33), 0.01);
                 TwoThirdNet := round((OneThirdGross * 0.66), 0.01);

@@ -319,13 +319,13 @@ page 52187329 "Records"
                     action("Member Group List")
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Members'' Savings Account';
+                        Caption = 'Groups list.';
                         RunObject = Page "Member Group List";
                     }
                     action("Archived Register")
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Archived Register';
+                        Caption = 'Archived Register(Deceased&Closed)';
                         RunObject = Page "Member Single List";
                         RunPageView = where(Status = filter(Deceased | Closed));
                     }
@@ -657,15 +657,27 @@ page 52187329 "Records"
             //         RunPageLink = "Fixed Deposit Status" = filter(Matured | Closed | "Not Matured" | Terminated);
             //     }
             // }
-            group("Marketing")
+            group("Marketing & Sales")
             {
-                Caption = 'Marketing';
-                // action("Campaign List")
-                // {
-                //     ApplicationArea = Basic, Suite;
-                //     Caption = 'Campaign List';
-                //     RunObject = page "Campaign List";
-                // }
+                group(Marketing)
+                {
+                    Caption = 'Marketing';
+                    action("Campaign List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Campaign List';
+                        RunObject = page "Campaign List";
+                    }
+                }
+                group(Sales)
+                {
+                    action("Marketing Teams")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Marketing Teams List';
+                        RunObject = page "Marketing Teams Header";
+                    }
+                }
             }
             // group("ATM Management")
             // {
