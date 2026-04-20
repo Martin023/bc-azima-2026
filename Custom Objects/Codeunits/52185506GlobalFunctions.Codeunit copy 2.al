@@ -2103,7 +2103,7 @@ Codeunit 52185506 "Global Functions"
         ProductFactory: Record "Product Factory";
         MinBalance: Decimal;
     begin
-        // Database.SelectLatestVersion();
+        Database.SelectLatestVersion();
 
         MinBalance := 0;
         if ProductFactory.Get(Rec."Product Type") then begin

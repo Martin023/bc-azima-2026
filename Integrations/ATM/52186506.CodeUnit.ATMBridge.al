@@ -204,6 +204,8 @@ codeunit 52186506 "Sky Coop ATM Bridge"
                         SkyCoopATMTrans.LogBalanceEnquiry(SkyATMTransactions, Payload, APIRequestID, MemberSavingsAccount);
 
                         if SkyATMTransactions.Insert(true) then begin
+                            Commit;
+
                             ServiceProviderRespCode := ServiceProviderRespCode::Success;
 
                             ResponsePayload.Add('message_id', message_id);
@@ -464,6 +466,8 @@ codeunit 52186506 "Sky Coop ATM Bridge"
                     SkyCoopATMTrans.LogFundsTransfer(SkyATMTransactions, Payload, APIRequestID, MemberSavingsAccount);
 
                     if SkyATMTransactions.Insert(true) then begin
+                        Commit;
+
                         ServiceProviderRespCode := ServiceProviderRespCode::"Accepted for reversal";
 
                         ResponsePayload.Add('message_id', message_id);
@@ -688,6 +692,8 @@ codeunit 52186506 "Sky Coop ATM Bridge"
                                 SkyCoopATMTrans.LogFundsTransfer(SkyATMTransactions, Payload, APIRequestID, MemberSavingsAccount);
 
                                 if SkyATMTransactions.Insert(true) then begin
+                                    Commit;
+
                                     ServiceProviderRespCode := ServiceProviderRespCode::Success;
 
                                     ResponsePayload.Add('message_id', message_id);
@@ -928,6 +934,8 @@ codeunit 52186506 "Sky Coop ATM Bridge"
                         SkyCoopATMTrans.LogMiniStatement(SkyATMTransactions, Payload, APIRequestID, MemberSavingsAccount);
 
                         if SkyATMTransactions.Insert(true) then begin
+                            Commit;
+                            
                             ServiceProviderRespCode := ServiceProviderRespCode::Success;
 
                             ResponsePayload.Add('message_id', message_id);
