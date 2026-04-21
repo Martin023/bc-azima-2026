@@ -213,9 +213,9 @@ page 52185804 "Treasury Cashier Transactions"
                             if BankAcc.get(BankingSetup."Default  Bank") then
                                 BankAcc.CalcFields("Balance (LCY)");
                             if BankAcc."Balance (LCY)" > BankingSetup."Maximum Withholding" then
-                                Message('The trasury has exceeded the maximum withholding of %1', BankingSetup."Maximum Withholding");
+                                Message('The treasury has exceeded the maximum withholding of %1', BankingSetup."Maximum Withholding");
                             if BankAcc."Balance (LCY)" < BankingSetup."Minimum Balance" then
-                                Message('The trasury account has gone below minimum required balance of %1', BankingSetup."Minimum Balance");
+                                Message('The treasury account has gone below minimum required balance of %1', BankingSetup."Minimum Balance");
                         end;
                     end;
 
