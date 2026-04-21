@@ -25,7 +25,11 @@ table 52185862 "Marketing Teams Lines"
         {
             Caption = 'Location';
         }
-       field(6;Branch)
+       field(6;Branch; Text[2048])
+        {
+            Caption = 'Branch';
+        }
+
     }
     keys
     {
