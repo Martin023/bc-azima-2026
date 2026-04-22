@@ -1,7 +1,7 @@
 table 52185776 "Cashier Transactions"
 {
-    DrillDownPageID = "Cashier Transactions List";
-    LookupPageID = "Cashier Transactions List";
+    DrillDownPageID = "Posted Cashier Transactions";
+    LookupPageID = "Posted Cashier Transactions";
 
     fields
     {
