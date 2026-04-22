@@ -1,7 +1,6 @@
 table 52185637 "PR Salary Card"
 {
 
-
     fields
     {
         field(1; "Employee Code"; Code[20])

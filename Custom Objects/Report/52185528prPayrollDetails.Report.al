@@ -264,7 +264,7 @@ Report 52185528 "prPayroll Details"
         FooterPrinted: Boolean;
         TotalFor: label 'Total for ';
         PeriodTrans: Record "PR Period Transactions";
-        TransCodes: Record "prTransaction Codes";
+        TransCodes: Record "PR Transaction Codes";
         GroupOrder: label '3';
         objPeriod: Record "PR Payroll Periods";
         SelectedPeriod: Date;
