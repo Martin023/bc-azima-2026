@@ -28,7 +28,7 @@ table 52185671 "PR Employee Allowances"
         }
         field(11; Description; Text[100])
         {
-            CalcFormula = Lookup("prTransaction Codes"."Transaction Name" WHERE("Transaction Code" = FIELD("Transaction Code")));
+            CalcFormula = Lookup("PR Transaction Codes"."Transaction Name" WHERE("Transaction Code" = FIELD("Transaction Code")));
             Editable = false;
             FieldClass = FlowField;
         }

@@ -3678,7 +3678,7 @@ page 52186778 "Finance Role Center"
                     action("prPayroll Period")
                     {
                         Caption = 'Payroll Periods';
-                        RunObject = page "prPayroll Period";
+                        RunObject = page "PR Payroll Periods";
                         ApplicationArea = Basic, Suite;
                     }
                     action("Employee Posting Groups")

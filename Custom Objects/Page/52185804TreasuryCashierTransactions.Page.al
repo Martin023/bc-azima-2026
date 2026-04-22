@@ -139,7 +139,7 @@ page 52185804 "Treasury Cashier Transactions"
                 field("Total Cash on Treasury Coinage"; Rec."Total Cash on Treasury Coinage")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'Total Cash on Treasury/Teller Coinage';
+                    //Caption = 'Total Cash on Treasury/Teller Coinage';
                 }
                 field(Type; Rec.Type)
                 {
@@ -446,6 +446,8 @@ page 52185804 "Treasury Cashier Transactions"
                         VarVariant := Rec;
                         if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then
                             CustomApprovals.OnSendDocForApproval(VarVariant);
+
+                        CurrPage.Close();
                     end;
                 }
                 action(CancelApprovalRequest)

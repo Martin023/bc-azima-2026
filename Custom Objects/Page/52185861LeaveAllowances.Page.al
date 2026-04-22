@@ -127,7 +127,7 @@ page 52185861 "Leave Allowances"
     var
         PREmpTrans: Record "PR Employee Transactions";
         PRPeriod: Record "PR Payroll Periods";
-        PRTrans: Record "prTransaction Codes";
+        PRTrans: Record "PR Transaction Codes";
         LeaveAllowances: Record "Leave Allowances";
         prVitalSetup: Record "PR Vital Setup Info";
 }

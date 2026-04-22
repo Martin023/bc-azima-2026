@@ -356,6 +356,7 @@ table 52185778 "Treasury Cashier Transactions"
         }
         field(26; "Total Cash on Treasury Coinage"; Decimal)
         {
+            Caption = 'Coinage Requested.';
             CalcFormula = Sum(Coinage."Total Amount" WHERE(No = FIELD(No)));
             Editable = false;
             FieldClass = FlowField;
