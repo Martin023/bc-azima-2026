@@ -86,6 +86,9 @@ Report 52185685 "Cashier CHDeposit Slip"
             {
 
             }
+            column(Branch_Name;"Branch Name")
+            {
+            }
             column(Transaction_No_Caption; Transaction_No_CaptionLbl)
             {
             }
@@ -179,6 +182,9 @@ Report 52185685 "Cashier CHDeposit Slip"
             column(CashierName; CashierName)
             {
             }
+            column(Reprint; Reprint)
+            {
+            }
             dataitem("Transaction Charges"; "Transaction Charges")
             {
                 DataItemLink = "Transaction Type" = field("Transaction Type");
@@ -208,6 +214,18 @@ Report 52185685 "Cashier CHDeposit Slip"
                 User.SetRange("User Name", UserId);
                 if User.Find('-') then begin
                     CashierName := User."Full Name";
+                end;
+
+                // if "Transaction Date";
+
+                Reprint := '';
+                if "Transaction Date" < Today then
+                    Reprint := 'REPRINT'
+                else if ("Transaction Date" = Today) and ("Transaction Time" <> 0T) then begin
+                    if Time > "Transaction Time" then begin
+                        if (Time - "Transaction Time") > 60000 then // 1 minute buffer to account for initial processing time
+                            Reprint := 'REPRINT';
+                    end;
                 end;
 
                 //calculate the charges
@@ -299,4 +317,5 @@ Report 52185685 "Cashier CHDeposit Slip"
         CompanyAddress: Text;
         CompanyTelephone: Text;
         CommunicationOnline: Text;
-}
+        Reprint: Text;
+} 
