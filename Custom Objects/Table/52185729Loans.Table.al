@@ -513,7 +513,7 @@ table 52185729 Loans
                 ShareBoostAmount: Decimal;
             begin
                 GlobalFunctions.FlagAccounts(Rec."Member No.");
-                LoansProcess.LoanBulkClearence(Rec."Member No.");
+                // LoansProcess.LoanBulkClearence(Rec."Member No.");
                 GlobalFunctions.DisplayLienMessage(Rec."Member No.");
                 LoanSS.reset;
                 LoanSS.setrange(LoanSS."Member No.", Rec."Member No.");

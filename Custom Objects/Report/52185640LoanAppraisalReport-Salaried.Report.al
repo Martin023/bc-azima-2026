@@ -864,6 +864,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 if Loans."Total TopUp" > 0 then begin
 
                     //Pass loan clearance principle and interest
+
                     TopUp.RESET;
                     TopUp.SETRANGE(TopUp."Loan No.", Loans."Loan No.");
                     IF TopUp.FIND('-') THEN BEGIN
@@ -879,23 +880,18 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                                     ExcemptProductCharges.setrange("Charge Code", PCharges."Charge Code");
                                     ExcemptProductCharges.setrange(Excempt, true);
                                     if not ExcemptProductCharges.Find('-') then begin
-                                        // IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Approved Amount") THEN BEGIN
-                                        //     // IF ChargeExtraComms = TRUE THEN
-                                        //     //     TotalComputedCharges := TotalComputedCharges + (ApprovedAmt * ((PCharges.Percentage + PCharges."Additional Charge %") / 100))
-                                        //     // ELSE
-                                        //     TopUp.Commision := Loans."Approved Amount" * (PCharges.Percentage / 100);
-                                        // END ELSE
-                                        //     IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Net Amount") THEN BEGIN
-                                        //         IF ChargeExtraComms = TRUE THEN
-                                        //             TotalComputedCharges := TotalComputedCharges + ((TopUp."Principle Top Up" + TopUp."Interest Top Up") * ((PCharges.Percentage + PCharges."Additional Charge %") / 100))
-                                        //         ELSE
-                                        //             TotalComputedCharges := TotalComputedCharges + ((TopUp."Principle Top Up" + TopUp."Interest Top Up") * (PCharges.Percentage / 100))
-                                        //     END ELSE
-                                        //         TotalComputedCharges := TotalComputedCharges + PCharges."Charge Amount";
-                                        // //MESSAGE('Running Charge topup %1',TotalComputedCharges);
+                                        IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Approved Amount") THEN BEGIN
+                                            TopUp.Commision := Loans."Approved Amount" * (PCharges.Percentage / 100);
+                                        END ELSE
+                                            IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Net Amount") THEN BEGIN
+                                                TopUp.Commision := TopUp."Outstanding Balance" * (PCharges.Percentage / 100);
+                                            END ELSE
+                                                TopUp.Commision := PCharges."Charge Amount";
+                                        //MESSAGE('Running Charge topup %1',TotalComputedCharges);
                                     end;
                                 UNTIL PCharges.NEXT = 0;
                             END;
+                            TopUp.Modify();
                         UNTIL TopUp.NEXT = 0;
                     end;
                     TopUpComms := 0;
@@ -962,6 +958,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 TwoThirdNet := round((OneThirdGross * 0.66), 0.01);
 
                 //Existing Loans
+                TotalRepay := 0;
                 Loan.Reset;
                 Loan.SetRange(Loan."Member No.", Loans."Member No.");
                 Loan.SetRange(Loan.Posted, true);
@@ -974,7 +971,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                     repeat
                         LoanTopup.reset();
                         LoanTopup.SetRange("Loan No.", Loans."Loan No.");
-                        LoanTopup.setrange("Loan Top Up", Loan."Member No.");
+                        LoanTopup.setrange("Loan Top Up", Loan."Loan No.");
                         if LoanTopup.IsEmpty() or (LoanTopup."Total Top Up" < Loan."Total Balance") then begin
                             TotalRepay += Loan.Repayment;
                             TotalLoanBal += Loan."Total Balance";

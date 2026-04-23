@@ -35,40 +35,42 @@ table 52185742 "Loans Top up"
                     end;
 
                     Loans.CalcFields(Loans."Outstanding Balance", Loans."Outstanding Interest", Loans."Outstanding Bills", Loans."Loans Category-SASRA");
-                    if Customer.Get(Loans."Employer Code") then
-                        "Loan Type" := Loans."Loan Product Type";
-                    if (Loans."Recovery Mode" = Loans."Recovery Mode"::Checkoff) and (Loans."Loans Category-SASRA" = Loans."Loans Category-SASRA"::Perfoming)
-                      and (Loans."Employer Code" <> '')
-                      and (Customer."Loans Cleared" <> Customer."Loans Cleared"::"Full Clearance") then begin
+                    // if Customer.Get(Loans."Employer Code") then
+                    //     "Loan Type" := Loans."Loan Product Type";
+                    // if (Loans."Recovery Mode" = Loans."Recovery Mode"::Checkoff) and (Loans."Loans Category-SASRA" = Loans."Loans Category-SASRA"::Perfoming)
+                    //   and (Loans."Employer Code" <> '')
+                    //   and (Customer."Loans Cleared" <> Customer."Loans Cleared"::"Full Clearance") then begin
 
-                        if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Flat" then begin
-                            "Principle Top Up" := Loans."Outstanding Balance" - (Loans.Repayment - Round(((Loans."Approved Amount" * Loans.Interest / 12 / 100) + ((Round(Loans."Approved Amount" / Loans.Installments, 1.0, '>')) * Loans.Interest / 12 / 100)) / 2, 1.0, '>'));
-                            "Interest Top Up" := (Loans."Outstanding Interest" + "Daily Interest") - Round(((Loans."Approved Amount" * Loans.Interest / 12 / 100) + ((Round(Loans."Approved Amount" / Loans.Installments, 1.0, '>')) * Loans.Interest / 12 / 100)) / 2, 1.0, '>');
-                            //  MESSAGE('%1 and %2',Loans."Outstanding Interest",ROUND(((Loans."Approved Amount"*Loans.Interest/12/100)+((ROUND(Loans."Approved Amount"/Loans.Installments,1.0,'>'))*Loans.Interest/12/100))/2,1.0,'>'));
-                        end else begin
-                            //"Principle Top Up" := Loans."Outstanding Balance" - (Loans.Repayment - Round((Loans."Outstanding Balance" * Loans.Interest * 0.01 / 12), 1, '>'));
-                            "Principle Top Up" := Loans."Outstanding Balance";
-                            "Interest Top Up" := (Loans."Outstanding Interest" + "Daily Interest") - Round((Loans."Outstanding Balance" * Loans.Interest * 0.01 / 12), 1, '>');
-                        end;
-                        "Interest Top Up" := (Loans."Outstanding Interest" + "Daily Interest");
-                        "One Month Interest" := (Loans."Outstanding Balance" * Loans.Interest * 0.01 / 12);
-                        "Monthly Repayment" := Loans.Repayment - Round((Loans."Outstanding Balance" * Loans.Interest * 0.01 / 12), 1, '>');
-                        "Interest Rate" := Loans.Interest;
-                        if "Interest Top Up" <= 0 then
-                            "Interest Top Up" := 0;
-                        if "Principle Top Up" <= 0 then
-                            "Principle Top Up" := 0;
-                    end else begin
-                        "Principle Top Up" := Loans."Outstanding Balance";
-                        "Interest Top Up" := (Loans."Outstanding Interest" + "Daily Interest");
-                        "Monthly Repayment" := Loans.Repayment;
-                    end;
+                    //     if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Flat" then begin
+                    //         "Principle Top Up" := Loans."Outstanding Balance" - (Loans.Repayment - Round(((Loans."Approved Amount" * Loans.Interest / 12 / 100) + ((Round(Loans."Approved Amount" / Loans.Installments, 1.0, '>')) * Loans.Interest / 12 / 100)) / 2, 1.0, '>'));
+                    //         "Interest Top Up" := (Loans."Outstanding Interest" + "Daily Interest") - Round(((Loans."Approved Amount" * Loans.Interest / 12 / 100) + ((Round(Loans."Approved Amount" / Loans.Installments, 1.0, '>')) * Loans.Interest / 12 / 100)) / 2, 1.0, '>');
+                    //         //  MESSAGE('%1 and %2',Loans."Outstanding Interest",ROUND(((Loans."Approved Amount"*Loans.Interest/12/100)+((ROUND(Loans."Approved Amount"/Loans.Installments,1.0,'>'))*Loans.Interest/12/100))/2,1.0,'>'));
+                    //     end else begin
+                    //         //"Principle Top Up" := Loans."Outstanding Balance" - (Loans.Repayment - Round((Loans."Outstanding Balance" * Loans.Interest * 0.01 / 12), 1, '>'));
+                    //         "Principle Top Up" := Loans."Outstanding Balance";
+                    //         "Interest Top Up" := (Loans."Outstanding Interest" + "Daily Interest") - Round((Loans."Outstanding Balance" * Loans.Interest * 0.01 / 12), 1, '>');
+                    //     end;
+                    //     "Interest Top Up" := (Loans."Outstanding Interest" + "Daily Interest");
+                    //     "One Month Interest" := (Loans."Outstanding Balance" * Loans.Interest * 0.01 / 12);
+                    //     "Monthly Repayment" := Loans.Repayment - Round((Loans."Outstanding Balance" * Loans.Interest * 0.01 / 12), 1, '>');
+                    //     "Interest Rate" := Loans.Interest;
+                    //     if "Interest Top Up" <= 0 then
+                    //         "Interest Top Up" := 0;
+                    //     if "Principle Top Up" <= 0 then
+                    //         "Principle Top Up" := 0;
+                    // end else begin
+                    "Loan Type" := Loans."Loan Product Type";
+                    "One Month Interest" := (Loans."Outstanding Balance" * Loans.Interest * 0.01 / 12);
+                    "Principle Top Up" := Loans."Outstanding Balance";
+                    "Interest Top Up" := (Loans."Outstanding Interest" + "Daily Interest");
+                    "Monthly Repayment" := Loans.Repayment;
+                    // end;
 
-                    if CalcDate('CM', Loans."Disbursement Date") = CalcDate('CM', Today) then begin
-                        "Principle Top Up" := Loans."Outstanding Balance";
-                        "Interest Top Up" := (Loans."Outstanding Interest" + "Daily Interest");
-                        "Monthly Repayment" := Loans.Repayment;
-                    end;
+                    // if CalcDate('CM', Loans."Disbursement Date") = CalcDate('CM', Today) then begin
+                    //     "Principle Top Up" := Loans."Outstanding Balance";
+                    //     "Interest Top Up" := (Loans."Outstanding Interest" + "Daily Interest");
+                    //     "Monthly Repayment" := Loans.Repayment;
+                    // end;
 
 
                     "Outstanding Bill" := Loans."Outstanding Bills";

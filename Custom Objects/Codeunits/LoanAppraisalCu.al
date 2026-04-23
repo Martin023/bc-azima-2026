@@ -20,7 +20,7 @@ Codeunit 52185484 "Loan Appraisal Codeunit"
         GenSetup.testField("Withdrawal Fee");
         SavBal := SavingsAcc.GetAvailableBalance(Accno);
         if SavBal > 0 then begin
-            Deductions := (GenSetup."Self Guarantee %" * 0.01 * SavBal * 3) + GenSetup."Withdrawal Fee" + GetTotalSelfGuarantee(Accno);
+            Deductions := (GenSetup."Self Guarantee %" * 0.01 * SavBal * 3) + GenSetup."Withdrawal Fee" + GetTotalSelfGuarantee(Accno) + GetTotalGuaranteedAmt(Accno);
             if Deductions > SavBal then
                 exit(0)
             else
@@ -60,6 +60,7 @@ Codeunit 52185484 "Loan Appraisal Codeunit"
         LoanGuar.Reset;
         LoanGuar.SetRange(LoanGuar."Savings Account No./Member No.", AccNO);
         LoanGuar.SetRange(Substituted, false);
+        LoanGuar.SetRange(LoanGuar."Self Guarantee", false);
         LoanGuar.SetLoadFields(LoanGuar."Outstanding Balance");
         LoanGuar.SetFilter(LoanGuar."Outstanding Balance", '>0');
         LoanGuar.CalcSums("Amount Guaranteed");
