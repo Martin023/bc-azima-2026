@@ -11,11 +11,302 @@
       <rd:DataSourceID>4c0e2a49-4e3a-4b37-be7f-d50e0b6f1994</rd:DataSourceID>
     </DataSource>
   </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+      <Fields>
+        <Field Name="ReportForNavId_5806">
+          <DataField>ReportForNavId_5806</DataField>
+        </Field>
+        <Field Name="Transactions_Transactions__Book_Balance_">
+          <DataField>Transactions_Transactions__Book_Balance_</DataField>
+        </Field>
+        <Field Name="Transactions_Transactions__Book_Balance_Format">
+          <DataField>Transactions_Transactions__Book_Balance_Format</DataField>
+        </Field>
+        <Field Name="Transactions_No">
+          <DataField>Transactions_No</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Name">
+          <DataField>CompanyInformation_Name</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Picture">
+          <DataField>CompanyInformation_Picture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="AccountNo">
+          <DataField>AccountNo</DataField>
+        </Field>
+        <Field Name="AccountName">
+          <DataField>AccountName</DataField>
+        </Field>
+        <Field Name="Amount">
+          <DataField>Amount</DataField>
+        </Field>
+        <Field Name="AmountFormat">
+          <DataField>AmountFormat</DataField>
+        </Field>
+        <Field Name="PayrollNo">
+          <DataField>PayrollNo</DataField>
+        </Field>
+        <Field Name="Prod_Name">
+          <DataField>Prod_Name</DataField>
+        </Field>
+        <Field Name="Transactions__Transaction_Date_">
+          <DataField>Transactions__Transaction_Date_</DataField>
+        </Field>
+        <Field Name="Transactions_Transactions__Transaction_Time_">
+          <DataField>Transactions_Transactions__Transaction_Time_</DataField>
+        </Field>
+        <Field Name="Transactions__Cheque_No_">
+          <DataField>Transactions__Cheque_No_</DataField>
+        </Field>
+        <Field Name="Transactions_Type">
+          <DataField>Transactions_Type</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Name">
+          <DataField>CompanyInfo_Name</DataField>
+        </Field>
+        <Field Name="Company_Address">
+          <DataField>Company_Address</DataField>
+        </Field>
+        <Field Name="Co_phone">
+          <DataField>Co_phone</DataField>
+        </Field>
+        <Field Name="Company_Pic">
+          <DataField>Company_Pic</DataField>
+        </Field>
+        <Field Name="Transactions_Transactions_Cashier">
+          <DataField>Transactions_Transactions_Cashier</DataField>
+        </Field>
+        <Field Name="Amount_WithdrawnCaption">
+          <DataField>Amount_WithdrawnCaption</DataField>
+        </Field>
+        <Field Name="Book_Balance_Caption">
+          <DataField>Book_Balance_Caption</DataField>
+        </Field>
+        <Field Name="Global_Dimension_1_Code">
+          <DataField>Global_Dimension_1_Code</DataField>
+        </Field>
+        <Field Name="Branch_Name">
+          <DataField>Branch_Name</DataField>
+        </Field>
+        <Field Name="Transaction_No_Caption">
+          <DataField>Transaction_No_Caption</DataField>
+        </Field>
+        <Field Name="Account_No_Caption">
+          <DataField>Account_No_Caption</DataField>
+        </Field>
+        <Field Name="Account_Name_Caption">
+          <DataField>Account_Name_Caption</DataField>
+        </Field>
+        <Field Name="Date_Caption">
+          <DataField>Date_Caption</DataField>
+        </Field>
+        <Field Name="Time_Caption">
+          <DataField>Time_Caption</DataField>
+        </Field>
+        <Field Name="Transactions__Cheque_No_Caption">
+          <DataField>Transactions__Cheque_No_Caption</DataField>
+        </Field>
+        <Field Name="Member_No_Caption">
+          <DataField>Member_No_Caption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption">
+          <DataField>EmptyStringCaption</DataField>
+        </Field>
+        <Field Name="Signature_Caption">
+          <DataField>Signature_Caption</DataField>
+        </Field>
+        <Field Name="I_acknowledge_receipt_of_the_above_amountCaption">
+          <DataField>I_acknowledge_receipt_of_the_above_amountCaption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control1000000048">
+          <DataField>EmptyStringCaption_Control1000000048</DataField>
+        </Field>
+        <Field Name="I_D_No_Caption">
+          <DataField>I_D_No_Caption</DataField>
+        </Field>
+        <Field Name="Availbal">
+          <DataField>Availbal</DataField>
+        </Field>
+        <Field Name="BookBal_">
+          <DataField>BookBal_</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control1102756001">
+          <DataField>EmptyStringCaption_Control1102756001</DataField>
+        </Field>
+        <Field Name="al">
+          <DataField>al</DataField>
+        </Field>
+        <Field Name="Withdrawn_By_______________________________________Caption">
+          <DataField>Withdrawn_By_______________________________________Caption</DataField>
+        </Field>
+        <Field Name="You_were_served_by__Caption">
+          <DataField>You_were_served_by__Caption</DataField>
+        </Field>
+        <Field Name="THANK_YOUCaption">
+          <DataField>THANK_YOUCaption</DataField>
+        </Field>
+        <Field Name="Better_life_for_our_members_globallyCaption">
+          <DataField>Better_life_for_our_members_globallyCaption</DataField>
+        </Field>
+        <Field Name="Transactions_Transaction_Type">
+          <DataField>Transactions_Transaction_Type</DataField>
+        </Field>
+        <Field Name="ExpectedMaturityDate">
+          <DataField>ExpectedMaturityDate</DataField>
+        </Field>
+        <Field Name="ChequeNo_Transactions">
+          <DataField>ChequeNo_Transactions</DataField>
+        </Field>
+        <Field Name="TransactionDescription_Transactions">
+          <DataField>TransactionDescription_Transactions</DataField>
+        </Field>
+        <Field Name="Cashier_Transactions">
+          <DataField>Cashier_Transactions</DataField>
+        </Field>
+        <Field Name="NumberText_1_">
+          <DataField>NumberText_1_</DataField>
+        </Field>
+        <Field Name="SumTransactionCharges">
+          <DataField>SumTransactionCharges</DataField>
+        </Field>
+        <Field Name="SumTransactionChargesFormat">
+          <DataField>SumTransactionChargesFormat</DataField>
+        </Field>
+        <Field Name="AvailableBalance">
+          <DataField>AvailableBalance</DataField>
+        </Field>
+        <Field Name="AvailableBalanceFormat">
+          <DataField>AvailableBalanceFormat</DataField>
+        </Field>
+        <Field Name="NewAvailable">
+          <DataField>NewAvailable</DataField>
+        </Field>
+        <Field Name="NewAvailableFormat">
+          <DataField>NewAvailableFormat</DataField>
+        </Field>
+        <Field Name="Dublicate">
+          <DataField>Dublicate</DataField>
+        </Field>
+        <Field Name="CashierName">
+          <DataField>CashierName</DataField>
+        </Field>
+        <Field Name="Reprint">
+          <DataField>Reprint</DataField>
+        </Field>
+        <Field Name="ReprintDate">
+          <DataField>ReprintDate</DataField>
+        </Field>
+        <Field Name="ReprintTime">
+          <DataField>ReprintTime</DataField>
+        </Field>
+        <Field Name="ReportForNavId_8541">
+          <DataField>ReportForNavId_8541</DataField>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+        </Field>
+        <Field Name="ChAmount">
+          <DataField>ChAmount</DataField>
+        </Field>
+        <Field Name="ChAmountFormat">
+          <DataField>ChAmountFormat</DataField>
+        </Field>
+        <Field Name="Transaction_Charges_Transaction_Type">
+          <DataField>Transaction_Charges_Transaction_Type</DataField>
+        </Field>
+        <Field Name="Transaction_Charges_Charge_Code">
+          <DataField>Transaction_Charges_Charge_Code</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
         <ReportItems>
-          <!-- THIS IS THE NEW REPRINT TEXTBOX -->
+          <Textbox Name="Textbox36">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>AZIMA SACCO</Value>
+                    <Style>
+                      <FontSize>13pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>P.O BOX 1124 THIKA</Value>
+                    <Style>
+                      <FontSize>13pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>AZIMA HQ</Value>
+                    <Style>
+                      <FontSize>13pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontSize>13pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox32</rd:DefaultName>
+            <Top>0.2cm</Top>
+            <Left>0.57704cm</Left>
+            <Height>2.5cm</Height>
+            <Width>18.5cm</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
           <Textbox Name="ReprintTextbox">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -25,7 +316,7 @@
                   <TextRun>
                     <Value>=First(Fields!Reprint.Value, "DataSet_Result")</Value>
                     <Style>
-                      <FontSize>10pt</FontSize>
+                      <FontSize>13pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -35,10 +326,10 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>2.07107cm</Top>
+            <Top>2.8cm</Top>
             <Left>0.57704cm</Left>
-            <Height>0.4cm</Height>
-            <Width>6.53421cm</Width>
+            <Height>0.8cm</Height>
+            <Width>18.5cm</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>
@@ -46,23 +337,23 @@
               </Border>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox3">
+          <Textbox Name="Textbox35">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Fields!Global_Dimension_1_Code.Value</Value>
+                    <Value>TRANS TYPE: </Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>13pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>[Branch_Name]</Value>
+                    <Value>=Fields!Transactions_Type.Value</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>13pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -72,11 +363,12 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>3.87029cm</Top>
-            <Left>0.60854cm</Left>
-            <Height>0.49239cm</Height>
-            <Width>6.53421cm</Width>
+            <rd:DefaultName>Textbox35</rd:DefaultName>
+            <Top>3.8cm</Top>
+            <Left>0.57704cm</Left>
+            <Height>0.8cm</Height>
+            <Width>18.5cm</Width>
+            <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -93,16 +385,16 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>DATE :     </Value>
+                    <Value>DATE:           </Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>13pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
                     <Value>=First(Fields!Transactions__Transaction_Date_.Value, "DataSet_Result")</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>13pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <Format>M/d/yyyy</Format>
                     </Style>
@@ -110,7 +402,7 @@
                   <TextRun>
                     <Value xml:space="preserve">    </Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>13pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <Format>M/d/yyyy</Format>
                     </Style>
@@ -118,14 +410,14 @@
                   <TextRun>
                     <Value xml:space="preserve">                     </Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>13pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
                     <Value>=First(Fields!Transactions_Transactions__Transaction_Time_.Value, "DataSet_Result")</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>13pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <Format>hh:mm tt</Format>
                     </Style>
@@ -136,16 +428,118 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>3.20151cm</Top>
+            <Top>4.8cm</Top>
             <Left>0.57704cm</Left>
-            <Height>0.49239cm</Height>
-            <Width>6.53421cm</Width>
+            <Height>0.8cm</Height>
+            <Width>18.5cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border />
               <VerticalAlign>Bottom</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>0.45cm</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox3">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>BRANCH:     </Value>
+                    <Style>
+                      <FontSize>13pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!Branch_Name.Value</Value>
+                    <Style>
+                      <FontSize>13pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value> (</Value>
+                    <Style>
+                      <FontSize>13pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!Global_Dimension_1_Code.Value</Value>
+                    <Style>
+                      <FontSize>13pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>)</Value>
+                    <Style>
+                      <FontSize>13pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox3</rd:DefaultName>
+            <Top>5.8cm</Top>
+            <Left>0.57704cm</Left>
+            <Height>0.8cm</Height>
+            <Width>18.5cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox29">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>TRANS No:     </Value>
+                    <Style>
+                      <FontSize>13pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!Transactions_No.Value</Value>
+                    <Style>
+                      <FontSize>13pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox29</rd:DefaultName>
+            <Top>6.8cm</Top>
+            <Left>0.57704cm</Left>
+            <Height>0.8cm</Height>
+            <Width>18.5cm</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
@@ -159,14 +553,14 @@
                   <TextRun>
                     <Value>A/C NAME:   </Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>13pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
                     <Value>=Fields!AccountName.Value</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>13pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -177,10 +571,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox25</rd:DefaultName>
-            <Top>5.20784cm</Top>
+            <Top>7.8cm</Top>
             <Left>0.57704cm</Left>
-            <Height>0.49239cm</Height>
-            <Width>6.53421cm</Width>
+            <Height>0.8cm</Height>
+            <Width>18.5cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -199,16 +593,16 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>A/C No:     </Value>
+                    <Value>A/C No:         </Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>13pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
                     <Value>=Fields!AccountNo.Value</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>13pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -219,10 +613,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox26</rd:DefaultName>
-            <Top>5.87662cm</Top>
-            <Left>0.60854cm</Left>
-            <Height>0.49239cm</Height>
-            <Width>6.53421cm</Width>
+            <Top>8.8cm</Top>
+            <Left>0.57704cm</Left>
+            <Height>0.8cm</Height>
+            <Width>18.5cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -243,14 +637,14 @@
                   <TextRun>
                     <Value>AMOUNT:     </Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>13pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
                     <Value>=Fields!Amount.Value</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>13pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <Format>#,0.00</Format>
                     </Style>
@@ -262,10 +656,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox27</rd:DefaultName>
-            <Top>6.5454cm</Top>
-            <Left>0.60854cm</Left>
-            <Height>0.49239cm</Height>
-            <Width>6.53421cm</Width>
+            <Top>9.8cm</Top>
+            <Left>0.57704cm</Left>
+            <Height>0.8cm</Height>
+            <Width>18.5cm</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -277,63 +671,23 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox29">
+          <Textbox Name="AmountInWordsTextbox">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>TRANS No:     </Value>
+                    <Value>IN WORDS:   </Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>13pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Fields!Transactions_No.Value</Value>
+                    <Value>=Fields!NumberText_1_.Value</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox29</rd:DefaultName>
-            <Top>4.53906cm</Top>
-            <Left>0.60854cm</Left>
-            <Height>0.49239cm</Height>
-            <Width>6.53421cm</Width>
-            <ZIndex>5</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox35">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Transaction Type:   </Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Fields!Transactions_Type.Value</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>13pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -343,12 +697,11 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox35</rd:DefaultName>
-            <Top>2.53273cm</Top>
+            <Top>10.8cm</Top>
             <Left>0.57704cm</Left>
-            <Height>0.49239cm</Height>
-            <Width>6.53421cm</Width>
-            <ZIndex>6</ZIndex>
+            <Height>1.5cm</Height>
+            <Width>18.5cm</Width>
+            <ZIndex>9</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -359,40 +712,16 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox36">
+          <Textbox Name="SignaturesTextbox">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>AZIMA SAVINGS  AND CREDIT CO-OP SOC LTD</Value>
+                    <Value>Member ID NO :.....................................</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>P.O BOX 1124 THIKA</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>AZIMA HQ</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>13pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -404,7 +733,19 @@
                   <TextRun>
                     <Value />
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>13pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Member Sign :......................................</Value>
+                    <Style>
+                      <FontSize>13pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -412,12 +753,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox32</rd:DefaultName>
-            <Top>0.17639cm</Top>
+            <Top>12.5cm</Top>
             <Left>0.57704cm</Left>
-            <Height>1.89468cm</Height>
-            <Width>6.53421cm</Width>
-            <ZIndex>7</ZIndex>
+            <Height>2.0cm</Height>
+            <Width>18.5cm</Width>
+            <ZIndex>10</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -429,13 +769,13 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>7.95501cm</Height>
+        <Height>15.0cm</Height>
         <Style />
       </Body>
-      <Width>7.53962cm</Width>
+      <Width>19.5cm</Width>
       <Page>
         <PageHeader>
-          <Height>3.50308cm</Height>
+          <Height>0.5cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <Style>
@@ -445,7 +785,7 @@
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>9.29217cm</Height>
+          <Height>4.0cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -458,14 +798,14 @@
                     <TextRun>
                       <Value>SERVED BY: </Value>
                       <Style>
-                        <FontSize>8pt</FontSize>
+                        <FontSize>13pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
                     <TextRun>
-                      <Value>=Fields!CashierName.Value</Value>
+                      <Value>=First(Fields!Transactions_Transactions_Cashier.Value, "DataSet_Result")</Value>
                       <Style>
-                        <FontSize>8pt</FontSize>
+                        <FontSize>13pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
@@ -474,10 +814,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox32</rd:DefaultName>
-              <Top>7.01927cm</Top>
+              <Top>0.1cm</Top>
               <Left>0.57704cm</Left>
-              <Height>0.49239cm</Height>
-              <Width>6.53421cm</Width>
+              <Height>0.8cm</Height>
+              <Width>18.5cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -495,9 +835,9 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Thankyou for Giving us an Opportunity to serve you</Value>
+                      <Value>Thank you for Giving us the Opportunity to serve you</Value>
                       <Style>
-                        <FontSize>8pt</FontSize>
+                        <FontSize>13pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
@@ -506,11 +846,47 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox32</rd:DefaultName>
-              <Top>7.86467cm</Top>
+              <Top>1.1cm</Top>
               <Left>0.57704cm</Left>
-              <Height>1.15385cm</Height>
-              <Width>6.53421cm</Width>
+              <Height>1.5cm</Height>
+              <Width>18.5cm</Width>
               <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="ReprintTimestamp">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>="Reprinted On: " &amp; Format(First(Fields!ReprintDate.Value, "DataSet_Result"), "dd/MM/yyyy") &amp; " at " &amp; Format(First(Fields!ReprintTime.Value, "DataSet_Result"), "HH:mm")</Value>
+                      <Style>
+                        <FontStyle>Italic</FontStyle>
+                        <FontSize>11pt</FontSize>
+                        <FontWeight>Normal</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Top>2.8cm</Top>
+              <Left>0.57704cm</Left>
+              <Height>0.8cm</Height>
+              <Width>18.5cm</Width>
+              <ZIndex>2</ZIndex>
+              <Visibility>
+                <Hidden>=IIf(First(Fields!Reprint.Value, "DataSet_Result") = "REPRINT", False, True)</Hidden>
+              </Visibility>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -529,9 +905,11 @@
           </Style>
         </PageFooter>
         <PageHeight>29.7cm</PageHeight>
-        <PageWidth>21cm</PageWidth>
+        <PageWidth>21.0cm</PageWidth>
         <LeftMargin>0.5cm</LeftMargin>
         <RightMargin>0.5cm</RightMargin>
+        <TopMargin>0.5cm</TopMargin>
+        <BottomMargin>0.5cm</BottomMargin>
         <ColumnSpacing>1.27cm</ColumnSpacing>
         <Style />
       </Page>

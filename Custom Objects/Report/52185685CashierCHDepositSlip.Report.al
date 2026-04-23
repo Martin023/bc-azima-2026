@@ -86,7 +86,7 @@ Report 52185685 "Cashier CHDeposit Slip"
             {
 
             }
-            column(Branch_Name;"Branch Name")
+            column(Branch_Name; "Branch Name")
             {
             }
             column(Transaction_No_Caption; Transaction_No_CaptionLbl)
@@ -185,6 +185,12 @@ Report 52185685 "Cashier CHDeposit Slip"
             column(Reprint; Reprint)
             {
             }
+            column(ReprintDate; ReprintDate)
+            {
+            }
+            column(ReprintTime; ReprintTime)
+            {
+            }
             dataitem("Transaction Charges"; "Transaction Charges")
             {
                 DataItemLink = "Transaction Type" = field("Transaction Type");
@@ -244,6 +250,10 @@ Report 52185685 "Cashier CHDeposit Slip"
                     StaffNo := Savings."Payroll/Staff No.";
                     ProductName := Savings."Product Name";
                 end;
+
+                ReprintDate := Today;
+                ReprintTime := Time;
+                NumberText[1] := ConvertAmountToWords(Amount);
             end;
 
             trigger OnPreDataItem()
@@ -303,7 +313,7 @@ Report 52185685 "Cashier CHDeposit Slip"
         Better_life_for_our_members_globallyCaptionLbl: label 'Better life for our members globally';
         CompanyInfo: Record "Company Information";
         //CheckReport: Report CheckRepo;
-        NumberText: array[2] of Text[120];
+        NumberText: array[2] of Text[250];
         SumTransactionCharges: Decimal;
         ChAmount: Decimal;
         AvailableBalance: Decimal;
@@ -318,4 +328,126 @@ Report 52185685 "Cashier CHDeposit Slip"
         CompanyTelephone: Text;
         CommunicationOnline: Text;
         Reprint: Text;
-} 
+        ReprintDate: Date;
+        ReprintTime: Time;
+        OnesText: array[20] of Text[30];
+        TensText: array[10] of Text[30];
+
+    local procedure InitTextVariable()
+    begin
+        OnesText[1] := 'One';
+        OnesText[2] := 'Two';
+        OnesText[3] := 'Three';
+        OnesText[4] := 'Four';
+        OnesText[5] := 'Five';
+        OnesText[6] := 'Six';
+        OnesText[7] := 'Seven';
+        OnesText[8] := 'Eight';
+        OnesText[9] := 'Nine';
+        OnesText[10] := 'Ten';
+        OnesText[11] := 'Eleven';
+        OnesText[12] := 'Twelve';
+        OnesText[13] := 'Thirteen';
+        OnesText[14] := 'Fourteen';
+        OnesText[15] := 'Fifteen';
+        OnesText[16] := 'Sixteen';
+        OnesText[17] := 'Seventeen';
+        OnesText[18] := 'Eighteen';
+        OnesText[19] := 'Nineteen';
+        TensText[1] := '';
+        TensText[2] := 'Twenty';
+        TensText[3] := 'Thirty';
+        TensText[4] := 'Forty';
+        TensText[5] := 'Fifty';
+        TensText[6] := 'Sixty';
+        TensText[7] := 'Seventy';
+        TensText[8] := 'Eighty';
+        TensText[9] := 'Ninety';
+    end;
+
+    local procedure ConvertAmountToWords(AmountToConvert: Decimal): Text
+    var
+        WholeAmount: Decimal;
+        CentsAmount: Decimal;
+        Words: Text;
+        CentsWords: Text;
+    begin
+        if AmountToConvert = 0 then
+            exit('Zero');
+
+        WholeAmount := Round(AmountToConvert, 1, '<');
+        CentsAmount := Round((AmountToConvert - WholeAmount) * 100, 1, '=');
+
+        InitTextVariable();
+        Words := ConvertNumberToText(WholeAmount);
+
+        if CentsAmount > 0 then begin
+            CentsWords := ConvertNumberToText(CentsAmount);
+            exit(Words + ' And ' + CentsWords + ' Cents Only');
+        end;
+
+        exit(Words + ' Only');
+    end;
+
+    local procedure ConvertNumberToText(Number: Decimal): Text
+    var
+        ResultText: Text;
+        Millions: Integer;
+        Thousands: Integer;
+        Hundreds: Integer;
+        TensAndOnes: Integer;
+    begin
+        if Number = 0 then exit('');
+
+        Millions := Round(Number / 1000000, 1, '<');
+        Number := Number - (Millions * 1000000);
+        Thousands := Round(Number / 1000, 1, '<');
+        Number := Number - (Thousands * 1000);
+        Hundreds := Round(Number / 100, 1, '<');
+        TensAndOnes := Round(Number - (Hundreds * 100), 1, '<');
+
+        ResultText := '';
+        if Millions > 0 then
+            ResultText += ConvertHundreds(Millions) + ' Million ';
+        if Thousands > 0 then
+            ResultText += ConvertHundreds(Thousands) + ' Thousand ';
+        if Hundreds > 0 then
+            ResultText += ConvertHundreds(Hundreds) + ' Hundred ';
+        if TensAndOnes > 0 then begin
+            if ResultText <> '' then
+                ResultText += 'and ';
+            ResultText += ConvertTens(TensAndOnes);
+        end;
+
+        exit(DelChr(ResultText, '>', ' '));
+    end;
+
+    local procedure ConvertHundreds(Number: Integer): Text
+    var
+        Hundreds: Integer;
+        TensAndOnes: Integer;
+        ResultText: Text;
+    begin
+        Hundreds := Number div 100;
+        TensAndOnes := Number mod 100;
+        if Hundreds > 0 then begin
+            ResultText := OnesText[Hundreds] + ' Hundred';
+            if TensAndOnes > 0 then
+                ResultText += ' and ' + ConvertTens(TensAndOnes);
+            exit(ResultText);
+        end else
+            exit(ConvertTens(TensAndOnes));
+    end;
+
+    local procedure ConvertTens(Number: Integer): Text
+    begin
+        if Number = 0 then exit('');
+        if Number < 20 then
+            exit(OnesText[Number]);
+
+        if (Number mod 10) = 0 then
+            exit(TensText[Number div 10])
+        else
+            exit(TensText[Number div 10] + ' ' + OnesText[Number mod 10]);
+    end;
+}
