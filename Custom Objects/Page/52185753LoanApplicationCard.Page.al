@@ -939,20 +939,23 @@ page 52185753 "Loan Application Card"
                         repeat
                             AppraisalSalDetails.Reset;
                             AppraisalSalDetails.SetRange(AppraisalSalDetails."Loan No", Rec."Loan No.");
+                            AppraisalSalDetails.SetRange(AppraisalSalDetails."Client Code", Rec."Member No.");
                             AppraisalSalDetails.SetRange(AppraisalSalDetails.Type, AppraisalDetailsSetup.Type);
                             AppraisalSalDetails.SetRange(Code, AppraisalDetailsSetup.Code);
 
                             if AppraisalSalDetails.Find('-') then
                                 exit;
-                            AppraisalSalDetails.Init;
-                            AppraisalSalDetails."Loan No" := Rec."Loan No.";
-                            AppraisalSalDetails."Client Code" := Rec."Member No.";
-                            AppraisalSalDetails.Code := AppraisalDetailsSetup.Code;
-                            AppraisalSalDetails.Description := AppraisalDetailsSetup.Description;
-                            AppraisalSalDetails.Type := AppraisalDetailsSetup.Type;
-                            AppraisalSalDetails.Rate := AppraisalDetailsSetup."Base Rate";
-                            AppraisalSalDetails.Hours := AppraisalDetailsSetup."Base Hours";
-                            AppraisalSalDetails.Insert;
+                            if Rec."Loan No." <> '' then begin
+                                AppraisalSalDetails.Init;
+                                AppraisalSalDetails."Loan No" := Rec."Loan No.";
+                                AppraisalSalDetails."Client Code" := Rec."Member No.";
+                                AppraisalSalDetails.Code := AppraisalDetailsSetup.Code;
+                                AppraisalSalDetails.Description := AppraisalDetailsSetup.Description;
+                                AppraisalSalDetails.Type := AppraisalDetailsSetup.Type;
+                                AppraisalSalDetails.Rate := AppraisalDetailsSetup."Base Rate";
+                                AppraisalSalDetails.Hours := AppraisalDetailsSetup."Base Hours";
+                                AppraisalSalDetails.Insert;
+                            end;
                         until AppraisalDetailsSetup.Next = 0;
                     end;
                 end;
