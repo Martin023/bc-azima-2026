@@ -9765,37 +9765,37 @@ Codeunit 52186458 "Loans Process"
         exit(MemberDeposits);
     end;
 
-    procedure LoanBulkClearence(MemberNo: code[20])
-    var
-        myInt: Integer;
-        BLoans: Record loans;
-        BCreditLed: Record "Credit Ledger Entry";
-        generalSetup: Record "General Set-Up";
-    begin
-        generalSetup.Get();
-        BLoans.reset;
-        BLoans.setrange("Member No.", MemberNo);
-        BLoans.SetRange(Posted, true);
-        if BLoans.find('-') then begin
-            repeat
-                BCreditLed.RESET;
-                BCreditLed.SetRange("Loan No", BLoans."Loan No.");
-                BCreditLed.SETRANGE("Transaction Type", BCreditLed."Transaction Type"::Repayment);
-                if Format(generalSetup."Boosting Maturity") = '' then
-                    BCreditLed.SetRange("Posting Date", CalcDate('-1M', Today), Today) else
-                    BCreditLed.SetRange("Posting Date", CalcDate(('-' + format(generalSetup."Boosting Maturity")), Today), Today);
-                BCreditLed.SetRange(Reversed, false);
-                IF BCreditLed.FIND('-') then begin
-                    if BLoans."Loan Principle Repayment" <= 0 then
-                        BLoans."Loan Principle Repayment" := BLoans.Repayment;
-                    if (Abs(BCreditLed.Amount)) > BLoans."Loan Principle Repayment" then begin
-                        Message('This member made a bulk payment of %1 against normal repayment of %2 on %3 to loan No %4.', (Abs(BCreditLed.Amount)), BLoans."Loan Principle Repayment", BCreditLed."Posting Date", BCreditLed."Loan No");
-                    end;
-                end;
+    // procedure LoanBulkClearence(MemberNo: code[20])
+    // var
+    //     myInt: Integer;
+    //     BLoans: Record loans;
+    //     BCreditLed: Record "Credit Ledger Entry";
+    //     generalSetup: Record "General Set-Up";
+    // begin
+    //     generalSetup.Get();
+    //     BLoans.reset;
+    //     BLoans.setrange("Member No.", MemberNo);
+    //     BLoans.SetRange(Posted, true);
+    //     if BLoans.find('-') then begin
+    //         repeat
+    //             BCreditLed.RESET;
+    //             BCreditLed.SetRange("Loan No", BLoans."Loan No.");
+    //             BCreditLed.SETRANGE("Transaction Type", BCreditLed."Transaction Type"::Repayment);
+    //             if Format(generalSetup."Boosting Maturity") = '' then
+    //                 BCreditLed.SetRange("Posting Date", CalcDate('-1M', Today), Today) else
+    //                 BCreditLed.SetRange("Posting Date", CalcDate(('-' + format(generalSetup."Boosting Maturity")), Today), Today);
+    //             BCreditLed.SetRange(Reversed, false);
+    //             IF BCreditLed.FIND('-') then begin
+    //                 if BLoans."Loan Principle Repayment" <= 0 then
+    //                     BLoans."Loan Principle Repayment" := BLoans.Repayment;
+    //                 if (Abs(BCreditLed.Amount)) > BLoans."Loan Principle Repayment" then begin
+    //                     Message('This member made a bulk payment of %1 against normal repayment of %2 on %3 to loan No %4.', (Abs(BCreditLed.Amount)), BLoans."Loan Principle Repayment", BCreditLed."Posting Date", BCreditLed."Loan No");
+    //                 end;
+    //             end;
 
-            until BLoans.next = 0;
-        end;
+    //         until BLoans.next = 0;
+    //     end;
 
-    end;
+    // end;
 
 }
