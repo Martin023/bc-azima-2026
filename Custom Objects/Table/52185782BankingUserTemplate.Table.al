@@ -197,7 +197,7 @@ table 52185782 "Banking User Template"
         }
         field(23; "Over Draft Batch"; Code[20])
         {
-            TableRelation = "Gen. Journal Batch".Name WHERE("Journal Template Name" = FIELD("Cashier Journal Template"));
+            TableRelation = "Gen. Journal Batch".Name WHERE("Journal Template Name" = FIELD("Over Draft Template"));
 
             trigger OnValidate()
             begin
@@ -408,7 +408,7 @@ table 52185782 "Banking User Template"
         }
         field(48; "Loan Recovery Batch"; Code[20])
         {
-            TableRelation = "Gen. Journal Batch".Name WHERE("Journal Template Name" = FIELD("Bills Template"));
+            TableRelation = "Gen. Journal Batch".Name WHERE("Journal Template Name" = FIELD("Loan Recovery Template"));
         }
         field(49; "Staff Welfare Template"; Code[20])
         {
