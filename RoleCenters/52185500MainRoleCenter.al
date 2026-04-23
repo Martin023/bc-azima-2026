@@ -4011,7 +4011,7 @@ page 52185500 "Main Role Center"
                             {
                                 Caption = 'HR Leave Periods';
                                 ApplicationArea = Basic, Suite;
-                                RunObject = Page "HR Leave Period List1";
+                                RunObject = Page "HR Leave Period List";
                             }
 
                         }

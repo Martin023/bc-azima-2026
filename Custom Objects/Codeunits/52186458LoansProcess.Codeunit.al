@@ -7140,24 +7140,24 @@ Codeunit 52186458 "Loans Process"
 
                         end;
                     end;
-                    if TopUp."Daily Interest" > 0 then begin
-                        if ProdFacTopup.Get(TopUp."Loan Type") then begin
-                            if ProdFacTopup."Loan Interest Account [G/L]" <> '' then begin
-                                //Interest Due
-                                LineNo := LineNo + 10000;
-                                AccType := Acctype::Credit;
-                                AccNo := TopUp."Loan Account";
-                                TransType := Transtype::"Interest due";
-                                BalAccType := Balacctype::"G/L Account";
-                                BalAccNo := ProdFacTopup."Loan Interest Account [G/L]";
-                                Amt := (TopUp."Daily Interest");
-                                JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AccType, LoanNo, 'Daily Interest Capitalized_' + LoanApps."Loan No.", Amt, AccNo, PDate, BalAccType,
-                                BalAccNo, LoanApps."Loan No.", Dim1, Dim2, TransType, TopUp."Loan Top Up", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-                                //Clears all the daily interest buffer
-                                ClearDailyInterest(TopUp."Loan Top Up");
-                            end;
-                        end;
-                    end;
+                // if TopUp."Daily Interest" > 0 then begin
+                //     if ProdFacTopup.Get(TopUp."Loan Type") then begin
+                //         if ProdFacTopup."Loan Interest Account [G/L]" <> '' then begin
+                //             //Interest Due
+                //             LineNo := LineNo + 10000;
+                //             AccType := Acctype::Credit;
+                //             AccNo := TopUp."Loan Account";
+                //             TransType := Transtype::"Interest due";
+                //             BalAccType := Balacctype::"G/L Account";
+                //             BalAccNo := ProdFacTopup."Loan Interest Account [G/L]";
+                //             Amt := (TopUp."Daily Interest");
+                //             JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AccType, LoanNo, 'Daily Interest Capitalized_' + LoanApps."Loan No.", Amt, AccNo, PDate, BalAccType,
+                //             BalAccNo, LoanApps."Loan No.", Dim1, Dim2, TransType, TopUp."Loan Top Up", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                //             //Clears all the daily interest buffer
+                //             ClearDailyInterest(TopUp."Loan Top Up");
+                //         end;
+                //     end;
+                // end;
                 until TopUp.Next = 0;
             end;
 

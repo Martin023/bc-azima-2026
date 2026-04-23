@@ -864,7 +864,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 if Loans."Total TopUp" > 0 then begin
 
                     //Pass loan clearance principle and interest
-
+                    TopUpComms := 0;
                     TopUp.RESET;
                     TopUp.SETRANGE(TopUp."Loan No.", Loans."Loan No.");
                     IF TopUp.FIND('-') THEN BEGIN
@@ -889,21 +889,22 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                                                 TopUp.Commision := PCharges."Charge Amount";
                                         //MESSAGE('Running Charge topup %1',TotalComputedCharges);
                                     end;
+                                    TopUpComms += TopUp.Commision;
                                 UNTIL PCharges.NEXT = 0;
                             END;
-                            TopUp.Modify();
+                            TopUp.Modify;
                         UNTIL TopUp.NEXT = 0;
                     end;
-                    TopUpComms := 0;
+
                     TopUp.Reset;
                     TopUp.SetRange("Loan No.", "Loan No.");
                     if TopUp.Findset() then begin
-                        TopUp.calcsums(Commision);
+                        // TopUp.calcsums(Commision);
                         TopUp.CalcSums("One Month Interest");
                         Topup.CalcSums("Principle Top Up");
                         Topup.CalcSums("Interest Top Up");
                         OneMonthInterest := TopUp."One Month Interest";
-                        TopUpComms := TopUp.Commision;
+
                         // PrincipleTopup := TopUp."Principle Top Up";
                         // InterestTopup := TopUp."Interest Top Up";
                         // Totaltopup := PrincipleTopup + InterestTopup;
@@ -966,13 +967,22 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 //exclude BGL and FGL
                 Loan.SetFilter("Loan Product Type", '<>BGL&<>FGL');
                 Loan.SetAutoCalcFields("Total Balance");
-                Loan.SetFilter("Outstanding Balance", '>%1', 0);
+                Loan.SetFilter("Total Balance", '>%1', 0);
                 if Loan.FindSet() then begin
                     repeat
                         LoanTopup.reset();
                         LoanTopup.SetRange("Loan No.", Loans."Loan No.");
                         LoanTopup.setrange("Loan Top Up", Loan."Loan No.");
-                        if LoanTopup.IsEmpty() or (LoanTopup."Total Top Up" < Loan."Total Balance") then begin
+                        if LoanTopup.FindFirst() then begin
+                            if (LoanTopup."Total Top Up" < Loan."Total Balance") then begin
+                                Message(Format(Loan."Loan No."));
+                                Message(format(LoanTopup."Total Top Up"));
+                                Message(Format(Loan."Total Balance"));
+                                TotalRepay += Loan.Repayment;
+                                TotalLoanBal += Loan."Total Balance";
+                            end;
+                        end
+                        else begin
                             TotalRepay += Loan.Repayment;
                             TotalLoanBal += Loan."Total Balance";
                         end;
@@ -1438,7 +1448,6 @@ Report 52185640 "Loan Appraisal Report-Salaried"
         STOAmount: Decimal;
         TotalLoanBal: Decimal;
         TotalRepay: Decimal;
-        LoansTopup: Record "Loans Top up";
         GlobalFunc: Codeunit "Global Functions";
         DisposableInc: Decimal;
         StandingOrderHeader: Record "Standing Order Header";

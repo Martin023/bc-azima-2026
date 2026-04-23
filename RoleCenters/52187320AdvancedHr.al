@@ -758,7 +758,7 @@ page 52187320 AdvancedHumanResources
                         {
                             Caption = 'HR Leave Periods';
                             ApplicationArea = Basic, Suite;
-                            RunObject = Page "HR Leave Period List1";
+                            RunObject = Page "HR Leave Period List";
                         }
 
                     }
@@ -1787,6 +1787,12 @@ page 52187320 AdvancedHumanResources
                     Caption = 'HR Leave Calendar';
                     ApplicationArea = Basic, Suite;
                     RunObject = page "HR Leave Calendar List";
+                }
+                action("Hr Leave Periods")
+                {
+                    Caption = 'HR Leave Periods';
+                    ApplicationArea = Basic, Suite;
+                    RunObject = Page "HR Leave Period List";
                 }
                 action("HR Lookup Values")
                 {
