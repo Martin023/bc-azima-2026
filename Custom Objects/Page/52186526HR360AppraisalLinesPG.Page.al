@@ -20,7 +20,6 @@ page 52186526 "HR 360 Appraisal Lines - PG"
                 field("Perfomance Goals and Targets"; Rec."Perfomance Goals and Targets")
                 {
                     ApplicationArea = Basic;
-                    MultiLine=true;
                 }
                 field("Unit of Measure"; Rec."Unit of Measure")
                 {
@@ -50,13 +49,13 @@ page 52186526 "HR 360 Appraisal Lines - PG"
                 {
                     ApplicationArea = Basic;
                 }
-                field("HOD Comments";Rec."HOD Comments")
+                field("HOD Comments"; Rec."HOD Comments")
                 {
-                    Caption='HOD Comments';
+                    Caption = 'HOD Comments';
                 }
-                 field("HRM Comments";Rec."HRM Comments")
+                field("HRM Comments"; Rec."HRM Comments")
                 {
-                    
+
                 }
             }
         }

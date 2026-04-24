@@ -291,7 +291,7 @@ page 52187320 AdvancedHumanResources
                         {
                             Caption = 'HR Training Needs';
                             ApplicationArea = Basic, Suite;
-                            RunObject = Page "HR Training Needs List1";
+                            RunObject = Page "HR Training Needs List";
                         }
                         action(HrTrainingApplications)
                         {
@@ -367,22 +367,22 @@ page 52187320 AdvancedHumanResources
                         }
 
                     }
-                    group(HrInternsMgt)
-                    {
-                        Caption = 'HR Interns Management';
-                        action(HrInterns)
-                        {
-                            Caption = 'HR Interns';
-                            ApplicationArea = Basic, Suite;
-                            RunObject = Page "HR Interns List";
-                        }
-                        action(HrInternsRequisitions)
-                        {
-                            Caption = 'HR Interns Requisitions';
-                            ApplicationArea = Basic, Suite;
-                            RunObject = Page "HR Intern Requisition List";
-                        }
-                    }
+                    // group(HrInternsMgt)
+                    // {
+                    //     Caption = 'HR Interns Management';
+                    //     action(HrInterns)
+                    //     {
+                    //         Caption = 'HR Interns';
+                    //         ApplicationArea = Basic, Suite;
+                    //         RunObject = Page "HR Interns List";
+                    //     }
+                    //     action(HrInternsRequisitions)
+                    //     {
+                    //         Caption = 'HR Interns Requisitions';
+                    //         ApplicationArea = Basic, Suite;
+                    //         RunObject = Page "HR Intern Requisition List";
+                    //     }
+                    // }
 
                 }
                 group("HR Disciplinary Management")
@@ -413,40 +413,8 @@ page 52187320 AdvancedHumanResources
                         ApplicationArea = Basic, Suite;
                         RunObject = page "HR Disciplinary Appeal List";
                     }
-                    action(HREmployeeGrievance)
-                    {
-                        Caption = 'HR Employee Grievance';
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "HR Employee Grievance List";
-                    }
-                    group(Takss)
-                    {
-                        Caption = 'Tasks';
-                        action(HrDiscCasesLst)
-                        {
-                            Caption = 'HR Disciplinary Cases list';
-                            ApplicationArea = Basic, Suite;
-                            RunObject = page "HR Disciplinary Cases List";
 
-                        }
-                    }
-                    group(RepAnalysis)
-                    {
-                        Caption = 'Reports and Analysis';
-                        action(HrDiscCasesList)
-                        {
-                            Caption = 'HR Disciplinary Cases list';
-                            ApplicationArea = Basic, Suite;
-                            RunObject = report "HR Disciplinary Cases List";
-                        }
-                        action(HrDiscCases)
-                        {
-                            Caption = 'HR Disciplinary Cases';
-                            ApplicationArea = Basic, Suite;
-                            RunObject = report "HR Disciplinary Cases";
-                        }
 
-                    }
                     group(Archves)
                     {
                         Caption = 'Archive';
@@ -1551,38 +1519,38 @@ page 52187320 AdvancedHumanResources
                         RunObject = page "HR Professional Bodies List";
                     }
                 }
-                group("HR Company Activities")
-                {
-                    Caption = 'HR Company Activities';
-                    action(CompanyActivitieswelfare)
-                    {
-                        Caption = 'Company Activities/ Welfare';
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "HR Company Activities List1";
-                    }
-                    group(RepAndAnalys)
-                    {
-                        Caption = 'Reports and Analysis';
-                        action(CompActivitiesWelface)
-                        {
-                            Caption = 'Company Activities/Welfare';
-                            ApplicationArea = Basic, Suite;
-                            RunObject = report "HR Company Activities";
-                        }
+                // group("HR Company Activities")
+                // {
+                //     Caption = 'HR Company Activities';
+                //     action(CompanyActivitieswelfare)
+                //     {
+                //         Caption = 'Company Activities/ Welfare';
+                //         ApplicationArea = Basic, Suite;
+                //         RunObject = page "HR Company Activities List1";
+                //     }
+                //     group(RepAndAnalys)
+                //     {
+                //         Caption = 'Reports and Analysis';
+                //         action(CompActivitiesWelface)
+                //         {
+                //             Caption = 'Company Activities/Welfare';
+                //             ApplicationArea = Basic, Suite;
+                //             RunObject = report "HR Company Activities";
+                //         }
 
-                    }
-                    group(Archv)
-                    {
-                        Caption = 'Archive';
-                        action(CompActivitiwelface)
-                        {
-                            Caption = 'Company Activities/Welfare closed activities';
-                            ApplicationArea = Basic, Suite;
-                            RunObject = page "HR Company Activities List Cl1";
-                        }
+                //     }
+                //     group(Archv)
+                //     {
+                //         Caption = 'Archive';
+                //         action(CompActivitiwelface)
+                //         {
+                //             Caption = 'Company Activities/Welfare closed activities';
+                //             ApplicationArea = Basic, Suite;
+                //             RunObject = page "HR Company Activities List Cl1";
+                //         }
 
-                    }
-                }
+                //     }
+                // }
                 group("HR Promotion Recommendation")
                 {
                     Caption = 'HR Promotion Recommendation';
@@ -1655,37 +1623,37 @@ page 52187320 AdvancedHumanResources
                     }
 
                 }
-                group("File Requests.")
-                {
-                    action("Request File")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Request File';
-                        RunObject = page "File Request List";
-                        RunPageView = where(Status = filter(open));
-                    }
-                    action("File Request")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Files Requested';
-                        RunObject = page "File Request List";
-                        RunPageView = where(Status = filter(requested));
-                    }
-                    action("Closed File Request")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Closed Files Requests.';
-                        RunObject = page "File Request List";
-                        RunPageView = where(Status = filter(closed));
-                    }
-                    action("File List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'File Tracker List';
-                        RunObject = page "File Tracker List";
-                        RunPageView = where(Status = filter(<> archived));
-                    }
-                }
+                // group("File Requests.")
+                // {
+                //     action("Request File")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Request File';
+                //         RunObject = page "File Request List";
+                //         RunPageView = where(Status = filter(open));
+                //     }
+                //     action("File Request")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Files Requested';
+                //         RunObject = page "File Request List";
+                //         RunPageView = where(Status = filter(requested));
+                //     }
+                //     action("Closed File Request")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Closed Files Requests.';
+                //         RunObject = page "File Request List";
+                //         RunPageView = where(Status = filter(closed));
+                //     }
+                //     action("File List")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'File Tracker List';
+                //         RunObject = page "File Tracker List";
+                //         RunPageView = where(Status = filter(<> archived));
+                //     }
+                // }
                 group("Alerts and Notifications")
                 {
                     Caption = 'SMS Alerts';
@@ -1831,12 +1799,12 @@ page 52187320 AdvancedHumanResources
                     ApplicationArea = Basic, Suite;
                     RunObject = page "Employee Groups";
                 }
-                action("Notifications")
-                {
+                // action("Notifications")
+                // {
 
-                    ApplicationArea = Basic, Suite;
-                    RunObject = page NotificationSetupSms;
-                }
+                //     ApplicationArea = Basic, Suite;
+                //     RunObject = page NotificationSetupSms;
+                // }
                 action("Disciplinary Actions")
                 {
 
@@ -1844,12 +1812,12 @@ page 52187320 AdvancedHumanResources
                     RunObject = page "HR Disciplinary Actions1";
 
                 }
-                action("Product Factory")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Product Setups';
-                    RunObject = page "Product Factory List";
-                }
+                // action("Product Factory")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Product Setups';
+                //     RunObject = page "Product Factory List";
+                // }
 
 
 
@@ -1857,29 +1825,29 @@ page 52187320 AdvancedHumanResources
             group(EmployeeSelfService)
             {
                 Caption = 'Employee Self Service';
-                group("Employee Fixed Assets")
-                {
-                    action("Employee Fixed Asset Transfer List")
-                    {
-                        ApplicationArea = FixedAssets;
-                        Caption = 'Fixed Assets Transfer List';
-                        RunObject = Page "Asset Transfer List";
-                        ToolTip = 'This module facilitates Transfer of FA location and responsible employee';
-                    }
-                    action("Employee Transferred Fixed Assets")
-                    {
-                        ApplicationArea = FixedAssets;
-                        Caption = 'Transferred Fixed Assets';
-                        RunObject = Page "Asset Transfer List Effected";
-                        ToolTip = 'View the list of fixed assets that have been transferred.';
-                    }
-                }
-                action(StaffWelfare)
-                {
-                    Caption = 'Staff Welfare Claim';
-                    ApplicationArea = Basic, Suite;
-                    RunObject = page "Staff Welfare List";
-                }
+                // group("Employee Fixed Assets")
+                // {
+                //     action("Employee Fixed Asset Transfer List")
+                //     {
+                //         ApplicationArea = FixedAssets;
+                //         Caption = 'Fixed Assets Transfer List';
+                //         RunObject = Page "Asset Transfer List";
+                //         ToolTip = 'This module facilitates Transfer of FA location and responsible employee';
+                //     }
+                //     action("Employee Transferred Fixed Assets")
+                //     {
+                //         ApplicationArea = FixedAssets;
+                //         Caption = 'Transferred Fixed Assets';
+                //         RunObject = Page "Asset Transfer List Effected";
+                //         ToolTip = 'View the list of fixed assets that have been transferred.';
+                //     }
+                // }
+                // action(StaffWelfare)
+                // {
+                //     Caption = 'Staff Welfare Claim';
+                //     ApplicationArea = Basic, Suite;
+                //     RunObject = page "Staff Welfare List";
+                // }
                 action(LeaveApplication1)
                 {
                     Caption = 'Employee Leave Application';
@@ -1918,12 +1886,12 @@ page 52187320 AdvancedHumanResources
                     Caption = 'Training Application';
                     RunObject = page "HR Training ApplicationList";
                 }
-                action("Training Evaluation")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Training Evaluation';
-                    RunObject = page "Training Evaluation";
-                }
+                // action("Training Evaluation")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Training Evaluation';
+                //     RunObject = page "Training Evaluation";
+                // }
                 action("Appraisal")
                 {
                     ApplicationArea = Basic, Suite;
@@ -1967,42 +1935,39 @@ page 52187320 AdvancedHumanResources
 
 
             }
+            // group("Contract Request")
+            // {
+            //     Caption = 'Contract Request';
+            //     action("Contract Requests")
+            //     {
+            //         ApplicationArea = Basic;
+            //         Caption = 'Open Contract Request';
+            //         RunObject = Page "Contract Request List";
+            //         RunPageLink = Status = CONST(Open);
+            //     }
+            //     action("Contract Requests Pending Approval")
+            //     {
+            //         ApplicationArea = Basic;
+            //         Caption = 'Contract Request - Pending Approval';
+            //         RunObject = Page "Contract Request List";
+            //         RunPageLink = Status = CONST(Pending);
+            //     }
+            //     action("Rejected Contract Requests")
+            //     {
+            //         ApplicationArea = Basic;
+            //         Caption = 'Rejected Contract Request';
+            //         RunObject = Page "Contract Request List";
+            //         RunPageLink = Status = CONST(Rejected);
+            //     }
+            //     action("Approved Contract Requests")
+            //     {
+            //         ApplicationArea = Basic;
+            //         Caption = 'Approved Contract Requests';
+            //         RunObject = Page "Contract Request List";
+            //         RunPageLink = Status = CONST(Approved);
+            //     }
 
-
-
-            group("Contract Request")
-            {
-                Caption = 'Contract Request';
-                action("Contract Requests")
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Open Contract Request';
-                    RunObject = Page "Contract Request List";
-                    RunPageLink = Status = CONST(Open);
-                }
-                action("Contract Requests Pending Approval")
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Contract Request - Pending Approval';
-                    RunObject = Page "Contract Request List";
-                    RunPageLink = Status = CONST(Pending);
-                }
-                action("Rejected Contract Requests")
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Rejected Contract Request';
-                    RunObject = Page "Contract Request List";
-                    RunPageLink = Status = CONST(Rejected);
-                }
-                action("Approved Contract Requests")
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Approved Contract Requests';
-                    RunObject = Page "Contract Request List";
-                    RunPageLink = Status = CONST(Approved);
-                }
-
-            }
+            // }
         }
 
         // area(Embedding)

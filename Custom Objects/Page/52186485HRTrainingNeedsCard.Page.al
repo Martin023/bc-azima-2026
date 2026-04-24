@@ -173,44 +173,44 @@ page 52186485 "HR Training Needs Card"
                     }
                 }
             }
-            group(Bonding)
-            {
-                Caption = 'Bonding';
-                //Editable = FieldEditable;
-                field("Employee Sponsorship"; Rec."Employee Sponsorship")
-                {
-                    Editable = InvTcode;
+            // group(Bonding)
+            // {
+            //     Caption = 'Bonding';
+            //     //Editable = FieldEditable;
+            //     field("Employee Sponsorship"; Rec."Employee Sponsorship")
+            //     {
+            //         Editable = InvTcode;
 
 
-                }
-                field("Bondage Required?"; Rec."Bondage Required?")
-                {
-                    ApplicationArea = Basic;
-                    Editable = InvTcode;
+            //     }
+            //     field("Bondage Required?"; Rec."Bondage Required?")
+            //     {
+            //         ApplicationArea = Basic;
+            //         Editable = InvTcode;
 
-                }
-                field("Bondage Start Date"; Rec."Bondage Start Date")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Bondage Duration"; Rec."Bondage Duration")
-                {
-                    ApplicationArea = Basic;
+            //     }
+            //     field("Bondage Start Date"; Rec."Bondage Start Date")
+            //     {
+            //         ApplicationArea = Basic;
+            //     }
+            //     field("Bondage Duration"; Rec."Bondage Duration")
+            //     {
+            //         ApplicationArea = Basic;
 
 
-                }
-                field("Bondage Release Date"; Rec."Bondage Release Date")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Allow Early Exit if Bonded?"; Rec."Allow Early Exit if Bonded?")
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Allow Early Exit with Conditions? If its a Bonded Training';
-                    Editable = InvTcode;
+            //     }
+            //     field("Bondage Release Date"; Rec."Bondage Release Date")
+            //     {
+            //         ApplicationArea = Basic;
+            //     }
+            //     field("Allow Early Exit if Bonded?"; Rec."Allow Early Exit if Bonded?")
+            //     {
+            //         ApplicationArea = Basic;
+            //         Caption = 'Allow Early Exit with Conditions? If its a Bonded Training';
+            //         Editable = InvTcode;
 
-                }
-            }
+            //     }
+            // }
         }
         area(factboxes)
         {
@@ -248,16 +248,16 @@ page 52186485 "HR Training Needs Card"
                     RunObject = Page "HR Training Cost";
                     RunPageLink = "Training ID" = FIELD(Code);
                 }
-                action("Training Bonding Conditions")
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Training Bonding Conditions';
-                    Image = BOM;
-                    Promoted = true;
-                    PromotedCategory = Category5;
-                    RunObject = Page "HR Training Bonding Cond. List";
-                    RunPageLink = "Training Bonding Code" = FIELD(Code);
-                }
+                // action("Training Bonding Conditions")
+                // {
+                //     ApplicationArea = Basic;
+                //     Caption = 'Training Bonding Conditions';
+                //     Image = BOM;
+                //     Promoted = true;
+                //     PromotedCategory = Category5;
+                //     RunObject = Page "HR Training Bonding Cond. List";
+                //     RunPageLink = "Training Bonding Code" = FIELD(Code);
+                // }
                 action(SendApprovalRequest)
                 {
                     ApplicationArea = Basic;
@@ -271,10 +271,6 @@ page 52186485 "HR Training Needs Card"
                     var
                         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                     begin
-                        //TESTFIELD("No of Posts");
-                        /*TESTFIELD("Document No.");
-                        TESTFIELD(Description);
-                        TESTFIELD("Interest Due Date");*/
                         VarVariant := Rec;
                         if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then
                             CustomApprovals.OnSendDocForApproval(VarVariant);

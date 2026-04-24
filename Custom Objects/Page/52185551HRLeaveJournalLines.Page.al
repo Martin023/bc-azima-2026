@@ -100,9 +100,9 @@ page 52185551 "HR Leave Journal Lines"
                 {
 
                 }
-                field("Leave Type Enum";Rec."Leave Type Enum")
+                field("Leave Type Enum"; Rec."Leave Type Enum")
                 {
-                    
+
                 }
                 field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
@@ -147,8 +147,6 @@ page 52185551 "HR Leave Journal Lines"
                         CODEUNIT.Run(CODEUNIT::"HR Leave Jnl.-Post", Rec);
                         CurrentJnlBatchName := Rec.GetRangeMax("Journal Batch Name");
                         CurrPage.Update(false);
-
-
                     end;
 
                 }

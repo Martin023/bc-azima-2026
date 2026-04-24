@@ -31,7 +31,7 @@ page 52185555 "HR Leave Application Card"
                 field("Application Date"; Rec."Application Date")
                 {
                     ApplicationArea = Basic;
-                    Editable = true;
+                    Editable = Inst;
                     ShowMandatory = true;
                 }
                 field("Applicant Staff No."; Rec."Applicant Staff No.")
@@ -61,6 +61,7 @@ page 52185555 "HR Leave Application Card"
                     ApplicationArea = Basic;
                     Importance = Promoted;
                     ShowMandatory = true;
+                    Editable = Inst;
                     //Editable=Inst;
                     trigger OnValidate()
                     Var
@@ -82,7 +83,6 @@ page 52185555 "HR Leave Application Card"
                         // end
                         // else
                         GetLeaveStats(Rec."Leave Type");
-
                     end;
                 }
                 field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
@@ -128,17 +128,18 @@ page 52185555 "HR Leave Application Card"
 
 
                 // }
-                field(RemainingDays; RemainingDays)
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
+                // field(RemainingDays; RemainingDays)
+                // {
+                //     ApplicationArea = Basic;
+                //     Editable = false;
+                // }
                 field("Days Applied"; Rec."Days Applied")
                 {
 
                     ApplicationArea = Basic;
                     Importance = Promoted;
                     ShowMandatory = true;
+                    Editable = Inst;
                     trigger OnValidate()
                     begin
                         //if Rec."Days Applied" > Dleft then
@@ -151,7 +152,7 @@ page 52185555 "HR Leave Application Card"
                     ApplicationArea = Basic;
                     Importance = Promoted;
                     ShowMandatory = true;
-                    Editable = true;
+                    Editable = Inst;
 
                     trigger OnValidate()
                     begin
@@ -160,12 +161,13 @@ page 52185555 "HR Leave Application Card"
                         //check for overlap
 
 
-                        //END;
+                        //END;`
                     end;
                 }
                 field("End Date"; Rec."End Date")
                 {
                     ApplicationArea = Basic;
+                    Editable = Inst;
                 }
                 field("Return Date"; Rec."Return Date")
                 {
@@ -176,12 +178,18 @@ page 52185555 "HR Leave Application Card"
                 {
                     ApplicationArea = Basic;
                 }
+
+                field("Total Leave Days"; Rec."Total Leave Days")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
                 field("Allocated Leave Days"; Rec."Allocated Leave Days")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Total Leave Days"; Rec."Total Leave Days")
+                field("Days Reimbursed"; Rec."Days Reimbursed")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
@@ -820,21 +828,7 @@ page 52185555 "HR Leave Application Card"
         // CustomApprovals: Codeunit "Custom Approvals Codeunit";
         VarVariant: Variant;
         HREmp: Record "HR Employees";
-        EmpJobDesc: Text[50];
-        HRJobs: Record "HR Jobs";
-        SupervisorName: Text[60];
-        //SMTP: Codeunit "SMTP Mail";
-        URL: Text[500];
-        dAlloc: Decimal;
-        dEarnd: Decimal;
-        dTaken: Decimal;
-        dLeft: Decimal;
-        cReimbsd: Decimal;
-        cPerDay: Decimal;
-        cbf: Decimal;
-        HRSetup: Record "HR Setup";
-        EmpDimension_1: Text[60];
-        EmpDimension_2: Text[60];
+
         HRLeaveApp: Record "HR Leave Application";
         HRLeaveLedgerEntries: Record "HR Leave Ledger Entries";
         EmpName: Text[70];
@@ -895,16 +889,8 @@ page 52185555 "HR Leave Application Card"
 
 
     //[Scope('OnPrem')]
-    procedure GetLeaveStats(LeaveType: Text[50]): decimal
+    procedure GetLeaveStats(LeaveType: Text[50])
     begin
-
-        dAlloc := 0;
-        dEarnd := 0;
-        dTaken := 0;
-        dLeft := 0;
-        cReimbsd := 0;
-        cPerDay := 0;
-        cbf := 0;
         HREmp.Reset;
         if HREmp.Get(Rec."Applicant Staff No.") then begin
 
@@ -915,46 +901,38 @@ page 52185555 "HR Leave Application Card"
             //Filter by Leave Period from HR Setup
             HRLeaveLedgerEntries.Reset;
             HRLeaveLedgerEntries.SetRange(HRLeaveLedgerEntries."Staff No.", Rec."Applicant Staff No.");
-            HRLeaveLedgerEntries.SetFilter(HRLeaveLedgerEntries."Leave Entry Type", '%1|%2', HRLeaveLedgerEntries."Leave Entry Type"::Reimbursement, HRLeaveLedgerEntries."Leave Entry Type"::Positive);
+            HRLeaveLedgerEntries.setrange(HRLeaveLedgerEntries."Leave Entry Type", HRLeaveLedgerEntries."Leave Entry Type"::Reimbursement);
             HRLeaveLedgerEntries.SetRange(HRLeaveLedgerEntries."Leave Calendar Code", HRLeaveCal."Calendar Code");
             HRLeaveLedgerEntries.SetRange(HRLeaveLedgerEntries."Leave Type", LeaveType);
-            if HRLeaveLedgerEntries.Find('-') then begin
-                dAlloc := 0;
-                repeat
-                    dAlloc := HRLeaveLedgerEntries."No. of days" + dAlloc;
-                until HRLeaveLedgerEntries.Next = 0;
-            end;
-
+            HRLeaveLedgerEntries.CalcSums("No. of days");
+            Rec."Days Reimbursed" := HRLeaveLedgerEntries."No. of days";
 
             HRLeaveLedgerEntries.Reset;
             HRLeaveLedgerEntries.SetRange(HRLeaveLedgerEntries."Staff No.", Rec."Applicant Staff No.");
             HRLeaveLedgerEntries.SetRange("Leave Entry Type", HRLeaveLedgerEntries."Leave Entry Type"::Negative);
             HRLeaveLedgerEntries.SetRange(HRLeaveLedgerEntries."Leave Calendar Code", HRLeaveCal."Calendar Code");
             HRLeaveLedgerEntries.SetRange(HRLeaveLedgerEntries."Leave Type", LeaveType);
-            if HRLeaveLedgerEntries.Find('-') then begin
-                dTaken := 0;
-                repeat
-                    dTaken := HRLeaveLedgerEntries."No. of days" + dTaken;
-                until HRLeaveLedgerEntries.Next = 0;
-            end;
+            HRLeaveLedgerEntries.CalcSums("No. of days");
+            Rec."Total Leave Taken" := HRLeaveLedgerEntries."No. of days";
 
-            //Leave Balance
-            dEarnd := dAlloc;// + dTaken;
-            dLeft := dAlloc + dTaken;
+            HRLeaveLedgerEntries.Reset;
+            HRLeaveLedgerEntries.SetRange(HRLeaveLedgerEntries."Staff No.", Rec."Applicant Staff No.");
+            HRLeaveLedgerEntries.SetRange("Leave Entry Type", HRLeaveLedgerEntries."Leave Entry Type"::Positive);
+            HRLeaveLedgerEntries.SetRange(HRLeaveLedgerEntries."Leave Calendar Code", HRLeaveCal."Calendar Code");
+            HRLeaveLedgerEntries.SetRange(HRLeaveLedgerEntries."Leave Type", LeaveType);
+            HRLeaveLedgerEntries.CalcSums("No. of days");
+            Rec."Allocated Leave Days" := HRLeaveLedgerEntries."No. of days";
 
-            //Reimbursed Leave Days
-            cbf := HREmp."Reimbursed Leave Days";
-            cReimbsd := HREmp."Cash - Leave Earned";
-            cPerDay := HREmp."Cash per Leave Day";
+            HRLeaveLedgerEntries.Reset;
+            HRLeaveLedgerEntries.SetRange(HRLeaveLedgerEntries."Staff No.", Rec."Applicant Staff No.");
+            HRLeaveLedgerEntries.SetRange(HRLeaveLedgerEntries."Leave Calendar Code", HRLeaveCal."Calendar Code");
+            HRLeaveLedgerEntries.SetRange(HRLeaveLedgerEntries."Leave Type", LeaveType);
+            HRLeaveLedgerEntries.CalcSums("No. of days");
+            Rec."Leave Days Balance" := HRLeaveLedgerEntries."No. of days";
 
-            Rec."Allocated Leave Days" := dAlloc;
-            Rec."Total Leave Days" := dEarnd;
-            Rec."Total Leave Taken" := -dTaken;
-            Rec."Leave Days Balance" := dLeft;
+            Rec."Total Leave Days" := rec."Allocated Leave Days" + rec."Days Reimbursed";
+
             Rec.Modify(True);
-
-            exit(dLeft);
-
         end;
     end;
 

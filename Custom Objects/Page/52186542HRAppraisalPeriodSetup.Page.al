@@ -431,16 +431,16 @@ page 52186542 "HR Appraisal Period Setup"
                 HrAppraisal.init;
                 HrAppraisal."Appraisal No" := '';
                 HrAppraisal."Employee No" := HREmp."No.";
-                HrAppraisal."User ID":=HREmp."User ID";
-                HrAppraisal."Supervisor Employee No":=HREmp."Supervisor Code";
-                HrAppraisal."Supervisor Name":=HREmp."Supervisor Name";
+                HrAppraisal."User ID" := HREmp."User ID";
+                HrAppraisal."Supervisor Employee No" := HREmp."Supervisor Code";
+                HrAppraisal."Supervisor Name" := HREmp."Supervisor Name";
                 HrAppraisal."Employee Name" := HREmp.FullName;
                 HrAppraisal."Supervisor Employee No" := HREmp."Supervisor Code";
                 HrAppraisal."Supervisor Name" := HREmp."Supervisor Name";
                 HrAppraisal.Department := HREmp."Global Dimension 2 Code";
                 //HrAppraisal."Appraisal Period":=HRAppPeriod."Appraisal Period"
                 HrAppraisal."Appraisal Quarters" := HRAppPeriod."Appraisal Type";
-                 HrAppraisal.Active:=true;
+                HrAppraisal.Active := true;
                 HrAppraisal.Insert(true);
             until HREmp.next = 0;
 
@@ -466,13 +466,13 @@ page 52186542 "HR Appraisal Period Setup"
                 HrAppraisalQuarter1."Appraisal No" := '';
                 HrAppraisalQuarter1."Employee No" := HrAppraisal."Employee No";
                 HrAppraisalQuarter1."Employee Name" := HrAppraisal."Employee Name";
-                HrAppraisalQuarter1."User ID":=HrAppraisal."User ID";
+                HrAppraisalQuarter1."User ID" := HrAppraisal."User ID";
                 HrAppraisalQuarter1."Supervisor Employee No" := HrAppraisal."Supervisor Employee No";
                 HrAppraisalQuarter1."Supervisor Name" := HrAppraisal."Supervisor Name";
                 HrAppraisalQuarter1.Department := HrAppraisal.Department;
                 //HrAppraisal."Appraisal Period":=HRAppPeriod."Appraisal Period"
                 HrAppraisalQuarter1."Appraisal Quarters" := NewPeriod;
-                HrAppraisalQuarter1.Active:=true;
+                HrAppraisalQuarter1.Active := true;
 
                 HrAppraisalQuarter1.Insert(true);
                 intEntryNo -= 1;
@@ -501,7 +501,7 @@ page 52186542 "HR Appraisal Period Setup"
         ChangePermission.Reset;
         ChangePermission.SetRange("User ID", UserId);
         ChangePermission.SetRange("Appraisal Setup", true);
-        ChangePermission.SetRange("Function Extended", ChangePermission."Function Extended"::"Appraisal Setup");
+        //ChangePermission.SetRange("Function Extended", ChangePermission."Function Extended"::"Appraisal Setup");
         if not ChangePermission.Find('-') then
             Error(ErrorOnRestricViewTxt, UserId);
     end;

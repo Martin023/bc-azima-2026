@@ -28,11 +28,6 @@ page 52185631 "HR Employee Card"
 
                     end;
                 }
-                field("Member No."; Rec."Member No.")
-                {
-                    ApplicationArea = Basic;
-                    //Editable = false;
-                }
                 field("First Name"; Rec."First Name")
                 {
                     ApplicationArea = Basic;
@@ -681,11 +676,10 @@ page 52185631 "HR Employee Card"
                     ShowMandatory = true;
                     Editable = WtaxCode;
                 }
-                // field("Member No."; Rec."Member No.")
-                // {
-                //     ApplicationArea = Basic;
-                //     //Editable = false;
-                // }
+                field("Member No."; Rec."Member No.")
+                {
+                    ApplicationArea = Basic;
+                }
                 field("Member Status"; Rec."Member Status")
                 {
 
@@ -721,37 +715,12 @@ page 52185631 "HR Employee Card"
                     Editable = false;
                     Importance = Promoted;
                 }
-                field("Leave Balance"; Rec."Leave Balance")
-                {
-                    ApplicationArea = Basic;
-                    Enabled = false;
-                    Importance = Promoted;
-                }
-                field("Acrued Leave Days"; Rec."Acrued Leave Days")
-                {
-                    ApplicationArea = Basic;
-                    Importance = Promoted;
-                    Editable = pType;
-                }
-                field("Monthly Leave Days"; Rec."Monthly Leave Days")
-                {
-                    Editable = false;
 
-                }
                 field("Available Leave Days"; Rec."Available Leave Days")
                 {
                     Editable = False;
                 }
-                field("Cash - Leave Earned"; Rec."Cash - Leave Earned")
-                {
-                    ApplicationArea = Basic;
-                    Editable = Freq;
-                }
-                field("Cash per Leave Day"; Rec."Cash per Leave Day")
-                {
-                    ApplicationArea = Basic;
-                    Editable = Intrate;
-                }
+
             }
             group("Separation Details")
             {
@@ -857,14 +826,7 @@ page 52185631 "HR Employee Card"
                 Caption = 'Approved Images';
                 SubPageLink = "Member No" = FIELD("Member No.");
             }
-            part("Attached Documents"; "Doc. Attachment List Factbox")
-            {
-                ApplicationArea = basic;
-                Caption = 'Attachments';
-                SubPageLink = "Table ID" = const(52185631),
-                "No." = field("No.");
 
-            }
             systempart(Control1102755002; Outlook)
             {
                 ApplicationArea = Basic;
@@ -1256,10 +1218,8 @@ page 52185631 "HR Employee Card"
                         end;
 
                         VarVariant := Rec;
-                        if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then begin
+                        if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then
                             CustomApprovals.OnSendDocForApproval(VarVariant);
-                            CurrPage.Close();
-                        end;
 
                     end;
                 }
@@ -1804,7 +1764,6 @@ page 52185631 "HR Employee Card"
             Dimension := False;
             MKS := False;
         end;
-
 
     end;
 

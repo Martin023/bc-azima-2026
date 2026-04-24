@@ -1,7 +1,6 @@
 table 52185650 "HR Employees"
 {
-    // Caption = 'HR Employees';
-    // DataCaptionFields = "No.", "Full Name", "Job Title";
+
     DrillDownPageId = "HR Employee List - Active";
     LookupPageId = "HR Employee List - Active";
 
@@ -122,19 +121,14 @@ table 52185650 "HR Employees"
         }
         field(21; "ID Number"; Integer)
         {
-            trigger OnValidate()
-            begin
 
-            end;
         }
 
         field(22; "Union Code"; Code[10])
         {
             TableRelation = Union;
         }
-        field(23; "UIF Number"; Text[30])
-        {
-        }
+
         field(24; Gender; Option)
         {
             OptionMembers = " ",Male,Female;
@@ -143,10 +137,7 @@ table 52185650 "HR Employees"
         {
             TableRelation = "Country/Region";
         }
-        field(28; "Statistics Group Code"; Code[10])
-        {
-            TableRelation = "Employee Statistics Group";
-        }
+
         field(31; Status; Option)
         {
             OptionMembers = New,"Pending Approval",Active,InActive,Suspended,Probation,interdicted,Rejected;
@@ -197,10 +188,7 @@ table 52185650 "HR Employees"
         }
         field(36; "Department Code"; Code[20])
         {
-            trigger OnValidate()
-            begin
 
-            end;
         }
         field(37; Office; Code[20])
         {
@@ -208,14 +196,8 @@ table 52185650 "HR Employees"
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2),
                                                           "Dimension Value Type" = CONST(Standard));
         }
-        field(38; "Resource No."; Code[20])
-        {
-            TableRelation = Resource;
-        }
-        field(39; Comment; Boolean)
-        {
-            Editable = false;
-        }
+
+
         field(40; "Last Date Modified"; Date)
         {
             Editable = false;
@@ -229,16 +211,8 @@ table 52185650 "HR Employees"
             FieldClass = FlowFilter;
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(3));
         }
-        field(43; "Office Filter"; Code[20])
-        {
-            FieldClass = FlowFilter;
-            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2));
-        }
-        field(47; "Employee No. Filter"; Code[20])
-        {
-            FieldClass = FlowFilter;
-            TableRelation = Employee;
-        }
+
+
         field(49; "Fax Number"; Text[30])
         {
         }
@@ -271,48 +245,6 @@ table 52185650 "HR Employees"
 
             trigger OnValidate()
             begin
-                /*
-                    IF ((Position <> xRec.Position) AND (xRec.Position <> '')) THEN BEGIN
-                      Jobs.RESET;
-                      Jobs.SETRANGE(Jobs."Job ID",Position);
-                      IF Jobs.FIND('-') THEN BEGIN
-                          Payroll.RESET;
-                          Payroll.SETRANGE(Payroll.Code,"No.");
-                          IF Payroll.FIND('-') THEN BEGIN
-                              Payroll."Salary Scheme Category":=Jobs.Category;
-                              Payroll."Salary Steps":=Jobs.Grade;
-                              Payroll.VALIDATE(Payroll."Salary Steps");
-                              Payroll.MODIFY;
-                          END
-                      END
-
-
-
-                        {
-                      CareerEvent.SetMessage('Job Title Changed');
-                     CareerEvent.RUNMODAL;
-                     OK:= CareerEvent.ReturnResult;
-                      IF OK THEN BEGIN
-                         CareerHistory.INIT;
-                         IF NOT CareerHistory.FIND('-') THEN
-                          CareerHistory."Line No.":=1
-                        ELSE BEGIN
-                          CareerHistory.FIND('+');
-                          CareerHistory."Line No.":=CareerHistory."Line No."+1;
-                        END;
-
-                         CareerHistory."Employee No.":= "No.";
-                         CareerHistory."Date Of Event":= WORKDATE;
-                         CareerHistory."Career Event":= 'Job Title Changed';
-                         CareerHistory."Job Title":= "Position Title";
-                         CareerHistory."Employee First Name":= "Known As";
-                         CareerHistory."Employee Last Name":= "Last Name";
-                         CareerHistory.INSERT;
-                      END;
-                      }
-
-                  END;
-               */
 
             end;
         }
@@ -339,8 +271,6 @@ table 52185650 "HR Employees"
             trigger onvalidate()
 
             begin
-                // if rec."Contract End Date" = today then begin
-
 
             end;
         }
@@ -353,9 +283,7 @@ table 52185650 "HR Employees"
         field(62; "Shift Worker?"; Boolean)
         {
         }
-        field(63; "Contracted Hours"; Decimal)
-        {
-        }
+
         field(64; "Pay Period"; Option)
         {
             OptionMembers = Weekly,"2 Weekly","4 Weekly",Monthly," ";
@@ -1211,10 +1139,11 @@ table 52185650 "HR Employees"
         }
         field(2004; "Total Leave Taken"; Decimal)
         {
+            Caption = 'Annual Leave Taken.';
             CalcFormula = Sum("HR Leave Ledger Entries"."No. of days" WHERE("Staff No." = FIELD("No."),
                                                                              "Posting Date" = FIELD("Date Filter"),
                                                                              "Leave Entry Type" = CONST(Negative),
-                                                                             Closed = CONST(false))
+                                                                             Closed = CONST(false), "Is For Annual Leave" = const(True))
                                                                               );
             DecimalPlaces = 2 : 2;
             FieldClass = FlowField;
@@ -1224,6 +1153,10 @@ table 52185650 "HR Employees"
         {
             DecimalPlaces = 2 : 2;
             Editable = false;
+            CalcFormula = Sum("HR Leave Ledger Entries"."No. of days" WHERE("Staff No." = FIELD("No."),
+                                                                             "Posting Date" = FIELD("Date Filter"),
+                                                                             Closed = CONST(false), "Is For Annual Leave" = const(True)));
+            FieldClass = FlowField;
         }
         field(2007; "Cash - Leave Earned"; Decimal)
         {
@@ -1234,14 +1167,14 @@ table 52185650 "HR Employees"
             CalcFormula = Sum("HR Leave Ledger Entries"."No. of days" WHERE("Staff No." = FIELD("No."),
                                                                              "Posting Date" = FIELD("Date Filter"),
                                                                              "Leave Entry Type" = CONST(Reimbursement),
-                                                                             Closed = CONST(false)));
+                                                                             Closed = CONST(false), "Is For Annual Leave" = const(True)));
             DecimalPlaces = 2 : 2;
             FieldClass = FlowField;
 
-            trigger OnValidate()
-            begin
-                Validate("Allocated Leave Days");
-            end;
+            // trigger OnValidate()
+            // begin
+            //     Validate("Allocated Leave Days");
+            // end;
         }
         field(2009; "Cash per Leave Day"; Decimal)
         {
@@ -1251,8 +1184,8 @@ table 52185650 "HR Employees"
         {
             CalcFormula = Sum("HR Leave Ledger Entries"."No. of days" WHERE("Staff No." = FIELD("No."),
                                                                              "Posting Date" = FIELD("Date Filter"),
-                                                                             "Leave Entry Type" = FILTER(Positive | Negative),
-                                                                             Closed = CONST(false)));
+                                                                             "Leave Entry Type" = FILTER(Positive),
+                                                                             Closed = CONST(false), "Is For Annual Leave" = const(True)));
             Editable = false;
             FieldClass = FlowField;
 
@@ -1299,6 +1232,7 @@ table 52185650 "HR Employees"
         }
         field(3971; "Annual Leave Account"; Decimal)
         {
+            Caption = 'Total Annual Leave Days';
             CalcFormula = Sum("HR Leave Ledger Entries"."No. of days" WHERE(//"Leave Type" = FILTER('LTY06' | 'LTY01' | 'LTY02'),
                                                                              "Is For Annual Leave" = const(True),
                                                                              "Staff No." = FIELD("No."),
@@ -1800,6 +1734,12 @@ table 52185650 "HR Employees"
         }
         field(39003968; "Available Leave Days"; Decimal)
         {
+            CalcFormula = Sum("HR Leave Ledger Entries"."No. of days" WHERE("Staff No." = FIELD("No."),
+                                                                             "Posting Date" = FIELD("Date Filter"),
+                                                                             Closed = CONST(false), "Is For Annual Leave" = const(True))
+                                                                              );
+            DecimalPlaces = 2 : 2;
+            FieldClass = FlowField;
 
         }
         field(39003969; "Member Status"; enum "Member Status")
@@ -1839,12 +1779,10 @@ table 52185650 "HR Employees"
     trigger OnInsert()
     begin
 
-
         if "No." = '' then begin
             HrSetup.Get;
             HrSetup.TestField("Employee Nos.");
-            "No." := NoSeriesMgt.GetNextNo(HrSetup."Employee Nos.", WorkDate(), true);
-            // NoSeriesMgt.InitSeries(HrSetup."Employee Nos.", xRec."No. Series", 0D, "No.", "No. Series");
+            NoSeriesMgt.GetNextNo(HrSetup."Employee Nos.", Today, true);
         end;
     end;
 
@@ -1877,18 +1815,8 @@ table 52185650 "HR Employees"
         Res: Record Resource;
         PostCode: Record "Post Code";
         SalespersonPurchaser: Record "Salesperson/Purchaser";
-        // NoSeriesMgt: Codeunit NoSeriesManagement;
-        NoSeriesMgt: Codeunit "No. Series";
-        OK: Boolean;
-        User: Record "User Setup";
-        ERROR1: Label 'Employee Career History Starting Information already exist.';
-        MSG1: Label 'Employee Career History Starting Information successfully created.';
-        ReasonDiaglog: Dialog;
-        EmpQualification: Record "Employee Qualification";
-        PayStartDate: Date;
-        PayPeriodText: Text[30];
-        ToD: Date;
-        CurrentMonth: Date;
+        NoSeriesMgt: Codeunit "No. Series - Batch";
+   
         HrSetup: Record "HR Setup";
         SalCard: Record "PR Salary Card";
         PRPayrollPeriod: Record "PR Payroll Periods";
@@ -1929,27 +1857,6 @@ table 52185650 "HR Employees"
         EndMonth: date;
     // Smtp: Codeunit "SMTP Mail";
 
-    // [Scope('OnPrem')]
-    procedure AssistEdit(): Boolean
-    begin
-        // GetHRSetup;
-        HrSetup.TestField("Employee Nos.");
-        if Rec."No. Series" = '' then
-            Rec."No. Series" := HrSetup."Employee Nos.";
-
-        if Rec."No. Series" <> '' then begin
-            Rec."No." := NoSeriesMgt.GetNextNo(
-                Rec."No. Series",
-                WorkDate(),
-                true
-            );
-            exit(true);
-        end;
-        // if NoSeriesMgt.SelectSeries(HrSetup."Employee Nos.", xRec."No. Series", "No. Series") then begin
-        //     NoSeriesMgt.SetSeries("No.");
-        //     exit(true);
-        // end;
-    end;
 
     // [Scope('OnPrem')]
     procedure FullName(): Text[100]
