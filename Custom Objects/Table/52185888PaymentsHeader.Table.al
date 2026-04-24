@@ -143,12 +143,15 @@ table 52185888 "Payments Header"
             Description = 'Stores the name of the paying bank account in the database';
             TableRelation = IF ("Payment Type" = FILTER(<> "Petty Cash")) "Bank Account"."No." WHERE("Currency Code" = FIELD("Currency Code"))
             ELSE
-            IF ("Payment Type" = CONST("Petty Cash")) "Bank Account"."No." WHERE("Bank Type" = CONST(Cash)) //"Currency Code" = FIELD("Currency Code"),
+            IF ("Payment Type" = CONST("Petty Cash")) "Bank Account"."No." WHERE("Bank Type" = filter(Cash | Cashier)) //"Currency Code" = FIELD("Currency Code"),
             else
             if ("Pay Mode" = CONST(Cheque)) "Bank Account"."No." WHERE("Bank Type" = CONST(Normal));
 
             trigger OnValidate()
+            var
+                BankingUser: record "Banking User Template";
             begin
+
                 BankAcc.Reset;
                 BankAcc.SetRange("No.", rec."Paying Bank Account");
                 if BankAcc.Find('-') then
@@ -158,10 +161,15 @@ table 52185888 "Payments Header"
                 BankAcc.Reset;
                 "Bank Name" := '';
                 if BankAcc.Get("Paying Bank Account") then begin
-                    if "Pay Mode" = "Pay Mode"::Cash then begin
-                        if BankAcc."Bank Type" <> BankAcc."Bank Type"::Cash then
-                            Error('This Payment can only be made against Banks Handling Cash');
+                    // if "Pay Mode" = "Pay Mode"::Cash then begin
+                    // if BankAcc."Bank Type" <> BankAcc."Bank Type"::Cash then
+                    //     Error('This Payment can only be made against Banks Handling Cash');
+                    if BankAcc."Bank Type" = BankAcc."Bank Type"::Cashier then begin
+                        BankingUser.get(UserId);
+                        if BankingUser."Default  Bank" <> "Paying Bank Account" then
+                            Error('You cannot pick someone else''s till for this payment!');
                     end;
+                    // end;
                     "Bank Name" := BankAcc.Name;
                     //"Currency Code":=BankAcc."Currency Code";
                     // VALIDATE("Currency Code");
@@ -687,7 +695,7 @@ table 52185888 "Payments Header"
             GenLedgerSetup.Get;
             if "Payment Type" = "Payment Type"::Normal then begin
                 GenLedgerSetup.TestField(GenLedgerSetup."Normal Payments No");
-                   "No." := NoSeriesMgt.GetNextNo(GenLedgerSetup."Normal Payments No");
+                "No." := NoSeriesMgt.GetNextNo(GenLedgerSetup."Normal Payments No");
                 // NoSeriesMgt.InitSeries(GenLedgerSetup."Normal Payments No", xRec."No. Series", 0D, "No.", "No. Series");
             end
 
