@@ -196,29 +196,29 @@ page 52186488 "HR Training Application Header"
 
                         if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then
                             CustomApprovals.OnSendDocForApproval(VarVariant);
-                        if rec.Status = rec.Status::Approved then begin
-                            repeat
-                                HRTrainingAppLines.reset();
-                                HRTrainingAppLines.setrange("Application No.", rec."Application No");
-                                HRTrainingAppLines.SetRange("Employee No.", HRTrainingAppLines."Employee No.");
-                                if HRTrainingAppLines.FindSet() then begin
-                                    LeaveApplication.reset();
-                                    LeaveApplication.SetRange(LeaveApplication.Status, LeaveApplication.Status::Approved);
-                                    LeaveApplication.SetRange("Start Date", rec."Actual Start Date");
-                                    LeaveApplication.SetRange("Applicant Staff No.", HRTrainingAppLines."Application No.");
-                                    if LeaveApplication.FindSet() then begin
-                                        HRTrainingAppLines."On Leave" := true;
-                                        HRTrainingAppLines.modify();
-                                        msg := 'Employee No: ' + HRTrainingAppLines."Employee No." + 'Name' + HRTrainingAppLines.Name;
-                                        SendSms.SendSms(Source::"Employee Status", number, msg, '', '', true, 0, false, 'CBS', '', 'CBS');
-                                        //SendSMS.SendSms(Source::LOAN_GUARANTORS, Members."Phone No.", msg, Format(Loans2."Disbursement Account No"), '', true, 0, false, 'CBS', Loans2."Disbursement Account No", 'CBS');
+                        // if rec.Status = rec.Status::Approved then begin
+                        //     repeat
+                        //         HRTrainingAppLines.reset();
+                        //         HRTrainingAppLines.setrange("Application No.", rec."Application No");
+                        //         HRTrainingAppLines.SetRange("Employee No.", HRTrainingAppLines."Employee No.");
+                        //         if HRTrainingAppLines.FindSet() then begin
+                        //             LeaveApplication.reset();
+                        //             LeaveApplication.SetRange(LeaveApplication.Status, LeaveApplication.Status::Approved);
+                        //             LeaveApplication.SetRange("Start Date", rec."Actual Start Date");
+                        //             LeaveApplication.SetRange("Applicant Staff No.", HRTrainingAppLines."Application No.");
+                        //             if LeaveApplication.FindSet() then begin
+                        //                 HRTrainingAppLines."On Leave" := true;
+                        //                 HRTrainingAppLines.modify();
+                        //                 msg := 'Employee No: ' + HRTrainingAppLines."Employee No." + 'Name' + HRTrainingAppLines.Name;
+                        //                 SendSms.SendSms(Source::"Employee Status", number, msg, '', '', true, 0, false, 'CBS', '', 'CBS');
+                        //                 //SendSMS.SendSms(Source::LOAN_GUARANTORS, Members."Phone No.", msg, Format(Loans2."Disbursement Account No"), '', true, 0, false, 'CBS', Loans2."Disbursement Account No", 'CBS');
 
 
 
-                                    end;
-                                end;
-                            until HRTrainingAppLines.Next = 0;
-                        end;
+                        //             end;
+                        //         end;
+                        //     until HRTrainingAppLines.Next = 0;
+                        // end;
 
 
                     end;
@@ -259,21 +259,21 @@ page 52186488 "HR Training Application Header"
                         ApprovalsMgmt.OpenApprovalEntriesPage(rec.RecordId);
                     end;
                 }
-                action("Suggest Participants")
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Suggest Participants';
-                    Image = Employee;
-                    Promoted = true;
-                    PromotedCategory = Category4;
-                    PromotedIsBig = true;
+                // action("Suggest Participants")
+                // {
+                //     ApplicationArea = Basic;
+                //     Caption = 'Suggest Participants';
+                //     Image = Employee;
+                //     Promoted = true;
+                //     PromotedCategory = Category4;
+                //     PromotedIsBig = true;
 
-                    trigger OnAction()
-                    begin
-                        //DW
-                        HRCodeunit.fn_SuggestParticipants(39003976, Rec."Application No", 1); // Parameters = LineTable ID & Document No
-                    end;
-                }
+                //     trigger OnAction()
+                //     begin
+                //         //DW
+                //         HRCodeunit.fn_SuggestParticipants(39003976, Rec."Application No", 1); // Parameters = LineTable ID & Document No
+                //     end;
+                // }
                 action("Get Participants")
                 {
                     ApplicationArea = Basic;
@@ -299,6 +299,7 @@ page 52186488 "HR Training Application Header"
                             repeat
                                 HRActivityApprovalEntry.Init;
                                 //HREmp.TESTFIELD(HREmp."User ID");
+                                HRActivityApprovalEntry.Type := HRActivityApprovalEntry.Type::Employees;
                                 HRActivityApprovalEntry."Employee No." := HREmp."No.";
                                 HRActivityApprovalEntry.Name := HREmp."Full Name";
                                 //HRActivityApprovalEntry."Participant E-Mail":= HREmp."Company E-Mail";
@@ -318,66 +319,11 @@ page 52186488 "HR Training Application Header"
 
                     trigger OnAction()
                     begin
-                        /*
-                        //TESTFIELD(Closed,FALSE);
-                        
-                        HRActivityApprovalEntry.RESET;
-                        HRActivityApprovalEntry.SETRANGE(HRActivityApprovalEntry."Application No.","Application No");
-                        
-                        //IF NO PARTICIPANTS ARE IMPORTED
-                        IF HRActivityApprovalEntry.COUNT=0 THEN
-                        ERROR('You must get participants to notify before using this function');
-                        
-                        //ELSE
-                        GET("Application No");
-                        HRActivityApprovalEntry.RESET;
-                        
-                        WITH HRActivityApprovalEntry DO BEGIN
-                        
-                        
-                        //DocType:=DocType::CompAct;
-                        
-                        
-                        //SETRANGE("Table ID",DATABASE::"HR Activity Participants");
-                        //SETRANGE("Document Type",DocType);
-                        //SETRANGE(""Document no.", Code);
-                        //SETRANGE("Activity Status","Activity Status"::Created);
-                        //
-                        REPEAT
-                        
-                        //ApprovalsMgtNotification.SendActivityNotificationMail(Rec,HRActivityApprovalEntry);
-                        
-                        
-                        HRActivityApprovalEntry.GET("Employee No.");
-                        //HREmp.TESTFIELD(HREmp."Company E-Mail");
-                        
-                        HREmailParameters.RESET;
-                        HREmailParameters.GET(HREmailParameters."Associate With"::"Leave Notifications");
-                        smtp.CreateMessage(HREmailParameters."Sender Name",HREmailParameters."Sender Address",HREmp."Company E-Mail",
-                        HREmailParameters.Subject,'Dear'+' '+ HREmp."First Name" +' '+
-                        HREmailParameters.Body+' '+"Application No"+' '+ HREmailParameters."Body 2",TRUE);
-                        smtp.Send();
-                        //MESSAGE('Leave applicant has been notified successfully');
-                        
-                        HRActivityApprovalEntry.Notified:=TRUE;
-                        HRActivityApprovalEntry.MODIFY;
-                        
-                        UNTIL HRActivityApprovalEntry.NEXT = 0;
-                        MESSAGE('%1',Text001)
-                        END
-                        //END
-                        */
-
 
 
                         if Rec.Status = Rec.Status::New then
                             Error('You Cannot notify Trainers when the application is not approved');
 
-                        // smtp.CreateMessage('Dear' + ' ' + HRTrainingAppLines.Name + ',' + 'Training Approval Notification', HRTrainingAppLines."Participant Email", HRTrainingAppLines."Participant Email",
-                        //    'Training Approval Notification', 'You have Training Notification,' + "Application No" + '  ' +
-                        //     HRTrainingAppLines."Employee No." + ' ', true);//"Drop Off Point"+'  '+"Pickup Point"+'  '+FORMAT("Transport Type")+'   '+'Days Applied'+'   '+FORMAT("Days Applied")+'   '+'   '+'Start Time'+'   ',TRUE)
-                        //                                                    // '  '+FORMAT(Time)+'   '+'Start Date'+FORMAT("Start Date")+'   '+'   '+'Return Date'+'   '+ FORMAT("Return Date")+'  ''Driver Name'+'  '+"Driver Name"+'  '+'Vehicle'+'  '+Vehicle+'  '+"Name Vehicle",TRUE);
-                        // smtp.Send();
 
                         Message('Email sent to participants');
 

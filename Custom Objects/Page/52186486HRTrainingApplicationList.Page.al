@@ -5,7 +5,6 @@ page 52186486 "HR Training ApplicationList"
     ModifyAllowed = false;
     PageType = List;
     SourceTable = "HR Training App Header";
-    //SourceTableView = WHERE(Status = FILTER(<> Approved));
     ApplicationArea = Basic;
     UsageCategory = Lists;
 
