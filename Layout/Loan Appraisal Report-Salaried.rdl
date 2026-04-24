@@ -1750,7 +1750,7 @@
                   <Width>1.0863in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.2076in</Width>
+                  <Width>0.98425in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -2006,7 +2006,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Commission</Value>
+                                  <Value>Total Top</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -2256,14 +2256,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Commision">
+                        <Textbox Name="TotalTopUp_LoansTopup">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Commision.Value</Value>
+                                  <Value>=Fields!TotalTopUp_LoansTopup.Value</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -2273,7 +2273,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Commision</rd:DefaultName>
+                          <rd:DefaultName>TotalTopUp_LoansTopup</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -2473,14 +2473,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox40">
+                        <Textbox Name="Textbox51">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!Commision.Value)</Value>
+                                  <Value>=Sum(Fields!TotalTopUp_LoansTopup.Value)</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -2490,7 +2490,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox40</rd:DefaultName>
+                          <rd:DefaultName>Textbox51</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -2555,7 +2555,7 @@
             <Top>7.3237in</Top>
             <Left>0.01903in</Left>
             <Height>0.73622in</Height>
-            <Width>7.80917in</Width>
+            <Width>7.58582in</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -4124,7 +4124,7 @@
                     <Value>=First(Fields!THouseAllow.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
-                      <Format>#,0.00;(#,0.00)</Format>
+                      <Format>#,0.00</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -4133,7 +4133,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox7</rd:DefaultName>
             <Top>3.04408in</Top>
-            <Left>4.24119in</Left>
+            <Left>4.23261in</Left>
             <Height>0.20191in</Height>
             <Width>0.98216in</Width>
             <ZIndex>49</ZIndex>
@@ -4361,6 +4361,7 @@
                     <Value>=First(Fields!TrEarni.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
+                      <Format>#,0.00</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -5153,8 +5154,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>2.24176in</Top>
-            <Left>0.03464in</Left>
+            <Top>2.22787in</Top>
+            <Left>0.00325in</Left>
             <Height>4.62955in</Height>
             <Width>7.80915in</Width>
             <ZIndex>79</ZIndex>
@@ -5962,7 +5963,10 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=First(Fields!TotalGuaranteed.Value, "DataSet_Result")</Value>
-                    <Style />
+                    <Style>
+                      <FontFamily>times New Roman</FontFamily>
+                      <Format>#,0.00</Format>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -6126,6 +6130,7 @@
                     <Value>=First(Fields!GrossPay.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
+                      <Format>#,0.00</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -6222,7 +6227,7 @@
           </Border>
         </Style>
       </Body>
-      <Width>19.92323cm</Width>
+      <Width>19.88363cm</Width>
       <Page>
         <PageHeader>
           <Height>3.88286cm</Height>

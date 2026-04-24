@@ -1,4 +1,4 @@
-page 52185571 "HR Leave Period List1"
+page 52185571 "HR Leave Period List"
 {
     PageType = List;
     InsertAllowed=false;

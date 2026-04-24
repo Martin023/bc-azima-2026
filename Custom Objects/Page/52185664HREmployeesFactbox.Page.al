@@ -62,13 +62,21 @@ page 52185664 "HR Employees Factbox"
             field("Annual Leave Account"; Rec."Annual Leave Account")
             {
                 ApplicationArea = Basic;
+                Caption = 'Annual Leave Days Acc.';
             }
-            field("Monthly Leave Days"; Rec."Monthly Leave Days")
+            field("Allocated Leave Days"; Rec."Allocated Leave Days")
             {
+                Caption = 'Allocated Annual Leave Days';
                 ApplicationArea = Basic;
             }
-            field("Available Leave Days"; Rec."Available Leave Days")
+            field(LEaveTaken; Rec."Total Leave Taken")
             {
+                ApplicationArea = Basic;
+                Caption = 'Total Annual Leave Taken';
+            }
+            field("Total (Leave Days)"; Rec."Total (Leave Days)")
+            {
+                Caption = 'Available Annual Leave Days';
                 ApplicationArea = Basic;
             }
             FIELD("Reimbursed Leave Days"; Rec."Reimbursed Leave Days")

@@ -1,9 +1,9 @@
 table 52185581 "HR Training Needs"
 {
     DataCaptionFields = "Code", Description;
-    // DrillDownPageID = "HR Training Needs List";
-    LinkedObject = false;
-    //LookupPageID = "HR Training Needs List";
+    DrillDownPageID = "HR Training Needs List";
+    // LinkedObject = false;
+    LookupPageID = "HR Training Needs List";
 
     fields
     {

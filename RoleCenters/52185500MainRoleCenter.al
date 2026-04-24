@@ -3702,7 +3702,7 @@ page 52185500 "Main Role Center"
                             {
                                 Caption = 'HR Training Needs';
                                 ApplicationArea = Basic, Suite;
-                                RunObject = Page "HR Training Needs List1";
+                                RunObject = Page "HR Training Needs List";
                             }
                             action(HrTrainingApplications)
                             {
@@ -4011,7 +4011,7 @@ page 52185500 "Main Role Center"
                             {
                                 Caption = 'HR Leave Periods';
                                 ApplicationArea = Basic, Suite;
-                                RunObject = Page "HR Leave Period List1";
+                                RunObject = Page "HR Leave Period List";
                             }
 
                         }

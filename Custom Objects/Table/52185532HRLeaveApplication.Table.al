@@ -38,6 +38,7 @@ table 52185532 "HR Leave Application"
                     else
                         if HRLeaveTypes.Gender <> HRLeaveTypes.Gender::Both then
                             Error('This leave type is restricted to the ' + Format(HRLeaveTypes.Gender) + ' gender');
+
                 end;
                 "Days Applied" := 0;
             end;
@@ -514,7 +515,7 @@ table 52185532 "HR Leave Application"
 
     trigger OnDelete()
     begin
-        //ERROR('Please edit document instead of deleting');
+        ERROR('Please edit document instead of deleting');
     end;
 
     trigger OnInsert()
@@ -525,8 +526,7 @@ table 52185532 "HR Leave Application"
         if "Application Code" = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Leave Application Nos.");
-            "Application Code" := NoSeriesMgt.GetNextNo(HRSetup."Leave Application Nos.");
-            // NoSeriesMgt.InitSeries(HRSetup."Leave Application Nos.", xRec."No series", 0D, "Application Code", "No series");
+            NoSeriesMgt.GetNextNo(HRSetup."Leave Application Nos.");
         end;
 
         if "Source of Application" = "Source of Application"::BC then begin
@@ -634,8 +634,7 @@ table 52185532 "HR Leave Application"
 
     var
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit "No. Series";
-        // NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeriesMgt: Codeunit "No. Series - Batch";
         HREmp: Record "HR Employees";
         varDaysApplied: Integer;
         HRLeaveTypes: Record "HR Leave Types";
@@ -734,18 +733,6 @@ table 52185532 "HR Leave Application"
         else
             error('No active Calendar');
 
-
-        /*
-        Customized.RESET;
-        Customized.SETRANGE(Customized.Date,bcDate);
-        IF Customized.FIND('-') THEN BEGIN
-            IF Customized."Non Working" = TRUE THEN
-            EXIT(TRUE)
-            ELSE
-            EXIT(FALSE);
-        END;
-        */
-
     end;
 
     // [Scope('OnPrem')]
@@ -765,7 +752,6 @@ table 52185532 "HR Leave Application"
         exit(fEndDate);
     end;
 
-    // [Scope('OnPrem')]
     procedure CreateLeaveLedgerEntries()
     begin
         //GET OPEN LEAVE PERIOD
@@ -817,25 +803,9 @@ table 52185532 "HR Leave Application"
         HRJournalLine.SetRange("Journal Batch Name", HRSetup."Negative Leave Posting Batch");
         if HRJournalLine.Find('-') then begin
             CODEUNIT.Run(CODEUNIT::"HR Leave Jnl.-Post", HRJournalLine);
-            //Notify Leave Applicant
-
-            // NotifyApplicant;
-            // NotifyReliever;
-
-            // if ("Days Applied" >= 5) and ("Days Applied" < 15) then
-            //     NotifyICT;
-
-            // if "Days Applied" >= 15 then begin
-            //     NotifyICT;
-            //     NotifyHR;
-            // end;
-
 
 
         end;
-        //Mark document as posted
-
-
 
 
         //Insert into Leave allowance table
@@ -877,45 +847,12 @@ table 52185532 "HR Leave Application"
     [Scope('OnPrem')]
     procedure NotifyApplicant()
     begin
-        /*//NOTIFY APPLICANT DERRICK
-        HREmp.GET("Applicant Staff No.");
-        HREmp.TESTFIELD(HREmp."Company E-Mail");
-        
-        HREmailParameters.RESET;
-        HREmailParameters.GET(HREmailParameters."Associate With"::"Leave Notifications");
-        SMTP.CreateMessage(HREmailParameters."Sender Name",HREmailParameters."Sender Address",HREmp."Company E-Mail",
-        HREmailParameters.Subject,'Dear'+' '+ HREmp."First Name" +' '+
-        HREmailParameters.Body+' '+"Application Code"+' '+'for'+' '+FORMAT("Days Applied")+' '+'Days starting on'+' '+FORMAT("Start Date")+' '+'and ending on'+' '+FORMAT("End Date")+'.'+ HREmailParameters."Body 2",TRUE);
-        SMTP.Send();
-        MESSAGE('Leave applicant has been notified successfully');
-        */
+
 
 
         HREmp.Get("Applicant Staff No.");
         HREmp.TestField(HREmp."Company E-Mail");
-        // SMTP.CreateMessage(
-        //                     'HARAMBEE SACCO HRMS',
-        //                     'no-reply@harambeesacco.com',
-        //                     HREmp."Company E-Mail",
-        //                     'Leave Approval Notification',
-        //                     '<br>''Dear' + ' ' + HREmp."First Name" +
-        //                     '<br>' + 'Your leave application no.' + "Application Code" + '  ' + 'has been fully approved:<br><br>' +
-        //                     '<br>Employee No. ' + "Applicant Staff No." + ' - ' + UpperCase(Names) +
-        //                     '<br>Application No - ' + "Application Code" +
-        //                     '<br>Start Date - ' + Format("Start Date") +
-        //                     '<br>End Date - ' + Format("End Date") +
-        //                     '<br>Return Date - ' + Format("Return Date") +
-        //                     '<br>Days Applied - ' + Format("Days Applied") +
-        //                     '<br><br>Kind Regards',
-        //                     true
-        //                   );
-        //  SMTP.AddCC("Supervisor Email");
-        //  SMTP.AddCC('fdgdgd');
-        //  SMTP.AddAttachment('C:\Leave\'+"Application Code"+'.Excel',"Application Code");
 
-
-        // SMTP.Send();
-        // Message('Leave applicant has been notified successfully');
 
     end;
 
@@ -1010,18 +947,5 @@ table 52185532 "HR Leave Application"
         //DERRICK NOTIFY RELIVER.
     end;
 
-    [Scope('OnPrem')]
-    procedure ModifyUserDate()
-    var
-        User: Record User;
-    begin
-        User.Reset;
-        User.SetRange("User Name", "Applicant User ID");
-        if User.Find('-') then begin
-            if "Days Applied" > 3 then
-                User."Expiry Date" := CreateDateTime("Start Date", 0T);
-            User.Modify
-        end
-    end;
 }
 
