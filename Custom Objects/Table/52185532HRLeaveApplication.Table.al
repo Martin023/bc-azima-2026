@@ -634,7 +634,7 @@ table 52185532 "HR Leave Application"
 
     var
         HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit "No. Series - Batch";
+        NoSeriesMgt: Codeunit "No. Series";
         HREmp: Record "HR Employees";
         varDaysApplied: Integer;
         HRLeaveTypes: Record "HR Leave Types";

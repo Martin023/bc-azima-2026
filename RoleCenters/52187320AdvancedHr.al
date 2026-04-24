@@ -289,10 +289,11 @@ page 52187320 AdvancedHumanResources
                         Caption = 'HR Training Management';
                         action(HRTrainingNeeds)
                         {
-                            Caption = 'HR Training Needs';
+                            Caption = 'Open HR Training Needs';
                             ApplicationArea = Basic, Suite;
                             RunObject = Page "HR Training Needs List";
                         }
+
                         action(HrTrainingApplications)
                         {
                             Caption = 'HR Training Applications';

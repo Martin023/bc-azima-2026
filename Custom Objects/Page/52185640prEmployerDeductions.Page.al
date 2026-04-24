@@ -3,7 +3,7 @@ page 52185640 "prEmployer Deductions"
     Editable = false;
     PageType = List;
     SourceTable = "prEmployer Deductions";
-
+    ModifyAllowed = false;
     ApplicationArea = Basic, Suite;
     UsageCategory = Lists;
 
