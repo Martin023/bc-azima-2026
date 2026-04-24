@@ -7002,7 +7002,7 @@ Codeunit 52186458 "Loans Process"
             TopUp.SetRange(TopUp."Loan No.", LoanApps."Loan No.");
             if TopUp.Find('-') then begin
                 repeat
-                    TopUp.Validate(TopUp."Loan Top Up");
+                    //TopUp.Validate(TopUp."Loan Top Up");
                     TotalCleared := 0;
                     //Loan repayment
                     TotalCleared := TotalCleared + TopUp."Principle Top Up" + TopUp."Interest Top Up";
@@ -7014,7 +7014,7 @@ Codeunit 52186458 "Loans Process"
                     BalAccNo := '';
                     Amt := TopUp."Principle Top Up" * -1;
 
-                    AdviceLoan(TopUp."Loan Top Up", true, LoanApps."Loan No.");
+                    // AdviceLoan(TopUp."Loan Top Up", true, LoanApps."Loan No.");
 
                     JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AccType, LoanNo, 'Top up Principle ' + LoanApps."Loan No.", Amt, AccNo, PDate, BalAccType,
                   BalAccNo, LoanApps."Loan No.", Dim1, Dim2, TransType, TopUp."Loan Top Up", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
@@ -7136,6 +7136,17 @@ Codeunit 52186458 "Loans Process"
                                     end;
 
                                 end;
+                                //One month installment
+                                LineNo := LineNo + 10000;
+                                AccType := Acctype::"G/L Account";
+                                AccNo := PCharges."Charges G_L Account";
+                                TransType := Transtype::" ";
+                                BalAccType := Balacctype::Savings;
+                                BalAccNo := LoanApps."Disbursement Account No";
+                                Amt := TopUp."One Month Interest";
+
+                                JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AccType, LoanNo, 'One month interest on ' + ': ' + TopUp."Loan Top Up", Amt, AccNo, PDate, BalAccType,
+                                  BalAccNo, LoanApps."Loan No.", Dim1, Dim2, TransType, LoanApps."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
                             until PCharges.Next = 0;
 
                         end;
