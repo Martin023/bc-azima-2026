@@ -99,7 +99,7 @@ Report 52185478 "HR Leave Adjustment"
                         Error('No Leave Type found within the applied filters [%1]', HRLeaveTypes.GetFilters);
                     end;
                 end else begin
-                    Error('No Leave Period have been created');
+                    Error('No Current leave calendar exists!');
                 end;
             end;
         }

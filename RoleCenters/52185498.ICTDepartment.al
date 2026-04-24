@@ -4052,7 +4052,7 @@ page 52187058 "ICT Department"
                                 {
                                     Caption = 'HR Training Needs';
                                     ApplicationArea = Basic, Suite;
-                                    RunObject = Page "HR Training Needs List1";
+                                    RunObject = Page "HR Training Needs List";
                                 }
                                 action(HrTrainingApplications)
                                 {

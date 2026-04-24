@@ -431,11 +431,7 @@ page 52186525 "HR 360 Appraisal Card"
             Error('No appraisal period have been defined');
         end;
 
-        // Rec.Reset;
-        // Rec.SetRange(Rec."User ID", UserId);
-        // //Rec.SetRange(Rec.Status);
-        // if xRec.Find('-') then
-        //     Error('Your application no' + ' ' + xRec."Appraisal No" + 'is still  pending.')
+
     end;
 
 
