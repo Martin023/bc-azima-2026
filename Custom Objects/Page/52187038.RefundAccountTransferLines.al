@@ -17,6 +17,10 @@ page 52187038 "Bulk Refund Account Transfers"
                 {
                     ToolTip = 'Specifies the value of the Debit Account No. field.';
                 }
+                field("Source Description"; Rec."Source Description")
+                {
+                    ToolTip = 'Specifies the value of Source Description.';
+                }
                 field("Source Loan Transaction."; Rec."Source Loan Transaction.")
                 {
                     ApplicationArea = All;
@@ -72,9 +76,9 @@ page 52187038 "Bulk Refund Account Transfers"
                     Caption = 'Destination Account Name';
                     Editable = false;
                 }
-                field(Description; Rec.Description)
+                field("Destination Description"; Rec."Destination Description")
                 {
-                    ToolTip = 'Specifies the value of Description.';
+                    ToolTip = 'Specifies the value of Destination Description.';
                 }
                 field(Validated; Rec.Validated)
                 {
