@@ -264,6 +264,9 @@ table 52185798 "Account Transfer Source"
         field(19; "Date Posted"; Date)
         {
         }
+        field(20; "Source Description"; Text[50])
+        {
+        }
     }
 
     keys

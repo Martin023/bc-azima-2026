@@ -53,11 +53,11 @@ page 52185822 "Account Transfer"
                     Editable = false;
                     ApplicationArea = Basic, Suite;
                 }
-                field(Remarks; Rec.Remarks)
-                {
-                    Editable = HeaderA;
-                    ApplicationArea = Basic, Suite;
-                }
+                // field(Remarks; Rec.Remarks)
+                // {
+                //     Editable = HeaderA;
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field(Posted; Rec.Posted)
                 {
                     Editable = false;

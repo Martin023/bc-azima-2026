@@ -61,6 +61,11 @@ page 52185823 "Account Transfer Source"
                 //     ApplicationArea = Basic, Suite;
                 //     Caption = 'Fixed Deposit Contract';
                 // }
+                field("Description"; Rec."Source Description")
+                {
+                    Caption = 'Description';
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Source Amount"; Rec."Source Amount")
                 {
                     Caption = 'Source Amount';
