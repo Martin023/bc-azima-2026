@@ -264,11 +264,11 @@ page 52187034 "Refund,Account Transfer "
                             Dim2 := RefundLines."Global Dimension 2 Code";
                             // BalAccNo := RefundLines.AccNo;
                             ExtDoc := RefundLines."Document No.";
-                            if RefundLines.Description = '' then RefundLines.Description := Rec.Description;
+                            //if RefundLines.Description = '' then RefundLines.Description := Rec.Description;
 
                             if Rec."Refund Type" = Rec."Refund Type"::Refund then begin
 
-                                SaccoT.JournalInsert(JTemplate, JBatch, DocNo, PDate, Accttype::Savings, AccNo, CopyStr(RefundLines.Description, 1, 50), Balacctype::"G/L Account",
+                                SaccoT.JournalInsert(JTemplate, JBatch, DocNo, PDate, Accttype::Savings, AccNo, CopyStr(RefundLines."Source Description", 1, 50), Balacctype::"G/L Account",
                                 '', TransAmt, ExtDoc, LoanNo, TransType, Dim1, Dim2, SystCreated);
                             end;
 

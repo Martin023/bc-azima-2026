@@ -39,7 +39,7 @@ report 52186235 "Refund Excess I to P"
                                 LoansInterest.Amount := -(Loans."Outstanding Interest");
                                 LoansInterest."Destination Account" := Loans."Loan Account";
                                 LoansInterest."Loan No." := Loans."Loan No.";
-                                LoansInterest.Description := "Interest Header".Description;
+                                LoansInterest."Destination Description" := "Interest Header".Description;
                                 if LoansInterest.Amount > 0 then
                                     LoansInterest.Insert(true);
                             end
@@ -54,7 +54,7 @@ report 52186235 "Refund Excess I to P"
                                 LoansInterest.Amount := -(Loans."Outstanding Interest");
                                 LoansInterest."Destination Account" := Loans."Loan Account";
                                 LoansInterest."Loan No." := Loans."Loan No.";
-                                LoansInterest.Description := "Interest Header".Description;
+                                LoansInterest."Destination Description" := "Interest Header".Description;
                                 if LoansInterest.Amount > 0 then
                                     LoansInterest.Insert(true);
                             end;

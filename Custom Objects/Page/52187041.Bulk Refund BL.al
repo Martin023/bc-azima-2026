@@ -370,8 +370,8 @@ page 52187041 "Bulk Refunds Card BL"
                 Dim2 := RefundLines."Global Dimension 2 Code";
                 // BalAccNo := RefundLines.AccNo;
                 ExtDoc := RefundLines."Document No.";
-                if RefundLines.Description = '' then RefundLines.Description := Rec.Description;
-                SaccoT.JournalInsert(JTemplate, JBatch, DocNo, PDate, Accttype::Savings, AccNo, CopyStr(RefundLines.Description, 1, 50), Balacctype::"G/L Account",
+                //if RefundLines.Description = '' then RefundLines.Description := Rec.Description;
+                SaccoT.JournalInsert(JTemplate, JBatch, DocNo, PDate, Accttype::Savings, AccNo, CopyStr(RefundLines."Source Description", 1, 50), Balacctype::"G/L Account",
                 '', TransAmt, ExtDoc, LoanNo, TransType, Dim1, Dim2, SystCreated);
 
                 //Credit Accounts
@@ -383,9 +383,9 @@ page 52187041 "Bulk Refunds Card BL"
                     Dim2 := RefundLines."Global Dimension 2 Code";
                     // BalAccNo := RefundLines.AccNo;
                     ExtDoc := RefundLines."Document No.";
-                    if RefundLines.Description = '' then RefundLines.Description := Rec.Description;
+                    //if RefundLines."Destination Description" = '' then RefundLines."Destination Description" := Rec."Destination Description";
 
-                    SaccoT.JournalInsert(JTemplate, JBatch, DocNo, PDate, Accttype::Savings, AccNo, CopyStr(RefundLines.Description, 1, 50), Balacctype::"G/L Account",
+                    SaccoT.JournalInsert(JTemplate, JBatch, DocNo, PDate, Accttype::Savings, AccNo, CopyStr(RefundLines."Destination Description", 1, 50), Balacctype::"G/L Account",
                     '', TransAmt, ExtDoc, LoanNo, TransType, Dim1, Dim2, SystCreated);
                 end;
                 //Credit Loans
@@ -408,7 +408,7 @@ page 52187041 "Bulk Refunds Card BL"
                             BalAccType := BalAccType::"G/L Account";
                             BalAccNo := Pfact."Loan Interest Account [G/L]";
 
-                            SaccoT.JournalInsert(JTemplate, JBatch, DocNo, PDate, Accttype::Credit, AccNo, CopyStr(RefundLines.Description, 1, 50), Balacctype::"G/L Account",
+                            SaccoT.JournalInsert(JTemplate, JBatch, DocNo, PDate, Accttype::Credit, AccNo, CopyStr(RefundLines."Source Description", 1, 50), Balacctype::"G/L Account",
                         BalAccNo, TransAmt, ExtDoc, MyLoans."Loan No.", TransType::"Interest Due", Dim1, Dim2, SystCreated);
 
                             MyLoans."Outstanding Interest" += TransAmt;
@@ -429,9 +429,9 @@ page 52187041 "Bulk Refunds Card BL"
                         Dim2 := RefundLines."Global Dimension 2 Code";
                         // BalAccNo := RefundLines.AccNo;
                         ExtDoc := RefundLines."Document No.";
-                        if RefundLines.Description = '' then RefundLines.Description := Rec.Description;
+                        //if RefundLines.Description = '' then RefundLines.Description := Rec.Description;
 
-                        SaccoT.JournalInsert(JTemplate, JBatch, DocNo, PDate, Accttype::Credit, AccNo, CopyStr(RefundLines.Description, 1, 50), Balacctype::"G/L Account",
+                        SaccoT.JournalInsert(JTemplate, JBatch, DocNo, PDate, Accttype::Credit, AccNo, CopyStr(RefundLines."Destination Description", 1, 50), Balacctype::"G/L Account",
                         '', TransAmt, ExtDoc, MyLoans."Loan No.", TransType::"Interest Paid", Dim1, Dim2, SystCreated);
                         RunBal += TransAmt;
                     end;
@@ -443,9 +443,9 @@ page 52187041 "Bulk Refunds Card BL"
                         Dim2 := RefundLines."Global Dimension 2 Code";
                         // BalAccNo := RefundLines.AccNo;
                         ExtDoc := RefundLines."Document No.";
-                        if RefundLines.Description = '' then RefundLines.Description := Rec.Description;
+                        //if RefundLines.Description = '' then RefundLines.Description := Rec.Description;
 
-                        SaccoT.JournalInsert(JTemplate, JBatch, DocNo, PDate, Accttype::Credit, AccNo, CopyStr(RefundLines.Description, 1, 50), Balacctype::"G/L Account",
+                        SaccoT.JournalInsert(JTemplate, JBatch, DocNo, PDate, Accttype::Credit, AccNo, CopyStr(RefundLines."Destination Description", 1, 50), Balacctype::"G/L Account",
                         '', TransAmt, ExtDoc, MyLoans."Loan No.", TransType::Repayment, Dim1, Dim2, SystCreated);
 
                     end;

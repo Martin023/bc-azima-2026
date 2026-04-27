@@ -35,6 +35,10 @@ page 52187043 "Bulk Account Transfers BL"
                     ToolTip = 'Specifies the value of the Debit Account No. field.';
                     TableRelation = "Savings Accounts"."No." WHERE("Member No." = field("Member No."), "Product Type" = filter('002|011'));
                 }
+                field("Source Description"; Rec."Source Description")
+                {
+                    ToolTip = 'Specifies the value of Source Description.';
+                }
                 field("Destination Account"; Rec."Destination Account")
                 {
                     ToolTip = 'Specifies the value of the Credit Account.';
@@ -60,9 +64,9 @@ page 52187043 "Bulk Account Transfers BL"
                     Visible = true;
                     Caption = 'Destination Account Name';
                 }
-                field(Description; Rec.Description)
+                field("Destination Description"; Rec."Destination Description")
                 {
-                    ToolTip = 'Specifies the value of Description.';
+                    ToolTip = 'Specifies the value of Destination Description.';
                 }
 
 
