@@ -2,17 +2,11 @@ page 52185664 "HR Employees Factbox"
 {
     PageType = CardPart;
     SourceTable = "HR Employees";
-    ;
-
-    layout
+        layout
     {
         area(content)
         {
-            // field(PersonalDetails; Rec.PersonalDetails)
-            // {
-            //     Style = StrongAccent;
-            //     StyleExpr = TRUE;
-            // }
+           
             field("No."; Rec."No.")
             {
                 ApplicationArea = Basic;

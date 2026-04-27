@@ -400,6 +400,15 @@ page 52185712 "Product Factory"
                 Visible = CreditProductVisible;
                 Editable = CurrPageEditable;
 
+                field("Charge 1 month Interest"; Rec."Charge 1 month Interest")
+                {
+                    ApplicationArea = Basic, Suite;
+
+                }
+                field("One Month Interest G/L"; Rec."One Month Interest G/L")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Loan Security"; Rec."Loan Security")
                 {
                     ApplicationArea = Basic, Suite;
@@ -1270,7 +1279,8 @@ page 52185712 "Product Factory"
                         Rec.TestField("Loan Receivable Account[G/L]");
                         Rec.TestField("Product Posting Group");
 
-
+                        if Rec."Charge 1 month Interest" then
+                            rec.TestField("One Month Interest G/L");
                     end;
                     if Rec.Status = Rec.Status::Active then begin
                         Error('This product  has been Approved');
