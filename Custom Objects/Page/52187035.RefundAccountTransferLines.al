@@ -45,9 +45,13 @@ page 52187035 "Refund,Account Transfer Lines"
                     ToolTip = 'Specifies the value of the Account Name field.';
                     Visible = false;
                 }
-                field(Description; Rec.Description)
+                field("Source Description"; Rec."Source Description")
                 {
-                    ToolTip = 'Specifies the value of the Account Name field.';
+                    ToolTip = 'Specifies the value of the Source Description field.';
+                }
+                field("Destination Description"; Rec."Destination Description")
+                {
+                    ToolTip = 'Specifies the value of the Destination Description field.';
                 }
                 field("Account Not Found"; Rec."Account Not Found")
                 {

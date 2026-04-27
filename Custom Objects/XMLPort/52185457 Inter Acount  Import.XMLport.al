@@ -26,6 +26,9 @@ xmlport 52185557 "Inter Account"
                 {
                     FieldValidate = No;
                 }
+                fieldattribute(SourceDescription; RAT."Source Description")
+                {
+                }
                 fieldattribute(DestinationAccount; RAT."Destination Account")
                 {
                     FieldValidate = No;
@@ -38,13 +41,14 @@ xmlport 52185557 "Inter Account"
                 {
                     FieldValidate = No;
                 }
-                fieldattribute(Description; RAT.Description)
+                fieldattribute(DestinationDescription; RAT."Destination Description")
                 {
                 }
                 trigger OnBeforeInsertRecord()
                 begin
                     If RAT.Amount <= 0 then Error(' Amount must be an absolute value');
-                    RAT.TestField(Description);
+                    RAT.TestField("Source Description");
+                    RAT.TestField("Destination Description");
                 end;
 
 

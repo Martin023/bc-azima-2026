@@ -56,7 +56,10 @@ report 52185824 "Bulk Account Refunds Report"
                 column(DestinationAccount_RefundAccountTransferlines; "Destination Account")
                 {
                 }
-                column(Description_RefundAccountTransferlines; Description)
+                column(Description_RefundAccountTransferlines; "Destination Description")
+                {
+                }
+                column(SrcDescription_RefundAccountTransferlines; "Source Description")
                 {
                 }
                 column(Amount_RefundAccountTransferlines; Amount)

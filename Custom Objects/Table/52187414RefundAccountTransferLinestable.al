@@ -221,7 +221,7 @@ table 52187414 "Refund,Account Transfer lines"
         {
             Editable = false;
         }
-        field(31; Description; Text[50])
+        field(31;"Destination Description"; Text[50])
         {
         }
         field(32; AccNo; Code[50])
@@ -325,6 +325,9 @@ table 52187414 "Refund,Account Transfer lines"
         field(48; "Message"; Text[250])
         {
 
+        }
+        field(49;"Source Description"; Text[50])
+        {
         }
 
     }
