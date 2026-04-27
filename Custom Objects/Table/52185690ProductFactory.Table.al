@@ -237,11 +237,20 @@ table 52185690 "Product Factory"
         field(47; "Interest Calc Min Balance"; Decimal)
         {
         }
-        field(48; "Penalty Calculation Days"; DateFormula)
+        field(48; "Charge 1 month Interest"; Boolean)
         {
+            Caption = 'Charge 1 month INT on Topup';
+
+            trigger OnValidate()
+            begin
+                if "Charge 1 month Interest" then
+                rec.TestField("One Month Interest G/L");
+            end;
         }
-        field(49; "Penalty Percentage"; Decimal)
+        field(49; "One Month Interest G/L"; Code[15])
         {
+            Caption = 'One Month Interest Charge G/L';
+            TableRelation = "G/L Account"."No.";
         }
         field(50; "Penalty Calculation Method"; Option)
         {
