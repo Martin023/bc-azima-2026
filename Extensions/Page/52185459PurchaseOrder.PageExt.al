@@ -961,6 +961,28 @@ PageExtension 52185459 pageextension52185459 extends "Purchase Order"
         //                     end;
         //             }
         //         }
+        }
+    
+                    actions
+                        {
+                            modify("&Print")
+                            {
+                                trigger OnBeforeAction()
+                                var
+                                    PurchaseHeader: Record "Purchase Header";
+                                begin
+                                    // Apply filter to current record
+                                    PurchaseHeader := Rec;
+                                    CurrPage.SetSelectionFilter(PurchaseHeader);
+                                    
+                                    // Example: Custom logic before printing
+                                    if PurchaseHeader.FindFirst() then begin
+                                        REPORT.RUN(Report::"Purchase Order", true, true, PurchaseHeader);
+                                    end;
+                                end;
+                            }
+                        }
+
         //         addafter(Reject)
         //         {
         //             action("EDMS [Case 360]")
@@ -1108,4 +1130,3 @@ PageExtension 52185459 pageextension52185459 extends "Purchase Order"
 
 
     }
-}
