@@ -53,12 +53,12 @@ page 52186637 "ATM Return Card"
 
                 }
             }
-            part(Control17; "Dispatch ATM Lines")
-            {
-                SubPageLink = "Global Dimension 1 Code" = field("Global Dimension 1 Code"), "Global Dimension 2 Code" = field("Global Dimension 2 Code"),
-                                                                 Status = filter(Pending);
-                ApplicationArea = Basic;
-            }
+            // part(Control17; "Dispatch ATM Lines")
+            // {
+            //     // SubPageLink = "Global Dimension 1 Code" = field("Global Dimension 1 Code"), "Global Dimension 2 Code" = field("Global Dimension 2 Code"),
+            //     //                                                  Status = filter(Pending);
+            //     ApplicationArea = Basic;
+            // }
         }
     }
 
@@ -81,17 +81,17 @@ page 52186637 "ATM Return Card"
                     trigger OnAction()
                     begin
                         if rec.Status = rec.Status::Approved then begin
-                            ATMLines.Reset();
-                            ATMLines.SetRange("Global Dimension 1 Code", Rec."Global Dimension 1 Code");
-                            ATMLines.SetRange(Status, ATMLines.Status::Pending);
-                            ATMLines.SetFilter("Date Of Dispatch", '<=%1', (CalcDate('<-6M>', Today)));
-                            ATMLines.SetRange("To HQ", true);
-                            if ATMLines.Find('-') then begin
-                                repeat
-                                    ATMLines.Status := ATMLines.Status::Returned;
-                                    ATMLines.Modify;
-                                until ATMLines.Next = 0;
-                            end;
+                            // ATMLines.Reset();
+                            // // ATMLines.SetRange("Global Dimension 1 Code", Rec."Global Dimension 1 Code");
+                            // // ATMLines.SetRange(Status, ATMLines.Status::Pending);
+                            // // ATMLines.SetFilter("Date Of Dispatch", '<=%1', (CalcDate('<-6M>', Today)));
+                            // // ATMLines.SetRange("To HQ", true);
+                            // if ATMLines.Find('-') then begin
+                            //     repeat
+                            //         ATMLines.Status := ATMLines.Status::Returned;
+                            //         ATMLines.Modify;
+                            //     until ATMLines.Next = 0;
+                            // end;
                         end;
                         CurrPage.Update;
                         MESSAGE('Cards Returned!!')
@@ -104,23 +104,23 @@ page 52186637 "ATM Return Card"
                     Image = Return;
                     Promoted = true;
                     PromotedCategory = Process;
-                
+
 
                     trigger OnAction()
                     var
 
                     begin
                         if rec.Status = rec.Status::Approved then begin
-                            ATMLines.Reset();
-                            ATMLines.SetRange("Global Dimension 1 Code", Rec."Global Dimension 1 Code");
-                            ATMLines.SetRange(Status, ATMLines.Status::Pending);
-                            ATMLines.SetRange("To HQ", true);
-                            if ATMLines.Find('-') then begin
-                                repeat
-                                    ATMLines.Status := ATMLines.Status::Discarded;
-                                    ATMLines.Modify;
-                                until ATMLines.Next = 0;
-                            end;
+                            // ATMLines.Reset();
+                            // // ATMLines.SetRange("Global Dimension 1 Code", Rec."Global Dimension 1 Code");
+                            // // ATMLines.SetRange(Status, ATMLines.Status::Pending);
+                            // // ATMLines.SetRange("To HQ", true);
+                            // if ATMLines.Find('-') then begin
+                            //     repeat
+                            //         ATMLines.Status := ATMLines.Status::Discarded;
+                            //         ATMLines.Modify;
+                            //     until ATMLines.Next = 0;
+                            //end;
                         end;
                         CurrPage.Update;
                         MESSAGE('Cards Discarded!!')
@@ -183,7 +183,7 @@ page 52186637 "ATM Return Card"
         Pdate: Boolean;
         SalaryLines: Record "Salary Lines";
         LastloanDate: Boolean;
-        ATMLines: Record "ATM Inventory";
+    // ATMLines: Record "ATM Inventory";
 
 
 }

@@ -14,7 +14,7 @@ table 52186267 "ATM Return Table"
             begin
 
                 if "No." <> xRec."No." then begin
-                    
+
                     NoSetup.Get();
                     NoSeriesMgt.TestManual(NoSetup."ATM Return No.");
                     "No. Series" := '';
@@ -55,19 +55,19 @@ table 52186267 "ATM Return Table"
         }
         field(6; "Record Count"; Integer)
         {
-            CalcFormula = Count("ATM Inventory" WHERE("Global Dimension 1 Code" = FIELD("Global Dimension 1 Code")));
+            CalcFormula = Count("ATM Card Storage");
             Editable = false;
             FieldClass = FlowField;
         }
         field(7; "Total Received"; Integer)
         {
-            CalcFormula = Count("ATM Inventory" WHERE(Received = filter(true), "Global Dimension 1 Code" = field("Global Dimension 1 Code")));
+            CalcFormula = Count("ATM Card Storage");
             Editable = true;
             FieldClass = FlowField;
         }
         field(8; "To Branch"; Integer)
         {
-            CalcFormula = Count("ATM Inventory" WHERE("To Branch" = filter(true), "Global Dimension 1 Code" = field("Global Dimension 1 Code")));
+            CalcFormula = Count("ATM Card Storage");
             Editable = false;
             FieldClass = FlowField;
         }

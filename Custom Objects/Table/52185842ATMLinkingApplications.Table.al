@@ -20,7 +20,7 @@ table 52185842 "ATM Linking Applications"
         }
         field(2; "Account No"; Code[20])
         {
-            TableRelation = "ATM Inventory"."Account No." where(Status = filter(Pending | Linked));
+            TableRelation = "ATM Applications"."No." WHERE(Status = FILTER(Approved), "Received from Bank" = filter(true));
 
             trigger OnValidate()
             begin
@@ -433,21 +433,26 @@ table 52185842 "ATM Linking Applications"
 
         field(54; "ATM No."; Code[20])
         {
-            Caption = 'ATM Ref No.';
-            TableRelation = "ATM Inventory"."Reference No" WHERE("Account No." = FIELD("Account No"), Status = filter(Pending | Linked));
-            trigger OnValidate()
-            var
-                ATMInventory: Record "ATM Inventory";
-            begin
+            // Caption = 'ATM Ref No.';
+            // TableRelation = "ATM Applications"."No." WHERE(Status = FILTER(Approved), "Received from Bank" = filter(true));
+            // trigger OnValidate()
+            // var
+            //     ATMInventory: Record "ATM Inventory";
+            // begin
 
-                ATMInventory.Reset();
-                ATMInventory.SetRange("Account No.", rec."Account No");
-                ATMInventory.SetRange("Reference No", rec."ATM No.");
-                if ATMInventory.find('-') then begin
-                    "Card No" := ATMInventory."Card Number";
-                    rec."Card Expiry Date" := ATMInventory."Expiry Date";
-                end;
-            end;
+            //     ATMInventory.Reset();
+            //     ATMInventory.SetRange("Account No.", rec."Account No");
+            //     ATMInventory.SetRange("Reference No", rec."ATM No.");
+            //     if ATMInventory.find('-') then begin
+            //         "Card No" := ATMInventory."Card Number";
+            //         rec."Card Expiry Date" := ATMInventory."Expiry Date";
+            //     end;
+            // end;
+        }
+        field(55; "Delivery Mode"; Option)
+        {
+            OptionMembers = "Owner Collection";
+
         }
     }
 

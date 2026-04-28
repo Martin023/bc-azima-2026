@@ -25,14 +25,38 @@ table 52187044 "ATM Card Storage"
         field(4; Linked; Boolean)
         {
             Caption = 'Linked';
-            Editable = false;
+            Editable = true;
+            trigger OnValidate()
+            begin
+                if not Linked then begin
+                    "Card Status" := "Card Status"::Frozen;
+                    "Delinked On" := Today();
+                    "Delinked By" := UserId();
+                end;
+            end;
         }
-        field(5; DeLinked; Boolean)
+        field(5; "Card Status"; Option)
         {
-            Caption = 'DeLinked';
+            OptionMembers = Pending,Active,Frozen;
+            OptionCaption = 'Pending,Active,Delinked';
+            FieldClass = FlowField;
+            CalcFormula = lookup("ATM Linking Applications"."Card Status" where("Card No" = field("Card Number")));
+        }
+        field(6; "Delinked On"; Date)
+        {
+            Caption = 'Delinked On';
+            Editable = true;
+        }
+        field(7; "Delinked By"; Code[50])
+        {
+            Caption = 'Delinked By';
             Editable = false;
         }
-
+        field(8; Reason; Text[100])
+        {
+            Caption = 'Remarks';
+            Editable = true;
+        }
     }
     keys
     {

@@ -59,7 +59,8 @@ page 52186686 "Credit Officers RC"
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Savings Accounts List';
-                    RunObject = page "Savings Accounts";;
+                    RunObject = page "Savings Accounts";
+                    ;
                 }
                 action("Banking Closure List")
                 {
@@ -954,12 +955,12 @@ page 52186686 "Credit Officers RC"
                         Caption = 'Approved ATM Applications List';
                         RunObject = page "Approved ATM Application List";
                     }
-                    action("ATM Inventory List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'ATM Inventory List';
-                        RunObject = page "ATM Inventory List";
-                    }
+                    // action("ATM Inventory List")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'ATM Inventory List';
+                    //     RunObject = page "ATM Inventory List";
+                    // }
                     action("Dispatch ATM List")
                     {
                         ApplicationArea = Basic, Suite;
@@ -1044,7 +1045,7 @@ page 52186686 "Credit Officers RC"
                         RunObject = page "Member List";
                         RunPageView = where("Request Mobile Banking" = const(true));
                     }
-                    
+
                 }
 
                 group("FixedDepositContract")
@@ -1613,8 +1614,8 @@ page 52186686 "Credit Officers RC"
                         Caption = 'Cashier Transactions';
                         RunObject = report "Cashier Transactions";
                     }
-                  
-                  
+
+
                     action("Daily Transactions Cashiers")
                     {
                         ApplicationArea = Basic, Suite;
@@ -1732,7 +1733,7 @@ page 52186686 "Credit Officers RC"
                         Caption = 'Petty Cash Report';
                         RunObject = report "Petty Cash FOSA Report";
                     }
-                  
+
                     action("FOSA Account List Report")
                     {
                         ApplicationArea = Basic, Suite;

@@ -21,7 +21,7 @@ table 52186263 "ATM Repin Table"
         field(2; "Account No"; Code[20])
         {
             // TableRelation = "Savings Accounts"."No." WHERE("Product Category" = FILTER("FOSA Account"));
-            TableRelation = "ATM Inventory"."Account No.";
+            TableRelation = "ATM Card Storage"."Account No.";
 
 
             trigger OnValidate()
@@ -270,21 +270,21 @@ table 52186263 "ATM Repin Table"
 
         field(54; "ATM No."; Code[20])
         {
-            TableRelation = "ATM Inventory"."Card Number" WHERE("Account No." = FIELD("Account No"), Status = filter(Linked | Pending));
+            TableRelation = "ATM Card Storage"."Card Number" WHERE("Account No." = FIELD("Account No"), Linked = filter(True));
             trigger OnValidate()
             var
-                ATMInventory: Record "ATM Inventory";
+                ATMInventory: Record "ATM Card Storage";
                 SavAccount: Record "Savings Accounts";
                 UserSetup: Record "User Setup";
             begin
                 "Card No" := Rec."ATM No.";
                 if ATMInventory.Get("ATM No.") then begin
-                    "Card Expiry Date" := ATMInventory."Expiry Date";
+                    //"Card Expiry Date" := ATMInventory."Expiry Date";
                 end;
 
                 ATMInventory.Reset();
                 ATMInventory.SetRange("Account No.", rec."Account No");
-                ATMInventory.SetRange(Status, ATMInventory.Status::Linked);
+                ATMInventory.SetRange(Linked, true);
                 if ATMInventory.FindFirst() then begin
                     // rec."Card Type" := ATMLink."Card Type";
                     // rec."Account Type" := ATMLink."Account Type";
@@ -294,9 +294,9 @@ table 52186263 "ATM Repin Table"
                     // rec."Shortcut Dimension 1 Code" := ATMLink."Shortcut Dimension 1 Code";
                     // rec."Shortcut Dimension 2 Code" := ATMLink."Shortcut Dimension 2 Code";
                     // "Application Date" := ATMLink."Application Date";
-                    rec."Card Status" := ATMInventory.Status::Linked;
+                    //rec."Card Status" := ATMInventory.Status::Linked;
                     rec."Card No" := ATMInventory."Card Number";
-                    rec."Card Expiry Date" := ATMInventory."Expiry Date";
+                    //rec."Card Expiry Date" := ATMInventory."Expiry Date";
                     rec."ATM Linked" := true;
                     rec.Collected := true;
                     // rec."Date Collected" := ATMLink."Date Collected";

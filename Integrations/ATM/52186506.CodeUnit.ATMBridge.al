@@ -83,7 +83,6 @@ codeunit 52186506 "Sky Coop ATM Bridge"
         ATMCardStorage.Reset;
         ATMCardStorage.SetRange("Card Number", get_balance_request_account_debit_account.AsValue.AsText);
         ATMCardStorage.SetRange(Linked, true);
-        ATMCardStorage.SetRange(DeLinked, false);
 
         if not ATMCardStorage.FindFirst then begin
 
@@ -380,7 +379,6 @@ codeunit 52186506 "Sky Coop ATM Bridge"
         ATMCardStorage.Reset;
         ATMCardStorage.SetRange("Card Number", send_funds_transfer_request_posting_debit_account.AsValue.AsText);
         ATMCardStorage.SetRange(Linked, true);
-        ATMCardStorage.SetRange(DeLinked, false);
 
         if not ATMCardStorage.FindFirst then begin
 
@@ -856,7 +854,6 @@ codeunit 52186506 "Sky Coop ATM Bridge"
         ATMCardStorage.Reset;
         ATMCardStorage.SetRange("Card Number", ministatement_request_account_debit_account.AsValue.AsText);
         ATMCardStorage.SetRange(Linked, true);
-        ATMCardStorage.SetRange(DeLinked, false);
 
         if not ATMCardStorage.FindFirst then begin
 
@@ -935,7 +932,7 @@ codeunit 52186506 "Sky Coop ATM Bridge"
 
                         if SkyATMTransactions.Insert(true) then begin
                             Commit;
-                            
+
                             ServiceProviderRespCode := ServiceProviderRespCode::Success;
 
                             ResponsePayload.Add('message_id', message_id);
