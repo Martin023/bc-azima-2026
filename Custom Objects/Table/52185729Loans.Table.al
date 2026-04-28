@@ -587,7 +587,7 @@ table 52185729 Loans
                 end;
 
                 "Loans - Deposit Purchase" := 0;
-                // "Share Boosted Amount" := 0;
+                "Share Boosted Amount" := 0;
                 //ClearDataLoans;
                 "Cost Value of House" := 0;
                 "Retirement/Expiry Date" := 0D;
@@ -711,20 +711,18 @@ table 52185729 Loans
                     end;
                 end;
 
-                // check if there is share capital
                 ShareCapAcc.RESET;
                 ShareCapAcc.SETRANGE(ShareCapAcc."Member No.", "Member No.");
-                // ShareCapAcc.SETRANGE(ShareCapAcc."Product Category", ShareCapAcc."Product Category"::"Share Capital");//reason for comment out:the data dont display share capital  category on saving account
-                ShareCapAcc.SETRANGE(ShareCapAcc."Product Type", '4');
+                ShareCapAcc.SETRANGE(ShareCapAcc."Product Category", ShareCapAcc."Product Category"::"Share Capital");
+                //reason for comment out:the data dont display share capital  category on saving account
+                //ShareCapAcc.SETRANGE(ShareCapAcc."Product Type", '4');
                 IF ShareCapAcc.FIND('-') THEN BEGIN
                     if SavProducts.Get(ShareCapAcc."Product Type") then begin
                         ShareCapAcc.CALCFIELDS(ShareCapAcc."Balance (LCY)");
-                        ShareBoostAmount := SavProducts."Minimum Balance" - ShareCapAcc."Balance (LCY)";
                         IF ShareCapAcc."Balance (LCY)" < SavProducts."Minimum Balance" THEN begin
-                            // "Share Boosted Amount" := ShareBoostAmount; //its upon user to know what to recover
-                            MESSAGE('Member no. %1 has share capital of %2 and minimum required share capital is %3.', ShareCapAcc."Member No.", ShareCapAcc."Balance (LCY)", SavProducts."Minimum Balance");
+                            MESSAGE('Member no. %1 has share capital of %2 and minimum required share capital is %3 This will be boosted on the loan.', LoanApp."Member No.", ShareCapAcc."Balance (LCY)", SavProducts."Minimum Balance");
+                            "Share Boosted Amount" := SavProducts."Minimum Balance" - ShareCapAcc."Balance (LCY)";
                         end;
-
                     end;
                 END ELSE
                     MESSAGE('Member does not have share capital account.');
@@ -1077,18 +1075,7 @@ table 52185729 Loans
                     ERROR('You cannot apply more than the recommended amount of %1 .', DivDiscRem);
 
                 "Amount To Disburse" := "Approved Amount";
-                ShareCapAcc.RESET;
-                ShareCapAcc.SETRANGE(ShareCapAcc."Member No.", "Member No.");
-                // ShareCapAcc.SETRANGE(ShareCapAcc."Product Category", ShareCapAcc."Product Category"::"Share Capital");//reason for comment out:the data dont display share capital  category on saving account
-                ShareCapAcc.SETRANGE(ShareCapAcc."Product Type", '4');
-                IF ShareCapAcc.FIND('-') THEN BEGIN
-                    if SavProducts.Get(ShareCapAcc."Product Type") then begin
-                        ShareCapAcc.CALCFIELDS(ShareCapAcc."Balance (LCY)");
-                        IF ShareCapAcc."Balance (LCY)" < SavProducts."Minimum Balance" THEN
-                            MESSAGE('Member no. %1 has share capital of %2 and minimum required share capital is %3.', LoanApp."Member No.", ShareCapAcc."Balance (LCY)", SavProducts."Minimum Balance");
-                    end;
-                END ELSE
-                    MESSAGE('Member does not have share capital account.');
+
 
                 //
                 TotalMRepay := 0;
@@ -1162,155 +1149,155 @@ table 52185729 Loans
                     Repayment := ROUND(LPrincipal, 1, '>');
                 end;
                 //Boosting
-                GenSetup.Get();
-                GenSetup.TestField("Boosting Maturity");
-                IF "Requested Amount" <> 0 THEN BEGIN
-                    "Share Boosted Amount" := 0;
-                    GenSetup.GET();
-                    IF ProdFac.GET("Loan Product Type") THEN BEGIN
+                // GenSetup.Get();
+                // GenSetup.TestField("Boosting Maturity");
+                // IF "Requested Amount" <> 0 THEN BEGIN
+                //     "Share Boosted Amount" := 0;
+                //     GenSetup.GET();
+                //     IF ProdFac.GET("Loan Product Type") THEN BEGIN
 
-                        ProdFac.Get("Loan Product Type");
-                        Otherdeposits := 0;
-                        OtherAppraisals.Reset();
-                        OtherAppraisals.SetRange(OtherAppraisals."Product ID", ProdFac."Product ID");
-                        if OtherAppraisals.Find('-') then begin
-                            repeat
-                                SavingsAccounts.Reset();
-                                SavingsAccounts.SetRange("Member No.", Rec."Member No.");
-                                SavingsAccounts.SetRange("Product Type", OtherAppraisals."Product code");
-                                if SavingsAccounts.Find('-') then begin
-                                    SavingsAccounts.CalcFields("Balance (LCY)");
-                                    Otherdeposits := Otherdeposits + SavingsAccounts."Balance (LCY)";
-                                end;
-                            until OtherAppraisals.Next() = 0;
-                        end;
-                        SavAcc.RESET;
-                        SavAcc.SETRANGE(SavAcc."Member No.", "Member No.");
-                        SavAcc.SETRANGE("Product Type", ProdFac."Loan Appraisal Account Code");
-                        IF SavAcc.FIND('-') THEN BEGIN
-                            SavAcc.CALCFIELDS(SavAcc."Balance (LCY)");
-                            //Check Minimum savings per product
-                            IF SavAcc."Balance (LCY)" < 0 THEN SavAcc."Balance (LCY)" := 0;
-                            IF (SavAcc."Balance (LCY)" + Otherdeposits) < ProdFac."Minimum Deposit Balance" THEN
-                                //ERROR(Text011,SavAcc."Balance (LCY)",ProdFac."Minimum Deposit Balance");
-                                IF NOT CONFIRM('The ' + SavAcc."Member No." + ' has lower deposits of ' + FORMAT(SavAcc."Balance (LCY)" + Otherdeposits) + ' less than expected of deposits of  ' + FORMAT(ProdFac."Minimum Deposit Balance")) THEN EXIT;
+                //         ProdFac.Get("Loan Product Type");
+                //         Otherdeposits := 0;
+                //         OtherAppraisals.Reset();
+                //         OtherAppraisals.SetRange(OtherAppraisals."Product ID", ProdFac."Product ID");
+                //         if OtherAppraisals.Find('-') then begin
+                //             repeat
+                //                 SavingsAccounts.Reset();
+                //                 SavingsAccounts.SetRange("Member No.", Rec."Member No.");
+                //                 SavingsAccounts.SetRange("Product Type", OtherAppraisals."Product code");
+                //                 if SavingsAccounts.Find('-') then begin
+                //                     SavingsAccounts.CalcFields("Balance (LCY)");
+                //                     Otherdeposits := Otherdeposits + SavingsAccounts."Balance (LCY)";
+                //                 end;
+                //             until OtherAppraisals.Next() = 0;
+                //         end;
+                //         SavAcc.RESET;
+                //         SavAcc.SETRANGE(SavAcc."Member No.", "Member No.");
+                //         SavAcc.SETRANGE("Product Type", ProdFac."Loan Appraisal Account Code");
+                //         IF SavAcc.FIND('-') THEN BEGIN
+                //             SavAcc.CALCFIELDS(SavAcc."Balance (LCY)");
+                //             //Check Minimum savings per product
+                //             IF SavAcc."Balance (LCY)" < 0 THEN SavAcc."Balance (LCY)" := 0;
+                //             IF (SavAcc."Balance (LCY)" + Otherdeposits) < ProdFac."Minimum Deposit Balance" THEN
+                //                 //ERROR(Text011,SavAcc."Balance (LCY)",ProdFac."Minimum Deposit Balance");
+                //                 IF NOT CONFIRM('The ' + SavAcc."Member No." + ' has lower deposits of ' + FORMAT(SavAcc."Balance (LCY)" + Otherdeposits) + ' less than expected of deposits of  ' + FORMAT(ProdFac."Minimum Deposit Balance")) THEN EXIT;
 
-                            IF "Approved Amount" > (SavAcc."Balance (LCY)" + Otherdeposits) THEN BEGIN
-                                IF ProdFac."Repay Mode" = ProdFac."Repay Mode"::Checkoff THEN BEGIN
-                                    SavLedger.RESET;
-                                    SavLedger.SETRANGE(SavLedger."Customer No.", SavAcc."No.");
-                                    SavLedger.SETFILTER(Amount, '<%1', 0);
-                                    SavLedger.SETFILTER("Document No.", '<>OPENBAL');
-                                    SavLedger.SetFilter("Posting Date", '%1..%2', CALCDATE('-' + FORMAT(GenSetup."Boosting Maturity"), "Application Date"), "Application Date");
-                                    IF SavLedger.FIND('-') THEN BEGIN
-                                        REPEAT
-                                            //MESSAGE('Amount %1 Boost Mat %2 Boost %3 Post date %4',SavLedger.Amount,GenSetup."Boosting Maturity",GenSetup."Boosting Shares %",SavLedger."Posting Date");
-                                            //IF SavLedger."Posting Date" >= CALCDATE('-' + FORMAT(GenSetup."Boosting Maturity"), "Application Date") THEN BEGIN
-                                            IF SavLedger.Amount * -1 > SavAcc."Monthly Contribution" THEN BEGIN
-                                                "Share Boosted Amount" := "Share Boosted Amount" + (SavLedger.Amount * -1);
-                                                NoOfDays := "Application Date" - SavLedger."Posting Date";
-                                                NoOfMonths := ROUND(NoOfDays / 30, 1, '>');
-                                                IF NoOfMonths = 0 THEN
-                                                    ShareBoostComm := ShareBoostComm + (ABS(SavLedger.Amount) * 0.03)
-                                                ELSE
-                                                    IF NoOfMonths = 1 THEN
-                                                        ShareBoostComm := ShareBoostComm + (ABS(SavLedger.Amount) * 0.03)
-                                                    ELSE
-                                                        IF NoOfMonths = 2 THEN
-                                                            ShareBoostComm := ShareBoostComm + (ABS(SavLedger.Amount) * 0.02)
-                                                        ELSE
-                                                            ShareBoostComm := ShareBoostComm + (ABS(SavLedger.Amount) * 0.01);
-                                            END;
-                                        // END;
-                                        UNTIL SavLedger.NEXT = 0;
-                                    ENd;
-                                    if "Share Boosted Amount" > 0 then
-                                        Message('Deposit Lumpsum');
-                                    BCommBuffer.RESET;
-                                    BCommBuffer.SETRANGE(BCommBuffer."Loan No.", rec."Loan No.");
-                                    if BCommBuffer.FindFirst() then
-                                        BCommBuffer.DELETEALL;
+                //             IF "Approved Amount" > (SavAcc."Balance (LCY)" + Otherdeposits) THEN BEGIN
+                //                 IF ProdFac."Repay Mode" = ProdFac."Repay Mode"::Checkoff THEN BEGIN
+                //                     SavLedger.RESET;
+                //                     SavLedger.SETRANGE(SavLedger."Customer No.", SavAcc."No.");
+                //                     SavLedger.SETFILTER(Amount, '<%1', 0);
+                //                     SavLedger.SETFILTER("Document No.", '<>OPENBAL');
+                //                     SavLedger.SetFilter("Posting Date", '%1..%2', CALCDATE('-' + FORMAT(GenSetup."Boosting Maturity"), "Application Date"), "Application Date");
+                //                     IF SavLedger.FIND('-') THEN BEGIN
+                //                         REPEAT
+                //                             //MESSAGE('Amount %1 Boost Mat %2 Boost %3 Post date %4',SavLedger.Amount,GenSetup."Boosting Maturity",GenSetup."Boosting Shares %",SavLedger."Posting Date");
+                //                             //IF SavLedger."Posting Date" >= CALCDATE('-' + FORMAT(GenSetup."Boosting Maturity"), "Application Date") THEN BEGIN
+                //                             IF SavLedger.Amount * -1 > SavAcc."Monthly Contribution" THEN BEGIN
+                //                                 "Share Boosted Amount" := "Share Boosted Amount" + (SavLedger.Amount * -1);
+                //                                 NoOfDays := "Application Date" - SavLedger."Posting Date";
+                //                                 NoOfMonths := ROUND(NoOfDays / 30, 1, '>');
+                //                                 IF NoOfMonths = 0 THEN
+                //                                     ShareBoostComm := ShareBoostComm + (ABS(SavLedger.Amount) * 0.03)
+                //                                 ELSE
+                //                                     IF NoOfMonths = 1 THEN
+                //                                         ShareBoostComm := ShareBoostComm + (ABS(SavLedger.Amount) * 0.03)
+                //                                     ELSE
+                //                                         IF NoOfMonths = 2 THEN
+                //                                             ShareBoostComm := ShareBoostComm + (ABS(SavLedger.Amount) * 0.02)
+                //                                         ELSE
+                //                                             ShareBoostComm := ShareBoostComm + (ABS(SavLedger.Amount) * 0.01);
+                //                             END;
+                //                         // END;
+                //                         UNTIL SavLedger.NEXT = 0;
+                //                     ENd;
+                //                     if "Share Boosted Amount" > 0 then
+                //                         Message('Deposit Lumpsum');
+                //                     BCommBuffer.RESET;
+                //                     BCommBuffer.SETRANGE(BCommBuffer."Loan No.", rec."Loan No.");
+                //                     if BCommBuffer.FindFirst() then
+                //                         BCommBuffer.DELETEALL;
 
-                                    BStartDate := CALCDATE('-' + FORMAT(GenSetup."Boosting Maturity") + '-CM', "Application Date");
+                //                     BStartDate := CALCDATE('-' + FORMAT(GenSetup."Boosting Maturity") + '-CM', "Application Date");
 
-                                    BPeriod[3] := "Application Date";
-                                    BPeriod[2] := CALCDATE('-1M+CM', "Application Date");
-                                    BPeriod[1] := CALCDATE('-2M+CM', "Application Date");
-                                    BRate[3] := 3;
-                                    BRate[2] := 2;
-                                    BRate[1] := 1;
+                //                     BPeriod[3] := "Application Date";
+                //                     BPeriod[2] := CALCDATE('-1M+CM', "Application Date");
+                //                     BPeriod[1] := CALCDATE('-2M+CM', "Application Date");
+                //                     BRate[3] := 3;
+                //                     BRate[2] := 2;
+                //                     BRate[1] := 1;
 
-                                    DepBefore := 0;
-                                    DepAcc.RESET;
-                                    DepAcc.SETRANGE("No.", SavAcc."No.");
-                                    DepAcc.SETFILTER("Date Filter", '..%1', CALCDATE('-1M+CM', BPeriod[1]));
-                                    IF DepAcc.FINDFIRST THEN BEGIN
-                                        DepAcc.CALCFIELDS("Balance (LCY)");
-                                        DepBefore := DepAcc."Balance (LCY)";
-                                        CurrDep := DepBefore;
-                                        ExpDep := DepBefore;
-                                    END;
-                                    FOR InitLoop := 1 TO 3 DO BEGIN
+                //                     DepBefore := 0;
+                //                     DepAcc.RESET;
+                //                     DepAcc.SETRANGE("No.", SavAcc."No.");
+                //                     DepAcc.SETFILTER("Date Filter", '..%1', CALCDATE('-1M+CM', BPeriod[1]));
+                //                     IF DepAcc.FINDFIRST THEN BEGIN
+                //                         DepAcc.CALCFIELDS("Balance (LCY)");
+                //                         DepBefore := DepAcc."Balance (LCY)";
+                //                         CurrDep := DepBefore;
+                //                         ExpDep := DepBefore;
+                //                     END;
+                //                     FOR InitLoop := 1 TO 3 DO BEGIN
 
-                                        SavLedger.RESET;
-                                        SavLedger.SETRANGE(SavLedger."Customer No.", SavAcc."No.");
-                                        SavLedger.SETFILTER("Document No.", '<>OPENBAL');
-                                        SavLedger.SETRANGE("Posting Date", CALCDATE('-CM', BPeriod[InitLoop]), BPeriod[InitLoop]);
-                                        IF SavLedger.FIND('-') THEN BEGIN
-                                            SavLedger.CALCSUMS("Amount (LCY)");
-                                            MDep := SavLedger."Amount (LCY)" * -1;
-                                            IF MDep < 0 THEN
-                                                MDep := 0;
-                                            BCommBuffer.Reset();
-                                            BCommBuffer.SetRange("Loan No.", Rec."Loan No.");
-                                            if BCommBuffer.FindFirst() then begin
-                                                BCommBuffer.Delete();
-                                            end;
-                                            BCommBuffer.INIT;
-                                            BCommBuffer."Loan No." := "Loan No.";
-                                            BCommBuffer.Date := BPeriod[InitLoop];
-                                            BCommBuffer."Deposit Amount" := MDep;
-                                            BCommBuffer."Expected Amount" := SavAcc."Monthly Contribution";
-                                            BCommBuffer."Boosted Amount" := BCommBuffer."Deposit Amount" - BCommBuffer."Expected Amount";
+                //                         SavLedger.RESET;
+                //                         SavLedger.SETRANGE(SavLedger."Customer No.", SavAcc."No.");
+                //                         SavLedger.SETFILTER("Document No.", '<>OPENBAL');
+                //                         SavLedger.SETRANGE("Posting Date", CALCDATE('-CM', BPeriod[InitLoop]), BPeriod[InitLoop]);
+                //                         IF SavLedger.FIND('-') THEN BEGIN
+                //                             SavLedger.CALCSUMS("Amount (LCY)");
+                //                             MDep := SavLedger."Amount (LCY)" * -1;
+                //                             IF MDep < 0 THEN
+                //                                 MDep := 0;
+                //                             BCommBuffer.Reset();
+                //                             BCommBuffer.SetRange("Loan No.", Rec."Loan No.");
+                //                             if BCommBuffer.FindFirst() then begin
+                //                                 BCommBuffer.Delete();
+                //                             end;
+                //                             BCommBuffer.INIT;
+                //                             BCommBuffer."Loan No." := "Loan No.";
+                //                             BCommBuffer.Date := BPeriod[InitLoop];
+                //                             BCommBuffer."Deposit Amount" := MDep;
+                //                             BCommBuffer."Expected Amount" := SavAcc."Monthly Contribution";
+                //                             BCommBuffer."Boosted Amount" := BCommBuffer."Deposit Amount" - BCommBuffer."Expected Amount";
 
-                                            IF BCommBuffer."Boosted Amount" < 0 THEN
-                                                BCommBuffer."Boosted Amount" := 0;
+                //                             IF BCommBuffer."Boosted Amount" < 0 THEN
+                //                                 BCommBuffer."Boosted Amount" := 0;
 
-                                            BCommBuffer.Commission := ROUND(BCommBuffer."Boosted Amount" * BRate[InitLoop] / 100);
+                //                             BCommBuffer.Commission := ROUND(BCommBuffer."Boosted Amount" * BRate[InitLoop] / 100);
 
-                                            ExpDep += BCommBuffer."Expected Amount";
-                                            CurrDep += BCommBuffer."Deposit Amount";
+                //                             ExpDep += BCommBuffer."Expected Amount";
+                //                             CurrDep += BCommBuffer."Deposit Amount";
 
-                                            BCommBuffer."Total Expected" := ExpDep;
-                                            BCommBuffer."Total Current" := CurrDep;
+                //                             BCommBuffer."Total Expected" := ExpDep;
+                //                             BCommBuffer."Total Current" := CurrDep;
 
-                                            IF BCommBuffer."Boosted Amount" > 0 THEN
-                                                DepBefore += BCommBuffer."Expected Amount"
-                                            ELSE
-                                                DepBefore += BCommBuffer."Deposit Amount";
+                //                             IF BCommBuffer."Boosted Amount" > 0 THEN
+                //                                 DepBefore += BCommBuffer."Expected Amount"
+                //                             ELSE
+                //                                 DepBefore += BCommBuffer."Deposit Amount";
 
-                                            BCommBuffer.INSERT;
+                //                             BCommBuffer.INSERT;
 
-                                        END;
+                //                         END;
 
-                                    END;
+                //                     END;
 
 
-                                    BCommBuffer.RESET;
-                                    BCommBuffer.SETRANGE("Loan No.", "Loan No.");
-                                    IF BCommBuffer.FINDFIRST THEN BEGIN
-                                        BCommBuffer.CALCSUMS(Commission);
-                                        ShareBoostComm := BCommBuffer.Commission;
-                                    END;
+                //                     BCommBuffer.RESET;
+                //                     BCommBuffer.SETRANGE("Loan No.", "Loan No.");
+                //                     IF BCommBuffer.FINDFIRST THEN BEGIN
+                //                         BCommBuffer.CALCSUMS(Commission);
+                //                         ShareBoostComm := BCommBuffer.Commission;
+                //                     END;
 
-                                    IF DepBefore * ProdFac."Ordinary Deposits Multiplier" > "Approved Amount" THEN
-                                        ShareBoostComm := 0;
-                                END;
-                            END;
-                        end;
+                //                     IF DepBefore * ProdFac."Ordinary Deposits Multiplier" > "Approved Amount" THEN
+                //                         ShareBoostComm := 0;
+                //                 END;
+                //             END;
+                //         end;
 
-                    end;
-                end;
+                //     end;
+                // end;
                 LoanApp.Reset;
                 LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
                 LoanApp.SetRange(LoanApp."Source Unit", LoanApp."Source Unit"::BOSA);
@@ -1838,8 +1825,6 @@ table 52185729 Loans
         }
         field(51; Status; enum "Workflow Status Main Flags")
         {
-
-
             // OptionCaption = 'Open,Pending Approval,Approved,Rejected,Deffered,Archived,Posted';
             // OptionMembers = Open,Pending,Approved,Rejected,Deffered,Archived,Posted;
             trigger OnValidate()
@@ -1847,6 +1832,7 @@ table 52185729 Loans
                 GlobalFunctions.DisplayLienMessage("Member No.");
                 CheckExceptions;
                 //SendSMSApproval()
+
             end;
 
         }
@@ -3795,7 +3781,7 @@ table 52185729 Loans
         OffsetBalance: Decimal;
         SectoralClassification: Record "Sectoral Classification";
         PartialDisb: Record "Partial Disbursement Schedule";
-        Txt001: Label 'Share Boosted Amount:%1  is greater than %1 of  member deposit %2.';
+        Txt001: Label 'Deposit Boosted Amount:%1  is greater than %1 of  member deposit %2.';
         BatchEditable: Boolean;
         GlobalFunctions: Codeunit "Global Functions";
         ShareCapAcc: Record "Savings Accounts";
