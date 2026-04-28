@@ -6,7 +6,7 @@ table 52185718 "Standing Order Lines"
         field(1; "Entry No."; Integer)
         {
         }
-        field(2; "Document No."; Code[10])
+        field(2; "Document No."; Code[20])
         {
         }
         field(17; "Destination Account Type"; Enum "Gen. Journal Account Type")
@@ -283,7 +283,7 @@ table 52185718 "Standing Order Lines"
             OptionCaption = 'Open,Pending,Approved,Rejected,Stopped,Cancelled';
             OptionMembers = Open,Pending,Approved,Rejected,Stopped,Cancelled;
             FieldClass = FlowField;
-            Calcformula = Lookup("Standing Order Header".Status WHERE("No." = FIELD("Document No.")));                                
+            Calcformula = Lookup("Standing Order Header".Status WHERE("No." = FIELD("Document No.")));
         }
     }
 

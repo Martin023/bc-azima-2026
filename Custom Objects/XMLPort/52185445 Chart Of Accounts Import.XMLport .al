@@ -9,7 +9,7 @@ XmlPort 52185445 "Chart Of Accounts"
         {
             tableelement("Chart"; "G/L Account")
             {
-                 AutoReplace = false;
+                AutoReplace = false;
                 AutoUpdate = true;
                 XmlName = 'Charts';
                 fieldelement(a; Chart."No.")
@@ -26,7 +26,7 @@ XmlPort 52185445 "Chart Of Accounts"
                 {
                     FieldValidate = No;
                 }
-                fieldelement(e;Chart."Account Category")
+                fieldelement(e; Chart."Account Category")
                 {
                     FieldValidate = No;
                 }
@@ -46,7 +46,7 @@ XmlPort 52185445 "Chart Of Accounts"
                 {
                     FieldValidate = No;
                 }
-                fieldelement(j;Chart."Gen. Posting Type")
+                /*fieldelement(j;Chart."Gen. Posting Type")
                 {
                     FieldValidate = No;
                 }
@@ -57,10 +57,10 @@ XmlPort 52185445 "Chart Of Accounts"
                 fieldelement(l; Chart."Gen. Prod. Posting Group")
                 {
                     FieldValidate = No;
-                }
-                 
+                }*/
+
             }
-            
+
         }
     }
     trigger OnPostXmlPort()
@@ -69,6 +69,6 @@ XmlPort 52185445 "Chart Of Accounts"
     begin
         Message('Processing completed successfully');
     end;
-    
-    
+
+
 }

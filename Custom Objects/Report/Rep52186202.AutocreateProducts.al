@@ -11,7 +11,7 @@ report 52186202 AutocreateProducts
     {
         dataitem(Members; Members)
         {
-            DataItemTableView = where(Status = filter(new));
+            //DataItemTableView = where(Status = filter(new));
             trigger OnAfterGetRecord()
             begin
                 productFactory.reset();
@@ -85,7 +85,7 @@ report 52186202 AutocreateProducts
                             SavingsAcc.Status := ProductFactory."Auto Openning Account Status";
                             SavingsAcc.Insert;
                         end;
-                        //if SavingsAcc.Status:= SavingsAcc.Status::" " then
+                    //if SavingsAcc.Status:= SavingsAcc.Status::" " then
                     until ProductFactory.next = 0;
                 end;
                 if not MemberFactBox.get(Members."No.") then begin

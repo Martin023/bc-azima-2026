@@ -5,7 +5,7 @@ table 52185717 "Standing Order Header"
 
     fields
     {
-        field(1; "No."; Code[10])
+        field(1; "No."; Code[20])
         {
             Editable = false;
 
