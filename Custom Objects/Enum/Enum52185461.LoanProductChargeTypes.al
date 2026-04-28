@@ -10,7 +10,7 @@ enum 52185461 "Loan Product Charge Types"
     }
     value(1; "Top up")
     {
-        Caption = 'Refinance';
+        Caption = 'Offset';
     }
     value(2; "External Loan")
     {
