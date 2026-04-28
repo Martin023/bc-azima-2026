@@ -69,7 +69,7 @@ Report 52185684 "Cashier Deposit Slip"
             column(Transactions_Type; Type)
             {
             }
-            column(BranchCode; Transactions."Global Dimension 2 Code")
+            column(BranchCode; Transactions."Global Dimension 1 Code")
             {
             }
             column(Global_Dimension_1_Code; "Global Dimension 1 Code")
@@ -197,6 +197,16 @@ Report 52185684 "Cashier Deposit Slip"
             {
 
             }
+            column(Reprint; Reprint)
+            {
+            }
+            column(ReprintDate; ReprintDate)
+            {
+            }
+            column(ReprintTime; ReprintTime)
+            {
+            }
+
             dataitem("Transaction Charges"; "Transaction Charges")
             {
                 DataItemLink = "Transaction Type" = field("Transaction Type");
@@ -228,15 +238,12 @@ Report 52185684 "Cashier Deposit Slip"
                     CashierName := User."Full Name";
                 end;
 
-
-                //calculate the charges
                 SavingsLedgerEntry.Reset;
                 SavingsLedgerEntry.SetRange("Customer No.", "Account No");
                 SavingsLedgerEntry.SetRange("Document No.", No);
                 if SavingsLedgerEntry.FindSet then begin
                     SavingsLedgerEntry.CalcSums(Amount);
                     SumTransactionCharges := SavingsLedgerEntry.Amount - Amount;
-                    //MESSAGE('the trans charges are %1',SumTransactionCharges);
                 end;
 
                 Savings.Reset;
@@ -245,11 +252,22 @@ Report 52185684 "Cashier Deposit Slip"
                     StaffNo := Savings."Payroll/Staff No.";
                     ProductName := Savings."Product Name";
                 end;
+                // CheckReport.InitTextVariable();
+                // CheckReport.FormatNoText(NumberText, Amount, '');
+                NumberText[1] := ConvertAmountToWords(Amount);
 
+                Reprint := '';
+                if "Transaction Date" < Today then
+                    Reprint := 'REPRINT'
+                else if ("Transaction Date" = Today) and ("Transaction Time" <> 0T) then begin
+                    if Time > "Transaction Time" then begin
+                        if (Time - "Transaction Time") > 60000 then
+                            Reprint := 'REPRINT';
+                    end;
+                end;
 
-                CheckReport.InitTextVariable();
-
-                CheckReport.FormatNoText(NumberText, Amount, '');
+                ReprintDate := Today;
+                ReprintTime := Time;
             end;
 
             trigger OnPreDataItem()
@@ -263,19 +281,10 @@ Report 52185684 "Cashier Deposit Slip"
     requestpage
     {
         SaveValues = true;
-
-        layout
-        {
-        }
-
-        actions
-        {
-        }
+        layout { }
+        actions { }
     }
 
-    labels
-    {
-    }
     trigger OnPreReport()
     begin
         if CompanyInformation.Get then
@@ -324,4 +333,127 @@ Report 52185684 "Cashier Deposit Slip"
         CompanyAddress: Text;
         CompanyTelephone: Text;
         CommunicationOnline: Text;
+        Reprint: Text;
+        ReprintDate: Date;
+        ReprintTime: Time;
+        OnesText: array[20] of Text[30];
+        TensText: array[10] of Text[30];
+
+    local procedure InitTextVariable()
+    begin
+        OnesText[1] := 'One';
+        OnesText[2] := 'Two';
+        OnesText[3] := 'Three';
+        OnesText[4] := 'Four';
+        OnesText[5] := 'Five';
+        OnesText[6] := 'Six';
+        OnesText[7] := 'Seven';
+        OnesText[8] := 'Eight';
+        OnesText[9] := 'Nine';
+        OnesText[10] := 'Ten';
+        OnesText[11] := 'Eleven';
+        OnesText[12] := 'Twelve';
+        OnesText[13] := 'Thirteen';
+        OnesText[14] := 'Fourteen';
+        OnesText[15] := 'Fifteen';
+        OnesText[16] := 'Sixteen';
+        OnesText[17] := 'Seventeen';
+        OnesText[18] := 'Eighteen';
+        OnesText[19] := 'Nineteen';
+        TensText[1] := '';
+        TensText[2] := 'Twenty';
+        TensText[3] := 'Thirty';
+        TensText[4] := 'Forty';
+        TensText[5] := 'Fifty';
+        TensText[6] := 'Sixty';
+        TensText[7] := 'Seventy';
+        TensText[8] := 'Eighty';
+        TensText[9] := 'Ninety';
+    end;
+
+    local procedure ConvertAmountToWords(AmountToConvert: Decimal): Text
+    var
+        WholeAmount: Decimal;
+        CentsAmount: Decimal;
+        Words: Text;
+        CentsWords: Text;
+    begin
+        if AmountToConvert = 0 then
+            exit('Zero');
+
+        WholeAmount := Round(AmountToConvert, 1, '<');
+        CentsAmount := Round((AmountToConvert - WholeAmount) * 100, 1, '=');
+
+        InitTextVariable();
+        Words := ConvertNumberToText(WholeAmount);
+
+        if CentsAmount > 0 then begin
+            CentsWords := ConvertNumberToText(CentsAmount);
+            exit(Words + ' And ' + CentsWords + ' Cents Only');
+        end;
+
+        exit(Words + ' Only');
+    end;
+
+    local procedure ConvertNumberToText(Number: Decimal): Text
+    var
+        ResultText: Text;
+        Millions: Integer;
+        Thousands: Integer;
+        Hundreds: Integer;
+        TensAndOnes: Integer;
+    begin
+        if Number = 0 then exit('');
+
+        Millions := Round(Number / 1000000, 1, '<');
+        Number := Number - (Millions * 1000000);
+        Thousands := Round(Number / 1000, 1, '<');
+        Number := Number - (Thousands * 1000);
+        Hundreds := Round(Number / 100, 1, '<');
+        TensAndOnes := Round(Number - (Hundreds * 100), 1, '<');
+
+        ResultText := '';
+        if Millions > 0 then
+            ResultText += ConvertHundreds(Millions) + ' Million ';
+        if Thousands > 0 then
+            ResultText += ConvertHundreds(Thousands) + ' Thousand ';
+        if Hundreds > 0 then
+            ResultText += ConvertHundreds(Hundreds) + ' Hundred ';
+        if TensAndOnes > 0 then begin
+            if ResultText <> '' then
+                ResultText += 'and ';
+            ResultText += ConvertTens(TensAndOnes);
+        end;
+
+        exit(DelChr(ResultText, '>', ' '));
+    end;
+
+    local procedure ConvertHundreds(Number: Integer): Text
+    var
+        Hundreds: Integer;
+        TensAndOnes: Integer;
+        ResultText: Text;
+    begin
+        Hundreds := Number div 100;
+        TensAndOnes := Number mod 100;
+        if Hundreds > 0 then begin
+            ResultText := OnesText[Hundreds] + ' Hundred';
+            if TensAndOnes > 0 then
+                ResultText += ' and ' + ConvertTens(TensAndOnes);
+            exit(ResultText);
+        end else
+            exit(ConvertTens(TensAndOnes));
+    end;
+
+    local procedure ConvertTens(Number: Integer): Text
+    begin
+        if Number = 0 then exit('');
+        if Number < 20 then
+            exit(OnesText[Number]);
+
+        if (Number mod 10) = 0 then
+            exit(TensText[Number div 10])
+        else
+            exit(TensText[Number div 10] + ' ' + OnesText[Number mod 10]);
+    end;
 }

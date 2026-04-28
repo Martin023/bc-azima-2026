@@ -183,6 +183,11 @@ Report 52185683 "Cashier Withdrawal Slip"
             {
 
             }
+
+            column(Branch_code; Transactions."Global Dimension 1 Code")
+            {
+
+            }
             dataitem("Transaction Charges"; "Transaction Charges")
             {
                 DataItemLink = "Transaction Type" = field("Transaction Type");
@@ -311,4 +316,6 @@ Report 52185683 "Cashier Withdrawal Slip"
         CompanyAddress: Text;
         CompanyTelephone: Text;
         CommunicationOnline: Text;
+
+
 }

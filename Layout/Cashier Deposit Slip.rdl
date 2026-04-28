@@ -22,20 +22,30 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Fields!BranchCode.Value</Value>
+                    <Value>BRANCH:     </Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=IIF(First(Fields!Branch_Name.Value, "DataSet_Result") &lt;&gt; "", First(Fields!Branch_Name.Value, "DataSet_Result"), "") &amp; IIF(First(Fields!BranchCode.Value, "DataSet_Result") &lt;&gt; "", " (" &amp; First(Fields!BranchCode.Value, "DataSet_Result") &amp; ")", "")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
-            <Top>0.84516cm</Top>
-            <Height>0.49239cm</Height>
-            <Width>19.66818cm</Width>
+            <Top>3cm</Top>
+            <Left>0.1cm</Left>
+            <Height>0.5cm</Height>
+            <Width>7.6cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -52,52 +62,45 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>DATE :     </Value>
+                    <Value>DATE:       </Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
                     <Value>=First(Fields!Transactions__Transaction_Date_.Value, "DataSet_Result")</Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <Format>M/d/yyyy</Format>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value xml:space="preserve">    </Value>
+                    <Value xml:space="preserve">               </Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                      <Format>M/d/yyyy</Format>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value xml:space="preserve">                     </Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
                     <Value>=First(Fields!Transactions_Transactions__Transaction_Time_.Value, "DataSet_Result")</Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <Format>hh:mm tt</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Right</TextAlign>
+                  <TextAlign>Left</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>0.10583cm</Top>
-            <Height>0.49239cm</Height>
-            <Width>19.66818cm</Width>
+            <Top>2.5cm</Top>
+            <Left>0.1cm</Left>
+            <Height>0.5cm</Height>
+            <Width>7.6cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border />
@@ -117,27 +120,28 @@
                   <TextRun>
                     <Value>A/C NAME:   </Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Fields!AccountName.Value</Value>
+                    <Value>=First(Fields!AccountName.Value, "DataSet_Result")</Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Center</TextAlign>
+                  <TextAlign>Left</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox25</rd:DefaultName>
-            <Top>1.86522cm</Top>
-            <Height>0.49239cm</Height>
-            <Width>19.66818cm</Width>
+            <Top>4cm</Top>
+            <Left>0.1cm</Left>
+            <Height>0.5cm</Height>
+            <Width>7.6cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -158,27 +162,28 @@
                   <TextRun>
                     <Value>A/C No:     </Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Fields!AccountNo.Value</Value>
+                    <Value>=First(Fields!AccountNo.Value, "DataSet_Result")</Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Center</TextAlign>
+                  <TextAlign>Left</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox26</rd:DefaultName>
-            <Top>2.39289cm</Top>
-            <Height>0.49239cm</Height>
-            <Width>19.66818cm</Width>
+            <Top>4.5cm</Top>
+            <Left>0.1cm</Left>
+            <Height>0.5cm</Height>
+            <Width>7.6cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -197,29 +202,31 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>AMOUNT:    </Value>
+                    <Value>AMOUNT:     </Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Fields!Amount.Value</Value>
+                    <Value>=First(Fields!Amount.Value, "DataSet_Result")</Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
+                      <Format>#,0.00</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Center</TextAlign>
+                  <TextAlign>Left</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox27</rd:DefaultName>
-            <Top>2.92056cm</Top>
-            <Height>0.49239cm</Height>
-            <Width>19.66818cm</Width>
+            <Top>5.5cm</Top>
+            <Left>0.1cm</Left>
+            <Height>0.5cm</Height>
+            <Width>7.6cm</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -238,27 +245,30 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>TRANS No:     </Value>
+                    <Value>TRANS No:   </Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Fields!Transactions_No.Value</Value>
+                    <Value>=First(Fields!Transactions_No.Value, "DataSet_Result")</Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox29</rd:DefaultName>
-            <Top>1.37283cm</Top>
-            <Height>0.49239cm</Height>
-            <Width>19.66818cm</Width>
+            <Top>3.5cm</Top>
+            <Left>0.1cm</Left>
+            <Height>0.5cm</Height>
+            <Width>7.6cm</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -277,30 +287,86 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Transaction Type:   </Value>
+                    <Value>TRANS TYPE: </Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Fields!Transactions_Type.Value</Value>
+                    <Value>=First(Fields!Transactions_Type.Value, "DataSet_Result")</Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Center</TextAlign>
+                  <TextAlign>Left</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox35</rd:DefaultName>
-            <Top>0.10583cm</Top>
-            <Height>0.49239cm</Height>
-            <Width>19.66818cm</Width>
+            <Top>2cm</Top>
+            <Left>0.1cm</Left>
+            <Height>0.5cm</Height>
+            <Width>7.6cm</Width>
             <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="HeaderBox">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>AZIMA SACCO</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>P.O BOX 1124 THIKA</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>AZIMA HQ</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Left>0.1cm</Left>
+            <Height>1.5cm</Height>
+            <Width>7.6cm</Width>
+            <ZIndex>7</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -318,16 +384,16 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>REMARKS:     </Value>
+                    <Value>REMARKS:    </Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Fields!Remarks.Value</Value>
+                    <Value>=First(Fields!Remarks.Value, "DataSet_Result")</Value>
                     <Style>
-                      <FontSize>9pt</FontSize>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -337,11 +403,266 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox27</rd:DefaultName>
-            <Top>2.92056cm</Top>
-            <Height>0.49239cm</Height>
-            <Width>19.66818cm</Width>
-            <ZIndex>7</ZIndex>
+            <rd:DefaultName>Textbox28</rd:DefaultName>
+            <Top>5cm</Top>
+            <Left>0.1cm</Left>
+            <Height>0.5cm</Height>
+            <Width>7.6cm</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="ReprintTextbox">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Reprint.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>1.5cm</Top>
+            <Left>0.1cm</Left>
+            <Height>0.5cm</Height>
+            <Width>7.6cm</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
+          <Textbox Name="AmountInWordsTextbox">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>IN WORDS:   </Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!NumberText.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>6cm</Top>
+            <Left>0.1cm</Left>
+            <Height>1cm</Height>
+            <Width>7.6cm</Width>
+            <ZIndex>10</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="SignaturesTextbox">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Member ID NO :..............................</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Member Sign :.................................</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>7cm</Top>
+            <Left>0.1cm</Left>
+            <Height>1.5cm</Height>
+            <Width>7.6cm</Width>
+            <ZIndex>11</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="ServedByTextbox">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>SERVED BY: </Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=IIF(First(Fields!CashierName.Value, "DataSet_Result") &lt;&gt; "", First(Fields!CashierName.Value, "DataSet_Result"), First(Fields!Transactions_Transactions_Cashier.Value, "DataSet_Result"))</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>8.5cm</Top>
+            <Left>0.1cm</Left>
+            <Height>0.5cm</Height>
+            <Width>7.6cm</Width>
+            <ZIndex>12</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="ThankYouTextbox">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Thank you for Giving us the Opportunity to serve </Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>you</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>9cm</Top>
+            <Left>0.1cm</Left>
+            <Height>1cm</Height>
+            <Width>7.6cm</Width>
+            <ZIndex>13</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="ReprintTimestamp">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>="Reprinted On: " &amp; Format(First(Fields!ReprintDate.Value, "DataSet_Result"), "dd/MM/yyyy") &amp; " at " &amp; Format(First(Fields!ReprintTime.Value, "DataSet_Result"), "HH:mm")</Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>10cm</Top>
+            <Left>0.1cm</Left>
+            <Height>0.5cm</Height>
+            <Width>7.6cm</Width>
+            <ZIndex>14</ZIndex>
+            <Visibility>
+              <Hidden>=IIf(First(Fields!Reprint.Value, "DataSet_Result") = "REPRINT", False, True)</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -353,17 +674,17 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>3.48557cm</Height>
+        <Height>11cm</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>19.66818cm</Width>
+      <Width>7.8cm</Width>
       <Page>
         <PageHeader>
-          <Height>3.5507cm</Height>
+          <Height>0cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <Style>
@@ -373,7 +694,7 @@
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>0.59796cm</Height>
+          <Height>0cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <Style>
@@ -382,10 +703,12 @@
             </Border>
           </Style>
         </PageFooter>
-        <PageHeight>29.7cm</PageHeight>
-        <PageWidth>21cm</PageWidth>
-        <LeftMargin>0.5cm</LeftMargin>
-        <RightMargin>0.5cm</RightMargin>
+        <PageHeight>15cm</PageHeight>
+        <PageWidth>8cm</PageWidth>
+        <LeftMargin>0.1cm</LeftMargin>
+        <RightMargin>0.1cm</RightMargin>
+        <TopMargin>0.1cm</TopMargin>
+        <BottomMargin>0.1cm</BottomMargin>
         <ColumnSpacing>1.27cm</ColumnSpacing>
         <Style />
       </Page>
@@ -627,6 +950,15 @@ End Function
         </Field>
         <Field Name="Till_Name">
           <DataField>Till_Name</DataField>
+        </Field>
+        <Field Name="Reprint">
+          <DataField>Reprint</DataField>
+        </Field>
+        <Field Name="ReprintDate">
+          <DataField>ReprintDate</DataField>
+        </Field>
+        <Field Name="ReprintTime">
+          <DataField>ReprintTime</DataField>
         </Field>
         <Field Name="ReportForNavId_8541">
           <DataField>ReportForNavId_8541</DataField>
