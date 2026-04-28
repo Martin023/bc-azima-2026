@@ -29,7 +29,7 @@ table 52185730 "Savings Accounts"
                 //TestNoEntriesExist(FieldCaption("No."), "No.");
             end;
         }
-        field(2; Name; Text[50])
+        field(2; Name; Text[100])
         {
             Caption = 'Name';
 
@@ -47,11 +47,11 @@ table 52185730 "Savings Accounts"
 
             end;
         }
-        field(3; "Search Name"; Code[50])
+        field(3; "Search Name"; Code[100])
         {
             Caption = 'Search Name';
         }
-        field(4; "Name 2"; Text[50])
+        field(4; "Name 2"; Text[100])
         {
             Caption = 'Name 2';
         }
