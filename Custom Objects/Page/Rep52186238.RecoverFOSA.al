@@ -72,7 +72,7 @@ report 52186238 "Recover FOSA Arrears"
                                                 RunBal -= Abs(MaxAmt);
                                                 AmtDeducted += Abs(MaxAmt);
                                             end;
-                                            LoansInterest.Description := "Interest Header".Description;
+                                            LoansInterest."Destination Description" := "Interest Header".Description;
                                             LoansInterest.Message := 'Dear ' + LoansInterest.Name + ', arrears of ' + Format(LoansInterest.Amount) + ' has been recovered for ' + Loans."Loan Product Type Name" + ': ' + Loans."Loan No." + ' on ' + Format(Today) + ' ' + Format(Time);
                                             if LoansInterest.Amount > 0 then
                                                 LoansInterest.Insert(true);

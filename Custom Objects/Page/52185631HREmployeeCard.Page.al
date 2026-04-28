@@ -439,8 +439,7 @@ page 52185631 "HR Employee Card"
                     Importance = Promoted;
                     Visible = true;
                     Editable = IntMode;
-
-
+                    ShowMandatory = true;
                     trigger OnValidate()
                     begin
                         //DService:= HRCodeunit.DetermineAge("Date Of Join",TODAY);

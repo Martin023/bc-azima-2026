@@ -39,7 +39,7 @@ report 52186219 "Unallocated Distribution"
                                 end;
                                 LoansInterest."Destination Account" := '';
                                 LoansInterest."Loan No." := '';
-                                LoansInterest.Description := "Interest Header".Description;
+                                LoansInterest."Destination Description" := "Interest Header".Description;
                                 if LoansInterest.Amount > 0 then
                                     LoansInterest.Insert(true);
                             end;

@@ -278,28 +278,28 @@ page 52187329 "Records"
                 //     }
                 // }
                 //....Groups 
-                // group("Group Applications")
-                // {
-                //     Caption = 'Members'' Account Applocation';
-                //     action("Group Application List")
-                //     {
-                //         ApplicationArea = All;
-                //         Caption = 'Members'' Savings App List';
-                //         RunObject = Page "Member Application Group List";
-                //     }
-                //     action("Approved Group App List")
-                //     {
-                //         ApplicationArea = All;
-                //         Caption = 'Members'' Savings App List';
-                //         RunObject = Page "Approved Group App List";
-                //     }
-                //     action("Rejected Group Applications")
-                //     {
-                //         ApplicationArea = All;
-                //         Caption = ' Rejected Members'' Savings Applications';
-                //         RunObject = Page "Rejected Group App List";
-                //     }
-                // }
+                group("Group Applications")
+                {
+                    Caption = 'MFI Account Applications';
+                    action("Group Application List")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'MFI Account Application List';
+                        RunObject = Page "Member Application Group List";
+                    }
+                    action("Approved Group App List")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Approved MFI Account List';
+                        RunObject = Page "Approved Group App List";
+                    }
+                    action("Rejected Group Applications")
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Rejected MFI Applications';
+                        RunObject = Page "Rejected Group App List";
+                    }
+                }
 
 
             }

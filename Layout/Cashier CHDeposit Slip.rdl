@@ -1000,6 +1000,12 @@ End Function
         <Field Name="ReprintTime">
           <DataField>ReprintTime</DataField>
         </Field>
+        <Field Name="ReprintDate">
+          <DataField>ReprintDate</DataField>
+        </Field>
+        <Field Name="ReprintTime">
+          <DataField>ReprintTime</DataField>
+        </Field>
         <Field Name="ReportForNavId_8541">
           <DataField>ReportForNavId_8541</DataField>
         </Field>

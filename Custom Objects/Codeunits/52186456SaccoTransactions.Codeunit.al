@@ -3822,7 +3822,7 @@ Codeunit 52186456 "Sacco Transactions"
                         GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
                         GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
                         // GenJournalLine.Description := PadStr(ACTransfer.Remarks + '-Destination Acc-' + BSchedDestin."Destination Account No.", 50);
-                        GenJournalLine.Description := ACTransfer.Remarks;
+                        GenJournalLine.Description := BSched."Source Description";
                         //GenJournalLine.Description:=BSched."Source Account Name";//Remarks;
                         GenJournalLine.Amount := BSched."Source Amount";
                         GenJournalLine.Validate(GenJournalLine.Amount);
@@ -3894,7 +3894,8 @@ Codeunit 52186456 "Sacco Transactions"
                             BSched.Reset;
                             BSched.SetRange(BSched."No.", ACTransfer.No);
                             if BSched.Find('-') then
-                                GenJournalLine.Description := PadStr(ACTransfer.Remarks + ':-Source Acc.' + BSched."Source Account No.", 50);
+                                //GenJournalLine.Description := PadStr(ACTransfer.Remarks + ':-Source Acc.' + BSched."Source Account No.", 50);
+                                GenJournalLine.Description := PadStr(BSchedDestin."Destination Description" + ':-Source Acc.' + BSched."Source Account No.", 50);
                             if RemainingAmount >= (Loans."Outstanding Interest" + Loans."Daily Interest") then begin
                                 GenJournalLine.Amount := -(Loans."Outstanding Interest" + Loans."Daily Interest");
                                 RemainingAmount := RemainingAmount - (Loans."Outstanding Interest" + Loans."Daily Interest");
@@ -3936,8 +3937,8 @@ Codeunit 52186456 "Sacco Transactions"
                             BSched.Reset;
                             BSched.SetRange(BSched."No.", ACTransfer.No);
                             if BSched.Find('-') then
-                                GenJournalLine.Description := PadStr(ACTransfer.Remarks + ':-Source Acc.' + BSched."Source Account No.", 50);
-
+                                //GenJournalLine.Description := PadStr(BSched."Source Description" + ':-Source Acc.' + BSched."Source Account No.", 50);
+                                GenJournalLine.Description := PadStr(BSchedDestin."Destination Description" + ':-Source Acc.' + BSched."Source Account No.", 50);
                             GenJournalLine.Amount := -RemainingAmount;
                             GenJournalLine.Validate(GenJournalLine.Amount);
                             GenJournalLine."Loan No" := BSchedDestin."Destination Loan No.";
@@ -3987,7 +3988,8 @@ Codeunit 52186456 "Sacco Transactions"
                             BSched.Reset;
                             BSched.SetRange(BSched."No.", ACTransfer.No);
                             if BSched.Find('-') then
-                                GenJournalLine.Description := PadStr(ACTransfer.Remarks + ' :-Source Acc.' + BSched."Source Account No.", 50);
+                                //GenJournalLine.Description := PadStr(ACTransfer.Remarks + ' :-Source Acc.' + BSched."Source Account No.", 50);
+                                GenJournalLine.Description := PadStr(BSchedDestin."Destination Description" + ':-Source Acc.' + BSched."Source Account No.", 50);
                             GenJournalLine.Amount := -BSchedDestin."Destination Amount";
                             GenJournalLine.Validate(GenJournalLine.Amount);
                             GenJournalLine."Transaction Type" := BSchedDestin."Destination Transaction Type";

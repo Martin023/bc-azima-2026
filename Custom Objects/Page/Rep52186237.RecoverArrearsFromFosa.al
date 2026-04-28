@@ -77,7 +77,7 @@ report 52186237 "Recover Arrears"
                                                 RunBal -= Abs(MaxAmt);
                                                 AmtDeducted += Abs(MaxAmt);
                                             end;
-                                            LoansInterest.Description := "Interest Header".Description;
+                                            LoansInterest."Destination Description" := "Interest Header".Description;
                                             if "Interest Header"."Send SMS" then begin
                                                 if LoansInterest.Amount > 100 then
                                                     LoansInterest.Message := 'Dear ' + LoansInterest.Name + ', arrears of ' + Format(LoansInterest.Amount) + ' has been recovered for ' + Loans."Loan Product Type Name" + ': ' + Loans."Loan No." + ' on ' + Format(Today) + ' ' + Format(Time)
@@ -119,7 +119,7 @@ report 52186237 "Recover Arrears"
                                     // LoansInterest.Amount := SavingsAccounts."Balance (LCY)";                        
                                     if RunBal > 0 then
                                         LoansInterest.Amount := RunBal;
-                                    LoansInterest.Description := "Interest Header".Description;
+                                    LoansInterest."Destination Description" := "Interest Header".Description;
                                     if LoansInterest.Amount > 0 then
                                         LoansInterest.Insert(true);
                                 end;
