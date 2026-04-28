@@ -1,7 +1,7 @@
 enum 52186502 "Sky M-Banking Trans Types"
 {
     Extensible = true;
-    
+
     value(0; " ")
     {
         Caption = ' ';
@@ -110,5 +110,25 @@ enum 52186502 "Sky M-Banking Trans Types"
     value(26; "Coop B2B Deposit")
     {
         Caption = 'Coop B2B Deposit';
+    }
+    value(27; "Self PIN Reset")
+    {
+        Caption = 'Self PIN Reset';
+    }
+    value(28; "Gaming Utility Payment")
+    {
+        Caption = 'Gaming Utility Payment';
+    }
+    value(29; "Till Payment")
+    {
+        Caption = 'Till Payment';
+    }
+    value(30; "SMP PIN Reset")
+    {
+        Caption = 'SMP PIN Reset';
+    }
+    value(31; "SMP Registration")
+    {
+        Caption = 'SMP Registration';
     }
 }

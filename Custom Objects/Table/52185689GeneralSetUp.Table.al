@@ -533,6 +533,10 @@ table 52185689 "General Set-Up"
         {
             TableRelation = "Transaction Types".Code WHERE(Type = FILTER("SMS Charge"));
         }
+        field(50024; "Transfer Excise Duty (%)"; Decimal)
+        {
+            Caption = 'Transfers Excise Duty (%)';
+        }
     }
 
     keys

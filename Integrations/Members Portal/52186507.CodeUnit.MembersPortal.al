@@ -2774,6 +2774,7 @@ codeunit 52186507 "Members Portal Integration"
         identifier: JsonToken;
         charge_action: JsonToken;
         amount: JsonToken;
+        receiver_identifier: JsonToken;
 
         SearchMember: Record Members;
         ChargesInfo: List of [decimal];
@@ -2786,15 +2787,23 @@ codeunit 52186507 "Members Portal Integration"
 
         ResponseText: Text;
         ResponseDescription: Text;
+
+        ReceiverIdentifierExists: Boolean;
     begin
         Payload.Get('account_number', account_number);
         Payload.Get('identifier_type', identifier_type); // MSISDN, CUSTOMER_NO
         Payload.Get('identifier', identifier);
         Payload.Get('charge_action', charge_action);
         Payload.Get('amount', amount);
+        ReceiverIdentifierExists := Payload.Get('receiver_identifier', receiver_identifier);
 
         if MemberExists(identifier_type.AsValue.AsText, identifier.AsValue.AsText, SearchMember, ResponseText, ResponseDescription) then begin
-            ChargesInfo := SkyMbankingTrans.GetTransChargesPreview(charge_action.AsValue.AsText, amount.AsValue.AsDecimal, account_number.AsValue.AsText, SearchMember);
+            // ChargesInfo := SkyMbankingTrans.GetTransChargesPreview(charge_action.AsValue.AsText, amount.AsValue.AsDecimal, account_number.AsValue.AsText, SearchMember);
+            if ReceiverIdentifierExists then begin
+                ChargesInfo := SkyMbankingTrans.GetTransChargesPreview(charge_action.AsValue.AsText, amount.AsValue.AsDecimal, account_number.AsValue.AsText, SearchMember, receiver_identifier.AsValue.AsText);
+            end else begin
+                ChargesInfo := SkyMbankingTrans.GetTransChargesPreview(charge_action.AsValue.AsText, amount.AsValue.AsDecimal, account_number.AsValue.AsText, SearchMember, '');
+            end;
             Datum.Add('charge_amount', ChargesInfo.Get(1) - ChargesInfo.Get(2));
             Datum.Add('excise_duty', ChargesInfo.Get(2));
             Datum.Add('total_charges', (ChargesInfo.Get(1)));
@@ -5332,7 +5341,7 @@ codeunit 52186507 "Members Portal Integration"
 
                 HRSetup.Get;
                 HRSetup.TestField(HRSetup."Leave Application Nos.");
-                 theLeaveApplication."Application Code" := NoSeriesMgt.GetNextNo(HRSetup."Leave Application Nos.");
+                theLeaveApplication."Application Code" := NoSeriesMgt.GetNextNo(HRSetup."Leave Application Nos.");
                 // NoSeriesMgt.InitSeries(HRSetup."Leave Application Nos.", '', 0D, theLeaveApplication."Application Code", theLeaveApplication."No series");
 
                 theLeaveApplication."Source of Application" := theLeaveApplication."Source of Application"::"Staff Portal";
