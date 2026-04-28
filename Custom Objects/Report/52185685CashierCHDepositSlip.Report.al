@@ -220,28 +220,23 @@ Report 52185685 "Cashier CHDeposit Slip"
                 User.SetRange("User Name", UserId);
                 if User.Find('-') then begin
                     CashierName := User."Full Name";
-                end;
-
-                // if "Transaction Date";
-
+                end; 
                 Reprint := '';
                 if "Transaction Date" < Today then
                     Reprint := 'REPRINT'
                 else if ("Transaction Date" = Today) and ("Transaction Time" <> 0T) then begin
                     if Time > "Transaction Time" then begin
-                        if (Time - "Transaction Time") > 60000 then // 1 minute buffer to account for initial processing time
+                        if (Time - "Transaction Time") > 60000 then 
                             Reprint := 'REPRINT';
                     end;
                 end;
-
-                //calculate the charges
+    
                 SavingsLedgerEntry.Reset;
                 SavingsLedgerEntry.SetRange("Customer No.", "Account No");
                 SavingsLedgerEntry.SetRange("Document No.", No);
                 if SavingsLedgerEntry.FindSet then begin
                     SavingsLedgerEntry.CalcSums(Amount);
-                    SumTransactionCharges := SavingsLedgerEntry.Amount - Amount;
-                    //MESSAGE('the trans charges are %1',SumTransactionCharges);
+                    SumTransactionCharges := SavingsLedgerEntry.Amount - Amount; 
                 end;
 
                 Savings.Reset;
@@ -267,18 +262,8 @@ Report 52185685 "Cashier CHDeposit Slip"
     requestpage
     {
         SaveValues = true;
-
-        layout
-        {
-        }
-
-        actions
-        {
-        }
-    }
-
-    labels
-    {
+        layout { }
+        actions { }
     }
     trigger OnPreReport()
     begin
@@ -311,8 +296,7 @@ Report 52185685 "Cashier CHDeposit Slip"
         You_were_served_by__CaptionLbl: label 'You were served by :';
         THANK_YOUCaptionLbl: label 'THANK YOU';
         Better_life_for_our_members_globallyCaptionLbl: label 'Better life for our members globally';
-        CompanyInfo: Record "Company Information";
-        //CheckReport: Report CheckRepo;
+        CompanyInfo: Record "Company Information"; 
         NumberText: array[2] of Text[250];
         SumTransactionCharges: Decimal;
         ChAmount: Decimal;
@@ -335,32 +319,33 @@ Report 52185685 "Cashier CHDeposit Slip"
 
     local procedure InitTextVariable()
     begin
-        OnesText[1] := 'One';
-        OnesText[2] := 'Two';
-        OnesText[3] := 'Three';
+        
+        OnesText[1] := 'One'; 
+        OnesText[2] := 'Two'; 
+        OnesText[3] := 'Three'; 
         OnesText[4] := 'Four';
-        OnesText[5] := 'Five';
-        OnesText[6] := 'Six';
-        OnesText[7] := 'Seven';
+        OnesText[5] := 'Five'; 
+        OnesText[6] := 'Six'; 
+        OnesText[7] := 'Seven'; 
         OnesText[8] := 'Eight';
-        OnesText[9] := 'Nine';
-        OnesText[10] := 'Ten';
-        OnesText[11] := 'Eleven';
+        OnesText[9] := 'Nine'; 
+        OnesText[10] := 'Ten'; 
+        OnesText[11] := 'Eleven'; 
         OnesText[12] := 'Twelve';
-        OnesText[13] := 'Thirteen';
-        OnesText[14] := 'Fourteen';
-        OnesText[15] := 'Fifteen';
+        OnesText[13] := 'Thirteen'; 
+        OnesText[14] := 'Fourteen'; 
+        OnesText[15] := 'Fifteen'; 
         OnesText[16] := 'Sixteen';
-        OnesText[17] := 'Seventeen';
-        OnesText[18] := 'Eighteen';
+        OnesText[17] := 'Seventeen'; 
+        OnesText[18] := 'Eighteen'; 
         OnesText[19] := 'Nineteen';
-        TensText[1] := '';
-        TensText[2] := 'Twenty';
-        TensText[3] := 'Thirty';
+        TensText[1] := ''; 
+        TensText[2] := 'Twenty'; 
+        TensText[3] := 'Thirty'; 
         TensText[4] := 'Forty';
-        TensText[5] := 'Fifty';
-        TensText[6] := 'Sixty';
-        TensText[7] := 'Seventy';
+        TensText[5] := 'Fifty'; 
+        TensText[6] := 'Sixty'; 
+        TensText[7] := 'Seventy'; 
         TensText[8] := 'Eighty';
         TensText[9] := 'Ninety';
     end;
