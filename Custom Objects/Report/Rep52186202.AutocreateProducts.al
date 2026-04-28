@@ -11,7 +11,7 @@ report 52186202 AutocreateProducts
     {
         dataitem(Members; Members)
         {
-            DataItemTableView = where(Status = filter(new));
+            //DataItemTableView = where(Status = filter(new));
             trigger OnAfterGetRecord()
             begin
                 productFactory.reset();

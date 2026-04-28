@@ -1,7 +1,7 @@
 table 52185744 "Appraisal Salary Details"
 {
-    DrillDownPageID = "Loan Disbursement Lines";
-    LookupPageID = "Loan Disbursement Lines";
+    DrillDownPageID = "Appraisal Salary Details.";
+    LookupPageID = "Appraisal Salary Details.";
 
     fields
     {
