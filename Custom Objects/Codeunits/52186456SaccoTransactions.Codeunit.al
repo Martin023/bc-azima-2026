@@ -12228,7 +12228,7 @@ Codeunit 52186456 "Sacco Transactions"
     end;
 
 
-    procedure LinkATM(ATMApplications: Record "ATM Linking Applications")
+    procedure LinkATM(ATMLinking: record "ATM Linking Applications")
     var
         GenJournalLine: Record "Gen. Journal Line";
         LineNo: Integer;
@@ -12251,79 +12251,117 @@ Codeunit 52186456 "Sacco Transactions"
         Txt004: label 'Your account has been linked to Sacco Link ATM.';
         ATMLinkingStatistics: Record "ATM Linking  Statistics";
         ATMCardStorage: Record "ATM Card Storage";
-        ATMInventory: Record "ATM Inventory";
+        ATMApplications: record "ATM Applications";
+        msg: Text;
+        SMSSource: enum "SMS Source";
+        SendSMS: Codeunit SendSms;
+        theMember: Record "Members";
 
     begin
-        //with ATMApplications do
-        if ATMApplications.Status <> ATMApplications.Status::Approved then Error(ErrPosted);
-        IF ATMApplications."ATM Application No." <> '' then begin
-            if ATMApplications."ATM Charges Applied" <> true then Error(ErrChargeATM);
-        END;
-        if Confirm(ConfrmATMLink, true) = true then begin
-            if (ATMApplications."ATM Linked" = true) and (ATMApplications."ATM Delinked" = false) then Error(ErrATMLinked);
-            ATMApplications.TestField("Card No");
-            ATMApplications."Linked Date" := Today;
-            ATMApplications."Linked By" := UserId;
-            ATMApplications."Card Status" := ATMApplications."card status"::Active;
-            ATMApplications."ATM Linked" := true;
-            ATMApplications."ATM Delinked" := false;
-            ATMInventory.Status := ATMInventory.Status::Linked;
-            ATMApplications.Modify;
+        ATMApplications.reset;
+        ATMApplications.setrange("No.", ATMLinking."ATM Application No.");
+        if ATMApplications.FindFirst() then begin
 
-            ATMCardStorage.reset;
-            ATMCardStorage.SetRange("Account No.", ATMApplications."Account No");
-            ATMCardStorage.SetRange("Card Number", ATMApplications."Card No");
-            if ATMCardStorage.FindFirst() then begin
-                ATMCardStorage.Linked := ATMApplications."ATM Linked";
-                ATMCardStorage.DeLinked := ATMApplications."ATM Delinked";
-                ATMCardStorage.Modify();
-            end
-            else begin
-                ATMCardStorage.Init();
-                ATMCardStorage."Account No." := ATMApplications."Account No";
-                ATMCardStorage."Card Number" := ATMApplications."Card No";
-                ATMCardStorage.Linked := ATMApplications."ATM Linked";
-                ATMCardStorage.DeLinked := ATMApplications."ATM Delinked";
-                ATMCardStorage.Insert();
+            //with ATMApplications do
+            if ATMLinking.Status <> ATMLinking.Status::Approved then Error(ErrPosted);
+            IF ATMLinking."ATM Application No." <> '' then begin
+                if ATMApplications."ATM Charges Applied" <> true then Error(ErrChargeATM);
+            END;
+            if Confirm(ConfrmATMLink, true) = true then begin
+                if (ATMLinking."ATM Linked" = true) and (ATMLinking."ATM Delinked" = false) then Error(ErrATMLinked);
+                ATMLinking.TestField("Card No");
+                ATMLinking."Linked Date" := Today;
+                ATMLinking."Linked By" := UserId;
+                ATMLinking."Card Status" := ATMLinking."card status"::Active;
+                ATMLinking."ATM Linked" := true;
+                ATMLinking."ATM Delinked" := false;
+                ATMLinking.Modify;
+
+
+                ATMCardStorage.reset;
+                ATMCardStorage.SetRange("Account No.", ATMLinking."Account No");
+                ATMCardStorage.SetRange("Card Number", ATMLinking."Card No");
+                if ATMCardStorage.FindFirst() then begin
+                    ATMCardStorage.Linked := ATMLinking."ATM Linked";
+                    //ATMCardStorage.DeLinked := ATMLinking."ATM Delinked";
+                    ATMCardStorage.Modify();
+                end
+                else begin
+                    ATMCardStorage.Init();
+                    ATMCardStorage."Account No." := ATMLinking."Account No";
+                    ATMCardStorage."Card Number" := ATMLinking."Card No";
+                    ATMCardStorage."Member Name" := ATMLinking."Account Name";
+                    ATMCardStorage.Linked := ATMLinking."ATM Linked";
+                    //ATMCardStorage.DeLinked := ATMLinking."ATM Delinked";
+                    ATMCardStorage.Insert();
+                end;
+
+                SavingsAccounts.Reset;
+                SavingsAccounts.SetRange(SavingsAccounts."No.", ATMApplications."Account No");
+                if SavingsAccounts.Find('-') then begin
+                    SavingsAccounts."ATM No." := ATMApplications."Card No";
+                    ATMApplications."Linked Date" := Today;
+                    ATMApplications."Linked By" := UserId;
+                    ATMApplications."ATM Delinked Date" := Today;
+                    ATMApplications."Card Status" := ATMApplications."card status"::Active;
+                    ATMApplications."ATM Linked" := true;
+                    ATMApplications."ATM Delinked" := false;
+                    ATMApplications.Modify;
+                    // SavingsAccounts.Modify;
+                    ATMLinkingStatistics.Init;
+                    ATMLinkingStatistics."Account No." := SavingsAccounts."No.";
+                    ATMLinkingStatistics."Activity Date" := Today;
+                    ATMLinkingStatistics."ATM Application No." := ATMApplications."No.";
+                    ATMLinkingStatistics."Linking Type" := ATMLinkingStatistics."linking type"::Linking;
+                    ATMLinkingStatistics."User ID" := UserId;
+                    ATMLinkingStatistics."Activity Time" := Time;
+                    ATMLinkingStatistics.Insert(true);
+
+                    // ATMLinkingStatistics.Init;
+                    // ATMLinkingStatistics."Account No." := SavingsAccounts."No.";
+                    // ATMLinkingStatistics."Activity Date" := Today;
+                    // ATMLinkingStatistics."ATM Application No." := ATMApplications."No.";
+                    // ATMLinkingStatistics."Linking Type" := ATMLinkingStatistics."linking type"::Linking;
+                    // ATMLinkingStatistics."User ID" := UserId;
+                    // ATMLinkingStatistics."Activity Time" := Time;
+                    // ATMLinkingStatistics.Insert(true);
+
+                    //send sms
+                    // if SavingsACC.Get(ATMApplications."Account No") then begin
+                    //     SendSMS.SendSms(Source::ATM_COLLECTION, SavingsACC."Mobile Phone No", Txt004, Format(ATMApplications."No."), '', true, 0, false, 'CBS', ATMApplications."No.", 'CBS');
+                    // end;
+
+                    Message(MSGATMCardLinked);
+
+                    // ATM_LINKING SMS
+                    theMember.Reset();
+                    theMember.SetRange("Primary Identification", ATMLinking."Customer ID");
+                    if theMember.FindFirst() then begin
+                        if theMember."Phone No." <> '' then begin
+                            msg := 'Dear ' + theMember."First Name" +
+                            ', your ATM card has been linked to your account successfully. REF: '
+                             + Format(ATMApplications."No.");
+
+                            SendSMS.SendSms(
+                                SMSSource::ATM_LINKING,
+                                theMember."Phone No.",
+                                msg,
+                                Format(ATMApplications."No."),
+                                '',
+                                true,
+                                220,
+                                false,
+                                'CBS',
+                                ATMApplications."No.",
+                                'CBS'
+                            );
+                        end;
+                    end;
+                end else
+                    Error(ErrOperationCancelled);
             end;
+        end;
 
-            //     SavingsAccounts.Reset;
-            //     SavingsAccounts.SetRange(SavingsAccounts."No.", ATMApplications."Account No");
-            //     if SavingsAccounts.Find('-') then begin
-            //         SavingsAccounts."ATM No." := ATMApplications."Card No";
-            //         ATMApplications."Linked Date" := Today;
-            //         ATMApplications."Linked By" := UserId;
-            //         ATMApplications."ATM Delinked Date" := Today;
-            //         ATMApplications."Card Status" := ATMApplications."card status"::Active;
-            //         ATMApplications."ATM Linked" := true;
-            //         ATMApplications."ATM Delinked" := false;
-            //         ATMApplications.Modify;
-            //         // SavingsAccounts.Modify;
-            //         ATMLinkingStatistics.Init;
-            //         ATMLinkingStatistics."Account No." := SavingsAccounts."No.";
-            //         ATMLinkingStatistics."Activity Date" := Today;
-            //         ATMLinkingStatistics."ATM Application No." := ATMApplications."ATM Application No.";
-            //         ATMLinkingStatistics."Linking Type" := ATMLinkingStatistics."linking type"::Linking;
-            //         ATMLinkingStatistics."User ID" := UserId;
-            //         ATMLinkingStatistics."Activity Time" := Time;
-            //         ATMLinkingStatistics.Insert(true);
-
-            // ATMLinkingStatistics.Init;
-            // ATMLinkingStatistics."Account No." := SavingsAccounts."No.";
-            // ATMLinkingStatistics."Activity Date" := Today;
-            // ATMLinkingStatistics."ATM Application No." := ATMApplications."ATM Application No.";
-            // ATMLinkingStatistics."Linking Type" := ATMLinkingStatistics."linking type"::Linking;
-            // ATMLinkingStatistics."User ID" := UserId;
-            // ATMLinkingStatistics."Activity Time" := Time;
-            // ATMLinkingStatistics.Insert(true);
-
-            //send sms
-            // if SavingsACC.Get(ATMApplications."Account No") then begin
-            //     SendSMS.SendSms(Source::ATM_COLLECTION, SavingsACC."Mobile Phone No", Txt004, Format(ATMApplications."No."), '', true, 0, false, 'CBS', ATMApplications."No.", 'CBS');
-            // end;
-            Message(MSGATMCardLinked);
-        end else
-            Error(ErrOperationCancelled);
     end;
     // end;
 
@@ -12349,59 +12387,78 @@ Codeunit 52186456 "Sacco Transactions"
         Txt004: label 'Your Account has been Delinked from ATM. In case of any query contact your branch.';
         ATMLinkingStatistics: Record "ATM Linking  Statistics";
         ATMCardStorage: Record "ATM Card Storage";
-    // [RunOnClient]
-    // Window: code[100];//dotnet Interaction;
-    // MyComment: Text;
+        MyComment: Text;
+        Selection: Integer;
+        ReasonPage: Page "ATM Card Delink Reason";
     begin
-        //with ATMApplications do
-        if ATMApplications.Status <> ATMApplications.Status::Approved then Error(ErrPosted);
+        if ATMApplications.Status <> ATMApplications.Status::Approved then
+            Error(ErrPosted);
         if Confirm(ConfrmATMLink, true) = true then begin
             if ATMApplications."ATM Delinked" = true then Error(ErrATMLinked);
             ATMApplications.TestField("Card No");
-            // MyComment := Window.InputBox('Enter reason for delinking ATM Card for ' + "Account Name", 'account:' + "Account No", '', 100, 100);
-            // if MyComment = '' then Error('Kindly Enter reason for delinking');
-            // ATMCardStorage.Init();
-            // ATMCardStorage."Account No." := ATMApplications."Account No";
-            // ATMCardStorage."Card Number" := ATMApplications."Card No";
-            // ATMCardStorage.Linked := ATMApplications."ATM Linked";
-            // ATMCardStorage.DeLinked := ATMApplications."ATM Delinked";
-            // ATMCardStorage.Insert();
+            Clear(ReasonPage);
+            if ReasonPage.RunModal() = Action::OK then begin
+                MyComment := ReasonPage.GetReason();
 
-            ATMApplications."ATM Delinked" := true;
-            ATMApplications."ATM Linked" := false;
-            ATMApplications."Card Status" := ATMApplications."card status"::Frozen;
-            ATMApplications.Modify;
+                ATMApplications."ATM Delinked" := true;
+                ATMApplications."ATM Linked" := false;
+                ATMApplications."Card Status" := ATMApplications."card status"::Frozen;
+                ATMApplications.Modify;
 
-            // SavingsAccounts.Reset;
-            // SavingsAccounts.SetRange(SavingsAccounts."No.", ATMApplications."Account No");
-            // if SavingsAccounts.Find('-') then begin
-            //     SavingsAccounts."ATM No." := '';
-            //     ATMApplications."ATM Delinked Date" := Today;
-            //     ATMApplications."Delinked By" := UserId;
-            //     ATMApplications."ATM Delinked" := true;
-            //     ATMApplications."ATM Linked" := false;
-            //     ATMApplications."Card Status" := ATMApplications."card status"::Frozen;
-            //     ATMApplications.Modify;
-            //     SavingsAccounts.Modify;
-            //     ATMLinkingStatistics.Init;
-            //     ATMLinkingStatistics."Account No." := SavingsAccounts."No.";
-            //     ATMLinkingStatistics."Activity Date" := Today;
-            //     ATMLinkingStatistics."ATM Application No." := ATMApplications."ATM Application No.";
-            //     ATMLinkingStatistics."Linking Type" := ATMLinkingStatistics."linking type"::Delinking;
-            //     ATMLinkingStatistics."User ID" := UserId;
-            //     ATMLinkingStatistics."Activity Time" := Time;
-            //     ATMLinkingStatistics."Reason for change" := MyComment;
-            //     ATMLinkingStatistics.Insert(true);
-            //send sms
-            if SavingsACC.Get(ATMApplications."Account No") then begin
-                SendSMS.SendSms(Source::ATM_COLLECTION, SavingsACC."Mobile Phone No", msg, Format(ATMApplications."No."), '', true, 0, false, 'CBS', ATMApplications."No.", 'CBS');
+                ATMCardStorage.reset;
+                ATMCardStorage.SetRange("Account No.", ATMApplications."Account No");
+                ATMCardStorage.SetRange("Card Number", ATMApplications."Card No");
+                if ATMCardStorage.FindFirst() then begin
+                    ATMCardStorage.Linked := ATMApplications."ATM Linked";
+                    //ATMCardStorage.DeLinked := ATMLinking."ATM Delinked";
+                    ATMCardStorage."Delinked On" := Today;
+                    ATMCardStorage."Delinked By" := UserId;
+                    ATMCardStorage.Reason := MyComment;
+                    ATMCardStorage.Modify();
+                end
+                else begin
+                    ATMCardStorage.Init();
+                    ATMCardStorage."Account No." := ATMApplications."Account No";
+                    ATMCardStorage."Card Number" := ATMApplications."Card No";
+                    ATMCardStorage."Member Name" := ATMApplications."Account Name";
+
+                    ATMCardStorage.Linked := ATMApplications."ATM Linked";
+                    //ATMCardStorage.DeLinked := ATMLinking."ATM Delinked";
+                    ATMCardStorage.Insert();
+                end;
+
+                SavingsAccounts.Reset;
+                SavingsAccounts.SetRange(SavingsAccounts."No.", ATMApplications."Account No");
+                if SavingsAccounts.Find('-') then begin
+                    SavingsAccounts."ATM No." := '';
+                    ATMApplications."ATM Delinked Date" := Today;
+                    ATMApplications."Delinked By" := UserId;
+                    ATMApplications."ATM Delinked" := true;
+                    ATMApplications."ATM Linked" := false;
+                    ATMApplications."Card Status" := ATMApplications."card status"::Frozen;
+                    ATMApplications.Modify;
+                    SavingsAccounts.Modify;
+                    ATMLinkingStatistics.Init;
+                    ATMLinkingStatistics."Account No." := SavingsAccounts."No.";
+                    ATMLinkingStatistics."Activity Date" := Today;
+                    ATMLinkingStatistics."ATM Application No." := ATMApplications."ATM Application No.";
+                    ATMLinkingStatistics."Linking Type" := ATMLinkingStatistics."linking type"::Delinking;
+                    ATMLinkingStatistics."User ID" := UserId;
+                    ATMLinkingStatistics."Activity Time" := Time;
+                    ATMLinkingStatistics."Reason for change" := MyComment;
+                    ATMLinkingStatistics.Insert(true);
+                    //send sms
+                    if SavingsACC.Get(ATMApplications."Account No") then begin
+                        SendSMS.SendSms(Source::ATM_COLLECTION, SavingsACC."Mobile Phone No", Txt004, Format(ATMApplications."No."), '', true, 0, false, 'CBS', ATMApplications."No.", 'CBS');
+                    end;
+                end;
+                Message(MSGATMCardLinked);
+            end else begin
+                Message(ErrOperationCancelled);
             end;
         end;
-
-        Message(MSGATMCardLinked);
-        // else
-        //         Error(ErrOperationCancelled);
     end;
+
     // end;
 
 

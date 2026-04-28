@@ -100,7 +100,7 @@ page 52186737 "ATM Inventory Card"
                     AvAl: Decimal;
                     PeriodicActivities: Codeunit "Periodic Activities";
                 begin
-                    PeriodicActivities.PostATMApplicationCharges(Rec);
+                    // PeriodicActivities.PostATMApplicationCharges(Rec);
                 end;
             }
             action("Already Charged ATM")

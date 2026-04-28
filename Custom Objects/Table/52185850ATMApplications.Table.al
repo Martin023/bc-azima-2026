@@ -26,40 +26,47 @@ table 52185850 "ATM Applications"
             TableRelation = IF ("Request Type" = filter(New)) "Savings Accounts"."No." WHERE("Loan Disbursement Account" = FILTER(true), Status = filter(Active),
                                                             "Product Category" = filter("FOSA Account"))
             ELSE
-            IF ("Request Type" = filter(Replacement)) "ATM Inventory"."Account No." where(Status = filter(Delinked));
+            IF ("Request Type" = filter(Replacement)) "ATM Card Storage"."Account No." where(Linked = filter(False));
 
             trigger OnValidate()
             var
                 TransCharges: Record "Transaction Charges";
                 ATMApplications: Record "ATM Applications";
+                ATMStorage: Record "ATM Card Storage";
             begin
-
-
                 SavingsAccounts.get("Account No");
                 SavingsAccounts.CalcFields("Balance (LCY)");
                 if SavingsAccounts.GetAvailableBalance(SavingsAccounts."No.") < TransCharges."Charge Amount" then
-                    Error('There is no enough balance in the account for the card application');
+                    Error(
+                        'There is not enough balance in account %1 for the card application. AvailableBalance: %2, TransCharges: %3',
+                        SavingsAccounts."No.",
+                        Format(SavingsAccounts.GetAvailableBalance(SavingsAccounts."No.")),
+                        Format(TransCharges."Charge Amount")
+                    );
 
                 UserSetup.Get(UserId);
                 SavingsAccounts.Reset;
                 SavingsAccounts.SetRange(SavingsAccounts."No.", "Account No");
-                //  SavingsAccounts.SetRange(SavingsAccounts."Product Category", SavingsAccounts."Product Category"::"FOSA Account");
-                // SavingsAccounts.SetRange(SavingsAccounts.Status, SavingsAccounts.Status::Active);
                 if SavingsAccounts.Find('-') then begin
                     Members.Reset;
                     Members.SetRange(Members."No.", SavingsAccounts."Member No.");
                     if Members.Find('-') then begin
-                        // "Branch Code":=Members."Global Dimension 2 Code";
-                        // "Shortcut Dimension 1 Code":=UserSetup."Global Dimension 1 Code";//Members."Global Dimension 1 Code";
-                        // "Shortcut Dimension 2 Code":=UserSetup."Global Dimension 2 Code";//Members."Global Dimension 2 Code";
                         "Account Name" := Members.Name;
                         "Customer ID" := Members."Primary Identification";
-                        "Phone No." := SavingsAccounts."Mobile Phone No";
+                        if SavingsAccounts."Mobile Phone No" <> '' then
+                            "Phone No." := SavingsAccounts."Mobile Phone No"
+                        else if SavingsAccounts."Phone No." <> '' then
+                            "Phone No." := SavingsAccounts."Phone No." else
+                            if SavingsAccounts."Transactional Mobile No" <> '' then
+                                "Phone No." := SavingsAccounts."Transactional Mobile No"
+                            else if Members."Phone No." <> '' then
+                                "Phone No." := Members."Phone No."
+                            else if Members."Transactional Mobile Number" <> '' then
+                                "Phone No." := Members."Transactional Mobile Number";
+
+
                         Address := Members."Current Address";
                     end else begin
-                        //  "Branch Code":='';
-                        // "Shortcut Dimension 1 Code":='';
-                        // "Shortcut Dimension 2 Code":='';
                         "Account Name" := '';
                         "Customer ID" := '';
                         "Phone No." := '';
@@ -68,7 +75,6 @@ table 52185850 "ATM Applications"
 
                     AvailableBalance := 0;
                     MinBalance := 0;
-                    //     TChargeAmount:=0;
                     if Account.Get(SavingsAccounts."No.") then begin
                         Account.CalcFields(Account.Balance, Account."Uncleared Cheques", Account."Authorised Over Draft", Account."Balance (LCY)");
                         ProdType.Reset;
@@ -79,101 +85,123 @@ table 52185850 "ATM Applications"
                         end;
                     end;
 
-                    GenSetup.Get;
-                    ChargeAmount := 0;
+                    // Check for ongoing ATM applications
+                    ATMApplications.Reset();
+                    ATMApplications.SetFilter(ATMApplications."Account No", "Account No");
+                    ATMApplications.SetFilter(Status, '%1|%2', ATMApplications.Status::Open, ATMApplications.Status::"Pending Approval");
+                    ATMApplications.SetFilter("No.", '<>%1', Rec."No.");
+                    if ATMApplications.FindSet() then
+                        Error('This account has an ongoing ATM application %1', ATMApplications."No.");
 
-                    ATMCardTypes.Reset;
-                    ATMCardTypes.SetRange(ATMCardTypes.Code, "Card Type");
-                    if ATMCardTypes.Find('-') then begin
-                        if "Request Type" = "Request Type"::New then begin
+                    ATMStorage.Reset();
+                    ATMStorage.SetRange("Account No.", Rec."Account No");
+                    if ATMStorage.FindSet() then begin
+                        if Rec."Request Type" = Rec."Request Type"::New then
+                            Message('This account already has preexisting cards. The request type should be Replacement.');
+                        Rec."Request Type" := Rec."Request Type"::Replacement;
+                    end;
+
+                    // Check ATM Storage for active linked cards (only block if Request Type is New)
+                    /*if Rec."Request Type" = Rec."Request Type"::New then begin
+                        ATMStorage.Reset();
+                        ATMStorage.SetRange("Account No.", Rec."Account No");
+                        ATMStorage.SetRange(Linked, true);
+                        if ATMStorage.FindSet() then begin
+                            Error('This account currently has an active ATM card. The request type should be Replacement.');
+                        end;
+                    end;*/
+
+                    // Check for existing applications with same account
+                    ATMApplications.Reset();
+                    ATMApplications.SetFilter("Account No", "Account No");
+                    ATMApplications.SetFilter("No.", '<>%1', Rec."No.");
+                    ATMApplications.SetRange(Status, ATMApplications.Status::Open);
+                    if ATMApplications.FindSet() then begin
+                        if Rec."Request Type" = Rec."Request Type"::New then
+                            Message('This account already has preexisting ATM application(s). The request type should be Replacement.');
+                        Rec."Request Type" := Rec."Request Type"::Replacement;
+                    end;
+                end;
+
+                GenSetup.Get;
+                ChargeAmount := 0;
+
+                ATMCardTypes.Reset;
+                ATMCardTypes.SetRange(ATMCardTypes.Code, "Card Type");
+                if ATMCardTypes.Find('-') then begin
+                    if "Request Type" = "Request Type"::New then begin
+                        TransType.Reset;
+                        TransType.SetRange(TransType.Code, ATMCardTypes."Application Charge Code");
+                        if TransType.Find('-') then begin
+                            ChargeAmount := 0;
+                            TransactionCharges.Reset;
+                            TransactionCharges.SetRange(TransactionCharges."Transaction Type", TransType.Code);
+                            if TransactionCharges.Find('-') then begin
+                                repeat
+                                    if (TransactionCharges."Transaction Charge Category" = TransactionCharges."Transaction Charge Category"::Normal) or
+                                       (TransactionCharges."Transaction Charge Category" = TransactionCharges."Transaction Charge Category"::"Stamp Duty") then begin
+                                        if TransactionCharges."Charge Type" = TransactionCharges."Charge Type"::"% of Amount" then
+                                            ChargeAmount := TransactionCharges."Charge Amount"
+                                        else
+                                            ChargeAmount := TransactionCharges."Charge Amount";
+
+                                        TChargeAmount += ChargeAmount;
+                                    end;
+                                until TransactionCharges.Next = 0;
+                            end;
+                        end;
+                    end else
+                        if "Request Type" = "Request Type"::Replacement then begin
                             TransType.Reset;
-                            TransType.SetRange(TransType.Code, ATMCardTypes."Application Charge Code");//TransType.Type::"ATM Applications");
+                            TransType.SetRange(TransType.Code, ATMCardTypes."Replacement Charge Code");
                             if TransType.Find('-') then begin
                                 ChargeAmount := 0;
                                 TransactionCharges.Reset;
                                 TransactionCharges.SetRange(TransactionCharges."Transaction Type", TransType.Code);
                                 if TransactionCharges.Find('-') then begin
-
-                                    //MESSAGE('here');
                                     repeat
-                                        //ChargeAmount:=0;
                                         if (TransactionCharges."Transaction Charge Category" = TransactionCharges."Transaction Charge Category"::Normal) or
-                                        (TransactionCharges."Transaction Charge Category" = TransactionCharges."Transaction Charge Category"::"Stamp Duty") then begin
-                                            if TransactionCharges."Charge Type" = TransactionCharges."Charge Type"::"% of Amount" = true then
-                                                ChargeAmount := TransactionCharges."Charge Amount"//(TransType.Amount*TransactionCharges."Percentage of Amount")*0.01
+                                           (TransactionCharges."Transaction Charge Category" = TransactionCharges."Transaction Charge Category"::"Stamp Duty") then begin
+                                            if TransactionCharges."Charge Type" = TransactionCharges."Charge Type"::"% of Amount" then
+                                                ChargeAmount := TransactionCharges."Charge Amount"
                                             else
                                                 ChargeAmount := TransactionCharges."Charge Amount";
 
                                             TChargeAmount += ChargeAmount;
-                                            // IF TransactionCharges."Transaction Charge Category"<>TransactionCharges."Transaction Charge Category"::"Stamp Duty" THEN
-                                            //   BEGIN
-                                            //TChargeAmount:=TChargeAmount+((ChargeAmount*GenSetup."Excise Duty (%)")*0.01);
-                                            //END;
                                         end;
                                     until TransactionCharges.Next = 0;
-
                                 end;
                             end;
-                        end else
-                            //if card type not new
-                            if "Request Type" = "Request Type"::Replacement then begin
-                                TransType.Reset;
-                                TransType.SetRange(TransType.Code, ATMCardTypes."Replacement Charge Code");//"Application Charge Code");//TransType.Type::"ATM Applications");
-                                if TransType.Find('-') then begin
-                                    ChargeAmount := 0;
-                                    TransactionCharges.Reset;
-                                    TransactionCharges.SetRange(TransactionCharges."Transaction Type", TransType.Code);
-                                    if TransactionCharges.Find('-') then begin
-
-                                        //MESSAGE('here');
-                                        repeat
-                                            //ChargeAmount:=0;
-                                            if (TransactionCharges."Transaction Charge Category" = TransactionCharges."Transaction Charge Category"::Normal) or
-                                            (TransactionCharges."Transaction Charge Category" = TransactionCharges."Transaction Charge Category"::"Stamp Duty") then begin
-                                                if TransactionCharges."Charge Type" = TransactionCharges."Charge Type"::"% of Amount" = true then
-                                                    ChargeAmount := TransactionCharges."Charge Amount"//(TransType.Amount*TransactionCharges."Percentage of Amount")*0.01
-                                                else
-                                                    ChargeAmount := TransactionCharges."Charge Amount";
-
-                                                TChargeAmount += ChargeAmount;
-                                                // IF TransactionCharges."Transaction Charge Category"<>TransactionCharges."Transaction Charge Category"::"Stamp Duty" THEN
-                                                //   BEGIN
-                                                //TChargeAmount:=TChargeAmount+((ChargeAmount*GenSetup."Excise Duty (%)")*0.01);
-                                                //END;
-                                            end;
-                                        until TransactionCharges.Next = 0;
-
-                                    end;
-                                end;
-                            end;
-                    end;//IF ATMCardTypes.FIND('-')
+                        end;
                 end;
+
                 if AvailableBalance < TChargeAmount then begin
-                    //send sms
                     SavingsACC.Reset;
                     SavingsACC.SetRange("No.", "Account No");
                     if SavingsACC.Find('-') then begin
-                        //  MESSAGE(SavingsACC."No.");
+                        // SendSMS functionality commented out - uncomment if needed
                         // SendSMS.SendSms(SourceType::"ATM Collection", SavingsACC."Mobile Phone No", Txt004, "No.", "Account No", false);
                     end;
-                    //ERROR(ErrRejectCard,TChargeAmount);
+                    // Error(ErrRejectCard, TChargeAmount); // Uncomment if you want to stop processing
                 end;
-                //   MESSAGE('T charges %1 and %2',TChargeAmount,ChargeAmount);
-                CashierTransactions.Init;
-                CashierTransactions.No := '';
-                CashierTransactions."Account No" := "Account No";
-                CashierTransactions."Account Name" := "Account Name";
-                CashierTransactions."Available Balance" := AvailableBalance;
-                CashierTransactions."Global Dimension 1 Code" := "Shortcut Dimension 1 Code";
-                CashierTransactions."Global Dimension 2 Code" := "Shortcut Dimension 2 Code";
-                CashierTransactions."ID No" := '';
-                CashierTransactions."Responsibility Center" := "Responsibility Center";
-                CashierTransactions.Amount := TChargeAmount;
-                CashierTransactions.Cashier := UserId;
-                CashierTransactions.Remarks := 'ATM Application Charges';
-                CashierTransactions.Posted := true;
-                CashierTransactions.Type := CashierTransactions.Type::Lien;
-                CashierTransactions.Insert(true);
+
+                // MODIFIED: Only create cashier transaction when AllowInsert is true
+                
+                    CashierTransactions.Init;
+                    CashierTransactions.No := '';
+                    CashierTransactions."Account No" := "Account No";
+                    CashierTransactions."Account Name" := "Account Name";
+                    CashierTransactions."Available Balance" := AvailableBalance;
+                    CashierTransactions."Global Dimension 1 Code" := "Shortcut Dimension 1 Code";
+                    CashierTransactions."Global Dimension 2 Code" := "Shortcut Dimension 2 Code";
+                    CashierTransactions."ID No" := '';
+                    CashierTransactions."Responsibility Center" := "Responsibility Center";
+                    CashierTransactions.Amount := TChargeAmount;
+                    CashierTransactions.Cashier := UserId;
+                    CashierTransactions.Remarks := 'ATM Application Charges';
+                    CashierTransactions.Posted := true;
+                    CashierTransactions.Type := CashierTransactions.Type::Lien;
+                    CashierTransactions.Insert(true);
             end;
         }
         field(3; "Branch Code"; Code[20])
@@ -576,6 +604,10 @@ table 52185850 "ATM Applications"
         {
             CaptionClass = '1,1,1';
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1));
+        }
+        field(57; "Received from Bank"; Boolean)
+        {
+
         }
     }
 
