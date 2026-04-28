@@ -659,7 +659,7 @@ page 52187040 "Bulk Refunds Card"
                                 Error('Source Description is required in line for account %1', AccTransLines."Account No.");
                             if AccTransLines."Destination Description" = '' then
                                 //Error('DestinationDescription is required in line for account %1', AccTransLines."Account No.");
-                                Error('Destination Description is required in line for account %1', AccTransLines."Account No.");
+                                Error('Destination Description is required in line for account %1', AccTransLines."Destination Account");
                         until AccTransLines.Next() = 0;
                 end;
             Rec."Refund Type"::"Loan Clearance":
