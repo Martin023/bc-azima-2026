@@ -49,7 +49,7 @@ page 52185499 "E-Channels Role Center"
                                     "Mpesa Withdrawal" |
                                     "Utility Payment" |
                                     Airtime |
-                                    "Bank Transfer"
+                                    "Bank Transfer" | "Till Payment" | "Gaming Utility Payment"
                                 ),
                             "Change Type" = filter(Post | Reverse)
                             );
@@ -65,7 +65,7 @@ page 52185499 "E-Channels Role Center"
                                     "Mpesa Withdrawal" |
                                     "Utility Payment" |
                                     Airtime |
-                                    "Bank Transfer"
+                                    "Bank Transfer" | "Till Payment" | "Gaming Utility Payment"
                                 ),
                                 "Change Type" = const(Post)
                             );
@@ -81,7 +81,7 @@ page 52185499 "E-Channels Role Center"
                                     "Mpesa Withdrawal" |
                                     "Utility Payment" |
                                     Airtime |
-                                    "Bank Transfer"
+                                    "Bank Transfer" | "Till Payment" | "Gaming Utility Payment"
                                 ),
                                 "Change Type" = const(Reverse)
                             );

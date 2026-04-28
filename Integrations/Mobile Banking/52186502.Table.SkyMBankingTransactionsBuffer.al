@@ -593,49 +593,56 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                     'MPESA_WITHDRAWAL',
                     "Transaction Amount",
                     "Savings Account",
-                    NullMember
+                    NullMember,
+                    ''
                 ).Get(1);
             "Transaction Type"::Airtime:
                 TotalCharge := SkyMbankingTransactions.GetTransChargesPreview(
                     'AIRTIME_PURCHASE',
                     "Transaction Amount",
                     "Savings Account",
-                    NullMember
+                    NullMember,
+                    ''
                 ).Get(1);
             "Transaction Type"::"Utility Payment":
                 TotalCharge := SkyMbankingTransactions.GetTransChargesPreview(
                     'BILL_PAYMENT',
                     "Transaction Amount",
                     "Savings Account",
-                    NullMember
+                    NullMember,
+                    ''
                 ).Get(1);
             "Transaction Type"::"Bank Transfer":
                 TotalCharge := SkyMbankingTransactions.GetTransChargesPreview(
                     'BANK_TRANSFER',
                     "Transaction Amount",
                     "Savings Account",
-                    NullMember
+                    NullMember,
+                    ''
                 ).Get(1);
             "Transaction Type"::"Account Transfer":
                 TotalCharge := SkyMbankingTransactions.GetTransChargesPreview(
                     'IFT_ACCOUNT_TO_ACCOUNT',
                     "Transaction Amount",
                     "Savings Account",
-                    NullMember
+                    NullMember,
+                    ''
                 ).Get(1);
             "Transaction Type"::"Kesasa Account Transfer":
                 TotalCharge := SkyMbankingTransactions.GetTransChargesPreview(
                     'IFT_ACCOUNT_TO_ACCOUNT',
                     "Transaction Amount",
                     "Savings Account",
-                    NullMember
+                    NullMember,
+                    ''
                 ).Get(1);
             "Transaction Type"::"Mpesa Deposit":
                 TotalCharge := -SkyMbankingTransactions.GetTransChargesPreview(
                     'DEPOSIT',
                     "Transaction Amount",
                     "Savings Account",
-                    NullMember
+                    NullMember,
+                    ''
                 ).Get(1);
             "Transaction Type"::"Account Balance Enquiry":
                 begin
@@ -652,7 +659,8 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                                 'SINGLE_ACCOUNT_BALANCE_ENQUIRY',
                                 "Transaction Amount",
                                 "Savings Account",
-                                NullMember
+                                NullMember,
+                                ''
                             ).Get(1);
                         end;
                     end;
@@ -672,7 +680,8 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                                 'ACCOUNT_MINI_STATEMENT',
                                 "Transaction Amount",
                                 "Savings Account",
-                                NullMember
+                                NullMember,
+                                ''
                             ).Get(1);
                         end;
                     end;
@@ -682,63 +691,72 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                     'ACCOUNT_FULL_STATEMENT',
                     "Transaction Amount",
                     "Savings Account",
-                    NullMember
+                    NullMember,
+                    ''
                 ).Get(1);
             "Transaction Type"::"Loan Balance Enquiry":
                 TotalCharge := SkyMbankingTransactions.GetTransChargesPreview(
                     'LOAN_BALANCE_ENQUIRY',
                     "Transaction Amount",
                     "Savings Account",
-                    NullMember
+                    NullMember,
+                    ''
                 ).Get(1);
             "Transaction Type"::"Loan Mini-Statement":
                 TotalCharge := SkyMbankingTransactions.GetTransChargesPreview(
                     'LOAN_MINI_STATEMENT',
                     "Transaction Amount",
                     "Savings Account",
-                    NullMember
+                    NullMember,
+                    ''
                 ).Get(1);
             "Transaction Type"::"Loan Full-Statement":
                 TotalCharge := SkyMbankingTransactions.GetTransChargesPreview(
                     'LOAN_FULL_STATEMENT',
                     "Transaction Amount",
                     "Savings Account",
-                    NullMember
+                    NullMember,
+                    ''
                 ).Get(1);
             "Transaction Type"::"Loan Application":
                 TotalCharge := SkyMbankingTransactions.GetTransChargesPreview(
                     'LOAN_APPLICATION',
                     "Transaction Amount",
                     "Savings Account",
-                    NullMember
+                    NullMember,
+                    ''
                 ).Get(1);
             "Transaction Type"::"Pay Loan From Account":
                 TotalCharge := SkyMbankingTransactions.GetTransChargesPreview(
                     'IFT_LOAN_REPAYMENT',
                     "Transaction Amount",
                     "Savings Account",
-                    NullMember
+                    NullMember,
+                    ''
                 ).Get(1);
             "Transaction Type"::"Loan Limit Check":
                 TotalCharge := SkyMbankingTransactions.GetTransChargesPreview(
                     'CHECK_LOAN_LIMIT',
                     "Transaction Amount",
                     "Savings Account",
-                    NullMember
+                    NullMember,
+                    ''
                 ).Get(1);
             "Transaction Type"::"Guarantorship Ability Enquiry":
                 TotalCharge := SkyMbankingTransactions.GetTransChargesPreview(
                     'GUARANTORSHIP_ABILITY_ENQUIRY',
                     "Transaction Amount",
                     "Savings Account",
-                    NullMember
+                    NullMember,
+                    ''
                 ).Get(1);
             "Transaction Type"::"Coop B2B Deposit":
                 TotalCharge := SkyMbankingTransactions.GetTransChargesPreview(
                     'COOP_DEPOSIT_B2B',
                     "Transaction Amount",
                     "Savings Account",
-                    NullMember
+                    NullMember,
+                    ''
                 ).Get(1);
 
             "Transaction Type"::"Coop P2F Deposit":
@@ -746,7 +764,16 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                     'COOP_DEPOSIT_P2F',
                     "Transaction Amount",
                     "Savings Account",
-                    NullMember
+                    NullMember,
+                    ''
+                ).Get(1);
+            "Transaction Type"::"Till Payment":
+                TotalCharge := SkyMbankingTransactions.GetTransChargesPreview(
+                    'TILL_PAYMENT',
+                    "Transaction Amount",
+                    "Savings Account",
+                    NullMember,
+                    "Receiver Identifier"
                 ).Get(1);
             else
         end;

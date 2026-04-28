@@ -82,6 +82,10 @@ page 52186182 "General Setup"
                 {
                     ApplicationArea = Basic;
                 }
+                field("Transfer Excise Duty (%)"; rec."Transfer Excise Duty (%)")
+                {
+                    ApplicationArea = Basic;
+                }
                 field("Excise Duty G/L"; rec."Excise Duty G/L")
                 {
                     ApplicationArea = Basic;
