@@ -84,6 +84,36 @@ table 52185547 "Mobile Transaction Types Lines"
         {
             ValuesAllowed = vendor, "G/L Account", Customer, "Bank Account";
         }
+        field(15; "Sky Revenue Share"; Boolean)
+        {
+            DataClassification = ToBeClassified;
+            trigger OnValidate()
+            var
+                myInt: Integer;
+            begin
+                if not "Sky Revenue Share" then begin
+                    "Sky Revenue Share %" := 0;
+                    "Sky Revenue Account No." := '';
+                end;
+            end;
+        }
+        field(16; "Sky Revenue Share %"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+            MinValue = 1;
+            MaxValue = 100;
+        }
+        field(17; "Sky Revenue Account No."; Code[20])
+        {
+            TableRelation = Vendor."No.";
+            trigger OnValidate()
+            var
+                myInt: Integer;
+            begin
+                TestField("Sky Revenue Share", true);
+                TestField("Sky Revenue Share %");
+            end;
+        }
 
     }
 
@@ -127,6 +157,11 @@ table 52185547 "Mobile Transaction Types Lines"
 
             theHeader.Modify;
         end;
+
+        if "Sky Revenue Share" then begin
+            TestField("Sky Revenue Share %");
+            TestField("Sky Revenue Account No.");
+        end;
     end;
 
     trigger OnModify()
@@ -138,6 +173,11 @@ table 52185547 "Mobile Transaction Types Lines"
             theHeader."Updated By" := UserId;
 
             theHeader.Modify;
+        end;
+
+        if "Sky Revenue Share" then begin
+            TestField("Sky Revenue Share %");
+            TestField("Sky Revenue Account No.");
         end;
     end;
 

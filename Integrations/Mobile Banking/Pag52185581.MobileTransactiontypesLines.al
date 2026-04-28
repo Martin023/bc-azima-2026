@@ -69,6 +69,26 @@ page 52185581 "Mobile Transaction types Lines"
                 field("Withholding Tax"; Rec."Withholding Tax")
                 {
                 }
+                field("Sky Revenue Share"; Rec."Sky Revenue Share")
+                {
+                    ApplicationArea = Basic, Suite;
+                    trigger OnValidate()
+                    var
+                        myInt: Integer;
+                    begin
+                        SkyRevenueShareEnabled := Rec."Sky Revenue Share";
+                    end;
+                }
+                field("Sky Revenue Share %"; Rec."Sky Revenue Share %")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = SkyRevenueShareEnabled;
+                }
+                field("Sky Revenue Share Account No."; Rec."Sky Revenue Account No.")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = SkyRevenueShareEnabled;
+                }
             }
         }
     }
@@ -76,6 +96,10 @@ page 52185581 "Mobile Transaction types Lines"
     actions
     {
     }
+
+    // Variables
+    var
+        SkyRevenueShareEnabled: Boolean;
 }
 
 
