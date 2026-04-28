@@ -1,8 +1,7 @@
 page 52187320 AdvancedHumanResources
 {
     PageType = RoleCenter;
-    Caption = 'HR AND PAYROLL';
-
+    Caption = 'Human Resources Role Center.';
 
     layout
     {
@@ -289,10 +288,11 @@ page 52187320 AdvancedHumanResources
                         Caption = 'HR Training Management';
                         action(HRTrainingNeeds)
                         {
-                            Caption = 'HR Training Needs';
+                            Caption = 'Open HR Training Needs';
                             ApplicationArea = Basic, Suite;
                             RunObject = Page "HR Training Needs List";
                         }
+
                         action(HrTrainingApplications)
                         {
                             Caption = 'HR Training Applications';
@@ -355,12 +355,12 @@ page 52187320 AdvancedHumanResources
                                 RunObject = Report "Training Evaluation";
                             }
 
-                            action(jobqueue)
-                            {
-                                Caption = 'Queue';
-                                ApplicationArea = Basic, Suite;
-                                RunObject = Report HremployeesJobQueues;
-                            }
+                            // action(jobqueue)
+                            // {
+                            //     Caption = 'Queue';
+                            //     ApplicationArea = Basic, Suite;
+                            //     RunObject = Report HremployeesJobQueues;
+                            // }
 
 
 
@@ -732,41 +732,41 @@ page 52187320 AdvancedHumanResources
                     }
 
                 }
-                group(Overtime)
-                {
-                    action("Overtime Management")
-                    {
-                        Caption = 'HR Needs Request';
-                        ApplicationArea = Basic, Suite;
-                        RunObject = Page "HR Overtime List1";
-                    }
-                    action(Overtimeclaim)
-                    {
-                        Caption = 'HR Overtime Claim List';
-                        ApplicationArea = Basic, Suite;
-                        RunObject = Page "Overtime Claim List";
-                    }
-                    action(OvertimeReport)
-                    {
-                        Caption = 'HR Overtime Claim Cost Report';
-                        ApplicationArea = Basic, Suite;
-                        RunObject = report "Overtime Claim Cost";
-                    }
-                    action(OvertimeNeedsReport)
-                    {
-                        Caption = 'HR Overtime Needs Report';
-                        ApplicationArea = Basic, Suite;
-                        RunObject = report "Overtime Needs Request";
-                    }
-                    action(OvertimeClaimReport)
-                    {
-                        Caption = 'HR Overtime Claim Report';
-                        ApplicationArea = Basic, Suite;
-                        RunObject = report "Overtime Claim";
-                    }
+                // group(Overtime)
+                // {
+                //     action("Overtime Management")
+                //     {
+                //         Caption = 'HR Needs Request';
+                //         ApplicationArea = Basic, Suite;
+                //         RunObject = Page "HR Overtime List1";
+                //     }
+                //     action(Overtimeclaim)
+                //     {
+                //         Caption = 'HR Overtime Claim List';
+                //         ApplicationArea = Basic, Suite;
+                //         RunObject = Page "Overtime Claim List";
+                //     }
+                //     action(OvertimeReport)
+                //     {
+                //         Caption = 'HR Overtime Claim Cost Report';
+                //         ApplicationArea = Basic, Suite;
+                //         RunObject = report "Overtime Claim Cost";
+                //     }
+                //     action(OvertimeNeedsReport)
+                //     {
+                //         Caption = 'HR Overtime Needs Report';
+                //         ApplicationArea = Basic, Suite;
+                //         RunObject = report "Overtime Needs Request";
+                //     }
+                //     action(OvertimeClaimReport)
+                //     {
+                //         Caption = 'HR Overtime Claim Report';
+                //         ApplicationArea = Basic, Suite;
+                //         RunObject = report "Overtime Claim";
+                //     }
 
 
-                }
+                // }
                 // group("Loans")
                 // {
                 //     Caption = 'Loans';
@@ -1265,37 +1265,37 @@ page 52187320 AdvancedHumanResources
                 //         RunObject = page "Loan Type List";
                 //     }
                 // }
-                group("Staff Welfare List")
-                {
-                    Caption = 'Staff Welfare List';
-                    action("Staff Welfare Lists")
-                    {
-                        Caption = 'Staff Welfare List';
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "Staff Welfare List";
-                    }
-                    action("Relationship Types")
-                    {
-                        Caption = 'Benefits';
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "Relationship Types";
-                    }
+                // group("Staff Welfare List")
+                // {
+                //     Caption = 'Staff Welfare List';
+                //     action("Staff Welfare Lists")
+                //     {
+                //         Caption = 'Staff Welfare List';
+                //         ApplicationArea = Basic, Suite;
+                //         RunObject = page "Staff Welfare List";
+                //     }
+                //     action("Relationship Types")
+                //     {
+                //         Caption = 'Benefits';
+                //         ApplicationArea = Basic, Suite;
+                //         RunObject = page "Relationship Types";
+                //     }
 
-                    action("Staff Welfare Report")
-                    {
-                        Caption = 'Staff WelfareClaim Report';
-                        ApplicationArea = Basic, Suite;
-                        RunObject = report "Staff Welfare Claims";
-                    }
-                    action("Staff Welfare Advance Report")
-                    {
-                        Caption = 'Staff Welfare Advance Report';
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "Welfare Advance List";
-                    }
+                //     action("Staff Welfare Report")
+                //     {
+                //         Caption = 'Staff WelfareClaim Report';
+                //         ApplicationArea = Basic, Suite;
+                //         RunObject = report "Staff Welfare Claims";
+                //     }
+                //     action("Staff Welfare Advance Report")
+                //     {
+                //         Caption = 'Staff Welfare Advance Report';
+                //         ApplicationArea = Basic, Suite;
+                //         RunObject = page "Welfare Advance List";
+                //     }
 
 
-                }
+                // }
                 group("HR Exit Interviews")
                 {
                     Caption = 'HR Exit Interviews';
@@ -1343,21 +1343,7 @@ page 52187320 AdvancedHumanResources
                     }
 
 
-                    group(repandanaly)
-                    {
-                        Caption = 'Reports And Analysis';
-                        // action(SeparationReport)
-                        // {
-                        //     Caption = 'Separation Report';
-                        //     ApplicationArea = Basic, Suite;
-                        //     // RunObject = report "Separation report1"; missing repo
-                        // }
-                    }
-                    // group(arch)
-                    // {
-                    //     Caption = 'Archive';
 
-                    // }
 
                 }
                 // group("Product Variations")
@@ -1392,24 +1378,7 @@ page 52187320 AdvancedHumanResources
                 //     }
 
                 // }
-                group("System Edits")
-                {
-                    action("Open System Edit")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'System Edits';
-                        RunObject = Page "System Edits List";
 
-                    }
-                    action("Posted System Edit")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Posted System Edits';
-                        RunObject = Page "Posted System Edits List";
-
-                    }
-
-                }
 
 
             }
@@ -1551,78 +1520,78 @@ page 52187320 AdvancedHumanResources
 
                 //     }
                 // }
-                group("HR Promotion Recommendation")
-                {
-                    Caption = 'HR Promotion Recommendation';
-                    action("HRPromotion Recommendations")
-                    {
+                // group("HR Promotion Recommendation")
+                // {
+                //     Caption = 'HR Promotion Recommendation';
+                //     action("HRPromotion Recommendations")
+                //     {
 
-                        Caption = 'HR Promotion Recommendations';
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "HR Promotion Recommend List";
-                    }
-                    action("Effected Promotion Recommendations")
-                    {
+                //         Caption = 'HR Promotion Recommendations';
+                //         ApplicationArea = Basic, Suite;
+                //         RunObject = page "HR Promotion Recommend List";
+                //     }
+                //     action("Effected Promotion Recommendations")
+                //     {
 
-                        Caption = 'Effected Promotion Recommendations';
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "HR Promotion RecommendAppList";
-                    }
-                }
-                group("Salary Agreements")
-                {
-                    group(GrpSalary)
-                    {
-                        Caption = 'Salary Agreements';
-                        action("Salary Agreement List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Salary Agreement List';
-                            RunObject = page "Salary Agreement List";
-                        }
-                        action("Approved Salary Agreement List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Approved Salary Agreement List';
-                            RunObject = page "Approved Salary Agreement List";
-                        }
-                        action("Rejected Salary Agreement List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Rejected Salary Agreement List';
-                            RunObject = page "Rejected Salary Agreement List";
-                        }
-                    }
-                    group(SalAgreeRepos)
-                    {
-                        Caption = 'Salary Agreements Reports';
-                        action("Salary Agreement")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Salary Agreement';
-                            RunObject = report "Salary Agreement";
-                        }
-                        action("Salary Agreement Report")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Salary Forms Report';
-                            RunObject = report "Salary Agreement Report";
-                        }
-                        action("Salary Agreement Counter")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Salary Agreement Counter';
-                            RunObject = report "Salary Agreement Counter";
-                        }
-                        action("RSalary Agreement List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Salary Agreement List';
-                            RunObject = report "Salary Agreement List";
-                        }
-                    }
+                //         Caption = 'Effected Promotion Recommendations';
+                //         ApplicationArea = Basic, Suite;
+                //         RunObject = page "HR Promotion RecommendAppList";
+                //     }
+                // }
+                // group("Salary Agreements")
+                // {
+                //     group(GrpSalary)
+                //     {
+                //         Caption = 'Salary Agreements';
+                //         action("Salary Agreement List")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Salary Agreement List';
+                //             RunObject = page "Salary Agreement List";
+                //         }
+                //         action("Approved Salary Agreement List")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Approved Salary Agreement List';
+                //             RunObject = page "Approved Salary Agreement List";
+                //         }
+                //         action("Rejected Salary Agreement List")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Rejected Salary Agreement List';
+                //             RunObject = page "Rejected Salary Agreement List";
+                //         }
+                //     }
+                //     group(SalAgreeRepos)
+                //     {
+                //         Caption = 'Salary Agreements Reports';
+                //         action("Salary Agreement")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Salary Agreement';
+                //             RunObject = report "Salary Agreement";
+                //         }
+                //         action("Salary Agreement Report")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Salary Forms Report';
+                //             RunObject = report "Salary Agreement Report";
+                //         }
+                //         action("Salary Agreement Counter")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Salary Agreement Counter';
+                //             RunObject = report "Salary Agreement Counter";
+                //         }
+                //         action("RSalary Agreement List")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Salary Agreement List';
+                //             RunObject = report "Salary Agreement List";
+                //         }
+                //     }
 
-                }
+                // }
                 // group("File Requests.")
                 // {
                 //     action("Request File")
@@ -1854,20 +1823,20 @@ page 52187320 AdvancedHumanResources
                     ApplicationArea = Basic, Suite;
                     RunObject = page "HR Leave Applications List1";
                 }
-                action("Store Requisition")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Store Requisition';
-                    RunObject = Page "Store Requisitions List";
+                // action("Store Requisition")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Store Requisition';
+                //     RunObject = Page "Store Requisitions List";
 
 
-                }
-                action("Overtime Claim List")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Overtime';
-                    RunObject = page "Overtime Claim List";
-                }
+                // }
+                // action("Overtime Claim List")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Overtime';
+                //     RunObject = page "Overtime Claim List";
+                // }
                 action("Exit Clearance")
                 {
                     ApplicationArea = Basic, Suite;

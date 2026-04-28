@@ -220,6 +220,9 @@ table 52185799 "Account Transfer Destination"
         {
             Editable = false;
         }
+        field(15; "Destination Description"; Text[50])
+        {
+        }
     }
 
     keys

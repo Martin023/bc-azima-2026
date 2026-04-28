@@ -3595,6 +3595,21 @@ page 52186778 "Finance Role Center"
                         RunObject = Page "PR Bank Summary";
                         ApplicationArea = Basic, Suite;
                     }
+                    group("Payroll Transactions")
+                    {
+                        Caption = 'Reports and Analysis';
+                        action("PR Period Transactions")
+                        {
+                            RunObject = Page "prPeriodTransaction List";
+                            ApplicationArea = Basic, Suite;
+                        }
+                        action("PR Employer Transactions")
+                        {
+                            RunObject = Page "prEmployer Deductions";
+                            ApplicationArea = Basic, Suite;
+                        }
+
+                    }
                     group("PR Reports and Analysis")
                     {
                         Caption = 'Reports and Analysis';

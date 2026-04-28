@@ -71,7 +71,7 @@ report 52186018 "Generate Bulk Refunds"
                             LoansInterest.Amount := SavingsAccounts."Balance (LCY)";
                             LoansInterest."Destination Account" := '';
                             LoansInterest."Loan No." := '';
-                            LoansInterest.Description := "Interest Header".Description;
+                            LoansInterest."Source Description" := "Interest Header".Description;
                             if LoansInterest.Amount > 0 then
                                 LoansInterest.Insert(true);
                         end;

@@ -60,6 +60,11 @@ page 52185824 "Account Transfer Destination"
                 //     ApplicationArea = Basic, Suite;
                 //     Caption = 'Loan No.';
                 // }
+                field("Destination Description"; Rec."Destination Description")
+                {
+                    Caption = 'Description';
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Destination Amount"; Rec."Destination Amount")
                 {
                     ApplicationArea = Basic, Suite;

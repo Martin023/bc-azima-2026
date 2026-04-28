@@ -52,7 +52,7 @@ report 52186236 "Recover Loans Below 100"
                                                     LoansInterest.Amount := AvAmt;
                                                 LoansInterest."Destination Account" := '';
                                                 LoansInterest."Loan No." := Loans."Loan No.";
-                                                LoansInterest.Description := "Interest Header".Description;
+                                                LoansInterest."Destination Description" := "Interest Header".Description;
                                                 if LoansInterest.Amount > 0 then
                                                     LoansInterest.Insert(true);
                                                 AvAmt -= LoansInterest.Amount;
@@ -74,7 +74,7 @@ report 52186236 "Recover Loans Below 100"
 
                                                     LoansInterest."Destination Account" := '';
                                                     LoansInterest."Loan No." := Loans."Loan No.";
-                                                    LoansInterest.Description := "Interest Header".Description;
+                                                    LoansInterest."Destination Description" := "Interest Header".Description;
                                                     if LoansInterest.Amount > 0 then
                                                         LoansInterest.Insert(true);
                                                     AvAmt -= LoansInterest.Amount;
