@@ -122,6 +122,50 @@ page 52185770 "Appraisal Salary Details"
                 end;
 
             }
+
+            action("Calculate NetPay")
+            {
+                ApplicationArea = Basic, Suite;
+                Image = Calculate;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                PromotedOnly = true;
+                Visible=false;
+                trigger OnAction()
+                var
+                    ApprD: Record "Appraisal Salary Details";
+                    Net: Decimal;
+                begin
+                    if Rec."Loan No" <> '' then begin
+                        repeat
+                            Net := CalculateNetPayForLoan(Rec."Loan No", Rec."Client Code");
+
+                            // Update or create the Net Income record for this loan/client
+                            ApprD.Reset();
+                            ApprD.SetRange("Loan No", Rec."Loan No");
+                            ApprD.SetRange("Client Code", Rec."Client Code");
+                            ApprD.SetRange(Type, ApprD.Type::"Net Income");
+                            if ApprD.FindFirst() then begin
+                                ApprD.Amount := Net;
+                                ApprD.Modify();
+                            end else begin
+                                ApprD.Init();
+                                ApprD."Loan No" := Rec."Loan No";
+                                ApprD."Client Code" := Rec."Client Code";
+                                ApprD.Type := ApprD.Type::"Net Income";
+                                ApprD.Code := 'NET PAY';
+                                ApprD.Amount := Net;
+                                ApprD.Insert();
+                            end;
+
+                            Rec.Modify();
+                        until Rec.Next() = 0;
+                        Message('NetPay calculation completed for all records.');
+                    end else
+                        Message('Loan No. is required to calculate NetPay.');
+                end;
+            }
         }
     }
 
@@ -157,6 +201,59 @@ page 52185770 "Appraisal Salary Details"
             //     end;
             // end;
         end;
+    end;
+
+    local procedure CalculateNetPayForLoan(LoanNo: Code[50]; ClientCode: Code[20]): Decimal
+    var
+        ApprDetailsLocal: Record "Appraisal Salary Details";
+        LoanRec: Record Loans;
+        GrossPayAmount: Decimal;
+        TotalDeductions: Decimal;
+        FacillitativeAmount: Decimal;
+        Net: Decimal;
+    begin
+        GrossPayAmount := 0;
+        TotalDeductions := 0;
+        FacillitativeAmount := 0;
+
+        // Get Gross Pay
+        ApprDetailsLocal.Reset();
+        ApprDetailsLocal.SetRange("Loan No", LoanNo);
+        ApprDetailsLocal.SetRange("Client Code", ClientCode);
+        ApprDetailsLocal.SetRange(Type, ApprDetailsLocal.Type::"Gross Pay");
+        if ApprDetailsLocal.FindFirst() then
+            GrossPayAmount := ApprDetailsLocal.Amount;
+
+        // Sum all Deductions
+        ApprDetailsLocal.Reset();
+        ApprDetailsLocal.SetRange("Loan No", LoanNo);
+        ApprDetailsLocal.SetRange("Client Code", ClientCode);
+        ApprDetailsLocal.SetRange(Type, ApprDetailsLocal.Type::Deductions);
+        if ApprDetailsLocal.FindSet() then
+            repeat
+                TotalDeductions += ApprDetailsLocal.Amount;
+            until ApprDetailsLocal.Next() = 0;
+
+        // Sum Facilitative Allowances
+        // ApprDetailsLocal.Reset();
+        // ApprDetailsLocal.SetRange("Loan No", LoanNo);
+        // ApprDetailsLocal.SetRange("Client Code", ClientCode);
+        // ApprDetailsLocal.SetRange(Type, ApprDetailsLocal.Type::"Facillitative Allowance");
+        // if ApprDetailsLocal.FindSet() then
+        //     repeat
+        //         FacillitativeAmount += ApprDetailsLocal.Amount;
+        //     until ApprDetailsLocal.Next() = 0;
+
+        // Calculate Net based on recovery mode when loan exists
+        // if LoanRec.Get(LoanNo) then begin
+        //     if LoanRec."Recovery Mode" = LoanRec."Recovery Mode"::Salary then
+        //         Net := (GrossPayAmount + FacillitativeAmount) - TotalDeductions
+        //     else
+        //         Net := GrossPayAmount - TotalDeductions;
+        // end else
+            Net := GrossPayAmount - TotalDeductions;
+
+        exit(Net);
     end;
 
     var

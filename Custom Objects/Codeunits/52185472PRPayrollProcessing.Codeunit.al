@@ -2915,7 +2915,12 @@ Codeunit 52185472 "PR Payroll Processing"
         if prNSSF.FindFirst then begin
             repeat
                 if ((curBaseAmount >= prNSSF."Lower Limit") and (curBaseAmount <= prNSSF."Upper Limit")) then
-                    NSSF := prNSSF."Tier 1 Employee Deduction" + prNSSF."Tier 2 Employee Deduction";
+                    NSSF := prNSSF."Tier 1 Employer Contribution" + prNSSF."Tier 2 Employer Contribution";
+ 
+                if curBaseAmount < 108000 then begin
+                    NSSF := prNSSF."Tier 1 Employer Contribution" + (0.06 * (curBaseAmount - prNSSF."Lower Limit"));
+                    Exit(NSSF);
+                end;
             until prNSSF.Next = 0;
         end;
     end;
@@ -2931,6 +2936,12 @@ Codeunit 52185472 "PR Payroll Processing"
             repeat
                 if ((curBaseAmount >= prNSSF."Lower Limit") and (curBaseAmount <= prNSSF."Upper Limit")) then
                     NSSF := prNSSF."Tier 1 Employer Contribution" + prNSSF."Tier 2 Employer Contribution";
+ 
+                if curBaseAmount < 108000 then begin
+                    NSSF := prNSSF."Tier 1 Employer Contribution" + (0.06 * (curBaseAmount - prNSSF."Lower Limit"));
+                    Exit(NSSF);
+                end;
+
             until prNSSF.Next = 0;
         end;
     end;

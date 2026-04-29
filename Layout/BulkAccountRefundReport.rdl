@@ -22,67 +22,6 @@
       <rd:DataSourceID>d02fdc65-e4b1-45ba-8bef-7ee358ee5ea4</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="No">
-          <DataField>No</DataField>
-        </Field>
-        <Field Name="DocumentNo">
-          <DataField>DocumentNo</DataField>
-        </Field>
-        <Field Name="Description">
-          <DataField>Description</DataField>
-        </Field>
-        <Field Name="Postingdate">
-          <DataField>Postingdate</DataField>
-        </Field>
-        <Field Name="Status">
-          <DataField>Status</DataField>
-        </Field>
-        <Field Name="Posted">
-          <DataField>Posted</DataField>
-        </Field>
-        <Field Name="Filters">
-          <DataField>Filters</DataField>
-        </Field>
-        <Field Name="CompanyInfoName">
-          <DataField>CompanyInfoName</DataField>
-        </Field>
-        <Field Name="CompanyInfoPic">
-          <DataField>CompanyInfoPic</DataField>
-        </Field>
-        <Field Name="SourceAccount_RefundAccountTransferlines">
-          <DataField>SourceAccount_RefundAccountTransferlines</DataField>
-        </Field>
-        <Field Name="SourceLoanNo_RefundAccountTransferlines">
-          <DataField>SourceLoanNo_RefundAccountTransferlines</DataField>
-        </Field>
-        <Field Name="SourceLoanTransaction_RefundAccountTransferlines">
-          <DataField>SourceLoanTransaction_RefundAccountTransferlines</DataField>
-        </Field>
-        <Field Name="DestinationAccount_RefundAccountTransferlines">
-          <DataField>DestinationAccount_RefundAccountTransferlines</DataField>
-        </Field>
-        <Field Name="Description_RefundAccountTransferlines">
-          <DataField>Description_RefundAccountTransferlines</DataField>
-        </Field>
-        <Field Name="SrcDescription_RefundAccountTransferlines">
-          <DataField>SrcDescription_RefundAccountTransferlines</DataField>
-        </Field>
-        <Field Name="Amount_RefundAccountTransferlines">
-          <DataField>Amount_RefundAccountTransferlines</DataField>
-        </Field>
-        <Field Name="Amount_RefundAccountTransferlinesFormat">
-          <DataField>Amount_RefundAccountTransferlinesFormat</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -1319,12 +1258,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -1364,4 +1297,65 @@ End Function
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="DocumentNo">
+          <DataField>DocumentNo</DataField>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+        </Field>
+        <Field Name="Postingdate">
+          <DataField>Postingdate</DataField>
+        </Field>
+        <Field Name="Status">
+          <DataField>Status</DataField>
+        </Field>
+        <Field Name="Posted">
+          <DataField>Posted</DataField>
+        </Field>
+        <Field Name="Filters">
+          <DataField>Filters</DataField>
+        </Field>
+        <Field Name="CompanyInfoName">
+          <DataField>CompanyInfoName</DataField>
+        </Field>
+        <Field Name="CompanyInfoPic">
+          <DataField>CompanyInfoPic</DataField>
+        </Field>
+        <Field Name="SourceAccount_RefundAccountTransferlines">
+          <DataField>SourceAccount_RefundAccountTransferlines</DataField>
+        </Field>
+        <Field Name="SourceLoanNo_RefundAccountTransferlines">
+          <DataField>SourceLoanNo_RefundAccountTransferlines</DataField>
+        </Field>
+        <Field Name="SourceLoanTransaction_RefundAccountTransferlines">
+          <DataField>SourceLoanTransaction_RefundAccountTransferlines</DataField>
+        </Field>
+        <Field Name="DestinationAccount_RefundAccountTransferlines">
+          <DataField>DestinationAccount_RefundAccountTransferlines</DataField>
+        </Field>
+        <Field Name="Description_RefundAccountTransferlines">
+          <DataField>Description_RefundAccountTransferlines</DataField>
+        </Field>
+        <Field Name="SrcDescription_RefundAccountTransferlines">
+          <DataField>SrcDescription_RefundAccountTransferlines</DataField>
+        </Field>
+        <Field Name="Amount_RefundAccountTransferlines">
+          <DataField>Amount_RefundAccountTransferlines</DataField>
+        </Field>
+        <Field Name="Amount_RefundAccountTransferlinesFormat">
+          <DataField>Amount_RefundAccountTransferlinesFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>
