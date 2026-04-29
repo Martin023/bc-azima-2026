@@ -22,12 +22,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-ad                    <Value>Take Home Amount</Value>
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
+ad                    <Value>Take Home Amount</Value><Style><FontFamily>Times New Roman</FontFamily><FontWeight>Bold</FontWeight></Style></TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
