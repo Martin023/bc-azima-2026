@@ -578,6 +578,18 @@ End Function
         <Field Name="Branch_code">
           <DataField>Branch_code</DataField>
         </Field>
+        <Field Name="Branch_Name">
+          <DataField>Branch_Name</DataField>
+        </Field>
+        <Field Name="Reprint">
+          <DataField>Reprint</DataField>
+        </Field>
+        <Field Name="ReprintDate">
+          <DataField>ReprintDate</DataField>
+        </Field>
+        <Field Name="ReprintTime">
+          <DataField>ReprintTime</DataField>
+        </Field>
         <Field Name="ReportForNavId_8541">
           <DataField>ReportForNavId_8541</DataField>
         </Field>
