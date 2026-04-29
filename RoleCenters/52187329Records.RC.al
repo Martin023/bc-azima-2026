@@ -319,7 +319,7 @@ page 52187329 "Records"
                     action("Member Group List")
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Groups list.';
+                        Caption = 'MFI list.';
                         RunObject = Page "Member Group List";
                     }
                     action("Archived Register")

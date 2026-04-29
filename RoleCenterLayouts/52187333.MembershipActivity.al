@@ -52,7 +52,7 @@ page 52187333 "Membership Activity cue"
                     field("Total Members"; Rec."Total Members")
                     {
                         ApplicationArea = All;
-                        // Image = none;
+                        Image = none;
                         ToolTip = 'Specifies the value of Active Members.';
                         trigger OnDrillDown()
                         var
@@ -160,13 +160,13 @@ page 52187333 "Membership Activity cue"
 
     trigger OnAfterGetRecord()
     begin
-        CalculateCues();
+        // CalculateCues();
     end;
 
-    local procedure CalculateCues()
-    var
-        CustomCuesCodeunit: Codeunit CustomCuesCodeunit;
-    begin
-        //rec."Members Created Today" := CustomCuesCodeunit.calculatememberscreatedtoday();
-    end;
+    // local procedure CalculateCues()
+    // var
+    //     CustomCuesCodeunit: Codeunit CustomCuesCodeunit;
+    // begin
+    //     //rec."Members Created Today" := CustomCuesCodeunit.calculatememberscreatedtoday();
+    // end;
 }
