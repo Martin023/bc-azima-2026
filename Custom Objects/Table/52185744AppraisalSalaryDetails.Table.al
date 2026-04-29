@@ -230,7 +230,7 @@ var
     curNSSF: Decimal;
     ShifAmount: Decimal;
     Savingsacc: Record "Savings Accounts";
-    ShrContr: Decimal;
+    DepositContr: Decimal;
     HousingLevyAmount: Decimal;
     curPayeAmount : Decimal;
     prTransactionCodes : Record "PR Transaction Codes";
@@ -273,9 +273,9 @@ begin
 
     Savingsacc.Reset;
     Savingsacc.SetRange("Member No.", Rec."Client Code");
-    Savingsacc.SetRange("Product Category", Savingsacc."Product Category"::"Share Capital");
+    Savingsacc.SetRange("Product Category", Savingsacc."Product Category"::"BOSA Deposits");
     if Savingsacc.FindFirst() then
-        ShrContr := Savingsacc."Monthly Contribution";
+        DepositContr := Savingsacc."Monthly Contribution";
     //Message('Share Contribution: %1',ShrContr);
 
     HousingLevyAmount := ROUND((curTransAmount * (1.5 / 100)), 0.01, '<');
@@ -310,7 +310,7 @@ begin
                         ApprDetails.Amount := ShifAmount;                       
 
                     'SHARES':
-                        ApprDetails.Amount := ShrContr;
+                        ApprDetails.Amount := DepositContr;
                         
                     'PAYE':
                     ApprDetails.Amount := curPayeAmount;

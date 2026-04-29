@@ -100,6 +100,7 @@ page 52187301 "Banking Management Role Center"
                 }
                 group("Member Withdrawal")
                 {
+                    visible = false;
                     Caption = 'Member Withdrawal';
                     group("Member Withdrawal Notice")
                     {
