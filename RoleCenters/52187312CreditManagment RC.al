@@ -60,6 +60,68 @@ page 52187312 "Credit Management Role Center"
                     Caption = 'Credit Accounts';
                     RunObject = Page "Credit Accounts List";
                 }
+                group("Member Withdrawal")
+                {
+                    Caption = 'Member Withdrawal';
+                    group("Member Withdrawal Notice")
+                    {
+                        //Visible = false;
+                        Caption = 'Member Withdrawal Notice';
+                        action("Open Withdrawal Notice")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            caption = 'Open Withdrawal Notice';
+                            RunObject = page "Open Withdrawal Notice";
+                        }
+                        action("Pending Withdrawal Notice")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            caption = 'Pending Withdrawal Notice';
+                            RunObject = page "Pending Withdrawal Notice";
+                        }
+                        action("Approved Withdrawal Notice")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            caption = 'Approved Withdrawal Notice';
+                            RunObject = page "Approved Withdrawal Notice";
+                        }
+                        action("Rejected Withdrawal Notice")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            caption = 'Rejected Withdrawal Notice';
+                            RunObject = page "Rejected Withdrawal Notice";
+                        }
+                    }
+                    group("Member CLosure")
+                    {
+                        //Visible = false;
+                        Caption = 'Member Closure';
+                        action("Open Closure List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            caption = 'Open Closure List';
+                            RunObject = page "Open Closure List";
+                        }
+                        action("Pending Closure List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            caption = 'Pending Closure List';
+                            RunObject = page "Pending Closure List";
+                        }
+                        action("Approved Closure List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            caption = 'Approved Closure List';
+                            RunObject = page "Approved Closure List";
+                        }
+                        action("Rejected Closure List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            caption = 'Rejected Closure List';
+                            RunObject = page "Rejected Closure List";
+                        }
+                    }
+                }
                 //*************************DMU-ADDONS*****************************************//
                 group("CRB Listing")
                 {
