@@ -551,7 +551,19 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Thank you for Giving us the Opportunity to serve you</Value>
+                    <Value>Thank you for Giving us the Opportunity to serve </Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>you</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -993,12 +1005,6 @@ End Function
         </Field>
         <Field Name="Reprint">
           <DataField>Reprint</DataField>
-        </Field>
-        <Field Name="ReprintDate">
-          <DataField>ReprintDate</DataField>
-        </Field>
-        <Field Name="ReprintTime">
-          <DataField>ReprintTime</DataField>
         </Field>
         <Field Name="ReprintDate">
           <DataField>ReprintDate</DataField>
