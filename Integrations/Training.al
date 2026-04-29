@@ -1,100 +1,100 @@
-codeunit 50100 "SOAP REST Service"
-{
-    // procedure HandleRequest(Request: Text): Text
-    // var
-    //     RequestParser: JsonObject;
-    //     RequestAction: JsonToken;
-    //     RequestPayload: JsonToken;
+// codeunit 50100 "SOAP REST Service"
+// {
+//     // procedure HandleRequest(Request: Text): Text
+//     // var
+//     //     RequestParser: JsonObject;
+//     //     RequestAction: JsonToken;
+//     //     RequestPayload: JsonToken;
 
-    //     HasToken: Boolean;
-    // begin
-    //     if Request <> '' then begin
-    //         RequestParser.ReadFrom(Request);
-    //         HasToken := RequestParser.SelectToken('$.action', RequestAction);
-    //         HasToken := RequestParser.SelectToken('$.payload', RequestPayload);
+//     //     HasToken: Boolean;
+//     // begin
+//     //     if Request <> '' then begin
+//     //         RequestParser.ReadFrom(Request);
+//     //         HasToken := RequestParser.SelectToken('$.action', RequestAction);
+//     //         HasToken := RequestParser.SelectToken('$.payload', RequestPayload);
 
-    //         // API actions here
-    //         case RequestAction.AsValue().AsText() of
-    //             'CREATE_USER_REQUEST':
-    //                 exit(CreateUserRequest(RequestPayload.AsObject));
-    //             'GET_USERS_LIST':
-    //                 exit(GetUsersList);
-    //             else
-    //                 exit(UnsupportedAction(RequestAction.AsValue.AsText));
-    //         end;
-    //     end else begin
-    //         exit('');
-    //     end;
-    // end;
+//     //         // API actions here
+//     //         case RequestAction.AsValue().AsText() of
+//     //             'CREATE_USER_REQUEST':
+//     //                 exit(CreateUserRequest(RequestPayload.AsObject));
+//     //             'GET_USERS_LIST':
+//     //                 exit(GetUsersList);
+//     //             else
+//     //                 exit(UnsupportedAction(RequestAction.AsValue.AsText));
+//     //         end;
+//     //     end else begin
+//     //         exit('');
+//     //     end;
+//     // end;
 
-    // local procedure CreateUserRequest(Payload: JsonObject): Text
-    // var
-    //     ResponseObject: JsonObject;
-    //     ResponseData: JsonObject;
-    //     Errors: JsonArray;
-    //     Response: Text;
-    // begin
-    //     // TODO: ...
-    // end;
+//     // local procedure CreateUserRequest(Payload: JsonObject): Text
+//     // var
+//     //     ResponseObject: JsonObject;
+//     //     ResponseData: JsonObject;
+//     //     Errors: JsonArray;
+//     //     Response: Text;
+//     // begin
+//     //     // TODO: ...
+//     // end;
 
-    procedure GetUsersList(): Text
-    var
-        RequestParser: JsonObject;
+//     procedure GetUsersList(): Text
+//     var
+//         RequestParser: JsonObject;
 
-        Users: record User;
+//         Users: record User;
 
-        Payload: JsonToken;
-        IdentifierType: JsonToken;
-        Identifier: JsonToken;
+//         Payload: JsonToken;
+//         IdentifierType: JsonToken;
+//         Identifier: JsonToken;
 
-        ResponseObject: JsonObject;
-        SampleAccount: JsonObject;
-        ResponseData: JsonArray;
-        Response: Text;
-    begin
-        // Fetch all users and add to JSON response
-        Users.Reset;
+//         ResponseObject: JsonObject;
+//         SampleAccount: JsonObject;
+//         ResponseData: JsonArray;
+//         Response: Text;
+//     begin
+//         // Fetch all users and add to JSON response
+//         Users.Reset;
 
-        if Users.FindSet then begin
-            repeat begin
-                Clear(SampleAccount);
+//         if Users.FindSet then begin
+//             repeat begin
+//                 Clear(SampleAccount);
                 
-                SampleAccount.Add('user_name', Users."User Name");
-                SampleAccount.Add('full_name', Users."Full Name");
+//                 SampleAccount.Add('user_name', Users."User Name");
+//                 SampleAccount.Add('full_name', Users."Full Name");
 
-                ResponseData.Add(SampleAccount);
-            end until Users.Next = 0;
-        end;
+//                 ResponseData.Add(SampleAccount);
+//             end until Users.Next = 0;
+//         end;
 
-        ResponseObject.Add('status', 'SUCCESS');
-        ResponseObject.Add('status_description', 'Users list has been fetched successfully');
-        ResponseObject.Add('data', ResponseData);
+//         ResponseObject.Add('status', 'SUCCESS');
+//         ResponseObject.Add('status_description', 'Users list has been fetched successfully');
+//         ResponseObject.Add('data', ResponseData);
 
-        // 5. Convert JSON response object to text
-        ResponseObject.WriteTo(Response);
+//         // 5. Convert JSON response object to text
+//         ResponseObject.WriteTo(Response);
 
-        // 6. Return JSON text/string
-        exit(Response)
-    end;
+//         // 6. Return JSON text/string
+//         exit(Response)
+//     end;
 
-    // GLOBAL
-    local procedure UnsupportedAction(RequestAction: Text): Text
-    var
-        ResponseObject: JsonObject;
-        Errors: JsonArray;
-        Response: Text;
-    begin
-        // ResponseObject.Add('status', 'ERROR');
-        // ResponseObject.Add('description', 'The requested action ' + RequestAction + ' is NOT supported.');
-        // ResponseObject.Add('errors', Errors);
-        // AddDateTimeToResponse(ResponseObject);
+//     // GLOBAL
+//     local procedure UnsupportedAction(RequestAction: Text): Text
+//     var
+//         ResponseObject: JsonObject;
+//         Errors: JsonArray;
+//         Response: Text;
+//     begin
+//         // ResponseObject.Add('status', 'ERROR');
+//         // ResponseObject.Add('description', 'The requested action ' + RequestAction + ' is NOT supported.');
+//         // ResponseObject.Add('errors', Errors);
+//         // AddDateTimeToResponse(ResponseObject);
 
-        // ResponseObject.WriteTo(Response);
+//         // ResponseObject.WriteTo(Response);
 
-        // exit(Response);
+//         // exit(Response);
 
-        Error('The requested action ' + RequestAction + ' is NOT supported.');
+//         Error('The requested action ' + RequestAction + ' is NOT supported.');
 
-        exit(Response);
-    end;
-}
+//         exit(Response);
+//     end;
+// }
