@@ -53,6 +53,7 @@ table 52185739 "Loan Guarantors and Security"
                     if SaVingAc.FindFirst() then begin
                         Rec."Amount Guaranteed" := SaVingAc."Lien Placed" - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.");
                         rec."Deposits/Shares" := SaVingAc."Lien Placed";
+                        "Original Amount Guaranteed" := "Amount Guaranteed";
                     end;
                 end;
                 if "Guarantor Type" = "Guarantor Type"::"Fixed Deposit" then begin
@@ -61,6 +62,7 @@ table 52185739 "Loan Guarantors and Security"
                     if FixedDeposit.FindFirst() then begin
                         Rec."Amount Guaranteed" := FixedDeposit."Fixed Deposit Amount" - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.");
                         rec."Deposits/Shares" := FixedDeposit."Fixed Deposit Amount";
+                        "Original Amount Guaranteed" := "Amount Guaranteed";
                     end;
                 end;
 
@@ -139,16 +141,18 @@ table 52185739 "Loan Guarantors and Security"
                                 "Self Guarantee" := true;
                                 "Available Shares" := LoanAppraisal.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.") - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.");
                                 "Amount Guaranteed" := LoanAppraisal.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.") - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.");
+                                "Original Amount Guaranteed" := "Amount Guaranteed";
                                 LoansR."Self Guarantee" := true;
                             end
-                            else
+                            else begin
                                 "Self Guarantee" := false;
+                                "Available Shares" := SavingsAccounts.GetAvailableBalance("Savings Account No./Member No.");
+                                "Amount Guaranteed" := "Available Shares";
+                                "Original Amount Guaranteed" := "Amount Guaranteed";
+                            end;
                         end;
-                    end
-                    else begin
-                        "Available Shares" := SavingsAccounts.GetAvailableBalance("Savings Account No./Member No.");
-                        "Amount Guaranteed" := "Available Shares";
                     end;
+
 
                     //Evaluate guarantor basic info
                     if Cust.Get("Savings Account No./Member No.") then begin
@@ -194,6 +198,7 @@ table 52185739 "Loan Guarantors and Security"
                             "Phone No." := Members."Phone No.";
                             "Available Shares" := FixedDeposit."Fixed Deposit Amount" - LoanAppraisal.GetTotalGuaranteedAmt(Members."No.");
                             "Amount Guaranteed" := FixedDeposit."Fixed Deposit Amount" - LoanAppraisal.GetTotalGuaranteedAmt(Members."No.");
+                            "Original Amount Guaranteed" := "Amount Guaranteed";
                         end;
 
 

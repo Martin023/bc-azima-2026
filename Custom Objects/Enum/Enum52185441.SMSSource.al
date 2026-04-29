@@ -201,4 +201,16 @@ enum 52185441 "SMS Source"
     {
         Caption = 'BULK_SMS';
     }
+    value(52; ATM_APPLICATION)
+    {
+        Caption = 'ATM_APPLICATION';
+    }
+    value(53; ATM_LINKING)
+    {
+        Caption = 'ATM_LINKING';
+    }
+    value(54; ATM_BLOCKING)
+    {
+        Caption = 'ATM_BLOCKING';
+    }
 }

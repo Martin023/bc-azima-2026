@@ -244,7 +244,7 @@ table 52185690 "Product Factory"
             trigger OnValidate()
             begin
                 if "Charge 1 month Interest" then
-                rec.TestField("One Month Interest G/L");
+                    rec.TestField("One Month Interest G/L");
             end;
         }
         field(49; "One Month Interest G/L"; Code[15])
@@ -260,10 +260,10 @@ table 52185690 "Product Factory"
         {
             TableRelation = "G/L Account"."No.";
         }
-        field(52; "Ordinary Deposits Multiplier"; Integer)
+        field(52; "Ordinary Deposits Multiplier"; Decimal)
         {
         }
-        field(53; "Preferential Dep. Multiplier"; Integer)
+        field(53; "Preferential Dep. Multiplier"; Decimal)
         {
         }
         field(54; "Allow Multiple Running Loans"; Boolean)

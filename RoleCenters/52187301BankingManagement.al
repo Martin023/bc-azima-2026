@@ -927,68 +927,162 @@ page 52187301 "Banking Management Role Center"
                     //         RunObject = page "ATM Charge List";
                     //     }
                     // }
-                    // action("ATM Applications List")
+                    group("ATM Applications")
+                    {
+                        action("ATM Applications List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'ATM Applications List';
+                            RunObject = page "ATM Application List";
+                        }
+                        action("Approved ATM Applications List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Approved ATM Applications List';
+                            RunObject = page "Approved ATM Application List";
+                        }
+
+                        // action("ATM Inventory List")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'ATM Inventory List';
+                        //     RunObject = page "ATM Inventory List";
+                        // }
+                        // action("Dispatch ATM List")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Dispatch ATM List';
+                        //     RunObject = page "Dispatch ATM Lists";
+                        // }
+                        action("Uncollected Cards From Bank")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Visible = false;
+                            Caption = 'Uncollected Cards From Bank';
+                            RunPageLink = "Received From Bank" = CONST(false);
+                            RunObject = page "Approved ATM Application List";
+                        }
+                        action("Collected Cards From Bank")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Collected Cards From Bank';
+                            RunPageLink = "Received From Bank" = CONST(true);
+                            RunObject = page "Approved ATM Application List";
+                        }
+                        action("Rejected ATM Applications List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Rejected ATM Applications List';
+                            RunObject = page "ATM Application List";
+                            RunPageLink = "Status" = CONST(Rejected);
+                        }
+                        action("Bulk ATM Application")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Bulk ATM Applications List';
+                            RunObject = page "Bulk ATM List";
+                        }
+                    }
+                    action("ATM Return List")
+                    {
+                        Visible = false;
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'ATM Return List';
+                        RunObject = page "ATM Returned List";
+                    }
+                    group("Atm Linking")
+                    {
+                        action("ATM Linking Application List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'ATM Linking Application List';
+                            RunObject = page "ATM Linking Application List";
+                        }
+                        action("Approved ATM Linking Charge List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Approved ATM Linking Charge and Collection List';
+                            //RunPageLink = "ATM Charges Applied" = const(false);
+                            RunPageLink = "Collected" = const(false);
+
+                            RunObject = page "Approved ATM Linking List";
+                        }
+                        // action("Approved ATM Linking Collection List")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Approved ATM Linking Collection List';
+                        //     RunPageLink = "Collected" = const(false), "ATM Charges Applied" = const(true);
+                        //     RunObject = page "Approved ATM Linking List";
+                        // }
+                        action("Approved ATM Linking List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Approved ATM Linking List';
+                            RunPageLink = "Collected" = const(true), "ATM Charges Applied" = const(true), "ATM Linked" = const(false), "ATM Delinked" = const(false);
+                            RunObject = page "Approved ATM Linking List";
+                        }
+                        action("Linked ATM List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Linked ATM List';
+                            RunPageLink = "Collected" = const(true), "ATM Charges Applied" = const(true), "ATM Linked" = const(true);
+                            RunObject = page "Approved ATM Linking List";
+                        }
+                        action("Delinked ATM List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Delinked ATM List';
+                            RunPageLink = "ATM Delinked" = const(true);
+                            RunObject = page "Approved ATM Linking List";
+                        }
+                        // action("Bulk ATM Linking List")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Bulk ATM Linking List';
+                        //     RunObject = page "ATM Bulk Linking List";
+                        // }
+                    }
+                    group(ATMRepin)
+                    {
+                        Caption = 'ATM Repin';
+                        Visible = true;
+                        action("ATM Repin Application List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'ATM Repin Application List';
+                            RunObject = page "ATM Repin Application List";
+                        }
+                        action("ATM Repin Processed List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'ATM Repin Procssed List';
+                            RunObject = page "ATM Repin Procssed List";
+                        }
+                    }
+
+                    group(MobileBank)
+                    {
+                        Caption = 'M-Banking PIN Resets';
+                        Visible = true;
+                        action("Mobile Banking List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Mobile Banking PIN Reset Application List';
+                            RunObject = page "Mobile Banking App List";
+                        }
+                        action("Mobile Processed List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Mobile Banking PIN Reset Processed List';
+                            RunObject = page "Mobile Banking Procssed List";
+                        }
+                    }
+                    // action("ATM Card List")
                     // {
                     //     ApplicationArea = Basic, Suite;
-                    //     Caption = 'ATM Applications List';
-                    //     RunObject = page "ATM Application List";
+                    //     Caption = 'ATM Card List';
+                    //     RunObject = page "ATM Card List";
                     // }
-                    // action("Approved ATM Applications List")
-                    // {
-                    //     ApplicationArea = Basic, Suite;
-                    //     Caption = 'Approved ATM Applications List';
-                    //     RunObject = page "Approved ATM Application List";
-                    // }
-                    action("Approved ATM Applications List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Approved ATM Applications List';
-                        RunObject = page "Approved ATM Application List";
-                    }
-                    action("ATM Inventory List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'ATM Inventory List';
-                        RunObject = page "ATM Inventory List";
-                    }
-
-                    action("ATM Linking Application List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'ATM Linking Application List';
-                        RunObject = page "ATM Linking Application List";
-                    }
-                    action("Approved ATM Linking List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Approved ATM Linking List';
-                        RunObject = page "Approved ATM Linking List";
-                    }
-                    // group(ATMRepin)
-                    // {
-                    //     Caption = 'ATM Repin';
-                    //     Visible = true;
-                    //     action("ATM Repin Application List")
-                    //     {
-                    //         ApplicationArea = Basic, Suite;
-                    //         Caption = 'ATM Repin Application List';
-                    //         RunObject = page "ATM Repin Application List";
-                    //     }
-                    //     action("ATM Repin Processed List")
-                    //     {
-                    //         ApplicationArea = Basic, Suite;
-                    //         Caption = 'ATM Repin Processed List';
-                    //         RunObject = page "ATM Repin Procssed List";
-                    //     }
-                    // }
-
-
-                    action("ATM Card List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'ATM Card List';
-                        RunObject = page "ATM Card List";
-                    }
                     action("ATM Transactions")
                     {
                         ApplicationArea = Basic, Suite;
@@ -998,7 +1092,7 @@ page 52187301 "Banking Management Role Center"
                     // action("ATM Applicant List")
                     // {
                     //     ApplicationArea = Basic, Suite;
-                    //     Caption = 'Members ATM Applicant List';
+                    //     Caption = 'ATM Applicant List';
                     //     RunObject = page "Member List";
                     //     RunPageView = where("Request for ATM" = const(true));
                     // }

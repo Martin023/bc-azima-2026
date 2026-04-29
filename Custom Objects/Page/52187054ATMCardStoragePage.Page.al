@@ -32,11 +32,7 @@ page 52186771 "Atm Card"
                     ApplicationArea = Basic, Suite;
 
                 }
-                field(DeLinked; Rec.DeLinked)
-                {
-                    ApplicationArea = Basic, Suite;
 
-                }
             }
         }
 

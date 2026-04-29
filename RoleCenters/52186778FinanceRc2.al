@@ -2044,25 +2044,25 @@ page 52186778 "Finance Role Center"
                         Caption = 'Approved ATM Applications List';
                         RunObject = page "Approved ATM Application List";
                     }
-                    action("ATM Inventory List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'ATM Inventory List';
-                        RunObject = page "ATM Inventory List";
-                        RunPageLink = Status = CONST(Open);
-                    }
-                    action("Charged ATM Inventory List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'ATM Inventory List';
-                        RunObject = page "ATM Inventory List";
-                        RunPageLink = Status = CONST(pending);
-                    }
-                    action("ATM Inventory List(All)")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "ATM Inventory List";
-                    }
+                    // action("ATM Inventory List")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'ATM Inventory List';
+                    //     RunObject = page "ATM Inventory List";
+                    //     RunPageLink = Status = CONST(Open);
+                    // }
+                    // action("Charged ATM Inventory List")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'ATM Inventory List';
+                    //     RunObject = page "ATM Inventory List";
+                    //     RunPageLink = Status = CONST(pending);
+                    // }
+                    // action("ATM Inventory List(All)")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     RunObject = page "ATM Inventory List";
+                    // }
                 }
 
                 group("Interest")

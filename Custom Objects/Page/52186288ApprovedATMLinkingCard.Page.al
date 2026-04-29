@@ -105,9 +105,11 @@ page 52186288 "Approved ATM Linking Card"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Card No"; Rec."Card No")
+                field("Card No"; GetMaskedCardNo()) //  "Card No"
                 {
                     ApplicationArea = Basic, Suite;
+                    Editable = false;
+                    Caption = 'Card No';
                 }
                 field(Limit; Rec.Limit)
                 {
@@ -152,9 +154,15 @@ page 52186288 "Approved ATM Linking Card"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Replacement For Card No"; Rec."Replacement For Card No")
+                field("Replacement For Card No"; GetMaskedReplacementCardNo())
                 {
                     ApplicationArea = Basic, Suite;
+                    Caption = 'Replacement For Card No';
+                }
+                field("Delivery Mode"; Rec."Delivery Mode")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = false;
                 }
                 field(Collected; Rec.Collected)
                 {
@@ -258,8 +266,39 @@ page 52186288 "Approved ATM Linking Card"
                     PromotedCategory = Process;
 
                     trigger OnAction()
+                    var
+                        theMember: Record Members;
+                        msg: Text[250];
+                        SendSMS: Codeunit SendSms;
+                        SMSSource: enum "SMS Source";
+
                     begin
+                        Rec.TestField("ATM Charges Applied", true);
+                        Rec.TestField(Collected, false);
                         SaccoTransactions.CollectATM(Rec);
+                        theMember.Reset();
+                        theMember.SetRange("Primary Identification", rec."Customer ID");
+                        if theMember.FindFirst() then begin
+                            if theMember."Phone No." <> '' then begin
+
+                                msg := 'Dear ' + theMember."First Name" + ', your' +
+                                       ' ATM card has been collected/dispatched. Query? 0205134900';
+
+                                SendSMS.SendSms(
+                                    SMSSource::ATM_APPLICATION,
+                                    theMember."Phone No.",
+                                    msg,
+                                    Format(rec."No."),
+                                    '',
+                                    true,
+                                    220,
+                                    false,
+                                    'CBS',
+                                    rec."No.",
+                                    'CBS'
+                                );
+                            end;
+                        end;
                     end;
                 }
                 action("Issue Pin")
@@ -283,8 +322,31 @@ page 52186288 "Approved ATM Linking Card"
                                 rec."PIN Issued By" := UserId;
                                 rec."PIN Issued Date" := Today;
                                 rec.Modify;
+                                Message('PIN issued successfully.');
                             end;
                         end;
+                    end;
+                }
+                action("Charge Card Fee")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Image = AdjustEntries;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedIsBig = true;
+
+                    trigger OnAction()
+                    var
+                        TrCharges: Record "Transaction Charges";
+                        TrType: Record "Transaction Types";
+                        Trch: Decimal;
+                        AvAl: Decimal;
+                        PeriodicActivities: Codeunit "Periodic Activities";
+                    begin
+                        PeriodicActivities.PostATMApplicationCharges(Rec);
+                        Rec."ATM Charges Applied" := true;
+                        Rec."ATM Charged Date" := Today;
+                        Rec.Modify;
                     end;
                 }
 
@@ -299,14 +361,16 @@ page 52186288 "Approved ATM Linking Card"
                     trigger OnAction()
                     var
                         ATMCardStorage: Record "ATM Card Storage";
-                        ATMInventory: Record "ATM Inventory";
                     begin
-                        ATMInventory.Reset();
-                        ATMInventory.SetRange("Card Number", rec."Card No");
-                        ATMInventory.SetRange("Account No.", rec."Account No");
-                        if ATMInventory.FindFirst() then
-                            ATMInventory.Status := ATMInventory.Status::Linked;
-                        ATMInventory.Modify();
+                        // ATMInventory.Reset();
+                        // ATMInventory.SetRange("Card Number", rec."Card No");
+                        // ATMInventory.SetRange("Account No.", rec."Account No");
+                        // if ATMInventory.FindFirst() then
+                        //     ATMInventory.Status := ATMInventory.Status::Linked;
+                        // ATMInventory.Modify();
+                        Rec.TestField(Collected, true);
+                        Rec.TestField("ATM Charges Applied", true);
+                        Rec.TestField("ATM Linked", false);
                         SaccoTransactions.LinkATM(Rec);
                     end;
                 }
@@ -348,15 +412,14 @@ page 52186288 "Approved ATM Linking Card"
                     trigger OnAction()
                     var
                         ATMCardStorage: Record "ATM Card Storage";
-                        ATMInventory: Record "ATM Inventory";
 
                     begin
-                        ATMInventory.Reset();
-                        ATMInventory.SetRange("Card Number", rec."Card No");
-                        ATMInventory.SetRange("Account No.", rec."Account No");
-                        if ATMInventory.FindFirst() then
-                            ATMInventory.Status := ATMInventory.Status::Delinked;
-                        ATMInventory.Modify();
+                        // ATMInventory.Reset();
+                        // ATMInventory.SetRange("Card Number", rec."Card No");
+                        // ATMInventory.SetRange("Account No.", rec."Account No");
+                        // if ATMInventory.FindFirst() then
+                        //     ATMInventory.Status := ATMInventory.Status::Delinked;
+                        // ATMInventory.Modify();
 
                         SaccoTransactions.DeLinkATM(Rec);
                     end;
@@ -399,6 +462,46 @@ page 52186288 "Approved ATM Linking Card"
         PageEditable := true;
         if rec.Status <> rec.Status::Open then
             PageEditable := false;
+    end;
+
+    procedure GetMaskedCardNo(): Text
+    var
+        CardNo: Text;
+    begin
+        CardNo := Rec."Card No";
+        if CardNo = '' then
+            exit('');
+
+        exit(MaskCardNumber(CardNo));
+    end;
+
+    procedure GetMaskedReplacementCardNo(): Text
+    var
+        CardNo: Text;
+    begin
+        CardNo := Rec."Replacement For Card No";
+        if CardNo = '' then
+            exit('');
+
+        exit(MaskCardNumber(CardNo));
+    end;
+
+    procedure MaskCardNumber(CardNo: Text): Text
+    var
+        MaskedCardNo: Text;
+        i: Integer;
+    begin
+        MaskedCardNo := CardNo;
+
+        // Mask characters 9-12 (positions 9, 10, 11, 12)
+        if StrLen(CardNo) >= 12 then begin
+            for i := 9 to 12 do begin
+                if i <= StrLen(CardNo) then
+                    MaskedCardNo := InsStr(DelStr(MaskedCardNo, i, 1), '*', i);
+            end;
+        end;
+
+        exit(MaskedCardNo);
     end;
 
     var

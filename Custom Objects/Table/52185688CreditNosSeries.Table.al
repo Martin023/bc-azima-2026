@@ -508,6 +508,11 @@ table 52185688 "Credit Nos. Series"
             DataClassification = ToBeClassified;
             TableRelation = "No. Series";
         }
+        field(158; "Bulk ATM Application"; Code[20])
+        {
+            TableRelation = "No. Series";
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys

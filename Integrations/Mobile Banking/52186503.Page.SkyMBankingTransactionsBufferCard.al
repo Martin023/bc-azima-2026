@@ -120,7 +120,7 @@ page 52186503 "Sky M-Banking Trans. Buf. Card"
                     Editable = PageEditable;
                     trigger OnValidate()
                     begin
-                        if not ((Rec."Transaction Type" = Rec."Transaction Type"::"Mpesa Deposit") or 
+                        if not ((Rec."Transaction Type" = Rec."Transaction Type"::"Mpesa Deposit") or
                         (Rec."Transaction Type" = Rec."Transaction Type"::"Loan Repayment") or
                         (Rec."Transaction Type" = Rec."Transaction Type"::"Coop B2B Deposit") or
                         (Rec."Transaction Type" = Rec."Transaction Type"::"Coop P2F Deposit")
@@ -390,7 +390,7 @@ page 52186503 "Sky M-Banking Trans. Buf. Card"
     begin
         PageEditable := Rec."Needs Change";
         // Deposits
-        if (Rec."Transaction Type" = Rec."Transaction Type"::"Mpesa Deposit") or (Rec."Transaction Type" = Rec."Transaction Type"::"Loan Repayment") or 
+        if (Rec."Transaction Type" = Rec."Transaction Type"::"Mpesa Deposit") or (Rec."Transaction Type" = Rec."Transaction Type"::"Loan Repayment") or
         (Rec."Transaction Type" = Rec."Transaction Type"::"Coop B2B Deposit") or (Rec."Transaction Type" = Rec."Transaction Type"::"Coop P2F Deposit") then begin
             if (Rec."Needs Change" = true) and (Rec.Posted = false) then begin
                 DepositReversible := true;
@@ -402,7 +402,9 @@ page 52186503 "Sky M-Banking Trans. Buf. Card"
                 Rec."Transaction Type"::Airtime,
                 Rec."Transaction Type"::"Mpesa Withdrawal",
                 Rec."Transaction Type"::"Bank Transfer",
-                Rec."Transaction Type"::"Utility Payment":
+                Rec."Transaction Type"::"Utility Payment",
+                Rec."Transaction Type"::"Till Payment",
+                Rec."Transaction Type"::"Gaming Utility Payment":
                     begin
                         WithdrawalReversible := true;
                     end;
@@ -415,7 +417,7 @@ page 52186503 "Sky M-Banking Trans. Buf. Card"
     begin
         PageEditable := Rec."Needs Change";
         // Deposits
-        if (Rec."Transaction Type" = Rec."Transaction Type"::"Mpesa Deposit") or (Rec."Transaction Type" = Rec."Transaction Type"::"Loan Repayment") or 
+        if (Rec."Transaction Type" = Rec."Transaction Type"::"Mpesa Deposit") or (Rec."Transaction Type" = Rec."Transaction Type"::"Loan Repayment") or
         (Rec."Transaction Type" = Rec."Transaction Type"::"Coop B2B Deposit") or (Rec."Transaction Type" = Rec."Transaction Type"::"Coop P2F Deposit") then begin
             if (Rec."Needs Change" = true) and (Rec.Posted = false) then begin
                 DepositReversible := true;
@@ -428,7 +430,9 @@ page 52186503 "Sky M-Banking Trans. Buf. Card"
                 Rec."Transaction Type"::Airtime,
                 Rec."Transaction Type"::"Mpesa Withdrawal",
                 Rec."Transaction Type"::"Bank Transfer",
-                Rec."Transaction Type"::"Utility Payment":
+                Rec."Transaction Type"::"Utility Payment",
+                Rec."Transaction Type"::"Till Payment",
+                Rec."Transaction Type"::"Gaming Utility Payment":
                     begin
                         WithdrawalReversible := true;
                     end;
@@ -456,7 +460,9 @@ page 52186503 "Sky M-Banking Trans. Buf. Card"
                 Rec."Transaction Type"::Airtime,
                 Rec."Transaction Type"::"Mpesa Withdrawal",
                 Rec."Transaction Type"::"Bank Transfer",
-                Rec."Transaction Type"::"Utility Payment":
+               Rec."Transaction Type"::"Utility Payment",
+                Rec."Transaction Type"::"Till Payment",
+                Rec."Transaction Type"::"Gaming Utility Payment":
                     begin
                         WithdrawalReversible := true;
                     end;

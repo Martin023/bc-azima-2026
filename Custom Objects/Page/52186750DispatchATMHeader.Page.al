@@ -53,11 +53,11 @@ page 52186750 "Dispatch ATM Header"
 
                 }
             }
-            part(Control17; "Dispatch ATM Lines")
-            {
-                SubPageLink = "Global Dimension 1 Code" = field("Global Dimension 1 Code"), "Global Dimension 2 Code" = field("Global Dimension 2 Code"), Status = filter(Open);
-                ApplicationArea = Basic;
-            }
+            // part(Control17; "Dispatch ATM Lines")
+            // {
+            //     SubPageLink = "Global Dimension 1 Code" = field("Global Dimension 1 Code"), "Global Dimension 2 Code" = field("Global Dimension 2 Code"), Status = filter(Open);
+            //     ApplicationArea = Basic;
+            // }
         }
     }
 
@@ -82,17 +82,17 @@ page 52186750 "Dispatch ATM Header"
                     begin
                         if rec.Status = rec.Status::Approved then begin
 
-                            ATMLines.Reset();
-                            ATMLines.SetRange("Global Dimension 1 Code", Rec."Global Dimension 1 Code");
-                            ATMLines.SetRange(Status, ATMLines.Status::Open);
-                            ATMLines.SetRange("To Branch", true);
-                            if ATMLines.Find('-') then begin
-                                repeat
-                                    ATMLines.Status := ATMLines.Status::"In Transit";
-                                    // ATMLines."To Branch" := true;
-                                    ATMLines.Modify;
-                                until ATMLines.Next = 0;
-                            end;
+                            // ATMLines.Reset();
+                            // ATMLines.SetRange("Global Dimension 1 Code", Rec."Global Dimension 1 Code");
+                            // ATMLines.SetRange(Status, ATMLines.Status::Open);
+                            // ATMLines.SetRange("To Branch", true);
+                            // if ATMLines.Find('-') then begin
+                            //     repeat
+                            //         ATMLines.Status := ATMLines.Status::"In Transit";
+                            //         // ATMLines."To Branch" := true;
+                            //         ATMLines.Modify;
+                            //     until ATMLines.Next = 0;
+                            // end;
 
                         end;
                         CurrPage.Update;
@@ -110,21 +110,21 @@ page 52186750 "Dispatch ATM Header"
 
                     trigger OnAction()
                     var
-                        ATMLines: Record "ATM Inventory";
+                    // ATMLines: Record "ATM Inventory";
                     begin
                         if rec.Status = rec.Status::Approved then begin
 
-                            ATMLines.Reset();
-                            ATMLines.SetRange("Global Dimension 1 Code", Rec."Global Dimension 1 Code");
-                            ATMLines.SetRange(Status, ATMLines.Status::"In Transit");
-                            ATMLines.SetRange(Received, true);
-                            if ATMLines.Find('-') then begin
-                                repeat
-                                    ATMLines.Status := ATMLines.Status::Pending;
-                                    // ATMLines.Received := true;
-                                    ATMLines.Modify;
-                                until ATMLines.Next = 0;
-                            end;
+                            // ATMLines.Reset();
+                            // ATMLines.SetRange("Global Dimension 1 Code", Rec."Global Dimension 1 Code");
+                            // ATMLines.SetRange(Status, ATMLines.Status::"In Transit");
+                            // ATMLines.SetRange(Received, true);
+                            // if ATMLines.Find('-') then begin
+                            //     repeat
+                            //         ATMLines.Status := ATMLines.Status::Pending;
+                            //         // ATMLines.Received := true;
+                            //         ATMLines.Modify;
+                            //     until ATMLines.Next = 0;
+                            // end;
                         end;
 
                         CurrPage.Update;
@@ -144,16 +144,16 @@ page 52186750 "Dispatch ATM Header"
                     // ATMLines: Record "ATM Inventory";
                     begin
                         if rec.Status = rec.Status::Approved then begin
-                            ATMLines.Reset();
-                            ATMLines.SetRange("Global Dimension 1 Code", Rec."Global Dimension 1 Code");
-                            ATMLines.SetRange(Status, ATMLines.Status::Pending);
-                            ATMLines.SetRange("To HQ", true);
-                            if ATMLines.Find('-') then begin
-                                repeat
-                                    ATMLines.Status := ATMLines.Status::Returned;
-                                    ATMLines.Modify;
-                                until ATMLines.Next = 0;
-                            end;
+                            // ATMLines.Reset();
+                            // ATMLines.SetRange("Global Dimension 1 Code", Rec."Global Dimension 1 Code");
+                            // ATMLines.SetRange(Status, ATMLines.Status::Pending);
+                            // ATMLines.SetRange("To HQ", true);
+                            // if ATMLines.Find('-') then begin
+                            //     repeat
+                            //         ATMLines.Status := ATMLines.Status::Returned;
+                            //         ATMLines.Modify;
+                            //     until ATMLines.Next = 0;
+                            // end;
                         end;
                         CurrPage.Update;
                         MESSAGE('Cards Returned!!')
@@ -173,16 +173,16 @@ page 52186750 "Dispatch ATM Header"
                     // ATMLines: Record "ATM Inventory";
                     begin
                         if rec.Status = rec.Status::Approved then begin
-                            ATMLines.Reset();
-                            ATMLines.SetRange("Global Dimension 1 Code", Rec."Global Dimension 1 Code");
-                            ATMLines.SetRange(Status, ATMLines.Status::Pending);
-                            ATMLines.SetRange("To HQ", true);
-                            if ATMLines.Find('-') then begin
-                                repeat
-                                    ATMLines.Status := ATMLines.Status::Discarded;
-                                    ATMLines.Modify;
-                                until ATMLines.Next = 0;
-                            end;
+                            // ATMLines.Reset();
+                            // ATMLines.SetRange("Global Dimension 1 Code", Rec."Global Dimension 1 Code");
+                            // ATMLines.SetRange(Status, ATMLines.Status::Pending);
+                            // ATMLines.SetRange("To HQ", true);
+                            // if ATMLines.Find('-') then begin
+                            //     repeat
+                            //         ATMLines.Status := ATMLines.Status::Discarded;
+                            //         ATMLines.Modify;
+                            //     until ATMLines.Next = 0;
+                            // end;
                         end;
                         CurrPage.Update;
                         MESSAGE('Cards Discarded!!')
@@ -311,7 +311,7 @@ page 52186750 "Dispatch ATM Header"
         Pdate: Boolean;
         SalaryLines: Record "Salary Lines";
         LastloanDate: Boolean;
-        ATMLines: Record "ATM Inventory";
+    // ATMLines: Record "ATM Inventory";
 
 
 }

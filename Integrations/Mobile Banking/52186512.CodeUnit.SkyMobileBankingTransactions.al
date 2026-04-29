@@ -166,6 +166,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
         request_application: JsonToken;
         source_application: JsonToken;
         transaction_date_time: JsonToken;
+
+        GamingPaybills: Record "Gaming Paybills Setup";
     begin
         Payload.Get('originator_id', originator_id);
         Payload.Get('pesa_type', pesa_type);
@@ -296,6 +298,16 @@ codeunit 52186512 "Sky M-Banking Transactions"
                 MpesaTrans."Transaction Type" := MpesaTrans."Transaction Type"::Airtime;
             'MPESA_C2B_DEPOSIT':
                 MpesaTrans."Transaction Type" := MpesaTrans."Transaction Type"::"Mpesa Deposit";
+            'TILL_PAYMENT':
+                begin
+                    MpesaTrans."Transaction Type" := MpesaTrans."Transaction Type"::"Till Payment";
+
+                    GamingPaybills.Reset;
+                    GamingPaybills.SetRange("Paybill / Till No.", MpesaTrans."Receiver Identifier");
+                    if GamingPaybills.FindFirst then begin
+                        MpesaTrans."Transaction Type" := MpesaTrans."Transaction Type"::"Gaming Utility Payment";
+                    end;
+                end;
         end;
 
         MpesaTrans."Savings Account" := MpesaTrans."Source Account";
@@ -970,6 +982,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         genSetUp: record "General Set-up";
         ExciseDuty: Decimal;
         TotalCharges: List of [decimal];
+        SkyRevenue: Decimal;
     begin
         ChargeAmount := 0;
         ExciseDuty := 0;
@@ -1007,12 +1020,18 @@ codeunit 52186512 "Sky M-Banking Transactions"
             if ChargeAmount > MobileTransLines."Maximum Amount" then
                 ChargeAmount := MobileTransLines."Maximum Amount";
         end;
+
+        if MobileTransLines."Sky Revenue Share" then begin
+            SkyRevenue := round((ChargeAmount * MobileTransLines."Sky Revenue Share %" * 0.01), 0.01, '>');
+        end;
         if MobileTransLines."Recover Excise Duty" then begin
             genSetUp.Get();
-            ExciseDuty := round((ChargeAmount * genSetUp."Excise Duty (%)" * 0.01), 0.01, '>');
+            // ExciseDuty := round(((ChargeAmount - SkyRevenue) * genSetUp."Excise Duty (%)" * 0.01) / (1 + (genSetUp."Excise Duty (%)" * 0.01)), 0.01, '>');
+            ExciseDuty := round(ChargeAmount * genSetUp."Excise Duty (%)" * 0.01);
         end;
-        TotalCharges.Add(ChargeAmount + ExciseDuty);
+        TotalCharges.Add(ChargeAmount + ExciseDuty + SkyRevenue);
         TotalCharges.Add(ExciseDuty);
+        TotalCharges.Add(SkyRevenue);
 
         exit(TotalCharges);
     end;
@@ -1705,7 +1724,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         EXIT(MonthI);
     end;
 
-    procedure GetTransChargesPreview(TransactionType: Text; TransactionAmount: Decimal; AccountNumber: Text; SearchMember: Record Members): List of [decimal]
+    procedure GetTransChargesPreview(TransactionType: Text; TransactionAmount: Decimal; AccountNumber: Text; SearchMember: Record Members; ReceiverPaybillTill: Text): List of [decimal]
     var
         TotalCharges: List of [decimal];
         MobileTransLines: Record "Mobile Transaction Types Lines";
@@ -1714,6 +1733,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
         ExciseDuty: decimal;
         FosaAcc: Text;
         CurrCharges: List of [Decimal];
+
+        GamingPaybills: Record "Gaming Paybills Setup";
     begin
         //Action to check the charge applicable
         // 1.	MPESA_WITHDRAWAL
@@ -1782,6 +1803,23 @@ codeunit 52186512 "Sky M-Banking Transactions"
                 MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Loan Limit Check");
             'GUARANTORSHIP_ABILITY_ENQUIRY':
                 MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Guarantorship Ability Enquiry");
+            'SMP_MEMBER_REGISTRATION':
+                MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"SMP Registration");
+            'SMP_PIN_RESET':
+                MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"SMP PIN Reset");
+            'PIN_RESET':
+                MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Self PIN Reset");
+            'GAMING_UTILITY_PAYMENT':
+                MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Gaming Utility Payment");
+            'TILL_PAYMENT':
+                begin
+                    MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Till Payment");
+                    GamingPaybills.Reset;
+                    GamingPaybills.SetRange("Paybill / Till No.", ReceiverPaybillTill);
+                    if GamingPaybills.FindFirst then begin
+                        MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Gaming Utility Payment");
+                    end;
+                end;
         end;
 
         MobileTransTypes.SetLoadFields(Code);
@@ -2923,12 +2961,14 @@ codeunit 52186512 "Sky M-Banking Transactions"
     var
         theCharges: List of [Decimal];
         totalCost: Decimal;
+        ReceiverPaybillTill: Text;
     begin
         theCharges := GetTransChargesPreview(
             theTransactionCategory,
             requestAmount,
             theSavingsAccount."No.",
-            SearchMember
+            SearchMember,
+            ReceiverPaybillTill
         );
 
         totalCost := theCharges.Get(1) + requestAmount;
@@ -2972,7 +3012,9 @@ codeunit 52186512 "Sky M-Banking Transactions"
             todaysMpesaWithdrawals."Transaction Type"::Airtime,
             todaysMpesaWithdrawals."Transaction Type"::"Bank Transfer",
             todaysMpesaWithdrawals."Transaction Type"::"Mpesa Withdrawal",
-            todaysMpesaWithdrawals."Transaction Type"::"Utility Payment"
+            todaysMpesaWithdrawals."Transaction Type"::"Utility Payment",
+            todaysMpesaWithdrawals."Transaction Type"::"Till Payment",
+            todaysMpesaWithdrawals."Transaction Type"::"Gaming Utility Payment"
         );
         todaysMpesaWithdrawals.SetFilter("Transaction Status", '<>%1', todaysMpesaWithdrawals."Transaction Status"::REVERSE_CONFIRMED);
 

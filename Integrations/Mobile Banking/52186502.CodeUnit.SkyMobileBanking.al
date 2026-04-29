@@ -103,6 +103,12 @@ codeunit 52186502 "Sky Mobile Banking Integration"
             'UPDATE_FD_MATURITY_INSTRUCTION_REQUEST':
                 exit(UpdateFDAccountMaturityRequest(RequestPayload.AsObject));
 
+            // PIn Reset
+            'CHECK_PIN_RESET_ABILITY':
+                exit(CheckPINResetAbilityRequest(RequestPayload.AsObject));
+            'PROCESS_PIN_RESET_REQUEST':
+                exit(ProcessPINResetRequest(RequestPayload.AsObject));
+
             // 'TEST':
             //     exit(Test)
             else
@@ -434,7 +440,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
             // Apply charges
             if apply_charges.AsValue.AsBoolean then begin
-                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('SINGLE_ACCOUNT_BALANCE_ENQUIRY', 0, '', SearchMember).Get(1);
+                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('SINGLE_ACCOUNT_BALANCE_ENQUIRY', 0, '', SearchMember, '').Get(1);
                 if TotalCharges > 0 then begin
                     if CheckFOSASavingsAccountBlocked(SearchMember, 'DEBIT') then begin
                         ResponseObject.Add('request_status', 'BLOCKED');
@@ -669,7 +675,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
             SavingsAccount.SetRange("Member No.", SearchMember."No.");
 
             if SavingsAccount.FindFirst then begin
-                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('SINGLE_ACCOUNT_BALANCE_ENQUIRY', 0, SavingsAccount."No.", SearchMember).Get(1);
+                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('SINGLE_ACCOUNT_BALANCE_ENQUIRY', 0, SavingsAccount."No.", SearchMember, '').Get(1);
                 if TotalCharges > 0 then begin
                     // Log the transaction
                     FosaAcc := SkyMbankingTrans.GetMemberFosaAcc(SearchMember);
@@ -790,7 +796,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
             SavingsAccount.SetAutoCalcFields("Balance (LCY)", "Authorised Over Draft", "Uncleared Cheques", "ATM Transactions", "Lien Placed");
 
             if SavingsAccount.FindFirst then begin
-                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('ACCOUNT_MINI_STATEMENT', 0, SavingsAccount."No.", SearchMember).Get(1);
+                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('ACCOUNT_MINI_STATEMENT', 0, SavingsAccount."No.", SearchMember, '').Get(1);
                 FosaAcc := SkyMbankingTrans.GetMemberFosaAcc(SearchMember);
                 if TotalCharges > 0 then begin
                     FOSAAccount.Reset;
@@ -956,7 +962,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
             SavingsAccount.SetAutoCalcFields("Balance (LCY)", "Authorised Over Draft", "Uncleared Cheques", "ATM Transactions", "Lien Placed");
 
             if SavingsAccount.FindFirst then begin
-                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('ACCOUNT_FULL_STATEMENT', 0, SavingsAccount."No.", SearchMember).Get(1);
+                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('ACCOUNT_FULL_STATEMENT', 0, SavingsAccount."No.", SearchMember, '').Get(1);
                 FosaAcc := SkyMbankingTrans.GetMemberFosaAcc(SearchMember);
 
                 if TotalCharges > 0 then begin
@@ -2176,7 +2182,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
         if MpesaTrans.Insert(true) then begin
             Commit;
-            
+
             ResponseObject.Add('request_status', 'SUCCESS');
 
             Datum.Add('transaction_reference', MpesaTrans."Transaction ID");
@@ -3181,7 +3187,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 ResponseObject.Add('request_status', 'SUCCESS');
                 ResponseObject.Add('response_payload', Datum);
 
-                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('LOAN_BALANCE_ENQUIRY', 0, '', SearchMember).Get(1);
+                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('LOAN_BALANCE_ENQUIRY', 0, '', SearchMember, '').Get(1);
                 if TotalCharges > 0 then begin
                     FosaAcc := SkyMbankingTrans.GetMemberFosaAcc(SearchMember);
 
@@ -3348,7 +3354,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 ResponseObject.Add('request_status', 'SUCCESS');
                 ResponseObject.Add('response_payload', Datum);
 
-                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('LOAN_MINI_STATEMENT', 0, '', SearchMember).Get(1);
+                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('LOAN_MINI_STATEMENT', 0, '', SearchMember, '').Get(1);
                 if TotalCharges > 0 then begin
                     FosaAcc := SkyMbankingTrans.GetMemberFosaAcc(SearchMember);
 
@@ -3526,7 +3532,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 ResponseObject.Add('request_status', 'SUCCESS');
                 ResponseObject.Add('response_payload', Datum);
 
-                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('LOAN_FULL_STATEMENT', 0, '', SearchMember).Get(1);
+                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('LOAN_FULL_STATEMENT', 0, '', SearchMember, '').Get(1);
                 if TotalCharges > 0 then begin
                     FosaAcc := SkyMbankingTrans.GetMemberFosaAcc(SearchMember);
 
@@ -3600,6 +3606,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         identifier: JsonToken;
         charge_action: JsonToken;
         amount: JsonToken;
+        receiver_identifier: JsonToken;
 
         SearchMember: Record Members;
         ChargesInfo: List of [decimal];
@@ -3608,12 +3615,15 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         MemberDetails: JsonObject;
         Datum: JsonObject;
         Response: Text;
+
+        ReceiverIdentifierExists: Boolean;
     begin
         Payload.Get('identifier_type', identifier_type); // MSISDN, CUSTOMER_NO
         Payload.Get('identifier', identifier);
         Payload.Get('account_number', account_number);
         Payload.Get('charge_action', charge_action);
         Payload.Get('amount', amount);
+        ReceiverIdentifierExists := Payload.Get('receiver_identifier', receiver_identifier);
 
         GetMemberRecord(
             SearchMember,
@@ -3625,7 +3635,13 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         SearchMember.SetLoadFields("No.");
 
         IF SearchMember.FindFirst then begin
-            ChargesInfo := SkyMbankingTrans.GetTransChargesPreview(charge_action.AsValue.AsText, amount.AsValue.AsDecimal, account_number.AsValue.AsText, SearchMember);
+            //ChargesInfo := SkyMbankingTrans.GetTransChargesPreview(charge_action.AsValue.AsText, amount.AsValue.AsDecimal, account_number.AsValue.AsText, SearchMember);
+
+            if ReceiverIdentifierExists then begin
+                ChargesInfo := SkyMbankingTrans.GetTransChargesPreview(charge_action.AsValue.AsText, amount.AsValue.AsDecimal, account_number.AsValue.AsText, SearchMember, receiver_identifier.AsValue.AsText);
+            end else begin
+                ChargesInfo := SkyMbankingTrans.GetTransChargesPreview(charge_action.AsValue.AsText, amount.AsValue.AsDecimal, account_number.AsValue.AsText, SearchMember, '');
+            end;
             Datum.Add('charge_amount', ChargesInfo.Get(1) - ChargesInfo.Get(2));
             Datum.Add('excise_duty', ChargesInfo.Get(2));
             Datum.Add('total_charges', (ChargesInfo.Get(1)));
@@ -3709,6 +3725,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         ReceiverSMSNo: Text;
 
         DepositTransBuffer: Record "Sky M-Banking Trans. Buffer";
+        DepositMember: Record Members;
     begin
         // Database.SelectLatestVersion();
         PostingBatchSize := 25;
@@ -3742,11 +3759,12 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         if not UserSetup.get(UserId) then begin
             Error('User ID = %1  not setup in UserSetup', UserId);
         end;
-        // Dim1 := UserSetup."Global Dimension 1 Code"; // 301
-        // Dim2 := UserSetup."Global Dimension 2 Code"; // FOSA
 
-        Dim1 := '301';
-        Dim2 := 'FOSA';
+        Dim1 := UserSetup."Global Dimension 1 Code"; // branch
+        Dim2 := UserSetup."Global Dimension 2 Code"; // FOSA
+
+        // Dim1 := '301';
+        // Dim2 := 'FOSA';
 
         JTemplate := BankingUserSetup."Cashier Journal Template";
         JBatch := BankingUserSetup."Cashier Journal Batch";
@@ -3759,10 +3777,10 @@ codeunit 52186502 "Sky Mobile Banking Integration"
             error('Loans Template and Batch must be set in the Banking User Setup');
 
         // Check posting date is current!!!
-        if UserSetup."Allow Posting From" <> Today then begin
-            UserSetup."Allow Posting From" := Today;
-            UserSetup.Modify;
-        end;
+        // if UserSetup."Allow Posting From" <> Today then begin
+        //     UserSetup."Allow Posting From" := Today;
+        //     UserSetup.Modify;
+        // end;
         if UserSetup."Allow Posting To" <> Today then begin
             UserSetup."Allow Posting To" := Today;
             UserSetup.Modify;
@@ -3889,12 +3907,25 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                         exit(Response);
                     end;
 
+                    MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Self PIN Reset");
+                    MobileTransTypes.SetLoadFields(Code);
+                    if not MobileTransTypes.FindFirst then begin
+                        ResponseData.Add('request_status', 'ERROR');
+                        ResponseData.Add('request_status_description', 'Mobile transaction type for MPESA self PIN reset has NOT been set!');
+
+                        Datum.Add('error_message', 'Mobile transaction type for MPESA self pin reset has NOT been set!');
+                        ResponseData.Add('response_payload', Datum);
+
+                        ResponseData.WriteTo(Response);
+                        exit(Response);
+                    end;
+
                     DepositTransBuffer.Reset();
                     DepositTransBuffer.SetRange("Posted", false);
                     DepositTransBuffer.SetRange("Needs Change", false);
                     DepositTransBuffer.SetFilter("Transaction Status", '=%1|%2', DepositTransBuffer."Transaction Status"::CONFIRMED, DepositTransBuffer."Transaction Status"::REVERSE_CONFIRMED);
                     DepositTransBuffer.SetRange("Transaction Type", DepositTransBuffer."Transaction Type"::"Mpesa Deposit");
-                    DepositTransBuffer.SetFilter("Transaction Type", '%1|%2|%3', DepositTransBuffer."Transaction Type"::"Mpesa Deposit", DepositTransBuffer."Transaction Type"::"Coop B2B Deposit", DepositTransBuffer."Transaction Type"::"Coop P2F Deposit");
+                    DepositTransBuffer.SetFilter("Transaction Type", '%1|%2|%3', DepositTransBuffer."Transaction Type"::"Mpesa Deposit", DepositTransBuffer."Transaction Type"::"Coop B2B Deposit", DepositTransBuffer."Transaction Type"::"Coop P2F Deposit", DepositTransBuffer."Transaction Type"::"Self PIN Reset");
                     DepositTransBuffer.SetCurrentKey("Try Posting Count", "Transaction Date Time");
                     DepositTransBuffer.SetAscending("Try Posting Count", true);
                     DepositTransBuffer.SetAscending("Transaction Date Time", true);
@@ -4041,58 +4072,21 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                 end;
                             end else begin
 
-                                if SavingsAccounts.get(MpesaTransBuffer."Savings Account") then begin
-                                    SaccoTrans.InitJournal(JTemplate, JBatch);
-                                    Dim1 := SavingsAccounts."Global Dimension 1 Code";
-                                    Dim2 := SavingsAccounts."Global Dimension 2 Code";
-                                    Description := CopyStr(MpesaTransBuffer."Transaction Description", 1, 150);
-                                    // Deb Bank Acc.
-                                    SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::"Bank Account", MobileTransTypes."Bank Account", Description, AccType::"G/L Account", '', MpesaTransBuffer."Transaction Amount", theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                if MpesaTransBuffer."Transaction Type" <> MpesaTransBuffer."Transaction Type"::"Self PIN Reset" then begin
+                                    if SavingsAccounts.get(MpesaTransBuffer."Savings Account") then begin
+                                        SaccoTrans.InitJournal(JTemplate, JBatch);
+                                        Dim1 := SavingsAccounts."Global Dimension 1 Code";
+                                        Dim2 := SavingsAccounts."Global Dimension 2 Code";
+                                        Description := CopyStr(MpesaTransBuffer."Transaction Description", 1, 150);
+                                        // Deb Bank Acc.
+                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::"Bank Account", MobileTransTypes."Bank Account", Description, AccType::"G/L Account", '', MpesaTransBuffer."Transaction Amount", theReference, '', TransactionType::" ", Dim1, Dim2, true);
 
-                                    TotalExciseDuty := 0;
-                                    if Description = '' then begin
-                                        Description := Format(MpesaTransBuffer."Transaction Type");
-                                    end;
-
-                                    // Check if deposit is less than the charges
-                                    MobileTransLines.Reset();
-                                    MobileTransLines.SetRange("Transaction Type", MobileTransTypes.Code);
-                                    MobileTransLines.SetFilter("Account No.", '<>%1', '');
-                                    if MobileTransLines.Findset() then begin
-                                        TotalCharges := 0;
-                                        repeat
-                                            currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
-                                            TotalCharges += currCharges.Get(1);
-                                        until MobileTransLines.next = 0;
-                                    end;
-
-                                    if TotalCharges >= MpesaTransBuffer."Transaction Amount" then begin
-                                        TotalCharges := MpesaTransBuffer."Transaction Amount";
-
-                                        // Charges if Any
-                                        MobileTransLines.Reset();
-                                        MobileTransLines.SetRange("Transaction Type", MobileTransTypes.Code);
-                                        MobileTransLines.SetFilter("Account No.", '<>%1', '');
-                                        if MobileTransLines.Findset() then begin
-                                            repeat
-                                                currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
-                                                if currCharges.Get(1) <= TotalCharges then begin
-                                                    SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(currCharges.Get(1) - currCharges.Get(2)), theReference, '', TransactionType::" ", Dim1, Dim2, true);
-                                                    if MobileTransLines."Recover Excise Duty" then begin
-                                                        TotalExciseDuty += currCharges.Get(2);
-                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::"G/L Account", genSetUp."Excise Duty G/L", 'Excise duty on charges', MobileTransLines."Account Type", ''/*MobileTransLines."Account No."*/, -currCharges.Get(2), theReference, '', TransactionType::" ", Dim1, Dim2, true);
-                                                    end;
-                                                end else begin
-                                                    //
-                                                    SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(TotalCharges), theReference, '', TransactionType::" ", Dim1, Dim2, true);
-                                                end;
-
-                                                TotalCharges -= currCharges.Get(1);
-                                                Clear(currCharges);
-                                            until (MobileTransLines.next = 0) or (TotalCharges <= 0);
+                                        TotalExciseDuty := 0;
+                                        if Description = '' then begin
+                                            Description := Format(MpesaTransBuffer."Transaction Type");
                                         end;
-                                    end else begin
-                                        // Charges if Any
+
+                                        // Check if deposit is less than the charges
                                         MobileTransLines.Reset();
                                         MobileTransLines.SetRange("Transaction Type", MobileTransTypes.Code);
                                         MobileTransLines.SetFilter("Account No.", '<>%1', '');
@@ -4100,162 +4094,82 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             TotalCharges := 0;
                                             repeat
                                                 currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
-                                                if currCharges.Get(1) > 0 then begin
-                                                    SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(currCharges.Get(1) - currCharges.Get(2)), theReference, '', TransactionType::" ", Dim1, Dim2, true);
-                                                    TotalCharges += currCharges.Get(1);
-                                                    if MobileTransLines."Recover Excise Duty" then begin
-                                                        TotalExciseDuty += currCharges.Get(2);
-                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::"G/L Account", genSetUp."Excise Duty G/L", 'Excise duty on charges', MobileTransLines."Account Type", ''/*MobileTransLines."Account No."*/, -currCharges.Get(2), theReference, '', TransactionType::" ", Dim1, Dim2, true);
-                                                    end;
-                                                end;
-
-                                                Clear(currCharges);
+                                                TotalCharges += currCharges.Get(1);
                                             until MobileTransLines.next = 0;
+                                        end;
 
-                                            if TotalCharges > 0 then begin
-                                                if TotalCharges < MpesaTransBuffer."Transaction Amount" then begin
-                                                    // Split Vendor + Beneficiary Account
-                                                    // Cr Member acc.
-                                                    SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", Description, AccType::"G/L Account", '', -(MpesaTransBuffer."Transaction Amount"), theReference, '', TransactionType::" ", Dim1, Dim2, true);
-                                                    SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges - TotalExciseDuty), theReference, '', TransactionType::" ", Dim1, Dim2, true);
-                                                    if TotalExciseDuty > 0 then begin
-                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", CopyStr(MobileTransTypes.Description + ' - Excise Duty', 1, 150), AccType::"G/L Account", '', TotalExciseDuty, theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                        if TotalCharges >= MpesaTransBuffer."Transaction Amount" then begin
+                                            TotalCharges := MpesaTransBuffer."Transaction Amount";
+
+                                            // Charges if Any
+                                            MobileTransLines.Reset();
+                                            MobileTransLines.SetRange("Transaction Type", MobileTransTypes.Code);
+                                            MobileTransLines.SetFilter("Account No.", '<>%1', '');
+                                            if MobileTransLines.Findset() then begin
+                                                repeat
+                                                    currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
+                                                    if currCharges.Get(1) <= TotalCharges then begin
+                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(currCharges.Get(1) - currCharges.Get(2)), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                        if MobileTransLines."Recover Excise Duty" then begin
+                                                            TotalExciseDuty += currCharges.Get(2);
+                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::"G/L Account", genSetUp."Excise Duty G/L", 'Excise duty on charges', MobileTransLines."Account Type", ''/*MobileTransLines."Account No."*/, -currCharges.Get(2), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                        end;
+                                                    end else begin
+                                                        //
+                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(TotalCharges), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                     end;
+
+                                                    TotalCharges -= currCharges.Get(1);
+                                                    Clear(currCharges);
+                                                until (MobileTransLines.next = 0) or (TotalCharges <= 0);
+                                            end;
+                                        end else begin
+                                            // Charges if Any
+                                            MobileTransLines.Reset();
+                                            MobileTransLines.SetRange("Transaction Type", MobileTransTypes.Code);
+                                            MobileTransLines.SetFilter("Account No.", '<>%1', '');
+                                            if MobileTransLines.Findset() then begin
+                                                TotalCharges := 0;
+                                                repeat
+                                                    currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
+                                                    if currCharges.Get(1) > 0 then begin
+                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(currCharges.Get(1) - currCharges.Get(2)), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                        TotalCharges += currCharges.Get(1);
+                                                        if MobileTransLines."Recover Excise Duty" then begin
+                                                            TotalExciseDuty += currCharges.Get(2);
+                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::"G/L Account", genSetUp."Excise Duty G/L", 'Excise duty on charges', MobileTransLines."Account Type", ''/*MobileTransLines."Account No."*/, -currCharges.Get(2), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                        end;
+                                                    end;
+
+                                                    Clear(currCharges);
+                                                until MobileTransLines.next = 0;
+
+                                                if TotalCharges > 0 then begin
+                                                    if TotalCharges < MpesaTransBuffer."Transaction Amount" then begin
+                                                        // Split Vendor + Beneficiary Account
+                                                        // Cr Member acc.
+                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", Description, AccType::"G/L Account", '', -(MpesaTransBuffer."Transaction Amount"), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges - TotalExciseDuty), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                        if TotalExciseDuty > 0 then begin
+                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", CopyStr(MobileTransTypes.Description + ' - Excise Duty', 1, 150), AccType::"G/L Account", '', TotalExciseDuty, theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                        end;
+                                                    end;
+                                                end else begin
+                                                    // Cr Member acc.
+                                                    SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", Description, AccType::"G/L Account", '', -MpesaTransBuffer."Transaction Amount", theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                 end;
                                             end else begin
                                                 // Cr Member acc.
                                                 SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", Description, AccType::"G/L Account", '', -MpesaTransBuffer."Transaction Amount", theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                             end;
-                                        end else begin
-                                            // Cr Member acc.
-                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", Description, AccType::"G/L Account", '', -MpesaTransBuffer."Transaction Amount", theReference, '', TransactionType::" ", Dim1, Dim2, true);
-                                        end;
-                                    end;
-
-                                    if SaccoTrans.PostJournal(JTemplate, JBatch) then begin
-                                        MpesaTransBuffer.Posted := true;
-                                        MpesaTransBuffer."Posting Date" := Today;
-                                        MpesaTransBuffer."Posting Time" := time;
-                                        MpesaTransBuffer."Posted By" := UserID;
-                                        MpesaTransBuffer."Needs Change" := false;
-                                        MpesaTransBuffer.Modify();
-
-                                        // SMS
-                                        BeneficiarySavingsAccount.Reset;
-                                        BeneficiarySavingsAccount.SetRange("No.", MpesaTransBuffer."Savings Account");
-                                        BeneficiarySavingsAccount.SetLoadFields(
-                                            "No.",
-                                            "Name",
-                                            "Product Name",
-                                            "Member No.",
-                                            "Product Type",
-                                            "Global Dimension 2 Code",
-                                            Status,
-                                            "Balance (LCY)",
-                                            "Authorised Over Draft",
-                                            "Uncleared Cheques",
-                                            "ATM Transactions",
-                                            "Lien Placed",
-                                            "Coop Transactions",
-                                            "One Month Installment",
-                                            "Product Category"
-                                        );
-
-                                        if BeneficiarySavingsAccount.FindFirst then begin
-                                            /*
-                                            Receiver SMS: Dear [Member name], your [Product name] [Account number] has been credited with KES [Amount] received from [Phone number], [Name] on [date+time]. Mpesa ref: [Mpesa Ref]
-                                            */
-                                            TheDestinationMember.Reset;
-                                            TheDestinationMember.SetRange("No.", BeneficiarySavingsAccount."Member No.");
-                                            TheDestinationMember.SetLoadFields(Name, "Phone No.", "Transactional Mobile Number");
-
-                                            if TheDestinationMember.FindFirst then begin
-                                                theSMS := 'Dear ' + TheDestinationMember.Name +
-                                                ', your ' + BeneficiarySavingsAccount."Product Name" +
-                                                ' ' + BeneficiarySavingsAccount."No." +
-                                                ' has been credited with KES ' + Format(MpesaTransBuffer."Transaction Amount") +
-                                                ' received from ' + MpesaTransBuffer."Initiator Identifier" +
-                                                ', ' + MpesaTransBuffer."Initiator Name" +
-                                                ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                '. Available balance is KES ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(BeneficiarySavingsAccount, true)) +
-                                                '. Mpesa ref: ' + MpesaTransBuffer."Transaction Source Reference";
-
-                                                if TheDestinationMember."Phone No." <> '' then begin
-                                                    ReceiverSMSNo := TheDestinationMember."Phone No.";
-                                                    SkySMS.SendSms(
-                                                        SMSSource::DEPOSIT_CONFIRMATION,
-                                                        TheDestinationMember."Phone No.",
-                                                        theSMS,
-                                                        MpesaTransBuffer."Transaction Source Reference",
-                                                        '',
-                                                        true,
-                                                        0,
-                                                        true,
-                                                        'MBANKING',
-                                                        MpesaTransBuffer."Originator ID",
-                                                        'CBS'
-                                                    );
-                                                end else begin
-                                                    if TheDestinationMember."Transactional Mobile Number" <> '' then begin
-                                                        ReceiverSMSNo := TheDestinationMember."Transactional Mobile Number";
-                                                        SkySMS.SendSms(
-                                                            SMSSource::DEPOSIT_CONFIRMATION,
-                                                            TheDestinationMember."Transactional Mobile Number",
-                                                            theSMS,
-                                                            MpesaTransBuffer."Transaction Source Reference",
-                                                            '',
-                                                            true,
-                                                            0,
-                                                            true,
-                                                            'MBANKING',
-                                                            MpesaTransBuffer."Originator ID",
-                                                            'CBS'
-                                                        );
-                                                    end;
-                                                end;
-                                                if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Mpesa Deposit" then begin
-                                                    if ReceiverSMSNo <> MpesaTransBuffer."Initiator Identifier" then begin
-                                                        /*
-                                                        Sender SMS: Your MPESA deposit of KES [Amount] to paybill 541900 for [Account name] on [date+time] has been received. Mpesa ref: [Mpesa Ref]
-                                                        */
-                                                        theSMS := 'Your MPESA deposit of KES ' +
-                                                        Format(MpesaTransBuffer."Transaction Amount") +
-                                                        ' to paybill ' +
-                                                        MpesaTransBuffer."Receiver Identifier" +
-                                                        ' for ' +
-                                                        BeneficiarySavingsAccount.Name +
-                                                        ' on ' +
-                                                        GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                        ' has been received. MPESA ref: ' +
-                                                        MpesaTransBuffer."Transaction Source Reference";
-
-                                                        SkySMS.SendSms(
-                                                            SMSSource::DEPOSIT_CONFIRMATION,
-                                                            MpesaTransBuffer."Initiator Identifier",
-                                                            theSMS,
-                                                            MpesaTransBuffer."Transaction Source Reference",
-                                                            '',
-                                                            true,
-                                                            0,
-                                                            true,
-                                                            'MBANKING',
-                                                            MpesaTransBuffer."Originator ID",
-                                                            'CBS'
-                                                        );
-                                                    end;
-                                                end;
-                                            end;
                                         end;
 
-                                    end else begin
-                                        GLEntry.Reset;
-                                        GLEntry.SetRange("Document No.", theReference);
-                                        GLEntry.SetLoadFields("Entry No.");
-                                        if GLEntry.FindFirst then begin
+                                        if SaccoTrans.PostJournal(JTemplate, JBatch) then begin
                                             MpesaTransBuffer.Posted := true;
                                             MpesaTransBuffer."Posting Date" := Today;
                                             MpesaTransBuffer."Posting Time" := time;
                                             MpesaTransBuffer."Posted By" := UserID;
+                                            MpesaTransBuffer."Needs Change" := false;
                                             MpesaTransBuffer.Modify();
 
                                             // SMS
@@ -4366,17 +4280,682 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             end;
 
                                         end else begin
-                                            MpesaTransBuffer."Try Posting Count" := MpesaTransBuffer."Try Posting Count" + 1;
-                                            MpesaTransBuffer."Needs Change" := true;
-                                            MpesaTransBuffer."Needs Change Reason" := 'The record was not able to post';
-                                            MpesaTransBuffer.Modify();
+                                            GLEntry.Reset;
+                                            GLEntry.SetRange("Document No.", theReference);
+                                            GLEntry.SetLoadFields("Entry No.");
+                                            if GLEntry.FindFirst then begin
+                                                MpesaTransBuffer.Posted := true;
+                                                MpesaTransBuffer."Posting Date" := Today;
+                                                MpesaTransBuffer."Posting Time" := time;
+                                                MpesaTransBuffer."Posted By" := UserID;
+                                                MpesaTransBuffer.Modify();
+
+                                                // SMS
+                                                BeneficiarySavingsAccount.Reset;
+                                                BeneficiarySavingsAccount.SetRange("No.", MpesaTransBuffer."Savings Account");
+                                                BeneficiarySavingsAccount.SetLoadFields(
+                                                    "No.",
+                                                    "Name",
+                                                    "Product Name",
+                                                    "Member No.",
+                                                    "Product Type",
+                                                    "Global Dimension 2 Code",
+                                                    Status,
+                                                    "Balance (LCY)",
+                                                    "Authorised Over Draft",
+                                                    "Uncleared Cheques",
+                                                    "ATM Transactions",
+                                                    "Lien Placed",
+                                                    "Coop Transactions",
+                                                    "One Month Installment",
+                                                    "Product Category"
+                                                );
+
+                                                if BeneficiarySavingsAccount.FindFirst then begin
+                                                    /*
+                                                    Receiver SMS: Dear [Member name], your [Product name] [Account number] has been credited with KES [Amount] received from [Phone number], [Name] on [date+time]. Mpesa ref: [Mpesa Ref]
+                                                    */
+                                                    TheDestinationMember.Reset;
+                                                    TheDestinationMember.SetRange("No.", BeneficiarySavingsAccount."Member No.");
+                                                    TheDestinationMember.SetLoadFields(Name, "Phone No.", "Transactional Mobile Number");
+
+                                                    if TheDestinationMember.FindFirst then begin
+                                                        theSMS := 'Dear ' + TheDestinationMember.Name +
+                                                        ', your ' + BeneficiarySavingsAccount."Product Name" +
+                                                        ' ' + BeneficiarySavingsAccount."No." +
+                                                        ' has been credited with KES ' + Format(MpesaTransBuffer."Transaction Amount") +
+                                                        ' received from ' + MpesaTransBuffer."Initiator Identifier" +
+                                                        ', ' + MpesaTransBuffer."Initiator Name" +
+                                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                        '. Available balance is KES ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(BeneficiarySavingsAccount, true)) +
+                                                        '. Mpesa ref: ' + MpesaTransBuffer."Transaction Source Reference";
+
+                                                        if TheDestinationMember."Phone No." <> '' then begin
+                                                            ReceiverSMSNo := TheDestinationMember."Phone No.";
+                                                            SkySMS.SendSms(
+                                                                SMSSource::DEPOSIT_CONFIRMATION,
+                                                                TheDestinationMember."Phone No.",
+                                                                theSMS,
+                                                                MpesaTransBuffer."Transaction Source Reference",
+                                                                '',
+                                                                true,
+                                                                0,
+                                                                true,
+                                                                'MBANKING',
+                                                                MpesaTransBuffer."Originator ID",
+                                                                'CBS'
+                                                            );
+                                                        end else begin
+                                                            if TheDestinationMember."Transactional Mobile Number" <> '' then begin
+                                                                ReceiverSMSNo := TheDestinationMember."Transactional Mobile Number";
+                                                                SkySMS.SendSms(
+                                                                    SMSSource::DEPOSIT_CONFIRMATION,
+                                                                    TheDestinationMember."Transactional Mobile Number",
+                                                                    theSMS,
+                                                                    MpesaTransBuffer."Transaction Source Reference",
+                                                                    '',
+                                                                    true,
+                                                                    0,
+                                                                    true,
+                                                                    'MBANKING',
+                                                                    MpesaTransBuffer."Originator ID",
+                                                                    'CBS'
+                                                                );
+                                                            end;
+                                                        end;
+                                                        if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Mpesa Deposit" then begin
+                                                            if ReceiverSMSNo <> MpesaTransBuffer."Initiator Identifier" then begin
+                                                                /*
+                                                                Sender SMS: Your MPESA deposit of KES [Amount] to paybill 541900 for [Account name] on [date+time] has been received. Mpesa ref: [Mpesa Ref]
+                                                                */
+                                                                theSMS := 'Your MPESA deposit of KES ' +
+                                                                Format(MpesaTransBuffer."Transaction Amount") +
+                                                                ' to paybill ' +
+                                                                MpesaTransBuffer."Receiver Identifier" +
+                                                                ' for ' +
+                                                                BeneficiarySavingsAccount.Name +
+                                                                ' on ' +
+                                                                GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                ' has been received. MPESA ref: ' +
+                                                                MpesaTransBuffer."Transaction Source Reference";
+
+                                                                SkySMS.SendSms(
+                                                                    SMSSource::DEPOSIT_CONFIRMATION,
+                                                                    MpesaTransBuffer."Initiator Identifier",
+                                                                    theSMS,
+                                                                    MpesaTransBuffer."Transaction Source Reference",
+                                                                    '',
+                                                                    true,
+                                                                    0,
+                                                                    true,
+                                                                    'MBANKING',
+                                                                    MpesaTransBuffer."Originator ID",
+                                                                    'CBS'
+                                                                );
+                                                            end;
+                                                        end;
+                                                    end;
+                                                end;
+
+                                            end else begin
+                                                MpesaTransBuffer."Try Posting Count" := MpesaTransBuffer."Try Posting Count" + 1;
+                                                MpesaTransBuffer."Needs Change" := true;
+                                                MpesaTransBuffer."Needs Change Reason" := 'The record was not able to post';
+                                                MpesaTransBuffer.Modify();
+                                            end;
                                         end;
+                                    end else begin
+                                        MpesaTransBuffer."Try Posting Count" := MpesaTransBuffer."Try Posting Count" + 1;
+                                        MpesaTransBuffer."Needs Change" := true;
+                                        MpesaTransBuffer."Needs Change Reason" := 'The beneficiary account was not found in Savings Accounts list';
+                                        MpesaTransBuffer.Modify();
                                     end;
                                 end else begin
-                                    MpesaTransBuffer."Try Posting Count" := MpesaTransBuffer."Try Posting Count" + 1;
-                                    MpesaTransBuffer."Needs Change" := true;
-                                    MpesaTransBuffer."Needs Change Reason" := 'The beneficiary account was not found in Savings Accounts list';
-                                    MpesaTransBuffer.Modify();
+
+                                    if MpesaTransBuffer."Transaction Type" <> MpesaTransBuffer."Transaction Type"::"Self PIN Reset" then begin
+                                        // Other deposits
+                                        if SavingsAccounts.get(MpesaTransBuffer."Savings Account") then begin
+                                            SaccoTrans.InitJournal(JTemplate, JBatch);
+                                            Dim1 := SavingsAccounts."Global Dimension 1 Code";
+                                            Dim2 := SavingsAccounts."Global Dimension 2 Code";
+                                            Description := CopyStr(MpesaTransBuffer."Transaction Description", 1, 150);
+                                            // Deb Bank Acc.
+                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, MpesaTransBuffer."Transaction Date", AccType::"Bank Account", MobileTransTypes."Bank Account", Description, AccType::"G/L Account", '', MpesaTransBuffer."Transaction Amount", theReference, '', TransactionType::" ", Dim1, Dim2, true);
+
+                                            TotalExciseDuty := 0;
+                                            if Description = '' then begin
+                                                Description := Format(MpesaTransBuffer."Transaction Type");
+                                            end;
+
+                                            if MpesaTransBuffer."Transaction Type" <> MpesaTransBuffer."Transaction Type"::"Mpesa Deposit" then begin
+                                                Description := CopyStr(Format(MpesaTransBuffer."Transaction Type") + ' ' + MpesaTransBuffer."Originator ID", 1, 150);
+                                            end;
+
+                                            // Check if deposit is less than the charges
+                                            MobileTransLines.Reset();
+                                            MobileTransLines.SetRange("Transaction Type", MobileTransTypes.Code);
+                                            MobileTransLines.SetFilter("Account No.", '<>%1', '');
+                                            if MobileTransLines.Findset() then begin
+                                                TotalCharges := 0;
+                                                repeat
+                                                    currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
+                                                    TotalCharges += currCharges.Get(1);
+                                                until MobileTransLines.next = 0;
+                                            end;
+
+                                            if TotalCharges >= MpesaTransBuffer."Transaction Amount" then begin
+                                                TotalCharges := MpesaTransBuffer."Transaction Amount";
+
+                                                // Charges if Any
+                                                MobileTransLines.Reset();
+                                                MobileTransLines.SetRange("Transaction Type", MobileTransTypes.Code);
+                                                MobileTransLines.SetFilter("Account No.", '<>%1', '');
+                                                if MobileTransLines.Findset() then begin
+                                                    repeat
+                                                        currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
+                                                        if currCharges.Get(1) <= TotalCharges then begin
+                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, MpesaTransBuffer."Transaction Date", MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(currCharges.Get(1) - currCharges.Get(2) - currCharges.Get(3)), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                            if MobileTransLines."Sky Revenue Share" then
+                                                                SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Vendor, MobileTransLines."Sky Revenue Account No.", 'Sky World ' + MobileTransLines.Description, AccType::"G/L Account", '', -currCharges.Get(3), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                            if MobileTransLines."Recover Excise Duty" then begin
+                                                                TotalExciseDuty += currCharges.Get(2);
+                                                                SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, MpesaTransBuffer."Transaction Date", AccType::"G/L Account", genSetUp."Excise Duty G/L", 'Excise duty on charges', MobileTransLines."Account Type", ''/*MobileTransLines."Account No."*/, -currCharges.Get(2), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                            end;
+                                                        end else begin
+                                                            //
+                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, MpesaTransBuffer."Transaction Date", MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(TotalCharges), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                        end;
+
+                                                        TotalCharges -= currCharges.Get(1);
+                                                        Clear(currCharges);
+                                                    until (MobileTransLines.next = 0) or (TotalCharges <= 0);
+                                                end;
+                                            end else begin
+                                                // Charges if Any
+                                                MobileTransLines.Reset();
+                                                MobileTransLines.SetRange("Transaction Type", MobileTransTypes.Code);
+                                                MobileTransLines.SetFilter("Account No.", '<>%1', '');
+                                                if MobileTransLines.Findset() then begin
+                                                    TotalCharges := 0;
+                                                    repeat
+                                                        currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
+                                                        if currCharges.Get(1) > 0 then begin
+                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, MpesaTransBuffer."Transaction Date", MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(currCharges.Get(1) - currCharges.Get(2) - currCharges.Get(3)), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                            if MobileTransLines."Sky Revenue Share" then
+                                                                SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Vendor, MobileTransLines."Sky Revenue Account No.", 'Sky World ' + MobileTransLines.Description, AccType::"G/L Account", '', -currCharges.Get(3), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                            TotalCharges += currCharges.Get(1);
+                                                            if MobileTransLines."Recover Excise Duty" then begin
+                                                                TotalExciseDuty += currCharges.Get(2);
+                                                                SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, MpesaTransBuffer."Transaction Date", AccType::"G/L Account", genSetUp."Excise Duty G/L", 'Excise duty on charges', MobileTransLines."Account Type", ''/*MobileTransLines."Account No."*/, -currCharges.Get(2), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                            end;
+                                                        end;
+
+                                                        Clear(currCharges);
+                                                    until MobileTransLines.next = 0;
+
+                                                    if TotalCharges > 0 then begin
+                                                        if TotalCharges < MpesaTransBuffer."Transaction Amount" then begin
+                                                            // Split Vendor + Beneficiary Account
+                                                            // Cr Member acc.
+                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, MpesaTransBuffer."Transaction Date", AccType::Savings, MpesaTransBuffer."Savings Account", Description, AccType::"G/L Account", '', -(MpesaTransBuffer."Transaction Amount"), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, MpesaTransBuffer."Transaction Date", AccType::Savings, MpesaTransBuffer."Savings Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges - TotalExciseDuty), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                            if TotalExciseDuty > 0 then begin
+                                                                SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, MpesaTransBuffer."Transaction Date", AccType::Savings, MpesaTransBuffer."Savings Account", CopyStr(MobileTransTypes.Description + ' - Excise Duty', 1, 150), AccType::"G/L Account", '', TotalExciseDuty, theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                            end;
+                                                        end;
+                                                    end else begin
+                                                        // Cr Member acc.
+                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, MpesaTransBuffer."Transaction Date", AccType::Savings, MpesaTransBuffer."Savings Account", Description, AccType::"G/L Account", '', -MpesaTransBuffer."Transaction Amount", theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                    end;
+                                                end else begin
+                                                    // Cr Member acc.
+                                                    SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, MpesaTransBuffer."Transaction Date", AccType::Savings, MpesaTransBuffer."Savings Account", Description, AccType::"G/L Account", '', -MpesaTransBuffer."Transaction Amount", theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                end;
+                                            end;
+
+                                            if SaccoTrans.PostJournal(JTemplate, JBatch) then begin
+                                                MpesaTransBuffer.Posted := true;
+                                                MpesaTransBuffer."Posting Date" := Today;
+                                                MpesaTransBuffer."Posting Time" := time;
+                                                MpesaTransBuffer."Posted By" := UserID;
+                                                MpesaTransBuffer."Needs Change" := false;
+                                                MpesaTransBuffer.Modify();
+
+                                                // SMS
+                                                BeneficiarySavingsAccount.Reset;
+                                                BeneficiarySavingsAccount.SetRange("No.", MpesaTransBuffer."Savings Account");
+                                                BeneficiarySavingsAccount.SetLoadFields(
+                                                    "No.",
+                                                    "Name",
+                                                    "Product Name",
+                                                    "Member No.",
+                                                    "Product Type",
+                                                    "Global Dimension 2 Code",
+                                                    Status,
+                                                    "Balance (LCY)",
+                                                    "Authorised Over Draft",
+                                                    "Uncleared Cheques",
+                                                    "ATM Transactions",
+                                                    "Lien Placed",
+                                                    "Coop Transactions",
+                                                    "One Month Installment",
+                                                    "Product Category"
+                                                );
+
+                                                if BeneficiarySavingsAccount.FindFirst then begin
+                                                    /*
+                                                    Receiver SMS: Dear [Member name], your [Product name] [Account number] has been credited with KES [Amount] received from [Phone number], [Name] on [date+time]. Mpesa ref: [Mpesa Ref]
+                                                    */
+                                                    TheDestinationMember.Reset;
+                                                    TheDestinationMember.SetRange("No.", BeneficiarySavingsAccount."Member No.");
+                                                    TheDestinationMember.SetLoadFields(Name, "Phone No.", "Transactional Mobile Number");
+
+                                                    if TheDestinationMember.FindFirst then begin
+                                                        // theSMS := 'Dear ' + TheDestinationMember.Name +
+                                                        // ', your ' + BeneficiarySavingsAccount."Product Name" +
+                                                        // ' ' + BeneficiarySavingsAccount."No." +
+                                                        // ' has been credited with KES ' + Format(MpesaTransBuffer."Transaction Amount") +
+                                                        // ' received from ' + MpesaTransBuffer."Initiator Identifier" +
+                                                        // ', ' + MpesaTransBuffer."Initiator Name" +
+                                                        // ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                        // '. Available balance is KES ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(BeneficiarySavingsAccount, true)) +
+                                                        // '. Mpesa ref: ' + MpesaTransBuffer."Transaction Source Reference";
+
+                                                        /*
+                                                            Receiver SMS:
+                                                            Dear [First Name],
+                                                            You have successfully deposited KES [Formatted Amount]
+                                                            to your [Account Product Name]
+                                                            on [ISO Date] [ISO Time].
+                                                            REF: [Mpesa Ref] PIN Yako, Siri Yako!
+                                                        */
+
+                                                        if (
+                                                            (MpesaTransBuffer."Initiator Identifier" = TheDestinationMember."Transactional Mobile Number") or
+                                                            (MpesaTransBuffer."Initiator Identifier" = TheDestinationMember."Phone No.")
+                                                        ) then begin
+                                                            theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                            ', You have successfully deposited KES ' + Format(MpesaTransBuffer."Transaction Amount") +
+                                                            ' to your ' + BeneficiarySavingsAccount."Product Name" +
+                                                            ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                            '. REF: ' + MpesaTransBuffer."Transaction Source Reference" +
+                                                            ' PIN Yako, Siri Yako!';
+                                                        end else begin
+                                                            theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                            ', You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
+                                                            ' from ' + MpesaTransBuffer."Source Name" +
+                                                            ' to your ' + BeneficiarySavingsAccount."Product Name" +
+                                                            ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                            '. REF: ' + MpesaTransBuffer."Transaction Source Reference" +
+                                                            ' PIN Yako, Siri Yako!';
+
+                                                            if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Coop B2B Deposit" then begin
+                                                                theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                            ', You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
+                                                            ' from Coop Bank (B2B) ' +
+                                                            ' to your ' + BeneficiarySavingsAccount."Product Name" +
+                                                            ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                            '. REF: ' + MpesaTransBuffer."Originator ID" +
+                                                            ' PIN Yako, Siri Yako!';
+                                                            end;
+                                                            if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Coop P2F Deposit" then begin
+                                                                theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                            ', You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
+                                                            ' from Coop Bank (P2F) ' +
+                                                            ' to your ' + BeneficiarySavingsAccount."Product Name" +
+                                                            ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                            '. REF: ' + MpesaTransBuffer."Originator ID" +
+                                                            ' PIN Yako, Siri Yako!';
+                                                            end;
+                                                        end;
+
+                                                        if TheDestinationMember."Phone No." <> '' then begin
+                                                            ReceiverSMSNo := TheDestinationMember."Phone No.";
+                                                            SkySMS.SendSms(
+                                                                SMSSource::DEPOSIT_CONFIRMATION,
+                                                                TheDestinationMember."Phone No.",
+                                                                theSMS,
+                                                                MpesaTransBuffer."Transaction Source Reference",
+                                                                '',
+                                                                true,
+                                                                0,
+                                                                true,
+                                                                'MBANKING',
+                                                                MpesaTransBuffer."Originator ID",
+                                                                'CBS'
+                                                            );
+                                                        end else begin
+                                                            if TheDestinationMember."Transactional Mobile Number" <> '' then begin
+                                                                ReceiverSMSNo := TheDestinationMember."Transactional Mobile Number";
+                                                                SkySMS.SendSms(
+                                                                    SMSSource::DEPOSIT_CONFIRMATION,
+                                                                    TheDestinationMember."Transactional Mobile Number",
+                                                                    theSMS,
+                                                                    MpesaTransBuffer."Transaction Source Reference",
+                                                                    '',
+                                                                    true,
+                                                                    0,
+                                                                    true,
+                                                                    'MBANKING',
+                                                                    MpesaTransBuffer."Originator ID",
+                                                                    'CBS'
+                                                                );
+                                                            end;
+                                                        end;
+
+                                                        if ReceiverSMSNo <> MpesaTransBuffer."Initiator Identifier" then begin
+                                                            /*
+                                                            Sender SMS: Your MPESA deposit of KES [Amount] to paybill 541900 for [Account name] on [date+time] has been received. Mpesa ref: [Mpesa Ref]
+                                                            */
+                                                            theSMS := 'Your MPESA deposit of KES ' +
+                                                            Format(MpesaTransBuffer."Transaction Amount") +
+                                                            ' to paybill ' +
+                                                            MpesaTransBuffer."Receiver Identifier" +
+                                                            ' for ' +
+                                                            BeneficiarySavingsAccount.Name +
+                                                            ' on ' +
+                                                            GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                            ' has been received. MPESA ref: ' +
+                                                            MpesaTransBuffer."Transaction Source Reference";
+
+                                                            if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Mpesa Deposit" then begin
+                                                                SkySMS.SendSms(
+                                                                    SMSSource::DEPOSIT_CONFIRMATION,
+                                                                    MpesaTransBuffer."Initiator Identifier",
+                                                                    theSMS,
+                                                                    MpesaTransBuffer."Transaction Source Reference",
+                                                                    '',
+                                                                    true,
+                                                                    0,
+                                                                    true,
+                                                                    'MBANKING',
+                                                                    MpesaTransBuffer."Originator ID",
+                                                                    'CBS'
+                                                                );
+                                                            end;
+                                                        end;
+                                                    end;
+                                                end;
+
+                                            end else begin
+                                                GLEntry.Reset;
+                                                GLEntry.SetRange("Document No.", theReference);
+                                                GLEntry.SetLoadFields("Entry No.");
+                                                if GLEntry.FindFirst then begin
+                                                    MpesaTransBuffer.Posted := true;
+                                                    MpesaTransBuffer."Posting Date" := Today;
+                                                    MpesaTransBuffer."Posting Time" := time;
+                                                    MpesaTransBuffer."Posted By" := UserID;
+                                                    MpesaTransBuffer.Modify();
+
+                                                    // SMS
+                                                    BeneficiarySavingsAccount.Reset;
+                                                    BeneficiarySavingsAccount.SetRange("No.", MpesaTransBuffer."Savings Account");
+                                                    BeneficiarySavingsAccount.SetLoadFields(
+                                                        "No.",
+                                                        "Name",
+                                                        "Product Name",
+                                                        "Member No.",
+                                                        "Product Type",
+                                                        "Global Dimension 2 Code",
+                                                        Status,
+                                                        "Balance (LCY)",
+                                                        "Authorised Over Draft",
+                                                        "Uncleared Cheques",
+                                                        "ATM Transactions",
+                                                        "Lien Placed",
+                                                        "Coop Transactions",
+                                                        "One Month Installment",
+                                                        "Product Category"
+                                                    );
+
+                                                    if BeneficiarySavingsAccount.FindFirst then begin
+                                                        /*
+                                                        Receiver SMS: Dear [Member name], your [Product name] [Account number] has been credited with KES [Amount] received from [Phone number], [Name] on [date+time]. Mpesa ref: [Mpesa Ref]
+                                                        */
+                                                        TheDestinationMember.Reset;
+                                                        TheDestinationMember.SetRange("No.", BeneficiarySavingsAccount."Member No.");
+                                                        TheDestinationMember.SetLoadFields(Name, "Phone No.", "Transactional Mobile Number");
+
+                                                        if TheDestinationMember.FindFirst then begin
+                                                            // theSMS := 'Dear ' + TheDestinationMember.Name +
+                                                            // ', your ' + BeneficiarySavingsAccount."Product Name" +
+                                                            // ' ' + BeneficiarySavingsAccount."No." +
+                                                            // ' has been credited with KES ' + Format(MpesaTransBuffer."Transaction Amount") +
+                                                            // ' received from ' + MpesaTransBuffer."Initiator Identifier" +
+                                                            // ', ' + MpesaTransBuffer."Initiator Name" +
+                                                            // ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                            // '. Available balance is KES ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(BeneficiarySavingsAccount, true)) +
+                                                            // '. Mpesa ref: ' + MpesaTransBuffer."Transaction Source Reference";
+
+                                                            /*
+                                                                Receiver SMS:
+                                                                Dear [First Name],
+                                                                You have successfully deposited KES [Formatted Amount]
+                                                                to your [Account Product Name]
+                                                                on [ISO Date] [ISO Time].
+                                                                REF: [Mpesa Ref] PIN Yako, Siri Yako!
+                                                            */
+
+                                                            if (
+                                                                (MpesaTransBuffer."Initiator Identifier" = TheDestinationMember."Transactional Mobile Number") or
+                                                                (MpesaTransBuffer."Initiator Identifier" = TheDestinationMember."Phone No.")
+                                                            ) then begin
+                                                                theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                                ', You have successfully deposited KES ' + Format(MpesaTransBuffer."Transaction Amount") +
+                                                                ' to your ' + BeneficiarySavingsAccount."Product Name" +
+                                                                ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                '. REF: ' + MpesaTransBuffer."Transaction Source Reference" +
+                                                                ' PIN Yako, Siri Yako!';
+                                                            end else begin
+                                                                theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                                ', You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
+                                                                ' from ' + MpesaTransBuffer."Source Name" +
+                                                                ' to your ' + BeneficiarySavingsAccount."Product Name" +
+                                                                ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                '. REF: ' + MpesaTransBuffer."Transaction Source Reference" +
+                                                                ' PIN Yako, Siri Yako!';
+
+                                                                if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Coop B2B Deposit" then begin
+                                                                    theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                                ', You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
+                                                                ' from Coop Bank (B2B) ' +
+                                                                ' to your ' + BeneficiarySavingsAccount."Product Name" +
+                                                                ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                '. REF: ' + MpesaTransBuffer."Originator ID" +
+                                                                ' PIN Yako, Siri Yako!';
+                                                                end;
+                                                                if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Coop P2F Deposit" then begin
+                                                                    theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                                ', You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
+                                                                ' from Coop Bank (P2F) ' +
+                                                                ' to your ' + BeneficiarySavingsAccount."Product Name" +
+                                                                ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                '. REF: ' + MpesaTransBuffer."Originator ID" +
+                                                                ' PIN Yako, Siri Yako!';
+                                                                end;
+                                                            end;
+
+                                                            if TheDestinationMember."Phone No." <> '' then begin
+                                                                ReceiverSMSNo := TheDestinationMember."Phone No.";
+                                                                SkySMS.SendSms(
+                                                                    SMSSource::DEPOSIT_CONFIRMATION,
+                                                                    TheDestinationMember."Phone No.",
+                                                                    theSMS,
+                                                                    MpesaTransBuffer."Transaction Source Reference",
+                                                                    '',
+                                                                    true,
+                                                                    0,
+                                                                    true,
+                                                                    'MBANKING',
+                                                                    MpesaTransBuffer."Originator ID",
+                                                                    'CBS'
+                                                                );
+                                                            end else begin
+                                                                if TheDestinationMember."Transactional Mobile Number" <> '' then begin
+                                                                    ReceiverSMSNo := TheDestinationMember."Transactional Mobile Number";
+                                                                    SkySMS.SendSms(
+                                                                        SMSSource::DEPOSIT_CONFIRMATION,
+                                                                        TheDestinationMember."Transactional Mobile Number",
+                                                                        theSMS,
+                                                                        MpesaTransBuffer."Transaction Source Reference",
+                                                                        '',
+                                                                        true,
+                                                                        0,
+                                                                        true,
+                                                                        'MBANKING',
+                                                                        MpesaTransBuffer."Originator ID",
+                                                                        'CBS'
+                                                                    );
+                                                                end;
+                                                            end;
+
+                                                            if ReceiverSMSNo <> MpesaTransBuffer."Initiator Identifier" then begin
+                                                                /*
+                                                                Sender SMS: Your MPESA deposit of KES [Amount] to paybill 541900 for [Account name] on [date+time] has been received. Mpesa ref: [Mpesa Ref]
+                                                                */
+                                                                theSMS := 'Your MPESA deposit of KES ' +
+                                                                Format(MpesaTransBuffer."Transaction Amount") +
+                                                                ' to paybill ' +
+                                                                MpesaTransBuffer."Receiver Identifier" +
+                                                                ' for ' +
+                                                                BeneficiarySavingsAccount.Name +
+                                                                ' on ' +
+                                                                GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                ' has been received. MPESA ref: ' +
+                                                                MpesaTransBuffer."Transaction Source Reference";
+
+                                                                if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Mpesa Deposit" then begin
+                                                                    SkySMS.SendSms(
+                                                                        SMSSource::DEPOSIT_CONFIRMATION,
+                                                                        MpesaTransBuffer."Initiator Identifier",
+                                                                        theSMS,
+                                                                        MpesaTransBuffer."Transaction Source Reference",
+                                                                        '',
+                                                                        true,
+                                                                        0,
+                                                                        true,
+                                                                        'MBANKING',
+                                                                        MpesaTransBuffer."Originator ID",
+                                                                        'CBS'
+                                                                    );
+                                                                end;
+                                                            end;
+                                                        end;
+                                                    end;
+
+                                                end else begin
+                                                    MpesaTransBuffer."Try Posting Count" := MpesaTransBuffer."Try Posting Count" + 1;
+                                                    MpesaTransBuffer."Needs Change" := true;
+                                                    MpesaTransBuffer."Needs Change Reason" := 'The record was not able to post';
+                                                    MpesaTransBuffer.Modify();
+                                                end;
+                                            end;
+                                        end else begin
+                                            MpesaTransBuffer."Try Posting Count" := MpesaTransBuffer."Try Posting Count" + 1;
+                                            MpesaTransBuffer."Needs Change" := true;
+                                            MpesaTransBuffer."Needs Change Reason" := 'The beneficiary account was not found in Savings Accounts list';
+
+                                            // Update BOSA
+                                            DepositMember.Reset;
+                                            DepositMember.SetRange("Primary Identification", MpesaTransBuffer."Savings Account");
+                                            DepositMember.SetLoadFields("No.", "Primary Identification");
+                                            if DepositMember.FindFirst then begin
+                                                MpesaTransBuffer."Savings Account" := SkyMbankingTrans.GetMemberDepositsAcc(DepositMember);
+                                                MpesaTransBuffer."Needs Change" := false;
+                                                MpesaTransBuffer."Needs Change Reason" := '';
+                                            end;
+
+                                            // Update BOSA
+                                            DepositMember.Reset;
+                                            DepositMember.SetRange("Payroll/Staff No.", MpesaTransBuffer."Savings Account");
+                                            DepositMember.SetLoadFields("No.", "Primary Identification");
+                                            if DepositMember.FindFirst then begin
+                                                MpesaTransBuffer."Savings Account" := SkyMbankingTrans.GetMemberDepositsAcc(DepositMember);
+                                                MpesaTransBuffer."Needs Change" := false;
+                                                MpesaTransBuffer."Needs Change Reason" := '';
+                                            end;
+
+                                            theSMS := 'The account number ' + MpesaTransBuffer."Savings Account" +
+                                            ' for your deposit transaction of Ksh ' + Format(MpesaTransBuffer."Transaction Amount") +
+                                            ' with ref ' + MpesaTransBuffer."Transaction Source Reference" +
+                                            ' does not exist.';
+
+                                            if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Mpesa Deposit" then begin
+                                                SkySMS.SendSms(
+                                                    SMSSource::DEPOSIT_CONFIRMATION,
+                                                    MpesaTransBuffer."Initiator Identifier",
+                                                    theSMS,
+                                                    MpesaTransBuffer."Transaction Source Reference",
+                                                    '',
+                                                    true,
+                                                    0,
+                                                    true,
+                                                    'MBANKING',
+                                                    MpesaTransBuffer."Originator ID",
+                                                    'CBS'
+                                                );
+                                            end;
+
+                                            MpesaTransBuffer.Modify;
+                                        end;
+                                    end else begin
+                                        // Self PIN reset
+                                        MobileTransTypes.Reset;
+                                        MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Self PIN Reset");
+                                        MobileTransTypes.FindFirst();
+
+                                        SaccoTrans.InitJournal(JTemplate, JBatch);
+                                        Description := CopyStr(MpesaTransBuffer."Transaction Description", 1, 150);
+
+                                        // Charges if Any
+                                        MobileTransLines.Reset();
+                                        MobileTransLines.SetRange("Transaction Type", MobileTransTypes.Code);
+                                        MobileTransLines.SetFilter("Account No.", '<>%1', '');
+                                        if MobileTransLines.Findset() then begin
+                                            TotalCharges := 0;
+                                            repeat
+                                                currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
+                                                if currCharges.Get(1) > 0 then begin
+                                                    SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(currCharges.Get(1) - currCharges.Get(2) - currCharges.Get(3)), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                    if MobileTransLines."Sky Revenue Share" then
+                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Vendor, MobileTransLines."Sky Revenue Account No.", 'Sky World ' + MobileTransLines.Description, AccType::"G/L Account", '', -currCharges.Get(3), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                    TotalCharges += currCharges.Get(1);
+                                                    if MobileTransLines."Recover Excise Duty" then
+                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::"G/L Account", genSetUp."Excise Duty G/L", 'Excise duty ' + MobileTransLines.Description, MobileTransLines."Account Type", ''/*MobileTransLines."Account No."*/, -currCharges.Get(2), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                end;
+
+                                                Clear(currCharges);
+                                            until MobileTransLines.next = 0;
+                                            if TotalCharges > 0 then begin
+                                                SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::"Bank Account", MobileTransTypes."Bank Account", MobileTransTypes.Description, AccType::"G/L Account", '', TotalCharges, theReference, '', TransactionType::" ", Dim1, Dim2, true);
+
+                                                if SaccoTrans.PostJournal(JTemplate, JBatch) then begin
+                                                    MpesaTransBuffer.Posted := true;
+                                                    MpesaTransBuffer."Posting Date" := Today;
+                                                    MpesaTransBuffer."Posting Time" := time;
+                                                    MpesaTransBuffer."Posted By" := UserID;
+                                                    MpesaTransBuffer.Modify();
+                                                end else begin
+                                                    GLEntry.Reset;
+                                                    GLEntry.SetRange("Document No.", theReference);
+                                                    GLEntry.SetLoadFields("Entry No.");
+                                                    if GLEntry.FindFirst then begin
+                                                        MpesaTransBuffer.Posted := true;
+                                                        MpesaTransBuffer."Posting Date" := Today;
+                                                        MpesaTransBuffer."Posting Time" := time;
+                                                        MpesaTransBuffer."Posted By" := UserID;
+                                                        MpesaTransBuffer.Modify();
+                                                    end else begin
+                                                        MpesaTransBuffer."Try Posting Count" := MpesaTransBuffer."Try Posting Count" + 1;
+                                                        MpesaTransBuffer."Needs Change" := true;
+                                                        MpesaTransBuffer."Needs Change Reason" := 'The record was not able to post';
+                                                        MpesaTransBuffer.Modify();
+                                                    end;
+                                                end;
+                                            end;
+                                        end;
+                                    end;
                                 end;
                             end;
 
@@ -4582,6 +5161,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                 currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
                                                 if currCharges.Get(1) <= TotalCharges then begin
                                                     SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(currCharges.Get(1) - currCharges.Get(2)), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                    if MobileTransLines."Sky Revenue Share" then
+                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Vendor, MobileTransLines."Sky Revenue Account No.", 'Sky World ' + MobileTransLines.Description, AccType::"G/L Account", '', -currCharges.Get(3), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                     if MobileTransLines."Recover Excise Duty" then begin
                                                         TotalExciseDuty += currCharges.Get(2);
                                                         SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::"G/L Account", genSetUp."Excise Duty G/L", 'Excise duty on charges', MobileTransLines."Account Type", ''/*MobileTransLines."Account No."*/, -currCharges.Get(2), theReference, '', TransactionType::" ", Dim1, Dim2, true);
@@ -4610,6 +5191,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                     currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
                                                     if currCharges.Get(1) > 0 then begin
                                                         SaccoTrans.JournalInsert(LoanTemp, LoanBatch, theReference, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(currCharges.Get(1) - currCharges.Get(2)), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                        if MobileTransLines."Sky Revenue Share" then
+                                                            SaccoTrans.JournalInsert(LoanTemp, LoanBatch, theReference, Today, AccType::Vendor, MobileTransLines."Sky Revenue Account No.", 'Sky World ' + MobileTransLines.Description, AccType::"G/L Account", '', -currCharges.Get(3), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                         TotalCharges += currCharges.Get(1);
                                                         if MobileTransLines."Recover Excise Duty" then begin
                                                             TotalExciseDuty += currCharges.Get(2);
@@ -4891,7 +5474,9 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                 MpesaTransBuffer."Transaction Type"::Airtime,
                                 MpesaTransBuffer."Transaction Type"::"Mpesa Withdrawal",
                                 MpesaTransBuffer."Transaction Type"::"Bank Transfer",
-                                MpesaTransBuffer."Transaction Type"::"Utility Payment"
+                                MpesaTransBuffer."Transaction Type"::"Utility Payment",
+                                MpesaTransBuffer."Transaction Type"::"Till Payment",
+                                MpesaTransBuffer."Transaction Type"::"Gaming Utility Payment"
                             );
                             MpesaTransBuffer.SetCurrentKey("Try Posting Count", "Transaction Date Time");
                             MpesaTransBuffer.SetAscending("Try Posting Count", true);
@@ -4912,6 +5497,28 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                         ' done on ' +
                                         GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                         ' has been reversed.';
+
+                                    if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Till Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
+                                        theSMS := 'Dear member, your ' +
+                                    Format(MpesaTransBuffer."Transaction Type") +
+                                        ' request of KES ' +
+                                        Format(MpesaTransBuffer."Transaction Amount") +
+                                        ' done on ' +
+                                        GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                        ' at ' + MpesaTransBuffer."Receiver Name" + '(' + MpesaTransBuffer."Receiver Identifier" + ')' +
+                                        ' has been reversed.';
+                                    end;
+
+                                    if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Gaming Utility Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
+                                        theSMS := 'Dear member, your ' +
+                                    Format(MpesaTransBuffer."Transaction Type") +
+                                        ' request of KES ' +
+                                        Format(MpesaTransBuffer."Transaction Amount") +
+                                        ' done on ' +
+                                        GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                        ' at ' + MpesaTransBuffer."Receiver Name" + '(' + MpesaTransBuffer."Receiver Identifier" + ')' +
+                                        ' has been reversed.';
+                                    end;
 
                                     SkySMS.SendSms(
                                         SMSSource::MPESA_WITHDRAWAL_REVERSAL,
@@ -4936,7 +5543,14 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                         end;
                     end;
 
-                    MobileTransTypes.SetFilter(Type, '%1|%2|%3|%4', MobileTransTypes.Type::Airtime, MobileTransTypes.Type::"Mpesa Withdrawal", MobileTransTypes.Type::"Bank Transfer", MobileTransTypes.Type::"Utility Payment");
+                    MobileTransTypes.SetFilter(Type, '%1|%2|%3|%4|%5|%6',
+                        MobileTransTypes.Type::Airtime,
+                        MobileTransTypes.Type::"Mpesa Withdrawal",
+                        MobileTransTypes.Type::"Bank Transfer",
+                        MobileTransTypes.Type::"Utility Payment",
+                        MobileTransTypes.Type::"Till Payment",
+                        MobileTransTypes.Type::"Gaming Utility Payment"
+                    );
                     if MobileTransTypes.FindSet then begin
                         repeat
                             MpesaTransBuffer.Reset();
@@ -4993,6 +5607,32 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             ' has been processed successfully.' +
                                                             ' Available balance is KES ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(BeneficiarySavingsAccount, true)) +
                                                             '. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference";
+
+                                            if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Till Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
+                                                theSMS := 'Dear member, your ' +
+                                            Format(MpesaTransBuffer."Transaction Type") +
+                                                                ' request of KES ' +
+                                                                Format(MpesaTransBuffer."Transaction Amount") +
+                                                                ' done on ' +
+                                                                GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                ' at ' + MpesaTransBuffer."Receiver Name" + '(' + MpesaTransBuffer."Receiver Identifier" + ')' +
+                                                                ' has been processed successfully.' +
+                                                            ' Available balance is KES ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(BeneficiarySavingsAccount, true)) +
+                                                            '. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference";
+                                            end;
+
+                                            if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Gaming Utility Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
+                                                theSMS := 'Dear member, your ' +
+                                            Format(MpesaTransBuffer."Transaction Type") +
+                                                                ' request of KES ' +
+                                                                Format(MpesaTransBuffer."Transaction Amount") +
+                                                                ' done on ' +
+                                                                GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                ' at ' + MpesaTransBuffer."Receiver Name" + '(' + MpesaTransBuffer."Receiver Identifier" + ')' +
+                                                                ' has been processed successfully.' +
+                                                                ' Available balance is KES ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(BeneficiarySavingsAccount, true)) +
+                                                                '. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference";
+                                            end;
 
                                             if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Bank Transfer" then begin
                                                 SkySMS.SendSms(
@@ -5056,6 +5696,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
                                                                 if currCharges.Get(1) > 0 then begin
                                                                     SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(currCharges.Get(1) - currCharges.Get(2)), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                                    if MobileTransLines."Sky Revenue Share" then
+                                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Vendor, MobileTransLines."Sky Revenue Account No.", 'Sky World ' + MobileTransLines.Description, AccType::"G/L Account", '', -currCharges.Get(3), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                                     TotalCharges += currCharges.Get(1);
                                                                     if MobileTransLines."Recover Excise Duty" then begin
                                                                         TotalExciseDuty += currCharges.Get(2);
@@ -5073,6 +5715,10 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                     MpesaTransBuffer."Transaction Type"::"Utility Payment":
                                                                         SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Source Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges - TotalExciseDuty), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                                     MpesaTransBuffer."Transaction Type"::Airtime:
+                                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Source Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges - TotalExciseDuty), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                                    MpesaTransBuffer."Transaction Type"::"Till Payment":
+                                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Source Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges - TotalExciseDuty), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                                    MpesaTransBuffer."Transaction Type"::"Gaming Utility Payment":
                                                                         SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Source Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges - TotalExciseDuty), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                                     else
                                                                 end;
@@ -5118,6 +5764,32 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             ' has been processed successfully.' +
                                                             ' Available balance is KES ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(BeneficiarySavingsAccount, true)) +
                                                             '. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference";
+
+                                                                if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Till Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
+                                                                    theSMS := 'Dear member, your ' +
+                                                                Format(MpesaTransBuffer."Transaction Type") +
+                                                                                    ' request of KES ' +
+                                                                                    Format(MpesaTransBuffer."Transaction Amount") +
+                                                                                    ' done on ' +
+                                                                                    GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                                    ' at ' + MpesaTransBuffer."Receiver Name" + '(' + MpesaTransBuffer."Receiver Identifier" + ')' +
+                                                                                    ' has been processed successfully.' +
+                                                            ' Available balance is KES ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(BeneficiarySavingsAccount, true)) +
+                                                            '. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference";
+                                                                end;
+
+                                                                if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Gaming Utility Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
+                                                                    theSMS := 'Dear member, your ' +
+                                                                Format(MpesaTransBuffer."Transaction Type") +
+                                                                                    ' request of KES ' +
+                                                                                    Format(MpesaTransBuffer."Transaction Amount") +
+                                                                                    ' done on ' +
+                                                                                    GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                                    ' at ' + MpesaTransBuffer."Receiver Name" + '(' + MpesaTransBuffer."Receiver Identifier" + ')' +
+                                                                                    ' has been processed successfully.' +
+                                                                                    ' Available balance is KES ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(BeneficiarySavingsAccount, true)) +
+                                                                                    '. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference";
+                                                                end;
 
                                                                 if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Bank Transfer" then begin
                                                                     SkySMS.SendSms(
@@ -5192,6 +5864,32 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 ' Available balance is KES ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(BeneficiarySavingsAccount, true)) +
                                                                 '. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference";
 
+                                                                    if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Till Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
+                                                                        theSMS := 'Dear member, your ' +
+                                                                    Format(MpesaTransBuffer."Transaction Type") +
+                                                                                        ' request of KES ' +
+                                                                                        Format(MpesaTransBuffer."Transaction Amount") +
+                                                                                        ' done on ' +
+                                                                                        GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                                        ' at ' + MpesaTransBuffer."Receiver Name" + '(' + MpesaTransBuffer."Receiver Identifier" + ')' +
+                                                                                        ' has been processed successfully.' +
+                                                                ' Available balance is KES ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(BeneficiarySavingsAccount, true)) +
+                                                                '. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference";
+                                                                    end;
+
+                                                                    if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Gaming Utility Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
+                                                                        theSMS := 'Dear member, your ' +
+                                                                    Format(MpesaTransBuffer."Transaction Type") +
+                                                                                        ' request of KES ' +
+                                                                                        Format(MpesaTransBuffer."Transaction Amount") +
+                                                                                        ' done on ' +
+                                                                                        GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                                        ' at ' + MpesaTransBuffer."Receiver Name" + '(' + MpesaTransBuffer."Receiver Identifier" + ')' +
+                                                                                        ' has been processed successfully.' +
+                                                                                        ' Available balance is KES ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(BeneficiarySavingsAccount, true)) +
+                                                                                        '. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference";
+                                                                    end;
+
                                                                     if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Bank Transfer" then begin
                                                                         SkySMS.SendSms(
                                                                             SMSSource::BANK_TRANSFER,
@@ -5245,6 +5943,27 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             ' done on ' +
                                                             GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                             ' has been reversed.';
+                                                        if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Till Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
+                                                            theSMS := 'Dear member, your ' +
+                                                        Format(MpesaTransBuffer."Transaction Type") +
+                                                                            ' request of KES ' +
+                                                                            Format(MpesaTransBuffer."Transaction Amount") +
+                                                                            ' done on ' +
+                                                                            GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                            ' at ' + MpesaTransBuffer."Receiver Name" + '(' + MpesaTransBuffer."Receiver Identifier" + ')' +
+                                                                            ' has been reversed.';
+                                                        end;
+
+                                                        if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Gaming Utility Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
+                                                            theSMS := 'Dear member, your ' +
+                                                        Format(MpesaTransBuffer."Transaction Type") +
+                                                                            ' request of KES ' +
+                                                                            Format(MpesaTransBuffer."Transaction Amount") +
+                                                                            ' done on ' +
+                                                                            GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                            ' at ' + MpesaTransBuffer."Receiver Name" + '(' + MpesaTransBuffer."Receiver Identifier" + ')' +
+                                                                            ' has been reversed.';
+                                                        end;
 
                                                         SkySMS.SendSms(
                                                             SMSSource::MPESA_WITHDRAWAL_REVERSAL,
@@ -5274,6 +5993,10 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                             end;
                         until MobileTransTypes.next = 0;
                         SuccessMessage := 'Mpesa Withdrawal/utility payments were processed Successfully';
+
+                        Commit();
+                        // PIN Resets
+                        PostPINResets();
                     end else begin
                         ResponseData.Add('request_status', 'FAILED');
                         ResponseData.Add('request_status_description', 'Transaction type for Mpesa Withdrawals and other utilities is not available');
@@ -5504,6 +6227,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                     currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
                                                                     if currCharges.Get(1) <= TotalCharges then begin
                                                                         SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(currCharges.Get(1) - currCharges.Get(2)), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                                        if MobileTransLines."Sky Revenue Share" then
+                                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Vendor, MobileTransLines."Sky Revenue Account No.", 'Sky World ' + MobileTransLines.Description, AccType::"G/L Account", '', -currCharges.Get(3), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                                         if MobileTransLines."Recover Excise Duty" then begin
                                                                             TotalExciseDuty += currCharges.Get(2);
                                                                             SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::"G/L Account", genSetUp."Excise Duty G/L", 'Excise duty on charges', MobileTransLines."Account Type", ''/*MobileTransLines."Account No."*/, -currCharges.Get(2), theReference, '', TransactionType::" ", Dim1, Dim2, true);
@@ -5563,6 +6288,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
                                                                     if theCharge > 0 then begin
                                                                         SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(theCharge - currCharges.Get(2)), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                                        if MobileTransLines."Sky Revenue Share" then
+                                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Vendor, MobileTransLines."Sky Revenue Account No.", 'Sky World ' + MobileTransLines.Description, AccType::"G/L Account", '', -currCharges.Get(3), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                                         TotalCharges += theCharge;
                                                                         if MobileTransLines."Recover Excise Duty" then begin
                                                                             TotalExciseDuty += currCharges.Get(2);
@@ -6026,21 +6753,34 @@ codeunit 52186502 "Sky Mobile Banking Integration"
     // end;
 
     // LOAN APPLICATIONS
-    local procedure GetLoanApplicationProducts(Payload: JsonObject; APIRequestID: JsonToken): Text
+    local procedure GetLoanApplicationProducts(Payload: JsonObject;
+    APIRequestID:
+        JsonToken):
+            Text
     var
         identifier_type: JsonToken;
-        identifier: JsonToken;
+        identifier:
+                JsonToken;
 
-        SearchMember: Record Members;
-        MemberRec: Record Members;
-        ProductFactory: Record "Product Factory";
+        SearchMember:
+                Record Members;
+        MemberRec:
+                Record Members;
+        ProductFactory:
+                Record "Product Factory";
 
-        ResponseObject: JsonObject;
-        Data: JsonArray;
-        Datum: JsonObject;
-        Response: Text;
-        ResponseText: Text;
-        ResponseDescription: Text;
+        ResponseObject:
+                JsonObject;
+        Data:
+                JsonArray;
+        Datum:
+                JsonObject;
+        Response:
+                Text;
+        ResponseText:
+                Text;
+        ResponseDescription:
+                Text;
     begin
         Payload.Get('identifier_type', identifier_type); // MSISDN, MEMBER_NO, EMAIL, ID_NO, PAYROLL_NO
         Payload.Get('identifier', identifier);
@@ -7785,6 +8525,292 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         ResponseObject.WriteTo(Response);
 
         exit(Response);
+    end;
+
+    local procedure CheckPINResetAbilityRequest(Payload: JsonObject): Text
+    var
+        identifier_type: JsonToken;
+        identifier: JsonToken;
+
+        SearchMember: record Members;
+
+        GenSetup: Record "General Set-Up";
+        TransactionTypes: Record "Transaction Types";
+        TransactionCharges: Record "Transaction Charges";
+        SavingsAccount: Record "Savings Accounts";
+
+        TotalCharges: Decimal;
+        CanResetPin: Boolean;
+        AvailableBalance: Decimal;
+
+        ResponseObject: JsonObject;
+        Datum: JsonObject;
+        Response: Text;
+        ResponseText: Text;
+        ResponseDescription: Text;
+    begin
+        Payload.Get('identifier_type', identifier_type);
+        Payload.Get('identifier', identifier);
+
+        if MemberExists(identifier_type.AsValue.AsText, identifier.AsValue.AsText, SearchMember, ResponseText, ResponseDescription) then begin
+            GenSetup.Get;
+            TransactionTypes.Reset;
+            TransactionTypes.SetRange(Code, GenSetup."Mobile Banking PIN Reset");
+            if TransactionTypes.FindSet then begin
+                repeat begin
+                    TransactionCharges.Reset;
+                    TransactionCharges.SetRange("Transaction Type", TransactionTypes.Code);
+                    if TransactionCharges.FindSet then begin
+                        repeat begin
+
+                            TotalCharges += TransactionCharges."Charge Amount";
+
+                            if TransactionCharges."Recover Excise Duty" then begin
+                                TotalCharges += (TransactionCharges."Charge Amount") * GenSetup."Transfer Excise Duty (%)" * 0.01;
+                            end;
+
+                        end until TransactionCharges.Next = 0;
+                    end;
+                end until TransactionTypes.Next = 0;
+            end;
+
+            SavingsAccount.Reset;
+            SavingsAccount.SetRange("No.", SkyMbankingTrans.GetMemberFosaAcc(SearchMember));
+            if SavingsAccount.FindFirst then begin
+                AvailableBalance := GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccount, true);
+                if AvailableBalance > TotalCharges then begin
+                    CanResetPin := true;
+                end;
+            end;
+
+            Datum.Add('can_reset_pin', CanResetPin);
+            Datum.Add('available_balance', AvailableBalance);
+            Datum.Add('total_charge', TotalCharges);
+
+            ResponseObject.Add('request_status', 'SUCCESS');
+            ResponseObject.Add('request_status_description', 'Request is successful');
+            ResponseObject.Add('response_payload', Datum);
+        end else begin
+            ResponseObject.Add('request_status', ResponseText);
+            ResponseObject.Add('request_status_description', ResponseDescription);
+            ResponseObject.Add('response_payload', Datum);
+        end;
+
+        AddDateTimeToResponse(ResponseObject);
+        ResponseObject.WriteTo(Response);
+
+        exit(Response);
+    end;
+
+    local procedure ProcessPINResetRequest(Payload: JsonObject): Text
+    var
+        identifier_type: JsonToken;
+        identifier: JsonToken;
+        smp_reference: JsonToken;
+
+        SearchMember: record Members;
+
+        GenSetup: Record "General Set-Up";
+        TransactionTypes: Record "Transaction Types";
+        TransactionCharges: Record "Transaction Charges";
+        SavingsAccount: Record "Savings Accounts";
+
+        SkyPINResetBuffer: Record "Sky PIN Reset Buffer";
+
+        FosaAccountNo: Text;
+
+        TotalCharges: Decimal;
+        CanResetPin: Boolean;
+        AvailableBalance: Decimal;
+
+        ResponseObject: JsonObject;
+        Datum: JsonObject;
+        Response: Text;
+        ResponseText: Text;
+        ResponseDescription: Text;
+    begin
+        Payload.Get('identifier_type', identifier_type);
+        Payload.Get('identifier', identifier);
+        Payload.Get('smp_reference', smp_reference);
+
+        if MemberExists(identifier_type.AsValue.AsText, identifier.AsValue.AsText, SearchMember, ResponseText, ResponseDescription) then begin
+            FosaAccountNo := SkyMbankingTrans.GetMemberFosaAcc(SearchMember);
+            if FosaAccountNo <> '' then begin
+                // 1. Log PIN reset to buffer
+                SkyPINResetBuffer.Init;
+
+                SkyPINResetBuffer."Savings Account No." := FosaAccountNo;
+                SkyPINResetBuffer."SMP Reference" := smp_reference.AsValue.AsText;
+                SkyPINResetBuffer."Is Processed?" := false;
+
+                if SkyPINResetBuffer.Insert(true) then begin
+                    ResponseObject.Add('request_status', 'SUCCESS');
+                    ResponseObject.Add('request_status_description', 'PIN reset request is successful');
+                    ResponseObject.Add('response_payload', Datum);
+                end else begin
+                    ResponseObject.Add('request_status', 'ERROR');
+                    ResponseObject.Add('request_status_description', 'Unable to log the PIN reset request at the moment!');
+                    ResponseObject.Add('response_payload', Datum);
+                end;
+            end else begin
+                ResponseObject.Add('request_status', 'ERROR');
+                ResponseObject.Add('request_status_description', 'Member does not have a FOSA savings account!');
+                ResponseObject.Add('response_payload', Datum);
+            end;
+        end else begin
+            ResponseObject.Add('request_status', ResponseText);
+            ResponseObject.Add('request_status_description', ResponseDescription);
+            ResponseObject.Add('response_payload', Datum);
+        end;
+
+        AddDateTimeToResponse(ResponseObject);
+        ResponseObject.WriteTo(Response);
+
+        exit(Response);
+    end;
+
+    local procedure PostPINResets()
+    var
+        SkyPINResetBuffer: Record "Sky PIN Reset Buffer";
+        SavingsAccounts: Record "Savings Accounts";
+        TransactionCharges: Record "Transaction Charges";
+        TransactionTypes: Record "Transaction Types";
+
+        GenSetup: Record "General Set-Up";
+        Temp: Record "Banking User Template";
+        Jtemplate: Code[20];
+        Jbatch: Code[20];
+        GenJnlLine: Record "Gen. Journal Line";
+        PDate: Date;
+        DocNo: Code[20];
+        DActivity2: Code[20];
+        DBranch2: Code[20];
+        LineNo: Integer;
+        AccType: Enum "Gen. Journal Account Type";
+        AccNo: Code[20];
+        TransType: Enum "Transaction Types";
+        BalAccType: Enum "Gen. Journal Account Type";
+        BalAccNo: Code[20];
+        Amt: Decimal;
+        JournalPosting: Codeunit "Journal Posting";
+        SaccoTrans: Codeunit "Sacco Transactions";
+        GLEntry: Record "G/L Entry";
+    begin
+        // PIN reset
+        SkyPINResetBuffer.Reset;
+        SkyPINResetBuffer.SetRange("Is Processed?", false);
+        if SkyPINResetBuffer.FindSet(true) then begin
+            GenSetup.Get;
+            Temp.Get(UserId);
+            Jtemplate := Temp."Cashier Journal Template";
+            JBatch := Temp."Cashier Journal Batch";
+
+            GenJnlLine.Reset;
+            GenJnlLine.SetRange(GenJnlLine."Journal Template Name", JTemplate);
+            GenJnlLine.SetRange(GenJnlLine."Journal Batch Name", JBatch);
+            GenJnlLine.DeleteAll;
+
+            repeat begin
+                SavingsAccounts.Reset;
+                SavingsAccounts.SetRange("No.", SkyPINResetBuffer."Savings Account No.");
+                SavingsAccounts.SetLoadFields(
+                    "No.",
+                    "Member No.",
+                    "Global Dimension 1 Code",
+                    "Global Dimension 2 Code"
+                );
+                SavingsAccounts.SetAutoCalcFields("Balance (LCY)");
+                if SavingsAccounts.FindFirst then begin
+                    DocNo := CopyStr(SkyPINResetBuffer."SMP Reference", 1, 19);
+
+                    GLEntry.Reset;
+                    GLEntry.SetRange("Document No.", DocNo);
+                    GLEntry.SetLoadFields("Entry No.");
+                    if GLEntry.FindFirst then begin
+                        SkyPINResetBuffer."Is Processed?" := true;
+                        SkyPINResetBuffer.Modify;
+                    end else begin
+                        // Post here...
+                        TransactionTypes.Reset;
+                        TransactionTypes.SetRange(Code, GenSetup."Mobile Banking PIN Reset");
+                        if TransactionTypes.FindSet then begin
+                            repeat begin
+                                TransactionCharges.Reset;
+                                TransactionCharges.SetRange("Transaction Type", TransactionTypes.Code);
+                                if TransactionCharges.FindSet then begin
+                                    repeat begin
+
+                                        if SavingsAccounts."Balance (LCY)" >= TransactionCharges."Charge Amount" then begin
+                                            // 
+                                            PDate := Today;
+                                            DActivity2 := SavingsAccounts."Global Dimension 1 Code"; // Branch
+                                            DBranch2 := SavingsAccounts."Global Dimension 2 Code"; // Activity
+
+                                            LineNo := LineNo + 10000;
+                                            AccType := Acctype::"G/L Account";
+                                            AccNo := TransactionCharges."G/L Account";
+                                            TransType := Transtype::" ";
+                                            BalAccType := Balacctype::"G/L Account";
+                                            BalAccNo := '';
+                                            Amt := TransactionCharges."Charge Amount";
+                                            Amt := Amt * -1;
+                                            JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, CopyStr((SavingsAccounts."Member No." + ':' + TransactionCharges.Description), 1, 50), Amt, AccNo, PDate, BalAccType,
+                                          BalAccNo, '', DActivity2, DBranch2, TransType, DocNo, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+                                            LineNo := LineNo + 10000;
+                                            AccType := Acctype::Savings;
+                                            AccNo := SavingsAccounts."No.";
+                                            TransType := Transtype::" ";
+                                            BalAccType := Balacctype::"G/L Account";
+                                            BalAccNo := '';
+                                            Amt := TransactionCharges."Charge Amount";
+
+                                            JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, CopyStr((SavingsAccounts."Member No." + ':' + TransactionCharges.Description), 1, 50), Amt, AccNo, PDate, BalAccType,
+                                          BalAccNo, '', DActivity2, DBranch2, TransType, DocNo, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+                                            if TransactionCharges."Recover Excise Duty" = true then begin
+                                                GenSetup.TestField("Excise Duty G/L");
+                                                GenSetup.TestField("Transfer Excise Duty (%)");
+                                                LineNo := LineNo + 10000;
+                                                AccType := Acctype::"G/L Account";
+                                                Amt := TransactionCharges."Charge Amount";
+                                                AccNo := GenSetup."Excise Duty G/L";
+                                                TransType := Transtype::" ";
+                                                BalAccType := Balacctype::"G/L Account";
+                                                BalAccNo := '';
+                                                Amt := Amt * GenSetup."Transfer Excise Duty (%)" * 0.01;
+                                                JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, CopyStr((SavingsAccounts."Member No." + ':' + TransactionCharges.Description + '-Excise Duty'), 1, 50), Amt * -1, AccNo, PDate, BalAccType,
+                                                BalAccNo, '', DActivity2, DBranch2, TransType, DocNo, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+                                                LineNo := LineNo + 10000;
+                                                GenSetup.TestField("Excise Duty G/L");
+                                                GenSetup.TestField("Transfer Excise Duty (%)");
+                                                Amt := TransactionCharges."Charge Amount";
+                                                AccType := Acctype::Savings;
+                                                AccNo := SavingsAccounts."No.";
+                                                TransType := Transtype::" ";
+                                                BalAccType := Balacctype::Savings;
+                                                BalAccNo := '';
+                                                Amt := Amt * GenSetup."Transfer Excise Duty (%)" * 0.01;
+                                                JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, CopyStr((SavingsAccounts."Member No." + ':' + TransactionCharges.Description + '-Excise Duty'), 1, 50), Amt, AccNo, PDate, BalAccType,
+                                                BalAccNo, '', DActivity2, DBranch2, TransType, DocNo, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+                                            end;
+
+                                            if SaccoTrans.PostJournal(JTemplate, JBatch) then begin
+                                                SkyPINResetBuffer."Is Processed?" := true;
+                                                SkyPINResetBuffer.Modify;
+                                            end;
+                                        end;
+
+                                    end until TransactionCharges.Next = 0;
+                                end;
+                            end until TransactionTypes.Next = 0;
+                        end;
+                    end;
+                end;
+            end until (SkyPINResetBuffer.Next = 0);
+        end;
     end;
 
     // COMMON

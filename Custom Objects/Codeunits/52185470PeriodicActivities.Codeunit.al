@@ -5348,7 +5348,7 @@ Codeunit 52185470 "Periodic Activities"
     end;
 
 
-    procedure PostATMApplicationCharges(ATMInventory: Record "ATM Inventory")
+    procedure PostATMApplicationCharges(ATMLinking: Record "ATM Linking Applications")
     var
         GenJournalLine: Record "Gen. Journal Line";
         LineNo: Integer;
@@ -5374,74 +5374,144 @@ Codeunit 52185470 "Periodic Activities"
         Txt004: label 'Your ATM Card application has been received and is being processed.';
         CashierTransactions: Record "Cashier Transactions";
         ATMApplications: record "ATM Applications";
+        AvaialableBal: Decimal;
+        GlobalFunc: Codeunit "Global Functions";
+        TotalCharge: Decimal;
+
     begin
         ATMApplications.reset;
-        ATMApplications.setrange("No.", ATMInventory."ATM Appl. No");
+        ATMApplications.setrange("No.", ATMLinking."ATM Application No.");
         if ATMApplications.FindFirst() then begin
-            if ATMApplications."ATM Charges Applied" = false then begin
-                if Confirm('Confirm ATM Charges?') then begin
-                    if ATMApplications."Request Type" = ATMApplications."request type"::New then begin
-                        // DELETE ANY LINE ITEM THAT MAY BE PRESENT
-                        BankingUserTemplate.Get(UserId);
-                        JTemp := BankingUserTemplate."ATM Charges Journal Template";
-                        JBatch := BankingUserTemplate."ATM Charges Journal Batch";
+            if ATMApplications."ATM Charges Applied" = true then begin
+                ATMLinking."ATM Charges Applied" := true;
+                ATMLinking.Modify;
+                Commit();
+                Error('This account has already been applied ATM charges');
+            end;
+            if Confirm('Confirm ATM Charges?') then begin
+                if ATMApplications."Request Type" = ATMApplications."request type"::New then begin
 
-                        if JTemp = '' then Error('ATM Charges journal template must be present for you to proceed');
-                        if JBatch = '' then Error('ATM Charges journal batch must be present for you to proceed');
+                    //Check FOSA Account Bal
+                    SavingsAcc.Reset();
+                    SavingsAcc.SetRange("No.", ATMApplications."Account No");
+                    if SavingsAcc.FindFirst() then begin
+                        SavingsAcc.CalcFields("Balance (LCY)");
+                        AvaialableBal := GlobalFunc.GetSavingsAccountAvailableBalance(SavingsAcc, true);
+                    end;
 
-                        LineNo := 0;
+                    // DELETE ANY LINE ITEM THAT MAY BE PRESENT
+                    BankingUserTemplate.Get(UserId);
+                    JTemp := BankingUserTemplate."ATM Charges Journal Template";
+                    JBatch := BankingUserTemplate."ATM Charges Journal Batch";
 
-                        GenJournalLine.Reset;
-                        GenJournalLine.SetRange(GenJournalLine."Journal Template Name", JTemp);
-                        GenJournalLine.SetRange(GenJournalLine."Journal Batch Name", JBatch);
-                        GenJournalLine.DeleteAll;
+                    if JTemp = '' then Error('ATM Charges journal template must be present for you to proceed');
+                    if JBatch = '' then Error('ATM Charges journal batch must be present for you to proceed');
 
-                        GenSetup.Get;
-                        ChargeAmount := 0;
-                        ATMCardTypes.Reset;
-                        ATMCardTypes.SetRange(ATMCardTypes.Code, ATMApplications."Card Type");
-                        if ATMCardTypes.Find('-') then begin
-                            //   MESSAGE('here');
-                            TransType.Reset;
-                            TransType.SetRange(TransType.Code, ATMCardTypes."Application Charge Code");//TransType.Type::"ATM Applications");
-                            if TransType.Find('-') then begin
-                                ChargeAmount := 0;
-                                TransactionCharges.Reset;
-                                TransactionCharges.SetRange(TransactionCharges."Transaction Type", TransType.Code);
-                                if TransactionCharges.Find('-') then begin
-                                    repeat
-                                        //ChargeAmount := 0;
-                                        // if (TransactionCharges."Transaction Charge Category" = TransactionCharges."transaction charge category"::Normal) or
-                                        // (TransactionCharges."Transaction Charge Category" = TransactionCharges."transaction charge category"::"Stamp Duty") then begin
-                                        //     if TransactionCharges."Charge Type" = TransactionCharges."charge type"::"% of Amount" = true then
-                                        //         ChargeAmount := TransactionCharges."Charge Amount"//(TransType.Amount*TransactionCharges."Percentage of Amount")*0.01
-                                        //     else
-                                        //         ChargeAmount := TransactionCharges."Charge Amount";
-                                        //     TChargeAmount += ChargeAmount;
+                    LineNo := 0;
 
-                                        //                    IF TransactionCharges."Transaction Charge Category"<>TransactionCharges."Transaction Charge Category"::"Stamp Duty" THEN
-                                        //                      BEGIN
-                                        //                    //Excise Duty
-                                        //                    TChargeAmount:=TChargeAmount+(ChargeAmount*GenSetup."Excise Duty (%)")*0.01;;
-                                        //                    END;
-                                        // end;
+                    GenJournalLine.Reset;
+                    GenJournalLine.SetRange(GenJournalLine."Journal Template Name", JTemp);
+                    GenJournalLine.SetRange(GenJournalLine."Journal Batch Name", JBatch);
+                    GenJournalLine.DeleteAll;
+
+                    GenSetup.Get;
+                    ChargeAmount := 0;
+                    ATMCardTypes.Reset;
+                    ATMCardTypes.SetRange(ATMCardTypes.Code, ATMApplications."Card Type");
+                    if ATMCardTypes.Find('-') then begin
+                        //   MESSAGE('here');
+                        TransType.Reset;
+                        TransType.SetRange(TransType.Code, ATMCardTypes."Application Charge Code");//TransType.Type::"ATM Applications");
+                        if TransType.Find('-') then begin
+                            ChargeAmount := 0;
+                            TotalCharge := 0;
+                            TransactionCharges.Reset;
+                            TransactionCharges.SetRange(TransactionCharges."Transaction Type", TransType.Code);
+                            if TransactionCharges.Find('-') then begin
+                                repeat
+                                    ChargeAmount := 0;
+                                    TotalCharge := 0;
+                                    // if (TransactionCharges."Transaction Charge Category" = TransactionCharges."transaction charge category"::Normal) or
+                                    // (TransactionCharges."Transaction Charge Category" = TransactionCharges."transaction charge category"::"Stamp Duty") then begin
+                                    //     if TransactionCharges."Charge Type" = TransactionCharges."charge type"::"% of Amount" = true then
+                                    //         ChargeAmount := TransactionCharges."Charge Amount"//(TransType.Amount*TransactionCharges."Percentage of Amount")*0.01
+                                    //     else
+                                    //         ChargeAmount := TransactionCharges."Charge Amount";
+                                    //     TChargeAmount += ChargeAmount;
+
+                                    //                    IF TransactionCharges."Transaction Charge Category"<>TransactionCharges."Transaction Charge Category"::"Stamp Duty" THEN
+                                    //                      BEGIN
+                                    //                    //Excise Duty
+                                    //                    TChargeAmount:=TChargeAmount+(ChargeAmount*GenSetup."Excise Duty (%)")*0.01;;
+                                    //                    END;
+                                    // end;
+                                    LineNo := LineNo + 10000;
+
+                                    GenJournalLine.Reset;
+                                    GenJournalLine."Journal Template Name" := JTemp;
+                                    GenJournalLine."Journal Batch Name" := JBatch;
+                                    GenJournalLine."Document No." := ATMApplications."No.";
+                                    GenJournalLine."External Document No." := ATMApplications."No.";
+                                    GenJournalLine."Line No." := LineNo;
+                                    GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
+                                    GenJournalLine."Account No." := TransactionCharges."G/L Account";
+                                    GenJournalLine."Posting Date" := Today;
+                                    GenJournalLine.Description := ATMCharge;
+                                    GenJournalLine.Amount := TransactionCharges."Charge Amount" * -1;
+                                    GenJournalLine.Validate(GenJournalLine.Amount);
+                                    GenJournalLine."Shortcut Dimension 1 Code" := ATMApplications."Shortcut Dimension 1 Code";
+                                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                                    GenJournalLine."Shortcut Dimension 2 Code" := ATMApplications."Shortcut Dimension 2 Code";
+                                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                                    if GenJournalLine.Amount <> 0 then
+                                        GenJournalLine.Insert;
+
+                                    LineNo := LineNo + 10000;
+
+                                    GenJournalLine.Reset;
+                                    GenJournalLine."Journal Template Name" := JTemp;
+                                    GenJournalLine."Journal Batch Name" := JBatch;
+                                    GenJournalLine."Document No." := ATMApplications."No.";
+                                    GenJournalLine."External Document No." := ATMApplications."No.";
+                                    GenJournalLine."Line No." := LineNo;
+                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
+                                    GenJournalLine."Account No." := ATMApplications."Account No";
+                                    GenJournalLine."Posting Date" := Today;
+                                    GenJournalLine.Description := ATMCharge;
+                                    GenJournalLine.Amount := TransactionCharges."Charge Amount";
+                                    GenJournalLine.Validate(GenJournalLine.Amount);
+                                    GenJournalLine."Shortcut Dimension 1 Code" := ATMApplications."Shortcut Dimension 1 Code";
+                                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                                    GenJournalLine."Shortcut Dimension 2 Code" := ATMApplications."Shortcut Dimension 2 Code";
+                                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                                    if GenJournalLine.Amount <> 0 then
+                                        GenJournalLine.Insert;
+
+
+
+                                    if TransactionCharges."Recover Excise Duty" then begin
                                         LineNo := LineNo + 10000;
 
-                                        GenJournalLine.Reset;
+                                        GenJournalLine.Init;
                                         GenJournalLine."Journal Template Name" := JTemp;
                                         GenJournalLine."Journal Batch Name" := JBatch;
                                         GenJournalLine."Document No." := ATMApplications."No.";
-                                        GenJournalLine."External Document No." := ATMApplications."No.";
                                         GenJournalLine."Line No." := LineNo;
-                                        GenJournalLine."Account Type" := TransactionCharges."Account Type";
-                                        GenJournalLine."Account No." := TransactionCharges."G/L Account";
+                                        GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
+                                        GenJournalLine."Account No." := GenSetup."Excise Duty G/L";
+                                        //GenJournalLine."Account No." := ATMApplications."Account No";
+                                        GenJournalLine.Validate(GenJournalLine."Account No.");
                                         GenJournalLine."Posting Date" := Today;
-                                        GenJournalLine.Description := ATMCharge;
-                                        GenJournalLine.Amount := TransactionCharges."Charge Amount" * -1;
+                                        GenJournalLine.Description := 'Excise Duty';
+                                        GenJournalLine."Currency Code" := '';
+                                        GenJournalLine.Amount := -(TransactionCharges."Charge Amount" * GenSetup."Excise Duty (%)") * 0.01;
                                         GenJournalLine.Validate(GenJournalLine.Amount);
+                                        // GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
+
+                                        GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
                                         GenJournalLine."Shortcut Dimension 1 Code" := ATMApplications."Shortcut Dimension 1 Code";
-                                        GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
                                         GenJournalLine."Shortcut Dimension 2 Code" := ATMApplications."Shortcut Dimension 2 Code";
+                                        GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
                                         GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
                                         if GenJournalLine.Amount <> 0 then
                                             GenJournalLine.Insert;
@@ -5458,7 +5528,7 @@ Codeunit 52185470 "Periodic Activities"
                                         GenJournalLine."Account No." := ATMApplications."Account No";
                                         GenJournalLine."Posting Date" := Today;
                                         GenJournalLine.Description := ATMCharge;
-                                        GenJournalLine.Amount := TransactionCharges."Charge Amount";
+                                        GenJournalLine.Amount := (TransactionCharges."Charge Amount" * GenSetup."Excise Duty (%)") * 0.01;
                                         GenJournalLine.Validate(GenJournalLine.Amount);
                                         GenJournalLine."Shortcut Dimension 1 Code" := ATMApplications."Shortcut Dimension 1 Code";
                                         GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
@@ -5466,130 +5536,215 @@ Codeunit 52185470 "Periodic Activities"
                                         GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
                                         if GenJournalLine.Amount <> 0 then
                                             GenJournalLine.Insert;
-
-
-
-                                        if TransactionCharges."Recover Excise Duty" then begin
-                                            LineNo := LineNo + 10000;
-
-                                            GenJournalLine.Init;
-                                            GenJournalLine."Journal Template Name" := JTemp;
-                                            GenJournalLine."Journal Batch Name" := JBatch;
-                                            GenJournalLine."Document No." := ATMApplications."No.";
-                                            GenJournalLine."Line No." := LineNo;
-                                            GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
-                                            GenJournalLine."Account No." := GenSetup."Excise Duty G/L";
-                                            //GenJournalLine."Account No." := ATMApplications."Account No";
-                                            GenJournalLine.Validate(GenJournalLine."Account No.");
-                                            GenJournalLine."Posting Date" := Today;
-                                            GenJournalLine.Description := 'Excise Duty';
-                                            GenJournalLine."Currency Code" := '';
-                                            GenJournalLine.Amount := -(TransactionCharges."Charge Amount" * GenSetup."Excise Duty (%)") * 0.01;
-                                            GenJournalLine.Validate(GenJournalLine.Amount);
-                                            // GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
-
-                                            GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
-                                            GenJournalLine."Shortcut Dimension 1 Code" := ATMApplications."Shortcut Dimension 1 Code";
-                                            GenJournalLine."Shortcut Dimension 2 Code" := ATMApplications."Shortcut Dimension 2 Code";
-                                            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
-                                            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
-                                            if GenJournalLine.Amount <> 0 then
-                                                GenJournalLine.Insert;
-
-                                            LineNo := LineNo + 10000;
-
-                                            GenJournalLine.Reset;
-                                            GenJournalLine."Journal Template Name" := JTemp;
-                                            GenJournalLine."Journal Batch Name" := JBatch;
-                                            GenJournalLine."Document No." := ATMApplications."No.";
-                                            GenJournalLine."External Document No." := ATMApplications."No.";
-                                            GenJournalLine."Line No." := LineNo;
-                                            GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
-                                            GenJournalLine."Account No." := ATMApplications."Account No";
-                                            GenJournalLine."Posting Date" := Today;
-                                            GenJournalLine.Description := ATMCharge;
-                                            GenJournalLine.Amount := (TransactionCharges."Charge Amount" * GenSetup."Excise Duty (%)") * 0.01;
-                                            GenJournalLine.Validate(GenJournalLine.Amount);
-                                            GenJournalLine."Shortcut Dimension 1 Code" := ATMApplications."Shortcut Dimension 1 Code";
-                                            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
-                                            GenJournalLine."Shortcut Dimension 2 Code" := ATMApplications."Shortcut Dimension 2 Code";
-                                            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
-                                            if GenJournalLine.Amount <> 0 then
-                                                GenJournalLine.Insert;
-                                        end;
+                                    end;
 
 
 
                                     // TChargeAmount := TChargeAmount + ChargeAmount;
+                                    TotalCharge := TotalCharge + (TransactionCharges."Charge Amount" + ((TransactionCharges."Charge Amount" * GenSetup."Excise Duty (%)") * 0.01));
 
-
-                                    // MESSAGE('Charge Amount %1',ChargeAmount)
-                                    until TransactionCharges.Next = 0;
-                                    //MESSAGE('Charge Amountwww %1',ChargeAmount)
-                                    //      END;
-
-                                    //END;
-
-                                    // LineNo := LineNo + 10000;
-
-                                    // GenJournalLine.Reset;
-                                    // GenJournalLine."Journal Template Name" := JTemp;
-                                    // GenJournalLine."Journal Batch Name" := JBatch;
-                                    // GenJournalLine."Document No." := ATMApplications."No.";
-                                    // GenJournalLine."External Document No." := ATMApplications."No.";
-                                    // GenJournalLine."Line No." := LineNo;
-                                    // GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
-                                    // GenJournalLine."Account No." := ATMApplications."Account No";
-                                    // GenJournalLine."Posting Date" := Today;
-                                    // GenJournalLine.Description := ATMCharge;
-                                    // GenJournalLine.Amount := TChargeAmount;
-                                    // GenJournalLine.Validate(GenJournalLine.Amount);
-                                    // GenJournalLine."Shortcut Dimension 1 Code" := ATMApplications."Shortcut Dimension 1 Code";
-                                    // GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
-                                    // GenJournalLine."Shortcut Dimension 2 Code" := ATMApplications."Shortcut Dimension 2 Code";
-                                    // GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
-                                    // //GenJournalLine."Bal. Account Type":=GenJournalLine."Bal. Account Type"::"G/L Account";
-                                    // //GenJournalLine."Bal. Account No.":=TransactionCharges."G/L Account";
-                                    // if GenJournalLine.Amount <> 0 then
-                                    //     GenJournalLine.Insert;
-
-                                    //Excise Duty
-                                    //     if (TransactionCharges."Transaction Charge Category" <> TransactionCharges."transaction charge category"::"Stamp Duty") and
-                                    // (TransactionCharges."Recover Excise Duty" = true) then begin
-
-                                    // GenJournalLine.Init;
-                                    // GenJournalLine."Journal Template Name" := Jtemplate;
-                                    // GenJournalLine."Journal Batch Name" := JBatch;
-                                    // GenJournalLine."Line No." := LineNo;
-                                    // GenJournalLine."Document No." := ATMApplications."No.";
-                                    // GenJournalLine."Posting Date" := ATMApplications."ATM Charged Date";
-                                    // GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
-                                    // GenJournalLine."Account No." := SalLines."Account No.";
-                                    // GenJournalLine.Validate(GenJournalLine."Account No.");
-                                    // GenJournalLine.Description := PostingRemarks;
-                                    // GenJournalLine.Amount := -SalLines.Amount;
-                                    // GenJournalLine.Validate(GenJournalLine.Amount);
-                                    // GenJournalLine."Shortcut Dimension 1 Code" := DActivity2;
-                                    // GenJournalLine."Shortcut Dimension 2 Code" := DBranch2;
-                                    // GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
-                                    // GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
-                                    // if GenJournalLine.Amount <> 0 then
-                                    //     GenJournalLine.Insert;
-
-
-                                end;
-                                //Excise Duty
 
                                 // MESSAGE('Charge Amount %1',ChargeAmount)
+                                until TransactionCharges.Next = 0;
+
+                                if TotalCharge > AvaialableBal then begin
+                                    error('Total Charge is > Available Bal');
+                                end;
+                                //MESSAGE('Charge Amountwww %1',ChargeAmount)
+                                //      END;
+
+                                //END;
+
+                                // LineNo := LineNo + 10000;
+
+                                // GenJournalLine.Reset;
+                                // GenJournalLine."Journal Template Name" := JTemp;
+                                // GenJournalLine."Journal Batch Name" := JBatch;
+                                // GenJournalLine."Document No." := ATMApplications."No.";
+                                // GenJournalLine."External Document No." := ATMApplications."No.";
+                                // GenJournalLine."Line No." := LineNo;
+                                // GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
+                                // GenJournalLine."Account No." := ATMApplications."Account No";
+                                // GenJournalLine."Posting Date" := Today;
+                                // GenJournalLine.Description := ATMCharge;
+                                // GenJournalLine.Amount := TChargeAmount;
+                                // GenJournalLine.Validate(GenJournalLine.Amount);
+                                // GenJournalLine."Shortcut Dimension 1 Code" := ATMApplications."Shortcut Dimension 1 Code";
+                                // GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                                // GenJournalLine."Shortcut Dimension 2 Code" := ATMApplications."Shortcut Dimension 2 Code";
+                                // GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                                // //GenJournalLine."Bal. Account Type":=GenJournalLine."Bal. Account Type"::"G/L Account";
+                                // //GenJournalLine."Bal. Account No.":=TransactionCharges."G/L Account";
+                                // if GenJournalLine.Amount <> 0 then
+                                //     GenJournalLine.Insert;
+
+                                //Excise Duty
+                                //     if (TransactionCharges."Transaction Charge Category" <> TransactionCharges."transaction charge category"::"Stamp Duty") and
+                                // (TransactionCharges."Recover Excise Duty" = true) then begin
+
+                                // GenJournalLine.Init;
+                                // GenJournalLine."Journal Template Name" := Jtemplate;
+                                // GenJournalLine."Journal Batch Name" := JBatch;
+                                // GenJournalLine."Line No." := LineNo;
+                                // GenJournalLine."Document No." := ATMApplications."No.";
+                                // GenJournalLine."Posting Date" := ATMApplications."ATM Charged Date";
+                                // GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
+                                // GenJournalLine."Account No." := SalLines."Account No.";
+                                // GenJournalLine.Validate(GenJournalLine."Account No.");
+                                // GenJournalLine.Description := PostingRemarks;
+                                // GenJournalLine.Amount := -SalLines.Amount;
+                                // GenJournalLine.Validate(GenJournalLine.Amount);
+                                // GenJournalLine."Shortcut Dimension 1 Code" := DActivity2;
+                                // GenJournalLine."Shortcut Dimension 2 Code" := DBranch2;
+                                // GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                                // GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                                // if GenJournalLine.Amount <> 0 then
+                                //     GenJournalLine.Insert;
+
+
+                            end;
+                            //Excise Duty
+
+                            // MESSAGE('Charge Amount %1',ChargeAmount)
+                            //send sms
+                            // if SavingsAcc.Get(ATMApplications."Account No") then begin
+                            //     SendSMS.SendSms(Source::ATM_COLLECTION, SavingsAcc."Mobile Phone No", Txt004, Format(ATMApplications."No."), '', true, 0, false, 'CBS', ATMApplications."No.", 'CBS');
+                            // end;
+                            GenJournalLine.Reset;
+                            GenJournalLine.SetRange("Journal Template Name", JTemp);
+                            GenJournalLine.SetRange("Journal Batch Name", JBatch);
+                            if GenJournalLine.Find('-') then begin
+                                Codeunit.Run(Codeunit::"Gen. Jnl.-Post New", GenJournalLine);
+                                /*SavingsAcc.Reset();
+                                SavingsAcc.SetRange("Payroll/Staff No.",ATMApplications."Service No");
+                                SavingsAcc.SetRange("Product Category", SavingsAcc."product category"::"FOSA Account");
+                                if savingsAcc.Find('-') then begin
+                                    SendSMS.SendSms(Source::ATM_COLLECTION, SavingsAcc."Transactional Mobile No", Txt004+format(TotalCharge), Format(ATMApplications."No."), '', true, 0, false, 'CBS', ATMApplications."No.", 'CBS');
+                                end;*/
+                            end;
+                            //Post New
+                            ATMApplications."ATM Charges Applied" := true;
+                            ATMApplications."ATM Charged Date" := Today;
+                            ATMApplications.Modify;
+                            CashierTransactions.Reset;
+                            CashierTransactions.SetRange(CashierTransactions."Account No", ATMApplications."Account No");
+                            CashierTransactions.SetRange(Remarks, 'ATM Application Charges');
+                            if CashierTransactions.Find('-')
+                              then begin
+                                repeat
+                                    //ERROR('here');
+                                    CashierTransactions."Cheque Status" := CashierTransactions."cheque status"::Honoured;
+                                    CashierTransactions.Modify;
+                                until CashierTransactions.Next = 0;
+                            end;
+
+                            ATMApplications."Card Charged" := true;
+                            ATMApplications.Modify();
+                            Message(MSGPosted);
+
+                        end;
+
+                        // end;
+                    end else begin
+                        Error('ATM Card Types: %1 does not exist', ATMApplications."Card Type");
+                    end;
+                end
+                else begin
+                    BankingUserTemplate.Get(UserId);
+                    JTemp := BankingUserTemplate."ATM Charges Journal Template";
+                    JBatch := BankingUserTemplate."ATM Charges Journal Batch";
+                    GenJournalLine.Reset;
+                    GenJournalLine.SetRange(GenJournalLine."Journal Template Name", JTemp);
+                    GenJournalLine.SetRange(GenJournalLine."Journal Batch Name", JBatch);
+                    GenJournalLine.DeleteAll;
+                    GenSetup.Get;
+                    ChargeAmount := 0;
+                    ATMCardTypes.Reset;
+                    ATMCardTypes.SetRange(ATMCardTypes.Code, ATMApplications."Card Type");
+                    if ATMCardTypes.Find('-') then begin
+                        //   MESSAGE('here');
+                        TransType.Reset;
+                        TransType.SetRange(TransType.Code, ATMCardTypes."Replacement Charge Code");//."Application Charge Code");//TransType.Type::"ATM Applications");
+                        if TransType.Find('-') then begin
+                            ChargeAmount := 0;
+                            TransactionCharges.Reset;
+                            TransactionCharges.SetRange(TransactionCharges."Transaction Type", TransType.Code);
+                            if TransactionCharges.Find('-') then begin
+                                repeat
+                                    ChargeAmount := 0;
+                                    if (TransactionCharges."Transaction Charge Category" = TransactionCharges."transaction charge category"::Normal) or
+                                    (TransactionCharges."Transaction Charge Category" = TransactionCharges."transaction charge category"::"Stamp Duty") then begin
+                                        if TransactionCharges."Charge Type" = TransactionCharges."charge type"::"% of Amount" = true then
+                                            ChargeAmount := TransactionCharges."Charge Amount"//(TransType.Amount*TransactionCharges."Percentage of Amount")*0.01
+                                        else
+                                            ChargeAmount := TransactionCharges."Charge Amount";
+                                        TChargeAmount += ChargeAmount;
+
+                                        //                    IF TransactionCharges."Transaction Charge Category"<>TransactionCharges."Transaction Charge Category"::"Stamp Duty" THEN
+                                        //                      BEGIN
+                                        //                    //Excise Duty
+                                        //                    TChargeAmount:=TChargeAmount+(ChargeAmount*GenSetup."Excise Duty (%)")*0.01;;
+                                        //                    END;
+                                    end;
+                                    LineNo := LineNo + 10000;
+
+                                    GenJournalLine.Reset;
+                                    GenJournalLine."Journal Template Name" := JTemp;
+                                    GenJournalLine."Journal Batch Name" := JBatch;
+                                    GenJournalLine."Document No." := ATMApplications."No.";
+                                    GenJournalLine."External Document No." := ATMApplications."No.";
+                                    GenJournalLine."Line No." := LineNo;
+                                    GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
+                                    GenJournalLine."Account No." := TransactionCharges."G/L Account";
+                                    GenJournalLine."Posting Date" := Today;
+                                    GenJournalLine.Description := ATMCharge;
+                                    GenJournalLine.Amount := TransactionCharges."Charge Amount" * -1;
+                                    GenJournalLine.Validate(GenJournalLine.Amount);
+                                    GenJournalLine."Shortcut Dimension 1 Code" := ATMApplications."Shortcut Dimension 1 Code";
+                                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                                    GenJournalLine."Shortcut Dimension 2 Code" := ATMApplications."Shortcut Dimension 2 Code";
+                                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                                    if GenJournalLine.Amount <> 0 then
+                                        GenJournalLine.Insert;
+                                // MESSAGE('Charge Amount %1',ChargeAmount)
+                                until TransactionCharges.Next = 0;
+                                //MESSAGE('Charge Amountwww %1',ChargeAmount)
+                                //      END;
+
+                                //END;
+
+                                LineNo := LineNo + 10000;
+
+                                GenJournalLine.Reset;
+                                GenJournalLine."Journal Template Name" := JTemp;
+                                GenJournalLine."Journal Batch Name" := JBatch;
+                                GenJournalLine."Document No." := ATMApplications."No.";
+                                GenJournalLine."External Document No." := ATMApplications."No.";
+                                GenJournalLine."Line No." := LineNo;
+                                GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
+                                GenJournalLine."Account No." := ATMApplications."Account No";
+                                GenJournalLine."Posting Date" := Today;
+                                GenJournalLine.Description := ATMCharge;
+                                GenJournalLine.Amount := TChargeAmount;
+                                GenJournalLine.Validate(GenJournalLine.Amount);
+                                GenJournalLine."Shortcut Dimension 1 Code" := ATMApplications."Shortcut Dimension 1 Code";
+                                GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                                GenJournalLine."Shortcut Dimension 2 Code" := ATMApplications."Shortcut Dimension 2 Code";
+                                GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                                //GenJournalLine."Bal. Account Type":=GenJournalLine."Bal. Account Type"::"G/L Account";
+                                //GenJournalLine."Bal. Account No.":=TransactionCharges."G/L Account";
+                                if GenJournalLine.Amount <> 0 then
+                                    GenJournalLine.Insert;
+                                // MESSAGE('Charge Amount %1',ChargeAmount)
                                 //send sms
-                                // if SavingsAcc.Get(ATMApplications."Account No") then begin
-                                //     SendSMS.SendSms(Source::ATM_COLLECTION, SavingsAcc."Mobile Phone No", Txt004, Format(ATMApplications."No."), '', true, 0, false, 'CBS', ATMApplications."No.", 'CBS');
-                                // end;
+                                if SavingsAcc.Get(ATMApplications."Account No") then begin
+                                    SendSMS.SendSms(Source::ATM_COLLECTION, SavingsAcc."Mobile Phone No", Txt004, Format(ATMApplications."No."), '', true, 0, false, 'CBS', ATMApplications."No.", 'CBS');
+                                end;
                                 GenJournalLine.Reset;
                                 GenJournalLine.SetRange("Journal Template Name", JTemp);
                                 GenJournalLine.SetRange("Journal Batch Name", JBatch);
                                 if GenJournalLine.Find('-') then begin
-                                    Codeunit.Run(Codeunit::"Gen. Jnl.-Post New", GenJournalLine);
+                                    Codeunit.Run(Codeunit::"Gen. Jnl.-Post", GenJournalLine);
                                 end;
                                 //Post New
                                 ATMApplications."ATM Charges Applied" := true;
@@ -5606,146 +5761,17 @@ Codeunit 52185470 "Periodic Activities"
                                         CashierTransactions.Modify;
                                     until CashierTransactions.Next = 0;
                                 end;
-
                                 ATMApplications."Card Charged" := true;
                                 ATMApplications.Modify();
                                 Message(MSGPosted);
-
-                            end
-                            else begin
-                                Message('No charges have been setup for ATM Card Type ' + ATMApplications."Card Type");
-                                exit;
-                            end;
-                            // end;
-                        end;
-                    end else begin
-                        BankingUserTemplate.Get(UserId);
-                        JTemp := BankingUserTemplate."ATM Charges Journal Template";
-                        JBatch := BankingUserTemplate."ATM Charges Journal Batch";
-                        GenJournalLine.Reset;
-                        GenJournalLine.SetRange(GenJournalLine."Journal Template Name", JTemp);
-                        GenJournalLine.SetRange(GenJournalLine."Journal Batch Name", JBatch);
-                        GenJournalLine.DeleteAll;
-                        GenSetup.Get;
-                        ChargeAmount := 0;
-                        ATMCardTypes.Reset;
-                        ATMCardTypes.SetRange(ATMCardTypes.Code, ATMApplications."Card Type");
-                        if ATMCardTypes.Find('-') then begin
-                            //   MESSAGE('here');
-                            TransType.Reset;
-                            TransType.SetRange(TransType.Code, ATMCardTypes."Replacement Charge Code");//."Application Charge Code");//TransType.Type::"ATM Applications");
-                            if TransType.Find('-') then begin
-                                ChargeAmount := 0;
-                                TransactionCharges.Reset;
-                                TransactionCharges.SetRange(TransactionCharges."Transaction Type", TransType.Code);
-                                if TransactionCharges.Find('-') then begin
-                                    repeat
-                                        ChargeAmount := 0;
-                                        if (TransactionCharges."Transaction Charge Category" = TransactionCharges."transaction charge category"::Normal) or
-                                        (TransactionCharges."Transaction Charge Category" = TransactionCharges."transaction charge category"::"Stamp Duty") then begin
-                                            if TransactionCharges."Charge Type" = TransactionCharges."charge type"::"% of Amount" = true then
-                                                ChargeAmount := TransactionCharges."Charge Amount"//(TransType.Amount*TransactionCharges."Percentage of Amount")*0.01
-                                            else
-                                                ChargeAmount := TransactionCharges."Charge Amount";
-                                            TChargeAmount += ChargeAmount;
-
-                                            //                    IF TransactionCharges."Transaction Charge Category"<>TransactionCharges."Transaction Charge Category"::"Stamp Duty" THEN
-                                            //                      BEGIN
-                                            //                    //Excise Duty
-                                            //                    TChargeAmount:=TChargeAmount+(ChargeAmount*GenSetup."Excise Duty (%)")*0.01;;
-                                            //                    END;
-                                        end;
-                                        LineNo := LineNo + 10000;
-
-                                        GenJournalLine.Reset;
-                                        GenJournalLine."Journal Template Name" := JTemp;
-                                        GenJournalLine."Journal Batch Name" := JBatch;
-                                        GenJournalLine."Document No." := ATMApplications."No.";
-                                        GenJournalLine."External Document No." := ATMApplications."No.";
-                                        GenJournalLine."Line No." := LineNo;
-                                        GenJournalLine."Account Type" := GenJournalLine."account type"::"G/L Account";
-                                        GenJournalLine."Account No." := TransactionCharges."G/L Account";
-                                        GenJournalLine."Posting Date" := Today;
-                                        GenJournalLine.Description := ATMCharge;
-                                        GenJournalLine.Amount := TransactionCharges."Charge Amount" * -1;
-                                        GenJournalLine.Validate(GenJournalLine.Amount);
-                                        GenJournalLine."Shortcut Dimension 1 Code" := ATMApplications."Shortcut Dimension 1 Code";
-                                        GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
-                                        GenJournalLine."Shortcut Dimension 2 Code" := ATMApplications."Shortcut Dimension 2 Code";
-                                        GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
-                                        if GenJournalLine.Amount <> 0 then
-                                            GenJournalLine.Insert;
-                                    // MESSAGE('Charge Amount %1',ChargeAmount)
-                                    until TransactionCharges.Next = 0;
-                                    //MESSAGE('Charge Amountwww %1',ChargeAmount)
-                                    //      END;
-
-                                    //END;
-
-                                    LineNo := LineNo + 10000;
-
-                                    GenJournalLine.Reset;
-                                    GenJournalLine."Journal Template Name" := JTemp;
-                                    GenJournalLine."Journal Batch Name" := JBatch;
-                                    GenJournalLine."Document No." := ATMApplications."No.";
-                                    GenJournalLine."External Document No." := ATMApplications."No.";
-                                    GenJournalLine."Line No." := LineNo;
-                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
-                                    GenJournalLine."Account No." := ATMApplications."Account No";
-                                    GenJournalLine."Posting Date" := Today;
-                                    GenJournalLine.Description := ATMCharge;
-                                    GenJournalLine.Amount := TChargeAmount;
-                                    GenJournalLine.Validate(GenJournalLine.Amount);
-                                    GenJournalLine."Shortcut Dimension 1 Code" := ATMApplications."Shortcut Dimension 1 Code";
-                                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
-                                    GenJournalLine."Shortcut Dimension 2 Code" := ATMApplications."Shortcut Dimension 2 Code";
-                                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
-                                    //GenJournalLine."Bal. Account Type":=GenJournalLine."Bal. Account Type"::"G/L Account";
-                                    //GenJournalLine."Bal. Account No.":=TransactionCharges."G/L Account";
-                                    if GenJournalLine.Amount <> 0 then
-                                        GenJournalLine.Insert;
-                                    // MESSAGE('Charge Amount %1',ChargeAmount)
-                                    //send sms
-                                    if SavingsAcc.Get(ATMApplications."Account No") then begin
-                                        SendSMS.SendSms(Source::ATM_COLLECTION, SavingsAcc."Mobile Phone No", Txt004, Format(ATMApplications."No."), '', true, 0, false, 'CBS', ATMApplications."No.", 'CBS');
-                                    end;
-                                    GenJournalLine.Reset;
-                                    GenJournalLine.SetRange("Journal Template Name", JTemp);
-                                    GenJournalLine.SetRange("Journal Batch Name", JBatch);
-                                    if GenJournalLine.Find('-') then begin
-                                        Codeunit.Run(Codeunit::"Gen. Jnl.-Post", GenJournalLine);
-                                    end;
-                                    //Post New
-                                    ATMApplications."ATM Charges Applied" := true;
-                                    ATMApplications."ATM Charged Date" := Today;
-                                    ATMApplications.Modify;
-                                    CashierTransactions.Reset;
-                                    CashierTransactions.SetRange(CashierTransactions."Account No", ATMApplications."Account No");
-                                    CashierTransactions.SetRange(Remarks, 'ATM Application Charges');
-                                    if CashierTransactions.Find('-')
-                                      then begin
-                                        repeat
-                                            //ERROR('here');
-                                            CashierTransactions."Cheque Status" := CashierTransactions."cheque status"::Honoured;
-                                            CashierTransactions.Modify;
-                                        until CashierTransactions.Next = 0;
-                                    end;
-                                    ATMApplications."Card Charged" := true;
-                                    ATMApplications.Modify();
-                                    Message(MSGPosted);
-                                end;
                             end;
                         end;
                     end;
-                    ATMInventory.Status := ATMInventory.Status::Pending;
-                    ATMInventory.modify();
-                end
-                else
-                    Message('ATM charging was successfully aborted!')
+                end;
             end;
         end
         else
-            Message('An Application for this card must be present to charge this ATM');
+            Error('An Applicaion for this card must be present for this ATM');
     end;
 
     procedure RecoverLoan(LoanRecoveryHeader: Record "Loan Recovery Header")

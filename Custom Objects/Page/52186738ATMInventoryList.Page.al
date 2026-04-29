@@ -99,7 +99,7 @@ page 52186738 "Atm Inventory List"
                     AvAl: Decimal;
                     PeriodicActivities: Codeunit "Periodic Activities";
                 begin
-                    PeriodicActivities.PostATMApplicationCharges(Rec);
+                    // PeriodicActivities.PostATMApplicationCharges(Rec);
                 end;
             }
             action("Already Charged ATM")
