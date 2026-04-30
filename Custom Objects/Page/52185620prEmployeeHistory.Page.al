@@ -1,4 +1,4 @@
-page 52185620 "prEmployee History"
+page 52185620 "Employee P9 Info"
 {
     PageType = List;
     SourceTable = "PR Employee P9 Info";

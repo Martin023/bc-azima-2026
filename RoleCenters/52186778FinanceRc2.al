@@ -3608,17 +3608,23 @@ page 52186778 "Finance Role Center"
                             RunObject = Page "prEmployer Deductions";
                             ApplicationArea = Basic, Suite;
                         }
+                        action("Employee P9 Info")
+                        {
+                            Caption = 'Employee p9 Info';
+                            RunObject = page "Employee P9 Info";
+                            ApplicationArea = Basic, Suite;
+                        }
 
                     }
                     group("PR Reports and Analysis")
                     {
                         Caption = 'Reports and Analysis';
-                        action("PR NHIF")
-                        {
-                            Caption = 'PR NHIF report';
-                            RunObject = report "pr NHIF";
-                            ApplicationArea = Basic, Suite;
-                        }
+                        // action("PR NHIF")
+                        // {
+                        //     Caption = 'PR NHIF report';
+                        //     RunObject = report "pr NHIF";
+                        //     ApplicationArea = Basic, Suite;
+                        // }
                         // action("PR NSSF")
                         // {
                         //     Caption = 'PR NSSF report';
@@ -3631,59 +3637,59 @@ page 52186778 "Finance Role Center"
                             RunObject = report P9;
                             ApplicationArea = Basic, Suite;
                         }
-                        action(P10)
-                        {
-                            Caption = 'P10';
-                            RunObject = report P10;
-                            ApplicationArea = Basic, Suite;
-                        }
-                        action(P10A)
-                        {
-                            Caption = 'P10A';
-                            RunObject = report P10A;
-                            ApplicationArea = Basic, Suite;
-                        }
-                        action("PR Payroll Summary")
-                        {
-                            Caption = 'PR Payroll Summary';
-                            //RunObject = report "PR Payroll Summary";
-                            RunObject = report "Payroll Summary";
+                        // action(P10)
+                        // {
+                        //     Caption = 'P10';
+                        //     RunObject = report P10;
+                        //     ApplicationArea = Basic, Suite;
+                        // }
+                        // action(P10A)
+                        // {
+                        //     Caption = 'P10A';
+                        //     RunObject = report P10A;
+                        //     ApplicationArea = Basic, Suite;
+                        // }
+                        // action("PR Payroll Summary")
+                        // {
+                        //     Caption = 'PR Payroll Summary';
+                        //     //RunObject = report "PR Payroll Summary";
+                        //     RunObject = report "Payroll Summary";
 
-                            ApplicationArea = Basic, Suite;
-                        }
-                        action("Payroll Summary")
-                        {
-                            Caption = 'PR Payroll Summary';
-                            RunObject = report "PR Payroll Summary";
-                            //RunObject = report "Payroll Summary";
+                        //     ApplicationArea = Basic, Suite;
+                        // }
+                        // action("Payroll Summary")
+                        // {
+                        //     Caption = 'PR Payroll Summary';
+                        //     RunObject = report "PR Payroll Summary";
+                        //     //RunObject = report "Payroll Summary";
 
-                            ApplicationArea = Basic, Suite;
-                        }
-                        action("PR Other PR Customers (Listing)")
-                        {
-                            Caption = 'PR Other PR Customers (Listing)';
-                            RunObject = report "PR Other PR Customers (Listin)";
-                            ApplicationArea = Basic, Suite;
-                        }
-                        action("PR BankSummary")
-                        {
-                            Caption = 'PR Bank summary';
-                            RunObject = report "PR Bank Summary";
-                            ApplicationArea = Basic, Suite;
-                        }
-                        action("PR Email Individual payslip")
-                        {
-                            Caption = 'PR E-Mail Individual Payslip';
-                            ApplicationArea = Basic, Suite;
-                            RunObject = report "PR E-Mail Individual Payslip";
-                            Visible = false;
-                        }
-                        action("PR NSSF NEW")
-                        {
-                            Caption = 'PRE NSSF';
-                            RunObject = report "PR NSSF NEW";
-                            ApplicationArea = Basic, Suite;
-                        }
+                        //     ApplicationArea = Basic, Suite;
+                        // }
+                        // action("PR Other PR Customers (Listing)")
+                        // {
+                        //     Caption = 'PR Other PR Customers (Listing)';
+                        //     RunObject = report "PR Other PR Customers (Listin)";
+                        //     ApplicationArea = Basic, Suite;
+                        // }
+                        // action("PR BankSummary")
+                        // {
+                        //     Caption = 'PR Bank summary';
+                        //     RunObject = report "PR Bank Summary";
+                        //     ApplicationArea = Basic, Suite;
+                        // }
+                        // action("PR Email Individual payslip")
+                        // {
+                        //     Caption = 'PR E-Mail Individual Payslip';
+                        //     ApplicationArea = Basic, Suite;
+                        //     RunObject = report "PR E-Mail Individual Payslip";
+                        //     Visible = false;
+                        // }
+                        // action("PR NSSF NEW")
+                        // {
+                        //     Caption = 'PRE NSSF';
+                        //     RunObject = report "PR NSSF NEW";
+                        //     ApplicationArea = Basic, Suite;
+                        // }
 
                     }
                 }
@@ -3791,16 +3797,16 @@ page 52186778 "Finance Role Center"
                         RunObject = page "Leave Allowances";
                         ApplicationArea = Basic, Suite;
                     }
-                    group("PR Tasks")
-                    {
-                        Caption = 'Tasks';
-                        action("Payroll Salary Process")
-                        {
-                            Caption = 'Payroll Salary Process';
-                            RunObject = page "Payroll Salary Process";
-                            ApplicationArea = Basic, Suite;
-                        }
-                    }
+                    // group("PR Tasks")
+                    // {
+                    //     Caption = 'Tasks';
+                    //     action("Payroll Salary Process")
+                    //     {
+                    //         Caption = 'Payroll Salary Process';
+                    //         RunObject = page "Payroll Salary Process";
+                    //         ApplicationArea = Basic, Suite;
+                    //     }
+                    // }
                     group("Reports & Analysis")
                     {
                         Caption = 'Reports and Analysis';
@@ -3857,13 +3863,13 @@ page 52186778 "Finance Role Center"
                             ApplicationArea = Basic, Suite;
                         }
 
-                        action("PRPayroll Monthly Variance")
-                        {
-                            Caption = 'PR Monthly Variance';
-                            RunObject = report "prMonthly Variance";
-                            ApplicationArea = Basic, Suite;
-                            visible = false;
-                        }
+                        // action("PRPayroll Monthly Variance")
+                        // {
+                        //     Caption = 'PR Monthly Variance';
+                        //     RunObject = report "prMonthly Variance";
+                        //     ApplicationArea = Basic, Suite;
+                        //     visible = false;
+                        // }
                         action("Pr Variance Report")
                         {
                             Caption = 'PR Monthly Variance';
@@ -3907,24 +3913,24 @@ page 52186778 "Finance Role Center"
                             ApplicationArea = Basic, Suite;
                             RunObject = report prGrossNetPay;
                         }
-                        action("prGrossNetPay FxedTC")
-                        {
-                            Caption = 'prGrossNetPay FxedTC';
-                            RunObject = report "prGrossNetPay FxedTC";
-                            ApplicationArea = Basic, Suite;
-                        }
-                        action("prPayrollSummary-List")
-                        {
-                            Caption = 'prPayrollSummary-List';
-                            RunObject = report "prPayrollSummary-List";
-                            ApplicationArea = Basic, Suite;
-                        }
-                        action("Staff Member Balances")
-                        {
-                            Caption = 'Staff Member Balances';
-                            RunObject = report "Staff Member Balances";
-                            ApplicationArea = Basic, Suite;
-                        }
+                        // action("prGrossNetPay FxedTC")
+                        // {
+                        //     Caption = 'prGrossNetPay FxedTC';
+                        //     RunObject = report "prGrossNetPay FxedTC";
+                        //     ApplicationArea = Basic, Suite;
+                        // }
+                        // action("prPayrollSummary-List")
+                        // {
+                        //     Caption = 'prPayrollSummary-List';
+                        //     RunObject = report "prPayrollSummary-List";
+                        //     ApplicationArea = Basic, Suite;
+                        // }
+                        // action("Staff Member Balances")
+                        // {
+                        //     Caption = 'Staff Member Balances';
+                        //     RunObject = report "Staff Member Balances";
+                        //     ApplicationArea = Basic, Suite;
+                        // }
 
                         action("Pension Summary")
                         {
@@ -3932,13 +3938,13 @@ page 52186778 "Finance Role Center"
                             RunObject = report "Pension Summary";
                             ApplicationArea = Basic, Suite;
                         }
-                        action("prBank Payments")
-                        {
-                            Caption = 'prBank Payments';
-                            RunObject = report "prBank Payments";
-                            ApplicationArea = Basic, Suite;
-                            visible = false;
-                        }
+                        // action("prBank Payments")
+                        // {
+                        //     Caption = 'prBank Payments';
+                        //     RunObject = report "prBank Payments";
+                        //     ApplicationArea = Basic, Suite;
+                        //     visible = false;
+                        // }
                         action("PrAllowances Summary")
                         {
                             Caption = 'PrAllowances Summary';
@@ -3958,67 +3964,67 @@ page 52186778 "Finance Role Center"
                             RunObject = report "Helb Report";
                             ApplicationArea = Basic, Suite;
                         }
-                        action("PR iTax Report")
-                        {
-                            Caption = 'PR iTax Report';
-                            RunObject = report "PR iTax Report";
-                            ApplicationArea = Basic, Suite;
-                        }
+                        // action("PR iTax Report")
+                        // {
+                        //     Caption = 'PR iTax Report';
+                        //     RunObject = report "PR iTax Report";
+                        //     ApplicationArea = Basic, Suite;
+                        // }
                         action("PR Company Totals")
                         {
                             Caption = 'PR Company Summary';
                             RunObject = report "PR Company Totals";
                             ApplicationArea = Basic, Suite;
                         }
-                        action("Fringe Benefit")
-                        {
+                        // action("Fringe Benefit")
+                        // {
 
-                            RunObject = report "Fringe Benefit";
-                            ApplicationArea = Basic, Suite;
-                        }
+                        //     RunObject = report "Fringe Benefit";
+                        //     ApplicationArea = Basic, Suite;
+                        // }
 
 
-                        action("prP9A-test  new")
-                        {
-                            Caption = 'prP9A-test  new';
-                            RunObject = report "prP9A-test  new";
-                            ApplicationArea = Basic, Suite;
-                        }
-                        action("PR Company FixedTC Totals")
-                        {
-                            Caption = 'PR Company FixedTC Totals';
-                            //RunObject = report "PR Company FixedTC Totals";
-                            ApplicationArea = Basic, Suite;
-                            visible = False;
-                        }
+                        // action("prP9A-test  new")
+                        // {
+                        //     Caption = 'prP9A-test  new';
+                        //     RunObject = report "prP9A-test  new";
+                        //     ApplicationArea = Basic, Suite;
+                        // }
+                        // action("PR Company FixedTC Totals")
+                        // {
+                        //     Caption = 'PR Company FixedTC Totals';
+                        //     //RunObject = report "PR Company FixedTC Totals";
+                        //     ApplicationArea = Basic, Suite;
+                        //     visible = False;
+                        // }
                         action("Detailed Payroll Transactions")
                         {
                             Caption = 'Detailed Payroll Transactions';
                             RunObject = report "Detailed Payroll Transactions";
                             ApplicationArea = Basic, Suite;
                         }
-                        action("Staff Allowance  P9")
-                        {
-                            Caption = 'Staff Allowance  P9';
-                            // RunObject = report "Staff Allowance  P9";
-                            ApplicationArea = Basic, Suite;
-                        }
-                        action("Overtime Hours Worked1")
-                        {
-                            Caption = 'Overtime Hours Worked1';
-                            RunObject = report "Overtime Hours Worked1";
-                            ApplicationArea = Basic, Suite;
-                        }
-                        group("PR Admin")
-                        {
-                            Caption = 'Administration';
-                            action("Update Mismatched HR Loans")
-                            {
-                                Caption = 'Update Mismatched HR Loans';
-                                RunObject = report "Update Mismatched HR Loans";
-                                ApplicationArea = Basic, Suite;
-                            }
-                        }
+                        // action("Staff Allowance  P9")
+                        // {
+                        //     Caption = 'Staff Allowance  P9';
+                        //     // RunObject = report "Staff Allowance  P9";
+                        //     ApplicationArea = Basic, Suite;
+                        // }
+                        // action("Overtime Hours Worked1")
+                        // {
+                        //     Caption = 'Overtime Hours Worked1';
+                        //     RunObject = report "Overtime Hours Worked1";
+                        //     ApplicationArea = Basic, Suite;
+                        // }
+                        // group("PR Admin")
+                        // {
+                        //     Caption = 'Administration';
+                        //     action("Update Mismatched HR Loans")
+                        //     {
+                        //         Caption = 'Update Mismatched HR Loans';
+                        //         RunObject = report "Update Mismatched HR Loans";
+                        //         ApplicationArea = Basic, Suite;
+                        //     }
+                        // }
                     }
                 }
                 group(TaxReturns)
@@ -4027,18 +4033,18 @@ page 52186778 "Finance Role Center"
                     group("Repo and analysis")
                     {
                         Caption = 'Reports And analysis';
-                        action("P 10A")
-                        {
-                            Caption = 'P 10A';
-                            RunObject = report P10A;
-                            ApplicationArea = Basic, Suite;
-                        }
-                        action("P1 0")
-                        {
-                            Caption = 'P10';
-                            RunObject = report P10;
-                            ApplicationArea = Basic, Suite;
-                        }
+                        // action("P 10A")
+                        // {
+                        //     Caption = 'P 10A';
+                        //     RunObject = report P10A;
+                        //     ApplicationArea = Basic, Suite;
+                        // }
+                        // action("P1 0")
+                        // {
+                        //     Caption = 'P10';
+                        //     RunObject = report P10;
+                        //     ApplicationArea = Basic, Suite;
+                        // }
                         action("P 9")
                         {
                             Caption = 'P9';
@@ -4053,18 +4059,18 @@ page 52186778 "Finance Role Center"
             {
                 group(Members)
                 {
-                    action("EX member Creditors")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'EX member Creditors';
-                        RunObject = report "EX member Creditors";
-                    }
-                    action("Deposit Arrears Report")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Deposit Arrears Report';
-                        RunObject = report "Deposits Arreas Report";
-                    }
+                    // action("EX member Creditors")
+                    // {
+                    //     ApplicationArea = all;
+                    //     Caption = 'EX member Creditors';
+                    //     RunObject = report "EX member Creditors";
+                    // }
+                    // action("Deposit Arrears Report")
+                    // {
+                    //     ApplicationArea = all;
+                    //     Caption = 'Deposit Arrears Report';
+                    //     RunObject = report "Deposits Arreas Report";
+                    // }
                     action("Checkoff Receipt Report ")
                     {
                         ApplicationArea = all;
@@ -4085,13 +4091,13 @@ page 52186778 "Finance Role Center"
                     }
 
 
-                    action("Member Listing Report")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Member Listing - List';
-                        RunObject = page "Member Listing Report";
+                    // action("Member Listing Report")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Member Listing - List';
+                    //     RunObject = page "Member Listing Report";
 
-                    }
+                    // }
 
                     action("Savings Accounts List")
                     {
@@ -4099,57 +4105,57 @@ page 52186778 "Finance Role Center"
                         Caption = 'Savings Accounts List';
                         RunObject = Report "Savings Accounts Register";
                     }
-                    action("Over Recoveries Report")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Over Recoveries Report';
-                        RunObject = Report "Over Recoveries Report";
-                    }
-                    action("Amounts Received - Deposits")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Amounts Received - Deposits';
-                        RunObject = Report "Amounts Received - Deposit A/c";
-                    }
-                    action("Amount Received Summary - Deposits")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Amount Received Summary - Deposits';
-                        RunObject = Report "Amounts Received Summary - Dep";
-                    }
-                    action("Withdrawal Notices")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Withdrawal Notices';
-                        RunObject = report "Withdrawal Notices";
-                        Visible = false;
-                    }
-                    action("pending Member Withdawal Notice")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Pending Member Withdrawal Notice';
-                        RunObject = report "Pending Withdrawal Notices";
-                        Visible = false;
-                    }
-                    group("Deposit Listing")
-                    {
-                        action("Proces Deposit Listing")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            RunObject = report "Deposit Listing Report";
-                        }
-                        action("View Deposit Listing")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            RunObject = page "Deposit Listing List";
-                        }
-                        action("Deposit Listing Errors")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            RunObject = page "Bulk Processing Errors List";
-                            RunPageView = where(Process = filter("Deposit Listing"));
-                        }
-                    }
+                    // action("Over Recoveries Report")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Over Recoveries Report';
+                    //     RunObject = Report "Over Recoveries Report";
+                    // }
+                    // action("Amounts Received - Deposits")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Amounts Received - Deposits';
+                    //     RunObject = Report "Amounts Received - Deposit A/c";
+                    // }
+                    // action("Amount Received Summary - Deposits")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Amount Received Summary - Deposits';
+                    //     RunObject = Report "Amounts Received Summary - Dep";
+                    // }
+                    // action("Withdrawal Notices")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Withdrawal Notices';
+                    //     RunObject = report "Withdrawal Notices";
+                    //     Visible = false;
+                    // }
+                    // action("pending Member Withdawal Notice")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Pending Member Withdrawal Notice';
+                    //     RunObject = report "Pending Withdrawal Notices";
+                    //     Visible = false;
+                    // }
+                    // group("Deposit Listing")
+                    // {
+                    //     action("Proces Deposit Listing")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         RunObject = report "Deposit Listing Report";
+                    //     }
+                    //     action("View Deposit Listing")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         RunObject = page "Deposit Listing List";
+                    //     }
+                    //     action("Deposit Listing Errors")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         RunObject = page "Bulk Processing Errors List";
+                    //         RunPageView = where(Process = filter("Deposit Listing"));
+                    //     }
+                    // }
                     action("Dormant Deposit Listing Report ")
                     {
                         ApplicationArea = all;
@@ -4186,37 +4192,37 @@ page 52186778 "Finance Role Center"
                         Caption = 'Over/Under Recovery Loans Report';
                         RunObject = report "Over/Under Recovery Loans Rep";
                     }
-                    action("BOSA Arreas Report")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Employer Shares and Loans Report';
-                        RunObject = report "Employer Shares and Loans";
-                    }
-                    action("Combined BOSA Report")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Combined BOSA Report';
-                        RunObject = report "BOSA Combined Report";
-                    }
-                    // action("Global Variance Report")
+                    // action("BOSA Arreas Report")
+                    // {
+                    //     ApplicationArea = all;
+                    //     Caption = 'Employer Shares and Loans Report';
+                    //     RunObject = report "Employer Shares and Loans";
+                    // }
+                    // action("Combined BOSA Report")
+                    // {
+                    //     ApplicationArea = all;
+                    //     Caption = 'Combined BOSA Report';
+                    //     RunObject = report "BOSA Combined Report";
+                    // }
+                    // // action("Global Variance Report")
                     // {
                     //     ApplicationArea = all;
                     //     Caption = 'Monthly Global Deposit Variance Report';
                     //     RunObject = report "Global Variance Report";
                     // }
-                    action("Loan Arreas Report")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Loan Arreas Report';
-                        //RunObject = report "Loan Arrears Report";
-                        RunObject = report "Loan Arrears Report - Finance";
-                    }
-                    action("Duplicate Deductions Report")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Duplicate Deduction Report';
-                        RunObject = report "Duplicate Deduction Report";
-                    }
+                    // action("Loan Arreas Report")
+                    // {
+                    //     ApplicationArea = all;
+                    //     Caption = 'Loan Arreas Report';
+                    //     //RunObject = report "Loan Arrears Report";
+                    //     RunObject = report "Loan Arrears Report - Finance";
+                    // }
+                    // action("Duplicate Deductions Report")
+                    // {
+                    //     ApplicationArea = all;
+                    //     Caption = 'Duplicate Deduction Report';
+                    //     RunObject = report "Duplicate Deduction Report";
+                    // }
                     // action(Shares_BBF_Risk_Analysis)
                     // {
                     //     ApplicationArea = Basic, Suite;
@@ -4268,89 +4274,85 @@ page 52186778 "Finance Role Center"
                             RunObject = report "Dividend Slip B64";
                         }
                     }
-                    group("BBF/RISK Report")
-                    {
-                        action("BBF/Risk/entrance fees/Depo")
-                        {
-                            ApplicationArea = all;
-                            Caption = 'BBF/RISK/ENTRANCE/DEPOSIT Summary';
-                            RunObject = report "BBF/Risk/entrance fees/Depo";
-                        }
-                        action("BBF/RISK Report ")
-                        {
-                            ApplicationArea = all;
-                            Caption = 'BBF/RISK UnPaid Report';
-                            RunObject = report "Sinkfund not paid";
-                        }
-                        action("Deceased Member Report ")
-                        {
-                            ApplicationArea = all;
-                            Caption = 'Deceased Member Report';
-                            RunObject = report "Sink Fund Notice Report";
-                        }
-                        // action("BBFSummary Report ")
-                        // {
-                        //     ApplicationArea = all;
-                        //     Caption = 'BBF/RISK/ENTRANCE/DEPOSIT Falloff Summary';
-                        //     RunObject = report "BBF_Risk_entr fees_Dep Falloff";
-                        // }
-                        action("BBF/RISK/ENTRANCE/DEPOSIT Falloff")
-                        {
-                            ApplicationArea = all;
-                            Caption = 'BBF/RISK/ENTRANCE/DEPOSIT Falloff';
-                            RunObject = report "BBF_Risk_entr fees_Dep Falloff";
-                        }
-                        action("Unrecov. Reg Fee/BBF/Risk/Shar")
-                        {
-                            ApplicationArea = all;
-                            Caption = 'Unrecoveres Reg Fee/BBF/Risk/Share';
-                            RunObject = report "Unrecov. Reg Fee/BBF/Risk/Shar";
-                        }
-                        action("DepositRiskBBF Falloff")
-                        {
-                            ApplicationArea = all;
-                            Caption = 'Deposit Risk BBF Falloff';
-                            RunObject = report "BOSA Accounts Fall-Off Report";
-                        }
-                        action("Over/Under Recoveries Loans Report")
-                        {
-                            ApplicationArea = all;
-                            Caption = 'Over/Under Recoveries Loans Report';
-                            RunObject = report "Over/Under Recovery Loans Rep";
-                        }
-                    }
+                    // group("BBF/RISK Report")
+                    // {
+                    //     action("BBF/Risk/entrance fees/Depo")
+                    //     {
+                    //         ApplicationArea = all;
+                    //         Caption = 'BBF/RISK/ENTRANCE/DEPOSIT Summary';
+                    //         RunObject = report "BBF/Risk/entrance fees/Depo";
+                    //     }
+                    //     action("BBF/RISK Report ")
+                    //     {
+                    //         ApplicationArea = all;
+                    //         Caption = 'BBF/RISK UnPaid Report';
+                    //         RunObject = report "Sinkfund not paid";
+                    //     }
+                    //     action("Deceased Member Report ")
+                    //     {
+                    //         ApplicationArea = all;
+                    //         Caption = 'Deceased Member Report';
+                    //         RunObject = report "Sink Fund Notice Report";
+                    //     }
+                    //     // action("BBFSummary Report ")
+                    //     // {
+                    //     //     ApplicationArea = all;
+                    //     //     Caption = 'BBF/RISK/ENTRANCE/DEPOSIT Falloff Summary';
+                    //     //     RunObject = report "BBF_Risk_entr fees_Dep Falloff";
+                    //     // }
+                    //     action("BBF/RISK/ENTRANCE/DEPOSIT Falloff")
+                    //     {
+                    //         ApplicationArea = all;
+                    //         Caption = 'BBF/RISK/ENTRANCE/DEPOSIT Falloff';
+                    //         RunObject = report "BBF_Risk_entr fees_Dep Falloff";
+                    //     }
+                    //     action("Unrecov. Reg Fee/BBF/Risk/Shar")
+                    //     {
+                    //         ApplicationArea = all;
+                    //         Caption = 'Unrecoveres Reg Fee/BBF/Risk/Share';
+                    //         RunObject = report "Unrecov. Reg Fee/BBF/Risk/Shar";
+                    //     }
+                    //     action("DepositRiskBBF Falloff")
+                    //     {
+                    //         ApplicationArea = all;
+                    //         Caption = 'Deposit Risk BBF Falloff';
+                    //         RunObject = report "BOSA Accounts Fall-Off Report";
+                    //     }
+                    //     action("Over/Under Recoveries Loans Report")
+                    //     {
+                    //         ApplicationArea = all;
+                    //         Caption = 'Over/Under Recoveries Loans Report';
+                    //         RunObject = report "Over/Under Recovery Loans Rep";
+                    //     }
+                    // }
                     action("Bulk Account Refunds Report")
                     {
                         ApplicationArea = All;
                         RunObject = report "Bulk Account Refunds Report";
                     }
-                    action("Accounts Fall Off")
-                    {
-                        ApplicationArea = All;
-                        RunObject = report "Accounts FallOff Report";
-                        Visible = false;
-                    }
-                    action("Deposits Dormancy")
-                    {
-                        ApplicationArea = All;
-                        RunObject = report "Savings Accounts Register";
-                    }
+                    // action("Accounts Fall Off")
+                    // {
+                    //     ApplicationArea = All;
+                    //     RunObject = report "Accounts FallOff Report";
+                    //     Visible = false;
+                    // }
+                    // 
                     action("Staff Daily Transactions")
                     {
                         ApplicationArea = Basic, Suite;
                         RunObject = report "Staff Daily Transactions";
                     }
-                    action("Prorata Report")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = report "Prorata Report";
-                    }
-                    action("Deposit Fall Off Report")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'BOSA Savings Fall Off';
-                        RunObject = report "Deposit Fall Off";
-                    }
+                    // action("Prorata Report")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     RunObject = report "Prorata Report";
+                    // }
+                    // action("Deposit Fall Off Report")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'BOSA Savings Fall Off';
+                    //     RunObject = report "Deposit Fall Off";
+                    // }
 
 
                 }
@@ -4371,12 +4373,12 @@ page 52186778 "Finance Role Center"
                         Caption = 'Amounts Received - Loans';
                         RunObject = report "Amounts Received - Loans";
                     }
-                    action("Amounts Receiv Summary - Loans")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Amounts Receiv Summary - Loans';
-                        RunObject = report "Amounts Receiv Summary - Loans";
-                    }
+                    // action("Amounts Receiv Summary - Loans")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Amounts Receiv Summary - Loans';
+                    //     RunObject = report "Amounts Receiv Summary - Loans";
+                    // }
                     action("Posted Loans Checkoff")
                     {
                         ApplicationArea = Basic, Suite;
@@ -4389,34 +4391,29 @@ page 52186778 "Finance Role Center"
                         Caption = 'Loan Repayment & Total Balance';
                         RunObject = report "Expected Loan Repayment";
                     }
-                    action("Loans Interest Register")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Posted Loans Register';
-                        RunObject = report "Loan Interest  Register";
-                        Visible = false;
-                    }
-                    group("Loan Listing")
-                    {
-                        action("Loan Listing process")
-                        {
-                            Caption = 'Process Loan Listing';
-                            ApplicationArea = Basic, Suite;
-                            RunObject = report "Loans Listing Report";
-                        }
-                        action("Loan Listing Report List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            RunObject = page "Loan Listing Report List";
-                        }
+                    // action("Loans Interest Register")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Posted Loans Register';
+                    //     RunObject = report "Loan Interest  Register";
+                    //     Visible = false;
+                    // }
+                    // group("Loan Listing")
+                    // {
+                       
+                    //     action("Loan Listing Report List")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         RunObject = page "Loan Listing Report List";
+                    //     }
 
-                        action("Loan Listing Errors")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            RunObject = page "Bulk Processing Errors List";
-                            RunPageView = where(Process = filter("Loan Listing"));
-                        }
-                    }
+                    //     action("Loan Listing Errors")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         RunObject = page "Bulk Processing Errors List";
+                    //         RunPageView = where(Process = filter("Loan Listing"));
+                    //     }
+                    // }
                     action("Loan Register ")
                     {
                         ApplicationArea = Basic, Suite;
@@ -4483,26 +4480,7 @@ page 52186778 "Finance Role Center"
                         RunObject = report "Loan Ageing Report";
                     }
 
-                    group("Loans Fall Off Report")
-                    {
-
-                        action("Fall Off List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            RunObject = page "Loan Fall Off List";
-                        }
-                        action("FallOff Listing Errors")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            RunObject = page "Bulk Processing Errors List";
-                            RunPageView = where(Process = filter("Loan Fall Off"));
-                        }
-                        // action("Customer Numbers")
-                        // {
-                        //     ApplicationArea = Basic, Suite;
-                        //     RunObject = report "Customer Numbers";
-                        // }
-                    }
+                    
                     action("Loan Variance Report")
                     {
                         ApplicationArea = all;
@@ -4521,14 +4499,6 @@ page 52186778 "Finance Role Center"
                         Caption = 'Recovery Fresh Loans Summary';
                         RunObject = report "Recovery Fresh Loans Summary";
                     }
-
-                    action("Ideal Repayment Schedule")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Loan Repayment Report';
-                        RunObject = report "Ideal Repayment Schedule";
-                    }
-
                     action("Loan Recovery Per Month")
                     {
                         ApplicationArea = all;
@@ -4692,13 +4662,7 @@ page 52186778 "Finance Role Center"
                         Caption = 'Loans Recovery per Month';
                         RunObject = report "Loans Recovery Per Month";
                     }
-                    action("Closed Loans Report")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Closed Loans Report';
-                        RunObject = report "Loans Listing Report";
-
-                    }
+                   
                     action("Montlhy Bill Summary")
                     {
                         ApplicationArea = Basic, Suite;

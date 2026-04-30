@@ -1,7 +1,7 @@
 table 52185625 "PR Employee P9 Info"
 {
-    DrillDownPageID = "prEmployee History";
-    LookupPageID = "prEmployee History";
+    DrillDownPageID = "Employee P9 Info";
+    LookupPageID = "Employee P9 Info";
 
     fields
     {
