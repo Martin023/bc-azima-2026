@@ -845,6 +845,7 @@
           </Tablix>
           <Line Name="Line1">
             <Top>2.895in</Top>
+            <Left>0cm</Left>
             <Height>0in</Height>
             <Width>19.74083cm</Width>
             <ZIndex>1</ZIndex>
@@ -2106,6 +2107,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox18</rd:DefaultName>
             <Top>9.76048cm</Top>
+            <Left>0cm</Left>
             <Height>12.40042cm</Height>
             <Width>19.74083cm</Width>
             <ZIndex>32</ZIndex>
@@ -2123,14 +2125,10 @@
         <Height>22.1609cm</Height>
         <Style />
       </Body>
-      <Width>19.74088cm</Width>
+      <Width>20.00541cm</Width>
       <Page>
         <PageFooter>
-<<<<<<< HEAD
-          <Height>3.65125cm</Height>
-=======
-          <Height>1.11125cm</Height>
->>>>>>> 3838a7978d07c4777ad0f6655236833a5e5d2ddf
+          <Height>1.50812cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -2155,13 +2153,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>PageNumber</rd:DefaultName>
-<<<<<<< HEAD
-              <Top>1.50812cm</Top>
-              <Left>0.26458cm</Left>
-=======
-              <Top>0.47625cm</Top>
-              <Left>0.00003cm</Left>
->>>>>>> 3838a7978d07c4777ad0f6655236833a5e5d2ddf
+              <Top>0.34395cm</Top>
               <Height>0.25in</Height>
               <Width>19.74083cm</Width>
               <Style>
