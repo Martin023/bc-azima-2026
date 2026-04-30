@@ -934,8 +934,10 @@ page 52185753 "Loan Application Card"
                     //Load defaults
                     AppraisalDetailsSetup.Reset;
                     if AppraisalDetailsSetup.Find('-') then begin
-                        if rec."Source Unit" = rec."Source Unit"::FOSA then
-                            AppraisalDetailsSetup.SetRange("Source Unit", Rec."Source Unit"::FOSA);
+                        if Rec."Source Unit" = Rec."Source Unit"::FOSA then
+                            AppraisalDetailsSetup.Setfilter("Source Unit", '=%1|%2', appraisalDetailsSetup."Source Unit"::" ", appraisalDetailsSetup."Source Unit"::FOSA)
+                        else if Rec."Source Unit" = Rec."Source Unit"::BOSA then
+                            AppraisalDetailsSetup.Setfilter("Source Unit", '=%1|%2', appraisalDetailsSetup."Source Unit"::" ", appraisalDetailsSetup."Source Unit"::BOSA);
                         repeat
                             AppraisalSalDetails.Reset;
                             AppraisalSalDetails.SetRange(AppraisalSalDetails."Loan No", Rec."Loan No.");

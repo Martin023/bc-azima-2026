@@ -29,8 +29,8 @@ table 52185744 "Appraisal Salary Details"
         }
         field(4; Type; Option)
         {
-            OptionCaption = ' ,Earnings,Deductions,Basic,Other Allowances ,Gross Pay,Fosa Income,Pension,House Allowance';
-            OptionMembers = " ",Earnings,Deductions,Basic,"Other Allowances","Gross Pay","Net Income",Pension,"House Allowance";
+            OptionCaption = ' ,Earnings,Deductions,Basic,Other Allowances ,Gross Pay,Fosa Income,Pension,House Allowance,Taxable Pay,Relief';
+            OptionMembers = " ",Earnings,Deductions,Basic,"Other Allowances","Gross Pay","Net Income",Pension,"House Allowance","Taxable Pay",Relief;
             trigger OnValidate()
             var
                 myInt: Integer;
@@ -66,6 +66,8 @@ table 52185744 "Appraisal Salary Details"
         {
 
             trigger OnValidate()
+            Var
+                LoanApp: Record Loans;
             begin
                 Rec."Modified By" := '';
                 if Type = Type::"Net Income" then begin
@@ -77,6 +79,12 @@ table 52185744 "Appraisal Salary Details"
                 //     Rec.Modify();
                 // end;
                 if Amount < 0 then Error('Amount cannot be less than zero');
+
+                if LoanApp.Get("Loan No") then begin
+                    if (LoanApp."Source Unit" = LoanApp."Source Unit"::BOSA) then 
+                        fnProcessSalaryDetails();
+                end;
+                
 
                 //to initialize the STO Amount if inserted and Display a message
                 if (Code = '7.1EXTERNAL BANK STO') and (Amount > 0) then begin
@@ -94,7 +102,7 @@ table 52185744 "Appraisal Salary Details"
 
                 if Type = Type::"Gross Pay" then
                     Error(Text002);
-
+                
                 if Type = Type::Basic then begin
 
                     ApprDetails.Reset;
@@ -147,6 +155,7 @@ table 52185744 "Appraisal Salary Details"
                     end;
                 end;
                 //End of initialize STO Amount if There is Basic Amount
+                CalculateNetPay();
             end;
         }
         field(6; "Loan No"; Code[50])
@@ -211,11 +220,205 @@ table 52185744 "Appraisal Salary Details"
         end;
     end;
 
+procedure fnProcessSalaryDetails()
+var
+    curBasicPay: Decimal;
+    ApprDetails: Record "Appraisal Salary Details";
+    AppraisalSet: Record "Appraisal Salary Set-up";
+    curTransAmount: Decimal;
+    prPayrollProcessing: Codeunit "PR Payroll Processing";
+    curNSSF: Decimal;
+    ShifAmount: Decimal;
+    Savingsacc: Record "Savings Accounts";
+    DepositContr: Decimal;
+    HousingLevyAmount: Decimal;
+    curPayeAmount : Decimal;
+    prTransactionCodes : Record "PR Transaction Codes";
+    strExtractedFrml: Text[250];
+    dtOpenPeriod : date;
+    Members : Record "Members";
+    intMonth : Integer;
+    intYear : Integer;
+    TaxablePay: Decimal;
+    Relief : Decimal;
+    Loanrec : Record Loans;
+    TotalOutstanding : Decimal;
+begin
+    dtOpenPeriod := prPayrollProcessing.fnGetOpenPeriod();
+    intMonth := Date2dmy(dtOpenPeriod, 2);
+    intYear := Date2dmy(dtOpenPeriod, 3);
+
+    // STEP 1: Get Basic Pay from details
+    if Rec.Type = Rec.Type::Basic then
+        curBasicPay := Rec.Amount;
+
+    curTransAmount := ROUND(curBasicPay, 0.01, '<');
+    //Message('Basic Pay: %1', curTransAmount);
+    // STEP 2: Pre-calc shared values
+    curNSSF := prPayrollProcessing.fnGetEmployerNSSF(curTransAmount);
+    //Message('NSSF: %1', curNSSF);
+
+    
+    ShifAmount := ROUND((curTransAmount * (2.75 / 100)), 0.01, '<');
+    //Message('SHIF: %1', ShifAmount);
+    clear(TotalOutstanding);
+    Loanrec.Reset();
+    Loanrec.SetAutoCalcFields("Outstanding Balance");
+    Loanrec.SetRange("Member No.", Rec."Client Code");
+    Loanrec.SetRange("Recovery Mode", Loanrec."Recovery Mode"::Checkoff);
+    if Loanrec.FindSet() then
+        repeat
+            TotalOutstanding += Loanrec."Outstanding Balance";
+        until Loanrec.Next() = 0;
+
+    Savingsacc.Reset;
+    Savingsacc.SetRange("Member No.", Rec."Client Code");
+    Savingsacc.SetRange("Product Category", Savingsacc."Product Category"::"BOSA Deposits");
+    if Savingsacc.FindFirst() then
+        DepositContr := Savingsacc."Monthly Contribution";
+    //Message('Share Contribution: %1',ShrContr);
+
+    HousingLevyAmount := ROUND((curTransAmount * (1.5 / 100)), 0.01, '<');
+    //Message('Housing Levy: %1', HousingLevyAmount);
+
+    Relief := 2400;
+    TaxablePay := curTransAmount - curNSSF - ShifAmount - HousingLevyAmount;
+    curPayeAmount := prPayrollProcessing.fnGetEmployeePaye(TaxablePay);
+    curPayeAmount := curPayeAmount - Relief;
+    curPayeAmount := ROUND(curPayeAmount, 0.01, '>');
+    //Message('PAYE: %1', curPayeAmount);
+
+    // STEP 3: Update using Appraisal Setup
+    ApprDetails.Reset();
+    ApprDetails.SetRange("Loan No", Rec."Loan No");
+
+    if ApprDetails.FindSet() then begin
+        repeat
+            // Link to setup using Code (BEST key)
+            AppraisalSet.Reset();
+            AppraisalSet.SetRange(Code, ApprDetails.Code);
+
+            if AppraisalSet.FindFirst() then begin
+
+                case AppraisalSet.Code of
+                    'BASIC':
+                        ApprDetails.Amount := curBasicPay;
+                    'NSSF':
+                        ApprDetails.Amount := curNSSF;
+
+                    'SHIF':
+                        ApprDetails.Amount := ShifAmount;                       
+
+                    'SHARES':
+                        ApprDetails.Amount := DepositContr;
+                        
+                    'PAYE':
+                    ApprDetails.Amount := curPayeAmount;
+
+                    'HOUSING LEVY':
+                        ApprDetails.Amount := HousingLevyAmount;
+                    
+                    'TAXABLE PAY':
+                        ApprDetails.Amount := TaxablePay;
+                    
+                    'RELIEF':
+                        ApprDetails.Amount := Relief;
+                    
+                    'SACCO LOANS':
+                        ApprDetails.Amount := TotalOutstanding;
+
+                end;
+
+                ApprDetails.Modify();
+            end;
+
+        until ApprDetails.Next() = 0;
+    end;
+end;
+
+local procedure CalculateNetPay()
+    var
+        GrossPay: Decimal;
+        TotalDeductions: Decimal;
+        NetPayRec: Record "Appraisal Salary Details";
+    begin
+        GrossPay := 0;
+        TotalDeductions := 0;
+
+        // Get Gross Pay
+        ApprDetails.Reset;
+        ApprDetails.SetRange("Loan No", "Loan No");
+        ApprDetails.SetRange("Client Code", "Client Code");
+        ApprDetails.SetRange(Type, Type::"Gross Pay");
+        if ApprDetails.FindFirst then
+            GrossPay := ApprDetails.Amount;
+
+        // Calculate Total Deductions from database
+        ApprDetails.Reset;
+        ApprDetails.SetRange("Loan No", "Loan No");
+        ApprDetails.SetRange("Client Code", "Client Code");
+        ApprDetails.SetRange(Type, Type::Deductions);
+        if ApprDetails.FindSet then
+            repeat
+                TotalDeductions += ApprDetails.Amount;
+            until ApprDetails.Next = 0;
+
+        // Include current record if it's a deduction being modified
+        if (Rec.Type = Rec.Type::Deductions) and (Rec."Loan No" <> '') and (Rec."Client Code" <> '') then
+            TotalDeductions += Rec.Amount;
+
+        // Update or Create Net Income record
+        ApprDetails.Reset;
+        ApprDetails.SetRange("Loan No", "Loan No");
+        ApprDetails.SetRange("Client Code", "Client Code");
+        ApprDetails.SetRange(Type, Type::"Net Income");
+        if ApprDetails.FindFirst then begin
+            ApprDetails.Amount := GrossPay - TotalDeductions;
+            ApprDetails.Modify(true);  // Added 'true' to trigger OnModify
+        end else begin
+            // Create new Net Income record if it doesn't exist
+            ApprDetails.Init;
+            ApprDetails."Loan No" := Rec."Loan No";
+            ApprDetails."Client Code" := Rec."Client Code";
+            ApprDetails.Type := Type::"Net Income";
+            ApprDetails.Code := 'NET PAY';
+            ApprDetails.Amount := GrossPay - TotalDeductions;
+            ApprDetails.Insert;
+        end;
+    end;
+
     var
         "SalarySet-up": Record "Appraisal Salary Set-up";
         LoanApp: Record Loans;
         Text002: Label 'Do not capture anything here';
         ApprDetails: Record "Appraisal Salary Details";
         STOVal: Decimal;
+        VitalSetup: Record "PR Vital Setup Info";
+        curReliefPersonal: Decimal;
+        curReliefInsurance: Decimal;
+        curReliefNHIF: Decimal;
+        curReliefNHIFAmt: Decimal;
+        curDisabledLimit: Decimal;
+        curMaxPensionContrib: Decimal;
+        curRateTaxExPension: Decimal;
+        curOOIMaxMonthlyContrb: Decimal;
+        curOOIDecemberDedc: Decimal;
+        curLoanMarketRate: Decimal;
+        curLoanCorpRate: Decimal;
+        curReliefPension: Decimal;
+        curReliefMorgage: Decimal;
+        CurAffordableHousingMax: Decimal;
+        AffordableHRelief: Decimal;
+        curMaximumRelief: Decimal;
+        currMinRelief: Decimal;
+        curNssfEmployee: Decimal;
+        curNssf_Employer_Factor: Decimal;
+        intNHIF_BasedOn: Option Gross,Basic,"Taxable Pay";
+        DisabledTaxRelief: Decimal;
+        shifRelief: decimal;
+        ShifPercentage: decimal;
+        HousingLevyRate: Decimal;
+        
 }
+
 

@@ -111,7 +111,7 @@ table 52185826 "Member withdrawal Notice"
                                         Loans.CalcFields("Outstanding Balance");
                                         if Loans."Member No." <> "Member No." then begin
                                             if Loans."Outstanding Balance" > 0 then begin
-                                                Message(Err001, Loans."Loan No.");
+                                                Error(Err001, Loans."Loan No.");
                                                 NoLoanGua := NoLoanGua + '-' + Format(Loans."Loan No.");
                                             end;
                                         end;

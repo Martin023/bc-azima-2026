@@ -110,9 +110,10 @@ page 52185832 "Savings Statistics FactBox"
                 //     Caption = 'Minumum Balance';
                 // }
                 // field("Available Balance"; (Rec."Balance (LCY)" + Rec."Authorised Over Draft") - (Rec."Uncleared Cheques" + Rec."ATM Transactions" + MinBalance + Rec."Lien Placed" + Rec.yed + Rec."Coop Transactions" + Rec."One Month Installment"))
-                field("Available Balance"; (Rec."Balance" + Rec."Authorised Over Draft") - (Rec."Uncleared Cheques" + Rec."ATM Transactions" + MinBalance + Rec."Lien Placed" + Rec.yed + Rec."Coop Transactions" + Rec."One Month Installment"))
+                field("Available Balance"; (Rec.GetAvailableBalance(Rec."No.")))
                 {
                     Caption = 'Available Balance';
+                    ApplicationArea = Basic, Suite;
                 }
                 field("Savings Interest Earned"; Rec."Savings Interest Earned")
                 {

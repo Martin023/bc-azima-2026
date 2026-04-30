@@ -942,7 +942,7 @@ table 52185700 Members
         field(48; "Account Type"; Option)
         {
             OptionMembers = "Single Member Account","Group Account";
-            OptionCaption = 'Single Member Account,Members'' Savings Account';
+            OptionCaption = 'Single Member Account,MFI Account';
 
         }
 

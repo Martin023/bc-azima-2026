@@ -19,67 +19,28 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.96612cm</Width>
+                  <Width>3.17552cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.0145cm</Width>
+                  <Width>3.86753cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.70651cm</Width>
+                  <Width>3.19089cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.02987cm</Width>
+                  <Width>3.25899cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.09797cm</Width>
+                  <Width>3.19089cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.02987cm</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>2.89596cm</Width>
+                  <Width>3.05698cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
                   <Height>0.25in</Height>
                   <TablixCells>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox21">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Code</Value>
-                                  <Style>
-                                    <FontFamily>Cambria</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>White</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox21</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>Lime</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>LightGreen</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Textbox23">
@@ -423,39 +384,6 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Repayment_Code">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!Repayment_Code.Value</Value>
-                                  <Style>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Repayment_Code</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>AliceBlue</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="Repayment_Date">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -662,40 +590,6 @@
                 <TablixRow>
                   <Height>0.23622in</Height>
                   <TablixCells>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox56">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily>Cambria</FontFamily>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox56</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>AliceBlue</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Textbox57">
@@ -915,11 +809,6 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
-                <TablixMember>
-                  <Visibility>
-                    <Hidden>true</Hidden>
-                  </Visibility>
-                </TablixMember>
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -944,8 +833,8 @@
             <FixedColumnHeaders>true</FixedColumnHeaders>
             <FixedRowHeaders>true</FixedRowHeaders>
             <DataSetName>DataSet_Result</DataSetName>
-            <Top>2.925in</Top>
-            <Left>0.3175cm</Left>
+            <Top>2.95056in</Top>
+            <Left>0.00003cm</Left>
             <Height>0.73622in</Height>
             <Width>19.7408cm</Width>
             <Style>
@@ -956,27 +845,26 @@
           </Tablix>
           <Line Name="Line1">
             <Top>2.895in</Top>
-            <Left>0.3175cm</Left>
             <Height>0in</Height>
             <Width>19.74083cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
-                <Color>#000099</Color>
+                <Color>LightGreen</Color>
                 <Style>Solid</Style>
                 <Width>1.5pt</Width>
               </Border>
               <TopBorder>
-                <Color>#000099</Color>
+                <Color>LightGreen</Color>
               </TopBorder>
               <BottomBorder>
-                <Color>#000099</Color>
+                <Color>LightGreen</Color>
               </BottomBorder>
               <LeftBorder>
-                <Color>#000099</Color>
+                <Color>LightGreen</Color>
               </LeftBorder>
               <RightBorder>
-                <Color>#000099</Color>
+                <Color>LightGreen</Color>
               </RightBorder>
             </Style>
           </Line>
@@ -985,8 +873,8 @@
             <Value>=First(Fields!CompanyInformation_Picture.Value, "DataSet_Result")</Value>
             <MIMEType>image/jpeg</MIMEType>
             <Sizing>FitProportional</Sizing>
-            <Top>0.07566in</Top>
-            <Left>0.3175cm</Left>
+            <Top>0in</Top>
+            <Left>0.07028cm</Left>
             <Height>1.23206in</Height>
             <Width>2.02209in</Width>
             <ZIndex>2</ZIndex>
@@ -1013,8 +901,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>BuldingName</rd:DefaultName>
-            <Top>0.81028cm</Top>
-            <Left>5.5897cm</Left>
+            <Top>0.6181cm</Top>
+            <Left>5.34248cm</Left>
             <Height>0.6cm</Height>
             <Width>8.47077cm</Width>
             <ZIndex>3</ZIndex>
@@ -1046,8 +934,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>CompanyName</rd:DefaultName>
-            <Top>0.19218cm</Top>
-            <Left>5.5897cm</Left>
+            <Left>5.34248cm</Left>
             <Height>0.6cm</Height>
             <Width>8.47077cm</Width>
             <ZIndex>4</ZIndex>
@@ -1078,8 +965,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>CompanyAddress</rd:DefaultName>
-            <Top>1.44555cm</Top>
-            <Left>5.5897cm</Left>
+            <Top>1.25337cm</Top>
+            <Left>5.34248cm</Left>
             <Height>0.6cm</Height>
             <Width>8.47077cm</Width>
             <ZIndex>5</ZIndex>
@@ -1116,8 +1003,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>CompanyTelephone</rd:DefaultName>
-            <Top>2.08083cm</Top>
-            <Left>7.10192cm</Left>
+            <Top>1.88865cm</Top>
+            <Left>6.8547cm</Left>
             <Height>0.6cm</Height>
             <Width>6.95855cm</Width>
             <ZIndex>6</ZIndex>
@@ -1154,8 +1041,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>CompanyEmail</rd:DefaultName>
-            <Top>2.70471cm</Top>
-            <Left>7.10192cm</Left>
+            <Top>2.51253cm</Top>
+            <Left>6.8547cm</Left>
             <Height>0.6cm</Height>
             <Width>6.95855cm</Width>
             <ZIndex>7</ZIndex>
@@ -1186,8 +1073,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>CompanyTelephone</rd:DefaultName>
-            <Top>2.08083cm</Top>
-            <Left>5.5897cm</Left>
+            <Top>1.88865cm</Top>
+            <Left>5.34248cm</Left>
             <Height>0.6cm</Height>
             <Width>1.40639cm</Width>
             <ZIndex>8</ZIndex>
@@ -1218,8 +1105,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>CompanyTelephone</rd:DefaultName>
-            <Top>2.70471cm</Top>
-            <Left>5.5897cm</Left>
+            <Top>2.51253cm</Top>
+            <Left>5.34248cm</Left>
             <Height>0.6cm</Height>
             <Width>1.40639cm</Width>
             <ZIndex>9</ZIndex>
@@ -1258,10 +1145,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>PrintingDate</rd:DefaultName>
-            <Top>0.22745cm</Top>
-            <Left>14.33724cm</Left>
+            <Top>0.03527cm</Top>
+            <Left>14.09002cm</Left>
             <Height>0.6cm</Height>
-            <Width>5.72109cm</Width>
+            <Width>5.65081cm</Width>
             <ZIndex>10</ZIndex>
             <Style>
               <Border>
@@ -1298,10 +1185,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>PrintingTime</rd:DefaultName>
-            <Top>0.84583cm</Top>
-            <Left>14.33724cm</Left>
+            <Top>0.65365cm</Top>
+            <Left>14.09002cm</Left>
             <Height>0.6cm</Height>
-            <Width>5.72109cm</Width>
+            <Width>5.65081cm</Width>
             <ZIndex>11</ZIndex>
             <Style>
               <Border>
@@ -1338,10 +1225,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>PrintedBy</rd:DefaultName>
-            <Top>1.48083cm</Top>
-            <Left>14.33724cm</Left>
+            <Top>1.28865cm</Top>
+            <Left>14.09002cm</Left>
             <Height>0.6cm</Height>
-            <Width>5.72109cm</Width>
+            <Width>5.65081cm</Width>
             <ZIndex>12</ZIndex>
             <Style>
               <Border>
@@ -1375,9 +1262,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox9</rd:DefaultName>
             <Top>3.39189cm</Top>
-            <Left>0.3175cm</Left>
+            <Left>0.07028cm</Left>
             <Height>0.6cm</Height>
-            <Width>19.74083cm</Width>
+            <Width>19.67055cm</Width>
             <ZIndex>13</ZIndex>
             <Style>
               <Border>
@@ -1407,8 +1294,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>1.62649in</Top>
-            <Left>0.4175cm</Left>
+            <Top>1.64241in</Top>
+            <Left>0.18056cm</Left>
             <Height>0.25in</Height>
             <Width>1.15625in</Width>
             <ZIndex>14</ZIndex>
@@ -1440,8 +1327,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>1.89038in</Top>
-            <Left>0.4175cm</Left>
+            <Top>1.90359in</Top>
+            <Left>0.18056cm</Left>
             <Height>0.25in</Height>
             <Width>1.15625in</Width>
             <ZIndex>15</ZIndex>
@@ -1473,8 +1360,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.15427in</Top>
-            <Left>0.4175cm</Left>
+            <Top>2.16748in</Top>
+            <Left>0.18056cm</Left>
             <Height>0.25in</Height>
             <Width>1.15625in</Width>
             <ZIndex>16</ZIndex>
@@ -1506,8 +1393,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>1.64173in</Top>
-            <Left>3.60508in</Left>
+            <Top>1.65494in</Top>
+            <Left>3.5118in</Left>
             <Height>0.25in</Height>
             <Width>1.4373in</Width>
             <ZIndex>17</ZIndex>
@@ -1539,8 +1426,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>1.90562in</Top>
-            <Left>3.60508in</Left>
+            <Top>1.91883in</Top>
+            <Left>3.5118in</Left>
             <Height>0.25in</Height>
             <Width>1.4373in</Width>
             <ZIndex>18</ZIndex>
@@ -1572,8 +1459,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.16951in</Top>
-            <Left>3.60508in</Left>
+            <Top>2.18272in</Top>
+            <Left>3.5118in</Left>
             <Height>0.25in</Height>
             <Width>1.4373in</Width>
             <ZIndex>19</ZIndex>
@@ -1612,8 +1499,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>1.62716in</Top>
-            <Left>1.34929in</Left>
+            <Top>1.65629in</Top>
+            <Left>1.25022in</Left>
             <Height>0.25in</Height>
             <Width>2.09317in</Width>
             <ZIndex>20</ZIndex>
@@ -1652,8 +1539,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>1.89105in</Top>
-            <Left>1.34929in</Left>
+            <Top>1.90426in</Top>
+            <Left>1.25022in</Left>
             <Height>0.25in</Height>
             <Width>2.09317in</Width>
             <ZIndex>21</ZIndex>
@@ -1692,8 +1579,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.16883in</Top>
-            <Left>1.34929in</Left>
+            <Top>2.18204in</Top>
+            <Left>1.25022in</Left>
             <Height>0.25in</Height>
             <Width>2.09317in</Width>
             <ZIndex>22</ZIndex>
@@ -1732,10 +1619,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>1.64241in</Top>
-            <Left>5.19395in</Left>
+            <Top>1.65562in</Top>
+            <Left>5.10067in</Left>
             <Height>0.25in</Height>
-            <Width>2.70303in</Width>
+            <Width>2.67133in</Width>
             <ZIndex>23</ZIndex>
             <Style>
               <Border>
@@ -1772,10 +1659,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>1.9063in</Top>
-            <Left>5.19395in</Left>
+            <Top>1.91951in</Top>
+            <Left>5.10067in</Left>
             <Height>0.25in</Height>
-            <Width>2.70303in</Width>
+            <Width>2.67133in</Width>
             <ZIndex>24</ZIndex>
             <Style>
               <Border>
@@ -1816,10 +1703,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.17019in</Top>
-            <Left>5.19395in</Left>
+            <Top>2.1834in</Top>
+            <Left>5.10067in</Left>
             <Height>0.25in</Height>
-            <Width>2.70303in</Width>
+            <Width>2.67133in</Width>
             <ZIndex>25</ZIndex>
             <Style>
               <Border>
@@ -1832,54 +1719,54 @@
             </Style>
           </Textbox>
           <Line Name="Line3">
-            <Top>4.13299cm</Top>
-            <Left>9.12308cm</Left>
+            <Top>4.16654cm</Top>
+            <Left>8.88614cm</Left>
             <Height>2.64412cm</Height>
             <Width>0cm</Width>
             <ZIndex>26</ZIndex>
             <Style>
               <Border>
-                <Color>#000099</Color>
+                <Color>LightGreen</Color>
                 <Style>Solid</Style>
                 <Width>1.5pt</Width>
               </Border>
               <TopBorder>
-                <Color>#000099</Color>
+                <Color>LightGreen</Color>
               </TopBorder>
               <BottomBorder>
-                <Color>#000099</Color>
+                <Color>LightGreen</Color>
               </BottomBorder>
               <LeftBorder>
-                <Color>#000099</Color>
+                <Color>LightGreen</Color>
               </LeftBorder>
               <RightBorder>
-                <Color>#000099</Color>
+                <Color>LightGreen</Color>
               </RightBorder>
             </Style>
           </Line>
           <Line Name="Line4">
-            <Top>4.13129cm</Top>
-            <Left>0.3409cm</Left>
+            <Top>4.16484cm</Top>
+            <Left>0.10396cm</Left>
             <Height>2.68282cm</Height>
             <Width>0cm</Width>
             <ZIndex>27</ZIndex>
             <Style>
               <Border>
-                <Color>#000099</Color>
+                <Color>LightGreen</Color>
                 <Style>Solid</Style>
                 <Width>1.5pt</Width>
               </Border>
               <TopBorder>
-                <Color>#000099</Color>
+                <Color>LightGreen</Color>
               </TopBorder>
               <BottomBorder>
-                <Color>#000099</Color>
+                <Color>LightGreen</Color>
               </BottomBorder>
               <LeftBorder>
-                <Color>#000099</Color>
+                <Color>LightGreen</Color>
               </LeftBorder>
               <RightBorder>
-                <Color>#000099</Color>
+                <Color>LightGreen</Color>
               </RightBorder>
             </Style>
           </Line>
@@ -1901,8 +1788,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.40427in</Top>
-            <Left>0.3675cm</Left>
+            <Top>2.41748in</Top>
+            <Left>0.16357cm</Left>
             <Height>0.27845in</Height>
             <Width>1.16294in</Width>
             <ZIndex>28</ZIndex>
@@ -1934,8 +1821,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.4334in</Top>
-            <Left>3.60565in</Left>
+            <Top>2.44661in</Top>
+            <Left>3.51237in</Left>
             <Height>0.25in</Height>
             <Width>1.4373in</Width>
             <ZIndex>29</ZIndex>
@@ -1976,8 +1863,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.41883in</Top>
-            <Left>1.3435in</Left>
+            <Top>2.43204in</Top>
+            <Left>1.25022in</Left>
             <Height>0.26389in</Height>
             <Width>2.09317in</Width>
             <ZIndex>30</ZIndex>
@@ -2020,10 +1907,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.4334in</Top>
-            <Left>5.19395in</Left>
+            <Top>2.44661in</Top>
+            <Left>5.10067in</Left>
             <Height>0.25in</Height>
-            <Width>2.70303in</Width>
+            <Width>2.67133in</Width>
             <ZIndex>31</ZIndex>
             <Style>
               <Border>
@@ -2042,21 +1929,174 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>  NB: Repayment is due on …15TH……...of every month and late payment will attract a penalty of 5%							
-  DECLARATION:							
-  I…………………………………………….ID NO…………………………Do hereby acknowledge the  receipt of a loan							
-  of Ksh…………………………..granted to me by Azima Sacco and its above repayment schedule							
-  of which I do agree to abide by until  end of the period.						PAYMENT DETAILS.	
-						PAYBILL:531 231	
+                    <Value>  NB: Repayment is due on …15TH……...of every month and late payment will attract a penalty of 5%	</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value xml:space="preserve">						
+  </Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>DECLARATION:				</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>			
+  I…………………………………………….ID NO…………………………Do hereby acknowledge the  receipt of a loan		of </Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>  Ksh…………………………..granted to me by Azima Sacco and its above repayment schedule of which I do agree to abide</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>  by until  end of the period.		</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value xml:space="preserve">		</Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>PAYMENT DETAILS</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>.	</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>
+		PAYBILL:531 231</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>
   SIGNATURE…..…………….DATE…………						A/C NO:  ID No:	
 							
-Mobile No		………………………..			CO-OP BANK:		
-					A/C NAME:	AZIMA SACCO LTD	
-			EMAIL ADDRESS……………………………………………………………		A/C NO:	01120073010100	
+  Mobile No		………………………..		</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>  EMAIL ADDRESS……………………………………………………………	</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>  CO-OP BANK:	</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>	
+		A/C NAME:	AZIMA SACCO LTD	
+		A/C NO:	01120073010100	
 							
-					ABSA BANK		
-					A/C NAME:	AZIMA SACCO LTD	
-					A/C NO:	0311068121	
+		ABSA BANK</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>		
+		A/C NAME:	AZIMA SACCO LTD	
+		A/C NO:	0311068121	
 </Value>
                     <Style />
                   </TextRun>
@@ -2065,10 +2105,9 @@ Mobile No		………………………..			CO-OP BANK:
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox18</rd:DefaultName>
-            <Top>10.18381cm</Top>
-            <Left>0.3175cm</Left>
-            <Height>4.80688cm</Height>
-            <Width>19.7408cm</Width>
+            <Top>9.76048cm</Top>
+            <Height>12.40042cm</Height>
+            <Width>19.74083cm</Width>
             <ZIndex>32</ZIndex>
             <Style>
               <Border>
@@ -2081,13 +2120,17 @@ Mobile No		………………………..			CO-OP BANK:
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>16.10194cm</Height>
+        <Height>22.1609cm</Height>
         <Style />
       </Body>
-      <Width>20.27cm</Width>
+      <Width>19.74088cm</Width>
       <Page>
         <PageFooter>
+<<<<<<< HEAD
           <Height>3.65125cm</Height>
+=======
+          <Height>1.11125cm</Height>
+>>>>>>> 3838a7978d07c4777ad0f6655236833a5e5d2ddf
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -2112,8 +2155,13 @@ Mobile No		………………………..			CO-OP BANK:
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>PageNumber</rd:DefaultName>
+<<<<<<< HEAD
               <Top>1.50812cm</Top>
               <Left>0.26458cm</Left>
+=======
+              <Top>0.47625cm</Top>
+              <Left>0.00003cm</Left>
+>>>>>>> 3838a7978d07c4777ad0f6655236833a5e5d2ddf
               <Height>0.25in</Height>
               <Width>19.74083cm</Width>
               <Style>

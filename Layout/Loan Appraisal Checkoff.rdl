@@ -22,29 +22,16 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Take Home Amount     : </Value>
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=First(Fields!NetTakeHome.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontWeight>Bold</FontWeight>
-                      <Format>#,0.00;(#,0.00)</Format>
-                    </Style>
-                  </TextRun>
+ad                    <Value>Take Home Amount</Value><Style><FontFamily>Times New Roman</FontFamily><FontWeight>Bold</FontWeight></Style></TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox7</rd:DefaultName>
-            <Top>3.9033in</Top>
+            <Top>3.93368in</Top>
             <Left>5.47702in</Left>
             <Height>0.2257in</Height>
-            <Width>2.37317in</Width>
+            <Width>1.25062in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -86,8 +73,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox156</rd:DefaultName>
-            <Top>4.13039in</Top>
-            <Left>5.47702in</Left>
+            <Top>4.27716in</Top>
+            <Left>5.47564in</Left>
             <Height>0.25in</Height>
             <Width>2.37317in</Width>
             <ZIndex>1</ZIndex>
@@ -3729,17 +3716,10 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Loan Interest                  :</Value>
+                    <Value>Loan Interest</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontWeight>Normal</FontWeight>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=First(Fields!Loan_IN_Repayment.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <Format>n2</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -3750,7 +3730,7 @@
             <Top>3.17688in</Top>
             <Left>5.47702in</Left>
             <Height>0.2257in</Height>
-            <Width>2.37317in</Width>
+            <Width>1.25062in</Width>
             <ZIndex>38</ZIndex>
             <Style>
               <Border>
@@ -3769,18 +3749,10 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Recommended Amt     :</Value>
+                    <Value>Recommended Amt</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontWeight>Normal</FontWeight>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=First(Fields!RecommendedAmt.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontWeight>Bold</FontWeight>
-                      <Format>#,0.00;(#,0.00)</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -3788,10 +3760,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox7</rd:DefaultName>
-            <Top>3.66371in</Top>
-            <Left>5.47702in</Left>
+            <Top>3.68384in</Top>
+            <Left>5.47564in</Left>
             <Height>0.2257in</Height>
-            <Width>2.37317in</Width>
+            <Width>1.25062in</Width>
             <ZIndex>39</ZIndex>
             <Style>
               <Border>
@@ -3810,17 +3782,10 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Repayment            :</Value>
+                    <Value>Repayment</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontWeight>Normal</FontWeight>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=First(Fields!LoanRepayment.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <Format>#,0.00;(#,0.00)</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -3831,7 +3796,7 @@
             <Top>2.93211in</Top>
             <Left>5.47702in</Left>
             <Height>0.2257in</Height>
-            <Width>2.37317in</Width>
+            <Width>1.25062in</Width>
             <ZIndex>40</ZIndex>
             <Style>
               <Border>
@@ -4325,25 +4290,10 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Principle Repayment:</Value>
+                    <Value>Principle Repayment</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>        :</Value>
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontWeight>Normal</FontWeight>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=First(Fields!Loan_Pr_Repayment.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontSize>9pt</FontSize>
-                      <Format>n2</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -4354,7 +4304,7 @@
             <Top>3.44425in</Top>
             <Left>5.47702in</Left>
             <Height>0.2257in</Height>
-            <Width>2.37317in</Width>
+            <Width>1.25062in</Width>
             <ZIndex>55</ZIndex>
             <Style>
               <Border>
@@ -5088,10 +5038,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>2.24175in</Top>
-            <Left>0.07739in</Left>
+            <Top>2.21398in</Top>
+            <Left>0.07568in</Left>
             <Height>4.62955in</Height>
-            <Width>7.80915in</Width>
+            <Width>7.79183in</Width>
             <ZIndex>77</ZIndex>
             <Style>
               <Border>
@@ -5765,7 +5715,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!OnethirdGross.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!TotalDeductions.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <Format>#,0.00;(#,0.00)</Format>
@@ -6284,6 +6234,174 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox71">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!LoanRepayment.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <Format>#,0.00;(#,0.00)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>2.91594in</Top>
+            <Left>6.83074in</Left>
+            <Height>0.2257in</Height>
+            <Width>0.98216in</Width>
+            <ZIndex>112</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox52">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Loan_IN_Repayment.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <Format>n2</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox43</rd:DefaultName>
+            <Top>8.10456cm</Top>
+            <Left>17.35008cm</Left>
+            <Height>0.57328cm</Height>
+            <Width>2.49469cm</Width>
+            <ZIndex>113</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox196">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!RecommendedAmt.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>#,0.00;(#,0.00)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>3.70763in</Top>
+            <Left>6.83074in</Left>
+            <Height>0.2257in</Height>
+            <Width>0.98216in</Width>
+            <ZIndex>114</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox80">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Loan_Pr_Repayment.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <Format>n2</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox43</rd:DefaultName>
+            <Top>8.7484cm</Top>
+            <Left>17.35008cm</Left>
+            <Height>0.57328cm</Height>
+            <Width>2.49469cm</Width>
+            <ZIndex>115</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox81">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!NetTakeHome.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>#,0.00;(#,0.00)</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox43</rd:DefaultName>
+            <Top>9.99153cm</Top>
+            <Left>17.35008cm</Left>
+            <Height>0.57328cm</Height>
+            <Width>2.49469cm</Width>
+            <ZIndex>116</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
         <Height>38.61409cm</Height>
         <Style>
@@ -6292,7 +6410,7 @@
           </Border>
         </Style>
       </Body>
-      <Width>20.03181cm</Width>
+      <Width>19.98348cm</Width>
       <Page>
         <PageHeader>
           <Height>3.88286cm</Height>
