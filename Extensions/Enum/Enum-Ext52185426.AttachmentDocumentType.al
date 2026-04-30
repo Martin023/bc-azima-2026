@@ -32,4 +32,13 @@ enumextension 52185426 "Attachment Document Type" extends "Attachment Document T
     {
         Caption = 'Accident';
     }
+    value(16; Member)
+    {
+        Caption = 'Member';
+    }
+    value(17; "Member Closure")
+    {
+        Caption = 'Member Closure';
+    }
+
 }
