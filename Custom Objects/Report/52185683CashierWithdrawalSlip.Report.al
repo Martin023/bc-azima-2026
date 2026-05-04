@@ -188,7 +188,7 @@ Report 52185683 "Cashier Withdrawal Slip"
             {
 
             }
-            
+
             // ADDED DIMENSION NAME AND REPRINT COLUMNS
             column(Branch_Name; BranchName)
             {
@@ -274,9 +274,10 @@ Report 52185683 "Cashier Withdrawal Slip"
 
                 ReprintDate := Today;
                 ReprintTime := Time;
+
                 // CheckReport.InitTextVariable();
                 // CheckReport.FormatNoText(NumberText, Amount, '');
-                
+
                 NumberText[1] := ConvertAmountToWords(Amount);
             end;
 
@@ -364,13 +365,33 @@ Report 52185683 "Cashier Withdrawal Slip"
 
     local procedure InitTextVariable()
     begin
-        OnesText[1] := 'One'; OnesText[2] := 'Two'; OnesText[3] := 'Three'; OnesText[4] := 'Four';
-        OnesText[5] := 'Five'; OnesText[6] := 'Six'; OnesText[7] := 'Seven'; OnesText[8] := 'Eight';
-        OnesText[9] := 'Nine'; OnesText[10] := 'Ten'; OnesText[11] := 'Eleven'; OnesText[12] := 'Twelve';
-        OnesText[13] := 'Thirteen'; OnesText[14] := 'Fourteen'; OnesText[15] := 'Fifteen'; OnesText[16] := 'Sixteen';
-        OnesText[17] := 'Seventeen'; OnesText[18] := 'Eighteen'; OnesText[19] := 'Nineteen';
-        TensText[1] := ''; TensText[2] := 'Twenty'; TensText[3] := 'Thirty'; TensText[4] := 'Forty';
-        TensText[5] := 'Fifty'; TensText[6] := 'Sixty'; TensText[7] := 'Seventy'; TensText[8] := 'Eighty';
+        OnesText[1] := 'One';
+        OnesText[2] := 'Two';
+        OnesText[3] := 'Three';
+        OnesText[4] := 'Four';
+        OnesText[5] := 'Five';
+        OnesText[6] := 'Six';
+        OnesText[7] := 'Seven';
+        OnesText[8] := 'Eight';
+        OnesText[9] := 'Nine';
+        OnesText[10] := 'Ten';
+        OnesText[11] := 'Eleven';
+        OnesText[12] := 'Twelve';
+        OnesText[13] := 'Thirteen';
+        OnesText[14] := 'Fourteen';
+        OnesText[15] := 'Fifteen';
+        OnesText[16] := 'Sixteen';
+        OnesText[17] := 'Seventeen';
+        OnesText[18] := 'Eighteen';
+        OnesText[19] := 'Nineteen';
+        TensText[1] := '';
+        TensText[2] := 'Twenty';
+        TensText[3] := 'Thirty';
+        TensText[4] := 'Forty';
+        TensText[5] := 'Fifty';
+        TensText[6] := 'Sixty';
+        TensText[7] := 'Seventy';
+        TensText[8] := 'Eighty';
         TensText[9] := 'Ninety';
     end;
 

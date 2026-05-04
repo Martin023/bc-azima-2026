@@ -599,7 +599,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>Totals</Value>
                                   <Style>
                                     <FontFamily>Cambria</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -821,9 +821,6 @@
                   <Group Name="Details" />
                 </TablixMember>
                 <TablixMember>
-                  <Visibility>
-                    <Hidden>true</Hidden>
-                  </Visibility>
                   <KeepWithGroup>Before</KeepWithGroup>
                 </TablixMember>
               </TablixMembers>
@@ -2105,8 +2102,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox18</rd:DefaultName>
-            <Top>9.76048cm</Top>
-            <Height>12.40042cm</Height>
+            <Top>9.54081cm</Top>
+            <Height>12.14384cm</Height>
             <Width>19.74083cm</Width>
             <ZIndex>32</ZIndex>
             <Style>
@@ -2120,13 +2117,13 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>22.1609cm</Height>
+        <Height>21.73757cm</Height>
         <Style />
       </Body>
-      <Width>19.74088cm</Width>
+      <Width>19.9cm</Width>
       <Page>
         <PageFooter>
-          <Height>1.11125cm</Height>
+          <Height>0.70556cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -2151,8 +2148,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>PageNumber</rd:DefaultName>
-              <Top>0.47625cm</Top>
-              <Left>0.00003cm</Left>
+              <Top>0.07056cm</Top>
               <Height>0.25in</Height>
               <Width>19.74083cm</Width>
               <Style>
