@@ -11,41 +11,41 @@ page 52185726 "Member Single"
     {
         area(content)
         {
-            group(IPRS)
-            {
-                Editable = false;
-                Caption = 'IPRS Information';
-                field("IPRS ID Type"; Rec."IPRS ID Type")
-                {
-                    Editable = false;
-                    Caption = 'IPRS ID Type';
-                }
-                field("IPRS ID"; Rec."IPRS ID")
-                {
-                    Editable = false;
-                    Caption = 'IPRS ID';
-                }
-                field("IPRS Full Names"; Rec."IPRS Full Names")
-                {
-                    Editable = false;
-                    Caption = 'IPRS Full Names';
-                }
-                field("IPRS ID Serial No"; Rec."IPRS ID Serial No")
-                {
-                    Editable = false;
-                    Caption = 'IPRS ID Serial No';
-                }
-                field("IPRS Verified"; Rec."IPRS Verified")
-                {
-                    Editable = false;
-                    Caption = 'IPRS Verified?';
-                }
-                field("IPRS Verified At"; Rec."IPRS Verified At")
-                {
-                    Editable = false;
-                    Caption = 'IPRS Verified At';
-                }
-            }
+            // group(IPRS)
+            // {
+            //     Editable = false;
+            //     Caption = 'IPRS Information';
+            //     field("IPRS ID Type"; Rec."IPRS ID Type")
+            //     {
+            //         Editable = false;
+            //         Caption = 'IPRS ID Type';
+            //     }
+            //     field("IPRS ID"; Rec."IPRS ID")
+            //     {
+            //         Editable = false;
+            //         Caption = 'IPRS ID';
+            //     }
+            //     field("IPRS Full Names"; Rec."IPRS Full Names")
+            //     {
+            //         Editable = false;
+            //         Caption = 'IPRS Full Names';
+            //     }
+            //     field("IPRS ID Serial No"; Rec."IPRS ID Serial No")
+            //     {
+            //         Editable = false;
+            //         Caption = 'IPRS ID Serial No';
+            //     }
+            //     field("IPRS Verified"; Rec."IPRS Verified")
+            //     {
+            //         Editable = false;
+            //         Caption = 'IPRS Verified?';
+            //     }
+            //     field("IPRS Verified At"; Rec."IPRS Verified At")
+            //     {
+            //         Editable = false;
+            //         Caption = 'IPRS Verified At';
+            //     }
+            // }
             group(General)
             {
                 Editable = false;
@@ -150,7 +150,10 @@ page 52185726 "Member Single"
                     Editable = true;
                     Visible = true;
                 }
-
+                field(Age; Rec.Age)
+                {
+                    ApplicationArea = Basic, Suite;
+                }
 
                 // field(NotAvailable; Rec.NotAvailable)
                 // {
@@ -183,7 +186,7 @@ page 52185726 "Member Single"
                 }
                 field("Member Class"; Rec."Member Class")
                 {
-
+                    ApplicationArea = Basic, Suite;
                 }
                 field("Sub Class"; Rec."Sub Class")
                 {
@@ -1965,35 +1968,35 @@ page 52185726 "Member Single"
             //         // RunPageMode = Create;
             //     }
             // }
-            group("IPRS Integration")
-            {
-                action("IPRS File List")
-                {
-                    Caption = 'IPRS Verification';
-                    ApplicationArea = Basic, Suite;
-                    Image = UserSetup;
-                    Promoted = true;
-                    PromotedCategory = Category10;
+            // group("IPRS Integration")
+            // {
+            //     action("IPRS File List")
+            //     {
+            //         Caption = 'IPRS Verification';
+            //         ApplicationArea = Basic, Suite;
+            //         Image = UserSetup;
+            //         Promoted = true;
+            //         PromotedCategory = Category10;
 
-                    trigger OnAction()
-                    var
-                        IPRS: Codeunit "IPRS Integration";
-                    begin
-                        if Rec."IPRS Verified" then begin
-                            // Ask user to confirm re-verification
-                            // Confirm user is aware of charges
-                            if Confirm('This member is already verified with IPRS. Do you wish to proceed with the IPRS verification of this member again? Standard charges apply') then begin
-                                IPRS.ValidateMember(Rec);
-                            end;
-                        end else begin
-                            // Confirm user is aware of charges
-                            if Confirm('Do you wish to proceed with the IPRS verification of this member? Standard charges apply') then begin
-                                IPRS.ValidateMember(Rec);
-                            end;
-                        end;
-                    end;
-                }
-            }
+            //         trigger OnAction()
+            //         var
+            //             IPRS: Codeunit "IPRS Integration";
+            //         begin
+            //             if Rec."IPRS Verified" then begin
+            //                 // Ask user to confirm re-verification
+            //                 // Confirm user is aware of charges
+            //                 if Confirm('This member is already verified with IPRS. Do you wish to proceed with the IPRS verification of this member again? Standard charges apply') then begin
+            //                     IPRS.ValidateMember(Rec);
+            //                 end;
+            //             end else begin
+            //                 // Confirm user is aware of charges
+            //                 if Confirm('Do you wish to proceed with the IPRS verification of this member? Standard charges apply') then begin
+            //                     IPRS.ValidateMember(Rec);
+            //                 end;
+            //             end;
+            //         end;
+            //     }
+            // }
         }
     }
 

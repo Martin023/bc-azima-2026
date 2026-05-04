@@ -144,21 +144,45 @@ Codeunit 52185455 "Registration Process"
             end;
         END;
 
-        if MemberApplication."Secondary Identification" <> '' then begin
-            Members.Reset;
-            Members.SetRange("Primary Identification Type", MemberApplication."Secondary Identification Type");
-            Members.SetRange("Primary Identification", MemberApplication."Secondary Identification");
-            Members.SetLoadFields("No.");
-            if not Members.FindFirst then begin
+                if MemberApplication."Secondary Identification" <> '' then begin
+            if MemberApplication."Type of Application" <> MemberApplication."Type of Application"::Readmission then begin
                 Members.Reset;
-                Members.SetRange("Secondary Identification Type", MemberApplication."Secondary Identification Type");
-                Members.SetRange("Secondary Identification", MemberApplication."Secondary Identification");
+                Members.SetRange("Primary Identification Type", MemberApplication."Secondary Identification Type");
+                Members.SetRange("Primary Identification", MemberApplication."Secondary Identification");
                 Members.SetLoadFields("No.");
-                if Members.FindFirst then begin
+                if not Members.FindFirst then begin
+                    Members.Reset;
+                    Members.SetRange("Secondary Identification Type", MemberApplication."Secondary Identification Type");
+                    Members.SetRange("Secondary Identification", MemberApplication."Secondary Identification");
+                    Members.SetLoadFields("No.");
+                    if Members.FindFirst then begin
+                        exit;
+                    end;
+                end else begin
                     exit;
                 end;
-            end else begin
-                exit;
+            end
+            else begin
+                if MemberApplication."Type of Application" = MemberApplication."Type of Application"::Readmission then begin
+                    Members.Reset;
+                    Members.Setfilter("No.", '<>%1', MemberApplication."Principle Member");
+                    Members.SetRange("Primary Identification Type", MemberApplication."Secondary Identification Type");
+                    Members.SetRange("Primary Identification", MemberApplication."Secondary Identification");
+                    Members.SetLoadFields("No.");
+                    if not Members.FindFirst then begin
+                        Members.Reset;
+                        Members.Setfilter("No.", '<>%1', MemberApplication."Principle Member");
+                        Members.SetRange("Secondary Identification Type", MemberApplication."Secondary Identification Type");
+                        Members.SetRange("Secondary Identification", MemberApplication."Secondary Identification");
+                        Members.SetLoadFields("No.");
+                        if Members.FindFirst then begin
+                            exit;
+                        end
+                    end
+                    else begin
+                        exit;
+                    end;
+                end;
             end;
         end;
 
@@ -565,6 +589,12 @@ Codeunit 52185455 "Registration Process"
                     SavingsAcc.Modify();
                 until SavingsAcc.Next() = 0;
             end;
+            SavAcc.Reset();
+            SavAcc.SetRange("Member No.",MemberApplication."Principle Member");
+            SavAcc.SetRange("Product Category",SavAcc."Product Category"::"FOSA Account");
+            SavAcc.SetRange("Loan Disbursement Account",true);
+            IF SavAcc.FindFirst then
+                FOSAACC := SavAcc."No.";
         end;
 
         if Cust."Account Type" = Cust."Account Type"::"Single Member Account" then begin

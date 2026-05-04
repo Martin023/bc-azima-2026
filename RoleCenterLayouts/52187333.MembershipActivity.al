@@ -63,6 +63,50 @@ page 52187333 "Membership Activity cue"
 
                         end;
                     }
+                    field("Dormant Members"; DormantMembers)
+                    {
+
+                        ApplicationArea = Basic, Suite;
+                        DecimalPlaces = 0 : 0;
+                        Style = Favorable;
+                        trigger OnDrillDown()
+                        var
+                            MemberRec: Record Members;
+                        begin
+                            MemberRec.SetRange(Status, MemberRec.status::Dormant);
+                            PAGE.Run(PAGE::"Member List", MemberRec);
+                        end;
+                    }
+
+                    field("Withdrawn Members"; WithdrawnMembers)
+                    {
+
+                        ApplicationArea = Basic, Suite;
+                        DecimalPlaces = 0 : 0;
+                        Style = Favorable;
+                        trigger OnDrillDown()
+                        var
+                            MemberRec: Record Members;
+                        begin
+                            MemberRec.SetRange(Subflag, MemberRec.Subflag::Withdrawal);
+                            PAGE.Run(PAGE::"Member List", MemberRec);
+                        end;
+                    }
+
+                    field("Deceased Members"; DeceasedMembers)
+                    {
+                        ApplicationArea = Basic, Suite;
+                        DecimalPlaces = 0 : 0;
+                        Style = Favorable;
+                        trigger OnDrillDown()
+                        var
+                            MemberRec: Record Members;
+                        begin
+                            MemberRec.SetRange(Status, MemberRec.status::Deceased);
+                            PAGE.Run(PAGE::"Member List", MemberRec);
+                        end;
+                    }
+
 
                 }
             }
@@ -159,8 +203,24 @@ page 52187333 "Membership Activity cue"
     end;
 
     trigger OnAfterGetRecord()
+    var
+        MemberRec: Record Members;
     begin
         // CalculateCues();
+        MemberRec.Reset();
+        MemberRec.SetCurrentKey(Status);
+        MemberRec.SetRange(Status, MemberRec.Status::Dormant);
+        DormantMembers := MemberRec.Count();
+
+        MemberRec.Reset();
+        MemberRec.SetCurrentKey(Status);
+        MemberRec.SetRange(Status, MemberRec.Status::Deceased);
+        DeceasedMembers := MemberRec.Count();
+
+        MemberRec.Reset();
+        MemberRec.SetCurrentKey(Subflag);
+        MemberRec.SetRange(Subflag, MemberRec.Subflag::Withdrawal);
+        WithdrawnMembers := MemberRec.Count();
     end;
 
     // local procedure CalculateCues()
@@ -169,4 +229,9 @@ page 52187333 "Membership Activity cue"
     // begin
     //     //rec."Members Created Today" := CustomCuesCodeunit.calculatememberscreatedtoday();
     // end;
+        var
+        DormantMembers: Decimal;
+        DeceasedMembers: Decimal;
+        WithdrawnMembers: Decimal;
+
 }
