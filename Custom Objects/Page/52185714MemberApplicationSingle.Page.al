@@ -42,6 +42,7 @@ page 52185714 "Member Application Single"
             // }
             group(IPRS)
             {
+                visible = false;
                 Caption = 'IPRS Information';
                 field("IPRS ID Type"; Rec."IPRS ID Type")
                 {
@@ -872,7 +873,7 @@ page 52185714 "Member Application Single"
             {
                 ApplicationArea = basic;
                 Caption = 'Attachments';
-                SubPageLink = "Table ID" = const(52185700),
+                SubPageLink = "Table ID" = const(52185691),
                 "No." = field("No.");
 
             }
@@ -1198,11 +1199,11 @@ page 52185714 "Member Application Single"
                         if Rec."Type of Application" = Rec."Type of Application"::Readmission then
                             Members.Get(Rec."Principle Member");
 
-                        if (Rec."IPRS Verified" = false) and
-                        (Rec."Primary Identification Type" = Rec."Primary Identification Type"::"ID Number") then begin
-                            // Error('Primary Identification number must be IPRS verified before sending this membership application for approval');
-                            Message('Take note that this application ID Number has NOT been verified through IPRS');
-                        end;
+                        // if (Rec."IPRS Verified" = false) and
+                        // (Rec."Primary Identification Type" = Rec."Primary Identification Type"::"ID Number") then begin
+                        //     // Error('Primary Identification number must be IPRS verified before sending this membership application for approval');
+                        //     Message('Take note that this application ID Number has NOT been verified through IPRS');
+                        // end;
 
 
                         VarVariant := Rec;
@@ -1567,6 +1568,7 @@ page 52185714 "Member Application Single"
             // DO NOT Comment out this!
             group("EDMS Integration")
             {
+                visible = false;
                 //     // action("Import")
                 //     // {
                 //     //     ApplicationArea = All;
@@ -1620,6 +1622,7 @@ page 52185714 "Member Application Single"
 
             group("IPRS Integration")
             {
+                visible = false;
                 action("IPRS File List")
                 {
                     Caption = 'IPRS Verification';

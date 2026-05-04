@@ -11,7 +11,7 @@ codeunit 52185426 "Document Attachment Events Sub"
 
     end;
 
-    [EventSubscriber(ObjectType::Page, Page::"Doc. Attachment List Factbox", OnBeforeDocumentAttachmentDetailsRunModal, '', false, false)]
+    [EventSubscriber(ObjectType::Page, Page::"Document Attachment Factbox", 'OnBeforeDrillDown', '', false, false)]
     local procedure SepcifyCustomTableOnBeforeDrillDown(DocumentAttachment: Record "Document Attachment"; var RecRef: RecordRef)
     var
         SuretyTable: Record "Surety Management";
@@ -22,7 +22,8 @@ codeunit 52185426 "Document Attachment Events Sub"
         SecurityPerfection: Record "Security Perfection";
         AccidentsTable: Record "HR OSAccident";
         SecuritiesCollectionRegister: Record "Securities Collection Register";
-
+        MemberApplication: Record "Member Application";
+        MemberClosure: Record "Membership closure";
 
     begin
         case
@@ -79,6 +80,18 @@ codeunit 52185426 "Document Attachment Events Sub"
                     if SecuritiesCollectionRegister.Get(DocumentAttachment."No.") then
                         RecRef.GetTable(SecuritiesCollectionRegister);
                 end;
+            Database::"Member Application":
+                begin
+                    RecRef.Open(Database::"Member Application");
+                    if MemberApplication.Get(DocumentAttachment."No.") then
+                        RecRef.GetTable(MemberApplication);
+                end;
+            Database::"Membership Closure":
+                begin
+                    RecRef.Open(Database::"Membership Closure");
+                    if MemberClosure.Get(DocumentAttachment."No.") then
+                        RecRef.GetTable(MemberClosure);
+                end;    
         end;
 
     end;
@@ -153,6 +166,20 @@ codeunit 52185426 "Document Attachment Events Sub"
                     DocumentAttachment.SetRange("No.", RecNo);
                     DocumentAttachment."Document Type" := DocumentAttachment."Document Type"::Securities;
                 END;
+            Database::"Member Application":
+                begin
+                    Fref := RecRef.Field(1);
+                    RecNo := Fref.Value;
+                    DocumentAttachment.SetRange("No.", RecNo);
+                    DocumentAttachment."Document Type" := DocumentAttachment."Document Type"::Member;
+                end;
+            Database::"Membership Closure":
+                begin
+                    Fref := RecRef.Field(1);
+                    RecNo := Fref.Value;
+                    DocumentAttachment.SetRange("No.", RecNo);
+                    DocumentAttachment."Document Type" := DocumentAttachment."Document Type"::"Member Closure";
+                end;
         end;
     end;
 
@@ -204,6 +231,16 @@ codeunit 52185426 "Document Attachment Events Sub"
             DocumentAttachment.Validate("No.", RecNo);
         end;
         if RecRef.Number = Database::"Securities Collection Register" then begin
+            Fref := RecRef.Field(1);
+            RecNo := Fref.Value;
+            DocumentAttachment.Validate("No.", RecNo);
+        end;
+        if RecRef.Number = Database::"Member Application" then begin
+            Fref := RecRef.Field(1);
+            RecNo := Fref.Value;
+            DocumentAttachment.Validate("No.", RecNo);
+        end;
+        if RecRef.Number = Database::"Membership Closure" then begin
             Fref := RecRef.Field(1);
             RecNo := Fref.Value;
             DocumentAttachment.Validate("No.", RecNo);
