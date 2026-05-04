@@ -15,7 +15,6 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <!-- HEADER AND DATE -->
           <Textbox Name="CompanyNameTextBox">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -25,7 +24,6 @@
                   <TextRun>
                     <Value>=First(Fields!CompanyName.Value, "DataSet_Result")</Value>
                     <Style>
-                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -37,7 +35,8 @@
                   <TextRun>
                     <Value>=First(Fields!CompanyAddress.Value, "DataSet_Result")</Value>
                     <Style>
-                      <FontSize>10pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -47,583 +46,223 @@
             <Top>0.5cm</Top>
             <Left>0.5cm</Left>
             <Height>1.2cm</Height>
-            <Width>19.0cm</Width>
+            <Width>19cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
             </Style>
           </Textbox>
-          <Textbox Name="PrintDateTextBox">
+          <Textbox Name="AmountInWordsHeader">
             <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Print Date     </Value>
+                    <Value>Amount In Words (Receipts):</Value>
                     <Style>
-                      <FontSize>10pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Format(First(Fields!PrintDateTime.Value, "DataSet_Result"), "dd/MM/yyyy")</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>2.0cm</Top>
+            <Top>12cm</Top>
             <Left>0.5cm</Left>
             <Height>0.6cm</Height>
-            <Width>6.5cm</Width>
+            <Width>5.5cm</Width>
             <ZIndex>1</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-            </Style>
+            <Style />
           </Textbox>
-          <Textbox Name="ReportTitle">
+          <Textbox Name="BalancesValuesRight">
             <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>TELLERS CASH REPORT AS AT </Value>
+                    <Value>=First(Fields!TreasuryOpeningBalanceAmt.Value, "DataSet_Result")</Value>
                     <Style>
-                      <FontSize>11pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=First(Fields!ReportDateParam.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>11pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <Format>#,0.00</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Left</TextAlign>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!TreasuryClosingBalanceAmt.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>2.0cm</Top>
-            <Left>7.0cm</Left>
-            <Height>0.6cm</Height>
-            <Width>12.5cm</Width>
+            <Top>10.5cm</Top>
+            <Left>15.5cm</Left>
+            <Height>1.2cm</Height>
+            <Width>3.5cm</Width>
             <ZIndex>2</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
+            <Style />
           </Textbox>
-          <!-- RECEIPTS SUMMARY HEADERS (Left Side) -->
-          <Textbox Name="ReceiptsHeaderLeft">
+          <Textbox Name="BalancesTextRight">
             <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Total Receipts made (summary)</Value>
+                    <Value>Treasury Opening Balance</Value>
                     <Style>
-                      <FontSize>10pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Treasury Closing Balance</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>2.8cm</Top>
-            <Left>0.5cm</Left>
-            <Height>0.6cm</Height>
-            <Width>8.5cm</Width>
+            <Top>10.5cm</Top>
+            <Left>10cm</Left>
+            <Height>1.2cm</Height>
+            <Width>5.5cm</Width>
             <ZIndex>3</ZIndex>
-            <Style>
-              <BottomBorder>
-                <Style>Solid</Style>
-              </BottomBorder>
-              <PaddingLeft>2pt</PaddingLeft>
-            </Style>
+            <Style />
           </Textbox>
-          <Textbox Name="DetailsHeaderLeft">
+          <Textbox Name="BalancesValuesLeft">
             <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Details</Value>
+                    <Value>=First(Fields!TellersOpeningBalancesAmt.Value, "DataSet_Result")</Value>
                     <Style>
-                      <FontSize>10pt</FontSize>
-                      <TextDecoration>Underline</TextDecoration>
+                      <FontSize>9pt</FontSize>
+                      <Format>#,0.00</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!TellersClosingBalancesAmt.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>3.5cm</Top>
-            <Left>0.5cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.5cm</Width>
+            <Top>10.5cm</Top>
+            <Left>6cm</Left>
+            <Height>1.2cm</Height>
+            <Width>3cm</Width>
             <ZIndex>4</ZIndex>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-            </Style>
+            <Style />
           </Textbox>
-          <Textbox Name="AmountHeaderLeft">
+          <Textbox Name="BalancesTextLeft">
             <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Amount</Value>
+                    <Value>Tellers' Opening Balances</Value>
                     <Style>
-                      <FontSize>10pt</FontSize>
-                      <TextDecoration>Underline</TextDecoration>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Tellers' Closing Balances</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>3.5cm</Top>
-            <Left>5.0cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.0cm</Width>
-            <ZIndex>5</ZIndex>
-            <Style>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
-          <!-- RECEIPTS VALUES -->
-          <Textbox Name="ReceiptDetailsText">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Cash Deposit</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Journal Voucher</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>MPesa Cash Deposit</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Receive From Treasury</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Special Receipt</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value xml:space="preserve"> </Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-              </Paragraph>
-            </Paragraphs>
-            <Top>4.2cm</Top>
+            <Top>10.5cm</Top>
             <Left>0.5cm</Left>
-            <Height>3.2cm</Height>
-            <Width>4.5cm</Width>
+            <Height>1.2cm</Height>
+            <Width>5.5cm</Width>
+            <ZIndex>5</ZIndex>
+            <Style />
+          </Textbox>
+          <Textbox Name="CoinageTotalLine">
+            <CanGrow>true</CanGrow>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Sum(Fields!DenomAmount.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>9.3cm</Top>
+            <Left>11.5cm</Left>
+            <Height>0.6cm</Height>
+            <Width>4cm</Width>
             <ZIndex>6</ZIndex>
-          </Textbox>
-          <Textbox Name="ReceiptAmountsText">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!TotalCashDeposit.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                      <Format>#,0.00</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!TotalJournalVoucherReceipts.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                      <Format>#,0.00</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!TotalMPesaCashDeposit.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                      <Format>#,0.00</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!TotalReceiveFromTreasury.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                      <Format>#,0.00</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!TotalSpecialReceipt.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                      <Format>#,0.00</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!GrandTotalReceipts.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                      <Format>#,0.00</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <Top>4.2cm</Top>
-            <Left>5.0cm</Left>
-            <Height>3.2cm</Height>
-            <Width>4.0cm</Width>
-            <ZIndex>7</ZIndex>
             <Style>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
-          <!-- PAYMENTS SUMMARY HEADERS (Right Side) -->
-          <Textbox Name="PaymentsHeaderRight">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Total Payments made (summary)</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>2.8cm</Top>
-            <Left>10.0cm</Left>
-            <Height>0.6cm</Height>
-            <Width>8.5cm</Width>
-            <ZIndex>8</ZIndex>
-            <Style>
-              <BottomBorder>
+              <TopBorder>
                 <Style>Solid</Style>
-              </BottomBorder>
-              <PaddingLeft>2pt</PaddingLeft>
+              </TopBorder>
             </Style>
           </Textbox>
-          <Textbox Name="DetailsHeaderRight">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Details</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                      <TextDecoration>Underline</TextDecoration>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>3.5cm</Top>
-            <Left>10.0cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.5cm</Width>
-            <ZIndex>9</ZIndex>
-            <Style>
-              <PaddingLeft>2pt</PaddingLeft>
-            </Style>
-          </Textbox>
-          <Textbox Name="AmountHeaderRight">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Amount</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                      <TextDecoration>Underline</TextDecoration>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <Top>3.5cm</Top>
-            <Left>14.5cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.0cm</Width>
-            <ZIndex>10</ZIndex>
-            <Style>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
-          <!-- PAYMENTS VALUES -->
-          <Textbox Name="PaymentDetailsText">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Cash Withdrawal</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>End Of Day</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Journal Voucher</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>MPesa Cash Withdraw</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value xml:space="preserve"> </Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-              </Paragraph>
-            </Paragraphs>
-            <Top>4.2cm</Top>
-            <Left>10.0cm</Left>
-            <Height>3.2cm</Height>
-            <Width>4.5cm</Width>
-            <ZIndex>11</ZIndex>
-          </Textbox>
-          <Textbox Name="PaymentAmountsText">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!TotalCashWithdrawal.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                      <Format>#,0.00</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!TotalEndOfDay.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                      <Format>#,0.00</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!TotalJournalVoucherPayments.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                      <Format>#,0.00</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!TotalMPesaCashWithdrawal.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                      <Format>#,0.00</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!GrandTotalPayments.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                      <Format>#,0.00</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <Top>4.2cm</Top>
-            <Left>14.5cm</Left>
-            <Height>3.2cm</Height>
-            <Width>4.0cm</Width>
-            <ZIndex>12</ZIndex>
-            <Style>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
-          <!-- DENOMINATIONS TABLIX -->
           <Tablix Name="DenominationsTablix">
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>3.0cm</Width>
+                  <Width>3cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>4.0cm</Width>
+                  <Width>4cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>4.0cm</Width>
+                  <Width>4cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>4.0cm</Width>
+                  <Width>4cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -639,7 +278,7 @@
                                 <TextRun>
                                   <Value>Record Number</Value>
                                   <Style>
-                                    <FontSize>10pt</FontSize>
+                                    <FontSize>9pt</FontSize>
                                     <TextDecoration>Underline</TextDecoration>
                                   </Style>
                                 </TextRun>
@@ -649,6 +288,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
+                          <Style />
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -661,7 +301,7 @@
                                 <TextRun>
                                   <Value>Denomination</Value>
                                   <Style>
-                                    <FontSize>10pt</FontSize>
+                                    <FontSize>9pt</FontSize>
                                     <TextDecoration>Underline</TextDecoration>
                                   </Style>
                                 </TextRun>
@@ -671,6 +311,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
+                          <Style />
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -683,7 +324,7 @@
                                 <TextRun>
                                   <Value>Denomination Count</Value>
                                   <Style>
-                                    <FontSize>10pt</FontSize>
+                                    <FontSize>9pt</FontSize>
                                     <TextDecoration>Underline</TextDecoration>
                                   </Style>
                                 </TextRun>
@@ -693,6 +334,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
+                          <Style />
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -705,7 +347,7 @@
                                 <TextRun>
                                   <Value>Coinage Value</Value>
                                   <Style>
-                                    <FontSize>10pt</FontSize>
+                                    <FontSize>9pt</FontSize>
                                     <TextDecoration>Underline</TextDecoration>
                                   </Style>
                                 </TextRun>
@@ -715,6 +357,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
+                          <Style />
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -732,7 +375,7 @@
                                 <TextRun>
                                   <Value>=Fields!DenomRecordNumber.Value</Value>
                                   <Style>
-                                    <FontSize>10pt</FontSize>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -741,6 +384,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
+                          <Style />
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -753,7 +397,7 @@
                                 <TextRun>
                                   <Value>=Fields!DenomCode.Value</Value>
                                   <Style>
-                                    <FontSize>10pt</FontSize>
+                                    <FontSize>9pt</FontSize>
                                     <Format>#,0.00</Format>
                                   </Style>
                                 </TextRun>
@@ -763,6 +407,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
+                          <Style />
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -775,8 +420,7 @@
                                 <TextRun>
                                   <Value>=Fields!DenomCount.Value</Value>
                                   <Style>
-                                    <FontSize>10pt</FontSize>
-                                    <Format>#,0</Format>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -785,19 +429,20 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
+                          <Style />
                         </Textbox>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="DenomTotalAmount">
+                        <Textbox Name="DenomAmount">
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!DenomTotalAmount.Value</Value>
+                                  <Value>=Fields!DenomAmount.Value</Value>
                                   <Style>
-                                    <FontSize>10pt</FontSize>
+                                    <FontSize>9pt</FontSize>
                                     <Format>#,0.00</Format>
                                   </Style>
                                 </TextRun>
@@ -807,6 +452,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
+                          <Style />
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -832,11 +478,6 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <Top>8.0cm</Top>
-            <Left>0.5cm</Left>
-            <Height>1.1cm</Height>
-            <Width>15.0cm</Width>
-            <ZIndex>13</ZIndex>
             <DataSetName>DataSet_Result</DataSetName>
             <Filters>
               <Filter>
@@ -847,80 +488,22 @@
                 </FilterValues>
               </Filter>
             </Filters>
-          </Tablix>
-          <!-- COINAGE VALUE TOTAL LINE -->
-          <Textbox Name="CoinageTotalLine">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=Sum(Fields!DenomTotalAmount.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                      <Format>#,0.00</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <Top>9.3cm</Top>
-            <Left>11.5cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.0cm</Width>
-            <ZIndex>14</ZIndex>
-            <Style>
-              <TopBorder>
-                <Style>Solid</Style>
-              </TopBorder>
-            </Style>
-          </Textbox>
-          <!-- BALANCES -->
-          <Textbox Name="BalancesTextLeft">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Tellers' Opening Balances</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Tellers' Closing Balances</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-              </Paragraph>
-            </Paragraphs>
-            <Top>10.5cm</Top>
+            <Top>8cm</Top>
             <Left>0.5cm</Left>
-            <Height>1.2cm</Height>
-            <Width>5.5cm</Width>
-            <ZIndex>15</ZIndex>
-          </Textbox>
-          <Textbox Name="BalancesValuesLeft">
+            <Height>1.1cm</Height>
+            <Width>15cm</Width>
+            <ZIndex>7</ZIndex>
+            <Style />
+          </Tablix>
+          <Textbox Name="PaymentAmountsText">
             <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!TellersOpeningBalances.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CashWithdrawalAmt.Value, "DataSet_Result")</Value>
                     <Style>
-                      <FontSize>10pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <Format>#,0.00</Format>
                     </Style>
                   </TextRun>
@@ -932,65 +515,9 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!TellersClosingBalances.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!EndOfDayAmt.Value, "DataSet_Result")</Value>
                     <Style>
-                      <FontSize>10pt</FontSize>
-                      <Format>#,0.00</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <Top>10.5cm</Top>
-            <Left>6.0cm</Left>
-            <Height>1.2cm</Height>
-            <Width>3.0cm</Width>
-            <ZIndex>16</ZIndex>
-          </Textbox>
-          <Textbox Name="BalancesTextRight">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Treasury Opening Balance</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Treasury Closing Balance</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-              </Paragraph>
-            </Paragraphs>
-            <Top>10.5cm</Top>
-            <Left>10.0cm</Left>
-            <Height>1.2cm</Height>
-            <Width>5.5cm</Width>
-            <ZIndex>17</ZIndex>
-          </Textbox>
-          <Textbox Name="BalancesValuesRight">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!TreasuryOpeningBalance.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <Format>#,0.00</Format>
                     </Style>
                   </TextRun>
@@ -1002,9 +529,38 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!TreasuryClosingBalance.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!JournalVoucherPaymentsAmt.Value, "DataSet_Result")</Value>
                     <Style>
-                      <FontSize>10pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!MPesaCashWithdrawAmt.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!GrandTotalPaymentsAmt.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                       <Format>#,0.00</Format>
                     </Style>
                   </TextRun>
@@ -1014,29 +570,55 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>10.5cm</Top>
-            <Left>15.5cm</Left>
-            <Height>1.2cm</Height>
-            <Width>3.5cm</Width>
-            <ZIndex>18</ZIndex>
+            <Top>4.2cm</Top>
+            <Left>14.5cm</Left>
+            <Height>3.2cm</Height>
+            <Width>4cm</Width>
+            <ZIndex>8</ZIndex>
+            <Style />
           </Textbox>
-          <!-- SIGNATURES -->
-          <Textbox Name="SignaturesBox">
+          <Textbox Name="PaymentDetailsText">
             <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Report produced by:    </Value>
+                    <Value>Cash Withdrawal</Value>
                     <Style>
-                      <FontSize>10pt</FontSize>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!ReportProducedBy.Value, "DataSet_Result")</Value>
+                    <Value>End Of Day</Value>
                     <Style>
-                      <FontSize>10pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Journal Voucher</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>MPesa Cash Withdraw</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1047,157 +629,608 @@
                   <TextRun>
                     <Value xml:space="preserve"> </Value>
                     <Style>
-                      <FontSize>10pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Report Checked by:     ........................................................</Value>
-                    <Style>
-                      <FontSize>10pt</FontSize>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>12.5cm</Top>
-            <Left>10.0cm</Left>
-            <Height>1.5cm</Height>
-            <Width>9.0cm</Width>
+            <Top>4.2cm</Top>
+            <Left>10cm</Left>
+            <Height>3.2cm</Height>
+            <Width>4.5cm</Width>
+            <ZIndex>9</ZIndex>
+            <Style />
+          </Textbox>
+          <Textbox Name="AmountHeaderRight">
+            <CanGrow>true</CanGrow>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Amount</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>3.5cm</Top>
+            <Left>14.5cm</Left>
+            <Height>0.6cm</Height>
+            <Width>4cm</Width>
+            <ZIndex>10</ZIndex>
+            <Style />
+          </Textbox>
+          <Textbox Name="DetailsHeaderRight">
+            <CanGrow>true</CanGrow>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Details</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>3.5cm</Top>
+            <Left>10cm</Left>
+            <Height>0.6cm</Height>
+            <Width>4.5cm</Width>
+            <ZIndex>11</ZIndex>
+            <Style />
+          </Textbox>
+          <Textbox Name="PaymentsHeaderRight">
+            <CanGrow>true</CanGrow>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Total Payments made (summary)</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>2.8cm</Top>
+            <Left>10cm</Left>
+            <Height>0.6cm</Height>
+            <Width>8.5cm</Width>
+            <ZIndex>12</ZIndex>
+            <Style>
+              <BottomBorder>
+                <Style>Solid</Style>
+              </BottomBorder>
+            </Style>
+          </Textbox>
+          <Textbox Name="ReceiptAmountsText">
+            <CanGrow>true</CanGrow>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!CashDepositAmt.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!JournalVoucherReceiptsAmt.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!MPesaCashDepositAmt.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!ReceiveFromTreasuryAmt.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!SpecialReceiptAmt.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!GrandTotalReceiptsAmt.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>4.2cm</Top>
+            <Left>5cm</Left>
+            <Height>3.2cm</Height>
+            <Width>4cm</Width>
+            <ZIndex>13</ZIndex>
+            <Style />
+          </Textbox>
+          <Textbox Name="ReceiptDetailsText">
+            <CanGrow>true</CanGrow>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Cash Deposit</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Journal Voucher</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>MPesa Cash Deposit</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Receive From Treasury</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Special Receipt</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>4.2cm</Top>
+            <Left>0.5cm</Left>
+            <Height>3.2cm</Height>
+            <Width>4.5cm</Width>
+            <ZIndex>14</ZIndex>
+            <Style />
+          </Textbox>
+          <Textbox Name="AmountHeaderLeft">
+            <CanGrow>true</CanGrow>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Amount</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>3.5cm</Top>
+            <Left>5cm</Left>
+            <Height>0.6cm</Height>
+            <Width>4cm</Width>
+            <ZIndex>15</ZIndex>
+            <Style />
+          </Textbox>
+          <Textbox Name="DetailsHeaderLeft">
+            <CanGrow>true</CanGrow>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Details</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <TextDecoration>Underline</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>3.5cm</Top>
+            <Left>0.5cm</Left>
+            <Height>0.6cm</Height>
+            <Width>4.5cm</Width>
+            <ZIndex>16</ZIndex>
+            <Style />
+          </Textbox>
+          <Textbox Name="ReceiptsHeaderLeft">
+            <CanGrow>true</CanGrow>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Total Receipts made (summary)</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>2.8cm</Top>
+            <Left>0.5cm</Left>
+            <Height>0.6cm</Height>
+            <Width>8.5cm</Width>
+            <ZIndex>17</ZIndex>
+            <Style>
+              <BottomBorder>
+                <Style>Solid</Style>
+              </BottomBorder>
+            </Style>
+          </Textbox>
+          <Textbox Name="ReportTitle">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>TELLERS CASH REPORT AS AT </Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!DateFilterTxt.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>2cm</Top>
+            <Left>7cm</Left>
+            <Height>0.6cm</Height>
+            <Width>12.5cm</Width>
+            <ZIndex>18</ZIndex>
+            <Style />
+          </Textbox>
+          <Textbox Name="PrintDateTextBox">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Print Date     </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!PrintingDate.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>2cm</Top>
+            <Left>0.5cm</Left>
+            <Height>0.6cm</Height>
+            <Width>6.5cm</Width>
             <ZIndex>19</ZIndex>
+            <Style />
+          </Textbox>
+          <Textbox Name="AmountInWordsValue">
+            <CanGrow>true</CanGrow>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!AmountInWords.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>12cm</Top>
+            <Left>6cm</Left>
+            <Height>1cm</Height>
+            <Width>13cm</Width>
+            <ZIndex>20</ZIndex>
+            <Style />
+          </Textbox>
+          <Textbox Name="SignaturesBox">
+            <CanGrow>true</CanGrow>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Report produced by:    </Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!PrintedBy_Header.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value xml:space="preserve"> </Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Report Checked by:     ........................................................</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>13.5cm</Top>
+            <Left>10cm</Left>
+            <Height>1.5cm</Height>
+            <Width>9cm</Width>
+            <ZIndex>21</ZIndex>
+            <Style />
           </Textbox>
         </ReportItems>
-        <Height>14.5cm</Height>
+        <Height>15.5cm</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>20.0cm</Width>
+      <Width>19.5cm</Width>
       <Page>
         <PageHeight>29.7cm</PageHeight>
-        <PageWidth>21.0cm</PageWidth>
+        <PageWidth>21cm</PageWidth>
         <LeftMargin>0.5cm</LeftMargin>
         <RightMargin>0.5cm</RightMargin>
         <TopMargin>0.5cm</TopMargin>
         <BottomMargin>0.5cm</BottomMargin>
-        <ColumnSpacing>1.27cm</ColumnSpacing>
         <Style />
       </Page>
     </ReportSection>
   </ReportSections>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>561ab16a-2d0d-4730-968a-24af48e5771c</rd:ReportID>
   <DataSets>
     <DataSet Name="DataSet_Result">
       <Fields>
         <Field Name="CompanyName">
           <DataField>CompanyName</DataField>
         </Field>
+        <Field Name="BuldingName">
+          <DataField>BuldingName</DataField>
+        </Field>
         <Field Name="CompanyAddress">
           <DataField>CompanyAddress</DataField>
         </Field>
-        <Field Name="ReportDateParam">
-          <DataField>ReportDateParam</DataField>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
         </Field>
-        <Field Name="PrintDateTime">
-          <DataField>PrintDateTime</DataField>
+        <Field Name="CompanyEmail">
+          <DataField>CompanyEmail</DataField>
         </Field>
-        <Field Name="TotalCashDeposit">
-          <DataField>TotalCashDeposit</DataField>
+        <Field Name="PrintingDate">
+          <DataField>PrintingDate</DataField>
         </Field>
-        <Field Name="TotalCashDepositFormat">
-          <DataField>TotalCashDepositFormat</DataField>
+        <Field Name="PrintingTime">
+          <DataField>PrintingTime</DataField>
         </Field>
-        <Field Name="TotalJournalVoucherReceipts">
-          <DataField>TotalJournalVoucherReceipts</DataField>
+        <Field Name="PrintedBy_Header">
+          <DataField>PrintedBy_Header</DataField>
         </Field>
-        <Field Name="TotalJournalVoucherReceiptsFormat">
-          <DataField>TotalJournalVoucherReceiptsFormat</DataField>
+        <Field Name="DateFilterTxt">
+          <DataField>DateFilterTxt</DataField>
         </Field>
-        <Field Name="TotalMPesaCashDeposit">
-          <DataField>TotalMPesaCashDeposit</DataField>
+        <Field Name="CashDepositAmt">
+          <DataField>CashDepositAmt</DataField>
         </Field>
-        <Field Name="TotalMPesaCashDepositFormat">
-          <DataField>TotalMPesaCashDepositFormat</DataField>
+        <Field Name="CashDepositAmtFormat">
+          <DataField>CashDepositAmtFormat</DataField>
         </Field>
-        <Field Name="TotalReceiveFromTreasury">
-          <DataField>TotalReceiveFromTreasury</DataField>
+        <Field Name="JournalVoucherReceiptsAmt">
+          <DataField>JournalVoucherReceiptsAmt</DataField>
         </Field>
-        <Field Name="TotalReceiveFromTreasuryFormat">
-          <DataField>TotalReceiveFromTreasuryFormat</DataField>
+        <Field Name="JournalVoucherReceiptsAmtFormat">
+          <DataField>JournalVoucherReceiptsAmtFormat</DataField>
         </Field>
-        <Field Name="TotalSpecialReceipt">
-          <DataField>TotalSpecialReceipt</DataField>
+        <Field Name="MPesaCashDepositAmt">
+          <DataField>MPesaCashDepositAmt</DataField>
         </Field>
-        <Field Name="TotalSpecialReceiptFormat">
-          <DataField>TotalSpecialReceiptFormat</DataField>
+        <Field Name="MPesaCashDepositAmtFormat">
+          <DataField>MPesaCashDepositAmtFormat</DataField>
         </Field>
-        <Field Name="GrandTotalReceipts">
-          <DataField>GrandTotalReceipts</DataField>
+        <Field Name="ReceiveFromTreasuryAmt">
+          <DataField>ReceiveFromTreasuryAmt</DataField>
         </Field>
-        <Field Name="GrandTotalReceiptsFormat">
-          <DataField>GrandTotalReceiptsFormat</DataField>
+        <Field Name="ReceiveFromTreasuryAmtFormat">
+          <DataField>ReceiveFromTreasuryAmtFormat</DataField>
         </Field>
-        <Field Name="TotalCashWithdrawal">
-          <DataField>TotalCashWithdrawal</DataField>
+        <Field Name="SpecialReceiptAmt">
+          <DataField>SpecialReceiptAmt</DataField>
         </Field>
-        <Field Name="TotalCashWithdrawalFormat">
-          <DataField>TotalCashWithdrawalFormat</DataField>
+        <Field Name="SpecialReceiptAmtFormat">
+          <DataField>SpecialReceiptAmtFormat</DataField>
         </Field>
-        <Field Name="TotalEndOfDay">
-          <DataField>TotalEndOfDay</DataField>
+        <Field Name="GrandTotalReceiptsAmt">
+          <DataField>GrandTotalReceiptsAmt</DataField>
         </Field>
-        <Field Name="TotalEndOfDayFormat">
-          <DataField>TotalEndOfDayFormat</DataField>
+        <Field Name="GrandTotalReceiptsAmtFormat">
+          <DataField>GrandTotalReceiptsAmtFormat</DataField>
         </Field>
-        <Field Name="TotalJournalVoucherPayments">
-          <DataField>TotalJournalVoucherPayments</DataField>
+        <Field Name="CashWithdrawalAmt">
+          <DataField>CashWithdrawalAmt</DataField>
         </Field>
-        <Field Name="TotalJournalVoucherPaymentsFormat">
-          <DataField>TotalJournalVoucherPaymentsFormat</DataField>
+        <Field Name="CashWithdrawalAmtFormat">
+          <DataField>CashWithdrawalAmtFormat</DataField>
         </Field>
-        <Field Name="TotalMPesaCashWithdrawal">
-          <DataField>TotalMPesaCashWithdrawal</DataField>
+        <Field Name="EndOfDayAmt">
+          <DataField>EndOfDayAmt</DataField>
         </Field>
-        <Field Name="TotalMPesaCashWithdrawalFormat">
-          <DataField>TotalMPesaCashWithdrawalFormat</DataField>
+        <Field Name="EndOfDayAmtFormat">
+          <DataField>EndOfDayAmtFormat</DataField>
         </Field>
-        <Field Name="GrandTotalPayments">
-          <DataField>GrandTotalPayments</DataField>
+        <Field Name="JournalVoucherPaymentsAmt">
+          <DataField>JournalVoucherPaymentsAmt</DataField>
         </Field>
-        <Field Name="GrandTotalPaymentsFormat">
-          <DataField>GrandTotalPaymentsFormat</DataField>
+        <Field Name="JournalVoucherPaymentsAmtFormat">
+          <DataField>JournalVoucherPaymentsAmtFormat</DataField>
         </Field>
-        <Field Name="TellersOpeningBalances">
-          <DataField>TellersOpeningBalances</DataField>
+        <Field Name="MPesaCashWithdrawAmt">
+          <DataField>MPesaCashWithdrawAmt</DataField>
         </Field>
-        <Field Name="TellersOpeningBalancesFormat">
-          <DataField>TellersOpeningBalancesFormat</DataField>
+        <Field Name="MPesaCashWithdrawAmtFormat">
+          <DataField>MPesaCashWithdrawAmtFormat</DataField>
         </Field>
-        <Field Name="TellersClosingBalances">
-          <DataField>TellersClosingBalances</DataField>
+        <Field Name="GrandTotalPaymentsAmt">
+          <DataField>GrandTotalPaymentsAmt</DataField>
         </Field>
-        <Field Name="TellersClosingBalancesFormat">
-          <DataField>TellersClosingBalancesFormat</DataField>
+        <Field Name="GrandTotalPaymentsAmtFormat">
+          <DataField>GrandTotalPaymentsAmtFormat</DataField>
         </Field>
-        <Field Name="TreasuryOpeningBalance">
-          <DataField>TreasuryOpeningBalance</DataField>
+        <Field Name="TellersOpeningBalancesAmt">
+          <DataField>TellersOpeningBalancesAmt</DataField>
         </Field>
-        <Field Name="TreasuryOpeningBalanceFormat">
-          <DataField>TreasuryOpeningBalanceFormat</DataField>
+        <Field Name="TellersOpeningBalancesAmtFormat">
+          <DataField>TellersOpeningBalancesAmtFormat</DataField>
         </Field>
-        <Field Name="TreasuryClosingBalance">
-          <DataField>TreasuryClosingBalance</DataField>
+        <Field Name="TellersClosingBalancesAmt">
+          <DataField>TellersClosingBalancesAmt</DataField>
         </Field>
-        <Field Name="TreasuryClosingBalanceFormat">
-          <DataField>TreasuryClosingBalanceFormat</DataField>
+        <Field Name="TellersClosingBalancesAmtFormat">
+          <DataField>TellersClosingBalancesAmtFormat</DataField>
         </Field>
-        <Field Name="ReportProducedBy">
-          <DataField>ReportProducedBy</DataField>
+        <Field Name="TreasuryOpeningBalanceAmt">
+          <DataField>TreasuryOpeningBalanceAmt</DataField>
+        </Field>
+        <Field Name="TreasuryOpeningBalanceAmtFormat">
+          <DataField>TreasuryOpeningBalanceAmtFormat</DataField>
+        </Field>
+        <Field Name="TreasuryClosingBalanceAmt">
+          <DataField>TreasuryClosingBalanceAmt</DataField>
+        </Field>
+        <Field Name="TreasuryClosingBalanceAmtFormat">
+          <DataField>TreasuryClosingBalanceAmtFormat</DataField>
         </Field>
         <Field Name="AmountInWords">
           <DataField>AmountInWords</DataField>
@@ -1211,11 +1244,11 @@
         <Field Name="DenomCount">
           <DataField>DenomCount</DataField>
         </Field>
-        <Field Name="DenomTotalAmount">
-          <DataField>DenomTotalAmount</DataField>
+        <Field Name="DenomAmount">
+          <DataField>DenomAmount</DataField>
         </Field>
-        <Field Name="DenomTotalAmountFormat">
-          <DataField>DenomTotalAmountFormat</DataField>
+        <Field Name="DenomAmountFormat">
+          <DataField>DenomAmountFormat</DataField>
         </Field>
       </Fields>
       <Query>

@@ -289,6 +289,24 @@ page 52185804 "Treasury Cashier Transactions"
                     SaccoT.PostTCReceive(Rec);
                 end;
             }
+            action("End of Day Reconciliation")
+            {
+                ApplicationArea = Basic;
+                Image = PrintReport;
+                Promoted = true;
+                PromotedCategory = "Report";
+                Enabled = Rec."Transaction Type" = Rec."Transaction Type"::"End of Day Return to Treasury";
+                Caption = 'End of Day Reconciliation Report';
+
+                trigger OnAction()
+                var
+                    TreasuryTrans: Record "Treasury Cashier Transactions";
+                begin
+                    TreasuryTrans.Reset();
+                    TreasuryTrans.SetRange(No, Rec.No);
+                    Report.Run(Report::"End of Day Reconciliation", true, false, TreasuryTrans);
+                end;
+            }
             action("Till Balance")
             {
                 ApplicationArea = Basic;

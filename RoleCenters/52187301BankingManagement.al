@@ -1728,6 +1728,22 @@ page 52187301 "Banking Management Role Center"
                         Caption = 'Anti-Money Laundering Report';
                         RunObject = report "Anti-Money Laundering Report";
                     }
+                    action("All Tellers Cash Report")
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'All Tellers Cash Report';
+                        Image = PrintReport;
+                        // Promoted = true;
+                        // PromotedCategory = "Report";
+                        ToolTip = 'View the consolidated cash summary for all tellers.';
+                        RunObject = report "All Tellers Cash Report";
+
+                        // trigger OnAction()
+                        // begin
+                        //     // RUNS THE REPORT, 'true' OPENS THE REQUEST PAGE FOR THE DATE FILTER
+                        //     Report.Run(Report::"All Tellers Cash Report", true, false);
+                        // end;
+                    }
                 }
 
 
