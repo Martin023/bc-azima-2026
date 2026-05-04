@@ -471,7 +471,7 @@ table 52185691 "Member Application"
         {
             Caption = 'Salesperson Code';
 
-            TableRelation = IF ("Recruited by Type" = FILTER(Staff)) "HR Employees"."Member No."
+            TableRelation = IF ("Recruited by Type" = FILTER(Staff)) "HR Employees"
             ELSE
             IF ("Recruited by Type" = CONST(Others)) Members."No." WHERE(Status = FILTER(<> Deceased & <> Closed), "Account Type" = filter("Single Member Account"))
             ELSE

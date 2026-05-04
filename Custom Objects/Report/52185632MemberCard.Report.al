@@ -102,7 +102,7 @@ Report 52185632 "Member Card"
             begin
                 SavingsAccounts.Reset();
                 SavingsAccounts.SETRANGE("Member No.", Members."No.");
-                SavingsAccounts.SetRange("Product Type", '002');
+                SavingsAccounts.SetRange("Product Type", '191');
                 SavingsAccounts.SETRANGE(SavingsAccounts."Product Category", SavingsAccounts."Product Category"::"FOSA Account");
                 if SavingsAccounts.FindFirst() then begin
                     FOSAAccount := SavingsAccounts."No.";
