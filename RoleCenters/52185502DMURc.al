@@ -1112,78 +1112,10 @@ page 52185502 "Debt Management Unit"
                     ApplicationArea = Basic, Suite;
                     RunObject = report "Notices Report";
                 }
-                group("Fall Off Report")
-                {
+               
+                
 
-                    action("Fall Off List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "Loan Fall Off List";
-                    }
-                    action("FallOff Listing Errors")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "Bulk Processing Errors List";
-                        RunPageView = where(Process = filter("Loan Fall Off"));
-                    }
-                    // action("Customer Numbers")
-                    // {
-                    //     ApplicationArea = Basic, Suite;
-                    //     RunObject = report "Customer Numbers";
-                    // }
-                }
-                group("Loan Listing")
-                {
-                    action("Loan Listing process")
-                    {
-                        Caption = 'Process Loan Listing';
-                        ApplicationArea = Basic, Suite;
-                        RunObject = report "Loans Listing Report";
-                    }
-                    action("Loan Listing Report List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "Loan Listing Report List";
-                    }
-
-                    action("Loan Listing Errors")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "Bulk Processing Errors List";
-                        RunPageView = where(Process = filter("Loan Listing"));
-                    }
-                }
-
-                group("Deposit Listing")
-                {
-                    action("Proces Deposit Listing")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = report "Deposit Listing Report";
-                    }
-                    action("View Deposit Listing")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "Deposit Listing List";
-                    }
-                    action("Deposit Listing Errors")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "Bulk Processing Errors List";
-                        RunPageView = where(Process = filter("Deposit Listing"));
-                    }
-                }
-
-                group(Members)
-                {
-                    action("Member Listing")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Member Listing';
-                        RunObject = page "Member Listing Report";
-
-                    }
-                }
+                
             }
         }
     }

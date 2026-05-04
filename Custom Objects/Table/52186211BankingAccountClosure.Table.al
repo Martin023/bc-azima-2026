@@ -36,7 +36,7 @@ table 52186211 "Banking Account Closure"
         }
         field(5; "Account No"; Code[20])
         {
-            TableRelation = "Savings Accounts" WHERE("Member No." = FIELD("Member No"),Status = FILTER(<> Closed),"Can Be Closed" = const(true));
+            TableRelation = "Savings Accounts" WHERE("Member No." = FIELD("Member No"), Status = FILTER(<> Closed), "Can Be Closed" = const(true));
 
             trigger OnValidate()
             begin
@@ -49,6 +49,8 @@ table 52186211 "Banking Account Closure"
                     SavingsAccounts.CalcFields("Balance (LCY)");
                     "Account Balance" := SavingsAccounts."Balance (LCY)";
                     "Account Name" := SavingsAccounts.Name;
+
+                    if "Account Balance" > 0 then Message('This account still has a balance!');
                 end;
             end;
         }

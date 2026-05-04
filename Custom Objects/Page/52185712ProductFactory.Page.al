@@ -431,10 +431,12 @@ page 52185712 "Product Factory"
                 field("Minimum Guarantors on Max Amt"; Rec."Minimum Guarantors on Max Amt")
                 {
                     ApplicationArea = Basic, Suite;
+                    ShowMandatory = true;
                 }
                 field("Max Amt on Guarantors"; Rec."Max Amt on Guarantors")
                 {
                     ApplicationArea = Basic, Suite;
+                    ShowMandatory = true;
                 }
                 field("Interest Calculation Method"; Rec."Interest Calculation Method")
                 {
