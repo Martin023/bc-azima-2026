@@ -39,6 +39,14 @@ page 52186055 "All Users Activities"
                 field("Member Withdrawal"; Rec."Member Withdrawal")
                 {
                     image = None;
+                    trigger OnDrillDown()
+                    var
+                        MemberWithdrawal: Record "Member withdrawal Notice";
+                    begin
+                        MemberWithdrawal.Reset();
+                        MemberWithdrawal.SetRange(MemberWithdrawal.Status, MemberWithdrawal.Status::Approved);
+                        Page.Run(Page::"Approved Withdrawal Notice", MemberWithdrawal);
+                    end;
                 }
                 field("Member Closure"; Rec."Member Closure")
                 {

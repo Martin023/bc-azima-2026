@@ -919,94 +919,7 @@ page 52186778 "Finance Role Center"
 
                 // }
 
-                group("Checkoff Bulk Upload")
-                {
-                    Caption = 'Checkoff Bulk Upload';
 
-                    action(EmployerCodeList)
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Employers List';
-                        RunObject = page "Employer Code List";
-                    }
-                    // action("Digit Custodian List")
-                    // {
-                    //     ApplicationArea = Basic, Suite;
-                    //     Caption = 'Digit Custodian List';
-                    //     RunObject = page "Digit Custodian List";
-                    // }
-                    action("Product & references")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Product & references';
-                        RunObject = page "Product & references";
-                    }
-                    action("Checkoff Header List")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Open Checkoff Header List';
-                        RunObject = page "Checkoff Header List";
-                        RunPageLink = Posted = const(false), Status = const(Open);
-                    }
-                    action("Pending Checkoff Header List")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Pending Checkoff Header List';
-                        RunObject = page "Checkoff Header List";
-                        RunPageLink = Posted = const(false), Status = const(Pending);
-                    }
-                    action("Approved Checkoff Header")
-                    {
-                        Caption = 'Approved Checkoff Header List';
-                        ApplicationArea = all;
-                        RunObject = page "Checkoff Header List";
-                        RunPageLink = Posted = const(false), Status = const(Approved);
-                    }
-                    action("Posted Checkoff Header")
-                    {
-                        Caption = 'Posted Checkoff Header List';
-                        ApplicationArea = all;
-                        RunObject = page "Checkoff Header List";
-                        RunPageLink = Posted = const(true);
-                    }
-                    action("Rejected Checkoff Header")
-                    {
-                        Caption = 'Rejected Checkoff Header List';
-                        ApplicationArea = all;
-                        RunObject = page "Checkoff Header List";
-                        RunPageLink = Posted = const(false), Status = const(Rejected);
-                    }
-
-                    // group("Revenue Collection")
-                    // {
-                    //     action("Open Revenue Collection List")
-                    //     {
-                    //         ApplicationArea = all;
-                    //         RunObject = page "Revenue Collection List";
-                    //         RunPageLink = Status = const(Open);
-                    //     }
-                    //     action("Pending Revenue Collection List")
-                    //     {
-                    //         ApplicationArea = all;
-                    //         RunObject = page "Revenue Collection List";
-                    //         RunPageLink = Status = const(Pending);
-                    //     }
-
-                    //     action("Approved Revenue Collection List")
-                    //     {
-                    //         ApplicationArea = all;
-                    //         RunObject = page "Revenue Collection List";
-                    //         RunPageLink = Status = const(Approved);
-                    //     }
-                    //     action("Rejected Revenue Collection List")
-                    //     {
-                    //         ApplicationArea = all;
-                    //         RunObject = page "Revenue Collection List";
-                    //         RunPageLink = Status = const(Rejected);
-                    //     }
-                    // }
-
-                }
                 // group("Case Forwarding")
                 // {
                 //     group("Employer Change Case Forwarding")
@@ -2200,6 +2113,13 @@ page 52186778 "Finance Role Center"
                     RunObject = Page "Chart of Accounts";
                     ToolTip = 'View or organize the general ledger accounts that store your financial data. All values from business transactions or internal adjustments end up in designated G/L accounts. Business Central includes a standard chart of accounts that is ready to support businesses in your country, but you can change the default accounts and add new ones.';
                 }
+                action(GLRegidters)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'G/L Registers';
+                    RunObject = Page "G/L Registers";
+                    ToolTip = 'View the details of transactions that are posted to general ledger accounts. You can view the details by opening the G/L register for a specific account or for all accounts. The G/L register shows the opening balance, transactions, and closing balance for each period, such as a month or a fiscal year, based on the selection criteria that you choose when you open the register.';
+                }
                 action("G/L Account Categories")
                 {
                     ApplicationArea = Basic, Suite;
@@ -2552,21 +2472,21 @@ page 52186778 "Finance Role Center"
                     RunObject = Page "Bank Account List";
                     ToolTip = 'View or set up detailed information about your bank account, such as which currency to use, the format of bank files that you import and export as electronic payments, and the numbering of checks.';
                 }
-                action("Direct Debit Collections")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Direct Debit Collections';
-                    RunObject = Page "Direct Debit Collections";
-                    ToolTip = 'Instruct your bank to withdraw payment amounts from your customer''s bank account and transfer them to your company''s account. A direct debit collection holds information about the customer''s bank account, the affected sales invoices, and the customer''s agreement, the so-called direct-debit mandate. From the resulting direct-debit collection entry, you can then export an XML file that you send or upload to your bank for processing.';
-                }
-                action("Payment Recon. Journals")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Payment Recon. Journals';
-                    Image = ApplyEntries;
-                    RunObject = Page "Pmt. Reconciliation Journals";
-                    ToolTip = 'Reconcile unpaid documents automatically with their related bank transactions by importing a bank statement feed or file. In the payment reconciliation journal, incoming or outgoing payments on your bank are automatically, or semi-automatically, applied to their related open customer or vendor ledger entries. Any open bank account ledger entries related to the applied customer or vendor ledger entries will be closed when you choose the Post Payments and Reconcile Bank Account action. This means that the bank account is automatically reconciled for payments that you post with the journal.';
-                }
+                // action("Direct Debit Collections")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Direct Debit Collections';
+                //     RunObject = Page "Direct Debit Collections";
+                //     ToolTip = 'Instruct your bank to withdraw payment amounts from your customer''s bank account and transfer them to your company''s account. A direct debit collection holds information about the customer''s bank account, the affected sales invoices, and the customer''s agreement, the so-called direct-debit mandate. From the resulting direct-debit collection entry, you can then export an XML file that you send or upload to your bank for processing.';
+                // }
+                // action("Payment Recon. Journals")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Payment Recon. Journals';
+                //     Image = ApplyEntries;
+                //     RunObject = Page "Pmt. Reconciliation Journals";
+                //     ToolTip = 'Reconcile unpaid documents automatically with their related bank transactions by importing a bank statement feed or file. In the payment reconciliation journal, incoming or outgoing payments on your bank are automatically, or semi-automatically, applied to their related open customer or vendor ledger entries. Any open bank account ledger entries related to the applied customer or vendor ledger entries will be closed when you choose the Post Payments and Reconcile Bank Account action. This means that the bank account is automatically reconciled for payments that you post with the journal.';
+                // }
                 action("Bank Acc. Statements")
                 {
                     ApplicationArea = Basic, Suite;
@@ -2606,34 +2526,34 @@ page 52186778 "Finance Role Center"
                     // end;
                 }
 
-                action("Cash Flow Forecasts")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Cash Flow Forecasts';
-                    RunObject = Page "Cash Flow Forecast List";
-                    ToolTip = 'Combine various financial data sources to find out when a cash surplus or deficit might happen or whether you should pay down debt, or borrow to meet upcoming expenses.';
-                }
-                action("Chart of Cash Flow Accounts")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Chart of Cash Flow Accounts';
-                    RunObject = Page "Chart of Cash Flow Accounts";
-                    ToolTip = 'View a chart contain a graphical representation of one or more cash flow accounts and one or more cash flow setups for the included general ledger, purchase, sales, services, or fixed assets accounts.';
-                }
-                action("Cash Flow Manual Revenues")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Cash Flow Manual Revenues';
-                    RunObject = Page "Cash Flow Manual Revenues";
-                    ToolTip = 'Record manual revenues, such as rental income, interest from financial assets, or new private capital to be used in cash flow forecasting.';
-                }
-                action("Cash Flow Manual Expenses")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Cash Flow Manual Expenses';
-                    RunObject = Page "Cash Flow Manual Expenses";
-                    ToolTip = 'Record manual expenses, such as salaries, interest on credit, or planned investments to be used in cash flow forecasting.';
-                }
+                // action("Cash Flow Forecasts")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Cash Flow Forecasts';
+                //     RunObject = Page "Cash Flow Forecast List";
+                //     ToolTip = 'Combine various financial data sources to find out when a cash surplus or deficit might happen or whether you should pay down debt, or borrow to meet upcoming expenses.';
+                // }
+                // action("Chart of Cash Flow Accounts")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Chart of Cash Flow Accounts';
+                //     RunObject = Page "Chart of Cash Flow Accounts";
+                //     ToolTip = 'View a chart contain a graphical representation of one or more cash flow accounts and one or more cash flow setups for the included general ledger, purchase, sales, services, or fixed assets accounts.';
+                // }
+                // action("Cash Flow Manual Revenues")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Cash Flow Manual Revenues';
+                //     RunObject = Page "Cash Flow Manual Revenues";
+                //     ToolTip = 'Record manual revenues, such as rental income, interest from financial assets, or new private capital to be used in cash flow forecasting.';
+                // }
+                // action("Cash Flow Manual Expenses")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Cash Flow Manual Expenses';
+                //     RunObject = Page "Cash Flow Manual Expenses";
+                //     ToolTip = 'Record manual expenses, such as salaries, interest on credit, or planned investments to be used in cash flow forecasting.';
+                // }
                 action(BankAccountReconciliations)
                 {
                     ApplicationArea = Basic, Suite;
@@ -3614,84 +3534,85 @@ page 52186778 "Finance Role Center"
                             RunObject = page "Employee P9 Info";
                             ApplicationArea = Basic, Suite;
                         }
-
-                    }
-                    group("PR Reports and Analysis")
-                    {
-                        Caption = 'Reports and Analysis';
-                        // action("PR NHIF")
-                        // {
-                        //     Caption = 'PR NHIF report';
-                        //     RunObject = report "pr NHIF";
-                        //     ApplicationArea = Basic, Suite;
-                        // }
-                        // action("PR NSSF")
-                        // {
-                        //     Caption = 'PR NSSF report';
-                        //     RunObject = report prNSSF;
-                        //     ApplicationArea = Basic, Suite;
-                        // }
                         action(p9)
                         {
                             Caption = 'P9';
                             RunObject = report P9;
                             ApplicationArea = Basic, Suite;
                         }
-                        // action(P10)
-                        // {
-                        //     Caption = 'P10';
-                        //     RunObject = report P10;
-                        //     ApplicationArea = Basic, Suite;
-                        // }
-                        // action(P10A)
-                        // {
-                        //     Caption = 'P10A';
-                        //     RunObject = report P10A;
-                        //     ApplicationArea = Basic, Suite;
-                        // }
-                        // action("PR Payroll Summary")
-                        // {
-                        //     Caption = 'PR Payroll Summary';
-                        //     //RunObject = report "PR Payroll Summary";
-                        //     RunObject = report "Payroll Summary";
-
-                        //     ApplicationArea = Basic, Suite;
-                        // }
-                        // action("Payroll Summary")
-                        // {
-                        //     Caption = 'PR Payroll Summary';
-                        //     RunObject = report "PR Payroll Summary";
-                        //     //RunObject = report "Payroll Summary";
-
-                        //     ApplicationArea = Basic, Suite;
-                        // }
-                        // action("PR Other PR Customers (Listing)")
-                        // {
-                        //     Caption = 'PR Other PR Customers (Listing)';
-                        //     RunObject = report "PR Other PR Customers (Listin)";
-                        //     ApplicationArea = Basic, Suite;
-                        // }
-                        // action("PR BankSummary")
-                        // {
-                        //     Caption = 'PR Bank summary';
-                        //     RunObject = report "PR Bank Summary";
-                        //     ApplicationArea = Basic, Suite;
-                        // }
-                        // action("PR Email Individual payslip")
-                        // {
-                        //     Caption = 'PR E-Mail Individual Payslip';
-                        //     ApplicationArea = Basic, Suite;
-                        //     RunObject = report "PR E-Mail Individual Payslip";
-                        //     Visible = false;
-                        // }
-                        // action("PR NSSF NEW")
-                        // {
-                        //     Caption = 'PRE NSSF';
-                        //     RunObject = report "PR NSSF NEW";
-                        //     ApplicationArea = Basic, Suite;
-                        // }
 
                     }
+                    // group("PR Reports and Analysis")
+                    // {
+                    //     Caption = 'Reports and Analysis';
+                    // action("PR NHIF")
+                    // {
+                    //     Caption = 'PR NHIF report';
+                    //     RunObject = report "pr NHIF";
+                    //     ApplicationArea = Basic, Suite;
+                    // }
+                    // action("PR NSSF")
+                    // {
+                    //     Caption = 'PR NSSF report';
+                    //     RunObject = report prNSSF;
+                    //     ApplicationArea = Basic, Suite;
+                    // }
+
+                    // action(P10)
+                    // {
+                    //     Caption = 'P10';
+                    //     RunObject = report P10;
+                    //     ApplicationArea = Basic, Suite;
+                    // }
+                    // action(P10A)
+                    // {
+                    //     Caption = 'P10A';
+                    //     RunObject = report P10A;
+                    //     ApplicationArea = Basic, Suite;
+                    // }
+                    // action("PR Payroll Summary")
+                    // {
+                    //     Caption = 'PR Payroll Summary';
+                    //     //RunObject = report "PR Payroll Summary";
+                    //     RunObject = report "Payroll Summary";
+
+                    //     ApplicationArea = Basic, Suite;
+                    // }
+                    // action("Payroll Summary")
+                    // {
+                    //     Caption = 'PR Payroll Summary';
+                    //     RunObject = report "PR Payroll Summary";
+                    //     //RunObject = report "Payroll Summary";
+
+                    //     ApplicationArea = Basic, Suite;
+                    // }
+                    // action("PR Other PR Customers (Listing)")
+                    // {
+                    //     Caption = 'PR Other PR Customers (Listing)';
+                    //     RunObject = report "PR Other PR Customers (Listin)";
+                    //     ApplicationArea = Basic, Suite;
+                    // }
+                    // action("PR BankSummary")
+                    // {
+                    //     Caption = 'PR Bank summary';
+                    //     RunObject = report "PR Bank Summary";
+                    //     ApplicationArea = Basic, Suite;
+                    // }
+                    // action("PR Email Individual payslip")
+                    // {
+                    //     Caption = 'PR E-Mail Individual Payslip';
+                    //     ApplicationArea = Basic, Suite;
+                    //     RunObject = report "PR E-Mail Individual Payslip";
+                    //     Visible = false;
+                    // }
+                    // action("PR NSSF NEW")
+                    // {
+                    //     Caption = 'PRE NSSF';
+                    //     RunObject = report "PR NSSF NEW";
+                    //     ApplicationArea = Basic, Suite;
+                    // }
+
+                    // }
                 }
                 group(PayrollSetup)
                 {
@@ -4400,7 +4321,7 @@ page 52186778 "Finance Role Center"
                     // }
                     // group("Loan Listing")
                     // {
-                       
+
                     //     action("Loan Listing Report List")
                     //     {
                     //         ApplicationArea = Basic, Suite;
@@ -4480,7 +4401,7 @@ page 52186778 "Finance Role Center"
                         RunObject = report "Loan Ageing Report";
                     }
 
-                    
+
                     action("Loan Variance Report")
                     {
                         ApplicationArea = all;
@@ -4662,7 +4583,7 @@ page 52186778 "Finance Role Center"
                         Caption = 'Loans Recovery per Month';
                         RunObject = report "Loans Recovery Per Month";
                     }
-                   
+
                     action("Montlhy Bill Summary")
                     {
                         ApplicationArea = Basic, Suite;
@@ -5730,12 +5651,12 @@ page 52186778 "Finance Role Center"
                 Caption = 'Bulk SMS List';
                 RunObject = page "Bulk SMS Header List";
             }
-            action("NCBA Pension List")
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'NCBA Pension List';
-                RunObject = page "NCBA Pension List";
-            }
+            // action("NCBA Pension List")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Caption = 'NCBA Pension List';
+            //     RunObject = page "NCBA Pension List";
+            // }
 
         }
         area(processing)
