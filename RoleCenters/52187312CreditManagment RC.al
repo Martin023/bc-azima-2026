@@ -122,6 +122,7 @@ page 52187312 "Credit Management Role Center"
                         }
                     }
                 }
+
                 //*************************DMU-ADDONS*****************************************//
                 group("CRB Listing")
                 {
@@ -1568,6 +1569,94 @@ page 52187312 "Credit Management Role Center"
                 }
 
             }
+            group("Checkoff Bulk Upload")
+            {
+                Caption = 'Checkoff Bulk Upload';
+
+                action(EmployerCodeList)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Employers List';
+                    RunObject = page "Employer Code List";
+                }
+                // action("Digit Custodian List")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Digit Custodian List';
+                //     RunObject = page "Digit Custodian List";
+                // }
+                action("Product & references")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Product & references';
+                    RunObject = page "Product & references";
+                }
+                action("Checkoff Header List")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Open Checkoff Header List';
+                    RunObject = page "Checkoff Header List";
+                    RunPageLink = Posted = const(false), Status = const(Open);
+                }
+                action("Pending Checkoff Header List")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Pending Checkoff Header List';
+                    RunObject = page "Checkoff Header List";
+                    RunPageLink = Posted = const(false), Status = const(Pending);
+                }
+                action("Approved Checkoff Header")
+                {
+                    Caption = 'Approved Checkoff Header List';
+                    ApplicationArea = all;
+                    RunObject = page "Checkoff Header List";
+                    RunPageLink = Posted = const(false), Status = const(Approved);
+                }
+                action("Posted Checkoff Header")
+                {
+                    Caption = 'Posted Checkoff Header List';
+                    ApplicationArea = all;
+                    RunObject = page "Checkoff Header List";
+                    RunPageLink = Posted = const(true);
+                }
+                action("Rejected Checkoff Header")
+                {
+                    Caption = 'Rejected Checkoff Header List';
+                    ApplicationArea = all;
+                    RunObject = page "Checkoff Header List";
+                    RunPageLink = Posted = const(false), Status = const(Rejected);
+                }
+
+                // group("Revenue Collection")
+                // {
+                //     action("Open Revenue Collection List")
+                //     {
+                //         ApplicationArea = all;
+                //         RunObject = page "Revenue Collection List";
+                //         RunPageLink = Status = const(Open);
+                //     }
+                //     action("Pending Revenue Collection List")
+                //     {
+                //         ApplicationArea = all;
+                //         RunObject = page "Revenue Collection List";
+                //         RunPageLink = Status = const(Pending);
+                //     }
+
+                //     action("Approved Revenue Collection List")
+                //     {
+                //         ApplicationArea = all;
+                //         RunObject = page "Revenue Collection List";
+                //         RunPageLink = Status = const(Approved);
+                //     }
+                //     action("Rejected Revenue Collection List")
+                //     {
+                //         ApplicationArea = all;
+                //         RunObject = page "Revenue Collection List";
+                //         RunPageLink = Status = const(Rejected);
+                //     }
+                // }
+
+            }
 
             //******************** END OF DMU-loan Activity*********************************************//
             //*************************************SMS ALERTS**********************************************************//
@@ -2040,7 +2129,7 @@ page 52187312 "Credit Management Role Center"
                         Caption = 'SASRA Loan Categorization';
                         RunObject = report "SASRA Loan Categorization";
                     }
-                   
+
 
                     action("Loan Approved Schedule")
                     {
@@ -2138,7 +2227,7 @@ page 52187312 "Credit Management Role Center"
                         Visible = true;
 
                     }
-                   
+
                     action("Position on Borrowers in Sacco")
                     {
                         ApplicationArea = Basic, Suite;
