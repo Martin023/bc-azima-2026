@@ -601,8 +601,9 @@ table 52185729 Loans
                     ProdFac.Get("Loan Product Type");
                     //if ProdFac."Mortgage Loan" = true then begin
                     Mem.Get("Member No.");
-                    if Mem."Employer Code" <> '99' then
-                        "Retirement/Expiry Date" := CalcDate('60Y', Mem."Date of Birth");
+                    // if Mem."Employer Code" <> '99' then
+                    GenSetup.testfield("Max. Member Age");
+                    "Retirement/Expiry Date" := CalcDate(GenSetup."Max. Member Age", Mem."Date of Birth");
 
                 end;
 

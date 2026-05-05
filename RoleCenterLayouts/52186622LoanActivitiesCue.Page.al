@@ -169,12 +169,12 @@ page 52186622 "Loan Processing Activities"
                 {
                     ApplicationArea = Basic, Suite;
                     //AutoFormatType = 11;
-                    // Image = none;
+                    Image = none;
                 }
                 field("Dormant Members"; Rec."Dormant Members")
                 {
                     ApplicationArea = Basic, Suite;
-                    // Image = none;
+                    Image = none;
                 }
             }
             cuegroup("Withdrawal Notices")

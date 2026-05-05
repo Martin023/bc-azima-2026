@@ -44,7 +44,7 @@ page 52187312 "Credit Management Role Center"
                 action("Member Group List")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'Member Groups';
+                    Caption = 'MFI List';
                     RunObject = Page "Member Group List";
                 }
 
