@@ -2269,22 +2269,22 @@ page 52187058 "ICT Department"
                             }
                         }
 
-                        group("Imprest")
-                        {
-                            Caption = 'Imprest Vouchers';
-                            action("Imprest Vouchers")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Imprest Vouchers List';
-                                RunObject = page "Imprest Vouchers List";
-                            }
-                            action("Imprest Surrender")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Imprest Surrender List';
-                                RunObject = page "Imprest Surrender List";
-                            }
-                        }
+                        // group("Imprest")
+                        // {
+                        //     Caption = 'Imprest Vouchers';
+                        //     action("Imprest Vouchers")
+                        //     {
+                        //         ApplicationArea = Basic, Suite;
+                        //         Caption = 'Imprest Vouchers List';
+                        //         RunObject = page "Imprest Vouchers List";
+                        //     }
+                        //     action("Imprest Surrender")
+                        //     {
+                        //         ApplicationArea = Basic, Suite;
+                        //         Caption = 'Imprest Surrender List';
+                        //         RunObject = page "Imprest Surrender List";
+                        //     }
+                        // }
                         group("Overtime")
                         {
                             Caption = 'Overtime';

@@ -23,11 +23,13 @@ page 52186412 "Collateral Register Card"
                 {
                     Caption = 'Member No.';
                     ApplicationArea = Basic, Suite;
+                    ShowMandatory = true;
                 }
                 field("Account Name"; Rec."Account Name")
                 {
                     Caption = 'Member Name';
                     ApplicationArea = Basic, Suite;
+                    ShowMandatory = true;
                 }
                 field("Payroll/Staff No."; Rec."PF No.")
                 {
@@ -37,10 +39,12 @@ page 52186412 "Collateral Register Card"
                 field("Collateral Owner"; Rec."Collateral Owner")
                 {
                     ApplicationArea = Basic, Suite;
+                    ShowMandatory = true;
                 }
                 field("Collateral Category"; Rec."Collateral Category")
                 {
                     ApplicationArea = Basic, Suite;
+                    ShowMandatory = true;
 
                     trigger OnValidate()
                     begin
@@ -120,6 +124,7 @@ page 52186412 "Collateral Register Card"
                 field("Collateral Type"; Rec."Collateral Type")
                 {
                     ApplicationArea = Basic, Suite;
+                    ShowMandatory = true;
                     //Editable = NotCashCollateral;
                     //Editable = PageEditable;
                 }
@@ -134,11 +139,13 @@ page 52186412 "Collateral Register Card"
                     ApplicationArea = Basic, Suite;
                     //Editable = NotCashCollateral;
                     Caption = 'Collateral Multiplier Code';
+                    ShowMandatory = true;
                     //Editable = PageEditable;
                 }
                 field("Collateral Name"; Rec."Collateral Name")
                 {
                     ApplicationArea = Basic, Suite;
+                    ShowMandatory = true;
                     //Editable = NotCashCollateral;
                     //Visible = false;
                     //Editable = PageEditable;
@@ -163,10 +170,12 @@ page 52186412 "Collateral Register Card"
                 {
                     ApplicationArea = Basic, Suite;
                     //Editable = NotCashCollateral;
+                    ShowMandatory = true;
                 }
                 field("Collateral Limit"; Rec."Collateral Limit")
                 {
                     ApplicationArea = Basic, Suite;
+                    ShowMandatory = true;
                     //Editable = NotCashCollateral;
                 }
                 field("Amount to be Charged"; Rec."Amount to be Charged")
@@ -580,7 +589,7 @@ page 52186412 "Collateral Register Card"
 
 
                     //if Rec."Collateral Category" <> Rec."Collateral Category"::"Cash Collateral" then begin
-                    Rec.TestField("Amount to be Charged");
+                    // Rec.TestField("Amount to be Charged");
                     //Rec.TestField("Collateral Ref No.");
                     Rec.TestField("Collateral");
                     Rec.Testfield("Collateral Name");
@@ -588,8 +597,8 @@ page 52186412 "Collateral Register Card"
                     Rec.TestField("Collateral Value");
                     Rec.TestField("Collateral Limit");
                     Rec.TestField("Last Valuation Date");
-                    Rec.TestField("Forced Sale Value");
-                    Rec.TestField("Valuer Name");
+                    //Rec.TestField("Forced Sale Value");
+                    //Rec.TestField("Valuer Name");
                     Rec.TestField("Charge Type");
                     Rec.testfield("Market Value");
                     //end;
@@ -597,32 +606,32 @@ page 52186412 "Collateral Register Card"
                     if Rec."Collateral Category" = Rec."Collateral Category"::Moveable then begin
                         //Rec.TestField("Personal Guarantee Provided");
                         //Rec.TestField("Corporate Guarantee Provided");
-                        Rec.TestField("Tracking Company");
-                        Rec.TestField("Insurance Company");
-                        Rec.TestField("Insurance Type");
+                        // Rec.TestField("Tracking Company");
+                        // Rec.TestField("Insurance Company");
+                        // Rec.TestField("Insurance Type");
                     end;
                     if Rec."Collateral Category" = Rec."Collateral Category"::Immovable then begin
-                        Rec.TestField("Collateral Hold Types");
+                        // Rec.TestField("Collateral Hold Types");
                         //Rec.TestField("Lease/Ownership Exp. Date");
                         //Rec.TestField("Years to Expiry");
-                        Rec.TestField("Spousal Consent");
-                        Rec.TestField("Land Control Board Consent");
-                        Rec.TestField("Law Firm Hanlding the Matter");
-                        Rec.TestField("Law Firm Address");
-                        Rec.TestField("Law Firm Physical Address");
-                        Rec.TestField("Fees Payable to the firm");
-                        Rec.TestField("Status of the fees");
+                        // Rec.TestField("Spousal Consent");
+                        // Rec.TestField("Land Control Board Consent");
+                        // Rec.TestField("Law Firm Hanlding the Matter");
+                        // Rec.TestField("Law Firm Address");
+                        // Rec.TestField("Law Firm Physical Address");
+                        // Rec.TestField("Fees Payable to the firm");
+                        // Rec.TestField("Status of the fees");
                         //Rec.TestField("Property Location");
                     end;
 
                     if Rec."Collateral Category" = Rec."Collateral Category"::Chattels then begin
-                        Rec.TestField("Collateral Description");
-                        Rec.TestField("Affidavit Provided");
-                        Rec.TestField("Affidavit Date");
-                        Rec.TestField("Chattel Make");
-                        Rec.TestField("Model No.");
-                        //Rec.TestField("Serial No.");
-                        Rec.TestField("Year of Purchase");
+                        // Rec.TestField("Collateral Description");
+                        // Rec.TestField("Affidavit Provided");
+                        // Rec.TestField("Affidavit Date");
+                        // Rec.TestField("Chattel Make");
+                        // Rec.TestField("Model No.");
+                        // //Rec.TestField("Serial No.");
+                        // Rec.TestField("Year of Purchase");
                         //Rec.TestField("Estimated Market Value");
                     end;
 
