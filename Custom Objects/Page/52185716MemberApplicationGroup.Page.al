@@ -100,10 +100,10 @@ page 52185716 "Member Application Group"
                     Editable = false;
                     ShowMandatory = true;
                 }
-                field("Allocated Officer"; Rec."Allocated Officer")
-                {
-                    Caption = 'Account Manager';
-                }
+                // field("Allocated Officer"; Rec."Allocated Officer")
+                // {
+                //     Caption = 'Account Manager';
+                // }
 
             }
             group(Business)
@@ -148,12 +148,40 @@ page 52185716 "Member Application Group"
                 }
                 field("Phone No."; Rec."Phone No.")
                 {
+                    Caption = 'Communication Phone Number';
                     ApplicationArea = Basic, Suite;
                     Editable = MobileNoEdit;
                     ShowMandatory = true;
-                    Style = Favorable;
-                    StyleExpr = TRUE;
-                    Visible = false;
+                    trigger OnValidate()
+                    var
+                        myInt: Integer;
+                        CountryRegion: Record "Country/Region";
+                    begin
+
+
+                        if CountryRegion.Get(Rec.Nationality) then begin
+                            if CountryRegion."County Phone Code" <> CopyStr(Rec."Phone No.", 1, StrLen(CountryRegion."County Phone Code")) then
+                                Error('Phone No must start with %1.', CountryRegion."County Phone Code");
+                        end;
+                    end;
+                }
+
+                field("Transactional Mobile Number"; Rec."Transactional Mobile Number")
+                {
+                    // ShowMandatory = true;
+                    ApplicationArea = Basic, Suite;
+                    trigger OnValidate()
+                    var
+                        myInt: Integer;
+                        CountryRegion: Record "Country/Region";
+                    begin
+
+
+                        if CountryRegion.Get(Rec.Nationality) then begin
+                            if CountryRegion."County Phone Code" <> CopyStr(Rec."Transactional Mobile Number", 1, StrLen(CountryRegion."County Phone Code")) then
+                                Error('Phone No must start with %1.', CountryRegion."County Phone Code");
+                        end;
+                    end;
                 }
 
                 field("E-Mail"; Rec."E-Mail")

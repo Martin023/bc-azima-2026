@@ -13,7 +13,7 @@ enum 52185437 "Product Categories"
     Value(10; "Transfered Share Capital") { }
     Value(11; "Biashara Account") { }
     Value(12; "Business Deposits") { }
-    Value(13; "Chama Investment Account") { Caption = 'members'' Savings Account'; }
+    Value(13; "Chama Investment Account") { Caption = 'MFI Savings Account'; }
     Value(14; "Junior Account") { }
     Value(15; "SAYE") { }
     Value(16; "General Account") { }

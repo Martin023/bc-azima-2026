@@ -188,10 +188,10 @@ page 52185726 "Member Single"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Sub Class"; Rec."Sub Class")
-                {
+                // field("Sub Class"; Rec."Sub Class")
+                // {
 
-                }
+                // }
                 field("Responsibility Center"; Rec."Responsibility Center")
                 {
                     ApplicationArea = Basic, Suite;
