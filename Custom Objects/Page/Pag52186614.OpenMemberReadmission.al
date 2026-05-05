@@ -237,11 +237,11 @@ page 52186614 "Open Member Readmission"
                     ShowMandatory = true;
                     ApplicationArea = all;
                 }
-                field("Sub Class"; Rec."Sub Class")
-                {
-                    ApplicationArea = all;
+                // field("Sub Class"; Rec."Sub Class")
+                // {
+                //     ApplicationArea = all;
 
-                }
+                // }
                 field("Date of Birth"; Rec."Date of Birth")
                 {
                     ApplicationArea = all;
@@ -720,21 +720,30 @@ page 52186614 "Open Member Readmission"
                     ShowMandatory = true;
 
                     trigger OnValidate()
+                    var
+                        HREmployees : Record "HR Employees";
                     begin
-                        if Rec."Recruited by Type" = Rec."Recruited by Type"::Others then begin
-                            if Members.Get(Rec."Recruited By") then Rec."Recruited By Name" := Members.Name;
+                       case Rec."Recruited by Type" of
+                            Rec."Recruited by Type"::Others:
+                                if Members.Get(Rec."Recruited By") then
+                                    Rec."Recruited By Name" := Members.Name;
+
+                            Rec."Recruited by Type"::Staff:
+                                begin
+                                    HREmployees.Reset;
+                                    HREmployees.SetRange("No.", Rec."Recruited By");
+                                    if HREmployees.FindFirst() then
+                                        Rec."Recruited By Name" := HREmployees."Full Name";
+                                end;
+
+                            Rec."Recruited by Type"::Delegates:
+                                begin
+                                    DelegateMemberss.Reset;
+                                    DelegateMemberss.SetRange("Delegate MNO.", Rec."Recruited By");
+                                    if DelegateMemberss.FindFirst() then
+                                        Rec."Recruited By Name" := DelegateMemberss."Delegate Name";
+                                end;
                         end;
-                        if rec."Recruited by Type" = Rec."Recruited by Type"::Others then begin
-                            if Members.Get(Rec."Recruited By") then Rec."Recruited By Name" := Members.Name;
-                        end;
-                        if Rec."Recruited by Type" = Rec."Recruited by Type"::Others then begin
-                            if Members.Get(Rec."Recruited By") then Rec."Recruited By Name" := Members.Name;
-                        end else
-                            if Rec."Recruited by Type" = Rec."Recruited by Type"::Delegates then begin
-                                DelegateMemberss.Reset;
-                                DelegateMemberss.SetRange("Delegate MNO.", Rec."Recruited By");
-                                if DelegateMemberss.FindFirst then Rec."Recruited By Name" := DelegateMemberss."Delegate Name";
-                            end;
                     end;
                 }
                 field("Recruited By Name"; Rec."Recruited By Name")
@@ -1113,11 +1122,11 @@ page 52186614 "Open Member Readmission"
                         if Rec."Type of Application" = Rec."Type of Application"::Readmission then
                             Members.Get(Rec."Principle Member");
 
-                        if (Rec."IPRS Verified" = false) and
-                        (Rec."Primary Identification Type" = Rec."Primary Identification Type"::"ID Number") then begin
-                            // Error('Primary Identification number must be IPRS verified before sending this membership application for approval');
-                            Message('Take note that this application ID Number has NOT been verified through IPRS');
-                        end;
+                        // if (Rec."IPRS Verified" = false) and
+                        // (Rec."Primary Identification Type" = Rec."Primary Identification Type"::"ID Number") then begin
+                        //     // Error('Primary Identification number must be IPRS verified before sending this membership application for approval');
+                        //     Message('Take note that this application ID Number has NOT been verified through IPRS');
+                        // end;
 
 
                         VarVariant := Rec;
@@ -1865,13 +1874,16 @@ page 52186614 "Open Member Readmission"
                 Rec."Bank Code" := Members."Bank Code";
                 Rec."Branch Code" := Members."Branch Code";
                 Rec."Bank Account No." := Members."Bank Account No.";
+                Rec.Age := Members.Age;
 
                 ImageData.Reset();
                 ImageData.SetRange("Member No", Rec."Principle Member");
                 if ImageData.FindFirst() then begin
-                    ImageData.CalcFields(Signature, Picture);
+                    ImageData.CalcFields(Signature, Picture,"ID Card Front","ID Card Back");
                     rec.Signature := ImageData.Signature;
                     rec.Picture := ImageData.Picture;
+                    rec."ID Card Front" := ImageData."ID Card Front";
+                    rec."ID Card Back" := ImageData."ID Card Back";
                 end;
             end;
         if (xRec."Type of Application" = Rec."Type of Application"::Readmission) and (Rec."Type of Application" <> Rec."Type of Application"::Readmission) then begin
@@ -1919,6 +1931,7 @@ page 52186614 "Open Member Readmission"
             Rec."Bank Account No." := '';
             Rec."Bank Branch Name" := '';
             Rec."Bank Name" := '';
+            Rec.Age := 0; 
         end;
 
         if Rec."Account Type" = Rec."Account Type"::"Single Member Account" then begin

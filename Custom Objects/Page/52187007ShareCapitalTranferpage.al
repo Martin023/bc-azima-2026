@@ -597,7 +597,7 @@ page 52187007 "Share Capital Transfer Card"
             PostPor := false;
 
         //DigitCustodianControl();
-        MinShareTransNot;
+        //MinShareTransNot;
 
     end;
 
