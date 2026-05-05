@@ -32,11 +32,11 @@ page 52187058 "ICT Department"
 
             Group("Product Applications")
             {
-                Caption = 'Product Applications';
+                Caption = 'Product Setup';
                 action("Product Application")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'Product Applications';
+                    Caption = 'Product Setups';
                     RunObject = page "Product Factory List";
                 }
             }
@@ -190,38 +190,38 @@ page 52187058 "ICT Department"
                 }
 
             }
-            group("Contract Request")
-            {
-                Caption = 'Contract Request';
-                action("Contract Requests")
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Open Contract Request';
-                    RunObject = Page "Contract Request List";
-                    RunPageLink = Status = CONST(Open);
-                }
-                action("Contract Requests Pending Approval")
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Contract Request - Pending Approval';
-                    RunObject = Page "Contract Request List";
-                    RunPageLink = Status = CONST(Pending);
-                }
-                action("Rejected Contract Requests")
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Rejected Contract Request';
-                    RunObject = Page "Contract Request List";
-                    RunPageLink = Status = CONST(Rejected);
-                }
-                action("Approved Contract Requests")
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Approved Contract Requests';
-                    RunObject = Page "Contract Request List";
-                    RunPageLink = Status = CONST(Approved);
-                }
-            }
+            // group("Contract Request")
+            // {
+            //     Caption = 'Contract Request';
+            //     action("Contract Requests")
+            //     {
+            //         ApplicationArea = Basic;
+            //         Caption = 'Open Contract Request';
+            //         RunObject = Page "Contract Request List";
+            //         RunPageLink = Status = CONST(Open);
+            //     }
+            //     action("Contract Requests Pending Approval")
+            //     {
+            //         ApplicationArea = Basic;
+            //         Caption = 'Contract Request - Pending Approval';
+            //         RunObject = Page "Contract Request List";
+            //         RunPageLink = Status = CONST(Pending);
+            //     }
+            //     action("Rejected Contract Requests")
+            //     {
+            //         ApplicationArea = Basic;
+            //         Caption = 'Rejected Contract Request';
+            //         RunObject = Page "Contract Request List";
+            //         RunPageLink = Status = CONST(Rejected);
+            //     }
+            //     action("Approved Contract Requests")
+            //     {
+            //         ApplicationArea = Basic;
+            //         Caption = 'Approved Contract Requests';
+            //         RunObject = Page "Contract Request List";
+            //         RunPageLink = Status = CONST(Approved);
+            //     }
+            // }
             group("Setups")
             {
                 Caption = 'Setups';
@@ -243,12 +243,12 @@ page 52187058 "ICT Department"
                             Caption = 'Mobile Transaction Types';
                             RunObject = Page "Mobile Transaction types List";
                         }
-                        action(ATMTransactionTypes)
-                        {
-                            ApplicationArea = Basic;
-                            Caption = 'ATM Transaction Types';
-                            RunObject = Page "ATM Charge List";
-                        }
+                        // action(ATMTransactionTypes)
+                        // {
+                        //     ApplicationArea = Basic;
+                        //     Caption = 'ATM Transaction Types';
+                        //     RunObject = Page "ATM Charge List";
+                        // }
                     }
                     action("Deposit Keywords")
                     {
@@ -396,99 +396,52 @@ page 52187058 "ICT Department"
                             }
                         }
 
-                        group("Virtual Member Single Application")
-                        {
-                            Caption = 'Virtual Member Single Application';
-                            action("Open Member Application List V")
+                        // group("Virtual Member Single Application")
+                        // {
+                        //     Caption = 'Virtual Member Single Application';
+                        //     action("Open Member Application List V")
 
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Open Member Application List Virtual';
-                                RunObject = Page "Open Member Application V";
-                            }
-                            action("Pending Member Application List V")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Pending Member Application List';
-                                RunObject = Page "Pending Member Application V";
-                            }
-                            action("Approved Member Application List V")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Approved Member Application List';
-                                RunObject = Page "Approved Member Application V";
-                            }
-                            action("Rejected Member Application V")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Rejected Member Application List';
-                                RunObject = Page "Rejected Member Application V";
-                            }
+                        //     {
+                        //         ApplicationArea = Basic, Suite;
+                        //         Caption = 'Open Member Application List Virtual';
+                        //         RunObject = Page "Open Member Application V";
+                        //     }
+                        //     action("Pending Member Application List V")
+                        //     {
+                        //         ApplicationArea = Basic, Suite;
+                        //         Caption = 'Pending Member Application List';
+                        //         RunObject = Page "Pending Member Application V";
+                        //     }
+                        //     action("Approved Member Application List V")
+                        //     {
+                        //         ApplicationArea = Basic, Suite;
+                        //         Caption = 'Approved Member Application List';
+                        //         RunObject = Page "Approved Member Application V";
+                        //     }
+                        //     action("Rejected Member Application V")
+                        //     {
+                        //         ApplicationArea = Basic, Suite;
+                        //         Caption = 'Rejected Member Application List';
+                        //         RunObject = Page "Rejected Member Application V";
+                        //     }
 
-                        }
+                        // }
 
                         group("Member Group Application")
                         {
 
-                            Caption = 'Member Group Application';
+                            Caption = 'MFI Applications';
                             action("Member Group Application List")
                             {
                                 ApplicationArea = Basic, Suite;
-                                Caption = 'Member Group Application List';
+                                Caption = 'MFI Application List';
                                 RunObject = Page "Member Application Group List";
                             }
                         }
-                        group("Micro Member Application")
-                        {
-                            Caption = 'Micro Member Application';
-                            action("Micro Member Application List")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Micro Member Application List';
-                                RunObject = Page "Micro Member Application List";
-                            }
-                        }
-                        group("Membership Reports")
-                        {
-                            Caption = 'Reports';
-                            group("Membership Reports and Analysis")
-                            {
-                                Caption = 'Reports and Analysis';
-                                action("PostBatches2")
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'Post Batches2';
-                                    RunObject = report PostBatches2;
-                                }
-                                // action("PostBatches") //Missing Report
-                                // {
-                                //     ApplicationArea = Basic, Suite;
-                                //     Caption = 'Post Batches';
-                                //     RunObject = report PostBatches;
-                                // }
-                            }
 
 
-                        }
                     }
-                    group("Agents")
-                    {
-                        Caption = 'Agents';
-                        // action("Agent Membership Applic. List")
-                        // {
-                        //     ApplicationArea = Basic, Suite;
-                        //     Caption = 'Agent Membership Applic. List';
-                        //     RunObject = page "Agent Membership Applic. List";
 
-                        // }
-                        action("Dimension Value")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Dimension Value List';
-                            RunObject = page "Dimension Value List";
-
-                        }
-                    }
                     group("Saving Account")
                     {
                         Caption = 'Saving Account Application';
@@ -501,24 +454,7 @@ page 52187058 "ICT Department"
                         }
                     }
 
-                    group("Membership Set Ups")
-                    {
-                        Caption = 'Membership Setups';
-                        action("Present Users")
-                        {
-                            ApplicationArea = All;
-                            Caption = 'Present Users Setups';
-                            RunObject = page "Present Users";
 
-                        }
-                        action("User Tasks")
-                        {
-                            ApplicationArea = All;
-                            Caption = 'User Tasks';
-                            RunObject = page "User Tasks";
-
-                        }
-                    }
                 }
                 group("Credit Management")
                 {
@@ -844,7 +780,7 @@ page 52187058 "ICT Department"
                             }
                             group("Member Securities")
                             {
-                                Caption = 'Member Securities';
+                                Caption = 'Member Changes';
 
                                 action("Member Changes")
                                 {
@@ -860,51 +796,7 @@ page 52187058 "ICT Department"
                                 // }
                             }
                         }
-                        group("Loan - CRB")
-                        {
-                            Caption = 'Loan - CRB';
 
-                            action("CRB Data")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'CRB Data';
-                                RunObject = page "CRB Data";
-                            }
-                            action("Loans CRB")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Loans CRB';
-                                RunObject = xmlport "Loans CRB";
-                            }
-                            action("Loans Guarantors")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Loans Guarantors';
-                                RunObject = XMLPort "Loans Gurarantors- CRB";
-                            }
-                        }
-                        group("CRM Applications")
-                        {
-                            Caption = 'CRM Applications';
-
-                            action("CRM Application List")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'CRM Application List';
-                                RunObject = page "CRM Application List";
-                            }
-                        }
-                        group("Marketing")
-                        {
-                            Caption = 'Marketing';
-
-                            action("BDE Management List")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'BDE Management List';
-                                RunObject = page "BDE Management List";
-                            }
-                        }
                         group("Dividend Process")
                         {
                             caption = 'Dividend Process';
@@ -1061,7 +953,7 @@ page 52187058 "ICT Department"
                                 Caption = 'Loans Register';
                                 RunObject = report "Loan Register";
                             }
-                           
+
                             action("Loan Approved Schedule")
                             {
                                 ApplicationArea = Basic, Suite;
@@ -1110,7 +1002,7 @@ page 52187058 "ICT Department"
                                 Caption = 'Loans Defaulter Aging - SASRA';
                                 RunObject = report "Loans Defaulter Aging - SASRA";
                             }
-                          
+
                             action("SASRA Deposit Return")
                             {
                                 ApplicationArea = Basic, Suite;
@@ -1160,7 +1052,7 @@ page 52187058 "ICT Department"
                                 Caption = 'Loan Issued Summary';
                                 RunObject = report "Loan Issued Summary";
                             }
-                           
+
                             action("Position on Borrowers in Sacco")
                             {
                                 ApplicationArea = Basic, Suite;
@@ -1357,23 +1249,7 @@ page 52187058 "ICT Department"
 
 
                             }
-                            group("Monthly Billings")
-                            {
-                                Caption = 'Monthly Billing';
 
-                                action("Charge Monthly Fee")
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'Charge Monthly Fee';
-                                    RunObject = report "Charge Monthly Fee";
-                                }
-                                action("Montlhly Bill Summary")
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'Montlhly Bill Summary';
-                                    RunObject = report "Monthly Bill Summary";
-                                }
-                            }
                             group("CheckOff Reports")
                             {
                                 caption = 'CheckOff Reports';
@@ -1409,23 +1285,7 @@ page 52187058 "ICT Department"
                                     runobject = report "Membership Declaration";
                                 }
                             }
-                            group("Marketing Reports")
-                            {
-                                Caption = 'Marketing';
 
-                                // action("Process BDE Payments II")
-                                // {
-                                //     ApplicationArea = Basic, Suite;
-                                //     Caption = 'Process BDE Payments';
-                                //     RunObject = report "Process BDE Payments";
-                                // }
-                                action("BDE Staff Performance Summary")
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'BDE Staff Performance Summary';
-                                    RunObject = report "BDE Staff Performance Summary";
-                                }
-                            }
                         }
                         group("Defaulters Management")
                         {
@@ -1473,7 +1333,7 @@ page 52187058 "ICT Department"
                                 Caption = 'Sasra Staff Access Granted';
                                 RunObject = report "Sasra Staff Access Granted";
                             }
-                          
+
                             action("Sasra Staff Positions")
                             {
                                 ApplicationArea = Basic, Suite;
@@ -1547,7 +1407,7 @@ page 52187058 "ICT Department"
                                 Caption = 'Transaction Log-Finance';
                                 RunObject = XMLPort "Transaction Log-Finance";
                             }
-                           
+
                         }
                     }
                     group("Credit Management Setups")
@@ -1704,238 +1564,9 @@ page 52187058 "ICT Department"
                         }
                     }
                 }
-                group("Treasury")
-                {
-                    group("Treasury and Cashier Transactions")
-                    {
-                        Caption = 'Treasury and Cashier Transactions';
-                        group("Treasury and Cashier Transactions List")
-                        {
-                            caption = 'Treasury and Cashier Transactions';
-                            action("Treasury Transactions")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Treasury Transactions';
-                                RunObject = page "Treasury Cashier List";
-                            }
-                            action("T Cashier Transactions")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Cashier Transactions';
-                                runobject = page "Cashier Transactions List";
-                            }
-                           
-                            action("T Cashier Transactions Report")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Cashier Transactions Report';
-                                RunObject = report "Cashier Transactions";
-                            }
 
-                        }
-                        group("Treasury Management")
-                        {
-                            Caption = 'Treasury Management';
-                            group("T Accounts")
-                            {
-                                caption = 'Accounts';
-                                action("Main Treasury")
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'Main Treasury';
-                                    RunObject = page "Main Treasury List";
-                                }
-                                action("Branch Treasury")
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'Branch Treasury';
-                                    runobject = page "Branch Treasury List";
-                                }
 
-                            }
-                        }
-                    }
-                    group("Investment")
-                    {
-                        Caption = 'Investment';
-                        group("Money Market")
-                        {
-                            caption = 'Money Market';
-                            action("Investments")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Investments';
-                                RunObject = page "Investment List";
-                            }
-                        }
 
-                    }
-                    group("T Payments")
-                    {
-                        Caption = 'Payment Vouchers List';
-                        action("Payment Vouchers List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Payment Vouchers List';
-                            RunObject = page "Payment Vouchers List";
-                        }
-                        action("Petty Cash Vouchers List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Petty Cash Vouchers List';
-                            RunObject = page "Petty Cash Vouchers List";
-                        }
-                    }
-                    group("Cash Flow")
-                    {
-                        Caption = 'Cash Flow';
-                        group("Lits")
-                        {
-                            caption = 'Cash Flow';
-                            action("Cash Flow Forecasts")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Cash Flow Forecasts';
-                                RunObject = page "Cash Flow Forecast List";
-                            }
-                            action("Chart of Cash Flow Accounts")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Chart of Cash Flow Accounts';
-                                RunObject = page "Chart of Cash Flow Accounts";
-                            }
-                            action("Cash Flow Manual Revenues")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Cash Flow Manual Revenues';
-                                RunObject = page "Cash Flow Manual Revenues";
-                            }
-                            action("Cash Flow Manual Expenses")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Cash Flow Manual Expenses';
-                                RunObject = page "Cash Flow Manual Expenses";
-                            }
-                        }
-                        group("T Tasks")
-                        {
-                            caption = 'Tasks';
-                            action("Cash Flow Worksheet")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Cash Flow Worksheet';
-                                RunObject = page "Cash Flow Worksheet";
-                            }
-
-                        }
-                        group("T History")
-                        {
-                            Caption = 'History';
-                            action("Navigate")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Navigate';
-                                RunObject = page Navigate;
-                            }
-                        }
-                        group("T Reports and Analysis")
-                        {
-                            caption = 'Reports and Analysis';
-                            group("Analysis and Reporting")
-                            {
-                                Caption = 'Analysis and Reporting';
-                                action("Account Schedules")
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'Account Schedules';
-                                    RunObject = page "Account Schedule Names";
-                                }
-                                action("Analysis by Dimension")
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'Analysis by Dimension';
-                                    RunObject = page "Analysis by Dimensions";
-                                }
-                            }
-                        }
-                        group("T Reports")
-                        {
-                            Caption = 'Reports';
-                            action("Account Schedule")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Account Schedule';
-                                RunObject = report "Account Schedule";
-                            }
-                            action("Cash Flow Date List")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Cash Flow Date List';
-                                RunObject = report "Cash Flow Date List";
-                            }
-                            action("Dimensions - Total")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Dimensions - Total';
-                                RunObject = report "Dimensions - Total";
-                            }
-                            action("Cash Flow Dimensions - Detail")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Cash Flow Dimensions - Detail';
-                                RunObject = report "Cash Flow Dimensions - Detail";
-                            }
-                        }
-
-                        group("T Archive")
-                        {
-                            Caption = 'Archive';
-                            group("Cashflow History")
-                            {
-                                Caption = 'History';
-                                action("Cash Flow Ledger Entries")
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'Cash Flow Ledger Entries';
-                                    RunObject = page "Cash Flow Forecast Entries";
-                                }
-                            }
-
-                        }
-                        group("Administration")
-                        {
-                            Caption = 'Administration';
-                            action("Cash Flow Setup")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Cash Flow Setup';
-                                RunObject = page "Cash Flow Setup";
-                            }
-                            action("Cash Flow Report Selectons")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Cash Flow Report Selectons';
-                                RunObject = page "Report Selection - Cash Flow";
-                            }
-                        }
-                    }
-
-                    group("Setup")
-                    {
-                        Caption = 'Setup';
-                        group("Investemt Setup")
-                        {
-                            Caption = 'Investement';
-                            action("Investement")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Investement';
-                                RunObject = page "Investment Type";
-                            }
-                        }
-
-                    }
-                }
                 group("Banking Management")
                 {
                     group("Accounts")
@@ -1945,7 +1576,8 @@ page 52187058 "ICT Department"
                         {
                             ApplicationArea = Basic, Suite;
                             Caption = 'Savings Accounts List';
-                            RunObject = page "Savings Accounts";;
+                            RunObject = page "Savings Accounts";
+                            ;
                         }
                         action("Banking Closure List")
                         {
@@ -2139,17 +1771,7 @@ page 52187058 "ICT Department"
                                 //RunObject = page "Sky ATM Transactions";
                             }
                         }
-                        group("Bank Overdraft")
-                        {
-                            Caption = 'Bank Overdraft';
-                            action("Over Draft Authorisation")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Over Draft Authorisation';
-                                RunObject = page "Over Draft Authorisation List";
-                            }
 
-                        }
                         group("Delegates")
                         {
                             Caption = 'Delegates Management';
@@ -2214,26 +1836,7 @@ page 52187058 "ICT Department"
                                 RunObject = page "Delegates AGM Update List";
                             }
                         }
-                        group("Bonds")
-                        {
-                            Caption = 'Bonds Management';
-                            action("Bond List")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Bond List';
-                                RunObject = page "Bond List";
-                            }
-                        }
-                        group("Salary")
-                        {
-                            Caption = 'Salary';
-                            action("Salary Lists")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Salary Lists';
-                                RunObject = page "Salary Lists";
-                            }
-                        }
+
                     }
                     group("Banking Reports")
                     {
@@ -2337,8 +1940,8 @@ page 52187058 "ICT Department"
                                 Caption = 'Cashier Transactions';
                                 RunObject = report "Cashier Transactions";
                             }
-                           
-                          
+
+
                         }
                         action("EFT Reports")
                         {
@@ -2414,7 +2017,7 @@ page 52187058 "ICT Department"
                                 Caption = 'Standing Order';
                                 RunObject = report "Standing Order";
                             }
-                            
+
                             action("Standing Order Register")
                             {
                                 ApplicationArea = Basic, Suite;
@@ -2549,7 +2152,7 @@ page 52187058 "ICT Department"
                                 RunObject = page "Banking User Setup";
                             }
                         }
-                        
+
 
                     }
                 }
@@ -3088,7 +2691,7 @@ page 52187058 "ICT Department"
                             //     RunObject = Page "Sky Mobile Users";
                             // }
                         }
-                       
+
                         group("E-Loans")
                         {
                             Caption = 'Loans';
@@ -3224,7 +2827,7 @@ page 52187058 "ICT Department"
                                 RunObject = Page "Insurance Actioned List";
                             }
                         }
-                       
+
                     }
                     group("Internet Banking")
                     {
@@ -3444,7 +3047,7 @@ page 52187058 "ICT Department"
                             RunObject = report "Agent Transactions";
                         }
                     }
-                    
+
                 }
                 group("Payroll Processing")
                 {
@@ -4189,14 +3792,14 @@ page 52187058 "ICT Department"
                                     ApplicationArea = Basic, suite;
                                     RunObject = page "HR BSC List Targets1";
                                 }
-                               
+
                                 action("HR BSC List Quater1")
                                 {
                                     Caption = 'HR BSC List Quater1';
                                     ApplicationArea = Basic, suite;
                                     RunObject = page "HR BSC List Qaurter 1";
                                 }
-                               
+
                                 action("HR BSC List Quater 3")
                                 {
                                     Caption = 'HR BSC List Quater 3';
@@ -5594,7 +5197,7 @@ page 52187058 "ICT Department"
                                 Caption = 'Terminated Contracts list';
                                 RunObject = Page "Terminated Contracts list";
                             }
-                           
+
                             action("Approved Contracts list")
                             {
                                 ApplicationArea = Basic;

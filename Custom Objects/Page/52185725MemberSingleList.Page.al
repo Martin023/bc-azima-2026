@@ -163,10 +163,10 @@ page 52185725 "Member Single List"
                 {
                     ApplicationArea = all;
                 }
-                field("Old Account Name"; Rec."Old Account Name")
-                {
-                    ApplicationArea = All;
-                }
+                // field("Old Account Name"; Rec."Old Account Name")
+                // {
+                //     ApplicationArea = All;
+                // }
                 // field("Witness ID No."; Rec."Witness ID No.")
                 // {
                 //     ApplicationArea = all;
