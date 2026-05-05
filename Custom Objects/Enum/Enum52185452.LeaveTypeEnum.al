@@ -28,7 +28,28 @@ enum 52185452 "Leave Type Enum"
     {
 
     }
-    value(6; " ")
+    value(6; "Unpaid Leave")
+    {
+        Caption = 'Unpaid Leave';
+    }
+    value(7; "Emergency")
+    {
+        Caption = 'Emergency';
+    }
+    value(8; "Marriage Leave")
+    {
+        Caption = 'Marriage Leave';
+    }
+    value(9; "Subbatical Leave")
+    {
+        Caption = 'Subbatical Leave';
+    }
+
+    value(10; "Family Leave")
+    {
+        Caption = 'Family Leave';
+    }
+    value(11; " ")
     {
         Caption = ' ';
     }
