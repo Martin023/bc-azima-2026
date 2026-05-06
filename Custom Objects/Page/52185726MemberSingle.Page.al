@@ -1174,6 +1174,22 @@ page 52185726 "Member Single"
                 end;
 
             }
+            action("Activate Member"){
+                ApplicationArea = Basic, Suite;
+                Image = Activate;
+                Promoted = true;
+                PromotedCategory = Category4;
+                Visible = Rec.Status = Rec.Status::New;
+                trigger OnAction()
+                var
+                    CurrentMembers: Record Members;
+                begin
+                    CurrentMembers.reset;
+                    CurrentMembers.setRange("No.", Rec."No.");
+                    if CurrentMembers.findfirst() then
+                        REPORT.Run(Report::"Registration Fee Recovery", true, true, CurrentMembers)
+                end;
+            }
 
             action(Flags)
             {

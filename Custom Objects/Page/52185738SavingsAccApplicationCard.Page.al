@@ -173,14 +173,48 @@ page 52185738 "Savings Acc. Application Card"
                     field("Recruited by Type"; Rec."Recruited by Type")
                     {
                         ApplicationArea = Basic, Suite;
+                        Editable = PageEdit;
                     }
                     field("Recruited By"; Rec."Recruited By")
                     {
                         ApplicationArea = Basic, Suite;
+                        Editable = PageEdit;
+                        trigger OnValidate()
+                        var
+                            HREmployees : Record "HR Employees";
+                            Members: Record Members;
+                            DelegateMemberss: Record "Delegate Members";
+                        begin
+                            // Handle 'Others'
+                            if Rec."Recruited by Type" = Rec."Recruited by Type"::Others then begin
+                                Members.Reset;
+                                Members.SetRange("No.", Rec."Recruited By");
+                                if Members.FindFirst then
+                                    Rec."Recruited By Name" := Members.Name;
+                            end;
+
+                            // Handle 'Delegates'
+                            if Rec."Recruited by Type" = Rec."Recruited by Type"::Delegates then begin
+                                DelegateMemberss.Reset;
+                                DelegateMemberss.SetRange("Delegate MNO.", Rec."Recruited By");
+                                if DelegateMemberss.FindFirst then
+                                    Rec."Recruited By Name" := DelegateMemberss."Delegate Name";
+                            end;
+
+                            // Handle 'Staff'
+                            if Rec."Recruited by Type" = Rec."Recruited by Type"::Staff then begin
+                                HREmployees.Reset;
+                                HREmployees.SetRange("No.", Rec."Recruited By");
+                                if HREmployees.FindFirst then
+                                    Rec."Recruited By Name" := HREmployees."Full Name";
+                            end;
+
+                        end;
                     }
                     field("Recruited By Name"; Rec."Recruited By Name")
                     {
                         ApplicationArea = Basic, Suite;
+                        Editable = false;
                     }
                 }
             }
