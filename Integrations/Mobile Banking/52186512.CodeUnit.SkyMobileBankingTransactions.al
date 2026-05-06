@@ -291,7 +291,15 @@ codeunit 52186512 "Sky M-Banking Transactions"
             'MPESA_WITHDRAWAL':
                 MpesaTrans."Transaction Type" := MpesaTrans."Transaction Type"::"Mpesa Withdrawal";
             'BILL_PAYMENT':
-                MpesaTrans."Transaction Type" := MpesaTrans."Transaction Type"::"Utility Payment";
+                begin
+                    MpesaTrans."Transaction Type" := MpesaTrans."Transaction Type"::"Utility Payment";
+
+                    GamingPaybills.Reset;
+                    GamingPaybills.SetRange("Paybill / Till No.", MpesaTrans."Receiver Identifier");
+                    if GamingPaybills.FindFirst then begin
+                        MpesaTrans."Transaction Type" := MpesaTrans."Transaction Type"::"Gaming Utility Payment";
+                    end;
+                end;
             'BANK_TRANSFER':
                 MpesaTrans."Transaction Type" := MpesaTrans."Transaction Type"::"Bank Transfer";
             'AIRTIME_PURCHASE':
@@ -594,6 +602,9 @@ codeunit 52186512 "Sky M-Banking Transactions"
         MobileDepositkeywordSetup: Record "Mobile Deposits Keywords Setup";
         ExitKeywordSearch: Text;
         SearchAccount: Text;
+
+        DepositType: Text;
+        DepositIdNo: Text;
     begin
         Payload.Get('originator_id', originator_id);
         Payload.Get('pesa_type', pesa_type);
@@ -727,61 +738,63 @@ codeunit 52186512 "Sky M-Banking Transactions"
             MpesaDepositTrans."Savings Account" := MpesaDepositTrans."Beneficiary Account";
             MpesaDepositTrans."Transaction Type" := MpesaDepositTrans."Transaction Type"::"Mpesa Deposit";
 
-            // Coop B2B
-            if MpesaDepositTrans."Transaction Category" = 'COOP_DEPOSIT_B2B' then begin
-                MpesaDepositTrans."Transaction Type" := MpesaDepositTrans."Transaction Type"::"Coop B2B Deposit";
-            end;
+            if MpesaDepositTrans."Transaction Category".ToUpper <> 'PIN_RESET' then begin
+                // Other Deposits
+                // Coop B2B
+                if MpesaDepositTrans."Transaction Category" = 'COOP_DEPOSIT_B2B' then begin
+                    MpesaDepositTrans."Transaction Type" := MpesaDepositTrans."Transaction Type"::"Coop B2B Deposit";
+                end;
 
-            // Coop P2F
-            if MpesaDepositTrans."Transaction Category" = 'COOP_DEPOSIT_P2F' then begin
-                MpesaDepositTrans."Transaction Type" := MpesaDepositTrans."Transaction Type"::"Coop P2F Deposit";
-            end;
+                // Coop P2F
+                if MpesaDepositTrans."Transaction Category" = 'COOP_DEPOSIT_P2F' then begin
+                    MpesaDepositTrans."Transaction Type" := MpesaDepositTrans."Transaction Type"::"Coop P2F Deposit";
+                end;
 
-            if MpesaDepositTrans."Transaction Type" = MpesaDepositTrans."Transaction Type"::"Mpesa Deposit" then begin
-                BeneficiarySavingsAccount.Reset;
-                BeneficiarySavingsAccount.SetRange("No.", MpesaDepositTrans."Savings Account");
-                BeneficiarySavingsAccount.SetLoadFields("No.");
-                if not BeneficiarySavingsAccount.FindFirst then begin
-                    // Search using old account no
-                    BeneficiarySavingsAccount.Reset;
-                    BeneficiarySavingsAccount.SetRange("Old Account No", MpesaDepositTrans."Savings Account");
+                if MpesaDepositTrans."Transaction Type" = MpesaDepositTrans."Transaction Type"::"Mpesa Deposit" then begin
+                                        BeneficiarySavingsAccount.Reset;
+                    BeneficiarySavingsAccount.SetRange("No.", MpesaDepositTrans."Savings Account");
+                    BeneficiarySavingsAccount.SetLoadFields("No.");
+                    if not BeneficiarySavingsAccount.FindFirst then begin
+                        // Search using old account no
+                        BeneficiarySavingsAccount.Reset;
+                        BeneficiarySavingsAccount.SetRange("Old Account No", MpesaDepositTrans."Savings Account");
                     BeneficiarySavingsAccount.SetFilter(Status, '<>%1', BeneficiarySavingsAccount.Status::Closed);
                     BeneficiarySavingsAccount.SetRange(Blocked, BeneficiarySavingsAccount.Blocked::" ");
-                    BeneficiarySavingsAccount.SetLoadFields("No.");
-                    if BeneficiarySavingsAccount.FindFirst then begin
-                        // Search using old account no
-                        MpesaDepositTrans."Savings Account" := BeneficiarySavingsAccount."No.";
-                    end else begin
-                        // Check deposit keywords
-                        MobileDepositkeywordSetup.Reset;
-                        if MobileDepositkeywordSetup.FindSet() then begin
-                            ExitKeywordSearch := '';
-
-                            repeat begin
-                                SearchAccount := MpesaDepositTrans."Beneficiary Account".ToUpper();
-                                // E.g 12345ADV
-                                if MobileDepositkeywordSetup."Member Identifier Position" = MobileDepositkeywordSetup."Member Identifier Position"::Prefix then begin
-                                    if SearchAccount.EndsWith(MobileDepositkeywordSetup.Keyword) then begin
-                                        ExitKeywordSearch := MobileDepositkeywordSetup.Keyword;
-                                    end;
-                                end;
-
-                                // E.g ADV12345
-                                if MobileDepositkeywordSetup."Member Identifier Position" = MobileDepositkeywordSetup."Member Identifier Position"::Suffix then begin
-                                    if SearchAccount.StartsWith(MobileDepositkeywordSetup.Keyword) then begin
-                                        ExitKeywordSearch := MobileDepositkeywordSetup.Keyword;
-                                    end;
-                                end;
-                            end until (ExitKeywordSearch <> '') or (MobileDepositkeywordSetup.Next() = 0);
-                        end;
-
-                        if ExitKeywordSearch <> '' then begin
+                        BeneficiarySavingsAccount.SetLoadFields("No.");
+                        if BeneficiarySavingsAccount.FindFirst then begin
+                            // Search using old account no
+                            MpesaDepositTrans."Savings Account" := BeneficiarySavingsAccount."No.";
+                        end else begin
+                            // Check deposit keywords
                             MobileDepositkeywordSetup.Reset;
-                            MobileDepositkeywordSetup.Get(ExitKeywordSearch);
-                            // 
+                            if MobileDepositkeywordSetup.FindSet() then begin
+                                ExitKeywordSearch := '';
+
+                                repeat begin
+                                    SearchAccount := MpesaDepositTrans."Beneficiary Account".ToUpper();
+                                    // E.g 12345ADV
+                                    if MobileDepositkeywordSetup."Member Identifier Position" = MobileDepositkeywordSetup."Member Identifier Position"::Prefix then begin
+                                        if SearchAccount.EndsWith(MobileDepositkeywordSetup.Keyword) then begin
+                                            ExitKeywordSearch := MobileDepositkeywordSetup.Keyword;
+                                        end;
+                                    end;
+
+                                    // E.g ADV12345
+                                    if MobileDepositkeywordSetup."Member Identifier Position" = MobileDepositkeywordSetup."Member Identifier Position"::Suffix then begin
+                                        if SearchAccount.StartsWith(MobileDepositkeywordSetup.Keyword) then begin
+                                            ExitKeywordSearch := MobileDepositkeywordSetup.Keyword;
+                                        end;
+                                    end;
+                                end until (ExitKeywordSearch <> '') or (MobileDepositkeywordSetup.Next() = 0);
+                            end;
+
+                            if ExitKeywordSearch <> '' then begin
+                                MobileDepositkeywordSetup.Reset;
+                                MobileDepositkeywordSetup.Get(ExitKeywordSearch);
+                                //
                             TheBeneficiaryIdentifierNo := SearchAccount.Replace(MobileDepositkeywordSetup.Keyword, '').Trim();
 
-                            TheBeneficiary.Reset;
+                                TheBeneficiary.Reset;
 
                             if MobileDepositkeywordSetup."Member Identifier Type" = MobileDepositkeywordSetup."Member Identifier Type"::"Group Account No." then begin
                                 TheBeneficiary.FilterGroup := -1;
@@ -792,42 +805,47 @@ codeunit 52186512 "Sky M-Banking Transactions"
                                 TheBeneficiary.SetRange("Primary Identification Type", MobileDepositkeywordSetup."Member Identifier Type");
                             end;
 
-                            TheBeneficiary.SetLoadFields("No.");
+                                TheBeneficiary.SetLoadFields("No.");
 
-                            if TheBeneficiary.FindFirst then begin
-                                if MobileDepositkeywordSetup."Product Class Type" = MobileDepositkeywordSetup."Product Class Type"::Loan then begin
+                                if TheBeneficiary.FindFirst then begin
+                                    if MobileDepositkeywordSetup."Product Class Type" = MobileDepositkeywordSetup."Product Class Type"::Loan then begin
 
-                                    BeneficiaryLoans.Reset;
-                                    BeneficiaryLoans.SetRange("Member No.", TheBeneficiary."No.");
-                                    BeneficiaryLoans.SetRange("Loan Product Type", MobileDepositkeywordSetup."Product Code");
-                                    BeneficiaryLoans.SetFilter("Total Loan Balance", '>0');
-                                    BeneficiaryLoans.SetLoadFields("Loan No.", "Loan Account");
+                                        BeneficiaryLoans.Reset;
+                                        BeneficiaryLoans.SetRange("Member No.", TheBeneficiary."No.");
+                                        BeneficiaryLoans.SetRange("Loan Product Type", MobileDepositkeywordSetup."Product Code");
+                                        BeneficiaryLoans.SetFilter("Total Loan Balance", '>0');
+                                        BeneficiaryLoans.SetLoadFields("Loan No.", "Loan Account");
 
-                                    if BeneficiaryLoans.FindFirst() then begin
-                                        MpesaDepositTrans."Transaction Type" := MpesaDepositTrans."Transaction Type"::"Loan Repayment";
-                                        MpesaDepositTrans."Loan No." := BeneficiaryLoans."Loan No.";
-                                        MpesaDepositTrans."Loan Account" := BeneficiaryLoans."Loan Account";
-                                        MpesaDepositTrans."Savings Account" := '';
+                                        if BeneficiaryLoans.FindFirst() then begin
+                                            MpesaDepositTrans."Transaction Type" := MpesaDepositTrans."Transaction Type"::"Loan Repayment";
+                                            MpesaDepositTrans."Loan No." := BeneficiaryLoans."Loan No.";
+                                            MpesaDepositTrans."Loan Account" := BeneficiaryLoans."Loan Account";
+                                            MpesaDepositTrans."Savings Account" := '';
+                                        end;
                                     end;
-                                end;
 
-                                if MobileDepositkeywordSetup."Product Class Type" = MobileDepositkeywordSetup."Product Class Type"::Savings then begin
-                                    MpesaDepositTrans."Transaction Type" := MpesaDepositTrans."Transaction Type"::"Mpesa Deposit";
+                                    if MobileDepositkeywordSetup."Product Class Type" = MobileDepositkeywordSetup."Product Class Type"::Savings then begin
+                                        MpesaDepositTrans."Transaction Type" := MpesaDepositTrans."Transaction Type"::"Mpesa Deposit";
 
-                                    BeneficiarySavingsAccount.Reset;
-                                    BeneficiarySavingsAccount.SetRange("Member No.", TheBeneficiary."No.");
-                                    BeneficiarySavingsAccount.SetRange("Product Type", MobileDepositkeywordSetup."Product Code");
+                                        BeneficiarySavingsAccount.Reset;
+                                        BeneficiarySavingsAccount.SetRange("Member No.", TheBeneficiary."No.");
+                                        BeneficiarySavingsAccount.SetRange("Product Type", MobileDepositkeywordSetup."Product Code");
                                     BeneficiarySavingsAccount.SetFilter(Status, '<>%1', BeneficiarySavingsAccount.Status::Closed);
                                     BeneficiarySavingsAccount.SetRange(Blocked, BeneficiarySavingsAccount.Blocked::" ");
-                                    BeneficiarySavingsAccount.SetLoadFields("No.");
-                                    if BeneficiarySavingsAccount.FindFirst then begin
-                                        MpesaDepositTrans."Savings Account" := BeneficiarySavingsAccount."No.";
+                                        BeneficiarySavingsAccount.SetLoadFields("No.");
+                                        if BeneficiarySavingsAccount.FindFirst then begin
+                                            MpesaDepositTrans."Savings Account" := BeneficiarySavingsAccount."No.";
+                                        end;
                                     end;
                                 end;
                             end;
                         end;
                     end;
                 end;
+            end else begin
+                // Pin Reset
+                MpesaDepositTrans."Savings Account" := '';
+                MpesaDepositTrans."Transaction Type" := MpesaDepositTrans."Transaction Type"::"Self PIN Reset";
             end;
         end;
 
@@ -1128,6 +1146,58 @@ codeunit 52186512 "Sky M-Banking Transactions"
             exit('');
     end;
 
+    // Get Member shares acc
+    procedure GetMemberSharesAcc(Member: record Members): text
+    var
+        SavingsAccounts: record "Savings Accounts";
+        FosaProduct: Record "Product Factory";
+    begin
+        FosaProduct.Reset;
+        FosaProduct.SetRange("Product Category", FosaProduct."Product Category"::"Share Capital");
+        FosaProduct.SetRange("Auto Open Account", true); // Main Acc.
+
+        FosaProduct.SetLoadFields("Product ID");
+        if not FosaProduct.FindFirst then begin
+            exit('');
+        end;
+
+        SavingsAccounts.RESET;
+        SavingsAccounts.SETRANGE("Member No.", Member."No.");
+        SavingsAccounts.SETRANGE("Product Type", FosaProduct."Product ID");
+
+        SavingsAccounts.SetLoadFields("No.");
+        if SavingsAccounts.FINDFIRST then
+            exit(SavingsAccounts."No.")
+        else
+            exit('');
+    end;
+
+    // Get Member Registration Fee Account
+    procedure GetMemberRegFeeAcc(Member: record Members): text
+    var
+        SavingsAccounts: record "Savings Accounts";
+        FosaProduct: Record "Product Factory";
+    begin
+        FosaProduct.Reset;
+        FosaProduct.SetRange("Product Category", FosaProduct."Product Category"::"Entrance Fee");
+        FosaProduct.SetRange("Auto Open Account", true); // Main Acc.
+
+        FosaProduct.SetLoadFields("Product ID");
+        if not FosaProduct.FindFirst then begin
+            exit('');
+        end;
+
+        SavingsAccounts.RESET;
+        SavingsAccounts.SETRANGE("Member No.", Member."No.");
+        SavingsAccounts.SETRANGE("Product Type", FosaProduct."Product ID");
+
+        SavingsAccounts.SetLoadFields("No.");
+        if SavingsAccounts.FINDFIRST then
+            exit(SavingsAccounts."No.")
+        else
+            exit('');
+    end;
+
     // Get Member primary biashara acc
     procedure GetMemberBiasharaAcc(Member: record Members): text
     var
@@ -1223,7 +1293,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         end;
     end;
 
-    // Mobile loan limit 
+    // Mobile loan limit
     procedure GetLoansQualifyAmount(MemberNo: Code[20]; ProductID: Code[10]; Installments: Integer; var EligibilityFailReason: Text) QualifiedAmount: Decimal
     var
         Members: Record Members;
@@ -1255,8 +1325,14 @@ codeunit 52186512 "Sky M-Banking Transactions"
         msg: text;
         SendSMS: Codeunit SendSms;
         Netamt: decimal;
+        DisbLoans: Integer;
+        LastQualifiedAmt: Decimal;
+        TotalSal: Decimal;
+        MemberDeposit: Decimal;
+
     begin
         TotalExisting := 0;
+        MemberDeposit := 0;
         if not GenSetUp.GET then begin
             EligibilityFailReason := 'General Setup NOT complete';
             QualifiedAmount := 0;
@@ -1268,6 +1344,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
             EXIT(QualifiedAmount);
         end;
 
+        Message('Checking the member''s loan eligibility. Please wait...');
         // Check mobile loan buffer for unposted loans application
         MobileLoanBuffer.Reset;
         MobileLoanBuffer.SetRange("Member No.", MemberNo);
@@ -1275,6 +1352,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         MobileLoanBuffer.SetLoadFields("Entry No");
 
         if MobileLoanBuffer.FindFirst then begin
+            Message('Debug : Found unposted mobile loan application in buffer');
             EligibilityFailReason := 'There is an ongoing mobile loan application being processed';
             QualifiedAmount := 0;
             EXIT(QualifiedAmount);
@@ -1289,6 +1367,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         LoanApp.SetLoadFields("Loan No.", Posted);
 
         if LoanApp.FindFirst then begin
+            Message('Debug : Found unposted mobile loan application in loans table');
             LoanApp.Posted := true;
             LoanApp.Modify;
 
@@ -1311,7 +1390,9 @@ codeunit 52186512 "Sky M-Banking Transactions"
         );
 
         if Members.Find('-') then begin
+            Message('Member record found. Status: %1, Membership status: %2', Members.Status, Members.Subflag);
             IF Members.Status <> Members.Status::Active THEN BEGIN
+                Message('The member is not active. Current status: %1', Members.Status);
                 EligibilityFailReason := StrSubstNo('Applicant NOT Active. Status is %1', Members.Status);
                 QualifiedAmount := 0;
                 EXIT(QualifiedAmount);
@@ -1330,17 +1411,19 @@ codeunit 52186512 "Sky M-Banking Transactions"
 
             // Validate Age Requirements
             if Format(ProdFac."Max. Member Age") <> '' then begin
+                Message('Validating member age requirements. Maximum allowed age: %1', Format(ProdFac."Max. Member Age"));
                 MinDateMember := CalcDate('-' + Format(ProdFac."Ordinary Default Intallments") + 'M', Members."Date of Birth");
                 MinDateProduct := CalcDate('-' + Format(ProdFac."Max. Member Age"), Today);
                 if MinDateMember < MinDateProduct then begin
                     if not Members."Allow Retiree M-Loans" then begin
+                        Message('DEBUG: Applicant NOT eligible due to age requirements - Member DOB: %1, Min Date Product: %2', Members."Date of Birth", MinDateProduct);
                         EligibilityFailReason := StrSubstNo('Applicant NOT eligible due to age requirements. Maximum applicant age allowed is: %1', Format(ProdFac."Max. Member Age"));
                         QualifiedAmount := 0;
                         EXIT(QualifiedAmount);
                     end;
                 end;
             end;
-
+            Message('Age requirements verified successfully.');
             //Get and check Member deposit balance
             OrdinaryAccounts.RESET;
             OrdinaryAccounts.SETRANGE("Member No.", Members."No.");
@@ -1349,43 +1432,63 @@ codeunit 52186512 "Sky M-Banking Transactions"
             IF OrdinaryAccounts.FINDFIRST THEN BEGIN
                 OrdinaryAccounts.CALCFIELDS(Balance);
                 IF OrdinaryAccounts.Balance < ProdFac."Minimum Deposit Balance" THEN BEGIN
+                    Message('The member does not meet the minimum deposit balance requirement. Current balance: %1, Required: %2', OrdinaryAccounts.Balance, ProdFac."Minimum Deposit Balance");
                     EligibilityFailReason := StrSubstNo('Applicant NOT eligible. Minimum deposit amount required is KES %1', Format(OrdinaryAccounts.Balance));
                     QualifiedAmount := 0;
                     EXIT(QualifiedAmount);
                 END;
+                Message('Member deposit balance verified successfully. Current balance: %1', OrdinaryAccounts.Balance);
+                if QualifiedAmount > OrdinaryAccounts.Balance then
+                    QualifiedAmount := OrdinaryAccounts.Balance;
+
+                MemberDeposit := OrdinaryAccounts.Balance;
+                if MemberDeposit < 0 then MemberDeposit := 0;
                 iF OrdinaryAccounts.Balance = 0 then begin
+                    Message('The member does not have any deposit balance.');
                     EligibilityFailReason := StrSubstNo('Applicant NOT eligible. You do not have any deposit balance');
                     QualifiedAmount := 0;
                     EXIT(QualifiedAmount);
                 end;
+            END ELSE BEGIN
+                Message('The member does not have a BOSA deposit account.');
+                EligibilityFailReason := 'Applicant NOT eligible. No BOSA deposit account found';
+                QualifiedAmount := 0;
+                EXIT(QualifiedAmount);
             END;
 
             saccoAccount.RESET;
             saccoAccount.SETRANGE(saccoAccount."Member No.", Members."No.");
             saccoAccount.SetRange("Product Category", saccoAccount."Product Category"::"FOSA Account");
             saccoAccount.SetCurrentKey(Blocked);
-            saccoAccount.SetRange("Product Type", '191');
 
             saccoAccount.SetLoadFields(
                 "No.", "Member No.", Status, Blocked
             );
             IF saccoAccount.FIND('-') THEN BEGIN
+                Message('DEBUG: FOSA account found for member %1', Members."No.");
                 STOAmount := ComputeSTODeductions(saccoAccount."No.");
+                Message('Standing order deductions = : %1', STOAmount);
 
                 if ProdFac."Salary Income Types" = ProdFac."Salary Income Types"::Pension then begin
                     SalAvg := Globalfunc.GetSmallestSalary(saccoAccount."No.", Incomsal::Pension);
+                    Message('DEBUG: Retrieved Pension Salary Average: %1', SalAvg);
                 end else begin
                     SalAvg := Globalfunc.GetSmallestSalary(saccoAccount."No.", Incomsal::Salary);
+                    Message('DEBUG: Smallest Salary = : %1', SalAvg);
                 end;
 
                 if ProdFac."Least Sal Rate %" <> 0 then begin
                     SalAvg := (ProdFac."Least Sal Rate %" / 100) * SalAvg;
+                    Message('DEBUG: Adjusted Salary Average after applying Least Sal Rate %: %1', SalAvg);
                 end;
 
                 LoanRec := ComputeLoanDeductions(saccoAccount."Member No.");
+                Message('DEBUG: Loan Deductions = : %1', LoanRec);
                 IF (saccoAccount.Status <> saccoAccount.Status::Active) OR (saccoAccount.Blocked <> saccoAccount.Blocked::" ") THEN BEGIN
+                    Message('DEBUG: Applicant NOT eligible due to FOSA account status - Status: %1, Blocked: %2', saccoAccount.Status, saccoAccount.Blocked);
                     EligibilityFailReason := StrSubstNo('Applicant NOT eligible. Transaction account status is %.', Format(saccoAccount.Status));
                     if saccoAccount.Blocked <> saccoAccount.Blocked::" " then begin
+                        Message('The member is not eligible because the transaction account is blocked.');
                         EligibilityFailReason := StrSubstNo('Applicant NOT eligible. Transaction account is blocked');
                     end;
                     QualifiedAmount := 0;
@@ -1411,6 +1514,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
                             IF LoanApp.FINDSET THEN BEGIN
                                 REPEAT
                                     IF ProdFac."Allow Multiple Running Loans" = FALSE THEN BEGIN
+                                        Message('DEBUG: Multiple running loans not allowed - Related loan found');
                                         EligibilityFailReason := StrSubstNo('Applicant NOT eligible due to having related loan product');
                                         QualifiedAmount := 0;
                                         EXIT(QualifiedAmount);
@@ -1433,6 +1537,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     // END;
 
                     QualifiedAmount := DividenceAdvanceQualification(MemberNo, ProductID);
+                    Message('DEBUG: Dividend Discounting loan qualification amount: %1', QualifiedAmount);
 
                     // Check arrears amt existing
                     // The arrears not to restrict qualification but recover all arrears.
@@ -1452,15 +1557,20 @@ codeunit 52186512 "Sky M-Banking Transactions"
                                 TotArrears += LoanArr."Amount In Arreas SASRA";
                             until LoanArr.next() = 0;
                         end;
+                        Message('DEBUG: Total loan arrears calculated: %1', TotArrears);
                         if TotArrears > 0 then begin
                             Netamt := QualifiedAmount - TotArrears;
                             if Netamt < 0 then Netamt := 0;
+                            Message('DEBUG: Net amount after arrears deduction: %1', Netamt);
                             msg := 'Dear ' + Members."First Name" + ', your loan qualification amount is KES.' + Format(QualifiedAmount) + ' and your total loan arrears is. ' + format(round(TotArrears, 1, '>')) +
                             '. The net amount to be disbursed is ' + Format(round(QualifiedAmount - TotArrears));
                             SendSMS.SendSms(SMSSource::MBANKING, Members."Phone No.", msg, Format(Members."No."), '', true, 220, false, 'CBS', Members."No.", 'CBS');
                         end;
                     end;
-
+                    if QualifiedAmount > MemberDeposit then begin
+                        QualifiedAmount := MemberDeposit;
+                        Message('DEBUG: Qualified amount adjusted to member deposit balance: %1', QualifiedAmount);
+                    end;
                     exit(QualifiedAmount);
                 end;
 
@@ -1474,6 +1584,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
                         Loans.SETFILTER("Outstanding Balance", '>0');
                         Loans.SetLoadFields("Loan No.");
                         IF Loans.FIND('-') THEN BEGIN
+                            Message('DEBUG: Applicant NOT eligible due to existing loan of same product type');
                             EligibilityFailReason := StrSubstNo('Applicant NOT eligible due to existing %1 loan', ProdFac."Product Description");
                             QualifiedAmount := 0;
                             EXIT(QualifiedAmount);
@@ -1481,6 +1592,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     end;
 
                     if ProdFac."Requires Salary Processing" = false then begin
+                        Message('DEBUG: Salary processing not required for this product');
                         EligibilityFailReason := '';
                         QualifiedAmount := ProdFac."Maximum Loan Amount";
                         exit(QualifiedAmount);
@@ -1504,15 +1616,18 @@ codeunit 52186512 "Sky M-Banking Transactions"
                                     LoanRec += Loans."Total Loan Balance";
                                 end until Loans.Next = 0;
                             END;
+                            Message('DEBUG: Total existing loan balances for multiple running loans: %1', LoanRec);
                         end;
 
                         if LoanRec > ProdFac."Maximum Loan Amount" then begin
+                            Message('DEBUG: Applicant NOT eligible due to existing loan(s) exceeding maximum allowed amount');
                             EligibilityFailReason := StrSubstNo('Applicant NOT eligible due to existing %1 loan(s)', ProdFac."Product Description");
                             QualifiedAmount := 0;
                             EXIT(QualifiedAmount);
                         end;
 
                         if SalAvg <= 0 then begin
+                            Message('DEBUG: Applicant NOT eligible due to salary requirements - Salary Average: %1', SalAvg);
                             EligibilityFailReason := StrSubstNo('Applicant NOT eligible due to salary requirements');
                             QualifiedAmount := 0;
                             EXIT(QualifiedAmount);
@@ -1540,8 +1655,10 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     // amtQualified := SalaryAmount * (ProdFac."Net Salary Multiplier %" / 100);
 
                     SalAvg := SalAvg - (STOAmount + LoanRec);
+                    Message('DEBUG: Smallest salary after deductions: %1', SalAvg);
 
                     amtQualified := SalAvg * (ProdFac."Net Salary Multiplier %" / 100);
+                    Message('DEBUG: Qualified amount after salary multiplier: %1', amtQualified);
                     IF amtQualified < 0 THEN amtQualified := 0;
                     QualifiedAmount := amtQualified;
 
@@ -1552,15 +1669,22 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     // end;
 
                     if QualifiedAmount > ProdFac."Maximum Loan Amount" then begin
+                        Message('DEBUG: Qualified amount exceeds maximum - Setting to: %1', ProdFac."Maximum Loan Amount");
                         QualifiedAmount := ProdFac."Maximum Loan Amount";
                     end;
+                    Message('DEBUG: Applicant is eligible with qualified amount of: %1', QualifiedAmount);
                     EligibilityFailReason := '';
+                    if QualifiedAmount > MemberDeposit then begin
+                        QualifiedAmount := MemberDeposit;
+                        Message('DEBUG: Qualified amount adjusted to member deposit balance: %1', QualifiedAmount);
+                    end;
                     EXIT(QualifiedAmount);
                 end;
             END ELSE BEGIN
                 EligibilityFailReason := StrSubstNo('Applicant NOT eligible. FOSA transactional account NOT found');
                 QualifiedAmount := 0;
                 EXIT(QualifiedAmount);
+                Message('DEBUG: Exiting eligibility check due to missing FOSA transactional account');
             END;
         end;
         //Max all mobile loans to deposit Balance - #866 Pension Advance Eligibility
@@ -1570,7 +1694,9 @@ codeunit 52186512 "Sky M-Banking Transactions"
         OrdinaryAccounts.SetLoadFields(Balance);
         IF OrdinaryAccounts.FINDFIRST THEN BEGIN
             OrdinaryAccounts.CALCFIELDS(Balance);
+            Message('DEBUG: Deposit Balance: %1, Qualified Amount: %2', OrdinaryAccounts.Balance, amtQualified);
             iF OrdinaryAccounts.Balance < amtQualified then begin
+                Message('DEBUG: Capping qualified amount to deposit balance');
                 amtQualified := OrdinaryAccounts.Balance;
             end;
         END;
@@ -1753,6 +1879,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         // 14.	IFT_LOAN_REPAYMENT
         // 15.	CHECK_LOAN_LIMIT
         // 16.	GUARANTORSHIP_ABILITY_ENQUIRY
+        // 17.  GAMING_UTILITY_PAYMENT
         MobileTransTypes.Reset;
         case TransactionType of
             'MPESA_WITHDRAWAL':
@@ -1760,7 +1887,14 @@ codeunit 52186512 "Sky M-Banking Transactions"
             'AIRTIME_PURCHASE':
                 MobileTransTypes.SetRange(Type, MobileTransTypes.Type::Airtime);
             'BILL_PAYMENT':
-                MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Utility Payment");
+                begin
+                    MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Utility Payment");
+                    GamingPaybills.Reset;
+                    GamingPaybills.SetRange("Paybill / Till No.", ReceiverPaybillTill);
+                    if GamingPaybills.FindFirst then begin
+                        MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Gaming Utility Payment");
+                    end;
+                end;
             'BANK_TRANSFER':
                 MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Bank Transfer");
             'IFT_ACCOUNT_TO_ACCOUNT':
@@ -1779,6 +1913,15 @@ codeunit 52186512 "Sky M-Banking Transactions"
                 MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Coop P2F Deposit");
             'LOAN_REPAYMENT':
                 MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Loan Repayment");
+            'TILL_PAYMENT':
+                begin
+                    MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Till Payment");
+                    GamingPaybills.Reset;
+                    GamingPaybills.SetRange("Paybill / Till No.", ReceiverPaybillTill);
+                    if GamingPaybills.FindFirst then begin
+                        MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Gaming Utility Payment");
+                    end;
+                end;
             'SINGLE_ACCOUNT_BALANCE_ENQUIRY':
                 begin
                     MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Account Balance Enquiry");
@@ -1811,15 +1954,6 @@ codeunit 52186512 "Sky M-Banking Transactions"
                 MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Self PIN Reset");
             'GAMING_UTILITY_PAYMENT':
                 MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Gaming Utility Payment");
-            'TILL_PAYMENT':
-                begin
-                    MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Till Payment");
-                    GamingPaybills.Reset;
-                    GamingPaybills.SetRange("Paybill / Till No.", ReceiverPaybillTill);
-                    if GamingPaybills.FindFirst then begin
-                        MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Gaming Utility Payment");
-                    end;
-                end;
         end;
 
         MobileTransTypes.SetLoadFields(Code);
@@ -1906,7 +2040,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         if MobileLoanBuffer.Insert(true) then begin
             // if LoanProduct."Mobile Loan Req. Guar." then begin
 
-            //     msg := 'Dear member, To add guarantors to your ' + MobileLoanBuffer."Loan Name" + ' request of KES ' + Format(MobileLoanBuffer.Amount) + ', Please dial *882# or use our Mobile App.' +
+            //     msg := 'Dear member, To add guarantors to your ' + MobileLoanBuffer."Loan Name" + ' request of KES ' + Format(MobileLoanBuffer.Amount) + ', Please dial *839# or use our Mobile App.' +
             //           'Login > Loans > Add / Remove Guarantors. ' +
             //           'REF: ' + MobileLoanBuffer."Loan No.";
             //     SendSMS.SendSms(SMSSource::MBANKING, TheMember."Phone No.", msg, Format(MobileLoanBuffer."Loan No."), '', true, 220, false, 'CBS', MobileLoanBuffer."Loan No.", 'CBS');
@@ -1932,7 +2066,6 @@ codeunit 52186512 "Sky M-Banking Transactions"
         CreditAccounts: record "Credit Accounts";
         LoansProcess: Codeunit "Loans Process";
         NoSeries: record "No. Series";
-        // NoSeriesMgt: Codeunit NoSeriesManagement;
         NoSeriesMgt: Codeunit "No. Series";
         LoanNo: Code[50];
         MobileLnNoSeries: record "Credit Nos. Series";
@@ -1950,8 +2083,10 @@ codeunit 52186512 "Sky M-Banking Transactions"
         UserSetUp.get(UserId);
 
         Loans.Init();
-        LoanNo := NoSeriesMgt.GetNextNo(MobileLnNoSeries."Mobile Loan Nos.");
-        // NoSeriesMgt.Initseries(MobileLnNoSeries."Mobile Loan Nos.", MobileLnNoSeries."Mobile Loan Nos.", 0D, LoanNo, Loans."No. Series");
+
+        Loans."No. Series" := MobileLnNoSeries."Mobile Loan Nos.";
+        LoanNo := NoSeriesMgt.GetNextNo(Loans."No. Series");
+
         Loans."Loan No." := LoanNo;
         Loans."Mobile Loan" := true;
         Loans."Member No." := MobileLoanBuffer."Member No.";
@@ -2240,7 +2375,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     repeat begin
                         // LineNo += 1000;
 
-                        SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount").Get(1) - GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount").Get(2)), DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
+                        SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount").Get(1), DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
                         TotalCharges += GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount").Get(1);
                         if MobileTransLines."Recover Excise Duty" then
                             SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, AccType::"G/L Account", genSetUp."Excise Duty G/L", 'Excise duty on loan disbursement charges', MobileTransLines."Account Type", ''/*MobileTransLines."Account No."*/, -GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount").Get(2), DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
@@ -2565,7 +2700,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         Loan.TestField(Installments);
 
         LoanInstallments := Loan.Installments;
-        // 
+        //
         case Loan."Interest Calculation Method" of
             Loan."Interest Calculation Method"::Amortised:
                 begin
@@ -2729,8 +2864,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
                 Return := 'ERROR::::1.'+Members.Name+' is not qualified to Guarantee';
                 EXIT;
             END;
-        
-        
+
+
             Loans.RESET;
             Loans.SETRANGE("Member No.",Members."No.");
             Loans.SETFILTER("Outstanding Balance",'>0');
@@ -2739,8 +2874,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
                 Return := 'ERROR::::2.'+Members.Name+' is not qualified to Guarantee';
                 EXIT;
             END;
-        
-        
+
+
             LoanG.RESET;
             LoanG.SETRANGE("Member No",Members."No.");
             LoanG.SETFILTER("Outstanding Balance",'>0');
@@ -2751,9 +2886,9 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     EXIT;
                 END;
             END;
-        
-        
-        
+
+
+
             LoanG.RESET;
             LoanG.SETRANGE("Member No",Members."No.");
             LoanG.SETFILTER("Outstanding Balance",'>0');
@@ -2849,7 +2984,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
 
                     msg := 'Dear ' + Format(MobileLoanGuarantors."Guarantor Name") + ',' + HMember.Name +
                     ' has cancelled your guarantorship request on ' + SkyMobileLoans."Loan Name" + ' loan amounting to KES ' + Format(SkyMobileLoans.Amount) + ' on ' + Format(Today) + ' ' + Format(Time) +
-                    ' Please Accept/Decline By dialing *882#. REF: ' + Format(SkyMobileLoans."Loan No.");
+                    ' Please Accept/Decline By dialing *839#. REF: ' + Format(SkyMobileLoans."Loan No.");
                     SendSMS.SendSms(SMSSource::MBANKING, MobileLoanGuarantors."Guarantor Mobile No.", msg, Format(HMember."No."), '', true, 220, false, 'CBS', HMember."No.", 'CBS');
 
 
@@ -2888,14 +3023,14 @@ codeunit 52186512 "Sky M-Banking Transactions"
 
                         msg := 'Dear member, You have Requested ' + MobileLoanGuarantors."Guarantor Name" +
                             ' to be your Guarantor on ' + SkyMobileLoans."Loan Name" + ' amounting to KES ' + Format(SkyMobileLoans.Amount) + ' on ' + Format(Today) + ' ' + Format(Time) +
-                            ' Please notify them to Accept By dialing *882#. REF: ' + Format(SkyMobileLoans."Loan No.");
+                            ' Please notify them to Accept By dialing *839#. REF: ' + Format(SkyMobileLoans."Loan No.");
                         SendSMS.SendSms(SMSSource::MBANKING, HMember."Phone No.", msg, SkyMobileLoans."Loan No.", '', true, 220, false, 'CBS', HMember."No.", 'CBS');
 
 
 
                         msg := 'Dear member, ' + SkyMobileLoans."Account Name" +
                         ' is Requesting your Guarantorship on ' + SkyMobileLoans."Loan Name" + ' amounting to KES ' + Format(SkyMobileLoans.Amount) + ' on ' + Format(Today) + ' ' + Format(Time) +
-                        ' Please Accept by dialing *882#, Select Loans Option. REF: ' + Format(SkyMobileLoans."Entry No");
+                        ' Please Accept by dialing *839#, Select Loans Option. REF: ' + Format(SkyMobileLoans."Entry No");
                         SendSMS.SendSms(SMSSource::MBANKING, MobileLoanGuarantors."Guarantor Mobile No.", msg, SkyMobileLoans."Loan No.", '', true, 220, false, 'CBS', HMember."No.", 'CBS');
                     end;
             end
@@ -2917,13 +3052,13 @@ codeunit 52186512 "Sky M-Banking Transactions"
 
                 msg := 'Dear member, You have Requested ' + MobileLoanGuarantors."Guarantor Name" +
                     ' to be your Guarantor on ' + SkyMobileLoans."Loan Name" + ' amounting to KES ' + Format(SkyMobileLoans.Amount) + ' on ' + Format(Today) + ' ' + Format(Time) +
-                    ' Please notify them to Accept By dialing *882#. REF: ' + Format(SkyMobileLoans."Loan No.");
+                    ' Please notify them to Accept By dialing *839#. REF: ' + Format(SkyMobileLoans."Loan No.");
                 SendSMS.SendSms(SMSSource::MBANKING, HMember."Phone No.", msg, Format(SkyMobileLoans."Loan No."), '', true, 220, false, 'CBS', SkyMobileLoans."Loan No.", 'CBS');
 
 
                 msg := 'Dear ' + Format(MobileLoanGuarantors."Guarantor Name") + ',' + HMember.Name +
                 ' is Requesting your Guarantorship on ' + SkyMobileLoans."Loan Name" + ' amounting to KES ' + Format(SkyMobileLoans.Amount) + ' on ' + Format(Today) + ' ' + Format(Time) +
-                ' Please Accept/Decline By dialing *882#. REF: ' + Format(SkyMobileLoans."Loan No.");
+                ' Please Accept/Decline By dialing *839#. REF: ' + Format(SkyMobileLoans."Loan No.");
                 SendSMS.SendSms(SMSSource::MBANKING, MobileLoanGuarantors."Guarantor Mobile No.", msg, Format(SkyMobileLoans."Loan No."), '', true, 220, false, 'CBS', SkyMobileLoans."Loan No.", 'CBS');
 
             end;
@@ -2956,12 +3091,12 @@ codeunit 52186512 "Sky M-Banking Transactions"
         requestAmount: Decimal;
         var theSavingsAccount: Record "Savings Accounts";
         theTransactionCategory: Text;
-        var SearchMember: record Members
+        var SearchMember: record Members;
+        ReceiverPaybillTill: Text
     ): Boolean
     var
         theCharges: List of [Decimal];
         totalCost: Decimal;
-        ReceiverPaybillTill: Text;
     begin
         theCharges := GetTransChargesPreview(
             theTransactionCategory,
@@ -3008,7 +3143,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         todaysMpesaWithdrawals.SetRange("Savings Account", theSavingsAccount."No.");
         todaysMpesaWithdrawals.SetRange("Transaction Date", Today);
         todaysMpesaWithdrawals.SetFilter("Transaction Type",
-            '=%1|%2|%3|%4',
+            '=%1|%2|%3|%4|%5|%6',
             todaysMpesaWithdrawals."Transaction Type"::Airtime,
             todaysMpesaWithdrawals."Transaction Type"::"Bank Transfer",
             todaysMpesaWithdrawals."Transaction Type"::"Mpesa Withdrawal",
