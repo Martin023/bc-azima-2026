@@ -905,9 +905,9 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                         Topup.CalcSums("Interest Top Up");
                         OneMonthInterest := TopUp."One Month Interest";
 
-                        // PrincipleTopup := TopUp."Principle Top Up";
+                        // PrincipleTopup :=
                         // InterestTopup := TopUp."Interest Top Up";
-                        // Totaltopup := PrincipleTopup + InterestTopup;
+                        OffsetTotal := TopUp."Principle Top Up" + TopUp."Interest Top Up";
                     end;
                 end;
 
@@ -965,7 +965,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 Loan.SetRange(Loan.Posted, true);
                 Loan.SetRange(Loan."Source Unit", Loan."Source Unit"::FOSA);
                 //exclude BGL and FGL
-                Loan.SetFilter("Loan Product Type", '<>BGL&<>FGL');
+                Loan.SetFilter("Loan Product Type", '<>BGL&<>FGL&<>12');
                 Loan.SetAutoCalcFields("Total Balance");
                 Loan.SetFilter("Total Balance", '>%1', 0);
                 if Loan.FindSet() then begin

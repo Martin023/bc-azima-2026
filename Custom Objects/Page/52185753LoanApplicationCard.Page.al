@@ -1925,7 +1925,7 @@ page 52185753 "Loan Application Card"
                                                 Format(Loan."Requested Amount") + '. If in dispute call' + ' ' + CompInfo."Phone No.";
 
                                                 SendSMS.SendSms(Source::LOAN_GUARANTORS, Members."Phone No.", msg, Format(Loan."Disbursement Account No"), '', true, 0, false, 'CBS', Loan."Disbursement Account No", 'CBS');
-                                        
+
                                                 LoanGua."SMS Sent" := true;
                                                 LoanGua.Modify;
                                             end;

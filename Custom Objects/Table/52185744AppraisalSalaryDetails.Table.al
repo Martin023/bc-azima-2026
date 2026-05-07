@@ -195,6 +195,15 @@ table 52185744 "Appraisal Salary Details"
         }
         field(10; Hours; Decimal)
         {
+            trigger OnValidate()
+            begin
+                if Rec.Hours > 0 then begin
+                    if rec.Rate = 0 then
+                        Error('Please enter rate to calculate amount')
+                    else
+                        Rec.Amount := round(Rec.Rate * Rec.Hours, 0.01);
+                end;
+            end;
         }
     }
 
