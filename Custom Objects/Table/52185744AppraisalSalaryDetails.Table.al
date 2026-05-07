@@ -155,7 +155,11 @@ table 52185744 "Appraisal Salary Details"
                     end;
                 end;
                 //End of initialize STO Amount if There is Basic Amount
-                CalculateNetPay();
+                if LoanApp.Get("Loan No") then begin
+                    if (LoanApp."Source Unit" = LoanApp."Source Unit"::BOSA) then 
+                        CalculateNetPay();
+                end;
+                
             end;
         }
         field(6; "Loan No"; Code[50])
@@ -250,8 +254,17 @@ begin
 
     // STEP 1: Get Basic Pay from details
     if Rec.Type = Rec.Type::Basic then
-        curBasicPay := Rec.Amount;
-
+        curBasicPay := Rec.Amount
+    else begin
+        // Fetch Basic from existing salary detail lines
+        ApprDetails.Reset();
+        ApprDetails.SetRange("Loan No", Rec."Loan No");
+        ApprDetails.SetRange("Client Code", Rec."Client Code");
+        ApprDetails.SetRange(Type, ApprDetails.Type::Basic);
+        if ApprDetails.FindFirst() then
+            curBasicPay := ApprDetails.Amount;
+    end;
+   
     curTransAmount := ROUND(curBasicPay, 0.01, '<');
     //Message('Basic Pay: %1', curTransAmount);
     // STEP 2: Pre-calc shared values
