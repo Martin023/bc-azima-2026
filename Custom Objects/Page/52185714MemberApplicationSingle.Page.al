@@ -1207,6 +1207,7 @@ page 52185714 "Member Application Single"
 
 
                         VarVariant := Rec;
+                        ApprovalsMgmt.DeleteApprovalEntries(Rec.RecordId);
                         if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then begin
                             CustomApprovals.OnSendDocForApproval(VarVariant);
                             MemberApplication."No." := Rec."No.";
