@@ -6,6 +6,7 @@ page 52187083 "System Edits Fields"
     PageType = List;
     SourceTable = "System Edits Fields";
     CardPageId = "Image Data Edits";
+    UsageCategory = Lists;
     layout
     {
         area(content)

@@ -66,6 +66,14 @@ page 52187329 "Records"
                         //RunPageLink = Status = CONST(Approved);
                         RunPageView = where(Status = const(Approved), "Account Type" = const("Single Member Account"));
                     }
+                    action("Archived Member Applications List")
+                    {
+                        Caption = 'Archived Member Single Application';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = Page "Open Member Application List";
+                        //RunPageLink = Status = CONST(Approved);
+                        RunPageView = where(Status = const(Archived), "Account Type" = const("Single Member Account"));
+                    }
                     action("Created Member Application List")
                     {
                         ApplicationArea = Basic, Suite;
