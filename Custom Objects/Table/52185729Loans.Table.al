@@ -511,6 +511,8 @@ table 52185729 Loans
                 OtherAppraisals: Record "Other Apprails products";
                 ProductFactory: Record "Product Factory";
                 ShareBoostAmount: Decimal;
+                GeneralSetUp : Record "General Set-Up";
+                TodayDate : Date;
             begin
                 GlobalFunctions.FlagAccounts(Rec."Member No.");
                 // LoansProcess.LoanBulkClearence(Rec."Member No.");
@@ -544,6 +546,9 @@ table 52185729 Loans
                             Error('Member date of birth not captured');
                         Rec."Member Age" := (ROUND((TODAY - memebrrec."Date of Birth") / 365.2364, 1, '<'));
                         Rec."ID No." := memebrrec."Primary Identification";
+                        RetirementDate := CALCDATE(Format(GeneralSetUp."Max. Member Age"), memebrrec."Date of Birth");
+                        TodayDate := TODAY;
+                        Rec."Months to Retire" := (RetirementDate - TodayDate) DIV 30;
                     end;
                     Rec."Employer Code" := memebrrec."Employer Code";
                 end;
@@ -3248,6 +3253,11 @@ table 52185729 Loans
         {
             fieldclass = flowfield;
             CalcFormula = lookup("Electrol Zones/Area Svr Center".Description WHERE(Code = field("Work Station")));
+        }
+        field(210; "Months to Retire"; Integer)
+        {
+            DataClassification = ToBeClassified;
+            Editable = false;
         }
 
     }
