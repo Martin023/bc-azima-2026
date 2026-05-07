@@ -55,10 +55,10 @@ page 52185753 "Loan Application Card"
                         end;
                         if Members.Get(Rec."Member No.") then begin
                             if Members."Phone No." = '' then
-                                Error('Member must have phone number in the system');
+                                MEssage('Member must have phone number in the system');
 
                             if StrLen(Members."Phone No.") < 10 then
-                                Error('Member phone number is not valid');
+                                Message('Member phone number is not valid');
                         end;
                     end;
                 }
@@ -1925,7 +1925,7 @@ page 52185753 "Loan Application Card"
                                                 Format(Loan."Requested Amount") + '. If in dispute call' + ' ' + CompInfo."Phone No.";
 
                                                 SendSMS.SendSms(Source::LOAN_GUARANTORS, Members."Phone No.", msg, Format(Loan."Disbursement Account No"), '', true, 0, false, 'CBS', Loan."Disbursement Account No", 'CBS');
-                                        
+
                                                 LoanGua."SMS Sent" := true;
                                                 LoanGua.Modify;
                                             end;

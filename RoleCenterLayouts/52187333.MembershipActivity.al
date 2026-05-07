@@ -51,6 +51,7 @@ page 52187333 "Membership Activity cue"
                     }
                     field("Total Members"; Rec."Total Members")
                     {
+                        Caption = 'Active Members';
                         ApplicationArea = All;
                         ToolTip = 'Specifies the value of Active Members.';
                         trigger OnDrillDown()
@@ -228,7 +229,7 @@ page 52187333 "Membership Activity cue"
     // begin
     //     //rec."Members Created Today" := CustomCuesCodeunit.calculatememberscreatedtoday();
     // end;
-        var
+    var
         DormantMembers: Decimal;
         DeceasedMembers: Decimal;
         WithdrawnMembers: Decimal;
