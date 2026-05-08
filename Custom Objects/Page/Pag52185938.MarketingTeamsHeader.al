@@ -3,7 +3,7 @@ namespace AzimaCBS.AzimaCBS;
 page 52185938 "Marketing Teams Header"
 {
     ApplicationArea = All;
-    Caption = 'Marketing Teams Header';
+    Caption = 'Sales Team List';
     PageType = List;
     SourceTable = "Marketing Teams Header";
     UsageCategory = Lists;
@@ -15,21 +15,37 @@ page 52185938 "Marketing Teams Header"
         {
             repeater(General)
             {
-                field(No; Rec.No)
+                field(No; Rec."Payroll No.")
                 {
-                    ToolTip = 'Specifies the value of the No field.', Comment = '%';
+                    ToolTip = 'Specifies the value of the Payroll No field.', Comment = '%';
                 }
-                field(Name; Rec.Name)
+                field("Member No."; Rec."Member No.")
                 {
-                    ToolTip = 'Specifies the value of the Name field.', Comment = '%';
+                    ToolTip = 'Specifies the value of the Member No. field.', Comment = '%';
                 }
-                field("Type"; Rec."Type")
+                field("Member Name"; Rec."Member Name")
                 {
-                    ToolTip = 'Specifies the value of the Type field.', Comment = '%';
+                    ToolTip = 'Specifies the value of the Member Name field.', Comment = '%';
                 }
-                field("No. of Members"; Rec."No. of Members")
+                field(Phone; Rec.Phone)
                 {
-                    ToolTip = 'Specifies the value of the No. of Members field.', Comment = '%';
+                    ToolTip = 'Specifies the value of the Phone field.', Comment = '%';
+                }
+                field("ID Number"; Rec."ID Number")
+                {
+                    ToolTip = 'Specifies the value of the ID Number field.', Comment = '%';
+                }
+                field("Branch Code"; Rec."Branch Code")
+                {
+                    ToolTip = 'Specifies the value of the Branch Code field.', Comment = '%';
+                }
+                field("Status"; Rec."Status")
+                {
+                    ToolTip = 'Specifies the value of the Status field.', Comment = '%';
+                }
+                field("Registered By"; Rec."Registered By")
+                {
+                    ToolTip = 'Specifies the value of the Registered By field.', Comment = '%';
                 }
             }
         }
