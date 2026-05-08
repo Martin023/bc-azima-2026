@@ -66,6 +66,14 @@ page 52187329 "Records"
                         //RunPageLink = Status = CONST(Approved);
                         RunPageView = where(Status = const(Approved), "Account Type" = const("Single Member Account"));
                     }
+                    action("Archived Member Applications List")
+                    {
+                        Caption = 'Archived Member Single Application';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = Page "Open Member Application List";
+                        //RunPageLink = Status = CONST(Approved);
+                        RunPageView = where(Status = const(Archived), "Account Type" = const("Single Member Account"));
+                    }
                     action("Created Member Application List")
                     {
                         ApplicationArea = Basic, Suite;
@@ -429,8 +437,11 @@ page 52187329 "Records"
                         RunObject = Page "Checkoff Advice";
                     }
                 }
+                
 
             }
+
+            
 
             group("Savings Account")
             {
@@ -518,6 +529,7 @@ page 52187329 "Records"
                     }
                 }
             }
+            
             group("Delegates Management")
             {
                 Caption = 'Delegates Management';
@@ -709,6 +721,7 @@ page 52187329 "Records"
             //         RunObject = page "ATM Returned List";
             //     }
             // }
+            
 
             group("Member Files")
             {
@@ -1280,7 +1293,7 @@ page 52187329 "Records"
                 }
                 group("Member Withdrawal Notice")
                 {
-                    Visible = false;
+                    Visible = true;
                     Caption = 'Member Withdrawal Notice';
                     action("Open Withdrawal Notice")
                     {
