@@ -437,8 +437,11 @@ page 52187329 "Records"
                         RunObject = Page "Checkoff Advice";
                     }
                 }
+                
 
             }
+
+            
 
             group("Savings Account")
             {
@@ -526,6 +529,7 @@ page 52187329 "Records"
                     }
                 }
             }
+            
             group("Delegates Management")
             {
                 Caption = 'Delegates Management';
@@ -717,6 +721,7 @@ page 52187329 "Records"
             //         RunObject = page "ATM Returned List";
             //     }
             // }
+            
 
             group("Member Files")
             {
@@ -1288,7 +1293,7 @@ page 52187329 "Records"
                 }
                 group("Member Withdrawal Notice")
                 {
-                    Visible = false;
+                    Visible = true;
                     Caption = 'Member Withdrawal Notice';
                     action("Open Withdrawal Notice")
                     {
