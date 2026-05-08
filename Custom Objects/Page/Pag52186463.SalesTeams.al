@@ -3,10 +3,9 @@ namespace AzimaCBS.AzimaCBS;
 page 52186490 "Sales Teams"
 {
     ApplicationArea = All;
-    Caption = 'Sales Teams';
+    Caption = 'Sales Card';
     PageType = Card;
     SourceTable = "Marketing Teams Header";
-
     layout
     {
         area(Content)
@@ -15,29 +14,70 @@ page 52186490 "Sales Teams"
             {
                 Caption = 'General';
 
-                field(No; Rec.No)
+                field(No; Rec."Payroll No.")
                 {
-                    ToolTip = 'Specifies the value of the No field.', Comment = '%';
+                    ToolTip = 'Specifies the value of the Payroll No field.', Comment = '%';
+                    Editable = NOT Rec.Created;
                 }
-                field(Name; Rec.Name)
+                field("Member No."; Rec."Member No.")
                 {
-                    ToolTip = 'Specifies the value of the Name field.', Comment = '%';
+                    ToolTip = 'Specifies the value of the Member No. field.', Comment = '%';
+                    Editable = false;
                 }
-                field("No. of Members"; Rec."No. of Members")
+                field("Member Name"; Rec."Member Name")
                 {
-                    ToolTip = 'Specifies the value of the No. of Members field.', Comment = '%';
+                    ToolTip = 'Specifies the value of the Member Name field.', Comment = '%';
+                    Editable = false;
                 }
-                field("Type"; Rec."Type")
+                field(Phone; Rec.Phone)
                 {
-                    ToolTip = 'Specifies the value of the Type field.', Comment = '%';
+                    ToolTip = 'Specifies the value of the Phone field.', Comment = '%';
+                    Editable = false;
                 }
-            }
-
-            part(SalesLines; "Marketing Teams Lines")
-            {
-                // Editable = statuseditable;
-                SubPageLink = No = FIELD(No);
+                field("ID Number"; Rec."ID Number")
+                {
+                    ToolTip = 'Specifies the value of the ID Number field.', Comment = '%';
+                    Editable = false;
+                }
+                field("Branch Code"; Rec."Branch Code")
+                {
+                    ToolTip = 'Specifies the value of the Branch Code field.', Comment = '%';
+                    Editable = false;
+                }
+                field("Status"; Rec."Status")
+                {
+                    ToolTip = 'Specifies the value of the Status field.', Comment = '%';
+                    Editable = false;
+                }
+                field("Registered By"; Rec."Registered By")
+                {
+                    ToolTip = 'Specifies the value of the Registered By field.', Comment = '%';
+                    Editable = false;
+                }
             }
         }
+    }
+
+    actions
+    {
+        area(Processing)
+        {
+            action(CreateSalesRep)
+            {
+                ApplicationArea = All;
+                Caption = 'Create Sales Rep';
+                Image = Post;
+                Enabled = NOT Rec.Created;
+                ToolTip = 'Creates the sales representative and locks the record from further editing.';
+
+                trigger OnAction()
+                begin
+                    Rec.Validate(Created, true);
+                    Rec.Modify(true);
+                    Message('Sales rep added successfully.');
+                end;
+            }
+        }
+        
     }
 }
