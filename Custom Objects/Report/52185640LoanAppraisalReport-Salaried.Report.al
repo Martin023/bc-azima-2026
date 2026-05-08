@@ -860,7 +860,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                         until PCharges.Next = 0;
                     end;
                 end;
-
+                Loans.CalcFields("Total TopUp");
                 if Loans."Total TopUp" > 0 then begin
 
                     //Pass loan clearance principle and interest

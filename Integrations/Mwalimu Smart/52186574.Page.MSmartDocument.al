@@ -200,7 +200,7 @@ page 52186574 "M-Smart Document"
                                     theLoanApplication.SetRange("Mwalimu Smart Document", Rec."No.");
 
                                     if theLoanApplication.FindFirst then begin
-                                        Page.Run(Page::"Loan Application Card_BOSA", theLoanApplication);
+                                        Page.Run(Page::"Loan Application Card", theLoanApplication);
                                     end else begin
                                         theLoanApplication.Init;
 
@@ -237,7 +237,7 @@ page 52186574 "M-Smart Document"
                                         theLoanApplication.SetRange("Mwalimu Smart Document", Rec."No.");
 
                                         if theLoanApplication.FindFirst then begin
-                                            Page.Run(Page::"Loan Application Card_BOSA", theLoanApplication);
+                                            Page.Run(Page::"Loan Application Card", theLoanApplication);
                                         end
                                     end;
                                 end;

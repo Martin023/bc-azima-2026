@@ -60,6 +60,8 @@ page 52185753 "Loan Application Card"
                             if StrLen(Members."Phone No.") < 10 then
                                 Message('Member phone number is not valid');
                         end;
+
+                        
                     end;
                 }
                 field("Staff No"; Rec."Staff No")
