@@ -60,7 +60,7 @@ table 52185742 "Loans Top up"
                     //         "Principle Top Up" := 0;
                     // end else begin
                     "Loan Type" := Loans."Loan Product Type";
-                    "One Month Interest" := (Loans."Outstanding Balance" * Loans.Interest * 0.01 / 12);
+
                     "Principle Top Up" := Loans."Outstanding Balance";
                     "Interest Top Up" := (Loans."Outstanding Interest" + "Daily Interest");
                     "Monthly Repayment" := Loans.Repayment;
@@ -144,6 +144,8 @@ table 52185742 "Loans Top up"
                 end;
                 if "Principle Top Up" < 0 then "Principle Top Up" := 0;
                 // "Total Top Up" := "Principle Top Up" + "Interest Top Up";
+                if Loans.get("Loan Top Up") then
+                    "One Month Interest" := "Principle Top Up" * Loans.Interest * 0.01 / 12;
             end;
         }
         field(6; "Interest Top Up"; Decimal)

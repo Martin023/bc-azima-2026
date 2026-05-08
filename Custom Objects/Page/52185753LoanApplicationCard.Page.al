@@ -55,10 +55,10 @@ page 52185753 "Loan Application Card"
                         end;
                         if Members.Get(Rec."Member No.") then begin
                             if Members."Phone No." = '' then
-                                Error('Member must have phone number in the system');
+                                MEssage('Member must have phone number in the system');
 
                             if StrLen(Members."Phone No.") < 10 then
-                                Error('Member phone number is not valid');
+                                Message('Member phone number is not valid');
                         end;
                     end;
                 }
@@ -260,6 +260,11 @@ page 52185753 "Loan Application Card"
                 {
                     ApplicationArea = Basic, Suite;
                     Editable = CheckRetirementDate;
+                }
+                field("Months to Retire"; Rec."Months to Retire")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = false;
                 }
                 field(Installments; Rec.Installments)
                 {
@@ -1909,19 +1914,22 @@ page 52185753 "Loan Application Card"
                                     repeat
                                         // MESSAGE(FORMAT(LoanGua."Member No"));
                                         if Members.Get(LoanGua."Member No") then begin
-                                            if Loan.Posted = true then
-                                                exit;
-                                            CompInfo.Get;
-                                            MemberGuarantor.Get(LoanGua."Member Guaranteed");
+                                            if Members."Phone No." <> '' then begin
+                                                if Loan.Posted = true then
+                                                    exit;
+                                                CompInfo.Get;
+                                                MemberGuarantor.Get(LoanGua."Member Guaranteed");
 
-                                            msg := 'Dear Member, You have guaranteed MNo: '
-                                            + LoanGua."Member Guaranteed" + '-' + MemberGuarantor.Name + ' ' + Loan."Loan Product Type Name" + ' of KES ' +
-                                            Format(Loan."Requested Amount") + '. If in dispute call' + ' ' + CompInfo."Phone No.";
+                                                msg := 'Dear Member, You have guaranteed MNo: '
+                                                + LoanGua."Member Guaranteed" + '-' + MemberGuarantor.Name + ' ' + Loan."Loan Product Type Name" + ' of KES ' +
+                                                Format(Loan."Requested Amount") + '. If in dispute call' + ' ' + CompInfo."Phone No.";
 
-                                            SendSMS.SendSms(Source::LOAN_GUARANTORS, Members."Phone No.", msg, Format(Loan."Disbursement Account No"), '', true, 0, false, 'CBS', Loan."Disbursement Account No", 'CBS');
+                                                SendSMS.SendSms(Source::LOAN_GUARANTORS, Members."Phone No.", msg, Format(Loan."Disbursement Account No"), '', true, 0, false, 'CBS', Loan."Disbursement Account No", 'CBS');
+
+                                                LoanGua."SMS Sent" := true;
+                                                LoanGua.Modify;
+                                            end;
                                         end;
-                                        LoanGua."SMS Sent" := true;
-                                        LoanGua.Modify;
                                     until LoanGua.Next = 0;
 
                                     //END;

@@ -257,11 +257,11 @@ page 52185714 "Member Application Single"
                     ShowMandatory = true;
                     ApplicationArea = all;
                 }
-                field("Sub Class"; Rec."Sub Class")
-                {
-                    ApplicationArea = all;
+                // field("Sub Class"; Rec."Sub Class")
+                // {
+                //     ApplicationArea = all;
 
-                }
+                // }
                 field("Date of Birth"; Rec."Date of Birth")
                 {
                     ApplicationArea = all;
@@ -1207,6 +1207,7 @@ page 52185714 "Member Application Single"
 
 
                         VarVariant := Rec;
+                        ApprovalsMgmt.DeleteApprovalEntries(Rec.RecordId);
                         if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then begin
                             CustomApprovals.OnSendDocForApproval(VarVariant);
                             MemberApplication."No." := Rec."No.";
@@ -1322,13 +1323,14 @@ page 52185714 "Member Application Single"
                         if not Rec.Created then begin
                             if not Confirm('Are you sure you want to open this record?') then exit;
 
-                            VarVariant := Rec;
-                            CustomApprovals.OnCancelDocApprovalRequest(VarVariant);
+                            // VarVariant := Rec;
+                            // CustomApprovals.OnCancelDocApprovalRequest(VarVariant);
 
                             if rec.Status <> rec.Status::open then begin
                                 rec.Status := rec.Status::Open;
                                 rec.Modify();
-                                CurrPage.Update();
+                                //CurrPage.Update();
+                                Message('The record have been opened successfully.');
                             end;
 
                         end else

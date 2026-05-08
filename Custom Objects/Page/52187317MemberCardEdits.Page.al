@@ -204,6 +204,25 @@ page 52187317 "Member Card Edits"
                         if SystemFilterFields.FindFirst() then begin
                             SystemFilterFields."New Value" := Format("Date of Birth");
                             SystemFilterFields.Validate("New Value");
+                            Age := FillAge("Date of Birth", 39);
+                            SystemFilterFields.Modify();
+                        end;
+                    end;
+                }
+                field(Age; Age)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Age';
+                    Editable = false;
+                    Visible = true;
+                    trigger OnValidate()
+                    begin
+                        SystemFilterFields.Reset();
+                        SystemFilterFields.SetRange("Record ID", RecordID);
+                        SystemFilterFields.SetRange("Field ID", 91);
+                        if SystemFilterFields.FindFirst() then begin
+                            SystemFilterFields."New Value" := Format("Age");
+                            SystemFilterFields.Validate("New Value");
                             SystemFilterFields.Modify();
                         end;
                     end;
@@ -885,41 +904,41 @@ page 52187317 "Member Card Edits"
                     Editable = false;
                 }
 
-                field("Recruited by Type"; "Recruited by Type")
-                {
-                    Editable = UserCanEditThisValue;
+                // field("Recruited by Type"; "Recruited by Type")
+                // {
+                //     Editable = UserCanEditThisValue;
 
-                    ApplicationArea = Basic, Suite;
-                    trigger OnValidate()
-                    begin
-                        SystemFilterFields.Reset();
-                        SystemFilterFields.SetRange("Record ID", RecordID);
-                        SystemFilterFields.SetRange("Field ID", 82);
-                        if SystemFilterFields.FindFirst() then begin
-                            SystemFilterFields."New Value" := Format("Recruited by Type");
-                            SystemFilterFields.Validate("New Value");
-                            SystemFilterFields.Modify();
-                        end;
-                    end;
-                }
-                field("Recruited By"; "Recruited By")
-                {
-                    Editable = UserCanEditThisValue;
+                //     ApplicationArea = Basic, Suite;
+                //     trigger OnValidate()
+                //     begin
+                //         SystemFilterFields.Reset();
+                //         SystemFilterFields.SetRange("Record ID", RecordID);
+                //         SystemFilterFields.SetRange("Field ID", 82);
+                //         if SystemFilterFields.FindFirst() then begin
+                //             SystemFilterFields."New Value" := Format("Recruited by Type");
+                //             SystemFilterFields.Validate("New Value");
+                //             SystemFilterFields.Modify();
+                //         end;
+                //     end;
+                // }
+                // field("Recruited By"; "Recruited By")
+                // {
+                //     Editable = UserCanEditThisValue;
 
-                    ApplicationArea = Basic, Suite;
-                    TableRelation = Members."No.";
-                    trigger OnValidate()
-                    begin
-                        SystemFilterFields.Reset();
-                        SystemFilterFields.SetRange("Record ID", RecordID);
-                        SystemFilterFields.SetRange("Field ID", 80);
-                        if SystemFilterFields.FindFirst() then begin
-                            SystemFilterFields."New Value" := Format("Recruited By");
-                            SystemFilterFields.Validate("New Value");
-                            SystemFilterFields.Modify();
-                        end;
-                    end;
-                }
+                //     ApplicationArea = Basic, Suite;
+                //     TableRelation = Members."No.";
+                //     trigger OnValidate()
+                //     begin
+                //         SystemFilterFields.Reset();
+                //         SystemFilterFields.SetRange("Record ID", RecordID);
+                //         SystemFilterFields.SetRange("Field ID", 80);
+                //         if SystemFilterFields.FindFirst() then begin
+                //             SystemFilterFields."New Value" := Format("Recruited By");
+                //             SystemFilterFields.Validate("New Value");
+                //             SystemFilterFields.Modify();
+                //         end;
+                //     end;
+                // }
                 field("Introducer's Name"; "Recruited By Name")
                 {
                     Editable = UserCanEditThisValue;
@@ -1727,6 +1746,9 @@ page 52187317 "Member Card Edits"
                 if SystemFilterFields."Field ID" = 39 then begin
                     "Date of Birth" := FieldRef.Value;
                 end;
+                if SystemFilterFields."Field ID" = 91 then begin
+                    Age := FieldRef.Value;
+                end;
                 if SystemFilterFields."Field ID" = 42 then begin
                     Gender := FieldRef.Value;
                 end;
@@ -1820,12 +1842,13 @@ page 52187317 "Member Card Edits"
                 if SystemFilterFields."Field ID" = 12 then begin
                     "Global Dimension 2 Code" := FieldRef.Value;
                 end;
-                if SystemFilterFields."Field ID" = 82 then begin
-                    "Recruited by Type" := FieldRef.Value;
-                end;
-                if SystemFilterFields."Field ID" = 80 then begin
-                    "Recruited By" := FieldRef.Value;
-                end;
+            
+                // if SystemFilterFields."Field ID" = 80 then begin
+                //     "Recruited By" := FieldRef.Value;
+                // end;
+                // if SystemFilterFields."Field ID" = 82 then begin
+                //     "Recruited by Type" := FieldRef.Value;
+                // end;
                 if SystemFilterFields."Field ID" = 52 then begin
                     "Bank Code" := FieldRef.Value;
                 end;
@@ -2048,6 +2071,38 @@ page 52187317 "Member Card Edits"
         exit(Salute + ' ' + First + ' ' + Middle + ' ' + Other);
     end;
 
+    local procedure FillAge(DateofBirth: Date; Position: Integer): Integer
+    var
+        MemberAge: Integer;
+        NewBirthDate: Date;
+    begin
+        // Get existing Date of Birth
+        SystemFilterFieldsII.Reset();
+        SystemFilterFieldsII.SetRange("Record ID", RecordID);
+        SystemFilterFieldsII.SetRange("Field ID", 39); // Date of Birth
+        if SystemFilterFieldsII.FindFirst() then begin
+            Evaluate(SystemFilterFieldsII."New Value", Format(DateofBirth));
+        end;
+
+        if Position = 39 then NewBirthDate := DateofBirth;
+
+        // Calculate Age
+        if NewBirthDate <> 0D then begin
+            MemberAge := Date2DMY(Today, 3) - Date2DMY(NewBirthDate, 3);
+        end
+        else
+            MemberAge := 0;
+        // Update Age Field (Field ID = 91)
+        SystemFilterFieldsII.Reset();
+        SystemFilterFieldsII.SetRange("Record ID", RecordID);
+        SystemFilterFieldsII.SetRange("Field ID", 91);
+        if SystemFilterFieldsII.FindFirst() then begin
+            SystemFilterFieldsII.Validate("New Value", Format(MemberAge));
+            SystemFilterFieldsII.Modify();
+        end;
+        exit(MemberAge);
+    end;
+
     var
         SystemEdits: Record "System Edits";
         VarVariant: Variant;
@@ -2088,6 +2143,7 @@ page 52187317 "Member Card Edits"
         "Secondary Identification": Code[30];
         "P.I.N Number": Code[50];
         "Date of Birth": Date;
+        Age: Integer;
         Gender: enum Gender;
         "Marital Status": Enum "Marital Status";
         "From Another Sacco": Boolean;

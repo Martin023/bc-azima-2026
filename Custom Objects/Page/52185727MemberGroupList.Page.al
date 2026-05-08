@@ -49,6 +49,7 @@ page 52185727 "Member Group List"
                 field("Company Registration No."; Rec."Company Registration No.")
                 {
                     ApplicationArea = Basic, Suite;
+                    caption = 'Registration No.';
                 }
                 field(Status; Rec.Status)
                 {
@@ -86,28 +87,28 @@ page 52185727 "Member Group List"
                 field("Group Savings Account Status"; GroupSavingsAccStatus)
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'Group Savings Account Status';
+                    Caption = 'MFI Savings Account Status';
                 }
                 field("Group Savings Account Balance"; Rec."Group Savings Balance")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'Group Savings Account Balance';
+                    Caption = 'MFI Savings Account Balance';
                 }
 
                 field("FOSA Account"; Rec."FOSA Account")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'ODS Account No.';
+                    Caption = 'FOSA Account No.';
                 }
                 field("FOSA Account Status"; Rec."FOSA Account Status")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'ODS Account Status';
+                    Caption = 'FOSA Account Status';
                 }
                 field("FOSA Savings"; Rec."FOSA Savings")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'ODS Account Balance';
+                    Caption = 'FOSA Account Balance';
                 }
                 field("Deposit Account No."; BOSAAccNo)
                 {
