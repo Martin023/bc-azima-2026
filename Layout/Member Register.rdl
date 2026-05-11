@@ -1330,6 +1330,12 @@ End Function
         <Field Name="Status_Members">
           <DataField>Status_Members</DataField>
         </Field>
+        <Field Name="Age">
+          <DataField>Age</DataField>
+        </Field>
+        <Field Name="Gender">
+          <DataField>Gender</DataField>
+        </Field>
         <Field Name="SCount">
           <DataField>SCount</DataField>
         </Field>

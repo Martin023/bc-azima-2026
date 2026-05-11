@@ -1843,12 +1843,12 @@ page 52187317 "Member Card Edits"
                     "Global Dimension 2 Code" := FieldRef.Value;
                 end;
             
-                // if SystemFilterFields."Field ID" = 80 then begin
-                //     "Recruited By" := FieldRef.Value;
-                // end;
-                // if SystemFilterFields."Field ID" = 82 then begin
-                //     "Recruited by Type" := FieldRef.Value;
-                // end;
+                if SystemFilterFields."Field ID" = 80 then begin
+                    "Recruited By" := FieldRef.Value;
+                end;
+                if SystemFilterFields."Field ID" = 82 then begin
+                    "Recruited by Type" := FieldRef.Value;
+                end;
                 if SystemFilterFields."Field ID" = 52 then begin
                     "Bank Code" := FieldRef.Value;
                 end;
