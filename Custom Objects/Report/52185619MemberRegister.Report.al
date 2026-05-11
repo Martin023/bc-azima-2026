@@ -10,7 +10,7 @@ Report 52185619 "Member Register"
     {
         dataitem(Members; Members)
         {
-            RequestFilterFields = "No.", Status, "Employer Code", "Registration Date", "Account Type", "Global Dimension 1 Code", "Global Dimension 2 Code", Nationality;
+            RequestFilterFields = "No.", Status, "Employer Code", "Registration Date", "Account Type", "Global Dimension 1 Code", "Global Dimension 2 Code", Nationality,Gender;
             column(ReportForNavId_1; 1)
             {
             }
@@ -75,6 +75,12 @@ Report 52185619 "Member Register"
             }
 
             column(Status_Members; Members.Status)
+            {
+            }
+            column(Age; Members."Recruited By Name")
+            {
+            }
+            column(Gender; Members.Gender)
             {
             }
             column(SCount; SNo)
