@@ -2363,7 +2363,7 @@ table 52185729 Loans
             OptionCaption = ' ,03rd,05th,10th,15th,20th,25th,28th';
             OptionMembers = " ","03rd","05th","10th","15th","20th","25th","28th";
         }
-        field(50012; "Member Category"; Code[10])
+        field(50012; "Member Class"; Code[10])
         {
             CalcFormula = Lookup(Members."Member Class" WHERE("No." = FIELD("Member No.")));
             FieldClass = FlowField;

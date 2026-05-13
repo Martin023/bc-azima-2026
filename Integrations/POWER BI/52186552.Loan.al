@@ -12,7 +12,7 @@ page 52186552 Loan
     SourceTable = Loans;
 
     ODataKeyFields = SystemId;
-    
+
     InsertAllowed = false;
     ModifyAllowed = false;
     DeleteAllowed = false;
@@ -495,7 +495,7 @@ page 52186552 Loan
                 {
                     Caption = 'Member Age';
                 }
-                field(memberCategory; Rec."Member Category")
+                field(memberCategory; Rec."Member Class")
                 {
                     Caption = 'Member Category';
                 }
