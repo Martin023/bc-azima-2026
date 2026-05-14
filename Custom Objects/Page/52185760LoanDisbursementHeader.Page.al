@@ -138,67 +138,87 @@ page 52185760 "Loan Disbursement Header"
                 PromotedCategory = Process;
 
                 trigger OnAction()
+                var
+                    BatchLines: record "Loan Disbursement Lines";
+                    Loanz: record Loans;
                 begin
                     Rec.TestField(Posted, false);
                     Rec.TestField(Status, Rec.Status::Approved);
                     if Rec."Disbursement Destination" <> Rec."Disbursement Destination"::Normal then
                         Rec.TestField("Disburse Accounts");
-                    if Rec."Subsequent Disbursements" = Rec."Subsequent Disbursements"::No then
-                        Posting.PostLoan(Rec."No.")
-                    else
-                        Posting."PostLoan Subsequent Disbursements"(Rec."No.");
+                    if Rec."Subsequent Disbursements" = Rec."Subsequent Disbursements"::No then begin
+                        //Posting.PostLoan(Rec."No.")
+                        BatchLines.Reset;
+                        BatchLines.SetRange(BatchLines.No, rec."No.");
+                        BatchLines.SetRange(BatchLines.Posted, false);
+                        if BatchLines.Find('-') then begin
+                            repeat
+                                if Loanz.Get(BatchLines."Loan No.") then begin
+                                    Posting.PostLoanNormal(Loans."Loan No.");
+                                    BatchLines.Posted := true;
+                                    BatchLines."Posted By" := UserId();
+                                    BatchLines."Date Posted" := Today();
+                                    BatchLines."Time Posted" := Time;
+                                    BatchLines.Modify;
+                                end;
+                            until BatchLines.Next() = 0;
+                        end
+                        else
+                            Posting."PostLoan Subsequent Disbursements"(Rec."No.");
 
-                    //Send SMS when Topup
-                    DSLines.Reset;
-                    DSLines.SetRange(No, Rec."No.");
-                    if DSLines.FindFirst then begin
-                        repeat
-                            LoansTopUp.Reset;
-                            LoansTopUp.SetRange("Loan No.", DSLines."Loan No.");
-                            if LoansTopUp.FindFirst then begin
-                                repeat
-                                    LoanGuar.Reset;
-                                    LoanGuar.SetRange("Loan No", LoansTopUp."Loan Top Up");
-                                    LoanGuar.SetRange("Self Guarantee", false);
-                                    if LoanGuar.FindFirst then begin
-                                        if Loans2.Get(LoanGuar."Loan No") then begin
-                                            ProductType := Loans2."Loan Product Type Name";
-                                            AppAmount := Loans2."Approved Amount";
-                                        end;
-                                        repeat
-                                            if Members.Get(LoanGuar."Member No") then
-                                                CompInfo.Get;
-                                        //TICKET:#608 STOP SMS TO GUARANTORS ON CLEARED LOANS
-                                        // msg := 'Dear ' + LoanGuar.Name + ', The ' + ProductType + ' of Ksh. ' + Format(AppAmount) + ', you had guaranteed ' + LoanGuar."Loanee Name" + ' is now fully repaid.';
+                        // //Send SMS when Topup
+                        // DSLines.Reset;
+                        // DSLines.SetRange(No, Rec."No.");
+                        // if DSLines.FindFirst then begin
+                        //     repeat
+                        //         LoansTopUp.Reset;
+                        //         LoansTopUp.SetRange("Loan No.", DSLines."Loan No.");
+                        //         if LoansTopUp.FindFirst then begin
+                        //             repeat
+                        //                 LoanGuar.Reset;
+                        //                 LoanGuar.SetRange("Loan No", LoansTopUp."Loan Top Up");
+                        //                 LoanGuar.SetRange("Self Guarantee", false);
+                        //                 if LoanGuar.FindFirst then begin
+                        //                     if Loans2.Get(LoanGuar."Loan No") then begin
+                        //                         ProductType := Loans2."Loan Product Type Name";
+                        //                         AppAmount := Loans2."Approved Amount";
+                        //                     end;
+                        //                     repeat
+                        //                         if Members.Get(LoanGuar."Member No") then
+                        //                             CompInfo.Get;
+                        //                     //TICKET:#608 STOP SMS TO GUARANTORS ON CLEARED LOANS
+                        //                     // msg := 'Dear ' + LoanGuar.Name + ', The ' + ProductType + ' of Ksh. ' + Format(AppAmount) + ', you had guaranteed ' + LoanGuar."Loanee Name" + ' is now fully repaid.';
 
-                                        // SendSMS.SendSms(Source::LOAN_GUARANTORS, Members."Phone No.", msg, Format(Loans2."Disbursement Account No"), '', true, 0, false, 'CBS', Loans2."Disbursement Account No", 'CBS');
+                        //                     // SendSMS.SendSms(Source::LOAN_GUARANTORS, Members."Phone No.", msg, Format(Loans2."Disbursement Account No"), '', true, 0, false, 'CBS', Loans2."Disbursement Account No", 'CBS');
 
-                                        until LoanGuar.Next = 0;
-                                    end;
-                                until LoansTopUp.Next = 0;
-                            end;
-                        until DSLines.Next = 0;
-                    end;
+                        //                     until LoanGuar.Next = 0;
+                        //                 end;
+                        //             until LoansTopUp.Next = 0;
+                        //         end;
+                        //     until DSLines.Next = 0;
+                        // end;
 
 
-                    //Set FOSA Savings Account to Frozen
-                    DSLines.Reset;
-                    DSLines.SetRange(No, Rec."No.");
-                    if DSLines.FindFirst then begin
-                        repeat
-                            LoanGuar.Reset;
-                            LoanGuar.SetRange("Loan No", DSLines."Loan No.");
-                            LoanGuar.SetFilter("Guarantor Type", '%1', LoanGuar."Guarantor Type"::Collateral);
-                            if LoanGuar.FindFirst then
-                                SavingsAccounts.Reset;
-                            SavingsAccounts.SetRange("Member No.", LoanGuar."Savings Account No./Member No.");
-                            SavingsAccounts.SetRange("Loan Disbursement Account", true);
-                            if SavingsAccounts.FindFirst then begin
-                                SavingsAccounts.Status := SavingsAccounts.Status::Frozen;
-                                SavingsAccounts."Status Change Reason" := 'FROZEN: Refer to Investment Manager';
-                                SavingsAccounts.Modify;
-                            end;
-                        until DSLines.Next = 0;
+                        // //Set FOSA Savings Account to Frozen
+                        // DSLines.Reset;
+                        // DSLines.SetRange(No, Rec."No.");
+                        // if DSLines.FindFirst then begin
+                        //     repeat
+                        //         LoanGuar.Reset;
+                        //         LoanGuar.SetRange("Loan No", DSLines."Loan No.");
+                        //         LoanGuar.SetFilter("Guarantor Type", '%1', LoanGuar."Guarantor Type"::Collateral);
+                        //         if LoanGuar.FindFirst then
+                        //             SavingsAccounts.Reset;
+                        //         SavingsAccounts.SetRange("Member No.", LoanGuar."Savings Account No./Member No.");
+                        //         SavingsAccounts.SetRange("Loan Disbursement Account", true);
+                        //         if SavingsAccounts.FindFirst then begin
+                        //             SavingsAccounts.Status := SavingsAccounts.Status::Frozen;
+                        //             SavingsAccounts."Status Change Reason" := 'FROZEN: Refer to Investment Manager';
+                        //             SavingsAccounts.Modify;
+                        //         end;
+                        //     until DSLines.Next = 0;
+                        // end;
+                        Message('Loan Disbursement Posted Successfully.');
                     end;
                 end;
             }

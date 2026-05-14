@@ -511,8 +511,8 @@ table 52185729 Loans
                 OtherAppraisals: Record "Other Apprails products";
                 ProductFactory: Record "Product Factory";
                 ShareBoostAmount: Decimal;
-                GeneralSetUp : Record "General Set-Up";
-                TodayDate : Date;
+                GeneralSetUp: Record "General Set-Up";
+                TodayDate: Date;
             begin
                 GlobalFunctions.FlagAccounts(Rec."Member No.");
                 // LoansProcess.LoanBulkClearence(Rec."Member No.");
@@ -1023,27 +1023,27 @@ table 52185729 Loans
                         end;
                     end;
                 end;
-                LoanApp.Reset;
-                LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
-                LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");
-                LoanApp.SetRange(LoanApp."Source Unit", LoanApp."Source Unit"::BOSA);
-                LoanApp.SetFilter(LoanApp."Total Loan Balance", '>0');
-                if LoanApp.Find('-') then begin
-                    LoanApp.CalcFields("Total Loan Balance");
-                    if LoanApp."Total Loan Balance" > 0 then begin
-                        LoansTopup.Reset;
-                        LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
-                        LoansTopup.SetRange("Loan Top Up", LoanApp."Loan No.");
-                        if not LoansTopup.Find('-') then begin
-                            LoansTopup.init;
-                            LoansTopup."Loan No." := Rec."Loan No.";
-                            LoansTopup."Client Code" := rec."Member No.";
-                            LoansTopup."Loan Top Up" := LoanApp."Loan No.";
-                            LoansTopup.insert;
-                        end;
+                // LoanApp.Reset;
+                // LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
+                // LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");
+                // LoanApp.SetRange(LoanApp."Source Unit", LoanApp."Source Unit"::BOSA);
+                // LoanApp.SetFilter(LoanApp."Total Loan Balance", '>0');
+                // if LoanApp.Find('-') then begin
+                //     LoanApp.CalcFields("Total Loan Balance");
+                //     if LoanApp."Total Loan Balance" > 0 then begin
+                //         LoansTopup.Reset;
+                //         LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
+                //         LoansTopup.SetRange("Loan Top Up", LoanApp."Loan No.");
+                //         if not LoansTopup.Find('-') then begin
+                //             LoansTopup.init;
+                //             LoansTopup."Loan No." := Rec."Loan No.";
+                //             LoansTopup."Client Code" := rec."Member No.";
+                //             LoansTopup."Loan Top Up" := LoanApp."Loan No.";
+                //             LoansTopup.insert;
+                //         end;
 
-                    end;
-                end;
+                //     end;
+                // end;
                 ProdFac.Reset;
                 ProdFac.SetRange("Product ID", Rec."Loan Product Type");
                 if ProdFac.FindFirst then begin
@@ -2363,7 +2363,7 @@ table 52185729 Loans
             OptionCaption = ' ,03rd,05th,10th,15th,20th,25th,28th';
             OptionMembers = " ","03rd","05th","10th","15th","20th","25th","28th";
         }
-        field(50012; "Member Category"; Code[10])
+        field(50012; "Member Class"; Code[10])
         {
             CalcFormula = Lookup(Members."Member Class" WHERE("No." = FIELD("Member No.")));
             FieldClass = FlowField;

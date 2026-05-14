@@ -185,10 +185,8 @@ table 52185744 "Appraisal Salary Details"
         {
             trigger OnValidate()
             begin
-                if Rec.Rate > 0 then begin
-                    if rec.Hours = 0 then
-                        Error('Please enter hours to calculate amount')
-                    else
+                if Rec.Hours > 0 then begin
+                    if rec.Rate > 0 then
                         Rec.Amount := round(Rec.Rate * Rec.Hours, 0.01);
                 end;
             end;
@@ -197,7 +195,11 @@ table 52185744 "Appraisal Salary Details"
         {
             trigger OnValidate()
             begin
-                Rec.Amount := round(Rec.Rate * Rec.Hours, 0.01);
+                if Rec.Hours > 0 then begin
+                    if rec.Rate > 0 then
+                        Rec.Amount := round(Rec.Rate * Rec.Hours, 0.01);
+                end;
+
             end;
         }
     }

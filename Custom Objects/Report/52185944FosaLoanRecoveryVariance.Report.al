@@ -9,7 +9,7 @@ Report 52185944 "Loan Recovery Variance"
         dataitem(Loans; Loans)
         {
             DataItemTableView = where("Source Unit" = filter(FOSA));
-            RequestFilterFields = "Loan No.", "Loan Product Type", "Member No.", "Member Category";
+            RequestFilterFields = "Loan No.", "Loan Product Type", "Member No.", "Member Class";
             column(ReportForNavId_1; 1)
             {
             }
