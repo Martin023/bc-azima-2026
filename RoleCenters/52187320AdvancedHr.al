@@ -475,12 +475,12 @@ page 52187320 AdvancedHumanResources
                         //     ApplicationArea = Basic, suite;
                         //     RunObject = page "HR BSC List Targets-Supervisor";
                         // }
-                        action("HR BSC List Quater1")
-                        {
-                            Caption = 'HR BSC List Quater1';
-                            ApplicationArea = Basic, suite;
-                            RunObject = page "HR BSC List Qaurter 1";
-                        }
+                        // action("HR BSC List Quater1")
+                        // {
+                        //     Caption = 'HR BSC List Quater1';
+                        //     ApplicationArea = Basic, suite;
+                        //     RunObject = page "HR BSC List Qaurter 1";
+                        // }
                         // action("HR BSC List Review")
                         // {
                         //     Caption = 'HR BSC List Review';
@@ -535,13 +535,13 @@ page 52187320 AdvancedHumanResources
                     group(randanalysis)
                     {
                         Caption = 'Reports and Analysis';
-                        action(PerfomanceReport)
-                        {
-                            Caption = 'Perfomance Report';
-                            ApplicationArea = Basic, Suite;
-                            RunObject = report "Performance Report";
+                        // action(PerfomanceReport)
+                        // {
+                        //     Caption = 'Perfomance Report';
+                        //     ApplicationArea = Basic, Suite;
+                        //     RunObject = report "Performance Report";
 
-                        }
+                        // }
                         action(Perfomance)
                         {
                             Caption = 'Perfomance Report';
@@ -550,13 +550,13 @@ page 52187320 AdvancedHumanResources
                             ;
 
                         }
-                        action(AppraisalReport)
-                        {
-                            Caption = 'Appraisal Report';
-                            ApplicationArea = Basic, Suite;
-                            RunObject = report "Appraisal Report";
+                        // action(AppraisalReport)
+                        // {
+                        //     Caption = 'Appraisal Report';
+                        //     ApplicationArea = Basic, Suite;
+                        //     RunObject = report "Appraisal Report";
 
-                        }
+                        // }
                     }
                 }
                 group("HR Leave Management")
