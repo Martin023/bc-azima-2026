@@ -2563,6 +2563,48 @@ page 52186778 "Finance Role Center"
                     ToolTip = 'Reconcile bank accounts in your system with bank statements received from your bank.';
                 }
             }
+
+            group("5. Purchase Invoicing")
+            {
+                Caption = 'Purchase Invoicing';
+                Visible = true;
+                action("Open Purchase Invoices")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Open Purchase Invoices';
+                    RunObject = page "Purchase Invoices";
+                    RunPageView = WHERE(Status = CONST("Open"));
+                }
+                action("Pending Purchase Invoices")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Pending Purchase Invoices';
+                    RunObject = page "Purchase Invoices";
+                    RunPageView = WHERE(Status = CONST("Pending Approval"));
+                }
+                action("Approved Purchase Invoices")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Approved Purchase Invoices';
+                    RunObject = page "Purchase Invoices";
+                    RunPageView = WHERE(Status = CONST("Released"));
+                }
+                action("Posted Purchase Invoicess")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted Purchase Invoices';
+                    //RunObject = page "Purchase Invoices";
+                    RunObject = page "Posted Purchase Invoices";
+                }
+
+                action("Rejected Purchase Invoices")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Rejected Purchase Invoices';
+                    RunObject = page "Purchase Invoices";
+                    //RunPageView = WHERE(Status = CONST("Cancelled"));
+                }
+            }
             group(Procurement)
             {
                 // group("Planning")

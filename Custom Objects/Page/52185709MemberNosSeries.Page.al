@@ -32,8 +32,8 @@ page 52185709 "Member Nos. Series"
                     ApplicationArea = Basic, Suite;
                 }
                 field("Group Account Nos"; Rec."Group Account Nos")
-                { 
-                    ApplicationArea = Basic, Suite; 
+                {
+                    ApplicationArea = Basic, Suite;
                 }
                 field("Driver No."; Rec."Driver No.")
                 {
@@ -341,92 +341,121 @@ page 52185709 "Member Nos. Series"
             }
             group("Administration")
             {
-                Visible = false;
                 // field("Driver No."; Rec."Driver No.")
                 // {
                 //     ApplicationArea = Basic, Suite;
                 // }
                 field("Key No."; Rec."Key No.")
                 {
+                    Visible = false;
                     ApplicationArea = Basic, Suite;
                 }
                 field("Key Dispatch No."; Rec."Keys Dispatch Nos.")
                 {
+                    Visible = false;
+
                     ApplicationArea = Basic, Suite;
                 }
                 field("Key Request No."; Rec."Key Request No.")
                 {
+                    Visible = false;
+
                     ApplicationArea = Basic, Suite;
                 }
                 field("Company Vehicle Nos."; Rec."Company Vehicle Nos.")
                 {
+                    Visible = false;
+
                     ApplicationArea = Basic, Suite;
                 }
                 field("Motor Vehicle Movement No."; Rec."Motor Vehicle Movement No.")
                 {
+                    Visible = false;
+
                     ApplicationArea = Basic, Suite;
                 }
                 field("Motor Vehicle Request No."; Rec."Motor Vehicle Request No.")
                 {
+                    Visible = false;
+
                     ApplicationArea = Basic, Suite;
                 }
                 field("Conference Creation Nos."; Rec."Conference Creation Nos.")
                 {
+                    Visible = false;
+
                     ApplicationArea = Basic, Suite;
                 }
                 field("Conference/Meeting Room No."; Rec."Conference/Meeting Room No.")
                 {
+                    Visible = false;
+
                     ApplicationArea = Basic, Suite;
                 }
                 field("Fueling No."; Rec."Fueling No.")
                 {
+                    Visible = false;
+
                     ApplicationArea = Basic, Suite;
                 }
                 field("Repair No."; Rec."Repair No.")
                 {
+                    Visible = false;
+
                     ApplicationArea = Basic, Suite;
                 }
                 field("Service No."; Rec."Service No.")
                 {
+                    Visible = false;
+
                     ApplicationArea = Basic, Suite;
                 }
                 field("Accident No."; Rec."Accident No.")
                 {
+                    Visible = false;
+
                     ApplicationArea = Basic, Suite;
                 }
                 field("Permission Requisitions Nos"; Rec."Permission Requisitions Nos")
                 {
+                    Visible = true;
                     ApplicationArea = Basic, Suite;
                 }
                 field("User creation"; Rec."User creation")
                 {
+                    Visible = true;
                     ApplicationArea = Basic, Suite;
                 }
                 field("User Termination"; Rec."User Termination")
                 {
+                    Visible = true;
                     ApplicationArea = Basic, Suite;
                 }
                 field("Parking Creation No."; Rec."Parking Creation No.")
                 {
+                    visible = false;
                     ApplicationArea = Basic, Suite;
                 }
                 field("Parking Space No."; Rec."Parking Space No.")
                 {
+                    visible = false;
                     ApplicationArea = Basic, Suite;
                 }
                 field("Insurace Claim No."; Rec."Insurance Claim No.")
                 {
+                    visible = false;
                     ApplicationArea = Basic, Suite;
                 }
                 field("Salary Agreement No"; Rec."Salary Agreement No")
                 {
+                    visible = false;
                     ApplicationArea = Basic, Suite;
                 }
             }
             group("Legal")
             {
                 Visible = false;
-                
+
                 field("Nominee Legal No."; Rec."Nominee Legal No.")
                 {
                     ApplicationArea = Basic, Suite;

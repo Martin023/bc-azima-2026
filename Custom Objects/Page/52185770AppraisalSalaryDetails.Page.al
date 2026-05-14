@@ -35,16 +35,17 @@ page 52185770 "Appraisal Salary Details"
                     ApplicationArea = Basic, Suite;
                     StyleExpr = StyleText;
                 }
-                field(Rate; Rec.Rate)
-                {
-                    ApplicationArea = Basic, Suite;
-                    StyleExpr = StyleText;
-                }
                 field(Hours; Rec.Hours)
                 {
                     ApplicationArea = Basic, Suite;
                     StyleExpr = StyleText;
                 }
+                field(Rate; Rec.Rate)
+                {
+                    ApplicationArea = Basic, Suite;
+                    StyleExpr = StyleText;
+                }
+
 
                 field(Amount; Rec.Amount)
                 {
@@ -131,7 +132,7 @@ page 52185770 "Appraisal Salary Details"
                 PromotedCategory = Process;
                 PromotedIsBig = true;
                 PromotedOnly = true;
-                Visible=false;
+                Visible = false;
                 trigger OnAction()
                 var
                     ApprD: Record "Appraisal Salary Details";
@@ -251,7 +252,7 @@ page 52185770 "Appraisal Salary Details"
         //     else
         //         Net := GrossPayAmount - TotalDeductions;
         // end else
-            Net := GrossPayAmount - TotalDeductions;
+        Net := GrossPayAmount - TotalDeductions;
 
         exit(Net);
     end;

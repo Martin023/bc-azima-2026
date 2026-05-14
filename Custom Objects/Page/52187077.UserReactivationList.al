@@ -1,58 +1,121 @@
 page 52187077 "User Creation Request List"
 {
-    CardPageID = "User Creation Request Card";
     ApplicationArea = All;
-    Caption = 'User Creation Request';
+    Caption = 'User Access Requests';
     PageType = List;
     SourceTable = "User Creation Requests";
     UsageCategory = Lists;
 
+    CardPageId = "User Creation Request Card";
+
+    Editable = false;
 
     layout
     {
-        area(content)
+        area(Content)
         {
             repeater(General)
             {
-                field(Departments; Rec.Departments)
-                {
-                    ToolTip = 'Specifies the value of the Departments field.';
-                }
-                field("New Email"; Rec."Contact Email")
-                {
-                    ToolTip = 'Specifies the value of the NewEmail field.';
-                }
-                field("Request Date"; Rec."Request Date")
-                {
-                    ToolTip = 'Specifies the value of the RequestDate field.';
-                }
-                field("New Username"; Rec."User name")
-                {
-                    ToolTip = 'Specifies the value of the NewUsername field.';
-                }
                 field("Request ID"; Rec."Request ID")
                 {
-                    ToolTip = 'Specifies the value of the RequestID field.';
+                    ApplicationArea = All;
+                    StyleExpr = StatusStyle;
                 }
-                field("Requester User ID"; Rec."Requester User ID")
+
+                field("Request Type"; Rec."Request Type")
                 {
-                    ToolTip = 'Specifies the value of the RequesterUserID field.';
+                    ApplicationArea = All;
                 }
+
+                field("Staff No."; Rec."Staff No.")
+                {
+                    ApplicationArea = All;
+                }
+
+                field("Full Name"; Rec."Full Name")
+                {
+                    ApplicationArea = All;
+                }
+
+                field(Department; Rec.Department)
+                {
+                    ApplicationArea = All;
+                }
+
+                field("Department Name"; Rec."Department Name")
+                {
+                    ApplicationArea = All;
+                }
+
+                field("User Name"; Rec."User Name")
+                {
+                    ApplicationArea = All;
+                }
+
+                field("Contact Email"; Rec."Contact Email")
+                {
+                    ApplicationArea = All;
+                }
+
+                field("Request Date"; Rec."Request Date")
+                {
+                    ApplicationArea = All;
+                }
+
                 field(Status; Rec.Status)
                 {
-                    ToolTip = 'Specifies the value of the Status field.';
+                    ApplicationArea = All;
                 }
+
+                field("Risk Level"; Rec."Risk Level")
+                {
+                    ApplicationArea = All;
+                }
+
+                field("Due Date Time"; Rec."Due Date Time")
+                {
+                    ApplicationArea = All;
+                }
+
                 field("Date Captured"; Rec."Date Captured")
                 {
-                    ToolTip = 'Specifies the value of the Date Captured field';
+                    ApplicationArea = All;
+                }
+
+                field("Created By"; Rec."Created By")
+                {
+                    ApplicationArea = All;
                 }
             }
         }
     }
 
+    trigger OnAfterGetRecord()
+    begin
+        SetStyle();
+    end;
+
+    local procedure SetStyle()
+    begin
+        case Rec.Status of
+
+            Rec.Status::Open:
+                StatusStyle := 'Standard';
+
+            Rec.Status::Pending:
+                StatusStyle := 'Ambiguous';
+
+            Rec.Status::Approved:
+                StatusStyle := 'Favorable';
+
+            Rec.Status::Rejected:
+                StatusStyle := 'Unfavorable';
+
+            else
+                StatusStyle := 'Standard';
+        end;
+    end;
+
     var
-        OpenApprovalEntriesExist: Boolean;
-        VarVariant: Variant;
-        RequestType: Boolean;
-        LinesEditable: Boolean;
+        StatusStyle: Text;
 }

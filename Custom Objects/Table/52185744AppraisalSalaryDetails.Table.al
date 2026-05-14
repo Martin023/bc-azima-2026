@@ -199,6 +199,7 @@ table 52185744 "Appraisal Salary Details"
                     if rec.Rate > 0 then
                         Rec.Amount := round(Rec.Rate * Rec.Hours, 0.01);
                 end;
+
             end;
         }
     }

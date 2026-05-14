@@ -1,135 +1,231 @@
 page 52187079 "User Creation Request Card"
 {
     ApplicationArea = All;
-    Caption = 'User Creation';
+    Caption = 'User Access Request';
     PageType = Card;
     SourceTable = "User Creation Requests";
-    PromotedActionCategories = 'New,Process,Report,Approve,Request Approval';
-    //PromotedActionCategories = 'New,Process,Reports,Information, ,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
+    UsageCategory = Documents;
+
+    PromotedActionCategories = 'Process,Report';
 
     layout
     {
-        area(content)
+        area(Content)
         {
             group(General)
             {
-                Caption = 'General';
+                Caption = 'General Information';
+
                 field("Request ID"; Rec."Request ID")
                 {
-                    ToolTip = 'Specifies the value of the Departments field.';
-                }
-                field("Staff No"; Rec."Staff No")
-                {
-                    ToolTip = 'Specifies the value of the Date Captured field.';
-                }
-                field("Full Name"; Rec."Full Name")
-                {
-                    ToolTip = 'Specifies the value of the Date Captured field.';
+                    ApplicationArea = All;
+                    Importance = Promoted;
+                    Editable = false;
                 }
 
-                field(Departments; Rec.Departments)
+                field("Request Type"; Rec."Request Type")
                 {
-                    ToolTip = 'Specifies the value of the Departments field.';
-                }
-                field("Email"; Rec."Contact Email")
-                {
-                    ToolTip = 'Specifies the value of the NewEmail field.';
-                }
-                field("Username"; Rec."User name")
-                {
-                    ToolTip = 'Specifies the value of the NewUsername field.';
-                }
-                field("Request Date"; Rec."Request Date")
-                {
-                    ToolTip = 'Specifies the value of the RequestDate field.';
-                }
+                    ApplicationArea = All;
+                    Importance = Promoted;
 
-                field("Requester User ID"; Rec."Requester User ID")
-                {
-                    ToolTip = 'Specifies the value of the RequesterUserID field.';
-                }
-                field("Authentication Email"; Rec."Authentication Email")
-                {
-                    ToolTip = 'Specifies the value of the RequesterUserID field.';
-                }
-
-                field("Expiry Date"; Rec."Expiry Date")
-                {
-                    ToolTip = 'Specifies the value of the RequesterUserID field.';
+                    trigger OnValidate()
+                    begin
+                        ShowAccountInfo := Rec."Request Type" <> Rec."Request Type"::"Deactivate User";
+                        CurrPage.Update(false);
+                    end;
                 }
 
                 field(Status; Rec.Status)
                 {
-                    ToolTip = 'Specifies the value of the Status field.';
-                }
-                field("Date Captured"; Rec."Date Captured")
-                {
-                    ToolTip = 'Specifies the value of the Date Captured field.';
-                }
-                field(Department; Rec."Employment Type")
-                {
-                    ToolTip = 'Specifies the value of the Date Captured field.';
+                    ApplicationArea = All;
+                    Editable = false;
+                    StyleExpr = StatusStyle;
                 }
 
+                field("Request Date"; Rec."Request Date")
+                {
+                    ApplicationArea = All;
+                    Editable = false;
+                }
+
+                field("Requester User ID"; Rec."Requester User ID")
+                {
+                    ApplicationArea = All;
+                    Editable = false;
+                }
+
+                field("Responsibility Center"; Rec."Responsibility Center")
+                {
+                    ApplicationArea = All;
+                    Editable = false;
+                }
+            }
+
+            group("Employee Information")
+            {
+                Caption = 'Employee Information';
+
+                field("Staff No."; Rec."Staff No.")
+                {
+                    ApplicationArea = All;
+                    ShowMandatory = true;
+
+                    trigger OnValidate()
+                    var
+                        Employee: Record Employee;
+                    begin
+                        case Employee.Get(Rec."Staff No.") of
+                            true:
+                                begin
+                                    Rec."Full Name" := Employee."First Name" + ' ' + Employee."Last Name";
+                                    Rec."Department Name" := Employee."Global Dimension 1 Code";
+                                    Rec."Employment Type" := Employee."Emplymt. Contract Code";
+                                    Rec."Phone No." := Employee."Phone No.";
+                                end;
+                            false:
+                                Rec.TestField("Staff No.");
+                        end;
+                    end;
+                }
+
+                field("Full Name"; Rec."Full Name")
+                {
+                    ApplicationArea = All;
+                    Editable = false;
+                }
+
+                field("Department Name"; Rec."Department Name")
+                {
+                    ApplicationArea = All;
+                    Editable = false;
+                }
+
+                field("Employment Type"; Rec."Employment Type")
+                {
+                    ApplicationArea = All;
+                    Editable = false;
+                }
+
+                field("Phone No."; Rec."Phone No.")
+                {
+                    ApplicationArea = All;
+                }
+            }
+
+            group("Account Information")
+            {
+                Caption = 'Account Information';
+                Visible = ShowAccountInfo;
+
+                field("User Name"; Rec."User Name")
+                {
+                    ApplicationArea = All;
+                    ShowMandatory = true;
+                }
+
+                field("Contact Email"; Rec."Contact Email")
+                {
+                    ApplicationArea = All;
+                    ShowMandatory = true;
+                }
+
+                field("Expiry Date"; Rec."Expiry Date")
+                {
+                    ApplicationArea = All;
+                }
+            }
+
+            group("Requested Access")
+            {
+                Caption = 'Requested Access';
+
+                part("System Access Lines"; "User Access Request Subpage")
+                {
+                    ApplicationArea = All;
+                    Caption = 'System Access & Roles';
+                    SubPageLink = "Request ID" = FIELD("Request ID");
+                    UpdatePropagation = Both;
+                }
+            }
+
+            group("Governance & Compliance")
+            {
+                Caption = 'Governance & Compliance';
+
+                field("SoD Conflict"; Rec."SoD Conflict")
+                {
+                    ApplicationArea = All;
+                    Editable = false;
+                }
+
+                field("Business Justification"; Rec."Business Justification")
+                {
+                    ApplicationArea = All;
+                    MultiLine = true;
+                    ShowMandatory = true;
+                }
+            }
+
+            group("SLA & Tracking")
+            {
+                Caption = 'SLA & Tracking';
+
+                field("Due Date Time"; Rec."Due Date Time")
+                {
+                    ApplicationArea = All;
+                }
+
+                field("Completion Date Time"; Rec."Completion Date Time")
+                {
+                    ApplicationArea = All;
+                    Editable = false;
+                }
             }
         }
     }
+
     actions
     {
-
-        area(processing)
+        area(Processing)
         {
-            action(ImportData)
-            {
-                RunObject = xmlport "Import Telephone Nos";
-            }
-            action(SendApprovalRequest)
+            action("Send Approval Request")
             {
                 ApplicationArea = All;
                 Caption = 'Send Approval Request';
-                //Enabled = NOT OpenApprovalEntriesExist;
                 Image = SendApprovalRequest;
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
+                Enabled = SendApprovalEnabled;
 
                 trigger OnAction()
-
                 begin
+                    ValidateMandatoryFields();
                     Rec.TestField(Status, Rec.Status::Open);
                     VarVariant := Rec;
-                    if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then
-                        CustomApprovals.OnSendDocForApproval(VarVariant);
-                    /* 
-                                        Users.Init;
-                                        Users."User Name" := UserCreation."User name";
-                                        //Users."Application ID" := UserCreation."Requester User ID";
-                                        Users."Expiry Date" := UserCreation."Expiry Date";
-                                        Users."Contact Email" := UserCreation."Contact Email";
-                                        Users."Full Name" := UserCreation."Full Name";
-                                        Users.Insert; */
+                    CustomApprovals.OnSendDocForApproval(VarVariant);
                 end;
             }
-            action(CancelApprovalRequest)
+
+            action("Cancel Approval Request")
             {
-                ApplicationArea = all;
-                Caption = 'Cancel Approval Re&quest';
+                ApplicationArea = All;
+                Caption = 'Cancel Approval Request';
                 Image = Cancel;
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
+                Enabled = CancelApprovalEnabled;
 
                 trigger OnAction()
-                var
                 begin
                     Rec.TestField(Status, Rec.Status::Pending);
                     VarVariant := Rec;
-                    if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then
-                        CustomApprovals.OnCancelDocApprovalRequest(VarVariant);
+                    CustomApprovals.OnCancelDocApprovalRequest(VarVariant);
                 end;
-
             }
-            action("Approvals.")
+
+            action(Approvals)
             {
                 ApplicationArea = All;
                 Caption = 'Approvals';
@@ -138,16 +234,60 @@ page 52187079 "User Creation Request Card"
                 PromotedCategory = Process;
                 PromotedIsBig = true;
 
+                trigger OnAction()
+                begin
+                    ApprovalsMgmt.OpenApprovalEntriesPage(Rec.RecordId);
+                end;
+            }
+
+            action("Generate PDF")
+            {
+                ApplicationArea = All;
+                Caption = 'Generate PDF';
+                Image = Print;
+                Promoted = true;
+                PromotedCategory = Report;
+
+                trigger OnAction()
+                begin
+                    // wire report here
+                end;
             }
         }
     }
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        SendApprovalEnabled := Rec.Status = Rec.Status::Open;
+        CancelApprovalEnabled := Rec.Status = Rec.Status::Pending;
+        ShowAccountInfo := Rec."Request Type" <> Rec."Request Type"::"Deactivate User";
+
+        case Rec.Status of
+            Rec.Status::Open:
+                StatusStyle := 'Standard';
+            Rec.Status::Pending:
+                StatusStyle := 'Ambiguous';
+            Rec.Status::Approved:
+                StatusStyle := 'Favorable';
+            Rec.Status::Rejected:
+                StatusStyle := 'Unfavorable';
+        end;
+    end;
+
+    local procedure ValidateMandatoryFields()
+    begin
+        Rec.TestField("Staff No.");
+        Rec.TestField("User Name");
+        Rec.TestField("Contact Email");
+        Rec.TestField("Business Justification");
+    end;
+
     var
         CustomApprovals: Codeunit "Custom Approvals Codeunit";
-        OpenApprovalEntriesExist: Boolean;
+        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
         VarVariant: Variant;
-        RequestType: Boolean;
-        LinesEditable: Boolean;
-
-        Users: Record User;
-        UserCreation: Record "User Creation Requests";
+        SendApprovalEnabled: Boolean;
+        CancelApprovalEnabled: Boolean;
+        ShowAccountInfo: Boolean;
+        StatusStyle: Text;
 }

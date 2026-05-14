@@ -75,6 +75,9 @@ Report 52185616 "Member Application Register"
             column(Status_MemberApplication; MemberApplication.Status)
             {
             }
+            column(Recruited_By; MemberApplication."Recruited By Name")
+            {
+            }
             column(SCount; SNo)
             {
             }
