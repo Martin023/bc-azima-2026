@@ -1174,9 +1174,10 @@ page 52185726 "Member Single"
                 end;
 
             }
-            action("Activate Member"){
+            action("Activate Member")
+            {
                 ApplicationArea = Basic, Suite;
-                Image = Activate;
+                Image = Accounts;
                 Promoted = true;
                 PromotedCategory = Category4;
                 Visible = Rec.Status = Rec.Status::New;

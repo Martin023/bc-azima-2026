@@ -156,10 +156,10 @@ page 52185659 "PR Salary List (ALL)"
 
                         Commit;
 
-                        //CODEUNIT
-                        PRSalaryCard.Reset;
-                        PRSalaryCard.SetRange("Employee Code", Rec."No.");
-                        PRSalaryCard.SetRange(PRSalaryCard."Period Filter", SelectedPeriod);
+                        // //CODEUNIT
+                        // PRSalaryCard.Reset;
+                        // PRSalaryCard.SetRange("Employee Code", Rec."No.");
+                        // PRSalaryCard.SetRange(PRSalaryCard."Period Filter", SelectedPeriod);
 
                         //AFTER SUCCESS PROCSSING PRINT INDIVIDUAL PAYSLIP
                         //REPORT.Run(REPORT::"PR Individual Payslip", true, false, PRSalaryCard);
@@ -346,50 +346,7 @@ page 52185659 "PR Salary List (ALL)"
                     dtOpenPeriod: Date;
                     strPeriodName: Text;
                 begin
-
-                    if not Confirm('Are you sure you want to update staff loan details?') then exit;
-                    PayPeriod.SetRange(PayPeriod.Closed, false);
-                    if PayPeriod.Find('-') then begin
-                        strPeriodName := PayPeriod."Period Name";
-                        dtOpenPeriod := PayPeriod."Date Opened";
-                    end;
-
-                    HREmployees.Reset;
-                    HREmployees.SetRange(HREmployees.Status, HREmployees.Status::Active);
-                    if HREmployees.Find('-') then begin
-                        repeat
-
-                            loans.Reset();
-                            loans.SetRange("Staff No", HREmployees."No.");
-                            Loans.CalcFields(Loans."Outstanding Balance", Loans."Outstanding Interest");
-                            Loans.SetFilter("Outstanding Balance", '>%1', 0);
-                            if loans.Find('-') then begin
-                                repeat
-                                    PRTransactionCodes.Reset;
-                                    PRTransactionCodes.SetRange("Loan Product Type", Loans."Loan Product Type");
-                                    if PRTransactionCodes.Find('-') then begin
-                                        repeat
-                                            PREmployeeTransactions.Reset();
-                                            PREmployeeTransactions.SetRange("Transaction Code", PRTransactionCodes."Transaction Code");
-                                            if not PREmployeeTransactions.FindFirst then begin
-                                                PREmployeeTransactions.Init();
-                                                PREmployeeTransactions."Transaction Code" := PRTransactionCodes."Transaction Code";
-                                                PREmployeeTransactions."Loan Number" := Loans."Loan No.";
-                                                PREmployeeTransactions."Interest Due" := Loans."Outstanding Interest";
-                                                PREmployeeTransactions."Loan Interest Rate" := Loans.interest;
-                                                PREmployeeTransactions.Amount := Loans."Outstanding Balance";
-                                                PREmployeeTransactions."Original Amount" := Loans."Approved Amount";
-                                                PREmployeeTransactions."Start Date" := Loans."Repayment Start Date";
-                                                PREmployeeTransactions."End Date" := Loans."Expected Date of Completion";
-                                                PREmployeeTransactions."Loan Interest Rate" := Loans.Interest;
-                                                PREmployeeTransactions.Insert();
-                                            end;
-                                        until PRTransactionCodes.next = 0;
-                                    end;
-                                until loans.next = 0;
-                            end;
-                        until HREmployees.Next = 0;
-                    end;
+                    report.run(report::"Update Employee Loans Report");
                 end;
             }
         }
@@ -450,7 +407,6 @@ page 52185659 "PR Salary List (ALL)"
 
     end;
 
-    //[Scope('OnPrem')]
     procedure OnAccesRestrictView()
     var
         ChangePermission: Record "Status Change Permissions.";

@@ -7,7 +7,7 @@ Report 52185624 "Dividend Generation"
     {
         dataitem("Savings Accounts"; "Savings Accounts")
         {
-            DataItemTableView = WHERE("Product Type" = FILTER('DCS|SCS'));
+            //DataItemTableView = WHERE("Product Type" = FILTER('|SCS'));
             RequestFilterFields = "Member No.", "Employer Code", "Product Type";
             trigger OnAfterGetRecord()
             begin
@@ -39,7 +39,7 @@ Report 52185624 "Dividend Generation"
 
             trigger OnPreDataItem()
             begin
-                "Savings Accounts".SetFilter("Product Type", 'DCS|SCS');
+                //"Savings Accounts".SetFilter("Product Type", 'DCS|SCS');
                 intProgressTotal := "Savings Accounts".Count;
                 intProgressI := 0;
                 TimeProgress := Time;
