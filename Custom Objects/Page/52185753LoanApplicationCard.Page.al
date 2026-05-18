@@ -60,6 +60,8 @@ page 52185753 "Loan Application Card"
                             if StrLen(Members."Phone No.") < 10 then
                                 Message('Member phone number is not valid');
                         end;
+
+
                     end;
                 }
                 field("Staff No"; Rec."Staff No")
@@ -72,6 +74,12 @@ page 52185753 "Loan Application Card"
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Work Station';
+                }
+                field("Member Class"; Rec."Member Class")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Member Class';
+                    Editable = false;
                 }
                 field("Work Station Name"; Rec."Work Station Name")
                 {
