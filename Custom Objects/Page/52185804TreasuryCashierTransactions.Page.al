@@ -219,6 +219,8 @@ page 52185804 "Treasury Cashier Transactions"
                         end;
                     end;
 
+                    
+
                     SaccoT.PostTCIssue(Rec);
                 end;
             }
@@ -431,6 +433,14 @@ page 52185804 "Treasury Cashier Transactions"
                         Members: record Members;
                         TCTransactions: record "Treasury Cashier Transactions";
                     begin
+
+                        // Coinage validation — moved from PostTCIssue
+                        Rec.Calcfields("Total Cash on Treasury Coinage");
+                        
+                        if Rec.Amount <> Rec."Total Cash on Treasury Coinage" then begin
+                            Error('Coinage amount (%1) must match total cash on treasury coinage (%2).', Rec.Amount, Rec."Total Cash on Treasury Coinage");
+                        end;
+                        
                         if rec."Transaction Type" = rec."Transaction Type"::"Issue From Treasury Control" then begin
                             if rec."External Document No." = '' then Error('Ensure cheque no has been inserted before sending for approval')
                         end;
