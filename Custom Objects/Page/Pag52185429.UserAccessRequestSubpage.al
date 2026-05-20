@@ -22,10 +22,9 @@ page 52185429 "User Access Request Subpage"
 
                     trigger OnValidate()
                     begin
-                        CurrPage.Update(false);
+                        Rec.Validate("System Type");
                     end;
                 }
-
                 field("System Name"; Rec."System Name")
                 {
                     ApplicationArea = All;
@@ -54,8 +53,12 @@ page 52185429 "User Access Request Subpage"
                 field("Business Justification"; Rec."Business Justification")
                 {
                     ApplicationArea = All;
-                }
 
+                    trigger OnValidate()
+                    begin
+                        UpdateHeaderBusinessJustification();
+                    end;
+                }
                 field("Risk Level"; Rec."Risk Level")
                 {
                     ApplicationArea = All;
@@ -113,6 +116,50 @@ page 52185429 "User Access Request Subpage"
                 SoDStyle := 'Unfavorable';
             false:
                 SoDStyle := 'Favorable';
+        end;
+    end;
+
+    local procedure UpdateHeaderBusinessJustification()
+    var
+        UserRequest: Record "User Creation Requests";
+        AccessLine: Record "User Access Request Lines";
+        CombinedJustification: Text[2048];
+    begin
+        if not UserRequest.Get(Rec."Request ID") then
+            exit;
+
+        // Build combined justification from all lines
+        AccessLine.Reset();
+        AccessLine.SetRange("Request ID", Rec."Request ID");
+
+        if AccessLine.FindSet() then begin
+            repeat
+
+                if AccessLine."Business Justification" <> '' then begin
+
+                    if CombinedJustification <> '' then
+                        CombinedJustification += ' | ';
+
+                    CombinedJustification +=
+                        AccessLine."Business Justification";
+                end;
+
+            until AccessLine.Next() = 0;
+        end;
+
+        // Prevent unnecessary modify
+        if UserRequest."Business Justification" <>
+           CopyStr(CombinedJustification, 1,
+           MaxStrLen(UserRequest."Business Justification"))
+        then begin
+
+            UserRequest."Business Justification" :=
+                CopyStr(
+                    CombinedJustification,
+                    1,
+                    MaxStrLen(UserRequest."Business Justification"));
+
+            UserRequest.Modify();
         end;
     end;
 

@@ -228,6 +228,32 @@ table 52187070 "User Creation Requests"
             Caption = 'Responsibility Center';
             Editable = false;
         }
+
+        field(36; "Vendor No."; Code[20])
+        {
+            Caption = 'Vendor No.';
+            Editable = true;
+            TableRelation = Vendor;
+        }
+
+        field(37; "Vendor Name"; Text[100])
+        {
+            Caption = 'Vendor Name';
+            Editable = false;
+        }
+
+        field(38; "Vendor Email"; Text[100])
+        {
+            Caption = 'Vendor Email';
+            Editable = true;
+        }
+
+        field(39; "Service No."; Text[100])
+        {
+            Caption = 'Service No.';
+            Editable = true;
+        }
+
     }
 
     keys
@@ -255,6 +281,7 @@ table 52187070 "User Creation Requests"
         "Request Date" := CurrentDateTime;
         "Created By" := UserId;
         "Requester User ID" := UserId;
+        "Responsibility Center" := UserSetup."Responsibility Centre";
         "Approval Stage" := "Approval Stage"::Open;
     end;
 
@@ -284,6 +311,10 @@ table 52187070 "User Creation Requests"
             "Employment Type" := HREmployees."Contract Type";
 
             "Responsibility Center" := HREmployees."Responsibility Center";
+
+            "Contact Email" := HREmployees."E-Mail";
+
+            "Phone No." := HREmployees."Cell Phone Number";
         end;
     end;
 
