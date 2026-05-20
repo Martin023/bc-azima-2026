@@ -9,7 +9,7 @@ report 52185657 "Member Application Channels"
     {
         dataitem(Members; Members)
         {
-            RequestFilterFields = "No.", Status;
+            RequestFilterFields = "No.", Status,"Source Aplication";
             //DataItemTableView =  WHERE 
             column(No; "No.")
             {
@@ -209,11 +209,11 @@ report 52185657 "Member Application Channels"
                 end;
             end;
 
-            trigger OnPreDataItem()
-            begin
-                CompanyInformation.Get;
-                CompanyInformation.CalcFields(Picture);
-            end;
+            // trigger OnPreDataItem()
+            // begin
+            //     CompanyInformation.Get;
+            //     CompanyInformation.CalcFields(Picture);
+            // end;
 
             // trigger OnAfterGetRecord()
             // begin

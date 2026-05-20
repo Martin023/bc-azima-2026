@@ -53,7 +53,7 @@ table 52185632 "Marketing Teams Header"
                    Phone := Members."Transactional Mobile Number";
             end;
         }
-        field(5; "ID Number"; Integer)
+        field(5; "ID Number"; code[20])
         {
             Caption = 'ID Number';
             Editable = false;

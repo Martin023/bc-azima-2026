@@ -66,7 +66,7 @@ page 52185604 "HR OSAccident Card"
                     Caption = 'SACCO Driver ID';
                     trigger OnValidate()
                     begin
-                        if Rec."MNS Driver ID No." = 0 then Error('This Field Cannot be empty')
+                        if Rec."MNS Driver ID No." = '' then Error('This Field Cannot be empty')
                     end;
                 }
                 field("SACCO Driver Phone No"; Rec."MNS Driver Phone No.")

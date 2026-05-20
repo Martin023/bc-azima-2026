@@ -296,7 +296,7 @@ Report 52185853 "PR NSSF NEW"
         objEmp: Record "HR Employees";
         EmployeeName: Text[150];
         NssfNo: Text[30];
-        IDNumber: Integer;
+        IDNumber: code[20];
         objPeriod: Record "PR Payroll Periods";
         SelectedPeriod: Date;
         PeriodName: Text[30];

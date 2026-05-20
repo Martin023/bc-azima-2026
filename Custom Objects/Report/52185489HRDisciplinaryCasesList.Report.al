@@ -153,6 +153,6 @@ Report 52185489 "HR Disciplinary Cases List"
         Travelling_Staff_DetailsCaptionLbl: label 'Travelling Staff Details';
         No: Integer;
         hremp: record "HR Employees";
-        IDNo: integer;
+        IDNo: code[20];
         Name: text[150];
 }

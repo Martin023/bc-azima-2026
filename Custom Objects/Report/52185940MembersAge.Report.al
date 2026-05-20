@@ -9,7 +9,7 @@ Report 52185940 "Members Age"
         //dataitem(52185700;52185700)
         dataitem(Members; "Members")
         {
-            RequestFilterFields = "No.", Status;
+            RequestFilterFields = "No.", Status,Age, "Date of Birth";
             column(ReportForNavId_1; 1)
             {
             }
@@ -89,11 +89,11 @@ Report 52185940 "Members Age"
                     EmployerName := Customer.Name
             end;
 
-            trigger OnPreDataItem()
-            begin
-                CompanyInformation.Get;
-                CompanyInformation.CalcFields(Picture);
-            end;
+            // trigger OnPreDataItem()
+            // begin
+            //     CompanyInformation.Get;
+            //     CompanyInformation.CalcFields(Picture);
+            // end;
         }
     }
 

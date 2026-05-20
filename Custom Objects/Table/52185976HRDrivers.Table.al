@@ -47,7 +47,7 @@ table 52185976 "HR Drivers"
         field(2; "Driver Name"; Text[80])
         {
         }
-        field(22; "Driver ID No."; Integer)
+        field(22; "Driver ID No."; code[20])
         {
         }
         field(3; "Driver License Number"; Code[20])
