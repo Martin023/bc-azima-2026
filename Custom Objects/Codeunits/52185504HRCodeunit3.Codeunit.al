@@ -325,7 +325,7 @@ Codeunit 52185504 "HR Codeunit3"
     end;
 
 
-    procedure fn_CheckIDNumber(curr_IDNo: Integer) Exists: Boolean
+    procedure fn_CheckIDNumber(curr_IDNo: code[20]) Exists: Boolean
     var
         IDFOUNDERROR: label 'ID No [ %1  ] is already in use in the System by an Employee.';
     begin

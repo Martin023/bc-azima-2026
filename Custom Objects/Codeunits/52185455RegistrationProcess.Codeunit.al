@@ -224,6 +224,7 @@ Codeunit 52185455 "Registration Process"
         Cust."Registration Time" := Time;
 
         Cust.Status := Cust.Status::New; //Here
+        Cust."Source Aplication" := Cust."Source Aplication"::BC;
 
         //NEED A SUBFLAG
         cust."E-Mail" := MemberApplication."E-Mail";

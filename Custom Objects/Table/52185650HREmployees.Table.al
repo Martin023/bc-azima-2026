@@ -119,9 +119,8 @@ table 52185650 "HR Employees"
         {
             SubType = Bitmap;
         }
-        field(21; "ID Number"; Integer)
-        {
-
+        field(21; "ID Number"; code[20])
+         {
         }
 
         field(22; "Union Code"; Code[10])
@@ -1767,11 +1766,17 @@ table 52185650 "HR Employees"
         key(Key4; "Last Name")
         {
         }
+        key(Key5; "Member No.")
+        {
+        }
+        key(Key6; "ID Number")
+        {
+        }
     }
 
     fieldgroups
     {
-        fieldgroup(DropDown; "No.", Initials, "First Name", "Middle Name", "Last Name")
+        fieldgroup(DropDown; "No.", "Member No.","ID Number", "First Name", "Middle Name", "Last Name")
         {
         }
     }

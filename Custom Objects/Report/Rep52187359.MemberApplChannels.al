@@ -9,7 +9,7 @@ report 52187359 "Member Appl Channels"
     {
         dataitem(Members; Members)
         {
-            RequestFilterFields = "NO.", "Source Aplication";
+            RequestFilterFields = "No.", "Source Aplication";
             column(No; "No.")
             {
             }
@@ -37,12 +37,6 @@ report 52187359 "Member Appl Channels"
             column(CommunicationOnline; CommunicationOnline)
             {
             }
-
-            trigger OnPreDataItem()
-            begin
-                CompanyInformation.Get;
-                CompanyInformation.CalcFields(Picture);
-            end;
         }
     }
     requestpage
