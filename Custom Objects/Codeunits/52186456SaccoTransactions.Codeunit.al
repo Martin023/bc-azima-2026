@@ -2321,8 +2321,8 @@ Codeunit 52186456 "Sacco Transactions"
             if TCTrans.Amount <= 0 then
                 Error(Text0007);
 
-            if TCTrans.Amount <> TCTrans."Total Cash on Treasury Coinage" then
-                Error(Text0008);
+            // if TCTrans.Amount <> TCTrans."Total Cash on Treasury Coinage" then
+            //     Error(Text0008);
 
             if (TCTrans."Transaction Type" = TCTrans."transaction type"::"Issue To Teller") or
             (TCTrans."Transaction Type" = TCTrans."transaction type"::"Return To Treasury") or

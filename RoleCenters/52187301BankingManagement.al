@@ -302,6 +302,13 @@ page 52187301 "Banking Management Role Center"
                             RunObject = page "Treasury Cashier List";
                             RunPageView = where(Posted = const(false), status = const(pending), Issued = const(no));
                         }
+                        action("Archived Treasury & Cashier Transactions")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Archived Treasury & Cashier Transactions';
+                            RunObject = page "Treasury Cashier List";
+                            RunPageView = where(Posted = const(false), status = const(Archived), Issued = const(no));
+                        }
                         action("Approved Treasury & Cashier Transactions")
                         {
                             ApplicationArea = Basic, Suite;

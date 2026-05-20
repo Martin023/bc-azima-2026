@@ -393,8 +393,8 @@ table 52185778 "Treasury Cashier Transactions"
         field(33; Status; Option)
         {
             Editable = true;
-            OptionCaption = 'Open,Pending,Approved,Rejected';
-            OptionMembers = Open,Pending,Approved,Rejected;
+            OptionCaption = 'Open,Pending,Approved,Rejected,Archived';
+            OptionMembers = Open,Pending,Approved,Rejected,Archived;
 
             trigger OnValidate()
             begin

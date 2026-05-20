@@ -219,6 +219,8 @@ page 52185804 "Treasury Cashier Transactions"
                         end;
                     end;
 
+                    
+
                     SaccoT.PostTCIssue(Rec);
                 end;
             }
@@ -431,6 +433,14 @@ page 52185804 "Treasury Cashier Transactions"
                         Members: record Members;
                         TCTransactions: record "Treasury Cashier Transactions";
                     begin
+
+                        // Coinage validation — moved from PostTCIssue
+                        Rec.Calcfields("Total Cash on Treasury Coinage");
+                        
+                        if Rec.Amount <> Rec."Total Cash on Treasury Coinage" then begin
+                            Error('Coinage amount (%1) must match total cash on treasury coinage (%2).', Rec.Amount, Rec."Total Cash on Treasury Coinage");
+                        end;
+
                         if rec."Transaction Type" = rec."Transaction Type"::"Issue From Treasury Control" then begin
                             if rec."External Document No." = '' then Error('Ensure cheque no has been inserted before sending for approval')
                         end;
@@ -517,6 +527,33 @@ page 52185804 "Treasury Cashier Transactions"
 
                     end;
                 }
+                action(Archive)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Archive Application';
+                    Image = Archive;
+                    //Visible = RejectVisible;
+                    Promoted = true;
+                    PromotedCategory = Category5;
+
+                    trigger OnAction()
+                    var
+
+                    begin
+                        if Rec.Status = Rec.Status::Archived then
+                            Error(('This transaction is already in archived state.'));
+                        GlobalFunctions.CommentsManagement(Rec.No);
+                        if not (Rec.Posted) and (Rec.Issued = Rec.Issued::No) then begin
+                            if not Confirm('Are you sure you want to archive this transaction?') then exit;
+                            GlobalFunctions.CancelApprovalManually(Rec.RecordId);
+                            Rec.Status := Rec.Status::Archived;
+                            Rec.Validate(Status);
+                            Rec.Modify(true);
+                            Message('Transaction archived succsessfully');
+                        end else
+                            Error('Cannot archive this transaction. The transaction must not be posted or issued.');
+                    end;
+                }
                 action(Approvals)
                 {
                     ApplicationArea = Basic, Suite;
@@ -596,6 +633,7 @@ page 52185804 "Treasury Cashier Transactions"
         UserSetup: Record "User Setup";
         Treasury: Record "Treasury Cashier Transactions";
         HeaderA: Boolean;
+        GlobalFunctions: Codeunit "Global Functions";
 
     local procedure UpdateControls()
     begin
