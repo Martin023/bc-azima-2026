@@ -108,19 +108,54 @@ report 52187076 "Registration Fee Recovery"
 
                                 // Activate first time member
                                 JournalPosting.CompletePosting(Jtemplate, JBatch);
-                                //then begin
-                                Members.Status := Members.Status::Active;
-                                Members.MODIFY();
-                                if Members.Status = Members.Status::Active then begin
-                                    SavAccount.reset;
-                                    SavAccount.SetRange("Member No.", Members."No.");
-                                    //SavAccount.SetFilter(SavAccount."Product Category", '%1|%2', SavAccount."Product Category"::"BOSA Deposits", SavAccount."Product Category"::"Entrance Fee");
-                                    if SavAccount.FINDSET then begin
-                                        repeat
-                                            SavAccount."Status" := SavAccount."Status"::Active;
-                                            SavAccount.Modify();
-                                        until SavAccount.NEXT = 0;
-                                    end;
+
+                                // Adam
+                                // FOR MEMBER TO MOVE FROM NEW TO ACTIVE THE SYSTEM SHOULD CONSIDER
+                                // MINIMUM DEPOSITS 1000
+                                // REG FEE 600
+                                // SHARE CAPITAL 250
+                                // FOSA MIN BAL 500
+                                Clear(FosaAccountNo);
+                                clear(fosaBal);
+                                Clear(BosaDepositAcct);
+                                Clear(BosaDepBal);
+                                clear(ShareCptAccountNo);
+                                Clear(ShareCptBal);
+                                Clear(FosaMinBal);
+
+                                FosaAccountNo := GlobalFunctions.GetFOSAAccount(Members);
+                                if FosaAccountNo <> '' then
+                                    FosaBal := SavingsAccounts.GetAvailableBalance(FosaAccountNo);
+                                
+                                BosaDepositAcct := GlobalFunctions.GetDepositAccount(Members);
+                                if BosaDepositAcct <> '' then
+                                    BosaDepBal := SavingsAccounts.GetAvailableBalance(BosaDepositAcct);
+
+                                ShareCptAccountNo := GlobalFunctions.GetShareCptAccount(Members);
+                                if ShareCptAccountNo <> '' then 
+                                    ShareCptBal := SavingsAccounts.GetAvailableBalance(ShareCptAccountNo);
+                                
+                                ProductSetUp.reset;
+                                ProductSetUp.SetRange("Product ID",'191');
+                                if ProductSetUp.FindFirst() then
+                                    FosaMinBal := ProductSetUp."Minimum Balance";
+                                    
+                                if (BosaDepBal > MemberClass."Default BOSA Deposit") and
+                                    (ShareCptBal > MemberClass."Default Share Capital") and
+                                    (FosaBal > FosaMinBal) then begin
+                                            Members.Status := Members.Status::Active;
+                                            Members.MODIFY();
+                                            if Members.Status = Members.Status::Active then begin
+                                                SavAccount.reset;
+                                                SavAccount.SetRange("Member No.", Members."No.");
+                                                //SavAccount.SetFilter(SavAccount."Product Category", '%1|%2', SavAccount."Product Category"::"BOSA Deposits", SavAccount."Product Category"::"Entrance Fee");
+                                                if SavAccount.FINDSET then begin
+                                                    repeat
+                                                        SavAccount."Status" := SavAccount."Status"::Active;
+                                                        SavAccount.Modify();
+                                                    until SavAccount.NEXT = 0;
+                                                end;
+                                            end;
                                 end;
                                 MembersRecovered := MembersRecovered + Members."No." + ', ';
                                 // end
@@ -203,19 +238,55 @@ report 52187076 "Registration Fee Recovery"
 
                                 // Activate first time member
                                 JournalPosting.CompletePosting(Jtemplate, JBatch);
-                                //then begin
-                                Members.Status := Members.Status::Active;
-                                Members.MODIFY();
-                                if Members.Status = Members.Status::Active then begin
-                                    SavAccount.reset;
-                                    SavAccount.SetRange("Member No.", Members."No.");
-                                    //SavAccount.SetFilter(SavAccount."Product Category", '%1|%2', SavAccount."Product Category"::"BOSA Deposits", SavAccount."Product Category"::"Entrance Fee");
-                                    if SavAccount.FINDSET then begin
-                                        repeat
-                                            SavAccount."Status" := SavAccount."Status"::Active;
-                                            SavAccount.Modify();
-                                        until SavAccount.NEXT = 0;
-                                    end;
+                                
+                                // Adam
+                                // FOR MEMBER TO MOVE FROM NEW TO ACTIVE THE SYSTEM SHOULD CONSIDER
+                                // MINIMUM DEPOSITS 1000
+                                // REG FEE 600
+                                // SHARE CAPITAL 250
+                                // FOSA MIN BAL 500
+                                
+                                Clear(FosaAccountNo);
+                                clear(fosaBal);
+                                Clear(BosaDepositAcct);
+                                Clear(BosaDepBal);
+                                clear(ShareCptAccountNo);
+                                Clear(ShareCptBal);
+                                Clear(FosaMinBal);
+                                
+                                FosaAccountNo := GlobalFunctions.GetFOSAAccount(Members);
+                                if FosaAccountNo <> '' then
+                                    FosaBal := SavingsAccounts.GetAvailableBalance(FosaAccountNo);
+                                
+                                BosaDepositAcct := GlobalFunctions.GetDepositAccount(Members);
+                                if BosaDepositAcct <> '' then
+                                    BosaDepBal := SavingsAccounts.GetAvailableBalance(BosaDepositAcct);
+
+                                ShareCptAccountNo := GlobalFunctions.GetShareCptAccount(Members);
+                                if ShareCptAccountNo <> '' then 
+                                    ShareCptBal := SavingsAccounts.GetAvailableBalance(ShareCptAccountNo);
+                                
+                                ProductSetUp.reset;
+                                ProductSetUp.SetRange("Product ID",'191');
+                                if ProductSetUp.FindFirst() then
+                                    FosaMinBal := ProductSetUp."Minimum Balance";
+
+                                if (BosaDepBal > MemberClass."Default BOSA Deposit") and
+                                    (ShareCptBal > MemberClass."Default Share Capital") and
+                                    (FosaBal > FosaMinBal) then begin
+                                            Members.Status := Members.Status::Active;
+                                            Members.MODIFY();
+                                            if Members.Status = Members.Status::Active then begin
+                                                SavAccount.reset;
+                                                SavAccount.SetRange("Member No.", Members."No.");
+                                                //SavAccount.SetFilter(SavAccount."Product Category", '%1|%2', SavAccount."Product Category"::"BOSA Deposits", SavAccount."Product Category"::"Entrance Fee");
+                                                if SavAccount.FINDSET then begin
+                                                    repeat
+                                                        SavAccount."Status" := SavAccount."Status"::Active;
+                                                        SavAccount.Modify();
+                                                    until SavAccount.NEXT = 0;
+                                                end;
+                                            end;
                                 end;
                                 MembersRecovered := MembersRecovered + Members."No." + ', ';
                                 // end
@@ -305,5 +376,13 @@ report 52187076 "Registration Fee Recovery"
         OutstandingRejoinFeeBal: Decimal;
         ChangePermission: Record "Status Change Permissions.";
         ErrorOnRestricViewTxt: Label 'You do not have Permissions to recover registration fee. Kindly contact system administrator for assistance.';
-
+        GlobalFunctions: Codeunit "Global Functions";
+        FosaAccountNo: code[50];
+        BosaDepositAcct : code[50];
+        ShareCptAccountNo: code[50];
+        FosaBal : Decimal;
+        BosaDepBal : Decimal;
+        ShareCptBal : Decimal;
+        RegFeeBal : Decimal;
+        FosaMinBal : Decimal;
 }

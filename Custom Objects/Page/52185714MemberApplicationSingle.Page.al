@@ -467,10 +467,10 @@ page 52185714 "Member Application Single"
                 {
                     Editable = false;
                 }
-                field("Source Aplication"; Rec."Source Aplication")
-                {
-                    Editable = false;
-                }
+                // field("Source Aplication"; Rec."Source Aplication")
+                // {
+                //     Editable = false;
+                // }
             }
             group("Communication Details")
             {
@@ -1166,7 +1166,7 @@ page 52185714 "Member Application Single"
                                     if ProductFactory.Get(AutoOpenedSavingAccs."Product Type") then begin
                                         if ProductFactory."Minimum Contribution" > 0 then begin
                                             if AutoOpenedSavingAccs."Monthly Contribution" <= 0 then
-                                                Error('Kindly specify the minimum monthly contribution for % 1 before proceeding.', ProductFactory."Product Description");
+                                                Error('Kindly specify the minimum monthly contribution for %1 before proceeding.', ProductFactory."Product Description");
                                         end;
                                     end;
                                 end;
