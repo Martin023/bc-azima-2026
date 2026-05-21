@@ -41,6 +41,7 @@
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
+                <!-- COLUMN HEADERS -->
                 <TablixRow>
                   <Height>0.25in</Height>
                   <TablixCells>
@@ -311,6 +312,7 @@
                     </TablixCell>
                   </TablixCells>
                 </TablixRow>
+                <!-- GROUP HEADER -->
                 <TablixRow>
                   <Height>0.35in</Height>
                   <TablixCells>
@@ -355,6 +357,7 @@
                     <TablixCell />
                   </TablixCells>
                 </TablixRow>
+                <!-- DETAIL ROW -->
                 <TablixRow>
                   <Height>0.18in</Height>
                   <TablixCells>
@@ -586,6 +589,7 @@
                     </TablixCell>
                   </TablixCells>
                 </TablixRow>
+                <!-- GROUP FOOTER (SUBTOTALS) -->
                 <TablixRow>
                   <Height>0.3in</Height>
                   <TablixCells>
@@ -1071,6 +1075,7 @@
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
+            <!-- COMPANY LOGO -->
             <Image Name="CompanyLogo">
               <Source>Database</Source>
               <Value>=First(Fields!CompanyInfo_Picture.Value, "DataSet_Result")</Value>
@@ -1081,6 +1086,7 @@
               <Height>1.0in</Height>
               <Width>1.2in</Width>
             </Image>
+            <!-- COMPANY DETAILS -->
             <Textbox Name="CompanyDetails">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
@@ -1134,6 +1140,7 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
+            <!-- COMPANY CONTACTS -->
             <Textbox Name="CompanyContacts">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
@@ -1191,6 +1198,7 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
+            <!-- PRINT DETAILS -->
             <Textbox Name="PrintDetails">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
@@ -1291,6 +1299,7 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
+            <!-- HEADER DIVIDER LINE -->
             <Line Name="HeaderLine">
               <Top>1.05in</Top>
               <Left>0.0in</Left>
@@ -1302,6 +1311,7 @@
                 </Border>
               </Style>
             </Line>
+            <!-- REPORT TITLE -->
             <Textbox Name="ReportTitleBox">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
