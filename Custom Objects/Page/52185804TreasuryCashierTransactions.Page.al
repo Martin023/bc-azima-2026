@@ -534,7 +534,7 @@ page 52185804 "Treasury Cashier Transactions"
                     Image = Archive;
                     //Visible = RejectVisible;
                     Promoted = true;
-                    PromotedCategory = Category5;
+                    PromotedCategory = Category4;
 
                     trigger OnAction()
                     var
@@ -543,7 +543,7 @@ page 52185804 "Treasury Cashier Transactions"
                         if Rec.Status = Rec.Status::Archived then
                             Error(('This transaction is already in archived state.'));
                         GlobalFunctions.CommentsManagement(Rec.No);
-                        if not (Rec.Posted) and (Rec.Issued = Rec.Issued::No) then begin
+                        if not Rec.Posted then begin
                             if not Confirm('Are you sure you want to archive this transaction?') then exit;
                             GlobalFunctions.CancelApprovalManually(Rec.RecordId);
                             Rec.Status := Rec.Status::Archived;
@@ -551,7 +551,7 @@ page 52185804 "Treasury Cashier Transactions"
                             Rec.Modify(true);
                             Message('Transaction archived succsessfully');
                         end else
-                            Error('Cannot archive this transaction. The transaction must not be posted or issued.');
+                            Error('The Transaction has already been posted');
                     end;
                 }
                 action(Approvals)

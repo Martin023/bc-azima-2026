@@ -87,11 +87,11 @@ report 52187364 "Members Missing Photos"
             { }
             column(SignExist; SignExist)
             { }
-            trigger OnPreDataItem()
-            begin
-                CompanyInformation.Get;
-                CompanyInformation.CalcFields(Picture);
-            end;
+            // trigger OnPreDataItem()
+            // begin
+            //     CompanyInformation.Get;
+            //     CompanyInformation.CalcFields(Picture);
+            // end;
 
             trigger OnAfterGetRecord()
             begin
@@ -105,8 +105,8 @@ report 52187364 "Members Missing Photos"
                     SignExist := ImageData.Signature.HasValue;
 
                 end;
-                // if (PicExist = true) and (SignExist = true) then
-                //     CurrReport.skip;
+                if (PicExist = true) and (SignExist = true) then
+                    CurrReport.skip;
                 sno += 1;
             end;
         }
