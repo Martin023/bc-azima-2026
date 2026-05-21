@@ -1195,7 +1195,7 @@ page 52185726 "Member Single"
             action("Activate Member")
             {
                 ApplicationArea = Basic, Suite;
-                Image = Activate;
+                Image = Approve;
                 Promoted = true;
                 PromotedCategory = Category4;
                 Visible = Rec.Status = Rec.Status::New;
