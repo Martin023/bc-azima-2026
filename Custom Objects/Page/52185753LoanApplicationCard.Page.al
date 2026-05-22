@@ -2531,6 +2531,8 @@ page 52185753 "Loan Application Card"
     end;
 
     trigger OnOpenPage()
+    var
+        Comments: record Comments;
     begin
         StatusControl;
         if UserSetup.Get(Rec."Captured By") then begin
@@ -2581,6 +2583,15 @@ page 52185753 "Loan Application Card"
             else
                 IsShambaLoan := false;
         end;
+        if rec."Member No." <> '' then begin
+            Comments.reset;
+            Comments.SetRange(Comments."Header No.", rec."Member No.");
+            Comments.setrange(Types, Comments.types::"Member Flagging");
+            Comments.setrange("Disable Flag", false);
+            if Comments.Find('-') then
+                Message(Comments."Comment");
+        end;
+
     end;
 
     procedure UploadToEDMS(Rec: Record Loans; FileName: Text; FileContentsB64: Text)
