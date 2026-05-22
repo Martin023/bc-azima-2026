@@ -11,7 +11,8 @@ report 52187363 "Member Rejoining"
         dataitem(Members; Members)
         {
             RequestFilterFields = Status, Subflag, "No.";
-            DataItemTableView = WHERE(Status = Filter(Active), Subflag = Filter(Rejoined));
+            //DataItemTableView = WHERE(Status = Filter(Active), Subflag = Filter(Rejoined));
+            DataItemTableView = where("Rejoinig Date" =filter(<> 0D));
             column(No; "No.")
             {
             }

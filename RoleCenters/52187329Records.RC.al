@@ -1896,12 +1896,12 @@ page 52187329 "Records"
                         Caption = 'Members Missing Photos';
                         RunObject = Report "Members Missing Photos";
                     }
-                    action("Members With Pictures")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Members With Pictures';
-                        RunObject = Report "Members With Pictures";
-                    }
+                    // action("Members With Pictures")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Members With Pictures';
+                    //     RunObject = Report "Members With Pictures";
+                    // }
                     action("Member Cards Awaiting Printing")
                     {
                         ApplicationArea = Basic, Suite;
