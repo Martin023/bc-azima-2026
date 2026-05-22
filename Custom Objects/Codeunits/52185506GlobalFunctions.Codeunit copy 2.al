@@ -2987,6 +2987,45 @@ Codeunit 52185506 "Global Functions"
         end;
     end;
 
+    procedure GetFOSAAccount(member: record Members): Code[20];
+    var
+        SavingsAccounts: Record "Savings Accounts";
+    begin
+        SavingsAccounts.RESET;
+        SavingsAccounts.SETRANGE("Member No.", member."No.");
+        SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"FOSA Account");
+        if SavingsAccounts.FINDFIRST then
+            exit(SavingsAccounts."No.")
+        else
+            exit('');
+    end;
+
+    procedure GetDepositAccount(member: record Members): Code[20];
+    var
+        SavingsAccounts: Record "Savings Accounts";
+    begin
+        SavingsAccounts.RESET;
+        SavingsAccounts.SETRANGE("Member No.", member."No.");
+        SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
+        if SavingsAccounts.FINDFIRST then
+            exit(SavingsAccounts."No.")
+        else
+            exit('');
+    end;
+
+    procedure GetShareCptAccount(member: record Members): Code[20];
+    var
+        SavingsAccounts: Record "Savings Accounts";
+    begin
+        SavingsAccounts.RESET;
+        SavingsAccounts.SETRANGE("Member No.", member."No.");
+        SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"Share Capital");
+        if SavingsAccounts.FINDFIRST then
+            exit(SavingsAccounts."No.")
+        else
+            exit('');
+    end;
+
     //LOCK
     // procedure UpdateAmountGuaranteed(LoanNo: Code[20]; AppliedAmount: Decimal): Decimal
     // var

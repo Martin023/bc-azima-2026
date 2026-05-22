@@ -25,17 +25,18 @@ table 52185467 "User Access Request Lines"
             var
                 ITSystemSetup: Record "IT System Setup";
             begin
-                case ITSystemSetup.Get("System Type") of
-                    true:
-                        begin
-                            "Requires ICT Approval" := ITSystemSetup."Requires ICT Approval";
-                            "Requires Admin Approval" := ITSystemSetup."Requires Admin Approval";
-                        end;
-                    false:
-                        begin
-                            "Requires ICT Approval" := false;
-                            "Requires Admin Approval" := false;
-                        end;
+                if ITSystemSetup.Get("System Type") then begin
+                    // Populate system details
+                    "System Name" := ITSystemSetup.Description;
+
+                    // Populate approval requirements
+                    "Requires ICT Approval" := ITSystemSetup."Requires ICT Approval";
+                    "Requires Admin Approval" := ITSystemSetup."Requires Admin Approval";
+                end else begin
+                    // Clear values if setup not found
+                    Clear("System Name");
+                    "Requires ICT Approval" := false;
+                    "Requires Admin Approval" := false;
                 end;
             end;
         }
@@ -43,6 +44,7 @@ table 52185467 "User Access Request Lines"
         field(4; "System Name"; Text[100])
         {
             Caption = 'System Name';
+            Editable = false;
         }
 
         field(5; Environment; Option)
@@ -79,7 +81,6 @@ table 52185467 "User Access Request Lines"
         {
             Caption = 'Business Justification';
         }
-
         field(11; "Risk Level"; Option)
         {
             Caption = 'Risk Level';
@@ -136,10 +137,8 @@ table 52185467 "User Access Request Lines"
 
     trigger OnInsert()
     begin
-        case "Line No." = 0 of
-            true:
-                "Line No." := GetNextLineNo();
-        end;
+        if "Line No." = 0 then
+            "Line No." := GetNextLineNo();
     end;
 
     local procedure GetNextLineNo(): Integer
@@ -148,11 +147,9 @@ table 52185467 "User Access Request Lines"
     begin
         UserAccessLines.SetRange("Request ID", "Request ID");
 
-        case UserAccessLines.FindLast() of
-            true:
-                exit(UserAccessLines."Line No." + 10000);
-            false:
-                exit(10000);
-        end;
+        if UserAccessLines.FindLast() then
+            exit(UserAccessLines."Line No." + 10000)
+        else
+            exit(10000);
     end;
 }

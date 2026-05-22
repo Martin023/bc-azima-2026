@@ -87,11 +87,11 @@ report 52187364 "Members Missing Photos"
             { }
             column(SignExist; SignExist)
             { }
-            trigger OnPreDataItem()
-            begin
-                CompanyInformation.Get;
-                CompanyInformation.CalcFields(Picture);
-            end;
+            // trigger OnPreDataItem()
+            // begin
+            //     CompanyInformation.Get;
+            //     CompanyInformation.CalcFields(Picture);
+            // end;
 
             trigger OnAfterGetRecord()
             begin

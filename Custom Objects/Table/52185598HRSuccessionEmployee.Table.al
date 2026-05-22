@@ -45,7 +45,7 @@ table 52185598 "HR Succession Employee"
         field(5; "Staff Names"; Text[100])
         {
         }
-        field(6; "ID No."; Integer)
+        field(6; "ID No."; code[20])
         {
         }
         field(7; "Dimension 1 Code"; Code[20])

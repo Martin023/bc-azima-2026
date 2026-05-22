@@ -89,7 +89,7 @@ table 52185512 "HR Job Applications"
         {
             SubType = Bitmap;
         }
-        field(20; "ID Number"; Integer)
+        field(20; "ID Number"; code[20])
         {
 
             trigger OnValidate()
