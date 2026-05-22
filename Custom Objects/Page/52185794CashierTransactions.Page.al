@@ -155,8 +155,11 @@ page 52185794 "Cashier Transactions"
                         OverMillion := false;
                         //TransTypes.Get(Rec."Transaction Type");
                         //if (TransTypes.Type = TransTypes.Type::"Cash Deposit") OR (TransTypes.Type = TransTypes.Type::"Cash Withdrawal") then begin
-                        if Rec.Amount >= 1000000 then
-                            OverMillion := true;
+                        if Rec.Amount >= 1000000 then begin
+                            OverMillion := true;    
+                            Message('Transactions above 1 million require Source of Funds and Purpose of this Transaction. This will be flagged as an AML transaction.');
+                        end;
+                            
                         //end;
 
                         // Acctypes for deposit to check if amt is > than cashier limit

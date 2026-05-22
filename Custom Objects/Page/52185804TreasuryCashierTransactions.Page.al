@@ -25,6 +25,11 @@ page 52185804 "Treasury Cashier Transactions"
                     Editable = HeaderA;
                     //OptionCaption = 'Teller Request,Return To Treasury,Issue From Treasury Control,Return To Bank,Inter Teller Transfers,Branch Treasury Transactions,End of Day Return to Treasury';
                 }
+                field("Cash Requisition Number"; Rec."Cash Requisition Number")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = HeaderA;
+                }
                 field("From Account"; Rec."From Account")
                 {
                     ApplicationArea = Basic, Suite;
@@ -450,6 +455,10 @@ page 52185804 "Treasury Cashier Transactions"
                         if rec.Amount <= 0 then
                             Error('Kindly Enter Amount');
 
+                        if (rec."Transaction Type" = rec."Transaction Type"::"Issue To Teller") or
+                            (rec."Transaction Type" = rec."Transaction Type"::"End of Day Return to Treasury") then
+                             rec.Testfield("Cash Requisition Number");
+                            
                         //if rec.Status = Status::Approved then begin
                         if rec."Transaction Type" = rec."Transaction Type"::"Issue To Teller" then begin
                             BankingUSetup.get(rec."From Account");
@@ -464,6 +473,7 @@ page 52185804 "Treasury Cashier Transactions"
 
                         if rec."Transaction Type" = rec."Transaction Type"::"End of Day Return to Treasury" then begin
                             TCTransactions.reset;
+                            TCTransactions.setrange("Transaction Type", TCTransactions."Transaction Type"::"End of Day Return to Treasury");
                             TCTransactions.SetRange(Issued, TCTransactions.Issued::Yes);
                             TCTransactions.SetRange(Received, TCTransactions.Received::No);
                             if TCTransactions.Find('-') then begin
