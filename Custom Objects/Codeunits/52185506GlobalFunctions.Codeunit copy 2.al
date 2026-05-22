@@ -802,7 +802,7 @@ Codeunit 52185506 "Global Functions"
         Salo1: Decimal;
         Salo2: Decimal;
         Salo3: Decimal;
-
+        NoOfSalaryTimes: Integer;
     begin
         TotalClearedAmount := 0;
         Salo1 := 0;
@@ -819,87 +819,87 @@ Codeunit 52185506 "Global Functions"
         SalrBBffer.SetLoadFields("Salary Header No.");
         SalrBBffer.SetRange(Posted, true);
         if SalrBBffer.FindSet then begin
-            repeat
-                //if SalrBBffer."Salary Header No." = '' then SalrBBffer."Salary Header No." := 'SAL000000';
-                // salHeader.Reset();
-                // salHeader.SetRange(salHeader.No, SalrBBffer."Salary Header No.");
-                // salHeader.SetRange(salHeader."Income Type", IncomeTy);
-                // salHeader.SetLoadFields(No);
-                // if salHeader.FindFirst() then begin
-                // SavingsAccounts.RESET;
-                // SavingsAccounts.SETRANGE(SavingsAccounts."No.", AccouNum);
-                // IF SavingsAccounts.FIND('-') THEN BEGIN
-                EndDate[3] := CALCDATE('CM', TODAY);
-                StartDate[3] := CALCDATE('-CM', EndDate[3]);
+            // repeat
+            //     //if SalrBBffer."Salary Header No." = '' then SalrBBffer."Salary Header No." := 'SAL000000';
+            //     // salHeader.Reset();
+            //     // salHeader.SetRange(salHeader.No, SalrBBffer."Salary Header No.");
+            //     // salHeader.SetRange(salHeader."Income Type", IncomeTy);
+            //     // salHeader.SetLoadFields(No);
+            //     // if salHeader.FindFirst() then begin
+            //     // SavingsAccounts.RESET;
+            //     // SavingsAccounts.SETRANGE(SavingsAccounts."No.", AccouNum);
+            //     // IF SavingsAccounts.FIND('-') THEN BEGIN
+            //     EndDate[3] := CALCDATE('CM', TODAY);
+            //     StartDate[3] := CALCDATE('-CM', EndDate[3]);
 
-                SalBuffer.RESET;
-                SalBuffer.SETRANGE(SalBuffer."Account No.", AccouNum);
-                // SalBuffer.SetRange("Salary Header No.", salHeader.No);
-                SalBuffer.SetRange(SalBuffer."Income Type", IncomeTy);
-                SalBuffer.SETFILTER(SalBuffer."Posting Date", '%1..%2', StartDate[3], EndDate[3]);
-                SalBuffer.SETRANGE(Posted, TRUE);
+            //     SalBuffer.RESET;
+            //     SalBuffer.SETRANGE(SalBuffer."Account No.", AccouNum);
+            //     // SalBuffer.SetRange("Salary Header No.", salHeader.No);
+            //     SalBuffer.SetRange(SalBuffer."Income Type", IncomeTy);
+            //     SalBuffer.SETFILTER(SalBuffer."Posting Date", '%1..%2', StartDate[3], EndDate[3]);
+            //     SalBuffer.SETRANGE(Posted, TRUE);
 
-                SalBuffer.SetLoadFields("Salary Header No.");
+            //     SalBuffer.SetLoadFields("Salary Header No.");
 
-                IF NOT SalBuffer.FIND('-') THEN BEGIN
-                    EndDate[3] := CALCDATE('-1M+CM', TODAY);
-                    StartDate[3] := CALCDATE('-CM', EndDate[3]);
-                END;
+            //     IF NOT SalBuffer.FIND('-') THEN BEGIN
+            //         EndDate[3] := CALCDATE('-1M+CM', TODAY);
+            //         StartDate[3] := CALCDATE('-CM', EndDate[3]);
+            //     END;
 
 
-                EndDate[2] := CALCDATE('-1M+CM', EndDate[3]);
-                StartDate[2] := CALCDATE('-CM', EndDate[2]);
+            //     EndDate[2] := CALCDATE('-1M+CM', EndDate[3]);
+            //     StartDate[2] := CALCDATE('-CM', EndDate[2]);
 
-                EndDate[1] := CALCDATE('-1M+CM', EndDate[2]);
-                StartDate[1] := CALCDATE('-CM', EndDate[1]);
+            //     EndDate[1] := CALCDATE('-1M+CM', EndDate[2]);
+            //     StartDate[1] := CALCDATE('-CM', EndDate[1]);
 
-                SalBuffer.RESET;
-                SalBuffer.SETRANGE(SalBuffer."Account No.", AccouNum);
-                // SalBuffer.SetRange("Salary Header No.", salHeader.No);
-                SalBuffer.SetRange(SalBuffer."Income Type", IncomeTy);
-                SalBuffer.SETFILTER(SalBuffer."Posting Date", '%1..%2', StartDate[3], EndDate[3]);
-                SalBuffer.SETRANGE(Posted, TRUE);
-                SalBuffer.SetLoadFields(Amount, "Posting Date");
+            //     SalBuffer.RESET;
+            //     SalBuffer.SETRANGE(SalBuffer."Account No.", AccouNum);
+            //     // SalBuffer.SetRange("Salary Header No.", salHeader.No);
+            //     SalBuffer.SetRange(SalBuffer."Income Type", IncomeTy);
+            //     SalBuffer.SETFILTER(SalBuffer."Posting Date", '%1..%2', StartDate[3], EndDate[3]);
+            //     SalBuffer.SETRANGE(Posted, TRUE);
+            //     SalBuffer.SetLoadFields(Amount, "Posting Date");
 
-                IF SalBuffer.FindFirst() THEN BEGIN
-                    SalaryThroughFosa := TRUE;
-                    SalBuffer.CALCSUMS(Amount);
-                    Salo1 := SalBuffer.Amount;
-                    SalDates[k] := SalBuffer."Posting Date";
-                END;
+            //     IF SalBuffer.FindFirst() THEN BEGIN
+            //         SalaryThroughFosa := TRUE;
+            //         SalBuffer.CALCSUMS(Amount);
+            //         Salo1 := SalBuffer.Amount;
+            //         SalDates[k] := SalBuffer."Posting Date";
+            //     END;
 
-                SalBuffer.RESET;
-                SalBuffer.SETRANGE(SalBuffer."Account No.", AccouNum);
-                //SalBuffer.SetRange("Salary Header No.", salHeader.No);
-                SalBuffer.SetRange(SalBuffer."Income Type", IncomeTy);
-                SalBuffer.SETFILTER(SalBuffer."Posting Date", '%1..%2', StartDate[2], EndDate[2]);
-                SalBuffer.SETRANGE(Posted, TRUE);
-                SalBuffer.SetLoadFields(Amount, "Posting Date");
+            //     SalBuffer.RESET;
+            //     SalBuffer.SETRANGE(SalBuffer."Account No.", AccouNum);
+            //     //SalBuffer.SetRange("Salary Header No.", salHeader.No);
+            //     SalBuffer.SetRange(SalBuffer."Income Type", IncomeTy);
+            //     SalBuffer.SETFILTER(SalBuffer."Posting Date", '%1..%2', StartDate[2], EndDate[2]);
+            //     SalBuffer.SETRANGE(Posted, TRUE);
+            //     SalBuffer.SetLoadFields(Amount, "Posting Date");
 
-                IF SalBuffer.FindFirst() THEN BEGIN
-                    SalaryThroughFosa := TRUE;
-                    SalBuffer.CALCSUMS(Amount);
-                    Salo2 := SalBuffer.Amount;
-                    SalDates[k] := SalBuffer."Posting Date";
-                END;
+            //     IF SalBuffer.FindFirst() THEN BEGIN
+            //         SalaryThroughFosa := TRUE;
+            //         SalBuffer.CALCSUMS(Amount);
+            //         Salo2 := SalBuffer.Amount;
+            //         SalDates[k] := SalBuffer."Posting Date";
+            //     END;
 
-                SalBuffer.RESET;
-                SalBuffer.SETRANGE(SalBuffer."Account No.", AccouNum);
-                //SalBuffer.SetRange("Salary Header No.", salHeader.No);
-                SalBuffer.SetRange(SalBuffer."Income Type", IncomeTy);
-                SalBuffer.SETFILTER(SalBuffer."Posting Date", '%1..%2', StartDate[1], EndDate[1]);
-                SalBuffer.SETRANGE(Posted, TRUE);
-                SalBuffer.SetLoadFields(Amount, "Posting Date");
+            //     SalBuffer.RESET;
+            //     SalBuffer.SETRANGE(SalBuffer."Account No.", AccouNum);
+            //     //SalBuffer.SetRange("Salary Header No.", salHeader.No);
+            //     SalBuffer.SetRange(SalBuffer."Income Type", IncomeTy);
+            //     SalBuffer.SETFILTER(SalBuffer."Posting Date", '%1..%2', StartDate[1], EndDate[1]);
+            //     SalBuffer.SETRANGE(Posted, TRUE);
+            //     SalBuffer.SetLoadFields(Amount, "Posting Date");
 
-                IF SalBuffer.FindFirst() THEN BEGIN
-                    SalaryThroughFosa := TRUE;
-                    SalBuffer.CALCSUMS(Amount);
-                    Salo3 := SalBuffer.Amount;
-                    SalDates[k] := SalBuffer."Posting Date";
-                END;
-            // END;
-            //end;
-            until SalrBBffer.Next() = 0;
+            //     IF SalBuffer.FindFirst() THEN BEGIN
+            //         SalaryThroughFosa := TRUE;
+            //         SalBuffer.CALCSUMS(Amount);
+            //         Salo3 := SalBuffer.Amount;
+            //         SalDates[k] := SalBuffer."Posting Date";
+            //     END;
+            // // END;
+            // //end;
+            // until SalrBBffer.Next() = 0;
             SmallestSal := Salo1;
             IF SmallestSal > Salo2 THEN
                 if Salo2 >= 0 then

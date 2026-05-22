@@ -1474,6 +1474,30 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     SalAvg := Globalfunc.GetSmallestSalary(saccoAccount."No.", Incomsal::Pension);
                     Message('DEBUG: Retrieved Pension Salary Average: %1', SalAvg);
                 end else begin
+                    //Class A - must have sal ry atleast 1once
+                    // if not more than 12 monts count then divide by count of salary times.
+                    // Do not include tht momth salary if more than 12 count.and also check last 12 months.
+                    // Maximum is 70% of deposits
+                    // no multiple of same type
+                    //enable choosing between net and gross salary recived.
+                    //Defaulted and Dormant members should not qualify
+                    //Topup should be allowed.
+                    //AZIMA SMS- Auti charge interest 15days after due date.
+                    //Eligiblke for all class A except contractors of Delmonte.
+
+                    //AZIMA B
+                    // Deposits of 60% qual
+                    // Contractors specific members.
+                    //Excempt All class A members
+                    // any other employer as needed- excemption table 
+                    //No salary check
+                    // Alert member 3 days before due date
+                    // Charge int one month. pn posting and and after due date +1 day
+                    //Max is 20K
+                    //Defaulter and Dormant Accs not to access.
+                    //Use free deposits***to be discussed.
+
+
                     SalAvg := Globalfunc.GetSmallestSalary(saccoAccount."No.", Incomsal::Salary);
                     Message('DEBUG: Smallest Salary = : %1', SalAvg);
                 end;

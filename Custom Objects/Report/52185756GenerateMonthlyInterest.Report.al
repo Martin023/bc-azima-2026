@@ -84,25 +84,25 @@ Report 52185756 "Generate Monthly Interest"
                                                         IntCharged := LoansRec."Outstanding Balance" * ((LoansRec.Interest) / 1200) * 1;
 
                                                     // Fetch last repayment date
-                                                    LoanRepayments.Reset();
-                                                    LoanRepayments.SetRange("Loan No", LoansRec."Loan No.");
-                                                    LoanRepayments.SetRange("Transaction Type", LoanRepayments."Transaction Type"::Repayment);
-                                                    LoanRepayments.SetFilter("Posting Date", '<=%1', PostingDate);
-                                                    LoanRepayments.SetCurrentKey("Posting Date");
+                                                    // LoanRepayments.Reset();
+                                                    // LoanRepayments.SetRange("Loan No", LoansRec."Loan No.");
+                                                    // LoanRepayments.SetRange("Transaction Type", LoanRepayments."Transaction Type"::Repayment);
+                                                    // LoanRepayments.SetFilter("Posting Date", '<=%1', PostingDate);
+                                                    // LoanRepayments.SetCurrentKey("Posting Date");
 
-                                                    if LoanRepayments.FindLast() then
-                                                        LastRepaymentDate := LoanRepayments."Posting Date"
-                                                    else
-                                                        // No repayment made
-                                                        LastRepaymentDate := LoansRec."Disbursement Date";
+                                                    // if LoanRepayments.FindLast() then
+                                                    //     LastRepaymentDate := LoanRepayments."Posting Date"
+                                                    // else
+                                                    //     // No repayment made
+                                                    //     LastRepaymentDate := LoansRec."Disbursement Date";
 
 
-                                                    //  Stop interest accrual if no payment for the past 3 smonthsP
+                                                    // //  Stop interest accrual if no payment for the past 3 smonthsP
 
-                                                    if (LastRepaymentDate <> 0D) then begin
-                                                        if (CalcDate('<+3M>', LastRepaymentDate) < PostingDate) then
-                                                            IntCharged := 0;
-                                                    end;
+                                                    // if (LastRepaymentDate <> 0D) then begin
+                                                    //     if (CalcDate('<+3M>', LastRepaymentDate) < PostingDate) then
+                                                    //         IntCharged := 0;
+                                                    // end;
 
                                                     if IntCharged > 0 then begin
                                                         Dim1 := LoansRec."Global Dimension 1 Code";
