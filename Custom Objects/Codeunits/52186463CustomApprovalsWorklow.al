@@ -6349,6 +6349,9 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         VoteTransfer: Record "Vote Transfer";
         BankDeposit: Record "Bank Deposit Header";
         GroupUpdate: Record "Group Member Exit & Update";
+        SaccoT: Codeunit "Sacco Transactions";
+        BankingSetup: record "Banking User Template";
+        BankAcc: record "Bank Account";
 
     begin
         case RecRef.Number of
@@ -7197,6 +7200,23 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                     TCashier.Validate(Status, TCashier.status::Approved);
                     TCashier.modify(true);
                     Handled := true;
+
+                    if (TCashier.Issued = TCashier.Issued::No) and
+                       (TCashier."Transaction Type" = TCashier."Transaction Type"::"Issue To Teller") then begin
+                        if TCashier."From Account" <> '' then begin
+                            if BankingSetup.get(TCashier."From Account") then begin
+                                if BankingSetup."Default  Bank" = '' then
+                                    error('Default treasury bank has to be set.');
+                                    if BankAcc.get(BankingSetup."Default  Bank") then
+                                        BankAcc.CalcFields("Balance (LCY)");
+                                        if BankAcc."Balance (LCY)" > BankingSetup."Maximum Withholding" then
+                                            Message('The treasury has exceeded the maximum withholding of %1', BankingSetup."Maximum Withholding");
+                                            if BankAcc."Balance (LCY)" < BankingSetup."Minimum Balance" then
+                                                Message('The treasury account has gone below minimum required balance of %1', BankingSetup."Minimum Balance");
+                            end;
+                        end;  
+                        SaccoT.PostTCIssue(TCashier);
+                    end;
                 end;
             database::"Savings Interest Header":
                 begin

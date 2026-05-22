@@ -279,7 +279,7 @@ Codeunit 52185455 "Registration Process"
         Cust."Transactional Mobile Number" := MemberApplication."Transactional Mobile Number".Trim();
         Cust.Age := MemberApplication.Age;
         Cust."Office E-Mail" := MemberApplication."Office E-Mail";
-        Cust."Source Aplication" := MemberApplication."Source Aplication";
+        //Cust."Source Aplication" := MemberApplication."Source Aplication";
         Cust."Permanent Post Code" := MemberApplication."Permanent Post Code";
         Cust."Permanent City" := MemberApplication."Permanent City";
         Cust."Request for ATM" := MemberApplication."Request for ATM";
