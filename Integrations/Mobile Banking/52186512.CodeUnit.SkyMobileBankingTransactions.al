@@ -751,15 +751,15 @@ codeunit 52186512 "Sky M-Banking Transactions"
                 end;
 
                 if MpesaDepositTrans."Transaction Type" = MpesaDepositTrans."Transaction Type"::"Mpesa Deposit" then begin
-                                        BeneficiarySavingsAccount.Reset;
+                    BeneficiarySavingsAccount.Reset;
                     BeneficiarySavingsAccount.SetRange("No.", MpesaDepositTrans."Savings Account");
                     BeneficiarySavingsAccount.SetLoadFields("No.");
                     if not BeneficiarySavingsAccount.FindFirst then begin
                         // Search using old account no
                         BeneficiarySavingsAccount.Reset;
                         BeneficiarySavingsAccount.SetRange("Old Account No", MpesaDepositTrans."Savings Account");
-                    BeneficiarySavingsAccount.SetFilter(Status, '<>%1', BeneficiarySavingsAccount.Status::Closed);
-                    BeneficiarySavingsAccount.SetRange(Blocked, BeneficiarySavingsAccount.Blocked::" ");
+                        BeneficiarySavingsAccount.SetFilter(Status, '<>%1', BeneficiarySavingsAccount.Status::Closed);
+                        BeneficiarySavingsAccount.SetRange(Blocked, BeneficiarySavingsAccount.Blocked::" ");
                         BeneficiarySavingsAccount.SetLoadFields("No.");
                         if BeneficiarySavingsAccount.FindFirst then begin
                             // Search using old account no
@@ -792,18 +792,18 @@ codeunit 52186512 "Sky M-Banking Transactions"
                                 MobileDepositkeywordSetup.Reset;
                                 MobileDepositkeywordSetup.Get(ExitKeywordSearch);
                                 //
-                            TheBeneficiaryIdentifierNo := SearchAccount.Replace(MobileDepositkeywordSetup.Keyword, '').Trim();
+                                TheBeneficiaryIdentifierNo := SearchAccount.Replace(MobileDepositkeywordSetup.Keyword, '').Trim();
 
                                 TheBeneficiary.Reset;
 
-                            if MobileDepositkeywordSetup."Member Identifier Type" = MobileDepositkeywordSetup."Member Identifier Type"::"Group Account No." then begin
-                                TheBeneficiary.FilterGroup := -1;
-                                TheBeneficiary.SetRange("No.", TheBeneficiaryIdentifierNo);
-                                TheBeneficiary.SetRange("Old Member No.", TheBeneficiaryIdentifierNo);
-                            end else begin
-                                TheBeneficiary.SetRange("Primary Identification", TheBeneficiaryIdentifierNo);
-                                TheBeneficiary.SetRange("Primary Identification Type", MobileDepositkeywordSetup."Member Identifier Type");
-                            end;
+                                if MobileDepositkeywordSetup."Member Identifier Type" = MobileDepositkeywordSetup."Member Identifier Type"::"Group Account No." then begin
+                                    TheBeneficiary.FilterGroup := -1;
+                                    TheBeneficiary.SetRange("No.", TheBeneficiaryIdentifierNo);
+                                    TheBeneficiary.SetRange("Old Member No.", TheBeneficiaryIdentifierNo);
+                                end else begin
+                                    TheBeneficiary.SetRange("Primary Identification", TheBeneficiaryIdentifierNo);
+                                    TheBeneficiary.SetRange("Primary Identification Type", MobileDepositkeywordSetup."Member Identifier Type");
+                                end;
 
                                 TheBeneficiary.SetLoadFields("No.");
 
@@ -830,8 +830,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
                                         BeneficiarySavingsAccount.Reset;
                                         BeneficiarySavingsAccount.SetRange("Member No.", TheBeneficiary."No.");
                                         BeneficiarySavingsAccount.SetRange("Product Type", MobileDepositkeywordSetup."Product Code");
-                                    BeneficiarySavingsAccount.SetFilter(Status, '<>%1', BeneficiarySavingsAccount.Status::Closed);
-                                    BeneficiarySavingsAccount.SetRange(Blocked, BeneficiarySavingsAccount.Blocked::" ");
+                                        BeneficiarySavingsAccount.SetFilter(Status, '<>%1', BeneficiarySavingsAccount.Status::Closed);
+                                        BeneficiarySavingsAccount.SetRange(Blocked, BeneficiarySavingsAccount.Blocked::" ");
                                         BeneficiarySavingsAccount.SetLoadFields("No.");
                                         if BeneficiarySavingsAccount.FindFirst then begin
                                             MpesaDepositTrans."Savings Account" := BeneficiarySavingsAccount."No.";
@@ -1458,7 +1458,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
 
             saccoAccount.RESET;
             saccoAccount.SETRANGE(saccoAccount."Member No.", Members."No.");
-            saccoAccount.SetRange("Product Category", saccoAccount."Product Category"::"FOSA Account");
+            //saccoAccount.SetRange("Product Category", saccoAccount."Product Category"::"FOSA Account");
+            saccoAccount.SetRange("Product Type", '191');
             saccoAccount.SetCurrentKey(Blocked);
 
             saccoAccount.SetLoadFields(
@@ -1486,7 +1487,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
                 Message('DEBUG: Loan Deductions = : %1', LoanRec);
                 IF (saccoAccount.Status <> saccoAccount.Status::Active) OR (saccoAccount.Blocked <> saccoAccount.Blocked::" ") THEN BEGIN
                     Message('DEBUG: Applicant NOT eligible due to FOSA account status - Status: %1, Blocked: %2', saccoAccount.Status, saccoAccount.Blocked);
-                    EligibilityFailReason := StrSubstNo('Applicant NOT eligible. Transaction account status is %.', Format(saccoAccount.Status));
+                    EligibilityFailReason := StrSubstNo('Applicant NOT eligible. Transaction account status is %1.', Format(saccoAccount.Status));
                     if saccoAccount.Blocked <> saccoAccount.Blocked::" " then begin
                         Message('The member is not eligible because the transaction account is blocked.');
                         EligibilityFailReason := StrSubstNo('Applicant NOT eligible. Transaction account is blocked');
