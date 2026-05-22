@@ -241,6 +241,12 @@ page 52187301 "Banking Management Role Center"
                                 Caption = 'EOD Teller Specifications Report';
                                 RunObject = report "Teller Specifications Report";
                             }
+                            action("Counter Summary Report")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Counter Summary Report';
+                                RunObject = report "Counter Summary Report";
+                            }
                         }
                     }
                     group(Receipt)
