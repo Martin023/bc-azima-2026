@@ -22,151 +22,6 @@
       <rd:DataSourceID>a92bdb9c-2f7f-4e3b-8171-d387bfe96727</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="No">
-          <DataField>No</DataField>
-        </Field>
-        <Field Name="Source_Aplication">
-          <DataField>Source_Aplication</DataField>
-        </Field>
-        <Field Name="Name">
-          <DataField>Name</DataField>
-        </Field>
-        <Field Name="Status">
-          <DataField>Status</DataField>
-        </Field>
-        <Field Name="Subflag">
-          <DataField>Subflag</DataField>
-        </Field>
-        <Field Name="RegistrationDate">
-          <DataField>RegistrationDate</DataField>
-        </Field>
-        <Field Name="GlobalDimension1Code">
-          <DataField>GlobalDimension1Code</DataField>
-        </Field>
-        <Field Name="GlobalDimension2Code">
-          <DataField>GlobalDimension2Code</DataField>
-        </Field>
-        <Field Name="EmployerCode">
-          <DataField>EmployerCode</DataField>
-        </Field>
-        <Field Name="EmployerName">
-          <DataField>EmployerName</DataField>
-        </Field>
-        <Field Name="CurrentAddress">
-          <DataField>CurrentAddress</DataField>
-        </Field>
-        <Field Name="DateofBirth">
-          <DataField>DateofBirth</DataField>
-        </Field>
-        <Field Name="EMail">
-          <DataField>EMail</DataField>
-        </Field>
-        <Field Name="RecruitedBy">
-          <DataField>RecruitedBy</DataField>
-        </Field>
-        <Field Name="StartDate">
-          <DataField>StartDate</DataField>
-        </Field>
-        <Field Name="EndDate">
-          <DataField>EndDate</DataField>
-        </Field>
-        <Field Name="RecruitedByName">
-          <DataField>RecruitedByName</DataField>
-        </Field>
-        <Field Name="RecruitedbyType">
-          <DataField>RecruitedbyType</DataField>
-        </Field>
-        <Field Name="MemberClass">
-          <DataField>MemberClass</DataField>
-        </Field>
-        <Field Name="Salutation">
-          <DataField>Salutation</DataField>
-        </Field>
-        <Field Name="MaritalStatus">
-          <DataField>MaritalStatus</DataField>
-        </Field>
-        <Field Name="Date_Approved">
-          <DataField>Date_Approved</DataField>
-        </Field>
-        <Field Name="MemberAge">
-          <DataField>MemberAge</DataField>
-        </Field>
-        <Field Name="CompanyInformation_Name">
-          <DataField>CompanyInformation_Name</DataField>
-        </Field>
-        <Field Name="CompanyInformation_Picture">
-          <DataField>CompanyInformation_Picture</DataField>
-        </Field>
-        <Field Name="CompanyAddress">
-          <DataField>CompanyAddress</DataField>
-        </Field>
-        <Field Name="CompanyTelephone">
-          <DataField>CompanyTelephone</DataField>
-        </Field>
-        <Field Name="CommunicationOnline">
-          <DataField>CommunicationOnline</DataField>
-        </Field>
-        <Field Name="Delegates_Zone">
-          <DataField>Delegates_Zone</DataField>
-        </Field>
-        <Field Name="RiskBalance">
-          <DataField>RiskBalance</DataField>
-        </Field>
-        <Field Name="RiskBalanceFormat">
-          <DataField>RiskBalanceFormat</DataField>
-        </Field>
-        <Field Name="RiskMonthlyContribution">
-          <DataField>RiskMonthlyContribution</DataField>
-        </Field>
-        <Field Name="RiskMonthlyContributionFormat">
-          <DataField>RiskMonthlyContributionFormat</DataField>
-        </Field>
-        <Field Name="RegistrationFee">
-          <DataField>RegistrationFee</DataField>
-        </Field>
-        <Field Name="RegistrationFeeFormat">
-          <DataField>RegistrationFeeFormat</DataField>
-        </Field>
-        <Field Name="FOSABalance">
-          <DataField>FOSABalance</DataField>
-        </Field>
-        <Field Name="FOSABalanceFormat">
-          <DataField>FOSABalanceFormat</DataField>
-        </Field>
-        <Field Name="BusinessDeposits">
-          <DataField>BusinessDeposits</DataField>
-        </Field>
-        <Field Name="BusinessDepositsFormat">
-          <DataField>BusinessDepositsFormat</DataField>
-        </Field>
-        <Field Name="BOSADepositBalance">
-          <DataField>BOSADepositBalance</DataField>
-        </Field>
-        <Field Name="BOSADepositBalanceFormat">
-          <DataField>BOSADepositBalanceFormat</DataField>
-        </Field>
-        <Field Name="BOSADepositsMonthlyContribution">
-          <DataField>BOSADepositsMonthlyContribution</DataField>
-        </Field>
-        <Field Name="BOSADepositsMonthlyContributionFormat">
-          <DataField>BOSADepositsMonthlyContributionFormat</DataField>
-        </Field>
-        <Field Name="BBFMonthlyContribution">
-          <DataField>BBFMonthlyContribution</DataField>
-        </Field>
-        <Field Name="BBFMonthlyContributionFormat">
-          <DataField>BBFMonthlyContributionFormat</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -2584,12 +2439,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -2629,4 +2478,149 @@ End Function
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="Source_Aplication">
+          <DataField>Source_Aplication</DataField>
+        </Field>
+        <Field Name="Name">
+          <DataField>Name</DataField>
+        </Field>
+        <Field Name="Status">
+          <DataField>Status</DataField>
+        </Field>
+        <Field Name="Subflag">
+          <DataField>Subflag</DataField>
+        </Field>
+        <Field Name="RegistrationDate">
+          <DataField>RegistrationDate</DataField>
+        </Field>
+        <Field Name="GlobalDimension1Code">
+          <DataField>GlobalDimension1Code</DataField>
+        </Field>
+        <Field Name="GlobalDimension2Code">
+          <DataField>GlobalDimension2Code</DataField>
+        </Field>
+        <Field Name="EmployerCode">
+          <DataField>EmployerCode</DataField>
+        </Field>
+        <Field Name="EmployerName">
+          <DataField>EmployerName</DataField>
+        </Field>
+        <Field Name="CurrentAddress">
+          <DataField>CurrentAddress</DataField>
+        </Field>
+        <Field Name="DateofBirth">
+          <DataField>DateofBirth</DataField>
+        </Field>
+        <Field Name="EMail">
+          <DataField>EMail</DataField>
+        </Field>
+        <Field Name="RecruitedBy">
+          <DataField>RecruitedBy</DataField>
+        </Field>
+        <Field Name="StartDate">
+          <DataField>StartDate</DataField>
+        </Field>
+        <Field Name="EndDate">
+          <DataField>EndDate</DataField>
+        </Field>
+        <Field Name="RecruitedByName">
+          <DataField>RecruitedByName</DataField>
+        </Field>
+        <Field Name="RecruitedbyType">
+          <DataField>RecruitedbyType</DataField>
+        </Field>
+        <Field Name="MemberClass">
+          <DataField>MemberClass</DataField>
+        </Field>
+        <Field Name="Salutation">
+          <DataField>Salutation</DataField>
+        </Field>
+        <Field Name="MaritalStatus">
+          <DataField>MaritalStatus</DataField>
+        </Field>
+        <Field Name="Date_Approved">
+          <DataField>Date_Approved</DataField>
+        </Field>
+        <Field Name="MemberAge">
+          <DataField>MemberAge</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Name">
+          <DataField>CompanyInformation_Name</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Picture">
+          <DataField>CompanyInformation_Picture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="Delegates_Zone">
+          <DataField>Delegates_Zone</DataField>
+        </Field>
+        <Field Name="RiskBalance">
+          <DataField>RiskBalance</DataField>
+        </Field>
+        <Field Name="RiskBalanceFormat">
+          <DataField>RiskBalanceFormat</DataField>
+        </Field>
+        <Field Name="RiskMonthlyContribution">
+          <DataField>RiskMonthlyContribution</DataField>
+        </Field>
+        <Field Name="RiskMonthlyContributionFormat">
+          <DataField>RiskMonthlyContributionFormat</DataField>
+        </Field>
+        <Field Name="RegistrationFee">
+          <DataField>RegistrationFee</DataField>
+        </Field>
+        <Field Name="RegistrationFeeFormat">
+          <DataField>RegistrationFeeFormat</DataField>
+        </Field>
+        <Field Name="FOSABalance">
+          <DataField>FOSABalance</DataField>
+        </Field>
+        <Field Name="FOSABalanceFormat">
+          <DataField>FOSABalanceFormat</DataField>
+        </Field>
+        <Field Name="BusinessDeposits">
+          <DataField>BusinessDeposits</DataField>
+        </Field>
+        <Field Name="BusinessDepositsFormat">
+          <DataField>BusinessDepositsFormat</DataField>
+        </Field>
+        <Field Name="BOSADepositBalance">
+          <DataField>BOSADepositBalance</DataField>
+        </Field>
+        <Field Name="BOSADepositBalanceFormat">
+          <DataField>BOSADepositBalanceFormat</DataField>
+        </Field>
+        <Field Name="BOSADepositsMonthlyContribution">
+          <DataField>BOSADepositsMonthlyContribution</DataField>
+        </Field>
+        <Field Name="BOSADepositsMonthlyContributionFormat">
+          <DataField>BOSADepositsMonthlyContributionFormat</DataField>
+        </Field>
+        <Field Name="BBFMonthlyContribution">
+          <DataField>BBFMonthlyContribution</DataField>
+        </Field>
+        <Field Name="BBFMonthlyContributionFormat">
+          <DataField>BBFMonthlyContributionFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>
