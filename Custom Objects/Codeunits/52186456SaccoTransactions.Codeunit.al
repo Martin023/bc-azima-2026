@@ -2474,7 +2474,7 @@ Codeunit 52186456 "Sacco Transactions"
         UserSetup: Record "User Setup";
         Text0001: label 'Ensure the Cashier Journal Template is set up in Banking User Setup';
         Text0002: label 'Ensure the Cashier Journal Batch is set up in Banking User Setup';
-        Text0003: label 'Ensure the Default Bank is set up in User Setup';
+        Text0003: label 'Ensure the Default Bank is set up in Banking User Setup';
         Text0007: label 'Please specify an amount greater than zero.';
         ToAccount: Code[20];
         FromAccount: Code[20];

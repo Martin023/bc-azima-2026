@@ -168,13 +168,13 @@ page 52185726 "Member Single"
                 {
                     ApplicationArea = Basic, Suite;
                     ValuesAllowed = Male, Female;
-                    Visible = GroupDetailsVisible;
+                    // Visible = GroupDetailsVisible;
                 }
                 field(txtMarital; Rec."Marital Status")
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Marital Status';
-                    Visible = GroupDetailsVisible;
+                    // Visible = GroupDetailsVisible;
                 }
                 field("Member Segment"; Rec."Member Segment")
                 {
