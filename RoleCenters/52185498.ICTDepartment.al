@@ -137,6 +137,18 @@ page 52187058 "ICT Department"
             Group("Audit Process")
             {
                 Caption = 'Audit Process';
+                action(ChangeLogSetup)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Change Log Setup';
+                    RunObject = page "Change Log Setup";
+                }
+                action(ChangelogRetention)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Change Log Retention';
+                    RunObject = page "Retention Policy Setup List";
+                }
                 action("Account Access Log")
                 {
                     ApplicationArea = Basic, Suite;
@@ -190,6 +202,35 @@ page 52187058 "ICT Department"
                 }
 
             }
+            Group("Database Management")
+            {
+                action(DatabaseLocks)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Database Locks';
+                    RunObject = page "Database Locks";
+                }
+                action(DatabaseAccessIntent)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Database Access Intent';
+                    RunObject = page "Database Access Intent List";
+                }
+                action(TableInformation)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Table Information';
+                    RunObject = page "Table Information";
+                }
+                action(DatabaseWaitStatistics)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Database Wait Statistics';
+                    RunObject = page "Database Wait Statistics";
+                }
+
+            }
+
             // group("Contract Request")
             // {
             //     Caption = 'Contract Request';

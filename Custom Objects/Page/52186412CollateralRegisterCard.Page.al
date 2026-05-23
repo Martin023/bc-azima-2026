@@ -676,23 +676,23 @@ page 52186412 "Collateral Register Card"
                     CustomApprovals.OnCancelDocApprovalRequest(VarVariant);
                 end;
             }
-            action("Re-Open")
-            {
-                ApplicationArea = Basic, Suite;
-                Visible = true;
+            // action("Re-Open")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Visible = true;
 
-                trigger OnAction()
-                begin
-                    if (Rec.Status = Rec.Status::Rejected) or (Rec.Status = Rec.Status::Approved) or (Rec.Status = Rec.Status::Archived) then begin
-                        GlobalFunctions.CommentsManagement(Rec."No.");
-                        if not Confirm('Are you sure you want to archive this record?') then exit;
-                        Rec.Status := Rec.Status::open;
-                        Rec.Validate(Status);
-                        Rec.Modify();
-                        Message('Record ropened succsessfully');
-                    end;
-                end;
-            }
+            //     trigger OnAction()
+            //     begin
+            //         if (Rec.Status = Rec.Status::Rejected) or (Rec.Status = Rec.Status::Approved) or (Rec.Status = Rec.Status::Archived) then begin
+            //             GlobalFunctions.CommentsManagement(Rec."No.");
+            //             if not Confirm('Are you sure you want to archive this record?') then exit;
+            //             Rec.Status := Rec.Status::open;
+            //             Rec.Validate(Status);
+            //             Rec.Modify();
+            //             Message('Record ropened succsessfully');
+            //         end;
+            //     end;
+            // }
             action(Approvals)
             {
                 ApplicationArea = Basic, Suite;
@@ -749,12 +749,15 @@ page 52186412 "Collateral Register Card"
                 ApplicationArea = Basic, Suite;
                 Caption = 'Reopen Card';
                 Image = ReOpen;
-                Visible = ReopenVisible;
+                // Visible = ReopenVisible;
+                Promoted = true;
+                PromotedCategory = Category5;
 
                 trigger OnAction()
                 var
 
                 begin
+
                     GlobalFunctions.CommentsManagement(Rec."No.");
 
                     if not Confirm('Are you sure you want to open this record?') then exit;
@@ -765,17 +768,17 @@ page 52186412 "Collateral Register Card"
                 end;
             }
 
-            // action(Comments)
-            // {
-            //     ApplicationArea = Basic, Suite;
-            //     Image = ViewComments;
-            //     Promoted = true;
-            //     PromotedCategory = Category4;
+            action(Comments)
+            {
+                ApplicationArea = Basic, Suite;
+                Image = ViewComments;
+                Promoted = true;
+                PromotedCategory = Category4;
 
-            //     RunObject = page "Comments List";
-            //     RunPageLink = "Header No." = field("No.");
-            //     RunPageView = where(Types = CONST(comment));
-            // }
+                RunObject = page "Comments List";
+                RunPageLink = "Header No." = field("No.");
+                RunPageView = where(Types = CONST(comment));
+            }
             group("Document Forwarding")
             {
                 action("Document Comments")

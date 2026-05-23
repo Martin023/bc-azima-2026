@@ -853,6 +853,10 @@ table 52185729 Loans
                     end;
                 end;
 
+                userSetup.get(USERID);
+                if userSetup."Member No." = Rec."Member No." then begin
+                    Error('You cannot capture your own loan application.');
+                end;
             end;
         }
         field(5; "Requested Amount"; Decimal)
@@ -1846,6 +1850,14 @@ table 52185729 Loans
                 GlobalFunctions.DisplayLienMessage("Member No.");
                 CheckExceptions;
                 //SendSMSApproval()
+                if (rec.Status = rec.Status::Approved) or (rec.Status = rec.Status::Rejected) then begin
+                    GlobalFunctions.CommentsManagement(Rec."Loan No.");
+
+                    userSetup.get(USERID);
+                    if userSetup."Member No." = Rec."Member No." then begin
+                        Error('You cannot Approve or Reject your own loan application.');
+                    end;
+                end;
 
             end;
 
