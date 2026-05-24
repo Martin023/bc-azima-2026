@@ -1491,6 +1491,11 @@ page 52185753 "Loan Application Card"
                     MemberGuarantor: record Members;
                     GlobalFunctions: Codeunit "Global Functions";
                 begin
+                      userSetup.get(USERID);
+                if userSetup."Member No." = Rec."Member No." then begin
+                    Error('You cannot capture your own loan application.');
+                end;
+
                     //Check minimum requirements
                     Rec.TestField("Recovery Mode");
                     if rec."Approved Amount" <= 0 then Error('Ensure Approved amount has a value');
@@ -1962,6 +1967,7 @@ page 52185753 "Loan Application Card"
             }
             action(Comments)
             {
+                Caption = 'Approval/Rejection Comments';
                 ApplicationArea = Basic, Suite;
                 Image = ViewComments;
                 Promoted = true;
