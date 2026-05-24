@@ -89,6 +89,14 @@ page 52185731 "Dividend Setup"
             //         ApplicationArea = Basic, Suite;
             //     }
             // }
+            group(NoSetup)
+            {
+                Caption = 'No. Setup';
+                field("Div Header No."; Rec."Div Header No.")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+            }
         }
     }
 
