@@ -513,6 +513,7 @@ table 52185729 Loans
                 ShareBoostAmount: Decimal;
                 GeneralSetUp: Record "General Set-Up";
                 TodayDate: Date;
+                Comments: record Comments;
             begin
                 GlobalFunctions.FlagAccounts(Rec."Member No.");
                 // LoansProcess.LoanBulkClearence(Rec."Member No.");
@@ -685,6 +686,13 @@ table 52185729 Loans
                     "Residential Address" := Mem."Home Address";
                     // "Global Dimension 1 Code":=Mem."Global Dimension 1 Code";
                     //"Global Dimension 2 Code":=Mem."Global Dimension 2 Code";
+
+                    Comments.reset;
+                    COmments.SetRange(Comments."Header No.", "Member No.");
+                    Comments.setrange(Types, Comments.types::"Member Flagging");
+                    Comments.setrange("Disable Flag", false);
+                    if Comments.Find('-') then
+                        Message(Comments."Comment");
                 end else begin
                     if "Dummy Appraisal" = false then Error('Member does not exist') else Message('Member does not exist');
                 end;
@@ -845,6 +853,10 @@ table 52185729 Loans
                     end;
                 end;
 
+                userSetup.get(USERID);
+                if userSetup."Member No." = Rec."Member No." then begin
+                    Error('You cannot capture your own loan application.');
+                end;
             end;
         }
         field(5; "Requested Amount"; Decimal)
@@ -1838,6 +1850,14 @@ table 52185729 Loans
                 GlobalFunctions.DisplayLienMessage("Member No.");
                 CheckExceptions;
                 //SendSMSApproval()
+                if (rec.Status = rec.Status::Approved) or (rec.Status = rec.Status::Rejected) then begin
+                    GlobalFunctions.CommentsManagement(Rec."Loan No.");
+
+                    userSetup.get(USERID);
+                    if userSetup."Member No." = Rec."Member No." then begin
+                        Error('You cannot Approve or Reject your own loan application.');
+                    end;
+                end;
 
             end;
 

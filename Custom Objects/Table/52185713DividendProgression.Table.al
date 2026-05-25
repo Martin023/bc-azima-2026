@@ -71,12 +71,16 @@ table 52185713 "Dividend Progression"
         { }
         field(21; "Forfeited"; Boolean)
         { }
+        field(22; "Header No."; Code[30])
+        {
+            TableRelation = "Dividend Header";
+        }
 
     }
 
     keys
     {
-        key(Key1; "Account No", "Product Type", Year, Month, "Entry No.")
+        key(Key1; "Account No", "Product Type", Year, Month, "Entry No.", "Header No.")
         {
             Clustered = true;
         }

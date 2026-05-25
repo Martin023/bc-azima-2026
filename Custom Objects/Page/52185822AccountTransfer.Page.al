@@ -105,25 +105,25 @@ page 52185822 "Account Transfer"
                 }
 
             }
-            group(Control17)
-            {
-                ShowCaption = false;
+            // group(Control17)
+            // {
+            //     ShowCaption = false;
 
-                part("Account Transfers-Source [ Debit ]"; "Account Transfer Source")
-                {
-                    Caption = 'Account Transfers-Source [ Debit ]';
-                    Editable = SourceA;
-                    SubPageLink = "No." = FIELD(No);
-                    ApplicationArea = Basic, Suite;
-                }
-                part("Account Transfers-Destination [ Credit ]"; "Account Transfer Destination")
-                {
-                    Caption = 'Account Transfers-Destination [ Credit ]';
-                    Editable = DestinationA;
-                    SubPageLink = "No." = FIELD(No);
-                    ApplicationArea = Basic, Suite;
-                }
+            part("Account Transfers-Source [ Debit ]"; "Account Transfer Source")
+            {
+                Caption = 'Account Transfers-Source [ Debit ]';
+                Editable = SourceA;
+                SubPageLink = "No." = FIELD(No);
+                ApplicationArea = Basic, Suite;
             }
+            part("Account Transfers-Destination [ Credit ]"; "Account Transfer Destination")
+            {
+                Caption = 'Account Transfers-Destination [ Credit ]';
+                Editable = DestinationA;
+                SubPageLink = "No." = FIELD(No);
+                ApplicationArea = Basic, Suite;
+            }
+            // }
         }
     }
 
@@ -415,11 +415,11 @@ page 52185822 "Account Transfer"
                                                                             until TariffDetails.Next = 0;
                                                                         end;
                                                                     end;
-                                                                    TChargeAmount:= TChargeAmount + ChargeAmount;
+                                                                    TChargeAmount := TChargeAmount + ChargeAmount;
 
                                                                     if (TransactionCharges."Transaction Charge Category" <> TransactionCharges."transaction charge category"::"Stamp Duty")
                                                                       and (TransactionCharges."Recover Excise Duty" = true) then begin
-                                                                        ExciseDuty:=Gensetup."Excise Duty (%)" * ChargeAmount * 0.01 + ChargeAmount;
+                                                                        ExciseDuty := Gensetup."Excise Duty (%)" * ChargeAmount * 0.01 + ChargeAmount;
                                                                         TChargeAmount := TChargeAmount + ChargeAmount;
                                                                     end;
                                                                 end;

@@ -1491,6 +1491,11 @@ page 52185753 "Loan Application Card"
                     MemberGuarantor: record Members;
                     GlobalFunctions: Codeunit "Global Functions";
                 begin
+                      userSetup.get(USERID);
+                if userSetup."Member No." = Rec."Member No." then begin
+                    Error('You cannot capture your own loan application.');
+                end;
+
                     //Check minimum requirements
                     Rec.TestField("Recovery Mode");
                     if rec."Approved Amount" <= 0 then Error('Ensure Approved amount has a value');
@@ -1962,6 +1967,7 @@ page 52185753 "Loan Application Card"
             }
             action(Comments)
             {
+                Caption = 'Approval/Rejection Comments';
                 ApplicationArea = Basic, Suite;
                 Image = ViewComments;
                 Promoted = true;
@@ -2531,6 +2537,8 @@ page 52185753 "Loan Application Card"
     end;
 
     trigger OnOpenPage()
+    var
+        Comments: record Comments;
     begin
         StatusControl;
         if UserSetup.Get(Rec."Captured By") then begin
@@ -2581,6 +2589,15 @@ page 52185753 "Loan Application Card"
             else
                 IsShambaLoan := false;
         end;
+        if rec."Member No." <> '' then begin
+            Comments.reset;
+            Comments.SetRange(Comments."Header No.", rec."Member No.");
+            Comments.setrange(Types, Comments.types::"Member Flagging");
+            Comments.setrange("Disable Flag", false);
+            if Comments.Find('-') then
+                Message(Comments."Comment");
+        end;
+
     end;
 
     procedure UploadToEDMS(Rec: Record Loans; FileName: Text; FileContentsB64: Text)

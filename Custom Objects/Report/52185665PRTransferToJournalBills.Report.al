@@ -20,7 +20,7 @@ Report 52185665 "PR Transfer To Journal Bills"
             begin
 
                 //For use when posting Pension and NSSF
-                PostingGroup.Get('KENPIPE');
+                PostingGroup.Get('AZIMA');
 
                 //Get the staff details (header)
                 objEmp.SetRange(objEmp."No.", "Employee Code");
