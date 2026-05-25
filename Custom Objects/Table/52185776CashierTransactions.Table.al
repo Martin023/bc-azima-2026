@@ -581,6 +581,8 @@ table 52185776 "Cashier Transactions"
         field(50014; "Cheque Issueing Bank"; Text[100])
         {
             Editable = false;
+            FieldClass = FlowField;
+            CalcFormula = lookup("Bank Account".Name where("No." = field("Bank Account")));
         }
         field(50015; "Account Type"; Option)
         {
