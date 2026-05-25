@@ -11,82 +11,76 @@ Report 52186171 "Cashier Cheque Deposits"
         {
             RequestFilterFields = "Date Posted", "Account No", Type, "Cheque Type", "Cheque Date";
             DataItemTableView = where(Type = filter("Cheque Deposit"), Posted = filter(true));
-            column(No; No)
-            {
 
-            }
-            column(Date_Posted; "Date Posted")
-            {
+            column(No; No) { }
+            column(Date_Posted; "Date Posted") { }
+            column(Transaction_Time; "Transaction Time") { }
+            column(Account_No; "Account No") { }
+            column(Account_Name; "Account Name") { }
+            column(Cheque_Type; "Cheque Type") { }
+            column(Cheque_No; "Cheque No") { }
+            column(Cheque_Date; "Cheque Date") { }
+            column(Amount; Amount) { }
+            column(CompanyInformation_Name; CompanyInformation.Name) { }
+            column(CompanyInformation_Picture; CompanyInformation.Picture) { }
+            column(CompanyAddress; CompanyAddress) { }
+            column(CompanyTelephone; CompanyTelephone) { }
+            column(CommunicationOnline; CommunicationOnline) { }
 
-            }
-            column(Account_No; "Account No")
-            {
-
-            }
-            column(Account_Name; "Account Name")
-            {
-
-            }
-            column(Cheque_Type; "Cheque Type")
-            {
-
-            }
-            column(Cheque_No; "Cheque No")
-            {
-
-            }
-            column(Cheque_Date; "Cheque Date")
-            {
-
-            }
-            column(Amount; Amount)
-            {
-            }
-            column(CompanyInformation_Name; CompanyInformation.Name)
-            {
-            }
-            column(CompanyInformation_Picture; CompanyInformation.Picture)
-            {
-            }
-            column(CompanyAddress; CompanyAddress)
-            {
-            }
-            column(CompanyTelephone; CompanyTelephone)
-            {
-            }
-            column(CommunicationOnline; CommunicationOnline)
-            {
-            }
+            // NEWLY ADDED FOR NARROW SLIP & REPRINT
+            column(CashierName; CashierName) { }
+            column(Branch_Name; BranchName) { }
+            column(Branch_code; "Global Dimension 1 Code") { }
+            column(Reprint; Reprint) { }
+            column(ReprintDate; ReprintDate) { }
+            column(ReprintTime; ReprintTime) { }
 
             trigger OnAfterGetRecord()
             begin
+                // GET CASHIER NAME
+                CashierName := '';
+                user.Reset;
+                user.SetRange("User Name", UserId);
+                if user.Find('-') then
+                    CashierName := user."Full Name"
+                else
+                    CashierName := UserId;
 
+                // GET BRANCH NAME
+                BranchName := '';
+                DimensionValue.Reset();
+                DimensionValue.SetRange("Global Dimension No.", 1);
+                DimensionValue.SetRange(Code, "Global Dimension 1 Code");
+                if DimensionValue.FindFirst() then
+                    BranchName := DimensionValue.Name;
+
+                // REPRINT LOGIC
+                Reprint := '';
+                if "Transaction Date" < Today then
+                    Reprint := 'REPRINT'
+                else if ("Transaction Date" = Today) and ("Transaction Time" <> 0T) then begin
+                    if Time > "Transaction Time" then begin
+                        if (Time - "Transaction Time") > 60000 then // 1 min buffer
+                            Reprint := 'REPRINT';
+                    end;
+                end;
+
+                ReprintDate := Today;
+                ReprintTime := Time;
             end;
 
             trigger OnPreDataItem()
             begin
-                "Cashier Transactions".SetFilter("Date Posted", '>%1', "Cashier Transactions"."Date Posted");
+                // Removed the recursive SetFilter that was causing issues
             end;
-
         }
     }
 
     requestpage
     {
         SaveValues = true;
-
-        layout
-        {
-
-        }
-
-        actions
-        {
-        }
-    }
-
-    labels
-    {
+        layout { }
+        actions { }
     }
 
     trigger OnPreReport()
@@ -110,4 +104,12 @@ Report 52186171 "Cashier Cheque Deposits"
         AccountName: Text[100];
         TransType: Enum "Fosa Transaction Types";
 
+        // NEW VARIABLES ADDED FOR SLIP
+        user: Record User;
+        DimensionValue: Record "Dimension Value";
+        CashierName: Text;
+        BranchName: Text;
+        Reprint: Text;
+        ReprintDate: Date;
+        ReprintTime: Time;
 }

@@ -9,6 +9,7 @@ page 52185711 "Product Factory List"
     SourceTable = "Product Factory";
     ApplicationArea = Basic, Suite;
     UsageCategory = Lists;
+    AdditionalSearchTerms = 'Product Factory';
 
     layout
     {
