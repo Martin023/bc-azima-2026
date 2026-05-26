@@ -40,6 +40,13 @@ page 52185804 "Treasury Cashier Transactions"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Till Balance"; Rec."Till Balance")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'End Of Day Till Balance';
+                    Editable = false;
+                    Visible = true;
+                }
                 field("To Account"; Rec."To Account")
                 {
                     ApplicationArea = Basic, Suite;
@@ -50,10 +57,10 @@ page 52185804 "Treasury Cashier Transactions"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Till/Treasury Balance"; Rec."Till/Treasury Balance")
+                field("Treasury Balance"; Rec."Treasury Balance")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'End Of Day Till Balance';
+                    Caption = 'Treasury Balance';
                     Editable = false;
                     Visible = true;
                 }
@@ -191,6 +198,50 @@ page 52185804 "Treasury Cashier Transactions"
                     end;
                 end;
             }
+
+            action("Yesterday Return to Treasury")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    trigger OnAction()
+                    var 
+                        Coinage : Record Coinage;
+                        TreasuryCoinage : record Coinage;
+                    begin
+                        Rec.TestField(Status, Rec.Status::Open);
+                        Rec.TestField("Transaction Type", rec."Transaction Type"::"Issue To Teller");
+                        Rec.TestField("To Account");
+                        Treasury.Reset;
+                        Treasury.SetRange("Transaction Type",treasury."Transaction Type"::"End of Day Return to Treasury");
+                        Treasury.SetRange(Received,Treasury.Received::Yes);
+                        Treasury.SetRange(Posted,true);
+                        Treasury.SetRange("From Account",Rec."To Account");
+                        Treasury.SetRange("Date Posted",CalcDate('<-1D>',Today));
+                        if Treasury.FindFirst() then begin
+                            Coinage.Reset;
+                            Coinage.SetRange(No,Treasury.No);
+                            if Coinage.FindSet() then begin
+                                repeat
+                                    TreasuryCoinage.Reset();
+                                    TreasuryCoinage.SetRange(No, Rec.No);
+                                    TreasuryCoinage.SetRange(Code, Coinage.Code);
+                                    if TreasuryCoinage.FindSet() then begin
+                                        TreasuryCoinage.Description := Coinage.Description;
+                                        TreasuryCoinage.Type := Coinage.Type;
+                                        TreasuryCoinage.Value := Coinage.Value;
+                                        TreasuryCoinage.Quantity := Coinage.Quantity;
+                                        TreasuryCoinage."Total Amount" := Coinage."Total Amount";
+                                        TreasuryCoinage.Modify();
+                                    end;
+                                until Coinage.next = 0;
+                            Message('Coinage details for yesterday return to treasury transaction have been updated on this transaction successfully');
+                        end else
+                            Message('No return to treasury transaction from yesterday found for this teller.');
+                        end;
+
+                    end;
+                }
             action("Treasury Issue")
             {
                 ApplicationArea = Basic, Suite;
@@ -314,7 +365,7 @@ page 52185804 "Treasury Cashier Transactions"
                     Report.Run(Report::"End of Day Reconciliation", true, false, TreasuryTrans);
                 end;
             }
-            action("Till Balance")
+            action("Cashier Till Balance")
             {
                 ApplicationArea = Basic;
                 Image = Balance;

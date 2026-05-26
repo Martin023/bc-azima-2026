@@ -7,6 +7,23 @@ report 52187359 "Member Appl Channels"
     RDLCLayout = './bc-azima-2026/Layout/Member Appl Channels.rdl';
     dataset
     {
+        dataitem(CompanyHeader; "Company Information")
+        {
+            DataItemTableView = sorting("Primary Key");
+            MaxIteration = 1;
+ 
+            column(CompanyInformation_Name; Name)
+            {
+            }
+            column(CompanyInformation_Picture; Picture)
+            {
+            }
+ 
+            trigger OnPreDataItem()
+            begin
+                CalcFields(Picture);  // load BLOB here, once
+            end;
+        }
         dataitem(Members; Members)
         {
             RequestFilterFields = "No.", "Source Aplication";
@@ -20,12 +37,6 @@ report 52187359 "Member Appl Channels"
             {
             }
             column(SourceApplication; "Source Aplication")
-            {
-            }
-            column(CompanyInformation_Name; CompanyInformation.Name)
-            {
-            }
-            column(CompanyInformation_Picture; CompanyInformation.Picture)
             {
             }
             column(CompanyAddress; CompanyAddress)
@@ -60,11 +71,11 @@ report 52187359 "Member Appl Channels"
     }
     trigger OnPreReport()
     begin
-        if CompanyInformation.Get then
-            CompanyInformation.CalcFields(CompanyInformation.Picture);
-        CompanyAddress := CompanyInformation.Address + ' -Post Code: ' + CompanyInformation."Post Code" + ' -City:' + CompanyInformation.City + ' Region: ' + CompanyInformation."Country/Region Code";
-        CompanyTelephone := 'Tel: ' + CompanyInformation."Phone No." + ' -Office Tel: ' + CompanyInformation."Phone No. 2";
-        CommunicationOnline := 'E-mail: ' + CompanyInformation."E-Mail" + '- Website: ' + CompanyInformation."Home Page";
+        if CompanyInformation.Get then begin
+            CompanyAddress := CompanyInformation.Address + ' -Post Code: ' + CompanyInformation."Post Code" + ' -City:' + CompanyInformation.City + ' Region: ' + CompanyInformation."Country/Region Code";
+            CompanyTelephone := 'Tel: ' + CompanyInformation."Phone No." + ' -Office Tel: ' + CompanyInformation."Phone No. 2";
+            CommunicationOnline := 'E-mail: ' + CompanyInformation."E-Mail" + '- Website: ' + CompanyInformation."Home Page";
+        end;
     end;
 
     var

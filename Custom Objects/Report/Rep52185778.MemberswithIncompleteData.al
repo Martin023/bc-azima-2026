@@ -59,11 +59,7 @@ report 52185778 "Members with Incomplete Data"
             column(CommunicationOnline; CommunicationOnline)
             {
             }
-            trigger OnPreDataItem()
-            begin
-                CompanyInformation.Get;
-                CompanyInformation.CalcFields(Picture);
-            end;
+        
         }
     }
     requestpage

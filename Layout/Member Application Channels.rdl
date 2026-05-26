@@ -2481,6 +2481,12 @@ End Function
   <DataSets>
     <DataSet Name="DataSet_Result">
       <Fields>
+        <Field Name="CompanyInformation_Name">
+          <DataField>CompanyInformation_Name</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Picture">
+          <DataField>CompanyInformation_Picture</DataField>
+        </Field>
         <Field Name="No">
           <DataField>No</DataField>
         </Field>
@@ -2549,12 +2555,6 @@ End Function
         </Field>
         <Field Name="MemberAge">
           <DataField>MemberAge</DataField>
-        </Field>
-        <Field Name="CompanyInformation_Name">
-          <DataField>CompanyInformation_Name</DataField>
-        </Field>
-        <Field Name="CompanyInformation_Picture">
-          <DataField>CompanyInformation_Picture</DataField>
         </Field>
         <Field Name="CompanyAddress">
           <DataField>CompanyAddress</DataField>
