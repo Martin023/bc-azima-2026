@@ -63,17 +63,17 @@ PageExtension 52185434 pageextension52185434 extends "Location List"
         {
             ApplicationArea = Basic;
         }
-        modify("Items with Negative Inventory")
-        {
-            Caption = 'Check on Negative Inventory';
-            ApplicationArea = Basic;
+        // modify("Items with Negative Inventory")
+        // {
+        //     Caption = 'Check on Negative Inventory';
+        //     ApplicationArea = Basic;
 
-            //Unsupported feature: Property Modification (Promoted) on ""Items with Negative Inventory"(Action 1907335806)".
+        //     //Unsupported feature: Property Modification (Promoted) on ""Items with Negative Inventory"(Action 1907335806)".
 
 
-            //Unsupported feature: Property Modification (Name) on ""Items with Negative Inventory"(Action 1907335806)".
+        //     //Unsupported feature: Property Modification (Name) on ""Items with Negative Inventory"(Action 1907335806)".
 
-        }
+        // }
 
         //Unsupported feature: Property Deletion (ToolTipML) on ""&Resource Locations"(Action 10)".
 

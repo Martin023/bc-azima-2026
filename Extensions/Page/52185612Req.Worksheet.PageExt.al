@@ -384,10 +384,10 @@ PageExtension 52185612 pageextension52185612 extends "Req. Worksheet"
         {
             ApplicationArea = Basic;
         }
-        modify("Inventory - Availability Plan")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Inventory - Availability Plan")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("Inventory Order Details")
         {
             ApplicationArea = Basic;

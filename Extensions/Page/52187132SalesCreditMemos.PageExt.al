@@ -558,18 +558,18 @@ PageExtension 52187132 pageextension52187132 extends "Sales Credit Memos"
         {
             Visible = false;
         }
-        modify("Customer - Top 10 List")
-        {
-            Visible = false;
-        }
-        modify("Customer - Sales List")
-        {
-            Visible = false;
-        }
-        modify("Sales Statistics")
-        {
-            Visible = false;
-        }
+        // modify("Customer - Top 10 List")
+        // {
+        //     Visible = false;
+        // }
+        // modify("Customer - Sales List")
+        // {
+        //     Visible = false;
+        // }
+        // modify("Sales Statistics")
+        // {
+        //     Visible = false;
+        // }
         modify(FinanceReports)
         {
             Visible = false;

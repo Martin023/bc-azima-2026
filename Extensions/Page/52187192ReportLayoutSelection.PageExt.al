@@ -110,10 +110,10 @@ PageExtension 52187192 pageextension52187192 extends "Report Layout Selection"
     }
     actions
     {
-        modify(Customizations)
-        {
-            ApplicationArea = Basic;
-        }
+        // modify(Customizations)
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify(RunReport)
         {
             ApplicationArea = Basic;

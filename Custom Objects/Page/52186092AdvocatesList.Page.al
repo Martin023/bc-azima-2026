@@ -596,16 +596,16 @@ page 52186092 "Advocates List"
             group(General)
             {
                 Caption = 'General';
-                action("Vendor - List")
-                {
-                    Caption = 'Vendor - List';
-                    Image = "Report";
-                    Promoted = false;
-                    //The property 'PromotedCategory' can only be set if the property 'Promoted' is set to 'true'
-                    //PromotedCategory = "Report";
-                    RunObject = Report "Vendor - List";
-                    ApplicationArea = Basic, Suite;
-                }
+                // action("Vendor - List")
+                // {
+                //     Caption = 'Vendor - List';
+                //     Image = "Report";
+                //     Promoted = false;
+                //     //The property 'PromotedCategory' can only be set if the property 'Promoted' is set to 'true'
+                //     //PromotedCategory = "Report";
+                //     RunObject = Report "Vendor - List";
+                //     ApplicationArea = Basic, Suite;
+                // }
                 action("Vendor Register")
                 {
                     Caption = 'Vendor Register';
@@ -636,15 +636,15 @@ page 52186092 "Advocates List"
                     //PromotedCategory = "Report";
                     RunObject = Report "Vendor - Labels";
                 }
-                action("Vendor - Top 10 List")
-                {
-                    Caption = 'Vendor - Top 10 List';
-                    Image = "Report";
-                    Promoted = true;
-                    PromotedCategory = "Report";
-                    RunObject = Report "Vendor - Top 10 List";
-                    ApplicationArea = Basic, Suite;
-                }
+                // action("Vendor - Top 10 List")
+                // {
+                //     Caption = 'Vendor - Top 10 List';
+                //     Image = "Report";
+                //     Promoted = true;
+                //     PromotedCategory = "Report";
+                //     RunObject = Report "Vendor - Top 10 List";
+                //     ApplicationArea = Basic, Suite;
+                // }
             }
             group(Action5)
             {
@@ -708,34 +708,26 @@ page 52186092 "Advocates List"
             {
                 Caption = 'Financial Management';
                 Image = "Report";
-                action("Payments on Hold")
-                {
-                    Caption = 'Payments on Hold';
-                    Image = "Report";
-                    Promoted = true;
-                    PromotedCategory = "Report";
-                    RunObject = Report "Payments on Hold";
-                    ApplicationArea = Basic, Suite;
-                }
-                action("Vendor - Summary Aging")
-                {
-                    Caption = 'Vendor - Summary Aging';
-                    Image = "Report";
-                    Promoted = false;
-                    //The property 'PromotedCategory' can only be set if the property 'Promoted' is set to 'true'
-                    //PromotedCategory = "Report";
-                    RunObject = Report "Vendor - Summary Aging";
-                    ApplicationArea = Basic, Suite;
-                }
-                action("Aged Accounts Payable")
-                {
-                    Caption = 'Aged Accounts Payable';
-                    Image = "Report";
-                    Promoted = true;
-                    PromotedCategory = "Report";
-                    RunObject = Report "Aged Accounts Payable";
-                    ApplicationArea = Basic, Suite;
-                }
+                // action("Payments on Hold")
+                // {
+                //     Caption = 'Payments on Hold';
+                //     Image = "Report";
+                //     Promoted = true;
+                //     PromotedCategory = "Report";
+                //     RunObject = Report "Payments on Hold";
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // action("Vendor - Summary Aging")
+                // {
+                //     Caption = 'Vendor - Summary Aging';
+                //     Image = "Report";
+                //     Promoted = false;
+                //     //The property 'PromotedCategory' can only be set if the property 'Promoted' is set to 'true'
+                //     //PromotedCategory = "Report";
+                //     RunObject = Report "Vendor - Summary Aging";
+                //     ApplicationArea = Basic, Suite;
+                // }
+              
                 action("Vendor - Balance to Date")
                 {
                     Caption = 'Vendor - Balance to Date';
