@@ -1128,7 +1128,9 @@ Codeunit 52186456 "Sacco Transactions"
                 GenJournalLine."Journal Template Name" := JTemplate;
                 GenJournalLine."Journal Batch Name" := JBatch;
                 GenJournalLine."Document No." := CashierTrans.No;
-                GenJournalLine."External Document No." := CashierTrans.No;
+                if (CashierTrans.Type = CashierTrans.Type::"MPESA Deposit") or (CashierTrans.Type = CashierTrans.Type::"MPESA Withdrawal") then
+                    GenJournalLine."External Document No." := CashierTrans."Mpesa Reference" else     
+                    GenJournalLine."External Document No." := CashierTrans.No;
                 GenJournalLine."Line No." := LineNo;
                 GenJournalLine."Account Type" := GenJournalLine."account type"::"Bank Account";
                 GenJournalLine."Account No." := CashierTrans."Account No";
@@ -1154,7 +1156,9 @@ Codeunit 52186456 "Sacco Transactions"
                 GenJournalLine."Journal Template Name" := JTemplate;
                 GenJournalLine."Journal Batch Name" := JBatch;
                 GenJournalLine."Document No." := CashierTrans.No;
-                GenJournalLine."External Document No." := CashierTrans.No;
+                if (CashierTrans.Type = CashierTrans.Type::"MPESA Deposit") or (CashierTrans.Type = CashierTrans.Type::"MPESA Withdrawal") then
+                    GenJournalLine."External Document No." := CashierTrans."Mpesa Reference" else     
+                    GenJournalLine."External Document No." := CashierTrans.No;
                 GenJournalLine."Line No." := LineNo;
                 GenJournalLine."Account Type" := GenJournalLine."Account Type"::"Bank Account";
                 GenJournalLine."Account No." := TillNo;
