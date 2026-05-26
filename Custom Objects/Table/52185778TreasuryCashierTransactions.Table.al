@@ -158,7 +158,7 @@ table 52185778 "Treasury Cashier Transactions"
                         BankAccount := BankingSetup."Default  Bank";
                         if bankacc.Get(BankAccount) then begin
                             bankacc.CalcFields(bankacc."Balance (LCY)", bankacc.Balance);
-                            "Till/Treasury Balance" := bankacc.Balance;//bankacc."Balance (LCY)";
+                            "Till Balance" := bankacc.Balance;//bankacc."Balance (LCY)";
                         end;
                     end;
 
@@ -239,7 +239,9 @@ table 52185778 "Treasury Cashier Transactions"
                     bankacc.Reset;
                     bankacc.SetRange("No.", BankingSetup."Default  Bank");
                     if bankacc.Find('-') then begin
+                        bankacc.CalcFields(bankacc."Balance (LCY)", bankacc.Balance);
                         "To Till" := PadStr(BankingSetup."Default  Bank" + ' ' + bankacc.Name, 50);
+                        "Treasury Balance" := bankacc.Balance;
                     end;
                     // bankacc.CalcFields("Balance (LCY)");
                     // Balance := bankacc."Balance (LCY)";
@@ -257,7 +259,7 @@ table 52185778 "Treasury Cashier Transactions"
                 if Amount < 0 then
                     Error('Amount must not be negative');
                 IF "Transaction Type" = "Transaction Type"::"End of Day Return to Treasury" THEN BEGIN
-                    "Excess/Shortage Amount" := (Amount - "Till/Treasury Balance");
+                    "Excess/Shortage Amount" := (Amount - "Till Balance");
                     IF "Excess/Shortage Amount" > 0 THEN
                         Type := Type::Excess ELSE IF
                             "Excess/Shortage Amount" < 0 THEN
@@ -361,7 +363,7 @@ table 52185778 "Treasury Cashier Transactions"
             Editable = false;
             FieldClass = FlowField;
         }
-        field(27; "Till/Treasury Balance"; Decimal)
+        field(27; "Till Balance"; Decimal)
         {
         }
         field(28; "Excess/Shortage Amount"; Decimal)
@@ -456,6 +458,9 @@ table 52185778 "Treasury Cashier Transactions"
                         Error('Cash Requisition Number %1 already exists for transaction No. %2', "Cash Requisition Number", TreasuryCt.No);
                     end;
             end;
+        }
+        field(50; "Treasury Balance"; decimal)
+        {
         }
     }
 
