@@ -67,6 +67,9 @@ table 52186184 Comments
         {
             Editable = false;
         }
+        field(16; "Expires At"; date)
+        {
+        }
 
     }
 

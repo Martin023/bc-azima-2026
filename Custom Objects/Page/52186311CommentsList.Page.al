@@ -38,6 +38,10 @@ page 52186311 "Comments List"
                 {
                     Editable = false;
                 }
+                field("Expires At"; Rec."Expires At")
+                {
+                    Visible = FlagBooleanVisible;
+                }
                 field("Responsibility Center"; Rec."Responsibility Center")
                 {
                     Editable = false;

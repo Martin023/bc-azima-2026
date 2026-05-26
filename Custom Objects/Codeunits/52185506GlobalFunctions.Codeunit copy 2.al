@@ -2261,6 +2261,20 @@ Codeunit 52185506 "Global Functions"
                 Message('This member is a Defaulter.');
             end;
 
+            //The system should allow setting of a time-based flag that expires after a set period.
+            Comments.Reset();
+            Comments.SetRange("Header No.", Members."No.");
+            Comments.SetRange("Disable Flag", false);
+            Comments.SetRange(Types, Comments.Types::"Member Flagging");
+            Comments.SetFilter(Comment, '<>%1', '');
+            Comments.SetFilter("Expires At", '<=%1', Today);
+            if Comments.FindSet() then begin
+                repeat
+                    Comments."Disable Flag" := true;
+                    Comments.Modify();
+                until Comments.Next() = 0;
+            end;
+
             Counter := 0;
             Comments.Reset();
             Comments.SetRange("Header No.", Members."No.");
