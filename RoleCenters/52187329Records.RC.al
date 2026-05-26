@@ -687,8 +687,14 @@ page 52187329 "Records"
                     action("Marketing Teams")
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Marketing Teams List';
+                        Caption = 'Sales Representatives';
                         RunObject = page "Marketing Teams Header";
+                    }
+                    action("Sales Routes Plan List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Sales Routes Plan List';
+                        RunObject = page "Sales Routes Plan List";
                     }
                 }
             }

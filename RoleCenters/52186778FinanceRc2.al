@@ -2975,30 +2975,30 @@ page 52186778 "Finance Role Center"
                             Caption = 'Vendor - Detail Trial Balance';
                             RunObject = report "Vendor - Detail Trial Balance";
                         }
-                        action("Vendor - List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Vendor - List';
-                            RunObject = report "Vendor - List";
-                        }
+                        // action("Vendor - List")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Vendor - List';
+                        //     RunObject = report "Vendor - List";
+                        // }
                         action("Vendor - Purchase List")
                         {
                             ApplicationArea = Basic, Suite;
                             Caption = 'Vendor - Purchase List';
                             RunObject = report "Vendor - Purchase List";
                         }
-                        action("Vendor - Summary Aging")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Vendor - Summary Aging';
-                            RunObject = report "Vendor - Summary Aging";
-                        }
-                        action("Vendor - Top 10 List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Vendor - Top 10 List';
-                            RunObject = report "Vendor - Top 10 List";
-                        }
+                        // action("Vendor - Summary Aging")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Vendor - Summary Aging';
+                        //     RunObject = report "Vendor - Summary Aging";
+                        // }
+                        // action("Vendor - Top 10 List")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Vendor - Top 10 List';
+                        //     RunObject = report "Vendor - Top 10 List";
+                        // }
                         action("Vendor - Trial Balance")
                         {
                             ApplicationArea = Basic, Suite;
@@ -3023,12 +3023,12 @@ page 52186778 "Finance Role Center"
                             Caption = 'Inventory Purchase Orders';
                             RunObject = report "Inventory Purchase Orders";
                         }
-                        action("Inventory - Availability Plan")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Inventory - Availability Plan';
-                            RunObject = report "Inventory - Availability Plan";
-                        }
+                        // action("Inventory - Availability Plan")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Inventory - Availability Plan';
+                        //     RunObject = report "Inventory - Availability Plan";
+                        // }
                         action("Inventory - Cost Variance")
                         {
                             ApplicationArea = Basic, Suite;

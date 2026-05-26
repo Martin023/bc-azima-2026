@@ -46,10 +46,10 @@ PageExtension 52186990 pageextension52186990 extends "Sales Manager Role Center"
         {
             ApplicationArea = Basic;
         }
-        modify("Customer - &Top 10 List")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Customer - &Top 10 List")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         // modify("S&ales Statistics")
         // {
         //     ApplicationArea = Basic;

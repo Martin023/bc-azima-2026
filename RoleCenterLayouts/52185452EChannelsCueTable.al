@@ -87,12 +87,12 @@ table 52185452 "E-Channels Cue Table"
             CalcFormula = Count("Sky Insurance" WHERE("Actioned" = FILTER(TRUE)));
         }
         
-        field(14; "Web Portal Users"; Integer)
-        {
-            Caption = 'Web Portal Users';
-            FieldClass = Flowfield;
-            CalcFormula = Count("Sky Portal Users." WHERE(Blocked = FILTER(FALSE)));
-        }
+        // field(14; "Web Portal Users"; Integer)
+        // {
+        //     Caption = 'Web Portal Users';
+        //     FieldClass = Flowfield;
+        //     CalcFormula = Count("Sky Portal Users." WHERE(Blocked = FILTER(FALSE)));
+        // }
         field(15; "Checkoff Advice"; Integer)
         {
             Caption = 'Checkoff Advice';

@@ -221,18 +221,18 @@ PageExtension 52185778 pageextension52185778 extends "Currency Card"
         {
             ApplicationArea = Basic;
         }
-        modify("Aged Accounts Receivable")
-        {
-            ApplicationArea = Basic;
-        }
-        modify("Aged Accounts Payable")
-        {
-            ApplicationArea = Basic;
-        }
-        modify("Trial Balance")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Aged Accounts Receivable")
+        // {
+        //     ApplicationArea = Basic;
+        // }
+        // modify("Aged Accounts Payable")
+        // {
+        //     ApplicationArea = Basic;
+        // }
+        // modify("Trial Balance")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify(ActionGroupCRM)
         {
             Caption = 'Dynamics CRM';

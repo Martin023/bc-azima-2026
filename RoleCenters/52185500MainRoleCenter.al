@@ -2197,7 +2197,7 @@ page 52185500 "Main Role Center"
                             RunObject = page "Banking User Setup";
                         }
                     }
-                    
+
 
                 }
             }
@@ -3003,12 +3003,12 @@ page 52185500 "Main Role Center"
                                 Caption = 'Agent Transactions';
                                 RunObject = Page "Sky Agent Transactions";
                             }
-                            action(Agencies)
-                            {
-                                ApplicationArea = Basic;
-                                Caption = 'Agent Transactions List';
-                                RunObject = Page "Sky Agencies";
-                            }
+                            // action(Agencies)
+                            // {
+                            //     ApplicationArea = Basic;
+                            //     Caption = 'Agent Transactions List';
+                            //     RunObject = Page "Sky Agencies";
+                            // }
                             action("Agent Withdrawals Buffer")
                             {
                                 ApplicationArea = Basic;
@@ -3040,24 +3040,6 @@ page 52185500 "Main Role Center"
                     Caption = 'Web Portal';
 
 
-                    group("Set Up")
-                    {
-                        action("Portal Setup")
-                        {
-                            ApplicationArea = Basic;
-                            Caption = 'Portal Setup';
-                            RunObject = Page "Portal Setup";
-                        }
-                    }
-                    group("Portal Users")
-                    {
-                        // action(PortalUsers)
-                        // {
-                        //     ApplicationArea = Basic;
-                        //     Caption = 'Portal Users';
-                        //     RunObject = Page "Sky Portal Users";
-                        // }
-                    }
                     group(" Web Portal Transactions")
                     {
                         action("Portal Transactions")
@@ -4736,30 +4718,30 @@ page 52185500 "Main Role Center"
                             Caption = 'Vendor - Detail Trial Balance';
                             RunObject = report "Vendor - Detail Trial Balance";
                         }
-                        action("Vendor - List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Vendor - List';
-                            RunObject = report "Vendor - List";
-                        }
+                        // action("Vendor - List")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Vendor - List';
+                        //     RunObject = report "Vendor - List";
+                        // }
                         action("Vendor - Purchase List")
                         {
                             ApplicationArea = Basic, Suite;
                             Caption = 'Vendor - Purchase List';
                             RunObject = report "Vendor - Purchase List";
                         }
-                        action("Vendor - Summary Aging")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Vendor - Summary Aging';
-                            RunObject = report "Vendor - Summary Aging";
-                        }
-                        action("Vendor - Top 10 List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Vendor - Top 10 List';
-                            RunObject = report "Vendor - Top 10 List";
-                        }
+                        // action("Vendor - Summary Aging")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Vendor - Summary Aging';
+                        //     RunObject = report "Vendor - Summary Aging";
+                        // }
+                        // action("Vendor - Top 10 List")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Vendor - Top 10 List';
+                        //     RunObject = report "Vendor - Top 10 List";
+                        // }
                         action("Vendor - Trial Balance")
                         {
                             ApplicationArea = Basic, Suite;
@@ -4784,12 +4766,7 @@ page 52185500 "Main Role Center"
                             Caption = 'Inventory Purchase Orders';
                             RunObject = report "Inventory Purchase Orders";
                         }
-                        action("Inventory - Availability Plan")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Inventory - Availability Plan';
-                            RunObject = report "Inventory - Availability Plan";
-                        }
+                       
                         action("Inventory - Cost Variance")
                         {
                             ApplicationArea = Basic, Suite;
@@ -4967,12 +4944,7 @@ page 52185500 "Main Role Center"
                             Caption = 'Invt. Valuation - Cost Spec.';
                             RunObject = report "Invt. Valuation - Cost Spec.";
                         }
-                        action("Item Age Composition - Qty.")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Item Age Composition - Qty.';
-                            RunObject = report "Item Age Composition - Qty.";
-                        }
+                       
                         action("Item Age Composition - Value")
                         {
                             ApplicationArea = Basic, Suite;

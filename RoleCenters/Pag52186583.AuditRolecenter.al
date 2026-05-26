@@ -3248,26 +3248,6 @@ page 52186583 "Audit Role center"
                 group("Web Portal")
                 {
                     Caption = 'Web Portal';
-
-
-                    group("Set Up")
-                    {
-                        action("Portal Setup")
-                        {
-                            ApplicationArea = Basic;
-                            Caption = 'Portal Setup';
-                            RunObject = Page "Portal Setup";
-                        }
-                    }
-                    group("Portal Users")
-                    {
-                        // action(PortalUsers)
-                        // {
-                        //     ApplicationArea = Basic;
-                        //     Caption = 'Portal Users';
-                        //     RunObject = Page "Sky Portal Users";
-                        // }
-                    }
                     group(" Web Portal Transactions")
                     {
                         action("Portal Transactions")

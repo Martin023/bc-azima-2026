@@ -1,32 +1,32 @@
-page 52185458 "Sky Agencies Page"
-{
-    PageType = Card;
-    SourceTable = "Sky Agency Companies";
+// page 52185458 "Sky Agencies Page"
+// {
+//     PageType = Card;
+//     SourceTable = "Sky Agency Companies";
 
-    layout
-    {
-        area(content)
-        {
-            group(General)
-            {
-                field(ID; Rec.ID)
-                {
-                    ApplicationArea = Basic;
-                }
-                field(Name; Rec.Name)
-                {
-                    ApplicationArea = Basic;
-                }
-                field(Location; Rec.Location)
-                {
-                    ApplicationArea = Basic;
-                }
-            }
-        }
-    }
+//     layout
+//     {
+//         area(content)
+//         {
+//             group(General)
+//             {
+//                 field(ID; Rec.ID)
+//                 {
+//                     ApplicationArea = Basic;
+//                 }
+//                 field(Name; Rec.Name)
+//                 {
+//                     ApplicationArea = Basic;
+//                 }
+//                 field(Location; Rec.Location)
+//                 {
+//                     ApplicationArea = Basic;
+//                 }
+//             }
+//         }
+//     }
 
-    actions
-    {
-    }
-}
+//     actions
+//     {
+//     }
+// }
 

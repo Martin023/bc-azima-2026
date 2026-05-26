@@ -493,10 +493,10 @@ PageExtension 52187135 pageextension52187135 extends "Sales Order List"
             //Unsupported feature: Property Modification (PromotedCategory) on ""Print Confirmation"(Action 151)".
 
         }
-        modify("Sales Reservation Avail.")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Sales Reservation Avail.")
+        // {
+        //     ApplicationArea = Basic;
+        // }
 
         //Unsupported feature: Property Deletion (ToolTipML) on "Dimensions(Action 1102601013)".
 
