@@ -11,7 +11,7 @@ codeunit 52185426 "Document Attachment Events Sub"
 
     end;
 
-    [EventSubscriber(ObjectType::Page, Page::"Document Attachment Factbox", 'OnBeforeDrillDown', '', false, false)]
+    [EventSubscriber(ObjectType::Page, Page::"Doc. Attachment List Factbox", 'OnBeforeDocumentAttachmentDetailsRunModal', '', false, false)]
     local procedure SepcifyCustomTableOnBeforeDrillDown(DocumentAttachment: Record "Document Attachment"; var RecRef: RecordRef)
     var
         SuretyTable: Record "Surety Management";

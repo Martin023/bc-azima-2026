@@ -68,7 +68,7 @@ codeunit 52187332 MySubscribers
             SavingsLedgerEntry.SetFilter("Posting Date", PostingDateFilter);
             //SavingsLedgerEntry.SetFilter("External Document No.", ExtDocNo);
             // NavigatePage.InsertIntoDocEntry(DocumentEntry, DATABASE::"Savings Ledger Entry", SavingsLedgerEntry.TableCaption, SavingsLedgerEntry.Count);
-            DocumentEntry.InsertIntoDocEntry( DATABASE::"Savings Ledger Entry", SavingsLedgerEntry.TableCaption, SavingsLedgerEntry.Count);
+            DocumentEntry.InsertIntoDocEntry(DATABASE::"Savings Ledger Entry", SavingsLedgerEntry.TableCaption, SavingsLedgerEntry.Count);
         end;
         if CreditLedgerEntry.ReadPermission() then begin
             CreditLedgerEntry.Reset();
@@ -77,34 +77,39 @@ codeunit 52187332 MySubscribers
             CreditLedgerEntry.SetFilter("Posting Date", PostingDateFilter);
             //CreditLedgerEntry.SetFilter("External Document No.", ExtDocNo);
             // NavigatePage.InsertIntoDocEntry(DocumentEntry, DATABASE::"Credit Ledger Entry", CreditLedgerEntry.TableCaption, CreditLedgerEntry.Count);
-            DocumentEntry.InsertIntoDocEntry( DATABASE::"Credit Ledger Entry", CreditLedgerEntry.TableCaption, CreditLedgerEntry.Count);
+            DocumentEntry.InsertIntoDocEntry(DATABASE::"Credit Ledger Entry", CreditLedgerEntry.TableCaption, CreditLedgerEntry.Count);
         end;
 
     end;
 
-
-    [EventSubscriber(ObjectType::Page, Page::"Navigate", 'OnAfterNavigateShowRecords', '', true, true)]
-    local procedure "Navigate_OnAfterNavigateShowRecords"
+    // OnBeforeShowRecords(Rec, DocNoFilter, PostingDateFilter, ItemTrackingSearch(), ContactNo, ExtDocNo, IsHandled);
+    [EventSubscriber(ObjectType::Page, Page::"Navigate", 'OnBeforeShowRecords', '', true, true)]
+    local procedure "OnBeforeShowRecords"
     (
-        TableID: Integer;
+        var TempDocumentEntry: Record "Document Entry";
         DocNoFilter: Text;
         PostingDateFilter: Text;
         ItemTrackingSearch: Boolean;
-        var TempDocumentEntry: Record "Document Entry";
-        SalesInvoiceHeader: Record "Sales Invoice Header";
-        SalesCrMemoHeader: Record "Sales Cr.Memo Header";
-        PurchInvHeader: Record "Purch. Inv. Header";
-        PurchCrMemoHdr: Record "Purch. Cr. Memo Hdr.";
-        ServiceInvoiceHeader: Record "Service Invoice Header";
-        ServiceCrMemoHeader: Record "Service Cr.Memo Header";
-        ContactType: Enum "Navigate Contact Type";
+
+        // TempDocumentEntry: Record "Document Entry";
         ContactNo: Code[250];
-        ExtDocNo: Code[250]
+        ExtDocNo: Code[250];
+        IsHandled: Boolean
+    // SalesInvoiceHeader: Record "Sales Invoice Header";
+    // SalesCrMemoHeader: Record "Sales Cr.Memo Header";
+    // PurchInvHeader: Record "Purch. Inv. Header";
+    // PurchCrMemoHdr: Record "Purch. Cr. Memo Hdr.";
+    // ServiceInvoiceHeader: Record "Service Invoice Header";
+    // ServiceCrMemoHeader: Record "Service Cr.Memo Header";
+    // ContactType: Enum "Navigate Contact Type";
+    // // ContactNo: Code[250];
+    // ExtDocNo: Code[250];
+    // Table_ID: Integer
     )
     begin
         SavingsLedgerEntry.SetFilter("Document No.", DocNoFilter);
         CreditLedgerEntry.SetFilter("Document No.", DocNoFilter);
-        case TableID of
+        case TempDocumentEntry."Table ID" of
             DATABASE::"Savings Ledger Entry":
                 PAGE.Run(0, SavingsLedgerEntry);
             DATABASE::"Credit Ledger Entry":

@@ -22,11 +22,11 @@ PageExtension 52185921 pageextension52185921 extends "Report Inbox"
         {
             Visible = true;
         }
-        addafter("Report Name")
-        {
-            field(Description; Rec.Description)
-            { }
-        }
+        // addafter("Report Name")
+        // {
+        //     field(Description; Rec.Description)
+        //     { }
+        // }
         addafter("Report Name")
         {
             field("Report Output"; Rec."Report Output")
