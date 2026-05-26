@@ -9,6 +9,7 @@ table 52185486 "Sales Route Plans"
         field(1; No; Code[20])
         {
             Caption = 'No';
+            Editable = false;
         }
         field(2; Desription; Text[1000])
         {
@@ -21,10 +22,12 @@ table 52185486 "Sales Route Plans"
         field(4; Achievements; Integer)
         {
             Caption = 'Achievements';
+            Editable = false;
         }
-        field(5; Leads; Decimal)
+        field(5; Leads; Integer)
         {
             Caption = 'Leads';
+            Editable = false;
         }
         field(6; Status; Option)
         {
@@ -39,4 +42,19 @@ table 52185486 "Sales Route Plans"
             Clustered = true;
         }
     }
+
+    trigger OnInsert()
+    begin
+
+        if No = '' then begin
+            MembNoSeries.Get;
+            MembNoSeries.TestField("Sales Route No.");
+            No := NoSeries.GetNextNo(MembNoSeries."Sales Route No.");
+            // NoSeriesMgt.InitSeries(ProdFac."Loan Nos", xRec."No. Series", 0D, "Loan No.", "No. Series");
+        end;
+    end;
+
+    var
+        MembNoSeries: Record "Credit Nos. Series";
+        NoSeries: Codeunit "No. Series";
 }

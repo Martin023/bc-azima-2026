@@ -20,7 +20,7 @@ table 52185497 "Route Achievements"
     }
     keys
     {
-        key(PK; "Header No")
+        key(PK; "Header No", No)
         {
             Clustered = true;
         }

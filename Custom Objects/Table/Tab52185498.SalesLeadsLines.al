@@ -34,7 +34,7 @@ table 52185498 "Sales Leads Lines"
     }
     keys
     {
-        key(PK; "Header No")
+        key(PK; "Header No", "ID No")
         {
             Clustered = true;
         }
