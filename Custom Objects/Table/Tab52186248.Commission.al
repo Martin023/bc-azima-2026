@@ -1,32 +1,51 @@
 table 52186248 Commission
 {
-    Caption = 'Commission';
+    Caption = 'Commission Generation List';
     DataClassification = ToBeClassified;
-    
+    DrillDownPageId = "Commission Generation List";
+
     fields
     {
-        field(1; ID; Integer)
+        field(1; ID; Code[20])
         {
             Caption = 'ID';
             DataClassification = SystemMetadata;
-            AutoIncrement = true;
+            Editable = false;
         }
-        field(2; MemberID; Code[20])
+
+        field(2; Remarks; Text[250])
         {
-            Caption = 'MemberID';
-            TableRelation = Members."No." where(status=filter(active));
-            DataClassification = ToBeClassified;
+            Caption = 'Remarks';
+            DataClassification = CustomerContent;
         }
-        field(3; "Count"; Integer)
+        field(3; "Cutoff date"; Date)
         {
-            Caption = 'Count';
-            DataClassification = ToBeClassified;
+            Caption = 'Cutoff date';
+            DataClassification = CustomerContent;
         }
-        field(4; CommissionAmount; Decimal)
+        field(4; "Member Count"; Integer)
         {
-            Caption = 'CommissionAmount';
-            DataClassification = ToBeClassified;
+            Editable = false;
+            Caption = 'Member Count';
+            DataClassification = CustomerContent;
         }
+        field(5; "Loans Count"; Integer)
+        {
+            Editable = false;
+            Caption = 'Loans Count';
+            DataClassification = CustomerContent;
+        }
+        field(6; Status; Enum "Employee Status")
+        {
+        }
+        field(7; "Date Created"; Date)
+        {
+            Editable = false;
+            Caption = 'Date Created';
+            DataClassification = CustomerContent;
+        }
+
+
     }
     keys
     {

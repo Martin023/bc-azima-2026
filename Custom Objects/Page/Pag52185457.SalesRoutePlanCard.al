@@ -1,4 +1,5 @@
 namespace AzimaBC.AzimaBC;
+using System.Security.AccessControl;
 
 page 52185457 "Sales Route Plan Card"
 {
@@ -39,8 +40,9 @@ page 52185457 "Sales Route Plan Card"
                 {
                     ToolTip = 'Specifies the value of the Status field.', Comment = '%';
                 }
-                field(SystemCreatedBy; Rec.SystemCreatedBy)
+                field(CreatedBy; CreatedBy)
                 {
+                    Caption = 'Created By';
                     ToolTip = 'Specifies the value of the SystemCreatedBy field.', Comment = '%';
                 }
             }
@@ -65,4 +67,22 @@ page 52185457 "Sales Route Plan Card"
             }
         }
     }
+
+    trigger OnAfterGetCurrrecord()
+    begin
+        CreatedBy := Getusername(rec.SystemCreatedBy);
+        //ModifiedBy := Getusername(rec.SystemModifiedBy);
+    end;
+
+    var
+        CreatedBy: code[40];
+        ModifiedBy: code[40];
+
+        Users: Record User;
+
+    procedure GetUserName(UserSecurityID: Guid): Text;
+    begin
+        if Users.Get(UserSecurityID) then
+            exit(Users."User Name");
+    end;
 }

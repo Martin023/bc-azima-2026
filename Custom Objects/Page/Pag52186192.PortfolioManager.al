@@ -51,10 +51,7 @@ page 52186192 "Portfolio Manager List"
                     ToolTip = 'Specifies the value of the Transfered field.', Comment = '%';
                 }
             }
-            part("PortfolioManagementLines";"Portfolio Management Lines")
-            {
-
-            }
+          
         }
     }
 }

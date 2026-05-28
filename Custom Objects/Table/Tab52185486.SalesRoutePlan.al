@@ -23,11 +23,15 @@ table 52185486 "Sales Route Plans"
         {
             Caption = 'Achievements';
             Editable = false;
+            FieldClass = flowfield;
+            CalcFormula = count("Route Achievements" where("Header No" = field(No)));
         }
         field(5; Leads; Integer)
         {
             Caption = 'Leads';
             Editable = false;
+            FieldClass = flowfield;
+            CalcFormula = count("Sales Leads Lines" where("Header No" = field(No)));
         }
         field(6; Status; Option)
         {
