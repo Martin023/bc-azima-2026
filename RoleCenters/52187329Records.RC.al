@@ -387,61 +387,62 @@ page 52187329 "Records"
                 //     }
 
                 // }
-                group(Archives)
+                // group(Archives)
+                // {
+
+                action("Created Members")
                 {
-                    action("Rejected Member Application")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Rejected Member Application List';
-                        RunObject = Page "Rejected Member Application";
-                        RunPageView = where(Status = const(Rejected));
-                    }
-                    action("Created Members")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = Page "Open Member Application List";
-                        RunPageView = where(Created = const(true));
-                    }
-                    action("File Management List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Archived File Tracker List';
-                        RunObject = page "File Tracker List";
-                        RunPageView = where(Status = filter(archived));
-                    }
+                    ApplicationArea = Basic, Suite;
+                    RunObject = Page "Open Member Application List";
+                    RunPageView = where(Created = const(true));
                 }
-                group("Checkoff Advise Process")
+                action("Rejected Member Application")
                 {
-                    action("Checkoff Advise")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Checkoff Advice';
-                        RunObject = Page "Checkoff Advice Header List";
-                    }
-                    action("Posted Checkoff Advise")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Posted Checkoff Advice';
-                        RunObject = Page "+Checkoff Advice Header List";
-                    }
-                    action("Checkoff Advice Logs")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Checkoff Advice Logs';
-                        RunObject = Page "Checkoff Advice";
-                    }
-                    action("Checkoff Advice Lines")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Checkoff Advice Lines';
-                        RunObject = Page "Checkoff Advice";
-                    }
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Rejected Member Application List';
+                    RunObject = Page "Rejected Member Application";
+                    RunPageView = where(Status = const(Rejected));
                 }
-                
+                // action("File Management List")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Archived File Tracker List';
+                //     RunObject = page "File Tracker List";
+                //     RunPageView = where(Status = filter(archived));
+                // }
+                // }
+                // group("Checkoff Advise Process")
+                // {
+                //     action("Checkoff Advise")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Checkoff Advice';
+                //         RunObject = Page "Checkoff Advice Header List";
+                //     }
+                //     action("Posted Checkoff Advise")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Posted Checkoff Advice';
+                //         RunObject = Page "+Checkoff Advice Header List";
+                //     }
+                //     action("Checkoff Advice Logs")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Checkoff Advice Logs';
+                //         RunObject = Page "Checkoff Advice";
+                //     }
+                //     action("Checkoff Advice Lines")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Checkoff Advice Lines';
+                //         RunObject = Page "Checkoff Advice";
+                //     }
+                // }
+
 
             }
 
-            
+
 
             group("Savings Account")
             {
@@ -529,7 +530,7 @@ page 52187329 "Records"
                     }
                 }
             }
-            
+
             group("Delegates Management")
             {
                 Caption = 'Delegates Management';
@@ -671,25 +672,54 @@ page 52187329 "Records"
             // }
             group("Marketing & Sales")
             {
-                group(Marketing)
+                // group(Marketing)
+                // {
+                //     Caption = 'Marketing';
+                //     action("Campaign List")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Campaign List';
+                //         RunObject = page "Campaign List";
+                //     }
+                // }
+                // group(Sales)
+                // {
+                action("Marketing Teams")
                 {
-                    Caption = 'Marketing';
-                    action("Campaign List")
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Sales Representatives';
+                    RunObject = page "Marketing Teams Header";
+                }
+                action("Sales Routes Plan List")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Sales Routes Plan List';
+                    RunObject = page "Sales Routes Plan List";
+                }
+                action("Portfolio Manager List")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Portfolio Manager List';
+                    RunObject = page "Portfolio Manager List";
+                }
+                action("Commission Generation List")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Commission Generation List';
+                    RunObject = page "Commission Generation List";
+                }
+
+                group("Sales&Mrk Reports")
+                {
+                    action("Member Commission Report")
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Campaign List';
-                        RunObject = page "Campaign List";
+                        Caption = 'Member Commission';
+                        RunObject = report "Member Commission";
                     }
                 }
-                group(Sales)
-                {
-                    action("Marketing Teams")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Marketing Teams List';
-                        RunObject = page "Marketing Teams Header";
-                    }
-                }
+                // }
+
             }
             // group("ATM Management")
             // {
@@ -721,7 +751,7 @@ page 52187329 "Records"
             //         RunObject = page "ATM Returned List";
             //     }
             // }
-            
+
 
             group("Member Files")
             {

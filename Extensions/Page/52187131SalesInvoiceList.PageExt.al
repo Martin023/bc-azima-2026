@@ -640,18 +640,18 @@ PageExtension 52187131 pageextension52187131 extends "Sales Invoice List"
         {
             Visible = false;
         }
-        modify("Customer - Top 10 List")
-        {
-            Visible = false;
-        }
-        modify("Customer - Sales List")
-        {
-            Visible = false;
-        }
-        modify("Sales Statistics")
-        {
-            Visible = false;
-        }
+        // modify("Customer - Top 10 List")
+        // {
+        //     Visible = false;
+        // }
+        // modify("Customer - Sales List")
+        // {
+        //     Visible = false;
+        // }
+        // modify("Sales Statistics")
+        // {
+        //     Visible = false;
+        // }
         addafter(Post)
         {
             action("Post and &Print")

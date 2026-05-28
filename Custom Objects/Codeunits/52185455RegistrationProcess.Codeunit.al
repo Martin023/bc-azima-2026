@@ -1313,6 +1313,7 @@ Codeunit 52185455 "Registration Process"
         ProductFactory."Interest Rate (Min.)" := ProductFactoryApplication."Interest Rate (Min.)";
         ProductFactory."Interest Rate (Max.)" := ProductFactoryApplication."Interest Rate (Max.)";
         ProductFactory."Dormancy Period" := ProductFactoryApplication."Dormancy Period";
+        ProductFactory."Dormancy Alert Period" := ProductFactoryApplication."Dormancy Alert Period";
         ProductFactory."Customer Segment" := ProductFactoryApplication."Customer Segment";
         ProductFactory."Closure Fee" := ProductFactoryApplication."Closure Fee";
         ProductFactory."Account No. Prefix" := ProductFactoryApplication."Account No. Prefix";

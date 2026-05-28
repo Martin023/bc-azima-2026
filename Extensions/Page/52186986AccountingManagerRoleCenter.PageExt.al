@@ -1,5 +1,5 @@
 #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-PageExtension 52186986 pageextension52186986 extends "Accounting Manager Role Center" 
+PageExtension 52186986 pageextension52186986 extends "Accounting Manager Role Center"
 {
     Caption = 'Role Center';
     layout
@@ -40,10 +40,7 @@ PageExtension 52186986 pageextension52186986 extends "Accounting Manager Role Ce
     }
     actions
     {
-        modify("&G/L Trial Balance")
-        {
-            ApplicationArea = Basic;
-        }
+
         modify("&Bank Detail Trial Balance")
         {
             ApplicationArea = Basic;
@@ -56,10 +53,10 @@ PageExtension 52186986 pageextension52186986 extends "Accounting Manager Role Ce
         // {
         //     ApplicationArea = Basic;
         // }
-        modify("Trial Bala&nce/Budget")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Trial Bala&nce/Budget")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         // modify("Trial Balance by &Period")
         // {
         //     ApplicationArea = Basic;
@@ -80,14 +77,14 @@ PageExtension 52186986 pageextension52186986 extends "Accounting Manager Role Ce
         {
             ApplicationArea = Basic;
         }
-        modify("Aged Accounts &Receivable")
-        {
-            ApplicationArea = Basic;
-        }
-        modify("Aged Accounts Pa&yable")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Aged Accounts &Receivable")
+        // {
+        //     ApplicationArea = Basic;
+        // }
+        // modify("Aged Accounts Pa&yable")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         // modify("Reconcile Cus&t. and Vend. Accs")
         // {
         //     ApplicationArea = Basic;

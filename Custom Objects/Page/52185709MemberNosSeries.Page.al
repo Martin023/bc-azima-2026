@@ -35,27 +35,28 @@ page 52185709 "Member Nos. Series"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Driver No."; Rec."Driver No.")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Group Exit and Transfer';
-                }
-                field("CRM Member Edits Nos."; Rec."CRM Member Edit App Nos.")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("M-Smart Member Edit App Nos."; Rec."M-Smart Member Edit App Nos.")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Driver No."; Rec."Driver No.")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Group Exit and Transfer';
+                // }
+                // field("CRM Member Edits Nos."; Rec."CRM Member Edit App Nos.")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("M-Smart Member Edit App Nos."; Rec."M-Smart Member Edit App Nos.")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("General SMS Nos."; Rec."General SMS Nos.")
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Virtual Member App. No"; Rec."Virtual Member App. No")
+                field("Sales Route No."; Rec."Sales Route No.")
                 {
                     ApplicationArea = Basic, Suite;
                 }
+
                 field("Dividend Rate No."; Rec."Dividend Rate No.")
                 {
                     ApplicationArea = Basic, Suite;
@@ -76,15 +77,15 @@ page 52185709 "Member Nos. Series"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Sink Fund Nos."; Rec."Sink Fund Nos.")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("BBF Insurance Nos."; Rec."BBF Insurance Nos.")
-                {
-                    ApplicationArea = Basic, Suite;
+                // field("Sink Fund Nos."; Rec."Sink Fund Nos.")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("BBF Insurance Nos."; Rec."BBF Insurance Nos.")
+                // {
+                //     ApplicationArea = Basic, Suite;
 
-                }
+                // }
                 field("BDE Application"; Rec."BDE Application")
                 {
                     ApplicationArea = Basic, Suite;
@@ -112,9 +113,9 @@ page 52185709 "Member Nos. Series"
                 field("Template No."; Rec."Template No.")
                 {
                 }
-                field("Revenue Collection Nos."; Rec."Revenue Collection Nos.")
-                {
-                }
+                // field("Revenue Collection Nos."; Rec."Revenue Collection Nos.")
+                // {
+                // }
             }
             group("FOSA No. series")
             {
@@ -164,10 +165,10 @@ page 52185709 "Member Nos. Series"
                     ApplicationArea = Basic, Suite;
                     Caption = 'Shares Transfer No';
                 }
-                field("MKey Case Forwarding"; Rec."MKey Case Forwarding")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("MKey Case Forwarding"; Rec."MKey Case Forwarding")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
 
             }
 
@@ -302,10 +303,10 @@ page 52185709 "Member Nos. Series"
                 // {
                 //     ApplicationArea = Basic, Suite;
                 // }
-                field("Mortage Doc Release"; Rec."Mortage Doc Release")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Mortage Doc Release"; Rec."Mortage Doc Release")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 // field("Loan No Web DEV"; Rec."Loan No Web DEV")
                 // {
                 //     ApplicationArea = Basic, Suite;
@@ -318,14 +319,14 @@ page 52185709 "Member Nos. Series"
                 // {
                 //     ApplicationArea = Basic, Suite;
                 // }
-                field("Business Loan Acc App"; Rec."Business Loan Acc App")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Business Loan Account Closure"; Rec."Business Loan Account Closure")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Business Loan Acc App"; Rec."Business Loan Acc App")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("Business Loan Account Closure"; Rec."Business Loan Account Closure")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("DMU SMS Alerts"; Rec."DMU SMS Alerts")
                 {
                     ApplicationArea = Basic, Suite;

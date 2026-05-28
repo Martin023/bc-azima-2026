@@ -49,6 +49,10 @@ page 52185712 "Product Factory"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Dormancy Alert Period"; Rec."Dormancy Alert Period")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Dormancy Period"; Rec."Dormancy Period")
                 {
                     ApplicationArea = Basic, Suite;

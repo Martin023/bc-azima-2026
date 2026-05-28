@@ -213,4 +213,8 @@ enum 52185441 "SMS Source"
     {
         Caption = 'ATM_BLOCKING';
     }
+    value(55; DEPOSIT_DORMANT)
+    {
+        Caption = 'DEPOSIT_DORMANT';
+    }
 }

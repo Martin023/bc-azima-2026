@@ -718,6 +718,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 Datum.Add('account_type', SavingsAccount."Product Type");
 
                 if SavingsAccount."Product Category" = SavingsAccount."Product Category"::"Share Capital" then begin
+                    SavingsAccount.CalcFields("Balance (LCY)");
                     Datum.Add('account_balance', SavingsAccount."Balance (LCY)");
                 end else begin
                     Datum.Add('account_balance', GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccount, true));
@@ -3844,13 +3845,23 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                 MobileLoanBuffer."Date Posted" := CurrentDateTime;
                                 MobileLoanBuffer.Modify();
 
-                                theSMS := 'Dear member, your ' +
-                                Loan."Loan Product Type Name" +
-                                ' of KES ' +
-                                Format(MobileLoanBuffer.Amount) +
-                                ' applied on ' + GlobalFunctions.FormatISODate(MobileLoanBuffer."Date Entered") +
-                                ' at ' + GlobalFunctions.FormatISOTime(MobileLoanBuffer."Time Entered") +
-                                ' has been approved and disbursed to your Fosa account. Ref: ' + Loan."Loan No.";
+                                // theSMS := 'Dear member, your ' +
+                                // Loan."Loan Product Type Name" +
+                                // ' of KES ' +
+                                // Format(MobileLoanBuffer.Amount) +
+                                // ' applied on ' + GlobalFunctions.FormatISODate(MobileLoanBuffer."Date Entered") +
+                                // ' at ' + GlobalFunctions.FormatISOTime(MobileLoanBuffer."Time Entered") +
+                                // ' has been approved and disbursed to your Fosa account. Ref: ' + Loan."Loan No.";
+
+                                // Dear [MEMBER_NAME], your loan application below has been received successfully [LOAN_DETAILS] Kindly wait as it is being processed Ref: [REFERENCE_NUMBER] Date: [DATE]
+                                theSMS :=
+                                'Dear ' + Loan."Member Name" +
+                                ', your loan application below has been received successfully ' +
+                                'Loan Type: ' + Loan."Loan Product Type Name" + ' ' +
+                                'Loan Amount: KES ' + Format(MobileLoanBuffer.Amount) + ' ' +
+                                'Kindly wait as it is being processed ' +
+                                'Ref: ' + Loan."Loan No." + ' ' +
+                                'Date: ' + GlobalFunctions.FormatISODate(MobileLoanBuffer."Date Entered");
 
                                 LoanApplicant.Get(MobileLoanBuffer."Member No.");
 
@@ -4048,18 +4059,33 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                 /*
                                                 Sender SMS: Your MPESA deposit of KES [Amount] to paybill 541900 for [Account name] on [date+time] has been received. Mpesa ref: [Mpesa Ref]
                                                 */
+                                                // Your M-Pesa Deposit of KES [AMOUNT] to Paybill [PAYBILL_NUMBER] ([SACCO_NAME]) for account [ACCOUNT_NUMBER] was received successfully on [DATE]. M-Pesa Ref: [MPESA_REFERENCE_NUMBER] Ref: [REFERENCE].
                                                 if TheDestinationMember."Old Account Name" <> '' then
                                                     BeneficiarySavingsAccount.Name := TheDestinationMember."Old Account Name";
 
-                                                theSMS := 'Your MPESA deposit of KES ' +
+                                                // theSMS := 'Your MPESA deposit of KES ' +
+                                                // Format(MpesaTransBuffer."Transaction Amount") +
+                                                // ' to paybill ' +
+                                                // MpesaTransBuffer."Receiver Identifier" +
+                                                // ' for ' +
+                                                // BeneficiarySavingsAccount.Name +
+                                                // ' on ' +
+                                                // GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                // ' has been received. MPESA ref: ' +
+                                                // MpesaTransBuffer."Transaction Source Reference";
+
+                                                theSMS := 'Your M-Pesa Deposit of KES ' +
                                                 Format(MpesaTransBuffer."Transaction Amount") +
-                                                ' to paybill ' +
+                                                ' to Paybill ' +
                                                 MpesaTransBuffer."Receiver Identifier" +
-                                                ' for ' +
-                                                BeneficiarySavingsAccount.Name +
-                                                ' on ' +
+                                                ' (' + ' Azima Sacco' +
+                                                ') for account ' +
+                                                MpesaTransBuffer."Savings Account" +
+                                                ' was received successfully on ' +
                                                 GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                ' has been received. MPESA ref: ' +
+                                                '. M-Pesa Ref: ' +
+                                                MpesaTransBuffer."Transaction Source Reference" +
+                                                ' Ref: ' +
                                                 MpesaTransBuffer."Transaction Source Reference";
 
                                                 SkySMS.SendSms(
@@ -4211,14 +4237,23 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                 TheDestinationMember.SetLoadFields(Name, "Phone No.", "Transactional Mobile Number");
 
                                                 if TheDestinationMember.FindFirst then begin
+                                                    // theSMS := 'Dear ' + TheDestinationMember.Name +
+                                                    // ', your ' + BeneficiarySavingsAccount."Product Name" +
+                                                    // ' ' + BeneficiarySavingsAccount."No." +
+                                                    // ' has been credited with KES ' + Format(MpesaTransBuffer."Transaction Amount") +
+                                                    // ' received from ' + MpesaTransBuffer."Initiator Identifier" +
+                                                    // ', ' + MpesaTransBuffer."Initiator Name" +
+                                                    // ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                    // '. Mpesa ref: ' + MpesaTransBuffer."Transaction Source Reference";
+
+                                                    // Dear [MEMBER_NAME], your A/C [ACCOUNT_NUMBER] was credit with amount KES [AMOUNT] on [DATE]. M-Pesa Ref: [MPESA_REFERENCE_NUMBER] Ref: [REFERENCE].
                                                     theSMS := 'Dear ' + TheDestinationMember.Name +
-                                                    ', your ' + BeneficiarySavingsAccount."Product Name" +
-                                                    ' ' + BeneficiarySavingsAccount."No." +
-                                                    ' has been credited with KES ' + Format(MpesaTransBuffer."Transaction Amount") +
-                                                    ' received from ' + MpesaTransBuffer."Initiator Identifier" +
-                                                    ', ' + MpesaTransBuffer."Initiator Name" +
+                                                    ', your A/C ' + BeneficiarySavingsAccount."No." +
+                                                    ' was credited with amount KES ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                     ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                    '. Mpesa ref: ' + MpesaTransBuffer."Transaction Source Reference";
+                                                    '. M-Pesa Ref: ' + MpesaTransBuffer."Transaction Source Reference" +
+                                                    ' Ref: ' + MpesaTransBuffer."Transaction Source Reference";
+
 
                                                     if TheDestinationMember."Phone No." <> '' then begin
                                                         ReceiverSMSNo := TheDestinationMember."Phone No.";
@@ -4258,15 +4293,31 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             /*
                                                             Sender SMS: Your MPESA deposit of KES [Amount] to paybill 541900 for [Account name] on [date+time] has been received. Mpesa ref: [Mpesa Ref]
                                                             */
-                                                            theSMS := 'Your MPESA deposit of KES ' +
+                                                            // Your M-Pesa Deposit of KES [AMOUNT] to Paybill [PAYBILL_NUMBER] ([SACCO_NAME]) for account [ACCOUNT_NUMBER] was received successfully on [DATE]. M-Pesa Ref: [MPESA_REFERENCE_NUMBER] Ref: [REFERENCE].
+
+                                                            // theSMS := 'Your MPESA deposit of KES ' +
+                                                            // Format(MpesaTransBuffer."Transaction Amount") +
+                                                            // ' to paybill ' +
+                                                            // MpesaTransBuffer."Receiver Identifier" +
+                                                            // ' for ' +
+                                                            // BeneficiarySavingsAccount.Name +
+                                                            // ' on ' +
+                                                            // GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                            // ' has been received. MPESA ref: ' +
+                                                            // MpesaTransBuffer."Transaction Source Reference";
+
+                                                            theSMS := 'Your M-Pesa Deposit of KES ' +
                                                             Format(MpesaTransBuffer."Transaction Amount") +
-                                                            ' to paybill ' +
+                                                            ' to Paybill ' +
                                                             MpesaTransBuffer."Receiver Identifier" +
-                                                            ' for ' +
-                                                            BeneficiarySavingsAccount.Name +
-                                                            ' on ' +
+                                                            ' (' + ' Azima Sacco' +
+                                                            ') for account ' +
+                                                            MpesaTransBuffer."Savings Account" +
+                                                            ' has received successfully on ' +
                                                             GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                            ' has been received. MPESA ref: ' +
+                                                            '. M-Pesa Ref: ' +
+                                                            MpesaTransBuffer."Transaction Source Reference" +
+                                                            ' Ref: ' +
                                                             MpesaTransBuffer."Transaction Source Reference";
 
                                                             SkySMS.SendSms(
@@ -4328,14 +4379,23 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                     TheDestinationMember.SetLoadFields(Name, "Phone No.", "Transactional Mobile Number");
 
                                                     if TheDestinationMember.FindFirst then begin
+                                                        // Dear [MEMBER_NAME], your A/C [ACCOUNT_NUMBER] was credit with amount KES [AMOUNT] on [DATE]. M-Pesa Ref: [MPESA_REFERENCE_NUMBER] Ref: [REFERENCE].
+
+                                                        // theSMS := 'Dear ' + TheDestinationMember.Name +
+                                                        // ', your ' + BeneficiarySavingsAccount."Product Name" +
+                                                        // ' ' + BeneficiarySavingsAccount."No." +
+                                                        // ' has been credited with KES ' + Format(MpesaTransBuffer."Transaction Amount") +
+                                                        // ' received from ' + MpesaTransBuffer."Initiator Identifier" +
+                                                        // ', ' + MpesaTransBuffer."Initiator Name" +
+                                                        // ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                        // '. Mpesa ref: ' + MpesaTransBuffer."Transaction Source Reference";
+
                                                         theSMS := 'Dear ' + TheDestinationMember.Name +
-                                                        ', your ' + BeneficiarySavingsAccount."Product Name" +
-                                                        ' ' + BeneficiarySavingsAccount."No." +
-                                                        ' has been credited with KES ' + Format(MpesaTransBuffer."Transaction Amount") +
-                                                        ' received from ' + MpesaTransBuffer."Initiator Identifier" +
-                                                        ', ' + MpesaTransBuffer."Initiator Name" +
+                                                        ', your A/C ' + BeneficiarySavingsAccount."No." +
+                                                        ' was credited with amount KES ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                         ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                        '. Mpesa ref: ' + MpesaTransBuffer."Transaction Source Reference";
+                                                        '. M-Pesa Ref: ' + MpesaTransBuffer."Transaction Source Reference" +
+                                                        ' Ref: ' + MpesaTransBuffer."Transaction Source Reference";
 
                                                         if TheDestinationMember."Phone No." <> '' then begin
                                                             ReceiverSMSNo := TheDestinationMember."Phone No.";
@@ -4375,16 +4435,30 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 /*
                                                                 Sender SMS: Your MPESA deposit of KES [Amount] to paybill 541900 for [Account name] on [date+time] has been received. Mpesa ref: [Mpesa Ref]
                                                                 */
-                                                                theSMS := 'Your MPESA deposit of KES ' +
+                                                                // theSMS := 'Your MPESA deposit of KES ' +
+                                                                // Format(MpesaTransBuffer."Transaction Amount") +
+                                                                // ' to paybill ' +
+                                                                // MpesaTransBuffer."Receiver Identifier" +
+                                                                // ' for ' +
+                                                                // BeneficiarySavingsAccount.Name +
+                                                                // ' on ' +
+                                                                // GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                // ' has been received. MPESA ref: ' +
+                                                                // MpesaTransBuffer."Transaction Source Reference";
+
+                                                                // Your M-Pesa Deposit of KES [AMOUNT] to Paybill [PAYBILL_NUMBER] (Azima Sacco) for account [ACCOUNT_NUMBER] was received successfully on [DATE]. M-Pesa Ref: [MPESA_REFERENCE_NUMBER] Ref: [REFERENCE]
+                                                                theSMS := 'Your M-Pesa Deposit of KES ' +
                                                                 Format(MpesaTransBuffer."Transaction Amount") +
-                                                                ' to paybill ' +
+                                                                ' to Paybill ' +
                                                                 MpesaTransBuffer."Receiver Identifier" +
-                                                                ' for ' +
-                                                                BeneficiarySavingsAccount.Name +
-                                                                ' on ' +
+                                                                ' (Azima Sacco) for account ' +
+                                                                MpesaTransBuffer."Originator ID" +
+                                                                ' was received successfully on ' +
                                                                 GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                ' has been received. MPESA ref: ' +
-                                                                MpesaTransBuffer."Transaction Source Reference";
+                                                                '. M-Pesa Ref: ' +
+                                                                MpesaTransBuffer."Transaction Source Reference" +
+                                                                ' Ref: ' +
+                                                                MpesaTransBuffer."Originator ID";
 
                                                                 SkySMS.SendSms(
                                                                     SMSSource::DEPOSIT_CONFIRMATION,
@@ -4586,7 +4660,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             ' to your ' + BeneficiarySavingsAccount."Product Name" +
                                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                             '. REF: ' + MpesaTransBuffer."Transaction Source Reference" +
-                                                            ' PIN Yako, Siri Yako!';
+                                                            '. Thank you ';
                                                         end else begin
                                                             theSMS := 'Dear ' + TheDestinationMember."First Name" +
                                                             ', You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
@@ -4594,7 +4668,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             ' to your ' + BeneficiarySavingsAccount."Product Name" +
                                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                             '. REF: ' + MpesaTransBuffer."Transaction Source Reference" +
-                                                            ' PIN Yako, Siri Yako!';
+                                                            '. Thank you ';
 
                                                             if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Coop B2B Deposit" then begin
                                                                 theSMS := 'Dear ' + TheDestinationMember."First Name" +
@@ -4603,7 +4677,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             ' to your ' + BeneficiarySavingsAccount."Product Name" +
                                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                             '. REF: ' + MpesaTransBuffer."Originator ID" +
-                                                            ' PIN Yako, Siri Yako!';
+                                                            '. Thank you ';
                                                             end;
                                                             if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Coop P2F Deposit" then begin
                                                                 theSMS := 'Dear ' + TheDestinationMember."First Name" +
@@ -4612,7 +4686,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             ' to your ' + BeneficiarySavingsAccount."Product Name" +
                                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                             '. REF: ' + MpesaTransBuffer."Originator ID" +
-                                                            ' PIN Yako, Siri Yako!';
+                                                            '. Thank you ';
                                                             end;
                                                         end;
 
@@ -4654,16 +4728,30 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             /*
                                                             Sender SMS: Your MPESA deposit of KES [Amount] to paybill 541900 for [Account name] on [date+time] has been received. Mpesa ref: [Mpesa Ref]
                                                             */
-                                                            theSMS := 'Your MPESA deposit of KES ' +
+                                                            // theSMS := 'Your MPESA deposit of KES ' +
+                                                            // Format(MpesaTransBuffer."Transaction Amount") +
+                                                            // ' to paybill ' +
+                                                            // MpesaTransBuffer."Receiver Identifier" +
+                                                            // ' for ' +
+                                                            // BeneficiarySavingsAccount.Name +
+                                                            // ' on ' +
+                                                            // GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                            // ' has been received. MPESA ref: ' +
+                                                            // MpesaTransBuffer."Transaction Source Reference";
+
+                                                            // Your M-Pesa Deposit of KES [AMOUNT] to Paybill [PAYBILL_NUMBER] (Azima Sacco) for account [ACCOUNT_NUMBER] was received successfully on [DATE]. M-Pesa Ref: [MPESA_REFERENCE_NUMBER] Ref: [REFERENCE]
+                                                            theSMS := 'Your M-Pesa Deposit of KES ' +
                                                             Format(MpesaTransBuffer."Transaction Amount") +
-                                                            ' to paybill ' +
+                                                            ' to Paybill ' +
                                                             MpesaTransBuffer."Receiver Identifier" +
-                                                            ' for ' +
-                                                            BeneficiarySavingsAccount.Name +
-                                                            ' on ' +
+                                                            ' (Azima Sacco) for account ' +
+                                                            MpesaTransBuffer."Originator ID" +
+                                                            ' was received successfully on ' +
                                                             GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                            ' has been received. MPESA ref: ' +
-                                                            MpesaTransBuffer."Transaction Source Reference";
+                                                            '. M-Pesa Ref: ' +
+                                                            MpesaTransBuffer."Transaction Source Reference" +
+                                                            ' Ref: ' +
+                                                            MpesaTransBuffer."Originator ID";
 
                                                             if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Mpesa Deposit" then begin
                                                                 SkySMS.SendSms(
@@ -4753,7 +4841,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 ' to your ' + BeneficiarySavingsAccount."Product Name" +
                                                                 ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                                 '. REF: ' + MpesaTransBuffer."Transaction Source Reference" +
-                                                                ' PIN Yako, Siri Yako!';
+                                                                '. Thank you ';
                                                             end else begin
                                                                 theSMS := 'Dear ' + TheDestinationMember."First Name" +
                                                                 ', You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
@@ -4761,7 +4849,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 ' to your ' + BeneficiarySavingsAccount."Product Name" +
                                                                 ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                                 '. REF: ' + MpesaTransBuffer."Transaction Source Reference" +
-                                                                ' PIN Yako, Siri Yako!';
+                                                                '. Thank you ';
 
                                                                 if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Coop B2B Deposit" then begin
                                                                     theSMS := 'Dear ' + TheDestinationMember."First Name" +
@@ -4770,7 +4858,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 ' to your ' + BeneficiarySavingsAccount."Product Name" +
                                                                 ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                                 '. REF: ' + MpesaTransBuffer."Originator ID" +
-                                                                ' PIN Yako, Siri Yako!';
+                                                                '. Thank you ';
                                                                 end;
                                                                 if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Coop P2F Deposit" then begin
                                                                     theSMS := 'Dear ' + TheDestinationMember."First Name" +
@@ -4779,7 +4867,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 ' to your ' + BeneficiarySavingsAccount."Product Name" +
                                                                 ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                                 '. REF: ' + MpesaTransBuffer."Originator ID" +
-                                                                ' PIN Yako, Siri Yako!';
+                                                                '. Thank you ';
                                                                 end;
                                                             end;
 
@@ -4821,16 +4909,29 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 /*
                                                                 Sender SMS: Your MPESA deposit of KES [Amount] to paybill 541900 for [Account name] on [date+time] has been received. Mpesa ref: [Mpesa Ref]
                                                                 */
-                                                                theSMS := 'Your MPESA deposit of KES ' +
+                                                                // theSMS := 'Your MPESA deposit of KES ' +
+                                                                // Format(MpesaTransBuffer."Transaction Amount") +
+                                                                // ' to paybill ' +
+                                                                // MpesaTransBuffer."Receiver Identifier" +
+                                                                // ' for ' +
+                                                                // BeneficiarySavingsAccount.Name +
+                                                                // ' on ' +
+                                                                // GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                // ' has been received. MPESA ref: ' +
+                                                                // MpesaTransBuffer."Transaction Source Reference";
+
+                                                                // Your M-Pesa Deposit of KES [AMOUNT] to Paybill [PAYBILL_NUMBER] ([SACCO_NAME]) for account [ACCOUNT_NUMBER] was received successfully on [DATE]. M-Pesa Ref: [MPESA_REFERENCE_NUMBER] Ref: [REFERENCE].
+                                                                theSMS := 'Your M-Pesa Deposit of KES ' +
                                                                 Format(MpesaTransBuffer."Transaction Amount") +
-                                                                ' to paybill ' +
+                                                                ' to Paybill ' +
                                                                 MpesaTransBuffer."Receiver Identifier" +
-                                                                ' for ' +
-                                                                BeneficiarySavingsAccount.Name +
-                                                                ' on ' +
+                                                                ' (Azima Sacco) for account ' +
+                                                                MpesaTransBuffer."Originator ID" +
+                                                                ' was received successfully on ' +
                                                                 GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                ' has been received. MPESA ref: ' +
-                                                                MpesaTransBuffer."Transaction Source Reference";
+                                                                '. M-Pesa Ref: ' +
+                                                                MpesaTransBuffer."Transaction Source Reference" +
+                                                                ' Ref: ' + MpesaTransBuffer."Originator ID";
 
                                                                 if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Mpesa Deposit" then begin
                                                                     SkySMS.SendSms(
@@ -5499,31 +5600,26 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
                                     theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
                                     Format(MpesaTransBuffer."Transaction Type") +
-                                        ' request of KES ' +
-                                        Format(MpesaTransBuffer."Transaction Amount") +
-                                        ' done on ' +
-                                        GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                        ' has been reversed. Ref: ' + MpesaTransBuffer."Beneficiary Reference";
+                                    ' request of KES ' +
+                                    Format(MpesaTransBuffer."Transaction Amount") +
+                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                    ' has been reversed. Ref: ' + MpesaTransBuffer."Beneficiary Reference";
 
                                     if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Till Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
                                         theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
-                                    Format(MpesaTransBuffer."Transaction Type") +
+                                        Format(MpesaTransBuffer."Transaction Type") +
                                         ' request of KES ' +
                                         Format(MpesaTransBuffer."Transaction Amount") +
-                                        ' done on ' +
-                                        GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                        ' at ' + MpesaTransBuffer."Receiver Name" + ' (' + MpesaTransBuffer."Receiver Identifier" + ')' +
+                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                         ' has been reversed. Ref: ' + MpesaTransBuffer."Beneficiary Reference";
                                     end;
 
                                     if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Gaming Utility Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
                                         theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
-                                    Format(MpesaTransBuffer."Transaction Type") +
+                                        Format(MpesaTransBuffer."Transaction Type") +
                                         ' request of KES ' +
                                         Format(MpesaTransBuffer."Transaction Amount") +
-                                        ' done on ' +
-                                        GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                        ' at ' + MpesaTransBuffer."Receiver Name" + ' (' + MpesaTransBuffer."Receiver Identifier" + ')' +
+                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                         ' has been reversed. Ref: ' + MpesaTransBuffer."Beneficiary Reference";
                                     end;
 
@@ -5616,33 +5712,40 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             "Product Category"
                                         );
                                         if BeneficiarySavingsAccount.FindFirst then begin
-                                            theSMS := 'Dear ' + TheSourceMember.Name + ', Your M-PESA Withdrawal request of KES ' +
-                                        Format(MpesaTransBuffer."Transaction Amount") +
-                                                                ' to ' + MpesaTransBuffer."Receiver Identifier" +
-                                                                ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                ' has been completed successfully. M-PESA Ref: ' + MpesaTransBuffer."Beneficiary Reference" +
-                                                                '. Ref: ' + theReference;
+                                            //     theSMS := 'Dear ' + TheSourceMember.Name + ', Your M-PESA Withdrawal request of KES ' +
+                                            // Format(MpesaTransBuffer."Transaction Amount") +
+                                            //                         ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                            //                         ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                            //                         ' has been completed successfully. M-PESA Ref: ' + MpesaTransBuffer."Beneficiary Reference" +
+                                            //                         '. Ref: ' + theReference;
+
+                                            // Dear [MEMBER_NAME], Your M-PESA Withdrawal request of KES [AMOUNT] to [RECEIVER_IDENTIFIER] on [DATE] has been completed successfully. M-PESA Ref: [BENEFICIARY_REFERENCE]. Ref: [REFERENCE]
+                                            theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
+                                            Format(MpesaTransBuffer."Transaction Type") +
+                                            ' request of KES ' +
+                                            Format(MpesaTransBuffer."Transaction Amount") +
+                                            ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                            ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                            ' has been completed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference" + '. Ref: ' + theReference;
 
                                             if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Till Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
                                                 theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
-                                            Format(MpesaTransBuffer."Transaction Type") +
-                                                                ' request of KES ' +
-                                                                Format(MpesaTransBuffer."Transaction Amount") +
-                                                                ' done on ' +
-                                                                GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                ' at ' + MpesaTransBuffer."Receiver Name" + ' (' + MpesaTransBuffer."Receiver Identifier" + ')' +
-                                                                ' has been processed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference";
+                                                Format(MpesaTransBuffer."Transaction Type") +
+                                                ' request of KES ' +
+                                                Format(MpesaTransBuffer."Transaction Amount") +
+                                                ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                                ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                ' has been completed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference" + '. Ref: ' + theReference;
                                             end;
 
                                             if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Gaming Utility Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
                                                 theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
                                             Format(MpesaTransBuffer."Transaction Type") +
-                                                                ' request of KES ' +
-                                                                Format(MpesaTransBuffer."Transaction Amount") +
-                                                                ' done on ' +
-                                                                GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                ' at ' + MpesaTransBuffer."Receiver Name" + ' (' + MpesaTransBuffer."Receiver Identifier" + ')' +
-                                                                ' has been processed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference" + '. Ref: ' + theReference;
+                                            ' request of KES ' +
+                                            Format(MpesaTransBuffer."Transaction Amount") +
+                                            ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                            ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                            ' has been completed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference" + '. Ref: ' + theReference;
                                             end;
 
                                             if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Bank Transfer" then begin
@@ -5766,37 +5869,67 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             );
 
                                                             if BeneficiarySavingsAccount.FindFirst then begin
+
+                                                                if SavingsAccounts.Get(MpesaTransBuffer."Savings Account") then
+                                                                    TheSourceMember.Get(SavingsAccounts."Member No.");
+
+                                                                    /*
+                                                                    
+                                                                    Dear [MEMBER_NAME],
+                                                                    Your M-PESA Withdrawal request of KES [AMOUNT] 
+                                                                    to [RECEIVER_IDENTIFIER] on [DATE] has been completed successfully. 
+                                                                    M-PESA Ref: [BENEFICIARY_REFERENCE]. Ref: [REFERENCE]
+
+                                                                    */
+                                                               
+
                                                                 theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
-                                                            Format(MpesaTransBuffer."Transaction Type") +
+                                                                Format(MpesaTransBuffer."Transaction Type") +
                                                                 ' request of KES ' +
                                                                 Format(MpesaTransBuffer."Transaction Amount") +
-                                                                ' done on ' +
-                                                                GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                ' has been processed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference";
+                                                                ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                                                ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                ' has been completed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference" +
+                                                                '. Ref: ' + theReference;
 
                                                                 if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Till Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
                                                                     theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
-                                                                Format(MpesaTransBuffer."Transaction Type") +
-                                                                                    ' request of KES ' +
-                                                                                    Format(MpesaTransBuffer."Transaction Amount") +
-                                                                                    ' done on ' +
-                                                                                    GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                                    ' at ' + MpesaTransBuffer."Receiver Name" + ' (' + MpesaTransBuffer."Receiver Identifier" + ')' +
-                                                                                    ' has been processed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference";
+                                                                    Format(MpesaTransBuffer."Transaction Type") +
+                                                                    ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                    ' has been completed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference" +
+                                                                    '. Ref: ' + theReference;
                                                                 end;
 
                                                                 if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Gaming Utility Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
                                                                     theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
                                                                 Format(MpesaTransBuffer."Transaction Type") +
-                                                                                    ' request of KES ' +
-                                                                                    Format(MpesaTransBuffer."Transaction Amount") +
-                                                                                    ' done on ' +
-                                                                                    GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                                    ' at ' + MpesaTransBuffer."Receiver Name" + ' (' + MpesaTransBuffer."Receiver Identifier" + ')' +
-                                                                                    ' has been processed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference" + '. Ref: ' + theReference;
+                                                                ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                                                ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                ' has been completed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference" +
+                                                                '. Ref: ' + theReference;
                                                                 end;
 
                                                                 if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Bank Transfer" then begin
+                                                                       /*
+                                                                      
+                                                                        Dear [MEMBER_NAME],
+                                                                        Your Bank Transfer request of KES [AMOUNT] to [RECEIVER_IDENTIFIER] - [RECEIVER_NAME] A/C
+                                                                        [RECEIVER_ACCOUNT] on [DATE] has been completed successfully. M-PESA Ref: [BENEFICIARY_REFERENCE]. 
+                                                                        Ref: [REFERENCE]
+
+                                                                       */
+
+                                                                    theSMS := 'Dear ' + TheSourceMember.Name +
+                                                                    ', Your Bank Transfer request of KES ' +
+                                                                    Format(MpesaTransBuffer."Transaction Amount") +
+                                                                    ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                                                    ' - ' + MpesaTransBuffer."Receiver Name" +
+                                                                    ' A/C ' + MpesaTransBuffer."Receiver Account" +
+                                                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                    ' has been completed successfully. M-PESA Ref: ' + MpesaTransBuffer."Beneficiary Reference" +
+                                                                    '. Ref: ' + theReference;
+
                                                                     SkySMS.SendSms(
                                                                         SMSSource::BANK_TRANSFER,
                                                                         MpesaTransBuffer."Initiator Identifier",
@@ -5861,32 +5994,30 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
                                                                     theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
                                                                     Format(MpesaTransBuffer."Transaction Type") +
-                                                                ' request of KES ' +
-                                                                Format(MpesaTransBuffer."Transaction Amount") +
-                                                                ' done on ' +
-                                                                GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                ' has been processed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference" + '. Ref: ' + theReference;
+                                                                    ' request of KES ' +
+                                                                    Format(MpesaTransBuffer."Transaction Amount") +
+                                                                    ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                    ' has been completed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference";
 
                                                                     if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Till Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
                                                                         theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
-                                                                    Format(MpesaTransBuffer."Transaction Type") +
-                                                                                        ' request of KES ' +
-                                                                                        Format(MpesaTransBuffer."Transaction Amount") +
-                                                                                        ' done on ' +
-                                                                                        GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                                        ' at ' + MpesaTransBuffer."Receiver Name" + ' (' + MpesaTransBuffer."Receiver Identifier" + ')' +
-                                                                                        ' has been processed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference" + '. Ref: ' + theReference;
+                                                                        Format(MpesaTransBuffer."Transaction Type") +
+                                                                        ' request of KES ' +
+                                                                        Format(MpesaTransBuffer."Transaction Amount") +
+                                                                        ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                        ' has been completed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference";
                                                                     end;
 
                                                                     if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Gaming Utility Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
                                                                         theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
                                                                     Format(MpesaTransBuffer."Transaction Type") +
-                                                                                        ' request of KES ' +
-                                                                                        Format(MpesaTransBuffer."Transaction Amount") +
-                                                                                        ' done on ' +
-                                                                                        GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                                        ' at ' + MpesaTransBuffer."Receiver Name" + ' (' + MpesaTransBuffer."Receiver Identifier" + ')' +
-                                                                                        ' has been processed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference" + '. Ref: ' + theReference;
+                                                                    ' request of KES ' +
+                                                                    Format(MpesaTransBuffer."Transaction Amount") +
+                                                                    ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                    ' has been completed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference";
                                                                     end;
 
                                                                     if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Bank Transfer" then begin
@@ -5935,34 +6066,38 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                         MpesaTransBuffer."Posted By" := UserID;
                                                         MpesaTransBuffer.Modify();
 
+                                                        // theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
+                                                        // Format(MpesaTransBuffer."Transaction Type") +
+                                                        //     ' request of KES ' +
+                                                        //     Format(MpesaTransBuffer."Transaction Amount") +
+                                                        //     ' done on ' +
+                                                        //     GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                        //     ' has been reversed. Ref: ' + MpesaTransBuffer."Beneficiary Reference";
+
+                                                        // Dear [MEMBER_NAME], your Cash Withdrawal request of KES [AMOUNT] on [DATE] has been REVERSED. Dial [USSD_CODE] to check your balance. Ref: [REFERENCE] Date: [DATE]
                                                         theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
                                                         Format(MpesaTransBuffer."Transaction Type") +
-                                                            ' request of KES ' +
-                                                            Format(MpesaTransBuffer."Transaction Amount") +
-                                                            ' done on ' +
-                                                            GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                            ' has been reversed. Ref: ' + MpesaTransBuffer."Beneficiary Reference";
+                                                        ' request of KES ' +
+                                                        Format(MpesaTransBuffer."Transaction Amount") +
+                                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                        ' has been reversed. Ref: ' + MpesaTransBuffer."Beneficiary Reference";
 
                                                         if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Till Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
                                                             theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
-                                                        Format(MpesaTransBuffer."Transaction Type") +
-                                                                            ' request of KES ' +
-                                                                            Format(MpesaTransBuffer."Transaction Amount") +
-                                                                            ' done on ' +
-                                                                            GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                            ' at ' + MpesaTransBuffer."Receiver Name" + ' (' + MpesaTransBuffer."Receiver Identifier" + ')' +
-                                                                            ' has been reversed. Ref: ' + MpesaTransBuffer."Beneficiary Reference";
+                                                            Format(MpesaTransBuffer."Transaction Type") +
+                                                            ' request of KES ' +
+                                                            Format(MpesaTransBuffer."Transaction Amount") +
+                                                            ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                            ' has been reversed. Ref: ' + MpesaTransBuffer."Beneficiary Reference";
                                                         end;
 
                                                         if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Gaming Utility Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
                                                             theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
-                                                        Format(MpesaTransBuffer."Transaction Type") +
-                                                                            ' request of KES ' +
-                                                                            Format(MpesaTransBuffer."Transaction Amount") +
-                                                                            ' done on ' +
-                                                                            GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                            ' at ' + MpesaTransBuffer."Receiver Name" + ' (' + MpesaTransBuffer."Receiver Identifier" + ')' +
-                                                                            ' has been reversed. Ref: ' + MpesaTransBuffer."Beneficiary Reference";
+                                                            Format(MpesaTransBuffer."Transaction Type") +
+                                                             ' request of KES ' +
+                                                            Format(MpesaTransBuffer."Transaction Amount") +
+                                                            ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                            ' has been reversed. Ref: ' + MpesaTransBuffer."Beneficiary Reference";
                                                         end;
 
                                                         SkySMS.SendSms(
@@ -6066,13 +6201,15 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                         MpesaTransBuffer."Transaction Type"::"Account Transfer",
                                                         MpesaTransBuffer."Transaction Type"::"Kesasa Account Transfer":
                                                             begin
+                                                                // Dear [MEMBER_NAME],Your Funds Transfer request of KES [AMOUNT] from A/C [SOURCE_ACCOUNT] to A/C [DESTINATION_ACCOUNT] on [DATE] has been completed successfully. Ref: [REFERENCE]
+
                                                                 theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() +
-                                                                    ', Your Funds Transfer request of KES ' +
-                                                                    Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
-                                                                    ' from A/C ' + MpesaTransBuffer."Savings Account" +
-                                                                    ' to A/C ' + MpesaTransBuffer."Destination Account" +
-                                                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                    ' has been completed successfully. Ref: ' + theReference;
+                                                                ', Your Funds Transfer request of KES ' +
+                                                                Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
+                                                                ' from ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Savings Account" +
+                                                                ' to ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Destination Account" +
+                                                                ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                ' has been completed successfully. Ref: ' + theReference;
 
                                                                 SkySMS.SendSms(
                                                                     SMSSource::IFT_ACCOUNT,
@@ -6093,8 +6230,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() +
                                                                     ', your internal loan repayment request of KES ' +
                                                                     Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
-                                                                    ' from A/C ' + MpesaTransBuffer."Savings Account" +
-                                                                    ' to A/C ' + MpesaTransBuffer."Loan Account" +
+                                                                    ' from ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Savings Account" +
+                                                                    ' to ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Loan Account" +
                                                                     ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                                     ' has been completed successfully. Ref: ' + theReference;
 
@@ -6424,13 +6561,18 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                             MpesaTransBuffer."Transaction Type"::"Account Transfer",
                                                                             MpesaTransBuffer."Transaction Type"::"Kesasa Account Transfer":
                                                                                 begin
+
+                                                                                    if MpesaTransBuffer."Destination Account" <> '' then begin
+                                                                                        TheDestinationSavings.Get(MpesaTransBuffer."Destination Account");
+                                                                                    end;
+
                                                                                     theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() +
-                                                                                        ', Your Funds Transfer request of KES ' +
-                                                                                        Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
-                                                                                        ' from A/C ' + MpesaTransBuffer."Savings Account" +
-                                                                                        ' to A/C ' + MpesaTransBuffer."Destination Account" +
-                                                                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                                        ' has been completed successfully. Ref: ' + theReference;
+                                                                                     ', Your Funds Transfer request of KES ' +
+                                                                                     Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
+                                                                                     ' from ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Savings Account" +
+                                                                                     ' to ' + TheDestinationSavings."Product Name" + ' ' + MpesaTransBuffer."Destination Account" +
+                                                                                     ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                                     ' has been completed successfully. Ref: ' + theReference;
 
                                                                                     SkySMS.SendSms(
                                                                                         SMSSource::IFT_ACCOUNT,
@@ -6451,8 +6593,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                     theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() +
                                                                                 ', your internal loan repayment request of KES ' +
                                                                                         Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
-                                                                                        ' from A/C ' + MpesaTransBuffer."Savings Account" +
-                                                                                        ' to A/C ' + MpesaTransBuffer."Loan Account" +
+                                                                                        ' from ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Savings Account" +
+                                                                                        ' to ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Loan Account" +
                                                                                         ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                                                         ' has been completed successfully. Ref: ' + theReference;
 
@@ -6479,11 +6621,11 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                 if TheSourceMember."No." <> TheDestinationSavings."Member No." then begin
                                                                                     if TheDestinationMember.Get(TheDestinationSavings."Member No.") then begin
                                                                                         theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
-                                                                                ', ' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
-                                                                                Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
-                                                                                ' to your account no. ' + TheDestinationSavings."No." +
-                                                                                ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                                '. Ref: ' + theReference;
+                                                                                         ', ' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
+                                                                                         Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
+                                                                                         ' to your ' + TheDestinationSavings."Product Name" + ' ' + TheDestinationSavings."No." +
+                                                                                         ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                                         '. Ref: ' + theReference;
 
                                                                                         SkySMS.SendSms(
                                                                                             SMSSource::IFT_ACCOUNT,
@@ -6559,8 +6701,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                         theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() +
                                                                                             ', Your Funds Transfer request of KES ' +
                                                                                             Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
-                                                                                            ' from A/C ' + MpesaTransBuffer."Savings Account" +
-                                                                                            ' to A/C ' + MpesaTransBuffer."Destination Account" +
+                                                                                            ' from ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Savings Account" +
+                                                                                            ' to ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Destination Account" +
                                                                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                                                             ' has been completed successfully. Ref: ' + theReference;
 

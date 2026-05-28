@@ -58,6 +58,15 @@ table 52185776 "Cashier Transactions"
                     "Employer Code" := Account."Employer Code";
                     "Phone No" := Account."Transactional Mobile No";
                 end;
+                
+                if "Account Type" = "Account Type"::MPESA then begin
+                    BankAccount.Reset;
+                    BankAccount.SetRange("No.", "Account No");
+                    if BankAccount.FindFirst() then begin
+                        BankAccount.CalcFields(BankAccount.Balance, BankAccount."Balance (LCY)");
+                        "MPESA Float Balance" := BankAccount.Balance;
+                    end;
+                end;
                 CalcAvailableBal;
                 Validate("Member No.");
             end;
@@ -581,6 +590,8 @@ table 52185776 "Cashier Transactions"
         field(50014; "Cheque Issueing Bank"; Text[100])
         {
             Editable = false;
+            FieldClass = FlowField;
+            CalcFormula = lookup("Bank Account".Name where("No." = field("Bank Account")));
         }
         field(50015; "Account Type"; Option)
         {
@@ -617,6 +628,7 @@ table 52185776 "Cashier Transactions"
                         bankacc.Reset;
                         bankacc.SetRange("No.", BUserSetup."Default  Bank");
                         if bankacc.Find('-') then begin
+                            bankacc.CalcFields(bankacc.Balance, bankacc."Balance (LCY)");
                             "Account No" := bankacc."No.";
                             "Till Name" := PadStr(BUserSetup."Default  Bank" + ' ' + bankacc.Name, 50);
                         end;
@@ -651,8 +663,19 @@ table 52185776 "Cashier Transactions"
         {
 
         }
-        field(50020; "Mpesa Reference"; Text[50])
+        field(50020; "Mpesa Reference"; Code[10])
         {
+            trigger OnValidate()
+            var 
+                CT: record "Cashier Transactions";
+            begin
+                if "Account Type" = "Account Type"::MPESA then begin
+                    CT.Reset();
+                    CT.SetRange("Mpesa Reference", "Mpesa Reference");
+                    if CT.FindFirst() then 
+                        Error('MPESA Reference Code %1 already exists for transaction No. %2', "Mpesa Reference", CT.No);
+                end;
+            end;
         }
         field(50021; Source; Text[100])
         {
@@ -681,6 +704,12 @@ table 52185776 "Cashier Transactions"
         field(50026; "Phone No"; Code[20])
         {
             Editable = false;
+        }
+        field(50027; "Reference Name"; Text[100])
+        {
+        }
+        field(50028; "MPESA Float Balance"; Decimal)
+        {
         }
     }
 

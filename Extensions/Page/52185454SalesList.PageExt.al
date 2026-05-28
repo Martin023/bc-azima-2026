@@ -204,10 +204,10 @@ PageExtension 52185454 pageextension52185454 extends "Sales List"
         // {
         //     ApplicationArea = Basic;
         // }
-        modify("Sales Reservation Avail.")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Sales Reservation Avail.")
+        // {
+        //     ApplicationArea = Basic;
+        // }
 
         //Unsupported feature: Property Deletion (ToolTipML) on "Card(Action 20)".
 
