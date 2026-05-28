@@ -32,6 +32,7 @@ using Microsoft.Finance.FinancialReports;
 using Microsoft.Finance.GeneralLedger.Account;
 using Microsoft.Finance.GeneralLedger.Budget;
 using Microsoft.Finance.GeneralLedger.Journal;
+using azima.azima;
 using Microsoft.Finance.GeneralLedger.Ledger;
 using Microsoft.Finance.GeneralLedger.Reports;
 using Microsoft.Finance.VAT.Registration;
@@ -2317,7 +2318,7 @@ page 52186778 "Finance Role Center"
                         {
                             ApplicationArea = all;
                             Caption = 'Dividend Progression List';
-                            RunObject = page "Dividend Progression";
+                            RunObject = page "Dividend Header List";
                         }
                         // action("Dividend Posting Buffer")
                         // {
@@ -2746,7 +2747,7 @@ page 52186778 "Finance Role Center"
                     }
                     group("Order Processing Documents")
                     {
-                        Caption = 'Documents';
+                        Caption = 'Order Processing Reports';
                         action("Purchase - Quote")
                         {
                             ApplicationArea = Basic, Suite;
@@ -2759,12 +2760,12 @@ page 52186778 "Finance Role Center"
                             Caption = 'Order';
                             RunObject = report "Order";
                         }
-                        action("Blanket Purchase Order")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Blanket Purchase Order';
-                            RunObject = report "Blanket Purchase Order";
-                        }
+                        // action("Blanket Purchase Order")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Blanket Purchase Order';
+                        //     RunObject = report "Blanket Purchase Order";
+                        // }
                         action("Purchase - Invoice")
                         {
                             ApplicationArea = Basic, Suite;
@@ -3206,12 +3207,12 @@ page 52186778 "Finance Role Center"
                             Caption = 'Invt. Valuation - Cost Spec.';
                             RunObject = report "Invt. Valuation - Cost Spec.";
                         }
-                        action("Item Age Composition - Qty.")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Item Age Composition - Qty.';
-                            RunObject = report "Item Age Composition - Qty.";
-                        }
+                        // action("Item Age Composition - Qty.")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Item Age Composition - Qty.';
+                        //     RunObject = report "Item Age Composition - Qty.";
+                        // }
                         action("Item Age Composition - Value")
                         {
                             ApplicationArea = Basic, Suite;
@@ -5320,12 +5321,12 @@ page 52186778 "Finance Role Center"
                     RunObject = Page "Asset Transfer List Effected";
                     ToolTip = 'View the list of fixed assets that have been transferred.';
                 }
-                action(StaffWelfare)
-                {
-                    Caption = 'Staff Welfare Claim';
-                    ApplicationArea = Basic, Suite;
-                    RunObject = page "Staff Welfare List";
-                }
+                // action(StaffWelfare)
+                // {
+                //     Caption = 'Staff Welfare Claim';
+                //     ApplicationArea = Basic, Suite;
+                //     RunObject = page "Staff Welfare List";
+                // }
                 action(LeaveApplication1)
                 {
                     Caption = 'Employee Leave Application';
@@ -5333,12 +5334,12 @@ page 52186778 "Finance Role Center"
                     RunObject = page "HR Leave Applications List1";
 
                 }
-                action("Overtime Claim List")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Overtime';
-                    RunObject = page "Overtime Claim List";
-                }
+                // action("Overtime Claim List")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Overtime';
+                //     RunObject = page "Overtime Claim List";
+                // }
 
                 action("System Rights Requisition")
                 {
@@ -5347,20 +5348,20 @@ page 52186778 "Finance Role Center"
                     RunObject = page "Permission Requisition Card";
                 }
 
-                action("Loan Application")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Apply Staff Loan';
-                    RunObject = page "Self Loan Application List";
-                }
-                action(ImprestsList)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Imprest Application List';
-                    RunObject = page "Imprest List";
-                    //RunObject = page "Imprest Application List S/S."; //TODO
-                    RunPageView = where(Status = filter(pending));
-                }
+                // action("Loan Application")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Apply Staff Loan';
+                //     RunObject = page "Self Loan Application List";
+                // }
+                // action(ImprestsList)
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Imprest Application List';
+                //     RunObject = page "Imprest List";
+                //     //RunObject = page "Imprest Application List S/S."; //TODO
+                //     RunPageView = where(Status = filter(pending));
+                // }
                 action("Store Requisition")
                 {
                     ApplicationArea = Basic, Suite;
@@ -5627,12 +5628,12 @@ page 52186778 "Finance Role Center"
                 }
                 group("BBF Setups")
                 {
-                    action("BBF Entitlement")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'BBF Entitlement List';
-                        RunObject = Page "BBF Entitlement List";
-                    }
+                    // action("BBF Entitlement")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'BBF Entitlement List';
+                    //     RunObject = Page "BBF Entitlement List";
+                    // }
                     action("Relationship Types")
                     {
                         ApplicationArea = Basic, Suite;

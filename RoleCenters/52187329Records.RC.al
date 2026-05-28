@@ -672,31 +672,54 @@ page 52187329 "Records"
             // }
             group("Marketing & Sales")
             {
-                group(Marketing)
+                // group(Marketing)
+                // {
+                //     Caption = 'Marketing';
+                //     action("Campaign List")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Campaign List';
+                //         RunObject = page "Campaign List";
+                //     }
+                // }
+                // group(Sales)
+                // {
+                action("Marketing Teams")
                 {
-                    Caption = 'Marketing';
-                    action("Campaign List")
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Sales Representatives';
+                    RunObject = page "Marketing Teams Header";
+                }
+                action("Sales Routes Plan List")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Sales Routes Plan List';
+                    RunObject = page "Sales Routes Plan List";
+                }
+                action("Portfolio Manager List")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Portfolio Manager List';
+                    RunObject = page "Portfolio Manager List";
+                }
+                action("Commission Generation List")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Commission Generation List';
+                    RunObject = page "Commission Generation List";
+                }
+
+                group("Sales&Mrk Reports")
+                {
+                    action("Member Commission Report")
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Campaign List';
-                        RunObject = page "Campaign List";
+                        Caption = 'Member Commission';
+                        RunObject = report "Member Commission";
                     }
                 }
-                group(Sales)
-                {
-                    action("Marketing Teams")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Sales Representatives';
-                        RunObject = page "Marketing Teams Header";
-                    }
-                    action("Sales Routes Plan List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Sales Routes Plan List';
-                        RunObject = page "Sales Routes Plan List";
-                    }
-                }
+                // }
+
             }
             // group("ATM Management")
             // {
