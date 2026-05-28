@@ -3845,21 +3845,12 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                 MobileLoanBuffer."Date Posted" := CurrentDateTime;
                                 MobileLoanBuffer.Modify();
 
-                                // theSMS := 'Dear member, your ' +
-                                // Loan."Loan Product Type Name" +
-                                // ' of KES ' +
-                                // Format(MobileLoanBuffer.Amount) +
-                                // ' applied on ' + GlobalFunctions.FormatISODate(MobileLoanBuffer."Date Entered") +
-                                // ' at ' + GlobalFunctions.FormatISOTime(MobileLoanBuffer."Time Entered") +
-                                // ' has been approved and disbursed to your Fosa account. Ref: ' + Loan."Loan No.";
-
-                                // Dear [MEMBER_NAME], your loan application below has been received successfully [LOAN_DETAILS] Kindly wait as it is being processed Ref: [REFERENCE_NUMBER] Date: [DATE]
                                 theSMS :=
                                 'Dear ' + Loan."Member Name" +
                                 ', your loan application below has been received successfully ' +
                                 'Loan Type: ' + Loan."Loan Product Type Name" + ' ' +
                                 'Loan Amount: KES ' + Format(MobileLoanBuffer.Amount) + ' ' +
-                                'Kindly wait as it is being processed ' +
+                                'has been approved and disbursed to your Fosa account. ' +
                                 'Ref: ' + Loan."Loan No." + ' ' +
                                 'Date: ' + GlobalFunctions.FormatISODate(MobileLoanBuffer."Date Entered");
 
@@ -5777,6 +5768,34 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                     'CBS'
                                                 );
                                             end;
+
+                                            // Other Number
+
+                                            if MpesaTransBuffer."Initiator Identifier" <> MpesaTransBuffer."Beneficiary Identifier" then begin
+                                                if SavingsAccounts.Get(MpesaTransBuffer."Savings Account") then
+                                                    TheSourceMember.Get(SavingsAccounts."Member No.");
+
+                                                theSMS := 'You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
+                                                    ' on your account ' + MpesaTransBuffer."Beneficiary Identifier" +
+                                                    ' from ' + TheSourceMember.Name + ' ' + MpesaTransBuffer."Initiator Identifier" +
+                                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                    '. M-PESA Ref: ' + MpesaTransBuffer."Beneficiary Reference" +
+                                                    '. Ref: ' + theReference;
+
+                                                SkySMS.SendSms(
+                                                    SMSSource::MPESA_WITHDRAWAL,
+                                                    MpesaTransBuffer."Beneficiary Identifier",
+                                                    theSMS,
+                                                    MpesaTransBuffer."Beneficiary Reference",
+                                                    '',
+                                                    true,
+                                                    0,
+                                                    true,
+                                                    'MBANKING',
+                                                    MpesaTransBuffer."Originator ID",
+                                                    'CBS'
+                                                );
+                                            end;
                                         end;
                                     end else begin
                                         if SavingsAccounts.get(MpesaTransBuffer."Source Account") then begin
@@ -5873,15 +5892,15 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 if SavingsAccounts.Get(MpesaTransBuffer."Savings Account") then
                                                                     TheSourceMember.Get(SavingsAccounts."Member No.");
 
-                                                                    /*
-                                                                    
-                                                                    Dear [MEMBER_NAME],
-                                                                    Your M-PESA Withdrawal request of KES [AMOUNT] 
-                                                                    to [RECEIVER_IDENTIFIER] on [DATE] has been completed successfully. 
-                                                                    M-PESA Ref: [BENEFICIARY_REFERENCE]. Ref: [REFERENCE]
+                                                                /*
 
-                                                                    */
-                                                               
+                                                                Dear [MEMBER_NAME],
+                                                                Your M-PESA Withdrawal request of KES [AMOUNT] 
+                                                                to [RECEIVER_IDENTIFIER] on [DATE] has been completed successfully. 
+                                                                M-PESA Ref: [BENEFICIARY_REFERENCE]. Ref: [REFERENCE]
+
+                                                                */
+
 
                                                                 theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
                                                                 Format(MpesaTransBuffer."Transaction Type") +
@@ -5911,14 +5930,14 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 end;
 
                                                                 if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Bank Transfer" then begin
-                                                                       /*
-                                                                      
-                                                                        Dear [MEMBER_NAME],
-                                                                        Your Bank Transfer request of KES [AMOUNT] to [RECEIVER_IDENTIFIER] - [RECEIVER_NAME] A/C
-                                                                        [RECEIVER_ACCOUNT] on [DATE] has been completed successfully. M-PESA Ref: [BENEFICIARY_REFERENCE]. 
-                                                                        Ref: [REFERENCE]
+                                                                    /*
 
-                                                                       */
+                                                                     Dear [MEMBER_NAME],
+                                                                     Your Bank Transfer request of KES [AMOUNT] to [RECEIVER_IDENTIFIER] - [RECEIVER_NAME] A/C
+                                                                     [RECEIVER_ACCOUNT] on [DATE] has been completed successfully. M-PESA Ref: [BENEFICIARY_REFERENCE]. 
+                                                                     Ref: [REFERENCE]
+
+                                                                    */
 
                                                                     theSMS := 'Dear ' + TheSourceMember.Name +
                                                                     ', Your Bank Transfer request of KES ' +
@@ -5943,10 +5962,62 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                         MpesaTransBuffer."Originator ID",
                                                                         'CBS'
                                                                     );
+
+                                                                    if MpesaTransBuffer."Initiator Identifier" <> MpesaTransBuffer."Beneficiary Identifier" then begin
+                                                                        if SavingsAccounts.Get(MpesaTransBuffer."Savings Account") then
+                                                                            TheSourceMember.Get(SavingsAccounts."Member No.");
+
+                                                                        theSMS := 'You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
+                                                                            ' on your account ' + MpesaTransBuffer."Beneficiary Identifier" +
+                                                                            ' from ' + TheSourceMember.Name + ' ' + MpesaTransBuffer."Initiator Identifier" +
+                                                                            ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                            '. M-PESA Ref: ' + MpesaTransBuffer."Beneficiary Reference" +
+                                                                            '. Ref: ' + theReference;
+
+                                                                        SkySMS.SendSms(
+                                                                            SMSSource::MPESA_WITHDRAWAL,
+                                                                            MpesaTransBuffer."Beneficiary Identifier",
+                                                                            theSMS,
+                                                                            MpesaTransBuffer."Beneficiary Reference",
+                                                                            '',
+                                                                            true,
+                                                                            0,
+                                                                            true,
+                                                                            'MBANKING',
+                                                                            MpesaTransBuffer."Originator ID",
+                                                                            'CBS'
+                                                                        );
+                                                                    end;
                                                                 end else begin
                                                                     SkySMS.SendSms(
                                                                         SMSSource::MPESA_WITHDRAWAL,
                                                                         MpesaTransBuffer."Initiator Identifier",
+                                                                        theSMS,
+                                                                        MpesaTransBuffer."Beneficiary Reference",
+                                                                        '',
+                                                                        true,
+                                                                        0,
+                                                                        true,
+                                                                        'MBANKING',
+                                                                        MpesaTransBuffer."Originator ID",
+                                                                        'CBS'
+                                                                    );
+                                                                end;
+                                                                // Other Number 
+                                                                if MpesaTransBuffer."Initiator Identifier" <> MpesaTransBuffer."Beneficiary Identifier" then begin
+                                                                    if SavingsAccounts.Get(MpesaTransBuffer."Savings Account") then
+                                                                        TheSourceMember.Get(SavingsAccounts."Member No.");
+
+                                                                    theSMS := 'You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
+                                                                        ' on your account ' + MpesaTransBuffer."Beneficiary Identifier" +
+                                                                        ' from ' + TheSourceMember.Name + ' ' + MpesaTransBuffer."Initiator Identifier" +
+                                                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                        '. M-PESA Ref: ' + MpesaTransBuffer."Beneficiary Reference" +
+                                                                        '. Ref: ' + theReference;
+
+                                                                    SkySMS.SendSms(
+                                                                        SMSSource::MPESA_WITHDRAWAL,
+                                                                        MpesaTransBuffer."Beneficiary Identifier",
                                                                         theSMS,
                                                                         MpesaTransBuffer."Beneficiary Reference",
                                                                         '',
@@ -6048,7 +6119,32 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                             MpesaTransBuffer."Originator ID",
                                                                             'CBS'
                                                                         );
-                                                                    end;
+                                                                    end
+                                                                end;
+                                                                if MpesaTransBuffer."Initiator Identifier" <> MpesaTransBuffer."Beneficiary Identifier" then begin
+                                                                    if SavingsAccounts.Get(MpesaTransBuffer."Savings Account") then
+                                                                        TheSourceMember.Get(SavingsAccounts."Member No.");
+
+                                                                    theSMS := 'You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
+                                                                        ' on your account ' + MpesaTransBuffer."Beneficiary Identifier" +
+                                                                        ' from ' + TheSourceMember.Name + ' ' + MpesaTransBuffer."Initiator Identifier" +
+                                                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                        '. M-PESA Ref: ' + MpesaTransBuffer."Beneficiary Reference" +
+                                                                        '. Ref: ' + theReference;
+
+                                                                    SkySMS.SendSms(
+                                                                        SMSSource::MPESA_WITHDRAWAL,
+                                                                        MpesaTransBuffer."Beneficiary Identifier",
+                                                                        theSMS,
+                                                                        MpesaTransBuffer."Beneficiary Reference",
+                                                                        '',
+                                                                        true,
+                                                                        0,
+                                                                        true,
+                                                                        'MBANKING',
+                                                                        MpesaTransBuffer."Originator ID",
+                                                                        'CBS'
+                                                                    );
                                                                 end;
                                                             end else begin
                                                                 MpesaTransBuffer."Try Posting Count" := MpesaTransBuffer."Try Posting Count" + 1;
@@ -6075,6 +6171,10 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                         //     ' has been reversed. Ref: ' + MpesaTransBuffer."Beneficiary Reference";
 
                                                         // Dear [MEMBER_NAME], your Cash Withdrawal request of KES [AMOUNT] on [DATE] has been REVERSED. Dial [USSD_CODE] to check your balance. Ref: [REFERENCE] Date: [DATE]
+
+                                                        if SavingsAccounts.Get(MpesaTransBuffer."Savings Account") then
+                                                            TheSourceMember.Get(SavingsAccounts."Member No.");
+
                                                         theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
                                                         Format(MpesaTransBuffer."Transaction Type") +
                                                         ' request of KES ' +
