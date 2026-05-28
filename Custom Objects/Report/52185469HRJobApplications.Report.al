@@ -9,7 +9,7 @@ Report 52185469 "HR Job Applications"
         dataitem("HR Job Applications"; "HR Job Applications")
         {
             PrintOnlyIfDetail = false;
-            RequestFilterFields = "Job Application No.";
+            RequestFilterFields = "Job Application No.", "Job Applied For", "Date Applied", Status;
             column(ReportForNavId_1102755000; 1102755000)
             {
             }
@@ -32,7 +32,23 @@ Report 52185469 "HR Job Applications"
             {
                 IncludeCaption = true;
             }
+            column(FullName_HRJobApplications; "HR Job Applications"."Full Name")
+            {
+                IncludeCaption = true;
+            }
             column(JobAppliedFor_HRJobApplications; "HR Job Applications"."Job Applied For")
+            {
+                IncludeCaption = true;
+            }
+            column(JobAppliedForDescription_HRJobApplications; "HR Job Applications"."Job Applied for Description")
+            {
+                IncludeCaption = true;
+            }
+            column(DateApplied_HRJobApplications; "HR Job Applications"."Date Applied")
+            {
+                IncludeCaption = true;
+            }
+            column(Status_HRJobApplications; "HR Job Applications".Status)
             {
                 IncludeCaption = true;
             }
@@ -79,6 +95,16 @@ Report 52185469 "HR Job Applications"
             {
                 IncludeCaption = true;
             }
+            //ADDED COLUMNS FOR LIST VIEW
+            column(QualificationsSummary; QualificationsSummary)
+            {
+            }
+            column(ShowDetailedView; ShowDetailedView)
+            {
+            }
+            column(ShowQualificationsSummary; ShowQualificationsSummary)
+            {
+            }
             column(CI_Name; CI.Name)
             {
                 IncludeCaption = true;
@@ -111,6 +137,23 @@ Report 52185469 "HR Job Applications"
             {
                 IncludeCaption = true;
             }
+            
+            trigger OnAfterGetRecord()
+            begin
+                //BUILD QUALIFICATIONS SUMMARY FOR LIST VIEW
+                QualificationsSummary := '';
+                if ShowQualificationsSummary then begin
+                    HRApplicantQual.Reset();
+                    HRApplicantQual.SetRange("Application No", "Job Application No.");
+                    if HRApplicantQual.FindSet() then begin
+                        repeat
+                            if QualificationsSummary <> '' then
+                                QualificationsSummary += '; ';
+                            QualificationsSummary += HRApplicantQual."Qualification Description";
+                        until HRApplicantQual.Next() = 0;
+                    end;
+                end;
+            end;
             dataitem("HR Applicant Qualifications"; "HR Applicant Qualifications")
             {
                 DataItemLink = "Application No" = field("Job Application No.");
@@ -204,6 +247,25 @@ Report 52185469 "HR Job Applications"
 
         layout
         {
+            area(content)
+            {
+                group(Options)
+                {
+                    Caption = 'Options';
+                    field(ShowDetailedView; ShowDetailedView)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Show Detailed View';
+                        ToolTip = 'Show detailed information including qualifications, referees, and hobbies for each applicant';
+                    }
+                    field(ShowQualificationsSummary; ShowQualificationsSummary)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Show Qualifications Summary';
+                        ToolTip = 'Show summary of qualifications for each applicant in list view';
+                    }
+                }
+            }
         }
 
         actions
@@ -220,12 +282,9 @@ Report 52185469 "HR Job Applications"
         CI.Get();
         CI.CalcFields(CI.Picture);
 
-        //GET FILTER
+        //GET FILTER - NO LONGER REQUIRED FOR LIST VIEW
         JobApplicationNo := "HR Job Applications".GetFilter("HR Job Applications"."Job Application No.");
-        if JobApplicationNo = '' then begin
-            Message('Please select a Job Application Number before printing a report');
-            CurrReport.Quit;
-        end;
+        //REMOVED MANDATORY FILTER CHECK TO ALLOW LIST OF ALL APPLICANTS
     end;
 
     var
@@ -235,4 +294,9 @@ Report 52185469 "HR Job Applications"
         SectionC: label 'Section C :: Academic and Qualification Information';
         SectionD: label 'Section D :: Applicant''s Refferees';
         JobApplicationNo: Text;
+        ShowDetailedView: Boolean;
+        ShowQualificationsSummary: Boolean;
+        HRApplicantQual: Record "HR Applicant Qualifications";
+        QualificationsSummary: Text[1000];
+}
 }

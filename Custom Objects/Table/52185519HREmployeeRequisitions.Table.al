@@ -218,6 +218,9 @@ table 52185519 "HR Employee Requisitions"
 
     trigger OnInsert()
     begin
+        //CHECK IF USER IS ALLOWED TO CREATE REQUISITIONS
+        CheckUserCanCreateRequisition();
+        
         //GENERATE DOCUMENT NUMBER
         if "Requisition No." = '' then begin
             HRSetup.Get;
@@ -263,5 +266,47 @@ table 52185519 "HR Employee Requisitions"
         mResponsibility: Code[50];
         HRJobReq: Record "HR Job Requirements";
         GlobalFunctions: Codeunit "Global Functions";
+        
+    local procedure CheckUserCanCreateRequisition()
+    var
+        HRHeadsOfDept: Record "HR Heads of Departments";
+        HREmployee: Record "HR Employees";
+        UserSetupRec: Record "User Setup";
+        IsHOD: Boolean;
+        IsHRStaff: Boolean;
+        HRDepartmentCode: Code[20];
+    begin
+        IsHOD := false;
+        IsHRStaff := false;
+        
+        //CHECK IF USER IS HOD
+        HRHeadsOfDept.Reset();
+        HRHeadsOfDept.SetRange("User ID", UserId);
+        if HRHeadsOfDept.FindFirst() then
+            IsHOD := true;
+        
+        //CHECK IF USER IS HR STAFF
+        HREmployee.Reset();
+        HREmployee.SetRange("User ID", UserId);
+        HREmployee.SetRange(Status, HREmployee.Status::Active);
+        if HREmployee.FindFirst() then begin
+            //GET HR DEPARTMENT CODE FROM HR SETUP OR DIMENSION
+            //ASSUMING HR DEPARTMENT HAS A SPECIFIC DIMENSION CODE
+            //YOU MAY NEED TO ADJUST THIS BASED ON YOUR SETUP
+            if HRSetup.Get() then begin
+                //CHECK IF EMPLOYEE BELONGS TO HR DEPARTMENT
+                //THIS CHECKS GLOBAL DIMENSION 2 (DEPARTMENT)
+                //ADJUST THE FILTER IF HR DEPARTMENT HAS DIFFERENT CODE
+                if (HREmployee."Global Dimension 2 Code" = 'HR') or 
+                   (HREmployee."Global Dimension 2 Code" = 'HUMAN RESOURCE') or
+                   (HREmployee."Global Dimension 2 Code" = 'HUMAN RESOURCES') then
+                    IsHRStaff := true;
+            end;
+        end;
+        
+        //BLOCK IF NOT HOD OR HR STAFF
+        if not (IsHOD or IsHRStaff) then
+            Error('ONLY HEAD OF DEPARTMENTS (HODs) AND HR STAFF CAN CREATE EMPLOYEE REQUISITIONS');
+    end;
 }
 

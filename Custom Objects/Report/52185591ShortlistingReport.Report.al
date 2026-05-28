@@ -6,51 +6,155 @@ Report 52185591 "Shortlisting Report"
 
     dataset
     {
-        dataitem("HR Job Interview"; "HR Job Interview")
+        //CHANGED FROM HR JOB INTERVIEW TO HR JOB APPLICATIONS FOR SHORTLISTED CANDIDATES
+        dataitem("HR Job Applications"; "HR Job Applications")
         {
-            column(ReportForNavId_1; 1)
+            DataItemTableView = WHERE(Status = CONST(Shortlisted));
+            RequestFilterFields = "Job Application No.", "Job Applied For", "Date Applied", "Employee Requisition No";
+            column(ReportForNavId_1000; 1000)
             {
             }
-            column(ApplicantNo_HRJobInterview; "HR Job Interview"."Applicant No")
+            column(ApplicationNo_HRJobApplications; "HR Job Applications"."Job Application No.")
             {
+                IncludeCaption = true;
             }
-            column(InterviewCode_HRJobInterview; "HR Job Interview"."Interview Code")
+            column(FullName_HRJobApplications; "HR Job Applications"."Full Name")
             {
+                IncludeCaption = true;
             }
-            column(InterviewDescription_HRJobInterview; "HR Job Interview"."Interview Description")
+            column(FirstName_HRJobApplications; "HR Job Applications"."First Name")
             {
+                IncludeCaption = true;
             }
-            column(Score_HRJobInterview; "HR Job Interview".Score)
+            column(MiddleName_HRJobApplications; "HR Job Applications"."Middle Name")
             {
+                IncludeCaption = true;
             }
-            column(TotalScore_HRJobInterview; "HR Job Interview"."Total Score")
+            column(LastName_HRJobApplications; "HR Job Applications"."Last Name")
             {
+                IncludeCaption = true;
             }
-            column(Category_HRJobInterview; "HR Job Interview".Category)
+            column(JobAppliedFor_HRJobApplications; "HR Job Applications"."Job Applied For")
             {
+                IncludeCaption = true;
             }
-            column(SubCategory_HRJobInterview; "HR Job Interview"."Sub Category")
+            column(JobAppliedForDescription_HRJobApplications; "HR Job Applications"."Job Applied for Description")
             {
+                IncludeCaption = true;
             }
-            column(Group_HRJobInterview; "HR Job Interview".Group)
+            column(DateApplied_HRJobApplications; "HR Job Applications"."Date Applied")
             {
+                IncludeCaption = true;
             }
-            column(LineNo_HRJobInterview; "HR Job Interview"."Line No")
+            column(Status_HRJobApplications; "HR Job Applications".Status)
             {
+                IncludeCaption = true;
             }
-            column(Comments_HRJobInterview; "HR Job Interview".Comments)
+            column(IDNumber_HRJobApplications; "HR Job Applications"."ID Number")
             {
+                IncludeCaption = true;
             }
-            column(Interviewer_HRJobInterview; "HR Job Interview".Interviewer)
+            column(Gender_HRJobApplications; "HR Job Applications".Gender)
             {
+                IncludeCaption = true;
             }
-            column(InterviewerName_HRJobInterview; "HR Job Interview"."Interviewer Name")
+            column(CellPhoneNumber_HRJobApplications; "HR Job Applications"."Cell Phone Number")
+            {
+                IncludeCaption = true;
+            }
+            column(EMail_HRJobApplications; "HR Job Applications"."E-Mail")
+            {
+                IncludeCaption = true;
+            }
+            column(EmployeeRequisitionNo_HRJobApplications; "HR Job Applications"."Employee Requisition No")
+            {
+                IncludeCaption = true;
+            }
+            column(TotalScoreAfterShortlisting_HRJobApplications; "HR Job Applications"."Total Score After Shortlisting")
+            {
+                IncludeCaption = true;
+            }
+            column(QualificationsSummary; QualificationsSummary)
             {
             }
             column(Picture; CompInfo.Picture)
             {
             }
+            column(CompanyName; CompInfo.Name)
+            {
+            }
+            column(CompanyAddress; CompInfo.Address)
+            {
+            }
+            column(CompanyPhone; CompInfo."Phone No.")
+            {
+            }
+            column(CompanyEmail; CompInfo."E-Mail")
+            {
+            }
+            
+            trigger OnAfterGetRecord()
+            begin
+                //BUILD QUALIFICATIONS SUMMARY
+                QualificationsSummary := '';
+                HRApplicantQual.Reset();
+                HRApplicantQual.SetRange("Application No", "Job Application No.");
+                if HRApplicantQual.FindSet() then begin
+                    repeat
+                        if QualificationsSummary <> '' then
+                            QualificationsSummary += '; ';
+                        QualificationsSummary += HRApplicantQual."Qualification Description";
+                    until HRApplicantQual.Next() = 0;
+                end;
+            end;
         }
+        
+        //COMMENTED OUT ORIGINAL HR JOB INTERVIEW DATAITEM - NOT NEEDED FOR SHORTLISTED CANDIDATES REPORT
+        //dataitem("HR Job Interview"; "HR Job Interview")
+        //{
+        //    column(ReportForNavId_1; 1)
+        //    {
+        //    }
+        //    column(ApplicantNo_HRJobInterview; "HR Job Interview"."Applicant No")
+        //    {
+        //    }
+        //    column(InterviewCode_HRJobInterview; "HR Job Interview"."Interview Code")
+        //    {
+        //    }
+        //    column(InterviewDescription_HRJobInterview; "HR Job Interview"."Interview Description")
+        //    {
+        //    }
+        //    column(Score_HRJobInterview; "HR Job Interview".Score)
+        //    {
+        //    }
+        //    column(TotalScore_HRJobInterview; "HR Job Interview"."Total Score")
+        //    {
+        //    }
+        //    column(Category_HRJobInterview; "HR Job Interview".Category)
+        //    {
+        //    }
+        //    column(SubCategory_HRJobInterview; "HR Job Interview"."Sub Category")
+        //    {
+        //    }
+        //    column(Group_HRJobInterview; "HR Job Interview".Group)
+        //    {
+        //    }
+        //    column(LineNo_HRJobInterview; "HR Job Interview"."Line No")
+        //    {
+        //    }
+        //    column(Comments_HRJobInterview; "HR Job Interview".Comments)
+        //    {
+        //    }
+        //    column(Interviewer_HRJobInterview; "HR Job Interview".Interviewer)
+        //    {
+        //    }
+        //    column(InterviewerName_HRJobInterview; "HR Job Interview"."Interviewer Name")
+        //    {
+        //    }
+        //    column(Picture; CompInfo.Picture)
+        //    {
+        //    }
+        //}
 
     }
 
@@ -80,4 +184,6 @@ Report 52185591 "Shortlisting Report"
 
     var
         CompInfo: Record "Company Information";
+        HRApplicantQual: Record "HR Applicant Qualifications";
+        QualificationsSummary: Text[1000];
 }
