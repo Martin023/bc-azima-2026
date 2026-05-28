@@ -199,7 +199,7 @@ page 52185804 "Treasury Cashier Transactions"
                 end;
             }
 
-            action("Yesterday Return to Treasury")
+            action("Yesterday Return to Treasury Coinage")
                 {
                     ApplicationArea = Basic, Suite;
                     Promoted = true;
@@ -212,13 +212,16 @@ page 52185804 "Treasury Cashier Transactions"
                         Rec.TestField(Status, Rec.Status::Open);
                         Rec.TestField("Transaction Type", rec."Transaction Type"::"Issue To Teller");
                         Rec.TestField("To Account");
+
+                        if not Confirm('Suggest Yesterday Return to Treasury Coinage for Teller - %1', true, Rec."To Account") then exit;
+
                         Treasury.Reset;
                         Treasury.SetRange("Transaction Type",treasury."Transaction Type"::"End of Day Return to Treasury");
                         Treasury.SetRange(Received,Treasury.Received::Yes);
                         Treasury.SetRange(Posted,true);
                         Treasury.SetRange("From Account",Rec."To Account");
-                        Treasury.SetRange("Date Posted",CalcDate('<-1D>',Today));
-                        if Treasury.FindFirst() then begin
+                        //Treasury.SetRange("Date Posted",CalcDate('<-1D>',Today));
+                        if Treasury.FindLast() then begin
                             Coinage.Reset;
                             Coinage.SetRange(No,Treasury.No);
                             if Coinage.FindSet() then begin

@@ -1048,6 +1048,10 @@ table 52185690 "Product Factory"
         field(10038; "Pension Loan"; Boolean)
         {
         }
+        field(10039; "Dormancy Alert Period"; DateFormula)
+        {
+            Description = 'Account no transactions';
+        }
     }
 
     keys

@@ -383,6 +383,10 @@ table 52186117 "Product Factory Application"
         {
             TableRelation = "Member Classes";
         }
+        field(102; "Dormancy Alert Period"; DateFormula)
+        {
+            Description = 'Account no transactions';
+        }
     }
 
     keys
