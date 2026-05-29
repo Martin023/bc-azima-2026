@@ -10,9 +10,9 @@ XmlPort 52185496 "Import Salaries"
             tableelement("Salary Lines"; "Salary Lines")
             {
                 XmlName = 'SalaryLines';
-                fieldattribute(HNo; "Salary Lines"."Salary Header No.")
-                {
-                }
+                // fieldattribute(HNo; "Salary Lines"."Salary Header No.")
+                // {
+                // }
                 fieldattribute(AccountNo; "Salary Lines"."Account No.")
                 {
                 }
@@ -28,6 +28,20 @@ XmlPort 52185496 "Import Salaries"
                 fieldattribute(Document_No; "Salary Lines"."Document No.")
                 {
                 }
+
+                trigger OnBeforeInsertRecord()
+                begin
+                    if SalaryHeaderNo = '' then
+                        Error('Salary Header No. was not initialized.');
+
+                   if ("Salary Lines"."Member No." = '') and ("Salary Lines"."ID No." = '') and ("Salary Lines"."Staff No." = '') then
+                        Error('Either Member No., ID No., or Staff No. must be provided.');
+
+                    if "Salary Lines".Amount <= 0 then
+                        Error('Amount must be greater than zero.');
+
+                    "Salary Lines"."Salary Header No." := SalaryHeaderNo;
+                end;
 
             }
         }
@@ -46,8 +60,14 @@ XmlPort 52185496 "Import Salaries"
         }
     }
 
+    var 
+        SalaryHeaderNo : Code[50];
     trigger OnPostXmlPort()
     begin
         Message('Salary Uploaded Successfuly');
+    end;
+    procedure SetHeaderNo(HeaderNo: Code[50])
+    begin
+        SalaryHeaderNo := HeaderNo;
     end;
 }

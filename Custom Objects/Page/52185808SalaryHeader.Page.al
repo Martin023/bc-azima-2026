@@ -177,6 +177,7 @@ page 52185808 "Salary Header"
                 trigger OnAction()
                 var
                     SalLines: Record "Salary Lines";
+                    ImportSalaries: XmlPort "Import Salaries";
                 begin
                     if rec.Posted then error('You cannot import salaries for a posted batch');
                     SalLines.Reset;
@@ -184,7 +185,9 @@ page 52185808 "Salary Header"
                     if SalLines.findfirst() then
                         error('You cannot import salaries for a batch that has already been imported. Kindly clear lines first');
                     if rec.status <> rec.status::open then error('Salary batch status must be open');
-                    xmlport.Run(XmlPort::"Import Salaries", true, true);
+                    //xmlport.Run(XmlPort::"Import Salaries", true, true);
+                    ImportSalaries.SetHeaderNo(Rec.No);
+                    ImportSalaries.Run();
                 end;
             }
             group(Process)
