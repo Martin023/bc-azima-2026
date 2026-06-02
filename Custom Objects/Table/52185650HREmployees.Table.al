@@ -9,12 +9,22 @@ table 52185650 "HR Employees"
         field(1; "No."; Code[20])
         {
             trigger OnValidate()
+            var
+                HREmpCheck: Record "HR Employees";
             begin
 
                 if "No." <> xRec."No." then begin
                     HrSetup.Get;
                     NoSeriesMgt.TestManual(HrSetup."Employee Nos.");
                     "No. Series" := '';
+                    
+                    //CHECK FOR DUPLICATE EMPLOYEE NUMBER
+                    if "No." <> '' then begin
+                        HREmpCheck.Reset();
+                        HREmpCheck.SetRange("No.", "No.");
+                        if HREmpCheck.FindFirst() then
+                            Error('EMPLOYEE NUMBER [%1] ALREADY EXISTS. DUPLICATE EMPLOYEE NUMBERS ARE NOT ALLOWED. PLEASE USE A DIFFERENT EMPLOYEE NUMBER.', "No.");
+                    end;
                 end;
             end;
         }
@@ -309,6 +319,8 @@ table 52185650 "HR Employees"
         }
         field(75; "First Language (R/W/S)"; Code[10])
         {
+            //NEW FIELD - ADDED TABLERELATION TO HR LOOKUP VALUES
+            TableRelation = "HR Lookup Values".Code WHERE(Type = CONST(Language));
         }
         field(76; "Driving Licence"; Code[10])
         {
@@ -325,7 +337,7 @@ table 52185650 "HR Employees"
 
             begin
                 // if rec.Disabled = rec.Disabled::yes then begin
-                //     rec.testfield("Certificate No.");
+                //     rec.testfield("KRA Cert. No.");
                 // end;
                 if HrSetup.get then begin
                     HrSetup.testfield("Retirement Age");
@@ -543,9 +555,13 @@ table 52185650 "HR Employees"
         }
         field(104; "Second Language (R/W/S)"; Code[10])
         {
+            //NEW FIELD - ADDED TABLERELATION TO HR LOOKUP VALUES
+            TableRelation = "HR Lookup Values".Code WHERE(Type = CONST(Language));
         }
         field(105; "Additional Language"; Code[10])
         {
+            //NEW FIELD - ADDED TABLERELATION TO HR LOOKUP VALUES
+            TableRelation = "HR Lookup Values".Code WHERE(Type = CONST(Language));
         }
         field(106; "Cell Phone Reimbursement?"; Boolean)
         {
@@ -773,34 +789,45 @@ table 52185650 "HR Employees"
         {
             trigger OnValidate()
             begin
-                HREmp.reset();
-                HrEmp.SetRange("PIN No.", rec."PIN No.");
-                if HREmp.findfirst() then begin
-                    Error('Pin No Already Exists');
+                //CHECK FOR DUPLICATE KRA PIN NUMBER
+                if "PIN No." <> '' then begin
+                    HREmp.Reset();
+                    HREmp.SetRange("PIN No.", "PIN No.");
+                    //EXCLUDE CURRENT RECORD FROM DUPLICATE CHECK
+                    if "No." <> '' then
+                        HREmp.SetFilter("No.", '<>%1', "No.");
+                    if HREmp.FindFirst() then
+                        Error('KRA PIN NUMBER [%1] ALREADY EXISTS FOR EMPLOYEE [%2] - [%3]. DUPLICATE KRA PIN NUMBERS ARE NOT ALLOWED. PLEASE VERIFY THE PIN NUMBER.', "PIN No.", HREmp."No.", HREmp."Full Name");
                 end;
-                If HrEmp.get("No.") then begin
-                    Members.reset();
-                    Members.setrange("Payroll/Staff No.", HREmp."No.");
+                
+                //CHECK IF PIN MATCHES MEMBER RECORD
+                if HrEmp.Get("No.") then begin
+                    Members.Reset();
+                    Members.SetRange("Payroll/Staff No.", HREmp."No.");
                     if Members.FindFirst() then begin
                         if HREmp."PIN No." <> Members."P.I.N Number" then
-                            Message('KRA PIN Does Not Match');
+                            Message('KRA PIN MISMATCH DETECTED:\n\nEmployee Card PIN: %1\nMember Register PIN: %2\n\nThe KRA PIN number on the Employee Card differs from the Member Register. Please verify which PIN is correct and update the Member Register accordingly to maintain data consistency.', HREmp."PIN No.", Members."P.I.N Number");
                     end;
                 end;
+                
+                //VALIDATE PIN FORMAT
                 // if StrPos("PIN No.", 'A') <> 1 then
                 //     Error('First letter must be an A');
                 // end;
 
-                if StrLen("PIN No.") <> 11 then Error('P.I.N Number length must be 11 characters');
+                if StrLen("PIN No.") <> 11 then 
+                    Error('P.I.N Number length must be 11 characters');
 
                 Characters := '1234567890!@#$%^&*()_~{}[];:"|\ ,./<>?-= ''';
-                if not MemberApplication.ValidateShouldNotHaves(CopyStr("PIN No.", 1, 1), Characters) then Error('First character must be a letter');
+                if not MemberApplication.ValidateShouldNotHaves(CopyStr("PIN No.", 1, 1), Characters) then 
+                    Error('First character must be a letter');
 
-                if not MemberApplication.ValidateShouldNotHaves(CopyStr("PIN No.", 11, 1), Characters) then Error('Last character must be a letter');
+                if not MemberApplication.ValidateShouldNotHaves(CopyStr("PIN No.", 11, 1), Characters) then 
+                    Error('Last character must be a letter');
 
                 Characters := '1234567890';
-                if MemberApplication.ValidateShouldNotHaves(CopyStr("PIN No.", 2, 8), Characters) then Error('Pin number must be alphanumeric');
-
-
+                if MemberApplication.ValidateShouldNotHaves(CopyStr("PIN No.", 2, 8), Characters) then 
+                    Error('Pin number must be alphanumeric');
             end;
         }
         field(146; "NSSF No."; Code[20])
@@ -1377,12 +1404,10 @@ table 52185650 "HR Employees"
                     if PrSalInfo.findfirst() then begin
                         PrSalInfo."Days Worked" := DaysWorked;
                         PrSalInfo.Modify(true);
-
-
-
                     end;
-
-
+                    
+                    //CALCULATE YEARS OF SERVICE
+                    CalculateYearsOfService();
                 end;
 
             End;
@@ -1551,8 +1576,13 @@ table 52185650 "HR Employees"
         field(39003944; "PF No."; code[20])
         {
         }
-        field(39003945; "Certificate No."; code[40])
+        //field(39003945; "Certificate No."; code[40])
+        //{
+        //}
+        //NEW FIELD NAME - "KRA Cert. No."
+        field(39003945; "KRA Cert. No."; code[40])
         {
+            Caption = 'KRA Certificate No.';
         }
         field(39003946; "Member No."; code[20])
         {
@@ -1703,11 +1733,16 @@ table 52185650 "HR Employees"
         }
         field(39003964; "Years of service"; decimal)
         {
+            Caption = 'Years of Service';
+            //NEW FIELD - NOT EDITABLE, 2 DECIMAL PLACES
+            Editable = false;
+            DecimalPlaces = 2 : 2;
+            
             trigger OnValidate()
             var
                 myInt: Integer;
             begin
-
+                //AUTO-CALCULATED - NO MANUAL ENTRY
             end;
         }
         field(39003965; "cpd points"; decimal)
@@ -1783,11 +1818,13 @@ table 52185650 "HR Employees"
 
     trigger OnInsert()
     begin
-
+        //AUTO-GENERATE EMPLOYEE NUMBER
         if "No." = '' then begin
             HrSetup.Get;
             HrSetup.TestField("Employee Nos.");
-            NoSeriesMgt.GetNextNo(HrSetup."Employee Nos.", Today, true);
+            //"No." := NoSeriesMgt.GetNextNo(HrSetup."Employee Nos.", Today, true);
+            "No." := NoSeriesMgt.GetNextNo(HrSetup."Employee Nos.");
+            "No. Series" := HrSetup."Employee Nos.";
         end;
     end;
 
@@ -1820,7 +1857,8 @@ table 52185650 "HR Employees"
         Res: Record Resource;
         PostCode: Record "Post Code";
         SalespersonPurchaser: Record "Salesperson/Purchaser";
-        NoSeriesMgt: Codeunit "No. Series - Batch";
+        //NoSeriesMgt: Codeunit "No. Series - Batch";
+        NoSeriesMgt: Codeunit "No. Series";
    
         HrSetup: Record "HR Setup";
         SalCard: Record "PR Salary Card";
@@ -1921,6 +1959,33 @@ table 52185650 "HR Employees"
     local procedure fn_FullName()
     begin
         "Full Name" := "First Name" + ' ' + "Middle Name" + ' ' + "Last Name";
+    end;
+
+    //ADDED PROCEDURE TO CALCULATE YEARS OF SERVICE
+    local procedure CalculateYearsOfService()
+    var
+        YearsDiff: Integer;
+        MonthsDiff: Integer;
+        TotalMonths: Decimal;
+    begin
+        if "Date Of Join" = 0D then begin
+            "Years of service" := 0;
+            exit;
+        end;
+        
+        //CALCULATE YEARS AND MONTHS BETWEEN DATE OF JOIN AND TODAY
+        YearsDiff := Date2DMY(Today, 3) - Date2DMY("Date Of Join", 3);
+        MonthsDiff := Date2DMY(Today, 2) - Date2DMY("Date Of Join", 2);
+        
+        //ADJUST IF MONTHS ARE NEGATIVE
+        if MonthsDiff < 0 then begin
+            YearsDiff := YearsDiff - 1;
+            MonthsDiff := MonthsDiff + 12;
+        end;
+        
+        //CONVERT TO DECIMAL (YEARS.MONTHS)
+        TotalMonths := (YearsDiff * 12) + MonthsDiff;
+        "Years of service" := Round(TotalMonths / 12, 0.01);
     end;
 
     // [Scope('OnPrem')]

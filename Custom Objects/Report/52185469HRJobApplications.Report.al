@@ -137,23 +137,7 @@ Report 52185469 "HR Job Applications"
             {
                 IncludeCaption = true;
             }
-            
-            trigger OnAfterGetRecord()
-            begin
-                //BUILD QUALIFICATIONS SUMMARY FOR LIST VIEW
-                QualificationsSummary := '';
-                if ShowQualificationsSummary then begin
-                    HRApplicantQual.Reset();
-                    HRApplicantQual.SetRange("Application No", "Job Application No.");
-                    if HRApplicantQual.FindSet() then begin
-                        repeat
-                            if QualificationsSummary <> '' then
-                                QualificationsSummary += '; ';
-                            QualificationsSummary += HRApplicantQual."Qualification Description";
-                        until HRApplicantQual.Next() = 0;
-                    end;
-                end;
-            end;
+
             dataitem("HR Applicant Qualifications"; "HR Applicant Qualifications")
             {
                 DataItemLink = "Application No" = field("Job Application No.");
@@ -238,6 +222,23 @@ Report 52185469 "HR Job Applications"
                 {
                 }
             }
+
+            trigger OnAfterGetRecord()
+            begin
+                //BUILD QUALIFICATIONS SUMMARY FOR LIST VIEW
+                QualificationsSummary := '';
+                if ShowQualificationsSummary then begin
+                    HRApplicantQual.Reset();
+                    HRApplicantQual.SetRange("Application No", "Job Application No.");
+                    if HRApplicantQual.FindSet() then begin
+                        repeat
+                            if QualificationsSummary <> '' then
+                                QualificationsSummary += '; ';
+                            QualificationsSummary += HRApplicantQual."Qualification Description";
+                        until HRApplicantQual.Next() = 0;
+                    end;
+                end;
+            end;
         }
     }
 
@@ -299,4 +300,4 @@ Report 52185469 "HR Job Applications"
         HRApplicantQual: Record "HR Applicant Qualifications";
         QualificationsSummary: Text[1000];
 }
-}
+

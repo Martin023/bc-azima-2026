@@ -4481,6 +4481,15 @@
       </DefaultValue>
       <Prompt>LastName_HRJobApplicationsCaption</Prompt>
     </ReportParameter>
+    <ReportParameter Name="FullName_HRJobApplicationsCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>FullName_HRJobApplicationsCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>FullName_HRJobApplicationsCaption</Prompt>
+    </ReportParameter>
     <ReportParameter Name="JobAppliedFor_HRJobApplicationsCaption">
       <DataType>String</DataType>
       <DefaultValue>
@@ -4489,6 +4498,33 @@
         </Values>
       </DefaultValue>
       <Prompt>JobAppliedFor_HRJobApplicationsCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="JobAppliedForDescription_HRJobApplicationsCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>JobAppliedForDescription_HRJobApplicationsCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>JobAppliedForDescription_HRJobApplicationsCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DateApplied_HRJobApplicationsCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>DateApplied_HRJobApplicationsCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>DateApplied_HRJobApplicationsCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Status_HRJobApplicationsCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Status_HRJobApplicationsCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Status_HRJobApplicationsCaption</Prompt>
     </ReportParameter>
     <ReportParameter Name="City_HRJobApplicationsCaption">
       <DataType>String</DataType>
@@ -4821,8 +4857,20 @@ End Function
         <Field Name="LastName_HRJobApplications">
           <DataField>LastName_HRJobApplications</DataField>
         </Field>
+        <Field Name="FullName_HRJobApplications">
+          <DataField>FullName_HRJobApplications</DataField>
+        </Field>
         <Field Name="JobAppliedFor_HRJobApplications">
           <DataField>JobAppliedFor_HRJobApplications</DataField>
+        </Field>
+        <Field Name="JobAppliedForDescription_HRJobApplications">
+          <DataField>JobAppliedForDescription_HRJobApplications</DataField>
+        </Field>
+        <Field Name="DateApplied_HRJobApplications">
+          <DataField>DateApplied_HRJobApplications</DataField>
+        </Field>
+        <Field Name="Status_HRJobApplications">
+          <DataField>Status_HRJobApplications</DataField>
         </Field>
         <Field Name="City_HRJobApplications">
           <DataField>City_HRJobApplications</DataField>
@@ -4856,6 +4904,15 @@ End Function
         </Field>
         <Field Name="PostalAddress_HRJobApplications">
           <DataField>PostalAddress_HRJobApplications</DataField>
+        </Field>
+        <Field Name="QualificationsSummary">
+          <DataField>QualificationsSummary</DataField>
+        </Field>
+        <Field Name="ShowDetailedView">
+          <DataField>ShowDetailedView</DataField>
+        </Field>
+        <Field Name="ShowQualificationsSummary">
+          <DataField>ShowQualificationsSummary</DataField>
         </Field>
         <Field Name="CI_Name">
           <DataField>CI_Name</DataField>

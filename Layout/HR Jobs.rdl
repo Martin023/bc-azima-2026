@@ -840,6 +840,60 @@ End Function
         <Field Name="CommunicationOnline">
           <DataField>CommunicationOnline</DataField>
         </Field>
+        <Field Name="Grade_HRJobs">
+          <DataField>Grade_HRJobs</DataField>
+        </Field>
+        <Field Name="ResponsibilityCenter_HRJobs">
+          <DataField>ResponsibilityCenter_HRJobs</DataField>
+        </Field>
+        <Field Name="GlobalDimension1Code_HRJobs">
+          <DataField>GlobalDimension1Code_HRJobs</DataField>
+        </Field>
+        <Field Name="GlobalDimension2Code_HRJobs">
+          <DataField>GlobalDimension2Code_HRJobs</DataField>
+        </Field>
+        <Field Name="Status_HRJobs">
+          <DataField>Status_HRJobs</DataField>
+        </Field>
+        <Field Name="DateCreated_HRJobs">
+          <DataField>DateCreated_HRJobs</DataField>
+        </Field>
+        <Field Name="ShowJobID">
+          <DataField>ShowJobID</DataField>
+        </Field>
+        <Field Name="ShowJobDescription">
+          <DataField>ShowJobDescription</DataField>
+        </Field>
+        <Field Name="ShowNoOfPosts">
+          <DataField>ShowNoOfPosts</DataField>
+        </Field>
+        <Field Name="ShowPositionReportingTo">
+          <DataField>ShowPositionReportingTo</DataField>
+        </Field>
+        <Field Name="ShowOccupiedPositions">
+          <DataField>ShowOccupiedPositions</DataField>
+        </Field>
+        <Field Name="ShowVacantPositions">
+          <DataField>ShowVacantPositions</DataField>
+        </Field>
+        <Field Name="ShowGrade">
+          <DataField>ShowGrade</DataField>
+        </Field>
+        <Field Name="ShowResponsibilityCenter">
+          <DataField>ShowResponsibilityCenter</DataField>
+        </Field>
+        <Field Name="ShowDimension1">
+          <DataField>ShowDimension1</DataField>
+        </Field>
+        <Field Name="ShowDimension2">
+          <DataField>ShowDimension2</DataField>
+        </Field>
+        <Field Name="ShowStatus">
+          <DataField>ShowStatus</DataField>
+        </Field>
+        <Field Name="ShowDateCreated">
+          <DataField>ShowDateCreated</DataField>
+        </Field>
       </Fields>
       <Query>
         <DataSourceName>DataSource</DataSourceName>
