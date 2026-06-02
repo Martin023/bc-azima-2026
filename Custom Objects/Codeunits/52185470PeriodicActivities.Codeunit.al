@@ -618,8 +618,8 @@ Codeunit 52185470 "Periodic Activities"
         LoansInterest: Record "Loans Interest";
         GeneratesuccMSG: label 'Interest Posted Successfully';
         AlreadyPostedErr: label 'This transaction Has already been posted';
-        NoTemplateErr: label 'Ensure the Bills Template is set up in Cash Office Setup';
-        NoBatchErr: label 'Ensure the Bills Batch is set up in the Cash Office Setup';
+        NoTemplateErr: label 'Ensure the Bills Template is set up in Banking User Template';
+        NoBatchErr: label 'Ensure the Bills Batch is set up in the Banking User Template';
         DailyLoansInterestBuffer: Record "Loans Interest Buffer";
         RunPosting: Boolean;
         LoansRec: Record Loans;
