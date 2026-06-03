@@ -75,18 +75,19 @@ page 52185753 "Loan Application Card"
                     ApplicationArea = Basic, Suite;
                     Caption = 'Work Station';
                 }
-                field("Member Class"; Rec."Member Class")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Member Class';
-                    Editable = false;
-                }
                 field("Work Station Name"; Rec."Work Station Name")
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Work Station Name';
                     Editable = false;
                 }
+                field("Member Class"; Rec."Member Class")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Member Class';
+                    Editable = false;
+                }
+
                 field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = Basic, Suite;
@@ -264,6 +265,11 @@ page 52185753 "Loan Application Card"
                     ApplicationArea = Basic, Suite;
                     // Editable = ApplicationDetailsEdit;
                 }
+                field("Member Age"; Rec."Member Age")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = false;
+                }
                 field("Retirement/Expiry Date"; Rec."Retirement/Expiry Date")
                 {
                     ApplicationArea = Basic, Suite;
@@ -369,12 +375,12 @@ page 52185753 "Loan Application Card"
                     ApplicationArea = Basic, Suite;
                     Editable = ApplicationDetailsEdit;
                 }
-                field("Purpose of Loan"; Rec."Purpose of Loan")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = ApplicationDetailsEdit;
-                    // Visible = false;
-                }
+                // field("Purpose of Loan"; Rec."Purpose of Loan")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Editable = ApplicationDetailsEdit;
+                //     // Visible = false;
+                // }
                 field("Share Boosted Amount"; Rec."Share Boosted Amount")
                 {
                     ApplicationArea = Basic, Suite;
@@ -385,11 +391,11 @@ page 52185753 "Loan Application Card"
                     ApplicationArea = Basic, Suite;
                     Editable = ApplicationDetailsEdit;
                 }
-                // field("Relation Officer"; Rec."Relation Officer")
-                // {
-                //     ApplicationArea = Basic, Suite;
-                //     Editable = ApplicationDetailsEdit;
-                // }
+                field("Relation Officer"; Rec."Relation Officer")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = ApplicationDetailsEdit;
+                }
                 field("Loan Appraised By"; Rec."Loan Appraised By")
                 {
                     ApplicationArea = Basic, Suite;
@@ -427,17 +433,17 @@ page 52185753 "Loan Application Card"
 
                     trigger OnValidate()
                     begin
-                        if Rec."Share Boosted Amount" > Rec."Approved Amount" then
+                        if Rec."Loans - Deposit Purchase" > Rec."Approved Amount" then
                             Error('you cannot share boost more than the approved amount');
-                        if Members.Get(Rec."Member No.") then begin
-                            if Cust.Get(Members."Employer Code") then begin
-                                if Cust."Self Employed" then begin
-                                    Error(ShareBoostError);
-                                    Rec."Share Boosted Amount" := 0.0;
-                                    Rec.Modify;
-                                end;
-                            end;
-                        end;
+                        // if Members.Get(Rec."Member No.") then begin
+                        //     if Cust.Get(Members."Employer Code") then begin
+                        //         if Cust."Self Employed" then begin
+                        //             Error(ShareBoostError);
+                        //             Rec."Loans - Deposit Purchase" := 0.0;
+                        //             Rec.Modify;
+                        //         end;
+                        //     end;
+                        // end;
                     end;
                 }
                 field("Responsibility Centre"; Rec."Responsibility Centre")
@@ -622,14 +628,17 @@ page 52185753 "Loan Application Card"
                 field("Main Sector"; Rec."Main Sector")
                 {
                     ApplicationArea = Basic, Suite;
+                    ShowMandatory = true;
                 }
                 field("Main Sector Description"; Rec."Main Sector Description")
                 {
                     ApplicationArea = Basic, Suite;
+
                 }
                 field("Sub Sector Level1"; Rec."Sub Sector Level1")
                 {
                     ApplicationArea = Basic, Suite;
+                    ShowMandatory = true;
 
                 }
                 field("Sub Sector Level1 Description"; Rec."Sub Sector Level1 Description")
@@ -640,11 +649,13 @@ page 52185753 "Loan Application Card"
                 {
                     Caption = 'Sub Sector Level2';
                     ApplicationArea = Basic, Suite;
+                    ShowMandatory = true;
                 }
                 field("Sub Sector Level2 Description"; Rec."Sub Sector Level2 Description")
                 {
                     ApplicationArea = Basic, Suite;
                     Editable = false;
+
                 }
             }
             group("External STO Details")
@@ -830,8 +841,8 @@ page 52185753 "Loan Application Card"
                 PromotedCategory = Process;
                 PromotedIsBig = true;
                 RunObject = Page "Loan Top Up";
-                RunPageLink = "Loan No." = FIELD("Loan No."),
-                              "Client Code" = FIELD("Member No.");
+                RunPageLink = "Loan No." = FIELD("Loan No.");
+                //   "Client Code" = FIELD("Member No.");
             }
             // action("Loan Appraisal Summary")
             // {
@@ -1012,136 +1023,7 @@ page 52185753 "Loan Application Card"
                     ProdFac: record "Product Factory";
                     LRepaymentSchedule: record "Ideal Repayment Schedule";
                 begin
-                    // if Rec.Posted then
-                    //     Error('The loan is already posted thus cannot generate the schedule');
 
-                    // //Delete schedule
-                    // RSchedule.Reset;
-                    // RSchedule.SetRange(RSchedule."Loan No.", Rec."Loan No.");
-                    // RSchedule.DeleteAll;
-
-                    // QCounter := 0;
-                    // QCounter := 3;
-
-
-
-
-                    // LoansR.Reset;
-                    // LoansR.SetRange(LoansR."Loan No.", Rec."Loan No.");
-                    // if LoansR.Find('-') then begin
-                    //     if Prodfac.get(LoansR."Loan Product Type") then begin
-                    //         Rec.TestField("Disbursement Date");
-                    //         Rec.TestField("Repayment Start Date");
-
-
-                    //         LoanAmount := LoansR."Approved Amount";
-                    //         InterestRate := LoansR.Interest;
-                    //         RepayPeriod := LoansR.Installments;
-                    //         InitialInstal := LoansR.Installments;
-                    //         LBalance := LoansR."Approved Amount";
-                    //         RunDate := Rec."Repayment Start Date";
-                    //         InstalNo := 0;
-                    //         repeat
-                    //             InstalNo := InstalNo + 1;
-                    //             if ProdFac."Interest Recovered Upfront" then begin
-                    //                 LPrincipal := LoanAmount / RepayPeriod;
-                    //                 LInterest := 0;
-                    //             end
-                    //             else begin
-                    //                 if Rec."Interest Calculation Method" = Rec."Interest Calculation Method"::Amortised then begin
-                    //                     Rec.TestField(Interest);
-                    //                     Rec.TestField(Installments);
-                    //                     TotalMRepay := Round((InterestRate / 12 / 100) / (1 - Power((1 + (InterestRate / 12 / 100)), -(RepayPeriod))) * (LoanAmount), 1, '>');
-                    //                     LInterest := Round(LBalance / 100 / 12 * InterestRate, 0.0001, '>');
-                    //                     LPrincipal := TotalMRepay - LInterest;
-                    //                 end;
-
-                    //                 if Rec."Interest Calculation Method" = Rec."Interest Calculation Method"::"Straight Line" then begin
-                    //                     Rec.TestField(Interest);
-                    //                     Rec.TestField(Installments);
-                    //                     LPrincipal := LoanAmount / RepayPeriod;
-                    //                     LInterest := (InterestRate / 12 / 100) * LoanAmount;
-                    //                     // Grace Period Interest
-                    //                     // LInterest:=(LInterest*InitialInstal)/(InitialInstal-InitialGraceInt);
-                    //                 end;
-
-                    //                 if (Rec."Interest Calculation Method" = Rec."Interest Calculation Method"::"Reducing Balance") or
-                    //                   (Rec."Interest Calculation Method" = Rec."Interest Calculation Method"::"Reducing Flat") then begin
-                    //                     Rec.TestField(Interest);
-                    //                     Rec.TestField(Installments);
-                    //                     LPrincipal := LoanAmount / RepayPeriod;
-                    //                     LInterest := Round((InterestRate / 12 / 100) * LBalance, 1.0, '>');
-                    //                 end;
-                    //                 /*
-                    //                 IF "Interest Calculation Method"="Interest Calculation Method"::"Straight Line" THEN BEGIN
-                    //                 TESTFIELD(Repayment);
-                    //                 IF LBalance < Repayment THEN
-                    //                 LPrincipal:=LBalance
-                    //                 ELSE
-                    //                 LPrincipal:=Repayment;
-                    //                 LInterest:=Interest;
-                    //                 END;
-                    //                 */
-                    //                 //kma
-
-
-                    //             end;
-
-
-                    //             //Grace Period
-                    //             if GrPrinciple > 0 then begin
-                    //                 LPrincipal := 0
-                    //             end else begin
-                    //                 //IF "Instalment Period" <> InPeriod THEN
-                    //                 LBalance := LBalance - LPrincipal;
-
-                    //             end;
-
-                    //             if GrInterest > 0 then
-                    //                 LInterest := 0;
-
-                    //             GrPrinciple := GrPrinciple - 1;
-                    //             GrInterest := GrInterest - 1;
-
-                    //             Evaluate(RepayCode, Format(InstalNo));
-
-                    //             RSchedule.Init;
-                    //             RSchedule."Repayment Code" := RepayCode;
-                    //             RSchedule."Loan No." := Rec."Loan No.";
-                    //             RSchedule."Loan Amount" := LoanAmount;
-                    //             RSchedule."Instalment No" := InstalNo;
-                    //             RSchedule."Repayment Date" := RunDate;
-                    //             RSchedule."Member No." := Rec."Member No.";
-                    //             RSchedule."Loan Category" := Rec."Loan Product Type";
-                    //             RSchedule."Monthly Repayment" := Round((LInterest + LPrincipal), 1, '>');
-                    //             RSchedule."Monthly Interest" := LInterest;
-                    //             RSchedule."Principal Repayment" := LPrincipal;
-                    //             RSchedule.Insert;
-
-
-                    //             //Repayment Frequency
-                    //             if Rec."Repayment Frequency" = Rec."Repayment Frequency"::Daily then
-                    //                 RunDate := CalcDate('1D', RunDate)
-                    //             else
-                    //                 if Rec."Repayment Frequency" = Rec."Repayment Frequency"::Weekly then
-                    //                     RunDate := CalcDate('1W', RunDate)
-                    //                 else
-                    //                     if Rec."Repayment Frequency" = Rec."Repayment Frequency"::Monthly then
-                    //                         RunDate := CalcDate('1M', RunDate)
-                    //                     else
-                    //                         if Rec."Repayment Frequency" = Rec."Repayment Frequency"::Quarterly then
-                    //                             RunDate := CalcDate('1Q', RunDate)
-                    //                         else
-                    //                             if Rec."Repayment Frequency" = Rec."Repayment Frequency"::"Bi-Annual" then
-                    //                                 RunDate := CalcDate('6M', RunDate)
-                    //                             else
-                    //                                 if Rec."Repayment Frequency" = Rec."Repayment Frequency"::Yearly then
-                    //                                     RunDate := CalcDate('1Y', RunDate);
-
-                    //         until LBalance < 1
-                    //     end;
-
-                    // end;
                     LRepaymentSchedule.Reset;
                     LRepaymentSchedule.SetRange(LRepaymentSchedule."Loan No.", Rec."Loan No.");
                     LRepaymentSchedule.DeleteAll();
@@ -1490,11 +1372,12 @@ page 52185753 "Loan Application Card"
                     Loan: record Loans;
                     MemberGuarantor: record Members;
                     GlobalFunctions: Codeunit "Global Functions";
+                    LRepaymentSchedule: record "Ideal Repayment Schedule";
                 begin
-                      userSetup.get(USERID);
-                if userSetup."Member No." = Rec."Member No." then begin
-                    Error('You cannot capture your own loan application.');
-                end;
+                    userSetup.get(USERID);
+                    if userSetup."Member No." = Rec."Member No." then begin
+                        Error('You cannot capture your own loan application.');
+                    end;
 
                     //Check minimum requirements
                     Rec.TestField("Recovery Mode");
@@ -1675,8 +1558,23 @@ page 52185753 "Loan Application Card"
                     //Repayment schedule
                     RSchedule.RESET;
                     RSchedule.SETRANGE(RSchedule."Loan No.", rec."Loan No.");
-                    IF NOT RSchedule.FIND('-') THEN
-                        ERROR('Loan repayment schedule must be generated first');
+                    IF NOT RSchedule.FIND('-') THEN begin
+                        if Confirm('Loan repayment schedule has not been generated. Do you want to generate it now?', false) then begin
+                            LRepaymentSchedule.Reset;
+                            LRepaymentSchedule.SetRange(LRepaymentSchedule."Loan No.", Rec."Loan No.");
+                            LRepaymentSchedule.DeleteAll();
+                            LoanProcess.GenerateSchedule(Rec, True);
+
+                            Commit;
+                            LoanApp.Reset;
+                            LoanApp.SetRange(LoanApp."Loan No.", Rec."Loan No.");
+                            if LoanApp.Find('-') then
+                                REPORT.Run(Report::"Ideal Repayment Schedule", true, false, LoanApp);
+                        end
+                        else
+                            ERROR('Loan repayment schedule must be generated first');
+                    end;
+
 
                     //
                     // //Check if product allows multiple loans and if offset

@@ -547,9 +547,6 @@ table 52185729 Loans
                             Error('Member date of birth not captured');
                         Rec."Member Age" := (ROUND((TODAY - memebrrec."Date of Birth") / 365.2364, 1, '<'));
                         Rec."ID No." := memebrrec."Primary Identification";
-                        RetirementDate := CALCDATE(Format(GeneralSetUp."Max. Member Age"), memebrrec."Date of Birth");
-                        TodayDate := TODAY;
-                        Rec."Months to Retire" := (RetirementDate - TodayDate) DIV 30;
                     end;
                     Rec."Employer Code" := memebrrec."Employer Code";
                 end;
@@ -2172,10 +2169,13 @@ table 52185729 Loans
 
             trigger OnValidate()
             begin
-                if "Retirement/Expiry Date" <> 0D then
+                if "Retirement/Expiry Date" <> 0D then begin
                     if "Retirement/Expiry Date" < Today then
                         // Error('This date cannot be less than today');
                         Message('This member is already retired');
+                    "Months to Retire" := round(("Retirement/Expiry Date" - Today) / 30, 1);
+                end;
+
 
                 Validate(Installments);
             end;
