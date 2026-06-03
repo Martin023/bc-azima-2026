@@ -6591,27 +6591,31 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                 end;
                                                                             MpesaTransBuffer."Transaction Type"::"Pay Loan From Account":
                                                                                 begin
-                                                                                    theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() +
-                                                                                ', your internal loan repayment request of KES ' +
-                                                                                        Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
-                                                                                        ' from ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Savings Account" +
-                                                                                        ' to ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Loan Account" +
-                                                                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                                        ' has been completed successfully. Ref: ' + theReference;
+                                                                                    if MpesaTransBuffer."Loan No." <> '' then begin
+                                                                                        if TheDestinationLoan.Get(MpesaTransBuffer."Loan No.") then begin
+                                                                                            theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() +
+                                                                                            ', your internal loan repayment request of KES ' +
+                                                                                                Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
+                                                                                                ' from ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Savings Account" +
+                                                                                                ' to ' + TheDestinationLoan."Loan Product Type Name" + ' ' + MpesaTransBuffer."Loan No." +
+                                                                                                ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                                                ' has been completed successfully. Ref: ' + theReference;
 
-                                                                                    SkySMS.SendSms(
-                                                                                        SMSSource::IFT_LOAN,
-                                                                                        TheSourceMember."Phone No.",
-                                                                                        theSMS,
-                                                                                        theReference,
-                                                                                        '',
-                                                                                        true,
-                                                                                        0,
-                                                                                        true,
-                                                                                        'MBANKING',
-                                                                                        MpesaTransBuffer."Originator ID",
-                                                                                        'CBS'
-                                                                                    );
+                                                                                            SkySMS.SendSms(
+                                                                                                SMSSource::IFT_LOAN,
+                                                                                                TheSourceMember."Phone No.",
+                                                                                                theSMS,
+                                                                                                theReference,
+                                                                                                '',
+                                                                                                true,
+                                                                                                0,
+                                                                                                true,
+                                                                                                'MBANKING',
+                                                                                                MpesaTransBuffer."Originator ID",
+                                                                                                'CBS'
+                                                                                            );
+                                                                                        end;
+                                                                                    end;
                                                                                 end;
 
                                                                         end;
@@ -6723,26 +6727,31 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                     end;
                                                                                 MpesaTransBuffer."Transaction Type"::"Pay Loan From Account":
                                                                                     begin
-                                                                                        theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() +
-                                                                                        ', your internal loan repayment request of KES ' +
-                                                                                        Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
-                                                                                        ' done on ' +
-                                                                                        GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                                        ' has been processed successfully. Ref: ' + theReference;
+                                                                                        if MpesaTransBuffer."Loan No." <> '' then begin
+                                                                                            if TheDestinationLoan.Get(MpesaTransBuffer."Loan No.") then begin
+                                                                                                theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() +
+                                                                                                ', your internal loan repayment request of KES ' +
+                                                                                                    Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
+                                                                                                    ' from ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Savings Account" +
+                                                                                                    ' to ' + TheDestinationLoan."Loan Product Type Name" + ' ' + MpesaTransBuffer."Loan No." +
+                                                                                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                                                    ' has been completed successfully. Ref: ' + theReference;
 
-                                                                                        SkySMS.SendSms(
-                                                                                            SMSSource::IFT_LOAN,
-                                                                                            TheSourceMember."Phone No.",
-                                                                                            theSMS,
-                                                                                            theReference,
-                                                                                            '',
-                                                                                            true,
-                                                                                            0,
-                                                                                            true,
-                                                                                            'MBANKING',
-                                                                                            MpesaTransBuffer."Originator ID",
-                                                                                            'CBS'
-                                                                                        );
+                                                                                                SkySMS.SendSms(
+                                                                                                    SMSSource::IFT_LOAN,
+                                                                                                    TheSourceMember."Phone No.",
+                                                                                                    theSMS,
+                                                                                                    theReference,
+                                                                                                    '',
+                                                                                                    true,
+                                                                                                    0,
+                                                                                                    true,
+                                                                                                    'MBANKING',
+                                                                                                    MpesaTransBuffer."Originator ID",
+                                                                                                    'CBS'
+                                                                                                );
+                                                                                            end;
+                                                                                        end;
                                                                                     end;
 
                                                                             end;
