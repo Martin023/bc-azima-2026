@@ -84,10 +84,10 @@ PageExtension 52185486 pageextension52185486 extends "Accounting Periods"
         {
             ApplicationArea = Basic;
         }
-        modify("Trial Balance")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Trial Balance")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("Fiscal Year Balance")
         {
             ApplicationArea = Basic;

@@ -200,13 +200,13 @@ PageExtension 52185667 pageextension52185667 extends "Bank Account List"
         {
             ApplicationArea = Basic;
         }
-        modify("Trial Balance")
-        {
-            ApplicationArea = Basic;
+        // modify("Trial Balance")
+        // {
+        //     ApplicationArea = Basic;
 
-            //Unsupported feature: Property Insertion (Promoted) on ""Trial Balance"(Action 1904082706)".
+        //     //Unsupported feature: Property Insertion (Promoted) on ""Trial Balance"(Action 1904082706)".
 
-        }
+        // }
         modify("Bank Account Statements")
         {
             ToolTip = 'View, print, or save statements for selected bank accounts. For each bank transaction, the report shows a description, an applied amount, a statement amount, and other information.';

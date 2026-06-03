@@ -628,10 +628,10 @@ PageExtension 52187131 pageextension52187131 extends "Sales Invoice List"
         // {
         //     Visible = false;
         // }
-        modify("Aged Accounts Receivable")
-        {
-            Visible = false;
-        }
+        // modify("Aged Accounts Receivable")
+        // {
+        //     Visible = false;
+        // }
         modify("Customer - Payment Receipt")
         {
             Visible = false;

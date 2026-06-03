@@ -482,10 +482,10 @@ PageExtension 52185496 pageextension52185496 extends Budget
         {
             Visible = false;
         }
-        modify(ReportTrialBalance)
-        {
-            Visible = false;
-        }
+        // modify(ReportTrialBalance)
+        // {
+        //     Visible = false;
+        // }
         modify(ReportBudget)
         {
             Visible = false;

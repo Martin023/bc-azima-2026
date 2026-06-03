@@ -101,10 +101,10 @@ PageExtension 52185591 pageextension52185591 extends "General Journal Batches"
         {
             ApplicationArea = Basic;
         }
-        modify("Trial Balance")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Trial Balance")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("Trial Balance by Period")
         {
             ApplicationArea = Basic;
