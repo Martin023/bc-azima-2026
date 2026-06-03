@@ -21,6 +21,14 @@ page 52185440 "Dividend Header List"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the No. field.', Comment = '%';
                 }
+                field("Start Date"; Rec."Start Date")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("End Date"; Rec."End Date")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field(Year; Rec.Year)
                 {
                     ApplicationArea = All;

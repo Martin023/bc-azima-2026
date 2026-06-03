@@ -128,10 +128,10 @@ PageExtension 52185499 pageextension52185499 extends "G/L Registers"
         {
             ApplicationArea = Basic;
         }
-        modify("Trial Balance")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Trial Balance")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("Trial Balance by Period")
         {
             ApplicationArea = Basic;

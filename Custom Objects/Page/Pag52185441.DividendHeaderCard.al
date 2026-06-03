@@ -22,6 +22,22 @@ page 52185441 "Dividend Header Card"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the No. field.', Comment = '%';
                 }
+                group("Date Filter")
+                {
+                    Caption = 'Date Filter';
+                    field("Start Date"; Rec."Start Date")
+                    {
+                        ApplicationArea = Basic, Suite;
+                    }
+                    field("End Date"; Rec."End Date")
+                    {
+                        ApplicationArea = Basic, Suite;
+                    }
+                    field("Year"; Rec.Year)
+                    {
+                        ApplicationArea = All;
+                    }
+                }
                 field("Branch Code"; Rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = All;
@@ -47,11 +63,17 @@ page 52185441 "Dividend Header Card"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the CreatedOn field.', Comment = '%';
                 }
-                field(Year; Rec.Year)
+                field(Status; Rec.Status)
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+
+                part(DividendLines; "Dividend Progression")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Year field.', Comment = '%';
+                    SubPageLink = "Header No." = field("No.");
                 }
+
             }
         }
     }
@@ -59,6 +81,41 @@ page 52185441 "Dividend Header Card"
     {
         area(Processing)
         {
+            action("Dividend Process")
+            {
+                Caption = 'Generate Dividends';
+                ApplicationArea = Basic, Suite;
+                Image = Add;
+                Promoted = true;
+                PromotedCategory = Process;
+                RunObject = report "Dividend Generation";
+            }
+            
+            action("Clear Progressions")
+            {
+                ApplicationArea = All, Basic, Suite;
+                Caption = 'Clear Dividend Progression';
+                Image = Action;
+                Promoted = true;
+                PromotedCategory = Process;
+
+                trigger OnAction()
+                var
+                    DividendProgression: Record "Dividend Progression";
+                    DividendYear: Label 'Dividend Year';
+                begin
+                    if confirm('Do you wish to clear all unposted dividend progressions?') then begin
+                        DividendProgression.Reset;
+                        DividendProgression.SetRange("Header No.", Rec."No.");
+                        DividendProgression.SetRange(Posted, false);
+                        //DividendProgression.SetRange("Account No", "Savings Accounts"."No.");
+                        DividendProgression.DeleteAll(true);
+                        Message('All unposted dividend progressions have been cleared');
+                    end
+                    else
+                        message('Clearing of dividend progressions cancelled');
+                end;
+            }
             group(Approval)
             {
                 Caption = 'Approval';
@@ -281,7 +338,6 @@ page 52185441 "Dividend Header Card"
     }
 
     var
-        "-": Integer;
         VarVariant: Variant;
         CustomApprovals: Codeunit "Custom Approvals Codeunit";
         OpenApprovalEntriesExistForCurrUser: Boolean;

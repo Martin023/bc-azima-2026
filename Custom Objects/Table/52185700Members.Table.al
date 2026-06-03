@@ -1712,7 +1712,7 @@ table 52185700 Members
         }
         field(1035; "FOSA Account"; Code[50])
         {
-            TableRelation = "Savings Accounts"."No." where("Member No." = field("No."), "Product Category" = filter("FOSA Account"));
+            TableRelation = "Savings Accounts"."No." where("Member No." = field("No."), "Product Type" = filter('191'));
         }
         field(1036; "FOSA Account Status"; Option)
         {
@@ -1914,6 +1914,10 @@ table 52185700 Members
 
     fieldgroups
     {
+        fieldgroup(Dropdown; "No.", Name, "Primary Identification", "Phone No.", "Payroll/Staff No.")
+        {
+        }
+
     }
 
     trigger OnInsert()

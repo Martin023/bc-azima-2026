@@ -2233,7 +2233,7 @@ Codeunit 52185506 "Global Functions"
                 Message('This member is a defaulter Lno. ' + Loans."Loan No.");
 
             if LoanNumbers <> '' then begin
-                Message('This member is a defaulter Loan Number(s): %1', LoanNumbers);
+                Message('This member has a loan that is not performing : Loan Number: %1', LoanNumbers);
             end;
 
             if Members.Subflag = Members.Subflag::Deceased then begin
@@ -2990,9 +2990,9 @@ Codeunit 52185506 "Global Functions"
         exit(Dates);
     end;
 
-    procedure CheckHowLongOneHasBeenAMember (MemberNo: Code[20]): Integer
+    procedure CheckHowLongOneHasBeenAMember(MemberNo: Code[20]): Integer
     var
-    Members : Record Members;
+        Members: Record Members;
     begin
         Members.Reset;
         Members.Setrange("No.", MemberNo);

@@ -106,7 +106,7 @@ Codeunit 52186460 "Dividend Process"
 
     end;
 
-    procedure generateDivdends(DividendAccount: Record "Savings Accounts")
+    procedure generateDivdends(DividendAccount: Record "Savings Accounts"; DivHeader: record "Dividend Header")
     var
         GrossDiv: Decimal;
         WTaxDiv: Decimal;
@@ -134,15 +134,12 @@ Codeunit 52186460 "Dividend Process"
         EndDateToFeed: date;
         I: Integer;
         AccountBal: Decimal;
-        GSetup: Record "General Set-Up";
+        // GSetup: Record "General Set-Up";
         GlobalFunctions: Codeunit "Global Functions";
         TheMember: Record members;
     begin
-        GSetup.GET;
-        getDividendSetup;
-        DividendSetUp.Get;
-        EndDate := DividendSetUp."End Date";
-        StartDate := DividendSetUp."Start Date";
+        EndDate := DivHeader."End Date";
+        StartDate := DivHeader."Start Date";
         YearDateFilter := '';
         //Interest On Deposits
         ProductFactory.RESET;
@@ -158,7 +155,7 @@ Codeunit 52186460 "Dividend Process"
                 CASE ProductFactory."Dividend Calc. Method" OF
                     ProductFactory."Dividend Calc. Method"::"Flat Rate":
                         BEGIN
-                            DateFilter := '..' + FORMAT(DividendSetUp."End Date");
+                            DateFilter := '..' + FORMAT(DivHeader."End Date");
                             DividendAccount.SETFILTER("Date Filter", DateFilter);
                             DividendAccount.SETFILTER("Balance (LCY)", '>0');
                             DividendAccount.CALCFIELDS("Balance (LCY)");
@@ -171,7 +168,7 @@ Codeunit 52186460 "Dividend Process"
                             CreateDividendLines(
                             DividendAccount."No.", TODAY, DividendAccount."Product Type", DividendAccount."Product Name", DividendAccount."Member No.",
                             DividendAccount."Balance (LCY)", DividendAccount."Balance (LCY)", GrossDiv, WTaxDiv, NetDiv,
-                            DividendSetUp."End Date", CalcDate('-CY', DividendSetUp."End Date"), ProductFactory."Dividend Calc. Method", EntrNo, DivPayMode, DividendAccount."Balance (LCY)", TheMember);
+                            DivHeader."End Date", CalcDate('-CY', DivHeader."End Date"), ProductFactory."Dividend Calc. Method", EntrNo, DivPayMode, DividendAccount."Balance (LCY)", TheMember, DivHeader."No.");
                         end;
 
                     ProductFactory."Dividend Calc. Method"::Prorated:
@@ -213,7 +210,7 @@ Codeunit 52186460 "Dividend Process"
                                     //IF DividendAccount."Balance (LCY)" >= ProductFactory."Interest Calc Min Balance" THEN
                                     CreateDividendLines(DividendAccount."No.", TODAY, DividendAccount."Product Type", DividendAccount."Product Name", DividendAccount."Member No.",
                                         QualifyingShares, DividendAccount."Balance (LCY)", GrossDiv, WTaxDiv, NetDiv,
-                                        ToDate, CALCDATE('-CM', ToDate), ProductFactory."Dividend Calc. Method", EntrNo, DivPayMode, DividendAccount."Balance (LCY)", TheMember);
+                                        ToDate, CALCDATE('-CM', ToDate), ProductFactory."Dividend Calc. Method", EntrNo, DivPayMode, DividendAccount."Balance (LCY)", TheMember, DivHeader."No.");
                                     ToDate := CALCDATE('1M+CM', ToDate);
                                     FromDate := CALCDATE('-CM', ToDate);
                                     DateFilter := Format(FromDate) + '..' + Format(ToDate);
@@ -244,10 +241,10 @@ Codeunit 52186460 "Dividend Process"
                                     //IF DividendAccount."Balance (LCY)" >= ProductFactory."Interest Calc Min Balance" THEN
                                     CreateDividendLines(DividendAccount."No.", TODAY, DividendAccount."Product Type", DividendAccount."Product Name", DividendAccount."Member No.",
                                         QualifyingShares, DividendAccount."Balance (LCY)", GrossDiv, WTaxDiv, NetDiv,
-                                        ToDate, CALCDATE('-CM', ToDate), ProductFactory."Dividend Calc. Method", EntrNo, DivPayMode, DividendAccount."Balance (LCY)", TheMember);
+                                        ToDate, CALCDATE('-CM', ToDate), ProductFactory."Dividend Calc. Method", EntrNo, DivPayMode, DividendAccount."Balance (LCY)", TheMember, DivHeader."No.");
                                     ToDate := CALCDATE('1M+CM', ToDate);
                                     FromDate := CALCDATE('-CM', ToDate);
-                                    DateFilter := Format(FromDate) + '..' + Format(ToDate);
+                                    // DateFilter := Format(FromDate) + '..' + Format(ToDate);
                                 END;
                             end;
                         END;
@@ -391,7 +388,7 @@ Codeunit 52186460 "Dividend Process"
 
 
     procedure CreateDividendLines(AccountNo: Code[20]; ProcessingDate: Date; ProductID: Code[20]; ProductName: Text; MemberNo: Code[20]; QualifyingShares: Decimal; DivShares: Decimal; GrossDiv: Decimal; DivWHoldingTax: Decimal; NetDiv: Decimal; DivEndDate: Date; DivStartDate: Date; DivCalcMethod: Option " ","Flat Rate",Prorated; EntrNo: Integer; PayMode: Code[20]; I: Decimal;
-    var TheMember: Record Members)
+    var TheMember: Record Members; DivHeaderNo: Code[20])
     var
         // CustMembr: Record Members;
         DivYear: Integer;
@@ -401,6 +398,7 @@ Codeunit 52186460 "Dividend Process"
         //** IF CustMembr."Dividend Action"=CustMembr."Dividend Action"::Pay THEN BEGIN
         EntrNo += 1;
         DividendProgression.Init;
+        DividendProgression."Header No." := DivHeaderNo;
         DividendProgression."Entry No." := EntrNo;
         DividendProgression."Account No" := AccountNo;
         DividendProgression."Processing Date" := ProcessingDate;
