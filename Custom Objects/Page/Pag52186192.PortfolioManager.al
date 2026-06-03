@@ -7,7 +7,8 @@ page 52186192 "Portfolio Manager List"
     PageType = List;
     SourceTable = "Portfolio Manager";
     UsageCategory = Lists;
-    
+    CardPageId = "Portfolio Manager Card";
+
     layout
     {
         area(Content)
@@ -51,7 +52,7 @@ page 52186192 "Portfolio Manager List"
                     ToolTip = 'Specifies the value of the Transfered field.', Comment = '%';
                 }
             }
-          
+
         }
     }
 }

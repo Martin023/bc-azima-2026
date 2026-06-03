@@ -44,4 +44,5 @@ enum 52185449 "Fosa Transaction Types"
     value(41; "ATM RePIN") { }
     value(42; "MBanking PIN Reset") { }
     value(43; "SMS Charge") { }
+    value(44; Commission) { }
 }
