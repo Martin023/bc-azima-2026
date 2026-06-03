@@ -1,31 +1,87 @@
 table 52185632 "Marketing Teams Header"
 {
-    Caption = 'Marketing Teams Header';
     DataClassification = ToBeClassified;
     DrillDownPageId = "Marketing Teams Header";
 
     fields
     {
-        field(1; No; Code[20])
+        field(1; "Payroll No."; Code[50])
         {
-            Caption = 'No';
+            TableRelation = "HR Employees"."No.";
+            Caption = 'Payroll Staff No';
+            trigger OnValidate()
+                var
+                    SalesRep: Record "Marketing Teams Header";
+                    Members : Record Members;
+                    HREmployees: Record "HR Employees";
+            begin
+                SalesRep.Reset();
+                SalesRep.setRange("Payroll No.", "Payroll No.");
+                if SalesRep.findFirst() then
+                    Error('This Sales rep already exists!');
+
+                IF HREmployees.Get("Payroll No.") THEN BEGIN
+                    Rec."Member No." := HREmployees."Member No.";
+                    Rec."Member Name" := HREmployees."Full Name";
+                    Rec."ID Number" := HREmployees."ID Number";
+                    Rec."Branch Code" := HREmployees."Global Dimension 1 Code";
+                    Rec."Status" := HREmployees.Status;
+                    Rec."Registered By" := UserId;
+                END;
+                
+            end;
+
         }
-        field(2; Name; Text[2048])
+        field(2; "Member No."; Code[20])
         {
-            Caption = 'Name';
+            Caption = 'Member No';
+            Editable = false;
         }
-        field(3; "Type"; Text[2048])
+        field(3; "Member Name"; Text[2048])
         {
-            Caption = 'Type';
+            Caption = 'Member Name';
+            Editable = false;
         }
-        field(4; "No. of Members"; Decimal)
+        field(4; Phone; Code[20])
         {
-            Caption = 'No. of Members';
+            Caption = 'Phone';
+            trigger OnValidate()
+                var
+                    Members: Record Members;
+            begin
+                if Members.get("Member No.") then
+                   Phone := Members."Transactional Mobile Number";
+            end;
         }
+        field(5; "ID Number"; code[20])
+        {
+            Caption = 'ID Number';
+            Editable = false;
+        }
+        field(6; "Branch Code"; Code[50])
+        {
+            Caption = 'Branch Code';
+            Editable = false;
+        }
+        field(7; "Status"; Option)
+        {
+            OptionMembers = New,"Pending Approval",Active,InActive,Suspended,Probation,interdicted,Rejected;
+            Editable = false;
+            Caption = 'Status';
+        }
+        field(8; "Registered By"; Code[200])
+        {
+            Caption = 'Registered By';
+        }
+        field(9; Created; Boolean)
+        {
+            Caption = 'Created';
+        }
+
     }
     keys
     {
-        key(PK; No)
+        key(PK; "Payroll No.")
         {
             Clustered = true;
         }

@@ -8,16 +8,27 @@ Report 52185619 "Member Register"
 
     dataset
     {
+        dataitem(CompanyHeader; "Company Information")
+        {
+            DataItemTableView = sorting("Primary Key");
+            MaxIteration = 1;
+ 
+            column(CompanyInformation_Name; Name)
+            {
+            }
+            column(CompanyInformation_Picture; Picture)
+            {
+            }
+ 
+            trigger OnPreDataItem()
+            begin
+                CalcFields(Picture);  // load BLOB here, once
+            end;
+        }
         dataitem(Members; Members)
         {
-            RequestFilterFields = "No.", Status, "Employer Code", "Registration Date", "Account Type", "Global Dimension 1 Code", "Global Dimension 2 Code", Nationality;
+            RequestFilterFields = "No.", Status, "Employer Code", "Registration Date", "Account Type", "Global Dimension 1 Code", "Global Dimension 2 Code", Nationality,Gender;
             column(ReportForNavId_1; 1)
-            {
-            }
-            column(CompanyInformation_Name; CompanyInformation.Name)
-            {
-            }
-            column(CompanyInformation_Picture; CompanyInformation.Picture)
             {
             }
             column(CompanyAddress; CompanyAddress)
@@ -75,6 +86,12 @@ Report 52185619 "Member Register"
             }
 
             column(Status_Members; Members.Status)
+            {
+            }
+            column(Age; Members."Recruited By Name")
+            {
+            }
+            column(Gender; Members.Gender)
             {
             }
             column(SCount; SNo)
@@ -321,12 +338,11 @@ Report 52185619 "Member Register"
 
     trigger OnPreReport()
     begin
-        if CompanyInformation.Get then
-            CompanyInformation.CalcFields(CompanyInformation.Picture);
-        CompanyAddress := CompanyInformation.Address + ' -Post Code: ' + CompanyInformation."Post Code" + ' -City:' + CompanyInformation.City + ' Region: ' + CompanyInformation."Country/Region Code";
-        CompanyTelephone := 'Tel: ' + CompanyInformation."Phone No." + ' -Office Tel: ' + CompanyInformation."Phone No. 2";
-        CommunicationOnline := 'E-mail: ' + CompanyInformation."E-Mail" + '- Website: ' + CompanyInformation."Home Page";
-
+        if CompanyInformation.Get then begin
+            CompanyAddress := CompanyInformation.Address + ' -Post Code: ' + CompanyInformation."Post Code" + ' -City:' + CompanyInformation.City + ' Region: ' + CompanyInformation."Country/Region Code";
+            CompanyTelephone := 'Tel: ' + CompanyInformation."Phone No." + ' -Office Tel: ' + CompanyInformation."Phone No. 2";
+            CommunicationOnline := 'E-mail: ' + CompanyInformation."E-Mail" + '- Website: ' + CompanyInformation."Home Page";
+        end;
         Sno := 0;
     end;
 

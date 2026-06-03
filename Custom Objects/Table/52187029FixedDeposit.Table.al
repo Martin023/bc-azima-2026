@@ -241,7 +241,7 @@ table 52187029 "Fixed Deposit Contract"
                     "FD Maturity Date" := CalcDate(FixedDepositType.Duration, "Application Date");
                     "FD Duration" := FixedDepositType.Duration;
                     "Product Category" := "Product Category"::"Fixed Deposit";
-                    Message('The FD number of days is - %1', Abs("FD Maturity Date" - "Application Date"));
+                    Message('The FD number of days is %1', Abs("FD Maturity Date" - "Application Date"));
 
                     FDSetup.Reset();
                     FDSetup.SetRange(FDSetup.Code, rec."Fixed Deposit Type");

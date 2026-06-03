@@ -193,6 +193,10 @@ table 52185784 "Salary Lines"
         {
             
         }
+        field(33; "Work Station"; Code[20])
+        {
+            TableRelation = "Electrol Zones/Area Svr Center".Code WHERE(Type = CONST("Area Service Centers"));
+        }
       
     }
 

@@ -241,6 +241,12 @@ page 52187301 "Banking Management Role Center"
                                 Caption = 'EOD Teller Specifications Report';
                                 RunObject = report "Teller Specifications Report";
                             }
+                            action("Counter Summary Report")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Counter Summary Report';
+                                RunObject = report "Counter Summary Report";
+                            }
                         }
                     }
                     group(Receipt)
@@ -295,6 +301,13 @@ page 52187301 "Banking Management Role Center"
                             Caption = 'Pending Treasury & Cashier Transactions';
                             RunObject = page "Treasury Cashier List";
                             RunPageView = where(Posted = const(false), status = const(pending), Issued = const(no));
+                        }
+                        action("Archived Treasury & Cashier Transactions")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Archived Treasury & Cashier Transactions';
+                            RunObject = page "Treasury Cashier List";
+                            RunPageView = where(Posted = const(false), status = const(Archived), Issued = const(no));
                         }
                         action("Approved Treasury & Cashier Transactions")
                         {

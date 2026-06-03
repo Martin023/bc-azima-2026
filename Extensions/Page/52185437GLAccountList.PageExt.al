@@ -122,10 +122,10 @@ PageExtension 52185437 pageextension52185437 extends "G/L Account List"
         {
             ApplicationArea = Basic;
         }
-        modify("Trial Balance")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Trial Balance (Excel)")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("Trial Balance by Period")
         {
             ApplicationArea = Basic;

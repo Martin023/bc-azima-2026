@@ -34,11 +34,11 @@ page 52186055 "All Users Activities"
                 field(Members; Rec.Members)
                 {
                     Caption = 'Active Members';
-                    image = None;
+                    image = People;
                 }
                 field("Member Withdrawal"; Rec."Member Withdrawal")
                 {
-                    image = None;
+                    image = People;
                     trigger OnDrillDown()
                     var
                         MemberWithdrawal: Record "Member withdrawal Notice";
@@ -73,7 +73,7 @@ page 52186055 "All Users Activities"
                 }
                 field(Loans; Rec.Loans)
                 {
-                    image = None;
+                    image = Cash;
                 }
                 field("My Staff Advance Surrender"; Rec."My Staff Advance Surrender")
                 {

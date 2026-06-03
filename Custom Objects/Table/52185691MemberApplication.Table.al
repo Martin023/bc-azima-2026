@@ -483,7 +483,7 @@ table 52185691 "Member Application"
             else
             IF ("Recruited by Type" = CONST("Board Member")) "Delegate Officials"."Member Number"
             else
-            IF ("Recruited by Type" = CONST("Sales Representative")) "HR Employees"."No." where("Staff Category" = const("Sales Representatives"));
+            IF ("Recruited by Type" = CONST("Sales Representative")) "HR Employees" where("Staff Category" = const("Sales Representatives"));
             trigger OnValidate()
             var
                 Members: Record Members;

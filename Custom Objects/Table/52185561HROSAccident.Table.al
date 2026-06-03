@@ -48,7 +48,7 @@ table 52185561 "HR OSAccident"
         field(7; "MNS Driver Name"; Text[100])
         {
         }
-        field(8; "MNS Driver ID No."; Integer)
+        field(8; "MNS Driver ID No."; code[20])
         {
         }
         field(9; "MNS Driver Phone No.";Code[20])

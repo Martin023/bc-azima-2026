@@ -26,7 +26,7 @@ page 52186480 "Unposted Loans Statistics"
                         case
                             Rec."Source Unit" of
                             Rec."Source Unit"::BOSA:
-                                Page.Run(Page::"Loan Application Card_BOSA", Rec);
+                                Page.Run(Page::"Loan Application Card", Rec);
 
                             Rec."Source Unit"::FOSA:
                                 Page.Run(Page::"Loan Application Card_FOSA", Rec);

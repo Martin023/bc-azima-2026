@@ -163,11 +163,11 @@ table 52185688 "Credit Nos. Series"
         {
             TableRelation = "No. Series";
         }
-        field(40; "Loan No Jsort"; Code[20])
+        field(40; "Portfolio Manager"; Code[20])
         {
             TableRelation = "No. Series";
         }
-        field(41; "Loan No Finje"; Code[20])
+        field(41; "Sales Route No."; Code[20])
         {
             TableRelation = "No. Series";
         }

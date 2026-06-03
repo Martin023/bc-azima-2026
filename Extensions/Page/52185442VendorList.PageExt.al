@@ -404,16 +404,16 @@ PageExtension 52185442 pageextension52185442 extends "Vendor List"
             //Unsupported feature: Property Insertion (PromotedCategory) on ""Vendor - Labels"(Action 1905916106)".
 
         }
-        modify("Vendor - Top 10 List")
-        {
-            ApplicationArea = Basic;
+        // modify("Vendor - Top 10 List")
+        // {
+        //     ApplicationArea = Basic;
 
-            //Unsupported feature: Property Insertion (Promoted) on ""Vendor - Top 10 List"(Action 1900497106)".
+        //     //Unsupported feature: Property Insertion (Promoted) on ""Vendor - Top 10 List"(Action 1900497106)".
 
 
-            //Unsupported feature: Property Insertion (PromotedCategory) on ""Vendor - Top 10 List"(Action 1900497106)".
+        //     //Unsupported feature: Property Insertion (PromotedCategory) on ""Vendor - Top 10 List"(Action 1900497106)".
 
-        }
+        // }
         modify("Vendor - Order Summary")
         {
             ApplicationArea = Basic;
@@ -455,14 +455,6 @@ PageExtension 52185442 pageextension52185442 extends "Vendor List"
 
         }
         modify("Purchase Statistics")
-        {
-            ApplicationArea = Basic;
-
-
-
-        }
-
-        modify("Aged Accounts Payable")
         {
             ApplicationArea = Basic;
 

@@ -102,6 +102,7 @@ page 52185794 "Cashier Transactions"
                         FChequeVisible := false;
                         BChequeVisible := false;
                         BReceiptVisible := false;
+                        MPESATYPEVisible := false;
                         BOSAReceiptChequeVisible := false;
                         AllAmount := false;
                         DiscCH := false;
@@ -132,6 +133,10 @@ page 52185794 "Cashier Transactions"
                             BOSAReceiptChequeVisible := true;
                             AllAmount := true;
                         end;
+
+                        if (Rec.Type = Rec.Type::"MPESA Deposit") or (Rec.Type = Rec.Type::"MPESA Withdrawal") then begin
+                            MPESATYPEVisible := true;
+                        end;
                     end;
                 }
                 field(Amount; Rec.Amount)
@@ -155,8 +160,11 @@ page 52185794 "Cashier Transactions"
                         OverMillion := false;
                         //TransTypes.Get(Rec."Transaction Type");
                         //if (TransTypes.Type = TransTypes.Type::"Cash Deposit") OR (TransTypes.Type = TransTypes.Type::"Cash Withdrawal") then begin
-                        if Rec.Amount >= 1000000 then
-                            OverMillion := true;
+                        if Rec.Amount >= 1000000 then begin
+                            OverMillion := true;    
+                            Message('Transactions above 1 million require Source of Funds and Purpose of this Transaction. This will be flagged as an AML transaction.');
+                        end;
+                            
                         //end;
 
                         // Acctypes for deposit to check if amt is > than cashier limit
@@ -316,7 +324,28 @@ page 52185794 "Cashier Transactions"
                     {
                         ApplicationArea = Basic;
                         Caption = 'Bankers Cheque No';
-                        Editable = rec.Type = rec.Type::"Cancel Bankers Cheque";
+                        Editable = (rec.Type = rec.Type::"Cancel Bankers Cheque") or (rec.Type = rec.Type::"Bankers Cheque");
+                    }
+                }
+                group(MPESATYPE)
+                {
+                    Caption = 'M-PESA Information';
+                    Visible = MPESATYPEVisible;
+                    field("Reference Name"; Rec."Reference Name")
+                    {
+                        ApplicationArea = Basic;
+                        ShowMandatory = true;
+
+                    }
+                    field("M-PESA Reference Code"; Rec."Mpesa Reference")
+                    {
+                        ApplicationArea = Basic;
+                        ShowMandatory = true;
+                    }
+                    field("M-PESA Float Balance"; Rec."MPESA Float Balance")
+                    {
+                        ApplicationArea = Basic;
+                        Editable = false;
                     }
                 }
 
@@ -1129,6 +1158,10 @@ page 52185794 "Cashier Transactions"
 
                             if Rec.Amount <= 0 then Error('Amount must be greater than zero');
                         end;
+
+                        if(Rec."Account Type" = Rec."Account Type"::MPESA) then begin
+                            Rec.testField("Mpesa Reference");
+                        end;
                         VarVariant := Rec;
                         if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then
                             CustomApprovals.OnSendDocForApproval(VarVariant);
@@ -1270,6 +1303,7 @@ page 52185794 "Cashier Transactions"
         end;
         FChequeVisible := false;
         BChequeVisible := false;
+        MPESATYPEVisible := false;
         RCheque := false;
         CLien := false;
         OverMillion := false;
@@ -1311,6 +1345,9 @@ page 52185794 "Cashier Transactions"
             BankBankEdit := false
         else
             BankBankEdit := true;
+        if (Rec.Type = Rec.Type::"MPESA Deposit") or (Rec.Type = Rec.Type::"MPESA Withdrawal") then begin
+            MPESATYPEVisible := true;
+        end;
 
         SetControlAppearance;
         UpdateControl;
@@ -1465,6 +1502,7 @@ page 52185794 "Cashier Transactions"
         NumberOfLoans: Integer;
         LoanNumbers: Code[200];
         ReprintSlip: Boolean;
+        MPESATYPEVisible : Boolean;
 
     // TransLien: Boolean;
 

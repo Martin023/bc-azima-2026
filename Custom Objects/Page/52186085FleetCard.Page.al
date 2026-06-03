@@ -298,16 +298,16 @@ page 52186085 "Fleet Card"
                 RunObject = Report "Fixed Asset - Acquisition List";
                 Visible = false;
             }
-            action(Details)
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Details';
-                Image = View;
-                Promoted = true;
-                PromotedCategory = "Report";
-                RunObject = Report "Fixed Asset - Details";
-                Visible = false;
-            }
+            // action(Details)
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Caption = 'Details';
+            //     Image = View;
+            //     Promoted = true;
+            //     PromotedCategory = "Report";
+            //     RunObject = Report "Fixed Asset - Details";
+            //     Visible = false;
+            // }
             action("Book Value 01")
             {
                 ApplicationArea = Basic, Suite;
@@ -330,26 +330,26 @@ page 52186085 "Fleet Card"
                 RunObject = Report "Fixed Asset - Book Value 02";
                 Visible = false;
             }
-            action(Analysis)
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Analysis';
-                Image = "Report";
-                Promoted = true;
-                PromotedCategory = "Report";
-                RunObject = Report "Fixed Asset - Analysis";
-                Visible = false;
-            }
-            action("Projected Value")
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Projected Value';
-                Image = "Report";
-                Promoted = true;
-                PromotedCategory = "Report";
-                RunObject = Report "Fixed Asset - Projected Value";
-                Visible = false;
-            }
+            // action(Analysis)
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Caption = 'Analysis';
+            //     Image = "Report";
+            //     Promoted = true;
+            //     PromotedCategory = "Report";
+            //     RunObject = Report "Fixed Asset - Analysis";
+            //     Visible = false;
+            // }
+            // action("Projected Value")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Caption = 'Projected Value';
+            //     Image = "Report";
+            //     Promoted = true;
+            //     PromotedCategory = "Report";
+            //     RunObject = Report "Fixed Asset - Projected Value";
+            //     Visible = false;
+            // }
             action("G/L Analysis")
             {
                 ApplicationArea = Basic, Suite;

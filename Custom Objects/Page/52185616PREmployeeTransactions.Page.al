@@ -52,11 +52,6 @@ page 52185616 "PR Employee Transactions"
                             //  curTransAmount:=objOcx.fnDisplayFrmlValues(empCode,PeriodMonth,PeriodYear,PRTransactionCodes."Is Formula for employer");
                             Rec."Employer Amount" := curTransAmount;
                         end;
-
-
-                        //  ******************* FOR NIB MWEA *****************************************
-
-                        //  **************************************************************************
                     end;
                 }
                 field("Transaction Name"; Rec."Transaction Name")

@@ -55,11 +55,13 @@ page 52185753 "Loan Application Card"
                         end;
                         if Members.Get(Rec."Member No.") then begin
                             if Members."Phone No." = '' then
-                                Error('Member must have phone number in the system');
+                                MEssage('Member must have phone number in the system');
 
                             if StrLen(Members."Phone No.") < 10 then
-                                Error('Member phone number is not valid');
+                                Message('Member phone number is not valid');
                         end;
+
+
                     end;
                 }
                 field("Staff No"; Rec."Staff No")
@@ -72,6 +74,12 @@ page 52185753 "Loan Application Card"
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Work Station';
+                }
+                field("Member Class"; Rec."Member Class")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Member Class';
+                    Editable = false;
                 }
                 field("Work Station Name"; Rec."Work Station Name")
                 {
@@ -1483,6 +1491,11 @@ page 52185753 "Loan Application Card"
                     MemberGuarantor: record Members;
                     GlobalFunctions: Codeunit "Global Functions";
                 begin
+                      userSetup.get(USERID);
+                if userSetup."Member No." = Rec."Member No." then begin
+                    Error('You cannot capture your own loan application.');
+                end;
+
                     //Check minimum requirements
                     Rec.TestField("Recovery Mode");
                     if rec."Approved Amount" <= 0 then Error('Ensure Approved amount has a value');
@@ -1925,7 +1938,7 @@ page 52185753 "Loan Application Card"
                                                 Format(Loan."Requested Amount") + '. If in dispute call' + ' ' + CompInfo."Phone No.";
 
                                                 SendSMS.SendSms(Source::LOAN_GUARANTORS, Members."Phone No.", msg, Format(Loan."Disbursement Account No"), '', true, 0, false, 'CBS', Loan."Disbursement Account No", 'CBS');
-                                        
+
                                                 LoanGua."SMS Sent" := true;
                                                 LoanGua.Modify;
                                             end;
@@ -1954,6 +1967,7 @@ page 52185753 "Loan Application Card"
             }
             action(Comments)
             {
+                Caption = 'Approval/Rejection Comments';
                 ApplicationArea = Basic, Suite;
                 Image = ViewComments;
                 Promoted = true;
@@ -2523,6 +2537,8 @@ page 52185753 "Loan Application Card"
     end;
 
     trigger OnOpenPage()
+    var
+        Comments: record Comments;
     begin
         StatusControl;
         if UserSetup.Get(Rec."Captured By") then begin
@@ -2573,6 +2589,15 @@ page 52185753 "Loan Application Card"
             else
                 IsShambaLoan := false;
         end;
+        if rec."Member No." <> '' then begin
+            Comments.reset;
+            Comments.SetRange(Comments."Header No.", rec."Member No.");
+            Comments.setrange(Types, Comments.types::"Member Flagging");
+            Comments.setrange("Disable Flag", false);
+            if Comments.Find('-') then
+                Message(Comments."Comment");
+        end;
+
     end;
 
     procedure UploadToEDMS(Rec: Record Loans; FileName: Text; FileContentsB64: Text)

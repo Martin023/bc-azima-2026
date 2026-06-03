@@ -54,7 +54,7 @@ table 52185548 "HR Shortlisted Applicants"
                 fn_FullName;
             end;
         }
-        field(9; "ID No"; Integer)
+        field(9; "ID No"; code[20])
         {
             Editable = false;
         }

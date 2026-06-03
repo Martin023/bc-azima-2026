@@ -511,8 +511,9 @@ table 52185729 Loans
                 OtherAppraisals: Record "Other Apprails products";
                 ProductFactory: Record "Product Factory";
                 ShareBoostAmount: Decimal;
-                GeneralSetUp : Record "General Set-Up";
-                TodayDate : Date;
+                GeneralSetUp: Record "General Set-Up";
+                TodayDate: Date;
+                Comments: record Comments;
             begin
                 GlobalFunctions.FlagAccounts(Rec."Member No.");
                 // LoansProcess.LoanBulkClearence(Rec."Member No.");
@@ -685,6 +686,13 @@ table 52185729 Loans
                     "Residential Address" := Mem."Home Address";
                     // "Global Dimension 1 Code":=Mem."Global Dimension 1 Code";
                     //"Global Dimension 2 Code":=Mem."Global Dimension 2 Code";
+
+                    Comments.reset;
+                    COmments.SetRange(Comments."Header No.", "Member No.");
+                    Comments.setrange(Types, Comments.types::"Member Flagging");
+                    Comments.setrange("Disable Flag", false);
+                    if Comments.Find('-') then
+                        Message(Comments."Comment");
                 end else begin
                     if "Dummy Appraisal" = false then Error('Member does not exist') else Message('Member does not exist');
                 end;
@@ -845,6 +853,10 @@ table 52185729 Loans
                     end;
                 end;
 
+                userSetup.get(USERID);
+                if userSetup."Member No." = Rec."Member No." then begin
+                    Error('You cannot capture your own loan application.');
+                end;
             end;
         }
         field(5; "Requested Amount"; Decimal)
@@ -1023,27 +1035,27 @@ table 52185729 Loans
                         end;
                     end;
                 end;
-                LoanApp.Reset;
-                LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
-                LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");
-                LoanApp.SetRange(LoanApp."Source Unit", LoanApp."Source Unit"::BOSA);
-                LoanApp.SetFilter(LoanApp."Total Loan Balance", '>0');
-                if LoanApp.Find('-') then begin
-                    LoanApp.CalcFields("Total Loan Balance");
-                    if LoanApp."Total Loan Balance" > 0 then begin
-                        LoansTopup.Reset;
-                        LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
-                        LoansTopup.SetRange("Loan Top Up", LoanApp."Loan No.");
-                        if not LoansTopup.Find('-') then begin
-                            LoansTopup.init;
-                            LoansTopup."Loan No." := Rec."Loan No.";
-                            LoansTopup."Client Code" := rec."Member No.";
-                            LoansTopup."Loan Top Up" := LoanApp."Loan No.";
-                            LoansTopup.insert;
-                        end;
+                // LoanApp.Reset;
+                // LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
+                // LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");
+                // LoanApp.SetRange(LoanApp."Source Unit", LoanApp."Source Unit"::BOSA);
+                // LoanApp.SetFilter(LoanApp."Total Loan Balance", '>0');
+                // if LoanApp.Find('-') then begin
+                //     LoanApp.CalcFields("Total Loan Balance");
+                //     if LoanApp."Total Loan Balance" > 0 then begin
+                //         LoansTopup.Reset;
+                //         LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
+                //         LoansTopup.SetRange("Loan Top Up", LoanApp."Loan No.");
+                //         if not LoansTopup.Find('-') then begin
+                //             LoansTopup.init;
+                //             LoansTopup."Loan No." := Rec."Loan No.";
+                //             LoansTopup."Client Code" := rec."Member No.";
+                //             LoansTopup."Loan Top Up" := LoanApp."Loan No.";
+                //             LoansTopup.insert;
+                //         end;
 
-                    end;
-                end;
+                //     end;
+                // end;
                 ProdFac.Reset;
                 ProdFac.SetRange("Product ID", Rec."Loan Product Type");
                 if ProdFac.FindFirst then begin
@@ -1838,6 +1850,14 @@ table 52185729 Loans
                 GlobalFunctions.DisplayLienMessage("Member No.");
                 CheckExceptions;
                 //SendSMSApproval()
+                if (rec.Status = rec.Status::Approved) or (rec.Status = rec.Status::Rejected) then begin
+                    GlobalFunctions.CommentsManagement(Rec."Loan No.");
+
+                    userSetup.get(USERID);
+                    if userSetup."Member No." = Rec."Member No." then begin
+                        Error('You cannot Approve or Reject your own loan application.');
+                    end;
+                end;
 
             end;
 
@@ -2363,7 +2383,7 @@ table 52185729 Loans
             OptionCaption = ' ,03rd,05th,10th,15th,20th,25th,28th';
             OptionMembers = " ","03rd","05th","10th","15th","20th","25th","28th";
         }
-        field(50012; "Member Category"; Code[10])
+        field(50012; "Member Class"; Code[10])
         {
             CalcFormula = Lookup(Members."Member Class" WHERE("No." = FIELD("Member No.")));
             FieldClass = FlowField;

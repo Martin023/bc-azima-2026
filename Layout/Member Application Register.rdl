@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
+  <am:AuthoringMetadata>
+    <am:CreatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.0.20283.0</am:Version>
+    </am:CreatedBy>
+    <am:UpdatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.0.20283.0</am:Version>
+    </am:UpdatedBy>
+    <am:LastModifiedTimestamp>2026-05-21T12:26:17.2560479Z</am:LastModifiedTimestamp>
+  </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource">
@@ -19,25 +30,31 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.63433in</Width>
+                  <Width>0.60855in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.08401in</Width>
+                  <Width>0.70998in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.01281in</Width>
+                  <Width>1.99743in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.86697in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.0753in</Width>
+                  <Width>0.89822in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.79406in</Width>
+                  <Width>0.72114in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.01281in</Width>
+                  <Width>0.6899in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.17111in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.98425in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -303,6 +320,80 @@
                         </Textbox>
                       </CellContents>
                     </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Recruited By</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox2</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BackgroundColor>DarkBlue</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="No_MemberApplication1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Created By</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>No_MemberApplication1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BackgroundColor>DarkBlue</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
@@ -539,12 +630,80 @@
                         </Textbox>
                       </CellContents>
                     </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Recruited_By">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Recruited_By.Value</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Recruited_By</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="CreatedBy_MemberApplication1">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!CreatedBy_MemberApplication.Value</Value>
+                                  <Style>
+                                    <FontFamily>Book Antiqua</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>CreatedBy_MemberApplication1</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
               </TablixRows>
             </TablixBody>
             <TablixColumnHierarchy>
               <TablixMembers>
+                <TablixMember />
+                <TablixMember />
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
@@ -574,7 +733,7 @@
             <Top>0.05556in</Top>
             <Left>0.00821in</Left>
             <Height>0.60416in</Height>
-            <Width>7.48031in</Width>
+            <Width>8.64755in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1572,7 +1731,7 @@
         <Height>10.21742cm</Height>
         <Style />
       </Body>
-      <Width>19.02085cm</Width>
+      <Width>22.24808cm</Width>
       <Page>
         <PageHeader>
           <Height>4.88307cm</Height>
@@ -1600,9 +1759,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
-              <Left>3.65403in</Left>
+              <Top>0.04168in</Top>
+              <Left>5.33781in</Left>
               <Height>0.23264in</Height>
-              <Width>3.45833in</Width>
+              <Width>3.31795in</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1634,10 +1794,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
-              <Top>0.23264in</Top>
-              <Left>3.65403in</Left>
+              <Top>0.27432in</Top>
+              <Left>5.33781in</Left>
               <Height>0.21528in</Height>
-              <Width>3.45833in</Width>
+              <Width>3.31795in</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -1670,10 +1830,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
-              <Top>0.44791in</Top>
-              <Left>3.65403in</Left>
+              <Top>0.48959in</Top>
+              <Left>5.33781in</Left>
               <Height>0.18403in</Height>
-              <Width>3.45833in</Width>
+              <Width>3.31795in</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -1722,10 +1882,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
-              <Top>0.65972in</Top>
-              <Left>3.65403in</Left>
+              <Top>0.7014in</Top>
+              <Left>5.33781in</Left>
               <Height>0.18403in</Height>
-              <Width>3.45833in</Width>
+              <Width>3.31795in</Width>
               <ZIndex>4</ZIndex>
               <Style>
                 <Border>
@@ -1761,7 +1921,7 @@
               <Top>4.10668cm</Top>
               <Left>0.02085cm</Left>
               <Height>0.6cm</Height>
-              <Width>19cm</Width>
+              <Width>21.96478cm</Width>
               <ZIndex>5</ZIndex>
               <Style>
                 <Border>
@@ -2001,7 +2161,7 @@
           </Style>
         </PageFooter>
         <PageHeight>29.7cm</PageHeight>
-        <PageWidth>21cm</PageWidth>
+        <PageWidth>26cm</PageWidth>
         <LeftMargin>1.5cm</LeftMargin>
         <RightMargin>1.5cm</RightMargin>
         <TopMargin>1.5cm</TopMargin>
@@ -2115,6 +2275,9 @@ End Function
         </Field>
         <Field Name="Status_MemberApplication">
           <DataField>Status_MemberApplication</DataField>
+        </Field>
+        <Field Name="Recruited_By">
+          <DataField>Recruited_By</DataField>
         </Field>
         <Field Name="SCount">
           <DataField>SCount</DataField>

@@ -76,6 +76,10 @@ table 52185708 "Dividend SetUp"
         }
         field(20; "Savings Arrears Period"; DateFormula)
         { }
+        field(21; "Div Header No."; Code[30])
+        {
+            TableRelation = "No. Series";
+        }
     }
 
     keys

@@ -32,6 +32,10 @@ page 52185661 "HR Employee List - Active"
                 {
                     ApplicationArea = all;
                 }
+                field("ID Number"; Rec."ID Number")
+                {
+                    ApplicationArea = all;
+                }
                 field("Full Name"; Rec."Full Name")
                 {
                     ApplicationArea = Basic;

@@ -70,7 +70,6 @@ Report 52185659 "SASRA Loan Categorization"
                 {
                     ApplicationArea = Basic;
                     Caption = 'As At';
-                    //Visible = false;
                 }
             }
         }

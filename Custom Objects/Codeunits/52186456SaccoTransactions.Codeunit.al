@@ -1128,7 +1128,9 @@ Codeunit 52186456 "Sacco Transactions"
                 GenJournalLine."Journal Template Name" := JTemplate;
                 GenJournalLine."Journal Batch Name" := JBatch;
                 GenJournalLine."Document No." := CashierTrans.No;
-                GenJournalLine."External Document No." := CashierTrans.No;
+                if (CashierTrans.Type = CashierTrans.Type::"MPESA Deposit") or (CashierTrans.Type = CashierTrans.Type::"MPESA Withdrawal") then
+                    GenJournalLine."External Document No." := CashierTrans."Mpesa Reference" else     
+                    GenJournalLine."External Document No." := CashierTrans.No;
                 GenJournalLine."Line No." := LineNo;
                 GenJournalLine."Account Type" := GenJournalLine."account type"::"Bank Account";
                 GenJournalLine."Account No." := CashierTrans."Account No";
@@ -1154,7 +1156,9 @@ Codeunit 52186456 "Sacco Transactions"
                 GenJournalLine."Journal Template Name" := JTemplate;
                 GenJournalLine."Journal Batch Name" := JBatch;
                 GenJournalLine."Document No." := CashierTrans.No;
-                GenJournalLine."External Document No." := CashierTrans.No;
+                if (CashierTrans.Type = CashierTrans.Type::"MPESA Deposit") or (CashierTrans.Type = CashierTrans.Type::"MPESA Withdrawal") then
+                    GenJournalLine."External Document No." := CashierTrans."Mpesa Reference" else     
+                    GenJournalLine."External Document No." := CashierTrans.No;
                 GenJournalLine."Line No." := LineNo;
                 GenJournalLine."Account Type" := GenJournalLine."Account Type"::"Bank Account";
                 GenJournalLine."Account No." := TillNo;
@@ -2321,8 +2325,8 @@ Codeunit 52186456 "Sacco Transactions"
             if TCTrans.Amount <= 0 then
                 Error(Text0007);
 
-            if TCTrans.Amount <> TCTrans."Total Cash on Treasury Coinage" then
-                Error(Text0008);
+            // if TCTrans.Amount <> TCTrans."Total Cash on Treasury Coinage" then
+            //     Error(Text0008);
 
             if (TCTrans."Transaction Type" = TCTrans."transaction type"::"Issue To Teller") or
             (TCTrans."Transaction Type" = TCTrans."transaction type"::"Return To Treasury") or
@@ -2474,7 +2478,7 @@ Codeunit 52186456 "Sacco Transactions"
         UserSetup: Record "User Setup";
         Text0001: label 'Ensure the Cashier Journal Template is set up in Banking User Setup';
         Text0002: label 'Ensure the Cashier Journal Batch is set up in Banking User Setup';
-        Text0003: label 'Ensure the Default Bank is set up in User Setup';
+        Text0003: label 'Ensure the Default Bank is set up in Banking User Setup';
         Text0007: label 'Please specify an amount greater than zero.';
         ToAccount: Code[20];
         FromAccount: Code[20];

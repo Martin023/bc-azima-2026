@@ -38,7 +38,7 @@ Report 52185446 "End of Day Reconciliation"
             column(TotalPayments; TotalPaymentsAmt) { }
             column(BalCarriedDown; BalCarriedDownAmt) { }
 
-            column(SystemCashAtHand; "Till/Treasury Balance") { }
+            column(SystemCashAtHand; "Till Balance") { }
             column(ActualCashAtHand; "Actual Cash At Hand") { }
             column(Difference; DifferenceAmt) { }
 
@@ -79,11 +79,11 @@ Report 52185446 "End of Day Reconciliation"
                 if Type = Type::Shortage then
                     DifferenceAmt := -DifferenceAmt;
 
-                if "Till/Treasury Balance" <> 0 then begin
+                if "Till Balance" <> 0 then begin
                     if DifferenceAmt = 0 then
                         AccuracyLevelTxt := '100%'
                     else
-                        AccuracyLevelTxt := Format(Round((("Actual Cash At Hand" / "Till/Treasury Balance") * 100), 0.01)) + '%';
+                        AccuracyLevelTxt := Format(Round((("Actual Cash At Hand" / "Till Balance") * 100), 0.01)) + '%';
                 end else
                     AccuracyLevelTxt := '100%';
 

@@ -2,6 +2,7 @@ namespace MNS.MNS;
 using System.Automation;
 using System.Email;
 using System.Utilities;
+using Microsoft.Utilities;
 using Microsoft.Inventory.Item.Catalog;
 using Microsoft.Foundation.Navigate;
 using Microsoft.CashFlow.Forecast;
@@ -105,6 +106,53 @@ page 52186583 "Audit Role center"
                     ApplicationArea = All;
                     Caption = 'AML Cashier Transactions Report';
                     RunObject = report "Anti-Money Laundering Report";
+                }
+            }
+            Group("Audit Logs")
+            {
+                Caption = 'Audit Logs';
+                action("Change Log Entries")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Change Log Entries';
+                    RunObject = page "Change Log Entries";
+                }
+                action("Account Access Log")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Account Access Log';
+                    RunObject = page "Account Access Log";
+                }
+                action("Approval Entry Logs")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Approval Entry Logs';
+                    RunObject = page "Loans Approval Entries";
+                }
+                action("Posted Loans")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted Loans';
+                    RunObject = page "Loan Posted List";
+                }
+
+                action("Error Message Register")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Error Message Register';
+                    RunObject = page "Error Message Register";
+                }
+                action("Error Messages Log")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Error Messages Log';
+                    RunObject = page "Error Messages Log";
+                }
+                action("Activity Log")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Activity Log.';
+                    RunObject = page "Activity Log";
                 }
             }
 
@@ -986,7 +1034,7 @@ page 52186583 "Audit Role center"
                                 Caption = 'Loans Defaulter Aging - SASRA';
                                 RunObject = report "Loans Defaulter Aging - SASRA";
                             }
-                           
+
                             action("SASRA Deposit Return")
                             {
                                 ApplicationArea = Basic, Suite;
@@ -1036,7 +1084,7 @@ page 52186583 "Audit Role center"
                                 Caption = 'Loan Issued Summary';
                                 RunObject = report "Loan Issued Summary";
                             }
-                           
+
                             action("Position on Borrowers in Sacco")
                             {
                                 ApplicationArea = Basic, Suite;
@@ -1169,7 +1217,7 @@ page 52186583 "Audit Role center"
                                 Caption = 'Generate CRB Data';
                                 RunObject = report "Generate CRB Data";
                             }
-                          
+
                         }
                         group("Periodic Activitites Reports")
                         {
@@ -1344,7 +1392,7 @@ page 52186583 "Audit Role center"
                                 Caption = 'Sasra Staff Access Granted';
                                 RunObject = report "Sasra Staff Access Granted";
                             }
-                          
+
                             action("Sasra Staff Positions")
                             {
                                 ApplicationArea = Basic, Suite;
@@ -1418,7 +1466,7 @@ page 52186583 "Audit Role center"
                                 Caption = 'Transaction Log-Finance';
                                 RunObject = XMLPort "Transaction Log-Finance";
                             }
-                           
+
                         }
                     }
                     group("Credit Management Setups")
@@ -1595,7 +1643,7 @@ page 52186583 "Audit Role center"
                                 Caption = 'Cashier Transactions';
                                 runobject = page "Cashier Transactions List";
                             }
-                          
+
                             action("T Cashier Transactions Report")
                             {
                                 ApplicationArea = Basic, Suite;
@@ -1816,7 +1864,8 @@ page 52186583 "Audit Role center"
                         {
                             ApplicationArea = Basic, Suite;
                             Caption = 'Savings Accounts List';
-                            RunObject = page "Savings Accounts";;
+                            RunObject = page "Savings Accounts";
+                            ;
                         }
                         action("Banking Closure List")
                         {
@@ -2208,8 +2257,8 @@ page 52186583 "Audit Role center"
                                 Caption = 'Cashier Transactions';
                                 RunObject = report "Cashier Transactions";
                             }
-                           
-                          
+
+
                         }
                         action("EFT Reports")
                         {
@@ -2285,7 +2334,7 @@ page 52186583 "Audit Role center"
                                 Caption = 'Standing Order';
                                 RunObject = report "Standing Order";
                             }
-                            
+
                             action("Standing Order Register")
                             {
                                 ApplicationArea = Basic, Suite;
@@ -2420,7 +2469,7 @@ page 52186583 "Audit Role center"
                                 RunObject = page "Banking User Setup";
                             }
                         }
-                       
+
 
                     }
                 }
@@ -2491,7 +2540,7 @@ page 52186583 "Audit Role center"
                             Caption = 'Payment Voucher Staff';
                             RunObject = page "Payment Voucher Staff List";
                         }
-                       
+
                         action("Bank & Cash Transfers")
                         {
                             ApplicationArea = Basic, Suite;
@@ -2960,7 +3009,7 @@ page 52186583 "Audit Role center"
                             //     RunObject = Page "Sky Mobile Users";
                             // }
                         }
-        
+
                         group("E-Loans")
                         {
                             Caption = 'Loans';
@@ -3034,7 +3083,7 @@ page 52186583 "Audit Role center"
                             }
 
                         }
-                        
+
                     }
                     group("Internet Banking")
                     {
@@ -3199,26 +3248,6 @@ page 52186583 "Audit Role center"
                 group("Web Portal")
                 {
                     Caption = 'Web Portal';
-
-                    
-                    group("Set Up")
-                    {
-                        action("Portal Setup")
-                        {
-                            ApplicationArea = Basic;
-                            Caption = 'Portal Setup';
-                            RunObject = Page "Portal Setup";
-                        }
-                    }
-                    group("Portal Users")
-                    {
-                        // action(PortalUsers)
-                        // {
-                        //     ApplicationArea = Basic;
-                        //     Caption = 'Portal Users';
-                        //     RunObject = Page "Sky Portal Users";
-                        // }
-                    }
                     group(" Web Portal Transactions")
                     {
                         action("Portal Transactions")
@@ -3259,11 +3288,11 @@ page 52186583 "Audit Role center"
                 {
                     Caption = 'Setups';
 
-                   
-                    
+
+
                 }
             }
-           
+
             group("Advanced HR")
             {
                 group(HREmployeeManagement)
@@ -3592,14 +3621,14 @@ page 52186583 "Audit Role center"
                                 ApplicationArea = Basic, suite;
                                 RunObject = page "HR BSC List Targets1";
                             }
-                           
+
                             action("HR BSC List Quater1")
                             {
                                 Caption = 'HR BSC List Quater1';
                                 ApplicationArea = Basic, suite;
                                 RunObject = page "HR BSC List Qaurter 1";
                             }
-                           
+
                             action("HR BSC List Quater 3")
                             {
                                 Caption = 'HR BSC List Quater 3';
@@ -5280,510 +5309,510 @@ page 52186583 "Audit Role center"
             //     }
             // }
 
-                group(EmployeeSelfService)
-                {
+            group(EmployeeSelfService)
+            {
                 Caption = 'Employee Self Service';
-                    group("Employee Fixed Assets")
-                    {
-                        action("Employee Fixed Asset Transfer List")
-                        {
-                            ApplicationArea = FixedAssets;
-                            Caption = 'Fixed Assets Transfer List';
-                            RunObject = Page "Asset Transfer List";
-                            ToolTip = 'This module facilitates Transfer of FA location and responsible employee';
-                        }
-                        action("Employee Transferred Fixed Assets")
-                        {
-                            ApplicationArea = FixedAssets;
-                            Caption = 'Transferred Fixed Assets';
-                            RunObject = Page "Asset Transfer List Effected";
-                            ToolTip = 'View the list of fixed assets that have been transferred.';
-                        }
-                    }
-                    action(StaffWelfare)
-                    {
-                        Caption = 'Staff Welfare Claim';
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "Staff Welfare List";
-                    }
-                    action(LeaveApplication1)
-                    {
-                        Caption = 'Employee Leave Application';
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "HR Leave Applications List1";
-
-                    }
-                    action("Audit Overtime Claim List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Overtime';
-                        RunObject = page "Overtime Claim List";
-                    }
-
-                    action("Audit System Rights Requisition")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'System Rights Requisition';
-                        RunObject = page "Permission Requisition Card";
-                    }
-
-                    action("Loan Application")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Apply Staff Loan';
-                        RunObject = page "Self Loan Application List";
-                    }
-                    action("Payslip")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Payslip';
-                        RunObject = report "Self Service Slip";
-                    }
-                    // group("Employee Requests")
-                    // {
-
-                    // group("File Requests.")
-                    // {
-                    //     action("Request File")
-                    //     {
-                    //         ApplicationArea = Basic, Suite;
-                    //         Caption = 'Request File';
-                    //         RunObject = page "File Request List";
-                    //         RunPageView = where(Status = filter(open));
-                    //     }
-                    //     action("File Request")
-                    //     {
-                    //         ApplicationArea = Basic, Suite;
-                    //         Caption = 'Files Requested';
-                    //         RunObject = page "File Request List";
-                    //         RunPageView = where(Status = filter(requested));
-                    //     }
-                    //     action("Closed File Request")
-                    //     {
-                    //         ApplicationArea = Basic, Suite;
-                    //         Caption = 'Closed Files Requests.';
-                    //         RunObject = page "File Request List";
-                    //         RunPageView = where(Status = filter(closed));
-                    //     }
-                    //     action("File List")
-                    //     {
-                    //         ApplicationArea = Basic, Suite;
-                    //         Caption = 'File Tracker List';
-                    //         RunObject = page "File Tracker List";
-                    //         RunPageView = where(Status = filter(<> archived));
-                    //     }
-                    // }
-                    //     group("Conf & Meeting Room Booking")
-                    //     {
-                    //         Caption = 'Conf & Meeting Room Aplications';
-                    //         action("Conference Hall & Meeting Rooms")
-                    //         {
-                    //             ApplicationArea = All;
-                    //             Caption = 'Open Bookings';
-                    //             RunObject = page "MNS Conf & Meetings Appl List";
-                    //             RunPageLink = Status = CONST(Open);
-                    //         }
-                    //         action("Pending Conf & Meeting Room Booking")
-                    //         {
-                    //             ApplicationArea = All;
-                    //             Caption = 'Pending Bookings';
-                    //             //RunObject = page "Pending Conf & Meeting - List";
-                    //             RunObject = page "MNS Conf & Meetings Appl List";
-                    //             RunPageLink = Status = CONST(Pending);
-                    //         }
-                    //         action("Approved Conf & Meeting Room Booking")
-                    //         {
-                    //             ApplicationArea = All;
-                    //             Caption = 'Approved Booking';
-                    //             //RunObject = page "Approved Conf & Meeting - List";
-                    //             RunObject = page "MNS Conf & Meetings Appl List";
-                    //             RunPageLink = Status = CONST(Approved);
-                    //         }
-                    //         action("Invoicing for Hire of Halls")
-                    //         {
-                    //             ApplicationArea = All;
-                    //             Caption = 'Invoicing for Hire of Halls';
-                    //             //RunObject = page "Approved Conf & Meeting - List";
-                    //             RunObject = page "MNS Conf & Meetings Appl List";
-                    //             //RunPageLink = Status = CONST(Approved);
-                    //             RunPageView = WHERE(Status = CONST(Approved), "Type of Meeting/Function" = Const(External));
-                    //         }
-                    //         action("Rejected Conf & Meeting Room Booking")
-                    //         {
-                    //             ApplicationArea = All;
-                    //             Caption = 'Declined Bookings';
-                    //             //RunObject = page "Rejected Conf & Meeting - List";
-                    //             RunObject = page "MNS Conf & Meetings Appl List";
-                    //             RunPageLink = Status = CONST(Rejected);
-                    //         }
-                    //         action("Closed Conf & Meeting Room Booking")
-                    //         {
-                    //             ApplicationArea = All;
-                    //             Caption = 'Closed Bookings';
-                    //             //RunObject = page "Closed Conf & Meeting - List";
-                    //             RunObject = page "MNS Conf & Meetings Appl List";
-                    //             RunPageLink = "Status of the Booking" = CONST(Closed);
-                    //         }
-                    //     }
-                    //     Group("Motor Vehicle Requests")
-                    //     {
-                    //         Caption = 'Motor Vehicle Requests';
-                    //         action("Vehicle Request Application")
-                    //         {
-                    //             ApplicationArea = all;
-                    //             Caption = 'Open Vehicle Requests';
-                    //             RunObject = page "Motor Vehicle Request List";
-                    //             RunPageLink = Status = CONST(Open);
-                    //         }
-                    //         action("Pending Vehicle Requests")
-                    //         {
-                    //             ApplicationArea = all;
-                    //             Caption = 'Pending Vehicle Requests';
-                    //             RunObject = page "Motor Vehicle Request List";
-                    //             RunPageLink = Status = CONST(Pending);
-                    //         }
-                    //         action("Approved Vehicle Requests")
-                    //         {
-                    //             ApplicationArea = all;
-                    //             Caption = 'Approved Vehicle Requests';
-                    //             //RunObject = page "Approved Vehicle Req - List";
-                    //             RunObject = page "Motor Vehicle Request List";
-                    //             RunpageLink = Status = CONST(Approved);
-                    //         }
-                    //         action("Deffered Vehicle Requests")
-                    //         {
-                    //             ApplicationArea = all;
-                    //             Caption = 'Deffered Vehicle Requests';
-                    //             RunObject = page "Deffered Vehicle Req - List";
-                    //         }
-                    //         action("Reject Vehicle Requests")
-                    //         {
-                    //             ApplicationArea = all;
-                    //             Caption = 'Rejected Vehicle Requests';
-                    //             //RunObject = page "Rejected Vehicle Req - List";
-                    //             RunObject = page "Motor Vehicle Request List";
-                    //             RunPageLink = Status = CONST(Rejected);
-                    //         }
-                    //         action("Closed Vehicle Request")
-                    //         {
-                    //             ApplicationArea = all;
-                    //             Caption = 'Closed Vehicle Request';
-                    //             //RunObject = page "Closed Vehicle Req - List";
-                    //             RunObject = page "Motor Vehicle Request List";
-                    //             RunPageLink = Status = CONST(Closed);
-                    //         }
-                    //         action("Reallocated Requests")
-                    //         {
-                    //             ApplicationArea = all;
-                    //             Caption = 'Reallocated Requests';
-                    //             RunObject = page "Motor Vehicle Request List";
-                    //             RunPageLink = Reallocated = CONST(TRUE);
-                    //         }
-                    //     }
-                    //     group("Key Requests")
-                    //     {
-                    //         action("Open Keys Request")
-                    //         {
-                    //             ApplicationArea = All;
-                    //             Caption = 'Office Keys Request';
-                    //             RunObject = page "Key Request List";
-                    //             RunPageLink = Status = CONST(Open);
-                    //         }
-                    //         action("Pending Keys Request")
-                    //         {
-                    //             ApplicationArea = All;
-                    //             Caption = 'Pending Requests';
-                    //             RunObject = page "Key Request List";
-                    //             RunPageLink = Status = CONST(Pending);
-                    //         }
-                    //         action("Approved Keys Request")
-                    //         {
-                    //             ApplicationArea = All;
-                    //             Caption = 'Approved Requests';
-                    //             RunObject = page "Key Request List";
-                    //             RunPageLink = Status = CONST(Approved);
-                    //         }
-                    //         action("Rejected Keys Request")
-                    //         {
-                    //             ApplicationArea = All;
-                    //             Caption = 'Rejected Key Request';
-                    //             RunObject = page "Key Request List";
-                    //             RunPageLink = Status = CONST(Rejected);
-                    //         }
-                    //         action("Closed Keys Request")
-                    //         {
-                    //             ApplicationArea = All;
-                    //             Caption = 'Closed Key Requests';
-                    //             RunObject = page "Key Request List";
-                    //             RunPageLink = "Key Status" = CONST(Received);
-                    //         }
-                    //     }
-                    //     Group("Parking Allocation")
-                    //     {
-                    //         action("Parking Space List")
-                    //         {
-                    //             ApplicationArea = All;
-                    //             Caption = 'Open Parking Application';
-                    //             RunObject = page "Parking Space List";
-                    //             RunPageLink = Status = CONST(Open);
-                    //         }
-                    //         action("Pending Parking Space Application")
-                    //         {
-                    //             ApplicationArea = All;
-                    //             Caption = 'Pending Parking Allocation';
-                    //             //RunObject = page "Approved Parking - List";
-                    //             RunObject = page "Parking Space List";
-                    //             RunPageLink = Status = CONST(Pending);
-                    //         }
-                    //         action("Approved Parking Space Application")
-                    //         {
-                    //             ApplicationArea = All;
-                    //             Caption = 'Approved Parking Allocation';
-                    //             //RunObject = page "Approved Parking - List";
-                    //             RunObject = page "Parking Space List";
-                    //             RunPageLink = Status = CONST(Approved);
-                    //         }
-                    //         action("Rejected Parking Space Application")
-                    //         {
-                    //             ApplicationArea = All;
-                    //             Caption = 'Rejected Parking Allocation';
-                    //             //RunObject = page "Rejected Parking Space - List";
-                    //             RunObject = page "Parking Space List";
-                    //             RunPageLink = Status = CONST(Rejected);
-                    //         }
-                    //     }
-                    // }
-
-                }
-                group(" Audit Setups")
+                group("Employee Fixed Assets")
                 {
-                    Caption = 'Setups';
-                    group("CRM")
+                    action("Employee Fixed Asset Transfer List")
                     {
-                        Caption = 'CRM';
-                        action("CRM API Setup")
-                        {
-                            ApplicationArea = Basic;
-                            Caption = 'CRM API Setup';
-                            RunObject = Page "CRM API Setup";
-                        }
-                        action("CRM Landing Departments")
-                        {
-                            ApplicationArea = Basic;
-                            Caption = 'CRM Landing Departments';
-                            RunObject = Page "CRM Originations Setup";
-                        }
+                        ApplicationArea = FixedAssets;
+                        Caption = 'Fixed Assets Transfer List';
+                        RunObject = Page "Asset Transfer List";
+                        ToolTip = 'This module facilitates Transfer of FA location and responsible employee';
                     }
-                    group("EDMS")
+                    action("Employee Transferred Fixed Assets")
                     {
-                        Caption = 'EDMS';
-                        action("EDMS API Setup")
-                        {
-                            ApplicationArea = Basic;
-                            Caption = 'EDMS API Setup';
-                            RunObject = Page "EDMS API Setup";
-                        }
-                    }
-                    group("CRB")
-                    {
-                        Caption = 'CRB';
-                        action("CRB Metropol")
-                        {
-                            ApplicationArea = Basic;
-                            Caption = 'CRB Metropol API Setup';
-                            RunObject = Page "CRB Metropol API Setup";
-                        }
-
-                        action("CRB Trans Union")
-                        {
-                            ApplicationArea = Basic;
-                            Caption = 'CRB Trans Union API Setup';
-                            RunObject = Page "CRB Trans Union API Setup";
-                        }
-                    }
-
-
-
-                    group("API")
-                    {
-                        Caption = 'API';
-                        action("API Logs")
-                        {
-                            ApplicationArea = Basic;
-                            Caption = 'API Logs';
-                            RunObject = Page "BC API Logs List";
-                        }
+                        ApplicationArea = FixedAssets;
+                        Caption = 'Transferred Fixed Assets';
+                        RunObject = Page "Asset Transfer List Effected";
+                        ToolTip = 'View the list of fixed assets that have been transferred.';
                     }
                 }
-                group("Audit - Reports")
+                action(StaffWelfare)
                 {
-                    Caption = 'Reports';
-                    action("Member Share By Category")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Member Share By Category';
-                        RunObject = report "Member Share By Category";
-                    }
-                    action("Loans Arr. HISTORICAL")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Loans Arrears HISTORICAL';
-                        RunObject = report "Loans Arrears HISTORICAL";
-                    }
-                    action("Ind Member Lifetime Value Rep")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Individual Member Lifetime Value Rep';
-                        RunObject = report "Ind Member Lifetime Value Rep";
-                    }
-                    action("Member Lifetime Value")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Member Lifetime Value';
-                        RunObject = report "Member Lifetime Value";
-                    }
-                    action("Loan Products Report")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Loan Products Report';
-                        RunObject = report "Loan Products Report";
-                    }
-                    action("Savings Products Report")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Savings Products Report';
-                        RunObject = report "Savings Products Report";
-                    }
-                    action("Savings Account Register")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Savings Account Register';
-                        RunObject = page "Savings Accounts";
-                    }
-
-                    action("Deposits Accumulated Over Time")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Deposits Accumulated Over Time';
-                        RunObject = report "Deposits Accumulated Over Time";
-                    }
-                    action("Salary Accounts Report")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Salary Accounts Report';
-                        RunObject = report "Salary Accounts Report";
-                    }
-                    action("Loans TAT")
-                    {
-                        ApplicationArea = Basic;
-                        Caption = 'Loans TAT';
-                        RunObject = report "Loans TAT";
-                    }
-                    action("Loan Variation TAT")
-                    {
-                        ApplicationArea = Basic;
-
-                        RunObject = report " Loan Variation TAT";
-                    }
-                    action("Deposit Variation TAT")
-                    {
-                        ApplicationArea = Basic;
-
-                        RunObject = report "Deposit Variation ";
-                    }
-                    // action("BBF TAT")
-                    // {
-                    //     ApplicationArea = Basic;
-
-                    //     RunObject = report "BBF TAT";
-                    // }
-                    // action("BBF Insurance TAT")
-                    // {
-                    //     ApplicationArea = Basic;
-
-                    //     RunObject = report "BBF Insurance TAT";
-                    // }
-                    // action("Risk Claim TAT")
-                    // {
-                    //     ApplicationArea = Basic;
-
-                    //     RunObject = report "Risk Claim TAT Report";
-                    // }
-                    action("Institutional Capital TAT")
-                    {
-                        ApplicationArea = Basic;
-
-                        RunObject = report "Institutional Capital TAT";
-                    }
-                    // action("Business Loans TAT")
-                    // {
-                    //     ApplicationArea = Basic;
-
-                    //     RunObject = report "Business Loans TAT";
-                    // }
-                    action("Guarantor Substitution TAT")
-                    {
-                        ApplicationArea = Basic;
-
-                        RunObject = report "Guarantor Substitution TAT";
-                    }
-                    action("Member Withdrawal TAT")
-                    {
-                        ApplicationArea = Basic;
-
-                        RunObject = report "Member Withdrawal TAT";
-                    }
-                    action("Member Readmission TAT")
-                    {
-                        ApplicationArea = Basic;
-
-                        RunObject = report "Member Readmission TAT";
-                    }
-                    action("Member Edit TAT")
-                    {
-                        ApplicationArea = Basic;
-
-                        RunObject = report "Member Edit TAT Report";
-                    }
-                    // action("Membership TAT")
-                    // {
-                    //     ApplicationArea = Basic;
-
-                    //     RunObject = report "CRM Member TAT Report ";
-                    // }
-                    // action("Member Commission")
-                    // {
-                    //     ApplicationArea = Basic;
-
-                    //     RunObject = report "Member Commission";
-                    // }
-
-                    action("Staff Daily Transactions")
-                    {
-                        ApplicationArea = Basic;
-                        RunObject = report "Staff Daily Transactions";
-                    }
+                    Caption = 'Staff Welfare Claim';
+                    ApplicationArea = Basic, Suite;
+                    RunObject = page "Staff Welfare List";
                 }
+                action(LeaveApplication1)
+                {
+                    Caption = 'Employee Leave Application';
+                    ApplicationArea = Basic, Suite;
+                    RunObject = page "HR Leave Applications List1";
+
+                }
+                action("Audit Overtime Claim List")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Overtime';
+                    RunObject = page "Overtime Claim List";
+                }
+
+                action("Audit System Rights Requisition")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'System Rights Requisition';
+                    RunObject = page "Permission Requisition Card";
+                }
+
+                action("Loan Application")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Apply Staff Loan';
+                    RunObject = page "Self Loan Application List";
+                }
+                action("Payslip")
+                {
+                    ApplicationArea = all;
+                    Caption = 'Payslip';
+                    RunObject = report "Self Service Slip";
+                }
+                // group("Employee Requests")
+                // {
+
+                // group("File Requests.")
+                // {
+                //     action("Request File")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Request File';
+                //         RunObject = page "File Request List";
+                //         RunPageView = where(Status = filter(open));
+                //     }
+                //     action("File Request")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Files Requested';
+                //         RunObject = page "File Request List";
+                //         RunPageView = where(Status = filter(requested));
+                //     }
+                //     action("Closed File Request")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Closed Files Requests.';
+                //         RunObject = page "File Request List";
+                //         RunPageView = where(Status = filter(closed));
+                //     }
+                //     action("File List")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'File Tracker List';
+                //         RunObject = page "File Tracker List";
+                //         RunPageView = where(Status = filter(<> archived));
+                //     }
+                // }
+                //     group("Conf & Meeting Room Booking")
+                //     {
+                //         Caption = 'Conf & Meeting Room Aplications';
+                //         action("Conference Hall & Meeting Rooms")
+                //         {
+                //             ApplicationArea = All;
+                //             Caption = 'Open Bookings';
+                //             RunObject = page "MNS Conf & Meetings Appl List";
+                //             RunPageLink = Status = CONST(Open);
+                //         }
+                //         action("Pending Conf & Meeting Room Booking")
+                //         {
+                //             ApplicationArea = All;
+                //             Caption = 'Pending Bookings';
+                //             //RunObject = page "Pending Conf & Meeting - List";
+                //             RunObject = page "MNS Conf & Meetings Appl List";
+                //             RunPageLink = Status = CONST(Pending);
+                //         }
+                //         action("Approved Conf & Meeting Room Booking")
+                //         {
+                //             ApplicationArea = All;
+                //             Caption = 'Approved Booking';
+                //             //RunObject = page "Approved Conf & Meeting - List";
+                //             RunObject = page "MNS Conf & Meetings Appl List";
+                //             RunPageLink = Status = CONST(Approved);
+                //         }
+                //         action("Invoicing for Hire of Halls")
+                //         {
+                //             ApplicationArea = All;
+                //             Caption = 'Invoicing for Hire of Halls';
+                //             //RunObject = page "Approved Conf & Meeting - List";
+                //             RunObject = page "MNS Conf & Meetings Appl List";
+                //             //RunPageLink = Status = CONST(Approved);
+                //             RunPageView = WHERE(Status = CONST(Approved), "Type of Meeting/Function" = Const(External));
+                //         }
+                //         action("Rejected Conf & Meeting Room Booking")
+                //         {
+                //             ApplicationArea = All;
+                //             Caption = 'Declined Bookings';
+                //             //RunObject = page "Rejected Conf & Meeting - List";
+                //             RunObject = page "MNS Conf & Meetings Appl List";
+                //             RunPageLink = Status = CONST(Rejected);
+                //         }
+                //         action("Closed Conf & Meeting Room Booking")
+                //         {
+                //             ApplicationArea = All;
+                //             Caption = 'Closed Bookings';
+                //             //RunObject = page "Closed Conf & Meeting - List";
+                //             RunObject = page "MNS Conf & Meetings Appl List";
+                //             RunPageLink = "Status of the Booking" = CONST(Closed);
+                //         }
+                //     }
+                //     Group("Motor Vehicle Requests")
+                //     {
+                //         Caption = 'Motor Vehicle Requests';
+                //         action("Vehicle Request Application")
+                //         {
+                //             ApplicationArea = all;
+                //             Caption = 'Open Vehicle Requests';
+                //             RunObject = page "Motor Vehicle Request List";
+                //             RunPageLink = Status = CONST(Open);
+                //         }
+                //         action("Pending Vehicle Requests")
+                //         {
+                //             ApplicationArea = all;
+                //             Caption = 'Pending Vehicle Requests';
+                //             RunObject = page "Motor Vehicle Request List";
+                //             RunPageLink = Status = CONST(Pending);
+                //         }
+                //         action("Approved Vehicle Requests")
+                //         {
+                //             ApplicationArea = all;
+                //             Caption = 'Approved Vehicle Requests';
+                //             //RunObject = page "Approved Vehicle Req - List";
+                //             RunObject = page "Motor Vehicle Request List";
+                //             RunpageLink = Status = CONST(Approved);
+                //         }
+                //         action("Deffered Vehicle Requests")
+                //         {
+                //             ApplicationArea = all;
+                //             Caption = 'Deffered Vehicle Requests';
+                //             RunObject = page "Deffered Vehicle Req - List";
+                //         }
+                //         action("Reject Vehicle Requests")
+                //         {
+                //             ApplicationArea = all;
+                //             Caption = 'Rejected Vehicle Requests';
+                //             //RunObject = page "Rejected Vehicle Req - List";
+                //             RunObject = page "Motor Vehicle Request List";
+                //             RunPageLink = Status = CONST(Rejected);
+                //         }
+                //         action("Closed Vehicle Request")
+                //         {
+                //             ApplicationArea = all;
+                //             Caption = 'Closed Vehicle Request';
+                //             //RunObject = page "Closed Vehicle Req - List";
+                //             RunObject = page "Motor Vehicle Request List";
+                //             RunPageLink = Status = CONST(Closed);
+                //         }
+                //         action("Reallocated Requests")
+                //         {
+                //             ApplicationArea = all;
+                //             Caption = 'Reallocated Requests';
+                //             RunObject = page "Motor Vehicle Request List";
+                //             RunPageLink = Reallocated = CONST(TRUE);
+                //         }
+                //     }
+                //     group("Key Requests")
+                //     {
+                //         action("Open Keys Request")
+                //         {
+                //             ApplicationArea = All;
+                //             Caption = 'Office Keys Request';
+                //             RunObject = page "Key Request List";
+                //             RunPageLink = Status = CONST(Open);
+                //         }
+                //         action("Pending Keys Request")
+                //         {
+                //             ApplicationArea = All;
+                //             Caption = 'Pending Requests';
+                //             RunObject = page "Key Request List";
+                //             RunPageLink = Status = CONST(Pending);
+                //         }
+                //         action("Approved Keys Request")
+                //         {
+                //             ApplicationArea = All;
+                //             Caption = 'Approved Requests';
+                //             RunObject = page "Key Request List";
+                //             RunPageLink = Status = CONST(Approved);
+                //         }
+                //         action("Rejected Keys Request")
+                //         {
+                //             ApplicationArea = All;
+                //             Caption = 'Rejected Key Request';
+                //             RunObject = page "Key Request List";
+                //             RunPageLink = Status = CONST(Rejected);
+                //         }
+                //         action("Closed Keys Request")
+                //         {
+                //             ApplicationArea = All;
+                //             Caption = 'Closed Key Requests';
+                //             RunObject = page "Key Request List";
+                //             RunPageLink = "Key Status" = CONST(Received);
+                //         }
+                //     }
+                //     Group("Parking Allocation")
+                //     {
+                //         action("Parking Space List")
+                //         {
+                //             ApplicationArea = All;
+                //             Caption = 'Open Parking Application';
+                //             RunObject = page "Parking Space List";
+                //             RunPageLink = Status = CONST(Open);
+                //         }
+                //         action("Pending Parking Space Application")
+                //         {
+                //             ApplicationArea = All;
+                //             Caption = 'Pending Parking Allocation';
+                //             //RunObject = page "Approved Parking - List";
+                //             RunObject = page "Parking Space List";
+                //             RunPageLink = Status = CONST(Pending);
+                //         }
+                //         action("Approved Parking Space Application")
+                //         {
+                //             ApplicationArea = All;
+                //             Caption = 'Approved Parking Allocation';
+                //             //RunObject = page "Approved Parking - List";
+                //             RunObject = page "Parking Space List";
+                //             RunPageLink = Status = CONST(Approved);
+                //         }
+                //         action("Rejected Parking Space Application")
+                //         {
+                //             ApplicationArea = All;
+                //             Caption = 'Rejected Parking Allocation';
+                //             //RunObject = page "Rejected Parking Space - List";
+                //             RunObject = page "Parking Space List";
+                //             RunPageLink = Status = CONST(Rejected);
+                //         }
+                //     }
+                // }
 
             }
-            
+            group(" Audit Setups")
+            {
+                Caption = 'Setups';
+                group("CRM")
+                {
+                    Caption = 'CRM';
+                    action("CRM API Setup")
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'CRM API Setup';
+                        RunObject = Page "CRM API Setup";
+                    }
+                    action("CRM Landing Departments")
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'CRM Landing Departments';
+                        RunObject = Page "CRM Originations Setup";
+                    }
+                }
+                group("EDMS")
+                {
+                    Caption = 'EDMS';
+                    action("EDMS API Setup")
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'EDMS API Setup';
+                        RunObject = Page "EDMS API Setup";
+                    }
+                }
+                group("CRB")
+                {
+                    Caption = 'CRB';
+                    action("CRB Metropol")
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'CRB Metropol API Setup';
+                        RunObject = Page "CRB Metropol API Setup";
+                    }
+
+                    action("CRB Trans Union")
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'CRB Trans Union API Setup';
+                        RunObject = Page "CRB Trans Union API Setup";
+                    }
+                }
+
+
+
+                group("API")
+                {
+                    Caption = 'API';
+                    action("API Logs")
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'API Logs';
+                        RunObject = Page "BC API Logs List";
+                    }
+                }
+            }
+            group("Audit - Reports")
+            {
+                Caption = 'Reports';
+                action("Member Share By Category")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Member Share By Category';
+                    RunObject = report "Member Share By Category";
+                }
+                action("Loans Arr. HISTORICAL")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Loans Arrears HISTORICAL';
+                    RunObject = report "Loans Arrears HISTORICAL";
+                }
+                action("Ind Member Lifetime Value Rep")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Individual Member Lifetime Value Rep';
+                    RunObject = report "Ind Member Lifetime Value Rep";
+                }
+                action("Member Lifetime Value")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Member Lifetime Value';
+                    RunObject = report "Member Lifetime Value";
+                }
+                action("Loan Products Report")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Loan Products Report';
+                    RunObject = report "Loan Products Report";
+                }
+                action("Savings Products Report")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Savings Products Report';
+                    RunObject = report "Savings Products Report";
+                }
+                action("Savings Account Register")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Savings Account Register';
+                    RunObject = page "Savings Accounts";
+                }
+
+                action("Deposits Accumulated Over Time")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Deposits Accumulated Over Time';
+                    RunObject = report "Deposits Accumulated Over Time";
+                }
+                action("Salary Accounts Report")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Salary Accounts Report';
+                    RunObject = report "Salary Accounts Report";
+                }
+                action("Loans TAT")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Loans TAT';
+                    RunObject = report "Loans TAT";
+                }
+                action("Loan Variation TAT")
+                {
+                    ApplicationArea = Basic;
+
+                    RunObject = report " Loan Variation TAT";
+                }
+                action("Deposit Variation TAT")
+                {
+                    ApplicationArea = Basic;
+
+                    RunObject = report "Deposit Variation ";
+                }
+                // action("BBF TAT")
+                // {
+                //     ApplicationArea = Basic;
+
+                //     RunObject = report "BBF TAT";
+                // }
+                // action("BBF Insurance TAT")
+                // {
+                //     ApplicationArea = Basic;
+
+                //     RunObject = report "BBF Insurance TAT";
+                // }
+                // action("Risk Claim TAT")
+                // {
+                //     ApplicationArea = Basic;
+
+                //     RunObject = report "Risk Claim TAT Report";
+                // }
+                action("Institutional Capital TAT")
+                {
+                    ApplicationArea = Basic;
+
+                    RunObject = report "Institutional Capital TAT";
+                }
+                // action("Business Loans TAT")
+                // {
+                //     ApplicationArea = Basic;
+
+                //     RunObject = report "Business Loans TAT";
+                // }
+                action("Guarantor Substitution TAT")
+                {
+                    ApplicationArea = Basic;
+
+                    RunObject = report "Guarantor Substitution TAT";
+                }
+                action("Member Withdrawal TAT")
+                {
+                    ApplicationArea = Basic;
+
+                    RunObject = report "Member Withdrawal TAT";
+                }
+                action("Member Readmission TAT")
+                {
+                    ApplicationArea = Basic;
+
+                    RunObject = report "Member Readmission TAT";
+                }
+                action("Member Edit TAT")
+                {
+                    ApplicationArea = Basic;
+
+                    RunObject = report "Member Edit TAT Report";
+                }
+                // action("Membership TAT")
+                // {
+                //     ApplicationArea = Basic;
+
+                //     RunObject = report "CRM Member TAT Report ";
+                // }
+                // action("Member Commission")
+                // {
+                //     ApplicationArea = Basic;
+
+                //     RunObject = report "Member Commission";
+                // }
+
+                action("Staff Daily Transactions")
+                {
+                    ApplicationArea = Basic;
+                    RunObject = report "Staff Daily Transactions";
+                }
+            }
+
         }
 
-        // area(Reporting)
-        // {
-        //     action("Members Portal")
-        //     {
-        //         ApplicationArea = Basic, Suite;
-        //         Caption = 'Members Portal';
-        //         RunObject = codeunit "Members Portal Link";
-        //     }
-        //     action("Customer Management Portal")
-        //     {
-        //         ApplicationArea = Basic, Suite;
-        //         Caption = 'Customer Management Portal';
-        //         RunObject = codeunit "Customer Management Portal Url";
-        //     }
-        // }
+    }
+
+    // area(Reporting)
+    // {
+    //     action("Members Portal")
+    //     {
+    //         ApplicationArea = Basic, Suite;
+    //         Caption = 'Members Portal';
+    //         RunObject = codeunit "Members Portal Link";
+    //     }
+    //     action("Customer Management Portal")
+    //     {
+    //         ApplicationArea = Basic, Suite;
+    //         Caption = 'Customer Management Portal';
+    //         RunObject = codeunit "Customer Management Portal Url";
+    //     }
+    // }
 }
 profile "Audit Role Center"
 {

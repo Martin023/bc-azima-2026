@@ -644,8 +644,10 @@ table 52185826 "Member withdrawal Notice"
         if "No." = '' then begin
             NoSetup.Get();
             NoSetup.TestField(NoSetup."Withdrawal Notice");
-            "No. Series" := NoSetup."Withdrawal Notice";
-            // NoSeriesMgt.InitSeries(NoSetup."Withdrawal Notice", xRec."No. Series", 0D, "No.", "No. Series");
+            if NoSeriesMgt.AreRelated(NoSetup."Withdrawal Notice", xRec."No. Series") then
+                "No. Series" := xRec."No. Series" else
+                "No. Series" := NoSetup."Withdrawal Notice";
+            Rec."No." := NoSeriesMgt.GetNextNo("No. Series", WorkDate);
         end;
 
         // Validation

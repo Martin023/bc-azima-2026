@@ -1380,7 +1380,8 @@ table 52185700 Members
         }
         field(94; "Source Aplication"; Option)
         {
-            OptionMembers = "N/A",CRM,"Kenpipe Smart","CRM - Sales";
+            //OptionMembers = "N/A",CRM,"Kenpipe Smart","CRM - Sales";
+            OptionMembers = "N/A","BC","Members Portal","Azima Mobile";
         }
         field(95; "Marked For Edits"; Boolean)
         {

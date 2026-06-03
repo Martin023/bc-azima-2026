@@ -1016,7 +1016,10 @@ table 52185730 "Savings Accounts"
             FieldClass = FlowField;
             CalcFormula = count("Change Log Entry" where("Primary Key Field 1 Value" = field("No.")));
         }
-
+        field(120; "Dormancy Alert Sent"; Boolean)
+        {
+            Caption = 'Dormancy Alert Sent';
+        }
     }
 
     keys

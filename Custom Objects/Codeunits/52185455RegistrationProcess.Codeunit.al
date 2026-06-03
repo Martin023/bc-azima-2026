@@ -224,6 +224,7 @@ Codeunit 52185455 "Registration Process"
         Cust."Registration Time" := Time;
 
         Cust.Status := Cust.Status::New; //Here
+        Cust."Source Aplication" := Cust."Source Aplication"::BC;
 
         //NEED A SUBFLAG
         cust."E-Mail" := MemberApplication."E-Mail";
@@ -278,7 +279,7 @@ Codeunit 52185455 "Registration Process"
         Cust."Transactional Mobile Number" := MemberApplication."Transactional Mobile Number".Trim();
         Cust.Age := MemberApplication.Age;
         Cust."Office E-Mail" := MemberApplication."Office E-Mail";
-        Cust."Source Aplication" := MemberApplication."Source Aplication";
+        //Cust."Source Aplication" := MemberApplication."Source Aplication";
         Cust."Permanent Post Code" := MemberApplication."Permanent Post Code";
         Cust."Permanent City" := MemberApplication."Permanent City";
         Cust."Request for ATM" := MemberApplication."Request for ATM";
@@ -1312,6 +1313,7 @@ Codeunit 52185455 "Registration Process"
         ProductFactory."Interest Rate (Min.)" := ProductFactoryApplication."Interest Rate (Min.)";
         ProductFactory."Interest Rate (Max.)" := ProductFactoryApplication."Interest Rate (Max.)";
         ProductFactory."Dormancy Period" := ProductFactoryApplication."Dormancy Period";
+        ProductFactory."Dormancy Alert Period" := ProductFactoryApplication."Dormancy Alert Period";
         ProductFactory."Customer Segment" := ProductFactoryApplication."Customer Segment";
         ProductFactory."Closure Fee" := ProductFactoryApplication."Closure Fee";
         ProductFactory."Account No. Prefix" := ProductFactoryApplication."Account No. Prefix";

@@ -580,14 +580,14 @@ page 52186686 "Credit Officers RC"
                     group("Loan Processing")
                     {
                         Caption = 'Loan Processing BOSA';
-                        action("Loan Application List_BOSA")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            caption = 'BOSA Loan Application List';
-                            RunObject = page "Loan Application List_BOSA";
-                            RunPageView = where(Status = filter(open));
-                            // RunPageView = where("Sent Back to CRM" = const(false), "Sent Back to M-Smart" = const(false));// Show all loans
-                        }
+                        // action("Loan Application List_BOSA")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     caption = 'BOSA Loan Application List';
+                        //     RunObject = page "Loan Application List_BOSA";
+                        //     RunPageView = where(Status = filter(open));
+                        //     // RunPageView = where("Sent Back to CRM" = const(false), "Sent Back to M-Smart" = const(false));// Show all loans
+                        // }
 
                         action("BOSA Loan Appraisal List")
                         {
@@ -619,22 +619,22 @@ page 52186686 "Credit Officers RC"
                             RunPageView = where("Source Unit" = const(BOSA));
                         }
 
-                        action("Loans Send Back to CRM")
-                        {
-                            ApplicationArea = all;
-                            Visible = true;
-                            caption = 'BOSA Loans Send Back to CRM';
-                            RunObject = page "Loan Application List_BOSA";
-                            RunPageView = where("Sent Back to CRM" = const(true));
-                        }
-                        action("BOSA Loans Send Back to M-Smart")
-                        {
-                            ApplicationArea = all;
-                            Visible = true;
-                            caption = 'Loans Send Back to M-Smart';
-                            RunObject = page "Loan Application List_BOSA";
-                            RunPageView = where("Sent Back to CRM" = const(true));
-                        }
+                        // action("Loans Send Back to CRM")
+                        // {
+                        //     ApplicationArea = all;
+                        //     Visible = true;
+                        //     caption = 'BOSA Loans Send Back to CRM';
+                        //     RunObject = page "Loan Application List_BOSA";
+                        //     RunPageView = where("Sent Back to CRM" = const(true));
+                        // }
+                        // action("BOSA Loans Send Back to M-Smart")
+                        // {
+                        //     ApplicationArea = all;
+                        //     Visible = true;
+                        //     caption = 'Loans Send Back to M-Smart';
+                        //     RunObject = page "Loan Application List_BOSA";
+                        //     RunPageView = where("Sent Back to CRM" = const(true));
+                        // }
 
                     }
 

@@ -32,30 +32,31 @@ page 52185709 "Member Nos. Series"
                     ApplicationArea = Basic, Suite;
                 }
                 field("Group Account Nos"; Rec."Group Account Nos")
-                { 
-                    ApplicationArea = Basic, Suite; 
-                }
-                field("Driver No."; Rec."Driver No.")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Group Exit and Transfer';
-                }
-                field("CRM Member Edits Nos."; Rec."CRM Member Edit App Nos.")
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("M-Smart Member Edit App Nos."; Rec."M-Smart Member Edit App Nos.")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Driver No."; Rec."Driver No.")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Group Exit and Transfer';
+                // }
+                // field("CRM Member Edits Nos."; Rec."CRM Member Edit App Nos.")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("M-Smart Member Edit App Nos."; Rec."M-Smart Member Edit App Nos.")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("General SMS Nos."; Rec."General SMS Nos.")
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Virtual Member App. No"; Rec."Virtual Member App. No")
+                field("Sales Route No."; Rec."Sales Route No.")
                 {
                     ApplicationArea = Basic, Suite;
                 }
+
                 field("Dividend Rate No."; Rec."Dividend Rate No.")
                 {
                     ApplicationArea = Basic, Suite;
@@ -76,15 +77,15 @@ page 52185709 "Member Nos. Series"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Sink Fund Nos."; Rec."Sink Fund Nos.")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("BBF Insurance Nos."; Rec."BBF Insurance Nos.")
-                {
-                    ApplicationArea = Basic, Suite;
+                // field("Sink Fund Nos."; Rec."Sink Fund Nos.")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("BBF Insurance Nos."; Rec."BBF Insurance Nos.")
+                // {
+                //     ApplicationArea = Basic, Suite;
 
-                }
+                // }
                 field("BDE Application"; Rec."BDE Application")
                 {
                     ApplicationArea = Basic, Suite;
@@ -112,9 +113,9 @@ page 52185709 "Member Nos. Series"
                 field("Template No."; Rec."Template No.")
                 {
                 }
-                field("Revenue Collection Nos."; Rec."Revenue Collection Nos.")
-                {
-                }
+                // field("Revenue Collection Nos."; Rec."Revenue Collection Nos.")
+                // {
+                // }
             }
             group("FOSA No. series")
             {
@@ -164,10 +165,10 @@ page 52185709 "Member Nos. Series"
                     ApplicationArea = Basic, Suite;
                     Caption = 'Shares Transfer No';
                 }
-                field("MKey Case Forwarding"; Rec."MKey Case Forwarding")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("MKey Case Forwarding"; Rec."MKey Case Forwarding")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
 
             }
 
@@ -302,10 +303,10 @@ page 52185709 "Member Nos. Series"
                 // {
                 //     ApplicationArea = Basic, Suite;
                 // }
-                field("Mortage Doc Release"; Rec."Mortage Doc Release")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Mortage Doc Release"; Rec."Mortage Doc Release")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 // field("Loan No Web DEV"; Rec."Loan No Web DEV")
                 // {
                 //     ApplicationArea = Basic, Suite;
@@ -318,14 +319,14 @@ page 52185709 "Member Nos. Series"
                 // {
                 //     ApplicationArea = Basic, Suite;
                 // }
-                field("Business Loan Acc App"; Rec."Business Loan Acc App")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Business Loan Account Closure"; Rec."Business Loan Account Closure")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Business Loan Acc App"; Rec."Business Loan Acc App")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("Business Loan Account Closure"; Rec."Business Loan Account Closure")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("DMU SMS Alerts"; Rec."DMU SMS Alerts")
                 {
                     ApplicationArea = Basic, Suite;
@@ -341,92 +342,121 @@ page 52185709 "Member Nos. Series"
             }
             group("Administration")
             {
-                Visible = false;
                 // field("Driver No."; Rec."Driver No.")
                 // {
                 //     ApplicationArea = Basic, Suite;
                 // }
                 field("Key No."; Rec."Key No.")
                 {
+                    Visible = false;
                     ApplicationArea = Basic, Suite;
                 }
                 field("Key Dispatch No."; Rec."Keys Dispatch Nos.")
                 {
+                    Visible = false;
+
                     ApplicationArea = Basic, Suite;
                 }
                 field("Key Request No."; Rec."Key Request No.")
                 {
+                    Visible = false;
+
                     ApplicationArea = Basic, Suite;
                 }
                 field("Company Vehicle Nos."; Rec."Company Vehicle Nos.")
                 {
+                    Visible = false;
+
                     ApplicationArea = Basic, Suite;
                 }
                 field("Motor Vehicle Movement No."; Rec."Motor Vehicle Movement No.")
                 {
+                    Visible = false;
+
                     ApplicationArea = Basic, Suite;
                 }
                 field("Motor Vehicle Request No."; Rec."Motor Vehicle Request No.")
                 {
+                    Visible = false;
+
                     ApplicationArea = Basic, Suite;
                 }
                 field("Conference Creation Nos."; Rec."Conference Creation Nos.")
                 {
+                    Visible = false;
+
                     ApplicationArea = Basic, Suite;
                 }
                 field("Conference/Meeting Room No."; Rec."Conference/Meeting Room No.")
                 {
+                    Visible = false;
+
                     ApplicationArea = Basic, Suite;
                 }
                 field("Fueling No."; Rec."Fueling No.")
                 {
+                    Visible = false;
+
                     ApplicationArea = Basic, Suite;
                 }
                 field("Repair No."; Rec."Repair No.")
                 {
+                    Visible = false;
+
                     ApplicationArea = Basic, Suite;
                 }
                 field("Service No."; Rec."Service No.")
                 {
+                    Visible = false;
+
                     ApplicationArea = Basic, Suite;
                 }
                 field("Accident No."; Rec."Accident No.")
                 {
+                    Visible = false;
+
                     ApplicationArea = Basic, Suite;
                 }
                 field("Permission Requisitions Nos"; Rec."Permission Requisitions Nos")
                 {
+                    Visible = true;
                     ApplicationArea = Basic, Suite;
                 }
                 field("User creation"; Rec."User creation")
                 {
+                    Visible = true;
                     ApplicationArea = Basic, Suite;
                 }
                 field("User Termination"; Rec."User Termination")
                 {
+                    Visible = true;
                     ApplicationArea = Basic, Suite;
                 }
                 field("Parking Creation No."; Rec."Parking Creation No.")
                 {
+                    visible = false;
                     ApplicationArea = Basic, Suite;
                 }
                 field("Parking Space No."; Rec."Parking Space No.")
                 {
+                    visible = false;
                     ApplicationArea = Basic, Suite;
                 }
                 field("Insurace Claim No."; Rec."Insurance Claim No.")
                 {
+                    visible = false;
                     ApplicationArea = Basic, Suite;
                 }
                 field("Salary Agreement No"; Rec."Salary Agreement No")
                 {
+                    visible = false;
                     ApplicationArea = Basic, Suite;
                 }
             }
             group("Legal")
             {
                 Visible = false;
-                
+
                 field("Nominee Legal No."; Rec."Nominee Legal No.")
                 {
                     ApplicationArea = Basic, Suite;

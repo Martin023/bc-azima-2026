@@ -150,13 +150,13 @@ page 52186622 "Loan Processing Activities"
                 {
                     ApplicationArea = Basic;
 
-                    // Image = none;
+                    Image = none;
                     LookupPageId = "Loan Posted List";
                     DrillDownPageId = "Loan Posted list";
                 }
                 field("Overdue Loans"; Rec."Overdue Loans")
                 {
-                    // Image = none;
+                    Image = none;
                     Style = Unfavorable;
                     ApplicationArea = Basic;
                 }

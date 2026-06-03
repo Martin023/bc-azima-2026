@@ -21,9 +21,9 @@ table 52185776 "Cashier Transactions"
         }
         field(2; "Account No"; Code[20])
         {
-            TableRelation = IF ("Account Type" = CONST(Account), type = filter(<> lien)) "Savings Accounts"."No." where("Product Category" = filter("FOSA Account"), Status = filter(<> Closed))
+            TableRelation = IF ("Account Type" = CONST(Account), type = filter(<> lien)) "Savings Accounts"."No." where("Product Type" = const('191'), Status = filter(<> Closed))
             ELSE
-            IF ("Account Type" = CONST(Account), type = filter(lien)) "Savings Accounts"."No." where(Status = filter(<> Closed), "Product Category" = filter("FOSA Account")) else
+            IF ("Account Type" = CONST(Account), type = filter(lien)) "Savings Accounts"."No." where(Status = filter(<> Closed), "Product Type" = const('191')) else
             IF ("Account Type" = CONST(MPESA)) "Bank Account"."No." WHERE("Bank Type" = filter("Mobile Money"), "Global Dimension 1 Code" = field("Global Dimension 1 Code"));
 
             trigger OnValidate()
@@ -57,6 +57,15 @@ table 52185776 "Cashier Transactions"
                     "Product Category" := Account."Product Category";
                     "Employer Code" := Account."Employer Code";
                     "Phone No" := Account."Transactional Mobile No";
+                end;
+                
+                if "Account Type" = "Account Type"::MPESA then begin
+                    BankAccount.Reset;
+                    BankAccount.SetRange("No.", "Account No");
+                    if BankAccount.FindFirst() then begin
+                        BankAccount.CalcFields(BankAccount.Balance, BankAccount."Balance (LCY)");
+                        "MPESA Float Balance" := BankAccount.Balance;
+                    end;
                 end;
                 CalcAvailableBal;
                 Validate("Member No.");
@@ -359,6 +368,7 @@ table 52185776 "Cashier Transactions"
                 SavAcc: Record "Savings Accounts";
                 SavLedgEntry: record "Savings Ledger Entry";
                 TotalTransactions: Decimal;
+                CT : Record "Cashier Transactions";
             begin
                 SavAcc.Reset();
                 SavAcc.SetRange("Member No.", rec."Member No.");
@@ -378,6 +388,24 @@ table 52185776 "Cashier Transactions"
                     end;
 
                 end;
+                //System should notify teller if a member has multiple times in other branches.
+                CT.Reset();
+                CT.SetRange("Member No.", rec."Member No.");
+                CT.SetRange("Transaction Date", Today);
+                CT.SetRange(Posted, true);
+                CT.SetFilter("Global Dimension 1 Code", '<>%1', rec."Global Dimension 1 Code");
+                if CT.FindSet() then begin
+                    repeat 
+                      CT.calcFields("Branch Name");
+                      Message(
+                            'This member has done other transactions today in another branch. Transaction Type: %1, Amount: %2, Branch: %3',
+                            Format(CT.Type),
+                            CT.Amount,
+                            CT."Branch Name"
+                            );
+                    until CT.Next() = 0;
+                end;
+                
             end;
         }
         field(30; "Banked By"; Code[50])
@@ -562,6 +590,8 @@ table 52185776 "Cashier Transactions"
         field(50014; "Cheque Issueing Bank"; Text[100])
         {
             Editable = false;
+            FieldClass = FlowField;
+            CalcFormula = lookup("Bank Account".Name where("No." = field("Bank Account")));
         }
         field(50015; "Account Type"; Option)
         {
@@ -598,6 +628,7 @@ table 52185776 "Cashier Transactions"
                         bankacc.Reset;
                         bankacc.SetRange("No.", BUserSetup."Default  Bank");
                         if bankacc.Find('-') then begin
+                            bankacc.CalcFields(bankacc.Balance, bankacc."Balance (LCY)");
                             "Account No" := bankacc."No.";
                             "Till Name" := PadStr(BUserSetup."Default  Bank" + ' ' + bankacc.Name, 50);
                         end;
@@ -632,8 +663,19 @@ table 52185776 "Cashier Transactions"
         {
 
         }
-        field(50020; "Mpesa Reference"; Text[50])
+        field(50020; "Mpesa Reference"; Code[10])
         {
+            trigger OnValidate()
+            var 
+                CT: record "Cashier Transactions";
+            begin
+                if "Account Type" = "Account Type"::MPESA then begin
+                    CT.Reset();
+                    CT.SetRange("Mpesa Reference", "Mpesa Reference");
+                    if CT.FindFirst() then 
+                        Error('MPESA Reference Code %1 already exists for transaction No. %2', "Mpesa Reference", CT.No);
+                end;
+            end;
         }
         field(50021; Source; Text[100])
         {
@@ -643,7 +685,9 @@ table 52185776 "Cashier Transactions"
         }
         field(50023; "Branch Name"; Text[100])
         {
-
+            Editable = false;
+            FieldClass = FlowField;
+            CalcFormula = lookup("Dimension Value".Name where("Code" = field("Global Dimension 1 Code")));
         }
         field(50024; "Account Status"; Enum "Savings Account status")//Option)
         {
@@ -660,6 +704,12 @@ table 52185776 "Cashier Transactions"
         field(50026; "Phone No"; Code[20])
         {
             Editable = false;
+        }
+        field(50027; "Reference Name"; Text[100])
+        {
+        }
+        field(50028; "MPESA Float Balance"; Decimal)
+        {
         }
     }
 

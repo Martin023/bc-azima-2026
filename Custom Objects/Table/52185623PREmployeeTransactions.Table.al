@@ -15,23 +15,7 @@ table 52185623 "PR Employee Transactions"
             trigger OnValidate()
             begin
 
-                EmployeeTrans.Reset;
-                EmployeeTrans.SetRange(EmployeeTrans."Transaction Code", "Transaction Code");
-                EmployeeTrans.SetRange(EmployeeTrans."Employee Code", "Employee Code");
-                if EmployeeTrans.Find('-') then begin
-                    //  ERROR('Transaction Code [ %1 ] has already been assigned to Staff no [ %2 ]',"Transaction Code","Employee Code");
-                end;
-
                 CurrentYear := Date2DMY("Payroll Period", 3);
-                EmployeeTrans.Reset;
-                EmployeeTrans.SetRange(EmployeeTrans."Employee Code", "Employee Code");
-                EmployeeTrans.SetRange(EmployeeTrans."Period Year", CurrentYear);
-                EmployeeTrans.SetRange(EmployeeTrans."Transaction Code", 'E05');
-                if EmployeeTrans.Find('-') then begin
-                    if "Transaction Code" = 'E05' then
-                        Error('This Employee already has been paid another allowance');
-                end;
-
 
                 Transcode.Reset;
                 Transcode.SetRange(Transcode."Transaction Code", "Transaction Code");
