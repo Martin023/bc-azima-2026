@@ -59,4 +59,21 @@ page 52187351 "Portfolio Manager Card"
             }
         }
     }
+
+    actions
+    {
+        area(Processing)
+        {
+            action(TransferToAX)
+            {
+                Caption = 'Transfer Portfolio';
+                Image = Trace;
+                Enabled = Rec.Transfered = false;
+                trigger OnAction()
+                begin
+                    
+                end;
+            }
+        }
+    }
 }
