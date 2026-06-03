@@ -3054,10 +3054,11 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 "Loan No.", "Loan Product Type", "Loan Product Type Name", "Approved Amount",
                 "Outstanding Balance", Repayment, "Loan Interest Repayment", "Outstanding Bills", "Disbursement Date",
                 "Expected Date of Completion", "Outstanding Interest", "Loans Category-SASRA",
-                "Daily Interest"
+                "Daily Interest","Total Loan Balance"
             );
             MemberLoans.SetAutoCalcFields(
-                "Outstanding Balance", "Outstanding Bills", "Loans Category-SASRA", "Outstanding Interest", "Daily Interest"
+                "Outstanding Balance", "Outstanding Bills", "Loans Category-SASRA", "Outstanding Interest", "Daily Interest",
+                "Total Loan Balance"
             );
 
             IF MemberLoans.FindSet then begin
@@ -3096,7 +3097,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                     Datum.Add('loan_type_name', MemberLoans."Loan Product Type Name");
                     Datum.Add('loan_amount', MemberLoans."Approved Amount");
 
-                    Datum.Add('loan_balance', MemberLoans."Outstanding Balance");
+                    Datum.Add('loan_balance', MemberLoans."Total Loan Balance");
                     Datum.Add('loan_repayment_charges', TotalCharges);
                     Datum.Add('total_repayment', MemberLoans."Outstanding Balance" + TotalCharges);
 
