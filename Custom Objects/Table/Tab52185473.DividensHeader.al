@@ -17,21 +17,23 @@ table 52185473 "Dividend Header"
                 if "No." <> xRec."No." then begin
                     DividendSetUp.Get();
                     NoSeriesMgt.TestManual(DividendSetUp."Div Header No.");
-                    "No. Series" := '';
                 end;
             end;
         }
         field(2; Year; Integer)
         {
             Caption = 'Year';
+            editable = false;
         }
         field(3; "Created By"; Code[30])
         {
             Caption = 'Created By';
+            editable = false;
         }
         field(4; "Created On"; Date)
         {
             Caption = 'CreatedOn';
+            editable = false;
         }
         field(5; "Global Dimension 1 Code"; Code[30])
         {
@@ -49,8 +51,21 @@ table 52185473 "Dividend Header"
         {
             Caption = 'Status';
         }
-        field(9; "No. Series"; Code[20])
+        field(9; "Start Date"; Date)
         {
+            Caption = 'Start Date';
+
+            trigger OnValidate()
+            begin
+                if Rec."Start Date" <> 0D then begin
+                    rec.Year := Date2DMY(Rec."Start Date", 3);
+                    rec.modify();
+                end;
+            end;
+        }
+        field(10; "End Date"; Date)
+        {
+            Caption = 'End Date';
         }
     }
     keys

@@ -34,11 +34,11 @@ page 52186055 "All Users Activities"
                 field(Members; Rec.Members)
                 {
                     Caption = 'Active Members';
-                    image = People;
+                    image = none;
                 }
                 field("Member Withdrawal"; Rec."Member Withdrawal")
                 {
-                    image = People;
+                    image = none;
                     trigger OnDrillDown()
                     var
                         MemberWithdrawal: Record "Member withdrawal Notice";
@@ -73,23 +73,23 @@ page 52186055 "All Users Activities"
                 }
                 field(Loans; Rec.Loans)
                 {
-                    image = Cash;
+                    image = none;
                 }
-                field("My Staff Advance Surrender"; Rec."My Staff Advance Surrender")
-                {
-                    Caption = 'Staff Advance Liquidation';
-                    ApplicationArea = Basic, Suite;
-                }
-                field("My Imprest Surrender"; Rec."My Imprest Surrender")
-                {
-                    Caption = 'Travel Liquidation';
-                    ApplicationArea = Basic, Suite;
-                }
-                field("My Staff Claims"; Rec."My Staff Claims")
-                {
-                    Caption = 'Staff Claims';
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("My Staff Advance Surrender"; Rec."My Staff Advance Surrender")
+                // {
+                //     Caption = 'Staff Advance Liquidation';
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("My Imprest Surrender"; Rec."My Imprest Surrender")
+                // {
+                //     Caption = 'Travel Liquidation';
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("My Staff Claims"; Rec."My Staff Claims")
+                // {
+                //     Caption = 'Staff Claims';
+                //     ApplicationArea = Basic, Suite;
+                // }
 
                 actions
                 {
@@ -111,14 +111,14 @@ page 52186055 "All Users Activities"
             cuegroup(Control11)
             {
                 Caption = 'Pending Posting';
-                field("Pending Imprest Request"; Rec."Pending Imprest Request")
-                {
+                // field("Pending Imprest Request"; Rec."Pending Imprest Request")
+                // {
 
-                }
-                field("Pending Imprest Surrender"; Rec."Pending Imprest Surrender")
-                {
+                // }
+                // field("Pending Imprest Surrender"; Rec."Pending Imprest Surrender")
+                // {
 
-                }
+                // }
                 field("Pending Loans"; Rec."Pending Loans")
                 {
                     // image = None;
@@ -150,10 +150,10 @@ page 52186055 "All Users Activities"
                 {
 
                 }
-                field("Pending Staff Claims"; Rec."Pending Staff Claims")
-                {
+                // field("Pending Staff Claims"; Rec."Pending Staff Claims")
+                // {
 
-                }
+                // }
                 field("Pending Petty Cash Vouchers"; Rec."Pending Petty Cash Vouchers")
                 {
 
@@ -185,18 +185,18 @@ page 52186055 "All Users Activities"
                 }
             }
 
-            cuegroup(Control12)
-            {
-                Caption = 'Dividends Processing';
-                field("Running Dividends Process"; Rec."Running Div. Processes")
-                {
+            // cuegroup(Control12)
+            // {
+            //     Caption = 'Dividends Processing';
+            //     field("Running Dividends Process"; Rec."Running Div. Processes")
+            //     {
 
-                }
-                field("Generated Dividends Entries"; Rec."Generated Div. Entries")
-                {
+            //     }
+            //     field("Generated Dividends Entries"; Rec."Generated Div. Entries")
+            //     {
 
-                }
-            }
+            //     }
+            // }
         }
     }
 

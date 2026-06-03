@@ -598,10 +598,10 @@ PageExtension 52187132 pageextension52187132 extends "Sales Credit Memos"
         // {
         //     Visible = false;
         // }
-        modify("Aged Accounts Receivable")
-        {
-            Visible = false;
-        }
+        // modify("Aged Accounts Receivable")
+        // {
+        //     Visible = false;
+        // }
         modify("Customer - Payment Receipt")
         {
             Visible = false;

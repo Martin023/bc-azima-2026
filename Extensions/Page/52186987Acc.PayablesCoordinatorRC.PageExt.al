@@ -32,10 +32,10 @@ PageExtension 52186987 pageextension52186987 extends "Acc. Payables Coordinator 
     }
     actions
     {
-        modify("&Vendor - List")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("&Vendor - List")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         modify("Vendor - &Balance to date")
         {
             ApplicationArea = Basic;
@@ -52,10 +52,10 @@ PageExtension 52186987 pageextension52186987 extends "Acc. Payables Coordinator 
         {
             ApplicationArea = Basic;
         }
-        modify("Pa&yments on Hold")
-        {
-            ApplicationArea = Basic;
-        }
+        // modify("Pa&yments on Hold")
+        // {
+        //     ApplicationArea = Basic;
+        // }
         // modify("P&urchase Statistics")
         // {
         //     ApplicationArea = Basic;
