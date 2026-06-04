@@ -24,6 +24,11 @@ page 52185441 "Dividend Header Card"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the No. field.', Comment = '%';
                 }
+                field("Minimum Capitalized"; Rec."Minimum Capitalized")
+                {
+                    ApplicationArea = Basic, Suite;
+                    ShowMandatory = true;
+                }
                 group("Date Filter")
                 {
                     Caption = 'Date Filter';
@@ -70,10 +75,7 @@ page 52185441 "Dividend Header Card"
                     ApplicationArea = Basic, Suite;
                     editable = false;
                 }
-                field("Minimum Capitalized"; Rec."Minimum Capitalized")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+
 
 
             }

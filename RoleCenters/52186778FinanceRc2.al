@@ -560,10 +560,18 @@ page 52186778 "Finance Role Center"
                     }
 
                 }
-                group("Loan Processed")
+                group("Loan Processing")
                 {
 
-                    Caption = 'Loans Processed';
+                    Caption = 'Loans Processing';
+
+                    action("Approved Loans List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        caption = 'Approved Loans List';
+                        RunObject = page "Loan Application List";
+                        RunPageView = where(status = filter(Approved), Posted = const(false));
+                    }
                     action("Loan Posted List")
                     {
                         ApplicationArea = Basic, Suite;
