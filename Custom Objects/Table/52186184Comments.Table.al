@@ -70,6 +70,35 @@ table 52186184 Comments
         field(16; "Expires At"; date)
         {
         }
+        field(17;"Reminder Date"; date)
+        {
+            trigger OnValidate()
+            var
+                UserSetUp: Record "User Setup";
+            begin
+                TestField("Disable Flag", false);
+                if "Reminder Date" < Today then
+                    Error('Reminder date cannot be in the past');
+                if "Expires At" <> 0D then
+                    if "Reminder Date" > "Expires At" then
+                        Error('Reminder date cannot be later than expiry date');
+                    if "E-mail" = '' then begin
+                        if UserSetUp.Get("Commented By") then
+                            Rec."E-mail" := UserSetUp."E-mail";
+                        if Rec."E-mail" = '' then
+                            Error('Cannot set reminder date without an email address. Please update in your user setup.');
+                    end;
+                        
+                
+            end;
+        }
+        field(18; "Reminder Sent"; Boolean)
+        {
+        }
+        field(19; "E-mail"; Text[100])
+        {
+
+        }
 
     }
 
@@ -96,6 +125,7 @@ table 52186184 Comments
             Rec."Responsibility Center" := UserSetUp."Responsibility Centre";
             Rec."Commented By" := UserId;
             Date := CurrentDateTime;
+            Rec."E-mail" := UserSetUp."E-mail";
         end else
             Error('You must be set up in user setup to create a comment');
 
