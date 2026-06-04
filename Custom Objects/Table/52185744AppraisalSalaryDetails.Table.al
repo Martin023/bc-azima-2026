@@ -29,8 +29,8 @@ table 52185744 "Appraisal Salary Details"
         }
         field(4; Type; Option)
         {
-            OptionCaption = ' ,Earnings,Deductions,Basic,Other Allowances ,Gross Pay,Fosa Income,Pension,House Allowance,Taxable Pay,Relief';
-            OptionMembers = " ",Earnings,Deductions,Basic,"Other Allowances","Gross Pay","Net Income",Pension,"House Allowance","Taxable Pay",Relief;
+            OptionCaption = ' ,Earnings,Deductions,Basic,Other Allowances ,Gross Pay,Fosa Income,Pension,House Allowance,Taxable Pay,Relief,Pension Relief';
+            OptionMembers = " ",Earnings,Deductions,Basic,"Other Allowances","Gross Pay","Net Income",Pension,"House Allowance","Taxable Pay",Relief,"Pension Relief";
             trigger OnValidate()
             var
                 myInt: Integer;
@@ -100,7 +100,7 @@ table 52185744 "Appraisal Salary Details"
                 end;
                 //end of initializing STO Amount
 
-                if Type = Type::"Gross Pay" then
+                if (Type = Type::"Gross Pay") or (Type = Type::"Pension Relief") then
                     Error(Text002);
 
                 if Type = Type::Basic then begin
@@ -253,6 +253,9 @@ table 52185744 "Appraisal Salary Details"
         Relief: Decimal;
         Loanrec: Record Loans;
         TotalOutstanding: Decimal;
+        PensionRelief: Decimal;
+        curPensionAmount : Decimal;
+        CurGrossPay: Decimal;
     begin
         dtOpenPeriod := prPayrollProcessing.fnGetOpenPeriod();
         intMonth := Date2dmy(dtOpenPeriod, 2);
@@ -269,6 +272,28 @@ table 52185744 "Appraisal Salary Details"
             ApprDetails.SetRange(Type, ApprDetails.Type::Basic);
             if ApprDetails.FindFirst() then
                 curBasicPay := ApprDetails.Amount;
+        end;
+
+        if Rec.Type = Rec.Type::Pension then
+            curPensionAmount := Rec.Amount
+        else begin
+            ApprDetails.Reset();
+            ApprDetails.SetRange("Loan No", Rec."Loan No");
+            ApprDetails.SetRange("Client Code", Rec."Client Code");
+            ApprDetails.SetRange(Type, ApprDetails.Type::Pension);
+            if ApprDetails.FindFirst() then
+                curPensionAmount := ApprDetails.Amount;
+        end;
+
+        if Rec.Type = Rec.Type::"Gross Pay" then
+            CurGrossPay := Rec.Amount
+        else begin
+            ApprDetails.Reset();
+            ApprDetails.SetRange("Loan No", Rec."Loan No");
+            ApprDetails.SetRange("Client Code", Rec."Client Code");
+            ApprDetails.SetRange(Type, ApprDetails.Type::"Gross Pay");
+            if ApprDetails.FindFirst() then
+                CurGrossPay := ApprDetails.Amount;
         end;
 
         curTransAmount := ROUND(curBasicPay, 0.01, '<');
@@ -300,12 +325,17 @@ table 52185744 "Appraisal Salary Details"
         HousingLevyAmount := ROUND((curTransAmount * (1.5 / 100)), 0.01, '<');
         //Message('Housing Levy: %1', HousingLevyAmount);
 
+        PensionRelief := PensionReliefAmount(curPensionAmount, CurGrossPay);
+        curPayeAmount := ROUND(PensionRelief, 0.01, '>');
+
         Relief := 2400;
-        TaxablePay := curTransAmount - curNSSF - ShifAmount - HousingLevyAmount;
+        TaxablePay := curTransAmount - curNSSF - ShifAmount - HousingLevyAmount -  PensionRelief;
         curPayeAmount := prPayrollProcessing.fnGetEmployeePaye(TaxablePay);
         curPayeAmount := curPayeAmount - Relief;
         curPayeAmount := ROUND(curPayeAmount, 0.01, '>');
         //Message('PAYE: %1', curPayeAmount);
+
+         
 
         // STEP 3: Update using Appraisal Setup
         ApprDetails.Reset();
@@ -346,6 +376,9 @@ table 52185744 "Appraisal Salary Details"
                         'SACCO LOANS':
                             ApprDetails.Amount := TotalOutstanding;
 
+                        'PENSION RELIEF':
+                            ApprDetails.Amount := PensionRelief;
+
                     end;
 
                     ApprDetails.Modify();
@@ -377,13 +410,14 @@ table 52185744 "Appraisal Salary Details"
         ApprDetails.SetRange("Loan No", "Loan No");
         ApprDetails.SetRange("Client Code", "Client Code");
         ApprDetails.SetRange(Type, Type::Deductions);
+        ApprDetails.SetFilter(Code, '<>%1', Rec.Code);
         if ApprDetails.FindSet then
             repeat
                 TotalDeductions += ApprDetails.Amount;
             until ApprDetails.Next = 0;
 
         // Include current record if it's a deduction being modified
-        if (Rec.Type = Rec.Type::Deductions) and (Rec."Loan No" <> '') and (Rec."Client Code" <> '') then
+        if Rec.Type = Rec.Type::Deductions then
             TotalDeductions += Rec.Amount;
 
         // Update or Create Net Income record
@@ -404,6 +438,20 @@ table 52185744 "Appraisal Salary Details"
             ApprDetails.Amount := GrossPay - TotalDeductions;
             ApprDetails.Insert;
         end;
+    end;
+
+    Local procedure PensionReliefAmount(curReliefPension: Decimal; curGross: Decimal) PersonalReliefAmount : Decimal;
+    var
+        VitalSetup: Record "PR Vital Setup Info";
+    
+    begin
+        VitalSetup.FindFirst;
+        clear(PersonalReliefAmount);
+        curMaxPensionContrib := VitalSetup."Max Pension Contribution";
+
+        PersonalReliefAmount := PersonalReliefAmount + ((curReliefPension / 100) * curGross);
+        if PersonalReliefAmount > curMaxPensionContrib then PersonalReliefAmount := curMaxPensionContrib
+
     end;
 
     var
