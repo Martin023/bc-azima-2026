@@ -2179,6 +2179,8 @@ Codeunit 52185506 "Global Functions"
         LoanNumbers: Code[200];
         NumberOfLoans: Integer;
         i: Integer;
+        SkyEmail : Codeunit "Sky Send Email";
+        UserrSetup : Record "User Setup";
     begin
         if Members.Get(MemberNo) then begin
             if Members.Status = Members.Status::Dormant then begin
@@ -2259,6 +2261,43 @@ Codeunit 52185506 "Global Functions"
             end;
             if Members.Subflag = Members.Subflag::Defaulter then begin
                 Message('This member is a Defaulter.');
+            end;
+
+            //The system should allow the setting of reminders on flags that send an email alert on pre-set reminder date          
+            Comments.reset;
+            Comments.SetRange("Header No.", Members."No.");
+            Comments.SetRange("Disable Flag", false);
+            Comments.SetRange(Types, Comments.Types::"Member Flagging");
+            Comments.SetFilter(Comment, '<>%1', '');
+            Comments.SetRange("Reminder Sent",false);
+            Comments.SetFilter("Reminder Date", '<>%1', 0D);
+            if Comments.FindSet() then begin
+                repeat
+                   if UserrSetup.Get(Comments."Commented By") then begin
+                        SkyEmail.QueueOutgoingEmail(
+                            Comments."E-mail",
+                            'Account Flagging Reminder',
+                            'Dear ' + UserrSetup."Full Name" + ',' + '<br><br>' +
+                            'This is an automated reminder regarding a flagged member record that requires attention.' + '<br><br>' +
+                            'Member No: ' + Members."No." + '<br>' +
+                            'Member Name: ' + Members.Name + '<br>' +
+                            'Flag Type: ' + format(Comments.Types) + '<br>' +
+                            'Comment: ' + Comments.Comment + '<br>' +
+                            'Flagged By: ' + Comments."Commented By" + '<br>' +
+                            'Date Flagged: ' + Format(Comments.Date) + '<br>' +
+                            'Reminder Date: ' + Format(Comments."Reminder Date") + '<br>' +
+                            'Expiry Date: ' + Format(Comments."Expires At") + '<br><br>' +
+                            'Please review and take the necessary action.' + '<br><br>' +
+                            'Regards,' + '<br>' +
+                            'Azima Sacco',
+                            'HTML',
+                            'NORMAL',
+                            'BUSINESS CENTRAL'
+                        );
+                    end;
+                    Comments."Reminder Sent" := true;
+                    Comments.Modify();
+                until Comments.Next() = 0;
             end;
 
             //The system should allow setting of a time-based flag that expires after a set period.
