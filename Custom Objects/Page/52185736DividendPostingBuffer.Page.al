@@ -4,7 +4,7 @@ page 52185736 "Dividend Posting Buffer"
     Editable = false;
     InsertAllowed = false;
     ModifyAllowed = false;
-    PageType = List;
+    PageType = ListPart;
     SourceTable = "Dividend Posting Buffer";
     ApplicationArea = Basic, Suite;
     UsageCategory = Lists;
@@ -72,55 +72,22 @@ page 52185736 "Dividend Posting Buffer"
         }
     }
 
-    actions
-    {
-        area(creation)
-        {
-            // action("Dividend Process")
-            // {
-            //     Caption = 'Generate Dividends';
-            //     ApplicationArea = Basic, Suite;
-            //     Image = Add;
-            //     Promoted = true;
-            //     PromotedCategory = Process;
-            //     RunObject = report "Dividend Generation";
-            // }
+    // actions
+    // {
+    //     area(creation)
+    //     {
+    //         // action("Dividend Process")
+    //         // {
+    //         //     Caption = 'Generate Dividends';
+    //         //     ApplicationArea = Basic, Suite;
+    //         //     Image = Add;
+    //         //     Promoted = true;
+    //         //     PromotedCategory = Process;
+    //         //     RunObject = report "Dividend Generation";
+    //         // }
 
-            action("Dividend Posting Buffer")
-            {
-                Caption = 'Dividend Posting Buffer';
-                ApplicationArea = Basic, Suite;
-                Image = Add;
-                Promoted = true;
-                PromotedCategory = Process;
-                RunObject = report "Dividend Posting Buffer";
-            }
-            action("Post")
-            {
-                Caption = 'Post';
-                ApplicationArea = Basic, Suite;
-                Image = PostBatch;
-                Promoted = true;
-                PromotedCategory = Process;
-                RunObject = report "Dividend Posting";
-            }
-
-            action("Send SMS")
-            {
-                Caption = 'Send SMS';
-                ApplicationArea = Basic, Suite;
-                Image = PostBatch;
-                Promoted = true;
-                PromotedCategory = Process;
-                trigger OnAction()
-                begin
-                    if Confirm('Are you sure you want to send Dividend SMS to members?', false) then
-                        report.run(report::"Dividend SMS")
-                    else
-                        message('Operation Cancelled');
-                end;
-            }
-        }
-    }
+            
+    //     }
+    // }
 }
 

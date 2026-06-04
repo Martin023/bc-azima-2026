@@ -15,10 +15,10 @@ page 52185735 "Dividend Progression"
         {
             repeater(Group)
             {
-                field("Header No."; Rec."Header No.")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Header No."; Rec."Header No.")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("Account No"; Rec."Account No")
                 {
                     ApplicationArea = Basic, Suite;

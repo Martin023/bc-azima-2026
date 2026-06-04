@@ -9,40 +9,47 @@ Report 52185624 "Dividend Generation"
         {
             //DataItemTableView = WHERE("Product Type" = FILTER('|SCS'));
             RequestFilterFields = "No.";
-            trigger OnAfterGetRecord()
-            begin
-                SavingsAccounts.Reset();
-                SavingsAccounts.SetRange("Product Type", 'DCS|SCS');
-                if SavingsAccounts.Findset then begin
-                    intProgressTotal := SavingsAccounts.Count;
-                    intProgressI := 0;
-                    TimeProgress := Time;
-                    NoOfRecsProgress := intProgressTotal DIV 100;
-                    NoOfProgressed := 0;
 
-                    diaProgress.Open(GeneratingDividends + '@1@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', intProgress);
-                    repeat
-                        DividendProgression.Reset;
-                        DividendProgression.SetRange(DividendProgression."Header No.", "Dividend Header"."No.");
-                        DividendProgression.SetRange("Account No", SavingsAccounts."No.");
-                        DividendProgression.DeleteAll(true);
+            dataitem("Savings Accounts"; "Savings Accounts")
+            {
+                RequestFilterFields = "Member No.", "Product Type", "Employer Code", "No.";
+                DataItemTableView = WHERE("Product Type" = FILTER('4|1|3'));
+                trigger OnAfterGetRecord()
+                begin
+                    // SavingsAccounts.Reset();
+                    // SavingsAccounts.SetRange("Product Type", '4|1|3');
+                    // if SavingsAccounts.Findset then begin
+                    // intProgressTotal := "Savings Accounts".Count;
+                    // intProgressI := 0;
+                    // TimeProgress := Time;
+                    // NoOfRecsProgress := intProgressTotal DIV 100;
+                    // NoOfProgressed := 0;
 
-                        intProgressI += 1;
-                        if (intProgressI >= NoOfRecsProgress) or (Time - TimeProgress > 1000) then begin
-                            NoOfProgressed := NoOfProgressed + intProgressI;
-                            diaProgress.Update(1, ROUND(NoOfProgressed / intProgressTotal * 10000, 1));
-                            intProgressI := 0;
-                            TimeProgress := Time;
-                        end;
-                        DividendProcess.generateDivdends(SavingsAccounts, "Dividend Header");
+                    // diaProgress.Open(GeneratingDividends + '@1@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', intProgress);
+                    // repeat
+                    DividendProgression.Reset;
+                    DividendProgression.SetRange(DividendProgression."Header No.", "Dividend Header"."No.");
+                    DividendProgression.SetRange("Account No", "Savings Accounts"."No.");
+                    DividendProgression.DeleteAll(true);
 
-                    until SavingsAccounts.Next() = 0;
+                    // intProgressI += 1;
+                    // if (intProgressI >= NoOfRecsProgress) or (Time - TimeProgress > 1000) then begin
+                    //     NoOfProgressed := NoOfProgressed + intProgressI;
+                    //     diaProgress.Update(1, ROUND(NoOfProgressed / intProgressTotal * 10000, 1));
+                    //     intProgressI := 0;
+                    //     TimeProgress := Time;
+                    // end;
+                    DividendProcess.generateDivdends("Savings Accounts", "Dividend Header");
+
+                    // until SavingsAccounts.Next() = 0;
+                    // end;
                 end;
-            end;
+            }
+
 
             trigger OnPostDataItem()
             begin
-                diaProgress.Close;
+                // diaProgress.Close;
                 Message('Transaction generated succesfully');
             end;
 
@@ -101,5 +108,5 @@ Report 52185624 "Dividend Generation"
         NoOfProgressed: Integer;
         NoOfRecsProgress: Integer;
         DividendSetUp: Record "Dividend SetUp";
-        SavingsAccounts: Record "Savings Accounts";
+    //SavingsAccounts: Record "Savings Accounts";
 }

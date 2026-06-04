@@ -332,11 +332,16 @@ table 52185714 "Dividend Posting Buffer"
         field(27; Year; Integer)
         {
         }
+        field(28; "Header No."; Code[20])
+        {
+            Caption = 'Header No.';
+            TableRelation = "Dividend Header"."No.";
+        }
     }
 
     keys
     {
-        key(Key1; "Entry No.")
+        key(Key1; "Entry No.", "Header No.")
         {
             Clustered = true;
         }

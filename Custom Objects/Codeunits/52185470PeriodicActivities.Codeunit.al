@@ -1539,7 +1539,7 @@ Codeunit 52185470 "Periodic Activities"
             //++++++++++++++++++++++++++++++++++++Advice Everything+++++++++with Employer Code
             Employer.Reset;
             Employer.SetRange(Employer."No.", CheckoffAdviceHeader."Employer Code");
-            Employer.SetRange(Employer."Advice Method", Employer."advice method"::Everything);
+            //Employer.SetRange(Employer."Advice Method", Employer."advice method"::Everything);
             if Employer.Find('-') then begin
                 Loans.Reset;
                 loans.CalcFields("Total Balance");

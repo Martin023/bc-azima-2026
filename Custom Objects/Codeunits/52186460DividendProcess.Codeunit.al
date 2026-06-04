@@ -176,77 +176,40 @@ Codeunit 52186460 "Dividend Process"
                             FromDate := StartDate;
                             YearDateFilter := '..' + FORMAT(EndDate);
                             ToDate := CALCDATE('-1D', StartDate);
-                            // Message('StartDate %1, EndDate %2', StartDate, EndDate);
-                            // Message(format(Date2dmy(StartDate, 3)));
-                            if Date2dmy(StartDate, 3) = 2025 then
-                                DateFilter := format(20250504D) + '..' + FORMAT(CALCDATE('CM', StartDate))
-                            else
-                                DateFilter := '..' + FORMAT(CALCDATE('CM', StartDate));
+                            DateFilter := '..' + FORMAT(CALCDATE('-1D', StartDate));
                             EntrNo := 1000;
-                            if Date2dmy(StartDate, 3) = 2025 then begin
-                                FOR i := 8 DOWNTO 1 DO BEGIN
-                                    if i = 8 then begin
-                                        ToDate := CALCDATE('CM', StartDate);
-                                    end;
-                                    DividendAccount.RESET;
-                                    DividendAccount.SETFILTER("Date Filter", DateFilter);
-                                    DividendAccount.CALCFIELDS("Balance (LCY)");
-                                    QualifyingShares := DividendAccount."Balance (LCY)";
-                                    GrossDiv := ROUND(((ProductFactory."Interest Rate (Min.)" / 100) * QualifyingShares * (i / 12)), 0.01, '<');
-                                    WTaxDiv := ROUND((GrossDiv * (ProductFactory."WithHolding Tax" / 100)), 0.01, '<');
-                                    if GlobalFunctions.TaxExcemptions(DividendAccount."Member No.") = true then
-                                        WTaxDiv := 0;
-                                    NetDiv := GrossDiv - WTaxDiv;
-                                    EntrNo += 1;
+                            FOR i := 12 DOWNTO 1 DO BEGIN
+                                if i = 12 then begin
+                                    DateFilter := '..' + FORMAT(CALCDATE('CM', StartDate));
+                                    ToDate := CALCDATE('CM', StartDate);
+                                end;
+                                DividendAccount.RESET;
+                                DividendAccount.SETFILTER("Date Filter", DateFilter);
+                                DividendAccount.CALCFIELDS("Balance (LCY)");
+                                QualifyingShares := DividendAccount."Balance (LCY)";
+                                GrossDiv := ROUND(((ProductFactory."Interest Rate (Min.)" / 100) * QualifyingShares * (1 / 12)), 0.01, '<');
+                                WTaxDiv := ROUND((GrossDiv * (ProductFactory."WithHolding Tax" / 100)), 0.01, '<');
+                                if GlobalFunctions.TaxExcemptions(DividendAccount."Member No.") = true then
+                                    WTaxDiv := 0;
+                                NetDiv := GrossDiv - WTaxDiv;
+                                EntrNo += 1;
 
-                                    //IF CustMembr.GET(DividendAccount."Member No.") THEN
-                                    //DivPayMode := CustMembr."Dividend Payment Method";
+                                //IF CustMembr.GET(DividendAccount."Member No.") THEN
+                                //DivPayMode := CustMembr."Dividend Payment Method";
 
-                                    AccountBal := 0;
-                                    // DividendAccount.RESET;
-                                    // DividendAccount.SETFILTER("Date Filter", DateFilter);//, '..%1', ToDate);
-                                    // DividendAccount.CALCFIELDS("Balance (LCY)");
-                                    // GSetup.TESTFIELD("Minimum Div Earning Amount");
-                                    //IF DividendAccount."Balance (LCY)" >= ProductFactory."Interest Calc Min Balance" THEN
-                                    CreateDividendLines(DividendAccount."No.", TODAY, DividendAccount."Product Type", DividendAccount."Product Name", DividendAccount."Member No.",
-                                        QualifyingShares, DividendAccount."Balance (LCY)", GrossDiv, WTaxDiv, NetDiv,
-                                        ToDate, CALCDATE('-CM', ToDate), ProductFactory."Dividend Calc. Method", EntrNo, DivPayMode, DividendAccount."Balance (LCY)", TheMember, DivHeader."No.");
-                                    ToDate := CALCDATE('1M+CM', ToDate);
-                                    FromDate := CALCDATE('-CM', ToDate);
-                                    DateFilter := Format(FromDate) + '..' + Format(ToDate);
-                                END;
-                            end
-                            else begin
-                                FOR i := 12 DOWNTO 1 DO BEGIN
-                                    if i = 12 then ToDate := CALCDATE('CM', StartDate);
-                                    DividendAccount.RESET;
-                                    DividendAccount.SETFILTER("Date Filter", DateFilter);
-                                    DividendAccount.CALCFIELDS("Balance (LCY)");
-                                    QualifyingShares := DividendAccount."Balance (LCY)";
-                                    GrossDiv := ROUND(((ProductFactory."Interest Rate (Min.)" / 100) * QualifyingShares * (i / 12)), 0.01, '<');
-                                    WTaxDiv := ROUND((GrossDiv * (ProductFactory."WithHolding Tax" / 100)), 0.01, '<');
-                                    if GlobalFunctions.TaxExcemptions(DividendAccount."Member No.") = true then
-                                        WTaxDiv := 0;
-                                    NetDiv := GrossDiv - WTaxDiv;
-                                    EntrNo += 1;
-
-                                    //IF CustMembr.GET(DividendAccount."Member No.") THEN
-                                    //DivPayMode := CustMembr."Dividend Payment Method";
-
-                                    AccountBal := 0;
-                                    // DividendAccount.RESET;
-                                    // DividendAccount.SETFILTER("Date Filter", DateFilter);//, '..%1', ToDate);
-                                    // DividendAccount.CALCFIELDS("Balance (LCY)");
-                                    // GSetup.TESTFIELD("Minimum Div Earning Amount");
-                                    //IF DividendAccount."Balance (LCY)" >= ProductFactory."Interest Calc Min Balance" THEN
-                                    CreateDividendLines(DividendAccount."No.", TODAY, DividendAccount."Product Type", DividendAccount."Product Name", DividendAccount."Member No.",
-                                        QualifyingShares, DividendAccount."Balance (LCY)", GrossDiv, WTaxDiv, NetDiv,
-                                        ToDate, CALCDATE('-CM', ToDate), ProductFactory."Dividend Calc. Method", EntrNo, DivPayMode, DividendAccount."Balance (LCY)", TheMember, DivHeader."No.");
-                                    ToDate := CALCDATE('1M+CM', ToDate);
-                                    FromDate := CALCDATE('-CM', ToDate);
-                                    // DateFilter := Format(FromDate) + '..' + Format(ToDate);
-                                END;
-                            end;
+                                AccountBal := 0;
+                                // DividendAccount.RESET;
+                                // DividendAccount.SETFILTER("Date Filter", DateFilter);//, '..%1', ToDate);
+                                // DividendAccount.CALCFIELDS("Balance (LCY)");
+                                // GSetup.TESTFIELD("Minimum Div Earning Amount");
+                                // IF DividendAccount."Balance (LCY)" >= ProductFactory."Interest Calc Min Balance" THEN
+                                CreateDividendLines(DividendAccount."No.", TODAY, DividendAccount."Product Type", DividendAccount."Product Name", DividendAccount."Member No.",
+                                    QualifyingShares * (1 / 12), QualifyingShares, GrossDiv, WTaxDiv, NetDiv,
+                                    ToDate, CALCDATE('-CM', ToDate), ProductFactory."Dividend Calc. Method", EntrNo, DivPayMode, DividendAccount."Balance (LCY)", TheMember, DivHeader."No.");
+                                ToDate := CALCDATE('1M+CM', ToDate);
+                                FromDate := CALCDATE('-CM', ToDate);
+                                DateFilter := '..' + FORMAT(ToDate);// FORMAT(FromDate) + '..' + FORMAT(ToDate);
+                            END;
                         END;
                 END;
 
@@ -466,7 +429,7 @@ Codeunit 52186460 "Dividend Process"
     end;
 
 
-    procedure GenerateDividendPostingEntries(CustMemberNo: Code[20]; PostingOptions: Option All,"BOSA Deposists","Share Capital")
+    procedure GenerateDividendPostingEntries(CustMemberNo: Code[20]; PostingOptions: Option All,"BOSA Deposists","Share Capital"; DividendHeader: Record "Dividend Header")
     var
         DividendProgression: Record "Dividend Progression";
         DividendInstructionsMember: Record "Dividend Instructions - Member";
@@ -569,14 +532,15 @@ Codeunit 52186460 "Dividend Process"
     begin
         DividendSetUp.get();
         Year := DATE2DMY(today, 3);
-        PreviousYear := DATE2DMY(DividendSetUp."End Date", 3);
+        PreviousYear := DATE2DMY(DividendHeader."End Date", 3);
         DocumentNO := 'DIVPAY_' + Format((PreviousYear));
         DividendAmount := 0;
         RebatesAmount := 0;
         DividendPostingBuffer.RESET;
+        DividendPostingBuffer.SETRANGE("Header No.", DividendHeader."No.");
         IF DividendPostingBuffer.FINDLAST THEN
             EntrNo := DividendPostingBuffer."Entry No.";
-        getDividendSetup;
+        // getDividendSetup;
         IF CustMembr.GET(CustMemberNo) THEN BEGIN
             DividendEarned := Format((PreviousYear)) + ' DIVIDEND PAYMENT -';
             TransactionCharge := Format((PreviousYear)) + ' Dividend Processing Fee -';
@@ -627,6 +591,7 @@ Codeunit 52186460 "Dividend Process"
             DividendAmount := 0;
             RebatesAmount := 0;
             DividendProgression.RESET();
+            DividendProgression.SetRange("Header No.", DividendHeader."No.");
             DividendProgression.SETRANGE(DividendProgression."Member No", CustMembr."No.");
             DividendProgression.SETRANGE(Year, PreviousYear);
             DividendProgression.SETRANGE(Forfeited, false);
@@ -636,6 +601,7 @@ Codeunit 52186460 "Dividend Process"
             RebatesAmount := DividendProgression."Net Dividends";
 
             DividendProgression.RESET();
+            DividendProgression.SETRANGE("Header No.", DividendHeader."No.");
             DividendProgression.SETRANGE("Member No", CustMembr."No.");
             DividendProgression.SETRANGE(Year, PreviousYear);
             DividendProgression.SETRANGE(Forfeited, false);
@@ -652,6 +618,7 @@ Codeunit 52186460 "Dividend Process"
             ForfeitedAmount := 0;
 
             DividendProgression.RESET();
+            DividendProgression.SETRANGE("Header No.", DividendHeader."No.");
             DividendProgression.SETRANGE("Member No", CustMembr."No.");
             DividendProgression.SETRANGE(Year, PreviousYear);
             DividendProgression.SETRANGE(Forfeited, false);
@@ -675,6 +642,7 @@ Codeunit 52186460 "Dividend Process"
                     SHareCapAcc := '';
                     EntrNo += 1;
                     DividendPostingBuffer.INIT;
+                    DividendPostingBuffer."Header No." := DividendHeader."No.";
                     DividendPostingBuffer."Entry No." := EntrNo;
                     DividendPostingBuffer."Posting Date" := TODAY;
                     DividendPostingBuffer."Document No." := DocumentNO;
@@ -695,10 +663,11 @@ Codeunit 52186460 "Dividend Process"
                     IF DividendPostingBuffer.Amount <> 0 THEN
                         DividendPostingBuffer.INSERT;
                     //--------------------------------------------------------CAPITALIZE
-                    IF (GrossAmount) <= DividendSetUp."Minimum Capitalized" THEN BEGIN
+                    IF (GrossAmount) <= DividendHeader."Minimum Capitalized" THEN BEGIN
                         // Credit FOSA Acc
                         EntrNo += 1;
                         DividendPostingBuffer.INIT;
+                        DividendPostingBuffer."Header No." := DividendHeader."No.";
                         DividendPostingBuffer."Entry No." := EntrNo;
                         DividendPostingBuffer."Posting Date" := TODAY;
                         DividendPostingBuffer."Document No." := DocumentNO;
@@ -723,6 +692,7 @@ Codeunit 52186460 "Dividend Process"
 
                         EntrNo += 1;
                         DividendPostingBuffer.INIT;
+                        DividendPostingBuffer."Header No." := DividendHeader."No.";
                         DividendPostingBuffer."Entry No." := EntrNo;
                         DividendPostingBuffer."Posting Date" := TODAY;
                         DividendPostingBuffer."Document No." := DocumentNO;
@@ -744,6 +714,7 @@ Codeunit 52186460 "Dividend Process"
 
                         EntrNo += 1;
                         DividendPostingBuffer.INIT;
+                        DividendPostingBuffer."Header No." := DividendHeader."No.";
                         DividendPostingBuffer."Entry No." := EntrNo;
                         DividendPostingBuffer."Posting Date" := TODAY;
                         DividendPostingBuffer."Document No." := DocumentNO;
@@ -808,6 +779,7 @@ Codeunit 52186460 "Dividend Process"
                     IF (GrossAmount - DividendProgression."Witholding Tax") > DividendSetUp."Minimum Capitalized" THEN BEGIN
                         EntrNo += 1;
                         DividendPostingBuffer.INIT;
+                        DividendPostingBuffer."Header No." := DividendHeader."No.";
                         DividendPostingBuffer."Entry No." := EntrNo;
                         DividendPostingBuffer."Posting Date" := TODAY;
                         DividendPostingBuffer."Document No." := DocumentNO;
@@ -832,6 +804,7 @@ Codeunit 52186460 "Dividend Process"
 
                         EntrNo += 1;
                         DividendPostingBuffer.INIT;
+                        DividendPostingBuffer."Header No." := DividendHeader."No.";
                         DividendPostingBuffer."Entry No." := EntrNo;
                         DividendPostingBuffer."Posting Date" := TODAY;
                         DividendPostingBuffer."Document No." := DocumentNO;
@@ -855,6 +828,7 @@ Codeunit 52186460 "Dividend Process"
                         //FOSA Withholding Tax
                         EntrNo += 1;
                         DividendPostingBuffer.INIT;
+                        DividendPostingBuffer."Header No." := DividendHeader."No.";
                         DividendPostingBuffer."Entry No." := EntrNo;
                         DividendPostingBuffer."Posting Date" := TODAY;
                         DividendPostingBuffer."Document No." := DocumentNO;
@@ -877,6 +851,7 @@ Codeunit 52186460 "Dividend Process"
                         //Debit Charges
                         EntrNo += 1;
                         DividendPostingBuffer.INIT;
+                        DividendPostingBuffer."Header No." := DividendHeader."No.";
                         DividendPostingBuffer."Entry No." := EntrNo;
                         DividendPostingBuffer."Posting Date" := TODAY;
                         DividendPostingBuffer."Document No." := DocumentNO;
@@ -903,6 +878,7 @@ Codeunit 52186460 "Dividend Process"
 
                         EntrNo += 1;
                         DividendPostingBuffer.INIT;
+                        DividendPostingBuffer."Header No." := DividendHeader."No.";
                         DividendPostingBuffer."Entry No." := EntrNo;
                         DividendPostingBuffer."Posting Date" := TODAY;
                         DividendPostingBuffer."Document No." := DocumentNO;
@@ -930,9 +906,10 @@ Codeunit 52186460 "Dividend Process"
 
                     //New Deve
                     // IF (GrossAmount - (TCharges + Eexciseduty)) <= DividendSetUp."Minimum Capitalized" THEN BEGIN
-                    IF (GrossAmount - DividendProgression."Witholding Tax") <= DividendSetUp."Minimum Capitalized" THEN BEGIN
+                    IF (GrossAmount - DividendProgression."Witholding Tax") <= DividendHeader."Minimum Capitalized" THEN BEGIN
                         EntrNo += 1;
                         DividendPostingBuffer.INIT;
+                        DividendPostingBuffer."Header No." := DividendHeader."No.";
                         DividendPostingBuffer."Entry No." := EntrNo;
                         DividendPostingBuffer."Posting Date" := TODAY;
                         DividendPostingBuffer."Document No." := DocumentNO;
@@ -957,6 +934,7 @@ Codeunit 52186460 "Dividend Process"
                         //Withholding Tax
                         EntrNo += 1;
                         DividendPostingBuffer.INIT;
+                        DividendPostingBuffer."Header No." := DividendHeader."No.";
                         DividendPostingBuffer."Entry No." := EntrNo;
                         DividendPostingBuffer."Posting Date" := TODAY;
                         DividendPostingBuffer."Document No." := DocumentNO;
@@ -979,6 +957,7 @@ Codeunit 52186460 "Dividend Process"
                         //FOSA Withholding Tax
                         EntrNo += 1;
                         DividendPostingBuffer.INIT;
+                        DividendPostingBuffer."Header No." := DividendHeader."No.";
                         DividendPostingBuffer."Entry No." := EntrNo;
                         DividendPostingBuffer."Posting Date" := TODAY;
                         DividendPostingBuffer."Document No." := DocumentNO;
@@ -1003,6 +982,7 @@ Codeunit 52186460 "Dividend Process"
 
                         EntrNo += 1;
                         DividendPostingBuffer.INIT;
+                        DividendPostingBuffer."Header No." := DividendHeader."No.";
                         DividendPostingBuffer."Entry No." := EntrNo;
                         DividendPostingBuffer."Posting Date" := TODAY;
                         DividendPostingBuffer."Document No." := DocumentNO;
@@ -1030,6 +1010,7 @@ Codeunit 52186460 "Dividend Process"
                         //Excise Duty
                         EntrNo += 1;
                         DividendPostingBuffer.INIT;
+                        DividendPostingBuffer."Header No." := DividendHeader."No.";
                         DividendPostingBuffer."Entry No." := EntrNo;
                         DividendPostingBuffer."Posting Date" := TODAY;
                         DividendPostingBuffer."Document No." := DocumentNO;
@@ -1069,6 +1050,7 @@ Codeunit 52186460 "Dividend Process"
                                 IF LoanApps."Outstanding Interest" > 0 THEN BEGIN
                                     EntrNo += 1;
                                     DividendPostingBuffer.INIT;
+                                    DividendPostingBuffer."Header No." := DividendHeader."No.";
                                     DividendPostingBuffer."Entry No." := EntrNo;
                                     DividendPostingBuffer."Posting Date" := TODAY;
                                     DividendPostingBuffer."Document No." := DocumentNO;
@@ -1100,6 +1082,7 @@ Codeunit 52186460 "Dividend Process"
 
                                     EntrNo += 1;
                                     DividendPostingBuffer.INIT;
+                                    DividendPostingBuffer."Header No." := DividendHeader."No.";
                                     DividendPostingBuffer."Entry No." := EntrNo;
                                     DividendPostingBuffer."Posting Date" := TODAY;
                                     DividendPostingBuffer."Document No." := DocumentNO;
@@ -1138,6 +1121,7 @@ Codeunit 52186460 "Dividend Process"
                             //Div Loan Recovery from FOSA Account
                             EntrNo += 1;
                             DividendPostingBuffer.INIT;
+                            DividendPostingBuffer."Header No." := DividendHeader."No.";
                             DividendPostingBuffer."Entry No." := EntrNo;
                             DividendPostingBuffer."Posting Date" := TODAY;
                             DividendPostingBuffer."Document No." := DocumentNO;
@@ -1199,6 +1183,7 @@ Codeunit 52186460 "Dividend Process"
                                                 IntReco := 0;
                                                 EntrNo += 1;
                                                 DividendPostingBuffer.INIT;
+                                                DividendPostingBuffer."Header No." := DividendHeader."No.";
                                                 DividendPostingBuffer."Entry No." := EntrNo;
                                                 DividendPostingBuffer."Posting Date" := TODAY;
                                                 DividendPostingBuffer."Document No." := DocumentNO;
@@ -1236,6 +1221,7 @@ Codeunit 52186460 "Dividend Process"
 
                                                 EntrNo += 1;
                                                 DividendPostingBuffer.INIT;
+                                                DividendPostingBuffer."Header No." := DividendHeader."No.";
                                                 DividendPostingBuffer."Entry No." := EntrNo;
                                                 DividendPostingBuffer."Posting Date" := TODAY;
                                                 DividendPostingBuffer."Document No." := DocumentNO;
@@ -1284,6 +1270,7 @@ Codeunit 52186460 "Dividend Process"
                             end;
                             EntrNo += 1;
                             DividendPostingBuffer.INIT;
+                            DividendPostingBuffer."Header No." := DividendHeader."No.";
                             DividendPostingBuffer."Entry No." := EntrNo;
                             DividendPostingBuffer."Posting Date" := TODAY;
                             DividendPostingBuffer."Document No." := DocumentNO;
@@ -1316,6 +1303,7 @@ Codeunit 52186460 "Dividend Process"
                 if (CustMembr.Subflag = CustMembr.Subflag::Defaulter) then begin
                     TotalExcess := 0;
                     DividendPostingBuffer.reset;
+                    DividendPostingBuffer.SetRange("Header No.", DividendHeader."No.");
                     DividendPostingBuffer.setrange("Account No.", SavingsAccountNo);
                     DividendPostingBuffer.SetRange("Document No.", DocumentNO);
                     DividendPostingBuffer.CalcSums(Amount);
@@ -1332,6 +1320,7 @@ Codeunit 52186460 "Dividend Process"
 
                         EntrNo += 1;
                         DividendPostingBuffer.INIT;
+                        DividendPostingBuffer."Header No." := DividendHeader."No.";
                         DividendPostingBuffer."Entry No." := EntrNo;
                         DividendPostingBuffer."Posting Date" := TODAY;
                         DividendPostingBuffer."Document No." := DocumentNO;
@@ -1358,6 +1347,7 @@ Codeunit 52186460 "Dividend Process"
                         //Credit FOSA Account
                         EntrNo += 1;
                         DividendPostingBuffer.INIT;
+                        DividendPostingBuffer."Header No." := DividendHeader."No.";
                         DividendPostingBuffer."Entry No." := EntrNo;
                         DividendPostingBuffer."Posting Date" := TODAY;
                         DividendPostingBuffer."Document No." := DocumentNO;

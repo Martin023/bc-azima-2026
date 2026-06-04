@@ -2326,12 +2326,12 @@ page 52186778 "Finance Role Center"
                         //     Caption = 'Generate Dividend Posting Buffer';
                         //     RunObject = report "Dividend Posting Buffer";
                         // }
-                        action("Dividend Posting Buffer ")
-                        {
-                            ApplicationArea = all;
-                            Caption = 'Dividend Posting Buffer';
-                            RunObject = page "Dividend Posting Buffer";
-                        }
+                        // action("Dividend Posting Buffer ")
+                        // {
+                        //     ApplicationArea = all;
+                        //     Caption = 'Dividend Posting Buffer';
+                        //     RunObject = page "Dividend Posting Buffer";
+                        // }
                         group("Dividend Reports")
                         {
                             action("Dividends Register")

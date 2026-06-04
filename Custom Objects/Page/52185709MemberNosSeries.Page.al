@@ -56,6 +56,10 @@ page 52185709 "Member Nos. Series"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Portfolio Manager"; Rec."Portfolio Manager")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
 
                 field("Dividend Rate No."; Rec."Dividend Rate No.")
                 {

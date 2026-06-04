@@ -14,6 +14,8 @@ table 52185578 "Portfolio Manager"
         field(2; "Sales Representative"; Code[20])
         {
             Caption = 'Sales Representative';
+
+            tableRelation = "Marketing Teams Header"."Payroll No.";
         }
         field(3; "Sales Rep Name"; Text[1000])
         {
