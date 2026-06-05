@@ -60,6 +60,12 @@ Report 52185656 "Checkoff Advice - Loans"
                 column(Reference; Reference)
                 {
                 }
+                column(Product_Type; "Product Type")
+                {
+                }
+                column(Loan_No_; "Loan No.")
+                {
+                }
 
                 trigger OnAfterGetRecord()
                 begin

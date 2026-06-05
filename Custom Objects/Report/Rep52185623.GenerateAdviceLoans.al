@@ -19,6 +19,7 @@ report 52185623 "Generate Advice Loans"
             }
             dataitem(Loans; Loans)
             {
+                CalcFields = "Total Balance";
                 DataItemTableView = where(Posted = const(true), "Total Balance" = filter(> 0));
                 RequestFilterFields = "Loan Product Type", "Disbursement Date", "Member No.", "Employer Code", "Work Station";
                 trigger OnpreDataItem()
@@ -110,11 +111,11 @@ report 52185623 "Generate Advice Loans"
             trigger OnAfterGetRecord()
             begin
 
-                CheckoffAdvice.Reset;
-                CheckoffAdvice.SetRange(CheckoffAdvice."Advice Header No.", CheckoffAdviceHeader."No.");
-                if CheckoffAdvice.Find('-') then begin
-                    CheckoffAdvice.DeleteAll;
-                end;
+                // CheckoffAdvice.Reset;
+                // CheckoffAdvice.SetRange(CheckoffAdvice."Advice Header No.", CheckoffAdviceHeader."No.");
+                // if CheckoffAdvice.Find('-') then begin
+                //     CheckoffAdvice.DeleteAll;
+                // end;
 
                 CheckoffAdvice.Reset;
                 CheckoffAdvice.SetRange(CheckoffAdvice.Period, CheckoffAdviceHeader.Period);
