@@ -1,6 +1,6 @@
 namespace BCAZIMA.BCAZIMA;
 
-page 50102 "Product Supported Classes List"
+page 52185442 "Product Supported Classes List"
 {
     PageType = List;
     SourceTable = "Product Supported Classes";

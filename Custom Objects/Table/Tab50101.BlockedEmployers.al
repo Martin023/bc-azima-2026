@@ -1,4 +1,4 @@
-table 50101 "Blocked Employers"
+table 52185446 "Blocked Employers"
 {
     Caption = 'Blocked Employers';
     DataClassification = ToBeClassified;

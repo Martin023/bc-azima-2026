@@ -1,4 +1,4 @@
-table 50100 "Product Supported Classes"
+table 52185474 "Product Supported Classes"
 {
     Caption = 'Product Supported Classes';
     DataClassification = ToBeClassified;
