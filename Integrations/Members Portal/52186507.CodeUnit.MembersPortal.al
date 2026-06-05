@@ -5499,7 +5499,7 @@ codeunit 52186507 "Members Portal Integration"
                 TheLeaveApplication.Reset;
                 TheLeaveApplication.SetRange("Application Code", application_no.AsValue.AsText);
                 TheLeaveApplication.SetRange("Applicant Staff No.", Employee."No.");
-                TheLeaveApplication.SetRange(Status, TheLeaveApplication.Status::New);
+                TheLeaveApplication.SetFilter(Status,'%1|%2',TheLeaveApplication.Status::New,TheLeaveApplication.Status::"Pending Approval");
 
                 if TheLeaveApplication.FindFirst then begin
                     TheLeaveApplication.Status := TheLeaveApplication.Status::Cancelled;
