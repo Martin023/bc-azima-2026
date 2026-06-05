@@ -315,6 +315,12 @@ page 52185499 "E-Channels Role Center"
                     Caption = 'Transaction Limits';
                     RunObject = Page "E-Channels Transaction Setup";
                 }
+                action("Gaming Paybills Setup")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Gaming Paybills Setup';
+                    RunObject = Page "Gaming Paybills Setup";
+                }
             }
         }
 
