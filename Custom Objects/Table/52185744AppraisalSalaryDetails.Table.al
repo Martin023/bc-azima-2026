@@ -29,8 +29,8 @@ table 52185744 "Appraisal Salary Details"
         }
         field(4; Type; Option)
         {
-            OptionCaption = ' ,Earnings,Deductions,Basic,Other Allowances ,Gross Pay,Fosa Income,Pension,House Allowance,Taxable Pay,Relief,Pension Relief';
-            OptionMembers = " ",Earnings,Deductions,Basic,"Other Allowances","Gross Pay","Net Income",Pension,"House Allowance","Taxable Pay",Relief,"Pension Relief";
+            OptionCaption = ' ,Earnings,Deductions,Basic,Other Allowances ,Gross Pay,Fosa Income,Pension,House Allowance,Taxable Pay,Relief';
+            OptionMembers = " ",Earnings,Deductions,Basic,"Other Allowances","Gross Pay","Net Income",Pension,"House Allowance","Taxable Pay",Relief;
             trigger OnValidate()
             var
                 myInt: Integer;
@@ -100,7 +100,7 @@ table 52185744 "Appraisal Salary Details"
                 end;
                 //end of initializing STO Amount
 
-                if (Type = Type::"Gross Pay") or (Type = Type::"Pension Relief") then
+                if (Type = Type::"Gross Pay")then
                     Error(Text002);
 
                 if Type = Type::Basic then begin
@@ -325,11 +325,8 @@ table 52185744 "Appraisal Salary Details"
         HousingLevyAmount := ROUND((curTransAmount * (1.5 / 100)), 0.01, '<');
         //Message('Housing Levy: %1', HousingLevyAmount);
 
-        PensionRelief := PensionReliefAmount(curPensionAmount, CurGrossPay);
-        curPayeAmount := ROUND(PensionRelief, 0.01, '>');
-
         Relief := 2400;
-        TaxablePay := curTransAmount - curNSSF - ShifAmount - HousingLevyAmount -  PensionRelief;
+        TaxablePay := curTransAmount - curNSSF - ShifAmount - HousingLevyAmount -  curPensionAmount;
         curPayeAmount := prPayrollProcessing.fnGetEmployeePaye(TaxablePay);
         curPayeAmount := curPayeAmount - Relief;
         curPayeAmount := ROUND(curPayeAmount, 0.01, '>');
@@ -375,9 +372,6 @@ table 52185744 "Appraisal Salary Details"
 
                         'SACCO LOANS':
                             ApprDetails.Amount := TotalOutstanding;
-
-                        'PENSION RELIEF':
-                            ApprDetails.Amount := PensionRelief;
 
                     end;
 
@@ -440,19 +434,6 @@ table 52185744 "Appraisal Salary Details"
         end;
     end;
 
-    Local procedure PensionReliefAmount(curReliefPension: Decimal; curGross: Decimal) PersonalReliefAmount : Decimal;
-    var
-        VitalSetup: Record "PR Vital Setup Info";
-    
-    begin
-        VitalSetup.FindFirst;
-        clear(PersonalReliefAmount);
-        curMaxPensionContrib := VitalSetup."Max Pension Contribution";
-
-        PersonalReliefAmount := PersonalReliefAmount + ((curReliefPension / 100) * curGross);
-        if PersonalReliefAmount > curMaxPensionContrib then PersonalReliefAmount := curMaxPensionContrib
-
-    end;
 
     var
         "SalarySet-up": Record "Appraisal Salary Set-up";
