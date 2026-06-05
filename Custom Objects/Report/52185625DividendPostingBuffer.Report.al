@@ -4,38 +4,45 @@ Report 52185625 "Dividend Posting Buffer"
 
     dataset
     {
-        dataitem(Members; "Members")
+        dataitem(DividendHeader; "Dividend Header")
         {
-            // 
-            RequestFilterFields = "No.", "Employer Code";
+            RequestFilterFields = "No.", "Start Date", "End Date", Year;
 
-            trigger OnAfterGetRecord()
-            begin
-                DividendSetUp.get();
-                Year := Date2dmy(DividendSetUp."Start Date", 3);
-                PreviousYear := Year;
-                DividendPostingBuffer.Reset();
-                DividendPostingBuffer.SetRange(Posted, false);
-                DividendPostingBuffer.SetRange("Member No.", Members."No.");
-                if DividendPostingBuffer.FindSet() then
-                    DividendPostingBuffer.DeleteAll(true);
+            dataitem(Members; "Members")
+            {
+                // 
+                RequestFilterFields = "No.", "Employer Code";
+
+                trigger OnAfterGetRecord()
+                begin
+                    // DividendSetUp.get();
+                    // Year := Date2dmy(DividendHeader."Start Date", 3);
+                    // PreviousYear := Year;
+                    DividendPostingBuffer.Reset();
+                    DividendPostingBuffer.SetRange("Header No.", DividendHeader."No.");
+                    DividendPostingBuffer.SetRange(Posted, false);
+                    DividendPostingBuffer.SetRange("Member No.", Members."No.");
+                    if DividendPostingBuffer.FindSet() then
+                        DividendPostingBuffer.DeleteAll(true);
 
 
-                DividendProcess.GenerateDividendPostingEntries(Members."No.", PostingOptions);
+                    DividendProcess.GenerateDividendPostingEntries(Members."No.", PostingOptions,DividendHeader);
 
-            end;
+                end;
 
-            // trigger OnPostDataItem()
-            // begin
-            //     Message(Text001);
-            // end;
+                // trigger OnPostDataItem()
+                // begin
+                //     Message(Text001);
+                // end;
 
-            trigger OnPreDataItem()
-            begin
-                Year := Date2dmy(Today, 3);
-                PreviousYear := Year - 1;
-            end;
+                trigger OnPreDataItem()
+                begin
+                    // Year := Date2dmy(Today, 3);
+                    // PreviousYear := Year - 1;
+                end;
+            }
         }
+
     }
 
     requestpage
@@ -79,15 +86,5 @@ Report 52185625 "Dividend Posting Buffer"
         Text001: label 'Successfully Processed.';
         DividendProcess: Codeunit "Dividend Process";
         DividendPostingBuffer: Record "Dividend Posting Buffer";
-        Year: Integer;
-        PreviousYear: Integer;
-        intProgressTotal: Integer;
-        diaProgress: Dialog;
-        intProgressI: Integer;
-        intProgress: Integer;
-        TimeProgress: Time;
-        NoOfProgressed: Integer;
-        NoOfRecsProgress: Integer;
-        DividendSetUp: Record "Dividend SetUp";
         PostingOptions: Option All,"BOSA Deposits","Share Capital";
 }

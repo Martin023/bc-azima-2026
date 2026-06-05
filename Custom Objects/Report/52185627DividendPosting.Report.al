@@ -5,83 +5,87 @@ Report 52185627 "Dividend Posting"
 
     dataset
     {
-        dataitem(Members; members)
+        dataitem(DividendHeader; "Dividend Header")
         {
+            RequestFilterFields = "No.", "Start Date", "End Date", Year;
+            dataitem(Members; members)
+            {
 
-            RequestFilterFields = "No.";
+                RequestFilterFields = "No.";
+
+                trigger OnAfterGetRecord()
+                var
+                    DividendpII: Codeunit DVII;
+                    DividendProcess: Codeunit "Dividend Process";
+                begin
+                    Year := Date2dmy(Today, 3);
+
+                    PreviousYear := Date2DMY(DividendHeader."End Date", 3);
+
+                    //ERROR('Fine %1',PreviousYear);
+
+                    DividendProgression.Reset;
+                    DividendProgression.SetRange("Header No.", DividendHeader."No.");
+                    DividendProgression.SetRange(DividendProgression."Member No", "No.");
+                    DividendProgression.SetRange(DividendProgression.Year, PreviousYear);
+                    if DividendProgression.Find('-') then begin
+                        intProgressI += 1;
+
+                        if (intProgressI >= NoOfRecsProgress) or (Time - TimeProgress > 1000) then begin
+                            NoOfProgressed := NoOfProgressed + intProgressI;
+                            diaProgress.Update(1, ROUND(NoOfProgressed / intProgressTotal * 10000, 1));
+                            intProgressI := 0;
+                            TimeProgress := Time;
+                        end;
+                        DividendPostingBuffer.SetCurrentKey("Member No.", Posted);
+                        DividendPostingBuffer.SetRange("Member No.", "No.");
+                        DividendPostingBuffer.SetRange(Posted, false);
+                        IF DividendPostingBuffer.Find('-') THEN BEGIN
+                            DividendpII.PostDiv(Members."No.", SendSMS);
+                        end;
 
 
-            trigger OnAfterGetRecord()
-            var
-                DividendpII: Codeunit DVII;
-                DividendProcess: Codeunit "Dividend Process";
-            begin
-                Year := Date2dmy(Today, 3);
-                DividendSetUp.Get();
-                PreviousYear := Date2DMY(DividendSetUp."End Date", 3);
-
-                //ERROR('Fine %1',PreviousYear);
-
-                DividendProgression.Reset;
-                DividendProgression.SetRange(DividendProgression."Member No", "No.");
-                DividendProgression.SetRange(DividendProgression.Year, PreviousYear);
-                if DividendProgression.Find('-') then begin
-                    intProgressI += 1;
-
-                    if (intProgressI >= NoOfRecsProgress) or (Time - TimeProgress > 1000) then begin
-                        NoOfProgressed := NoOfProgressed + intProgressI;
-                        diaProgress.Update(1, ROUND(NoOfProgressed / intProgressTotal * 10000, 1));
-                        intProgressI := 0;
-                        TimeProgress := Time;
                     end;
-                    DividendPostingBuffer.SetCurrentKey("Member No.", Posted);
-                    DividendPostingBuffer.SetRange("Member No.", "No.");
-                    DividendPostingBuffer.SetRange(Posted, false);
-                    IF DividendPostingBuffer.Find('-') THEN BEGIN
-                        DividendpII.PostDiv(Members."No.", SendSMS);
-                    end;
-
-
                 end;
-            end;
 
-            trigger OnPostDataItem()
-            var
+                trigger OnPostDataItem()
+                var
 
-                Text001: label 'Successfully Processed.';
-                DividendProcess: Codeunit "Dividend Process";
-            begin
-                diaProgress.Close;
-                Message(MessageTxt);
-            end;
+                    Text001: label 'Successfully Processed.';
+                    DividendProcess: Codeunit "Dividend Process";
+                begin
+                    diaProgress.Close;
+                    Message(MessageTxt);
+                end;
 
-            trigger OnPreDataItem()
+                trigger OnPreDataItem()
 
-            begin
-                intProgressTotal := Members.Count;
+                begin
+                    intProgressTotal := Members.Count;
 
-                if UserSetup.Get(UserId) then
-                    if UserSetup."Post Dividend" = false then
-                        Error('You are not allowed to Post Dividend');
+                    if UserSetup.Get(UserId) then
+                        if UserSetup."Post Dividend" = false then
+                            Error('You are not allowed to Post Dividend');
 
 
-                Temp.Get(UserId);
-                Temp.TestField("Cashier Journal Template");
-                Temp.TestField("Cashier Journal Batch");
-                JBatch := Temp."Cashier Journal Batch";
-                Jtemplate := Temp."Cashier Journal Template";
-                GenJLine.SetRange("Journal Batch Name", JBatch);
-                GenJLine.SetRange("Journal Template Name", Jtemplate);
-                if GenJLine.Find('-') then
-                    GenJLine.DeleteAll;
+                    Temp.Get(UserId);
+                    Temp.TestField("Cashier Journal Template");
+                    Temp.TestField("Cashier Journal Batch");
+                    JBatch := Temp."Cashier Journal Batch";
+                    Jtemplate := Temp."Cashier Journal Template";
+                    GenJLine.SetRange("Journal Batch Name", JBatch);
+                    GenJLine.SetRange("Journal Template Name", Jtemplate);
+                    if GenJLine.Find('-') then
+                        GenJLine.DeleteAll;
 
-                intProgressI := 0;
-                TimeProgress := Time;
-                NoOfRecsProgress := intProgressTotal DIV 100;
-                NoOfProgressed := 0;
+                    intProgressI := 0;
+                    TimeProgress := Time;
+                    NoOfRecsProgress := intProgressTotal DIV 100;
+                    NoOfProgressed := 0;
 
-                diaProgress.Open(DividendsPosting + '@1@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', intProgress);
-            end;
+                    diaProgress.Open(DividendsPosting + '@1@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', intProgress);
+                end;
+            }
         }
     }
 

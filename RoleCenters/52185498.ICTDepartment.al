@@ -107,6 +107,83 @@ page 52187058 "ICT Department"
                         RunObject = report "User Posting Dates Update";
                     }
                 }
+                group("Dividend Processing")
+                {
+
+                    // action("Run Dividends")
+                    // {
+                    //     ApplicationArea = all;
+                    //     Caption = 'Dividends Generation';
+                    //     RunObject = report "Dividend Generation";
+                    // }
+                    action("Dividend Progression ")
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Dividend Progression List';
+                        RunObject = page "Dividend Header List";
+                    }
+                    // action("Dividend Posting Buffer")
+                    // {
+                    //     ApplicationArea = all;
+                    //     Caption = 'Generate Dividend Posting Buffer';
+                    //     RunObject = report "Dividend Posting Buffer";
+                    // }
+                    // action("Dividend Posting Buffer ")
+                    // {
+                    //     ApplicationArea = all;
+                    //     Caption = 'Dividend Posting Buffer';
+                    //     RunObject = page "Dividend Posting Buffer";
+                    // }
+                    group("Dividend Reports")
+                    {
+                        action("Dividends Register")
+                        {
+                            ApplicationArea = all;
+                            Caption = 'Dividend Register';
+                            RunObject = report "Dividend Register";
+                        }
+                        action("Dividends Slip")
+                        {
+                            ApplicationArea = all;
+                            Caption = 'Dividend Slip';
+                            RunObject = report "Dividend Slip B64";
+                        }
+                        action("Dividends Statement")
+                        {
+                            ApplicationArea = all;
+                            Caption = 'Dividend Summary';
+                            RunObject = report "Dividend Register Summary";
+                        }
+                        action("DividendsRegister")
+                        {
+                            ApplicationArea = all;
+                            Caption = 'Detailed Dividend Register';
+                            RunObject = report "Dividend Register Filtered";
+                        }
+                        action("Dividend Capitalization")
+                        {
+                            ApplicationArea = all;
+                            Caption = 'Dividend Capitalization';
+                            RunObject = report "Dividends Capitalization";
+                        }
+                        action("Tax Exemption Report")
+                        {
+                            ApplicationArea = all;
+
+                            RunObject = report "Tax Exemption Report";
+
+                        }
+                        action("Flagged Dividend Report")
+                        {
+                            ApplicationArea = all;
+
+                            RunObject = report FlaggedDividendRegister;
+
+                        }
+
+
+                    }
+                }
 
             }
             group("User Termination and Reactivation")
@@ -1214,12 +1291,12 @@ page 52187058 "ICT Department"
                                 Caption = 'Update Loan Installments';
                                 RunObject = report "Update Loan Instalments";
                             }
-                            action("Post Lien")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                caption = 'Post Lien';
-                                RunObject = report "Post Lien";
-                            }
+                            // action("Post Lien")
+                            // {
+                            //     ApplicationArea = Basic, Suite;
+                            //     caption = 'Post Lien';
+                            //     RunObject = report "Post Lien";
+                            // }
                             action("Generate CRB Data")
                             {
                                 ApplicationArea = Basic, Suite;
@@ -3032,7 +3109,7 @@ page 52187058 "ICT Department"
                     }
                     group("Web Portal")
                     {
-                       
+
                         group(" Web Portal Transactions")
                         {
                             action("Portal Transactions")

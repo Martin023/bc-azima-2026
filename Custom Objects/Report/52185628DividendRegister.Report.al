@@ -147,6 +147,7 @@ Report 52185628 "Dividend Register"
                 end;
 
                 DividendProgression.Reset;
+                DividendProgression.SetRange(DividendProgression."Header No.", HeaderNo);
                 DividendProgression.SetRange(DividendProgression."Member No", Members."No.");
                 DividendProgression.SetRange(Year, DividendsYear);
                 DividendProgression.SetFilter("Product Type", '1');
@@ -195,7 +196,9 @@ Report 52185628 "Dividend Register"
 
             trigger OnPreDataItem()
             begin
-                if DividendsYear = 0 then Error('Kindly specify dividends year');
+                if HeaderNo = '' then
+                    Error('Kindly specify the header no. to filter the report');
+                //if DividendsYear = 0 then Error('Kindly specify dividends year');
             end;
         }
     }
@@ -208,6 +211,12 @@ Report 52185628 "Dividend Register"
         {
             area(content)
             {
+                field(HeaderNo; HeaderNo)
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Header No.';
+                    TableRelation = "Dividend Header"."No.";
+                }
                 field("Dividends Year"; DividendsYear)
                 {
                     ApplicationArea = Basic;
@@ -273,6 +282,7 @@ Report 52185628 "Dividend Register"
         DividendInstr: record "Dividend Instructions - Member";
         AmountCapitalize: decimal;
         Date2: date;
+        HeaderNo: Code[20];
 
 
 }

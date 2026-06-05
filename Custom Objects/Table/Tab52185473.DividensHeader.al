@@ -38,10 +38,12 @@ table 52185473 "Dividend Header"
         field(5; "Global Dimension 1 Code"; Code[30])
         {
             Caption = 'Branch Code';
+            Editable = false;
         }
         field(6; "Global Dimension 2 Code"; Code[30])
         {
             Caption = 'Activity Code';
+            editable = false;
         }
         field(7; "Responsibility Center"; Code[30])
         {
@@ -66,6 +68,10 @@ table 52185473 "Dividend Header"
         field(10; "End Date"; Date)
         {
             Caption = 'End Date';
+        }
+        field(11; "Minimum Capitalized"; Decimal)
+        {
+            Caption = 'Minimum Capitalized';
         }
     }
     keys

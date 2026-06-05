@@ -427,54 +427,5 @@ Codeunit 52185467 DVII
         //**MESSAGE(MessageTxt);
     end;
 
-    local procedure AdviceLoan(Loans: Record Loans; LoanAmount: Decimal)
-    var
-        iEntryNo: Integer;
-        CheckoffAdvice: Record "Checkoff Advice Line";
-        PaymentMethods: Record "Payment Methods";
-        Memb: Record Members;
-    begin
-        Loans.CalcFields(Loans."Outstanding Balance");
-        iEntryNo := 0;
-        CheckoffAdvice.Reset;
-        CheckoffAdvice.SetRange(CheckoffAdvice."Advice Date", Today);
-        CheckoffAdvice.SetRange(CheckoffAdvice."Loan No.", Loans."Loan No.");
-        if CheckoffAdvice.Find('-') then
-            CheckoffAdvice.DeleteAll;
-
-        CheckoffAdvice.Reset;
-        if CheckoffAdvice.Find('+') then
-            iEntryNo := CheckoffAdvice."Entry No" + 1;
-
-        CheckoffAdvice.Init;
-        CheckoffAdvice."Entry No" := iEntryNo;
-        CheckoffAdvice."Account No." := Loans."Loan Account";
-        CheckoffAdvice."Product Type" := Loans."Loan Product Type";
-        CheckoffAdvice."Loan No." := Loans."Loan No.";
-        if Memb.Get(Loans."Member No.") then
-            CheckoffAdvice."ID No." := Memb."Primary Identification";
-        CheckoffAdvice."Member No." := Loans."Member No.";
-        CheckoffAdvice."Employer Code" := Loans."Employer Code";
-        CheckoffAdvice.Validate(CheckoffAdvice."Member No.");
-        CheckoffAdvice.Names := Loans."Member Name";
-
-        //Different Mode of Payment***************
-        PaymentMethods.Reset;
-        PaymentMethods.SetRange(PaymentMethods."Loan No.", Loans."Loan No.");
-        PaymentMethods.SetRange(PaymentMethods."Member No.", Loans."Member No.");
-        PaymentMethods.SetRange(PaymentMethods."Payment Method", PaymentMethods."payment method"::Checkoff);
-        if PaymentMethods.Find('-') then begin
-            CheckoffAdvice."Amount On" := PaymentMethods.Amount;
-        end else
-            CheckoffAdvice."Amount On" := Loans.Repayment;
-        CheckoffAdvice."Balance On" := Loans."Outstanding Balance" - LoanAmount;
-        CheckoffAdvice."Advice Date" := 20190105D;
-        CheckoffAdvice."Payroll No" := Memb."Payroll/Staff No.";
-        CheckoffAdvice.Interest := Loans."Loan Interest Repayment";
-        if (Loans."Outstanding Balance" - LoanAmount) <= 0 then
-            CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Stoppage
-        else
-            CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Adjustment;
-        CheckoffAdvice.Insert;
-    end;
+    
 }

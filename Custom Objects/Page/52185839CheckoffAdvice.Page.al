@@ -47,6 +47,10 @@ page 52185839 "Checkoff Advice"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Work Station"; Rec."Work Station")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 // field("SAD No."; Rec."SAD No.")
                 // {
                 //     ApplicationArea = Basic, Suite;

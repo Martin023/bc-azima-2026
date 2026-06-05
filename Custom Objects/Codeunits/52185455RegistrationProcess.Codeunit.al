@@ -144,7 +144,7 @@ Codeunit 52185455 "Registration Process"
             end;
         END;
 
-                if MemberApplication."Secondary Identification" <> '' then begin
+        if MemberApplication."Secondary Identification" <> '' then begin
             if MemberApplication."Type of Application" <> MemberApplication."Type of Application"::Readmission then begin
                 Members.Reset;
                 Members.SetRange("Primary Identification Type", MemberApplication."Secondary Identification Type");
@@ -505,19 +505,19 @@ Codeunit 52185455 "Registration Process"
                             SavingsAcc.Status := ProductFactory."Auto Openning Account Status";
                             SavingsAcc.Insert;
 
-                            if (SavingsAcc."Product Category" = SavingsAcc."Product Category"::"BOSA Deposits") or
-                            (SavingsAcc."Product Category" = SavingsAcc."Product Category"::Risk) or
-                            (SavingsAcc."Product Category" = SavingsAcc."Product Category"::"Benevolent (BBF)") then
-                                LoanProcess.AdviceShares(SavingsAcc, DefaultSavAccReg."Monthly Contribution", Cust."No.");
+                            // if (SavingsAcc."Product Category" = SavingsAcc."Product Category"::"BOSA Deposits") or
+                            // (SavingsAcc."Product Category" = SavingsAcc."Product Category"::Risk) or
+                            // (SavingsAcc."Product Category" = SavingsAcc."Product Category"::"Benevolent (BBF)") then
+                            //     LoanProcess.AdviceShares(SavingsAcc, DefaultSavAccReg."Monthly Contribution", Cust."No.");
 
                             //Advice
-                            if MemberApplication."Member Segment" = 'CHECKOFF' then begin
-                                if (SavingsAcc."Product Category" = SavingsAcc."Product Category"::"BOSA Deposits") or
-                                (SavingsAcc."Product Category" = SavingsAcc."Product Category"::"Benevolent (BBF)") or
-                                (SavingsAcc."Product Category" = SavingsAcc."product category"::"Entrance Fee") then begin
-                                    AdviceSavings(SavingsAcc, SavingsAcc."Monthly Contribution", SavingsAcc."Monthly Contribution");
-                                end;
-                            end;
+                            // if MemberApplication."Member Segment" = 'CHECKOFF' then begin
+                            //     if (SavingsAcc."Product Category" = SavingsAcc."Product Category"::"BOSA Deposits") or
+                            //     (SavingsAcc."Product Category" = SavingsAcc."Product Category"::"Benevolent (BBF)") or
+                            //     (SavingsAcc."Product Category" = SavingsAcc."product category"::"Entrance Fee") then begin
+                            //         AdviceSavings(SavingsAcc, SavingsAcc."Monthly Contribution", SavingsAcc."Monthly Contribution");
+                            //     end;
+                            // end;
 
                             //Accrue Registration Fee
                             CompanyInformation.Get();
@@ -591,9 +591,9 @@ Codeunit 52185455 "Registration Process"
                 until SavingsAcc.Next() = 0;
             end;
             SavAcc.Reset();
-            SavAcc.SetRange("Member No.",MemberApplication."Principle Member");
-            SavAcc.SetRange("Product Category",SavAcc."Product Category"::"FOSA Account");
-            SavAcc.SetRange("Loan Disbursement Account",true);
+            SavAcc.SetRange("Member No.", MemberApplication."Principle Member");
+            SavAcc.SetRange("Product Category", SavAcc."Product Category"::"FOSA Account");
+            SavAcc.SetRange("Loan Disbursement Account", true);
             IF SavAcc.FindFirst then
                 FOSAACC := SavAcc."No.";
         end;
@@ -1921,97 +1921,97 @@ Codeunit 52185455 "Registration Process"
     end;
 
 
-    procedure AdviceSavings(SavingsAccounts: Record "Savings Accounts"; OldAmount: Decimal; NewAmount: Decimal)
-    var
-        CheckoffAdvice: Record "Checkoff Advice Line";
-        iEntryNo: Integer;
-        SavingsAccount: Record "Savings Accounts";
-        MemberClass: Record "Member Classes";
-        ProductFactory: Record "Product Factory";
-        Members: Record Members;
-    begin
-        //Advice Deposits Changes
-        begin
-            SavingsAccounts.CalcFields("Balance (LCY)");
-            iEntryNo := 0;
-            CheckoffAdvice.Reset;
-            if CheckoffAdvice.Find('+') then
-                iEntryNo := CheckoffAdvice."Entry No" + 1;
-            if Members.Get(SavingsAccounts."Member No.") then begin
-                if MemberClass.Get(Members."Member Class") then begin
-                    if SavingsAccounts."Product Category" = SavingsAccounts."Product Category"::"BOSA Deposits" then
-                        //NewAmount:=MemberClass."Default BOSA Deposit";
-                        if SavingsAccounts."Product Category" = SavingsAccounts."Product Category"::"Benevolent (BBF)" then begin
-                            // if ProductFactory.Get("Product Type") then begin
-                            //     //NewAmount:=ProductFactory."Minimum Contribution";
-                            // end;
-                        end;
-                end;
+    // procedure AdviceSavings(SavingsAccounts: Record "Savings Accounts"; OldAmount: Decimal; NewAmount: Decimal)
+    // var
+    //     CheckoffAdvice: Record "Checkoff Advice Line";
+    //     iEntryNo: Integer;
+    //     SavingsAccount: Record "Savings Accounts";
+    //     MemberClass: Record "Member Classes";
+    //     ProductFactory: Record "Product Factory";
+    //     Members: Record Members;
+    // begin
+    //     //Advice Deposits Changes
+    //     begin
+    //         SavingsAccounts.CalcFields("Balance (LCY)");
+    //         iEntryNo := 0;
+    //         CheckoffAdvice.Reset;
+    //         if CheckoffAdvice.Find('+') then
+    //             iEntryNo := CheckoffAdvice."Entry No" + 1;
+    //         if Members.Get(SavingsAccounts."Member No.") then begin
+    //             if MemberClass.Get(Members."Member Class") then begin
+    //                 if SavingsAccounts."Product Category" = SavingsAccounts."Product Category"::"BOSA Deposits" then
+    //                     //NewAmount:=MemberClass."Default BOSA Deposit";
+    //                     if SavingsAccounts."Product Category" = SavingsAccounts."Product Category"::"Benevolent (BBF)" then begin
+    //                         // if ProductFactory.Get("Product Type") then begin
+    //                         //     //NewAmount:=ProductFactory."Minimum Contribution";
+    //                         // end;
+    //                     end;
+    //             end;
 
-            end;
+    //         end;
 
-            if (SavingsAccounts.Status = SavingsAccounts.Status::Closed) or (SavingsAccounts.Status = SavingsAccounts.Status::New) then
-                OldAmount := 0;
+    //         if (SavingsAccounts.Status = SavingsAccounts.Status::Closed) or (SavingsAccounts.Status = SavingsAccounts.Status::New) then
+    //             OldAmount := 0;
 
-            CheckoffAdvice.Init;
-            CheckoffAdvice."Entry No" := iEntryNo;
-            CheckoffAdvice."Account No." := SavingsAccounts."No.";
-            CheckoffAdvice."Member No." := SavingsAccounts."Member No.";
-            CheckoffAdvice."Payroll No" := SavingsAccounts."Payroll/Staff No.";
-            CheckoffAdvice.Validate(CheckoffAdvice."Member No.");
-            CheckoffAdvice."Amount On" := NewAmount;
-            CheckoffAdvice."Amount Off" := 0;
-            CheckoffAdvice.Type := CheckoffAdvice.Type::Savings;
+    //         CheckoffAdvice.Init;
+    //         CheckoffAdvice."Entry No" := iEntryNo;
+    //         CheckoffAdvice."Account No." := SavingsAccounts."No.";
+    //         CheckoffAdvice."Member No." := SavingsAccounts."Member No.";
+    //         CheckoffAdvice."Payroll No" := SavingsAccounts."Payroll/Staff No.";
+    //         CheckoffAdvice.Validate(CheckoffAdvice."Member No.");
+    //         CheckoffAdvice."Amount On" := NewAmount;
+    //         CheckoffAdvice."Amount Off" := 0;
+    //         CheckoffAdvice.Type := CheckoffAdvice.Type::Savings;
 
-            SavingsAccount.Reset;
-            SavingsAccount.SetRange("No.", SavingsAccounts."No.");
-            if SavingsAccount.Find('-') then begin
-                SavingsAccount.CalcFields("Balance (LCY)");
-                CheckoffAdvice."Balance On" := SavingsAccount."Balance (LCY)";
+    //         SavingsAccount.Reset;
+    //         SavingsAccount.SetRange("No.", SavingsAccounts."No.");
+    //         if SavingsAccount.Find('-') then begin
+    //             SavingsAccount.CalcFields("Balance (LCY)");
+    //             CheckoffAdvice."Balance On" := SavingsAccount."Balance (LCY)";
 
-                if SavingsAccount."Employer Account No" <> '' then
-                    CheckoffAdvice."Employer Account No." := SavingsAccount."Employer Account No"
-                else
-                    CheckoffAdvice."Employer Account No." := SavingsAccount."No.";
-            end;
+    //             if SavingsAccount."Employer Account No" <> '' then
+    //                 CheckoffAdvice."Employer Account No." := SavingsAccount."Employer Account No"
+    //             else
+    //                 CheckoffAdvice."Employer Account No." := SavingsAccount."No.";
+    //         end;
 
-            if SavingsAccounts."Product Category" = SavingsAccounts."Product Category"::"BOSA Deposits" then begin
-                SavingsAccount.Reset;
-                SavingsAccount.SetRange("Member No.", SavingsAccounts."Member No.");
-                SavingsAccount.SetFilter(Status, '<>%1', SavingsAccount.Status::Closed);
-                SavingsAccount.SetRange("Product Category", SavingsAccount."Product Category"::"BOSA Deposits");
-                if SavingsAccount.Find('-') then begin
-                    SavingsAccount.CalcFields("Balance (LCY)");
-                    if SavingsAccount."Employer Balance" = 0 then
-                        CheckoffAdvice."Balance On" := /*CheckoffAdvice."Balance On"+*/SavingsAccount."Balance (LCY)"//Commented to prevent doubling of balance on
-                    else
-                        CheckoffAdvice."Balance On" := NewAmount + SavingsAccount."Employer Balance";
-                end;
-            end;
+    //         if SavingsAccounts."Product Category" = SavingsAccounts."Product Category"::"BOSA Deposits" then begin
+    //             SavingsAccount.Reset;
+    //             SavingsAccount.SetRange("Member No.", SavingsAccounts."Member No.");
+    //             SavingsAccount.SetFilter(Status, '<>%1', SavingsAccount.Status::Closed);
+    //             SavingsAccount.SetRange("Product Category", SavingsAccount."Product Category"::"BOSA Deposits");
+    //             if SavingsAccount.Find('-') then begin
+    //                 SavingsAccount.CalcFields("Balance (LCY)");
+    //                 if SavingsAccount."Employer Balance" = 0 then
+    //                     CheckoffAdvice."Balance On" := /*CheckoffAdvice."Balance On"+*/SavingsAccount."Balance (LCY)"//Commented to prevent doubling of balance on
+    //                 else
+    //                     CheckoffAdvice."Balance On" := NewAmount + SavingsAccount."Employer Balance";
+    //             end;
+    //         end;
 
-            CheckoffAdvice."Advice Method" := CheckoffAdvice."advice method"::Changes;
-            CheckoffAdvice."Advice Date" := Today;
-            CheckoffAdvice."ID No." := SavingsAccounts."ID No.";
-            CheckoffAdvice."Employer Code" := SavingsAccounts."Employer Code";
-            CheckoffAdvice.Names := SavingsAccounts.Name;
-            CheckoffAdvice."Product Type" := SavingsAccounts."Product Type";
-            if NewAmount = OldAmount then
-                CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Adjustment
-            else
-                CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Variations;
-            // if NewAmount = 0 then begin
-            //     CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Stoppage;
-            //     CheckoffAdvice."Balance Off" := SavingsAccount."Monthly Contribution";
-            // end else
-            //     if "Balance (LCY)" = 0 then
-            //         CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::New;
-            //**CheckoffAdvice.VALIDATE(CheckoffAdvice."Account No.");
-            CheckoffAdvice.Validate(CheckoffAdvice."Product Type");
-            if (CheckoffAdvice."Amount On" <> 0) or (CheckoffAdvice."Amount Off" <> 0) or (CheckoffAdvice."Balance On" <> 0) or (CheckoffAdvice."Advice Type" = CheckoffAdvice."advice type"::Stoppage) then
-                CheckoffAdvice.Insert(true);
-        end;
+    //         CheckoffAdvice."Advice Method" := CheckoffAdvice."advice method"::Changes;
+    //         CheckoffAdvice."Advice Date" := Today;
+    //         CheckoffAdvice."ID No." := SavingsAccounts."ID No.";
+    //         CheckoffAdvice."Employer Code" := SavingsAccounts."Employer Code";
+    //         CheckoffAdvice.Names := SavingsAccounts.Name;
+    //         CheckoffAdvice."Product Type" := SavingsAccounts."Product Type";
+    //         if NewAmount = OldAmount then
+    //             CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Adjustment
+    //         else
+    //             CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Variations;
+    //         // if NewAmount = 0 then begin
+    //         //     CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Stoppage;
+    //         //     CheckoffAdvice."Balance Off" := SavingsAccount."Monthly Contribution";
+    //         // end else
+    //         //     if "Balance (LCY)" = 0 then
+    //         //         CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::New;
+    //         //**CheckoffAdvice.VALIDATE(CheckoffAdvice."Account No.");
+    //         CheckoffAdvice.Validate(CheckoffAdvice."Product Type");
+    //         if (CheckoffAdvice."Amount On" <> 0) or (CheckoffAdvice."Amount Off" <> 0) or (CheckoffAdvice."Balance On" <> 0) or (CheckoffAdvice."Advice Type" = CheckoffAdvice."advice type"::Stoppage) then
+    //             CheckoffAdvice.Insert(true);
+    //     end;
 
-    end;
+    // end;
 
     local procedure HasProrataContractualDep(MemberNo: Code[20]) HasProrataContractualDep: Boolean
     var
