@@ -1291,12 +1291,12 @@ page 52187058 "ICT Department"
                                 Caption = 'Update Loan Installments';
                                 RunObject = report "Update Loan Instalments";
                             }
-                            action("Post Lien")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                caption = 'Post Lien';
-                                RunObject = report "Post Lien";
-                            }
+                            // action("Post Lien")
+                            // {
+                            //     ApplicationArea = Basic, Suite;
+                            //     caption = 'Post Lien';
+                            //     RunObject = report "Post Lien";
+                            // }
                             action("Generate CRB Data")
                             {
                                 ApplicationArea = Basic, Suite;

@@ -9,58 +9,26 @@ Report 52185656 "Checkoff Advice - Loans"
         dataitem("Checkoff Advice Header"; "Checkoff Advice Header")
         {
             RequestFilterFields = "No.";
-            column(ReportForNavId_2; 2)
-            {
-            }
+
             dataitem("Checkoff Advice Line"; "Checkoff Advice Line")
             {
                 DataItemLink = "Advice Header No." = field("No.");
                 RequestFilterFields = "Employer Code";
-                column(ReportForNavId_1; 1)
-                {
-                }
-                column(Moratorium; Moratorium)
-                {
 
-                }
-                column(StartDatemoratorium; StartDatemoratorium)
-                {
-
-                }
-                column(EndDateMoratorium; EndDateMoratorium)
-                {
-
-                }
                 column(MemberNo; "Checkoff Advice Line"."Member No.")
                 {
                 }
                 column(PayrollNo; "Checkoff Advice Line"."Payroll No")
                 {
                 }
-                column(Name; Name)
-                {
-                }
                 column(AmountOn; "Checkoff Advice Line"."Amount On")
                 {
                 }
-                column(AmountOff; "Checkoff Advice Line"."Amount Off")
-                {
-                }
+
                 column(BalanceOn; "Checkoff Advice Line"."Balance On")
                 {
                 }
-                column(BalaceOff; "Checkoff Advice Line"."Balance Off")
-                {
-                }
-                column(ProductFactory; CheckoffAdviceLine."Product Name")
-                {
-                }
-                column(Product_Type; "Product Type")
-                { }
-                column(Loan_No_; "Loan No.")
-                {
 
-                }
                 column(CompanyName; Company.Name)
                 {
                 }
@@ -73,12 +41,7 @@ Report 52185656 "Checkoff Advice - Loans"
                 column(Period; "Checkoff Advice Header".Period)
                 {
                 }
-                column(EmployerName; "Checkoff Advice Header"."Employer Name")
-                {
-                }
-                column(EmployerAccountNo; "Checkoff Advice Line"."Employer Account No.")
-                {
-                }
+
                 column(Narration; NarationCode)
                 {
                 }
@@ -90,38 +53,13 @@ Report 52185656 "Checkoff Advice - Loans"
                 }
                 column(ApprovedAmount; ApprovedAmount)
                 { }
-                column(EDcode; EDcode)
-                {
-                }
-                column(TransType; ActionCode)
-                {
-                }
-                column(Interest; IntCode)
-                {
-                }
-                column("Action"; TransCode)
-                {
-                }
-                column(Loan_Interest_Repayment; "Loan Interest Repayment")
-                { }
-                column(Loan_Principle_Repayment; "Loan Principle Repayment")
-                { }
-                column(BookNo; BookNo)
+
+                column(Work_Station; "Work Station")
                 {
                 }
                 column(Reference; Reference)
                 {
                 }
-                column(Remarks; "Variation Action")
-                {
-                }
-                column(Employer_Code; "Employer Code") { }
-                column(Member_No_; "Member No.") { }
-                column(Standing_Order_amount; "Standing Order amount")
-                {
-                }
-                column(Total_Loan_Repayment; "Total Loan Repayment")
-                { }
 
                 trigger OnAfterGetRecord()
                 begin
@@ -133,55 +71,55 @@ Report 52185656 "Checkoff Advice - Loans"
                             CurrReport.Skip;
                     end;
 
-                    if Members.Get("Checkoff Advice Line"."Member No.") then begin
-                        CheckoffAdviceLine.Reset;
-                        CheckoffAdviceLine.SetCurrentkey("Member No.");
-                        CheckoffAdviceLine.SetRange("Advice Header No.", "Checkoff Advice Header"."No.");
-                        CheckoffAdviceLine.SetRange("Member No.", Members."No.");
-                        if CheckoffAdviceLine.Find('-') then begin
-                            repeat
-                                MemberNo := CheckoffAdviceLine."Member No.";
-                                Name := CheckoffAdviceLine.Names;
-                                Amount := Amount + CheckoffAdviceLine."Amount On" + CheckoffAdviceLine.Interest;
-                            until CheckoffAdviceLine.Next = 0;
-                        end;
-                    end;
+                    // if Members.Get("Checkoff Advice Line"."Member No.") then begin
+                    //     CheckoffAdviceLine.Reset;
+                    //     CheckoffAdviceLine.SetCurrentkey("Member No.");
+                    //     CheckoffAdviceLine.SetRange("Advice Header No.", "Checkoff Advice Header"."No.");
+                    //     CheckoffAdviceLine.SetRange("Member No.", Members."No.");
+                    //     if CheckoffAdviceLine.Find('-') then begin
+                    //         repeat
+                    //             MemberNo := CheckoffAdviceLine."Member No.";
+                    //             Name := CheckoffAdviceLine.Names;
+                    //             Amount := Amount + CheckoffAdviceLine."Amount On" + CheckoffAdviceLine.Interest;
+                    //         until CheckoffAdviceLine.Next = 0;
+                    //     end;
+                    // end;
 
-                    if "Checkoff Advice Line"."Advice Type" = "Checkoff Advice Line"."advice type"::Adjustment then begin
-                        NarationCode := Format("Checkoff Advice Line"."Employer Code") + 'ADJUSTMENT';
-                        ActionCode := '5';
-                        TransCode := 1;
+                    // if "Checkoff Advice Line"."Advice Type" = "Checkoff Advice Line"."advice type"::Adjustment then begin
+                    //     NarationCode := Format("Checkoff Advice Line"."Employer Code") + 'ADJUSTMENT';
+                    //     ActionCode := '5';
+                    //     TransCode := 1;
 
-                    end else
-                        if "Checkoff Advice Line"."Advice Type" = "Checkoff Advice Line"."advice type"::Stoppage then begin
-                            NarationCode := Format("Checkoff Advice Line"."Employer Code") + 'STOPPAGE';
-                            ActionCode := '3';
-                            TransCode := 1;
-                        end else
-                            if "Checkoff Advice Line"."Advice Type" = "Checkoff Advice Line"."advice type"::"New Loan" then begin
-                                NarationCode := Format("Checkoff Advice Line"."Employer Code") + 'NEW LOAN';
-                                TransCode := 2;
-                                ActionCode := '12';
-                            end else
-                                if "Checkoff Advice Line"."Advice Type" = "Checkoff Advice Line"."advice type"::Variations then begin
-                                    NarationCode := Format("Checkoff Advice Line"."Employer Code") + 'VARIATION';
-                                    ActionCode := '2';
-                                    TransCode := 1;
-                                end;
-                    if Loans.Get("Checkoff Advice Line"."Loan No.") then begin
-                        ApprovedAmount := Loans."Approved Amount";
-                        if (Loans."Interest Calculation Method" = Loans."interest calculation method"::"Reducing Flat") or
-                          (Loans."Interest Calculation Method" = Loans."interest calculation method"::Amortised) then
-                            IntCode := 1
-                        else
-                            IntCode := 0;
-                        if Loans."Moratorium Loan" = true then begin
-                            Moratorium := Loans."Moratorium Loan";
-                            StartDatemoratorium := Loans."Moratorium Start Date";
-                            EndDateMoratorium := Loans."Moratorium End date";
-                        end;
+                    // end else
+                    //     if "Checkoff Advice Line"."Advice Type" = "Checkoff Advice Line"."advice type"::Stoppage then begin
+                    //         NarationCode := Format("Checkoff Advice Line"."Employer Code") + 'STOPPAGE';
+                    //         ActionCode := '3';
+                    //         TransCode := 1;
+                    //     end else
+                    //         if "Checkoff Advice Line"."Advice Type" = "Checkoff Advice Line"."advice type"::"New Loan" then begin
+                    //             NarationCode := Format("Checkoff Advice Line"."Employer Code") + 'NEW LOAN';
+                    //             TransCode := 2;
+                    //             ActionCode := '12';
+                    //         end else
+                    //             if "Checkoff Advice Line"."Advice Type" = "Checkoff Advice Line"."advice type"::Variations then begin
+                    //                 NarationCode := Format("Checkoff Advice Line"."Employer Code") + 'VARIATION';
+                    //                 ActionCode := '2';
+                    //                 TransCode := 1;
+                    //             end;
+                    // if Loans.Get("Checkoff Advice Line"."Loan No.") then begin
+                    //     ApprovedAmount := Loans."Approved Amount";
+                    //     if (Loans."Interest Calculation Method" = Loans."interest calculation method"::"Reducing Flat") or
+                    //       (Loans."Interest Calculation Method" = Loans."interest calculation method"::Amortised) then
+                    //         IntCode := 1
+                    //     else
+                    //         IntCode := 0;
+                    //     if Loans."Moratorium Loan" = true then begin
+                    //         Moratorium := Loans."Moratorium Loan";
+                    //         StartDatemoratorium := Loans."Moratorium Start Date";
+                    //         EndDateMoratorium := Loans."Moratorium End date";
+                    //     end;
 
-                    end;
+                    // end;
                     //IF Turn=2 THEN CurrReport.SKIP
                     EDcode := Company."ED Code";
                     SaccoCode := Company."Sacco Code";

@@ -14,17 +14,17 @@ table 52185818 "Checkoff Advice Line"
             Editable = false;
             TableRelation = Members."No.";
 
-            trigger OnValidate()
-            begin
+            // trigger OnValidate()
+            // begin
 
-                if "Advice Type" = "Advice Type"::"New Loan" then begin
-                    Period := Format(CalcDate('1M', Today), 0, Text000)
-                end else
-                    Period := Format(CalcDate('1M', Today), 0, Text000);
-                // Period:=FORMAT(TODAY,0,Text000);
+            //     if "Advice Type" = "Advice Type"::"New Loan" then begin
+            //         Period := Format(CalcDate('1M', Today), 0, Text000)
+            //     end else
+            //         Period := Format(CalcDate('1M', Today), 0, Text000);
+            //     // Period:=FORMAT(TODAY,0,Text000);
 
-                "Captured  By" := UserId;
-            end;
+            //     "Captured  By" := UserId;
+            // end;
         }
         field(3; "Account No."; Code[20])
         {
@@ -179,49 +179,6 @@ table 52185818 "Checkoff Advice Line"
             OptionCaption = 'Savings,Credit';
             OptionMembers = Savings,Credit;
 
-            trigger OnValidate()
-            begin
-                //*********Variation********//
-                if "Advice Type" = "Advice Type"::Variations then begin
-                    if SavingsAccounts.Get("Account No.") then
-                        "Balance On" := SavingsAccounts."Employer Balance";
-                    if Loans.Get("Loan No.") then
-                        "Balance On" := Loans."Employer Balance";
-
-                    if ("Amount On" = "Amount Off") or ("Amount Off" = 0) or ("Amount On" = 0) then
-                        Error('Kindly confirm on Amount off/On');
-                end else
-                    if "Advice Type" = "Advice Type"::Adjustment then begin
-                        if SavingsAccounts.Get("Account No.") then begin
-                            SavingsAccounts.CalcFields("Balance (LCY)");
-                            "Balance On" := SavingsAccounts."Balance (LCY)";
-                        end;
-                        if Loans.Get("Loan No.") then begin
-                            Loans.CalcFields("Outstanding Balance");
-                            "Balance On" := Loans."Outstanding Balance";
-                        end;
-                        if "Amount On" <> "Amount On" then
-                            Error('Kindly confirm Amount off/On');
-                    end else
-                        if "Advice Type" = "Advice Type"::Stoppage then begin
-                            if SavingsAccounts.Get("Account No.") then
-                                "Balance On" := SavingsAccounts."Employer Balance";
-                            if Loans.Get("Loan No.") then
-                                "Balance On" := Loans."Employer Balance";
-
-                            if ("Amount Off" = 0) or ("Amount On" <> 0) or ("Balance On" <> 0) then
-                                Error('Kindly confirm on Amount off/On');
-                        end else
-                            if "Advice Type" = "Advice Type"::New then begin
-                                if SavingsAccounts.Get("Account No.") then
-                                    "Balance On" := SavingsAccounts."Employer Balance";
-                                if Loans.Get("Loan No.") then
-                                    "Balance On" := Loans."Employer Balance";
-
-                                if ("Amount Off" <> 0) or ("Amount On" <> 0) or ("Balance On" <> 0) then
-                                    Error('Kindly confirm on Amount off/On');
-                            end;
-            end;
         }
         field(28; "Modified By"; Code[50])
         {
@@ -274,6 +231,11 @@ table 52185818 "Checkoff Advice Line"
         field(68; "Total Loan Repayment"; Decimal)
         {
             Editable = false;
+        }
+        field(69; "Work Station"; code[50])
+        {
+            Editable = false;
+            DataClassification = ToBeClassified;
         }
     }
 
