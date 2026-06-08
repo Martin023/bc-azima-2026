@@ -1325,6 +1325,12 @@ codeunit 52186512 "Sky M-Banking Transactions"
         msg: text;
         SendSMS: Codeunit SendSms;
         Netamt: decimal;
+
+        LoanAvailability: Record "Loan Product Availability";
+        CurrentMonthInt: Integer;
+        CurrentMonthEnum: Enum "Loan Month";
+        AllowedMonths: Text;
+
     begin
         TotalExisting := 0;
         if not GenSetUp.GET then begin
@@ -1337,6 +1343,37 @@ codeunit 52186512 "Sky M-Banking Transactions"
             QualifiedAmount := 0;
             EXIT(QualifiedAmount);
         end;
+        // Azima Mazao Loan
+        CurrentMonthInt := Date2DMY(Today(), 2);
+        Evaluate(CurrentMonthEnum, Format(CurrentMonthInt));
+
+        LoanAvailability.SetRange("Loan Product Code", ProductID);
+        LoanAvailability.SetRange(Accessible, true);
+
+        if LoanAvailability.FindSet() then begin
+            repeat
+                if AllowedMonths <> '' then
+                    AllowedMonths += ', ';
+                AllowedMonths += Format(LoanAvailability.Month);
+            until LoanAvailability.Next() = 0;
+        end;
+
+        LoanAvailability.Reset();
+        LoanAvailability.SetRange("Loan Product Code", ProductID);
+        LoanAvailability.SetRange(Month, CurrentMonthEnum);
+        LoanAvailability.SetRange(Accessible, true);
+
+        if not LoanAvailability.FindFirst() then begin
+            EligibilityFailReason :=
+              StrSubstNo(
+                'Loan %1 is only available in: %2',
+                ProductID,
+                AllowedMonths
+              );
+            QualifiedAmount := 0;
+            exit(QualifiedAmount);
+        end;
+        // Azima Mazao Loan
 
         // Check mobile loan buffer for unposted loans application
         MobileLoanBuffer.Reset;
@@ -1646,6 +1683,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         END;
         exit(amtQualified);
     end;
+
     procedure ComputeSTODeductions(AccountNo: Code[20]): Decimal
     var
         AmountToDeduct: Decimal;
