@@ -953,12 +953,12 @@ page 52185500 "Main Role Center"
                             Caption = 'Update Loan Installments';
                             RunObject = report "Update Loan Instalments";
                         }
-                        action("Post Lien")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            caption = 'Post Lien';
-                            RunObject = report "Post Lien";
-                        }
+                        // action("Post Lien")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     caption = 'Post Lien';
+                        //     RunObject = report "Post Lien";
+                        // }
                         action("Generate CRB Data")
                         {
                             ApplicationArea = Basic, Suite;

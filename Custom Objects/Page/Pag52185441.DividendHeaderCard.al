@@ -8,6 +8,8 @@ page 52185441 "Dividend Header Card"
     SourceTable = "Dividend Header";
     ApplicationArea = All;
     DeleteAllowed = false;
+    PromotedActionCategories = 'New,Process,Report,Approvals';
+
 
     layout
     {
@@ -21,6 +23,11 @@ page 52185441 "Dividend Header Card"
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the No. field.', Comment = '%';
+                }
+                field("Minimum Capitalized"; Rec."Minimum Capitalized")
+                {
+                    ApplicationArea = Basic, Suite;
+                    ShowMandatory = true;
                 }
                 group("Date Filter")
                 {
@@ -66,14 +73,21 @@ page 52185441 "Dividend Header Card"
                 field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic, Suite;
+                    editable = false;
                 }
 
-                part(DividendLines; "Dividend Progression")
-                {
-                    ApplicationArea = All;
-                    SubPageLink = "Header No." = field("No.");
-                }
 
+
+            }
+            part(DividendLines; "Dividend Progression")
+            {
+                ApplicationArea = All;
+                SubPageLink = "Header No." = field("No.");
+            }
+            part(DividendPostingBuff; "Dividend Posting Buffer")
+            {
+                ApplicationArea = All;
+                SubPageLink = "Header No." = field("No.");
             }
         }
     }
@@ -88,9 +102,18 @@ page 52185441 "Dividend Header Card"
                 Image = Add;
                 Promoted = true;
                 PromotedCategory = Process;
-                RunObject = report "Dividend Generation";
+
+                trigger OnAction()
+                var
+                    DivHead: Record "Dividend Header";
+                begin
+                    DivHead.reset();
+                    DivHead.setrange("No.", Rec."No.");
+                    if DivHead.findfirst() then
+                        report.run(report::"Dividend Generation", true, true, DivHead)
+                end;
             }
-            
+
             action("Clear Progressions")
             {
                 ApplicationArea = All, Basic, Suite;
@@ -255,7 +278,7 @@ page 52185441 "Dividend Header Card"
                     Enabled = NOT OpenApprovalEntriesExist;
                     Image = SendApprovalRequest;
                     Promoted = true;
-                    PromotedCategory = Category9;
+                    PromotedCategory = category4;
 
                     trigger OnAction()
                     var
@@ -279,7 +302,7 @@ page 52185441 "Dividend Header Card"
                     Caption = 'Cancel Approval Re&quest';
                     Image = Cancel;
                     Promoted = true;
-                    PromotedCategory = Category9;
+                    PromotedCategory = category4;
 
                     trigger OnAction()
                     var
@@ -299,7 +322,7 @@ page 52185441 "Dividend Header Card"
                     Caption = 'Re-Open (Return) Application';
                     Image = ReOpen;
                     Promoted = true;
-                    PromotedCategory = Category9;
+                    PromotedCategory = category4;
 
                     trigger OnAction()
                     var
@@ -323,7 +346,7 @@ page 52185441 "Dividend Header Card"
                     Caption = 'Approvals';
                     Image = Approvals;
                     Promoted = true;
-                    PromotedCategory = Category9;
+                    PromotedCategory = category4;
 
                     trigger OnAction()
                     var
@@ -331,6 +354,60 @@ page 52185441 "Dividend Header Card"
                         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                     begin
                         ApprovalsMgmt.OpenApprovalEntriesPage(rec.RecordId);
+                    end;
+                }
+            }
+            group(DIvidendPostingBuffer)
+            {
+                action("Dividend Posting Buffer")
+                {
+                    Caption = 'Dividend Posting Buffer';
+                    ApplicationArea = Basic, Suite;
+                    Image = Add;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    trigger OnAction()
+                    var
+                        DivHead: Record "Dividend Header";
+                    begin
+                        DivHead.reset();
+                        DivHead.setrange("No.", Rec."No.");
+                        if DivHead.findfirst() then
+                            report.run(report::"Dividend Posting Buffer", true, true, DivHead)
+                    end;
+                }
+                action("Post")
+                {
+                    Caption = 'Post';
+                    ApplicationArea = Basic, Suite;
+                    Image = PostBatch;
+                    Promoted = true;
+                    PromotedCategory = Process;
+
+                    trigger OnAction()
+                    var
+                        DivHead: Record "Dividend Header";
+                    begin
+                        DivHead.reset();
+                        DivHead.setrange("No.", Rec."No.");
+                        if DivHead.findfirst() then
+                            report.run(report::"Dividend Posting", true, true, DivHead)
+                    end;
+                }
+
+                action("Send SMS")
+                {
+                    Caption = 'Send SMS';
+                    ApplicationArea = Basic, Suite;
+                    Image = PostBatch;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    trigger OnAction()
+                    begin
+                        // if Confirm('Are you sure you want to send Dividend SMS to members?', false) then
+                        //     report.run(report::"Dividend SMS")
+                        // else
+                        //     message('Operation Cancelled');
                     end;
                 }
             }

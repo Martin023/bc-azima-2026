@@ -42,6 +42,10 @@ page 52186311 "Comments List"
                 {
                     Visible = FlagBooleanVisible;
                 }
+
+                field("Reminder Date"; Rec."Reminder Date")
+                {
+                }                
                 field("Responsibility Center"; Rec."Responsibility Center")
                 {
                     Editable = false;

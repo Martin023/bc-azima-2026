@@ -1211,6 +1211,16 @@ page 52185712 "Product Factory"
                     RunObject = Page "Target Employers";
                     RunPageLink = "Product ID" = FIELD("Product ID");
                 }
+                action("Loan Product Availability")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Image = SetupPayment;
+                    Enabled = CreditProductVisible;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    RunObject = Page "Loan Product Availability";
+                    RunPageLink = "Loan Product Code" = FIELD("Product ID");
+                }
             }
         }
 

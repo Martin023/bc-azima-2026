@@ -198,7 +198,7 @@ page 52185840 "Checkoff Header"
                         Error('Ensure checkoff type is selected before proceeding.');
 
                     if Rec."CheckOff Type" = Rec."CheckOff Type"::Savings then
-                        Xmlport.Run(52185554, true, true)
+                        Xmlport.Run(xmlport::"Savings BP", true, true)
                     else
                         if Rec."CheckOff Type" = Rec."CheckOff Type"::Loans then
                             Xmlport.Run(xmlport::"Loans BP", true, true) else

@@ -404,7 +404,6 @@ codeunit 52185457 "Membership Closure Mgmt"
 
                                 RunBal -= Amt;
                             end;
-                            LoansProcess.AdviceLoan(Loans."Loan No.", true, MembershipClosure."No.");
                         until Loans.Next = 0;
                     end;
 

@@ -1023,13 +1023,13 @@ page 52187040 "Bulk Refunds Card"
                 Rec."Time Posted" := time;
                 Rec.Modify;
 
-                LoanClearanceLines.Reset;
-                LoanClearanceLines.SetRange("Refund Header No.", Rec.No);
-                if LoanClearanceLines.FindSet then begin
-                    repeat
-                        LoansProcess.AdviceLoan(LoanClearanceLines."Loan No.", false, Rec.No);
-                    until LoanClearanceLines.Next() = 0;
-                end;
+                // LoanClearanceLines.Reset;
+                // LoanClearanceLines.SetRange("Refund Header No.", Rec.No);
+                // if LoanClearanceLines.FindSet then begin
+                //     repeat
+                //         LoansProcess.AdviceLoan(LoanClearanceLines."Loan No.", false, Rec.No);
+                //     until LoanClearanceLines.Next() = 0;
+                // end;
                 Message('Transaction Posted succesfully');
 
                 exit;

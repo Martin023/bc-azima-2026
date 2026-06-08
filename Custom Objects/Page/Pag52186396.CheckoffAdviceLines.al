@@ -3,7 +3,7 @@ page 52186396 "Checkoff Advice Lines"
     Caption = 'Checkoff Advice Lines';
     SourceTable = "Checkoff Advice Line";
     PageType = ListPart;
-    
+
     layout
     {
         area(content)
@@ -18,10 +18,10 @@ page 52186396 "Checkoff Advice Lines"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Advice Header No."; Rec."Advice Header No.")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Advice Header No."; Rec."Advice Header No.")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("Member No."; Rec."Member No.")
                 {
                     ApplicationArea = Basic, Suite;
@@ -43,10 +43,10 @@ page 52186396 "Checkoff Advice Lines"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                // field("SAD No."; Rec."SAD No.")
-                // {
-                //     ApplicationArea = Basic, Suite;
-                // }
+                field("Work Station"; Rec."Work Station")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Loan No."; Rec."Loan No.")
                 {
                     ApplicationArea = Basic, Suite;
@@ -67,10 +67,10 @@ page 52186396 "Checkoff Advice Lines"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Balance Off"; Rec."Balance Off")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Balance Off"; Rec."Balance Off")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("Product Type"; Rec."Product Type")
                 {
                     ApplicationArea = Basic, Suite;
@@ -79,11 +79,11 @@ page 52186396 "Checkoff Advice Lines"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field(Interest; Rec.Interest)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Visible = false;
-                }
+                // field(Interest; Rec.Interest)
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Visible = false;
+                // }
                 field("Payroll No"; Rec."Payroll No")
                 {
                     ApplicationArea = Basic, Suite;
@@ -96,24 +96,24 @@ page 52186396 "Checkoff Advice Lines"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field(Manual; Rec.Manual)
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Employer Account No."; Rec."Employer Account No.")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Modified By"; Rec."Modified By")
-                {
-                    Editable = false;
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Captured  By"; Rec."Captured  By")
-                {
-                    Editable = false;
-                    ApplicationArea = Basic, Suite;
-                }
+                // field(Manual; Rec.Manual)
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("Employer Account No."; Rec."Employer Account No.")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("Modified By"; Rec."Modified By")
+                // {
+                //     Editable = false;
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("Captured  By"; Rec."Captured  By")
+                // {
+                //     Editable = false;
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field(Reference; Rec.Reference)
                 {
                     ToolTip = 'Specifies the value of the Reference field.';
