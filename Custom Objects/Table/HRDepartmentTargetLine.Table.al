@@ -1,4 +1,4 @@
-table 52185446 "HR Department Target Line"
+table 52185482 "HR Department Target Line"
 {
     Caption = 'HR Department Target Line';
     DataClassification = CustomerContent;
