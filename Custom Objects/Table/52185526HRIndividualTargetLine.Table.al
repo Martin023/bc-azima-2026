@@ -59,6 +59,7 @@ table 52185526 "HR Individual Target Line"
         }
         field(11; "Company Target"; Code[50])
         {
+            //FIELD CAN BE USED TO LINK INDIVIDUAL TARGETS TO EITHER COMPANY TARGETS (52185516) OR DEPARTMENT TARGETS (52185474)
         }
         field(12; "Start Date"; Date)
         {
