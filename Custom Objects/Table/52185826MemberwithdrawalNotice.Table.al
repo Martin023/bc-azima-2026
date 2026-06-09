@@ -744,8 +744,8 @@ table 52185826 "Member withdrawal Notice"
                     "maturity time" := Time;
                 end;
 
-                // theMember.Reset;
-                // theMember.SetRange("No.", Rec."Member No.");
+                theMember.Reset;
+                theMember.SetRange("No.", Rec."Member No.");
 
                 if theMember.FindFirst then begin
                     if theSMS <> '' then begin
@@ -914,5 +914,5 @@ table 52185826 "Member withdrawal Notice"
         exit(TChargeAmount);
     end;
 
-    
+
 }
