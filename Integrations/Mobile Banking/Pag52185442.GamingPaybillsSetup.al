@@ -1,16 +1,16 @@
 namespace BCAZIMA.BCAZIMA;
 
-page 52185442 "Gaming Paybills Setup"
+page 52185447 "Gaming Paybills Setup"
 {
     Caption = 'Gaming Paybills Setup';
     PageType = List;
-    SourceTable = "Gaming Paybills Setup";   
+    SourceTable = "Gaming Paybills Setup";
     UsageCategory = None;
 
     InsertAllowed = true;
     ModifyAllowed = true;
     DeleteAllowed = false;
-    
+
     layout
     {
         area(Content)
