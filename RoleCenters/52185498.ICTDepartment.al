@@ -367,6 +367,12 @@ page 52187058 "ICT Department"
                         //     Caption = 'ATM Transaction Types';
                         //     RunObject = Page "ATM Charge List";
                         // }
+                        action("Gaming Paybills Setup")
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'Gaming Paybills Setup';
+                            RunObject = Page "Gaming Paybills Setup";
+                        }
                     }
                     action("Deposit Keywords")
                     {
