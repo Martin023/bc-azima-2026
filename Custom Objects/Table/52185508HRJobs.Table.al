@@ -207,6 +207,9 @@ table 52185508 "HR Jobs"
             begin
                 if (Rec.Status = Status::Rejected) then
                     GlobalFunctions.CommentsManagement(Rec."Job ID");
+                
+                //UPDATE PENDING AT WHEN STATUS CHANGES
+                UpdatePendingAtField();
             end;
         }
         field(32; "Date Created"; Date)
@@ -323,6 +326,27 @@ table 52185508 "HR Jobs"
             OptionCaption = 'Jobs,Establishment';
             OptionMembers = Jobs,Establishment;
         }
+        field(62; "Current Approval Level"; Integer)
+        {
+            CalcFormula = Max("Approval Entry"."Sequence No." WHERE("Document No." = FIELD("Job ID"),
+                                                                      Status = FILTER(Open)));
+            Editable = false;
+            FieldClass = FlowField;
+            Caption = 'Current Approval Level';
+        }
+        field(63; "Current Approver ID"; Code[50])
+        {
+            CalcFormula = Lookup("Approval Entry"."Approver ID" WHERE("Document No." = FIELD("Job ID"),
+                                                                        Status = FILTER(Open)));
+            Editable = false;
+            FieldClass = FlowField;
+            Caption = 'Current Approver ID';
+        }
+        field(64; "Pending At"; Text[100])
+        {
+            Editable = false;
+            Caption = 'Pending At';
+        }
     }
 
     keys
@@ -395,6 +419,9 @@ table 52185508 "HR Jobs"
         rec.CalcFields("Occupied Positions");
         "Vacant Positions" := "No of Posts" - "Occupied Positions";
         // if Status <> Status::Open then Error('You cannot Modify record when status is %1', Status);
+        
+        //UPDATE PENDING AT FIELD
+        UpdatePendingAtField();
     end;
 
 
@@ -424,6 +451,52 @@ table 52185508 "HR Jobs"
                 exit(false);
 
         exit(true);
+    end;
+    
+    procedure UpdatePendingAtField()
+    var
+        ApprovalEntry: Record "Approval Entry";
+        UserRec: Record User;
+        ApproverName: Text[100];
+    begin
+        //CLEAR PENDING AT FIELD
+        "Pending At" := '';
+        
+        //CALCULATE FLOWFIELDS
+        rec.CalcFields("Current Approval Level", "Current Approver ID");
+        
+        //BUILD PENDING AT TEXT BASED ON STATUS
+        case Status of
+            Status::Open:
+                "Pending At" := 'New - Not Submitted';
+            Status::"Pending Approval":
+                begin
+                    if "Current Approver ID" <> '' then begin
+                        //GET APPROVER NAME FROM USER TABLE
+                        UserRec.Reset();
+                        UserRec.SetRange("User Name", "Current Approver ID");
+                        if UserRec.FindFirst() then
+                            ApproverName := UserRec."Full Name"
+                        else
+                            ApproverName := "Current Approver ID";
+                        
+                        //FORMAT: LEVEL X - APPROVER NAME
+                        if "Current Approval Level" > 0 then
+                            "Pending At" := 'Level ' + Format("Current Approval Level") + ' - ' + ApproverName
+                        else
+                            "Pending At" := 'Pending - ' + ApproverName;
+                    end else
+                        "Pending At" := 'Pending Approval';
+                end;
+            Status::Approved:
+                "Pending At" := 'Approved';
+            Status::Rejected:
+                "Pending At" := 'Rejected';
+            Status::Canceled:
+                "Pending At" := 'Canceled';
+            Status::Deferred:
+                "Pending At" := 'Deferred';
+        end;
     end;
 }
 

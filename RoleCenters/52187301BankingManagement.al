@@ -1908,6 +1908,12 @@ page 52187301 "Banking Management Role Center"
                         Caption = 'FOSA Loan Recovery Variance';
                         RunObject = report "Loan Recovery Variance";
                     }
+                    action("Flagged Accounts Report")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Flagged Accounts Report';
+                        RunObject = report "Flagged Accounts";
+                    }
                     group("Deposit Listing")
                     {
                         action("Proces Deposit Listing")

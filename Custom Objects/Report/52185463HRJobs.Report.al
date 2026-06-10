@@ -87,6 +87,60 @@ Report 52185463 "HR Jobs"
             column(CommunicationOnline; CommunicationOnline)
             {
             }
+            column(Grade_HRJobs; Grade)
+            {
+            }
+            column(ResponsibilityCenter_HRJobs; "Responsibility Center")
+            {
+            }
+            column(GlobalDimension1Code_HRJobs; "Global Dimension 1 Code")
+            {
+            }
+            column(GlobalDimension2Code_HRJobs; "Global Dimension 2 Code")
+            {
+            }
+            column(Status_HRJobs; Status)
+            {
+            }
+            column(DateCreated_HRJobs; "Date Created")
+            {
+            }
+            column(ShowJobID; ShowJobID)
+            {
+            }
+            column(ShowJobDescription; ShowJobDescription)
+            {
+            }
+            column(ShowNoOfPosts; ShowNoOfPosts)
+            {
+            }
+            column(ShowPositionReportingTo; ShowPositionReportingTo)
+            {
+            }
+            column(ShowOccupiedPositions; ShowOccupiedPositions)
+            {
+            }
+            column(ShowVacantPositions; ShowVacantPositions)
+            {
+            }
+            column(ShowGrade; ShowGrade)
+            {
+            }
+            column(ShowResponsibilityCenter; ShowResponsibilityCenter)
+            {
+            }
+            column(ShowDimension1; ShowDimension1)
+            {
+            }
+            column(ShowDimension2; ShowDimension2)
+            {
+            }
+            column(ShowStatus; ShowStatus)
+            {
+            }
+            column(ShowDateCreated; ShowDateCreated)
+            {
+            }
 
             trigger OnAfterGetRecord()
             begin
@@ -101,11 +155,98 @@ Report 52185463 "HR Jobs"
 
         layout
         {
+            area(content)
+            {
+                group(Options)
+                {
+                    Caption = 'Field Selection';
+                    field(ShowJobID; ShowJobID)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Show Job ID';
+                    }
+                    field(ShowJobDescription; ShowJobDescription)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Show Job Description';
+                    }
+                    field(ShowNoOfPosts; ShowNoOfPosts)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Show No. of Posts';
+                    }
+                    field(ShowPositionReportingTo; ShowPositionReportingTo)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Show Position Reporting To';
+                    }
+                    field(ShowOccupiedPositions; ShowOccupiedPositions)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Show Occupied Positions';
+                    }
+                    field(ShowVacantPositions; ShowVacantPositions)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Show Vacant Positions';
+                    }
+                    field(ShowGrade; ShowGrade)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Show Grade';
+                    }
+                    field(ShowResponsibilityCenter; ShowResponsibilityCenter)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Show Responsibility Center';
+                    }
+                    field(ShowDimension1; ShowDimension1)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Show Global Dimension 1';
+                    }
+                    field(ShowDimension2; ShowDimension2)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Show Global Dimension 2';
+                    }
+                    field(ShowStatus; ShowStatus)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Show Status';
+                    }
+                    field(ShowDateCreated; ShowDateCreated)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Show Date Created';
+                    }
+                }
+            }
         }
 
         actions
         {
         }
+        
+        trigger OnOpenPage()
+        begin
+            //SET DEFAULT VALUES TO SHOW ALL FIELDS
+            if not RequestOptionsInitialized then begin
+                ShowJobID := true;
+                ShowJobDescription := true;
+                ShowNoOfPosts := true;
+                ShowPositionReportingTo := true;
+                ShowOccupiedPositions := true;
+                ShowVacantPositions := true;
+                ShowGrade := true;
+                ShowResponsibilityCenter := true;
+                ShowDimension1 := true;
+                ShowDimension2 := true;
+                ShowStatus := true;
+                ShowDateCreated := true;
+                RequestOptionsInitialized := true;
+            end;
+        end;
     }
 
     labels
@@ -133,4 +274,17 @@ Report 52185463 "HR Jobs"
         CompanyAddress: Text;
         CompanyTelephone: Text;
         CommunicationOnline: Text;
+        ShowJobID: Boolean;
+        ShowJobDescription: Boolean;
+        ShowNoOfPosts: Boolean;
+        ShowPositionReportingTo: Boolean;
+        ShowOccupiedPositions: Boolean;
+        ShowVacantPositions: Boolean;
+        ShowGrade: Boolean;
+        ShowResponsibilityCenter: Boolean;
+        ShowDimension1: Boolean;
+        ShowDimension2: Boolean;
+        ShowStatus: Boolean;
+        ShowDateCreated: Boolean;
+        RequestOptionsInitialized: Boolean;
 }

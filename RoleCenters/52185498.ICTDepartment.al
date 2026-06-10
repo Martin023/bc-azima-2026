@@ -3946,6 +3946,19 @@ page 52187058 "ICT Department"
                                     RunObject = page "HR Appraisal Period Setup";
 
                                 }
+                                //ADDED DEPARTMENT TARGETS MENU ITEMS FOR HOD AND HR ADMIN ACCESS
+                                action("HR Department Targets List")
+                                {
+                                    Caption = 'HR Department Targets';
+                                    ApplicationArea = Basic, Suite;
+                                    RunObject = page "HR Department Targets List";
+                                }
+                                action("HR HOD Department Targets")
+                                {
+                                    Caption = 'My Department Targets (HOD)';
+                                    ApplicationArea = Basic, Suite;
+                                    RunObject = page "HRHOD Department Targets";
+                                }
                             }
                             group(randanalysis)
                             {

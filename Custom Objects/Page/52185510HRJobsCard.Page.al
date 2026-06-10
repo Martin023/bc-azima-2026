@@ -118,6 +118,20 @@ page 52185510 "HR Jobs Card"
                     Importance = Promoted;
                     Style = Attention;
                 }
+                field("Current Approval Level"; Rec."Current Approval Level")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Approval Level';
+                    Importance = Additional;
+                }
+                field("Pending At"; Rec."Pending At")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Pending At';
+                    Importance = Promoted;
+                    Style = Attention;
+                    StyleExpr = Rec.Status = Rec.Status::"Pending Approval";
+                }
                 field(UserID; Rec.UserID)
                 {
 
@@ -356,10 +370,13 @@ page 52185510 "HR Jobs Card"
                     trigger OnAction()
                     var
                         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+                        GlobalFunctions: Codeunit "Global Functions";
                     begin
 
                         Rec.TestField(Status, Rec.Status::"Pending Approval");
-
+                        
+                        //VALIDATE COMMENTS EXIST BEFORE REJECTION
+                        GlobalFunctions.CommentsManagement(Rec."Job ID");
 
                         ApprovalsMgmt.RejectRecordApprovalRequest(Rec.RecordId);
                     end;
@@ -499,6 +516,9 @@ page 52185510 "HR Jobs Card"
         SetControlAppearance;
         rec.CalcFields("Occupied Positions");
         rec."Vacant Positions" := rec."No of Posts" - rec."Occupied Positions";
+        
+        //UPDATE PENDING AT FIELD
+        rec.UpdatePendingAtField();
     end;
 
     trigger OnAfterGetRecord()
@@ -509,6 +529,9 @@ page 52185510 "HR Jobs Card"
         //  OpenApprovalEntriesExistCurrUser := ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(Rec.RecordId);
         //  OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(Rec.RecordId);
         Rec.Validate("Vacant Positions");
+        
+        //UPDATE PENDING AT FIELD
+        rec.UpdatePendingAtField();
     end;
 
     trigger OnOpenPage()
