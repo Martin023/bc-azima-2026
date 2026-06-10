@@ -24,76 +24,6 @@
       <rd:DataSourceID>b9b58296-01d7-4c8f-ad67-7c14b1f0eec2</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="EmployerName">
-          <DataField>EmployerName</DataField>
-        </Field>
-        <Field Name="MemberNo">
-          <DataField>MemberNo</DataField>
-        </Field>
-        <Field Name="PayrollNo">
-          <DataField>PayrollNo</DataField>
-        </Field>
-        <Field Name="AmountOn">
-          <DataField>AmountOn</DataField>
-        </Field>
-        <Field Name="AmountOnFormat">
-          <DataField>AmountOnFormat</DataField>
-        </Field>
-        <Field Name="BalanceOn">
-          <DataField>BalanceOn</DataField>
-        </Field>
-        <Field Name="BalanceOnFormat">
-          <DataField>BalanceOnFormat</DataField>
-        </Field>
-        <Field Name="CompanyName">
-          <DataField>CompanyName</DataField>
-        </Field>
-        <Field Name="CompanyAddress">
-          <DataField>CompanyAddress</DataField>
-        </Field>
-        <Field Name="ComapnyPicture">
-          <DataField>ComapnyPicture</DataField>
-        </Field>
-        <Field Name="Period">
-          <DataField>Period</DataField>
-        </Field>
-        <Field Name="Narration">
-          <DataField>Narration</DataField>
-        </Field>
-        <Field Name="VoteNo">
-          <DataField>VoteNo</DataField>
-        </Field>
-        <Field Name="SaccoCode">
-          <DataField>SaccoCode</DataField>
-        </Field>
-        <Field Name="ApprovedAmount">
-          <DataField>ApprovedAmount</DataField>
-        </Field>
-        <Field Name="ApprovedAmountFormat">
-          <DataField>ApprovedAmountFormat</DataField>
-        </Field>
-        <Field Name="Work_Station">
-          <DataField>Work_Station</DataField>
-        </Field>
-        <Field Name="Reference">
-          <DataField>Reference</DataField>
-        </Field>
-        <Field Name="Product_Type">
-          <DataField>Product_Type</DataField>
-        </Field>
-        <Field Name="Loan_No_">
-          <DataField>Loan_No_</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -1268,12 +1198,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -1311,4 +1235,74 @@ End Function
 </Code>
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="EmployerName">
+          <DataField>EmployerName</DataField>
+        </Field>
+        <Field Name="MemberNo">
+          <DataField>MemberNo</DataField>
+        </Field>
+        <Field Name="PayrollNo">
+          <DataField>PayrollNo</DataField>
+        </Field>
+        <Field Name="AmountOn">
+          <DataField>AmountOn</DataField>
+        </Field>
+        <Field Name="AmountOnFormat">
+          <DataField>AmountOnFormat</DataField>
+        </Field>
+        <Field Name="BalanceOn">
+          <DataField>BalanceOn</DataField>
+        </Field>
+        <Field Name="BalanceOnFormat">
+          <DataField>BalanceOnFormat</DataField>
+        </Field>
+        <Field Name="CompanyName">
+          <DataField>CompanyName</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="ComapnyPicture">
+          <DataField>ComapnyPicture</DataField>
+        </Field>
+        <Field Name="Period">
+          <DataField>Period</DataField>
+        </Field>
+        <Field Name="Narration">
+          <DataField>Narration</DataField>
+        </Field>
+        <Field Name="VoteNo">
+          <DataField>VoteNo</DataField>
+        </Field>
+        <Field Name="SaccoCode">
+          <DataField>SaccoCode</DataField>
+        </Field>
+        <Field Name="ApprovedAmount">
+          <DataField>ApprovedAmount</DataField>
+        </Field>
+        <Field Name="ApprovedAmountFormat">
+          <DataField>ApprovedAmountFormat</DataField>
+        </Field>
+        <Field Name="Work_Station">
+          <DataField>Work_Station</DataField>
+        </Field>
+        <Field Name="Reference">
+          <DataField>Reference</DataField>
+        </Field>
+        <Field Name="Product_Type">
+          <DataField>Product_Type</DataField>
+        </Field>
+        <Field Name="Loan_No_">
+          <DataField>Loan_No_</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>

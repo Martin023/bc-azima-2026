@@ -11,9 +11,10 @@ table 52185486 "Sales Route Plans"
             Caption = 'No';
             Editable = false;
         }
-        field(2; Desription; Text[1000])
+        field(2; Target; Text[1000])
         {
-            Caption = 'Desription';
+            Caption = 'Target';
+
         }
         field(3; "Place to visit"; Code[50])
         {
@@ -38,6 +39,15 @@ table 52185486 "Sales Route Plans"
             OptionMembers = Active,Closed;
             Caption = 'Status';
         }
+        field(7; "Sales Representative"; Code[50])
+        {
+            Caption = 'Sales Representative';
+        }
+        field(8; "Route Date"; Date)
+        {
+            Caption = 'Route Date';
+        }
+
     }
     keys
     {

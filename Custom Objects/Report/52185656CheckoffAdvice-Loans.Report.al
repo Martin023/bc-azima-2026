@@ -140,7 +140,6 @@ Report 52185656 "Checkoff Advice - Loans"
                     i := 1;
                     if "Checkoff Advice Header"."Employer Code" <> '' then begin
                         EmployerName := "Checkoff Advice Header"."Employer Code";
-                        "Checkoff Advice Line".SetRange("Employer Code", "Checkoff Advice Header"."Employer Code");
                     end
                     else
                         EmployerName := '';
