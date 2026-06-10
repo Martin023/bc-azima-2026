@@ -3,11 +3,11 @@ TableExtension 52186403 tableextension52186403 extends Customer
 {
     fields
     {
-        field(50000; "Account Type"; Option)
+        field(50000; "Account Type"; Enum "Customer Types")
         {
             DataClassification = ToBeClassified;
-            OptionMembers = " ","Travel Advance",Partner,Investment,"Staff Imprest",Others,"Training Advance",Employer,"Cashier Excess","Cashier Shortage",Tenant,"Parking Customer",SinkFund,"Conference Room Customer";
-            ValuesAllowed = " ", "Staff Imprest", Employer, "Cashier Excess", "Cashier Shortage", "Training Advance";
+            //OptionMembers = " ","Travel Advance",Partner,Investment,"Staff Imprest",Others,"Training Advance",Employer,"Cashier Excess","Cashier Shortage",Tenant,"Parking Customer",SinkFund,"Conference Room Customer";
+            ValuesAllowed = " ", "Staff Imprest", Employer, "Cashier Excess", "Cashier Shortage", "Training Advance", "Employer Code";
 
 
             trigger Onvalidate()

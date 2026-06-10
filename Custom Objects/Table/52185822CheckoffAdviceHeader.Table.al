@@ -17,7 +17,7 @@ table 52185822 "Checkoff Advice Header"
         }
         field(2; "Employer Code"; Code[20])
         {
-            TableRelation = Customer WHERE("Account Type" = CONST(Employer)
+            TableRelation = Customer WHERE("Account Type" = CONST("Employer Code")
                                             //"Advice Method" = FILTER(<> " ")
                                             );
 

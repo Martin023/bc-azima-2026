@@ -673,6 +673,7 @@ table 52185700 Members
         }
         field(31; "Employer Code"; Code[100])
         {
+            Caption = 'Employer';
             Description = 'LookUp to Customer Table';
             TableRelation = Customer WHERE("Account Type" = CONST(Employer));
 
@@ -701,15 +702,15 @@ table 52185700 Members
                     until CreditAccounts.Next = 0;
                 end;
 
-                CheckoffAdviceLine.Reset;
-                CheckoffAdviceLine.SetRange("Member No.", "No.");
-                if CheckoffAdviceLine.Find('-') then begin
-                    repeat
-                        CheckoffAdviceLine."Payroll No" := "Employer Code";
-                        CheckoffAdviceLine.Validate("Employer Code", "Employer Code");
-                        CheckoffAdviceLine.Modify;
-                    until CheckoffAdviceLine.Next = 0;
-                end;
+                // CheckoffAdviceLine.Reset;
+                // CheckoffAdviceLine.SetRange("Member No.", "No.");
+                // if CheckoffAdviceLine.Find('-') then begin
+                //     repeat
+                //         CheckoffAdviceLine."Payroll No" := "Employer Code";
+                //         CheckoffAdviceLine.Validate("Employer Code", "Employer Code");
+                //         CheckoffAdviceLine.Modify;
+                //     until CheckoffAdviceLine.Next = 0;
+                // end;
 
                 LoanApps.Reset;
                 LoanApps.SetRange("Member No.", "No.");
@@ -768,7 +769,8 @@ table 52185700 Members
 
         field(34; "Work Station"; Code[20])
         {
-            TableRelation = "Electrol Zones/Area Svr Center".Code WHERE(Type = CONST("Area Service Centers"));
+            Caption = 'Employer Code/Work Station';
+            TableRelation = Customer."No." WHERE("Account Type" = filter("Employer Code"));
         }
 
         field(35; "Country Of Operation"; Code[10])

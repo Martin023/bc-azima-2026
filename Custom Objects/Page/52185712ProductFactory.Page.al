@@ -1161,7 +1161,6 @@ page 52185712 "Product Factory"
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Blocked Employers';
-                    Image = CustomerBlocked;
                     Promoted = true;
                     PromotedCategory = Process;
                     PromotedOnly = true;

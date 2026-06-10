@@ -381,25 +381,25 @@ page 52187079 "User Creation Request Card"
                 end;
             }
 
-            action("Generate PDF")
-            {
-                ApplicationArea = All;
-                Caption = 'Generate PDF';
-                Image = Print;
-                Promoted = true;
-                PromotedCategory = Report;
-                PromotedIsBig = true;
+            // action("Generate PDF")
+            // {
+            //     ApplicationArea = All;
+            //     Caption = 'Generate PDF';
+            //     Image = Print;
+            //     Promoted = true;
+            //     PromotedCategory = Report;
+            //     PromotedIsBig = true;
 
-                // trigger OnAction()
-                // begin
-                //     Report.RunModal(
-                //         Report::"User Access Request Form",
-                //         true,
-                //         true,
-                //         Rec
-                //     );
-                // end;
-            }
+            //     trigger OnAction()
+            //     begin
+            //         Report.RunModal(
+            //             Report::"User Access Request Form",
+            //             true,
+            //             true,
+            //             Rec
+            //         );
+            //     end;
+            // }
         }
     }
 

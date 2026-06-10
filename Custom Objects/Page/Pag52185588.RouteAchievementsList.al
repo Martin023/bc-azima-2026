@@ -4,10 +4,10 @@ page 52185588 "Route Achievements List"
 {
     ApplicationArea = All;
     Caption = 'Route Achievements List';
-    PageType = List;
+    PageType = ListPart;
     SourceTable = "Route Achievements";
     UsageCategory = Lists;
-    
+
     layout
     {
         area(Content)
