@@ -1,4 +1,4 @@
-table 52185446 "Loan Product Availability"
+table 52185482 "Loan Product Availability"
 {
     DataClassification = ToBeClassified;
 
@@ -33,7 +33,19 @@ table 52185446 "Loan Product Availability"
         field(6; "Upfront Interest Rate"; Decimal)
         {
             trigger OnValidate()
+            var
+                TheProduct: Record "Product Factory";
             begin
+
+                TheProduct.Reset();
+                TheProduct.SetRange("Product ID", "Loan Product Code");
+
+                if TheProduct.FindFirst() then begin
+                    if TheProduct."Status" = TheProduct."Status"::Active then begin
+                        Error('Kindly Open the product for editing');
+                    end;
+                end;
+
                 if "Upfront Interest Rate" = 0 then begin
                     Error('Upfront Interest Rate must be provided and cannot be zero.');
                 end else if "Upfront Interest Rate" < 0 then begin
@@ -61,5 +73,7 @@ table 52185446 "Loan Product Availability"
     begin
         "Last Modified By" := UserId;
         "Last Modified At" := CurrentDateTime;
+        // if status of the product is active do not allow edit instead throw error 
+
     end;
 }

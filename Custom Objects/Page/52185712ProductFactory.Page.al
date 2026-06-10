@@ -1143,6 +1143,31 @@ page 52185712 "Product Factory"
                     RunObject = Page "Loan Product Charges";
                     RunPageLink = "Product Code" = FIELD("Product ID");
                 }
+                action("Product Supported Classes")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Supported Member Classes';
+                    Image = SetupPayment;
+                    Enabled = CreditProductVisible;
+
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedOnly = true;
+
+                    RunObject = Page "Product Supported Classes List";
+                    RunPageLink = "Product ID" = field("Product ID");
+                }
+                action("Blocked Employers")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Blocked Employers';
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedOnly = true;
+
+                    RunObject = Page "Blocked Employers List";
+                    RunPageLink = "Product ID" = field("Product ID");
+                }
                 action("Monthly Contribution Changes")
                 {
                     ApplicationArea = Basic, Suite;

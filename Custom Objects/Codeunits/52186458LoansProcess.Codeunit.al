@@ -7574,7 +7574,6 @@ Codeunit 52186458 "Loans Process"
                                     end;
                     end;
 
-
                     //Grace Period
                     if GrPrinciple > 0 then begin
                         LPrincipal := 0
