@@ -9,6 +9,9 @@ Report 52185656 "Checkoff Advice - Loans"
         dataitem("Checkoff Advice Header"; "Checkoff Advice Header")
         {
             RequestFilterFields = "No.";
+            column(EmployerName; EmployerName)
+            {
+            }
 
             dataitem("Checkoff Advice Line"; "Checkoff Advice Line")
             {
@@ -135,6 +138,12 @@ Report 52185656 "Checkoff Advice - Loans"
                 trigger OnPreDataItem()
                 begin
                     i := 1;
+                    if "Checkoff Advice Header"."Employer Code" <> '' then begin
+                        EmployerName := "Checkoff Advice Header"."Employer Code";
+                        "Checkoff Advice Line".SetRange("Employer Code", "Checkoff Advice Header"."Employer Code");
+                    end
+                    else
+                        EmployerName := '';
                 end;
             }
         }
@@ -190,5 +199,6 @@ Report 52185656 "Checkoff Advice - Loans"
         StartDatemoratorium: date;
         EndDateMoratorium: Date;
         ApprovedAmount: Decimal;
+        EmployerName: Text;
 
 }
