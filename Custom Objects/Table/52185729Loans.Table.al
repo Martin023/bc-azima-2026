@@ -2574,9 +2574,9 @@ table 52185729 Loans
             Editable = true;
             NotBlank = true;
             Caption = 'Relation Officer';
-            TableRelation = IF ("BDE Type" = FILTER(BDE)) "HR Employees"."No."
+            TableRelation = IF ("BDE Type" = FILTER(BDE)) "Marketing Teams Header"."Payroll No."
             ELSE
-            "Salesperson/Purchaser".Code;
+            "HR Employees"."No.";
         }
         field(39004263; "Loan BDE Paid"; Boolean)
         {
@@ -2584,7 +2584,7 @@ table 52185729 Loans
         field(39004264; "BDE Type"; Option)
         {
             Caption = 'Relation Officer Type';
-            OptionCaption = 'Relation Officer,Others';
+            OptionCaption = 'Sales Representative,Others';
             OptionMembers = BDE,Others;
         }
         field(39004265; "Dummy Appraisal"; Boolean)
