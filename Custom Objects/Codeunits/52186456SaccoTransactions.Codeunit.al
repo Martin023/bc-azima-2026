@@ -1129,7 +1129,7 @@ Codeunit 52186456 "Sacco Transactions"
                 GenJournalLine."Journal Batch Name" := JBatch;
                 GenJournalLine."Document No." := CashierTrans.No;
                 if (CashierTrans.Type = CashierTrans.Type::"MPESA Deposit") or (CashierTrans.Type = CashierTrans.Type::"MPESA Withdrawal") then
-                    GenJournalLine."External Document No." := CashierTrans."Mpesa Reference" else     
+                    GenJournalLine."External Document No." := CashierTrans."Mpesa Reference" else
                     GenJournalLine."External Document No." := CashierTrans.No;
                 GenJournalLine."Line No." := LineNo;
                 GenJournalLine."Account Type" := GenJournalLine."account type"::"Bank Account";
@@ -1157,7 +1157,7 @@ Codeunit 52186456 "Sacco Transactions"
                 GenJournalLine."Journal Batch Name" := JBatch;
                 GenJournalLine."Document No." := CashierTrans.No;
                 if (CashierTrans.Type = CashierTrans.Type::"MPESA Deposit") or (CashierTrans.Type = CashierTrans.Type::"MPESA Withdrawal") then
-                    GenJournalLine."External Document No." := CashierTrans."Mpesa Reference" else     
+                    GenJournalLine."External Document No." := CashierTrans."Mpesa Reference" else
                     GenJournalLine."External Document No." := CashierTrans.No;
                 GenJournalLine."Line No." := LineNo;
                 GenJournalLine."Account Type" := GenJournalLine."Account Type"::"Bank Account";
@@ -9586,6 +9586,7 @@ Codeunit 52186456 "Sacco Transactions"
         FDInterestCalc: Record "FD Interest Calculation Rules";
         IntRate: Decimal;
         FDDays: Integer;
+        FDMonths: Integer;
     begin
 
         InterestAmount := 0;
@@ -9618,13 +9619,17 @@ Codeunit 52186456 "Sacco Transactions"
                     // RunDate := Today;
 
                     // end;
-                    FDDays := RunDate - Account."Application Date";
 
-                    if FDDays < 0 then FDDays := 0;
+                    FDDays := Account."FD Maturity Date" - Account."Application Date";
+                    FDMonths := round((FDDays / 30), 1, '=');
+                    if FDDays <= 0 then begin
+                        FDDays := 0;
+                        FDMonths := 0;
+                    end;
 
                     //FDDays:=Account."FD Duration";
                     Account.CalcFields("Balance (LCY)");
-                    InterestAmount := Account."Balance (LCY)" * IntRate * 0.01 * (FDDays / 365);
+                    InterestAmount := Account."Balance (LCY)" * IntRate * 0.01 * (FDMonths / 12);
                     InterestAmount := ROUND(InterestAmount, 1.0, '<');
 
                     IntBufferNo := IntBufferNo + 1;

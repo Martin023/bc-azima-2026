@@ -132,10 +132,14 @@ table 52187029 "Fixed Deposit Contract"
             OptionMembers = Open,Pending,Approved,Rejected,Created;
             trigger Onvalidate()
             begin
-                if Rec."Neg. Interest Rate" > 0 then begin
-                    if not Confirm('Are you sure you want to change the interest?') then exit
-                end else
-                    Message('Interest changed!');
+                // if Rec."Neg. Interest Rate" > 0 then begin
+                //     if not Confirm('Are you sure you want to change the interest?') then exit
+                // end else
+                //     Message('Interest changed!');
+                if rec.Status = rec.Status::Approved then begin
+                    Tranferfunds(rec);
+                end;
+
             end;
         }
 
@@ -237,33 +241,33 @@ table 52187029 "Fixed Deposit Contract"
                 FDSetup: Record "Fixed Deposit Type";
             begin
                 TestField("Application Date");
+                rec."Interest Rate" := 0;
+                rec."Fixed Deposit Amount" := 0;
+                rec."Forecasted Interest" := 0;
+                rec."Neg. Interest Rate" := 0;
                 if FixedDepositType.Get("Fixed Deposit Type") then begin
                     "FD Maturity Date" := CalcDate(FixedDepositType.Duration, "Application Date");
                     "FD Duration" := FixedDepositType.Duration;
                     "Product Category" := "Product Category"::"Fixed Deposit";
-                    rec."Interest Rate" := 0;
-                    rec."Fixed Deposit Amount" := 0;
-                    rec."Forecasted Interest" := 0;
-                    rec."Neg. Interest Rate" := 0;
                     Message('The FD number of days is %1', Abs("FD Maturity Date" - "Application Date"));
-                    FDSetup.Reset();
-                    FDSetup.SetRange(FDSetup.Code, rec."Fixed Deposit Type");
-                    if FDSetup.Find('-') then begin
-                        FDCalculation.Reset();
-                        FDCalculation.SetRange(Code, FDSetup.Code);
-                        if FDCalculation.FindFirst() then begin
-                            //repeat
-                            case
-                                Rec."Fixed Deposit Amount" of
-                                FDCalculation."Minimum Amount" .. FDCalculation."Maximum Amount":
-                                    begin
-                                        rec."Interest Rate" := FDCalculation."Interest Rate";
-                                        rec.Modify();
-                                    end;
-                            end;
-                            //until FDCalculation.Next() = 0;
-                        end;
-                    end;
+                    // FDSetup.Reset();
+                    // FDSetup.SetRange(FDSetup.Code, rec."Fixed Deposit Type");
+                    // if FDSetup.Find('-') then begin
+                    //     FDCalculation.Reset();
+                    //     FDCalculation.SetRange(Code, FDSetup.Code);
+                    //     if FDCalculation.FindFirst() then begin
+                    //         repeat
+                    //         case
+                    //             Rec."Fixed Deposit Amount" of
+                    //             FDCalculation."Minimum Amount" .. FDCalculation."Maximum Amount":
+                    //                 begin
+                    //                     rec."Interest Rate" := FDCalculation."Interest Rate";
+                    //                     rec.Modify();
+                    //                 end;
+                    //         end;
+                    //         until FDCalculation.Next() = 0;
+                    //     end;
+                    // end;
                 end
             end;
         }
@@ -321,6 +325,13 @@ table 52187029 "Fixed Deposit Contract"
             begin
                 if "Application Date" > Today then
                     Error(DateofBirthError);
+                if rec.Status = rec.Status::Open then begin
+                    rec."Fixed Deposit Amount" := 0;
+                    rec."FD Maturity Date" := 0D;
+                    rec."FD Maturity Instructions" := rec."FD Maturity Instructions"::" ";
+                    rec."Fixed Deposit Type" := '';
+                    rec.modify();
+                end;
             end;
         }
 
@@ -343,7 +354,7 @@ table 52187029 "Fixed Deposit Contract"
 
             begin
 
-                // rec.validate("Fixed Deposit Type");
+                if rec."Fixed Deposit Type" = '' then Error('Kindly ensure you have selected Fixed Depoist Type before proceeding.');
                 NoOfDays := 0;
                 NoOfDays := Abs(Rec."FD Maturity Date" - Rec."Application Date");
                 SavingsAccounts.get("FOSA Main Account No.");
@@ -363,16 +374,16 @@ table 52187029 "Fixed Deposit Contract"
                     FDCalculation.Reset();
                     FDCalculation.SetRange(Code, FDSetup.Code);
                     if FDCalculation.FindFirst() then begin
-                        //repeat
-                        case
-                            Rec."Fixed Deposit Amount" of
-                            FDCalculation."Minimum Amount" .. FDCalculation."Maximum Amount":
-                                begin
-                                    rec."Interest Rate" := FDCalculation."Interest Rate";
-                                    rec.Modify();
-                                end;
-                        end;
-                        //until FDCalculation.Next() = 0;
+                        repeat
+                            case
+                                Rec."Fixed Deposit Amount" of
+                                FDCalculation."Minimum Amount" .. FDCalculation."Maximum Amount":
+                                    begin
+                                        rec."Interest Rate" := FDCalculation."Interest Rate";
+                                        rec.Modify();
+                                    end;
+                            end;
+                        until FDCalculation.Next() = 0;
                     end;
                     // end;
 
@@ -527,24 +538,126 @@ table 52187029 "Fixed Deposit Contract"
         Sav: Record "Savings Accounts";
         AccountApplication: Record "Savings Account Application";
 
-    [Scope('OnPrem')]
-    procedure MultipleAccountCreation()
+    procedure Tranferfunds(FDContract: record "Fixed Deposit Contract")
     var
-        AllowMultipleAcntError: Label 'Applicant already has %1, Kindly ensure this product allows multiple account creations to proceed.';
+        FixedSetup: Record "Fixed Deposit Type";
+        JournalPosting: Codeunit "Journal Posting";
+        AccType: Enum "Gen. Journal Account Type";
+        BalAccType: Enum "Gen. Journal Account Type";
+        AccNo: Code[20];
+        BalAccNo: Code[20];
+        Amt: Decimal;
+        LineNo: Integer;
+        TransType: Enum "Transaction Types";
+        DocNo: Code[20];
+        PDate: Date;
+        Dim1: Code[20];
+        Dim2: Code[20];
+        SavingsAccounts: Record "Savings Accounts";
+        SavBal: Decimal;
+        savingsLedger: record "Savings Ledger Entry";
+        Temp: Record "Banking User Template";
+        Jtemplate: Code[20];
+        JBatch: Code[20];
+        GenJournalLine: record "Gen. Journal Line";
     begin
-        SavingsAccounts.Reset;
-        SavingsAccounts.SetRange(SavingsAccounts."Member No.", "Member No.");
-        SavingsAccounts.SetRange(SavingsAccounts."Product Type", "Product Type");
-        if SavingsAccounts.Find('-') then begin
-            if ProductFactory.Get("Product Type") then begin
-                if not ProductFactory."Allow Multiple Accounts" then
-                    if SavingsAccounts.Count >= 1 then
-                        Error(AllowMultipleAcntError, SavingsAccounts."Product Name");
-                //MESSAGE(FORMAT(SavingsAccounts.COUNT));
+        savingsLedger.Reset();
+        savingsLedger.SetRange("Fixed Deposit Contract", FDContract."No.");
+        if savingsLedger.Find('-') then
+            Error('This action does not allow for capital increase/ transacted account.');
+        FDContract.TestField(Status, FDContract.Status::Approved);
+        Temp.Get(UserId);
+        Jtemplate := Temp."Fixed/Call Journal Template";
+        JBatch := Temp."Fixed/Call Journal Batch";
+
+        if Jtemplate = '' then begin
+            Error('Ensure the Fixed/Call Deposit Journal Template is set up in Banking User Setup');
+        end;
+
+        if JBatch = '' then begin
+            Error('Ensure the Fixed/Call Deposit Journal Batch is set up in Banking User Setup');
+        end;
+
+        GenJournalLine.Reset;
+        GenJournalLine.SetRange("Journal Template Name", Jtemplate);
+        GenJournalLine.SetRange("Journal Batch Name", JBatch);
+        GenJournalLine.DeleteAll;
+
+        SavingsAccounts.Reset();
+        SavingsAccounts.SetRange("No.", Rec."FOSA Main Account No.");
+        if SavingsAccounts.FindFirst() then begin
+            SavingsAccounts.CalcFields("Balance (LCY)");
+            SavBal := SavingsAccounts."Balance (LCY)";
+            if SavBal < FDContract."Fixed Deposit Amount" then Error('Saving Balance of %1 is not adequate to fund this contract of %2.', SavBal, Rec."Fixed Deposit Amount");
+
+            //Debit FOSA Main Account
+            GenJournalLine.Init;
+            GenJournalLine."Journal Template Name" := Jtemplate;
+            GenJournalLine."Line No." := LineNo;
+            GenJournalLine."Journal Batch Name" := Jbatch;
+            GenJournalLine."Document No." := FDContract."No.";
+            GenJournalLine."External Document No." := FDContract."No.";
+            GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
+            GenJournalLine."Account No." := FDContract."FOSA Main Account No.";
+            GenJournalLine.Validate(GenJournalLine."Account No.");
+            GenJournalLine."Posting Date" := Today;
+            GenJournalLine.Description := 'Transfer of funds from Fosa Main Acc.';
+            GenJournalLine.Description := UpperCase(GenJournalLine.Description);
+            GenJournalLine.Amount := FDContract."Fixed Deposit Amount";
+            GenJournalLine.Validate(GenJournalLine.Amount);
+            GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
+            GenJournalLine."Bal. Account No." := '';
+            GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
+            GenJournalLine."Fixed Deposit Contract" := FDContract."No.";
+            GenJournalLine."Shortcut Dimension 1 Code" := FDContract."Global Dimension 1 Code";
+            GenJournalLine."Shortcut Dimension 2 Code" := FDContract."Global Dimension 2 Code";
+            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+            if GenJournalLine.Amount <> 0 then
+                GenJournalLine.Insert;
+
+            //Credit FD Account
+            LineNo := LineNo + 10000;
+            GenJournalLine.Init;
+            GenJournalLine."Journal Template Name" := Jtemplate;
+            GenJournalLine."Line No." := LineNo;
+            GenJournalLine."Journal Batch Name" := Jbatch;
+            GenJournalLine."Document No." := FDContract."No.";
+            GenJournalLine."External Document No." := FDContract."No.";
+            GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
+            GenJournalLine."Account No." := FDContract."Fixed Deposit Account No.";
+            GenJournalLine.Validate(GenJournalLine."Account No.");
+            GenJournalLine."Posting Date" := Today;
+            GenJournalLine.Description := 'Transfer of funds from ' + format(FDContract."FOSA Main Account No.") + ' to FD Contract';
+            GenJournalLine.Description := UpperCase(GenJournalLine.Description);
+            GenJournalLine.Amount := (FDContract."Fixed Deposit Amount") * -1;
+            GenJournalLine.Validate(GenJournalLine.Amount);
+            GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
+            GenJournalLine."Bal. Account No." := '';
+            GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
+            GenJournalLine."Fixed Deposit Contract" := FDContract."No.";
+            GenJournalLine."Shortcut Dimension 1 Code" := FDContract."Global Dimension 1 Code";
+            GenJournalLine."Shortcut Dimension 2 Code" := FDContract."Global Dimension 2 Code";
+            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+            if GenJournalLine.Amount <> 0 then
+                GenJournalLine.Insert;
+
+            //Post New
+            GenJournalLine.Reset;
+            GenJournalLine.SetRange("Journal Template Name", Jtemplate);
+            GenJournalLine.SetRange("Journal Batch Name", Jbatch);
+            if GenJournalLine.Find('-') then begin
+                Codeunit.Run(Codeunit::"Gen. Jnl.-Post New", GenJournalLine);
             end;
+            // Rec.Balance := Rec."Fixed Deposit Amount";
+            Rec."Fixed Deposit Status" := Rec."Fixed Deposit Status"::Active;
+            // Rec."Application Date" := today;
+            Rec.Modify();
+            Message('Funds Transfered Successfully!');
+
         end;
     end;
-
     // [Scope('OnPrem')]
     procedure FieldLength(VarVariant: Text; FldLength: Integer): Text
     var
