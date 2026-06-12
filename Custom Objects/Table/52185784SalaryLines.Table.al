@@ -13,7 +13,7 @@ table 52185784 "Salary Lines"
         field(2; "Account No."; Code[20])
         {
             // TableRelation = "Savings Accounts"."No." where("Product Category" = filter("FOSA Account" | SAYE), "Loan Disbursement Account" = filter(true));
-            TableRelation = "Savings Accounts"."No." where("Product Category" = filter("FOSA Account"), "Loan Disbursement Account" = filter(true));
+            TableRelation = "Savings Accounts"."No." where("Product Category" = filter("FOSA Account"), "Product Type" = const('191'));
             ValidateTableRelation = false;
 
             trigger OnValidate()
@@ -191,13 +191,13 @@ table 52185784 "Salary Lines"
         }
         field(32; "Actual Date Posted"; Date)
         {
-            
+
         }
         field(33; "Work Station"; Code[20])
         {
             TableRelation = "Electrol Zones/Area Svr Center".Code WHERE(Type = CONST("Area Service Centers"));
         }
-      
+
     }
 
     keys

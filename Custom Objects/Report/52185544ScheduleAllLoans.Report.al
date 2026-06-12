@@ -80,6 +80,8 @@ Report 52185544 "Schedule All Loans"
                                     Loans."Loan Interest Repayment" := (Loans.Interest / 12 / 100) * Loans."Approved Amount";
 
                                 end;
+                    loans."Repayment Start Date" := CalcDate('CM+1M', loans."Disbursement Date");
+                    Loans.Repayment := Loans."Loan Principle Repayment" + Loans."Loan Interest Repayment";
                     Loans.Modify();
                 end;
             end;

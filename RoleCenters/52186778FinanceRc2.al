@@ -1912,6 +1912,13 @@ page 52186778 "Finance Role Center"
                 group("FixedDepositContract")
                 {
                     Caption = 'Fixed/Call Deposit Contracts';
+
+                    action("Saving Account Application")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Saving Account Application';
+                        RunObject = page "Savings Account Application";
+                    }
                     action("Fixed Deposit")
                     {
                         ApplicationArea = Basic, Suite;

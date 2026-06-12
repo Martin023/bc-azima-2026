@@ -2,7 +2,7 @@ table 52187029 "Fixed Deposit Contract"
 {
     DrillDownPageId = "Fixed Deposit Contract List";
     LookupPageId = "Fixed Deposit Contract list";
-    Caption = 'Fixed/Call Deposit Contract';
+    Caption = 'Fixed/Call Deposit Contract list';
 
     fields
     {
@@ -241,8 +241,11 @@ table 52187029 "Fixed Deposit Contract"
                     "FD Maturity Date" := CalcDate(FixedDepositType.Duration, "Application Date");
                     "FD Duration" := FixedDepositType.Duration;
                     "Product Category" := "Product Category"::"Fixed Deposit";
+                    rec."Interest Rate" := 0;
+                    rec."Fixed Deposit Amount" := 0;
+                    rec."Forecasted Interest" := 0;
+                    rec."Neg. Interest Rate" := 0;
                     Message('The FD number of days is %1', Abs("FD Maturity Date" - "Application Date"));
-
                     FDSetup.Reset();
                     FDSetup.SetRange(FDSetup.Code, rec."Fixed Deposit Type");
                     if FDSetup.Find('-') then begin
@@ -253,7 +256,10 @@ table 52187029 "Fixed Deposit Contract"
                             case
                                 Rec."Fixed Deposit Amount" of
                                 FDCalculation."Minimum Amount" .. FDCalculation."Maximum Amount":
-                                    rec."Interest Rate" := FDCalculation."Interest Rate";
+                                    begin
+                                        rec."Interest Rate" := FDCalculation."Interest Rate";
+                                        rec.Modify();
+                                    end;
                             end;
                             //until FDCalculation.Next() = 0;
                         end;
@@ -333,9 +339,11 @@ table 52187029 "Fixed Deposit Contract"
                 IntRate: Decimal;
                 IntEarned: Decimal;
                 NoOfDays: Integer;
+                FDCalculation: Record "FD Interest Calculation Rules";
+
             begin
 
-                rec.validate("Fixed Deposit Type");
+                // rec.validate("Fixed Deposit Type");
                 NoOfDays := 0;
                 NoOfDays := Abs(Rec."FD Maturity Date" - Rec."Application Date");
                 SavingsAccounts.get("FOSA Main Account No.");
@@ -348,6 +356,25 @@ table 52187029 "Fixed Deposit Contract"
                 if FDSetup.Find('-') then begin
                     if "Fixed Deposit Amount" < FDSetup."Allowed Minimum Amount" then
                         Error('The Deposit Amount is less than the Allowed Minimum Amount.');
+
+                    // FDSetup.Reset();
+                    // FDSetup.SetRange(FDSetup.Code, rec."Fixed Deposit Type");
+                    // if FDSetup.Find('-') then begin
+                    FDCalculation.Reset();
+                    FDCalculation.SetRange(Code, FDSetup.Code);
+                    if FDCalculation.FindFirst() then begin
+                        //repeat
+                        case
+                            Rec."Fixed Deposit Amount" of
+                            FDCalculation."Minimum Amount" .. FDCalculation."Maximum Amount":
+                                begin
+                                    rec."Interest Rate" := FDCalculation."Interest Rate";
+                                    rec.Modify();
+                                end;
+                        end;
+                        //until FDCalculation.Next() = 0;
+                    end;
+                    // end;
 
                     rec."Forecasted Interest" := Rec."Fixed Deposit Amount" * (rec."Interest Rate" / 100) * (NoOfDays / 365);
 
@@ -379,9 +406,9 @@ table 52187029 "Fixed Deposit Contract"
         field(39; "Balance (LCY)"; Decimal)
         {
             AutoFormatType = 1;
-            CalcFormula = - Sum("Savings Ledger Entry"."Amount (LCY)" WHERE("Fixed Deposit Contract" = FIELD("No."), "Customer No." = field("Fixed Deposit Account No."),
+            CalcFormula = - Sum("Savings Ledger Entry"."Amount (LCY)" WHERE("Customer No." = field("FOSA Main Account No."),
                                                                             "Posting Date" = FIELD("Date Filter")));
-            Caption = 'Balance (LCY)';
+            Caption = 'Savings Account Bal.';
             FieldClass = FlowField;
             Editable = false;
         }

@@ -85,6 +85,11 @@ page 52186739 "Fixed Deposit Contract"
                     ApplicationArea = Basic, Suite;
                     Editable = HeaderA;
                 }
+                field("Balance (LCY)"; Rec."Balance (LCY)")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = false;
+                }
                 field("Fixed Deposit Type"; Rec."Fixed Deposit Type")
                 {
                     ApplicationArea = Basic, Suite;
@@ -111,10 +116,7 @@ page 52186739 "Fixed Deposit Contract"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Balance (LCY)"; Rec."Balance (LCY)")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+
                 field("Forecasted Interest"; Rec."Forecasted Interest")
                 {
                     ApplicationArea = Basic, Suite;
@@ -123,7 +125,7 @@ page 52186739 "Fixed Deposit Contract"
                 field("Fixed Deposit Status"; Rec."Fixed Deposit Status")
                 {
                     ApplicationArea = Basic, Suite;
-                    Editable = HeaderA;
+                    // Editable = HeaderA;
                 }
                 field("FD Maturity Date"; Rec."FD Maturity Date")
                 {
