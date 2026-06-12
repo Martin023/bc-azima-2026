@@ -202,7 +202,7 @@ page 52186739 "Fixed Deposit Contract"
                 action(FixedDepositReceipt)
                 {
                     ApplicationArea = Basic;
-                    Caption = 'Fixed/Call Deposit Certificate';
+                    Caption = 'Fixed/Call Deposit Receipt';
                     // Enabled = OpenApprovalEntriesExist;
                     Image = Receipt;
                     Promoted = true;

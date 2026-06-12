@@ -1858,8 +1858,11 @@ page 52185753 "Loan Application Card"
                     end;
                     CompInfo.Get;
                     VarVariant := Rec;
-                    if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then
+                    if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then begin
                         CustomApprovals.OnSendDocForApproval(VarVariant);
+                        currpage.close;
+                    end;
+
 
                 end;
             }

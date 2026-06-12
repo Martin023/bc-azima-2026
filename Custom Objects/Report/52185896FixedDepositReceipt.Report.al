@@ -8,9 +8,6 @@ Report 52185896 "Fixed Deposit Receipt"
     {
         dataitem("Fixed Deposit Contract"; "Fixed Deposit Contract")
         {
-            column(ReportForNavId_1000000000; 1000000000)
-            {
-            }
             column(COMPANYNAME; COMPANYNAME)
             {
             }

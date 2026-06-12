@@ -401,13 +401,13 @@ page 52185808 "Salary Header"
 
                     trigger OnAction()
                     var
-                        SalaryLines: Record "Salary Lines";
+                        SalHead: Record "Salary Header";
                     begin
 
-                        SalaryLines.Reset;
-                        SalaryLines.SetRange(SalaryLines."Salary Header No.", rec.No);
-                        if SalaryLines.Find('-') then
-                            REPORT.Run(Report::"Check Mutiple Salary", true, false, SalaryLines);
+                        SalHead.Reset;
+                        SalHead.SetRange(No, rec.No);
+                        if SalHead.Find('-') then
+                            REPORT.Run(Report::"Check Mutiple Salary", true, false, SalHead);
                     end;
                 }
                 action("Clear Unvalidated Lines")
