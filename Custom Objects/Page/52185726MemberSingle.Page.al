@@ -574,11 +574,24 @@ page 52185726 "Member Single"
                 Caption = 'Approved Images';
                 SubPageLink = "Member No" = FIELD("No.");
             }
-            part("Member FactBox"; "Member FactBox")
+            // part("Member FactBox"; "Member FactBox")
+            // {
+            //     ApplicationArea = Basic;
+            //     Caption = 'Member FactBox';
+            //     SubPageLink = "Member No." = field("No.");
+            // }
+            part(Control4; "Savings Statistics")
             {
-                ApplicationArea = Basic;
-                Caption = 'Member FactBox';
-                SubPageLink = "Member No." = field("No.");
+                ApplicationArea = Basic, Suite;
+                SubPageLink = "Member No." = FIELD("No.");
+                Visible = Not HideAccount;
+
+            }
+            part(LoanFactBox; "Loans Factbox")
+            {
+                ApplicationArea = Basic, Suite;
+                SubPageLink = "Member No." = FIELD("No.");
+                Visible = Not HideAccount;
             }
 
         }

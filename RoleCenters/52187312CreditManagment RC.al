@@ -248,12 +248,6 @@ page 52187312 "Credit Management Role Center"
                         RunObject = page "Approved Loans List";
                         // RunPageView = where("Source Unit" = const(BOSA));
                     }
-                    action("Loan Disbursement List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        caption = 'Loan Disbursement List';
-                        RunObject = page "Loan Disbursement List";
-                    }
                     action("Deferred Loan Application List")
                     {
                         ApplicationArea = Basic, Suite;
@@ -272,10 +266,11 @@ page 52187312 "Credit Management Role Center"
 
                 }
 
+
                 group("Loan Processed")
                 {
 
-                    Caption = 'Loan Processed';
+                    Caption = 'Posted/Reversed Loans';
                     action("Loan Posted List")
                     {
                         ApplicationArea = Basic, Suite;
@@ -303,6 +298,17 @@ page 52187312 "Credit Management Role Center"
                         caption = 'Reversed Loan List';
                         RunObject = page "Loan Posted List";
                         RunPageView = where("Source Unit" = filter(<> "HR LOANS"), "Reversed" = filter(true));
+                    }
+
+                }
+                group(LoanBatchingList)
+                {
+                    Caption = 'Partial/Batch Disbursements';
+                    action("Loan Disbursement List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        caption = 'Loan Disbursement List';
+                        RunObject = page "Loan Disbursement List";
                     }
                     action("Posted Loan Disbursment List")
                     {

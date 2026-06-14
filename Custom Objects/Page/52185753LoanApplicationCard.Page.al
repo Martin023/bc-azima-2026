@@ -715,10 +715,16 @@ page 52185753 "Loan Application Card"
                 Caption = 'Member Images';
                 SubPageLink = "Member No" = FIELD("Member No.");
             }
-            part("Member FactBox"; "Member FactBox")
+            // part("Member FactBox"; "Member FactBox")
+            // {
+            //     ApplicationArea = Basic;
+            //     Caption = 'Member FactBox';
+            //     SubPageLink = "Member No." = field("Member No.");
+            // }
+            part("Loans Factbox"; "Loans Factbox")
             {
                 ApplicationArea = Basic;
-                Caption = 'Member FactBox';
+                Caption = 'Loan FactBox';
                 SubPageLink = "Member No." = field("Member No.");
             }
 
