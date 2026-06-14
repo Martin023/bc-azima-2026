@@ -3838,7 +3838,6 @@ table 52185729 Loans
         BusinessIncome: Record "Business Income";
         LoansTopup: Record "Loans Top up";
         ExternalComm: Record "Other Commitements Clearance";
-        PaymentMethods: Record "Payment Methods";
     begin
         AppraisalSalDetails.Reset;
         AppraisalSalDetails.SetRange("Loan No", Rec."Loan No.");

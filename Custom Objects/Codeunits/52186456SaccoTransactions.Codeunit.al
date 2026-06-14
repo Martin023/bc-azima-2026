@@ -9662,9 +9662,13 @@ Codeunit 52186456 "Sacco Transactions"
         Text0002: label ' has matured and amount transfered to your savings account on';
         GlobalFunctions: Codeunit "Global Functions";
         DocumentNo: Code[20];
+        Wtax: Decimal;
+        GrossInt: Decimal;
     begin
         if FDAccount."Fixed Deposit Status" = FDAccount."Fixed Deposit Status"::Closed then
             Error('The Fixed/Call Deposit is Closed, it has already been processed!');
+        GrossInt := 0;
+        Wtax := 0;
 
         Temp.Get(UserId);
         DocumentNo := 'FDINT' + '-' + CopyStr(Format(TODAY, 0, '<Month Text>'), 1, 3) + ' ' + Format(Date2DMY(Today, 3));
@@ -9721,8 +9725,13 @@ Codeunit 52186456 "Sacco Transactions"
 
                                         AccountTypes.TestField("WithHolding Tax");
                                         AccountTypes.TestField("Withholding Tax Account");
-                                        LineNo := LineNo + 10000;
                                         FDAccount.CalcFields("Untranfered Interest");
+                                        GrossInt := FDAccount."Untranfered Interest";
+                                        if GlobalFunctions.TaxExcemptions(FDAccount."Member No.") = true then
+                                            Wtax := round((GrossInt * (AccountTypes."WithHolding Tax" / 100)), 1, '<')
+                                        else
+                                            WTax := 0;
+                                        LineNo := LineNo + 10000;
                                         // 1. Credit Interest to FD less withholding tax (Tax Charged on member interest)
                                         GenJournalLine.Init;
                                         GenJournalLine."Journal Template Name" := Jtemplate;
@@ -9734,9 +9743,9 @@ Codeunit 52186456 "Sacco Transactions"
                                         GenJournalLine."Account No." := FDAccount."Fixed Deposit Account No.";
                                         GenJournalLine.Validate(GenJournalLine."Account No.");
                                         GenJournalLine."Posting Date" := Today;
-                                        GenJournalLine.Description := 'FD Interest - ' + Format(FDAccount."FD Maturity Date", 0, ' <Day,2>-<Month Text,3>-<Year4> ');
+                                        GenJournalLine.Description := 'FD gross interest - ' + Format(FDAccount."FD Maturity Date", 0, ' <Day,2>-<Month Text,3>-<Year4> ');
                                         GenJournalLine.Description := UpperCase(GenJournalLine.Description);
-                                        GenJournalLine.Amount := -FDAccount."Untranfered Interest";
+                                        GenJournalLine.Amount := -GrossInt;
                                         GenJournalLine.Validate(GenJournalLine.Amount);
                                         GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
                                         GenJournalLine."Bal. Account No." := AccountTypes."Interest Expense Account";
@@ -9763,10 +9772,7 @@ Codeunit 52186456 "Sacco Transactions"
                                         GenJournalLine."Posting Date" := Today;
                                         GenJournalLine.Description := 'Withholding Tax';
                                         GenJournalLine.Description := UpperCase(GenJournalLine.Description);
-                                        if GlobalFunctions.TaxExcemptions(FDAccount."Member No.") = true then
-                                            GenJournalLine.Amount := 0
-                                        else
-                                            GenJournalLine.Amount := (FDAccount."Untranfered Interest" * (AccountTypes."WithHolding Tax" / 100));
+
                                         GenJournalLine.Validate(GenJournalLine.Amount);
                                         GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
                                         GenJournalLine."Bal. Account No." := AccountTypes."Withholding Tax Account";
@@ -9779,7 +9785,7 @@ Codeunit 52186456 "Sacco Transactions"
                                         if GenJournalLine.Amount <> 0 then
                                             GenJournalLine.Insert;
 
-                                        // debit totals from FD acc.
+                                        // debit Principle from FD acc.
                                         FDAccount.CalcFields("Balance (LCY)", Balance, "Untranfered Interest");
                                         LineNo := LineNo + 10000;
                                         GenJournalLine.Init;
@@ -9788,14 +9794,13 @@ Codeunit 52186456 "Sacco Transactions"
                                         GenJournalLine."Journal Batch Name" := Jbatch;
                                         GenJournalLine."Document No." := FDAccount."No.";
                                         GenJournalLine."External Document No." := DocumentNo;
-                                        GenJournalLine."Account No." := FDAccount."Fixed Deposit Account No.";
                                         GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
                                         GenJournalLine."Account No." := FDAccount."Fixed Deposit Account No.";//Account."No."
                                         GenJournalLine.Validate(GenJournalLine."Account No.");
                                         GenJournalLine."Posting Date" := Today;
-                                        GenJournalLine.Description := 'Transfer from fixed';
+                                        GenJournalLine.Description := 'Transfer principle from fixed';
                                         GenJournalLine.Description := UpperCase(GenJournalLine.Description);
-                                        GenJournalLine.Amount := (FDAccount."Balance (LCY)" + FDAccount."Untranfered Interest" - (FDAccount."Untranfered Interest" * AccountTypes."WithHolding Tax" / 100));
+                                        GenJournalLine.Amount := FDAccount."Balance (LCY)";
                                         GenJournalLine.Validate(GenJournalLine.Amount);
                                         GenJournalLine."Fixed Deposit Contract" := FDAccount."No.";
                                         GenJournalLine."Shortcut Dimension 1 Code" := FDAccount."Global Dimension 1 Code";
@@ -9804,8 +9809,31 @@ Codeunit 52186456 "Sacco Transactions"
                                         GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
                                         if GenJournalLine.Amount <> 0 then
                                             GenJournalLine.Insert;
-                                        //TRANSFER Total amount to member savings
 
+                                        //bal
+                                        LineNo := LineNo + 10000;
+                                        GenJournalLine.Init;
+                                        GenJournalLine."Journal Template Name" := Jtemplate;
+                                        GenJournalLine."Line No." := LineNo;
+                                        GenJournalLine."Journal Batch Name" := Jbatch;
+                                        GenJournalLine."Document No." := FDAccount."No.";
+                                        GenJournalLine."External Document No." := DocumentNo;
+                                        GenJournalLine."Account No." := FDAccount."FOSA Main Account No.";
+                                        GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
+                                        GenJournalLine.Validate(GenJournalLine."Account No.");
+                                        GenJournalLine."Posting Date" := Today;
+                                        GenJournalLine.Description := 'Transfer principle from fixed';
+                                        GenJournalLine.Description := UpperCase(GenJournalLine.Description);
+                                        GenJournalLine.Amount := -FDAccount."Balance (LCY)";
+                                        GenJournalLine.Validate(GenJournalLine.Amount);
+                                        GenJournalLine."Fixed Deposit Contract" := FDAccount."No.";
+                                        GenJournalLine."Shortcut Dimension 1 Code" := FDAccount."Global Dimension 1 Code";
+                                        GenJournalLine."Shortcut Dimension 2 Code" := FDAccount."Global Dimension 2 Code";
+                                        GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                                        GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                                        if GenJournalLine.Amount <> 0 then
+                                            GenJournalLine.Insert;
+                                        //TRANSFER net Int amount to member savings
                                         LineNo := LineNo + 10000;
                                         FDAccount.CalcFields("Balance (LCY)", Balance, "Untranfered Interest");
                                         GenJournalLine.Init;
@@ -9818,9 +9846,35 @@ Codeunit 52186456 "Sacco Transactions"
                                         GenJournalLine."Account No." := FDAccount."FOSA Main Account No.";
                                         GenJournalLine.Validate(GenJournalLine."Account No.");
                                         GenJournalLine."Posting Date" := Today;
-                                        GenJournalLine.Description := 'Transfer to Savings';
+                                        GenJournalLine.Description := 'Transfer net interest from Fixed';
                                         GenJournalLine.Description := UpperCase(GenJournalLine.Description);
-                                        GenJournalLine.Amount := (FDAccount."Balance (LCY)" + FDAccount."Untranfered Interest" - (FDAccount."Untranfered Interest" * AccountTypes."WithHolding Tax" / 100)) * -1;
+                                        GenJournalLine.Amount := (GrossInt - Wtax) * -1;
+                                        GenJournalLine.Validate(GenJournalLine.Amount);
+                                        GenJournalLine."Bal. Account Type" := GenJournalLine."Bal. Account Type"::"G/L Account";
+                                        GenJournalLine."Bal. Account No." := '';
+                                        GenJournalLine."Fixed Deposit Contract" := FDAccount."No.";
+                                        GenJournalLine."Shortcut Dimension 1 Code" := FDAccount."Global Dimension 1 Code";
+                                        GenJournalLine."Shortcut Dimension 2 Code" := FDAccount."Global Dimension 2 Code";
+                                        GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                                        GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                                        if GenJournalLine.Amount <> 0 then
+                                            GenJournalLine.Insert;
+
+                                        //TRANSFER net Int amount to member savings
+                                        LineNo := LineNo + 10000;
+                                        GenJournalLine.Init;
+                                        GenJournalLine."Journal Template Name" := Jtemplate;
+                                        GenJournalLine."Line No." := LineNo;
+                                        GenJournalLine."Journal Batch Name" := Jbatch;
+                                        GenJournalLine."Document No." := FDAccount."No.";
+                                        GenJournalLine."External Document No." := DocumentNo;
+                                        GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
+                                        GenJournalLine."Account No." := FDAccount."FOSA Main Account No.";
+                                        GenJournalLine.Validate(GenJournalLine."Account No.");
+                                        GenJournalLine."Posting Date" := Today;
+                                        GenJournalLine.Description := 'Transfer net interest to Savings';
+                                        GenJournalLine.Description := UpperCase(GenJournalLine.Description);
+                                        GenJournalLine.Amount := (GrossInt - Wtax);
                                         GenJournalLine.Validate(GenJournalLine.Amount);
                                         GenJournalLine."Bal. Account Type" := GenJournalLine."Bal. Account Type"::"G/L Account";
                                         GenJournalLine."Bal. Account No." := '';

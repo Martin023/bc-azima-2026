@@ -168,16 +168,18 @@ page 52186739 "Fixed Deposit Contract"
                 {
                     ApplicationArea = Basic;
                     Caption = 'Fixed/Call Deposit Certificate';
-                    // Enabled = OpenApprovalEntriesExist;
                     Image = Certificate;
                     Promoted = true;
                     PromotedCategory = Report;
-                    Visible = false;
 
                     trigger OnAction()
+                    var
+                        FixedDepositContract: Record "Fixed Deposit Contract";
                     begin
-
-                        Report.Run(Report::"Fixed Deposit Certificate", true, true, Rec);
+                        FixedDepositContract.Reset;
+                        FixedDepositContract.SetFilter("No.", Rec."No.");
+                        if FixedDepositContract.findFirst() then
+                            Report.Run(Report::"Fixed Deposit Certificate", true, true, FixedDepositContract);
                     end;
                 }
                 action(FixedDepositReceipt)

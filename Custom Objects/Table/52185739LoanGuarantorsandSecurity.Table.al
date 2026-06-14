@@ -257,7 +257,7 @@ table 52185739 "Loan Guarantors and Security"
 
         field(7; Substituted; Boolean)
         {
-            Editable = true;
+            Editable = false;
 
             trigger OnValidate()
             begin
