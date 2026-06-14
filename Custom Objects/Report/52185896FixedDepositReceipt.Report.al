@@ -8,9 +8,6 @@ Report 52185896 "Fixed Deposit Receipt"
     {
         dataitem("Fixed Deposit Contract"; "Fixed Deposit Contract")
         {
-            column(ReportForNavId_1000000000; 1000000000)
-            {
-            }
             column(COMPANYNAME; COMPANYNAME)
             {
             }
@@ -62,11 +59,33 @@ Report 52185896 "Fixed Deposit Receipt"
             column(SNo; "SNo.")
             {
             }
+            column(MemberAddress; MemberAddress)
+            {
+            }
+            column(Fixed_Deposit_Amount; "Fixed Deposit Amount")
+            {
+            }
+            column(FD_Duration; "FD Duration")
+            {
+
+            }
+            column(ApplicationDate; Format("Fixed Deposit Contract"."Application Date", 0, 4))
+            {
+            }
+            column(PhoneNo; PhoneNo) { }
+            column(Interest_Rate; "Interest Rate")
+            {
+            }
 
             trigger OnAfterGetRecord()
             begin
 
                 "SNo." += 1;
+
+                if Member.get("Fixed Deposit Contract"."Member No.") then begin
+                    MemberAddress := member."Home Address";
+                    PhoneNo := Member."Phone No.";
+                end;
 
                 FixedRate := 0;
                 FDCalcRules.Reset;
@@ -85,8 +104,8 @@ Report 52185896 "Fixed Deposit Receipt"
                 "Fixed Deposit Contract".CalcFields("Fixed Deposit Contract".Balance);
 
                 // Amount into words
-                // CheckReport.InitTextVariable;
-                // CheckReport.FormatNoText(NumberText, "Fixed Deposit Contract"."Balance (LCY)", '');
+                CheckReport.InitTextVariable;
+                CheckReport.FormatNoText(NumberText, "Fixed Deposit Contract"."Balance (LCY)", '');
             end;
 
             trigger OnPreDataItem()
@@ -126,11 +145,14 @@ Report 52185896 "Fixed Deposit Receipt"
         CompInfo: Record "Company Information";
         FixedRate: Decimal;
         FDCalcRules: Record "FD Interest Calculation Rules";
-        // CheckReport: Report Check;
+        CheckReport: Report Check;
         NumberText: array[2] of Text[120];
         CompanyInformation: Record "Company Information";
         CompanyAddress: Text;
         CompanyTelephone: Text;
         "SNo.": Integer;
         CommunicationOnline: Text;
+        Member: record Members;
+        MemberAddress: text[1000];
+        PhoneNo: Text;
 }

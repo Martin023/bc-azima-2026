@@ -16,12 +16,12 @@ page 52185761 "Loan Guarantors and Security"
             repeater(Group)
             {
 
-                field("Loan No"; Rec."Loan No")
-                {
-                    ApplicationArea = all;
-                    Editable = false;
-                    //Visible = false;
-                }
+                // field("Loan No"; Rec."Loan No")
+                // {
+                //     ApplicationArea = all;
+                //     Editable = false;
+                //     //Visible = false;
+                // }
                 field("Guarantor Type"; Rec."Guarantor Type")
                 {
                     ApplicationArea = Basic, Suite;
@@ -37,6 +37,18 @@ page 52185761 "Loan Guarantors and Security"
                     Editable = false;
                 }
                 field("Collateral Reg. No."; Rec."Collateral Reg. No.")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Amount Guaranteed"; Rec."Amount Guaranteed")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Available Shares"; Rec."Available Shares")
+                {
+                    ApplicationArea = all;
+                }
+                field("Deposits/Shares"; Rec."Deposits/Shares")
                 {
                     ApplicationArea = Basic, Suite;
                 }
@@ -71,23 +83,16 @@ page 52185761 "Loan Guarantors and Security"
                     ApplicationArea = Basic, Suite;
                 }
 
-                field("Amount Guaranteed"; Rec."Amount Guaranteed")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Amount Guaranteed"; Rec."Amount Guaranteed")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 // field("User Specified"; Rec."User Specified")
                 // {
                 //     ApplicationArea = Basic, Suite;
                 // }
 
-                field("Available Shares"; Rec."Available Shares")
-                {
-                    ApplicationArea = all;
-                }
-                field("Deposits/Shares"; Rec."Deposits/Shares")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+
                 field("No Of Loans Guaranteed"; Rec."No Of Loans Guaranteed")
                 {
                     ApplicationArea = Basic, Suite;
@@ -606,7 +611,7 @@ page 52185761 "Loan Guarantors and Security"
     //     UpdateLoanGroup();
     // end;
 
-   
+
 
     var
         LoanGua: Record "Loan Guarantors and Security";

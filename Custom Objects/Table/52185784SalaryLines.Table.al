@@ -193,10 +193,11 @@ table 52185784 "Salary Lines"
         {
 
         }
-        field(33; "Work Station"; Code[20])
+        field(33; "Already Paid"; Boolean)
         {
-            TableRelation = "Electrol Zones/Area Svr Center".Code WHERE(Type = CONST("Area Service Centers"));
+            editable = false;
         }
+
 
     }
 

@@ -7292,7 +7292,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                 begin
                     RecRef.SetTable(FDC);
                     FDC.Validate(Status, FDC.status::Approved);
-                    FDC."Fixed Deposit Status" := FDC."Fixed Deposit Status"::Active;
+                    // FDC."Fixed Deposit Status" := FDC."Fixed Deposit Status"::Active;
                     FDC.modify(true);
                     Handled := true;
                 end;
