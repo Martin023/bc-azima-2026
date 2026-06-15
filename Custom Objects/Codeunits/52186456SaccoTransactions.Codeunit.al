@@ -4917,6 +4917,9 @@ Codeunit 52186456 "Sacco Transactions"
             SalLines.Reset();
             SalLines.SetRange(SalLines."Salary Header No.", SalHeaD.No);
             SalLines.SetRange(Posted, false);
+            SalLines.setrange("Paid Within Month", false);
+            SalLines.setrange("Account Not Found", false);
+            SalLines.setrange("Multiple Salary", false);
 
             if SalLines.FindSet() then begin
                 repeat

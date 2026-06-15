@@ -193,9 +193,13 @@ table 52185784 "Salary Lines"
         {
 
         }
-        field(33; "Already Paid"; Boolean)
+        field(33; "Paid Within Month"; Boolean)
         {
             editable = false;
+        }
+        field(34; "Transaction Type"; code[20])
+        {
+            TableRelation = "Transaction Types".Code WHERE(Type = CONST("Salary Processing"));
         }
 
 

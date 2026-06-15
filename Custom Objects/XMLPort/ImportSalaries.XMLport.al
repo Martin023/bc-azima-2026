@@ -16,6 +16,9 @@ XmlPort 52185496 "Import Salaries"
                 fieldattribute(AccountNo; "Salary Lines"."Account No.")
                 {
                 }
+                fieldattribute(EmployerCode; "Salary Lines"."Employer Code")
+                {
+                }
                 fieldattribute(StaffNo; "Salary Lines"."Staff No.")
                 {
                 }
@@ -34,7 +37,7 @@ XmlPort 52185496 "Import Salaries"
                     if SalaryHeaderNo = '' then
                         Error('Salary Header No. was not initialized.');
 
-                   if ("Salary Lines"."Member No." = '') and ("Salary Lines"."ID No." = '') and ("Salary Lines"."Staff No." = '') then
+                    if ("Salary Lines"."Member No." = '') and ("Salary Lines"."ID No." = '') and ("Salary Lines"."Staff No." = '') then
                         Error('Either Member No., ID No., or Staff No. must be provided.');
 
                     if "Salary Lines".Amount <= 0 then
@@ -60,12 +63,14 @@ XmlPort 52185496 "Import Salaries"
         }
     }
 
-    var 
-        SalaryHeaderNo : Code[50];
+    var
+        SalaryHeaderNo: Code[50];
+
     trigger OnPostXmlPort()
     begin
         Message('Salary Uploaded Successfuly');
     end;
+
     procedure SetHeaderNo(HeaderNo: Code[50])
     begin
         SalaryHeaderNo := HeaderNo;

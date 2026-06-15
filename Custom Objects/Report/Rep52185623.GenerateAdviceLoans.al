@@ -61,10 +61,20 @@ report 52185623 "Generate Advice Loans"
                                     CheckoffAdvice."Amount On" := loans."Variated Amount";
 
                                 if CheckoffAdvice."Amount On" = 0 then begin
-                                    if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Balance" then
-                                        CheckoffAdvice."Amount On" := Loans."Loan Principle Repayment"
-                                    else
+                                    if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Balance" then begin
+                                        CheckoffAdvice."Amount On" := Loans."Loan Principle Repayment";
+                                        CheckoffAdvice."Balance On" := Loans."Outstanding Balance";
+                                    end
+                                    else begin
                                         CheckoffAdvice."Amount On" := Loans.Repayment;
+                                        LoanRepaySchedule.Reset();
+                                        LoanRepaySchedule.SetRange("Loan No.", Loans."Loan No.");
+                                        LoanRepaySchedule.setfilter("Repayment Date", '>=%1', Today);
+                                        // if LoanRepaySchedule.Find('-') then
+                                        LoanRepaySchedule.CalcSums("Monthly Interest");
+                                        CheckoffAdvice."Balance On" := Loans."Outstanding Balance" + LoanRepaySchedule."Monthly Interest";
+                                    end;
+
                                 end;
 
                                 if loans."Total Balance" < CheckoffAdvice."Amount On"
@@ -74,7 +84,7 @@ report 52185623 "Generate Advice Loans"
                                 CheckoffAdvice."Loan Principle Repayment" := Loans."Loan Principle Repayment";
                                 CheckoffAdvice."Loan Interest Repayment" := Loans."Loan Interest Repayment";
                                 CheckoffAdvice."Amount On" := Round(CheckoffAdvice."Amount On", 1, '>');
-                                CheckoffAdvice."Balance On" := Loans."Outstanding Balance" + Loans."Outstanding Interest";
+
                                 CheckoffAdvice."Advice Date" := Today;
 
                                 CheckoffAdvice."Payroll No" := Loans."Staff No";
@@ -125,9 +135,9 @@ report 52185623 "Generate Advice Loans"
                 CheckoffAdvice.SetRange(CheckoffAdvice.Period, CheckoffAdviceHeader.Period);
                 CheckoffAdvice.SetRange(CheckoffAdvice.Type, CheckoffAdvice.Type::Credit);
                 CheckoffAdvice.setrange("Advice Header No.", CheckoffAdviceHeader."No.");
-                if CheckoffAdvice.Find('-') then begin
-                    CheckoffAdvice.DeleteAll;
-                end;
+                // if CheckoffAdvice.Find('-') then begin
+                CheckoffAdvice.DeleteAll;
+                // end;
             end;
         }
     }
@@ -161,4 +171,5 @@ report 52185623 "Generate Advice Loans"
         Memb: record members;
         TotalSTO: decimal;
         iEntryNo: Integer;
+        LoanRepaySchedule: record "Ideal Repayment Schedule";
 }

@@ -28,7 +28,6 @@ page 52185753 "Loan Application Card"
                     Editable = false;
                 }
 
-
                 field("Member No."; Rec."Member No.")
                 {
                     ApplicationArea = Basic, Suite;

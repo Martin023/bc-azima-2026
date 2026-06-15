@@ -100,12 +100,14 @@ table 52185818 "Checkoff Advice Line"
         }
         field(8; "Amount On"; Decimal)
         {
+            Caption = 'Installment Amount';
         }
         field(9; "Amount Off"; Decimal)
         {
         }
         field(10; "Balance On"; Decimal)
         {
+            Caption = 'Loan Balance(P+I)';
         }
         field(11; "Balance Off"; Decimal)
         {
