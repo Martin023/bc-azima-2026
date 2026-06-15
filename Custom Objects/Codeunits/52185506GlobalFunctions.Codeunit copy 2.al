@@ -2700,6 +2700,56 @@ Codeunit 52185506 "Global Functions"
         exit(FormatedMonth);
     end;
 
+    procedure ConvertDateFormulaToNumber(DateFormulaText: Text): Integer
+    var
+        Value: Integer;
+        Unit: Text;
+        Length: Integer;
+    begin
+        Length := StrLen(DateFormulaText);
+
+        // Handle multi-character units like WD (weekday)
+        if Length > 2 then
+            Unit := CopyStr(DateFormulaText, Length - 1, 2)
+        else
+            Unit := CopyStr(DateFormulaText, Length, 1);
+
+        case Unit of
+            'D':
+                begin
+                    Evaluate(Value, CopyStr(DateFormulaText, 1, Length - 1));
+                    exit(Value); // Days
+                end;
+            'W':
+                begin
+                    Evaluate(Value, CopyStr(DateFormulaText, 1, Length - 1));
+                    exit(Value); // Weeks
+                end;
+            'WD':
+                begin
+                    Evaluate(Value, CopyStr(DateFormulaText, 1, Length - 2));
+                    exit(Value); // Weekdays
+                end;
+            'M':
+                begin
+                    Evaluate(Value, CopyStr(DateFormulaText, 1, Length - 1));
+                    exit(Value); // Months
+                end;
+            'Q':
+                begin
+                    Evaluate(Value, CopyStr(DateFormulaText, 1, Length - 1));
+                    exit(Value); // Quarters
+                end;
+            'Y':
+                begin
+                    Evaluate(Value, CopyStr(DateFormulaText, 1, Length - 1));
+                    exit(Value); // Years
+                end;
+            else
+                exit(0); // Unknown or unsupported unit
+        end;
+    end;
+
     procedure IsBusinessLoanProduct(ProductID: Code[10]): Boolean;
     var
         TheLoanProduct: Record "Product Factory";

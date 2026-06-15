@@ -105,7 +105,7 @@ Report 52185896 "Fixed Deposit Receipt"
 
                 // Amount into words
                 CheckReport.InitTextVariable;
-                CheckReport.FormatNoText(NumberText, "Fixed Deposit Contract"."Balance (LCY)", '');
+                CheckReport.FormatNoText(NumberText, "Fixed Deposit Contract".Balance, '');
             end;
 
             trigger OnPreDataItem()

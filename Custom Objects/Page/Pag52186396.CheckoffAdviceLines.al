@@ -10,14 +10,14 @@ page 52186396 "Checkoff Advice Lines"
         {
             repeater(General)
             {
-                field("Entry No"; Rec."Entry No")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field(Type; Rec.Type)
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Entry No"; Rec."Entry No")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field(Type; Rec.Type)
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 // field("Advice Header No."; Rec."Advice Header No.")
                 // {
                 //     ApplicationArea = Basic, Suite;
@@ -43,10 +43,10 @@ page 52186396 "Checkoff Advice Lines"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Work Station"; Rec."Work Station")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Work Station"; Rec."Work Station")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("Loan No."; Rec."Loan No.")
                 {
                     ApplicationArea = Basic, Suite;

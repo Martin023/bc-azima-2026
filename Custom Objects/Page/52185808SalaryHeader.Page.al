@@ -156,6 +156,7 @@ page 52185808 "Salary Header"
                     editable = false;
 
                 }
+                
             }
             part(Control17; "Salary Lines")
             {

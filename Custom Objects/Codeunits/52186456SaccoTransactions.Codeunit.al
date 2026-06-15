@@ -5230,7 +5230,8 @@ Codeunit 52186456 "Sacco Transactions"
                             if Account.GetAvailableBalance(Account."No.") > 0 then
                                 RunBal := RunBal + Account.GetAvailableBalance(Account."No.");
 
-                            if SalHeaD."Income Type" <> SalHeaD."Income Type"::SAYE then
+                            // if SalHeaD."Income Type" <> SalHeaD."Income Type"::SAYE then
+                            if not SalHeaD."Donnot Recover" then
                                 PostSalaryLoans(SalHeaD, DocNo, PDate, DActivity2, DBranch2, Jtemplate, JBatch, RunBal, MemberNo, LineNo, Salaccno);
 
                             // if Account.Get(SalLines."Account No.") then begin
@@ -9595,7 +9596,6 @@ Codeunit 52186456 "Sacco Transactions"
         FDInterestCalc: Record "FD Interest Calculation Rules";
         IntRate: Decimal;
         FDDays: Integer;
-        FDMonths: Integer;
     begin
 
         InterestAmount := 0;
@@ -9609,7 +9609,7 @@ Codeunit 52186456 "Sacco Transactions"
                     // FDInterestCalc.Reset;
                     // FDInterestCalc.SetRange(FDInterestCalc.Code, Account."Fixed Deposit Type");
                     // if FDInterestCalc.FindSet() then begin
-                    Account.CalcFields("Balance (LCY)");
+                    // Account.CalcFields("Balance (LCY)");
                     // repeat
                     // if (FDInterestCalc."Minimum Amount" <= Account."Balance (LCY)") and
                     // (Account."Balance (LCY)" <= FDInterestCalc."Maximum Amount") then
@@ -9628,21 +9628,12 @@ Codeunit 52186456 "Sacco Transactions"
                     // RunDate := Today;
 
                     // end;
-
-                    FDDays := Account."FD Maturity Date" - Account."Application Date";
-                    FDMonths := round((FDDays / 30), 1, '=');
-                    if FDDays <= 0 then begin
-                        FDDays := 0;
-                        FDMonths := 0;
-                    end;
-
-                    //FDDays:=Account."FD Duration";
-                    Account.CalcFields("Balance (LCY)");
-                    InterestAmount := Account."Balance (LCY)" * IntRate * 0.01 * (FDMonths / 12);
+                    FDDays := 0;
+                    FDDays := Abs(Account."FD Maturity Date" - Account."Application Date");
+                    Account.CalcFields(Balance);
+                    InterestAmount := Account.Balance * Account."Interest Rate" * 0.01 * (FDDays / 365);
                     InterestAmount := ROUND(InterestAmount, 1.0, '<');
-
                     IntBufferNo := IntBufferNo + 1;
-
                     InterestBuffer.Init;
                     InterestBuffer."Account No" := Account."No.";
                     InterestBuffer.No := IntBufferNo;
@@ -9712,7 +9703,6 @@ Codeunit 52186456 "Sacco Transactions"
             GenJournalLine.DeleteAll;
 
             if FDAccount.Blocked <> FDAccount.Blocked::All then begin
-                FDAccount.CalcFields(FDAccount."Balance (LCY)");
                 if AccountTypes.Get(FDAccount."Product Type") then begin
                     if (AccountTypes."Product Category" = AccountTypes."product category"::"Fixed Deposit") then begin
                         if AccountTypes."Earns Interest" = true then begin
@@ -9781,7 +9771,7 @@ Codeunit 52186456 "Sacco Transactions"
                                         GenJournalLine."Posting Date" := Today;
                                         GenJournalLine.Description := 'Withholding Tax';
                                         GenJournalLine.Description := UpperCase(GenJournalLine.Description);
-
+                                        GenJournalLine.Amount := Wtax;
                                         GenJournalLine.Validate(GenJournalLine.Amount);
                                         GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
                                         GenJournalLine."Bal. Account No." := AccountTypes."Withholding Tax Account";
@@ -9795,7 +9785,7 @@ Codeunit 52186456 "Sacco Transactions"
                                             GenJournalLine.Insert;
 
                                         // debit Principle from FD acc.
-                                        FDAccount.CalcFields("Balance (LCY)", Balance, "Untranfered Interest");
+                                        FDAccount.CalcFields(Balance, "Untranfered Interest");
                                         LineNo := LineNo + 10000;
                                         GenJournalLine.Init;
                                         GenJournalLine."Journal Template Name" := Jtemplate;
@@ -9807,9 +9797,9 @@ Codeunit 52186456 "Sacco Transactions"
                                         GenJournalLine."Account No." := FDAccount."Fixed Deposit Account No.";//Account."No."
                                         GenJournalLine.Validate(GenJournalLine."Account No.");
                                         GenJournalLine."Posting Date" := Today;
-                                        GenJournalLine.Description := 'Transfer principle from fixed';
+                                        GenJournalLine.Description := 'Transfer principle from fixed to savings';
                                         GenJournalLine.Description := UpperCase(GenJournalLine.Description);
-                                        GenJournalLine.Amount := FDAccount."Balance (LCY)";
+                                        GenJournalLine.Amount := FDAccount.Balance;
                                         GenJournalLine.Validate(GenJournalLine.Amount);
                                         GenJournalLine."Fixed Deposit Contract" := FDAccount."No.";
                                         GenJournalLine."Shortcut Dimension 1 Code" := FDAccount."Global Dimension 1 Code";
@@ -9833,7 +9823,7 @@ Codeunit 52186456 "Sacco Transactions"
                                         GenJournalLine."Posting Date" := Today;
                                         GenJournalLine.Description := 'Transfer principle from fixed';
                                         GenJournalLine.Description := UpperCase(GenJournalLine.Description);
-                                        GenJournalLine.Amount := -FDAccount."Balance (LCY)";
+                                        GenJournalLine.Amount := -FDAccount.Balance;
                                         GenJournalLine.Validate(GenJournalLine.Amount);
                                         GenJournalLine."Fixed Deposit Contract" := FDAccount."No.";
                                         GenJournalLine."Shortcut Dimension 1 Code" := FDAccount."Global Dimension 1 Code";
@@ -9844,7 +9834,7 @@ Codeunit 52186456 "Sacco Transactions"
                                             GenJournalLine.Insert;
                                         //TRANSFER net Int amount to member savings
                                         LineNo := LineNo + 10000;
-                                        FDAccount.CalcFields("Balance (LCY)", Balance, "Untranfered Interest");
+                                        FDAccount.CalcFields(Balance, "Untranfered Interest");
                                         GenJournalLine.Init;
                                         GenJournalLine."Journal Template Name" := Jtemplate;
                                         GenJournalLine."Line No." := LineNo;
@@ -9855,7 +9845,7 @@ Codeunit 52186456 "Sacco Transactions"
                                         GenJournalLine."Account No." := FDAccount."FOSA Main Account No.";
                                         GenJournalLine.Validate(GenJournalLine."Account No.");
                                         GenJournalLine."Posting Date" := Today;
-                                        GenJournalLine.Description := 'Transfer net interest from Fixed';
+                                        GenJournalLine.Description := 'Transfer net interest to Savings';
                                         GenJournalLine.Description := UpperCase(GenJournalLine.Description);
                                         GenJournalLine.Amount := (GrossInt - Wtax) * -1;
                                         GenJournalLine.Validate(GenJournalLine.Amount);
@@ -9881,7 +9871,7 @@ Codeunit 52186456 "Sacco Transactions"
                                         GenJournalLine."Account No." := FDAccount."FOSA Main Account No.";
                                         GenJournalLine.Validate(GenJournalLine."Account No.");
                                         GenJournalLine."Posting Date" := Today;
-                                        GenJournalLine.Description := 'Transfer net interest to Savings';
+                                        GenJournalLine.Description := 'Transfer net interest from Fixed';
                                         GenJournalLine.Description := UpperCase(GenJournalLine.Description);
                                         GenJournalLine.Amount := (GrossInt - Wtax);
                                         GenJournalLine.Validate(GenJournalLine.Amount);
@@ -10290,8 +10280,6 @@ Codeunit 52186456 "Sacco Transactions"
             GenJournalLine.DeleteAll;
 
             if Account.Blocked <> Account.Blocked::All then begin
-                Account.CalcFields("Balance (LCY)");
-
                 if AccountTypes.Get(Account."Product Type") then begin
                     if AccountTypes."Product Category" = AccountTypes."product category"::"Fixed Deposit" = true then begin
                         if AccountTypes."Earns Interest" = true then
@@ -10386,7 +10374,7 @@ Codeunit 52186456 "Sacco Transactions"
                                         Memb.reset;
                                         Memb.setrange("No.", Account."Member No.");
                                         if Memb.FindFirst() then begin
-                                            msg := Text0001 + Format(Account."Balance (LCY)") + Text0002
+                                            msg := Text0001 + Format(Account.Balance) + Text0002
                                                                                + Format(Today) + ' ' + Format(Time);
                                             if Memb."Transactional Mobile Number" <> '' then
                                                 SendSMS.SendSms(Source::FIXED_DEPOSIT_MATURITY, Memb."Transactional Mobile Number", msg, Format(Account."No."), '', true, 0, false, 'CBS', Account."No.", 'CBS')
@@ -10396,7 +10384,7 @@ Codeunit 52186456 "Sacco Transactions"
                                         end;
                                     end
                                     else begin
-                                        msg := Text0001 + Format(Account."Balance (LCY)") + Text0002
+                                        msg := Text0001 + Format(Account.Balance) + Text0002
                                                                               + Format(Today) + ' ' + Format(Time);
 
                                         SendSMS.SendSms(Source::FIXED_DEPOSIT_MATURITY, Account."Transactional Mobile No", msg, Format(Account."No."), '', true, 0, false, 'CBS', Account."No.", 'CBS');
@@ -10414,8 +10402,8 @@ Codeunit 52186456 "Sacco Transactions"
                                     Account."FD Maturity Date" := CalcDate(FDType.Duration, RunDate);
                                     Account."FD Date Renewed" := RunDate;
                                     Account."Fixed Deposit Status" := Account."Fixed Deposit Status"::Active;
-                                    Account.calcfields("Balance (LCY)");
-                                    Account."Fixed Deposit Amount" := Account."Balance (LCY)";
+                                    Account.calcfields(Balance);
+                                    Account."Fixed Deposit Amount" := Account.Balance;
 
                                     //Account."FD Marked for Closure" := true;
                                     //New rate incase of chnages
@@ -10470,7 +10458,7 @@ Codeunit 52186456 "Sacco Transactions"
         FixedHistory."Account No." := Account."No.";
         FixedHistory."Interest Earned" := Account."Untranfered Interest";
         FixedHistory."Fixed Deposit Type" := Account."Fixed Deposit Type";
-        FixedHistory."Fixed Amount" := Account."Balance (LCY)";
+        FixedHistory."Fixed Amount" := Account.Balance;
         FixedHistory."FD Maturity Date" := Account."FD Maturity Date";
         FixedHistory."FD Duration" := Account."FD Duration";
         FixedHistory."FD Maturity Instructions" := Account."FD Maturity Instructions";
