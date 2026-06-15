@@ -4,7 +4,7 @@ page 52185808 "Salary Header"
     Editable = true;
     PageType = Card;
     SourceTable = "Salary Header";
-    PromotedActionCategories = 'New,Process,Report,Workflows, ,Request Approval,Adjustments';
+    PromotedActionCategories = 'New,Process,Report,Wrokflows, ,Request Approval,Adjustments';
 
     layout
     {

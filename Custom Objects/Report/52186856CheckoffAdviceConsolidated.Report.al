@@ -104,7 +104,7 @@ report 52186856 "Checkoff Advice Consolidated"
                 CreditAccounts: Record "Credit Accounts";
                 Accounts: Record "Savings Accounts";
             begin
-                if "Checkoff Advice Line"."Advice Type" = "Checkoff Advice Line"."Advice Type"::Adjustment then begin
+                if "Checkoff Advice Line"."Advice Type" = "Checkoff Advice Line"."Advice Type"::"Monthly Deduction" then begin
                     "Checkoff Advice Line"."Balance Off" := 0;
                 end;
 
@@ -143,11 +143,11 @@ report 52186856 "Checkoff Advice Consolidated"
                 end;
 
                 case "Advice Type" of
-                    "Checkoff Advice Line"."Advice Type"::New:
+                    "Checkoff Advice Line"."Advice Type"::"Monthly Deduction":
                         begin
                             Remarks := 'RECOVER';
                         end;
-                    "Checkoff Advice Line"."Advice Type"::"New Loan":
+                    "Checkoff Advice Line"."Advice Type"::"Fresh Loan":
                         begin
                             Remarks := 'RECOVER';
                         end;

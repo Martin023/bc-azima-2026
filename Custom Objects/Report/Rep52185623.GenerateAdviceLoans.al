@@ -36,8 +36,8 @@ report 52185623 "Generate Advice Loans"
                     if Memb.Get(Loans."Member No.") then begin
                         if Memb.status <> Memb.Status::Deceased then begin
                             //if Memb."Employer Code" = CheckoffAdviceHeader."Employer Code" then begin
-                            Loans.CalcFields(Loans."Outstanding Balance", "Outstanding Interest", "Total Balance");
-                            if loans."Outstanding Balance" > 0 then begin
+                            Loans.CalcFields(Loans."Outstanding Balance", "Outstanding Interest", "Total Balance", "Repayment Advised");
+                            if (loans."Outstanding Balance" > 0) or (loans."Repayment Advised" > 0) then begin
                                 iEntryNo := 0;
                                 CheckoffAdvice.Reset;
                                 if CheckoffAdvice.Find('+') then
@@ -89,14 +89,26 @@ report 52185623 "Generate Advice Loans"
                                 CheckoffAdvice."Standing Order amount" := TotalSTO;
                                 CheckoffAdvice.Type := CheckoffAdvice.Type::Credit;
                                 CheckoffAdvice."Work Station" := Loans."Work Station";
-                                CheckoffAdvice.Reference := 'MONTHLYDED-' + format(CheckoffAdvice."Product Type");
-                                if CheckoffAdvice."Amount On" > 0 then
+                                Loans.CalcFields("Repayment Advised");
+                                if Loans."Repayment Advised" > 0 then begin
+                                    CheckoffAdvice.Reference := 'MONTHLYDED-' + format(CheckoffAdvice."Product Type");
+                                    CheckoffAdvice."Advice Type" := CheckoffAdvice."Advice Type"::"Monthly Deduction";
+                                    if Loans."Total Balance" = 0 then begin
+                                        CheckoffAdvice.Reference := 'STOPPAGE-' + format(CheckoffAdvice."Product Type");
+                                        CheckoffAdvice."Advice Type" := CheckoffAdvice."Advice Type"::Stoppage;
+                                    end;
                                     CheckoffAdvice.Insert;
+                                end
+                                else begin
+                                    CheckoffAdvice."Advice Type" := CheckoffAdvice."Advice Type"::"Fresh Loan";
+                                    CheckoffAdvice.Reference := 'NEWLOAN-' + format(CheckoffAdvice."Product Type");
+                                    if CheckoffAdvice."Amount On" > 0 then
+                                        CheckoffAdvice.Insert;
+                                end;
                             end;
                         end;
                     end;
                 end;
-
 
             }
 

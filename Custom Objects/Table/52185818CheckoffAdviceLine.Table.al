@@ -147,8 +147,8 @@ table 52185818 "Checkoff Advice Line"
         }
         field(20; "Advice Type"; Option)
         {
-            OptionCaption = ' ,Stoppage,Adjustment,New Loan,Variations,New,Refeeding,New Guar Loan';
-            OptionMembers = " ",Stoppage,Adjustment,"New Loan",Variations,New,Refeeding,"New Guar Loan";
+            OptionCaption = ' ,Stoppage,Fresh Loan,Variations,Monthly Deduction';
+            OptionMembers = " ",Stoppage,"Fresh Loan",Variations,"Monthly Deduction";
 
             trigger OnValidate()
             begin
