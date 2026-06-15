@@ -137,7 +137,8 @@ table 52185783 "Salary Header"
         }
         field(29; "Employer Code"; Code[30])
         {
-            TableRelation = Customer."No.";
+            Caption = 'Workstation';
+            TableRelation = Customer."No." where("Account Type" = const("Employer Code"));
 
             trigger OnValidate()
             var
@@ -177,8 +178,14 @@ table 52185783 "Salary Header"
             TableRelation = "Transaction Types".Code WHERE(Type = CONST("Salary Processing"));
 
             trigger OnValidate()
+            var
+                TransTypes: Record "Transaction Types";
             begin
                 "Document No" := No;
+                if TransTypes.get("Transaction Type") then begin
+                    "Donnot Recover" := TransTypes."Exclude Salary Deductions";
+                    rec.Modify()
+                end;
             end;
         }
         field(33; Validated; Boolean)
@@ -192,6 +199,7 @@ table 52185783 "Salary Header"
         }
         field(36; "Donnot Recover"; Boolean)
         {
+            Caption = 'Exclude Salary Deductions.';
         }
         field(38; Month; Option)
         {
@@ -255,6 +263,10 @@ table 52185783 "Salary Header"
             begin
                 "Document No" := No;
             end;
+        }
+        field(75; "Employer"; Code[30])
+        {
+            TableRelation = Customer."No." WHERE("Account Type" = CONST(Employer));
         }
 
     }
