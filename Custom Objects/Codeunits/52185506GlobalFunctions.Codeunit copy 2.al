@@ -2179,8 +2179,8 @@ Codeunit 52185506 "Global Functions"
         LoanNumbers: Code[200];
         NumberOfLoans: Integer;
         i: Integer;
-        SkyEmail : Codeunit "Sky Send Email";
-        UserrSetup : Record "User Setup";
+        SkyEmail: Codeunit "Sky Send Email";
+        UserrSetup: Record "User Setup";
     begin
         if Members.Get(MemberNo) then begin
             if Members.Status = Members.Status::Dormant then begin
@@ -2269,11 +2269,11 @@ Codeunit 52185506 "Global Functions"
             Comments.SetRange("Disable Flag", false);
             Comments.SetRange(Types, Comments.Types::"Member Flagging");
             Comments.SetFilter(Comment, '<>%1', '');
-            Comments.SetRange("Reminder Sent",false);
+            Comments.SetRange("Reminder Sent", false);
             Comments.SetFilter("Reminder Date", '<>%1', 0D);
             if Comments.FindSet() then begin
                 repeat
-                   if UserrSetup.Get(Comments."Commented By") then begin
+                    if UserrSetup.Get(Comments."Commented By") then begin
                         SkyEmail.QueueOutgoingEmail(
                             Comments."E-mail",
                             'Account Flagging Reminder',

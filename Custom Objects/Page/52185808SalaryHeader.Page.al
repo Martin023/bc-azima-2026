@@ -483,6 +483,7 @@ page 52185808 "Salary Header"
                     var
                         SaccoT: Codeunit "Sacco Transactions";
                         GenSetup: record "General Set-Up";
+                        CashReceiptJournal: record "Gen. Journal Line";
                     begin
                         SalaryLines.Reset;
                         SalaryLines.SetRange(SalaryLines."Salary Header No.", Rec.No);
@@ -503,6 +504,7 @@ page 52185808 "Salary Header"
                         if Confirm('Are you sure you want to post Salaries?', false) = false then
                             exit;
                         SaccoT.PostSalaryLineByLine(Rec);
+
                     end;
 
                 }

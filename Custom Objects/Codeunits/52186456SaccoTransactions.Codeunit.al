@@ -5284,7 +5284,13 @@ Codeunit 52186456 "Sacco Transactions"
             // SalHeaD."Posted By" := UserId;
             // SalHeaD.Modify;
 
-            Message('The salary batch has been posted successfully');
+            if Confirm('The salary batch has been successfully transfered to journal. Do you wish to open?', false) then begin
+                GenJournalLine.Reset;
+                GenJournalLine.SetRange("Journal Template Name", Jtemplate);
+                GenJournalLine.SetRange("Journal Batch Name", JBatch);
+                if GenJournalLine.FindSet() then
+                    page.run(Page::"Cash Receipt Journal", GenJournalLine);
+            end;
         end;
     end;
 
