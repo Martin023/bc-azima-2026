@@ -1149,7 +1149,7 @@ page 52187312 "Credit Management Role Center"
                     }
                     group("Single Refunds")
                     {
-                        action("Account Trasfer")
+                        action("Account Transfer")
                         {
                             ApplicationArea = Basic, Suite;
                             Caption = 'Account Transfer List(Single Member)';

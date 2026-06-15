@@ -258,9 +258,7 @@ Report 52185956 "Update Loan Instalments"
         ProdFac: Record "Product Factory";
         Vend: Record Vendor;
         GLAcc: Record "G/L Account";
-        PaymentMethods: Record "Payment Methods";
         LoanRepay: Decimal;
-        RepMethods: Record "Payment Methods";
         CompInfo: Record "Company Information";
         EndDateSalo: Date;
         SalProc: Record "Salary Lines";

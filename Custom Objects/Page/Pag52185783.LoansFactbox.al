@@ -18,9 +18,9 @@ page 52185783 "Loans Factbox"
                 {
                     ToolTip = 'Specifies the value of the Loan No. field.', Comment = '%';
                 }
-                field("Loan Product Type"; Rec."Loan Product Type")
+                field("Loan Product Type Name"; Rec."Loan Product Type Name")
                 {
-                    ToolTip = 'Specifies the value of the Loan Product Type field.', Comment = '%';
+                    ToolTip = 'Specifies the value of the Loan Product Name field.', Comment = '%';
                 }
                 field(Repayment; Rec.Repayment)
                 {

@@ -11,7 +11,7 @@
       <am:Name>PBIRB</am:Name>
       <am:Version>15.7.1813.16</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-06-12T11:27:16.8171855Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-06-14T19:23:30.7051109Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -1105,7 +1105,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>This receipt has been issued without alteration or erasure of any kind and thus has no value in itself except as evidence of the original deposit with the SACCO.</Value>
+                    <Value>1.This receipt has been issued without alteration or erasure of any kind and thus has no value in itself except as evidence of the original deposit with the SACCO.</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Times New Roman</FontFamily>
@@ -1116,7 +1116,6 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <ListStyle>Numbered</ListStyle>
                 <ListLevel>1</ListLevel>
                 <Style>
                   <TextAlign>Left</TextAlign>
@@ -1144,7 +1143,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>No interest will be paid if the deposit is withdrawn before the maturity date.</Value>
+                    <Value>2. No interest will be paid if the deposit is withdrawn before the maturity date.</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Times New Roman</FontFamily>
@@ -1155,7 +1154,6 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <ListStyle>Numbered</ListStyle>
                 <ListLevel>1</ListLevel>
                 <Style>
                   <TextAlign>Left</TextAlign>
@@ -1183,7 +1181,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Interest ceases to accrue on maturity date.</Value>
+                    <Value>3,Interest ceases to accrue on maturity date.</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Times New Roman</FontFamily>
@@ -1194,7 +1192,6 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <ListStyle>Numbered</ListStyle>
                 <ListLevel>1</ListLevel>
                 <Style>
                   <TextAlign>Left</TextAlign>
