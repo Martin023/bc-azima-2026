@@ -41,6 +41,11 @@ page 52185808 "Salary Header"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field(Employer; Rec.Employer)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = EmployerC;
+                }
                 field("Employer Code"; Rec."Employer Code")
                 {
                     ApplicationArea = Basic, Suite;
@@ -137,7 +142,6 @@ page 52185808 "Salary Header"
                 field("Donnot Recover"; Rec."Donnot Recover")
                 {
                     ApplicationArea = Basic, Suite;
-                    Visible = false;
                 }
                 field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {

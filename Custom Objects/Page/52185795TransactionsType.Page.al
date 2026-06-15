@@ -41,6 +41,13 @@ page 52185795 "Transactions Type"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Exclude Salary Deductions"; Rec."Exclude Salary Deductions")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Sal. Deposit Deduction"; Rec."Sal. Deposit Deduction")
+                {
+                }
             }
             part(Control1; "Transaction Charges")
             {
