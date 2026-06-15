@@ -675,7 +675,7 @@ table 52185700 Members
         {
             Caption = 'Employer';
             Description = 'LookUp to Customer Table';
-            TableRelation = Customer WHERE("Account Type" = CONST(Employer));
+            TableRelation = Customer WHERE("Account Type" = CONST("Employer Code"));
 
             trigger OnValidate()
             begin

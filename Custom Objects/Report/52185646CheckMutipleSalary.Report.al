@@ -25,17 +25,7 @@ Report 52185646 "Check Mutiple Salary"
                         "Salary Lines"."Multiple Salary" := false;
                         "Salary Lines".Modify;
                     end;
-                    SavLedger.reset();
-                    // SavLedger.SetRange(SavLedger."Document No.", "Salary Lines"."Document No.");
-                    //SavLedger.setfilter(SavLedger."Posting Date", '%1..%2',calcdate('<CM>',));
-                    SavLedger.SetRange(SavLedger."Customer No.", "Salary Lines"."Account No.");
-                    if SavLedger.Find('-') then begin
-                        "Salary Lines"."Already Paid" := true;
-                        "Salary Lines".Modify;
-                    end;
                 end;
-
-
             }
             trigger OnPostDataItem()
             begin

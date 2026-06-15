@@ -3272,7 +3272,7 @@ table 52185729 Loans
         field(209; "Work Station Name"; text[150])
         {
             fieldclass = flowfield;
-            CalcFormula = lookup("Electrol Zones/Area Svr Center".Description WHERE(Code = field("Work Station")));
+            CalcFormula = lookup(Customer.Name WHERE("No." = field("Work Station")));
         }
         field(210; "Months to Retire"; Integer)
         {

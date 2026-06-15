@@ -1395,10 +1395,10 @@ Codeunit 52186458 "Loans Process"
         end;
     end;
 
-   
 
 
-   
+
+
 
     // procedure AdviceTriggeredLoan(LoanNo: Code[20]; Topup: Boolean; AssociatedDocNo: Code[50])
     // var
@@ -1534,74 +1534,6 @@ Codeunit 52186458 "Loans Process"
         if CheckOffAdviceLine.Find('-') then begin
             Report.Run(52186856, true, false, CheckOffAdviceLine);
         end;
-    end;
-
-
-    procedure AdviceShares(SavingsAccounts: Record "Savings Accounts"; AmountOn: Decimal; AssociatedDocNo: Code[50])
-    var
-        CheckoffAdvice: Record "Checkoff Advice Line";
-        iEntryNo: Integer;
-        MonthlyContribution: Decimal;
-        Prorata: Decimal;
-        CustomCuesCodeunit: Codeunit CustomCuesCodeunit;
-    begin
-        SavingsAccounts.CalcFields("Balance (LCY)");
-
-        CheckoffAdvice.Init;
-        CheckoffAdvice."Account No." := SavingsAccounts."No.";
-        CheckoffAdvice."Member No." := SavingsAccounts."Member No.";
-        CheckoffAdvice.Validate(CheckoffAdvice."Member No.");
-        CheckoffAdvice."Payroll No" := SavingsAccounts."Payroll/Staff No.";
-        CheckoffAdvice."Advice Method" := CheckoffAdvice."advice method"::Changes;
-        CheckoffAdvice."Advice Date" := Today;
-        CheckoffAdvice."ID No." := SavingsAccounts."ID No.";
-        CheckoffAdvice."Employer Code" := SavingsAccounts."Employer Code";
-        CheckoffAdvice.Names := SavingsAccounts.Name;
-        CheckoffAdvice."Employer Account No." := SavingsAccounts."Employer Account No";
-        CheckoffAdvice."Product Type" := SavingsAccounts."Product Type";
-        CheckoffAdvice.Type := CheckoffAdvice.Type::Savings;
-        if CheckoffAdvice."Employer Account No." = '' then
-            CheckoffAdvice."Employer Account No." := SavingsAccounts."No.";
-
-        //***********************Amount Off******************************************/
-        MonthlyContribution := SavingsAccounts."Monthly Contribution";
-        Prorata := CustomCuesCodeunit.Prorata(SavingsAccounts."Member No.", SavingsAccounts."Product Type");
-        if Prorata > MonthlyContribution then MonthlyContribution := Prorata;
-        CheckoffAdvice."Amount Off" := MonthlyContribution;
-        if SavingsAccounts."Balance (LCY)" <= 0 then
-            CheckoffAdvice."Amount Off" := 0;
-        //***********************Amount Off******************************************/
-
-        //***********************Amount On******************************************/
-        if AmountOn = 0 then begin
-            CheckoffAdvice."Amount On" := 0;
-        end;
-        if AmountOn > 0 then begin
-            CheckoffAdvice."Amount On" := AmountOn;
-            if CheckoffAdvice."Amount On" < SavingsAccounts."Monthly Contribution" then
-                CheckoffAdvice."Amount On" := SavingsAccounts."Monthly Contribution";
-        end;
-        //***********************Amount On******************************************/
-
-        //***********************Balance On******************************************/
-        CheckoffAdvice."Balance On" := SavingsAccounts."Balance (LCY)";
-        //***********************Balance On******************************************/
-
-        //***********************Advice Type******************************************/
-        if (CheckoffAdvice."Amount Off" = 0) and (AmountOn > 0) then
-            CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::New;
-
-        if AmountOn = CheckoffAdvice."Amount Off" then
-            CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Adjustment;
-
-        if AmountOn <> CheckoffAdvice."Amount Off" then
-            CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Variations;
-
-        if CheckoffAdvice."Amount On" = 0 then
-            CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Stoppage;
-        //***********************Advice Type******************************************/
-
-        CheckoffAdvice.Insert;
     end;
 
 
@@ -1810,7 +1742,7 @@ Codeunit 52186458 "Loans Process"
         if AmountOn <> SavingsAccount."Monthly Contribution" then
             CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Variations
         else
-            CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Adjustment;
+            CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::"Monthly Deduction";
         CheckoffAdvice.Type := CheckoffAdvice.Type::Savings;
         CheckoffAdvice.Reference := ProdVariations.Reference;
         CheckoffAdvice."Variation Action" := ProdVariations."Variation Action";
@@ -4318,7 +4250,7 @@ Codeunit 52186458 "Loans Process"
                     // DepositProrata(LoanApps."Loan No.");
                     HoldOneMonthInstallment(LoanApps."Loan No.");
                     LoanApps.Modify(true);
-                    // AdviceLoan(LoanApps."Loan No.", false, LoanApps."Loan No.");
+                // AdviceLoan(LoanApps."Loan No.", false, LoanApps."Loan No.");
                 until LoanApps.Next = 0;
             end;
         end;

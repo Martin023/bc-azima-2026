@@ -4,11 +4,12 @@ Report 52185643 "Fixed Deposit Certificate"
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Fixed Deposit Certificate.rdl';
 
-   
+
     dataset
     {
         dataitem("Fixed Deposit Contract"; "Fixed Deposit Contract")
         {
+            calcfields = Balance;
             column(CompanyInformation_Name; CompanyInformation.Name)
             {
             }
@@ -34,7 +35,7 @@ Report 52185643 "Fixed Deposit Certificate"
             column(Fixed_Deposit_Account_No_; "Fixed Deposit Contract"."Fixed Deposit Account No.")
             {
             }
-            column(Fixed_Deposit_Amount; "Fixed Deposit Contract"."Fixed Deposit Amount")
+            column(Fixed_Deposit_Amount; "Fixed Deposit Contract".Balance)
             {
             }
             column(No_; "Fixed Deposit Contract"."No.")

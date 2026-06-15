@@ -2179,8 +2179,8 @@ Codeunit 52185506 "Global Functions"
         LoanNumbers: Code[200];
         NumberOfLoans: Integer;
         i: Integer;
-        SkyEmail : Codeunit "Sky Send Email";
-        UserrSetup : Record "User Setup";
+        SkyEmail: Codeunit "Sky Send Email";
+        UserrSetup: Record "User Setup";
     begin
         if Members.Get(MemberNo) then begin
             if Members.Status = Members.Status::Dormant then begin
@@ -2269,11 +2269,11 @@ Codeunit 52185506 "Global Functions"
             Comments.SetRange("Disable Flag", false);
             Comments.SetRange(Types, Comments.Types::"Member Flagging");
             Comments.SetFilter(Comment, '<>%1', '');
-            Comments.SetRange("Reminder Sent",false);
+            Comments.SetRange("Reminder Sent", false);
             Comments.SetFilter("Reminder Date", '<>%1', 0D);
             if Comments.FindSet() then begin
                 repeat
-                   if UserrSetup.Get(Comments."Commented By") then begin
+                    if UserrSetup.Get(Comments."Commented By") then begin
                         SkyEmail.QueueOutgoingEmail(
                             Comments."E-mail",
                             'Account Flagging Reminder',
@@ -2698,6 +2698,56 @@ Codeunit 52185506 "Global Functions"
         IF Month = 12 THEN FormatedMonth := 'DECEMBER';
 
         exit(FormatedMonth);
+    end;
+
+    procedure ConvertDateFormulaToNumber(DateFormulaText: Text): Integer
+    var
+        Value: Integer;
+        Unit: Text;
+        Length: Integer;
+    begin
+        Length := StrLen(DateFormulaText);
+
+        // Handle multi-character units like WD (weekday)
+        if Length > 2 then
+            Unit := CopyStr(DateFormulaText, Length - 1, 2)
+        else
+            Unit := CopyStr(DateFormulaText, Length, 1);
+
+        case Unit of
+            'D':
+                begin
+                    Evaluate(Value, CopyStr(DateFormulaText, 1, Length - 1));
+                    exit(Value); // Days
+                end;
+            'W':
+                begin
+                    Evaluate(Value, CopyStr(DateFormulaText, 1, Length - 1));
+                    exit(Value); // Weeks
+                end;
+            'WD':
+                begin
+                    Evaluate(Value, CopyStr(DateFormulaText, 1, Length - 2));
+                    exit(Value); // Weekdays
+                end;
+            'M':
+                begin
+                    Evaluate(Value, CopyStr(DateFormulaText, 1, Length - 1));
+                    exit(Value); // Months
+                end;
+            'Q':
+                begin
+                    Evaluate(Value, CopyStr(DateFormulaText, 1, Length - 1));
+                    exit(Value); // Quarters
+                end;
+            'Y':
+                begin
+                    Evaluate(Value, CopyStr(DateFormulaText, 1, Length - 1));
+                    exit(Value); // Years
+                end;
+            else
+                exit(0); // Unknown or unsupported unit
+        end;
     end;
 
     procedure IsBusinessLoanProduct(ProductID: Code[10]): Boolean;

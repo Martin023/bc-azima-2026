@@ -199,7 +199,8 @@ table 52185783 "Salary Header"
         }
         field(36; "Donnot Recover"; Boolean)
         {
-            Caption = 'Exclude Salary Deductions.';
+            Caption = 'Exclude Salary Deduction.';
+            Editable = false;
         }
         field(38; Month; Option)
         {

@@ -44,6 +44,11 @@ page 52185809 "Salary Lines"
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
+                field("Paid Within Month"; Rec."Paid Within Month")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = false;
+                }
                 field("Employer Code"; Rec."Employer Code")
                 {
                     ApplicationArea = Basic, Suite;
