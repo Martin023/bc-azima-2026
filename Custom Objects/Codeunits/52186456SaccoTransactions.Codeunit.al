@@ -9726,10 +9726,14 @@ Codeunit 52186456 "Sacco Transactions"
                                         AccountTypes.TestField("Withholding Tax Account");
                                         FDAccount.CalcFields("Untranfered Interest");
                                         GrossInt := FDAccount."Untranfered Interest";
+                                        // Message(format(GrossInt));
                                         if GlobalFunctions.TaxExcemptions(FDAccount."Member No.") = true then
-                                            Wtax := round((GrossInt * (AccountTypes."WithHolding Tax" / 100)), 1, '<')
+                                            WTax := 0
                                         else
-                                            WTax := 0;
+                                            Wtax := round((GrossInt * (AccountTypes."WithHolding Tax" / 100)), 1, '<');
+
+                                        // message(format(wtax));
+
                                         LineNo := LineNo + 10000;
                                         // 1. Credit Interest to FD less withholding tax (Tax Charged on member interest)
                                         GenJournalLine.Init;
@@ -9832,9 +9836,10 @@ Codeunit 52186456 "Sacco Transactions"
                                         GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
                                         if GenJournalLine.Amount <> 0 then
                                             GenJournalLine.Insert;
+
                                         //TRANSFER net Int amount to member savings
                                         LineNo := LineNo + 10000;
-                                        FDAccount.CalcFields(Balance, "Untranfered Interest");
+                                        //FDAccount.CalcFields(Balance, "Untranfered Interest");
                                         GenJournalLine.Init;
                                         GenJournalLine."Journal Template Name" := Jtemplate;
                                         GenJournalLine."Line No." := LineNo;
@@ -9868,7 +9873,7 @@ Codeunit 52186456 "Sacco Transactions"
                                         GenJournalLine."Document No." := FDAccount."No.";
                                         GenJournalLine."External Document No." := DocumentNo;
                                         GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
-                                        GenJournalLine."Account No." := FDAccount."FOSA Main Account No.";
+                                        GenJournalLine."Account No." := FDAccount."Fixed Deposit Account No.";
                                         GenJournalLine.Validate(GenJournalLine."Account No.");
                                         GenJournalLine."Posting Date" := Today;
                                         GenJournalLine.Description := 'Transfer net interest from Fixed';
