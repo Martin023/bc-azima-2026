@@ -334,13 +334,22 @@ codeunit 52187335 "Reversal Posting"
     begin
 
         NewSavingsLedgerEntry := SavingsLedgerEntry;
+        if NewSavingsLedgerEntry.Amount > 0 then begin
+            NewSavingsLedgerEntry."Debit Amount" := 0;
+            NewSavingsLedgerEntry."Credit Amount" := NewSavingsLedgerEntry."Debit Amount";
+            NewSavingsLedgerEntry."Debit Amount (LCY)" := 0;
+            NewSavingsLedgerEntry."Credit Amount (LCY)" := NewSavingsLedgerEntry."Debit Amount (LCY)";
+        end
+        else begin
+            NewSavingsLedgerEntry."Debit Amount" := NewSavingsLedgerEntry."Credit Amount";
+            NewSavingsLedgerEntry."Credit Amount" := 0;
+            NewSavingsLedgerEntry."Debit Amount (LCY)" := NewSavingsLedgerEntry."Credit Amount (LCY)";
+            NewSavingsLedgerEntry."Credit Amount (LCY)" := 0;
+        end;
+        NewSavingsLedgerEntry.Description := 'Reversal of ' + NewSavingsLedgerEntry.Description;
         NewSavingsLedgerEntry.Amount := -NewSavingsLedgerEntry.Amount;
         NewSavingsLedgerEntry."Remaining Amount" := -NewSavingsLedgerEntry."Remaining Amount";
         NewSavingsLedgerEntry."Amount (LCY)" := -NewSavingsLedgerEntry."Amount (LCY)";
-        NewSavingsLedgerEntry."Debit Amount" := -NewSavingsLedgerEntry."Debit Amount";
-        NewSavingsLedgerEntry."Credit Amount" := -NewSavingsLedgerEntry."Credit Amount";
-        NewSavingsLedgerEntry."Debit Amount (LCY)" := -NewSavingsLedgerEntry."Debit Amount (LCY)";
-        NewSavingsLedgerEntry."Credit Amount (LCY)" := -NewSavingsLedgerEntry."Credit Amount (LCY)";
         //NewSavingsLedgerEntry."Entry Type" := NewSavingsLedgerEntry."Entry Type";
         NewSavingsLedgerEntry.Positive := NOT NewSavingsLedgerEntry.Positive;
         NewSavingsLedgerEntry."User ID" := USERID;
@@ -379,13 +388,25 @@ codeunit 52187335 "Reversal Posting"
 
         // WITH NewCreditLedgerEntry DO BEGIN
         NewCreditLedgerEntry := CreditLedgerEntry;
+
+        if NewCreditLedgerEntry.Amount > 0 then begin
+            NewCreditLedgerEntry."Debit Amount" := 0;
+            NewCreditLedgerEntry."Credit Amount" := NewCreditLedgerEntry."Debit Amount";
+            NewCreditLedgerEntry."Debit Amount (LCY)" := 0;
+            NewCreditLedgerEntry."Credit Amount (LCY)" := NewCreditLedgerEntry."Debit Amount (LCY)";
+        end else begin
+            NewCreditLedgerEntry."Debit Amount" := NewCreditLedgerEntry."Credit Amount";
+            NewCreditLedgerEntry."Credit Amount" := 0;
+            NewCreditLedgerEntry."Debit Amount (LCY)" := NewCreditLedgerEntry."Credit Amount (LCY)";
+            NewCreditLedgerEntry."Credit Amount (LCY)" := 0;
+        end;
         NewCreditLedgerEntry.Amount := -NewCreditLedgerEntry.Amount;
         NewCreditLedgerEntry."Remaining Amount" := -NewCreditLedgerEntry."Remaining Amount";
-        NewCreditLedgerEntry."Amount (LCY)" := -NewCreditLedgerEntry."Amount (LCY)";
-        NewCreditLedgerEntry."Debit Amount" := -NewCreditLedgerEntry."Debit Amount";
-        NewCreditLedgerEntry."Credit Amount" := -NewCreditLedgerEntry."Credit Amount";
-        NewCreditLedgerEntry."Debit Amount (LCY)" := -NewCreditLedgerEntry."Debit Amount (LCY)";
-        NewCreditLedgerEntry."Credit Amount (LCY)" := -NewCreditLedgerEntry."Credit Amount (LCY)";
+        // NewCreditLedgerEntry."Amount (LCY)" := -NewCreditLedgerEntry."Amount (LCY)";
+        // NewCreditLedgerEntry."Debit Amount" := -NewCreditLedgerEntry."Debit Amount";
+        // NewCreditLedgerEntry."Credit Amount" := -NewCreditLedgerEntry."Credit Amount";
+        // NewCreditLedgerEntry."Debit Amount (LCY)" := -NewCreditLedgerEntry."Debit Amount (LCY)";
+        // NewCreditLedgerEntry."Credit Amount (LCY)" := -NewCreditLedgerEntry."Credit Amount (LCY)";
         NewCreditLedgerEntry.Positive := NOT NewCreditLedgerEntry.Positive;
         NewCreditLedgerEntry."User ID" := USERID;
         NewCreditLedgerEntry."Entry No." := NewEntryNo;
@@ -515,11 +536,15 @@ codeunit 52187335 "Reversal Posting"
     var
         StatusP: Record "Status Change Permissions.";
     begin
-        StatusP.Reset();
-        StatusP.SetRange("User ID", UserId);
-        StatusP.SetRange("Edit Journal", true);
-        if StatusP.Find('-') = false then
-            Error('You do not have the reversal permission');
+        // StatusP.Reset();
+        // StatusP.SetRange("User ID", UserId);
+        // StatusP.SetRange("Edit Journal", true);
+        // if StatusP.Find('-') = false then
+        //     Error('You do not have the reversal permission');
+
+        UserSetup.Get(UserId);
+        if UserSetup."Post Reversals" = false then
+            Error('You do not have permission to reverse this entry');
 
     end;
 
@@ -531,8 +556,8 @@ codeunit 52187335 "Reversal Posting"
         UserSetup.Get(UserId);
         if UserSetup."Post Reversals" = false then
             Error('You do not have permission to reverse this entry');
-        if GLEntry."User ID" = UserId then
-            Error('You are not allowed to reverse an entry you posted.');
+        // if GLEntry."User ID" = UserId then
+        //     Error('You are not allowed to reverse an entry you posted.');
 
     end;
 
