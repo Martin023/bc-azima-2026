@@ -4867,6 +4867,7 @@ Codeunit 52186456 "Sacco Transactions"
         Text0008: Text;
         WasBlocked: Boolean;
         GlobalFunctions: codeunit "Global Functions";
+        SavAccII: record "Savings Accounts";
     begin
         //with SalHeaD do
         begin
@@ -5230,7 +5231,71 @@ Codeunit 52186456 "Sacco Transactions"
                             if Account.GetAvailableBalance(Account."No.") > 0 then
                                 RunBal := RunBal + Account.GetAvailableBalance(Account."No.");
 
-                            // if SalHeaD."Income Type" <> SalHeaD."Income Type"::SAYE then
+                            if SalHeaD."Deposit Deduction" > 0 then begin
+                                SavAccII.reset();
+                                SavAccII.setrange("Member No.", Account."Member No.");
+                                SavAccII.setrange("Product Category", SavAccII."Product Category"::"BOSA Deposits");
+                                SavAccII.setrange(Blocked, SavAccII.blocked::" ");
+                                if SavAccII.FindFirst() then begin
+                                    LineNo := LineNo + 10000;
+                                    GenJournalLine.Init;
+                                    GenJournalLine."Journal Template Name" := Jtemplate;
+                                    GenJournalLine."Journal Batch Name" := JBatch;
+                                    GenJournalLine."Document No." := CopyStr(DocNo, 1, 20);
+                                    GenJournalLine."Line No." := LineNo;
+                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
+                                    GenJournalLine."Account No." := SalLines."Account No.";
+                                    //GenJournalLine."External Document No.":="ID No";
+                                    GenJournalLine.Validate(GenJournalLine."Account No.");
+                                    GenJournalLine."Posting Date" := PDate;
+                                    GenJournalLine.Description := 'Deposit contribution Deduction';
+                                    GenJournalLine.Validate(GenJournalLine."Currency Code");
+                                    GenJournalLine.Amount := SalHead."Deposit Deduction";
+                                    if GenJournalLine.Amount > RunBal then
+                                        GenJournalLine.Amount := RunBal;
+                                    GenJournalLine.Validate(GenJournalLine.Amount);
+                                    GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
+                                    GenJournalLine."Bal. Account No." := '';
+                                    GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
+                                    GenJournalLine."Shortcut Dimension 1 Code" := DActivity2;
+                                    GenJournalLine."Shortcut Dimension 2 Code" := DBranch2;
+                                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                                    if GenJournalLine.Amount <> 0 then
+                                        GenJournalLine.Insert(false);
+                                    //RunBal
+                                    RunBal := RunBal - GenJournalLine.Amount;
+
+                                    LineNo := LineNo + 10000;
+                                    GenJournalLine.Init;
+                                    GenJournalLine."Journal Template Name" := Jtemplate;
+                                    GenJournalLine."Journal Batch Name" := JBatch;
+                                    GenJournalLine."Document No." := CopyStr(DocNo, 1, 20);
+                                    GenJournalLine."Line No." := LineNo;
+                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
+                                    GenJournalLine."Account No." := SavAccII."No.";
+                                    //GenJournalLine."External Document No.":="ID No";
+                                    GenJournalLine.Validate(GenJournalLine."Account No.");
+                                    GenJournalLine."Posting Date" := PDate;
+                                    GenJournalLine.Description := 'Deposit contribution Deduction';
+                                    GenJournalLine.Validate(GenJournalLine."Currency Code");
+                                    GenJournalLine.Amount := (SalHead."Deposit Deduction") * -1;
+                                    if Abs(GenJournalLine.Amount) > RunBal then
+                                        GenJournalLine.Amount := RunBal * -1;
+                                    GenJournalLine.Validate(GenJournalLine.Amount);
+                                    GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
+                                    GenJournalLine."Bal. Account No." := '';
+                                    GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
+                                    GenJournalLine."Shortcut Dimension 1 Code" := DActivity2;
+                                    GenJournalLine."Shortcut Dimension 2 Code" := DBranch2;
+                                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                                    if GenJournalLine.Amount <> 0 then
+                                        GenJournalLine.Insert(false);
+                                end;
+                            end;
+
+
                             if not SalHeaD."Donnot Recover" then
                                 PostSalaryLoans(SalHeaD, DocNo, PDate, DActivity2, DBranch2, Jtemplate, JBatch, RunBal, MemberNo, LineNo, Salaccno);
 
@@ -9927,7 +9992,6 @@ Codeunit 52186456 "Sacco Transactions"
                                         if InterestBuffer.Find('-') then
                                             InterestBuffer.ModifyAll(InterestBuffer.Transferred, true);
                                         if FDAccount."FD Maturity Date" = 0D then FDAccount."FD Maturity Date" := Today;
-                                        FDAccount."FD Maturity Date" := CalcDate(FDType.Duration, FDAccount."FD Maturity Date");
                                         FDAccount."FD Maturity Instructions" := FDAccount."FD Maturity Instructions"::"Transfer all to Savings";
                                         FDAccount."Fixed Deposit Status" := FDAccount."fixed deposit status"::Closed;
                                         FDAccount."FD Marked for Closure" := true;

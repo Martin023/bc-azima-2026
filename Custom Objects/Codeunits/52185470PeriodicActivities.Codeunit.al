@@ -2275,7 +2275,7 @@ Codeunit 52185470 "Periodic Activities"
                             loans.CalcFields("Total Loan Balance");
                             Loans.SetFilter(Loans."Total Loan Balance", '>0');
                             // Buffer."Member No.");
-                            // Loans.SetRange(Loans."Loan Product Type", PFactory."Product ID");
+                            Loans.SetRange(Loans."Loan Product Type", Buffer."Product Code");
                             if Loans.FindFirst() then begin
                                 // repeat
                                 Buffer."Loan No" := Loans."Loan No.";

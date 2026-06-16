@@ -184,6 +184,7 @@ table 52185783 "Salary Header"
                 "Document No" := No;
                 if TransTypes.get("Transaction Type") then begin
                     "Donnot Recover" := TransTypes."Exclude Salary Deductions";
+                    "Deposit Deduction" := TransTypes."Sal. Deposit Deduction";
                     rec.Modify()
                 end;
             end;
@@ -268,6 +269,9 @@ table 52185783 "Salary Header"
         field(75; "Employer"; Code[30])
         {
             TableRelation = Customer."No." WHERE("Account Type" = CONST(Employer));
+        }
+        field(76; "Deposit Deduction"; Decimal)
+        {
         }
 
     }
