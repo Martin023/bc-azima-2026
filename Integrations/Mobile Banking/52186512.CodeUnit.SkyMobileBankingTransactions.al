@@ -1344,34 +1344,36 @@ codeunit 52186512 "Sky M-Banking Transactions"
             EXIT(QualifiedAmount);
         end;
         // Azima Mazao Loan
-        CurrentMonthInt := Date2DMY(Today(), 2);
-        Evaluate(CurrentMonthEnum, Format(CurrentMonthInt));
+        if ProdFac."IsAvailableInMonth" then begin
+            CurrentMonthInt := Date2DMY(Today(), 2);
+            Evaluate(CurrentMonthEnum, Format(CurrentMonthInt));
 
-        LoanAvailability.SetRange("Loan Product Code", ProductID);
-        LoanAvailability.SetRange(Accessible, true);
+            LoanAvailability.SetRange("Loan Product Code", ProductID);
+            LoanAvailability.SetRange(Accessible, true);
 
-        if LoanAvailability.FindSet() then begin
-            repeat
-                if AllowedMonths <> '' then
-                    AllowedMonths += ', ';
-                AllowedMonths += Format(LoanAvailability.Month);
-            until LoanAvailability.Next() = 0;
-        end;
+            if LoanAvailability.FindSet() then begin
+                repeat
+                    if AllowedMonths <> '' then
+                        AllowedMonths += ', ';
+                    AllowedMonths += Format(LoanAvailability.Month);
+                until LoanAvailability.Next() = 0;
+            end;
 
-        LoanAvailability.Reset();
-        LoanAvailability.SetRange("Loan Product Code", ProductID);
-        LoanAvailability.SetRange(Month, CurrentMonthEnum);
-        LoanAvailability.SetRange(Accessible, true);
+            LoanAvailability.Reset();
+            LoanAvailability.SetRange("Loan Product Code", ProductID);
+            LoanAvailability.SetRange(Month, CurrentMonthEnum);
+            LoanAvailability.SetRange(Accessible, true);
 
-        if not LoanAvailability.FindFirst() then begin
-            EligibilityFailReason :=
-              StrSubstNo(
-                'Loan %1 is only available in: %2',
-                ProductID,
-                AllowedMonths
-              );
-            QualifiedAmount := 0;
-            exit(QualifiedAmount);
+            if not LoanAvailability.FindFirst() then begin
+                EligibilityFailReason :=
+                  StrSubstNo(
+                    '%1 is only available in: %2',
+                    ProdFac."Product Description",
+                    AllowedMonths
+                  );
+                QualifiedAmount := 0;
+                exit(QualifiedAmount);
+            end;
         end;
         // Azima Mazao Loan
 
@@ -1593,6 +1595,12 @@ codeunit 52186512 "Sky M-Banking Transactions"
                         exit(QualifiedAmount);
                     end;
 
+                    if SalAvg <= 0 then begin
+                        EligibilityFailReason := StrSubstNo('Applicant NOT eligible due to salary requirements');
+                        QualifiedAmount := 0;
+                        EXIT(QualifiedAmount);
+                    end;
+
                     // Weekend Njema Loan
                     if ProdFac."Appraisal - Omit Deductions" then begin
                         STOAmount := 0;
@@ -1619,11 +1627,11 @@ codeunit 52186512 "Sky M-Banking Transactions"
                             EXIT(QualifiedAmount);
                         end;
 
-                        if SalAvg <= 0 then begin
-                            EligibilityFailReason := StrSubstNo('Applicant NOT eligible due to salary requirements');
-                            QualifiedAmount := 0;
-                            EXIT(QualifiedAmount);
-                        end;
+                        // if SalAvg <= 0 then begin
+                        //     EligibilityFailReason := StrSubstNo('Applicant NOT eligible due to salary requirements');
+                        //     QualifiedAmount := 0;
+                        //     EXIT(QualifiedAmount);
+                        // end;
 
                         SalAvg := ProdFac."Maximum Loan Amount";
                     end;

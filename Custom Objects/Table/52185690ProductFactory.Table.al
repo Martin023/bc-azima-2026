@@ -1052,6 +1052,11 @@ table 52185690 "Product Factory"
         {
             Description = 'Account no transactions';
         }
+        field(10040; "IsAvailableInMonth"; Boolean)
+        {
+            Caption = 'Is Available In Month';
+        }
+
     }
 
     keys
