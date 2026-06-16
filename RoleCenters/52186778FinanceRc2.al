@@ -1141,12 +1141,12 @@ page 52186778 "Finance Role Center"
                         RunObject = page "Share Capital Transfer List";
                         RunPageLink = Status = filter(Rejected), "Sent Back to CRM" = const(false), Transfered = const(false);
                     }
-                    action("Transfered Share Capital Certificate")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Transferred Share Capital Certificate';
-                        RunObject = report "Transferred Share Capital Cert";
-                    }
+                    // action("Transfered Share Capital Certificate")
+                    // {
+                    //     ApplicationArea = all;
+                    //     Caption = 'Transferred Share Capital Certificate';
+                    //     RunObject = report "Transferred Share Capital Cert";
+                    // }
                 }
                 group(AccountTransfer)
                 {
@@ -1219,7 +1219,7 @@ page 52186778 "Finance Role Center"
                         ApplicationArea = Basic;
                         Caption = 'Share Capital Register';
                         RunObject = page "Savings Accounts";
-                        RunPageView = WHERE("Product Category" = filter("Share Capital" | "Transfered Share Capital"), "Balance (LCY)" = filter(<> 0));
+                        RunPageView = WHERE("Product Category" = filter("Share Capital" | "Transfered Share Capital"));
                     }
                 }
                 // group("BBF & Risk Claims")
@@ -2332,7 +2332,7 @@ page 52186778 "Finance Role Center"
                         action("Dividend Progression ")
                         {
                             ApplicationArea = all;
-                            Caption = 'Dividend Progression List';
+                            Caption = 'Dividend Header List';
                             RunObject = page "Dividend Header List";
                         }
                         // action("Dividend Posting Buffer")
@@ -2843,24 +2843,32 @@ page 52186778 "Finance Role Center"
                 }
                 group("Procurememnt Order Planning")
                 {
-                    Caption = 'Order Planning';
-                    action("Order Planning")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Order Planning';
-                        RunObject = page "Order Planning";
-                    }
-                    action(Budgets)
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'G/L Budgets';
-                        RunObject = page "G/L Budget Names";
-                    }
+                    Caption = 'Lists';
+                    // action("Order Planning")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Order Planning';
+                    //     RunObject = page "Order Planning";
+                    // }
+                    // action(Budgets)
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'G/L Budgets';
+                    //     RunObject = page "G/L Budget Names";
+                    // }
                     action(Vendors)
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Vendors';
+                        Caption = 'Active Vendors';
                         RunObject = page "Vendor List";
+                        RunPageView = where(Archived = const(false));
+                    }
+                    action(AVendors)
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Archived Vendors';
+                        RunObject = page "Vendor List";
+                        RunPageView = where(Archived = const(true));
                     }
                     action(Item)
                     {
@@ -2895,7 +2903,7 @@ page 52186778 "Finance Role Center"
                     }
                     group("Procurement Tasks")
                     {
-                        Caption = 'Procurement Tasks';
+                        Caption = 'Procurement Journals';
                         action("Item Journal")
                         {
                             ApplicationArea = Basic, Suite;
@@ -2928,16 +2936,16 @@ page 52186778 "Finance Role Center"
                             RunObject = page "Recurring Item Jnl.";
                         }
                     }
-                    group("Costing")
-                    {
-                        Caption = 'Costing';
-                        action("Standard Cost Worksheet")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Standard Cost Worksheet';
-                            RunObject = page "Standard Cost Worksheet";
-                        }
-                    }
+                    // group("Costing")
+                    // {
+                    //     Caption = 'Costing';
+                    //     action("Standard Cost Worksheet")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         Caption = 'Standard Cost Worksheet';
+                    //         RunObject = page "Standard Cost Worksheet";
+                    //     }
+                    // }
 
                 }
                 group("Reports and Analysis")
@@ -3264,21 +3272,27 @@ page 52186778 "Finance Role Center"
                 group("Procurement Setup")
                 {
                     Caption = 'Setup';
-                    group("Planning Setup")
+                    // group("Planning Setup")
+                    // {
+                    //     Caption = 'Planning';
+                    //     action("Salespeople/Purchasers")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         Caption = 'Salespeople/Purchasers';
+                    //         RunObject = page "Salespersons/Purchasers";
+                    //     }
+                    //     action("Req. Worksheet Templates")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         Caption = 'Req. Worksheet Templates List';
+                    //         RunObject = page "Req. Worksheet Template List";
+                    //     }
+                    // }
+                    action("Units of Measure")
                     {
-                        Caption = 'Planning';
-                        action("Salespeople/Purchasers")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Salespeople/Purchasers';
-                            RunObject = page "Salespersons/Purchasers";
-                        }
-                        action("Req. Worksheet Templates")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Req. Worksheet Templates List';
-                            RunObject = page "Req. Worksheet Template List";
-                        }
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Units of Measure';
+                        RunObject = page "Units of Measure";
                     }
                     group("Order Processing Setup")
                     {
@@ -3307,41 +3321,36 @@ page 52186778 "Finance Role Center"
                             Caption = 'Return Reasons';
                             RunObject = page "Return Reasons";
                         }
-                        action("Report Selection - Purchase ")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Report Selection - Purchase ';
-                            //RunObject = page "Report Selection - Purchase ";
-                        }
-                    }
-                    group("Inventory and Costing Setup")
-                    {
-                        Caption = 'Inventrory and Costing';
-                        action("Units of Measure")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Units of Measure';
-                            RunObject = page "Units of Measure";
-                        }
-                        action("Manufacturers")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Manufacturers';
-                            RunObject = page "Manufacturers";
-                        }
-                        // action("Product Groups")
+                        // action("Report Selection - Purchase ")
                         // {
                         //     ApplicationArea = Basic, Suite;
-                        //     Caption = 'Product Groups';
-                        //     RunObject = page "Product Groups";
-                        // }
-                        // action("Nonstock Item Setup")
-                        // {
-                        //     ApplicationArea = Basic, Suite;
-                        //     Caption = 'Nonstock Item Setup';
-                        //     //RunObject = page "Nonstock Item Setup";
+                        //     Caption = 'Report Selection - Purchase ';
+                        //     //RunObject = page "Report Selection - Purchase ";
                         // }
                     }
+                    // group("Inventory and Costing Setup")
+                    // {
+                    //     Caption = 'Inventrory and Costing';
+
+                    // action("Manufacturers")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Manufacturers';
+                    //     RunObject = page "Manufacturers";
+                    // }
+                    // action("Product Groups")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Product Groups';
+                    //     RunObject = page "Product Groups";
+                    // }
+                    // action("Nonstock Item Setup")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Nonstock Item Setup';
+                    //     //RunObject = page "Nonstock Item Setup";
+                    // }
+                    // }
                 }
             }
 

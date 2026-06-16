@@ -89,6 +89,10 @@ TableExtension 52186404 tableextension52186404 extends Vendor
         {
             TableRelation="Vendor Categories";
         }
+        field(500160;Archived;Boolean)
+        {
+            
+        }
         
     }
 

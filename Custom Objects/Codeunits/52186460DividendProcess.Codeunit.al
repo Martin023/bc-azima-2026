@@ -674,8 +674,8 @@ Codeunit 52186460 "Dividend Process"
                         DividendPostingBuffer."Account Type" := DividendPostingBuffer."Account Type"::Savings;
                         DividendPostingBuffer."Account No." := SavingsAccountNo;
                         if PostingOptions = PostingOptions::"BOSA Deposists" then
-                            DividendPostingBuffer.Description := PADSTR(Format(PreviousYear) + ' REBATES PAYMENT <1K ' + CustMembr."No.", 50) else
-                            DividendPostingBuffer.Description := PADSTR(Format(PreviousYear) + ' DIVIDEND PAYMENT <1K ' + CustMembr."No.", 50);
+                            DividendPostingBuffer.Description := PADSTR(Format(PreviousYear) + ' REBATES PAYMENT < ' + Format(DividendHeader."Minimum Capitalized") + CustMembr."No.", 50) else
+                            DividendPostingBuffer.Description := PADSTR(Format(PreviousYear) + ' DIVIDEND PAYMENT < ' + Format(DividendHeader."Minimum Capitalized") + CustMembr."No.", 50);
                         DividendPostingBuffer."Member No." := CustMembr."No.";
                         DividendPostingBuffer.Amount := -GrossAmount;
                         DividendPostingBuffer."Debit Amount" := 0;
@@ -699,8 +699,8 @@ Codeunit 52186460 "Dividend Process"
                         DividendPostingBuffer."Account Type" := DividendPostingBuffer."Account Type"::Savings;
                         DividendPostingBuffer."Account No." := CapitaliazeAcc;
                         if PostingOptions = PostingOptions::"BOSA Deposists" then
-                            DividendPostingBuffer.Description := PADSTR(Format(PreviousYear) + ' REBATES PAYMENT <1K ' + CustMembr."No.", 50) else
-                            DividendPostingBuffer.Description := PADSTR(Format(PreviousYear) + ' DIVIDEND PAYMENT <1K ' + CustMembr."No.", 50);
+                            DividendPostingBuffer.Description := PADSTR(Format(PreviousYear) + ' REBATES PAYMENT < ' + Format(DividendHeader."Minimum Capitalized") + CustMembr."No.", 50) else
+                            DividendPostingBuffer.Description := PADSTR(Format(PreviousYear) + ' DIVIDEND PAYMENT < ' + Format(DividendHeader."Minimum Capitalized") + CustMembr."No.", 50);
                         DividendPostingBuffer."Member No." := CustMembr."No.";
                         DividendPostingBuffer.Amount := -GrossAmount;//ROUND(DividendProgression."Gross Dividends",0.01,'=');
                         DividendPostingBuffer."Debit Amount" := 0;//ROUND(DividendPostingBuffer.Amount,0.01,'=');
@@ -721,8 +721,8 @@ Codeunit 52186460 "Dividend Process"
                         DividendPostingBuffer."Account Type" := DividendPostingBuffer."Account Type"::Savings;
                         DividendPostingBuffer."Account No." := SavingsAccountNo;
                         if PostingOptions = PostingOptions::"BOSA Deposists" then
-                            DividendPostingBuffer.Description := PADSTR(Format(PreviousYear) + ' REBATES PAYMENT <1K ' + CustMembr."No.", 50) else
-                            DividendPostingBuffer.Description := PADSTR(Format(PreviousYear) + ' DIVIDEND PAYMENT <1K ' + CustMembr."No.", 50);
+                            DividendPostingBuffer.Description := PADSTR(Format(PreviousYear) + ' REBATES PAYMENT < ' + Format(DividendHeader."Minimum Capitalized") + CustMembr."No.", 50) else
+                            DividendPostingBuffer.Description := PADSTR(Format(PreviousYear) + ' DIVIDEND PAYMENT < ' + Format(DividendHeader."Minimum Capitalized") + CustMembr."No.", 50);
                         // DividendPostingBuffer.Description := PADSTR(Format(PreviousYear) + ' DIVIDEND PAYMENT <1K ' + CustMembr."No.", 50);
                         DividendPostingBuffer."Member No." := CustMembr."No.";
                         DividendPostingBuffer.Amount := GrossAmount;//ROUND(DividendProgression."Gross Dividends",0.01,'=');

@@ -480,7 +480,7 @@ PageExtension 52185441 pageextension52185441 extends "Vendor Card"
         {
             Visible = false;
         }
-       
+
 
         modify(AgedAccPayableChart)
         {
@@ -534,7 +534,7 @@ PageExtension 52185441 pageextension52185441 extends "Vendor Card"
                 ApplicationArea = Basic;
                 Editable = true;
             }
-            field("Vendor Category";Rec."Vendor Categories")
+            field("Vendor Category"; Rec."Vendor Categories")
             {
 
             }
@@ -547,6 +547,10 @@ PageExtension 52185441 pageextension52185441 extends "Vendor Card"
                 Editable = false;
             }
             field(Comments; Rec.Comments)
+            {
+
+            }
+            field(Archived; Rec.Archived)
             {
 
             }
@@ -628,7 +632,7 @@ PageExtension 52185441 pageextension52185441 extends "Vendor Card"
         {
             ApplicationArea = Basic;
         }
-      
+
         modify("Prepa&yment Percentages")
         {
             ApplicationArea = Basic;
@@ -723,20 +727,11 @@ PageExtension 52185441 pageextension52185441 extends "Vendor Card"
 
             ApplicationArea = Basic;
 
-            //Unsupported feature: Property Modification (Promoted) on "NewPurchaseCrMemo(Action 1905024805)".
-
-
-            //Unsupported feature: Property Modification (PromotedCategory) on "NewPurchaseCrMemo(Action 1905024805)".
 
         }
         modify(NewPurchaseReturnOrder)
         {
-
-            //Unsupported feature: Property Modification (Name) on "NewPurchaseReturnOrder(Action 1904749705)".
-
             ApplicationArea = Basic;
-
-            //Unsupported feature: Property Modification (PromotedCategory) on "NewPurchaseReturnOrder(Action 1904749705)".
 
         }
         modify(Approve)
@@ -962,61 +957,7 @@ PageExtension 52185441 pageextension52185441 extends "Vendor Card"
         }
 
 
-        //Unsupported feature: Code Modification on "SendApprovalRequest(Action 29).OnAction".
 
-        //trigger OnAction()
-        //Parameters and return type have not been exported.
-        //>>>> ORIGINAL CODE:
-        //begin
-        /*
-        IF ApprovalsMgmt.CheckVendorApprovalsWorkflowEnabled(Rec) THEN
-          ApprovalsMgmt.OnSendVendorForApproval(Rec);
-        */
-        //end;
-        //>>>> MODIFIED CODE:
-        //begin
-        /*
-        TESTFIELD("KRA Pin No.");
-        IF ApprovalsMgmt.CheckVendorApprovalsWorkflowEnabled(Rec) THEN
-          ApprovalsMgmt.OnSendVendorForApproval(Rec);
-        */
-        //end;
-
-        //Unsupported feature: Property Deletion (ToolTipML) on "SendApprovalRequest(Action 29)".
-
-
-        //Unsupported feature: Property Deletion (PromotedIsBig) on "SendApprovalRequest(Action 29)".
-
-
-
-        //Unsupported feature: Code Modification on "CancelApprovalRequest(Action 27).OnAction".
-
-        //trigger OnAction()
-        //Parameters and return type have not been exported.
-        //>>>> ORIGINAL CODE:
-        //begin
-        /*
-        ApprovalsMgmt.OnCancelVendorApprovalRequest(Rec);
-        WorkflowWebhookManagement.FindAndCancel(RECORDID);
-        */
-        //end;
-        //>>>> MODIFIED CODE:
-        //begin
-        /*
-        ApprovalsMgmt.OnCancelVendorApprovalRequest(Rec);
-        */
-        //end;
-
-        //Unsupported feature: Property Deletion (ToolTipML) on "CancelApprovalRequest(Action 27)".
-
-        // modify(CreateFlow)
-        // {
-        //     Visible = false;
-        // }
-        // modify(SeeFlows)
-        // {
-        //     Visible = false;
-        // }
         modify(Templates)
         {
             Visible = false;
@@ -1094,15 +1035,33 @@ PageExtension 52185441 pageextension52185441 extends "Vendor Card"
 
             //     trigger OnAction()
             //     begin
-            //         //ApprovalsMgmt.OpenApprovalEntriesPage(Rec.RecordId);
+            //         ApprovalsMgmt.OpenApprovalEntriesPage(Rec.RecordId);
             //     end;
             // }
+            action(Archive)
+            {
+                ApplicationArea = Basic;
+                Caption = 'Archive/Unarchive';
+                Image = Archive;
+
+                trigger OnAction()
+                begin
+                    if Confirm('Do you wish to archive/unarchive vendor?', false) then begin
+                        if rec.Archived then
+                            rec.archived := false
+                        else
+                            rec.Archived := true;
+                        rec.Modify();
+                    end;
+                end;
+            }
         }
     }
 
     var
         ConfigTemplateMgt: Codeunit "Config. Template Management";
         RecRef: RecordRef;
+        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
 
     var
         VendLedgEntry: Record "Vendor Ledger Entry";

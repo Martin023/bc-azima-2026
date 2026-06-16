@@ -44,6 +44,34 @@ page 52185754 "Savings Ledger Entries"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Debit Amount"; Rec."Debit Amount")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Credit Amount"; Rec."Credit Amount")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Debit Amount (LCY)"; Rec."Debit Amount (LCY)")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Credit Amount (LCY)"; Rec."Credit Amount (LCY)")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field(Reversed; Rec.Reversed)
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Reversed by Entry No."; Rec."Reversed by Entry No.")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Reversed Entry No."; Rec."Reversed Entry No.")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
 
                 field(Amount; Rec.Amount)
                 {
@@ -126,7 +154,7 @@ page 52185754 "Savings Ledger Entries"
                     ApplicationArea = Basic, Suite;
                 }
                 field("Bal. Account No."; Rec."Bal. Account No.")
-                { 
+                {
                     ApplicationArea = Basic, Suite;
                 }
                 field("Transaction No."; Rec."Transaction No.")
@@ -134,22 +162,6 @@ page 52185754 "Savings Ledger Entries"
                     ApplicationArea = Basic, Suite;
                 }
                 field("Closed by Amount (LCY)"; Rec."Closed by Amount (LCY)")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Debit Amount"; Rec."Debit Amount")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Credit Amount"; Rec."Credit Amount")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Debit Amount (LCY)"; Rec."Debit Amount (LCY)")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Credit Amount (LCY)"; Rec."Credit Amount (LCY)")
                 {
                     ApplicationArea = Basic, Suite;
                 }
@@ -171,18 +183,7 @@ page 52185754 "Savings Ledger Entries"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field(Reversed; Rec.Reversed)
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Reversed by Entry No."; Rec."Reversed by Entry No.")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Reversed Entry No."; Rec."Reversed Entry No.")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+
                 field(Prepayment; Rec.Prepayment)
                 {
                     ApplicationArea = Basic, Suite;
