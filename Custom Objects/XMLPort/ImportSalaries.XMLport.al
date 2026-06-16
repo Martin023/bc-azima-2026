@@ -13,13 +13,13 @@ XmlPort 52185496 "Import Salaries"
                 // fieldattribute(HNo; "Salary Lines"."Salary Header No.")
                 // {
                 // }
-                fieldattribute(AccountNo; "Salary Lines"."Account No.")
+                fieldattribute(StaffNo; "Salary Lines"."Staff No.")
                 {
                 }
                 fieldattribute(EmployerCode; "Salary Lines"."Employer Code")
                 {
                 }
-                fieldattribute(StaffNo; "Salary Lines"."Staff No.")
+                fieldattribute(AccountNo; "Salary Lines"."Account No.")
                 {
                 }
                 fieldattribute(MemberNo; "Salary Lines"."Member No.")
@@ -40,8 +40,8 @@ XmlPort 52185496 "Import Salaries"
                     if ("Salary Lines"."Member No." = '') and ("Salary Lines"."ID No." = '') and ("Salary Lines"."Staff No." = '') then
                         Error('Either Member No., ID No., or Staff No. must be provided.');
 
-                    if "Salary Lines".Amount <= 0 then
-                        Error('Amount must be greater than zero.');
+                    // if "Salary Lines".Amount <= 0 then
+                    //     Error('Amount must be greater than zero.');
 
                     "Salary Lines"."Salary Header No." := SalaryHeaderNo;
                 end;
@@ -50,21 +50,34 @@ XmlPort 52185496 "Import Salaries"
         }
     }
 
+
+
     requestpage
     {
         SaveValues = true;
 
         layout
         {
-        }
-
-        actions
-        {
+            area(content)
+            {
+                group("StaffNo|EmployerCode|AccountNo|MemberNo|Amount|DocumentNo")
+                {
+                    field(AccountNo; SalaryHeaderNo)
+                    {
+                    }
+                }
+            }
         }
     }
 
     var
         SalaryHeaderNo: Code[50];
+        ExcelLayout: Text;
+
+    // trigger OninitXmlPort()
+    // begin
+    //     ExcelLayout := 'AccountNo|EmployerCode|StaffNo|MemberNo|Amount|DocumentNo';
+    // end;
 
     trigger OnPostXmlPort()
     begin
@@ -75,4 +88,7 @@ XmlPort 52185496 "Import Salaries"
     begin
         SalaryHeaderNo := HeaderNo;
     end;
+
+
 }
+

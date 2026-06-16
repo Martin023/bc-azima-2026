@@ -4,7 +4,7 @@ page 52185808 "Salary Header"
     Editable = true;
     PageType = Card;
     SourceTable = "Salary Header";
-    PromotedActionCategories = 'New,Process,Report,Wrokflows, ,Request Approval,Adjustments';
+    PromotedActionCategories = 'New,Process,Report,Workflows, ,Request Approval,Adjustments';
 
     layout
     {
@@ -139,6 +139,10 @@ page 52185808 "Salary Header"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Deposit Deduction"; rec."Deposit Deduction")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Donnot Recover"; Rec."Donnot Recover")
                 {
                     ApplicationArea = Basic, Suite;
@@ -156,7 +160,7 @@ page 52185808 "Salary Header"
                     editable = false;
 
                 }
-                
+
             }
             part(Control17; "Salary Lines")
             {
@@ -276,6 +280,7 @@ page 52185808 "Salary Header"
                                         OldSalary.Reset();
                                         OldSalary.SetRange("Transaction Type", SalaryLines."Transaction Type");
                                         OldSalary.SetRange("Account No.", SalaryLines."Account No.");
+                                        OldSalary.SetRange(Posted, true);
                                         OldSalary.Setfilter("Posting Date", '%1..%2', Calcdate('<-CM>', SalaryLines."Posting Date"), Calcdate('<CM>', SalaryLines."Posting Date"));
                                         if OldSalary.FindSet() then begin
                                             SalaryLines."Paid Within Month" := true;
@@ -455,6 +460,7 @@ page 52185808 "Salary Header"
                     Promoted = true;
                     PromotedCategory = Process;
                     RunObject = page "Salary Lines";
+                    RunPageLink = "Salary Header No." = FIELD(No);
                     RunPageView = where(Posted = filter(false));
                 }
             }
@@ -617,6 +623,8 @@ page 52185808 "Salary Header"
                 action(MarkSalaryAsPosted)
                 {
                     //Enabled = false;
+                    PromotedCategory = Process;
+                    Promoted = true;
                     trigger OnAction()
                     var
                         SalLines: record "Salary Lines";
