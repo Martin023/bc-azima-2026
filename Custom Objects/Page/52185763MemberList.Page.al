@@ -24,6 +24,14 @@ page 52185763 "Member List"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Phone No."; Rec."Phone No.")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Payroll/Staff No."; Rec."Payroll/Staff No.")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("FOSA Account"; Rec."FOSA Account")
                 {
                     ApplicationArea = Basic, Suite;
@@ -33,10 +41,7 @@ page 52185763 "Member List"
                     ToolTip = 'Specifies the value of the Ordinary Savings Account No.';
                     ApplicationArea = Basic, Suite;
                 }
-                field("Phone No."; Rec."Phone No.")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+
                 field("Transactional Mobile Number"; Rec."Transactional Mobile Number")
                 {
                     ApplicationArea = Basic, Suite;
@@ -61,6 +66,11 @@ page 52185763 "Member List"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field(Subflag; Rec.Subflag)
+                {
+                    Caption = 'Sub Status';
+                    Editable = false;
+                }
                 field("Employer Code"; Rec."Employer Code")
                 {
                     ApplicationArea = Basic, Suite;
@@ -69,10 +79,7 @@ page 52185763 "Member List"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Payroll/Staff No."; Rec."Payroll/Staff No.")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+
                 field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = Basic, Suite;
@@ -95,7 +102,6 @@ page 52185763 "Member List"
                     ToolTip = 'Specifies the value of the FOSA Loan Balance field.';
                     ApplicationArea = Basic, Suite;
                 }
-
                 field("Bosa Loan Balance"; BosaLoanBalance)
                 {
                     ToolTip = 'Specifies the value of the BOSA Loan Balance field.';
@@ -120,11 +126,7 @@ page 52185763 "Member List"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field(Subflag; Rec.Subflag)
-                {
-                    Caption = 'Sub Status';
-                    Editable = false;
-                }
+
                 field("Primary Identification"; Rec."Primary Identification")
                 {
                     ApplicationArea = Basic, Suite;

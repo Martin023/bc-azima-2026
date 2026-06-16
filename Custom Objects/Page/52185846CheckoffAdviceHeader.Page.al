@@ -101,14 +101,17 @@ page 52185846 "Checkoff Advice Header"
 
                 trigger OnAction()
                 begin
-                    Rec.TestField("Loan Interest Cut OFF Date");
-                    Rec.TestField("Loan Issue Cut OFF Date");
-                    if Rec.Processed = false then begin
-                        PeriodicActivities.MonthlyCheckoffAdviceLn(Rec)
-
-                    end else
-                        Error(Txt0001);
-
+                    CheckoffAdviceHeader.reset;
+                    CheckoffAdviceHeader.SetRange("No.", Rec."No.");
+                    if CheckoffAdviceHeader.FindFirst then begin
+                        CheckoffAdviceHeader.TestField("Loan Interest Cut OFF Date");
+                        CheckoffAdviceHeader.TestField("Loan Issue Cut OFF Date");
+                        if CheckoffAdviceHeader.Processed = false then begin
+                            report.run(Report::"Generate Advice Loans", true, true, CheckoffAdviceHeader);
+                            //PeriodicActivities.MonthlyCheckoffAdviceLn(Rec)
+                        end else
+                            Error(Txt0001);
+                    end;
                     Message(Txt0002);
                 end;
             }
@@ -209,37 +212,37 @@ page 52185846 "Checkoff Advice Header"
                         REPORT.Run(Report::"Checkoff Advice Consolidated", true, true, CheckoffLines);
                 end;
             }
-            action("Checkoff Advice - Loans Main")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = "Report";
-                Promoted = true;
-                PromotedCategory = Process;
+            // action("Checkoff Advice - Loans Main")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = "Report";
+            //     Promoted = true;
+            //     PromotedCategory = Process;
 
-                trigger OnAction()
-                begin
-                    Rec.Reset;
-                    Rec.SetFilter("No.", Rec."No.");
-                    REPORT.Run(Report::"Checkoff Advice - Loans Main", true, true, Rec);
-                    Rec.Reset;
-                end;
-            }
-            action("Checkoff Advice - Effective Variance")
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = ' Effective Variance';
-                Image = "Report";
-                Promoted = true;
-                PromotedCategory = Process;
+            //     trigger OnAction()
+            //     begin
+            //         Rec.Reset;
+            //         Rec.SetFilter("No.", Rec."No.");
+            //         REPORT.Run(Report::"Checkoff Advice - Loans Main", true, true, Rec);
+            //         Rec.Reset;
+            //     end;
+            // }
+            // action("Checkoff Advice - Effective Variance")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Caption = ' Effective Variance';
+            //     Image = "Report";
+            //     Promoted = true;
+            //     PromotedCategory = Process;
 
-                trigger OnAction()
-                begin
-                    Rec.Reset;
-                    Rec.SetFilter("No.", Rec."No.");
-                    REPORT.Run(Report::"Checkoff Advice  Effectiveness", true, true, Rec);
-                    Rec.Reset;
-                end;
-            }
+            //     trigger OnAction()
+            //     begin
+            //         Rec.Reset;
+            //         Rec.SetFilter("No.", Rec."No.");
+            //         REPORT.Run(Report::"Checkoff Advice  Effectiveness", true, true, Rec);
+            //         Rec.Reset;
+            //     end;
+            // }
 
             // group("EDMS Integration")
             // {

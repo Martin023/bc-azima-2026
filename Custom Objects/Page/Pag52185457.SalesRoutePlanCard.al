@@ -20,9 +20,22 @@ page 52185457 "Sales Route Plan Card"
                 {
                     ToolTip = 'Specifies the value of the No field.', Comment = '%';
                 }
-                field(Desription; Rec.Desription)
+                field("Sales Representative"; Rec."Sales Representative")
                 {
-                    ToolTip = 'Specifies the value of the Desription field.', Comment = '%';
+                    ApplicationArea = All;
+                }
+                field("Route Date"; Rec."Route Date")
+                {
+                    ToolTip = 'Specifies the value of the Route Date field.', Comment = '%';
+                }
+                field(Day; Rec.Day)
+                {
+                    ToolTip = 'Specifies the value of the Day field.', Comment = '%';
+                }
+                field(Target; Rec.Target)
+                {
+                    Multiline = true;
+                    ToolTip = 'Specifies the value of the Target field.', Comment = '%';
                 }
                 field("Place to visit"; Rec."Place to visit")
                 {
@@ -35,6 +48,11 @@ page 52185457 "Sales Route Plan Card"
                 field(Leads; Rec.Leads)
                 {
                     ToolTip = 'Specifies the value of the Leads field.', Comment = '%';
+                }
+                field("BDE Comments"; Rec."BDE Comments")
+                {
+                    Multiline = true;
+                    ToolTip = 'Specifies the value of the BDE Comments field.', Comment = '%';
                 }
                 field(Status; Rec.Status)
                 {
@@ -52,20 +70,18 @@ page 52185457 "Sales Route Plan Card"
                 SubPageLink = "Header No" = field(No);
                 ApplicationArea = Basic, Suite;
             }
+            part(PartName1; "Route Achievements List")
+            {
+                caption = 'Route Achievements List';
+                SubPageLink = "Header No" = field(No);
+                ApplicationArea = Basic, Suite;
+            }
         }
 
     }
     actions
     {
-        area(Processing)
-        {
-            action("Route Achievements")
-            {
-                ApplicationArea = Basic;
-                Caption = 'Route Achievements';
-                RunObject = Page "Route Achievements List";
-            }
-        }
+
     }
 
     trigger OnAfterGetCurrrecord()

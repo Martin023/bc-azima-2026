@@ -673,8 +673,9 @@ table 52185700 Members
         }
         field(31; "Employer Code"; Code[100])
         {
+            Caption = 'Employer';
             Description = 'LookUp to Customer Table';
-            TableRelation = Customer WHERE("Account Type" = CONST(Employer));
+            TableRelation = Customer WHERE("Account Type" = CONST("Employer Code"));
 
             trigger OnValidate()
             begin
@@ -701,15 +702,15 @@ table 52185700 Members
                     until CreditAccounts.Next = 0;
                 end;
 
-                CheckoffAdviceLine.Reset;
-                CheckoffAdviceLine.SetRange("Member No.", "No.");
-                if CheckoffAdviceLine.Find('-') then begin
-                    repeat
-                        CheckoffAdviceLine."Payroll No" := "Employer Code";
-                        CheckoffAdviceLine.Validate("Employer Code", "Employer Code");
-                        CheckoffAdviceLine.Modify;
-                    until CheckoffAdviceLine.Next = 0;
-                end;
+                // CheckoffAdviceLine.Reset;
+                // CheckoffAdviceLine.SetRange("Member No.", "No.");
+                // if CheckoffAdviceLine.Find('-') then begin
+                //     repeat
+                //         CheckoffAdviceLine."Payroll No" := "Employer Code";
+                //         CheckoffAdviceLine.Validate("Employer Code", "Employer Code");
+                //         CheckoffAdviceLine.Modify;
+                //     until CheckoffAdviceLine.Next = 0;
+                // end;
 
                 LoanApps.Reset;
                 LoanApps.SetRange("Member No.", "No.");
@@ -768,7 +769,8 @@ table 52185700 Members
 
         field(34; "Work Station"; Code[20])
         {
-            TableRelation = "Electrol Zones/Area Svr Center".Code WHERE(Type = CONST("Area Service Centers"));
+            Caption = 'Employer Code/Work Station';
+            TableRelation = Customer."No." WHERE("Account Type" = filter("Employer Code"));
         }
 
         field(35; "Country Of Operation"; Code[10])
@@ -1712,7 +1714,7 @@ table 52185700 Members
         }
         field(1035; "FOSA Account"; Code[50])
         {
-            TableRelation = "Savings Accounts"."No." where("Member No." = field("No."), "Product Category" = filter("FOSA Account"));
+            TableRelation = "Savings Accounts"."No." where("Member No." = field("No."), "Product Type" = filter('191'));
         }
         field(1036; "FOSA Account Status"; Option)
         {
@@ -1914,6 +1916,10 @@ table 52185700 Members
 
     fieldgroups
     {
+        fieldgroup(Dropdown; "No.", Name, "Primary Identification", "Phone No.", "Payroll/Staff No.")
+        {
+        }
+
     }
 
     trigger OnInsert()

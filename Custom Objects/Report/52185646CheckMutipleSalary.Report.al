@@ -5,32 +5,35 @@ Report 52185646 "Check Mutiple Salary"
 
     dataset
     {
-        dataitem("Salary Lines"; "Salary Lines")
+        dataitem(SalaryHeader; "Salary Header")
         {
-            //DataItemTableView = where(Posted=const(No));
-            trigger OnAfterGetRecord()
-            begin
+            dataitem("Salary Lines"; "Salary Lines")
+            {
+                //DataItemTableView = where(Posted=const(No));
+                DataItemLink = "Salary Header No." = field("No");
+                trigger OnAfterGetRecord()
+                begin
 
-                SalaryLine.Reset;
-                SalaryLine.SetRange(SalaryLine.Processed, false);
-                SalaryLine.SetRange(SalaryLine."Salary Header No.", "Salary Lines"."Salary Header No.");
-                SalaryLine.SetRange(SalaryLine."Account No.", "Salary Lines"."Account No.");
-                if SalaryLine.Count > 1 then begin
-                    "Salary Lines"."Multiple Salary" := true;
-                    "Salary Lines".Modify;
-                end else begin
-                    "Salary Lines"."Multiple Salary" := false;
-                    "Salary Lines".Modify;
+                    SalaryLine.Reset;
+                    SalaryLine.SetRange(SalaryLine.Processed, false);
+                    SalaryLine.SetRange(SalaryLine."Salary Header No.", "Salary Lines"."Salary Header No.");
+                    SalaryLine.SetRange(SalaryLine."Account No.", "Salary Lines"."Account No.");
+                    if SalaryLine.Count > 1 then begin
+                        "Salary Lines"."Multiple Salary" := true;
+                        "Salary Lines".Modify;
+                    end else begin
+                        "Salary Lines"."Multiple Salary" := false;
+                        "Salary Lines".Modify;
+                    end;
                 end;
-            end;
-
+            }
             trigger OnPostDataItem()
             begin
 
-                if SalaryHeader.Get("Salary Lines"."Salary Header No.") then begin
-                    SalaryHeader."Mutiple Salaries Checked" := true;
-                    SalaryHeader.Modify;
-                end;
+                // if SalaryHeader.Get("Salary Lines"."Salary Header No.") then begin
+                SalaryHeader."Mutiple Salaries Checked" := true;
+                SalaryHeader.Modify;
+                // end;
 
                 Message('Mutiple Salary validation Completed sucessfully');
             end;
@@ -56,5 +59,6 @@ Report 52185646 "Check Mutiple Salary"
 
     var
         SalaryLine: Record "Salary Lines";
-        SalaryHeader: Record "Salary Header";
+        SalHeaderII: record "Salary Header";
+        SavLedger: record "Savings Ledger Entry";
 }

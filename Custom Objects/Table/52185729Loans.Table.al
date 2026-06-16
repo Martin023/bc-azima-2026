@@ -547,9 +547,6 @@ table 52185729 Loans
                             Error('Member date of birth not captured');
                         Rec."Member Age" := (ROUND((TODAY - memebrrec."Date of Birth") / 365.2364, 1, '<'));
                         Rec."ID No." := memebrrec."Primary Identification";
-                        RetirementDate := CALCDATE(Format(GeneralSetUp."Max. Member Age"), memebrrec."Date of Birth");
-                        TodayDate := TODAY;
-                        Rec."Months to Retire" := (RetirementDate - TodayDate) DIV 30;
                     end;
                     Rec."Employer Code" := memebrrec."Employer Code";
                 end;
@@ -2172,10 +2169,13 @@ table 52185729 Loans
 
             trigger OnValidate()
             begin
-                if "Retirement/Expiry Date" <> 0D then
+                if "Retirement/Expiry Date" <> 0D then begin
                     if "Retirement/Expiry Date" < Today then
                         // Error('This date cannot be less than today');
                         Message('This member is already retired');
+                    "Months to Retire" := round(("Retirement/Expiry Date" - Today) / 30, 1);
+                end;
+
 
                 Validate(Installments);
             end;
@@ -2574,9 +2574,9 @@ table 52185729 Loans
             Editable = true;
             NotBlank = true;
             Caption = 'Relation Officer';
-            TableRelation = IF ("BDE Type" = FILTER(BDE)) "HR Employees"."No."
+            TableRelation = IF ("BDE Type" = FILTER(BDE)) "Marketing Teams Header"."Payroll No."
             ELSE
-            "Salesperson/Purchaser".Code;
+            "HR Employees"."No.";
         }
         field(39004263; "Loan BDE Paid"; Boolean)
         {
@@ -2584,7 +2584,7 @@ table 52185729 Loans
         field(39004264; "BDE Type"; Option)
         {
             Caption = 'Relation Officer Type';
-            OptionCaption = 'Relation Officer,Others';
+            OptionCaption = 'Sales Representative,Others';
             OptionMembers = BDE,Others;
         }
         field(39004265; "Dummy Appraisal"; Boolean)
@@ -3272,7 +3272,7 @@ table 52185729 Loans
         field(209; "Work Station Name"; text[150])
         {
             fieldclass = flowfield;
-            CalcFormula = lookup("Electrol Zones/Area Svr Center".Description WHERE(Code = field("Work Station")));
+            CalcFormula = lookup(Customer.Name WHERE("No." = field("Work Station")));
         }
         field(210; "Months to Retire"; Integer)
         {
@@ -3838,7 +3838,6 @@ table 52185729 Loans
         BusinessIncome: Record "Business Income";
         LoansTopup: Record "Loans Top up";
         ExternalComm: Record "Other Commitements Clearance";
-        PaymentMethods: Record "Payment Methods";
     begin
         AppraisalSalDetails.Reset;
         AppraisalSalDetails.SetRange("Loan No", Rec."Loan No.");

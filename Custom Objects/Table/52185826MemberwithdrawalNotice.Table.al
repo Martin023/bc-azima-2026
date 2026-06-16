@@ -744,8 +744,8 @@ table 52185826 "Member withdrawal Notice"
                     "maturity time" := Time;
                 end;
 
-                // theMember.Reset;
-                // theMember.SetRange("No.", Rec."Member No.");
+                theMember.Reset;
+                theMember.SetRange("No.", Rec."Member No.");
 
                 if theMember.FindFirst then begin
                     if theSMS <> '' then begin
@@ -914,42 +914,5 @@ table 52185826 "Member withdrawal Notice"
         exit(TChargeAmount);
     end;
 
-    [Scope('OnPrem')]
-    procedure StopAdvice(MemberwithdrawalNotice: Record "Member withdrawal Notice")
-    var
-        Loans: Record Loans;
-        SavingsAccounts: Record "Savings Accounts";
-        PeriodicAcc: Codeunit "Periodic Activities";
-        LoansProcess: Codeunit "Loans Process";
-    begin
-        Loans.Reset;
-        Loans.SetRange("Member No.", "Member No.");
-        Loans.SetRange("Recovery Mode", Loans."Recovery Mode"::Checkoff);
-        Loans.SetFilter("Outstanding Balance", '>0');
-        if Loans.Find('-') then begin
-            repeat
-                LoansProcess.AdviceLoan(Loans."Loan No.", true, Rec."No.");
-            until Loans.Next = 0;
-        end;
 
-        SavingsAccounts.Reset;
-        SavingsAccounts.SetRange(SavingsAccounts."Member No.", "Member No.");
-        if SavingsAccounts.Find('-') then begin
-            repeat
-                if SavingsAccounts."Product Category" = SavingsAccounts."Product Category"::"BOSA Deposits" then begin
-                    // PeriodicAcc.StopEmplyerSavingAdvice(SavingsAccounts, SavingsAccounts."Monthly Contribution", SavingsAccounts."Employer Balance");
-                end else
-                    if SavingsAccounts."Product Category" = SavingsAccounts."Product Category"::"Benevolent (BBF)" then begin
-                        // PeriodicAcc.StopEmplyerSavingAdvice(SavingsAccounts, SavingsAccounts."Monthly Contribution", SavingsAccounts."Employer Balance");
-                    end;
-                if SavingsAccounts."Product Category" <> SavingsAccounts."Product Category"::"Share Capital" then begin
-                    if SavingsAccounts."Loan Disbursement Account" = false then begin
-                        SavingsAccounts.Status := SavingsAccounts.Status::Closed;
-                        SavingsAccounts.Blocked := SavingsAccounts.Blocked::All;
-                        ///  SavingsAccounts.MODIFY;
-                    end;
-                end;
-            until SavingsAccounts.Next = 0;
-        end;
-    end;
 }

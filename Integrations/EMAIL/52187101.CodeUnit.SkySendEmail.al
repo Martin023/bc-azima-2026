@@ -25,8 +25,8 @@ codeunit 52187101 "Sky Send Email"
                 theTable.sender_email_name := GeneralLedgerSetup."EMAIL Sender Name";
                 theTable.sender_email_address := GeneralLedgerSetup."EMAIL Sender Address";
             end else begin
-                theTable.sender_email_name := 'Kenpipe SACCO';
-                theTable.sender_email_address := 'members.portal@kenpipesacco.com';
+                theTable.sender_email_name := 'AZIMA SACCO';
+                theTable.sender_email_address := 'info@azimasacco.co.ke';
             end;
 
             theTable.email_type := 'OUTBOUND_EMAIL';

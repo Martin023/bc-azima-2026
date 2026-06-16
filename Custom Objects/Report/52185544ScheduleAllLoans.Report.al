@@ -12,10 +12,6 @@ Report 52185544 "Schedule All Loans"
         {
             RequestFilterFields = "Loan No.", "Employer Code", "Staff No", "Member No.", "Application Date", "Source Unit", "Loan Product Type";
             DataItemTableView = where(Posted = const(True));
-            column(ReportForNavId_1; 1)
-            {
-            }
-
             trigger OnAfterGetRecord()
             var
                 LoanSchedule: Record "Ideal Repayment Schedule";
@@ -40,6 +36,53 @@ Report 52185544 "Schedule All Loans"
                     LRepaymentSchedule.SetRange(LRepaymentSchedule."Loan No.", Loans."Loan No.");
                     if not LRepaymentSchedule.Find('-') then
                         LoanProcess.GenerateSchedule(Loans, RecreateSchedule);
+                end;
+
+                if UpdateLoanRepayment then begin
+                    if Loans.Interest = 0 then Loans."Interest Calculation Method" := Loans."Interest Calculation Method"::"Straight Line";
+                    Loans.TestField(Installments);
+
+                    if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::Amortised then begin
+
+                        //Loans.TestField(Interest);
+
+                        if Loans.Interest > 0 then begin
+                            Repayment := Round((Loans.Interest / 12 / 100) / (1 - Power((1 + (Loans.Interest / 12 / 100)), -(Loans.Installments))) * (Loans."Approved Amount"), 0.0001, '>');
+                            Loans."Loan Interest Repayment" := Round(Loans."Approved Amount" / 100 / 12 * Loans.Interest, 0.0001, '>');
+                            Loans."Loan Principle Repayment" := Loans.Repayment - Loans."Loan Interest Repayment";
+                        end else begin
+                            Loans."Loan Principle Repayment" := Loans."Approved Amount" / Loans.Installments;
+                            Loans."Loan Interest Repayment" := (Loans.Interest / 12 / 100) * Loans."Approved Amount";
+                        end;
+                    end else
+
+                        if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Straight Line" then begin
+                            //Loans.TestField(Interest);
+                            Loans."Loan Principle Repayment" := Loans."Approved Amount" / Loans.Installments;
+                            Loans."Loan Interest Repayment" := (Loans.Interest / 12 / 100) * Loans."Approved Amount";
+                            //Grace Period Interest
+                            //Loans."Loan Interest Repayment":=(Loans."Loan Interest Repayment"*InitialInstal)/(InitialInstal-InitialGraceInt);
+                        end else
+
+                            if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Balance" then begin
+                                //Loans.TestField(Interest);
+                                Loans."Loan Principle Repayment" := Loans."Approved Amount" / Loans.Installments;
+                                Loans."Loan Interest Repayment" := (Loans.Interest / 12 / 100) * Loans."Approved Amount";
+                            end else
+
+                                if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Flat" then begin
+                                    //Loans.TestField(Interest);
+                                    Loans."Loan Principle Repayment" := Round(Loans."Approved Amount" / Loans.Installments, 1.0, '>');
+                                    Loans."Loan Interest Repayment" := Round(((Loans."Approved Amount" * Loans.Interest / 12 / 100) + (Loans."Loan Principle Repayment" * Loans.Interest / 12 / 100)) / 2, 1.0, '>');
+                                    Loans.Repayment := Loans."Loan Principle Repayment" + Loans."Loan Interest Repayment";
+                                end else begin
+                                    Loans."Loan Principle Repayment" := Loans."Approved Amount" / Loans.Installments;
+                                    Loans."Loan Interest Repayment" := (Loans.Interest / 12 / 100) * Loans."Approved Amount";
+
+                                end;
+                    loans."Repayment Start Date" := CalcDate('CM+1M', loans."Disbursement Date");
+                    Loans.Repayment := Loans."Loan Principle Repayment" + Loans."Loan Interest Repayment";
+                    Loans.Modify();
                 end;
             end;
 
@@ -74,6 +117,11 @@ Report 52185544 "Schedule All Loans"
                     Caption = 'Recreate Schedules';
                     ApplicationArea = All;
                 }
+                field(UpdateLoanRepayment; UpdateLoanRepayment)
+                {
+                    Caption = 'Update Loan Repayment';
+                    ApplicationArea = All;
+                }
             }
         }
 
@@ -102,4 +150,5 @@ Report 52185544 "Schedule All Loans"
         Generating: Label 'Generating Schedules';
         diaProgress: Dialog;
         intProgress: Integer;
+        UpdateLoanRepayment: Boolean;
 }

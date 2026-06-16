@@ -475,7 +475,6 @@ table 52185623 "PR Employee Transactions"
         PRAllowances: Record "PR Employee Allowances";
         TotalAllowance: Decimal;
         HREmp: Record "HR Employees";
-        PayMethods: Record "Payment Methods";
         Members: Record Members;
         Loans: Record Loans;
         Ploan: Record Loans;

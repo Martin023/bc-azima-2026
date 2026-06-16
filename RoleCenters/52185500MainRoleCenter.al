@@ -953,12 +953,12 @@ page 52185500 "Main Role Center"
                             Caption = 'Update Loan Installments';
                             RunObject = report "Update Loan Instalments";
                         }
-                        action("Post Lien")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            caption = 'Post Lien';
-                            RunObject = report "Post Lien";
-                        }
+                        // action("Post Lien")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     caption = 'Post Lien';
+                        //     RunObject = report "Post Lien";
+                        // }
                         action("Generate CRB Data")
                         {
                             ApplicationArea = Basic, Suite;
@@ -3869,6 +3869,19 @@ page 52185500 "Main Role Center"
                                 ApplicationArea = Basic, Suite;
                                 RunObject = page "HR Appraisal Period Setup";
 
+                            }
+                            //ADDED DEPARTMENT TARGETS MENU ITEMS FOR HOD AND HR ADMIN ACCESS
+                            action("HR Department Targets List")
+                            {
+                                Caption = 'HR Department Targets';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = page "HR Department Targets List";
+                            }
+                            action("HR HOD Department Targets")
+                            {
+                                Caption = 'My Department Targets (HOD)';
+                                ApplicationArea = Basic, Suite;
+                                RunObject = page "HRHOD Department Targets";
                             }
                         }
                         group(randanalysis)

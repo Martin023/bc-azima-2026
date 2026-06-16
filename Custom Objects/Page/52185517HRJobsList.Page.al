@@ -64,6 +64,20 @@ page 52185517 "HR Jobs List"
                     ApplicationArea = Basic;
                     StyleExpr = StyleText;
                 }
+                field("Current Approval Level"; Rec."Current Approval Level")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Approval Level';
+                    Visible = true;
+                }
+                field("Pending At"; Rec."Pending At")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Pending At';
+                    Visible = true;
+                    Style = Attention;
+                    StyleExpr = Rec.Status = Rec.Status::"Pending Approval";
+                }
             }
         }
         area(factboxes)
@@ -224,13 +238,18 @@ page 52185517 "HR Jobs List"
         OpenApprovalEntriesExistCurrUser := ApprovalsMgmt.HasOpenApprovalEntriesForCurrentUser(Rec.RECORDID);
 // OpenApprovalEntriesExist := ApprovalsMgmt.HasOpenApprovalEntries(Rec.RECORDID);
         */
-
+        
+        //UPDATE PENDING AT FIELD
+        Rec.UpdatePendingAtField();
     end;
 
     trigger OnAfterGetCurrRecord()
     begin
         rec.CalcFields("Occupied Positions");
         Rec."Vacant Positions" := Rec."No of Posts" - Rec."Occupied Positions";
+        
+        //UPDATE PENDING AT FIELD
+        Rec.UpdatePendingAtField();
     end;
 
     var

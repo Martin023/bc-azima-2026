@@ -18,14 +18,14 @@ table 52185821 "Checkoff Buffer"
             var
                 myInt: Integer;
             begin
-                if SavingsAcc.get(Rec."Account No") then begin
-                    if Members.Get((SavingsAcc."Member No.")) then begin
-                        if Members."Member Class" = 'B' then begin
-                            Members."Member Class" := 'A';
-                            members.Modify;
-                        end;
-                    end;
-                end;
+                // if SavingsAcc.get(Rec."Account No") then begin
+                //     if Members.Get((SavingsAcc."Member No.")) then begin
+                //         if Members."Member Class" = 'B' then begin
+                //             Members."Member Class" := 'A';
+                //             members.Modify;
+                //         end;
+                //     end;
+                // end;
             end;
 
         }

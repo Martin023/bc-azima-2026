@@ -618,8 +618,8 @@ Codeunit 52185470 "Periodic Activities"
         LoansInterest: Record "Loans Interest";
         GeneratesuccMSG: label 'Interest Posted Successfully';
         AlreadyPostedErr: label 'This transaction Has already been posted';
-        NoTemplateErr: label 'Ensure the Bills Template is set up in Cash Office Setup';
-        NoBatchErr: label 'Ensure the Bills Batch is set up in the Cash Office Setup';
+        NoTemplateErr: label 'Ensure the Bills Template is set up in Banking User Template';
+        NoBatchErr: label 'Ensure the Bills Batch is set up in the Banking User Template';
         DailyLoansInterestBuffer: Record "Loans Interest Buffer";
         RunPosting: Boolean;
         LoansRec: Record Loans;
@@ -1252,124 +1252,6 @@ Codeunit 52185470 "Periodic Activities"
     end;
 
 
-    procedure LoanCheckoffAdvice(Loans: Record Loans; AmountON: Decimal; Amountoff: Decimal)
-    var
-        CheckoffAdvice: Record "Checkoff Advice Line";
-        iEntryNo: Integer;
-        Employer: Record Customer;
-        ChAdvice: Record "Checkoff Advice Line";
-        Member: Record Members;
-        PaymentMethods: Record "Payment Methods";
-        InterestAmnt: Decimal;
-        NoOfMonths: Integer;
-        InterestTotalsFlat: Decimal;
-        CheckoffAdvice2: Record "Checkoff Advice Line";
-        CreditAccounts: Record "Credit Ledger Entry";
-        LBal: Decimal;
-    begin
-
-        //with Loans do
-        begin
-            Loans.CalcFields(Loans."Outstanding Balance", "Outstanding Interest");
-            InterestAmnt := ((Loans."Outstanding Balance" * (Loans.Interest / 1200)) / Loans.Installments);
-            if InterestAmnt < 0 then
-                InterestAmnt := 0;
-
-            ChAdvice.Reset;
-            ChAdvice.SetRange(ChAdvice."Loan No.", Loans."Loan No.");
-            ChAdvice.SetRange(ChAdvice."Advice Date", Today);
-            if ChAdvice.Find('-') then
-                ChAdvice.DeleteAll;
-            iEntryNo := 0;
-            CheckoffAdvice.Reset;
-            if CheckoffAdvice.Find('+') then
-                iEntryNo := CheckoffAdvice."Entry No" + 1;
-
-            CheckoffAdvice.Init;
-            CheckoffAdvice."Entry No" := iEntryNo;
-            CheckoffAdvice."Account No." := Loans."Loan Account";
-            CheckoffAdvice."Loan No." := Loans."Loan No.";
-            CheckoffAdvice."Member No." := Loans."Member No.";
-            CheckoffAdvice.Type := CheckoffAdvice.Type::Credit;
-            CheckoffAdvice.Validate("Member No.");
-            CheckoffAdvice."Product Type" := Loans."Loan Product Type";
-            CheckoffAdvice.Validate("Product Type");
-            if Member.Get(Loans."Member No.") then
-                CheckoffAdvice."Employer Code" := Member."Employer Code";
-            if Loans."Employer Loan No." <> '' then
-                CheckoffAdvice."Employer Account No." := Loans."Employer Loan No."
-            else
-                CheckoffAdvice."Employer Account No." := Loans."Loan No.";
-
-            CheckoffAdvice.Validate(CheckoffAdvice."Member No.");
-            CheckoffAdvice.Names := Member.Name;
-
-            //Different Mode of Payment***************
-            PaymentMethods.Reset;
-            PaymentMethods.SetRange(PaymentMethods."Loan No.", Loans."Loan No.");
-            PaymentMethods.SetRange(PaymentMethods."Member No.", Loans."Member No.");
-            PaymentMethods.SetRange(PaymentMethods."Payment Method", PaymentMethods."payment method"::Checkoff);
-            if PaymentMethods.Find('-') then begin
-                CheckoffAdvice."Amount On" := PaymentMethods.Amount;
-            end else
-                CheckoffAdvice."Amount On" := Loans.Repayment;//-InterestAmnt;
-            if Loans."Outstanding Balance" > 0 then
-                CheckoffAdvice."Amount On" := Amountoff;
-            CheckoffAdvice."Amount Off" := Amountoff;
-            if Loans."Recovered Loan" = '' then begin
-                CreditAccounts.Reset;
-                CreditAccounts.SetRange("Customer No.", Loans."Loan Account");
-                CreditAccounts.SetRange("Loan No", Loans."Loan No.");
-                CreditAccounts.SetRange("Transaction Type", CreditAccounts."transaction type"::Repayment);
-                if CreditAccounts.Find('+') then begin
-                    CheckoffAdvice."Balance Off" := Loans."Employer Balance";//Loans."Outstanding Balance"+(CreditAccounts.Amount*-1);
-                end;
-            end;
-            if Loans."Outstanding Interest" > InterestAmnt then
-                CheckoffAdvice.Interest := Loans."Outstanding Interest"//Loans."Loan Interest Repayment";
-            else
-                CheckoffAdvice.Interest := InterestAmnt;
-
-            LBal := Loans."Employer Balance";
-            if LBal <= 0 then
-                LBal := Loans."Outstanding Balance";
-
-
-            if Loans."Interest Calculation Method" = Loans."interest calculation method"::"Reducing Flat" then begin
-                InterestTotalsFlat := ((Loans.Repayment * Loans.Installments) - Loans."Approved Amount") / Loans.Installments;
-                NoOfMonths := ROUND((Loans."Approved Amount" - Loans."Outstanding Balance") / (Loans.Repayment - InterestTotalsFlat), 1, '>');
-                CheckoffAdvice."Balance On" := Loans.Repayment * NoOfMonths;//Loans."Outstanding Balance";
-            end else
-                CheckoffAdvice."Balance On" := LBal + (CreditAccounts.Amount);//Loans."Outstanding Balance";
-            if Loans."Recovered Loan" <> '' then begin
-                CheckoffAdvice."Balance On" := Loans.Repayment * Loans.Installments;
-            end;
-            CheckoffAdvice."Advice Date" := Today;
-            if Member.Get(Loans."Member No.") then
-                CheckoffAdvice."ID No." := Member."Primary Identification";
-            if Loans."Loan Recovery No." <> '' then
-                CheckoffAdvice."Amount Off" := 0;
-            CheckoffAdvice."Payroll No" := Member."Payroll/Staff No.";
-            CheckoffAdvice.Interest := Loans."Loan Interest Repayment";
-            if Loans."Outstanding Balance" > 0 then
-                CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Adjustment
-            else
-                if Loans."Recovered Loan" <> '' then
-                    CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::"New Loan"
-                else begin
-                    if Loans."Employer Balance" <> 0 then
-                        CheckoffAdvice."Amount Off" := Loans.Repayment;
-                    if Loans."Employer Loan No." = '' then
-                        CheckoffAdvice."Employer Account No." := Loans."Loan No." else
-                        CheckoffAdvice."Employer Account No." := Loans."Employer Loan No.";
-                    CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Stoppage;
-                    CheckoffAdvice."Amount On" := 0;
-                end;
-
-            CheckoffAdvice.Insert;
-        end;
-    end;
-
 
     procedure MonthlyCheckoffAdviceLn(CheckoffAdviceHeader: Record "Checkoff Advice Header")
     var
@@ -1383,7 +1265,7 @@ Codeunit 52185470 "Periodic Activities"
         Memb: Record Members;
         Employer3: Record Customer;
         MemberClass: Record "Member Classes";
-        PaymentMethods: Record "Payment Methods";
+        // PaymentMethods: Record "Payment Methods";
         InterestAmount: Decimal;
         Mdays: Integer;
         CheckoffAdvice2: Record "Checkoff Advice Line";
@@ -1462,19 +1344,19 @@ Codeunit 52185470 "Periodic Activities"
                                             //     CheckoffAdvice."Amount On" := PaymentMethods.Amount;
                                             // end else
 
-                                            STOPlaced.Reset();
-                                            STOPlaced.setrange(Status, STOPlaced.Status::Approved);
-                                            STOPlaced.setrange("Member No.", Loans."Member No.");
-                                            if STOPlaced.findfirst then begin
-                                                repeat
-                                                    STOLines.reset;
-                                                    STOLines.setrange("Document No.", STOPlaced."No.");
-                                                    STOLines.SetRange("Loan No.", Loans."Loan No.");
-                                                    if STOLines.findfirst then begin
-                                                        TotalSTO += STOLines.Amount;
-                                                    end;
-                                                until STOPlaced.next = 0;
-                                            end;
+                                            // STOPlaced.Reset();
+                                            // STOPlaced.setrange(Status, STOPlaced.Status::Approved);
+                                            // STOPlaced.setrange("Member No.", Loans."Member No.");
+                                            // if STOPlaced.findfirst then begin
+                                            //     repeat
+                                            //         STOLines.reset;
+                                            //         STOLines.setrange("Document No.", STOPlaced."No.");
+                                            //         STOLines.SetRange("Loan No.", Loans."Loan No.");
+                                            //         if STOLines.findfirst then begin
+                                            //             TotalSTO += STOLines.Amount;
+                                            //         end;
+                                            //     until STOPlaced.next = 0;
+                                            // end;
 
 
                                             // if Loans."Recovery Mode" = Loans."Recovery Mode"::Hybrid then
@@ -1484,13 +1366,15 @@ Codeunit 52185470 "Periodic Activities"
                                             if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Balance" then begin
                                                 if Loans."Variated Amount" <> 0 then
                                                     Loans."Loan Principle Repayment" := Loans."Variated Amount";
-                                                CheckoffAdvice."Amount On" := loans."Loan Principle Repayment" + Loans."Outstanding Interest" - TotalSTO;
+                                                CheckoffAdvice."Amount On" := loans."Loan Principle Repayment";
+                                                //+ Loans."Outstanding Interest" - TotalSTO;
                                                 CheckoffAdvice."Total Loan Repayment" := loans."Loan Principle Repayment" + Loans."Outstanding Interest";
                                             end
                                             else begin
                                                 if Loans."Variated Amount" <> 0 then
                                                     Loans.Repayment := Loans."Variated Amount";
-                                                CheckoffAdvice."Amount On" := loans.Repayment - TotalSTO;
+                                                CheckoffAdvice."Amount On" := loans.Repayment;
+                                                // - TotalSTO;
                                                 CheckoffAdvice."Total Loan Repayment" := loans.Repayment;
                                             end;
 
@@ -1539,7 +1423,7 @@ Codeunit 52185470 "Periodic Activities"
             //++++++++++++++++++++++++++++++++++++Advice Everything+++++++++with Employer Code
             Employer.Reset;
             Employer.SetRange(Employer."No.", CheckoffAdviceHeader."Employer Code");
-            Employer.SetRange(Employer."Advice Method", Employer."advice method"::Everything);
+            //Employer.SetRange(Employer."Advice Method", Employer."advice method"::Everything);
             if Employer.Find('-') then begin
                 Loans.Reset;
                 loans.CalcFields("Total Balance");
@@ -1589,40 +1473,38 @@ Codeunit 52185470 "Periodic Activities"
                                     //     CheckoffAdvice."Amount On" := PaymentMethods.Amount;
                                     // end else
 
-                                    STOPlaced.Reset();
-                                    STOPlaced.setrange(Status, STOPlaced.Status::Approved);
-                                    STOPlaced.setrange("Member No.", Loans."Member No.");
-                                    if STOPlaced.findfirst then begin
-                                        repeat
-                                            STOLines.reset;
-                                            STOLines.setrange("Document No.", STOPlaced."No.");
-                                            STOLines.SetRange("Loan No.", Loans."Loan No.");
-                                            if STOLines.findfirst then begin
-                                                TotalSTO += STOLines.Amount;
-                                            end;
-                                        until STOPlaced.next = 0;
-                                    end;
+                                    // STOPlaced.Reset();
+                                    // STOPlaced.setrange(Status, STOPlaced.Status::Approved);
+                                    // STOPlaced.setrange("Member No.", Loans."Member No.");
+                                    // if STOPlaced.findfirst then begin
+                                    //     repeat
+                                    //         STOLines.reset;
+                                    //         STOLines.setrange("Document No.", STOPlaced."No.");
+                                    //         STOLines.SetRange("Loan No.", Loans."Loan No.");
+                                    //         if STOLines.findfirst then begin
+                                    //             TotalSTO += STOLines.Amount;
+                                    //         end;
+                                    //     until STOPlaced.next = 0;
+                                    // end;
 
 
                                     // if Loans."Recovery Mode" = Loans."Recovery Mode"::Hybrid then
                                     //     CheckoffAdvice."Amount On" := loans.Repayment - Loans."Salary Amount"
                                     // else
                                     if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Balance" then begin
-                                        CheckoffAdvice."Amount On" := loans."Loan Principle Repayment" + Loans."Outstanding Interest" - TotalSTO;
+                                        if Loans."Variated Amount" <> 0 then
+                                            Loans."Loan Principle Repayment" := Loans."Variated Amount";
+                                        CheckoffAdvice."Amount On" := loans."Loan Principle Repayment";
+                                        //+ Loans."Outstanding Interest" - TotalSTO;
                                         CheckoffAdvice."Total Loan Repayment" := loans."Loan Principle Repayment" + Loans."Outstanding Interest";
                                     end
                                     else begin
-                                        CheckoffAdvice."Amount On" := loans.Repayment - TotalSTO;
+                                        if Loans."Variated Amount" <> 0 then
+                                            Loans.Repayment := Loans."Variated Amount";
+                                        CheckoffAdvice."Amount On" := loans.Repayment;
+                                        // - TotalSTO;
                                         CheckoffAdvice."Total Loan Repayment" := loans.Repayment;
                                     end;
-
-                                    if Loans.Repayment <> (Loans."Loan Principle Repayment" + Loans."Loan Interest Repayment") then
-                                        CheckoffAdvice."Amount On" := Loans.Repayment - TotalSTO;
-
-                                    if loans."Total Balance" < CheckoffAdvice."Amount On"
-                                    then
-                                        CheckoffAdvice."Amount On" := Loans."Total Balance";
-
 
                                     CheckoffAdvice."Loan Principle Repayment" := Loans."Loan Principle Repayment";
                                     CheckoffAdvice."Loan Interest Repayment" := Loans."Loan Interest Repayment";
@@ -1638,8 +1520,17 @@ Codeunit 52185470 "Periodic Activities"
                                     CheckoffAdvice."Amount On" := Round(checkoffAdvice."Amount On", 1, '>');
                                     // CheckoffAdvice.Interest:=Loans."Loan Interest Repayment";
                                     CheckoffAdvice."Payroll No" := Loans."Staff No";
+                                    if Memb.Get(Loans."Member No.") then
+                                        if Memb."Payroll/Staff No." <> Loans."Staff No" then begin
+                                            CheckoffAdvice."Payroll No" := Memb."Payroll/Staff No.";
+                                            Loans."Staff No" := Memb."Payroll/Staff No.";
+                                            Loans.Modify();
+                                        end;
+
                                     CheckoffAdvice."Standing Order amount" := TotalSTO;
-                                    CheckoffAdvice.Insert;
+                                    CheckoffAdvice.Type := CheckoffAdvice.Type::Credit;
+                                    if CheckoffAdvice."Amount On" > 0 then
+                                        CheckoffAdvice.Insert;
                                 end;
                             end;
                         end;
@@ -1649,7 +1540,6 @@ Codeunit 52185470 "Periodic Activities"
 
     end;
     //++++++++++++++++++++Advice Changes with Employer CODE======
-
 
     procedure MonthlyCheckoffAdviceSav(CheckoffAdviceHeader: Record "Checkoff Advice Header")
     var
@@ -1663,7 +1553,7 @@ Codeunit 52185470 "Periodic Activities"
         Memb: Record Members;
         Employer3: Record Customer;
         MemberClass: Record "Member Classes";
-        PaymentMethods: Record "Payment Methods";
+        // PaymentMethods: Record "Payment Methods";
         InterestAmount: Decimal;
         Mdays: Integer;
         CheckoffAdvice2: Record "Checkoff Advice Line";
@@ -1825,7 +1715,7 @@ Codeunit 52185470 "Periodic Activities"
         Memb: Record Members;
         Employer3: Record Customer;
         MemberClass: Record "Member Classes";
-        PaymentMethods: Record "Payment Methods";
+        // PaymentMethods: Record "Payment Methods";
         InterestAmount: Decimal;
         Mdays: Integer;
         CheckoffAdvice2: Record "Checkoff Advice Line";
@@ -2385,7 +2275,7 @@ Codeunit 52185470 "Periodic Activities"
                             loans.CalcFields("Total Loan Balance");
                             Loans.SetFilter(Loans."Total Loan Balance", '>0');
                             // Buffer."Member No.");
-                            // Loans.SetRange(Loans."Loan Product Type", PFactory."Product ID");
+                            Loans.SetRange(Loans."Loan Product Type", Buffer."Product Code");
                             if Loans.FindFirst() then begin
                                 // repeat
                                 Buffer."Loan No" := Loans."Loan No.";
@@ -4984,99 +4874,6 @@ Codeunit 52185470 "Periodic Activities"
     end;
 
 
-    procedure EmplyerSavingAdvice(SavingsAccounts: Record "Savings Accounts"; OldAmount: Decimal; NewAmount: Decimal)
-    var
-        CheckoffAdvice: Record "Checkoff Advice Line";
-        iEntryNo: Integer;
-        SavingsAccount: Record "Savings Accounts";
-        MemberClass: Record "Member Classes";
-        ProductFactory: Record "Product Factory";
-        Members: Record Members;
-    begin
-        //Advice Deposits Changes
-        //with SavingsAccounts do
-        begin
-            SavingsAccounts.CalcFields("Balance (LCY)");
-            iEntryNo := 0;
-            CheckoffAdvice.Reset;
-            if CheckoffAdvice.Find('+') then
-                iEntryNo := CheckoffAdvice."Entry No" + 1;
-            if Members.Get(SavingsAccounts."Member No.") then begin
-                if MemberClass.Get(Members."Member Class") then begin
-                    if SavingsAccounts."Product Category" = SavingsAccounts."Product Category"::"BOSA Deposits" then
-                        NewAmount := MemberClass."Default BOSA Deposit";
-                    if SavingsAccounts."Product Category" = SavingsAccounts."Product Category"::"Benevolent (BBF)" then begin
-                        if ProductFactory.Get(SavingsAccounts."Product Type") then begin
-                            NewAmount := ProductFactory."Minimum Contribution";
-                        end;
-                    end;
-                end;
-
-            end;
-
-            if (SavingsAccounts.Status = SavingsAccounts.Status::Closed) or (SavingsAccounts.Status = SavingsAccounts.Status::New) then
-                OldAmount := 0;
-
-            CheckoffAdvice.Init;
-            CheckoffAdvice."Entry No" := iEntryNo;
-            CheckoffAdvice."Account No." := SavingsAccounts."No.";
-            CheckoffAdvice."Member No." := SavingsAccounts."Member No.";
-            CheckoffAdvice."Payroll No" := SavingsAccounts."Payroll/Staff No.";
-            CheckoffAdvice.Validate(CheckoffAdvice."Member No.");
-            CheckoffAdvice."Amount On" := NewAmount;
-            CheckoffAdvice."Amount Off" := OldAmount;
-            CheckoffAdvice.Type := CheckoffAdvice.Type::Savings;
-
-            SavingsAccount.Reset;
-            SavingsAccount.SetRange("No.", SavingsAccounts."No.");
-            if SavingsAccount.Find('-') then begin
-                SavingsAccount.CalcFields("Balance (LCY)");
-                CheckoffAdvice."Balance On" := SavingsAccount."Balance (LCY)";
-
-                if SavingsAccount."Employer Account No" <> '' then
-                    CheckoffAdvice."Employer Account No." := SavingsAccount."Employer Account No"
-                else
-                    CheckoffAdvice."Employer Account No." := SavingsAccount."No.";
-            end;
-
-            if SavingsAccounts."Product Category" = SavingsAccounts."Product Category"::"BOSA Deposits" then begin
-                SavingsAccount.Reset;
-                SavingsAccount.SetRange("Member No.", SavingsAccounts."Member No.");
-                SavingsAccount.SetFilter(Status, '<>%1', SavingsAccount.Status::Closed);
-                SavingsAccount.SetRange("Product Category", SavingsAccount."Product Category"::"BOSA Deposits");
-                if SavingsAccount.Find('-') then begin
-                    SavingsAccount.CalcFields("Balance (LCY)");
-                    if SavingsAccount."Employer Balance" = 0 then
-                        CheckoffAdvice."Balance On" := /*CheckoffAdvice."Balance On"+*/SavingsAccount."Balance (LCY)"//Commented to prevent doubling of balance on
-                    else
-                        CheckoffAdvice."Balance On" := NewAmount + SavingsAccount."Employer Balance";
-                end;
-            end;
-
-            CheckoffAdvice."Advice Method" := CheckoffAdvice."advice method"::Changes;
-            CheckoffAdvice."Advice Date" := Today;
-            CheckoffAdvice."ID No." := SavingsAccounts."ID No.";
-            CheckoffAdvice."Employer Code" := SavingsAccounts."Employer Code";
-            CheckoffAdvice.Names := SavingsAccounts.Name;
-            CheckoffAdvice."Product Type" := SavingsAccounts."Product Type";
-            if NewAmount = OldAmount then
-                CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Adjustment
-            else
-                CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Variations;
-            if NewAmount = 0 then begin
-                CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Stoppage;
-                CheckoffAdvice."Balance Off" := SavingsAccount."Monthly Contribution";
-            end else
-                if SavingsAccounts."Balance (LCY)" = 0 then
-                    CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::New;
-            //**CheckoffAdvice.VALIDATE(CheckoffAdvice."Account No.");
-            CheckoffAdvice.Validate(CheckoffAdvice."Product Type");
-            if (CheckoffAdvice."Amount On" <> 0) or (CheckoffAdvice."Amount Off" <> 0) or (CheckoffAdvice."Balance On" <> 0) or (CheckoffAdvice."Advice Type" = CheckoffAdvice."advice type"::Stoppage) then
-                CheckoffAdvice.Insert(true);
-        end;
-
-    end;
-
 
     procedure ProcessAdvice(CheckoffAdviceHeader: Record "Checkoff Advice Header")
     var
@@ -5127,7 +4924,7 @@ Codeunit 52185470 "Periodic Activities"
         LPrincipal: Decimal;
         RepayCode: Code[10];
         LoanSch: Record Loans;
-        PaymentMethods: Record "Payment Methods";
+        // PaymentMethods: Record "Payment Methods";
         PaymentMethodsApplication: Record "Payment Methods Application";
     begin
         //with LoanRescheduling do
@@ -6256,9 +6053,6 @@ Codeunit 52185470 "Periodic Activities"
 
                 SendSMS.SendSms(Source::MBANKING, PhoneNumber, CopyStr(msg, 1, 250), Format(NewLoans."Loan No."), '', true, 0, false, 'CBS', NewLoans."Loan No.", 'CBS');
 
-                LoanNumber := NewLoans."Loan No.";
-
-                LoanProcess.AdviceLoan(LoanNumber, false, LoanRecLines."Header No.");
             end;
         end else
             Error('Defaulter loan product does not exist');
@@ -6401,8 +6195,6 @@ Codeunit 52185470 "Periodic Activities"
 
                 SendSMS.SendSms(Source::MBANKING, PhoneNumber, CopyStr(msg, 1, 250), Format(NewLoans."Loan No."), '', true, 0, false, 'CBS', NewLoans."Loan No.", 'CBS');
 
-                LoanNumber := NewLoans."Loan No.";
-                LoanProcess.AdviceLoan(LoanNumber, false, LoanRecLines."Header No.");
             end;
         end else
             Error('Defaulter loan product does not exist');
@@ -6566,7 +6358,7 @@ Codeunit 52185470 "Periodic Activities"
                     end;
                     GlobalFunctionsCodeunit.GetMemberData(GuarantorMember."No.", FirstName, PhoneNumber);
 
-                    LoansProces.AdviceLoan(ReversalLines."Guarantor Loan No", true, ReversalLines."Header No.");
+                    // LoansProces.AdviceLoan(ReversalLines."Guarantor Loan No", true, ReversalLines."Header No.");
 
                     // msg := 'Dear ' + FirstName + ' the ' + OriginalLoan."Loan Product Type Name" + ' for ' + DefaulterMember."No." + '-' + DefaulterMember.Name +
                     //  ' attached to your account KES ' + Format(ReversalLines."Interest Attached Amount" + ReversalLines."Principle Attached Amount") + ' has been reversed. ' + ForMoreInfo;
@@ -6647,7 +6439,7 @@ Codeunit 52185470 "Periodic Activities"
             Comments.Insert(true);
         end;
 
-        LoansProces.AdviceLoan(OriginalLoan."Loan No.", false, ReversalLines."Header No.");
+        // LoansProces.AdviceLoan(OriginalLoan."Loan No.", false, ReversalLines."Header No.");
         //Post Batch
         SaccoTrans.PostJournal(Jtemplate, JBatch, false);
     END;
@@ -6810,7 +6602,7 @@ Codeunit 52185470 "Periodic Activities"
                         end;
                         GlobalFunctionsCodeunit.GetMemberData(GuarantorMember."No.", FirstName, PhoneNumber);
 
-                        LoansProces.AdviceLoan(ReversalLines."Guarantor Loan No", true, ReversalLines."Header No.");
+                        // LoansProces.AdviceLoan(ReversalLines."Guarantor Loan No", true, ReversalLines."Header No.");
 
                         // msg := 'Dear ' + FirstName + ' your attached loan of KES ' + Format((ReversalLines."Interest Refund" + ReversalLines."Principle Refund")) +
                         // ' has been reversed to the owner successfully';
@@ -6891,7 +6683,7 @@ Codeunit 52185470 "Periodic Activities"
             Comments.Insert(true);
         end;
 
-        LoansProces.AdviceLoan(OriginalLoan."Loan No.", false, ReversalLines."Header No.");
+        // LoansProces.AdviceLoan(OriginalLoan."Loan No.", false, ReversalLines."Header No.");
 
         //Post Batch
         SaccoTrans.PostJournal(Jtemplate, JBatch);
@@ -7626,313 +7418,6 @@ Codeunit 52185470 "Periodic Activities"
 
                 Message(MSGPosted);
             end;
-        end;
-    end;
-
-
-    procedure StopEmplyerSavingAdvice(SavingsAccounts: Record "Savings Accounts"; NewAmount: Decimal; OldAmount: Decimal)
-    var
-        CheckoffAdvice: Record "Checkoff Advice Line";
-        iEntryNo: Integer;
-        SavingsAccount: Record "Savings Accounts";
-        MemberClass: Record "Member Classes";
-        ProductFactory: Record "Product Factory";
-        Members: Record Members;
-    begin
-        //Advice Deposits Changes
-        // with SavingsAccounts do
-        begin
-            SavingsAccounts.CalcFields("Balance (LCY)");
-            iEntryNo := 0;
-            CheckoffAdvice.Reset;
-            if CheckoffAdvice.Find('+') then
-                iEntryNo := CheckoffAdvice."Entry No" + 1;
-            if Members.Get(SavingsAccounts."Member No.") then begin
-                if SavingsAccounts."Product Category" = SavingsAccounts."Product Category"::"BOSA Deposits" then
-                    OldAmount := SavingsAccounts."Monthly Contribution";
-                if SavingsAccounts."Product Category" = SavingsAccounts."Product Category"::"Benevolent (BBF)" then begin
-                    if ProductFactory.Get(SavingsAccounts."Product Type") then begin
-                        OldAmount := ProductFactory."Minimum Contribution";
-                    end;
-                end;
-
-            end;
-
-            if (SavingsAccounts.Status = SavingsAccounts.Status::Closed) or (SavingsAccounts.Status = SavingsAccounts.Status::New) then
-                OldAmount := 0;
-
-            CheckoffAdvice.Init;
-            CheckoffAdvice."Entry No" := iEntryNo;
-            CheckoffAdvice."Account No." := SavingsAccounts."No.";
-            CheckoffAdvice."Member No." := SavingsAccounts."Member No.";
-            CheckoffAdvice."Payroll No" := SavingsAccounts."Payroll/Staff No.";
-            CheckoffAdvice.Validate(CheckoffAdvice."Member No.");
-            CheckoffAdvice."Amount On" := 0;
-            CheckoffAdvice."Amount Off" := OldAmount;
-            CheckoffAdvice.Type := CheckoffAdvice.Type::Savings;
-
-            SavingsAccount.Reset;
-            SavingsAccount.SetRange("No.", SavingsAccounts."No.");
-            if SavingsAccount.Find('-') then begin
-                SavingsAccount.CalcFields("Balance (LCY)");
-                CheckoffAdvice."Balance On" := 0;
-                CheckoffAdvice."Balance Off" := SavingsAccounts."Employer Balance";
-                if SavingsAccount."Employer Account No" <> '' then
-                    CheckoffAdvice."Employer Account No." := SavingsAccount."Employer Account No"
-                else
-                    CheckoffAdvice."Employer Account No." := SavingsAccount."No.";
-            end;
-
-            if SavingsAccounts."Product Category" = SavingsAccounts."Product Category"::"BOSA Deposits" then begin
-                SavingsAccount.Reset;
-                SavingsAccount.SetRange("Member No.", SavingsAccounts."Member No.");
-                SavingsAccount.SetFilter(Status, '<>%1', SavingsAccount.Status::Closed);
-                SavingsAccount.SetRange("Product Category", SavingsAccount."Product Category"::"BOSA Deposits");
-                if SavingsAccount.Find('-') then begin
-                    SavingsAccount.CalcFields("Balance (LCY)");
-                    if SavingsAccount."Employer Balance" = 0 then
-                        CheckoffAdvice."Balance On" := CheckoffAdvice."Balance On" + SavingsAccount."Balance (LCY)"
-                    else
-                        CheckoffAdvice."Balance Off" := SavingsAccount."Employer Balance";
-                end;
-                CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Stoppage;
-            end;
-
-            if SavingsAccounts."Product Category" = SavingsAccounts."Product Category"::"Benevolent (BBF)" then begin
-                SavingsAccount.Reset;
-                SavingsAccount.SetRange("Member No.", SavingsAccounts."Member No.");
-                SavingsAccount.SetFilter(Status, '<>%1', SavingsAccount.Status::Closed);
-                SavingsAccount.SetRange("Product Category", SavingsAccount."Product Category"::"Benevolent (BBF)");
-                if SavingsAccount.Find('-') then begin
-                    SavingsAccount.CalcFields("Balance (LCY)");
-                    CheckoffAdvice."Balance Off" := SavingsAccount."Monthly Contribution";
-                    ;
-                end;
-            end;
-            CheckoffAdvice."Advice Method" := CheckoffAdvice."advice method"::Changes;
-            CheckoffAdvice."Advice Date" := Today;
-            CheckoffAdvice."ID No." := SavingsAccounts."ID No.";
-            CheckoffAdvice."Employer Code" := SavingsAccounts."Employer Code";
-            CheckoffAdvice.Names := SavingsAccounts.Name;
-            CheckoffAdvice."Product Type" := SavingsAccounts."Product Type";
-            CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Stoppage;
-            CheckoffAdvice."Balance Off" := SavingsAccount."Monthly Contribution";
-            CheckoffAdvice."Balance Off" := SavingsAccount."Employer Balance";
-            CheckoffAdvice.Validate(CheckoffAdvice."Product Type");
-            if (CheckoffAdvice."Amount On" <> 0) or (CheckoffAdvice."Amount Off" <> 0) or (CheckoffAdvice."Balance On" <> 0) or (CheckoffAdvice."Advice Type" = CheckoffAdvice."advice type"::Stoppage) then
-                CheckoffAdvice.Insert(true);
-        end;
-    end;
-
-
-    procedure InitPost(CashierTrans: Record "Checkoff  Receipt Transactions")
-    var
-        Temp: Record "Banking User Template";
-        Jtemplate: Code[30];
-        JBatch: Code[30];
-        UserSetup: Record "User Setup";
-        DBranch: Code[20];
-        DActivity: Code[20];
-        Tillno: Code[20];
-        Text0001: label 'Ensure the Cashier Journal Template is set up in Banking User Setup';
-        Text0002: label 'Ensure the Cashier Journal Batch is set up in Banking User Setup';
-        Text0003: label 'Ensure the Default Bank is set up in User Setup';
-        Text0004: label 'The transaction has already been posted.';
-        Text0005: label 'Cannot post a Transaction being processed by %1';
-        Text0006: label 'Please specify the Account No';
-        Text0007: label 'Please specify an amount greater than zero.';
-        Text0008: label 'Please select the transaction type.';
-        CmemberNo: Code[20];
-        Text0009: label 'Ensure the Cashier Member No is set up in Banking User Setup';
-        Text0010: label 'You are not authorised to transact your own account';
-        Text0011: label 'Ensure the Cashier Shortage Account is set up in Banking User Setup';
-        Text0012: label 'Ensure the Cashier Excess Account iis set up in Banking User Setup';
-        Excess: Code[20];
-        Shortage: Code[20];
-        Text0013: label 'The Transaction date must be today, please reset to proceed';
-    begin
-        //with CashierTrans do
-        begin
-
-            //Cyrus
-
-            if CashierTrans.Posted = true then
-                Error(Text0004);
-
-            if CashierTrans."Transaction Date" <> Today then
-                Error(Text0013);
-
-            Temp.Get(UserId);
-
-            Jtemplate := Temp."Cashier Journal Template";
-            JBatch := Temp."Cashier Journal Batch";
-            Tillno := Temp."Default  Bank";
-            CmemberNo := Temp."Member No.";
-            Excess := Temp."Excess Account";
-            Shortage := Temp."Shortage Account";
-
-            if Jtemplate = '' then begin
-                Error(Text0001);
-            end;
-
-            if JBatch = '' then begin
-                Error(Text0002);
-            end;
-
-            if Tillno = '' then begin
-                Error(Text0003);
-            end;
-
-            if CmemberNo = '' then begin
-                Error(Text0009);
-            end;
-
-            if Shortage = '' then begin
-                Error(Text0011);
-            end;
-
-            if Excess = '' then begin
-                Error(Text0012);
-            end;
-
-            if CashierTrans.Cashier <> UpperCase(UserId) then
-                Error(Text0005, CashierTrans.Cashier);
-
-            UserSetup.Reset;
-            UserSetup.SetRange(UserSetup."User ID", UpperCase(UserId));
-            if UserSetup.Find('-') then begin
-                UserSetup.TestField(UserSetup."Global Dimension 2 Code");
-                UserSetup.TestField(UserSetup."Global Dimension 1 Code");
-                DBranch := UserSetup."Global Dimension 2 Code";
-                DActivity := UserSetup."Global Dimension 1 Code";
-            end;
-
-
-            if CashierTrans."Employer No" = '' then
-                Error(Text0006);
-
-            if CashierTrans.Amount <= 0 then
-                Error(Text0007);
-            CashierTrans.TestField(Remarks);
-
-            CashierTrans.CalcFields("Allocated Amount");
-
-
-            if (CashierTrans.Amount < CashierTrans."Allocated Amount") or (CashierTrans."Allocated Amount" = 0) then
-                Error('Amount Allocated must be less than the amount');
-            PostEmployerReceipt(CashierTrans, Jtemplate, JBatch, Tillno, DBranch, DActivity);
-
-        end;
-    end;
-
-    local procedure PostEmployerReceipt(CashierTrans: Record "Checkoff  Receipt Transactions"; JTemplate: Code[20]; JBatch: Code[20]; TillNo: Code[20]; DBranch: Code[20]; DActivity: Code[20])
-    var
-        CTransLines: Record "Checkoff  Receipt Trans Lines";
-        GenJournalLine: Record "Gen. Journal Line";
-        Text0009: label 'You have done a transaction of KSHS. ';
-        Text0010: label ' of type ';
-        Text0011: label ' on ';
-        Text0012: label ' on your account ';
-        Text0013: label ' at ';
-        LineNo: Integer;
-    begin
-
-        //with CashierTrans do
-        begin
-            GenJournalLine.Reset;
-            GenJournalLine.SetRange("Journal Template Name", JTemplate);
-            GenJournalLine.SetRange("Journal Batch Name", JBatch);
-            GenJournalLine.DeleteAll;
-
-            LineNo := LineNo + 10000;
-
-            GenJournalLine.Init;
-            GenJournalLine."Journal Template Name" := JTemplate;
-            GenJournalLine."Journal Batch Name" := JBatch;
-            GenJournalLine."Document No." := CashierTrans.No;
-            GenJournalLine."External Document No." := CashierTrans."Cheque No";
-            GenJournalLine."Line No." := LineNo;
-            GenJournalLine."Account Type" := GenJournalLine."account type"::Customer;
-            GenJournalLine."Account No." := CashierTrans."Employer No";
-            GenJournalLine.Validate(GenJournalLine."Account No.");
-            GenJournalLine."Posting Date" := CashierTrans."Transaction Date";
-            GenJournalLine.Description := CashierTrans.Remarks;
-            GenJournalLine."Currency Code" := CashierTrans."Currency Code";
-            GenJournalLine.Validate(GenJournalLine."Currency Code");
-            GenJournalLine.Amount := -(CashierTrans.Amount);
-            GenJournalLine.Validate(GenJournalLine.Amount);
-            GenJournalLine."Shortcut Dimension 1 Code" := DActivity;
-            GenJournalLine."Shortcut Dimension 2 Code" := DBranch;
-            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
-            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
-            if GenJournalLine.Amount <> 0 then
-                GenJournalLine.Insert;
-
-            CTransLines.Reset;
-            CTransLines.SetRange(CTransLines."Transaction No", CashierTrans.No);
-            if CTransLines.Find('-') then begin
-                repeat
-                    CTransLines.TestField(CTransLines."Receipt Description");
-                    LineNo := LineNo + 10000;
-
-                    GenJournalLine.Init;
-                    GenJournalLine."Journal Template Name" := JTemplate;
-                    GenJournalLine."Journal Batch Name" := JBatch;
-                    GenJournalLine."Line No." := LineNo;
-                    GenJournalLine."Document No." := CashierTrans.No;
-                    GenJournalLine."External Document No." := CashierTrans."Cheque No";
-                    GenJournalLine."Posting Date" := CashierTrans."Transaction Date";
-                    GenJournalLine.Description := CTransLines."Receipt Description";
-
-                    if CTransLines.Type = CTransLines.Type::"Bank Account" then begin
-                        GenJournalLine."Account Type" := GenJournalLine."bal. account type"::"Bank Account"
-                    end else
-                        if CTransLines.Type = CTransLines.Type::Customer then begin
-                            GenJournalLine."Account Type" := GenJournalLine."bal. account type"::Customer
-                        end else
-                            if CTransLines.Type = CTransLines.Type::"G/L Account" then begin
-                                GenJournalLine."Account Type" := GenJournalLine."bal. account type"::"G/L Account";
-                            end;
-
-                    GenJournalLine."Account No." := CTransLines."Account No";
-                    GenJournalLine.Validate(GenJournalLine."Account No.");
-                    GenJournalLine.Amount := CTransLines.Amount;
-                    GenJournalLine.Validate(GenJournalLine.Amount);
-                    GenJournalLine."Currency Code" := CashierTrans."Currency Code";
-                    GenJournalLine.Validate(GenJournalLine."Currency Code");
-                    GenJournalLine."Transaction Type" := CTransLines."Transaction Type";
-                    GenJournalLine."Loan No" := CTransLines."Loan No";
-                    GenJournalLine."Shortcut Dimension 1 Code" := DActivity;
-                    GenJournalLine."Shortcut Dimension 2 Code" := DBranch;
-                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
-                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
-                    if GenJournalLine.Amount <> 0 then
-                        GenJournalLine.Insert;
-
-                until CTransLines.Next = 0;
-            end;
-
-            //Post New
-            GenJournalLine.Reset;
-            GenJournalLine.SetRange("Journal Template Name", JTemplate);
-            GenJournalLine.SetRange("Journal Batch Name", JBatch);
-            // if GenJournalLine.Find('-') then begin
-            //     Codeunit.Run(Codeunit::"Gen. Jnl.-Post New", GenJournalLine);
-            // end;
-            //Post New
-
-            CashierTrans.Posted := false;
-            CashierTrans.Posted := JournlPosted.PostedSuccessfully();
-            if CashierTrans.Posted then begin
-                CashierTrans.Posted := true;
-                CashierTrans."Date Posted" := Today;
-                CashierTrans."Time Posted" := Time;
-                CashierTrans."Posted By" := UserId;
-                CashierTrans.Status := CashierTrans.Status::Posted;
-                CashierTrans.Modify;
-            end;
-
-
         end;
     end;
 

@@ -575,11 +575,7 @@ page 52185712 "Product Factory"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Requires Salary Processing"; Rec."Requires Salary Processing")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = true;
-                }
+
                 field("Net Salary Multiplier %"; Rec."Net Salary Multiplier %")
                 {
                     ApplicationArea = Basic, Suite;
@@ -596,10 +592,7 @@ page 52185712 "Product Factory"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Appraisal - Omit Deductions"; Rec."Appraisal - Omit Deductions")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+
                 field("Maximum Deposit Contribution"; Rec."Maximum Deposit Contribution")
                 {
                     ApplicationArea = Basic, Suite;
@@ -664,15 +657,7 @@ page 52185712 "Product Factory"
                 // {
                 //     ApplicationArea = Basic, Suite;
                 // }
-                field("Allow Multiple Running Loans"; Rec."Allow Multiple Running Loans")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
 
-                field("Mobile Loan"; Rec."Mobile Loan")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
                 // field(AvailableOnMobile; Rec.AvailableOnMobile)
                 // {
                 //     ApplicationArea = Basic, Suite;
@@ -922,6 +907,37 @@ page 52185712 "Product Factory"
                     ApplicationArea = Basic, Suite;
                 }
             }
+            group("Mbanking Credit")
+            {
+                Caption = 'Mbanking Credit';
+                Visible = CreditProductVisible;
+                Editable = CurrPageEditable;
+
+                field("Allow Multiple Running Loans"; Rec."Allow Multiple Running Loans")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+
+                field("Mobile Loan"; Rec."Mobile Loan")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("IsAvailableInMonth"; Rec."IsAvailableInMonth")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Is Available In Month';
+                }
+                field("Requires Salary Processing"; Rec."Requires Salary Processing")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = true;
+                }
+                field("Appraisal - Omit Deductions"; Rec."Appraisal - Omit Deductions")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+
+            }
             group("Sky Mbanking")
             {
                 Caption = 'Sky Mbanking';
@@ -1143,6 +1159,31 @@ page 52185712 "Product Factory"
                     RunObject = Page "Loan Product Charges";
                     RunPageLink = "Product Code" = FIELD("Product ID");
                 }
+                action("Product Supported Classes")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Supported Member Classes';
+                    Image = SetupPayment;
+                    Enabled = CreditProductVisible;
+
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedOnly = true;
+
+                    RunObject = Page "Product Supported Classes List";
+                    RunPageLink = "Product ID" = field("Product ID");
+                }
+                action("Blocked Employers")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Blocked Employers';
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedOnly = true;
+
+                    RunObject = Page "Blocked Employers List";
+                    RunPageLink = "Product ID" = field("Product ID");
+                }
                 action("Monthly Contribution Changes")
                 {
                     ApplicationArea = Basic, Suite;
@@ -1210,6 +1251,16 @@ page 52185712 "Product Factory"
                     Enabled = CreditProductVisible;
                     RunObject = Page "Target Employers";
                     RunPageLink = "Product ID" = FIELD("Product ID");
+                }
+                action("Loan Product Availability")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Image = SetupPayment;
+                    Enabled = CreditProductVisible;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    RunObject = Page "Loan Product Availability";
+                    RunPageLink = "Loan Product Code" = FIELD("Product ID");
                 }
             }
         }

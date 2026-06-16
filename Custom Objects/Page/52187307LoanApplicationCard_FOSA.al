@@ -836,33 +836,33 @@ page 52187307 "Loan Application Card_FOSA"
                               "Client Code" = FIELD("Member No.");
             }
 
-            action("Repayment Method")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = Payment;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-                RunObject = Page "Loan Payment Method";
-                RunPageLink = "Loan No." = FIELD("Loan No."),
-                              "Member No." = FIELD("Member No.");
+            // action("Repayment Method")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = Payment;
+            //     Promoted = true;
+            //     PromotedCategory = Process;
+            //     PromotedIsBig = true;
+            //     RunObject = Page "Loan Payment Method";
+            //     RunPageLink = "Loan No." = FIELD("Loan No."),
+            //                   "Member No." = FIELD("Member No.");
 
-                trigger OnAction()
-                begin
+            //     trigger OnAction()
+            //     begin
 
-                    if Rec."Appraisal Parameter Type" = Rec."Appraisal Parameter Type"::"Check Off" then begin
-                        RepMethods.Reset;
-                        RepMethods.SetRange("Loan No.", Rec."Loan No.");
-                        if not RepMethods.Find('-') then begin
-                            RepMethods."Loan No." := Rec."Loan No.";
-                            RepMethods.Amount := Rec.Repayment;
-                            RepMethods."Member No." := Rec."Member No.";
-                            RepMethods."Payment Method" := RepMethods."Payment Method"::Checkoff;
-                            RepMethods.Insert;
-                        end;
-                    end;
-                end;
-            }
+            //         // if Rec."Appraisal Parameter Type" = Rec."Appraisal Parameter Type"::"Check Off" then begin
+            //         //     RepMethods.Reset;
+            //         //     RepMethods.SetRange("Loan No.", Rec."Loan No.");
+            //         //     if not RepMethods.Find('-') then begin
+            //         //         RepMethods."Loan No." := Rec."Loan No.";
+            //         //         RepMethods.Amount := Rec.Repayment;
+            //         //         RepMethods."Member No." := Rec."Member No.";
+            //         //         RepMethods."Payment Method" := RepMethods."Payment Method"::Checkoff;
+            //         //         RepMethods.Insert;
+            //         //     end;
+            //         // end;
+            //     end;
+            // }
 
             action("Other Commitments Clearance")
             {
@@ -1593,14 +1593,6 @@ page 52187307 "Loan Application Card_FOSA"
                                         Error(Text009);
                                     if (AppraisalSalDetails.Type = AppraisalSalDetails.Type::"Gross Pay") and (AppraisalSalDetails.Amount = 0) then
                                         Error('Kindly capture Basic Salary information');
-                                end else begin
-                                    RepMethods.Reset;
-                                    RepMethods.SetRange("Loan No.", Rec."Loan No.");
-                                    if RepMethods.Find('-') then begin
-                                        if (RepMethods."Payment Method" <> RepMethods."Payment Method"::"Standing Order(External)") and
-                                          (RepMethods."Payment Method" <> RepMethods."Payment Method"::"Standing Order(Internal)") then
-                                            Error(Text013);
-                                    end;
                                 end;
                         end else
                             Error(Text012);
@@ -2464,7 +2456,6 @@ page 52187307 "Loan Application Card_FOSA"
         Text007: Label 'Both Minimum Guarantors on Max Amt and Max Amt on Guarantors must be defined';
         Text008: Label 'The number of guarantors expected is less than the expected number of %1 where amount is more than %2';
         "InactiveErr:": Label 'This member is not active thus cannot qualify for a loan';
-        RepMethods: Record "Payment Methods";
         CompInfo: Record "Company Information";
         Text009: Label 'This product requires salary details';
         EndDateSalo: Date;

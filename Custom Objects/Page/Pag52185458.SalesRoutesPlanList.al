@@ -19,9 +19,21 @@ page 52185458 "Sales Routes Plan List"
                 {
                     ToolTip = 'Specifies the value of the No field.', Comment = '%';
                 }
-                field(Desription; Rec.Desription)
+                field("Sales Representative"; Rec."Sales Representative")
                 {
-                    ToolTip = 'Specifies the value of the Desription field.', Comment = '%';
+                    ToolTip = 'Specifies the value of the Sales Representative field.', Comment = '%';
+                }
+                field("Route Date"; Rec."Route Date")
+                {
+                    ToolTip = 'Specifies the value of the Route Date field.', Comment = '%';
+                }
+                field(Day; Rec.Day)
+                {
+                    ToolTip = 'Specifies the value of the Day field.', Comment = '%';
+                }
+                field(Target; Rec.Target)
+                {
+                    ToolTip = 'Specifies the value of the Target field.', Comment = '%';
                 }
                 field("Place to visit"; Rec."Place to visit")
                 {

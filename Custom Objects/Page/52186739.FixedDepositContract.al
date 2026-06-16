@@ -85,6 +85,11 @@ page 52186739 "Fixed Deposit Contract"
                     ApplicationArea = Basic, Suite;
                     Editable = HeaderA;
                 }
+                field("Fosa Balance"; Rec."Fosa Balance")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = false;
+                }
                 field("Fixed Deposit Type"; Rec."Fixed Deposit Type")
                 {
                     ApplicationArea = Basic, Suite;
@@ -111,10 +116,7 @@ page 52186739 "Fixed Deposit Contract"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Balance (LCY)"; Rec."Balance (LCY)")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+
                 field("Forecasted Interest"; Rec."Forecasted Interest")
                 {
                     ApplicationArea = Basic, Suite;
@@ -123,7 +125,12 @@ page 52186739 "Fixed Deposit Contract"
                 field("Fixed Deposit Status"; Rec."Fixed Deposit Status")
                 {
                     ApplicationArea = Basic, Suite;
-                    Editable = HeaderA;
+                    // Editable = HeaderA;
+                }
+                field("FD Date Renewed"; Rec."FD Date Renewed")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = false;
                 }
                 field("FD Maturity Date"; Rec."FD Maturity Date")
                 {
@@ -157,25 +164,6 @@ page 52186739 "Fixed Deposit Contract"
 
     actions
     {
-        area(navigation)
-        {
-            group("&Customer")
-            {
-                Caption = '&Customer';
-                Image = Customer;
-                action(ApprovalEntries)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Approvals';
-                    Image = Approvals;
-
-                    trigger OnAction()
-                    begin
-                        // // ApprovalsMgmt.OpenApprovalEntriesPage(rec.RecordId);
-                    end;
-                }
-            }
-        }
         area(processing)
         {
             group(Process)
@@ -185,22 +173,24 @@ page 52186739 "Fixed Deposit Contract"
                 {
                     ApplicationArea = Basic;
                     Caption = 'Fixed/Call Deposit Certificate';
-                    // Enabled = OpenApprovalEntriesExist;
                     Image = Certificate;
                     Promoted = true;
                     PromotedCategory = Report;
-                    Visible = false;
 
                     trigger OnAction()
+                    var
+                        FixedDepositContract: Record "Fixed Deposit Contract";
                     begin
-
-                        Report.Run(Report::"Fixed Deposit Certificate", true, true, Rec);
+                        FixedDepositContract.Reset;
+                        FixedDepositContract.SetFilter("No.", Rec."No.");
+                        if FixedDepositContract.findFirst() then
+                            Report.Run(Report::"Fixed Deposit Certificate", true, true, FixedDepositContract);
                     end;
                 }
                 action(FixedDepositReceipt)
                 {
                     ApplicationArea = Basic;
-                    Caption = 'Fixed/Call Deposit Certificate';
+                    Caption = 'Fixed/Call Deposit Receipt';
                     // Enabled = OpenApprovalEntriesExist;
                     Image = Receipt;
                     Promoted = true;
@@ -229,6 +219,7 @@ page 52186739 "Fixed Deposit Contract"
 
                         Rec.TestField("FOSA Main Account No.");
                         Rec.CalcFields(Balance);
+                        rec.TestField("FD Duration");
 
                         // "Fixed Deposit Contract".Reset();
                         // "Fixed Deposit Contract".SetRange("No.", Rec."No.");
@@ -269,150 +260,7 @@ page 52186739 "Fixed Deposit Contract"
 
                     Visible = true;
 
-                    trigger OnAction()
-                    var
-                        FixedSetup: Record "Fixed Deposit Type";
-                        JournalPosting: Codeunit "Journal Posting";
-                        AccType: Enum "Gen. Journal Account Type";
-                        BalAccType: Enum "Gen. Journal Account Type";
-                        AccNo: Code[20];
-                        BalAccNo: Code[20];
-                        Amt: Decimal;
-                        LineNo: Integer;
-                        TransType: Enum "Transaction Types";
-                        DocNo: Code[20];
-                        PDate: Date;
-                        Dim1: Code[20];
-                        Dim2: Code[20];
-                        SavingsAccounts: Record "Savings Accounts";
-                        SavBal: Decimal;
-                        savingsLedger: record "Savings Ledger Entry";
-                    begin
-                        savingsLedger.Reset();
-                        savingsLedger.SetRange("Fixed Deposit Contract", Rec."No.");
-                        if savingsLedger.Find('-') then
-                            Error('This action does not allow for capital increase/ transacted account.');
-                        Rec.TestField(Status, Rec.Status::Approved);
-                        Temp.Get(UserId);
-                        Jtemplate := Temp."Fixed/Call Journal Template";
-                        JBatch := Temp."Fixed/Call Journal Batch";
 
-                        if Jtemplate = '' then begin
-                            Error('Ensure the Fixed/Call Deposit Journal Template is set up in Banking User Setup');
-                        end;
-
-                        if JBatch = '' then begin
-                            Error('Ensure the Fixed/Call Deposit Journal Batch is set up in Banking User Setup');
-                        end;
-
-                        GenJournalLine.Reset;
-                        GenJournalLine.SetRange("Journal Template Name", Jtemplate);
-                        GenJournalLine.SetRange("Journal Batch Name", JBatch);
-                        GenJournalLine.DeleteAll;
-
-                        SavingsAccounts.Reset();
-                        SavingsAccounts.SetRange("No.", Rec."FOSA Main Account No.");
-                        if SavingsAccounts.FindFirst() then begin
-                            SavingsAccounts.CalcFields("Balance (LCY)");
-                            SavBal := SavingsAccounts."Balance (LCY)";
-                            if SavBal < Rec."Fixed Deposit Amount" then Error('Saving Balance of %1 is not adequate to fund this contract of %2.', SavBal, Rec."Fixed Deposit Amount");
-
-                            //Debit FOSA Main Account
-                            GenJournalLine.Init;
-                            GenJournalLine."Journal Template Name" := Jtemplate;
-                            GenJournalLine."Line No." := LineNo;
-                            GenJournalLine."Journal Batch Name" := Jbatch;
-                            GenJournalLine."Document No." := Rec."No.";
-                            GenJournalLine."External Document No." := Rec."No.";
-                            GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
-                            GenJournalLine."Account No." := Rec."FOSA Main Account No.";
-                            GenJournalLine.Validate(GenJournalLine."Account No.");
-                            GenJournalLine."Posting Date" := Today;
-                            GenJournalLine.Description := 'From FOSA Main';
-                            GenJournalLine.Description := UpperCase(GenJournalLine.Description);
-                            GenJournalLine.Amount := Rec."Fixed Deposit Amount";
-                            GenJournalLine.Validate(GenJournalLine.Amount);
-                            GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
-                            GenJournalLine."Bal. Account No." := '';
-                            GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
-                            GenJournalLine."Fixed Deposit Contract" := Rec."No.";
-                            GenJournalLine."Shortcut Dimension 1 Code" := rec."Global Dimension 1 Code";
-                            GenJournalLine."Shortcut Dimension 2 Code" := rec."Global Dimension 2 Code";
-                            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
-                            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
-                            if GenJournalLine.Amount <> 0 then
-                                GenJournalLine.Insert;
-
-                            //Credit Fosa Main
-                            LineNo := LineNo + 10000;
-                            GenJournalLine.Init;
-                            GenJournalLine."Journal Template Name" := Jtemplate;
-                            GenJournalLine."Line No." := LineNo;
-                            GenJournalLine."Journal Batch Name" := Jbatch;
-                            GenJournalLine."Document No." := rec."No.";
-                            GenJournalLine."External Document No." := Rec."No.";
-                            GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
-                            GenJournalLine."Account No." := Rec."Fixed Deposit Account No.";
-                            GenJournalLine.Validate(GenJournalLine."Account No.");
-                            GenJournalLine."Posting Date" := Today;
-                            GenJournalLine.Description := 'To FD Contract';
-                            GenJournalLine.Description := UpperCase(GenJournalLine.Description);
-                            GenJournalLine.Amount := (Rec."Fixed Deposit Amount") * -1;
-                            GenJournalLine.Validate(GenJournalLine.Amount);
-                            GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
-                            GenJournalLine."Bal. Account No." := '';
-                            GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
-                            GenJournalLine."Fixed Deposit Contract" := rec."No.";
-                            GenJournalLine."Shortcut Dimension 1 Code" := rec."Global Dimension 1 Code";
-                            GenJournalLine."Shortcut Dimension 2 Code" := rec."Global Dimension 2 Code";
-                            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
-                            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
-                            if GenJournalLine.Amount <> 0 then
-                                GenJournalLine.Insert;
-
-                            //Post New
-                            GenJournalLine.Reset;
-                            GenJournalLine.SetRange("Journal Template Name", Jtemplate);
-                            GenJournalLine.SetRange("Journal Batch Name", Jbatch);
-                            if GenJournalLine.Find('-') then begin
-                                Codeunit.Run(Codeunit::"Gen. Jnl.-Post New", GenJournalLine);
-                            end;
-                            // Amt := Rec."Fixed Deposit Amount";
-                            // Dim1 := rec."Global Dimension 1 Code";
-                            // Dim2 := rec."Global Dimension 2 Code";
-                            // //Debit FD Account
-                            // LineNo := LineNo + 10000;
-                            // AccType := Acctype::Savings;
-                            // AccNo := Rec."Fixed Deposit Account No.";
-                            // DocNo := Rec."No.";
-                            // PDate := Today;
-                            // TransType := Transtype::" ";
-                            // BalAccType := Balacctype::"G/L Account";
-                            // BalAccNo := '';
-                            // Amt := Amt;
-                            // JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AccType, DocNo, 'Termination', Amt, AccNo, PDate, BalAccType,
-                            // BalAccNo, DocNo, Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-
-
-                            // //Credit Fosa Main
-                            // LineNo := LineNo + 10000;
-                            // AccType := Acctype::Savings;
-                            // AccNo := rec."FOSA Main Account No.";
-                            // TransType := Transtype::" ";
-                            // BalAccType := Balacctype::"G/L Account";
-                            // BalAccNo := '';
-                            // Amt := Amt;
-                            // JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AccType, DocNo, 'Termination', Amt * -1, AccNo, PDate, BalAccType,
-                            // BalAccNo, DocNo, Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
-                            // JournalPosting.CompletePosting(Jtemplate, JBatch);
-                            Rec.Balance := Rec."Fixed Deposit Amount";
-                            Rec."Fixed Deposit Status" := Rec."Fixed Deposit Status"::Active;
-                            Rec."Application Date" := today;
-                            Rec.Modify();
-                            Message('Funds Transfered Successfully!');
-
-                        end;
-                    end;
                 }
                 action(Terminate)
                 {
@@ -603,6 +451,9 @@ page 52186739 "Fixed Deposit Contract"
                         CustomApprovals: Codeunit "Custom Approvals Codeunit";
                     begin
                         rec.TestField("Interest Rate");
+                        if rec."FD Maturity Instructions" = rec."FD Maturity Instructions"::" " then Error('Maturity instructions must be indicated before performing the action!');
+                        if rec."FD Maturity Date" = 0D then Error('Maturity date must be indicated before performing the action!');
+
                         VarVariant := Rec;
                         if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then
                             CustomApprovals.OnSendDocForApproval(VarVariant);
@@ -641,13 +492,29 @@ page 52186739 "Fixed Deposit Contract"
 
                     trigger OnAction()
                     var
-
+                        ApprovalsMgmt: codeunit "Approvals Mgmt.";
                     begin
                         VarVariant := Rec;
                         if not confirm('Are you sure you want to reopen this document?') then exit;
                         Rec.Status := Rec.Status::Open;
+                        rec."Fixed Deposit Status" := rec."Fixed Deposit Status"::" ";
+                        ApprovalsMgmt.DeleteApprovalEntries(Rec.RecordId);
                         rec.modify;
                         Message('The document have been opened successfully.');
+                    end;
+                }
+                action(ApprovalEntries)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Approvals';
+                    Image = Approvals;
+                    PromotedCategory = Category4;
+                    promoted = true;
+                    trigger OnAction()
+                    var
+                        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+                    begin
+                        ApprovalsMgmt.OpenApprovalEntriesPage(rec.RecordId);
                     end;
                 }
             }

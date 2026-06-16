@@ -560,10 +560,18 @@ page 52186778 "Finance Role Center"
                     }
 
                 }
-                group("Loan Processed")
+                group("Loan Processing")
                 {
 
-                    Caption = 'Loans Processed';
+                    Caption = 'Loans Processing';
+
+                    action("Approved Loans List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        caption = 'Approved Loans List';
+                        RunObject = page "Loan Application List";
+                        RunPageView = where(status = filter(Approved), Posted = const(false));
+                    }
                     action("Loan Posted List")
                     {
                         ApplicationArea = Basic, Suite;
@@ -1904,6 +1912,13 @@ page 52186778 "Finance Role Center"
                 group("FixedDepositContract")
                 {
                     Caption = 'Fixed/Call Deposit Contracts';
+
+                    action("Saving Account Application")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Saving Account Application';
+                        RunObject = page "Savings Account Application";
+                    }
                     action("Fixed Deposit")
                     {
                         ApplicationArea = Basic, Suite;
@@ -2326,12 +2341,12 @@ page 52186778 "Finance Role Center"
                         //     Caption = 'Generate Dividend Posting Buffer';
                         //     RunObject = report "Dividend Posting Buffer";
                         // }
-                        action("Dividend Posting Buffer ")
-                        {
-                            ApplicationArea = all;
-                            Caption = 'Dividend Posting Buffer';
-                            RunObject = page "Dividend Posting Buffer";
-                        }
+                        // action("Dividend Posting Buffer ")
+                        // {
+                        //     ApplicationArea = all;
+                        //     Caption = 'Dividend Posting Buffer';
+                        //     RunObject = page "Dividend Posting Buffer";
+                        // }
                         group("Dividend Reports")
                         {
                             action("Dividends Register")

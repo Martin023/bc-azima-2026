@@ -1,6 +1,6 @@
 page 52185789 "Mpesa Applications List"
 {
-    CardPageID = "MBanking Applications";
+    //CardPageID = "MBanking Applications";
     Editable = false;
     PageType = List;
     SourceTable = "M-SACCO Applications";

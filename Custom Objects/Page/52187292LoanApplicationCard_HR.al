@@ -839,34 +839,34 @@ page 52187292 "Loan Application Card_HR"
                               "Client Code" = FIELD("Member No.");
             }
 
-            action("Repayment Method")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = Payment;
-                Promoted = true;
-                PromotedCategory = Process;
-                Visible = false;
-                PromotedIsBig = true;
-                RunObject = Page "Loan Payment Method";
-                RunPageLink = "Loan No." = FIELD("Loan No."),
-                              "Member No." = FIELD("Member No.");
+            // action("Repayment Method")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = Payment;
+            //     Promoted = true;
+            //     PromotedCategory = Process;
+            //     Visible = false;
+            //     PromotedIsBig = true;
+            //     RunObject = Page "Loan Payment Method";
+            //     RunPageLink = "Loan No." = FIELD("Loan No."),
+            //                   "Member No." = FIELD("Member No.");
 
-                trigger OnAction()
-                begin
+            //     trigger OnAction()
+            //     begin
 
-                    if Rec."Appraisal Parameter Type" = Rec."Appraisal Parameter Type"::"Check Off" then begin
-                        RepMethods.Reset;
-                        RepMethods.SetRange("Loan No.", Rec."Loan No.");
-                        if not RepMethods.Find('-') then begin
-                            RepMethods."Loan No." := Rec."Loan No.";
-                            RepMethods.Amount := Rec.Repayment;
-                            RepMethods."Member No." := Rec."Member No.";
-                            RepMethods."Payment Method" := RepMethods."Payment Method"::Checkoff;
-                            RepMethods.Insert;
-                        end;
-                    end;
-                end;
-            }
+            //         if Rec."Appraisal Parameter Type" = Rec."Appraisal Parameter Type"::"Check Off" then begin
+            //             RepMethods.Reset;
+            //             RepMethods.SetRange("Loan No.", Rec."Loan No.");
+            //             if not RepMethods.Find('-') then begin
+            //                 RepMethods."Loan No." := Rec."Loan No.";
+            //                 RepMethods.Amount := Rec.Repayment;
+            //                 RepMethods."Member No." := Rec."Member No.";
+            //                 RepMethods."Payment Method" := RepMethods."Payment Method"::Checkoff;
+            //                 RepMethods.Insert;
+            //             end;
+            //         end;
+            //     end;
+            // }
 
             action("Other Commitments Clearance")
             {
@@ -1782,24 +1782,6 @@ page 52187292 "Loan Application Card_HR"
                     if TotalAssetFin >= Rec."Approved Amount" then
                         Error(Text014, TotalAssetFin, Rec."Approved Amount");
 
-
-
-                    //ConfirmReyments
-                    LoanRepay := 0;
-                    PaymentMethods.Reset;
-                    PaymentMethods.SetRange(PaymentMethods."Loan No.", Rec."Loan No.");
-                    PaymentMethods.SetRange(PaymentMethods."Member No.", Rec."Member No.");
-                    if PaymentMethods.Find('-') then begin
-                        repeat
-                            LoanRepay := LoanRepay + PaymentMethods.Amount;
-                        until PaymentMethods.Next = 0;
-                    end;
-                    if LoanRepay <> 0 then begin
-                        if LoanRepay <> Rec.Repayment then
-                            Error(ErrMssage);
-                    end;
-                    //
-
                     Members.Get(Rec."Member No.");
                     if Members.Status <> Members.Status::Active then
                         Error("InactiveErr:");
@@ -2479,7 +2461,6 @@ page 52187292 "Loan Application Card_HR"
         RevolvingBal: Decimal;
         GLAcc: Record "G/L Account";
         Text004: Label 'The fund is already exhausted';
-        PaymentMethods: Record "Payment Methods";
         LoanRepay: Decimal;
         ErrMssage: Label 'Repayment distribution is not equal to the loan repayment amount';
         Text005: Label 'Amount guaranteed is less than approved amount';
@@ -2487,7 +2468,6 @@ page 52187292 "Loan Application Card_HR"
         Text007: Label 'Both Minimum Guarantors on Max Amt and Max Amt on Guarantors must be defined';
         Text008: Label 'The number of guarantors expected is less than the expected number of %1 where amount is more than %2';
         "InactiveErr:": Label 'This member is not active thus cannot qualify for a loan';
-        RepMethods: Record "Payment Methods";
         CompInfo: Record "Company Information";
         Text009: Label 'This product requires salary details';
         EndDateSalo: Date;

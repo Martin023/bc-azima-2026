@@ -98,5 +98,74 @@ table 52186192 "HR Heads of Departments"
         DimensionValue: Record "Dimension Value";
         HREmp: Record "HR Employees";
         UserSetup: Record "User Setup";
+
+    //ADDED HELPER PROCEDURES FOR DEPARTMENT TARGETS INTEGRATION
+    procedure CheckHODAccess(UserID: Code[50]; DepartmentCode: Code[20]): Boolean
+    var
+        HREmp: Record "HR Employees";
+        HRHOD: Record "HR Heads of Departments";
+    begin
+        HREmp.Reset;
+        HREmp.SetRange(HREmp."User ID", UserID);
+        if HREmp.Find('-') then begin
+            HRHOD.Reset;
+            HRHOD.SetRange(HRHOD."Employee No.", HREmp."No.");
+            HRHOD.SetRange(HRHOD."Global Dimension 1 Code", DepartmentCode);
+            if HRHOD.Find('-') then
+                exit(true);
+        end;
+        exit(false);
+    end;
+
+    procedure GetHODDepartments(UserID: Code[50]): Text
+    var
+        HREmp: Record "HR Employees";
+        HRHOD: Record "HR Heads of Departments";
+        DepartmentList: Text;
+    begin
+        DepartmentList := '';
+        HREmp.Reset;
+        HREmp.SetRange(HREmp."User ID", UserID);
+        if HREmp.Find('-') then begin
+            HRHOD.Reset;
+            HRHOD.SetRange(HRHOD."Employee No.", HREmp."No.");
+            if HRHOD.Find('-') then begin
+                repeat
+                    if DepartmentList = '' then
+                        DepartmentList := HRHOD."Global Dimension 1 Code"
+                    else
+                        DepartmentList := DepartmentList + '|' + HRHOD."Global Dimension 1 Code";
+                until HRHOD.Next = 0;
+            end;
+        end;
+        exit(DepartmentList);
+    end;
+
+    procedure IsHOD(UserID: Code[50]): Boolean
+    var
+        HREmp: Record "HR Employees";
+        HRHOD: Record "HR Heads of Departments";
+    begin
+        HREmp.Reset;
+        HREmp.SetRange(HREmp."User ID", UserID);
+        if HREmp.Find('-') then begin
+            HRHOD.Reset;
+            HRHOD.SetRange(HRHOD."Employee No.", HREmp."No.");
+            if HRHOD.Find('-') then
+                exit(true);
+        end;
+        exit(false);
+    end;
+
+    procedure GetHODEmployeeNo(UserID: Code[50]): Code[20]
+    var
+        HREmp: Record "HR Employees";
+    begin
+        HREmp.Reset;
+        HREmp.SetRange(HREmp."User ID", UserID);
+        if HREmp.Find('-') then
+            exit(HREmp."No.");
+        exit('');
+    end;
 }
 

@@ -47,6 +47,15 @@ table 52185773 "Transaction Types"
             OptionCaption = ' ,Cashier';
             OptionMembers = " ",Cashier;
         }
+        field(16; "Exclude Salary Deductions"; Boolean)
+        {
+        }
+        field(17; "Sal. Deposit Deduction"; Decimal)
+        {
+            MinValue = 0;
+            MaxValue = 100000;
+        }
+
     }
 
     keys

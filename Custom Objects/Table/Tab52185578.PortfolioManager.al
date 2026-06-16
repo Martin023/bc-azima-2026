@@ -14,6 +14,7 @@ table 52185578 "Portfolio Manager"
         field(2; "Sales Representative"; Code[20])
         {
             Caption = 'Sales Representative';
+            tableRelation = "Marketing Teams Header"."Payroll No.";
         }
         field(3; "Sales Rep Name"; Text[1000])
         {
@@ -39,7 +40,7 @@ table 52185578 "Portfolio Manager"
         {
             Caption = 'Comments';
         }
-        field(8; Status; Enum "ABS Blob Access Tier")
+        field(8; Status; Enum "Workflow Status Main Flags")
         {
             Editable = false;
             Caption = 'Status';
@@ -49,6 +50,18 @@ table 52185578 "Portfolio Manager"
             Editable = false;
             Caption = 'Created By';
         }
+        field(10; "Incoming Sales Rep"; Code[30])
+        {
+            tableRelation = "Marketing Teams Header"."Payroll No.";
+        }
+        field(11; "Incoming Rep Name"; Text[1000])
+        {
+            Editable = false;
+            Caption = 'Incoming Rep Name';
+            FieldClass = FlowField;
+            CalcFormula = lookup("HR Employees"."Full Name" where("No." = field("Incoming Sales Rep")));
+        }
+
     }
     keys
     {

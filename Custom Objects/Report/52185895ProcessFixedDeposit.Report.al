@@ -4,6 +4,9 @@ Report 52185895 "Process Fixed Deposit"
     // DefaultLayout = RDLC;
     // RDLCLayout = './bc-azima-2026/Layout/Process Fixed Deposit.rdl';
     ProcessingOnly = true;
+    ApplicationArea = Basic;
+    UsageCategory = tasks;
+
 
     dataset
     {
@@ -11,22 +14,22 @@ Report 52185895 "Process Fixed Deposit"
         {
             DataItemTableView = where("Product Category" = const("Fixed Deposit"), "Fixed Deposit Status" = const(Active));//, "Balance (LCY)" = filter(> 0));
             RequestFilterFields = "No.";
-            column(ReportForNavId_1; 1)
-            {
-            }
+            // column(ReportForNavId_1; 1)
+            // {
+            // }
 
             trigger OnAfterGetRecord()
             begin
 
                 // if "Fixed Deposit Contract".Balance <= 0 then Error('Fixed Deposit Contract must have a a balance of greater 0, current balance is %1.', "Fixed Deposit Contract".Balance);
                 // if "Fixed Deposit Contract"."FD Maturity Date" > Today then Error('This Fixed deposit maturity is %1. For payment, proceed to terminate.', "Fixed Deposit Contract"."FD Maturity Date");
-                RunDate := "Fixed Deposit Contract"."FD Maturity Date";
-                if RunDate = 0D then begin
-                    if "Fixed Deposit Contract"."Application Date" = 0D then "Fixed Deposit Contract"."Application Date" := today;
-                    if Format("Fixed Deposit Contract"."FD Duration") <> '' then
-                        RunDate := CalcDate("Fixed Deposit Contract"."FD Duration", "Fixed Deposit Contract"."Application Date") else
-                        RunDate := CalcDate('1D', "Fixed Deposit Contract"."Application Date")
-                end;
+                //RunDate := "Fixed Deposit Contract"."FD Maturity Date";
+                // if RunDate = 0D then begin
+                //     if "Fixed Deposit Contract"."Application Date" = 0D then "Fixed Deposit Contract"."Application Date" := today;
+                //     if Format("Fixed Deposit Contract"."FD Duration") <> '' then
+                //         RunDate := CalcDate("Fixed Deposit Contract"."FD Duration", "Fixed Deposit Contract"."Application Date") else
+                //         RunDate := CalcDate('1D', "Fixed Deposit Contract"."Application Date")
+                // end;
                 IF RunDate = 0D THEN
                     RunDate := TODAY;
 
@@ -74,45 +77,7 @@ Report 52185895 "Process Fixed Deposit"
             trigger OnPreDataItem()
             begin
 
-                // if "Fixed Deposit Contract".Balance <= 0 then Error('Fixed Deposit Contract must have a a balance of greater 0, current balance is %1.', "Fixed Deposit Contract".Balance);
-                // if "Fixed Deposit Contract"."FD Maturity Date" > Today then Error('This Fixed deposit maturity is %1. For payment, proceed to terminate.', "Fixed Deposit Contract"."FD Maturity Date");
-                // RunDate := "Fixed Deposit Contract"."FD Maturity Date";
-                // if RunDate = 0D then begin
-                //     if "Fixed Deposit Contract"."Application Date" = 0D then "Fixed Deposit Contract"."Application Date" := today;
-                //     if Format("Fixed Deposit Contract"."FD Duration") <> '' then
-                //         RunDate := CalcDate("Fixed Deposit Contract"."FD Duration", "Fixed Deposit Contract"."Application Date") else
-                //         RunDate := CalcDate('1D', "Fixed Deposit Contract"."Application Date")
-                // end;
-
-                if RunDate = 0D then
-                    RunDate := Today;
-
-
-                Temp.Get(UserId);
-
-                JTemplate := Temp."Cashier Journal Template";
-                JBatch := Temp."Cashier Journal Batch";
-
-                GenJournalLine.Reset;
-                GenJournalLine.SetRange("Journal Template Name", JTemplate);
-                GenJournalLine.SetRange("Journal Batch Name", JBatch);
-                if GenJournalLine.Find('-') then
-                    GenJournalLine.DeleteAll;
-
-
-                DefaultBatch.Reset;
-                DefaultBatch.SetRange(DefaultBatch."Journal Template Name", JTemplate);
-                DefaultBatch.SetRange(DefaultBatch.Name, JBatch);
-                if DefaultBatch.Find('-') = false then begin
-
-                    DefaultBatch.Init;
-                    DefaultBatch."Journal Template Name" := JTemplate;
-                    DefaultBatch.Name := JBatch;
-                    DefaultBatch.Description := 'Fixed Deposit Journal';
-                    DefaultBatch.Validate(DefaultBatch."Journal Template Name");
-                    DefaultBatch.Validate(DefaultBatch.Name);
-                    DefaultBatch.Insert;
-                end;
+              
             end;
         }
     }
@@ -123,6 +88,14 @@ Report 52185895 "Process Fixed Deposit"
 
         layout
         {
+            area(content)
+            {
+                field(RunDate; RunDate)
+                {
+
+                }
+
+            }
         }
 
         actions

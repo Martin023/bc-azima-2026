@@ -62,10 +62,10 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>0.0cm</Top>
             <Left>0.1cm</Left>
             <Height>1.2cm</Height>
             <Width>7.6cm</Width>
+            <Style />
           </Textbox>
           <Textbox Name="ReprintTextbox">
             <CanGrow>true</CanGrow>
@@ -90,6 +90,8 @@
             <Left>0.1cm</Left>
             <Height>0.4cm</Height>
             <Width>7.6cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style />
           </Textbox>
           <Textbox Name="TitleTextbox">
             <CanGrow>true</CanGrow>
@@ -115,6 +117,8 @@
             <Left>0.1cm</Left>
             <Height>0.4cm</Height>
             <Width>7.6cm</Width>
+            <ZIndex>2</ZIndex>
+            <Style />
           </Textbox>
           <Textbox Name="Textbox35">
             <CanGrow>true</CanGrow>
@@ -137,12 +141,15 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
+                <Style />
               </Paragraph>
             </Paragraphs>
             <Top>2.3cm</Top>
             <Left>0.1cm</Left>
             <Height>0.4cm</Height>
             <Width>7.6cm</Width>
+            <ZIndex>3</ZIndex>
+            <Style />
           </Textbox>
           <Textbox Name="Available_Balance_Caption18">
             <KeepTogether>true</KeepTogether>
@@ -166,6 +173,7 @@
                   </TextRun>
                   <TextRun>
                     <Value xml:space="preserve">               </Value>
+                    <Style />
                   </TextRun>
                   <TextRun>
                     <Value>=First(Fields!Transactions_Transactions__Transaction_Time_.Value, "DataSet_Result")</Value>
@@ -176,12 +184,15 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
+                <Style />
               </Paragraph>
             </Paragraphs>
             <Top>2.8cm</Top>
             <Left>0.1cm</Left>
             <Height>0.4cm</Height>
             <Width>7.6cm</Width>
+            <ZIndex>4</ZIndex>
+            <Style />
           </Textbox>
           <Textbox Name="Textbox3">
             <CanGrow>true</CanGrow>
@@ -204,12 +215,15 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
+                <Style />
               </Paragraph>
             </Paragraphs>
             <Top>3.3cm</Top>
             <Left>0.1cm</Left>
             <Height>0.4cm</Height>
             <Width>7.6cm</Width>
+            <ZIndex>5</ZIndex>
+            <Style />
           </Textbox>
           <Textbox Name="Textbox29">
             <CanGrow>true</CanGrow>
@@ -232,12 +246,15 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
+                <Style />
               </Paragraph>
             </Paragraphs>
             <Top>3.8cm</Top>
             <Left>0.1cm</Left>
             <Height>0.4cm</Height>
             <Width>7.6cm</Width>
+            <ZIndex>6</ZIndex>
+            <Style />
           </Textbox>
           <Textbox Name="Textbox25">
             <CanGrow>true</CanGrow>
@@ -260,12 +277,15 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
+                <Style />
               </Paragraph>
             </Paragraphs>
             <Top>4.3cm</Top>
             <Left>0.1cm</Left>
             <Height>0.4cm</Height>
             <Width>7.6cm</Width>
+            <ZIndex>7</ZIndex>
+            <Style />
           </Textbox>
           <Textbox Name="Textbox26">
             <CanGrow>true</CanGrow>
@@ -288,12 +308,15 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
+                <Style />
               </Paragraph>
             </Paragraphs>
             <Top>4.8cm</Top>
             <Left>0.1cm</Left>
             <Height>0.4cm</Height>
             <Width>7.6cm</Width>
+            <ZIndex>8</ZIndex>
+            <Style />
           </Textbox>
           <Tablix Name="Tablix1">
             <TablixBody>
@@ -302,10 +325,10 @@
                   <Width>2.6cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.0cm</Width>
+                  <Width>3cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.0cm</Width>
+                  <Width>2cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -327,8 +350,10 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
+                              <Style />
                             </Paragraph>
                           </Paragraphs>
+                          <Style />
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -347,8 +372,10 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
+                              <Style />
                             </Paragraph>
                           </Paragraphs>
+                          <Style />
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -372,6 +399,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
+                          <Style />
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -393,12 +421,13 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
+                              <Style />
                             </Paragraph>
                           </Paragraphs>
                           <Style>
                             <BottomBorder>
-                              <Style>Dotted</Style>
                               <Color>LightGrey</Color>
+                              <Style>Dotted</Style>
                             </BottomBorder>
                           </Style>
                         </Textbox>
@@ -417,12 +446,13 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
+                              <Style />
                             </Paragraph>
                           </Paragraphs>
                           <Style>
                             <BottomBorder>
-                              <Style>Dotted</Style>
                               <Color>LightGrey</Color>
+                              <Style>Dotted</Style>
                             </BottomBorder>
                           </Style>
                         </Textbox>
@@ -449,8 +479,8 @@
                           </Paragraphs>
                           <Style>
                             <BottomBorder>
-                              <Style>Dotted</Style>
                               <Color>LightGrey</Color>
+                              <Style>Dotted</Style>
                             </BottomBorder>
                           </Style>
                         </Textbox>
@@ -491,6 +521,8 @@
             <Left>0.1cm</Left>
             <Height>0.9cm</Height>
             <Width>7.6cm</Width>
+            <ZIndex>9</ZIndex>
+            <Style />
           </Tablix>
           <Textbox Name="Textbox27">
             <CanGrow>true</CanGrow>
@@ -523,6 +555,8 @@
             <Left>0.1cm</Left>
             <Height>0.4cm</Height>
             <Width>7.6cm</Width>
+            <ZIndex>10</ZIndex>
+            <Style />
           </Textbox>
           <Textbox Name="AmountInWordsTextbox">
             <CanGrow>true</CanGrow>
@@ -545,12 +579,15 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
+                <Style />
               </Paragraph>
             </Paragraphs>
             <Top>7.1cm</Top>
             <Left>0.1cm</Left>
             <Height>0.8cm</Height>
             <Width>7.6cm</Width>
+            <ZIndex>11</ZIndex>
+            <Style />
           </Textbox>
           <Textbox Name="SignaturesTextbox">
             <CanGrow>true</CanGrow>
@@ -566,6 +603,7 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
+                <Style />
               </Paragraph>
               <Paragraph>
                 <TextRuns>
@@ -577,6 +615,7 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
+                <Style />
               </Paragraph>
               <Paragraph>
                 <TextRuns>
@@ -588,12 +627,15 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
+                <Style />
               </Paragraph>
             </Paragraphs>
             <Top>8.1cm</Top>
             <Left>0.1cm</Left>
             <Height>1.2cm</Height>
             <Width>7.6cm</Width>
+            <ZIndex>12</ZIndex>
+            <Style />
           </Textbox>
           <Textbox Name="ServedByTextbox">
             <CanGrow>true</CanGrow>
@@ -609,19 +651,22 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=IIF(First(Fields!CashierName.Value, "DataSet_Result") &lt;&gt; "", First(Fields!CashierName.Value, "DataSet_Result"), First(Fields!Transactions_Transactions_Cashier.Value, "DataSet_Result"))</Value>
+                    <Value>=First(Fields!CashierName.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
+                <Style />
               </Paragraph>
             </Paragraphs>
             <Top>9.5cm</Top>
             <Left>0.1cm</Left>
             <Height>0.4cm</Height>
             <Width>7.6cm</Width>
+            <ZIndex>13</ZIndex>
+            <Style />
           </Textbox>
           <Textbox Name="ThankYouTextbox">
             <CanGrow>true</CanGrow>
@@ -637,12 +682,15 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
+                <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>10.0cm</Top>
+            <Top>10cm</Top>
             <Left>0.1cm</Left>
             <Height>0.8cm</Height>
             <Width>7.6cm</Width>
+            <ZIndex>14</ZIndex>
+            <Style />
           </Textbox>
           <Textbox Name="ReprintTimestamp2">
             <CanGrow>true</CanGrow>
@@ -659,27 +707,32 @@
                     </Style>
                   </TextRun>
                 </TextRuns>
+                <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>11.0cm</Top>
+            <Top>11cm</Top>
             <Left>0.1cm</Left>
             <Height>0.4cm</Height>
             <Width>7.6cm</Width>
+            <ZIndex>15</ZIndex>
             <Visibility>
               <Hidden>=IIf(First(Fields!Reprint.Value, "DataSet_Result") = "REPRINT", False, True)</Hidden>
             </Visibility>
+            <Style />
           </Textbox>
         </ReportItems>
-        <Height>12.0cm</Height>
+        <Height>12cm</Height>
+        <Style />
       </Body>
       <Width>7.8cm</Width>
       <Page>
-        <PageHeight>15.0cm</PageHeight>
-        <PageWidth>8.0cm</PageWidth>
+        <PageHeight>15cm</PageHeight>
+        <PageWidth>8cm</PageWidth>
         <LeftMargin>0.1cm</LeftMargin>
         <RightMargin>0.1cm</RightMargin>
         <TopMargin>0.1cm</TopMargin>
         <BottomMargin>0.1cm</BottomMargin>
+        <Style />
       </Page>
     </ReportSection>
   </ReportSections>

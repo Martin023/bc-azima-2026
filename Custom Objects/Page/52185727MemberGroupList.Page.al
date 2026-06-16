@@ -26,21 +26,21 @@ page 52185727 "Member Group List"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("First Name"; Rec."First Name")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Visible = false;
-                }
-                field("Middle Name"; Rec."Middle Name")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Visible = false;
-                }
-                field("Other Names"; Rec."Other Names")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Visible = false;
-                }
+                // field("First Name"; Rec."First Name")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Visible = false;
+                // }
+                // field("Middle Name"; Rec."Middle Name")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Visible = false;
+                // }
+                // field("Other Names"; Rec."Other Names")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Visible = false;
+                // }
 
                 field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
@@ -110,36 +110,36 @@ page 52185727 "Member Group List"
                     ApplicationArea = Basic, Suite;
                     Caption = 'FOSA Account Balance';
                 }
-                field("Deposit Account No."; BOSAAccNo)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Deposit Account No.';
-                }
-                field("Deposit Account Status"; BOSAAccStatus)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Deposit Account Status';
-                }
-                field("Deposit Account Balance"; Rec."BOSA Deposit")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Deposit Account Balance';
-                }
-                field("Share Capital Account No."; ShareCapitalAccNo)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Share Capital Account No.';
-                }
-                field("Share Capital Account Status"; ShareCapitalAccStatus)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Share Capital Account Status';
-                }
-                field("Share Capital Account Balance"; Rec."Share Capital")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Share Capital Account Balance';
-                }
+                // field("Deposit Account No."; BOSAAccNo)
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Deposit Account No.';
+                // }
+                // field("Deposit Account Status"; BOSAAccStatus)
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Deposit Account Status';
+                // }
+                // field("Deposit Account Balance"; Rec."BOSA Deposit")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Deposit Account Balance';
+                // }
+                // field("Share Capital Account No."; ShareCapitalAccNo)
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Share Capital Account No.';
+                // }
+                // field("Share Capital Account Status"; ShareCapitalAccStatus)
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Share Capital Account Status';
+                // }
+                // field("Share Capital Account Balance"; Rec."Share Capital")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Share Capital Account Balance';
+                // }
                 field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = Basic, Suite;

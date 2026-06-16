@@ -11,9 +11,10 @@ table 52185486 "Sales Route Plans"
             Caption = 'No';
             Editable = false;
         }
-        field(2; Desription; Text[1000])
+        field(2; Target; Text[1000])
         {
-            Caption = 'Desription';
+            Caption = 'Activities/Target';
+
         }
         field(3; "Place to visit"; Code[50])
         {
@@ -38,6 +39,38 @@ table 52185486 "Sales Route Plans"
             OptionMembers = Active,Closed;
             Caption = 'Status';
         }
+        field(7; "Sales Representative"; Code[50])
+        {
+            Caption = 'Sales Representative';
+            Tablerelation = "Marketing Teams Header"."Payroll No.";
+        }
+        field(8; "Route Date"; Date)
+        {
+            Caption = 'Route Date';
+
+            trigger OnValidate()
+            var
+                Date: record Date;
+            begin
+                Date.Reset();
+                Date.SetRange("Period Type", Date."Period Type"::"Date");
+                Date.SetRange("Period Start", rec."Route Date");
+                if Date.Find('-') then begin
+                    Day := Date."Period Name";
+                end;
+            end;
+        }
+        field(9; Day; Text[30])
+        {
+            Editable = false;
+            Caption = 'Day';
+        }
+        field(10; "BDE Comments"; Text[1000])
+        {
+            Caption = 'BM/MO Comments';
+
+        }
+
     }
     keys
     {

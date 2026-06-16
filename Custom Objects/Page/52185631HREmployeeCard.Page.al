@@ -13,11 +13,18 @@ page 52185631 "HR Employee Card"
             group("General Details")
             {
                 Caption = 'General Details';
+                //field("No."; Rec."No.")
+                //{
+                //    ApplicationArea = Basic;
+                //    Importance = Promoted;
+                //    Editable = False;
+                //}
+                //NEW FIELD - EDITABLE TO ALLOW MANUAL ALPHANUMERIC INPUT
                 field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
-                    Editable = False;
+                    Editable = true;
 
                     trigger OnAssistEdit()
                     begin
@@ -348,9 +355,15 @@ page 52185631 "HR Employee Card"
                             Message('Please input certificate number.');
                     end;
                 }
-                field("Certificate No."; Rec."Certificate No.")
+                //CHANGED FROM "Certificate No." TO "KRA Cert. No."
+                //field("Certificate No."; Rec."Certificate No.")
+                //{
+                //    Editable = MKS;
+                //}
+                field("KRA Cert. No."; Rec."KRA Cert. No.")
                 {
                     Editable = MKS;
+                    Caption = 'KRA Certificate No.';
                 }
             }
             group("Communication Details")
@@ -1212,8 +1225,11 @@ page 52185631 "HR Employee Card"
                         CustomApprovals: Codeunit "Custom Approvals Codeunit";
                     begin
                         if Rec.Disabled = Rec.Disabled::Yes then begin
-                            if rec."Certificate No." = '' then
-                                Error('Please Capture the Disability Certificate No. for the disabled Employee.');
+                            //CHANGED FROM "Certificate No." TO "KRA Cert. No."
+                            //if rec."Certificate No." = '' then
+                            //    Error('Please Capture the Disability Certificate No. for the disabled Employee.');
+                            if rec."KRA Cert. No." = '' then
+                                Error('Please Capture the Disability KRA Certificate No. for the disabled Employee.');
                         end;
 
                         VarVariant := Rec;
@@ -1379,8 +1395,15 @@ page 52185631 "HR Employee Card"
         SetControlAppearance();
         UpdateControls();
         //UpdateMonthlyLeaveDays();
-        if rec.Status <> rec.status::New then
-            CurrPage.Editable := false else
+        //BLOCKED ALL EDITS FOR NON-NEW EMPLOYEES
+        //if rec.Status <> rec.status::New then
+        //    CurrPage.Editable := false else
+        //    CurrPage.Editable := true;
+        
+        //ALLOW EDITS FOR ACTIVE EMPLOYEES, BLOCK ONLY PENDING APPROVAL
+        if rec.Status = rec.Status::"Pending Approval" then
+            CurrPage.Editable := false
+        else
             CurrPage.Editable := true;
 
         if rec."No." <> '' then begin
@@ -1704,8 +1727,15 @@ page 52185631 "HR Employee Card"
 
     local procedure UpdateControls()
     begin
-        if rec.Status <> rec.Status::New then
-            CurrPage.EDITABLE := false;
+        //BLOCKED ALL EDITS FOR NON-NEW EMPLOYEES
+        //if rec.Status <> rec.Status::New then
+        //    CurrPage.EDITABLE := false;
+        
+        //ALLOW EDITS FOR ACTIVE EMPLOYEES, BLOCK ONLY PENDING APPROVAL
+        if Rec.Status = Rec.Status::"Pending Approval" then
+            CurrPage.EDITABLE := false
+        else
+            CurrPage.EDITABLE := true;
 
 
         if Rec.Status = Rec.Status::New then begin
@@ -1745,23 +1775,42 @@ page 52185631 "HR Employee Card"
             MKS := False;
         end;
 
-
+        //BLOCKED EDITS FOR ACTIVE EMPLOYEES
+        //if Rec.Status = Rec.Status::Active then begin
+        //    InvTcode := false;
+        //    Inst := false;
+        //    DepType := false;
+        //    IntMode := false;
+        //    CurrCode := false;
+        //    RespCenter := false;
+        //    Rmks := false;
+        //    WtaxCode := false;
+        //    INVdate := false;
+        //    pType := false;
+        //    Freq := false;
+        //    Intrate := false;
+        //    Mmarketpage := false;
+        //    Dimension := False;
+        //    MKS := False;
+        //end;
+        
+        //ALLOW EDITS FOR ACTIVE EMPLOYEES
         if Rec.Status = Rec.Status::Active then begin
-            InvTcode := false;
-            Inst := false;
-            DepType := false;
-            IntMode := false;
-            CurrCode := false;
-            RespCenter := false;
-            Rmks := false;
-            WtaxCode := false;
-            INVdate := false;
-            pType := false;
-            Freq := false;
-            Intrate := false;
-            Mmarketpage := false;
-            Dimension := False;
-            MKS := False;
+            InvTcode := true;
+            Inst := true;
+            DepType := true;
+            IntMode := true;
+            CurrCode := true;
+            RespCenter := true;
+            Rmks := true;
+            WtaxCode := true;
+            INVdate := true;
+            pType := true;
+            Freq := true;
+            Intrate := true;
+            Mmarketpage := true;
+            Dimension := true;
+            MKS := true;
         end;
 
     end;

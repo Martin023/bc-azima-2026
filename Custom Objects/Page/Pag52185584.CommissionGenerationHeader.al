@@ -7,6 +7,7 @@ page 52185584 "Commission Generation List"
     PageType = List;
     SourceTable = Commission;
     UsageCategory = Lists;
+    CardPageId = "Commission Generation Card";
 
     layout
     {
@@ -18,7 +19,7 @@ page 52185584 "Commission Generation List"
                 {
                     ToolTip = 'Specifies the value of the ID field.', Comment = '%';
                 }
-               
+
 
             }
         }

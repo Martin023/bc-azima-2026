@@ -1809,24 +1809,6 @@ page 52186820 "Bosa Commecial Loan"
                     if TotalAssetFin >= Rec."Approved Amount" then
                         Error(Text014, TotalAssetFin, Rec."Approved Amount");
 
-
-
-                    //ConfirmReyments
-                    LoanRepay := 0;
-                    PaymentMethods.Reset;
-                    PaymentMethods.SetRange(PaymentMethods."Loan No.", Rec."Loan No.");
-                    PaymentMethods.SetRange(PaymentMethods."Member No.", Rec."Member No.");
-                    if PaymentMethods.Find('-') then begin
-                        repeat
-                            LoanRepay := LoanRepay + PaymentMethods.Amount;
-                        until PaymentMethods.Next = 0;
-                    end;
-                    if LoanRepay <> 0 then begin
-                        if LoanRepay <> Rec.Repayment then
-                            Error(ErrMssage);
-                    end;
-                    //
-
                     Members.Get(Rec."Member No.");
                     if Members.Status <> Members.Status::Active then
                         Error("InactiveErr:");

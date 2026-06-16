@@ -248,12 +248,6 @@ page 52187312 "Credit Management Role Center"
                         RunObject = page "Approved Loans List";
                         // RunPageView = where("Source Unit" = const(BOSA));
                     }
-                    action("Loan Disbursement List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        caption = 'Loan Disbursement List';
-                        RunObject = page "Loan Disbursement List";
-                    }
                     action("Deferred Loan Application List")
                     {
                         ApplicationArea = Basic, Suite;
@@ -272,10 +266,11 @@ page 52187312 "Credit Management Role Center"
 
                 }
 
+
                 group("Loan Processed")
                 {
 
-                    Caption = 'Loan Processed';
+                    Caption = 'Posted/Reversed Loans';
                     action("Loan Posted List")
                     {
                         ApplicationArea = Basic, Suite;
@@ -303,6 +298,17 @@ page 52187312 "Credit Management Role Center"
                         caption = 'Reversed Loan List';
                         RunObject = page "Loan Posted List";
                         RunPageView = where("Source Unit" = filter(<> "HR LOANS"), "Reversed" = filter(true));
+                    }
+
+                }
+                group(LoanBatchingList)
+                {
+                    Caption = 'Partial/Batch Disbursements';
+                    action("Loan Disbursement List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        caption = 'Loan Disbursement List';
+                        RunObject = page "Loan Disbursement List";
                     }
                     action("Posted Loan Disbursment List")
                     {
@@ -1143,7 +1149,7 @@ page 52187312 "Credit Management Role Center"
                     }
                     group("Single Refunds")
                     {
-                        action("Account Trasfer")
+                        action("Account Transfer")
                         {
                             ApplicationArea = Basic, Suite;
                             Caption = 'Account Transfer List(Single Member)';
@@ -1591,41 +1597,46 @@ page 52187312 "Credit Management Role Center"
                     Caption = 'Product & references';
                     RunObject = page "Product & references";
                 }
-                action("Checkoff Header List")
+                group("Checkoff Posting")
                 {
-                    ApplicationArea = all;
-                    Caption = 'Open Checkoff Header List';
-                    RunObject = page "Checkoff Header List";
-                    RunPageLink = Posted = const(false), Status = const(Open);
+                    Caption = 'Checkoff Posting';
+                    action("Checkoff Header List")
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Open Checkoff Header List';
+                        RunObject = page "Checkoff Header List";
+                        RunPageLink = Posted = const(false), Status = const(Open);
+                    }
+                    action("Pending Checkoff Header List")
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Pending Checkoff Header List';
+                        RunObject = page "Checkoff Header List";
+                        RunPageLink = Posted = const(false), Status = const(Pending);
+                    }
+                    action("Approved Checkoff Header")
+                    {
+                        Caption = 'Approved Checkoff Header List';
+                        ApplicationArea = all;
+                        RunObject = page "Checkoff Header List";
+                        RunPageLink = Posted = const(false), Status = const(Approved);
+                    }
+                    action("Posted Checkoff Header")
+                    {
+                        Caption = 'Posted Checkoff Header List';
+                        ApplicationArea = all;
+                        RunObject = page "Checkoff Header List";
+                        RunPageLink = Posted = const(true);
+                    }
+                    action("Rejected Checkoff Header")
+                    {
+                        Caption = 'Rejected Checkoff Header List';
+                        ApplicationArea = all;
+                        RunObject = page "Checkoff Header List";
+                        RunPageLink = Posted = const(false), Status = const(Rejected);
+                    }
                 }
-                action("Pending Checkoff Header List")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Pending Checkoff Header List';
-                    RunObject = page "Checkoff Header List";
-                    RunPageLink = Posted = const(false), Status = const(Pending);
-                }
-                action("Approved Checkoff Header")
-                {
-                    Caption = 'Approved Checkoff Header List';
-                    ApplicationArea = all;
-                    RunObject = page "Checkoff Header List";
-                    RunPageLink = Posted = const(false), Status = const(Approved);
-                }
-                action("Posted Checkoff Header")
-                {
-                    Caption = 'Posted Checkoff Header List';
-                    ApplicationArea = all;
-                    RunObject = page "Checkoff Header List";
-                    RunPageLink = Posted = const(true);
-                }
-                action("Rejected Checkoff Header")
-                {
-                    Caption = 'Rejected Checkoff Header List';
-                    ApplicationArea = all;
-                    RunObject = page "Checkoff Header List";
-                    RunPageLink = Posted = const(false), Status = const(Rejected);
-                }
+
 
                 // group("Revenue Collection")
                 // {
@@ -1682,12 +1693,12 @@ page 52187312 "Credit Management Role Center"
                 //         ToolTip = 'View the list of fixed assets that have been transferred.';
                 //     }
                 // }
-                action(StaffWelfare)
-                {
-                    Caption = 'Staff Welfare Claim';
-                    ApplicationArea = Basic, Suite;
-                    RunObject = page "Staff Welfare List";
-                }
+                // action(StaffWelfare)
+                // {
+                //     Caption = 'Staff Welfare Claim';
+                //     ApplicationArea = Basic, Suite;
+                //     RunObject = page "Staff Welfare List";
+                // }
                 action(LeaveApplication1)
                 {
                     Caption = 'Employee Leave Application';
@@ -1706,12 +1717,12 @@ page 52187312 "Credit Management Role Center"
 
 
 
-                action("Overtime Claim List")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Overtime';
-                    RunObject = page "Overtime Claim List";
-                }
+                // action("Overtime Claim List")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Overtime';
+                //     RunObject = page "Overtime Claim List";
+                // }
 
                 action("System Rights Requisition")
                 {
@@ -1725,25 +1736,25 @@ page 52187312 "Credit Management Role Center"
                     Caption = 'Payslip';
                     RunObject = report "Self Service Slip";
                 }
-                group("Loan Application")
-                {
+                // group("Loan Application")
+                // {
 
-                    action("New Application")
-                    {
+                //     action("New Application")
+                //     {
 
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Apply Staff Loan';
-                        RunObject = page "Self Loan Application List";
-                        RunPageLink = "Return To user" = const(false);
-                    }
-                    action("Resubmission")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Resubmission';
-                        RunObject = page "Self Loan Application List";
-                        RunPageLink = "Return To user" = const(true);
-                    }
-                }
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Apply Staff Loan';
+                //         RunObject = page "Self Loan Application List";
+                //         RunPageLink = "Return To user" = const(false);
+                //     }
+                //     action("Resubmission")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Resubmission';
+                //         RunObject = page "Self Loan Application List";
+                //         RunPageLink = "Return To user" = const(true);
+                //     }
+                // }
                 group("Employee Requests")
                 {
 

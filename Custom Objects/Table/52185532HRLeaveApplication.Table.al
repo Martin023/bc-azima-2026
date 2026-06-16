@@ -571,11 +571,15 @@ table 52185532 "HR Leave Application"
 
 
 
+            //CHECK FOR EXISTING LEAVE APPLICATIONS BEFORE CREATING NEW ONE
             xRec.Reset;
             xRec.SetRange(xRec."Applicant User ID", UserId);
-            xRec.SetRange(xRec.Status, xRec.Status::"Pending Approval");
+            //ONLY CHECKED PENDING APPROVAL - ALLOWED MULTIPLE NEW APPLICATIONS
+            //xRec.SetRange(xRec.Status, xRec.Status::"Pending Approval");
+            //CHECK BOTH NEW AND PENDING APPROVAL STATUS
+            xRec.SetFilter(xRec.Status, '%1|%2', xRec.Status::New, xRec.Status::"Pending Approval");
             if xRec.Find('-') then begin
-                ERROR('You your leave application no' + ' ' + xRec."Application Code" + 'is still  pending Approval. Kindy Contact the HR department to have it approved first');
+                ERROR('Your leave application no. %1 with status %2 is still pending. Please complete or cancel this application before creating a new one.', xRec."Application Code", xRec.Status);
                 REPEAT
                     IF "Start Date" < HRLeaveApp."Return Date" THEN
                         ERROR('You already have an active leave application!');
