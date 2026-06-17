@@ -407,7 +407,7 @@ page 52185529 "HR Job Applications Card"
                 action(SendApprovalRequest)
                 {
                     ApplicationArea = Basic;
-                    Caption = 'Send A&pproval Request';
+                    Caption = 'Send Approval Request';
                     Enabled = NOT OpenApprovalEntriesExist;
                     Image = SendApprovalRequest;
                     Promoted = true;

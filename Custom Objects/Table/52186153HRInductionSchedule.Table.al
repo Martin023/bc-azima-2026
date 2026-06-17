@@ -126,6 +126,27 @@ table 52186153 "HR Induction Schedule"
             Editable = false;
             FieldClass = FlowField;
         }
+        field(48; "Responsibility Center"; Code[20])
+        {
+            Caption = 'Department';
+            TableRelation = "Responsibility CenterBR".Code;
+
+            trigger OnValidate()
+            var
+                RespCenter: Record "Responsibility CenterBR";
+            begin
+                "Department Name" := '';
+                if "Responsibility Center" <> '' then begin
+                    if RespCenter.Get("Responsibility Center") then
+                        "Department Name" := RespCenter.Name;
+                end;
+            end;
+        }
+        field(49; "Department Name"; Text[100])
+        {
+            Caption = 'Department Name';
+            Editable = false;
+        }
     }
 
     keys

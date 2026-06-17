@@ -3,6 +3,8 @@ table 52186192 "HR Heads of Departments"
 
     fields
     {
+        
+        /*
         field(1; "Global Dimension 1 Code"; Code[20])
         {
             CaptionClass = '1,1,1';
@@ -18,6 +20,7 @@ table 52186192 "HR Heads of Departments"
                 end;
             end;
         }
+        */
         field(2; "Global Dimension 2 Code"; Code[20])
         {
             CaptionClass = '1,1,2';
@@ -33,10 +36,12 @@ table 52186192 "HR Heads of Departments"
                 end;
             end;
         }
+        /*
         field(3; "Global Dimension 1 Name"; Text[100])
         {
             Editable = false;
         }
+        */
         field(4; "Global Dimension 2 Name"; Text[100])
         {
             CaptionClass = '1,1,2';
@@ -56,7 +61,7 @@ table 52186192 "HR Heads of Departments"
                 HREmp.Reset;
                 HREmp.Get("Employee No.");
                 begin
-                    // "Employee Name" := HREmp.FullName;
+                    "Employee Name" := HREmp."Full Name";
                     HREmp.TestField(HREmp."User ID");
                     HREmp.TestField(HREmp."Company E-Mail");
                     "User ID" := HREmp."User ID";
@@ -75,16 +80,57 @@ table 52186192 "HR Heads of Departments"
         }
         field(8; "E-Mail Address"; Text[60])
         {
+            Editable = false;
         }
         field(9;"Responsibility center";Code[60])
         {
-         
+            Caption = 'Department';
+            TableRelation = "Responsibility CenterBR".Code;
+            
+            trigger OnValidate()
+            var
+                RespCenter: Record "Responsibility CenterBR";
+            begin
+                if "Responsibility center" <> '' then begin
+                    if RespCenter.Get("Responsibility center") then begin
+                        // Department validated
+                    end;
+                end;
+            end;
+        }
+        //APPROVAL WORKFLOW FIELDS ADDED
+        field(10; Status; Option)
+        {
+            Caption = 'Status';
+            Editable = false;
+            OptionCaption = 'Open,Pending Approval,Approved';
+            OptionMembers = Open,"Pending Approval",Approved;
+        }
+        field(11; "Created By"; Code[100])
+        {
+            Caption = 'Created By';
+            Editable = false;
+        }
+        field(12; "Created Date"; Date)
+        {
+            Caption = 'Created Date';
+            Editable = false;
+        }
+        field(13; "Approved By"; Code[100])
+        {
+            Caption = 'Approved By';
+            Editable = false;
+        }
+        field(14; "Approved Date"; Date)
+        {
+            Caption = 'Approved Date';
+            Editable = false;
         }
     }
 
     keys
     {
-        key(Key1; "Global Dimension 1 Code", "Global Dimension 2 Code", "Employee No.")
+        key(Key1; "Responsibility center", "Employee No.")
         {
             Clustered = true;
         }
@@ -94,12 +140,20 @@ table 52186192 "HR Heads of Departments"
     {
     }
 
+    //TRIGGERS FOR AUDIT TRAIL
+    trigger OnInsert()
+    begin
+        "Created By" := UserId;
+        "Created Date" := Today;
+        Status := Status::Open;
+    end;
+
     var
         DimensionValue: Record "Dimension Value";
         HREmp: Record "HR Employees";
         UserSetup: Record "User Setup";
 
-    //ADDED HELPER PROCEDURES FOR DEPARTMENT TARGETS INTEGRATION
+    //HELPER PROCEDURES FOR DEPARTMENT TARGETS INTEGRATION
     procedure CheckHODAccess(UserID: Code[50]; DepartmentCode: Code[20]): Boolean
     var
         HREmp: Record "HR Employees";
@@ -110,7 +164,7 @@ table 52186192 "HR Heads of Departments"
         if HREmp.Find('-') then begin
             HRHOD.Reset;
             HRHOD.SetRange(HRHOD."Employee No.", HREmp."No.");
-            HRHOD.SetRange(HRHOD."Global Dimension 1 Code", DepartmentCode);
+            HRHOD.SetRange(HRHOD."Responsibility center", DepartmentCode);
             if HRHOD.Find('-') then
                 exit(true);
         end;
@@ -132,9 +186,9 @@ table 52186192 "HR Heads of Departments"
             if HRHOD.Find('-') then begin
                 repeat
                     if DepartmentList = '' then
-                        DepartmentList := HRHOD."Global Dimension 1 Code"
+                        DepartmentList := HRHOD."Responsibility center"
                     else
-                        DepartmentList := DepartmentList + '|' + HRHOD."Global Dimension 1 Code";
+                        DepartmentList := DepartmentList + '|' + HRHOD."Responsibility center";
                 until HRHOD.Next = 0;
             end;
         end;

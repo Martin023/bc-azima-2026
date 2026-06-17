@@ -35,11 +35,11 @@ page 52186559 "HR Induction Schedule Card"
                         group(Control6)
                         {
                             ShowCaption = false;
-                            field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
+                            field("Responsibility Center"; Rec."Responsibility Center")
                             {
                                 ApplicationArea = Basic;
                             }
-                            field("Global Dimension 1 Name"; Rec."Global Dimension 1 Name")
+                            field("Department Name"; Rec."Department Name")
                             {
                                 ApplicationArea = Basic;
                                 ShowCaption = false;
@@ -57,9 +57,33 @@ page 52186559 "HR Induction Schedule Card"
                         group(Control13)
                         {
                             ShowCaption = false;
+                            field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
+                            {
+                                ApplicationArea = Basic;
+                                Caption = 'Branch';
+                            }
+                            field("Global Dimension 1 Name"; Rec."Global Dimension 1 Name")
+                            {
+                                ApplicationArea = Basic;
+                                ShowCaption = false;
+                            }
+                        }
+                    }
+                }
+                group("Activity Code Group")
+                {
+                    ShowCaption = false;
+                    grid("Activity Code Grid")
+                    {
+                        GridLayout = Rows;
+                        ShowCaption = false;
+                        group("Activity Code Inner")
+                        {
+                            ShowCaption = false;
                             field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                             {
                                 ApplicationArea = Basic;
+                                Caption = 'Activity Code';
                             }
                             field("Global Dimension 2 Name"; Rec."Global Dimension 2 Name")
                             {
@@ -150,44 +174,39 @@ page 52186559 "HR Induction Schedule Card"
                 trigger OnAction()
                 begin
                     Message('Checks for HOD and sends an email to them to facilitate the Induction');
-                    //Testfields
+                    
                     Rec.TestField("HOD Notified?", Rec."HOD Notified?"::No);
-                    Rec.TestField("Global Dimension 1 Code");
-                    Rec.TestField("Global Dimension 2 Code");
+                    Rec.TestField("Responsibility Center");
                     Rec.CalcFields("No. of Participants");
                     Rec.TestField("No. of Participants");
                     Rec.TestField("Induction Start Date");
                     Rec.TestField("Induction End Date");
 
-
-                    //Check if respective HOD is setup in HR Heads of Depts. Table
                     HR_HODs.Reset;
-                    HR_HODs.SetRange(HR_HODs."Global Dimension 1 Code", Rec."Global Dimension 1 Code");
-                    HR_HODs.SetRange(HR_HODs."Global Dimension 2 Code", Rec."Global Dimension 2 Code");
-                    if not HR_HODs.Find('-') then Error(ERR_HR_HOD_SETUP);
+                    HR_HODs.SetRange(HR_HODs."Responsibility center", Rec."Responsibility Center");
+                    if not HR_HODs.Find('-') then 
+                        Error('Please define HOD for Department: %1', Rec."Responsibility Center");
                     HR_HODs.TestField(HR_HODs."Employee No.");
 
-                    //Check if E-Mail parameters have been setup
                     HREmailParam.Reset;
                     HREmailParam.SetRange(HREmailParam."Associate With", HREmailParam."Associate With"::"Induction Schedule");
                     if not HREmailParam.Find('-') then begin
-                        //Create Email Parameters f not setup
                         HREmailParam.Init;
-
                         HREmailParam."Associate With" := HREmailParam."Associate With"::"Induction Schedule";
                         HREmailParam."Sender Name" := 'HUMAN RESOURCE';
-                        HREmailParam."Sender Address" := 'dwesa@coretec.co.ke';
+                        HREmailParam."Sender Address" := 'no-reply@azima.co.ke';
                         HREmailParam.Subject := 'Induction Schedule Participants';
                         HREmailParam.Body := 'Kindly faciliate an Induction for [ Induction Document No ] '
                                             + Rec."Induction Code" + '<br>' +
                                             'Kindly login in the system to view document and participants'
                                             + '<br>' + 'Warm Regards';
-
                         HREmailParam.Insert;
                     end;
 
-                    //Check document as processed
                     Rec."HOD Notified?" := Rec."HOD Notified?"::Yes;
+                    Rec.Modify();
+                    
+                    Message('HOD notification prepared for Department: %1 - %2', Rec."Responsibility Center", Rec."Department Name");
                 end;
             }
         }

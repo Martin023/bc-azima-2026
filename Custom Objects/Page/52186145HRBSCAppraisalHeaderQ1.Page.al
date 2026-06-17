@@ -213,6 +213,38 @@ page 52186145 "HR BSC Appraisal Header-Q1"
                 {
                     ApplicationArea = Basic;
                 }
+                field("Initiated By User ID"; Rec."Initiated By User ID")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Initiated By Employee No"; Rec."Initiated By Employee No")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Appraisee Submitted"; Rec."Appraisee Submitted")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Appraisee Submission Date"; Rec."Appraisee Submission Date")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Has Disagreements"; Rec."Has Disagreements")
+                {
+                    ApplicationArea = Basic;
+                    Style = Attention;
+                    StyleExpr = Rec."Has Disagreements";
+                }
+                field("Discussion Log Count"; Rec."Discussion Log Count")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Unresolved Discussions"; Rec."Unresolved Discussions")
+                {
+                    ApplicationArea = Basic;
+                    Style = Unfavorable;
+                    StyleExpr = Rec."Unresolved Discussions" > 0;
+                }
             }
             part("Financial Targets"; "HR Financial BSC Lines")
             {
@@ -242,6 +274,12 @@ page 52186145 "HR BSC Appraisal Header-Q1"
             {
                 SubPageLink = "Appraisal No" = FIELD("Appraisal No");
             }
+            part("Discussion Log"; "HR Appraisal Discussion Log")
+            {
+                Caption = 'Discussion Log';
+                SubPageLink = "Appraisal No" = FIELD("Appraisal No");
+                Visible = ShowDiscussionLog;
+            }
         }
     }
 
@@ -251,18 +289,89 @@ page 52186145 "HR BSC Appraisal Header-Q1"
         {
             action("Send to supervisor")
             {
-                Caption = 'Send to Supervisor';
+                Caption = 'Submit to Supervisor';
                 Image = SendTo;
                 Promoted = true;
                 PromotedCategory = Category5;
+                Enabled = Rec.Status = Rec.Status::Open;
 
                 trigger OnAction()
                 begin
+                    //OLD CODE - SIMPLE STATUS CHANGE WITHOUT VALIDATION
+                    //if Confirm('Send this Appraisal to Supervisor?', true) = false then exit;
+                    //Rec.Status := Rec.Status::"Pending Approval";
+                    //Rec.Modify;
 
-                    if Confirm('Send this Appraisal to Supervisor?', true) = false then exit;
+                    //NEW: USE PROCEDURE WITH SELF-RATING VALIDATION
+                    if Confirm('Submit this appraisal to your supervisor for review?', true) = false then exit;
+                    Rec.SubmitToSupervisor();
+                    CurrPage.Update();
+                end;
+            }
+            action("Move to Discussion")
+            {
+                Caption = 'Move to Discussion';
+                Image = Interaction;
+                Promoted = true;
+                PromotedCategory = Category5;
+                Enabled = Rec.Status = Rec.Status::"Pending Approval";
 
-                    Rec.Status := Rec.Status::"Pending Approval";
-                    Rec.Modify;
+                trigger OnAction()
+                begin
+                    if Rec.Status <> Rec.Status::"Pending Approval" then
+                        Error('Can only move to Discussion from Pending Approval status.');
+
+                    if Confirm('Move this appraisal to Discussion status? This indicates there are disagreements that need to be resolved.', true) = false then exit;
+
+                    Rec.Status := Rec.Status::Discussed;
+                    Rec.Modify();
+                    CurrPage.Update();
+
+                    Message('Appraisal moved to Discussion status. Both parties can now record discussion points in the Discussion Log tab.');
+                end;
+            }
+            action("Record Discussion Point")
+            {
+                Caption = 'Record Discussion Point';
+                Image = Comment;
+                Promoted = true;
+                PromotedCategory = Category5;
+                Enabled = Rec.Status = Rec.Status::Discussed;
+
+                trigger OnAction()
+                begin
+                    if Rec.Status <> Rec.Status::Discussed then
+                        Error('Discussion points can only be recorded when appraisal status is "Discussed".');
+
+                    Message('Please navigate to the Discussion Log tab to add discussion points.');
+                    CurrPage.Update();
+                end;
+            }
+            action("Resolve and Approve")
+            {
+                Caption = 'Resolve and Approve';
+                Image = Approve;
+                Promoted = true;
+                PromotedCategory = Category5;
+                Enabled = Rec.Status = Rec.Status::Discussed;
+
+                trigger OnAction()
+                begin
+                    if Rec.Status <> Rec.Status::Discussed then
+                        Error('Can only approve from Discussed status.');
+
+                    if Rec.CheckUnresolvedDiscussions() then begin
+                        if not Confirm('There are still unresolved discussion points. Do you want to proceed with approval anyway?', false) then
+                            exit;
+                    end;
+
+                    if Confirm('Approve this appraisal? This confirms all discussions have been resolved.', true) = false then exit;
+
+                    Rec.Status := Rec.Status::Approved;
+                    Rec.Modify();
+                    CurrPage.Update();
+
+                    Message('Appraisal approved successfully.');
                 end;
             }
             action("Return to Supervisor")
@@ -375,6 +484,8 @@ page 52186145 "HR BSC Appraisal Header-Q1"
          "Overall Perc Score":="Finance Perc Score"+"Customer Perc Score"+"Training Perc Score"+"Service Perc Score";
          MODIFY;*/
 
+        //NEW: SHOW DISCUSSION LOG ONLY IN DISCUSSED, APPROVED, OR POSTED STATUS
+        ShowDiscussionLog := Rec.Status in [Rec.Status::Discussed, Rec.Status::Approved, Rec.Status::Posted];
     end;
 
     trigger OnModifyRecord(): Boolean
@@ -384,9 +495,21 @@ page 52186145 "HR BSC Appraisal Header-Q1"
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean)
+    var
+        ExistingAppraisal: Record "HR Individual Targets Header";
+        CurrentEmpNo: Code[50];
     begin
-        if (UserId = xRec."User ID") and (Rec.Status <> Rec.Status::Approved) then
-            Error('You have an open appraisal for the current period')
+        //OLD CHECK - ONLY CHECKED USER ID MATCH
+        //if (UserId = xRec."User ID") and (Rec.Status <> Rec.Status::Approved) then
+        //    Error('You have an open appraisal for the current period')
+
+        //NEW: CHECK FOR EXISTING OPEN APPRAISALS FOR CURRENT USER
+        CurrentEmpNo := Rec.CurrentEmployee();
+        ExistingAppraisal.Reset;
+        ExistingAppraisal.SetRange("Employee No", CurrentEmpNo);
+        ExistingAppraisal.SetFilter(Status, '<%1', ExistingAppraisal.Status::Approved);
+        if not ExistingAppraisal.IsEmpty then
+            Error('You already have an open appraisal for the current period. Please complete or close it before creating a new one.');
     end;
 
     trigger OnNextRecord(Steps: Integer): Integer
@@ -410,6 +533,7 @@ page 52186145 "HR BSC Appraisal Header-Q1"
         OpenPeriod: Integer;
         AppraisalPeriod: Record "HR Appraisal Period";
         Editpage: Boolean;
+        ShowDiscussionLog: Boolean;
 
     //[Scope('OnPrem')]
     procedure Testfields()

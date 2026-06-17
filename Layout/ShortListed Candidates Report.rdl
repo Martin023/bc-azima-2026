@@ -371,7 +371,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="DateApplied">
+                        <!-- <Textbox Name="DateApplied">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -400,7 +400,7 @@
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
-                        </Textbox>
+                        </Textbox> -->
                       </CellContents>
                     </TablixCell>
                     <TablixCell>

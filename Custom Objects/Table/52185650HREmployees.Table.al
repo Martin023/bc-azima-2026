@@ -197,7 +197,7 @@ table 52185650 "HR Employees"
         }
         field(36; "Department Code"; Code[20])
         {
-
+            TableRelation = "Responsibility CenterBR".Code;
         }
         field(37; Office; Code[20])
         {
@@ -336,9 +336,10 @@ table 52185650 "HR Employees"
             var
 
             begin
-                // if rec.Disabled = rec.Disabled::yes then begin
-                //     rec.testfield("KRA Cert. No.");
-                // end;
+                //VALIDATE DISABILITY CERTIFICATE IS PROVIDED FOR DISABLED EMPLOYEES
+                if rec.Disabled = rec.Disabled::yes then begin
+                    rec.testfield("Certificate No.");
+                end;
                 if HrSetup.get then begin
                     HrSetup.testfield("Retirement Age");
                     HrSetup.testfield("Disabled Retirement Age");
@@ -1579,10 +1580,10 @@ table 52185650 "HR Employees"
         //field(39003945; "Certificate No."; code[40])
         //{
         //}
-        //NEW FIELD NAME - "KRA Cert. No."
-        field(39003945; "KRA Cert. No."; code[40])
+        //FIELD RENAMED BACK - THIS IS FOR DISABILITY CERTIFICATE, NOT KRA
+        field(39003945; "Certificate No."; code[40])
         {
-            Caption = 'KRA Certificate No.';
+            Caption = 'Disability Certificate No.';
         }
         field(39003946; "Member No."; code[20])
         {

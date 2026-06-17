@@ -211,17 +211,31 @@ page 52187320 AdvancedHumanResources
 
                     //     RunObject = Page "HR Employee Change Log";
                     // }
-                    // group(Tasks)
-                    // {
-                    //     Caption = 'Tasks';
-                    //     action(HrHeadOfDepartments)
-                    //     {
-                    //         ApplicationArea = Basic, Suite;
-                    //         Caption = 'HR Head of Departments';
+                    group(Tasks)
+                    {
+                        Caption = 'Tasks';
+                        action(HrHeadOfDepartments)
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'HR Head of Departments';
 
-                    //         RunObject = Page "HR Head of Departments List";
-                    //     }
-                    // }
+                            RunObject = Page "HR Head of Departments List";
+                        }
+                        action(HRDepartmentTargets)
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'HR Department Targets';
+
+                            RunObject = Page "HR Department Targets List";
+                        }
+                        // action(HRInductionSchedule)
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'HR Induction Schedule';
+
+                        //     RunObject = Page "HR Induction Schedule List";
+                        // }
+                    }
                     group(RepandAnalysis)
                     {
                         Caption = 'Reports And Analysis';

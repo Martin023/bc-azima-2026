@@ -12,7 +12,7 @@ codeunit 52185456 "Department Targets Management"
             Error('Target No %1 does not exist.', NewTargetNo);
 
         PreviousHeader.Reset;
-        PreviousHeader.SetRange("Department Code", NewHeader."Department Code");
+        PreviousHeader.SetRange("Responsibility Center", NewHeader."Responsibility Center");
         PreviousHeader.SetRange("Appraisal Year", PreviousYear);
         PreviousHeader.SetRange(Status, PreviousHeader.Status::Approved);
         if PreviousHeader.FindFirst then begin
@@ -37,7 +37,7 @@ codeunit 52185456 "Department Targets Management"
                 until PreviousLine.Next = 0;
             end;
         end else begin
-            Error('No approved targets found for Department %1 in Year %2', NewHeader."Department Code", PreviousYear);
+            Error('No approved targets found for Department %1 in Year %2', NewHeader."Responsibility Center", PreviousYear);
         end;
     end;
 
@@ -51,7 +51,7 @@ codeunit 52185456 "Department Targets Management"
         if HREmp.Find('-') then begin
             HRHOD.Reset;
             HRHOD.SetRange(HRHOD."Employee No.", HREmp."No.");
-            HRHOD.SetRange(HRHOD."Global Dimension 1 Code", DepartmentCode);
+            HRHOD.SetRange(HRHOD."Responsibility center", DepartmentCode);
             if HRHOD.Find('-') then
                 exit(true);
         end;
@@ -73,9 +73,9 @@ codeunit 52185456 "Department Targets Management"
             if HRHOD.Find('-') then begin
                 repeat
                     if DepartmentList = '' then
-                        DepartmentList := HRHOD."Global Dimension 1 Code"
+                        DepartmentList := HRHOD."Responsibility center"
                     else
-                        DepartmentList := DepartmentList + '|' + HRHOD."Global Dimension 1 Code";
+                        DepartmentList := DepartmentList + '|' + HRHOD."Responsibility center";
                 until HRHOD.Next = 0;
             end;
         end;

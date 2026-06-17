@@ -15,7 +15,11 @@ page 52186624 "HR Head of Departments List"
         {
             repeater(Group)
             {
-                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
+                field("Responsibility center"; Rec."Responsibility center")
+                {
+                    ApplicationArea = Basic;
+                }
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic;
                 }

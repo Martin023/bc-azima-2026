@@ -17,7 +17,7 @@ page 52185505 "HRHOD Department Targets"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Department Code"; Rec."Department Code")
+                field("Responsibility Center"; Rec."Responsibility Center")
                 {
                     ApplicationArea = Basic;
                 }
@@ -77,7 +77,7 @@ page 52185505 "HRHOD Department Targets"
             HRHOD.Reset;
             HRHOD.SetRange(HRHOD."Employee No.", HREmp."No.");
             if HRHOD.Find('-') then begin
-                Rec.SetFilter("Department Code", HRHOD."Global Dimension 1 Code");
+                Rec.SetFilter("Responsibility Center", HRHOD."Responsibility center");
             end else begin
                 Error('You are not assigned as a Head of Department. Please contact HR Administrator.');
             end;
