@@ -1269,9 +1269,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                                                                                                                          //AGM Delegate Payment
             Database::"AGM Delegates Payment":
                 exit(CheckApprovalsWorkflowEnabledCode(Variant, RunWorkflowOAGMDelegatePaymentForApprovalCode));
-            //BDE Management
-            Database::"BDE Management Header":
-                exit(CheckApprovalsWorkflowEnabledCode(Variant, RunWorkflowOnSendBDEManagementAppForApprovalCode)); //
                                                                                                                     //Delegate Groups Applicationss
             Database::"Delegate Region Applicationss":
                 exit(CheckApprovalsWorkflowEnabledCode(Variant, RunWorkflowOnSendDelegateGroupsApplicationssForApprovalCode)); //
@@ -2046,13 +2043,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         RunWorkflowOAGMDelegatePaymentForApprovalCode, Database::"AGM Delegates Payment", OnsendAGMDelegatePaymentApprovalRequestTxt, 0, false);
         WorkFlowEventHandling.AddEventToLibrary(
         RunWorkflowOnCanceAGMDelegatePayentForApprovalCode, Database::"AGM Delegates Payment", OnCancelAGMDelegatePaymentApprovalRequestTxt, 0, false); //
-
-
-        //BDE Management
-        WorkFlowEventHandling.AddEventToLibrary(
-        RunWorkflowOnSendBDEManagementAppForApprovalCode, Database::"BDE Management Header", OnSendBDEManagementApprovalRequestTxt, 0, false);
-        WorkFlowEventHandling.AddEventToLibrary(
-        RunWorkflowOnCancelBDEManagementAppForApprovalCode, Database::"BDE Management Header", OnCancelBDEManagementAppApprovalRequestTxt, 0, false); //
         //
         //Delegate Groups Applicationss
         WorkFlowEventHandling.AddEventToLibrary(
@@ -2592,11 +2582,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
             Database::"AGM Delegates Payment":
                 WorkflowManagement.HandleEvent(RunWorkflowOAGMDelegatePaymentForApprovalCode, Variant); //
 
-
-            //BDE Management
-            Database::"BDE Management Header":
-                WorkflowManagement.HandleEvent(RunWorkflowOnSendBDEManagementAppForApprovalCode, Variant); //
-
             //Delegate Groups Applicationss
             Database::"Delegate Region Applicationss":
                 WorkflowManagement.HandleEvent(RunWorkflowOnSendDelegateGroupsApplicationssForApprovalCode, Variant); //
@@ -3055,11 +3040,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
             //Fosa Account Closure
             Database::"Banking Account Closure":
                 WorkflowManagement.HandleEvent(RunWorkflowOnCancelBankingAccountClosureForApprovalCode, Variant); //
-
-
-            //BDE Management
-            Database::"BDE Management Header":
-                WorkflowManagement.HandleEvent(RunWorkflowOnCancelBDEManagementAppForApprovalCode, Variant); //
 
             //Delegate Groups Applicationss
             Database::"Delegate Region Applicationss":
@@ -8474,7 +8454,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         LoanRecoveryHeader: Record 52185829;
         LoanRecoveryHeaderII: Record "Loan Recovery Header II";
         Bond: Record 52185835;
-        BDEManagementHeader: Record 52186128;
         DelegateGroupsApplicationss: Record 52186064;
         DelegateGroupMemRetirements: Record 52186065;
         DelegatesPayment: Record 52186067;
@@ -9593,17 +9572,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                     BBFRequisationHeader.modify(true);
                     Variant := BBFRequisationHeader;
                 end;
-            //
-
-            //BDE Management
-            Database::"BDE Management Header":
-                begin
-                    RecRef.SetTable(BDEManagementHeader);
-                    BDEManagementHeader.Validate(Status, BDEManagementHeader.Status::Open);
-                    BDEManagementHeader.modify(true);
-                    Variant := BDEManagementHeader;
-                end;
-            //
             //Delegate Groups Applicationss
             Database::"Delegate Region Applicationss":
                 begin
@@ -9914,7 +9882,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         LoanRecoveryHeader: Record 52185829;
         LoanRecoveryHeaderII: Record "Loan Recovery Header II";
         Bond: Record 52185835;
-        BDEManagementHeader: Record 52186128;
         DelegateGroupsApplicationss: Record 52186064;
         DelegateGroupMemRetirements: Record 52186065;
         DelegatesPayment: Record 52186067;
@@ -11124,16 +11091,6 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                     BBFRequisationHeader.modify(true);
                     Variant := BBFRequisationHeader;
                 end;
-
-            //BDE Management
-            Database::"BDE Management Header":
-                begin
-                    RecRef.SetTable(BDEManagementHeader);
-                    BDEManagementHeader.Validate(Status, BDEManagementHeader.Status::Pending);
-                    BDEManagementHeader.modify(true);
-                    Variant := BDEManagementHeader;
-                end;
-            //
 
             //Delegate Group Mem Retirements
             Database::"Delegate Region Mem Retirement":
