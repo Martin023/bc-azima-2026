@@ -33,7 +33,6 @@ Report 52186070 "Expected Loan Repayment"
             }
             column(Employer_Code; "Employer Code")
             {
-
             }
             column(CompanyInformation_Name; CompanyInformation.Name)
             {
@@ -50,8 +49,102 @@ Report 52186070 "Expected Loan Repayment"
             column(CommunicationOnline; CommunicationOnline)
             {
             }
+            column(StartDate; StartDate)
+            {
+            }
+            column(EndDate; EndDate)
+            {
+            }
+            column(PriReceived; PriReceived)
+            {
+            }
+            column(IntReceived; IntReceived)
+            {
+            }
 
+            column(LoanIntOffset; LoanIntOffset)
+            {
+            }
+            column(LoanPriOffset; LoanPriOffset)
+            {
+            }
+            column(STOInt; STOInt)
+            {
+            }
+            column(STOPri; STOPri)
+            {
+            }
+            column(MobileIntRece; MobileIntRece)
+            {
+            }
+            column(MobilePriRece; MobilePriRece)
+            {
+            }
+            column(Variance; Variance)
+            {
+            }
 
+            trigger OnPreDataItem()
+            begin
+                Loans.Setfilter("Disbursement Date", '..%2', EndDate);
+                Loans.SetFilter("Date Filter", '..%2', EndDate);
+            end;
+
+            trigger OnAfterGetRecord()
+            begin
+                PriReceived := 0;
+                IntReceived := 0;
+                STOInt := 0;
+                STOPri := 0;
+                LoanIntOffset := 0;
+                LoanPriOffset := 0;
+                Variance := 0;
+                MobileIntRece := 0;
+                MobilePriRece := 0;
+
+                CreditLedgerEntr.Reset();
+                CreditLedgerEntr.SetLoadFields("Posting Date", "Loan No", Amount, "Credit Amount");
+                CreditLedgerEntr.Setfilter("Posting Date", '%1..%2', StartDate, EndDate);
+                CreditLedgerEntr.SetRange("Loan No", Loans."Loan No.");
+                CreditLedgerEntr.SetRange(Reversed, false);
+                CreditLedgerEntr.SetFilter("Credit Amount", '>0');
+                if CreditLedgerEntr.FindSet() then begin
+                    repeat
+                        case
+                            CreditLedgerEntr."Transaction Type" of
+                            CreditLedgerEntr."Transaction Type"::Repayment:
+                                begin
+                                    PriReceived := PriReceived + CreditLedgerEntr."Credit Amount";
+                                    if Loans.get(CreditLedgerEntr."Loan No") then
+                                        LoanPriOffset := LoanPriOffset + CreditLedgerEntr."Credit Amount";
+                                    if STO.get(CreditLedgerEntr."Loan No") then
+                                        STOPri := STOPri + CreditLedgerEntr."Credit Amount";
+                                    MobileTransBuff.reset();
+                                    MobileTransBuff.SetRange("Loan No.", Loans."Loan No.");
+                                    MobileTransBuff.SetRange("Originator ID", CreditLedgerEntr."Document No.");
+                                    if MobileTransBuff.findfirst then
+                                        MobileIntRece := MobilePriRece + CreditLedgerEntr."Credit Amount";
+
+                                end;
+                            CreditLedgerEntr."Transaction Type"::"Interest Paid":
+                                begin
+                                    IntReceived := IntReceived + CreditLedgerEntr."Credit Amount";
+                                    if Loans.get(CreditLedgerEntr."Loan No") then
+                                        LoanIntOffset := LoanIntOffset + CreditLedgerEntr."Credit Amount";
+                                    if STO.get(CreditLedgerEntr."Loan No") then
+                                        STOInt := STOInt + CreditLedgerEntr."Credit Amount";
+
+                                    MobileTransBuff.reset();
+                                    MobileTransBuff.SetRange("Loan No.", Loans."Loan No.");
+                                    MobileTransBuff.SetRange("Originator ID", CreditLedgerEntr."Document No.");
+                                    if MobileTransBuff.findfirst then
+                                        MobileIntRece := MobileIntRece + CreditLedgerEntr."Credit Amount";
+                                end;
+                        end;
+                    until CreditLedgerEntr.Next() = 0;
+                end;
+                Variance := Loans.Repayment - (PriReceived + IntReceived);
+            end;
         }
     }
 
@@ -61,11 +154,21 @@ Report 52186070 "Expected Loan Repayment"
 
         layout
         {
+            area(content)
+            {
+                field(StartDate; StartDate)
+                {
+                    Caption = 'Start Date';
+                    ApplicationArea = All;
+                }
+                field(Enddate; EndDate)
+                {
+                    Caption = 'End Date';
+                    ApplicationArea = All;
+                }
+            }
         }
 
-        actions
-        {
-        }
     }
 
     labels
@@ -78,6 +181,10 @@ Report 52186070 "Expected Loan Repayment"
         CompanyAddress := CompanyInformation.Address + ' -Post Code: ' + CompanyInformation."Post Code" + ' -City:' + CompanyInformation.City + ' Region: ' + CompanyInformation."Country/Region Code";
         CompanyTelephone := 'Tel: ' + CompanyInformation."Phone No." + ' -Office Tel: ' + CompanyInformation."Phone No. 2";
         CommunicationOnline := 'E-mail: ' + CompanyInformation."E-Mail" + '- Website: ' + CompanyInformation."Home Page";
+
+        if StartDate = 0D then Error('Start Date must be indicated');
+        if EndDate = 0D then Error('End Date must be indicated');
+
     end;
 
     var
@@ -86,4 +193,18 @@ Report 52186070 "Expected Loan Repayment"
         CompanyAddress: Text;
         CompanyTelephone: Text;
         CommunicationOnline: Text;
+        StartDate: Date;
+        EndDate: Date;
+        CreditLedgerEntr: record "Credit Ledger Entry";
+        PriReceived: Decimal;
+        IntReceived: Decimal;
+        MobileTransBuff: record "Sky M-Banking Trans. Buffer";
+        MobileIntRece: Decimal;
+        MobilePriRece: Decimal;
+        LoanPriOffset: Decimal;
+        LoanIntOffset: Decimal;
+        STOInt: Decimal;
+        STOPri: Decimal;
+        STO: record "Standing Order Header";
+        Variance: Decimal;
 }

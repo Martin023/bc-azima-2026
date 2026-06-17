@@ -4374,12 +4374,7 @@ page 52186778 "Finance Role Center"
                         Caption = 'Posted Loans Checkoff Report';
                         RunObject = report "Posted Loans Checkoff";
                     }
-                    action("Loan Repayment & Total Balance")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Loan Repayment & Total Balance';
-                        RunObject = report "Expected Loan Repayment";
-                    }
+                   
                     // action("Loans Interest Register")
                     // {
                     //     ApplicationArea = Basic, Suite;

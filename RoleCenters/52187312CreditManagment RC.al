@@ -2070,7 +2070,6 @@ page 52187312 "Credit Management Role Center"
                         ApplicationArea = Basic, Suite;
                         Caption = 'Member Listing - List';
                         RunObject = report "Member Register";
-
                     }
                     action("Members Age")
                     {
@@ -2137,6 +2136,12 @@ page 52187312 "Credit Management Role Center"
                         Caption = 'Posted Loans Register';
                         RunObject = report "Loan Interest  Register";
                         Visible = false;
+                    }
+                    action("Loan Repayment & Total Balance")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Expected Vs Received Loans Report.';
+                        RunObject = report "Expected Loan Repayment";
                     }
                     action("Loan Insurance Report")
                     {
