@@ -150,13 +150,13 @@ page 52186622 "Loan Processing Activities"
                 {
                     ApplicationArea = Basic;
 
-                    Image = none;
+                    Image = Document;
                     LookupPageId = "Loan Posted List";
                     DrillDownPageId = "Loan Posted list";
                 }
                 field("Overdue Loans"; Rec."Overdue Loans")
                 {
-                    Image = none;
+                    Image = Document;
                     Style = Unfavorable;
                     ApplicationArea = Basic;
                 }
@@ -169,12 +169,12 @@ page 52186622 "Loan Processing Activities"
                 {
                     ApplicationArea = Basic, Suite;
                     //AutoFormatType = 11;
-                    Image = none;
+                    Image = People;
                 }
                 field("Dormant Members"; Rec."Dormant Members")
                 {
                     ApplicationArea = Basic, Suite;
-                    Image = none;
+                    Image = People;
                 }
             }
             cuegroup("Withdrawal Notices")
