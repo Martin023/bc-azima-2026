@@ -3183,7 +3183,73 @@ Codeunit 52185506 "Global Functions"
     //         end;
     //     end;
     // end;
+    procedure getChargesAmt(TransCode: Code[50]; Amount: decimal): Decimal;
+    var
+        ChargeAmt: Decimal;
+        TotalCharge: Decimal;
+        ExciseDuty: decimal;
+        TransactionCharges: record "Transaction Charges";
+        TariffDetails: Record "Tiered Charges Lines";
+        GeneralSetUp: Record "General Set-Up";
+        ChargeAmount: Decimal;
+        TExciseDuty: Decimal;
+    begin
+        ChargeAmount := 0;
+        TotalCharge := 0;
+        ExciseDuty := 0;
+        TExciseDuty := 0;
 
+        TransactionCharges.Reset;
+        TransactionCharges.SetRange(TransactionCharges."Transaction Type", TransCode);
+        if TransactionCharges.Find('-') then begin
+            repeat
+                ChargeAmount := 0;
+                if TransactionCharges."Charge Type" = TransactionCharges."Charge Type"::"% of Amount" then begin
+                    if TransactionCharges."Recover Excise Duty" = false then
+                        ChargeAmount := (Amount * TransactionCharges."Percentage of Amount") * 0.01
+                    else begin
+                        ChargeAmount := ((Amount * TransactionCharges."Percentage of Amount") * 0.01) + (0.01 * ((Amount * TransactionCharges."Percentage of Amount") * (GeneralSetUp."Excise Duty (%)" * 0.01)));
+                    end;
+                end
+                else begin
+                    if TransactionCharges."Recover Excise Duty" = false then
+                        ChargeAmount := TransactionCharges."Charge Amount" else begin
+                        ChargeAmount := (TransactionCharges."Charge Amount") + (TransactionCharges."Charge Amount" * (GeneralSetUp."Excise Duty (%)" * 0.01));
+                        ExciseDuty := (TransactionCharges."Charge Amount" * (GeneralSetUp."Excise Duty (%)" * 0.01));
+
+                    end;
+                end;
+                if TransactionCharges."Charge Type" = TransactionCharges."Charge Type"::Staggered then begin
+                    TransactionCharges.TestField(TransactionCharges."Staggered Charge Code");
+                    TariffDetails.Reset;
+                    TariffDetails.SetRange(TariffDetails.Code, TransactionCharges."Staggered Charge Code");
+                    if TariffDetails.Find('-') then begin
+                        repeat
+                            if (Amount >= TariffDetails."Lower Limit") and (Amount <= TariffDetails."Upper Limit") then begin
+                                if TariffDetails."Use Percentage" then begin
+                                    if TransactionCharges."Recover Excise Duty" = false then
+                                        ChargeAmount := Amount * TariffDetails.Percentage * 0.01 else begin
+                                        ChargeAmount := ((Amount * TariffDetails.Percentage * 0.01) + ((Amount * TariffDetails.Percentage * 0.01) * (GeneralSetUp."Excise Duty (%)" * 0.01)));
+                                        ExciseDuty := ((Amount * TariffDetails.Percentage * 0.01) * (GeneralSetUp."Excise Duty (%)" * 0.01));
+
+                                    end;
+                                end else begin
+                                    if TransactionCharges."Recover Excise Duty" = false then
+                                        ChargeAmount := TariffDetails."Charge Amount" else begin
+                                        ChargeAmount := ((TariffDetails."Charge Amount") + ((TariffDetails."Charge Amount") * (GeneralSetUp."Excise Duty (%)" * 0.01)));
+                                        ExciseDuty := ((TariffDetails."Charge Amount") * (GeneralSetUp."Excise Duty (%)" * 0.01));
+                                    end;
+                                end;
+                            end;
+                        until TariffDetails.Next = 0;
+                    end;
+                end;
+                TExciseDuty += ExciseDuty;
+                TotalCharge += ChargeAmount;
+            until TransactionCharges.Next = 0;
+        end;
+        exit(TotalCharge + TExciseDuty);
+    end;
 
 }
 

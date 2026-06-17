@@ -6,6 +6,25 @@ Report 52186070 "Expected Loan Repayment"
 
     dataset
     {
+        // Single-row dataitem for header/company info — runs ONCE
+        dataitem(CompanyInformation; "Company Information")
+        {
+            DataItemTableView = sorting("Primary Key");
+            MaxIteration = 1;
+
+            column(CompanyInformation_Name; Name) { }
+            column(CompanyInformation_Picture; Picture) { }  // BLOB emitted only once
+            column(CompanyAddress; CompanyInformation.Address + ' -Post Code: ' + CompanyInformation."Post Code" + ' -City:' + CompanyInformation.City + ' Region: ' + CompanyInformation."Country/Region Code") { }
+            column(CompanyTelephone; 'Tel: ' + CompanyInformation."Phone No." + ' -Office Tel: ' + CompanyInformation."Phone No. 2") { }
+            column(CommunicationOnline; 'E-mail: ' + CompanyInformation."E-Mail" + '- Website: ' + CompanyInformation."Home Page") { }
+
+
+            trigger OnPreDataItem()
+            begin
+                CalcFields(Picture);  // load BLOB here, once
+            end;
+        }
+
         dataitem(Loans; Loans)
         {
             DataItemTableView = where(Posted = filter(true));
@@ -34,21 +53,21 @@ Report 52186070 "Expected Loan Repayment"
             column(Employer_Code; "Employer Code")
             {
             }
-            column(CompanyInformation_Name; CompanyInformation.Name)
-            {
-            }
-            column(CompanyInformation_Picture; CompanyInformation.Picture)
-            {
-            }
-            column(CompanyAddress; CompanyAddress)
-            {
-            }
-            column(CompanyTelephone; CompanyTelephone)
-            {
-            }
-            column(CommunicationOnline; CommunicationOnline)
-            {
-            }
+            // column(CompanyInformation_Name; CompanyInformation.Name)
+            // {
+            // }
+            // column(CompanyInformation_Picture; CompanyInformation.Picture)
+            // {s
+            // }
+            // column(CompanyAddress; CompanyAddress)
+            // {
+            // }
+            // column(CompanyTelephone; CompanyTelephone)
+            // {
+            // }
+            // column(CommunicationOnline; CommunicationOnline)
+            // {
+            // }
             column(StartDate; StartDate)
             {
             }
@@ -176,11 +195,11 @@ Report 52186070 "Expected Loan Repayment"
     }
     trigger OnPreReport()
     begin
-        if CompanyInformation.Get then
-            CompanyInformation.CalcFields(CompanyInformation.Picture);
-        CompanyAddress := CompanyInformation.Address + ' -Post Code: ' + CompanyInformation."Post Code" + ' -City:' + CompanyInformation.City + ' Region: ' + CompanyInformation."Country/Region Code";
-        CompanyTelephone := 'Tel: ' + CompanyInformation."Phone No." + ' -Office Tel: ' + CompanyInformation."Phone No. 2";
-        CommunicationOnline := 'E-mail: ' + CompanyInformation."E-Mail" + '- Website: ' + CompanyInformation."Home Page";
+        // if CompanyInformation.Get then
+        //     CompanyInformation.CalcFields(CompanyInformation.Picture);
+        // CompanyAddress := CompanyInformation.Address + ' -Post Code: ' + CompanyInformation."Post Code" + ' -City:' + CompanyInformation.City + ' Region: ' + CompanyInformation."Country/Region Code";
+        // CompanyTelephone := 'Tel: ' + CompanyInformation."Phone No." + ' -Office Tel: ' + CompanyInformation."Phone No. 2";
+        // CommunicationOnline := 'E-mail: ' + CompanyInformation."E-Mail" + '- Website: ' + CompanyInformation."Home Page";
 
         if StartDate = 0D then Error('Start Date must be indicated');
         if EndDate = 0D then Error('End Date must be indicated');
@@ -189,10 +208,10 @@ Report 52186070 "Expected Loan Repayment"
 
     var
 
-        CompanyInformation: Record "Company Information";
-        CompanyAddress: Text;
-        CompanyTelephone: Text;
-        CommunicationOnline: Text;
+        // CompanyInformation: Record "Company Information";
+        // CompanyAddress: Text;
+        // CompanyTelephone: Text;
+        // CommunicationOnline: Text;
         StartDate: Date;
         EndDate: Date;
         CreditLedgerEntr: record "Credit Ledger Entry";
