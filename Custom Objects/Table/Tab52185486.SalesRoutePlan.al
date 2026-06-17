@@ -69,6 +69,26 @@ table 52185486 "Sales Route Plans"
             Caption = 'BM/MO Comments';
 
         }
+        field(11; "Created By"; Code[100])
+        {
+            Caption = 'Created By';
+            Editable = false;
+        }
+        field(12; "Created Date"; Date)
+        {
+            Caption = 'Created Date';
+            Editable = false;
+        }
+        field(13; "Approved By"; Code[100])
+        {
+            Caption = 'Approved By';
+            Editable = false;
+        }
+        field(14; "Approved Date"; Date)
+        {
+            Caption = 'Approved Date';
+            Editable = false;
+        }
 
     }
     keys
@@ -88,6 +108,10 @@ table 52185486 "Sales Route Plans"
             No := NoSeries.GetNextNo(MembNoSeries."Sales Route No.");
             // NoSeriesMgt.InitSeries(ProdFac."Loan Nos", xRec."No. Series", 0D, "Loan No.", "No. Series");
         end;
+
+        "Created By" := UserId;
+        "Created Date" := Today;
+        Status := Status::Open;
     end;
 
     var
