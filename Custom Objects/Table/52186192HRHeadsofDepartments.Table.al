@@ -99,12 +99,10 @@ table 52186192 "HR Heads of Departments"
             end;
         }
         //APPROVAL WORKFLOW FIELDS ADDED
-        field(10; Status; Option)
+        field(10; Status; Enum "Workflow Status Main Flags")
         {
             Caption = 'Status';
             Editable = false;
-            OptionCaption = 'Open,Pending Approval,Approved';
-            OptionMembers = Open,"Pending Approval",Approved;
         }
         field(11; "Created By"; Code[100])
         {

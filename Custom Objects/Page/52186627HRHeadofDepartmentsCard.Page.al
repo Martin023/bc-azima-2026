@@ -112,7 +112,9 @@ page 52186627 "HR Head of Departments Card"
                     CustomApprovals: Codeunit "Custom Approvals Codeunit";
                     VarVariant: Variant;
                 begin
-                    Rec.TestField(Status, Rec.Status::"Pending Approval");
+                    if Confirm('Are you sure you want to cancel this approval request?', false) = false then exit;
+                    
+                    Rec.TestField(Status, Rec.Status::Pending);
                     VarVariant := Rec;
                     CustomApprovals.OnCancelDocApprovalRequest(VarVariant);
                 end;
@@ -130,6 +132,34 @@ page 52186627 "HR Head of Departments Card"
                     ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                 begin
                     ApprovalsMgmt.OpenApprovalEntriesPage(Rec.RecordId);
+                end;
+            }
+            action(Reopen)
+            {
+                Caption = 'Reopen';
+                Image = ReOpen;
+                Promoted = true;
+                PromotedCategory = Process;
+                ApplicationArea = All;
+
+                trigger OnAction()
+                var
+                    ApprovalEntry: Record "Approval Entry";
+                begin
+                    if Confirm('Reopen this HOD assignment? This will reset status to Open and clear approval history.', false) = false then exit;
+
+                    Rec.Status := Rec.Status::Open;
+                    Rec."Approved By" := '';
+                    Rec."Approved Date" := 0D;
+                    Rec.Modify;
+
+                    ApprovalEntry.Reset();
+                    ApprovalEntry.SetRange("Document No.", Rec."Responsibility center");
+                    ApprovalEntry.SetRange("Table ID", Database::"HR Heads of Departments");
+                    if ApprovalEntry.FindSet() then
+                        ApprovalEntry.DeleteAll();
+
+                    Message('HOD assignment reopened and approval entries removed.');
                 end;
             }
         }

@@ -58,10 +58,25 @@ page 52185457 "Sales Route Plan Card"
                 {
                     ToolTip = 'Specifies the value of the Status field.', Comment = '%';
                 }
-                field(CreatedBy; CreatedBy)
+            }
+            group("Approval Information")
+            {
+                Caption = 'Approval Information';
+                field("Created By"; Rec."Created By")
                 {
-                    Caption = 'Created By';
-                    ToolTip = 'Specifies the value of the SystemCreatedBy field.', Comment = '%';
+                    ApplicationArea = All;
+                }
+                field("Created Date"; Rec."Created Date")
+                {
+                    ApplicationArea = All;
+                }
+                field("Approved By"; Rec."Approved By")
+                {
+                    ApplicationArea = All;
+                }
+                field("Approved Date"; Rec."Approved Date")
+                {
+                    ApplicationArea = All;
                 }
             }
             part(PartName; "Sales Leads Lines")
@@ -81,24 +96,95 @@ page 52185457 "Sales Route Plan Card"
     }
     actions
     {
+        area(processing)
+        {
+            action("Send for Approval")
+            {
+                Caption = 'Send for Approval';
+                Image = SendApprovalRequest;
+                Promoted = true;
+                PromotedCategory = Process;
+                ApplicationArea = All;
+
+                trigger OnAction()
+                var
+                    CustomApprovals: Codeunit "Custom Approvals Codeunit";
+                    VarVariant: Variant;
+                begin
+                    Rec.TestField("Sales Representative");
+                    Rec.TestField("Route Date");
+                    Rec.TestField(Target);
+
+                    VarVariant := Rec;
+                    if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then
+                        CustomApprovals.OnSendDocForApproval(VarVariant);
+                end;
+            }
+            action("Cancel Approval Request")
+            {
+                Caption = 'Cancel Approval Request';
+                Image = CancelApprovalRequest;
+                Promoted = true;
+                PromotedCategory = Process;
+                ApplicationArea = All;
+
+                trigger OnAction()
+                var
+                    CustomApprovals: Codeunit "Custom Approvals Codeunit";
+                    VarVariant: Variant;
+                begin
+                    if Confirm('Are you sure you want to cancel this approval request?', false) = false then exit;
+
+                    Rec.TestField(Status, Rec.Status::Pending);
+                    VarVariant := Rec;
+                    CustomApprovals.OnCancelDocApprovalRequest(VarVariant);
+                end;
+            }
+            action(Approvals)
+            {
+                Caption = 'Approvals';
+                Image = Approvals;
+                Promoted = true;
+                PromotedCategory = Process;
+                ApplicationArea = All;
+
+                trigger OnAction()
+                var
+                    ApprovalsMgmt: Codeunit 1535; //Approvals Mgmt.
+                begin
+                    ApprovalsMgmt.OpenApprovalEntriesPage(Rec.RecordId);
+                end;
+            }
+            action(Reopen)
+            {
+                Caption = 'Reopen';
+                Image = ReOpen;
+                Promoted = true;
+                PromotedCategory = Process;
+                ApplicationArea = All;
+
+                trigger OnAction()
+                var
+                    ApprovalEntry: Record 454; //Approval Entry
+                begin
+                    if Confirm('Reopen this Sales Route Plan? This will reset status to Open and clear approval history.', false) = false then exit;
+
+                    Rec.Status := Rec.Status::Open;
+                    Rec."Approved By" := '';
+                    Rec."Approved Date" := 0D;
+                    Rec.Modify;
+
+                    ApprovalEntry.Reset();
+                    ApprovalEntry.SetRange(ApprovalEntry."Document No.", Rec.No);
+                    ApprovalEntry.SetRange(ApprovalEntry."Table ID", Database::"Sales Route Plans");
+                    if ApprovalEntry.FindSet() then
+                        ApprovalEntry.DeleteAll();
+
+                    Message('Sales Route Plan reopened and approval entries removed.');
+                end;
+            }
+        }
 
     }
 
-    trigger OnAfterGetCurrrecord()
-    begin
-        CreatedBy := Getusername(rec.SystemCreatedBy);
-        //ModifiedBy := Getusername(rec.SystemModifiedBy);
-    end;
-
-    var
-        CreatedBy: code[40];
-        ModifiedBy: code[40];
-
-        Users: Record User;
-
-    procedure GetUserName(UserSecurityID: Guid): Text;
-    begin
-        if Users.Get(UserSecurityID) then
-            exit(Users."User Name");
-    end;
 }
