@@ -24,8 +24,8 @@ page 52185631 "HR Employee Card"
                 {
                     ApplicationArea = Basic;
                     Importance = Promoted;
-                    Editable = true;
-
+                    // Editable = true;
+                    Editable = false;
                     trigger OnAssistEdit()
                     begin
                         /*
@@ -355,15 +355,11 @@ page 52185631 "HR Employee Card"
                             Message('Please input certificate number.');
                     end;
                 }
-                //CHANGED FROM "Certificate No." TO "KRA Cert. No."
-                //field("Certificate No."; Rec."Certificate No.")
-                //{
-                //    Editable = MKS;
-                //}
-                field("KRA Cert. No."; Rec."KRA Cert. No.")
+                
+                field("Certificate No."; Rec."Certificate No.")
                 {
                     Editable = MKS;
-                    Caption = 'KRA Certificate No.';
+                    Caption = 'Disability Certificate No.';
                 }
             }
             group("Communication Details")
@@ -656,6 +652,21 @@ page 52185631 "HR Employee Card"
                     Importance = Promoted;
                     ShowMandatory = true;
                     Editable = CurrCode;
+                    
+                    trigger OnValidate()
+                    var
+                        Members: Record Members;
+                    begin
+                        if Rec."No." <> '' then begin
+                            Members.reset();
+                            Members.setrange("Payroll/Staff No.", Rec."No.");
+                            if Members.FindFirst() then begin
+                                if UpperCase(DelChr(Rec."PIN No.", '=', ' ')) <> UpperCase(DelChr(Members."P.I.N Number", '=', ' ')) then
+                                    Message('KRA PIN MISMATCH DETECTED:\Employee Card PIN: [%1]\Member Register PIN: [%2]\n\nThe KRA PIN number on the Employee Card differs from the Member Register. Please verify the PIN number and update the Member Register accordingly to maintain data consistency.', 
+                                            Rec."PIN No.", Members."P.I.N Number");
+                            end;
+                        end;
+                    end;
                 }
                 field("Medical Insurance No."; Rec."Medical Insurance No.")
                 {
@@ -1225,11 +1236,9 @@ page 52185631 "HR Employee Card"
                         CustomApprovals: Codeunit "Custom Approvals Codeunit";
                     begin
                         if Rec.Disabled = Rec.Disabled::Yes then begin
-                            //CHANGED FROM "Certificate No." TO "KRA Cert. No."
-                            //if rec."Certificate No." = '' then
-                            //    Error('Please Capture the Disability Certificate No. for the disabled Employee.');
-                            if rec."KRA Cert. No." = '' then
-                                Error('Please Capture the Disability KRA Certificate No. for the disabled Employee.');
+                            //VALIDATE DISABILITY CERTIFICATE IS PROVIDED
+                            if rec."Certificate No." = '' then
+                                Error('Please Capture the Disability Certificate No. for the disabled Employee.');
                         end;
 
                         VarVariant := Rec;
@@ -1324,30 +1333,14 @@ page 52185631 "HR Employee Card"
 
     begin
         if rec."No." <> '' then begin
-            //rec."Monthly Leave Days" := 0;
-            // If HrEmp.get(rec."No.") then begin
-            //     Members.reset();
-            //     Members.setrange("Payroll/Staff No.", HREmp."No.");
-            //     if Members.FindFirst() then begin
-            //         if HREmp."PIN No." <> Members."P.I.N Number" then
-            //             Message('KRA PIN Does Not Match');
-            //     end;
-            // end;
-
-
-
-
-            //if HREmp."End Of Probation Date" = 0D then
-
-            // if Today >= HrEmp."End of Probation Date" then begin
-            //     MyNotification.Message := 'The Probation Date has expired';
-            //     //MyNotification.Scope := NotificationScope::LocalScope;
-            //     MyNotification.Send();
-            // end;
-
-            //     HREmp.Reset;
-            // if HREmp.Get(Rec."No.") then begin
-
+            Members.reset();
+            Members.setrange("Payroll/Staff No.", Rec."No.");
+            if Members.FindFirst() then begin
+                //VALIDATE KRA PIN MATCHES MEMBER REGISTER - TRIM SPACES AND COMPARE CASE-INSENSITIVE
+                if UpperCase(DelChr(Rec."PIN No.", '=', ' ')) <> UpperCase(DelChr(Members."P.I.N Number", '=', ' ')) then
+                    Message('KRA PIN MISMATCH DETECTED:\Employee Card PIN: [%1]\Member Register PIN: [%2]\n\nThe KRA PIN number on the Employee Card differs from the Member Register. Please verify the PIN number and update the Member Register accordingly to maintain data consistency.', 
+                            Rec."PIN No.", Members."P.I.N Number");
+            end;
         end;
 
         UpdateControls();
@@ -1399,7 +1392,7 @@ page 52185631 "HR Employee Card"
         //if rec.Status <> rec.status::New then
         //    CurrPage.Editable := false else
         //    CurrPage.Editable := true;
-        
+
         //ALLOW EDITS FOR ACTIVE EMPLOYEES, BLOCK ONLY PENDING APPROVAL
         if rec.Status = rec.Status::"Pending Approval" then
             CurrPage.Editable := false
@@ -1730,7 +1723,7 @@ page 52185631 "HR Employee Card"
         //BLOCKED ALL EDITS FOR NON-NEW EMPLOYEES
         //if rec.Status <> rec.Status::New then
         //    CurrPage.EDITABLE := false;
-        
+
         //ALLOW EDITS FOR ACTIVE EMPLOYEES, BLOCK ONLY PENDING APPROVAL
         if Rec.Status = Rec.Status::"Pending Approval" then
             CurrPage.EDITABLE := false
@@ -1793,7 +1786,7 @@ page 52185631 "HR Employee Card"
         //    Dimension := False;
         //    MKS := False;
         //end;
-        
+
         //ALLOW EDITS FOR ACTIVE EMPLOYEES
         if Rec.Status = Rec.Status::Active then begin
             InvTcode := true;

@@ -16,7 +16,7 @@ Page 52185448 "HR Department Targets Card"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Department Code"; Rec."Department Code")
+                field("Responsibility Center"; Rec."Responsibility Center")
                 {
                     ApplicationArea = Basic;
                 }
@@ -109,10 +109,6 @@ Page 52185448 "HR Department Targets Card"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Responsibility Center"; Rec."Responsibility Center")
-                {
-                    ApplicationArea = Basic;
-                }
             }
             part("Financial Targets"; "Department Target Lines")
             {
@@ -157,7 +153,7 @@ Page 52185448 "HR Department Targets Card"
                     if Confirm('Send these Department Targets for Approval?', true) = false then exit;
 
                     Rec.TestField("Target No");
-                    Rec.TestField("Department Code");
+                    Rec.TestField("Responsibility Center");
                     Rec.TestField("HOD Employee No");
                     Rec.Status := Rec.Status::"Pending Approval";
                     Rec.Modify;

@@ -35,7 +35,7 @@ table 52185586 "HR Individual Targets Header"
         }
         field(4; "Employee No"; Code[20])
         {
-            Editable = True;
+            Editable = false;
             TableRelation = "HR Employees"."No.";
 
             trigger OnValidate()
@@ -247,6 +247,41 @@ table 52185586 "HR Individual Targets Header"
         field(44; "Total score"; Decimal)
         {
         }
+        field(45; "Initiated By User ID"; Code[50])
+        {
+            Editable = false;
+            TableRelation = "User Setup"."User ID";
+        }
+        field(46; "Initiated By Employee No"; Code[20])
+        {
+            Editable = false;
+            TableRelation = "HR Employees"."No.";
+        }
+        field(47; "Appraisee Submitted"; Boolean)
+        {
+            Editable = false;
+        }
+        field(48; "Appraisee Submission Date"; Date)
+        {
+            Editable = false;
+        }
+        field(49; "Has Disagreements"; Boolean)
+        {
+            CalcFormula = Exist("HR Appraisal Discussion Log" WHERE("Appraisal No" = FIELD("Appraisal No"),
+                                                                      Resolved = CONST(false)));
+            FieldClass = FlowField;
+        }
+        field(50; "Discussion Log Count"; Integer)
+        {
+            CalcFormula = Count("HR Appraisal Discussion Log" WHERE("Appraisal No" = FIELD("Appraisal No")));
+            FieldClass = FlowField;
+        }
+        field(51; "Unresolved Discussions"; Integer)
+        {
+            CalcFormula = Count("HR Appraisal Discussion Log" WHERE("Appraisal No" = FIELD("Appraisal No"),
+                                                                      Resolved = CONST(false)));
+            FieldClass = FlowField;
+        }
     }
 
     keys
@@ -262,6 +297,8 @@ table 52185586 "HR Individual Targets Header"
     }
 
     trigger OnInsert()
+    var
+        CurrentEmpNo: Code[50];
     begin
         if "Appraisal No" = '' then begin
             HRSetup.Get;
@@ -278,6 +315,21 @@ table 52185586 "HR Individual Targets Header"
         */
 
         "Appraisal Date" := Today;
+
+        // NEW: VALIDATE USER IS CREATING APPRAISAL FOR THEMSELVES ONLY
+        CurrentEmpNo := CurrentEmployee();
+
+        // IF EMPLOYEE NO IS BLANK, AUTO-POPULATE WITH CURRENT USER'S EMPLOYEE NO
+        if "Employee No" = '' then
+            "Employee No" := CurrentEmpNo;
+
+        // VALIDATE EMPLOYEE NO MATCHES CURRENT USER - BLOCK IF MISMATCH
+        if "Employee No" <> CurrentEmpNo then
+            Error('ACCESS DENIED: You can only create appraisals for yourself. Current User Employee No: %1, Attempted Employee No: %2', CurrentEmpNo, "Employee No");
+
+        // RECORD WHO INITIATED THE APPRAISAL
+        "Initiated By User ID" := UserId;
+        "Initiated By Employee No" := CurrentEmpNo;
 
         // "Employee No" :=/ CurrentEmployee;
         "User ID" := UserId;
@@ -482,6 +534,80 @@ table 52185586 "HR Individual Targets Header"
         END;
         
 
+    end;
+
+    procedure SubmitToSupervisor()
+    begin
+        TestField(Status, Status::Open);
+        TestField("Appraisee Submitted", false);
+
+        ValidateSelfRatingsCompleted();
+
+        "Appraisee Submitted" := true;
+        "Appraisee Submission Date" := Today;
+        Status := Status::"Pending Approval";
+        Modify;
+
+        Message('Appraisal submitted to supervisor: %1', "Supervisor Name");
+    end;
+
+    procedure RecordDiscussionPoint(PointText: Text[250]; Category: Integer)
+    var
+        DiscussionLog: Record "HR Appraisal Discussion Log";
+        LineNo: Integer;
+    begin
+        TestField(Status, Status::Discussed);
+
+        DiscussionLog.Reset;
+        if DiscussionLog.FindLast then
+            LineNo := DiscussionLog."Line No" + 1
+        else
+            LineNo := 1;
+
+        DiscussionLog.Init;
+        DiscussionLog."Line No" := LineNo;
+        DiscussionLog."Appraisal No" := "Appraisal No";
+        DiscussionLog."Discussion Date" := Today;
+        DiscussionLog."Discussion Time" := Time;
+        DiscussionLog."Discussion Point" := PointText;
+        DiscussionLog."Point Category" := Category;
+        DiscussionLog."Raised By User ID" := UserId;
+
+        if UserId = "User ID" then
+            DiscussionLog."Raised By" := DiscussionLog."Raised By"::Appraisee
+        else if UserId = "Supervisor ID" then
+            DiscussionLog."Raised By" := DiscussionLog."Raised By"::Appraiser;
+
+        DiscussionLog.Insert(true);
+    end;
+
+    procedure ValidateSelfRatingsCompleted()
+    var
+        TargetLine: Record "HR Individual Target Line";
+        MissingCount: Integer;
+    begin
+        MissingCount := 0;
+        TargetLine.Reset;
+        TargetLine.SetRange("Appraisal No", "Appraisal No");
+        if TargetLine.FindSet then begin
+            repeat
+                if TargetLine."Self Rating" = 0 then
+                    MissingCount += 1;
+            until TargetLine.Next = 0;
+        end;
+
+        if MissingCount > 0 then
+            Error('Cannot submit appraisal. %1 target line(s) are missing self-ratings. Please complete all self-ratings before submitting.', MissingCount);
+    end;
+
+    procedure CheckUnresolvedDiscussions(): Boolean
+    var
+        DiscussionLog: Record "HR Appraisal Discussion Log";
+    begin
+        DiscussionLog.Reset;
+        DiscussionLog.SetRange("Appraisal No", "Appraisal No");
+        DiscussionLog.SetRange(Resolved, false);
+        exit(not DiscussionLog.IsEmpty);
     end;
 }
 

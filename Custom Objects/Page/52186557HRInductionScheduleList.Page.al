@@ -21,13 +21,24 @@ page 52186557 "HR Induction Schedule List1"
                 {
                     ApplicationArea = Basic;
                 }
+                field("Responsibility Center"; Rec."Responsibility Center")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Department';
+                }
+                field("Department Name"; Rec."Department Name")
+                {
+                    ApplicationArea = Basic;
+                }
                 field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = Basic;
+                    Caption = 'Branch';
                 }
                 field("Global Dimension 2 Code"; Rec."Global Dimension 2 Code")
                 {
                     ApplicationArea = Basic;
+                    Caption = 'Activity Code';
                 }
                 field("Induction Duration"; Rec."Induction Duration")
                 {

@@ -17,7 +17,7 @@ Page 52185466 "HR Department Targets List"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Department Code"; Rec."Department Code")
+                field("Responsibility Center"; Rec."Responsibility Center")
                 {
                     ApplicationArea = Basic;
                 }

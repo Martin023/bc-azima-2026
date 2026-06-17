@@ -10,7 +10,11 @@ page 52186627 "HR Head of Departments Card"
             group(Group)
             {
                 Caption = 'General';
-                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
+                field(Status; Rec.Status)
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Responsibility center"; Rec."Responsibility center")
                 {
                     ApplicationArea = Basic;
                 }
@@ -30,9 +34,29 @@ page 52186627 "HR Head of Departments Card"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Responsiblity center";Rec."Responsibility center")
+                field("E-Mail Address"; Rec."E-Mail Address")
                 {
-                    ApplicationArea=Basic;
+                    ApplicationArea = Basic;
+                }
+            }
+            group("Approval Information")
+            {
+                Caption = 'Approval Information';
+                field("Created By"; Rec."Created By")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Created Date"; Rec."Created Date")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Approved By"; Rec."Approved By")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Approved Date"; Rec."Approved Date")
+                {
+                    ApplicationArea = Basic;
                 }
             }
         }
@@ -51,6 +75,64 @@ page 52186627 "HR Head of Departments Card"
 
     actions
     {
+        area(processing)
+        {
+            action("Send for Approval")
+            {
+                Caption = 'Send for Approval';
+                Image = SendApprovalRequest;
+                Promoted = true;
+                PromotedCategory = Process;
+                ApplicationArea = All;
+
+                trigger OnAction()
+                var
+                    CustomApprovals: Codeunit "Custom Approvals Codeunit";
+                    VarVariant: Variant;
+                begin
+                    Rec.TestField("Responsibility center");
+                    Rec.TestField("Employee No.");
+                    Rec.TestField("User ID");
+
+                    VarVariant := Rec;
+                    if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then
+                        CustomApprovals.OnSendDocForApproval(VarVariant);
+                end;
+            }
+            action("Cancel Approval Request")
+            {
+                Caption = 'Cancel Approval Request';
+                Image = CancelApprovalRequest;
+                Promoted = true;
+                PromotedCategory = Process;
+                ApplicationArea = All;
+
+                trigger OnAction()
+                var
+                    CustomApprovals: Codeunit "Custom Approvals Codeunit";
+                    VarVariant: Variant;
+                begin
+                    Rec.TestField(Status, Rec.Status::"Pending Approval");
+                    VarVariant := Rec;
+                    CustomApprovals.OnCancelDocApprovalRequest(VarVariant);
+                end;
+            }
+            action(Approvals)
+            {
+                Caption = 'Approvals';
+                Image = Approvals;
+                Promoted = true;
+                PromotedCategory = Process;
+                ApplicationArea = All;
+
+                trigger OnAction()
+                var
+                    ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+                begin
+                    ApprovalsMgmt.OpenApprovalEntriesPage(Rec.RecordId);
+                end;
+            }
+        }
     }
 }
 

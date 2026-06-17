@@ -18,6 +18,9 @@ table 52185496 "HR Department Targets Header"
                 end;
             end;
         }
+        // COMMENTED OUT - WRONG REFERENCE (LINKED TO BRANCH INSTEAD OF DEPARTMENT)
+        // GLOBAL DIMENSION 1 = BRANCH (HQ, WESTLANDS, ETC), NOT DEPARTMENT
+        /*
         field(2; "Department Code"; Code[20])
         {
             Caption = 'Department Code';
@@ -34,6 +37,7 @@ table 52185496 "HR Department Targets Header"
                 end;
             end;
         }
+        */
         field(3; "Department Name"; Text[100])
         {
             Caption = 'Department Name';
@@ -165,8 +169,20 @@ table 52185496 "HR Department Targets Header"
         }
         field(24; "Responsibility Center"; Code[20])
         {
-            Caption = 'Responsibility Center';
+            Caption = 'Department';
+            TableRelation = "Responsibility CenterBR".Code;
             Editable = true;
+            
+            trigger OnValidate()
+            var
+                RespCenter: Record "Responsibility CenterBR";
+            begin
+                "Department Name" := '';
+                if "Responsibility Center" <> '' then begin
+                    if RespCenter.Get("Responsibility Center") then
+                        "Department Name" := RespCenter.Name;
+                end;
+            end;
         }
         field(25; "Global Dimension 1 Code"; Code[20])
         {
