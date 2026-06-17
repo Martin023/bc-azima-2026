@@ -80,12 +80,7 @@ table 52185744 "Appraisal Salary Details"
                 // end;
                 if Amount < 0 then Error('Amount cannot be less than zero');
 
-                if LoanApp.Get("Loan No") then begin
-                    if (LoanApp."Source Unit" = LoanApp."Source Unit"::BOSA) then
-                        fnProcessSalaryDetails();
-                end;
-
-
+                
                 //to initialize the STO Amount if inserted and Display a message
                 if (Code = '7.1EXTERNAL BANK STO') and (Amount > 0) then begin
                     ApprDetails.Reset;
@@ -131,7 +126,17 @@ table 52185744 "Appraisal Salary Details"
                                 ApprDetails.Amount := ApprDetails.Amount + Amount - xRec.Amount;
                                 ApprDetails.Modify;
                             end;
+                        end else
+                        if Type = Type::Pension then begin
+                            ApprDetails.Reset;
+                            ApprDetails.SetRange(Type, Type::"Gross Pay");
+                            ApprDetails.SetRange("Loan No", "Loan No");
+                            if ApprDetails.Find('-') then begin
+                                ApprDetails.Amount := ApprDetails.Amount + Amount - xRec.Amount;
+                                ApprDetails.Modify;
+                            end;
                         end;
+                    
                 //initialize the STO Amount if there is a value in Basic
                 if (Type = Type::Basic) and (Amount > 0) then begin
                     ApprDetails.Reset;
@@ -156,8 +161,10 @@ table 52185744 "Appraisal Salary Details"
                 end;
                 //End of initialize STO Amount if There is Basic Amount
                 if LoanApp.Get("Loan No") then begin
-                    if (LoanApp."Source Unit" = LoanApp."Source Unit"::BOSA) then
+                    if (LoanApp."Source Unit" = LoanApp."Source Unit"::BOSA) then begin
+                        fnProcessSalaryDetails();
                         CalculateNetPay();
+                    end;
                 end;
 
             end;
@@ -327,8 +334,12 @@ table 52185744 "Appraisal Salary Details"
 
         Relief := 2400;
         TaxablePay := curTransAmount - curNSSF - ShifAmount - HousingLevyAmount -  curPensionAmount;
+        if TaxablePay < 0 then
+            TaxablePay := 0;
         curPayeAmount := prPayrollProcessing.fnGetEmployeePaye(TaxablePay);
         curPayeAmount := curPayeAmount - Relief;
+        if curPayeAmount < 0 then
+            curPayeAmount := 0;
         curPayeAmount := ROUND(curPayeAmount, 0.01, '>');
         //Message('PAYE: %1', curPayeAmount);
 
