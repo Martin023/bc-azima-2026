@@ -11,7 +11,7 @@
       <am:Name>PBIRB</am:Name>
       <am:Version>15.7.1813.16</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-06-16T17:38:11.4399506Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-06-17T11:22:58.4090854Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -24,121 +24,6 @@
       <rd:DataSourceID>78067029-1264-4ae9-9dff-8c25bce95bd2</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="Loan_No_">
-          <DataField>Loan_No_</DataField>
-        </Field>
-        <Field Name="Member_No_">
-          <DataField>Member_No_</DataField>
-        </Field>
-        <Field Name="Member_Name">
-          <DataField>Member_Name</DataField>
-        </Field>
-        <Field Name="Loan_Account">
-          <DataField>Loan_Account</DataField>
-        </Field>
-        <Field Name="Staff_No">
-          <DataField>Staff_No</DataField>
-        </Field>
-        <Field Name="Repayment">
-          <DataField>Repayment</DataField>
-        </Field>
-        <Field Name="RepaymentFormat">
-          <DataField>RepaymentFormat</DataField>
-        </Field>
-        <Field Name="Total_Balance">
-          <DataField>Total_Balance</DataField>
-        </Field>
-        <Field Name="Total_BalanceFormat">
-          <DataField>Total_BalanceFormat</DataField>
-        </Field>
-        <Field Name="Employer_Code">
-          <DataField>Employer_Code</DataField>
-        </Field>
-        <Field Name="CompanyInformation_Name">
-          <DataField>CompanyInformation_Name</DataField>
-        </Field>
-        <Field Name="CompanyInformation_Picture">
-          <DataField>CompanyInformation_Picture</DataField>
-        </Field>
-        <Field Name="CompanyAddress">
-          <DataField>CompanyAddress</DataField>
-        </Field>
-        <Field Name="CompanyTelephone">
-          <DataField>CompanyTelephone</DataField>
-        </Field>
-        <Field Name="CommunicationOnline">
-          <DataField>CommunicationOnline</DataField>
-        </Field>
-        <Field Name="StartDate">
-          <DataField>StartDate</DataField>
-        </Field>
-        <Field Name="EndDate">
-          <DataField>EndDate</DataField>
-        </Field>
-        <Field Name="PriReceived">
-          <DataField>PriReceived</DataField>
-        </Field>
-        <Field Name="PriReceivedFormat">
-          <DataField>PriReceivedFormat</DataField>
-        </Field>
-        <Field Name="IntReceived">
-          <DataField>IntReceived</DataField>
-        </Field>
-        <Field Name="IntReceivedFormat">
-          <DataField>IntReceivedFormat</DataField>
-        </Field>
-        <Field Name="LoanIntOffset">
-          <DataField>LoanIntOffset</DataField>
-        </Field>
-        <Field Name="LoanIntOffsetFormat">
-          <DataField>LoanIntOffsetFormat</DataField>
-        </Field>
-        <Field Name="LoanPriOffset">
-          <DataField>LoanPriOffset</DataField>
-        </Field>
-        <Field Name="LoanPriOffsetFormat">
-          <DataField>LoanPriOffsetFormat</DataField>
-        </Field>
-        <Field Name="STOInt">
-          <DataField>STOInt</DataField>
-        </Field>
-        <Field Name="STOIntFormat">
-          <DataField>STOIntFormat</DataField>
-        </Field>
-        <Field Name="STOPri">
-          <DataField>STOPri</DataField>
-        </Field>
-        <Field Name="STOPriFormat">
-          <DataField>STOPriFormat</DataField>
-        </Field>
-        <Field Name="MobileIntRece">
-          <DataField>MobileIntRece</DataField>
-        </Field>
-        <Field Name="MobileIntReceFormat">
-          <DataField>MobileIntReceFormat</DataField>
-        </Field>
-        <Field Name="MobilePriRece">
-          <DataField>MobilePriRece</DataField>
-        </Field>
-        <Field Name="MobilePriReceFormat">
-          <DataField>MobilePriReceFormat</DataField>
-        </Field>
-        <Field Name="Variance">
-          <DataField>Variance</DataField>
-        </Field>
-        <Field Name="VarianceFormat">
-          <DataField>VarianceFormat</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -147,49 +32,49 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.63255cm</Width>
+                  <Width>2.07129cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.63255cm</Width>
+                  <Width>2.07129cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.63255cm</Width>
+                  <Width>2.07129cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.63255cm</Width>
+                  <Width>2.07129cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.63255cm</Width>
+                  <Width>2.07129cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.57593cm</Width>
+                  <Width>2.01467cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.57593cm</Width>
+                  <Width>2.01467cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.57593cm</Width>
+                  <Width>2.01467cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.57593cm</Width>
+                  <Width>2.01467cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.57593cm</Width>
+                  <Width>2.01467cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.57593cm</Width>
+                  <Width>2.01467cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.18206cm</Width>
+                  <Width>2.6208cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.18206cm</Width>
+                  <Width>2.6208cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.32046cm</Width>
+                  <Width>2.7592cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>2.93874cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -207,7 +92,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Staff No</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -237,7 +124,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Member No </Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -267,7 +156,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Member Name</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -297,7 +188,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Loan No </Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -327,7 +220,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Repayment</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -357,7 +252,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Pri Received</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -387,7 +284,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Int Received</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -417,7 +316,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Mobile Pri Rece</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -447,7 +348,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Mobile Int Rece</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -477,7 +380,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Loan Pri Offset</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -507,7 +412,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Loan Int Offset</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -536,8 +443,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>STOPri</Value>
-                                  <Style />
+                                  <Value>STO Pri</Value>
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -567,7 +476,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>STOInt</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -597,7 +508,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Variance</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -627,7 +540,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Total Balance</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -1138,7 +1053,7 @@
             <Top>0.3055cm</Top>
             <Left>0.36621cm</Left>
             <Height>1.2cm</Height>
-            <Width>26.80291cm</Width>
+            <Width>33.38405cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1149,7 +1064,7 @@
         <Height>1.64661cm</Height>
         <Style />
       </Body>
-      <Width>28.48505cm</Width>
+      <Width>33.75026cm</Width>
       <Page>
         <PageHeader>
           <Height>3.38667cm</Height>
@@ -1194,7 +1109,7 @@
               <Top>0.09787in</Top>
               <Left>0in</Left>
               <Height>0.23264in</Height>
-              <Width>11.21458in</Width>
+              <Width>13.2875in</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -1229,7 +1144,7 @@
               <Top>0.33051in</Top>
               <Left>0in</Left>
               <Height>0.21528in</Height>
-              <Width>11.21458in</Width>
+              <Width>13.2875in</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -1264,7 +1179,7 @@
               <Top>0.54578in</Top>
               <Left>0in</Left>
               <Height>0.18403in</Height>
-              <Width>11.21458in</Width>
+              <Width>13.2875in</Width>
               <ZIndex>3</ZIndex>
               <Style>
                 <Border>
@@ -1299,7 +1214,7 @@
               <Top>0.75759in</Top>
               <Left>0in</Left>
               <Height>0.18403in</Height>
-              <Width>11.21458in</Width>
+              <Width>13.2875in</Width>
               <ZIndex>4</ZIndex>
               <Style>
                 <Border>
@@ -1333,7 +1248,7 @@
               </Paragraphs>
               <Top>2.64749cm</Top>
               <Height>0.6cm</Height>
-              <Width>28.48505cm</Width>
+              <Width>33.75026cm</Width>
               <ZIndex>5</ZIndex>
               <Style>
                 <Border>
@@ -1378,7 +1293,7 @@
                 </Paragraph>
               </Paragraphs>
               <Top>0.04932in</Top>
-              <Left>2.3488in</Left>
+              <Left>0.92544in</Left>
               <Height>0.1875in</Height>
               <Width>2.10937in</Width>
               <Style>
@@ -1411,8 +1326,8 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>0.04167in</Top>
-              <Left>4.54495in</Left>
+              <Top>0.04932in</Top>
+              <Left>6.0316in</Left>
               <Height>0.1875in</Height>
               <Width>0.63195in</Width>
               <ZIndex>1</ZIndex>
@@ -1446,8 +1361,8 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>0.04167in</Top>
-              <Left>5.11441in</Left>
+              <Top>0.04932in</Top>
+              <Left>6.60106in</Left>
               <Height>0.1875in</Height>
               <Width>0.32639in</Width>
               <ZIndex>2</ZIndex>
@@ -1480,7 +1395,7 @@
                 </Paragraph>
               </Paragraphs>
               <Top>0.04932in</Top>
-              <Left>1.56754in</Left>
+              <Left>0.14418in</Left>
               <Height>0.1875in</Height>
               <Width>0.78125in</Width>
               <ZIndex>3</ZIndex>
@@ -1502,7 +1417,7 @@
           </Style>
         </PageFooter>
         <PageHeight>21cm</PageHeight>
-        <PageWidth>29.7cm</PageWidth>
+        <PageWidth>35cm</PageWidth>
         <LeftMargin>0.5cm</LeftMargin>
         <RightMargin>0.5cm</RightMargin>
         <ColumnSpacing>1.27cm</ColumnSpacing>
@@ -1510,12 +1425,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -1553,4 +1462,119 @@ End Function
 </Code>
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompanyInformation_Name">
+          <DataField>CompanyInformation_Name</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Picture">
+          <DataField>CompanyInformation_Picture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="Loan_No_">
+          <DataField>Loan_No_</DataField>
+        </Field>
+        <Field Name="Member_No_">
+          <DataField>Member_No_</DataField>
+        </Field>
+        <Field Name="Member_Name">
+          <DataField>Member_Name</DataField>
+        </Field>
+        <Field Name="Loan_Account">
+          <DataField>Loan_Account</DataField>
+        </Field>
+        <Field Name="Staff_No">
+          <DataField>Staff_No</DataField>
+        </Field>
+        <Field Name="Repayment">
+          <DataField>Repayment</DataField>
+        </Field>
+        <Field Name="RepaymentFormat">
+          <DataField>RepaymentFormat</DataField>
+        </Field>
+        <Field Name="Total_Balance">
+          <DataField>Total_Balance</DataField>
+        </Field>
+        <Field Name="Total_BalanceFormat">
+          <DataField>Total_BalanceFormat</DataField>
+        </Field>
+        <Field Name="Employer_Code">
+          <DataField>Employer_Code</DataField>
+        </Field>
+        <Field Name="StartDate">
+          <DataField>StartDate</DataField>
+        </Field>
+        <Field Name="EndDate">
+          <DataField>EndDate</DataField>
+        </Field>
+        <Field Name="PriReceived">
+          <DataField>PriReceived</DataField>
+        </Field>
+        <Field Name="PriReceivedFormat">
+          <DataField>PriReceivedFormat</DataField>
+        </Field>
+        <Field Name="IntReceived">
+          <DataField>IntReceived</DataField>
+        </Field>
+        <Field Name="IntReceivedFormat">
+          <DataField>IntReceivedFormat</DataField>
+        </Field>
+        <Field Name="LoanIntOffset">
+          <DataField>LoanIntOffset</DataField>
+        </Field>
+        <Field Name="LoanIntOffsetFormat">
+          <DataField>LoanIntOffsetFormat</DataField>
+        </Field>
+        <Field Name="LoanPriOffset">
+          <DataField>LoanPriOffset</DataField>
+        </Field>
+        <Field Name="LoanPriOffsetFormat">
+          <DataField>LoanPriOffsetFormat</DataField>
+        </Field>
+        <Field Name="STOInt">
+          <DataField>STOInt</DataField>
+        </Field>
+        <Field Name="STOIntFormat">
+          <DataField>STOIntFormat</DataField>
+        </Field>
+        <Field Name="STOPri">
+          <DataField>STOPri</DataField>
+        </Field>
+        <Field Name="STOPriFormat">
+          <DataField>STOPriFormat</DataField>
+        </Field>
+        <Field Name="MobileIntRece">
+          <DataField>MobileIntRece</DataField>
+        </Field>
+        <Field Name="MobileIntReceFormat">
+          <DataField>MobileIntReceFormat</DataField>
+        </Field>
+        <Field Name="MobilePriRece">
+          <DataField>MobilePriRece</DataField>
+        </Field>
+        <Field Name="MobilePriReceFormat">
+          <DataField>MobilePriReceFormat</DataField>
+        </Field>
+        <Field Name="Variance">
+          <DataField>Variance</DataField>
+        </Field>
+        <Field Name="VarianceFormat">
+          <DataField>VarianceFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>

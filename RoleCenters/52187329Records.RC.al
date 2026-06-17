@@ -732,7 +732,7 @@ page 52187329 "Records"
                 action("Commission Generation List")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'Commission Generation List';
+                    Caption = 'Commission Generation';
                     RunObject = report "Member Commission";
                 }
                 group("Commission Setup")
