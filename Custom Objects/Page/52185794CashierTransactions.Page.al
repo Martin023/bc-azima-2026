@@ -161,10 +161,10 @@ page 52185794 "Cashier Transactions"
                         //TransTypes.Get(Rec."Transaction Type");
                         //if (TransTypes.Type = TransTypes.Type::"Cash Deposit") OR (TransTypes.Type = TransTypes.Type::"Cash Withdrawal") then begin
                         if Rec.Amount >= 1000000 then begin
-                            OverMillion := true;    
+                            OverMillion := true;
                             Message('Transactions above 1 million require Source of Funds and Purpose of this Transaction. This will be flagged as an AML transaction.');
                         end;
-                            
+
                         //end;
 
                         // Acctypes for deposit to check if amt is > than cashier limit
@@ -1159,7 +1159,7 @@ page 52185794 "Cashier Transactions"
                             if Rec.Amount <= 0 then Error('Amount must be greater than zero');
                         end;
 
-                        if(Rec."Account Type" = Rec."Account Type"::MPESA) then begin
+                        if (Rec."Account Type" = Rec."Account Type"::MPESA) then begin
                             Rec.testField("Mpesa Reference");
                         end;
                         VarVariant := Rec;
@@ -1238,8 +1238,9 @@ page 52185794 "Cashier Transactions"
 
                     trigger OnAction()
                     begin
-
-
+                        if rec.Status <> rec.Status::Approved then begin
+                            Error('To clear this Lien, the entry must be approved. Send Approval first!');
+                        end;
                         if Rec.Type <> Rec.Type::Lien then
                             Error('Only applicable to Lien');
 
@@ -1502,7 +1503,7 @@ page 52185794 "Cashier Transactions"
         NumberOfLoans: Integer;
         LoanNumbers: Code[200];
         ReprintSlip: Boolean;
-        MPESATYPEVisible : Boolean;
+        MPESATYPEVisible: Boolean;
 
     // TransLien: Boolean;
 
