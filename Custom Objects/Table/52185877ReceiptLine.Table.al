@@ -363,7 +363,7 @@ table 52185877 "Receipt Line"
                             if rec.Amount > (Loans."Daily Interest" + Loans."Total Balance") then
                                 error('The amount cannot be greater than the total loan balance');
                         rec."Transaction Type"::Repayment:
-                            if rec.Amount > Loans."Total Balance" then
+                            if rec.Amount > Loans."Outstanding Balance" then
                                 error('The amount cannot be greater than the total loan balance');
                         rec."Transaction Type"::"Interest Paid":
                             if rec.Amount > Loans."Outstanding Interest" then

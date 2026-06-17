@@ -20,6 +20,8 @@ table 52185578 "Portfolio Manager"
         {
             Editable = false;
             Caption = 'Sales Rep Name';
+            FieldClass = flowfield;
+            CalcFormula = lookup("HR Employees"."Full Name" where("No." = field("Sales Representative")));
         }
         field(4; "No.of Members"; Integer)
         {

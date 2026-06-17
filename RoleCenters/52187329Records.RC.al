@@ -690,11 +690,38 @@ page 52187329 "Records"
                     Caption = 'Sales Representatives';
                     RunObject = page "Marketing Teams Header";
                 }
-                action("Sales Routes Plan List")
+                group(SalesRoutePlans)
                 {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Sales Routes Plan List';
-                    RunObject = page "Sales Routes Plan List";
+                    Caption = 'Sales Routes Plans';
+                    action("Sales Routes Plan List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Open Sales Routes Plan List';
+                        RunObject = page "Sales Routes Plan List";
+                        RunPageView = where(Status = filter(Open));
+                    }
+                    action("PSales Routes Plan List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Pending Sales Routes Plan List';
+                        RunObject = page "Sales Routes Plan List";
+                        RunPageView = where(Status = filter(Pending));
+                    }
+                    action("ASales Routes Plan List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Approved Sales Routes Plan List';
+                        RunObject = page "Sales Routes Plan List";
+                        RunPageView = where(Status = filter(Approved));
+                    }
+                    action("RSales Routes Plan List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Rejected Sales Routes Plan List';
+                        RunObject = page "Sales Routes Plan List";
+                        RunPageView = where(Status = filter(Approved));
+                    }
+
                 }
                 action("Portfolio Manager List")
                 {
@@ -706,16 +733,16 @@ page 52187329 "Records"
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Commission Generation List';
-                    RunObject = page "Commission Generation List";
+                    RunObject = report "Member Commission";
                 }
-
-                group("Sales&Mrk Reports")
+                group("Commission Setup")
                 {
-                    action("Member Commission Report")
+                    action("Transaction Types")
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Member Commission';
-                        RunObject = report "Member Commission";
+                        Caption = 'Transaction Types List';
+                        RunObject = page "Transaction Types List";
+                        RunpageView = where(type = const(commission));
                     }
                 }
                 // }

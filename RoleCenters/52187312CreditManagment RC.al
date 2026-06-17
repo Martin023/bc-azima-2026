@@ -2663,23 +2663,7 @@ page 52187312 "Credit Management Role Center"
                             runobject = report "Membership Declaration";
                         }
                     }
-                    group("Marketing Reports")
-                    {
-                        Caption = 'Marketing';
-                        // action("Process BDE Payments II")
-                        // {
-                        //     ApplicationArea = Basic, Suite;
-                        //     Caption = 'Process BDE Payments';
-                        //     RunObject = report "Process BDE Payments";
-                        // }
-                        action("BDE Staff Performance Summary")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'BDE Staff Performance Summary';
-                            RunObject = report "BDE Staff Performance Summary";
-                        }
-
-                    }
+                    
 
                 }
 
@@ -2703,24 +2687,24 @@ page 52187312 "Credit Management Role Center"
                         RunObject = report "Sectoral Lending";
                     }
 
-                    action("User Groups and Permission Report")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'User Groups and Permission Report';
-                        RunObject = report "User Groups Permision Report";
-                    }
-                    action("Sasra Staff Access Granted")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Sasra Staff Access Granted';
-                        RunObject = report "Sasra Staff Access Granted";
-                    }
-                    action("Sasra Staff Positions")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Sasra Staff Positions';
-                        RunObject = report "Sasra Staff Positions";
-                    }
+                    // action("User Groups and Permission Report")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'User Groups and Permission Report';
+                    //     RunObject = report "User Groups Permision Report";
+                    // }
+                    // action("Sasra Staff Access Granted")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Sasra Staff Access Granted';
+                    //     RunObject = report "Sasra Staff Access Granted";
+                    // }
+                    // action("Sasra Staff Positions")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Sasra Staff Positions';
+                    //     RunObject = report "Sasra Staff Positions";
+                    // }
                     action("Sasra Loan Register")
                     {
                         ApplicationArea = Basic, Suite;
@@ -2739,26 +2723,26 @@ page 52187312 "Credit Management Role Center"
                         Caption = 'Sasra Deposit Accounts Others';
                         RunObject = report "Sasra Deposit Accounts Others";
                     }
-                    action("Unpaid Deposits Claims")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Unpaid Deposits Claims';
-                        RunObject = report "Unpaid Deposits Claims";
-                    }
+                    // action("Unpaid Deposits Claims")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Unpaid Deposits Claims';
+                    //     RunObject = report "Unpaid Deposits Claims";
+                    // }
 
-                    action("Anti-Money Laundering Report")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Anti-Money Laundering Report';
-                        RunObject = report "Anti-Money Laundering Report";
-                    }
+                    // action("Anti-Money Laundering Report")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Anti-Money Laundering Report';
+                    //     RunObject = report "Anti-Money Laundering Report";
+                    // }
 
-                    action("Transaction Log-Finance")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Transaction Log-Finance';
-                        RunObject = XMLPort "Transaction Log-Finance";
-                    }
+                    // action("Transaction Log-Finance")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Transaction Log-Finance';
+                    //     RunObject = XMLPort "Transaction Log-Finance";
+                    // }
                 }
                 //*******************DMU-ADDITIONAL REPORTS*******************************************************//
                 action("Loan Attachment Report")
@@ -2802,11 +2786,11 @@ page 52187312 "Credit Management Role Center"
                     ApplicationArea = Basic, Suite;
                     RunObject = report "Staff Daily Transactions";
                 }
-                action("Promise To Pay Report")
-                {
-                    ApplicationArea = Basic, Suite;
-                    RunObject = report "Promise To Pay Report";
-                }
+                // action("Promise To Pay Report")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     RunObject = report "Promise To Pay Report";
+                // }
                 group("CRB Daily")
                 {
                     action("Process CRM Daily")
@@ -2904,36 +2888,6 @@ page 52187312 "Credit Management Role Center"
                 //     }
                 // }
 
-                group("Deposit Listing")
-                {
-                    action("Proces Deposit Listing")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = report "Deposit Listing Report";
-                    }
-                    action("View Deposit Listing")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "Deposit Listing List";
-                    }
-                    action("Deposit Listing Errors")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "Bulk Processing Errors List";
-                        RunPageView = where(Process = filter("Deposit Listing"));
-                    }
-                }
-
-                group(Members)
-                {
-                    action("Member Listing")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Member Listing';
-                        RunObject = page "Member Listing Report";
-
-                    }
-                }
 
             }
 
@@ -3051,46 +3005,7 @@ page 52187312 "Credit Management Role Center"
 
                 }
 
-                group("Dividend Setup II")
-                {
-                    caption = 'Dividend Setup';
-
-                    action("Dividend Setup")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Dividend Setup';
-                        RunObject = page "Dividend Setup";
-                    }
-                    action("Dividend Simulation Header")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Dividend Simulation Header';
-                        RunObject = page "Dividend Simulation Header";
-                    }
-                }
-
-                group("SMS")
-                {
-                    caption = 'SMS';
-                    action("SMS Setup")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'SMS Setup';
-                        RunObject = page "SMS Setup";
-                    }
-                    action("SMS Codes")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'SMS Codes';
-                        RunObject = page "SMS Codes";
-                    }
-                    action("SMS Subscription List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'SMS Subscription List';
-                        RunObject = page "SMS Subscription List";
-                    }
-                }
+                
                 // group("Notifications")
                 // {
                 //     Action("Notification Setup")

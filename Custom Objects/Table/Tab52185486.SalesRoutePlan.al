@@ -20,12 +20,12 @@ table 52185486 "Sales Route Plans"
         {
             Caption = 'Place to visit';
         }
-        field(4; Achievements; Integer)
+        field(4; Achievements; Text[1000])
         {
             Caption = 'Achievements';
             Editable = false;
-            FieldClass = flowfield;
-            CalcFormula = count("Route Achievements" where("Header No" = field(No)));
+            // FieldClass = flowfield;
+            // CalcFormula = count("Route Achievements" where("Header No" = field(No)));
         }
         field(5; Leads; Integer)
         {
@@ -34,9 +34,8 @@ table 52185486 "Sales Route Plans"
             FieldClass = flowfield;
             CalcFormula = count("Sales Leads Lines" where("Header No" = field(No)));
         }
-        field(6; Status; Option)
+        field(6; Status; Enum "Workflow Status Main Flags")
         {
-            OptionMembers = Active,Closed;
             Caption = 'Status';
         }
         field(7; "Sales Representative"; Code[50])

@@ -70,12 +70,12 @@ page 52185457 "Sales Route Plan Card"
                 SubPageLink = "Header No" = field(No);
                 ApplicationArea = Basic, Suite;
             }
-            part(PartName1; "Route Achievements List")
-            {
-                caption = 'Route Achievements List';
-                SubPageLink = "Header No" = field(No);
-                ApplicationArea = Basic, Suite;
-            }
+            // part(PartName1; "Route Achievements List")
+            // {
+            //     caption = 'Route Achievements List';
+            //     SubPageLink = "Header No" = field(No);
+            //     ApplicationArea = Basic, Suite;
+            // }
         }
 
     }
