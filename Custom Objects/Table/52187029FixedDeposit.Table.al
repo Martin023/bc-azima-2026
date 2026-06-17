@@ -414,7 +414,7 @@ table 52187029 "Fixed Deposit Contract"
         field(38; "Product Category"; enum "Product Categories")
         {
         }
-        field(39; "Balance (LCY)"; Decimal)
+        field(39; "Fosa Balance"; Decimal)
         {
             AutoFormatType = 1;
             CalcFormula = - Sum("Savings Ledger Entry"."Amount (LCY)" WHERE("Customer No." = field("FOSA Main Account No."),

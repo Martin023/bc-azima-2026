@@ -13,19 +13,19 @@ table 52185486 "Sales Route Plans"
         }
         field(2; Target; Text[1000])
         {
-            Caption = 'Target';
+            Caption = 'Activities/Target';
 
         }
         field(3; "Place to visit"; Code[50])
         {
             Caption = 'Place to visit';
         }
-        field(4; Achievements; Integer)
+        field(4; Achievements; Text[1000])
         {
             Caption = 'Achievements';
             Editable = false;
-            FieldClass = flowfield;
-            CalcFormula = count("Route Achievements" where("Header No" = field(No)));
+            // FieldClass = flowfield;
+            // CalcFormula = count("Route Achievements" where("Header No" = field(No)));
         }
         field(5; Leads; Integer)
         {
@@ -34,18 +34,40 @@ table 52185486 "Sales Route Plans"
             FieldClass = flowfield;
             CalcFormula = count("Sales Leads Lines" where("Header No" = field(No)));
         }
-        field(6; Status; Option)
+        field(6; Status; Enum "Workflow Status Main Flags")
         {
-            OptionMembers = Active,Closed;
             Caption = 'Status';
         }
         field(7; "Sales Representative"; Code[50])
         {
             Caption = 'Sales Representative';
+            Tablerelation = "Marketing Teams Header"."Payroll No.";
         }
         field(8; "Route Date"; Date)
         {
             Caption = 'Route Date';
+
+            trigger OnValidate()
+            var
+                Date: record Date;
+            begin
+                Date.Reset();
+                Date.SetRange("Period Type", Date."Period Type"::"Date");
+                Date.SetRange("Period Start", rec."Route Date");
+                if Date.Find('-') then begin
+                    Day := Date."Period Name";
+                end;
+            end;
+        }
+        field(9; Day; Text[30])
+        {
+            Editable = false;
+            Caption = 'Day';
+        }
+        field(10; "BDE Comments"; Text[1000])
+        {
+            Caption = 'BM/MO Comments';
+
         }
 
     }

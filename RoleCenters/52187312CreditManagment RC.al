@@ -718,86 +718,86 @@ page 52187312 "Credit Management Role Center"
                         RunObject = page "Reversed System Reversal List";
                     }
                 }
-                group("Product Variations")
-                {
-                    group("Loans Variations")
-                    {
-                        action("Open Variations List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Open Loans Variations List';
-                            RunObject = Page "Variations List";
-                            RunPageLink = Status = filter(Open), "Sent Back to CRM" = const(false), "Variation Type" = filter(Loan);
-                        }
-                        action("Pending Variations List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Pending Loans Variations List';
-                            RunObject = Page "Variations List";
-                            RunPageLink = Status = filter("Pending"), "Variation Type" = filter(Loan);
-                        }
-                        action("Approved Variations List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Approved Loans Variations List';
-                            RunObject = Page "Variations List";
-                            RunPageLink = Status = filter(Approved), posted = const(false), "Variation Type" = filter(Loan);
-                        }
-                        action("Posted Variations List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Posted Loans Variations List';
-                            RunObject = Page "Variations List";
-                            RunPageLink = Status = filter(Approved), posted = const(true), "Variation Type" = filter(Loan);
-                        }
-                        // action("Variations Send Back To CRM")
-                        // {
-                        //     ApplicationArea = Basic, Suite;
-                        //     Caption = 'Variations Send Back To CRM';
-                        //     RunObject = Page "Variations List";
-                        //     RunPageLink = Status = filter(Open), "Sent Back to CRM" = const(true), "Variation Type" = filter(Loan);
-                        // }
-                    }
-                    group("Savings Variations")
-                    {
-                        action("Open  Savings Variations List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Open Savings Variations List';
-                            RunObject = Page "Savings Variations List";
-                            RunPageLink = Status = filter(Open), "Sent Back to CRM" = const(false), "Variation Type" = filter(savings);
-                        }
-                        action("Savings PendVariations List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Pending Savings Variations List';
-                            RunObject = Page "Savings Variations List";
-                            RunPageLink = Status = filter("Pending"), "Variation Type" = filter(savings);
-                        }
-                        action("Savings  AppVariations List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Approved Savings Variations List';
-                            RunObject = Page "Savings Variations List";
-                            RunPageLink = Status = filter(Approved), posted = const(false), "Variation Type" = filter(savings);
-                        }
-                        action("Posted sav Variations List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Posted  Savings Variations List';
-                            RunObject = Page "Savings Variations List";
-                            RunPageLink = Status = filter(Approved), posted = const(true), "Variation Type" = filter(savings);
-                        }
-                        // action("Sav' Variations Send Back To CRM")
-                        // {
-                        //     ApplicationArea = Basic, Suite;
-                        //     Caption = ' Savings Variations Send Back To CRM';
-                        //     RunObject = Page "Savings Variations List";
-                        //     RunPageLink = Status = filter(Open), "Sent Back to CRM" = const(true), "Variation Type" = filter(savings);
-                        // }
-                    }
+                // group("Product Variations")
+                // {
+                //     group("Loans Variations")
+                //     {
+                //         action("Open Variations List")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Open Loans Variations List';
+                //             RunObject = Page "Variations List";
+                //             RunPageLink = Status = filter(Open), "Sent Back to CRM" = const(false), "Variation Type" = filter(Loan);
+                //         }
+                //         action("Pending Variations List")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Pending Loans Variations List';
+                //             RunObject = Page "Variations List";
+                //             RunPageLink = Status = filter("Pending"), "Variation Type" = filter(Loan);
+                //         }
+                //         action("Approved Variations List")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Approved Loans Variations List';
+                //             RunObject = Page "Variations List";
+                //             RunPageLink = Status = filter(Approved), posted = const(false), "Variation Type" = filter(Loan);
+                //         }
+                //         action("Posted Variations List")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Posted Loans Variations List';
+                //             RunObject = Page "Variations List";
+                //             RunPageLink = Status = filter(Approved), posted = const(true), "Variation Type" = filter(Loan);
+                //         }
+                //         // action("Variations Send Back To CRM")
+                //         // {
+                //         //     ApplicationArea = Basic, Suite;
+                //         //     Caption = 'Variations Send Back To CRM';
+                //         //     RunObject = Page "Variations List";
+                //         //     RunPageLink = Status = filter(Open), "Sent Back to CRM" = const(true), "Variation Type" = filter(Loan);
+                //         // }
+                //     }
+                //     group("Savings Variations")
+                //     {
+                //         action("Open  Savings Variations List")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Open Savings Variations List';
+                //             RunObject = Page "Savings Variations List";
+                //             RunPageLink = Status = filter(Open), "Sent Back to CRM" = const(false), "Variation Type" = filter(savings);
+                //         }
+                //         action("Savings PendVariations List")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Pending Savings Variations List';
+                //             RunObject = Page "Savings Variations List";
+                //             RunPageLink = Status = filter("Pending"), "Variation Type" = filter(savings);
+                //         }
+                //         action("Savings  AppVariations List")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Approved Savings Variations List';
+                //             RunObject = Page "Savings Variations List";
+                //             RunPageLink = Status = filter(Approved), posted = const(false), "Variation Type" = filter(savings);
+                //         }
+                //         action("Posted sav Variations List")
+                //         {
+                //             ApplicationArea = Basic, Suite;
+                //             Caption = 'Posted  Savings Variations List';
+                //             RunObject = Page "Savings Variations List";
+                //             RunPageLink = Status = filter(Approved), posted = const(true), "Variation Type" = filter(savings);
+                //         }
+                //         // action("Sav' Variations Send Back To CRM")
+                //         // {
+                //         //     ApplicationArea = Basic, Suite;
+                //         //     Caption = ' Savings Variations Send Back To CRM';
+                //         //     RunObject = Page "Savings Variations List";
+                //         //     RunPageLink = Status = filter(Open), "Sent Back to CRM" = const(true), "Variation Type" = filter(savings);
+                //         // }
+                //     }
 
-                }
+                // }
                 // group("Member Withdrawal")
                 // {
                 //     Caption = 'Member Withdrawal Notices';
@@ -925,35 +925,7 @@ page 52187312 "Credit Management Role Center"
                 //         RunPageLink = Status = filter(Approved), Processed = const(true);
                 //     }
                 // }
-                group("Checkoff Advise Process")
-                {
-                    action("Checkoff Advise")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Checkoff Advice';
-                        RunObject = Page "Checkoff Advice Header List";
-                    }
-                    action("Posted Checkoff Advise")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Posted Checkoff Advice';
-                        RunObject = Page "+Checkoff Advice Header List";
-                    }
-                    action("Checkoff Advice Lines")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Checkoff Advice Lines';
-                        RunObject = Page "Checkoff Advice";
-                    }
-                    action("Checkoff Advice Logs")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Checkoff Advice Logs';
-                        RunObject = Page "Checkoff Advice";
-                    }
 
-
-                }
 
                 group("Standing Orders")
                 {
@@ -1149,7 +1121,7 @@ page 52187312 "Credit Management Role Center"
                     }
                     group("Single Refunds")
                     {
-                        action("Account Trasfer")
+                        action("Account Transfer")
                         {
                             ApplicationArea = Basic, Suite;
                             Caption = 'Account Transfer List(Single Member)';
@@ -1585,6 +1557,108 @@ page 52187312 "Credit Management Role Center"
                     Caption = 'Employers List';
                     RunObject = page "Employer Code List";
                 }
+                group("Product Variations")
+                {
+                    group("Loans Variations")
+                    {
+                        action("Open Variations List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Open Loans Variations List';
+                            RunObject = Page "Variations List";
+                            RunPageLink = Status = filter(Open), "Sent Back to CRM" = const(false), "Variation Type" = filter(Loan);
+                        }
+                        action("Pending Variations List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Pending Loans Variations List';
+                            RunObject = Page "Variations List";
+                            RunPageLink = Status = filter("Pending"), "Variation Type" = filter(Loan);
+                        }
+                        action("Approved Variations List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Approved Loans Variations List';
+                            RunObject = Page "Variations List";
+                            RunPageLink = Status = filter(Approved), posted = const(false), "Variation Type" = filter(Loan);
+                        }
+                        action("Posted Variations List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Posted Loans Variations List';
+                            RunObject = Page "Variations List";
+                            RunPageLink = Status = filter(Approved), posted = const(true), "Variation Type" = filter(Loan);
+                        }
+                        // action("Variations Send Back To CRM")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Variations Send Back To CRM';
+                        //     RunObject = Page "Variations List";
+                        //     RunPageLink = Status = filter(Open), "Sent Back to CRM" = const(true), "Variation Type" = filter(Loan);
+                        // }
+                    }
+                    group("Savings Variations")
+                    {
+                        action("Open  Savings Variations List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Open Savings Variations List';
+                            RunObject = Page "Savings Variations List";
+                            RunPageLink = Status = filter(Open), "Sent Back to CRM" = const(false), "Variation Type" = filter(savings);
+                        }
+                        action("Savings PendVariations List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Pending Savings Variations List';
+                            RunObject = Page "Savings Variations List";
+                            RunPageLink = Status = filter("Pending"), "Variation Type" = filter(savings);
+                        }
+                        action("Savings  AppVariations List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Approved Savings Variations List';
+                            RunObject = Page "Savings Variations List";
+                            RunPageLink = Status = filter(Approved), posted = const(false), "Variation Type" = filter(savings);
+                        }
+                        action("Posted sav Variations List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Posted  Savings Variations List';
+                            RunObject = Page "Savings Variations List";
+                            RunPageLink = Status = filter(Approved), posted = const(true), "Variation Type" = filter(savings);
+                        }
+                        // action("Sav' Variations Send Back To CRM")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = ' Savings Variations Send Back To CRM';
+                        //     RunObject = Page "Savings Variations List";
+                        //     RunPageLink = Status = filter(Open), "Sent Back to CRM" = const(true), "Variation Type" = filter(savings);
+                        // }
+                    }
+
+                }
+                group("Checkoff Advise Process")
+                {
+                    action("Checkoff Advise")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Checkoff Advice';
+                        RunObject = Page "Checkoff Advice Header List";
+                    }
+                    action("Posted Checkoff Advise")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Posted Checkoff Advice';
+                        RunObject = Page "+Checkoff Advice Header List";
+                    }
+                    action("Checkoff Advice Logs")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Checkoff Advice Logs';
+                        RunObject = Page "Checkoff Advice";
+                    }
+
+                }
                 // action("Digit Custodian List")
                 // {
                 //     ApplicationArea = Basic, Suite;
@@ -1597,41 +1671,46 @@ page 52187312 "Credit Management Role Center"
                     Caption = 'Product & references';
                     RunObject = page "Product & references";
                 }
-                action("Checkoff Header List")
+                group("Checkoff Posting")
                 {
-                    ApplicationArea = all;
-                    Caption = 'Open Checkoff Header List';
-                    RunObject = page "Checkoff Header List";
-                    RunPageLink = Posted = const(false), Status = const(Open);
+                    Caption = 'Checkoff Posting';
+                    action("Checkoff Header List")
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Open Checkoff Header List';
+                        RunObject = page "Checkoff Header List";
+                        RunPageLink = Posted = const(false), Status = const(Open);
+                    }
+                    action("Pending Checkoff Header List")
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Pending Checkoff Header List';
+                        RunObject = page "Checkoff Header List";
+                        RunPageLink = Posted = const(false), Status = const(Pending);
+                    }
+                    action("Approved Checkoff Header")
+                    {
+                        Caption = 'Approved Checkoff Header List';
+                        ApplicationArea = all;
+                        RunObject = page "Checkoff Header List";
+                        RunPageLink = Posted = const(false), Status = const(Approved);
+                    }
+                    action("Posted Checkoff Header")
+                    {
+                        Caption = 'Posted Checkoff Header List';
+                        ApplicationArea = all;
+                        RunObject = page "Checkoff Header List";
+                        RunPageLink = Posted = const(true);
+                    }
+                    action("Rejected Checkoff Header")
+                    {
+                        Caption = 'Rejected Checkoff Header List';
+                        ApplicationArea = all;
+                        RunObject = page "Checkoff Header List";
+                        RunPageLink = Posted = const(false), Status = const(Rejected);
+                    }
                 }
-                action("Pending Checkoff Header List")
-                {
-                    ApplicationArea = all;
-                    Caption = 'Pending Checkoff Header List';
-                    RunObject = page "Checkoff Header List";
-                    RunPageLink = Posted = const(false), Status = const(Pending);
-                }
-                action("Approved Checkoff Header")
-                {
-                    Caption = 'Approved Checkoff Header List';
-                    ApplicationArea = all;
-                    RunObject = page "Checkoff Header List";
-                    RunPageLink = Posted = const(false), Status = const(Approved);
-                }
-                action("Posted Checkoff Header")
-                {
-                    Caption = 'Posted Checkoff Header List';
-                    ApplicationArea = all;
-                    RunObject = page "Checkoff Header List";
-                    RunPageLink = Posted = const(true);
-                }
-                action("Rejected Checkoff Header")
-                {
-                    Caption = 'Rejected Checkoff Header List';
-                    ApplicationArea = all;
-                    RunObject = page "Checkoff Header List";
-                    RunPageLink = Posted = const(false), Status = const(Rejected);
-                }
+
 
                 // group("Revenue Collection")
                 // {
@@ -1688,12 +1767,12 @@ page 52187312 "Credit Management Role Center"
                 //         ToolTip = 'View the list of fixed assets that have been transferred.';
                 //     }
                 // }
-                action(StaffWelfare)
-                {
-                    Caption = 'Staff Welfare Claim';
-                    ApplicationArea = Basic, Suite;
-                    RunObject = page "Staff Welfare List";
-                }
+                // action(StaffWelfare)
+                // {
+                //     Caption = 'Staff Welfare Claim';
+                //     ApplicationArea = Basic, Suite;
+                //     RunObject = page "Staff Welfare List";
+                // }
                 action(LeaveApplication1)
                 {
                     Caption = 'Employee Leave Application';
@@ -1712,12 +1791,12 @@ page 52187312 "Credit Management Role Center"
 
 
 
-                action("Overtime Claim List")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Overtime';
-                    RunObject = page "Overtime Claim List";
-                }
+                // action("Overtime Claim List")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Overtime';
+                //     RunObject = page "Overtime Claim List";
+                // }
 
                 action("System Rights Requisition")
                 {
@@ -1731,25 +1810,25 @@ page 52187312 "Credit Management Role Center"
                     Caption = 'Payslip';
                     RunObject = report "Self Service Slip";
                 }
-                group("Loan Application")
-                {
+                // group("Loan Application")
+                // {
 
-                    action("New Application")
-                    {
+                //     action("New Application")
+                //     {
 
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Apply Staff Loan';
-                        RunObject = page "Self Loan Application List";
-                        RunPageLink = "Return To user" = const(false);
-                    }
-                    action("Resubmission")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Resubmission';
-                        RunObject = page "Self Loan Application List";
-                        RunPageLink = "Return To user" = const(true);
-                    }
-                }
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Apply Staff Loan';
+                //         RunObject = page "Self Loan Application List";
+                //         RunPageLink = "Return To user" = const(false);
+                //     }
+                //     action("Resubmission")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Resubmission';
+                //         RunObject = page "Self Loan Application List";
+                //         RunPageLink = "Return To user" = const(true);
+                //     }
+                // }
                 group("Employee Requests")
                 {
 
@@ -1991,7 +2070,6 @@ page 52187312 "Credit Management Role Center"
                         ApplicationArea = Basic, Suite;
                         Caption = 'Member Listing - List';
                         RunObject = report "Member Register";
-
                     }
                     action("Members Age")
                     {
@@ -2058,6 +2136,12 @@ page 52187312 "Credit Management Role Center"
                         Caption = 'Posted Loans Register';
                         RunObject = report "Loan Interest  Register";
                         Visible = false;
+                    }
+                    action("Loan Repayment & Total Balance")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Expected Vs Received Loans Report.';
+                        RunObject = report "Expected Loan Repayment";
                     }
                     action("Loan Insurance Report")
                     {
@@ -2469,82 +2553,82 @@ page 52187312 "Credit Management Role Center"
                 group("Periodic Activitites Reports")
                 {
                     Caption = 'Periodic Activities';
-                    group("Dividend")
-                    {
-                        action("Dividend Register")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Dividend Register';
-                            RunObject = report "Dividend Register";
-                        }
-                        action("Dividend Generation")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Dividend Generation';
-                            RunObject = report "Dividend Generation";
-                        }
-                        action("Dividend Posting Buffer")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Dividend Posting Buffer';
-                            RunObject = report "Dividend Posting Buffer";
-                        }
-                        action("Dividend Posting")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Dividend Posting';
-                            RunObject = report "Dividend Posting";
-                        }
-                        action("Dividend Register II")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Dividend Register';
-                            RunObject = report "Dividend Register";
-                        }
-                        action("Dividend Register Summary")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Dividend Register Summary';
-                            RunObject = report "Dividend Register Summary";
-                        }
-                        action("Dividend Statement")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Dividend Statement';
-                            RunObject = report "Dividend Statement";
-                        }
-                        action("Dividend Register Filtered")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Dividend Register Filltered';
-                            RunObject = report "Dividend Register Filtered";
-                        }
+                    // group("Dividend")
+                    // {
+                    //     action("Dividend Register")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         Caption = 'Dividend Register';
+                    //         RunObject = report "Dividend Register";
+                    //     }
+                    //     action("Dividend Generation")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         Caption = 'Dividend Generation';
+                    //         RunObject = report "Dividend Generation";
+                    //     }
+                    //     action("Dividend Posting Buffer")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         Caption = 'Dividend Posting Buffer';
+                    //         RunObject = report "Dividend Posting Buffer";
+                    //     }
+                    //     action("Dividend Posting")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         Caption = 'Dividend Posting';
+                    //         RunObject = report "Dividend Posting";
+                    //     }
+                    //     action("Dividend Register II")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         Caption = 'Dividend Register';
+                    //         RunObject = report "Dividend Register";
+                    //     }
+                    //     action("Dividend Register Summary")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         Caption = 'Dividend Register Summary';
+                    //         RunObject = report "Dividend Register Summary";
+                    //     }
+                    //     action("Dividend Statement")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         Caption = 'Dividend Statement';
+                    //         RunObject = report "Dividend Statement";
+                    //     }
+                    //     action("Dividend Register Filtered")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         Caption = 'Dividend Register Filltered';
+                    //         RunObject = report "Dividend Register Filtered";
+                    //     }
 
-                    }
-                    group("Monthly Billings")
-                    {
-                        Caption = 'Monthly Billing';
-                        action("Charge Monthly Fee")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Charge Monthly Fee';
-                            RunObject = report "Charge Monthly Fee";
-                        }
-                        action("Montlhly Bill Summary")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Montlhly Bill Summary';
-                            RunObject = report "Monthly Bill Summary";
-                        }
-                        action("Dailly Interest Buffer")
-                        {
-                            ApplicationArea = all;
-                            Caption = 'Dailly Interest';
-                            RunObject = report "Dailly Billing Process";
-                        }
+                    // }
+                    // group("Monthly Billings")
+                    // {
+                    //     Caption = 'Monthly Billing';
+                    //     action("Charge Monthly Fee")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         Caption = 'Charge Monthly Fee';
+                    //         RunObject = report "Charge Monthly Fee";
+                    //     }
+                    //     action("Montlhly Bill Summary")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         Caption = 'Montlhly Bill Summary';
+                    //         RunObject = report "Monthly Bill Summary";
+                    //     }
+                    //     action("Dailly Interest Buffer")
+                    //     {
+                    //         ApplicationArea = all;
+                    //         Caption = 'Dailly Interest';
+                    //         RunObject = report "Dailly Billing Process";
+                    //     }
 
 
-                    }
+                    // }
                     group("CheckOff Reports")
                     {
                         caption = 'CheckOff Reports';
@@ -2579,23 +2663,7 @@ page 52187312 "Credit Management Role Center"
                             runobject = report "Membership Declaration";
                         }
                     }
-                    group("Marketing Reports")
-                    {
-                        Caption = 'Marketing';
-                        // action("Process BDE Payments II")
-                        // {
-                        //     ApplicationArea = Basic, Suite;
-                        //     Caption = 'Process BDE Payments';
-                        //     RunObject = report "Process BDE Payments";
-                        // }
-                        action("BDE Staff Performance Summary")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'BDE Staff Performance Summary';
-                            RunObject = report "BDE Staff Performance Summary";
-                        }
-
-                    }
+                    
 
                 }
 
@@ -2619,24 +2687,24 @@ page 52187312 "Credit Management Role Center"
                         RunObject = report "Sectoral Lending";
                     }
 
-                    action("User Groups and Permission Report")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'User Groups and Permission Report';
-                        RunObject = report "User Groups Permision Report";
-                    }
-                    action("Sasra Staff Access Granted")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Sasra Staff Access Granted';
-                        RunObject = report "Sasra Staff Access Granted";
-                    }
-                    action("Sasra Staff Positions")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Sasra Staff Positions';
-                        RunObject = report "Sasra Staff Positions";
-                    }
+                    // action("User Groups and Permission Report")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'User Groups and Permission Report';
+                    //     RunObject = report "User Groups Permision Report";
+                    // }
+                    // action("Sasra Staff Access Granted")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Sasra Staff Access Granted';
+                    //     RunObject = report "Sasra Staff Access Granted";
+                    // }
+                    // action("Sasra Staff Positions")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Sasra Staff Positions';
+                    //     RunObject = report "Sasra Staff Positions";
+                    // }
                     action("Sasra Loan Register")
                     {
                         ApplicationArea = Basic, Suite;
@@ -2655,26 +2723,26 @@ page 52187312 "Credit Management Role Center"
                         Caption = 'Sasra Deposit Accounts Others';
                         RunObject = report "Sasra Deposit Accounts Others";
                     }
-                    action("Unpaid Deposits Claims")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Unpaid Deposits Claims';
-                        RunObject = report "Unpaid Deposits Claims";
-                    }
+                    // action("Unpaid Deposits Claims")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Unpaid Deposits Claims';
+                    //     RunObject = report "Unpaid Deposits Claims";
+                    // }
 
-                    action("Anti-Money Laundering Report")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Anti-Money Laundering Report';
-                        RunObject = report "Anti-Money Laundering Report";
-                    }
+                    // action("Anti-Money Laundering Report")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Anti-Money Laundering Report';
+                    //     RunObject = report "Anti-Money Laundering Report";
+                    // }
 
-                    action("Transaction Log-Finance")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Transaction Log-Finance';
-                        RunObject = XMLPort "Transaction Log-Finance";
-                    }
+                    // action("Transaction Log-Finance")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Transaction Log-Finance';
+                    //     RunObject = XMLPort "Transaction Log-Finance";
+                    // }
                 }
                 //*******************DMU-ADDITIONAL REPORTS*******************************************************//
                 action("Loan Attachment Report")
@@ -2718,11 +2786,11 @@ page 52187312 "Credit Management Role Center"
                     ApplicationArea = Basic, Suite;
                     RunObject = report "Staff Daily Transactions";
                 }
-                action("Promise To Pay Report")
-                {
-                    ApplicationArea = Basic, Suite;
-                    RunObject = report "Promise To Pay Report";
-                }
+                // action("Promise To Pay Report")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     RunObject = report "Promise To Pay Report";
+                // }
                 group("CRB Daily")
                 {
                     action("Process CRM Daily")
@@ -2820,36 +2888,6 @@ page 52187312 "Credit Management Role Center"
                 //     }
                 // }
 
-                group("Deposit Listing")
-                {
-                    action("Proces Deposit Listing")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = report "Deposit Listing Report";
-                    }
-                    action("View Deposit Listing")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "Deposit Listing List";
-                    }
-                    action("Deposit Listing Errors")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "Bulk Processing Errors List";
-                        RunPageView = where(Process = filter("Deposit Listing"));
-                    }
-                }
-
-                group(Members)
-                {
-                    action("Member Listing")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Member Listing';
-                        RunObject = page "Member Listing Report";
-
-                    }
-                }
 
             }
 
@@ -2967,46 +3005,7 @@ page 52187312 "Credit Management Role Center"
 
                 }
 
-                group("Dividend Setup II")
-                {
-                    caption = 'Dividend Setup';
-
-                    action("Dividend Setup")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Dividend Setup';
-                        RunObject = page "Dividend Setup";
-                    }
-                    action("Dividend Simulation Header")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Dividend Simulation Header';
-                        RunObject = page "Dividend Simulation Header";
-                    }
-                }
-
-                group("SMS")
-                {
-                    caption = 'SMS';
-                    action("SMS Setup")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'SMS Setup';
-                        RunObject = page "SMS Setup";
-                    }
-                    action("SMS Codes")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'SMS Codes';
-                        RunObject = page "SMS Codes";
-                    }
-                    action("SMS Subscription List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'SMS Subscription List';
-                        RunObject = page "SMS Subscription List";
-                    }
-                }
+                
                 // group("Notifications")
                 // {
                 //     Action("Notification Setup")

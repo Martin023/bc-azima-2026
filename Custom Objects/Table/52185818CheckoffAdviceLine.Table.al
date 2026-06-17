@@ -100,12 +100,14 @@ table 52185818 "Checkoff Advice Line"
         }
         field(8; "Amount On"; Decimal)
         {
+            Caption = 'Installment Amount';
         }
         field(9; "Amount Off"; Decimal)
         {
         }
         field(10; "Balance On"; Decimal)
         {
+            Caption = 'Loan Balance(P+I)';
         }
         field(11; "Balance Off"; Decimal)
         {
@@ -147,8 +149,8 @@ table 52185818 "Checkoff Advice Line"
         }
         field(20; "Advice Type"; Option)
         {
-            OptionCaption = ' ,Stoppage,Adjustment,New Loan,Variations,New,Refeeding,New Guar Loan';
-            OptionMembers = " ",Stoppage,Adjustment,"New Loan",Variations,New,Refeeding,"New Guar Loan";
+            OptionCaption = ' ,Stoppage,Fresh Loan,Variations,Monthly Deduction';
+            OptionMembers = " ",Stoppage,"Fresh Loan",Variations,"Monthly Deduction";
 
             trigger OnValidate()
             begin

@@ -3272,7 +3272,7 @@ table 52185729 Loans
         field(209; "Work Station Name"; text[150])
         {
             fieldclass = flowfield;
-            CalcFormula = lookup("Electrol Zones/Area Svr Center".Description WHERE(Code = field("Work Station")));
+            CalcFormula = lookup(Customer.Name WHERE("No." = field("Work Station")));
         }
         field(210; "Months to Retire"; Integer)
         {
@@ -3838,7 +3838,6 @@ table 52185729 Loans
         BusinessIncome: Record "Business Income";
         LoansTopup: Record "Loans Top up";
         ExternalComm: Record "Other Commitements Clearance";
-        PaymentMethods: Record "Payment Methods";
     begin
         AppraisalSalDetails.Reset;
         AppraisalSalDetails.SetRange("Loan No", Rec."Loan No.");

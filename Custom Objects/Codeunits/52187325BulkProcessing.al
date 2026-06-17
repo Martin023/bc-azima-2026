@@ -1387,9 +1387,9 @@ codeunit 52187325 "Bulk Processing"
                 //     MemberFactBox."Risk Contribution" := SavingsAccount."Monthly Contribution";
                 // end;
                 //if SavingsAccount."Product Type" = '6' then begin
-                if savingsaccount."Product Category" = savingsaccount."Product Category"::"Unallocated Fund" then begin
-                    MemberFactBox."Unallocated Funds" := SavingsAccount."Balance (LCY)";
-                end;
+                // if savingsaccount."Product Category" = savingsaccount."Product Category"::"Unallocated Fund" then begin
+                //     MemberFactBox."Unallocated Funds" := SavingsAccount."Balance (LCY)";
+                // end;
             // if SavingsAccount."Product Type" = '011' then begin
             //     MemberFactBox."Business Deposits" := SavingsAccount."Balance (LCY)";
             // end;

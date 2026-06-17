@@ -53,7 +53,7 @@ table 52186834 "Member FactBox"
         {
             Editable = false;
             FieldClass = FlowField;
-            CalcFormula = - sum("Savings Ledger Entry".Amount where("Member No." = field("Member No."), "Product Category" = filter("FOSA Account"), "Posting Date" = FIELD("Date Filter")));
+            CalcFormula = - sum("Savings Ledger Entry".Amount where("Member No." = field("Member No."), "Product Type" = filter('191'), "Posting Date" = FIELD("Date Filter")));
         }
         field(8; "Share Capital"; Decimal)
         {

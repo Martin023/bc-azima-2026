@@ -1395,142 +1395,117 @@ Codeunit 52186458 "Loans Process"
         end;
     end;
 
-    procedure TriggeredAdvice(Members: Record Members)
-    var
-        SavingsAccounts: Record "Savings Accounts";
-        Loans: Record Loans;
-    begin
-        SavingsAccounts.Reset();
-        SavingsAccounts.SetRange("Member No.", Members."No.");
-        SavingsAccounts.Setrange("Source Unit", SavingsAccounts."Source Unit"::BOSA);
-        SavingsAccounts.SetFilter("Product Type", '<>%1&<>%2', '2', '3');
-        if SavingsAccounts.Find('-') then begin
-            repeat
-                AdviceTriggeredShares(SavingsAccounts, SavingsAccounts."Monthly Contribution", '');
-            until SavingsAccounts.Next = 0;
-        end;
-
-        Loans.Reset();
-        Loans.SetRange("Member No.", Members."No.");
-        Loans.SetFilter("Outstanding Balance", '>0');
-        if Loans.Find('-') then begin
-            repeat
-                AdviceTriggeredLoan(Loans."Loan No.", False, '');
-            until Loans.Next = 0;
-        end;
-
-    end;
 
 
-   
 
-    procedure AdviceTriggeredLoan(LoanNo: Code[20]; Topup: Boolean; AssociatedDocNo: Code[50])
-    var
-        iEntryNo: Integer;
-        CheckoffAdvice: Record "Triggered Advice Line";
-        PaymentMethods: Record "Payment Methods";
-        Memb: Record Members;
-        Loans: Record Loans;
-        InterestAmount: Decimal;
-        InterestTotalsFlat: Decimal;
-        NoOfMonths: Integer;
-        MortgageInsurance: Decimal;
-    begin
-        if Loans.Get(LoanNo) then begin
 
-            ProdFac.Get(Loans."Loan Product Type");
 
-            GenSetup.Get;
-            if Loans."Recovery Mode" = Loans."Recovery Mode"::Checkoff then begin
-                Loans.CalcFields(Loans."Outstanding Balance");
-                InterestAmount := ((Loans."Outstanding Balance" * Loans.Interest / 1200) / Loans.Installments);
-                if InterestAmount < 0 then
-                    InterestAmount := 0;
-                MortgageInsurance := 0;
-                //MortgageInsurance:=GenSetup."Mortgage Insurance Amount";
-                MortgageInsurance := Loans."Mortgage Insurance Amount";
+    // procedure AdviceTriggeredLoan(LoanNo: Code[20]; Topup: Boolean; AssociatedDocNo: Code[50])
+    // var
+    //     iEntryNo: Integer;
+    //     CheckoffAdvice: Record "Triggered Advice Line";
+    //     Memb: Record Members;
+    //     Loans: Record Loans;
+    //     InterestAmount: Decimal;
+    //     InterestTotalsFlat: Decimal;
+    //     NoOfMonths: Integer;
+    //     MortgageInsurance: Decimal;
+    // begin
+    //     if Loans.Get(LoanNo) then begin
 
-                CheckoffAdvice.Reset;
-                CheckoffAdvice.SetRange(CheckoffAdvice."Advice Date", Today);
-                CheckoffAdvice.SetRange(CheckoffAdvice."Loan No.", Loans."Loan No.");
-                if CheckoffAdvice.Find('-') then
-                    CheckoffAdvice.DeleteAll;
+    //         ProdFac.Get(Loans."Loan Product Type");
 
-                iEntryNo := 0;
-                CheckoffAdvice.Reset;
-                if CheckoffAdvice.Find('+') then
-                    iEntryNo := CheckoffAdvice."Entry No" + 1;
+    //         GenSetup.Get;
+    //         if Loans."Recovery Mode" = Loans."Recovery Mode"::Checkoff then begin
+    //             Loans.CalcFields(Loans."Outstanding Balance");
+    //             InterestAmount := ((Loans."Outstanding Balance" * Loans.Interest / 1200) / Loans.Installments);
+    //             if InterestAmount < 0 then
+    //                 InterestAmount := 0;
+    //             MortgageInsurance := 0;
+    //             //MortgageInsurance:=GenSetup."Mortgage Insurance Amount";
+    //             MortgageInsurance := Loans."Mortgage Insurance Amount";
 
-                CheckoffAdvice.Init;
-                CheckoffAdvice."Entry No" := iEntryNo;
-                CheckoffAdvice."Account No." := Loans."Loan Account";
-                CheckoffAdvice."Product Type" := Loans."Loan Product Type";
-                CheckoffAdvice.Type := CheckoffAdvice.Type::Credit;
-                CheckoffAdvice.Validate("Product Type");
-                CheckoffAdvice."Loan No." := Loans."Loan No.";
-                CheckoffAdvice.Validate("Loan No.");
-                if Memb.Get(Loans."Member No.") then
-                    CheckoffAdvice."ID No." := Memb."Primary Identification";
-                CheckoffAdvice."Member No." := Loans."Member No.";
-                CheckoffAdvice.Validate("Member No.");
-                CheckoffAdvice."Employer Code" := Memb."Employer Code";
-                //CheckoffAdvice.VALIDATE(CheckoffAdvice."Member No.");
-                CheckoffAdvice.Names := Loans."Member Name";
-                if Loans."Employer Loan No." <> '' then
-                    CheckoffAdvice."Employer Account No." := Loans."Employer Loan No."
-                else
-                    CheckoffAdvice."Employer Account No." := Loans."Loan No.";
-                CheckoffAdvice."Loan No." := Loans."Loan No.";
-                CheckoffAdvice.Validate("Loan No.");
+    //             CheckoffAdvice.Reset;
+    //             CheckoffAdvice.SetRange(CheckoffAdvice."Advice Date", Today);
+    //             CheckoffAdvice.SetRange(CheckoffAdvice."Loan No.", Loans."Loan No.");
+    //             if CheckoffAdvice.Find('-') then
+    //                 CheckoffAdvice.DeleteAll;
 
-                //Different Mode of Payment***************
-                PaymentMethods.Reset;
-                PaymentMethods.SetRange(PaymentMethods."Loan No.", Loans."Loan No.");
-                PaymentMethods.SetRange(PaymentMethods."Member No.", Loans."Member No.");
-                PaymentMethods.SetRange(PaymentMethods."Payment Method", PaymentMethods."payment method"::Checkoff);
-                if PaymentMethods.Find('-') then
-                    CheckoffAdvice."Amount On" := PaymentMethods.Amount
-                else
-                    CheckoffAdvice."Amount On" := Loans.Repayment + MortgageInsurance;//-InterestAmount;
+    //             iEntryNo := 0;
+    //             CheckoffAdvice.Reset;
+    //             if CheckoffAdvice.Find('+') then
+    //                 iEntryNo := CheckoffAdvice."Entry No" + 1;
 
-                if Topup = true then begin
-                    CheckoffAdvice."Amount Off" := Loans.Repayment;
-                    CheckoffAdvice."Amount On" := 0;
+    //             CheckoffAdvice.Init;
+    //             CheckoffAdvice."Entry No" := iEntryNo;
+    //             CheckoffAdvice."Account No." := Loans."Loan Account";
+    //             CheckoffAdvice."Product Type" := Loans."Loan Product Type";
+    //             CheckoffAdvice.Type := CheckoffAdvice.Type::Credit;
+    //             CheckoffAdvice.Validate("Product Type");
+    //             CheckoffAdvice."Loan No." := Loans."Loan No.";
+    //             CheckoffAdvice.Validate("Loan No.");
+    //             if Memb.Get(Loans."Member No.") then
+    //                 CheckoffAdvice."ID No." := Memb."Primary Identification";
+    //             CheckoffAdvice."Member No." := Loans."Member No.";
+    //             CheckoffAdvice.Validate("Member No.");
+    //             CheckoffAdvice."Employer Code" := Memb."Employer Code";
+    //             //CheckoffAdvice.VALIDATE(CheckoffAdvice."Member No.");
+    //             CheckoffAdvice.Names := Loans."Member Name";
+    //             if Loans."Employer Loan No." <> '' then
+    //                 CheckoffAdvice."Employer Account No." := Loans."Employer Loan No."
+    //             else
+    //                 CheckoffAdvice."Employer Account No." := Loans."Loan No.";
+    //             CheckoffAdvice."Loan No." := Loans."Loan No.";
+    //             CheckoffAdvice.Validate("Loan No.");
 
-                    if Loans."Interest Calculation Method" = Loans."interest calculation method"::"Reducing Flat" then begin
-                        InterestTotalsFlat := ((Loans.Repayment * Loans.Installments) - Loans."Approved Amount") / Loans.Installments;
-                        NoOfMonths := ROUND((Loans."Approved Amount" - Loans."Outstanding Balance") / (Loans.Repayment - InterestTotalsFlat), 1, '>');
-                        CheckoffAdvice."Balance Off" := Loans.Repayment * NoOfMonths;//Loans."Outstanding Balance";
-                    end else
-                        CheckoffAdvice."Balance Off" := Loans."Outstanding Balance";
-                    CheckoffAdvice.Interest := 0;
-                    CheckoffAdvice."Balance On" := 0;
-                end else begin
-                    /* IF Loans."Outstanding Interest">InterestAmount THEN
-                       CheckoffAdvice.Interest:=Loans."Outstanding Interest"
+    //             //Different Mode of Payment***************
+    //             PaymentMethods.Reset;
+    //             PaymentMethods.SetRange(PaymentMethods."Loan No.", Loans."Loan No.");
+    //             PaymentMethods.SetRange(PaymentMethods."Member No.", Loans."Member No.");
+    //             PaymentMethods.SetRange(PaymentMethods."Payment Method", PaymentMethods."payment method"::Checkoff);
+    //             if PaymentMethods.Find('-') then
+    //                 CheckoffAdvice."Amount On" := PaymentMethods.Amount
+    //             else
+    //                 CheckoffAdvice."Amount On" := Loans.Repayment + MortgageInsurance;//-InterestAmount;
 
-                       ELSE*/
-                    CheckoffAdvice.Interest := InterestAmount;
-                    CheckoffAdvice."Balance On" := Loans.Repayment * Loans.Installments;//Loans."Outstanding Balance";
-                    CheckoffAdvice."Balance Off" := 0;
-                    CheckoffAdvice."Amount Off" := 0;
-                end;
-                if Loans."Employer Balance" <> 0 then
-                    CheckoffAdvice."Balance Off" := Loans."Employer Balance";
-                CheckoffAdvice."Advice Date" := Today;
-                CheckoffAdvice."Payroll No" := Memb."Payroll/Staff No.";
-                CheckoffAdvice.Interest := Loans."Loan Interest Repayment";
-                if Topup = false then
-                    CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::"New Loan"
-                else
-                    CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Stoppage;
-                CheckoffAdvice.Validate("Advice Type");
-                CheckoffAdvice."Associated Document No" := AssociatedDocNo;
-                CheckoffAdvice.Insert;
-            end;
-        end;
+    //             if Topup = true then begin
+    //                 CheckoffAdvice."Amount Off" := Loans.Repayment;
+    //                 CheckoffAdvice."Amount On" := 0;
 
-    end;
+    //                 if Loans."Interest Calculation Method" = Loans."interest calculation method"::"Reducing Flat" then begin
+    //                     InterestTotalsFlat := ((Loans.Repayment * Loans.Installments) - Loans."Approved Amount") / Loans.Installments;
+    //                     NoOfMonths := ROUND((Loans."Approved Amount" - Loans."Outstanding Balance") / (Loans.Repayment - InterestTotalsFlat), 1, '>');
+    //                     CheckoffAdvice."Balance Off" := Loans.Repayment * NoOfMonths;//Loans."Outstanding Balance";
+    //                 end else
+    //                     CheckoffAdvice."Balance Off" := Loans."Outstanding Balance";
+    //                 CheckoffAdvice.Interest := 0;
+    //                 CheckoffAdvice."Balance On" := 0;
+    //             end else begin
+    //                 /* IF Loans."Outstanding Interest">InterestAmount THEN
+    //                    CheckoffAdvice.Interest:=Loans."Outstanding Interest"
+
+    //                    ELSE*/
+    //                 CheckoffAdvice.Interest := InterestAmount;
+    //                 CheckoffAdvice."Balance On" := Loans.Repayment * Loans.Installments;//Loans."Outstanding Balance";
+    //                 CheckoffAdvice."Balance Off" := 0;
+    //                 CheckoffAdvice."Amount Off" := 0;
+    //             end;
+    //             if Loans."Employer Balance" <> 0 then
+    //                 CheckoffAdvice."Balance Off" := Loans."Employer Balance";
+    //             CheckoffAdvice."Advice Date" := Today;
+    //             CheckoffAdvice."Payroll No" := Memb."Payroll/Staff No.";
+    //             CheckoffAdvice.Interest := Loans."Loan Interest Repayment";
+    //             if Topup = false then
+    //                 CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::"New Loan"
+    //             else
+    //                 CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Stoppage;
+    //             CheckoffAdvice.Validate("Advice Type");
+    //             CheckoffAdvice."Associated Document No" := AssociatedDocNo;
+    //             CheckoffAdvice.Insert;
+    //         end;
+    //     end;
+
+    // end;
 
 
     procedure RunSpecificConsolidatedCheckOffAdviceReport(MemberNo: Code[50]; AdviceDate: Date; AssociatedDocNo: Code[50])
@@ -1559,74 +1534,6 @@ Codeunit 52186458 "Loans Process"
         if CheckOffAdviceLine.Find('-') then begin
             Report.Run(52186856, true, false, CheckOffAdviceLine);
         end;
-    end;
-
-
-    procedure AdviceShares(SavingsAccounts: Record "Savings Accounts"; AmountOn: Decimal; AssociatedDocNo: Code[50])
-    var
-        CheckoffAdvice: Record "Checkoff Advice Line";
-        iEntryNo: Integer;
-        MonthlyContribution: Decimal;
-        Prorata: Decimal;
-        CustomCuesCodeunit: Codeunit CustomCuesCodeunit;
-    begin
-        SavingsAccounts.CalcFields("Balance (LCY)");
-
-        CheckoffAdvice.Init;
-        CheckoffAdvice."Account No." := SavingsAccounts."No.";
-        CheckoffAdvice."Member No." := SavingsAccounts."Member No.";
-        CheckoffAdvice.Validate(CheckoffAdvice."Member No.");
-        CheckoffAdvice."Payroll No" := SavingsAccounts."Payroll/Staff No.";
-        CheckoffAdvice."Advice Method" := CheckoffAdvice."advice method"::Changes;
-        CheckoffAdvice."Advice Date" := Today;
-        CheckoffAdvice."ID No." := SavingsAccounts."ID No.";
-        CheckoffAdvice."Employer Code" := SavingsAccounts."Employer Code";
-        CheckoffAdvice.Names := SavingsAccounts.Name;
-        CheckoffAdvice."Employer Account No." := SavingsAccounts."Employer Account No";
-        CheckoffAdvice."Product Type" := SavingsAccounts."Product Type";
-        CheckoffAdvice.Type := CheckoffAdvice.Type::Savings;
-        if CheckoffAdvice."Employer Account No." = '' then
-            CheckoffAdvice."Employer Account No." := SavingsAccounts."No.";
-
-        //***********************Amount Off******************************************/
-        MonthlyContribution := SavingsAccounts."Monthly Contribution";
-        Prorata := CustomCuesCodeunit.Prorata(SavingsAccounts."Member No.", SavingsAccounts."Product Type");
-        if Prorata > MonthlyContribution then MonthlyContribution := Prorata;
-        CheckoffAdvice."Amount Off" := MonthlyContribution;
-        if SavingsAccounts."Balance (LCY)" <= 0 then
-            CheckoffAdvice."Amount Off" := 0;
-        //***********************Amount Off******************************************/
-
-        //***********************Amount On******************************************/
-        if AmountOn = 0 then begin
-            CheckoffAdvice."Amount On" := 0;
-        end;
-        if AmountOn > 0 then begin
-            CheckoffAdvice."Amount On" := AmountOn;
-            if CheckoffAdvice."Amount On" < SavingsAccounts."Monthly Contribution" then
-                CheckoffAdvice."Amount On" := SavingsAccounts."Monthly Contribution";
-        end;
-        //***********************Amount On******************************************/
-
-        //***********************Balance On******************************************/
-        CheckoffAdvice."Balance On" := SavingsAccounts."Balance (LCY)";
-        //***********************Balance On******************************************/
-
-        //***********************Advice Type******************************************/
-        if (CheckoffAdvice."Amount Off" = 0) and (AmountOn > 0) then
-            CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::New;
-
-        if AmountOn = CheckoffAdvice."Amount Off" then
-            CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Adjustment;
-
-        if AmountOn <> CheckoffAdvice."Amount Off" then
-            CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Variations;
-
-        if CheckoffAdvice."Amount On" = 0 then
-            CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Stoppage;
-        //***********************Advice Type******************************************/
-
-        CheckoffAdvice.Insert;
     end;
 
 
@@ -1835,7 +1742,7 @@ Codeunit 52186458 "Loans Process"
         if AmountOn <> SavingsAccount."Monthly Contribution" then
             CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Variations
         else
-            CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::Adjustment;
+            CheckoffAdvice."Advice Type" := CheckoffAdvice."advice type"::"Monthly Deduction";
         CheckoffAdvice.Type := CheckoffAdvice.Type::Savings;
         CheckoffAdvice.Reference := ProdVariations.Reference;
         CheckoffAdvice."Variation Action" := ProdVariations."Variation Action";
@@ -4343,7 +4250,7 @@ Codeunit 52186458 "Loans Process"
                     // DepositProrata(LoanApps."Loan No.");
                     HoldOneMonthInstallment(LoanApps."Loan No.");
                     LoanApps.Modify(true);
-                    // AdviceLoan(LoanApps."Loan No.", false, LoanApps."Loan No.");
+                // AdviceLoan(LoanApps."Loan No.", false, LoanApps."Loan No.");
                 until LoanApps.Next = 0;
             end;
         end;

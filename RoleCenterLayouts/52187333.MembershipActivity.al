@@ -54,7 +54,7 @@ page 52187333 "Membership Activity cue"
                         Caption = 'Active Members';
                         ApplicationArea = All;
                         ToolTip = 'Specifies the value of Active Members.';
-                        Image = none;
+                        Image = People;
                         trigger OnDrillDown()
                         var
                             myInt: Integer;

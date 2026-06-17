@@ -1265,7 +1265,7 @@ Codeunit 52185470 "Periodic Activities"
         Memb: Record Members;
         Employer3: Record Customer;
         MemberClass: Record "Member Classes";
-        PaymentMethods: Record "Payment Methods";
+        // PaymentMethods: Record "Payment Methods";
         InterestAmount: Decimal;
         Mdays: Integer;
         CheckoffAdvice2: Record "Checkoff Advice Line";
@@ -1553,7 +1553,7 @@ Codeunit 52185470 "Periodic Activities"
         Memb: Record Members;
         Employer3: Record Customer;
         MemberClass: Record "Member Classes";
-        PaymentMethods: Record "Payment Methods";
+        // PaymentMethods: Record "Payment Methods";
         InterestAmount: Decimal;
         Mdays: Integer;
         CheckoffAdvice2: Record "Checkoff Advice Line";
@@ -1715,7 +1715,7 @@ Codeunit 52185470 "Periodic Activities"
         Memb: Record Members;
         Employer3: Record Customer;
         MemberClass: Record "Member Classes";
-        PaymentMethods: Record "Payment Methods";
+        // PaymentMethods: Record "Payment Methods";
         InterestAmount: Decimal;
         Mdays: Integer;
         CheckoffAdvice2: Record "Checkoff Advice Line";
@@ -2275,7 +2275,7 @@ Codeunit 52185470 "Periodic Activities"
                             loans.CalcFields("Total Loan Balance");
                             Loans.SetFilter(Loans."Total Loan Balance", '>0');
                             // Buffer."Member No.");
-                            // Loans.SetRange(Loans."Loan Product Type", PFactory."Product ID");
+                            Loans.SetRange(Loans."Loan Product Type", Buffer."Product Code");
                             if Loans.FindFirst() then begin
                                 // repeat
                                 Buffer."Loan No" := Loans."Loan No.";
@@ -4924,7 +4924,7 @@ Codeunit 52185470 "Periodic Activities"
         LPrincipal: Decimal;
         RepayCode: Code[10];
         LoanSch: Record Loans;
-        PaymentMethods: Record "Payment Methods";
+        // PaymentMethods: Record "Payment Methods";
         PaymentMethodsApplication: Record "Payment Methods Application";
     begin
         //with LoanRescheduling do

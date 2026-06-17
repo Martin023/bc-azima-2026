@@ -565,17 +565,6 @@ page 52185500 "Main Role Center"
                             RunObject = page "CRM Application List";
                         }
                     }
-                    group("Marketing")
-                    {
-                        Caption = 'Marketing';
-
-                        action("BDE Management List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'BDE Management List';
-                            RunObject = page "BDE Management List";
-                        }
-                    }
                     group("Dividend Process")
                     {
                         caption = 'Dividend Process';
@@ -1086,12 +1075,7 @@ page 52185500 "Main Role Center"
                             //     Caption = 'Process BDE Payments';
                             //     RunObject = report "Process BDE Payments";
                             // }
-                            action("BDE Staff Performance Summary")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'BDE Staff Performance Summary';
-                                RunObject = report "BDE Staff Performance Summary";
-                            }
+                            
                         }
                     }
                     group("Defaulters Management")

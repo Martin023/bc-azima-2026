@@ -18,7 +18,7 @@ page 52185441 "Dividend Header Card"
             group(General)
             {
                 Caption = 'General';
-
+                Editable = rec.Status <> rec.Status::Approved;
                 field("No."; Rec."No.")
                 {
                     ApplicationArea = All;
@@ -81,11 +81,13 @@ page 52185441 "Dividend Header Card"
             }
             part(DividendLines; "Dividend Progression")
             {
+                Editable = rec.Status <> rec.Status::Approved;
                 ApplicationArea = All;
                 SubPageLink = "Header No." = field("No.");
             }
             part(DividendPostingBuff; "Dividend Posting Buffer")
             {
+                Editable = rec.Status <> rec.Status::Approved;
                 ApplicationArea = All;
                 SubPageLink = "Header No." = field("No.");
             }
@@ -102,6 +104,7 @@ page 52185441 "Dividend Header Card"
                 Image = Add;
                 Promoted = true;
                 PromotedCategory = Process;
+                Enabled = rec.Status <> rec.Status::Approved;
 
                 trigger OnAction()
                 var
@@ -121,6 +124,7 @@ page 52185441 "Dividend Header Card"
                 Image = Action;
                 Promoted = true;
                 PromotedCategory = Process;
+                Enabled = rec.Status <> rec.Status::Approved;
 
                 trigger OnAction()
                 var
@@ -290,6 +294,7 @@ page 52185441 "Dividend Header Card"
                         NokApp: Record "Next of KIN Application";
                         AccSignatories: Record "Account Signatories";
                     begin
+                        if Rec.Status = rec.Status::Approved then error('This record is already approved');
                         if not Confirm('Are you sure you want to send approval request for this record?') then exit;
                         VarVariant := Rec;
                         if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then
@@ -309,7 +314,6 @@ page 52185441 "Dividend Header Card"
                         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                     begin
                         GlobalFunctions.CommentsManagement(Rec."No.");
-
                         Rec.TestField(Status, Rec.Status::Pending);
                         VarVariant := Rec;
                         if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then

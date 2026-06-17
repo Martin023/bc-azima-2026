@@ -28,6 +28,7 @@ using KenpipeCBS.KenpipeCBS;
 using Microsoft.Inventory.Location;
 using Microsoft.Manufacturing.Journal;
 using Microsoft.Inventory.Reports;
+using AzimaCBS.AzimaCBS;
 using Microsoft.Purchases.Reports;
 using Microsoft.Inventory.Transfer;
 using Microsoft.Sales.Document;
@@ -814,7 +815,7 @@ page 52186583 "Audit Role center"
                             {
                                 ApplicationArea = Basic, Suite;
                                 Caption = 'BDE Management List';
-                                RunObject = page "BDE Management List";
+                                RunObject = page "Sales Teams";
                             }
                         }
                         group("Dividend Process")
@@ -1338,12 +1339,7 @@ page 52186583 "Audit Role center"
                                 //     Caption = 'Process BDE Payments';
                                 //     RunObject = report "Process BDE Payments";
                                 // }
-                                action("BDE Staff Performance Summary")
-                                {
-                                    ApplicationArea = Basic, Suite;
-                                    Caption = 'BDE Staff Performance Summary';
-                                    RunObject = report "BDE Staff Performance Summary";
-                                }
+                               
                             }
                         }
                         group("Defaulters Management")

@@ -2733,6 +2733,9 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
         SearchMember: Record Members;
         MobileLoanProduct: Record "Product Factory";
+        ProductSupportedClasses: Record "Product Supported Classes";
+        MemberClass: Record "Member Classes";
+        BlockedEmployers: Record "Blocked Employers";
 
         ResponseObject: JsonObject;
         MemberDetails: JsonObject;
@@ -2755,6 +2758,13 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         );
 
         IF SearchMember.FindFirst then begin
+            // memberclass filter
+            MemberClass.Reset();
+            MemberClass.SetRange("No.", SearchMember."Member Class");
+            MemberClass.SetLoadFields("Member Class");
+            if MemberClass.FindFirst() then begin
+            end;
+
             MobileLoanProduct.Reset;
             MobileLoanProduct.SetRange("Product ID", loan_type_id.AsValue.AsText);
 
@@ -2763,6 +2773,32 @@ codeunit 52186502 "Sky Mobile Banking Integration"
             );
 
             if MobileLoanProduct.FindFirst then begin
+                // MemberClass product filter
+                ProductSupportedClasses.Reset();
+                ProductSupportedClasses.SetRange("Product ID", MobileLoanProduct."Product ID");
+                ProductSupportedClasses.SetRange("Class Category", MemberClass."Member Class");
+                if ProductSupportedClasses.IsEmpty() then begin
+                    ResponseObject.Add('request_status', 'ERROR');
+                    Datum.Add('error_message', 'Loan product with ID = ' + loan_type_id.AsValue.AsText + ' is NOT available to Class ' + Format(MemberClass."Member Class") + ' Members');
+                    ResponseObject.Add('response_payload', Datum);
+                    AddDateTimeToResponse(ResponseObject);
+                    ResponseObject.WriteTo(Response);
+                    exit(Response);
+                end;
+
+                // BlockedEmployers product filter 
+                BlockedEmployers.Reset();
+                BlockedEmployers.SetRange("Product ID", MobileLoanProduct."Product ID");
+                BlockedEmployers.SetRange("Employer Code", SearchMember."Employer Code");
+                if not BlockedEmployers.IsEmpty() then begin
+                    ResponseObject.Add('request_status', 'ERROR');
+                    Datum.Add('error_message', 'Loan product with ID = ' + loan_type_id.AsValue.AsText + ' is NOT available to ' + SearchMember."Employer Code" + ' Employees');
+                    ResponseObject.Add('response_payload', Datum);
+                    AddDateTimeToResponse(ResponseObject);
+                    ResponseObject.WriteTo(Response);
+                    exit(Response);
+                end;
+
                 Datum.Add('loan_type_id', MobileLoanProduct."Product ID");
                 Datum.Add('loan_name', MobileLoanProduct."Product Description");
 
@@ -2867,7 +2903,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         );
 
         IF SearchMember.FindFirst then begin
-            if SearchMember.Status = SearchMember.Status::Deceased then begin // abel changes - Deceased
+            if SearchMember.Status = SearchMember.Status::Deceased then begin // Deceased
                 ResponseObject.Add('request_status', 'ERROR');
                 Datum.Add('error_message', 'Member with identification ' + identifier_type.AsValue.AsText + ' = ' + identifier.AsValue.AsText + ' is Deceased');
                 ResponseObject.Add('response_payload', Datum);
@@ -2875,7 +2911,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 ResponseObject.WriteTo(Response);
                 exit(Response);
             end;
-            if SearchMember.Status = SearchMember.Status::Dormant then begin // abel changes - Dormant
+            if SearchMember.Status = SearchMember.Status::Dormant then begin // Dormant
                 ResponseObject.Add('request_status', 'ERROR');
                 Datum.Add('error_message', 'Member with identification ' + identifier_type.AsValue.AsText + ' = ' + identifier.AsValue.AsText + ' is Dormant');
                 ResponseObject.Add('response_payload', Datum);
@@ -2884,7 +2920,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 ResponseObject.WriteTo(Response);
                 exit(Response);
             end;
-            if (SearchMember.Status = SearchMember.Status::Dormant) and (SearchMember.Subflag = SearchMember.Subflag::Defaulter) then begin // abel changes - Defaulter
+            if (SearchMember.Status = SearchMember.Status::Dormant) and (SearchMember.Subflag = SearchMember.Subflag::Defaulter) then begin // Defaulter
                 ResponseObject.Add('request_status', 'ERROR');
                 Datum.Add('error_message', 'Member with identification ' + identifier_type.AsValue.AsText + ' = ' + identifier.AsValue.AsText + ' is a Defaulter');
                 ResponseObject.Add('response_payload', Datum);
@@ -2903,9 +2939,10 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 ResponseObject.WriteTo(Response);
                 exit(Response);
             end;
-            MemberClass.Reset(); // abel changes - member class filter
-            MemberClass.SetRange("No.", SearchMember."Member Class"); // abel changes - member class filter
-            if MemberClass.FindFirst() then begin // abel changes - member class filter
+            MemberClass.Reset(); // member class filter
+            MemberClass.SetRange("No.", SearchMember."Member Class"); // member class filter
+            MemberClass.SetLoadFields("Member Class");
+            if MemberClass.FindFirst() then begin // member class filter
             end;
 
             MobileLoanProduct.Reset;
@@ -2917,131 +2954,148 @@ codeunit 52186502 "Sky Mobile Banking Integration"
             );
 
             if MobileLoanProduct.FindFirst then begin
-                ProductSupportedClasses.Reset(); // abel changes - member class filter
-                ProductSupportedClasses.SetRange("Product ID", MobileLoanProduct."Product ID"); // abel changes - member class filter
-                ProductSupportedClasses.SetRange("Class Category", MemberClass."Member Class"); // abel changes - member class filter
-                if not ProductSupportedClasses.IsEmpty() then begin // abel changes - member class filter
-                    BlockedEmployers.Reset(); //abel changes - blocked employers filter
-                    BlockedEmployers.SetRange("Product ID", MobileLoanProduct."Product ID"); //abel changes - blocked employers filter
-                    BlockedEmployers.SetRange("Employer Code", SearchMember."Employer Code"); //abel changes - blocked employers filter
-                    if BlockedEmployers.IsEmpty() then begin //abel changes - blocked employers filter
-                        // Check loan Limit
-                        if SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason) < amount.AsValue.AsDecimal then begin
-                            ResponseObject.Add('request_status', 'ERROR');
-                            Datum.Add('error_message', 'Loan amount exceeds the maximum limit allowed for the member of ' + Format(SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason)));
-                            ResponseObject.Add('response_payload', Datum);
-
-                            AddDateTimeToResponse(ResponseObject);
-
-                            ResponseObject.WriteTo(Response);
-                            exit(Response);
-                        end;
-                        // Check Max Appliable Amount for loan
-                        if amount.AsValue.AsDecimal > MobileLoanProduct."Mobile Max. Loan Amount" then begin
-                            ResponseObject.Add('request_status', 'ERROR');
-                            Datum.Add('error_message', 'Loan amount exceeds the maximum limit allowed for the loan product of ' + Format(MobileLoanProduct."Mobile Max. Loan Amount"));
-                            ResponseObject.Add('response_payload', Datum);
-
-                            AddDateTimeToResponse(ResponseObject);
-
-                            ResponseObject.WriteTo(Response);
-                            exit(Response);
-                        end;
-                        // Check Min Appliable Amount for loan
-                        if amount.AsValue.AsDecimal < MobileLoanProduct."Minimum Loan Amount" then begin
-                            ResponseObject.Add('request_status', 'ERROR');
-                            Datum.Add('error_message', 'Loan amount is less than the minimum limit allowed for the loan product of ' + Format(MobileLoanProduct."Minimum Loan Amount"));
-                            ResponseObject.Add('response_payload', Datum);
-
-                            AddDateTimeToResponse(ResponseObject);
-
-                            ResponseObject.WriteTo(Response);
-                            exit(Response);
-                        end;
-                        // if Conditions are met then create loan application
-                        if SkyMbankingTrans.BufferLoanApplication(
-                            SearchMember."No.", MobileLoanProduct."Product ID",
-                            amount.AsValue.AsDecimal,
-                            source_reference.AsValue.AsText,
-                            MobileLoanPurpose) then begin
-
-                            Datum.Add('transaction_reference', GlobalFunctions.CleanGuid);
-
-                            TheLoan.Reset;
-
-                            TheLoan.SetRange("Member No.", SearchMember."No.");
-                            TheLoan.SetRange("Loan Product Type", MobileLoanProduct."Product ID");
-                            TheLoan.SetRange(Posted, false);
-                            TheLoan.SetRange("Requested Amount", amount.AsValue.AsDecimal);
-                            TheLoan.SetRange("Loanee Message", source_reference.AsValue.AsText);
-
-                            TheLoan.SetLoadFields(
-                                "Loan No.",
-                                "Loan Product Type Name",
-                                "Requested Amount"
-                            );
-
-                            if TheLoan.FindFirst then begin
-                                Datum.Add('loan_serial_number', TheLoan."Loan No.");
-                            end else begin
-                                Datum.Add('loan_serial_number', '');
-                            end;
-
-                            Datum.Add('loan_type_id', MobileLoanProduct."Product ID");
-                            Datum.Add('loan_name', MobileLoanProduct."Product Description");
-                            // Datum.Add('amount', 0);
-                            Datum.Add('amount', amount.AsValue.AsDecimal);
-
-                            ResponseObject.Add('request_status', 'SUCCESS');
-                            ResponseObject.Add('response_payload', Datum);
-
-
-                            // SMS
-                            // theSMS := 'Dear member, your ' +
-                            // TheLoan."Loan Product Type Name"
-                            // + ' loan application request of KES ' +
-                            // Format(TheLoan."Requested Amount") +
-                            // ' has been received successfully. Kindly wait shortly as we process this request. Transaction ID: ' +
-                            // TheLoan."Loan No.";
-
-                            // if SearchMember."Phone No." <> '' then begin
-                            //     SkySMS.SendSms(
-                            //         SMSSource::LOAN_APPLICATION,
-                            //         SearchMember."Phone No.",
-                            //         theSMS,
-                            //         TheLoan."Loan No.",
-                            //         '',
-                            //         true,
-                            //         0,
-                            //         true,
-                            //         'MBANKING',
-                            //         originator_id.AsValue.AsText,
-                            //         'CBS'
-                            //     );
-                            // end else begin
-                            //     if SearchMember."Transactional Mobile Number" <> '' then begin
-                            //         SkySMS.SendSms(
-                            //             SMSSource::LOAN_APPLICATION,
-                            //             SearchMember."Transactional Mobile Number",
-                            //             theSMS,
-                            //             TheLoan."Loan No.",
-                            //             '',
-                            //             true,
-                            //             0,
-                            //             true,
-                            //             'MBANKING',
-                            //             originator_id.AsValue.AsText,
-                            //             'CBS'
-                            //         );
-                            //     end
-                            // end;
-                        end else begin
-                            ResponseObject.Add('request_status', 'FAILED');
-                            Datum.Add('error_message', 'Loan creation failed');
-                            ResponseObject.Add('response_payload', Datum);
-                        end;
-                    end;
+                // MemberClass product filter
+                ProductSupportedClasses.Reset();
+                ProductSupportedClasses.SetRange("Product ID", MobileLoanProduct."Product ID");
+                ProductSupportedClasses.SetRange("Class Category", MemberClass."Member Class");
+                if ProductSupportedClasses.IsEmpty() then begin
+                    ResponseObject.Add('request_status', 'ERROR');
+                    Datum.Add('error_message', 'Loan product with ID = ' + loan_type_id.AsValue.AsText + ' is NOT available to Class ' + Format(MemberClass."Member Class") + ' Members');
+                    ResponseObject.Add('response_payload', Datum);
+                    AddDateTimeToResponse(ResponseObject);
+                    ResponseObject.WriteTo(Response);
+                    exit(Response);
                 end;
+
+                // BlockedEmployers product filter 
+                BlockedEmployers.Reset();
+                BlockedEmployers.SetRange("Product ID", MobileLoanProduct."Product ID");
+                BlockedEmployers.SetRange("Employer Code", SearchMember."Employer Code");
+                if not BlockedEmployers.IsEmpty() then begin
+                    ResponseObject.Add('request_status', 'ERROR');
+                    Datum.Add('error_message', 'Loan product with ID = ' + loan_type_id.AsValue.AsText + ' is NOT available to ' + SearchMember."Employer Code" + ' Employees');
+                    ResponseObject.Add('response_payload', Datum);
+                    AddDateTimeToResponse(ResponseObject);
+                    ResponseObject.WriteTo(Response);
+                    exit(Response);
+                end;
+
+                // Check loan Limit
+                if SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason) < amount.AsValue.AsDecimal then begin
+                    ResponseObject.Add('request_status', 'ERROR');
+                    Datum.Add('error_message', 'Loan amount exceeds the maximum limit allowed for the member of ' + Format(SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason)));
+                    ResponseObject.Add('response_payload', Datum);
+
+                    AddDateTimeToResponse(ResponseObject);
+
+                    ResponseObject.WriteTo(Response);
+                    exit(Response);
+                end;
+                // Check Max Appliable Amount for loan
+                if amount.AsValue.AsDecimal > MobileLoanProduct."Mobile Max. Loan Amount" then begin
+                    ResponseObject.Add('request_status', 'ERROR');
+                    Datum.Add('error_message', 'Loan amount exceeds the maximum limit allowed for the loan product of ' + Format(MobileLoanProduct."Mobile Max. Loan Amount"));
+                    ResponseObject.Add('response_payload', Datum);
+
+                    AddDateTimeToResponse(ResponseObject);
+
+                    ResponseObject.WriteTo(Response);
+                    exit(Response);
+                end;
+                // Check Min Appliable Amount for loan
+                if amount.AsValue.AsDecimal < MobileLoanProduct."Minimum Loan Amount" then begin
+                    ResponseObject.Add('request_status', 'ERROR');
+                    Datum.Add('error_message', 'Loan amount is less than the minimum limit allowed for the loan product of ' + Format(MobileLoanProduct."Minimum Loan Amount"));
+                    ResponseObject.Add('response_payload', Datum);
+
+                    AddDateTimeToResponse(ResponseObject);
+
+                    ResponseObject.WriteTo(Response);
+                    exit(Response);
+                end;
+                // if Conditions are met then create loan application
+                if SkyMbankingTrans.BufferLoanApplication(
+                    SearchMember."No.", MobileLoanProduct."Product ID",
+                    amount.AsValue.AsDecimal,
+                    source_reference.AsValue.AsText,
+                    MobileLoanPurpose) then begin
+
+                    Datum.Add('transaction_reference', GlobalFunctions.CleanGuid);
+
+                    TheLoan.Reset;
+
+                    TheLoan.SetRange("Member No.", SearchMember."No.");
+                    TheLoan.SetRange("Loan Product Type", MobileLoanProduct."Product ID");
+                    TheLoan.SetRange(Posted, false);
+                    TheLoan.SetRange("Requested Amount", amount.AsValue.AsDecimal);
+                    TheLoan.SetRange("Loanee Message", source_reference.AsValue.AsText);
+
+                    TheLoan.SetLoadFields(
+                        "Loan No.",
+                        "Loan Product Type Name",
+                        "Requested Amount"
+                    );
+
+                    if TheLoan.FindFirst then begin
+                        Datum.Add('loan_serial_number', TheLoan."Loan No.");
+                    end else begin
+                        Datum.Add('loan_serial_number', '');
+                    end;
+
+                    Datum.Add('loan_type_id', MobileLoanProduct."Product ID");
+                    Datum.Add('loan_name', MobileLoanProduct."Product Description");
+                    // Datum.Add('amount', 0);
+                    Datum.Add('amount', amount.AsValue.AsDecimal);
+
+                    ResponseObject.Add('request_status', 'SUCCESS');
+                    ResponseObject.Add('response_payload', Datum);
+
+
+                    // SMS
+                    // theSMS := 'Dear member, your ' +
+                    // TheLoan."Loan Product Type Name"
+                    // + ' loan application request of KES ' +
+                    // Format(TheLoan."Requested Amount") +
+                    // ' has been received successfully. Kindly wait shortly as we process this request. Transaction ID: ' +
+                    // TheLoan."Loan No.";
+
+                    // if SearchMember."Phone No." <> '' then begin
+                    //     SkySMS.SendSms(
+                    //         SMSSource::LOAN_APPLICATION,
+                    //         SearchMember."Phone No.",
+                    //         theSMS,
+                    //         TheLoan."Loan No.",
+                    //         '',
+                    //         true,
+                    //         0,
+                    //         true,
+                    //         'MBANKING',
+                    //         originator_id.AsValue.AsText,
+                    //         'CBS'
+                    //     );
+                    // end else begin
+                    //     if SearchMember."Transactional Mobile Number" <> '' then begin
+                    //         SkySMS.SendSms(
+                    //             SMSSource::LOAN_APPLICATION,
+                    //             SearchMember."Transactional Mobile Number",
+                    //             theSMS,
+                    //             TheLoan."Loan No.",
+                    //             '',
+                    //             true,
+                    //             0,
+                    //             true,
+                    //             'MBANKING',
+                    //             originator_id.AsValue.AsText,
+                    //             'CBS'
+                    //         );
+                    //     end
+                    // end;
+                end else begin
+                    ResponseObject.Add('request_status', 'FAILED');
+                    Datum.Add('error_message', 'Loan creation failed');
+                    ResponseObject.Add('response_payload', Datum);
+                end;
+
             end else begin
                 ResponseObject.Add('request_status', 'ERROR');
                 Datum.Add('error_message', 'Loan product with ID = ' + loan_type_id.AsValue.AsText + ' NOT available for mobile application!');
@@ -7058,7 +7112,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         SearchMember.Reset;
 
         IF MemberExists(identifier_type.AsValue.AsText, identifier.AsValue.AsText, SearchMember, ResponseText, ResponseDescription) then begin
-            if SearchMember.Status = SearchMember.Status::Deceased then begin // abel changes - Deceased
+            if SearchMember.Status = SearchMember.Status::Deceased then begin // Deceased
                 ResponseObject.Add('request_status', 'ERROR');
                 Datum.Add('error_message', 'Member with identification ' + identifier_type.AsValue.AsText + ' = ' + identifier.AsValue.AsText + ' is Deceased');
                 ResponseObject.Add('response_payload', Datum);
@@ -7066,7 +7120,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 ResponseObject.WriteTo(Response);
                 exit(Response);
             end;
-            if SearchMember.Status = SearchMember.Status::Dormant then begin // abel changes - Dormant
+            if SearchMember.Status = SearchMember.Status::Dormant then begin // Dormant
                 ResponseObject.Add('request_status', 'ERROR');
                 Datum.Add('error_message', 'Member with identification ' + identifier_type.AsValue.AsText + ' = ' + identifier.AsValue.AsText + ' is Dormant');
                 ResponseObject.Add('response_payload', Datum);
@@ -7075,7 +7129,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 ResponseObject.WriteTo(Response);
                 exit(Response);
             end;
-            if (SearchMember.Status = SearchMember.Status::Dormant) and (SearchMember.Subflag = SearchMember.Subflag::Defaulter) then begin // abel changes - Defaulter
+            if (SearchMember.Status = SearchMember.Status::Dormant) and (SearchMember.Subflag = SearchMember.Subflag::Defaulter) then begin // Defaulter
                 ResponseObject.Add('request_status', 'ERROR');
                 Datum.Add('error_message', 'Member with identification ' + identifier_type.AsValue.AsText + ' = ' + identifier.AsValue.AsText + ' is a Defaulter');
                 ResponseObject.Add('response_payload', Datum);
@@ -7084,7 +7138,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 ResponseObject.WriteTo(Response);
                 exit(Response);
             end;
-            // abel changes - filter products by member class, filter out blocked employers 6918 -6926
+            // filter products by member class, filter out blocked employers 6918 -6926
             MemberClasses.Reset();
             MemberClasses.SetRange("No.", SearchMember."Member Class");
             if not MemberClasses.FindFirst() then begin
@@ -7099,14 +7153,14 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
             if ProductFactory.FindSet then begin
                 repeat begin
-                    ProductSupportedClasses.Reset(); // abel changes - filter products by member class
-                    ProductSupportedClasses.SetRange("Product ID", ProductFactory."Product ID"); // abel changes - filter products by member class
-                    ProductSupportedClasses.SetRange("Class Category", MemberClasses."Member Class"); // abel changes - filter products by member class
-                    if not ProductSupportedClasses.IsEmpty() then begin // abel changes - filter products by member class
-                        BlockedEmployer.Reset(); // abel changes - filter out blocked employers
-                        BlockedEmployer.SetRange("Employer Code", SearchMember."Employer Code"); // abel changes - filter out blocked employers
-                        BlockedEmployer.SetRange("Product ID", ProductFactory."Product ID"); // abel changes - filter out blocked employers
-                        if BlockedEmployer.IsEmpty() then begin // abel changes - filter out blocked employers
+                    ProductSupportedClasses.Reset(); // filter products by member class
+                    ProductSupportedClasses.SetRange("Product ID", ProductFactory."Product ID"); // filter products by member class
+                    ProductSupportedClasses.SetRange("Class Category", MemberClasses."Member Class"); // filter products by member class
+                    if not ProductSupportedClasses.IsEmpty() then begin // filter products by member class
+                        BlockedEmployer.Reset(); // filter out blocked employers
+                        BlockedEmployer.SetRange("Employer Code", SearchMember."Employer Code"); // filter out blocked employers
+                        BlockedEmployer.SetRange("Product ID", ProductFactory."Product ID"); // filter out blocked employers
+                        if BlockedEmployer.IsEmpty() then begin // filter out blocked employers
                             Clear(Datum);
 
                             Datum.Add('product_id', ProductFactory."Product ID");
@@ -7121,8 +7175,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                             Datum.Add('interest_calculation_method', Format(ProductFactory."Interest Calculation Method"));
 
                             Data.Add(Datum);
-                        end; // abel changes - filter out blocked employers
-                    end; // abel changes - filter products by member class
+                        end; // filter out blocked employers
+                    end; // filter products by member class
                 end until ProductFactory.Next = 0;
             end;
 

@@ -10,10 +10,10 @@ table 52185632 "Marketing Teams Header"
             TableRelation = "HR Employees"."No.";
             Caption = 'Payroll Staff No';
             trigger OnValidate()
-                var
-                    SalesRep: Record "Marketing Teams Header";
-                    Members : Record Members;
-                    HREmployees: Record "HR Employees";
+            var
+                SalesRep: Record "Marketing Teams Header";
+                Members: Record Members;
+                HREmployees: Record "HR Employees";
             begin
                 SalesRep.Reset();
                 SalesRep.setRange("Payroll No.", "Payroll No.");
@@ -28,7 +28,7 @@ table 52185632 "Marketing Teams Header"
                     Rec."Status" := HREmployees.Status;
                     Rec."Registered By" := UserId;
                 END;
-                
+
             end;
 
         }
@@ -39,18 +39,18 @@ table 52185632 "Marketing Teams Header"
         }
         field(3; "Member Name"; Text[2048])
         {
-            Caption = 'Member Name';
+            Caption = 'Name';
             Editable = false;
         }
         field(4; Phone; Code[20])
         {
             Caption = 'Phone';
             trigger OnValidate()
-                var
-                    Members: Record Members;
+            var
+                Members: Record Members;
             begin
                 if Members.get("Member No.") then
-                   Phone := Members."Transactional Mobile Number";
+                    Phone := Members."Transactional Mobile Number";
             end;
         }
         field(5; "ID Number"; code[20])
@@ -78,12 +78,21 @@ table 52185632 "Marketing Teams Header"
             Caption = 'Created';
         }
 
+
     }
+
     keys
     {
         key(PK; "Payroll No.")
         {
             Clustered = true;
+        }
+    }
+    fieldgroups
+    {
+        fieldgroup(DropDown; "Payroll No.", "Member Name", "ID Number", "Member No.", Phone)
+        {
+
         }
     }
 }

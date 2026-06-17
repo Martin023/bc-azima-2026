@@ -276,5 +276,38 @@ table 52186000 "BOSA Account Activation"
         GlobalFunctions: Codeunit "Global Functions";
         ProdFact: Record "Product Factory";
         Comments: Record Comments;
+
+    procedure CheckBalAfterChrg(AccNo: Code[20]; TransactionTypes: record "Transaction Types")
+    var
+        TransactionCharges: record "Transaction Charges";
+        SavAcc: Record "Savings Accounts";
+        FosaAcc: record "Savings Accounts";
+    begin
+        TransactionTypes.Reset;
+        TransactionTypes.SetRange(Code, TransactionTypes.code);
+        if TransactionTypes.Find('-') then begin
+            TransactionCharges.Reset;
+            TransactionCharges.SetRange("Transaction Type", TransactionTypes.Code);
+            //TransactionCharges.setrange("G/L Account")
+            if TransactionCharges.Find('-') then begin
+                TransactionCharges.CalcSums("Charge Amount");
+                if SavAcc.get(Rec."Account No") then begin
+                    SavAcc.TestField(Status, SavAcc.Status::Dormant);
+                    if SavAcc."Product Category" = SavAcc."Product Category"::"BOSA Deposits" then begin
+                        //charge ODS not BOSA Acc.
+                        // FosaAcc.Reset();
+                        // FosaAcc.SetRange("Product Type", '191');
+                        // FosaAcc.SetRange("Member No.", SavAcc."Member No.");
+                        // if FosaAcc.FindFirst() then begin
+                        //     if FosaAcc.GetAvailableBalance(FosaAcc."No.");
+                        // end;
+                    end;
+                    if SavAcc."Product Type" = '191' then begin
+
+                    end;
+                end;
+            end;
+        end;
+    end;
 }
 

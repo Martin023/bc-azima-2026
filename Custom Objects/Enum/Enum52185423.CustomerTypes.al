@@ -62,6 +62,6 @@ enum 52185423 "Customer Types"
     }
     value(14; "Employer Code")
     {
-        Caption = 'Workstation';
+        //Caption = 'Workstation';
     }
 }

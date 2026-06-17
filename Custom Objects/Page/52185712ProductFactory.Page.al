@@ -575,11 +575,7 @@ page 52185712 "Product Factory"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Requires Salary Processing"; Rec."Requires Salary Processing")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = true;
-                }
+
                 field("Net Salary Multiplier %"; Rec."Net Salary Multiplier %")
                 {
                     ApplicationArea = Basic, Suite;
@@ -596,10 +592,7 @@ page 52185712 "Product Factory"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Appraisal - Omit Deductions"; Rec."Appraisal - Omit Deductions")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+
                 field("Maximum Deposit Contribution"; Rec."Maximum Deposit Contribution")
                 {
                     ApplicationArea = Basic, Suite;
@@ -664,15 +657,7 @@ page 52185712 "Product Factory"
                 // {
                 //     ApplicationArea = Basic, Suite;
                 // }
-                field("Allow Multiple Running Loans"; Rec."Allow Multiple Running Loans")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
 
-                field("Mobile Loan"; Rec."Mobile Loan")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
                 // field(AvailableOnMobile; Rec.AvailableOnMobile)
                 // {
                 //     ApplicationArea = Basic, Suite;
@@ -921,6 +906,37 @@ page 52185712 "Product Factory"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+            }
+            group("Mbanking Credit")
+            {
+                Caption = 'Mbanking Credit';
+                Visible = CreditProductVisible;
+                Editable = CurrPageEditable;
+
+                field("Allow Multiple Running Loans"; Rec."Allow Multiple Running Loans")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+
+                field("Mobile Loan"; Rec."Mobile Loan")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("IsAvailableInMonth"; Rec."IsAvailableInMonth")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Is Available In Month';
+                }
+                field("Requires Salary Processing"; Rec."Requires Salary Processing")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = true;
+                }
+                field("Appraisal - Omit Deductions"; Rec."Appraisal - Omit Deductions")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+
             }
             group("Sky Mbanking")
             {

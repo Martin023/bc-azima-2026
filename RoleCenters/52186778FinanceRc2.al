@@ -1141,17 +1141,17 @@ page 52186778 "Finance Role Center"
                         RunObject = page "Share Capital Transfer List";
                         RunPageLink = Status = filter(Rejected), "Sent Back to CRM" = const(false), Transfered = const(false);
                     }
-                    action("Transfered Share Capital Certificate")
-                    {
-                        ApplicationArea = all;
-                        Caption = 'Transferred Share Capital Certificate';
-                        RunObject = report "Transferred Share Capital Cert";
-                    }
+                    // action("Transfered Share Capital Certificate")
+                    // {
+                    //     ApplicationArea = all;
+                    //     Caption = 'Transferred Share Capital Certificate';
+                    //     RunObject = report "Transferred Share Capital Cert";
+                    // }
                 }
                 group(AccountTransfer)
                 {
                     Visible = false;
-                    Caption = 'BOSA Account Activation';
+                    Caption = 'Account Activation';
                     // action(BosaAccountActivate)
                     // {
                     //     ApplicationArea = Basic;
@@ -1219,7 +1219,7 @@ page 52186778 "Finance Role Center"
                         ApplicationArea = Basic;
                         Caption = 'Share Capital Register';
                         RunObject = page "Savings Accounts";
-                        RunPageView = WHERE("Product Category" = filter("Share Capital" | "Transfered Share Capital"), "Balance (LCY)" = filter(<> 0));
+                        RunPageView = WHERE("Product Category" = filter("Share Capital" | "Transfered Share Capital"));
                     }
                 }
                 // group("BBF & Risk Claims")
@@ -2081,24 +2081,24 @@ page 52186778 "Finance Role Center"
                                         Recurring = const(true));
                         ToolTip = 'Define how to post transactions that recur with few or no changes to general ledger, bank, customer, vendor, or fixed asset accounts';
                     }
-                    action(PurchaseJournals)
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Purchase Journals';
-                        RunObject = Page "General Journal Batches";
-                        RunPageView = where("Template Type" = const(Purchases),
-                                        Recurring = const(false));
-                        ToolTip = 'Post any purchase-related transaction directly to a vendor, bank, or general ledger account instead of using dedicated documents. You can post all types of financial purchase transactions, including payments, refunds, and finance charge amounts. Note that you cannot post item quantities with a purchase journal.';
-                    }
-                    action(SalesJournals)
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Sales Journals';
-                        RunObject = Page "General Journal Batches";
-                        RunPageView = where("Template Type" = const(Sales),
-                                        Recurring = const(false));
-                        ToolTip = 'Post any sales-related transaction directly to a customer, bank, or general ledger account instead of using dedicated documents. You can post all types of financial sales transactions, including payments, refunds, and finance charge amounts. Note that you cannot post item quantities with a sales journal.';
-                    }
+                    // action(PurchaseJournals)
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Purchase Journals';
+                    //     RunObject = Page "General Journal Batches";
+                    //     RunPageView = where("Template Type" = const(Purchases),
+                    //                     Recurring = const(false));
+                    //     ToolTip = 'Post any purchase-related transaction directly to a vendor, bank, or general ledger account instead of using dedicated documents. You can post all types of financial purchase transactions, including payments, refunds, and finance charge amounts. Note that you cannot post item quantities with a purchase journal.';
+                    // }
+                    // action(SalesJournals)
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Sales Journals';
+                    //     RunObject = Page "General Journal Batches";
+                    //     RunPageView = where("Template Type" = const(Sales),
+                    //                     Recurring = const(false));
+                    //     ToolTip = 'Post any sales-related transaction directly to a customer, bank, or general ledger account instead of using dedicated documents. You can post all types of financial sales transactions, including payments, refunds, and finance charge amounts. Note that you cannot post item quantities with a sales journal.';
+                    // }
                     // action(ICGeneralJournals)
                     // {
                     //     ApplicationArea = Basic, Suite;
@@ -2143,6 +2143,22 @@ page 52186778 "Finance Role Center"
                     RunObject = Page "G/L Account Categories";
                     ToolTip = 'Personalize the structure of your financial statements by mapping general ledger accounts to account categories. You can create category groups by indenting subcategories under them. Each grouping shows a total balance. When you choose the Generate Account Schedules action, the account schedules for the underlying financial reports are updated. The next time you run one of these reports, such as the balance statement, new totals and subentries are added, based on your changes.';
                 }
+                group(SystemReversals)
+                {
+                    Caption = 'System Reversal';
+                    action(SystemReversal)
+                    {
+                        Caption = 'System Reversal';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = page "System Reversal List";
+                    }
+                    action(PostedSystemReversal)
+                    {
+                        Caption = 'Posted System Reversal';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = page "Reversed System Reversal List";
+                    }
+                }
                 action(Currencies)
                 {
                     ApplicationArea = Suite;
@@ -2174,13 +2190,13 @@ page 52186778 "Finance Role Center"
                 //     ToolTip = 'Distribute revenues or expenses to the relevant accounting periods instead of the date of posting the transaction. Set up a deferral template for the resource, item, or G/L account that the revenue or expense will be posted for. When you post the related sales or purchase document, the revenue or expense is deferred to the involved accounting periods, according to a deferral schedule that is governed by settings in the deferral template and the posting date.';
                 // }
 
-                action("Posted General Journal")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Posted General Journals';
-                    RunObject = Page "Posted General Journal";
-                    ToolTip = 'Open the list of posted general journal lines.';
-                }
+                // action("Posted General Journal")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Posted General Journals';
+                //     RunObject = Page "Posted General Journal";
+                //     ToolTip = 'Open the list of posted general journal lines.';
+                // }
                 action(Dimensions)
                 {
                     ApplicationArea = Suite;
@@ -2190,46 +2206,46 @@ page 52186778 "Finance Role Center"
                     ToolTip = 'View or edit dimensions, such as area, project, or department, that you can assign to sales and purchase documents to distribute costs and analyze transaction history.';
                 }
 
-                group(Action84)
-                {
-                    Caption = 'Cost Accounting';
-                    ToolTip = 'Allocate actual and budgeted costs of operations, departments, products, and projects to analyze the profitability of your company.';
-                    action("Cost Types")
-                    {
-                        ApplicationArea = CostAccounting;
-                        Caption = 'Cost Types';
-                        RunObject = Page "Chart of Cost Types";
-                        ToolTip = 'View the chart of cost types with a structure and functionality that resembles the general ledger chart of accounts. You can transfer the general ledger income statement accounts or create your own chart of cost types.';
-                    }
-                    action("Cost Centers")
-                    {
-                        ApplicationArea = CostAccounting;
-                        Caption = 'Cost Centers';
-                        RunObject = Page "Chart of Cost Centers";
-                        ToolTip = 'Manage cost centers, which are departments and profit centers that are responsible for costs and income. Often, there are more cost centers set up in cost accounting than in any dimension that is set up in the general ledger. In the general ledger, usually only the first level cost centers for direct costs and the initial costs are used. In cost accounting, additional cost centers are created for additional allocation levels.';
-                    }
-                    action("Cost Objects")
-                    {
-                        ApplicationArea = CostAccounting;
-                        Caption = 'Cost Objects';
-                        RunObject = Page "Chart of Cost Objects";
-                        ToolTip = 'Set up cost objects, which are products, product groups, or services of a company. These are the finished goods of a company that carry the costs. You can link cost centers to departments and cost objects to projects in your company.';
-                    }
-                    action("Cost Allocations")
-                    {
-                        ApplicationArea = CostAccounting;
-                        Caption = 'Cost Allocations';
-                        RunObject = Page "Cost Allocation Sources";
-                        ToolTip = 'Manage allocation rules to allocate costs and revenues between cost types, cost centers, and cost objects. Each allocation consists of an allocation source and one or more allocation targets. For example, all costs for the cost type Electricity and Heating are an allocation source. You want to allocate the costs to the cost centers Workshop, Production, and Sales, which are three allocation targets.';
-                    }
-                    action("Cost Budgets")
-                    {
-                        ApplicationArea = CostAccounting;
-                        Caption = 'Cost Budgets';
-                        RunObject = Page "Cost Budget Names";
-                        ToolTip = 'Set up cost accounting budgets that are created based on cost types just as a budget for the general ledger is created based on general ledger accounts. A cost budget is created for a certain period of time, for example, a fiscal year. You can create as many cost budgets as needed. You can create a new cost budget manually, or by importing a cost budget, or by copying an existing cost budget as the budget base.';
-                    }
-                }
+                // group(Action84)
+                // {
+                //     Caption = 'Cost Accounting';
+                //     ToolTip = 'Allocate actual and budgeted costs of operations, departments, products, and projects to analyze the profitability of your company.';
+                //     action("Cost Types")
+                //     {
+                //         ApplicationArea = CostAccounting;
+                //         Caption = 'Cost Types';
+                //         RunObject = Page "Chart of Cost Types";
+                //         ToolTip = 'View the chart of cost types with a structure and functionality that resembles the general ledger chart of accounts. You can transfer the general ledger income statement accounts or create your own chart of cost types.';
+                //     }
+                //     action("Cost Centers")
+                //     {
+                //         ApplicationArea = CostAccounting;
+                //         Caption = 'Cost Centers';
+                //         RunObject = Page "Chart of Cost Centers";
+                //         ToolTip = 'Manage cost centers, which are departments and profit centers that are responsible for costs and income. Often, there are more cost centers set up in cost accounting than in any dimension that is set up in the general ledger. In the general ledger, usually only the first level cost centers for direct costs and the initial costs are used. In cost accounting, additional cost centers are created for additional allocation levels.';
+                //     }
+                //     action("Cost Objects")
+                //     {
+                //         ApplicationArea = CostAccounting;
+                //         Caption = 'Cost Objects';
+                //         RunObject = Page "Chart of Cost Objects";
+                //         ToolTip = 'Set up cost objects, which are products, product groups, or services of a company. These are the finished goods of a company that carry the costs. You can link cost centers to departments and cost objects to projects in your company.';
+                //     }
+                //     action("Cost Allocations")
+                //     {
+                //         ApplicationArea = CostAccounting;
+                //         Caption = 'Cost Allocations';
+                //         RunObject = Page "Cost Allocation Sources";
+                //         ToolTip = 'Manage allocation rules to allocate costs and revenues between cost types, cost centers, and cost objects. Each allocation consists of an allocation source and one or more allocation targets. For example, all costs for the cost type Electricity and Heating are an allocation source. You want to allocate the costs to the cost centers Workshop, Production, and Sales, which are three allocation targets.';
+                //     }
+                //     action("Cost Budgets")
+                //     {
+                //         ApplicationArea = CostAccounting;
+                //         Caption = 'Cost Budgets';
+                //         RunObject = Page "Cost Budget Names";
+                //         ToolTip = 'Set up cost accounting budgets that are created based on cost types just as a budget for the general ledger is created based on general ledger accounts. A cost budget is created for a certain period of time, for example, a fiscal year. You can create as many cost budgets as needed. You can create a new cost budget manually, or by importing a cost budget, or by copying an existing cost budget as the budget base.';
+                //     }
+                // }
                 action("Accounting Periods")
                 {
                     ApplicationArea = Basic, Suite;
@@ -2332,7 +2348,7 @@ page 52186778 "Finance Role Center"
                         action("Dividend Progression ")
                         {
                             ApplicationArea = all;
-                            Caption = 'Dividend Progression List';
+                            Caption = 'Dividend Header List';
                             RunObject = page "Dividend Header List";
                         }
                         // action("Dividend Posting Buffer")
@@ -2438,22 +2454,7 @@ page 52186778 "Finance Role Center"
                     RunObject = Page "Bank Account Posting Groups";
                     ToolTip = 'Set up posting groups, so that payments in and out of each bank account are posted to the specified general ledger account.';
                 }
-                group(SystemReversals)
-                {
-                    Caption = 'System Reversal';
-                    action(SystemReversal)
-                    {
-                        Caption = 'System Reversal';
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "System Reversal List";
-                    }
-                    action(PostedSystemReversal)
-                    {
-                        Caption = 'Posted System Reversal';
-                        ApplicationArea = Basic, Suite;
-                        RunObject = page "Reversed System Reversal List";
-                    }
-                }
+
             }
 
             group("Cash Management")
@@ -2843,24 +2844,32 @@ page 52186778 "Finance Role Center"
                 }
                 group("Procurememnt Order Planning")
                 {
-                    Caption = 'Order Planning';
-                    action("Order Planning")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Order Planning';
-                        RunObject = page "Order Planning";
-                    }
-                    action(Budgets)
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'G/L Budgets';
-                        RunObject = page "G/L Budget Names";
-                    }
+                    Caption = 'Lists';
+                    // action("Order Planning")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Order Planning';
+                    //     RunObject = page "Order Planning";
+                    // }
+                    // action(Budgets)
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'G/L Budgets';
+                    //     RunObject = page "G/L Budget Names";
+                    // }
                     action(Vendors)
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Vendors';
+                        Caption = 'Active Vendors';
                         RunObject = page "Vendor List";
+                        RunPageView = where(Archived = const(false));
+                    }
+                    action(AVendors)
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Archived Vendors';
+                        RunObject = page "Vendor List";
+                        RunPageView = where(Archived = const(true));
                     }
                     action(Item)
                     {
@@ -2895,7 +2904,7 @@ page 52186778 "Finance Role Center"
                     }
                     group("Procurement Tasks")
                     {
-                        Caption = 'Procurement Tasks';
+                        Caption = 'Procurement Journals';
                         action("Item Journal")
                         {
                             ApplicationArea = Basic, Suite;
@@ -2928,16 +2937,16 @@ page 52186778 "Finance Role Center"
                             RunObject = page "Recurring Item Jnl.";
                         }
                     }
-                    group("Costing")
-                    {
-                        Caption = 'Costing';
-                        action("Standard Cost Worksheet")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Standard Cost Worksheet';
-                            RunObject = page "Standard Cost Worksheet";
-                        }
-                    }
+                    // group("Costing")
+                    // {
+                    //     Caption = 'Costing';
+                    //     action("Standard Cost Worksheet")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         Caption = 'Standard Cost Worksheet';
+                    //         RunObject = page "Standard Cost Worksheet";
+                    //     }
+                    // }
 
                 }
                 group("Reports and Analysis")
@@ -3264,21 +3273,27 @@ page 52186778 "Finance Role Center"
                 group("Procurement Setup")
                 {
                     Caption = 'Setup';
-                    group("Planning Setup")
+                    // group("Planning Setup")
+                    // {
+                    //     Caption = 'Planning';
+                    //     action("Salespeople/Purchasers")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         Caption = 'Salespeople/Purchasers';
+                    //         RunObject = page "Salespersons/Purchasers";
+                    //     }
+                    //     action("Req. Worksheet Templates")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         Caption = 'Req. Worksheet Templates List';
+                    //         RunObject = page "Req. Worksheet Template List";
+                    //     }
+                    // }
+                    action("Units of Measure")
                     {
-                        Caption = 'Planning';
-                        action("Salespeople/Purchasers")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Salespeople/Purchasers';
-                            RunObject = page "Salespersons/Purchasers";
-                        }
-                        action("Req. Worksheet Templates")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Req. Worksheet Templates List';
-                            RunObject = page "Req. Worksheet Template List";
-                        }
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Units of Measure';
+                        RunObject = page "Units of Measure";
                     }
                     group("Order Processing Setup")
                     {
@@ -3307,41 +3322,36 @@ page 52186778 "Finance Role Center"
                             Caption = 'Return Reasons';
                             RunObject = page "Return Reasons";
                         }
-                        action("Report Selection - Purchase ")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Report Selection - Purchase ';
-                            //RunObject = page "Report Selection - Purchase ";
-                        }
-                    }
-                    group("Inventory and Costing Setup")
-                    {
-                        Caption = 'Inventrory and Costing';
-                        action("Units of Measure")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Units of Measure';
-                            RunObject = page "Units of Measure";
-                        }
-                        action("Manufacturers")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Manufacturers';
-                            RunObject = page "Manufacturers";
-                        }
-                        // action("Product Groups")
+                        // action("Report Selection - Purchase ")
                         // {
                         //     ApplicationArea = Basic, Suite;
-                        //     Caption = 'Product Groups';
-                        //     RunObject = page "Product Groups";
-                        // }
-                        // action("Nonstock Item Setup")
-                        // {
-                        //     ApplicationArea = Basic, Suite;
-                        //     Caption = 'Nonstock Item Setup';
-                        //     //RunObject = page "Nonstock Item Setup";
+                        //     Caption = 'Report Selection - Purchase ';
+                        //     //RunObject = page "Report Selection - Purchase ";
                         // }
                     }
+                    // group("Inventory and Costing Setup")
+                    // {
+                    //     Caption = 'Inventrory and Costing';
+
+                    // action("Manufacturers")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Manufacturers';
+                    //     RunObject = page "Manufacturers";
+                    // }
+                    // action("Product Groups")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Product Groups';
+                    //     RunObject = page "Product Groups";
+                    // }
+                    // action("Nonstock Item Setup")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Nonstock Item Setup';
+                    //     //RunObject = page "Nonstock Item Setup";
+                    // }
+                    // }
                 }
             }
 
@@ -4364,12 +4374,7 @@ page 52186778 "Finance Role Center"
                         Caption = 'Posted Loans Checkoff Report';
                         RunObject = report "Posted Loans Checkoff";
                     }
-                    action("Loan Repayment & Total Balance")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Loan Repayment & Total Balance';
-                        RunObject = report "Expected Loan Repayment";
-                    }
+                   
                     // action("Loans Interest Register")
                     // {
                     //     ApplicationArea = Basic, Suite;

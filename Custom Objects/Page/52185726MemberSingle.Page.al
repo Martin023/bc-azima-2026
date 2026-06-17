@@ -801,70 +801,70 @@ page 52185726 "Member Single"
 
             }
 
-            action("Run Generated Advice")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = Installments;
-                Promoted = true;
-                PromotedCategory = Category4;
-                trigger OnAction()
-                var
-                    LoansProcess: Codeunit "Loans Process";
-                    CheckOffAdviceLine: Record "Checkoff Advice Line";
-                begin
-                    LoansProcess.TriggeredAdvice(Rec);
-                    CheckOffAdviceLine.Reset();
-                    CheckOffAdviceLine.SetRange("Member No.", Rec."No.");
-                    if CheckOffAdviceLine.Find('-') then begin
-                        Report.Run(52186856, true, false, CheckOffAdviceLine);
-                    end;
-                end;
-            }
-            action("Trigger Advice")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = BlanketOrder;
-                Promoted = true;
-                PromotedCategory = Category4;
+            // action("Run Generated Advice")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = Installments;
+            //     Promoted = true;
+            //     PromotedCategory = Category4;
+            //     trigger OnAction()
+            //     var
+            //         LoansProcess: Codeunit "Loans Process";
+            //         CheckOffAdviceLine: Record "Checkoff Advice Line";
+            //     begin
+            //         LoansProcess.TriggeredAdvice(Rec);
+            //         CheckOffAdviceLine.Reset();
+            //         CheckOffAdviceLine.SetRange("Member No.", Rec."No.");
+            //         if CheckOffAdviceLine.Find('-') then begin
+            //             Report.Run(52186856, true, false, CheckOffAdviceLine);
+            //         end;
+            //     end;
+            // }
+            // action("Trigger Advice")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = BlanketOrder;
+            //     Promoted = true;
+            //     PromotedCategory = Category4;
 
-                trigger OnAction()
-                var
-                    LoansProcess: Codeunit "Loans Process";
-                    TriggeredAdviceLine: Record "Triggered Advice Line";
-                begin
-                    TriggeredAdviceLine.Reset();
-                    TriggeredAdviceLine.SetRange("Member No.", Rec."No.");
-                    if TriggeredAdviceLine.Find('-') then begin
-                        TriggeredAdviceLine.DeleteAll();
-                    end;
+            //     trigger OnAction()
+            //     var
+            //         LoansProcess: Codeunit "Loans Process";
+            //         TriggeredAdviceLine: Record "Triggered Advice Line";
+            //     begin
+            //         TriggeredAdviceLine.Reset();
+            //         TriggeredAdviceLine.SetRange("Member No.", Rec."No.");
+            //         if TriggeredAdviceLine.Find('-') then begin
+            //             TriggeredAdviceLine.DeleteAll();
+            //         end;
 
-                    LoansProcess.TriggeredAdvice(Rec);
+            //         LoansProcess.TriggeredAdvice(Rec);
 
-                    Message('Complete');
+            //         Message('Complete');
 
 
-                end;
-            }
+            //     end;
+            // }
 
-            action("Preview Triggered Advice")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = PreviewChecks;
-                Promoted = true;
-                PromotedCategory = Category4;
+            // action("Preview Triggered Advice")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = PreviewChecks;
+            //     Promoted = true;
+            //     PromotedCategory = Category4;
 
-                trigger OnAction()
-                var
-                    LoansProcess: Codeunit "Loans Process";
-                    TriggeredAdviceLine: Record "Triggered Advice Line";
-                begin
+            //     trigger OnAction()
+            //     var
+            //         LoansProcess: Codeunit "Loans Process";
+            //         TriggeredAdviceLine: Record "Triggered Advice Line";
+            //     begin
 
-                    TriggeredAdviceLine.Reset();
-                    TriggeredAdviceLine.SetRange("Member No.", Rec."No.");
-                    if TriggeredAdviceLine.Find('-') then
-                        Report.Run(52186194, true, false, TriggeredAdviceLine);
-                end;
-            }
+            //         TriggeredAdviceLine.Reset();
+            //         TriggeredAdviceLine.SetRange("Member No.", Rec."No.");
+            //         if TriggeredAdviceLine.Find('-') then
+            //             Report.Run(52186194, true, false, TriggeredAdviceLine);
+            //     end;
+            // }
             action("Checkoff Advice Variance")
             {
                 ApplicationArea = Basic, Suite;

@@ -85,7 +85,7 @@ page 52186739 "Fixed Deposit Contract"
                     ApplicationArea = Basic, Suite;
                     Editable = HeaderA;
                 }
-                field("Balance (LCY)"; Rec."Balance (LCY)")
+                field("Fosa Balance"; Rec."Fosa Balance")
                 {
                     ApplicationArea = Basic, Suite;
                     Editable = false;
@@ -126,6 +126,11 @@ page 52186739 "Fixed Deposit Contract"
                 {
                     ApplicationArea = Basic, Suite;
                     // Editable = HeaderA;
+                }
+                field("FD Date Renewed"; Rec."FD Date Renewed")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = false;
                 }
                 field("FD Maturity Date"; Rec."FD Maturity Date")
                 {
@@ -168,16 +173,18 @@ page 52186739 "Fixed Deposit Contract"
                 {
                     ApplicationArea = Basic;
                     Caption = 'Fixed/Call Deposit Certificate';
-                    // Enabled = OpenApprovalEntriesExist;
                     Image = Certificate;
                     Promoted = true;
                     PromotedCategory = Report;
-                    Visible = false;
 
                     trigger OnAction()
+                    var
+                        FixedDepositContract: Record "Fixed Deposit Contract";
                     begin
-
-                        Report.Run(Report::"Fixed Deposit Certificate", true, true, Rec);
+                        FixedDepositContract.Reset;
+                        FixedDepositContract.SetFilter("No.", Rec."No.");
+                        if FixedDepositContract.findFirst() then
+                            Report.Run(Report::"Fixed Deposit Certificate", true, true, FixedDepositContract);
                     end;
                 }
                 action(FixedDepositReceipt)
@@ -212,6 +219,7 @@ page 52186739 "Fixed Deposit Contract"
 
                         Rec.TestField("FOSA Main Account No.");
                         Rec.CalcFields(Balance);
+                        rec.TestField("FD Duration");
 
                         // "Fixed Deposit Contract".Reset();
                         // "Fixed Deposit Contract".SetRange("No.", Rec."No.");
@@ -252,7 +260,7 @@ page 52186739 "Fixed Deposit Contract"
 
                     Visible = true;
 
-                    
+
                 }
                 action(Terminate)
                 {

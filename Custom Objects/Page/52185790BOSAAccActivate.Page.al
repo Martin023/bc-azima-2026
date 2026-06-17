@@ -161,6 +161,9 @@ page 52186088 "BOSA Account Activation"
                         Rec.TestField("Member No");
                         Rec.TestField(Remarks);
 
+                        //CheckCharges- not to overdraw
+                        
+
                         //if Rec."Activation Date" <> Today then Error('Activation Date must be today');
 
                         VarVariant := Rec;

@@ -46,14 +46,14 @@ page 52186745 "Detailed Member Balance List"
                 {
                     ToolTip = 'Specifies the value of the Share Capital field.';
                 }
-                field("Unallocated Funds"; Rec."Unallocated Funds")
-                {
-                    ToolTip = 'Specifies the value of the Unallocated Funds field.', Comment = '%';
-                }
-                field("Kesasa Savings"; Rec."Kesasa Savings")
-                {
-                    ToolTip = 'Specifies the value of the Kesasa Savings field.', Comment = '%';
-                }
+                // field("Unallocated Funds"; Rec."Unallocated Funds")
+                // {
+                //     ToolTip = 'Specifies the value of the Unallocated Funds field.', Comment = '%';
+                // }
+                // field("Kesasa Savings"; Rec."Kesasa Savings")
+                // {
+                //     ToolTip = 'Specifies the value of the Kesasa Savings field.', Comment = '%';
+                // }
                 field("FOSA Savings"; Rec."FOSA Savings")
                 {
                     ToolTip = 'Specifies the value of the FOSA Savings.';
@@ -66,10 +66,10 @@ page 52186745 "Detailed Member Balance List"
                 // {
                 //     ToolTip = 'Specifies the value of the BUSINESS Loans Issued field.';
                 // }
-                field("Bosa Monthly Contribution"; Rec."Bosa Monthly Contribution")
-                {
-                    ToolTip = 'Specifies the value of the Bosa Monthly Contribution field.', Comment = '%';
-                }
+                // field("Bosa Monthly Contribution"; Rec."Bosa Monthly Contribution")
+                // {
+                //     ToolTip = 'Specifies the value of the Bosa Monthly Contribution field.', Comment = '%';
+                // }
                 // field("Business Deposits"; Rec."Business Deposits")
                 // {
                 //     ToolTip = 'Specifies the value of the Business Deposits field.', Comment = '%';
@@ -80,10 +80,10 @@ page 52186745 "Detailed Member Balance List"
                     ToolTip = 'Specifies the value of the FOSA Loans Issued field.';
                 }
 
-                field("HR Loans"; Rec."HR Loans")
-                {
-                    ToolTip = 'Specifies the value of the HR Loans Issued field.';
-                }
+                // field("HR Loans"; Rec."HR Loans")
+                // {
+                //     ToolTip = 'Specifies the value of the HR Loans Issued field.';
+                // }
                 // field(Risk; Rec.Risk)
                 // {
                 //     ToolTip = 'Specifies the value of the Risk field.';

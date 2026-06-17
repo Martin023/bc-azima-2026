@@ -13,6 +13,7 @@ table 52187004 "Portfolio Manager Lines"
         field(2; "Member No"; Code[20])
         {
             Caption = 'Member No';
+            TableRelation = "Members"."No.";
         }
         field(3; Name; Text[1000])
         {
@@ -42,11 +43,11 @@ table 52187004 "Portfolio Manager Lines"
         {
             Caption = 'PF Number';
         }
-        field(10; Status; Enum "ABS Blob Access Tier")
+        field(10; Status; Enum "Member Status")
         {
             Caption = 'Status';
         }
-        field(11; "Sub Status"; Enum "ABS Blob Access Tier")
+        field(11; "Sub Status"; Enum "Member Status Sub Flags")
         {
             Caption = 'Sub Status';
         }
@@ -62,6 +63,15 @@ table 52187004 "Portfolio Manager Lines"
         {
             Caption = 'Sales Rep Code';
         }
+        field(15; Gender; Enum "Gender")
+        {
+            Caption = 'Gender';
+        }
+        field(16; "Registration Date"; Date)
+        {
+            Caption = 'Registration Date';
+        }
+
     }
     keys
     {
