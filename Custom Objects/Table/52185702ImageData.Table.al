@@ -44,12 +44,17 @@ table 52185702 "Image Data"
         {
             SubType = Bitmap;
         }
+        field(11;"Old Member No."; Code[20])
+        {
+            Description = 'LookUp to Member Table';
+            TableRelation = Members;
+        }
 
     }
 
     keys
     {
-        key(Key1; "Member No", "ID Number")
+        key(Key1; "Member No", "Old Member No.")
         {
             Clustered = true;
         }

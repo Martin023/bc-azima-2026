@@ -23,7 +23,7 @@ Report 52185472 "Images Upload+"
                     Clear("Pictures and Signtures".Picture);
 
 
-                PicFileName := StrSubstNo('%1%2.png', FilePath, "Pictures and Signtures"."Member No");
+                PicFileName := StrSubstNo('%1%2.png', FilePath, "Pictures and Signtures"."Old Member No.");
                 PicFileName := 'D:\000002.png';
                 if FILE.Exists(PicFileName) then begin
                     InputFile.Open(PicFileName);
@@ -38,7 +38,7 @@ Report 52185472 "Images Upload+"
                 if "Pictures and Signtures".Signature.Hasvalue then
                     Clear("Pictures and Signtures".Signature);
 
-                PicFileName2 := StrSubstNo('%1%2.png', FilePath2, "Pictures and Signtures"."Member No");
+                PicFileName2 := StrSubstNo('%1%2.png', FilePath2, "Pictures and Signtures"."Old Member No.");
                 if FILE.Exists(PicFileName2) then begin
                     InputFile.Open(PicFileName2);
                     InputFile.CreateInstream(InStream1);
