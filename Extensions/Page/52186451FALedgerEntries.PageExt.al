@@ -46,6 +46,7 @@ PageExtension 52186451 pageextension52186451 extends "FA Ledger Entries"
         modify(Amount)
         {
             ApplicationArea = Basic;
+            visible = false;
         }
         modify("Reclassification Entry")
         {

@@ -5,14 +5,7 @@ PageExtension 52186448 pageextension52186448 extends "Fixed Asset List"
     //CardPageId = "Fixed Asset Card";
     layout
     {
-        addafter(Description)
-        {
-            field("Serial No."; SerialNumber)
-            {
-                ApplicationArea = Basic;
-            }
 
-        }
         addafter(Description)
         {
             field("Asset Tag"; Rec."Asset Tag")
@@ -28,7 +21,7 @@ PageExtension 52186448 pageextension52186448 extends "Fixed Asset List"
                 ApplicationArea = Basic;
             }
         }
-        addafter(Description)
+        addafter(Acquired)
         {
             field("Acquisition Type"; Rec."Acquisition Type")
             {
