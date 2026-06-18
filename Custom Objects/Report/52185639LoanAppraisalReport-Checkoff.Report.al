@@ -537,7 +537,7 @@ Report 52185639 "Loan Appraisal Report-Checkoff"
                 if NewContr < ProductFactory."Minimum Deposit Contribution" then
                     NewContr := ProductFactory."Minimum Deposit Contribution";
 
-                NewContr := NewContr - SavAcc."Monthly Contribution";
+                // NewContr := NewContr - SavAcc."Monthly Contribution";
 
 
 

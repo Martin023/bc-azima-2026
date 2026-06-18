@@ -99,6 +99,10 @@ table 52185738 "Ideal Repayment Schedule"
         field(60; "Actual Repayment"; Decimal)
         {
         }
+        field(61; "New Deposit Contribution"; Decimal)
+        {
+
+        }
     }
 
     keys

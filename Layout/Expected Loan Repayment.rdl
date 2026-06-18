@@ -11,7 +11,7 @@
       <am:Name>PBIRB</am:Name>
       <am:Version>15.7.1813.16</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-06-17T11:22:58.4090854Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-06-18T13:09:33.3280185Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -32,49 +32,49 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>2.07129cm</Width>
+                  <Width>2.0957cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.07129cm</Width>
+                  <Width>2.0957cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.07129cm</Width>
+                  <Width>3.32163cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.07129cm</Width>
+                  <Width>2.80127cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.07129cm</Width>
+                  <Width>1.80466cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.01467cm</Width>
+                  <Width>2.03908cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.01467cm</Width>
+                  <Width>2.03908cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.01467cm</Width>
+                  <Width>2.03908cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.01467cm</Width>
+                  <Width>2.03908cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.01467cm</Width>
+                  <Width>2.03908cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.01467cm</Width>
+                  <Width>1.95971cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.6208cm</Width>
+                  <Width>2.48646cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.6208cm</Width>
+                  <Width>2.51292cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.7592cm</Width>
+                  <Width>2.28091cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.93874cm</Width>
+                  <Width>2.19586cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -697,7 +697,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Repayment.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <Format>#,0.00</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -727,7 +729,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!PriReceived.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <Format>#,0.00</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -757,7 +761,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!IntReceived.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <Format>#,0.00</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -787,7 +793,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!MobilePriRece.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <Format>#,0.00</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -817,7 +825,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!MobileIntRece.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <Format>#,0.00</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -847,7 +857,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!LoanPriOffset.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <Format>#,0.00</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -877,7 +889,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!LoanIntOffset.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <Format>#,0.00</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -907,7 +921,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!STOPri.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <Format>#,0.00</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -937,7 +953,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!STOInt.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <Format>#,0.00</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -967,7 +985,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Variance.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <Format>#,0.00</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -997,7 +1017,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Total_Balance.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <Format>#,0.00</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -1051,9 +1073,8 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
             <Top>0.3055cm</Top>
-            <Left>0.36621cm</Left>
             <Height>1.2cm</Height>
-            <Width>33.38405cm</Width>
+            <Width>33.75026cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
