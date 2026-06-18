@@ -480,6 +480,12 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         OnCancelHRHODApprovalRequestTxt: label 'An Approval of HR Head of Department is canceled';
         RunWorkflowOnCancelHRHODForApprovalCode: label 'RUNWORKFLOWONCANCELHRHODFORAPPROVAL';
         //HR Heads of Departments end
+        //Sales Route Plans
+        OnSendSalesRoutePlanApprovalRequestTxt: label 'Approval of Sales Route Plan is requested';
+        RunWorkflowOnSendSalesRoutePlanForApprovalCode: label 'RUNWORKFLOWONSENDSALESROUTEPLANFORAPPROVAL';
+        OnCancelSalesRoutePlanApprovalRequestTxt: label 'An Approval of Sales Route Plan is canceled';
+        RunWorkflowOnCancelSalesRoutePlanForApprovalCode: label 'RUNWORKFLOWONCANCELSALESROUTEPLANFORAPPROVAL';
+        //Sales Route Plans end
         OnSendEmpTransferAppApprovalRequestTxt: label 'Approval of Employee Transfer is requested';
         RunWorkflowOnSendEmpTransferAppForApprovalCode: label 'RUNWORKFLOWONSENDEmpTransferAppFORAPPROVAL';
         OnCancelEmpTransferAppApprovalRequestTxt: label 'An Approval of Employee Transfer is canceled';
@@ -1338,6 +1344,9 @@ Codeunit 52186463 "Custom Approvals Codeunit"
             //HR Heads of Departments
             Database::"HR Heads of Departments":
                 exit(CheckApprovalsWorkflowEnabledCode(Variant, RunWorkflowOnSendHRHODForApprovalCode));
+            //Sales Route Plans
+            Database::"Sales Route Plans":
+                exit(CheckApprovalsWorkflowEnabledCode(Variant, RunWorkflowOnSendSalesRoutePlanForApprovalCode));
             //HR Leave Planner Header
             Database::"HR Leave Planner Header":
                 exit(CheckApprovalsWorkflowEnabledCode(Variant, RunWorkflowOnSendPlannerAppForApprovalCode)); //
@@ -2161,6 +2170,11 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         RunWorkflowOnSendHRHODForApprovalCode, Database::"HR Heads of Departments", OnSendHRHODApprovalRequestTxt, 0, false);
         WorkFlowEventHandling.AddEventToLibrary(
         RunWorkflowOnCancelHRHODForApprovalCode, Database::"HR Heads of Departments", OnCancelHRHODApprovalRequestTxt, 0, false);
+        //Sales Route Plans
+        WorkFlowEventHandling.AddEventToLibrary(
+        RunWorkflowOnSendSalesRoutePlanForApprovalCode, Database::"Sales Route Plans", OnSendSalesRoutePlanApprovalRequestTxt, 0, false);
+        WorkFlowEventHandling.AddEventToLibrary(
+        RunWorkflowOnCancelSalesRoutePlanForApprovalCode, Database::"Sales Route Plans", OnCancelSalesRoutePlanApprovalRequestTxt, 0, false);
         //Planner
         WorkFlowEventHandling.AddEventToLibrary(
         RunWorkflowOnSendPlannerAppForApprovalCode, Database::"HR Leave Planner Header", OnSendPlannerAppApprovalRequestTxt, 0, false);
@@ -2672,6 +2686,9 @@ Codeunit 52186463 "Custom Approvals Codeunit"
             //HR Heads of Departments
             Database::"HR Heads of Departments":
                 WorkflowManagement.HandleEvent(RunWorkflowOnSendHRHODForApprovalCode, Variant);
+            //Sales Route Plans
+            Database::"Sales Route Plans":
+                WorkflowManagement.HandleEvent(RunWorkflowOnSendSalesRoutePlanForApprovalCode, Variant);
 
             //legal
             Database::Legal:
@@ -2953,6 +2970,9 @@ Codeunit 52186463 "Custom Approvals Codeunit"
             //HR Heads of Departments
             Database::"HR Heads of Departments":
                 WorkflowManagement.HandleEvent(RunWorkflowOnCancelHRHODForApprovalCode, Variant);
+            //Sales Route Plans
+            Database::"Sales Route Plans":
+                WorkflowManagement.HandleEvent(RunWorkflowOnCancelSalesRoutePlanForApprovalCode, Variant);
 
             //Inter Teller
             Database::"Treasury Cashier Transactions":
@@ -3238,6 +3258,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         SecurityPerfection: Record "Security Perfection";
         Application: record "Hr Job Applications";
         HRHOD: Record "HR Heads of Departments";
+        SalesRoutePlan: Record "Sales Route Plans";
         ParkingSpace: Record "Parking Space";
         InvHeader: Record "Investment Header";
         HrEmployee: Record "HR Employees";
@@ -3927,6 +3948,13 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                     HRHOD.modify(true);
                     Handled := true;
                 end;
+            database::"Sales Route Plans":
+                begin
+                    recref.settable(SalesRoutePlan);
+                    SalesRoutePlan.validate(Status, SalesRoutePlan.Status::Open);
+                    SalesRoutePlan.modify(true);
+                    Handled := true;
+                end;
 
 
             database::"Delegates Minutes Header":
@@ -4284,6 +4312,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         SecurityPerfection: Record "Security Perfection";
         Application: Record "HR Job Applications";
         HRHOD: Record "HR Heads of Departments";
+        SalesRoutePlan: Record "Sales Route Plans";
         Overtime: Record "Overtime Claim Header";
         ParkingSpace: Record "Parking Space";
         InvestInterestHeader: Record "Investment Interest Header";
@@ -5006,9 +5035,17 @@ Codeunit 52186463 "Custom Approvals Codeunit"
             database::"HR Heads of Departments":
                 begin
                     recref.settable(HRHOD);
-                    HRHOD.Validate(Status, HRHOD.Status::"Pending Approval");
+                    HRHOD.Validate(Status, HRHOD.Status::Pending);
                     HRHOD.modify(true);
                     Variant := HRHOD;
+                    IsHandled := true;
+                end;
+            database::"Sales Route Plans":
+                begin
+                    recref.settable(SalesRoutePlan);
+                    SalesRoutePlan.Validate(Status, SalesRoutePlan.Status::Pending);
+                    SalesRoutePlan.modify(true);
+                    Variant := SalesRoutePlan;
                     IsHandled := true;
                 end;
             Database::"Interest Header":
@@ -5485,6 +5522,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         SecurityPerfection: Record "Security Perfection";
         Application: record "HR Job Applications";
         HRHOD: Record "HR Heads of Departments";
+        SalesRoutePlan: Record "Sales Route Plans";
         InvHeader: Record "Investment Header";
         Jobs: record "HR Jobs";
         Overtime: Record "Overtime Claim Header";
@@ -5965,6 +6003,11 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                     RecRef.SetTable(HRHOD);
                     ApprovalEntryArgument."Document No." := HRHOD."Responsibility center";
                 end;
+            database::"Sales Route Plans":
+                begin
+                    RecRef.SetTable(SalesRoutePlan);
+                    ApprovalEntryArgument."Document No." := SalesRoutePlan.No;
+                end;
             database::"Interest Header":
                 begin
                     RecRef.SetTable(InterestHeader);
@@ -6290,6 +6333,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         SecurityPerfection: Record "Security Perfection";
         Application: Record "Hr Job Applications";
         HRHOD: Record "HR Heads of Departments";
+        SalesRoutePlan: Record "Sales Route Plans";
         EmpRequisitions: record "HR Employee Requisitions";
         Overtime: Record "Overtime Claim Header";
         InvHeader: Record "Investment Header";
@@ -6890,6 +6934,15 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                     HRHOD.modify(true);
                     Handled := true;
                 end;
+            database::"Sales Route Plans":
+                begin
+                    recref.settable(SalesRoutePlan);
+                    SalesRoutePlan.validate(Status, SalesRoutePlan.Status::Approved);
+                    SalesRoutePlan."Approved By" := UserId;
+                    SalesRoutePlan."Approved Date" := Today;
+                    SalesRoutePlan.modify(true);
+                    Handled := true;
+                end;
             database::"Interest Header":
                 begin
                     recref.settable(InterestHeader);
@@ -7459,6 +7512,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         SecurityPerfection: Record "Security Perfection";
         Application: Record "HR Job Applications";
         HRHOD: Record "HR Heads of Departments";
+        SalesRoutePlan: Record "Sales Route Plans";
         ParkingSpace: Record "Parking Space";
         Overtime: record "Overtime Claim Header";
         InvHeader: Record "Investment Header";
@@ -8118,6 +8172,13 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                         HRHOD.modify(true);
                     end
                 end;
+            database::"Sales Route Plans":
+                begin
+                    if SalesRoutePlan.Get(ApprovalEntry."Document No.") then begin
+                        SalesRoutePlan.validate(Status, SalesRoutePlan.Status::Open);
+                        SalesRoutePlan.modify(true);
+                    end
+                end;
             database::"Dispatch ATM Header":
                 begin
                     if DispatchATM.Get(ApprovalEntry."Document No.") then begin
@@ -8591,6 +8652,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
         //HRLeaveJournalLine: Record "HR Leave Journal Line";
         Application: Record "HR Job Applications";
         HRHOD: Record "HR Heads of Departments";
+        SalesRoutePlan: Record "Sales Route Plans";
         HRDrivers: Record "HR Drivers";
         Lease: Record Lease;
         Surety: Record "Surety Management";

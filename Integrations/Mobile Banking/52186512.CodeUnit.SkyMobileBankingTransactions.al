@@ -1330,6 +1330,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         CurrentMonthInt: Integer;
         CurrentMonthEnum: Enum "Loan Month";
         AllowedMonths: Text;
+        DepositCap: Decimal;
 
     begin
         TotalExisting := 0;
@@ -1457,6 +1458,19 @@ codeunit 52186512 "Sky M-Banking Transactions"
             OrdinaryAccounts.SetLoadFields(Balance);
             IF OrdinaryAccounts.FINDFIRST THEN BEGIN
                 OrdinaryAccounts.CALCFIELDS(Balance);
+                if ProdFac."Deposit Qualifier %" > 0 then begin
+                    OrdinaryAccounts.Reset();
+                    OrdinaryAccounts.SetRange("Member No.", Members."No.");
+                    OrdinaryAccounts.SetRange("Product Category", OrdinaryAccounts."Product Category"::"BOSA Deposits");
+                    OrdinaryAccounts.SetLoadFields(Balance);
+                    if OrdinaryAccounts.FindFirst() then begin
+                        OrdinaryAccounts.CalcFields(Balance);
+                        DepositCap := Round(OrdinaryAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1);
+                        if DepositCap < QualifiedAmount then
+                            QualifiedAmount := DepositCap;
+                    end;
+                end;
+
                 IF OrdinaryAccounts.Balance < ProdFac."Minimum Deposit Balance" THEN BEGIN
                     EligibilityFailReason := StrSubstNo('Applicant NOT eligible. Minimum deposit amount required is KES %1', Format(OrdinaryAccounts.Balance));
                     QualifiedAmount := 0;
@@ -1570,6 +1584,32 @@ codeunit 52186512 "Sky M-Banking Transactions"
                         end;
                     end;
 
+                    if ProdFac."Deposit Qualifier %" > 0 then begin
+                        OrdinaryAccounts.Reset();
+                        OrdinaryAccounts.SetRange("Member No.", Members."No.");
+                        OrdinaryAccounts.SetRange("Product Category", OrdinaryAccounts."Product Category"::"BOSA Deposits");
+                        OrdinaryAccounts.SetLoadFields(Balance);
+                        if OrdinaryAccounts.FindFirst() then begin
+                            OrdinaryAccounts.CalcFields(Balance);
+                            DepositCap := Round(OrdinaryAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1);
+                            if DepositCap < QualifiedAmount then
+                                QualifiedAmount := DepositCap;
+                        end;
+                    end;
+
+                    if ProdFac."Deposit Qualifier %" > 0 then begin
+                        OrdinaryAccounts.Reset();
+                        OrdinaryAccounts.SetRange("Member No.", Members."No.");
+                        OrdinaryAccounts.SetRange("Product Category", OrdinaryAccounts."Product Category"::"BOSA Deposits");
+                        OrdinaryAccounts.SetLoadFields(Balance);
+                        if OrdinaryAccounts.FindFirst() then begin
+                            OrdinaryAccounts.CalcFields(Balance);
+                            DepositCap := Round(OrdinaryAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1);
+                            if DepositCap < QualifiedAmount then
+                                QualifiedAmount := DepositCap;
+                        end;
+                    end;
+
                     exit(QualifiedAmount);
                 end;
 
@@ -1592,6 +1632,20 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     if ProdFac."Requires Salary Processing" = false then begin
                         EligibilityFailReason := '';
                         QualifiedAmount := ProdFac."Maximum Loan Amount";
+
+                        if ProdFac."Deposit Qualifier %" > 0 then begin
+                            OrdinaryAccounts.Reset();
+                            OrdinaryAccounts.SetRange("Member No.", Members."No.");
+                            OrdinaryAccounts.SetRange("Product Category", OrdinaryAccounts."Product Category"::"BOSA Deposits");
+                            OrdinaryAccounts.SetLoadFields(Balance);
+                            if OrdinaryAccounts.FindFirst() then begin
+                                OrdinaryAccounts.CalcFields(Balance);
+                                DepositCap := Round(OrdinaryAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1);
+                                if DepositCap < QualifiedAmount then
+                                    QualifiedAmount := DepositCap;
+                            end;
+                        end;
+
                         exit(QualifiedAmount);
                     end;
 
@@ -1627,12 +1681,6 @@ codeunit 52186512 "Sky M-Banking Transactions"
                             EXIT(QualifiedAmount);
                         end;
 
-                        // if SalAvg <= 0 then begin
-                        //     EligibilityFailReason := StrSubstNo('Applicant NOT eligible due to salary requirements');
-                        //     QualifiedAmount := 0;
-                        //     EXIT(QualifiedAmount);
-                        // end;
-
                         SalAvg := ProdFac."Maximum Loan Amount";
                     end;
 
@@ -1658,6 +1706,20 @@ codeunit 52186512 "Sky M-Banking Transactions"
 
                     amtQualified := SalAvg * (ProdFac."Net Salary Multiplier %" / 100);
                     IF amtQualified < 0 THEN amtQualified := 0;
+
+                    if ProdFac."Deposit Qualifier %" > 0 then begin
+                        OrdinaryAccounts.Reset();
+                        OrdinaryAccounts.SetRange("Member No.", Members."No.");
+                        OrdinaryAccounts.SetRange("Product Category", OrdinaryAccounts."Product Category"::"BOSA Deposits");
+                        OrdinaryAccounts.SetLoadFields(Balance);
+                        if OrdinaryAccounts.FindFirst() then begin
+                            OrdinaryAccounts.CalcFields(Balance);
+                            DepositCap := Round(OrdinaryAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1);
+                            if DepositCap < amtQualified then
+                                amtQualified := DepositCap;
+                        end;
+                    end;
+
                     QualifiedAmount := amtQualified;
 
                     // Weekend Njema Loan
@@ -1670,6 +1732,19 @@ codeunit 52186512 "Sky M-Banking Transactions"
                         QualifiedAmount := ProdFac."Maximum Loan Amount";
                     end;
                     EligibilityFailReason := '';
+
+                    if ProdFac."Deposit Qualifier %" > 0 then begin
+                        OrdinaryAccounts.Reset();
+                        OrdinaryAccounts.SetRange("Member No.", Members."No.");
+                        OrdinaryAccounts.SetRange("Product Category", OrdinaryAccounts."Product Category"::"BOSA Deposits");
+                        OrdinaryAccounts.SetLoadFields(Balance);
+                        if OrdinaryAccounts.FindFirst() then begin
+                            OrdinaryAccounts.CalcFields(Balance);
+                            DepositCap := Round(OrdinaryAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1);
+                            if DepositCap < QualifiedAmount then
+                                QualifiedAmount := DepositCap;
+                        end;
+                    end;
                     EXIT(QualifiedAmount);
                 end;
             END ELSE BEGIN
@@ -1685,9 +1760,29 @@ codeunit 52186512 "Sky M-Banking Transactions"
         OrdinaryAccounts.SetLoadFields(Balance);
         IF OrdinaryAccounts.FINDFIRST THEN BEGIN
             OrdinaryAccounts.CALCFIELDS(Balance);
+
+            if ProdFac."Deposit Qualifier %" > 0 then begin
+                amtQualified := Round(OrdinaryAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1)
+            end else begin
+                amtQualified := OrdinaryAccounts.Balance;
+            end;
+
             iF OrdinaryAccounts.Balance < amtQualified then begin
                 amtQualified := OrdinaryAccounts.Balance;
             end;
+
+            if amtQualified <= 0 then begin
+                EligibilityFailReason := StrSubstNo(
+                    'Applicant NOT eligible. %1% of your deposit balance KES %2 qualifies you for KES %3',
+                    Format(ProdFac."Deposit Qualifier %", 0, '<Integer>'),
+                    Format(OrdinaryAccounts.Balance, 0, '<Precision,2:2><Standard Format,0>'),
+                    Format(Round(OrdinaryAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1), 0, '<Precision,2:2><Standard Format,0>')
+                );
+                QualifiedAmount := 0;
+                exit(QualifiedAmount);
+            end;
+
+            EligibilityFailReason := '';
         END;
         exit(amtQualified);
     end;
