@@ -119,28 +119,7 @@ page 52185500 "Main Role Center"
                             RunObject = Page "Micro Member Application List";
                         }
                     }
-                    group("Membership Reports")
-                    {
-                        Caption = 'Reports';
-                        group("Membership Reports and Analysis")
-                        {
-                            Caption = 'Reports and Analysis';
-                            action("PostBatches2")
-                            {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'Post Batches2';
-                                RunObject = report PostBatches2;
-                            }
-                            // action("PostBatches") //Missing Report
-                            // {
-                            //     ApplicationArea = Basic, Suite;
-                            //     Caption = 'Post Batches';
-                            //     RunObject = report PostBatches;
-                            // }
-                        }
-
-
-                    }
+                    
                 }
                 group("Agents")
                 {

@@ -46,6 +46,7 @@ PageExtension 52186451 pageextension52186451 extends "FA Ledger Entries"
         modify(Amount)
         {
             ApplicationArea = Basic;
+            visible = false;
         }
         modify("Reclassification Entry")
         {
@@ -114,6 +115,15 @@ PageExtension 52186451 pageextension52186451 extends "FA Ledger Entries"
         movebefore(Amount; "Debit Amount")
         moveafter(Amount; RunningBalance)
 
+        modify("Credit Amount")
+        {
+            Visible = true;
+        }
+        modify("Debit Amount")
+        {
+            Visible = true;
+        }
+
         modify(RunningBalance)
         {
             Visible = true;
@@ -139,32 +149,11 @@ PageExtension 52186451 pageextension52186451 extends "FA Ledger Entries"
             ApplicationArea = Basic;
         }
 
-        //Unsupported feature: Property Deletion (ToolTipML) on "Dimensions(Action 36)".
-
         modify(SetDimensionFilter)
         {
             Visible = false;
         }
 
-        //Unsupported feature: Property Deletion (ToolTipML) on "CancelEntries(Action 33)".
-
-
-        //Unsupported feature: Property Deletion (ToolTipML) on "ReverseTransaction(Action 38)".
-
-
-        //Unsupported feature: Property Deletion (ToolTipML) on ""&Navigate"(Action 18)".
-
     }
-
-    //Unsupported feature: Property Deletion (ApplicationArea).
-
-
-    //Unsupported feature: Property Deletion (SourceTableView).
-
-
-    //Unsupported feature: Property Deletion (UsageCategory).
-
-
-    //Unsupported feature: Property Deletion (AdditionalSearchTermsML).
 
 }
