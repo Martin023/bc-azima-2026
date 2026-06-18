@@ -936,6 +936,10 @@ page 52185712 "Product Factory"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Deposit Qualifier %"; Rec."Deposit Qualifier %")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
 
             }
             group("Sky Mbanking")
