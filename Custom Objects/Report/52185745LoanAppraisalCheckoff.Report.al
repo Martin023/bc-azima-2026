@@ -166,9 +166,6 @@ Report 52185745 "Loan Appraisal Checkoff"
             {
 
             }
-
-            column(RelatedBal; RelatedBal)
-            { }
             column(MemberDeposits; MemberDeposits)
             {
 
@@ -351,9 +348,7 @@ Report 52185745 "Loan Appraisal Checkoff"
             {
                 DataItemLink = "Member No." = field("Member No.");
                 DataItemTableView = where(Posted = const(true), "Outstanding Balance" = filter(> 0));
-                column(ReportForNavId_18; 18)
-                {
-                }
+
                 column(LoansLoanNo; AllLoans."Loan No.")
                 {
                 }
@@ -694,6 +689,7 @@ Report 52185745 "Loan Appraisal Checkoff"
                 TDeductions := 0;
                 TPension := 0;
                 NetSalary := 0;
+                TotalGuaranteed := 0;
 
                 ProductFactory.get(Loans."Loan Product Type");
                 //Get Charges and commissions
@@ -1049,6 +1045,7 @@ Report 52185745 "Loan Appraisal Checkoff"
                 LoanGua.Reset;
                 LoanGua.SetRange("Loan No", Loans."Loan No.");
                 LoanGua.SetRange("Guarantor Type", LoanGua."guarantor type"::Guarantor);
+                LoanGua.SetRange(Substituted, false);
                 if LoanGua.Findset() then begin
                     NofGuar := LoanGua.Count;
                     Loangua.CalcSums("Amount Guaranteed");
@@ -1065,10 +1062,13 @@ Report 52185745 "Loan Appraisal Checkoff"
                 if Loans."Requested Amount" > NetOnSalary then begin
                     QualifyingAmount := NetOnSalary;
 
-                    if ProductFactory."Secured Loan" then begin
-                        if QualifyingAmount > QualificationOnDeposits then
-                            QualifyingAmount := QualificationOnDeposits;
-                    end;
+                    // if ProductFactory."Secured Loan" then begin
+                    if QualifyingAmount > QualificationOnDeposits then
+                        QualifyingAmount := QualificationOnDeposits;
+                    // end;
+
+                    if QualifyingAmount > TotalGuaranteed then
+                        QualifyingAmount := TotalGuaranteed;
 
                     Loans."Recommended Amount" := ROUND(QualifyingAmount, 1, '<');
                     Loans."Approved Amount" := ROUND(QualifyingAmount, 1, '<');
@@ -1266,11 +1266,11 @@ Report 52185745 "Loan Appraisal Checkoff"
                     end else
                         SalNotThroughSacco := true;
 
-                    if (ProductFactory."Nature of Loan Type" = ProductFactory."Nature of Loan Type"::IPO) and SalNotThroughSacco then begin
-                        Loans."Recommended Amount" := 0;
-                        Loans."Approved Amount" := 0;
-                        Loans."Amount To Disburse" := 0;
-                    end;
+                    // if (ProductFactory."Nature of Loan Type" = ProductFactory."Nature of Loan Type"::IPO) and SalNotThroughSacco then begin
+                    //     Loans."Recommended Amount" := 0;
+                    //     Loans."Approved Amount" := 0;
+                    //     Loans."Amount To Disburse" := 0;
+                    // end;
 
                 end;
                 Loans.modify;
@@ -1278,14 +1278,9 @@ Report 52185745 "Loan Appraisal Checkoff"
                 LoanGua.SetRange("Loan No", Loans."Loan No.");
                 if LoanGua.Find('-') then
                     LoanGua.CalcSums(LoanGua."Amount Guaranteed");
-                SavAcc.Reset;
-                SavAcc.SetRange(SavAcc."Member No.", Loans."Member No.");
-                SavAcc.SetRange(SavAcc."Product Category", SavAcc."Product Category"::"BOSA Deposits");
-                if SavAcc.Find('-') then
-                    SavAcc.CalcFields(SavAcc."Balance (LCY)");
 
-                SecurityTotal := LoanGua."Amount Guaranteed" + SavAcc."Balance (LCY)" - (RelatedBal);//-OffsetBalance);
-                                                                                                     //MESSAGE('Guar %1 Dep %2 Related %3 OffsetBal %4 ',LoanGua."Amount Guaranteed",SavAcc."Balance (LCY)",RelatedBal,OffsetBalance);
+                SecurityTotal := LoanGua."Amount Guaranteed";//-OffsetBalance);
+                                                             //MESSAGE('Guar %1 Dep %2 Related %3 OffsetBal %4 ',LoanGua."Amount Guaranteed",SavAcc."Balance (LCY)",RelatedBal,OffsetBalance);
 
                 if SecurityTotal < Loans."Approved Amount" then begin
                     SecurityRisk := true;
@@ -1473,7 +1468,7 @@ Report 52185745 "Loan Appraisal Checkoff"
         ReapplicationPeriod: Boolean;
         DepositMult: Decimal;
         RelatedProduct: Record "Related Product";
-        RelatedBal, TotalGuaranteed : Decimal;
+        TotalGuaranteed: Decimal;
         AppraisalSal: Record "Appraisal Salary Details";
         TotalBasic: Decimal;
         TDeductions: Decimal;

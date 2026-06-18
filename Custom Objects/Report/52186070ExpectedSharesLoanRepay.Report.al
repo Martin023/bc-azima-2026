@@ -121,6 +121,10 @@ Report 52186070 "Expected Loan Repayment"
                 MobileIntRece := 0;
                 MobilePriRece := 0;
 
+                if Loans.Repayment > Loans."Total Balance" then
+                    Loans.Repayment := Loans."Total Balance";
+
+
                 CreditLedgerEntr.Reset();
                 CreditLedgerEntr.SetLoadFields("Posting Date", "Loan No", Amount, "Credit Amount");
                 CreditLedgerEntr.Setfilter("Posting Date", '%1..%2', StartDate, EndDate);

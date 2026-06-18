@@ -1783,25 +1783,25 @@ page 52185753 "Loan Application Card"
                         end;
                     end;
 
-                    Members.Get(Rec."Member No.");
-                    SegmentCountyDividendSignat.Reset;
-                    SegmentCountyDividendSignat.SetRange(Type, SegmentCountyDividendSignat.Type::Segment);
-                    SegmentCountyDividendSignat.SetRange(Code, Members."Member Segment");
-                    if SegmentCountyDividendSignat.Find('-') then begin
-                        MemberClass.Reset;
-                        MemberClass.SetRange("No.", Members."Member Class");
-                        if MemberClass.FindFirst then begin
-                            //Share Capital
-                            SavAcc.Reset;
-                            SavAcc.SetRange("Member No.", Rec."Member No.");
-                            SavAcc.SetRange("Product Category", SavAcc."Product Category"::"Share Capital");
-                            if SavAcc.Find('-') then begin
-                                SavAcc.CalcFields("Balance (LCY)");
-                                if (SavAcc."Balance (LCY)") < MemberClass."Share Capital" then
-                                    Error('Share capital less than Kes %1', MemberClass."Share Capital");
-                            end;
-                        end;
-                    end;
+                    // Members.Get(Rec."Member No.");
+                    // SegmentCountyDividendSignat.Reset;
+                    // SegmentCountyDividendSignat.SetRange(Type, SegmentCountyDividendSignat.Type::Segment);
+                    // SegmentCountyDividendSignat.SetRange(Code, Members."Member Segment");
+                    // if SegmentCountyDividendSignat.Find('-') then begin
+                    //     MemberClass.Reset;
+                    //     MemberClass.SetRange("No.", Members."Member Class");
+                    //     if MemberClass.FindFirst then begin
+                    //         //Share Capital
+                    //         SavAcc.Reset;
+                    //         SavAcc.SetRange("Member No.", Rec."Member No.");
+                    //         SavAcc.SetRange("Product Category", SavAcc."Product Category"::"Share Capital");
+                    //         if SavAcc.Find('-') then begin
+                    //             SavAcc.CalcFields("Balance (LCY)");
+                    //             if (SavAcc."Balance (LCY)") < MemberClass."Share Capital" then
+                    //                 Error('Share capital less than Kes %1', MemberClass."Share Capital");
+                    //         end;
+                    //     end;
+                    // end;
 
                     if (Rec."Recovery Mode" = Rec."Recovery Mode"::"External STO") then begin
                         Rec.TestField("Client Bank Code");
@@ -1867,7 +1867,6 @@ page 52185753 "Loan Application Card"
                         CustomApprovals.OnSendDocForApproval(VarVariant);
                         currpage.close;
                     end;
-
 
                 end;
             }

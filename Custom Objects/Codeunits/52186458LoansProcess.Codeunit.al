@@ -7361,8 +7361,7 @@ Codeunit 52186458 "Loans Process"
         GeneralSetUp: Record "General Set-Up";
         CreateSchedule: Boolean;
         Dateformula: DateFormula;
-
-        NewDate: Date;
+        NewDepoCont: Decimal;
     begin
         if RecreateSchedule then begin
             RSchedule.Reset();
