@@ -34,9 +34,13 @@ PageExtension 52186448 pageextension52186448 extends "Fixed Asset List"
             {
                 ApplicationArea = Basic;
             }
-            field("Marked for Disposal"; Rec."Marked for Disposal")
+            field(Disposed; Rec.Disposed)
             {
-
+                ApplicationArea = Basic;
+            }
+            field("Disposal Date"; Rec."Disposal Date")
+            {
+                ApplicationArea = Basic;
             }
 
         }

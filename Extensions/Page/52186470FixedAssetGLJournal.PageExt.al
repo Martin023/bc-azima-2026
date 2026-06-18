@@ -12,6 +12,46 @@ PageExtension 52186470 pageextension52186470 extends "Fixed Asset G/L Journal"
         {
             visible = true;
         }
+        movebefore(Amount; "Credit Amount")
+        movebefore(Amount; "Debit Amount")
+
+        modify("Gen. Posting Type")
+        {
+            visible = false;
+        }
+        modify("Gen. Bus. Posting Group")
+        {
+            visible = false;
+        }
+        modify("Gen. Prod. Posting Group")
+        {
+            visible = false;
+        }
+        modify("Bal. Gen. Bus. Posting Group")
+        {
+            visible = false;
+        }
+        modify("Bal. Gen. Prod. Posting Group")
+        {
+            visible = false;
+        }
+        modify("Bal. Gen. Posting Type")
+        {
+            visible = false;
+        }
+        modify("Depr. until FA Posting Date")
+        {
+            visible = false;
+        }
+        modify("Budgeted FA No.")
+        {
+            visible = false;
+        }
+        modify("FA Error Entry No.")
+        {
+            Visible = false;
+        }
+
     }
 
     actions
