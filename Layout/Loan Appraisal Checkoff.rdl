@@ -6923,12 +6923,6 @@ End Function
         <Field Name="NetTakeHomeFormat">
           <DataField>NetTakeHomeFormat</DataField>
         </Field>
-        <Field Name="RelatedBal">
-          <DataField>RelatedBal</DataField>
-        </Field>
-        <Field Name="RelatedBalFormat">
-          <DataField>RelatedBalFormat</DataField>
-        </Field>
         <Field Name="MemberDeposits">
           <DataField>MemberDeposits</DataField>
         </Field>
@@ -7165,9 +7159,6 @@ End Function
         </Field>
         <Field Name="STOAmountFormat">
           <DataField>STOAmountFormat</DataField>
-        </Field>
-        <Field Name="ReportForNavId_18">
-          <DataField>ReportForNavId_18</DataField>
         </Field>
         <Field Name="LoansLoanNo">
           <DataField>LoansLoanNo</DataField>

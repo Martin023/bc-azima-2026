@@ -34,7 +34,7 @@ page 52186055 "All Users Activities"
                 field(Members; Rec.Members)
                 {
                     Caption = 'Active Members';
-                    image = People;
+                    image = none;
                 }
                 field("Member Withdrawal"; Rec."Member Withdrawal")
                 {

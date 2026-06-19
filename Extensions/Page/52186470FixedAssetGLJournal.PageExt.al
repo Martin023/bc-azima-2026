@@ -4,11 +4,56 @@ PageExtension 52186470 pageextension52186470 extends "Fixed Asset G/L Journal"
     Caption = 'Fixed Asset G/L Journal';
     layout
     {
+        modify("Debit Amount")
+        {
+            visible = true;
+        }
+        modify("Credit Amount")
+        {
+            visible = true;
+        }
+        movebefore(Amount; "Credit Amount")
+        movebefore(Amount; "Debit Amount")
 
-
-
+        modify("Gen. Posting Type")
+        {
+            visible = false;
+        }
+        modify("Gen. Bus. Posting Group")
+        {
+            visible = false;
+        }
+        modify("Gen. Prod. Posting Group")
+        {
+            visible = false;
+        }
+        modify("Bal. Gen. Bus. Posting Group")
+        {
+            visible = false;
+        }
+        modify("Bal. Gen. Prod. Posting Group")
+        {
+            visible = false;
+        }
+        modify("Bal. Gen. Posting Type")
+        {
+            visible = false;
+        }
+        modify("Depr. until FA Posting Date")
+        {
+            visible = false;
+        }
+        modify("Budgeted FA No.")
+        {
+            visible = false;
+        }
+        modify("FA Error Entry No.")
+        {
+            Visible = false;
+        }
 
     }
+
     actions
     {
         addafter("Apply Entries")
@@ -126,7 +171,7 @@ PageExtension 52186470 pageextension52186470 extends "Fixed Asset G/L Journal"
                     trigger OnAction()
                     var
                         FlowServiceManagement: Codeunit "Flow Service Management";
-                        // FlowTemplateSelector: Page "Flow Template Selector";
+                    // FlowTemplateSelector: Page "Flow Template Selector";
                     begin
                         // Opens page 6400 where the user can use filtered templates to create new flows.
                         // FlowTemplateSelector.SetSearchText(FlowServiceManagement.GetJournalTemplateFilter());

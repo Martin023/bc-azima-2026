@@ -3198,6 +3198,8 @@ Codeunit 52185506 "Global Functions"
         TotalCharge := 0;
         ExciseDuty := 0;
         TExciseDuty := 0;
+        GeneralSetUp.get();
+        GeneralSetUp.TestField("Excise Duty (%)");
 
         TransactionCharges.Reset;
         TransactionCharges.SetRange(TransactionCharges."Transaction Type", TransCode);

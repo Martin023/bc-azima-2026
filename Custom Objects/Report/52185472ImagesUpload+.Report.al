@@ -23,8 +23,9 @@ Report 52185472 "Images Upload+"
                     Clear("Pictures and Signtures".Picture);
 
 
-                PicFileName := StrSubstNo('%1%2.png', FilePath, "Pictures and Signtures"."Member No");
-                PicFileName := 'D:\000002.png';
+                PicFileName := StrSubstNo('%1%2.jpg', FilePath, "Pictures and Signtures"."Old Member No.");
+                // PicFileName := 'D:\000002.png';
+                // C:\ProgramData\Microsoft\Microsoft Dynamics NAV\280\Server\MicrosoftDynamicsNavServer$BC280\users\default\{choose from your list}\TEMP\Photos\
                 if FILE.Exists(PicFileName) then begin
                     InputFile.Open(PicFileName);
                     InputFile.CreateInstream(InStream1);
@@ -38,7 +39,8 @@ Report 52185472 "Images Upload+"
                 if "Pictures and Signtures".Signature.Hasvalue then
                     Clear("Pictures and Signtures".Signature);
 
-                PicFileName2 := StrSubstNo('%1%2.png', FilePath2, "Pictures and Signtures"."Member No");
+                PicFileName2 := StrSubstNo('%1%2.jpg', FilePath2, "Pictures and Signtures"."Old Member No.");
+                // C:\ProgramData\Microsoft\Microsoft Dynamics NAV\280\Server\MicrosoftDynamicsNavServer$BC280\users\default\{choose from your list}\TEMP\Signature\
                 if FILE.Exists(PicFileName2) then begin
                     InputFile.Open(PicFileName2);
                     InputFile.CreateInstream(InStream1);

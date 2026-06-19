@@ -155,15 +155,22 @@ page 52186088 "BOSA Account Activation"
                     var
                         ApprovalsMgmt: Codeunit 1535;
                         CustomApprovals: Codeunit "Custom Approvals Codeunit";
+                        GlobalFunc: Codeunit "Global Functions";
+                        SavAcc: record "Savings Accounts";
                     begin
                         // Rec.TestField("Activation Date");
                         Rec.TestField("Account No");
                         Rec.TestField("Member No");
                         Rec.TestField(Remarks);
+                        rec.TestField("FOSA Main Account No.");
+                        if Rec."Activation Date" <> Today then Error('Activation Date must be today');
+
+                        if rec."Transaction Type" <> '' then begin
+                            if SavAcc.GetAvailableBalance(rec."FOSA Main Account No.") < GlobalFunc.getChargesAmt(rec."Transaction Type", 0) then
+                                error('The available saving account available balance of %1 is less than charge amount of %2 that may lead to overdrawing of account!', format(SavAcc.GetAvailableBalance(rec."FOSA Main Account No.")), format(GlobalFunc.getChargesAmt(rec."Transaction Type", 0)));
+                        end;
 
                         //CheckCharges- not to overdraw
-                        
-
                         //if Rec."Activation Date" <> Today then Error('Activation Date must be today');
 
                         VarVariant := Rec;
@@ -232,32 +239,29 @@ page 52186088 "BOSA Account Activation"
                         Rec.Modify;
                     end;
                 }
-                action("Reset Transaction Date")
+                action("Reset Card")
                 {
-                    ApplicationArea = Basic;
-                    Image = ChangeStatus;
+                    ApplicationArea = Basic, Suite;
+                    Image = Restore;
                     Promoted = true;
                     PromotedCategory = Process;
-                    PromotedIsBig = false;
-                    Visible = false;
+                    // Visible = (Rec.status = filter("Open"));
 
                     trigger OnAction()
                     var
-                        Activate: Record "BOSA Account Activation";
+                        // ApprovalsMgmt: Codeunit 1535;
+                        UserSetup: Record "User Setup";
                     begin
+                        rec.TestField(posted, false);
+                        Rec."User Id" := UserId;
+                        Rec."Activation Date" := Today;
+                        Rec.Date := Today;
+                        if UserSetup.Get(UserId) then begin
+                            Rec."Global Dimension 1 Code" := UserSetup."Global Dimension 1 Code";
+                            Rec."Global Dimension 2 Code" := UserSetup."Global Dimension 2 Code";
+                        end;
 
-                        Activate.Reset;
-                        Activate.SetRange(Activate.Posted, false);
-                        Activate.SetRange(Activate.No, Rec.No);
-                        if Activate.Find('-') then begin
-
-                            Rec."Activation Date" := Today;
-                            Rec.Modify;
-
-                            Message('Transaction date updated');
-
-                        end else
-                            Error('Transaction already posted');
+                        Rec.Modify();
                     end;
                 }
                 action(Refresh)
@@ -329,7 +333,7 @@ page 52186088 "BOSA Account Activation"
                             SavAcc.get(Rec."Account No");
                             SavAcc.Status := SavAcc.Status::Active;
                             SavAcc.Blocked := SavAcc.Blocked::" ";
-                            SavAcc."Status Change Reason" := 'Activation';
+                            SavAcc."Status Change Reason" := rec.Remarks;
                             SavAcc.Modify;
                             Message('Activated Successfully!!');
                         end;

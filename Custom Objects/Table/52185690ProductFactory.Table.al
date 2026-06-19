@@ -1056,6 +1056,11 @@ table 52185690 "Product Factory"
         {
             Caption = 'Is Available In Month';
         }
+        field(10041; "Deposit Qualifier %"; Decimal)
+        {
+            MaxValue = 100;
+            MinValue = 1;
+        }
 
     }
 

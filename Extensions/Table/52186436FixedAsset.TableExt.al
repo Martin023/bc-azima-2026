@@ -63,7 +63,7 @@ TableExtension 52186436 tableextension52186436 extends "Fixed Asset"
             FieldClass = FlowFilter;
             TableRelation = "G/L Budget Name";
         }
-       
+
         field(50017; No2; Code[20])
         {
             DataClassification = ToBeClassified;
@@ -336,6 +336,16 @@ TableExtension 52186436 tableextension52186436 extends "Fixed Asset"
         {
             FieldClass = FlowField;
             CalcFormula = lookup("FA Ledger Entry"."Posting Date" where("FA No." = field("No."), "FA Posting Type" = const("Acquisition Cost")));
+        }
+        field(147; Disposed; Boolean)
+        {
+            FieldClass = FlowField;
+            CalcFormula = exist("FA Ledger Entry" where("FA No." = field("No."), "FA Posting Type" = const("Proceeds on Disposal")));
+        }
+        field(148; "Disposal Date"; Date)
+        {
+            FieldClass = FlowField;
+            CalcFormula = lookup("FA Ledger Entry"."Document Date" where("FA No." = field("No."), "FA Posting Type" = const("Proceeds on Disposal")));
         }
     }
 

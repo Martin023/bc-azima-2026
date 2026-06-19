@@ -721,6 +721,13 @@ page 52187329 "Records"
                         RunObject = page "Sales Routes Plan List";
                         RunPageView = where(Status = filter(Approved));
                     }
+                    action(SalesrouteReport)
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = ' Sales Routes Plan Report';
+                        RunObject = report "Sales Routes Plan Report";
+
+                    }
 
                 }
                 action("Portfolio Manager List")

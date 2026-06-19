@@ -21,7 +21,7 @@ Report 52185473 "Poppulate Image Data"
                 if not Img.find('-') then begin
                     Img.Init;
                     Img."Member No" := "Pictures and Signtures"."No.";
-                    Img."ID Number" := "Pictures and Signtures"."Primary Identification";
+                    Img."Old Member No." := "Pictures and Signtures"."Old Member No.";
                     Img.Insert;
                 end
             end;

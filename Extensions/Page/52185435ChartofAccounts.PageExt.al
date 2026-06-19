@@ -241,11 +241,27 @@ PageExtension 52185435 pageextension52185435 extends "Chart of Accounts"
         modify("Trial Balance")
         {
             ApplicationArea = Basic;
-            Visible = true;
+            Visible = false;
         }
-        addafter("Detail Trial Balance")
+        addbefore("Detail Trial Balance")
         {
             action(CustomTrialBalance)
+            {
+                Caption = 'Custom Trial Bal.';
+                ApplicationArea = Basic;
+                Promoted = true;
+                PromotedCategory = Report;
+
+                trigger OnAction()
+                begin
+                    Report.run(report::"Trial Balance Custom");
+                end;
+            }
+        }
+
+        addafter("Detail Trial Balance")
+        {
+            action(CustomDetailTrialBalance)
             {
                 Caption = 'Custom Detail Trial Bal.';
                 ApplicationArea = Basic;
