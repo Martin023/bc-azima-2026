@@ -671,6 +671,57 @@ page 52186778 "Finance Role Center"
                 //     // }
                 // }
 
+                group("Account Activation")
+                {
+                    group("BOSA Account Activation")
+                    {
+                        Caption = 'BOSA Account Activation';
+                        action("Open Account Activaion")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Open BOSA Account Activation';
+                            RunObject = Page "BOSA Account Activation List";
+                            RunPageView = where(Status = filter(Open));
+                        }
+                        action("Account Activaion Pending Approval")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'BOSA Account Activation Pending Approval';
+                            RunObject = Page "BOSA Account Activation List";
+                            RunPageView = where(Status = filter(Pending));
+                        }
+                        action("Rejected Account Activaion")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Rejected BOSA Account Activation';
+                            RunObject = Page "BOSA Account Activation List";
+                            RunPageView = where(Status = filter(Rejected));
+                        }
+                        action("Approved Account Activaion")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Approved BOSA Account Activation';
+                            RunObject = Page "BOSA Account Activation List";
+                            RunPageView = where(Status = filter(Approved));
+                        }
+                        action("Posted Account Activation")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Posted BOSA Account Activation';
+                            RunObject = Page "Posted BOSA Account Activation";
+                        }
+                    }
+                    group("FOSA Account Activation")
+                    {
+                        action("FOSA Account Activation List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Account Activation List';
+                            RunObject = page "Account Activation List";
+                        }
+                    }
+                }
+
                 group("Member closure Notices")
                 {
                     Caption = 'Member Closure Notices';
@@ -1147,55 +1198,6 @@ page 52186778 "Finance Role Center"
                     //     Caption = 'Transferred Share Capital Certificate';
                     //     RunObject = report "Transferred Share Capital Cert";
                     // }
-                }
-                group(AccountTransfer)
-                {
-                    Visible = false;
-                    Caption = 'Account Activation';
-                    // action(BosaAccountActivate)
-                    // {
-                    //     ApplicationArea = Basic;
-                    //     Caption = 'BOSA Account Activation List';
-                    //     RunObject = Page "BOSA Account Activation List";
-                    // }
-                    group("Account Activation")
-                    {
-                        Caption = 'Account Activation';
-                        action("Open Account Activaion")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Open Account Activation';
-                            RunObject = Page "BOSA Account Activation List";
-                            RunPageView = where(Status = filter(Open));
-                        }
-                        action("Account Activaion Pending Approval")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Account Activation Pending Approval';
-                            RunObject = Page "BOSA Account Activation List";
-                            RunPageView = where(Status = filter(Pending));
-                        }
-                        action("Rejected Account Activaion")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Rejected Account Activation';
-                            RunObject = Page "BOSA Account Activation List";
-                            RunPageView = where(Status = filter(Rejected));
-                        }
-                        action("Approved Account Activaion")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Approved Account Activation';
-                            RunObject = Page "BOSA Account Activation List";
-                            RunPageView = where(Status = filter(Approved));
-                        }
-                        action("Posted Account Activation")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Posted Account Activation';
-                            RunObject = Page "Posted BOSA Account Activation";
-                        }
-                    }
                 }
                 group("Share Capital Cert")
                 {
@@ -1825,26 +1827,26 @@ page 52186778 "Finance Role Center"
                     }
 
                 }
-                group("Per-Diem Receipt")
-                {
-                    Caption = 'Per-Diem/Claim Payments';
-                    action("Per-Diem Receipts")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Per-Diem/Claims Payments';
-                        RunObject = page "Per-Diem Receipts list";
-                        RunPageView = where(Posted = const(false));
+                // group("Per-Diem Receipt")
+                // {
+                //     Caption = 'Per-Diem/Claim Payments';
+                //     action("Per-Diem Receipts")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Per-Diem/Claims Payments';
+                //         RunObject = page "Per-Diem Receipts list";
+                //         RunPageView = where(Posted = const(false));
 
-                    }
-                    action(" Posted Receipt List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Posted Per-Diem/Claim Payments';
-                        RunObject = page "Per-Diem Receipts list";
-                        RunPageView = where(Posted = const(true));
-                    }
+                //     }
+                //     action(" Posted Receipt List")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Posted Per-Diem/Claim Payments';
+                //         RunObject = page "Per-Diem Receipts list";
+                //         RunPageView = where(Posted = const(true));
+                //     }
 
-                }
+                // }
 
                 group(Interbank)
                 {
@@ -1962,36 +1964,6 @@ page 52186778 "Finance Role Center"
                         Caption = 'RTGS Report';
                         RunObject = report "RTGS Report";
                     }
-                }
-                group("ATM Management")
-                {
-                    Caption = 'ATM Management';
-
-                    action("Approved ATM Applications List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Approved ATM Applications List';
-                        RunObject = page "Approved ATM Application List";
-                    }
-                    // action("ATM Inventory List")
-                    // {
-                    //     ApplicationArea = Basic, Suite;
-                    //     Caption = 'ATM Inventory List';
-                    //     RunObject = page "ATM Inventory List";
-                    //     RunPageLink = Status = CONST(Open);
-                    // }
-                    // action("Charged ATM Inventory List")
-                    // {
-                    //     ApplicationArea = Basic, Suite;
-                    //     Caption = 'ATM Inventory List';
-                    //     RunObject = page "ATM Inventory List";
-                    //     RunPageLink = Status = CONST(pending);
-                    // }
-                    // action("ATM Inventory List(All)")
-                    // {
-                    //     ApplicationArea = Basic, Suite;
-                    //     RunObject = page "ATM Inventory List";
-                    // }
                 }
 
                 group("Interest")
@@ -2579,6 +2551,199 @@ page 52186778 "Finance Role Center"
                     RunObject = Page "Bank Acc. Reconciliation List";
                     ToolTip = 'Reconcile bank accounts in your system with bank statements received from your bank.';
                 }
+            }
+
+            group(BankingMgt)
+            {
+                group("Banking Management")
+                {
+                    group("Accounts")
+                    {
+                        Caption = 'Accounts';
+                        action("B Savings Accounts")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Savings Accounts List';
+                            RunObject = page "Savings Accounts";
+                            ;
+                        }
+                        action("Banking Closure List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Banking Closure List';
+                            RunObject = page "Banking Closure List";
+                        }
+
+                    }
+                    group("Banking Operations")
+                    {
+                        Caption = 'Banking Operations';
+                        group("Cashier")
+                        {
+                            Caption = 'Cashier';
+                            action("Cashier Transactions")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Cashier Transactions';
+                                RunObject = page "Cashier Transactions List";
+                            }
+                            action("Treasury & Cashier Transactions")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Treasury & Cashier Transactions';
+                                RunObject = page "Treasury Cashier List";
+                            }
+                        }
+
+                        group("Standing Orders")
+                        {
+                            Caption = 'Standing Order';
+                            action("Standing Order List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Standing Order List';
+                                RunObject = page "Standing Order List";
+                            }
+                            action("Standing Order Register List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Standing Order Register List';
+                                RunObject = page "Standing Order Register List";
+                            }
+                            action("Standing Order Control List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Standing Order Control List';
+                                RunObject = page "Standing Order Control List";
+                            }
+                        }
+                        group("Cheque Management")
+                        {
+                            Caption = 'Cheque Management';
+                            action("Cheque Types")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Cheque Types';
+                                RunObject = page "Cheque Types";
+                            }
+
+                            action("Cheque Book Application")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Cheque Book Application';
+                                RunObject = page "Cheque Book Application List";
+                            }
+                            action("Cheque Receipts")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Cheque Receipts';
+                                RunObject = page "Cheque Receipts List";
+                            }
+                            action("Bankers Cheque Application")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Bankers Cheque Application';
+                                RunObject = page "Bankers Cheque Application";
+                            }
+
+                            action("Cheque Clearance")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Cheque Clearance';
+                                RunObject = page "Cheque Clearance";
+                            }
+                        }
+                        group("ATM Management List")
+                        {
+                            Caption = 'ATM Management';
+                            action("ATM Applications List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'ATM Applications List';
+                                RunObject = page "ATM Application List";
+                            }
+                            action("Approved ATM Applications List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Approved ATM Applications List';
+                                RunObject = page "Approved ATM Application List";
+                            }
+                            action("ATM Linking Application List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'ATM Linking Application List';
+                                RunObject = page "ATM Linking Application List";
+                            }
+                            action("Approved ATM Linking List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Approved ATM Linking List';
+                                RunObject = page "Approved ATM Linking List";
+                            }
+                            action("ATM Transactions")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'ATM Transactions';
+                                RunObject = page "Sky ATM Transactions Buffer";
+                            }
+                            action("ATM Charge")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'ATM Charge';
+                                RunObject = page "ATM Charge List";
+                            }
+
+                        }
+
+                    }
+                    group("Banking Setup")
+                    {
+                        Caption = 'Banking Setups';
+                        group("Transaction Setup")
+                        {
+                            Caption = 'Transactions Setup';
+                            action("Transaction Types List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Transaction Types';
+                                RunObject = page "Transaction Types";
+                            }
+                            action("Tiered Charges")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Tiered Charges';
+                                RunObject = page "Tiered Charges List";
+                            }
+                            action("Denominition Setup")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Denominition Setup';
+                                RunObject = page "Denomination Setup";
+                            }
+
+                        }
+
+                        group("Banking No. Setup")
+                        {
+                            Caption = 'Banking No Setup';
+                            action("Banking No Setup")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Banking No Setup';
+                                RunObject = page "Banking No Setup";
+                            }
+                            action("Banking User Setup")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Banking User Setup';
+                                RunObject = page "Banking User Setup";
+                            }
+                        }
+
+
+                    }
+                }
+
             }
 
             group("5. Purchase Invoicing")
@@ -4374,7 +4539,7 @@ page 52186778 "Finance Role Center"
                         Caption = 'Posted Loans Checkoff Report';
                         RunObject = report "Posted Loans Checkoff";
                     }
-                   
+
                     // action("Loans Interest Register")
                     // {
                     //     ApplicationArea = Basic, Suite;
