@@ -9661,6 +9661,7 @@ Codeunit 52186456 "Sacco Transactions"
         FDInterestCalc: Record "FD Interest Calculation Rules";
         IntRate: Decimal;
         FDDays: Integer;
+        FDMonths: Integer;
     begin
 
         InterestAmount := 0;
@@ -9695,8 +9696,9 @@ Codeunit 52186456 "Sacco Transactions"
                     // end;
                     FDDays := 0;
                     FDDays := Abs(Account."FD Maturity Date" - Account."Application Date");
+                    FDMonths := round((FDDays / 30), 1, '<');
                     Account.CalcFields(Balance);
-                    InterestAmount := Account.Balance * Account."Interest Rate" * 0.01 * (FDDays / 365);
+                    InterestAmount := Account.Balance * Account."Interest Rate" * 0.01 * (FDMonths / 12);
                     InterestAmount := ROUND(InterestAmount, 1.0, '<');
                     IntBufferNo := IntBufferNo + 1;
                     InterestBuffer.Init;

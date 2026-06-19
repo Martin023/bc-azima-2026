@@ -828,7 +828,7 @@ table 52185730 "Savings Accounts"
         field(39004255; "Old Account No"; Code[20])
         {
         }
-        field(39004256; "Status Change Reason"; Text[80])
+        field(39004256; "Status Change Reason"; Text[100])
         {
         }
         field(39004257; DummyBlocked; Boolean)

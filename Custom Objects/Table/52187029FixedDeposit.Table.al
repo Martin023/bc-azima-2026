@@ -351,7 +351,9 @@ table 52187029 "Fixed Deposit Contract"
                 IntEarned: Decimal;
                 NoOfDays: Integer;
                 FDCalculation: Record "FD Interest Calculation Rules";
-
+                FDdays: Integer;
+                FDMonths: integer;
+                InterestAmount: Decimal;
             begin
 
                 if rec."Fixed Deposit Type" = '' then Error('Kindly ensure you have selected Fixed Depoist Type before proceeding.');
@@ -387,7 +389,14 @@ table 52187029 "Fixed Deposit Contract"
                     end;
                     // end;
 
-                    rec."Forecasted Interest" := Rec."Fixed Deposit Amount" * (rec."Interest Rate" / 100) * (NoOfDays / 365);
+                    if (rec."FD Maturity Date" <> 0D) and (rec."Application Date" <> 0D) then begin
+                        FDDays := Abs(rec."FD Maturity Date" - rec."Application Date");
+                        FDMonths := round((FDDays / 30), 1, '<');
+                        InterestAmount := Rec."Fixed Deposit Amount" * rec."Interest Rate" * 0.01 * (FDMonths / 12);
+                        rec."Forecasted Interest" := ROUND(InterestAmount, 1.0, '<');
+                    end;
+
+                    //rec."Forecasted Interest" := Rec."Fixed Deposit Amount" * (rec."Interest Rate" / 100) * (NoOfDays / 365);
 
                 end else
                     Error('Fixed Deposit Setup missing.');
