@@ -174,8 +174,7 @@ table 52186000 "BOSA Account Activation"
         {
             Description = 'LookUp to Savings Account Table';
             Editable = false;
-            TableRelation = "Savings Accounts"."No." WHERE("Member No." = FIELD("Member No"), "Loan Disbursement Account" = filter(true),
-                                                      "Product Category" = FILTER("FOSA Account"), "Salary Through FOSA" = filter(true));
+            TableRelation = "Savings Accounts"."No." WHERE("Member No." = FIELD("Member No"), "Product Type" = const('191'));
         }
         field(21; "Share Monthly Contribution"; Decimal)
         {
@@ -228,7 +227,7 @@ table 52186000 "BOSA Account Activation"
             Editable = false;
             TableRelation = "Responsibility CenterBR";
         }
-        field(31; Remarks; text[900])
+        field(31; Remarks; text[100])
         {
 
         }
