@@ -521,6 +521,14 @@ page 52186739 "Fixed Deposit Contract"
         }
     }
 
+    trigger OnNewRecord(BelowxRec: Boolean)
+    begin
+        OtherFixed.Reset();
+        OtherFixed.SetRange(Status, OtherFixed.Status::open);
+        OtherFIxed.SetRange("No.", '<>%1', rec."No.");
+        if OtherFixed.count > 2 then Error('Please use the open cards instead of opening an new entry.');
+    end;
+
     trigger OnOpenPage()
     begin
 
@@ -579,6 +587,7 @@ page 52186739 "Fixed Deposit Contract"
         SourceA: Boolean;
         DestinationA: Boolean;
         TerminateVisible: Boolean;
+        OtherFixed: record "Fixed Deposit Contract";
 
 
     procedure AControl()

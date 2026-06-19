@@ -112,8 +112,7 @@ table 52185784 "Salary Lines"
         }
         field(18; "Employer Code"; Code[50])
         {
-            Editable = false;
-
+            TableRelation = Customer."No." where("Account Type" = const("Employer Code"));
             trigger OnValidate()
             begin
                 /*

@@ -215,7 +215,7 @@ table 52185783 "Salary Header"
         }
         field(40; "Employer Name"; Text[100])
         {
-
+            Caption = 'Name';
         }
         field(41; "Start Date"; Date)
         {
@@ -265,10 +265,6 @@ table 52185783 "Salary Header"
             begin
                 "Document No" := No;
             end;
-        }
-        field(75; "Employer"; Code[30])
-        {
-            TableRelation = Customer."No." WHERE("Account Type" = CONST(Employer));
         }
         field(76; "Deposit Deduction"; Decimal)
         {
