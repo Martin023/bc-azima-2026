@@ -179,6 +179,13 @@ Report 52185683 "Cashier Withdrawal Slip"
             column(CashierName; CashierName)
             {
             }
+            //MASKED COLUMNS FOR PRIVACY
+            column(MaskedAccountNo; MaskedAccountNo)
+            {
+            }
+            column(CashierNameOnly; CashierNameOnly)
+            {
+            }
             column(Till_Name; "Till Name")
             {
 
@@ -228,12 +235,27 @@ Report 52185683 "Cashier Withdrawal Slip"
                 StaffNo := '';
                 ProductName := '';
                 CashierName := '';
+                MaskedAccountNo := '';
+                CashierNameOnly := '';
 
                 user.Reset;
-                user.SetRange("User Name", UserId);
+                user.SetRange("User Name", Transactions.Cashier);
                 if user.Find('-') then begin
-                    CashierName := user."Full Name";
+                    CashierName := user."User Name";
+                    //Extract name after backslash
+                    if StrPos(CashierName, '\') > 0 then
+                        CashierNameOnly := CopyStr(CashierName, StrPos(CashierName, '\') + 1)
+                    else
+                        CashierNameOnly := CashierName;
                 end;
+
+                //Mask account number: show first 2 and last 2 digits
+                if StrLen("Account No") > 4 then begin
+                    MaskedAccountNo := CopyStr("Account No", 1, 2) + 
+                                      PadStr('', StrLen("Account No") - 4, '*') + 
+                                      CopyStr("Account No", StrLen("Account No") - 1, 2);
+                end else
+                    MaskedAccountNo := "Account No";
 
                 //calculate the charges
                 SavingsLedgerEntry.Reset;
@@ -349,6 +371,8 @@ Report 52185683 "Cashier Withdrawal Slip"
         NumberText: array[2] of Text[80];
         user: Record User;
         CashierName: Text;
+        MaskedAccountNo: Text; //Masked account number (first 2 + stars + last 2)
+        CashierNameOnly: Text; //Cashier name without domain prefix
         CompanyInformation: Record "Company Information";
         CompanyAddress: Text;
         CompanyTelephone: Text;

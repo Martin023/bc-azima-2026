@@ -60,6 +60,18 @@ page 52185590 "HR Applicants UnQualified L1"
                     StyleExpr = TRUE;
                     Editable=false;
                 }
+                field("Rejection Reason"; Rec."Rejection Reason")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Approval Status"; Rec."Approval Status")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Current Approver ID"; Rec."Current Approver ID")
+                {
+                    ApplicationArea = Basic;
+                }
             }
         }
     }

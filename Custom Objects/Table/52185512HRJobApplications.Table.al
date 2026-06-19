@@ -442,6 +442,14 @@ table 52185512 "HR Job Applications"
         {
 
         }
+        field(95; "Current Approver ID"; Code[50])
+        {
+            CalcFormula = Lookup("Approval Entry"."Approver ID" WHERE("Document No." = FIELD("Job Application No."),
+                                                                        Status = FILTER(Open)));
+            Editable = false;
+            FieldClass = FlowField;
+            Caption = 'Current Approver ID';
+        }
 
 
 

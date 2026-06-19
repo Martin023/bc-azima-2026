@@ -22,7 +22,44 @@ page 52185608 "HR Employee List-Pending App1"
                     ApplicationArea = Basic;
                     StyleExpr = TRUE;
                 }
+                field("Primary Identification"; Rec."Primary Identification")
+                {
+                    ApplicationArea = Basic;
+                }
                 field("Full Name"; Rec."Full Name")
+                {
+                    ApplicationArea = Basic;
+                }
+                field(Age; Rec.Age)
+                {
+                    ApplicationArea = Basic;
+                }
+                field(Gender; Rec.Gender)
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Marital Status"; Rec."Marital Status")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Date Of Birth"; Rec."Date Of Birth")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Date Of Join"; Rec."Date Of Join")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Cellular Phone Number"; Rec."Cellular Phone Number")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("E-Mail"; Rec."E-Mail")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Personal Email';
+                }
+                field("Company E-Mail"; Rec."Company E-Mail")
                 {
                     ApplicationArea = Basic;
                 }
@@ -39,11 +76,20 @@ page 52185608 "HR Employee List-Pending App1"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Company E-Mail"; Rec."Company E-Mail")
+                field("Contract Type"; Rec."Contract Type")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Contract Type"; Rec."Contract Type")
+                field("NSSF No."; Rec."NSSF No.")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("NHIF No."; Rec."NHIF No.")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'SHIF NO.';
+                }
+                field("Retirement date"; Rec."Retirement date")
                 {
                     ApplicationArea = Basic;
                 }
@@ -53,6 +99,14 @@ page 52185608 "HR Employee List-Pending App1"
                     Enabled = false;
                     Style = Attention;
                     StyleExpr = TRUE;
+                }
+                field("Current Approver ID"; Rec."Current Approver ID")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Approval Status"; Rec."Approval Status")
+                {
+                    ApplicationArea = Basic;
                 }
             }
         }
