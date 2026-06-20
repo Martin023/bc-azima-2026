@@ -940,7 +940,14 @@ page 52185712 "Product Factory"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-
+                field("Use Contribution Qualification"; Rec."Use Contribution Qualification")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Use Salary Average"; Rec."Use Salary Average")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
             }
             group("Sky Mbanking")
             {
