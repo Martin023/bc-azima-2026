@@ -249,7 +249,7 @@ table 52187029 "Fixed Deposit Contract"
                     "FD Maturity Date" := CalcDate(FixedDepositType.Duration, "Application Date");
                     "FD Duration" := FixedDepositType.Duration;
                     "Product Category" := "Product Category"::"Fixed Deposit";
-                    Message('The FD number of days is %1', Abs("FD Maturity Date" - "Application Date"));
+                    Message('The FD number of months is %1', (round(("FD Maturity Date" - rec."Application Date") / 30)), 1, '<');
                     // FDSetup.Reset();
                     // FDSetup.SetRange(FDSetup.Code, rec."Fixed Deposit Type");
                     // if FDSetup.Find('-') then begin
@@ -393,7 +393,7 @@ table 52187029 "Fixed Deposit Contract"
                         FDDays := Abs(rec."FD Maturity Date" - rec."Application Date");
                         FDMonths := round((FDDays / 30), 1, '<');
                         InterestAmount := Rec."Fixed Deposit Amount" * rec."Interest Rate" * 0.01 * (FDMonths / 12);
-                        rec."Forecasted Interest" := ROUND(InterestAmount, 1.0, '<');
+                        rec."Forecasted Interest" := ROUND(InterestAmount, 0.01, '<');
                     end;
 
                     //rec."Forecasted Interest" := Rec."Fixed Deposit Amount" * (rec."Interest Rate" / 100) * (NoOfDays / 365);

@@ -1377,7 +1377,7 @@ Codeunit 52186456 "Sacco Transactions"
             GenJournalLine."Account No." := CashierTrans."Account No";
             GenJournalLine.Validate(GenJournalLine."Account No.");
             GenJournalLine."Posting Date" := CashierTrans."Transaction Date";
-            GenJournalLine.Description := PadStr(CashierTrans."Transaction Description" + '-' + CashierTrans.Remarks, 50);
+            GenJournalLine.Description := PadStr('Cheque Deposit ChqNo. ' + CashierTrans."Account No" + '-' + CashierTrans.Remarks, 50);
             GenJournalLine."Currency Code" := CashierTrans."Currency Code";
             GenJournalLine.Validate(GenJournalLine."Currency Code");
             GenJournalLine.Amount := -(CashierTrans.Amount);
@@ -1401,7 +1401,7 @@ Codeunit 52186456 "Sacco Transactions"
             GenJournalLine."Account No." := ChBank;
             GenJournalLine.Validate(GenJournalLine."Account No.");
             GenJournalLine."Posting Date" := CashierTrans."Transaction Date";
-            GenJournalLine.Description := CashierTrans."Account Name";
+            GenJournalLine.Description := PadStr('Cheque Deposit - ChqNo.' + CashierTrans."Account No" + '-' + CashierTrans.Remarks, 50);
             GenJournalLine."Currency Code" := CashierTrans."Currency Code";
             GenJournalLine.Validate(GenJournalLine."Currency Code");
             GenJournalLine.Amount := CashierTrans.Amount;
@@ -1542,24 +1542,6 @@ Codeunit 52186456 "Sacco Transactions"
                 CashierTrans."Posted By" := UserId;
                 CashierTrans.Modify;
                 Commit;
-            end;
-
-
-            //Advice Loan -------------Advice Savings Accounts
-            if CashierTrans.Type <> CashierTrans.Type::"Credit Cheque" then begin
-                CTransLines.Reset;
-                CTransLines.SetRange("Transaction No", CashierTrans.No);
-                if CTransLines.FindSet() then begin
-                    repeat
-                        if Loans.Get(CTransLines."Loan No") then
-                            Loans.Validate(Repayment);
-                        if SavingsACC.Get(CTransLines."Account No") then begin
-                            if (SavingsACC."Product Category" = SavingsACC."Product Category"::"BOSA Deposits") or
-                              (SavingsACC."Product Category" = SavingsACC."Product Category"::"Benevolent (BBF)") then
-                                SavingsACC.Validate("Monthly Contribution");
-                        end;
-                    until CTransLines.Next = 0;
-                end;
             end;
         end;
     end;
@@ -9695,11 +9677,15 @@ Codeunit 52186456 "Sacco Transactions"
 
                     // end;
                     FDDays := 0;
-                    FDDays := Abs(Account."FD Maturity Date" - Account."Application Date");
+                    if Account."FD Date Renewed" <> 0D then
+                        FDDays := Abs(Account."FD Maturity Date" - Account."FD Date Renewed")
+                    else
+                        FDDays := Abs(Account."FD Maturity Date" - Account."Application Date");
+
                     FDMonths := round((FDDays / 30), 1, '<');
                     Account.CalcFields(Balance);
                     InterestAmount := Account.Balance * Account."Interest Rate" * 0.01 * (FDMonths / 12);
-                    InterestAmount := ROUND(InterestAmount, 1.0, '<');
+                    InterestAmount := ROUND(InterestAmount, 0.01, '<');
                     IntBufferNo := IntBufferNo + 1;
                     InterestBuffer.Init;
                     InterestBuffer."Account No" := Account."No.";
@@ -9917,7 +9903,7 @@ Codeunit 52186456 "Sacco Transactions"
                                         GenJournalLine."Account No." := FDAccount."FOSA Main Account No.";
                                         GenJournalLine.Validate(GenJournalLine."Account No.");
                                         GenJournalLine."Posting Date" := Today;
-                                        GenJournalLine.Description := 'Transfer net interest to Savings';
+                                        GenJournalLine.Description := 'Transfer net interest from Fixed - ' + FDAccount."No.";
                                         GenJournalLine.Description := UpperCase(GenJournalLine.Description);
                                         GenJournalLine.Amount := (GrossInt - Wtax) * -1;
                                         GenJournalLine.Validate(GenJournalLine.Amount);
@@ -9943,7 +9929,7 @@ Codeunit 52186456 "Sacco Transactions"
                                         GenJournalLine."Account No." := FDAccount."Fixed Deposit Account No.";
                                         GenJournalLine.Validate(GenJournalLine."Account No.");
                                         GenJournalLine."Posting Date" := Today;
-                                        GenJournalLine.Description := 'Transfer net interest from Fixed';
+                                        GenJournalLine.Description := 'Transfer net interest to Savings';
                                         GenJournalLine.Description := UpperCase(GenJournalLine.Description);
                                         GenJournalLine.Amount := (GrossInt - Wtax);
                                         GenJournalLine.Validate(GenJournalLine.Amount);
@@ -10043,6 +10029,9 @@ Codeunit 52186456 "Sacco Transactions"
         DocumentNo: Code[20];
         FDCalculation: Record "FD Interest Calculation Rules";
         NoOfDays: Integer;
+        FDdays: Integer;
+        FDMonths: Integer;
+        InterestAmount: Decimal;
     begin
 
         if Account."Fixed Deposit Status" = Account."Fixed Deposit Status"::Closed then
@@ -10143,12 +10132,12 @@ Codeunit 52186456 "Sacco Transactions"
                                     GenJournalLine."Account No." := Account."Fixed Deposit Account No.";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
                                     GenJournalLine."Posting Date" := Today;
-                                    GenJournalLine.Description := 'Withholding Tax';
+                                    GenJournalLine.Description := Account."No." + ' interest Withholding Tax';
                                     GenJournalLine.Description := UpperCase(GenJournalLine.Description);
                                     if GlobalFunctions.TaxExcemptions(Account."Member No.") = true then
                                         GenJournalLine.Amount := 0
                                     else
-                                        GenJournalLine.Amount := Account."Untranfered Interest" * (AccountTypes."WithHolding Tax" / 100);
+                                        GenJournalLine.Amount := round(Account."Untranfered Interest" * (AccountTypes."WithHolding Tax" / 100), 0.01, '<');
                                     GenJournalLine.Validate(GenJournalLine.Amount);
                                     GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
                                     GenJournalLine."Bal. Account No." := AccountTypes."Withholding Tax Account";
@@ -10173,9 +10162,9 @@ Codeunit 52186456 "Sacco Transactions"
                                     GenJournalLine."Account No." := Account."Fixed Deposit Account No.";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
                                     GenJournalLine."Posting Date" := Today;
-                                    GenJournalLine.Description := 'Transfer to Savings';
+                                    GenJournalLine.Description := 'Transfer net interest to Savings';
                                     GenJournalLine.Description := UpperCase(GenJournalLine.Description);
-                                    GenJournalLine.Amount := Account."Untranfered Interest" - (Account."Untranfered Interest" * (AccountTypes."WithHolding Tax" / 100));
+                                    GenJournalLine.Amount := Account."Untranfered Interest" - round(Account."Untranfered Interest" * (AccountTypes."WithHolding Tax" / 100), 0.01, '<');
                                     GenJournalLine.Validate(GenJournalLine.Amount);
                                     //GenJournalLine."Bal. Account Type":=GenJournalLine."Bal. Account Type"::"G/L Account";
                                     //GenJournalLine."Bal. Account No.":=AccountTypes."Interest Tax Account";
@@ -10201,7 +10190,7 @@ Codeunit 52186456 "Sacco Transactions"
                                     GenJournalLine."Account No." := Account."FOSA Main Account No.";//Account."No.";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
                                     GenJournalLine."Posting Date" := Today;
-                                    GenJournalLine.Description := 'Transfer from fixed';
+                                    GenJournalLine.Description := 'Transfer of net interest from fixed - ' + Account."No.";
                                     GenJournalLine.Description := UpperCase(GenJournalLine.Description);
                                     GenJournalLine.Amount := (Account."Untranfered Interest" - (Account."Untranfered Interest" * (AccountTypes."WithHolding Tax" / 100))) * -1;
                                     GenJournalLine.Validate(GenJournalLine.Amount);
@@ -10270,23 +10259,27 @@ Codeunit 52186456 "Sacco Transactions"
                                         FDCalculation.Reset();
                                         FDCalculation.SetRange(Code, FDType.Code);
                                         if FDCalculation.FindFirst() then begin
-                                            //repeat
-                                            case
-                                                Account."Fixed Deposit Amount" of
-                                                FDCalculation."Minimum Amount" .. FDCalculation."Maximum Amount":
-                                                    begin
-                                                        Account."Interest Rate" := FDCalculation."Interest Rate";
-                                                    end;
+                                            repeat
+                                                case
+                                                    Account."Fixed Deposit Amount" of
+                                                    FDCalculation."Minimum Amount" .. FDCalculation."Maximum Amount":
+                                                        begin
+                                                            Account."Interest Rate" := FDCalculation."Interest Rate";
+                                                        end;
 
-                                            end;
+                                                end;
+                                            until FDCalculation.next = 0;
                                         end;
                                     end;
-                                    if Account."Application Date" <> 0D then begin
-                                        NoOfDays := Abs(Account."FD Maturity Date" - Account."Application Date");
-                                        Account."Forecasted Interest" := Account."Fixed Deposit Amount" * (Account."Interest Rate" / 100) * (NoOfDays / 365);
+                                    if Account."FD Date Renewed" <> 0D then begin
+                                        if (Account."FD Maturity Date" <> 0D) and (Account."FD Date Renewed" <> 0D) then begin
+                                            FDDays := Abs(Account."FD Maturity Date" - Account."FD Date Renewed");
+                                            FDMonths := round((FDDays / 30), 1, '<');
+                                            InterestAmount := Account."Fixed Deposit Amount" * Account."Interest Rate" * 0.01 * (FDMonths / 12);
+                                            Account."Forecasted Interest" := ROUND(InterestAmount, 0.01, '<');
+                                        end;
                                     end;
                                     Account.Modify;
-
                                     Message('Processed Successfully!');
                                 end;
                             end;
@@ -10311,6 +10304,9 @@ Codeunit 52186456 "Sacco Transactions"
         WTaxDiv: Decimal;
         NoOfDays: Integer;
         FDCalculation: Record "FD Interest Calculation Rules";
+        FDdays: Integer;
+        FDMonths: Integer;
+        InterestAmount: Decimal;
     begin
 
         if Account."Fixed Deposit Status" = Account."Fixed Deposit Status"::Closed then
@@ -10414,7 +10410,7 @@ Codeunit 52186456 "Sacco Transactions"
                                     GenJournalLine."Account No." := Account."Fixed Deposit Account No.";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
                                     GenJournalLine."Posting Date" := Today;
-                                    GenJournalLine.Description := 'Withholding Tax';
+                                    GenJournalLine.Description := Account."No." + 'interest Withholding Tax';
                                     GenJournalLine.Description := UpperCase(GenJournalLine.Description);
                                     if GlobalFunctions.TaxExcemptions(Account."Member No.") = true then
                                         GenJournalLine.Amount := 0
@@ -10476,28 +10472,31 @@ Codeunit 52186456 "Sacco Transactions"
                                     Account.calcfields(Balance);
                                     Account."Fixed Deposit Amount" := Account.Balance;
 
-                                    //Account."FD Marked for Closure" := true;
-                                    //New rate incase of chnages
                                     FDType.Reset();
                                     FDType.SetRange(Code, Account."Fixed Deposit Type");
                                     if FDType.FindFirst() then begin
                                         FDCalculation.Reset();
                                         FDCalculation.SetRange(Code, FDType.Code);
                                         if FDCalculation.FindFirst() then begin
-                                            //repeat
-                                            case
-                                                Account."Fixed Deposit Amount" of
-                                                FDCalculation."Minimum Amount" .. FDCalculation."Maximum Amount":
-                                                    begin
-                                                        Account."Interest Rate" := FDCalculation."Interest Rate";
-                                                    end;
+                                            repeat
+                                                case
+                                                    Account."Fixed Deposit Amount" of
+                                                    FDCalculation."Minimum Amount" .. FDCalculation."Maximum Amount":
+                                                        begin
+                                                            Account."Interest Rate" := FDCalculation."Interest Rate";
+                                                        end;
 
-                                            end;
+                                                end;
+                                            until FDCalculation.next = 0;
                                         end;
                                     end;
-                                    if Account."Application Date" <> 0D then begin
-                                        NoOfDays := Abs(Account."FD Maturity Date" - Account."Application Date");
-                                        Account."Forecasted Interest" := Account."Fixed Deposit Amount" * (Account."Interest Rate" / 100) * (NoOfDays / 365);
+                                    if Account."FD Date Renewed" <> 0D then begin
+                                        if (Account."FD Maturity Date" <> 0D) and (Account."FD Date Renewed" <> 0D) then begin
+                                            FDDays := Abs(Account."FD Maturity Date" - Account."FD Date Renewed");
+                                            FDMonths := round((FDDays / 30), 1, '<');
+                                            InterestAmount := Account."Fixed Deposit Amount" * Account."Interest Rate" * 0.01 * (FDMonths / 12);
+                                            Account."Forecasted Interest" := ROUND(InterestAmount, 0.01, '<');
+                                        end;
                                     end;
                                     Account.Modify;
                                     Message('Processed Successfully!');

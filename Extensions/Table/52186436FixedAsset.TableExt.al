@@ -347,6 +347,11 @@ TableExtension 52186436 tableextension52186436 extends "Fixed Asset"
             FieldClass = FlowField;
             CalcFormula = lookup("FA Ledger Entry"."Document Date" where("FA No." = field("No."), "FA Posting Type" = const("Proceeds on Disposal")));
         }
+        field(149; "Expected Useful Life"; Decimal)
+        {
+            MinValue = 0.1;
+            MaxValue = 100;
+        }
     }
 
     var

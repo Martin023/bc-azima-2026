@@ -19,6 +19,10 @@ page 52185809 "Salary Lines"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Employer Code"; Rec."Employer Code")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("ID No."; Rec."ID No.")
                 {
                     ApplicationArea = Basic, Suite;
@@ -49,10 +53,7 @@ page 52185809 "Salary Lines"
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
-                field("Employer Code"; Rec."Employer Code")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+
                 field("Member No."; Rec."Member No.")
                 {
                     ApplicationArea = Basic, Suite;
