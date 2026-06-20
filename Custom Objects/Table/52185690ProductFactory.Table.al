@@ -1061,6 +1061,16 @@ table 52185690 "Product Factory"
             MaxValue = 100;
             MinValue = 1;
         }
+        field(10042; "Use Contribution Qualification"; Boolean)
+        {
+            Caption = 'Use Contribution Qualification';
+            DataClassification = CustomerContent;
+        }
+        field(10043; "Use Salary Average"; Boolean)
+        {
+            Caption = 'Use Salary Average';
+            DataClassification = CustomerContent;
+        }
 
     }
 
