@@ -58,7 +58,7 @@ table 52185776 "Cashier Transactions"
                     "Employer Code" := Account."Employer Code";
                     "Phone No" := Account."Transactional Mobile No";
                 end;
-                
+
                 if "Account Type" = "Account Type"::MPESA then begin
                     BankAccount.Reset;
                     BankAccount.SetRange("No.", "Account No");
@@ -88,6 +88,7 @@ table 52185776 "Cashier Transactions"
                     "Transaction Description" := TransactionTypes.Description;
                     Validate(Rec.type, TransactionTypes.Type);
                 end;
+                Amount := 0;
 
                 //Check if member has picture and Signature
 
@@ -175,8 +176,11 @@ table 52185776 "Cashier Transactions"
                         //TODOMIM
                         Message('You need to Return money to treasury because you have exceeded the Max Withholding!')
                     end else
-                        if BankAccount."Balance (LCY)" <= 0 then
-                            Error('You need to request money from treasury first before proceeding!');
+                        if BankAccount."Balance (LCY)" <= 0 then begin
+                            if (Type <> type::"Cash Deposit") and (Type <> Type::"Cheque Deposit") and (Type <> Type::"Credit Receipt") then
+                                Error('You need to request money from treasury first before proceeding!');
+                        end;
+
 
                 end;
                 if TransType.Get(Rec."Transaction Type") then begin
@@ -368,7 +372,7 @@ table 52185776 "Cashier Transactions"
                 SavAcc: Record "Savings Accounts";
                 SavLedgEntry: record "Savings Ledger Entry";
                 TotalTransactions: Decimal;
-                CT : Record "Cashier Transactions";
+                CT: Record "Cashier Transactions";
             begin
                 SavAcc.Reset();
                 SavAcc.SetRange("Member No.", rec."Member No.");
@@ -395,17 +399,17 @@ table 52185776 "Cashier Transactions"
                 CT.SetRange(Posted, true);
                 CT.SetFilter("Global Dimension 1 Code", '<>%1', rec."Global Dimension 1 Code");
                 if CT.FindSet() then begin
-                    repeat 
-                      CT.calcFields("Branch Name");
-                      Message(
-                            'This member has done other transactions today in another branch. Transaction Type: %1, Amount: %2, Branch: %3',
-                            Format(CT.Type),
-                            CT.Amount,
-                            CT."Branch Name"
-                            );
+                    repeat
+                        CT.calcFields("Branch Name");
+                        Message(
+                              'This member has done other transactions today in another branch. Transaction Type: %1, Amount: %2, Branch: %3',
+                              Format(CT.Type),
+                              CT.Amount,
+                              CT."Branch Name"
+                              );
                     until CT.Next() = 0;
                 end;
-                
+
             end;
         }
         field(30; "Banked By"; Code[50])
@@ -666,13 +670,13 @@ table 52185776 "Cashier Transactions"
         field(50020; "Mpesa Reference"; Code[10])
         {
             trigger OnValidate()
-            var 
+            var
                 CT: record "Cashier Transactions";
             begin
                 if "Account Type" = "Account Type"::MPESA then begin
                     CT.Reset();
                     CT.SetRange("Mpesa Reference", "Mpesa Reference");
-                    if CT.FindFirst() then 
+                    if CT.FindFirst() then
                         Error('MPESA Reference Code %1 already exists for transaction No. %2', "Mpesa Reference", CT.No);
                 end;
             end;
@@ -900,7 +904,7 @@ table 52185776 "Cashier Transactions"
                 if Type = Type::"Cash Withdrawal" then
                     "New Account Balance" := "Available Balance" - Amount
                 else
-                    if Type = Type::"Cash Deposit" then
+                    if (Type = Type::"Cash Deposit") or (Type = Type::"Cheque Deposit") then
                         "New Account Balance" := "Available Balance" + Amount
                     else
                         if Type = Type::"Bankers Cheque" then

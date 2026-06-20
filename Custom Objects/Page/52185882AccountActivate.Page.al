@@ -130,6 +130,8 @@ page 52186882 "Account Activation"
                     var
                         ApprovalsMgmt: Codeunit 1535;
                         CustomApprovals: Codeunit "Custom Approvals Codeunit";
+                        SavAcc: record "Savings Accounts";
+                        GlobalFunc: codeunit "Global Functions";
                     begin
                         Rec.TestField("Activation Date");
                         Rec.TestField("Account No");
@@ -137,6 +139,13 @@ page 52186882 "Account Activation"
                         Rec.Testfield("Reason for the Action");
 
                         if Rec."Activation Date" <> Today then Error('Activation Date must be today');
+
+
+                        if rec."Transaction Type" <> '' then begin
+                            if SavAcc.GetAvailableBalance(rec."Account No") < GlobalFunc.getChargesAmt(rec."Transaction Type", 0) then
+                                error('The available saving account available balance of %1 is less than charge amount of %2 that may lead to overdrawing of account!', format(SavAcc.GetAvailableBalance(rec."Account No")), format(GlobalFunc.getChargesAmt(rec."Transaction Type", 0)));
+                        end;
+
 
                         VarVariant := Rec;
                         if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then
@@ -298,7 +307,7 @@ page 52186882 "Account Activation"
 
                             SavingsAccounts.get(Rec."Account No");
                             SavingsAccounts.Blocked := rec.Blocked;
-                            SavingsAccounts."Status Change Reason" := 'Blocking the Account';
+                            SavingsAccounts."Status Change Reason" := rec."Reason for the Action";
                             SavingsAccounts.Modify;
                         end;
 
@@ -311,7 +320,7 @@ page 52186882 "Account Activation"
 
                             SavingsAccounts.get(Rec."Account No");
                             SavingsAccounts.Status := SavingsAccounts.Status::Frozen;
-                            SavingsAccounts."Status Change Reason" := 'Freezing the Account';
+                            SavingsAccounts."Status Change Reason" := rec."Reason for the Action";
                             SavingsAccounts.Modify;
                         end;
 
@@ -324,7 +333,7 @@ page 52186882 "Account Activation"
 
                             SavingsAccounts.get(Rec."Account No");
                             SavingsAccounts.Blocked := SavingsAccounts.Blocked::" ";
-                            SavingsAccounts."Status Change Reason" := 'Unblocking the Account';
+                            SavingsAccounts."Status Change Reason" := rec."Reason for the Action";
                             SavingsAccounts.Modify;
                         end;
 
@@ -344,6 +353,7 @@ page 52186882 "Account Activation"
                         // ApprovalsMgmt: Codeunit 1535;
                         UserSetup: Record "User Setup";
                     begin
+                        rec.TestField(activated, false);
                         Rec."User Id" := UserId;
                         Rec."Activation Date" := Today;
                         Rec.Date := Today;
@@ -540,7 +550,7 @@ page 52186882 "Account Activation"
                 //     Error('There is no enough balance to charge activation fee.');
             end;
             SavAcc.Status := SavAcc.Status::Active;
-            SavAcc."Status Change Reason" := 'Activation';
+            SavingsAccounts."Status Change Reason" := rec."Reason for the Action";
             SavAcc.Modify;
         end;
 
