@@ -67,13 +67,13 @@ page 52186055 "All Users Activities"
                     end;
 
                 }
-                field("Processed Checkoff"; Rec."Processed Checkoff")
-                {
+                // field("Processed Checkoff"; Rec."Processed Checkoff")
+                // {
 
-                }
+                // }
                 field(Loans; Rec.Loans)
                 {
-                    image = Document;
+                    image = none;
                 }
                 // field("My Staff Advance Surrender"; Rec."My Staff Advance Surrender")
                 // {
