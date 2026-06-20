@@ -2776,10 +2776,10 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 // MemberClass product filter
                 ProductSupportedClasses.Reset();
                 ProductSupportedClasses.SetRange("Product ID", MobileLoanProduct."Product ID");
-                ProductSupportedClasses.SetRange("Class Category", MemberClass."Member Class");
+                ProductSupportedClasses.SetRange("Class Category", SearchMember."Member Class");
                 if ProductSupportedClasses.IsEmpty() then begin
                     ResponseObject.Add('request_status', 'ERROR');
-                    Datum.Add('error_message', 'Loan product with ID = ' + loan_type_id.AsValue.AsText + ' is NOT available to Class ' + Format(MemberClass."Member Class") + ' Members');
+                    Datum.Add('error_message', 'Loan product with ID = ' + loan_type_id.AsValue.AsText + ' is NOT available to ' + Format(SearchMember."Member Class") + ' Members');
                     ResponseObject.Add('response_payload', Datum);
                     AddDateTimeToResponse(ResponseObject);
                     ResponseObject.WriteTo(Response);
@@ -2957,7 +2957,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 // MemberClass product filter
                 ProductSupportedClasses.Reset();
                 ProductSupportedClasses.SetRange("Product ID", MobileLoanProduct."Product ID");
-                ProductSupportedClasses.SetRange("Class Category", MemberClass."Member Class");
+                ProductSupportedClasses.SetRange("Class Category", CopyStr(Format(MemberClass."Member Class"), 1, 10));
                 if ProductSupportedClasses.IsEmpty() then begin
                     ResponseObject.Add('request_status', 'ERROR');
                     Datum.Add('error_message', 'Loan product with ID = ' + loan_type_id.AsValue.AsText + ' is NOT available to Class ' + Format(MemberClass."Member Class") + ' Members');
@@ -7115,7 +7115,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 repeat begin
                     ProductSupportedClasses.Reset(); // filter products by member class
                     ProductSupportedClasses.SetRange("Product ID", ProductFactory."Product ID"); // filter products by member class
-                    ProductSupportedClasses.SetRange("Class Category", MemberClasses."Member Class"); // filter products by member class
+                    ProductSupportedClasses.SetRange("Class Category", SearchMember."Member Class");
                     if not ProductSupportedClasses.IsEmpty() then begin // filter products by member class
                         BlockedEmployer.Reset(); // filter out blocked employers
                         BlockedEmployer.SetRange("Employer Code", SearchMember."Employer Code"); // filter out blocked employers

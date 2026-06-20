@@ -14,17 +14,25 @@ table 52185474 "Product Supported Classes"
         {
             Caption = 'Line No.';
         }
-        field(3; "Class Category"; Enum "Member Classes")
+        field(3; "Class Category"; /*Enum "Member Classes"*/ Code[10])
         {
-            Caption = 'Class Category';
+            // Caption = 'Class Category';
+            // trigger OnValidate()
+            // var
+            //     ExistingClass: Record "Product Supported Classes";
+            // begin
+            //     ExistingClass.SetRange("Product ID", Rec."Product ID");
+            //     ExistingClass.SetRange("Class Category", Rec."Class Category");
+            //     if not ExistingClass.IsEmpty() then
+            //         Error('Class category %1 has already been added.', Rec."Class Category");
+            // end;
+
+            TableRelation = "Member Classes"."No.";
             trigger OnValidate()
             var
-                ExistingClass: Record "Product Supported Classes";
+                myInt: Integer;
             begin
-                ExistingClass.SetRange("Product ID", Rec."Product ID");
-                ExistingClass.SetRange("Class Category", Rec."Class Category");
-                if not ExistingClass.IsEmpty() then
-                    Error('Class category %1 has already been added.', Rec."Class Category");
+                if "Class Category" = '' then Error(FieldEmptyError);
             end;
         }
     }
@@ -35,4 +43,6 @@ table 52185474 "Product Supported Classes"
             Clustered = true;
         }
     }
+    var
+        FieldEmptyError: Label 'This field can''t be empty';
 }
