@@ -80,85 +80,85 @@ table 52185744 "Appraisal Salary Details"
                 // end;
                 if Amount < 0 then Error('Amount cannot be less than zero');
 
-                
+
                 //to initialize the STO Amount if inserted and Display a message
-                if (Code = '7.1EXTERNAL BANK STO') and (Amount > 0) then begin
-                    ApprDetails.Reset;
-                    ApprDetails.SetRange("Loan No", "Loan No");
-                    ApprDetails.SetRange(Type, ApprDetails.Type::Basic);
-                    ApprDetails.SetFilter(Amount, '>0');
-                    if ApprDetails.FindFirst then begin
-                        Rec.Amount := 0;
-                        Rec.Modify;
-                        Message('Standing Order Amount not allowed when there is Basic Salary');
-                    end;
-                end;
+                // if (Code = '7.1EXTERNAL BANK STO') and (Amount > 0) then begin
+                //     ApprDetails.Reset;
+                //     ApprDetails.SetRange("Loan No", "Loan No");
+                //     ApprDetails.SetRange(Type, ApprDetails.Type::Basic);
+                //     ApprDetails.SetFilter(Amount, '>0');
+                //     if ApprDetails.FindFirst then begin
+                //         Rec.Amount := 0;
+                //         Rec.Modify;
+                //         Message('Standing Order Amount not allowed when there is Basic Salary');
+                //     end;
+                // end;
                 //end of initializing STO Amount
 
-                if (Type = Type::"Gross Pay")then
+                if (Type = Type::"Gross Pay") then
                     Error(Text002);
 
-                if Type = Type::Basic then begin
+                // if Type = Type::Basic then begin
 
-                    ApprDetails.Reset;
-                    ApprDetails.SetRange(Type, Type::"Gross Pay");
-                    ApprDetails.SetRange("Loan No", "Loan No");
-                    if ApprDetails.Find('-') then begin
-                        ApprDetails.Amount := ApprDetails.Amount + Amount - xRec.Amount;
-                        ApprDetails.Modify;
-                    end;
-                end else
+                //     ApprDetails.Reset;
+                //     ApprDetails.SetRange(Type, Type::"Gross Pay");
+                //     ApprDetails.SetRange("Loan No", "Loan No");
+                //     if ApprDetails.Find('-') then begin
+                //         ApprDetails.Amount := ApprDetails.Amount + Amount - xRec.Amount;
+                //         ApprDetails.Modify;
+                //     end;
+                // end else
 
-                    if Type = Type::Earnings then begin
-                        ApprDetails.Reset;
-                        ApprDetails.SetRange(Type, Type::"Gross Pay");
-                        ApprDetails.SetRange("Loan No", "Loan No");
-                        if ApprDetails.Find('-') then begin
-                            ApprDetails.Amount := ApprDetails.Amount + Amount - xRec.Amount;
-                            ApprDetails.Modify;
-                        end;
-                    end else
-                        if Type = Type::"Other Allowances" then begin
-                            ApprDetails.Reset;
-                            ApprDetails.SetRange(Type, Type::"Gross Pay");
-                            ApprDetails.SetRange("Loan No", "Loan No");
-                            if ApprDetails.Find('-') then begin
-                                ApprDetails.Amount := ApprDetails.Amount + Amount - xRec.Amount;
-                                ApprDetails.Modify;
-                            end;
-                        end else
-                        if Type = Type::Pension then begin
-                            ApprDetails.Reset;
-                            ApprDetails.SetRange(Type, Type::"Gross Pay");
-                            ApprDetails.SetRange("Loan No", "Loan No");
-                            if ApprDetails.Find('-') then begin
-                                ApprDetails.Amount := ApprDetails.Amount + Amount - xRec.Amount;
-                                ApprDetails.Modify;
-                            end;
-                        end;
-                    
-                //initialize the STO Amount if there is a value in Basic
-                if (Type = Type::Basic) and (Amount > 0) then begin
-                    ApprDetails.Reset;
-                    ApprDetails.SetRange("Loan No", "Loan No");
-                    ApprDetails.SetRange(Code, '7.1EXTERNAL BANK STO');
-                    if ApprDetails.FindFirst then begin
-                        STOVal := ApprDetails.Amount;
-                        ApprDetails.Amount := 0;
-                        ApprDetails.Modify;
+                //     if Type = Type::Earnings then begin
+                //         ApprDetails.Reset;
+                //         ApprDetails.SetRange(Type, Type::"Gross Pay");
+                //         ApprDetails.SetRange("Loan No", "Loan No");
+                //         if ApprDetails.Find('-') then begin
+                //             ApprDetails.Amount := ApprDetails.Amount + Amount - xRec.Amount;
+                //             ApprDetails.Modify;
+                //         end;
+                //     end else
+                //         if Type = Type::"Other Allowances" then begin
+                //             ApprDetails.Reset;
+                //             ApprDetails.SetRange(Type, Type::"Gross Pay");
+                //             ApprDetails.SetRange("Loan No", "Loan No");
+                //             if ApprDetails.Find('-') then begin
+                //                 ApprDetails.Amount := ApprDetails.Amount + Amount - xRec.Amount;
+                //                 ApprDetails.Modify;
+                //             end;
+                //         end else
+                //             if Type = Type::Pension then begin
+                //                 ApprDetails.Reset;
+                //                 ApprDetails.SetRange(Type, Type::"Gross Pay");
+                //                 ApprDetails.SetRange("Loan No", "Loan No");
+                //                 if ApprDetails.Find('-') then begin
+                //                     ApprDetails.Amount := ApprDetails.Amount + Amount - xRec.Amount;
+                //                     ApprDetails.Modify;
+                //                 end;
+                //             end;
 
-                        //IF Type=Type::"Other Allowances" THEN BEGIN
-                        ApprDetails.Reset;
-                        ApprDetails.SetRange(Type, Type::"Gross Pay");
-                        ApprDetails.SetRange("Loan No", "Loan No");
-                        if ApprDetails.Find('-') then begin
-                            ApprDetails.Amount := ApprDetails.Amount - STOVal;
-                            ApprDetails.Modify;
-                        end;
-                        //END;
+                //initialize the STO Amount if there is a value in Basicbulk
+                // if (Type = Type::Basic) and (Amount > 0) then begin
+                //     ApprDetails.Reset;
+                //     ApprDetails.SetRange("Loan No", "Loan No");
+                //     ApprDetails.SetRange(Code, '7.1EXTERNAL BANK STO');
+                //     if ApprDetails.FindFirst then begin
+                //         STOVal := ApprDetails.Amount;
+                //         ApprDetails.Amount := 0;
+                //         ApprDetails.Modify;
 
-                    end;
-                end;
+                //         //IF Type=Type::"Other Allowances" THEN BEGIN
+                //         ApprDetails.Reset;
+                //         ApprDetails.SetRange(Type, Type::"Gross Pay");
+                //         ApprDetails.SetRange("Loan No", "Loan No");
+                //         if ApprDetails.Find('-') then begin
+                //             ApprDetails.Amount := ApprDetails.Amount - STOVal;
+                //             ApprDetails.Modify;
+                //         end;
+                //         //END;
+
+                //     end;
+                // end;
                 //End of initialize STO Amount if There is Basic Amount
                 if LoanApp.Get("Loan No") then begin
                     if (LoanApp."Source Unit" = LoanApp."Source Unit"::BOSA) then begin
@@ -261,7 +261,7 @@ table 52185744 "Appraisal Salary Details"
         Loanrec: Record Loans;
         TotalOutstanding: Decimal;
         PensionRelief: Decimal;
-        curPensionAmount : Decimal;
+        curPensionAmount: Decimal;
         CurGrossPay: Decimal;
     begin
         dtOpenPeriod := prPayrollProcessing.fnGetOpenPeriod();
@@ -312,28 +312,28 @@ table 52185744 "Appraisal Salary Details"
 
         ShifAmount := ROUND((curTransAmount * (2.75 / 100)), 0.01, '<');
         //Message('SHIF: %1', ShifAmount);
-        clear(TotalOutstanding);
-        Loanrec.Reset();
-        Loanrec.SetAutoCalcFields("Outstanding Balance");
-        Loanrec.SetRange("Member No.", Rec."Client Code");
-        Loanrec.SetRange("Recovery Mode", Loanrec."Recovery Mode"::Checkoff);
-        if Loanrec.FindSet() then
-            repeat
-                TotalOutstanding += Loanrec."Outstanding Balance";
-            until Loanrec.Next() = 0;
+        // clear(TotalOutstanding);
+        // Loanrec.Reset();
+        // Loanrec.SetAutoCalcFields("Outstanding Balance");
+        // Loanrec.SetRange("Member No.", Rec."Client Code");
+        // Loanrec.SetRange("Recovery Mode", Loanrec."Recovery Mode"::Checkoff);
+        // if Loanrec.FindSet() then
+        //     repeat
+        //         TotalOutstanding += Loanrec."Outstanding Balance";
+        //     until Loanrec.Next() = 0;
 
-        Savingsacc.Reset;
-        Savingsacc.SetRange("Member No.", Rec."Client Code");
-        Savingsacc.SetRange("Product Category", Savingsacc."Product Category"::"BOSA Deposits");
-        if Savingsacc.FindFirst() then
-            DepositContr := Savingsacc."Monthly Contribution";
+        // Savingsacc.Reset;
+        // Savingsacc.SetRange("Member No.", Rec."Client Code");
+        // Savingsacc.SetRange("Product Category", Savingsacc."Product Category"::"BOSA Deposits");
+        // if Savingsacc.FindFirst() then
+        //     DepositContr := Savingsacc."Monthly Contribution";
         //Message('Share Contribution: %1',ShrContr);
 
         HousingLevyAmount := ROUND((curTransAmount * (1.5 / 100)), 0.01, '<');
         //Message('Housing Levy: %1', HousingLevyAmount);
 
         Relief := 2400;
-        TaxablePay := curTransAmount - curNSSF - ShifAmount - HousingLevyAmount -  curPensionAmount;
+        TaxablePay := curTransAmount - curNSSF - ShifAmount - HousingLevyAmount - curPensionAmount;
         if TaxablePay < 0 then
             TaxablePay := 0;
         curPayeAmount := prPayrollProcessing.fnGetEmployeePaye(TaxablePay);
@@ -343,7 +343,7 @@ table 52185744 "Appraisal Salary Details"
         curPayeAmount := ROUND(curPayeAmount, 0.01, '>');
         //Message('PAYE: %1', curPayeAmount);
 
-         
+
 
         // STEP 3: Update using Appraisal Setup
         ApprDetails.Reset();

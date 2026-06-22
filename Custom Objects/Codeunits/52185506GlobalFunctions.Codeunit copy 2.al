@@ -2382,6 +2382,7 @@ Codeunit 52185506 "Global Functions"
             Comments.SetRange("Disable Flag", false);
             Comments.SetRange(Types, Comments.Types::"Member Flagging");
             Comments.SetFilter(Comment, '<>%1', '');
+            Comments.SetFilter("Expires At", '<>%1', 0D);
             Comments.SetFilter("Expires At", '<=%1', Today);
             if Comments.FindSet() then begin
                 repeat

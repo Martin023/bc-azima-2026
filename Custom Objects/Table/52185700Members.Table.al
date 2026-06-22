@@ -2134,7 +2134,7 @@ table 52185700 Members
     begin
 
         if IdentificationType = IdentificationType::"ID Number" then begin
-            if StrLen(Identification) > 9 then Error('ID Number cannot have more than 9 characters');
+            if StrLen(Identification) > 15 then Error('ID Number cannot have more than 15 characters');
             if StrLen(Identification) < 5 then Error('ID Number cannot have less than 7 characters');
             Characters := 'ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_~{}[];:"|\ ,./<>?-= ''';
             if not MemberApplication.ValidateShouldNotHaves(Identification, Characters) then Error('ID Number has invalid characters');

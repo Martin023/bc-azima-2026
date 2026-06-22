@@ -2270,7 +2270,7 @@ page 52185753 "Loan Application Card"
 
                         //AutoCreateFile
 
-                        GlobalFunctions.CreateFile(Rec."Member No.", Enum::"File Types"::"Member File");
+                        //GlobalFunctions.CreateFile(Rec."Member No.", Enum::"File Types"::"Member File");
 
                         Message('Loan Posted Successfully');
                         CurrPage.Close();
