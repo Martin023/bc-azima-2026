@@ -598,12 +598,126 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Tablix Name="ChargesBreakdownTable">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>5.2cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.3cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.4cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="ChargeDescription">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>="  " &amp; Fields!Description.Value</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <FontStyle>Italic</FontStyle>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>ChargeDescription</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>1pt</PaddingTop>
+                            <PaddingBottom>1pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="ChargeAmount">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!ChargeAmount_TransactionCharges.Value</Value>
+                                  <Style>
+                                    <FontSize>7pt</FontSize>
+                                    <FontStyle>Italic</FontStyle>
+                                    <Format>#,0.00</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>ChargeAmount</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>1pt</PaddingTop>
+                            <PaddingBottom>1pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="ChargesBreakdownGroup">
+                    <DataElementName>ChargeItem</DataElementName>
+                  </Group>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>DataSet_Result</DataSetName>
+            <Top>6.15cm</Top>
+            <Left>0.1cm</Left>
+            <Height>0.4cm</Height>
+            <Width>7.5cm</Width>
+            <ZIndex>14</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
           <Line Name="LineEq1">
-            <Top>6.4cm</Top>
+            <Top>6.6cm</Top>
             <Left>1.8cm</Left>
             <Height>0cm</Height>
             <Width>5.8cm</Width>
-            <ZIndex>14</ZIndex>
+            <ZIndex>15</ZIndex>
             <Style>
               <Border>
                 <Style>Dashed</Style>
@@ -637,11 +751,11 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>6.5cm</Top>
+            <Top>6.7cm</Top>
             <Left>0.1cm</Left>
             <Height>0.5cm</Height>
             <Width>7.6cm</Width>
-            <ZIndex>15</ZIndex>
+            <ZIndex>16</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -679,11 +793,11 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>7.2cm</Top>
+            <Top>7.4cm</Top>
             <Left>0.1cm</Left>
             <Height>0.5cm</Height>
             <Width>7.6cm</Width>
-            <ZIndex>16</ZIndex>
+            <ZIndex>17</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -721,11 +835,11 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>7.7cm</Top>
+            <Top>7.9cm</Top>
             <Left>0.1cm</Left>
             <Height>0.5cm</Height>
             <Width>7.6cm</Width>
-            <ZIndex>17</ZIndex>
+            <ZIndex>18</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -737,11 +851,11 @@
             </Style>
           </Textbox>
           <Line Name="LineEq2">
-            <Top>8.2cm</Top>
+            <Top>8.4cm</Top>
             <Left>1.8cm</Left>
             <Height>0cm</Height>
             <Width>5.8cm</Width>
-            <ZIndex>18</ZIndex>
+            <ZIndex>19</ZIndex>
             <Style>
               <Border>
                 <Style>Dashed</Style>
@@ -775,11 +889,11 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>8.3cm</Top>
+            <Top>8.5cm</Top>
             <Left>0.1cm</Left>
             <Height>0.5cm</Height>
             <Width>7.6cm</Width>
-            <ZIndex>19</ZIndex>
+            <ZIndex>20</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -799,7 +913,7 @@
             <Left>1.20584cm</Left>
             <Height>1.2cm</Height>
             <Width>5.38833cm</Width>
-            <ZIndex>20</ZIndex>
+            <ZIndex>21</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1243,11 +1357,11 @@ ZZWuQqAQKAQKgUKgECgECoFCYJMjsMEUp9pAtsnLU4lfCPQKgkKgEBgGgQ06UbhBxRoG0fJTCBQChcCo
         <Field Name="Description">
           <DataField>Description</DataField>
         </Field>
-        <Field Name="ChAmount">
-          <DataField>ChAmount</DataField>
+        <Field Name="ChargeAmount_TransactionCharges">
+          <DataField>ChargeAmount_TransactionCharges</DataField>
         </Field>
-        <Field Name="ChAmountFormat">
-          <DataField>ChAmountFormat</DataField>
+        <Field Name="ChargeAmount_TransactionChargesFormat">
+          <DataField>ChargeAmount_TransactionChargesFormat</DataField>
         </Field>
         <Field Name="Transaction_Charges_Transaction_Type">
           <DataField>Transaction_Charges_Transaction_Type</DataField>

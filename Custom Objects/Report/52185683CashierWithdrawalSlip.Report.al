@@ -219,7 +219,7 @@ Report 52185683 "Cashier Withdrawal Slip"
                 column(Description; Description)
                 {
                 }
-                column(ChAmount; ChAmount)
+                column(ChargeAmount_TransactionCharges; "Charge Amount")
                 {
                 }
                 column(Transaction_Charges_Transaction_Type; "Transaction Type")
@@ -361,7 +361,6 @@ Report 52185683 "Cashier Withdrawal Slip"
         CompanyInfo: Record "Company Information";
         CheckReport: Report Check;
         SumTransactionCharges: Decimal;
-        ChAmount: Decimal;
         AvailableBalance: Decimal;
         SavingsLedgerEntry: Record "Savings Ledger Entry";
         Savings: Record "Savings Accounts";
