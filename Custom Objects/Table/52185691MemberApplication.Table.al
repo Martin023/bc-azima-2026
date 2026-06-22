@@ -592,8 +592,10 @@ table 52185691 "Member Application"
 
         field(39; "Employer Code"; Code[20])
         {
-            // TableRelation = Customer WHERE("Account Type" = CONST("Employer Code"));
-            TableRelation = Customer WHERE("Account Type" = CONST(Employer));
+            //IF ("Account Type" = CONST("G/L Account")) "G/L Account" WHERE
+            TableRelation = IF ("Self Employed" = const(true)) Customer WHERE("Account Type" = CONST("Employer Code"), "Self Employed" = const(true))
+            else
+            Customer WHERE("Account Type" = CONST("Employer Code"), "Self Employed" = const(false));
             trigger OnValidate()
             begin
                 CalcFields("Employer Name")
@@ -689,7 +691,7 @@ table 52185691 "Member Application"
 
         field(46; "Work Station"; Code[20])
         {
-            TableRelation = "Electrol Zones/Area Svr Center".Code WHERE(Type = CONST("Work Station"),"Employer Code" = field("Employer Code"));
+            TableRelation = "Electrol Zones/Area Svr Center".Code WHERE(Type = CONST("Work Station"), "Employer Code" = field("Employer Code"));
         }
 
         field(47; "Employment Designation"; Text[50])
@@ -1652,7 +1654,8 @@ table 52185691 "Member Application"
             Error(FieldLengthError, FldLength);
     end;
 
-    procedure ValidateIdentificationTypes(IdentificationType: enum "Identification Type"; Identification: Code[30]; PrimaryOrSecondaryID: Option Primary,Secondary): Code[30]
+    procedure ValidateIdentificationTypes(IdentificationType: enum "Identification Type"; Identification: Code[30];
+                                                                  PrimaryOrSecondaryID: Option Primary,Secondary): Code[30]
     var
         Members: Record Members;
         Characters: Text;

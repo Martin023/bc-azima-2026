@@ -5,6 +5,16 @@ Codeunit 52185506 "Global Functions"
     begin
     end;
 
+    procedure CreateFile(MemberNo: Code[100]; FileType: Enum "File Types")
+    var
+        FilesRec: Record "Files Table";
+    begin
+        FilesRec.Init();
+        FilesRec.Validate("File Type", FileType);
+        FilesRec.Validate("File/Member No.", MemberNo);
+        FilesRec.Insert(true);
+    end;
+
     procedure FormatDate(Realdate: date) dateText: Text;
     var
         Month: Integer;

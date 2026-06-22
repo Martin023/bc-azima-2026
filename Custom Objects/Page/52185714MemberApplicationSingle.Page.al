@@ -613,7 +613,7 @@ page 52185714 "Member Application Single"
                 {
                     ApplicationArea = all;
 
-                    Editable = SelfEmployed;
+                    // Editable = SelfEmployed;
                     ShowMandatory = SelfEmployed;
                 }
                 field("Employer Name"; Rec."Employer Name")
@@ -1028,7 +1028,10 @@ page 52185714 "Member Application Single"
                             Rec.TestField("Sent Back to CRM", false);
                         end;
                         if rec."Transactional Mobile Number" = '' then
-                            if Confirm('Transactional Mobile Number is empty. This member will not be able to access mobile banking. Do you wish to continue') = false then exit;
+                            if Confirm('Transactional Mobile Number is empty. This member will not be able to access mobile banking. Do you wish to continue') = false then
+                                exit
+                            else
+                                Error('Transactional mobile no must be inserted');
                         if rec."Primary Identification" = '' then
                             Error('Primary Identification is required for membership application');
 
@@ -1101,10 +1104,10 @@ page 52185714 "Member Application Single"
 
                         if not Rec."Self Employed" then begin
                             Rec.TestField("Employer Code");
-                            if rec."Employer Code" <> 'DIASPORA' then begin
-                                Rec.TestField("Payroll/Staff No.");
-                                Rec.TestField("Terms of Employment");
-                            end;
+                            // if rec."Employer Code" <> 'DIASPORA' then begin
+                            Rec.TestField("Payroll/Staff No.");
+                            Rec.TestField("Terms of Employment");
+                            // end;
 
                             // Rec.TestField("Work Station");
                             // Rec.TestField("Employment Designation");
@@ -2005,7 +2008,8 @@ page 52185714 "Member Application Single"
 
         end;
         if Rec.Status = Rec.Status::Rejected then begin
-            ReopenVisible := false;
+            ReopenVisible := true;
+            SendApprovalVisible := false;
         end;
 
 

@@ -2099,7 +2099,7 @@ page 52185753 "Loan Application Card"
                     UserSetup: Record "User Setup";
                     SeriesSetup: Record "Banking No Setup";
                     FosaAcc, idno : Code[30];
-
+                    GlobalFunctions: Codeunit "Global Functions";
                 begin
                     UserSetup.Reset();
                     UserSetup.SetRange(UserSetup."User ID", UserId);
@@ -2268,10 +2268,13 @@ page 52185753 "Loan Application Card"
                             end;
                         end;
 
-                        //Set FOSA Savings Account to Frozen
+                        //AutoCreateFile
+
+                        GlobalFunctions.CreateFile(Rec."Member No.", Enum::"File Types"::"Member File");
+
+                        Message('Loan Posted Successfully');
+                        CurrPage.Close();
                     end;
-                    Message('Loan Posted Successfully');
-                    CurrPage.Close();
                 end;
             }
         }
