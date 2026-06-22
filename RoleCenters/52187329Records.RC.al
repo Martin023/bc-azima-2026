@@ -878,13 +878,13 @@ page 52187329 "Records"
                         RunObject = page "File Tracker List";
                         RunPageView = where("File Request Status" = filter(Received));
                     }
-                    // action("Forwarded Files")
-                    // {
-                    //     ApplicationArea = Basic, Suite;
-                    //     Caption = 'Forwarded Files';
-                    //     RunObject = page "File Tracker List";
-                    //     RunPageView = where("File Request Status" = filter(Forwarded));
-                    // }
+                    action("Forwarded Files")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Forwarded Files';
+                        RunObject = page "File Tracker List";
+                        RunPageView = where("File Request Status" = filter(Forwarded));
+                    }
                     action("Closed File Requests")
                     {
                         ApplicationArea = Basic, Suite;
