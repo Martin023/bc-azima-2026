@@ -967,7 +967,7 @@ Codeunit 52185506 "Global Functions"
 
         Message('Total Salary: %1, Months with Salary: %2, Last Month Amount: %3', TotalSalary, MonthsWithSalary, LastMonthAmount);
 
-       
+
         if MonthsWithSalary = MaxMonths then begin
             TotalSalary -= LastMonthAmount;
             MonthsWithSalary -= 1;
@@ -3272,6 +3272,7 @@ Codeunit 52185506 "Global Functions"
         if TransactionCharges.Find('-') then begin
             repeat
                 ChargeAmount := 0;
+                ExciseDuty := 0;
                 if TransactionCharges."Charge Type" = TransactionCharges."Charge Type"::"% of Amount" then begin
                     if TransactionCharges."Recover Excise Duty" = false then
                         ChargeAmount := (Amount * TransactionCharges."Percentage of Amount") * 0.01

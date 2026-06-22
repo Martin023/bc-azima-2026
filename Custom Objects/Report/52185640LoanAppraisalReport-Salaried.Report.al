@@ -1059,10 +1059,13 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 if Loans."Requested Amount" > NetOnSalary then begin
                     QualifyingAmount := NetOnSalary;
 
-                    if ProductFactory."Secured Loan" then begin
-                        if QualifyingAmount > QualificationOnDeposits then
-                            QualifyingAmount := QualificationOnDeposits;
-                    end;
+                    // if ProductFactory."Secured Loan" then begin
+                    if QualifyingAmount > QualificationOnDeposits then
+                        QualifyingAmount := QualificationOnDeposits;
+                    // end;
+
+                    if QualifyingAmount > TotalGuaranteed then
+                        QualifyingAmount := TotalGuaranteed;
 
                     Loans."Recommended Amount" := ROUND(QualifyingAmount, 1, '<');
                     Loans."Approved Amount" := ROUND(QualifyingAmount, 1, '<');

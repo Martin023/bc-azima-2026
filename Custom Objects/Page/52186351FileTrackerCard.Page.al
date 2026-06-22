@@ -531,8 +531,8 @@ page 52186351 "File Tracker Card"
 
                 trigger OnAction()
                 begin
-                    Rec.TestField("File Request Status", Rec."File Request Status"::Requested);
-                    Rec.TestField("Volume Entry No.");
+                    // Rec.TestField("File Request Status", Rec."File Request Status"::Requested);
+                    // Rec.TestField("Volume Entry No.");
                     Rec.TestField("Move to");
                     //if Rec.Create = false then Error(ErrorFileNotCreated);
                     if Rec."File Issued" = true then Error(AlreadyIssued);
