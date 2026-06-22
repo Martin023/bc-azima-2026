@@ -1861,6 +1861,19 @@ page 52185753 "Loan Application Card"
                             end;
                         end;
                     end;
+
+                    //checkguarcount
+                    if Loan.Get(Rec."Loan No.") then begin
+                        LoanGua.Reset;
+                        LoanGua.SetRange(LoanGua."Loan No", Rec."Loan No.");
+                        LoanGua.SetRange("Self Guarantee", false);
+                        if LoanGua.count < 6 then begin
+                            if rec."Approved Amount" > 100000 then begin
+                                Error('Minimum guarantors should be 6 for loans above 100000');
+                            end;
+                        end;
+                    end;
+
                     CompInfo.Get;
                     VarVariant := Rec;
                     if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then begin

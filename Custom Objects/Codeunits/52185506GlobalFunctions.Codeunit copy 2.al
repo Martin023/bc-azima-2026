@@ -912,6 +912,72 @@ Codeunit 52185506 "Global Functions"
         end;
     end;
 
+    procedure GetAzimaSMSLoanSalaryAverage(FOSAAccountNo: Code[20]; IncomeTy: Enum "Salary Income Types"): Decimal
+    var
+        SalBuffer: Record "Salary Lines";
+        MonthStart: Date;
+        MonthEnd: Date;
+        MonthAmount: Decimal;
+        TotalSalary: Decimal;
+        MonthsWithSalary: Integer;
+        MaxMonths: Integer;
+        i: Integer;
+        LastMonthAmount: Decimal;
+        LastMonthIndex: Integer;
+    begin
+        TotalSalary := 0;
+        MonthsWithSalary := 0;
+        MaxMonths := 12;
+        LastMonthAmount := 0;
+        LastMonthIndex := 0;
+
+        for i := 1 to MaxMonths do begin
+            MonthStart := DMY2Date(1,
+                Date2DMY(CalcDate('<-' + Format(i) + 'M>', Today()), 2),
+                Date2DMY(CalcDate('<-' + Format(i) + 'M>', Today()), 3)
+            );
+            Message('Month %1: Start %2, End %3', i, MonthStart, MonthEnd);
+
+            MonthEnd := CalcDate('<CM>', MonthStart);
+
+            SalBuffer.Reset();
+            SalBuffer.SetRange("Account No.", FOSAAccountNo);
+            SalBuffer.SetRange("Income Type", IncomeTy);
+            SalBuffer.SetRange(Posted, true);
+            SalBuffer.SetRange("Posting Date", MonthStart, MonthEnd);
+            SalBuffer.SetLoadFields(Amount, "Posting Date");
+            SalBuffer.CalcSums(Amount);
+            MonthAmount := SalBuffer.Amount;
+
+            Message('Month Amount: %1', MonthAmount);
+
+            if MonthAmount > 0 then begin
+                MonthsWithSalary += 1;
+                TotalSalary += MonthAmount;
+
+                LastMonthAmount := MonthAmount;
+                LastMonthIndex := i;
+                Message('Month %1: Start %2, End %3, Amount %4 (Salary Found)', i, MonthStart, MonthEnd, MonthAmount);
+            end;
+        end;
+
+        // salary in at least 1 month
+        if MonthsWithSalary = 0 then
+            exit(0);
+
+        Message('Total Salary: %1, Months with Salary: %2, Last Month Amount: %3', TotalSalary, MonthsWithSalary, LastMonthAmount);
+
+
+        if MonthsWithSalary = MaxMonths then begin
+            TotalSalary -= LastMonthAmount;
+            MonthsWithSalary -= 1;
+            Message('After 12 months rule: Excluding last month amount %1, New Total Salary: %2, New Months with Salary: %3', LastMonthAmount, TotalSalary, MonthsWithSalary);
+        end;
+
+        exit(Round(TotalSalary / MonthsWithSalary, 1));
+        Message('Average Salary: %1', Round(TotalSalary / MonthsWithSalary, 1));
+    end;
+
     procedure ValidateBusinessLoansOnproductInput(Loans: Record Loans; MemberNo: code[30])
     var
         ProductFactory: Record "Product Factory";
@@ -3206,6 +3272,7 @@ Codeunit 52185506 "Global Functions"
         if TransactionCharges.Find('-') then begin
             repeat
                 ChargeAmount := 0;
+                ExciseDuty := 0;
                 if TransactionCharges."Charge Type" = TransactionCharges."Charge Type"::"% of Amount" then begin
                     if TransactionCharges."Recover Excise Duty" = false then
                         ChargeAmount := (Amount * TransactionCharges."Percentage of Amount") * 0.01

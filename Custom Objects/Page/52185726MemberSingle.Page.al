@@ -1187,6 +1187,24 @@ page 52185726 "Member Single"
                 end;
 
             }
+            action("Mobile Loan Eligibility")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Check Mobile Loan Eligibility';
+                Image = CheckList;
+                Promoted = true;
+                PromotedCategory = Category4;
+                PromotedIsBig = true;
+                ToolTip = 'Calculate mobile loan eligibility for this member.';
+
+                trigger OnAction()
+                var
+                    MobileLoanEligibilityPage: Page "Mobile Loan Eligibility";
+                begin
+                    MobileLoanEligibilityPage.SetMemberNo(Rec."No.");
+                    MobileLoanEligibilityPage.RunModal();
+                end;
+            }
             action("Activate Member")
             {
                 ApplicationArea = Basic, Suite;

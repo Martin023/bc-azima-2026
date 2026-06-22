@@ -65,7 +65,7 @@ PageExtension 52185904 pageextension52185904 extends "Requests to Approve"
                 Leave: record "HR Leave Application";
                 HrTable: Record "HR Employees";
                 GlobalFunctions: Codeunit "Global Functions";
-
+                SalHeader: record "Salary Header";
             begin
                 StoreReq.reset;
                 StoreReq.setrange("No.", rec."Document No.");
@@ -84,6 +84,18 @@ PageExtension 52185904 pageextension52185904 extends "Requests to Approve"
                         Leave.Status := Leave.Status::Approved;
                         Leave.validate(Status, Leave.Status::Approved);
                         Leave.Modify();
+                    end;
+                end;
+
+                SalHeader.reset;
+                SalHeader.setrange(No, rec."Document No.");
+                if SalHeader.FindFirst() then begin
+                    if SalHeader.Status <> Leave.Status::Approved then begin
+                        // IF not ApprovalsMgmt.HasOpenApprovalEntries(Leave.RecordId) THEN BEGIN
+                        SalHeader.Status := SalHeader.Status::Approved;
+                        SalHeader.validate(Status, SalHeader.Status::Approved);
+                        SalHeader.Modify();
+                        // end;
                     end;
                 end;
 
@@ -122,8 +134,8 @@ PageExtension 52185904 pageextension52185904 extends "Requests to Approve"
         {
             action(clearApprovedEntries)
             {
-                 ApplicationArea = Basic;
-                 
+                ApplicationArea = Basic;
+
             }
         }
     }

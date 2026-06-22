@@ -30,7 +30,7 @@ page 52185808 "Salary Header"
                 {
                     ApplicationArea = Basic, Suite;
                     Editable = AccType;
-                    ValuesAllowed = "G/L Account";
+                    ValuesAllowed = "G/L Account", customer;
                 }
                 field("Account No"; Rec."Account No")
                 {
@@ -40,11 +40,6 @@ page 52185808 "Salary Header"
                 field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic, Suite;
-                }
-                field(Employer; Rec.Employer)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = EmployerC;
                 }
                 field("Employer Code"; Rec."Employer Code")
                 {
@@ -260,63 +255,69 @@ page 52185808 "Salary Header"
                         if Selection = 1 then begin
                             SalaryLines.Reset;
                             SalaryLines.SetRange(SalaryLines."Salary Header No.", Rec.No);
-                            SalaryLines.Setfilter("Employer Code", '<>%1', '');
                             if SalaryLines.Find('-') then begin
                                 repeat
-                                    SavingsAccounts.Reset;
-                                    SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"FOSA Account");
-                                    SavingsAccounts.SetFilter(SavingsAccounts."Employer Code", SalaryLines."Employer Code");
-                                    SavingsAccounts.SetRange(SavingsAccounts."Payroll/Staff No.", SalaryLines."Staff No.");
-                                    SavingsAccounts.SetCurrentKey("Product Type");
-                                    SavingsAccounts.SetFilter(SavingsAccounts."Product Type", '191');
-                                    if SavingsAccounts.Find('-') then begin
-
-                                        SalaryLines."Account Not Found" := false;
-                                        //SalaryLines.Posted := false;
-                                        SalaryLines."Posting Date" := Rec."Posting date";
-                                        SalaryLines."Transaction Type" := rec."Transaction Type";
-                                        SalaryLines.Modify;
-
-                                        OldSalary.Reset();
-                                        OldSalary.SetRange("Transaction Type", SalaryLines."Transaction Type");
-                                        OldSalary.SetRange("Account No.", SalaryLines."Account No.");
-                                        OldSalary.SetRange(Posted, true);
-                                        OldSalary.Setfilter("Posting Date", '%1..%2', Calcdate('<-CM>', SalaryLines."Posting Date"), Calcdate('<CM>', SalaryLines."Posting Date"));
-                                        if OldSalary.FindSet() then begin
-                                            SalaryLines."Paid Within Month" := true;
-                                        end
-                                        else begin
-                                            SalaryLines."Paid Within Month" := false;
-                                            if SavingsAccounts."Payroll/Staff No." <> '' then begin
-                                                SalaryLines."Account No." := SavingsAccounts."No.";
-                                                if SavingsAccounts.Blocked <> SavingsAccounts.Blocked::" " then
-                                                    SalaryLines."Blocked Accounts" := true
-                                                else
-                                                    SalaryLines."Blocked Accounts" := false;
-
-                                                SalaryLines."ID No." := SavingsAccounts."ID No.";
-                                                SalaryLines."Account No." := SavingsAccounts."No.";
-
-                                                SalaryLines.Status := SavingsAccounts.Status;
-                                                SalaryLines."Member No." := SavingsAccounts."Member No.";
-                                                SalaryLines.Name := SavingsAccounts.Name;
-                                                SalaryLines."Employer Code" := SavingsAccounts."Employer Code";
-                                                SalaryLines."Global Dimension 1 Code" := SavingsAccounts."Global Dimension 1 Code";
-                                                SalaryLines."Global Dimension 2 Code" := SavingsAccounts."Global Dimension 2 Code";
-                                                SalaryLines."Posting Date" := Rec."Posting date";
-                                                SalaryLines."Posting Time" := Time;
-                                                SalaryLines."Actual Date Posted" := Today;
-                                            end else
-                                                SalaryLines."Account Not Found" := true;
-                                            //SalaryLines.Posted := false;
-
-                                        end;
-                                        // SavingsAccounts."Salary Through FOSA" := true;
-                                        SalaryLines.Modify;
-                                    end else
+                                    if SalaryLines."Employer Code" = '' then begin
                                         SalaryLines."Account Not Found" := true;
-                                    //SalaryLines.Posted := false;
+                                        SalaryLines."Posting Date" := rec."Posting date";
+                                    end
+                                    else begin
+                                        SavingsAccounts.Reset;
+                                        SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"FOSA Account");
+                                        SavingsAccounts.SetFilter(SavingsAccounts."Employer Code", SalaryLines."Employer Code");
+                                        SavingsAccounts.SetRange(SavingsAccounts."Payroll/Staff No.", SalaryLines."Staff No.");
+                                        SavingsAccounts.SetCurrentKey("Product Type");
+                                        SavingsAccounts.SetFilter(SavingsAccounts."Product Type", '191');
+                                        if SavingsAccounts.Find('-') then begin
+
+                                            SalaryLines."Account Not Found" := false;
+                                            //SalaryLines.Posted := false;
+                                            SalaryLines."Posting Date" := Rec."Posting date";
+                                            SalaryLines."Transaction Type" := rec."Transaction Type";
+                                            SalaryLines.Modify;
+
+                                            OldSalary.Reset();
+                                            OldSalary.SetRange("Transaction Type", SalaryLines."Transaction Type");
+                                            OldSalary.SetRange("Account No.", SalaryLines."Account No.");
+                                            OldSalary.SetRange(Posted, true);
+                                            OldSalary.Setfilter("Posting Date", '%1..%2', Calcdate('<-CM>', SalaryLines."Posting Date"), Calcdate('<CM>', SalaryLines."Posting Date"));
+                                            if OldSalary.FindSet() then begin
+                                                SalaryLines."Paid Within Month" := true;
+                                            end
+                                            else begin
+                                                SalaryLines."Paid Within Month" := false;
+                                                if SavingsAccounts."Payroll/Staff No." <> '' then begin
+                                                    SalaryLines."Account No." := SavingsAccounts."No.";
+                                                    if SavingsAccounts.Blocked <> SavingsAccounts.Blocked::" " then
+                                                        SalaryLines."Blocked Accounts" := true
+                                                    else
+                                                        SalaryLines."Blocked Accounts" := false;
+
+                                                    SalaryLines."ID No." := SavingsAccounts."ID No.";
+                                                    SalaryLines."Account No." := SavingsAccounts."No.";
+
+                                                    SalaryLines.Status := SavingsAccounts.Status;
+                                                    SalaryLines."Member No." := SavingsAccounts."Member No.";
+                                                    SalaryLines.Name := SavingsAccounts.Name;
+                                                    SalaryLines."Employer Code" := SavingsAccounts."Employer Code";
+                                                    SalaryLines."Global Dimension 1 Code" := SavingsAccounts."Global Dimension 1 Code";
+                                                    SalaryLines."Global Dimension 2 Code" := SavingsAccounts."Global Dimension 2 Code";
+                                                    SalaryLines."Posting Date" := Rec."Posting date";
+                                                    SalaryLines."Posting Time" := Time;
+                                                    SalaryLines."Actual Date Posted" := Today;
+                                                end else
+                                                    SalaryLines."Account Not Found" := true;
+                                                //SalaryLines.Posted := false;
+
+                                            end;
+                                            // SavingsAccounts."Salary Through FOSA" := true;
+                                            SalaryLines.Modify;
+                                        end else
+                                            SalaryLines."Account Not Found" := true;
+                                        //SalaryLines.Posted := false;
+                                    end;
                                     SalaryLines.Modify;
+
                                 until SalaryLines.Next = 0;
                             end;
                         end;
@@ -746,7 +747,7 @@ page 52185808 "Salary Header"
                         Rec.CalcFields("Scheduled Amount");
 
                         if Rec.Validated = false then
-                            Error('Kinldy validate the salary batch before proceeding');
+                            Error('Kindly validate the salary batch before proceeding');
 
                         if Rec."Mutiple Salaries Checked" = false then
                             Error('Kindly check for multiple salaries before proceeding');
@@ -754,22 +755,22 @@ page 52185808 "Salary Header"
                         if Rec."Scheduled Amount" <> Rec.Amount then
                             Error('Scheduled amount and Amount must be the same');
 
-
+                        //Allow sending
                         SalaryLines.Reset;
                         SalaryLines.SetRange(SalaryLines."Salary Header No.", Rec.No);
                         if SalaryLines.Find('-') then begin
                             repeat
-                                if SalaryLines."Account Not Found" = true then begin
-                                    Error('Kinldy reconcile all the unfound accounts for this employer before proceeding');
-                                end;
+                                // if SalaryLines."Account Not Found" = true then begin
+                                //     Error('Kinldy reconcile all the unfound accounts for this employer before proceeding');
+                                // end;
                                 if SalaryLines."Posting Date" <> rec."Posting date" then
                                     Error('kindly Validate the lines again to update the posting dates to match header & lines');
 
-                                if SalaryLines."Multiple Salary" = true then begin
-                                    Error('Kinldy reconcile all the Multiple accounts for this employer before proceeding');
-                                end;
-                                if SalaryLines."Paid Within Month" = true then
-                                    Error('There are some accounts that may have been paid within the month with thw same salary type!');
+                            // if SalaryLines."Multiple Salary" = true then begin
+                            //     Error('Kinldy reconcile all the Multiple accounts for this employer before proceeding');
+                            // end;
+                            // if SalaryLines."Paid Within Month" = true then
+                            //     Error('There are some accounts that may have been paid within the month with thw same salary type!');
                             until
                             SalaryLines.Next = 0;
                         end;

@@ -13,10 +13,11 @@ XmlPort 52185496 "Import Salaries"
                 // fieldattribute(HNo; "Salary Lines"."Salary Header No.")
                 // {
                 // }
-                fieldattribute(StaffNo; "Salary Lines"."Staff No.")
+                fieldattribute(EmployerCode; "Salary Lines"."Employer Code")
                 {
                 }
-                fieldattribute(EmployerCode; "Salary Lines"."Employer Code")
+
+                fieldattribute(StaffNo; "Salary Lines"."Staff No.")
                 {
                 }
                 fieldattribute(AccountNo; "Salary Lines"."Account No.")
@@ -25,6 +26,7 @@ XmlPort 52185496 "Import Salaries"
                 fieldattribute(MemberNo; "Salary Lines"."Member No.")
                 {
                 }
+                fieldattribute(IDno; "Salary Lines"."ID No.") { }
                 fieldattribute(Amount; "Salary Lines".Amount)
                 {
                 }
@@ -60,7 +62,7 @@ XmlPort 52185496 "Import Salaries"
         {
             area(content)
             {
-                group("StaffNo|EmployerCode|AccountNo|MemberNo|Amount|DocumentNo")
+                group("EmployerCode|StaffNo|AccountNo|Member No.|ID No.|Amount|DocumentNo")
                 {
                     field(AccountNo; SalaryHeaderNo)
                     {

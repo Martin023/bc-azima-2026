@@ -1334,6 +1334,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
 
     begin
         TotalExisting := 0;
+        DepositCap := 0;
+        Message('Deposit Cap: %1', DepositCap);
         if not GenSetUp.GET then begin
             EligibilityFailReason := 'General Setup NOT complete';
             QualifiedAmount := 0;
@@ -1345,6 +1347,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
             EXIT(QualifiedAmount);
         end;
         // Azima Mazao Loan
+        Message('Is Available in Month: %1', ProdFac."IsAvailableInMonth");
+
         if ProdFac."IsAvailableInMonth" then begin
             CurrentMonthInt := Date2DMY(Today(), 2);
             Evaluate(CurrentMonthEnum, Format(CurrentMonthInt));
@@ -1372,6 +1376,10 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     ProdFac."Product Description",
                     AllowedMonths
                   );
+                Message('%1 is only available in: %2',
+                  ProdFac."Product Description",
+                  AllowedMonths
+                  );
                 QualifiedAmount := 0;
                 exit(QualifiedAmount);
             end;
@@ -1386,6 +1394,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
 
         if MobileLoanBuffer.FindFirst then begin
             EligibilityFailReason := 'There is an ongoing mobile loan application being processed';
+            Message('There is an ongoing mobile loan application being processed');
             QualifiedAmount := 0;
             EXIT(QualifiedAmount);
         end;
@@ -1403,9 +1412,11 @@ codeunit 52186512 "Sky M-Banking Transactions"
             LoanApp.Modify;
 
             EligibilityFailReason := 'There is ongoing mobile loan application being processed';
+            Message('There is ongoing mobile loan application being processed');
             QualifiedAmount := 0;
             EXIT(QualifiedAmount);
         end;
+        Message('No ongoing mobile loan applications found');
 
         amtQualified := 0;
         STOAmount := 0;
@@ -1421,18 +1432,22 @@ codeunit 52186512 "Sky M-Banking Transactions"
         );
 
         if Members.Find('-') then begin
+            Message('Member Found: %1', Members."No.");
             IF Members.Status <> Members.Status::Active THEN BEGIN
                 EligibilityFailReason := StrSubstNo('Applicant NOT Active. Status is %1', Members.Status);
+                Message('Applicant NOT Active. Status is %1', Members.Status);
                 QualifiedAmount := 0;
                 EXIT(QualifiedAmount);
             END else begin
                 // Active Status - Check Subflags
+                Message('Member Subflag: %1', Members.Subflag);
                 if not (
                     (Members.Subflag = Members.Subflag::"First time") or
                     (Members.Subflag = Members.Subflag::Rejoined) or
                     (Members.Subflag = Members.Subflag::"Partial withdrawn")
                 ) then begin
                     EligibilityFailReason := StrSubstNo('Applicant NOT eligible. Sub-Status is %1', Members.Subflag);
+                    Message('Applicant NOT eligible. Sub-Status is %1', Members.Subflag);
                     QualifiedAmount := 0;
                     EXIT(QualifiedAmount);
                 end;
@@ -1445,67 +1460,83 @@ codeunit 52186512 "Sky M-Banking Transactions"
                 if MinDateMember < MinDateProduct then begin
                     if not Members."Allow Retiree M-Loans" then begin
                         EligibilityFailReason := StrSubstNo('Applicant NOT eligible due to age requirements. Maximum applicant age allowed is: %1', Format(ProdFac."Max. Member Age"));
+                        Message('Applicant NOT eligible due to age requirements. Maximum applicant age allowed is: %1', Format(ProdFac."Max. Member Age"));
                         QualifiedAmount := 0;
                         EXIT(QualifiedAmount);
                     end;
                 end;
             end;
 
-            //Get and check Member deposit balance
+            // Get and check Member deposit balance
             OrdinaryAccounts.RESET;
             OrdinaryAccounts.SETRANGE("Member No.", Members."No.");
             OrdinaryAccounts.SETRANGE("Product Category", OrdinaryAccounts."Product Category"::"BOSA Deposits");
             OrdinaryAccounts.SetLoadFields(Balance);
-            IF OrdinaryAccounts.FINDFIRST THEN BEGIN
+            if OrdinaryAccounts.FINDFIRST() then begin
                 OrdinaryAccounts.CALCFIELDS(Balance);
-                if ProdFac."Deposit Qualifier %" > 0 then begin
-                    OrdinaryAccounts.Reset();
-                    OrdinaryAccounts.SetRange("Member No.", Members."No.");
-                    OrdinaryAccounts.SetRange("Product Category", OrdinaryAccounts."Product Category"::"BOSA Deposits");
-                    OrdinaryAccounts.SetLoadFields(Balance);
-                    if OrdinaryAccounts.FindFirst() then begin
-                        OrdinaryAccounts.CalcFields(Balance);
-                        DepositCap := Round(OrdinaryAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1);
-                        if DepositCap < QualifiedAmount then
-                            QualifiedAmount := DepositCap;
-                    end;
-                end;
+                Message('Ordinary Accounts Balance: %1', Format(OrdinaryAccounts.Balance));
 
-                IF OrdinaryAccounts.Balance < ProdFac."Minimum Deposit Balance" THEN BEGIN
-                    EligibilityFailReason := StrSubstNo('Applicant NOT eligible. Minimum deposit amount required is KES %1', Format(OrdinaryAccounts.Balance));
-                    QualifiedAmount := 0;
-                    EXIT(QualifiedAmount);
-                END;
-                iF OrdinaryAccounts.Balance = 0 then begin
-                    EligibilityFailReason := StrSubstNo('Applicant NOT eligible. You do not have any deposit balance');
+                if OrdinaryAccounts.Balance = 0 then begin
+                    EligibilityFailReason := 'Applicant NOT eligible. You do not have any deposit balance';
                     QualifiedAmount := 0;
                     EXIT(QualifiedAmount);
                 end;
-            END;
 
+                if OrdinaryAccounts.Balance < ProdFac."Minimum Deposit Balance" then begin
+                    EligibilityFailReason := StrSubstNo(
+                        'Applicant NOT eligible. Minimum deposit amount required is KES %1',
+                        Format(ProdFac."Minimum Deposit Balance")
+                    );
+                    QualifiedAmount := 0;
+                    EXIT(QualifiedAmount);
+                end;
+            end;
+            // Find FOSA transactional account
             saccoAccount.RESET;
             saccoAccount.SETRANGE(saccoAccount."Member No.", Members."No.");
             saccoAccount.SetRange("Product Category", saccoAccount."Product Category"::"FOSA Account");
             saccoAccount.SetCurrentKey(Blocked);
             saccoAccount.SetRange("Product Type", '191');
+            Message('Searching for FOSA transactional account for Member: %1', Members."No.");
 
             saccoAccount.SetLoadFields(
                 "No.", "Member No.", Status, Blocked
             );
-            IF saccoAccount.FIND('-') THEN BEGIN
-                STOAmount := ComputeSTODeductions(saccoAccount."No.");
 
-                if ProdFac."Salary Income Types" = ProdFac."Salary Income Types"::Pension then begin
-                    SalAvg := Globalfunc.GetSmallestSalary(saccoAccount."No.", Incomsal::Pension);
+            IF saccoAccount.FIND('-') THEN BEGIN
+
+                STOAmount := ComputeSTODeductions(saccoAccount."No.");
+                Message('STO Amount: %1', Format(STOAmount));
+
+                if ProdFac."Use Salary Average" then begin
+                    SalAvg := Globalfunc.GetAzimaSMSLoanSalaryAverage(saccoAccount."No.", Incomsal::Salary);
+                    Message('Salary Average (up to 12M): %1', Format(SalAvg));
                 end else begin
-                    SalAvg := Globalfunc.GetSmallestSalary(saccoAccount."No.", Incomsal::Salary);
+                    if ProdFac."Salary Income Types" = ProdFac."Salary Income Types"::Pension then begin
+                        SalAvg := Globalfunc.GetSmallestSalary(saccoAccount."No.", Incomsal::Pension);
+                        Message('Pension Average: %1', Format(SalAvg));
+                    end else begin
+                        SalAvg := Globalfunc.GetSmallestSalary(saccoAccount."No.", Incomsal::Salary);
+                        Message('Salary Average: %1', Format(SalAvg));
+                    end;
                 end;
 
+                Message('Least Salary Rate %: %1', Format(ProdFac."Least Sal Rate %"));
                 if ProdFac."Least Sal Rate %" <> 0 then begin
                     SalAvg := (ProdFac."Least Sal Rate %" / 100) * SalAvg;
+                    message('Salary Average after applying least salary rate: %1', Format(SalAvg));
+                end;
+
+                if SalAvg <= 0 then begin
+                    EligibilityFailReason := StrSubstNo('Applicant NOT eligible due to salary requirements');
+                    Message('SalAvg <= 0. Applicant NOT eligible due to salary requirements');
+                    QualifiedAmount := 0;
+                    EXIT(QualifiedAmount);
                 end;
 
                 LoanRec := ComputeLoanDeductions(saccoAccount."Member No.");
+                Message('Loan Deductions: %1', Format(LoanRec));
+
                 IF (saccoAccount.Status <> saccoAccount.Status::Active) OR (saccoAccount.Blocked <> saccoAccount.Blocked::" ") THEN BEGIN
                     EligibilityFailReason := StrSubstNo('Applicant NOT eligible. Transaction account status is %.', Format(saccoAccount.Status));
                     if saccoAccount.Blocked <> saccoAccount.Blocked::" " then begin
@@ -1517,10 +1548,10 @@ codeunit 52186512 "Sky M-Banking Transactions"
 
                 //confirm if loan exist of same type
                 if ProdFac."Type of Discounting" <> ProdFac."Type of Discounting"::"Dividend Discounting" then begin
+                    Message('Type of Discounting: %1', Format(ProdFac."Type of Discounting"));
 
                     RelatedProduct.RESET;
                     RelatedProduct.SETRANGE("Product Code", ProductID);
-
                     RelatedProduct.SetLoadFields("Product To Bridge");
 
                     IF RelatedProduct.FINDSET THEN BEGIN
@@ -1533,8 +1564,10 @@ codeunit 52186512 "Sky M-Banking Transactions"
                             LoanApp.SetLoadFields("Loan No.");
                             IF LoanApp.FINDSET THEN BEGIN
                                 REPEAT
+                                    Message('Allow Multiple Running Loans: %1', Format(ProdFac."Allow Multiple Running Loans"));
                                     IF ProdFac."Allow Multiple Running Loans" = FALSE THEN BEGIN
                                         EligibilityFailReason := StrSubstNo('Applicant NOT eligible due to having related loan product');
+                                        Message('Applicant NOT eligible due to having related loan product');
                                         QualifiedAmount := 0;
                                         EXIT(QualifiedAmount);
                                     END;
@@ -1556,6 +1589,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     // END;
 
                     QualifiedAmount := DividenceAdvanceQualification(MemberNo, ProductID);
+                    Message('Qualified Amount: %1', Format(QualifiedAmount));
 
                     // Check arrears amt existing
                     // The arrears not to restrict qualification but recover all arrears.
@@ -1564,7 +1598,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
                         Netamt := 0;
                         LoanArr.Reset();
                         LoanArr.setRange("Member No.", Members."No.");
-                        LoanArr.SetFilter("Loan Product Type", '<>FGL&<>BGL');
+                        LoanArr.SetFilter("Loan Product Type", '<>FGL&<>BGL'); // Todo 
+                        Message('Loan product type filter: %1', Format(LoanArr.GetFilter("Loan Product Type")));
                         LoanArr.CalcFields("Total Balance", "Amount In Arreas SASRA", "Loans Category-SASRA");
                         //LoanArr.SetFilter("Loans Category-SASRA", '<>%1', loans."Loans Category-SASRA"::Perfoming);
                         LoanArr.SetFilter("Total Balance", '>0');
@@ -1584,6 +1619,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
                         end;
                     end;
 
+                    // Deposit cap 
                     if ProdFac."Deposit Qualifier %" > 0 then begin
                         OrdinaryAccounts.Reset();
                         OrdinaryAccounts.SetRange("Member No.", Members."No.");
@@ -1592,29 +1628,24 @@ codeunit 52186512 "Sky M-Banking Transactions"
                         if OrdinaryAccounts.FindFirst() then begin
                             OrdinaryAccounts.CalcFields(Balance);
                             DepositCap := Round(OrdinaryAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1);
+                            if DepositCap > ProdFac."Maximum Loan Amount" then
+                                DepositCap := ProdFac."Maximum Loan Amount";
                             if DepositCap < QualifiedAmount then
                                 QualifiedAmount := DepositCap;
                         end;
                     end;
 
-                    if ProdFac."Deposit Qualifier %" > 0 then begin
-                        OrdinaryAccounts.Reset();
-                        OrdinaryAccounts.SetRange("Member No.", Members."No.");
-                        OrdinaryAccounts.SetRange("Product Category", OrdinaryAccounts."Product Category"::"BOSA Deposits");
-                        OrdinaryAccounts.SetLoadFields(Balance);
-                        if OrdinaryAccounts.FindFirst() then begin
-                            OrdinaryAccounts.CalcFields(Balance);
-                            DepositCap := Round(OrdinaryAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1);
-                            if DepositCap < QualifiedAmount then
-                                QualifiedAmount := DepositCap;
-                        end;
-                    end;
+                    if QualifiedAmount > ProdFac."Maximum Loan Amount" then
+                        QualifiedAmount := ProdFac."Maximum Loan Amount";
 
                     exit(QualifiedAmount);
+                    Message('Qualified Amount: %1', Format(QualifiedAmount));
                 end;
 
                 //Exisiting loans
+                Message('Type of Discounting: %1', Format(ProdFac."Type of Discounting"));
                 if ProdFac."Type of Discounting" <> ProdFac."Type of Discounting"::"Dividend Discounting" then begin
+
                     if not ProdFac."Allow Multiple Running Loans" then begin
                         Loans.RESET;
                         Loans.SETRANGE(Loans."Member No.", saccoAccount."Member No.");
@@ -1629,9 +1660,24 @@ codeunit 52186512 "Sky M-Banking Transactions"
                         END;
                     end;
 
+                    // Biashara Loan Qualification
+                    Message('Use Contribution Qualification: %1', Format(ProdFac."Use Contribution Qualification"));
+                    if ProdFac."Use Contribution Qualification" then begin
+                        QualifiedAmount := GetBiasharaQualifiedAmount(
+                            MemberNo,
+                            ProductID,
+                            saccoAccount."No.",
+                            EligibilityFailReason
+                        );
+                        exit(QualifiedAmount);
+                    end;
+                    Message('Requires Salary Processing: %1', Format(ProdFac."Requires Salary Processing"));
                     if ProdFac."Requires Salary Processing" = false then begin
                         EligibilityFailReason := '';
                         QualifiedAmount := ProdFac."Maximum Loan Amount";
+                        Message('Qualified Amount: %1', Format(QualifiedAmount));
+
+                        Message('Deposit Qualifier %: %1', Format(ProdFac."Deposit Qualifier %"));
 
                         if ProdFac."Deposit Qualifier %" > 0 then begin
                             OrdinaryAccounts.Reset();
@@ -1641,6 +1687,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
                             if OrdinaryAccounts.FindFirst() then begin
                                 OrdinaryAccounts.CalcFields(Balance);
                                 DepositCap := Round(OrdinaryAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1);
+                                if DepositCap > ProdFac."Maximum Loan Amount" then
+                                    DepositCap := ProdFac."Maximum Loan Amount";
                                 if DepositCap < QualifiedAmount then
                                     QualifiedAmount := DepositCap;
                             end;
@@ -1651,11 +1699,13 @@ codeunit 52186512 "Sky M-Banking Transactions"
 
                     if SalAvg <= 0 then begin
                         EligibilityFailReason := StrSubstNo('Applicant NOT eligible due to salary requirements');
+                        Message('SalAvg <= 0. Applicant NOT eligible due to salary requirements');
                         QualifiedAmount := 0;
                         EXIT(QualifiedAmount);
                     end;
 
                     // Weekend Njema Loan
+                    Message('Appraisal - Omit Deductions: %1', Format(ProdFac."Appraisal - Omit Deductions"));
                     if ProdFac."Appraisal - Omit Deductions" then begin
                         STOAmount := 0;
                         LoanRec := 0;
@@ -1703,24 +1753,15 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     // amtQualified := SalaryAmount * (ProdFac."Net Salary Multiplier %" / 100);
 
                     SalAvg := SalAvg - (STOAmount + LoanRec);
+                    Message('Salary Average after deductions: %1', Format(SalAvg));
 
                     amtQualified := SalAvg * (ProdFac."Net Salary Multiplier %" / 100);
-                    IF amtQualified < 0 THEN amtQualified := 0;
+                    message('Qualified Amount before deposit cap: %1', Format(amtQualified));
 
-                    if ProdFac."Deposit Qualifier %" > 0 then begin
-                        OrdinaryAccounts.Reset();
-                        OrdinaryAccounts.SetRange("Member No.", Members."No.");
-                        OrdinaryAccounts.SetRange("Product Category", OrdinaryAccounts."Product Category"::"BOSA Deposits");
-                        OrdinaryAccounts.SetLoadFields(Balance);
-                        if OrdinaryAccounts.FindFirst() then begin
-                            OrdinaryAccounts.CalcFields(Balance);
-                            DepositCap := Round(OrdinaryAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1);
-                            if DepositCap < amtQualified then
-                                amtQualified := DepositCap;
-                        end;
-                    end;
+                    IF amtQualified < 0 THEN
+                        amtQualified := 0;
 
-                    QualifiedAmount := amtQualified;
+
 
                     // Weekend Njema Loan
 
@@ -1730,8 +1771,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
 
                     if QualifiedAmount > ProdFac."Maximum Loan Amount" then begin
                         QualifiedAmount := ProdFac."Maximum Loan Amount";
+                        Message('Qualified Amount after applying maximum loan amount: %1', Format(QualifiedAmount));
                     end;
-                    EligibilityFailReason := '';
 
                     if ProdFac."Deposit Qualifier %" > 0 then begin
                         OrdinaryAccounts.Reset();
@@ -1741,10 +1782,17 @@ codeunit 52186512 "Sky M-Banking Transactions"
                         if OrdinaryAccounts.FindFirst() then begin
                             OrdinaryAccounts.CalcFields(Balance);
                             DepositCap := Round(OrdinaryAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1);
-                            if DepositCap < QualifiedAmount then
-                                QualifiedAmount := DepositCap;
+                            Message('Deposit Cap based on deposit qualifier %: %1', Format(DepositCap));
+                            if DepositCap > ProdFac."Maximum Loan Amount" then
+                                DepositCap := ProdFac."Maximum Loan Amount";
+                            Message('Deposit Cap after applying maximum loan amount: %1', Format(DepositCap));
+                            if DepositCap < amtQualified then
+                                amtQualified := DepositCap;
+                            Message('Qualified Amount after applying deposit cap: %1', Format(amtQualified));
                         end;
                     end;
+                    EligibilityFailReason := '';
+                    QualifiedAmount := amtQualified;
                     EXIT(QualifiedAmount);
                 end;
             END ELSE BEGIN
@@ -1762,18 +1810,29 @@ codeunit 52186512 "Sky M-Banking Transactions"
             OrdinaryAccounts.CALCFIELDS(Balance);
 
             if ProdFac."Deposit Qualifier %" > 0 then begin
-                amtQualified := Round(OrdinaryAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1)
+                amtQualified := Round(OrdinaryAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1);
+                Message('Qualified Amount based on deposit qualifier %: %1', Format(amtQualified));
             end else begin
                 amtQualified := OrdinaryAccounts.Balance;
             end;
 
             iF OrdinaryAccounts.Balance < amtQualified then begin
                 amtQualified := OrdinaryAccounts.Balance;
+                Message('Qualified Amount adjusted to deposit balance: %1', Format(amtQualified));
             end;
+
+            if amtQualified > ProdFac."Maximum Loan Amount" then
+                amtQualified := ProdFac."Maximum Loan Amount";
+            Message('Qualified Amount after applying maximum loan amount: %1', Format(amtQualified));
 
             if amtQualified <= 0 then begin
                 EligibilityFailReason := StrSubstNo(
                     'Applicant NOT eligible. %1% of your deposit balance KES %2 qualifies you for KES %3',
+                    Format(ProdFac."Deposit Qualifier %", 0, '<Integer>'),
+                    Format(OrdinaryAccounts.Balance, 0, '<Precision,2:2><Standard Format,0>'),
+                    Format(Round(OrdinaryAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1), 0, '<Precision,2:2><Standard Format,0>')
+                );
+                Message('Applicant NOT eligible. %1% of your deposit balance KES %2 qualifies you for KES %3',
                     Format(ProdFac."Deposit Qualifier %", 0, '<Integer>'),
                     Format(OrdinaryAccounts.Balance, 0, '<Precision,2:2><Standard Format,0>'),
                     Format(Round(OrdinaryAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1), 0, '<Precision,2:2><Standard Format,0>')
@@ -1785,6 +1844,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
             EligibilityFailReason := '';
         END;
         exit(amtQualified);
+        Message('Qualified Amount: %1', Format(amtQualified));
     end;
 
     procedure ComputeSTODeductions(AccountNo: Code[20]): Decimal
@@ -3638,6 +3698,119 @@ codeunit 52186512 "Sky M-Banking Transactions"
 
             until LBalance < 1;
         end;
+    end;
+
+    local procedure GetBiasharaQualifiedAmount(
+    MemberNo: Code[20];
+    ProductID: Code[10];
+    FOSAAccountNo: Code[20];
+    var EligibilityFailReason: Text
+): Decimal
+    var
+        ProdFac: Record "Product Factory";
+        SavAccounts: Record "Savings Accounts";
+        SavLedger: Record "Savings Ledger Entry";
+        MonthStart: Date;
+        MonthEnd: Date;
+        MonthCredits: Decimal;
+        TotalCredits: Decimal;
+        QualifiedAmount: Decimal;
+        ActiveMonths: Integer;
+        DepositCap: Decimal;
+        i: Integer;
+        MonthLabel: Text;
+    begin
+        QualifiedAmount := 0;
+        TotalCredits := 0;
+        ActiveMonths := 0;
+        DepositCap := 0;
+
+        ProdFac.GET(ProductID);
+
+        for i := 1 to 3 do begin
+            MonthStart := DMY2Date(1,
+                Date2DMY(CalcDate('<-' + Format(i) + 'M>', Today()), 2),
+                Date2DMY(CalcDate('<-' + Format(i) + 'M>', Today()), 3)
+            );
+            MonthEnd := CalcDate('<CM>', MonthStart);
+            MonthLabel := Format(MonthStart, 0, '<Month Text> <Year4>');
+            MonthCredits := 0;
+
+            // BOSA Deposit credits
+            SavAccounts.Reset();
+            SavAccounts.SetRange("Member No.", MemberNo);
+            SavAccounts.SetRange("Product Category", SavAccounts."Product Category"::"BOSA Deposits");
+            SavAccounts.SetLoadFields("No.");
+            if SavAccounts.FindSet() then
+                repeat
+                    SavLedger.Reset();
+                    SavLedger.SetRange("Customer No.", SavAccounts."No.");
+                    SavLedger.SetRange("Posting Date", MonthStart, MonthEnd);
+                    SavLedger.SetFilter("Credit Amount", '>0');
+                    SavLedger.CalcSums("Credit Amount");
+                    MonthCredits += SavLedger."Credit Amount";
+                until SavAccounts.Next() = 0;
+
+            // FOSA credits
+            SavLedger.Reset();
+            SavLedger.SetRange("Customer No.", FOSAAccountNo);
+            SavLedger.SetRange("Posting Date", MonthStart, MonthEnd);
+            SavLedger.SetFilter("Credit Amount", '>0');
+            SavLedger.CalcSums("Credit Amount");
+            MonthCredits += SavLedger."Credit Amount";
+
+            if MonthCredits > 0 then
+                ActiveMonths += 1
+            else begin
+                EligibilityFailReason := StrSubstNo(
+                    'Applicant NOT eligible. No contribution activity found in %1',
+                    MonthLabel
+                );
+                exit(0);
+            end;
+
+            TotalCredits += MonthCredits;
+        end;
+
+        if ActiveMonths < 3 then begin
+            EligibilityFailReason :=
+                'Applicant NOT eligible. Active contributions required for 3 consecutive months';
+            exit(0);
+        end;
+
+        QualifiedAmount := Round(TotalCredits / 3, 1);
+
+        if QualifiedAmount > ProdFac."Maximum Loan Amount" then
+            QualifiedAmount := ProdFac."Maximum Loan Amount";
+
+        if ProdFac."Deposit Qualifier %" > 0 then begin
+            SavAccounts.Reset();
+            SavAccounts.SetRange("Member No.", MemberNo);
+            SavAccounts.SetRange("Product Category", SavAccounts."Product Category"::"BOSA Deposits");
+            SavAccounts.SetLoadFields(Balance);
+            if SavAccounts.FindFirst() then begin
+                SavAccounts.CalcFields(Balance);
+                DepositCap := Round(SavAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1);
+
+                if DepositCap > ProdFac."Maximum Loan Amount" then
+                    DepositCap := ProdFac."Maximum Loan Amount";
+
+                if DepositCap < QualifiedAmount then
+                    QualifiedAmount := DepositCap;
+            end;
+        end;
+
+        if QualifiedAmount < ProdFac."Minimum Loan Amount" then begin
+            EligibilityFailReason := StrSubstNo(
+                'Applicant NOT eligible. Qualified amount KES %1 is below the minimum of KES %2',
+                Format(Round(QualifiedAmount, 1)),
+                Format(ProdFac."Minimum Loan Amount")
+            );
+            exit(0);
+        end;
+
+        EligibilityFailReason := '';
+        exit(QualifiedAmount);
     end;
 
 

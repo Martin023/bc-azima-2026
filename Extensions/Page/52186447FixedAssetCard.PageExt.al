@@ -70,7 +70,7 @@ PageExtension 52186447 pageextension52186447 extends "Fixed Asset Card"
             }
             field("Remaining Lease"; RemainingLease)
             {
-                Caption = 'Remaining Lease(Years)';
+                Caption = 'Remaining Lease(Months)';
             }
 
             field("Employee Responsible"; Rec."Employee Responsible")
@@ -112,6 +112,11 @@ PageExtension 52186447 pageextension52186447 extends "Fixed Asset Card"
         addafter(DepreciationMethod)
         {
             field("Straight Line %"; FADepreciationBook."Straight-Line %") { ApplicationArea = basic; }
+            field("Expected Useful Life"; Rec."Expected Useful Life") { ApplicationArea = basic; }
+        }
+        addafter(Acquired)
+        {
+            field(Disposed; Rec.Disposed) { ApplicationArea = basic; }
         }
         modify("FA Class Code")
         {
@@ -206,8 +211,8 @@ PageExtension 52186447 pageextension52186447 extends "Fixed Asset Card"
         myInt: Integer;
     begin
         FnRestrictAccess();
-        if (rec."Lease Commence Date" <> 0D) and (rec."Lease End Date" <> 0D) then begin
-            RemainingLease := round((rec."Lease End Date" - rec."Lease Commence Date"), 1, '=') / 360;
+        if (rec."Lease End Date" <> 0D) then begin
+            RemainingLease := round((rec."Lease End Date" - Today), 1, '<') / 30;
         end;
     end;
 
@@ -216,6 +221,9 @@ PageExtension 52186447 pageextension52186447 extends "Fixed Asset Card"
         myInt: Integer;
     begin
         FnRestrictAccess();
+        if (rec."Lease End Date" <> 0D) then begin
+            RemainingLease := round((rec."Lease End Date" - Today), 1, '<') / 30;
+        end;
     end;
 
     var
