@@ -74,6 +74,7 @@ table 52185703 "Account Signatories"
                     "Date Of Birth" := Members."Date of Birth";
                     "Staff/Payroll" := Members."Payroll/Staff No.";
                     "PIN Number" := Members."P.I.N Number";
+                    "Phone No." := Members."Phone No.";
 
                     ImageData.Reset;
                     ImageData.SetRange(ImageData."Member No", Members."No.");
@@ -103,7 +104,7 @@ table 52185703 "Account Signatories"
         field(20; Gender; Code[10])
         {
         }
-        field(21; "Phone No."; Code[20])
+        field(21; "Phone No."; Code[80])
         {
         }
         field(22; "Account Type"; Option)
@@ -119,7 +120,7 @@ table 52185703 "Account Signatories"
         field(24; "Can Access Member Portal"; Boolean)
         {
         }
-        field(25; Exited; Boolean) {}
+        field(25; Exited; Boolean) { }
     }
 
     keys
