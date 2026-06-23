@@ -209,15 +209,21 @@ table 52187421 "Product Variations"
                     if LoansRec.FindFirst() then begin
                         Rec."Product Type" := LoansRec."Loan Product Type";
                         Rec."Product Name" := LoansRec."Loan Product Type Name";
-
-                        Rec."Amount Off" := LoansRec.Repayment;
+                        if LoansRec."Interest Calculation Method" = LoansRec."Interest Calculation Method"::"Reducing Balance" then begin
+                            Rec."Amount Off" := LoansRec."Loan Principle Repayment";
+                            Rec."Minimum Variated Amount" := LoansRec."Loan Principle Repayment";
+                        end
+                        else begin
+                            Rec."Amount Off" := LoansRec.Repayment;
+                            Rec."Minimum Variated Amount" := LoansRec.Repayment;
+                        end;
 
                         if Rec."Initial Repayment" = 0 then begin
-                            Rec."Initial Repayment" := LoansRec.Repayment;
+                            Rec."Initial Repayment" := "Amount Off";
                         end;
                         LoansRec.CalcFields("Total Loan Balance", "Daily Interest");
                         Rec.Balance := LoansRec."Total Loan Balance" + LoansRec."Daily Interest";
-                        Rec."Minimum Variated Amount" := LoansRec.Repayment;
+
 
                         Checkoffline.Reset();
                         Checkoffline.SetRange("Loan No.", Rec."Account No");
@@ -597,7 +603,7 @@ table 52187421 "Product Variations"
                 NoSetup.Get();
                 NoSetup.TestField(NoSetup."Savings Variations");
                 // NoSeriesMgt.InitSeries(NoSetup."Savings Variations", NoSetup."Savings Variations", 0D, "No.", "No. Series");
-                // "No." := NoSeriesCU.GetNextNo(NoSetup."Savings Variations");
+                "No." := NoSeriesCU.GetNextNo(NoSetup."Savings Variations");
             end;
         end;
         "Application Date" := Today;
