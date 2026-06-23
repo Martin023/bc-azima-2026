@@ -717,6 +717,18 @@ page 52186773 "Loans card"
                     ApprovalsMgmt.OpenApprovalEntriesPage(rec.RecordId);
                 end;
             }
+            action(Comments)
+            {
+                Caption = 'Approval/Rejection Comments';
+                ApplicationArea = Basic, Suite;
+                Image = ViewComments;
+                Promoted = true;
+                PromotedCategory = Category9;
+
+                RunObject = page "Comments List";
+                RunPageLink = "Header No." = field("Loan No.");
+                RunPageView = where(Types = CONST(comment));
+            }
             action("Loans Topped Up")
             {
                 ApplicationArea = Basic, Suite;

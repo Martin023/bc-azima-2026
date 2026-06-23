@@ -3331,6 +3331,23 @@ Codeunit 52185506 "Global Functions"
         exit(TotalCharge + TExciseDuty);
     end;
 
+    procedure GetPaidReadmissionFees(MemberNo: Code[20]; RegistrationFeeAccount: Code[50]; RejoiningDate: Date): Decimal
+    var
+        Members: Record Members;
+        SavingsLedgerEntry: Record "Savings Ledger Entry";
+        TotalPaid: Decimal;
+    begin
+        Clear(TotalPaid);
+        SavingsLedgerEntry.Reset;
+        SavingsLedgerEntry.Setrange("Member No.", MemberNo);
+        SavingsLedgerEntry.Setrange("Customer No.", RegistrationFeeAccount);
+        SavingsLedgerEntry.Setfilter("Posting Date", '%1..%2', RejoiningDate, Today);
+        if SavingsLedgerEntry.Find('-') then begin
+            SavingsLedgerEntry.Calcsums(Amount);
+            TotalPaid := Abs(SavingsLedgerEntry.Amount);
+        end;
+        exit(TotalPaid);
+    end;
 }
 
 

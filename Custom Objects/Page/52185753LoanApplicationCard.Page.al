@@ -309,7 +309,7 @@ page 52185753 "Loan Application Card"
                 field(Interest; Rec.Interest)
                 {
                     ApplicationArea = Basic, Suite;
-                    Editable = ApplicationDetailsEdit;
+                    Editable = false;
                 }
                 field("Cost Value of House"; Rec."Cost Value of House")
                 {
@@ -846,8 +846,8 @@ page 52185753 "Loan Application Card"
                 PromotedCategory = Process;
                 PromotedIsBig = true;
                 RunObject = Page "Loan Top Up";
-                RunPageLink = "Loan No." = FIELD("Loan No.");
-                //   "Client Code" = FIELD("Member No.");
+                RunPageLink = "Loan No." = FIELD("Loan No."),
+                  "Client Code" = FIELD("Member No.");
             }
             // action("Loan Appraisal Summary")
             // {
@@ -1745,14 +1745,7 @@ page 52185753 "Loan Application Card"
                                                     Error(Text008, ProdFac."Minimum Guarantors on Max Amt", ProdFac."Max Amt on Guarantors");
                                                 if LoanGua.Count < ProdFac."Minimum Guarantors" then
                                                     Error(Text006, ProdFac."Minimum Guarantors");
-                                                //******************************Policies states any loan above 2M should have minimum of 10 guarantors
 
-                                                //TO DO:Remove the hard code logic
-                                                if Rec."Approved Amount" > 2000000 then begin
-                                                    if LoanGua.Count < 10 then
-                                                        Error(Text006, 10);
-                                                end;
-                                                //*******************************************End of policies..... 
                                             end;
                                             LoanGua.CalcSums("Amount Guaranteed");
                                             LoanGua.CalcFields("Total Sum");
@@ -1956,11 +1949,11 @@ page 52185753 "Loan Application Card"
                     AppraisaComme: Record "Loan Appraisal Comments";
                 begin
                     //Rec.TestField(Status, Rec.Status::Deffered);
-                    AppraisaComme.Reset();
-                    AppraisaComme.SetRange("Loan No.", Rec."Loan No.");
-                    AppraisaComme.SetRange(Commented, false);
-                    if not AppraisaComme.FindFirst() then
-                        Error('Loan Appraisal Comments Must have a value');
+                    // AppraisaComme.Reset();
+                    // AppraisaComme.SetRange("Loan No.", Rec."Loan No.");
+                    // AppraisaComme.SetRange(Commented, false);
+                    // if not AppraisaComme.FindFirst() then
+                    //     Error('Loan Appraisal Comments Must have a value');
                     if (Rec.Status = Rec.Status::Deffered) or (Rec.Status = Rec.Status::Approved) or (Rec.Status = Rec.Status::Pending) or (Rec.Status = Rec.Status::Rejected) or (Rec.Status = Rec.Status::Archived)
                      then begin
                         if not Confirm('Are you sure you want to re-open the loan?') then exit;
