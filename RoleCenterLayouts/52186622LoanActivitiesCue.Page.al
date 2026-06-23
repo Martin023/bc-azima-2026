@@ -125,13 +125,13 @@ page 52186622 "Loan Processing Activities"
                 }
                 field("Loan Approvals"; Rec."Approved Loans")
                 {
-                    // Image = none;
+                    Image = none;
 
                 }
                 field("Rejected Loans"; Rec."Rejected Loans")
                 {
                     ApplicationArea = Basic;
-                    // Image = none;
+                    Image = none;
 
                 }
                 field("Deffered Loans"; Rec."Deffered Loans")
@@ -150,7 +150,7 @@ page 52186622 "Loan Processing Activities"
                 {
                     ApplicationArea = Basic;
 
-                    Image = Document;
+                    Image = none;
                     LookupPageId = "Loan Posted List";
                     DrillDownPageId = "Loan Posted list";
                 }

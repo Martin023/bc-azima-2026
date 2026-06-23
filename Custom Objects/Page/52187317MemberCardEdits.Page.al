@@ -744,7 +744,7 @@ page 52187317 "Member Card Edits"
 
                     ApplicationArea = Basic, Suite;
                     ShowMandatory = true;
-                    TableRelation = Customer WHERE("Account Type" = CONST(Employer));
+                    TableRelation = Customer WHERE("Account Type" = CONST("Employer code"));
                     trigger OnValidate()
                     var
                         Customer: Record Customer;
@@ -1842,7 +1842,7 @@ page 52187317 "Member Card Edits"
                 if SystemFilterFields."Field ID" = 12 then begin
                     "Global Dimension 2 Code" := FieldRef.Value;
                 end;
-            
+
                 if SystemFilterFields."Field ID" = 80 then begin
                     "Recruited By" := FieldRef.Value;
                 end;

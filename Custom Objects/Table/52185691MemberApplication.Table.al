@@ -592,8 +592,10 @@ table 52185691 "Member Application"
 
         field(39; "Employer Code"; Code[20])
         {
-            // TableRelation = Customer WHERE("Account Type" = CONST("Employer Code"));
-            TableRelation = Customer WHERE("Account Type" = CONST(Employer));
+            //IF ("Account Type" = CONST("G/L Account")) "G/L Account" WHERE
+            TableRelation = IF ("Self Employed" = const(true)) Customer WHERE("Account Type" = CONST("Employer Code"), "Self Employed" = const(true))
+            else
+            Customer WHERE("Account Type" = CONST("Employer Code"), "Self Employed" = const(false));
             trigger OnValidate()
             begin
                 CalcFields("Employer Name")
@@ -689,7 +691,7 @@ table 52185691 "Member Application"
 
         field(46; "Work Station"; Code[20])
         {
-            TableRelation = "Electrol Zones/Area Svr Center".Code WHERE(Type = CONST("Work Station"),"Employer Code" = field("Employer Code"));
+            TableRelation = "Electrol Zones/Area Svr Center".Code WHERE(Type = CONST("Work Station"), "Employer Code" = field("Employer Code"));
         }
 
         field(47; "Employment Designation"; Text[50])
@@ -1652,14 +1654,15 @@ table 52185691 "Member Application"
             Error(FieldLengthError, FldLength);
     end;
 
-    procedure ValidateIdentificationTypes(IdentificationType: enum "Identification Type"; Identification: Code[30]; PrimaryOrSecondaryID: Option Primary,Secondary): Code[30]
+    procedure ValidateIdentificationTypes(IdentificationType: enum "Identification Type"; Identification: Code[30];
+                                                                  PrimaryOrSecondaryID: Option Primary,Secondary): Code[30]
     var
         Members: Record Members;
         Characters: Text;
     begin
 
         if IdentificationType = IdentificationType::"ID Number" then begin
-            if StrLen(Identification) > 9 then Error('ID Number cannot have more than 9 characters');
+            if StrLen(Identification) > 15 then Error('ID Number cannot have more than 15 characters');
             if StrLen(Identification) < 5 then Error('ID Number cannot have less than 7 characters');
             Characters := 'ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_~{}[];:"|\ ,./<>?-= ''';
             if not ValidateShouldNotHaves(Identification, Characters) then Error('ID Number has invalid characters');

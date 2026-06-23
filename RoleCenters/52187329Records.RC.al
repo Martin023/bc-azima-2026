@@ -907,44 +907,44 @@ page 52187329 "Records"
                     //     RunPageView = where(Status = filter(<> archived));
                     // }
                 }
-                group("File Batching & Archiving")
-                {
-                    action("Batching & Archiving Process")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Open File Batch';
-                        RunObject = page "Batching Process List";
-                        RunPageView = where(Status = const(Open));
-                    }
-                    action("Batches Pending Approval")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'File Batch Pending Approval';
-                        RunObject = page "Batching Process List";
-                        RunPageView = where(Status = const(Pending));
-                    }
-                    action("Rejected Batches")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Rejected File Batch';
-                        RunObject = page "Batching Process List";
-                        RunPageView = where(Status = const(Rejected));
-                    }
-                    action("Approved Batches")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Approved File Batch';
-                        RunObject = page "Batching Process List";
-                        RunPageView = where(Status = const(Approved));
-                    }
-                    action("Archived File Volumes")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Archived File Volumes';
-                        //RunObject = page "Batching Lines";
-                        RunObject = page "Batching Lines List";
-                    }
-                }
+                // group("File Batching & Archiving")
+                // {
+                //     action("Batching & Archiving Process")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Open File Batch';
+                //         RunObject = page "Batching Process List";
+                //         RunPageView = where(Status = const(Open));
+                //     }
+                //     action("Batches Pending Approval")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'File Batch Pending Approval';
+                //         RunObject = page "Batching Process List";
+                //         RunPageView = where(Status = const(Pending));
+                //     }
+                //     action("Rejected Batches")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Rejected File Batch';
+                //         RunObject = page "Batching Process List";
+                //         RunPageView = where(Status = const(Rejected));
+                //     }
+                //     action("Approved Batches")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Approved File Batch';
+                //         RunObject = page "Batching Process List";
+                //         RunPageView = where(Status = const(Approved));
+                //     }
+                //     action("Archived File Volumes")
+                //     {
+                //         ApplicationArea = Basic, Suite;
+                //         Caption = 'Archived File Volumes';
+                //         //RunObject = page "Batching Lines";
+                //         RunObject = page "Batching Lines List";
+                //     }
+                // }
                 group("File Configurations.")
                 {
                     action("User Station List")

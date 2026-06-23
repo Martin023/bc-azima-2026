@@ -39,6 +39,7 @@ table 52187300 "Loan Cue"
         }
         field(8; "Overdue Loans"; Integer)
         {
+            Caption = 'Defaulted Loans';
             CalcFormula = Count(Loans WHERE(Defaulted = FILTER(true)));
             FieldClass = FlowField;
         }
