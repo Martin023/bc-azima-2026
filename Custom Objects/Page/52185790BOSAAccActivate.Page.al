@@ -165,10 +165,10 @@ page 52186088 "BOSA Account Activation"
                         rec.TestField("FOSA Main Account No.");
                         if Rec."Activation Date" <> Today then Error('Activation Date must be today');
 
-                        if rec."Transaction Type" <> '' then begin
-                            if SavAcc.GetAvailableBalance(rec."FOSA Main Account No.") < GlobalFunc.getChargesAmt(rec."Transaction Type", 0) then
-                                error('The available saving account available balance of %1 is less than charge amount of %2 that may lead to overdrawing of account!', format(SavAcc.GetAvailableBalance(rec."FOSA Main Account No.")), format(GlobalFunc.getChargesAmt(rec."Transaction Type", 0)));
-                        end;
+                        // if rec."Transaction Type" <> '' then begin
+                        //     if SavAcc.GetAvailableBalance(rec."FOSA Main Account No.") < GlobalFunc.getChargesAmt(rec."Transaction Type", 0) then
+                        //         error('The available saving account available balance of %1 is less than charge amount of %2 that may lead to overdrawing of account!', format(SavAcc.GetAvailableBalance(rec."FOSA Main Account No.")), format(GlobalFunc.getChargesAmt(rec."Transaction Type", 0)));
+                        // end;
 
                         //CheckCharges- not to overdraw
                         //if Rec."Activation Date" <> Today then Error('Activation Date must be today');
