@@ -129,7 +129,7 @@ report 52186018 "Generate Bulk Refunds"
                     field(EmployerCode; EmployerCode)
                     {
                         Caption = 'Employer Code';
-                        tablerelation = Customer where("Account Type" = const(Employer));
+                        tablerelation = Customer where("Account Type" = const("Employer Code"));
                     }
                 }
             }

@@ -331,7 +331,7 @@ page 52186351 "File Tracker Card"
             group(Location)
             {
                 Editable = CurrPageEditable;
-                Visible = TrackerTabEditable;
+                //Visible = TrackerTabEditable;
                 field("Move to"; Rec."Move to")
                 {
                     ApplicationArea = Basic, Suite;

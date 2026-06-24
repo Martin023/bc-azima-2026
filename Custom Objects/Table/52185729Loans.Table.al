@@ -660,7 +660,7 @@ table 52185729 Loans
                         if Mem."Primary Identification" = '' then Message('Member has no Id number captured');
                         if Mem."Phone No." = '' then Message('Member has no phone number captured');
                     end;
-                    if (Mem.Status <> Mem.Status::Active) and (Mem.Status <> Mem.Status::New) then begin
+                    if (Mem.Status <> Mem.Status::Active) and (Mem.Status <> Mem.Status::New) and (Mem.Status <> mem.Status::Dormant) then begin
                         //IF CONFIRM('This member is not active. Do you wish to continue with application ?',TRUE)=FALSE THEN
                         if "Dummy Appraisal" = false then Error("InactiveErr:") else Message("InactiveErr:");
                     end;
@@ -1980,7 +1980,7 @@ table 52185729 Loans
         }
         field(64; "Employer Code"; Code[100])
         {
-            TableRelation = Customer WHERE("Account Type" = CONST(Employer));
+            TableRelation = Customer WHERE("Account Type" = CONST("Employer Code"));
         }
         field(65; "Compute Interest Due on Postin"; Option)
         {

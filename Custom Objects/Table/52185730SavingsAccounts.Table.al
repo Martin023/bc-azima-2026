@@ -366,7 +366,7 @@ table 52185730 "Savings Accounts"
         field(41; "Employer Code"; Code[50])
         {
             FieldClass = Normal;
-            TableRelation = Customer WHERE("Account Type" = CONST(employer));
+            TableRelation = Customer WHERE("Account Type" = CONST("Employer Code"));
         }
         field(42; "Date of Birth"; Date)
         {

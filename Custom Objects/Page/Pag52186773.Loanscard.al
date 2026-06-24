@@ -229,6 +229,16 @@ page 52186773 "Loans card"
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
+                field("Variated Amount"; Rec."Variated Amount")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = false;
+                }
+                field("Variated By"; Rec."Variated By")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = false;
+                }
                 field("Outstanding Balance"; Rec."Outstanding Balance")
                 {
                     ApplicationArea = Basic, Suite;

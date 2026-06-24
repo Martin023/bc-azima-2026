@@ -21,9 +21,9 @@ table 52185776 "Cashier Transactions"
         }
         field(2; "Account No"; Code[20])
         {
-            TableRelation = IF ("Account Type" = CONST(Account), type = filter(<> lien)) "Savings Accounts"."No." where("Product Type" = const('191'), Status = filter(<> Closed))
+            TableRelation = IF ("Account Type" = CONST(Account), type = filter(<> lien)) "Savings Accounts"."No." where("Product Type" = filter('191|195'), Status = filter(<> Closed))
             ELSE
-            IF ("Account Type" = CONST(Account), type = filter(lien)) "Savings Accounts"."No." where(Status = filter(<> Closed), "Product Type" = const('191')) else
+            IF ("Account Type" = CONST(Account), type = filter(lien)) "Savings Accounts"."No." where(Status = filter(<> Closed), "Product Type" = filter('191|195')) else
             IF ("Account Type" = CONST(MPESA)) "Bank Account"."No." WHERE("Bank Type" = filter("Mobile Money"), "Global Dimension 1 Code" = field("Global Dimension 1 Code"));
 
             trigger OnValidate()

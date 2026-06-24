@@ -8,7 +8,7 @@ page 52186566 "Employer Code List"
     Caption = 'Employer Code List';
     PageType = List;
     SourceTable = Customer;
-    SourceTableView = where("Account Type" = filter(Employer));
+    SourceTableView = where("Account Type" = filter("Employer Code"));
     UsageCategory = Lists;
     Editable = false;
     DeleteAllowed = false;
@@ -116,17 +116,5 @@ page 52186566 "Employer Code List"
             }
         }
     }
-    trigger OnOpenPage()
-    var
-        Cust: record Customer;
-    begin
-        Cust.Reset();
-        Cust.SetRange("Account Type", Cust."Account Type"::Employer);
-        if Cust.Find('-') then begin
-            repeat
-                Cust.Validate("Responsible Employee");
-                Cust.Modify();
-            until Cust.Next = 0;
-        end;
-    end;
+
 }

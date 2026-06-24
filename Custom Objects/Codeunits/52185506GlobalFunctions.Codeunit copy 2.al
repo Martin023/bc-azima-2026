@@ -5,6 +5,16 @@ Codeunit 52185506 "Global Functions"
     begin
     end;
 
+    procedure CreateFile(MemberNo: Code[100]; FileType: Enum "File Types")
+    var
+        FilesRec: Record "Files Table";
+    begin
+        FilesRec.Init();
+        FilesRec.Validate("File Type", FileType);
+        FilesRec.Validate("File/Member No.", MemberNo);
+        FilesRec.Insert(true);
+    end;
+
     procedure FormatDate(Realdate: date) dateText: Text;
     var
         Month: Integer;
@@ -2330,55 +2340,56 @@ Codeunit 52185506 "Global Functions"
             end;
 
             //The system should allow the setting of reminders on flags that send an email alert on pre-set reminder date          
-            Comments.reset;
-            Comments.SetRange("Header No.", Members."No.");
-            Comments.SetRange("Disable Flag", false);
-            Comments.SetRange(Types, Comments.Types::"Member Flagging");
-            Comments.SetFilter(Comment, '<>%1', '');
-            Comments.SetRange("Reminder Sent", false);
-            Comments.SetFilter("Reminder Date", '<>%1', 0D);
-            if Comments.FindSet() then begin
-                repeat
-                    if UserrSetup.Get(Comments."Commented By") then begin
-                        SkyEmail.QueueOutgoingEmail(
-                            Comments."E-mail",
-                            'Account Flagging Reminder',
-                            'Dear ' + UserrSetup."Full Name" + ',' + '<br><br>' +
-                            'This is an automated reminder regarding a flagged member record that requires attention.' + '<br><br>' +
-                            'Member No: ' + Members."No." + '<br>' +
-                            'Member Name: ' + Members.Name + '<br>' +
-                            'Flag Type: ' + format(Comments.Types) + '<br>' +
-                            'Comment: ' + Comments.Comment + '<br>' +
-                            'Flagged By: ' + Comments."Commented By" + '<br>' +
-                            'Date Flagged: ' + Format(Comments.Date) + '<br>' +
-                            'Reminder Date: ' + Format(Comments."Reminder Date") + '<br>' +
-                            'Expiry Date: ' + Format(Comments."Expires At") + '<br><br>' +
-                            'Please review and take the necessary action.' + '<br><br>' +
-                            'Regards,' + '<br>' +
-                            'Azima Sacco',
-                            'HTML',
-                            'NORMAL',
-                            'BUSINESS CENTRAL'
-                        );
-                    end;
-                    Comments."Reminder Sent" := true;
-                    Comments.Modify();
-                until Comments.Next() = 0;
-            end;
+            // Comments.reset;
+            // Comments.SetRange("Header No.", Members."No.");
+            // Comments.SetRange("Disable Flag", false);
+            // Comments.SetRange(Types, Comments.Types::"Member Flagging");
+            // Comments.SetFilter(Comment, '<>%1', '');
+            // Comments.SetRange("Reminder Sent", false);
+            // Comments.SetFilter("Reminder Date", '<>%1', 0D);
+            // if Comments.FindSet() then begin
+            //     repeat
+            //         if UserrSetup.Get(Comments."Commented By") then begin
+            //             SkyEmail.QueueOutgoingEmail(
+            //                 Comments."E-mail",
+            //                 'Account Flagging Reminder',
+            //                 'Dear ' + UserrSetup."Full Name" + ',' + '<br><br>' +
+            //                 'This is an automated reminder regarding a flagged member record that requires attention.' + '<br><br>' +
+            //                 'Member No: ' + Members."No." + '<br>' +
+            //                 'Member Name: ' + Members.Name + '<br>' +
+            //                 'Flag Type: ' + format(Comments.Types) + '<br>' +
+            //                 'Comment: ' + Comments.Comment + '<br>' +
+            //                 'Flagged By: ' + Comments."Commented By" + '<br>' +
+            //                 'Date Flagged: ' + Format(Comments.Date) + '<br>' +
+            //                 'Reminder Date: ' + Format(Comments."Reminder Date") + '<br>' +
+            //                 'Expiry Date: ' + Format(Comments."Expires At") + '<br><br>' +
+            //                 'Please review and take the necessary action.' + '<br><br>' +
+            //                 'Regards,' + '<br>' +
+            //                 'Azima Sacco',
+            //                 'HTML',
+            //                 'NORMAL',
+            //                 'BUSINESS CENTRAL'
+            //             );
+            //         end;
+            //         Comments."Reminder Sent" := true;
+            //         Comments.Modify();
+            //     until Comments.Next() = 0;
+            // end;
 
             //The system should allow setting of a time-based flag that expires after a set period.
-            Comments.Reset();
-            Comments.SetRange("Header No.", Members."No.");
-            Comments.SetRange("Disable Flag", false);
-            Comments.SetRange(Types, Comments.Types::"Member Flagging");
-            Comments.SetFilter(Comment, '<>%1', '');
-            Comments.SetFilter("Expires At", '<=%1', Today);
-            if Comments.FindSet() then begin
-                repeat
-                    Comments."Disable Flag" := true;
-                    Comments.Modify();
-                until Comments.Next() = 0;
-            end;
+            // Comments.Reset();
+            // Comments.SetRange("Header No.", Members."No.");
+            // Comments.SetRange("Disable Flag", false);
+            // Comments.SetRange(Types, Comments.Types::"Member Flagging");
+            // Comments.SetFilter(Comment, '<>%1', '');
+            // Comments.SetFilter("Expires At", '<>%1', 0D);
+            // Comments.SetFilter("Expires At", '<=%1', Today);
+            // if Comments.FindSet() then begin
+            //     repeat
+            //         // Comments."Disable Flag" := true;
+            //         Comments.Modify();
+            //     until Comments.Next() = 0;
+            // end;
 
             Counter := 0;
             Comments.Reset();
@@ -3318,6 +3329,24 @@ Codeunit 52185506 "Global Functions"
             until TransactionCharges.Next = 0;
         end;
         exit(TotalCharge + TExciseDuty);
+    end;
+
+    procedure GetPaidReadmissionFees(MemberNo: Code[20]; RegistrationFeeAccount: Code[50]; RejoiningDate: Date): Decimal
+    var
+        Members: Record Members;
+        SavingsLedgerEntry: Record "Savings Ledger Entry";
+        TotalPaid: Decimal;
+    begin
+        Clear(TotalPaid);
+        SavingsLedgerEntry.Reset;
+        SavingsLedgerEntry.Setrange("Member No.", MemberNo);
+        SavingsLedgerEntry.Setrange("Customer No.", RegistrationFeeAccount);
+        SavingsLedgerEntry.Setfilter("Posting Date", '%1..%2', RejoiningDate, Today);
+        if SavingsLedgerEntry.Find('-') then begin
+            SavingsLedgerEntry.Calcsums(Amount);
+            TotalPaid := Abs(SavingsLedgerEntry.Amount);
+        end;
+        exit(TotalPaid);
     end;
 
 }
