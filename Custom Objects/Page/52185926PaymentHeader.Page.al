@@ -931,6 +931,7 @@ page 52185926 "Payment Header"
                 Image = Refresh;
                 Promoted = true;
                 PromotedCategory = Category6;
+                visible = false;
                 trigger OnAction()
                 begin
                     rec.testfield(Status, rec.Status::Pending);
