@@ -61,6 +61,18 @@ Report 52185476 "HR Employee List"
             {
 
             }
+            column(Date_Of_Birth; "Date Of Birth")
+            {
+            }
+            column(NSSF_No; "NSSF No.")
+            {
+            }
+            column(NHIF_No; "NHIF No.")
+            {
+            }
+            column(Retirement_date; "Retirement date")
+            {
+            }
             column(Ages; Ages)
             {
 

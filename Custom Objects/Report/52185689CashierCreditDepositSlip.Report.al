@@ -49,7 +49,13 @@ Report 52185689 "CashierCredit Deposit Slip"
             column(Prod_Name; ProductName)
             {
             }
-            column(BranchCode; Transactions."Global Dimension 2 Code")
+            column(BranchCode; Transactions."Global Dimension 1 Code")
+            {
+            }
+            column(Global_Dimension_1_Code; "Global Dimension 1 Code")
+            {
+            }
+            column(Branch_Name; "Branch Name")
             {
             }
             column(Transactions__Transaction_Date_; "Transaction Date")
@@ -181,6 +187,13 @@ Report 52185689 "CashierCredit Deposit Slip"
             column(CashierName; CashierName)
             {
             }
+            //MASKED COLUMNS FOR PRIVACY
+            column(MaskedAccountNo; MaskedAccountNo)
+            {
+            }
+            column(CashierNameOnly; CashierNameOnly)
+            {
+            }
             column(Remarks; Remarks)
             {
             }
@@ -222,6 +235,9 @@ Report 52185689 "CashierCredit Deposit Slip"
                 column(CL_Account_no; "Cashier Transaction Lines"."Account No")
                 {
                 }
+                column(CL_MaskedAccountNo; CL_MaskedAccountNo)
+                {
+                }
                 column(CL_Loan_no; "Cashier Transaction Lines"."Loan No")
                 {
                 }
@@ -237,6 +253,17 @@ Report 52185689 "CashierCredit Deposit Slip"
 
                 trigger OnAfterGetRecord()
                 begin
+                    CL_MaskedAccountNo := '';
+
+                    //Mask transaction line account number
+                    if StrLen("Cashier Transaction Lines"."Account No") > 4 then begin
+                        CL_MaskedAccountNo := CopyStr("Cashier Transaction Lines"."Account No", 1, 2) + 
+                                              PadStr('', StrLen("Cashier Transaction Lines"."Account No") - 4, '*') + 
+                                              CopyStr("Cashier Transaction Lines"."Account No", 
+                                                    StrLen("Cashier Transaction Lines"."Account No") - 1, 2);
+                    end else
+                        CL_MaskedAccountNo := "Cashier Transaction Lines"."Account No";
+
                     if "Cashier Transaction Lines".Type = "Cashier Transaction Lines".Type::Credit then begin
 
                         CSName := '';
@@ -262,12 +289,28 @@ Report 52185689 "CashierCredit Deposit Slip"
                 StaffNo := '';
                 ProductName := '';
                 CashierName := '';
+                MaskedAccountNo := '';
+                CashierNameOnly := '';
 
+                //FIXED: Use transaction cashier instead of current logged-in user
                 user.Reset;
-                user.SetRange("User Name", UserId);
+                user.SetRange("User Name", Transactions.Cashier);
                 if user.Find('-') then begin
-                    CashierName := user."Full Name";
+                    CashierName := user."User Name";
+                    //Extract name after backslash
+                    if StrPos(CashierName, '\') > 0 then
+                        CashierNameOnly := CopyStr(CashierName, StrPos(CashierName, '\') + 1)
+                    else
+                        CashierNameOnly := CashierName;
                 end;
+
+                //Mask account number: show first 2 and last 2 digits
+                if StrLen("Account No") > 4 then begin
+                    MaskedAccountNo := CopyStr("Account No", 1, 2) + 
+                                      PadStr('', StrLen("Account No") - 4, '*') + 
+                                      CopyStr("Account No", StrLen("Account No") - 1, 2);
+                end else
+                    MaskedAccountNo := "Account No";
                 //calculate the charges
                 SavingsLedgerEntry.Reset;
                 SavingsLedgerEntry.SetRange("Customer No.", "Account No");
@@ -369,8 +412,11 @@ Report 52185689 "CashierCredit Deposit Slip"
         ProductName: Text[50];
         Credit: Record "Credit Accounts";
         CSName: Text[50];
+        CL_MaskedAccountNo: Text; //Masked account for transaction lines
         Copy: Boolean;
         CashierName: Text;
+        MaskedAccountNo: Text; //Masked account number (first 2 + stars + last 2)
+        CashierNameOnly: Text; //Cashier name without domain prefix
         user: Record User;
         CompanyInformation: Record "Company Information";
         CompanyAddress: Text;

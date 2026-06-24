@@ -72,7 +72,11 @@ page 52186602 "HR  App Qualified Applicants1"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Rejection Reason"; Rec."Rejection Reason")
+                field("Approval Status"; Rec."Approval Status")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Current Approver ID"; Rec."Current Approver ID")
                 {
                     ApplicationArea = Basic;
                 }

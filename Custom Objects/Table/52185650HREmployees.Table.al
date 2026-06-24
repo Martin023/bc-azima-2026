@@ -802,12 +802,16 @@ table 52185650 "HR Employees"
                 end;
                 
                 //CHECK IF PIN MATCHES MEMBER RECORD
-                if HrEmp.Get("No.") then begin
+                if "No." <> '' then begin
                     Members.Reset();
-                    Members.SetRange("Payroll/Staff No.", HREmp."No.");
+                    Members.SetRange("Payroll/Staff No.", "No.");
                     if Members.FindFirst() then begin
-                        if HREmp."PIN No." <> Members."P.I.N Number" then
-                            Message('KRA PIN MISMATCH DETECTED:\n\nEmployee Card PIN: %1\nMember Register PIN: %2\n\nThe KRA PIN number on the Employee Card differs from the Member Register. Please verify which PIN is correct and update the Member Register accordingly to maintain data consistency.', HREmp."PIN No.", Members."P.I.N Number");
+                        if "PIN No." <> Members."P.I.N Number" then
+                            Message('KRA PIN MISMATCH DETECTED:' + '\' + '\' +
+                                'Employee Card PIN: %1' + '\' +
+                                'Member Register PIN: %2' + '\' + '\' +
+                                'The KRA PIN number on the Employee Card differs from the Member Register. Please verify which PIN is correct and update the Member Register accordingly to maintain data consistency.', 
+                                "PIN No.", Members."P.I.N Number");
                     end;
                 end;
                 
@@ -1780,6 +1784,22 @@ table 52185650 "HR Employees"
         field(39003969; "Member Status"; enum "Member Status")
         {
 
+        }
+        field(39003970; "Current Approver ID"; Code[50])
+        {
+            CalcFormula = Lookup("Approval Entry"."Approver ID" WHERE("Document No." = FIELD("No."),
+                                                                        Status = FILTER(Open)));
+            Editable = false;
+            FieldClass = FlowField;
+            Caption = 'Current Approver ID';
+        }
+        field(39003971; "Approval Status"; Enum "Approval Status")
+        {
+            CalcFormula = Lookup("Approval Entry".Status WHERE("Document No." = FIELD("No."),
+                                                                Status = FILTER(Open)));
+            Editable = false;
+            FieldClass = FlowField;
+            Caption = 'Approval Status';
         }
 
 
