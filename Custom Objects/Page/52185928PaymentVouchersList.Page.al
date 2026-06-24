@@ -475,7 +475,7 @@ page 52185928 "Payment Vouchers List"
 
     trigger OnOpenPage()
     begin
-        Rec.SetFilter(Cashier, UserId);
+        //Rec.SetFilter(Cashier, UserId);
         //SETFILTER(Date,'>01/01/2022');
         /*
         IF UserMgt.GetPurchasesFilter() <> '' THEN BEGIN
