@@ -717,6 +717,18 @@ page 52186773 "Loans card"
                     ApprovalsMgmt.OpenApprovalEntriesPage(rec.RecordId);
                 end;
             }
+            action(Comments)
+            {
+                Caption = 'Approval/Rejection Comments';
+                ApplicationArea = Basic, Suite;
+                Image = ViewComments;
+                Promoted = true;
+                PromotedCategory = Category9;
+
+                RunObject = page "Comments List";
+                RunPageLink = "Header No." = field("Loan No.");
+                RunPageView = where(Types = CONST(comment));
+            }
             action("Loans Topped Up")
             {
                 ApplicationArea = Basic, Suite;
@@ -761,41 +773,41 @@ page 52186773 "Loans card"
             }
 
 
-            action("External Loans Cleared")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = Archive;
-                Promoted = true;
-                PromotedCategory = Process;
+            // action("External Loans Cleared")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = Archive;
+            //     Promoted = true;
+            //     PromotedCategory = Process;
 
-                trigger OnAction()
-                var
-                    LoanApp: Record Loans;
-                begin
-                    LoanApp.Reset;
-                    LoanApp.SetRange(LoanApp."Loan No.", Rec."Loan No.");
-                    //if LoanApp.Find('-') then
-                    //REPORT.Run(52185996, true, true, LoanApp);
-                end;
-            }
+            //     trigger OnAction()
+            //     var
+            //         LoanApp: Record Loans;
+            //     begin
+            //         LoanApp.Reset;
+            //         LoanApp.SetRange(LoanApp."Loan No.", Rec."Loan No.");
+            //         //if LoanApp.Find('-') then
+            //         //REPORT.Run(52185996, true, true, LoanApp);
+            //     end;
+            // }
 
-            action("Capitalize Daily Interest")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = CalculateRemainingUsage;
-                Promoted = true;
-                PromotedCategory = Process;
+            // action("Capitalize Daily Interest")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = CalculateRemainingUsage;
+            //     Promoted = true;
+            //     PromotedCategory = Process;
 
-                trigger OnAction()
-                var
-                    LoanApp: Record Loans;
-                    LoansProcess: Codeunit "Loans Process";
-                begin
-                    Rec.CalcFields("Daily Interest");
-                    IF NOT CONFIRM('Are you sure you want to capitalized daily interest of ' + Format(Rec."Daily Interest") + ' for this loan?') then exit;
-                    LoansProcess.CapitalizeDailyInterest(Rec."Loan No.");
-                end;
-            }
+            //     trigger OnAction()
+            //     var
+            //         LoanApp: Record Loans;
+            //         LoansProcess: Codeunit "Loans Process";
+            //     begin
+            //         Rec.CalcFields("Daily Interest");
+            //         IF NOT CONFIRM('Are you sure you want to capitalized daily interest of ' + Format(Rec."Daily Interest") + ' for this loan?') then exit;
+            //         LoansProcess.CapitalizeDailyInterest(Rec."Loan No.");
+            //     end;
+            // }
             action("Salary Details")
             {
                 ApplicationArea = Basic, Suite;
@@ -803,7 +815,7 @@ page 52186773 "Loans card"
                 Promoted = true;
                 PromotedCategory = Process;
                 PromotedIsBig = true;
-                RunObject = Page "Appraisal Salary Details.";
+                RunObject = Page "Appraisal Salary Details";
                 RunPageLink = "Loan No" = FIELD("Loan No."),
                               "Client Code" = FIELD("Member No.");
                 RunPageMode = View;

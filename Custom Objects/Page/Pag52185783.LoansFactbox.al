@@ -7,6 +7,8 @@ page 52185783 "Loans Factbox"
     PageType = ListPart;
     SourceTableView = where(posted = const(true), "Total Balance" = filter(> 0));
     SourceTable = Loans;
+    Editable = false;
+    DeleteAllowed = false;
 
     layout
     {

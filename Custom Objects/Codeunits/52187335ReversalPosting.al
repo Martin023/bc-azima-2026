@@ -346,7 +346,8 @@ codeunit 52187335 "Reversal Posting"
             NewSavingsLedgerEntry."Debit Amount (LCY)" := NewSavingsLedgerEntry."Credit Amount (LCY)";
             NewSavingsLedgerEntry."Credit Amount (LCY)" := 0;
         end;
-        NewSavingsLedgerEntry.Description := 'Reversal of ' + NewSavingsLedgerEntry.Description;
+        NewSavingsLedgerEntry.Description := CopyStr(('Reversal of ' + NewSavingsLedgerEntry.Description), 1, 50);
+        ;
         NewSavingsLedgerEntry.Amount := -NewSavingsLedgerEntry.Amount;
         NewSavingsLedgerEntry."Remaining Amount" := -NewSavingsLedgerEntry."Remaining Amount";
         NewSavingsLedgerEntry."Amount (LCY)" := -NewSavingsLedgerEntry."Amount (LCY)";
@@ -391,13 +392,13 @@ codeunit 52187335 "Reversal Posting"
 
         if NewCreditLedgerEntry.Amount > 0 then begin
             NewCreditLedgerEntry."Debit Amount" := 0;
-            NewCreditLedgerEntry."Credit Amount" := NewCreditLedgerEntry."Debit Amount";
+            NewCreditLedgerEntry."Credit Amount" := Abs(NewCreditLedgerEntry.Amount);
             NewCreditLedgerEntry."Debit Amount (LCY)" := 0;
-            NewCreditLedgerEntry."Credit Amount (LCY)" := NewCreditLedgerEntry."Debit Amount (LCY)";
+            NewCreditLedgerEntry."Credit Amount (LCY)" := Abs(NewCreditLedgerEntry.Amount);
         end else begin
-            NewCreditLedgerEntry."Debit Amount" := NewCreditLedgerEntry."Credit Amount";
+            NewCreditLedgerEntry."Debit Amount" := Abs(NewCreditLedgerEntry.Amount);
             NewCreditLedgerEntry."Credit Amount" := 0;
-            NewCreditLedgerEntry."Debit Amount (LCY)" := NewCreditLedgerEntry."Credit Amount (LCY)";
+            NewCreditLedgerEntry."Debit Amount (LCY)" := Abs(NewCreditLedgerEntry.Amount);
             NewCreditLedgerEntry."Credit Amount (LCY)" := 0;
         end;
         NewCreditLedgerEntry.Amount := -NewCreditLedgerEntry.Amount;
@@ -440,6 +441,8 @@ codeunit 52187335 "Reversal Posting"
             CreditLedgerEntry."Reversed Entry No." := NewCreditLedgerEntry."Entry No.";
             NewCreditLedgerEntry."Reversed by Entry No." := CreditLedgerEntry."Entry No.";
         END;
+        NewCreditLedgerEntry.Description := CopyStr(('Reversal of ' + NewCreditLedgerEntry.Description), 1, 50);
+
         CreditLedgerEntry."Reversed by Entry No." := NewCreditLedgerEntry."Entry No.";
         CreditLedgerEntry."Creation Date Time" := CurrentDateTime;
         CreditLedgerEntry."Creation Date" := Today;

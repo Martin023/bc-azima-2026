@@ -2,6 +2,7 @@ page 52185770 "Appraisal Salary Details"
 {
     PageType = List;
     SourceTable = "Appraisal Salary Details";
+    // CardPageID = "Appraisal Salary Details Card.";
 
     layout
     {
@@ -132,36 +133,21 @@ page 52185770 "Appraisal Salary Details"
                 PromotedCategory = Process;
                 PromotedIsBig = true;
                 PromotedOnly = true;
-                Visible = false;
+                // Visible = false;
                 trigger OnAction()
                 var
                     ApprD: Record "Appraisal Salary Details";
                     Net: Decimal;
                 begin
                     if Rec."Loan No" <> '' then begin
-                        repeat
-                            Net := CalculateNetPayForLoan(Rec."Loan No", Rec."Client Code");
-
-                            // Update or create the Net Income record for this loan/client
-                            ApprD.Reset();
-                            ApprD.SetRange("Loan No", Rec."Loan No");
-                            ApprD.SetRange("Client Code", Rec."Client Code");
-                            ApprD.SetRange(Type, ApprD.Type::"Net Income");
-                            if ApprD.FindFirst() then begin
-                                ApprD.Amount := Net;
-                                ApprD.Modify();
-                            end else begin
-                                ApprD.Init();
-                                ApprD."Loan No" := Rec."Loan No";
-                                ApprD."Client Code" := Rec."Client Code";
-                                ApprD.Type := ApprD.Type::"Net Income";
-                                ApprD.Code := 'NET PAY';
-                                ApprD.Amount := Net;
-                                ApprD.Insert();
-                            end;
-
-                            Rec.Modify();
-                        until Rec.Next() = 0;
+                        if LoanApps.Get(Rec."Loan No") then begin
+                            if (LoanApps."Source Unit" = LoanApps."Source Unit"::BOSA) then begin
+                                ApprD.fnProcessSalaryDetails(rec."Loan No", rec."Client Code");
+                                // ApprD.CalculateNetPay();
+                            end
+                            else
+                                Error('Kindly note this only applies to BOSA loans! and current unit is %1', LoanApps."Source Unit");
+                        end;
                         Message('NetPay calculation completed for all records.');
                     end else
                         Message('Loan No. is required to calculate NetPay.');
@@ -172,9 +158,9 @@ page 52185770 "Appraisal Salary Details"
 
     trigger OnAfterGetRecord()
     begin
-        StyleText := '';
-        if rec.Code = '7.1EXTERNAL BANK STO' then /*BEGIN*/
-            StyleText := 'StrongAccent';
+        // StyleText := '';
+        // if rec.Code = '7.1EXTERNAL BANK STO' then /*BEGIN*/
+        //     StyleText := 'StrongAccent';
     end;
 
     trigger OnOpenPage()

@@ -392,8 +392,6 @@ table 52185729 Loans
                 if ProdFac."Mortgage Loan" = true then begin
                     "Mortgage Loan" := true;
                     Mem.Get("Member No.");
-                    if Mem."Employer Code" <> '99' then
-                        "Retirement/Expiry Date" := CalcDate('60Y', Mem."Date of Birth");
                     Validate("Retirement/Expiry Date");
                 end else
                     "Mortgage Loan" := false;
@@ -548,7 +546,7 @@ table 52185729 Loans
                         Rec."Member Age" := (ROUND((TODAY - memebrrec."Date of Birth") / 365.2364, 1, '<'));
                         Rec."ID No." := memebrrec."Primary Identification";
                     end;
-                    Rec."Employer Code" := memebrrec."Employer Code";
+                    //Rec."Employer Code" := memebrrec."Employer Code";
                 end;
                 // Apprasail.Reset();
                 // Apprasail.SetRange(Apprasail."Loan No.", Rec."Loan No.");
@@ -664,7 +662,7 @@ table 52185729 Loans
                         //IF CONFIRM('This member is not active. Do you wish to continue with application ?',TRUE)=FALSE THEN
                         if "Dummy Appraisal" = false then Error("InactiveErr:") else Message("InactiveErr:");
                     end;
-                    "Staff No" := Mem."Payroll/Staff No.";
+                    // "Staff No" := Mem."Payroll/Staff No.";
                     if "Staff No" <> '' then begin
                         HrEmployees.Reset();
                         HrEmployees.SetRange(HrEmployees."No.", Rec."Staff No");
@@ -679,7 +677,7 @@ table 52185729 Loans
                     "KRA PIN" := Mem."P.I.N Number";
                     "ID No." := Mem."Primary Identification";
                     "Application Date" := Today;
-                    "Employer Code" := Mem."Employer Code";
+                    //"Employer Code" := Mem."Employer Code";
                     "Residential Address" := Mem."Home Address";
                     // "Global Dimension 1 Code":=Mem."Global Dimension 1 Code";
                     //"Global Dimension 2 Code":=Mem."Global Dimension 2 Code";
@@ -1784,6 +1782,16 @@ table 52185729 Loans
         }
         field(36; "Staff No"; Code[20])
         {
+            trigger OnValidate()
+            begin
+                if rec."Employer Code" <> '' then begin
+                    Mem.Reset();
+                    mem.SetRange("Employer Code", rec."Staff No");
+                    Mem.SetRange("Payroll/Staff No.", rec."Staff No");
+                    if Mem.FindFirst() then
+                        rec.Validate("Member No.", Mem."No.");
+                end;
+            end;
         }
         field(37; Source; Option)
         {
@@ -3264,16 +3272,6 @@ table 52185729 Loans
             Editable = false;
             FieldClass = FlowField;
         }
-        field(208; "Work Station"; Code[20])
-        {
-            DataClassification = ToBeClassified;
-            Editable = false;
-        }
-        field(209; "Work Station Name"; text[150])
-        {
-            fieldclass = flowfield;
-            CalcFormula = lookup(Customer.Name WHERE("No." = field("Work Station")));
-        }
         field(210; "Months to Retire"; Integer)
         {
             DataClassification = ToBeClassified;
@@ -3350,9 +3348,8 @@ table 52185729 Loans
 
     trigger OnDelete()
     begin
-
-        if Status = Status::Approved then
-            Error('A loan cannot be deleted once it has been approved');
+        //if Status = Status::Approved then
+        Error('A loan cannot be deleted.');
     end;
 
     trigger OnInsert()
