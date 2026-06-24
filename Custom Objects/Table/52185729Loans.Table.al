@@ -1789,7 +1789,9 @@ table 52185729 Loans
                     mem.SetRange("Employer Code", rec."Staff No");
                     Mem.SetRange("Payroll/Staff No.", rec."Staff No");
                     if Mem.FindFirst() then
-                        rec.Validate("Member No.", Mem."No.");
+                        rec.Validate("Member No.", Mem."No.")
+                    else
+                        Message('Member of employer code %1 with Staff no.%2 was not found!', rec."Employer Code", rec."Staff No");
                 end;
             end;
         }
@@ -1851,6 +1853,13 @@ table 52185729 Loans
             // OptionCaption = 'Open,Pending Approval,Approved,Rejected,Deffered,Archived,Posted';
             // OptionMembers = Open,Pending,Approved,Rejected,Deffered,Archived,Posted;
             trigger OnValidate()
+            var
+                LoanGua: record "Loan Guarantors and Security";
+                SendM: Boolean;
+                Members: record Members;
+                CompInfo: Record "Company Information";
+                MemberGuarantor: record Members;
+                Source: enum "SMS Source";
             begin
                 GlobalFunctions.DisplayLienMessage("Member No.");
                 CheckExceptions;
@@ -1861,6 +1870,55 @@ table 52185729 Loans
                     userSetup.get(USERID);
                     if userSetup."Member No." = Rec."Member No." then begin
                         Error('You cannot Approve or Reject your own loan application.');
+                    end;
+                end;
+                //Send guarantor sms
+                LoanGua.Reset;
+                LoanGua.SetRange(LoanGua."Loan No", Rec."Loan No.");
+                LoanGua.SetRange("SMS Sent", false);
+                if LoanGua.FindFirst then begin
+                    //Message('Some Messages have not been sent to the guarantors');
+                    SendM := true;
+                end;
+                if SendM = true then begin
+                    if Confirm('Do you wish to Send Guarantor SMS?', false) then begin
+                        if Loan.Get(Rec."Loan No.") then begin
+                            LoanGua.Reset;
+                            LoanGua.SetRange(LoanGua."Loan No", Rec."Loan No.");
+                            LoanGua.SetRange("SMS Sent", false);
+                            if LoanGua.Find('-') then begin
+                                repeat
+                                    // MESSAGE(FORMAT(LoanGua."Member No"));
+                                    if Members.Get(LoanGua."Member No") then begin
+                                        if Members."Phone No." <> '' then begin
+                                            if Loan.Posted = true then
+                                                exit;
+                                            CompInfo.Get;
+                                            MemberGuarantor.Get(LoanGua."Member Guaranteed");
+
+                                            msg := 'Dear ' + MemberGuarantor."First Name" + ', You have guaranteed MNo: '
+                                            + LoanGua."Member Guaranteed" + '-' + MemberGuarantor.Name + ' ' + Loan."Loan Product Type Name" + ' of KES ' +
+                                            Format(Loan."Approved Amount") + '. If in dispute call' + ' ' + CompInfo."Phone No.";
+
+                                            SendSMS.SendSms(Source::LOAN_GUARANTORS, Members."Phone No.", msg, Format(Loan."Disbursement Account No"), '', true, 0, false, 'CBS', Loan."Disbursement Account No", 'CBS');
+
+                                            LoanGua."SMS Sent" := true;
+                                            LoanGua.Modify;
+                                        end;
+                                    end;
+                                until LoanGua.Next = 0;
+
+                                //END;
+                            end;
+                            // if Members.Get(Loan."Member No.") then begin
+                            //     if Loan."SMS Sent" = false then begin
+
+                            //         msg := 'You loan application of ' + ' ' + Loan."Loan Product Type Name" + ' of ' + ' Kes' + Format(Loan."Approved Amount") + ' ' + 'is being processed';
+
+                            //         SendSMS.SendSms(Source::MBANKING, Members."Phone No.", msg, Format(Loan."Disbursement Account No"), '', true, 0, false, 'CBS', Loan."Disbursement Account No", 'CBS');
+                            //     end;
+                            // end;
+                        end;
                     end;
                 end;
 
@@ -2181,7 +2239,7 @@ table 52185729 Loans
                     if "Retirement/Expiry Date" < Today then
                         // Error('This date cannot be less than today');
                         Message('This member is already retired');
-                    "Months to Retire" := round(("Retirement/Expiry Date" - Today) / 30, 1);
+                    "Months to Retire" := round(("Retirement/Expiry Date" - Today) /365, 1);
                 end;
 
 
