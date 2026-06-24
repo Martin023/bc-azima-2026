@@ -1814,55 +1814,6 @@ page 52185753 "Loan Application Card"
                     // //update amount guaranteed
 
 
-                    LoanGua.Reset;
-                    LoanGua.SetRange(LoanGua."Loan No", Rec."Loan No.");
-                    LoanGua.SetRange("SMS Sent", false);
-                    if LoanGua.FindFirst then begin
-                        //Message('Some Messages have not been sent to the guarantors');
-                        SendM := true;
-                    end;
-                    if SendM = true then begin
-                        if Confirm('Do you wish to Send Guarantor SMS?', false) then begin
-                            if Loan.Get(Rec."Loan No.") then begin
-                                LoanGua.Reset;
-                                LoanGua.SetRange(LoanGua."Loan No", Rec."Loan No.");
-                                LoanGua.SetRange("SMS Sent", false);
-                                if LoanGua.Find('-') then begin
-                                    repeat
-                                        // MESSAGE(FORMAT(LoanGua."Member No"));
-                                        if Members.Get(LoanGua."Member No") then begin
-                                            if Members."Phone No." <> '' then begin
-                                                if Loan.Posted = true then
-                                                    exit;
-                                                CompInfo.Get;
-                                                MemberGuarantor.Get(LoanGua."Member Guaranteed");
-
-                                                msg := 'Dear Member, You have guaranteed MNo: '
-                                                + LoanGua."Member Guaranteed" + '-' + MemberGuarantor.Name + ' ' + Loan."Loan Product Type Name" + ' of KES ' +
-                                                Format(Loan."Requested Amount") + '. If in dispute call' + ' ' + CompInfo."Phone No.";
-
-                                                SendSMS.SendSms(Source::LOAN_GUARANTORS, Members."Phone No.", msg, Format(Loan."Disbursement Account No"), '', true, 0, false, 'CBS', Loan."Disbursement Account No", 'CBS');
-
-                                                LoanGua."SMS Sent" := true;
-                                                LoanGua.Modify;
-                                            end;
-                                        end;
-                                    until LoanGua.Next = 0;
-
-                                    //END;
-                                end;
-                                // if Members.Get(Loan."Member No.") then begin
-                                //     if Loan."SMS Sent" = false then begin
-
-                                //         msg := 'You loan application of ' + ' ' + Loan."Loan Product Type Name" + ' of ' + ' Kes' + Format(Loan."Approved Amount") + ' ' + 'is being processed';
-
-                                //         SendSMS.SendSms(Source::MBANKING, Members."Phone No.", msg, Format(Loan."Disbursement Account No"), '', true, 0, false, 'CBS', Loan."Disbursement Account No", 'CBS');
-                                //     end;
-                                // end;
-                            end;
-                        end;
-                    end;
-
                     //checkguarcount
                     if Loan.Get(Rec."Loan No.") then begin
                         LoanGua.Reset;

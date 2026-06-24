@@ -1002,6 +1002,13 @@ Report 52185745 "Loan Appraisal Checkoff"
                 QualificationOnDeposits := (MemberDeposits + loans."Loans - Deposit Purchase") * Mult;
                 DepositMult := QualificationOnDeposits;
 
+                if ProductFactory."Minimum Deposit Balance" <> 0 then begin
+                    if (MemberDeposits + loans."Loans - Deposit Purchase") < ProductFactory."Minimum Deposit Balance" then begin
+                        Message('Thus Member has not met the minimun deposit of %1', format((MemberDeposits + loans."Loans - Deposit Purchase")));
+                        QualificationOnDeposits := 0;
+                    end;
+                end;
+
                 //Existing Loans
                 TotalRepay := 0;
                 Loan.Reset;
@@ -1075,14 +1082,21 @@ Report 52185745 "Loan Appraisal Checkoff"
                     Loans."Amount To Disburse" := ROUND(QualifyingAmount, 1, '<');
                 end else begin
                     QualifyingAmount := Loans."Requested Amount";
-                    if ProductFactory."Secured Loan" then begin
-                        if QualifyingAmount > QualificationOnDeposits then
-                            QualifyingAmount := QualificationOnDeposits;
-                    end;
+                    // if ProductFactory."Secured Loan" then begin
+                    // if ProductFactory."Secured Loan" then begin
+                    if QualifyingAmount > QualificationOnDeposits then
+                        QualifyingAmount := QualificationOnDeposits;
+                    // end;
+
+                    if QualifyingAmount > TotalGuaranteed then
+                        QualifyingAmount := TotalGuaranteed;
+                    // end;
                     Loans."Recommended Amount" := ROUND(QualifyingAmount, 1, '<');
                     Loans."Approved Amount" := ROUND(QualifyingAmount, 1, '<');
                     Loans."Amount To Disburse" := ROUND(QualifyingAmount, 1, '<');
                 end;
+
+
 
 
 
