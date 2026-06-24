@@ -48,12 +48,7 @@ table 52185777 "Tiered Charges Lines"
         {
             DecimalPlaces = 4;
         }
-        field(7; "External Vendor Charge"; Decimal)
-        {
-        }
-        field(8; "Mobile Vendor Charge"; Decimal)
-        {
-        }
+
         field(9; "Start Date"; Date)
         {
         }
