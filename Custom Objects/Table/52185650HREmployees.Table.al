@@ -1793,13 +1793,12 @@ table 52185650 "HR Employees"
             FieldClass = FlowField;
             Caption = 'Current Approver ID';
         }
-        field(39003971; "Approval Status"; Option)
+        field(39003971; "Approval Status"; Enum "Approval Status")
         {
             CalcFormula = Lookup("Approval Entry".Status WHERE("Document No." = FIELD("No."),
                                                                 Status = FILTER(Open)));
             Editable = false;
             FieldClass = FlowField;
-            OptionMembers = Created,Open,Canceled,Rejected,Approved;
             Caption = 'Approval Status';
         }
 
