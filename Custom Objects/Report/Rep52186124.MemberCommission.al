@@ -67,13 +67,6 @@ report 52186124 "Member Commission"
                     if AmountContributed < SavingsAccount."Monthly Contribution" then
                         AmountContributed := 0;
                 end;
-
-                SavingsLedgerEntry.RESET;
-                SavingsLedgerEntry.SETRANGE("Member No.", Members."No.");
-                SavingsLedgerEntry.SetRange(Reversed, FALSE);
-                SavingsLedgerEntry.SetRange("Customer Posting Group", 'REG');
-                if SavingsLedgerEntry.FindLast() then
-                    ContributionDate := SavingsLedgerEntry."Posting Date";
             end;
         }
     }
