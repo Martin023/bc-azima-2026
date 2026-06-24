@@ -747,9 +747,8 @@ page 52187329 "Records"
                     action("Transaction Types")
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Transaction Types List';
-                        RunObject = page "Transaction Types List";
-                        RunpageView = where(type = const(commission));
+                        Caption = 'Commsion setup';
+                        RunObject = page "Tiered Charges List";
                     }
                 }
                 // }
@@ -878,13 +877,13 @@ page 52187329 "Records"
                         RunObject = page "File Tracker List";
                         RunPageView = where("File Request Status" = filter(Received));
                     }
-                    action("Forwarded Files")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Forwarded Files';
-                        RunObject = page "File Tracker List";
-                        RunPageView = where("File Request Status" = filter(Forwarded));
-                    }
+                    // action("Forwarded Files")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Forwarded Files';
+                    //     RunObject = page "File Tracker List";
+                    //     RunPageView = where("File Request Status" = filter(Forwarded));
+                    // }
                     action("Closed File Requests")
                     {
                         ApplicationArea = Basic, Suite;
@@ -892,59 +891,59 @@ page 52187329 "Records"
                         RunObject = page "File Tracker List";
                         RunPageView = where("File Request Status" = filter(Closed));
                     }
-                    action("Overdue File Requests")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Overdue File Requests';
-                        RunObject = page "File Tracker List";
-                        RunPageView = where(Overdue = const(true));
-                    }
-                    // action("File List")
+                    // action("Overdue File Requests")
                     // {
                     //     ApplicationArea = Basic, Suite;
-                    //     Caption = 'File Tracker List';
+                    //     Caption = 'Overdue File Requests';
                     //     RunObject = page "File Tracker List";
-                    //     RunPageView = where(Status = filter(<> archived));
+                    //     RunPageView = where(Overdue = const(true));
                     // }
+                    action("File List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Archived File Tracker List';
+                        RunObject = page "File Tracker List";
+                        RunPageView = where(Status = filter(archived));
+                    }
                 }
-                // group("File Batching & Archiving")
-                // {
-                //     action("Batching & Archiving Process")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Open File Batch';
-                //         RunObject = page "Batching Process List";
-                //         RunPageView = where(Status = const(Open));
-                //     }
-                //     action("Batches Pending Approval")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'File Batch Pending Approval';
-                //         RunObject = page "Batching Process List";
-                //         RunPageView = where(Status = const(Pending));
-                //     }
-                //     action("Rejected Batches")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Rejected File Batch';
-                //         RunObject = page "Batching Process List";
-                //         RunPageView = where(Status = const(Rejected));
-                //     }
-                //     action("Approved Batches")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Approved File Batch';
-                //         RunObject = page "Batching Process List";
-                //         RunPageView = where(Status = const(Approved));
-                //     }
-                //     action("Archived File Volumes")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Archived File Volumes';
-                //         //RunObject = page "Batching Lines";
-                //         RunObject = page "Batching Lines List";
-                //     }
-                // }
+                group("File Batching & Archiving")
+                {
+                    action("Batching & Archiving Process")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Open File Batch';
+                        RunObject = page "Batching Process List";
+                        RunPageView = where(Status = const(Open));
+                    }
+                    // action("Batches Pending Approval")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'File Batch Pending Approval';
+                    //     RunObject = page "Batching Process List";
+                    //     RunPageView = where(Status = const(Pending));
+                    // }
+                    // action("Rejected Batches")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Rejected File Batch';
+                    //     RunObject = page "Batching Process List";
+                    //     RunPageView = where(Status = const(Rejected));
+                    // }
+                    // action("Approved Batches")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Approved File Batch';
+                    //     RunObject = page "Batching Process List";
+                    //     RunPageView = where(Status = const(Approved));
+                    // }
+                    action("Archived File Volumes")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Archived File Volumes';
+                        //RunObject = page "Batching Lines";
+                        RunObject = page "Batching Lines List";
+                    }
+                }
                 group("File Configurations.")
                 {
                     action("User Station List")

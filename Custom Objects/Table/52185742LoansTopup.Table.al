@@ -145,7 +145,7 @@ table 52185742 "Loans Top up"
                 if "Principle Top Up" < 0 then "Principle Top Up" := 0;
                 // "Total Top Up" := "Principle Top Up" + "Interest Top Up";
                 if Loans.get("Loan Top Up") then
-                    "One Month Interest" := "Principle Top Up" * Loans.Interest * 0.01 / 12;
+                    "One Month Interest" := round(("Principle Top Up" * Loans.Interest * 0.01 / 12), 1, '<');
             end;
         }
         field(6; "Interest Top Up"; Decimal)

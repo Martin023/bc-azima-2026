@@ -240,6 +240,33 @@ page 52185926 "Payment Header"
                     ApplicationArea = Basic, Suite;
                     Editable = StatusEditableapproved;
                     Visible = true;
+                    Caption = 'Cheque No.1';
+
+                    trigger OnValidate()
+                    begin
+                        //check if the cheque has been inserted
+                        Rec.TestField("Paying Bank Account");
+                        PVHead.Reset;
+                        PVHead.SetRange(PVHead."Paying Bank Account", Rec."Paying Bank Account");
+                        PVHead.SetRange(PVHead."Pay Mode", PVHead."Pay Mode"::Cheque);
+                        if PVHead.FindFirst then begin
+                            repeat
+                                if PVHead."Cheque No." = Rec."Cheque No." then begin
+                                    if PVHead."No." <> Rec."No." then begin
+                                        Error('The Cheque Number has already been utilised');
+                                    end;
+                                end;
+                            until PVHead.Next = 0;
+                        end;
+                    end;
+                }
+
+                field("Cheque No.2"; Rec."Cheque No.2")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = StatusEditableapproved;
+                    Visible = true;
+                    Caption = 'Cheque No.2';
 
                     trigger OnValidate()
                     begin
@@ -520,7 +547,7 @@ page 52185926 "Payment Header"
 
                     end;
                 }
-               
+
                 separator(Action1102756005)
                 {
                 }
@@ -530,14 +557,16 @@ page 52185926 "Payment Header"
                     Caption = 'ReOpen Document';
                     Image = ReOpen;
                     Promoted = true;
-                    //The property 'PromotedCategory' can only be set if the property 'Promoted' is set to 'true'
                     PromotedCategory = Process;
 
                     trigger OnAction()
                     begin
                         if not Confirm('Are you sure you want to reopen this document?') then exit;
                         Rec.Status := Rec.Status::Pending;
+                        Rec.Cashier := UserId;
+                        Rec."Global Dimension 1 Code" := UserMgt.GetSetDimensions(UserId, 1);
                         Rec.Modify;
+                        Message('Cashier has been updated successfully');
                     end;
                 }
                 action("Cancel Document")
@@ -902,6 +931,7 @@ page 52185926 "Payment Header"
                 Image = Refresh;
                 Promoted = true;
                 PromotedCategory = Category6;
+                visible = false;
                 trigger OnAction()
                 begin
                     rec.testfield(Status, rec.Status::Pending);

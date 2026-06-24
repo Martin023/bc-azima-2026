@@ -3,13 +3,14 @@ PageExtension 52185438 GeneralLedgerEntriesEXT extends "General Ledger Entries"
 {
 
     //Unsupported feature: Property Modification (DeleteAllowed) on ""General Ledger Entries"(Page 20)".
-
     Editable = false;
     layout
     {
         movebefore("Posting Date"; "G/L Account No.")
         moveafter(Description; "Debit Amount")
         moveafter("Debit Amount"; "Credit Amount")
+        moveafter("Credit Amount"; RunningBalance)
+
         moveafter("Credit Amount"; "Amount")
 
         // moveafter("Posting Date"; "Document No.")
@@ -126,6 +127,7 @@ PageExtension 52185438 GeneralLedgerEntriesEXT extends "General Ledger Entries"
         modify(Amount)
         {
             ApplicationArea = Basic;
+            visible = false;
         }
 
         modify("Additional-Currency Amount")
@@ -186,6 +188,14 @@ PageExtension 52185438 GeneralLedgerEntriesEXT extends "General Ledger Entries"
 
 
         modify("Credit Amount")
+        {
+            Visible = true;
+        }
+        modify("Debit Amount")
+        {
+            Visible = true;
+        }
+        modify(RunningBalance)
         {
             Visible = true;
         }

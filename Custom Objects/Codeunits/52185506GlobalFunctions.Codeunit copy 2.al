@@ -3348,7 +3348,6 @@ Codeunit 52185506 "Global Functions"
         end;
         exit(TotalPaid);
     end;
-
 }
 
 

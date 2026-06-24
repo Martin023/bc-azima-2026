@@ -1067,18 +1067,22 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                     if QualifyingAmount > TotalGuaranteed then
                         QualifyingAmount := TotalGuaranteed;
 
-                    Loans."Recommended Amount" := ROUND(QualifyingAmount, 1, '<');
-                    Loans."Approved Amount" := ROUND(QualifyingAmount, 1, '<');
-                    Loans."Amount To Disburse" := ROUND(QualifyingAmount, 1, '<');
+                    Loans."Recommended Amount" := ROUND(QualifyingAmount, 1000, '<');
+                    Loans."Approved Amount" := ROUND(QualifyingAmount, 1000, '<');
+                    Loans."Amount To Disburse" := ROUND(QualifyingAmount, 1000, '<');
                 end else begin
                     QualifyingAmount := Loans."Requested Amount";
-                    if ProductFactory."Secured Loan" then begin
-                        if QualifyingAmount > QualificationOnDeposits then
-                            QualifyingAmount := QualificationOnDeposits;
-                    end;
-                    Loans."Recommended Amount" := ROUND(QualifyingAmount, 1, '<');
-                    Loans."Approved Amount" := ROUND(QualifyingAmount, 1, '<');
-                    Loans."Amount To Disburse" := ROUND(QualifyingAmount, 1, '<');
+                    // if ProductFactory."Secured Loan" then begin
+                    if QualifyingAmount > QualificationOnDeposits then
+                        QualifyingAmount := QualificationOnDeposits;
+                    // end;
+
+                    if QualifyingAmount > TotalGuaranteed then
+                        QualifyingAmount := TotalGuaranteed;
+                    // end;
+                    Loans."Recommended Amount" := ROUND(QualifyingAmount, 1000, '<');
+                    Loans."Approved Amount" := ROUND(QualifyingAmount, 1000, '<');
+                    Loans."Amount To Disburse" := ROUND(QualifyingAmount, 1000, '<');
                 end;
 
 

@@ -112,7 +112,7 @@ page 52187092 "System Reversal Card"
             action("Registers")
             {
                 Visible = true;
-                Enabled = AllowPost;
+                Enabled = AllowViewRegister;
                 ApplicationArea = Basic, Suite;
                 Image = ReverseRegister;
                 Promoted = true;
@@ -292,6 +292,9 @@ page 52187092 "System Reversal Card"
         if ReC.Status = Rec.Status::Approved then
             AllowPost := true Else
             AllowPost := false;
+
+        AllowViewRegister := (Rec.Status = Rec.Status::Pending) or (Rec.Status = Rec.Status::Approved);
+
         if Rec.Reversed = false then begin
             if Rec."No." <> '' then begin
                 Rec."Transaction Date" := Today;
@@ -322,4 +325,6 @@ page 52187092 "System Reversal Card"
         OpenApprovalEntriesExist: Boolean;
         PageEitable: Boolean;
         AllowPost: Boolean;
+
+        AllowViewRegister: Boolean;
 }

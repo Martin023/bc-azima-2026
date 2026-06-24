@@ -40,24 +40,24 @@ page 52186310 "Batching Process Card"
                     Caption = 'File Location No.';
                     ToolTip = 'Specifies the value of the File Location field.';
                 }
-                field(Town; Rec.Town)
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Town field.';
-                    Editable = false;
-                }
-                field("Building Name"; Rec."Building Name")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the File Location field.';
-                    Editable = false;
-                }
-                field("Floor No."; Rec."Floor No.")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Floor No. field.';
-                    Editable = false;
-                }
+                // field(Town; Rec.Town)
+                // {
+                //     ApplicationArea = All;
+                //     ToolTip = 'Specifies the value of the Town field.';
+                //     Editable = false;
+                // }
+                // field("Building Name"; Rec."Building Name")
+                // {
+                //     ApplicationArea = All;
+                //     ToolTip = 'Specifies the value of the File Location field.';
+                //     Editable = false;
+                // }
+                // field("Floor No."; Rec."Floor No.")
+                // {
+                //     ApplicationArea = All;
+                //     ToolTip = 'Specifies the value of the Floor No. field.';
+                //     Editable = false;
+                // }
                 field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = All;
@@ -102,7 +102,6 @@ page 52186310 "Batching Process Card"
             {
                 ApplicationArea = All;
                 Caption = 'Batch Files';
-                //SubPageLink = "Batch No." = field("Batch No.");
                 SubPageLink = "Header No." = field("No.");
             }
         }
@@ -136,19 +135,19 @@ page 52186310 "Batching Process Card"
                             BatchLines.MODIFY;
                         until BatchLines.NEXT = 0;
 
-                    FileVolumes.RESET;
-                    FileVolumes.SetRange(Archived, false);
-                    FileVolumes.SETRANGE("Batch", Rec."Batch");
-                    if FileVolumes.FindSet() then
-                        repeat
-                            //FileVolumes.TESTFIELD(Archived, false);
-                            //if FileVolumes.Archived = false then
-                            FileVolumes.Archived := True;
-                            FileVolumes."Date Archived" := Today;
-                            FileVolumes."Archived By" := UserId;
-                            FileVolumes."Volume Status" := FileVolumes."Volume Status"::Archived;
-                            FileVolumes.MODIFY;
-                        until FileVolumes.NEXT = 0;
+                    // FileVolumes.RESET;
+                    // FileVolumes.SetRange(Archived, false);
+                    // FileVolumes.SETRANGE("Batch", Rec."Batch");
+                    // if FileVolumes.FindSet() then
+                    //     repeat
+                    //         //FileVolumes.TESTFIELD(Archived, false);
+                    //         //if FileVolumes.Archived = false then
+                    //         FileVolumes.Archived := True;
+                    //         FileVolumes."Date Archived" := Today;
+                    //         FileVolumes."Archived By" := UserId;
+                    //         FileVolumes."Volume Status" := FileVolumes."Volume Status"::Archived;
+                    //         FileVolumes.MODIFY;
+                    //     until FileVolumes.NEXT = 0;
 
                     Rec."Archived By" := UserId;
                     Rec."Date Archived" := Today;

@@ -430,7 +430,7 @@ table 52185776 "Cashier Transactions"
         field(35; "Time Cleared"; Time)
         {
         }
-        field(36; "ID No"; Code[11])
+        field(36; "ID No"; Code[20])
         {
         }
         field(37; "Bank Account"; Code[20])

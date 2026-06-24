@@ -9,7 +9,8 @@ page 52185753 "Loan Application Card"
     Editable = true;
     //Ensure STOs are created for hybrid loans
     Permissions = TableData "Standing Order Header" = rim,
-                    TableData "Standing Order Lines" = rim;
+                    TableData "Standing Order Lines" = rim,
+                    tabledata "Files Table" = rim;
     layout
     {
         area(content)
@@ -23,9 +24,21 @@ page 52185753 "Loan Application Card"
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
-                field("Responsible Officer"; Rec."Responsible Officer")
+                // field("Responsible Officer"; Rec."Responsible Officer")
+                // {
+                //     Editable = false;
+                // }
+                field("Employer Code"; Rec."Employer Code")
                 {
-                    Editable = false;
+                    ApplicationArea = Basic, Suite;
+                    Editable = ApplicationDetailsEdit;
+                }
+
+                field("Staff No"; Rec."Staff No")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Staff No';
+                    Editable = ApplicationDetailsEdit;
                 }
 
                 field("Member No."; Rec."Member No.")
@@ -63,23 +76,18 @@ page 52185753 "Loan Application Card"
 
                     end;
                 }
-                field("Staff No"; Rec."Staff No")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Staff No';
-                    Editable = ApplicationDetailsEdit;
-                }
-                field("Work Station"; Rec."Work Station")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Work Station';
-                }
-                field("Work Station Name"; Rec."Work Station Name")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Work Station Name';
-                    Editable = false;
-                }
+
+                // field("Work Station"; Rec."Work Station")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Work Station';
+                // }
+                // field("Work Station Name"; Rec."Work Station Name")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Work Station Name';
+                //     Editable = false;
+                // }
                 field("Member Class"; Rec."Member Class")
                 {
                     ApplicationArea = Basic, Suite;
@@ -166,15 +174,15 @@ page 52185753 "Loan Application Card"
                                 IfMortgage := false;
                         end;
 
-                        if ProdFac.Get(Rec."Loan Product Type") then begin
-                            if ProdFac."Mortgage Loan" = true then begin
-                                Members.Get(Rec."Member No.");
-                                if Members."Employer Code" = '99' then
-                                    CheckRetirementDate := true
-                                else
-                                    CheckRetirementDate := false
-                            end;
-                        end;
+                        // if ProdFac.Get(Rec."Loan Product Type") then begin
+                        //     if ProdFac."Mortgage Loan" = true then begin
+                        //         Members.Get(Rec."Member No.");
+                        //         if Members."Employer Code" = '99' then
+                        //             CheckRetirementDate := true
+                        //         else
+                        //             CheckRetirementDate := false
+                        //     end;
+                        // end;
 
                         if ProdFac.Get(Rec."Loan Product Type") then begin
                             if ProdFac."Mortgage Loan" = true then
@@ -309,7 +317,7 @@ page 52185753 "Loan Application Card"
                 field(Interest; Rec.Interest)
                 {
                     ApplicationArea = Basic, Suite;
-                    Editable = ApplicationDetailsEdit;
+                    Editable = false;
                 }
                 field("Cost Value of House"; Rec."Cost Value of House")
                 {
@@ -846,8 +854,8 @@ page 52185753 "Loan Application Card"
                 PromotedCategory = Process;
                 PromotedIsBig = true;
                 RunObject = Page "Loan Top Up";
-                RunPageLink = "Loan No." = FIELD("Loan No.");
-                //   "Client Code" = FIELD("Member No.");
+                RunPageLink = "Loan No." = FIELD("Loan No."),
+                  "Client Code" = FIELD("Member No.");
             }
             // action("Loan Appraisal Summary")
             // {
@@ -1745,14 +1753,7 @@ page 52185753 "Loan Application Card"
                                                     Error(Text008, ProdFac."Minimum Guarantors on Max Amt", ProdFac."Max Amt on Guarantors");
                                                 if LoanGua.Count < ProdFac."Minimum Guarantors" then
                                                     Error(Text006, ProdFac."Minimum Guarantors");
-                                                //******************************Policies states any loan above 2M should have minimum of 10 guarantors
 
-                                                //TO DO:Remove the hard code logic
-                                                if Rec."Approved Amount" > 2000000 then begin
-                                                    if LoanGua.Count < 10 then
-                                                        Error(Text006, 10);
-                                                end;
-                                                //*******************************************End of policies..... 
                                             end;
                                             LoanGua.CalcSums("Amount Guaranteed");
                                             LoanGua.CalcFields("Total Sum");
@@ -1812,55 +1813,6 @@ page 52185753 "Loan Application Card"
                     // GlobalFunctions.UpdateAmountGuaranteed(Rec."Loan No.", Rec."Approved Amount");
                     // //update amount guaranteed
 
-
-                    LoanGua.Reset;
-                    LoanGua.SetRange(LoanGua."Loan No", Rec."Loan No.");
-                    LoanGua.SetRange("SMS Sent", false);
-                    if LoanGua.FindFirst then begin
-                        //Message('Some Messages have not been sent to the guarantors');
-                        SendM := true;
-                    end;
-                    if SendM = true then begin
-                        if Confirm('Do you wish to Send Guarantor SMS?', false) then begin
-                            if Loan.Get(Rec."Loan No.") then begin
-                                LoanGua.Reset;
-                                LoanGua.SetRange(LoanGua."Loan No", Rec."Loan No.");
-                                LoanGua.SetRange("SMS Sent", false);
-                                if LoanGua.Find('-') then begin
-                                    repeat
-                                        // MESSAGE(FORMAT(LoanGua."Member No"));
-                                        if Members.Get(LoanGua."Member No") then begin
-                                            if Members."Phone No." <> '' then begin
-                                                if Loan.Posted = true then
-                                                    exit;
-                                                CompInfo.Get;
-                                                MemberGuarantor.Get(LoanGua."Member Guaranteed");
-
-                                                msg := 'Dear Member, You have guaranteed MNo: '
-                                                + LoanGua."Member Guaranteed" + '-' + MemberGuarantor.Name + ' ' + Loan."Loan Product Type Name" + ' of KES ' +
-                                                Format(Loan."Requested Amount") + '. If in dispute call' + ' ' + CompInfo."Phone No.";
-
-                                                SendSMS.SendSms(Source::LOAN_GUARANTORS, Members."Phone No.", msg, Format(Loan."Disbursement Account No"), '', true, 0, false, 'CBS', Loan."Disbursement Account No", 'CBS');
-
-                                                LoanGua."SMS Sent" := true;
-                                                LoanGua.Modify;
-                                            end;
-                                        end;
-                                    until LoanGua.Next = 0;
-
-                                    //END;
-                                end;
-                                // if Members.Get(Loan."Member No.") then begin
-                                //     if Loan."SMS Sent" = false then begin
-
-                                //         msg := 'You loan application of ' + ' ' + Loan."Loan Product Type Name" + ' of ' + ' Kes' + Format(Loan."Approved Amount") + ' ' + 'is being processed';
-
-                                //         SendSMS.SendSms(Source::MBANKING, Members."Phone No.", msg, Format(Loan."Disbursement Account No"), '', true, 0, false, 'CBS', Loan."Disbursement Account No", 'CBS');
-                                //     end;
-                                // end;
-                            end;
-                        end;
-                    end;
 
                     //checkguarcount
                     if Loan.Get(Rec."Loan No.") then begin
@@ -1956,11 +1908,11 @@ page 52185753 "Loan Application Card"
                     AppraisaComme: Record "Loan Appraisal Comments";
                 begin
                     //Rec.TestField(Status, Rec.Status::Deffered);
-                    AppraisaComme.Reset();
-                    AppraisaComme.SetRange("Loan No.", Rec."Loan No.");
-                    AppraisaComme.SetRange(Commented, false);
-                    if not AppraisaComme.FindFirst() then
-                        Error('Loan Appraisal Comments Must have a value');
+                    // AppraisaComme.Reset();
+                    // AppraisaComme.SetRange("Loan No.", Rec."Loan No.");
+                    // AppraisaComme.SetRange(Commented, false);
+                    // if not AppraisaComme.FindFirst() then
+                    //     Error('Loan Appraisal Comments Must have a value');
                     if (Rec.Status = Rec.Status::Deffered) or (Rec.Status = Rec.Status::Approved) or (Rec.Status = Rec.Status::Pending) or (Rec.Status = Rec.Status::Rejected) or (Rec.Status = Rec.Status::Archived)
                      then begin
                         if not Confirm('Are you sure you want to re-open the loan?') then exit;
