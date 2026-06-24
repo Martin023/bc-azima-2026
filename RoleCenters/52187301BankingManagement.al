@@ -206,6 +206,13 @@ page 52187301 "Banking Management Role Center"
                             RunObject = page "Cashier Transactions List";
                             RunPageView = where(Status = filter(Approved), posted = filter(false));
                         }
+                        action("Rejected Cashier Transactions")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Rejected Cashier Transactions';
+                            RunObject = page "Cashier Transactions List";
+                            RunPageView = where(Status = filter(Rejected), posted = filter(false));
+                        }
                         action("Posted Cashier Transactions")
                         {
                             ApplicationArea = Basic, Suite;
