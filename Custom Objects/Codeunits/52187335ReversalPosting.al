@@ -441,6 +441,8 @@ codeunit 52187335 "Reversal Posting"
             CreditLedgerEntry."Reversed Entry No." := NewCreditLedgerEntry."Entry No.";
             NewCreditLedgerEntry."Reversed by Entry No." := CreditLedgerEntry."Entry No.";
         END;
+        NewCreditLedgerEntry.Description := CopyStr(('Reversal of ' + NewCreditLedgerEntry.Description), 1, 50);
+
         CreditLedgerEntry."Reversed by Entry No." := NewCreditLedgerEntry."Entry No.";
         CreditLedgerEntry."Creation Date Time" := CurrentDateTime;
         CreditLedgerEntry."Creation Date" := Today;

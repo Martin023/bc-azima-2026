@@ -68,4 +68,8 @@ enum 52185463 "Salary Type"
     {
         Caption = 'Loans';
     }
+    value(16; "Total Deduction")
+    {
+        Caption = 'Total Deductions';
+    }
 }

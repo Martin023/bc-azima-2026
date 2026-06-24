@@ -2,7 +2,7 @@ page 52185770 "Appraisal Salary Details"
 {
     PageType = List;
     SourceTable = "Appraisal Salary Details";
-    CardPageID = "Appraisal Salary Details Card.";
+    // CardPageID = "Appraisal Salary Details Card.";
 
     layout
     {
@@ -144,7 +144,9 @@ page 52185770 "Appraisal Salary Details"
                             if (LoanApps."Source Unit" = LoanApps."Source Unit"::BOSA) then begin
                                 ApprD.fnProcessSalaryDetails(rec."Loan No", rec."Client Code");
                                 // ApprD.CalculateNetPay();
-                            end;
+                            end
+                            else
+                                Error('Kindly note this only applies to BOSA loans! and current unit is %1', LoanApps."Source Unit");
                         end;
                         Message('NetPay calculation completed for all records.');
                     end else

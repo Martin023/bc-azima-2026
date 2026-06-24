@@ -98,6 +98,14 @@ table 52185744 "Appraisal Salary Details"
                 if (Type = Type::"Gross Pay") then
                     Error(Text002);
 
+                // if Rec."Loan No" <> '' then begin
+                //     if LoanApp.Get(Rec."Loan No") then begin
+                //         if (LoanApp."Source Unit" = LoanApp."Source Unit"::BOSA) then begin
+                //             fnProcessSalaryDetails(rec."Loan No", rec."Client Code");
+                //             // ApprD.CalculateNetPay();
+                //         end;
+                //     end;
+                // end;
                 // if Type = Type::Basic then begin
 
                 //     ApprDetails.Reset;
@@ -191,6 +199,8 @@ table 52185744 "Appraisal Salary Details"
                     if rec.Rate > 0 then
                         Rec.Amount := round(Rec.Rate * Rec.Hours, 0.01);
                 end;
+                rec.Validate(amount);
+
             end;
         }
         field(10; Hours; Decimal)
@@ -201,7 +211,7 @@ table 52185744 "Appraisal Salary Details"
                     if rec.Rate > 0 then
                         Rec.Amount := round(Rec.Rate * Rec.Hours, 0.01);
                 end;
-
+                rec.Validate(amount);
             end;
         }
     }
@@ -260,10 +270,26 @@ table 52185744 "Appraisal Salary Details"
         CurGrossPay: Decimal;
         OtherAllowances: Decimal;
         TotalDeductions: Decimal;
+        OtherDeductions: Decimal;
     begin
-        dtOpenPeriod := prPayrollProcessing.fnGetOpenPeriod();
-        intMonth := Date2dmy(dtOpenPeriod, 2);
-        intYear := Date2dmy(dtOpenPeriod, 3);
+        curBasicPay := 0;
+        curTransAmount := 0;
+        curNSSF := 0;
+        ShifAmount := 0;
+        HousingLevyAmount := 0;
+        curPayeAmount := 0;
+        TaxablePay := 0;
+        Relief := 0;
+        curPensionAmount := 0;
+        CurGrossPay := 0;
+        OtherAllowances := 0;
+        TotalDeductions := 0;
+        TotalOutstanding := 0;
+        PensionRelief := 0;
+        OtherDeductions := 0;
+        // dtOpenPeriod := prPayrollProcessing.fnGetOpenPeriod();
+        // intMonth := Date2dmy(dtOpenPeriod, 2);
+        // intYear := Date2dmy(dtOpenPeriod, 3);
 
         // STEP 1: Get Basic Pay from details
         // if Rec.Type = Rec.Type::Basic then
@@ -302,44 +328,45 @@ table 52185744 "Appraisal Salary Details"
         ApprDetails.Reset();
         ApprDetails.SetRange("Loan No", LoanNo);
         ApprDetails.SetRange("Client Code", Mno);
-        ApprDetails.setfilter(Type, '%1|%2|%3', ApprDetails.Type::Basic, ApprDetails.Type::Pension, ApprDetails.Type::"Other Allowances");
+        ApprDetails.setfilter(Type, '%1|%2|%3|%4|%5', ApprDetails.Type::Basic, ApprDetails.Type::Pension, ApprDetails.Type::"Other Allowances", ApprDetails.Type::"House Allowance", ApprDetails.Type::Deductions);
         if ApprDetails.FindFirst() then begin
             repeat
                 case
                     ApprDetails.Type of
                     ApprDetails.Type::Basic:
-                        curBasicPay := ApprDetails.Amount;
+                        curBasicPay += ApprDetails.Amount;
 
                     ApprDetails.Type::Pension:
-                        curPensionAmount := ApprDetails.Amount;
-                    ApprDetails.Type::"Other Allowances":
-                        OtherAllowances := ApprDetails.Amount;
+                        curPensionAmount += ApprDetails.Amount;
+                    ApprDetails.Type::"Other Allowances", ApprDetails.Type::"House Allowance":
+                        OtherAllowances += ApprDetails.Amount;
+                    ApprDetails.Type::Deductions:
+                        OtherDeductions += ApprDetails.Amount;
                 end;
             until ApprDetails.Next() = 0;
         end;
 
         CurGrossPay := curBasicPay + OtherAllowances;
-        curBasicPay := ApprDetails.Amount;
+        // curBasicPay := ApprDetails.Amount;
         curTransAmount := ROUND(curBasicPay, 0.01, '<');
-        //Message('Basic Pay: %1', curTransAmount);
-        // STEP 2: Pre-calc shared values
-        curNSSF := prPayrollProcessing.fnGetEmployerNSSF(curTransAmount);
-        //Message('NSSF: %1', curNSSF);
-        ShifAmount := ROUND((curTransAmount * (2.75 / 100)), 0.01, '<');
+        if curTransAmount > 0 then begin
+            curNSSF := prPayrollProcessing.fnGetEmployerNSSF(curTransAmount);
+            //Message('NSSF: %1', curNSSF);
+            ShifAmount := ROUND((curTransAmount * (2.75 / 100)), 0.01, '<');
 
-        HousingLevyAmount := ROUND((curTransAmount * (1.5 / 100)), 0.01, '<');
+            HousingLevyAmount := ROUND((curTransAmount * (1.5 / 100)), 0.01, '<');
+            Relief := 2400;
+            TaxablePay := (curTransAmount + OtherAllowances) - curNSSF - ShifAmount - HousingLevyAmount - curPensionAmount;
+            if TaxablePay < 0 then
+                TaxablePay := 0;
+            curPayeAmount := prPayrollProcessing.fnGetEmployeePaye(TaxablePay);
+            curPayeAmount := curPayeAmount - Relief;
+            if curPayeAmount < 0 then
+                curPayeAmount := 0;
+            curPayeAmount := ROUND(curPayeAmount, 0.01, '>');
 
-        Relief := 2400;
-        TaxablePay := (curTransAmount + OtherAllowances) - curNSSF - ShifAmount - HousingLevyAmount - curPensionAmount;
-        if TaxablePay < 0 then
-            TaxablePay := 0;
-        curPayeAmount := prPayrollProcessing.fnGetEmployeePaye(TaxablePay);
-        curPayeAmount := curPayeAmount - Relief;
-        if curPayeAmount < 0 then
-            curPayeAmount := 0;
-        curPayeAmount := ROUND(curPayeAmount, 0.01, '>');
-
-        TotalDeductions := curPayeAmount + ShifAmount + curNSSF + curPensionAmount + HousingLevyAmount;
+            TotalDeductions := curPayeAmount + ShifAmount + curNSSF + curPensionAmount + HousingLevyAmount + OtherDeductions;
+        end;
 
         // STEP 3: Update using Appraisal Setup
         ApprDetails.Reset();
@@ -380,7 +407,7 @@ table 52185744 "Appraisal Salary Details"
 
                     ApprDetails.Type::Loans:
                         ApprDetails.Amount := TotalOutstanding;
-                    ApprDetails.Type::Deductions:
+                    ApprDetails.Type::"Total Deduction":
                         begin
                             ApprDetails.Amount := TotalDeductions;
                         end;
