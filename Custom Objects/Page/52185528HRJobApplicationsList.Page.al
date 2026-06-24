@@ -52,6 +52,14 @@ page 52185528 "HR Job Applications List"
                     Style = Attention;
                     StyleExpr = TRUE;
                 }
+                field("Approval Status"; Rec."Approval Status")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Current Approver ID"; Rec."Current Approver ID")
+                {
+                    ApplicationArea = Basic;
+                }
             }
         }
         area(factboxes)

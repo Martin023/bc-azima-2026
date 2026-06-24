@@ -182,6 +182,13 @@ Report 52185685 "Cashier CHDeposit Slip"
             column(CashierName; CashierName)
             {
             }
+            //MASKED COLUMNS FOR PRIVACY
+            column(MaskedAccountNo; MaskedAccountNo)
+            {
+            }
+            column(CashierNameOnly; CashierNameOnly)
+            {
+            }
             column(Reprint; Reprint)
             {
             }
@@ -216,11 +223,29 @@ Report 52185685 "Cashier CHDeposit Slip"
                 StaffNo := '';
                 ProductName := '';
                 CashierName := '';
+                MaskedAccountNo := '';
+                CashierNameOnly := '';
+
+                //FIXED: Use transaction cashier instead of current logged-in user
                 User.Reset;
-                User.SetRange("User Name", UserId);
+                User.SetRange("User Name", Transactions.Cashier);
                 if User.Find('-') then begin
-                    CashierName := User."Full Name";
-                end; 
+                    CashierName := User."User Name";
+                    //Extract name after backslash
+                    if StrPos(CashierName, '\') > 0 then
+                        CashierNameOnly := CopyStr(CashierName, StrPos(CashierName, '\') + 1)
+                    else
+                        CashierNameOnly := CashierName;
+                end;
+
+                //Mask account number: show first 2 and last 2 digits
+                if StrLen("Account No") > 4 then begin
+                    MaskedAccountNo := CopyStr("Account No", 1, 2) + 
+                                      PadStr('', StrLen("Account No") - 4, '*') + 
+                                      CopyStr("Account No", StrLen("Account No") - 1, 2);
+                end else
+                    MaskedAccountNo := "Account No";
+
                 Reprint := '';
                 if "Transaction Date" < Today then
                     Reprint := 'REPRINT'
@@ -306,6 +331,8 @@ Report 52185685 "Cashier CHDeposit Slip"
         StaffNo: Code[20];
         ProductName: Text[50];
         CashierName: Text;
+        MaskedAccountNo: Text; //Masked account number (first 2 + stars + last 2)
+        CashierNameOnly: Text; //Cashier name without domain prefix
         User: Record User;
         CompanyInformation: Record "Company Information";
         CompanyAddress: Text;

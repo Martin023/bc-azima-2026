@@ -653,20 +653,7 @@ page 52185631 "HR Employee Card"
                     ShowMandatory = true;
                     Editable = CurrCode;
                     
-                    trigger OnValidate()
-                    var
-                        Members: Record Members;
-                    begin
-                        if Rec."No." <> '' then begin
-                            Members.reset();
-                            Members.setrange("Payroll/Staff No.", Rec."No.");
-                            if Members.FindFirst() then begin
-                                if UpperCase(DelChr(Rec."PIN No.", '=', ' ')) <> UpperCase(DelChr(Members."P.I.N Number", '=', ' ')) then
-                                    Message('KRA PIN MISMATCH DETECTED:\Employee Card PIN: [%1]\Member Register PIN: [%2]\n\nThe KRA PIN number on the Employee Card differs from the Member Register. Please verify the PIN number and update the Member Register accordingly to maintain data consistency.', 
-                                            Rec."PIN No.", Members."P.I.N Number");
-                            end;
-                        end;
-                    end;
+                    //REMOVED DUPLICATE PIN VALIDATION - TABLE VALIDATION HANDLES THIS
                 }
                 field("Medical Insurance No."; Rec."Medical Insurance No.")
                 {
@@ -1332,14 +1319,17 @@ page 52185631 "HR Employee Card"
         MyNotification: Notification;
 
     begin
+        //VALIDATE KRA PIN MATCHES MEMBER REGISTER - FIXED TO REMOVE FORMATTING ISSUES
         if rec."No." <> '' then begin
             Members.reset();
             Members.setrange("Payroll/Staff No.", Rec."No.");
             if Members.FindFirst() then begin
-                //VALIDATE KRA PIN MATCHES MEMBER REGISTER - TRIM SPACES AND COMPARE CASE-INSENSITIVE
                 if UpperCase(DelChr(Rec."PIN No.", '=', ' ')) <> UpperCase(DelChr(Members."P.I.N Number", '=', ' ')) then
-                    Message('KRA PIN MISMATCH DETECTED:\Employee Card PIN: [%1]\Member Register PIN: [%2]\n\nThe KRA PIN number on the Employee Card differs from the Member Register. Please verify the PIN number and update the Member Register accordingly to maintain data consistency.', 
-                            Rec."PIN No.", Members."P.I.N Number");
+                    Message('KRA PIN MISMATCH DETECTED:' + '\' + '\' +
+                        'Employee Card PIN: %1' + '\' +
+                        'Member Register PIN: %2' + '\' + '\' +
+                        'The KRA PIN number on the Employee Card differs from the Member Register. Please verify which PIN is correct and update the Member Register accordingly to maintain data consistency.', 
+                        Rec."PIN No.", Members."P.I.N Number");
             end;
         end;
 

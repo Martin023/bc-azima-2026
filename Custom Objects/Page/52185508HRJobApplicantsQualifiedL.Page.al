@@ -66,6 +66,14 @@ page 52185508 "HR Job Applicants QualifiedL1"
                 {
                     ApplicationArea = Basic;
                 }
+                field("Approval Status"; Rec."Approval Status")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Current Approver ID"; Rec."Current Approver ID")
+                {
+                    ApplicationArea = Basic;
+                }
             }
         }
     }
