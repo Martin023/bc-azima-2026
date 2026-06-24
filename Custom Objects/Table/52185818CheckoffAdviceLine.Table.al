@@ -78,7 +78,7 @@ table 52185818 "Checkoff Advice Line"
         }
         field(5; "Employer Code"; Code[20])
         {
-            TableRelation = Customer WHERE("Account Type" = CONST(Employer));
+            TableRelation = Customer WHERE("Account Type" = CONST("Employer code"));
         }
         field(6; "Loan No."; Code[20])
         {

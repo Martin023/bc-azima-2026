@@ -20,7 +20,7 @@ report 52185623 "Generate Advice Loans"
             dataitem(Loans; Loans)
             {
                 DataItemTableView = where(Posted = const(true));
-                RequestFilterFields = "Loan Product Type", "Disbursement Date", "Member No.", "Employer Code", "Work Station";
+                RequestFilterFields = "Loan Product Type", "Disbursement Date", "Member No.", "Employer Code";
                 trigger OnpreDataItem()
                 begin
                     if CheckoffAdviceHeader."Employer Code" <> '' then
@@ -98,7 +98,7 @@ report 52185623 "Generate Advice Loans"
 
                                 CheckoffAdvice."Standing Order amount" := TotalSTO;
                                 CheckoffAdvice.Type := CheckoffAdvice.Type::Credit;
-                                CheckoffAdvice."Work Station" := Loans."Work Station";
+                                CheckoffAdvice."Employer Code" := Loans."Employer Code";
                                 Loans.CalcFields("Repayment Advised");
                                 if Loans."Repayment Advised" > 0 then begin
                                     CheckoffAdvice.Reference := 'MONTHLYDED-' + format(CheckoffAdvice."Product Type");

@@ -9,7 +9,8 @@ page 52185753 "Loan Application Card"
     Editable = true;
     //Ensure STOs are created for hybrid loans
     Permissions = TableData "Standing Order Header" = rim,
-                    TableData "Standing Order Lines" = rim;
+                    TableData "Standing Order Lines" = rim,
+                    tabledata "Files Table" = rim;
     layout
     {
         area(content)
@@ -23,9 +24,21 @@ page 52185753 "Loan Application Card"
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
-                field("Responsible Officer"; Rec."Responsible Officer")
+                // field("Responsible Officer"; Rec."Responsible Officer")
+                // {
+                //     Editable = false;
+                // }
+                field("Employer Code"; Rec."Employer Code")
                 {
-                    Editable = false;
+                    ApplicationArea = Basic, Suite;
+                    Editable = ApplicationDetailsEdit;
+                }
+
+                field("Staff No"; Rec."Staff No")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Staff No';
+                    Editable = ApplicationDetailsEdit;
                 }
 
                 field("Member No."; Rec."Member No.")
@@ -63,23 +76,18 @@ page 52185753 "Loan Application Card"
 
                     end;
                 }
-                field("Staff No"; Rec."Staff No")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Staff No';
-                    Editable = ApplicationDetailsEdit;
-                }
-                field("Work Station"; Rec."Work Station")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Work Station';
-                }
-                field("Work Station Name"; Rec."Work Station Name")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Work Station Name';
-                    Editable = false;
-                }
+
+                // field("Work Station"; Rec."Work Station")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Work Station';
+                // }
+                // field("Work Station Name"; Rec."Work Station Name")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Work Station Name';
+                //     Editable = false;
+                // }
                 field("Member Class"; Rec."Member Class")
                 {
                     ApplicationArea = Basic, Suite;
@@ -166,15 +174,15 @@ page 52185753 "Loan Application Card"
                                 IfMortgage := false;
                         end;
 
-                        if ProdFac.Get(Rec."Loan Product Type") then begin
-                            if ProdFac."Mortgage Loan" = true then begin
-                                Members.Get(Rec."Member No.");
-                                if Members."Employer Code" = '99' then
-                                    CheckRetirementDate := true
-                                else
-                                    CheckRetirementDate := false
-                            end;
-                        end;
+                        // if ProdFac.Get(Rec."Loan Product Type") then begin
+                        //     if ProdFac."Mortgage Loan" = true then begin
+                        //         Members.Get(Rec."Member No.");
+                        //         if Members."Employer Code" = '99' then
+                        //             CheckRetirementDate := true
+                        //         else
+                        //             CheckRetirementDate := false
+                        //     end;
+                        // end;
 
                         if ProdFac.Get(Rec."Loan Product Type") then begin
                             if ProdFac."Mortgage Loan" = true then

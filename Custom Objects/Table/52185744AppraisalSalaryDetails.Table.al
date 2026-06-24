@@ -1,7 +1,7 @@
 table 52185744 "Appraisal Salary Details"
 {
-    DrillDownPageID = "Appraisal Salary Details.";
-    LookupPageID = "Appraisal Salary Details.";
+    DrillDownPageID = "Appraisal Salary Details";
+    LookupPageID = "Appraisal Salary Details";
 
     fields
     {
@@ -27,10 +27,10 @@ table 52185744 "Appraisal Salary Details"
         field(3; Description; Text[30])
         {
         }
-        field(4; Type; Option)
+        field(4; Type; enum "Salary Type")
         {
-            OptionCaption = ' ,Earnings,Deductions,Basic,Other Allowances ,Gross Pay,Fosa Income,Pension,House Allowance,Taxable Pay,Relief';
-            OptionMembers = " ",Earnings,Deductions,Basic,"Other Allowances","Gross Pay","Net Income",Pension,"House Allowance","Taxable Pay",Relief;
+            // OptionCaption = ' ,Earnings,Deductions,Basic,Other Allowances ,Gross Pay,Fosa Income,Pension,House Allowance,Taxable Pay,Relief';
+            // OptionMembers = " ",Earnings,Deductions,Basic,"Other Allowances","Gross Pay","Net Income",Pension,"House Allowance","Taxable Pay",Relief;
             trigger OnValidate()
             var
                 myInt: Integer;
@@ -41,25 +41,25 @@ table 52185744 "Appraisal Salary Details"
                 SlaryIn: Enum "Salary Income Types";
             begin
                 Rec.Amount := 0;
-                LoansRec.Reset();
-                LoansRec.SetRange("Loan No.", Rec."Loan No");
-                LoansRec.SetFilter("Source Unit", '<>%1', LoansRec."Source Unit"::BOSA);
-                if LoansRec.FindFirst() then begin
-                    Savingsacc.Reset();
-                    Savingsacc.SetRange("Member No.", Rec."Client Code");
-                    Savingsacc.SetRange("Product Category", Savingsacc."Product Category"::"FOSA Account");
-                    if Savingsacc.FindFirst() then begin
-                        // if Rec.Type = Rec.Type::"Net Income" then begin
-                        //     rec.Amount := GlobalFun.GetSmallestSalary(Savingsacc."No.", SlaryIn::Salary);
-                        // end;
-                        // if Rec.Type = Rec.Type::"SAYE Income" then begin
-                        //     Rec.Amount := GlobalFun.GetSmallestSalary(Savingsacc."No.", SlaryIn::SAYE);
-                        // end;
-                        // if Rec.Type = Rec.Type::Pension then begin
-                        //     Rec.Amount := GlobalFun.GetSmallestSalary(Savingsacc."No.", SlaryIn::Pension);
-                        // end;
-                    end;
-                end
+                // LoansRec.Reset();
+                // LoansRec.SetRange("Loan No.", Rec."Loan No");
+                // LoansRec.SetFilter("Source Unit", '<>%1', LoansRec."Source Unit"::BOSA);
+                // if LoansRec.FindFirst() then begin
+                //     Savingsacc.Reset();
+                //     Savingsacc.SetRange("Member No.", Rec."Client Code");
+                //     Savingsacc.SetRange("Product Category", Savingsacc."Product Category"::"FOSA Account");
+                //     if Savingsacc.FindFirst() then begin
+                // if Rec.Type = Rec.Type::"Net Income" then begin
+                //     rec.Amount := GlobalFun.GetSmallestSalary(Savingsacc."No.", SlaryIn::Salary);
+                // end;
+                // if Rec.Type = Rec.Type::"SAYE Income" then begin
+                //     Rec.Amount := GlobalFun.GetSmallestSalary(Savingsacc."No.", SlaryIn::SAYE);
+                // end;
+                // if Rec.Type = Rec.Type::Pension then begin
+                //     Rec.Amount := GlobalFun.GetSmallestSalary(Savingsacc."No.", SlaryIn::Pension);
+                // end;
+                // end;
+                // end
             end;
         }
         field(5; Amount; Decimal)
@@ -160,12 +160,7 @@ table 52185744 "Appraisal Salary Details"
                 //     end;
                 // end;
                 //End of initialize STO Amount if There is Basic Amount
-                if LoanApp.Get("Loan No") then begin
-                    if (LoanApp."Source Unit" = LoanApp."Source Unit"::BOSA) then begin
-                        fnProcessSalaryDetails();
-                        CalculateNetPay();
-                    end;
-                end;
+
 
             end;
         }
@@ -237,7 +232,7 @@ table 52185744 "Appraisal Salary Details"
         end;
     end;
 
-    procedure fnProcessSalaryDetails()
+    procedure fnProcessSalaryDetails(LoanNo: code[20]; Mno: code[20])
     var
         curBasicPay: Decimal;
         ApprDetails: Record "Appraisal Salary Details";
@@ -263,77 +258,79 @@ table 52185744 "Appraisal Salary Details"
         PensionRelief: Decimal;
         curPensionAmount: Decimal;
         CurGrossPay: Decimal;
+        OtherAllowances: Decimal;
+        TotalDeductions: Decimal;
     begin
         dtOpenPeriod := prPayrollProcessing.fnGetOpenPeriod();
         intMonth := Date2dmy(dtOpenPeriod, 2);
         intYear := Date2dmy(dtOpenPeriod, 3);
 
         // STEP 1: Get Basic Pay from details
-        if Rec.Type = Rec.Type::Basic then
-            curBasicPay := Rec.Amount
-        else begin
-            // Fetch Basic from existing salary detail lines
-            ApprDetails.Reset();
-            ApprDetails.SetRange("Loan No", Rec."Loan No");
-            ApprDetails.SetRange("Client Code", Rec."Client Code");
-            ApprDetails.SetRange(Type, ApprDetails.Type::Basic);
-            if ApprDetails.FindFirst() then
-                curBasicPay := ApprDetails.Amount;
+        // if Rec.Type = Rec.Type::Basic then
+        //     curBasicPay := Rec.Amount
+        // else begin
+        //     // Fetch Basic from existing salary detail lines
+        //     ApprDetails.Reset();
+        //     ApprDetails.SetRange("Loan No", LoanNo);
+        //     ApprDetails.SetRange("Client Code", Mno);
+        //     ApprDetails.SetRange(Type, ApprDetails.Type::Basic);
+        //     if ApprDetails.FindFirst() then
+        //         curBasicPay := ApprDetails.Amount;
+        // end;
+
+        // if Rec.Type = Rec.Type::Pension then
+        //     curPensionAmount := Rec.Amount
+        // else begin
+        //     ApprDetails.Reset();
+        //     ApprDetails.SetRange("Loan No", Rec."Loan No");
+        //     ApprDetails.SetRange("Client Code", Rec."Client Code");
+        //     ApprDetails.SetRange(Type, ApprDetails.Type::Pension);
+        //     if ApprDetails.FindFirst() then
+        //         curPensionAmount := ApprDetails.Amount;
+        // end;
+
+        // if Rec.Type = Rec.Type::"Gross Pay" then
+        //     CurGrossPay := Rec.Amount
+        // else begin
+        //     ApprDetails.Reset();
+        //     ApprDetails.SetRange("Loan No", Rec."Loan No");
+        //     ApprDetails.SetRange("Client Code", Rec."Client Code");
+        //     ApprDetails.SetRange(Type, ApprDetails.Type::"Gross Pay");
+        //     if ApprDetails.FindFirst() then
+        //         CurGrossPay := ApprDetails.Amount;
+        // end;
+        ApprDetails.Reset();
+        ApprDetails.SetRange("Loan No", LoanNo);
+        ApprDetails.SetRange("Client Code", Mno);
+        ApprDetails.setfilter(Type, '%1|%2|%3', ApprDetails.Type::Basic, ApprDetails.Type::Pension, ApprDetails.Type::"Other Allowances");
+        if ApprDetails.FindFirst() then begin
+            repeat
+                case
+                    ApprDetails.Type of
+                    ApprDetails.Type::Basic:
+                        curBasicPay := ApprDetails.Amount;
+
+                    ApprDetails.Type::Pension:
+                        curPensionAmount := ApprDetails.Amount;
+                    ApprDetails.Type::"Other Allowances":
+                        OtherAllowances := ApprDetails.Amount;
+                end;
+            until ApprDetails.Next() = 0;
         end;
 
-        if Rec.Type = Rec.Type::Pension then
-            curPensionAmount := Rec.Amount
-        else begin
-            ApprDetails.Reset();
-            ApprDetails.SetRange("Loan No", Rec."Loan No");
-            ApprDetails.SetRange("Client Code", Rec."Client Code");
-            ApprDetails.SetRange(Type, ApprDetails.Type::Pension);
-            if ApprDetails.FindFirst() then
-                curPensionAmount := ApprDetails.Amount;
-        end;
-
-        if Rec.Type = Rec.Type::"Gross Pay" then
-            CurGrossPay := Rec.Amount
-        else begin
-            ApprDetails.Reset();
-            ApprDetails.SetRange("Loan No", Rec."Loan No");
-            ApprDetails.SetRange("Client Code", Rec."Client Code");
-            ApprDetails.SetRange(Type, ApprDetails.Type::"Gross Pay");
-            if ApprDetails.FindFirst() then
-                CurGrossPay := ApprDetails.Amount;
-        end;
-
+        CurGrossPay := curBasicPay + OtherAllowances;
+        curBasicPay := ApprDetails.Amount;
         curTransAmount := ROUND(curBasicPay, 0.01, '<');
         //Message('Basic Pay: %1', curTransAmount);
         // STEP 2: Pre-calc shared values
         curNSSF := prPayrollProcessing.fnGetEmployerNSSF(curTransAmount);
         //Message('NSSF: %1', curNSSF);
-
-
         ShifAmount := ROUND((curTransAmount * (2.75 / 100)), 0.01, '<');
-        //Message('SHIF: %1', ShifAmount);
-        // clear(TotalOutstanding);
-        // Loanrec.Reset();
-        // Loanrec.SetAutoCalcFields("Outstanding Balance");
-        // Loanrec.SetRange("Member No.", Rec."Client Code");
-        // Loanrec.SetRange("Recovery Mode", Loanrec."Recovery Mode"::Checkoff);
-        // if Loanrec.FindSet() then
-        //     repeat
-        //         TotalOutstanding += Loanrec."Outstanding Balance";
-        //     until Loanrec.Next() = 0;
-
-        // Savingsacc.Reset;
-        // Savingsacc.SetRange("Member No.", Rec."Client Code");
-        // Savingsacc.SetRange("Product Category", Savingsacc."Product Category"::"BOSA Deposits");
-        // if Savingsacc.FindFirst() then
-        //     DepositContr := Savingsacc."Monthly Contribution";
-        //Message('Share Contribution: %1',ShrContr);
 
         HousingLevyAmount := ROUND((curTransAmount * (1.5 / 100)), 0.01, '<');
-        //Message('Housing Levy: %1', HousingLevyAmount);
 
         Relief := 2400;
-        TaxablePay := curTransAmount - curNSSF - ShifAmount - HousingLevyAmount - curPensionAmount;
+        TaxablePay := (curTransAmount + OtherAllowances) - curNSSF - ShifAmount - HousingLevyAmount - curPensionAmount;
         if TaxablePay < 0 then
             TaxablePay := 0;
         curPayeAmount := prPayrollProcessing.fnGetEmployeePaye(TaxablePay);
@@ -341,54 +338,60 @@ table 52185744 "Appraisal Salary Details"
         if curPayeAmount < 0 then
             curPayeAmount := 0;
         curPayeAmount := ROUND(curPayeAmount, 0.01, '>');
-        //Message('PAYE: %1', curPayeAmount);
 
-
+        TotalDeductions := curPayeAmount + ShifAmount + curNSSF + curPensionAmount + HousingLevyAmount;
 
         // STEP 3: Update using Appraisal Setup
         ApprDetails.Reset();
-        ApprDetails.SetRange("Loan No", Rec."Loan No");
-
+        ApprDetails.SetRange("Loan No", LoanNo);
+        ApprDetails.SetRange("Client Code", Mno);
         if ApprDetails.FindSet() then begin
             repeat
                 // Link to setup using Code (BEST key)
-                AppraisalSet.Reset();
-                AppraisalSet.SetRange(Code, ApprDetails.Code);
+                // AppraisalSet.Reset();
+                // AppraisalSet.SetRange(Code, ApprDetails.Code);
 
-                if AppraisalSet.FindFirst() then begin
+                // if AppraisalSet.FindFirst() then begin
 
-                    case AppraisalSet.Code of
-                        'BASIC':
-                            ApprDetails.Amount := curBasicPay;
-                        'NSSF':
-                            ApprDetails.Amount := curNSSF;
+                case ApprDetails.Type of
+                    ApprDetails.Type::"Gross Pay":
+                        ApprDetails.Amount := CurGrossPay;
 
-                        'SHIF':
-                            ApprDetails.Amount := ShifAmount;
+                    ApprDetails.Type::NSSF:
+                        ApprDetails.Amount := curNSSF;
 
-                        'SHARES':
-                            ApprDetails.Amount := DepositContr;
+                    ApprDetails.Type::SHIF:
+                        ApprDetails.Amount := ShifAmount;
 
-                        'PAYE':
-                            ApprDetails.Amount := curPayeAmount;
+                    // 'SHARES':
+                    //     ApprDetails.Amount := DepositContr;
 
-                        'HOUSING LEVY':
-                            ApprDetails.Amount := HousingLevyAmount;
+                    ApprDetails.Type::PAYE:
+                        ApprDetails.Amount := curPayeAmount;
 
-                        'TAXABLE PAY':
-                            ApprDetails.Amount := TaxablePay;
+                    ApprDetails.Type::HLEVY:
+                        ApprDetails.Amount := HousingLevyAmount;
 
-                        'RELIEF':
-                            ApprDetails.Amount := Relief;
+                    ApprDetails.Type::"Taxable Pay":
+                        ApprDetails.Amount := TaxablePay;
 
-                        'SACCO LOANS':
-                            ApprDetails.Amount := TotalOutstanding;
+                    ApprDetails.Type::Relief:
+                        ApprDetails.Amount := Relief;
 
-                    end;
+                    ApprDetails.Type::Loans:
+                        ApprDetails.Amount := TotalOutstanding;
+                    ApprDetails.Type::Deductions:
+                        begin
+                            ApprDetails.Amount := TotalDeductions;
+                        end;
 
-                    ApprDetails.Modify();
+                    ApprDetails.Type::"Net Income":
+                        begin
+                            ApprDetails.Amount := CurGrossPay - TotalDeductions;
+                        end;
                 end;
-
+                ApprDetails.Modify();
+            // end;
             until ApprDetails.Next() = 0;
         end;
     end;

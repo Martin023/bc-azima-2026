@@ -1,4 +1,4 @@
-page 52186345 "Appraisal Salary Details."
+page 52186345 "Appraisal Salary Details Card."
 {
     DeleteAllowed = false;
     Editable = false;
