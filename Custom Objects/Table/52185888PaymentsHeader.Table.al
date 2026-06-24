@@ -207,6 +207,8 @@ table 52185888 "Payments Header"
         {
             Description = 'Stores the status of the record in the database';
             OptionMembers = Pending,Posted,Cancelled,Checking,"Pending Approval",Approved;
+            OptionCaption = 'Open,Posted,Rejected,Checking,Pending Approval,Approved';
+
             trigger OnValidate()
             begin
 
@@ -663,6 +665,17 @@ table 52185888 "Payments Header"
         field(50016; "Paying Bank Account Balance"; Decimal)
         {
             TableRelation = "Bank Account"."Balance (LCY)" where("No." = field("Paying Bank Account"));
+        }
+
+        field(482; "Cheque No.2"; Code[20])
+        {
+
+            trigger OnValidate()
+            begin
+                if "Pay Mode" = "Pay Mode"::Cash then begin
+                    Error('You CANNOT insert cheque No. If the Pay Mode is Cash');
+                end;
+            end;
         }
     }
 

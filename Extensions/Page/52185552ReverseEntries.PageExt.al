@@ -1,45 +1,40 @@
 // #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-PageExtension 52185552 pageextension52185552 extends "Reverse Transaction Entries"
-{
-    actions
-    {
-        modify(Reverse)
-        {
-            Enabled = IsReversalApproved;
-        }
-    }
+// PageExtension 52185552 pageextension52185552 extends "Reverse Transaction Entries"
+// {
+//     actions
+//     {
+//         modify(Reverse)
+//         {
+//             Enabled = IsReversalApproved;
+//         }
+//     }
 
-    trigger OnOpenPage()
-    begin
-        SetReversalApproved();
-    end;
+//     trigger OnOpenPage()
+//     begin
+//         SetReversalApproved();
+//     end;
 
-    trigger OnAfterGetCurrRecord()
-    begin
-        SetReversalApproved();
-    end;
+//     trigger OnAfterGetCurrRecord()
+//     begin
+//         SetReversalApproved();
+//     end;
 
-    local procedure SetReversalApproved()
-    var
-        SystemReversal: Record "System Reversal";
-        GLEntry: Record "G/L Entry";
-    begin
-        IsReversalApproved := false;
+//     local procedure SetReversalApproved()
+//     var
+//         SystemReversal: Record "System Reversal";
+//     begin
+//         IsReversalApproved := false;
 
-        GLEntry.SetRange("Transaction No.", Rec."Transaction No.");
-        if not GLEntry.FindFirst() then
-            exit;
+//         SystemReversal.SetRange("Transaction Number", Rec."Transaction No.");
+//         if not SystemReversal.FindFirst() then
+//             exit;
 
-        SystemReversal.SetRange("Transaction Number", GLEntry."Transaction No.");
-        if not SystemReversal.FindFirst() then
-            exit;
+//         IsReversalApproved := SystemReversal.Status = SystemReversal.Status::Approved;
+//     end;
 
-        IsReversalApproved := SystemReversal.Status = SystemReversal.Status::Approved;
-    end;
-
-    var
-        IsReversalApproved: Boolean;
-}
+//     var
+//         IsReversalApproved: Boolean;
+// }
 //     layout
 //     {
 //         modify("Transaction No.")
