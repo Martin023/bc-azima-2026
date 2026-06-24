@@ -337,6 +337,19 @@ page 52186882 "Account Activation"
                             SavingsAccounts.Modify;
                         end;
 
+                        //Send Sms
+                        Members.Reset();
+                        Members.SetRange("No.", rec."Member No");
+                        if Members.FindFirst() then begin
+                            msg := 'Dear Member, your account ' + Format(Rec."Account No") + ' ' + 'has been' + ' ' + Format(rec.Status);
+                            SendSMS.SendSms(Source::LOAN_POSTED, Members."Phone No.", msg, '', '', true, 0, false, 'CBS', Rec."Account No", 'CBS');
+
+                            if rec.Action = rec.Action::Activate then
+                                Members.Status := Members.Status::Active;
+                            Members.Modify(True);
+                        end;
+
+                        Message('Activated Successfully!!');
                     end;
                 }
 
