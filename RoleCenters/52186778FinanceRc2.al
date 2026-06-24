@@ -1609,10 +1609,10 @@ page 52186778 "Finance Role Center"
                             RunPageLink = Status = CONST(Approved);
 
                         }
-                        action("Cancelled Payment Vouchers List")
+                        action("Rejected Payment Vouchers List")
                         {
                             ApplicationArea = Basic, Suite;
-                            Caption = 'Cancelled Payment Voucher';
+                            Caption = 'Rejected Payment Voucher';
                             RunObject = page "Payment Vouchers List";
                             RunPageLink = Status = CONST(Cancelled);
                         }
