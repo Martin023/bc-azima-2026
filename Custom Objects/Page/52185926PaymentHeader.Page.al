@@ -1075,6 +1075,15 @@ page 52185926 "Payment Header"
 
     end;
 
+    trigger OnModifyRecord(): Boolean
+    begin
+        if Rec.Status = Rec.Status::Pending then begin
+            Rec.Cashier := UserId;
+            Rec."Global Dimension 1 Code" := UserMgt.GetSetDimensions(UserId, 1);
+        end;
+        exit(true);
+    end;
+
     var
         PayLine: Record "Payment Line";
         PVUsers: Record "W/P Budget Buffer";
