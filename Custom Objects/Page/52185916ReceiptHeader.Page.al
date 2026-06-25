@@ -167,9 +167,13 @@ page 52185916 "Receipt Header"
                         rec."Received From" := '';
                     end;
                 }
+                field("Group Code"; Rec."Group Code")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Group Name"; Rec."Group Name")
                 {
-                    Caption = 'Member Name';
+                    Caption = 'Group/Member Name';
                     Editable = false;
                 }
 
@@ -464,78 +468,143 @@ page 52185916 "Receipt Header"
                     end;
                 end;
             }
-            action("Suggest Previous Receipt")
+
+            action("Suggest Group Member Accounts")
             {
                 ApplicationArea = Basic, Suite;
-                Image = SuggestCustomerPayments;
+                Image = SuggestPayment;
                 Promoted = true;
                 PromotedCategory = Process;
 
                 trigger OnAction()
                 var
                     ReceiptSetup: Record "Receipts and Payment Types";
-                    ReceiptHdr: record "Receipts Header";
-                    ReceiptLineII: Record "Receipt Line";
+                    Signatories: record "Account Signatories";
                 begin
-                    if rec."Member No" = '' then begin
-                        Error('Please select a member');
+                    if rec."Group Code" = '' then begin
+                        Error('Please select a MFI no.');
                     end;
-                    if not Confirm('Suggest Prevoius receipt for member -  %1', true, Rec."Member No") then exit;
+                    if not Confirm('Suggest Savings accounts for %1', true, Rec."Group Code") then exit;
                     // end;
 
-                    ReceiptHdr.Reset();
-                    ReceiptHdr.SetRange(ReceiptHdr."Member No", Rec."Member No");
-                    ReceiptHdr.SetRange(Posted, true);
-                    if ReceiptHdr.FindLast() then begin
-                        ReceiptLineII.Reset();
-                        ReceiptLineII.SetRange(ReceiptLineII.No, ReceiptHdr."No.");
-                        if ReceiptLineII.FindFirst() then begin
-                            ReceiptLine.Reset;
-                            ReceiptLine.SetRange(No, Rec."No.");
-                            if ReceiptLine.FindSet()
-                            then
-                                ReceiptLine.DeleteAll();
-                            repeat
-                                ReceiptLine.Init;
-                                ReceiptLine.No := Rec."No.";
-                                if ReceiptLine.FindLast then
-                                    Line := ReceiptLine."Line No." + 1 else
-                                    Line += 1;
-                                ReceiptLine."Account Type" := ReceiptLineII."Account Type";
-                                ReceiptLine."Line No." := Line;
-                                ReceiptLine.Type := ReceiptLineII.Type;
-                                ReceiptLine."Account Name" := ReceiptLineII."Account Name";
-                                ReceiptLine.Validate(Type);
-                                ReceiptLine."Account No." := ReceiptLineII."Account No.";
-                                ReceiptLine.Validate("Account No.");
-                                if rec.Dim4 <> '' then
-                                    ReceiptLine.Description := Rec.Dim4
-                                else
-                                    ReceiptLine.Description := ReceiptLineII.Description;
-                                if ReceiptLine."Account Type" = ReceiptLine."Account Type"::Savings then begin
-
+                    //Clear any line
+                    ReceiptLine.Reset;
+                    ReceiptLine.SetRange(No, Rec."No.");
+                    ReceiptLine.SetRange(Type, 'SAVINGS');
+                    if ReceiptLine.Find('-') then begin
+                        repeat
+                            ReceiptLine.Delete;
+                        until ReceiptLine.Next = 0;
+                    end;
+                    //Insert new accounts
+                    Signatories.Reset();
+                    Signatories.SetRange("Account No", Rec."Group Code");
+                    if Signatories.findset() then begin
+                        repeat
+                            SavingsAccounts.Reset;
+                            SavingsAccounts.SetRange(SavingsAccounts."Member No.", Signatories."Member No.");
+                            SavingsAccounts.SetRange(SavingsAccounts."Product Category", SavingsAccounts."Product Category"::"Chama Investment Account");
+                            if SavingsAccounts.Find('-') then begin
+                                repeat
+                                    ReceiptLine.Init;
+                                    ReceiptLine.No := Rec."No.";
+                                    if ReceiptLine.FindLast then
+                                        Line := ReceiptLine."Line No." + 1 else
+                                        Line += 1;
+                                    ReceiptLine."Account Type" := ReceiptSetup."Account Type"::Savings;
+                                    ReceiptLine."Line No." := Line;
+                                    ReceiptLine.Type := 'SAVINGS';
+                                    ReceiptLine."Account Name" := SavingsAccounts."Product Name";
+                                    ReceiptLine.Validate(Type);
+                                    ReceiptLine."Account No." := SavingsAccounts."No.";
+                                    ReceiptLine.Validate("Account No.");
+                                    ReceiptLine.Description := Rec.Dim4;
+                                    ReceiptLine."Amount Payable" := SavingsAccounts."Monthly Contribution";
                                     ReceiptLine."Transaction Type" := ReceiptLine."Transaction Type"::" ";
                                     ReceiptLine."Loan No." := '';
                                     ReceiptLine."Total Outstanding Loan" := 0;
                                     ReceiptLine."Loan Oustanding Principal" := 0;
                                     ReceiptLine."Loan Outstanding Interest" := 0;
                                     ReceiptLine."Daily Interest" := 0;
-                                end
-                                else
-                                    if ReceiptLine."Account Type" = ReceiptLine."Account Type"::Credit then begin
-                                        ReceiptLine."Loan No." := ReceiptLineII."Loan No.";
-                                        ReceiptLine."Transaction Type" := ReceiptLineII."Transaction Type";
-                                        ReceiptLine.Validate("Loan No.");
-                                        ReceiptLine.Validate("Account No.");
-                                    end;
-                                ReceiptLine."Amount Payable" := ReceiptLineII."Amount Payable";
-                                ReceiptLine.Amount := ReceiptLineII.Amount;
-                                ReceiptLine.Insert(true);
-                            until ReceiptLineII.next = 0;
-                        end;
+                                    ReceiptLine.Insert(true);
+                                until SavingsAccounts.Next = 0;
+                            end;
+                        until Signatories.next = 0;
                     end;
                 end;
             }
+            // action("Suggest Previous Receipt")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = SuggestCustomerPayments;
+            //     Promoted = true;
+            //     PromotedCategory = Process;
+
+            //     trigger OnAction()
+            //     var
+            //         ReceiptSetup: Record "Receipts and Payment Types";
+            //         ReceiptHdr: record "Receipts Header";
+            //         ReceiptLineII: Record "Receipt Line";
+            //     begin
+            //         if rec."Member No" = '' then begin
+            //             Error('Please select a member');
+            //         end;
+            //         if not Confirm('Suggest Prevoius receipt for member -  %1', true, Rec."Member No") then exit;
+            //         // end;
+
+            //         ReceiptHdr.Reset();
+            //         ReceiptHdr.SetRange(ReceiptHdr."Member No", Rec."Member No");
+            //         ReceiptHdr.SetRange(Posted, true);
+            //         if ReceiptHdr.FindLast() then begin
+            //             ReceiptLineII.Reset();
+            //             ReceiptLineII.SetRange(ReceiptLineII.No, ReceiptHdr."No.");
+            //             if ReceiptLineII.FindFirst() then begin
+            //                 ReceiptLine.Reset;
+            //                 ReceiptLine.SetRange(No, Rec."No.");
+            //                 if ReceiptLine.FindSet()
+            //                 then
+            //                     ReceiptLine.DeleteAll();
+            //                 repeat
+            //                     ReceiptLine.Init;
+            //                     ReceiptLine.No := Rec."No.";
+            //                     if ReceiptLine.FindLast then
+            //                         Line := ReceiptLine."Line No." + 1 else
+            //                         Line += 1;
+            //                     ReceiptLine."Account Type" := ReceiptLineII."Account Type";
+            //                     ReceiptLine."Line No." := Line;
+            //                     ReceiptLine.Type := ReceiptLineII.Type;
+            //                     ReceiptLine."Account Name" := ReceiptLineII."Account Name";
+            //                     ReceiptLine.Validate(Type);
+            //                     ReceiptLine."Account No." := ReceiptLineII."Account No.";
+            //                     ReceiptLine.Validate("Account No.");
+            //                     if rec.Dim4 <> '' then
+            //                         ReceiptLine.Description := Rec.Dim4
+            //                     else
+            //                         ReceiptLine.Description := ReceiptLineII.Description;
+            //                     if ReceiptLine."Account Type" = ReceiptLine."Account Type"::Savings then begin
+
+            //                         ReceiptLine."Transaction Type" := ReceiptLine."Transaction Type"::" ";
+            //                         ReceiptLine."Loan No." := '';
+            //                         ReceiptLine."Total Outstanding Loan" := 0;
+            //                         ReceiptLine."Loan Oustanding Principal" := 0;
+            //                         ReceiptLine."Loan Outstanding Interest" := 0;
+            //                         ReceiptLine."Daily Interest" := 0;
+            //                     end
+            //                     else
+            //                         if ReceiptLine."Account Type" = ReceiptLine."Account Type"::Credit then begin
+            //                             ReceiptLine."Loan No." := ReceiptLineII."Loan No.";
+            //                             ReceiptLine."Transaction Type" := ReceiptLineII."Transaction Type";
+            //                             ReceiptLine.Validate("Loan No.");
+            //                             ReceiptLine.Validate("Account No.");
+            //                         end;
+            //                     ReceiptLine."Amount Payable" := ReceiptLineII."Amount Payable";
+            //                     ReceiptLine.Amount := ReceiptLineII.Amount;
+            //                     ReceiptLine.Insert(true);
+            //                 until ReceiptLineII.next = 0;
+            //             end;
+            //         end;
+            //     end;
+            // }
             action(Refresh)
             {
                 ApplicationArea = Basic, Suite;

@@ -433,12 +433,11 @@ table 52185828 "Guarantors Substitution"
         if Rec."Loan No." <> '' then begin
             LGuarant.Reset();
             LGuarant.SetRange(LGuarant."No.", Rec."No.");
-
             LGuarant.DeleteAll();
         end;
         Lguarantx.Reset;
         Lguarantx.SetRange(Lguarantx."Loan No", Rec."Loan No.");
-        //Lguarantx.SetRange(Lguarantx.Substituted, false);
+        Lguarantx.SetRange(Lguarantx.Substituted, false);
         if Lguarantx.Find('-') then
             repeat
 
@@ -451,12 +450,12 @@ table 52185828 "Guarantors Substitution"
                 LGuarant."Member No" := Lguarantx."Member No";
                 //get deposit contribution no
                 // SaVingAc.Get(LGuarant."Member No"); 
-                SaVingAc.Reset;
-                SaVingAc.SetRange("Member No.", LGuarant."Member No");
-                SaVingAc.SetRange("Product Type", '1');
-                if SaVingAc.FindFirst then begin
-                    LGuarant."Savings Account No." := SaVingAc."No.";
-                end;
+                // SaVingAc.Reset;
+                // SaVingAc.SetRange("Member No.", LGuarant."Member No");
+                // SaVingAc.SetRange("Product Type", '001');
+                // if SaVingAc.FindFirst then begin
+                LGuarant."Savings Account No." := Lguarantx."Savings Account No./Member No.";
+                // end;
                 LGuarant.Shares := Lguarantx."Deposits/Shares";
                 LGuarant."Loan Balance" := Lguarantx."Loan Balance";
                 LGuarant.Name := Lguarantx.Name;

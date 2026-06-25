@@ -1,4 +1,5 @@
 namespace MNS.MNS;
+using AZIMA.AZIMA;
 
 page 52187371 "Files Card"
 {
@@ -44,7 +45,7 @@ page 52187371 "Files Card"
                 {
                     ToolTip = 'Specifies the value of the Business Loan Type field.';
                     //Visible = VisibleBusinessLoansFileTypes;
-                    visible = false;    
+                    visible = false;
                 }
                 field("Policy Files Types"; Rec."Policy Files Types")
                 {
@@ -103,8 +104,15 @@ page 52187371 "Files Card"
                 // {
                 //     ToolTip = 'Specifies the value of the File Volume No. field.';
                 // }
+
+            }
+            part(Control1; "Member Form List")
+            {
+                ApplicationArea = Basic, Suite;
+                SubPageLink = "Member No." = field("File/Member No.");
             }
         }
+
     }
     //local procedure PageControl()
     trigger OnOpenPage()
@@ -112,6 +120,7 @@ page 52187371 "Files Card"
         FileTypes();
         restrictfilescardesit()
     end;
+
     trigger OnAfterGetCurrRecord()
     begin
         restrictfilescardesit();
