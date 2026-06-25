@@ -342,7 +342,8 @@ page 52186882 "Account Activation"
                         Members.SetRange("No.", rec."Member No");
                         if Members.FindFirst() then begin
                             if rec.Action = rec.Action::Activate then begin
-                                msg := 'Dear Member, your account ' + Format(Rec."Account No") + ' ' + 'has been' + ' ' + Format(rec.Status);
+                                //msg := 'Dear Member, your account ' + Format(Rec."Account No") + ' ' + 'has been' + ' ' + Format(rec.Status);
+                                msg := 'Dear ' + Members.Name + ', your account ' + Format(Rec."Account No") + ' ' + 'has been' + ' ' + Format(rec.Status);
                                 SendSMS.SendSms(Source::LOAN_POSTED, Members."Phone No.", msg, '', '', true, 0, false, 'CBS', Rec."Account No", 'CBS');
                                 Members.Status := Members.Status::Active;
                             end;
