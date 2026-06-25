@@ -1907,20 +1907,53 @@ page 52186778 "Finance Role Center"
                 group(Interbank)
                 {
                     Caption = 'InterBank Transfers';
+
                     action("Interbank Transfer")
                     {
                         ApplicationArea = Suite, FixedAssets;
                         Caption = 'InterBank Transfer';
                         RunObject = page "InterBank Transfers List";
                     }
+                    action("Pending Approval Interbank")
+                    {
+                        ApplicationArea = Suite, FixedAssets;
+                        Caption = 'Pending Approval';
+                        Image = Approval;
+                        RunObject = page "InterBank Transfers List";
+                        RunPageView = WHERE(Status = CONST("Pending Approval"));
+                    }
+                    action("Approved Interbank")
+                    {
+                        ApplicationArea = Suite, FixedAssets;
+                        Caption = 'Approved Transfers';
+                        Image = Approve;
+                        RunObject = page "InterBank Transfers List";
+                        RunPageView = WHERE(Status = CONST(Approved));
+                    }
+                    action("Rejected Interbank")
+                    {
+                        ApplicationArea = Suite, FixedAssets;
+                        Caption = 'Rejected Transfers';
+                        Image = Reject;
+                        RunObject = page "InterBank Transfers List";
+                        RunPageView = WHERE(Status = CONST(Rejected));
+                    }
+                    action("Cancelled Interbank")
+                    {
+                        ApplicationArea = Suite, FixedAssets;
+                        Caption = 'Cancelled Transfers';
+                        Image = Cancel;
+                        RunObject = page "InterBank Transfers List";
+                        RunPageView = WHERE(Status = CONST(Cancelled));
+                    }
                     action("Posted Interbank Transfer")
                     {
                         ApplicationArea = Suite, FixedAssets;
                         Caption = 'Posted InterBank Transfer';
+                        Image = PostedOrder;
                         RunObject = page "Posted Bank & Cash Transfers";
                     }
                 }
-
                 group(Salaries)
                 {
                     Caption = 'Salaries';
