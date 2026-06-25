@@ -34,7 +34,6 @@ page 52186055 "All Users Activities"
                 field(Members; Rec.Members)
                 {
                     Caption = 'Active Members';
-                    image = none;
                 }
                 field("Member Withdrawal"; Rec."Member Withdrawal")
                 {
@@ -73,7 +72,6 @@ page 52186055 "All Users Activities"
                 // }
                 field(Loans; Rec.Loans)
                 {
-                    image = none;
                 }
                 // field("My Staff Advance Surrender"; Rec."My Staff Advance Surrender")
                 // {
