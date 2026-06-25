@@ -1828,19 +1828,60 @@ page 52186778 "Finance Role Center"
                 group(Receipt)
                 {
                     Caption = 'Receipts';
+
                     action("Receipt List")
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Receipts';
                         RunObject = page "Receipts List";
                     }
+                    action("Pending Approval Receipts")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Pending Approval Receipts';
+                        Image = Approval;
+                        RunObject = page "Receipts List";
+                        RunPageView = WHERE(Status = CONST("Pending Approval"));
+                    }
+                    action("Approved Receipts")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Approved Receipts';
+                        Image = Approve;
+                        RunObject = page "Receipts List";
+                        RunPageView = WHERE(Status = CONST(Approved));
+                    }
+                    // action("Post Dated Receipts")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Post Dated Receipts';
+                    //     Image = Calendar;
+                    //     RunObject = page "Receipts List";
+                    //     RunPageView = WHERE(Status = CONST("Post Dated"));
+                    // }
+                    // action("Partial Receipts")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Partial Receipts';
+                    //     Image = Split;
+                    //     RunObject = page "Receipts List";
+                    //     RunPageView = WHERE(Status = CONST(Partial));
+                    // }
+                    action("Cancelled Receipts")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Cancelled Receipts';
+                        Image = Cancel;
+                        RunObject = page "Receipts List";
+                        RunPageView = WHERE(Status = CONST(Cancelled));
+                    }
                     action("Posted Receipt List")
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = ' Posted Receipts';
+                        Caption = 'Posted Receipts';
+                        Image = PostedOrder;
                         RunObject = page "Posted Receipt List";
                     }
-
                 }
                 // group("Per-Diem Receipt")
                 // {
