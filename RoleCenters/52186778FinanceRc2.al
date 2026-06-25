@@ -2834,6 +2834,49 @@ page 52186778 "Finance Role Center"
                 // }
 
             }
+
+            group("5. Purchase Invoicing1")
+            {
+                Caption = 'Purchase Invoicing';
+                Visible = true;
+                action("Open Purchase Invoices1")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Open Purchase Invoices';
+                    RunObject = page "Purchase Invoices";
+                    RunPageView = WHERE(Status = CONST("Open"));
+                }
+                action("Pending Purchase Invoices1")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Pending Purchase Invoices';
+                    RunObject = page "Purchase Invoices";
+                    RunPageView = WHERE(Status = CONST("Pending Approval"));
+                }
+                action("Approved Purchase Invoices1")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Approved Purchase Invoices';
+                    RunObject = page "Purchase Invoices";
+                    RunPageView = WHERE(Status = CONST("Released"));
+                }
+
+                action("Posted Purchase Invoicess1")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted Purchase Invoices';
+                    //RunObject = page "Purchase Invoices";
+                    RunObject = page "Posted Purchase Invoices";
+                }
+
+                action("All Purchase Invoices")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'All Purchase Invoices';
+                    Image = Invoice;
+                    RunObject = page "Purchase Invoices";
+                }
+            }
             group(Procurement)
             {
                 // group("Planning")
