@@ -217,6 +217,17 @@ page 52185917 "Bank & Cash Transfer Request"
 
             }
         }
+        area(factboxes)
+        {
+            part("Attached Documents List"; "Doc. Attachment List Factbox")
+            {
+                ApplicationArea = All;
+                Caption = 'Documents';
+                UpdatePropagation = Both;
+                SubPageLink = "Table ID" = const(Database::"InterBank Transfers"),
+                              "No." = field(No);
+            }
+        }
     }
 
     actions
