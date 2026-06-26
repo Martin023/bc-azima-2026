@@ -437,7 +437,7 @@ table 52185881 "InterBank Transfers"
         {
             Description = 'Stores the status of the record in the database';
             OptionMembers = Pending,Posted,Cancelled,"Pending Approval",Approved,Rejected;
-
+            OptionCaption = 'Pending,Posted,Rejected,Pending Approval,Approved,Rejected';
             trigger OnValidate()
             var
                 RegistrationMngt: Codeunit "Registration Process";
