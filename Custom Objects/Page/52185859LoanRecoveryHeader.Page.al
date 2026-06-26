@@ -1168,6 +1168,6 @@ page 52185859 "Loan Recovery Header"
         GlobalFunctions: Codeunit "Global Functions";
         ReversalLinesVisible: Boolean;
         AttachmentCertificateVisible: Boolean;
-        ForMoreInfo: Label 'For more info call 071060099 or IP 3996';
+        ForMoreInfo: Label 'For more info call 0748293268/0737727528';
 
 }

@@ -115,12 +115,12 @@ page 52186622 "Loan Processing Activities"
                 field("Applied Loans"; Rec."Applied Loans")
                 {
                     ApplicationArea = Basic;
-                    // Image = none;
+                    AutoFormatType = 11;
                 }
                 field("Appraised Loans"; Rec."Appraised Loans")
                 {
                     ApplicationArea = Basic;
-                    // Image = none;
+                    AutoFormatType = 11;
                     Caption = 'Pending Approvals';
                 }
                 field("Loan Approvals"; Rec."Approved Loans")
@@ -165,11 +165,12 @@ page 52186622 "Loan Processing Activities"
                 field("Active Members"; Rec."Active Members")
                 {
                     ApplicationArea = Basic, Suite;
-                    //AutoFormatType = 11;
+                    AutoFormatType = 11;
                 }
                 field("Dormant Members"; Rec."Dormant Members")
                 {
                     ApplicationArea = Basic, Suite;
+                    AutoFormatType = 11;
                 }
             }
             cuegroup("Withdrawal Notices")
@@ -178,6 +179,7 @@ page 52186622 "Loan Processing Activities"
                 field("Withdrawals Notices"; Rec."Withdrawals Notices")
                 {
                     ApplicationArea = Basic, Suite;
+                    AutoFormatType = 11;
                 }
             }
             cuegroup("Channels")

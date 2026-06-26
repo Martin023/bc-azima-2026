@@ -1159,44 +1159,40 @@ page 52187312 "Credit Management Role Center"
                     }
 
                 }
+                group("Loan rescheduling")
+                {
+                    action("Open Rescheduling List")
+                    {
 
-                //fusion
-                //kenpipe policy
-                // group("Loan rescheduling")
-                // {
+                        ApplicationArea = Basic, Suite;
+                        caption = 'Open Rescheduling List';
+                        RunObject = page "Loan Rescheduling List";
+                        RunPageLink = "Schedule Type" = filter(Reschedule), Status = filter(Open);
 
-                //     action("Open Rescheduling List")
-                //     {
+                    }
+                    action("Pending Recheduling")
+                    {
 
-                //         ApplicationArea = Basic, Suite;
-                //         caption = 'Open Rescheduling List';
-                //         RunObject = page "Loan Rescheduling List";
-                //         RunPageLink = "Schedule Type" = filter(Reschedule), Status = filter(Open);
-
-                //     }
-                //     action("Pending Recheduling")
-                //     {
-
-                //         ApplicationArea = all;
-                //         Caption = 'Pending Rescheduling List';
-                //         RunObject = page "Loan Rescheduling List";
-                //         RunPageLink = "Schedule Type" = filter(Reschedule), Status = filter(Pending);
-                //     }
-                //     action("Approved Reshedulling List")
-                //     {
-                //         ApplicationArea = all;
-                //         Caption = 'Approved Rescheduling List';
-                //         RunObject = page "Loan Rescheduling List";
-                //         RunPageLink = "Schedule Type" = filter(Reschedule), Status = filter(Approved), Rescheduled = const(false);
-                //     }
-                //     action("Rescheduled Loans List")
-                //     {
-                //         ApplicationArea = all;
-                //         Caption = 'Rescheduled Loans List';
-                //         RunObject = page "Loan Rescheduling List";
-                //         RunPageLink = "Schedule Type" = filter(Reschedule), Rescheduled = const(true);
-                //     }
-                // }
+                        ApplicationArea = all;
+                        Caption = 'Pending Rescheduling List';
+                        RunObject = page "Loan Rescheduling List";
+                        RunPageLink = "Schedule Type" = filter(Reschedule), Status = filter(Pending);
+                    }
+                    action("Approved Reshedulling List")
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Approved Rescheduling List';
+                        RunObject = page "Loan Rescheduling List";
+                        RunPageLink = "Schedule Type" = filter(Reschedule), Status = filter(Approved), Rescheduled = const(false);
+                    }
+                    action("Rescheduled Loans List")
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Rescheduled Loans List';
+                        RunObject = page "Loan Rescheduling List";
+                        RunPageLink = "Schedule Type" = filter(Reschedule), Rescheduled = const(true);
+                    }
+                }
                 // group("Loan Restructuring")
                 // {
                 //     action("Open Loan Restructring List")
@@ -1228,6 +1224,8 @@ page 52187312 "Credit Management Role Center"
                 //         RunPageLink = "Schedule Type" = filter(Restructure), Status = filter(Approved), Rescheduled = const(true);
                 //     }
                 // }
+
+
                 group("Guarantor Substitution")
                 {
                     action("Open Guarantor Substitution")
@@ -2663,7 +2661,7 @@ page 52187312 "Credit Management Role Center"
                             runobject = report "Membership Declaration";
                         }
                     }
-                    
+
 
                 }
 
@@ -3005,7 +3003,7 @@ page 52187312 "Credit Management Role Center"
 
                 }
 
-                
+
                 // group("Notifications")
                 // {
                 //     Action("Notification Setup")

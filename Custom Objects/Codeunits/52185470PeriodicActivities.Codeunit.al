@@ -5685,16 +5685,16 @@ Codeunit 52185470 "Periodic Activities"
                     LoanRecoveryLines."Loan No." := CreateGuarantorLoan(LoanRecoveryLines."Account No.", Loans, LoanRecoveryLines, Dim1, Dim2, DocNo, PDate);
 
                     TransAmt := 0;
-                    TransAmt := LoanRecoveryLines."Principle Amount" + LoanRecoveryLines."Interest Amount";
-                    Description := 'Guarantor Attachment ' + LoanRecoveryLines."Member No." + ' ' + LoanRecoveryLines."Loan No." + ' P & I';
+                    TransAmt := LoanRecoveryLines."Principle Amount";
+                    Description := 'Guarantor Attachment to principle ' + LoanRecoveryLines."Member No." + ' ' + LoanRecoveryLines."Loan No.";
                     SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
                         '', -TransAmt, ExtDoc, Loans."Loan No.", TransType::Repayment, Dim1, Dim2, SystemCreated);
 
-                    // TransAmt := 0;
-                    // TransAmt := LoanRecoveryLines."Interest Amount";
-                    // Description := 'Guarantor Attachment ' + LoanRecoveryLines."Member No." + ' ' + LoanRecoveryLines."Loan No." + ' Interest';
-                    // SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
-                    //     '', -TransAmt, ExtDoc, Loans."Loan No.", TransType::, Dim1, Dim2, SystemCreated);
+                    TransAmt := 0;
+                    TransAmt := LoanRecoveryLines."Interest Amount";
+                    Description := 'Guarantor Attachment to interest ' + LoanRecoveryLines."Member No." + ' ' + LoanRecoveryLines."Loan No.";
+                    SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
+                        '', -TransAmt, ExtDoc, Loans."Loan No.", TransType::"Interest Paid", Dim1, Dim2, SystemCreated);
                     LoanRecoveryLines.Modify();
                 end;
 
@@ -5962,8 +5962,8 @@ Codeunit 52185470 "Periodic Activities"
             NewLoans."Appraisal Parameter Type" := ProductFactory."Appraisal Parameter Type";
             NewLoans."Recovery Priority" := ProductFactory."Recovery Priority";
             NewLoans."Application Date" := PDate;
-            NewLoans."Requested Amount" := LoanRecLines."Principle Amount";
-            NewLoans."Approved Amount" := LoanRecLines."Principle Amount";
+            NewLoans."Requested Amount" := LoanRecLines."Principle Amount" + LoanReclines."Interest Amount";
+            NewLoans."Approved Amount" := LoanRecLines."Principle Amount" + LoanReclines."Interest Amount";
             NewLoans.Validate(NewLoans."Approved Amount");
             NewLoans.Status := NewLoans.Status::Approved;
             NewLoans."Disbursement Date" := PDate;
@@ -6023,13 +6023,13 @@ Codeunit 52185470 "Periodic Activities"
                 TransAmt := NewLoans."Approved Amount";
                 Description := 'Defaulter Attachment ' + Loans."Member No." + ' ' + Loans."Loan No.";
 
-                if LoanRecLines."Principle Amount" <> 0 then
+                if NewLoans."Approved Amount" <> 0 then
                     SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
                            '', TransAmt, DocNo, LoanNo, TransType::Loan, Dim1, Dim2, SystemCreated);
 
-                if LoanRecLines."Interest Amount" <> 0 then
-                    SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
-                           '', LoanRecLines."Interest Amount", DocNo, LoanNo, TransType::"Interest Due", Dim1, Dim2, SystemCreated);
+                // if LoanRecLines."Interest Amount" <> 0 then
+                // SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
+                //        '', LoanRecLines."Interest Amount", DocNo, LoanNo, TransType::"Interest Due", Dim1, Dim2, SystemCreated);
 
                 NewLoans.Posted := true;
                 NewLoans.Modify;
@@ -6043,6 +6043,7 @@ Codeunit 52185470 "Periodic Activities"
                 Members.Get(NewLoans."Member No.");
 
                 GlobalFunctions.GetMemberData(Members."No.", FirstName, PhoneNumber);
+                LoanNumber := NewLoans."Loan No.";
 
                 // msg := 'Dear member your have been attached Loan of Kes'
                 // + Format(ROUND(NewLoans."Approved Amount", 1, '=')) + ' ' + 'for defaulted loan you guaranteed Member No.' + Loans."Member No." + '-' + Loans."Member Name" + '' +
@@ -6135,8 +6136,8 @@ Codeunit 52185470 "Periodic Activities"
             NewLoans."Appraisal Parameter Type" := ProductFactory."Appraisal Parameter Type";
             NewLoans."Recovery Priority" := ProductFactory."Recovery Priority";
             NewLoans."Application Date" := PDate;
-            NewLoans."Requested Amount" := LoanRecLines."Principle Amount";
-            NewLoans."Approved Amount" := LoanRecLines."Principle Amount";
+            NewLoans."Requested Amount" := LoanRecLines."Principle Amount" + LoanRecLines."Interest Amount";
+            NewLoans."Approved Amount" := LoanRecLines."Principle Amount" + LoanRecLines."Interest Amount";
             NewLoans.Validate(NewLoans."Approved Amount");
             NewLoans.Status := NewLoans.Status::Approved;
             NewLoans."Disbursement Date" := PDate;
@@ -6163,15 +6164,15 @@ Codeunit 52185470 "Periodic Activities"
                 LoanNo := NewLoans."Loan No.";
                 SystemCreated := true;
                 TransAmt := NewLoans."Approved Amount";
-                Description := 'Defaulter Attachment ' + Loans."Member No." + ' ' + Loans."Loan No.";
+                Description := 'Defaulter P+I Attachment ' + Loans."Member No." + ' ' + Loans."Loan No.";
 
-                if LoanRecLines."Principle Amount" <> 0 then
+                if TransAmt <> 0 then
                     SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
                            '', TransAmt, DocNo, LoanNo, TransType::Loan, Dim1, Dim2, SystemCreated);
 
-                if LoanRecLines."Interest Amount" <> 0 then
-                    SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
-                           '', LoanRecLines."Interest Amount", DocNo, LoanNo, TransType::"Interest Due", Dim1, Dim2, SystemCreated);
+                // if LoanRecLines."Interest Amount" <> 0 then
+                //     SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
+                //            '', LoanRecLines."Interest Amount", DocNo, LoanNo, TransType::"Interest Due", Dim1, Dim2, SystemCreated);
 
                 NewLoans.Posted := true;
                 NewLoans.Modify;
