@@ -493,6 +493,7 @@ table 52185881 "InterBank Transfers"
                         CurrentChequeNo,
                         ExistingRec.No);
             end;
+
         }
         field(480; "Dimension Set ID"; Integer)
         {
