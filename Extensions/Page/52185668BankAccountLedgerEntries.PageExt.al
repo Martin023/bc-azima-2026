@@ -67,11 +67,12 @@ PageExtension 52185668 pageextension52185668 extends "Bank Account Ledger Entrie
         modify(Amount)
         {
             ApplicationArea = Basic;
+            visible = false;
         }
         modify("Amount (LCY)")
         {
             ApplicationArea = Basic;
-            Visible = true;
+            Visible = false;
         }
         modify("Debit Amount")
         {
@@ -131,16 +132,11 @@ PageExtension 52185668 pageextension52185668 extends "Bank Account Ledger Entrie
             Visible = false;
         }
 
-        //Unsupported feature: Property Deletion (ApplicationArea) on "Control1900383207(Control 1900383207)".
-
-
-        //Unsupported feature: Property Deletion (ApplicationArea) on "Control1905767507(Control 1905767507)".
-        // addafter(Open)
-        // {
-
-
-        //     field("User ID"; Rec."User ID") { }
-        // }
+        modify("Credit Amount")
+        {
+            ApplicationArea = Basic;
+            Visible = true;
+        }
         moveafter(Description; "Debit Amount")
         moveafter("Debit Amount"; "Credit Amount")
         moveafter(RunningBalance; "Global Dimension 1 Code")
@@ -165,9 +161,6 @@ PageExtension 52185668 pageextension52185668 extends "Bank Account Ledger Entrie
         modify("&Navigate")
         {
             ApplicationArea = Basic;
-
-            //Unsupported feature: Property Modification (PromotedCategory) on ""&Navigate"(Action 21)".
-
         }
 
 

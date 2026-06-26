@@ -1,4 +1,5 @@
 namespace MNS.MNS;
+using AZIMA.AZIMA;
 
 page 52187371 "Files Card"
 {
@@ -44,7 +45,7 @@ page 52187371 "Files Card"
                 {
                     ToolTip = 'Specifies the value of the Business Loan Type field.';
                     //Visible = VisibleBusinessLoansFileTypes;
-                    visible = false;    
+                    visible = false;
                 }
                 field("Policy Files Types"; Rec."Policy Files Types")
                 {
@@ -99,12 +100,37 @@ page 52187371 "Files Card"
                     ToolTip = 'Specifies the value of the ID No. field.';
                     //Visible = false;
                 }
-                // field("File Volume No."; Rec."File Volume No.")
-                // {
-                //     ToolTip = 'Specifies the value of the File Volume No. field.';
-                // }
+                field("File Volume No."; Rec."File Volume No.")
+                {
+                    ToolTip = 'Specifies the value of the File Volume No. field.';
+                }
+                field("File Batch No."; Rec."File Batch No.")
+                {
+                    ToolTip = 'Specifies the value of the File Batch No. field.';
+                }
+                field("Archived"; Rec.Archived)
+                {
+                    ToolTip = 'Specifies the value of the Archived field.';
+                    Editable = false;
+                }
+                field("Date Archived"; Rec."Date Archived")
+                {
+                    ToolTip = 'Specifies the value of the Date Archived field.';
+                    Editable = false;
+                }
+                field("Archived By"; Rec."Archived By")
+                {
+                    ToolTip = 'Specifies the value of the Archived By field.';
+                }
+
+            }
+            part(Control1; "Member Form List")
+            {
+                ApplicationArea = Basic, Suite;
+                SubPageLink = "Member No." = field("File/Member No.");
             }
         }
+
     }
     //local procedure PageControl()
     trigger OnOpenPage()
@@ -112,6 +138,7 @@ page 52187371 "Files Card"
         FileTypes();
         restrictfilescardesit()
     end;
+
     trigger OnAfterGetCurrRecord()
     begin
         restrictfilescardesit();

@@ -291,7 +291,8 @@ table 52185889 "Receipts Header"
         field(90; "Account Type"; Enum "Gen. Journal Account Type")
         {
             Caption = 'Account Type';
-            Editable = false;
+            ValuesAllowed = "Bank Account", Savings;
+            // Editable = false;
             // OptionCaption = 'G/L Account,Customer,Vendor,Bank Account,Fixed Asset,IC Partner,Savings,Credit';
             // OptionMembers = "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Savings,Credit;
         }
@@ -311,7 +312,7 @@ table 52185889 "Receipts Header"
             ELSE
             IF ("Account Type" = CONST("IC Partner")) "IC Partner"
             ELSE
-            IF ("Account Type" = CONST(Savings)) "Savings Accounts" WHERE("Product Type" = FILTER('PRIME' | 'TWIGA'))
+            IF ("Account Type" = CONST(Savings)) "Savings Accounts" WHERE("Product Category" = FILTER("Chama Investment Account"))
             ELSE
             IF ("Account Type" = CONST(Credit)) "Credit Accounts";
 
@@ -343,7 +344,6 @@ table 52185889 "Receipts Header"
         }
         field(483; "Group Code"; Code[20])
         {
-            Description = '//Added by Kigen--Lookup to members -- To gather for Micro Credit Groups to filter its members';
             TableRelation = Members."No." WHERE("Account Type" = FILTER(<> "Single Member Account"));
 
             trigger OnValidate()

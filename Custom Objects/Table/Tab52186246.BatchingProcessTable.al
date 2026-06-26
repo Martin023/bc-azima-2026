@@ -40,24 +40,24 @@ table 52186246 "Batching Process Table"
                     BatchLines.DeleteAll();
 
                 FileVolumes.RESET;
-                FileVolumes.SetRange("Batch", Rec."Batch");
+                FileVolumes.SetRange("File Batch No.", Rec."Batch No.");
                 FileVolumes.SetRange(Archived, False);
-                FileVolumes.SetRange(Batched, True);
+                // FileVolumes.SetRange(Batched, True);
                 if FileVolumes.find('-') then begin
                     repeat
                         BatchLines.Init;
                         BatchLines."Header No." := Rec."No.";
-                        BatchLines."Batch No." := FileVolumes."Batch";
-                        BatchLines."File No." := FileVolumes."File No.";
+                        BatchLines."Batch No." := FileVolumes."File Batch No.";
+                        BatchLines."File No." := FileVolumes."No.";
                         BatchLines."Volume No." := FileVolumes."File Volume No.";
                         BatchLines.Archived := FileVolumes.Archived;
-                        BatchLines."Date Batched" := FileVolumes."Date Batched";
-                        FilesTable.Reset();
-                        FilesTable.SetRange("No.", FileVolumes."File No.");
-                        if FilesTable.FindFirst() then
-                            BatchLines."Member No." := FilesTable."File/Member No.";
-                        BatchLines."Staff PF No." := FilesTable."Staff PF No.";
-                        BatchLines."Member Name" := FilesTable."File Name/Descrption";
+                        // BatchLines."Date Batched" := FileVolumes."Date Batched";
+                        // FilesTable.Reset();
+                        // FilesTable.SetRange("No.", FileVolumes."File No.");
+                        // if FilesTable.FindFirst() then
+                        BatchLines."Member No." := FileVolumes."File/Member No.";
+                        BatchLines."Staff PF No." := FileVolumes."Staff PF No.";
+                        BatchLines."Member Name" := FileVolumes."File Name/Descrption";
                         BatchLines.Insert();
                     until FileVolumes.Next() = 0;
                 end;
@@ -179,7 +179,7 @@ table 52186246 "Batching Process Table"
     var
         MembNoSeries: Record "Credit Nos. Series";
         NoSeriesMgt: Codeunit "No. Series";
-        FileVolumes: Record "File Volumes";
+        FileVolumes: Record "Files Table";
         BatchLines: Record "Batch Lines Table";
         FilesTable: Record "Files Table";
         Members: Record Members;

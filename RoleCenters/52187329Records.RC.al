@@ -827,6 +827,12 @@ page 52187329 "Records"
                         Caption = 'File Details List';
                         RunObject = page "Files List";
                     }
+                    action("Member Form List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Member Form List';
+                        RunObject = page "Member Form List";
+                    }
                     action("File Volumes List")
                     {
                         ApplicationArea = Basic, Suite;

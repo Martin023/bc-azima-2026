@@ -3756,7 +3756,6 @@ table 52185729 Loans
         InitLoop: integer;
         MDep: decimal;
         DepAcc: Record "Savings Accounts";
-        BCommBuffer: Record "52187009 Boosting Buffer";
         EmployerProducts: Record "52187008 Employer Product Attr";
         RejectionReason: Record "Exceptions/ Rejection Reason";
         MembNoSeries: Record "Credit Nos. Series";

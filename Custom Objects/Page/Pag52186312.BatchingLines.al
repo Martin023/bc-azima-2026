@@ -5,7 +5,7 @@ page 52186312 "Batching Lines"
     Caption = 'Batching Lines';
     PageType = ListPart;
     SourceTable = "Batch Lines Table";
-    Editable = False;
+    // Editable = False;
     
     layout
     {
@@ -48,11 +48,11 @@ page 52186312 "Batching Lines"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Staff PF No. field.';
                 }
-                field("Volume No."; Rec."Volume No.")
-                {
-                    ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Volume No. field.';
-                }
+                // field("Volume No."; Rec."Volume No.")
+                // {
+                //     ApplicationArea = All;
+                //     ToolTip = 'Specifies the value of the Volume No. field.';
+                // }
                 field(Archived; Rec.Archived)
                 {
                     ApplicationArea = All;

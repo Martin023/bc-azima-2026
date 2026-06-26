@@ -1,11 +1,11 @@
-table 52187009 "52187009 Boosting Buffer"
+table 52187009 "Member Form List"
 {
-    Caption = '52187009 Boosting Buffer';
     DataClassification = ToBeClassified;
-    
+    DrillDownPageId = "Member Form List";
+
     fields
     {
-        field(1; "Loan No."; Code[20])
+        field(1; "Reference No"; Code[20])
         {
             Caption = 'Loan No.';
         }
@@ -13,34 +13,34 @@ table 52187009 "52187009 Boosting Buffer"
         {
             Caption = 'Date';
         }
-        field(3; "Deposit Amount"; Decimal)
+        field(3; "Member No."; Code[50])
         {
-            Caption = 'Deposit Amount';
+            Caption = 'Member No.';
         }
-        field(4; "Expected Amount"; Decimal)
+        field(4; "Member Form Types"; Enum "Member Form Types")
         {
-            Caption = 'Expected Amount';
+            Caption = 'Form Type';
         }
-        field(5; "Boosted Amount"; Decimal)
+        field(5; filed; Boolean)
         {
-            Caption = 'Boosted Amount';
+            Caption = 'Filed/Received';
         }
-        field(6; Commission; Decimal)
+        field(6; "Filed By"; code[20])
         {
-            Caption = 'Commission';
+            Caption = 'Filed By.';
         }
-        field(7; "Total Current"; Decimal)
+        field(7; "Filed Date"; Date)
         {
-            Caption = 'Total Current';
+            Caption = 'Filed Date';
         }
-        field(8; "Total Expected"; Decimal)
+        field(9; "Received Date"; Date)
         {
-            Caption = 'Total Expected';
+            Caption = 'Received Date';
         }
     }
     keys
     {
-        key(PK; "Loan No.")
+        key(PK; "Reference No", "Member No.")
         {
             Clustered = true;
         }

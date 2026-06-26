@@ -222,7 +222,7 @@ table 52185783 "Salary Header"
             trigger OnValidate()
             begin
                 "End Date" := CalcDate('<CM>', "Start Date");
-                rec.Remarks := Format(Rec."Employer Code") + ' ' + Format("End Date", 0, '<Month Text>') + ' - ' + Format(Date2DMY("End Date", 3))
+                rec.Remarks := Format("End Date", 0, '<Month Text>') + ' - ' + Format(Date2DMY("End Date", 3))
                                + ' ' + Format(Rec."Income Type");
             end;
         }
