@@ -443,8 +443,8 @@ table 52185881 "InterBank Transfers"
                 RegistrationMngt: Codeunit "Registration Process";
                 GlobalFunctions: Codeunit "Global Functions";
             begin
-                // if (Rec.Status = Status::Rejected) or ((Rec.Status = Status::Approved)) then
-                //     GlobalFunctions.CommentsManagement(Rec.No);
+                if (Rec.Status = Status::Rejected) or ((Rec.Status = Status::Approved)) then
+                    GlobalFunctions.CommentsManagement(Rec.No);
             end;
         }
         field(94; "Created By"; Code[50])
@@ -478,8 +478,20 @@ table 52185881 "InterBank Transfers"
         field(102; "Cheque No"; Text[20])
         {
             trigger OnValidate()
+            var
+                ExistingRec: Record "InterBank Transfers";
+                CurrentChequeNo: Text[20];
             begin
                 "Cheque No" := UpperCase("Cheque No");
+
+                CurrentChequeNo := "Cheque No";
+                ExistingRec.Reset();
+                ExistingRec.SetRange("Cheque No", CurrentChequeNo);
+                ExistingRec.SetFilter(No, '<>%1', No);
+                if ExistingRec.FindFirst() then
+                    Error('Cheque No. %1 has already been used in Transfer %2.',
+                        CurrentChequeNo,
+                        ExistingRec.No);
             end;
         }
         field(480; "Dimension Set ID"; Integer)
