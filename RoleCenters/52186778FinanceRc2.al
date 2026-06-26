@@ -1941,7 +1941,7 @@ page 52186778 "Finance Role Center"
                     action("Cancelled Interbank Transfer")
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Cancelled InterBank Transfer';
+                        Caption = 'Rejected InterBank Transfer';
                         RunObject = page "InterBank Transfers List";
                         RunPageView = WHERE(Status = Const("cancelled"));
                     }
