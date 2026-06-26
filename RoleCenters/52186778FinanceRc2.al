@@ -1828,19 +1828,60 @@ page 52186778 "Finance Role Center"
                 group(Receipt)
                 {
                     Caption = 'Receipts';
+
                     action("Receipt List")
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Receipts';
                         RunObject = page "Receipts List";
                     }
+                    action("Pending Approval Receipts")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Pending Approval Receipts';
+                        Image = Approval;
+                        RunObject = page "Receipts List";
+                        RunPageView = WHERE(Status = CONST("Pending Approval"));
+                    }
+                    action("Approved Receipts")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Approved Receipts';
+                        Image = Approve;
+                        RunObject = page "Receipts List";
+                        RunPageView = WHERE(Status = CONST(Approved));
+                    }
+                    // action("Post Dated Receipts")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Post Dated Receipts';
+                    //     Image = Calendar;
+                    //     RunObject = page "Receipts List";
+                    //     RunPageView = WHERE(Status = CONST("Post Dated"));
+                    // }
+                    // action("Partial Receipts")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Partial Receipts';
+                    //     Image = Split;
+                    //     RunObject = page "Receipts List";
+                    //     RunPageView = WHERE(Status = CONST(Partial));
+                    // }
+                    action("Cancelled Receipts")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Cancelled Receipts';
+                        Image = Cancel;
+                        RunObject = page "Receipts List";
+                        RunPageView = WHERE(Status = CONST(Cancelled));
+                    }
                     action("Posted Receipt List")
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = ' Posted Receipts';
+                        Caption = 'Posted Receipts';
+                        Image = PostedOrder;
                         RunObject = page "Posted Receipt List";
                     }
-
                 }
                 // group("Per-Diem Receipt")
                 // {
@@ -1866,20 +1907,45 @@ page 52186778 "Finance Role Center"
                 group(Interbank)
                 {
                     Caption = 'InterBank Transfers';
-                    action("Interbank Transfer")
+                    action("Open Interbank Transfer")
                     {
-                        ApplicationArea = Suite, FixedAssets;
-                        Caption = 'InterBank Transfer';
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Open InterBank Transfer';
                         RunObject = page "InterBank Transfers List";
+                        RunPageView = WHERE(Status = Const("pending"));
+                    }
+
+                    action("Pending Interbank Transfer")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Pending InterBank Transfer';
+                        RunObject = page "InterBank Transfers List";
+                        RunPageView = WHERE(Status = Const("pending approval"));
+                    }
+
+                    action("Approved Interbank Transfer")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Approved InterBank Transfer';
+                        RunObject = page "InterBank Transfers List";
+                        RunPageView = WHERE(Status = Const("approved"), Posted = const(false));
                     }
                     action("Posted Interbank Transfer")
                     {
-                        ApplicationArea = Suite, FixedAssets;
+                        ApplicationArea = Basic, Suite;
                         Caption = 'Posted InterBank Transfer';
                         RunObject = page "Posted Bank & Cash Transfers";
+                        //RunPageView = WHERE(Status = Const("posted"));
+                    }
+
+                    action("Cancelled Interbank Transfer")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Cancelled InterBank Transfer';
+                        RunObject = page "InterBank Transfers List";
+                        RunPageView = WHERE(Status = Const("cancelled"));
                     }
                 }
-
                 group(Salaries)
                 {
                     Caption = 'Salaries';
@@ -2759,6 +2825,49 @@ page 52186778 "Finance Role Center"
                 }
                 // }
 
+            }
+
+            group("5. Purchase Invoicing1")
+            {
+                Caption = 'Purchase Invoicing';
+                Visible = true;
+                action("Open Purchase Invoices1")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Open Purchase Invoices';
+                    RunObject = page "Purchase Invoices";
+                    RunPageView = WHERE(Status = CONST("Open"));
+                }
+                action("Pending Purchase Invoices1")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Pending Purchase Invoices';
+                    RunObject = page "Purchase Invoices";
+                    RunPageView = WHERE(Status = CONST("Pending Approval"));
+                }
+                action("Approved Purchase Invoices1")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Approved Purchase Invoices';
+                    RunObject = page "Purchase Invoices";
+                    RunPageView = WHERE(Status = CONST("Released"));
+                }
+
+                action("Posted Purchase Invoicess1")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posted Purchase Invoices';
+                    //RunObject = page "Purchase Invoices";
+                    RunObject = page "Posted Purchase Invoices";
+                }
+
+                action("All Purchase Invoices")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'All Purchase Invoices';
+                    Image = Invoice;
+                    RunObject = page "Purchase Invoices";
+                }
             }
             group(Procurement)
             {

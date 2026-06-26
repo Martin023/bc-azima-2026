@@ -145,12 +145,22 @@ table 52185889 "Receipts Header"
         {
             trigger OnValidate()
             var
-                myInt: Integer;
+                ExistingHeader: Record "Receipts Header";
+                CurrentChequeNo: Code[20];
             begin
                 if StrLen("Cheque No.") <> 6 then
                     Error('Invalid Cheque');
-            end;
 
+                CurrentChequeNo := "Cheque No.";
+                ExistingHeader.Reset();
+                ExistingHeader.SetRange("Cheque No.", CurrentChequeNo);
+                ExistingHeader.SetFilter("No.", '<>%1', "No.");
+                if ExistingHeader.FindFirst() then
+                    Error('Cheque No. %1 has already been used in Receipt %2 received from %3.',
+                        CurrentChequeNo,
+                        ExistingHeader."No.",
+                        ExistingHeader."Received From");
+            end;
         }
         field(43; "No. Printed"; Integer)
         {

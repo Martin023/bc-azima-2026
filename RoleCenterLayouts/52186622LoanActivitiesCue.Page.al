@@ -125,13 +125,11 @@ page 52186622 "Loan Processing Activities"
                 }
                 field("Loan Approvals"; Rec."Approved Loans")
                 {
-                    Image = none;
 
                 }
                 field("Rejected Loans"; Rec."Rejected Loans")
                 {
                     ApplicationArea = Basic;
-                    Image = none;
 
                 }
                 field("Deffered Loans"; Rec."Deffered Loans")
@@ -150,7 +148,6 @@ page 52186622 "Loan Processing Activities"
                 {
                     ApplicationArea = Basic;
 
-                    Image = none;
                     LookupPageId = "Loan Posted List";
                     DrillDownPageId = "Loan Posted list";
                 }
@@ -169,12 +166,10 @@ page 52186622 "Loan Processing Activities"
                 {
                     ApplicationArea = Basic, Suite;
                     //AutoFormatType = 11;
-                    Image = None;
                 }
                 field("Dormant Members"; Rec."Dormant Members")
                 {
                     ApplicationArea = Basic, Suite;
-                    Image = None;
                 }
             }
             cuegroup("Withdrawal Notices")
