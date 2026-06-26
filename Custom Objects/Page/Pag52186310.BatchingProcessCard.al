@@ -98,11 +98,18 @@ page 52186310 "Batching Process Card"
 
                 }
             }
-            part("Batch Files"; "Batching Lines")
+            // part("Batch Files"; "Batching Lines")
+            // {
+            //     ApplicationArea = All;
+            //     Caption = 'Batch Files';
+            //     SubPageLink = "Header No." = field("No.");
+            // }
+            part("Files List"; "Files List")
             {
                 ApplicationArea = All;
                 Caption = 'Batch Files';
-                SubPageLink = "Header No." = field("No.");
+                SubPageLink = "File Batch No." = field("Batch No.");
+                // SubPageLink =  = field("Batch No.");
             }
         }
     }
@@ -123,31 +130,31 @@ page 52186310 "Batching Process Card"
                     //Rec.TestField(Status, Rec.Status::Approved);
                     if Not confirm('Are you sure you want to archive this batch?') then
                         exit;
-                    BatchLines.RESET;
-                    BatchLines.SetRange(Archived, false);
-                    BatchLines.SETRANGE("Batch No.", Rec."Batch");
-                    if BatchLines.FINDSET then
-                        repeat
-                            BatchLines.TESTFIELD("Archived", false);
-                            BatchLines.Archived := True;
-                            BatchLines."Date Archived" := Today;
-                            BatchLines."Archived By" := UserId;
-                            BatchLines.MODIFY;
-                        until BatchLines.NEXT = 0;
-
-                    // FileVolumes.RESET;
-                    // FileVolumes.SetRange(Archived, false);
-                    // FileVolumes.SETRANGE("Batch", Rec."Batch");
-                    // if FileVolumes.FindSet() then
+                    // BatchLines.RESET;
+                    // BatchLines.SetRange(Archived, false);
+                    // BatchLines.SETRANGE("Batch No.", Rec."Batch");
+                    // if BatchLines.FINDSET then
                     //     repeat
-                    //         //FileVolumes.TESTFIELD(Archived, false);
-                    //         //if FileVolumes.Archived = false then
-                    //         FileVolumes.Archived := True;
-                    //         FileVolumes."Date Archived" := Today;
-                    //         FileVolumes."Archived By" := UserId;
-                    //         FileVolumes."Volume Status" := FileVolumes."Volume Status"::Archived;
-                    //         FileVolumes.MODIFY;
-                    //     until FileVolumes.NEXT = 0;
+                    //         BatchLines.TESTFIELD("Archived", false);
+                    //         BatchLines.Archived := True;
+                    //         BatchLines."Date Archived" := Today;
+                    //         BatchLines."Archived By" := UserId;
+                    //         BatchLines.MODIFY;
+                    //     until BatchLines.NEXT = 0;
+
+                    FileVolumes.RESET;
+                    FileVolumes.SetRange(Archived, false);
+                    FileVolumes.SETRANGE("File Batch No.", Rec."Batch No.");
+                    if FileVolumes.FindSet() then
+                        repeat
+                            //FileVolumes.TESTFIELD(Archived, false);
+                            //if FileVolumes.Archived = false then
+                            FileVolumes.Archived := True;
+                            FileVolumes."Date Archived" := Today;
+                            FileVolumes."Archived By" := UserId;
+                            //FileVolumes."Volume Status" := FileVolumes."Volume Status"::Archived;
+                            FileVolumes.MODIFY;
+                        until FileVolumes.NEXT = 0;
 
                     Rec."Archived By" := UserId;
                     Rec."Date Archived" := Today;
@@ -254,5 +261,5 @@ page 52186310 "Batching Process Card"
         CustomApprovals: Codeunit "Custom Approvals Codeunit";
         VisibleSingleAsset: Boolean;
         VisibleCollectiveAsset: Boolean;
-        FileVolumes: REcord "File Volumes";
+        FileVolumes: REcord "Files Table";
 }

@@ -47,6 +47,11 @@ page 52185795 "Transactions Type"
                 }
                 field("Sal. Deposit Deduction"; Rec."Sal. Deposit Deduction")
                 {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Commission Type"; Rec."Commission Type")
+                {
+                    ApplicationArea = Basic, Suite;
                 }
             }
             part(Control1; "Transaction Charges")

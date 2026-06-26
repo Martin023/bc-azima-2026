@@ -28,6 +28,10 @@ Report 52185677 "Loan Statement"
             column(MemberName_Loans; Loans."Member Name")
             {
             }
+            column(BForward; BForward)
+            {
+            }
+
             dataitem("Credit Ledger Entry"; "Credit Ledger Entry")
             {
                 DataItemLink = "Loan No" = field("Loan No.");
@@ -65,6 +69,9 @@ Report 52185677 "Loan Statement"
                 column(Amount_CreditLedgerEntrys; "Credit Ledger Entry".Amount)
                 {
                 }
+                column(RunningBal; GlobalFunctions.GetLoanRunningBal("Credit Ledger Entry"."Entry No.", "Credit Ledger Entry"."Loan No"))
+                {
+                }
             }
         }
     }
@@ -85,4 +92,8 @@ Report 52185677 "Loan Statement"
     labels
     {
     }
+    var
+        GlobalFunctions: codeunit "Global Functions";
+        RunningBal: Decimal;
+        BForward: Decimal;
 }

@@ -463,21 +463,21 @@ table 52185827 "Loan Guarantors Sub"
                         end;
                     until GsubLines.Next() = 0;
                 end;
-                if TotaDeps < Gdepos then
-                    // Message('Kindly add more Guarantors');
-                GenSetUp.Get();
-                GHeader.Reset;
-                GHeader.SetRange(GHeader."No.", "No.");
-                if GHeader.Find('-') then begin
-                    LoanApp.Reset;
-                    LoanApp.SetRange("Loan No.", GHeader."Loan No.");
-                    if LoanApp.Find('-') then begin
-                        //Check status - sasra
-                        LoanApp.CalcFields("Loans Category-SASRA");
-                        if LoanApp."Loans Category-SASRA".AsInteger() >= GenSetUp."Allowed Loan Categories".AsInteger() then
-                            Message(Text012, LoanApp."Loans Category-SASRA");
-                    end;
-                end;
+                // if TotaDeps < Gdepos then
+                //     // Message('Kindly add more Guarantors');
+                // GenSetUp.Get();
+                // GHeader.Reset;
+                // GHeader.SetRange(GHeader."No.", "No.");
+                // if GHeader.Find('-') then begin
+                //     LoanApp.Reset;
+                //     LoanApp.SetRange("Loan No.", GHeader."Loan No.");
+                //     if LoanApp.Find('-') then begin
+                //         //Check status - sasra
+                //         LoanApp.CalcFields("Loans Category-SASRA");
+                //         if LoanApp."Loans Category-SASRA".AsInteger() >= GenSetUp."Allowed Loan Categories".AsInteger() then
+                //             Message(Text012, LoanApp."Loans Category-SASRA");
+                //     end;
+                // end;
                 GsubLines.Reset();
                 GsubLines.SetRange(GsubLines."Loan No", Rec."Loan No");
                 GsubLines.SetRange(GsubLines."No.", Rec."No.");

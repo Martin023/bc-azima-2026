@@ -51,22 +51,26 @@ page 52185755 "Credit Ledger Entries"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Debit Amount (LCY)"; Rec."Debit Amount (LCY)")
+                field(RunningBal; GlobalFunctions.GetLoanRunningBal(rec."Entry No.", rec."Loan No"))
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Credit Amount (LCY)"; Rec."Credit Amount (LCY)")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Debit Amount (LCY)"; Rec."Debit Amount (LCY)")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("Credit Amount (LCY)"; Rec."Credit Amount (LCY)")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field(Amount; Rec.Amount)
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Amount (LCY)"; Rec."Amount (LCY)")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Amount (LCY)"; Rec."Amount (LCY)")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field(Reversed; Rec.Reversed)
                 {
                     ApplicationArea = Basic, Suite;
@@ -79,10 +83,10 @@ page 52185755 "Credit Ledger Entries"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Remaining Amount"; Rec."Remaining Amount")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Remaining Amount"; Rec."Remaining Amount")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 // field("Original Amt. (LCY)"; Rec."Original Amt. (LCY)")
                 // {
                 //     ApplicationArea = Basic, Suite;
@@ -108,10 +112,10 @@ page 52185755 "Credit Ledger Entries"
                 // {
                 //     ApplicationArea = Basic, Suite;
                 // }
-                field("Customer Posting Group"; Rec."Customer Posting Group")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Customer Posting Group"; Rec."Customer Posting Group")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
                 {
                     ApplicationArea = Basic, Suite;
@@ -120,22 +124,22 @@ page 52185755 "Credit Ledger Entries"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Salesperson Code"; Rec."Salesperson Code")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Salesperson Code"; Rec."Salesperson Code")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Source Code"; Rec."Source Code")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("On Hold"; Rec."On Hold")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Source Code"; Rec."Source Code")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("On Hold"; Rec."On Hold")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 // field("Applies-to Doc. Type"; Rec."Applies-to Doc. Type")
                 // {
                 //     ApplicationArea = Basic, Suite;
@@ -144,14 +148,14 @@ page 52185755 "Credit Ledger Entries"
                 // {
                 //     ApplicationArea = Basic, Suite;
                 // }
-                field(Open; Rec.Open)
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Due Date"; Rec."Due Date")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field(Open; Rec.Open)
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("Due Date"; Rec."Due Date")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 // field("Pmt. Discount Date"; Rec."Pmt. Discount Date")
                 // {
                 //     ApplicationArea = Basic, Suite;
@@ -164,10 +168,10 @@ page 52185755 "Credit Ledger Entries"
                 // {
                 //     ApplicationArea = Basic, Suite;
                 // }
-                field(Positive; Rec.Positive)
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field(Positive; Rec.Positive)
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 // field("Closed by Entry No."; Rec."Closed by Entry No.")
                 // {
                 //     ApplicationArea = Basic, Suite;
@@ -200,14 +204,14 @@ page 52185755 "Credit Ledger Entries"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Transaction No."; Rec."Transaction No.")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Closed by Amount (LCY)"; Rec."Closed by Amount (LCY)")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Transaction No."; Rec."Transaction No.")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("Closed by Amount (LCY)"; Rec."Closed by Amount (LCY)")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
 
                 field("Document Date"; Rec."Document Date")
                 {
@@ -249,10 +253,10 @@ page 52185755 "Credit Ledger Entries"
                 // {
                 //     ApplicationArea = Basic, Suite;
                 // }
-                field("Date Filter"; Rec."Date Filter")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Date Filter"; Rec."Date Filter")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 // field("Remaining Pmt. Disc. Possible"; Rec."Remaining Pmt. Disc. Possible")
                 // {
                 //     ApplicationArea = Basic, Suite;
@@ -289,10 +293,10 @@ page 52185755 "Credit Ledger Entries"
                 // {
                 //     ApplicationArea = Basic, Suite;
                 // }
-                field("Applying Entry"; Rec."Applying Entry")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Applying Entry"; Rec."Applying Entry")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
 
                 // field(Prepayment; Rec.Prepayment)
                 // {
@@ -327,10 +331,10 @@ page 52185755 "Credit Ledger Entries"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Approver ID"; Rec."Approver ID")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Approver ID"; Rec."Approver ID")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("Member No."; Rec."Member No.")
                 {
                     ApplicationArea = Basic, Suite;
@@ -392,6 +396,8 @@ page 52185755 "Credit Ledger Entries"
 
     var
         Navigate: Page Navigate;
+        RunningBal: Decimal;
+        GlobalFunctions: codeunit "Global Functions";
 
     trigger OnOpenPage()
     var

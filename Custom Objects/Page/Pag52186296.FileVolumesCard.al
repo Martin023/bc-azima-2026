@@ -171,7 +171,7 @@ page 52186296 "File Volumes Card"
                     if not Confirm('Are you sure you want to archive this file?') then exit;
 
                     BatchLines.RESET;
-                    BatchLines.SetRange("Batch No.", Rec."Batch");
+                    BatchLines.SetRange("Batch No.", Rec."Batch No.");
                     if BatchLines.FindSet() then begin
                         BatchLines.Archived := true;
                         BatchLines.Modify();

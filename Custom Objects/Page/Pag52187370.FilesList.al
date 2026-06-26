@@ -9,14 +9,14 @@ page 52187370 "Files List"
     UsageCategory = Lists;
     CardPageId = "Files Card";
     Editable = false;
-    
+
     layout
     {
         area(content)
         {
             repeater(General)
             {
-                field("Entry No.";Rec."Entry No.")
+                field("Entry No."; Rec."Entry No.")
                 {
                     ToolTip = 'Specifies the value of the Entry No. field.';
                 }
@@ -28,14 +28,14 @@ page 52187370 "Files List"
                 {
                     ToolTip = 'Specifies the value of the File Type field.';
                 }
-                field("Business Loan Types";Rec."Business Loan Types")
-                {
-                    ToolTip = 'Specifies the value of the Business Loan Type field.';
-                }
-                field("Policy Files Types"; Rec."Policy Files Types")
-                {
-                    ToolTip = 'Specifies the value of the Policy Files Types field.';
-                }
+                // field("Business Loan Types";Rec."Business Loan Types")
+                // {
+                //     ToolTip = 'Specifies the value of the Business Loan Type field.';
+                // }
+                // field("Policy Files Types"; Rec."Policy Files Types")
+                // {
+                //     ToolTip = 'Specifies the value of the Policy Files Types field.';
+                // }
                 field("File/Member No."; Rec."File/Member No.")
                 {
                     ToolTip = 'Specifies the value of the File/Member No. field.';
@@ -51,6 +51,28 @@ page 52187370 "Files List"
                 field("File Status"; Rec."File Status")
                 {
                     ToolTip = 'Specifies the value of the Stage field.';
+                }
+                field("File Volume No."; Rec."File Volume No.")
+                {
+                    ToolTip = 'Specifies the value of the File Volume No. field.';
+                }
+                field("File Batch No."; Rec."File Batch No.")
+                {
+                    ToolTip = 'Specifies the value of the File Batch No. field.';
+                }
+                field("Archived"; Rec.Archived)
+                {
+                    ToolTip = 'Specifies the value of the Archived field.';
+                    Editable = false;
+                }
+                field("Date Archived"; Rec."Date Archived")
+                {
+                    ToolTip = 'Specifies the value of the Date Archived field.';
+                    Editable = false;
+                }
+                field("Archived By"; Rec."Archived By")
+                {
+                    ToolTip = 'Specifies the value of the Archived By field.';
                 }
             }
         }

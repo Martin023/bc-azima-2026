@@ -134,9 +134,33 @@ table 52186014 "Files Table"
         field(16; "ID No."; Code[100])
         {
         }
-        // field(17; "Staff No."; Code[100])
-        // {
-        // }
+        field(17; "File Batch No."; integer)
+        {
+            Caption = 'File Volume No.';
+            TableRelation = "Batch No Table";
+        }
+        field(18; Archived; Boolean)
+        {
+            Caption = 'Archived';
+
+            trigger OnValidate()
+            begin
+                if Archived then begin
+                    rec."Archived By" := UserId;
+                    rec."Date Archived" := Today;
+                end;
+            end;
+        }
+        field(19; "Date Archived"; Date)
+        {
+            Caption = 'Date Archived';
+        }
+        field(20; "Archived By"; Code[100])
+        {
+            Caption = 'Archived By';
+            TableRelation = "User Setup"."User Id";
+            editable = false;
+        }
     }
     keys
     {

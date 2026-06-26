@@ -81,10 +81,15 @@ page 52185859 "Loan Recovery Header"
                 Editable = FastTabsEditable;
                 Visible = RecoveryDetailsVisible;
 
-                field("Recover Attached Loan"; Rec."Recover Attached Loan")
+                field("Prorate Deposits"; Rec."Prorate Deposits")
                 {
 
                 }
+
+                // field("Recover Attached Loan"; Rec."Recover Attached Loan")
+                // {
+
+                // }
                 field("Loan No."; Rec."Loan No.")
                 {
 
@@ -916,6 +921,25 @@ page 52185859 "Loan Recovery Header"
 
         if Counter > 1 then
             MESSAGE('ALERT!\This case has the following warnings\' + ManualFlag + 'To view more, head to the comments section.');
+    end;
+
+    trigger OnNewRecord(BelowxRec: Boolean)
+    var
+        LoanRecoHeader: Record "Loan Recovery Header";
+    begin
+        LoanRecoHeader.reset;
+        LoanRecoHeader.SetRange("Entered By", UserId);
+        LoanRecoHeader.SetRange(Status, LoanRecoHeader.Status::Open);
+        LoanRecoHeader.SetRange("No.", '<>%1', rec."No.");
+        if LoanRecoHeader.count > 2 then
+            Error('You cannot create more than 2 open cases at a time. Kindly use the existing ones or contact the system administrator for assistance');
+
+        LoanRecoHeader.reset;
+        LoanRecoHeader.SetRange("Member No.", rec."Member No.");
+        LoanRecoHeader.setfilter(Status, '<>%1', LoanRecoHeader.Status::Rejected);
+        LoanRecoHeader.SetRange("No.", '<>%1', rec."No.");
+        if LoanRecoHeader.findset() then
+            Error('This member has an existing open case %1', LoanRecoHeader."No.");
     end;
 
     local procedure SetControlAppearance()
