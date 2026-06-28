@@ -4,7 +4,7 @@ page 52185482 "Member Form List"
 {
     ApplicationArea = All;
     Caption = 'Member Form List';
-    PageType = ListPart;
+    PageType = List;
     SourceTable = "Member Form List";
 
     layout

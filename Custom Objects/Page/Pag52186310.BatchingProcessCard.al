@@ -15,6 +15,7 @@ page 52186310 "Batching Process Card"
         {
             group(General)
             {
+                editable = (rec.Status = rec.status::open);
                 Caption = 'General';
 
                 field(No; Rec."No.")
@@ -130,17 +131,17 @@ page 52186310 "Batching Process Card"
                     //Rec.TestField(Status, Rec.Status::Approved);
                     if Not confirm('Are you sure you want to archive this batch?') then
                         exit;
-                    // BatchLines.RESET;
-                    // BatchLines.SetRange(Archived, false);
-                    // BatchLines.SETRANGE("Batch No.", Rec."Batch");
-                    // if BatchLines.FINDSET then
-                    //     repeat
-                    //         BatchLines.TESTFIELD("Archived", false);
-                    //         BatchLines.Archived := True;
-                    //         BatchLines."Date Archived" := Today;
-                    //         BatchLines."Archived By" := UserId;
-                    //         BatchLines.MODIFY;
-                    //     until BatchLines.NEXT = 0;
+                    BatchLines.RESET;
+                    BatchLines.SetRange(Archived, false);
+                    BatchLines.SETRANGE("Batch No.", Rec."Batch No.");
+                    if BatchLines.FINDSET then
+                        repeat
+                            BatchLines.TESTFIELD("Archived", false);
+                            BatchLines.Archived := True;
+                            BatchLines."Date Archived" := Today;
+                            BatchLines."Archived By" := UserId;
+                            BatchLines.MODIFY;
+                        until BatchLines.NEXT = 0;
 
                     FileVolumes.RESET;
                     FileVolumes.SetRange(Archived, false);
@@ -155,9 +156,10 @@ page 52186310 "Batching Process Card"
                             //FileVolumes."Volume Status" := FileVolumes."Volume Status"::Archived;
                             FileVolumes.MODIFY;
                         until FileVolumes.NEXT = 0;
-
+                    rec.Status := rec.Status::Archived;
                     Rec."Archived By" := UserId;
                     Rec."Date Archived" := Today;
+                    Rec.modify;
                     Message('Files have been succesfully Archived.');
                 end;
             }

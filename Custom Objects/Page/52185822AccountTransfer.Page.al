@@ -580,7 +580,7 @@ page 52185822 "Account Transfer"
 
                         SavingsREC.Reset;
                         SavingsREC.SetRange(SavingsREC."Member No.", rec."Member No");
-                        SavingsREC.setfilter("Product Category", '%1|%2|%3', SavingsREC."Product Category"::"FOSA Account", SavingsREC."Product Category"::Kesasa, SavingsREC."Product Category"::"Junior Account");
+                        SavingsREC.setfilter("Product Category", '<>%1', SavingsREC."Product Category"::"Entrance Fee");
                         SavingsREC.SetLoadFields("Balance (LCY)");
                         if SavingsREC.Find('-') then begin
                             repeat
