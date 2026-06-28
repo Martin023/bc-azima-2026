@@ -61,7 +61,7 @@ table 52185632 "Marketing Teams Header"
         field(6; "Branch Code"; Code[50])
         {
             Caption = 'Branch Code';
-            Editable = false;
+            // Editable = false;
         }
         field(7; "Status"; Option)
         {
@@ -76,6 +76,10 @@ table 52185632 "Marketing Teams Header"
         field(9; Created; Boolean)
         {
             Caption = 'Created';
+        }
+        field(10; Retainer; Decimal)
+        {
+            Caption = 'Retainer';
         }
 
 

@@ -3,7 +3,7 @@ namespace AZIMA.AZIMA;
 enum 52185465 "Commission Types"
 {
     Extensible = true;
-    
+
     value(0; "Member Recruitment")
     {
         Caption = 'Member Recruitment';
@@ -16,8 +16,8 @@ enum 52185465 "Commission Types"
     {
         Caption = 'Share Capital';
     }
-    value(3; "lLoans Disbursed")
+    value(3; "Loans Disbursed")
     {
-        Caption = 'lLoans Disbursed';
+        Caption = 'Loans Disbursed';
     }
 }

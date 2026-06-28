@@ -16,6 +16,7 @@ table 52187009 "Member Form List"
         field(3; "Member No."; Code[50])
         {
             Caption = 'Member No.';
+            TableRelation = Members."No.";
         }
         field(4; "Member Form Types"; Enum "Member Form Types")
         {
@@ -24,6 +25,13 @@ table 52187009 "Member Form List"
         field(5; filed; Boolean)
         {
             Caption = 'Filed/Received';
+
+            trigger OnValidate()
+            begin
+                "Filed By" := userid;
+                "Filed Date" := Today;
+                "Received Date" := Today;
+            end;
         }
         field(6; "Filed By"; code[20])
         {

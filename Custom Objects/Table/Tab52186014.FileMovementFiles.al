@@ -136,7 +136,6 @@ table 52186014 "Files Table"
         }
         field(17; "File Batch No."; integer)
         {
-            Caption = 'File Volume No.';
             TableRelation = "Batch No Table";
         }
         field(18; Archived; Boolean)
