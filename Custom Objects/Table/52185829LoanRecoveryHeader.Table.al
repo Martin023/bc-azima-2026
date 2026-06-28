@@ -343,12 +343,12 @@ table 52185829 "Loan Recovery Header"
         }
         field(12; "Account Balance"; Decimal)
         {
-            Caption = 'Account Balance';
+            Caption = 'Deposits Balance';
         }
 
         field(13; "Prorated Funds"; Decimal)
         {
-            Caption = 'Prorated Balance';
+            Caption = 'Prorated Deposits';
 
         }
         field(30; "Amount To Use"; Decimal)
@@ -639,18 +639,20 @@ table 52185829 "Loan Recovery Header"
                 ProductFactory: record "Product Factory";
             begin
                 if Rec."Recovery Type" = Rec."Recovery Type"::"Recovery and Attachment" then begin
+                    TotalLoansBalances := 0;
                     LoanRecoveryLines.Reset();
                     LoanRecoveryLines.SetRange("Header No.", Rec."No.");
                     if LoanRecoveryLines.FindFirst() then LoanRecoveryLines.DeleteAll();
 
                     if rec."Prorate Deposits" then begin
                         Loans.Reset();
+                        Loans.SetLoadFields("Member No.", "Member No.", "Outstanding Balance");
                         Loans.SetRange("Member No.", Rec."Member No.");
                         Loans.SetFilter("Outstanding Balance", '>0');
                         // Loans.SetRange("Recovery Product", ProductFactory."Recovery Product");
                         // Loans.SetRange("Loan Recovery No.", '');
                         //Loans.SetRange("Mobile Loan", false);
-                        if Loans.FindFirst() then begin
+                        if Loans.findset() then begin
                             repeat
                                 TotalLoansBalances += Loans."Outstanding Balance";
                             until Loans.Next() = 0;

@@ -1001,9 +1001,9 @@ codeunit 52187325 "Bulk Processing"
             LocationCoutry := 'KE';
             OccupationalIndustryType := '011';
             IncomeAmount := 12000000;
-            LendersRegisteredName := 'KENPIE SACCO LTD';
-            LendersTradingName := 'KENPIE SACCO LTD';
-            LendersBrachName := 'KENPIE SACCO LTD';
+            LendersRegisteredName := 'AZIMA SACCO LTD';
+            LendersTradingName := 'AZIMA SACCO LTD';
+            LendersBrachName := 'AZIMA SACCO LTD';
             LendersBrachCode := 'N084001';
 
             if CopyStr(Loans."Loan Product Type", 1, 1) = 'D' then
@@ -1382,14 +1382,14 @@ codeunit 52187325 "Bulk Processing"
                 if savingsaccount."Product Category" = savingsaccount."Product Category"::"Entrance Fee" then begin
                     MemberFactBox."Entrance Fee" := SavingsAccount."Balance (LCY)";
                 end;
-                // if SavingsAccount."Product Type" = '5' then begin
-                //     MemberFactBox.Risk := SavingsAccount."Balance (LCY)";
-                //     MemberFactBox."Risk Contribution" := SavingsAccount."Monthly Contribution";
-                // end;
-                //if SavingsAccount."Product Type" = '6' then begin
-                // if savingsaccount."Product Category" = savingsaccount."Product Category"::"Unallocated Fund" then begin
-                //     MemberFactBox."Unallocated Funds" := SavingsAccount."Balance (LCY)";
-                // end;
+            // if SavingsAccount."Product Type" = '5' then begin
+            //     MemberFactBox.Risk := SavingsAccount."Balance (LCY)";
+            //     MemberFactBox."Risk Contribution" := SavingsAccount."Monthly Contribution";
+            // end;
+            //if SavingsAccount."Product Type" = '6' then begin
+            // if savingsaccount."Product Category" = savingsaccount."Product Category"::"Unallocated Fund" then begin
+            //     MemberFactBox."Unallocated Funds" := SavingsAccount."Balance (LCY)";
+            // end;
             // if SavingsAccount."Product Type" = '011' then begin
             //     MemberFactBox."Business Deposits" := SavingsAccount."Balance (LCY)";
             // end;
