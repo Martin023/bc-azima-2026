@@ -2309,6 +2309,7 @@ page 52185753 "Loan Application Card"
                 // DO NOT comment out this!
                 action("EDMS File List")
                 {
+                    Caption = 'Loan Form';
                     ApplicationArea = Basic, Suite;
                     Image = Documents;
                     Promoted = true;

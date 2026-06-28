@@ -147,7 +147,7 @@ page 52186622 "Loan Processing Activities"
                 field("Disbursed Loans"; Rec."Disbursed Loans")
                 {
                     ApplicationArea = Basic;
-
+                    image = none;
                     LookupPageId = "Loan Posted List";
                     DrillDownPageId = "Loan Posted list";
                 }
@@ -165,12 +165,12 @@ page 52186622 "Loan Processing Activities"
                 field("Active Members"; Rec."Active Members")
                 {
                     ApplicationArea = Basic, Suite;
-                    AutoFormatType = 11;
+                    image = none;
                 }
                 field("Dormant Members"; Rec."Dormant Members")
                 {
                     ApplicationArea = Basic, Suite;
-                    AutoFormatType = 11;
+                    image = none;
                 }
             }
             cuegroup("Withdrawal Notices")

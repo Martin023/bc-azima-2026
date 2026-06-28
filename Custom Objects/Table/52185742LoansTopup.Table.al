@@ -135,10 +135,10 @@ table 52185742 "Loans Top up"
                             else
                                 AmountToSend := LoanApp."Requested Amount";
 
-                            NetAmt := LoansProcess.ComputeCharges(AmountToSend, LoanApp."Loan Product Type", LoanApp."Loan No.", 0);
-                            //MESSAGE(FORMAT(NetAmt));
-                            if NetAmt - "Total Top Up" <= 0 then
-                                Error(Text003);
+                            // NetAmt := LoansProcess.ComputeCharges(AmountToSend, LoanApp."Loan Product Type", LoanApp."Loan No.", 0);
+                            // //MESSAGE(FORMAT(NetAmt));
+                            // if NetAmt - "Total Top Up" <= 0 then
+                            //     Error(Text003);
                         end;
                     end;
                 end;
