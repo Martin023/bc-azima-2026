@@ -235,6 +235,15 @@ page 52185631 "HR Employee Card"
 
                     end;
                 }
+                field("Rejection Reason"; Rec."Rejection Reason")
+                {
+                    ApplicationArea = Basic;
+                    Editable = Rec.Status = Rec.Status::InActive;
+                    Visible = Rec.Status = Rec.Status::InActive;
+                    MultiLine = true;
+                    ShowMandatory = Rec.Status = Rec.Status::InActive;
+                    ToolTip = 'Enter reason for rejecting this employee application';
+                }
             }
             group("Personal Details")
             {
@@ -355,7 +364,7 @@ page 52185631 "HR Employee Card"
                             Message('Please input certificate number.');
                     end;
                 }
-                
+
                 field("Certificate No."; Rec."Certificate No.")
                 {
                     Editable = MKS;
@@ -652,8 +661,6 @@ page 52185631 "HR Employee Card"
                     Importance = Promoted;
                     ShowMandatory = true;
                     Editable = CurrCode;
-                    
-                    //REMOVED DUPLICATE PIN VALIDATION - TABLE VALIDATION HANDLES THIS
                 }
                 field("Medical Insurance No."; Rec."Medical Insurance No.")
                 {
@@ -965,7 +972,7 @@ page 52185631 "HR Employee Card"
                 action("Next of Kin")
                 {
                     ApplicationArea = Basic;
-                    Caption = 'Next of Kin';
+                    Caption = 'Contact Persons';
                     Image = Relatives;
                     Promoted = true;
                     PromotedCategory = Category6;
@@ -976,7 +983,7 @@ page 52185631 "HR Employee Card"
                 action(Dependants)
                 {
                     ApplicationArea = Basic;
-                    Caption = 'Dependants';
+                    Caption = 'Beneficiaries';
                     Image = Opportunity;
                     Promoted = true;
                     PromotedCategory = Category6;
@@ -1169,7 +1176,11 @@ page 52185631 "HR Employee Card"
                     var
                         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                     begin
+                        if not Confirm('Are you sure you want to reject this employee application? You can enter rejection reason after rejecting.', false) then
+                            exit;
+
                         ApprovalsMgmt.RejectRecordApprovalRequest(Rec.RecordId);
+                        Message('Application rejected. Please enter the rejection reason in the Rejection Reason field.');
                     end;
                 }
                 action(Delegate)
@@ -1328,7 +1339,7 @@ page 52185631 "HR Employee Card"
                     Message('KRA PIN MISMATCH DETECTED:' + '\' + '\' +
                         'Employee Card PIN: %1' + '\' +
                         'Member Register PIN: %2' + '\' + '\' +
-                        'The KRA PIN number on the Employee Card differs from the Member Register. Please verify which PIN is correct and update the Member Register accordingly to maintain data consistency.', 
+                        'The KRA PIN number on the Employee Card differs from the Member Register. Please verify which PIN is correct and update the Member Register accordingly to maintain data consistency.',
                         Rec."PIN No.", Members."P.I.N Number");
             end;
         end;

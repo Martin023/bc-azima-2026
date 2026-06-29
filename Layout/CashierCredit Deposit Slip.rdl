@@ -15,21 +15,6 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <Image Name="Company_Logo">
-            <Source>Embedded</Source>
-            <Value>azimaa</Value>
-            <MIMEType>image/bmp</MIMEType>
-            <Sizing>FitProportional</Sizing>
-            <Top>0.1cm</Top>
-            <Left>1.42292cm</Left>
-            <Height>1.2cm</Height>
-            <Width>5.38833cm</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Image>
           <Textbox Name="ReprintTextbox">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -49,11 +34,9 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>1.3cm</Top>
-            <Left>0.1cm</Left>
+            <Top>3cm</Top>
             <Height>0.4cm</Height>
-            <Width>7.6cm</Width>
-            <ZIndex>1</ZIndex>
+            <Width>6.83229cm</Width>
             <Style />
           </Textbox>
           <Textbox Name="TitleTextbox">
@@ -76,11 +59,10 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>1.8cm</Top>
-            <Left>0.1cm</Left>
+            <Top>3.5cm</Top>
             <Height>0.4cm</Height>
-            <Width>7.6cm</Width>
-            <ZIndex>2</ZIndex>
+            <Width>6.83229cm</Width>
+            <ZIndex>1</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="Textbox35">
@@ -107,11 +89,10 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>2.3cm</Top>
-            <Left>0.1cm</Left>
+            <Top>4cm</Top>
             <Height>0.4cm</Height>
-            <Width>7.6cm</Width>
-            <ZIndex>3</ZIndex>
+            <Width>6.83229cm</Width>
+            <ZIndex>2</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="Available_Balance_Caption18">
@@ -150,11 +131,10 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>2.8cm</Top>
-            <Left>0.1cm</Left>
+            <Top>4.5cm</Top>
             <Height>0.4cm</Height>
-            <Width>7.6cm</Width>
-            <ZIndex>4</ZIndex>
+            <Width>6.83229cm</Width>
+            <ZIndex>3</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="Textbox3">
@@ -181,11 +161,10 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>3.3cm</Top>
-            <Left>0.1cm</Left>
+            <Top>5cm</Top>
             <Height>0.4cm</Height>
-            <Width>7.6cm</Width>
-            <ZIndex>5</ZIndex>
+            <Width>6.83229cm</Width>
+            <ZIndex>4</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="Textbox29">
@@ -212,11 +191,10 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>3.8cm</Top>
-            <Left>0.1cm</Left>
+            <Top>5.5cm</Top>
             <Height>0.4cm</Height>
-            <Width>7.6cm</Width>
-            <ZIndex>6</ZIndex>
+            <Width>6.83229cm</Width>
+            <ZIndex>5</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="Textbox25">
@@ -243,11 +221,10 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>4.3cm</Top>
-            <Left>0.1cm</Left>
+            <Top>6cm</Top>
             <Height>0.4cm</Height>
-            <Width>7.6cm</Width>
-            <ZIndex>7</ZIndex>
+            <Width>6.83229cm</Width>
+            <ZIndex>6</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="Textbox26">
@@ -274,24 +251,23 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>4.8cm</Top>
-            <Left>0.1cm</Left>
+            <Top>6.5cm</Top>
             <Height>0.4cm</Height>
-            <Width>7.6cm</Width>
-            <ZIndex>8</ZIndex>
+            <Width>6.83229cm</Width>
+            <ZIndex>7</ZIndex>
             <Style />
           </Textbox>
           <Tablix Name="Tablix1">
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>2.6cm</Width>
+                  <Width>2.3441cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3cm</Width>
+                  <Width>2.7441cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2cm</Width>
+                  <Width>1.7441cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -480,11 +456,10 @@
                 </FilterValues>
               </Filter>
             </Filters>
-            <Top>5.4cm</Top>
-            <Left>0.1cm</Left>
+            <Top>7.1cm</Top>
             <Height>0.9cm</Height>
-            <Width>7.6cm</Width>
-            <ZIndex>9</ZIndex>
+            <Width>6.83229cm</Width>
+            <ZIndex>8</ZIndex>
             <Style />
           </Tablix>
           <Textbox Name="Textbox27">
@@ -514,11 +489,10 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>6.5cm</Top>
-            <Left>0.1cm</Left>
+            <Top>8.2cm</Top>
             <Height>0.4cm</Height>
-            <Width>7.6cm</Width>
-            <ZIndex>10</ZIndex>
+            <Width>6.83229cm</Width>
+            <ZIndex>9</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="AmountInWordsTextbox">
@@ -545,11 +519,10 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>7.1cm</Top>
-            <Left>0.1cm</Left>
+            <Top>8.8cm</Top>
             <Height>0.8cm</Height>
-            <Width>7.6cm</Width>
-            <ZIndex>11</ZIndex>
+            <Width>6.83229cm</Width>
+            <ZIndex>10</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="SignaturesTextbox">
@@ -593,11 +566,10 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>8.1cm</Top>
-            <Left>0.1cm</Left>
+            <Top>9.8cm</Top>
             <Height>1.2cm</Height>
-            <Width>7.6cm</Width>
-            <ZIndex>12</ZIndex>
+            <Width>6.83229cm</Width>
+            <ZIndex>11</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="ServedByTextbox">
@@ -624,11 +596,10 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>9.5cm</Top>
-            <Left>0.1cm</Left>
+            <Top>11.2cm</Top>
             <Height>0.4cm</Height>
-            <Width>7.6cm</Width>
-            <ZIndex>13</ZIndex>
+            <Width>6.83229cm</Width>
+            <ZIndex>12</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="ThankYouTextbox">
@@ -648,11 +619,10 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>10cm</Top>
-            <Left>0.1cm</Left>
+            <Top>11.7cm</Top>
             <Height>0.8cm</Height>
-            <Width>7.6cm</Width>
-            <ZIndex>14</ZIndex>
+            <Width>6.83229cm</Width>
+            <ZIndex>13</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="ReprintTimestamp2">
@@ -673,21 +643,34 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>11cm</Top>
-            <Left>0.1cm</Left>
+            <Top>12.7cm</Top>
             <Height>0.4cm</Height>
-            <Width>7.6cm</Width>
-            <ZIndex>15</ZIndex>
+            <Width>6.83229cm</Width>
+            <ZIndex>14</ZIndex>
             <Visibility>
               <Hidden>=IIf(First(Fields!Reprint.Value, "DataSet_Result") = "REPRINT", False, True)</Hidden>
             </Visibility>
             <Style />
           </Textbox>
+          <Image Name="Company_Logo3">
+            <Source>Embedded</Source>
+            <Value>azimaa</Value>
+            <MIMEType>image/bmp</MIMEType>
+            <Sizing>FitProportional</Sizing>
+            <Height>2.27639cm</Height>
+            <Width>6.83229cm</Width>
+            <ZIndex>15</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
         </ReportItems>
-        <Height>12cm</Height>
+        <Height>13.71979cm</Height>
         <Style />
       </Body>
-      <Width>8.36146cm</Width>
+      <Width>6.95917cm</Width>
       <Page>
         <PageHeight>15cm</PageHeight>
         <PageWidth>8cm</PageWidth>

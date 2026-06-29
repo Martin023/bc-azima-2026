@@ -198,6 +198,15 @@ Report 52185685 "Cashier CHDeposit Slip"
             column(ReprintTime; ReprintTime)
             {
             }
+            column(Payee_Transactions; Transactions.Payee)
+            {
+            }
+            column(ChequeIssuingBank_Transactions; Transactions."Cheque Issueing Bank")
+            {
+            }
+            column(ChequeDate_Transactions; Transactions."Cheque Date")
+            {
+            }
             dataitem("Transaction Charges"; "Transaction Charges")
             {
                 DataItemLink = "Transaction Type" = field("Transaction Type");
@@ -225,6 +234,8 @@ Report 52185685 "Cashier CHDeposit Slip"
                 CashierName := '';
                 MaskedAccountNo := '';
                 CashierNameOnly := '';
+
+                Transactions.CalcFields("Cheque Issueing Bank");
 
                 //FIXED: Use transaction cashier instead of current logged-in user
                 User.Reset;

@@ -62,6 +62,11 @@ table 52186161 "HR Officer Cue"
             Caption = 'Revolving fund Bal Loans';
             FieldClass = Normal;
         }
+        field(11; "HR Employees Inactive"; Integer)
+        {
+            CalcFormula = Count("HR Employees" WHERE(Status = FILTER(Inactive)));
+            FieldClass = FlowField;
+        }
     }
 
     keys

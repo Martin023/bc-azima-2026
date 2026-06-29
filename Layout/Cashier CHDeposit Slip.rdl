@@ -586,7 +586,7 @@
             </Style>
           </Image>
         </ReportItems>
-        <Height>13.59021cm</Height>
+        <Height>13.85479cm</Height>
         <Style />
       </Body>
       <Width>7.97938cm</Width>
@@ -631,6 +631,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox32</rd:DefaultName>
+              <Top>0cm</Top>
               <Left>0.1cm</Left>
               <Height>0cm</Height>
               <Width>7.5cm</Width>
@@ -665,6 +666,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox32</rd:DefaultName>
+              <Top>0cm</Top>
               <Left>0.1cm</Left>
               <Height>0cm</Height>
               <Width>7.5cm</Width>
@@ -700,6 +702,7 @@
                   <Style />
                 </Paragraph>
               </Paragraphs>
+              <Top>0cm</Top>
               <Left>0.1cm</Left>
               <Height>0cm</Height>
               <Width>7.5cm</Width>
@@ -1118,6 +1121,15 @@ ZZWuQqAQKAQKgUKgECgECoFCYJMjsMEUp9pAtsnLU4lfCPQKgkKgEBgGgQ06UbhBxRoG0fJTCBQChcCo
         </Field>
         <Field Name="ReprintTime">
           <DataField>ReprintTime</DataField>
+        </Field>
+        <Field Name="Payee_Transactions">
+          <DataField>Payee_Transactions</DataField>
+        </Field>
+        <Field Name="ChequeIssuingBank_Transactions">
+          <DataField>ChequeIssuingBank_Transactions</DataField>
+        </Field>
+        <Field Name="ChequeDate_Transactions">
+          <DataField>ChequeDate_Transactions</DataField>
         </Field>
         <Field Name="ReportForNavId_8541">
           <DataField>ReportForNavId_8541</DataField>
