@@ -2529,7 +2529,8 @@ Codeunit 52185470 "Periodic Activities"
                                 loans.reset;
                                 loans.setrange("Member No.", CheckoffBuffer2."Member No.");
                                 //loans.setfilter("Recovery Mode", '%1|%2', loans."Recovery Mode"::Checkoff, loans."Recovery Mode"::Hybrid);
-                                Loans.Setrange("Source Unit", Loans."Source Unit"::BOSA);
+                                // Loans.Setrange("Source Unit", Loans."Source Unit"::BOSA);
+                                Loans.setrange("Loan Product Type", CheckoffBuffer2."Product Code");
                                 Loans.SetCurrentKey("Disbursement Date");
                                 Loans.SetAscending("Disbursement Date", true);
                                 loans.SetFilter("Disbursement Date", '<=%1', checkoffHeader."Loan Cutoff Date");
@@ -2557,22 +2558,22 @@ Codeunit 52185470 "Periodic Activities"
                                             else
                                                 CheckoffLines.Amount := Loans.Repayment;
 
-                                            TotalSTO := 0;
-                                            STOPlaced.Reset();
-                                            STOPlaced.setrange(Status, STOPlaced.Status::Approved);
-                                            STOPlaced.setrange("Member No.", Loans."Member No.");
-                                            if STOPlaced.findfirst then begin
-                                                repeat
-                                                    STOLines.reset;
-                                                    STOLines.setrange("Document No.", STOPlaced."No.");
-                                                    STOLines.SetRange("Loan No.", Loans."Loan No.");
-                                                    if STOLines.findfirst then begin
-                                                        TotalSTO += STOLines.Amount;
-                                                    end;
-                                                until STOPlaced.next = 0;
-                                            end;
+                                            // TotalSTO := 0;
+                                            // STOPlaced.Reset();
+                                            // STOPlaced.setrange(Status, STOPlaced.Status::Approved);
+                                            // STOPlaced.setrange("Member No.", Loans."Member No.");
+                                            // if STOPlaced.findfirst then begin
+                                            //     repeat
+                                            //         STOLines.reset;
+                                            //         STOLines.setrange("Document No.", STOPlaced."No.");
+                                            //         STOLines.SetRange("Loan No.", Loans."Loan No.");
+                                            //         if STOLines.findfirst then begin
+                                            //             TotalSTO += STOLines.Amount;
+                                            //         end;
+                                            //     until STOPlaced.next = 0;
+                                            // end;
 
-                                            CheckoffLines.Amount := CheckoffLines.Amount - TotalSTO;
+                                            // CheckoffLines.Amount := CheckoffLines.Amount - TotalSTO;
                                             if CheckoffLines.Amount < 0 then begin
                                                 CheckoffLines.Amount := 0;
                                             end;
@@ -2663,107 +2664,106 @@ Codeunit 52185470 "Periodic Activities"
                                 // end;
 
                                 if remAmt > 0 then begin
-                                    if remAmt > 500 then begin
-                                        UnallocatedAccount := '';
-                                        SavingsAccounts.Reset;
-                                        SavingsAccounts.SetRange(SavingsAccounts."Member No.", Members."No.");
-                                        SavingsAccounts.SetRange("Product Category", SavingsAccounts."product category"::"Unallocated Fund");
-                                        if SavingsAccounts.Find('-') then begin
-                                            UnallocatedAccount := SavingsAccounts."No.";
-                                        end else begin
-                                            Pfact.reset;
-                                            Pfact.SetRange("Product Category", Pfact."Product Category"::"Unallocated Fund");
-                                            Pfact.SetRange(status, Pfact.status::Active);
-                                            if Pfact.find('-') then begin
+                                    // if remAmt > 500 then begin
+                                    UnallocatedAccount := '';
+                                    SavingsAccounts.Reset;
+                                    SavingsAccounts.SetRange(SavingsAccounts."Member No.", Members."No.");
+                                    SavingsAccounts.SetRange("Product Category", SavingsAccounts."product category"::"BOSA Deposits");
+                                    if SavingsAccounts.Find('-') then begin
+                                        UnallocatedAccount := SavingsAccounts."No.";
+                                    end else begin
+                                        Pfact.reset;
+                                        Pfact.SetRange("Product Category", Pfact."Product Category"::"BOSA Deposits");
+                                        Pfact.SetRange(status, Pfact.status::Active);
+                                        if Pfact.find('-') then begin
 
-                                                UnallocatedAccount := MemberRegistration.CreateSavingsAccountNo(Pfact."Product ID", Members."Global Dimension 1 Code", Members."No.");
-                                                MemberRegistration.AutoCreateSavingsAccount(UnallocatedAccount, Members."No.", Pfact."Product ID");
-                                            end;
+                                            UnallocatedAccount := MemberRegistration.CreateSavingsAccountNo(Pfact."Product ID", Members."Global Dimension 1 Code", Members."No.");
+                                            MemberRegistration.AutoCreateSavingsAccount(UnallocatedAccount, Members."No.", Pfact."Product ID");
                                         end;
-                                        // Unallocatd Fund
-                                        EntryNo := 1;
-                                        CheckoffLines2.Reset;
-                                        CheckoffLines2.SetRange(CheckoffLines2."Checkoff Header", CheckoffBuffer2."Checkoff No");
-                                        if CheckoffLines2.Find('+') then
-                                            EntryNo := CheckoffLines2."Entry No" + 1;
-
-                                        CheckoffLines.Init;
-                                        CheckoffLines."Entry No" := EntryNo;
-                                        CheckoffLines.Amount := remAmt;
-                                        CheckoffLines."Account No." := SavingsAccounts."No.";
-                                        //IF CheckoffBuffer2."Account No"<>'' THEN
-                                        CheckoffLines.Multiple := true;
-                                        CheckoffLines."Loan No." := '';
-                                        // if CheckoffBuffer2."Loan No" <> '' then begin
-                                        //     CheckoffLines."Clears Loan" := AmountClearsLoanIfPosted(CheckoffBuffer2."Loan No", CheckoffBuffer2.Amount);
-                                        //     if CheckoffLines."Clears Loan" then
-                                        //         CheckoffLines."Refundable Amount" := ABS(GetLoanBalanceAfterPosting(CheckoffBuffer2."Loan No", CheckoffBuffer2.Amount));
-                                        // end;
-                                        CheckoffLines."Payroll No." := SavingsAccounts."Payroll/Staff No.";
-                                        CheckoffLines."ID Number" := SavingsAccounts."ID No.";
-                                        CheckoffLines."Member No." := SavingsAccounts."Member No.";
-                                        CheckoffLines."Savings Account" := true;
-                                        CheckoffLines."Credit Account" := false;
-                                        CheckoffLines."Checkoff Header" := checkoffHeader."No.";
-                                        CheckoffLines.Type := checkoffHeader.Type;
-                                        CheckoffLines.Name := SavingsAccounts.Name;
-                                        // CheckoffLines."Payroll No." := CheckoffBuffer2.Payroll;
-                                        CheckoffLines."Employer Code" := SavingsAccounts."Employer Code";
-                                        CheckoffLines.Remarks := 'Unallocated Fund for ' + checkoffHeader."No.";
-                                        CheckoffLines."Product Code" := SavingsAccounts."Product Type";
-                                        CheckoffLines.Insert;
-                                    end
-                                    else begin
-                                        UnallocatedAccount := '';
-                                        SavingsAccounts.Reset;
-                                        SavingsAccounts.SetRange(SavingsAccounts."Member No.", Members."No.");
-                                        SavingsAccounts.SetRange("Product Type", '191`');
-                                        if SavingsAccounts.Find('-') then begin
-                                            UnallocatedAccount := SavingsAccounts."No.";
-                                        end else begin
-                                            Pfact.reset;
-                                            Pfact.SetRange("Product ID", '191');
-                                            Pfact.SetRange(status, Pfact.status::Active);
-                                            if Pfact.find('-') then begin
-
-                                                UnallocatedAccount := MemberRegistration.CreateSavingsAccountNo(Pfact."Product ID", Members."Global Dimension 1 Code", Members."No.");
-                                                MemberRegistration.AutoCreateSavingsAccount(UnallocatedAccount, Members."No.", Pfact."Product ID");
-                                            end;
-                                        end;
-                                        // FOSA Acc below 100
-                                        EntryNo := 1;
-                                        CheckoffLines2.Reset;
-                                        CheckoffLines2.SetRange(CheckoffLines2."Checkoff Header", CheckoffBuffer2."Checkoff No");
-                                        if CheckoffLines2.Find('+') then
-                                            EntryNo := CheckoffLines2."Entry No" + 1;
-
-                                        CheckoffLines.Init;
-                                        CheckoffLines."Entry No" := EntryNo;
-                                        CheckoffLines.Amount := remAmt;
-                                        CheckoffLines."Account No." := SavingsAccounts."No.";
-                                        //IF CheckoffBuffer2."Account No"<>'' THEN
-                                        CheckoffLines.Multiple := true;
-                                        CheckoffLines."Loan No." := '';
-                                        // if CheckoffBuffer2."Loan No" <> '' then begin
-                                        //     CheckoffLines."Clears Loan" := AmountClearsLoanIfPosted(CheckoffBuffer2."Loan No", CheckoffBuffer2.Amount);
-                                        //     if CheckoffLines."Clears Loan" then
-                                        //         CheckoffLines."Refundable Amount" := ABS(GetLoanBalanceAfterPosting(CheckoffBuffer2."Loan No", CheckoffBuffer2.Amount));
-                                        // end;
-                                        CheckoffLines."Payroll No." := SavingsAccounts."Payroll/Staff No.";
-                                        CheckoffLines."ID Number" := SavingsAccounts."ID No.";
-                                        CheckoffLines."Member No." := SavingsAccounts."Member No.";
-                                        CheckoffLines."Savings Account" := true;
-                                        CheckoffLines."Credit Account" := false;
-                                        CheckoffLines."Checkoff Header" := checkoffHeader."No.";
-                                        CheckoffLines.Type := checkoffHeader.Type;
-                                        CheckoffLines.Name := SavingsAccounts.Name;
-                                        // CheckoffLines."Payroll No." := CheckoffBuffer2.Payroll;
-                                        CheckoffLines."Employer Code" := SavingsAccounts."Employer Code";
-                                        CheckoffLines.Remarks := 'Ordinary excess checkoff refund from ' + checkoffHeader."No.";
-                                        CheckoffLines."Product Code" := SavingsAccounts."Product Type";
-                                        CheckoffLines.Insert;
                                     end;
+                                    // Unallocatd Fund
+                                    EntryNo := 1;
+                                    CheckoffLines2.Reset;
+                                    CheckoffLines2.SetRange(CheckoffLines2."Checkoff Header", CheckoffBuffer2."Checkoff No");
+                                    if CheckoffLines2.Find('+') then
+                                        EntryNo := CheckoffLines2."Entry No" + 1;
 
+                                    CheckoffLines.Init;
+                                    CheckoffLines."Entry No" := EntryNo;
+                                    CheckoffLines.Amount := remAmt;
+                                    CheckoffLines."Account No." := SavingsAccounts."No.";
+                                    //IF CheckoffBuffer2."Account No"<>'' THEN
+                                    CheckoffLines.Multiple := true;
+                                    CheckoffLines."Loan No." := '';
+                                    // if CheckoffBuffer2."Loan No" <> '' then begin
+                                    //     CheckoffLines."Clears Loan" := AmountClearsLoanIfPosted(CheckoffBuffer2."Loan No", CheckoffBuffer2.Amount);
+                                    //     if CheckoffLines."Clears Loan" then
+                                    //         CheckoffLines."Refundable Amount" := ABS(GetLoanBalanceAfterPosting(CheckoffBuffer2."Loan No", CheckoffBuffer2.Amount));
+                                    // end;
+                                    CheckoffLines."Payroll No." := SavingsAccounts."Payroll/Staff No.";
+                                    CheckoffLines."ID Number" := SavingsAccounts."ID No.";
+                                    CheckoffLines."Member No." := SavingsAccounts."Member No.";
+                                    CheckoffLines."Savings Account" := true;
+                                    CheckoffLines."Credit Account" := false;
+                                    CheckoffLines."Checkoff Header" := checkoffHeader."No.";
+                                    CheckoffLines.Type := checkoffHeader.Type;
+                                    CheckoffLines.Name := SavingsAccounts.Name;
+                                    // CheckoffLines."Payroll No." := CheckoffBuffer2.Payroll;
+                                    CheckoffLines."Employer Code" := SavingsAccounts."Employer Code";
+                                    CheckoffLines.Remarks := 'Excess checkoff from ' + checkoffHeader."No." + ' to deposits.';
+                                    CheckoffLines."Product Code" := SavingsAccounts."Product Type";
+                                    CheckoffLines.Insert;
+                                    // end
+                                    // else begin
+                                    //     UnallocatedAccount := '';
+                                    //     SavingsAccounts.Reset;
+                                    //     SavingsAccounts.SetRange(SavingsAccounts."Member No.", Members."No.");
+                                    //     SavingsAccounts.SetRange("Product Type", '191');
+                                    //     if SavingsAccounts.Find('-') then begin
+                                    //         UnallocatedAccount := SavingsAccounts."No.";
+                                    //     end else begin
+                                    //         Pfact.reset;
+                                    //         Pfact.SetRange("Product ID", '191');
+                                    //         Pfact.SetRange(status, Pfact.status::Active);
+                                    //         if Pfact.find('-') then begin
+
+                                    //             UnallocatedAccount := MemberRegistration.CreateSavingsAccountNo(Pfact."Product ID", Members."Global Dimension 1 Code", Members."No.");
+                                    //             MemberRegistration.AutoCreateSavingsAccount(UnallocatedAccount, Members."No.", Pfact."Product ID");
+                                    //         end;
+                                    //     end;
+                                    //     // FOSA Acc below 100
+                                    //     EntryNo := 1;
+                                    //     CheckoffLines2.Reset;
+                                    //     CheckoffLines2.SetRange(CheckoffLines2."Checkoff Header", CheckoffBuffer2."Checkoff No");
+                                    //     if CheckoffLines2.Find('+') then
+                                    //         EntryNo := CheckoffLines2."Entry No" + 1;
+
+                                    //     CheckoffLines.Init;
+                                    //     CheckoffLines."Entry No" := EntryNo;
+                                    //     CheckoffLines.Amount := remAmt;
+                                    //     CheckoffLines."Account No." := SavingsAccounts."No.";
+                                    //     //IF CheckoffBuffer2."Account No"<>'' THEN
+                                    //     CheckoffLines.Multiple := true;
+                                    //     CheckoffLines."Loan No." := '';
+                                    //     // if CheckoffBuffer2."Loan No" <> '' then begin
+                                    //     //     CheckoffLines."Clears Loan" := AmountClearsLoanIfPosted(CheckoffBuffer2."Loan No", CheckoffBuffer2.Amount);
+                                    //     //     if CheckoffLines."Clears Loan" then
+                                    //     //         CheckoffLines."Refundable Amount" := ABS(GetLoanBalanceAfterPosting(CheckoffBuffer2."Loan No", CheckoffBuffer2.Amount));
+                                    //     // end;
+                                    //     CheckoffLines."Payroll No." := SavingsAccounts."Payroll/Staff No.";
+                                    //     CheckoffLines."ID Number" := SavingsAccounts."ID No.";
+                                    //     CheckoffLines."Member No." := SavingsAccounts."Member No.";
+                                    //     CheckoffLines."Savings Account" := true;
+                                    //     CheckoffLines."Credit Account" := false;
+                                    //     CheckoffLines."Checkoff Header" := checkoffHeader."No.";
+                                    //     CheckoffLines.Type := checkoffHeader.Type;
+                                    //     CheckoffLines.Name := SavingsAccounts.Name;
+                                    //     // CheckoffLines."Payroll No." := CheckoffBuffer2.Payroll;
+                                    //     CheckoffLines."Employer Code" := SavingsAccounts."Employer Code";
+                                    //     CheckoffLines.Remarks := 'Ordinary excess checkoff refund from ' + checkoffHeader."No.";
+                                    //     CheckoffLines."Product Code" := SavingsAccounts."Product Type";
+                                    //     CheckoffLines.Insert;
+                                    // end;
                                 end;
 
                             end;
@@ -2771,49 +2771,49 @@ Codeunit 52185470 "Periodic Activities"
                         end;
                     end;
                 end;
-                //     end else begin
-                //     EntryNo := 1;
-                //     CheckoffLines2.Reset;
-                //     CheckoffLines2.SetRange(CheckoffLines2."Checkoff Header", CheckoffBuffer."Checkoff No");
-                //     if CheckoffLines2.Find('+') then
-                //         EntryNo := CheckoffLines2."Entry No" + 1;
+            //     end else begin
+            //     EntryNo := 1;
+            //     CheckoffLines2.Reset;
+            //     CheckoffLines2.SetRange(CheckoffLines2."Checkoff Header", CheckoffBuffer."Checkoff No");
+            //     if CheckoffLines2.Find('+') then
+            //         EntryNo := CheckoffLines2."Entry No" + 1;
 
-                //     CheckoffLines.Init;
-                //     CheckoffLines."Entry No" := EntryNo;
-                //     CheckoffLines.Amount := CheckoffBuffer.Amount + CheckoffBuffer.Interest;
-                //     CheckoffLines."Account No." := CheckoffBuffer."Account No";
-                //     //IF CheckoffBuffer."Account No"<>'' THEN
-                //     CheckoffLines.Multiple := true;
-                //     CheckoffLines."Loan No." := CheckoffBuffer."Loan No";
-                //     if CheckoffBuffer."Loan No" <> '' then
-                //         CheckoffLines."Clears Loan" :=
-                //         AmountClearsLoanIfPosted(CheckoffBuffer."Loan No", CheckoffBuffer.Amount);
-                //     CheckoffLines."Payroll No." := CheckoffBuffer."Upload No.";//CheckoffBuffer.Payroll;
-                //     CheckoffLines."ID Number" := CheckoffBuffer."ID No.";
-                //     CheckoffLines."Member No." := CheckoffBuffer."Member No.";
-                //     CheckoffLines."Savings Account" := CheckoffBuffer."Savings Account";
-                //     CheckoffLines."Credit Account" := CheckoffBuffer."Credit Account";
-                //     CheckoffLines."Checkoff Header" := CheckoffBuffer."Checkoff No";
-                //     CheckoffLines.Name := CheckoffBuffer.Name;
-                //     CheckoffLines.Type := CheckoffBuffer.Type;
-                //     //CheckoffLines."Payroll No.":=CheckoffBuffer.Payroll;
-                //     CheckoffLines.Remarks := CheckoffBuffer.Remarks;
-                //     CheckoffLines."Product Code" := CheckoffBuffer."Search Code";
-                //     CheckoffLines.Insert;
-                // end;
+            //     CheckoffLines.Init;
+            //     CheckoffLines."Entry No" := EntryNo;
+            //     CheckoffLines.Amount := CheckoffBuffer.Amount + CheckoffBuffer.Interest;
+            //     CheckoffLines."Account No." := CheckoffBuffer."Account No";
+            //     //IF CheckoffBuffer."Account No"<>'' THEN
+            //     CheckoffLines.Multiple := true;
+            //     CheckoffLines."Loan No." := CheckoffBuffer."Loan No";
+            //     if CheckoffBuffer."Loan No" <> '' then
+            //         CheckoffLines."Clears Loan" :=
+            //         AmountClearsLoanIfPosted(CheckoffBuffer."Loan No", CheckoffBuffer.Amount);
+            //     CheckoffLines."Payroll No." := CheckoffBuffer."Upload No.";//CheckoffBuffer.Payroll;
+            //     CheckoffLines."ID Number" := CheckoffBuffer."ID No.";
+            //     CheckoffLines."Member No." := CheckoffBuffer."Member No.";
+            //     CheckoffLines."Savings Account" := CheckoffBuffer."Savings Account";
+            //     CheckoffLines."Credit Account" := CheckoffBuffer."Credit Account";
+            //     CheckoffLines."Checkoff Header" := CheckoffBuffer."Checkoff No";
+            //     CheckoffLines.Name := CheckoffBuffer.Name;
+            //     CheckoffLines.Type := CheckoffBuffer.Type;
+            //     //CheckoffLines."Payroll No.":=CheckoffBuffer.Payroll;
+            //     CheckoffLines.Remarks := CheckoffBuffer.Remarks;
+            //     CheckoffLines."Product Code" := CheckoffBuffer."Search Code";
+            //     CheckoffLines.Insert;
+            // end;
 
-                //Employer Balance Update
-                if Loans.Get(CheckoffBuffer."Loan No") then begin
-                    if CheckoffBuffer.Type = CheckoffBuffer.Type::sLoan then
-                        Loans."Employer Balance" := CheckoffBuffer.Balance;
-                    Loans.Modify;
-                end;
+            //Employer Balance Update
+            // if Loans.Get(CheckoffBuffer."Loan No") then begin
+            //     if CheckoffBuffer.Type = CheckoffBuffer.Type::sLoan then
+            //         Loans."Employer Balance" := CheckoffBuffer.Balance;
+            //     Loans.Modify;
+            // end;
 
-                if SavingsAccounts.Get(CheckoffBuffer."Account No") then begin
-                    SavingsAccounts."Employer Balance" := CheckoffBuffer.Balance;
-                    SavingsAccounts."Monthly Contribution" := CheckoffBuffer.Amount;
-                    SavingsAccounts.Modify;
-                end;
+            // if SavingsAccounts.Get(CheckoffBuffer."Account No") then begin
+            //     SavingsAccounts."Employer Balance" := CheckoffBuffer.Balance;
+            //     SavingsAccounts."Monthly Contribution" := CheckoffBuffer.Amount;
+            //     SavingsAccounts.Modify;
+            // end;
 
             until CheckoffBuffer.Next = 0;
         end;

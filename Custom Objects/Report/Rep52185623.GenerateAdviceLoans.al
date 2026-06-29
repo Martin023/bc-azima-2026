@@ -56,7 +56,7 @@ report 52185623 "Generate Advice Loans"
                                 CheckoffAdvice."Employer Code" := Memb."Employer Code";
                                 CheckoffAdvice.Validate(CheckoffAdvice."Member No.");
                                 CheckoffAdvice.Names := Loans."Member Name";
-                                if Loans."Variated Amount" <> 0 then
+                                if Loans."Variated Amount" > 0 then
                                     //Loans."Loan Principle Repayment" := Loans."Variated Amount";
                                     CheckoffAdvice."Amount On" := loans."Variated Amount";
 
@@ -76,6 +76,10 @@ report 52185623 "Generate Advice Loans"
                                     end;
 
                                 end;
+                                // else 
+                                // begin
+                                //      CheckoffAdvice."Amount Off":
+                                // end;
 
                                 if loans."Total Balance" < CheckoffAdvice."Amount On"
                                 then
@@ -101,6 +105,11 @@ report 52185623 "Generate Advice Loans"
                                 CheckoffAdvice."Employer Code" := Loans."Employer Code";
                                 Loans.CalcFields("Repayment Advised");
                                 if Loans."Repayment Advised" > 0 then begin
+                                    if Loans."Repayment Advised" <> Loans."Variated Amount" then
+                                        if Loans."Variated Amount" <> 0 then begin
+                                            CheckoffAdvice.Reference := 'VARIATION';
+                                            CheckoffAdvice."Advice Type" := CheckoffAdvice."Advice Type"::Variations;
+                                        end;
                                     CheckoffAdvice.Reference := 'MONTHLYDED-' + format(CheckoffAdvice."Product Type");
                                     CheckoffAdvice."Advice Type" := CheckoffAdvice."Advice Type"::"Monthly Deduction";
                                     if Loans."Total Balance" = 0 then begin
@@ -125,18 +134,19 @@ report 52185623 "Generate Advice Loans"
             trigger OnAfterGetRecord()
             begin
 
-                // CheckoffAdvice.Reset;
-                // CheckoffAdvice.SetRange(CheckoffAdvice."Advice Header No.", CheckoffAdviceHeader."No.");
-                // if CheckoffAdvice.Find('-') then begin
-                //     CheckoffAdvice.DeleteAll;
-                // end;
-
                 CheckoffAdvice.Reset;
-                CheckoffAdvice.SetRange(CheckoffAdvice.Period, CheckoffAdviceHeader.Period);
+                CheckoffAdvice.SetRange(CheckoffAdvice."Advice Header No.", CheckoffAdviceHeader."No.");
                 CheckoffAdvice.SetRange(CheckoffAdvice.Type, CheckoffAdvice.Type::Credit);
-                CheckoffAdvice.setrange("Advice Header No.", CheckoffAdviceHeader."No.");
-                // if CheckoffAdvice.Find('-') then begin
-                CheckoffAdvice.DeleteAll;
+                if CheckoffAdvice.Find('-') then begin
+                    CheckoffAdvice.DeleteAll;
+                end;
+
+                // CheckoffAdvice.Reset;
+                // // CheckoffAdvice.SetRange(CheckoffAdvice.Period, CheckoffAdviceHeader.Period);
+                // CheckoffAdvice.SetRange(CheckoffAdvice.Type, CheckoffAdvice.Type::Credit);
+                // CheckoffAdvice.setrange("Advice Header No.", CheckoffAdviceHeader."No.");
+                // // if CheckoffAdvice.Find('-') then begin
+                // CheckoffAdvice.DeleteAll;
                 // end;
             end;
         }

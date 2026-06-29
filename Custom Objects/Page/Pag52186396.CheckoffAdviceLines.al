@@ -59,10 +59,10 @@ page 52186396 "Checkoff Advice Lines"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Amount Off"; Rec."Amount Off")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Amount Off"; Rec."Amount Off")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("Balance On"; Rec."Balance On")
                 {
                     ApplicationArea = Basic, Suite;

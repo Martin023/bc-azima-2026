@@ -1,4 +1,5 @@
 namespace AzimaBC.AzimaBC;
+using AZIMA.AZIMA;
 
 page 52185480 "Commission Setup"
 {
@@ -8,7 +9,7 @@ page 52185480 "Commission Setup"
     SourceTable = "Transaction Types";
     SourceTableView = where(Type = const(commission));
     UsageCategory = Lists;
-    CardPageId = "Transactions Type";
+    CardPageId = "Commission Setup Card";
 
     layout
     {
@@ -47,8 +48,5 @@ page 52185480 "Commission Setup"
         }
     }
 
-    trigger OnNewRecord(BelowxRec: Boolean)
-    begin
-        rec.Type := Rec.Type::Commission;
-    end;
+    
 }
