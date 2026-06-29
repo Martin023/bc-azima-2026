@@ -1076,6 +1076,10 @@ table 52185690 "Product Factory"
             Caption = 'Allow Loan Top-Up';
             DataClassification = CustomerContent;
         }
+        field(10045; "Allow Withdrawal"; Boolean)
+        {
+            Caption = 'Allow Withdrawal';
+        }
     }
 
     keys

@@ -806,7 +806,7 @@ table 52185650 "HR Employees"
                     Members.Reset();
                     Members.SetRange("Payroll/Staff No.", "No.");
                     if Members.FindFirst() then begin
-                        if "PIN No." <> Members."P.I.N Number" then
+                        if UpperCase(DelChr("PIN No.", '=', ' ')) <> UpperCase(DelChr(Members."P.I.N Number", '=', ' ')) then
                             Message('KRA PIN MISMATCH DETECTED:' + '\' + '\' +
                                 'Employee Card PIN: %1' + '\' +
                                 'Member Register PIN: %2' + '\' + '\' +
@@ -1800,6 +1800,11 @@ table 52185650 "HR Employees"
             Editable = false;
             FieldClass = FlowField;
             Caption = 'Approval Status';
+        }
+        field(39003972; "Rejection Reason"; Text[250])
+        {
+            Caption = 'Rejection Reason';
+            DataClassification = ToBeClassified;
         }
 
 

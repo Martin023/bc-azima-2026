@@ -1,0 +1,530 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:SecurityType>None</rd:SecurityType>
+    </DataSource>
+  </DataSources>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Tablix Name="List_JobApplications">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>19cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>14cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Rectangle Name="AppRectangle">
+                          <ReportItems>
+                            <Textbox Name="HeaderA">
+                              <CanGrow>true</CanGrow>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>PERSONAL &amp; CONTACT DETAILS</Value>
+                                      <Style>
+                                        <FontFamily>Tahoma</FontFamily>
+                                        <FontSize>10pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>DarkBlue</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>0.2cm</Top>
+                              <Left>0.2cm</Left>
+                              <Height>0.6cm</Height>
+                              <Width>18.6cm</Width>
+                              <Style>
+                                <BottomBorder>
+                                  <Style>Solid</Style>
+                                </BottomBorder>
+                              </Style>
+                            </Textbox>
+                            <Tablix Name="PersonalInfo">
+                              <TablixBody>
+                                <TablixColumns>
+                                  <TablixColumn><Width>4cm</Width></TablixColumn>
+                                  <TablixColumn><Width>14cm</Width></TablixColumn>
+                                </TablixColumns>
+                                <TablixRows>
+                                  <TablixRow>
+                                    <Height>0.5cm</Height>
+                                    <TablixCells>
+                                      <TablixCell><CellContents><Textbox Name="lblAppNo"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Application No:</Value><Style><FontWeight>Bold</FontWeight><FontSize>9pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                                      <TablixCell><CellContents><Textbox Name="valAppNo"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!ApplicationNo_HRJobApplications.Value</Value><Style><FontSize>9pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                                    </TablixCells>
+                                  </TablixRow>
+                                  <TablixRow>
+                                    <Height>0.5cm</Height>
+                                    <TablixCells>
+                                      <TablixCell><CellContents><Textbox Name="lblName"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Full Name:</Value><Style><FontWeight>Bold</FontWeight><FontSize>9pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                                      <TablixCell><CellContents><Textbox Name="valName"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!FirstName_HRJobApplications.Value &amp; " " &amp; Fields!MiddleName_HRJobApplications.Value &amp; " " &amp; Fields!LastName_HRJobApplications.Value</Value><Style><FontSize>9pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                                    </TablixCells>
+                                  </TablixRow>
+                                  <TablixRow>
+                                    <Height>0.5cm</Height>
+                                    <TablixCells>
+                                      <TablixCell><CellContents><Textbox Name="lblJob"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Job Applied For:</Value><Style><FontWeight>Bold</FontWeight><FontSize>9pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                                      <TablixCell><CellContents><Textbox Name="valJob"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!JobAppliedForDescription_HRJobApplications.Value</Value><Style><FontSize>9pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                                    </TablixCells>
+                                  </TablixRow>
+                                  <TablixRow>
+                                    <Height>0.5cm</Height>
+                                    <TablixCells>
+                                      <TablixCell><CellContents><Textbox Name="lblID"><Paragraphs><Paragraph><TextRuns><TextRun><Value>ID Number:</Value><Style><FontWeight>Bold</FontWeight><FontSize>9pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                                      <TablixCell><CellContents><Textbox Name="valID"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!IDNumber_HRJobApplications.Value</Value><Style><FontSize>9pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                                    </TablixCells>
+                                  </TablixRow>
+                                  <TablixRow>
+                                    <Height>0.5cm</Height>
+                                    <TablixCells>
+                                      <TablixCell><CellContents><Textbox Name="lblPhone"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Cell Phone:</Value><Style><FontWeight>Bold</FontWeight><FontSize>9pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                                      <TablixCell><CellContents><Textbox Name="valPhone"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!CellPhoneNumber_HRJobApplications.Value</Value><Style><FontSize>9pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                                    </TablixCells>
+                                  </TablixRow>
+                                  <TablixRow>
+                                    <Height>0.5cm</Height>
+                                    <TablixCells>
+                                      <TablixCell><CellContents><Textbox Name="lblEmail"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Email:</Value><Style><FontWeight>Bold</FontWeight><FontSize>9pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                                      <TablixCell><CellContents><Textbox Name="valEmail"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!EMail_HRJobApplications.Value</Value><Style><FontSize>9pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                                    </TablixCells>
+                                  </TablixRow>
+                                </TablixRows>
+                              </TablixBody>
+                              <TablixColumnHierarchy><TablixMembers><TablixMember /><TablixMember /></TablixMembers></TablixColumnHierarchy>
+                              <TablixRowHierarchy><TablixMembers><TablixMember /><TablixMember /><TablixMember /><TablixMember /><TablixMember /><TablixMember /></TablixMembers></TablixRowHierarchy>
+                              <Top>1cm</Top>
+                              <Left>0.5cm</Left>
+                              <Height>3cm</Height>
+                            </Tablix>
+
+                            <Textbox Name="HeaderB">
+                              <CanGrow>true</CanGrow>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>ACADEMIC &amp; QUALIFICATION INFORMATION</Value>
+                                      <Style>
+                                        <FontFamily>Tahoma</FontFamily>
+                                        <FontSize>10pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>DarkBlue</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>4.5cm</Top>
+                              <Left>0.2cm</Left>
+                              <Height>0.6cm</Height>
+                              <Width>18.6cm</Width>
+                              <Style>
+                                <BottomBorder>
+                                  <Style>Solid</Style>
+                                </BottomBorder>
+                              </Style>
+                            </Textbox>
+                            <Tablix Name="QualList">
+                              <TablixBody>
+                                <TablixColumns>
+                                  <TablixColumn><Width>3.5cm</Width></TablixColumn>
+                                  <TablixColumn><Width>6cm</Width></TablixColumn>
+                                  <TablixColumn><Width>5cm</Width></TablixColumn>
+                                  <TablixColumn><Width>3.5cm</Width></TablixColumn>
+                                </TablixColumns>
+                                <TablixRows>
+                                  <TablixRow>
+                                    <Height>0.5cm</Height>
+                                    <TablixCells>
+                                      <TablixCell><CellContents><Textbox Name="hq1"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Qualification Type</Value><Style><FontWeight>Bold</FontWeight><FontSize>8pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs><Style><BackgroundColor>LightGrey</BackgroundColor></Style></Textbox></CellContents></TablixCell>
+                                      <TablixCell><CellContents><Textbox Name="hq2"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Description</Value><Style><FontWeight>Bold</FontWeight><FontSize>8pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs><Style><BackgroundColor>LightGrey</BackgroundColor></Style></Textbox></CellContents></TablixCell>
+                                      <TablixCell><CellContents><Textbox Name="hq3"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Institution</Value><Style><FontWeight>Bold</FontWeight><FontSize>8pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs><Style><BackgroundColor>LightGrey</BackgroundColor></Style></Textbox></CellContents></TablixCell>
+                                      <TablixCell><CellContents><Textbox Name="hq4"><Paragraphs><Paragraph><TextRuns><TextRun><Value>From - To</Value><Style><FontWeight>Bold</FontWeight><FontSize>8pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs><Style><BackgroundColor>LightGrey</BackgroundColor></Style></Textbox></CellContents></TablixCell>
+                                    </TablixCells>
+                                  </TablixRow>
+                                  <TablixRow>
+                                    <Height>0.5cm</Height>
+                                    <TablixCells>
+                                      <TablixCell><CellContents><Textbox Name="dq1"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!QualificationType_HRApplicantQualifications.Value</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                                      <TablixCell><CellContents><Textbox Name="dq2"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!QualificationDescription_HRApplicantQualifications.Value</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                                      <TablixCell><CellContents><Textbox Name="dq3"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!InstitutionCompany_HRApplicantQualifications.Value</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                                      <TablixCell><CellContents><Textbox Name="dq4"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!FromDate_HRApplicantQualifications.Value &amp; " - " &amp; Fields!ToDate_HRApplicantQualifications.Value</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                                    </TablixCells>
+                                  </TablixRow>
+                                </TablixRows>
+                              </TablixBody>
+                              <TablixColumnHierarchy><TablixMembers><TablixMember /><TablixMember /><TablixMember /><TablixMember /></TablixMembers></TablixColumnHierarchy>
+                              <TablixRowHierarchy>
+                                <TablixMembers>
+                                  <TablixMember><KeepWithGroup>After</KeepWithGroup></TablixMember>
+                                  <TablixMember>
+                                    <Group Name="QualsGroup" />
+                                    <SortExpressions><SortExpression><Value>=Fields!QualificationType_HRApplicantQualifications.Value</Value></SortExpression></SortExpressions>
+                                  </TablixMember>
+                                </TablixMembers>
+                              </TablixRowHierarchy>
+                              <Filters>
+                                <Filter>
+                                  <FilterExpression>=IsNothing(Fields!QualificationType_HRApplicantQualifications.Value)</FilterExpression>
+                                  <Operator>Equal</Operator>
+                                  <FilterValues><FilterValue DataType="Boolean">false</FilterValue></FilterValues>
+                                </Filter>
+                              </Filters>
+                              <Top>5.3cm</Top>
+                              <Left>0.5cm</Left>
+                              <Height>1cm</Height>
+                            </Tablix>
+
+                            <Textbox Name="HeaderC">
+                              <CanGrow>true</CanGrow>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>APPLICANT'S REFEREES</Value>
+                                      <Style>
+                                        <FontFamily>Tahoma</FontFamily>
+                                        <FontSize>10pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>DarkBlue</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>7cm</Top>
+                              <Left>0.2cm</Left>
+                              <Height>0.6cm</Height>
+                              <Width>18.6cm</Width>
+                              <Style>
+                                <BottomBorder>
+                                  <Style>Solid</Style>
+                                </BottomBorder>
+                              </Style>
+                            </Textbox>
+                            <Tablix Name="RefsList">
+                              <TablixBody>
+                                <TablixColumns>
+                                  <TablixColumn><Width>4cm</Width></TablixColumn>
+                                  <TablixColumn><Width>4cm</Width></TablixColumn>
+                                  <TablixColumn><Width>4cm</Width></TablixColumn>
+                                  <TablixColumn><Width>3cm</Width></TablixColumn>
+                                  <TablixColumn><Width>3cm</Width></TablixColumn>
+                                </TablixColumns>
+                                <TablixRows>
+                                  <TablixRow>
+                                    <Height>0.5cm</Height>
+                                    <TablixCells>
+                                      <TablixCell><CellContents><Textbox Name="hr1"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Name</Value><Style><FontWeight>Bold</FontWeight><FontSize>8pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs><Style><BackgroundColor>LightGrey</BackgroundColor></Style></Textbox></CellContents></TablixCell>
+                                      <TablixCell><CellContents><Textbox Name="hr2"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Designation</Value><Style><FontWeight>Bold</FontWeight><FontSize>8pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs><Style><BackgroundColor>LightGrey</BackgroundColor></Style></Textbox></CellContents></TablixCell>
+                                      <TablixCell><CellContents><Textbox Name="hr3"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Institution</Value><Style><FontWeight>Bold</FontWeight><FontSize>8pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs><Style><BackgroundColor>LightGrey</BackgroundColor></Style></Textbox></CellContents></TablixCell>
+                                      <TablixCell><CellContents><Textbox Name="hr4"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Phone No.</Value><Style><FontWeight>Bold</FontWeight><FontSize>8pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs><Style><BackgroundColor>LightGrey</BackgroundColor></Style></Textbox></CellContents></TablixCell>
+                                      <TablixCell><CellContents><Textbox Name="hr5"><Paragraphs><Paragraph><TextRuns><TextRun><Value>Email</Value><Style><FontWeight>Bold</FontWeight><FontSize>8pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs><Style><BackgroundColor>LightGrey</BackgroundColor></Style></Textbox></CellContents></TablixCell>
+                                    </TablixCells>
+                                  </TablixRow>
+                                  <TablixRow>
+                                    <Height>0.5cm</Height>
+                                    <TablixCells>
+                                      <TablixCell><CellContents><Textbox Name="dr1"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Names_HRApplicantReferees.Value</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                                      <TablixCell><CellContents><Textbox Name="dr2"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Designation_HRApplicantReferees.Value</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                                      <TablixCell><CellContents><Textbox Name="dr3"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!Institution_HRApplicantReferees.Value</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                                      <TablixCell><CellContents><Textbox Name="dr4"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!TelephoneNo_HRApplicantReferees.Value</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                                      <TablixCell><CellContents><Textbox Name="dr5"><Paragraphs><Paragraph><TextRuns><TextRun><Value>=Fields!EMail_HRApplicantReferees.Value</Value><Style><FontSize>8pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                                    </TablixCells>
+                                  </TablixRow>
+                                </TablixRows>
+                              </TablixBody>
+                              <TablixColumnHierarchy><TablixMembers><TablixMember /><TablixMember /><TablixMember /><TablixMember /><TablixMember /></TablixMembers></TablixColumnHierarchy>
+                              <TablixRowHierarchy>
+                                <TablixMembers>
+                                  <TablixMember><KeepWithGroup>After</KeepWithGroup></TablixMember>
+                                  <TablixMember>
+                                    <Group Name="RefGroup" />
+                                    <SortExpressions><SortExpression><Value>=Fields!Names_HRApplicantReferees.Value</Value></SortExpression></SortExpressions>
+                                  </TablixMember>
+                                </TablixMembers>
+                              </TablixRowHierarchy>
+                              <Filters>
+                                <Filter>
+                                  <FilterExpression>=IsNothing(Fields!Names_HRApplicantReferees.Value)</FilterExpression>
+                                  <Operator>Equal</Operator>
+                                  <FilterValues><FilterValue DataType="Boolean">false</FilterValue></FilterValues>
+                                </Filter>
+                              </Filters>
+                              <Top>7.8cm</Top>
+                              <Left>0.5cm</Left>
+                              <Height>1cm</Height>
+                            </Tablix>
+
+                            <Textbox Name="HeaderD">
+                              <CanGrow>true</CanGrow>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>HOBBIES &amp; INTERESTS</Value>
+                                      <Style>
+                                        <FontFamily>Tahoma</FontFamily>
+                                        <FontSize>10pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>DarkBlue</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>9.5cm</Top>
+                              <Left>0.2cm</Left>
+                              <Height>0.6cm</Height>
+                              <Width>18.6cm</Width>
+                              <Style>
+                                <BottomBorder>
+                                  <Style>Solid</Style>
+                                </BottomBorder>
+                              </Style>
+                            </Textbox>
+                            <Tablix Name="HobbiesList">
+                              <TablixBody>
+                                <TablixColumns>
+                                  <TablixColumn><Width>18cm</Width></TablixColumn>
+                                </TablixColumns>
+                                <TablixRows>
+                                  <TablixRow>
+                                    <Height>0.5cm</Height>
+                                    <TablixCells>
+                                      <TablixCell><CellContents><Textbox Name="dh1"><Paragraphs><Paragraph><TextRuns><TextRun><Value>• </Value><Style><FontWeight>Bold</FontWeight></Style></TextRun><TextRun><Value>=Fields!Hobby_HRApplicantHobbies.Value</Value><Style><FontSize>9pt</FontSize></Style></TextRun></TextRuns></Paragraph></Paragraphs></Textbox></CellContents></TablixCell>
+                                    </TablixCells>
+                                  </TablixRow>
+                                </TablixRows>
+                              </TablixBody>
+                              <TablixColumnHierarchy><TablixMembers><TablixMember /></TablixMembers></TablixColumnHierarchy>
+                              <TablixRowHierarchy>
+                                <TablixMembers>
+                                  <TablixMember>
+                                    <Group Name="HobGroup" />
+                                    <SortExpressions><SortExpression><Value>=Fields!Hobby_HRApplicantHobbies.Value</Value></SortExpression></SortExpressions>
+                                  </TablixMember>
+                                </TablixMembers>
+                              </TablixRowHierarchy>
+                              <Filters>
+                                <Filter>
+                                  <FilterExpression>=IsNothing(Fields!Hobby_HRApplicantHobbies.Value)</FilterExpression>
+                                  <Operator>Equal</Operator>
+                                  <FilterValues><FilterValue DataType="Boolean">false</FilterValue></FilterValues>
+                                </Filter>
+                              </Filters>
+                              <Top>10.3cm</Top>
+                              <Left>0.5cm</Left>
+                              <Height>0.5cm</Height>
+                            </Tablix>
+                          </ReportItems>
+                        </Rectangle>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <Group Name="ApplicationGroup">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!ApplicationNo_HRJobApplications.Value</GroupExpression>
+                    </GroupExpressions>
+                    <PageBreak>
+                      <BreakLocation>Between</BreakLocation>
+                    </PageBreak>
+                  </Group>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>DataSet_Result</DataSetName>
+            <Top>0.5cm</Top>
+            <Left>1cm</Left>
+            <Height>14cm</Height>
+            <Width>19cm</Width>
+          </Tablix>
+        </ReportItems>
+        <Height>15cm</Height>
+      </Body>
+      <Width>21cm</Width>
+      <Page>
+        <PageHeader>
+          <Height>3cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Image Name="CompanyLogo">
+              <Source>Database</Source>
+              <Value>=First(Fields!CI_Picture.Value, "DataSet_Result")</Value>
+              <MIMEType>image/jpeg</MIMEType>
+              <Sizing>Fit</Sizing>
+              <Top>0.5cm</Top>
+              <Left>1cm</Left>
+              <Height>2cm</Height>
+              <Width>3cm</Width>
+            </Image>
+            <Textbox Name="CompanyName">
+              <CanGrow>true</CanGrow>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CI_Name.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontFamily>Tahoma</FontFamily>
+                        <FontSize>14pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.5cm</Top>
+              <Left>4.5cm</Left>
+              <Height>0.8cm</Height>
+              <Width>15cm</Width>
+            </Textbox>
+            <Textbox Name="ReportTitle">
+              <CanGrow>true</CanGrow>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>JOB APPLICATION REPORT</Value>
+                      <Style>
+                        <FontFamily>Tahoma</FontFamily>
+                        <FontSize>12pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                        <Color>DarkBlue</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                </Paragraph>
+              </Paragraphs>
+              <Top>1.5cm</Top>
+              <Left>4.5cm</Left>
+              <Height>0.6cm</Height>
+              <Width>15cm</Width>
+            </Textbox>
+            <Textbox Name="PageNumber">
+              <CanGrow>true</CanGrow>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>="Page " &amp; Globals!PageNumber &amp; " of " &amp; Globals!TotalPages</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>2cm</Top>
+              <Left>16cm</Left>
+              <Height>0.5cm</Height>
+              <Width>4cm</Width>
+            </Textbox>
+          </ReportItems>
+        </PageHeader>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>21cm</PageWidth>
+        <LeftMargin>0cm</LeftMargin>
+        <RightMargin>0cm</RightMargin>
+        <TopMargin>0cm</TopMargin>
+        <BottomMargin>0cm</BottomMargin>
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <Language>=User!Language</Language>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1102755000"><DataField>ReportForNavId_1102755000</DataField></Field>
+        <Field Name="SectionA"><DataField>SectionA</DataField></Field>
+        <Field Name="ApplicationNo_HRJobApplications"><DataField>ApplicationNo_HRJobApplications</DataField></Field>
+        <Field Name="FirstName_HRJobApplications"><DataField>FirstName_HRJobApplications</DataField></Field>
+        <Field Name="MiddleName_HRJobApplications"><DataField>MiddleName_HRJobApplications</DataField></Field>
+        <Field Name="LastName_HRJobApplications"><DataField>LastName_HRJobApplications</DataField></Field>
+        <Field Name="FullName_HRJobApplications"><DataField>FullName_HRJobApplications</DataField></Field>
+        <Field Name="JobAppliedFor_HRJobApplications"><DataField>JobAppliedFor_HRJobApplications</DataField></Field>
+        <Field Name="JobAppliedForDescription_HRJobApplications"><DataField>JobAppliedForDescription_HRJobApplications</DataField></Field>
+        <Field Name="DateApplied_HRJobApplications"><DataField>DateApplied_HRJobApplications</DataField></Field>
+        <Field Name="Status_HRJobApplications"><DataField>Status_HRJobApplications</DataField></Field>
+        <Field Name="City_HRJobApplications"><DataField>City_HRJobApplications</DataField></Field>
+        <Field Name="PostCode_HRJobApplications"><DataField>PostCode_HRJobApplications</DataField></Field>
+        <Field Name="IDNumber_HRJobApplications"><DataField>IDNumber_HRJobApplications</DataField></Field>
+        <Field Name="Gender_HRJobApplications"><DataField>Gender_HRJobApplications</DataField></Field>
+        <Field Name="CountryCode_HRJobApplications"><DataField>CountryCode_HRJobApplications</DataField></Field>
+        <Field Name="SectionB"><DataField>SectionB</DataField></Field>
+        <Field Name="HomePhoneNumber_HRJobApplications"><DataField>HomePhoneNumber_HRJobApplications</DataField></Field>
+        <Field Name="CellPhoneNumber_HRJobApplications"><DataField>CellPhoneNumber_HRJobApplications</DataField></Field>
+        <Field Name="WorkPhoneNumber_HRJobApplications"><DataField>WorkPhoneNumber_HRJobApplications</DataField></Field>
+        <Field Name="EMail_HRJobApplications"><DataField>EMail_HRJobApplications</DataField></Field>
+        <Field Name="PostalAddress_HRJobApplications"><DataField>PostalAddress_HRJobApplications</DataField></Field>
+        <Field Name="QualificationsSummary"><DataField>QualificationsSummary</DataField></Field>
+        <Field Name="ShowDetailedView"><DataField>ShowDetailedView</DataField></Field>
+        <Field Name="ShowQualificationsSummary"><DataField>ShowQualificationsSummary</DataField></Field>
+        <Field Name="CI_Name"><DataField>CI_Name</DataField></Field>
+        <Field Name="CI_Address"><DataField>CI_Address</DataField></Field>
+        <Field Name="CI_Address2"><DataField>CI_Address2</DataField></Field>
+        <Field Name="CI_City"><DataField>CI_City</DataField></Field>
+        <Field Name="CI_EMail"><DataField>CI_EMail</DataField></Field>
+        <Field Name="CI_HomePage"><DataField>CI_HomePage</DataField></Field>
+        <Field Name="CI_PhoneNo"><DataField>CI_PhoneNo</DataField></Field>
+        <Field Name="CI_Picture"><DataField>CI_Picture</DataField></Field>
+        <Field Name="ReportForNavId_1102755001"><DataField>ReportForNavId_1102755001</DataField></Field>
+        <Field Name="SectionC"><DataField>SectionC</DataField></Field>
+        <Field Name="QualificationType_HRApplicantQualifications"><DataField>QualificationType_HRApplicantQualifications</DataField></Field>
+        <Field Name="QualificationCode_HRApplicantQualifications"><DataField>QualificationCode_HRApplicantQualifications</DataField></Field>
+        <Field Name="QualificationDescription_HRApplicantQualifications"><DataField>QualificationDescription_HRApplicantQualifications</DataField></Field>
+        <Field Name="InstitutionCompany_HRApplicantQualifications"><DataField>InstitutionCompany_HRApplicantQualifications</DataField></Field>
+        <Field Name="FromDate_HRApplicantQualifications"><DataField>FromDate_HRApplicantQualifications</DataField></Field>
+        <Field Name="ToDate_HRApplicantQualifications"><DataField>ToDate_HRApplicantQualifications</DataField></Field>
+        <Field Name="ReportForNavId_1102755002"><DataField>ReportForNavId_1102755002</DataField></Field>
+        <Field Name="SectionD"><DataField>SectionD</DataField></Field>
+        <Field Name="Names_HRApplicantReferees"><DataField>Names_HRApplicantReferees</DataField></Field>
+        <Field Name="Designation_HRApplicantReferees"><DataField>Designation_HRApplicantReferees</DataField></Field>
+        <Field Name="Institution_HRApplicantReferees"><DataField>Institution_HRApplicantReferees</DataField></Field>
+        <Field Name="Address_HRApplicantReferees"><DataField>Address_HRApplicantReferees</DataField></Field>
+        <Field Name="TelephoneNo_HRApplicantReferees"><DataField>TelephoneNo_HRApplicantReferees</DataField></Field>
+        <Field Name="EMail_HRApplicantReferees"><DataField>EMail_HRApplicantReferees</DataField></Field>
+        <Field Name="ReportForNavId_1102755003"><DataField>ReportForNavId_1102755003</DataField></Field>
+        <Field Name="Hobby_HRApplicantHobbies"><DataField>Hobby_HRApplicantHobbies</DataField></Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
+</Report>

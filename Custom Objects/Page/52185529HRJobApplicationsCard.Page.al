@@ -505,14 +505,6 @@ page 52185529 "HR Job Applications Card"
                 Promoted = true;
                 PromotedCategory = Process;
                 RunObject = XMLport "Job Application";
-
-                trigger OnAction()
-                begin
-
-
-
-                end;
-
             }
         }
     }
