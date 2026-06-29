@@ -1331,6 +1331,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         CurrentMonthEnum: Enum "Loan Month";
         AllowedMonths: Text;
         DepositCap: Decimal;
+        ExistingLoanBalance: Decimal;
 
     begin
         TotalExisting := 0;
@@ -1791,6 +1792,24 @@ codeunit 52186512 "Sky M-Banking Transactions"
                             Message('Qualified Amount after applying deposit cap: %1', Format(amtQualified));
                         end;
                     end;
+
+                    if amtQualified > ProdFac."Maximum Loan Amount" then
+                        amtQualified := ProdFac."Maximum Loan Amount";
+
+                    if ProdFac."Allow Loan Top-Up" then begin
+                        ExistingLoanBalance := GetMemberLoanBalance(MemberNo, ProductID);
+                        if amtQualified > ExistingLoanBalance then begin
+                            amtQualified := amtQualified - ExistingLoanBalance;
+                        end else begin
+                            EligibilityFailReason := StrSubstNo(
+                                'Existing loan balance of KES %1 meets or exceeds your maximum qualification of KES %2.',
+                                ExistingLoanBalance,
+                                amtQualified
+                            );
+                            amtQualified := 0;
+                        end;
+                    end;
+                    
                     EligibilityFailReason := '';
                     QualifiedAmount := amtQualified;
                     EXIT(QualifiedAmount);
@@ -2829,6 +2848,158 @@ codeunit 52186512 "Sky M-Banking Transactions"
         end;
     end;
 
+    procedure PostLoan2(LoanNo: Code[50]; Template: Code[50]; Batch: Code[50]; SessionID: Text[50]; HasChargeType: boolean): Boolean
+    var
+        Loans: Record Loans;
+        ProductFactory: Record "Product Factory";
+        TotalInterest: Decimal;
+        AccType: Enum "Gen. Journal Account Type";
+        TransType: enum "Transaction Types";
+        LineNo: Integer;
+        JnlPosting: Codeunit "Journal Posting";
+        Members: record Members;
+        FosaAcc: code[50];
+        DocNo: Text[20];
+        GLEntry: Record "G/L Entry";
+        MobileTransTypes: Record "Mobile Transaction Types";
+        MobileTransLines: Record "Mobile Transaction Types Lines";
+        TotalCharges: Decimal;
+        genSetUp: Record "General Set-up";
+        RemainingDays: Integer;
+        DaysPast: Integer;
+        EndMonth: Date;
+        TMonthDays: Integer;
+        Amt: Decimal;
+        TransCharge: Record "Transaction Charges";
+        PrCharges: Record "Loan Product Charges";
+        BalAccType: Enum "Gen. Journal Account Type";
+        AccNo: Code[20];
+        BalAccNo: Code[20];
+        TCharges: Decimal;
+        PaySched: Record "Schedule of Loan Payment";
+        PCharges: Record "Loan Product Charges";
+        TotalComputedCharges: Decimal;
+        TotalCleared: Decimal;
+        OtherComms: Decimal;
+        TariffDetails: Record "Tiered Charges Lines";
+        ExcemptCharges: Boolean;
+        Cust: Record Customer;
+        LoansProcess: Codeunit "Loans Process";
+
+        LoansToBeCleared: Record "Loans Top up";
+        LnTopUp: Record Loans;
+    begin
+        Loans.get(LoanNo);
+        Members.get(Loans."Member No.");
+        ProductFactory.get(Loans."Loan Product Type");
+        FosaAcc := GetMemberFosaAcc(Members);
+        LineNo := 0;
+
+        DocNo := LoanNo;
+        // DocNo := Loans."Loan No.";
+        // Check if loan already posted
+        GLEntry.Reset;
+        GLEntry.SetRange("Document No.", DocNo);
+        GLEntry.SetLoadFields("Entry No.");
+        if GLEntry.FindFirst then begin
+            Loans.Posted := true;
+            Loans.Modify;
+            exit(true);
+        end;
+
+        // Clear zero balance topups
+        LoansToBeCleared.Reset;
+        LoansToBeCleared.SetRange("Loan No.", Loans."Loan No.");
+        LoansToBeCleared.SetLoadFields("Loan Top Up");
+        if LoansToBeCleared.FindSet then begin
+            repeat begin
+                LnTopUp.Reset;
+                LnTopUp.SetRange("Loan No.", LoansToBeCleared."Loan Top Up");
+                LnTopUp.SetLoadFields("Total Loan Balance");
+                LnTopUp.SetAutoCalcFields("Total Loan Balance");
+                if LnTopUp.FindFirst then begin
+                    if LnTopUp."Total Loan Balance" <= 0 then begin
+                        LoansToBeCleared.Delete;
+                    end;
+                end;
+
+            end until LoansToBeCleared.Next = 0;
+        end;
+
+        LoansProcess.PostLoanNormal(LoanNo);
+
+        GLEntry.Reset;
+        GLEntry.SetRange("Document No.", DocNo);
+        GLEntry.SetLoadFields("Entry No.");
+        if GLEntry.FindFirst then begin
+            // Only post charges after loan is disbursed
+            SaccoTrans.InitJournal(Template, Batch);
+            //End of Charges
+            if HasChargeType then begin
+                // Loan disbursement charges here...
+
+                genSetUp.get();
+                MobileTransTypes.Reset;
+                MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Loan Disbursement");
+                if MobileTransTypes.FindFirst then begin
+                    MobileTransLines.Reset();
+                    MobileTransLines.SetRange("Transaction Type", MobileTransTypes.Code);
+                    if MobileTransLines.FindSet then begin
+                        TotalCharges := 0;
+                        repeat begin
+                            // LineNo += 1000;
+
+                            SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount").Get(1) - GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount").Get(2)), DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
+                            TotalCharges += GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount").Get(1);
+                            if MobileTransLines."Recover Excise Duty" then
+                                SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, AccType::"G/L Account", genSetUp."Excise Duty G/L", 'Excise duty on loan disbursement charges', MobileTransLines."Account Type", ''/*MobileTransLines."Account No."*/, -GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount").Get(2), DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
+                        end until MobileTransLines.Next = 0;
+
+                        if TotalCharges > 0 then begin
+                            SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, AccType::Savings, FosaAcc, MobileTransTypes.Description, AccType::"G/L Account", '', TotalCharges, DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
+                        end;
+                    end;
+                end;
+            end;
+
+            if SaccoTrans.PostJournal(Template, Batch) then begin
+                Loans.Posted := true;
+                Loans.Modify;
+                exit(true);
+            end else begin
+                GLEntry.Reset;
+                GLEntry.SetRange("Document No.", DocNo);
+                GLEntry.SetLoadFields("Entry No.");
+                if GLEntry.FindFirst then begin
+                    Loans.Posted := true;
+                    Loans.Modify;
+                    exit(true);
+                end;
+                exit(false);
+            end;
+
+        end else begin
+            exit(false);
+        end;
+
+        // if SaccoTrans.PostJournal(Template, Batch) then begin
+        //     Loans.Posted := true;
+        //     Loans.Modify;
+        //     exit(true);
+        // end
+        // else begin
+        //     GLEntry.Reset;
+        //     GLEntry.SetRange("Document No.", DocNo);
+        //     GLEntry.SetLoadFields("Entry No.");
+        //     if GLEntry.FindFirst then begin
+        //         Loans.Posted := true;
+        //         Loans.Modify;
+        //         exit(true);
+        //     end;
+        //     exit(false);
+        // end;
+    end;
+
     procedure CalculateUpfrontInterest(LoanNo: code[50]): Decimal
     var
         ProductFactory: Record "Product Factory";
@@ -3811,6 +3982,30 @@ codeunit 52186512 "Sky M-Banking Transactions"
 
         EligibilityFailReason := '';
         exit(QualifiedAmount);
+    end;
+
+    procedure GetMemberLoanBalance(MemberNo: Code[20]; ProductID: Code[10]): Decimal
+    var
+        LoanApp: Record Loans;
+        TotalBalance: Decimal;
+    begin
+        TotalBalance := 0;
+
+        LoanApp.Reset;
+        LoanApp.SetRange("Member No.", MemberNo);
+        LoanApp.SetRange("Loan Product Type", ProductID);
+        LoanApp.SetRange(Posted, true);
+        LoanApp.SetFilter("Total Loan Balance", '>0');
+        LoanApp.SetAutoCalcFields("Total Loan Balance");
+        LoanApp.SetLoadFields("Loan No.", "Total Loan Balance");
+
+        if LoanApp.FindSet() then begin
+            repeat
+                TotalBalance += LoanApp."Total Loan Balance";
+            until LoanApp.Next() = 0;
+        end;
+
+        exit(TotalBalance);
     end;
 
 

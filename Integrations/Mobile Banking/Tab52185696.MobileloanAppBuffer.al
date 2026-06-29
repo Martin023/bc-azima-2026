@@ -161,6 +161,14 @@ table 52185696 "Mobile loan App. Buffer"
         field(50071; "Employer Code"; Code[100])
         {
         }
+        field(50072; "Try Posting Count"; Integer)
+        {
+            DataClassification = ToBeClassified;
+            Editable = false;
+        }
+         field(50073; Installments; Integer)
+        {
+        }
     }
 
     keys

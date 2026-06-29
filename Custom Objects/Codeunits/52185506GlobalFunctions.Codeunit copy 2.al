@@ -3348,6 +3348,12 @@ Codeunit 52185506 "Global Functions"
         end;
         exit(TotalPaid);
     end;
+
+    procedure GetRandomBoolean(): Boolean
+    begin
+        Randomize();
+        exit(Random(2) = 1);
+    end;
 }
 
 
