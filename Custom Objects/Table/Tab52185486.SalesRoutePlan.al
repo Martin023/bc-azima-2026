@@ -46,18 +46,6 @@ table 52185486 "Sales Route Plans"
         field(8; "Route Date"; Date)
         {
             Caption = 'Route Date';
-
-            trigger OnValidate()
-            var
-                Date: record Date;
-            begin
-                Date.Reset();
-                Date.SetRange("Period Type", Date."Period Type"::"Date");
-                Date.SetRange("Period Start", rec."Route Date");
-                if Date.Find('-') then begin
-                    Day := Date."Period Name";
-                end;
-            end;
         }
         field(9; Day; Text[30])
         {
@@ -88,6 +76,10 @@ table 52185486 "Sales Route Plans"
         {
             Caption = 'Approved Date';
             Editable = false;
+        }
+        field(15; "Route End Date"; Date)
+        {
+            Caption = 'Route End Date';
         }
 
     }
