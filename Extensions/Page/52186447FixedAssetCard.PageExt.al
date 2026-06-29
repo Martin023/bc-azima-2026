@@ -226,8 +226,23 @@ PageExtension 52186447 pageextension52186447 extends "Fixed Asset Card"
         end;
     end;
 
+    trigger OnNewRecord(BelowxRec: Boolean)
+    var
+        myInt: Integer;
+    begin
+        Fa.reset();
+        Fa.SetRange("No.", '<>%1', Rec."No.");
+        FA.SetAutoCalcFields(Acquired);
+        Fa.SetRange(Acquired, false);
+        if Fa.FindSet() then begin
+            if Fa.Count > 2 then error('Kindly use the existing open FA cards eg.%1', fa."No.");
+        end;
+
+    end;
+
     var
         RemainingLease: Decimal;
+        Fa: record "Fixed Asset";
 
 }
 

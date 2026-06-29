@@ -637,18 +637,6 @@ Codeunit 52185472 "PR Payroll Processing"
             curNssf_Base_Amount := curBasicPay;
 
         //Get the NSSF amount
-        // if blnPaysNssf then
-        //     curNSSF := fnGetEmployerNSSF(curNssf_Base_Amount);
-        // curTransAmount := curNSSF;
-        // strTransDescription := 'N.S.S.F';
-        // TGroup := 'STATUTORIES';
-        // TGroupOrder := 7;
-        // TSubGroupOrder := 1;
-        // fnUpdatePeriodTrans(strEmpCode, 'NSSF', TGroup, TGroupOrder, TSubGroupOrder,
-        // strTransDescription, curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept, NSSFEMPyee,
-        // Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::NSSF);
-
-        //Get the NSSF amount
         if blnPaysNssf then BEGIN
             IF NOT PaysNewNSSF THEN BEGIN
                 curNSSF := fnGetEmployerNSSF(curNssf_Base_Amount);

@@ -119,6 +119,8 @@ page 52185794 "Cashier Transactions"
                             BChequeVisible := true;
                         if rec.Type = rec.Type::"Cancel Bankers Cheque" then
                             BChequeVisible := true;
+                        if rec.Type = rec.Type::"Cheque Withdrawal" then
+                            BChequeVisible := true;
 
                         if rec.Type = rec.Type::Lien then
                             CLien := true;
@@ -1327,6 +1329,8 @@ page 52185794 "Cashier Transactions"
         if Rec.Type = Rec.Type::"Bankers Cheque" then
             BChequeVisible := true;
         if rec.Type = Rec.Type::"Cancel Bankers Cheque" then
+            BChequeVisible := true;
+        if rec.Type = Rec.Type::"Cheque Withdrawal" then
             BChequeVisible := true;
 
         if rec.Type = Rec.Type::Lien then
