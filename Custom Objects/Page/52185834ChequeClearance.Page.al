@@ -137,12 +137,19 @@ page 52185834 "Cheque Clearance"
                         Transactions.SetRange(Transactions.Select, true);
                         if Transactions.Find('-') then begin
                             repeat
+                                if Transactions."Expected Maturity Date" > Today then
+                                    Error('Cheque %1 cannot be cleared before maturity date %2', Transactions.No, Transactions."Expected Maturity Date");
+
                                 CreditLedger.Reset;
                                 CreditLedger.SetRange("Document No.", Transactions.No);
                                 //CreditLedger.SetRange("Member No.", Transactions."Member No.");
                                 if not CreditLedger.Find('-') then begin
                                     SaccoT.ClearCheques;
                                 end;
+                                Transactions."Cheque Status" := Transactions."cheque status"::Cleared;
+                                Transactions."Date Cleared" := Today;
+                                Transactions."Cleared By" := UserId;
+                                Transactions.Modify(true);
 
                             until Transactions.Next = 0;
                         end

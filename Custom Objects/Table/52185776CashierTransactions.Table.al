@@ -21,7 +21,7 @@ table 52185776 "Cashier Transactions"
         }
         field(2; "Account No"; Code[20])
         {
-            TableRelation = IF ("Account Type" = CONST(Account), type = filter(<> lien)) "Savings Accounts"."No." where("Product Type" = filter('191|195'), Status = filter(<> Closed))
+            TableRelation = IF ("Account Type" = CONST(Account), type = filter(<> lien)) "Savings Accounts"."No." where("Product Type" = filter('191|192|193|194|195|198'), Status = filter(Closed) )//filter('191|192|193|194|195|198'), Status = filter(<> Closed))
             ELSE
             IF ("Account Type" = CONST(Account), type = filter(lien)) "Savings Accounts"."No." where(Status = filter(<> Closed), "Product Type" = filter('191|195')) else
             IF ("Account Type" = CONST(MPESA)) "Bank Account"."No." WHERE("Bank Type" = filter("Mobile Money"), "Global Dimension 1 Code" = field("Global Dimension 1 Code"));
@@ -472,12 +472,13 @@ table 52185776 "Cashier Transactions"
         }
         field(45; "Bankers Cheque No"; Code[6])
         {
-            TableRelation = IF (Type = CONST("Bankers Cheque")) "Bankers Cheques Register"."Cheque No." WHERE(Status = FILTER(Pending)
-                                                                           //"Global Dimension 2 Code" = FIELD("Global Dimension 2 Code")
+            TableRelation = IF (Type = CONST("Bankers Cheque")) "Bankers Cheques Register"."Cheque No." WHERE(Status = FILTER(Pending),
+                                                                           "Global Dimension 1 Code" = FIELD("Global Dimension 1 Code")
                                                                            )
             else
-            IF (Type = CONST("Cancel Bankers Cheque")) "Bankers Cheques Register"."Cheque No." WHERE(Status = FILTER(Approved), "Member No" = field("Member No.")
-                                                                           //"Global Dimension 2 Code" = FIELD("Global Dimension 2 Code")
+            IF (Type = CONST("Cancel Bankers Cheque")) "Bankers Cheques Register"."Cheque No." WHERE(Status = FILTER(Approved), 
+                                                                           "Member No" = field("Member No."),
+                                                                           "Global Dimension 1 Code" = FIELD("Global Dimension 1 Code")
                                                                            );
 
             trigger OnValidate()

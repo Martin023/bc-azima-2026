@@ -1,5 +1,4 @@
-#pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-Report 52185683 "Cashier Withdrawal Slip"
+report 52185683 "Cashier Withdrawal Slip"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Cashier Withdrawal Slip.rdl';
@@ -11,223 +10,112 @@ Report 52185683 "Cashier Withdrawal Slip"
             DataItemTableView = sorting(No);
             RequestFilterFields = No;
 
-            column(Transactions_Transactions__Book_Balance_; Transactions."Book Balance")
-            {
-            }
-            column(Transactions_No; No)
-            {
-            }
-            column(AccountNo; "Account No")
-            {
-            }
-            column(AccountName; "Account Name")
-            {
-            }
-            column(CompanyInformation_Name; CompanyInformation.Name)
-            {
-            }
-            column(CompanyInformation_Picture; CompanyInformation.Picture)
-            {
-            }
-            column(CompanyAddress; CompanyAddress)
-            {
-            }
-            column(CompanyTelephone; CompanyTelephone)
-            {
-            }
-            column(CommunicationOnline; CommunicationOnline)
-            {
-            }
-            column(Amount; Amount)
-            {
-            }
-            column(PayrollNo; StaffNo)
-            {
-            }
-            column(Prod_Name; ProductName)
-            {
-            }
-            column(Transactions__Transaction_Date_; "Transaction Date")
-            {
-            }
-            column(Transactions_Transactions__Transaction_Time_; Transactions."Transaction Time")
-            {
-            }
-            column(Transactions__Cheque_No_; "Cheque No")
-            {
-            }
-            column(Transactions_Type; Type)
-            {
-            }
-            column(BranchCode; Transactions."Global Dimension 2 Code")
-            {
-            }
-            column(CompanyInfo_Name; CompanyInfo.Name)
-            {
-            }
-            column(Company_Address; CompanyInfo.Address)
-            {
-            }
-            column(Co_phone; CompanyInfo."Phone No.")
-            {
-            }
-            column(Company_Pic; CompanyInfo.Picture)
-            {
-            }
-            column(NumberText; NumberText[1])
-            {
-            }
-            column(Transactions_Transactions_Cashier; Transactions.Cashier)
-            {
-            }
-            column(Amount_WithdrawnCaption; Amount_WithdrawnCaptionLbl)
-            {
-            }
-            column(Book_Balance_Caption; Book_Balance_CaptionLbl)
-            {
-            }
-            column(Transaction_No_Caption; Transaction_No_CaptionLbl)
-            {
-            }
-            column(Account_No_Caption; Account_No_CaptionLbl)
-            {
-            }
-            column(Account_Name_Caption; Account_Name_CaptionLbl)
-            {
-            }
-            column(Date_Caption; Date_CaptionLbl)
-            {
-            }
-            column(Time_Caption; Time_CaptionLbl)
-            {
-            }
-            column(Transactions__Cheque_No_Caption; Transactions.FieldCaption("Cheque No"))
-            {
-            }
-            column(Member_No_Caption; Member_No_CaptionLbl)
-            {
-            }
-            column(EmptyStringCaption; EmptyStringCaptionLbl)
-            {
-            }
-            column(Signature_Caption; Signature_CaptionLbl)
-            {
-            }
-            column(I_acknowledge_receipt_of_the_above_amountCaption; I_acknowledge_receipt_of_the_above_amountCaptionLbl)
-            {
-            }
-            column(EmptyStringCaption_Control1000000048; EmptyStringCaption_Control1000000048Lbl)
-            {
-            }
-            column(I_D_No_Caption; I_D_No_CaptionLbl)
-            {
-            }
-            column(Availbal; Available_Balance_CaptionLbl)
-            {
-            }
-            column(BookBal_; Book_Balance_Caption_Control1102760006Lbl)
-            {
-            }
-            column(EmptyStringCaption_Control1102756001; EmptyStringCaption_Control1102756001Lbl)
-            {
-            }
-            column(al; Name_CaptionLbl)
-            {
-            }
-            column(Withdrawn_By_______________________________________Caption; Withdrawn_By_______________________________________CaptionLbl)
-            {
-            }
-            column(You_were_served_by__Caption; You_were_served_by__CaptionLbl)
-            {
-            }
-            column(THANK_YOUCaption; THANK_YOUCaptionLbl)
-            {
-            }
-            column(Better_life_for_our_members_globallyCaption; Better_life_for_our_members_globallyCaptionLbl)
-            {
-            }
-            column(Transactions_Transaction_Type; "Transaction Type")
-            {
-            }
-            column(ExpectedMaturityDate; "Expected Maturity Date")
-            {
-            }
-            column(ChequeNo_Transactions; Transactions."Cheque No")
-            {
-            }
-            column(TransactionDescription_Transactions; Transactions."Transaction Description")
-            {
-            }
-            column(Cashier_Transactions; Transactions.Cashier)
-            {
-            }
-            column(NumberText_1_; NumberText[1])
-            {
-            }
-            column(SumTransactionCharges; SumTransactionCharges)
-            {
-            }
-            column(AvailableBalance; "Available Balance")
-            {
-            }
-            column(NewAvailable; "Available Balance" - (Amount))
-            {
-            }
-            column(Dublicate; Transactions.Dublicate)
-            {
-            }
-            column(CashierName; CashierName)
-            {
-            }
-            //MASKED COLUMNS FOR PRIVACY
-            column(MaskedAccountNo; MaskedAccountNo)
-            {
-            }
-            column(CashierNameOnly; CashierNameOnly)
-            {
-            }
-            column(Till_Name; "Till Name")
-            {
-
-            }
-
-            column(Branch_code; Transactions."Global Dimension 1 Code")
-            {
-
-            }
-
-            // ADDED DIMENSION NAME AND REPRINT COLUMNS
-            column(Branch_Name; BranchName)
-            {
-            }
-            column(Reprint; Reprint)
-            {
-            }
-            column(ReprintDate; ReprintDate)
-            {
-            }
-            column(ReprintTime; ReprintTime)
-            {
-            }
+            column(Transactions_Transactions__Book_Balance_; Transactions."Book Balance") {}
+            column(Transactions_No; No) {}
+            column(AccountNo; "Account No") {}
+            column(AccountName; "Account Name") {}
+            column(CompanyInformation_Name; CompanyInformation.Name) {}
+            column(CompanyInformation_Picture; CompanyInformation.Picture) {}
+            column(CompanyAddress; CompanyAddress) {}
+            column(CompanyTelephone; CompanyTelephone) {}
+            column(CommunicationOnline; CommunicationOnline) {}
+            column(Amount; Amount) {}
+            column(PayrollNo; StaffNo) {}
+            column(Prod_Name; ProductName) {}
+            column(Transactions__Transaction_Date_; "Transaction Date") {}
+            column(Transactions_Transactions__Transaction_Time_; Transactions."Transaction Time") {}
+            column(Transactions__Cheque_No_; "Cheque No") {}
+            column(Transactions_Type; Type) {}
+            column(BranchCode; Transactions."Global Dimension 2 Code") {}
+            column(CompanyInfo_Name; CompanyInfo.Name) {}
+            column(Company_Address; CompanyInfo.Address) {}
+            column(Co_phone; CompanyInfo."Phone No.") {}
+            column(Company_Pic; CompanyInfo.Picture) {}
+            column(NumberText; NumberText[1]) {}
+            column(Transactions_Transactions_Cashier; Transactions.Cashier) {}
+            column(Amount_WithdrawnCaption; Amount_WithdrawnCaptionLbl) {}
+            column(Book_Balance_Caption; Book_Balance_CaptionLbl) {}
+            column(Transaction_No_Caption; Transaction_No_CaptionLbl) {}
+            column(Account_No_Caption; Account_No_CaptionLbl) {}
+            column(Account_Name_Caption; Account_Name_CaptionLbl) {}
+            column(Date_Caption; Date_CaptionLbl) {}
+            column(Time_Caption; Time_CaptionLbl) {}
+            column(Transactions__Cheque_No_Caption; Transactions.FieldCaption("Cheque No")) {}
+            column(Member_No_Caption; Member_No_CaptionLbl) {}
+            column(EmptyStringCaption; EmptyStringCaptionLbl) {}
+            column(Signature_Caption; Signature_CaptionLbl) {}
+            column(I_acknowledge_receipt_of_the_above_amountCaption; I_acknowledge_receipt_of_the_above_amountCaptionLbl) {}
+            column(EmptyStringCaption_Control1000000048; EmptyStringCaption_Control1000000048Lbl) {}
+            column(I_D_No_Caption; I_D_No_CaptionLbl) {}
+            column(Availbal; Available_Balance_CaptionLbl) {}
+            column(BookBal_; Book_Balance_Caption_Control1102760006Lbl) {}
+            column(EmptyStringCaption_Control1102756001; EmptyStringCaption_Control1102756001Lbl) {}
+            column(al; Name_CaptionLbl) {}
+            column(Withdrawn_By_______________________________________Caption; Withdrawn_By_______________________________________CaptionLbl) {}
+            column(You_were_served_by__Caption; You_were_served_by__CaptionLbl) {}
+            column(THANK_YOUCaption; THANK_YOUCaptionLbl) {}
+            column(Better_life_for_our_members_globallyCaption; Better_life_for_our_members_globallyCaptionLbl) {}
+            column(Transactions_Transaction_Type; "Transaction Type") {}
+            column(ExpectedMaturityDate; "Expected Maturity Date") {}
+            column(ChequeNo_Transactions; Transactions."Cheque No") {}
+            column(TransactionDescription_Transactions; Transactions."Transaction Description") {}
+            column(Cashier_Transactions; Transactions.Cashier) {}
+            column(NumberText_1_; NumberText[1]) {}
+            column(SumTransactionCharges; SumTransactionCharges) {}
+            column(AvailableBalance; "Available Balance") {}
+            column(NewAvailable; "Available Balance" - (Amount)) {}
+            column(Dublicate; Transactions.Dublicate) {}
+            column(CashierName; CashierName) {}
+            column(MaskedAccountNo; MaskedAccountNo) {}
+            column(CashierNameOnly; CashierNameOnly) {}
+            column(Till_Name; "Till Name") {}
+            column(Branch_code; Transactions."Global Dimension 1 Code") {}
+            column(Branch_Name; BranchName) {}
+            column(Reprint; Reprint) {}
+            column(ReprintDate; ReprintDate) {}
+            column(ReprintTime; ReprintTime) {}
 
             dataitem("Transaction Charges"; "Transaction Charges")
             {
                 DataItemLink = "Transaction Type" = field("Transaction Type");
-                column(ReportForNavId_8541; 8541)
-                {
-                }
-                column(Description; Description)
-                {
-                }
-                column(ChargeAmount_TransactionCharges; "Charge Amount")
-                {
-                }
-                column(Transaction_Charges_Transaction_Type; "Transaction Type")
-                {
-                }
-                column(Transaction_Charges_Charge_Code; "Charge Code")
-                {
-                }
+                
+                column(ReportForNavId_8541; 8541) {}
+                column(Description; Description) {}
+                column(ChargeAmount_TransactionCharges; ActualChargeAmount) {}
+                column(Transaction_Charges_Transaction_Type; "Transaction Type") {}
+                column(Transaction_Charges_Charge_Code; "Charge Code") {}
+                column(RecoverExciseDuty_TransactionCharges; "Recover Excise Duty") {}
+                column(ExciseDutyAmount; ExciseDutyAmount) {}
+                column(ExciseDutyPercentage; ExciseDutyPercentage) {}
+
+                trigger OnAfterGetRecord()
+                var
+                    GenSetup: Record "General Set-Up";
+                    SavingsLedger: Record "Savings Ledger Entry";
+                begin
+                    ActualChargeAmount := 0;
+                    ExciseDutyAmount := 0;
+                    ExciseDutyPercentage := 0;
+
+                    if GenSetup.Get() then
+                        ExciseDutyPercentage := GenSetup."Excise Duty (%)";
+
+                    SavingsLedger.Reset();
+                    SavingsLedger.SetRange("Customer No.", Transactions."Account No");
+                    SavingsLedger.SetRange("Document No.", Transactions.No);
+                    SavingsLedger.SetFilter(Description, '*' + "Transaction Charges".Description + '*');
+                    if SavingsLedger.FindFirst() then
+                        ActualChargeAmount := Abs(SavingsLedger.Amount);
+
+                    if ActualChargeAmount = 0 then
+                        CurrReport.Skip();
+
+                    if ("Recover Excise Duty" = true) and 
+                       ("Transaction Charge Category" <> "Transaction Charge Category"::"Stamp Duty") then begin
+                        if ActualChargeAmount > 0 then
+                            ExciseDutyAmount := (ActualChargeAmount * ExciseDutyPercentage) * 0.01;
+                    end;
+                end;
             }
 
             trigger OnAfterGetRecord()
@@ -238,18 +126,16 @@ Report 52185683 "Cashier Withdrawal Slip"
                 MaskedAccountNo := '';
                 CashierNameOnly := '';
 
-                user.Reset;
+                user.Reset();
                 user.SetRange("User Name", Transactions.Cashier);
                 if user.Find('-') then begin
                     CashierName := user."User Name";
-                    //Extract name after backslash
                     if StrPos(CashierName, '\') > 0 then
                         CashierNameOnly := CopyStr(CashierName, StrPos(CashierName, '\') + 1)
                     else
                         CashierNameOnly := CashierName;
                 end;
 
-                //Mask account number: show first 2 and last 2 digits
                 if StrLen("Account No") > 4 then begin
                     MaskedAccountNo := CopyStr("Account No", 1, 2) + 
                                       PadStr('', StrLen("Account No") - 4, '*') + 
@@ -257,24 +143,21 @@ Report 52185683 "Cashier Withdrawal Slip"
                 end else
                     MaskedAccountNo := "Account No";
 
-                //calculate the charges
-                SavingsLedgerEntry.Reset;
+                SavingsLedgerEntry.Reset();
                 SavingsLedgerEntry.SetRange("Customer No.", "Account No");
                 SavingsLedgerEntry.SetRange("Document No.", No);
-                if SavingsLedgerEntry.FindSet then begin
+                if SavingsLedgerEntry.FindSet() then begin
                     SavingsLedgerEntry.CalcSums(Amount);
                     SumTransactionCharges := SavingsLedgerEntry.Amount - Amount;
-                    //MESSAGE('the trans charges are %1',SumTransactionCharges);
                 end;
 
-                Savings.Reset;
+                Savings.Reset();
                 Savings.SetRange(Savings."No.", Transactions."Account No");
                 if Savings.Find('-') then begin
                     StaffNo := Savings."Payroll/Staff No.";
                     ProductName := Savings."Product Name";
                 end;
 
-                // FETCH DIMENSION NAME LOGIC ADDED HERE
                 BranchName := '';
                 DimensionValue.Reset();
                 DimensionValue.SetRange("Global Dimension No.", 1);
@@ -283,22 +166,18 @@ Report 52185683 "Cashier Withdrawal Slip"
                     BranchName := DimensionValue.Name;
                 end;
 
-                // REPRINT LOGIC ADDED HERE
                 Reprint := '';
                 if "Transaction Date" < Today then
                     Reprint := 'REPRINT'
                 else if ("Transaction Date" = Today) and ("Transaction Time" <> 0T) then begin
                     if Time > "Transaction Time" then begin
-                        if (Time - "Transaction Time") > 60000 then // 1 min buffer
+                        if (Time - "Transaction Time") > 60000 then
                             Reprint := 'REPRINT';
                     end;
                 end;
 
                 ReprintDate := Today;
                 ReprintTime := Time;
-
-                // CheckReport.InitTextVariable();
-                // CheckReport.FormatNoText(NumberText, Amount, '');
 
                 NumberText[1] := ConvertAmountToWords(Amount);
             end;
@@ -314,22 +193,13 @@ Report 52185683 "Cashier Withdrawal Slip"
     requestpage
     {
         SaveValues = true;
-
-        layout
-        {
-        }
-
-        actions
-        {
-        }
+        layout {}
+        actions {}
     }
 
-    labels
-    {
-    }
     trigger OnPreReport()
     begin
-        if CompanyInformation.Get then
+        if CompanyInformation.Get() then
             CompanyInformation.CalcFields(CompanyInformation.Picture);
         CompanyAddress := CompanyInformation.Address + ' -Post Code: ' + CompanyInformation."Post Code" + ' -City:' + CompanyInformation.City + ' Region: ' + CompanyInformation."Country/Region Code";
         CompanyTelephone := 'Tel: ' + CompanyInformation."Phone No." + ' -Office Tel: ' + CompanyInformation."Phone No. 2";
@@ -370,14 +240,12 @@ Report 52185683 "Cashier Withdrawal Slip"
         NumberText: array[2] of Text[80];
         user: Record User;
         CashierName: Text;
-        MaskedAccountNo: Text; //Masked account number (first 2 + stars + last 2)
-        CashierNameOnly: Text; //Cashier name without domain prefix
+        MaskedAccountNo: Text;
+        CashierNameOnly: Text;
         CompanyInformation: Record "Company Information";
         CompanyAddress: Text;
         CompanyTelephone: Text;
         CommunicationOnline: Text;
-
-        // ADDED VARIABLES FOR DIMENSIONS AND REPRINT
         DimensionValue: Record "Dimension Value";
         BranchName: Text;
         Reprint: Text;
@@ -385,6 +253,9 @@ Report 52185683 "Cashier Withdrawal Slip"
         ReprintTime: Time;
         OnesText: array[20] of Text[30];
         TensText: array[10] of Text[30];
+        ActualChargeAmount: Decimal;
+        ExciseDutyAmount: Decimal;
+        ExciseDutyPercentage: Decimal;
 
     local procedure InitTextVariable()
     begin

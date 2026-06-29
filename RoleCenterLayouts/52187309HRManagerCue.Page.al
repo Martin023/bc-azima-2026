@@ -90,6 +90,14 @@ page 52187309 "HR  Manager Activities"
                         PAGE.Run(PAGE::"HR Employee List - Active", ActiVeEm);
                     end;
                 }
+                
+                field("Inactive Employees"; Rec."HR Employees Inactive")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Inactive Employees';
+                    DrillDownPageId = "HR Employee List - Inactive";
+                    ToolTip = 'Specifies total count of  inactive employees';
+                }
                 field("Posted Revolving"; Rec."Posted Revolving")
                 {
                     ApplicationArea = all;

@@ -1071,7 +1071,11 @@ table 52185690 "Product Factory"
             Caption = 'Use Salary Average';
             DataClassification = CustomerContent;
         }
-
+        field(10044; "Allow Withdrawal"; Boolean)
+        {
+            Caption = 'Allow Withdrawal';
+            DataClassification = CustomerContent;
+        }
     }
 
     keys
