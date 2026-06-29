@@ -113,7 +113,6 @@ page 52185617 "prSalary Arrears"
     end;
 
     var
-        objOcx: Codeunit prPayrollProcessing111;
         SalCard: Record "PR Salary Card";
         PayPeriod: Record "PR Payroll Periods";
         PeriodMonth: Integer;

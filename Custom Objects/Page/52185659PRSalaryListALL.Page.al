@@ -70,17 +70,17 @@ page 52185659 "PR Salary List (ALL)"
                     RunObject = Page "PR Employee Transactions";
                     RunPageLink = "Employee Code" = FIELD("No.");
                 }
-                action("Salary Arrears")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Salary Arrears';
-                    Image = SelectEntries;
-                    Promoted = true;
-                    PromotedCategory = Category4;
-                    PromotedIsBig = true;
-                    RunObject = Page "pr Salary Arrears";
-                    RunPageLink = "No." = FIELD("No.");
-                }
+                // action("Salary Arrears")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Salary Arrears';
+                //     Image = SelectEntries;
+                //     Promoted = true;
+                //     PromotedCategory = Category4;
+                //     PromotedIsBig = true;
+                //     RunObject = Page "pr Salary Arrears";
+                //     RunPageLink = "No." = FIELD("No.");
+                // }
             }
         }
         area(processing)

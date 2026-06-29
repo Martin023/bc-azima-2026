@@ -1,7 +1,7 @@
 table 52185624 "PR Period Transactions"
 {
-    DrillDownPageID = "Staff Claims";
-    LookupPageID = "Staff Claims";
+    DrillDownPageId = "prPeriodTransaction List";
+    LookupPageId = "prPeriodTransaction List";
 
     fields
     {
@@ -49,10 +49,10 @@ table 52185624 "PR Period Transactions"
         {
             TableRelation = "PR Payroll Periods"."Date Opened";
         }
-       // field(14; Membership; Code[50])
-       // {
-       //     TableRelation = "prInstitutional Membership"."Institution No";
-       // }
+        // field(14; Membership; Code[50])
+        // {
+        //     TableRelation = "prInstitutional Membership"."Institution No";
+        // }
         field(15; "Reference No"; Text[20])
         {
         }
@@ -184,6 +184,10 @@ table 52185624 "PR Period Transactions"
             OptionMembers = Income,Deduction;
         }
         field(46; "Not Levied"; Boolean)
+        {
+
+        }
+        field(47; "Salary Type"; enum "Salary Type")
         {
 
         }

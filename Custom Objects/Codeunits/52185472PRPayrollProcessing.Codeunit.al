@@ -57,6 +57,7 @@ Codeunit 52185472 "PR Payroll Processing"
         NSSFEMPyee: Code[20];
         NHIFEMPyer: Code[20];
         NHIFEMPyee: Code[20];
+        NSSFEmpyee2: Code[20];
         HREmployee: Record "HR Employees";
         CoopParameters: Option "none",shares,loan,"loan Interest","Emergency loan","Emergency loan Interest","School Fees loan","School Fees loan Interest",Welfare,Pension,NSSF;
         PostingGroup: Record "prEmployee Posting Group";
@@ -638,35 +639,35 @@ Codeunit 52185472 "PR Payroll Processing"
 
         //Get the NSSF amount
         if blnPaysNssf then BEGIN
-            IF NOT PaysNewNSSF THEN BEGIN
-                curNSSF := fnGetEmployerNSSF(curNssf_Base_Amount);
-                curTransAmount := curNSSF;
-                strTransDescription := 'N.S.S.F';
-                // TGroup := 'STATUTORIES';
-                // TGroupOrder := 7;
-                // TSubGroupOrder := 1;
-                TGroup := 'DEDUCTIONS';
-                TGroupOrder := 3;
-                TSubGroupOrder := 3;
-                fnUpdatePeriodTrans(strEmpCode, 'NSSF', TGroup, TGroupOrder, TSubGroupOrder,
-                strTransDescription, curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept, NSSFEMPyee,
-                Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::NSSF);
-            END
-            else
-                if PaysNewNSSF = True then begin
-                    CurNssf := (NewNSSFRate * curNssf_Base_Amount) / 100;
-                    curTransAmount := curNSSF;
-                    strTransDescription := 'N.S.S.F';
-                    // TGroup := 'STATUTORIES';
-                    // TGroupOrder := 7;
-                    // TSubGroupOrder := 1;
-                    TGroup := 'DEDUCTIONS';
-                    TGroupOrder := 3;
-                    TSubGroupOrder := 3;
-                    fnUpdatePeriodTrans(strEmpCode, 'NSSF', TGroup, TGroupOrder, TSubGroupOrder,
-                    strTransDescription, curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept, NSSFEMPyee,
-                    Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::NSSF);
-                end;
+            // IF NOT PaysNewNSSF THEN BEGIN
+            curNSSF := fnGetEmployerNSSF(curNssf_Base_Amount);
+            curTransAmount := curNSSF;
+            strTransDescription := 'N.S.S.F';
+            // TGroup := 'STATUTORIES';
+            // TGroupOrder := 7;
+            // TSubGroupOrder := 1;
+            TGroup := 'DEDUCTIONS';
+            TGroupOrder := 3;
+            TSubGroupOrder := 3;
+            fnUpdatePeriodTrans(strEmpCode, 'NSSF', TGroup, TGroupOrder, TSubGroupOrder,
+            strTransDescription, curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept, NSSFEMPyee,
+            Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::NSSF);
+            // END
+            // else
+            //     if PaysNewNSSF = True then begin
+            //         CurNssf := (NewNSSFRate * curNssf_Base_Amount) / 100;
+            //         curTransAmount := curNSSF;
+            //         strTransDescription := 'N.S.S.F';
+            //         // TGroup := 'STATUTORIES';
+            //         // TGroupOrder := 7;
+            //         // TSubGroupOrder := 1;
+            //         TGroup := 'DEDUCTIONS';
+            //         TGroupOrder := 3;
+            //         TSubGroupOrder := 3;
+            //         fnUpdatePeriodTrans(strEmpCode, 'NSSF', TGroup, TGroupOrder, TSubGroupOrder,
+            //         strTransDescription, curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept, NSSFEMPyee,
+            //         Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::NSSF);
+            //     end;
         END;
 
         // //Update Employer deductions
@@ -2881,7 +2882,8 @@ Codeunit 52185472 "PR Payroll Processing"
                 salariesAcc := PostingGroup."Salary Account";
                 PayablesAcc := PostingGroup."Net Salary Payable";
                 NSSFEMPyer := PostingGroup."SSF Employer Account";
-                NSSFEMPyee := PostingGroup."SSF Employee Account";
+                NSSFEMPyee := PostingGroup."SSF Tier 1 Payable Account";
+                NSSFEmpyee2 := PostingGroup."SSF Tier 2 Payable Account";
                 NHIFEMPyee := PostingGroup."NHIF Employee Account";
                 PensionEMPyer := PostingGroup."Pension Employer Acc";
                 ShifAccount := PostingGroup."SHIF Account";
@@ -2904,7 +2906,7 @@ Codeunit 52185472 "PR Payroll Processing"
             repeat
                 if ((curBaseAmount >= prNSSF."Lower Limit") and (curBaseAmount <= prNSSF."Upper Limit")) then
                     NSSF := prNSSF."Tier 1 Employer Contribution" + prNSSF."Tier 2 Employer Contribution";
- 
+
                 if curBaseAmount < 108000 then begin
                     NSSF := prNSSF."Tier 1 Employer Contribution" + (0.06 * (curBaseAmount - prNSSF."Lower Limit"));
                     Exit(NSSF);
@@ -2924,7 +2926,7 @@ Codeunit 52185472 "PR Payroll Processing"
             repeat
                 if ((curBaseAmount >= prNSSF."Lower Limit") and (curBaseAmount <= prNSSF."Upper Limit")) then
                     NSSF := prNSSF."Tier 1 Employer Contribution" + prNSSF."Tier 2 Employer Contribution";
- 
+
                 if curBaseAmount < 108000 then begin
                     NSSF := prNSSF."Tier 1 Employer Contribution" + (0.06 * (curBaseAmount - prNSSF."Lower Limit"));
                     Exit(NSSF);
