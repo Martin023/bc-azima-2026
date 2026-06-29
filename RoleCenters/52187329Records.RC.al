@@ -748,7 +748,7 @@ page 52187329 "Records"
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Commsion setup';
-                        RunObject = page "Tiered Charges List";
+                        RunObject = page "Commission Setup";
                     }
                 }
                 // }
@@ -826,6 +826,12 @@ page 52187329 "Records"
                         ApplicationArea = Basic, Suite;
                         Caption = 'File Details List';
                         RunObject = page "Files List";
+                    }
+                    action("Member Form List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Member Form List';
+                        RunObject = page "Member Form List";
                     }
                     action("File Volumes List")
                     {
@@ -936,12 +942,12 @@ page 52187329 "Records"
                     //     RunObject = page "Batching Process List";
                     //     RunPageView = where(Status = const(Approved));
                     // }
-                    action("Archived File Volumes")
+                    action("Archived File Batches")
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Archived File Volumes';
-                        //RunObject = page "Batching Lines";
-                        RunObject = page "Batching Lines List";
+                        Caption = 'Archived File Batches';
+                        RunObject = page "Batching Process List";
+                        RunPageView = where(Status = const(Archived));
                     }
                 }
                 group("File Configurations.")

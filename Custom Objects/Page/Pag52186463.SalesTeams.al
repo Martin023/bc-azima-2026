@@ -54,6 +54,10 @@ page 52186490 "Sales Teams"
                     ToolTip = 'Specifies the value of the Registered By field.', Comment = '%';
                     Editable = false;
                 }
+                field(Retainer; rec.Retainer)
+                {
+
+                }
             }
         }
     }
@@ -78,6 +82,6 @@ page 52186490 "Sales Teams"
                 end;
             }
         }
-        
+
     }
 }

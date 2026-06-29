@@ -1727,9 +1727,9 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 IsSourceAccActive := true;
             end;
 
-            if SavingsProduct."Product Category" = SavingsProduct."Product Category"::Kesasa then begin
-                IsSourceAccActive := true;
-            end;
+            // if SavingsProduct."Product Category" = SavingsProduct."Product Category"::Kesasa then begin
+            //     IsSourceAccActive := true;
+            // end;
 
             if not IsSourceAccActive then begin
                 ResponseObject.Add('request_status', 'ACCOUNT_NOT_ACTIVE');

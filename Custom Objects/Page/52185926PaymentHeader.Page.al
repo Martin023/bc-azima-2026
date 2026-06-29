@@ -261,31 +261,6 @@ page 52185926 "Payment Header"
                     end;
                 }
 
-                field("Cheque No.2"; Rec."Cheque No.2")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = StatusEditableapproved;
-                    Visible = true;
-                    Caption = 'Cheque No.2';
-
-                    trigger OnValidate()
-                    begin
-                        //check if the cheque has been inserted
-                        Rec.TestField("Paying Bank Account");
-                        PVHead.Reset;
-                        PVHead.SetRange(PVHead."Paying Bank Account", Rec."Paying Bank Account");
-                        PVHead.SetRange(PVHead."Pay Mode", PVHead."Pay Mode"::Cheque);
-                        if PVHead.FindFirst then begin
-                            repeat
-                                if PVHead."Cheque No." = Rec."Cheque No." then begin
-                                    if PVHead."No." <> Rec."No." then begin
-                                        Error('The Cheque Number has already been utilised');
-                                    end;
-                                end;
-                            until PVHead.Next = 0;
-                        end;
-                    end;
-                }
                 // field("Bankers Cheque No"; Rec."Bankers Cheque No")
                 // {
                 //     ApplicationArea = Basic, Suite;
@@ -1073,6 +1048,15 @@ page 52185926 "Payment Header"
         SetDocNoVisible;
         SetControlAppearance;
 
+    end;
+
+    trigger OnModifyRecord(): Boolean
+    begin
+        if Rec.Status = Rec.Status::Pending then begin
+            Rec.Cashier := UserId;
+            Rec."Global Dimension 1 Code" := UserMgt.GetSetDimensions(UserId, 1);
+        end;
+        exit(true);
     end;
 
     var

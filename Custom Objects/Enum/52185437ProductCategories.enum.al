@@ -18,5 +18,5 @@ enum 52185437 "Product Categories"
     Value(15; "SAYE") { }
     Value(16; "General Account") { }
     Value(17; "Savcol") { }
-    value(18; "Kesasa") { }
+    value(18; "Holiday") { }
 }

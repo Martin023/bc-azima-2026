@@ -58,10 +58,10 @@ page 52185855 "Guarantor Substitution"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Loan Account No."; Rec."Loan Account No.")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Loan Account No."; Rec."Loan Account No.")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
 
                 field("Account Status"; Rec."Account Status")
                 {
@@ -79,14 +79,14 @@ page 52185855 "Guarantor Substitution"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Business Loan No."; Rec."Business Loan No.")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Business Loan Shares"; Rec."Business Loan Shares")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Business Loan No."; Rec."Business Loan No.")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("Business Loan Shares"; Rec."Business Loan Shares")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("Responsible Officer"; Rec."Responsible Officer")
                 {
                     ApplicationArea = all;

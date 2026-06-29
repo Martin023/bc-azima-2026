@@ -2,12 +2,13 @@ table 52186245 "Batch Lines Table"
 {
     Caption = 'Batch Lines Table';
     DataClassification = ToBeClassified;
-    
+
     fields
     {
-        field(1; "Batch No."; Code[100])
+        field(1; "Batch No."; integer)
         {
             Caption = 'Batch No.';
+            TableRelation = "Batch No Table";
         }
         field(2; "File No."; Code[100])
         {
