@@ -300,12 +300,6 @@ table 52185776 "Cashier Transactions"
         }
         field(17; Type; Enum "Fosa Transaction Types")
         {
-
-            // OptionCaption = 'Cash Deposit,Cash Withdrawal,Credit Receipt,Credit Cheque,Bankers Cheque,Cheque Deposit,Cheque Withdrawal,Salary Processing,EFT,RTGS,Overdraft,Standing Order,Dividend,Dividends Capt. Incentives,MPESA Deposit,MPESA Withdrawal,Account Activate,Failed STO Fee,Account Closure,Share Capital Transfer,Board Salary,Transfers,ATM Applications,Member Withdrawal,ATM Replacement,Statement,Bounced Cheque,Lien,Cheque Application,Bank Transfer Mode,Sacco_Bank Cheques,Savings Penalty,Delegates Payment,Delegates Special,BBF Payment,Cancel Bankers Cheque,Sky Mobile,Loan Reschedule,Moratorium fee,Loan Restructure';
-            // OptionMembers = "Cash Deposit","Cash Withdrawal","Credit Receipt","Credit Cheque","Bankers Cheque","Cheque Deposit","Cheque Withdrawal","Salary Processing",EFT,RTGS,Overdraft,"Standing Order",Dividend,"Dividends Capt. Incentives","MPESA Deposit","MPESA Withdrawal","Account Activate","Failed STO Fee","Account Closure","Share Capital Transfer","Board Salary",Transfers,"ATM Applications","Member Withdrawal","ATM Replacement",Statement,"Bounced Cheque",Lien,"Cheque Application","Bank Transfer Mode","Sacco_Bank Cheques","Savings Penalty","Delegates Payment","Delegates Special","BBF Payment","Cancel Bankers Cheque","Sky Mobile",LoanTransfer,"Loan Reschedule","Moratorium fee","Loan Restructure";
-            // OptionCaption = 'Cash Deposit,Cash Withdrawal,Credit Receipt,Credit Cheque,Bankers Cheque,Cheque Deposit,Cheque Withdrawal,Salary Processing,EFT,RTGS,Overdraft,Standing Order,Dividend,Msacco Balance Enquiry,MPESA Deposit,MPESA Withdrawal,Msacco Transfer,Msacco Withdrawal,Msacco Registration,Msacco Charge,Transfers,ATM Applications,Member Withdrawal,ATM Replacement,Statement,Bounced Cheque,Lien,Cheque Application,Bank Transfer Mode,Sacco_Bank Cheques,Savings Penalty,Delegates Payment,Delegates Special,BBF Payment,Cancel Bankers Cheque';
-            // OptionMembers = "Cash Deposit","Cash Withdrawal","Credit Receipt","Credit Cheque","Bankers Cheque","Cheque Deposit","Cheque Withdrawal","Salary Processing",EFT,RTGS,Overdraft,"Standing Order",Dividend,"Msacco Balance Enquiry","Msacco Deposit","Msacco Ministatement",,"MPESA Deposit","MPESA Withdrawal","Msacco Registration","Msacco Charge",Transfers,"ATM Applications","Member Withdrawal","ATM Replacement",Statement,"Bounced Cheque",Lien,"Cheque Application","Bank Transfer Mode","Sacco_Bank Cheques","Savings Penalty","Delegates Payment","Delegates Special","BBF Payment","Cancel Bankers Cheque";
-
             trigger OnValidate()
             var
                 BankersCheque: Record "Bankers Cheques Register";
@@ -315,17 +309,13 @@ table 52185776 "Cashier Transactions"
                     BankersCheque.SetCurrentKey("Cheque No.");
                     BankersCheque.SetAscending("Cheque No.", true);
                     BankersCheque.SetRange(Status, BankersCheque.Status::Pending);
-                    if BankersCheque.FindFirst() then begin
-                        rec."Bankers Cheque No" := BankersCheque."Cheque No.";
-                        //rec.Modify();
-                    end
+                    BankersCheque.SetRange("Global Dimension 2 Code", Rec."Global Dimension 2 Code"); // <-- add this
+                    if BankersCheque.FindFirst() then
+                        rec."Bankers Cheque No" := BankersCheque."Cheque No."
                     else
-                        Error('No pending Bankers Cheque found. Kindly generate a new one.');
-                end
-                else begin
+                        Error('No pending Bankers Cheque found for your branch. Kindly generate a new one.');
+                end else
                     rec."Bankers Cheque No" := '';
-                    //rec.Modify();
-                end;
             end;
         }
         field(18; "Transaction Description"; Text[100])
@@ -472,14 +462,16 @@ table 52185776 "Cashier Transactions"
         }
         field(45; "Bankers Cheque No"; Code[6])
         {
-            TableRelation = IF (Type = CONST("Bankers Cheque")) "Bankers Cheques Register"."Cheque No." WHERE(Status = FILTER(Pending),
-                                                                           "Global Dimension 1 Code" = FIELD("Global Dimension 1 Code")
-                                                                           )
+            TableRelation = IF (Type = CONST("Bankers Cheque")) "Bankers Cheques Register"."Cheque No." WHERE(
+                        Status = FILTER(Pending),
+                        "Global Dimension 2 Code" = FIELD("Global Dimension 2 Code")
+                    )
             else
-            IF (Type = CONST("Cancel Bankers Cheque")) "Bankers Cheques Register"."Cheque No." WHERE(Status = FILTER(Approved), 
-                                                                           "Member No" = field("Member No."),
-                                                                           "Global Dimension 1 Code" = FIELD("Global Dimension 1 Code")
-                                                                           );
+            IF (Type = CONST("Cancel Bankers Cheque")) "Bankers Cheques Register"."Cheque No." WHERE(
+                        Status = FILTER(Approved),
+                        "Member No" = FIELD("Member No."),
+                        "Global Dimension 2 Code" = FIELD("Global Dimension 2 Code")
+                    );
 
             trigger OnValidate()
             var
@@ -494,7 +486,6 @@ table 52185776 "Cashier Transactions"
                     end;
                 end;
             end;
-
         }
         field(46; "Global Dimension 1 Code"; Code[20])
         {

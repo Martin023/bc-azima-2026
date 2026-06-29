@@ -804,7 +804,7 @@ page 52187317 "Member Card Edits"
                         end;
                     end;
                 }
-                field("TSC Number"; "TSC Number")
+                field("Staff/PF No."; "Staff/PF No.")
                 {
                     Editable = UserCanEditThisValue;
 
@@ -815,7 +815,7 @@ page 52187317 "Member Card Edits"
                         SystemFilterFields.SetRange("Record ID", RecordID);
                         SystemFilterFields.SetRange("Field ID", 93);
                         if SystemFilterFields.FindFirst() then begin
-                            SystemFilterFields."New Value" := Format("TSC Number");
+                            SystemFilterFields."New Value" := Format("Staff/PF No.");
                             SystemFilterFields.Validate("New Value");
                             SystemFilterFields.Modify();
                         end;
@@ -1831,7 +1831,7 @@ page 52187317 "Member Card Edits"
                     "Allow Retiree M-Loans" := FieldRef.Value;
                 end;
                 if SystemFilterFields."Field ID" = 93 then begin
-                    "TSC Number" := FieldRef.Value;
+                    "Staff/PF No." := FieldRef.Value;
                 end;
                 if SystemFilterFields."Field ID" = 607 then begin
                     "Contribution Mode" := FieldRef.Value;
@@ -2169,7 +2169,7 @@ page 52187317 "Member Card Edits"
         "Employer Code": Code[100];
         "Allow Retiree M-Loans": Boolean;
         "Employer Name": Text;
-        "TSC Number": Code[20];
+        "Staff/PF No.": Code[20];
         "Contribution Mode": Option Salary,"Check off","Direct Debit",Cash,Pension,Dividend,Others;
         "Global Dimension 1 Code": Code[20];
         "Branch Name": Text;

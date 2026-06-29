@@ -145,12 +145,22 @@ table 52185889 "Receipts Header"
         {
             trigger OnValidate()
             var
-                myInt: Integer;
+                ExistingHeader: Record "Receipts Header";
+                CurrentChequeNo: Code[20];
             begin
                 if StrLen("Cheque No.") <> 6 then
                     Error('Invalid Cheque');
-            end;
 
+                CurrentChequeNo := "Cheque No.";
+                ExistingHeader.Reset();
+                ExistingHeader.SetRange("Cheque No.", CurrentChequeNo);
+                ExistingHeader.SetFilter("No.", '<>%1', "No.");
+                if ExistingHeader.FindFirst() then
+                    Error('Cheque No. %1 has already been used in Receipt %2 received from %3.',
+                        CurrentChequeNo,
+                        ExistingHeader."No.",
+                        ExistingHeader."Received From");
+            end;
         }
         field(43; "No. Printed"; Integer)
         {
@@ -281,7 +291,8 @@ table 52185889 "Receipts Header"
         field(90; "Account Type"; Enum "Gen. Journal Account Type")
         {
             Caption = 'Account Type';
-            Editable = false;
+            ValuesAllowed = "Bank Account", Savings;
+            // Editable = false;
             // OptionCaption = 'G/L Account,Customer,Vendor,Bank Account,Fixed Asset,IC Partner,Savings,Credit';
             // OptionMembers = "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Savings,Credit;
         }
@@ -301,7 +312,7 @@ table 52185889 "Receipts Header"
             ELSE
             IF ("Account Type" = CONST("IC Partner")) "IC Partner"
             ELSE
-            IF ("Account Type" = CONST(Savings)) "Savings Accounts" WHERE("Product Type" = FILTER('PRIME' | 'TWIGA'))
+            IF ("Account Type" = CONST(Savings)) "Savings Accounts" WHERE("Product Category" = FILTER("Chama Investment Account"))
             ELSE
             IF ("Account Type" = CONST(Credit)) "Credit Accounts";
 
@@ -333,7 +344,6 @@ table 52185889 "Receipts Header"
         }
         field(483; "Group Code"; Code[20])
         {
-            Description = '//Added by Kigen--Lookup to members -- To gather for Micro Credit Groups to filter its members';
             TableRelation = Members."No." WHERE("Account Type" = FILTER(<> "Single Member Account"));
 
             trigger OnValidate()
@@ -575,7 +585,7 @@ table 52185889 "Receipts Header"
             GenLedgerSetup.Get;
             TestNoSeries;
             // was commented//NoSeriesMgt.InitSeries(GetNoSeriesCode,xRec."No. Series",0D,"No.","No. Series");
-                "No." := NoSeriesMgt.GetNextNo(GenLedgerSetup."Receipts No");
+            "No." := NoSeriesMgt.GetNextNo(GenLedgerSetup."Receipts No");
             // NoSeriesMgt.InitSeries(GenLedgerSetup."Receipts No", xRec."No. Series", 0D, "No.", "No. Series");
         end;
         Cashier := UserId;

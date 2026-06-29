@@ -2529,7 +2529,8 @@ Codeunit 52185470 "Periodic Activities"
                                 loans.reset;
                                 loans.setrange("Member No.", CheckoffBuffer2."Member No.");
                                 //loans.setfilter("Recovery Mode", '%1|%2', loans."Recovery Mode"::Checkoff, loans."Recovery Mode"::Hybrid);
-                                Loans.Setrange("Source Unit", Loans."Source Unit"::BOSA);
+                                // Loans.Setrange("Source Unit", Loans."Source Unit"::BOSA);
+                                Loans.setrange("Loan Product Type", CheckoffBuffer2."Product Code");
                                 Loans.SetCurrentKey("Disbursement Date");
                                 Loans.SetAscending("Disbursement Date", true);
                                 loans.SetFilter("Disbursement Date", '<=%1', checkoffHeader."Loan Cutoff Date");
@@ -2557,22 +2558,22 @@ Codeunit 52185470 "Periodic Activities"
                                             else
                                                 CheckoffLines.Amount := Loans.Repayment;
 
-                                            TotalSTO := 0;
-                                            STOPlaced.Reset();
-                                            STOPlaced.setrange(Status, STOPlaced.Status::Approved);
-                                            STOPlaced.setrange("Member No.", Loans."Member No.");
-                                            if STOPlaced.findfirst then begin
-                                                repeat
-                                                    STOLines.reset;
-                                                    STOLines.setrange("Document No.", STOPlaced."No.");
-                                                    STOLines.SetRange("Loan No.", Loans."Loan No.");
-                                                    if STOLines.findfirst then begin
-                                                        TotalSTO += STOLines.Amount;
-                                                    end;
-                                                until STOPlaced.next = 0;
-                                            end;
+                                            // TotalSTO := 0;
+                                            // STOPlaced.Reset();
+                                            // STOPlaced.setrange(Status, STOPlaced.Status::Approved);
+                                            // STOPlaced.setrange("Member No.", Loans."Member No.");
+                                            // if STOPlaced.findfirst then begin
+                                            //     repeat
+                                            //         STOLines.reset;
+                                            //         STOLines.setrange("Document No.", STOPlaced."No.");
+                                            //         STOLines.SetRange("Loan No.", Loans."Loan No.");
+                                            //         if STOLines.findfirst then begin
+                                            //             TotalSTO += STOLines.Amount;
+                                            //         end;
+                                            //     until STOPlaced.next = 0;
+                                            // end;
 
-                                            CheckoffLines.Amount := CheckoffLines.Amount - TotalSTO;
+                                            // CheckoffLines.Amount := CheckoffLines.Amount - TotalSTO;
                                             if CheckoffLines.Amount < 0 then begin
                                                 CheckoffLines.Amount := 0;
                                             end;
@@ -2663,107 +2664,106 @@ Codeunit 52185470 "Periodic Activities"
                                 // end;
 
                                 if remAmt > 0 then begin
-                                    if remAmt > 500 then begin
-                                        UnallocatedAccount := '';
-                                        SavingsAccounts.Reset;
-                                        SavingsAccounts.SetRange(SavingsAccounts."Member No.", Members."No.");
-                                        SavingsAccounts.SetRange("Product Category", SavingsAccounts."product category"::"Unallocated Fund");
-                                        if SavingsAccounts.Find('-') then begin
-                                            UnallocatedAccount := SavingsAccounts."No.";
-                                        end else begin
-                                            Pfact.reset;
-                                            Pfact.SetRange("Product Category", Pfact."Product Category"::"Unallocated Fund");
-                                            Pfact.SetRange(status, Pfact.status::Active);
-                                            if Pfact.find('-') then begin
+                                    // if remAmt > 500 then begin
+                                    UnallocatedAccount := '';
+                                    SavingsAccounts.Reset;
+                                    SavingsAccounts.SetRange(SavingsAccounts."Member No.", Members."No.");
+                                    SavingsAccounts.SetRange("Product Category", SavingsAccounts."product category"::"BOSA Deposits");
+                                    if SavingsAccounts.Find('-') then begin
+                                        UnallocatedAccount := SavingsAccounts."No.";
+                                    end else begin
+                                        Pfact.reset;
+                                        Pfact.SetRange("Product Category", Pfact."Product Category"::"BOSA Deposits");
+                                        Pfact.SetRange(status, Pfact.status::Active);
+                                        if Pfact.find('-') then begin
 
-                                                UnallocatedAccount := MemberRegistration.CreateSavingsAccountNo(Pfact."Product ID", Members."Global Dimension 1 Code", Members."No.");
-                                                MemberRegistration.AutoCreateSavingsAccount(UnallocatedAccount, Members."No.", Pfact."Product ID");
-                                            end;
+                                            UnallocatedAccount := MemberRegistration.CreateSavingsAccountNo(Pfact."Product ID", Members."Global Dimension 1 Code", Members."No.");
+                                            MemberRegistration.AutoCreateSavingsAccount(UnallocatedAccount, Members."No.", Pfact."Product ID");
                                         end;
-                                        // Unallocatd Fund
-                                        EntryNo := 1;
-                                        CheckoffLines2.Reset;
-                                        CheckoffLines2.SetRange(CheckoffLines2."Checkoff Header", CheckoffBuffer2."Checkoff No");
-                                        if CheckoffLines2.Find('+') then
-                                            EntryNo := CheckoffLines2."Entry No" + 1;
-
-                                        CheckoffLines.Init;
-                                        CheckoffLines."Entry No" := EntryNo;
-                                        CheckoffLines.Amount := remAmt;
-                                        CheckoffLines."Account No." := SavingsAccounts."No.";
-                                        //IF CheckoffBuffer2."Account No"<>'' THEN
-                                        CheckoffLines.Multiple := true;
-                                        CheckoffLines."Loan No." := '';
-                                        // if CheckoffBuffer2."Loan No" <> '' then begin
-                                        //     CheckoffLines."Clears Loan" := AmountClearsLoanIfPosted(CheckoffBuffer2."Loan No", CheckoffBuffer2.Amount);
-                                        //     if CheckoffLines."Clears Loan" then
-                                        //         CheckoffLines."Refundable Amount" := ABS(GetLoanBalanceAfterPosting(CheckoffBuffer2."Loan No", CheckoffBuffer2.Amount));
-                                        // end;
-                                        CheckoffLines."Payroll No." := SavingsAccounts."Payroll/Staff No.";
-                                        CheckoffLines."ID Number" := SavingsAccounts."ID No.";
-                                        CheckoffLines."Member No." := SavingsAccounts."Member No.";
-                                        CheckoffLines."Savings Account" := true;
-                                        CheckoffLines."Credit Account" := false;
-                                        CheckoffLines."Checkoff Header" := checkoffHeader."No.";
-                                        CheckoffLines.Type := checkoffHeader.Type;
-                                        CheckoffLines.Name := SavingsAccounts.Name;
-                                        // CheckoffLines."Payroll No." := CheckoffBuffer2.Payroll;
-                                        CheckoffLines."Employer Code" := SavingsAccounts."Employer Code";
-                                        CheckoffLines.Remarks := 'Unallocated Fund for ' + checkoffHeader."No.";
-                                        CheckoffLines."Product Code" := SavingsAccounts."Product Type";
-                                        CheckoffLines.Insert;
-                                    end
-                                    else begin
-                                        UnallocatedAccount := '';
-                                        SavingsAccounts.Reset;
-                                        SavingsAccounts.SetRange(SavingsAccounts."Member No.", Members."No.");
-                                        SavingsAccounts.SetRange("Product Type", '191`');
-                                        if SavingsAccounts.Find('-') then begin
-                                            UnallocatedAccount := SavingsAccounts."No.";
-                                        end else begin
-                                            Pfact.reset;
-                                            Pfact.SetRange("Product ID", '191');
-                                            Pfact.SetRange(status, Pfact.status::Active);
-                                            if Pfact.find('-') then begin
-
-                                                UnallocatedAccount := MemberRegistration.CreateSavingsAccountNo(Pfact."Product ID", Members."Global Dimension 1 Code", Members."No.");
-                                                MemberRegistration.AutoCreateSavingsAccount(UnallocatedAccount, Members."No.", Pfact."Product ID");
-                                            end;
-                                        end;
-                                        // FOSA Acc below 100
-                                        EntryNo := 1;
-                                        CheckoffLines2.Reset;
-                                        CheckoffLines2.SetRange(CheckoffLines2."Checkoff Header", CheckoffBuffer2."Checkoff No");
-                                        if CheckoffLines2.Find('+') then
-                                            EntryNo := CheckoffLines2."Entry No" + 1;
-
-                                        CheckoffLines.Init;
-                                        CheckoffLines."Entry No" := EntryNo;
-                                        CheckoffLines.Amount := remAmt;
-                                        CheckoffLines."Account No." := SavingsAccounts."No.";
-                                        //IF CheckoffBuffer2."Account No"<>'' THEN
-                                        CheckoffLines.Multiple := true;
-                                        CheckoffLines."Loan No." := '';
-                                        // if CheckoffBuffer2."Loan No" <> '' then begin
-                                        //     CheckoffLines."Clears Loan" := AmountClearsLoanIfPosted(CheckoffBuffer2."Loan No", CheckoffBuffer2.Amount);
-                                        //     if CheckoffLines."Clears Loan" then
-                                        //         CheckoffLines."Refundable Amount" := ABS(GetLoanBalanceAfterPosting(CheckoffBuffer2."Loan No", CheckoffBuffer2.Amount));
-                                        // end;
-                                        CheckoffLines."Payroll No." := SavingsAccounts."Payroll/Staff No.";
-                                        CheckoffLines."ID Number" := SavingsAccounts."ID No.";
-                                        CheckoffLines."Member No." := SavingsAccounts."Member No.";
-                                        CheckoffLines."Savings Account" := true;
-                                        CheckoffLines."Credit Account" := false;
-                                        CheckoffLines."Checkoff Header" := checkoffHeader."No.";
-                                        CheckoffLines.Type := checkoffHeader.Type;
-                                        CheckoffLines.Name := SavingsAccounts.Name;
-                                        // CheckoffLines."Payroll No." := CheckoffBuffer2.Payroll;
-                                        CheckoffLines."Employer Code" := SavingsAccounts."Employer Code";
-                                        CheckoffLines.Remarks := 'Ordinary excess checkoff refund from ' + checkoffHeader."No.";
-                                        CheckoffLines."Product Code" := SavingsAccounts."Product Type";
-                                        CheckoffLines.Insert;
                                     end;
+                                    // Unallocatd Fund
+                                    EntryNo := 1;
+                                    CheckoffLines2.Reset;
+                                    CheckoffLines2.SetRange(CheckoffLines2."Checkoff Header", CheckoffBuffer2."Checkoff No");
+                                    if CheckoffLines2.Find('+') then
+                                        EntryNo := CheckoffLines2."Entry No" + 1;
 
+                                    CheckoffLines.Init;
+                                    CheckoffLines."Entry No" := EntryNo;
+                                    CheckoffLines.Amount := remAmt;
+                                    CheckoffLines."Account No." := SavingsAccounts."No.";
+                                    //IF CheckoffBuffer2."Account No"<>'' THEN
+                                    CheckoffLines.Multiple := true;
+                                    CheckoffLines."Loan No." := '';
+                                    // if CheckoffBuffer2."Loan No" <> '' then begin
+                                    //     CheckoffLines."Clears Loan" := AmountClearsLoanIfPosted(CheckoffBuffer2."Loan No", CheckoffBuffer2.Amount);
+                                    //     if CheckoffLines."Clears Loan" then
+                                    //         CheckoffLines."Refundable Amount" := ABS(GetLoanBalanceAfterPosting(CheckoffBuffer2."Loan No", CheckoffBuffer2.Amount));
+                                    // end;
+                                    CheckoffLines."Payroll No." := SavingsAccounts."Payroll/Staff No.";
+                                    CheckoffLines."ID Number" := SavingsAccounts."ID No.";
+                                    CheckoffLines."Member No." := SavingsAccounts."Member No.";
+                                    CheckoffLines."Savings Account" := true;
+                                    CheckoffLines."Credit Account" := false;
+                                    CheckoffLines."Checkoff Header" := checkoffHeader."No.";
+                                    CheckoffLines.Type := checkoffHeader.Type;
+                                    CheckoffLines.Name := SavingsAccounts.Name;
+                                    // CheckoffLines."Payroll No." := CheckoffBuffer2.Payroll;
+                                    CheckoffLines."Employer Code" := SavingsAccounts."Employer Code";
+                                    CheckoffLines.Remarks := 'Excess checkoff from ' + checkoffHeader."No." + ' to deposits.';
+                                    CheckoffLines."Product Code" := SavingsAccounts."Product Type";
+                                    CheckoffLines.Insert;
+                                    // end
+                                    // else begin
+                                    //     UnallocatedAccount := '';
+                                    //     SavingsAccounts.Reset;
+                                    //     SavingsAccounts.SetRange(SavingsAccounts."Member No.", Members."No.");
+                                    //     SavingsAccounts.SetRange("Product Type", '191');
+                                    //     if SavingsAccounts.Find('-') then begin
+                                    //         UnallocatedAccount := SavingsAccounts."No.";
+                                    //     end else begin
+                                    //         Pfact.reset;
+                                    //         Pfact.SetRange("Product ID", '191');
+                                    //         Pfact.SetRange(status, Pfact.status::Active);
+                                    //         if Pfact.find('-') then begin
+
+                                    //             UnallocatedAccount := MemberRegistration.CreateSavingsAccountNo(Pfact."Product ID", Members."Global Dimension 1 Code", Members."No.");
+                                    //             MemberRegistration.AutoCreateSavingsAccount(UnallocatedAccount, Members."No.", Pfact."Product ID");
+                                    //         end;
+                                    //     end;
+                                    //     // FOSA Acc below 100
+                                    //     EntryNo := 1;
+                                    //     CheckoffLines2.Reset;
+                                    //     CheckoffLines2.SetRange(CheckoffLines2."Checkoff Header", CheckoffBuffer2."Checkoff No");
+                                    //     if CheckoffLines2.Find('+') then
+                                    //         EntryNo := CheckoffLines2."Entry No" + 1;
+
+                                    //     CheckoffLines.Init;
+                                    //     CheckoffLines."Entry No" := EntryNo;
+                                    //     CheckoffLines.Amount := remAmt;
+                                    //     CheckoffLines."Account No." := SavingsAccounts."No.";
+                                    //     //IF CheckoffBuffer2."Account No"<>'' THEN
+                                    //     CheckoffLines.Multiple := true;
+                                    //     CheckoffLines."Loan No." := '';
+                                    //     // if CheckoffBuffer2."Loan No" <> '' then begin
+                                    //     //     CheckoffLines."Clears Loan" := AmountClearsLoanIfPosted(CheckoffBuffer2."Loan No", CheckoffBuffer2.Amount);
+                                    //     //     if CheckoffLines."Clears Loan" then
+                                    //     //         CheckoffLines."Refundable Amount" := ABS(GetLoanBalanceAfterPosting(CheckoffBuffer2."Loan No", CheckoffBuffer2.Amount));
+                                    //     // end;
+                                    //     CheckoffLines."Payroll No." := SavingsAccounts."Payroll/Staff No.";
+                                    //     CheckoffLines."ID Number" := SavingsAccounts."ID No.";
+                                    //     CheckoffLines."Member No." := SavingsAccounts."Member No.";
+                                    //     CheckoffLines."Savings Account" := true;
+                                    //     CheckoffLines."Credit Account" := false;
+                                    //     CheckoffLines."Checkoff Header" := checkoffHeader."No.";
+                                    //     CheckoffLines.Type := checkoffHeader.Type;
+                                    //     CheckoffLines.Name := SavingsAccounts.Name;
+                                    //     // CheckoffLines."Payroll No." := CheckoffBuffer2.Payroll;
+                                    //     CheckoffLines."Employer Code" := SavingsAccounts."Employer Code";
+                                    //     CheckoffLines.Remarks := 'Ordinary excess checkoff refund from ' + checkoffHeader."No.";
+                                    //     CheckoffLines."Product Code" := SavingsAccounts."Product Type";
+                                    //     CheckoffLines.Insert;
+                                    // end;
                                 end;
 
                             end;
@@ -2771,49 +2771,49 @@ Codeunit 52185470 "Periodic Activities"
                         end;
                     end;
                 end;
-                //     end else begin
-                //     EntryNo := 1;
-                //     CheckoffLines2.Reset;
-                //     CheckoffLines2.SetRange(CheckoffLines2."Checkoff Header", CheckoffBuffer."Checkoff No");
-                //     if CheckoffLines2.Find('+') then
-                //         EntryNo := CheckoffLines2."Entry No" + 1;
+            //     end else begin
+            //     EntryNo := 1;
+            //     CheckoffLines2.Reset;
+            //     CheckoffLines2.SetRange(CheckoffLines2."Checkoff Header", CheckoffBuffer."Checkoff No");
+            //     if CheckoffLines2.Find('+') then
+            //         EntryNo := CheckoffLines2."Entry No" + 1;
 
-                //     CheckoffLines.Init;
-                //     CheckoffLines."Entry No" := EntryNo;
-                //     CheckoffLines.Amount := CheckoffBuffer.Amount + CheckoffBuffer.Interest;
-                //     CheckoffLines."Account No." := CheckoffBuffer."Account No";
-                //     //IF CheckoffBuffer."Account No"<>'' THEN
-                //     CheckoffLines.Multiple := true;
-                //     CheckoffLines."Loan No." := CheckoffBuffer."Loan No";
-                //     if CheckoffBuffer."Loan No" <> '' then
-                //         CheckoffLines."Clears Loan" :=
-                //         AmountClearsLoanIfPosted(CheckoffBuffer."Loan No", CheckoffBuffer.Amount);
-                //     CheckoffLines."Payroll No." := CheckoffBuffer."Upload No.";//CheckoffBuffer.Payroll;
-                //     CheckoffLines."ID Number" := CheckoffBuffer."ID No.";
-                //     CheckoffLines."Member No." := CheckoffBuffer."Member No.";
-                //     CheckoffLines."Savings Account" := CheckoffBuffer."Savings Account";
-                //     CheckoffLines."Credit Account" := CheckoffBuffer."Credit Account";
-                //     CheckoffLines."Checkoff Header" := CheckoffBuffer."Checkoff No";
-                //     CheckoffLines.Name := CheckoffBuffer.Name;
-                //     CheckoffLines.Type := CheckoffBuffer.Type;
-                //     //CheckoffLines."Payroll No.":=CheckoffBuffer.Payroll;
-                //     CheckoffLines.Remarks := CheckoffBuffer.Remarks;
-                //     CheckoffLines."Product Code" := CheckoffBuffer."Search Code";
-                //     CheckoffLines.Insert;
-                // end;
+            //     CheckoffLines.Init;
+            //     CheckoffLines."Entry No" := EntryNo;
+            //     CheckoffLines.Amount := CheckoffBuffer.Amount + CheckoffBuffer.Interest;
+            //     CheckoffLines."Account No." := CheckoffBuffer."Account No";
+            //     //IF CheckoffBuffer."Account No"<>'' THEN
+            //     CheckoffLines.Multiple := true;
+            //     CheckoffLines."Loan No." := CheckoffBuffer."Loan No";
+            //     if CheckoffBuffer."Loan No" <> '' then
+            //         CheckoffLines."Clears Loan" :=
+            //         AmountClearsLoanIfPosted(CheckoffBuffer."Loan No", CheckoffBuffer.Amount);
+            //     CheckoffLines."Payroll No." := CheckoffBuffer."Upload No.";//CheckoffBuffer.Payroll;
+            //     CheckoffLines."ID Number" := CheckoffBuffer."ID No.";
+            //     CheckoffLines."Member No." := CheckoffBuffer."Member No.";
+            //     CheckoffLines."Savings Account" := CheckoffBuffer."Savings Account";
+            //     CheckoffLines."Credit Account" := CheckoffBuffer."Credit Account";
+            //     CheckoffLines."Checkoff Header" := CheckoffBuffer."Checkoff No";
+            //     CheckoffLines.Name := CheckoffBuffer.Name;
+            //     CheckoffLines.Type := CheckoffBuffer.Type;
+            //     //CheckoffLines."Payroll No.":=CheckoffBuffer.Payroll;
+            //     CheckoffLines.Remarks := CheckoffBuffer.Remarks;
+            //     CheckoffLines."Product Code" := CheckoffBuffer."Search Code";
+            //     CheckoffLines.Insert;
+            // end;
 
-                //Employer Balance Update
-                if Loans.Get(CheckoffBuffer."Loan No") then begin
-                    if CheckoffBuffer.Type = CheckoffBuffer.Type::sLoan then
-                        Loans."Employer Balance" := CheckoffBuffer.Balance;
-                    Loans.Modify;
-                end;
+            //Employer Balance Update
+            // if Loans.Get(CheckoffBuffer."Loan No") then begin
+            //     if CheckoffBuffer.Type = CheckoffBuffer.Type::sLoan then
+            //         Loans."Employer Balance" := CheckoffBuffer.Balance;
+            //     Loans.Modify;
+            // end;
 
-                if SavingsAccounts.Get(CheckoffBuffer."Account No") then begin
-                    SavingsAccounts."Employer Balance" := CheckoffBuffer.Balance;
-                    SavingsAccounts."Monthly Contribution" := CheckoffBuffer.Amount;
-                    SavingsAccounts.Modify;
-                end;
+            // if SavingsAccounts.Get(CheckoffBuffer."Account No") then begin
+            //     SavingsAccounts."Employer Balance" := CheckoffBuffer.Balance;
+            //     SavingsAccounts."Monthly Contribution" := CheckoffBuffer.Amount;
+            //     SavingsAccounts.Modify;
+            // end;
 
             until CheckoffBuffer.Next = 0;
         end;
@@ -5685,16 +5685,16 @@ Codeunit 52185470 "Periodic Activities"
                     LoanRecoveryLines."Loan No." := CreateGuarantorLoan(LoanRecoveryLines."Account No.", Loans, LoanRecoveryLines, Dim1, Dim2, DocNo, PDate);
 
                     TransAmt := 0;
-                    TransAmt := LoanRecoveryLines."Principle Amount" + LoanRecoveryLines."Interest Amount";
-                    Description := 'Guarantor Attachment ' + LoanRecoveryLines."Member No." + ' ' + LoanRecoveryLines."Loan No." + ' P & I';
+                    TransAmt := LoanRecoveryLines."Principle Amount";
+                    Description := 'Guarantor Attachment to principle ' + LoanRecoveryLines."Member No." + ' ' + LoanRecoveryLines."Loan No.";
                     SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
                         '', -TransAmt, ExtDoc, Loans."Loan No.", TransType::Repayment, Dim1, Dim2, SystemCreated);
 
-                    // TransAmt := 0;
-                    // TransAmt := LoanRecoveryLines."Interest Amount";
-                    // Description := 'Guarantor Attachment ' + LoanRecoveryLines."Member No." + ' ' + LoanRecoveryLines."Loan No." + ' Interest';
-                    // SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
-                    //     '', -TransAmt, ExtDoc, Loans."Loan No.", TransType::, Dim1, Dim2, SystemCreated);
+                    TransAmt := 0;
+                    TransAmt := LoanRecoveryLines."Interest Amount";
+                    Description := 'Guarantor Attachment to interest ' + LoanRecoveryLines."Member No." + ' ' + LoanRecoveryLines."Loan No.";
+                    SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
+                        '', -TransAmt, ExtDoc, Loans."Loan No.", TransType::"Interest Paid", Dim1, Dim2, SystemCreated);
                     LoanRecoveryLines.Modify();
                 end;
 
@@ -5962,8 +5962,8 @@ Codeunit 52185470 "Periodic Activities"
             NewLoans."Appraisal Parameter Type" := ProductFactory."Appraisal Parameter Type";
             NewLoans."Recovery Priority" := ProductFactory."Recovery Priority";
             NewLoans."Application Date" := PDate;
-            NewLoans."Requested Amount" := LoanRecLines."Principle Amount";
-            NewLoans."Approved Amount" := LoanRecLines."Principle Amount";
+            NewLoans."Requested Amount" := LoanRecLines."Principle Amount" + LoanReclines."Interest Amount";
+            NewLoans."Approved Amount" := LoanRecLines."Principle Amount" + LoanReclines."Interest Amount";
             NewLoans.Validate(NewLoans."Approved Amount");
             NewLoans.Status := NewLoans.Status::Approved;
             NewLoans."Disbursement Date" := PDate;
@@ -6023,13 +6023,13 @@ Codeunit 52185470 "Periodic Activities"
                 TransAmt := NewLoans."Approved Amount";
                 Description := 'Defaulter Attachment ' + Loans."Member No." + ' ' + Loans."Loan No.";
 
-                if LoanRecLines."Principle Amount" <> 0 then
+                if NewLoans."Approved Amount" <> 0 then
                     SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
                            '', TransAmt, DocNo, LoanNo, TransType::Loan, Dim1, Dim2, SystemCreated);
 
-                if LoanRecLines."Interest Amount" <> 0 then
-                    SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
-                           '', LoanRecLines."Interest Amount", DocNo, LoanNo, TransType::"Interest Due", Dim1, Dim2, SystemCreated);
+                // if LoanRecLines."Interest Amount" <> 0 then
+                // SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
+                //        '', LoanRecLines."Interest Amount", DocNo, LoanNo, TransType::"Interest Due", Dim1, Dim2, SystemCreated);
 
                 NewLoans.Posted := true;
                 NewLoans.Modify;
@@ -6043,6 +6043,7 @@ Codeunit 52185470 "Periodic Activities"
                 Members.Get(NewLoans."Member No.");
 
                 GlobalFunctions.GetMemberData(Members."No.", FirstName, PhoneNumber);
+                LoanNumber := NewLoans."Loan No.";
 
                 // msg := 'Dear member your have been attached Loan of Kes'
                 // + Format(ROUND(NewLoans."Approved Amount", 1, '=')) + ' ' + 'for defaulted loan you guaranteed Member No.' + Loans."Member No." + '-' + Loans."Member Name" + '' +
@@ -6135,8 +6136,8 @@ Codeunit 52185470 "Periodic Activities"
             NewLoans."Appraisal Parameter Type" := ProductFactory."Appraisal Parameter Type";
             NewLoans."Recovery Priority" := ProductFactory."Recovery Priority";
             NewLoans."Application Date" := PDate;
-            NewLoans."Requested Amount" := LoanRecLines."Principle Amount";
-            NewLoans."Approved Amount" := LoanRecLines."Principle Amount";
+            NewLoans."Requested Amount" := LoanRecLines."Principle Amount" + LoanRecLines."Interest Amount";
+            NewLoans."Approved Amount" := LoanRecLines."Principle Amount" + LoanRecLines."Interest Amount";
             NewLoans.Validate(NewLoans."Approved Amount");
             NewLoans.Status := NewLoans.Status::Approved;
             NewLoans."Disbursement Date" := PDate;
@@ -6163,15 +6164,15 @@ Codeunit 52185470 "Periodic Activities"
                 LoanNo := NewLoans."Loan No.";
                 SystemCreated := true;
                 TransAmt := NewLoans."Approved Amount";
-                Description := 'Defaulter Attachment ' + Loans."Member No." + ' ' + Loans."Loan No.";
+                Description := 'Defaulter P+I Attachment ' + Loans."Member No." + ' ' + Loans."Loan No.";
 
-                if LoanRecLines."Principle Amount" <> 0 then
+                if TransAmt <> 0 then
                     SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
                            '', TransAmt, DocNo, LoanNo, TransType::Loan, Dim1, Dim2, SystemCreated);
 
-                if LoanRecLines."Interest Amount" <> 0 then
-                    SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
-                           '', LoanRecLines."Interest Amount", DocNo, LoanNo, TransType::"Interest Due", Dim1, Dim2, SystemCreated);
+                // if LoanRecLines."Interest Amount" <> 0 then
+                //     SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, Loans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
+                //            '', LoanRecLines."Interest Amount", DocNo, LoanNo, TransType::"Interest Due", Dim1, Dim2, SystemCreated);
 
                 NewLoans.Posted := true;
                 NewLoans.Modify;
@@ -6769,22 +6770,22 @@ Codeunit 52185470 "Periodic Activities"
 
                 Description := 'Reappotionment to ' + RpptLns."Guarantor Member No." + ' ' + RpptLns."Guarantor Loan No.";
                 TransAmt := RpptLns."Interest Portion";
-                SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Savings, DefaulterDebitAccount, CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
+                SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Savings, DefaulterDebitAccount, CopyStr(Description, 1, 40), BalAccountType::"G/L Account",
                                         '', TransAmt, ExtDoc, LoanNo, TransType::" ", Dim1, Dim2, SystemCreated);
 
                 Description := 'Reappotionment to ' + RpptLns."Guarantor Member No." + ' ' + RpptLns."Guarantor Loan No.";
                 TransAmt := RpptLns."Principle Portion";
-                SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Savings, DefaulterDebitAccount, CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
+                SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Savings, DefaulterDebitAccount, CopyStr(Description, 1, 40), BalAccountType::"G/L Account",
                                         '', TransAmt, ExtDoc, LoanNo, TransType::" ", Dim1, Dim2, SystemCreated);
 
                 Description := 'Reappotionment from ' + LoanRecoveryHeader."Loan No." + ' ' + LoanRecoveryHeader."Member No.";
                 TransAmt := RpptLns."Interest Portion";
-                SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, GuarantorLoans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
+                SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, GuarantorLoans."Loan Account", CopyStr(Description, 1, 40), BalAccountType::"G/L Account",
                             '', -TransAmt, DocNo, GuarantorLoans."Loan No.", TransType::"Interest Paid", Dim1, Dim2, SystemCreated);
 
                 Description := 'Reappotionment from ' + LoanRecoveryHeader."Loan No." + ' ' + LoanRecoveryHeader."Member No.";
                 TransAmt := RpptLns."Principle Portion";
-                SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, GuarantorLoans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
+                SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, GuarantorLoans."Loan Account", CopyStr(Description, 1, 40), BalAccountType::"G/L Account",
                             '', -TransAmt, DocNo, GuarantorLoans."Loan No.", TransType::Repayment, Dim1, Dim2, SystemCreated);
 
 
@@ -6796,13 +6797,13 @@ Codeunit 52185470 "Periodic Activities"
                     AccNo := SavingsAccounts."No.";
                     TransAmt := RpptLns."Money To FOSA";
                     Description := 'Reappotionment from ' + LoanRecoveryHeader."Loan No." + ' ' + LoanRecoveryHeader."Member No." + ' Cleared';
-                    SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Savings, AccNo, CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
+                    SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Savings, AccNo, CopyStr(Description, 1, 40), BalAccountType::"G/L Account",
                                         '', -TransAmt, ExtDoc, LoanNo, TransType::" ", Dim1, Dim2, SystemCreated);
 
                     AccNo := DefaulterDebitAccount;
                     TransAmt := RpptLns."Money To FOSA";
                     Description := 'Reappotionment to ' + RpptLns."Guarantor Member No." + ' ' + RpptLns."Guarantor Loan No." + ' Cleared';
-                    SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Savings, AccNo, CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
+                    SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Savings, AccNo, CopyStr(Description, 1, 40), BalAccountType::"G/L Account",
                                         '', TransAmt, ExtDoc, LoanNo, TransType::" ", Dim1, Dim2, SystemCreated);
 
                     //HOLD MONEY TO FOSA
@@ -6816,7 +6817,7 @@ Codeunit 52185470 "Periodic Activities"
                     SendSMS.SendSms(SMSSource::DMU, Members."Phone No.", msg, Format(Members."First Name"), '', true, 250, false, 'CBS', GuarantorLoans."Loan No.", 'CBS');
 
                 end else
-                    Error('Guarantor No.: %1 Name: %2 doesn''t have an Ordinary Account.', RpptLns."Guarantor Member No.", RpptLns."Guarantor Name");
+                    Error('Guarantor No.: %1 Name: %2 doesn''t have a Deposit Account.', RpptLns."Guarantor Member No.", RpptLns."Guarantor Name");
             until RpptLns.Next() = 0;
         end;
         SaccoTrans.PostJournal(Jtemplate, JBatch, false);
@@ -6898,22 +6899,22 @@ Codeunit 52185470 "Periodic Activities"
 
                 Description := 'Reappotionment to ' + RpptLns."Guarantor Member No." + ' ' + RpptLns."Guarantor Loan No.";
                 TransAmt := RpptLns."Interest Portion";
-                SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Savings, DefaulterDebitAccount, CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
+                SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Savings, DefaulterDebitAccount, CopyStr(Description, 1, 40), BalAccountType::"G/L Account",
                                         '', TransAmt, ExtDoc, LoanNo, TransType::" ", Dim1, Dim2, SystemCreated);
 
                 Description := 'Reappotionment to ' + RpptLns."Guarantor Member No." + ' ' + RpptLns."Guarantor Loan No.";
                 TransAmt := RpptLns."Principle Portion";
-                SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Savings, DefaulterDebitAccount, CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
+                SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Savings, DefaulterDebitAccount, CopyStr(Description, 1, 40), BalAccountType::"G/L Account",
                                         '', TransAmt, ExtDoc, LoanNo, TransType::" ", Dim1, Dim2, SystemCreated);
 
                 Description := 'Reappotionment from ' + LoanRecoveryHeader."Loan No." + ' ' + LoanRecoveryHeader."Member No.";
                 TransAmt := RpptLns."Interest Portion";
-                SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, GuarantorLoans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
+                SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, GuarantorLoans."Loan Account", CopyStr(Description, 1, 40), BalAccountType::"G/L Account",
                             '', -TransAmt, DocNo, GuarantorLoans."Loan No.", TransType::"Interest Paid", Dim1, Dim2, SystemCreated);
 
                 Description := 'Reappotionment from ' + LoanRecoveryHeader."Loan No." + ' ' + LoanRecoveryHeader."Member No.";
                 TransAmt := RpptLns."Principle Portion";
-                SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, GuarantorLoans."Loan Account", CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
+                SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, GuarantorLoans."Loan Account", CopyStr(Description, 1, 40), BalAccountType::"G/L Account",
                             '', -TransAmt, DocNo, GuarantorLoans."Loan No.", TransType::Repayment, Dim1, Dim2, SystemCreated);
 
 
@@ -6924,13 +6925,13 @@ Codeunit 52185470 "Periodic Activities"
                     AccNo := SavingsAccounts."No.";
                     TransAmt := RpptLns."Money To FOSA";
                     Description := 'Reappotionment from ' + LoanRecoveryHeader."Loan No." + ' ' + LoanRecoveryHeader."Member No." + ' Cleared';
-                    SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Savings, AccNo, CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
+                    SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Savings, AccNo, CopyStr(Description, 1, 40), BalAccountType::"G/L Account",
                                         '', -TransAmt, ExtDoc, LoanNo, TransType::" ", Dim1, Dim2, SystemCreated);
 
                     AccNo := DefaulterDebitAccount;
                     TransAmt := RpptLns."Money To FOSA";
                     Description := 'Reappotionment to ' + RpptLns."Guarantor Member No." + ' ' + RpptLns."Guarantor Loan No." + ' Cleared';
-                    SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Savings, AccNo, CopyStr(Description, 1, 50), BalAccountType::"G/L Account",
+                    SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Savings, AccNo, CopyStr(Description, 1, 40), BalAccountType::"G/L Account",
                                         '', TransAmt, ExtDoc, LoanNo, TransType::" ", Dim1, Dim2, SystemCreated);
 
                     //HOLD MONEY TO FOSA

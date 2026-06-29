@@ -667,16 +667,16 @@ table 52185888 "Payments Header"
             TableRelation = "Bank Account"."Balance (LCY)" where("No." = field("Paying Bank Account"));
         }
 
-        field(482; "Cheque No.2"; Code[20])
-        {
+        // field(482; "Cheque No.2"; Code[20])
+        // {
 
-            trigger OnValidate()
-            begin
-                if "Pay Mode" = "Pay Mode"::Cash then begin
-                    Error('You CANNOT insert cheque No. If the Pay Mode is Cash');
-                end;
-            end;
-        }
+        //     trigger OnValidate()
+        //     begin
+        //         if "Pay Mode" = "Pay Mode"::Cash then begin
+        //             Error('You CANNOT insert cheque No. If the Pay Mode is Cash');
+        //         end;
+        //     end;
+        // }
     }
 
     keys

@@ -92,7 +92,7 @@ page 52185495 "Banking Activities"
                 ShowCaption = true;
                 field("Mobile Transaction"; Rec."Mobile Transactions")
                 {
-                    Caption = 'Kenpipe IPesa';
+                    Caption = 'Azima Chapaa';
                     ApplicationArea = Basic;
                     // Image = None;
                 }

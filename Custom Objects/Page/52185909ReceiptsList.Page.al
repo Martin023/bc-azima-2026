@@ -99,7 +99,7 @@ page 52185909 "Receipts List"
         Rec.SetFilter(Status, ' ');
 
         //***************************JACK***************************//
-        Rec.SetRange("Created By", UserId);
+        //Rec.SetRange("Created By", UserId);
         if UserMgt.GetSalesFilter() <> '' then begin
             Rec.FilterGroup(2);
             Rec.SetRange("Responsibility Center", UserMgt.GetSalesFilter());

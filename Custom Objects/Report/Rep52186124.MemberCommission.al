@@ -11,30 +11,10 @@ report 52186124 "Member Commission"
 
     dataset
     {
-        dataitem(Members; Members)
+        dataitem("Marketing Teams Header"; "Marketing Teams Header")
         {
-            RequestFilterFields = "No.", "Recruited by Type", "Recruited By", "Date Approved";
-            column(No; "No.")
-            {
-            }
-            column(Name; Name)
-            {
-            }
-            column(Recruited_by_Type; "Recruited by Type") { }
-            column(RecruitedBy; "Recruited By")
-            {
-            }
-            column(RecruitedByName; "Recruited By Name")
-            {
-            }
-            column(RecruitedbyType; "Recruited by Type")
-            {
-            }
-            column(RegistrationDate; "Registration Date")
-            {
-            }
-            column(AmountContributed; AmountContributed) { }
-            column(ContributionDate; ContributionDate) { }
+            RequestFilterFields = "Payroll No.", "Member Name", "ID Number", "Branch Code";
+
             column(CompanyInformation_Name; CompanyInformation.Name)
             {
             }
@@ -50,25 +30,108 @@ report 52186124 "Member Commission"
             column(CommunicationOnline; CommunicationOnline)
             {
             }
-
+            column(Branch_Code; "Branch Code") { }
+            column(Payroll_No_; "Payroll No.") { }
+            column(Member_Name; "Member Name") { }
+            column(NewMemberTarget; NewMemberTarget) { }
+            column(RecrutedMembers; RecrutedMembers) { }
+            column(NewPaidMembersRecruited; NewPaidMembersRecruited) { }
+            column(FollowUpMembers; FollowUpMembers) { }
+            column(EntranceFee; EntranceFee) { }
+            column(ShareCapital; ShareCapital) { }
+            column(Deposist; Deposist) { }
+            column(CommissionOnNewMembers; CommissionOnNewMembers) { }
+            column(MembersRejoined; MembersRejoined) { }
+            column(RejoinedCommsion; RejoinedCommsion) { }
+            column(CheckoffCommsion; CheckoffCommsion) { }
+            column(MembersDormant; MembersDormant) { }
+            column(DormantCommsion; DormantCommsion) { }
+            column(AchievedShareCapitalPort; AchievedShareCapitalPort) { }
+            column(CommssionOnShareCapital; CommssionOnShareCapital) { }
+            column(AchievedDepositPort; AchievedDepositPort) { }
+            column(CommssionOnAchievedDepositPort; CommssionOnAchievedDepositPort) { }
+            column(InterestPaidOnLoans; InterestPaidOnLoans) { }
+            column(CommissionOnIntPaid; CommissionOnIntPaid) { }
+            column(FDTotal; FDTotal) { }
+            column(SAYETotal; SAYETotal) { }
+            column(SAYECommssion; SAYECommssion) { }
+            column(JuniorTotal; JuniorTotal) { }
+            column(CommsionOnJunior; CommsionOnJunior) { }
+            column(HolidayTotal; HolidayTotal) { }
+            column(CommsionOnHoliday; CommsionOnHoliday) { }
+            column(Retainer; "Marketing Teams Header".Retainer) { }
+            column(AggregateCommission; AggregateCommission) { }
             trigger OnAfterGetRecord()
-            var
-                myInt: Integer;
             begin
-                ContributionDate := 0D;
-                AmountContributed := 0;
+                RecrutedMembers := 0;
+                NewPaidMembersRecruited := 0;
+                FollowUpMembers := 0;
+                EntranceFee := 0;
+                ShareCapital := 0;
+                Deposist := 0;
+                CommissionOnNewMembers := 0;
+                MembersRejoined := 0;
+                RejoinedCommsion := 0;
+                CheckoffCommsion := 0;
+                MembersDormant := 0;
+                DormantCommsion := 0;
+                AchievedShareCapitalPort := 0;
+                CommssionOnShareCapital := 0;
+                AchievedDepositPort := 0;
+                CommssionOnAchievedDepositPort := 0;
+                InterestPaidOnLoans := 0;
+                CommissionOnIntPaid := 0;
+                FDTotal := 0;
+                SAYETotal := 0;
+                SAYECommssion := 0;
+                JuniorTotal := 0;
+                CommsionOnJunior := 0;
+                HolidayTotal := 0;
+                CommsionOnHoliday := 0;
+                Retainer := 0;
+                AggregateCommission := 0;
+                Members.reset;
+                Members.SetLoadFields("No.", "Phone No.", Name, "Recruited By", "Member Class", "Registration Date", "Rejoinig Date");
+                // if (StartDate <> 0D) then
+                //     if Enddate <> 0D then
+                Members.SetRange("Registration Date", StartDate, Enddate);
+                // else Members.SetRange("Registration Date", StartDate);
+                Members.SetRange("Recruited By", "Marketing Teams Header"."Payroll No.");
+                if Members.FindSet() then begin
+                    repeat
+                        RecrutedMembers += 1;
 
-                SavingsAccount.RESET;
-                SavingsAccount.SETRANGE("Member No.", Members."No.");
-                SavingsAccount.SetRange("Product Category", SavingsAccount."Product Category"::"Entrance Fee");
-                if SavingsAccount.Find('-') then begin
-                    SavingsAccount.CalcFields("Balance (LCY)");
-                    AmountContributed := SavingsAccount."Balance (LCY)";
-                    if AmountContributed < SavingsAccount."Monthly Contribution" then
-                        AmountContributed := 0;
+                        SavingsAccount.Reset();
+                        SavingsAccount.SetRange("Member No.", Members."No.");
+                        SavingsAccount.SetAutoCalcFields("Balance (LCY)");
+                        if SavingsAccount.FindSet() then begin
+                            repeat
+                                case
+                                    SavingsAccount."Product Category" of
+                                    SavingsAccount."Product Category"::"BOSA Deposits":
+                                        Deposist += SavingsAccount."Balance (LCY)";
+                                    SavingsAccount."Product Category"::"Fixed Deposit":
+                                        FDTotal += SavingsAccount."Balance (LCY)";
+                                    SavingsAccount."Product Category"::"Share Capital":
+                                        ShareCapital += SavingsAccount."Balance (LCY)";
+                                    SavingsAccount."Product Category"::SAYE:
+                                        SAYETotal += SavingsAccount."Balance (LCY)";
+                                    SavingsAccount."Product Category"::"Junior Account":
+                                        JuniorTotal += SavingsAccount."Balance (LCY)";
+                                    SavingsAccount."Product Category"::Holiday:
+                                        HolidayTotal += SavingsAccount."Balance (LCY)";
+                                    SavingsAccount."Product Category"::"Entrance Fee":
+                                        EntranceFee += SavingsAccount."Balance (LCY)";
+                                end;
+                            until SavingsAccount.Next() = 0;
+                        end;
+
+                    until Members.Next() = 0;
                 end;
+
             end;
         }
+
     }
     requestpage
     {
@@ -79,6 +142,15 @@ report 52186124 "Member Commission"
             {
                 group(GroupName)
                 {
+                    Caption = 'Date Filter';
+                    field(StartDate; StartDate)
+                    {
+                        Caption = 'Start Date';
+                    }
+                    field(EndDate; Enddate)
+                    {
+                        Caption = 'Start Date';
+                    }
                 }
             }
         }
@@ -96,10 +168,11 @@ report 52186124 "Member Commission"
         CompanyAddress := CompanyInformation.Address + ' -Post Code: ' + CompanyInformation."Post Code" + ' -City:' + CompanyInformation.City + ' Region: ' + CompanyInformation."Country/Region Code";
         CompanyTelephone := 'Tel: ' + CompanyInformation."Phone No." + ' -Office Tel: ' + CompanyInformation."Phone No. 2";
         CommunicationOnline := 'E-mail: ' + CompanyInformation."E-Mail" + '- Website: ' + CompanyInformation."Home Page";
+
+        if Enddate = 0D then Enddate := Today;
     end;
 
     var
-        myInt: Integer;
         CI: Record "Company Information";
         CompanyInformation: Record "Company Information";
         CompanyAddress: Text;
@@ -109,5 +182,35 @@ report 52186124 "Member Commission"
         AmountContributed: Decimal;
         SavingsLedgerEntry: Record "Savings Ledger Entry";
         ContributionDate: Date;
-
+        NewMemberTarget: Integer;
+        RecrutedMembers: Integer;
+        NewPaidMembersRecruited: Integer;
+        FollowUpMembers: Integer;
+        EntranceFee: Decimal;
+        ShareCapital: Decimal;
+        Deposist: Decimal;
+        CommissionOnNewMembers: Decimal;
+        MembersRejoined: Integer;
+        RejoinedCommsion: Decimal;
+        CheckoffCommsion: Decimal;
+        MembersDormant: Decimal;
+        DormantCommsion: Decimal;
+        AchievedShareCapitalPort: Decimal;
+        CommssionOnShareCapital: Decimal;
+        AchievedDepositPort: Decimal;
+        CommssionOnAchievedDepositPort: Decimal;
+        InterestPaidOnLoans: Decimal;
+        CommissionOnIntPaid: Decimal;
+        FDTotal: Decimal;
+        SAYETotal: Decimal;
+        SAYECommssion: Decimal;
+        JuniorTotal: Decimal;
+        CommsionOnJunior: Decimal;
+        HolidayTotal: Decimal;
+        CommsionOnHoliday: Decimal;
+        AggregateCommission: Decimal;
+        Members: record Members;
+        StartDate: Date;
+        Enddate: Date;
+        Loans: record Loans;
 }

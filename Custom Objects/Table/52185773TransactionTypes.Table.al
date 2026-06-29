@@ -55,6 +55,9 @@ table 52185773 "Transaction Types"
             MinValue = 0;
             MaxValue = 100000;
         }
+        field(18; "Commission Type"; Enum "Commission Types")
+        {
+        }
 
     }
 

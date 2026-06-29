@@ -52,9 +52,9 @@ page 52187333 "Membership Activity cue"
                     field("Total Members"; Rec."Total Members")
                     {
                         Caption = 'Active Members';
+                        Image = none;
                         ApplicationArea = All;
                         ToolTip = 'Specifies the value of Active Members.';
-                        Image = none;
                         trigger OnDrillDown()
                         var
                             myInt: Integer;

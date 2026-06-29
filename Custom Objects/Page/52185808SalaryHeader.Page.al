@@ -605,16 +605,19 @@ page 52185808 "Salary Header"
                         if SalaryLines.FindSet() then begin
                             repeat
                                 if Account.get(SalaryLines."Account No.") then begin
-                                    MobileNo := Account."Mobile Phone No";
-                                    if MobileNo = '' then begin
-                                        if Memb.get(Account."Member No.") then
-                                            MobileNo := Memb."Phone No.";
-                                    end;
-                                    Text0008 := Gensetup."Salary SMS Suffix";
-                                    msg := Text0005 + Format(SalaryLines.Amount) + Text0006 + Text0007 + SaccoT.ddMMyyyy(Today) + ' ' + Format(Time) + '. Your new Ordinary account balance is KES ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(Account, true));
+                                    // MobileNo := Account."Mobile Phone No";
+                                    // if MobileNo = '' then begin
+                                    if Memb.get(Account."Member No.") then begin
+                                        MobileNo := Memb."Phone No.";
+                                        Text0008 := Gensetup."Salary SMS Suffix";
+                                        msg := 'Dear ' + memb."First Name" + ' your ' + rec.Remarks + ' has been credited to your FOSA account. Thank You, Dial *477# for more information.';
 
-                                    SendSMS.SendSms(Source::SALARY_PROCESSING, MobileNo, msg, Format(SalaryLines."Account No."), '', true, 0, false, 'CBS', SalaryLines."Account No.", 'CBS');
+                                        SendSMS.SendSms(Source::SALARY_PROCESSING, MobileNo, msg, Format(SalaryLines."Account No."), '', true, 0, false, 'CBS', SalaryLines."Account No.", 'CBS');
+                                    end;
                                 end;
+
+                            // end;
+                            // end;
                             until
                             SalaryLines.Next = 0;
                         end;

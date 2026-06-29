@@ -122,11 +122,11 @@ table 52186834 "Member FactBox"
             FieldClass = FlowField;
             CalcFormula = sum("Savings Accounts"."Monthly Contribution" where("Member No." = field("Member No."), "Product Type" = const('4')));
         }
-        field(31; "Kesasa Savings"; Decimal)
+        field(31; "Holiday Savings"; Decimal)
         {
             Editable = false;
             FieldClass = FlowField;
-            CalcFormula = - sum("Savings Ledger Entry".Amount where("Member No." = field("Member No."), "Product Category" = filter("Kesasa"), "Posting Date" = FIELD("Date Filter")));
+            CalcFormula = - sum("Savings Ledger Entry".Amount where("Member No." = field("Member No."), "Product Category" = filter(holiday), "Posting Date" = FIELD("Date Filter")));
         }
         field(32; "Member Name"; Text[100])
         {

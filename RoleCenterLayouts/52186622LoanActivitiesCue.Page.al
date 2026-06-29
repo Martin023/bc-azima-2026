@@ -115,23 +115,21 @@ page 52186622 "Loan Processing Activities"
                 field("Applied Loans"; Rec."Applied Loans")
                 {
                     ApplicationArea = Basic;
-                    // Image = none;
+                    AutoFormatType = 11;
                 }
                 field("Appraised Loans"; Rec."Appraised Loans")
                 {
                     ApplicationArea = Basic;
-                    // Image = none;
+                    AutoFormatType = 11;
                     Caption = 'Pending Approvals';
                 }
                 field("Loan Approvals"; Rec."Approved Loans")
                 {
-                    Image = none;
 
                 }
                 field("Rejected Loans"; Rec."Rejected Loans")
                 {
                     ApplicationArea = Basic;
-                    Image = none;
 
                 }
                 field("Deffered Loans"; Rec."Deffered Loans")
@@ -149,8 +147,7 @@ page 52186622 "Loan Processing Activities"
                 field("Disbursed Loans"; Rec."Disbursed Loans")
                 {
                     ApplicationArea = Basic;
-
-                    Image = none;
+                    image = none;
                     LookupPageId = "Loan Posted List";
                     DrillDownPageId = "Loan Posted list";
                 }
@@ -168,13 +165,12 @@ page 52186622 "Loan Processing Activities"
                 field("Active Members"; Rec."Active Members")
                 {
                     ApplicationArea = Basic, Suite;
-                    //AutoFormatType = 11;
-                    Image = None;
+                    image = none;
                 }
                 field("Dormant Members"; Rec."Dormant Members")
                 {
                     ApplicationArea = Basic, Suite;
-                    Image = None;
+                    image = none;
                 }
             }
             cuegroup("Withdrawal Notices")
@@ -183,6 +179,7 @@ page 52186622 "Loan Processing Activities"
                 field("Withdrawals Notices"; Rec."Withdrawals Notices")
                 {
                     ApplicationArea = Basic, Suite;
+                    AutoFormatType = 11;
                 }
             }
             cuegroup("Channels")

@@ -859,55 +859,56 @@ Report 52185745 "Loan Appraisal Checkoff"
                     end;
                 end;
 
-                if Loans."Total TopUp" > 0 then begin
+                //if Loans."Total TopUp" > 0 then begin
 
-                    //Pass loan clearance principle and interest
-                    TopUpComms := 0;
-                    TopUp.RESET;
-                    TopUp.SETRANGE(TopUp."Loan No.", Loans."Loan No.");
-                    IF TopUp.FIND('-') THEN BEGIN
-                        REPEAT
-                            PCharges.RESET;
-                            PCharges.SETRANGE(PCharges."Product Code", Loans."Loan Product Type");
-                            PCharges.SETRANGE(PCharges."Charge Type", PCharges."Charge Type"::"Top up");
-                            IF PCharges.FIND('-') THEN BEGIN
-                                REPEAT
-                                    ExcemptProductCharges.Reset();
-                                    ExcemptProductCharges.SetRange("Loan No.", Loans."Loan No.");
-                                    ExcemptProductCharges.SetRange("Product Code", PCharges."Product Code");
-                                    ExcemptProductCharges.setrange("Charge Code", PCharges."Charge Code");
-                                    ExcemptProductCharges.setrange(Excempt, true);
-                                    if not ExcemptProductCharges.Find('-') then begin
-                                        IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Approved Amount") THEN BEGIN
-                                            TopUp.Commision := Loans."Approved Amount" * (PCharges.Percentage / 100);
+                //Pass loan clearance principle and interest
+                TopUpComms := 0;
+                TopUp.RESET;
+                TopUp.SETRANGE(TopUp."Loan No.", Loans."Loan No.");
+                IF TopUp.FIND('-') THEN BEGIN
+                    REPEAT
+                        PCharges.RESET;
+                        PCharges.SETRANGE(PCharges."Product Code", Loans."Loan Product Type");
+                        PCharges.SETRANGE(PCharges."Charge Type", PCharges."Charge Type"::"Top up");
+                        IF PCharges.FIND('-') THEN BEGIN
+                            REPEAT
+                                ExcemptProductCharges.Reset();
+                                ExcemptProductCharges.SetRange("Loan No.", Loans."Loan No.");
+                                ExcemptProductCharges.SetRange("Product Code", PCharges."Product Code");
+                                ExcemptProductCharges.setrange("Charge Code", PCharges."Charge Code");
+                                ExcemptProductCharges.setrange(Excempt, true);
+                                if not ExcemptProductCharges.Find('-') then begin
+                                    IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Approved Amount") THEN BEGIN
+                                        TopUp.Commision := Loans."Approved Amount" * (PCharges.Percentage / 100);
+                                    END ELSE
+                                        IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Net Amount") THEN BEGIN
+                                            TopUp.Commision := TopUp."Outstanding Balance" * (PCharges.Percentage / 100);
                                         END ELSE
-                                            IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Net Amount") THEN BEGIN
-                                                TopUp.Commision := TopUp."Outstanding Balance" * (PCharges.Percentage / 100);
-                                            END ELSE
-                                                TopUp.Commision := PCharges."Charge Amount";
-                                        //MESSAGE('Running Charge topup %1',TotalComputedCharges);
-                                    end;
-                                    TopUpComms += TopUp.Commision;
-                                UNTIL PCharges.NEXT = 0;
-                            END;
-                            TopUp.Modify;
-                        UNTIL TopUp.NEXT = 0;
-                    end;
-
-                    TopUp.Reset;
-                    TopUp.SetRange("Loan No.", "Loan No.");
-                    if TopUp.Findset() then begin
-                        // TopUp.calcsums(Commision);
-                        TopUp.CalcSums("One Month Interest");
-                        Topup.CalcSums("Principle Top Up");
-                        Topup.CalcSums("Interest Top Up");
-                        OneMonthInterest := TopUp."One Month Interest";
-
-                        // PrincipleTopup := TopUp."Principle Top Up";
-                        // InterestTopup := TopUp."Interest Top Up";
-                        // Totaltopup := PrincipleTopup + InterestTopup;
-                    end;
+                                            TopUp.Commision := PCharges."Charge Amount";
+                                    //MESSAGE('Running Charge topup %1',TotalComputedCharges);
+                                end;
+                                TopUpComms += TopUp.Commision;
+                            UNTIL PCharges.NEXT = 0;
+                        END;
+                        TopUp.Modify;
+                    UNTIL TopUp.NEXT = 0;
                 end;
+
+                TopUp.Reset;
+                TopUp.SetRange("Loan No.", "Loan No.");
+                if TopUp.Findset() then begin
+                    // TopUp.calcsums(Commision);
+                    TopUp.CalcSums("One Month Interest");
+                    Topup.CalcSums("Total Top Up");
+                    // Topup.CalcSums("Interest Top Up");
+                    OneMonthInterest := TopUp."One Month Interest";
+
+                    // PrincipleTopup := TopUp."Principle Top Up";
+                    // InterestTopup := TopUp."Interest Top Up";
+                    // Totaltopup := PrincipleTopup + InterestTopup;
+                    OffsetTotal := TopUp."Total Top Up";
+                end;
+                //end;
 
 
                 //get share capital

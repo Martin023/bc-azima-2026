@@ -2987,9 +2987,9 @@ codeunit 52186507 "Members Portal Integration"
                     IsSourceAccActive := true;
                 end;
 
-                if SavingsProduct."Product Category" = SavingsProduct."Product Category"::Kesasa then begin
-                    IsSourceAccActive := true;
-                end;
+                // if SavingsProduct."Product Category" = SavingsProduct."Product Category"::Kesasa then begin
+                //     IsSourceAccActive := true;
+                // end;
 
                 if not IsSourceAccActive then begin
                     ResponseObject.Add('status', 'ACCOUNT_NOT_ACTIVE');

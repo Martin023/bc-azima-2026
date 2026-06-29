@@ -1908,11 +1908,11 @@ page 52185753 "Loan Application Card"
                     AppraisaComme: Record "Loan Appraisal Comments";
                 begin
                     //Rec.TestField(Status, Rec.Status::Deffered);
-                    // AppraisaComme.Reset();
-                    // AppraisaComme.SetRange("Loan No.", Rec."Loan No.");
-                    // AppraisaComme.SetRange(Commented, false);
-                    // if not AppraisaComme.FindFirst() then
-                    //     Error('Loan Appraisal Comments Must have a value');
+                    AppraisaComme.Reset();
+                    AppraisaComme.SetRange("Loan No.", Rec."Loan No.");
+                    AppraisaComme.SetRange(Commented, false);
+                    if not AppraisaComme.FindFirst() then
+                        Error('Loan Appraisal Comments Must have a value');
                     if (Rec.Status = Rec.Status::Deffered) or (Rec.Status = Rec.Status::Approved) or (Rec.Status = Rec.Status::Pending) or (Rec.Status = Rec.Status::Rejected) or (Rec.Status = Rec.Status::Archived)
                      then begin
                         if not Confirm('Are you sure you want to re-open the loan?') then exit;
@@ -2309,6 +2309,7 @@ page 52185753 "Loan Application Card"
                 // DO NOT comment out this!
                 action("EDMS File List")
                 {
+                    Caption = 'Loan Form';
                     ApplicationArea = Basic, Suite;
                     Image = Documents;
                     Promoted = true;

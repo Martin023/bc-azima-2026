@@ -948,6 +948,10 @@ page 52185712 "Product Factory"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Allow Loan Top-Up"; Rec."Allow Loan Top-Up")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
             }
             group("Sky Mbanking")
             {

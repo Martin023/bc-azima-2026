@@ -318,17 +318,17 @@ table 52185826 "Member withdrawal Notice"
                     //     rec."Amount Refundable" := 0;
                     rec."Amount To Refund" := 0;
 
-                    if Members.Get(Rec."Member No.") then begin
-                        if Members."Employer Code" <> '' then begin
-                            if Customers.get(Members."Employer Code") then
-                                if not Customers."Retiree Employer" then
-                                    Error('Only retirees are allowed to do partial withdrawals');
-                        end
-                        else
-                            Error('Member Employer must be present');
-                    end
-                    else
-                        Error('Member does not exist');
+                    // if Members.Get(Rec."Member No.") then begin
+                    //     if Members."Employer Code" <> '' then begin
+                    //         if Customers.get(Members."Employer Code") then
+                    //             if not Customers."Retiree Employer" then
+                    //                 Error('Only retirees are allowed to do partial withdrawals');
+                    //     end
+                    //     else
+                    //         Error('Member Employer must be present');
+                    // end
+                    // else
+                    //     Error('Member does not exist');
                 end
                 else begin
                     rec.Validate(Percentage, 100);

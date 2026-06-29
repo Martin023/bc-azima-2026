@@ -1071,10 +1071,14 @@ table 52185690 "Product Factory"
             Caption = 'Use Salary Average';
             DataClassification = CustomerContent;
         }
-        field(10044; "Allow Withdrawal"; Boolean)
+        field(10044; "Allow Loan Top-Up"; Boolean)
+        {
+            Caption = 'Allow Loan Top-Up';
+            DataClassification = CustomerContent;
+        }
+        field(10045; "Allow Withdrawal"; Boolean)
         {
             Caption = 'Allow Withdrawal';
-            DataClassification = CustomerContent;
         }
     }
 

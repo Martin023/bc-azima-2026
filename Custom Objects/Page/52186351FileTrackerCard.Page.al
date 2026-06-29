@@ -810,7 +810,9 @@ page 52186351 "File Tracker Card"
                         end;
 
                         CurrPage.Update;
-                    end;
+                    end
+                    else
+                        error('This movement is already closed.')
                 end;
             }
             separator(Action1000000030)

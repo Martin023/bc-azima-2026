@@ -128,7 +128,7 @@ table 52185797 "Account Transfer Header"
 
                     SavingsREC.Reset;
                     SavingsREC.SetRange(SavingsREC."Member No.", "Member No");
-                    SavingsREC.setfilter("Product Category", '%1|%2|%3', SavingsREC."Product Category"::"FOSA Account", SavingsREC."Product Category"::Kesasa, SavingsREC."Product Category"::"Junior Account");
+                    SavingsREC.setfilter("Product Category", '<>%1', SavingsREC."Product Category"::"Entrance Fee");
                     if SavingsREC.Find('-') then begin
                         repeat
                             TransSource.Init;
@@ -176,7 +176,7 @@ table 52185797 "Account Transfer Header"
                 end else begin
                     SavingsREC.Reset;
                     SavingsREC.SetRange(SavingsREC."Member No.", "Member No");
-                    SavingsREC.setfilter("Product Category", '%1|%2', SavingsREC."Product Category"::"FOSA Account", SavingsREC."Product Category"::Kesasa);
+                    SavingsREC.setfilter("Product Category", '<>%1', SavingsREC."Product Category"::"Entrance Fee");
                     if SavingsREC.Find('-') then begin
                         repeat
                             TransSource.Init;
@@ -309,7 +309,7 @@ table 52185797 "Account Transfer Header"
 
                     SavingsREC.Reset;
                     SavingsREC.SetRange(SavingsREC."Member No.", "Member No");
-                    SavingsREC.setfilter("Product Category", '%1|%2', SavingsREC."Product Category"::"FOSA Account", SavingsREC."Product Category"::Kesasa);
+                    SavingsREC.setfilter("Product Category", '<>%1', SavingsREC."Product Category"::"Entrance Fee");
                     if SavingsREC.Find('-') then begin
                         repeat
                             TransSource.Init;
@@ -362,7 +362,7 @@ table 52185797 "Account Transfer Header"
 
                     SavingsREC.Reset;
                     SavingsREC.SetRange(SavingsREC."Member No.", "Member No");
-                    SavingsREC.setfilter("Product Category", '%1|%2', SavingsREC."Product Category"::"FOSA Account", SavingsREC."Product Category"::Kesasa);
+                    SavingsREC.setfilter("Product Category", '<>%1', SavingsREC."Product Category"::"Entrance Fee");
                     if SavingsREC.Find('-') then begin
                         repeat
                             TransSource.Init;

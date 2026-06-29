@@ -1,4 +1,5 @@
 namespace AzimaBC.AzimaBC;
+using AZIMA.AZIMA;
 
 page 52185480 "Commission Setup"
 {
@@ -8,6 +9,7 @@ page 52185480 "Commission Setup"
     SourceTable = "Transaction Types";
     SourceTableView = where(Type = const(commission));
     UsageCategory = Lists;
+    CardPageId = "Commission Setup Card";
 
     layout
     {
@@ -35,6 +37,9 @@ page 52185480 "Commission Setup"
                 {
                     ToolTip = 'Specifies the value of the Type field.', Comment = '%';
                 }
+                field("Commission Type"; Rec."Commission Type")
+                {
+                }
                 field("Upper Limit"; Rec."Upper Limit")
                 {
                     ToolTip = 'Specifies the value of the Upper Limit field.', Comment = '%';
@@ -42,4 +47,6 @@ page 52185480 "Commission Setup"
             }
         }
     }
+
+    
 }
