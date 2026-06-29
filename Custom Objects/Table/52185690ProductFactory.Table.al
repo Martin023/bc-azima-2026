@@ -395,7 +395,7 @@ table 52185690 "Product Factory"
         }
         field(79; "Nature of Loan Type"; Option)
         {
-            OptionMembers = " ",Normal,Defaulter,"Bridging Loan","Karibu Loan","Commercial Bridging",IPO;
+            OptionMembers = " ",Normal,Defaulter,"Bridging Loan","Karibu Loan","Commercial Bridging",;
             OptionCaption = ' ,Normal,Defaulter,Bridging Loan,Karibu Loan,Commercial Bridging,IPO';
         }
         field(80; "Account No. Suffix"; Code[5])

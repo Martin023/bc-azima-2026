@@ -129,19 +129,19 @@ page 52185495 "Banking Activities"
                 field("SStanding Order"; Rec."Successful Standing Orders")
                 {
                     ApplicationArea = Basic;
-                    // Image = None;
+                    Image = None;
 
                 }
                 field("Standing Order"; Rec."Partial Deduction STO")
                 {
                     ApplicationArea = Basic;
-                    // Image = None;
+                    Image = None;
 
                 }
                 field("Standing Orders"; Rec."Unsuccessful Standing Order")
                 {
                     ApplicationArea = Basic;
-                    // Image = None;
+                    Image = None;
                 }
             }
             cuegroup("Members Portal")

@@ -1,5 +1,6 @@
 namespace AzimaBC.AzimaBC;
 using System.Security.AccessControl;
+using AZIMA.AZIMA;
 
 page 52185457 "Sales Route Plan Card"
 {
@@ -26,7 +27,12 @@ page 52185457 "Sales Route Plan Card"
                 }
                 field("Route Date"; Rec."Route Date")
                 {
+                    Caption = 'Route Start Date';
                     ToolTip = 'Specifies the value of the Route Date field.', Comment = '%';
+                }
+                field("Route End Date"; Rec."Route End Date")
+                {
+                    ToolTip = 'Specifies the value of the Route End Date field.', Comment = '%';
                 }
                 field(Day; Rec.Day)
                 {
@@ -79,18 +85,19 @@ page 52185457 "Sales Route Plan Card"
                     ApplicationArea = All;
                 }
             }
+            part(PartName1; "Sales Route Lines")
+            {
+                caption = 'Sales Route Lines';
+                SubPageLink = "Header No" = field(No);
+                ApplicationArea = Basic, Suite;
+            }
             part(PartName; "Sales Leads Lines")
             {
                 caption = 'Sales Leads Lines';
                 SubPageLink = "Header No" = field(No);
                 ApplicationArea = Basic, Suite;
             }
-            // part(PartName1; "Route Achievements List")
-            // {
-            //     caption = 'Route Achievements List';
-            //     SubPageLink = "Header No" = field(No);
-            //     ApplicationArea = Basic, Suite;
-            // }
+
         }
 
     }

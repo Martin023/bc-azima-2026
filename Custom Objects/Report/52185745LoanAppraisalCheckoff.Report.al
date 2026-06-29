@@ -1135,7 +1135,7 @@ Report 52185745 "Loan Appraisal Checkoff"
                     Loans."Amount To Disburse" := 0;
                 end;
 
-                if (ProductFactory."Nature of Loan Type" = ProductFactory."Nature of Loan Type"::"Karibu Loan") or (ProductFactory."Nature of Loan Type" = ProductFactory."Nature of Loan Type"::"Commercial Bridging") or (ProductFactory."Nature of Loan Type" = ProductFactory."Nature of Loan Type"::IPO) then begin
+                if (ProductFactory."Nature of Loan Type" = ProductFactory."Nature of Loan Type"::"Karibu Loan") or (ProductFactory."Nature of Loan Type" = ProductFactory."Nature of Loan Type"::"Commercial Bridging") then begin
                     Loans."Recommended Amount" := Loans."Requested Amount";
 
                     Loans."Approved Amount" := Loans."Recommended Amount";
