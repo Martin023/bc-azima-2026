@@ -574,11 +574,13 @@ page 52185738 "Savings Acc. Application Card"
 
                     trigger OnAction()
                     var
+                        ApprovalsMgmt: Codeunit "Approvals Mgmt.";
 
                     begin
                         VarVariant := Rec;
                         if not confirm('Are you sure you want to reopen this document?') then exit;
                         Rec.Status := Rec.Status::Open;
+                        ApprovalsMgmt.DeleteApprovalEntries(Rec.RecordId);
                         rec.modify;
                         Message('The document have been opened successfully.');
                     end;
