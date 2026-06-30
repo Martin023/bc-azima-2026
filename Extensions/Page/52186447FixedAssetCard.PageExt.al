@@ -123,6 +123,7 @@ PageExtension 52186447 pageextension52186447 extends "Fixed Asset Card"
             ApplicationArea = Basic;
             trigger OnAfterValidate()
             begin
+                PrefillDepreciationFromFAClass();
                 CurrPage.Update();
             end;
         }
@@ -204,6 +205,32 @@ PageExtension 52186447 pageextension52186447 extends "Fixed Asset Card"
         end else begin
             CurrPage.Editable := true;
         end;
+    end;
+
+    local procedure PrefillDepreciationFromFAClass()
+    var
+        FAClass: Record "FA Class";
+    begin
+        if Rec."FA Class Code" = '' then
+            exit;
+
+        if not FAClass.Get(Rec."FA Class Code") then
+            exit;
+
+        LoadFADepreciationBooks();
+
+        // Only prefill Depreciation Method if currently blank (ordinal 0)
+        if FADepreciationBook."Depreciation Method".AsInteger() = 0 then
+            if FAClass."Depreciation Method".AsInteger() <> 0 then
+                FADepreciationBook.Validate("Depreciation Method", FAClass."Depreciation Method");
+
+        // Only prefill Straight-Line % if currently 0
+        if FADepreciationBook."Straight-Line %" = 0 then
+            if FAClass."Straight-Line %" <> 0 then
+                FADepreciationBook.Validate("Straight-Line %", FAClass."Straight-Line %");
+
+        SaveSimpleDepreciationBook(xRec."No.");
+        LoadFADepreciationBooks();
     end;
 
     trigger OnOpenPage()
