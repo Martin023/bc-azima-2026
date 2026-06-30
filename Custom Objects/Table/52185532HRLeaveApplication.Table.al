@@ -10,7 +10,7 @@ table 52185532 "HR Leave Application"
 
             trigger OnValidate()
             begin
-                //TEST IF MANUAL NOs ARE ALLOWED
+                // TEST IF MANUAL NOS ARE ALLOWED
                 if "Application Code" <> xRec."Application Code" then begin
                     HRSetup.Get;
                     NoSeriesMgt.TestManual(HRSetup."Leave Application Nos.");
@@ -21,7 +21,7 @@ table 52185532 "HR Leave Application"
         field(3; "Leave Type"; Code[30])
         {
             TableRelation = "HR Leave Types".Code;
-            //WHERE(Active = FILTER(true));
+            // WHERE(Active = FILTER(true));
 
             trigger OnValidate()
             begin
@@ -74,7 +74,7 @@ table 52185532 "HR Leave Application"
             trigger OnValidate()
             begin
                 testfield(rec."Days Applied");
-                //IF "Start Date" < TODAY THEN ERROR('You cannot postdate your application. Please contact the HR/IT Department');
+                // IF "Start Date" < TODAY THEN ERROR('You cannot postdate your application. Please contact the HR/IT Department');
 
                 if "Start Date" = 0D then begin
                     "Return Date" := 0D;
@@ -88,19 +88,24 @@ table 52185532 "HR Leave Application"
                     "Return Date" := DetermineLeaveReturnDate("Start Date", "Days Applied");
                     "End Date" := DeterminethisLeaveEndDate("Return Date");
 
+                    // CHECK LEAVE YEAR
                     // if Date2DMY(Today, 3) < Date2DMY("Return Date", 3) then
                     //     Error('Leave appllication must be done within the current year %1', Format(Date2DMY(Today, 3)));
                     // Modify;
                     if Date2DMY("End Date", 3) <> Date2DMY(Today, 3) then
                         Error('You cannot apply leave for a different year other than %1', Format(Date2DMY(Today, 3)));
                 end;
-                //check for overlap
-                HRLeaveApp.Reset;
-                HRLeaveApp.SetRange(HRLeaveApp."Applicant Staff No.", "Applicant Staff No.");
-                HRLeaveApp.SetRange(HRLeaveApp.Status, HRLeaveApp.Status::Approved);
-                if HRLeaveApp.FindLast() then begin
-                    if (rec."Start Date" >= HRLeaveApp."Start Date") and (rec."Start Date" <= HRLeaveApp."End Date") then
-                        ERROR('You already have an active leave application!');
+                
+                // CHECK FOR OVERLAPPING LEAVES
+                HRLeaveApp.Reset();
+                HRLeaveApp.SetRange("Applicant Staff No.", Rec."Applicant Staff No.");
+                HRLeaveApp.SetFilter("Application Code", '<>%1', Rec."Application Code");
+                HRLeaveApp.SetFilter(Status, '%1|%2', HRLeaveApp.Status::Approved, HRLeaveApp.Status::"Pending Approval");
+                if HRLeaveApp.FindSet() then begin
+                    repeat
+                        if (Rec."Start Date" <= HRLeaveApp."End Date") and (Rec."End Date" >= HRLeaveApp."Start Date") then
+                            Error('You already have an active or pending leave application (%1) that overlaps with these dates!', HRLeaveApp."Application Code");
+                    until HRLeaveApp.Next() = 0;
                 end;
             end;
         }
@@ -123,6 +128,7 @@ table 52185532 "HR Leave Application"
                 HrLeaveTypes: record "HR Leave Types";
             begin
                 if Status = Status::Approved then begin
+                    // CHECK LEAVE YEAR
                     // if Date2DMY(Today, 3) < Date2DMY("Return Date", 3) then
                     //     Error('Leave appllication must be done within the current year %1', Format(Date2DMY(Today, 3)));
 
@@ -133,7 +139,7 @@ table 52185532 "HR Leave Application"
 
 
                     HRLeaveEntries.Reset;
-                    //HRLeaveEntries.SetRange(HRLeaveEntries."Entry No.");
+                    // HRLeaveEntries.SetRange(HRLeaveEntries."Entry No.");
                     if HRLeaveEntries.Find('+') then intEntryNo := HRLeaveEntries."Entry No.";
 
                     intEntryNo := intEntryNo + 1;
@@ -295,7 +301,7 @@ table 52185532 "HR Leave Application"
         field(3949; Reliever; Code[50])
         {
             TableRelation = "HR Employees"."No." WHERE(Status = CONST(Active), "Global Dimension 1 Code" = FIELD("Global Dimension 1 Code"));
-            //"Global Dimension 2 Code" = FIELD("Global Dimension 2 Code"));
+            // "Global Dimension 2 Code" = FIELD("Global Dimension 2 Code"));
 
             trigger OnValidate()
             begin
@@ -344,7 +350,7 @@ table 52185532 "HR Leave Application"
                     HRLeaveCal.SetRange(HRLeaveCal."Current Leave Calendar", true);
                     if not HRLeaveCal.Find('-') then Error('Leave Calendar has not been setup');
 
-                    //Filter by Leave Period from HR Setup
+                    // FILTER BY LEAVE PERIOD
                     HRLeave.Reset;
                     HRLeave.SetRange(HRLeave."Staff No.", Rec."Applicant Staff No.");
 
@@ -522,7 +528,7 @@ table 52185532 "HR Leave Application"
     var
         LeaveApplication: Record "HR Leave Application";
     begin
-        //No. Series
+        // NO SERIES
         if "Application Code" = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Leave Application Nos.");
@@ -542,7 +548,7 @@ table 52185532 "HR Leave Application"
                 empMonths := Calendar.Count;
 
 
-                //Populate fields
+                // POPULATE FIELDS
                 UserSetUp.Get(UserId);
                 "Applicant Staff No." := HREmp."No.";
                 Names := HREmp."First Name" + ' ' + HREmp."Middle Name" + ' ' + HREmp."Last Name";
@@ -559,8 +565,9 @@ table 52185532 "HR Leave Application"
                 "Responsibility Center" := UserSetUp."Responsibility Centre";
 
                 Picture := HREmp.Picture;
-                //"Responsibility Center":=HREmp."Responsibility Center";
-                //Approver details
+                // "Responsibility Center":=HREmp."Responsibility Center";
+                
+                // APPROVER DETAILS
                 // GetApplicantSupervisor(UserId);
 
             end else begin
@@ -571,12 +578,12 @@ table 52185532 "HR Leave Application"
 
 
 
-            //CHECK FOR EXISTING LEAVE APPLICATIONS BEFORE CREATING NEW ONE
+            // CHECK EXISTING APPLICATIONS
             xRec.Reset;
             xRec.SetRange(xRec."Applicant User ID", UserId);
-            //ONLY CHECKED PENDING APPROVAL - ALLOWED MULTIPLE NEW APPLICATIONS
-            //xRec.SetRange(xRec.Status, xRec.Status::"Pending Approval");
-            //CHECK BOTH NEW AND PENDING APPROVAL STATUS
+            // ALLOW MULTIPLE PENDING APPLICATIONS
+            // xRec.SetRange(xRec.Status, xRec.Status::"Pending Approval");
+            // CHECK NEW OR PENDING STATUS
             xRec.SetFilter(xRec.Status, '%1|%2', xRec.Status::New, xRec.Status::"Pending Approval");
             if xRec.Find('-') then begin
                 ERROR('Your leave application no. %1 with status %2 is still pending. Please complete or cancel this application before creating a new one.', xRec."Application Code", xRec.Status);
@@ -599,7 +606,7 @@ table 52185532 "HR Leave Application"
                 empMonths := Calendar.Count;
 
 
-                //Populate fields
+                // POPULATE FIELDS
                 // UserSetUp.Get(HREmp."User ID");
                 "Applicant Staff No." := HREmp."No.";
                 Names := HREmp."First Name" + ' ' + HREmp."Middle Name" + ' ' + HREmp."Last Name";
@@ -616,8 +623,9 @@ table 52185532 "HR Leave Application"
                 "Responsibility Center" := HREmp."Global Dimension 2 Code";
 
                 Picture := HREmp.Picture;
-                //"Responsibility Center":=HREmp."Responsibility Center";
-                //Approver details
+                // "Responsibility Center":=HREmp."Responsibility Center";
+                
+                // APPROVER DETAILS
                 // GetApplicantSupervisor(UserId);
 
             end;
@@ -640,7 +648,7 @@ table 52185532 "HR Leave Application"
         HRSetup: Record "HR Setup";
         NoSeriesMgt: Codeunit "No. Series";
         HREmp: Record "HR Employees";
-        varDaysApplied: Integer;
+        varDaysApplied: Decimal;
         HRLeaveTypes: Record "HR Leave Types";
         BaseCalendarChange: Record "Base Calendar Change";
         ReturnDateLoop: Boolean;
@@ -679,25 +687,83 @@ table 52185532 "HR Leave Application"
         Characters: code[100];
         GlobalFunctions: Codeunit "Global Functions";
 
+    // CALCULATE DECIMAL VALUE OF A SPECIFIC DAY
+    procedure GetDayLeaveValue(var bcDate: Date): Decimal
+    var
+        LeaveCalendar: record "HR Leave Calendar";
+        DayOfWeek: Integer;
+    begin
+        HRSetup.Get();
+        DayOfWeek := Date2DWY(bcDate, 1); 
+        
+        // SUNDAY (ALWAYS 0)
+        if DayOfWeek = 7 then
+            exit(0.0);
+
+        // SATURDAY (CHECK HR SETUP)
+        if DayOfWeek = 6 then begin
+            if HRSetup."Saturday is Half Day" then
+                exit(0.5)
+            else
+                exit(0.0);
+        end;
+
+        // PUBLIC HOLIDAYS CHECK
+        LeaveCalendar.reset();
+        LeaveCalendar.SetRange("Current Leave Calendar", true);
+        if LeaveCalendar.FindFirst() then begin
+            HRLeavePeriods.Reset();
+            HRLeavePeriods.setrange("Period Code", LeaveCalendar."Calendar Code");
+            if HRLeavePeriods.Find('-') then begin
+                Customized.Reset();
+                Customized.SetRange(Customized.Date, bcDate);
+                Customized.SetRange(Code, HRLeavePeriods."Period Code");
+                if Customized.Find('-') then begin
+                    if Customized."Non Working" = true then
+                        exit(0.0);
+                end;
+            end;
+        end;
+
+        // NORMAL WORKING DAY
+        exit(1.0);
+    end;
+
     // [Scope('OnPrem')]
     procedure DetermineLeaveReturnDate(var fBeginDate: Date; var fDays: Decimal) fReturnDate: Date
+    var
+        DayValue: Decimal;
     begin
         varDaysApplied := fDays;
         fReturnDate := fBeginDate;
+
+        if varDaysApplied <= 0 then
+            exit(fReturnDate);
+
         repeat
             if DetermineIfIncludesNonWorking("Leave Type") = false then begin
-                fReturnDate := CalcDate('1D', fReturnDate);
-                if DetermineIfIsNonWorking(fReturnDate) then
-                    varDaysApplied := varDaysApplied + 1
-                else
-                    varDaysApplied := varDaysApplied;
-                varDaysApplied := varDaysApplied - 1
-            end
-            else begin
-                fReturnDate := CalcDate('1D', fReturnDate);
+                // GET VALUE OF CURRENT DAY
+                DayValue := GetDayLeaveValue(fReturnDate);
+                
+                varDaysApplied := varDaysApplied - DayValue;
+                
+                if varDaysApplied > 0 then
+                    fReturnDate := CalcDate('1D', fReturnDate);
+            end else begin
+                // LEAVES THAT INCLUDE WEEKENDS
                 varDaysApplied := varDaysApplied - 1;
+                
+                if varDaysApplied > 0 then
+                    fReturnDate := CalcDate('1D', fReturnDate);
             end;
-        until varDaysApplied = 0;
+        until varDaysApplied <= 0;
+        
+        // FIND NEXT WORKING DAY FOR RETURN DATE
+        fReturnDate := CalcDate('1D', fReturnDate);
+        while GetDayLeaveValue(fReturnDate) = 0.0 do begin
+            fReturnDate := CalcDate('1D', fReturnDate);
+        end;
+
         exit(fReturnDate);
     end;
 
@@ -712,31 +778,12 @@ table 52185532 "HR Leave Application"
 
     // [Scope('OnPrem')]
     procedure DetermineIfIsNonWorking(var bcDate: Date) Isnonworking: Boolean
-    var
-        LeaveCalendar: record "HR Leave Calendar";
     begin
-        LeaveCalendar.reset();
-        LeaveCalendar.SetRange("Current Leave Calendar", true);
-        If LeaveCalendar.FindFirst then begin
-            HRLeavePeriods.Reset;
-            //HRLeavePeriods.SetRange(Closed, false);
-            HRLeavePeriods.setrange("Period Code", LeaveCalendar."Calendar Code");
-            if HRLeavePeriods.Find('-') then begin
-                Customized.Reset;
-                Customized.SetRange(Customized.Date, bcDate);
-                Customized.SetRange(Code, HRLeavePeriods."Period Code");
-                if Customized.Find('-') then begin
-                    if Customized."Non Working" = true then
-                        exit(true)
-                    else
-                        exit(false);
-                end;
-            end else
-                Error('No Period Available for the current Calendar');
-        End
+        // IF VALUE IS 0.0 IT IS NON-WORKING. 0.5 AND 1.0 ARE WORKING
+        if GetDayLeaveValue(bcDate) = 0.0 then
+            exit(true)
         else
-            error('No active Calendar');
-
+            exit(false);
     end;
 
     // [Scope('OnPrem')]
@@ -758,7 +805,7 @@ table 52185532 "HR Leave Application"
 
     procedure CreateLeaveLedgerEntries()
     begin
-        //GET OPEN LEAVE PERIOD
+        // GET OPEN LEAVE PERIOD
         HRLeaveCal.Reset;
         HRLeaveCal.SetRange(HRLeaveCal."Current Leave Calendar", true);
         HRLeaveCal.Find('-');
@@ -770,7 +817,7 @@ table 52185532 "HR Leave Application"
 
         HRJournalBatch.Get(HRSetup."Default Leave Posting Template", HRSetup."Negative Leave Posting Batch");
 
-        //POPULATE JOURNAL LINES
+        // POPULATE JOURNAL LINES
         HRJournalLine.Reset;
         HRJournalLine.SetRange(HRJournalLine."Journal Template Name", HRSetup."Default Leave Posting Template");
         HRJournalLine.SetRange(HRJournalLine."Journal Batch Name", HRSetup."Negative Leave Posting Batch");
@@ -801,7 +848,7 @@ table 52185532 "HR Leave Application"
 
         HRJournalLine.Insert(true);
 
-        //Post Journal
+        // POST JOURNAL
         HRJournalLine.Reset;
         HRJournalLine.SetRange("Journal Template Name", HRSetup."Default Leave Posting Template");
         HRJournalLine.SetRange("Journal Batch Name", HRSetup."Negative Leave Posting Batch");
@@ -812,25 +859,25 @@ table 52185532 "HR Leave Application"
         end;
 
 
-        //Insert into Leave allowance table
+        // INSERT LEAVE ALLOWANCE
         if "Request Leave Allowance" = true then begin
             prVitalSetup.Reset;
             prVitalSetup.Get;
-            //Mandatory fields
+            // Mandatory fields
             // prVitalSetup.TESTFIELD(prVitalSetup."Leave Allowance Percentage");
             // prVitalSetup.TESTFIELD(prVitalSetup."Leave Allowance Based On");
             // prVitalSetup.TESTFIELD(prVitalSetup."Max. Leave Allowance");
 
-            if prVitalSetup."Leave Allowance Based On" = prVitalSetup."Leave Allowance Based On"::"Basic Pay" then          //Based on BPAY
+            if prVitalSetup."Leave Allowance Based On" = prVitalSetup."Leave Allowance Based On"::"Basic Pay" then          // BASED ON BPAY
             begin
-                //Get Basic Pay
+                // GET BASIC PAY
                 PRSalCard.Reset;
                 if not PRSalCard.Find('-') then begin
                     Error('Enter BPAY for Staff');
                 end;
             end;
 
-            //Insert entry
+            // INSERT ENTRY
 
             LeaveAllowances.Init;
             LeaveAllowances."Application No." := "Application Code";
@@ -841,7 +888,7 @@ table 52185532 "HR Leave Application"
             LeaveAllowances."Date Posted" := Today;
             LeaveAllowances.Year := Date2DMY(LeaveAllowances."Date Posted", 3);
             LeaveAllowances.Amount := prVitalSetup."Leave Allowance Percentage" * PRSalCard."Basic Pay";
-            //Not Exceed 50000
+            // MAX 50000
             if LeaveAllowances.Amount > prVitalSetup."Max. Leave Allowance" then LeaveAllowances.Amount := prVitalSetup."Max. Leave Allowance";
 
             LeaveAllowances.Insert
@@ -873,7 +920,7 @@ table 52185532 "HR Leave Application"
         if UserSetup.Get(EmpUserID) then begin
             UserSetup.TestField(UserSetup."Approver ID");
 
-            //Get supervisor e-mail
+            // Get supervisor e-mail
             UserSetup2.Reset;
             if UserSetup2.Get(UserSetup."Approver ID") then begin
                 UserSetup2.TestField(UserSetup2."E-Mail");
@@ -901,7 +948,7 @@ table 52185532 "HR Leave Application"
         // ' ' + 'days' + ' ' + 'from' + ' ' + Format("Start Date") + ' ' + 'to' + ' ' + Format("End Date") + '.' + ' ' + 'Please ensure that you understand the responsibilities given to you for that duration.', true);
         // SMTP.Send();
         // Message('Leave Reliever has been notified successfully');
-        //DERRICK NOTIFY RELIVER.
+        // NOTIFY RELIEVER
     end;
 
     //[Scope('OnPrem')]
@@ -919,7 +966,7 @@ table 52185532 "HR Leave Application"
         // ' ' + 'days' + ' ' + 'from' + ' ' + Format("Start Date") + ' ' + 'to' + ' ' + Format("End Date") + '.' + ' ', true);
         // SMTP.Send();
         Message('ICT has been notified successfully');
-        //DERRICK NOTIFY RELIVER.
+        // NOTIFY RELIEVER
     end;
 
     procedure ValidateShouldNotHaves(Number: Text; CharactersToCheck: Text): Boolean
@@ -948,7 +995,7 @@ table 52185532 "HR Leave Application"
         // ' ' + 'days' + ' ' + 'from' + ' ' + Format("Start Date") + ' ' + 'to' + ' ' + Format("End Date") + ' and hence qualifies for leave allowance.' + ' ', true);
         // SMTP.Send();
         Message('HR has been notified successfully');
-        //DERRICK NOTIFY RELIVER.
+        // NOTIFY RELIEVER
     end;
 
 }

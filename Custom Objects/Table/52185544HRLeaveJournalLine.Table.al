@@ -57,6 +57,16 @@ table 52185544 "HR Leave Journal Line"
                 "Global Dimension 1 Code" := FA."Department Code";
                 "Global Dimension 2 Code" := FA.Office;
                 "Salary Grade" := FA."Salary Grade";
+
+                // PREVENT ALLOCATING LEAVE TO WRONG GENDER
+                if "Leave Type" <> '' then begin
+                    HrLeaveTypes.Reset();
+                    HrLeaveTypes.SetRange(Code, "Leave Type");
+                    if HrLeaveTypes.FindFirst() then begin
+                        if (HrLeaveTypes.Gender <> HrLeaveTypes.Gender::Both) and (FA.Gender <> HrLeaveTypes.Gender) then
+                            Error('THIS LEAVE TYPE IS RESTRICTED TO THE %1 GENDER.', Format(HrLeaveTypes.Gender));
+                    end;
+                end;
             end;
         }
         field(7; "Staff Name"; Text[120])
@@ -177,6 +187,15 @@ table 52185544 "HR Leave Journal Line"
                 HrLeaveTypes.reset();
                 HrLeaveTypes.SetRange(Code, rec."Leave Type");
                 if HrLeaveTypes.FindFirst() then begin
+
+                    // PREVENT ALLOCATING LEAVE TO WRONG GENDER
+                    if "Staff No." <> '' then begin
+                        if HrEmployee.Get("Staff No.") then begin
+                            if (HrLeaveTypes.Gender <> HrLeaveTypes.Gender::Both) and (HrEmployee.Gender <> HrLeaveTypes.Gender) then
+                                Error('THIS LEAVE TYPE IS RESTRICTED TO THE %1 GENDER.', Format(HrLeaveTypes.Gender));
+                        end;
+                    end;
+
                     if HrLeaveTypes."Is Annual Leave" = true then begin
                         rec."Is Annual Leave" := true;
                         SalaryGrades.reset();
@@ -413,4 +432,3 @@ table 52185544 "HR Leave Journal Line"
 
     end;
 }
-
