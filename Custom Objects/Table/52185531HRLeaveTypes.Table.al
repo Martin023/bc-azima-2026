@@ -39,7 +39,8 @@ table 52185531 "HR Leave Types"
                 if gender = rec.gender::Female then
                     if rec.days < 90 then Error('Maternity leave days should not be less than 90 days');
                 rec.validate("Leave type Enum");
-
+                if "Leave type Enum" = rec."Leave type Enum"::Paternity then
+                    if rec.days < 14 then Error('Paternity leave days should not be less than 14 days');
             end;
         }
         field(4; "Acrue Days"; Boolean)
