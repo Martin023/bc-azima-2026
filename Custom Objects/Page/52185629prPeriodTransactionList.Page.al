@@ -40,10 +40,6 @@ page 52185629 "prPeriodTransaction List"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                //field(Membership; Rec.Membership)
-                //{
-                //    ApplicationArea = Basic, Suite;
-                //}
                 field("Reference No"; Rec."Reference No")
                 {
                     ApplicationArea = Basic, Suite;
@@ -69,6 +65,10 @@ page 52185629 "prPeriodTransaction List"
                     ApplicationArea = Basic, Suite;
                 }
                 field("Journal Account Code"; Rec."Journal Account Code")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Salary Type"; Rec."Salary Type")
                 {
                     ApplicationArea = Basic, Suite;
                 }

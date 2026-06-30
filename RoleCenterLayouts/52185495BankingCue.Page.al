@@ -21,12 +21,12 @@ page 52185495 "Banking Activities"
                 field("Total Cashier Transactions"; Rec."T/Cashier Transactions")
                 {
                     ApplicationArea = Basic;
-                    // Image = None;
+                    Image = None;
                 }
                 field("Cashier Transactions"; Rec."Cashier Transactions")
                 {
                     ApplicationArea = Basic;
-                    // Image = None;
+                    Image = None;
                 }
                 // field("Total Processed Salaries"; Rec."Total Processed Salaries")
                 // {
@@ -44,7 +44,7 @@ page 52185495 "Banking Activities"
                 field("Savings Accounts"; Rec."Savings Accounts")
                 {
                     ApplicationArea = Basic;
-                    // Image = None;
+                    Image = None;
                 }
                 field("EFT Trasfers"; Rec."EFT Transfer List")
                 {
@@ -94,7 +94,7 @@ page 52185495 "Banking Activities"
                 {
                     Caption = 'Azima Chapaa';
                     ApplicationArea = Basic;
-                    // Image = None;
+                    Image = None;
                 }
 
             }

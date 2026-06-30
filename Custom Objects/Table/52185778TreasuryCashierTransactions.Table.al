@@ -153,14 +153,7 @@ table 52185778 "Treasury Cashier Transactions"
                         end;
                     end;
 
-                    BankAccount := '';
-                    if BankingSetup.Get("From Account") then begin
-                        BankAccount := BankingSetup."Default  Bank";
-                        if bankacc.Get(BankAccount) then begin
-                            bankacc.CalcFields(bankacc."Balance (LCY)", bankacc.Balance);
-                            "Till Balance" := bankacc.Balance;//bankacc."Balance (LCY)";
-                        end;
-                    end;
+
 
                 end;
 
@@ -202,6 +195,7 @@ table 52185778 "Treasury Cashier Transactions"
                             if bankacc.Find('-') then begin
                                 bankacc.CalcFields(Balance);
                                 Balance := bankacc.Balance;
+                                "Till Balance" := bankacc.Balance;
 
                             end;
 
@@ -447,16 +441,16 @@ table 52185778 "Treasury Cashier Transactions"
         field(49; "Cash Requisition Number"; Code[50])
         {
             trigger OnValidate()
-            var 
+            var
                 TreasuryCt: record "Treasury Cashier Transactions";
             begin
                 if (rec."Transaction Type" = rec."Transaction Type"::"Issue To Teller") or
                     (rec."Transaction Type" = rec."Transaction Type"::"End of Day Return to Treasury") then begin
                     TreasuryCt.Reset();
                     TreasuryCt.SetRange("Cash Requisition Number", "Cash Requisition Number");
-                    if TreasuryCt.FindFirst() then 
+                    if TreasuryCt.FindFirst() then
                         Error('Cash Requisition Number %1 already exists for transaction No. %2', "Cash Requisition Number", TreasuryCt.No);
-                    end;
+                end;
             end;
         }
         field(50; "Treasury Balance"; decimal)

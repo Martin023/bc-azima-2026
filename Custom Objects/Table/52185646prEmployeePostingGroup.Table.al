@@ -25,7 +25,11 @@ table 52185646 "prEmployee Posting Group"
         {
             TableRelation = "G/L Account";
         }
-        field(6; "SSF Employee Account"; Code[50])
+        field(6; "SSF Tier 1 Payable Account"; Code[50])
+        {
+            TableRelation = "G/L Account";
+        }
+        field(21; "SSF Tier 2 Payable Account"; Code[50])
         {
             TableRelation = "G/L Account";
         }
@@ -39,7 +43,7 @@ table 52185646 "prEmployee Posting Group"
         }
         field(7; "Net Salary Payable"; Code[50])
         {
-            TableRelation = "G/L Account"."No."; 
+            TableRelation = "G/L Account"."No.";
         }
         field(8; "Operating Overtime"; Code[50])
         {
@@ -53,11 +57,6 @@ table 52185646 "prEmployee Posting Group"
         {
             TableRelation = "G/L Account";
         }
-        field(11; "Pay Period Filter"; Date)
-        {
-            FieldClass = FlowFilter;
-            TableRelation = "PR Payroll Periods"."Date Opened";
-        }
         field(12; "Pension Employer Acc"; Code[50])
         {
             TableRelation = "G/L Account";
@@ -69,42 +68,8 @@ table 52185646 "prEmployee Posting Group"
         field(14; "Earnings and deductions"; Code[50])
         {
         }
-        field(15; "Staff Benevolent"; Code[50])
-        {
-            TableRelation = "G/L Account";
-        }
-        field(16; SalaryExpenseAC; Code[100])
-        {
-            TableRelation = "G/L Account";
-        }
-        field(17; DirectorsFeeGL; Code[50])
-        {
-            TableRelation = "G/L Account";
-        }
-        field(18; StaffGratuity; Code[50])
-        {
-            TableRelation = "G/L Account";
-        }
+
         field(19; "NHIF Employee Account"; Code[50])
-        {
-            TableRelation = "G/L Account";
-        }
-        field(20; "Payroll Code"; Code[20])
-        {
-            TableRelation = "prPayroll Type";
-        }
-        field(21; "Payslip Report"; Integer)
-        {
-        }
-        field(22; "Tax Code"; Code[20])
-        {
-            TableRelation = "prTax Law".Code WHERE(Blocked = FILTER(false));
-        }
-        field(23; "Employment Tax Debit"; Code[50])
-        {
-            TableRelation = "G/L Account";
-        }
-        field(24; "Employment Tax Credit"; Code[50])
         {
             TableRelation = "G/L Account";
         }

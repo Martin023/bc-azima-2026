@@ -9,9 +9,7 @@ Report 52185665 "PR Transfer To Journal Bills"
         {
             DataItemTableView = where("Employee Status" = filter(Active));
             RequestFilterFields = "Period Filter", "Employee Code";
-            column(ReportForNavId_9285; 9285)
-            {
-            }
+
 
             trigger OnAfterGetRecord()
             var
@@ -39,14 +37,12 @@ Report 52185665 "PR Transfer To Journal Bills"
                 PeriodTrans.SetRange(PeriodTrans."Payroll Period", SelectedPeriod);
                 PeriodTrans.Setfilter(PeriodTrans."Transaction Code", '<>%1', 'NDPAYE');
                 if PeriodTrans.Find('-') then begin
-
-                    //MyDialog.Open(Text000, PeriodTrans."Employee Code");  //**
                     repeat
 
                         SavingsTransactionType := SavingsTransactionType::" ";
                         SavingsAccounts.Reset();
                         SavingsAccounts.SetRange("Payroll/Staff No.", PeriodTrans."Employee Code");
-                        SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"Unallocated Fund");
+                        SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
                         if SavingsAccounts.FindFirst() then AccNo := SavingsAccounts."No.";
                         //MyDialog.Update(); //**
                         if PeriodTrans."Journal Account Code" <> '' then begin
@@ -263,9 +259,18 @@ Report 52185665 "PR Transfer To Journal Bills"
                             //if PeriodTrans."coop parameters" = PeriodTrans."coop parameters"::NSSF then begin
                             if PeriodTrans."Transaction Code" = 'NSSF' then begin
                                 //Credit Payables
+                                prNSSF.Reset;
+                                prNSSF.SetCurrentkey(prNSSF.Tier);
+                                if prNSSF.FindFirst then begin
+                                    Tier1Cont := prNSSF."Tier 1 Employee Deduction";
+                                end;
 
-                                CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."SSF Employee Account",
-                                GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name", 0, PeriodTrans.Amount,
+                                CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."SSF Tier 1 Payable Account",
+                                GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + ' tier 1', 0, Tier1Cont,
+                                PeriodTrans."Post As", '', SaccoTransactionType);
+
+                                CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."SSF Tier 2 Payable Account",
+                                GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + ' tier 2', 0, PeriodTrans.Amount - Tier1Cont,
                                 PeriodTrans."Post As", '', SaccoTransactionType);
 
                                 //Debit Staff Expense
@@ -397,6 +402,17 @@ Report 52185665 "PR Transfer To Journal Bills"
             CompanyInfo.CalcFields(CompanyInfo.Picture);
     end;
 
+    trigger OnPostReport()
+    begin
+        if Confirm('The salary batch has been successfully transfered to journal. Do you wish to open?', false) then begin
+            GenJournalLine.Reset;
+            GenJournalLine.SetRange("Journal Template Name", 'GENERAL');
+            GenJournalLine.SetRange("Journal Batch Name", 'SALARIES');
+            if GenJournalLine.FindSet() then
+                page.run(Page::"General Journal", GenJournalLine);
+        end;
+    end;
+
     var
         GenJournalLine: Record "Gen. Journal Line";
         PeriodTrans: Record "PR Period Transactions";
@@ -489,6 +505,8 @@ Report 52185665 "PR Transfer To Journal Bills"
         SaccoT: codeunit "Sacco Transactions";
         AccType: Enum "Gen. Journal Account Type";
         AccNo: code[20];
+        prNSSF: record "prNSSF Tiers";
+        Tier1Cont: Decimal;
 
 
     procedure CreateJnlEntry(AccountType: Enum "Gen. Journal Account Type"; AccountNo: Code[20]; GlobalDime1: Code[20]; GlobalDime2: Code[20]; Description: Text[150]; DebitAmount: Decimal; CreditAmount: Decimal; PostAs: Option " ",Debit,Credit; LoanNo: Code[20]; TransType: Enum "Transaction Types")//Option " ","Registration Fee",Loan,Repayment,Withdrawal,"Interest Due","Interest Paid","Benevolent Fund","Deposit Contribution","Loan Penalty","Application Fee","Appraisal Fee",Investment,"Unallocated Funds","Shares Capital","Loan Adjustment",Dividend,"Withholding Tax","Administration Fee Due","Loan Guard",Prepayment,"Administration Fee Paid","Car Savings","SchFees Savings","Holiday Savings","CIC Fixed Deposit","Withdrawable Savings","Children Savings","KMA Investment","KMA Fixed Deposit","UAP Premiums","UAP Admin Fee","Direct Debit")
