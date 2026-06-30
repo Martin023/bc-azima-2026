@@ -33,7 +33,7 @@ report 52186124 "Member Commission"
             column(Branch_Code; "Branch Code") { }
             column(Payroll_No_; "Payroll No.") { }
             column(Member_Name; "Member Name") { }
-            column(NewMemberTarget; NewMemberTarget) { }
+            column(NewMemberTarget; "Membership Target") { }
             column(RecrutedMembers; RecrutedMembers) { }
             column(NewPaidMembersRecruited; NewPaidMembersRecruited) { }
             column(FollowUpMembers; FollowUpMembers) { }
@@ -128,7 +128,20 @@ report 52186124 "Member Commission"
 
                     until Members.Next() = 0;
                 end;
-
+                CommsionSetup.Reset();
+                CommsionSetup.SetRange(Type, CommsionSetup.type::Commission);
+                CommsionSetup.SetRange("Commission Type", CommsionSetup."Commission Type"::"Member Recruitment");
+                if CommsionSetup.FindSet() then begin
+                    commsionlines.reset;
+                    commsionlines.setrange("Transaction Type", CommsionSetup.Code);
+                    if commsionlines.findset() then begin
+                        repeat
+                            if RecrutedMembers in [commsionlines."Minimum Amount" .. commsionlines."Maximum Amount"] then begin
+                                CommissionOnNewMembers := commsionlines."Charge Amount" * RecrutedMembers;
+                            end;
+                        until commsionlines.Next() = 0;
+                    end;
+                end;
             end;
         }
 
@@ -213,4 +226,7 @@ report 52186124 "Member Commission"
         StartDate: Date;
         Enddate: Date;
         Loans: record Loans;
+        CommsionSetup: record "Transaction Types";
+        commsionlines: record "Transaction Charges";
+
 }
