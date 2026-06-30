@@ -1020,6 +1020,13 @@ table 52185730 "Savings Accounts"
         {
             Caption = 'Dormancy Alert Sent';
         }
+
+        field(121; "Over The Counter Transaction"; Boolean)
+        {
+            caption = 'Over The Counter Transaction';
+            FieldClass = FlowField;
+            CalcFormula = lookup("Product Factory"."Over The Counter Transaction" where("Product ID" = field("Product Type")));
+        }
     }
 
     keys

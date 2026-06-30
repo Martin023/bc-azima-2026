@@ -393,8 +393,10 @@ table 52185550 "HR Setup"
         {
           TableRelation = "G/L Account"."No."; 
         }
-
-
+        field(39004284; "Saturday is Half Day"; Boolean)
+        {
+            DataClassification = CustomerContent;
+        }
     }
 
     keys

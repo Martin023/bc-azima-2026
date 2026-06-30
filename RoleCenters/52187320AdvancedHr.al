@@ -228,6 +228,13 @@ page 52187320 AdvancedHumanResources
 
                             RunObject = Page "HR Department Targets List";
                         }
+                        action(HRPerspectivesSetup)
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'HR Perspectives Setup';
+
+                            RunObject = Page "HR Perspective Setup List";
+                        }
                         // action(HRInductionSchedule)
                         // {
                         //     ApplicationArea = Basic, Suite;

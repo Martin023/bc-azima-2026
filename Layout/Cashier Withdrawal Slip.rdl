@@ -52,199 +52,263 @@
                               <Width>7.6cm</Width>
                               <Style />
                             </Textbox>
-                            <Textbox Name="SignaturesTextbox">
+                            <Textbox Name="ThankYouTextbox">
                               <CanGrow>true</CanGrow>
                               <Paragraphs>
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>Member ID NO :..............................</Value>
+                                      <Value>Thank you for Giving us the Opportunity to serve you</Value>
                                       <Style>
                                         <FontSize>8pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
-                                  <Style />
-                                </Paragraph>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value />
-                                      <Style />
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style />
-                                </Paragraph>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>Member Sign :.................................</Value>
-                                      <Style>
-                                        <FontSize>8pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style />
+                                  <Style>
+                                    <TextAlign>Left</TextAlign>
+                                  </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>12.1cm</Top>
+                              <Top>14.5cm</Top>
                               <Left>0.2cm</Left>
-                              <Height>1.5cm</Height>
+                              <Height>1cm</Height>
                               <Width>7.6cm</Width>
                               <ZIndex>1</ZIndex>
                               <Style />
                             </Textbox>
-                            <Textbox Name="AmountInWordsTextbox">
+                            <Textbox Name="ReprintTextbox">
                               <CanGrow>true</CanGrow>
                               <Paragraphs>
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>IN WORDS:   </Value>
-                                      <Style>
-                                        <FontSize>8pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                    <TextRun>
-                                      <Value>=Fields!NumberText_1_.Value</Value>
+                                      <Value>=Fields!Reprint.Value</Value>
                                       <Style>
                                         <FontSize>8pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
-                                  <Style />
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>10.9cm</Top>
+                              <Top>2.7cm</Top>
                               <Left>0.2cm</Left>
-                              <Height>1cm</Height>
-                              <Width>7.6cm</Width>
+                              <Height>0.4cm</Height>
+                              <Width>6.33cm</Width>
                               <ZIndex>2</ZIndex>
                               <Style />
                             </Textbox>
-                            <Textbox Name="NewBalBox">
+                            <Textbox Name="Textbox35">
                               <CanGrow>true</CanGrow>
                               <Paragraphs>
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>NEW BAL:    </Value>
+                                      <Value>TRANS TYPE: </Value>
                                       <Style>
                                         <FontSize>8pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
                                     <TextRun>
-                                      <Value>=Fields!AvailableBalance.Value - (Fields!Amount.Value + Fields!SumTransactionCharges.Value)</Value>
+                                      <Value>=Fields!Transactions_Type.Value</Value>
                                       <Style>
                                         <FontSize>8pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
-                                        <Format>#,0.00</Format>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>10.2cm</Top>
+                              <Top>3.2cm</Top>
                               <Left>0.2cm</Left>
                               <Height>0.5cm</Height>
                               <Width>7.6cm</Width>
                               <ZIndex>3</ZIndex>
                               <Style />
                             </Textbox>
-                            <Line Name="LineEq2">
-                              <Top>10.1cm</Top>
-                              <Left>1.9cm</Left>
-                              <Height>0cm</Height>
-                              <Width>5.8cm</Width>
-                              <ZIndex>4</ZIndex>
-                              <Style>
-                                <Border>
-                                  <Style>Dashed</Style>
-                                </Border>
-                              </Style>
-                            </Line>
-                            <Textbox Name="TotalDeductBox2">
+                            <Textbox Name="Available_Balance_Caption18">
                               <CanGrow>true</CanGrow>
                               <Paragraphs>
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>- TOTAL DED:</Value>
+                                      <Value>DATE:       </Value>
                                       <Style>
                                         <FontSize>8pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
                                     <TextRun>
-                                      <Value>=Fields!Amount.Value + Fields!SumTransactionCharges.Value</Value>
+                                      <Value>=Fields!Transactions__Transaction_Date_.Value</Value>
                                       <Style>
                                         <FontSize>8pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
-                                        <Format>#,0.00</Format>
+                                        <Format>M/d/yyyy</Format>
+                                      </Style>
+                                    </TextRun>
+                                    <TextRun>
+                                      <Value xml:space="preserve">               </Value>
+                                      <Style />
+                                    </TextRun>
+                                    <TextRun>
+                                      <Value>=Fields!Transactions_Transactions__Transaction_Time_.Value</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Format>hh:mm tt</Format>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>9.6cm</Top>
+                              <Top>3.8cm</Top>
+                              <Left>0.2cm</Left>
+                              <Height>0.5cm</Height>
+                              <Width>7.6cm</Width>
+                              <ZIndex>4</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Textbox3">
+                              <CanGrow>true</CanGrow>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>BRANCH:     </Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                    <TextRun>
+                                      <Value>=IIF(Fields!Branch_Name.Value &lt;&gt; "", Fields!Branch_Name.Value, "") &amp; IIF(Fields!Branch_code.Value &lt;&gt; "", " (" &amp; Fields!Branch_code.Value &amp; ")", "")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>4.4cm</Top>
                               <Left>0.2cm</Left>
                               <Height>0.5cm</Height>
                               <Width>7.6cm</Width>
                               <ZIndex>5</ZIndex>
                               <Style />
                             </Textbox>
-                            <Textbox Name="PrevBalBox">
+                            <Textbox Name="Textbox29">
                               <CanGrow>true</CanGrow>
                               <Paragraphs>
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>PREV BAL:   </Value>
+                                      <Value>TRANS No:   </Value>
                                       <Style>
                                         <FontSize>8pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
                                     <TextRun>
-                                      <Value>=Fields!AvailableBalance.Value</Value>
+                                      <Value>=Fields!Transactions_No.Value</Value>
                                       <Style>
                                         <FontSize>8pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
-                                        <Format>#,0.00</Format>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>9.1cm</Top>
+                              <Top>5cm</Top>
                               <Left>0.2cm</Left>
                               <Height>0.5cm</Height>
                               <Width>7.6cm</Width>
                               <ZIndex>6</ZIndex>
                               <Style />
                             </Textbox>
-                            <Textbox Name="TotalDeductBox1">
+                            <Textbox Name="Textbox25">
                               <CanGrow>true</CanGrow>
                               <Paragraphs>
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>TOTAL DED:  </Value>
+                                      <Value>A/C NAME:   </Value>
                                       <Style>
                                         <FontSize>8pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
                                     <TextRun>
-                                      <Value>=Fields!Amount.Value + Fields!SumTransactionCharges.Value</Value>
+                                      <Value>=Fields!AccountName.Value</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>5.6cm</Top>
+                              <Left>0.2cm</Left>
+                              <Height>0.5cm</Height>
+                              <Width>7.6cm</Width>
+                              <ZIndex>7</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Textbox26">
+                              <CanGrow>true</CanGrow>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>A/C No:     </Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                    <TextRun>
+                                      <Value>=Fields!MaskedAccountNo.Value</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>6.2cm</Top>
+                              <Left>0.2cm</Left>
+                              <Height>0.5cm</Height>
+                              <Width>7.6cm</Width>
+                              <ZIndex>8</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Textbox27">
+                              <CanGrow>true</CanGrow>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>AMOUNT:     </Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                    <TextRun>
+                                      <Value>=Fields!Amount.Value</Value>
                                       <Style>
                                         <FontSize>8pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
@@ -255,25 +319,44 @@
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>8.4cm</Top>
+                              <Top>6.8cm</Top>
                               <Left>0.2cm</Left>
                               <Height>0.5cm</Height>
                               <Width>7.6cm</Width>
-                              <ZIndex>7</ZIndex>
+                              <ZIndex>9</ZIndex>
                               <Style />
                             </Textbox>
-                            <Line Name="LineEq1">
-                              <Top>8.3cm</Top>
-                              <Left>1.9cm</Left>
-                              <Height>0cm</Height>
-                              <Width>5.8cm</Width>
-                              <ZIndex>8</ZIndex>
-                              <Style>
-                                <Border>
-                                  <Style>Dashed</Style>
-                                </Border>
-                              </Style>
-                            </Line>
+                            <Textbox Name="ChargesBox">
+                              <CanGrow>true</CanGrow>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>+ CHARGES:  </Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                    <TextRun>
+                                      <Value>=Fields!SumTransactionCharges.Value</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Format>#,0.00</Format>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>7.3cm</Top>
+                              <Left>0.2cm</Left>
+                              <Height>0.5cm</Height>
+                              <Width>7.6cm</Width>
+                              <ZIndex>10</ZIndex>
+                              <Style />
+                            </Textbox>
                             <Tablix Name="ChargesBreakdownTable">
                               <TablixBody>
                                 <TablixColumns>
@@ -337,6 +420,58 @@
                                       </TablixCell>
                                     </TablixCells>
                                   </TablixRow>
+                                  <TablixRow>
+                                    <Height>0.4cm</Height>
+                                    <TablixCells>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="ExciseDescription">
+                                            <CanGrow>true</CanGrow>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>="  Excise Duty (" &amp; Fields!ExciseDutyPercentage.Value &amp; "%)"</Value>
+                                                    <Style>
+                                                      <FontStyle>Italic</FontStyle>
+                                                      <FontSize>7pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style />
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="ExciseDutyAmount">
+                                            <CanGrow>true</CanGrow>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>=Fields!ExciseDutyAmount.Value</Value>
+                                                    <Style>
+                                                      <FontStyle>Italic</FontStyle>
+                                                      <FontSize>7pt</FontSize>
+                                                      <Format>#,0.00</Format>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style>
+                                                  <TextAlign>Right</TextAlign>
+                                                </Style>
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style />
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                    </TablixCells>
+                                  </TablixRow>
                                 </TablixRows>
                               </TablixBody>
                               <TablixColumnHierarchy>
@@ -351,317 +486,242 @@
                                     <Group Name="ChargesBreakdownGroup">
                                       <DataElementName>ChargeItem</DataElementName>
                                     </Group>
+                                    <TablixMembers>
+                                      <TablixMember />
+                                      <TablixMember>
+                                        <Visibility>
+                                          <Hidden>=IIf(Fields!ExciseDutyAmount.Value &gt; 0, False, True)</Hidden>
+                                        </Visibility>
+                                      </TablixMember>
+                                    </TablixMembers>
                                   </TablixMember>
                                 </TablixMembers>
                               </TablixRowHierarchy>
                               <Top>7.8cm</Top>
                               <Left>0.6cm</Left>
-                              <Height>0.4cm</Height>
+                              <Height>0.8cm</Height>
                               <Width>6.8cm</Width>
-                              <ZIndex>9</ZIndex>
-                              <Style />
-                            </Tablix>
-                            <Textbox Name="ChargesBox">
-                              <CanGrow>true</CanGrow>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>+ CHARGES:  </Value>
-                                      <Style>
-                                        <FontSize>8pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                    <TextRun>
-                                      <Value>=Fields!SumTransactionCharges.Value</Value>
-                                      <Style>
-                                        <FontSize>8pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                        <Format>#,0.00</Format>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style />
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>7.3cm</Top>
-                              <Left>0.2cm</Left>
-                              <Height>0.5cm</Height>
-                              <Width>7.6cm</Width>
-                              <ZIndex>10</ZIndex>
-                              <Style />
-                            </Textbox>
-                            <Textbox Name="Textbox27">
-                              <CanGrow>true</CanGrow>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>AMOUNT:     </Value>
-                                      <Style>
-                                        <FontSize>8pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                    <TextRun>
-                                      <Value>=Fields!Amount.Value</Value>
-                                      <Style>
-                                        <FontSize>8pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                        <Format>#,0.00</Format>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style />
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>6.8cm</Top>
-                              <Left>0.2cm</Left>
-                              <Height>0.5cm</Height>
-                              <Width>7.6cm</Width>
                               <ZIndex>11</ZIndex>
                               <Style />
-                            </Textbox>
-                            <Textbox Name="Textbox26">
-                              <CanGrow>true</CanGrow>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>A/C No:     </Value>
-                                      <Style>
-                                        <FontSize>8pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                    <TextRun>
-                                      <Value>=Fields!MaskedAccountNo.Value</Value>
-                                      <Style>
-                                        <FontSize>8pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style />
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>6.2cm</Top>
-                              <Left>0.2cm</Left>
-                              <Height>0.5cm</Height>
-                              <Width>7.6cm</Width>
+                            </Tablix>
+                            <Line Name="LineEq1">
+                              <Top>8.3cm</Top>
+                              <Left>1.9cm</Left>
+                              <Height>0cm</Height>
+                              <Width>5.8cm</Width>
                               <ZIndex>12</ZIndex>
-                              <Style />
-                            </Textbox>
-                            <Textbox Name="Textbox25">
+                              <Style>
+                                <Border>
+                                  <Style>Dashed</Style>
+                                </Border>
+                              </Style>
+                            </Line>
+                            <Textbox Name="TotalDeductBox1">
                               <CanGrow>true</CanGrow>
                               <Paragraphs>
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>A/C NAME:   </Value>
+                                      <Value>TOTAL DED:  </Value>
                                       <Style>
                                         <FontSize>8pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
                                     <TextRun>
-                                      <Value>=Fields!AccountName.Value</Value>
+                                      <Value>=Fields!Amount.Value + Fields!SumTransactionCharges.Value</Value>
                                       <Style>
                                         <FontSize>8pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
+                                        <Format>#,0.00</Format>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>5.6cm</Top>
+                              <Top>8.4cm</Top>
                               <Left>0.2cm</Left>
                               <Height>0.5cm</Height>
                               <Width>7.6cm</Width>
                               <ZIndex>13</ZIndex>
                               <Style />
                             </Textbox>
-                            <Textbox Name="Textbox29">
+                            <Textbox Name="PrevBalBox">
                               <CanGrow>true</CanGrow>
                               <Paragraphs>
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>TRANS No:   </Value>
+                                      <Value>PREV BAL:   </Value>
                                       <Style>
                                         <FontSize>8pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
                                     <TextRun>
-                                      <Value>=Fields!Transactions_No.Value</Value>
+                                      <Value>=Fields!AvailableBalance.Value</Value>
                                       <Style>
                                         <FontSize>8pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
+                                        <Format>#,0.00</Format>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>5cm</Top>
+                              <Top>9.1cm</Top>
                               <Left>0.2cm</Left>
                               <Height>0.5cm</Height>
                               <Width>7.6cm</Width>
                               <ZIndex>14</ZIndex>
                               <Style />
                             </Textbox>
-                            <Textbox Name="Textbox3">
+                            <Textbox Name="TotalDeductBox2">
                               <CanGrow>true</CanGrow>
                               <Paragraphs>
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>BRANCH:     </Value>
+                                      <Value>- TOTAL DED:</Value>
                                       <Style>
                                         <FontSize>8pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
                                     <TextRun>
-                                      <Value>=IIF(Fields!Branch_Name.Value &lt;&gt; "", Fields!Branch_Name.Value, "") &amp; IIF(Fields!Branch_code.Value &lt;&gt; "", " (" &amp; Fields!Branch_code.Value &amp; ")", "")</Value>
+                                      <Value>=Fields!Amount.Value + Fields!SumTransactionCharges.Value</Value>
                                       <Style>
                                         <FontSize>8pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
+                                        <Format>#,0.00</Format>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>4.4cm</Top>
+                              <Top>9.6cm</Top>
                               <Left>0.2cm</Left>
                               <Height>0.5cm</Height>
                               <Width>7.6cm</Width>
                               <ZIndex>15</ZIndex>
                               <Style />
                             </Textbox>
-                            <Textbox Name="Available_Balance_Caption18">
-                              <CanGrow>true</CanGrow>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>DATE:       </Value>
-                                      <Style>
-                                        <FontSize>8pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                    <TextRun>
-                                      <Value>=Fields!Transactions__Transaction_Date_.Value</Value>
-                                      <Style>
-                                        <FontSize>8pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                        <Format>M/d/yyyy</Format>
-                                      </Style>
-                                    </TextRun>
-                                    <TextRun>
-                                      <Value xml:space="preserve">               </Value>
-                                      <Style />
-                                    </TextRun>
-                                    <TextRun>
-                                      <Value>=Fields!Transactions_Transactions__Transaction_Time_.Value</Value>
-                                      <Style>
-                                        <FontSize>8pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                        <Format>hh:mm tt</Format>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style />
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>3.8cm</Top>
-                              <Left>0.2cm</Left>
-                              <Height>0.5cm</Height>
-                              <Width>7.6cm</Width>
+                            <Line Name="LineEq2">
+                              <Top>10.1cm</Top>
+                              <Left>1.9cm</Left>
+                              <Height>0cm</Height>
+                              <Width>5.8cm</Width>
                               <ZIndex>16</ZIndex>
-                              <Style />
-                            </Textbox>
-                            <Textbox Name="Textbox35">
+                              <Style>
+                                <Border>
+                                  <Style>Dashed</Style>
+                                </Border>
+                              </Style>
+                            </Line>
+                            <Textbox Name="NewBalBox">
                               <CanGrow>true</CanGrow>
                               <Paragraphs>
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>TRANS TYPE: </Value>
+                                      <Value>NEW BAL:    </Value>
                                       <Style>
                                         <FontSize>8pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
                                     <TextRun>
-                                      <Value>=Fields!Transactions_Type.Value</Value>
+                                      <Value>=Fields!AvailableBalance.Value - (Fields!Amount.Value + Fields!SumTransactionCharges.Value)</Value>
                                       <Style>
                                         <FontSize>8pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
+                                        <Format>#,0.00</Format>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>3.2cm</Top>
+                              <Top>10.2cm</Top>
                               <Left>0.2cm</Left>
                               <Height>0.5cm</Height>
                               <Width>7.6cm</Width>
                               <ZIndex>17</ZIndex>
                               <Style />
                             </Textbox>
-                            <Textbox Name="ReprintTextbox">
+                            <Textbox Name="AmountInWordsTextbox">
                               <CanGrow>true</CanGrow>
                               <Paragraphs>
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>=Fields!Reprint.Value</Value>
+                                      <Value>IN WORDS:   </Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                    <TextRun>
+                                      <Value>=Fields!NumberText_1_.Value</Value>
                                       <Style>
                                         <FontSize>8pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
-                                  <Style>
-                                    <TextAlign>Center</TextAlign>
-                                  </Style>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>2.7cm</Top>
+                              <Top>10.9cm</Top>
                               <Left>0.2cm</Left>
-                              <Height>0.4cm</Height>
-                              <Width>6.33cm</Width>
+                              <Height>1cm</Height>
+                              <Width>7.6cm</Width>
                               <ZIndex>18</ZIndex>
                               <Style />
                             </Textbox>
-                            <Textbox Name="ThankYouTextbox">
+                            <Textbox Name="SignaturesTextbox">
                               <CanGrow>true</CanGrow>
                               <Paragraphs>
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value>Thank you for Giving us the Opportunity to serve you</Value>
+                                      <Value>Member ID NO :..............................</Value>
                                       <Style>
                                         <FontSize>8pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
-                                  <Style>
-                                    <TextAlign>Left</TextAlign>
-                                  </Style>
+                                  <Style />
+                                </Paragraph>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value />
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Member Sign :.................................</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>14.5cm</Top>
+                              <Top>12.1cm</Top>
                               <Left>0.2cm</Left>
-                              <Height>1cm</Height>
+                              <Height>1.5cm</Height>
                               <Width>7.6cm</Width>
                               <ZIndex>19</ZIndex>
                               <Style />
@@ -697,7 +757,7 @@
                               <Value>azimaa</Value>
                               <MIMEType>image/bmp</MIMEType>
                               <Sizing>FitProportional</Sizing>
-                              <Top>0.24722cm</Top>
+                              <Top>0.2825cm</Top>
                               <Left>0.2cm</Left>
                               <Height>2.27639cm</Height>
                               <Width>6.83229cm</Width>
@@ -749,7 +809,7 @@
       </Body>
       <Width>8.2cm</Width>
       <Page>
-        <PageHeight>18cm</PageHeight>
+        <PageHeight>28cm</PageHeight>
         <PageWidth>8cm</PageWidth>
         <Style />
       </Page>

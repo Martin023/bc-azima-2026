@@ -464,13 +464,13 @@ table 52185776 "Cashier Transactions"
         {
             TableRelation = IF (Type = CONST("Bankers Cheque")) "Bankers Cheques Register"."Cheque No." WHERE(
                         Status = FILTER(Pending),
-                        "Global Dimension 2 Code" = FIELD("Global Dimension 2 Code")
+                        "Global Dimension 1 Code" = FIELD("Global Dimension 1 Code")
                     )
             else
             IF (Type = CONST("Cancel Bankers Cheque")) "Bankers Cheques Register"."Cheque No." WHERE(
                         Status = FILTER(Approved),
                         "Member No" = FIELD("Member No."),
-                        "Global Dimension 2 Code" = FIELD("Global Dimension 2 Code")
+                        "Global Dimension 1 Code" = FIELD("Global Dimension 1 Code")
                     );
 
             trigger OnValidate()
