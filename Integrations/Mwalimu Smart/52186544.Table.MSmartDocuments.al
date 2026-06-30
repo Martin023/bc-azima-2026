@@ -4,8 +4,8 @@ table 52186544 "M-Smart Documents"
     DataClassification = SystemMetadata;
     DataPerCompany = false;
 
-    LookupPageId = "M-Smart Documents List";
-    DrillDownPageId = "M-Smart Documents List";
+    // LookupPageId = "M-Smart Documents List";
+    // DrillDownPageId = "M-Smart Documents List";
 
     fields
     {
