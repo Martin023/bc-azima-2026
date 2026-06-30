@@ -248,6 +248,11 @@ page 52185592 "HR Setup"
                 {
 
                 }
+                field("Saturday is Half Day"; Rec."Saturday is Half Day")
+                {
+                    ApplicationArea = Basic;
+                }
+                
                 field(Formula; Rec.Formula)
                 {
 
