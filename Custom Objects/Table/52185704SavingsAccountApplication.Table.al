@@ -842,8 +842,8 @@ table 52185704 "Savings Account Application"
                 MSMDocRec.SetRange("Landing Department", MSMDocRec."Landing Department"::FOSA);
                 MSMDocRec.SetFilter("Document Type", '%1|%2', MSMDocRec."Document Type"::"SUB-ACCOUNT APPLICATION FORM", MSMDocRec."Document Type"::"FIXED DEPOSIT ACCOUNT APPLICATION FORM");
 
-                if Page.RunModal(Page::"M-Smart Documents List", MSMDocRec) = Action::LookupOK then begin
-                end;
+                // if Page.RunModal(Page::"M-Smart Documents List", MSMDocRec) = Action::LookupOK then begin
+                // end;
             end;
         }
     }
