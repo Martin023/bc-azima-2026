@@ -16,11 +16,10 @@ report 52185531 "Update Employee Loans Report"
             trigger OnAfterGetRecord()
             begin
                 Loans.reset;
-                Loans.SetRange("Employer Code", '07');
-                //Loans.SetRange("Employer Code", Loans."Employer Code");
+                Loans.SetRange("Member No.", HREmployees."Member No.");
                 loans.setfilter("Source Unit", '<>%1', Loans."Source Unit"::FOSA);
                 Loans.Setfilter("Disbursement Date", '..%1', CutOffDate);
-                Loans.SetFilter("Outstanding Balance", '>0');
+                Loans.SetFilter(Loans."Total Balance", '>0');
                 PRTransactionCodes.Reset;
                 PRTransactionCodes.SetRange("Loan Product Type", Loans."Loan Product Type");
                 if PRTransactionCodes.Find('-') then begin

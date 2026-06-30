@@ -72,4 +72,16 @@ enum 52185463 "Salary Type"
     {
         Caption = 'Total Deductions';
     }
+    value(17; "Insurance relief")
+    {
+        Caption = 'Insurance relief';
+    }
+    value(18; "Insurance Pension relief")
+    {
+        Caption = 'Insurance Pension relief';
+    }
+    value(19; "Other Non-Taxable Benefits")
+    {
+        Caption = 'Other Non-Taxable Benefits';
+    }
 }

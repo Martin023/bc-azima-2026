@@ -283,9 +283,9 @@ page 52185659 "PR Salary List (ALL)"
                         if HREmployees.Find('-') then begin
                             repeat
                                 Loans.Reset;
-                                Loans.SetRange("Staff No", HREmployees."No.");
-                                Loans.CalcFields("Outstanding Balance", "Outstanding Interest", "Outstanding Bills");
-                                //Loans.SetFilter(Loans."Outstanding Balance", '>%1', 0);
+                                Loans.SetRange(Loans."Member No.", HREmployees."Member No.");
+                                Loans.CalcFields("Outstanding Balance", "Outstanding Interest", "Total Balance");
+                                Loans.SetFilter(Loans."Total Balance", '>%1', 0);
                                 if Loans.Find('-') then begin
                                     repeat
                                         PREmployeeTransactions.Reset;

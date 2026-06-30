@@ -7,13 +7,7 @@ Codeunit 52185472 "PR Payroll Processing"
     end;
 
     var
-        Text020: label 'Because of circular references, the program cannot calculate a formula.';
-        Text012: label 'You have entered an illegal value or a nonexistent row number.';
-        Text013: label 'You have entered an illegal value or a nonexistent column number.';
-        Text017: label 'The error occurred when the program tried to calculate:\';
-        Text018: label 'Acc. Sched. Line: Row No. = %1, Line No. = %2, Totaling = %3\';
-        Text019: label 'Acc. Sched. Column: Column No. = %4, Line No. = %5, Formula  = %6';
-        Text023: label 'Formulas ending with a percent sign require %2 %1 on a line before it.';
+
         VitalSetup: Record "PR Vital Setup Info";
         curReliefPersonal: Decimal;
         curReliefInsurance: Decimal;
@@ -67,7 +61,6 @@ Codeunit 52185472 "PR Payroll Processing"
         HREmp2: Record "HR Employees";
         PRTransCode: Record "PR Transaction Codes";
         HREmployes: Record "HR Employees";
-        Cust2: Record Customer;
         curTransSubledger: Option " ",Customer,Vendor;
         curTransSubledgerAccount: Code[20];
         PRSalCard: Record "PR Salary Card";
@@ -201,7 +194,7 @@ Codeunit 52185472 "PR Payroll Processing"
     var
         strTableName: Text[50];
         curTransAmount: Decimal;
-        NonLevied: decimal;
+        // NonLevied: decimal;
         curTransBalance: Decimal;
         strTransDescription: Text[50];
         TGroup: Text[30];
@@ -269,7 +262,7 @@ Codeunit 52185472 "PR Payroll Processing"
         AllAllowables: Decimal;
         OtherSavingsDeductions: Decimal;
         TotalOtherSavingDeductions: Decimal;
-
+        SalaryType: enum "Salary Type";
     begin
 
         dtOpenPeriod := fnGetOpenPeriod();
@@ -281,8 +274,7 @@ Codeunit 52185472 "PR Payroll Processing"
 
 
         //check if the period selected=current period. If not, do NOT run this function
-        if SelectedPeriod <> dtOpenPeriod then exit;
-        intMonth := Date2dmy(SelectedPeriod, 2);
+        if SelectedPeriod <> dtOpenPeriod then error('select the current open payroll period for this processing!');
         intYear := Date2dmy(SelectedPeriod, 3);
 
         //Delete all Records from the prPeriod Transactions for Reprocessing
@@ -305,9 +297,7 @@ Codeunit 52185472 "PR Payroll Processing"
         HRBankSummary.SetRange(HRBankSummary."Staff No.", strEmpCode);
         if HRBankSummary.Find('-') then HRBankSummary.DeleteAll;
 
-
-
-        //IF curBasicPay >0 THEN
+        //
 
         //Get the Basic Salary (prorate basc pay if needed) //Termination Remaining
         if (Date2dmy(dtDOE, 2) = Date2dmy(dtOpenPeriod, 2)) and (Date2dmy(dtDOE, 3) = Date2dmy(dtOpenPeriod, 3)) then begin
@@ -329,7 +319,6 @@ Codeunit 52185472 "PR Payroll Processing"
         curBPAYBal := 0;
         salCard.Reset;
         salCard.SetRange(salCard."Employee Code", strEmpCode);
-        //salCard.CALCFIELDS(salCard."Cumm BasicPay");
         if salCard.Find('-') then begin
             curBPAYBal := curBasicPay;
         end;
@@ -345,72 +334,8 @@ Codeunit 52185472 "PR Payroll Processing"
                            TSubGroupOrder, strTransDescription, curTransAmount, 0,
                            intMonth, intYear, Membership, ReferenceNo, SelectedPeriod, Dept,
                            salariesAcc, Journalpostas::Debit, Journalpostingtype::"G/L Account", ''
-                           , Coopparameters::none);
-        curTransAmount := ROUND(curBasicPay, 0.01, '<'); //DERRICKBASIC
-        //Message('Basic Pay: %1', curTransAmount);
-        //END OF BASIC PAY
-
-        //Salary Arrears
-        prSalaryArrears.Reset;
-        prSalaryArrears.SetRange(prSalaryArrears."Employee Code", strEmpCode);
-        prSalaryArrears.SetRange(prSalaryArrears."Period Month", intMonth);
-        prSalaryArrears.SetRange(prSalaryArrears."Period Year", intYear);
-        if prSalaryArrears.Find('-') then begin
-            repeat
-                curSalaryArrears := prSalaryArrears."Salary Arrears";
-                curPayeArrears := prSalaryArrears."PAYE Arrears";
-
-                //Insert [Salary Arrears] into period trans [ARREARS]
-                curTransAmount := curSalaryArrears;
-                strTransDescription := 'Salary Arrears';
-                TGroup := 'ARREARS';
-                // TGroupOrder := 1;
-                // TSubGroupOrder := 2;
-                TGroupOrder := 1;
-                TSubGroupOrder := 1;
-                fnUpdatePeriodTrans(strEmpCode, prSalaryArrears."Transaction Code", TGroup, TGroupOrder, TSubGroupOrder,
-                  strTransDescription, curTransAmount, 0, intMonth, intYear, Membership, ReferenceNo, SelectedPeriod, Dept,
-                  salariesAcc, Journalpostas::Debit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
-
-                //Insert [PAYE Arrears] into period trans [PYAR] chacha
-                curTransAmount := curPayeArrears;
-                strTransDescription := 'P.A.Y.E Arrears';
-                // TGroup := 'STATUTORIES';
-                // TGroupOrder := 7;
-                // TSubGroupOrder := 4;
-                TGroup := 'DEDUCTIONS';
-                TGroupOrder := 3;
-                TSubGroupOrder := 3;
-                fnUpdatePeriodTrans(strEmpCode, 'PYAR', TGroup, TGroupOrder, TSubGroupOrder,
-                   strTransDescription, curTransAmount, 0, intMonth, intYear, Membership, ReferenceNo, SelectedPeriod, Dept
-                   , salariesAcc, Journalpostas::Debit, Journalpostingtype::"G/L Account", '', Coopparameters::none)
-
-            until prSalaryArrears.Next = 0;
-        end;
-
-        //..............................................levied..........................................
-
-        prEmployeeTransactions.Reset;
-        prEmployeeTransactions.SetRange(prEmployeeTransactions."Employee Code", strEmpCode);
-        prEmployeeTransactions.SetRange(prEmployeeTransactions."Period Month", intMonth);
-        prEmployeeTransactions.SetRange(prEmployeeTransactions."Period Year", intYear);
-        prEmployeeTransactions.SetRange(prEmployeeTransactions.Stopped, false); //Added DW to not process Stopped Transactions
-        if prEmployeeTransactions.Find('-') then begin
-            curTotAllowances := 0;
-            NonLevied := 0;
-            repeat
-
-                prTransactionCodes.Reset;
-                prTransactionCodes.SetRange(prTransactionCodes."Transaction Code", prEmployeeTransactions."Transaction Code");
-                prTransactionCodes.SetRange(prTransactionCodes."Transaction Type", prTransactionCodes."transaction type"::Income);
-                prTransactionCodes.SetRange(prTransactionCodes."Is HLEVY", false);
-                if prTransactionCodes.Find('-') then begin
-                    NonLevied := NonLevied + prEmployeeTransactions.Amount;
-                end;
-            until prEmployeeTransactions.next = 0;
-        end;
-
-        //..............................................levied.............................................
+                           , Coopparameters::none, SalaryType::Basic);
+        curTransAmount := ROUND(curBasicPay, 0.01, '<');
 
         //Get Earnings
         prEmployeeTransactions.Reset;
@@ -602,7 +527,7 @@ Codeunit 52185472 "PR Payroll Processing"
                     fnUpdatePeriodTrans(strEmpCode, prTransactionCodes."Transaction Code", TGroup, TGroupOrder, TSubGroupOrder,
                     strTransDescription, curTransAmount, curTransBalance, intMonth, intYear, prEmployeeTransactions.Membership,
                     prEmployeeTransactions."Reference No", SelectedPeriod, Dept, JournalAc, Journalpostas::Debit, JournalPostingType, '',
-                    prTransactionCodes."coop parameters");
+                    prTransactionCodes."coop parameters", prTransactionCodes."Salary Type");
 
                 end;
             until prEmployeeTransactions.Next = 0;
@@ -617,7 +542,7 @@ Codeunit 52185472 "PR Payroll Processing"
         TGroupOrder := 1;
         TSubGroupOrder := 7;
         fnUpdatePeriodTrans(strEmpCode, 'GPAY', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription, curTransAmount, 0, intMonth,
-         intYear, '', '', SelectedPeriod, Dept, '', Journalpostas::Debit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
+         intYear, '', '', SelectedPeriod, Dept, '', Journalpostas::Debit, Journalpostingtype::"G/L Account", '', Coopparameters::none, SalaryType::"Gross Pay");
 
 
         strTransDescription := 'Taxable Earnings';
@@ -625,12 +550,9 @@ Codeunit 52185472 "PR Payroll Processing"
         TGroupOrder := 6;
         TSubGroupOrder := 1;
         fnUpdatePeriodTrans(strEmpCode, 'TBLEAR', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription, curTransAmount, 0, intMonth,
-         intYear, '', '', SelectedPeriod, Dept, '', Journalpostas::Debit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
+         intYear, '', '', SelectedPeriod, Dept, '', Journalpostas::Debit, Journalpostingtype::"G/L Account", '', Coopparameters::none, SalaryType::"Taxable Pay");
 
-
-        //************************************************************************************************************************************
         //NEW NSSF CODE HERE
-        //Get the N.S.S.F amount for the month GBT
         curNssf_Base_Amount := 0;
         if intNSSF_BasedOn = Intnssf_basedon::Gross then //>NSSF calculation can be based on:
             curNssf_Base_Amount := curGrossPay;
@@ -638,9 +560,10 @@ Codeunit 52185472 "PR Payroll Processing"
             curNssf_Base_Amount := curBasicPay;
 
         //Get the NSSF amount
+        curNSSF := 0;
         if blnPaysNssf then BEGIN
             // IF NOT PaysNewNSSF THEN BEGIN
-            curNSSF := fnGetEmployerNSSF(curNssf_Base_Amount);
+            curNSSF := fnGetEmployeeNSSF(curNssf_Base_Amount);
             curTransAmount := curNSSF;
             strTransDescription := 'N.S.S.F';
             // TGroup := 'STATUTORIES';
@@ -651,66 +574,17 @@ Codeunit 52185472 "PR Payroll Processing"
             TSubGroupOrder := 3;
             fnUpdatePeriodTrans(strEmpCode, 'NSSF', TGroup, TGroupOrder, TSubGroupOrder,
             strTransDescription, curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept, NSSFEMPyee,
-            Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::NSSF);
-            // END
-            // else
-            //     if PaysNewNSSF = True then begin
-            //         CurNssf := (NewNSSFRate * curNssf_Base_Amount) / 100;
-            //         curTransAmount := curNSSF;
-            //         strTransDescription := 'N.S.S.F';
-            //         // TGroup := 'STATUTORIES';
-            //         // TGroupOrder := 7;
-            //         // TSubGroupOrder := 1;
-            //         TGroup := 'DEDUCTIONS';
-            //         TGroupOrder := 3;
-            //         TSubGroupOrder := 3;
-            //         fnUpdatePeriodTrans(strEmpCode, 'NSSF', TGroup, TGroupOrder, TSubGroupOrder,
-            //         strTransDescription, curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept, NSSFEMPyee,
-            //         Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::NSSF);
-            //     end;
+            Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::NSSF, SalaryType::"NSSF");
+
+            curNSSF := fnGetEmployerNSSF(curNssf_Base_Amount);
+            curTransAmount := curNSSF;
+            fnUpdateEmployerDeductions(strEmpCode, 'NSSF',
+             'EMP', TGroupOrder, TSubGroupOrder, '', curTransAmount, 0, intMonth, intYear,
+              prEmployeeTransactions.Membership, prEmployeeTransactions."Reference No", SelectedPeriod);
+
         END;
 
-        // //Update Employer deductions
-        // if blnPaysNssf then
-        //     curNSSF := fnGetEmployerNSSF(curNssf_Base_Amount);
-        // curTransAmount := curNSSF;
-        // fnUpdateEmployerDeductions(strEmpCode, 'NSSF',
-        //  'EMP', TGroupOrder, TSubGroupOrder, '', curTransAmount, 0, intMonth, intYear,
-        //   prEmployeeTransactions.Membership, prEmployeeTransactions."Reference No", SelectedPeriod);
-        //Update Employer deductions
-        if blnPaysNssf then begin
-            IF NOT PaysNewNSSF THEN BEGIN
-                curNSSF := fnGetEmployerNSSF(curNssf_Base_Amount);
-                curTransAmount := curNSSF;
-                fnUpdateEmployerDeductions(strEmpCode, 'NSSF',
-                 'EMP', TGroupOrder, TSubGroupOrder, '', curTransAmount, 0, intMonth, intYear,
-                  prEmployeeTransactions.Membership, prEmployeeTransactions."Reference No", SelectedPeriod);
-            end
-            else
-                if PaysNewNSSF = True then begin
-                    CurNssf := (NewNSSFRate * curNssf_Base_Amount) / 100;
-                    //CurNssf := (VitalSetup."New NSSF Rate %" * curNssf_Base_Amount) / 100;
-                    curTransAmount := curNSSF;
-                    fnUpdateEmployerDeductions(strEmpCode, 'NSSF',
-                     'EMP', TGroupOrder, TSubGroupOrder, '', curTransAmount, 0, intMonth, intYear,
-                      prEmployeeTransactions.Membership, prEmployeeTransactions."Reference No", SelectedPeriod);
-                end;
-        end;
-
-
-        //************************************************************************************************************************************
-
-        //Get the Defined contribution to post based on the Max Def contrb allowed   ****************All Defined Contributions not included
-        curDefinedContrib := curNSSF; //(curNSSF + curPensionStaff + curNonTaxable) - curMorgageReliefAmount
-        //curTransAmount := curDefinedContrib;
-        // //error('%1',curTransAmount);
-        // strTransDescription := 'Defined Contributions';
-        // TGroup := 'TAX CALCULATIONS';
-        // TGroupOrder := 6;
-        // TSubGroupOrder := 1;
-        // fnUpdatePeriodTrans(strEmpCode, 'DEFCON', TGroup, TGroupOrder, TSubGroupOrder,
-        //  strTransDescription, curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-        //  '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none); ----------------------------------------------------------------REMOVED April 2025
+        curDefinedContrib := curNSSF;
 
         //Get the Gross taxable amount
         //>GrossTaxable = Gross + Benefits + nValueofQuarters  ******Confirm CurValueofQuaters
@@ -730,23 +604,7 @@ Codeunit 52185472 "PR Payroll Processing"
         // //Specialtranstype := prTransactionCodes."Special Transactions";
         curPensionStaff := fnGetSpecialTransAmount(strEmpCode, intMonth, intYear,
         Specialtranstype::"Defined Contribution", false);//Self contrib Pension is 1 on [Special Transaction]
-        // if curPensionStaff > 0 then begin
-        //     curTransAmount := curPensionStaff;
-        //     if (curTransAmount + curDefinedContrib) > (curMaxPensionContrib) then
-        //         //curTransAmount := ROUND((curMaxPensionContrib - curDefinedContrib), 0.01, '>')//here
-        //         curTransAmount := ROUND((curMaxPensionContrib - curDefinedContrib), 0.01, '<')
-        //     else
-        //         curTransAmount := ROUND(curPensionStaff, 0.01, '>');
-        //     strTransDescription := 'Pension Contribution';
-        //     TGroup := 'TAX CALCULATIONS';
-        //     TGroupOrder := 6;
-        //     TSubGroupOrder := 2;
-        //     fnUpdatePeriodTrans(strEmpCode, 'PNSR', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
-        //     curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-        //     '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none)
-        // end;
-        //----------------------------------------------------------------------------------------------------------Removed 2025
-        //Other Deductibles
+                                                         //Other Deductibles
         OtherNonDeductible := 0;
         OtherNonDeductibles := 0;
         prEmployeeTransactions.Reset;
@@ -787,38 +645,13 @@ Codeunit 52185472 "PR Payroll Processing"
 
                     OtherNonDeductible := ROUND(OtherNonDeductible, 0.01, '>');
                     strTransDescription := prEmployeeTransactions."Transaction Name";
-                    // TGroup := 'TAX CALCULATIONS';
-                    // TGroupOrder := 6;
-                    // TSubGroupOrder := 2;
-                    /*
-
-                    TGroupOrder := 2;
-                    TSubGroupOrder := 0;
-
-                    fnUpdatePeriodTrans(strEmpCode, 'ND' + prEmployeeTransactions."Transaction Code", TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
-                    OtherNonDeductible, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-                    '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
-                    */
-                    //Removed So that They do not appear twice on the payslip
-
-                    //for deductions
-                    // OtherNonDeductible := ROUND(OtherNonDeductible, 0.01, '>');
-                    // strTransDescription := prEmployeeTransactions."Transaction Name";
-                    // TGroup := 'DEDUCTIONS';
-                    // TGroupOrder := 6;
-                    // TSubGroupOrder := 2;
-                    // fnUpdatePeriodTrans(strEmpCode, 'D-' + prEmployeeTransactions."Transaction Code", TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
-                    // OtherNonDeductible, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-                    // '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
 
                     OtherNonDeductibles += OtherNonDeductible;
-                    //Message(Format(OtherNonDeductibles));
                 end;
 
 
             until prEmployeeTransactions.Next = 0;
         end;
-        //Other Deductibles
 
         //if he PAYS paye only*******************I  chacha
         if blnPaysPaye and blnGetsPAYERelief then begin
@@ -839,7 +672,7 @@ Codeunit 52185472 "PR Payroll Processing"
                 TSubGroupOrder := 8;
                 fnUpdatePeriodTrans(strEmpCode, 'INSR', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
                 curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-                '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
+                '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none, SalaryType::"Insurance relief");
             end;
             //********************************************************************************************************************************************************
             //Get Pension Relief
@@ -854,62 +687,62 @@ Codeunit 52185472 "PR Payroll Processing"
                 TSubGroupOrder := 8;
                 fnUpdatePeriodTrans(strEmpCode, 'IPR', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
                 curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-                '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
+                '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none, SalaryType::"Insurance Pension relief");
 
             end;
 
-            //>OOI
-            curOOI := fnGetSpecialTransAmount(strEmpCode, intMonth, intYear,
-            Specialtranstype::"Owner Occupier Interest", false); //Morgage is LAST on [Special Transaction]
-            if curOOI > 0 then begin
-                if curOOI <= curOOIMaxMonthlyContrb then
-                    curTransAmount := curOOI
-                else
-                    curTransAmount := curOOIMaxMonthlyContrb;
+            // //>OOI
+            // curOOI := fnGetSpecialTransAmount(strEmpCode, intMonth, intYear,
+            // Specialtranstype::"Owner Occupier Interest", false); //Morgage is LAST on [Special Transaction]
+            // if curOOI > 0 then begin
+            //     if curOOI <= curOOIMaxMonthlyContrb then
+            //         curTransAmount := curOOI
+            //     else
+            //         curTransAmount := curOOIMaxMonthlyContrb;
 
-                strTransDescription := 'Owner Occupier Interest';
-                TGroup := 'TAX CALCULATIONS';
-                TGroupOrder := 6;
-                TSubGroupOrder := 3;
-                fnUpdatePeriodTrans(strEmpCode, 'OOI', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
-                curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-                '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
-            end;
+            //     strTransDescription := 'Owner Occupier Interest';
+            //     TGroup := 'TAX CALCULATIONS';
+            //     TGroupOrder := 6;
+            //     TSubGroupOrder := 3;
+            //     fnUpdatePeriodTrans(strEmpCode, 'OOI', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
+            //     curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
+            //     '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
+            // end;
 
             //HOSP
-            curHOSP := 0;
-            curHOSP := fnGetSpecialTransAmount(strEmpCode, intMonth, intYear,
-            Specialtranstype::"Home Ownership Savings Plan", false); //Home Ownership Savings Plan
-            if curHOSP > 0 then begin
-                if curHOSP <= curReliefMorgage then
-                    curTransAmount := curHOSP
-                else
-                    curTransAmount := curReliefMorgage;
+            // curHOSP := 0;
+            // curHOSP := fnGetSpecialTransAmount(strEmpCode, intMonth, intYear,
+            // Specialtranstype::"Home Ownership Savings Plan", false); //Home Ownership Savings Plan
+            // if curHOSP > 0 then begin
+            //     if curHOSP <= curReliefMorgage then
+            //         curTransAmount := curHOSP
+            //     else
+            //         curTransAmount := curReliefMorgage;
 
-                strTransDescription := 'Home Ownership Savings Plan';
-                TGroup := 'TAX CALCULATIONS';
-                TGroupOrder := 6;
-                TSubGroupOrder := 4;
-                fnUpdatePeriodTrans(strEmpCode, 'HOSP', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
-                curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-                '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
-            end;
+            //     strTransDescription := 'Home Ownership Savings Plan';
+            //     TGroup := 'TAX CALCULATIONS';
+            //     TGroupOrder := 6;
+            //     TSubGroupOrder := 4;
+            //     fnUpdatePeriodTrans(strEmpCode, 'HOSP', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
+            //     curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
+            //     '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
+            // end;
 
             //Mortage Relief
-            curMorgageRelief := 0;
-            curMorgageRelief := fnGetSpecialTransAmount(strEmpCode, intMonth, intYear,
-            Specialtranstype::"Mortgage Relief", false);
-            if curMorgageRelief > 0 then begin
-                curTransAmount := ROUND(curMorgageRelief, 1, '>');
-                strTransDescription := 'Mortgage Relief';
-                TGroup := 'TAX CALCULATIONS';
-                TGroupOrder := 6;
-                TSubGroupOrder := 9;
-                fnUpdatePeriodTrans(strEmpCode, 'MORG-RL', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
-                curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-                '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none)
+            // curMorgageRelief := 0;
+            // curMorgageRelief := fnGetSpecialTransAmount(strEmpCode, intMonth, intYear,
+            // Specialtranstype::"Mortgage Relief", false);
+            // if curMorgageRelief > 0 then begin
+            //     curTransAmount := ROUND(curMorgageRelief, 1, '>');
+            //     strTransDescription := 'Mortgage Relief';
+            //     TGroup := 'TAX CALCULATIONS';
+            //     TGroupOrder := 6;
+            //     TSubGroupOrder := 9;
+            //     fnUpdatePeriodTrans(strEmpCode, 'MORG-RL', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
+            //     curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
+            //     '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none)
 
-            end;
+            // end;
 
             //Enter NonTaxable Amount   chacha Other Non-Taxable Benefits
             if curNonTaxable > 0 then begin
@@ -919,40 +752,11 @@ Codeunit 52185472 "PR Payroll Processing"
                 TSubGroupOrder := 9;
                 fnUpdatePeriodTrans(strEmpCode, 'NONTAX', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
                 curNonTaxable, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-                '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
+                '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none, SalaryType::"Other Non-Taxable Benefits");
             end;
-            /////...........................chacha
 
         end;
 
-        //................................................ chacha add pension...............................................................
-
-        //>Company pension, Excess pension, Tax on excess pension
-        curPensionCompany := fnGetSpecialTransAmount(strEmpCode, intMonth, intYear, SpecialTransType::"Defined Contribution",
-        TRUE);
-        IF curPensionCompany > 0 THEN BEGIN
-            curTransAmount := curPensionCompany;
-            strTransDescription := 'Pension (Company)';
-
-            curExcessPension := curPensionCompany - curMaxPensionContrib;
-            IF curExcessPension > 0 THEN BEGIN
-                curTransAmount := curExcessPension;
-                strTransDescription := 'Excess Pension';
-                TGroup := 'STATUTORIES';
-                TGroupOrder := 7;
-                TSubGroupOrder := 5;
-                fnUpdatePeriodTrans(strEmpCode, 'EXCP', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
-                curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-                '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
-
-            END;
-        END;
-
-        //................................................ chacha add pension...............................................................
-
-
-
-        //Added Dann for KEPHIS
         BenifitAmount := 0;
 
         PRTransCode_2.Reset;
@@ -980,33 +784,6 @@ Codeunit 52185472 "PR Payroll Processing"
         curTransAmount := 0;
         curTransBalance := 0;
         strTransDescription := '';
-        //Added Dann for KEPHIS
-
-        //Add HOSP and MORTGAGE KIM{}
-        // HREmp2.Reset;
-        // if HREmp2.Get(strEmpCode) then begin
-        //     if HREmp2.Disabled = HREmp2.Disabled::No then begin
-        //         if curPensionStaff > (curMaxPensionContrib) then begin
-        //             curTaxablePay := curGrossTaxable - (curSalaryArrears + curDefinedContrib + (curMaxPensionContrib - curDefinedContrib) + curOOI + curHOSP + curNonTaxable
-        //                              + curPensionReliefAmount + curMorgageRelief) + BenifitAmount //includes subtracting mortgage relief to get taxable pay
-        //         end else
-        //             curTaxablePay := curGrossTaxable - (curSalaryArrears + curDefinedContrib + curPensionStaff + curOOI + curHOSP + curNonTaxable
-        //                            + curPensionReliefAmount + curMorgageRelief) + BenifitAmount;//includes subtracting mortgage relief to get taxable pay
-
-        //     end else begin
-        //         if HREmp2.Disabled = HREmp2.Disabled::Yes then begin
-        //             if curPensionStaff > (curMaxPensionContrib) then begin
-        //                 curTaxablePay := curGrossTaxable - (curSalaryArrears + curDefinedContrib + (curMaxPensionContrib - curDefinedContrib + curDisabledLimit) + curOOI + curHOSP + curNonTaxable
-        //                                  + curPensionReliefAmount + curMorgageRelief) + BenifitAmount //includes subtracting mortgage relief to get taxable pay
-        //             end else
-        //                 curTaxablePay := curGrossTaxable - (curSalaryArrears + curDefinedContrib + curPensionStaff + curOOI + curHOSP + curNonTaxable
-        //                                + curPensionReliefAmount + curMorgageRelief + curDisabledLimit) + BenifitAmount;//includes subtracting mortgage relief to get taxable pay
-
-
-        //         end;
-        //     end;
-        // end;
-
         //Other Deductibles SHIF & AHL
 
         HREmp2.Reset;
@@ -1046,7 +823,7 @@ Codeunit 52185472 "PR Payroll Processing"
         TSubGroupOrder := 3;
         fnUpdatePeriodTrans(strEmpCode, 'TXBP', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
          curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-         '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
+         '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none, SalaryType::"Taxable Pay");
 
 
         //Get the Tax charged for the month
@@ -1078,7 +855,7 @@ Codeunit 52185472 "PR Payroll Processing"
                         TSubGroupOrder := 4;
                         fnUpdatePeriodTrans(strEmpCode, 'TXCHRG', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
                         curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-                        '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
+                        '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none, SalaryType::PAYE);
                     end;
                     if (curTransAmount > DisabledTaxRelief) and (curGrossPay > curDisabledLimit) then begin
                         curTransAmount := DisabledTaxRelief;
@@ -1088,7 +865,7 @@ Codeunit 52185472 "PR Payroll Processing"
                         TSubGroupOrder := 5;
                         fnUpdatePeriodTrans(strEmpCode, 'PSNR', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
                          curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-                         '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
+                         '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none, SalaryType::PAYE);
                     end;
                 end;
 
@@ -1101,7 +878,7 @@ Codeunit 52185472 "PR Payroll Processing"
                     TSubGroupOrder := 7;
                     fnUpdatePeriodTrans(strEmpCode, 'TXCHRG', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
                     curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-                    '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
+                    '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none, SalaryType::PAYE);
 
                     if (curTransAmount > curReliefPersonal) then begin
                         curTransAmount := DisabledTaxRelief;
@@ -1111,55 +888,10 @@ Codeunit 52185472 "PR Payroll Processing"
                         TSubGroupOrder := 9;
                         fnUpdatePeriodTrans(strEmpCode, 'PSNR', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
                          curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-                         '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
+                         '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none, Salarytype::Relief);
                     end;
                 end;
             end;
-        end;
-
-
-        //Get the N.H.I.F amount for the month GBT
-        curNhif_Base_Amount := 0;
-        curNHIF := 0;
-
-        if intNHIF_BasedOn = Intnhif_basedon::Gross then //>NHIF calculation can be based on:
-            curNhif_Base_Amount := curGrossPay;
-        if intNHIF_BasedOn = Intnhif_basedon::Basic then
-            curNhif_Base_Amount := curBasicPay;
-        if intNHIF_BasedOn = Intnhif_basedon::"Taxable Pay" then
-            curNhif_Base_Amount := curTaxablePay;
-
-        if blnPaysNhif then begin
-
-            curNHIF := fnGetEmployeeNHIF(curNhif_Base_Amount);
-            curTransAmount := curNHIF;
-            strTransDescription := 'N.H.I.F';
-            TGroup := 'STATUTORIES';
-            TGroupOrder := 7;
-            TSubGroupOrder := 2;
-            fnUpdatePeriodTrans(strEmpCode, 'NHIF', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
-             curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-             NHIFEMPyee, Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
-        end;
-
-        //NHIF ReliefcurReliefNHIF
-        curReliefNHIFAmt := 0;
-        PRSalCard_2.Reset();
-        PRSalCard_2.SetRange("Employee Code", strEmpCode);
-        if PRSalCard_2.FindFirst() then begin
-
-            if PRSalCard_2."Pays NHIF" = false then
-                curTransAmount := 0;
-            curReliefNHIFAmt := curTransAmount * curReliefNHIF / 100;
-            curTransAmount := curReliefNHIFAmt;
-            strTransDescription := 'NHIF Relief';
-            TGroup := 'TAX CALCULATIONS';
-            TGroupOrder := 6;
-            TSubGroupOrder := 9;
-            fnUpdatePeriodTrans(strEmpCode, 'NHIFR', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
-             curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-             '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
-            //NHIF Relief
         end;
         //..SHIF
         CurShifBaseAmount := 0;
@@ -1175,22 +907,6 @@ Codeunit 52185472 "PR Payroll Processing"
 
         ShifAmount := (CurShifBaseAmount * (ShifPercentage / 100));
         ShifAmount := Round(ShifAmount, 0.01, '<');
-        //curTransAmount := ShifAmount;
-
-        // strTransDescription := 'S.H.I.F';
-        // TGroup := 'STATUTORIES';
-        // TGroupOrder := 7;
-        // TSubGroupOrder := 1; //Kenpipe ///Removed for Payslip's sake
-
-        // // TGroup := 'DEDUCTIONS';
-        // // TGroupOrder := 8;
-        // // TSubGroupOrder := 1; //Previously As MNS
-
-        // fnUpdatePeriodTrans(strEmpCode, 'SHIF', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
-        //  curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-        //  ShifAccount, Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
-
-        //End of SHIF
 
         //..SHIF RELIEF
         ShifReliefAmount := 0;
@@ -1202,10 +918,9 @@ Codeunit 52185472 "PR Payroll Processing"
         TSubGroupOrder := 9;
         fnUpdatePeriodTrans(strEmpCode, 'SHIFR', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
          curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-         '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
+         '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none, SalaryType::SHIF);
 
         //END OF SHIF RELIEF
-
 
         //Housing Levy As a Satutory
         HousingLevyAmount := 0;
@@ -1220,15 +935,6 @@ Codeunit 52185472 "PR Payroll Processing"
         TGroup := 'STATUTORIES';
         TGroupOrder := 7;
         TSubGroupOrder := 1; //Kenpipe
-
-        // TGroup := 'DEDUCTIONS';
-        // TGroupOrder := 8;
-        // TSubGroupOrder := 1; //Previously As MNS
-
-        // fnUpdatePeriodTrans(strEmpCode, 'A.H.L', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
-        //  curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-        //  ShifAccount, Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
-
 
         //End of Housing Levy As a Satutory
 
@@ -1277,35 +983,35 @@ Codeunit 52185472 "PR Payroll Processing"
         TSubGroupOrder := 3;
         fnUpdatePeriodTrans(strEmpCode, 'PAYE', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
          curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-         TaxAccount, Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
+         TaxAccount, Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none, salarytype::paye);
 
         TGroup := 'Tax Calculations';
         TGroupOrder := 6;
         TSubGroupOrder := 10;
 
         fnUpdatePeriodTrans(strEmpCode, 'NDPAYE', TGroup, TgroupOrder, TSubGroupOrder, strTransDescription, curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-        TaxAccount, JournalPostAs::Credit, JournalPostingType::"G/L Account", '', CoopParameters::none);
+        TaxAccount, JournalPostAs::Credit, JournalPostingType::"G/L Account", '', CoopParameters::none, salarytype::paye);
 
         //Store the unused relief for the current month
         //>If Paye<0 then "Insert into tblprUNUSEDRELIEF
-        if curPAYE < 0 then begin
-            prUnusedRelief.Reset;
-            prUnusedRelief.SetRange(prUnusedRelief."Employee Code", strEmpCode);
-            prUnusedRelief.SetRange(prUnusedRelief."Period Month", intMonth);
-            prUnusedRelief.SetRange(prUnusedRelief."Period Year", intYear);
-            if prUnusedRelief.FindSet() then
-                prUnusedRelief.DeleteAll();
+        // if curPAYE < 0 then begin
+        //     prUnusedRelief.Reset;
+        //     prUnusedRelief.SetRange(prUnusedRelief."Employee Code", strEmpCode);
+        //     prUnusedRelief.SetRange(prUnusedRelief."Period Month", intMonth);
+        //     prUnusedRelief.SetRange(prUnusedRelief."Period Year", intYear);
+        //     if prUnusedRelief.FindSet() then
+        //         prUnusedRelief.DeleteAll();
 
-            prUnusedRelief.Reset;
-            begin
-                prUnusedRelief.Init;
-                prUnusedRelief."Employee Code" := strEmpCode;
-                prUnusedRelief."Unused Relief" := curPAYE;
-                prUnusedRelief."Period Month" := intMonth;
-                prUnusedRelief."Period Year" := intYear;
-                prUnusedRelief.Insert;
-            end;
-        end;
+        //     prUnusedRelief.Reset;
+        //     begin
+        //         prUnusedRelief.Init;
+        //         prUnusedRelief."Employee Code" := strEmpCode;
+        //         prUnusedRelief."Unused Relief" := curPAYE;
+        //         prUnusedRelief."Period Month" := intMonth;
+        //         prUnusedRelief."Period Year" := intYear;
+        //         prUnusedRelief.Insert;
+        //     end;
+        // end;
 
         if curPAYE < 0 then
             curPAYE := 0;
@@ -1487,7 +1193,7 @@ Codeunit 52185472 "PR Payroll Processing"
                               strTransDescription, curTransAmount, curTransBalance, intMonth, intYear,
                               prEmployeeTransactions.Membership, prEmployeeTransactions."Reference No", SelectedPeriod, Dept,
                               JournalAc, Journalpostas::Credit, JournalPostingType, prEmployeeTransactions."Loan Number",
-                              Coopparameters::"loan Interest")
+                              Coopparameters::"loan Interest", SalaryType::Loans)
                         end;
                         //Get the Principal Amt
                         if Ploan.Get(prEmployeeTransactions."Loan Number") then //Variated
@@ -1556,7 +1262,7 @@ Codeunit 52185472 "PR Payroll Processing"
                      strTransDescription, curTransAmount, curTransBalance, intMonth,
                      intYear, prEmployeeTransactions.Membership, prEmployeeTransactions."Reference No", SelectedPeriod, Dept,
                      JournalAc, Journalpostas::Credit, JournalPostingType, prEmployeeTransactions."Loan Number",
-                     prTransactionCodes."coop parameters");
+                     prTransactionCodes."coop parameters", SalaryType::Loans);
 
 
                     // Affordable Housing Relief..................................ReliefTest
@@ -1575,7 +1281,7 @@ Codeunit 52185472 "PR Payroll Processing"
                             TSubGroupOrder := 4;
                             fnUpdatePeriodTrans(strEmpCode, 'AFHR', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
                             curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-                            '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
+                            '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none, SalaryType::Relief);
 
                         end;
                     end;
@@ -1633,7 +1339,7 @@ Codeunit 52185472 "PR Payroll Processing"
 
         curTotalDeductions += ROUND(curNSSF + curNHIF /*+ ShifAmount + */+ curPAYE + curPayeArrears, 0.01, '>');
         IF curTotalDeductions > (athirdofGS + curTotAllowances) then
-            Error('This Employee:' + '' + Format(strEmpCode) + '' + 'current deduction exceeds the two third rule');
+            message('This Employee:' + '' + Format(strEmpCode) + '' + 'current deduction exceeds the two third rule');
 
         //GET TOTAL DEDUCTIONS
         curTransBalance := 0;
@@ -1648,7 +1354,7 @@ Codeunit 52185472 "PR Payroll Processing"
         fnUpdatePeriodTrans(strEmpCode, strTransCode, TGroup, TGroupOrder, TSubGroupOrder,//chacha
           strTransDescription, curTotalDeductions, curTransBalance, intMonth, intYear,
           prEmployeeTransactions.Membership, prEmployeeTransactions."Reference No", SelectedPeriod, Dept,
-          '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
+          '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none, SalaryType::"Total Deduction");
 
 
 
@@ -1683,7 +1389,7 @@ Codeunit 52185472 "PR Payroll Processing"
 
         fnUpdatePeriodTrans(strEmpCode, 'NPAY', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
         curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-        PayablesAcc, Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
+        PayablesAcc, Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none, SalaryType::"Net Income");
         //PayablesAcc,JournalPostAs::Credit,JournalPostingType::"G/L Account",'',CoopParameters::none);
 
         //  //*************************************************************************************************************
@@ -1749,7 +1455,7 @@ Codeunit 52185472 "PR Payroll Processing"
 
         fnUpdatePeriodTrans(strEmpCode, 'ALLOWABLES', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
         curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-        '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none);
+        '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none, SalaryType::"Other Allowances");
 
         //Message('Allowables', curTransAmount);
 
@@ -1787,7 +1493,7 @@ Codeunit 52185472 "PR Payroll Processing"
     end;
 
 
-    procedure fnUpdatePeriodTrans(EmpCode: Code[20]; TCode: Code[20]; TGroup: Code[20]; GroupOrder: Integer; SubGroupOrder: Integer; Description: Text[50]; curAmount: Decimal; curBalance: Decimal; Month: Integer; Year: Integer; mMembership: Text[30]; ReferenceNo: Text[30]; dtOpenPeriod: Date; Department: Code[50]; JournalAC: Code[20]; PostAs: Option " ",Debit,Credit; JournalACType: Enum "Gen. Journal Account Type"; LoanNo: Code[20]; CoopParam: Option "none",shares,loan,"loan Interest","Emergency loan","Emergency loan Interest","School Fees loan","School Fees loan Interest",Welfare,Pension)
+    procedure fnUpdatePeriodTrans(EmpCode: Code[20]; TCode: Code[20]; TGroup: Code[20]; GroupOrder: Integer; SubGroupOrder: Integer; Description: Text[50]; curAmount: Decimal; curBalance: Decimal; Month: Integer; Year: Integer; mMembership: Text[30]; ReferenceNo: Text[30]; dtOpenPeriod: Date; Department: Code[50]; JournalAC: Code[20]; PostAs: Option " ",Debit,Credit; JournalACType: Enum "Gen. Journal Account Type"; LoanNo: Code[20]; CoopParam: Option "none",shares,loan,"loan Interest","Emergency loan","Emergency loan Interest","School Fees loan","School Fees loan Interest",Welfare,Pension; Salarytype: enum "Salary Type")
     var
         PRPeriodTransactions: Record "PR Period Transactions";
         HRBankAccounts: Record "HR Employee Bank Accounts";
@@ -3000,37 +2706,5 @@ Codeunit 52185472 "PR Payroll Processing"
     end;
 
 
-    procedure FixedAllowances(Allowances: record "Salary Grade Lines"; emplyCode: code[30]; PayriollP: Date)
-    var
-        PrTransactionCodes: record "PR Transaction Codes";
-        PrEmployeeTransactions: record "PR Employee Transactions";
-        dtOpenPeriod: date;
-        SalGrad: Record "Salary Grade Lines";
-        intMonth: Integer;
-        intYear: Integer;
-        NonLevied: decimal;
-    begin
-        dtOpenPeriod := fnGetOpenPeriod();
-        intMonth := Date2dmy(dtOpenPeriod, 2); //GET THE MONTH
-        intYear := Date2dmy(dtOpenPeriod, 3);  //GET THE YEAR
-
-
-        if PrEmployeeTransactions.Frequency = PrEmployeeTransactions.Frequency::Fixed then begin
-            PrEmployeeTransactions.Amount := 0;
-            PrEmployeeTransactions.Init();
-            PrEmployeeTransactions."Employee Code" := emplyCode;
-            PrEmployeeTransactions."Payroll Period" := dtOpenPeriod;
-            PrEmployeeTransactions."Period Month" := intMonth;
-            PrEmployeeTransactions."Salary Grade" := Allowances."Salary Grade";
-            PrEmployeeTransactions."Period Year" := intYear;
-            PrEmployeeTransactions.Frequency := PrEmployeeTransactions.Frequency::Fixed;
-            PrEmployeeTransactions."Transaction Code" := Allowances."Transaction Code";
-            PrEmployeeTransactions.Validate("Transaction Code");
-            PrEmployeeTransactions.Amount := Allowances.Amount;
-            PrEmployeeTransactions."Original Amount" := Allowances.Amount;
-            PrEmployeeTransactions.Insert;
-        end
-    end;
-    //end;
 
 }
