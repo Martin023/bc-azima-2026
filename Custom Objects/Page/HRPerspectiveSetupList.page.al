@@ -1,4 +1,4 @@
-page 52185584 "HR Perspective Setup List"
+page 52185602 "HR Perspective Setup List"
 {
     PageType = List;
     SourceTable = "HR Perspectives Setup";
