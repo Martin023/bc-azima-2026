@@ -1121,7 +1121,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                     Loans."Amount To Disburse" := 0;
                 end;
 
-                if (ProductFactory."Nature of Loan Type" = ProductFactory."Nature of Loan Type"::"Karibu Loan") or (ProductFactory."Nature of Loan Type" = ProductFactory."Nature of Loan Type"::"Commercial Bridging") or (ProductFactory."Nature of Loan Type" = ProductFactory."Nature of Loan Type"::IPO) then begin
+                if (ProductFactory."Nature of Loan Type" = ProductFactory."Nature of Loan Type"::"Karibu Loan") or (ProductFactory."Nature of Loan Type" = ProductFactory."Nature of Loan Type"::"Commercial Bridging") then begin
                     Loans."Recommended Amount" := Loans."Requested Amount";
 
                     Loans."Approved Amount" := Loans."Recommended Amount";
@@ -1267,11 +1267,11 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                     end else
                         SalNotThroughSacco := true;
 
-                    if (ProductFactory."Nature of Loan Type" = ProductFactory."Nature of Loan Type"::IPO) and SalNotThroughSacco then begin
-                        Loans."Recommended Amount" := 0;
-                        Loans."Approved Amount" := 0;
-                        Loans."Amount To Disburse" := 0;
-                    end;
+                    // if (ProductFactory."Nature of Loan Type" = ProductFactory."Nature of Loan Type"::IPO) and SalNotThroughSacco then begin
+                    //     Loans."Recommended Amount" := 0;
+                    //     Loans."Approved Amount" := 0;
+                    //     Loans."Amount To Disburse" := 0;
+                    // end;
 
                 end;
                 Loans.modify;

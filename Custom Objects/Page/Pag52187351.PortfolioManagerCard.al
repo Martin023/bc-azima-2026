@@ -14,7 +14,7 @@ page 52187351 "Portfolio Manager Card"
             group(General)
             {
                 Caption = 'General';
-
+                editable = rec.Transfered = false;
                 field(No; Rec.No)
                 {
                     ToolTip = 'Specifies the value of the No field.', Comment = '%';
@@ -60,6 +60,7 @@ page 52187351 "Portfolio Manager Card"
             }
             part("PortfolioManagementLines"; "Portfolio Management Lines")
             {
+                editable = rec.Transfered = false;
                 SubPageLink = "Header No" = field(No);
                 ApplicationArea = Basic, Suite;
             }
@@ -77,6 +78,10 @@ page 52187351 "Portfolio Manager Card"
                 Enabled = Rec.Transfered = false;
                 trigger OnAction()
                 begin
+                    rec.TestField(Transfered, false);
+                    PortFolioMgtLines.reset();
+                    PortFolioMgtLines.setrange("Header No", Rec.No);
+                    PortFolioMgtLines.DeleteAll();
                     Members.reset();
                     Members.SetCurrentKey("No.");
                     members.SetLoadFields("No.", Name, "Employer Code", "Payroll/Staff No.", Gender, "Phone No.", Status, Subflag);
@@ -123,7 +128,10 @@ page 52187351 "Portfolio Manager Card"
                                 end;
                             until PortFolioMgtLines.next() = 0;
                         end
-
+                        else
+                            Error('There are no lines to transfer.');
+                        rec.Transfered := true;
+                        rec.Modify();
                     end;
                 end;
             }

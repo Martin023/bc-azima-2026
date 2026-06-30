@@ -33,15 +33,24 @@ page 52185621 "prEmployee Posting Group"
                     ApplicationArea = Basic, Suite;
                     Caption = 'SSF Employer Expense Account';
                 }
-                field("SSF Employee Account"; Rec."SSF Employee Account")
+                field("SSF Tier 1 Payable Account"; Rec."SSF Tier 1 Payable Account")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'SSF Total Payable Account';
+                    Caption = 'SSF Tier 2 Payable Account';
                 }
+                field("SSF Tier 2 Payable Account"; Rec."SSF Tier 2 Payable Account")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'SSF Tier 3 Payable Account';
+                }
+                // field("SSF Employee Account"; Rec."SSF Employee Account")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'SSF Tier 1 Payable Account';
+                // }
                 field("Housing Levy Employer"; Rec."Housing Levy Employer")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'SSF Total Expense Account';
                 }
                 field("Housing Levy Employee"; Rec."Housing Levy Employee")
                 {
@@ -62,29 +71,29 @@ page 52185621 "prEmployee Posting Group"
                     ApplicationArea = Basic, Suite;
                     Caption = 'PF Total Payable Account';
                 }
-                field("Tax Code"; Rec."Tax Code")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Payslip Report"; Rec."Payslip Report")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Employment Tax Debit"; Rec."Employment Tax Debit")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Employment Tax Credit"; Rec."Employment Tax Credit")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Tax Code"; Rec."Tax Code")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("Payslip Report"; Rec."Payslip Report")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("Employment Tax Debit"; Rec."Employment Tax Debit")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("Employment Tax Credit"; Rec."Employment Tax Credit")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("NHIF Employee Account"; Rec."NHIF Employee Account")
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("SHIF Account";Rec."SHIF Account")
+                field("SHIF Account"; Rec."SHIF Account")
                 {
-                    
+
                 }
             }
         }

@@ -285,6 +285,10 @@ table 52185614 "PR Transaction Codes"
         field(54; "Posting to Other Savings"; Boolean)
         {
         }
+        field(55; "Salary Type"; enum "Salary Type")
+        {
+
+        }
     }
 
     keys

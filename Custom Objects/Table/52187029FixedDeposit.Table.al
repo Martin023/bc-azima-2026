@@ -221,7 +221,7 @@ table 52187029 "Fixed Deposit Contract"
         {
             Description = 'LookUp to Savings Account Table';
             TableRelation = "Savings Accounts" WHERE("Member No." = FIELD("Member No."),
-                                                      "Product Category" = FILTER("FOSA Account" | Savcol));
+                                                      "Product Category" = FILTER("FOSA Account" | Savcol | holiday));
         }
         field(25; "Fixed Deposit Account No."; Code[20])
         {

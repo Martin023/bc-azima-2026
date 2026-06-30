@@ -70,17 +70,17 @@ page 52185659 "PR Salary List (ALL)"
                     RunObject = Page "PR Employee Transactions";
                     RunPageLink = "Employee Code" = FIELD("No.");
                 }
-                action("Salary Arrears")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Salary Arrears';
-                    Image = SelectEntries;
-                    Promoted = true;
-                    PromotedCategory = Category4;
-                    PromotedIsBig = true;
-                    RunObject = Page "pr Salary Arrears";
-                    RunPageLink = "No." = FIELD("No.");
-                }
+                // action("Salary Arrears")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Salary Arrears';
+                //     Image = SelectEntries;
+                //     Promoted = true;
+                //     PromotedCategory = Category4;
+                //     PromotedIsBig = true;
+                //     RunObject = Page "pr Salary Arrears";
+                //     RunPageLink = "No." = FIELD("No.");
+                // }
             }
         }
         area(processing)
@@ -283,9 +283,9 @@ page 52185659 "PR Salary List (ALL)"
                         if HREmployees.Find('-') then begin
                             repeat
                                 Loans.Reset;
-                                Loans.SetRange("Staff No", HREmployees."No.");
-                                Loans.CalcFields("Outstanding Balance", "Outstanding Interest", "Outstanding Bills");
-                                //Loans.SetFilter(Loans."Outstanding Balance", '>%1', 0);
+                                Loans.SetRange(Loans."Member No.", HREmployees."Member No.");
+                                Loans.CalcFields("Outstanding Balance", "Outstanding Interest", "Total Balance");
+                                Loans.SetFilter(Loans."Total Balance", '>%1', 0);
                                 if Loans.Find('-') then begin
                                     repeat
                                         PREmployeeTransactions.Reset;
