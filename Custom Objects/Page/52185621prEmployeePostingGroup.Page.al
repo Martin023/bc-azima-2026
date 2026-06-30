@@ -36,12 +36,22 @@ page 52185621 "prEmployee Posting Group"
                 field("SSF Tier 1 Payable Account"; Rec."SSF Tier 1 Payable Account")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'SSF Tier 2 Payable Account';
+                    Caption = 'SSF Tier 1 Payable Account';
                 }
                 field("SSF Tier 2 Payable Account"; Rec."SSF Tier 2 Payable Account")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'SSF Tier 3 Payable Account';
+                    Caption = 'SSF Tier 2 Payable Account';
+                }
+                field("SSF Tier 1 Emplyer Pay Account"; Rec."SSF Tier 1 Emplyer Pay Account")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'SSF Tier 1 Emplyer Pay Account';
+                }
+                field("SSF Tier 2 Emplyer Pay Account"; Rec."SSF Tier 2 Emplyer Pay Account")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'SSF Tier 1 Emplyer Pay Account';
                 }
                 // field("SSF Employee Account"; Rec."SSF Employee Account")
                 // {
@@ -87,7 +97,7 @@ page 52185621 "prEmployee Posting Group"
                 // {
                 //     ApplicationArea = Basic, Suite;
                 // }
-                field("NHIF Employee Account"; Rec."NHIF Employee Account")
+                field("NHIF Employee Account"; Rec."SHIF Employee Account")
                 {
                     ApplicationArea = Basic, Suite;
                 }

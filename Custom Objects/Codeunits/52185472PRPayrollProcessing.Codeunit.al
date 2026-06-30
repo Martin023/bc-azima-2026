@@ -2590,7 +2590,7 @@ Codeunit 52185472 "PR Payroll Processing"
                 NSSFEMPyer := PostingGroup."SSF Employer Account";
                 NSSFEMPyee := PostingGroup."SSF Tier 1 Payable Account";
                 NSSFEmpyee2 := PostingGroup."SSF Tier 2 Payable Account";
-                NHIFEMPyee := PostingGroup."NHIF Employee Account";
+                NHIFEMPyee := PostingGroup."SHIF Employee Account";
                 PensionEMPyer := PostingGroup."Pension Employer Acc";
                 ShifAccount := PostingGroup."SHIF Account";
             end

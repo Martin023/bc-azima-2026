@@ -1105,8 +1105,8 @@ page 52185714 "Member Application Single"
                         if not Rec."Self Employed" then begin
                             Rec.TestField("Employer Code");
                             // if rec."Employer Code" <> 'DIASPORA' then begin
-                            Rec.TestField("Payroll/Staff No.");
-                            Rec.TestField("Terms of Employment");
+                            // Rec.TestField("Payroll/Staff No.");
+                            // Rec.TestField("Terms of Employment");
                             // end;
 
                             // Rec.TestField("Work Station");

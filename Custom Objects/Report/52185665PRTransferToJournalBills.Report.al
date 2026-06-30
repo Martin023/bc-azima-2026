@@ -239,7 +239,7 @@ Report 52185665 "PR Transfer To Journal Bills"
                                 EmployerDed.SetRange(EmployerDed."Payroll Period", PeriodTrans."Payroll Period");
                                 if EmployerDed.Find('-') then begin
                                     //Credit Payables
-                                    CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."NHIF Employee Account",
+                                    CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."SHIF Employee Account",
                                     GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + '-' + PeriodTrans."Employee Code", 0,
                                    EmployerDed.Amount, PeriodTrans."Post As", '', SaccoTransactionType);
                                     // Message('SHIF Account 1 %1', PostingGroup."NHIF Employee Account");
@@ -265,11 +265,11 @@ Report 52185665 "PR Transfer To Journal Bills"
                                     Tier1Cont := prNSSF."Tier 1 Employee Deduction";
                                 end;
 
-                                CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."SSF Tier 1 Payable Account",
+                                CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."SSF Tier 1 Emplyer Pay Account",
                                 GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + ' tier 1', 0, Tier1Cont,
                                 PeriodTrans."Post As", '', SaccoTransactionType);
 
-                                CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."SSF Tier 2 Payable Account",
+                                CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."SSF Tier 2 Emplyer Pay Account",
                                 GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + ' tier 2', 0, PeriodTrans.Amount - Tier1Cont,
                                 PeriodTrans."Post As", '', SaccoTransactionType);
 

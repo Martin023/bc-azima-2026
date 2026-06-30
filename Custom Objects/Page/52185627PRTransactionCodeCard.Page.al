@@ -139,6 +139,11 @@ page 52185627 "PR Transaction Code Card"
                     ApplicationArea = Basic, Suite;
                     Caption = 'Is Loan/Coop';
                 }
+                field("Salary Type"; Rec."Salary Type")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Salary Type';
+                }
             }
             group("Other Set-Ups")
             {
