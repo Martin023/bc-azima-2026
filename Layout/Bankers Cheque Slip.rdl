@@ -22,7 +22,7 @@
             <Sizing>FitProportional</Sizing>
             <Top>0.2cm</Top>
             <Left>0.5cm</Left>
-            <Height>2.5cm</Height>
+            <Height>2.1cm</Height>
             <Width>5cm</Width>
             <Style>
               <Border>
@@ -426,7 +426,7 @@
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Fields!AccountNo.Value</Value>
+                    <Value>=Fields!MaskedAccountNo.Value</Value>
                     <Style />
                   </TextRun>
                 </TextRuns>
@@ -440,6 +440,40 @@
             <Height>0.6cm</Height>
             <Width>19cm</Width>
             <ZIndex>12</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="ProductTypeBox">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Fields!ProductTypeDescription.Value</Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>7.5cm</Top>
+            <Left>0.5cm</Left>
+            <Height>0.47938cm</Height>
+            <Width>19cm</Width>
+            <ZIndex>13</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -478,11 +512,11 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>7.7cm</Top>
+            <Top>8.35875cm</Top>
             <Left>0.5cm</Left>
             <Height>0.8cm</Height>
             <Width>19cm</Width>
-            <ZIndex>13</ZIndex>
+            <ZIndex>14</ZIndex>
             <Style>
               <Border>
                 <Color>LightGrey</Color>
@@ -519,11 +553,11 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>8.8cm</Top>
+            <Top>9.35875cm</Top>
             <Left>0.5cm</Left>
-            <Height>1cm</Height>
+            <Height>0.8cm</Height>
             <Width>19cm</Width>
-            <ZIndex>14</ZIndex>
+            <ZIndex>15</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -535,11 +569,11 @@
             </Style>
           </Textbox>
           <Line Name="ChargesSeparator">
-            <Top>10cm</Top>
+            <Top>10.35875cm</Top>
             <Left>0.5cm</Left>
             <Height>0cm</Height>
             <Width>19cm</Width>
-            <ZIndex>15</ZIndex>
+            <ZIndex>16</ZIndex>
             <Style>
               <Border>
                 <Color>LightGrey</Color>
@@ -572,11 +606,11 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>10.2cm</Top>
+            <Top>10.55875cm</Top>
             <Left>1cm</Left>
             <Height>0.6cm</Height>
             <Width>18cm</Width>
-            <ZIndex>16</ZIndex>
+            <ZIndex>17</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -603,11 +637,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>11cm</Top>
+            <Top>11.35875cm</Top>
             <Left>1cm</Left>
             <Height>0.6cm</Height>
             <Width>18cm</Width>
-            <ZIndex>17</ZIndex>
+            <ZIndex>18</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -634,11 +668,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>11.8cm</Top>
+            <Top>12.15875cm</Top>
             <Left>1cm</Left>
             <Height>0.6cm</Height>
             <Width>18cm</Width>
-            <ZIndex>18</ZIndex>
+            <ZIndex>19</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -665,11 +699,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>12.6cm</Top>
+            <Top>12.95875cm</Top>
             <Left>1cm</Left>
             <Height>0.6cm</Height>
             <Width>18cm</Width>
-            <ZIndex>19</ZIndex>
+            <ZIndex>20</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -705,11 +739,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>13.5cm</Top>
+            <Top>13.85875cm</Top>
             <Left>1cm</Left>
             <Height>0.6cm</Height>
             <Width>18cm</Width>
-            <ZIndex>20</ZIndex>
+            <ZIndex>21</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -740,11 +774,11 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>14.3cm</Top>
+            <Top>14.65875cm</Top>
             <Left>0.5cm</Left>
             <Height>0.7cm</Height>
             <Width>19cm</Width>
-            <ZIndex>21</ZIndex>
+            <ZIndex>22</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -756,7 +790,7 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>15.2cm</Height>
+        <Height>15.46458cm</Height>
         <Style />
       </Body>
       <Width>19.60762cm</Width>
@@ -772,7 +806,7 @@
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>0.84667cm</Height>
+          <Height>2.01084cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <Style>
@@ -1026,6 +1060,15 @@ End Function
         </Field>
         <Field Name="CashierName">
           <DataField>CashierName</DataField>
+        </Field>
+        <Field Name="MaskedAccountNo">
+          <DataField>MaskedAccountNo</DataField>
+        </Field>
+        <Field Name="CashierNameOnly">
+          <DataField>CashierNameOnly</DataField>
+        </Field>
+        <Field Name="ProductTypeDescription">
+          <DataField>ProductTypeDescription</DataField>
         </Field>
         <Field Name="ReportForNavId_8541">
           <DataField>ReportForNavId_8541</DataField>

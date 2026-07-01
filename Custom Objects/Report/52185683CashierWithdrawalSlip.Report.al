@@ -71,6 +71,7 @@ report 52185683 "Cashier Withdrawal Slip"
             column(Till_Name; "Till Name") {}
             column(Branch_code; Transactions."Global Dimension 1 Code") {}
             column(Branch_Name; BranchName) {}
+            column(ProductTypeDescription; ProductTypeDescription) {}
             column(Reprint; Reprint) {}
             column(ReprintDate; ReprintDate) {}
             column(ReprintTime; ReprintTime) {}
@@ -125,6 +126,7 @@ report 52185683 "Cashier Withdrawal Slip"
                 CashierName := '';
                 MaskedAccountNo := '';
                 CashierNameOnly := '';
+                ProductTypeDescription := '';
 
                 user.Reset();
                 user.SetRange("User Name", Transactions.Cashier);
@@ -136,12 +138,19 @@ report 52185683 "Cashier Withdrawal Slip"
                         CashierNameOnly := CashierName;
                 end;
 
-                if StrLen("Account No") > 4 then begin
-                    MaskedAccountNo := CopyStr("Account No", 1, 2) + 
-                                      PadStr('', StrLen("Account No") - 4, '*') + 
+                if StrLen("Account No") > 5 then begin
+                    MaskedAccountNo := CopyStr("Account No", 1, 3) + 
+                                      PadStr('', StrLen("Account No") - 5, '*') + 
                                       CopyStr("Account No", StrLen("Account No") - 1, 2);
                 end else
                     MaskedAccountNo := "Account No";
+
+                ProductFactory.Reset();
+                ProductFactory.SetRange("Product ID", "Product Type");
+                if ProductFactory.FindFirst() then
+                    ProductTypeDescription := ProductFactory."Product Description"
+                else
+                    ProductTypeDescription := '';
 
                 SavingsLedgerEntry.Reset();
                 SavingsLedgerEntry.SetRange("Customer No.", "Account No");
@@ -256,6 +265,8 @@ report 52185683 "Cashier Withdrawal Slip"
         ActualChargeAmount: Decimal;
         ExciseDutyAmount: Decimal;
         ExciseDutyPercentage: Decimal;
+        ProductFactory: Record "Product Factory";
+        ProductTypeDescription: Text[100];
 
     local procedure InitTextVariable()
     begin

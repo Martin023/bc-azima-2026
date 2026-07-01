@@ -182,11 +182,13 @@ Report 52185685 "Cashier CHDeposit Slip"
             column(CashierName; CashierName)
             {
             }
-            //MASKED COLUMNS FOR PRIVACY
             column(MaskedAccountNo; MaskedAccountNo)
             {
             }
             column(CashierNameOnly; CashierNameOnly)
+            {
+            }
+            column(ProductTypeDescription; ProductTypeDescription)
             {
             }
             column(Reprint; Reprint)
@@ -234,28 +236,33 @@ Report 52185685 "Cashier CHDeposit Slip"
                 CashierName := '';
                 MaskedAccountNo := '';
                 CashierNameOnly := '';
+                ProductTypeDescription := '';
 
                 Transactions.CalcFields("Cheque Issueing Bank");
 
-                //FIXED: Use transaction cashier instead of current logged-in user
                 User.Reset;
                 User.SetRange("User Name", Transactions.Cashier);
                 if User.Find('-') then begin
                     CashierName := User."User Name";
-                    //Extract name after backslash
                     if StrPos(CashierName, '\') > 0 then
                         CashierNameOnly := CopyStr(CashierName, StrPos(CashierName, '\') + 1)
                     else
                         CashierNameOnly := CashierName;
                 end;
 
-                //Mask account number: show first 2 and last 2 digits
-                if StrLen("Account No") > 4 then begin
-                    MaskedAccountNo := CopyStr("Account No", 1, 2) + 
-                                      PadStr('', StrLen("Account No") - 4, '*') + 
+                if StrLen("Account No") > 5 then begin
+                    MaskedAccountNo := CopyStr("Account No", 1, 3) + 
+                                      PadStr('', StrLen("Account No") - 5, '*') + 
                                       CopyStr("Account No", StrLen("Account No") - 1, 2);
                 end else
                     MaskedAccountNo := "Account No";
+
+                ProductFactory.Reset();
+                ProductFactory.SetRange("Product ID", "Product Type");
+                if ProductFactory.FindFirst() then
+                    ProductTypeDescription := ProductFactory."Product Description"
+                else
+                    ProductTypeDescription := '';
 
                 Reprint := '';
                 if "Transaction Date" < Today then
@@ -342,8 +349,8 @@ Report 52185685 "Cashier CHDeposit Slip"
         StaffNo: Code[20];
         ProductName: Text[50];
         CashierName: Text;
-        MaskedAccountNo: Text; //Masked account number (first 2 + stars + last 2)
-        CashierNameOnly: Text; //Cashier name without domain prefix
+        MaskedAccountNo: Text;
+        CashierNameOnly: Text;
         User: Record User;
         CompanyInformation: Record "Company Information";
         CompanyAddress: Text;
@@ -354,6 +361,8 @@ Report 52185685 "Cashier CHDeposit Slip"
         ReprintTime: Time;
         OnesText: array[20] of Text[30];
         TensText: array[10] of Text[30];
+        ProductFactory: Record "Product Factory";
+        ProductTypeDescription: Text[100];
 
     local procedure InitTextVariable()
     begin
