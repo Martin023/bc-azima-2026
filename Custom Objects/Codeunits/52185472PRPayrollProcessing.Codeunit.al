@@ -1230,25 +1230,8 @@ Codeunit 52185472 "PR Payroll Processing"
           '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none, SalaryType::"Total Deduction");
 
 
-
-
-
-        //Net Pay: calculate the Net pay for the month in the following manner:
-        //>Nett = Gross - (xNssfAmount + curMyNhifAmt + PAYE + PayeArrears + prTotDeductions)
-        //...Tot Deductions also include (SumLoan + SumInterest)
-
         //curNetPay :=curGrossPay - (curNSSF + curNHIF + curPAYE + curPayeArrears + curTotalDeductions);//-curIncludeinNet;******HK
         curNetPay := curGrossPay - curTotalDeductions;
-
-
-        //curNetPay:=curNetPay+curIncludeinNet;
-        //>Nett = Nett - curExcessPension
-        //...Excess pension is only used for tax. Staff is not paid the amount hence substract it
-        // curNetPay := curNetPay; //- curExcessPension
-
-        //>Nett = Nett - cSumEmployerDeductions
-        //...Employer Deductions are used for reporting as cost to company BUT dont affect Net pay
-        //curNetPay := curNetPay - curTotCompanyDed; //******Get Company Deduction*****
 
         curNetRnd_Effect := curNetPay - ROUND(curNetPay);
         curNetPay := ROUND(curNetPay, 0.01, '>'); //Check here//DERRICKNETPAY

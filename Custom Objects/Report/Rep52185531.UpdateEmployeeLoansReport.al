@@ -49,6 +49,7 @@ report 52185531 "Update Employee Loans Report"
                                 PREmployeeTransactions."End Date" := Loans."Expected Date of Completion";
                                 PREmployeeTransactions."Loan Interest Rate" := Loans.Interest;
                                 PREmployeeTransactions."Period Month" := PeriodMonth;
+                                PREmployeeTransactions."Payroll Period" := SelectedPeriod;
                                 PREmployeeTransactions."Period Year" := PeriodYear;
                                 PREmployeeTransactions.Insert();
 

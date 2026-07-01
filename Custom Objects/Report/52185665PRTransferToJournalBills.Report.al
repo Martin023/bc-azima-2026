@@ -61,10 +61,28 @@ Report 52185665 "PR Transfer To Journal Bills"
                                 SaccoTransactionType := SaccoTransactionType::" ";
                             if PeriodTrans."Journal Account Type" = Jac::Savings then
                                 SaccoTransactionType := SaccoTransactionType::" ";
-                            if PeriodTrans."Journal Account Type" <> Jac::Credit then
-                                CreateJnlEntry(PeriodTrans."Journal Account Type", PeriodTrans."Journal Account Code",
+                            if PeriodTrans."Journal Account Type" <> Jac::Credit then begin
+                                if PeriodTrans."Transaction Code" = 'NSSF' then begin
+                                    prNSSF.Reset;
+                                    prNSSF.SetCurrentkey(prNSSF.Tier);
+                                    if prNSSF.FindFirst then begin
+                                        Tier1Cont := prNSSF."Tier 1 Employee Deduction";
+                                    end;
+
+                                    CreateJnlEntry(PeriodTrans."Journal Account Type", PeriodTrans."Journal Account Code",
+                                 GlobalDim1, GlobalDim2, 'Employee tier 1 ' + PeriodTrans."Transaction Name", AmountToDebit, Tier1Cont,
+                                 PeriodTrans."Post As", PeriodTrans."Loan Number", SaccoTransactionType);
+
+                                    CreateJnlEntry(PeriodTrans."Journal Account Type", PeriodTrans."Journal Account Code",
+                                    GlobalDim1, GlobalDim2, 'Employee tier 2 ' + PeriodTrans."Transaction Name", AmountToDebit, (AmountToCredit - Tier1Cont),
+                                    PeriodTrans."Post As", PeriodTrans."Loan Number", SaccoTransactionType);
+                                end
+                                else begin
+                                    CreateJnlEntry(PeriodTrans."Journal Account Type", PeriodTrans."Journal Account Code",
                                   GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name", AmountToDebit, AmountToCredit,
-                                  PeriodTrans."Post As", PeriodTrans."Loan Number", SaccoTransactionType)
+                                  PeriodTrans."Post As", PeriodTrans."Loan Number", SaccoTransactionType);
+                                end;
+                            end
                             else
                                 if PeriodTrans."Journal Account Type" = Jac::Credit then begin
                                     if PeriodTrans."coop parameters" = PeriodTrans."coop parameters"::None then begin
@@ -256,17 +274,16 @@ Report 52185665 "PR Transfer To Journal Bills"
                                 end;
 
                                 CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."SSF Tier 1 Emplyer Pay Account",
-                                GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + ' tier 1', 0, Tier1Cont,
+                                GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + ' Employer tier 1 cont', 0, Tier1Cont,
                                 PeriodTrans."Post As", '', SaccoTransactionType);
 
                                 CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."SSF Tier 2 Emplyer Pay Account",
-                                GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + ' tier 2', 0, PeriodTrans.Amount - Tier1Cont,
+                                GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + ' Employer tier 2 cont', 0, PeriodTrans.Amount - Tier1Cont,
                                 PeriodTrans."Post As", '', SaccoTransactionType);
 
                                 //Debit Staff Expense
-
                                 CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."SSF Employer Account",
-                                GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name", PeriodTrans.Amount, 0, 1, '',
+                                GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + ' Employer NSSF expense', PeriodTrans.Amount, 0, 1, '',
                                 SaccoTransactionType);
                             end;
 
@@ -274,35 +291,6 @@ Report 52185665 "PR Transfer To Journal Bills"
 
                     until PeriodTrans.Next = 0;
                 end;
-
-
-                //Update Monthly Cont
-                PeriodTrans.Reset;
-                PeriodTrans.SetRange(PeriodTrans."Employee Code", "Employee Code");
-                PeriodTrans.SetRange(PeriodTrans."Payroll Period", SelectedPeriod);
-                PeriodTrans.SetRange("Transaction Code", 'D003');
-                if PeriodTrans.Find('-') then begin
-
-                    SavingsAccounts.Reset;
-                    SavingsAccounts.SetRange("Payroll/Staff No.", PeriodTrans."Employee Code");
-                    //SavingsAccounts.SetFilter("Employer Code", '00');
-                    SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
-                    if SavingsAccounts.Find('-') then begin
-                        SavingsAccounts."Monthly Contribution" := PeriodTrans.Amount;
-                        SavingsAccounts.Modify;
-
-                        Members.Reset;
-                        Members.SetRange("No.", SavingsAccounts."Member No.");
-                        Members.SetFilter(Status, '%1', Members.Status::New);
-                        if Members.FindFirst then begin
-                            Members.Status := Members.Status::Active;
-                            Members.Modify;
-                        end;
-
-                    end;
-                end;
-
-
 
             end;
 
@@ -426,48 +414,10 @@ Report 52185665 "PR Transfer To Journal Bills"
         EmployerNSSFNo: Integer;
         GenJnlLine: Record "Gen. Journal Line";
         LineNo: Integer;
-        DocumentNo: Code[100];
-        NHIfAmount: Decimal;
-        totNHIFTotalAmount: Decimal;
-        PAYEAmount: Decimal;
-        totPAYETotalAmount: Decimal;
-        PENSIONAmount: Decimal;
-        totPENSIONTotalAmount: Decimal;
-        totHELBTotalAmount: Decimal;
-        HELBAMOUNT: Decimal;
-        totGRATTotalAmount: Decimal;
-        GRATAMOUNT: Decimal;
-        ICEAAMOUNT: Decimal;
-        totSACCOTotalAmount: Decimal;
-        SACCOAMOUNT: Decimal;
-        totICEATotalAmount: Decimal;
-        Pension: Decimal;
-        NssfAmountemployer: Decimal;
-        TotalNssfAmountemployer: Decimal;
-        totTotalNssfAmountemployer: Decimal;
-        NssfAmountemployee: Decimal;
-        TotalNssfAmountemployee: Decimal;
 
-        totTotalNssfAmountemployee: Decimal;
         ICEATotalAmount: Decimal;
         GeneraljnlLine: Record "Gen. Journal Line";
         GenJnlBatch: Record "Gen. Journal Batch";
-        gRATAMOUNT1: Decimal;
-        prsalrycard: Record "PR Salary Card";
-        amount: Decimal;
-        TOTALamountGRAT: Decimal;
-        nETPAY: Decimal;
-        Finlemsacco: Decimal;
-        csrcontribution: Decimal;
-        sALARYaDVANCE: Decimal;
-        CarLoanInt: Decimal;
-        Staffloanint: Decimal;
-        "prEmployee Transactions": Record "PR Employee Transactions";
-        TotalAmountarrears: Decimal;
-        GRATAMOUNTarrears: Decimal;
-        totGRATTotalAmount1: Decimal;
-        totGRATTotalAmounttot: Decimal;
-        toGrossAmount: Decimal;
         "Slip/Receipt No": Code[50];
         PostingGroup: Record "prEmployee Posting Group";
         strEmpName: Text[150];
@@ -515,8 +465,7 @@ Report 52185665 "PR Transfer To Journal Bills"
         GeneraljnlLine."Account Type" := AccountType;
         GeneraljnlLine."Account No." := AccountNo;
         GeneraljnlLine.Validate(GeneraljnlLine."Account No.");
-        GeneraljnlLine.Description := Description + ' - PF No. ' + objEmp."No.";
-        ;
+        GeneraljnlLine.Description := CopyStr((Description + ' - PF No. ' + objEmp."No."), 1, 50);
         if PostAs = Postas::Debit then begin
             GeneraljnlLine."Debit Amount" := DebitAmount;
             GeneraljnlLine.Validate("Debit Amount");
