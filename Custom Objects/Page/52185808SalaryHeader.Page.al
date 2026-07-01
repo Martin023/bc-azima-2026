@@ -273,7 +273,7 @@ page 52185808 "Salary Header"
                         //     Rec.TestField("Employer Code");
                         rec.TestField("Posting date");
 
-                        Selection := StrMenu(StrMenuTxt, 3);
+                        Selection := StrMenu(StrMenuTxt, 1);
 
                         if Selection = 0 then
                             exit;
@@ -927,7 +927,9 @@ page 52185808 "Salary Header"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
+        rec."Date Entered" := Today;
         rec."Income Type" := rec."Income Type"::Salary;
+
     end;
 
     trigger OnAfterGetCurrRecord()

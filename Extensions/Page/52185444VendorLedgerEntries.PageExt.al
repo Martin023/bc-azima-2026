@@ -308,5 +308,18 @@ PageExtension 52185444 pageextension52185444 extends "Vendor Ledger Entries"
         }
     }
 
+    procedure GetVendorBalanceLCY(var VendorLedgerEntry: Record "Vendor Ledger Entry"): Decimal
+    var
+        RunningBalanceLCY: Decimal;
+    begin
+        CalcVendorBalance(rec."Entry No.", RunningBalanceLCY);
+        exit(RunningBalanceLCY);
+    end;
+
+    procedure CalcVendorBalance(EntryNo: Integer; var RunningBalanceLCY: Decimal)
+    var
+    begin
+        // vendorled
+    end;
 
 }

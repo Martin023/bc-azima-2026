@@ -35,7 +35,6 @@ Report 52185665 "PR Transfer To Journal Bills"
                 PeriodTrans.Reset;
                 PeriodTrans.SetRange(PeriodTrans."Employee Code", "Employee Code");
                 PeriodTrans.SetRange(PeriodTrans."Payroll Period", SelectedPeriod);
-                PeriodTrans.Setfilter(PeriodTrans."Transaction Code", '<>%1', 'NDPAYE');
                 if PeriodTrans.Find('-') then begin
                     repeat
 
@@ -185,11 +184,7 @@ Report 52185665 "PR Transfer To Journal Bills"
 
                                 end;
 
-                            //Pension  chacha
-                            if PeriodTrans."Transaction Code" = 'D001' then begin //Pension
-                                //if PeriodTrans."coop parameters" = PeriodTrans."coop parameters"::Pension then begin
-                                //if PeriodTrans
-                                //Get from Employer Deduction
+                            if PeriodTrans."Transaction Code" = 'D048' then begin //Pension
 
                                 EmployerDed.Reset;
                                 EmployerDed.SetRange(EmployerDed."Employee Code", PeriodTrans."Employee Code");
@@ -209,10 +204,8 @@ Report 52185665 "PR Transfer To Journal Bills"
                                 end;
                             end;
 
-                            // End of Pension
-                            // Housing Levy
-
-                            if PeriodTrans."Transaction Code" = 'D048' then begin
+                            // End of HousingLevy
+                            if PeriodTrans."Transaction Code" = 'D080' then begin
                                 EmployerDed.Reset;
                                 EmployerDed.SetRange(EmployerDed."Employee Code", PeriodTrans."Employee Code");
                                 EmployerDed.SetRange(EmployerDed."Transaction Code", PeriodTrans."Transaction Code");
@@ -229,7 +222,6 @@ Report 52185665 "PR Transfer To Journal Bills"
                                     SaccoTransactionType);
                                 end;
                             end;
-                            //Housing levy
 
                             //SHIF
                             if PeriodTrans."Transaction Code" = 'D049' then begin
@@ -252,8 +244,6 @@ Report 52185665 "PR Transfer To Journal Bills"
 
                                 end;
                             end;
-                            //SHIF
-
 
                             //NSSF
                             //if PeriodTrans."coop parameters" = PeriodTrans."coop parameters"::NSSF then begin
