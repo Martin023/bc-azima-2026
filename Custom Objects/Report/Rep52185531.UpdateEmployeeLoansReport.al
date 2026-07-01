@@ -28,6 +28,8 @@ report 52185531 "Update Employee Loans Report"
                             repeat
                                 PREmployeeTransactions.Reset();
                                 PREmployeeTransactions.SetRange("Employee Code", HREmployees."No.");
+                                PREmployeeTransactions.SetRange("Period Month", PeriodMonth);
+                                PREmployeeTransactions.SetRange("Period Year", PeriodYear);
                                 PREmployeeTransactions.SetRange("Transaction Code", PRTransactionCodes."Transaction Code");
                                 PREmployeeTransactions.SetRange("Loan Number", Loans."Loan No.");
                                 if PREmployeeTransactions.FindFirst then begin
@@ -36,6 +38,7 @@ report 52185531 "Update Employee Loans Report"
                                 PREmployeeTransactions.Init();
                                 PREmployeeTransactions."Employee Code" := HREmployees."No.";
                                 PREmployeeTransactions."Transaction Code" := PRTransactionCodes."Transaction Code";
+                                PREmployeeTransactions."Transaction Name" := PRTRansactionCodes."Transaction Name";
                                 PREmployeeTransactions."Loan Number" := Loans."Loan No.";
                                 PREmployeeTransactions."Interest Due" := Loans."Outstanding Interest";
                                 PREmployeeTransactions."Loan Interest Rate" := Loans.interest;
@@ -46,6 +49,7 @@ report 52185531 "Update Employee Loans Report"
                                 PREmployeeTransactions."End Date" := Loans."Expected Date of Completion";
                                 PREmployeeTransactions."Loan Interest Rate" := Loans.Interest;
                                 PREmployeeTransactions."Period Month" := PeriodMonth;
+                                PREmployeeTransactions."Payroll Period" := SelectedPeriod;
                                 PREmployeeTransactions."Period Year" := PeriodYear;
                                 PREmployeeTransactions.Insert();
 

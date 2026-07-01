@@ -30,20 +30,7 @@ table 52185784 "Salary Lines"
 
             trigger OnValidate()
             begin
-                if SalaryHeader.Get("Salary Header No.") then
-                    SalaryHeader.TestField("Employer Code");
-                Acc.Reset;
-                Acc.SetRange(Acc."Payroll/Staff No.", "Staff No.");
-                Acc.SetRange("Employer Code", SalaryHeader."Employer Code");
-                Acc.SetRange("Product Category", Acc."Product Category"::"FOSA Account");
-                if Acc.Find('-') then begin
-                    if "Account No." = '' then
-                        "Account No." := Acc."No.";
-                    "Member No." := Acc."Member No.";
-                    Status := Acc.Status;
-                    Blocked := Acc.Blocked;
-                    Name := Acc.Name;
-                end;
+       
             end;
         }
         field(4; Name; Text[50])
@@ -98,12 +85,6 @@ table 52185784 "Salary Lines"
             TableRelation = Customer."No." where("Account Type" = const("Employer Code"));
             trigger OnValidate()
             begin
-                /*
-               IF "Employer Code"<> SalProcessingHeader."Employer Code" THEN  BEGIN
-               "Employer/ Staff Mismatch":=TRUE;
-               MODIFY;
-               END;
-               */
 
             end;
         }
@@ -116,9 +97,6 @@ table 52185784 "Salary Lines"
         field(21; Status; Enum "Savings Account Status")//Option)
         {
             Editable = true;
-            // OptionCaption = ' ,New,Active,Dormant,Frozen,Withdrawal Application,Withdrawn,Deceased,Defaulter,Closed';
-            // OptionMembers = " ",New,Active,Dormant,Frozen,"Withdrawal Application",Withdrawn,Deceased,Defaulter,Closed;
-
             trigger OnValidate()
             begin
                 //IF (Status<>Status::New) OR (Status<>Status::Closed) THEN
