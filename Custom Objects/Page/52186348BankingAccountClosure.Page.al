@@ -309,6 +309,140 @@ page 52186348 "Banking Account Closure"
 
     //[Scope('OnPrem')]
 
+    // local procedure CloseAccount(AccClose: Record "Banking Account Closure")
+    // var
+    //     SavAcc: Record "Savings Accounts";
+    //     TransactionCharges: Record "Transaction Charges";
+    //     TransactionTypes: Record "Transaction Types";
+    //     AccType: Enum "Gen. Journal Account Type";
+    //     AccNo: Code[20];
+    //     TransType: Enum "Transaction Types";
+    //     BalAccType: Enum "Gen. Journal Account Type";
+    //     BalAccNo: Code[20];
+    //     Amt: Decimal;
+    //     JournalPosting: Codeunit "Journal Posting";
+    //     GenSetup: Record "General Set-Up";
+    //     DocNo: Code[20];
+    //     PDate: Date;
+    //     DActivity2: Code[20];
+    //     DBranch2: Code[20];
+    //     Jtemplate: Code[20];
+    //     Jbatch: Code[20];
+    //     RunBal: Decimal;
+    //     MemberNo: Code[20];
+    //     LineNo: Integer;
+    //     Salaccno: Code[20];
+    //     Temp: Record "Banking User Template";
+    //     SavBal: Decimal;
+    // begin
+    //     //Auto Activate Dormant On Loan Posting
+    //     GenSetup.Get;
+    //     Temp.Get(UserId);
+    //     //with SalHeaD do
+
+
+    //     Jtemplate := Temp."Cashier Journal Template";
+    //     JBatch := Temp."Cashier Journal Batch";
+    //     if Jtemplate = '' then
+    //         Error('Cashier Template must have a value.');
+    //     if Jbatch = '' then
+    //         Error('Cashier Batch must have a value.');
+
+    //     Rec.TestField("Account No");
+    //     GenJnlLine.Reset;
+    //     GenJnlLine.SetRange(GenJnlLine."Journal Template Name", JTemplate);
+    //     GenJnlLine.SetRange(GenJnlLine."Journal Batch Name", JBatch);
+    //     GenJnlLine.DeleteAll;
+
+    //     // SavAcc.Reset;
+    //     // SavAcc.get(rec."Account No");
+    //     // SavAcc.TestField(Status, SavAcc.Status::Dormant);
+    //     Gensetup.TestField("Closure Account Fee");
+    //     TransactionTypes.Reset;
+    //     TransactionTypes.SetRange(Code, GenSetup."Closure Account Fee");
+    //     if TransactionTypes.Find('-') then begin
+    //         TransactionCharges.Reset;
+    //         TransactionCharges.SetRange("Transaction Type", TransactionTypes.Code);
+    //         if TransactionCharges.Find('-') then begin
+    //             TransactionCharges.TestField("G/L Account");
+    //             if SavAcc.get(Rec."Account No") then begin
+    //                 // SavAcc.TestField(Status, SavAcc.Status::Dormant);
+    //                 SavAcc.CalcFields("Balance (LCY)");
+    //                 SavBal := SavAcc."Balance (LCY)";
+    //                 if SavBal >= TransactionCharges."Charge Amount" then begin
+    //                     PDate := rec."Closure Date";
+    //                     DocNo := rec.No;
+    //                     DActivity2 := rec."Global Dimension 1 Code";
+    //                     DBranch2 := rec."Global Dimension 2 Code";
+
+    //                     LineNo := LineNo + 10000;
+    //                     AccType := Acctype::"G/L Account";
+    //                     AccNo := TransactionCharges."G/L Account";
+    //                     TransType := Transtype::" ";
+    //                     BalAccType := Balacctype::"G/L Account";
+    //                     BalAccNo := '';
+    //                     Amt := TransactionCharges."Charge Amount";
+    //                     Amt := Amt * -1;
+    //                     JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, TransactionCharges.Description + SavAcc."No.", Amt, AccNo, PDate, BalAccType,
+    //                   BalAccNo, '', DActivity2, DBranch2, TransType, Rec.No, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+    //                     LineNo := LineNo + 10000;
+    //                     AccType := Acctype::Savings;
+    //                     AccNo := SavAcc."No.";
+    //                     TransType := Transtype::" ";
+    //                     BalAccType := Balacctype::"G/L Account";
+    //                     BalAccNo := '';
+    //                     Amt := TransactionCharges."Charge Amount";
+
+    //                     JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, TransactionCharges.Description + SavAcc."No.", Amt, AccNo, PDate, BalAccType,
+    //                   BalAccNo, '', DActivity2, DBranch2, TransType, Rec.No, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+    //                     if TransactionCharges."Recover Excise Duty" = true then begin
+    //                         GenSetup.TestField("Excise Duty G/L");
+    //                         GenSetup.TestField("Excise Duty (%)");
+    //                         LineNo := LineNo + 10000;
+    //                         AccType := Acctype::"G/L Account";
+    //                         Amt := TransactionCharges."Charge Amount";
+    //                         AccNo := GenSetup."Excise Duty G/L";
+    //                         TransType := Transtype::" ";
+    //                         BalAccType := Balacctype::"G/L Account";
+    //                         BalAccNo := '';
+    //                         Amt := Amt * GenSetup."Excise Duty (%)" * 0.01;
+    //                         JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, CopyStr((TransactionCharges.Description + SavAcc."No." + '-Excise Duty'), 1, 50), Amt * -1, AccNo, PDate, BalAccType,
+    //                         BalAccNo, '', DActivity2, DBranch2, TransType, Rec.No, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+    //                         LineNo := LineNo + 10000;
+    //                         GenSetup.TestField("Excise Duty G/L");
+    //                         GenSetup.TestField("Excise Duty (%)");
+    //                         Amt := TransactionCharges."Charge Amount";
+    //                         AccType := Acctype::Savings;
+    //                         AccNo := SavAcc."No.";
+    //                         TransType := Transtype::" ";
+    //                         BalAccType := Balacctype::Savings;
+    //                         BalAccNo := '';
+    //                         Amt := Amt * GenSetup."Excise Duty (%)" * 0.01;
+    //                         JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, CopyStr((TransactionCharges.Description + SavAcc."No." + '-Excise Duty'), 1, 50), Amt, AccNo, PDate, BalAccType,
+    //                         BalAccNo, '', DActivity2, DBranch2, TransType, Rec.No, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+    //                     end;
+    //                     SavAcc.Status := SavAcc.Status::Closed;
+    //                     SavAcc."Status Change Reason" := 'Account Closure';
+    //                     SavAcc.Modify;
+    //                 end;
+    //                 JournalPosting.CompletePosting(Jtemplate, JBatch);
+    //                 // if SavAcc.Blocked <> SavAcc.Blocked::" " then begin
+    //                 //     SavAcc.Blocked := SavAcc.Blocked::" ";
+
+    //                 // end;
+    //             end else
+    //                 Error('There is no enough balance to charge closure fee.');
+
+    //         end;
+
+    //     end else error('There is no transaction type set up for closure fee. ');
+
+    // end;
+
     local procedure CloseAccount(AccClose: Record "Banking Account Closure")
     var
         SavAcc: Record "Savings Accounts";
@@ -334,6 +468,10 @@ page 52186348 "Banking Account Closure"
         Salaccno: Code[20];
         Temp: Record "Banking User Template";
         SavBal: Decimal;
+        GlobalFunc : Codeunit "Global Functions";
+        FosaAccountNo : Code[100];
+        FosaBal : decimal;
+        TotalCharges : decimal;
     begin
         //Auto Activate Dormant On Loan Posting
         GenSetup.Get;
@@ -357,9 +495,10 @@ page 52186348 "Banking Account Closure"
         // SavAcc.Reset;
         // SavAcc.get(rec."Account No");
         // SavAcc.TestField(Status, SavAcc.Status::Dormant);
-        Gensetup.TestField("Closure Account Fee");
+        Rec.TestField("Transaction Type");
+        //Gensetup.TestField("Closure Account Fee");
         TransactionTypes.Reset;
-        TransactionTypes.SetRange(Code, GenSetup."Closure Account Fee");
+        TransactionTypes.SetRange(Code, Rec."Transaction Type");
         if TransactionTypes.Find('-') then begin
             TransactionCharges.Reset;
             TransactionCharges.SetRange("Transaction Type", TransactionTypes.Code);
@@ -367,9 +506,15 @@ page 52186348 "Banking Account Closure"
                 TransactionCharges.TestField("G/L Account");
                 if SavAcc.get(Rec."Account No") then begin
                     // SavAcc.TestField(Status, SavAcc.Status::Dormant);
+                    Clear(fosaAccountNo);
+                    clear(fosaBal);
+                    clear(totalCharges);
+                    fosaAccountNo := GlobalFunc.GetFOSAAccount(SavAcc."Member No.");
+                    totalCharges := GlobalFunc.getChargesAmt(TransactionTypes.Code,0);
+                    FosaBal := SavAcc.GetAvailableBalance(fosaAccountNo);
                     SavAcc.CalcFields("Balance (LCY)");
                     SavBal := SavAcc."Balance (LCY)";
-                    if SavBal >= TransactionCharges."Charge Amount" then begin
+                    if FosaBal >= totalCharges then begin
                         PDate := rec."Closure Date";
                         DocNo := rec.No;
                         DActivity2 := rec."Global Dimension 1 Code";
@@ -428,18 +573,20 @@ page 52186348 "Banking Account Closure"
                         SavAcc.Status := SavAcc.Status::Closed;
                         SavAcc."Status Change Reason" := 'Account Closure';
                         SavAcc.Modify;
-                    end;
-                    JournalPosting.CompletePosting(Jtemplate, JBatch);
+                        JournalPosting.CompletePosting(Jtemplate, JBatch);
+                    end else
+                        Error('There is no enough balance to charge closure fee.');
                     // if SavAcc.Blocked <> SavAcc.Blocked::" " then begin
                     //     SavAcc.Blocked := SavAcc.Blocked::" ";
 
                     // end;
                 end else
-                    Error('There is no enough balance to charge closure fee.');
+                    Error('Savings account %1 does not exist.', Rec."Account No");
 
-            end;
+            end else
+                Error('There is no transaction charge set up for the closure fee transaction type.');
 
-        end else error('There is no transaction type set up for closure fee.');
+        end else Error('There is no transaction type set up for closure fee.');
 
     end;
 
