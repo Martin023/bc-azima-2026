@@ -50,11 +50,20 @@ table 52185766 "Bulk SMS Lines"
         {
             DataClassification = ToBeClassified;
         }
+        field(8; "Deduction Status"; Option)
+        {
+            OptionMembers = Successfull,"Partial Deduction",Failed;
+
+        }
+        Field(9; "Sto Number"; code[50])
+        {
+
+        }
     }
 
     keys
     {
-        key(Key1; No, "Code", Description, "Member No")
+        key(Key1; No, "Code", Description, "Member No", "Sto Number")
         {
             Clustered = true;
         }
