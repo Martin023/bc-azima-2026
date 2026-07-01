@@ -28,8 +28,9 @@ table 52185881 "InterBank Transfers"
         {
             //TableRelation = "Bank Account"; //WHERE("Global Dimension 1 Code" = FIELD("Source Depot Code")); //, "Bank Type" = filter(Control));
 
-            TableRelation = IF ("Transfer Type" = filter("Treasury Requisition")) "Bank Account" WHERE("Global Dimension 1 Code" = field("Source Depot Code"),
-                                                                                                        "Bank Type" = filter(Control))
+            // TableRelation = IF ("Transfer Type" = filter("Treasury Requisition")) "Bank Account" WHERE("Global Dimension 1 Code" = field("Source Depot Code"),
+            //                                                                                             "Bank Type" = filter(Control))
+            TableRelation = IF ("Transfer Type" = filter("Treasury Requisition")) "Bank Account"
             ELSE
             IF ("Transfer Type" = filter("Normal Transfer")) "Bank Account";
         }
