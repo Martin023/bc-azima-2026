@@ -2,7 +2,7 @@ namespace AZIMA.AZIMA;
 
 using Microsoft.Purchases.Document;
 
-pageextension 52185428 "52185428" extends "Purchase Quote"
+pageextension 52185428 "Purchase Quote EXT" extends "Purchase Quote"
 {
     //Unsupported feature: Property Modification (PromotedActionCategoriesML) on ""Purchase Quote"(Page 49)".
 

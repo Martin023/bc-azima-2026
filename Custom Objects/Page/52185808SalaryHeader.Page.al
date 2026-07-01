@@ -172,7 +172,7 @@ page 52185808 "Salary Header"
             action("Import Salaries")
             {
                 ApplicationArea = Basic, Suite;
-                Caption = 'Import Salaries';
+                Caption = 'Import Salaries (Employer Code&PF No.)';
                 Image = Import;
                 Promoted = true;
                 PromotedCategory = Process;
@@ -182,6 +182,31 @@ page 52185808 "Salary Header"
                 var
                     SalLines: Record "Salary Lines";
                     ImportSalaries: XmlPort "Import Salaries";
+                begin
+                    if rec.Posted then error('You cannot import salaries for a posted batch');
+                    SalLines.Reset;
+                    SalLines.SetRange("Salary Header No.", rec.No);
+                    if SalLines.findfirst() then
+                        error('You cannot import salaries for a batch that has already been imported. Kindly clear lines first');
+                    if rec.status <> rec.status::open then error('Salary batch status must be open');
+                    //xmlport.Run(XmlPort::"Import Salaries", true, true);
+                    ImportSalaries.SetHeaderNo(Rec.No);
+                    ImportSalaries.Run();
+                end;
+            }
+            action("Import Salaries ID No.")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Import Salaries (ID No.)';
+                Image = Import;
+                Promoted = true;
+                PromotedCategory = Process;
+
+
+                trigger OnAction()
+                var
+                    SalLines: Record "Salary Lines";
+                    ImportSalaries: XmlPort "Import Salaries ID";
                 begin
                     if rec.Posted then error('You cannot import salaries for a posted batch');
                     SalLines.Reset;

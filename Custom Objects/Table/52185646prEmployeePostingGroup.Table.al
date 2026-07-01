@@ -69,11 +69,19 @@ table 52185646 "prEmployee Posting Group"
         {
         }
 
-        field(19; "NHIF Employee Account"; Code[50])
+        field(19; "SHIF Employee Account"; Code[50])
         {
             TableRelation = "G/L Account";
         }
         field(30; "SHIF Account"; code[50])
+        {
+            TableRelation = "G/L Account";
+        }
+        field(31; "SSF Tier 1 Emplyer Pay Account"; Code[50])
+        {
+            TableRelation = "G/L Account";
+        }
+        field(32; "SSF Tier 2 Emplyer Pay Account"; Code[50])
         {
             TableRelation = "G/L Account";
         }
