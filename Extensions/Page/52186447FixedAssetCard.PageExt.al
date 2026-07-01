@@ -120,35 +120,50 @@ PageExtension 52186447 pageextension52186447 extends "Fixed Asset Card"
         }
         modify("FA Class Code")
         {
-            trigger Onaftervalidate()
+            trigger OnAfterValidate()
             var
                 FAClasses: Record "FA Class";
                 DepreciationBook: Record "FA Depreciation Book";
-                FACard: page "Fixed Asset Card";
+                FACard: Page "Fixed Asset Card";
             begin
-                FAClasses.RESET;
-                if FAClasses.get(rec."FA Class Code") then begin
+                FAClasses.Reset();
+                if FAClasses.Get(Rec."FA Class Code") then begin
                     if FAClasses."Depreciation Book Code" <> '' then begin
                         DepreciationBook.SetRange("FA No.", Rec."No.");
                         if DepreciationBook.FindSet() then
-                            DepreciationBook.DELETEALL;
-
-                        DepreciationBook.reset;
-                        DepreciationBook.init;
+                            DepreciationBook.DeleteAll();
+                        DepreciationBook.Reset();
+                        DepreciationBook.Init();
                         DepreciationBook."FA No." := Rec."No.";
                         DepreciationBook."Depreciation Book Code" := FAClasses."Depreciation Book Code";
-                        DepreciationBook.validate("Depreciation Method", FAClasses."Depreciation Method");
-                        DepreciationBook."Straight-Line %" := FAClasses."Straight-Line %";
-                        DepreciationBook.INSERT(true);
+                        DepreciationBook.Validate("Depreciation Method", FAClasses."Depreciation Method");
 
-                        FACard.UpdateDepreciationBook(rec."No.");
+                        case FAClasses."Depreciation Method" of
+                            FAClasses."Depreciation Method"::"Straight-Line":
+                                DepreciationBook."Straight-Line %" := FAClasses."Straight-Line %";
+
+                            FAClasses."Depreciation Method"::"Declining-Balance 1",
+                            FAClasses."Depreciation Method"::"Declining-Balance 2":
+                                DepreciationBook."Declining-Balance %" := FAClasses."Straight-Line %";
+
+                            FAClasses."Depreciation Method"::"Reducing Bal On NBV":
+                                DepreciationBook."Declining-Balance %" := FAClasses."Straight-Line %";
+
+                            FAClasses."Depreciation Method"::"DB1/SL",
+                            FAClasses."Depreciation Method"::"DB2/SL":
+                                begin
+                                    DepreciationBook."Declining-Balance %" := FAClasses."Straight-Line %";
+                                    DepreciationBook."Straight-Line %" := FAClasses."Straight-Line %";
+                                end;
+                        end;
+                        DepreciationBook.Insert(true);
+                        FACard.UpdateDepreciationBook(Rec."No.");
                         FACard.Update();
                     end;
                 end;
-                rec.Validate("Description");
+                Rec.Validate(Description);
             end;
         }
-
     }
 
     actions
