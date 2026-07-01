@@ -120,11 +120,32 @@ PageExtension 52186447 pageextension52186447 extends "Fixed Asset Card"
         }
         modify("FA Class Code")
         {
-            ApplicationArea = Basic;
-            trigger OnAfterValidate()
+            trigger Onaftervalidate()
+            var
+                FAClasses: Record "FA Class";
+                DepreciationBook: Record "FA Depreciation Book";
+                FACard: page "Fixed Asset Card";
             begin
-                PrefillDepreciationFromFAClass();
-                CurrPage.Update();
+                FAClasses.RESET;
+                if FAClasses.get(rec."FA Class Code") then begin
+                    if FAClasses."Depreciation Book Code" <> '' then begin
+                        DepreciationBook.SetRange("FA No.", Rec."No.");
+                        if DepreciationBook.FindSet() then
+                            DepreciationBook.DELETEALL;
+
+                        DepreciationBook.reset;
+                        DepreciationBook.init;
+                        DepreciationBook."FA No." := Rec."No.";
+                        DepreciationBook."Depreciation Book Code" := FAClasses."Depreciation Book Code";
+                        DepreciationBook.validate("Depreciation Method", FAClasses."Depreciation Method");
+                        DepreciationBook."Straight-Line %" := FAClasses."Straight-Line %";
+                        DepreciationBook.INSERT(true);
+
+                        FACard.UpdateDepreciationBook(rec."No.");
+                        FACard.Update();
+                    end;
+                end;
+                rec.Validate("Description");
             end;
         }
 
