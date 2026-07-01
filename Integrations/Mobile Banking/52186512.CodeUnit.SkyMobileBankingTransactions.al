@@ -1672,6 +1672,17 @@ codeunit 52186512 "Sky M-Banking Transactions"
                         );
                         exit(QualifiedAmount);
                     end;
+
+                    if ProdFac."Product ID" = '062' then begin
+                        QualifiedAmount := GetEmergencyLoanQualifiedAmount(
+                            MemberNo,
+                            ProductID,
+                            saccoAccount."No.",
+                            EligibilityFailReason
+                        );
+                        exit(QualifiedAmount);
+                    end;
+
                     Message('Requires Salary Processing: %1', Format(ProdFac."Requires Salary Processing"));
                     if ProdFac."Requires Salary Processing" = false then begin
                         EligibilityFailReason := '';
@@ -1809,7 +1820,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
                             amtQualified := 0;
                         end;
                     end;
-                    
+
                     EligibilityFailReason := '';
                     QualifiedAmount := amtQualified;
                     EXIT(QualifiedAmount);
@@ -4006,6 +4017,112 @@ codeunit 52186512 "Sky M-Banking Transactions"
         end;
 
         exit(TotalBalance);
+    end;
+
+    local procedure GetEmergencyLoanQualifiedAmount(
+    MemberNo: Code[20];
+    ProductID: Code[10];
+    FOSAAccountNo: Code[20];
+    var EligibilityFailReason: Text
+): Decimal
+    var
+        Members: Record Members;
+        ProdFac: Record "Product Factory";
+        FOSAAccount: Record "Savings Accounts";
+        SavLedger: Record "Savings Ledger Entry";
+        Globalfunc: Codeunit "Global Functions";
+        Incomsal: Enum "Salary Income Types";
+        AbilityAmount: Decimal;
+        QualifiedAmount: Decimal;
+        DepositCap: Decimal;
+        AvgFOSACredits: Decimal;
+        TotalCredits: Decimal;
+        StartDate: Date;
+        SalaryRatePct: Decimal;
+        FOSACreditsRatePct: Decimal;
+    begin
+        QualifiedAmount := 0;
+        AbilityAmount := 0;
+        DepositCap := 0;
+        SalaryRatePct := 66;
+        FOSACreditsRatePct := 50;
+
+        ProdFac.GET(ProductID);
+
+        Members.Reset();
+        Members.SetRange("No.", MemberNo);
+        Members.SetLoadFields("No.", "Member Class");
+        if not Members.FindFirst() then begin
+            EligibilityFailReason := 'Member NOT found';
+            exit(0);
+        end;
+
+        // Class A -> 66% of salary (standard working hours)
+        // All others (Class B) -> 50% of average FOSA statement credits
+        case Members."Member Class" of
+            'Class A':
+                begin
+                    AbilityAmount := Globalfunc.GetSmallestSalary(FOSAAccountNo, Incomsal::Salary);
+                    AbilityAmount := (SalaryRatePct / 100) * AbilityAmount;
+                end;
+            else begin
+                StartDate := CalcDate('<-12M>', Today());
+                TotalCredits := 0;
+
+                SavLedger.Reset();
+                SavLedger.SetRange("Customer No.", FOSAAccountNo);
+                SavLedger.SetRange("Posting Date", StartDate, Today());
+                SavLedger.SetFilter("Credit Amount", '>0');
+                SavLedger.CalcSums("Credit Amount");
+                TotalCredits := SavLedger."Credit Amount";
+
+                AvgFOSACredits := Round(TotalCredits / 12, 1);
+                AbilityAmount := (FOSACreditsRatePct / 100) * AvgFOSACredits;
+            end;
+        end;
+
+        if AbilityAmount <= 0 then begin
+            EligibilityFailReason := 'Applicant NOT eligible due to salary or FOSA statement credits. Qualified amount KES 0 is below the minimum of KES ' +
+                Format(ProdFac."Minimum Loan Amount");
+            exit(0);
+        end;
+
+        QualifiedAmount := AbilityAmount;
+
+        if QualifiedAmount > ProdFac."Maximum Loan Amount" then
+            QualifiedAmount := ProdFac."Maximum Loan Amount";
+
+        // 3X Deposits cap - FOSA balance only, Deposit Qualifier % = 300 on Product Factory
+        if ProdFac."Deposit Qualifier %" > 0 then begin
+            FOSAAccount.Reset();
+            FOSAAccount.SetRange("No.", FOSAAccountNo);
+            FOSAAccount.SetLoadFields(Balance);
+            if FOSAAccount.FindFirst() then begin
+                FOSAAccount.CalcFields(Balance);
+                DepositCap := Round(FOSAAccount.Balance * (ProdFac."Deposit Qualifier %" / 100), 1);
+
+                if DepositCap > ProdFac."Maximum Loan Amount" then
+                    DepositCap := ProdFac."Maximum Loan Amount";
+
+                if DepositCap < QualifiedAmount then
+                    QualifiedAmount := DepositCap;
+            end else begin
+                EligibilityFailReason := 'Applicant NOT eligible. FOSA account NOT found';
+                exit(0);
+            end;
+        end;
+
+        if QualifiedAmount < ProdFac."Minimum Loan Amount" then begin
+            EligibilityFailReason := StrSubstNo(
+                'Applicant NOT eligible. Qualified amount KES %1 is below the minimum of KES %2',
+                Format(Round(QualifiedAmount, 1)),
+                Format(ProdFac."Minimum Loan Amount")
+            );
+            exit(0);
+        end;
+
+        EligibilityFailReason := '';
+        exit(QualifiedAmount);
     end;
 
 
