@@ -237,6 +237,7 @@ page 52185609 "File Request Card"
                 trigger OnAction()
                 begin
                     Rec.TestField(status, Rec.Status::Open);
+                    rec.testField("File Number");
 
                     if not confirm('Are you sure you want to request file?') then exit;
                     Rec.Status := Rec.Status::Requested;

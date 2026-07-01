@@ -34,7 +34,7 @@ table 52185614 "PR Transaction Codes"
         {
             Description = 'Does staff receive cash for this transaction';
         }
-        field(72; "Not Pension"; Boolean)
+        field(72; Pension; Boolean)
         {
             Description = 'Not included in defined  contribution';
         }

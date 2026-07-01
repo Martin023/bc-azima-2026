@@ -63,7 +63,7 @@ page 52185627 "PR Transaction Code Card"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Not Pension"; Rec."Not Pension")
+                field(Pension; Rec.Pension)
                 {
                     ApplicationArea = Basic, Suite;
                 }

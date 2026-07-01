@@ -11,7 +11,7 @@
       <am:Name>PBIRB</am:Name>
       <am:Version>15.7.1813.16</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-06-28T19:12:37.8132952Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-06-30T17:19:36.9763080Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -1221,15 +1221,15 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox4">
-                          <rd:DefaultName>Textbox4</rd:DefaultName>
+                        <Textbox Name="NewMemberTarget">
+                          <rd:DefaultName>NewMemberTarget</rd:DefaultName>
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!NewMemberTarget.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
