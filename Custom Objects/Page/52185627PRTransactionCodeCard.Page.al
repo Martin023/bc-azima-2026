@@ -42,28 +42,36 @@ page 52185627 "PR Transaction Code Card"
                     ApplicationArea = Basic, Suite;
                     ValuesAllowed = None, Increasing, Reducing;
                 }
-                field("Is Cash"; Rec."Is Cash")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field(Taxable; Rec.Taxable)
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Is Cash"; Rec."Is Cash")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field(Taxable; Rec.Taxable)
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field(Allowables; Rec.Allowable)
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field(Deductible; Rec.Deductible)
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field(Deductible; Rec.Deductible)
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
 
-                FIELD("Is HLEVY"; Rec."Is HLEVY")
+                // FIELD("Is HLEVY"; Rec."Is HLEVY")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                field(SHIF; Rec.SHIF)
                 {
                     ApplicationArea = Basic, Suite;
                 }
                 field(Pension; Rec.Pension)
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field(NSSF; Rec.NSSF)
                 {
                     ApplicationArea = Basic, Suite;
                 }
@@ -85,18 +93,18 @@ page 52185627 "PR Transaction Code Card"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("iTax Grouping"; Rec."iTax Grouping")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("iTax Grouping"; Rec."iTax Grouping")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("Employer Deduction"; Rec."Employer Deduction")
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Group Code"; Rec."Group Code")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Group Code"; Rec."Group Code")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("Is Formula for employer"; Rec."Is Formula for employer")
                 {
                     ApplicationArea = Basic, Suite;
@@ -110,11 +118,6 @@ page 52185627 "PR Transaction Code Card"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field(Subledger; Rec.Subledger)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Posting to Subledger';
-                }
                 field("Product Min Cont."; Rec."Product Min Cont.")
                 {
                     ApplicationArea = Basic, Suite;
@@ -125,24 +128,40 @@ page 52185627 "PR Transaction Code Card"
                     ApplicationArea = Basic, Suite;
                     Caption = 'Debtor Posting Group';
                 }
-                group(Loans)
-                {
-                    Caption = 'Loans';
-                }
-                field("Interest Rate"; Rec."Interest Rate")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Interest Rate';
-                }
-                field("IsCoop/LnRep"; Rec."IsCoop/LnRep")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Is Loan/Coop';
-                }
+
+                // field("Interest Rate"; Rec."Interest Rate")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Interest Rate';
+                // }
+                // field("IsCoop/LnRep"; Rec."IsCoop/LnRep")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Is Loan/Coop';
+                // }
+
+            }
+            group(Incometype)
+            {
+                Caption = 'Salary Type & subledger';
                 field("Salary Type"; Rec."Salary Type")
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Salary Type';
+                }
+
+                field(Subledger; Rec.Subledger)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Posting to Subledger';
+                }
+            }
+            group("Loan Setup")
+            {
+                Caption = 'Loan Setup';
+                field("Loan Product Type"; Rec."Loan Product Type")
+                {
+                    ApplicationArea = Basic, Suite;
                 }
             }
             group("Other Set-Ups")
@@ -165,19 +184,19 @@ page 52185627 "PR Transaction Code Card"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Fringe Benefit"; Rec."Fringe Benefit")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Deduct Premium"; Rec."Deduct Premium")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("IsCoop/LnRep2"; Rec."IsCoop/LnRep")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Coop Parameter';
-                }
+                // field("Fringe Benefit"; Rec."Fringe Benefit")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("Deduct Premium"; Rec."Deduct Premium")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("IsCoop/LnRep2"; Rec."IsCoop/LnRep")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Coop Parameter';
+                // }
                 field("coop parameters"; Rec."coop parameters")
                 {
                     ApplicationArea = Basic, Suite;
@@ -187,18 +206,15 @@ page 52185627 "PR Transaction Code Card"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("IsLeave Allowance"; Rec."IsLeave Allowance")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Loan Product Type"; Rec."Loan Product Type")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Based on Loans"; Rec."Based on Loans")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("IsLeave Allowance"; Rec."IsLeave Allowance")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+
+                // field("Based on Loans"; Rec."Based on Loans")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("Product Category"; Rec."Product Category")
                 {
                     ApplicationArea = Basic, Suite;

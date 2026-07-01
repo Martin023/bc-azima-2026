@@ -3789,14 +3789,14 @@ page 52186778 "Finance Role Center"
                                         Recurring = const(false));
                     ToolTip = 'Post fixed asset transactions, such as acquisition and depreciation, in integration with the general ledger. The FA G/L Journal is a general journal, which is integrated into the general ledger.';
                 }
-                action("Fixed Assets Journals")
-                {
-                    ApplicationArea = FixedAssets;
-                    Caption = 'Fixed Assets Journals';
-                    RunObject = Page "FA Journal Batches";
-                    RunPageView = where(Recurring = const(false));
-                    ToolTip = 'Post fixed asset transactions, such as acquisition and depreciation book without integration to the general ledger.';
-                }
+                // action("Fixed Assets Journals")
+                // {
+                //     ApplicationArea = FixedAssets;
+                //     Caption = 'Fixed Assets Journals';
+                //     RunObject = Page "FA Journal Batches";
+                //     RunPageView = where(Recurring = const(false));
+                //     ToolTip = 'Post fixed asset transactions, such as acquisition and depreciation book without integration to the general ledger.';
+                // }
                 action("Calculate Depreciation")
                 {
                     ApplicationArea = FixedAssets;
@@ -4192,12 +4192,12 @@ page 52186778 "Finance Role Center"
                         RunObject = page "PR Payroll Periods";
                         ApplicationArea = Basic, Suite;
                     }
-                    action("Leave Allowances")
-                    {
-                        Caption = 'Leave Allowances';
-                        RunObject = page "Leave Allowances";
-                        ApplicationArea = Basic, Suite;
-                    }
+                    // action("Leave Allowances")
+                    // {
+                    //     Caption = 'Leave Allowances';
+                    //     RunObject = page "Leave Allowances";
+                    //     ApplicationArea = Basic, Suite;
+                    // }
                     // group("PR Tasks")
                     // {
                     //     Caption = 'Tasks';
@@ -4230,12 +4230,13 @@ page 52186778 "Finance Role Center"
                             RunObject = report "PR Transfer To Journal Bills";
                             ApplicationArea = Basic, Suite;
                         }
-                        action(GenjournalTemplate)
+                        action("General Journals")
                         {
-                            Caption = 'General Journal Template';
-                            RunObject = page "General Journal Template List";
                             ApplicationArea = Basic, Suite;
-
+                            Caption = 'BOSA Salary Journal';
+                            Image = Journal;
+                            RunObject = page "General Journal";
+                            RunPageView = where("Journal Template Name" = Const('GENERAL'), "Journal Batch Name" = Const('SALARIES'));
 
                         }
                     }
