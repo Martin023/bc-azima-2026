@@ -195,6 +195,41 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="ProductTypeBox">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!ProductTypeDescription.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontSize>7pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>ProductTypeBox</rd:DefaultName>
+            <Top>6.32903cm</Top>
+            <Left>0.1cm</Left>
+            <Height>0.53812cm</Height>
+            <Width>6.9cm</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
           <Textbox Name="Textbox27">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -223,11 +258,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox27</rd:DefaultName>
-            <Top>6.65264cm</Top>
+            <Top>7.65264cm</Top>
             <Left>0.1cm</Left>
             <Height>0.5cm</Height>
             <Width>7.6cm</Width>
-            <ZIndex>4</ZIndex>
+            <ZIndex>5</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -269,7 +304,7 @@
             <Left>0.1cm</Left>
             <Height>0.5cm</Height>
             <Width>7.6cm</Width>
-            <ZIndex>5</ZIndex>
+            <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -311,7 +346,7 @@
             <Left>0.1cm</Left>
             <Height>0.5cm</Height>
             <Width>7.6cm</Width>
-            <ZIndex>6</ZIndex>
+            <ZIndex>7</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -349,11 +384,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox28</rd:DefaultName>
-            <Top>6.15264cm</Top>
+            <Top>7.15264cm</Top>
             <Left>0.1cm</Left>
             <Height>0.5cm</Height>
             <Width>7.6cm</Width>
-            <ZIndex>7</ZIndex>
+            <ZIndex>8</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -387,7 +422,7 @@
             <Left>0.1cm</Left>
             <Height>0.5cm</Height>
             <Width>7.6cm</Width>
-            <ZIndex>8</ZIndex>
+            <ZIndex>9</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -420,11 +455,11 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>7.15264cm</Top>
+            <Top>8.15264cm</Top>
             <Left>0.1cm</Left>
             <Height>1cm</Height>
             <Width>7.6cm</Width>
-            <ZIndex>9</ZIndex>
+            <ZIndex>10</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -476,11 +511,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>8.15264cm</Top>
+            <Top>9.15264cm</Top>
             <Left>0.1cm</Left>
             <Height>1.5cm</Height>
             <Width>7.6cm</Width>
-            <ZIndex>10</ZIndex>
+            <ZIndex>11</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -517,11 +552,11 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>9.65264cm</Top>
+            <Top>10.65264cm</Top>
             <Left>0.1cm</Left>
             <Height>0.5cm</Height>
             <Width>7.6cm</Width>
-            <ZIndex>11</ZIndex>
+            <ZIndex>12</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -565,11 +600,11 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>10.15264cm</Top>
+            <Top>11.15264cm</Top>
             <Left>0.1cm</Left>
             <Height>1cm</Height>
             <Width>7.6cm</Width>
-            <ZIndex>12</ZIndex>
+            <ZIndex>13</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -600,11 +635,11 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>11.15264cm</Top>
+            <Top>12.15264cm</Top>
             <Left>0.1cm</Left>
             <Height>0.5cm</Height>
             <Width>7.6cm</Width>
-            <ZIndex>13</ZIndex>
+            <ZIndex>14</ZIndex>
             <Visibility>
               <Hidden>=IIf(First(Fields!Reprint.Value, "DataSet_Result") = "REPRINT", False, True)</Hidden>
             </Visibility>
@@ -625,7 +660,7 @@
             <Sizing>FitProportional</Sizing>
             <Height>2.27639cm</Height>
             <Width>6.83229cm</Width>
-            <ZIndex>14</ZIndex>
+            <ZIndex>15</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -633,7 +668,7 @@
             </Style>
           </Image>
         </ReportItems>
-        <Height>11.79375cm</Height>
+        <Height>12.95792cm</Height>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1056,6 +1091,9 @@ ZZWuQqAQKAQKgUKgECgECoFCYJMjsMEUp9pAtsnLU4lfCPQKgkKgEBgGgQ06UbhBxRoG0fJTCBQChcCo
         </Field>
         <Field Name="Till_Name">
           <DataField>Till_Name</DataField>
+        </Field>
+        <Field Name="ProductTypeDescription">
+          <DataField>ProductTypeDescription</DataField>
         </Field>
         <Field Name="Reprint">
           <DataField>Reprint</DataField>

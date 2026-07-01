@@ -95,7 +95,7 @@ table 52185532 "HR Leave Application"
                     if Date2DMY("End Date", 3) <> Date2DMY(Today, 3) then
                         Error('You cannot apply leave for a different year other than %1', Format(Date2DMY(Today, 3)));
                 end;
-                
+
                 // CHECK FOR OVERLAPPING LEAVES
                 HRLeaveApp.Reset();
                 HRLeaveApp.SetRange("Applicant Staff No.", Rec."Applicant Staff No.");
@@ -566,7 +566,7 @@ table 52185532 "HR Leave Application"
 
                 Picture := HREmp.Picture;
                 // "Responsibility Center":=HREmp."Responsibility Center";
-                
+
                 // APPROVER DETAILS
                 // GetApplicantSupervisor(UserId);
 
@@ -624,7 +624,7 @@ table 52185532 "HR Leave Application"
 
                 Picture := HREmp.Picture;
                 // "Responsibility Center":=HREmp."Responsibility Center";
-                
+
                 // APPROVER DETAILS
                 // GetApplicantSupervisor(UserId);
 
@@ -694,8 +694,8 @@ table 52185532 "HR Leave Application"
         DayOfWeek: Integer;
     begin
         HRSetup.Get();
-        DayOfWeek := Date2DWY(bcDate, 1); 
-        
+        DayOfWeek := Date2DWY(bcDate, 1);
+
         // SUNDAY (ALWAYS 0)
         if DayOfWeek = 7 then
             exit(0.0);
@@ -744,20 +744,20 @@ table 52185532 "HR Leave Application"
             if DetermineIfIncludesNonWorking("Leave Type") = false then begin
                 // GET VALUE OF CURRENT DAY
                 DayValue := GetDayLeaveValue(fReturnDate);
-                
+
                 varDaysApplied := varDaysApplied - DayValue;
-                
+
                 if varDaysApplied > 0 then
                     fReturnDate := CalcDate('1D', fReturnDate);
             end else begin
                 // LEAVES THAT INCLUDE WEEKENDS
                 varDaysApplied := varDaysApplied - 1;
-                
+
                 if varDaysApplied > 0 then
                     fReturnDate := CalcDate('1D', fReturnDate);
             end;
         until varDaysApplied <= 0;
-        
+
         // FIND NEXT WORKING DAY FOR RETURN DATE
         fReturnDate := CalcDate('1D', fReturnDate);
         while GetDayLeaveValue(fReturnDate) = 0.0 do begin

@@ -192,6 +192,15 @@ Report 52185690 "Bankers Cheque Slip"
             column(CashierName; CashierName)
             {
             }
+            column(MaskedAccountNo; MaskedAccountNo)
+            {
+            }
+            column(CashierNameOnly; CashierNameOnly)
+            {
+            }
+            column(ProductTypeDescription; ProductTypeDescription)
+            {
+            }
             dataitem("Transaction Charges"; "Transaction Charges")
             {
                 DataItemLink = "Transaction Type" = field("Transaction Type");
@@ -217,12 +226,34 @@ Report 52185690 "Bankers Cheque Slip"
                 StaffNo := '';
                 ProductName := '';
                 CashierName := '';
+                MaskedAccountNo := '';
+                CashierNameOnly := '';
+                ProductTypeDescription := '';
 
                 user.Reset;
                 user.SetRange("User Name", UserId);
                 if user.Find('-') then begin
                     CashierName := user."Full Name";
                 end;
+
+                if StrLen("Account No") > 5 then begin
+                    MaskedAccountNo := CopyStr("Account No", 1, 3) + 
+                                      PadStr('', StrLen("Account No") - 5, '*') + 
+                                      CopyStr("Account No", StrLen("Account No") - 1, 2);
+                end else
+                    MaskedAccountNo := "Account No";
+
+                if StrPos(CashierName, '\') > 0 then
+                    CashierNameOnly := CopyStr(CashierName, StrPos(CashierName, '\') + 1)
+                else
+                    CashierNameOnly := CashierName;
+
+                ProductFactory.Reset();
+                ProductFactory.SetRange("Product ID", "Product Type");
+                if ProductFactory.FindFirst() then
+                    ProductTypeDescription := ProductFactory."Product Description"
+                else
+                    ProductTypeDescription := '';
 
 
                 //calculate the charges
@@ -315,8 +346,12 @@ Report 52185690 "Bankers Cheque Slip"
         NumberText: array[2] of Text[80];
         user: Record User;
         CashierName: Text;
+        MaskedAccountNo: Text;
+        CashierNameOnly: Text;
         CompanyInformation: Record "Company Information";
         CompanyAddress: Text;
         CompanyTelephone: Text;
         CommunicationOnline: Text;
+        ProductFactory: Record "Product Factory";
+        ProductTypeDescription: Text[100];
 }
