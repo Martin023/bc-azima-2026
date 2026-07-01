@@ -506,15 +506,15 @@ page 52186348 "Banking Account Closure"
                 TransactionCharges.TestField("G/L Account");
                 if SavAcc.get(Rec."Account No") then begin
                     // SavAcc.TestField(Status, SavAcc.Status::Dormant);
-                    Clear(fosaAccountNo);
-                    clear(fosaBal);
-                    clear(totalCharges);
-                    fosaAccountNo := GlobalFunc.GetFOSAAccount(SavAcc."Member No.");
+                    // Clear(fosaAccountNo);
+                    // clear(fosaBal);
+                    // clear(totalCharges);
+                    // fosaAccountNo := GlobalFunc.GetFOSAAccount(SavAcc."Member No.");
                     totalCharges := GlobalFunc.getChargesAmt(TransactionTypes.Code,0);
-                    FosaBal := SavAcc.GetAvailableBalance(fosaAccountNo);
+                    //FosaBal := SavAcc.GetAvailableBalance(fosaAccountNo);
                     SavAcc.CalcFields("Balance (LCY)");
                     SavBal := SavAcc."Balance (LCY)";
-                    if FosaBal >= totalCharges then begin
+                    if SavBal >= totalCharges then begin
                         PDate := rec."Closure Date";
                         DocNo := rec.No;
                         DActivity2 := rec."Global Dimension 1 Code";
@@ -528,7 +528,7 @@ page 52186348 "Banking Account Closure"
                         BalAccNo := '';
                         Amt := TransactionCharges."Charge Amount";
                         Amt := Amt * -1;
-                        JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, TransactionCharges.Description + SavAcc."No.", Amt, AccNo, PDate, BalAccType,
+                        JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, TransactionCharges.Description + ' - ' + SavAcc."No.", Amt, AccNo, PDate, BalAccType,
                       BalAccNo, '', DActivity2, DBranch2, TransType, Rec.No, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
 
                         LineNo := LineNo + 10000;
@@ -539,7 +539,7 @@ page 52186348 "Banking Account Closure"
                         BalAccNo := '';
                         Amt := TransactionCharges."Charge Amount";
 
-                        JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, TransactionCharges.Description + SavAcc."No.", Amt, AccNo, PDate, BalAccType,
+                        JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, TransactionCharges.Description + ' - ' + SavAcc."No.", Amt, AccNo, PDate, BalAccType,
                       BalAccNo, '', DActivity2, DBranch2, TransType, Rec.No, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
 
                         if TransactionCharges."Recover Excise Duty" = true then begin
@@ -553,7 +553,7 @@ page 52186348 "Banking Account Closure"
                             BalAccType := Balacctype::"G/L Account";
                             BalAccNo := '';
                             Amt := Amt * GenSetup."Excise Duty (%)" * 0.01;
-                            JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, CopyStr((TransactionCharges.Description + SavAcc."No." + '-Excise Duty'), 1, 50), Amt * -1, AccNo, PDate, BalAccType,
+                            JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, CopyStr((TransactionCharges.Description + ' - '+ SavAcc."No." + '-Excise Duty'), 1, 50), Amt * -1, AccNo, PDate, BalAccType,
                             BalAccNo, '', DActivity2, DBranch2, TransType, Rec.No, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
 
                             LineNo := LineNo + 10000;
@@ -566,7 +566,7 @@ page 52186348 "Banking Account Closure"
                             BalAccType := Balacctype::Savings;
                             BalAccNo := '';
                             Amt := Amt * GenSetup."Excise Duty (%)" * 0.01;
-                            JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, CopyStr((TransactionCharges.Description + SavAcc."No." + '-Excise Duty'), 1, 50), Amt, AccNo, PDate, BalAccType,
+                            JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, CopyStr((TransactionCharges.Description + ' - ' + SavAcc."No." + ' -Excise Duty'), 1, 50), Amt, AccNo, PDate, BalAccType,
                             BalAccNo, '', DActivity2, DBranch2, TransType, Rec.No, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
 
                         end;
