@@ -69,15 +69,15 @@ page 52185935 "InterBank Transfers List"
         CurrPage.LookupMode := true;
     end;
 
-    trigger OnOpenPage()
-    begin
-        if UserMgt.GetPurchasesFilter() <> '' then begin
-            Rec.FilterGroup(2);
-            Rec.SetRange("Reciept Responsibility Center", UserMgt.GetPurchasesFilter());
-            //  setrange("global Dimension 2 Code",UserMgt.GetSetDimensions(userid,2));
-            Rec.FilterGroup(0);
-        end;
-    end;
+    // trigger OnOpenPage()
+    // begin
+    //     if UserMgt.GetPurchasesFilter() <> '' then begin
+    //         Rec.FilterGroup(2);
+    //         Rec.SetRange("Reciept Responsibility Center", UserMgt.GetPurchasesFilter());
+    //         //  setrange("global Dimension 2 Code",UserMgt.GetSetDimensions(userid,2));
+    //         Rec.FilterGroup(0);
+    //     end;
+    // end;
 
     var
         GenJnlLine: Record "Gen. Journal Line";

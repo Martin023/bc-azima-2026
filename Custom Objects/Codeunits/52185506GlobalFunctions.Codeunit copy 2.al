@@ -3167,13 +3167,13 @@ Codeunit 52185506 "Global Functions"
         end;
     end;
 
-    procedure GetFOSAAccount(member: record Members): Code[20];
+    procedure GetFOSAAccount(MemberNo: Code[50]): Code[50];
     var
         SavingsAccounts: Record "Savings Accounts";
     begin
         SavingsAccounts.RESET;
-        SavingsAccounts.SETRANGE("Member No.", member."No.");
-        SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"FOSA Account");
+        SavingsAccounts.SETRANGE("Member No.", MemberNo);
+        SavingsAccounts.SetRange("Loan Disbursement Account",true);
         if SavingsAccounts.FINDFIRST then
             exit(SavingsAccounts."No.")
         else

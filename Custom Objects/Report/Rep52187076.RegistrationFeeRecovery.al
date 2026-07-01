@@ -128,7 +128,7 @@ report 52187076 "Registration Fee Recovery"
                                     Clear(ShareCptBal);
                                     Clear(FosaMinBal);
 
-                                    FosaAccountNo := GlobalFunctions.GetFOSAAccount(Members);
+                                    FosaAccountNo := GlobalFunctions.GetFOSAAccount(Members."No.");
                                     if FosaAccountNo <> '' then
                                         FosaBal := SavingsAccounts.GetAvailableBalance(FosaAccountNo);
                                     
@@ -266,7 +266,7 @@ report 52187076 "Registration Fee Recovery"
                                 Clear(ShareCptBal);
                                 Clear(FosaMinBal);
                                 
-                                FosaAccountNo := GlobalFunctions.GetFOSAAccount(Members);
+                                FosaAccountNo := GlobalFunctions.GetFOSAAccount(Members."No.");
                                 if FosaAccountNo <> '' then
                                     FosaBal := SavingsAccounts.GetAvailableBalance(FosaAccountNo);
                                 
