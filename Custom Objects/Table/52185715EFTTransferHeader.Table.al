@@ -173,6 +173,30 @@ table 52185715 "RTGS Transfer Header"
         {
             FieldClass = FlowFilter;
         }
+        field(4; "Pay Mode"; Option)
+        {
+            OptionMembers = " ",Cash,Cheque,EFT,"RTGS";
+        }
+
+        field(102; "Cheque No"; Text[20])
+        {
+            trigger OnValidate()
+            var
+                ExistingRec: Record "InterBank Transfers";
+                CurrentChequeNo: Text[20];
+            begin
+                "Cheque No" := UpperCase("Cheque No");
+
+                CurrentChequeNo := "Cheque No";
+                ExistingRec.Reset();
+                ExistingRec.SetRange("Cheque No", CurrentChequeNo);
+                ExistingRec.SetFilter(No, '<>%1', "No.");
+                if ExistingRec.FindFirst() then
+                    Error('Cheque No. %1 has already been used in Transfer %2.',
+                        CurrentChequeNo,
+                        ExistingRec.No);
+            end;
+        }
     }
 
     keys
