@@ -289,6 +289,12 @@ table 52185614 "PR Transaction Codes"
         {
 
         }
+        field(56; NSSF; Boolean)
+        {
+        }
+        field(57; SHIF; Boolean)
+        {
+        }
     }
 
     keys

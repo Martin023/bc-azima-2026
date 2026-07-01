@@ -18,23 +18,6 @@ table 52185784 "Salary Lines"
 
             trigger OnValidate()
             begin
-                if SalaryHeader.Get("Salary Header No.") then
-                    SalaryHeader.TestField("Employer Code");
-                Acc.Reset;
-                Acc.SetRange(Acc."No.", "Account No.");
-                Acc.SetRange("Employer Code", SalaryHeader."Employer Code");
-                if Acc.Find('-') then begin
-                    if "Staff No." = '' then
-                        "Staff No." := Acc."Payroll/Staff No.";
-                    "Member No." := Acc."Member No.";
-                    Name := Acc.Name;
-                    "ID No." := Acc."ID No.";
-                    Status := Acc.Status;
-                    "ID No." := Acc."ID No.";
-                    Blocked := Acc.Blocked;
-                    Name := Acc.Name;
-                end;
-
                 if "Account No." = '' then begin
                     "Member No." := '';
                     Name := '';

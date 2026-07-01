@@ -350,6 +350,7 @@ Codeunit 52185472 "PR Payroll Processing"
                 prTransactionCodes.Reset;
                 prTransactionCodes.SetRange(prTransactionCodes."Transaction Code", prEmployeeTransactions."Transaction Code");
                 prTransactionCodes.SetRange(prTransactionCodes."Transaction Type", prTransactionCodes."transaction type"::Income);
+                prTransactionCodes.SetRange(prTransactionCodes.nssf, false);
                 if prTransactionCodes.Find('-') then begin
 
                     curTransAmount := 0;
@@ -535,11 +536,44 @@ Codeunit 52185472 "PR Payroll Processing"
          intYear, '', '', SelectedPeriod, Dept, '', Journalpostas::Debit, Journalpostingtype::"G/L Account", '', Coopparameters::none, SalaryType::"Taxable Pay");
 
         //NEW NSSF CODE HERE
+        // curNssf_Base_Amount := 0;
+        // if intNSSF_BasedOn = Intnssf_basedon::Gross then //>NSSF calculation can be based on:
+        //     curNssf_Base_Amount := curGrossPay;
+        // if intNSSF_BasedOn = Intnssf_basedon::Basic then
+        //     curNssf_Base_Amount := curBasicPay;
+
+        //NSSF moved to trans codes
         curNssf_Base_Amount := 0;
-        if intNSSF_BasedOn = Intnssf_basedon::Gross then //>NSSF calculation can be based on:
-            curNssf_Base_Amount := curGrossPay;
-        if intNSSF_BasedOn = Intnssf_basedon::Basic then
-            curNssf_Base_Amount := curBasicPay;
+        strExtractedFrml := '';
+        prEmployeeTransactions.Reset;
+        prEmployeeTransactions.SetRange(prEmployeeTransactions."Employee Code", strEmpCode);
+        prEmployeeTransactions.SetRange(prEmployeeTransactions."Period Month", intMonth);
+        prEmployeeTransactions.SetRange(prEmployeeTransactions."Period Year", intYear);
+        prEmployeeTransactions.SetRange(prEmployeeTransactions.Stopped, false);
+        if prEmployeeTransactions.Find('-') then begin
+            curNssf_Base_Amount := 0;
+            repeat
+                prTransactionCodes.Reset;
+                prTransactionCodes.SetRange(prTransactionCodes."Transaction Code", prEmployeeTransactions."Transaction Code");
+                prTransactionCodes.SetRange(prTransactionCodes."Transaction Type", prTransactionCodes."transaction type"::Deduction);
+                prTransactionCodes.SetRange(prTransactionCodes.nssf, true);
+                if prTransactionCodes.Find('-') then begin
+                    if prTransactionCodes."Is Formula" then begin
+                        strExtractedFrml := fnPureFormula(strEmpCode, intMonth, intYear, prTransactionCodes.Formula);
+                        if prEmployeeTransactions."No of Units" = 0 then begin
+                            curNssf_Base_Amount := ROUND(fnFormulaResult(strExtractedFrml), 0.01, '<'); //Get the calculated amount
+                                                                                                        //error('%1',curTransAmount);
+                        end else
+                            curNssf_Base_Amount := ROUND(fnFormulaResult(strExtractedFrml), 0.01, '<') * prEmployeeTransactions."No of Units";
+                    end else begin
+                        curNssf_Base_Amount := prEmployeeTransactions.Amount;
+                        //end;
+                    end;
+                end;
+            until prEmployeeTransactions.Next = 0;
+        end;
+
+
 
         //Get the NSSF amount
         curNSSF := 0;
@@ -599,6 +633,8 @@ Codeunit 52185472 "PR Payroll Processing"
                 PrTransactionCodes.Reset;
                 PrTransactionCodes.SetRange(PrTransactionCodes."Transaction Code", prEmployeeTransactions."Transaction Code");
                 PrTransactionCodes.SetRange(PrTransactionCodes."Transaction Type", prTransactionCodes."transaction type"::Deduction);
+                prTransactionCodes.SetRange(prTransactionCodes.nssf, false);
+                prTransactionCodes.SetRange(prTransactionCodes.SHIF, false);
                 pRTransactionCodes.Setrange(PrTransactionCodes.Allowable, True);
                 prTransactionCodes.setrange(pension, false);
                 if prTransactionCodes.Find('-') then begin
@@ -868,12 +904,41 @@ Codeunit 52185472 "PR Payroll Processing"
         ShifAmount := 0;
 
 
-        if intNHIF_BasedOn = Intnhif_basedon::Gross then //>NHIF calculation can be based on:
-            CurShifBaseAmount := curGrossPay;
-        if intNHIF_BasedOn = Intnhif_basedon::Basic then
-            CurShifBaseAmount := curBasicPay;
-        if intNHIF_BasedOn = Intnhif_basedon::"Taxable Pay" then
-            CurShifBaseAmount := curTaxablePay;
+        // if intNHIF_BasedOn = Intnhif_basedon::Gross then //>NHIF calculation can be based on:
+        //     CurShifBaseAmount := curGrossPay;
+        // if intNHIF_BasedOn = Intnhif_basedon::Basic then
+        //     CurShifBaseAmount := curBasicPay;
+        // if intNHIF_BasedOn = Intnhif_basedon::"Taxable Pay" then
+        //     CurShifBaseAmount := curTaxablePay;
+        CurShifBaseAmount := 0;
+        strExtractedFrml := '';
+        prEmployeeTransactions.Reset;
+        prEmployeeTransactions.SetRange(prEmployeeTransactions."Employee Code", strEmpCode);
+        prEmployeeTransactions.SetRange(prEmployeeTransactions."Period Month", intMonth);
+        prEmployeeTransactions.SetRange(prEmployeeTransactions."Period Year", intYear);
+        prEmployeeTransactions.SetRange(prEmployeeTransactions.Stopped, false);
+        if prEmployeeTransactions.Find('-') then begin
+            CurShifBaseAmount := 0;
+            repeat
+                prTransactionCodes.Reset;
+                prTransactionCodes.SetRange(prTransactionCodes."Transaction Code", prEmployeeTransactions."Transaction Code");
+                prTransactionCodes.SetRange(prTransactionCodes."Transaction Type", prTransactionCodes."transaction type"::Deduction);
+                prTransactionCodes.SetRange(prTransactionCodes.SHIF, true);
+                if prTransactionCodes.Find('-') then begin
+                    if prTransactionCodes."Is Formula" then begin
+                        strExtractedFrml := fnPureFormula(strEmpCode, intMonth, intYear, prTransactionCodes.Formula);
+                        if prEmployeeTransactions."No of Units" = 0 then begin
+                            CurShifBaseAmount := ROUND(fnFormulaResult(strExtractedFrml), 0.01, '<'); //Get the calculated amount
+                                                                                                      //error('%1',curTransAmount);
+                        end else
+                            CurShifBaseAmount := ROUND(fnFormulaResult(strExtractedFrml), 0.01, '<') * prEmployeeTransactions."No of Units";
+                    end else begin
+                        CurShifBaseAmount := prEmployeeTransactions.Amount;
+                        //end;
+                    end;
+                end;
+            until prEmployeeTransactions.Next = 0;
+        end;
 
         ShifAmount := (CurShifBaseAmount * (ShifPercentage / 100));
         ShifAmount := Round(ShifAmount, 0.01, '<');
@@ -1000,6 +1065,9 @@ Codeunit 52185472 "PR Payroll Processing"
                 prTransactionCodes.Reset;
                 prTransactionCodes.SetRange(prTransactionCodes."Transaction Code", prEmployeeTransactions."Transaction Code");
                 prTransactionCodes.SetRange(prTransactionCodes."Transaction Type", prTransactionCodes."transaction type"::Deduction);
+                prTransactionCodes.SetRange(prTransactionCodes.nssf, false);
+                prTransactionCodes.SetRange(prTransactionCodes.SHIF, false);
+
                 if prTransactionCodes.Find('-') then begin
                     curTransAmount := 0;
                     curTransBalance := 0;
@@ -1389,6 +1457,8 @@ Codeunit 52185472 "PR Payroll Processing"
                 PrTransactionCodes.SetRange(PrTransactionCodes."Transaction Type", prTransactionCodes."transaction type"::Deduction);
                 pRTransactionCodes.Setrange(PrTransactionCodes.Allowable, True);
                 prTransactionCodes.setrange(pension, false);
+                prTransactionCodes.SetRange(prTransactionCodes.nssf, false);
+                prTransactionCodes.SetRange(prTransactionCodes.SHIF, false);
                 if pRTransactionCodes.find('-') then begin
                     repeat
                         Allowables := 0;
