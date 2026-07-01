@@ -1163,6 +1163,7 @@ page 52185794 "Cashier Transactions"
 
                         if (Rec."Account Type" = Rec."Account Type"::MPESA) then begin
                             Rec.testField("Mpesa Reference");
+                            Rec.testfield("Reference Name");
                         end;
                         VarVariant := Rec;
                         if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then

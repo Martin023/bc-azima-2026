@@ -1136,6 +1136,8 @@ Codeunit 52186456 "Sacco Transactions"
                 GenJournalLine."Account No." := CashierTrans."Account No";
                 GenJournalLine.Validate(GenJournalLine."Account No.");
                 GenJournalLine."Posting Date" := CashierTrans."Transaction Date";
+                If (CashierTrans.Type = CashierTrans.Type::"MPESA Deposit") or (CashierTrans.Type = CashierTrans.Type::"MPESA Withdrawal") then
+                    GenJournalLine.Description := CashierTrans."Transaction Description" + '-' + CashierTrans."Reference Name" else
                 GenJournalLine.Description := CopyStr(CashierTrans."Transaction Description" + '-' + CashierTrans."Account Name" + '-' + CashierTrans."Member No.", 1, 50);
                 GenJournalLine."Currency Code" := CashierTrans."Currency Code";
                 GenJournalLine.Validate(GenJournalLine."Currency Code");
@@ -1164,6 +1166,8 @@ Codeunit 52186456 "Sacco Transactions"
                 GenJournalLine."Account No." := TillNo;
                 GenJournalLine.VALIDATE(GenJournalLine."Account No.");
                 GenJournalLine."Posting Date" := CashierTrans."Transaction Date";
+                If (CashierTrans.Type = CashierTrans.Type::"MPESA Deposit") or (CashierTrans.Type = CashierTrans.Type::"MPESA Withdrawal") then
+                    GenJournalLine.Description := CashierTrans."Transaction Description" + '-' + CashierTrans."Reference Name" else
                 GenJournalLine.Description := CashierTrans."Transaction Description" + '-' + CashierTrans.Remarks;
                 GenJournalLine."Currency Code" := CashierTrans."Currency Code";
                 GenJournalLine.VALIDATE(GenJournalLine."Currency Code");
