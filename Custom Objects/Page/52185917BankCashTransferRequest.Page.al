@@ -14,6 +14,7 @@ page 52185917 "Bank & Cash Transfer Request"
             group(General)
             {
                 Caption = 'General';
+                Editable = rec.Posted = false;
                 field(No; Rec.No)
                 {
                     Editable = false;
@@ -46,6 +47,11 @@ page 52185917 "Bank & Cash Transfer Request"
                         if rec."Transfer Type" = rec."Transfer Type"::"Treasury Requisition" then
                             TreasuryReq := true;
                     end;
+                }
+                field("Pay Mode"; Rec."Pay Mode")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = DateEditable;
                 }
                 field("Paying Account"; Rec."Paying Account")
                 {
@@ -162,7 +168,7 @@ page 52185917 "Bank & Cash Transfer Request"
                 }
                 field("Cheque No"; Rec."Cheque No")
                 {
-                    Editable = ChqVisible;
+                    // Editable = ChqVisible;
                     ApplicationArea = Basic, Suite;
                 }
                 field(Status; Rec.Status)

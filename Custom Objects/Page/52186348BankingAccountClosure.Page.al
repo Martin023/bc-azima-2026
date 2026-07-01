@@ -357,7 +357,7 @@ page 52186348 "Banking Account Closure"
         // SavAcc.Reset;
         // SavAcc.get(rec."Account No");
         // SavAcc.TestField(Status, SavAcc.Status::Dormant);
-
+        Gensetup.TestField("Closure Account Fee");
         TransactionTypes.Reset;
         TransactionTypes.SetRange(Code, GenSetup."Closure Account Fee");
         if TransactionTypes.Find('-') then begin
@@ -439,7 +439,7 @@ page 52186348 "Banking Account Closure"
 
             end;
 
-        end;
+        end else error('There is no transaction type set up for closure fee.');
 
     end;
 

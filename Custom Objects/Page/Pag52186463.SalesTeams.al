@@ -58,6 +58,10 @@ page 52186490 "Sales Teams"
                 {
 
                 }
+                field("Membership Target"; rec."Membership Target")
+                {
+
+                }
             }
         }
     }

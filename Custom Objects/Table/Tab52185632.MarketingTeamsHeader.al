@@ -81,6 +81,11 @@ table 52185632 "Marketing Teams Header"
         {
             Caption = 'Retainer';
         }
+         field(11; "Membership Target"; Integer)
+        {
+            Caption = 'Membership Target';
+        }
+
 
 
     }

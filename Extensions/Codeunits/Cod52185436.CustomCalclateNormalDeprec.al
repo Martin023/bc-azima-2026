@@ -462,6 +462,7 @@ codeunit 52185436 "Custom Calc. Normal Deprec."
     procedure CalcRBCustomAmt() Result: Decimal
     var
         DeprInFiscalYear: Decimal;
+        Months: Integer;
     begin
         if CalcTempDeprAmount(TempDeprAmount) then
             exit(TempDeprAmount);
@@ -477,6 +478,8 @@ codeunit 52185436 "Custom Calc. Normal Deprec."
 
         result := -(DBPercent / 100) * (NumberOfDays / DaysInFiscalYear) *
           (BookValue + SalvageValue - MinusBookValue);
+
+
 
         OnAfterCalcDB1Amount(DBPercent, NumberOfDays, DaysInFiscalYear, BookValue, SalvageValue, MinusBookValue, Sign, DeprInFiscalYear, Result, FADeprBook, FirstDeprDate);
     end;

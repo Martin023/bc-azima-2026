@@ -154,9 +154,9 @@ table 52187150 "M-Smart Member Edit"
                 MSMDocRec.SetRange("Member No.", Rec."Member No.");
                 MSMDocRec.SetFilter("Document Type", '%1|%2|%3', MSMDocRec."Document Type"::"MEMBER DETAILS UPDATE FORM", MSMDocRec."Document Type"::"BBF NEXT OF KIN UPDATE FORM", MSMDocRec."Document Type"::"NOMINEE DECLARATION FORM");
 
-                if Page.RunModal(Page::"M-Smart Documents List", MSMDocRec) = Action::LookupOK then begin
-                    "Mwalimu Smart Document" := MSMDocRec."No.";
-                end;
+                // if Page.RunModal(Page::"M-Smart Documents List", MSMDocRec) = Action::LookupOK then begin
+                //     "Mwalimu Smart Document" := MSMDocRec."No.";
+                // end;
             end;
         }
     }

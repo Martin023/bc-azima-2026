@@ -120,10 +120,32 @@ PageExtension 52186447 pageextension52186447 extends "Fixed Asset Card"
         }
         modify("FA Class Code")
         {
-            ApplicationArea = Basic;
-            trigger OnAfterValidate()
+            trigger Onaftervalidate()
+            var
+                FAClasses: Record "FA Class";
+                DepreciationBook: Record "FA Depreciation Book";
+                FACard: page "Fixed Asset Card";
             begin
-                CurrPage.Update();
+                FAClasses.RESET;
+                if FAClasses.get(rec."FA Class Code") then begin
+                    if FAClasses."Depreciation Book Code" <> '' then begin
+                        DepreciationBook.SetRange("FA No.", Rec."No.");
+                        if DepreciationBook.FindSet() then
+                            DepreciationBook.DELETEALL;
+
+                        DepreciationBook.reset;
+                        DepreciationBook.init;
+                        DepreciationBook."FA No." := Rec."No.";
+                        DepreciationBook."Depreciation Book Code" := FAClasses."Depreciation Book Code";
+                        DepreciationBook.validate("Depreciation Method", FAClasses."Depreciation Method");
+                        DepreciationBook."Straight-Line %" := FAClasses."Straight-Line %";
+                        DepreciationBook.INSERT(true);
+
+                        FACard.UpdateDepreciationBook(rec."No.");
+                        FACard.Update();
+                    end;
+                end;
+                rec.Validate("Description");
             end;
         }
 
@@ -204,6 +226,32 @@ PageExtension 52186447 pageextension52186447 extends "Fixed Asset Card"
         end else begin
             CurrPage.Editable := true;
         end;
+    end;
+
+    local procedure PrefillDepreciationFromFAClass()
+    var
+        FAClass: Record "FA Class";
+    begin
+        if Rec."FA Class Code" = '' then
+            exit;
+
+        if not FAClass.Get(Rec."FA Class Code") then
+            exit;
+
+        LoadFADepreciationBooks();
+
+        // Only prefill Depreciation Method if currently blank (ordinal 0)
+        if FADepreciationBook."Depreciation Method".AsInteger() = 0 then
+            if FAClass."Depreciation Method".AsInteger() <> 0 then
+                FADepreciationBook.Validate("Depreciation Method", FAClass."Depreciation Method");
+
+        // Only prefill Straight-Line % if currently 0
+        if FADepreciationBook."Straight-Line %" = 0 then
+            if FAClass."Straight-Line %" <> 0 then
+                FADepreciationBook.Validate("Straight-Line %", FAClass."Straight-Line %");
+
+        SaveSimpleDepreciationBook(xRec."No.");
+        LoadFADepreciationBooks();
     end;
 
     trigger OnOpenPage()

@@ -39,6 +39,13 @@ table 52186211 "Banking Account Closure"
             TableRelation = "Savings Accounts" WHERE("Member No." = FIELD("Member No"), Status = FILTER(<> Closed), "Can Be Closed" = const(true));
 
             trigger OnValidate()
+            var 
+                ShareBal : Decimal;
+                DepositBal : Decimal;
+                BosaDepositAcct : code[50];
+                ShareCptAccountNo: code[50];
+                GlobalFunctions : Codeunit "Global Functions";
+                Memberss  : Record Members;
             begin
                 "Account Balance" := 0;
                 "Account Name" := '';
@@ -51,6 +58,25 @@ table 52186211 "Banking Account Closure"
                     "Account Name" := SavingsAccounts.Name;
 
                     if "Account Balance" > 0 then Message('This account still has a balance!');
+
+                    if SavingsAccounts."Product Type" = '191' then begin
+                        Memberss.Get("Member No");
+                        clear(BosaDepositAcct);
+                        clear(ShareCptAccountNo);
+                        clear(DepositBal);
+                        clear(ShareBal);
+                        BosaDepositAcct := GlobalFunctions.GetDepositAccount(Memberss);
+                        if BosaDepositAcct <> '' then
+                            DepositBal := SavingsAccounts.GetAvailableBalance(BosaDepositAcct);
+
+                        ShareCptAccountNo := GlobalFunctions.GetShareCptAccount(Memberss);
+                        if ShareCptAccountNo <> '' then 
+                            ShareBal := SavingsAccounts.GetAvailableBalance(ShareCptAccountNo);
+
+                        if (DepositBal > 0) or (ShareBal > 0) then
+                            Error('This member still has a balance in the deposit or share capital account!');
+                    end
+
                 end;
             end;
         }

@@ -20,34 +20,42 @@ report 52185531 "Update Employee Loans Report"
                 loans.setfilter("Source Unit", '<>%1', Loans."Source Unit"::FOSA);
                 Loans.Setfilter("Disbursement Date", '..%1', CutOffDate);
                 Loans.SetFilter(Loans."Total Balance", '>0');
-                PRTransactionCodes.Reset;
-                PRTransactionCodes.SetRange("Loan Product Type", Loans."Loan Product Type");
-                if PRTransactionCodes.Find('-') then begin
+                if Loans.FindSet() then begin
                     repeat
-                        PREmployeeTransactions.Reset();
-                        PREmployeeTransactions.SetRange("Employee Code", HREmployees."No.");
-                        PREmployeeTransactions.SetRange("Transaction Code", PRTransactionCodes."Transaction Code");
-                        if not PREmployeeTransactions.FindFirst then begin
-                            PREmployeeTransactions.Init();
-                            PREmployeeTransactions."Employee Code" := HREmployees."No.";
-                            PREmployeeTransactions."Transaction Code" := PRTransactionCodes."Transaction Code";
-                            PREmployeeTransactions."Loan Number" := Loans."Loan No.";
-                            PREmployeeTransactions."Interest Due" := Loans."Outstanding Interest";
-                            PREmployeeTransactions."Loan Interest Rate" := Loans.interest;
-                            PREmployeeTransactions.Balance := Loans."Outstanding Balance" + Loans."Outstanding Interest";
-                            PREmployeeTransactions.Amount := Loans.Repayment;
-                            PREmployeeTransactions."Original Amount" := Loans."Approved Amount";
-                            PREmployeeTransactions."Start Date" := Loans."Repayment Start Date";
-                            PREmployeeTransactions."End Date" := Loans."Expected Date of Completion";
-                            PREmployeeTransactions."Loan Interest Rate" := Loans.Interest;
-                            PREmployeeTransactions."Period Month" := PeriodMonth;
-                            PREmployeeTransactions."Period Year" := PeriodYear;
-                            PREmployeeTransactions.Insert();
-                        end;
-                    until PRTransactionCodes.next = 0;
-                end
-                else
-                    CurrReport.Skip;
+                        PRTransactionCodes.Reset;
+                        PRTransactionCodes.SetRange("Loan Product Type", Loans."Loan Product Type");
+                        if PRTransactionCodes.Find('-') then begin
+                            repeat
+                                PREmployeeTransactions.Reset();
+                                PREmployeeTransactions.SetRange("Employee Code", HREmployees."No.");
+                                PREmployeeTransactions.SetRange("Transaction Code", PRTransactionCodes."Transaction Code");
+                                PREmployeeTransactions.SetRange("Loan Number", Loans."Loan No.");
+                                if PREmployeeTransactions.FindFirst then begin
+                                    PREmployeeTransactions.DeleteAll();
+                                end;
+                                PREmployeeTransactions.Init();
+                                PREmployeeTransactions."Employee Code" := HREmployees."No.";
+                                PREmployeeTransactions."Transaction Code" := PRTransactionCodes."Transaction Code";
+                                PREmployeeTransactions."Loan Number" := Loans."Loan No.";
+                                PREmployeeTransactions."Interest Due" := Loans."Outstanding Interest";
+                                PREmployeeTransactions."Loan Interest Rate" := Loans.interest;
+                                PREmployeeTransactions.Balance := Loans."Outstanding Balance" + Loans."Outstanding Interest";
+                                PREmployeeTransactions.Amount := Loans.Repayment;
+                                PREmployeeTransactions."Original Amount" := Loans."Approved Amount";
+                                PREmployeeTransactions."Start Date" := Loans."Repayment Start Date";
+                                PREmployeeTransactions."End Date" := Loans."Expected Date of Completion";
+                                PREmployeeTransactions."Loan Interest Rate" := Loans.Interest;
+                                PREmployeeTransactions."Period Month" := PeriodMonth;
+                                PREmployeeTransactions."Period Year" := PeriodYear;
+                                PREmployeeTransactions.Insert();
+
+                            until PRTransactionCodes.next = 0;
+                        end
+                        else
+                            CurrReport.Skip;
+                    until Loans.next() = 0;
+                end;
+
             end;
         }
 

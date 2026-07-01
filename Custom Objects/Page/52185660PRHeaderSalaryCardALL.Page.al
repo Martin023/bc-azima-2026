@@ -1,7 +1,5 @@
 page 52185660 "PR Header Salary Card - ALL"
 {
-    // strempcode,dtDOE,curbasicpay,blnpaye,blnnssf,blnnhif,selectedperio,dtopenperio,
-    // membership,referenceno,dttermination,blngetspayereleif
 
     Caption = 'Salary Card';
     DeleteAllowed = false;
