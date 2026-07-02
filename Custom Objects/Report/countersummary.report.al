@@ -69,10 +69,9 @@ Report 52185496 "Counter Summary Report"
                         TrxDate := Format(Treasury_transaction."Transaction Date", 0, '<Day,2>/<Month,2>/<Year4>');
                         TrxTime := Format(Treasury_transaction."Transaction Time", 0, '<Hours24,2>:<Minutes,2>:<Seconds,2>');
                         
-                        // We fetch the segregated fee amount directly from your new table field
                         LineAmount := Treasury_transaction."Charge Amount";
                         LineDebitAmt := 0;
-                        LineCreditAmt := Treasury_transaction."Charge Amount"; // Charges count as a credit/income to the branch
+                        LineCreditAmt := Treasury_transaction."Charge Amount";
                     end;
                 end;
             }
