@@ -1272,13 +1272,14 @@ page 52185794 "Cashier Transactions"
                     trigger OnAction()
                     var
                         Err00001: Label 'Document must be posted ';
+                        CT : Record "Cashier Transactions";
                     begin
                         if Rec.Posted = true then begin
-                            Rec.Reset;
-                            Rec.SetFilter(No, Rec.No);
-                            REPORT.Run(52185437, true, true, Rec);
-                            Rec.Reset;
-                            //END;
+                            
+                            CT.Reset;
+                            CT.SetFilter(No, Rec.No);
+                            if CT.Find then
+                                REPORT.Run(Report::"Bankers Cheque Slip", true, true, CT)
                         end else
                             Error(Err00001);
                     end;
