@@ -69,17 +69,17 @@ Report 52185665 "PR Transfer To Journal Bills"
                                         Tier1Cont := prNSSF."Tier 1 Employee Deduction";
                                     end;
 
-                                    CreateJnlEntry(PeriodTrans."Journal Account Type", PeriodTrans."Journal Account Code",
+                                    CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."SSF Tier 1 Emplyer Pay Account",
                                  GlobalDim1, GlobalDim2, 'Employee tier 1 ' + PeriodTrans."Transaction Name", AmountToDebit, Tier1Cont,
                                  PeriodTrans."Post As", PeriodTrans."Loan Number", SaccoTransactionType);
 
-                                    CreateJnlEntry(PeriodTrans."Journal Account Type", PeriodTrans."Journal Account Code",
+                                    CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."SSF Tier 2 Emplyer Pay Account",
                                     GlobalDim1, GlobalDim2, 'Employee tier 2 ' + PeriodTrans."Transaction Name", AmountToDebit, (AmountToCredit - Tier1Cont),
                                     PeriodTrans."Post As", PeriodTrans."Loan Number", SaccoTransactionType);
                                 end
                                 else begin
                                     CreateJnlEntry(PeriodTrans."Journal Account Type", PeriodTrans."Journal Account Code",
-                                  GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name", AmountToDebit, AmountToCredit,
+                                  GlobalDim1, GlobalDim2, 'Employee ' + PeriodTrans."Transaction Name", AmountToDebit, AmountToCredit,
                                   PeriodTrans."Post As", PeriodTrans."Loan Number", SaccoTransactionType);
                                 end;
                             end
@@ -211,12 +211,12 @@ Report 52185665 "PR Transfer To Journal Bills"
                                 if EmployerDed.Find('-') then begin
                                     //Credit Payables
                                     CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."Pension Employee Acc",
-                                    GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name", 0,
+                                    GlobalDim1, GlobalDim2, 'Employer ' + PeriodTrans."Transaction Name", 0,
                                    EmployerDed.Amount, PeriodTrans."Post As", '', SaccoTransactionType);
 
                                     //Debit Staff Expense
                                     CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."Pension Employer Acc",
-                                    GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name", EmployerDed.Amount, 0, 1, '',
+                                    GlobalDim1, GlobalDim2, 'Employer ' + PeriodTrans."Transaction Name", EmployerDed.Amount, 0, 1, '',
                                     SaccoTransactionType);
 
                                 end;
@@ -231,12 +231,12 @@ Report 52185665 "PR Transfer To Journal Bills"
                                 if EmployerDed.Find('-') then begin
                                     //Credit Payables
                                     CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."Housing Levy Employee",
-                                    GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + '-' + PeriodTrans."Employee Code", 0,
+                                    GlobalDim1, GlobalDim2, ' Employer ' + PeriodTrans."Transaction Name" + '-' + PeriodTrans."Employee Code", 0,
                                    EmployerDed.Amount, PeriodTrans."Post As", '', SaccoTransactionType);
 
                                     //Debit Staff Expense
                                     CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."Housing Levy Employer",
-                                    GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name", EmployerDed.Amount, 0, 1, '',
+                                    GlobalDim1, GlobalDim2, ' Employer ' + PeriodTrans."Transaction Name" + '-' + PeriodTrans."Employee Code", EmployerDed.Amount, 0, 1, '',
                                     SaccoTransactionType);
                                 end;
                             end;
@@ -274,11 +274,11 @@ Report 52185665 "PR Transfer To Journal Bills"
                                 end;
 
                                 CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."SSF Tier 1 Emplyer Pay Account",
-                                GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + ' Employer tier 1 cont', 0, Tier1Cont,
+                                GlobalDim1, GlobalDim2, ' Employer tier 1 ' + PeriodTrans."Transaction Name" + 'cont', 0, Tier1Cont,
                                 PeriodTrans."Post As", '', SaccoTransactionType);
 
                                 CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."SSF Tier 2 Emplyer Pay Account",
-                                GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + ' Employer tier 2 cont', 0, PeriodTrans.Amount - Tier1Cont,
+                                GlobalDim1, GlobalDim2, ' Employer tier 2 ' + PeriodTrans."Transaction Name" + 'cont', 0, PeriodTrans.Amount - Tier1Cont,
                                 PeriodTrans."Post As", '', SaccoTransactionType);
 
                                 //Debit Staff Expense
@@ -341,9 +341,6 @@ Report 52185665 "PR Transfer To Journal Bills"
                     GenJnlBatch.Name := 'SALARIES';
                     GenJnlBatch.Insert;
                 end;
-                // End Create Batch************************************************************************
-                "Slip/Receipt No" := UpperCase(objPeriod."Period Name");
-
             end;
         }
     }
@@ -372,7 +369,10 @@ Report 52185665 "PR Transfer To Journal Bills"
 
         SelectedPeriod := "PR Salary Card".GetRangeMin("Period Filter");
         objPeriod.Reset;
-        if objPeriod.Get(SelectedPeriod) then PeriodName := objPeriod."Period Name";
+        if objPeriod.Get(SelectedPeriod) then begin
+            if objPeriod.closed then error('The Period %1 is Closed', objPeriod."Date Opened");
+            PeriodName := uppercase(objPeriod."Period Name");
+        end;
 
         PostingDate := CalcDate('1M-1D', SelectedPeriod);
         //MESSAGE('get period filter');
@@ -458,7 +458,7 @@ Report 52185665 "PR Transfer To Journal Bills"
         GeneraljnlLine."Journal Template Name" := 'GENERAL';
         GeneraljnlLine."Journal Batch Name" := 'SALARIES';
         GeneraljnlLine."Line No." := LineNumber;
-        GeneraljnlLine."Document No." := "Slip/Receipt No";
+        GeneraljnlLine."Document No." := PeriodName;
         GeneraljnlLine."Loan No" := LoanNo;
         GeneraljnlLine."Transaction Type" := SaccoTransactionType;
         GeneraljnlLine."Posting Date" := Today;
