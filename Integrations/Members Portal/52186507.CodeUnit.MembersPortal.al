@@ -5846,7 +5846,7 @@ codeunit 52186507 "Members Portal Integration"
 
                 Datum.Add('eligibility_fail_reason', EligibilityFailReason);
 
-                Datum.Add('loan_type_min_amount', MobileLoanProduct."Minimum Loan Amount");
+                //Datum.Add('loan_type_min_amount', MobileLoanProduct."Minimum Loan Amount");
 
                 if MobileLoanProduct."Requires Installments on App." then begin
                     TotalTopUp := MobileLoanProduct."Minimum Loan Amount";
