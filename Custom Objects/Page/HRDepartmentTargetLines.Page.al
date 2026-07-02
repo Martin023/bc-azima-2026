@@ -93,10 +93,6 @@ Page 52185503 "Department Target Lines"
                 ApplicationArea = Basic;
                 Caption = 'Assign to Employees';
                 Image = Allocate;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-
                 trigger OnAction()
                 var
                     DeptHeader: Record "HR Department Targets Header";
