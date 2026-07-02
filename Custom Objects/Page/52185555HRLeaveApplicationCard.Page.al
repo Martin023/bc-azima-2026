@@ -366,6 +366,16 @@ page 52185555 "HR Leave Application Card"
                     Editable = MKS;
                 }
             }
+            group("Recall Lines")
+            {
+                Caption = 'Recall Lines';
+                part("Recall Subpage"; "HR Leave Recall Lines")
+                {
+                    ApplicationArea = All;
+                    SubPageLink = "Leave Application Code" = field("Application Code");
+                    UpdatePropagation = Both;
+                }
+            }
         }
         area(factboxes)
         {
@@ -596,12 +606,47 @@ page 52185555 "HR Leave Application Card"
                         end;
                     end;
                 }
-                action("Leave Recall")
+                action("Record Leave Recall")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Record Leave Recall';
+                    Image = CreateDocument;
+                    Promoted = true;
+                    PromotedCategory = Category4;
+                    PromotedIsBig = true;
+                    ToolTip = 'Record a new recall instance for this approved leave application';
+
+                    trigger OnAction()
+                    var
+                        RecallLine: Record "HR Leave Recall Lines";
+                        RecallPage: Page "HR Leave Recall Lines";
+                    begin
+                        if Rec.Status <> Rec.Status::Approved then
+                            Error('Leave Recall can only be recorded for approved leave applications');
+
+                        RecallLine.Init();
+                        RecallLine."Leave Application Code" := Rec."Application Code";
+                        RecallLine.Insert(true);
+                        Commit();
+
+                        RecallLine.Reset();
+                        RecallLine.SetRange("Leave Application Code", Rec."Application Code");
+                        RecallLine.FindLast();
+
+                        RecallPage.SetTableView(RecallLine);
+                        RecallPage.SetRecord(RecallLine);
+                        RecallPage.Run();
+
+                        CurrPage.Update(false);
+                    end;
+                }
+                action("Leave Recall (Old)")
                 {
                     ApplicationArea = Basic;
                     Image = "Report";
-                    Promoted = true;
-                    PromotedCategory = Category4;
+                    Promoted = false;
+                    Visible = false;
+                    Caption = 'Leave Recall (Old - Permanent Termination)';
 
                     trigger OnAction()
                     Var

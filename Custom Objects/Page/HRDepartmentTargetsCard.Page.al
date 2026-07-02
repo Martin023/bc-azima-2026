@@ -134,6 +134,11 @@ Page 52185448 "HR Department Targets Card"
                 SubPageLink = "Department Target No" = FIELD("Target No"),
                               "Perspective Code" = CONST(1);
             }
+            part("Employee Assignments"; "HR Employee Target Assignments")
+            {
+                Caption = 'Employee Assignments';
+                SubPageLink = "Department Target No" = FIELD("Target No");
+            }
         }
     }
 
@@ -215,6 +220,54 @@ Page 52185448 "HR Department Targets Card"
                 Image = PrintForm;
                 Promoted = true;
                 PromotedCategory = Process;
+            }
+            action("Assign All Targets to Employee")
+            {
+                Caption = 'Assign All Targets to Employee';
+                Image = Allocate;
+                Promoted = true;
+                PromotedCategory = Category4;
+                PromotedIsBig = true;
+
+                trigger OnAction()
+                var
+                    Employee: Record "HR Employees";
+                begin
+                    Employee.Reset;
+                    Employee.SetRange("Department Code", Rec."Responsibility Center");
+                    Employee.SetRange(Status, Employee.Status::Active);
+                    if not Employee.FindFirst then
+                        Error('No active employees found in department %1', Rec."Department Name");
+
+                    if PAGE.RunModal(PAGE::"HR Employee List - Active", Employee) = ACTION::LookupOK then begin
+                        Rec.AssignAllLinesToEmployee(Employee."No.");
+                        CurrPage.Update(false);
+                    end;
+                end;
+            }
+            action("View All Assignments")
+            {
+                Caption = 'View All Assignments';
+                Image = ViewDetails;
+                Promoted = true;
+                PromotedCategory = Category4;
+                RunObject = Page "HR Employee Target Assgns List";
+                RunPageLink = "Department Target No" = FIELD("Target No");
+            }
+        }
+        area(navigation)
+        {
+            group("Assignment")
+            {
+                Caption = 'Assignment';
+                action("My Assigned Targets")
+                {
+                    Caption = 'My Assigned Targets (Employee View)';
+                    Image = Employee;
+                    RunObject = Page "My Assigned Targets";
+                    Promoted = true;
+                    PromotedCategory = Category4;
+                }
             }
         }
     }
