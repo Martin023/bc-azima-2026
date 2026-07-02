@@ -1080,6 +1080,11 @@ table 52185690 "Product Factory"
         {
             Caption = 'Over The Counter Transaction';
         }
+        field(10046; "Requires Installments on App."; Boolean)
+        {
+            DataClassification = ToBeClassified;
+            Caption = 'Requires Installments on Application';
+        }
     }
 
     keys
