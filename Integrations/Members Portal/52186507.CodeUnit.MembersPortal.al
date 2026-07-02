@@ -5931,7 +5931,7 @@ codeunit 52186507 "Members Portal Integration"
             // ProductFactory.SetRange("Mobile Loan", true);
             ProductFactory.SetRange("Is CRM Product", true);
             // ProductFactory.SetRange("Is USSD Product", false);
-            ProductFactory.SetFilter("Source Unit", '<>%1', ProductFactory."Source Unit"::"HR LOANS");
+            // ProductFactory.SetFilter("Source Unit", '<>%1', ProductFactory."Source Unit"::"HR LOANS");
 
             if SearchMember."Employer Code" = 'RETIREE' then begin
                 // Pension only 
