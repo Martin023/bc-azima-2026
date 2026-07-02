@@ -5350,10 +5350,11 @@ codeunit 52186507 "Members Portal Integration"
 
                 theLeaveApplication."Leave Type" := leave_type.AsValue.AsText;
                 theLeaveApplication.Validate("Leave Type");
-                theLeaveApplication."Days Applied" := days_applied.AsValue.AsInteger;
-                theLeaveApplication.Validate("Days Applied");
                 theLeaveApplication."Start Date" := start_date.AsValue.AsDate;
                 theLeaveApplication.Validate("Start Date");
+                Evaluate(theLeaveApplication."Days Applied",days_applied.AsValue.AsText);
+                //theLeaveApplication."Days Applied" := days_applied.AsValue.AsInteger;
+                theLeaveApplication.Validate("Days Applied");
                 theLeaveApplication.Reliever := reliever.AsValue.AsText;
                 theLeaveApplication."Global Dimension 1 Code" := Employee."Global Dimension 1 Code";
                 theLeaveApplication."Global Dimension 2 Code" := Employee."Global Dimension 2 Code";

@@ -62,7 +62,7 @@ table 52185532 "HR Leave Application"
                 if "Days Applied" < 15 then "Request Leave Allowance" := false;
 
 
-                if "Days Applied" < 1 then Error('Days applied cannot be less than 1');
+                if "Days Applied" < 0.5 then Error('Days applied cannot be less than 0.5');
                 IF HRLeaveTypes.get("Leave Type") THEN BEGIN
                     IF HRLeaveTypes.Gender = HRLeaveTypes.Gender::Female then
                         IF "Days Applied" < HRLeaveTypes.Days THEN Error('Days Applied Cannot be less than' + ' ' + Format(HRLeaveTypes.Days));

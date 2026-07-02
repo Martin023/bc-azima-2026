@@ -834,7 +834,7 @@ page 52185555 "HR Leave Application Card"
         EmpName: Text[70];
         ApprovalComments: Page "Approval Comments";
         UserSetup: Record "User Setup";
-        varDaysApplied: Integer;
+        varDaysApplied: Decimal;
         HRLeaveTypes: Record "HR Leave Types";
         BaseCalendarChange: Record "Base Calendar Change";
         ReturnDateLoop: Boolean;
