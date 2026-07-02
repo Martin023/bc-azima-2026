@@ -217,4 +217,8 @@ enum 52185441 "SMS Source"
     {
         Caption = 'DEPOSIT_DORMANT';
     }
+    value(56; CHEQUE_CLEARANCE)
+    {
+        Caption = 'CHEQUE_CLEARANCE';
+    }
 }
