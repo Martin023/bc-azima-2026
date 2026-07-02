@@ -38,6 +38,11 @@ page 52185660 "PR Header Salary Card - ALL"
                     ApplicationArea = Basic, Suite;
                     Editable = true;
                 }
+                field("Member No."; Rec."Member No.")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = true;
+                }
                 field("Date Of Join"; Rec."Date Of Join")
                 {
                     ApplicationArea = Basic, Suite;
@@ -73,9 +78,9 @@ page 52185660 "PR Header Salary Card - ALL"
                     ApplicationArea = Basic, Suite;
                     Editable = true;
                 }
-                field("Salary Grade";Rec."Salary Grade")
+                field("Salary Grade"; Rec."Salary Grade")
                 {
-                    
+
                 }
                 field(Disabled; Rec.Disabled)
                 {
