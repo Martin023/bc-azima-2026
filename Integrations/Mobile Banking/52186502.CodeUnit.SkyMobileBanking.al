@@ -4325,7 +4325,10 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
                                         TotalExciseDuty := 0;
                                         if Description = '' then begin
-                                            Description := Format(MpesaTransBuffer."Transaction Type");
+                                            if MobileTransTypes.Description <> '' then
+                                                Description := CopyStr(MobileTransTypes.Description, 1, 150)
+                                            else
+                                                Description := Format(MpesaTransBuffer."Transaction Type");
                                         end;
 
                                         // Check if deposit is less than the charges
@@ -4391,10 +4394,10 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                         // Split Vendor + Beneficiary Account
                                                         // Cr Member acc.
                                                         SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", Description, AccType::"G/L Account", '', -(MpesaTransBuffer."Transaction Amount"), theReference, '', TransactionType::" ", Dim1, Dim2, true);
-                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges - TotalExciseDuty), theReference, '', TransactionType::" ", Dim1, Dim2, true);
-                                                        if TotalExciseDuty > 0 then begin
-                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", CopyStr(MobileTransTypes.Description + ' - Excise Duty', 1, 150), AccType::"G/L Account", '', TotalExciseDuty, theReference, '', TransactionType::" ", Dim1, Dim2, true);
-                                                        end;
+                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges /*- TotalExciseDuty*/), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                        // if TotalExciseDuty > 0 then begin
+                                                        //     SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", CopyStr(MobileTransTypes.Description + ' - Excise Duty', 1, 150), AccType::"G/L Account", '', TotalExciseDuty, theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                        // end;
                                                     end;
                                                 end else begin
                                                     // Cr Member acc.
@@ -4731,7 +4734,10 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
                                             TotalExciseDuty := 0;
                                             if Description = '' then begin
-                                                Description := Format(MpesaTransBuffer."Transaction Type");
+                                                if MobileTransTypes.Description <> '' then
+                                                    Description := CopyStr(MobileTransTypes.Description, 1, 150)
+                                                else
+                                                    Description := Format(MpesaTransBuffer."Transaction Type");
                                             end;
 
                                             if MpesaTransBuffer."Transaction Type" <> MpesaTransBuffer."Transaction Type"::"Mpesa Deposit" then begin
@@ -4805,10 +4811,10 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             // Split Vendor + Beneficiary Account
                                                             // Cr Member acc.
                                                             SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, MpesaTransBuffer."Transaction Date", AccType::Savings, MpesaTransBuffer."Savings Account", Description, AccType::"G/L Account", '', -(MpesaTransBuffer."Transaction Amount"), theReference, '', TransactionType::" ", Dim1, Dim2, true);
-                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, MpesaTransBuffer."Transaction Date", AccType::Savings, MpesaTransBuffer."Savings Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges - TotalExciseDuty), theReference, '', TransactionType::" ", Dim1, Dim2, true);
-                                                            if TotalExciseDuty > 0 then begin
-                                                                SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, MpesaTransBuffer."Transaction Date", AccType::Savings, MpesaTransBuffer."Savings Account", CopyStr(MobileTransTypes.Description + ' - Excise Duty', 1, 150), AccType::"G/L Account", '', TotalExciseDuty, theReference, '', TransactionType::" ", Dim1, Dim2, true);
-                                                            end;
+                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, MpesaTransBuffer."Transaction Date", AccType::Savings, MpesaTransBuffer."Savings Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges /*- TotalExciseDuty*/), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                            // if TotalExciseDuty > 0 then begin
+                                                            //     SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, MpesaTransBuffer."Transaction Date", AccType::Savings, MpesaTransBuffer."Savings Account", CopyStr(MobileTransTypes.Description + ' - Excise Duty', 1, 150), AccType::"G/L Account", '', TotalExciseDuty, theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                            // end;
                                                         end;
                                                     end else begin
                                                         // Cr Member acc.
@@ -5387,7 +5393,10 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                 if SkyMbankingTrans.ProcessLoanRepayment(MpesaTransBuffer) then begin
                                     Description := CopyStr(MpesaTransBuffer."Transaction Description", 1, 150);
                                     if Description = '' then begin
-                                        Description := Format(MpesaTransBuffer."Transaction Type");
+                                        if MobileTransTypes.Description <> '' then
+                                            Description := CopyStr(MobileTransTypes.Description, 1, 150)
+                                        else
+                                            Description := Format(MpesaTransBuffer."Transaction Type");
                                     end;
                                     Loan.get(MpesaTransBuffer."Loan No.");
                                     Dim1 := Loan."Global Dimension 1 Code";
@@ -5956,7 +5965,10 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                         SaccoTrans.InitJournal(JTemplate, JBatch);
                                                         Description := CopyStr(MpesaTransBuffer."Transaction Description", 1, 150);
                                                         if Description = '' then begin
-                                                            Description := Format(MpesaTransBuffer."Transaction Type");
+                                                            if MobileTransTypes.Description <> '' then
+                                                                Description := CopyStr(MobileTransTypes.Description, 1, 150)
+                                                            else
+                                                                Description := Format(MpesaTransBuffer."Transaction Type");
                                                         end;
                                                         // Db Member account.
                                                         SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Source Account", Description, AccType::"G/L Account", '', MpesaTransBuffer."Transaction Amount", theReference, '', TransactionType::" ", Dim1, Dim2, true);
@@ -5991,22 +6003,23 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             if TotalCharges <> 0 then begin
                                                                 case MpesaTransBuffer."Transaction Type" of
                                                                     MpesaTransBuffer."Transaction Type"::"Mpesa Withdrawal":
-                                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Source Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges - TotalExciseDuty), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Source Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges /*- TotalExciseDuty*/), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                                     MpesaTransBuffer."Transaction Type"::"Bank Transfer":
-                                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Source Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges - TotalExciseDuty), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Source Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges  /*- TotalExciseDuty*/), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                                     MpesaTransBuffer."Transaction Type"::"Utility Payment":
-                                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Source Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges - TotalExciseDuty), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Source Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges  /*- TotalExciseDuty*/), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                                     MpesaTransBuffer."Transaction Type"::Airtime:
-                                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Source Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges - TotalExciseDuty), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Source Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges  /*- TotalExciseDuty*/), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                                     MpesaTransBuffer."Transaction Type"::"Till Payment":
-                                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Source Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges - TotalExciseDuty), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Source Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges   /*- TotalExciseDuty*/), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                                     MpesaTransBuffer."Transaction Type"::"Gaming Utility Payment":
-                                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Source Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges - TotalExciseDuty), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Source Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges   /*- TotalExciseDuty*/), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                                     else
                                                                 end;
-                                                                if TotalExciseDuty > 0 then begin
-                                                                    SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", CopyStr(MobileTransTypes.Description + ' - Excise Duty', 1, 150), AccType::"G/L Account", '', TotalExciseDuty, theReference, '', TransactionType::" ", Dim1, Dim2, true);
-                                                                end;
+
+                                                                // if TotalExciseDuty > 0 then begin
+                                                                //     SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", CopyStr(MobileTransTypes.Description + ' - Excise Duty', 1, 150), AccType::"G/L Account", '', TotalExciseDuty, theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                                // end;
                                                             end;
                                                         end;
                                                         if SaccoTrans.PostJournal(JTemplate, JBatch) then begin
@@ -6479,7 +6492,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             end;
                                                         MpesaTransBuffer."Transaction Type"::"Pay Loan From Account":
                                                             begin
-                                                                theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() +
+                                                                theSMS := 'Jambo  ' + TheSourceMember."First Name".ToUpper() +
                                                                     ', your internal loan repayment request of KES ' +
                                                                     Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
                                                                     ' from ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Savings Account" +
@@ -6509,7 +6522,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                         if TheDestinationSavings.Get(MpesaTransBuffer."Destination Account") then begin
                                                             if TheSourceMember."No." <> TheDestinationSavings."Member No." then begin
                                                                 if TheDestinationMember.Get(TheDestinationSavings."Member No.") then begin
-                                                                    theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
+                                                                    theSMS := 'Jambo ' + TheDestinationMember."First Name".ToUpper() +
                                                                         ', ' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
                                                                         Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
                                                                         ' to your account no. ' + TheDestinationSavings."No." +
@@ -6538,7 +6551,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                         if TheDestinationLoan.Get(MpesaTransBuffer."Loan No.") then begin
                                                             if TheSourceMember."No." <> TheDestinationLoan."Member No." then begin
                                                                 if TheDestinationMember.Get(TheDestinationSavings."Member No.") then begin
-                                                                    theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
+                                                                    theSMS := 'Jambo ' + TheDestinationMember."First Name".ToUpper() +
                                                             ',' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
                                                             Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
                                                             ' for repayment of your loan no. ' + TheDestinationLoan."Loan No." +
@@ -6582,7 +6595,10 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                         TotalExciseDuty := 0;
 
                                                         if Description = '' then begin
-                                                            Description := Format(MpesaTransBuffer."Transaction Type");
+                                                            if MobileTransTypes.Description <> '' then
+                                                                Description := CopyStr(MobileTransTypes.Description, 1, 150)
+                                                            else
+                                                                Description := Format(MpesaTransBuffer."Transaction Type");
                                                         end;
 
                                                         // Check if credit amount is less than the charges
@@ -6685,27 +6701,27 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 if TotalCharges > 0 then begin
                                                                     case MpesaTransBuffer."Transaction Type" of
                                                                         MpesaTransBuffer."Transaction Type"::"Account Balance Enquiry":
-                                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges - TotalExciseDuty), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges /*- TotalExciseDuty*/), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                                         MpesaTransBuffer."Transaction Type"::"Account Mini-Statement":
-                                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges - TotalExciseDuty), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges /*- TotalExciseDuty*/), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                                         MpesaTransBuffer."Transaction Type"::"Account Full-Statement":
-                                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges - TotalExciseDuty), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges /*- TotalExciseDuty*/), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                                         MpesaTransBuffer."Transaction Type"::"Account Transfer",
                                                                         MpesaTransBuffer."Transaction Type"::"Kesasa Account Transfer":
-                                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges - TotalExciseDuty), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges /*- TotalExciseDuty*/), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                                         MpesaTransBuffer."Transaction Type"::"Pay Loan From Account":
-                                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges - TotalExciseDuty), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges /*- TotalExciseDuty*/), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                                         MpesaTransBuffer."Transaction Type"::"Loan Balance Enquiry":
-                                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges - TotalExciseDuty), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges /*- TotalExciseDuty*/), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                                         MpesaTransBuffer."Transaction Type"::"Loan Mini-Statement":
-                                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges - TotalExciseDuty), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges /*- TotalExciseDuty*/), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                                         MpesaTransBuffer."Transaction Type"::"Loan Full-Statement":
-                                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges - TotalExciseDuty), theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", MobileTransTypes.Description, AccType::"G/L Account", '', (TotalCharges /*- TotalExciseDuty*/), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                                         else
                                                                     end;
-                                                                    if TotalExciseDuty > 0 then begin
-                                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", CopyStr(MobileTransTypes.Description + ' - Excise Duty', 1, 150), AccType::"G/L Account", '', TotalExciseDuty, theReference, '', TransactionType::" ", Dim1, Dim2, true);
-                                                                    end;
+                                                                    // if TotalExciseDuty > 0 then begin
+                                                                    //     SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", CopyStr(MobileTransTypes.Description + ' - Excise Duty', 1, 150), AccType::"G/L Account", '', TotalExciseDuty, theReference, '', TransactionType::" ", Dim1, Dim2, true);
+                                                                    // end;
                                                                     TotalCreditAmount -= TotalCharges;
                                                                 end;
                                                             end;
@@ -6844,7 +6860,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                 begin
                                                                                     if MpesaTransBuffer."Loan No." <> '' then begin
                                                                                         if TheDestinationLoan.Get(MpesaTransBuffer."Loan No.") then begin
-                                                                                            theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() +
+                                                                                            theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
                                                                                             ', your internal loan repayment request of KES ' +
                                                                                                 Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
                                                                                                 ' from ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Savings Account" +
@@ -6876,7 +6892,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                             if TheDestinationSavings.Get(MpesaTransBuffer."Destination Account") then begin
                                                                                 if TheSourceMember."No." <> TheDestinationSavings."Member No." then begin
                                                                                     if TheDestinationMember.Get(TheDestinationSavings."Member No.") then begin
-                                                                                        theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
+                                                                                        theSMS := 'Jambo ' + TheDestinationMember."First Name".ToUpper() +
                                                                                          ', ' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
                                                                                          Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
                                                                                          ' to your ' + TheDestinationSavings."Product Name" + ' ' + TheDestinationSavings."No." +
@@ -6905,7 +6921,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                             if TheDestinationLoan.Get(MpesaTransBuffer."Loan No.") then begin
                                                                                 if TheSourceMember."No." <> TheDestinationLoan."Member No." then begin
                                                                                     if TheDestinationMember.Get(TheDestinationSavings."Member No.") then begin
-                                                                                        theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
+                                                                                        theSMS := 'Jambo ' + TheDestinationMember."First Name".ToUpper() +
                                                                                 ',' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
                                                                                 Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
                                                                                 ' for repayment of your loan no. ' + TheDestinationLoan."Loan No." +
@@ -6979,7 +6995,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                     begin
                                                                                         if MpesaTransBuffer."Loan No." <> '' then begin
                                                                                             if TheDestinationLoan.Get(MpesaTransBuffer."Loan No.") then begin
-                                                                                                theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() +
+                                                                                                theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
                                                                                                 ', your internal loan repayment request of KES ' +
                                                                                                     Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
                                                                                                     ' from ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Savings Account" +
@@ -7011,7 +7027,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                 if TheDestinationSavings.Get(MpesaTransBuffer."Destination Account") then begin
                                                                                     if TheSourceMember."No." <> TheDestinationSavings."Member No." then begin
                                                                                         if TheDestinationMember.Get(TheDestinationSavings."Member No.") then begin
-                                                                                            theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
+                                                                                            theSMS := 'Jambo ' + TheDestinationMember."First Name".ToUpper() +
                                                                                     ', ' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
                                                                                     Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
                                                                                     ' to your account no. ' + TheDestinationSavings."No." +
@@ -7040,7 +7056,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                 if TheDestinationLoan.Get(MpesaTransBuffer."Loan No.") then begin
                                                                                     if TheSourceMember."No." <> TheDestinationLoan."Member No." then begin
                                                                                         if TheDestinationMember.Get(TheDestinationSavings."Member No.") then begin
-                                                                                            theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
+                                                                                            theSMS := 'Jambo ' + TheDestinationMember."First Name".ToUpper() +
                                                                                     ',' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
                                                                                     Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
                                                                                     ' for repayment of your loan no. ' + TheDestinationLoan."Loan No." +
