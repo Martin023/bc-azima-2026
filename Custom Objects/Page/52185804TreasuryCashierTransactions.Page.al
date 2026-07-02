@@ -148,11 +148,7 @@ page 52185804 "Treasury Cashier Transactions"
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
-                field("Total Cash on Treasury Coinage"; Rec."Total Cash on Treasury Coinage")
-                {
-                    ApplicationArea = Basic, Suite;
-                    //Caption = 'Total Cash on Treasury/Teller Coinage';
-                }
+                
                 field(Type; Rec.Type)
                 {
                     ApplicationArea = Basic, Suite;
@@ -167,6 +163,11 @@ page 52185804 "Treasury Cashier Transactions"
                 {
                     ApplicationArea = Basic, Suite;
                     Editable = false;
+                }
+                field("Total Cash on Treasury Coinage"; Rec."Total Cash on Treasury Coinage")
+                {
+                    ApplicationArea = Basic, Suite;
+                    //Caption = 'Total Cash on Treasury/Teller Coinage';
                 }
             }
             part(Coinage; Coinage)

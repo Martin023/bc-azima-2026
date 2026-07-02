@@ -702,6 +702,23 @@ table 52185776 "Cashier Transactions"
         field(50028; "MPESA Float Balance"; Decimal)
         {
         }
+        field(50029; "Bank Code"; code[20])
+        {
+            TableRelation = "PR Bank Accounts"."Bank Code";
+            trigger OnValidate()
+            var
+                BankAcc: Record "PR Bank Accounts";
+            begin
+                if BankAcc.Get(Rec."Bank Code") then
+                    Rec."Bank Name" := BankAcc."Bank Name"
+                else
+                    Rec."Bank Name" := '';
+            end;
+        }
+        field(50030; "Bank Name"; Text[100])
+        {
+            Editable = false;
+        }
     }
 
     keys
