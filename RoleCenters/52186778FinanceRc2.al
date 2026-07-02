@@ -4031,12 +4031,7 @@ page 52186778 "Finance Role Center"
                     //     RunObject = report "pr NHIF";
                     //     ApplicationArea = Basic, Suite;
                     // }
-                    // action("PR NSSF")
-                    // {
-                    //     Caption = 'PR NSSF report';
-                    //     RunObject = report prNSSF;
-                    //     ApplicationArea = Basic, Suite;
-                    // }
+
 
                     // action(P10)
                     // {
@@ -4185,249 +4180,199 @@ page 52186778 "Finance Role Center"
                 }
                 group(PeriodicActivities)
                 {
-                    Caption = 'Periodic Activities';
-                    action("PR Payroll Periods")
+                    Caption = 'Payroll Posting & journals';
+
+                    action("Salary List")
                     {
-                        Caption = 'PR Payroll Periods';
-                        RunObject = page "PR Payroll Periods";
+
+                        RunObject = page "Salary Lists";
                         ApplicationArea = Basic, Suite;
                     }
-                    // action("Leave Allowances")
-                    // {
-                    //     Caption = 'Leave Allowances';
-                    //     RunObject = page "Leave Allowances";
-                    //     ApplicationArea = Basic, Suite;
-                    // }
-                    // group("PR Tasks")
-                    // {
-                    //     Caption = 'Tasks';
-                    //     action("Payroll Salary Process")
-                    //     {
-                    //         Caption = 'Payroll Salary Process';
-                    //         RunObject = page "Payroll Salary Process";
-                    //         ApplicationArea = Basic, Suite;
-                    //     }
-                    // }
-                    group("Reports & Analysis")
+
+                    action("Transfer Net Pay To Fosa")
                     {
-                        Caption = 'Reports and Analysis';
-                        action("Salary List")
-                        {
+                        Caption = 'Transfer Net Pay To Fosa';
+                        RunObject = report "Transfer Net Pay To Fosa";
+                        ApplicationArea = Basic, Suite;
+                    }
+                    action("PR Transfer To Journal Bills")
+                    {
+                        Caption = 'PR Transfer To Journal Bills';
+                        RunObject = report "PR Transfer To Journal Bills";
+                        ApplicationArea = Basic, Suite;
+                    }
+                    action("General Journals")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Payroll Journal';
+                        Image = Journal;
+                        RunObject = page "General Journal";
+                        RunPageView = where("Journal Template Name" = Const('GENERAL'), "Journal Batch Name" = Const('SALARIES'));
 
-                            RunObject = page "Salary Lists";
-                            ApplicationArea = Basic, Suite;
-                        }
-
-                        action("Transfer Net Pay To Fosa")
-                        {
-                            Caption = 'Transfer Net Pay To Fosa';
-                            RunObject = report "Transfer Net Pay To Fosa";
-                            ApplicationArea = Basic, Suite;
-                        }
-                        action("PR Transfer To Journal Bills")
-                        {
-                            Caption = 'PR Transfer To Journal Bills';
-                            RunObject = report "PR Transfer To Journal Bills";
-                            ApplicationArea = Basic, Suite;
-                        }
-                        action("General Journals")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'BOSA Salary Journal';
-                            Image = Journal;
-                            RunObject = page "General Journal";
-                            RunPageView = where("Journal Template Name" = Const('GENERAL'), "Journal Batch Name" = Const('SALARIES'));
-
-                        }
                     }
 
                 }
                 group("PR Reports")
                 {
                     Caption = 'Reports';
-                    // group("Tasks")
+                   
+                    action("Pr Variance Report")
+                    {
+                        Caption = 'PR Monthly Variance';
+                        RunObject = report "Pr Variance Report";
+                        ApplicationArea = Basic, Suite;
+                    }
+                    action("Payroll Variance Report")
+                    {
+                        Caption = 'Payroll Monthly Variance Report (BPAY & NPAY & GPAY)';
+                        RunObject = report "Payroll Variance Report";
+                        ApplicationArea = Basic, Suite;
+                    }
+
+                    action("prPaye Report")
+                    {
+                        Caption = 'PAYE Schedule';
+                        RunObject = report "prPaye Report";
+                        ApplicationArea = Basic, Suite;
+                    }
+                    action("PR NSSF")
+                    {
+                        Caption = 'PR NSSF report';
+                        RunObject = report prNSSF;
+                        ApplicationArea = Basic, Suite;
+                    }
+                    action("prDeductions Report")
+                    {
+                        Caption = 'Deductions Report';
+                        RunObject = report "prDeductions Report";
+                        ApplicationArea = Basic, Suite;
+                    }
+                  
+                    action("prAllowances Report")
+                    {
+                        Caption = 'prAllowances Report';
+                        RunObject = report "prAllowances Report";
+                        ApplicationArea = Basic, Suite;
+                    }
+                    // action(prGrossNetPay)
                     // {
-                    //     Caption = 'Tasks';
-                    //     action("Update Payroll Credit Accounts")
+                    //     Caption = 'Gross NetPay';
+                    //     ApplicationArea = Basic, Suite;
+                    //     RunObject = report prGrossNetPay;
+                    // }
+                    // action("prGrossNetPay FxedTC")
+                    // {
+                    //     Caption = 'prGrossNetPay FxedTC';
+                    //     RunObject = report "prGrossNetPay FxedTC";
+                    //     ApplicationArea = Basic, Suite;
+                    // }
+                    // action("prPayrollSummary-List")
+                    // {
+                    //     Caption = 'prPayrollSummary-List';
+                    //     RunObject = report "prPayrollSummary-List";
+                    //     ApplicationArea = Basic, Suite;
+                    // }
+                    // action("Staff Member Balances")
+                    // {
+                    //     Caption = 'Staff Member Balances';
+                    //     RunObject = report "Staff Member Balances";
+                    //     ApplicationArea = Basic, Suite;
+                    // }
+
+                    // action("Pension Summary")
+                    // {
+                    //     Caption = 'Pension Summary';
+                    //     RunObject = report "Pension Summary";
+                    //     ApplicationArea = Basic, Suite;
+                    // }
+                    // action("prBank Payments")
+                    // {
+                    //     Caption = 'prBank Payments';
+                    //     RunObject = report "prBank Payments";
+                    //     ApplicationArea = Basic, Suite;
+                    //     visible = false;
+                    // }
+                    action("PrAllowances Summary")
+                    {
+                        Caption = 'PrAllowances Summary';
+                        RunObject = report "PrAllowances Summary";
+                        ApplicationArea = Basic, Suite;
+                    }
+                    action(" PrDeductions Summary")
+                    {
+                        Caption = 'PrDeductions Summary';
+                        RunObject = report "PrDeductions Summary";
+                        ApplicationArea = Basic, Suite;
+                    }
+
+                    action("Helb Report")
+                    {
+                        Caption = 'Helb Report';
+                        RunObject = report "Helb Report";
+                        ApplicationArea = Basic, Suite;
+                    }
+                    // action("PR iTax Report")
+                    // {
+                    //     Caption = 'PR iTax Report';
+                    //     RunObject = report "PR iTax Report";
+                    //     ApplicationArea = Basic, Suite;
+                    // }
+                    action("PR Company Totals")
+                    {
+                        Caption = 'PR Company Summary';
+                        RunObject = report "PR Company Totals";
+                        ApplicationArea = Basic, Suite;
+                    }
+                    // action("Fringe Benefit")
+                    // {
+
+                    //     RunObject = report "Fringe Benefit";
+                    //     ApplicationArea = Basic, Suite;
+                    // }
+
+
+                    // action("prP9A-test  new")
+                    // {
+                    //     Caption = 'prP9A-test  new';
+                    //     RunObject = report "prP9A-test  new";
+                    //     ApplicationArea = Basic, Suite;
+                    // }
+                    // action("PR Company FixedTC Totals")
+                    // {
+                    //     Caption = 'PR Company FixedTC Totals';
+                    //     //RunObject = report "PR Company FixedTC Totals";
+                    //     ApplicationArea = Basic, Suite;
+                    //     visible = False;
+                    // }
+                    // action("Detailed Payroll Transactions")
+                    // {
+                    //     Caption = 'Detailed Payroll Transactions';
+                    //     RunObject = report "Detailed Payroll Transactions";
+                    //     ApplicationArea = Basic, Suite;
+                    // }
+                    // action("Staff Allowance  P9")
+                    // {
+                    //     Caption = 'Staff Allowance  P9';
+                    //     // RunObject = report "Staff Allowance  P9";
+                    //     ApplicationArea = Basic, Suite;
+                    // }
+                    // action("Overtime Hours Worked1")
+                    // {
+                    //     Caption = 'Overtime Hours Worked1';
+                    //     RunObject = report "Overtime Hours Worked1";
+                    //     ApplicationArea = Basic, Suite;
+                    // }
+                    // group("PR Admin")
+                    // {
+                    //     Caption = 'Administration';
+                    //     action("Update Mismatched HR Loans")
                     //     {
-                    //         Caption = 'Update Payroll Credit Accounts';
-                    //         //RunObject = report "Update Payroll Credit Accounts";
+                    //         Caption = 'Update Mismatched HR Loans';
+                    //         RunObject = report "Update Mismatched HR Loans";
                     //         ApplicationArea = Basic, Suite;
                     //     }
                     // }
-                    group("Rep and Analysis")
-                    {
-                        Caption = 'Reports and Analysis';
-                        action("PR E-Mail Individual Payslip")
-                        {
-                            Caption = 'PR E-Mail Individual Payslip';
-                            RunObject = report "PR E-Mail Individual Payslip";
-                            ApplicationArea = Basic, Suite;
-                        }
-
-                        // action("PRPayroll Monthly Variance")
-                        // {
-                        //     Caption = 'PR Monthly Variance';
-                        //     RunObject = report "prMonthly Variance";
-                        //     ApplicationArea = Basic, Suite;
-                        //     visible = false;
-                        // }
-                        action("Pr Variance Report")
-                        {
-                            Caption = 'PR Monthly Variance';
-                            RunObject = report "Pr Variance Report";
-                            ApplicationArea = Basic, Suite;
-                        }
-                        action("Payroll Variance Report")
-                        {
-                            Caption = 'Payroll Monthly Variance Report (BPAY & NPAY & GPAY)';
-                            RunObject = report "Payroll Variance Report";
-                            ApplicationArea = Basic, Suite;
-                        }
-
-                        action("prPaye Report")
-                        {
-                            Caption = 'PAYE Schedule';
-                            RunObject = report "prPaye Report";
-                            ApplicationArea = Basic, Suite;
-                        }
-                        action("prDeductions Report")
-                        {
-                            Caption = 'Deductions Report';
-                            RunObject = report "prDeductions Report";
-                            ApplicationArea = Basic, Suite;
-                        }
-                        action("Transactions Report")
-                        {
-                            Caption = 'Staff Deductions Report';
-                            RunObject = report AllTransactions;
-                            ApplicationArea = Basic, Suite;
-                        }
-                        action("prAllowances Report")
-                        {
-                            Caption = 'prAllowances Report';
-                            RunObject = report "prAllowances Report";
-                            ApplicationArea = Basic, Suite;
-                        }
-                        action(prGrossNetPay)
-                        {
-                            Caption = 'Gross NetPay';
-                            ApplicationArea = Basic, Suite;
-                            RunObject = report prGrossNetPay;
-                        }
-                        // action("prGrossNetPay FxedTC")
-                        // {
-                        //     Caption = 'prGrossNetPay FxedTC';
-                        //     RunObject = report "prGrossNetPay FxedTC";
-                        //     ApplicationArea = Basic, Suite;
-                        // }
-                        // action("prPayrollSummary-List")
-                        // {
-                        //     Caption = 'prPayrollSummary-List';
-                        //     RunObject = report "prPayrollSummary-List";
-                        //     ApplicationArea = Basic, Suite;
-                        // }
-                        // action("Staff Member Balances")
-                        // {
-                        //     Caption = 'Staff Member Balances';
-                        //     RunObject = report "Staff Member Balances";
-                        //     ApplicationArea = Basic, Suite;
-                        // }
-
-                        action("Pension Summary")
-                        {
-                            Caption = 'Pension Summary';
-                            RunObject = report "Pension Summary";
-                            ApplicationArea = Basic, Suite;
-                        }
-                        // action("prBank Payments")
-                        // {
-                        //     Caption = 'prBank Payments';
-                        //     RunObject = report "prBank Payments";
-                        //     ApplicationArea = Basic, Suite;
-                        //     visible = false;
-                        // }
-                        action("PrAllowances Summary")
-                        {
-                            Caption = 'PrAllowances Summary';
-                            RunObject = report "PrAllowances Summary";
-                            ApplicationArea = Basic, Suite;
-                        }
-                        action(" PrDeductions Summary")
-                        {
-                            Caption = 'PrDeductions Summary';
-                            RunObject = report "PrDeductions Summary";
-                            ApplicationArea = Basic, Suite;
-                        }
-
-                        action("Helb Report")
-                        {
-                            Caption = 'Helb Report';
-                            RunObject = report "Helb Report";
-                            ApplicationArea = Basic, Suite;
-                        }
-                        // action("PR iTax Report")
-                        // {
-                        //     Caption = 'PR iTax Report';
-                        //     RunObject = report "PR iTax Report";
-                        //     ApplicationArea = Basic, Suite;
-                        // }
-                        action("PR Company Totals")
-                        {
-                            Caption = 'PR Company Summary';
-                            RunObject = report "PR Company Totals";
-                            ApplicationArea = Basic, Suite;
-                        }
-                        // action("Fringe Benefit")
-                        // {
-
-                        //     RunObject = report "Fringe Benefit";
-                        //     ApplicationArea = Basic, Suite;
-                        // }
-
-
-                        // action("prP9A-test  new")
-                        // {
-                        //     Caption = 'prP9A-test  new';
-                        //     RunObject = report "prP9A-test  new";
-                        //     ApplicationArea = Basic, Suite;
-                        // }
-                        // action("PR Company FixedTC Totals")
-                        // {
-                        //     Caption = 'PR Company FixedTC Totals';
-                        //     //RunObject = report "PR Company FixedTC Totals";
-                        //     ApplicationArea = Basic, Suite;
-                        //     visible = False;
-                        // }
-                        action("Detailed Payroll Transactions")
-                        {
-                            Caption = 'Detailed Payroll Transactions';
-                            RunObject = report "Detailed Payroll Transactions";
-                            ApplicationArea = Basic, Suite;
-                        }
-                        // action("Staff Allowance  P9")
-                        // {
-                        //     Caption = 'Staff Allowance  P9';
-                        //     // RunObject = report "Staff Allowance  P9";
-                        //     ApplicationArea = Basic, Suite;
-                        // }
-                        // action("Overtime Hours Worked1")
-                        // {
-                        //     Caption = 'Overtime Hours Worked1';
-                        //     RunObject = report "Overtime Hours Worked1";
-                        //     ApplicationArea = Basic, Suite;
-                        // }
-                        // group("PR Admin")
-                        // {
-                        //     Caption = 'Administration';
-                        //     action("Update Mismatched HR Loans")
-                        //     {
-                        //         Caption = 'Update Mismatched HR Loans';
-                        //         RunObject = report "Update Mismatched HR Loans";
-                        //         ApplicationArea = Basic, Suite;
-                        //     }
-                        // }
-                    }
+                    // }
                 }
                 group(TaxReturns)
                 {
@@ -4435,18 +4380,7 @@ page 52186778 "Finance Role Center"
                     group("Repo and analysis")
                     {
                         Caption = 'Reports And analysis';
-                        // action("P 10A")
-                        // {
-                        //     Caption = 'P 10A';
-                        //     RunObject = report P10A;
-                        //     ApplicationArea = Basic, Suite;
-                        // }
-                        // action("P1 0")
-                        // {
-                        //     Caption = 'P10';
-                        //     RunObject = report P10;
-                        //     ApplicationArea = Basic, Suite;
-                        // }
+
                         action("P 9")
                         {
                             Caption = 'P9';
