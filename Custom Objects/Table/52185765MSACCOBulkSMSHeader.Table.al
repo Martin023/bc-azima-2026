@@ -64,6 +64,7 @@ table 52185765 "Bulk SMS Header"
         }
         field(10; Message_; Text[900])
         {
+            Caption = 'Message';
             trigger OnValidate()
             begin
 
@@ -106,6 +107,22 @@ table 52185765 "Bulk SMS Header"
         field(5702; "Email Subject"; Code[200])
         {
         }
+        field(5703; "Attachment"; Media)
+        {
+            Caption = 'Attachment Content';
+        }
+        field(5704; "Attachment Name"; Text[250])
+        {
+            Caption = 'Attachment Name';
+        }
+        field(5705; "Has Attachment"; Boolean)
+        {
+            Caption = 'Has Attachment';
+        }
+        field(5706; "Email Signature"; Text[2048])
+        {
+            Caption = 'Email Signature';
+        }
 
     }
     keys
@@ -128,8 +145,10 @@ table 52185765 "Bulk SMS Header"
         if No = '' then begin
             NoSetup.Get;
             NoSetup.TestField(NoSetup."BULK SMS Nos");
-            No := NoSeriesMgt.GetNextNo(NoSetup."BULK SMS Nos");
-            // NoSeriesMgt.InitSeries(NoSetup."BULK SMS Nos", xRec."No. Series", 0D, No, "No. Series");
+            if NoSeriesMgt.AreRelated(NoSetup."BULK SMS Nos", xRec."No. Series") then
+                "No. Series" := xRec."No. Series" else
+                "No. Series" := NoSetup."BULK SMS Nos";
+            Rec."No" := NoSeriesMgt.GetNextNo("No. Series", WorkDate());
         end;
 
         "Date Entered" := Today;
@@ -140,7 +159,6 @@ table 52185765 "Bulk SMS Header"
 
     var
         NoSetup: Record "Banking No Setup";
-        // NoSeriesMgt: Codeunit NoSeriesManagement;
         NoSeriesMgt: Codeunit "No. Series";
         BulkSMSLine: Record "Bulk SMS Lines";
 }

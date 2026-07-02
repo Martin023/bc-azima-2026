@@ -30,6 +30,18 @@ page 52185750 "RTGS Transfer Header"
                     ApplicationArea = Basic, Suite;
                     Editable = TransactionTypeEdit;
                 }
+
+                field("Pay Mode"; Rec."Pay Mode")
+                {
+                    ApplicationArea = Basic, Suite;
+                    //Editable = DateEditable;
+                }
+
+                field("Cheque No"; Rec."Cheque No")
+                {
+                    // Editable = ChqVisible;
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Account Type"; Rec."Account Type")
                 {
                     ApplicationArea = Basic, Suite;

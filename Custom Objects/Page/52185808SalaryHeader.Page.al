@@ -41,16 +41,16 @@ page 52185808 "Salary Header"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Employer Code"; Rec."Employer Code")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = EmployerC;
-                }
-                field("Employer Name"; Rec."Employer Name")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = false;
-                }
+                // field("Employer Code"; Rec."Employer Code")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Editable = EmployerC;
+                // }
+                // field("Employer Name"; Rec."Employer Name")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Editable = false;
+                // }
                 field("Document No"; Rec."Document No")
                 {
                     ApplicationArea = Basic, Suite;
@@ -264,15 +264,16 @@ page 52185808 "Salary Header"
                     var
                         SalaryLines: Record "Salary Lines";
                         SavingsAccounts: Record "Savings Accounts";
-                        StrMenuTxt: Label '&Staff No.,&Account No.,&Member No';
+                        StrMenuTxt: Label '&Staff No.,&Account No.,&Member No,ID No.';
                         Selection: Integer;
                         OldSalary: record "Salary Lines";
+                        Members: record Members;
                     begin
                         // if Rec."Donnot Recover" = false then
                         //     Rec.TestField("Employer Code");
                         rec.TestField("Posting date");
 
-                        Selection := StrMenu(StrMenuTxt, 3);
+                        Selection := StrMenu(StrMenuTxt, 1);
 
                         if Selection = 0 then
                             exit;
@@ -432,6 +433,60 @@ page 52185808 "Salary Header"
                                     //SalaryLines.Posted := false;
                                     SalaryLines.Modify;
 
+
+                                until SalaryLines.Next = 0;
+                            end;
+                        end;
+
+                        if Selection = 4 then begin
+                            SalaryLines.Reset;
+                            SalaryLines.SetRange(SalaryLines."Salary Header No.", Rec.No);
+                            if SalaryLines.Find('-') then begin
+                                repeat
+                                    Members.reset();
+                                    Members.SetRange("Primary Identification", SalaryLines."ID No.");
+                                    if Members.FindFirst() then begin
+                                        SavingsAccounts.Reset;
+                                        SavingsAccounts.SetRange(SavingsAccounts."Member No.", Members."No.");
+                                        SavingsAccounts.SetFilter(SavingsAccounts."Product Type", '191');
+                                        // SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"FOSA Account");
+                                        if SavingsAccounts.Find('-') then begin
+
+                                            SalaryLines."Account Not Found" := false;
+                                            //SalaryLines.Posted := false;
+                                            SalaryLines.Modify;
+
+                                            if SavingsAccounts."ID No." <> '' then begin
+                                                if SavingsAccounts.Blocked <> SavingsAccounts.Blocked::" " then
+                                                    SalaryLines."Blocked Accounts" := true
+                                                else
+                                                    SalaryLines."Blocked Accounts" := false;
+
+                                                SalaryLines."ID No." := SavingsAccounts."ID No.";
+                                                SalaryLines."Account No." := SavingsAccounts."No.";
+                                                SalaryLines.Status := SavingsAccounts.Status;
+                                                SalaryLines."Member No." := SavingsAccounts."Member No.";
+                                                SalaryLines.Name := SavingsAccounts.Name;
+                                                SalaryLines."Employer Code" := SavingsAccounts."Employer Code";
+                                                SalaryLines."Global Dimension 1 Code" := SavingsAccounts."Global Dimension 1 Code";
+                                                SalaryLines."Global Dimension 2 Code" := SavingsAccounts."Global Dimension 2 Code";
+                                                SalaryLines."Posting Date" := Today;
+                                                SalaryLines."Posting Time" := Time;
+                                                SalaryLines."Actual Date Posted" := Today;
+                                            end else
+                                                SalaryLines."Account Not Found" := true;
+                                            //SalaryLines.Posted := false;
+                                            SalaryLines.Modify;
+
+                                            //   SavingsAccounts."Salary Through FOSA" := true;
+                                            //   SavingsAccounts.Modify;
+                                        end else
+                                            SalaryLines."Account Not Found" := true;
+                                        //SalaryLines.Posted := false;
+                                    end
+                                    else
+                                        SalaryLines."Account Not Found" := true;
+                                    SalaryLines.Modify;
 
                                 until SalaryLines.Next = 0;
                             end;
@@ -872,7 +927,9 @@ page 52185808 "Salary Header"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
+        rec."Date Entered" := Today;
         rec."Income Type" := rec."Income Type"::Salary;
+
     end;
 
     trigger OnAfterGetCurrRecord()

@@ -3652,12 +3652,6 @@ End Function
   <DataSets>
     <DataSet Name="DataSet_Result">
       <Fields>
-        <Field Name="ReportForNavId_4946">
-          <DataField>ReportForNavId_4946</DataField>
-        </Field>
-        <Field Name="ReportForNavId_8631">
-          <DataField>ReportForNavId_8631</DataField>
-        </Field>
         <Field Name="CompanyInfo_Picture">
           <DataField>CompanyInfo_Picture</DataField>
         </Field>

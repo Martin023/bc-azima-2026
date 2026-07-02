@@ -350,6 +350,7 @@ Codeunit 52185472 "PR Payroll Processing"
                 prTransactionCodes.Reset;
                 prTransactionCodes.SetRange(prTransactionCodes."Transaction Code", prEmployeeTransactions."Transaction Code");
                 prTransactionCodes.SetRange(prTransactionCodes."Transaction Type", prTransactionCodes."transaction type"::Income);
+                prTransactionCodes.SetRange(prTransactionCodes.nssf, false);
                 if prTransactionCodes.Find('-') then begin
 
                     curTransAmount := 0;
@@ -535,11 +536,44 @@ Codeunit 52185472 "PR Payroll Processing"
          intYear, '', '', SelectedPeriod, Dept, '', Journalpostas::Debit, Journalpostingtype::"G/L Account", '', Coopparameters::none, SalaryType::"Taxable Pay");
 
         //NEW NSSF CODE HERE
+        // curNssf_Base_Amount := 0;
+        // if intNSSF_BasedOn = Intnssf_basedon::Gross then //>NSSF calculation can be based on:
+        //     curNssf_Base_Amount := curGrossPay;
+        // if intNSSF_BasedOn = Intnssf_basedon::Basic then
+        //     curNssf_Base_Amount := curBasicPay;
+
+        //NSSF moved to trans codes
         curNssf_Base_Amount := 0;
-        if intNSSF_BasedOn = Intnssf_basedon::Gross then //>NSSF calculation can be based on:
-            curNssf_Base_Amount := curGrossPay;
-        if intNSSF_BasedOn = Intnssf_basedon::Basic then
-            curNssf_Base_Amount := curBasicPay;
+        strExtractedFrml := '';
+        prEmployeeTransactions.Reset;
+        prEmployeeTransactions.SetRange(prEmployeeTransactions."Employee Code", strEmpCode);
+        prEmployeeTransactions.SetRange(prEmployeeTransactions."Period Month", intMonth);
+        prEmployeeTransactions.SetRange(prEmployeeTransactions."Period Year", intYear);
+        prEmployeeTransactions.SetRange(prEmployeeTransactions.Stopped, false);
+        if prEmployeeTransactions.Find('-') then begin
+            curNssf_Base_Amount := 0;
+            repeat
+                prTransactionCodes.Reset;
+                prTransactionCodes.SetRange(prTransactionCodes."Transaction Code", prEmployeeTransactions."Transaction Code");
+                prTransactionCodes.SetRange(prTransactionCodes."Transaction Type", prTransactionCodes."transaction type"::Deduction);
+                prTransactionCodes.SetRange(prTransactionCodes.NSSF, true);
+                if prTransactionCodes.Find('-') then begin
+                    if prTransactionCodes."Is Formula" then begin
+                        strExtractedFrml := fnPureFormula(strEmpCode, intMonth, intYear, prTransactionCodes.Formula);
+                        if prEmployeeTransactions."No of Units" = 0 then begin
+                            curNssf_Base_Amount := ROUND(fnFormulaResult(strExtractedFrml), 0.01, '<'); //Get the calculated amount
+                                                                                                        //error('%1',curTransAmount);
+                        end else
+                            curNssf_Base_Amount := ROUND(fnFormulaResult(strExtractedFrml), 0.01, '<') * prEmployeeTransactions."No of Units";
+                    end else begin
+                        curNssf_Base_Amount := prEmployeeTransactions.Amount;
+                        //end;
+                    end;
+                end;
+            until prEmployeeTransactions.Next = 0;
+        end;
+
+
 
         //Get the NSSF amount
         curNSSF := 0;
@@ -599,6 +633,8 @@ Codeunit 52185472 "PR Payroll Processing"
                 PrTransactionCodes.Reset;
                 PrTransactionCodes.SetRange(PrTransactionCodes."Transaction Code", prEmployeeTransactions."Transaction Code");
                 PrTransactionCodes.SetRange(PrTransactionCodes."Transaction Type", prTransactionCodes."transaction type"::Deduction);
+                prTransactionCodes.SetRange(prTransactionCodes.nssf, false);
+                prTransactionCodes.SetRange(prTransactionCodes.SHIF, false);
                 pRTransactionCodes.Setrange(PrTransactionCodes.Allowable, True);
                 prTransactionCodes.setrange(pension, false);
                 if prTransactionCodes.Find('-') then begin
@@ -759,13 +795,9 @@ Codeunit 52185472 "PR Payroll Processing"
         HREmp2.Reset;
         if HREmp2.Get(strEmpCode) then begin
             if HREmp2.Disabled = HREmp2.Disabled::No then begin
-                if curPensionStaff > (curMaxPensionContrib) then begin
-                    curTaxablePay := curGrossTaxable - (curSalaryArrears + curDefinedContrib + (curMaxPensionContrib - curDefinedContrib) + curOOI + curHOSP + OtherNonDeductibles + curNonTaxable
-                                     + curPensionReliefAmount + curMorgageRelief) + BenifitAmount //includes subtracting mortgage relief to get taxable pay
-                end else
-                    curTaxablePay := curGrossTaxable - (curSalaryArrears + curDefinedContrib + curPensionStaff + curOOI + curHOSP + OtherNonDeductibles + curNonTaxable
-                                   + curPensionReliefAmount + curMorgageRelief) + BenifitAmount;//includes subtracting mortgage relief to get taxable pay
-                                                                                                //CurTaxablePay := CurGrossTaxable - (CurDefinedContrib + OtherNonDeductibles);
+
+                curTaxablePay := curGrossTaxable - (curDefinedContrib + OtherNonDeductibles + curPensionStaff)
+
 
             end else begin
                 if HREmp2.Disabled = HREmp2.Disabled::Yes then begin
@@ -868,12 +900,41 @@ Codeunit 52185472 "PR Payroll Processing"
         ShifAmount := 0;
 
 
-        if intNHIF_BasedOn = Intnhif_basedon::Gross then //>NHIF calculation can be based on:
-            CurShifBaseAmount := curGrossPay;
-        if intNHIF_BasedOn = Intnhif_basedon::Basic then
-            CurShifBaseAmount := curBasicPay;
-        if intNHIF_BasedOn = Intnhif_basedon::"Taxable Pay" then
-            CurShifBaseAmount := curTaxablePay;
+        // if intNHIF_BasedOn = Intnhif_basedon::Gross then //>NHIF calculation can be based on:
+        //     CurShifBaseAmount := curGrossPay;
+        // if intNHIF_BasedOn = Intnhif_basedon::Basic then
+        //     CurShifBaseAmount := curBasicPay;
+        // if intNHIF_BasedOn = Intnhif_basedon::"Taxable Pay" then
+        //     CurShifBaseAmount := curTaxablePay;
+        CurShifBaseAmount := 0;
+        strExtractedFrml := '';
+        prEmployeeTransactions.Reset;
+        prEmployeeTransactions.SetRange(prEmployeeTransactions."Employee Code", strEmpCode);
+        prEmployeeTransactions.SetRange(prEmployeeTransactions."Period Month", intMonth);
+        prEmployeeTransactions.SetRange(prEmployeeTransactions."Period Year", intYear);
+        prEmployeeTransactions.SetRange(prEmployeeTransactions.Stopped, false);
+        if prEmployeeTransactions.Find('-') then begin
+            CurShifBaseAmount := 0;
+            repeat
+                prTransactionCodes.Reset;
+                prTransactionCodes.SetRange(prTransactionCodes."Transaction Code", prEmployeeTransactions."Transaction Code");
+                prTransactionCodes.SetRange(prTransactionCodes."Transaction Type", prTransactionCodes."transaction type"::Deduction);
+                prTransactionCodes.SetRange(prTransactionCodes.SHIF, true);
+                if prTransactionCodes.Find('-') then begin
+                    if prTransactionCodes."Is Formula" then begin
+                        strExtractedFrml := fnPureFormula(strEmpCode, intMonth, intYear, prTransactionCodes.Formula);
+                        if prEmployeeTransactions."No of Units" = 0 then begin
+                            CurShifBaseAmount := ROUND(fnFormulaResult(strExtractedFrml), 0.01, '<'); //Get the calculated amount
+                                                                                                      //error('%1',curTransAmount);
+                        end else
+                            CurShifBaseAmount := ROUND(fnFormulaResult(strExtractedFrml), 0.01, '<') * prEmployeeTransactions."No of Units";
+                    end else begin
+                        CurShifBaseAmount := prEmployeeTransactions.Amount;
+                        //end;
+                    end;
+                end;
+            until prEmployeeTransactions.Next = 0;
+        end;
 
         ShifAmount := (CurShifBaseAmount * (ShifPercentage / 100));
         ShifAmount := Round(ShifAmount, 0.01, '<');
@@ -1000,6 +1061,9 @@ Codeunit 52185472 "PR Payroll Processing"
                 prTransactionCodes.Reset;
                 prTransactionCodes.SetRange(prTransactionCodes."Transaction Code", prEmployeeTransactions."Transaction Code");
                 prTransactionCodes.SetRange(prTransactionCodes."Transaction Type", prTransactionCodes."transaction type"::Deduction);
+                prTransactionCodes.SetRange(prTransactionCodes.nssf, false);
+                prTransactionCodes.SetRange(prTransactionCodes.SHIF, false);
+
                 if prTransactionCodes.Find('-') then begin
                     curTransAmount := 0;
                     curTransBalance := 0;
@@ -1024,27 +1088,6 @@ Codeunit 52185472 "PR Payroll Processing"
                         end else begin
                             curTransAmount := Round(prEmployeeTransactions.Amount, 0.01, '=');
                         end;
-                    end;
-
-
-
-                    //**************************If "deduct Premium" is not ticked and the type is insurance*****
-                    if (prTransactionCodes."Special Transactions" = prTransactionCodes."special transactions"::"Life Insurance")
-                      and (prTransactionCodes."Deduct Premium" = false) then begin
-                        curTransAmount := 0;
-                    end;
-
-                    //**************************If "deduct Premium" is not ticked and the type is mortgage- Dennis*****
-                    if (prTransactionCodes."Special Transactions" = prTransactionCodes."special transactions"::Mortgage)
-                     and (prTransactionCodes."Deduct Mortgage" = false) then begin
-                        curTransAmount := 0;
-                    end;
-
-
-                    //**************************If "deduct Premium" is not ticked and the type is mortgage- Chacha*****
-                    if (prTransactionCodes."Special Transactions" = prTransactionCodes."special transactions"::Pension)
-                     and (prTransactionCodes.Welfare = false) then begin
-                        curTransAmount := 0;
                     end;
 
                     //Get the posting Details
@@ -1104,7 +1147,8 @@ Codeunit 52185472 "PR Payroll Processing"
 
                             HREmployee.Get(strEmpCode);
                             Loans.Reset;
-                            Loans.SetRange("Staff No", strEmpCode);
+                            loans.setrange("Member No.", HREmployee."Member No.");
+                            // Loans.SetRange("Staff No", strEmpCode);
                             Loans.SetRange("Loan Product Type", prTransactionCodes."Loan Product Type");
                             Loans.SetRange("Loan No.", prEmployeeTransactions."Loan Number");
                             if Loans.Find('-') then begin
@@ -1117,102 +1161,6 @@ Codeunit 52185472 "PR Payroll Processing"
 
                         JournalAc := prTransactionCodes."GL Account";
                         JournalPostingType := Journalpostingtype::"G/L Account";
-                    end;
-
-                    //End posting Details
-
-                    if (prTransactionCodes."Special Transactions" = prTransactionCodes."special transactions"::"Staff Loan (Interest Varies)") and
-                       (prTransactionCodes."Repayment Method" = prTransactionCodes."repayment method"::Amortized) then begin
-                        curTransAmount := 0;
-                        curLoanInt := 0;
-
-                        if not prEmployeeTransactions."Exempt from Interest" then
-                            prEmployeeTransactions.TestField(prEmployeeTransactions."Loan Interest Rate");
-
-                        if Ploan.Get(prEmployeeTransactions."Loan Number") then
-                            Ploan.CalcFields("Outstanding Interest", "Outstanding Balance");
-                        if Ploan."Outstanding Balance" > prEmployeeTransactions.Amount then begin
-                            if prEmployeeTransactions.Amount >= Ploan."Outstanding Interest" then
-                                curLoanInt := Ploan."Outstanding Interest" else
-                                if prEmployeeTransactions.Amount <= Ploan."Outstanding Interest" then
-                                    curLoanInt := prEmployeeTransactions.Amount
-
-                        end else
-                            if Ploan."Outstanding Interest" <= prEmployeeTransactions.Amount then
-                                curLoanInt := Ploan."Outstanding Interest" else
-                                if Ploan."Outstanding Interest" >= prEmployeeTransactions.Amount then
-                                    curLoanInt := prEmployeeTransactions.Amount;
-
-                        if curLoanInt < 0 then
-                            curLoanInt := 0 else
-                            curLoanInt := curLoanInt;
-                        //Post the Interest
-                        if (curLoanInt <> 0) then begin
-                            curTransAmount := curLoanInt;
-                            curTotalDeductions := curTotalDeductions + curTransAmount; //Sum-up all the deductions
-                            curTransBalance := 0;
-                            strTransCode := prEmployeeTransactions."Transaction Code" + '-INT';
-                            strTransDescription := prEmployeeTransactions."Transaction Name" + 'Interest';
-                            TGroup := 'DEDUCTIONS';
-                            // TGroupOrder := 8;
-                            // TSubGroupOrder := 1;
-                            TGroupOrder := 2;
-                            TSubGroupOrder := 1;
-
-                            fnUpdatePeriodTrans(strEmpCode, strTransCode, TGroup, TGroupOrder, TSubGroupOrder,
-                              strTransDescription, curTransAmount, curTransBalance, intMonth, intYear,
-                              prEmployeeTransactions.Membership, prEmployeeTransactions."Reference No", SelectedPeriod, Dept,
-                              JournalAc, Journalpostas::Credit, JournalPostingType, prEmployeeTransactions."Loan Number",
-                              Coopparameters::"loan Interest", SalaryType::Loans)
-                        end;
-                        //Get the Principal Amt
-                        if Ploan.Get(prEmployeeTransactions."Loan Number") then //Variated
-                            // if Ploan."Loan Product Type" <> '133' then begin
-                                curTransAmount := prEmployeeTransactions.Amount - curLoanInt;
-
-                        // end;
-                    end;
-
-                    case prTransactionCodes."Balance Type" of //[0=None, 1=Increasing, 2=Reducing]
-                        prTransactionCodes."balance type"::None:
-                            curTransBalance := 0;
-                        prTransactionCodes."balance type"::Increasing:
-                            begin
-                                //Added Dann
-                                if prTransactionCodes."Special Transactions" <> prTransactionCodes."special transactions"::"Defined Contribution"
-                                then begin
-                                    curTransAmount := prEmployeeTransactions.Amount;
-                                end;
-                                //Added Dann
-                                curTransBalance := prEmployeeTransactions.Balance + curTransAmount;
-                            end;
-                        prTransactionCodes."balance type"::Reducing:
-                            begin
-                                //curTransBalance := prEmployeeTransactions.Balance - curTransAmount;
-                                if prEmployeeTransactions.Balance < prEmployeeTransactions.Amount then begin
-                                    curTransAmount := prEmployeeTransactions.Balance;
-                                    curTransBalance := 0;
-                                end else begin
-                                    //Added Dann
-                                    if not prEmployeeTransactions.Variated then begin //PMN
-                                        if prEmployeeTransactions."Loan Number" = '' then
-                                            curTransAmount := prEmployeeTransactions.Amount else
-                                            curTransAmount := curTransAmount;
-                                    end else
-                                        curTransAmount := curTransAmount;
-                                    //Added Dann
-
-                                    curTransBalance := prEmployeeTransactions.Balance - curTransAmount;
-                                end;
-                                if prEmployeeTransactions."Loan Number" <> ' ' then
-                                    if prTransactionCodes."Balance Type" = prTransactionCodes."balance type"::Reducing then
-                                        curTransBalance := prEmployeeTransactions.Balance - (curTransAmount) + prEmployeeTransactions."Interest Due";
-
-                                if curTransBalance < 0 then begin
-                                    curTransAmount := 0;
-                                    curTransBalance := 0;
-                                end;
-                            end
                     end;
 
                     curTotalDeductions := ROUND(curTotalDeductions + curTransAmount, 0.01, '<'); //Sum-up all the deductions
@@ -1235,46 +1183,6 @@ Codeunit 52185472 "PR Payroll Processing"
                      prTransactionCodes."coop parameters", SalaryType::Loans);
 
 
-                    // Affordable Housing Relief..................................ReliefTest
-                    if prTransactionCodes."Special Transactions" = prTransactionCodes."Special Transactions"::"Affordable Housing" then begin
-
-                        AffordableRelief := ((AffordableHRelief / 100) * prEmployeeTransactions.Amount);
-                        if AffordableRelief > CurAffordableHousingMax then AffordableRelief := CurAffordableHousingMax;
-
-                        if AffordableRelief > 0 then begin
-
-                            curTransAmount := AffordableRelief;
-
-                            strTransDescription := 'Affordable housing Relief';
-                            TGroup := 'TAX CALCULATIONS';
-                            TGroupOrder := 6;
-                            TSubGroupOrder := 4;
-                            fnUpdatePeriodTrans(strEmpCode, 'AFHR', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
-                            curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
-                            '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none, SalaryType::Relief);
-
-                        end;
-                    end;
-
-                    // Affordable Housing Relief..................................
-
-                    //Fringe Benefits and Low interest Benefits
-                    if prTransactionCodes."Fringe Benefit" = true then begin
-                        if prTransactionCodes."Interest Rate" < curLoanMarketRate then begin
-                            fnCalcFringeBenefit := (((curLoanMarketRate - prTransactionCodes."Interest Rate") * curLoanCorpRate) / 1200)
-                             * prEmployeeTransactions.Balance;
-                        end;
-                    end else begin
-                        fnCalcFringeBenefit := 0;
-                    end;
-                    if fnCalcFringeBenefit > 0 then begin
-                        fnUpdateEmployerDeductions(strEmpCode, prEmployeeTransactions."Transaction Code" + '-FRG',
-                         'EMP', TGroupOrder, TSubGroupOrder, 'Fringe Benefit Tax', fnCalcFringeBenefit, 0, intMonth, intYear,
-                          prEmployeeTransactions.Membership, prEmployeeTransactions."Reference No", SelectedPeriod)
-
-                    end;
-                    //End Fringe Benefits
-
                     //Create Employer Deduction
                     if (prTransactionCodes."Employer Deduction") or (prTransactionCodes."Include Employer Deduction") then begin
                         if prTransactionCodes."Is Formula for employer" <> '' then begin
@@ -1293,16 +1201,11 @@ Codeunit 52185472 "PR Payroll Processing"
                             fnUpdateEmployerDeductions(strEmpCode, prEmployeeTransactions."Transaction Code",
                              'EMP', TGroupOrder, TSubGroupOrder, '', curTransAmount, 0, intMonth, intYear,
                               prEmployeeTransactions.Membership, prEmployeeTransactions."Reference No", SelectedPeriod);
-
-
                         end;
-
                     end;
                 end;
 
             until prEmployeeTransactions.Next = 0;
-
-            //END GET TOTAL DEDUCTIONS
         end;
 
 
@@ -1327,25 +1230,8 @@ Codeunit 52185472 "PR Payroll Processing"
           '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none, SalaryType::"Total Deduction");
 
 
-
-
-
-        //Net Pay: calculate the Net pay for the month in the following manner:
-        //>Nett = Gross - (xNssfAmount + curMyNhifAmt + PAYE + PayeArrears + prTotDeductions)
-        //...Tot Deductions also include (SumLoan + SumInterest)
-
         //curNetPay :=curGrossPay - (curNSSF + curNHIF + curPAYE + curPayeArrears + curTotalDeductions);//-curIncludeinNet;******HK
         curNetPay := curGrossPay - curTotalDeductions;
-
-
-        //curNetPay:=curNetPay+curIncludeinNet;
-        //>Nett = Nett - curExcessPension
-        //...Excess pension is only used for tax. Staff is not paid the amount hence substract it
-        // curNetPay := curNetPay; //- curExcessPension
-
-        //>Nett = Nett - cSumEmployerDeductions
-        //...Employer Deductions are used for reporting as cost to company BUT dont affect Net pay
-        //curNetPay := curNetPay - curTotCompanyDed; //******Get Company Deduction*****
 
         curNetRnd_Effect := curNetPay - ROUND(curNetPay);
         curNetPay := ROUND(curNetPay, 0.01, '>'); //Check here//DERRICKNETPAY
@@ -1361,13 +1247,6 @@ Codeunit 52185472 "PR Payroll Processing"
         curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
         PayablesAcc, Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none, SalaryType::"Net Income");
         //PayablesAcc,JournalPostAs::Credit,JournalPostingType::"G/L Account",'',CoopParameters::none);
-
-        //  //*************************************************************************************************************
-        //  //Added: DW. To Update PR Staff Bank Transactions with Net Pay Amounts that are transfered to Individual Banks
-
-        //  fnUpdateStaffBankTrans(strEmpCode, 'NPAY',strTransDescription,curTransAmount,
-        //                        intMonth, intYear,SelectedPeriod,Dept);
-
 
         //  //*************************************************************************************************************
 
@@ -1389,6 +1268,8 @@ Codeunit 52185472 "PR Payroll Processing"
                 PrTransactionCodes.SetRange(PrTransactionCodes."Transaction Type", prTransactionCodes."transaction type"::Deduction);
                 pRTransactionCodes.Setrange(PrTransactionCodes.Allowable, True);
                 prTransactionCodes.setrange(pension, false);
+                prTransactionCodes.SetRange(prTransactionCodes.nssf, false);
+                prTransactionCodes.SetRange(prTransactionCodes.SHIF, false);
                 if pRTransactionCodes.find('-') then begin
                     repeat
                         Allowables := 0;
@@ -1428,8 +1309,6 @@ Codeunit 52185472 "PR Payroll Processing"
         fnUpdatePeriodTrans(strEmpCode, 'ALLOWABLES', TGroup, TGroupOrder, TSubGroupOrder, strTransDescription,
         curTransAmount, 0, intMonth, intYear, '', '', SelectedPeriod, Dept,
         '', Journalpostas::Credit, Journalpostingtype::"G/L Account", '', Coopparameters::none, SalaryType::"Other Allowances");
-
-        //Message('Allowables', curTransAmount);
 
     end;
 
@@ -1864,7 +1743,6 @@ Codeunit 52185472 "PR Payroll Processing"
         prNewPayrollPeriods: Record "PR Payroll Periods";
         CreateTrans: Boolean;
     begin
-        //MESSAGE('Also include function to reset No. of days worked');
         dtNewPeriod := CalcDate('1M', dtOpenPeriod);
         intNewMonth := Date2dmy(dtNewPeriod, 2);
         intNewYear := Date2dmy(dtNewPeriod, 3);
@@ -1873,7 +1751,6 @@ Codeunit 52185472 "PR Payroll Processing"
         intYear := Date2dmy(dtOpenPeriod, 3);
 
         prEmployeeTransactions.Reset;
-        //prEmployeeTransactions.SETRANGE(prEmployeeTransactions."Employee Code", strEmpCode);
         prEmployeeTransactions.SetRange(prEmployeeTransactions."Period Month", intMonth);
         prEmployeeTransactions.SetRange(prEmployeeTransactions."Period Year", intYear);
         prEmployeeTransactions.SetRange(prEmployeeTransactions.Stopped, false);
@@ -1882,7 +1759,6 @@ Codeunit 52185472 "PR Payroll Processing"
                 if not prEmployeeTransactions."Stop for Next Period" then begin
                     prTransactionCodes.Reset;
                     prTransactionCodes.SetRange(prTransactionCodes."Transaction Code", prEmployeeTransactions."Transaction Code");
-
                     if prTransactionCodes.Find('-') then begin
                         begin
                             case prTransactionCodes."Balance Type" of
@@ -1935,54 +1811,43 @@ Codeunit 52185472 "PR Payroll Processing"
                     if (prTransactionCodes.Frequency = prTransactionCodes.Frequency::Fixed) and
                        (prEmployeeTransactions."Stop for Next Period" = false) then //DENNO ADDED THIS TO CHECK FREQUENCY AND STOP IF MARKED
                      begin
-                        if (curTransAmount <> 0) then  //Update the employee transaction table
-                         begin
-                            if ((prTransactionCodes."Balance Type" = prTransactionCodes."balance type"::Reducing) and (curTransBalance <> 0)) or
-                             (prTransactionCodes."Balance Type" <> prTransactionCodes."balance type"::Reducing) then
-                                if not prEmployeeTransactions.Variated then begin
-                                    prEmployeeTransactions.Balance := curTransBalance;
-                                    prEmployeeTransactions.Modify;
-                                end;
-
-
-                            //Clear(prEmployeeTrans);
-                            prEmployeeTrans.Init;
-                            prEmployeeTrans."Employee Code" := prEmployeeTransactions."Employee Code";
-                            prEmployeeTrans."Transaction Code" := prEmployeeTransactions."Transaction Code";
-                            prEmployeeTrans."Transaction Name" := prEmployeeTransactions."Transaction Name";
-
-                            //IF NOT prEmployeeTrans.Variated THEN BEGIN  //variated pMN
-                            prEmployeeTrans.Amount := curTransAmount;
-                            // END;
-
-                            prEmployeeTrans.Balance := curTransBalance;
-                            prEmployeeTrans."Amortized Loan Total Repay Amt" := prEmployeeTransactions."Amortized Loan Total Repay Amt";
-                            prEmployeeTrans."Original Amount" := prEmployeeTransactions."Original Amount";
-                            //prEmployeeTrans.Membership := prEmployeeTransactions.Membership;
-                            //prEmployeeTrans."Reference No" := prEmployeeTransactions."Reference No";
-                            prEmployeeTrans."Period Month" := intNewMonth;
-                            prEmployeeTrans."Period Year" := intNewYear;
-                            prEmployeeTrans."Payroll Period" := dtNewPeriod;
-                            prEmployeeTrans."Loan Interest Rate" := prEmployeeTransactions."Loan Interest Rate";
-                            prEmployeeTrans."Loan Number" := prEmployeeTransactions."Loan Number";
-                            prEmployeeTrans.Variated := prEmployeeTransactions.Variated;
-
-                            //Added DW to Insert Subledger and Subledger Account for the next period
-                            if curTransSubledger <> Curtranssubledger::" " then begin
-                                prEmployeeTrans.Subledger := curTransSubledger;
-                                prEmployeeTrans."Subledger Account" := curTransSubledgerAccount;
-
+                        if ((prTransactionCodes."Balance Type" = prTransactionCodes."balance type"::Reducing) and (curTransBalance <> 0)) or
+                         (prTransactionCodes."Balance Type" <> prTransactionCodes."balance type"::Reducing) then
+                            if not prEmployeeTransactions.Variated then begin
+                                prEmployeeTransactions.Balance := curTransBalance;
+                                prEmployeeTransactions.Modify;
                             end;
-                            prEmployeeTrans.Insert;
-                            // prEmployeeTrans.SetRange(prEmployeeTrans."Transaction Code", prEmployeeTransactions."Transaction Code");
-                            // prEmployeeTrans.SetRange(prEmployeeTrans."Payroll Period", dtNewPeriod);
-                            // prEmployeeTrans.SetRange(prEmployeeTrans."Period Year", intNewYear);
-                            // prEmployeeTrans.SetRange(prEmployeeTrans."Period Month", intNewMonth);
-                            // if prEmployeeTrans.Find('-') then
-                            //     //prEmployeeTrans.DeleteAll;
 
-                            // Clear(prEmployeeTrans);
+
+                        //Clear(prEmployeeTrans);
+                        prEmployeeTrans.Init;
+                        prEmployeeTrans."Employee Code" := prEmployeeTransactions."Employee Code";
+                        prEmployeeTrans."Transaction Code" := prEmployeeTransactions."Transaction Code";
+                        prEmployeeTrans."Transaction Name" := prEmployeeTransactions."Transaction Name";
+
+                        //IF NOT prEmployeeTrans.Variated THEN BEGIN  //variated pMN
+                        prEmployeeTrans.Amount := curTransAmount;
+                        // END;
+
+                        prEmployeeTrans.Balance := curTransBalance;
+                        // prEmployeeTrans."Amortized Loan Total Repay Amt" := prEmployeeTransactions."Amortized Loan Total Repay Amt";
+                        prEmployeeTrans."Original Amount" := prEmployeeTransactions."Original Amount";
+                        //prEmployeeTrans.Membership := prEmployeeTransactions.Membership;
+                        //prEmployeeTrans."Reference No" := prEmployeeTransactions."Reference No";
+                        prEmployeeTrans."Period Month" := intNewMonth;
+                        prEmployeeTrans."Period Year" := intNewYear;
+                        prEmployeeTrans."Payroll Period" := dtNewPeriod;
+                        prEmployeeTrans."Loan Interest Rate" := prEmployeeTransactions."Loan Interest Rate";
+                        prEmployeeTrans."Loan Number" := prEmployeeTransactions."Loan Number";
+                        prEmployeeTrans.Variated := prEmployeeTransactions.Variated;
+
+                        //Added DW to Insert Subledger and Subledger Account for the next period
+                        if curTransSubledger <> Curtranssubledger::" " then begin
+                            prEmployeeTrans.Subledger := curTransSubledger;
+                            prEmployeeTrans."Subledger Account" := curTransSubledgerAccount;
+
                         end;
+                        prEmployeeTrans.Insert;
                     end;
                 end;
             until prEmployeeTransactions.Next = 0;
@@ -2015,20 +1880,6 @@ Codeunit 52185472 "PR Payroll Processing"
 
         //Take all the Negative pay (Net) for the current month & treat it as a deduction in the new period
         fnGetNegativePay(intMonth, intYear, dtOpenPeriod);
-
-
-        /*
-        //Reset no. of days worked for casuals
-        PRSalCard.RESET;
-        PRSalCard.SETRANGE(PRSalCard."Employee Contract Type",'CASUALS');
-        IF PRSalCard.FIND('-') THEN
-        BEGIN
-            REPEAT
-                PRSalCard."No. of Days Worked":=0;
-                PRSalCard.MODIFY;
-            UNTIL PRSalCard.NEXT = 0;
-        END;
-        */
 
     end;
 

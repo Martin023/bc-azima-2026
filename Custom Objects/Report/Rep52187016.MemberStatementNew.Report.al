@@ -634,7 +634,7 @@ Report 52187016 "Member and loan Statement"
                         // repeat
                         //     SavingsAccounts.CalcFields("Balance (LCY)");
                         //     AllSavingsAmount := AllSavingsAmount + SavingsAccounts."Balance (LCY)";
-                        if SavingsAccounts."Product Category" = SavingsAccounts."Product Category"::"FOSA Account" then
+                        if (SavingsAccounts."Product Category" = SavingsAccounts."Product Category"::"FOSA Account") and SavingsAccounts."Loan Disbursement Account" then
                             FOSAAccount := SavingsAccounts."No.";
                     until SavingsAccounts.Next() = 0;
                     //Message('%1', AllSavingsAmount);

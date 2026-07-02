@@ -662,15 +662,9 @@ table 52185776 "Cashier Transactions"
         field(50020; "Mpesa Reference"; Code[10])
         {
             trigger OnValidate()
-            var
-                CT: record "Cashier Transactions";
+            
             begin
-                if "Account Type" = "Account Type"::MPESA then begin
-                    CT.Reset();
-                    CT.SetRange("Mpesa Reference", "Mpesa Reference");
-                    if CT.FindFirst() then
-                        Error('MPESA Reference Code %1 already exists for transaction No. %2', "Mpesa Reference", CT.No);
-                end;
+                ValidateMpesaReference("Mpesa Reference");
             end;
         }
         field(50021; Source; Text[100])
@@ -703,6 +697,7 @@ table 52185776 "Cashier Transactions"
         }
         field(50027; "Reference Name"; Text[100])
         {
+        
         }
         field(50028; "MPESA Float Balance"; Decimal)
         {
@@ -1105,6 +1100,27 @@ table 52185776 "Cashier Transactions"
         //Penalty of maximum amount on transaction
     end;
 
+    local procedure ValidateMpesaReference(MpesaRef: Code[10])
+    var 
+         CT: record "Cashier Transactions";
+         MpesaRefCode : Code[10];          
+    begin
+        clear(MpesaRefCode);
+
+        MpesaRefCode := UpperCase(DelChr(MpesaRef, '<>', ' '));
+
+        if StrLen(MpesaRefCode) <> 10 then
+        Error('M-Pesa reference must be exactly 10 characters long.');
+
+        if "Account Type" = "Account Type"::MPESA then begin
+            CT.Reset();
+            CT.SetRange("Mpesa Reference", MpesaRefCode);
+            CT.setfilter(No, '<>%1', Rec.No);
+            if CT.FindFirst() then
+                Error('MPESA Reference Code %1 already exists for transaction No. %2', MpesaRefCode, CT.No);
+        end;
+    end;
+    
     local procedure CLEARALL()
     begin
         "Account No" := '';

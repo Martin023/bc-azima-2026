@@ -10,9 +10,9 @@ Report 52185694 "Pension Summary"
         dataitem("PR Payroll Periods"; "PR Payroll Periods")
         {
             RequestFilterFields = "Date Opened";
-            column(ReportForNavId_4946; 4946)
-            {
-            }
+            // column(ReportForNavId_4946; 4946)
+            // {
+            // }
 
             trigger OnPreDataItem()
             begin
@@ -23,9 +23,9 @@ Report 52185694 "Pension Summary"
         {
             DataItemTableView = sorting("No.");
             RequestFilterFields = "No.";
-            column(ReportForNavId_8631; 8631)
-            {
-            }
+            // column(ReportForNavId_8631; 8631)
+            // {
+            // }
             column(CompanyInfo_Picture; CompanyInfo.Picture)
             {
             }

@@ -1,14 +1,11 @@
 page 52186765 "Bulk SMS Header"
 {
     SourceTable = "Bulk SMS Header";
-    // ApplicationArea = Basic, Suite;
-    // UsageCategory = Lists;
     PromotedActionCategories = 'New,Process,Reports,Approvals,Defaulter Notification';
     layout
     {
         area(content)
         {
-
             field(No; Rec.No)
             {
                 ApplicationArea = Basic, Suite;
@@ -92,9 +89,25 @@ page 52186765 "Bulk SMS Header"
             {
                 ApplicationArea = Basic, Suite;
                 ShowMandatory = true;
+                Editable = Mssage;
             }
+            field("Email Signature"; Rec."Email Signature")
+            {
+                ApplicationArea = Basic, Suite;
+                MultiLine = true;
+                Editable = Mssage;
+                Caption = 'Email Signature';
+            }
+            field("Attachment Name"; Rec."Attachment Name")
+            {
+                ApplicationArea = Basic, Suite;
+                Editable = false;
+                Caption = 'Attached File';
+            }
+
             part(Control1000000012; "Bulk SMS Lines part")
             {
+                ApplicationArea = Basic, Suite;
                 Editable = BulkSMSLines;
                 SubPageLink = No = FIELD(No);
             }
@@ -150,7 +163,7 @@ page 52186765 "Bulk SMS Header"
 
                                     SkySMS.SendSms(
                                 SMSSource::BULK_SMS,
-                                Members."Phone No.",
+                                Members."Transactional Mobile Number",
                                 MsgText,
                                 rec.No,
                                 '',
@@ -197,95 +210,7 @@ page 52186765 "Bulk SMS Header"
                     else begin
                         Message('Cancelled successfully');
                     end;
-
                 end;
-                // BulkLines.Reset;
-                // BulkLines.SetRange(BulkHeader.No, Rec.No);
-                // if BulkLines.Find('-') then begin
-                //             repeat
-                //                 //SMS MESSAGE
-                //                 SMSMessage.Reset;
-                //                 SMSMessage.SetRange("SMS Message", Rec.Message_);
-                //                 SMSMessage.SetRange("Telephone No", Vend."Mobile Phone No");
-                //                 if SMSMessage.Find('-') then begin
-                //                 end
-                //                 else begin
-
-                //                     SMSMessage.Reset;
-                //                     if SMSMessage.Find('+') then begin
-                //                         iEntryNo := SMSMessage."Entry No";
-                //                         iEntryNo := iEntryNo + 1;
-                //                     end
-                //                     else begin
-                //                         iEntryNo := 1;
-                //                     end;
-
-                //                     SMSMessage.Init;
-                //                     SMSMessage."Entry No" := iEntryNo;
-                //                     SMSMessage."Document No" := '';
-                //                     SMSMessage."Account No" := Vend."No.";
-                //                     SMSMessage."Date Entered" := Today;
-                //                     SMSMessage."Time Entered" := Time;
-                //                     SMSMessage.Source := SMSMessage.Source::MSACCO;
-                //                     SMSMessage."Entered By" := UserId;
-                //                     SMSMessage."Sent To Server" := SMSMessage."Sent To Server"::No;
-                //                     SMSMessage."SMS Message" := Rec.Message_;
-                //                     SMSMessage."Telephone No" := Vend."Mobile Phone No";
-                //                     if Vend."Mobile Phone No" <> '' then
-                //                         SMSMessage.Insert;
-                //                 end;
-                //             until Vend.Next = 0
-                //         end;
-                //     end;
-
-
-                //     //DIMENSION
-                //     if BulkHeader."SMS Type" = BulkHeader."SMS Type"::Dimension then begin
-                //         BulkLines.Reset;
-                //         BulkLines.SetRange(BulkLines.No, Rec.No);
-                //         if BulkLines.Find('-') then begin
-                //             repeat
-
-                //                 Vend.Reset;
-                //                 Vend.SetRange(Vend."Product Type", '505');
-                //                 Vend.SetFilter(Vend.Status, '%1|%2|%3', Vend.Status::Active, Vend.Status::Dormant, Vend.Status::Frozen);
-                //                 if Vend.Find('-') then begin
-                //                     repeat
-                //                         //SMS MESSAGE
-                //                         SMSMessage.Reset;
-                //                         if SMSMessage.Find('+') then begin
-                //                             iEntryNo := SMSMessage."Entry No";
-                //                             iEntryNo := iEntryNo + 1;
-                //                         end
-                //                         else begin
-                //                             iEntryNo := 1;
-                //                         end;
-
-                //                         SMSMessage.Init;
-                //                         SMSMessage."Entry No" := iEntryNo;
-                //                         SMSMessage."Document No" := '';
-                //                         SMSMessage."Account No" := Vend."No.";
-                //                         SMSMessage."Date Entered" := Today;
-                //                         SMSMessage."Time Entered" := Time;
-                //                         SMSMessage.Source := SMSMessage.Source::MSACCO;
-                //                         SMSMessage."Entered By" := UserId;
-                //                         SMSMessage."Sent To Server" := SMSMessage."Sent To Server"::No;
-                //                         SMSMessage."SMS Message" := Rec.Message_;
-                //                         SMSMessage."Telephone No" := Vend."Mobile Phone No";
-                //                         if Vend."Mobile Phone No" <> '' then
-                //                             SMSMessage.Insert;
-
-                //                     until Vend.Next = 0
-                //                 end;
-
-                //             until BulkLines.Next = 0
-                //         end;
-                //     end;
-                //     //Telephone
-                //     if BulkHeader."SMS Type" = BulkHeader."SMS Type"::Telephone then begin
-
-                // end;
-                // end;
             }
 
             action("Import Telephone Nos")
@@ -326,192 +251,216 @@ page 52186765 "Bulk SMS Header"
                     end;
                 end;
             }
+            action("Upload Attachment Media")
+            {
+                ApplicationArea = Basic, Suite;
+                Image = Attach;
+                Promoted = true;
+                PromotedCategory = Process;
+                Caption = 'Upload File';
+                Enabled = Rec."SMS Status" <> Rec."SMS Status"::Sent;
+
+                trigger OnAction()
+                var
+                    InStr: InStream;
+                    FileName: Text;
+                begin
+                    if UploadIntoStream('Select file to attach', '', 'All Files (*.*)|*.*', FileName, InStr) then begin
+                        Clear(Rec."Attachment");
+                        Rec."Attachment".ImportStream(InStr, FileName);
+
+                        Rec."Attachment Name" := CopyStr(FileName, 1, MaxStrLen(Rec."Attachment Name"));
+                        Rec."Has Attachment" := true;
+                        Rec.Modify();
+
+                        Message('File uploaded: %1', FileName);
+                    end;
+                end;
+            }
+            //  action("Send Email")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = PutawayLines;
+            //     Promoted = true;
+            //     PromotedCategory = Process;
+            //     Enabled = Rec."SMS Status" <> Rec."SMS Status"::Sent;
+            //     trigger OnAction()
+            //     var
+            //         PhoneNo: Text[13];
+            //         SMSText: text[1000];
+            //         BulkLines: Record "Bulk SMS Lines";
+            //         Email: Codeunit Email;
+            //         EmailMsg: Codeunit "Email Message";
+            //     begin
+            //         if rec."SMS Status" = rec."SMS Status"::Sent then
+            //             Error('This record has already been sent.');
+            //         if rec."Email Subject" = '' then
+            //             Error('Email Subject is required.');
+
+            //         // IF Rec.Status <> Rec.Status::Approved THEN
+            //         //     ERROR('This document requires approval');
+
+            //         if UserSetup.Get(UserId) then begin
+            //             if UserSetup."Post Reversals" = false then
+            //                 Error('You do not have permission');
+            //         end;
+
+            //         if Rec."SMS Status" <> Rec."SMS Status"::Pending then
+            //             Error('The mail status is not open');
+            //         if Confirm('Are you sure you would like to send the Email(s)?', false) = true then begin
+
+            //             if Rec."SMS Type" = Rec."SMS Type"::"Selected Members" then begin
+
+            //             end;
+            //             if not Rec."Use Line Message" = true then begin
+            //                 Rec.TestField(Message_);
+            //             end;
+
+            //             BulkLines.Reset;
+            //             BulkLines.SetRange(No, Rec.No);
+            //             if BulkLines.Find('-') then begin
+            //                 repeat
+            //                     BulkLines.Validate("Text Message");
+            //                     Members.Reset();
+            //                     if Members.get(BulkLines."Member No") then begin
+            //                         if members."E-Mail" <> '' then begin
+            //                             if Rec."Use Line Message" then begin
+            //                                 EmailMsg.Create(
+            //                                     Members."E-Mail",
+            //                                     rec."Email Subject",
+            //                                     GetGreeting() + ' ' + Members."First Name" + ', ' + BulkLines."Text Message"
+            //                                 );
+            //                                 Email.Send(EmailMsg, Enum::"Email Scenario"::Default);
+            //                             end
+            //                             else
+            //                                 if Rec.Message_ <> '' then begin
+            //                                     EmailMsg.Create(
+            //                                         Members."E-Mail",
+            //                                         rec."Email Subject",
+            //                                         GetGreeting() + ' ' + Members."First Name" + ', ' + Rec.Message_
+            //                                     );
+            //                                     Email.Send(EmailMsg, Enum::"Email Scenario"::Default);
+            //                                 end;
+            //                         end;
+            //                         BulkLines.Sent := true;
+            //                         BulkLines.Modify();
+            //                     end;
+            //                 until BulkLines.Next = 0
+            //             end
+            //             else
+            //                 Error('No members to send Emails to');
+            //         end;
+            //         Rec."SMS Status" := Rec."SMS Status"::Sent;
+            //         Rec."Status Date" := Today;
+            //         Rec."Status Time" := Time;
+            //         Rec."Status By" := UserId;
+            //         Rec.Modify;
+            //     end;
+            // }
+
             action("Send Email")
             {
                 ApplicationArea = Basic, Suite;
-                Image = PutawayLines;
+                Image = Email;
                 Promoted = true;
                 PromotedCategory = Process;
                 Enabled = Rec."SMS Status" <> Rec."SMS Status"::Sent;
+                Caption = 'Send Email';
                 trigger OnAction()
                 var
-                    PhoneNo: Text[13];
-                    SMSText: text[1000];
                     BulkLines: Record "Bulk SMS Lines";
                     Email: Codeunit Email;
                     EmailMsg: Codeunit "Email Message";
+                    EmailBody: Text;
+                    EmailsSent: Integer;
+                    TempBlob: Codeunit "Temp Blob";
+                    InStream: InStream;
+                    OutStream: OutStream;
                 begin
                     if rec."SMS Status" = rec."SMS Status"::Sent then
                         Error('This record has already been sent.');
-                    if rec."Email Subject" = '' then
-                        Error('Email Subject is required.');
 
-                    // IF Rec.Status <> Rec.Status::Approved THEN
-                    //     ERROR('This document requires approval');
+                    Rec.TestField("Email Subject");
 
                     if UserSetup.Get(UserId) then begin
                         if UserSetup."Post Reversals" = false then
                             Error('You do not have permission');
                     end;
 
-                    if Rec."SMS Status" <> Rec."SMS Status"::Pending then
-                        Error('The mail status is not open');
-                    if Confirm('Are you sure you would like to send the Email(s)?', false) = true then begin
-
-                        if Rec."SMS Type" = Rec."SMS Type"::"Selected Members" then begin
-
-                        end;
-                        if not Rec."Use Line Message" = true then begin
+                    if Confirm('Send email to member[s]?', false) then begin
+                        if not Rec."Use Line Message" then
                             Rec.TestField(Message_);
-                        end;
 
                         BulkLines.Reset;
                         BulkLines.SetRange(No, Rec.No);
                         if BulkLines.Find('-') then begin
                             repeat
-                                BulkLines.Validate("Text Message");
                                 Members.Reset();
-                                if Members.get(BulkLines."Member No") then begin
-                                    if members."E-Mail" <> '' then begin
-                                        if Rec."Use Line Message" then begin
-                                            EmailMsg.Create(
-                                                Members."E-Mail",
-                                                rec."Email Subject",
-                                                GetGreeting() + ' ' + Members."First Name" + ', ' + BulkLines."Text Message"
-                                            );
-                                            Email.Send(EmailMsg, Enum::"Email Scenario"::Default);
-                                        end
-                                        else
-                                            if Rec.Message_ <> '' then begin
-                                                EmailMsg.Create(
-                                                    Members."E-Mail",
-                                                    rec."Email Subject",
-                                                    GetGreeting() + ' ' + Members."First Name" + ', ' + Rec.Message_
-                                                );
-                                                Email.Send(EmailMsg, Enum::"Email Scenario"::Default);
-                                            end;
+                                if Members.get(BulkLines."Member No") and (Members."E-Mail" <> '') then begin
+
+                                    // email body
+                                    EmailBody := '<html><head><meta charset="UTF-8"></head>';
+                                    EmailBody += '<body style="font-family: -apple-system, BlinkMacSystemFont, ''Segoe UI'', Roboto, Arial, sans-serif; font-size: 14px; line-height: 1.6; color: #202124; margin: 0; padding: 0; background-color: #f8f9fa;">';
+                                    EmailBody += '<div style="max-width: 600px; margin: 40px auto; background-color: #ffffff; padding: 40px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">';
+
+                                    // greeting
+                                    EmailBody += '<p style="margin: 0 0 24px 0; font-size: 16px;">Hi ' + Members."First Name" + ',</p>';
+
+                                    // message
+                                    if Rec."Use Line Message" then
+                                        EmailBody += '<div style="margin-bottom: 24px; white-space: pre-line;">' + BulkLines."Text Message" + '</div>'
+                                    else
+                                        EmailBody += '<div style="margin-bottom: 24px; white-space: pre-line;">' + Rec.Message_ + '</div>';
+
+                                    // signature
+                                    if Rec."Email Signature" <> '' then begin
+                                        EmailBody += '<div style="margin-top: 32px; padding-top: 16px; border-top: 1px solid #e8eaed;">';
+                                        EmailBody += '<div style="font-size: 13px; color: #5f6368; white-space: pre-line;">' + Rec."Email Signature" + '</div>';
+                                        EmailBody += '</div>';
                                     end;
-                                    BulkLines.Sent := true;
-                                    BulkLines.Modify();
+
+                                    EmailBody += '</div></body></html>';
+
+                                    // Create email
+                                    EmailMsg.Create(Members."E-Mail", Rec."Email Subject", EmailBody, true);
+
+                                    if Rec."Has Attachment" and Rec."Attachment".HasValue() then begin
+                                        // Clear TempBlob
+                                        Clear(TempBlob);
+
+                                        // Create OutStream from TempBlob
+                                        TempBlob.CreateOutStream(OutStream);
+
+                                        // Export the blob content to the OutStream
+                                        Rec."Attachment".ExportStream(OutStream);
+
+                                        // Create InStream from the same TempBlob
+                                        TempBlob.CreateInStream(InStream);
+
+                                        EmailMsg.AddAttachment(Rec."Attachment Name", GetMIMEType(Rec."Attachment Name"), InStream);
+                                    end;
+
+                                    if Email.Send(EmailMsg, Enum::"Email Scenario"::Default) then begin
+                                        EmailsSent += 1;
+                                        BulkLines.Sent := true;
+                                        BulkLines.Modify();
+                                    end;
                                 end;
-                            until BulkLines.Next = 0
-                        end
-                        else
-                            Error('No members to send Emails to');
+                            until BulkLines.Next = 0;
+                        end;
+
+                        Rec."SMS Status" := Rec."SMS Status"::Sent;
+                        Rec."Status Date" := Today;
+                        Rec."Status Time" := Time;
+                        Rec."Status By" := UserId;
+                        Rec.Modify;
+                        Message('Email[s] sent successfully: %1', EmailsSent);
                     end;
-                    Rec."SMS Status" := Rec."SMS Status"::Sent;
-                    Rec."Status Date" := Today;
-                    Rec."Status Time" := Time;
-                    Rec."Status By" := UserId;
-                    Rec.Modify;
                 end;
             }
             separator(Action4)
             {
             }
-            // action(Approve)
-            // {
-            //     ApplicationArea = Basic, Suite;
-            //     Image = Approve;
-            //     Promoted = true;
-            //     PromotedCategory = Category4;
-            //     Caption = 'Approve';
-            //     Enabled = Rec."SMS Status" <> Rec."SMS Status"::Sent;
-
-            //     trigger OnAction()
-            //     begin
-            //         if rec."SMS Status" = rec."SMS Status"::Sent then
-            //             Error('This record has already been sent.');
-            //         if (Rec."Approval Status" = Rec."Approval Status"::Approved) and (Rec.Status = Rec.Status::Approved) then
-            //             Error('This record is already approved.');
-            //         Rec.Validate("Approval Status", Rec."Approval Status"::Approved);
-            //         Rec.Validate("Status", Rec.Status::Approved);
-            //         Rec.Modify();
-            //         Message('Record approved successfully.');
-            //     end;
-            // }
-            // action(Reopen)
-            // {
-            //     ApplicationArea = Basic, Suite;
-            //     Image = ReOpen;
-            //     Promoted = true;
-            //     PromotedCategory = Category4;
-            //     Caption = 'Reopen';
-            //     Enabled = Rec."SMS Status" <> Rec."SMS Status"::Sent;
-            //     trigger OnAction()
-            //     begin
-            //         if rec."SMS Status" = rec."SMS Status"::Sent then
-            //             Error('This record has already been sent.');
-
-            //         Rec.Status := rec.Status::Open;
-            //         Rec."Approval Status" := rec."Approval Status"::Open;
-            //         Rec."SMS Status" := Rec."SMS Status"::Pending;
-            //         Rec.Modify();
-            //         Message('Record re-opened successfully.');
-            //     end;
-            // }
-
-
-            // action(Reject)
-            // {
-            //     ApplicationArea = Basic, Suite;
-            //     Image = Reject;
-            //     Promoted = true;
-            //     PromotedCategory = Category4;
-            //     Caption = 'Reject';
-            //     Enabled = Rec."SMS Status" <> Rec."SMS Status"::Sent;
-
-            //     trigger OnAction()
-            //     begin
-            //         if rec."SMS Status" = rec."SMS Status"::Sent then
-            //             Error('This record has already been sent.');
-
-            //         if Rec."Approval Status" = Rec."Approval Status"::Rejected then
-            //             Error('This record is already rejected.');
-
-            //         Rec.Validate("Approval Status", Rec."Approval Status"::Rejected);
-            //         Rec."SMS Status" := Rec."SMS Status"::Cancelled;
-            //         Rec.Modify();
-            //         Message('Record rejected successfully.');
-            //     end;
-            // }
-
-            // TODO : To be returned once needed.
-            // group("Pre-Defined SMS")
-            // {
-            //     Caption = 'Pre-Defined SMS';
-
-            //     action("Share Reminder SMS")
-            //     {
-            //         Caption = 'Share Reminder SMS';
-            //         ApplicationArea = Basic, Suite;
-            //         Image = Share;
-            //         Promoted = true;
-            //         PromotedCategory = Process;
-            //         Enabled = Rec."SMS Status" <> Rec."SMS Status"::Sent;
-            //         trigger OnAction()
-            //         begin
-            //             Rec.Message_ := 'Kindly note that your share capital is due for payment. Please use our mobile channel or bank to make your payments. Thank you.';
-            //         end;
-            //     }
-            //     action("loan reminder SMS")
-            //     {
-            //         Caption = 'Loan Reminder SMS';
-            //         ApplicationArea = Basic, Suite;
-            //         Image = Payment;
-            //         Promoted = true;
-            //         PromotedCategory = Process;
-            //         Enabled = Rec."SMS Status" <> Rec."SMS Status"::Sent;
-            //         trigger OnAction()
-            //         begin
-            //             Rec.Message_ := 'Kindly note that your loan is due for payment. Please use our mobile channel or bank to make your payments. Thank you.';
-            //         end;
-            //     }
-            // }
-
-            // TODO : To be returned once needed.
-
-
         }
     }
 
@@ -526,10 +475,8 @@ page 52186765 "Bulk SMS Header"
         UseHeader: Boolean;
         BulkSMSLines: Boolean;
         UserSetup: Record "User Setup";
-        SendSms: codeunit SendSms;
         Members: record Members;
 
-    //[Scope('OnPrem')]
     procedure UpdateControl()
     begin
         if Rec.Status = Rec.Status::Open then begin
@@ -556,16 +503,58 @@ page 52186765 "Bulk SMS Header"
         end;
     end;
 
-    local procedure GetGreeting(): Text
+    local procedure GetMIMEType(FileName: Text): Text
     var
-        CurrentTime: Time;
+        FileExt: Text;
     begin
-        CurrentTime := Time();
-        if CurrentTime < 120000T then
-            exit('Good Morning,');
-        if CurrentTime < 180000T then
-            exit('Good Afternoon,');
-        exit('Good Evening,');
-    end;
-}
+        FileExt := LowerCase(GetFileExtension(FileName));
 
+        case FileExt of
+            'pdf':
+                exit('application/pdf');
+            'doc':
+                exit('application/msword');
+            'docx':
+                exit('application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+            'xls':
+                exit('application/vnd.ms-excel');
+            'xlsx':
+                exit('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            'txt':
+                exit('text/plain');
+            'png':
+                exit('image/png');
+            'jpg', 'jpeg':
+                exit('image/jpeg');
+            'gif':
+                exit('image/gif');
+            'zip':
+                exit('application/zip');
+            else
+                exit('application/octet-stream');
+        end;
+    end;
+
+    local procedure GetFileExtension(FileName: Text): Text
+    var
+        DotPos: Integer;
+    begin
+        DotPos := StrPos(FileName, '.');
+        if DotPos = 0 then
+            exit('');
+
+        exit(CopyStr(FileName, DotPos + 1));
+    end;
+
+    // local procedure GetGreeting(): Text
+    // var
+    //     CurrentTime: Time;
+    // begin
+    //     CurrentTime := Time();
+    //     if CurrentTime < 120000T then
+    //         exit('Good Morning,');
+    //     if CurrentTime < 180000T then
+    //         exit('Good Afternoon,');
+    //     exit('Good Evening,');
+    // end;
+}

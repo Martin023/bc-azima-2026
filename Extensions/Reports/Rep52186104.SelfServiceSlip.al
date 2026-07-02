@@ -983,8 +983,8 @@ report 52186104 "Self Service Slip"
             SalaryHeader.SetRange("Start Date", SelectedPeriod);
             if SalaryHeader.FindFirst() then begin
                 PRPayrollPeriods.Reset;
-                //PRPayrollPeriods.SetRange(Closed, True);
-                PRPayrollPeriods.SetRange("Date Opened", SelectedPeriod);
+                PRPayrollPeriods.SetRange(Closed, True);
+                // PRPayrollPeriods.SetRange("Date Opened", SelectedPeriod);
                 if PRPayrollPeriods.FIND('-') then begin
                     PeriodName := PRPayrollPeriods."Period Name";
                 end else

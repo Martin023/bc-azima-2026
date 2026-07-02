@@ -35,10 +35,10 @@ Report 52186789 "FOSA Account Change Logs"
             column(Type_of_Change; "Type of Change")
             {
             }
-            column(Old_Value; "Old Value")
+            column(Old_Value; Format("Old Value"))
             {
             }
-            column(New_Value; "New Value")
+            column(New_Value; Format("New Value"))
             {
             }
             column(Primary_Key; "Primary Key")
@@ -79,7 +79,7 @@ Report 52186789 "FOSA Account Change Logs"
 
             trigger OnPreDataItem()
             begin
-                "Change Log Entry".reset;
+                // "Change Log Entry".reset;
                 "Change Log Entry".SetRange("Table No.", 52185730);
                 if AccountNo <> '' then begin
                     "Change Log Entry".SetFilter("Primary Key Field 1 Value", '%1', AccountNo);
