@@ -5358,7 +5358,7 @@ codeunit 52186507 "Members Portal Integration"
                 theLeaveApplication.Validate("Leave Type");
                 theLeaveApplication."Start Date" := start_date.AsValue.AsDate;
                 theLeaveApplication.Validate("Start Date");
-                Evaluate(theLeaveApplication."Days Applied",days_applied.AsValue.AsText);
+                Evaluate(theLeaveApplication."Days Applied", days_applied.AsValue.AsText);
                 //theLeaveApplication."Days Applied" := days_applied.AsValue.AsInteger;
                 theLeaveApplication.Validate("Days Applied");
                 theLeaveApplication.Reliever := reliever.AsValue.AsText;
@@ -5931,7 +5931,7 @@ codeunit 52186507 "Members Portal Integration"
             // ProductFactory.SetRange("Mobile Loan", true);
             ProductFactory.SetRange("Is CRM Product", true);
             // ProductFactory.SetRange("Is USSD Product", false);
-            // ProductFactory.SetFilter("Source Unit", '<>%1', ProductFactory."Source Unit"::"HR LOANS");
+            ProductFactory.SetFilter("Source Unit", '<>%1', ProductFactory."Source Unit"::"HR LOANS");
 
             if SearchMember."Employer Code" = 'RETIREE' then begin
                 // Pension only 
