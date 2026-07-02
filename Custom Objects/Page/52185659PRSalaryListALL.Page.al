@@ -29,6 +29,10 @@ page 52185659 "PR Salary List (ALL)"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Member No."; Rec."Member No.")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Contract Type"; Rec."Contract Type")
                 {
                     ApplicationArea = Basic, Suite;
