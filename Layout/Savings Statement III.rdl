@@ -11,7 +11,7 @@
       <am:Name>PBIRB</am:Name>
       <am:Version>15.7.1813.16</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-07-01T21:20:05.2812762Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-07-02T02:16:31.7879014Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -3443,7 +3443,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>This is a System generated statement and does not require a signature.</Value>
+                    <Value>This is a computer generated SACCO statement and does not require a signature or stamp. The information contained in this statement is confidential and intended only for the account holder or an authorized recipient.</Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Times New Roman</FontFamily>
@@ -3461,7 +3461,7 @@
             </Paragraphs>
             <Top>12.263cm</Top>
             <Left>0.34564cm</Left>
-            <Height>0.71526cm</Height>
+            <Height>1.13859cm</Height>
             <Width>20.12528cm</Width>
             <ZIndex>5</ZIndex>
             <Style>
