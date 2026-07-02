@@ -3253,6 +3253,7 @@ codeunit 52186507 "Members Portal Integration"
         ResponseText: Text;
         ResponseDescription: Text;
         ActualSchedule: Codeunit ActualLoanSchedule;
+        LoanProcess: Codeunit "Loans Process";
     begin
         Payload.Get('identifier_type', identifier_type);
         Payload.Get('identifier', identifier);
@@ -3266,9 +3267,10 @@ codeunit 52186507 "Members Portal Integration"
             IF TheLoan.FindFirst then begin
                 RecRef.GetTable(TheLoan);
 
-                ActualSchedule.GenerateLoanSchedule(TheLoan);
+                //ActualSchedule.GenerateLoanSchedule(TheLoan);
+                LoanProcess.GenerateSchedule(TheLoan, True);
                 BlobOutStream := TempBlob.CreateOutStream;
-                Report.SaveAs(Report::"Actual Loan Schedule", '', ReportFormat::Pdf, BlobOutStream, RecRef);
+                Report.SaveAs(Report::"Ideal Repayment Schedule", '', ReportFormat::Pdf, BlobOutStream, RecRef);
 
                 BlobInStream := TempBlob.CreateInStream;
                 FileContentsB64 := Base64Convert.ToBase64(BlobInStream);
@@ -5358,7 +5360,7 @@ codeunit 52186507 "Members Portal Integration"
                 theLeaveApplication.Validate("Leave Type");
                 theLeaveApplication."Start Date" := start_date.AsValue.AsDate;
                 theLeaveApplication.Validate("Start Date");
-                Evaluate(theLeaveApplication."Days Applied",days_applied.AsValue.AsText);
+                Evaluate(theLeaveApplication."Days Applied", days_applied.AsValue.AsText);
                 //theLeaveApplication."Days Applied" := days_applied.AsValue.AsInteger;
                 theLeaveApplication.Validate("Days Applied");
                 theLeaveApplication.Reliever := reliever.AsValue.AsText;
