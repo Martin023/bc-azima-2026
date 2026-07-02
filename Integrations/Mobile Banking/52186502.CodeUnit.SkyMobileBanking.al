@@ -5858,7 +5858,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                 Format(MpesaTransBuffer."Transaction Amount") +
                                                 ' to ' + MpesaTransBuffer."Receiver Identifier" +
                                                 ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                ' has been completed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference" + '. Ref: ' + theReference;
+                                                ' has been completed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference";
                                             end;
 
                                             if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Gaming Utility Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
@@ -5868,7 +5868,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             Format(MpesaTransBuffer."Transaction Amount") +
                                             ' to ' + MpesaTransBuffer."Receiver Identifier" +
                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                            ' has been completed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference" + '. Ref: ' + theReference;
+                                            ' has been completed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference";
                                             end;
 
                                             if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Bank Transfer" then begin
