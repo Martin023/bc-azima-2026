@@ -67,6 +67,15 @@ report 52185507 "Savings Statement III"
             column(LienPlaced_SavingsAccounts; SavingsAccounts."Lien Placed")
             {
             }
+            column(Employer_Code; SavingsAccounts."Employer Code")
+            {
+            }
+            column(Employer_Name; Employer_Name)
+            {
+            }
+            column(Global_Dimension_1_Code; SavingsAccounts."Global Dimension 2 Code")
+            {
+            }
             column(AccountBal; AccountBal)
             {
             }
@@ -191,6 +200,10 @@ report 52185507 "Savings Statement III"
                                    (SavingsAccounts."Uncleared Cheques" + SavingsAccounts."ATM Transactions" +
                                     ProductFac."Minimum Balance" + SavingsAccounts."Lien Placed");
                 end;
+                clear(Employer_Name);
+                if Customers.Get(SavingsAccounts."Employer Code") then
+                    Employer_Name := Customers.Name;
+                
                 if StatementCharge then begin
                     AvailableBal := 0;
                     SavingsAccounts.SetFilter(SavingsAccounts.Blocked, '%1', SavingsAccounts.Blocked::" ");
@@ -405,6 +418,8 @@ report 52185507 "Savings Statement III"
         ProductFac: Record "Product Factory";
         SavingsAccounts1: Record "Savings Accounts";
         DFilter: Text;
+        Employer_Name : Text[250];
+        Customers : record Customer;
 
 
     procedure PostStatementCharge()
