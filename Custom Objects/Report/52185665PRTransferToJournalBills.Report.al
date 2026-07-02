@@ -231,12 +231,12 @@ Report 52185665 "PR Transfer To Journal Bills"
                                 if EmployerDed.Find('-') then begin
                                     //Credit Payables
                                     CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."Housing Levy Employee",
-                                    GlobalDim1, GlobalDim2, ' Employer ' + PeriodTrans."Transaction Name" + '-' + PeriodTrans."Employee Code", 0,
+                                    GlobalDim1, GlobalDim2, 'Employer ' + PeriodTrans."Transaction Name" + '-' + PeriodTrans."Employee Code", 0,
                                    EmployerDed.Amount, PeriodTrans."Post As", '', SaccoTransactionType);
 
                                     //Debit Staff Expense
                                     CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."Housing Levy Employer",
-                                    GlobalDim1, GlobalDim2, ' Employer ' + PeriodTrans."Transaction Name" + '-' + PeriodTrans."Employee Code", EmployerDed.Amount, 0, 1, '',
+                                    GlobalDim1, GlobalDim2, 'Employer ' + PeriodTrans."Transaction Name" + '-' + PeriodTrans."Employee Code", EmployerDed.Amount, 0, 1, '',
                                     SaccoTransactionType);
                                 end;
                             end;
@@ -274,16 +274,16 @@ Report 52185665 "PR Transfer To Journal Bills"
                                 end;
 
                                 CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."SSF Tier 1 Emplyer Pay Account",
-                                GlobalDim1, GlobalDim2, ' Employer tier 1 ' + PeriodTrans."Transaction Name" + 'cont', 0, Tier1Cont,
+                                GlobalDim1, GlobalDim2, 'Employer tier 1 ' + PeriodTrans."Transaction Name", 0, Tier1Cont,
                                 PeriodTrans."Post As", '', SaccoTransactionType);
 
                                 CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."SSF Tier 2 Emplyer Pay Account",
-                                GlobalDim1, GlobalDim2, ' Employer tier 2 ' + PeriodTrans."Transaction Name" + 'cont', 0, PeriodTrans.Amount - Tier1Cont,
+                                GlobalDim1, GlobalDim2, 'Employer tier 2 ' + PeriodTrans."Transaction Name", 0, PeriodTrans.Amount - Tier1Cont,
                                 PeriodTrans."Post As", '', SaccoTransactionType);
 
                                 //Debit Staff Expense
                                 CreateJnlEntry(PeriodTrans."Journal Account Type", PostingGroup."SSF Employer Account",
-                                GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + ' Employer NSSF expense', PeriodTrans.Amount, 0, 1, '',
+                                GlobalDim1, GlobalDim2, PeriodTrans."Transaction Name" + ' Employer NSSF ', PeriodTrans.Amount, 0, 1, '',
                                 SaccoTransactionType);
                             end;
 
