@@ -983,19 +983,15 @@ table 52185532 "HR Leave Application"
 
     procedure NotifyHR()
     begin
-        //HREmp.GET(Reliever);
-        //HREmp.TESTFIELD(HREmp."Company E-Mail");
-
         HREmailParameters.Reset;
         HREmailParameters.Get(HREmailParameters."Associate With"::"Leave Notifications");
-        // sSMTP.CreateMessage(HREmailParameters."Sender Name", HREmailParameters."Sender Address", HREmailParameters."HR Email",
-
-        // 'Leave Notification', 'Dear' + '<br>' + 'HR Department' + ' ' + ' <br>' +
-        // 'You are hereby notified that' + ' ' + Names + ' ' + ' has been fully approved for' + ' ' + Format("Days Applied") +
-        // ' ' + 'days' + ' ' + 'from' + ' ' + Format("Start Date") + ' ' + 'to' + ' ' + Format("End Date") + ' and hence qualifies for leave allowance.' + ' ', true);
-        // SMTP.Send();
         Message('HR has been notified successfully');
-        // NOTIFY RELIEVER
+    end;
+
+    procedure UpdateRecallSummary()
+    begin
+        CalcFields("Days Reimbursed");
+        Modify();
     end;
 
 }

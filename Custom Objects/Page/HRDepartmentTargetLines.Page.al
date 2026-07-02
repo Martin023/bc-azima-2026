@@ -86,5 +86,28 @@ Page 52185503 "Department Target Lines"
 
     actions
     {
+        area(processing)
+        {
+            action("Assign to Employees")
+            {
+                ApplicationArea = Basic;
+                Caption = 'Assign to Employees';
+                Image = Allocate;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+
+                trigger OnAction()
+                var
+                    DeptHeader: Record "HR Department Targets Header";
+                begin
+                    if not DeptHeader.Get(Rec."Department Target No") then
+                        Error('Department Target Header not found.');
+                    
+                    DeptHeader.AssignLineToEmployees(Rec."Line No");
+                    CurrPage.Update(false);
+                end;
+            }
+        }
     }
 }

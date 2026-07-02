@@ -1332,7 +1332,7 @@ page 52187320 AdvancedHumanResources
                 // }
                 group("HR Exit Interviews")
                 {
-                    Caption = 'HR Exit Interviews';
+                    Caption = 'HR Employee Exit';
                     action("HR Employee Exit Interviews")
                     {
                         Caption = 'HR Employee Exit ';
