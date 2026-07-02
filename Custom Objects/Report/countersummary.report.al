@@ -12,8 +12,6 @@ Report 52185496 "Counter Summary Report"
 
             column(CompanyInfo_Name; CompanyInfo.Name) { }
             column(CompanyInfo_Address; CompanyAddress) { }
-            
-            // NEWLY ADDED COLUMNS FOR THE EOD-STYLE HEADER
             column(CompanyInfo_Picture; CompanyInfo.Picture) { }
             column(CompanyName; CompanyName) { }
             column(BuldingName; BuldingName) { }
@@ -22,43 +20,68 @@ Report 52185496 "Counter Summary Report"
             column(PrintingDate; PrintingDate) { }
             column(PrintingTime; PrintingTime) { }
             column(PrintedBy; PrintedBy) { }
-
             column(DateFilterTxt; DateFilterTxt) { }
             column(PrintDateTime; Format(CurrentDateTime, 0, '<Day,2>/<Month,2>/<Year4> <Hours24,2>:<Minutes,2>')) { }
-            
-            column(GroupDetails; GroupDetails) { }
-            column(TransType; Format(Type)) { }
-            column(UserName; Cashier) { }
-            column(TrxDate; Format("Transaction Date", 0, '<Day,2>/<Month,2>/<Year4>')) { }
-            column(TrxTime; Format("Transaction Time", 0, '<Hours24,2>:<Minutes,2>:<Seconds,2>')) { }
-            column(Amount; Amount) { }
-            column(DebitAmt; DebitAmt) { }
-            column(CreditAmt; CreditAmt) { }
 
-            trigger OnAfterGetRecord()
-            begin
-                // DETERMINE GROUPING DETAILS FROM TRANSACTION
-                if "Transaction Description" <> '' then
-                    GroupDetails := "Transaction Description"
-                else
-                    GroupDetails := Format(Type);
+            // INTEGER LOOP: Splits the record into Main Transaction and Charges
+            dataitem(TransLines; Integer)
+            {
+                DataItemTableView = sorting(Number) where(Number = filter(1 .. 2));
 
-                // ALLOCATE DEBIT AND CREDIT COLUMNS BASED ON TRANSACTION NATURE
-                DebitAmt := 0;
-                CreditAmt := 0;
-                
-                if Type in[Type::"Cash Withdrawal", Type::"MPESA Withdrawal", Type::"Cheque Withdrawal", Type::"Bankers Cheque"] then
-                    DebitAmt := Amount
-                else
-                    CreditAmt := Amount;
-            end;
+                column(GroupDetails; GroupDetails) { }
+                column(TransType; TransType) { }
+                column(UserName; Treasury_transaction.Cashier) { }
+                column(TrxDate; TrxDate) { }
+                column(TrxTime; TrxTime) { }
+                column(Amount; LineAmount) { }
+                column(DebitAmt; LineDebitAmt) { }
+                column(CreditAmt; LineCreditAmt) { }
+
+                trigger OnAfterGetRecord()
+                begin
+                    if Number = 1 then begin
+                        // 1. THE MAIN TRANSACTION ROW
+                        if Treasury_transaction."Transaction Description" <> '' then
+                            GroupDetails := Treasury_transaction."Transaction Description"
+                        else
+                            GroupDetails := Format(Treasury_transaction.Type);
+
+                        TransType := Format(Treasury_transaction.Type);
+                        TrxDate := Format(Treasury_transaction."Transaction Date", 0, '<Day,2>/<Month,2>/<Year4>');
+                        TrxTime := Format(Treasury_transaction."Transaction Time", 0, '<Hours24,2>:<Minutes,2>:<Seconds,2>');
+                        LineAmount := Treasury_transaction.Amount;
+                        
+                        LineDebitAmt := 0;
+                        LineCreditAmt := 0;
+                        
+                        if Treasury_transaction.Type in[Treasury_transaction.Type::"Cash Withdrawal", Treasury_transaction.Type::"MPESA Withdrawal", Treasury_transaction.Type::"Cheque Withdrawal", Treasury_transaction.Type::"Bankers Cheque"] then
+                            LineDebitAmt := Treasury_transaction.Amount
+                        else
+                            LineCreditAmt := Treasury_transaction.Amount;
+
+                    end else if Number = 2 then begin
+                        if Treasury_transaction."Charge Amount" <= 0 then
+                            CurrReport.Skip();
+
+                        // This automatically forces the RDLC to create a new grouping!
+                        GroupDetails := 'Withdrawal Charges';
+                        TransType := 'Charge';
+                        TrxDate := Format(Treasury_transaction."Transaction Date", 0, '<Day,2>/<Month,2>/<Year4>');
+                        TrxTime := Format(Treasury_transaction."Transaction Time", 0, '<Hours24,2>:<Minutes,2>:<Seconds,2>');
+                        
+                        // We fetch the segregated fee amount directly from your new table field
+                        LineAmount := Treasury_transaction."Charge Amount";
+                        LineDebitAmt := 0;
+                        LineCreditAmt := Treasury_transaction."Charge Amount"; // Charges count as a credit/income to the branch
+                    end;
+                end;
+            }
 
             trigger OnPreDataItem()
             begin
                 CompanyInfo.Get();
                 CompanyInfo.CalcFields(Picture);
 
-                // POPULATING THE NEW HEADER VARIABLES
                 CompanyName := CompanyInfo.Name;
                 BuldingName := CompanyInfo."Building Name";
                 CompanyAddress := CompanyInfo.Address + ' -Post Code: ' + CompanyInfo."Post Code" + ' -City:' + CompanyInfo.City + ' Region: ' + CompanyInfo."Country/Region Code";
@@ -82,7 +105,6 @@ Report 52185496 "Counter Summary Report"
 
     trigger OnPreReport()
     begin
-        // CAPTURING PRINT DETAILS
         PrintingDate := Format(Today, 0, '<Day,2>/<Month,2>/<Year4>');
         PrintingTime := Format(Time);
         PrintedBy := UserId;
@@ -92,11 +114,7 @@ Report 52185496 "Counter Summary Report"
         CompanyInfo: Record "Company Information";
         CompanyAddress: Text;
         DateFilterTxt: Text;
-        GroupDetails: Text;
-        DebitAmt: Decimal;
-        CreditAmt: Decimal;
         
-        // ADDED VARIABLES FOR THE HEADER
         CompanyName: Text;
         BuldingName: Text;
         CompanyTelephone: Text;
@@ -104,4 +122,12 @@ Report 52185496 "Counter Summary Report"
         PrintingDate: Text;
         PrintingTime: Text;
         PrintedBy: Text;
+
+        GroupDetails: Text;
+        TransType: Text;
+        TrxDate: Text;
+        TrxTime: Text;
+        LineAmount: Decimal;
+        LineDebitAmt: Decimal;
+        LineCreditAmt: Decimal;
 }
