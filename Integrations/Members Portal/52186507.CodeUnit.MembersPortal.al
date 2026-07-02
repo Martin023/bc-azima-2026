@@ -5359,8 +5359,8 @@ codeunit 52186507 "Members Portal Integration"
                 theLeaveApplication."Global Dimension 2 Code" := Employee."Global Dimension 2 Code";
                 theLeaveApplication.Validate(Reliever);
 
-                theLeaveApplication.Status := theLeaveApplication.Status::"Pending Approval";
-                theLeaveApplication.Validate(Status);
+                // theLeaveApplication.Status := theLeaveApplication.Status::"Pending Approval";
+                // theLeaveApplication.Validate(Status);
 
                 if theLeaveApplication.Insert(true) then begin
                     VarVariant := theLeaveApplication;

@@ -397,6 +397,12 @@ table 52185550 "HR Setup"
         {
             DataClassification = CustomerContent;
         }
+        field(39004285; "Min Recall Notice Days"; Integer)
+        {
+            Caption = 'Minimum Recall Notice Days';
+            DataClassification = CustomerContent;
+            MinValue = 0;
+        }
     }
 
     keys

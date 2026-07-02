@@ -245,6 +245,16 @@ page 52186145 "HR BSC Appraisal Header-Q1"
                     Style = Unfavorable;
                     StyleExpr = Rec."Unresolved Discussions" > 0;
                 }
+                field("Source Type"; Rec."Source Type")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
+                field("Source Department Target No"; Rec."Source Department Target No")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
             }
             part("Financial Targets"; "HR Financial BSC Lines")
             {
@@ -287,6 +297,46 @@ page 52186145 "HR BSC Appraisal Header-Q1"
     {
         area(creation)
         {
+            action("Import Assigned Department Targets")
+            {
+                Caption = 'Import Assigned Department Targets';
+                Image = ImportExcel;
+                Promoted = true;
+                PromotedCategory = Category5;
+                PromotedIsBig = true;
+                Enabled = (Rec.Status = Rec.Status::Open) and (Rec."Appraisal Type" = Rec."Appraisal Type"::"Target Setting");
+
+                trigger OnAction()
+                var
+                    Assignment: Record "HR Employee Target Assignment";
+                    DeptTargetNo: Code[20];
+                    DeptTargetList: Page "HR Employee Target Assgns List";
+                begin
+                    if Rec."Appraisal Type" <> Rec."Appraisal Type"::"Target Setting" then
+                        Error('Can only import assigned targets into Target Setting appraisals.');
+
+                    if Rec.Status <> Rec.Status::Open then
+                        Error('Can only import targets when appraisal status is Open.');
+
+                    Assignment.Reset;
+                    Assignment.SetRange("Employee No", Rec."Employee No");
+                    Assignment.SetFilter(Status, '%1|%2', Assignment.Status::Assigned, Assignment.Status::Accepted);
+                    if Assignment.IsEmpty then
+                        Error('You have no assigned department targets available for import. Please contact your HOD.');
+
+                    DeptTargetList.SetTableView(Assignment);
+                    DeptTargetList.LookupMode := true;
+                    if DeptTargetList.RunModal = ACTION::LookupOK then begin
+                        DeptTargetList.GetRecord(Assignment);
+                        DeptTargetNo := Assignment."Department Target No";
+
+                        if Confirm('Import all assigned targets from Department Target %1?', true, DeptTargetNo) then begin
+                            Rec.ImportFromAssignedTargets(DeptTargetNo);
+                            CurrPage.Update(false);
+                        end;
+                    end;
+                end;
+            }
             action("Send to supervisor")
             {
                 Caption = 'Submit to Supervisor';

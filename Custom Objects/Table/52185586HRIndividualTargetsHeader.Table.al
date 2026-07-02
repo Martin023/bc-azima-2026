@@ -282,6 +282,19 @@ table 52185586 "HR Individual Targets Header"
                                                                       Resolved = CONST(false)));
             FieldClass = FlowField;
         }
+        field(52; "Source Type"; Option)
+        {
+            Caption = 'Source Type';
+            OptionCaption = 'Manual Entry,Imported from Department Targets,Copied from Previous Year';
+            OptionMembers = "Manual Entry","Imported from Department Targets","Copied from Previous Year";
+            Editable = false;
+        }
+        field(53; "Source Department Target No"; Code[20])
+        {
+            Caption = 'Source Department Target No';
+            TableRelation = "HR Department Targets Header"."Target No";
+            Editable = false;
+        }
     }
 
     keys
@@ -608,6 +621,64 @@ table 52185586 "HR Individual Targets Header"
         DiscussionLog.SetRange("Appraisal No", "Appraisal No");
         DiscussionLog.SetRange(Resolved, false);
         exit(not DiscussionLog.IsEmpty);
+    end;
+
+    procedure ImportFromAssignedTargets(DepartmentTargetNo: Code[20])
+    var
+        Assignment: Record "HR Employee Target Assignment";
+        TargetLine: Record "HR Individual Target Line";
+        LineNo: Integer;
+        ImportCount: Integer;
+    begin
+        TestField(Status, Status::Open);
+        TestField("Appraisal Type", "Appraisal Type"::"Target Setting");
+
+        TargetLine.Reset;
+        TargetLine.SetRange("Appraisal No", "Appraisal No");
+        if TargetLine.FindLast then
+            LineNo := TargetLine."Line No"
+        else
+            LineNo := 0;
+
+        Assignment.Reset;
+        Assignment.SetRange("Department Target No", DepartmentTargetNo);
+        Assignment.SetRange("Employee No", "Employee No");
+        Assignment.SetFilter(Status, '%1|%2', Assignment.Status::Assigned, Assignment.Status::Accepted);
+        if Assignment.FindSet then begin
+            ImportCount := 0;
+            repeat
+                LineNo += 10000;
+                TargetLine.Init;
+                TargetLine."Line No" := LineNo;
+                TargetLine."Appraisal No" := "Appraisal No";
+                TargetLine."Perspective Code" := Assignment."Perspective Code";
+                TargetLine.Validate("Perspective Code");
+                TargetLine."Perspective Type" := Assignment."Perspective Type";
+                TargetLine.Objective := Assignment.Objective;
+                TargetLine.Strategy := Assignment.Strategy;
+                TargetLine.Measures := Assignment.Measures;
+                TargetLine.Baseline := Assignment.Baseline;
+                TargetLine."Targeted Score" := Assignment."Targeted Score";
+                TargetLine.Validate("Targeted Score");
+                TargetLine."Appraisal Period" := "Appraisal Period";
+                TargetLine."Company Target" := Assignment."Department Target No";
+                TargetLine.Insert(true);
+
+                Assignment.Status := Assignment.Status::Incorporated;
+                Assignment."Incorporated Into Appraisal No" := "Appraisal No";
+                Assignment."Incorporated Date" := Today;
+                Assignment.Modify;
+                ImportCount += 1;
+            until Assignment.Next = 0;
+
+            "Source Type" := "Source Type"::"Imported from Department Targets";
+            "Source Department Target No" := DepartmentTargetNo;
+            Modify;
+
+            Message('%1 target(s) imported successfully from Department Target %2.', ImportCount, DepartmentTargetNo);
+        end else begin
+            Error('No assigned targets found for you from Department Target %1. Please contact your HOD.', DepartmentTargetNo);
+        end;
     end;
 }
 
