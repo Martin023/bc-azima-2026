@@ -552,10 +552,9 @@ page 52187320 AdvancedHumanResources
                             RunObject = page "HR Appraisal Period Setup";
 
                         }
-                        //ADDED DEPARTMENT TARGETS MENU ITEMS FOR HOD AND HR ADMIN ACCESS
                         action("HR Department Targets List")
                         {
-                            Caption = 'HR Department Targets';
+                            Caption = 'HR Department Targets (All)';
                             ApplicationArea = Basic, Suite;
                             RunObject = page "HR Department Targets List";
                         }
@@ -564,6 +563,12 @@ page 52187320 AdvancedHumanResources
                             Caption = 'My Department Targets (HOD)';
                             ApplicationArea = Basic, Suite;
                             RunObject = page "HRHOD Department Targets";
+                        }
+                        action("HR Employee Target Assignments")
+                        {
+                            Caption = 'Employee Target Assignments';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = page "HR Employee Target Assgns List";
                         }
                     }
                     group(randanalysis)
@@ -1889,17 +1894,17 @@ page 52187320 AdvancedHumanResources
                     Caption = 'Training Application';
                     RunObject = page "HR Training ApplicationList";
                 }
-                // action("Training Evaluation")
-                // {
-                //     ApplicationArea = Basic, Suite;
-                //     Caption = 'Training Evaluation';
-                //     RunObject = page "Training Evaluation";
-                // }
                 action("Appraisal")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'Appraisal List';
+                    Caption = 'My Appraisals';
                     RunObject = page "HR 360 Appraisals List - TS1";
+                }
+                action("My Assigned Targets")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'My Assigned Targets';
+                    RunObject = page "My Assigned Targets";
                 }
                 group("Self Loan Application")
                 {

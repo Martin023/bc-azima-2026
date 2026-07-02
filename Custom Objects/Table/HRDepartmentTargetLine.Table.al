@@ -19,6 +19,7 @@ table 52185484 "HR Department Target Line"
         {
             Caption = 'Perspective Code';
             TableRelation = "HR Perspectives Setup"."Perspective No";
+            ValidateTableRelation = false;
 
             trigger OnValidate()
             begin

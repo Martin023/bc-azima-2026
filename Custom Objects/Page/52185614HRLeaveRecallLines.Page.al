@@ -1,6 +1,6 @@
 page 52185614 "HR Leave Recall Lines"
 {
-    PageType = List;
+    PageType = ListPart;
     SourceTable = "HR Leave Recall Lines";
     Caption = 'HR Leave Recall Lines';
     Editable = true;
@@ -80,10 +80,10 @@ page 52185614 "HR Leave Recall Lines"
                 ApplicationArea = All;
                 Caption = 'Post Recall';
                 Image = Post;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-                Enabled = not Rec.Posted;
+                // Promoted = true;
+                // PromotedCategory = Process;
+                // PromotedIsBig = true;
+                // Enabled = not Rec.Posted;
 
                 trigger OnAction()
                 begin
