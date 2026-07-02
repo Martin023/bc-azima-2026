@@ -3173,7 +3173,7 @@ Codeunit 52185506 "Global Functions"
     begin
         SavingsAccounts.RESET;
         SavingsAccounts.SETRANGE("Member No.", MemberNo);
-        SavingsAccounts.SetRange("Loan Disbursement Account",true);
+        SavingsAccounts.SetRange("Loan Disbursement Account", true);
         if SavingsAccounts.FINDFIRST then
             exit(SavingsAccounts."No.")
         else
@@ -3353,6 +3353,35 @@ Codeunit 52185506 "Global Functions"
     begin
         Randomize();
         exit(Random(2) = 1);
+    end;
+
+    procedure GetMemberLoanProductTotalBalance(
+       MemberNo: Text;
+       LoanProductID: Text
+   ) TotalBalance: Decimal
+    var
+        TheLoan: Record Loans;
+    begin
+        TotalBalance := 0;
+
+        if (MemberNo = '') OR (LoanProductID = '') then begin
+            exit(TotalBalance);
+        end;
+
+        TheLoan.Reset;
+        TheLoan.SetRange("Member No.", MemberNo);
+        TheLoan.SetRange("Loan Product Type", LoanProductID);
+        TheLoan.SetRange(Posted, true);
+        TheLoan.SetLoadFields("Loan No.", "Total Loan Balance", "Daily Interest");
+        TheLoan.SetAutoCalcFields("Total Loan Balance", "Daily Interest");
+        TheLoan.SetFilter("Total Loan Balance", '>0');
+        if TheLoan.FindSet then begin
+            repeat begin
+                TotalBalance += TheLoan."Total Loan Balance" + TheLoan."Daily Interest";
+            end until TheLoan.Next = 0;
+        end;
+
+        exit(TotalBalance);
     end;
 }
 

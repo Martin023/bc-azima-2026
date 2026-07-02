@@ -2295,6 +2295,10 @@ codeunit 52186507 "Members Portal Integration"
                 LoanGuarantorsSecurity.Reset();
                 LoanGuarantorsSecurity.SetRange(LoanGuarantorsSecurity."Loan No", lnNumber.AsValue.AsText);
                 LoanGuarantorsSecurity.SetRange(LoanGuarantorsSecurity."Guarantor Type", LoanGuarantorsSecurity."Guarantor Type"::Guarantor);
+                LoanGuarantorsSecurity.SetRange(LoanGuarantorsSecurity.Substituted, false);
+                LoanGuarantorsSecurity.SetFilter(LoanGuarantorsSecurity."Outstanding Balance", '>0');
+                LoanGuarantorsSecurity.SetRange(LoanGuarantorsSecurity."Member Guaranteed", SearchMember."No.");
+
 
                 if LoanGuarantorsSecurity.Find('-') then begin
                     ResponseText := 'SUCCESS';
@@ -2502,6 +2506,7 @@ codeunit 52186507 "Members Portal Integration"
                     Datum.Add('maximum_installments', ProductFactory."Ordinary Default Intallments");
                     Datum.Add('is_mobile_loan', ProductFactory."Mobile Loan");
                     Datum.Add('repayment_mode', Format(ProductFactory."Repay Mode"));
+                    Datum.Add('requires_installments', ProductFactory."Requires Installments on App.");
 
                     Data.Add(Datum);
                 until ProductFactory.Next = 0;
@@ -2576,6 +2581,7 @@ codeunit 52186507 "Members Portal Integration"
                 Datum.Add('repayment_mode', Format(ProductFactory."Repay Mode"));
                 Datum.Add('minimum_guarantors', ProductFactory."Minimum Guarantors");
                 Datum.Add('maximum_guarantors', ProductFactory."Maximum Guarantors");
+                Datum.Add('requires_installments', ProductFactory."Requires Installments on App.");
 
                 Data.Add(Datum);
                 ResponseObject.Add('data', Data);
@@ -5782,9 +5788,13 @@ codeunit 52186507 "Members Portal Integration"
         identifier_type: JsonToken;
         identifier: JsonToken;
         loan_type_id: JsonToken;
+        installments: JsonToken;
 
         SearchMember: Record Members;
         MobileLoanProduct: Record "Product Factory";
+        IsFosaMLoanProduct: Boolean;
+        TopUpLoan: Record Loans;
+        TotalTopUp: Decimal;
 
         ResponseObject: JsonObject;
         MemberDetails: JsonObject;
@@ -5801,6 +5811,7 @@ codeunit 52186507 "Members Portal Integration"
         Payload.Get('identifier_type', identifier_type); // MSISDN, MEMBER_NO, EMAIL, ID_NO, PAYROLL_NO
         Payload.Get('identifier', identifier);
         Payload.Get('loan_type_id', loan_type_id);
+        IsFosaMLoanProduct := Payload.Get('installments', installments);
 
         IF MemberExists(identifier_type.AsValue.AsText, identifier.AsValue.AsText, SearchMember, ResponseText, ResponseDescription) then begin
             MobileLoanProduct.Reset;
@@ -5815,7 +5826,12 @@ codeunit 52186507 "Members Portal Integration"
                 Datum.Add('loan_name', MobileLoanProduct."Product Description");
 
                 if MobileLoanProduct."Mobile Loan" then begin
-                    Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason));
+                    // Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason));
+                    if IsFosaMLoanProduct then begin
+                        Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount2(SearchMember."No.", MobileLoanProduct."Product ID", installments.AsValue.AsInteger));
+                    end else begin
+                        Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason));
+                    end;
                 end else begin
                     SalaryAmount := GuarantorSalaryEligibility(loan_type_id.AsValue.AsText, SearchMember, 0, FailReason);
                     if (SalaryAmount > MobileLoanProduct."Maximum Loan Amount") then begin
@@ -5829,6 +5845,35 @@ codeunit 52186507 "Members Portal Integration"
                 Datum.Add('eligibility_fail_reason', EligibilityFailReason);
 
                 Datum.Add('loan_type_min_amount', MobileLoanProduct."Minimum Loan Amount");
+
+                if MobileLoanProduct."Requires Installments on App." then begin
+                    TotalTopUp := MobileLoanProduct."Minimum Loan Amount";
+
+                    TopUpLoan.Reset;
+                    TopUpLoan.SetRange("Member No.", SearchMember."No.");
+                    TopUpLoan.SetRange("Loan Product Type", MobileLoanProduct."Product ID");
+                    TopUpLoan.SetFilter("Outstanding Balance", '>0');
+                    TopUpLoan.SetRange(Posted, true);
+
+                    TopUpLoan.SetLoadFields("Loan No.", "Outstanding Balance", "Outstanding Interest", "Daily Interest");
+                    TopUpLoan.SetAutoCalcFields("Outstanding Balance", "Outstanding Interest", "Daily Interest");
+
+                    if TopUpLoan.FindSet then begin
+                        TotalTopUp := 0;
+
+                        repeat begin
+                            TotalTopUp += TopUpLoan."Outstanding Balance" + TopUpLoan."Outstanding Interest" + TopUpLoan."Daily Interest";
+                        end until TopUpLoan.Next = 0;
+
+                        if TotalTopUp < MobileLoanProduct."Minimum Loan Amount" then begin
+                            TotalTopUp := MobileLoanProduct."Minimum Loan Amount";
+                        end;
+                    end;
+
+                    Datum.Add('loan_type_min_amount', TotalTopUp);
+                end else begin
+                    Datum.Add('loan_type_min_amount', MobileLoanProduct."Minimum Loan Amount");
+                end;
 
                 if MobileLoanProduct."Mobile Max. Loan Amount" <> 0 then begin
                     Datum.Add('loan_type_max_amount', MobileLoanProduct."Mobile Max. Loan Amount");
@@ -5883,7 +5928,7 @@ codeunit 52186507 "Members Portal Integration"
             ProductFactory.Reset;
             ProductFactory.SetRange("Product Class Type", ProductFactory."Product Class Type"::Loan);
             ProductFactory.SetRange(Status, ProductFactory.Status::Active);
-            // ProductFactory.SetRange("Mobile Loan", false);
+            ProductFactory.SetRange("Mobile Loan", true);
             ProductFactory.SetRange("Is CRM Product", true);
             // ProductFactory.SetRange("Is USSD Product", false);
             ProductFactory.SetFilter("Source Unit", '<>%1', ProductFactory."Source Unit"::"HR LOANS");
@@ -5916,6 +5961,7 @@ codeunit 52186507 "Members Portal Integration"
                     Datum.Add('repayment_mode', Format(ProductFactory."Repay Mode"));
                     Datum.Add('source', ProductFactory."Source of Funds");
                     Datum.Add('source_unit', Format(ProductFactory."Source Unit"));
+                    Datum.Add('requires_installments', ProductFactory."Requires Installments on App.");
 
                     Data.Add(Datum);
                 end until ProductFactory.Next = 0;
@@ -6445,6 +6491,8 @@ codeunit 52186507 "Members Portal Integration"
         ResponseText: Text;
         ResponseDescription: Text;
         EligibilityFailReason: Text;
+        TotalTopUp: Decimal;
+        TopUpLoan: Record Loans;
     begin
         Payload.Get('identifier_type', identifier_type);
         Payload.Get('identifier', identifier);
@@ -6471,140 +6519,276 @@ codeunit 52186507 "Members Portal Integration"
             MobileLoanProduct.SetRange("Mobile Loan", true);
 
             MobileLoanProduct.SetLoadFields(
-                "Product ID", "Mobile Max. Loan Amount", "Minimum Loan Amount"
+                "Product ID", "Mobile Max. Loan Amount", "Minimum Loan Amount",
+                "Requires Installments on App."
             );
 
             if MobileLoanProduct.FindFirst then begin
                 // Check loan Limit
-                if SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason) < requested_amount.AsValue.AsDecimal then begin
-                    ResponseObject.Add('status', 'ERROR');
-                    Datum.Add('error_message', 'Loan amount exceeds the maximum limit allowed for the member of ' + Format(SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason)));
-                    ResponseObject.Add('data', Datum);
+                if MobileLoanProduct."Requires Installments on App." then begin
+                    if MobileLoanProduct."Requires Installments on App." then begin
+                        if SkyMbankingTrans.GetLoansQualifyAmount2(SearchMember."No.", MobileLoanProduct."Product ID", installments.AsValue.AsInteger) < requested_amount.AsValue.AsDecimal then begin
+                            ResponseObject.Add('status', 'ERROR');
+                            Datum.Add('error_message', 'Loan amount exceeds the maximum limit allowed for the member of ' + Format(SkyMbankingTrans.GetLoansQualifyAmount2(SearchMember."No.", MobileLoanProduct."Product ID", installments.AsValue.AsInteger)));
+                            ResponseObject.Add('data', Datum);
 
-                    AddDateTimeToResponse(ResponseObject);
+                            AddDateTimeToResponse(ResponseObject);
 
-                    ResponseObject.WriteTo(Response);
-                    exit(Response);
-                end;
-                // Check Max Appliable Amount for loan
-                if requested_amount.AsValue.AsDecimal > MobileLoanProduct."Mobile Max. Loan Amount" then begin
-                    ResponseObject.Add('status', 'ERROR');
-                    Datum.Add('error_message', 'Loan amount exceeds the maximum limit allowed for the loan product of ' + Format(MobileLoanProduct."Mobile Max. Loan Amount"));
-                    ResponseObject.Add('data', Datum);
+                            ResponseObject.WriteTo(Response);
+                            exit(Response);
+                        end;
 
-                    AddDateTimeToResponse(ResponseObject);
+                        // Validate minimum top up
+                        TotalTopUp := 0;
 
-                    ResponseObject.WriteTo(Response);
-                    exit(Response);
-                end;
-                // Check Min Appliable Amount for loan
-                if requested_amount.AsValue.AsDecimal < MobileLoanProduct."Minimum Loan Amount" then begin
-                    ResponseObject.Add('status', 'ERROR');
-                    Datum.Add('error_message', 'Loan amount is less than the minimum limit allowed for the loan product of ' + Format(MobileLoanProduct."Minimum Loan Amount"));
-                    ResponseObject.Add('data', Datum);
+                        TopUpLoan.Reset;
+                        TopUpLoan.SetRange("Member No.", SearchMember."No.");
+                        TopUpLoan.SetRange("Loan Product Type", MobileLoanProduct."Product ID");
+                        TopUpLoan.SetFilter("Outstanding Balance", '>0');
+                        TopUpLoan.SetRange(Posted, true);
 
-                    AddDateTimeToResponse(ResponseObject);
+                        TopUpLoan.SetLoadFields("Loan No.", "Outstanding Balance", "Outstanding Interest", "Daily Interest");
+                        TopUpLoan.SetAutoCalcFields("Outstanding Balance", "Outstanding Interest", "Daily Interest");
 
-                    ResponseObject.WriteTo(Response);
-                    exit(Response);
-                end;
-                // if Conditions are met then create loan application
-                if SkyMbankingTrans.BufferLoanApplication(
-                    SearchMember."No.", MobileLoanProduct."Product ID",
-                    requested_amount.AsValue.AsDecimal,
-                    theReference,
-                    MobileLoanPurpose) then begin
+                        if TopUpLoan.FindSet then begin
+                            repeat begin
+                                TotalTopUp += TopUpLoan."Outstanding Balance" + TopUpLoan."Outstanding Interest" + TopUpLoan."Daily Interest";
+                            end until TopUpLoan.Next = 0;
 
-                    Datum.Add('transaction_reference', theReference);
+                            if TotalTopUp < MobileLoanProduct."Minimum Loan Amount" then begin
+                                TotalTopUp := MobileLoanProduct."Minimum Loan Amount";
+                            end;
+                        end;
 
-                    TheLoan.Reset;
+                        if TotalTopUp <> 0 then begin
+                            if requested_amount.AsValue.AsDecimal < TotalTopUp then begin
+                                ResponseObject.Add('status', 'ERROR');
+                                Datum.Add('error_message', 'Loan amount must be above the minimum amount of KES ' + Format(TotalTopUp));
+                                ResponseObject.Add('data', Datum);
 
-                    TheLoan.SetRange("Member No.", SearchMember."No.");
-                    TheLoan.SetRange("Loan Product Type", MobileLoanProduct."Product ID");
-                    TheLoan.SetRange(Posted, false);
-                    TheLoan.SetRange("Requested Amount", requested_amount.AsValue.AsDecimal);
-                    TheLoan.SetRange("Loanee Message", theReference);
+                                AddDateTimeToResponse(ResponseObject);
 
-                    TheLoan.SetLoadFields(
-                        "Loan No.",
-                        "Loan Product Type Name",
-                        "Requested Amount"
-                    );
-
-                    if TheLoan.FindFirst then begin
-                        Datum.Add('loan_serial_number', TheLoan."Loan No.");
+                                ResponseObject.WriteTo(Response);
+                                exit(Response);
+                            end;
+                        end;
                     end else begin
-                        Datum.Add('loan_serial_number', '');
+                        if SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason) < requested_amount.AsValue.AsDecimal then begin
+                            ResponseObject.Add('status', 'ERROR');
+                            Datum.Add('error_message', 'Loan amount exceeds the maximum limit allowed for the member of ' + Format(SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason)));
+                            ResponseObject.Add('data', Datum);
+
+                            AddDateTimeToResponse(ResponseObject);
+
+                            ResponseObject.WriteTo(Response);
+                            exit(Response);
+                        end;
                     end;
 
-                    Datum.Add('loan_type_id', MobileLoanProduct."Product ID");
-                    Datum.Add('loan_name', MobileLoanProduct."Product Description");
-                    Datum.Add('amount', requested_amount.AsValue.AsDecimal);
+                    // Check Max Appliable Amount for loan
+                    if requested_amount.AsValue.AsDecimal > MobileLoanProduct."Mobile Max. Loan Amount" then begin
+                        ResponseObject.Add('status', 'ERROR');
+                        Datum.Add('error_message', 'Loan amount exceeds the maximum limit allowed for the loan product of ' + Format(MobileLoanProduct."Mobile Max. Loan Amount"));
+                        ResponseObject.Add('data', Datum);
 
-                    ResponseObject.Add('status', 'SUCCESS');
-                    ResponseObject.Add('data', Datum);
+                        AddDateTimeToResponse(ResponseObject);
+
+                        ResponseObject.WriteTo(Response);
+                        exit(Response);
+                    end;
+                    // Check Min Appliable Amount for loan
+                    if requested_amount.AsValue.AsDecimal < MobileLoanProduct."Minimum Loan Amount" then begin
+                        ResponseObject.Add('status', 'ERROR');
+                        Datum.Add('error_message', 'Loan amount is less than the minimum limit allowed for the loan product of ' + Format(MobileLoanProduct."Minimum Loan Amount"));
+                        ResponseObject.Add('data', Datum);
+
+                        AddDateTimeToResponse(ResponseObject);
+
+                        ResponseObject.WriteTo(Response);
+                        exit(Response);
+                    end;
+                    // if Conditions are met then create loan application
+                    if MobileLoanProduct."Requires Installments on App." then begin
+                        if SkyMbankingTrans.BufferLoanApplication2(
+                        SearchMember."No.", MobileLoanProduct."Product ID",
+                        requested_amount.AsValue.AsDecimal,
+                        theReference,
+                        MobileLoanPurpose,
+                        installments.AsValue.AsInteger) then begin
+
+                            Datum.Add('transaction_reference', theReference);
+
+                            // TheLoan.Reset;
+
+                            // TheLoan.SetRange("Member No.", SearchMember."No.");
+                            // TheLoan.SetRange("Loan Product Type", MobileLoanProduct."Product ID");
+                            // TheLoan.SetRange(Posted, false);
+                            // TheLoan.SetRange("Requested Amount", requested_amount.AsValue.AsDecimal);
+                            // TheLoan.SetRange("Loanee Message", theReference);
+
+                            // TheLoan.SetLoadFields(
+                            //     "Loan No.",
+                            //     "Loan Product Type Name",
+                            //     "Requested Amount"
+                            // );
+
+                            // if TheLoan.FindFirst then begin
+                            //     Datum.Add('loan_serial_number', TheLoan."Loan No.");
+                            // end else begin
+                            Datum.Add('loan_serial_number', theReference);
+                            //end;
+
+                            Datum.Add('loan_type_id', MobileLoanProduct."Product ID");
+                            Datum.Add('loan_name', MobileLoanProduct."Product Description");
+                            Datum.Add('amount', requested_amount.AsValue.AsDecimal);
+
+                            ResponseObject.Add('status', 'SUCCESS');
+                            ResponseObject.Add('data', Datum);
 
 
-                    // SMS
-                    // theSMS := 'Dear member, your ' +
-                    // TheLoan."Loan Product Type Name"
-                    // + ' loan application request of KES ' +
-                    // Format(TheLoan."Requested Amount") +
-                    // ' has been received successfully. Kindly wait shortly as we process this request. Transaction ID: ' +
-                    // TheLoan."Loan No.";
+                            // SMS
+                            // theSMS := 'Dear member, your ' +
+                            // TheLoan."Loan Product Type Name"
+                            // + ' loan application request of KES ' +
+                            // Format(TheLoan."Requested Amount") +
+                            // ' has been received successfully. Kindly wait shortly as we process this request. Transaction ID: ' +
+                            // TheLoan."Loan No.";
 
-                    // if SearchMember."Phone No." <> '' then begin
-                    //     SkySMS.SendSms(
-                    //         SMSSource::LOAN_APPLICATION,
-                    //         SearchMember."Phone No.",
-                    //         theSMS,
-                    //         TheLoan."Loan No.",
-                    //         '',
-                    //         true,
-                    //         0,
-                    //         true,
-                    //         'MBANKING',
-                    //         theReference,
-                    //         'CBS'
-                    //     );
-                    // end else begin
-                    //     if SearchMember."Transactional Mobile Number" <> '' then begin
-                    //         SkySMS.SendSms(
-                    //             SMSSource::LOAN_APPLICATION,
-                    //             SearchMember."Transactional Mobile Number",
-                    //             theSMS,
-                    //             TheLoan."Loan No.",
-                    //             '',
-                    //             true,
-                    //             0,
-                    //             true,
-                    //             'MBANKING',
-                    //             theReference,
-                    //             'CBS'
-                    //         );
-                    //     end
-                    // end;
+                            // if SearchMember."Phone No." <> '' then begin
+                            //     SkySMS.SendSms(
+                            //         SMSSource::LOAN_APPLICATION,
+                            //         SearchMember."Phone No.",
+                            //         theSMS,
+                            //         TheLoan."Loan No.",
+                            //         '',
+                            //         true,
+                            //         0,
+                            //         true,
+                            //         'MBANKING',
+                            //         theReference,
+                            //         'CBS'
+                            //     );
+                            // end else begin
+                            //     if SearchMember."Transactional Mobile Number" <> '' then begin
+                            //         SkySMS.SendSms(
+                            //             SMSSource::LOAN_APPLICATION,
+                            //             SearchMember."Transactional Mobile Number",
+                            //             theSMS,
+                            //             TheLoan."Loan No.",
+                            //             '',
+                            //             true,
+                            //             0,
+                            //             true,
+                            //             'MBANKING',
+                            //             theReference,
+                            //             'CBS'
+                            //         );
+                            //     end
+                            // end;
+                        end else begin
+                            ResponseObject.Add('status', 'FAILED');
+                            Datum.Add('error_message', 'Loan creation failed');
+                            ResponseObject.Add('data', Datum);
+                        end;
+                    end else begin
+                        if SkyMbankingTrans.BufferLoanApplication(
+                        SearchMember."No.", MobileLoanProduct."Product ID",
+                        requested_amount.AsValue.AsDecimal,
+                        theReference,
+                        MobileLoanPurpose) then begin
+
+                            Datum.Add('transaction_reference', theReference);
+
+                            // TheLoan.Reset;
+
+                            // TheLoan.SetRange("Member No.", SearchMember."No.");
+                            // TheLoan.SetRange("Loan Product Type", MobileLoanProduct."Product ID");
+                            // TheLoan.SetRange(Posted, false);
+                            // TheLoan.SetRange("Requested Amount", requested_amount.AsValue.AsDecimal);
+                            // TheLoan.SetRange("Loanee Message", theReference);
+
+                            // TheLoan.SetLoadFields(
+                            //     "Loan No.",
+                            //     "Loan Product Type Name",
+                            //     "Requested Amount"
+                            // );
+
+                            // if TheLoan.FindFirst then begin
+                            //     Datum.Add('loan_serial_number', TheLoan."Loan No.");
+                            // end else begin
+                            Datum.Add('loan_serial_number', '');
+                            // end;
+
+                            Datum.Add('loan_type_id', MobileLoanProduct."Product ID");
+                            Datum.Add('loan_name', MobileLoanProduct."Product Description");
+                            Datum.Add('amount', requested_amount.AsValue.AsDecimal);
+
+                            ResponseObject.Add('status', 'SUCCESS');
+                            ResponseObject.Add('data', Datum);
+
+
+                            // // SMS
+                            // theSMS := 'Dear member, your ' +
+                            // TheLoan."Loan Product Type Name"
+                            // + ' loan application request of KES ' +
+                            // Format(TheLoan."Requested Amount") +
+                            // ' has been received successfully. Kindly wait shortly as we process this request. Transaction ID: ' +
+                            // TheLoan."Loan No.";
+
+                            // if SearchMember."Phone No." <> '' then begin
+                            //     SkySMS.SendSms(
+                            //         SMSSource::LOAN_APPLICATION,
+                            //         SearchMember."Phone No.",
+                            //         theSMS,
+                            //         TheLoan."Loan No.",
+                            //         '',
+                            //         true,
+                            //         0,
+                            //         true,
+                            //         'MBANKING',
+                            //         theReference,
+                            //         'CBS'
+                            //     );
+                            // end else begin
+                            //     if SearchMember."Transactional Mobile Number" <> '' then begin
+                            //         SkySMS.SendSms(
+                            //             SMSSource::LOAN_APPLICATION,
+                            //             SearchMember."Transactional Mobile Number",
+                            //             theSMS,
+                            //             TheLoan."Loan No.",
+                            //             '',
+                            //             true,
+                            //             0,
+                            //             true,
+                            //             'MBANKING',
+                            //             theReference,
+                            //             'CBS'
+                            //         );
+                            //     end
+                            // end;
+                        end else begin
+                            ResponseObject.Add('status', 'FAILED');
+                            Datum.Add('error_message', 'Loan creation failed');
+                            ResponseObject.Add('data', Datum);
+                        end;
+                    end;
                 end else begin
-                    ResponseObject.Add('status', 'FAILED');
-                    Datum.Add('error_message', 'Loan creation failed');
+                    ResponseObject.Add('status', 'ERROR');
+                    Datum.Add('error_message', 'Loan product with ID = ' + loan_product.AsValue.AsText + ' NOT available for mobile application!');
                     ResponseObject.Add('data', Datum);
                 end;
             end else begin
                 ResponseObject.Add('status', 'ERROR');
-                Datum.Add('error_message', 'Loan product with ID = ' + loan_product.AsValue.AsText + ' NOT available for mobile application!');
+                Datum.Add('error_message', 'Member with identification ' + identifier_type.AsValue.AsText + ' = ' + identifier.AsValue.AsText + ' NOT found!');
                 ResponseObject.Add('data', Datum);
             end;
-        end else begin
-            ResponseObject.Add('status', 'ERROR');
-            Datum.Add('error_message', 'Member with identification ' + identifier_type.AsValue.AsText + ' = ' + identifier.AsValue.AsText + ' NOT found!');
-            ResponseObject.Add('data', Datum);
+
+            AddDateTimeToResponse(ResponseObject);
+
+            ResponseObject.WriteTo(Response);
+
+            exit(Response);
         end;
-
-        AddDateTimeToResponse(ResponseObject);
-
-        ResponseObject.WriteTo(Response);
-
-        exit(Response);
     end;
 
     local procedure GetLoanApplicationRequests(Payload: JsonObject): Text
@@ -12095,6 +12279,7 @@ codeunit 52186507 "Members Portal Integration"
                         Datum.Add('interest_calculation_method', Format(ProductFactory."Interest Calculation Method"));
                         Datum.Add('is_mobile_loan', ProductFactory."Mobile Loan");
                         Datum.Add('repayment_mode', Format(ProductFactory."Repay Mode"));
+                        Datum.Add('requires_installments', ProductFactory."Requires Installments on App.");
 
                         Data.Add(Datum);
                     end until ProductFactory.Next = 0;
