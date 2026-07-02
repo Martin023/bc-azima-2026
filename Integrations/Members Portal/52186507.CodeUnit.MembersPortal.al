@@ -2475,7 +2475,7 @@ codeunit 52186507 "Members Portal Integration"
         IF MemberExists(identifier_type.AsValue.AsText, identifier.AsValue.AsText, SearchMember, ResponseText, ResponseDescription) then begin
             ProductFactory.SetRange(Status, ProductFactory.Status::Active);
             ProductFactory.SetRange("Product Class Type", ProductFactory."Product Class Type"::Loan);
-            ProductFactory.SetRange("Nature of Loan Type", ProductFactory."Nature of Loan Type"::Normal);
+            // ProductFactory.SetRange("Nature of Loan Type", ProductFactory."Nature of Loan Type"::Normal);
             // ProductFactory.SetRange("Is CRM Product", true);
 
             if SearchMember."Employer Code" = 'RETIREE' then begin
@@ -2553,7 +2553,7 @@ codeunit 52186507 "Members Portal Integration"
             ProductFactory.Reset();
             ProductFactory.SetRange("Product ID", LnCode.AsValue().AsText());
             ProductFactory.SetRange(ProductFactory."Product Class Type", ProductFactory."Product Class Type"::Loan);
-            ProductFactory.SetRange("Nature of Loan Type", ProductFactory."Nature of Loan Type"::Normal);
+            // ProductFactory.SetRange("Nature of Loan Type", ProductFactory."Nature of Loan Type"::Normal);
 
             if ProductFactory.FindFirst() then begin
                 ResponseText := 'SUCCESS';
