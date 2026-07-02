@@ -35,10 +35,10 @@ Report 52186789 "FOSA Account Change Logs"
             column(Type_of_Change; "Type of Change")
             {
             }
-            column(Old_Value; "Old Value")
+            column(Old_Value; Format("Old Value"))
             {
             }
-            column(New_Value; "New Value")
+            column(New_Value; Format("New Value"))
             {
             }
             column(Primary_Key; "Primary Key")
