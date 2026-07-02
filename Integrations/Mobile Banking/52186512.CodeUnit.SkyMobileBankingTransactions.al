@@ -1528,13 +1528,6 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     message('Salary Average after applying least salary rate: %1', Format(SalAvg));
                 end;
 
-                if SalAvg <= 0 then begin
-                    EligibilityFailReason := StrSubstNo('Applicant NOT eligible due to salary requirements');
-                    Message('SalAvg <= 0. Applicant NOT eligible due to salary requirements');
-                    QualifiedAmount := 0;
-                    EXIT(QualifiedAmount);
-                end;
-
                 LoanRec := ComputeLoanDeductions(saccoAccount."Member No.");
                 Message('Loan Deductions: %1', Format(LoanRec));
 
@@ -1638,6 +1631,16 @@ codeunit 52186512 "Sky M-Banking Transactions"
 
                     if QualifiedAmount > ProdFac."Maximum Loan Amount" then
                         QualifiedAmount := ProdFac."Maximum Loan Amount";
+
+                    if QualifiedAmount < ProdFac."Minimum Loan Amount" then begin
+                        EligibilityFailReason := StrSubstNo(
+                            'Applicant NOT eligible. Qualified amount KES %1 is below the minimum of KES %2',
+                            Format(Round(QualifiedAmount, 1)),
+                            Format(ProdFac."Minimum Loan Amount")
+                        );
+                        QualifiedAmount := 0;
+                    end else
+                        EligibilityFailReason := '';
 
                     exit(QualifiedAmount);
                     Message('Qualified Amount: %1', Format(QualifiedAmount));
@@ -3892,6 +3895,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
         ProdFac: Record "Product Factory";
         SavAccounts: Record "Savings Accounts";
         SavLedger: Record "Savings Ledger Entry";
+        Members: Record Members;
+        BlockedEmployers: Record "Blocked Employers";
         MonthStart: Date;
         MonthEnd: Date;
         MonthCredits: Decimal;
@@ -3908,6 +3913,14 @@ codeunit 52186512 "Sky M-Banking Transactions"
         DepositCap := 0;
 
         ProdFac.GET(ProductID);
+
+        Members.Reset();
+        Members.SetRange("No.", MemberNo);
+        Members.SetLoadFields("No.", "Employer Code", "Account Type");
+        if not Members.FindFirst() then begin
+            EligibilityFailReason := 'Member NOT found';
+            exit(0);
+        end;
 
         for i := 1 to 3 do begin
             MonthStart := DMY2Date(1,
