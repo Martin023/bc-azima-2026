@@ -200,51 +200,51 @@ page 52185804 "Treasury Cashier Transactions"
             }
 
             action("Yesterday Return to Treasury Coinage")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Promoted = true;
-                    PromotedCategory = Process;
-                    trigger OnAction()
-                    var 
-                        Coinage : Record Coinage;
-                        TreasuryCoinage : record Coinage;
-                    begin
-                        Rec.TestField(Status, Rec.Status::Open);
-                        Rec.TestField("Transaction Type", rec."Transaction Type"::"Issue To Teller");
-                        Rec.TestField("To Account");
+            {
+                ApplicationArea = Basic, Suite;
+                Promoted = true;
+                PromotedCategory = Process;
+                trigger OnAction()
+                var
+                    Coinage: Record Coinage;
+                    TreasuryCoinage: record Coinage;
+                begin
+                    Rec.TestField(Status, Rec.Status::Open);
+                    Rec.TestField("Transaction Type", rec."Transaction Type"::"Issue To Teller");
+                    Rec.TestField("To Account");
 
-                        if not Confirm('Suggest Yesterday Return to Treasury Coinage for Teller - %1', true, Rec."To Account") then exit;
+                    if not Confirm('Suggest Yesterday Return to Treasury Coinage for Teller - %1', true, Rec."To Account") then exit;
 
-                        Treasury.Reset;
-                        Treasury.SetRange("Transaction Type",treasury."Transaction Type"::"End of Day Return to Treasury");
-                        Treasury.SetRange(Received,Treasury.Received::Yes);
-                        Treasury.SetRange(Posted,true);
-                        Treasury.SetRange("From Account",Rec."To Account");
-                        //Treasury.SetRange("Date Posted",CalcDate('<-1D>',Today));
-                        if Treasury.FindLast() then begin
-                            Coinage.Reset;
-                            Coinage.SetRange(No,Treasury.No);
-                            if Coinage.FindSet() then begin
-                                repeat
-                                    TreasuryCoinage.Reset();
-                                    TreasuryCoinage.SetRange(No, Rec.No);
-                                    TreasuryCoinage.SetRange(Code, Coinage.Code);
-                                    if TreasuryCoinage.FindSet() then begin
-                                        TreasuryCoinage.Description := Coinage.Description;
-                                        TreasuryCoinage.Type := Coinage.Type;
-                                        TreasuryCoinage.Value := Coinage.Value;
-                                        TreasuryCoinage.Quantity := Coinage.Quantity;
-                                        TreasuryCoinage."Total Amount" := Coinage."Total Amount";
-                                        TreasuryCoinage.Modify();
-                                    end;
-                                until Coinage.next = 0;
+                    Treasury.Reset;
+                    Treasury.SetRange("Transaction Type", treasury."Transaction Type"::"End of Day Return to Treasury");
+                    Treasury.SetRange(Received, Treasury.Received::Yes);
+                    Treasury.SetRange(Posted, true);
+                    Treasury.SetRange("From Account", Rec."To Account");
+                    //Treasury.SetRange("Date Posted",CalcDate('<-1D>',Today));
+                    if Treasury.FindLast() then begin
+                        Coinage.Reset;
+                        Coinage.SetRange(No, Treasury.No);
+                        if Coinage.FindSet() then begin
+                            repeat
+                                TreasuryCoinage.Reset();
+                                TreasuryCoinage.SetRange(No, Rec.No);
+                                TreasuryCoinage.SetRange(Code, Coinage.Code);
+                                if TreasuryCoinage.FindSet() then begin
+                                    TreasuryCoinage.Description := Coinage.Description;
+                                    TreasuryCoinage.Type := Coinage.Type;
+                                    TreasuryCoinage.Value := Coinage.Value;
+                                    TreasuryCoinage.Quantity := Coinage.Quantity;
+                                    TreasuryCoinage."Total Amount" := Coinage."Total Amount";
+                                    TreasuryCoinage.Modify();
+                                end;
+                            until Coinage.next = 0;
                             Message('Coinage details for yesterday return to treasury transaction have been updated on this transaction successfully');
                         end else
                             Message('No return to treasury transaction from yesterday found for this teller.');
-                        end;
-
                     end;
-                }
+
+                end;
+            }
             action("Treasury Issue")
             {
                 ApplicationArea = Basic, Suite;
@@ -252,6 +252,7 @@ page 52185804 "Treasury Cashier Transactions"
                 Image = Interaction;
                 Promoted = true;
                 PromotedCategory = Process;
+                Enabled = (rec.Issued = rec.Issued::No);
 
                 trigger OnAction()
                 var
@@ -259,7 +260,7 @@ page 52185804 "Treasury Cashier Transactions"
                     BankingSetup: record "Banking User Template";
                     BankAcc: record "Bank Account";
                 begin
-
+                    if rec.Issued = rec.Issued::yes then error('This document has already been issued!');
                     if Rec.Status <> Rec.Status::Approved then
                         Error('Transaction must be approved');
 
@@ -277,8 +278,6 @@ page 52185804 "Treasury Cashier Transactions"
                                 Message('The treasury account has gone below minimum required balance of %1', BankingSetup."Minimum Balance");
                         end;
                     end;
-
-                    
 
                     SaccoT.PostTCIssue(Rec);
                 end;
@@ -495,7 +494,7 @@ page 52185804 "Treasury Cashier Transactions"
 
                         // Coinage validation — moved from PostTCIssue
                         Rec.Calcfields("Total Cash on Treasury Coinage");
-                        
+
                         if Rec.Amount <> Rec."Total Cash on Treasury Coinage" then begin
                             Error('Coinage amount (%1) must match total cash on treasury coinage (%2).', Rec.Amount, Rec."Total Cash on Treasury Coinage");
                         end;
@@ -511,8 +510,8 @@ page 52185804 "Treasury Cashier Transactions"
 
                         if (rec."Transaction Type" = rec."Transaction Type"::"Issue To Teller") or
                             (rec."Transaction Type" = rec."Transaction Type"::"End of Day Return to Treasury") then
-                             rec.Testfield("Cash Requisition Number");
-                            
+                            rec.Testfield("Cash Requisition Number");
+
                         //if rec.Status = Status::Approved then begin
                         if rec."Transaction Type" = rec."Transaction Type"::"Issue To Teller" then begin
                             BankingUSetup.get(rec."From Account");
