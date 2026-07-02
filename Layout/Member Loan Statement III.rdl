@@ -11,7 +11,7 @@
       <am:Name>PBIRB</am:Name>
       <am:Version>15.7.1813.16</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-07-01T20:39:37.8351376Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-07-02T02:21:16.3938194Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -4426,7 +4426,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>This is a system-generated report</Value>
+                      <Value>This is a computer generated SACCO statement</Value>
                       <Style>
                         <FontStyle>Normal</FontStyle>
                         <FontFamily>Times New Roman</FontFamily>
@@ -4445,7 +4445,7 @@
               <Top>0.05556in</Top>
               <Left>0.18533in</Left>
               <Height>0.25in</Height>
-              <Width>3.47926in</Width>
+              <Width>4.02093in</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
