@@ -723,6 +723,7 @@ table 52185776 "Cashier Transactions"
         field(50030; "Bank Name"; Text[100])
         {
             Editable = false;
+        }
         field(50031; "Charge Amount"; Decimal)
         {
             Editable = false;
