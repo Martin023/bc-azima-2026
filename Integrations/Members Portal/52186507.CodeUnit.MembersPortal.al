@@ -3253,6 +3253,7 @@ codeunit 52186507 "Members Portal Integration"
         ResponseText: Text;
         ResponseDescription: Text;
         ActualSchedule: Codeunit ActualLoanSchedule;
+        LoanProcess: Codeunit "Loans Process";
     begin
         Payload.Get('identifier_type', identifier_type);
         Payload.Get('identifier', identifier);
@@ -3266,9 +3267,10 @@ codeunit 52186507 "Members Portal Integration"
             IF TheLoan.FindFirst then begin
                 RecRef.GetTable(TheLoan);
 
-                ActualSchedule.GenerateLoanSchedule(TheLoan);
+                //ActualSchedule.GenerateLoanSchedule(TheLoan);
+                LoanProcess.GenerateSchedule(TheLoan, True);
                 BlobOutStream := TempBlob.CreateOutStream;
-                Report.SaveAs(Report::"Actual Loan Schedule", '', ReportFormat::Pdf, BlobOutStream, RecRef);
+                Report.SaveAs(Report::"Ideal Repayment Schedule", '', ReportFormat::Pdf, BlobOutStream, RecRef);
 
                 BlobInStream := TempBlob.CreateInStream;
                 FileContentsB64 := Base64Convert.ToBase64(BlobInStream);
@@ -5844,7 +5846,7 @@ codeunit 52186507 "Members Portal Integration"
 
                 Datum.Add('eligibility_fail_reason', EligibilityFailReason);
 
-                Datum.Add('loan_type_min_amount', MobileLoanProduct."Minimum Loan Amount");
+                //Datum.Add('loan_type_min_amount', MobileLoanProduct."Minimum Loan Amount");
 
                 if MobileLoanProduct."Requires Installments on App." then begin
                     TotalTopUp := MobileLoanProduct."Minimum Loan Amount";
