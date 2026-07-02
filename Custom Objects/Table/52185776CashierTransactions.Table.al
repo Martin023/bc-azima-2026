@@ -707,22 +707,39 @@ table 52185776 "Cashier Transactions"
         field(50028; "MPESA Float Balance"; Decimal)
         {
         }
-        field(50029; "Charge Amount"; Decimal)
+        field(50029; "Bank Code"; code[20])
+        {
+            TableRelation = "PR Bank Accounts"."Bank Code";
+            trigger OnValidate()
+            var
+                BankAcc: Record "PR Bank Accounts";
+            begin
+                if BankAcc.Get(Rec."Bank Code") then
+                    Rec."Bank Name" := BankAcc."Bank Name"
+                else
+                    Rec."Bank Name" := '';
+            end;
+        }
+        field(50030; "Bank Name"; Text[100])
+        {
+            Editable = false;
+        }
+        field(50031; "Charge Amount"; Decimal)
         {
             Editable = false;
             Description = 'Base withdrawal fee exclusive of excise and SMS';
         }
-        field(50030; "Excise Duty Amount"; Decimal)
+        field(50032; "Excise Duty Amount"; Decimal)
         {
             Editable = false;
             Description = 'Excise Duty charged on the base withdrawal fee';
         }
-        field(50031; "SMS Charge Amount"; Decimal)
+        field(50033; "SMS Charge Amount"; Decimal)
         {
             Editable = false;
             Description = 'SMS Charge segregated from base charge';
         }
-        field(50032; "SMS Excise Duty"; Decimal)
+        field(50034; "SMS Excise Duty"; Decimal)
         {
             Editable = false;
             Description = 'Excise Duty charged specifically on the SMS Fee';

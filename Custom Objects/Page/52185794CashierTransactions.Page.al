@@ -328,6 +328,17 @@ page 52185794 "Cashier Transactions"
                         Caption = 'Bankers Cheque No';
                         Editable = (rec.Type = rec.Type::"Cancel Bankers Cheque") or (rec.Type = rec.Type::"Bankers Cheque");
                     }
+                    field("Bank Code"; Rec."Bank Code")
+                    {
+                        ApplicationArea = Basic;
+
+                    }
+                    field("Bank Name"; Rec."Bank Name")
+                    {
+                        ApplicationArea = Basic;
+                        editable = false;
+
+                    }
                 }
                 group(MPESATYPE)
                 {
