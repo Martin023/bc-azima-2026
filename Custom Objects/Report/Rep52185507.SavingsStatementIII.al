@@ -79,6 +79,9 @@ report 52185507 "Savings Statement III"
             column(AccountBal; AccountBal)
             {
             }
+            column(TimeT; '')
+            {
+            }
             dataitem(SavingsLedgerEntry; "Savings Ledger Entry")
             {
                 DataItemLink = "Customer No." = field("No."), "Posting Date" = field("Date Filter");

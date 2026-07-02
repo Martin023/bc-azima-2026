@@ -5930,7 +5930,7 @@ codeunit 52186507 "Members Portal Integration"
             ProductFactory.Reset;
             ProductFactory.SetRange("Product Class Type", ProductFactory."Product Class Type"::Loan);
             ProductFactory.SetRange(Status, ProductFactory.Status::Active);
-            ProductFactory.SetRange("Mobile Loan", true);
+            // ProductFactory.SetRange("Mobile Loan", true);
             ProductFactory.SetRange("Is CRM Product", true);
             // ProductFactory.SetRange("Is USSD Product", false);
             ProductFactory.SetFilter("Source Unit", '<>%1', ProductFactory."Source Unit"::"HR LOANS");
