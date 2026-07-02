@@ -9,7 +9,7 @@
       <am:Name>MSRB</am:Name>
       <am:Version>15.0.20283.0</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-07-02T16:10:34.2932369Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-07-02T18:09:19.1665535Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -22,6 +22,142 @@
       <rd:DataSourceID>8cf8d1d2-c3f3-4656-8a0e-4c7b21f2d6f0</rd:DataSourceID>
     </DataSource>
   </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+      <Fields>
+        <Field Name="ReportForNavId_2">
+          <DataField>ReportForNavId_2</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Name">
+          <DataField>CompanyInformation_Name</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Picture">
+          <DataField>CompanyInformation_Picture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="No_SavingsAccounts">
+          <DataField>No_SavingsAccounts</DataField>
+        </Field>
+        <Field Name="Name_SavingsAccounts">
+          <DataField>Name_SavingsAccounts</DataField>
+        </Field>
+        <Field Name="MemberNo_SavingsAccounts">
+          <DataField>MemberNo_SavingsAccounts</DataField>
+        </Field>
+        <Field Name="SavingsAccountName">
+          <DataField>SavingsAccountName</DataField>
+        </Field>
+        <Field Name="IDNumber_SavingsAccounts">
+          <DataField>IDNumber_SavingsAccounts</DataField>
+        </Field>
+        <Field Name="MobilePhoneNo_SavingsAccounts">
+          <DataField>MobilePhoneNo_SavingsAccounts</DataField>
+        </Field>
+        <Field Name="County_SavingsAccounts">
+          <DataField>County_SavingsAccounts</DataField>
+        </Field>
+        <Field Name="EMail_SavingsAccounts">
+          <DataField>EMail_SavingsAccounts</DataField>
+        </Field>
+        <Field Name="PayrollStaffNo_SavingsAccounts">
+          <DataField>PayrollStaffNo_SavingsAccounts</DataField>
+        </Field>
+        <Field Name="ProductType_SavingsAccounts">
+          <DataField>ProductType_SavingsAccounts</DataField>
+        </Field>
+        <Field Name="BalanceBF">
+          <DataField>BalanceBF</DataField>
+        </Field>
+        <Field Name="BalanceBFFormat">
+          <DataField>BalanceBFFormat</DataField>
+        </Field>
+        <Field Name="UnclearedCheques_SavingsAccounts">
+          <DataField>UnclearedCheques_SavingsAccounts</DataField>
+        </Field>
+        <Field Name="UnclearedCheques_SavingsAccountsFormat">
+          <DataField>UnclearedCheques_SavingsAccountsFormat</DataField>
+        </Field>
+        <Field Name="LienPlaced_SavingsAccounts">
+          <DataField>LienPlaced_SavingsAccounts</DataField>
+        </Field>
+        <Field Name="LienPlaced_SavingsAccountsFormat">
+          <DataField>LienPlaced_SavingsAccountsFormat</DataField>
+        </Field>
+        <Field Name="Employer_Code">
+          <DataField>Employer_Code</DataField>
+        </Field>
+        <Field Name="Employer_Name">
+          <DataField>Employer_Name</DataField>
+        </Field>
+        <Field Name="Global_Dimension_1_Code">
+          <DataField>Global_Dimension_1_Code</DataField>
+        </Field>
+        <Field Name="AccountBal">
+          <DataField>AccountBal</DataField>
+        </Field>
+        <Field Name="AccountBalFormat">
+          <DataField>AccountBalFormat</DataField>
+        </Field>
+        <Field Name="MemberNo_SavingsLedgerEntry">
+          <DataField>MemberNo_SavingsLedgerEntry</DataField>
+        </Field>
+        <Field Name="CustomerNo_SavingsLedgerEntry">
+          <DataField>CustomerNo_SavingsLedgerEntry</DataField>
+        </Field>
+        <Field Name="PostingDate_SavingsLedgerEntry">
+          <DataField>PostingDate_SavingsLedgerEntry</DataField>
+        </Field>
+        <Field Name="DocumentNo_SavingsLedgerEntry">
+          <DataField>DocumentNo_SavingsLedgerEntry</DataField>
+        </Field>
+        <Field Name="Description_SavingsLedgerEntry">
+          <DataField>Description_SavingsLedgerEntry</DataField>
+        </Field>
+        <Field Name="DebitAmountLCY_SavingsLedgerEntry">
+          <DataField>DebitAmountLCY_SavingsLedgerEntry</DataField>
+        </Field>
+        <Field Name="DebitAmountLCY_SavingsLedgerEntryFormat">
+          <DataField>DebitAmountLCY_SavingsLedgerEntryFormat</DataField>
+        </Field>
+        <Field Name="CreditAmountLCY_SavingsLedgerEntry">
+          <DataField>CreditAmountLCY_SavingsLedgerEntry</DataField>
+        </Field>
+        <Field Name="CreditAmountLCY_SavingsLedgerEntryFormat">
+          <DataField>CreditAmountLCY_SavingsLedgerEntryFormat</DataField>
+        </Field>
+        <Field Name="AmountLCY_SavingsLedgerEntry">
+          <DataField>AmountLCY_SavingsLedgerEntry</DataField>
+        </Field>
+        <Field Name="AmountLCY_SavingsLedgerEntryFormat">
+          <DataField>AmountLCY_SavingsLedgerEntryFormat</DataField>
+        </Field>
+        <Field Name="SavingsAccountRunBal">
+          <DataField>SavingsAccountRunBal</DataField>
+        </Field>
+        <Field Name="SavingsAccountRunBalFormat">
+          <DataField>SavingsAccountRunBalFormat</DataField>
+        </Field>
+        <Field Name="SavingsAccountBal">
+          <DataField>SavingsAccountBal</DataField>
+        </Field>
+        <Field Name="SavingsAccountBalFormat">
+          <DataField>SavingsAccountBalFormat</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -4733,65 +4869,6 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="Textbox64">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>Printed on :</Value>
-                      <Style>
-                        <FontFamily>Times New Roman</FontFamily>
-                        <FontSize>8pt</FontSize>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value>=Today()</Value>
-                      <Style>
-                        <FontFamily>Times New Roman</FontFamily>
-                        <FontSize>8pt</FontSize>
-                        <Format>dd/MM/yyyy</Format>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value xml:space="preserve"> </Value>
-                      <Style>
-                        <FontFamily>Times New Roman</FontFamily>
-                        <FontSize>8pt</FontSize>
-                        <Format>dd/MM/yyyy</Format>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value>=First(Fields!TimeT.Value, "DataSet_Result")</Value>
-                      <Style>
-                        <FontFamily>Times New Roman</FontFamily>
-                        <FontSize>8pt</FontSize>
-                        <Format>T</Format>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>0.26315cm</Top>
-              <Left>13.48137cm</Left>
-              <Height>0.38628cm</Height>
-              <Width>6.8222cm</Width>
-              <ZIndex>5</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
             <Textbox Name="UserID">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
@@ -4837,49 +4914,7 @@
               <Left>13.48139cm</Left>
               <Height>0.46216cm</Height>
               <Width>6.8222cm</Width>
-              <ZIndex>6</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="UserID2">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>Printed By: </Value>
-                      <Style>
-                        <FontFamily>Times New Roman</FontFamily>
-                        <FontSize>7pt</FontSize>
-                      </Style>
-                    </TextRun>
-                    <TextRun>
-                      <Value>=User!UserID</Value>
-                      <Style>
-                        <FontFamily>Times New Roman</FontFamily>
-                        <FontSize>7pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>UserID</rd:DefaultName>
-              <Top>1.61608cm</Top>
-              <Left>13.48139cm</Left>
-              <Height>0.46744cm</Height>
-              <Width>6.8222cm</Width>
-              <ZIndex>7</ZIndex>
+              <ZIndex>5</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -4913,7 +4948,7 @@
               <Left>5.02922cm</Left>
               <Height>0.59999cm</Height>
               <Width>15.29553cm</Width>
-              <ZIndex>8</ZIndex>
+              <ZIndex>6</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
