@@ -212,9 +212,25 @@ PageExtension 52185444 pageextension52185444 extends "Vendor Ledger Entries"
         }
         modify(RunningBalanceLCY)
         {
-            Visible = true;
+            //Visible = true;
+            Visible = false;
             ApplicationArea = Basic;
         }
+
+        addafter(RunningBalanceLCY)
+        {
+            field(RunningBalanceLCYAbs; RunningBalanceLCYAbs)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Running Balance (LCY)';
+                ToolTip = 'Specifies the running balance in LCY.';
+                AutoFormatType = 1;
+                AutoFormatExpression = '';
+                Visible = true;
+            }
+        }
+
+
         moveafter("Credit Amount"; RunningBalanceLCY)
 
 
@@ -307,6 +323,10 @@ PageExtension 52185444 pageextension52185444 extends "Vendor Ledger Entries"
             }
         }
     }
+    trigger OnAfterGetRecord()
+    begin
+        RunningBalanceLCYAbs := Abs(CalcRunningVendBalance.GetVendorBalanceLCY(Rec));
+    end;
 
     procedure GetVendorBalanceLCY(var VendorLedgerEntry: Record "Vendor Ledger Entry"): Decimal
     var
@@ -321,5 +341,9 @@ PageExtension 52185444 pageextension52185444 extends "Vendor Ledger Entries"
     begin
         // vendorled
     end;
+
+    var
+        CalcRunningVendBalance: Codeunit "Calc. Running Vend. Balance";
+        RunningBalanceLCYAbs: Decimal;
 
 }
