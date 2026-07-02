@@ -6442,8 +6442,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                  your available balance is Ksh [AMOUNT] on [TIMESTAMP]. 
                                                                 */
 
-                                                                theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() + ', '
-                                                                 + MpesaTransBuffer."Originator ID" +
+                                                                theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
                                                                 ', you have successfully transferred Kshs. ' +
                                                                 Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
                                                                  ' to ' + TheDestinationSavings."Name" +
@@ -6696,7 +6695,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                     // if TotalExciseDuty > 0 then begin
                                                                     //     SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", CopyStr(MobileTransTypes.Description + ' - Excise Duty', 1, 150), AccType::"G/L Account", '', TotalExciseDuty, theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                                     // end;
-                                                                    TotalCreditAmount -= TotalCharges;
+                                                                    // TotalCreditAmount -= TotalCharges;
                                                                 end;
                                                             end;
 
