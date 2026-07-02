@@ -252,6 +252,11 @@ page 52185592 "HR Setup"
                 {
                     ApplicationArea = Basic;
                 }
+                field("Min Recall Notice Days"; Rec."Min Recall Notice Days")
+                {
+                    ApplicationArea = Basic;
+                    ToolTip = 'Minimum number of days notice required before recalling an employee from leave. Set to 0 to allow immediate recalls.';
+                }
                 
                 field(Formula; Rec.Formula)
                 {
