@@ -2295,6 +2295,10 @@ codeunit 52186507 "Members Portal Integration"
                 LoanGuarantorsSecurity.Reset();
                 LoanGuarantorsSecurity.SetRange(LoanGuarantorsSecurity."Loan No", lnNumber.AsValue.AsText);
                 LoanGuarantorsSecurity.SetRange(LoanGuarantorsSecurity."Guarantor Type", LoanGuarantorsSecurity."Guarantor Type"::Guarantor);
+                LoanGuarantorsSecurity.SetRange(LoanGuarantorsSecurity.Substituted, false);
+                LoanGuarantorsSecurity.SetFilter(LoanGuarantorsSecurity."Outstanding Balance", '>0');
+                LoanGuarantorsSecurity.SetRange(LoanGuarantorsSecurity."Member Guaranteed", SearchMember."No.");
+
 
                 if LoanGuarantorsSecurity.Find('-') then begin
                     ResponseText := 'SUCCESS';
