@@ -970,6 +970,10 @@ page 52185712 "Product Factory"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Requires Installments on App."; Rec."Requires Installments on App.")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 group(Channels)
                 {
                     Caption = 'Sky Channels';

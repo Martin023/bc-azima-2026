@@ -1880,6 +1880,536 @@ codeunit 52186512 "Sky M-Banking Transactions"
         Message('Qualified Amount: %1', Format(amtQualified));
     end;
 
+    procedure GetLoansQualifyAmount2(MemberNo: Code[20]; ProductID: Code[10]; Installments: Integer) QualifiedAmount: Decimal
+    var
+        Members: Record Members;
+        PFac: Record "Product Factory";
+        ProdFac: Record "Product Factory";
+        amtQualified: Decimal;
+        saccoAccount: Record "Savings Accounts";
+        STOAmount: Decimal;
+        SalAvg: Decimal;
+        LoanRec: Decimal;
+        SalaryAmount: Decimal;
+        GenSetUp: Record "General Set-Up";
+        RelatedProduct: Record "Related Product";
+        LoanApp: Record Loans;
+        OrdinaryAccounts: Record "Savings Accounts";
+        SalaryLines: Record "Salary Lines";
+        SalaryHeader: Record "Salary Header";
+        Loans: Record Loans;
+        Incomsal: Enum "Salary Income Types";
+        Globalfunc: Codeunit "Global Functions";
+        MobileLoanBuffer: record "Mobile loan App. Buffer";
+        // MLoanSetup: Record "M-Loan Setup";
+
+        ExistingFOSAMLoan: record loans;
+        InterestRepayment: Decimal;
+        LoanRepayment: Decimal;
+        TLoanRepayment: Decimal;
+        ExistingFOSAMLoanAmount: Decimal;
+    begin
+        if not GenSetUp.GET then begin
+            QualifiedAmount := 0;
+            EXIT(QualifiedAmount);
+        end;
+        if not ProdFac.GET(ProductID) then begin
+            QualifiedAmount := 0;
+            EXIT(QualifiedAmount);
+        end;
+
+        // Check mobile loan buffer for unposted loans application
+        MobileLoanBuffer.Reset;
+        MobileLoanBuffer.SetRange("Member No.", MemberNo);
+        MobileLoanBuffer.SetRange(Posted, false);
+        MobileLoanBuffer.SetLoadFields("Entry No");
+
+        if MobileLoanBuffer.FindFirst then begin
+            QualifiedAmount := 0;
+            EXIT(QualifiedAmount);
+        end;
+
+        // Check unposted loans with outstanding balance
+        LoanApp.RESET;
+        LoanApp.SETRANGE("Member No.", MemberNo);
+        LoanApp.SETRANGE(Posted, false);
+        LoanApp.SETRANGE("Loan Product Type", ProductID);
+        LoanApp.SETFILTER("Total Loan Balance", '>0');
+        LoanApp.SetLoadFields("Loan No.", Posted);
+
+        if LoanApp.FindFirst then begin
+            LoanApp.Posted := true;
+            LoanApp.Modify;
+
+            QualifiedAmount := 0;
+            EXIT(QualifiedAmount);
+        end;
+
+        amtQualified := 0;
+        STOAmount := 0;
+        SalAvg := 0;
+        LoanRec := 0;
+        SalaryAmount := 0;
+
+        Members.Reset;
+        Members.SetRange("No.", MemberNo);
+
+        Members.SetLoadFields(
+            "No.", Status, Subflag
+        );
+
+        if Members.Find('-') then begin
+            IF Members.Status <> Members.Status::Active THEN BEGIN
+                QualifiedAmount := 0;
+                EXIT(QualifiedAmount);
+            END else begin
+                // Active Status - Check Subflags
+                if not (
+                    (Members.Subflag = Members.Subflag::"First time") or
+                    (Members.Subflag = Members.Subflag::Rejoined) or
+                    (Members.Subflag = Members.Subflag::"Partial withdrawn")
+                ) then begin
+                    QualifiedAmount := 0;
+                    EXIT(QualifiedAmount);
+                end;
+            end;
+
+            //Get and check Member deposit balance
+            OrdinaryAccounts.RESET;
+            OrdinaryAccounts.SETRANGE("Member No.", Members."No.");
+            OrdinaryAccounts.SETRANGE("Product Category", OrdinaryAccounts."Product Category"::"BOSA Deposits");
+            OrdinaryAccounts.SetLoadFields(Balance);
+            IF OrdinaryAccounts.FINDFIRST THEN BEGIN
+                OrdinaryAccounts.CALCFIELDS(Balance);
+                IF OrdinaryAccounts.Balance < ProdFac."Minimum Deposit Balance" THEN BEGIN
+                    //QualifiedAmount := '1|' + FORMAT(amtQualified) + '|Minimum deposits not met.';
+                    QualifiedAmount := 0;
+                    EXIT(QualifiedAmount);
+                END else begin
+                    if ProdFac."Minimum Dep. Contribution %" > 0 then begin
+                        QualifiedAmount := (ProdFac."Minimum Dep. Contribution %" / 100) * OrdinaryAccounts.Balance;
+                    end;
+                end;
+            END;
+
+            saccoAccount.RESET;
+            saccoAccount.SETRANGE(saccoAccount."Member No.", Members."No.");
+            saccoAccount.SetRange("Product Category", saccoAccount."Product Category"::"FOSA Account");
+            saccoAccount.SetCurrentKey(Blocked);
+            saccoAccount.SetRange("Product Type", '002');
+
+            saccoAccount.SetLoadFields(
+                "No.", "Member No.", Status, Blocked
+            );
+            IF saccoAccount.FIND('-') THEN BEGIN
+                IF (saccoAccount.Status <> saccoAccount.Status::Active) OR (saccoAccount.Blocked <> saccoAccount.Blocked::" ") THEN BEGIN
+                    QualifiedAmount := 0;
+                    EXIT(QualifiedAmount);
+                END;
+
+                STOAmount := ComputeSTODeductions(saccoAccount."No.");
+                SalAvg := Globalfunc.GetSmallestSalary(saccoAccount."No.", Incomsal::Salary);
+                LoanRec := ComputeLoanDeductions(saccoAccount."Member No.");
+
+                // Handle existing fosa mloan to be cleared after topup
+                ExistingFOSAMLoan.Reset;
+                ExistingFOSAMLoan.SETRANGE("Member No.", MemberNo);
+                ExistingFOSAMLoan.SETFILTER("Total Loan Balance", '>0');
+                ExistingFOSAMLoan.SETRANGE("Loan Product Type", ProductID);
+                ExistingFOSAMLoan.SETRANGE(Posted, true);
+                ExistingFOSAMLoan.SetLoadFields(
+                    "Total Balance", "Loan Product Type", Repayment, "Outstanding Interest", Repayment, Installments, "Outstanding Balance"
+                );
+                ExistingFOSAMLoan.SetAutoCalcFields(
+                    "Total Balance", "Outstanding Interest", "Outstanding Balance"
+                );
+
+                if ExistingFOSAMLoan.Findset then begin
+                    repeat begin
+                        InterestRepayment := 0;
+                        LoanRepayment := 0;
+                        LoanRepayment := ExistingFOSAMLoan.Repayment;
+
+                        IF ExistingFOSAMLoan."Outstanding Interest" > 0 THEN BEGIN
+                            LoanRepayment := ExistingFOSAMLoan.Repayment;
+
+                            IF ExistingFOSAMLoan.Installments = 1 THEN
+                                LoanRepayment := ExistingFOSAMLoan."Outstanding Balance";
+                            IF LoanRepayment < 0 THEN
+                                LoanRepayment := 0;
+                        END;
+                        IF LoanRepayment > ExistingFOSAMLoan."Total Balance" THEN
+                            LoanRepayment := ExistingFOSAMLoan."Total Balance";
+                        TLoanRepayment += LoanRepayment;
+                    end until ExistingFOSAMLoan.Next = 0;
+
+                    if ProdFac."Repay Mode" in [
+                        ProdFac."Repay Mode"::Salary,
+                        ProdFac."Repay Mode"::"Mobile Money"
+                    ] then begin
+                        LoanRec -= TLoanRepayment;
+                    end;
+                end;
+
+                //confirm if loan exist of same type
+                if ProdFac."Type of Discounting" <> ProdFac."Type of Discounting"::"Dividend Discounting" then begin
+
+                    RelatedProduct.RESET;
+                    RelatedProduct.SETRANGE("Product Code", ProductID);
+
+                    RelatedProduct.SetLoadFields("Related Product Code");
+
+                    IF RelatedProduct.FINDSET THEN BEGIN
+                        REPEAT
+                            LoanApp.RESET;
+                            LoanApp.SETRANGE("Member No.", saccoAccount."Member No.");
+                            LoanApp.SETRANGE(Posted, TRUE);
+                            LoanApp.SETRANGE("Loan Product Type", RelatedProduct."Related Product Code");
+                            LoanApp.SETFILTER("Total Loan Balance", '>0');
+                            LoanApp.SetLoadFields("Loan No.");
+                            IF LoanApp.FINDSET THEN BEGIN
+                                REPEAT
+                                    IF ProdFac."Allow Multiple Running Loans" = FALSE THEN BEGIN
+                                        QualifiedAmount := 0;
+                                        EXIT(QualifiedAmount);
+                                    END;
+                                UNTIL LoanApp.NEXT = 0;
+                            END;
+                        UNTIL RelatedProduct.NEXT = 0;
+                    END;
+                end else begin
+                    LoanApp.RESET;
+                    LoanApp.SETRANGE(LoanApp."Member No.", MemberNo);
+                    LoanApp.SetFilter("Loans Category-SASRA", '%1|%2|%3', LoanApp."Loans Category-SASRA"::Substandard, LoanApp."Loans Category-SASRA"::Doubtful, LoanApp."Loans Category-SASRA"::Loss);
+                    LoanApp.SETFILTER(LoanApp."Total Loan Balance", '>0');
+                    LoanApp.SetLoadFields("Loan No.");
+                    IF LoanApp.FIND('-') THEN BEGIN
+                        exit(QualifiedAmount);
+                    END;
+                    QualifiedAmount := DividenceAdvanceQualification(MemberNo, ProductID);
+                    if QualifiedAmount < 0 then QualifiedAmount := 0;
+                    exit(QualifiedAmount);
+                end;
+
+                //Exisiting loans
+                if ProdFac."Type of Discounting" <> ProdFac."Type of Discounting"::"Dividend Discounting" then begin
+                    // Loans.RESET;
+                    // Loans.SETRANGE(Loans."Member No.", saccoAccount."Member No.");
+                    // Loans.SETRANGE(Loans."Loan Product Type", ProductID);
+                    // Loans.SETRANGE(Loans.Posted, TRUE);
+                    // Loans.SETFILTER("Total Loan Balance", '>0');
+                    // Loans.SetLoadFields("Loan No.");
+                    // IF Loans.FIND('-') THEN BEGIN
+                    //     QualifiedAmount := 0;
+                    //     EXIT(QualifiedAmount);
+                    // END;
+                    if ProdFac."Requires Salary Processing" = false then begin
+                        if QualifiedAmount > ProdFac."Maximum Loan Amount" then begin
+                            QualifiedAmount := ProdFac."Maximum Loan Amount";
+                        end;
+
+                        ExistingFOSAMLoanAmount := GlobalFunctions.GetMemberLoanProductTotalBalance(
+                            MemberNo,
+                            ProductID
+                        );
+                        exit(QualifiedAmount - ExistingFOSAMLoanAmount);
+                    end;
+                    //Get last salary amount
+                    SalaryLines.RESET;
+                    SalaryLines.SETRANGE("Member No.", saccoAccount."Member No.");
+                    SalaryLines.SETRANGE(Posted, TRUE);
+                    SalaryLines.SETRANGE("Posting Date", CALCDATE(('-' + format(ProdFac."Salary Period")), TODAY), TODAY);
+                    SalaryLines.SetLoadFields(Amount);
+                    SalaryLines.SetCurrentKey(Amount);
+                    IF SalaryLines.FINDLAST THEN BEGIN
+                        SalaryAmount := SalaryLines.Amount - (STOAmount + LoanRec);
+                    END;
+                    SalAvg := SalAvg - (STOAmount + LoanRec);
+                    IF SalaryAmount > SalAvg THEN
+                        SalaryAmount := SalAvg;
+
+                    // if MLoanSetup.Get(ProdFac."Product ID", Installments) then begin
+                    //     // Temporary Variable
+                    //     ProdFac."Net Salary Multiplier %" := MLoanSetup."Net Salary Multiplier %";
+                    // end;
+                    // amtQualified := SalaryAmount * (ProdFac."Net Salary Multiplier %" / 100) * Installments;
+                    amtQualified := SalaryAmount * (ProdFac."Net Salary Multiplier %" / 100);
+                    IF amtQualified < 0 THEN amtQualified := 0;
+                    QualifiedAmount := amtQualified;
+
+                    if QualifiedAmount > ProdFac."Maximum Loan Amount" then begin
+                        QualifiedAmount := ProdFac."Maximum Loan Amount";
+                    end;
+
+                    ExistingFOSAMLoanAmount := GlobalFunctions.GetMemberLoanProductTotalBalance(
+                        MemberNo,
+                        ProductID
+                    );
+
+                    QualifiedAmount -= ExistingFOSAMLoanAmount;
+
+                    if QualifiedAmount < 0 then begin
+                        QualifiedAmount := 0
+                    end;
+                    EXIT(QualifiedAmount);
+                end;
+            END ELSE BEGIN
+                QualifiedAmount := 0;
+                EXIT(QualifiedAmount);
+            END;
+        end;
+        exit(amtQualified);
+    end;
+
+    procedure BufferLoanApplication2(
+        MemberNo: Code[50];
+        LoanProductID: Code[50];
+        RequestedAmount: Decimal;
+        SourceReference: Text;
+        MobileLoanPurpose: Text;
+        Installments: Integer
+    ): Boolean
+    var
+        MobileLoanBuffer: record "Mobile loan App. Buffer";
+        LoanProduct: Record "Product Factory";
+        TheMember: record Members;
+        msg: Text;
+        FosaAcc: Text;
+        ExistingFOSAMLoanAmount: Decimal;
+    begin
+        // check for duplicate Applications
+
+        // MobileLoanBuffer.RESET;
+        // MobileLoanBuffer.SETRANGE("Member No.", MemberNo);
+        // MobileLoanBuffer.SETRANGE(Deactivated, FALSE);
+        // MobileLoanBuffer.SETRANGE("Loan Product Type", LoanProductType);
+        // MobileLoanBuffer.SetRange(Status, MobileLoanBuffer.Status::Pending);
+        // if MobileLoanBuffer.FIND('-') then begin
+        //     exit(MobileLoanBuffer."Loan No.");
+        // end;
+        TheMember.Get(MemberNo);
+        FosaAcc := GetMemberFosaAcc(TheMember);
+
+        ExistingFOSAMLoanAmount := GlobalFunctions.GetMemberLoanProductTotalBalance(
+            MemberNo,
+            LoanProductID
+        );
+
+        MobileLoanBuffer.Init;
+        MobileLoanBuffer."Member No." := MemberNo;
+        MobileLoanBuffer."Loan Product Type" := LoanProductID;
+        MobileLoanBuffer.Amount := RequestedAmount;
+        MobileLoanBuffer."Approved Amount" := RequestedAmount + ExistingFOSAMLoanAmount;
+        MobileLoanBuffer."Session ID" := SourceReference;
+        MobileLoanBuffer.Status := MobileLoanBuffer.Status::Approved;
+        MobileLoanBuffer.Posted := false;
+        MobileLoanBuffer."Time Entered" := Time;
+        MobileLoanBuffer."Date Entered" := Today;
+        MobileLoanBuffer."Loan No." := '';
+        MobileLoanBuffer."Loan Purpose" := MobileLoanPurpose;
+        MobileLoanBuffer."Account Name" := TheMember.Name;
+        MobileLoanBuffer.Installments := Installments;
+        MobileLoanBuffer."Account No" := FosaAcc;
+
+        // LoanProduct.SetRange("Product ID", LoanProductID);
+        // MobileLoanBuffer."Needs Guarantors" := LoanProduct."Mobile Loan Req. Guar.";
+        // if MobileLoanBuffer."Needs Guarantors" then begin
+        //     LoanProduct.TestField("Mobile Min. Guarantors");
+        //     MobileLoanBuffer.Status := MobileLoanBuffer.Status::"Pending Guarantors";
+        //     MobileLoanBuffer."Expected Guarantors" := GetNumberOfGuarantors(LoanProduct."Product ID", RequestedAmount);
+        // end;
+
+        if MobileLoanBuffer.Insert(true) then begin
+            // if LoanProduct."Mobile Loan Req. Guar." then begin
+
+            //     msg := 'Dear member, To add guarantors to your ' + MobileLoanBuffer."Loan Name" + ' request of KES ' + Format(MobileLoanBuffer.Amount) + ', Please dial *882# or use our Mobile App.' +
+            //           'Login > Loans > Add / Remove Guarantors. ' +
+            //           'REF: ' + MobileLoanBuffer."Loan No.";
+            //     SendSMS.SendSms(SMSSource::MBANKING, TheMember."Phone No.", msg, Format(MobileLoanBuffer."Loan No."), '', true, 220, false, 'CBS', MobileLoanBuffer."Loan No.", 'CBS');
+
+            //     msg := 'Minimum required guarantors is ' + Format(MobileLoanBuffer."Expected Guarantors") + '. In the event their total deposits won''t be sufficient, you''ll'
+            //     + ' be required to add one or more.REF: ' + MobileLoanBuffer."Loan No.";
+            //     SendSMS.SendSms(SMSSource::MBANKING, TheMember."Phone No.", msg, Format(MobileLoanBuffer."Loan No."), '', true, 220, false, 'CBS', MobileLoanBuffer."Loan No.", 'CBS');
+
+            // end;
+
+            //if CreateLoanRecord2(MobileLoanBuffer, LoanProductID, Installments) then
+            exit(true)
+            // else
+            //     exit(false);
+        end else
+            exit(false);
+    end;
+    // Create applied loan record
+    procedure CreateLoanRecord2(var MobileLoanBuffer: Record "Mobile loan App. Buffer"; LoanProdID: code[50]; Installments: Integer): Boolean
+    var
+        Loans: Record Loans;
+        ProductFactory: Record "Product Factory";
+        CreditAccounts: record "Credit Accounts";
+        LoansProcess: Codeunit "Loans Process";
+        NoSeries: record "No. Series";
+        NoSeriesMgt: Codeunit "No. Series";
+        LoanNo: Code[50];
+        MobileLnNoSeries: record "Credit Nos. Series";
+        Members: Record Members;
+        UserSetUp: Record "User Setup";
+        InstallmentFrequency: Text;
+        InstallmentPeriod: DateFormula;
+        MobileLoanPurposes: Record "Loan Purpose";
+
+        ExistingFOSAMLoan: record loans;
+        LoansToBeCleared: Record "Loans Top up";
+    begin
+        //InstallmentPeriod := '';
+        InstallmentFrequency := '';
+        MobileLnNoSeries.get;
+        ProductFactory.get(LoanProdID);
+        Members.get(MobileLoanBuffer."Member No.");
+        UserSetUp.get(UserId);
+
+        Loans.Init();
+        LoanNo := NoSeriesMgt.GetNextNo(Loans."No. Series");
+        Loans."Loan No." := LoanNo;
+        Loans."Mobile Loan" := true;
+        Loans."Member No." := MobileLoanBuffer."Member No.";
+        Loans."Member Name" := Members.Name;
+        Loans."Interest Calculation Method" := ProductFactory."Interest Calculation Method";
+        Loans."Loan Product Type" := LoanProdID;
+        Loans."Loan Product Type Name" := ProductFactory."Product Description";
+        Loans."Purpose of Loan" := MobileLoanBuffer."Loan Purpose";
+        Loans."Loan Account" := LoansProcess.CreateLoanAccount(MobileLoanBuffer."Member No.", LoanProdID);
+        Loans.Interest := ProductFactory."Interest Rate (Min.)";
+        Loans."Loan Span" := ProductFactory."Loan Span";
+        Loans."Application Date" := Today;
+        Loans."Disbursement Date" := Today;
+        Loans."disbursement time" := Time;
+        Loans."Approved Amount" := MobileLoanBuffer."Approved Amount";
+        Loans."Staff No" := Members."Payroll/Staff No.";
+        Loans."Requested Amount" := MobileLoanBuffer."Approved Amount";
+        Loans."Approved Amount" := MobileLoanBuffer."Approved Amount";
+        Loans."Amount To Disburse" := MobileLoanBuffer."Approved Amount";
+        Loans."Disbursement Account No" := MobileLoanBuffer."Account No";
+        Loans.Status := Loans.Status::Approved;
+        Loans."Captured By" := UpperCase(UserId);
+        Loans."Global Dimension 1 Code" := Members."Global Dimension 1 Code";
+
+        Loans."Global Dimension 2 Code" := Format(ProductFactory."Source Unit");
+        Loans.Source := Loans.Source::BANKING;
+        Loans."Recovery Mode" := ProductFactory."Repay Mode";
+
+        if (Installments > ProductFactory."Ordinary Default Intallments") or (Installments <= 0) then begin
+            Installments := ProductFactory."Ordinary Default Intallments";
+        end;
+        Loans.Installments := Installments;
+        Loans."Repayment Frequency" := ProductFactory."Repayment Frequency";
+
+        case
+            Loans."Repayment Frequency" of
+            Loans."Repayment Frequency"::Monthly:
+                begin
+                    Loans."Repayment Start Date" := CALCDATE('1M', Today);
+                    InstallmentFrequency := 'M';
+                    evaluate(InstallmentPeriod, '1M');
+                end;
+            Loans."Repayment Frequency"::Daily:
+                begin
+                    Loans."Repayment Start Date" := CALCDATE('1D', Today);
+                    InstallmentFrequency := 'D';
+                    Evaluate(InstallmentPeriod, '1D');
+                end;
+            Loans."Repayment Frequency"::Weekly:
+                begin
+                    Loans."Repayment Start Date" := CALCDATE('1W', Today);
+                    InstallmentFrequency := 'W';
+                    Evaluate(InstallmentPeriod, '1W');
+                end;
+            else begin
+                Loans."Repayment Start Date" := CALCDATE('1M', Today);
+                InstallmentFrequency := 'M';
+                Evaluate(InstallmentPeriod, '1M');
+            end;
+        end;
+        Loans."Expected Date of Completion" := CALCDATE(Format(Loans.Installments) + InstallmentFrequency, Loans."Repayment Start Date");
+        if (Loans.Installments = 1) and (Loans."Repayment Frequency" = Loans."Repayment Frequency"::Monthly) then begin
+            Loans."Expected Date of Completion" := CalcDate('<1M>', Loans."Disbursement Date");
+            Loans."Repayment Start Date" := CalcDate('<1M>', Loans."Disbursement Date");
+        end;
+        Loans."Installment Period" := ProductFactory."Installment Repayment Interval";
+        if Format(Loans."Installment Period") = '' then
+            Loans."Installment Period" := InstallmentPeriod;
+
+        if Loans."Purpose of Loan" <> '' then begin
+            MobileLoanPurposes.Reset;
+            MobileLoanPurposes.SetRange(Code, Loans."Purpose of Loan");
+
+            MobileLoanPurposes.SetLoadFields(
+                "Main Sector",
+                "Sub Sector Level1",
+                "Sub Sector Level2",
+                "Main Sector Description",
+                "Sub Sector Level1 Description",
+                "Sub Sector Level2 Description"
+            );
+
+            if MobileLoanPurposes.FindFirst then begin
+                Loans."Main Sector" := MobileLoanPurposes."Main Sector";
+                Loans."Main Sector Description" := MobileLoanPurposes."Main Sector Description";
+                Loans."Sub Sector Level1" := MobileLoanPurposes."Sub Sector Level1";
+                Loans."Sub Sector Level1 Description" := MobileLoanPurposes."Sub Sector Level1 Description";
+                Loans."Sub Sector Level2" := MobileLoanPurposes."Sub Sector Level2";
+                Loans."Sub Sector Level2 Description" := MobileLoanPurposes."Sub Sector Level2 Description";
+            end;
+        end;
+
+        Loans.Validate("Disbursement Date");
+        Loans.Validate("Approved Amount");
+
+        // Source Unit
+        Loans."Source Unit" := ProductFactory."Source Unit";
+        Loans."Compute Interest Due on Postin" := ProductFactory."Compute Interest Due on Postin";
+        Loans."Loanee Message" := MobileLoanBuffer."Session ID";
+
+        if Loans.Insert then begin
+            // Handle existing fosa mloan to be cleared after topup
+            ExistingFOSAMLoan.Reset;
+            ExistingFOSAMLoan.SETRANGE("Member No.", Loans."Member No.");
+            ExistingFOSAMLoan.SETFILTER("Total Loan Balance", '>0');
+            ExistingFOSAMLoan.SETRANGE("Loan Product Type", Loans."Loan Product Type");
+            ExistingFOSAMLoan.SETRANGE(Posted, true);
+            ExistingFOSAMLoan.SetLoadFields("Loan No.");
+
+
+            if ExistingFOSAMLoan.Findset then begin
+                repeat begin
+                    LoansToBeCleared.Init;
+
+                    LoansToBeCleared."Loan No." := Loans."Loan No.";
+                    LoansToBeCleared."Client Code" := Loans."Member No.";
+                    LoansToBeCleared."Loan Top Up" := ExistingFOSAMLoan."Loan No.";
+
+                    LoansToBeCleared.Validate("Loan Top Up");
+                    LoansToBeCleared.Validate("Principle Top Up");
+                    LoansToBeCleared.Validate("Interest Top Up");
+
+                    if LoansToBeCleared.Insert then begin
+                    end;
+                end until ExistingFOSAMLoan.Next = 0;
+            end;
+
+            MobileLoanBuffer."Loan No." := Loans."Loan No.";
+            MobileLoanBuffer."Interest Recoverd Upfront" := ProductFactory."Interest Recovered Upfront";
+            if ProductFactory."Mobile Min. Guarantors" > 0 then begin
+                MobileLoanBuffer."Needs Guarantors" := true;
+                MobileLoanBuffer."Expected Guarantors" := ProductFactory."Mobile Min. Guarantors";
+            end;
+            MobileLoanBuffer."Loan Record Created?" := true;
+            MobileLoanBuffer.Modify(true);
+            exit(true);
+        end else begin
+            exit(false);
+        end;
+    end;
+
     procedure ComputeSTODeductions(AccountNo: Code[20]): Decimal
     var
         AmountToDeduct: Decimal;
@@ -4073,25 +4603,26 @@ codeunit 52186512 "Sky M-Banking Transactions"
         // Class A -> 66% of salary (standard working hours)
         // All others (Class B) -> 50% of average FOSA statement credits
         case Members."Member Class" of
-            'Class A':
+            'CLASSA':
                 begin
                     AbilityAmount := Globalfunc.GetSmallestSalary(FOSAAccountNo, Incomsal::Salary);
                     AbilityAmount := (SalaryRatePct / 100) * AbilityAmount;
                 end;
-            else begin
-                StartDate := CalcDate('<-12M>', Today());
-                TotalCredits := 0;
+            'CLASSB':
+                begin
+                    StartDate := CalcDate('<-12M>', Today());
+                    TotalCredits := 0;
 
-                SavLedger.Reset();
-                SavLedger.SetRange("Customer No.", FOSAAccountNo);
-                SavLedger.SetRange("Posting Date", StartDate, Today());
-                SavLedger.SetFilter("Credit Amount", '>0');
-                SavLedger.CalcSums("Credit Amount");
-                TotalCredits := SavLedger."Credit Amount";
+                    SavLedger.Reset();
+                    SavLedger.SetRange("Customer No.", FOSAAccountNo);
+                    SavLedger.SetRange("Posting Date", StartDate, Today());
+                    SavLedger.SetFilter("Credit Amount", '>0');
+                    SavLedger.CalcSums("Credit Amount");
+                    TotalCredits := SavLedger."Credit Amount";
 
-                AvgFOSACredits := Round(TotalCredits / 12, 1);
-                AbilityAmount := (FOSACreditsRatePct / 100) * AvgFOSACredits;
-            end;
+                    AvgFOSACredits := Round(TotalCredits / 12, 1);
+                    AbilityAmount := (FOSACreditsRatePct / 100) * AvgFOSACredits;
+                end;
         end;
 
         if AbilityAmount <= 0 then begin
