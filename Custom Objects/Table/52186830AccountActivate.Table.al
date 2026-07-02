@@ -104,6 +104,18 @@ table 52186833 "Account Activation"
             Editable = false;
             OptionCaption = 'Open,Pending,Rejected,Approved,Activated,Blocked,Frozen';
             OptionMembers = Open,Pending,Rejected,Approved,Activated,Blocked,Frozen;
+
+            trigger OnValidate()
+            begin
+                if (Rec.Status = Status::Rejected) or (Rec.Status = Status::Approved) then begin
+                    Comments.Reset();
+                    Comments.SetRange("Commented By", UserId);
+                    Comments.SetRange("Viewd By Somebody Else", false);
+                    Comments.SetRange("Header No.", No);
+                    if not Comments.FindFirst() then
+                        Error('Please add a comment before performing this action');
+                end;
+            end;
         }
         field(12; "Account Name"; Text[100])
         {
@@ -196,5 +208,6 @@ table 52186833 "Account Activation"
         // NoSeriesMgt: Codeunit NoSeriesManagement;
         NoSeriesMgt: Codeunit "No. Series";
         UserSetup: Record "User Setup";
+        Comments: Record Comments;
 }
 

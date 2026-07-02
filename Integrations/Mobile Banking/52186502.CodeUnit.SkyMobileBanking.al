@@ -2792,7 +2792,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 BlockedEmployers.SetRange("Employer Code", SearchMember."Employer Code");
                 if not BlockedEmployers.IsEmpty() then begin
                     ResponseObject.Add('request_status', 'ERROR');
-                    Datum.Add('error_message', 'Loan product with ID = ' + loan_type_id.AsValue.AsText + ' is NOT available to ' + SearchMember."Employer Code" + ' Employees');
+                    Datum.Add('error_message', 'Loan product with ID = ' + loan_type_id.AsValue.AsText + ' is NOT available to ' + SearchMember."Employer Name" + ' Employees');
                     ResponseObject.Add('response_payload', Datum);
                     AddDateTimeToResponse(ResponseObject);
                     ResponseObject.WriteTo(Response);
@@ -2947,7 +2947,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 BlockedEmployers.SetRange("Employer Code", SearchMember."Employer Code");
                 if not BlockedEmployers.IsEmpty() then begin
                     ResponseObject.Add('request_status', 'ERROR');
-                    Datum.Add('error_message', 'Loan product with ID = ' + loan_type_id.AsValue.AsText + ' is NOT available to ' + SearchMember."Employer Code" + ' Employees');
+                    Datum.Add('error_message', 'Loan product with ID = ' + loan_type_id.AsValue.AsText + ' is NOT available to ' + SearchMember."Employer Name" + ' Employees');
                     ResponseObject.Add('response_payload', Datum);
                     AddDateTimeToResponse(ResponseObject);
                     ResponseObject.WriteTo(Response);
@@ -5858,7 +5858,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                 Format(MpesaTransBuffer."Transaction Amount") +
                                                 ' to ' + MpesaTransBuffer."Receiver Identifier" +
                                                 ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                ' has been completed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference" + '. Ref: ' + theReference;
+                                                ' has been completed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference";
                                             end;
 
                                             if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Gaming Utility Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
@@ -5868,7 +5868,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             Format(MpesaTransBuffer."Transaction Amount") +
                                             ' to ' + MpesaTransBuffer."Receiver Identifier" +
                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                            ' has been completed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference" + '. Ref: ' + theReference;
+                                            ' has been completed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference";
                                             end;
 
                                             if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Bank Transfer" then begin

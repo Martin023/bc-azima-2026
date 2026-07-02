@@ -10,6 +10,7 @@ report 52185531 "Update Employee Loans Report"
     {
         dataitem(HREmployees; "HR Employees")
         {
+            RequestFilterFields = "No.","Member No.";
             column(MemberNo; "Member No.")
             {
             }
@@ -19,6 +20,7 @@ report 52185531 "Update Employee Loans Report"
                 Loans.SetRange("Member No.", HREmployees."Member No.");
                 loans.setfilter("Source Unit", '<>%1', Loans."Source Unit"::FOSA);
                 Loans.Setfilter("Disbursement Date", '..%1', CutOffDate);
+                loans.SetAutoCalcFields("Outstanding Balance", "Outstanding Interest", "Total Balance");
                 Loans.SetFilter(Loans."Total Balance", '>0');
                 if Loans.FindSet() then begin
                     repeat
