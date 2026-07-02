@@ -2903,32 +2903,6 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         );
 
         IF SearchMember.FindFirst then begin
-            if SearchMember.Status = SearchMember.Status::Deceased then begin // Deceased
-                ResponseObject.Add('request_status', 'ERROR');
-                Datum.Add('error_message', 'Member with identification ' + identifier_type.AsValue.AsText + ' = ' + identifier.AsValue.AsText + ' is Deceased');
-                ResponseObject.Add('response_payload', Datum);
-                AddDateTimeToResponse(ResponseObject);
-                ResponseObject.WriteTo(Response);
-                exit(Response);
-            end;
-            if SearchMember.Status = SearchMember.Status::Dormant then begin // Dormant
-                ResponseObject.Add('request_status', 'ERROR');
-                Datum.Add('error_message', 'Member with identification ' + identifier_type.AsValue.AsText + ' = ' + identifier.AsValue.AsText + ' is Dormant');
-                ResponseObject.Add('response_payload', Datum);
-                ResponseObject.Add('response_payload', Datum);
-                AddDateTimeToResponse(ResponseObject);
-                ResponseObject.WriteTo(Response);
-                exit(Response);
-            end;
-            if (SearchMember.Status = SearchMember.Status::Dormant) and (SearchMember.Subflag = SearchMember.Subflag::Defaulter) then begin // Defaulter
-                ResponseObject.Add('request_status', 'ERROR');
-                Datum.Add('error_message', 'Member with identification ' + identifier_type.AsValue.AsText + ' = ' + identifier.AsValue.AsText + ' is a Defaulter');
-                ResponseObject.Add('response_payload', Datum);
-                ResponseObject.Add('response_payload', Datum);
-                AddDateTimeToResponse(ResponseObject);
-                ResponseObject.WriteTo(Response);
-                exit(Response);
-            end;
             if CheckFOSASavingsAccountBlocked(SearchMember, 'CREDIT') then begin
                 ResponseObject.Add('request_status', 'BLOCKED');
                 Datum.Add('error_message', 'Account is blocked from credit transactions.');
@@ -2957,10 +2931,10 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 // MemberClass product filter
                 ProductSupportedClasses.Reset();
                 ProductSupportedClasses.SetRange("Product ID", MobileLoanProduct."Product ID");
-                ProductSupportedClasses.SetRange("Class Category", CopyStr(Format(MemberClass."Member Class"), 1, 10));
+                ProductSupportedClasses.SetRange("Class Category", SearchMember."Member Class");
                 if ProductSupportedClasses.IsEmpty() then begin
                     ResponseObject.Add('request_status', 'ERROR');
-                    Datum.Add('error_message', 'Loan product with ID = ' + loan_type_id.AsValue.AsText + ' is NOT available to Class ' + Format(MemberClass."Member Class") + ' Members');
+                    Datum.Add('error_message', 'Loan product with ID = ' + loan_type_id.AsValue.AsText + ' is NOT available to Class ' + Format(SearchMember."Member Class") + ' Members');
                     ResponseObject.Add('response_payload', Datum);
                     AddDateTimeToResponse(ResponseObject);
                     ResponseObject.WriteTo(Response);
@@ -7226,6 +7200,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
             // filter products by member class, filter out blocked employers 6918 -6926
             MemberClasses.Reset();
             MemberClasses.SetRange("No.", SearchMember."Member Class");
+            MemberClasses.SetLoadFields("Member Class");
             if not MemberClasses.FindFirst() then begin
                 // error
             end;
