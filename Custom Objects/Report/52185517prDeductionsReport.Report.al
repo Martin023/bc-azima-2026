@@ -9,7 +9,6 @@ Report 52185517 "prDeductions Report"
     {
         dataitem("PR Period Transactions"; "PR Period Transactions")
         {
-            //DataItemTableView = sorting("Group Order", "Transaction Code", "Period Month", "Period Year", Membership, "Reference No", "Department Code") where("Group Text" = filter(DEDUCTIONS));
             RequestFilterFields = "Employee Code", "Transaction Code";
             column(ReportForNavId_7769; 7769)
             {
@@ -244,18 +243,4 @@ Report 52185517 "prDeductions Report"
         CI: Record "Company Information";
         ID: Integer;
         HideBalance: Boolean;
-
-
-    // procedure OnViewCurrRec()
-    // var
-    //     ChangePermission: Record "Status Change Permissions.";
-    //     ErrorOnRestricViewTxt: label 'You do not have Permissions to VIEW,MODIFY or DELETE on this record. Contact system administrator for assistance. %';
-    // begin
-    //     ChangePermission.Reset;
-    //     ChangePermission.SetRange("User ID", UserId);
-    //     ChangePermission.SetRange("View Payroll", true);
-    //     ChangePermission.SetRange("Function Extended", ChangePermission."function extended"::"View Payroll");
-    //     if not ChangePermission.Find('-') then
-    //         Error(ErrorOnRestricViewTxt, UserId);
-    // end;
 }

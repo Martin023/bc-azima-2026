@@ -4,13 +4,37 @@ Report 52185688 prNSSF
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/prNSSF.rdl';
 
+
     dataset
     {
-        dataitem("PR Salary Card"; "PR Salary Card")
+        dataitem("PR Period Transactions"; "PR Period Transactions")
         {
-            RequestFilterFields = "Period Filter", "Employee Code";
-            column(ReportForNavId_6207; 6207)
+            RequestFilterFields = "Employee Code";
+            Dataitemtableview = where("Transaction Code" = filter('NSSF'));
+
+            column(CI_Name; CI.Name)
             {
+                IncludeCaption = true;
+            }
+            column(CI_Address; CI.Address)
+            {
+                IncludeCaption = true;
+            }
+            column(CI_Address2; CI."Address 2")
+            {
+                IncludeCaption = true;
+            }
+            column(CI_PhoneNo; CI."Phone No.")
+            {
+                IncludeCaption = true;
+            }
+            column(CI_Picture; CI.Picture)
+            {
+                IncludeCaption = true;
+            }
+            column(CI_City; CI.City)
+            {
+                IncludeCaption = true;
             }
             column(USERID; UserId)
             {
@@ -21,176 +45,48 @@ Report 52185688 prNSSF
             column(PeriodName; PeriodName)
             {
             }
-            //column(CurrReport_PAGENO; CurrReport.PageNo)
-            //{
-            //}
-            column(CompanyInfo_Picture; CompanyInformation.Picture)
-            {
-            }
-            column(CompanyInfoName; CompanyInformation.Name)
-            {
-            }
-            column(NSSFN; CompanyInformation.NSSF)
-            {
 
-            }
-            column(COMPANYNAME; COMPANYNAME)
+            column(CompanyInfo_Picture; CompanyInfo.Picture)
             {
             }
-            column(PeriodName_Control1102756011; PeriodName)
+            column(tier1Cont; Tier1Cont)
             {
             }
-            column(TotalAmount; TotalAmount)
+            column(tier2Cont; Tier2Cont)
             {
             }
-            column(Volume_Amount_; "Volume Amount")
+            column(totalCont; TotalCont)
             {
             }
-            column(IDNumber; IDNumber)
+            column(prPeriod_Transactions__Group_Text_; "PR Period Transactions"."Employee Code")
             {
             }
             column(EmployeeName; EmployeeName)
             {
             }
-            column(prSalary_Card__prSalary_Card___Employee_Code_; "PR Salary Card"."Employee Code")
-            {
-            }
-            column(NssfAmount_2; NssfAmount / 2)
-            {
-            }
-            column(NssfNo; NssfNo)
-            {
-            }
-            column(NssfAmount_2_Control1102756008; NssfAmount / 2)
-            {
-            }
-            column(TotNssfAmount_2; TotNssfAmount / 2)
-            {
-            }
-            column(totTotalAmount; totTotalAmount)
-            {
-            }
-            column(TotVolume_Amount_; "TotVolume Amount")
-            {
-            }
-            column(TotNssfAmount_2_Control1102756015; TotNssfAmount / 2)
-            {
-            }
-            column(NATIONAL_SOCIAL_SECURITY_FUNDCaption; NATIONAL_SOCIAL_SECURITY_FUNDCaptionLbl)
-            {
-            }
-            column(User_Name_Caption; User_Name_CaptionLbl)
-            {
-            }
-            column(Print_Date_Caption; Print_Date_CaptionLbl)
-            {
-            }
-            column(Period_Caption; Period_CaptionLbl)
-            {
-            }
-            column(Page_No_Caption; Page_No_CaptionLbl)
-            {
-            }
-            column(PERIOD_Caption_Control1102755031; PERIOD_Caption_Control1102755031Lbl)
-            {
-            }
-            column(EMPLOYER_NO_Caption; EMPLOYER_NO_CaptionLbl)
-            {
-            }
-            column(EMPLOYER_NAME_Caption; EMPLOYER_NAME_CaptionLbl)
-            {
-            }
-            column(Payroll_No_Caption; Payroll_No_CaptionLbl)
-            {
-            }
-            column(Employee_NameCaption; Employee_NameCaptionLbl)
-            {
-            }
-            column(NSSF_No_Caption; NSSF_No_CaptionLbl)
-            {
-            }
-            column(ID_Number_Caption; ID_Number_CaptionLbl)
-            {
-            }
-            column(Vol_AmountCaption; Vol_AmountCaptionLbl)
-            {
-            }
-            column(Total_AmountCaption; Total_AmountCaptionLbl)
-            {
-            }
-            column(Employee_AmountCaption; Employee_AmountCaptionLbl)
-            {
-            }
-            column(Employer_AmountCaption; Employer_AmountCaptionLbl)
-            {
-            }
-            column(Total_Amounts_Caption; Total_Amounts_CaptionLbl)
-            {
-            }
-            column(Prepared_by_______________________________________Date_________________Caption; Prepared_by_______________________________________Date_________________CaptionLbl)
-            {
-            }
-            column(Checked_by________________________________________Date_________________Caption; Checked_by________________________________________Date_________________CaptionLbl)
-            {
-            }
-            column(Authorized_by____________________________________Date_________________Caption; Authorized_by____________________________________Date_________________CaptionLbl)
-            {
-            }
-            column(Approved_by______________________________________Date_________________Caption; Approved_by______________________________________Date_________________CaptionLbl)
-            {
-            }
-
             trigger OnAfterGetRecord()
             begin
+                "PR Period Transactions".SetRange("Payroll Period", SelectedPeriod);
 
-                objEmp.Reset;
-                objEmp.SetRange(objEmp."No.", "Employee Code");
-                if objEmp.Find('-') then;
-                EmployeeName := objEmp."First Name" + ' ' + objEmp."Middle Name" + ' ' + objEmp."Last Name";
-                NssfNo := objEmp."NSSF No.";
-                IDNumber := Format(objEmp."ID Number");
+                Employees.Reset;
+                if Employees.Get("PR Period Transactions"."Employee Code") then
+                    EmployeeName := Employees."First Name" + ' ' + Employees."Middle Name" + ' ' + Employees."Last Name"
+                else
+                    EmployeeName := '';
 
-                //Volume Amount****************************************************************************
-                PeriodTrans.Reset;
-                PeriodTrans.SetRange(PeriodTrans."Employee Code", "Employee Code");
-                PeriodTrans.SetRange(PeriodTrans."Payroll Period", SelectedPeriod);
-                PeriodTrans.SetFilter(PeriodTrans."Transaction Code", 'NSSF');
-                // Nssf Code
-                // PeriodTrans.SetCurrentkey(PeriodTrans."Employee Code", PeriodTrans."Period Month", PeriodTrans."Period Year",
-                // PeriodTrans."Group Order", PeriodTrans."Sub Group Order");
-
-                "Volume Amount" := 0;
-                if PeriodTrans.Find('-') then begin
-                    "Volume Amount" := PeriodTrans.Amount;
+                prNSSF.Reset;
+                prNSSF.SetCurrentkey(prNSSF.Tier);
+                if prNSSF.FindFirst then begin
+                    Tier1Cont := prNSSF."Tier 1 Employee Deduction";
                 end;
+                Tier2Cont := "PR Period Transactions".Amount - Tier1Cont;
+                TotalCont := "PR Period Transactions".Amount * 2;
+            end;
 
-                "TotVolume Amount" := "TotVolume Amount" + "Volume Amount";
-
-
-                //Standard Amount**************************************************************************
-                PeriodTrans.Reset;
-                PeriodTrans.SetRange(PeriodTrans."Employee Code", "Employee Code");
-                PeriodTrans.SetRange(PeriodTrans."Payroll Period", SelectedPeriod);
-                PeriodTrans.SetFilter(PeriodTrans."Group Order", '=7');
-                PeriodTrans.SetFilter(PeriodTrans."Sub Group Order", '=1');
-                PeriodTrans.SetCurrentkey(PeriodTrans."Employee Code", PeriodTrans."Period Month", PeriodTrans."Period Year",
-                PeriodTrans."Group Order", PeriodTrans."Sub Group Order");
-
-                NssfAmount := 0;
-                if PeriodTrans.Find('-') then begin
-                    NssfAmount := PeriodTrans.Amount + PeriodTrans.Amount;
-                end;
-
-                //Total Amount=NssfAmount+Volume Amount**************************************************
-                TotalAmount := NssfAmount + "Volume Amount";
-
-
-                //Summation Total Amount=****************************************************************
-                totTotalAmount := totTotalAmount + TotalAmount;
-
-                if NssfAmount <= 0 then
-                    CurrReport.Skip;
-                TotNssfAmount := TotNssfAmount + NssfAmount;
+            trigger OnPreDataItem()
+            begin
+                //OnViewCurrRec();
+                LastFieldNo := "PR Period Transactions".FieldNo("Period Year");
             end;
         }
     }
@@ -201,6 +97,15 @@ Report 52185688 prNSSF
 
         layout
         {
+            area(content)
+            {
+                field(SelectedPeriod; SelectedPeriod)
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Selected Period';
+                    TableRelation = "PR Payroll Periods";
+                }
+            }
         }
 
         actions
@@ -214,63 +119,31 @@ Report 52185688 prNSSF
 
     trigger OnPreReport()
     begin
-        PeriodFilter := "PR Salary Card".GetFilter("Period Filter");
-        if PeriodFilter = '' then Error('You must specify the period filter');
+        if SelectedPeriod = 0D then Error('You must specify the period filter');
 
-        SelectedPeriod := "PR Salary Card".GetRangeMin("Period Filter");
         objPeriod.Reset;
-        if objPeriod.Get(SelectedPeriod) then PeriodName := objPeriod."Period Name";
+        objPeriod.SetRange(objPeriod."Date Opened", SelectedPeriod);
+        if objPeriod.Find('-') then begin
+            PeriodName := objPeriod."Period Name";
+        end;
 
 
-        if CompanyInformation.Get then
-            CompanyInformation.CalcFields(CompanyInformation.Picture);
-        CompanyAddress := CompanyInformation.Address + ' -Post Code: ' + CompanyInformation."Post Code" + ' -City:' + CompanyInformation.City + ' Region: ' + CompanyInformation."Country/Region Code";
-        CompanyTelephone := 'Tel: ' + CompanyInformation."Phone No." + ' -Office Tel: ' + CompanyInformation."Phone No. 2";
-        CommunicationOnline := 'E-mail: ' + CompanyInformation."E-Mail" + '- Website: ' + CompanyInformation."Home Page";
-
+        if CI.Get() then
+            CI.CalcFields(CI.Picture);
     end;
 
     var
-        PeriodTrans: Record "PR Period Transactions";
-        NssfAmount: Decimal;
-        TotNssfAmount: Decimal;
-        objEmp: Record "HR Employees";
-        EmployeeName: Text[30];
-        NssfNo: Text[30];
-        IDNumber: Text[30];
+        LastFieldNo: Integer;
         objPeriod: Record "PR Payroll Periods";
         SelectedPeriod: Date;
         PeriodName: Text[30];
-        PeriodFilter: Text[30];
-        "Volume Amount": Decimal;
-        "TotVolume Amount": Decimal;
-        TotalAmount: Decimal;
-        totTotalAmount: Decimal;
-        CompanyAddress: Text;
-        CompanyTelephone: Text;
-        CommunicationOnline: Text;
-
-        CompanyInformation: Record "Company Information";
-        NATIONAL_SOCIAL_SECURITY_FUNDCaptionLbl: label 'NATIONAL SOCIAL SECURITY FUND';
-        User_Name_CaptionLbl: label 'User Name:';
-        Print_Date_CaptionLbl: label 'Print Date:';
-        Period_CaptionLbl: label 'Period:';
-        Page_No_CaptionLbl: label 'Page No:';
-        PERIOD_Caption_Control1102755031Lbl: label 'PERIOD:';
-        EMPLOYER_NO_CaptionLbl: label 'EMPLOYER NO:';
-        EMPLOYER_NAME_CaptionLbl: label 'EMPLOYER NAME:';
-        Payroll_No_CaptionLbl: label 'Payroll No:';
-        Employee_NameCaptionLbl: label 'Employee Name';
-        NSSF_No_CaptionLbl: label 'NSSF No:';
-        ID_Number_CaptionLbl: label 'ID Number:';
-        Vol_AmountCaptionLbl: label 'Vol Amount';
-        Total_AmountCaptionLbl: label 'Total Amount';
-        Employee_AmountCaptionLbl: label 'Employee Amount';
-        Employer_AmountCaptionLbl: label 'Employer Amount';
-        Total_Amounts_CaptionLbl: label 'Total Amounts:';
-        Prepared_by_______________________________________Date_________________CaptionLbl: label 'Prepared by……………………………………………………..                 Date……………………………………………';
-        Checked_by________________________________________Date_________________CaptionLbl: label 'Checked by…………………………………………………..                   Date……………………………………………';
-        Authorized_by____________________________________Date_________________CaptionLbl: label 'Authorized by……………………………………………………..              Date……………………………………………';
-        Approved_by______________________________________Date_________________CaptionLbl: label 'Approved by……………………………………………………..                Date……………………………………………';
+        CompanyInfo: Record "Company Information";
+        Employees: Record "HR Employees";
+        EmployeeName: Text[100];
+        CI: Record "Company Information";
+        prNSSF: record "prNSSF Tiers";
+        Tier1Cont: Decimal;
+        Tier2Cont: Decimal;
+        TotalCont: Decimal;
 }
 
