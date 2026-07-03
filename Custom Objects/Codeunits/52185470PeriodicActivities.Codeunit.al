@@ -6783,7 +6783,7 @@ Codeunit 52185470 "Periodic Activities"
                 SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, GuarantorLoans."Loan Account", CopyStr(Description, 1, 40), BalAccountType::"G/L Account",
                             '', -TransAmt, DocNo, GuarantorLoans."Loan No.", TransType::"Interest Paid", Dim1, Dim2, SystemCreated);
 
-                Description := 'Reappotionment from ' + LoanRecoveryHeader."Loan No." + ' ' + LoanRecoveryHeader."Member No.";
+                Description := 'Reapp from ' + LoanRecoveryHeader."Loan No." + ' ' + LoanRecoveryHeader."Member No.";
                 TransAmt := RpptLns."Principle Portion";
                 SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Credit, GuarantorLoans."Loan Account", CopyStr(Description, 1, 40), BalAccountType::"G/L Account",
                             '', -TransAmt, DocNo, GuarantorLoans."Loan No.", TransType::Repayment, Dim1, Dim2, SystemCreated);
@@ -6796,13 +6796,13 @@ Codeunit 52185470 "Periodic Activities"
                 if SavingsAccounts.FindFirst() then begin
                     AccNo := SavingsAccounts."No.";
                     TransAmt := RpptLns."Money To FOSA";
-                    Description := 'Reappotionment from ' + LoanRecoveryHeader."Loan No." + ' ' + LoanRecoveryHeader."Member No." + ' Cleared';
+                    Description := 'Reappotionment from ' + LoanRecoveryHeader."Loan No." + ' ' + LoanRecoveryHeader."Member No.";
                     SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Savings, AccNo, CopyStr(Description, 1, 40), BalAccountType::"G/L Account",
                                         '', -TransAmt, ExtDoc, LoanNo, TransType::" ", Dim1, Dim2, SystemCreated);
 
                     AccNo := DefaulterDebitAccount;
                     TransAmt := RpptLns."Money To FOSA";
-                    Description := 'Reappotionment to ' + RpptLns."Guarantor Member No." + ' ' + RpptLns."Guarantor Loan No." + ' Cleared';
+                    Description := 'Reappotionment to ' + RpptLns."Guarantor Member No." + ' ' + RpptLns."Guarantor Loan No.";
                     SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Savings, AccNo, CopyStr(Description, 1, 40), BalAccountType::"G/L Account",
                                         '', TransAmt, ExtDoc, LoanNo, TransType::" ", Dim1, Dim2, SystemCreated);
 
@@ -6924,7 +6924,7 @@ Codeunit 52185470 "Periodic Activities"
                 if SavingsAccounts.FindFirst() then begin
                     AccNo := SavingsAccounts."No.";
                     TransAmt := RpptLns."Money To FOSA";
-                    Description := 'Reappotionment from ' + LoanRecoveryHeader."Loan No." + ' ' + LoanRecoveryHeader."Member No." + ' Cleared';
+                    Description := 'Reappotionment from ' + LoanRecoveryHeader."Loan No." + ' ' + LoanRecoveryHeader."Member No.";
                     SaccoTrans.JournalInsert(JTemplate, JBatch, DocNo, PDate, AccountType::Savings, AccNo, CopyStr(Description, 1, 40), BalAccountType::"G/L Account",
                                         '', -TransAmt, ExtDoc, LoanNo, TransType::" ", Dim1, Dim2, SystemCreated);
 
