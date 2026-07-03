@@ -5871,7 +5871,7 @@ codeunit 52186507 "Members Portal Integration"
 
                     Datum.Add('loan_type_min_amount', TotalTopUp);
                 end else begin
-                    Datum.Replace('loan_type_min_amount', MobileLoanProduct."Minimum Loan Amount");
+                    Datum.Add('loan_type_min_amount', MobileLoanProduct."Minimum Loan Amount");
                 end;
 
                 if MobileLoanProduct."Mobile Max. Loan Amount" <> 0 then begin
