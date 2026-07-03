@@ -5883,6 +5883,9 @@ codeunit 52186507 "Members Portal Integration"
                         Datum.Add('loan_type_max_amount', 0);
                     end;
 
+
+                Datum.Add('eligibility_fail_reason', EligibilityFailReason);
+
                 ResponseObject.Add('status', 'SUCCESS');
                 ResponseObject.Add('data', Datum);
             end else begin
