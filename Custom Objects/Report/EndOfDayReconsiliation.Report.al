@@ -8,7 +8,7 @@ Report 52185446 "End of Day Reconciliation"
     {
         dataitem(TreasuryTrans; "Treasury Cashier Transactions")
         {
-            RequestFilterFields = No;
+            RequestFilterFields = No, "From Account", "From Bank", "Transaction Date";
 
             column(CompanyInfo_Name; CompanyInformation.Name) { }
             column(CompanyInformation_Picture; CompanyInformation.Picture) { }

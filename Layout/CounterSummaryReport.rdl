@@ -41,7 +41,6 @@
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
-                <!-- COLUMN HEADERS -->
                 <TablixRow>
                   <Height>0.25in</Height>
                   <TablixCells>
@@ -62,13 +61,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
                             </Paragraph>
                           </Paragraphs>
                           <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
                             <BottomBorder>
                               <Color>Black</Color>
                               <Style>Solid</Style>
@@ -99,13 +94,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
                             </Paragraph>
                           </Paragraphs>
                           <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
                             <BottomBorder>
                               <Color>Black</Color>
                               <Style>Solid</Style>
@@ -136,13 +127,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
                             </Paragraph>
                           </Paragraphs>
                           <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
                             <BottomBorder>
                               <Color>Black</Color>
                               <Style>Solid</Style>
@@ -173,13 +160,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
                             </Paragraph>
                           </Paragraphs>
                           <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
                             <BottomBorder>
                               <Color>Black</Color>
                               <Style>Solid</Style>
@@ -216,9 +199,6 @@
                             </Paragraph>
                           </Paragraphs>
                           <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
                             <BottomBorder>
                               <Color>Black</Color>
                               <Style>Solid</Style>
@@ -255,9 +235,6 @@
                             </Paragraph>
                           </Paragraphs>
                           <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
                             <BottomBorder>
                               <Color>Black</Color>
                               <Style>Solid</Style>
@@ -294,9 +271,6 @@
                             </Paragraph>
                           </Paragraphs>
                           <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
                             <BottomBorder>
                               <Color>Black</Color>
                               <Style>Solid</Style>
@@ -333,13 +307,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
                             </Paragraph>
                           </Paragraphs>
                           <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>10pt</PaddingTop>
@@ -377,13 +347,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
                             </Paragraph>
                           </Paragraphs>
                           <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -408,13 +374,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
                             </Paragraph>
                           </Paragraphs>
                           <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -439,13 +401,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
                             </Paragraph>
                           </Paragraphs>
                           <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -470,13 +428,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
                             </Paragraph>
                           </Paragraphs>
                           <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -508,9 +462,6 @@
                             </Paragraph>
                           </Paragraphs>
                           <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -542,9 +493,6 @@
                             </Paragraph>
                           </Paragraphs>
                           <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -576,9 +524,6 @@
                             </Paragraph>
                           </Paragraphs>
                           <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -605,11 +550,6 @@
                               </TextRuns>
                             </Paragraph>
                           </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                          </Style>
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -625,11 +565,6 @@
                               </TextRuns>
                             </Paragraph>
                           </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                          </Style>
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -645,11 +580,6 @@
                               </TextRuns>
                             </Paragraph>
                           </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                          </Style>
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -665,11 +595,6 @@
                               </TextRuns>
                             </Paragraph>
                           </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                          </Style>
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -811,11 +736,6 @@
                               </TextRuns>
                             </Paragraph>
                           </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                          </Style>
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -831,11 +751,6 @@
                               </TextRuns>
                             </Paragraph>
                           </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                          </Style>
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -851,11 +766,6 @@
                               </TextRuns>
                             </Paragraph>
                           </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                          </Style>
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -1058,15 +968,9 @@
             <Left>0.0in</Left>
             <Height>1.38in</Height>
             <Width>7.5in</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
           </Tablix>
         </ReportItems>
         <Height>1.5in</Height>
-        <Style />
       </Body>
       <Width>7.5in</Width>
       <Page>
@@ -1130,15 +1034,6 @@
               <Left>1.3in</Left>
               <Height>0.6in</Height>
               <Width>3.7in</Width>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
             </Textbox>
             <!-- COMPANY CONTACTS -->
             <Textbox Name="CompanyContacts">
@@ -1188,15 +1083,6 @@
               <Left>1.3in</Left>
               <Height>0.4in</Height>
               <Width>3.7in</Width>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
             </Textbox>
             <!-- PRINT DETAILS -->
             <Textbox Name="PrintDetails">
@@ -1289,15 +1175,6 @@
               <Left>5.0in</Left>
               <Height>0.8in</Height>
               <Width>2.5in</Width>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
             </Textbox>
             <!-- HEADER DIVIDER LINE -->
             <Line Name="HeaderLine">
@@ -1337,22 +1214,8 @@
               <Left>0.0in</Left>
               <Height>0.3in</Height>
               <Width>7.5in</Width>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
             </Textbox>
           </ReportItems>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-          </Style>
         </PageHeader>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>
@@ -1360,7 +1223,6 @@
         <RightMargin>0.3in</RightMargin>
         <TopMargin>0.3in</TopMargin>
         <BottomMargin>0.3in</BottomMargin>
-        <Style />
       </Page>
     </ReportSection>
   </ReportSections>
