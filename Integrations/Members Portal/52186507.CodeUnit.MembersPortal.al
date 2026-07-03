@@ -5871,7 +5871,7 @@ codeunit 52186507 "Members Portal Integration"
 
                     Datum.Add('loan_type_min_amount', TotalTopUp);
                 end else begin
-                    Datum.Replace('loan_type_min_amount', MobileLoanProduct."Minimum Loan Amount");
+                    Datum.Add('loan_type_min_amount', MobileLoanProduct."Minimum Loan Amount");
                 end;
 
                 if MobileLoanProduct."Mobile Max. Loan Amount" <> 0 then begin
@@ -5882,6 +5882,9 @@ codeunit 52186507 "Members Portal Integration"
                     end else begin
                         Datum.Add('loan_type_max_amount', 0);
                     end;
+
+
+                Datum.Add('eligibility_fail_reason', EligibilityFailReason);
 
                 ResponseObject.Add('status', 'SUCCESS');
                 ResponseObject.Add('data', Datum);
