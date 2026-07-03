@@ -242,11 +242,12 @@ page 52187301 "Banking Management Role Center"
                                 Caption = 'Bankers Cheque Register Report';
                                 RunObject = report "Sacco Cheque Register";
                             }
-                            action("Teller Specifications Report")
+                            action("End of Day Reconciliation")
                             {
-                                ApplicationArea = Basic, Suite;
-                                Caption = 'EOD Teller Specifications Report';
-                                RunObject = report "Teller Specifications Report";
+                                ApplicationArea = Basic;
+                                Image = PrintReport;
+                                Caption = 'End of Day Reconciliation Report';
+                                RunObject = codeunit "Run EOD Reconciliation Report";
                             }
                             action("Counter Summary Report")
                             {

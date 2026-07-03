@@ -115,6 +115,7 @@ table 52185513 "HR Employee Target Assignment"
         {
             Caption = 'Perspective Code';
             TableRelation = "HR Perspectives Setup"."Perspective No";
+            ValidateTableRelation = false;
             Editable = false;
 
             trigger OnValidate()
