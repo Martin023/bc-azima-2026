@@ -646,19 +646,20 @@ table 52185829 "Loan Recovery Header"
 
                     if rec."Prorate Deposits" then begin
                         Loans.Reset();
-                        Loans.SetLoadFields("Member No.", "Member No.", "Outstanding Balance");
+                        Loans.SetLoadFields("Member No.", "Outstanding Balance");
                         Loans.SetRange("Member No.", Rec."Member No.");
-                        Loans.SetFilter("Outstanding Balance", '>0');
+                        Loans.SetAutoCalcFields("Total Balance");
+                        Loans.SetFilter("Total Balance", '>0');
                         // Loans.SetRange("Recovery Product", ProductFactory."Recovery Product");
                         // Loans.SetRange("Loan Recovery No.", '');
                         //Loans.SetRange("Mobile Loan", false);
                         if Loans.findset() then begin
                             repeat
-                                TotalLoansBalances += Loans."Outstanding Balance";
+                                TotalLoansBalances += Loans."Total Balance";
                             until Loans.Next() = 0;
                         end;
 
-                        TotalLoansBalances -= ("Total Attached Recoverable");//Subtract amounts to be cleared
+                        //TotalLoansBalances -= ("Total Attached Recoverable");//Subtract amounts to be cleared
                         "Prorated Funds" := "Account Balance";
                         if TotalLoansBalances > 0 then
                             "Prorated Funds" := Round((("Total Balance" / TotalLoansBalances) * "Account Balance"), 1, '>');
@@ -670,45 +671,12 @@ table 52185829 "Loan Recovery Header"
                             "Prorated Funds" := "Total Balance";
 
                         "Amount To Use" := "Prorated Funds";
+
                     end
                     else begin
                         "Amount To Use" := "Account Balance";
                     end;
-
-                    if "Amount To Use" <= 0 then "Amount To Use" := 0;
-                    if "Amount To Use" > "Total Balance" then "Amount To Use" := "Total Balance";
-                    if loans.get("Loan No.") then begin
-                        if ProductFactory.get(loans."Loan Product Type") then begin
-                            if "Amount To Use" > 0 then begin
-                                if "Amount To Use" > "Interest Balance" then begin //Deposits greater than interest
-                                    DepositsToInterest := "Interest Balance";
-                                    DepositsToPrinciple := "Amount To Use" - DepositsToInterest;
-                                    InterestToGuarantors := 0;
-                                    PrincipleToGuarantors := "Total Balance" - "Amount To Use";
-                                end else begin //Deposits less than interest
-                                    DepositsToInterest := "Amount To Use";
-                                    DepositsToPrinciple := 0;
-                                    InterestToGuarantors := "Interest Balance" - "Amount To Use";
-                                    PrincipleToGuarantors := "Principle Balance";
-                                end;
-
-                                if ProductFactory."Recovery Creteria" <> ProductFactory."Recovery Creteria"::"Guarantors Only" then
-                                    InsertRecoveryLines(Rec."Account Number", Rec."No.", "Amount To Use", '', 0, LoanRecoveryLines."Recovery Type"::"Deposits Recovery",
-                                                        DepositsToPrinciple, DepositsToInterest);
-                            end else begin
-                                InterestToGuarantors := "Interest Balance";
-                                PrincipleToGuarantors := "Principle Balance";
-                            end;
-
-
-                            if ProductFactory."Recovery Creteria" = ProductFactory."Recovery Creteria"::"Guarantors Only" then begin
-                                InterestToGuarantors := "Interest Balance";
-                                PrincipleToGuarantors := "Principle Balance";
-                            end;
-                            if ProductFactory."Recovery Creteria" <> ProductFactory."Recovery Creteria"::"Shares Only" then
-                                AppotionGuarantors();
-                        end;
-                    end;
+                    rec.Validate("Amount To Use");
                 end;
             end;
         }
@@ -886,16 +854,16 @@ table 52185829 "Loan Recovery Header"
 
         Rec.CalcFields("Source Unit");
 
-        if Rec."Source Unit" = Rec."Source Unit"::FOSA then begin
-            IntModRemainder := Rec."Interest Balance" mod AvailableGuarantorsCount;
-            PrModRemainder := Rec."Principle Balance" mod AvailableGuarantorsCount;
+        // if Rec."Source Unit" = Rec."Source Unit"::FOSA then begin
+        //     IntModRemainder := Rec."Interest Balance" mod AvailableGuarantorsCount;
+        //     PrModRemainder := Rec."Principle Balance" mod AvailableGuarantorsCount;
 
-            Rec."Interest Balance" -= IntModRemainder;
-            Rec."Principle Balance" -= PrModRemainder;
+        //     Rec."Interest Balance" -= IntModRemainder;
+        //     Rec."Principle Balance" -= PrModRemainder;
 
-            IntShare := Rec."Interest Balance" / AvailableGuarantorsCount;
-            PrShare := Rec."Principle Balance" / AvailableGuarantorsCount;
-        end;
+        //     IntShare := Rec."Interest Balance" / AvailableGuarantorsCount;
+        //     PrShare := Rec."Principle Balance" / AvailableGuarantorsCount;
+        // end;
 
 
 
