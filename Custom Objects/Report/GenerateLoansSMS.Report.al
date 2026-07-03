@@ -76,7 +76,7 @@ report 52187321 "Generate Loans"
                 // end;
 
 
-                if "SMS Alerts Header"."Notice Type" = "SMS Alerts Header"."Notice Type"::"1st & 2nd Notice" then begin
+                if ("SMS Alerts Header"."Notice Type" = "SMS Alerts Header"."Notice Type"::"1st Notice") or ("SMS Alerts Header"."Notice Type" = "SMS Alerts Header"."Notice Type"::"2nd Notice") then begin
                     // if FallOff > 0 then begin
                     //     if InsertLoan then
                     InsertLoanLines(Loans, "SMS Alerts Header");

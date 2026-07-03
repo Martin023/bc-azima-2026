@@ -9691,8 +9691,11 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                         SearchMember.SetRange("Secondary Identification Type", SearchMember."Secondary Identification Type"::"Passport No");
                         SearchMember.SetRange("Secondary Identification", Identifier);
                     end;
-                end;
+                end
+            else
+                exit(false);
         end;
+
 
         SearchMember.SetLoadFields("No.", Subflag, "Phone No.", "Transactional Mobile Number", "Employer Code");
 
