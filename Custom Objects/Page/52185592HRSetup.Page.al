@@ -76,6 +76,11 @@ page 52185592 "HR Setup"
                 {
                     ApplicationArea = Basic;
                 }
+                field("Training Need Request Nos."; Rec."Training Need Request Nos.")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Training Need Request Nos.';
+                }
                 field("Training Application Nos."; Rec."Training Application Nos.")
                 {
                     ApplicationArea = Basic;
@@ -284,6 +289,39 @@ page 52185592 "HR Setup"
                 {
                     
                 }
+            }
+            group("Notification Settings")
+            {
+                Caption = 'Employee Notification Settings';
+                field("Enable Contract Notifications"; Rec."Enable Contract Notifications")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Enable automatic email notifications for contract expiry';
+                }
+                field("Contract Expiry Warning Days"; Rec."Contract Expiry Warning Days")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Number of days before contract end date to send notification';
+                }
+                field("Enable Retirement Notifications"; Rec."Enable Retire Notifications")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Enable automatic email notifications for retirement';
+                }
+                field("Retirement Warning Months"; Rec."Retirement Warning Months")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Number of months before retirement date to send notification';
+                }
+                field("HR Admin Email"; Rec."HR Admin Email")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Email address of HR Administrator to receive notifications';
+                }
+            }
+            group("Miscellaneous")
+            {
+                Caption = 'Miscellaneous';
                 field("Welfare Advance No.";Rec."Welfare Advance No.")
                 {
                     
@@ -299,6 +337,39 @@ page 52185592 "HR Setup"
 
     actions
     {
+        area(Processing)
+        {
+            action(ViewNotificationLog)
+            {
+                ApplicationArea = All;
+                Caption = 'View Notification Log';
+                Image = Log;
+                ToolTip = 'View the history of sent contract and retirement notifications';
+                RunObject = page "HR Notification Log";
+            }
+            action(RunNotificationCheck)
+            {
+                ApplicationArea = All;
+                Caption = 'Run Notification Check Now';
+                Image = SendMail;
+                ToolTip = 'Manually trigger contract and retirement notification check';
+
+                trigger OnAction()
+                var
+                    HRNotifMgmt: Codeunit "HR Expiry & Retirement Notif";
+                begin
+                    if Confirm('Run contract expiry and retirement notification check now?', true) then begin
+                        HRNotifMgmt.RunDailyNotificationCheck();
+                        Message('Notification check completed. Check the Notification Log for results.');
+                    end;
+                end;
+            }
+        }
+        area(Promoted)
+        {
+            actionref(ViewNotificationLog_Promoted; ViewNotificationLog) { }
+            actionref(RunNotificationCheck_Promoted; RunNotificationCheck) { }
+        }
     }
 
     trigger OnOpenPage()

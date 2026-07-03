@@ -10,7 +10,7 @@ report 52186344 "Shortlisted Candidates"
     {
         dataitem(HREmployeeRequisitions; "HR Employee Requisitions")
         {
-            RequestFilterFields = "Requisition No.", "Job ID", "Approval Status";
+            RequestFilterFields = "Requisition No.", "Job ID", "Approval Status", "Requisition Date", "Closing Date";
             
             column(RequisitionNo; "Requisition No.")
             {
@@ -42,6 +42,18 @@ report 52186344 "Shortlisted Candidates"
             column(NoDisqualified; NoDisqualified)
             {
             }
+            column(ResponsibilityCenter; "Responsibility Center")
+            {
+            }
+            column(GlobalDimension2Code; "Global Dimension 2 Code")
+            {
+            }
+            column(EmploymentType; "Employment Type")
+            {
+            }
+            column(ApprovalStatus; "Approval Status")
+            {
+            }
             column(CompanyInformation_Name; CompanyInformation.Name)
             {
             }
@@ -56,6 +68,25 @@ report 52186344 "Shortlisted Candidates"
             }
             column(CommunicationOnline; CommunicationOnline)
             {
+            }
+            column(ShowCostBreakdown; ShowCostBreakdown)
+            {
+            }
+            
+            dataitem(RecruitmentCosts; "Recruitment Costs")
+            {
+                DataItemLink = "Requisition No." = field("Requisition No.");
+                DataItemTableView = sorting("Requisition No.", "Training ID", "Cost Item") order(ascending);
+                
+                column(CostItem; "Cost Item")
+                {
+                }
+                column(CostItemDescription; "Cost Item Description")
+                {
+                }
+                column(Cost; Cost)
+                {
+                }
             }
             
             dataitem(HRShortlistedApplicants; "HR Shortlisted Applicants")
@@ -131,6 +162,12 @@ report 52186344 "Shortlisted Candidates"
                         ApplicationArea = All;
                         Caption = 'Show Only Qualified Candidates';
                     }
+                    field(ShowCostBreakdown; ShowCostBreakdown)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Show Cost Breakdown';
+                        ToolTip = 'Shows detailed breakdown of recruitment costs per requisition';
+                    }
                 }
             }
         }
@@ -155,10 +192,11 @@ report 52186344 "Shortlisted Candidates"
         CompanyTelephone: Text;
         CommunicationOnline: Text;
         HRJobApplications: Record "HR Job Applications";
-        ShortlistedApplicantsRec: Record "HR Shortlisted Applicants"; // RENAMED TO AVOID CONFLICT WITH DATAITEM
+        ShortlistedApplicantsRec: Record "HR Shortlisted Applicants";
         NoOfApplications: Integer;
         NoQualified: Integer;
         NoDisqualified: Integer;
         QualificationStatus: Text;
         ShowOnlyQualified: Boolean;
+        ShowCostBreakdown: Boolean;
 }

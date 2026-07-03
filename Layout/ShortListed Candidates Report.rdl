@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:cl="http://schemas.microsoft.com/sqlserver/reporting/2010/01/componentdefinition" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition">
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource">
@@ -125,7 +125,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Date</Value>
+                                  <Value>ID No</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>7pt</FontSize>
@@ -371,25 +371,24 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <!-- <Textbox Name="DateApplied">
+                        <Textbox Name="IDNo">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!DateApplied.Value</Value>
+                                  <Value>=Fields!IDNo.Value</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>7pt</FontSize>
-                                    <Format>M/d/yyyy</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>DateApplied</rd:DefaultName>
+                          <rd:DefaultName>IDNo</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -400,7 +399,7 @@
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
-                        </Textbox> -->
+                        </Textbox>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -438,18 +437,17 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="JobAppliedFor">
+                        <Textbox Name="JobID">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!JobAppliedFor.Value</Value>
+                                  <Value>=Fields!JobID.Value</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>7pt</FontSize>
-                                    <Format>MMM d, yyyy</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -458,7 +456,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>JobAppliedFor</rd:DefaultName>
+                          <rd:DefaultName>JobID</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -474,14 +472,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="JobAppliedforDescription">
+                        <Textbox Name="JobDescription">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!JobAppliedforDescription.Value</Value>
+                                  <Value>=Fields!JobDescription.Value</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>7pt</FontSize>
@@ -491,7 +489,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>JobAppliedforDescription</rd:DefaultName>
+                          <rd:DefaultName>JobDescription</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -507,14 +505,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Status">
+                        <Textbox Name="QualificationStatus">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Status.Value</Value>
+                                  <Value>=Fields!QualificationStatus.Value</Value>
                                   <Style>
                                     <FontFamily>Times New Roman</FontFamily>
                                     <FontSize>7pt</FontSize>
@@ -524,7 +522,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Status</rd:DefaultName>
+                          <rd:DefaultName>QualificationStatus</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -565,7 +563,7 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
             <Top>0.07403in</Top>
-            <Left>0.41988in</Left>
+            <Left>0in</Left>
             <Height>0.60195in</Height>
             <Width>19.77816cm</Width>
             <Style>
@@ -578,10 +576,10 @@
         <Height>2.159cm</Height>
         <Style />
       </Body>
-      <Width>24.38445cm</Width>
+      <Width>20.7332cm</Width>
       <Page>
         <PageHeader>
-          <Height>3.88938cm</Height>
+          <Height>3.92465cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -590,7 +588,7 @@
               <Value>=First(Fields!CompanyInformation_Picture.Value, "DataSet_Result")</Value>
               <MIMEType>image/jpeg</MIMEType>
               <Sizing>FitProportional</Sizing>
-              <Left>0.41988in</Left>
+              <Left>0in</Left>
               <Height>1.53125in</Height>
               <Width>2.5896in</Width>
               <Style>
@@ -621,8 +619,8 @@
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
               <Top>0.26736in</Top>
-              <Left>6.13522in</Left>
-              <Height>0.23264in</Height>
+              <Left>5.71534in</Left>
+              <Height>0.29513in</Height>
               <Width>2.40341in</Width>
               <ZIndex>1</ZIndex>
               <Style>
@@ -656,9 +654,9 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
-              <Top>0.55556in</Top>
-              <Left>6.13522in</Left>
-              <Height>0.21528in</Height>
+              <Top>0.63193in</Top>
+              <Left>5.71534in</Left>
+              <Height>0.24653in</Height>
               <Width>2.40341in</Width>
               <ZIndex>2</ZIndex>
               <Style>
@@ -692,9 +690,9 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
-              <Top>0.84027in</Top>
-              <Left>6.13522in</Left>
-              <Height>0.18403in</Height>
+              <Top>0.93402in</Top>
+              <Left>5.71534in</Left>
+              <Height>0.23959in</Height>
               <Width>2.40341in</Width>
               <ZIndex>3</ZIndex>
               <Style>
@@ -728,9 +726,9 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
-              <Top>1.07986in</Top>
-              <Left>6.13522in</Left>
-              <Height>0.18403in</Height>
+              <Top>1.21528in</Top>
+              <Left>5.71534in</Left>
+              <Height>0.24653in</Height>
               <Width>2.40341in</Width>
               <ZIndex>4</ZIndex>
               <Style>
@@ -763,8 +761,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox5</rd:DefaultName>
-              <Top>0.01736in</Top>
-              <Left>1.06993in</Left>
+              <Top>0.14236in</Top>
+              <Left>0.64166in</Left>
               <Height>0.25in</Height>
               <Width>7.4687in</Width>
               <ZIndex>5</ZIndex>
@@ -822,7 +820,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
               <Top>0.35938in</Top>
-              <Left>6.61091in</Left>
+              <Left>6.19103in</Left>
               <Height>0.20833in</Height>
               <Width>1.8194in</Width>
               <Style>
@@ -867,7 +865,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
               <Top>0.68229in</Top>
-              <Left>1.06154in</Left>
+              <Left>0.64166in</Left>
               <Height>0.1875in</Height>
               <Width>7.47709in</Width>
               <ZIndex>1</ZIndex>
@@ -913,7 +911,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
               <Top>0.13021in</Top>
-              <Left>6.61091in</Left>
+              <Left>6.19103in</Left>
               <Height>0.1875in</Height>
               <Width>1.8194in</Width>
               <ZIndex>2</ZIndex>
@@ -936,10 +934,6 @@
         </PageFooter>
         <PageHeight>29.7cm</PageHeight>
         <PageWidth>21cm</PageWidth>
-        <LeftMargin>0cm</LeftMargin>
-        <RightMargin>0cm</RightMargin>
-        <TopMargin>0cm</TopMargin>
-        <BottomMargin>0cm</BottomMargin>
         <ColumnSpacing>1.27cm</ColumnSpacing>
         <Style />
       </Page>
@@ -1023,6 +1017,18 @@ End Function
         <Field Name="NoDisqualified">
           <DataField>NoDisqualified</DataField>
         </Field>
+        <Field Name="ResponsibilityCenter">
+          <DataField>ResponsibilityCenter</DataField>
+        </Field>
+        <Field Name="GlobalDimension2Code">
+          <DataField>GlobalDimension2Code</DataField>
+        </Field>
+        <Field Name="EmploymentType">
+          <DataField>EmploymentType</DataField>
+        </Field>
+        <Field Name="ApprovalStatus">
+          <DataField>ApprovalStatus</DataField>
+        </Field>
         <Field Name="CompanyInformation_Name">
           <DataField>CompanyInformation_Name</DataField>
         </Field>
@@ -1037,6 +1043,21 @@ End Function
         </Field>
         <Field Name="CommunicationOnline">
           <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="ShowCostBreakdown">
+          <DataField>ShowCostBreakdown</DataField>
+        </Field>
+        <Field Name="CostItem">
+          <DataField>CostItem</DataField>
+        </Field>
+        <Field Name="CostItemDescription">
+          <DataField>CostItemDescription</DataField>
+        </Field>
+        <Field Name="Cost">
+          <DataField>Cost</DataField>
+        </Field>
+        <Field Name="CostFormat">
+          <DataField>CostFormat</DataField>
         </Field>
         <Field Name="JobApplicationNo">
           <DataField>JobApplicationNo</DataField>

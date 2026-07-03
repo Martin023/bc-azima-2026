@@ -55,26 +55,26 @@ page 52187320 AdvancedHumanResources
         {
             group(HREmployeeManagement)
             {
-                group("HR Employee recruitment")
+                group("Employee Recruitment")
                 {
                     action(HRemployeeRequisitions)
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'HR Employee Requisitions';
+                        Caption = 'Employee Requisitions List';
 
                         RunObject = Page "HR Employee Requisitions List";
                     }
                     action(HRjobApplications)
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'HR job applications';
+                        Caption = 'Job Applications List';
 
                         RunObject = Page "HR Job Applications List";
                     }
                     action(Shortlisting)
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'HR Shortlisting';
+                        Caption = 'Shortlisting List';
 
                         RunObject = Page "HR Shortlisting List1";
                     }
@@ -88,7 +88,7 @@ page 52187320 AdvancedHumanResources
                     action(HRJobApplicantsNotQualified)
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'HR Job Applicants UnQualified';
+                        Caption = 'Job Applicants UnQualified List';
 
                         RunObject = Page "HR Applicants UnQualified L1";
 
@@ -96,7 +96,7 @@ page 52187320 AdvancedHumanResources
                     action(SuccesfulJobApplicants)
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Qualified (Succesful) Job Applicants';
+                        Caption = 'Qualified (Successful) Job Applicants List';
 
                         RunObject = Page "HR  App Qualified Applicants1";
                     }
@@ -106,7 +106,7 @@ page 52187320 AdvancedHumanResources
                         action(HRJobApplicants)
                         {
                             ApplicationArea = Basic, Suite;
-                            Caption = 'HR Job Applicantions';
+                            Caption = 'Job Applications';
 
                             RunObject = report "HR Job Applications";
                         }
@@ -135,7 +135,7 @@ page 52187320 AdvancedHumanResources
                         action("Employee Requisition")
                         {
                             ApplicationArea = Basic, Suite;
-                            Caption = 'Employee Requisition';
+                            Caption = 'Employee Requisition Report';
 
                             RunObject = report "Employee Requisiton Report";
                         }
@@ -146,22 +146,22 @@ page 52187320 AdvancedHumanResources
                         action(HRjobApplicantsUploaded)
                         {
                             ApplicationArea = Basic, Suite;
-                            Caption = 'HR Job Applicants Uploaded';
+                            Caption = 'Job Applicants Uploaded List';
 
                             RunObject = Page "HR Job Applicants Uploaded1";
                         }
                         action(HRemployeereqapproved)
                         {
                             ApplicationArea = Basic, Suite;
-                            Caption = 'HR Employee Requisitions Approved';
+                            Caption = 'Employee Requisitions Approved List';
 
                             RunObject = Page "HR Employee ReqsListApproved1";
                         }
                     }
                 }
-                group("HR Employee Management")
+                group("Employee Management")
                 {
-                    Caption = 'HR Employee Management';
+                    Caption = 'Employee Management';
                     // action(HRInductionSchedule)
                     // {
                     //     ApplicationArea = Basic, Suite;
@@ -172,28 +172,28 @@ page 52187320 AdvancedHumanResources
                     action(HREmployeeList)
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'HR Employee List - New';
+                        Caption = 'Employees - New List';
 
                         RunObject = Page "HR Employee List - New1";
                     }
                     action(HREmployeeList1)
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'HR Employees - Pending Approval';
+                        Caption = 'Employees - Pending Approval List';
 
                         RunObject = Page "HR Employee List-Pending App1";
                     }
                     action(HREmployeeList2)
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'HR Employees - Active';
+                        Caption = 'Employees - Active List';
 
                         RunObject = Page "HR Employee List - Active";
                     }
                     action(HREmployeeList3)
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'HR Employees - Inactive';
+                        Caption = 'Employees - Inactive List';
 
                         RunObject = Page "HR Employee List - Inactive";
                     }
@@ -217,21 +217,21 @@ page 52187320 AdvancedHumanResources
                         action(HrHeadOfDepartments)
                         {
                             ApplicationArea = Basic, Suite;
-                            Caption = 'HR Head of Departments';
+                            Caption = 'Head of Departments List';
 
                             RunObject = Page "HR Head of Departments List";
                         }
                         action(HRDepartmentTargets)
                         {
                             ApplicationArea = Basic, Suite;
-                            Caption = 'HR Department Targets';
+                            Caption = 'Department Targets List';
 
                             RunObject = Page "HR Department Targets List";
                         }
                         action(HRPerspectivesSetup)
                         {
                             ApplicationArea = Basic, Suite;
-                            Caption = 'HR Perspectives Setup';
+                            Caption = 'Perspectives Setup List';
 
                             RunObject = Page "HR Perspective Setup List";
                         }
@@ -250,14 +250,14 @@ page 52187320 AdvancedHumanResources
                         action(HREmployeeListdetailedReport)
                         {
                             ApplicationArea = Basic, Suite;
-                            Caption = 'HR Employee List Detailed Report';
+                            Caption = 'Employee Detailed Report';
 
                             RunObject = report "Employee Detailed Report";
                         }
                         action(HREmployeeListReport)
                         {
                             ApplicationArea = Basic, Suite;
-                            Caption = 'HR Employee dependants Report';
+                            Caption = 'Employee Dependants Report';
 
                             RunObject = report HrNextofKin;
                         }
@@ -265,21 +265,21 @@ page 52187320 AdvancedHumanResources
                         action(HREmployeeListReport1)
                         {
                             ApplicationArea = Basic, Suite;
-                            Caption = 'HR Employee List ';
+                            Caption = 'Employee List Report';
 
                             RunObject = report "HR Employee List";
                         }
                         action(HREmployeeSupervisor)
                         {
                             ApplicationArea = Basic, Suite;
-                            Caption = 'HR Employee Supervisors ';
+                            Caption = 'Employee Supervisors Report';
 
                             RunObject = report "HR Staff Supervisor";
                         }
                         action(HREmployeeAppointment)
                         {
                             ApplicationArea = Basic, Suite;
-                            Caption = 'HR Employee Appointment ';
+                            Caption = 'Employee Appointment Report';
 
                             RunObject = report "EmployeeAppointment report";
                         }
@@ -301,22 +301,28 @@ page 52187320 AdvancedHumanResources
 
                     }
                 }
-                group("HR Training Management")
+                group("Training Management")
                 {
-                    Caption = 'HR Training Management';
+                    Caption = 'Training Management';
                     group(HrTrainingMgt)
                     {
-                        Caption = 'HR Training Management';
+                        Caption = 'Training Management';
                         action(HRTrainingNeeds)
                         {
-                            Caption = 'Open HR Training Needs';
+                            Caption = 'Open Training Needs List';
                             ApplicationArea = Basic, Suite;
                             RunObject = Page "HR Training Needs List";
+                        }
+                        action(HRTrainingNeedRequests)
+                        {
+                            Caption = 'Training Need Requests - All';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = Page "Training Need Requests - All";
                         }
 
                         action(HrTrainingApplications)
                         {
-                            Caption = 'HR Training Applications';
+                            Caption = 'Training Applications List';
                             ApplicationArea = Basic, Suite;
                             RunObject = Page "HR Training ApplicationList";
                         }
@@ -325,13 +331,13 @@ page 52187320 AdvancedHumanResources
                             Caption = 'Tasks';
                             action(HRTrainingFeedBack)
                             {
-                                Caption = 'HR Training FeedBack';
+                                Caption = 'Training FeedBack';
                                 ApplicationArea = Basic, Suite;
                                 RunObject = Page "Training Evaluation";
                             }
                             action(HRTrainingPlanner)
                             {
-                                Caption = 'HR Training Planner';
+                                Caption = 'Training Planner List';
                                 ApplicationArea = Basic, Suite;
                                 RunObject = Page "Hr Training Planner List";
                             }
@@ -352,20 +358,20 @@ page 52187320 AdvancedHumanResources
                             Caption = 'Reports';
                             action(HrTraining)
                             {
-                                Caption = 'HR Training Needs';
+                                Caption = 'Training Needs Report';
                                 ApplicationArea = Basic, Suite;
                                 RunObject = Report "HR Training Needs";
                             }
 
                             action(HrTrainingPlan)
                             {
-                                Caption = 'HR Training Planner';
+                                Caption = 'Training Planner Report';
                                 ApplicationArea = Basic, Suite;
                                 RunObject = Report "Training Planner";
                             }
                             action(HrTrainingAttendees)
                             {
-                                Caption = 'HR Training Attendees';
+                                Caption = 'Training Attendees Report';
                                 ApplicationArea = Basic, Suite;
                                 RunObject = Report TrainingAttendees;
                             }
@@ -406,31 +412,31 @@ page 52187320 AdvancedHumanResources
                     // }
 
                 }
-                group("HR Disciplinary Management")
+                group("Disciplinary Management")
                 {
-                    Caption = 'HR Disciplinary Management';
+                    Caption = 'Disciplinary Management';
                     action(HRDisciplinaryCases)
                     {
-                        Caption = 'HR Disciplinary Cases';
+                        Caption = 'Disciplinary Cases List';
                         ApplicationArea = Basic, Suite;
                         RunObject = page "HR Disciplinary Cases List N1";
                     }
                     action(ClosedHRDisciplinaryCases)
                     {
-                        Caption = 'Closed HR Disciplinary Cases';
+                        Caption = 'Closed Disciplinary Cases List';
                         ApplicationArea = Basic, Suite;
                         RunObject = page "HR Disciplinary Cases ListCls1";
                     }
 
                     action(HRDiscWthdwaList)
                     {
-                        Caption = 'HR Disciplinary Withdrawal List';
+                        Caption = 'Disciplinary Withdrawal List';
                         ApplicationArea = Basic, Suite;
                         RunObject = page "HR Disc Withdrawal list";
                     }
                     action(HRDiscAppealList)
                     {
-                        Caption = 'HR Disciplinary Appeal list';
+                        Caption = 'Disciplinary Appeal List';
                         ApplicationArea = Basic, Suite;
                         RunObject = page "HR Disciplinary Appeal List";
                     }
@@ -441,7 +447,7 @@ page 52187320 AdvancedHumanResources
                         Caption = 'Archive';
                         action(ClosedHrDiscCases)
                         {
-                            Caption = 'Closed HR Disciplinary Cases';
+                            Caption = 'Closed Disciplinary Cases List';
                             ApplicationArea = Basic, Suite;
                             RunObject = page "HR Disciplinary Cases ListCls1";
 
@@ -452,33 +458,33 @@ page 52187320 AdvancedHumanResources
                         Caption = 'Administration';
                         action(HrDiscActions)
                         {
-                            Caption = 'HR Disciplinary Actions';
+                            Caption = 'Disciplinary Actions List';
                             ApplicationArea = Basic, Suite;
                             RunObject = page "HR Disciplinary Actions1";
 
                         }
                     }
                 }
-                group("HR Perfomance Management")
+                group("Performance Management")
                 {
-                    Caption = 'Hr Perfomance Management';
-                    group("HR BSC Appraisal")
+                    Caption = 'Performance Management';
+                    group("BSC Appraisal")
                     {
                         action("HR BSC List Target Setting ")
                         {
-                            Caption = 'HR List Target Setting';
+                            Caption = 'List Target Setting';
                             ApplicationArea = Basic, suite;
                             RunObject = page "HR 360 Appraisals List - TS1";
                         }
                         action("HR BSC List Target Approval")
                         {
-                            Caption = 'HR List Target Approval';
+                            Caption = 'List Target Approval';
                             ApplicationArea = Basic, suite;
                             RunObject = page "HR 360 Appraisals List - TA1";
                         }
                         action("HR BSC List Evaluation Areas")
                         {
-                            Caption = 'HR List Evaluation';
+                            Caption = 'List Evaluation';
                             ApplicationArea = Basic, suite;
                             RunObject = page "HR 360 Appraisals List - EV1";
 
@@ -598,7 +604,7 @@ page 52187320 AdvancedHumanResources
                         // }
                     }
                 }
-                group("HR Leave Management")
+                group("Leave Management")
                 {
                     group(Grp1Tasks)
                     {
@@ -606,25 +612,25 @@ page 52187320 AdvancedHumanResources
                         action("HR Leave Types")
                         {
                             ApplicationArea = Basic, Suite;
-                            Caption = 'HR Leave Types';
+                            Caption = 'Leave Types List';
 
                             RunObject = Page "HR Leave Types1";
                         }
                         action(LeaveApplication)
                         {
-                            Caption = 'HR Leave Application';
+                            Caption = 'Leave Applications List';
                             ApplicationArea = Basic, Suite;
                             RunObject = page "HR Leave Applications List1";
                         }
                         action(AllLeaveApplication)
                         {
-                            Caption = 'HR Leave ApplicationList All';
+                            Caption = 'Leave Applications - All List';
                             ApplicationArea = Basic, Suite;
                             RunObject = page "Hr Leave Application List All";
                         }
                         action(AppLeaveApplication)
                         {
-                            Caption = 'Approved Leave Applications';
+                            Caption = 'Approved Leave Applications List';
                             ApplicationArea = Basic, Suite;
                             RunObject = page "Approved Leave Applications";
                         }
@@ -633,26 +639,26 @@ page 52187320 AdvancedHumanResources
                         action(HRLeaveAdjustments)
                         {
                             ApplicationArea = Basic, Suite;
-                            Caption = 'HR Leave Adjustments';
+                            Caption = 'Leave Adjustments';
 
                             RunObject = Page "HR Leave Journal Lines";
                         }
                         action(HrleaveJnrTemp)
                         {
                             ApplicationArea = Basic, Suite;
-                            Caption = 'HR Leave Journal Templates';
+                            Caption = 'Leave Journal Templates List';
 
                             RunObject = Page "HR Leave Jnl. Template List";
                         }
                         action(HrLeaveReimbusementList)
                         {
-                            Caption = 'HR Leave Reimbusement List';
+                            Caption = 'Leave Reimbursement List';
                             ApplicationArea = Basic, Suite;
                             RunObject = Page "HR Leave Reimbursment List1";
                         }
                         action(HrLeaveRecallList)
                         {
-                            Caption = 'HR Leave Recall List';
+                            Caption = 'Leave Recall List';
                             ApplicationArea = Basic, Suite;
                             RunObject = report "Reimburse Recalled Leave Days";
                         }
@@ -660,13 +666,13 @@ page 52187320 AdvancedHumanResources
 
                         action(HrLeavePlannerList)
                         {
-                            Caption = 'HR Leave Planner List';
+                            Caption = 'Leave Planner List';
                             ApplicationArea = Basic, Suite;
                             RunObject = Page "HR Leave Planner List";
                         }
                         action(HrLeavePlannerLinesDrill)
                         {
-                            Caption = 'HR Leave Planner Lines dril';
+                            Caption = 'Leave Planner Lines Drill';
                             ApplicationArea = Basic, Suite;
                             RunObject = Page "HR Leave Planner Lines Drill";
                         }
@@ -677,19 +683,19 @@ page 52187320 AdvancedHumanResources
                         Caption = 'Reports and Analysis';
                         action(HrLeaveApplication)
                         {
-                            Caption = 'HR Leave Application';
+                            Caption = 'Leave Application Report';
                             ApplicationArea = Basic, Suite;
                             RunObject = report "HR Leave Application";
                         }
                         action(HrLeaveTypes)
                         {
-                            Caption = 'HR Leave Types';
+                            Caption = 'Leave Types Report';
                             ApplicationArea = Basic, Suite;
                             RunObject = report "Leave types report";
                         }
                         action(LeaveBalances)
                         {
-                            Caption = 'Leave Balance';
+                            Caption = 'Leave Balance Report';
                             ApplicationArea = Basic, Suite;
                             RunObject = report "Leave Balance";
                         }
@@ -697,7 +703,7 @@ page 52187320 AdvancedHumanResources
 
                         action(HrLeaveStatement)
                         {
-                            Caption = 'HR Leave Statement';
+                            Caption = 'Leave Statement Report';
                             ApplicationArea = Basic, Suite;
                             RunObject = report "HR Leave Statement";
                         }
@@ -709,31 +715,31 @@ page 52187320 AdvancedHumanResources
                         }
                         action(HrleaveBal2)
                         {
-                            Caption = 'HR Leave Balance2';
+                            Caption = 'Leave Balance 2 Report';
                             ApplicationArea = Basic, Suite;
                             RunObject = report "HR Leave Balance2";
                         }
                         action(HrLeaveBalSummary)
                         {
-                            Caption = 'HR Leave Balance Summary';
+                            Caption = 'Leave Balance Summary Report';
                             ApplicationArea = Basic, Suite;
                             RunObject = report "HR Leave Balance Summary";
                         }
                         action(StaffOnLeave)
                         {
-                            Caption = 'Staff On Leave';
+                            Caption = 'Staff On Leave Report';
                             ApplicationArea = Basic, Suite;
                             RunObject = report "Staff On Leave";
                         }
                         action("Leave Costing")
                         {
-                            Caption = 'Leave Costing';
+                            Caption = 'Leave Costing Report';
                             ApplicationArea = Basic, Suite;
                             RunObject = report "Leave Costing";
                         }
                         action("LeaveCost to payroll")
                         {
-                            Caption = ' Leave Cost to payroll';
+                            Caption = 'Leave Cost to Payroll Report';
                             ApplicationArea = Basic, Suite;
                             RunObject = report "LeaveCost to payroll";
                         }
@@ -747,7 +753,7 @@ page 52187320 AdvancedHumanResources
                         Caption = 'Archives';
                         action(HrLeavePlannerArchive)
                         {
-                            Caption = 'HR Leave Planner Archive';
+                            Caption = 'Leave Planner Archive';
                             ApplicationArea = Basic, Suite;
                             RunObject = Page "Hr Leave Planner Lines";
                         }
@@ -1801,6 +1807,13 @@ page 52187320 AdvancedHumanResources
                     ApplicationArea = Basic, Suite;
                     RunObject = page "HR Setup";
                 }
+                action("HR Notification Log")
+                {
+                    Caption = 'HR Notification Log';
+                    ApplicationArea = Basic, Suite;
+                    RunObject = page "HR Notification Log";
+                    ToolTip = 'View contract expiry and retirement notification history';
+                }
                 action("Employee group")
                 {
                     Caption = 'Employee Group';
@@ -1893,6 +1906,12 @@ page 52187320 AdvancedHumanResources
                     ApplicationArea = Basic, Suite;
                     Caption = 'Training Application';
                     RunObject = page "HR Training ApplicationList";
+                }
+                action("Training Need Request")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Training Need Request';
+                    RunObject = page "HR Training Need Request List";
                 }
                 action("Appraisal")
                 {

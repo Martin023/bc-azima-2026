@@ -50,6 +50,10 @@ Report 52185695 "Employee Requisiton Report"
             {
 
             }
+            column(ClosingDate_HREmployeeRequisitions; "HR Employee Requisitions"."Closing Date")
+            {
+
+            }
             column(CompletionStatus_HREmployeeRequisitions; "HR Employee Requisitions"."Completion Status")
             {
             }
