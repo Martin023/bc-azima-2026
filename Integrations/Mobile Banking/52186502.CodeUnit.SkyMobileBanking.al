@@ -2804,7 +2804,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 ProductSupportedClasses.SetRange("Class Category", SearchMember."Member Class");
                 if ProductSupportedClasses.IsEmpty() then begin
                     ResponseObject.Add('request_status', 'ERROR');
-                    Datum.Add('error_message', 'Loan product with ID = ' + loan_type_id.AsValue.AsText + ' is NOT available to ' + Format(SearchMember."Member Class") + ' Members');
+                    Datum.Add('error_message', StrSubstNo('This loan product is not available for %1 members.', SearchMember."Member Class"));
                     ResponseObject.Add('response_payload', Datum);
                     AddDateTimeToResponse(ResponseObject);
                     ResponseObject.WriteTo(Response);
@@ -2991,7 +2991,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 ProductSupportedClasses.SetRange("Class Category", SearchMember."Member Class");
                 if ProductSupportedClasses.IsEmpty() then begin
                     ResponseObject.Add('request_status', 'ERROR');
-                    Datum.Add('error_message', 'Loan product with ID = ' + loan_type_id.AsValue.AsText + ' is NOT available to ' + Format(SearchMember."Member Class") + ' Members');
+                    Datum.Add('error_message', StrSubstNo('This loan product is not available for %1 members.', SearchMember."Member Class"));
                     ResponseObject.Add('response_payload', Datum);
                     AddDateTimeToResponse(ResponseObject);
                     ResponseObject.WriteTo(Response);
