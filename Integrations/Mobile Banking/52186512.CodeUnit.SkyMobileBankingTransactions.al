@@ -1810,19 +1810,6 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     if amtQualified > ProdFac."Maximum Loan Amount" then
                         amtQualified := ProdFac."Maximum Loan Amount";
 
-                    if ProdFac."Allow Loan Top-Up" then begin
-                        ExistingLoanBalance := GetMemberLoanBalance(MemberNo, ProductID);
-                        if amtQualified > ExistingLoanBalance then begin
-                            amtQualified := amtQualified - ExistingLoanBalance;
-                        end else begin
-                            EligibilityFailReason := StrSubstNo(
-                                'Existing loan balance of KES %1 meets or exceeds your maximum qualification of KES %2.',
-                                ExistingLoanBalance,
-                                amtQualified
-                            );
-                            amtQualified := 0;
-                        end;
-                    end;
 
                     EligibilityFailReason := '';
                     QualifiedAmount := amtQualified;

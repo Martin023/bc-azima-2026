@@ -176,7 +176,18 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 end;
             'GROWER_NO':
                 SearchMember.SetRange("Payroll/Staff No.", identifier.AsValue.AsText);
-            else
+            else begin
+
+                ResponseObject.Add('request_status', 'ERROR');
+                Datum.Add('error_message', 'Invalid identifier type!');
+
+                ResponseObject.Add('response_payload', Datum);
+                AddDateTimeToResponse(ResponseObject);
+
+                ResponseObject.WriteTo(Response);
+
+                exit(Response);
+            end;
         end;
 
         SearchMember.SetLoadFields(
@@ -9691,8 +9702,11 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                         SearchMember.SetRange("Secondary Identification Type", SearchMember."Secondary Identification Type"::"Passport No");
                         SearchMember.SetRange("Secondary Identification", Identifier);
                     end;
-                end;
+                end
+            else
+                exit(false);
         end;
+
 
         SearchMember.SetLoadFields("No.", Subflag, "Phone No.", "Transactional Mobile Number", "Employer Code");
 

@@ -5808,7 +5808,6 @@ codeunit 52186507 "Members Portal Integration"
 
         SalaryAmount: Decimal;
         EligibilityFailReason: Text;
-        FailReason: Text;
     begin
         Payload.Get('identifier_type', identifier_type); // MSISDN, MEMBER_NO, EMAIL, ID_NO, PAYROLL_NO
         Payload.Get('identifier', identifier);
@@ -5820,7 +5819,7 @@ codeunit 52186507 "Members Portal Integration"
             MobileLoanProduct.SetRange("Product ID", loan_type_id.AsValue.AsText);
 
             MobileLoanProduct.SetLoadFields(
-                "Product ID", "Product Description", "Minimum Loan Amount", "Mobile Max. Loan Amount", "Maximum Loan Amount", "Mobile Loan", "FosaLoan Multiplier"
+                "Product ID", "Product Description", "Minimum Loan Amount", "Mobile Max. Loan Amount", "Maximum Loan Amount", "Mobile Loan", "FosaLoan Multiplier", "Requires Installments on App."
             );
 
             if MobileLoanProduct.FindFirst then begin
@@ -5828,25 +5827,23 @@ codeunit 52186507 "Members Portal Integration"
                 Datum.Add('loan_name', MobileLoanProduct."Product Description");
 
                 if MobileLoanProduct."Mobile Loan" then begin
-                    // Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason));
-                    if IsFosaMLoanProduct then begin
-                        Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount2(SearchMember."No.", MobileLoanProduct."Product ID", installments.AsValue.AsInteger));
+                    if MobileLoanProduct."Requires Installments on App." then begin
+                        if IsFosaMLoanProduct then begin
+                            Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount2(SearchMember."No.", MobileLoanProduct."Product ID", installments.AsValue.AsInteger));
+                        end else begin
+                            Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason));
+                        end;
                     end else begin
                         Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason));
                     end;
                 end else begin
-                    SalaryAmount := GuarantorSalaryEligibility(loan_type_id.AsValue.AsText, SearchMember, 0, FailReason);
-                    if (SalaryAmount > MobileLoanProduct."Maximum Loan Amount") then begin
-                        Datum.Add('eligible_amount', MobileLoanProduct."Maximum Loan Amount");
+                    if MobileLoanProduct."Source Unit" = MobileLoanProduct."Source Unit"::FOSA then begin
+                        SalaryAmount := GuarantorSalaryEligibility(loan_type_id.AsValue.AsText, SearchMember);
+                        Datum.Add('eligible_amount', SalaryAmount * MobileLoanProduct."FosaLoan Multiplier");
                     end else begin
-                        Datum.Add('eligible_amount', SalaryAmount);
+                        Datum.Add('eligible_amount', 0);
                     end;
-
                 end;
-
-                Datum.Add('eligibility_fail_reason', EligibilityFailReason);
-
-                //Datum.Add('loan_type_min_amount', MobileLoanProduct."Minimum Loan Amount");
 
                 if MobileLoanProduct."Requires Installments on App." then begin
                     TotalTopUp := MobileLoanProduct."Minimum Loan Amount";
@@ -5885,6 +5882,9 @@ codeunit 52186507 "Members Portal Integration"
                     end else begin
                         Datum.Add('loan_type_max_amount', 0);
                     end;
+
+
+                Datum.Add('eligibility_fail_reason', EligibilityFailReason);
 
                 ResponseObject.Add('status', 'SUCCESS');
                 ResponseObject.Add('data', Datum);
@@ -13384,6 +13384,76 @@ codeunit 52186507 "Members Portal Integration"
     local procedure AddDateTimeToResponse(var ResponseObject: JsonObject)
     begin
         ResponseObject.Add('date_time', GlobalFunctions.FormatISODateTime(CurrentDateTime));
+    end;
+
+    local procedure GuarantorSalaryEligibility(LoanTypeID: Text; SearchMember: Record Members): Decimal
+    var
+        SalAvg: decimal;
+        SalaryAmount: decimal;
+        SalaryAccount: record "Savings Accounts";
+        FosaAccount: Text;
+        BosaAccount: Text;
+        SalaryLines: Record "Salary Lines";
+        ProdFac: record "Product Factory";
+        STOAmount: decimal;
+        LoanRec: decimal;
+        SalaryType: Enum "Salary Income Types";
+    begin
+        SalAvg := 0;
+        SalaryAmount := 0;
+        FosaAccount := SkyMbankingTrans.GetMemberFosaAcc(SearchMember);
+
+        if ProdFac.Get(LoanTypeID) then begin
+            if ProdFac."Source Unit" = ProdFac."Source Unit"::FOSA then begin
+
+                SalaryAccount.Reset;
+                SalaryAccount.SetRange("No.", FosaAccount);
+                if SalaryAccount.FindFirst then begin
+                    SalaryType := ProdFac."Salary Income Types";
+                    SalAvg := GlobalFunctions.GetSmallestSalary(SalaryAccount."No.", SalaryType);
+                    STOAmount := SkyMbankingTrans.ComputeSTODeductions(SalaryAccount."No.");
+                    LoanRec := SkyMbankingTrans.ComputeLoanDeductions(SalaryAccount."Member No.");
+
+                    IF (SalaryAccount.Status <> SalaryAccount.Status::Active) OR (SalaryAccount.Blocked <> SalaryAccount.Blocked::" ") THEN BEGIN
+                        SalaryAmount := 0;
+                    END else begin
+                        //Get last salary amount
+                        SalaryLines.RESET;
+                        SalaryLines.SETRANGE("Member No.", SalaryAccount."Member No.");
+                        SalaryLines.SETRANGE(Posted, TRUE);
+                        if Format(ProdFac."Salary Period") <> '' then begin
+                            SalaryLines.SETRANGE("Posting Date", CALCDATE(('-' + format(ProdFac."Salary Period")), TODAY), TODAY);
+                        end;
+                        SalaryLines.SetLoadFields(Amount);
+                        IF SalaryLines.FINDLAST THEN BEGIN
+                            SalaryAmount := SalaryLines.Amount - (STOAmount + LoanRec);
+                        END;
+                        SalAvg := SalAvg - (STOAmount + LoanRec);
+                        IF SalaryAmount > SalAvg THEN
+                            SalaryAmount := SalAvg;
+                    end;
+                end;
+
+            end;
+
+            if ProdFac."Source Unit" = ProdFac."Source Unit"::BOSA then begin
+
+                BosaAccount := SkyMbankingTrans.GetMemberDepositsAcc(SearchMember);
+
+                SalaryAccount.Reset;
+                SalaryAccount.SetRange("No.", BosaAccount);
+                if SalaryAccount.FindFirst then begin
+                    SalaryAmount := GlobalFunctions.GetSavingsAccountAvailableGuarantorshipBalance(SalaryAccount, true)
+                end;
+
+            end;
+        end;
+
+
+        if SalaryAmount < 0 then begin
+            exit(0);
+        end;
+        exit(SalaryAmount);
     end;
 
     var

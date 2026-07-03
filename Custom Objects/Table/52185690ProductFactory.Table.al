@@ -1071,11 +1071,6 @@ table 52185690 "Product Factory"
             Caption = 'Use Salary Average';
             DataClassification = CustomerContent;
         }
-        field(10044; "Allow Loan Top-Up"; Boolean)
-        {
-            Caption = 'Allow Loan Top-Up';
-            DataClassification = CustomerContent;
-        }
         field(10045; "Over The Counter Transaction"; Boolean)
         {
             Caption = 'Over The Counter Transaction';
