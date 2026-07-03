@@ -72,7 +72,18 @@ page 52185528 "HR Job Applications List"
 
     actions
     {
-
+        area(Processing)
+        {
+            action("Import Job Applications")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Import Job Applications';
+                Image = Import;
+                Promoted = true;
+                PromotedCategory = Process;
+                RunObject = XMLport "Job Application";
+            }
+        }
         area(Navigation)
         {
             group(Email)

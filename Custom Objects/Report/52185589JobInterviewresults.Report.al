@@ -65,6 +65,18 @@ Report 52185589 "Job Interview results"
             column(FullName_HRShortlistedApplicants; "HR Shortlisted Applicants"."Full Name")
             {
             }
+            column(CompanyInformation_Name; CompInfo.Name)
+            {
+            }
+            column(CompanyAddress; CompanyAddress)
+            {
+            }
+            column(CompanyTelephone; CompanyTelephone)
+            {
+            }
+            column(CommunicationOnline; CommunicationOnline)
+            {
+            }
         }
     }
 
@@ -89,9 +101,15 @@ Report 52185589 "Job Interview results"
     begin
         CompInfo.Reset;
         CompInfo.Get;
-        CompInfo.CalcFields(CompInfo.Picture)
+        CompInfo.CalcFields(CompInfo.Picture);
+        CompanyAddress := CompInfo.Address + ' -Post Code: ' + CompInfo."Post Code" + ' -City:' + CompInfo.City + ' Region: ' + CompInfo."Country/Region Code";
+        CompanyTelephone := 'Tel: ' + CompInfo."Phone No." + ' -Office Tel: ' + CompInfo."Phone No. 2";
+        CommunicationOnline := 'E-mail: ' + CompInfo."E-Mail" + '- Website: ' + CompInfo."Home Page";
     end;
 
     var
         CompInfo: Record "Company Information";
+        CompanyAddress: Text;
+        CompanyTelephone: Text;
+        CommunicationOnline: Text;
 }

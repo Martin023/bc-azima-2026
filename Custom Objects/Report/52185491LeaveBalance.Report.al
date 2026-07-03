@@ -8,7 +8,7 @@ Report 52185491 "Leave Balance"
     {
         dataitem("HR EMPLOYEES"; "HR EMPLOYEES")
         {
-            RequestFilterFields = "No.";
+            RequestFilterFields = "No.", "Department Code", "Responsibility Center";
             CalcFields = "Allocated Leave Days", "Total Leave Taken";
             column(ReportForNavId_1; 1)
             {
@@ -58,12 +58,33 @@ Report 52185491 "Leave Balance"
             }
             column(TotalTaken; TotalTaken) { }
             column(TotalReimbursed; TotalReimbursed) { }
+            column(PFNo_HREmployees; "HR Employees"."PF No.")
+            {
+            }
+            column(DepartmentCode_HREmployees; "HR Employees"."Department Code")
+            {
+            }
+            column(ResponsibilityCenter_HREmployees; "HR Employees"."Responsibility Center")
+            {
+            }
+            column(DepartmentName; DepartmentName)
+            {
+            }
+            column(DaysUtilized; DaysUtilized)
+            {
+            }
+            column(DaysAvailable; DaysAvailable)
+            {
+            }
             trigger OnAfterGetRecord()
             begin
                 LeaveBal := 0;
                 TotalAllocated := 0;
                 TotalTaken := 0;
                 TotalReimbursed := 0;
+                DaysUtilized := 0;
+                DaysAvailable := 0;
+                DepartmentName := '';
 
                 LeaveLedger.Reset();
                 LeaveLedger.SetRange("Staff No.", "No.");
@@ -86,6 +107,11 @@ Report 52185491 "Leave Balance"
                 end;
                 TotalTaken *= -1;
                 LeaveBal := (totalAllocated + TotalReimbursed) - TotalTaken;
+                DaysUtilized := TotalTaken;
+                DaysAvailable := LeaveBal;
+
+                if ResponsibilityCenterRec.Get("Responsibility Center") then
+                    DepartmentName := ResponsibilityCenterRec.Name;
             end;
 
             trigger OnPreDataItem()
@@ -152,4 +178,8 @@ Report 52185491 "Leave Balance"
         TotalAllocated: Integer;
         TotalReimbursed: Integer;
         LeaveTypeEnum: enum "Leave Type Enum";
+        DepartmentName: Text[100];
+        DaysUtilized: Decimal;
+        DaysAvailable: Decimal;
+        ResponsibilityCenterRec: Record "Responsibility CenterBR";
 }
