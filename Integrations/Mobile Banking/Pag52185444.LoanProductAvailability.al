@@ -1,5 +1,3 @@
-namespace BCAZIMA.BCAZIMA;
-
 page 52185445 "Loan Product Availability"
 {
     PageType = List;
@@ -44,18 +42,32 @@ page 52185445 "Loan Product Availability"
             }
         }
     }
-    trigger OnNewRecord(BelowxRec: Boolean)
+    trigger OnOpenPage()
     begin
-        Rec."Loan Product Code" := Rec.GetRangeMin("Loan Product Code");
+        CheckPageEditable();
     end;
 
-    trigger OnAfterGetRecord()
-    var
-        TheProduct: Record "Product Factory";
-        IsEditable: Boolean;
+    trigger OnAfterGetCurrRecord()
     begin
-        TheProduct.SetRange("Product ID", Rec."Loan Product Code");
-        if TheProduct.FindFirst() then
-            IsEditable := TheProduct.Status <> TheProduct.Status::Active;
+        CheckPageEditable();
+    end;
+
+    trigger OnNewRecord(BelowxRec: Boolean)
+    begin
+        if Rec.GetFilter("Loan Product Code") <> '' then
+            Rec.Validate("Loan Product Code", Rec.GetRangeMin("Loan Product Code"));
+    end;
+
+    local procedure CheckPageEditable()
+    var
+        ProductFactory: Record "Product Factory";
+    begin
+        if Rec.GetFilter("Loan Product Code") <> '' then begin
+            if ProductFactory.Get(Rec.GetRangeMin("Loan Product Code")) then
+                CurrPage.Editable(ProductFactory.Status = ProductFactory.Status::Open)
+            else
+                CurrPage.Editable(true);
+        end else
+            CurrPage.Editable(true);
     end;
 }

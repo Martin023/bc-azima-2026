@@ -254,6 +254,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 Datum.Add('branch', SearchMember."Branch Code");
             end;
 
+            Datum.Add('member_class', SearchMember."Member Class");
             Datum.Add('main_savings_account_no', SkyMbankingTrans.GetMemberFosaAcc(SearchMember));
             Datum.Add('main_deposits_account_no', SkyMbankingTrans.GetMemberDepositsAcc(SearchMember));
 
@@ -2606,11 +2607,14 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
         SearchMember: Record Members;
         MobileLoanProducts: Record "Product Factory";
+        ProductSupportedClasses: Record "Product Supported Classes";
 
         ResponseObject: JsonObject;
         Data: JsonArray;
         Datum: JsonObject;
         Response: Text;
+
+        EligibleClass: JsonArray;
     begin
         Payload.Get('identifier_type', identifier_type); // MSISDN, CUSTOMER_NO
         Payload.Get('identifier', identifier);
@@ -2647,6 +2651,22 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
             IF MobileLoanProducts.FindSet then begin
                 repeat begin
+                    Clear(EligibleClass);
+
+                    ProductSupportedClasses.Reset();
+                    ProductSupportedClasses.SetRange(
+                        "Product ID",
+                        MobileLoanProducts."Product ID"
+                    );
+
+                    if ProductSupportedClasses.FindSet() then begin
+                        repeat
+                            EligibleClass.Add(
+                                Format(ProductSupportedClasses."Class Category")
+                            );
+                        until ProductSupportedClasses.Next() = 0;
+                    end;
+
                     Datum.Add('loan_type_id', MobileLoanProducts."Product ID");
                     Datum.Add('loan_type_name', MobileLoanProducts."Product Description");
                     Datum.Add('loan_type_min_amount', MobileLoanProducts."Minimum Loan Amount");
@@ -2662,6 +2682,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
                     Datum.Add('loan_type_max_installments', MobileLoanProducts."Ordinary Default Intallments");
                     Datum.Add('requires_installments', MobileLoanProducts."Requires Installments on App.");
+                    Datum.Add('eligible_member_class', EligibleClass);
 
                     Data.Add(Datum);
 
@@ -2755,6 +2776,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         ProductSupportedClasses: Record "Product Supported Classes";
         MemberClass: Record "Member Classes";
         BlockedEmployers: Record "Blocked Employers";
+        MblLoanException: Record "Mobile Loan Exceptions";
         IsFosaMLoanProduct: Boolean;
         TopUpLoan: Record Loans;
         TotalTopUp: Decimal;
@@ -2804,7 +2826,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 ProductSupportedClasses.SetRange("Class Category", SearchMember."Member Class");
                 if ProductSupportedClasses.IsEmpty() then begin
                     ResponseObject.Add('request_status', 'ERROR');
-                    Datum.Add('error_message', StrSubstNo('This loan product is not available for %1 members.', SearchMember."Member Class"));
+                    Datum.Add('error_message', StrSubstNo('This loan product is not available to %1 members.', SearchMember."Member Class"));
                     ResponseObject.Add('response_payload', Datum);
                     AddDateTimeToResponse(ResponseObject);
                     ResponseObject.WriteTo(Response);
@@ -2816,12 +2838,17 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 BlockedEmployers.SetRange("Product ID", MobileLoanProduct."Product ID");
                 BlockedEmployers.SetRange("Employer Code", SearchMember."Employer Code");
                 if not BlockedEmployers.IsEmpty() then begin
-                    ResponseObject.Add('request_status', 'ERROR');
-                    Datum.Add('error_message', 'Loan product with ID = ' + loan_type_id.AsValue.AsText + ' is NOT available to ' + SearchMember."Employer Name" + ' Employees');
-                    ResponseObject.Add('response_payload', Datum);
-                    AddDateTimeToResponse(ResponseObject);
-                    ResponseObject.WriteTo(Response);
-                    exit(Response);
+                    MblLoanException.Reset();
+                    MblLoanException.SetRange("Member No.", SearchMember."No.");
+                    MblLoanException.SetRange("Product ID", MobileLoanProduct."Product ID");
+                    if MblLoanException.IsEmpty() then begin
+                        ResponseObject.Add('request_status', 'ERROR');
+                        Datum.Add('error_message', 'This loan product is not available to members of your employer.');
+                        ResponseObject.Add('response_payload', Datum);
+                        AddDateTimeToResponse(ResponseObject);
+                        ResponseObject.WriteTo(Response);
+                        exit(Response);
+                    end;
                 end;
 
                 Datum.Add('loan_type_id', MobileLoanProduct."Product ID");
@@ -2991,7 +3018,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 ProductSupportedClasses.SetRange("Class Category", SearchMember."Member Class");
                 if ProductSupportedClasses.IsEmpty() then begin
                     ResponseObject.Add('request_status', 'ERROR');
-                    Datum.Add('error_message', StrSubstNo('This loan product is not available for %1 members.', SearchMember."Member Class"));
+                    Datum.Add('error_message', StrSubstNo('This loan product is not available to %1 members.', SearchMember."Member Class"));
                     ResponseObject.Add('response_payload', Datum);
                     AddDateTimeToResponse(ResponseObject);
                     ResponseObject.WriteTo(Response);
