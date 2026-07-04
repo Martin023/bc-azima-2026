@@ -575,7 +575,7 @@ codeunit 52186507 "Members Portal Integration"
             end else begin
                 Datum.Add('branch', SearchMember."Branch Code");
             end;
-
+            Datum.Add('member_class', SearchMember."Member Class");
             Datum.Add('main_savings_account_no', SkyMbankingTrans.GetMemberFosaAcc(SearchMember));
             Datum.Add('main_deposits_account_no', SkyMbankingTrans.GetMemberDepositsAcc(SearchMember));
 
@@ -2479,7 +2479,7 @@ codeunit 52186507 "Members Portal Integration"
         IF MemberExists(identifier_type.AsValue.AsText, identifier.AsValue.AsText, SearchMember, ResponseText, ResponseDescription) then begin
             ProductFactory.SetRange(Status, ProductFactory.Status::Active);
             ProductFactory.SetRange("Product Class Type", ProductFactory."Product Class Type"::Loan);
-            // ProductFactory.SetRange("Nature of Loan Type", ProductFactory."Nature of Loan Type"::Normal);
+            ProductFactory.SetRange("Nature of Loan Type", ProductFactory."Nature of Loan Type"::Normal);
             // ProductFactory.SetRange("Is CRM Product", true);
 
             if SearchMember."Employer Code" = 'RETIREE' then begin
@@ -5794,6 +5794,9 @@ codeunit 52186507 "Members Portal Integration"
 
         SearchMember: Record Members;
         MobileLoanProduct: Record "Product Factory";
+        ProductSupportedClasses: Record "Product Supported Classes";
+        BlockedEmployers: Record "Blocked Employers";
+        MblLoanException: Record "Mobile Loan Exceptions";
         IsFosaMLoanProduct: Boolean;
         TopUpLoan: Record Loans;
         TotalTopUp: Decimal;
@@ -5823,6 +5826,36 @@ codeunit 52186507 "Members Portal Integration"
             );
 
             if MobileLoanProduct.FindFirst then begin
+
+                ProductSupportedClasses.Reset();
+                ProductSupportedClasses.SetRange("Product ID", MobileLoanProduct."Product ID");
+                ProductSupportedClasses.SetRange("Class Category", SearchMember."Member Class");
+                if ProductSupportedClasses.IsEmpty() then begin
+                    ResponseObject.Add('request_status', 'ERROR');
+                    Datum.Add('error_message', StrSubstNo('This loan product is not available to %1 members.', SearchMember."Member Class"));
+                    ResponseObject.Add('response_payload', Datum);
+                    AddDateTimeToResponse(ResponseObject);
+                    ResponseObject.WriteTo(Response);
+                    exit(Response);
+                end;
+
+                BlockedEmployers.Reset();
+                BlockedEmployers.SetRange("Product ID", MobileLoanProduct."Product ID");
+                BlockedEmployers.SetRange("Employer Code", SearchMember."Employer Code");
+                if not BlockedEmployers.IsEmpty() then begin
+                    MblLoanException.Reset();
+                    MblLoanException.SetRange("Member No.", SearchMember."No.");
+                    MblLoanException.SetRange("Product ID", MobileLoanProduct."Product ID");
+                    if MblLoanException.IsEmpty() then begin
+                        ResponseObject.Add('request_status', 'ERROR');
+                        Datum.Add('error_message', 'This loan product is not available to members of your employer.');
+                        ResponseObject.Add('response_payload', Datum);
+                        AddDateTimeToResponse(ResponseObject);
+                        ResponseObject.WriteTo(Response);
+                        exit(Response);
+                    end;
+                end;
+
                 Datum.Add('loan_type_id', MobileLoanProduct."Product ID");
                 Datum.Add('loan_name', MobileLoanProduct."Product Description");
 
@@ -5913,6 +5946,8 @@ codeunit 52186507 "Members Portal Integration"
         SearchMember: Record Members;
         MemberRec: Record Members;
         ProductFactory: Record "Product Factory";
+        ProductSupportedClasses: Record "Product Supported Classes";
+
 
         ResponseObject: JsonObject;
         Data: JsonArray;
@@ -5920,6 +5955,7 @@ codeunit 52186507 "Members Portal Integration"
         Response: Text;
         ResponseText: Text;
         ResponseDescription: Text;
+        EligibleClass: JsonArray;
     begin
         Payload.Get('identifier_type', identifier_type); // MSISDN, MEMBER_NO, EMAIL, ID_NO, PAYROLL_NO
         Payload.Get('identifier', identifier);
@@ -5945,6 +5981,22 @@ codeunit 52186507 "Members Portal Integration"
 
             if ProductFactory.FindSet then begin
                 repeat begin
+                    Clear(EligibleClass);
+
+                    ProductSupportedClasses.Reset();
+                    ProductSupportedClasses.SetRange(
+                        "Product ID",
+                        ProductFactory."Product ID"
+                    );
+
+                    if ProductSupportedClasses.FindSet() then begin
+                        repeat
+                            EligibleClass.Add(
+                                Format(ProductSupportedClasses."Class Category")
+                            );
+                        until ProductSupportedClasses.Next() = 0;
+                    end;
+
                     Clear(Datum);
 
                     Datum.Add('loan_code', ProductFactory."Product ID");
@@ -5964,6 +6016,7 @@ codeunit 52186507 "Members Portal Integration"
                     Datum.Add('source', ProductFactory."Source of Funds");
                     Datum.Add('source_unit', Format(ProductFactory."Source Unit"));
                     Datum.Add('requires_installments', ProductFactory."Requires Installments on App.");
+                    Datum.Add('eligible_member_class', EligibleClass);
 
                     Data.Add(Datum);
                 end until ProductFactory.Next = 0;

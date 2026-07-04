@@ -31,9 +31,43 @@ table 52185474 "Product Supported Classes"
             trigger OnValidate()
             var
                 myInt: Integer;
+                ExistingClass: Record "Product Supported Classes";
             begin
-                if "Class Category" = '' then Error(FieldEmptyError);
+                if "Class Category" = '' then begin
+                    Error(FieldEmptyError);
+                end;
+
+                ExistingClass.SetRange("Product ID", Rec."Product ID");
+                ExistingClass.SetRange("Class Category", Rec."Class Category");
+                ExistingClass.SetFilter("Line No.", '<>%1', Rec."Line No.");
+                if not ExistingClass.IsEmpty() then begin
+                    Error('Class category %1 has already been added.', Rec."Class Category");
+                end;
             end;
+        }
+        field(4; "Created By"; Code[50])
+        {
+            Caption = 'Created By';
+            DataClassification = CustomerContent;
+            Editable = false;
+        }
+        field(5; "Created On"; DateTime)
+        {
+            Caption = 'Created On';
+            DataClassification = CustomerContent;
+            Editable = false;
+        }
+        field(6; "Modified By"; Code[50])
+        {
+            Caption = 'Modified By';
+            DataClassification = CustomerContent;
+            Editable = false;
+        }
+        field(7; "Modified On"; DateTime)
+        {
+            Caption = 'Modified On';
+            DataClassification = CustomerContent;
+            Editable = false;
         }
     }
     keys
@@ -43,6 +77,37 @@ table 52185474 "Product Supported Classes"
             Clustered = true;
         }
     }
+    trigger OnInsert()
+    begin
+        Rec."Created By" := UserId;
+        Rec."Created On" := CurrentDateTime();
+        Rec."Modified By" := UserId;
+        Rec."Modified On" := CurrentDateTime();
+        CheckIfProductIsOpen();
+    end;
+
+    trigger OnModify()
+    begin
+        Rec."Modified By" := UserId;
+        Rec."Modified On" := CurrentDateTime();
+        CheckIfProductIsOpen();
+    end;
+
+    trigger OnDelete()
+    begin
+        CheckIfProductIsOpen();
+    end;
+
+    local procedure CheckIfProductIsOpen()
     var
-        FieldEmptyError: Label 'This field can''t be empty';
+        ProductFactory: Record "Product Factory";
+    begin
+        if ProductFactory.Get(Rec."Product ID") then begin
+            if ProductFactory.Status <> ProductFactory.Status::Open then
+                Error('Changes are not allowed because Product %1 status is %2 (Must be Open).', Rec."Product ID", ProductFactory.Status);
+        end;
+    end;
+
+    var
+        FieldEmptyError: Label 'This field can not be empty';
 }

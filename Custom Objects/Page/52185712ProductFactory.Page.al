@@ -1277,6 +1277,17 @@ page 52185712 "Product Factory"
                     RunObject = Page "Loan Product Availability";
                     RunPageLink = "Loan Product Code" = FIELD("Product ID");
                 }
+                // "Mobile Loan Exceptions"
+                action("Mobile Loan Exceptions")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Image = SetupPayment;
+                    Enabled = CreditProductVisible;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    RunObject = Page "Mobile Loan Exceptions";
+                    RunPageLink = "Product ID" = FIELD("Product ID");
+                }
             }
         }
 
