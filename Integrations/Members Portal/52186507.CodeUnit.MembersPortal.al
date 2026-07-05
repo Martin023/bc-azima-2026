@@ -2506,7 +2506,7 @@ codeunit 52186507 "Members Portal Integration"
                     Datum.Add('maximum_installments', ProductFactory."Ordinary Default Intallments");
                     Datum.Add('is_mobile_loan', ProductFactory."Mobile Loan");
                     Datum.Add('repayment_mode', Format(ProductFactory."Repay Mode"));
-                    Datum.Add('requires_installments', ProductFactory."Requires Installments on App.");
+                    Datum.Add('requires_topup', ProductFactory."Allow Topup");
 
                     Data.Add(Datum);
                 until ProductFactory.Next = 0;
@@ -2581,7 +2581,7 @@ codeunit 52186507 "Members Portal Integration"
                 Datum.Add('repayment_mode', Format(ProductFactory."Repay Mode"));
                 Datum.Add('minimum_guarantors', ProductFactory."Minimum Guarantors");
                 Datum.Add('maximum_guarantors', ProductFactory."Maximum Guarantors");
-                Datum.Add('requires_installments', ProductFactory."Requires Installments on App.");
+                Datum.Add('requires_installments', ProductFactory."Allow Topup");
 
                 Data.Add(Datum);
                 ResponseObject.Add('data', Data);
@@ -5797,7 +5797,7 @@ codeunit 52186507 "Members Portal Integration"
         ProductSupportedClasses: Record "Product Supported Classes";
         BlockedEmployers: Record "Blocked Employers";
         MblLoanException: Record "Mobile Loan Exceptions";
-        IsFosaMLoanProduct: Boolean;
+        // IsFosaMLoanProduct: Boolean;
         TopUpLoan: Record Loans;
         TotalTopUp: Decimal;
 
@@ -5815,14 +5815,14 @@ codeunit 52186507 "Members Portal Integration"
         Payload.Get('identifier_type', identifier_type); // MSISDN, MEMBER_NO, EMAIL, ID_NO, PAYROLL_NO
         Payload.Get('identifier', identifier);
         Payload.Get('loan_type_id', loan_type_id);
-        IsFosaMLoanProduct := Payload.Get('installments', installments);
+        // IsFosaMLoanProduct := Payload.Get('installments', installments);
 
         IF MemberExists(identifier_type.AsValue.AsText, identifier.AsValue.AsText, SearchMember, ResponseText, ResponseDescription) then begin
             MobileLoanProduct.Reset;
             MobileLoanProduct.SetRange("Product ID", loan_type_id.AsValue.AsText);
 
             MobileLoanProduct.SetLoadFields(
-                "Product ID", "Product Description", "Minimum Loan Amount", "Mobile Max. Loan Amount", "Maximum Loan Amount", "Mobile Loan", "FosaLoan Multiplier", "Requires Installments on App."
+                "Product ID", "Product Description", "Minimum Loan Amount", "Mobile Max. Loan Amount", "Maximum Loan Amount", "Mobile Loan", "FosaLoan Multiplier", "Allow Topup"
             );
 
             if MobileLoanProduct.FindFirst then begin
@@ -5860,12 +5860,12 @@ codeunit 52186507 "Members Portal Integration"
                 Datum.Add('loan_name', MobileLoanProduct."Product Description");
 
                 if MobileLoanProduct."Mobile Loan" then begin
-                    if MobileLoanProduct."Requires Installments on App." then begin
-                        if IsFosaMLoanProduct then begin
-                            Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount2(SearchMember."No.", MobileLoanProduct."Product ID", installments.AsValue.AsInteger));
-                        end else begin
-                            Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason));
-                        end;
+                    if MobileLoanProduct."Allow Topup" then begin
+                        // if IsFosaMLoanProduct then begin
+                        Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount2(SearchMember."No.", MobileLoanProduct."Product ID"/*, installments.AsValue.AsInteger*/, EligibilityFailReason));
+                        // end else begin
+                        //     Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason));
+                        // end;
                     end else begin
                         Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason));
                     end;
@@ -5878,7 +5878,7 @@ codeunit 52186507 "Members Portal Integration"
                     end;
                 end;
 
-                if MobileLoanProduct."Requires Installments on App." then begin
+                if MobileLoanProduct."Allow Topup" then begin
                     TotalTopUp := MobileLoanProduct."Minimum Loan Amount";
 
                     TopUpLoan.Reset;
@@ -6015,7 +6015,7 @@ codeunit 52186507 "Members Portal Integration"
                     Datum.Add('repayment_mode', Format(ProductFactory."Repay Mode"));
                     Datum.Add('source', ProductFactory."Source of Funds");
                     Datum.Add('source_unit', Format(ProductFactory."Source Unit"));
-                    Datum.Add('requires_installments', ProductFactory."Requires Installments on App.");
+                    Datum.Add('requires_installments', ProductFactory."Allow Topup");
                     Datum.Add('eligible_member_class', EligibleClass);
 
                     Data.Add(Datum);
@@ -6575,16 +6575,16 @@ codeunit 52186507 "Members Portal Integration"
 
             MobileLoanProduct.SetLoadFields(
                 "Product ID", "Mobile Max. Loan Amount", "Minimum Loan Amount",
-                "Requires Installments on App."
+                "Allow Topup"
             );
 
             if MobileLoanProduct.FindFirst then begin
                 // Check loan Limit
-                if MobileLoanProduct."Requires Installments on App." then begin
-                    if MobileLoanProduct."Requires Installments on App." then begin
-                        if SkyMbankingTrans.GetLoansQualifyAmount2(SearchMember."No.", MobileLoanProduct."Product ID", installments.AsValue.AsInteger) < requested_amount.AsValue.AsDecimal then begin
+                if MobileLoanProduct."Allow Topup" then begin
+                    if MobileLoanProduct."Allow Topup" then begin
+                        if SkyMbankingTrans.GetLoansQualifyAmount2(SearchMember."No.", MobileLoanProduct."Product ID"/*, installments.AsValue.AsInteger*/, EligibilityFailReason) < requested_amount.AsValue.AsDecimal then begin
                             ResponseObject.Add('status', 'ERROR');
-                            Datum.Add('error_message', 'Loan amount exceeds the maximum limit allowed for the member of ' + Format(SkyMbankingTrans.GetLoansQualifyAmount2(SearchMember."No.", MobileLoanProduct."Product ID", installments.AsValue.AsInteger)));
+                            Datum.Add('error_message', 'Loan amount exceeds the maximum limit allowed for the member of ' + Format(SkyMbankingTrans.GetLoansQualifyAmount2(SearchMember."No.", MobileLoanProduct."Product ID"/*, installments.AsValue.AsInteger*/, EligibilityFailReason)));
                             ResponseObject.Add('data', Datum);
 
                             AddDateTimeToResponse(ResponseObject);
@@ -6663,7 +6663,7 @@ codeunit 52186507 "Members Portal Integration"
                         exit(Response);
                     end;
                     // if Conditions are met then create loan application
-                    if MobileLoanProduct."Requires Installments on App." then begin
+                    if MobileLoanProduct."Allow Topup" then begin
                         if SkyMbankingTrans.BufferLoanApplication2(
                         SearchMember."No.", MobileLoanProduct."Product ID",
                         requested_amount.AsValue.AsDecimal,
@@ -12334,7 +12334,7 @@ codeunit 52186507 "Members Portal Integration"
                         Datum.Add('interest_calculation_method', Format(ProductFactory."Interest Calculation Method"));
                         Datum.Add('is_mobile_loan', ProductFactory."Mobile Loan");
                         Datum.Add('repayment_mode', Format(ProductFactory."Repay Mode"));
-                        Datum.Add('requires_installments', ProductFactory."Requires Installments on App.");
+                        Datum.Add('requires_topup', ProductFactory."Allow Topup");
 
                         Data.Add(Datum);
                     end until ProductFactory.Next = 0;

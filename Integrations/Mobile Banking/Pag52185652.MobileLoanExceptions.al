@@ -3,7 +3,8 @@ page 52185652 "Mobile Loan Exceptions"
     Caption = 'Mobile Loan Exceptions';
     PageType = List;
     SourceTable = "Mobile Loan Exceptions";
-    applicationArea = All;
+    ApplicationArea = All;
+    deleteallowed = false;
 
     layout
     {
@@ -14,61 +15,77 @@ page 52185652 "Mobile Loan Exceptions"
                 field("Member No."; Rec."Member No.")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Member No. field.', Comment = '%';
+                    ToolTip = 'Member identification number';
                 }
                 field("Member Name"; Rec."Member Name")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Member Name field.', Comment = '%';
+                    ToolTip = 'Name of the member';
                 }
                 field(Employer; Rec.Employer)
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Employer field.', Comment = '%';
+                    ToolTip = 'Employer code';
                 }
                 field("Employer Name"; Rec."Employer Name")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Employer Name field.', Comment = '%';
+                    ToolTip = 'Employer name';
                 }
                 field("Product ID"; Rec."Product ID")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Loan Product field.', Comment = '%';
+                    ToolTip = 'Loan product identifier';
                 }
                 field("Product Name"; Rec."Product Name")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Loan Product Name field.', Comment = '%';
+                    ToolTip = 'Loan product name';
                 }
-                field(Remarks; Rec.Remarks)
+                field(Status; Rec.Status)
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Remarks field.', Comment = '%';
+                    ToolTip = 'Active or Inactive status of the exception';
                 }
+                // field(Remarks; Rec.Remarks)
+                // {
+                //     ApplicationArea = All;
+                //     ToolTip = 'Notes about this exception';
+                // }
                 field("Created By"; Rec."Created By")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Created By field.', Comment = '%';
+                    ToolTip = 'User who created this record';
                 }
                 field("Created On"; Rec."Created On")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Created On field.', Comment = '%';
+                    ToolTip = 'Date and time record was created';
                 }
                 field("Modified By"; Rec."Modified By")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Modified By field.', Comment = '%';
+                    ToolTip = 'User who last modified this record';
                 }
                 field("Modified On"; Rec."Modified On")
                 {
                     ApplicationArea = All;
-                    ToolTip = 'Specifies the value of the Modified On field.', Comment = '%';
+                    ToolTip = 'Date and time record was last modified';
+                }
+                field("Disabled By"; Rec."Disabled By")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'User who disabled this exception';
+                }
+                field("Disabled On"; Rec."Disabled On")
+                {
+                    ApplicationArea = All;
+                    ToolTip = 'Date and time exception was disabled';
                 }
             }
         }
     }
+
     trigger OnOpenPage()
     begin
         CheckPageEditable();

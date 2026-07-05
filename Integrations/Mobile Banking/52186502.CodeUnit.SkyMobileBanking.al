@@ -2634,7 +2634,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
             MobileLoanProducts.SetLoadFields(
                "Product ID", "Product Description", "Minimum Loan Amount", "Mobile Max. Loan Amount", "Maximum Loan Amount",
-               "Ordinary Default Intallments", "Requires Installments on App."
+               "Ordinary Default Intallments", "Allow Topup"
            );
 
             if SearchMember."Employer Code" = 'RETIREE' then begin
@@ -2681,7 +2681,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                         end;
 
                     Datum.Add('loan_type_max_installments', MobileLoanProducts."Ordinary Default Intallments");
-                    Datum.Add('requires_installments', MobileLoanProducts."Requires Installments on App.");
+                    Datum.Add('requires_installments', MobileLoanProducts."Allow Topup");
                     Datum.Add('eligible_member_class', EligibleClass);
 
                     Data.Add(Datum);
@@ -2777,11 +2777,11 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         MemberClass: Record "Member Classes";
         BlockedEmployers: Record "Blocked Employers";
         MblLoanException: Record "Mobile Loan Exceptions";
-        IsFosaMLoanProduct: Boolean;
+        // IsFosaMLoanProduct: Boolean;
         TopUpLoan: Record Loans;
         TotalTopUp: Decimal;
         ExistingLoanAmount: Decimal;
-        installments: JsonToken;
+        // installments: JsonToken;
 
         ResponseObject: JsonObject;
         MemberDetails: JsonObject;
@@ -2790,12 +2790,13 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
         SalaryAmount: Decimal;
         EligibilityFailReason: Text;
+        EligibleAmount: Decimal;
     begin
         Payload.Get('originator_id', originator_id);
         Payload.Get('identifier_type', identifier_type); // MSISDN, CUSTOMER_NO
         Payload.Get('identifier', identifier);
         Payload.Get('loan_type_id', loan_type_id);
-        IsFosaMLoanProduct := Payload.Get('installments', installments);
+        // IsFosaMLoanProduct := Payload.Get('installments', installments);
 
         GetMemberRecordV2(
             SearchMember,
@@ -2803,6 +2804,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
             identifier.AsValue.AsText,
             ''
         );
+        EligibleAmount := 0;
 
         IF SearchMember.FindFirst then begin
             // memberclass filter
@@ -2841,6 +2843,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                     MblLoanException.Reset();
                     MblLoanException.SetRange("Member No.", SearchMember."No.");
                     MblLoanException.SetRange("Product ID", MobileLoanProduct."Product ID");
+                    MblLoanException.SetRange("Status", MblLoanException.Status::Active);
                     if MblLoanException.IsEmpty() then begin
                         ResponseObject.Add('request_status', 'ERROR');
                         Datum.Add('error_message', 'This loan product is not available to members of your employer.');
@@ -2857,28 +2860,30 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 if MobileLoanProduct."Mobile Loan" then begin
 
                     // Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason));
-                    if MobileLoanProduct."Requires Installments on App." then begin
-                        if IsFosaMLoanProduct then begin
-                            if installments.AsValue.AsInteger <= 0 then begin
-                                ResponseObject.Add('request_status', 'ERROR');
-                                Datum.Add('error_message', 'Installments MUST be greater than 0!');
-                                ResponseObject.Add('response_payload', Datum);
+                    if MobileLoanProduct."Allow Topup" then begin
+                        // if IsFosaMLoanProduct then begin
+                        // if installments.AsValue.AsInteger <= 0 then begin
+                        //     ResponseObject.Add('request_status', 'ERROR');
+                        //     Datum.Add('error_message', 'Installments MUST be greater than 0!');
+                        //     ResponseObject.Add('response_payload', Datum);
 
-                                AddDateTimeToResponse(ResponseObject);
+                        //     AddDateTimeToResponse(ResponseObject);
 
-                                ResponseObject.WriteTo(Response);
-                                exit(Response);
-                            end;
-                            Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount2(SearchMember."No.", MobileLoanProduct."Product ID", installments.AsValue.AsInteger));
-                            ExistingLoanAmount := GlobalFunctions.GetMemberLoanProductTotalBalance(
-                                SearchMember."No.",
-                                MobileLoanProduct."Product ID"
-                            );
-                            Datum.Add('existing_loan_amount', ExistingLoanAmount);
-                        end else begin
-                            Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason));
-                            Datum.Add('existing_loan_amount', ExistingLoanAmount);
-                        end;
+                        //     ResponseObject.WriteTo(Response);
+                        //     exit(Response);
+                        // end;
+                        EligibleAmount := SkyMbankingTrans.GetLoansQualifyAmount2(SearchMember."No.", MobileLoanProduct."Product ID" /*, installments.AsValue.AsInteger*/, EligibilityFailReason);
+
+                        Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount2(SearchMember."No.", MobileLoanProduct."Product ID" /*, installments.AsValue.AsInteger*/, EligibilityFailReason));
+                        ExistingLoanAmount := GlobalFunctions.GetMemberLoanProductTotalBalance(
+                            SearchMember."No.",
+                            MobileLoanProduct."Product ID"
+                        );
+                        Datum.Add('existing_loan_amount', ExistingLoanAmount);
+                        // end else begin
+                        //     Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason));
+                        //     Datum.Add('existing_loan_amount', ExistingLoanAmount);
+                        // end;
                     end else begin
                         Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason));
                         Datum.Add('existing_loan_amount', ExistingLoanAmount);
@@ -2935,10 +2940,10 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         request_application: JsonToken;
         transaction_date_time: JsonToken;
         mobile_loan_purpose: JsonToken;
-        installments: JsonToken;
+        // installments: JsonToken;
 
         KeyExists: Boolean;
-        IsFosaMLoanProduct: Boolean;
+        // IsFosaMLoanProduct: Boolean;
         TotalTopUp: Decimal;
         TopUpLoan: Record Loans;
 
@@ -2967,7 +2972,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         Payload.Get('request_application', request_application);
         Payload.Get('transaction_date_time', transaction_date_time);
         KeyExists := Payload.Get('mobile_loan_purpose', mobile_loan_purpose);
-        IsFosaMLoanProduct := Payload.Get('installments', installments);
+        // IsFosaMLoanProduct := Payload.Get('installments', installments);
 
         MobileLoanPurpose := '';
         TheLoanPurposes.Reset;
@@ -3038,75 +3043,40 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                     exit(Response);
                 end;
 
-                if MobileLoanProduct."Requires Installments on App." then begin
-                    // Check loan Limit
-                    if IsFosaMLoanProduct then begin
-                        if installments.AsValue.AsInteger <= 0 then begin
-                            ResponseObject.Add('request_status', 'ERROR');
-                            Datum.Add('error_message', 'Installments MUST be greater than 0!');
-                            ResponseObject.Add('response_payload', Datum);
-
-                            AddDateTimeToResponse(ResponseObject);
-
-                            ResponseObject.WriteTo(Response);
-                            exit(Response);
-                        end;
-
-                        if SkyMbankingTrans.GetLoansQualifyAmount2(SearchMember."No.", MobileLoanProduct."Product ID", installments.AsValue.AsInteger) < amount.AsValue.AsDecimal then begin
-                            ResponseObject.Add('request_status', 'ERROR');
-                            Datum.Add('error_message', 'Loan amount exceeds the maximum limit allowed for the member of ' + Format(SkyMbankingTrans.GetLoansQualifyAmount2(SearchMember."No.", MobileLoanProduct."Product ID", installments.AsValue.AsInteger)));
-                            ResponseObject.Add('response_payload', Datum);
-
-                            AddDateTimeToResponse(ResponseObject);
-
-                            ResponseObject.WriteTo(Response);
-                            exit(Response);
-                        end;
-                    end else begin
-                        if SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason) < amount.AsValue.AsDecimal then begin
-                            ResponseObject.Add('request_status', 'ERROR');
-                            Datum.Add('error_message', 'Loan amount exceeds the maximum limit allowed for the member of ' + Format(SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason)));
-                            ResponseObject.Add('response_payload', Datum);
-
-                            AddDateTimeToResponse(ResponseObject);
-
-                            ResponseObject.WriteTo(Response);
-                            exit(Response);
-                        end;
-                    end;
+                if MobileLoanProduct."Allow Topup" then begin
                     // Check Max Appliable Amount for loan
-                    if amount.AsValue.AsDecimal > MobileLoanProduct."Mobile Max. Loan Amount" then begin
-                        ResponseObject.Add('request_status', 'ERROR');
-                        Datum.Add('error_message', 'Loan amount exceeds the maximum limit allowed for the loan product of ' + Format(MobileLoanProduct."Mobile Max. Loan Amount"));
-                        ResponseObject.Add('response_payload', Datum);
+                    // if amount.AsValue.AsDecimal > MobileLoanProduct."Mobile Max. Loan Amount" then begin
+                    //     ResponseObject.Add('request_status', 'ERROR');
+                    //     Datum.Add('error_message', 'Loan amount exceeds the maximum limit allowed for the loan product of ' + Format(MobileLoanProduct."Mobile Max. Loan Amount"));
+                    //     ResponseObject.Add('response_payload', Datum);
 
-                        AddDateTimeToResponse(ResponseObject);
+                    //     AddDateTimeToResponse(ResponseObject);
 
-                        ResponseObject.WriteTo(Response);
-                        exit(Response);
-                    end;
-                    // Check Min Appliable Amount for loan
-                    if amount.AsValue.AsDecimal < MobileLoanProduct."Minimum Loan Amount" then begin
-                        ResponseObject.Add('request_status', 'ERROR');
-                        Datum.Add('error_message', 'Loan amount is less than the minimum limit allowed for the loan product of ' + Format(MobileLoanProduct."Minimum Loan Amount"));
-                        ResponseObject.Add('response_payload', Datum);
+                    //     ResponseObject.WriteTo(Response);
+                    //     exit(Response);
+                    // end;
+                    // // Check Min Appliable Amount for loan
+                    // if amount.AsValue.AsDecimal < MobileLoanProduct."Minimum Loan Amount" then begin
+                    //     ResponseObject.Add('request_status', 'ERROR');
+                    //     Datum.Add('error_message', 'Loan amount is less than the minimum limit allowed for the loan product of ' + Format(MobileLoanProduct."Minimum Loan Amount"));
+                    //     ResponseObject.Add('response_payload', Datum);
 
-                        AddDateTimeToResponse(ResponseObject);
+                    //     AddDateTimeToResponse(ResponseObject);
 
-                        ResponseObject.WriteTo(Response);
-                        exit(Response);
-                    end;
+                    //     ResponseObject.WriteTo(Response);
+                    //     exit(Response);
+                    // end;
 
                     // if Conditions are met then create loan application
-                    if MobileLoanProduct."Requires Installments on App." then begin
-                        if installments.AsValue.IsNull then begin
-                            IsFosaMLoanProduct := false;
-                        end;
-                    end else begin
-                        IsFosaMLoanProduct := false;
-                    end;
+                    // if MobileLoanProduct."Allow Topup" then begin
+                    //     // if installments.AsValue.IsNull then begin
+                    //     //     IsFosaMLoanProduct := false;
+                    //     // end;
+                    // end else begin
+                    //     IsFosaMLoanProduct := false;
+                    // end;
 
-                    if IsFosaMLoanProduct then begin
+                    if MobileLoanProduct."Allow Topup" then begin
                         // if Conditions are met then create loan application
                         if SkyMbankingTrans.BufferLoanApplication(
                             SearchMember."No.", MobileLoanProduct."Product ID",
@@ -4102,7 +4072,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                             repeat begin
                                 if MobileLoanBuffer."Loan No." = '' then begin
                                     if pfac.Get(MobileLoanBuffer."Loan Product Type") then begin
-                                        if pfac."Requires Installments on App." then begin
+                                        if pfac."Allow Topup" then begin
                                             // CreateLoanRecord2
                                             SkyMbankingTrans.CreateLoanRecord2(
                                                 MobileLoanBuffer,

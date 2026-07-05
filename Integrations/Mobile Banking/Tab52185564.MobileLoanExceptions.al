@@ -1,7 +1,8 @@
 table 52185564 "Mobile Loan Exceptions"
 {
-    Caption = 'Biashara Contractor Exceptions';
+    Caption = 'Mobile Loan Exceptions';
     DataClassification = ToBeClassified;
+
 
     fields
     {
@@ -63,28 +64,45 @@ table 52185564 "Mobile Loan Exceptions"
             FieldClass = FlowField;
             CalcFormula = lookup("Product Factory"."Product Description" where("Product ID" = field("Product ID")));
         }
-        field(7; Remarks; Text[100])
+        field(7; Status; Option)
         {
-            Caption = 'Remarks';
+            Caption = 'Status';
+            OptionMembers = Active,Inactive;
+            OptionCaption = 'Active,Inactive';
+            InitValue = Active;
         }
-        field(8; "Created By"; Code[50])
+        // field(8; Remarks; Text[100])
+        // {
+        //     Caption = 'Remarks';
+        // }
+        field(9; "Created By"; Code[50])
         {
             Caption = 'Created By';
             Editable = false;
         }
-        field(9; "Created On"; DateTime)
+        field(10; "Created On"; DateTime)
         {
             Caption = 'Created On';
             Editable = false;
         }
-        field(10; "Modified By"; Code[50])
+        field(11; "Modified By"; Code[50])
         {
             Caption = 'Modified By';
             Editable = false;
         }
-        field(11; "Modified On"; DateTime)
+        field(12; "Modified On"; DateTime)
         {
             Caption = 'Modified On';
+            Editable = false;
+        }
+        field(13; "Disabled On"; DateTime)
+        {
+            Caption = 'Disabled On';
+            Editable = false;
+        }
+        field(14; "Disabled By"; Code[50])
+        {
+            Caption = 'Disabled By';
             Editable = false;
         }
     }
@@ -109,5 +127,15 @@ table 52185564 "Mobile Loan Exceptions"
     begin
         "Modified By" := UserId;
         "Modified On" := CurrentDateTime;
+
+        if (Rec.Status <> Rec.Status::Active) and (xRec.Status = xRec.Status::Active) then begin
+            "Disabled By" := UserId;
+            "Disabled On" := CurrentDateTime;
+        end;
+    end;
+
+    trigger OnDelete()
+    begin
+        Error('Deletion is not allowed. Set the Status to Inactive to disable this exception.');
     end;
 }
