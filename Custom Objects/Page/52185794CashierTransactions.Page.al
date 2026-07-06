@@ -560,6 +560,11 @@ page 52185794 "Cashier Transactions"
 
                     Editable = false;
                 }
+                field("Approved By"; Rec."Approved By")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                }
                 field("Attempted Self Transaction"; Rec."Attempted Self Transaction")
                 {
                     ApplicationArea = Basic;

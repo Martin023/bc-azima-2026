@@ -744,6 +744,10 @@ table 52185776 "Cashier Transactions"
             Editable = false;
             Description = 'Excise Duty charged specifically on the SMS Fee';
         }
+        field(50035; "Approved By"; Code[50])
+        {
+            Editable = false;
+        }
     }
 
     keys
