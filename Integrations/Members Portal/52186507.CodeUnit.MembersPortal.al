@@ -1465,7 +1465,7 @@ codeunit 52186507 "Members Portal Integration"
 
             if SavingsAccount.FindSet then begin
                 XmlDocument.ReadFrom(
-                    '<ReportParameters name="Savings Statement III" id="' + Format(Report::"Savings Statement III") +
+                    '<ReportParameters name="Savings Statement" id="' + Format(Report::"Savings Statement") +
                     '"><Options><Field name="StartDate">' + start_date.AsValue.AsText +
                     '</Field><Field name="EndDate">' + end_date.AsValue.AsText +
                     '</Field><Field name="StatementCharge">false</Field><Field name="AccountwithLien">false</Field></Options><DataItems><DataItem name="SavingsAccounts">VERSION(1) SORTING(Field1) WHERE(Field1=1(' + Format(SavingsAccount."No.") +
@@ -1478,9 +1478,9 @@ codeunit 52186507 "Members Portal Integration"
                 BlobOutStream := TempBlob.CreateOutStream;
                 case file_type.AsValue.AsText of
                     'PDF':
-                        Report.SaveAs(Report::"Savings Statement III", ReportParameters, ReportFormat::Pdf, BlobOutStream, RecRef);
+                        Report.SaveAs(Report::"Savings Statement", ReportParameters, ReportFormat::Pdf, BlobOutStream, RecRef);
                     'XLSX':
-                        Report.SaveAs(Report::"Savings Statement III", ReportParameters, ReportFormat::Excel, BlobOutStream, RecRef);
+                        Report.SaveAs(Report::"Savings Statement", ReportParameters, ReportFormat::Excel, BlobOutStream, RecRef);
                 end;
 
                 BlobInStream := TempBlob.CreateInStream;
@@ -2210,7 +2210,7 @@ codeunit 52186507 "Members Portal Integration"
             if TheLoan.FindSet then begin
                 // TODO: Handle start-end date filter
                 XmlDocument.ReadFrom(
-                    '<ReportParameters name="Member Loan Statement III" id="' + Format(Report::"Member Loan Statement III") +
+                    '<ReportParameters name="Member Loan Statement II" id="' + Format(Report::"Member Loan Statement II") +
                     '"><DataItems><DataItem name="Members">VERSION(1) SORTING(Field1) WHERE(Field1=1(' + Format(SearchMember."No.") +
                     '))</DataItem><DataItem name="Loans">VERSION(1) SORTING(Field1) WHERE(Field1=1(' + Format(TheLoan."Loan No.") +
                     '))</DataItem><DataItem name="loan">VERSION(1) SORTING(Field1)</DataItem><DataItem name="LoansI">VERSION(1) SORTING(Field1) WHERE(Field1=1(' + Format(TheLoan."Loan No.") +
@@ -2223,9 +2223,9 @@ codeunit 52186507 "Members Portal Integration"
                 BlobOutStream := TempBlob.CreateOutStream;
                 case file_type.AsValue.AsText of
                     'PDF':
-                        Report.SaveAs(Report::"Member Loan Statement III", ReportParameters, ReportFormat::Pdf, BlobOutStream, RecRef);
+                        Report.SaveAs(Report::"Member Loan Statement II", ReportParameters, ReportFormat::Pdf, BlobOutStream, RecRef);
                     'XLSX':
-                        Report.SaveAs(Report::"Member Loan Statement III", ReportParameters, ReportFormat::Excel, BlobOutStream, RecRef);
+                        Report.SaveAs(Report::"Member Loan Statement II", ReportParameters, ReportFormat::Excel, BlobOutStream, RecRef);
                 end;
 
                 BlobInStream := TempBlob.CreateInStream;
