@@ -2348,7 +2348,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         if MobileLoanBuffer.Insert(true) then begin
             // if LoanProduct."Mobile Loan Req. Guar." then begin
 
-            //     msg := 'Dear member, To add guarantors to your ' + MobileLoanBuffer."Loan Name" + ' request of KES ' + Format(MobileLoanBuffer.Amount) + ', Please dial *882# or use our Mobile App.' +
+            //     msg := 'Dear member, To add guarantors to your ' + MobileLoanBuffer."Loan Name" + ' request of KES ' + Format(MobileLoanBuffer.Amount) + ', Please dial ' + TheUSSD + ' or use our Mobile App.' +
             //           'Login > Loans > Add / Remove Guarantors. ' +
             //           'REF: ' + MobileLoanBuffer."Loan No.";
             //     SendSMS.SendSms(SMSSource::MBANKING, TheMember."Phone No.", msg, Format(MobileLoanBuffer."Loan No."), '', true, 220, false, 'CBS', MobileLoanBuffer."Loan No.", 'CBS');
