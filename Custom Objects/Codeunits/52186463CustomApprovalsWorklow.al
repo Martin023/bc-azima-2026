@@ -7276,6 +7276,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                 begin
                     RecRef.SetTable(CashierTransactions);
                     CashierTransactions.Validate(Status, CashierTransactions.status::Approved);
+                    CashierTransactions."Approved By" := UserId;
                     CashierTransactions.modify(true);
                     Handled := true;
                 end;

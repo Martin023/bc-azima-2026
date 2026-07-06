@@ -891,11 +891,37 @@ page 52187301 "Banking Management Role Center"
                 group("Cheque Management")
                 {
                     Caption = 'Cheque Management';
-                    action("Bankers Cheque Application")
+                    group("Bankers Cheque Applications")
                     {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Bankers Cheque Application';
-                        RunObject = page "Bankers Application List";
+                        action("Open Bankers Cheque Application")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Open Bankers Cheque Applications';
+                            RunObject = page "Bankers Application List";
+                            RunPageView = where(Status = const(Open), "Cheque Register Generated" = const(false));
+                        }
+                        action("Pending Bankers Cheque Application")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Pending Bankers Cheque Applications';
+                            RunObject = page "Bankers Application List";
+                            RunPageView = where(Status = const("Pending Approval"),"Cheque Register Generated" = const(false));
+                        }
+                        action("Approved Bankers Cheque Application")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Approved Bankers Cheque Applications';
+                            RunObject = page "Bankers Application List";
+                            RunPageView = where(Status = const("Approved"), "Cheque Register Generated" = const(false));
+                        }
+                        action("Registered Bankers Cheque Application")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Registered Bankers Cheque Applications';
+                            RunObject = page "Bankers Application List";
+                            RunPageView = where(Status = const("Approved"), "Cheque Register Generated" = const(true));
+                        }
+
                     }
                     // action("Treasury Cheque Application")
                     // {

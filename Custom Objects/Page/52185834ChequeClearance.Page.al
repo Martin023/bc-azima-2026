@@ -161,7 +161,7 @@ page 52185834 "Cheque Clearance"
                             if SavingsACC.Get(Transactions."Account No") then begin
                                 MobileNo := SavingsACC."Mobile Phone No";
                             
-                                SMSMessage := StrSubstNo('Dear %1, your cheque no. %2 for amount %3 has been cleared on %4.',
+                                SMSMessage := StrSubstNo('Dear %1, your cheque no. %2 for amount KES %3 has been cleared on %4.',
                                     SavingsACC.Name, Transactions."Cheque No", Transactions.Amount, Format(Today) + ' ' + Format(Time));
                                 if MobileNo <> '' then
                                     SendSMS.SendSms(Source::CHEQUE_CLEARANCE, MobileNo, SMSMessage, Format(Transactions."Account No"), '', true, 0, false, 'CBS', Transactions."Account No", 'CBS');
