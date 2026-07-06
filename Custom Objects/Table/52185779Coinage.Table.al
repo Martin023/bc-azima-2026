@@ -46,6 +46,7 @@ table 52185779 Coinage
                     "Total Amount" := Quantity * Rec.Value
                 else
                     "Total Amount" := 0;
+                UpdateHeaderDifference();
             end;
         }
         field(7; "Total Amount"; Decimal)
@@ -64,5 +65,36 @@ table 52185779 Coinage
     fieldgroups
     {
     }
+    local procedure UpdateHeaderDifference()
+    var
+        Header: Record "Treasury Cashier Transactions";
+        CoinageRec: Record Coinage;
+        TotalCoinage: Decimal;
+    begin
+        if No = '' then
+            exit;
+
+        if not Header.Get(No) then
+            exit;
+
+        CoinageRec.SetRange(No, No);
+        CoinageRec.SetFilter("Code", '<>%1', Code); // exclude this row - it's not saved yet
+        CoinageRec.CalcSums("Total Amount");
+
+        TotalCoinage := CoinageRec."Total Amount" + "Total Amount"; // add current in-memory value
+
+        Header."Coinage Difference" := Header.Amount - TotalCoinage;
+        Header.Modify();
+    end;
+
+    trigger OnInsert()
+    begin
+        UpdateHeaderDifference();
+    end;
+
+    trigger OnDelete()
+    begin
+        UpdateHeaderDifference();
+    end;
 }
 

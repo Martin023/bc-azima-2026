@@ -8,6 +8,25 @@ page 52185801 Coinage
     {
         area(content)
         {
+            group(Summary)
+            {
+                ShowCaption = false;
+
+                field("Coinage AAmount"; TotalCoinageRequested)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Coinage Requested';
+                    Editable = false;
+                }
+                field("Coinage Difference"; CoinageDifference)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Coinage Difference';
+                    Editable = false;
+                    Style = Unfavorable;
+                    StyleExpr = CoinageDifference <> 0;
+                }
+            }
             repeater(Control1000000000)
             {
                 ShowCaption = false;
@@ -42,6 +61,11 @@ page 52185801 Coinage
                 field(Quantity; Rec.Quantity)
                 {
                     ApplicationArea = Basic, Suite;
+
+                    trigger OnValidate()
+                    begin
+                        CurrPage.Update(false);
+                    end;
                 }
                 field("Total Amount"; Rec."Total Amount")
                 {
@@ -55,5 +79,42 @@ page 52185801 Coinage
     actions
     {
     }
+    trigger OnAfterGetRecord()
+    begin
+        RefreshHeaderRec();
+    end;
+
+    trigger OnAfterGetCurrRecord()
+    begin
+        RefreshHeaderRec();
+    end;
+
+    var
+        HeaderRec: Record "Treasury Cashier Transactions";
+        TotalCoinageRequested: Decimal;
+        CoinageDifference : decimal;
+
+    local procedure RefreshHeaderRec()
+    var
+        CoinageRec: Record Coinage;
+    begin
+        if Rec.No = '' then begin
+            Clear(HeaderRec);
+            TotalCoinageRequested := 0;
+            exit;
+        end;
+
+        if not HeaderRec.Get(Rec.No) then begin
+            Clear(HeaderRec);
+            TotalCoinageRequested := 0;
+            exit;
+        end;
+
+        CoinageDifference := HeaderRec."Coinage Difference";
+
+        CoinageRec.SetRange(No, Rec.No);
+        CoinageRec.CalcSums("Total Amount");
+        TotalCoinageRequested := CoinageRec."Total Amount";
+    end;
 }
 

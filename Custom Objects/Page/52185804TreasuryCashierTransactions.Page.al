@@ -79,6 +79,11 @@ page 52185804 "Treasury Cashier Transactions"
                 {
                     ApplicationArea = Basic, Suite;
                     Editable = HeaderA;
+                    trigger OnValidate()
+                    begin
+                        Rec.UpdateCoinageDifference();
+                        CurrPage.Update(false);
+                    end;
                 }
                 // field("Currency Code"; Rec."Currency Code")
                 // {
@@ -165,6 +170,11 @@ page 52185804 "Treasury Cashier Transactions"
                     Editable = false;
                 }
                 field("Total Cash on Treasury Coinage"; Rec."Total Cash on Treasury Coinage")
+                {
+                    ApplicationArea = Basic, Suite;
+                    //Caption = 'Total Cash on Treasury/Teller Coinage';
+                }
+                field("Coinage Difference"; Rec."Coinage Difference")
                 {
                     ApplicationArea = Basic, Suite;
                     //Caption = 'Total Cash on Treasury/Teller Coinage';
