@@ -148,6 +148,13 @@ page 52185555 "HR Leave Application Card"
                     ShowMandatory = true;
                     Editable = Inst;
                 }
+                field("Leave Start Time Calc"; Rec."Leave Start Time Calc")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Starts';
+                    Style = Subordinate;
+                    StyleExpr = TRUE;
+                }
                 field("End Date"; Rec."End Date")
                 {
                     ApplicationArea = Basic;
@@ -160,17 +167,27 @@ page 52185555 "HR Leave Application Card"
                     ApplicationArea = Basic;
                     Caption = 'Morning';
                     Editable = MorningHalfDayEditable;
+                    ToolTip = 'Check this if you need only the morning off on the End Date. You will return to work in the afternoon of the End Date. Reduces leave by 0.5 days.';
                 }
                 field("Is Afternoon Half Day"; Rec."Is Afternoon Half Day")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Afternoon';
                     Editable = AfternoonHalfDayEditable;
+                    ToolTip = 'Check this if you need only the afternoon off on the Start Date. Your leave starts in the afternoon of the Start Date. Reduces leave by 0.5 days.';
                 }
                 field("Return Date"; Rec."Return Date")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
+                    ToolTip = 'The date you are expected to return to work. Morning Half-Day: return afternoon of End Date. Afternoon Half-Day: return morning of next working day. No half-day: return morning of next working day.';
+                }
+                field("Return Time"; Rec."Return Time")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Returns';
+                    Style = Subordinate;
+                    StyleExpr = TRUE;
                 }
                 field("Recall Date"; Rec."Recall Date")
                 {
