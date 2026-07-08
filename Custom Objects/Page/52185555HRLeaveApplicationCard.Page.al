@@ -552,7 +552,6 @@ page 52185555 "HR Leave Application Card"
                     PromotedCategory = Category9;
                     trigger OnAction()
                     var
-                        // // ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                         CustomApprovals: Codeunit "Custom Approvals Codeunit";
                     begin
                         VarVariant := Rec;
@@ -563,11 +562,11 @@ page 52185555 "HR Leave Application Card"
                 {
                     ApplicationArea = Basic;
                     Caption = 'Re&open';
-                    Enabled = (Rec.Status = Rec.Status::Approved) or (Rec.Status = Rec.Status::Rejected) or (Rec.Status = Rec.Status::Cancelled);
+                    Enabled = (Rec.Status = Rec.Status::Rejected) or (Rec.Status = Rec.Status::Cancelled) or (Rec.Status = Rec.Status::"Pending Approval");
                     Image = ReOpen;
                     Promoted = true;
                     PromotedCategory = Category9;
-                    ToolTip = 'Reopen an approved, rejected, or cancelled leave application to allow editing and resubmission.';
+                    ToolTip = 'Reopen a rejected, cancelled, or pending leave application to allow editing and resubmission. Approved applications cannot be reopened - use Recall instead.';
 
                     trigger OnAction()
                     begin
@@ -575,8 +574,12 @@ page 52185555 "HR Leave Application Card"
                             exit;
 
                         Rec.TestField(Status);
-                        if (Rec.Status <> Rec.Status::Approved) and (Rec.Status <> Rec.Status::Rejected) and (Rec.Status <> Rec.Status::Cancelled) then
-                            Error('You can only reopen Approved, Rejected, or Cancelled applications.');
+                        
+                        if Rec.Status = Rec.Status::Approved then
+                            Error('Cannot reopen Approved leave applications. Use the Recall functionality instead to adjust approved leave.');
+
+                        if (Rec.Status <> Rec.Status::Rejected) and (Rec.Status <> Rec.Status::Cancelled) and (Rec.Status <> Rec.Status::"Pending Approval") then
+                            Error('You can only reopen Rejected, Cancelled, or Pending Approval applications.');
 
                         Rec.Status := Rec.Status::New;
                         Rec.Modify(true);
