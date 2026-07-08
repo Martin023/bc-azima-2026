@@ -118,6 +118,12 @@ codeunit 52186505 "BC Portal"
                 exit(Response);
             end;
 
+            // Session Cleanup - Multiple Tabs issue
+            ActiveSession.reset;
+            ActiveSession.SETRANGE("User ID", HRStaff."User ID");
+            ActiveSession.DeleteAll;
+            Commit;
+
             ResponseObject.Add('request_status', 'SUCCESS');
             Datum.Add('can_login', true);
             Datum.Add('reason', 'Login is permitted');
