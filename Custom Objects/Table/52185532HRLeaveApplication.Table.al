@@ -46,66 +46,21 @@ table 52185532 "HR Leave Application"
         field(4; "Days Applied"; Decimal)
         {
             DecimalPlaces = 0 : 0;
-
-            trigger OnValidate()
-            var
-                Max2: Integer;
-                Days: Decimal;
-                hrleaveCalendar: record "HR Leave Calendar";
-            begin
-                TestField("Leave Type");
-                "Start Date" := 0D;
-                "Return Date" := 0D;
-
-
-                if "Days Applied" >= 15 then "Request Leave Allowance" := true;
-                if "Days Applied" < 15 then "Request Leave Allowance" := false;
-
-
-                if "Days Applied" < 0.5 then Error('Days applied cannot be less than 0.5');
-                IF HRLeaveTypes.get("Leave Type") THEN BEGIN
-                    IF HRLeaveTypes.Gender = HRLeaveTypes.Gender::Female then
-                        IF "Days Applied" < HRLeaveTypes.Days THEN Error('Days Applied Cannot be less than' + ' ' + Format(HRLeaveTypes.Days));
-                END;
-            end;
+            Editable = false;
         }
         field(5; "Start Date"; Date)
         {
             trigger OnValidate()
             begin
-                testfield(rec."Days Applied");
-                // IF "Start Date" < TODAY THEN ERROR('You cannot postdate your application. Please contact the HR/IT Department');
-
                 if "Start Date" = 0D then begin
-                    "Return Date" := 0D;
                     "End Date" := 0D;
+                    "Return Date" := 0D;
+                    "Days Applied" := 0;
+                    "Is Morning Half Day" := false;
+                    "Is Afternoon Half Day" := false;
                 end else begin
-                    if DetermineIfIsNonWorking("Start Date") = true then begin
+                    if DetermineIfIsNonWorking("Start Date") = true then
                         Error('Start date must be a working day');
-                    end;
-                end;
-                if ("Days Applied" <> 0) and ("Start Date" <> 0D) then begin
-                    "Return Date" := DetermineLeaveReturnDate("Start Date", "Days Applied");
-                    "End Date" := DeterminethisLeaveEndDate("Return Date");
-
-                    // CHECK LEAVE YEAR
-                    // if Date2DMY(Today, 3) < Date2DMY("Return Date", 3) then
-                    //     Error('Leave appllication must be done within the current year %1', Format(Date2DMY(Today, 3)));
-                    // Modify;
-                    if Date2DMY("End Date", 3) <> Date2DMY(Today, 3) then
-                        Error('You cannot apply leave for a different year other than %1', Format(Date2DMY(Today, 3)));
-                end;
-
-                // CHECK FOR OVERLAPPING LEAVES
-                HRLeaveApp.Reset();
-                HRLeaveApp.SetRange("Applicant Staff No.", Rec."Applicant Staff No.");
-                HRLeaveApp.SetFilter("Application Code", '<>%1', Rec."Application Code");
-                HRLeaveApp.SetFilter(Status, '%1|%2', HRLeaveApp.Status::Approved, HRLeaveApp.Status::"Pending Approval");
-                if HRLeaveApp.FindSet() then begin
-                    repeat
-                        if (Rec."Start Date" <= HRLeaveApp."End Date") and (Rec."End Date" >= HRLeaveApp."Start Date") then
-                            Error('You already have an active or pending leave application (%1) that overlaps with these dates!', HRLeaveApp."Application Code");
-                    until HRLeaveApp.Next() = 0;
                 end;
             end;
         }
@@ -221,7 +176,103 @@ table 52185532 "HR Leave Application"
         }
         field(3900; "End Date"; Date)
         {
-            Editable = true;
+            trigger OnValidate()
+            begin
+                TestField("Start Date");
+                TestField("Leave Type");
+
+                if "End Date" = 0D then begin
+                    "Days Applied" := 0;
+                    "Return Date" := 0D;
+                    "Is Morning Half Day" := false;
+                    "Is Afternoon Half Day" := false;
+                    exit;
+                end;
+
+                if "End Date" < "Start Date" then
+                    Error('End Date cannot be earlier than Start Date');
+
+                if DetermineIfIsNonWorking("End Date") = true then
+                    Error('End date must be a working day');
+
+                //if "Is Morning Half Day" or "Is Afternoon Half Day" then begin
+                //    if "Start Date" <> "End Date" then
+                //        Error('Half day leave must have the same start and end date');
+                //
+                //    "Days Applied" := 0.5;
+                //
+                //    if "Is Morning Half Day" then
+                //        "Return Date" := "End Date"
+                //    else begin
+                //        "Return Date" := CalcDate('1D', "End Date");
+                //        while DetermineIfIsNonWorking("Return Date") do
+                //            "Return Date" := CalcDate('1D', "Return Date");
+                //    end;
+                //end else begin
+                //    "Days Applied" := CalculateDaysFromDateRange("Start Date", "End Date");
+                //
+                //    "Return Date" := CalcDate('1D', "End Date");
+                //    while DetermineIfIsNonWorking("Return Date") do
+                //        "Return Date" := CalcDate('1D', "Return Date");
+                //end;
+
+                "Days Applied" := CalculateDaysFromDateRange("Start Date", "End Date");
+
+                if "Is Morning Half Day" then begin
+                    if GetDayLeaveValue("End Date") = 0.5 then
+                        Error('Morning Half-Day cannot be applied because %1 is already configured as a half-day in the leave calendar.', "End Date");
+                    "Days Applied" -= 0.5;
+                end;
+
+                if "Is Afternoon Half Day" then begin
+                    if GetDayLeaveValue("Start Date") = 0.5 then
+                        Error('Afternoon Half-Day cannot be applied because %1 is already configured as a half-day in the leave calendar.', "Start Date");
+                    "Days Applied" -= 0.5;
+                end;
+
+                if "Start Date" = "End Date" then begin
+                    if "Is Morning Half Day" and "Is Afternoon Half Day" then
+                        Error('Cannot apply for zero days leave. For same-day half-day leave, select only one option.');
+                end;
+
+                if "Is Morning Half Day" then
+                    "Return Date" := "End Date"
+                else begin
+                    "Return Date" := CalcDate('1D', "End Date");
+                    while DetermineIfIsNonWorking("Return Date") do
+                        "Return Date" := CalcDate('1D', "Return Date");
+                end;
+
+                if "Days Applied" < 0.5 then
+                    Error('Calculated days cannot be less than 0.5');
+
+                IF HRLeaveTypes.get("Leave Type") THEN BEGIN
+                    IF HRLeaveTypes.Gender = HRLeaveTypes.Gender::Female then
+                        IF "Days Applied" < HRLeaveTypes.Days THEN Error('Days Applied Cannot be less than' + ' ' + Format(HRLeaveTypes.Days));
+                END;
+
+                if "Days Applied" >= 15 then
+                    "Request Leave Allowance" := true
+                else
+                    "Request Leave Allowance" := false;
+
+                if Date2DMY("End Date", 3) <> Date2DMY(Today, 3) then
+                    Error('You cannot apply leave for a different year other than %1', Format(Date2DMY(Today, 3)));
+
+                HRLeaveApp.Reset();
+                HRLeaveApp.SetRange("Applicant Staff No.", Rec."Applicant Staff No.");
+                HRLeaveApp.SetFilter("Application Code", '<>%1', Rec."Application Code");
+                HRLeaveApp.SetFilter(Status, '%1|%2', HRLeaveApp.Status::Approved, HRLeaveApp.Status::"Pending Approval");
+                if HRLeaveApp.FindSet() then begin
+                    repeat
+                        if (Rec."Start Date" <= HRLeaveApp."End Date") and (Rec."End Date" >= HRLeaveApp."Start Date") then
+                            Error('You already have an active or pending leave application (%1) that overlaps with these dates!', HRLeaveApp."Application Code");
+                    until HRLeaveApp.Next() = 0;
+                end;
+
+                if "Days Applied" > "Leave Days Balance" then
+                    Error('You are applying for %1 days which exceeds your leave balance of %2 days', "Days Applied", "Leave Days Balance");
+            end;
         }
         field(3901; "Total Taken"; Decimal)
         {
@@ -498,6 +549,28 @@ table 52185532 "HR Leave Application"
         {
             Caption = 'Annual Leave Days Balance';
         }
+        field(4006; "Is Morning Half Day"; Boolean)
+        {
+            Caption = 'Morning Half Day';
+
+            trigger OnValidate()
+            begin
+
+                if "Is Morning Half Day" then
+                    Validate("End Date");
+            end;
+        }
+        field(4007; "Is Afternoon Half Day"; Boolean)
+        {
+            Caption = 'Afternoon Half Day';
+
+            trigger OnValidate()
+            begin
+
+                if "Is Afternoon Half Day" then
+                    Validate("End Date");
+            end;
+        }
     }
 
     keys
@@ -687,46 +760,58 @@ table 52185532 "HR Leave Application"
         Characters: code[100];
         GlobalFunctions: Codeunit "Global Functions";
 
-    // CALCULATE DECIMAL VALUE OF A SPECIFIC DAY
+    procedure CalculateDaysFromDateRange(StartDate: Date; EndDate: Date): Decimal
+    var
+        CurrentDate: Date;
+        TotalDays: Decimal;
+        DayValue: Decimal;
+    begin
+        TotalDays := 0;
+        CurrentDate := StartDate;
+
+        while CurrentDate <= EndDate do begin
+            DayValue := GetDayLeaveValue(CurrentDate);
+            TotalDays += DayValue;
+            CurrentDate := CalcDate('1D', CurrentDate);
+        end;
+
+        exit(TotalDays);
+    end;
+
     procedure GetDayLeaveValue(var bcDate: Date): Decimal
     var
-        LeaveCalendar: record "HR Leave Calendar";
-        DayOfWeek: Integer;
+        CalendarLine: Record "HR Leave Calendar Lines";
+        CalendarCode: Code[20];
     begin
-        HRSetup.Get();
-        DayOfWeek := Date2DWY(bcDate, 1);
+        CalendarCode := GetCurrentCalendarCode();
 
-        // SUNDAY (ALWAYS 0)
-        if DayOfWeek = 7 then
-            exit(0.0);
+        CalendarLine.Reset();
+        CalendarLine.SetRange(Code, CalendarCode);
+        CalendarLine.SetRange(Date, bcDate);
 
-        // SATURDAY (CHECK HR SETUP)
-        if DayOfWeek = 6 then begin
-            if HRSetup."Saturday is Half Day" then
-                exit(0.5)
-            else
+        if CalendarLine.FindFirst() then begin
+            if CalendarLine."Non Working" then
                 exit(0.0);
+
+            if CalendarLine."Is Half Day" then
+                exit(0.5);
+
+            exit(1.0);
         end;
 
-        // PUBLIC HOLIDAYS CHECK
-        LeaveCalendar.reset();
+        Error('Date %1 is not in the current leave calendar [%2]', bcDate, CalendarCode);
+    end;
+
+    local procedure GetCurrentCalendarCode(): Code[20]
+    var
+        LeaveCalendar: Record "HR Leave Calendar";
+    begin
+        LeaveCalendar.Reset();
         LeaveCalendar.SetRange("Current Leave Calendar", true);
-        if LeaveCalendar.FindFirst() then begin
-            HRLeavePeriods.Reset();
-            HRLeavePeriods.setrange("Period Code", LeaveCalendar."Calendar Code");
-            if HRLeavePeriods.Find('-') then begin
-                Customized.Reset();
-                Customized.SetRange(Customized.Date, bcDate);
-                Customized.SetRange(Code, HRLeavePeriods."Period Code");
-                if Customized.Find('-') then begin
-                    if Customized."Non Working" = true then
-                        exit(0.0);
-                end;
-            end;
-        end;
+        if LeaveCalendar.FindFirst() then
+            exit(LeaveCalendar."Calendar Code");
 
-        // NORMAL WORKING DAY
-        exit(1.0);
+        Error('No current leave calendar is configured. Please set a calendar as current in Leave Calendar setup.');
     end;
 
     // [Scope('OnPrem')]

@@ -224,16 +224,23 @@ page 52187320 AdvancedHumanResources
                         action(HRDepartmentTargets)
                         {
                             ApplicationArea = Basic, Suite;
-                            Caption = 'Department Targets List';
+                            Caption = 'Department Targets - All';
 
                             RunObject = Page "HR Department Targets List";
                         }
                         action(HRPerspectivesSetup)
                         {
                             ApplicationArea = Basic, Suite;
-                            Caption = 'Perspectives Setup List';
+                            Caption = 'Performance Perspectives';
 
                             RunObject = Page "HR Perspective Setup List";
+                        }
+                        action(HREmployeeTargetAssignments)
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Employee Target Assignments';
+
+                            RunObject = Page "HR Employee Target Assgns List";
                         }
                         // action(HRInductionSchedule)
                         // {

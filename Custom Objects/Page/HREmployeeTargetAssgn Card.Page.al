@@ -48,7 +48,7 @@ page 52185643 "HR Employee Target Assgn Card"
             group("Target Details")
             {
                 Caption = 'Target Details';
-                field("Perspective Description"; Rec."Perspective Description")
+                field("Perspective Name"; Rec."Perspective Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;

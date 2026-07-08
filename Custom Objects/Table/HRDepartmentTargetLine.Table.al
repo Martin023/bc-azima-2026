@@ -18,27 +18,36 @@ table 52185484 "HR Department Target Line"
         field(3; "Perspective Code"; Integer)
         {
             Caption = 'Perspective Code';
-            TableRelation = "HR Perspectives Setup"."Perspective No";
+            TableRelation = "HR Perspectives Setup"."Perspective No" WHERE(Active = CONST(true));
             ValidateTableRelation = false;
 
             trigger OnValidate()
             begin
-                CalcFields("Perspective Description");
+                CalcFields("Perspective Name", "Scoring Method", "Result Label");
             end;
         }
-        field(4; "Perspective Description"; Text[250])
+        field(4; "Perspective Name"; Text[100])
         {
-            CalcFormula = Lookup("HR Perspectives Setup".Description WHERE("Perspective No" = FIELD("Perspective Code")));
-            Caption = 'Perspective Description';
+            CalcFormula = Lookup("HR Perspectives Setup"."Perspective Name" WHERE("Perspective No" = FIELD("Perspective Code")));
+            Caption = 'Perspective Name';
             FieldClass = FlowField;
+            Editable = false;
         }
-        field(5; "Perspective Type"; Option)
+        field(5; "Scoring Method"; Option)
         {
-            CalcFormula = Lookup("HR Perspectives Setup"."Perspective type" WHERE("Perspective No" = FIELD("Perspective Code")));
-            Caption = 'Perspective Type';
+            CalcFormula = Lookup("HR Perspectives Setup"."Scoring Method" WHERE("Perspective No" = FIELD("Perspective Code")));
+            Caption = 'Scoring Method';
             FieldClass = FlowField;
-            OptionCaption = ' ,Internal Service Delivery,Financial Stewardship,Training and Development,Customer Sales';
-            OptionMembers = " ","Internal Service Delivery","Financial Stewardship","Training and Development","Customer Sales";
+            OptionCaption = 'Standard,Inverted';
+            OptionMembers = Standard,Inverted;
+            Editable = false;
+        }
+        field(18; "Result Label"; Text[50])
+        {
+            CalcFormula = Lookup("HR Perspectives Setup"."Result Label" WHERE("Perspective No" = FIELD("Perspective Code")));
+            Caption = 'Result Label';
+            FieldClass = FlowField;
+            Editable = false;
         }
         field(6; Objective; Text[250])
         {
@@ -77,8 +86,20 @@ table 52185484 "HR Department Target Line"
             trigger OnValidate()
             begin
                 "Unachieved Targets" := "Targeted Score" - "Achieved Score";
-                if ("Targeted Score" <> 0) and ("Achieved Score" <> 0) then
-                    Score := "Achieved Score" / "Targeted Score" * 100;
+                
+                CalcFields("Scoring Method");
+                
+                if "Scoring Method" = "Scoring Method"::Inverted then begin
+                    if "Achieved Score" <> 0 then
+                        Score := 100 - "Achieved Score"
+                    else
+                        Score := 100;
+                end else begin
+                    if ("Targeted Score" <> 0) and ("Achieved Score" <> 0) then
+                        Score := ("Achieved Score" / "Targeted Score") * 100
+                    else
+                        Score := 0;
+                end;
             end;
         }
         field(13; "Unachieved Targets"; Decimal)

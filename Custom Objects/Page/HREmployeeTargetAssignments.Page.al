@@ -25,7 +25,7 @@ page 52185644 "HR Employee Target Assignments"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Perspective Description"; Rec."Perspective Description")
+                field("Perspective Name"; Rec."Perspective Name")
                 {
                     ApplicationArea = Basic;
                 }

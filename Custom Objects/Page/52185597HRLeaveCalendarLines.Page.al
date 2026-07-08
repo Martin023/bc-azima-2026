@@ -25,6 +25,10 @@ page 52185597 "HR Leave Calendar Lines"
                 {
                     ApplicationArea = Basic;
                 }
+                field("Is Half Day"; Rec."Is Half Day")
+                {
+                    ApplicationArea = Basic;
+                }
                 field(Reason; Rec.Reason)
                 {
                     ApplicationArea = Basic;

@@ -55,7 +55,7 @@ table 52185496 "HR Department Targets Header"
         }
         field(6; "Target Date"; Date)
         {
-            Caption = 'Target Date';
+            Caption = 'Target Date';  
         }
         field(7; "HOD Employee No"; Code[20])
         {
@@ -80,63 +80,7 @@ table 52185496 "HR Department Targets Header"
             Editable = false;
             OptionCaption = 'Open,Pending Approval,Approved,Closed';
             OptionMembers = Open,"Pending Approval",Approved,Closed;
-        }
-        field(10; "Financial Targeted Score"; Decimal)
-        {
-            CalcFormula = Sum("HR Department Target Line"."Targeted Score" WHERE("Perspective Type" = FILTER("Financial Stewardship"),
-                                                                                  "Department Target No" = FIELD("Target No")));
-            Caption = 'Financial Targeted Score';
-            FieldClass = FlowField;
-        }
-        field(11; "Customer Target Score"; Decimal)
-        {
-            CalcFormula = Sum("HR Department Target Line"."Targeted Score" WHERE("Perspective Type" = FILTER("Customer Sales"),
-                                                                                  "Department Target No" = FIELD("Target No")));
-            Caption = 'Customer Target Score';
-            FieldClass = FlowField;
-        }
-        field(12; "Training Target Score"; Decimal)
-        {
-            CalcFormula = Sum("HR Department Target Line"."Targeted Score" WHERE("Perspective Type" = FILTER("Training and Development"),
-                                                                                  "Department Target No" = FIELD("Target No")));
-            Caption = 'Training Target Score';
-            FieldClass = FlowField;
-        }
-        field(13; "Service Delivery Target Score"; Decimal)
-        {
-            CalcFormula = Sum("HR Department Target Line"."Targeted Score" WHERE("Perspective Type" = FILTER("Internal Service Delivery"),
-                                                                                  "Department Target No" = FIELD("Target No")));
-            Caption = 'Service Delivery Target Score';
-            FieldClass = FlowField;
-        }
-        field(14; "Financial Achieved Score"; Decimal)
-        {
-            CalcFormula = Sum("HR Department Target Line"."Achieved Score" WHERE("Perspective Type" = FILTER("Financial Stewardship"),
-                                                                                  "Department Target No" = FIELD("Target No")));
-            Caption = 'Financial Achieved Score';
-            FieldClass = FlowField;
-        }
-        field(15; "Customer Achieved Score"; Decimal)
-        {
-            CalcFormula = Sum("HR Department Target Line"."Achieved Score" WHERE("Perspective Type" = FILTER("Customer Sales"),
-                                                                                  "Department Target No" = FIELD("Target No")));
-            Caption = 'Customer Achieved Score';
-            FieldClass = FlowField;
-        }
-        field(16; "Training Achieved Score"; Decimal)
-        {
-            CalcFormula = Sum("HR Department Target Line"."Achieved Score" WHERE("Perspective Type" = FILTER("Training and Development"),
-                                                                                  "Department Target No" = FIELD("Target No")));
-            Caption = 'Training Achieved Score';
-            FieldClass = FlowField;
-        }
-        field(17; "Service Delivery Achieved"; Decimal)
-        {
-            CalcFormula = Sum("HR Department Target Line"."Achieved Score" WHERE("Perspective Type" = FILTER("Internal Service Delivery"),
-                                                                                  "Department Target No" = FIELD("Target No")));
-            Caption = 'Service Delivery Achieved';
-            FieldClass = FlowField;
-        }
+        } 
         field(18; "Unachieved Targets"; Decimal)
         {
             CalcFormula = Sum("HR Department Target Line"."Unachieved Targets" WHERE("Department Target No" = FIELD("Target No")));
