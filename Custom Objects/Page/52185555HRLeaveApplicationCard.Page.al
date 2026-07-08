@@ -559,6 +559,31 @@ page 52185555 "HR Leave Application Card"
                         CustomApprovals.OnCancelDocApprovalRequest(VarVariant);
                     end;
                 }
+                action(Reopen)
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Re&open';
+                    Enabled = (Rec.Status = Rec.Status::Approved) or (Rec.Status = Rec.Status::Rejected) or (Rec.Status = Rec.Status::Cancelled);
+                    Image = ReOpen;
+                    Promoted = true;
+                    PromotedCategory = Category9;
+                    ToolTip = 'Reopen an approved, rejected, or cancelled leave application to allow editing and resubmission.';
+
+                    trigger OnAction()
+                    begin
+                        if not Confirm('Reopen this leave application? This will set the status back to New and allow editing.', false) then
+                            exit;
+
+                        Rec.TestField(Status);
+                        if (Rec.Status <> Rec.Status::Approved) and (Rec.Status <> Rec.Status::Rejected) and (Rec.Status <> Rec.Status::Cancelled) then
+                            Error('You can only reopen Approved, Rejected, or Cancelled applications.');
+
+                        Rec.Status := Rec.Status::New;
+                        Rec.Modify(true);
+                        Message('Leave application %1 has been reopened.', Rec."Application Code");
+                        CurrPage.Update(false);
+                    end;
+                }
                 action(Approvals)
                 {
                     ApplicationArea = Basic;
