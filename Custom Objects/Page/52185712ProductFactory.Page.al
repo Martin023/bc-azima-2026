@@ -966,7 +966,7 @@ page 52185712 "Product Factory"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Requires Installments on App."; Rec."Requires Installments on App.")
+                field("Allow Topup"; Rec."Allow Topup")
                 {
                     ApplicationArea = Basic, Suite;
                 }
@@ -1276,6 +1276,17 @@ page 52185712 "Product Factory"
                     PromotedCategory = Process;
                     RunObject = Page "Loan Product Availability";
                     RunPageLink = "Loan Product Code" = FIELD("Product ID");
+                }
+                // "Mobile Loan Exceptions"
+                action("Mobile Loan Exceptions")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Image = SetupPayment;
+                    Enabled = CreditProductVisible;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    RunObject = Page "Mobile Loan Exceptions";
+                    RunPageLink = "Product ID" = FIELD("Product ID");
                 }
             }
         }
