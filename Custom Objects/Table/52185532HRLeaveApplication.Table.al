@@ -93,6 +93,10 @@ table 52185532 "HR Leave Application"
                 HrLeaveTypes: record "HR Leave Types";
             begin
                 if Status = Status::Approved then begin
+                    // Prevent double-posting if already posted
+                    if Posted then
+                        Error('This leave application has already been posted (ledger entry exists). Cannot approve again.');
+
                     // CHECK LEAVE YEAR
                     // if Date2DMY(Today, 3) < Date2DMY("Return Date", 3) then
                     //     Error('Leave appllication must be done within the current year %1', Format(Date2DMY(Today, 3)));
@@ -564,18 +568,22 @@ table 52185532 "HR Leave Application"
         field(4002; "Allocated Leave Days"; Decimal)
         {
             Caption = 'Allocated Annual Leave Days';
+            DecimalPlaces = 0 : 1;
         }
         field(4003; "Total Leave Days"; Decimal)
         {
             Caption = 'Total Annual Leave Days';
+            DecimalPlaces = 0 : 1;
         }
         field(4004; "Total Leave Taken"; Decimal)
         {
             Caption = 'Total Annual Leave Taken';
+            DecimalPlaces = 0 : 1;
         }
         field(4005; "Leave Days Balance"; Decimal)
         {
             Caption = 'Annual Leave Days Balance';
+            DecimalPlaces = 0 : 1;
         }
         field(4006; "Is Morning Half Day"; Boolean)
         {

@@ -17,6 +17,31 @@ page 52185614 "HR Leave Recall Lines"
                     ApplicationArea = All;
                     Editable = false;
                 }
+                field("Leave Start Time"; Rec."Leave Start Time")
+                {
+                    ApplicationArea = All;
+                    Editable = false;
+                    Style = Subordinate;
+                    StyleExpr = TRUE;
+                    ToolTip = 'Shows when the employee started their leave (Morning or Afternoon)';
+                }
+                field("Leave Return Time"; Rec."Leave Return Time")
+                {
+                    ApplicationArea = All;
+                    Editable = false;
+                    Style = Subordinate;
+                    StyleExpr = TRUE;
+                    ToolTip = 'Shows when the employee is scheduled to return from leave (Morning or Afternoon)';
+                }
+                field("Days Spent Before Recall"; Rec."Days Spent Before Recall")
+                {
+                    ApplicationArea = All;
+                    Editable = false;
+                    Caption = 'Days Spent';
+                    Style = Favorable;
+                    StyleExpr = TRUE;
+                    ToolTip = 'Number of leave days already consumed before this recall';
+                }
                 field("Recall Date"; Rec."Recall Date")
                 {
                     ApplicationArea = All;
@@ -28,6 +53,15 @@ page 52185614 "HR Leave Recall Lines"
                     ApplicationArea = All;
                     ShowMandatory = true;
                     Editable = not Rec.Posted;
+                }
+                field("Days Remaining After Recall"; Rec."Days Remaining After Recall")
+                {
+                    ApplicationArea = All;
+                    Editable = false;
+                    Caption = 'Days Remaining';
+                    Style = Attention;
+                    StyleExpr = Rec."Days Remaining After Recall" < 0;
+                    ToolTip = 'Number of leave days remaining after this recall is posted';
                 }
                 field(Reason; Rec.Reason)
                 {
