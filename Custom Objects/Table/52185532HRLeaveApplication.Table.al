@@ -51,6 +51,8 @@ table 52185532 "HR Leave Application"
         field(5; "Start Date"; Date)
         {
             trigger OnValidate()
+            var
+                CurrentCalendar: Record "HR Leave Calendar";
             begin
                 if "Start Date" = 0D then begin
                     "End Date" := 0D;
@@ -59,6 +61,14 @@ table 52185532 "HR Leave Application"
                     "Is Morning Half Day" := false;
                     "Is Afternoon Half Day" := false;
                 end else begin
+                    CurrentCalendar.Reset();
+                    CurrentCalendar.SetRange("Current Leave Calendar", true);
+                    if CurrentCalendar.FindFirst() then begin
+                        if ("Start Date" < CurrentCalendar."Start Date") or ("Start Date" > CurrentCalendar."End Date") then
+                            Error('Start Date %1 is outside the current leave calendar range (%2 to %3). Please update the calendar or select a date within range.', 
+                                "Start Date", CurrentCalendar."Start Date", CurrentCalendar."End Date");
+                    end;
+
                     if DetermineIfIsNonWorking("Start Date") = true then
                         Error('Start date must be a working day');
                 end;
@@ -177,6 +187,8 @@ table 52185532 "HR Leave Application"
         field(3900; "End Date"; Date)
         {
             trigger OnValidate()
+            var
+                CurrentCalendar: Record "HR Leave Calendar";
             begin
                 TestField("Start Date");
                 TestField("Leave Type");
@@ -191,6 +203,14 @@ table 52185532 "HR Leave Application"
 
                 if "End Date" < "Start Date" then
                     Error('End Date cannot be earlier than Start Date');
+
+                CurrentCalendar.Reset();
+                CurrentCalendar.SetRange("Current Leave Calendar", true);
+                if CurrentCalendar.FindFirst() then begin
+                    if ("End Date" < CurrentCalendar."Start Date") or ("End Date" > CurrentCalendar."End Date") then
+                        Error('End Date %1 is outside the current leave calendar range (%2 to %3). Please update the calendar or select a date within range.', 
+                            "End Date", CurrentCalendar."Start Date", CurrentCalendar."End Date");
+                end;
 
                 if DetermineIfIsNonWorking("End Date") = true then
                     Error('End date must be a working day');
@@ -783,6 +803,9 @@ table 52185532 "HR Leave Application"
         CalendarLine: Record "HR Leave Calendar Lines";
         CalendarCode: Code[20];
     begin
+        if bcDate = 0D then
+            exit(1.0);
+
         CalendarCode := GetCurrentCalendarCode();
 
         CalendarLine.Reset();
@@ -798,8 +821,7 @@ table 52185532 "HR Leave Application"
 
             exit(1.0);
         end;
-
-        Error('Date %1 is not in the current leave calendar [%2]', bcDate, CalendarCode);
+        exit(1.0);
     end;
 
     local procedure GetCurrentCalendarCode(): Code[20]
