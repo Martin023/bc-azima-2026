@@ -116,12 +116,25 @@ Report 52185840 "HR Leave Balance"
                         intMonth := Date2DMY(today, 2);
                         Intyear := Date2DMY(today, 3);
                         curTransAmount := 0;
+
+                        PRPeriodTransactions.Reset();
+                        PRPeriodTransactions.SetRange("Employee Code", EmpCode);
+                        PRPeriodTransactions.SetRange("Transaction Code", 'E006');
+                        PRPeriodTransactions.Setrange("Period Year", intYear);
+                        if PRPeriodTransactions.Find('-') then begin
+                            PRPeriodTransactions.CalcSums(Amount);
+                            curTransAmount := PRPeriodTransactions.Amount;
+                        end;
+                        Cost := curTransAmount;
+
+                        /*
                         strExtractedFrml := '';
                         if HrSetup.get() then
                             IF COPYSTR(HrSEtup.Formula, 3, 4) = 'BPAY' then
                                 Bpay := CopyStr(HrSEtup.Formula, 1, 1) + Format(PRSalaryCard."Basic Pay") + CopyStr(HrSEtup.Formula, 8, 12);
                         curTransAmount := ROUND(Payroll.fnFormulaResult(Bpay), 1, '<');
                         Cost := Round((curTransAmount * (HrEmp."Monthly Leave Days" + HrEmp."Reimbursed Leave Days")), 0.01, '<');
+                        */
                     end;
                 end;
 
@@ -222,4 +235,6 @@ Report 52185840 "HR Leave Balance"
         BroughtForward: decimal;
         cost: decimal;
         MonthlyDays: Decimal;
+
+        PRPeriodTransactions: Record "PR Period Transactions";
 }
