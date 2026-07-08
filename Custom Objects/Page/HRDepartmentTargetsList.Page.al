@@ -45,38 +45,6 @@ Page 52185466 "HR Department Targets List"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Financial Targeted Score"; Rec."Financial Targeted Score")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Financial Achieved Score"; Rec."Financial Achieved Score")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Customer Target Score"; Rec."Customer Target Score")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Customer Achieved Score"; Rec."Customer Achieved Score")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Training Target Score"; Rec."Training Target Score")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Training Achieved Score"; Rec."Training Achieved Score")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Service Delivery Target Score"; Rec."Service Delivery Target Score")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Service Delivery Achieved"; Rec."Service Delivery Achieved")
-                {
-                    ApplicationArea = Basic;
-                }
             }
         }
     }

@@ -29,10 +29,13 @@ page 52186155 "My Assigned Targets"
                     ApplicationArea = Basic;
                     Editable = false;
                 }
-                field("Perspective Description"; Rec."Perspective Description")
+                field("Perspective Description"; Rec."Perspective Name")
                 {
                     ApplicationArea = Basic;
                     Editable = false;
+                    Caption = 'Perspective';
+                    Style = Strong;
+                    StyleExpr = TRUE;
                 }
                 field(Objective; Rec.Objective)
                 {

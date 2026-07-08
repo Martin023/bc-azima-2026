@@ -81,6 +81,11 @@ page 52185592 "HR Setup"
                     ApplicationArea = Basic;
                     Caption = 'Training Need Request Nos.';
                 }
+                field("Target Assignment Nos."; Rec."Target Assignment Nos.")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Employee Target Assignment Nos.';
+                }
                 field("Training Application Nos."; Rec."Training Application Nos.")
                 {
                     ApplicationArea = Basic;
@@ -252,10 +257,6 @@ page 52185592 "HR Setup"
                 field("Min Leave Days"; Rec."Min Leave Days")
                 {
 
-                }
-                field("Saturday is Half Day"; Rec."Saturday is Half Day")
-                {
-                    ApplicationArea = Basic;
                 }
                 field("Min Recall Notice Days"; Rec."Min Recall Notice Days")
                 {

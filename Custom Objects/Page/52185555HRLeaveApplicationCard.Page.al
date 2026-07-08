@@ -135,17 +135,11 @@ page 52185555 "HR Leave Application Card"
                 // }
                 field("Days Applied"; Rec."Days Applied")
                 {
-
                     ApplicationArea = Basic;
                     Importance = Promoted;
-                    ShowMandatory = true;
-                    Editable = Inst;
-                    trigger OnValidate()
-                    begin
-                        //if Rec."Days Applied" > Dleft then
-                        if Rec."Days Applied" > Rec."Leave Days Balance" then
-                            Error('You are applying for days that exceeds Leave balance');
-                    end;
+                    Editable = false;
+                    Style = Strong;
+                    StyleExpr = TRUE;
                 }
                 field("Start Date"; Rec."Start Date")
                 {
@@ -153,21 +147,25 @@ page 52185555 "HR Leave Application Card"
                     Importance = Promoted;
                     ShowMandatory = true;
                     Editable = Inst;
-
-                    trigger OnValidate()
-                    begin
-                        //IF "Start Date"<>0D THEN
-                        //BEGIN
-                        //check for overlap
-
-
-                        //END;`
-                    end;
                 }
                 field("End Date"; Rec."End Date")
                 {
                     ApplicationArea = Basic;
+                    Importance = Promoted;
+                    ShowMandatory = true;
                     Editable = Inst;
+                }
+                field("Is Morning Half Day"; Rec."Is Morning Half Day")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Morning';
+                    Editable = MorningHalfDayEditable;
+                }
+                field("Is Afternoon Half Day"; Rec."Is Afternoon Half Day")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Afternoon';
+                    Editable = AfternoonHalfDayEditable;
                 }
                 field("Return Date"; Rec."Return Date")
                 {
@@ -517,17 +515,9 @@ page 52185555 "HR Leave Application Card"
                         HRleave: Record "HR Leave Application";
                     begin
                         Rec.TestField(Reliever);
-                        ///Rec.TestField("Cell Phone Number");
-                        Rec.TestField("Days Applied");
                         Rec.TestField("Start Date");
+                        Rec.TestField("End Date");
                         Rec.TestField("Leave Type");
-
-                        //Rec.TestField("E-mail Address");
-                        /*TESTFIELD(Description);
-                        TESTFIELD("Interest Due Date");*/
-                        // if Date2DMY(Today, 3) < Date2DMY(Rec."Return Date", 3) then
-                        //     Error('Leave application must be done within the current year %1', Format(Date2DMY(Today, 3)));
-                        //if Rec."Days Applied" > dLeft then Error('You have applied for more days than those you have in your balance');
 
                         VarVariant := Rec;
                         if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then
@@ -916,6 +906,8 @@ page 52185555 "HR Leave Application Card"
         DepType: Boolean;
         Dimension: Boolean;
         MKS: Boolean;
+        MorningHalfDayEditable: Boolean;
+        AfternoonHalfDayEditable: Boolean;
         Separation: record "HR Employee Exit Interviews";
         NewReturnDate2: date;
         NewReturnDate: Date;
@@ -1058,6 +1050,16 @@ page 52185555 "HR Leave Application Card"
             Mmarketpage := true;
             Dimension := true;
             MKS := true;
+
+            if (Rec."End Date" <> 0D) and (Rec.GetDayLeaveValue(Rec."End Date") = 0.5) then
+                MorningHalfDayEditable := false
+            else
+                MorningHalfDayEditable := true;
+
+            if (Rec."Start Date" <> 0D) and (Rec.GetDayLeaveValue(Rec."Start Date") = 0.5) then
+                AfternoonHalfDayEditable := false
+            else
+                AfternoonHalfDayEditable := true;
         end;
 
         if Rec.Status = Rec.Status::"Pending Approval" then begin
@@ -1076,6 +1078,8 @@ page 52185555 "HR Leave Application Card"
             Mmarketpage := false;
             Dimension := False;
             MKS := False;
+            MorningHalfDayEditable := false;
+            AfternoonHalfDayEditable := false;
         end;
 
 
@@ -1088,6 +1092,8 @@ page 52185555 "HR Leave Application Card"
             RespCenter := false;
             Rmks := false;
             WtaxCode := false;
+            MorningHalfDayEditable := false;
+            AfternoonHalfDayEditable := false;
             INVdate := false;
             pType := false;
             Freq := false;

@@ -40,6 +40,17 @@ table 52185553 "HR Leave Calendar Lines"
         field(5; Reason; Text[40])
         {
         }
+        field(6; "Is Half Day"; Boolean)
+        {
+            Caption = 'Half Day';
+            DataClassification = CustomerContent;
+
+            trigger OnValidate()
+            begin
+                if "Is Half Day" and "Non Working" then
+                    Error('A date cannot be both Half Day and Non-Working. Please unmark Non-Working first.');
+            end;
+        }
     }
 
     keys

@@ -23,7 +23,7 @@ page 52185595 "HR Leave Calendar Card"
                 {
                     ApplicationArea = Basic;
                 }
-                field(Description; Rec.Description)
+                field("Description"; Rec.Description)
                 {
                     ApplicationArea = Basic;
                 }
@@ -50,6 +50,15 @@ page 52185595 "HR Leave Calendar Card"
                 field("Date Modified"; Rec."Date Modified")
                 {
                     ApplicationArea = Basic;
+                }
+            }
+            group("Saturday Policy")
+            {
+                Caption = 'Saturday Working Policy';
+                field("Saturday is Half Day"; Rec."Saturday is Half Day")
+                {
+                    ApplicationArea = Basic;
+                    ToolTip = 'Defines whether working Saturdays in this calendar should default to half-day (0.5) or full-day (1.0).';
                 }
             }
             part(Control10; "HR Non Working Days & Dates")
@@ -132,6 +141,286 @@ page 52185595 "HR Leave Calendar Card"
                         exit;
                     end;
 
+                end;
+            }
+            action(MarkSaturdaysWorking)
+            {
+                ApplicationArea = Basic;
+                Caption = 'Mark All Saturdays as Working Days';
+                Image = WorkCenter;
+                Promoted = true;
+                PromotedCategory = Process;
+                ToolTip = 'Removes Non-Working flag from all Saturdays in this calendar, making them working days.';
+
+                trigger OnAction()
+                var
+                    CalendarLine: Record "HR Leave Calendar Lines";
+                    DayOfWeekNum: Integer;
+                    UpdateCount: Integer;
+                begin
+                    Rec.TestField("Calendar Code");
+                    
+                    CalendarLine.Reset();
+                    CalendarLine.SetRange(Code, Rec."Calendar Code");
+                    if not CalendarLine.FindSet() then
+                        Error('No calendar lines found for calendar [%1]', Rec."Calendar Code");
+
+                    UpdateCount := 0;
+                    repeat
+                        DayOfWeekNum := Date2DWY(CalendarLine.Date, 1);
+                        if DayOfWeekNum = 6 then
+                            UpdateCount += 1;
+                    until CalendarLine.Next() = 0;
+
+                    if UpdateCount = 0 then begin
+                        Message('No Saturdays found in this calendar.');
+                        exit;
+                    end;
+
+                    if not Confirm('This will mark %1 Saturdays as working days. Continue?', false, UpdateCount) then
+                        exit;
+
+                    CalendarLine.Reset();
+                    CalendarLine.SetRange(Code, Rec."Calendar Code");
+                    CalendarLine.FindSet();
+                    
+                    repeat
+                        DayOfWeekNum := Date2DWY(CalendarLine.Date, 1);
+                        if DayOfWeekNum = 6 then begin
+                            CalendarLine."Non Working" := false;
+                            if Rec."Saturday is Half Day" then
+                                CalendarLine."Is Half Day" := true
+                            else
+                                CalendarLine."Is Half Day" := false;
+                            CalendarLine.Reason := '';
+                            CalendarLine.Modify();
+                        end;
+                    until CalendarLine.Next() = 0;
+
+                    Message('%1 Saturdays marked as working days.', UpdateCount);
+                    CurrPage.Update(false);
+                end;
+            }
+            action(MarkSaturdaysNonWorking)
+            {
+                ApplicationArea = Basic;
+                Caption = 'Mark All Saturdays as Non-Working';
+                Image = Stop;
+                Promoted = true;
+                PromotedCategory = Process;
+                ToolTip = 'Marks all Saturdays in this calendar as non-working days.';
+
+                trigger OnAction()
+                var
+                    CalendarLine: Record "HR Leave Calendar Lines";
+                    DayOfWeekNum: Integer;
+                    UpdateCount: Integer;
+                begin
+                    Rec.TestField("Calendar Code");
+                    
+                    CalendarLine.Reset();
+                    CalendarLine.SetRange(Code, Rec."Calendar Code");
+                    if not CalendarLine.FindSet() then
+                        Error('No calendar lines found for calendar [%1]', Rec."Calendar Code");
+
+                    UpdateCount := 0;
+                    repeat
+                        DayOfWeekNum := Date2DWY(CalendarLine.Date, 1);
+                        if DayOfWeekNum = 6 then
+                            UpdateCount += 1;
+                    until CalendarLine.Next() = 0;
+
+                    if UpdateCount = 0 then begin
+                        Message('No Saturdays found in this calendar.');
+                        exit;
+                    end;
+
+                    if not Confirm('This will mark %1 Saturdays as non-working. Continue?', false, UpdateCount) then
+                        exit;
+
+                    CalendarLine.Reset();
+                    CalendarLine.SetRange(Code, Rec."Calendar Code");
+                    CalendarLine.FindSet();
+                    
+                    repeat
+                        DayOfWeekNum := Date2DWY(CalendarLine.Date, 1);
+                        if DayOfWeekNum = 6 then begin
+                            CalendarLine."Non Working" := true;
+                            CalendarLine."Is Half Day" := false;
+                            CalendarLine.Reason := 'Saturday';
+                            CalendarLine.Modify();
+                        end;
+                    until CalendarLine.Next() = 0;
+
+                    Message('%1 Saturdays marked as non-working.', UpdateCount);
+                    CurrPage.Update(false);
+                end;
+            }
+            action(MarkSundaysWorking)
+            {
+                ApplicationArea = Basic;
+                Caption = 'Mark All Sundays as Working Days';
+                Image = WorkCenter;
+                Promoted = true;
+                PromotedCategory = Process;
+                ToolTip = 'Removes Non-Working flag from all Sundays in this calendar, making them working days (for 7-day operations).';
+
+                trigger OnAction()
+                var
+                    CalendarLine: Record "HR Leave Calendar Lines";
+                    DayOfWeekNum: Integer;
+                    UpdateCount: Integer;
+                begin
+                    Rec.TestField("Calendar Code");
+                    
+                    CalendarLine.Reset();
+                    CalendarLine.SetRange(Code, Rec."Calendar Code");
+                    if not CalendarLine.FindSet() then
+                        Error('No calendar lines found for calendar [%1]', Rec."Calendar Code");
+
+                    UpdateCount := 0;
+                    repeat
+                        DayOfWeekNum := Date2DWY(CalendarLine.Date, 1);
+                        if DayOfWeekNum = 7 then
+                            UpdateCount += 1;
+                    until CalendarLine.Next() = 0;
+
+                    if UpdateCount = 0 then begin
+                        Message('No Sundays found in this calendar.');
+                        exit;
+                    end;
+
+                    if not Confirm('This will mark %1 Sundays as working days (for 7-day operations). Continue?', false, UpdateCount) then
+                        exit;
+
+                    CalendarLine.Reset();
+                    CalendarLine.SetRange(Code, Rec."Calendar Code");
+                    CalendarLine.FindSet();
+                    
+                    repeat
+                        DayOfWeekNum := Date2DWY(CalendarLine.Date, 1);
+                        if DayOfWeekNum = 7 then begin
+                            CalendarLine."Non Working" := false;
+                            CalendarLine."Is Half Day" := false;
+                            CalendarLine.Reason := '';
+                            CalendarLine.Modify();
+                        end;
+                    until CalendarLine.Next() = 0;
+
+                    Message('%1 Sundays marked as working days.', UpdateCount);
+                    CurrPage.Update(false);
+                end;
+            }
+            action(MarkSundaysNonWorking)
+            {
+                ApplicationArea = Basic;
+                Caption = 'Mark All Sundays as Non-Working';
+                Image = Stop;
+                Promoted = true;
+                PromotedCategory = Process;
+                ToolTip = 'Marks all Sundays in this calendar as non-working days (default behavior).';
+
+                trigger OnAction()
+                var
+                    CalendarLine: Record "HR Leave Calendar Lines";
+                    DayOfWeekNum: Integer;
+                    UpdateCount: Integer;
+                begin
+                    Rec.TestField("Calendar Code");
+                    
+                    CalendarLine.Reset();
+                    CalendarLine.SetRange(Code, Rec."Calendar Code");
+                    if not CalendarLine.FindSet() then
+                        Error('No calendar lines found for calendar [%1]', Rec."Calendar Code");
+
+                    UpdateCount := 0;
+                    repeat
+                        DayOfWeekNum := Date2DWY(CalendarLine.Date, 1);
+                        if DayOfWeekNum = 7 then
+                            UpdateCount += 1;
+                    until CalendarLine.Next() = 0;
+
+                    if UpdateCount = 0 then begin
+                        Message('No Sundays found in this calendar.');
+                        exit;
+                    end;
+
+                    if not Confirm('This will mark %1 Sundays as non-working. Continue?', false, UpdateCount) then
+                        exit;
+
+                    CalendarLine.Reset();
+                    CalendarLine.SetRange(Code, Rec."Calendar Code");
+                    CalendarLine.FindSet();
+                    
+                    repeat
+                        DayOfWeekNum := Date2DWY(CalendarLine.Date, 1);
+                        if DayOfWeekNum = 7 then begin
+                            CalendarLine."Non Working" := true;
+                            CalendarLine."Is Half Day" := false;
+                            CalendarLine.Reason := 'Sunday';
+                            CalendarLine.Modify();
+                        end;
+                    until CalendarLine.Next() = 0;
+
+                    Message('%1 Sundays marked as non-working.', UpdateCount);
+                    CurrPage.Update(false);
+                end;
+            }
+            action(ApplyHalfDayToSaturdays)
+            {
+                ApplicationArea = Basic;
+                Caption = 'Apply Half-Day to All Working Saturdays';
+                Image = DateRange;
+                Promoted = true;
+                PromotedCategory = Process;
+                ToolTip = 'Marks all working Saturdays (where Non-Working = FALSE) as half-day, based on this calendar Saturday policy.';
+
+                trigger OnAction()
+                var
+                    CalendarLine: Record "HR Leave Calendar Lines";
+                    DayOfWeekNum: Integer;
+                    UpdateCount: Integer;
+                begin
+                    Rec.TestField("Calendar Code");
+                    
+                    CalendarLine.Reset();
+                    CalendarLine.SetRange(Code, Rec."Calendar Code");
+                    if not CalendarLine.FindSet() then
+                        Error('No calendar lines found for calendar [%1]', Rec."Calendar Code");
+
+                    UpdateCount := 0;
+                    repeat
+                        DayOfWeekNum := Date2DWY(CalendarLine.Date, 1);
+                        if (DayOfWeekNum = 6) and (not CalendarLine."Non Working") then
+                            UpdateCount += 1;
+                    until CalendarLine.Next() = 0;
+
+                    if UpdateCount = 0 then begin
+                        Message('No working Saturdays found in this calendar. Use "Mark All Saturdays as Working Days" first.');
+                        exit;
+                    end;
+
+                    if not Confirm('This will apply half-day settings to %1 working Saturdays based on this calendar policy. Continue?', false, UpdateCount) then
+                        exit;
+
+                    CalendarLine.Reset();
+                    CalendarLine.SetRange(Code, Rec."Calendar Code");
+                    CalendarLine.FindSet();
+                    
+                    repeat
+                        DayOfWeekNum := Date2DWY(CalendarLine.Date, 1);
+                        if (DayOfWeekNum = 6) and (not CalendarLine."Non Working") then begin
+                            CalendarLine."Is Half Day" := Rec."Saturday is Half Day";
+                            CalendarLine.Modify();
+                        end;
+                    until CalendarLine.Next() = 0;
+
+                    if Rec."Saturday is Half Day" then
+                        Message('%1 working Saturdays marked as half-day.', UpdateCount)
+                    else
+                        Message('%1 working Saturdays marked as full-day.', UpdateCount);
+                    
+                    CurrPage.Update(false);
                 end;
             }
         }

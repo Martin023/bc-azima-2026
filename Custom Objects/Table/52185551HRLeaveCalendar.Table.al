@@ -104,6 +104,11 @@ table 52185551 "HR Leave Calendar"
                 rec.validate("Calendar Code");
             end;
         }
+        field(12; "Saturday is Half Day"; Boolean)
+        {
+            Caption = 'Working Saturdays are Half-Day';
+            DataClassification = CustomerContent;
+        }
     }
 
     keys
@@ -149,8 +154,6 @@ table 52185551 "HR Leave Calendar"
     local procedure fnCreateLeaveCalendar()
     begin
         TestField(Rec."Calendar Code");
-        //TESTFIELD("Start Date");
-        //TESTFIELD("End Date");
 
         Date.Reset;
         Date.SetRange(Date."Period Type", Date."Period Type"::Date);
@@ -165,16 +168,14 @@ table 52185551 "HR Leave Calendar"
 
                 HRCalendarList.Code := "Calendar Code";
                 HRCalendarList.Date := Date."Period Start";
-                ;      // e.g 01-01-15
-                HRCalendarList.Day := Date."Period Name";         // e.g Thursday
+                HRCalendarList.Day := Date."Period Name";
                 HRCalendarList."Non Working" := fn_DetermineNonWorking(Date."Period Start");
 
-                //Saturday
                 if (Date."Period Name" = 'Saturday') and not (HRCalendarList."Non Working") then begin
                     HRCalendarList."Non Working" := true;
                     HRCalendarList.Reason := 'Saturday';
                 end;
-                //Sunday
+
                 if (Date."Period Name" = 'Sunday') and not (HRCalendarList."Non Working") then begin
                     HRCalendarList."Non Working" := true;
                     HRCalendarList.Reason := 'Sunday';

@@ -15,7 +15,7 @@ table 52185513 "HR Employee Target Assignment"
             begin
                 if "Assignment No" <> xRec."Assignment No" then begin
                     HRSetup.Get;
-                    NoSeriesMgt.TestManual(HRSetup."Appraisal Nos");
+                    NoSeriesMgt.TestManual(HRSetup."Target Assignment Nos.");
                     "No. Series" := '';
                 end;
             end;
@@ -114,29 +114,36 @@ table 52185513 "HR Employee Target Assignment"
         field(8; "Perspective Code"; Integer)
         {
             Caption = 'Perspective Code';
-            TableRelation = "HR Perspectives Setup"."Perspective No";
+            TableRelation = "HR Perspectives Setup"."Perspective No" WHERE(Active = CONST(true));
             ValidateTableRelation = false;
             Editable = false;
 
             trigger OnValidate()
             begin
-                CalcFields("Perspective Description", "Perspective Type");
+                CalcFields("Perspective Name", "Scoring Method", "Result Label");
             end;
         }
-        field(9; "Perspective Description"; Text[250])
+        field(9; "Perspective Name"; Text[100])
         {
-            Caption = 'Perspective Description';
-            CalcFormula = Lookup("HR Perspectives Setup".Description WHERE("Perspective No" = FIELD("Perspective Code")));
+            Caption = 'Perspective Name';
+            CalcFormula = Lookup("HR Perspectives Setup"."Perspective Name" WHERE("Perspective No" = FIELD("Perspective Code")));
             FieldClass = FlowField;
             Editable = false;
         }
-        field(10; "Perspective Type"; Option)
+        field(10; "Scoring Method"; Option)
         {
-            Caption = 'Perspective Type';
-            CalcFormula = Lookup("HR Perspectives Setup"."Perspective type" WHERE("Perspective No" = FIELD("Perspective Code")));
+            Caption = 'Scoring Method';
+            CalcFormula = Lookup("HR Perspectives Setup"."Scoring Method" WHERE("Perspective No" = FIELD("Perspective Code")));
             FieldClass = FlowField;
-            OptionCaption = ' ,Internal Service Delivery,Financial Stewardship,Training and Development,Customer Sales';
-            OptionMembers = " ","Internal Service Delivery","Financial Stewardship","Training and Development","Customer Sales";
+            OptionCaption = 'Standard,Inverted';
+            OptionMembers = Standard,Inverted;
+            Editable = false;
+        }
+        field(30; "Result Label"; Text[50])
+        {
+            CalcFormula = Lookup("HR Perspectives Setup"."Result Label" WHERE("Perspective No" = FIELD("Perspective Code")));
+            Caption = 'Result Label';
+            FieldClass = FlowField;
             Editable = false;
         }
         field(11; Objective; Text[250])
@@ -280,8 +287,8 @@ table 52185513 "HR Employee Target Assignment"
     begin
         if "Assignment No" = '' then begin
             HRSetup.Get;
-            HRSetup.TestField(HRSetup."Appraisal Nos");
-            "Assignment No" := NoSeriesMgt.GetNextNo(HRSetup."Appraisal Nos");
+            HRSetup.TestField(HRSetup."Target Assignment Nos.");
+            "Assignment No" := NoSeriesMgt.GetNextNo(HRSetup."Target Assignment Nos.");
         end;
 
         TestField("Department Target No");
