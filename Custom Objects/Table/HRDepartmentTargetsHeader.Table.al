@@ -55,7 +55,7 @@ table 52185496 "HR Department Targets Header"
         }
         field(6; "Target Date"; Date)
         {
-            Caption = 'Target Date';
+            Caption = 'Target Date';  
         }
         field(7; "HOD Employee No"; Code[20])
         {
@@ -80,63 +80,7 @@ table 52185496 "HR Department Targets Header"
             Editable = false;
             OptionCaption = 'Open,Pending Approval,Approved,Closed';
             OptionMembers = Open,"Pending Approval",Approved,Closed;
-        }
-        field(10; "Financial Targeted Score"; Decimal)
-        {
-            CalcFormula = Sum("HR Department Target Line"."Targeted Score" WHERE("Perspective Type" = FILTER("Financial Stewardship"),
-                                                                                  "Department Target No" = FIELD("Target No")));
-            Caption = 'Financial Targeted Score';
-            FieldClass = FlowField;
-        }
-        field(11; "Customer Target Score"; Decimal)
-        {
-            CalcFormula = Sum("HR Department Target Line"."Targeted Score" WHERE("Perspective Type" = FILTER("Customer Sales"),
-                                                                                  "Department Target No" = FIELD("Target No")));
-            Caption = 'Customer Target Score';
-            FieldClass = FlowField;
-        }
-        field(12; "Training Target Score"; Decimal)
-        {
-            CalcFormula = Sum("HR Department Target Line"."Targeted Score" WHERE("Perspective Type" = FILTER("Training and Development"),
-                                                                                  "Department Target No" = FIELD("Target No")));
-            Caption = 'Training Target Score';
-            FieldClass = FlowField;
-        }
-        field(13; "Service Delivery Target Score"; Decimal)
-        {
-            CalcFormula = Sum("HR Department Target Line"."Targeted Score" WHERE("Perspective Type" = FILTER("Internal Service Delivery"),
-                                                                                  "Department Target No" = FIELD("Target No")));
-            Caption = 'Service Delivery Target Score';
-            FieldClass = FlowField;
-        }
-        field(14; "Financial Achieved Score"; Decimal)
-        {
-            CalcFormula = Sum("HR Department Target Line"."Achieved Score" WHERE("Perspective Type" = FILTER("Financial Stewardship"),
-                                                                                  "Department Target No" = FIELD("Target No")));
-            Caption = 'Financial Achieved Score';
-            FieldClass = FlowField;
-        }
-        field(15; "Customer Achieved Score"; Decimal)
-        {
-            CalcFormula = Sum("HR Department Target Line"."Achieved Score" WHERE("Perspective Type" = FILTER("Customer Sales"),
-                                                                                  "Department Target No" = FIELD("Target No")));
-            Caption = 'Customer Achieved Score';
-            FieldClass = FlowField;
-        }
-        field(16; "Training Achieved Score"; Decimal)
-        {
-            CalcFormula = Sum("HR Department Target Line"."Achieved Score" WHERE("Perspective Type" = FILTER("Training and Development"),
-                                                                                  "Department Target No" = FIELD("Target No")));
-            Caption = 'Training Achieved Score';
-            FieldClass = FlowField;
-        }
-        field(17; "Service Delivery Achieved"; Decimal)
-        {
-            CalcFormula = Sum("HR Department Target Line"."Achieved Score" WHERE("Perspective Type" = FILTER("Internal Service Delivery"),
-                                                                                  "Department Target No" = FIELD("Target No")));
-            Caption = 'Service Delivery Achieved';
-            FieldClass = FlowField;
-        }
+        } 
         field(18; "Unachieved Targets"; Decimal)
         {
             CalcFormula = Sum("HR Department Target Line"."Unachieved Targets" WHERE("Department Target No" = FIELD("Target No")));
@@ -196,6 +140,20 @@ table 52185496 "HR Department Targets Header"
             Caption = 'Global Dimension 2 Code';
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(2));
         }
+        field(27; "Targets Assigned"; Boolean)
+        {
+            Caption = 'Targets Assigned';
+            CalcFormula = Exist("HR Employee Target Assignment" WHERE("Department Target No" = FIELD("Target No")));
+            FieldClass = FlowField;
+            Editable = false;
+        }
+        field(28; "Total Assignments"; Integer)
+        {
+            Caption = 'Total Assignments';
+            CalcFormula = Count("HR Employee Target Assignment" WHERE("Department Target No" = FIELD("Target No")));
+            FieldClass = FlowField;
+            Editable = false;
+        }
     }
 
     keys
@@ -229,4 +187,109 @@ table 52185496 "HR Department Targets Header"
         NoSeriesMgt: Codeunit "No. Series";
         HREmp: Record "HR Employees";
         DimensionValue: Record "Dimension Value";
+
+    procedure AssignLineToEmployees(LineNo: Integer)
+    var
+        DeptLine: Record "HR Department Target Line";
+        Employee: Record "HR Employees";
+        Assignment: Record "HR Employee Target Assignment";
+        SelectedEmps: Text;
+        EmpNo: Code[20];
+        CommaPos: Integer;
+        AssignmentCount: Integer;
+    begin
+        TestField("Target No");
+        TestField("Responsibility Center");
+
+        DeptLine.Reset;
+        DeptLine.SetRange("Department Target No", "Target No");
+        DeptLine.SetRange("Line No", LineNo);
+        if not DeptLine.FindFirst then
+            Error('Department target line %1 not found.', LineNo);
+
+        Employee.Reset;
+        Employee.SetRange("Department Code", "Responsibility Center");
+        Employee.SetRange(Status, Employee.Status::Active);
+        if not Employee.FindFirst then
+            Error('No active employees found in department %1', "Department Name");
+
+        if PAGE.RunModal(PAGE::"Employee Selection List", Employee) = ACTION::LookupOK then begin
+            Employee.Reset;
+            Employee.SetRange("Department Code", "Responsibility Center");
+            Employee.SetRange(Status, Employee.Status::Active);
+            Employee.MarkedOnly(true);
+            if Employee.FindSet then begin
+                AssignmentCount := 0;
+                repeat
+                    if not AssignmentExists(DeptLine, Employee."No.") then begin
+                        Assignment.Init;
+                        Assignment."Department Target No" := "Target No";
+                        Assignment.Validate("Department Target No");
+                        Assignment."Target Line No" := DeptLine."Line No";
+                        Assignment.Validate("Target Line No");
+                        Assignment."Employee No" := Employee."No.";
+                        Assignment.Validate("Employee No");
+                        Assignment.Insert(true);
+                        AssignmentCount += 1;
+                    end;
+                until Employee.Next = 0;
+
+                if AssignmentCount > 0 then
+                    Message('%1 employee(s) assigned successfully.', AssignmentCount)
+                else
+                    Message('No new assignments created. Selected employees may already have this target assigned.');
+            end;
+        end;
+    end;
+
+    local procedure AssignmentExists(DeptLine: Record "HR Department Target Line"; EmployeeNo: Code[20]): Boolean
+    var
+        Assignment: Record "HR Employee Target Assignment";
+    begin
+        Assignment.Reset;
+        Assignment.SetRange("Department Target No", DeptLine."Department Target No");
+        Assignment.SetRange("Target Line No", DeptLine."Line No");
+        Assignment.SetRange("Employee No", EmployeeNo);
+        Assignment.SetRange("Appraisal Year", "Appraisal Year");
+        exit(not Assignment.IsEmpty);
+    end;
+
+    procedure AssignAllLinesToEmployee(EmployeeNo: Code[20])
+    var
+        DeptLine: Record "HR Department Target Line";
+        Assignment: Record "HR Employee Target Assignment";
+        AssignmentCount: Integer;
+    begin
+        TestField("Target No");
+        TestField("Responsibility Center");
+
+        if EmployeeNo = '' then
+            Error('Please specify an employee.');
+
+        DeptLine.Reset;
+        DeptLine.SetRange("Department Target No", "Target No");
+        if DeptLine.FindSet then begin
+            AssignmentCount := 0;
+            repeat
+                if not AssignmentExists(DeptLine, EmployeeNo) then begin
+                    Assignment.Init;
+                    Assignment."Department Target No" := "Target No";
+                    Assignment.Validate("Department Target No");
+                    Assignment."Target Line No" := DeptLine."Line No";
+                    Assignment.Validate("Target Line No");
+                    Assignment."Employee No" := EmployeeNo;
+                    Assignment.Validate("Employee No");
+                    Assignment.Insert(true);
+                    AssignmentCount += 1;
+                end;
+            until DeptLine.Next = 0;
+
+            if AssignmentCount > 0 then
+                Message('%1 target line(s) assigned to employee %2.', AssignmentCount, EmployeeNo)
+            else
+                Message('No new assignments created. Employee may already have all targets assigned.');
+        end else begin
+            Error('No target lines found for this department target.');
+        end;
+    end;
 }

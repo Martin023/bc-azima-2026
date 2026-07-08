@@ -7,38 +7,36 @@ Report 52185624 "Dividend Generation"
     {
         dataitem("Dividend Header"; "Dividend Header")
         {
-            //DataItemTableView = WHERE("Product Type" = FILTER('|SCS'));
             RequestFilterFields = "No.";
 
             dataitem("Savings Accounts"; "Savings Accounts")
             {
                 RequestFilterFields = "Member No.", "Product Type", "Employer Code", "No.";
-                DataItemTableView = WHERE("Product Type" = FILTER('4|1|3'));
                 trigger OnAfterGetRecord()
                 begin
                     // SavingsAccounts.Reset();
                     // SavingsAccounts.SetRange("Product Type", '4|1|3');
                     // if SavingsAccounts.Findset then begin
-                    // intProgressTotal := "Savings Accounts".Count;
-                    // intProgressI := 0;
-                    // TimeProgress := Time;
-                    // NoOfRecsProgress := intProgressTotal DIV 100;
-                    // NoOfProgressed := 0;
+                    intProgressTotal := "Savings Accounts".Count;
+                    intProgressI := 0;
+                    TimeProgress := Time;
+                    NoOfRecsProgress := intProgressTotal DIV 100;
+                    NoOfProgressed := 0;
 
-                    // diaProgress.Open(GeneratingDividends + '@1@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', intProgress);
+                    diaProgress.Open(GeneratingDividends + '@1@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', intProgress);
                     // repeat
                     DividendProgression.Reset;
                     DividendProgression.SetRange(DividendProgression."Header No.", "Dividend Header"."No.");
                     DividendProgression.SetRange("Account No", "Savings Accounts"."No.");
                     DividendProgression.DeleteAll(true);
 
-                    // intProgressI += 1;
-                    // if (intProgressI >= NoOfRecsProgress) or (Time - TimeProgress > 1000) then begin
-                    //     NoOfProgressed := NoOfProgressed + intProgressI;
-                    //     diaProgress.Update(1, ROUND(NoOfProgressed / intProgressTotal * 10000, 1));
-                    //     intProgressI := 0;
-                    //     TimeProgress := Time;
-                    // end;
+                    intProgressI += 1;
+                    if (intProgressI >= NoOfRecsProgress) or (Time - TimeProgress > 1000) then begin
+                        NoOfProgressed := NoOfProgressed + intProgressI;
+                        diaProgress.Update(1, ROUND(NoOfProgressed / intProgressTotal * 10000, 1));
+                        intProgressI := 0;
+                        TimeProgress := Time;
+                    end;
                     DividendProcess.generateDivdends("Savings Accounts", "Dividend Header");
 
                     // until SavingsAccounts.Next() = 0;
@@ -49,7 +47,7 @@ Report 52185624 "Dividend Generation"
 
             trigger OnPostDataItem()
             begin
-                // diaProgress.Close;
+                diaProgress.Close;
                 Message('Transaction generated succesfully');
             end;
 

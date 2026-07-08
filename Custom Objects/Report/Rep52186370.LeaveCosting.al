@@ -6,7 +6,7 @@ report 52186370 "Leave Costing"
     {
         dataitem(Hremployees; "Hr employees")
         {
-            RequestFilterFields = "No.";
+            RequestFilterFields = "No.", "Department Code", "Responsibility Center";
             column(No; "No.")
             {
             }
@@ -40,6 +40,18 @@ report 52186370 "Leave Costing"
             column(CommunicationOnline; CommunicationOnline)
             {
             }
+            column(PFNo; "PF No.")
+            {
+            }
+            column(DepartmentCode; "Department Code")
+            {
+            }
+            column(ResponsibilityCenter; "Responsibility Center")
+            {
+            }
+            column(DepartmentName; DepartmentName)
+            {
+            }
             dataitem("PR Salary Card"; "PR Salary Card")
             {
                 DataItemLink = "Employee Code" = field("No.");
@@ -64,9 +76,15 @@ report 52186370 "Leave Costing"
             begin
                 cost := 0;
                 curTransAmount := 0;
+                DepartmentName := '';
+                
                 HREmp.Reset;
                 if HrEmp.Get("No.") then begin
                     HrEmp.CalcFields("Reimbursed Leave Days");
+                    
+                    if ResponsibilityCenterRec.Get(HrEmp."Responsibility Center") then
+                        DepartmentName := ResponsibilityCenterRec.Name;
+                    
                     PRSalaryCard.reset();
                     PRSalaryCard.setrange("Employee Code", HrEmp."No.");
                     if PRSalaryCard.FindSet() then begin
@@ -136,6 +154,6 @@ report 52186370 "Leave Costing"
         HrSEtup: record "HR Setup";
         Payroll: codeunit "PR Payroll Processing";
         Cost: decimal;
-
-
+        DepartmentName: Text[100];
+        ResponsibilityCenterRec: Record "Responsibility CenterBR";
 }

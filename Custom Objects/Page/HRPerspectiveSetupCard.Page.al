@@ -19,11 +19,11 @@ page 52185588 "HR Perspective Setup Card"
                     ToolTip = 'Specifies the automatically generated perspective number.';
                     Importance = Promoted; 
                 }
-                field("Perspective type"; Rec."Perspective type")
+                field("Perspective Name"; Rec."Perspective Name")
                 {
                     ApplicationArea = Basic, Suite;
                     ShowMandatory = true; 
-                    ToolTip = 'Specifies the category of the balanced scorecard perspective.';
+                    ToolTip = 'Specifies the name of the balanced scorecard perspective.';
                 }
                 field(Description; Rec.Description)
                 {

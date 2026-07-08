@@ -326,14 +326,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="TotalScore_HRJobInterview">
+                        <Textbox Name="TotalScoreAfterShortlisting_HRJobApplications">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!TotalScore_HRJobInterview.Value</Value>
+                                  <Value>=Fields!TotalScoreAfterShortlisting_HRJobApplications.Value</Value>
                                   <Style>
                                     <FontFamily>Cambria</FontFamily>
                                   </Style>
@@ -342,7 +342,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>TotalScore_HRJobInterview</rd:DefaultName>
+                          <rd:DefaultName>TotalScoreAfterShortlisting_HRJobApplications</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -418,7 +418,7 @@
             <DataSetName>DataSet_Result</DataSetName>
             <SortExpressions>
               <SortExpression>
-                <Value>=Fields!TotalScore_HRJobInterview.Value</Value>
+                <Value>=Fields!TotalScoreAfterShortlisting_HRJobApplications.Value</Value>
                 <Direction>Descending</Direction>
               </SortExpression>
             </SortExpressions>

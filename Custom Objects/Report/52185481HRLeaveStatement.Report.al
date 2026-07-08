@@ -15,27 +15,27 @@ Report 52185481 "HR Leave Statement"
             column(FORMAT_TODAY_0_4_; Format(Today, 0, 4))
             {
             }
-            column(COMPANYNAME; COMPANYNAME)
+            
+            // Replaced basic COMPANYNAME & CI calls with detailed Company Information
+            column(CompanyInformation_Name; CompanyInformation.Name)
             {
             }
-            //column(CurrReport_PAGENO; CurrReport.PageNo)
-            //{
-            //}
+            column(CompanyInformation_Picture; CompanyInformation.Picture)
+            {
+            }
+            column(CompanyAddress; CompanyAddress)
+            {
+            }
+            column(CompanyTelephone; CompanyTelephone)
+            {
+            }
+            column(CommunicationOnline; CommunicationOnline)
+            {
+            }
+
             column(USERID; "HR Employees"."User ID")
             {
             }
-            // column(CI_Picture; CI.Picture)
-            // {
-            // }
-            // column(CI_City; CI.City)
-            // {
-            // }
-            // column(CI__Address_2______CI__Post_Code_; CI."Address 2" + ' ' + CI."Post Code")
-            // {
-            // }
-            // column(CI_Address; CI.Address)
-            // {
-            // }
             column(HR_Employees__No__; "No.")
             {
             }
@@ -45,36 +45,11 @@ Report 52185481 "HR Leave Statement"
             column(HR_Employees__HR_Employees___Leave_Balance_; "HR Employees"."Leave Balance")
             {
             }
-            // column(EmployeeCaption; EmployeeCaptionLbl)
-            // {
-            // }
-            // column(CurrReport_PAGENOCaption; CurrReport_PAGENOCaptionLbl)
-            // {
-            // }
-            // column(Employee_Leave_StatementCaption; Employee_Leave_StatementCaptionLbl)
-            // {
-            // }
-            // column(P_O__BoxCaption; P_O__BoxCaptionLbl)
-            // {
-            // }
-            // column(HR_Employees__No__Caption; UnknownTable"HR EMPLOYEES".FieldCaption("No."))
-            // {
-            // }
-            // column(NameCaption; NameCaptionLbl)
-            // {
-            // }
-            // column(Leave_BalanceCaption; Leave_BalanceCaptionLbl)
-            // {
-            // }
-            // column(Day_s_Caption; Day_s_CaptionLbl)
-            // {
-            // }
-            // column(No; No)
-            // {
-            // }
+            
             column(Employee_No; "HR Employees"."No.")
             {
             }
+            
             dataitem("HR Leave Ledger Entries"; "HR Leave Ledger Entries")
             {
                 DataItemLink = "Staff No." = field("No.");
@@ -100,24 +75,6 @@ Report 52185481 "HR Leave Statement"
                 column(HR_Leave_Ledger_Entries__Posting_Date_; "Posting Date")
                 {
                 }
-                // column(HR_Leave_Ledger_Entries__Leave_Entry_Type_Caption;UnknownTable52185537.FieldCaption("Leave Entry Type"))
-                // {
-                // }
-                // column(HR_Leave_Ledger_Entries__Leave_Type_Caption;UnknownTable52185537.FieldCaption("Leave Type"))
-                // {
-                // }
-                // column(HR_Leave_Ledger_Entries__No__of_days_Caption;UnknownTable52185537.FieldCaption("No. of days"))
-                // {
-                // }
-                // column(HR_Leave_Ledger_Entries__Leave_Posting_Description_Caption;UnknownTable52185537.FieldCaption("Leave Posting Description"))
-                // {
-                // }
-                // column(HR_Leave_Ledger_Entries__Posting_Date_Caption;UnknownTable52185537.FieldCaption("Posting Date"))
-                // {
-                // }
-                // column(HR_Leave_Ledger_Entries__Leave_Period_Caption;UnknownTable52185537.FieldCaption("Leave Calendar Code"))
-                // {
-                // }
                 column(HR_Leave_Ledger_Entries_Entry_No_; "Entry No.")
                 {
                 }
@@ -132,14 +89,14 @@ Report 52185481 "HR Leave Statement"
 
                 trigger OnPostDataItem()
                 begin
-                    //               OnViewCurrRec();
+                    // OnViewCurrRec();
                 end;
 
                 trigger OnPreDataItem()
                 begin
                     //"HR Leave Ledger Entries".SETFILTER("HR Leave Ledger Entries"."Leave Type",
                     //"HR-Employee".GETFILTER("HR-Employee"."Leave Type Filter"));
-                    //               OnViewCurrRec();
+                    // OnViewCurrRec();
                 end;
             }
 
@@ -170,12 +127,19 @@ Report 52185481 "HR Leave Statement"
 
     trigger OnPreReport()
     begin
-        CI.Get();
-        CI.CalcFields(CI.Picture);
+        if CompanyInformation.Get() then
+            CompanyInformation.CalcFields(CompanyInformation.Picture);
+            
+        CompanyAddress := CompanyInformation.Address + ' -Post Code: ' + CompanyInformation."Post Code" + ' -City:' + CompanyInformation.City + ' Region: ' + CompanyInformation."Country/Region Code";
+        CompanyTelephone := 'Tel: ' + CompanyInformation."Phone No." + ' -Office Tel: ' + CompanyInformation."Phone No. 2";
+        CommunicationOnline := 'E-mail: ' + CompanyInformation."E-Mail" + '- Website: ' + CompanyInformation."Home Page";
     end;
 
     var
-        CI: Record "Company Information";
+        CompanyInformation: Record "Company Information";
+        CompanyAddress: Text;
+        CompanyTelephone: Text;
+        CommunicationOnline: Text;
         LeaveBalance: Decimal;
         EmployeeCaptionLbl: label 'Employee';
         CurrReport_PAGENOCaptionLbl: label 'Page';

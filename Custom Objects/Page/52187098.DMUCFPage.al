@@ -484,7 +484,7 @@ page 52187098 "DMU CF Page"
         //Create Headers
         for i := 1 to TotalHeaders do begin
             SMSHeader.Init();
-            SMSHeader."Notice Type" := SMSHeader."Notice Type"::"1st & 2nd Notice";
+            //SMSHeader."Notice Type" := SMSHeader."Notice Type"::"1st & 2nd Notice";
             SMSHeader."Employer Code" := Rec."Employer Code";
             SMSHeader.Period := Rec.Period;
             SMSHeader."Case Forwarding No" := Rec."No.";

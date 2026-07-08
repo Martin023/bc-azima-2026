@@ -615,6 +615,11 @@ table 52185776 "Cashier Transactions"
                 "Product Type" := '';
                 "Project Member" := '';
                 "Project Vendor" := '';
+                
+                "Charge Amount" := 0;
+                "Excise Duty Amount" := 0;
+                "SMS Charge Amount" := 0;
+                "SMS Excise Duty" := 0;
 
                 if "Account Type" = "Account Type"::MPESA then begin
                     BUserSetup.Reset;
@@ -662,15 +667,9 @@ table 52185776 "Cashier Transactions"
         field(50020; "Mpesa Reference"; Code[10])
         {
             trigger OnValidate()
-            var
-                CT: record "Cashier Transactions";
+            
             begin
-                if "Account Type" = "Account Type"::MPESA then begin
-                    CT.Reset();
-                    CT.SetRange("Mpesa Reference", "Mpesa Reference");
-                    if CT.FindFirst() then
-                        Error('MPESA Reference Code %1 already exists for transaction No. %2', "Mpesa Reference", CT.No);
-                end;
+                ValidateMpesaReference("Mpesa Reference");
             end;
         }
         field(50021; Source; Text[100])
@@ -703,9 +702,51 @@ table 52185776 "Cashier Transactions"
         }
         field(50027; "Reference Name"; Text[100])
         {
+        
         }
         field(50028; "MPESA Float Balance"; Decimal)
         {
+        }
+        field(50029; "Bank Code"; code[20])
+        {
+            TableRelation = "PR Bank Accounts"."Bank Code";
+            trigger OnValidate()
+            var
+                BankAcc: Record "PR Bank Accounts";
+            begin
+                if BankAcc.Get(Rec."Bank Code") then
+                    Rec."Bank Name" := BankAcc."Bank Name"
+                else
+                    Rec."Bank Name" := '';
+            end;
+        }
+        field(50030; "Bank Name"; Text[100])
+        {
+            Editable = false;
+        }
+        field(50031; "Charge Amount"; Decimal)
+        {
+            Editable = false;
+            Description = 'Base withdrawal fee exclusive of excise and SMS';
+        }
+        field(50032; "Excise Duty Amount"; Decimal)
+        {
+            Editable = false;
+            Description = 'Excise Duty charged on the base withdrawal fee';
+        }
+        field(50033; "SMS Charge Amount"; Decimal)
+        {
+            Editable = false;
+            Description = 'SMS Charge segregated from base charge';
+        }
+        field(50034; "SMS Excise Duty"; Decimal)
+        {
+            Editable = false;
+            Description = 'Excise Duty charged specifically on the SMS Fee';
+        }
+        field(50035; "Approved By"; Code[50])
+        {
+            Editable = false;
         }
     }
 
@@ -906,17 +947,31 @@ table 52185776 "Cashier Transactions"
     end;
 
     local procedure CalcCharges()
+    var
+        IsSMS: Boolean;
     begin
 
         GenSetup.Get;
 
         TChargeAmount := 0;
+        
+        "Charge Amount" := 0;
+        "Excise Duty Amount" := 0;
+        "SMS Charge Amount" := 0;
+        "SMS Excise Duty" := 0;
+
         TransactionCharges.Reset;
         TransactionCharges.SetRange(TransactionCharges."Transaction Type", "Transaction Type");
         if TransactionCharges.Find('-') then begin
             repeat
 
                 ChargeAmount := 0;
+                IsSMS := false;
+                
+                // Identify if the loop has encountered the SMS Charge dynamically 
+                if (StrPos(UpperCase(TransactionCharges.Description), 'SMS') > 0) or 
+                   (StrPos(UpperCase(TransactionCharges."Charge Code"), 'SMS') > 0) then
+                    IsSMS := true;
 
                 if (TransactionCharges."Transaction Charge Category" = TransactionCharges."Transaction Charge Category"::Normal) or
                 (TransactionCharges."Transaction Charge Category" = TransactionCharges."Transaction Charge Category"::"Stamp Duty") then begin
@@ -947,12 +1002,23 @@ table 52185776 "Cashier Transactions"
                     end;
 
 
+                    // Segregate the SMS Charge vs the Base Withdrawal Fee
+                    if IsSMS then begin
+                        "SMS Charge Amount" += ChargeAmount;
+                        
+                        if (TransactionCharges."Transaction Charge Category" <> TransactionCharges."Transaction Charge Category"::"Stamp Duty") and (TransactionCharges."Recover Excise Duty") then
+                            "SMS Excise Duty" += (ChargeAmount * GenSetup."Excise Duty (%)") * 0.01;
+                    end else begin
+                        "Charge Amount" += ChargeAmount;
+                        
+                        if (TransactionCharges."Transaction Charge Category" <> TransactionCharges."Transaction Charge Category"::"Stamp Duty") and (TransactionCharges."Recover Excise Duty") then
+                            "Excise Duty Amount" += (ChargeAmount * GenSetup."Excise Duty (%)") * 0.01;
+                    end;
+
                     TChargeAmount := TChargeAmount + ChargeAmount;
 
                     if (TransactionCharges."Transaction Charge Category" <> TransactionCharges."Transaction Charge Category"::"Stamp Duty") and (TransactionCharges."Recover Excise Duty") then begin
-
-                        //Excise Duty
-
+                        // Global system Excise Duty
                         TChargeAmount := TChargeAmount + (ChargeAmount * GenSetup."Excise Duty (%)") * 0.01;
                         ;
                     end;
@@ -976,6 +1042,11 @@ table 52185776 "Cashier Transactions"
                             TransactionCharges.SetRange(TransactionCharges."Transaction Type", "Transaction Type");
                             if TransactionCharges.Find('-') then begin
                                 repeat
+
+                                    IsSMS := false;
+                                    if (StrPos(UpperCase(TransactionCharges.Description), 'SMS') > 0) or 
+                                       (StrPos(UpperCase(TransactionCharges."Charge Code"), 'SMS') > 0) then
+                                        IsSMS := true;
 
                                     if (TransactionCharges."Transaction Charge Category" = TransactionCharges."Transaction Charge Category"::"Withdrawal Frequency") then begin
 
@@ -1006,6 +1077,17 @@ table 52185776 "Cashier Transactions"
                                             end;
                                         end;
 
+
+                                        // Segregate frequency penalty from SMS noise
+                                        if IsSMS then begin
+                                            "SMS Charge Amount" += ChargeAmount;
+                                            if (TransactionCharges."Transaction Charge Category" <> TransactionCharges."Transaction Charge Category"::"Stamp Duty") and (TransactionCharges."Recover Excise Duty") then
+                                                "SMS Excise Duty" += (ChargeAmount * GenSetup."Excise Duty (%)") * 0.01;
+                                        end else begin
+                                            "Charge Amount" += ChargeAmount;
+                                            if (TransactionCharges."Transaction Charge Category" <> TransactionCharges."Transaction Charge Category"::"Stamp Duty") and (TransactionCharges."Recover Excise Duty") then
+                                                "Excise Duty Amount" += (ChargeAmount * GenSetup."Excise Duty (%)") * 0.01;
+                                        end;
 
                                         TChargeAmount := TChargeAmount + ChargeAmount;
 
@@ -1059,9 +1141,13 @@ table 52185776 "Cashier Transactions"
                 if TransactionCharges.Find('-') then begin
                     repeat
 
+                        IsSMS := false;
+                        if (StrPos(UpperCase(TransactionCharges.Description), 'SMS') > 0) or 
+                           (StrPos(UpperCase(TransactionCharges."Charge Code"), 'SMS') > 0) then
+                            IsSMS := true;
+
                         if (TransactionCharges."Transaction Charge Category" = TransactionCharges."Transaction Charge Category"::"Withdrawn Amount") then begin
-
-
+                        
 
                             ChargeAmount := 0;
                             if TransactionCharges."Charge Type" = TransactionCharges."Charge Type"::"% of Amount" = true then
@@ -1088,12 +1174,22 @@ table 52185776 "Cashier Transactions"
                                 end;
                             end;
 
+                            // Adding the penalty charges securely separated from SMS
+                            if IsSMS then begin
+                                "SMS Charge Amount" += ChargeAmount;
+                                if (TransactionCharges."Transaction Charge Category" <> TransactionCharges."Transaction Charge Category"::"Stamp Duty") and (TransactionCharges."Recover Excise Duty") then
+                                    "SMS Excise Duty" += (ChargeAmount * GenSetup."Excise Duty (%)") * 0.01;
+                            end else begin
+                                "Charge Amount" += ChargeAmount;
+                                if (TransactionCharges."Transaction Charge Category" <> TransactionCharges."Transaction Charge Category"::"Stamp Duty") and (TransactionCharges."Recover Excise Duty") then
+                                    "Excise Duty Amount" += (ChargeAmount * GenSetup."Excise Duty (%)") * 0.01;
+                            end;
+
                             TChargeAmount := TChargeAmount + ChargeAmount;
 
                             if (TransactionCharges."Transaction Charge Category" <> TransactionCharges."Transaction Charge Category"::"Stamp Duty") and (TransactionCharges."Recover Excise Duty") then begin
 
-                                //Excise Duty
-
+                        
                                 TChargeAmount := TChargeAmount + (ChargeAmount * GenSetup."Excise Duty (%)") * 0.01;
                             end;
                         end;
@@ -1105,6 +1201,27 @@ table 52185776 "Cashier Transactions"
         //Penalty of maximum amount on transaction
     end;
 
+    local procedure ValidateMpesaReference(MpesaRef: Code[10])
+    var 
+         CT: record "Cashier Transactions";
+         MpesaRefCode : Code[10];          
+    begin
+        clear(MpesaRefCode);
+
+        MpesaRefCode := UpperCase(DelChr(MpesaRef, '<>', ' '));
+
+        if StrLen(MpesaRefCode) <> 10 then
+        Error('M-Pesa reference must be exactly 10 characters long.');
+
+        if "Account Type" = "Account Type"::MPESA then begin
+            CT.Reset();
+            CT.SetRange("Mpesa Reference", MpesaRefCode);
+            CT.setfilter(No, '<>%1', Rec.No);
+            if CT.FindFirst() then
+                Error('MPESA Reference Code %1 already exists for transaction No. %2', MpesaRefCode, CT.No);
+        end;
+    end;
+    
     local procedure CLEARALL()
     begin
         "Account No" := '';
@@ -1122,6 +1239,11 @@ table 52185776 "Cashier Transactions"
         "Cheque Date" := 0D;
         "Cheque No" := '';
         "Product Type" := '';
+        
+        "Charge Amount" := 0;
+        "Excise Duty Amount" := 0;
+        "SMS Charge Amount" := 0;
+        "SMS Excise Duty" := 0;
     end;
 }
 

@@ -67,13 +67,23 @@ table 52185482 "Loan Product Availability"
     begin
         "Last Modified By" := UserId;
         "Last Modified At" := CurrentDateTime;
+        CheckIfProductIsOpen();
     end;
 
     trigger OnModify()
     begin
         "Last Modified By" := UserId;
         "Last Modified At" := CurrentDateTime;
-        // if status of the product is active do not allow edit instead throw error 
+        CheckIfProductIsOpen();
+    end;
 
+    local procedure CheckIfProductIsOpen()
+    var
+        ProductFactory: Record "Product Factory";
+    begin
+        if ProductFactory.Get(Rec."Loan Product Code") then begin
+            if ProductFactory.Status <> ProductFactory.Status::Open then
+                Error('Changes are not allowed because Product %1 status is %2 (Must be Open).', Rec."Loan Product Code", ProductFactory.Status);
+        end;
     end;
 }

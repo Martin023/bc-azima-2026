@@ -8,9 +8,7 @@ Report 52185705 "Transfer Net Pay To Fosa"
         dataitem("prSalary Card"; "PR Salary Card")
         {
             RequestFilterFields = "Period Filter", "Employee Code";
-            column(ReportForNavId_6207; 6207)
-            {
-            }
+
 
             trigger OnAfterGetRecord()
             begin
@@ -28,6 +26,7 @@ Report 52185705 "Transfer Net Pay To Fosa"
                         SalaryPrLines."No." := LineNumber;
                         //SalaryPrLines."Account No.":="prSalary Card"."Bank Account Number";
                         SalaryPrLines.VALIDATE(SalaryPrLines."Account No.");
+                        SalaryPrLines."Employer Code" := EmployerCode;
                         SalaryPrLines."Staff No." := PeriodTrans."Employee Code";
                         SalaryPrLines.Validate(SalaryPrLines."Staff No.");
                         SalaryPrLines.Date := Today;
@@ -43,7 +42,7 @@ Report 52185705 "Transfer Net Pay To Fosa"
                 Message('Salary Transfered Successfully');
             end;
 
-            trigger OnPreDataItem() 
+            trigger OnPreDataItem()
             begin
 
                 //  OnViewCurrRec();
@@ -55,7 +54,7 @@ Report 52185705 "Transfer Net Pay To Fosa"
                     if SalheaderDet.Posted = true then
                         Error('Header already posted');
                 end else
-                    Error('Salary Header No % not found', SalHeader);
+                    Error('Salary Header No %1 not found', SalHeader);
 
                 SalaryPrLines.Reset;
                 SalaryPrLines.SetRange(SalaryPrLines."Salary Header No.", SalHeader);
@@ -77,7 +76,7 @@ Report 52185705 "Transfer Net Pay To Fosa"
                 {
                     ApplicationArea = Basic;
                     Caption = 'Salary Header No';
-                    //TableRelation = "Salary Header".No where(Posted = filter(No));
+                    TableRelation = "Salary Header".No where(Posted = filter(false));
                 }
             }
         }
@@ -103,6 +102,12 @@ Report 52185705 "Transfer Net Pay To Fosa"
             if objPeriod.Closed = true then Error('The Period %1 is Closed', objPeriod."Date Opened");
         end;
         PostingDate := CalcDate('1M-1D', SelectedPeriod);
+
+        Employer.reset;
+        Employer.SetRange("Internal Staff Employer", true);
+        Employer.SetRange("Account Type", Employer."Account Type"::"Employer Code");
+        if Employer.FindFirst() then
+            EmployerCode := Employer."No.";
     end;
 
     var
@@ -112,67 +117,15 @@ Report 52185705 "Transfer Net Pay To Fosa"
         PeriodFilter: Text[30];
         SelectedPeriod: Date;
         objPeriod: Record "PR Payroll Periods";
-        ControlInfo: Record "Control-Information";
-        strEmpName: Text[150];
-        GeneraljnlLine: Record "Gen. Journal Line";
-        GenJnlBatch: Record "Gen. Journal Batch";
         "Slip/Receipt No": Code[50];
         LineNumber: Integer;
-        "Salary Card": Record "PR Salary Card";
-        TaxableAmount: Decimal;
-        PostingGroup: Record "prEmployee Posting Group";
-        GlobalDim1: Code[10];
-        GlobalDim2: Code[10];
         TransCode: Record "PR Transaction Codes";
         PostingDate: Date;
-        AmountToDebit: Decimal;
-        AmountToCredit: Decimal;
-        IntegerPostAs: Integer;
-        SaccoTransactionType: Option " ","Deposit Contribution","Share Capital","Benevolent Contribution",Loan,Repayment,"Interest Due","Interest Paid","Un Allocated Amount";
-        EmployerDed: Record "prEmployer Deductions";
         SalheaderDet: Record "Salary Header";
         SalaryPrLines: Record "Salary Lines";
         SalHeader: Code[20];
-
-
-    procedure CreateJnlEntry(AccountType: Option "G/L Account",Customer,Vendor,"Bank Account","Fixed Asset","IC Partner",Member; AccountNo: Code[20]; GlobalDime1: Code[20]; GlobalDime2: Code[20]; Description: Text[50]; DebitAmount: Decimal; CreditAmount: Decimal; PostAs: Option " ",Debit,Credit; LoanNo: Code[20]; TransType: Option " ","Registration Fee",Loan,Repayment,Withdrawal,"Interest Due","Interest Paid","Welfare Contribution","Deposit Contribution","Loan Penalty","Application Fee","Appraisal Fee",Investment,"Unallocated Funds","Shares Capital","Loan Adjustment",Dividend,"Withholding Tax","Administration Fee","Welfare Contribution 2"; BalAccountNo: Code[20])
-    begin
-        /*IF AccountType=AccountType::Customer THEN BEGIN
-        AccountType:=AccountType::Member;
-        END;
-        
-        
-         LineNumber:=LineNumber+100;
-         GeneraljnlLine.INIT;
-         GeneraljnlLine."Journal Template Name":='GENERAL';
-         GeneraljnlLine."Journal Batch Name":='STAFF PR';
-         GeneraljnlLine."Line No.":=LineNumber;
-         GeneraljnlLine."Document No.":="Slip/Receipt No";
-         GeneraljnlLine."Loan No":=LoanNo;
-         GeneraljnlLine."Transaction Type":=TransType;
-         GeneraljnlLine."Posting Date":=TODAY;
-         GeneraljnlLine."Account Type":=AccountType;
-         GeneraljnlLine."Account No.":=AccountNo;
-         //GeneraljnlLine.VALIDATE(GeneraljnlLine."Account No.");
-         GeneraljnlLine.Description:=Description;
-         IF PostAs = PostAs::Debit THEN BEGIN
-         GeneraljnlLine."Debit Amount":=DebitAmount;
-         GeneraljnlLine.VALIDATE("Debit Amount");
-         END ELSE BEGIN
-         GeneraljnlLine."Credit Amount":=CreditAmount;
-         GeneraljnlLine.VALIDATE("Credit Amount");
-         END;
-         //GeneraljnlLine."Bal. Account No.":=BalAccountNo;
-         GeneraljnlLine."Shortcut Dimension 1 Code":=GlobalDime1;
-         GeneraljnlLine.VALIDATE(GeneraljnlLine."Shortcut Dimension 1 Code");
-        // GeneraljnlLine."Shortcut Dimension 2 Code":=GlobalDime2;
-        // GeneraljnlLine.VALIDATE(GeneraljnlLine."Shortcut Dimension 2 Code");
-         IF GeneraljnlLine.Amount<>0 THEN
-              GeneraljnlLine.INSERT;
-         */
-
-    end;
-
+        Employer: record Customer;
+        EmployerCode: Code[20];
 
     procedure OnViewCurrRec()
     var

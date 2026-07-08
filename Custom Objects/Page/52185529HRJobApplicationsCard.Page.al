@@ -497,15 +497,15 @@ page 52185529 "HR Job Applications Card"
 
 
             // }
-            action("Import Job Applications")
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Import Job Applications';
-                Image = Import;
-                Promoted = true;
-                PromotedCategory = Process;
-                RunObject = XMLport "Job Application";
-            }
+            // action("Import Job Applications")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Caption = 'Import Job Applications';
+            //     Image = Import;
+            //     Promoted = true;
+            //     PromotedCategory = Process;
+            //     RunObject = XMLport "Job Application";
+            // }
         }
     }
 

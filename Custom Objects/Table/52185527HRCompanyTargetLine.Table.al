@@ -28,13 +28,6 @@ table 52185527 "HR Company Target Line"
         field(5; "Targeted Score"; Decimal)
         {
         }
-        field(6; "Perspective type"; Option)
-        {
-            CalcFormula = Lookup("HR Perspectives Setup"."Perspective type" WHERE("Perspective No" = FIELD("Perspective Code")));
-            FieldClass = FlowField;
-            OptionCaption = ' ,Service Delivery,Financial Stewardship,Training and Development,Customer and Sales';
-            OptionMembers = " ","Service Delivery","Financial Stewardship","Training and Development","Customer and Sales";
-        }
         field(7; "Achieved Score"; Decimal)
         {
         }

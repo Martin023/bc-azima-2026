@@ -94,7 +94,7 @@ table 52187018 "SMS Alerts Header"
         {
             Caption = 'Notice Type';
 
-            OptionMembers = " ","1st & 2nd Notice","Arrears Alert","CRB Notice","CRB Listing";
+            OptionMembers = "1st Notice","2nd Notice","Arrears Alert","CRB Notice","CRB Listing";
 
             trigger OnValidate()
             var
@@ -183,7 +183,7 @@ table 52187018 "SMS Alerts Header"
             var
                 myInt: Integer;
             begin
-                if "Notice Type" = "Notice Type"::"1st & 2nd Notice" then begin
+                if ("Notice Type" = "Notice Type"::"1st Notice") or ("Notice Type" = "Notice Type"::"2nd Notice") then begin
                     if "Case Forwarding No" = '' then
                         DeleteAlertLines();
                 end;

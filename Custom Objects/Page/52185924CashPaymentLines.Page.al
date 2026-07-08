@@ -44,8 +44,8 @@ page 52185924 "Cash Payment Lines"
                         PaymentHeader: Record "Payments Header";
                     begin
 
-                        if rec.Amount > 5000 then
-                            Error('Amount cannot be greater than 5,000!');
+                        // if rec.Amount > 5000 then
+                        //     Error('Amount cannot be greater than 5,000!');
                         if rec.Amount < 0 then Error('Amount cannot be less than 0!');
 
                         //Total amount of lines not to exceed Bank Acc max witholding balance

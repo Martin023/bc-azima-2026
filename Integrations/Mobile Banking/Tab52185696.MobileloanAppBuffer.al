@@ -166,8 +166,12 @@ table 52185696 "Mobile loan App. Buffer"
             DataClassification = ToBeClassified;
             Editable = false;
         }
-         field(50073; Installments; Integer)
+        field(50073; Installments; Integer)
         {
+        }
+        field(50074; "Loan Record Created?"; Boolean)
+        {
+            DataClassification = ToBeClassified;
         }
     }
 

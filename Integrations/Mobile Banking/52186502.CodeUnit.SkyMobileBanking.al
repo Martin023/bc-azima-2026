@@ -176,7 +176,18 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 end;
             'GROWER_NO':
                 SearchMember.SetRange("Payroll/Staff No.", identifier.AsValue.AsText);
-            else
+            else begin
+
+                ResponseObject.Add('request_status', 'ERROR');
+                Datum.Add('error_message', 'Invalid identifier type!');
+
+                ResponseObject.Add('response_payload', Datum);
+                AddDateTimeToResponse(ResponseObject);
+
+                ResponseObject.WriteTo(Response);
+
+                exit(Response);
+            end;
         end;
 
         SearchMember.SetLoadFields(
@@ -243,6 +254,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 Datum.Add('branch', SearchMember."Branch Code");
             end;
 
+            Datum.Add('member_class', SearchMember."Member Class");
             Datum.Add('main_savings_account_no', SkyMbankingTrans.GetMemberFosaAcc(SearchMember));
             Datum.Add('main_deposits_account_no', SkyMbankingTrans.GetMemberDepositsAcc(SearchMember));
 
@@ -2595,11 +2607,14 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
         SearchMember: Record Members;
         MobileLoanProducts: Record "Product Factory";
+        ProductSupportedClasses: Record "Product Supported Classes";
 
         ResponseObject: JsonObject;
         Data: JsonArray;
         Datum: JsonObject;
         Response: Text;
+
+        EligibleClass: JsonArray;
     begin
         Payload.Get('identifier_type', identifier_type); // MSISDN, CUSTOMER_NO
         Payload.Get('identifier', identifier);
@@ -2617,6 +2632,11 @@ codeunit 52186502 "Sky Mobile Banking Integration"
             MobileLoanProducts.SetRange(Status, MobileLoanProducts.Status::Active);
             MobileLoanProducts.SetRange("Mobile Loan", true);
 
+            MobileLoanProducts.SetLoadFields(
+               "Product ID", "Product Description", "Minimum Loan Amount", "Mobile Max. Loan Amount", "Maximum Loan Amount",
+               "Ordinary Default Intallments", "Allow Topup"
+           );
+
             if SearchMember."Employer Code" = 'RETIREE' then begin
                 // Pension only
                 MobileLoanProducts.Setfilter("Salary Income Types", '%1|%2', MobileLoanProducts."Salary Income Types"::Pension, MobileLoanProducts."Salary Income Types"::Dividend);
@@ -2631,6 +2651,22 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
             IF MobileLoanProducts.FindSet then begin
                 repeat begin
+                    Clear(EligibleClass);
+
+                    ProductSupportedClasses.Reset();
+                    ProductSupportedClasses.SetRange(
+                        "Product ID",
+                        MobileLoanProducts."Product ID"
+                    );
+
+                    if ProductSupportedClasses.FindSet() then begin
+                        repeat
+                            EligibleClass.Add(
+                                Format(ProductSupportedClasses."Class Category")
+                            );
+                        until ProductSupportedClasses.Next() = 0;
+                    end;
+
                     Datum.Add('loan_type_id', MobileLoanProducts."Product ID");
                     Datum.Add('loan_type_name', MobileLoanProducts."Product Description");
                     Datum.Add('loan_type_min_amount', MobileLoanProducts."Minimum Loan Amount");
@@ -2643,6 +2679,10 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                         end else begin
                             Datum.Add('loan_type_max_amount', 0);
                         end;
+
+                    Datum.Add('loan_type_max_installments', MobileLoanProducts."Ordinary Default Intallments");
+                    Datum.Add('requires_installments', MobileLoanProducts."Allow Topup");
+                    Datum.Add('eligible_member_class', EligibleClass);
 
                     Data.Add(Datum);
 
@@ -2736,6 +2776,12 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         ProductSupportedClasses: Record "Product Supported Classes";
         MemberClass: Record "Member Classes";
         BlockedEmployers: Record "Blocked Employers";
+        MblLoanException: Record "Mobile Loan Exceptions";
+        // IsFosaMLoanProduct: Boolean;
+        TopUpLoan: Record Loans;
+        TotalTopUp: Decimal;
+        ExistingLoanAmount: Decimal;
+        // installments: JsonToken;
 
         ResponseObject: JsonObject;
         MemberDetails: JsonObject;
@@ -2744,11 +2790,13 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
         SalaryAmount: Decimal;
         EligibilityFailReason: Text;
+        EligibleAmount: Decimal;
     begin
         Payload.Get('originator_id', originator_id);
         Payload.Get('identifier_type', identifier_type); // MSISDN, CUSTOMER_NO
         Payload.Get('identifier', identifier);
         Payload.Get('loan_type_id', loan_type_id);
+        // IsFosaMLoanProduct := Payload.Get('installments', installments);
 
         GetMemberRecordV2(
             SearchMember,
@@ -2756,6 +2804,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
             identifier.AsValue.AsText,
             ''
         );
+        EligibleAmount := 0;
 
         IF SearchMember.FindFirst then begin
             // memberclass filter
@@ -2779,7 +2828,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 ProductSupportedClasses.SetRange("Class Category", SearchMember."Member Class");
                 if ProductSupportedClasses.IsEmpty() then begin
                     ResponseObject.Add('request_status', 'ERROR');
-                    Datum.Add('error_message', 'Loan product with ID = ' + loan_type_id.AsValue.AsText + ' is NOT available to ' + Format(SearchMember."Member Class") + ' Members');
+                    Datum.Add('error_message', StrSubstNo('This loan product is not available to %1 members.', SearchMember."Member Class"));
                     ResponseObject.Add('response_payload', Datum);
                     AddDateTimeToResponse(ResponseObject);
                     ResponseObject.WriteTo(Response);
@@ -2791,19 +2840,54 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 BlockedEmployers.SetRange("Product ID", MobileLoanProduct."Product ID");
                 BlockedEmployers.SetRange("Employer Code", SearchMember."Employer Code");
                 if not BlockedEmployers.IsEmpty() then begin
-                    ResponseObject.Add('request_status', 'ERROR');
-                    Datum.Add('error_message', 'Loan product with ID = ' + loan_type_id.AsValue.AsText + ' is NOT available to ' + SearchMember."Employer Code" + ' Employees');
-                    ResponseObject.Add('response_payload', Datum);
-                    AddDateTimeToResponse(ResponseObject);
-                    ResponseObject.WriteTo(Response);
-                    exit(Response);
+                    MblLoanException.Reset();
+                    MblLoanException.SetRange("Member No.", SearchMember."No.");
+                    MblLoanException.SetRange("Product ID", MobileLoanProduct."Product ID");
+                    MblLoanException.SetRange("Status", MblLoanException.Status::Active);
+                    if MblLoanException.IsEmpty() then begin
+                        ResponseObject.Add('request_status', 'ERROR');
+                        Datum.Add('error_message', 'This loan product is not available to members of your employer.');
+                        ResponseObject.Add('response_payload', Datum);
+                        AddDateTimeToResponse(ResponseObject);
+                        ResponseObject.WriteTo(Response);
+                        exit(Response);
+                    end;
                 end;
 
                 Datum.Add('loan_type_id', MobileLoanProduct."Product ID");
                 Datum.Add('loan_name', MobileLoanProduct."Product Description");
 
                 if MobileLoanProduct."Mobile Loan" then begin
-                    Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason));
+
+                    // Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason));
+                    if MobileLoanProduct."Allow Topup" then begin
+                        // if IsFosaMLoanProduct then begin
+                        // if installments.AsValue.AsInteger <= 0 then begin
+                        //     ResponseObject.Add('request_status', 'ERROR');
+                        //     Datum.Add('error_message', 'Installments MUST be greater than 0!');
+                        //     ResponseObject.Add('response_payload', Datum);
+
+                        //     AddDateTimeToResponse(ResponseObject);
+
+                        //     ResponseObject.WriteTo(Response);
+                        //     exit(Response);
+                        // end;
+                        EligibleAmount := SkyMbankingTrans.GetLoansQualifyAmount2(SearchMember."No.", MobileLoanProduct."Product ID" /*, installments.AsValue.AsInteger*/, EligibilityFailReason);
+
+                        Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount2(SearchMember."No.", MobileLoanProduct."Product ID" /*, installments.AsValue.AsInteger*/, EligibilityFailReason));
+                        ExistingLoanAmount := GlobalFunctions.GetMemberLoanProductTotalBalance(
+                            SearchMember."No.",
+                            MobileLoanProduct."Product ID"
+                        );
+                        Datum.Add('existing_loan_amount', ExistingLoanAmount);
+                        // end else begin
+                        //     Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason));
+                        //     Datum.Add('existing_loan_amount', ExistingLoanAmount);
+                        // end;
+                    end else begin
+                        Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason));
+                        Datum.Add('existing_loan_amount', ExistingLoanAmount);
+                    end;
                 end else begin
                     SalaryAmount := GuarantorSalaryEligibility(loan_type_id.AsValue.AsText, SearchMember, 0, EligibilityFailReason);
 
@@ -2856,8 +2940,12 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         request_application: JsonToken;
         transaction_date_time: JsonToken;
         mobile_loan_purpose: JsonToken;
+        // installments: JsonToken;
 
         KeyExists: Boolean;
+        // IsFosaMLoanProduct: Boolean;
+        TotalTopUp: Decimal;
+        TopUpLoan: Record Loans;
 
         SearchMember: Record Members;
         MobileLoanProduct: Record "Product Factory";
@@ -2884,6 +2972,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         Payload.Get('request_application', request_application);
         Payload.Get('transaction_date_time', transaction_date_time);
         KeyExists := Payload.Get('mobile_loan_purpose', mobile_loan_purpose);
+        // IsFosaMLoanProduct := Payload.Get('installments', installments);
 
         MobileLoanPurpose := '';
         TheLoanPurposes.Reset;
@@ -2903,32 +2992,6 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         );
 
         IF SearchMember.FindFirst then begin
-            if SearchMember.Status = SearchMember.Status::Deceased then begin // Deceased
-                ResponseObject.Add('request_status', 'ERROR');
-                Datum.Add('error_message', 'Member with identification ' + identifier_type.AsValue.AsText + ' = ' + identifier.AsValue.AsText + ' is Deceased');
-                ResponseObject.Add('response_payload', Datum);
-                AddDateTimeToResponse(ResponseObject);
-                ResponseObject.WriteTo(Response);
-                exit(Response);
-            end;
-            if SearchMember.Status = SearchMember.Status::Dormant then begin // Dormant
-                ResponseObject.Add('request_status', 'ERROR');
-                Datum.Add('error_message', 'Member with identification ' + identifier_type.AsValue.AsText + ' = ' + identifier.AsValue.AsText + ' is Dormant');
-                ResponseObject.Add('response_payload', Datum);
-                ResponseObject.Add('response_payload', Datum);
-                AddDateTimeToResponse(ResponseObject);
-                ResponseObject.WriteTo(Response);
-                exit(Response);
-            end;
-            if (SearchMember.Status = SearchMember.Status::Dormant) and (SearchMember.Subflag = SearchMember.Subflag::Defaulter) then begin // Defaulter
-                ResponseObject.Add('request_status', 'ERROR');
-                Datum.Add('error_message', 'Member with identification ' + identifier_type.AsValue.AsText + ' = ' + identifier.AsValue.AsText + ' is a Defaulter');
-                ResponseObject.Add('response_payload', Datum);
-                ResponseObject.Add('response_payload', Datum);
-                AddDateTimeToResponse(ResponseObject);
-                ResponseObject.WriteTo(Response);
-                exit(Response);
-            end;
             if CheckFOSASavingsAccountBlocked(SearchMember, 'CREDIT') then begin
                 ResponseObject.Add('request_status', 'BLOCKED');
                 Datum.Add('error_message', 'Account is blocked from credit transactions.');
@@ -2957,10 +3020,10 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 // MemberClass product filter
                 ProductSupportedClasses.Reset();
                 ProductSupportedClasses.SetRange("Product ID", MobileLoanProduct."Product ID");
-                ProductSupportedClasses.SetRange("Class Category", CopyStr(Format(MemberClass."Member Class"), 1, 10));
+                ProductSupportedClasses.SetRange("Class Category", SearchMember."Member Class");
                 if ProductSupportedClasses.IsEmpty() then begin
                     ResponseObject.Add('request_status', 'ERROR');
-                    Datum.Add('error_message', 'Loan product with ID = ' + loan_type_id.AsValue.AsText + ' is NOT available to Class ' + Format(MemberClass."Member Class") + ' Members');
+                    Datum.Add('error_message', StrSubstNo('This loan product is not available to %1 members.', SearchMember."Member Class"));
                     ResponseObject.Add('response_payload', Datum);
                     AddDateTimeToResponse(ResponseObject);
                     ResponseObject.WriteTo(Response);
@@ -2973,145 +3036,227 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 BlockedEmployers.SetRange("Employer Code", SearchMember."Employer Code");
                 if not BlockedEmployers.IsEmpty() then begin
                     ResponseObject.Add('request_status', 'ERROR');
-                    Datum.Add('error_message', 'Loan product with ID = ' + loan_type_id.AsValue.AsText + ' is NOT available to ' + SearchMember."Employer Code" + ' Employees');
+                    Datum.Add('error_message', 'Loan product with ID = ' + loan_type_id.AsValue.AsText + ' is NOT available to ' + SearchMember."Employer Name" + ' Employees');
                     ResponseObject.Add('response_payload', Datum);
                     AddDateTimeToResponse(ResponseObject);
                     ResponseObject.WriteTo(Response);
                     exit(Response);
                 end;
 
-                // Check loan Limit
-                if SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason) < amount.AsValue.AsDecimal then begin
-                    ResponseObject.Add('request_status', 'ERROR');
-                    Datum.Add('error_message', 'Loan amount exceeds the maximum limit allowed for the member of ' + Format(SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason)));
-                    ResponseObject.Add('response_payload', Datum);
+                if MobileLoanProduct."Allow Topup" then begin
+                    // Check Max Appliable Amount for loan
+                    // if amount.AsValue.AsDecimal > MobileLoanProduct."Mobile Max. Loan Amount" then begin
+                    //     ResponseObject.Add('request_status', 'ERROR');
+                    //     Datum.Add('error_message', 'Loan amount exceeds the maximum limit allowed for the loan product of ' + Format(MobileLoanProduct."Mobile Max. Loan Amount"));
+                    //     ResponseObject.Add('response_payload', Datum);
 
-                    AddDateTimeToResponse(ResponseObject);
+                    //     AddDateTimeToResponse(ResponseObject);
 
-                    ResponseObject.WriteTo(Response);
-                    exit(Response);
-                end;
-                // Check Max Appliable Amount for loan
-                if amount.AsValue.AsDecimal > MobileLoanProduct."Mobile Max. Loan Amount" then begin
-                    ResponseObject.Add('request_status', 'ERROR');
-                    Datum.Add('error_message', 'Loan amount exceeds the maximum limit allowed for the loan product of ' + Format(MobileLoanProduct."Mobile Max. Loan Amount"));
-                    ResponseObject.Add('response_payload', Datum);
+                    //     ResponseObject.WriteTo(Response);
+                    //     exit(Response);
+                    // end;
+                    // // Check Min Appliable Amount for loan
+                    // if amount.AsValue.AsDecimal < MobileLoanProduct."Minimum Loan Amount" then begin
+                    //     ResponseObject.Add('request_status', 'ERROR');
+                    //     Datum.Add('error_message', 'Loan amount is less than the minimum limit allowed for the loan product of ' + Format(MobileLoanProduct."Minimum Loan Amount"));
+                    //     ResponseObject.Add('response_payload', Datum);
 
-                    AddDateTimeToResponse(ResponseObject);
+                    //     AddDateTimeToResponse(ResponseObject);
 
-                    ResponseObject.WriteTo(Response);
-                    exit(Response);
-                end;
-                // Check Min Appliable Amount for loan
-                if amount.AsValue.AsDecimal < MobileLoanProduct."Minimum Loan Amount" then begin
-                    ResponseObject.Add('request_status', 'ERROR');
-                    Datum.Add('error_message', 'Loan amount is less than the minimum limit allowed for the loan product of ' + Format(MobileLoanProduct."Minimum Loan Amount"));
-                    ResponseObject.Add('response_payload', Datum);
+                    //     ResponseObject.WriteTo(Response);
+                    //     exit(Response);
+                    // end;
 
-                    AddDateTimeToResponse(ResponseObject);
+                    // if Conditions are met then create loan application
+                    // if MobileLoanProduct."Allow Topup" then begin
+                    //     // if installments.AsValue.IsNull then begin
+                    //     //     IsFosaMLoanProduct := false;
+                    //     // end;
+                    // end else begin
+                    //     IsFosaMLoanProduct := false;
+                    // end;
 
-                    ResponseObject.WriteTo(Response);
-                    exit(Response);
-                end;
-                // if Conditions are met then create loan application
-                if SkyMbankingTrans.BufferLoanApplication(
-                    SearchMember."No.", MobileLoanProduct."Product ID",
-                    amount.AsValue.AsDecimal,
-                    source_reference.AsValue.AsText,
-                    MobileLoanPurpose) then begin
+                    if MobileLoanProduct."Allow Topup" then begin
+                        // if Conditions are met then create loan application
+                        if SkyMbankingTrans.BufferLoanApplication(
+                            SearchMember."No.", MobileLoanProduct."Product ID",
+                            amount.AsValue.AsDecimal,
+                            source_reference.AsValue.AsText,
+                            MobileLoanPurpose) then begin
 
-                    Datum.Add('transaction_reference', GlobalFunctions.CleanGuid);
+                            Datum.Add('transaction_reference', GlobalFunctions.CleanGuid);
 
-                    TheLoan.Reset;
+                            TheLoan.Reset;
 
-                    TheLoan.SetRange("Member No.", SearchMember."No.");
-                    TheLoan.SetRange("Loan Product Type", MobileLoanProduct."Product ID");
-                    TheLoan.SetRange(Posted, false);
-                    TheLoan.SetRange("Requested Amount", amount.AsValue.AsDecimal);
-                    TheLoan.SetRange("Loanee Message", source_reference.AsValue.AsText);
+                            TheLoan.SetRange("Member No.", SearchMember."No.");
+                            TheLoan.SetRange("Loan Product Type", MobileLoanProduct."Product ID");
+                            TheLoan.SetRange(Posted, false);
+                            TheLoan.SetRange("Requested Amount", amount.AsValue.AsDecimal);
+                            TheLoan.SetRange("Loanee Message", source_reference.AsValue.AsText);
 
-                    TheLoan.SetLoadFields(
-                        "Loan No.",
-                        "Loan Product Type Name",
-                        "Requested Amount"
-                    );
+                            TheLoan.SetLoadFields(
+                                "Loan No.",
+                                "Loan Product Type Name",
+                                "Requested Amount"
+                            );
 
-                    if TheLoan.FindFirst then begin
-                        Datum.Add('loan_serial_number', TheLoan."Loan No.");
+                            if TheLoan.FindFirst then begin
+                                Datum.Add('loan_serial_number', TheLoan."Loan No.");
+                            end else begin
+                                Datum.Add('loan_serial_number', '');
+                            end;
+
+                            Datum.Add('loan_type_id', MobileLoanProduct."Product ID");
+                            Datum.Add('loan_name', MobileLoanProduct."Product Description");
+                            // Datum.Add('amount', 0);
+                            Datum.Add('amount', amount.AsValue.AsDecimal);
+
+                            ResponseObject.Add('request_status', 'SUCCESS');
+                            ResponseObject.Add('response_payload', Datum);
+
+
+                            // SMS
+                            // theSMS := 'Dear member, your ' +
+                            // TheLoan."Loan Product Type Name"
+                            // + ' loan application request of KES ' +
+                            // Format(TheLoan."Requested Amount") +
+                            // ' has been received successfully. Kindly wait shortly as we process this request. Transaction ID: ' +
+                            // TheLoan."Loan No.";
+
+                            // if SearchMember."Phone No." <> '' then begin
+                            //     SkySMS.SendSms(
+                            //         SMSSource::LOAN_APPLICATION,
+                            //         SearchMember."Phone No.",
+                            //         theSMS,
+                            //         TheLoan."Loan No.",
+                            //         '',
+                            //         true,
+                            //         0,
+                            //         true,
+                            //         'MBANKING',
+                            //         originator_id.AsValue.AsText,
+                            //         'CBS'
+                            //     );
+                            // end else begin
+                            //     if SearchMember."Transactional Mobile Number" <> '' then begin
+                            //         SkySMS.SendSms(
+                            //             SMSSource::LOAN_APPLICATION,
+                            //             SearchMember."Transactional Mobile Number",
+                            //             theSMS,
+                            //             TheLoan."Loan No.",
+                            //             '',
+                            //             true,
+                            //             0,
+                            //             true,
+                            //             'MBANKING',
+                            //             originator_id.AsValue.AsText,
+                            //             'CBS'
+                            //         );
+                            //     end
+                            // end;
+                        end else begin
+                            ResponseObject.Add('request_status', 'FAILED');
+                            Datum.Add('error_message', 'Loan creation failed');
+                            ResponseObject.Add('response_payload', Datum);
+                        end;
+
                     end else begin
-                        Datum.Add('loan_serial_number', '');
+                        if SkyMbankingTrans.BufferLoanApplication(
+                   SearchMember."No.", MobileLoanProduct."Product ID",
+                   amount.AsValue.AsDecimal,
+                   source_reference.AsValue.AsText,
+                   MobileLoanPurpose) then begin
+
+                            Datum.Add('transaction_reference', GlobalFunctions.CleanGuid);
+
+                            // TheLoan.Reset;
+
+                            // TheLoan.SetRange("Member No.", SearchMember."No.");
+                            // TheLoan.SetRange("Loan Product Type", MobileLoanProduct."Product ID");
+                            // TheLoan.SetRange(Posted, false);
+                            // // TheLoan.SetRange("Requested Amount", amount.AsValue.AsDecimal);
+                            // TheLoan.SetRange("Loanee Message", source_reference.AsValue.AsText);
+
+                            // TheLoan.SetLoadFields(
+                            //     "Loan No.",
+                            //     "Loan Product Type Name",
+                            //     "Requested Amount"
+                            // );
+
+                            // if TheLoan.FindFirst then begin
+                            //     Datum.Add('loan_serial_number', TheLoan."Loan No.");
+                            // end else begin
+                            Datum.Add('loan_serial_number', source_reference.AsValue.AsText);
+                            // end;
+
+                            Datum.Add('loan_type_id', MobileLoanProduct."Product ID");
+                            Datum.Add('loan_name', MobileLoanProduct."Product Description");
+                            // Datum.Add('amount', 0);
+                            Datum.Add('amount', amount.AsValue.AsDecimal);
+
+                            ResponseObject.Add('request_status', 'SUCCESS');
+                            ResponseObject.Add('response_payload', Datum);
+
+
+                            // SMS
+                            // theSMS := 'Dear member, your ' +
+                            // TheLoan."Loan Product Type Name"
+                            // + ' loan application request of KES ' +
+                            // Format(TheLoan."Requested Amount") +
+                            // ' has been received successfully. Kindly wait shortly as we process this request. Transaction ID: ' +
+                            // TheLoan."Loan No.";
+
+                            // if SearchMember."Phone No." <> '' then begin
+                            //     SkySMS.SendSms(
+                            //         SMSSource::LOAN_APPLICATION,
+                            //         SearchMember."Phone No.",
+                            //         theSMS,
+                            //         TheLoan."Loan No.",
+                            //         '',
+                            //         true,
+                            //         0,
+                            //         true,
+                            //         'MBANKING',
+                            //         originator_id.AsValue.AsText,
+                            //         'CBS'
+                            //     );
+                            // end else begin
+                            //     if SearchMember."Transactional Mobile Number" <> '' then begin
+                            //         SkySMS.SendSms(
+                            //             SMSSource::LOAN_APPLICATION,
+                            //             SearchMember."Transactional Mobile Number",
+                            //             theSMS,
+                            //             TheLoan."Loan No.",
+                            //             '',
+                            //             true,
+                            //             0,
+                            //             true,
+                            //             'MBANKING',
+                            //             originator_id.AsValue.AsText,
+                            //             'CBS'
+                            //         );
+                            //     end
+                            // end;
+                        end else begin
+                            ResponseObject.Add('request_status', 'FAILED');
+                            Datum.Add('error_message', 'Loan creation failed');
+                            ResponseObject.Add('response_payload', Datum);
+                        end;
                     end;
 
-                    Datum.Add('loan_type_id', MobileLoanProduct."Product ID");
-                    Datum.Add('loan_name', MobileLoanProduct."Product Description");
-                    // Datum.Add('amount', 0);
-                    Datum.Add('amount', amount.AsValue.AsDecimal);
-
-                    ResponseObject.Add('request_status', 'SUCCESS');
-                    ResponseObject.Add('response_payload', Datum);
-
-
-                    // SMS
-                    // theSMS := 'Dear member, your ' +
-                    // TheLoan."Loan Product Type Name"
-                    // + ' loan application request of KES ' +
-                    // Format(TheLoan."Requested Amount") +
-                    // ' has been received successfully. Kindly wait shortly as we process this request. Transaction ID: ' +
-                    // TheLoan."Loan No.";
-
-                    // if SearchMember."Phone No." <> '' then begin
-                    //     SkySMS.SendSms(
-                    //         SMSSource::LOAN_APPLICATION,
-                    //         SearchMember."Phone No.",
-                    //         theSMS,
-                    //         TheLoan."Loan No.",
-                    //         '',
-                    //         true,
-                    //         0,
-                    //         true,
-                    //         'MBANKING',
-                    //         originator_id.AsValue.AsText,
-                    //         'CBS'
-                    //     );
-                    // end else begin
-                    //     if SearchMember."Transactional Mobile Number" <> '' then begin
-                    //         SkySMS.SendSms(
-                    //             SMSSource::LOAN_APPLICATION,
-                    //             SearchMember."Transactional Mobile Number",
-                    //             theSMS,
-                    //             TheLoan."Loan No.",
-                    //             '',
-                    //             true,
-                    //             0,
-                    //             true,
-                    //             'MBANKING',
-                    //             originator_id.AsValue.AsText,
-                    //             'CBS'
-                    //         );
-                    //     end
-                    // end;
-                end else begin
-                    ResponseObject.Add('request_status', 'FAILED');
-                    Datum.Add('error_message', 'Loan creation failed');
-                    ResponseObject.Add('response_payload', Datum);
                 end;
-
             end else begin
                 ResponseObject.Add('request_status', 'ERROR');
-                Datum.Add('error_message', 'Loan product with ID = ' + loan_type_id.AsValue.AsText + ' NOT available for mobile application!');
+                Datum.Add('error_message', 'Member with identification ' + identifier_type.AsValue.AsText + ' = ' + identifier.AsValue.AsText + ' NOT found!');
                 ResponseObject.Add('response_payload', Datum);
             end;
-        end else begin
-            ResponseObject.Add('request_status', 'ERROR');
-            Datum.Add('error_message', 'Member with identification ' + identifier_type.AsValue.AsText + ' = ' + identifier.AsValue.AsText + ' NOT found!');
-            ResponseObject.Add('response_payload', Datum);
+
+            AddDateTimeToResponse(ResponseObject);
+
+            ResponseObject.WriteTo(Response);
+
+            exit(Response);
         end;
-
-        AddDateTimeToResponse(ResponseObject);
-
-        ResponseObject.WriteTo(Response);
-
-        exit(Response);
     end;
 
     local procedure GetLoansInService(Payload: JsonObject; APIRequestID: JsonToken): Text
@@ -3808,6 +3953,9 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         Loan: Record Loans;
         TotalCreditAmount: Decimal;
         FosaAcc: code[50];
+        CredLedgEntry: Record "Credit Ledger Entry";
+        InterestPaidAmount: Decimal;
+        RepaymentPaidAmount: Decimal;
         MobileLoanBuffer: Record "Mobile loan App. Buffer";
         SavingsAccounts: Record "Savings Accounts";
         LoanApplicant: Record Members;
@@ -3835,6 +3983,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         DepositTransBuffer: Record "Sky M-Banking Trans. Buffer";
 
         DepositMember: Record Members;
+        TheLoan: Record loans;
+        SearchMember: Record Members;
     begin
         // Database.SelectLatestVersion();
         PostingBatchSize := 25;
@@ -3911,178 +4061,303 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                         end;
                     end;
 
-                    // Moble Loan Disbursements
-                    MobileTransTypes.SetRange(type, MobileTransTypes.Type::"Loan Disbursement");
-                    MobileTransTypes.SetLoadFields(Code);
-                    if MobileTransTypes.FindFirst() then begin
-                        HasChargeType := true;
-                    end else begin
-                        HasChargeType := false;
-                    end;
+                    // Create Mobile Loan Record
+                    if GlobalFunctions.GetRandomBoolean then begin
 
-                    MobileLoanBuffer.Reset();
-                    MobileLoanBuffer.SetRange(Posted, false);
-                    MobileLoanBuffer.SetRange(Status, MobileLoanBuffer.Status::Approved);
-                    MobileLoanBuffer.SetRange(Deactivated, false);
-                    // MobileLoanBuffer.SetAscending("Entry No", GlobalFunctions.GetRandomBoolean);
-                    MobileLoanBuffer.SetCurrentKey("Try Posting Count", "Entry No");
-                    MobileLoanBuffer.SetAscending("Try Posting Count", true);
-                    MobileLoanBuffer.SetAscending("Entry No", GlobalFunctions.GetRandomBoolean);
-                    if MobileLoanBuffer.FindSet(true) then begin
-                        PostingBatchCounter := 0;
-                        RecordsCount := MobileLoanBuffer.Count;
-                        // SuccessMessage := Format(MobileLoanBuffer.Count) + ' Loan Disbursement(s) were processed Successfully';
-                        repeat
-                            // Check prerequisites
-                            loan.reset;
-                            loan.SetRange("Loan No.", MobileLoanBuffer."Loan No.");
-                            Loan.SetLoadFields("Loan No.", "Loan Product Type Name");
-                            if not loan.FindFirst then begin
-                                MobileLoanBuffer.Posted := false;
-                                MobileLoanBuffer."Needs Change" := true;
-                                MobileLoanBuffer."Needs Change Reason" := 'The loan was not found';
-                                MobileLoanBuffer.Modify();
-                            end;
+                        // Create pending mobile loan records to the loans table
+                        MobileLoanBuffer.Reset;
+                        MobileLoanBuffer.SetRange("Loan Record Created?", false);
+                        MobileLoanBuffer.SetRange(Posted, false);
+                        MobileLoanBuffer.SetRange("Loan No.", '');
+                        if MobileLoanBuffer.FindSet(true) then begin
+                            PostingBatchCounter := 0;
+                            RecordsCount := MobileLoanBuffer.Count;
+                            repeat begin
+                                if MobileLoanBuffer."Loan No." = '' then begin
+                                    if pfac.Get(MobileLoanBuffer."Loan Product Type") then begin
+                                        if pfac."Allow Topup" then begin
+                                            // CreateLoanRecord2
+                                            SkyMbankingTrans.CreateLoanRecord2(
+                                                MobileLoanBuffer,
+                                                MobileLoanBuffer."Loan Product Type",
+                                                MobileLoanBuffer.Installments
+                                            );
+                                        end else begin
+                                            // CreateLoanRecord
+                                            SkyMbankingTrans.CreateLoanRecord(
+                                                MobileLoanBuffer,
+                                                MobileLoanBuffer."Loan Product Type"
+                                            );
+                                        end;
 
-                            MobileLoanBuffer."Try Posting Count" += 1;
-                            if MobileLoanBuffer."Try Posting Count" >= 10 then begin
-                                MobileLoanBuffer.Remarks := 'Max. Posting Attempts of ' + Format(MobileLoanBuffer."Try Posting Count") + ' reached!';
-                                MobileLoanBuffer.Posted := true;
-                                MobileLoanBuffer.Deactivated := true;
-                                MobileLoanBuffer."Deactivated By" := UserId;
-                                MobileLoanBuffer."Date Posted" := CurrentDateTime;
+                                        if MobileLoanBuffer."Loan Record Created?" then begin
+                                            Commit;
 
-                                theSMS := 'Dear member, your ' +
-                                    Loan."Loan Product Type Name" +
-                                    ' of KES ' +
-                                    Format(MobileLoanBuffer.Amount) +
-                                    ' applied on ' + GlobalFunctions.FormatISODate(MobileLoanBuffer."Date Entered") +
-                                    ' at ' + GlobalFunctions.FormatISOTime(MobileLoanBuffer."Time Entered") +
-                                    ' was unsuccessful. Please try again later. Ref: ' + Loan."Loan No.";
+                                            // SMS
+                                            TheLoan.Reset;
 
-                                LoanApplicant.Reset;
-                                LoanApplicant.SetRange("No.", MobileLoanBuffer."Member No.");
-                                LoanApplicant.SetLoadFields("Phone No.", "Transactional Mobile Number");
-                                if LoanApplicant.FindFirst then begin
-                                    SkySMS.SendSms(
-                                        SMSSource::LOAN_REJECTED,
-                                        LoanApplicant."Transactional Mobile Number",
-                                        theSMS,
-                                        Loan."Loan No.",
-                                        '',
-                                        true,
-                                        0,
-                                        true,
-                                        'MBANKING',
-                                        MobileLoanBuffer."Session ID",
-                                        'CBS'
-                                    );
+                                            TheLoan.SetRange("Member No.", MobileLoanBuffer."Member No.");
+                                            TheLoan.SetRange("Loan Product Type", MobileLoanBuffer."Loan Product Type");
+                                            TheLoan.SetRange(Posted, false);
+                                            // TheLoan.SetRange("Requested Amount", amount.AsValue.AsDecimal);
+                                            TheLoan.SetRange("Loanee Message", MobileLoanBuffer."Session ID");
+
+                                            TheLoan.SetLoadFields(
+                                                "Loan No.",
+                                                "Loan Product Type Name",
+                                                "Requested Amount"
+                                            );
+
+                                            if TheLoan.FindFirst then begin
+
+                                                theSMS := 'Dear member, your ' +
+                                                TheLoan."Loan Product Type Name"
+                                                + ' loan application request of KES ' +
+                                                Format(TheLoan."Requested Amount") +
+                                                ' has been received successfully. Kindly wait shortly as we process this request. Transaction ID: ' +
+                                                TheLoan."Loan No.";
+
+                                                SearchMember.Reset;
+                                                SearchMember.SetRange("No.", TheLoan."Member No.");
+                                                SearchMember.SetLoadFields(
+                                                    "Phone No.", "Transactional Mobile Number"
+                                                );
+                                                if SearchMember.FindFirst then begin
+                                                    if SearchMember."Phone No." <> '' then begin
+                                                        SkySMS.SendSms(
+                                                            SMSSource::LOAN_APPLICATION,
+                                                            SearchMember."Phone No.",
+                                                            theSMS,
+                                                            TheLoan."Loan No.",
+                                                            '',
+                                                            true,
+                                                            0,
+                                                            true,
+                                                            'MBANKING',
+                                                            MobileLoanBuffer."Session ID",
+                                                            'CBS'
+                                                        );
+                                                    end else begin
+                                                        if SearchMember."Transactional Mobile Number" <> '' then begin
+                                                            SkySMS.SendSms(
+                                                                SMSSource::LOAN_APPLICATION,
+                                                                SearchMember."Transactional Mobile Number",
+                                                                theSMS,
+                                                                TheLoan."Loan No.",
+                                                                '',
+                                                                true,
+                                                                0,
+                                                                true,
+                                                                'MBANKING',
+                                                                MobileLoanBuffer."Session ID",
+                                                                'CBS'
+                                                            );
+                                                        end
+                                                    end;
+                                                end;
+                                            end;
+
+                                        end;
+
+                                    end;
                                 end;
 
-                                Loan.Status := Loan.Status::Rejected;
-                                Loan."Loan Rejection Reason" := 'MBANKING POSTING LIMIT';
-                                Loan.Modify;
-                            end;
-                            MobileLoanBuffer.Modify();
-                            Commit;
+                                PostingBatchCounter += 1;
+                            end until (MobileLoanBuffer.Next = 0) or (PostingBatchCounter = PostingBatchSize);
+                        end;
 
-                            if MobileLoanBuffer.Posted = false then begin
-                                if MobileLoanBuffer.Installments = 0 then begin
-                                    if SkyMbankingTrans.PostLoan(MobileLoanBuffer."Loan No.", LoanTemp, LoanBatch, MobileLoanBuffer."Session ID", HasChargeType) then begin
-                                        MobileLoanBuffer.Posted := true;
-                                        MobileLoanBuffer."Date Posted" := CurrentDateTime;
-                                        MobileLoanBuffer.Modify();
+                        SuccessMessage := Format(PostingBatchCounter) + ' open loans were processed';
+                    end else begin
 
-                                        theSMS := 'Dear member, your ' +
+                        // Disburse pending mobile loan records
+                        MobileTransTypes.SetRange(type, MobileTransTypes.Type::"Loan Disbursement");
+                        MobileTransTypes.SetLoadFields(Code);
+                        if MobileTransTypes.FindFirst() then begin
+                            HasChargeType := true;
+                        end else begin
+                            HasChargeType := false;
+                        end;
+
+                        // Handle cases during publish
+                        MobileLoanBuffer.Reset;
+                        MobileLoanBuffer.SetRange("Loan Record Created?", false);
+                        MobileLoanBuffer.SetRange(Posted, false);
+                        MobileLoanBuffer.SetFilter("Loan No.", '<>%1', '');
+                        if MobileLoanBuffer.FindSet(true) then begin
+                            repeat begin
+                                if MobileLoanBuffer."Loan No." <> '' then begin
+                                    MobileLoanBuffer."Loan Record Created?" := true;
+                                    MobileLoanBuffer.Modify();
+                                end;
+                            end until MobileLoanBuffer.Next = 0;
+                        end;
+
+                        MobileLoanBuffer.Reset();
+                        MobileLoanBuffer.SetRange(Posted, false);
+                        MobileLoanBuffer.SetRange(Status, MobileLoanBuffer.Status::Approved);
+                        MobileLoanBuffer.SetRange(Deactivated, false);
+                        MobileLoanBuffer.SetRange("Loan Record Created?", true);
+                        // MobileLoanBuffer.SetAscending("Entry No", GlobalFunctions.GetRandomBoolean);
+                        MobileLoanBuffer.SetCurrentKey("Try Posting Count", "Entry No");
+                        MobileLoanBuffer.SetAscending("Try Posting Count", true);
+                        MobileLoanBuffer.SetAscending("Entry No", GlobalFunctions.GetRandomBoolean);
+                        if MobileLoanBuffer.FindSet(true) then begin
+                            PostingBatchCounter := 0;
+                            RecordsCount := MobileLoanBuffer.Count;
+                            // SuccessMessage := Format(MobileLoanBuffer.Count) + ' Loan Disbursement(s) were processed Successfully';
+                            repeat
+                                // Check prerequisites
+                                loan.reset;
+                                loan.SetRange("Loan No.", MobileLoanBuffer."Loan No.");
+                                Loan.SetLoadFields("Loan No.", "Loan Product Type Name");
+                                if not loan.FindFirst then begin
+                                    MobileLoanBuffer.Posted := false;
+                                    MobileLoanBuffer."Needs Change" := true;
+                                    MobileLoanBuffer."Needs Change Reason" := 'The loan was not found';
+                                    MobileLoanBuffer.Modify();
+                                end;
+
+                                MobileLoanBuffer."Try Posting Count" += 1;
+                                if MobileLoanBuffer."Try Posting Count" >= 10 then begin
+                                    MobileLoanBuffer.Remarks := 'Max. Posting Attempts of ' + Format(MobileLoanBuffer."Try Posting Count") + ' reached!';
+                                    MobileLoanBuffer.Posted := true;
+                                    MobileLoanBuffer.Deactivated := true;
+                                    MobileLoanBuffer."Deactivated By" := UserId;
+                                    MobileLoanBuffer."Date Posted" := CurrentDateTime;
+
+                                    theSMS := 'Dear member, your ' +
                                         Loan."Loan Product Type Name" +
                                         ' of KES ' +
                                         Format(MobileLoanBuffer.Amount) +
                                         ' applied on ' + GlobalFunctions.FormatISODate(MobileLoanBuffer."Date Entered") +
                                         ' at ' + GlobalFunctions.FormatISOTime(MobileLoanBuffer."Time Entered") +
-                                        ' has been approved and disbursed to your savings account. Ref: ' + Loan."Loan No.";
+                                        ' was unsuccessful. Please try again later. Ref: ' + Loan."Loan No.";
 
-                                        LoanApplicant.Reset;
-                                        LoanApplicant.SetRange("No.", MobileLoanBuffer."Member No.");
-                                        LoanApplicant.SetLoadFields("Phone No.", "Transactional Mobile Number");
-                                        if LoanApplicant.FindFirst then begin
-                                            SkySMS.SendSms(
-                                                SMSSource::LOAN_POSTED,
-                                                LoanApplicant."Transactional Mobile Number",
-                                                theSMS,
-                                                Loan."Loan No.",
-                                                '',
-                                                true,
-                                                0,
-                                                true,
-                                                'MBANKING',
-                                                MobileLoanBuffer."Session ID",
-                                                'CBS'
-                                            );
-                                        end;
-
-                                        Commit;
-                                        SkyMbankingTrans.GenerateSchedule(Loan);
-                                    end else begin
-                                        MobileLoanBuffer.Posted := false;
-                                        MobileLoanBuffer."Needs Change" := true;
-                                        MobileLoanBuffer."Needs Change Reason" := 'The record was not able to post';
-                                        MobileLoanBuffer.Modify();
+                                    LoanApplicant.Reset;
+                                    LoanApplicant.SetRange("No.", MobileLoanBuffer."Member No.");
+                                    LoanApplicant.SetLoadFields("Phone No.");
+                                    if LoanApplicant.FindFirst then begin
+                                        SkySMS.SendSms(
+                                            SMSSource::LOAN_REJECTED,
+                                            LoanApplicant."Phone No.",
+                                            theSMS,
+                                            Loan."Loan No.",
+                                            '',
+                                            true,
+                                            0,
+                                            true,
+                                            'MBANKING',
+                                            MobileLoanBuffer."Session ID",
+                                            'CBS'
+                                        );
                                     end;
-                                end else begin
-                                    // FOSA M-Loan
-                                    if SkyMbankingTrans.PostLoan2(MobileLoanBuffer."Loan No.", LoanTemp, LoanBatch, MobileLoanBuffer."Session ID", HasChargeType) then begin
-                                        MobileLoanBuffer.Posted := true;
-                                        MobileLoanBuffer."Date Posted" := CurrentDateTime;
-                                        MobileLoanBuffer.Modify();
 
-                                        theSMS := 'Dear member, your ' +
-                                        Loan."Loan Product Type Name" +
-                                        ' of KES ' +
-                                        Format(MobileLoanBuffer."Approved Amount") +
-                                        ' applied on ' + GlobalFunctions.FormatISODate(MobileLoanBuffer."Date Entered") +
-                                        ' at ' + GlobalFunctions.FormatISOTime(MobileLoanBuffer."Time Entered") +
-                                        ' has been approved and disbursed to your savings account. Ref: ' + Loan."Loan No.";
+                                    Loan.Status := Loan.Status::Rejected;
+                                    Loan."Loan Rejection Reason" := 'MBANKING POSTING LIMIT';
+                                    Loan.Modify;
+                                end;
+                                MobileLoanBuffer.Modify();
+                                Commit;
 
-                                        LoanApplicant.Reset;
-                                        LoanApplicant.SetRange("No.", MobileLoanBuffer."Member No.");
-                                        LoanApplicant.SetLoadFields("Transactional Mobile Number");
-                                        if LoanApplicant.FindFirst then begin
-                                            SkySMS.SendSms(
-                                                SMSSource::LOAN_POSTED,
-                                                LoanApplicant."Transactional Mobile Number",
-                                                theSMS,
-                                                Loan."Loan No.",
-                                                '',
-                                                true,
-                                                0,
-                                                true,
-                                                'MBANKING',
-                                                MobileLoanBuffer."Session ID",
-                                                'CBS'
-                                            );
+                                if MobileLoanBuffer.Posted = false then begin
+                                    if MobileLoanBuffer.Installments = 0 then begin
+                                        if SkyMbankingTrans.PostLoan(MobileLoanBuffer."Loan No.", LoanTemp, LoanBatch, MobileLoanBuffer."Session ID", HasChargeType) then begin
+                                            MobileLoanBuffer.Posted := true;
+                                            MobileLoanBuffer."Date Posted" := CurrentDateTime;
+                                            MobileLoanBuffer.Modify();
+
+                                            theSMS := 'Dear member, your ' +
+                                            Loan."Loan Product Type Name" +
+                                            ' of KES ' +
+                                            Format(MobileLoanBuffer.Amount) +
+                                            ' applied on ' + GlobalFunctions.FormatISODate(MobileLoanBuffer."Date Entered") +
+                                            ' at ' + GlobalFunctions.FormatISOTime(MobileLoanBuffer."Time Entered") +
+                                            ' has been approved and disbursed to your savings account. Ref: ' + Loan."Loan No.";
+
+                                            LoanApplicant.Reset;
+                                            LoanApplicant.SetRange("No.", MobileLoanBuffer."Member No.");
+                                            LoanApplicant.SetLoadFields("Phone No.");
+                                            if LoanApplicant.FindFirst then begin
+                                                SkySMS.SendSms(
+                                                    SMSSource::LOAN_POSTED,
+                                                    LoanApplicant."Phone No.",
+                                                    theSMS,
+                                                    Loan."Loan No.",
+                                                    '',
+                                                    true,
+                                                    0,
+                                                    true,
+                                                    'MBANKING',
+                                                    MobileLoanBuffer."Session ID",
+                                                    'CBS'
+                                                );
+                                            end;
+
+                                            Commit;
+                                            SkyMbankingTrans.GenerateSchedule(Loan);
+                                        end else begin
+                                            MobileLoanBuffer.Posted := false;
+                                            MobileLoanBuffer."Needs Change" := true;
+                                            MobileLoanBuffer."Needs Change Reason" := 'The record was not able to post';
+                                            MobileLoanBuffer.Modify();
                                         end;
-
-                                        Commit;
-                                        SkyMbankingTrans.GenerateSchedule(Loan);
                                     end else begin
-                                        MobileLoanBuffer.Posted := false;
-                                        MobileLoanBuffer."Needs Change" := true;
-                                        MobileLoanBuffer."Needs Change Reason" := 'The record was not able to post';
-                                        MobileLoanBuffer.Modify();
+                                        // FOSA M-Loan
+                                        if SkyMbankingTrans.PostLoan2(MobileLoanBuffer."Loan No.", LoanTemp, LoanBatch, MobileLoanBuffer."Session ID", HasChargeType) then begin
+                                            MobileLoanBuffer.Posted := true;
+                                            MobileLoanBuffer."Date Posted" := CurrentDateTime;
+                                            MobileLoanBuffer.Modify();
+
+                                            theSMS := 'Dear member, your ' +
+                                            Loan."Loan Product Type Name" +
+                                            ' of KES ' +
+                                            Format(MobileLoanBuffer."Approved Amount") +
+                                            ' applied on ' + GlobalFunctions.FormatISODate(MobileLoanBuffer."Date Entered") +
+                                            ' at ' + GlobalFunctions.FormatISOTime(MobileLoanBuffer."Time Entered") +
+                                            ' has been approved and disbursed to your savings account. Ref: ' + Loan."Loan No.";
+
+                                            LoanApplicant.Reset;
+                                            LoanApplicant.SetRange("No.", MobileLoanBuffer."Member No.");
+                                            LoanApplicant.SetLoadFields("Phone No.");
+                                            if LoanApplicant.FindFirst then begin
+                                                SkySMS.SendSms(
+                                                    SMSSource::LOAN_POSTED,
+                                                    LoanApplicant."Phone No.",
+                                                    theSMS,
+                                                    Loan."Loan No.",
+                                                    '',
+                                                    true,
+                                                    0,
+                                                    true,
+                                                    'MBANKING',
+                                                    MobileLoanBuffer."Session ID",
+                                                    'CBS'
+                                                );
+                                            end;
+
+                                            Commit;
+                                            SkyMbankingTrans.GenerateSchedule(Loan);
+                                        end else begin
+                                            MobileLoanBuffer.Posted := false;
+                                            MobileLoanBuffer."Needs Change" := true;
+                                            MobileLoanBuffer."Needs Change Reason" := 'The record was not able to post';
+                                            MobileLoanBuffer.Modify();
+                                        end;
                                     end;
                                 end;
+
+                                PostingBatchCounter += 1;
+                            until (MobileLoanBuffer.next = 0) OR (PostingBatchCounter = PostingBatchSize);
+
+                            if RecordsCount < PostingBatchSize then begin
+                                SuccessMessage := Format(RecordsCount) + ' Loan Disbursement(s) were processed Successfully';
+                            end else begin
+                                SuccessMessage := Format(PostingBatchSize) + ' out of ' + Format(RecordsCount) + ' Loan Disbursement(s) were processed Successfully';
                             end;
-
-                            PostingBatchCounter += 1;
-                        until (MobileLoanBuffer.next = 0) OR (PostingBatchCounter = PostingBatchSize);
-
-                        if RecordsCount < PostingBatchSize then begin
-                            SuccessMessage := Format(RecordsCount) + ' Loan Disbursement(s) were processed Successfully';
                         end else begin
-                            SuccessMessage := Format(PostingBatchSize) + ' out of ' + Format(RecordsCount) + ' Loan Disbursement(s) were processed Successfully';
+                            SuccessMessage := '0 Loan Disbursements were processed';
                         end;
-                    end else begin
-                        SuccessMessage := '0 Loan Disbursements were processed';
+
                     end;
                 end;
             // Mpesa Deposits:
@@ -4192,7 +4467,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                     */
                                     TheDestinationMember.Reset;
                                     TheDestinationMember.SetRange("No.", BeneficiarySavingsAccount."Member No.");
-                                    TheDestinationMember.SetLoadFields(Name, "Phone No.", "Transactional Mobile Number");
+                                    TheDestinationMember.SetLoadFields(Name, "First Name", "Phone No.", "Transactional Mobile Number");
 
                                     if TheDestinationMember.FindFirst then begin
                                         /*
@@ -4203,39 +4478,39 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             (MpesaTransBuffer."Initiator Identifier" = TheDestinationMember."Transactional Mobile Number") or
                                             (MpesaTransBuffer."Initiator Identifier" = TheDestinationMember."Phone No.")
                                         ) then begin
-                                            theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                            theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
                                             ', Confirmed ' + MpesaTransBuffer."Originator ID" +
                                             ' of KSHs ' + Format(MpesaTransBuffer."Transaction Amount") +
                                             ' Credited to ' + BeneficiarySavingsAccount."No." + ' ' +
                                             BeneficiarySavingsAccount."Name" +
                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                            ' Thank you . Dial *882# to get more.';
+                                            '. Thank you . Dial ' + TheUSSD + ' to get more.';
                                         end else begin
-                                            theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                            theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
                                             ', You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
                                             ' from ' + MpesaTransBuffer."Source Name" +
                                             ' to your ' + BeneficiarySavingsAccount."Product Name" +
                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                             '. REF: ' + MpesaTransBuffer."Transaction Source Reference" +
-                                            ' Thank you . Dial *882# to get more.';
+                                            ' Thank you . Dial ' + TheUSSD + ' to get more.';
 
                                             if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Coop B2B Deposit" then begin
-                                                theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
                                             ', You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
                                             ' from Coop Bank (B2B) ' +
                                             ' to your ' + BeneficiarySavingsAccount."Product Name" +
                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                             '. REF: ' + MpesaTransBuffer."Originator ID" +
-                                            ' Thank you . Dial *882# to get more.';
+                                            ' Thank you . Dial ' + TheUSSD + ' to get more.';
                                             end;
                                             if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Coop P2F Deposit" then begin
-                                                theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
                                             ', You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
                                             ' from Coop Bank (P2F) ' +
                                             ' to your ' + BeneficiarySavingsAccount."Product Name" +
                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                             '. REF: ' + MpesaTransBuffer."Originator ID" +
-                                            ' Thank you . Dial *882# to get more.';
+                                            ' Thank you . Dial ' + TheUSSD + ' to get more.';
                                             end;
                                         end;
 
@@ -4444,7 +4719,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                 */
                                                 TheDestinationMember.Reset;
                                                 TheDestinationMember.SetRange("No.", BeneficiarySavingsAccount."Member No.");
-                                                TheDestinationMember.SetLoadFields(Name, "Phone No.", "Transactional Mobile Number");
+                                                TheDestinationMember.SetLoadFields(Name, "First Name", "Phone No.", "Transactional Mobile Number");
 
                                                 if TheDestinationMember.FindFirst then begin
 
@@ -4452,39 +4727,39 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                            (MpesaTransBuffer."Initiator Identifier" = TheDestinationMember."Transactional Mobile Number") or
                                            (MpesaTransBuffer."Initiator Identifier" = TheDestinationMember."Phone No.")
                                        ) then begin
-                                                        theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                        theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
                                                         ', Confirmed ' + MpesaTransBuffer."Originator ID" +
                                                         ' of KSHs ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                         ' Credited to ' + BeneficiarySavingsAccount."No." + ' ' +
                                                         BeneficiarySavingsAccount."Name" +
                                                         ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                        ' Thank you . Dial *882# to get more.';
+                                                        '. Thank you . Dial ' + TheUSSD + ' to get more.';
                                                     end else begin
-                                                        theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                        theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
                                                         ', You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                         ' from ' + MpesaTransBuffer."Source Name" +
                                                         ' to your ' + BeneficiarySavingsAccount."Product Name" +
                                                         ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                         '. REF: ' + MpesaTransBuffer."Transaction Source Reference" +
-                                                        ' Thank you . Dial *882# to get more.';
+                                                        ' Thank you . Dial ' + TheUSSD + ' to get more.';
 
                                                         if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Coop B2B Deposit" then begin
-                                                            theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                            theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
                                                         ', You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                         ' from Coop Bank (B2B) ' +
                                                         ' to your ' + BeneficiarySavingsAccount."Product Name" +
                                                         ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                         '. REF: ' + MpesaTransBuffer."Originator ID" +
-                                                        ' Thank you . Dial *882# to get more.';
+                                                        ' Thank you . Dial ' + TheUSSD + ' to get more.';
                                                         end;
                                                         if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Coop P2F Deposit" then begin
-                                                            theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                            theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
                                                         ', You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                         ' from Coop Bank (P2F) ' +
                                                         ' to your ' + BeneficiarySavingsAccount."Product Name" +
                                                         ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                         '. REF: ' + MpesaTransBuffer."Originator ID" +
-                                                        ' Thank you . Dial *882# to get more.';
+                                                        ' Thank you . Dial ' + TheUSSD + ' to get more.';
                                                         end;
                                                     end;
 
@@ -4594,7 +4869,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                     */
                                                     TheDestinationMember.Reset;
                                                     TheDestinationMember.SetRange("No.", BeneficiarySavingsAccount."Member No.");
-                                                    TheDestinationMember.SetLoadFields(Name, "Phone No.", "Transactional Mobile Number");
+                                                    TheDestinationMember.SetLoadFields(Name, "First Name", "Phone No.", "Transactional Mobile Number");
 
                                                     if TheDestinationMember.FindFirst then begin
 
@@ -4602,39 +4877,39 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                            (MpesaTransBuffer."Initiator Identifier" = TheDestinationMember."Transactional Mobile Number") or
                                            (MpesaTransBuffer."Initiator Identifier" = TheDestinationMember."Phone No.")
                                        ) then begin
-                                                            theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                            theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
                                                             ', Confirmed ' + MpesaTransBuffer."Originator ID" +
                                                             ' of KSHs ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                             ' Credited to ' + BeneficiarySavingsAccount."No." + ' ' +
                                                             BeneficiarySavingsAccount."Name" +
                                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                            ' Thank you . Dial *882# to get more.';
+                                                            '. Thank you . Dial ' + TheUSSD + ' to get more.';
                                                         end else begin
-                                                            theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                            theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
                                                             ', You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                             ' from ' + MpesaTransBuffer."Source Name" +
                                                             ' to your ' + BeneficiarySavingsAccount."Product Name" +
                                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                             '. REF: ' + MpesaTransBuffer."Transaction Source Reference" +
-                                                            ' Thank you . Dial *882# to get more.';
+                                                            ' Thank you . Dial ' + TheUSSD + ' to get more.';
 
                                                             if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Coop B2B Deposit" then begin
-                                                                theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                                theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
                                                             ', You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                             ' from Coop Bank (B2B) ' +
                                                             ' to your ' + BeneficiarySavingsAccount."Product Name" +
                                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                             '. REF: ' + MpesaTransBuffer."Originator ID" +
-                                                            ' Thank you . Dial *882# to get more.';
+                                                            ' Thank you . Dial ' + TheUSSD + ' to get more.';
                                                             end;
                                                             if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Coop P2F Deposit" then begin
-                                                                theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                                theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
                                                             ', You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                             ' from Coop Bank (P2F) ' +
                                                             ' to your ' + BeneficiarySavingsAccount."Product Name" +
                                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                             '. REF: ' + MpesaTransBuffer."Originator ID" +
-                                                            ' Thank you . Dial *882# to get more.';
+                                                            ' Thank you . Dial ' + TheUSSD + ' to get more.';
                                                             end;
                                                         end;
 
@@ -4861,7 +5136,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                     */
                                                     TheDestinationMember.Reset;
                                                     TheDestinationMember.SetRange("No.", BeneficiarySavingsAccount."Member No.");
-                                                    TheDestinationMember.SetLoadFields(Name, "Phone No.", "Transactional Mobile Number");
+                                                    TheDestinationMember.SetLoadFields(Name, "First Name", "Phone No.", "Transactional Mobile Number");
 
                                                     if TheDestinationMember.FindFirst then begin
 
@@ -4869,14 +5144,14 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             (MpesaTransBuffer."Initiator Identifier" = TheDestinationMember."Transactional Mobile Number") or
                                                             (MpesaTransBuffer."Initiator Identifier" = TheDestinationMember."Phone No.")
                                                         ) then begin
-                                                            theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                            theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
                                                             ', You have successfully deposited KES ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                             ' to your ' + BeneficiarySavingsAccount."Product Name" +
                                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                             '. REF: ' + MpesaTransBuffer."Transaction Source Reference" +
                                                             '. Thank you ';
                                                         end else begin
-                                                            theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                            theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
                                                             ', You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                             ' from ' + MpesaTransBuffer."Source Name" +
                                                             ' to your ' + BeneficiarySavingsAccount."Product Name" +
@@ -4885,7 +5160,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             '. Thank you ';
 
                                                             if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Coop B2B Deposit" then begin
-                                                                theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                                theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
                                                             ', You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                             ' from Coop Bank (B2B) ' +
                                                             ' to your ' + BeneficiarySavingsAccount."Product Name" +
@@ -4894,7 +5169,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             '. Thank you ';
                                                             end;
                                                             if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Coop P2F Deposit" then begin
-                                                                theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                                theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
                                                             ', You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                             ' from Coop Bank (P2F) ' +
                                                             ' to your ' + BeneficiarySavingsAccount."Product Name" +
@@ -4947,7 +5222,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             ' Credited to ' + BeneficiarySavingsAccount."No." +
                                                             ' ' + BeneficiarySavingsAccount."Name" +
                                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                            '. Welcome to bank with us';
+                                                            '. Welcome to bank with us.';
 
                                                             if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Mpesa Deposit" then begin
                                                                 SkySMS.SendSms(
@@ -5006,7 +5281,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                         */
                                                         TheDestinationMember.Reset;
                                                         TheDestinationMember.SetRange("No.", BeneficiarySavingsAccount."Member No.");
-                                                        TheDestinationMember.SetLoadFields(Name, "Phone No.", "Transactional Mobile Number");
+                                                        TheDestinationMember.SetLoadFields(Name, "First Name", "Phone No.", "Transactional Mobile Number");
 
                                                         if TheDestinationMember.FindFirst then begin
 
@@ -5014,14 +5289,14 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 (MpesaTransBuffer."Initiator Identifier" = TheDestinationMember."Transactional Mobile Number") or
                                                                 (MpesaTransBuffer."Initiator Identifier" = TheDestinationMember."Phone No.")
                                                             ) then begin
-                                                                theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                                theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
                                                                 ', You have successfully deposited KES ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                                 ' to your ' + BeneficiarySavingsAccount."Product Name" +
                                                                 ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                                 '. REF: ' + MpesaTransBuffer."Transaction Source Reference" +
                                                                 '. Thank you ';
                                                             end else begin
-                                                                theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                                theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
                                                                 ', You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                                 ' from ' + MpesaTransBuffer."Source Name" +
                                                                 ' to your ' + BeneficiarySavingsAccount."Product Name" +
@@ -5030,7 +5305,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 '. Thank you ';
 
                                                                 if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Coop B2B Deposit" then begin
-                                                                    theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                                    theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
                                                                 ', You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                                 ' from Coop Bank (B2B) ' +
                                                                 ' to your ' + BeneficiarySavingsAccount."Product Name" +
@@ -5039,7 +5314,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 '. Thank you ';
                                                                 end;
                                                                 if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Coop P2F Deposit" then begin
-                                                                    theSMS := 'Dear ' + TheDestinationMember."First Name" +
+                                                                    theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
                                                                 ', You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                                 ' from Coop Bank (P2F) ' +
                                                                 ' to your ' + BeneficiarySavingsAccount."Product Name" +
@@ -5091,7 +5366,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 ' Credited to ' + BeneficiarySavingsAccount."No." +
                                                                 ' ' + BeneficiarySavingsAccount."Name" +
                                                                 ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                '. Welcome to bank with us';
+                                                                '. Welcome to bank with us.';
 
                                                                 if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Mpesa Deposit" then begin
                                                                     SkySMS.SendSms(
@@ -5288,6 +5563,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                             MpesaTransBuffer.Get(DepositTransBuffer."No.");
 
                             TotalCharges := 0;
+                            InterestPaidAmount := 0;
+                            RepaymentPaidAmount := 0;
                             theReference := CopyStr(MpesaTransBuffer."Transaction Source Reference", 1, 19);
 
                             GLEntry.Reset;
@@ -5309,9 +5586,19 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                     /*
                                     Receiver SMS: Dear [Member name], your [Product name] [Account number] has been credited with KES [Amount] received from [Phone number], [Name] on [date+time]. Mpesa ref: [Mpesa Ref]
                                     */
+                                    CredLedgEntry.Reset;
+                                    CredLedgEntry.SetRange("Loan No", MpesaTransBuffer."Loan No.");
+                                    CredLedgEntry.SetRange("Document No.", theReference);
+                                    CredLedgEntry.SetRange("Transaction Type", CredLedgEntry."Transaction Type"::"Interest Paid");
+                                    CredLedgEntry.CalcSums(Amount);
+                                    InterestPaidAmount := CredLedgEntry.Amount;
+                                    CredLedgEntry.SetRange("Transaction Type", CredLedgEntry."Transaction Type"::Repayment);
+                                    CredLedgEntry.CalcSums(Amount);
+                                    RepaymentPaidAmount := CredLedgEntry.Amount;
+
                                     TheDestinationMember.Reset;
                                     TheDestinationMember.SetRange("No.", BeneficiaryLoan."Member No.");
-                                    TheDestinationMember.SetLoadFields(Name, "Phone No.", "Transactional Mobile Number");
+                                    TheDestinationMember.SetLoadFields(Name, "First Name", "Phone No.", "Transactional Mobile Number");
 
                                     if TheDestinationMember.FindFirst then begin
                                         theSMS := 'Dear ' + TheDestinationMember.Name +
@@ -5321,6 +5608,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                         ' has been received from ' + MpesaTransBuffer."Initiator Identifier" +
                                         ', ' + MpesaTransBuffer."Initiator Name" +
                                         ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                        '. Principal paid: KES ' + Format(RepaymentPaidAmount) + ', Interest paid: KES ' + Format(InterestPaidAmount) +
                                         '. Mpesa ref: ' + MpesaTransBuffer."Transaction Source Reference";
 
                                         if TheDestinationMember."Phone No." <> '' then begin
@@ -5492,9 +5780,11 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             loan."Outstanding Interest" := Loan."Outstanding Interest" + loan."Daily Interest";
                                             if TotalCreditAmount >= (Loan."Outstanding Interest") then begin
                                                 SaccoTrans.JournalInsert(LoanTemp, LoanBatch, theReference, Today, AccType::Credit, MpesaTransBuffer."Loan Account", Description, AccType::"G/L Account", '', -(Loan."Outstanding Interest"), theReference, Loan."Loan No.", TransactionType::"Interest Paid", Dim1, Dim2, true);
+                                                InterestPaidAmount := Loan."Outstanding Interest";
                                                 TotalCreditAmount -= (Loan."Outstanding Interest");
                                                 if TotalCreditAmount > Loan."Outstanding Balance" then begin
                                                     SaccoTrans.JournalInsert(LoanTemp, LoanBatch, theReference, Today, AccType::Credit, MpesaTransBuffer."Loan Account", Description, AccType::"G/L Account", '', -Loan."Outstanding Balance", theReference, Loan."Loan No.", TransactionType::Repayment, Dim1, Dim2, true);
+                                                    RepaymentPaidAmount := Loan."Outstanding Balance";
                                                     TotalCreditAmount -= Loan."Outstanding Balance";
                                                     //Post the rest into FOSA ACC.
                                                     //get member fosa acc.
@@ -5502,11 +5792,15 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                     LoanApplicant.Get(Loan."Member No.");
                                                     FosaAcc := SkyMbankingTrans.GetMemberFosaAcc(LoanApplicant);
                                                     SaccoTrans.JournalInsert(LoanTemp, LoanBatch, theReference, Today, AccType::Savings, FosaAcc, Description, AccType::"G/L Account", '', -TotalCreditAmount, theReference, '', TransactionType::" ", Dim1, Dim2, true);
-                                                end else
+                                                end else begin
                                                     SaccoTrans.JournalInsert(LoanTemp, LoanBatch, theReference, Today, AccType::Credit, MpesaTransBuffer."Loan Account", Description, AccType::"G/L Account", '', -TotalCreditAmount, theReference, Loan."Loan No.", TransactionType::Repayment, Dim1, Dim2, true);
+                                                    RepaymentPaidAmount := TotalCreditAmount;
+                                                end;
                                             end
-                                            else
+                                            else begin
                                                 SaccoTrans.JournalInsert(LoanTemp, LoanBatch, theReference, Today, AccType::Credit, MpesaTransBuffer."Loan Account", Description, AccType::"G/L Account", '', -TotalCreditAmount, theReference, Loan."Loan No.", TransactionType::"Interest Paid", Dim1, Dim2, true);
+                                                InterestPaidAmount := TotalCreditAmount;
+                                            end;
                                         end;
 
                                     end;
@@ -5530,17 +5824,18 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             */
                                             TheDestinationMember.Reset;
                                             TheDestinationMember.SetRange("No.", BeneficiaryLoan."Member No.");
-                                            TheDestinationMember.SetLoadFields(Name, "Phone No.", "Transactional Mobile Number");
+                                            TheDestinationMember.SetLoadFields(Name, "First Name", "Phone No.", "Transactional Mobile Number");
 
                                             if TheDestinationMember.FindFirst then begin
-                                                theSMS := 'Dear ' + TheDestinationMember.Name +
-                                        ', a loan repayment of KES ' + Format(MpesaTransBuffer."Transaction Amount") +
-                                        ' for your loan ' + BeneficiaryLoan."Loan Product Type Name" +
-                                        ' ' + BeneficiaryLoan."Loan No." +
-                                        ' has been received from ' + MpesaTransBuffer."Initiator Identifier" +
-                                        ', ' + MpesaTransBuffer."Initiator Name" +
-                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                        '. Mpesa ref: ' + MpesaTransBuffer."Transaction Source Reference";
+                                                theSMS := 'Dear ' + TheDestinationMember."First Name".ToUpper() +
+                                                        ', a loan repayment of KES ' + Format(MpesaTransBuffer."Transaction Amount") +
+                                                        ' for your loan ' + BeneficiaryLoan."Loan Product Type Name" +
+                                                        ' ' + BeneficiaryLoan."Loan No." +
+                                                        ' has been received from ' + MpesaTransBuffer."Initiator Identifier" +
+                                                        ', ' + MpesaTransBuffer."Initiator Name" +
+                                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                        '. Principal paid: KES ' + Format(RepaymentPaidAmount) + ', Interest paid: KES ' + Format(InterestPaidAmount) +
+                                                        '. Mpesa ref: ' + MpesaTransBuffer."Transaction Source Reference";
 
                                                 if TheDestinationMember."Phone No." <> '' then begin
                                                     ReceiverSMSNo := TheDestinationMember."Phone No.";
@@ -5627,19 +5922,30 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                 /*
                                                 Receiver SMS: Dear [Member name], your [Product name] [Account number] has been credited with KES [Amount] received from [Phone number], [Name] on [date+time]. Mpesa ref: [Mpesa Ref]
                                                 */
+                                                CredLedgEntry.Reset;
+                                                CredLedgEntry.SetRange("Loan No", MpesaTransBuffer."Loan No.");
+                                                CredLedgEntry.SetRange("Document No.", theReference);
+                                                CredLedgEntry.SetRange("Transaction Type", CredLedgEntry."Transaction Type"::"Interest Paid");
+                                                CredLedgEntry.CalcSums(Amount);
+                                                InterestPaidAmount := CredLedgEntry.Amount;
+                                                CredLedgEntry.SetRange("Transaction Type", CredLedgEntry."Transaction Type"::Repayment);
+                                                CredLedgEntry.CalcSums(Amount);
+                                                RepaymentPaidAmount := CredLedgEntry.Amount;
+
                                                 TheDestinationMember.Reset;
                                                 TheDestinationMember.SetRange("No.", BeneficiaryLoan."Member No.");
-                                                TheDestinationMember.SetLoadFields(Name, "Phone No.", "Transactional Mobile Number");
+                                                TheDestinationMember.SetLoadFields(Name, "First Name", "Phone No.", "Transactional Mobile Number");
 
                                                 if TheDestinationMember.FindFirst then begin
                                                     theSMS := 'Dear ' + TheDestinationMember.Name +
-                                        ', a loan repayment of KES ' + Format(MpesaTransBuffer."Transaction Amount") +
-                                        ' for your loan ' + BeneficiaryLoan."Loan Product Type Name" +
-                                        ' ' + BeneficiaryLoan."Loan No." +
-                                        ' has been received from ' + MpesaTransBuffer."Initiator Identifier" +
-                                        ', ' + MpesaTransBuffer."Initiator Name" +
-                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                        '. Mpesa ref: ' + MpesaTransBuffer."Transaction Source Reference";
+                                                            ', a loan repayment of KES ' + Format(MpesaTransBuffer."Transaction Amount") +
+                                                            ' for your loan ' + BeneficiaryLoan."Loan Product Type Name" +
+                                                            ' ' + BeneficiaryLoan."Loan No." +
+                                                            ' has been received from ' + MpesaTransBuffer."Initiator Identifier" +
+                                                            ', ' + MpesaTransBuffer."Initiator Name" +
+                                                            ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                            '. Principal paid: KES ' + Format(RepaymentPaidAmount) + ', Interest paid: KES ' + Format(InterestPaidAmount) +
+                                                            '. Mpesa ref: ' + MpesaTransBuffer."Transaction Source Reference";
 
                                                     if TheDestinationMember."Phone No." <> '' then begin
                                                         ReceiverSMSNo := TheDestinationMember."Phone No.";
@@ -5763,20 +6069,51 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
                                     // Mobile Money Reversal transaction Ref: [REFERENCE] Date: [TIMESTAMP] has been performed
 
-                                    theSMS := ' Mobile Money Reversal transaction Ref:' + MpesaTransBuffer."Beneficiary Reference" +
-                                     'Date: ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                     ' has been performed. Ref: ';
+                                    if SavingsAccounts.Get(MpesaTransBuffer."Savings Account") then
+                                        TheSourceMember.Get(SavingsAccounts."Member No.");
+
+                                    theSMS := 'Mobile Money Reversal transaction Ref: ' + MpesaTransBuffer."Beneficiary Reference" +
+                                     ' Date: ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                     ' has been performed';
 
                                     if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Till Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
-                                        theSMS := ' Mobile Money Reversal transaction Ref:' + MpesaTransBuffer."Beneficiary Reference" +
-                                        'Date: ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                        ' has been performed. Ref: ';
+                                        theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() + ', Your Buy Goods and Services request of KES ' +
+                                        Format(MpesaTransBuffer."Transaction Amount") +
+                                        ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                        ' - ' + MpesaTransBuffer."Receiver Name" +
+                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                        ' has been REVERSED. Dial ' + TheUSSD + ' to check your balance. Ref: ' + MpesaTransBuffer."Beneficiary Reference";
                                     end;
 
                                     if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Gaming Utility Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
-                                        theSMS := ' Mobile Money Reversal transaction Ref:' + MpesaTransBuffer."Beneficiary Reference" +
-                                        'Date: ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                        ' has been performed. Ref: ';
+                                        theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() + ', Your ' +
+                                        Format(MpesaTransBuffer."Transaction Type") +
+                                        ' request of KES ' +
+                                        Format(MpesaTransBuffer."Transaction Amount") +
+                                        ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                        ' - ' + MpesaTransBuffer."Receiver Name" +
+                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                        ' has been REVERSED. Dial ' + TheUSSD + ' to check your balance. Ref: ' + MpesaTransBuffer."Beneficiary Reference";
+                                    end;
+
+                                    if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Bank Transfer" then begin
+                                        theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() + ', Your Bank Transfer request of KES ' +
+                                        Format(MpesaTransBuffer."Transaction Amount") +
+                                        ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                        ' - ' + MpesaTransBuffer."Receiver Name" +
+                                        ' ' + MpesaTransBuffer."Receiver Account" +
+                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                        ' has been REVERSED. Dial ' + TheUSSD + ' to check your balance. Ref: ' + MpesaTransBuffer."Beneficiary Reference";
+                                    end;
+
+                                    if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Utility Payment" then begin
+                                        theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() + ', Your Bill Payment request of KES ' +
+                                        Format(MpesaTransBuffer."Transaction Amount") +
+                                        ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                        ' - ' + MpesaTransBuffer."Receiver Name" +
+                                        ' ' + MpesaTransBuffer."Receiver Account" +
+                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                        ' has been REVERSED. Dial ' + TheUSSD + ' to check your balance. Ref: ' + MpesaTransBuffer."Beneficiary Reference";
                                     end;
 
                                     SkySMS.SendSms(
@@ -5870,31 +6207,53 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                         if BeneficiarySavingsAccount.FindFirst then begin
                                             //    Dear [FIRST_NAME], Mobile banking cash withdrawal ID [MPESA REF] of KSHs [AMOUNT] to [FULL_NAME] from your FOSA account [AC NUMBER] on [TIMESTAMP]
 
-                                            theSMS := 'Dear ' + TheSourceMember."First Name" +
+                                            theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() +
                                              ', Mobile banking cash withdrawal ID ' + MpesaTransBuffer."Beneficiary Reference" +
-                                             ' of KES ' + Format(MpesaTransBuffer."Transaction Amount")
-                                             + ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                             ' of KSHs ' + Format(MpesaTransBuffer."Transaction Amount")
+                                             + ' to ' + MpesaTransBuffer."Receiver Name" +
                                              ' from your FOSA account ' + BeneficiarySavingsAccount."No." +
                                              ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
 
                                             if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Till Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
-                                                theSMS := 'Dear ' + TheSourceMember."First Name" + ', Your ' +
+                                                theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() + ', Your ' +
                                                 Format(MpesaTransBuffer."Transaction Type") +
                                                 ' request of KES ' +
                                                 Format(MpesaTransBuffer."Transaction Amount") +
                                                 ' to ' + MpesaTransBuffer."Receiver Identifier" +
                                                 ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                ' has been completed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference" + '. Ref: ' + theReference;
+                                                ' has been completed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference";
                                             end;
 
                                             if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Gaming Utility Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
-                                                theSMS := 'Dear ' + TheSourceMember."First Name" + ', Your ' +
+                                                theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() + ', Your ' +
                                             Format(MpesaTransBuffer."Transaction Type") +
                                             ' request of KES ' +
                                             Format(MpesaTransBuffer."Transaction Amount") +
                                             ' to ' + MpesaTransBuffer."Receiver Identifier" +
                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                            ' has been completed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference" + '. Ref: ' + theReference;
+                                            ' has been completed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference";
+                                            end;
+
+                                            if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Bank Transfer" then begin
+                                                theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() + ', Your Bank Transfer request of KES ' +
+                                                Format(MpesaTransBuffer."Transaction Amount") +
+                                                ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                                ' - ' + MpesaTransBuffer."Receiver Name" +
+                                                ' ' + MpesaTransBuffer."Receiver Account" +
+                                                ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                ' has been completed successfully. M-PESA Ref: ' + MpesaTransBuffer."Beneficiary Reference" +
+                                                '. Ref: ' + theReference;
+                                            end;
+
+                                            if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Utility Payment" then begin
+                                                theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() + ', Your Bill Payment request of KES ' +
+                                                Format(MpesaTransBuffer."Transaction Amount") +
+                                                ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                                ' - ' + MpesaTransBuffer."Receiver Name" +
+                                                ' ' + MpesaTransBuffer."Receiver Account" +
+                                                ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                ' has been completed successfully. M-PESA Ref: ' + MpesaTransBuffer."Beneficiary Reference" +
+                                                '. Ref: ' + theReference;
                                             end;
 
                                             if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Bank Transfer" then begin
@@ -5935,7 +6294,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
                                                 theSMS := 'You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                     ' on your account ' + MpesaTransBuffer."Beneficiary Identifier" +
-                                                    ' from ' + TheSourceMember.Name + ' ' + MpesaTransBuffer."Initiator Identifier" +
+                                                    ' from ' + TheSourceMember."First Name" + ' ' + MpesaTransBuffer."Initiator Identifier" +
                                                     ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                     '. M-PESA Ref: ' + MpesaTransBuffer."Beneficiary Reference" +
                                                     '. Ref: ' + theReference;
@@ -6066,16 +6425,16 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 // Dear [FIRST_NAME], Mobile banking cash withdrawal ID [MPESA REF] of KSHs [AMOUNT] to [OTHER NUMBER FULL_NAME] from your FOSA account [ACC NUMBER] on [TIMESTAMP]
 
 
-                                                                theSMS := 'Dear ' + TheSourceMember."First Name" +
+                                                                theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() +
                                                                ', Mobile banking cash withdrawal ID ' + MpesaTransBuffer."Beneficiary Reference" +
-                                                               ' of KES ' + Format(MpesaTransBuffer."Transaction Amount")
-                                                               + ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                                               ' of KSHs ' + Format(MpesaTransBuffer."Transaction Amount")
+                                                               + ' to ' + MpesaTransBuffer."Receiver Name" +
                                                                ' from your FOSA account ' + BeneficiarySavingsAccount."No." +
                                                                ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
 
 
                                                                 if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Till Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
-                                                                    theSMS := 'Dear ' + TheSourceMember."First Name" + ', Your ' +
+                                                                    theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() + ', Your ' +
                                                                     Format(MpesaTransBuffer."Transaction Type") +
                                                                     ' to ' + MpesaTransBuffer."Receiver Identifier" +
                                                                     ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
@@ -6084,7 +6443,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 end;
 
                                                                 if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Gaming Utility Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
-                                                                    theSMS := 'Dear ' + TheSourceMember."First Name" + ', Your ' +
+                                                                    theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() + ', Your ' +
                                                                 Format(MpesaTransBuffer."Transaction Type") +
                                                                 ' to ' + MpesaTransBuffer."Receiver Identifier" +
                                                                 ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
@@ -6092,22 +6451,25 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 '. Ref: ' + theReference;
                                                                 end;
 
+                                                                if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Utility Payment" then begin
+                                                                    theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() +
+                                                                    ', Your Bill Payment request of KES ' +
+                                                                    Format(MpesaTransBuffer."Transaction Amount") +
+                                                                    ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                                                    ' - ' + MpesaTransBuffer."Receiver Name" +
+                                                                    ' ' + MpesaTransBuffer."Receiver Account" +
+                                                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                    ' has been completed successfully. M-PESA Ref: ' + MpesaTransBuffer."Beneficiary Reference" +
+                                                                    '. Ref: ' + theReference;
+                                                                end;
+
                                                                 if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Bank Transfer" then begin
-                                                                    /*
-
-                                                                     Dear [MEMBER_NAME],
-                                                                     Your Bank Transfer request of KES [AMOUNT] to [RECEIVER_IDENTIFIER] - [RECEIVER_NAME] A/C
-                                                                     [RECEIVER_ACCOUNT] on [DATE] has been completed successfully. M-PESA Ref: [BENEFICIARY_REFERENCE]. 
-                                                                     Ref: [REFERENCE]
-
-                                                                    */
-
-                                                                    theSMS := 'Dear ' + TheSourceMember.Name +
+                                                                    theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() +
                                                                     ', Your Bank Transfer request of KES ' +
                                                                     Format(MpesaTransBuffer."Transaction Amount") +
                                                                     ' to ' + MpesaTransBuffer."Receiver Identifier" +
                                                                     ' - ' + MpesaTransBuffer."Receiver Name" +
-                                                                    ' A/C ' + MpesaTransBuffer."Receiver Account" +
+                                                                    ' ' + MpesaTransBuffer."Receiver Account" +
                                                                     ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                                     ' has been completed successfully. M-PESA Ref: ' + MpesaTransBuffer."Beneficiary Reference" +
                                                                     '. Ref: ' + theReference;
@@ -6173,7 +6535,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
                                                                     theSMS := 'You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                                         ' on your account ' + MpesaTransBuffer."Beneficiary Identifier" +
-                                                                        ' from ' + TheSourceMember.Name + ' ' + MpesaTransBuffer."Initiator Identifier" +
+                                                                        ' from ' + TheSourceMember."First Name" + ' ' + MpesaTransBuffer."Initiator Identifier" +
                                                                         ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                                         '. M-PESA Ref: ' + MpesaTransBuffer."Beneficiary Reference" +
                                                                         '. Ref: ' + theReference;
@@ -6226,16 +6588,15 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
                                                                 if BeneficiarySavingsAccount.FindFirst then begin
 
-                                                                    theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
-                                                                    Format(MpesaTransBuffer."Transaction Type") +
-                                                                    ' request of KES ' +
-                                                                    Format(MpesaTransBuffer."Transaction Amount") +
-                                                                    ' to ' + MpesaTransBuffer."Receiver Identifier" +
-                                                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                    ' has been completed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference";
+                                                                    theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() +
+                                                                    ', Mobile banking cash withdrawal ID ' + MpesaTransBuffer."Beneficiary Reference" +
+                                                                    ' of KSHs ' + Format(MpesaTransBuffer."Transaction Amount") +
+                                                                    ' to ' + MpesaTransBuffer."Receiver Name" +
+                                                                    ' from your FOSA account ' + BeneficiarySavingsAccount."No." +
+                                                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
 
                                                                     if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Till Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
-                                                                        theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
+                                                                        theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() + ', Your ' +
                                                                         Format(MpesaTransBuffer."Transaction Type") +
                                                                         ' request of KES ' +
                                                                         Format(MpesaTransBuffer."Transaction Amount") +
@@ -6245,7 +6606,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                     end;
 
                                                                     if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Gaming Utility Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
-                                                                        theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
+                                                                        theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() + ', Your ' +
                                                                     Format(MpesaTransBuffer."Transaction Type") +
                                                                     ' request of KES ' +
                                                                     Format(MpesaTransBuffer."Transaction Amount") +
@@ -6254,7 +6615,29 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                     ' has been completed successfully. MPESA ref: ' + MpesaTransBuffer."Beneficiary Reference";
                                                                     end;
 
+                                                                    if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Utility Payment" then begin
+                                                                        theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() +
+                                                                        ', Your Bill Payment request of KES ' +
+                                                                        Format(MpesaTransBuffer."Transaction Amount") +
+                                                                        ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                                                        ' - ' + MpesaTransBuffer."Receiver Name" +
+                                                                        ' ' + MpesaTransBuffer."Receiver Account" +
+                                                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                        ' has been completed successfully. M-PESA Ref: ' + MpesaTransBuffer."Beneficiary Reference" +
+                                                                        '. Ref: ' + theReference;
+                                                                    end;
+
                                                                     if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Bank Transfer" then begin
+                                                                        theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() +
+                                                                        ', Your Bank Transfer request of KES ' +
+                                                                        Format(MpesaTransBuffer."Transaction Amount") +
+                                                                        ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                                                        ' - ' + MpesaTransBuffer."Receiver Name" +
+                                                                        ' ' + MpesaTransBuffer."Receiver Account" +
+                                                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                        ' has been completed successfully. M-PESA Ref: ' + MpesaTransBuffer."Beneficiary Reference" +
+                                                                        '. Ref: ' + theReference;
+
                                                                         SkySMS.SendSms(
                                                                             SMSSource::BANK_TRANSFER,
                                                                             MpesaTransBuffer."Initiator Identifier",
@@ -6290,7 +6673,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
                                                                     theSMS := 'You have received KES ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                                         ' on your account ' + MpesaTransBuffer."Beneficiary Identifier" +
-                                                                        ' from ' + TheSourceMember.Name + ' ' + MpesaTransBuffer."Initiator Identifier" +
+                                                                        ' from ' + TheSourceMember."First Name" + ' ' + MpesaTransBuffer."Initiator Identifier" +
                                                                         ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                                         '. M-PESA Ref: ' + MpesaTransBuffer."Beneficiary Reference" +
                                                                         '. Ref: ' + theReference;
@@ -6325,7 +6708,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                         MpesaTransBuffer."Posted By" := UserID;
                                                         MpesaTransBuffer.Modify();
 
-                                                        // theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
+                                                        // theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() + ', Your ' +
                                                         // Format(MpesaTransBuffer."Transaction Type") +
                                                         //     ' request of KES ' +
                                                         //     Format(MpesaTransBuffer."Transaction Amount") +
@@ -6338,26 +6721,48 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                         if SavingsAccounts.Get(MpesaTransBuffer."Savings Account") then
                                                             TheSourceMember.Get(SavingsAccounts."Member No.");
 
-                                                        theSMS := ' Mobile Money Reversal transaction Ref:' + MpesaTransBuffer."Beneficiary Reference" +
-                                                        'Date: ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                        ' has been performed. Ref: ';
+                                                        theSMS := 'Mobile Money Reversal transaction Ref: ' + MpesaTransBuffer."Beneficiary Reference" +
+                                                        ' Date: ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                        ' has been performed';
 
                                                         if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Till Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
-                                                            theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
-                                                            Format(MpesaTransBuffer."Transaction Type") +
-                                                            ' request of KES ' +
+                                                            theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() + ', Your Buy Goods and Services request of KES ' +
                                                             Format(MpesaTransBuffer."Transaction Amount") +
+                                                            ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                                            ' - ' + MpesaTransBuffer."Receiver Name" +
                                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                            ' has been reversed. Ref: ' + MpesaTransBuffer."Beneficiary Reference";
+                                                            ' has been REVERSED. Dial ' + TheUSSD + ' to check your balance. Ref: ' + theReference;
                                                         end;
 
                                                         if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Gaming Utility Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
-                                                            theSMS := 'Dear ' + TheSourceMember.Name + ', Your ' +
+                                                            theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() + ', Your ' +
                                                             Format(MpesaTransBuffer."Transaction Type") +
-                                                             ' request of KES ' +
+                                                            ' request of KES ' +
                                                             Format(MpesaTransBuffer."Transaction Amount") +
+                                                            ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                                            ' - ' + MpesaTransBuffer."Receiver Name" +
                                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                            ' has been reversed. Ref: ' + MpesaTransBuffer."Beneficiary Reference";
+                                                            ' has been REVERSED. Dial ' + TheUSSD + ' to check your balance. Ref: ' + theReference;
+                                                        end;
+
+                                                        if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Bank Transfer" then begin
+                                                            theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() + ', Your Bank Transfer request of KES ' +
+                                                            Format(MpesaTransBuffer."Transaction Amount") +
+                                                            ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                                            ' - ' + MpesaTransBuffer."Receiver Name" +
+                                                            ' ' + MpesaTransBuffer."Receiver Account" +
+                                                            ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                            ' has been REVERSED. Dial ' + TheUSSD + ' to check your balance. Ref: ' + theReference;
+                                                        end;
+
+                                                        if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Utility Payment" then begin
+                                                            theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() + ', Your Bill Payment request of KES ' +
+                                                            Format(MpesaTransBuffer."Transaction Amount") +
+                                                            ' to ' + MpesaTransBuffer."Receiver Identifier" +
+                                                            ' - ' + MpesaTransBuffer."Receiver Name" +
+                                                            ' ' + MpesaTransBuffer."Receiver Account" +
+                                                            ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                            ' has been REVERSED. Dial ' + TheUSSD + ' to check your balance. Ref: ' + theReference;
                                                         end;
 
                                                         SkySMS.SendSms(
@@ -6461,20 +6866,41 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                         MpesaTransBuffer."Transaction Type"::"Account Transfer",
                                                         MpesaTransBuffer."Transaction Type"::"Kesasa Account Transfer":
                                                             begin
-                                                                /*
-                                                                Jambo [FIRST_NAME], REF: [REFERENCE], 
-                                                                you have successfully transferred Kshs. [AMOUNT] 
-                                                                 to [OTHER MEMBER NAME], 
-                                                                 your available balance is Ksh [AMOUNT] on [TIMESTAMP]. 
-                                                                */
+                                                                Clear(TheDestinationSavings);
+                                                                if MpesaTransBuffer."Destination Account" <> '' then
+                                                                    TheDestinationSavings.Get(MpesaTransBuffer."Destination Account");
 
-                                                                theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() + ', '
-                                                                 + MpesaTransBuffer."Originator ID" +
-                                                                ', you have successfully transferred Kshs. ' +
-                                                                Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
-                                                                 ' to ' + TheDestinationSavings."Name" +
-                                                                ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccounts, true)) +
-                                                                ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
+                                                                if (TheDestinationSavings."No." <> '') and (TheSourceMember."No." = TheDestinationSavings."Member No.") then begin
+                                                                    /*
+                                                                    INTERNAL_FUNDS_TRANSFER
+                                                                    Dear [FIRST_NAME],
+                                                                    Your Funds Transfer request of KES [AMOUNT] from {source account name e.g fosa} [SOURCE_ACCOUNT]
+                                                                    to {destination account name eg Deposit} [DESTINATION_ACCOUNT] on [DATE] has been completed successfully.
+                                                                    Ref: [REFERENCE]
+                                                                    */
+                                                                    theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() +
+                                                                    ', Your Funds Transfer request of KES ' +
+                                                                    Format(MpesaTransBuffer."Transaction Amount") +
+                                                                    ' from ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Savings Account" +
+                                                                    ' to ' + TheDestinationSavings."Product Name" + ' ' + TheDestinationSavings."No." +
+                                                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                    ' has been completed successfully. Ref: ' + theReference;
+                                                                end else begin
+                                                                    /*
+                                                                    INTERNAL_FUNDS_TRANSFER_OTHER_MEMBER
+                                                                    Jambo [FIRST_NAME], REF: [REFERENCE],
+                                                                    you have successfully transferred Kshs. [AMOUNT]
+                                                                     to [OTHER MEMBER NAME],
+                                                                     your available balance is Ksh [AMOUNT] on [TIMESTAMP].
+                                                                    */
+                                                                    theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
+                                                                    ', REF: ' + theReference +
+                                                                    ', you have successfully transferred Kshs. ' +
+                                                                    Format(MpesaTransBuffer."Transaction Amount") +
+                                                                     ' to ' + TheDestinationSavings."Name" +
+                                                                    ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccounts, true)) +
+                                                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
+                                                                end;
 
                                                                 SkySMS.SendSms(
                                                                     SMSSource::IFT_ACCOUNT,
@@ -6492,13 +6918,24 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             end;
                                                         MpesaTransBuffer."Transaction Type"::"Pay Loan From Account":
                                                             begin
+                                                                CredLedgEntry.Reset;
+                                                                CredLedgEntry.SetRange("Loan No", MpesaTransBuffer."Loan No.");
+                                                                CredLedgEntry.SetRange("Document No.", theReference);
+                                                                CredLedgEntry.SetRange("Transaction Type", CredLedgEntry."Transaction Type"::"Interest Paid");
+                                                                CredLedgEntry.CalcSums(Amount);
+                                                                InterestPaidAmount := CredLedgEntry.Amount;
+                                                                CredLedgEntry.SetRange("Transaction Type", CredLedgEntry."Transaction Type"::Repayment);
+                                                                CredLedgEntry.CalcSums(Amount);
+                                                                RepaymentPaidAmount := CredLedgEntry.Amount;
+
                                                                 theSMS := 'Jambo  ' + TheSourceMember."First Name".ToUpper() +
                                                                     ', your internal loan repayment request of KES ' +
                                                                     Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
                                                                     ' from ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Savings Account" +
                                                                     ' to ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Loan Account" +
                                                                     ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                    ' has been completed successfully. Ref: ' + theReference;
+                                                                    ' has been completed successfully. Principal paid: KES ' + Format(RepaymentPaidAmount) + ', Interest paid: KES ' + Format(InterestPaidAmount) +
+                                                                    '. Ref: ' + theReference;
 
                                                                 SkySMS.SendSms(
                                                                     SMSSource::IFT_LOAN,
@@ -6524,8 +6961,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 if TheDestinationMember.Get(TheDestinationSavings."Member No.") then begin
                                                                     theSMS := 'Jambo ' + TheDestinationMember."First Name".ToUpper() +
                                                                         ', ' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
-                                                                        Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
-                                                                        ' to your account no. ' + TheDestinationSavings."No." +
+                                                                        Format(MpesaTransBuffer."Transaction Amount") +
+                                                                        ' to your ' + TheDestinationSavings."Product Name" + ' account no. ' + TheDestinationSavings."No." +
                                                                         ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                                         '. Ref: ' + theReference;
 
@@ -6553,10 +6990,11 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 if TheDestinationMember.Get(TheDestinationSavings."Member No.") then begin
                                                                     theSMS := 'Jambo ' + TheDestinationMember."First Name".ToUpper() +
                                                             ',' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
-                                                            Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
+                                                            Format(MpesaTransBuffer."Transaction Amount") +
                                                             ' for repayment of your loan no. ' + TheDestinationLoan."Loan No." +
                                                             ' on ' +
                                                             GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                            '. Principal paid: KES ' + Format(RepaymentPaidAmount) + ', Interest paid: KES ' + Format(InterestPaidAmount) +
                                                             '. Ref: ' + theReference;
 
                                                                     SkySMS.SendSms(
@@ -6593,6 +7031,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                         TotalCreditAmount := MpesaTransBuffer."Transaction Amount";
                                                         Description := CopyStr(MpesaTransBuffer."Transaction Description", 1, 150);
                                                         TotalExciseDuty := 0;
+                                                        InterestPaidAmount := 0;
+                                                        RepaymentPaidAmount := 0;
 
                                                         if Description = '' then begin
                                                             if MobileTransTypes.Description <> '' then
@@ -6722,7 +7162,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                     // if TotalExciseDuty > 0 then begin
                                                                     //     SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Savings, MpesaTransBuffer."Savings Account", CopyStr(MobileTransTypes.Description + ' - Excise Duty', 1, 150), AccType::"G/L Account", '', TotalExciseDuty, theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                                     // end;
-                                                                    TotalCreditAmount -= TotalCharges;
+                                                                    // TotalCreditAmount -= TotalCharges;
                                                                 end;
                                                             end;
 
@@ -6771,11 +7211,13 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                 Loan."Outstanding Interest" := TotalCreditAmount;
 
                                                                             SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Credit, MpesaTransBuffer."Loan Account", 'Interest. Internal loan repayment from acc. ' + MpesaTransBuffer."Savings Account", AccType::"G/L Account", '', -Loan."Outstanding Interest", theReference, Loan."Loan No.", TransactionType::"Interest Paid", Dim1, Dim2, true);
+                                                                            InterestPaidAmount := Loan."Outstanding Interest";
                                                                             TotalCreditAmount -= Loan."Outstanding Interest";
                                                                             if TotalCreditAmount > 0 then begin
                                                                                 if Loan."Outstanding Balance" > TotalCreditAmount then
                                                                                     Loan."Outstanding Balance" := TotalCreditAmount;
                                                                                 SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Credit, MpesaTransBuffer."Loan Account", 'Outstanding Balance. Internal loan repayment from acc. ' + MpesaTransBuffer."Savings Account", AccType::"G/L Account", '', -Loan."Outstanding Balance", theReference, Loan."Loan No.", TransactionType::Repayment, Dim1, Dim2, true);
+                                                                                RepaymentPaidAmount := Loan."Outstanding Balance";
                                                                                 TotalCreditAmount -= Loan."Outstanding Balance";
                                                                             end;
                                                                             if TotalCreditAmount > 0 then begin
@@ -6834,10 +7276,10 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                         TheDestinationSavings.Get(MpesaTransBuffer."Destination Account");
                                                                                     end;
 
-                                                                                    theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() + ', '
-                                                                                   + MpesaTransBuffer."Originator ID" +
+                                                                                    theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
+                                                                                   ', REF: ' + theReference +
                                                                                    ', you have successfully transferred Kshs. ' +
-                                                                                   Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
+                                                                                   Format(MpesaTransBuffer."Transaction Amount") +
                                                                                    ' to ' + TheDestinationSavings."Name" +
                                                                                    ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccounts, true)) +
                                                                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
@@ -6862,11 +7304,12 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                         if TheDestinationLoan.Get(MpesaTransBuffer."Loan No.") then begin
                                                                                             theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
                                                                                             ', your internal loan repayment request of KES ' +
-                                                                                                Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
+                                                                                                Format(MpesaTransBuffer."Transaction Amount") +
                                                                                                 ' from ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Savings Account" +
                                                                                                 ' to ' + TheDestinationLoan."Loan Product Type Name" + ' ' + MpesaTransBuffer."Loan No." +
                                                                                                 ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                                                ' has been completed successfully. Ref: ' + theReference;
+                                                                                                ' has been completed successfully. Principal paid: KES ' + Format(RepaymentPaidAmount) + ', Interest paid: KES ' + Format(InterestPaidAmount) +
+                                                                                                '. Ref: ' + theReference;
 
                                                                                             SkySMS.SendSms(
                                                                                                 SMSSource::IFT_LOAN,
@@ -6894,7 +7337,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                     if TheDestinationMember.Get(TheDestinationSavings."Member No.") then begin
                                                                                         theSMS := 'Jambo ' + TheDestinationMember."First Name".ToUpper() +
                                                                                          ', ' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
-                                                                                         Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
+                                                                                         Format(MpesaTransBuffer."Transaction Amount") +
                                                                                          ' to your ' + TheDestinationSavings."Product Name" + ' ' + TheDestinationSavings."No." +
                                                                                          ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                                                          '. Ref: ' + theReference;
@@ -6923,10 +7366,11 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                     if TheDestinationMember.Get(TheDestinationSavings."Member No.") then begin
                                                                                         theSMS := 'Jambo ' + TheDestinationMember."First Name".ToUpper() +
                                                                                 ',' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
-                                                                                Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
+                                                                                Format(MpesaTransBuffer."Transaction Amount") +
                                                                                 ' for repayment of your loan no. ' + TheDestinationLoan."Loan No." +
                                                                                 ' on ' +
                                                                                 GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                                '. Principal paid: KES ' + Format(RepaymentPaidAmount) + ', Interest paid: KES ' + Format(InterestPaidAmount) +
                                                                                 '. Ref: ' + theReference;
 
                                                                                         SkySMS.SendSms(
@@ -6970,10 +7414,10 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                 MpesaTransBuffer."Transaction Type"::"Account Transfer",
                                                                                 MpesaTransBuffer."Transaction Type"::"Kesasa Account Transfer":
                                                                                     begin
-                                                                                        theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() + ', '
-                                                                                            + MpesaTransBuffer."Originator ID" +
+                                                                                        theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() + ', REF: '
+                                                                                            + theReference +
                                                                                             ', you have successfully transferred Kshs. ' +
-                                                                                            Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
+                                                                                            Format(MpesaTransBuffer."Transaction Amount") +
                                                                                             ' to ' + TheDestinationSavings."Name" +
                                                                                             ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccounts, true)) +
                                                                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
@@ -6995,13 +7439,24 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                     begin
                                                                                         if MpesaTransBuffer."Loan No." <> '' then begin
                                                                                             if TheDestinationLoan.Get(MpesaTransBuffer."Loan No.") then begin
+                                                                                                CredLedgEntry.Reset;
+                                                                                                CredLedgEntry.SetRange("Loan No", MpesaTransBuffer."Loan No.");
+                                                                                                CredLedgEntry.SetRange("Document No.", theReference);
+                                                                                                CredLedgEntry.SetRange("Transaction Type", CredLedgEntry."Transaction Type"::"Interest Paid");
+                                                                                                CredLedgEntry.CalcSums(Amount);
+                                                                                                InterestPaidAmount := CredLedgEntry.Amount;
+                                                                                                CredLedgEntry.SetRange("Transaction Type", CredLedgEntry."Transaction Type"::Repayment);
+                                                                                                CredLedgEntry.CalcSums(Amount);
+                                                                                                RepaymentPaidAmount := CredLedgEntry.Amount;
+
                                                                                                 theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
                                                                                                 ', your internal loan repayment request of KES ' +
-                                                                                                    Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
+                                                                                                    Format(MpesaTransBuffer."Transaction Amount") +
                                                                                                     ' from ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Savings Account" +
                                                                                                     ' to ' + TheDestinationLoan."Loan Product Type Name" + ' ' + MpesaTransBuffer."Loan No." +
                                                                                                     ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                                                    ' has been completed successfully. Ref: ' + theReference;
+                                                                                                    ' has been completed successfully. Principal paid: KES ' + Format(RepaymentPaidAmount) + ', Interest paid: KES ' + Format(InterestPaidAmount) +
+                                                                                                    '. Ref: ' + theReference;
 
                                                                                                 SkySMS.SendSms(
                                                                                                     SMSSource::IFT_LOAN,
@@ -7062,6 +7517,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                     ' for repayment of your loan no. ' + TheDestinationLoan."Loan No." +
                                                                                     ' on ' +
                                                                                     GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                                    '. Principal paid: KES ' + Format(RepaymentPaidAmount) + ', Interest paid: KES ' + Format(InterestPaidAmount) +
                                                                                     '. Ref: ' + theReference;
 
                                                                                             SkySMS.SendSms(
@@ -7226,6 +7682,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
             // filter products by member class, filter out blocked employers 6918 -6926
             MemberClasses.Reset();
             MemberClasses.SetRange("No.", SearchMember."Member Class");
+            MemberClasses.SetLoadFields("Member Class");
             if not MemberClasses.FindFirst() then begin
                 // error
             end;
@@ -9428,8 +9885,13 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                         SearchMember.SetRange("Secondary Identification Type", SearchMember."Secondary Identification Type"::"Passport No");
                         SearchMember.SetRange("Secondary Identification", Identifier);
                     end;
-                end;
+                end
+            else begin
+                SearchMember.SetRange("No.", '');
+                exit(false);
+            end;
         end;
+
 
         SearchMember.SetLoadFields("No.", Subflag, "Phone No.", "Transactional Mobile Number", "Employer Code");
 
@@ -9705,4 +10167,5 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         SkyMbankingTrans: Codeunit "Sky M-Banking Transactions";
         SkySMS: Codeunit SendSms;
         SMSSource: enum "SMS Source";
+        TheUSSD: Label '*882#';
 }

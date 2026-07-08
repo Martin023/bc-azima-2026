@@ -154,6 +154,14 @@ table 52185580 "HR Training App Header"
         {
             FieldClass = FlowFilter;
         }
+        field(29; "Current Approver ID"; Code[50])
+        {
+            CalcFormula = Lookup("Approval Entry"."Approver ID" WHERE("Document No." = FIELD("Application No"),
+                                                                        Status = FILTER(Open)));
+            Editable = false;
+            FieldClass = FlowField;
+            Caption = 'Current Approver ID';
+        }
     }
 
     keys

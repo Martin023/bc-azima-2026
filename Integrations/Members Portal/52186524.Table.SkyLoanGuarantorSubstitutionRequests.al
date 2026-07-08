@@ -109,7 +109,7 @@ table 52186524 "Sky Guarantor Sub Requests"
         // Send SMS...
         theSMS := 'Dear ' + TheGuarantor."First Name" +
         ', you have been included as a guarantor for the loan guarantor substitution request of ' + TheLoanApplicant.Name +
-        // '. For further information, log into the member portal or dial ' + theUSSDCode + ' to accept or reject this request.';
+        // '. For further information, log into the member portal or dial ' + TheUSSD + ' to accept or reject this request.';
         '. For further information, log into the member portal to accept or reject this request. Ref: ' + "Application No.";
         SkySMS.SendSms(
             SMSSource::LOAN_APPLICATION,
@@ -209,7 +209,7 @@ table 52186524 "Sky Guarantor Sub Requests"
                         // Applicant SMS
                         theSMS := 'Dear ' + TheLoanApplicant."First Name" + ', ' +
                         TheGuarantor.Name + ' has ' + Format(Status).ToUpper + ' your request for loan guarantorship' + '. ' +
-                        // 'Log into the member portal or dial ' + theUSSDCode + ' to substitute guarantors.';
+                        // 'Log into the member portal or dial ' + TheUSSD + ' to substitute guarantors.';
                         'Log into the member portal to substitute guarantors.' + ' Ref: ' + "Application No.";
 
                         SkySMS.SendSms(
@@ -235,7 +235,6 @@ table 52186524 "Sky Guarantor Sub Requests"
     var
         SkySMS: Codeunit SendSms;
         SMSSource: Enum "SMS Source";
-        // theUSSDCode: Label '*882*1#';
-        theUSSDCode: Label '*882#';
+        TheUSSD: Label '*882#';
         GlobalFunctions: Codeunit "Global Functions";
 }

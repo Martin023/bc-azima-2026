@@ -209,6 +209,16 @@ table 52185550 "HR Setup"
         {
             TableRelation = "No. Series".Code;
         }
+        field(50024; "Training Need Request Nos."; Code[10])
+        {
+            Caption = 'Training Need Request Nos.';
+            TableRelation = "No. Series".Code;
+        }
+        field(50025; "Target Assignment Nos."; Code[10])
+        {
+            Caption = 'Employee Target Assignment Nos.';
+            TableRelation = "No. Series".Code;
+        }
         field(50015; "Induction Nos"; Code[10])
         {
             TableRelation = "No. Series".Code;
@@ -393,9 +403,43 @@ table 52185550 "HR Setup"
         {
           TableRelation = "G/L Account"."No."; 
         }
-        field(39004284; "Saturday is Half Day"; Boolean)
+        field(39004285; "Min Recall Notice Days"; Integer)
         {
+            Caption = 'Minimum Recall Notice Days';
             DataClassification = CustomerContent;
+            MinValue = 0;
+        }
+        field(39004286; "Contract Expiry Warning Days"; Integer)
+        {
+            Caption = 'Contract Expiry Warning Days';
+            DataClassification = CustomerContent;
+            InitValue = 90;
+            MinValue = 1;
+        }
+        field(39004287; "Retirement Warning Months"; Integer)
+        {
+            Caption = 'Retirement Warning Months';
+            DataClassification = CustomerContent;
+            InitValue = 12;
+            MinValue = 1;
+        }
+        field(39004288; "HR Admin Email"; Text[100])
+        {
+            Caption = 'HR Administrator Email';
+            DataClassification = CustomerContent;
+            ExtendedDatatype = EMail;
+        }
+        field(39004289; "Enable Contract Notifications"; Boolean)
+        {
+            Caption = 'Enable Contract Expiry Notifications';
+            DataClassification = CustomerContent;
+            InitValue = true;
+        }
+        field(39004290; "Enable Retire Notifications"; Boolean)
+        {
+            Caption = 'Enable Retirement Notifications';
+            DataClassification = CustomerContent;
+            InitValue = true;
         }
     }
 
@@ -411,4 +455,3 @@ table 52185550 "HR Setup"
     {
     }
 }
-

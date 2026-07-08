@@ -55,6 +55,9 @@ report 52185493 "Member Loan Statement III"
             column(PhoneNo_Members; Members."Phone No.")
             {
             }
+            column(PageNo_Members; '')
+            {
+            }
             dataitem(Loans; Loans)
             {
                 DataItemLink = "Member No." = field("No.");

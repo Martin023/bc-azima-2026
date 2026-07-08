@@ -15,6 +15,8 @@ Report 52185544 "Schedule All Loans"
             trigger OnAfterGetRecord()
             var
                 LoanSchedule: Record "Ideal Repayment Schedule";
+                LoanRescheduling: record "Loan Rescheduling";
+                PeriodicActivities: codeunit "Periodic Activities";
             begin
                 //Sleep(10000);
                 intProgressI += 1;
@@ -30,8 +32,19 @@ Report 52185544 "Schedule All Loans"
                 END;
 
                 if RecreateSchedule then begin
-                    LoanProcess.GenerateSchedule(Loans, RecreateSchedule);
-                end else begin
+                    if Loans."Loan Rescheduled" then begin
+                        //Check if Ever Rescheduled.
+                        LoanRescheduling.Reset;
+                        LoanRescheduling.SetRange(LoanRescheduling."Loan No.", Loans."Loan No.");
+                        LoanRescheduling.SetRange(LoanRescheduling."Rescheduled", true);
+                        if LoanRescheduling.Find('-') then begin
+                            PeriodicActivities.RescheduleLoanII(LoanRescheduling);
+                        end else
+                            LoanProcess.GenerateSchedule(Loans, RecreateSchedule);
+                    end else
+                        LoanProcess.GenerateSchedule(Loans, RecreateSchedule);
+                end
+                else begin
                     LRepaymentSchedule.Reset;
                     LRepaymentSchedule.SetRange(LRepaymentSchedule."Loan No.", Loans."Loan No.");
                     if not LRepaymentSchedule.Find('-') then

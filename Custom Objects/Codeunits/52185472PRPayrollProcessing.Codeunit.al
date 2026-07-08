@@ -1743,7 +1743,6 @@ Codeunit 52185472 "PR Payroll Processing"
         prNewPayrollPeriods: Record "PR Payroll Periods";
         CreateTrans: Boolean;
     begin
-        //MESSAGE('Also include function to reset No. of days worked');
         dtNewPeriod := CalcDate('1M', dtOpenPeriod);
         intNewMonth := Date2dmy(dtNewPeriod, 2);
         intNewYear := Date2dmy(dtNewPeriod, 3);
@@ -1752,7 +1751,6 @@ Codeunit 52185472 "PR Payroll Processing"
         intYear := Date2dmy(dtOpenPeriod, 3);
 
         prEmployeeTransactions.Reset;
-        //prEmployeeTransactions.SETRANGE(prEmployeeTransactions."Employee Code", strEmpCode);
         prEmployeeTransactions.SetRange(prEmployeeTransactions."Period Month", intMonth);
         prEmployeeTransactions.SetRange(prEmployeeTransactions."Period Year", intYear);
         prEmployeeTransactions.SetRange(prEmployeeTransactions.Stopped, false);
@@ -1761,7 +1759,6 @@ Codeunit 52185472 "PR Payroll Processing"
                 if not prEmployeeTransactions."Stop for Next Period" then begin
                     prTransactionCodes.Reset;
                     prTransactionCodes.SetRange(prTransactionCodes."Transaction Code", prEmployeeTransactions."Transaction Code");
-
                     if prTransactionCodes.Find('-') then begin
                         begin
                             case prTransactionCodes."Balance Type" of
@@ -1814,54 +1811,43 @@ Codeunit 52185472 "PR Payroll Processing"
                     if (prTransactionCodes.Frequency = prTransactionCodes.Frequency::Fixed) and
                        (prEmployeeTransactions."Stop for Next Period" = false) then //DENNO ADDED THIS TO CHECK FREQUENCY AND STOP IF MARKED
                      begin
-                        if (curTransAmount <> 0) then  //Update the employee transaction table
-                         begin
-                            if ((prTransactionCodes."Balance Type" = prTransactionCodes."balance type"::Reducing) and (curTransBalance <> 0)) or
-                             (prTransactionCodes."Balance Type" <> prTransactionCodes."balance type"::Reducing) then
-                                if not prEmployeeTransactions.Variated then begin
-                                    prEmployeeTransactions.Balance := curTransBalance;
-                                    prEmployeeTransactions.Modify;
-                                end;
-
-
-                            //Clear(prEmployeeTrans);
-                            prEmployeeTrans.Init;
-                            prEmployeeTrans."Employee Code" := prEmployeeTransactions."Employee Code";
-                            prEmployeeTrans."Transaction Code" := prEmployeeTransactions."Transaction Code";
-                            prEmployeeTrans."Transaction Name" := prEmployeeTransactions."Transaction Name";
-
-                            //IF NOT prEmployeeTrans.Variated THEN BEGIN  //variated pMN
-                            prEmployeeTrans.Amount := curTransAmount;
-                            // END;
-
-                            prEmployeeTrans.Balance := curTransBalance;
-                            prEmployeeTrans."Amortized Loan Total Repay Amt" := prEmployeeTransactions."Amortized Loan Total Repay Amt";
-                            prEmployeeTrans."Original Amount" := prEmployeeTransactions."Original Amount";
-                            //prEmployeeTrans.Membership := prEmployeeTransactions.Membership;
-                            //prEmployeeTrans."Reference No" := prEmployeeTransactions."Reference No";
-                            prEmployeeTrans."Period Month" := intNewMonth;
-                            prEmployeeTrans."Period Year" := intNewYear;
-                            prEmployeeTrans."Payroll Period" := dtNewPeriod;
-                            prEmployeeTrans."Loan Interest Rate" := prEmployeeTransactions."Loan Interest Rate";
-                            prEmployeeTrans."Loan Number" := prEmployeeTransactions."Loan Number";
-                            prEmployeeTrans.Variated := prEmployeeTransactions.Variated;
-
-                            //Added DW to Insert Subledger and Subledger Account for the next period
-                            if curTransSubledger <> Curtranssubledger::" " then begin
-                                prEmployeeTrans.Subledger := curTransSubledger;
-                                prEmployeeTrans."Subledger Account" := curTransSubledgerAccount;
-
+                        if ((prTransactionCodes."Balance Type" = prTransactionCodes."balance type"::Reducing) and (curTransBalance <> 0)) or
+                         (prTransactionCodes."Balance Type" <> prTransactionCodes."balance type"::Reducing) then
+                            if not prEmployeeTransactions.Variated then begin
+                                prEmployeeTransactions.Balance := curTransBalance;
+                                prEmployeeTransactions.Modify;
                             end;
-                            prEmployeeTrans.Insert;
-                            // prEmployeeTrans.SetRange(prEmployeeTrans."Transaction Code", prEmployeeTransactions."Transaction Code");
-                            // prEmployeeTrans.SetRange(prEmployeeTrans."Payroll Period", dtNewPeriod);
-                            // prEmployeeTrans.SetRange(prEmployeeTrans."Period Year", intNewYear);
-                            // prEmployeeTrans.SetRange(prEmployeeTrans."Period Month", intNewMonth);
-                            // if prEmployeeTrans.Find('-') then
-                            //     //prEmployeeTrans.DeleteAll;
 
-                            // Clear(prEmployeeTrans);
+
+                        //Clear(prEmployeeTrans);
+                        prEmployeeTrans.Init;
+                        prEmployeeTrans."Employee Code" := prEmployeeTransactions."Employee Code";
+                        prEmployeeTrans."Transaction Code" := prEmployeeTransactions."Transaction Code";
+                        prEmployeeTrans."Transaction Name" := prEmployeeTransactions."Transaction Name";
+
+                        //IF NOT prEmployeeTrans.Variated THEN BEGIN  //variated pMN
+                        prEmployeeTrans.Amount := curTransAmount;
+                        // END;
+
+                        prEmployeeTrans.Balance := curTransBalance;
+                        // prEmployeeTrans."Amortized Loan Total Repay Amt" := prEmployeeTransactions."Amortized Loan Total Repay Amt";
+                        prEmployeeTrans."Original Amount" := prEmployeeTransactions."Original Amount";
+                        //prEmployeeTrans.Membership := prEmployeeTransactions.Membership;
+                        //prEmployeeTrans."Reference No" := prEmployeeTransactions."Reference No";
+                        prEmployeeTrans."Period Month" := intNewMonth;
+                        prEmployeeTrans."Period Year" := intNewYear;
+                        prEmployeeTrans."Payroll Period" := dtNewPeriod;
+                        prEmployeeTrans."Loan Interest Rate" := prEmployeeTransactions."Loan Interest Rate";
+                        prEmployeeTrans."Loan Number" := prEmployeeTransactions."Loan Number";
+                        prEmployeeTrans.Variated := prEmployeeTransactions.Variated;
+
+                        //Added DW to Insert Subledger and Subledger Account for the next period
+                        if curTransSubledger <> Curtranssubledger::" " then begin
+                            prEmployeeTrans.Subledger := curTransSubledger;
+                            prEmployeeTrans."Subledger Account" := curTransSubledgerAccount;
+
                         end;
+                        prEmployeeTrans.Insert;
                     end;
                 end;
             until prEmployeeTransactions.Next = 0;
@@ -1894,20 +1880,6 @@ Codeunit 52185472 "PR Payroll Processing"
 
         //Take all the Negative pay (Net) for the current month & treat it as a deduction in the new period
         fnGetNegativePay(intMonth, intYear, dtOpenPeriod);
-
-
-        /*
-        //Reset no. of days worked for casuals
-        PRSalCard.RESET;
-        PRSalCard.SETRANGE(PRSalCard."Employee Contract Type",'CASUALS');
-        IF PRSalCard.FIND('-') THEN
-        BEGIN
-            REPEAT
-                PRSalCard."No. of Days Worked":=0;
-                PRSalCard.MODIFY;
-            UNTIL PRSalCard.NEXT = 0;
-        END;
-        */
 
     end;
 

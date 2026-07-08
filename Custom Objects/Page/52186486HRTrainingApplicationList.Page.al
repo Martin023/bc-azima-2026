@@ -46,6 +46,10 @@ page 52186486 "HR Training ApplicationList"
                 {
                     ApplicationArea = Basic;
                 }
+                field("Current Approver ID"; Rec."Current Approver ID")
+                {
+                    ApplicationArea = Basic;
+                }
             }
         }
         area(factboxes)
