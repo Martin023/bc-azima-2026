@@ -744,12 +744,12 @@ page 52187320 AdvancedHumanResources
                             ApplicationArea = Basic, Suite;
                             RunObject = report "Leave Costing";
                         }
-                        action("LeaveCost to payroll")
-                        {
-                            Caption = 'Leave Cost to Payroll Report';
-                            ApplicationArea = Basic, Suite;
-                            RunObject = report "LeaveCost to payroll";
-                        }
+                        // action("LeaveCost to payroll")
+                        // {
+                        //     Caption = 'Leave Cost to Payroll Report';
+                        //     ApplicationArea = Basic, Suite;
+                        //     RunObject = report "LeaveCost to payroll";
+                        // }
 
 
 
