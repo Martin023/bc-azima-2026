@@ -80,7 +80,7 @@ page 52185595 "HR Leave Calendar Card"
 
     actions
     {
-        area(creation)
+        area(processing)
         {
             action(CreateCalendar)
             {
@@ -88,7 +88,7 @@ page 52185595 "HR Leave Calendar Card"
                 Caption = 'Create Calendar';
                 Image = CalculateCalendar;
                 Promoted = true;
-                PromotedCategory = Category6;
+                PromotedCategory = Process;
 
                 trigger OnAction()
                 var
@@ -106,6 +106,7 @@ page 52185595 "HR Leave Calendar Card"
                         Date.SetRange(Date."Period Start", Rec."Start Date", Rec."End Date");
                         if Date.Find('-') then begin
                             HRCalendarList.Reset;
+                            HRCalendarList.SetRange(Code, Rec."Calendar Code");
                             HRCalendarList.DeleteAll;
 
                             repeat
@@ -116,15 +117,14 @@ page 52185595 "HR Leave Calendar Card"
                                 ;      // e.g 01-01-15
                                 HRCalendarList.Day := Date."Period Name";         // e.g Thursday
                                 HRCalendarList."Non Working" := fn_DetermineNonWorking(Date."Period Start");
-                                /*
-                                //Saturday
-                                IF  (Date."Period Name" = TEXT0025) AND NOT (HRCalendarList."Non Working") THEN
-                                BEGIN
-                                    HRCalendarList."Non Working":=TRUE;
-                                    HRCalendarList.Reason:=TEXT0025;
-                                END;
-                                */
-                                //Sunday
+                                
+                                //Saturday - mark as non-working by default
+                                if (Date."Period Name" = TEXT0025) and not (HRCalendarList."Non Working") then begin
+                                    HRCalendarList."Non Working" := true;
+                                    HRCalendarList.Reason := TEXT0025;
+                                end;
+
+                                //Sunday - mark as non-working by default
                                 if (Date."Period Name" = TEXT0026) and not (HRCalendarList."Non Working") then begin
                                     HRCalendarList."Non Working" := true;
                                     HRCalendarList.Reason := TEXT0026;
@@ -193,7 +193,7 @@ page 52185595 "HR Leave Calendar Card"
                             else
                                 CalendarLine."Is Half Day" := false;
                             CalendarLine.Reason := '';
-                            CalendarLine.Modify();
+                            CalendarLine.Modify(true); // Skip validation during bulk operation
                         end;
                     until CalendarLine.Next() = 0;
 
@@ -248,7 +248,7 @@ page 52185595 "HR Leave Calendar Card"
                             CalendarLine."Non Working" := true;
                             CalendarLine."Is Half Day" := false;
                             CalendarLine.Reason := 'Saturday';
-                            CalendarLine.Modify();
+                            CalendarLine.Modify(true); // Skip validation during bulk operation
                         end;
                     until CalendarLine.Next() = 0;
 
@@ -303,7 +303,7 @@ page 52185595 "HR Leave Calendar Card"
                             CalendarLine."Non Working" := false;
                             CalendarLine."Is Half Day" := false;
                             CalendarLine.Reason := '';
-                            CalendarLine.Modify();
+                            CalendarLine.Modify(true); // Skip validation during bulk operation
                         end;
                     until CalendarLine.Next() = 0;
 
@@ -358,7 +358,7 @@ page 52185595 "HR Leave Calendar Card"
                             CalendarLine."Non Working" := true;
                             CalendarLine."Is Half Day" := false;
                             CalendarLine.Reason := 'Sunday';
-                            CalendarLine.Modify();
+                            CalendarLine.Modify(true); // Skip validation during bulk operation
                         end;
                     until CalendarLine.Next() = 0;
 
@@ -411,7 +411,7 @@ page 52185595 "HR Leave Calendar Card"
                         DayOfWeekNum := Date2DWY(CalendarLine.Date, 1);
                         if (DayOfWeekNum = 6) and (not CalendarLine."Non Working") then begin
                             CalendarLine."Is Half Day" := Rec."Saturday is Half Day";
-                            CalendarLine.Modify();
+                            CalendarLine.Modify(true); // Skip validation during bulk operation
                         end;
                     until CalendarLine.Next() = 0;
 

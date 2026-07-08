@@ -108,6 +108,40 @@ table 52185551 "HR Leave Calendar"
         {
             Caption = 'Working Saturdays are Half-Day';
             DataClassification = CustomerContent;
+
+            trigger OnValidate()
+            var
+                CalendarLine: Record "HR Leave Calendar Lines";
+                DayOfWeekNum: Integer;
+                UpdateCount: Integer;
+                DayTypeText: Text[20];
+            begin
+                if "Calendar Code" = '' then
+                    exit;
+
+                CalendarLine.Reset();
+                CalendarLine.SetRange(Code, "Calendar Code");
+                if not CalendarLine.FindSet() then
+                    exit;
+
+                UpdateCount := 0;
+                repeat
+                    DayOfWeekNum := Date2DWY(CalendarLine.Date, 1);
+                    if (DayOfWeekNum = 6) and (not CalendarLine."Non Working") then begin
+                        CalendarLine."Is Half Day" := "Saturday is Half Day";
+                        CalendarLine.Modify(true);
+                        UpdateCount += 1;
+                    end;
+                until CalendarLine.Next() = 0;
+
+                if UpdateCount > 0 then begin
+                    if "Saturday is Half Day" then
+                        DayTypeText := 'half-day'
+                    else
+                        DayTypeText := 'full-day';
+                    Message('Updated %1 working Saturday(s) to %2.', UpdateCount, DayTypeText);
+                end;
+            end;
         }
     }
 
