@@ -45,7 +45,7 @@ table 52185532 "HR Leave Application"
         }
         field(4; "Days Applied"; Decimal)
         {
-            DecimalPlaces = 0 : 0;
+            DecimalPlaces = 0 : 2;
             Editable = false;
         }
         field(5; "Start Date"; Date)
@@ -255,13 +255,21 @@ table 52185532 "HR Leave Application"
                         Error('Cannot apply for zero days leave. For same-day half-day leave, select only one option.');
                 end;
 
-                if "Is Morning Half Day" then
-                    "Return Date" := "End Date"
-                else begin
+                if "Is Morning Half Day" then begin
+                    "Return Date" := "End Date";
+                    "Return Time" := 'Afternoon';
+                end else begin
                     "Return Date" := CalcDate('1D', "End Date");
                     while DetermineIfIsNonWorking("Return Date") do
                         "Return Date" := CalcDate('1D', "Return Date");
+                    "Return Time" := 'Morning';
                 end;
+
+                // Calculate leave start time
+                if "Is Afternoon Half Day" then
+                    "Leave Start Time Calc" := 'Afternoon'
+                else
+                    "Leave Start Time Calc" := 'Morning';
 
                 if "Days Applied" < 0.5 then
                     Error('Calculated days cannot be less than 0.5');
@@ -575,8 +583,8 @@ table 52185532 "HR Leave Application"
 
             trigger OnValidate()
             begin
-
-                if "Is Morning Half Day" then
+                // Recalculate whenever checkbox changes (checked or unchecked)
+                if "End Date" <> 0D then
                     Validate("End Date");
             end;
         }
@@ -586,9 +594,42 @@ table 52185532 "HR Leave Application"
 
             trigger OnValidate()
             begin
-
-                if "Is Afternoon Half Day" then
+                // Recalculate whenever checkbox changes (checked or unchecked)
+                if "End Date" <> 0D then
                     Validate("End Date");
+            end;
+        }
+        field(4008; "Leave Start Time"; Text[20])
+        {
+            Caption = 'Leave Starts';
+            Editable = false;
+            FieldClass = FlowField;
+            CalcFormula = Lookup("HR Leave Application"."Leave Start Time Calc" WHERE("Application Code" = FIELD("Application Code")));
+        }
+        field(4009; "Leave Start Time Calc"; Text[20])
+        {
+            Caption = 'Leave Start Time';
+            Editable = false;
+
+            trigger OnValidate()
+            begin
+                if "Is Afternoon Half Day" then
+                    "Leave Start Time Calc" := 'Afternoon'
+                else
+                    "Leave Start Time Calc" := 'Morning';
+            end;
+        }
+        field(4010; "Return Time"; Text[20])
+        {
+            Caption = 'Return Time';
+            Editable = false;
+
+            trigger OnValidate()
+            begin
+                if "Is Morning Half Day" then
+                    "Return Time" := 'Afternoon'
+                else
+                    "Return Time" := 'Morning';
             end;
         }
     }
