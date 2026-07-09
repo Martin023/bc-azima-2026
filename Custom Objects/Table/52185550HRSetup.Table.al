@@ -214,6 +214,11 @@ table 52185550 "HR Setup"
             Caption = 'Training Need Request Nos.';
             TableRelation = "No. Series".Code;
         }
+        field(50025; "Target Assignment Nos."; Code[10])
+        {
+            Caption = 'Employee Target Assignment Nos.';
+            TableRelation = "No. Series".Code;
+        }
         field(50015; "Induction Nos"; Code[10])
         {
             TableRelation = "No. Series".Code;
@@ -397,10 +402,6 @@ table 52185550 "HR Setup"
           field(39004283;"Staff Welfare G/L ";code[100])
         {
           TableRelation = "G/L Account"."No."; 
-        }
-        field(39004284; "Saturday is Half Day"; Boolean)
-        {
-            DataClassification = CustomerContent;
         }
         field(39004285; "Min Recall Notice Days"; Integer)
         {

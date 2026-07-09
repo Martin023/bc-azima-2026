@@ -101,8 +101,15 @@ page 52185553 "HR Leave Types Card"
     begin
 
         fn_SetVisible;
+        OnViewCurrRec();
     end;
 
+    trigger OnOpenPage()
+    var
+        myInt: Integer;
+    begin
+            OnViewCurrRec();
+    end;
     var
 
         CarryForwardVisible: Boolean;
@@ -117,6 +124,19 @@ page 52185553 "HR Leave Types Card"
                     CarryForwardVisible := true;
                 end;
         end;
+    end;
+
+
+        procedure OnViewCurrRec()
+    var
+        ChangePermission: Record "Status Change Permissions.";
+        ErrorOnRestricViewTxt: Label 'You do not have Permissions to VIEW,MODIFY or DELETE on this record. Contact system administrator for assistance. %';
+    begin
+        ChangePermission.Reset;
+        ChangePermission.SetRange("User ID", UserID);
+        ChangePermission.SetRange("View Payroll", true);
+        if not ChangePermission.Find('-') then
+            Error(ErrorOnRestricViewTxt, UserID);
     end;
 }
 

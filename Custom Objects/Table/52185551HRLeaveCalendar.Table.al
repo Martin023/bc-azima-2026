@@ -104,6 +104,45 @@ table 52185551 "HR Leave Calendar"
                 rec.validate("Calendar Code");
             end;
         }
+        field(12; "Saturday is Half Day"; Boolean)
+        {
+            Caption = 'Working Saturdays are Half-Day';
+            DataClassification = CustomerContent;
+
+            trigger OnValidate()
+            var
+                CalendarLine: Record "HR Leave Calendar Lines";
+                DayOfWeekNum: Integer;
+                UpdateCount: Integer;
+                DayTypeText: Text[20];
+            begin
+                if "Calendar Code" = '' then
+                    exit;
+
+                CalendarLine.Reset();
+                CalendarLine.SetRange(Code, "Calendar Code");
+                if not CalendarLine.FindSet() then
+                    exit;
+
+                UpdateCount := 0;
+                repeat
+                    DayOfWeekNum := Date2DWY(CalendarLine.Date, 1);
+                    if (DayOfWeekNum = 6) and (not CalendarLine."Non Working") then begin
+                        CalendarLine."Is Half Day" := "Saturday is Half Day";
+                        CalendarLine.Modify(true);
+                        UpdateCount += 1;
+                    end;
+                until CalendarLine.Next() = 0;
+
+                if UpdateCount > 0 then begin
+                    if "Saturday is Half Day" then
+                        DayTypeText := 'half-day'
+                    else
+                        DayTypeText := 'full-day';
+                    Message('Updated %1 working Saturday(s) to %2.', UpdateCount, DayTypeText);
+                end;
+            end;
+        }
     }
 
     keys
@@ -149,8 +188,6 @@ table 52185551 "HR Leave Calendar"
     local procedure fnCreateLeaveCalendar()
     begin
         TestField(Rec."Calendar Code");
-        //TESTFIELD("Start Date");
-        //TESTFIELD("End Date");
 
         Date.Reset;
         Date.SetRange(Date."Period Type", Date."Period Type"::Date);
@@ -165,16 +202,14 @@ table 52185551 "HR Leave Calendar"
 
                 HRCalendarList.Code := "Calendar Code";
                 HRCalendarList.Date := Date."Period Start";
-                ;      // e.g 01-01-15
-                HRCalendarList.Day := Date."Period Name";         // e.g Thursday
+                HRCalendarList.Day := Date."Period Name";
                 HRCalendarList."Non Working" := fn_DetermineNonWorking(Date."Period Start");
 
-                //Saturday
                 if (Date."Period Name" = 'Saturday') and not (HRCalendarList."Non Working") then begin
                     HRCalendarList."Non Working" := true;
                     HRCalendarList.Reason := 'Saturday';
                 end;
-                //Sunday
+
                 if (Date."Period Name" = 'Sunday') and not (HRCalendarList."Non Working") then begin
                     HRCalendarList."Non Working" := true;
                     HRCalendarList.Reason := 'Sunday';

@@ -1394,11 +1394,11 @@ page 52185631 "HR Employee Card"
         //    CurrPage.Editable := false else
         //    CurrPage.Editable := true;
 
-        //ALLOW EDITS FOR ACTIVE EMPLOYEES, BLOCK ONLY PENDING APPROVAL
-        if rec.Status = rec.Status::"Pending Approval" then
-            CurrPage.Editable := false
-        else
-            CurrPage.Editable := true;
+        //ALLOW EDITS FOR ACTIVE EMPLOYEES, BLOCK ONLY PENDING APPROVAL - COMMENTED OUT BECAUSE IT OVERRIDES UpdateControls() AND VIOLATES EDITABILITY RULES
+        //if rec.Status = rec.Status::"Pending Approval" then
+        //    CurrPage.Editable := false
+        //else
+        //    CurrPage.Editable := true;
 
         if rec."No." <> '' then begin
             FChequeVisible := false;
@@ -1721,17 +1721,6 @@ page 52185631 "HR Employee Card"
 
     local procedure UpdateControls()
     begin
-        //BLOCKED ALL EDITS FOR NON-NEW EMPLOYEES
-        //if rec.Status <> rec.Status::New then
-        //    CurrPage.EDITABLE := false;
-
-        //ALLOW EDITS FOR ACTIVE EMPLOYEES, BLOCK ONLY PENDING APPROVAL
-        if Rec.Status = Rec.Status::"Pending Approval" then
-            CurrPage.EDITABLE := false
-        else
-            CurrPage.EDITABLE := true;
-
-
         if Rec.Status = Rec.Status::New then begin
             InvTcode := true;
             Inst := true;
@@ -1748,10 +1737,8 @@ page 52185631 "HR Employee Card"
             Mmarketpage := true;
             Dimension := true;
             MKS := true;
-        end;
-
-
-        if Rec.Status = Rec.Status::"Pending Approval" then begin
+            CurrPage.EDITABLE := true;
+        end else begin
             InvTcode := false;
             Inst := false;
             DepType := false;
@@ -1765,48 +1752,10 @@ page 52185631 "HR Employee Card"
             Freq := false;
             Intrate := false;
             Mmarketpage := false;
-            Dimension := False;
-            MKS := False;
+            Dimension := false;
+            MKS := false;
+            CurrPage.EDITABLE := false;
         end;
-
-        //BLOCKED EDITS FOR ACTIVE EMPLOYEES
-        //if Rec.Status = Rec.Status::Active then begin
-        //    InvTcode := false;
-        //    Inst := false;
-        //    DepType := false;
-        //    IntMode := false;
-        //    CurrCode := false;
-        //    RespCenter := false;
-        //    Rmks := false;
-        //    WtaxCode := false;
-        //    INVdate := false;
-        //    pType := false;
-        //    Freq := false;
-        //    Intrate := false;
-        //    Mmarketpage := false;
-        //    Dimension := False;
-        //    MKS := False;
-        //end;
-
-        //ALLOW EDITS FOR ACTIVE EMPLOYEES
-        if Rec.Status = Rec.Status::Active then begin
-            InvTcode := true;
-            Inst := true;
-            DepType := true;
-            IntMode := true;
-            CurrCode := true;
-            RespCenter := true;
-            Rmks := true;
-            WtaxCode := true;
-            INVdate := true;
-            pType := true;
-            Freq := true;
-            Intrate := true;
-            Mmarketpage := true;
-            Dimension := true;
-            MKS := true;
-        end;
-
     end;
 
 

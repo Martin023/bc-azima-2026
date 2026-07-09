@@ -22,6 +22,22 @@ table 52186256 "HR Training Planner"
             Caption = 'Training Course';
             TableRelation = "HR Training Needs".Description where(status = filter(Approved));
             ValidateTableRelation = false;
+
+            trigger OnValidate()
+            var
+                HRTrainingNeeds: Record "HR Training Needs";
+            begin
+                if "Training Course" <> '' then begin
+                    HRTrainingNeeds.Reset;
+                    HRTrainingNeeds.SetRange(Description, "Training Course");
+                    HRTrainingNeeds.SetRange(Status, HRTrainingNeeds.Status::Approved);
+                    if HRTrainingNeeds.FindFirst then begin
+                        "Start Date" := HRTrainingNeeds."Start Date";
+                        Duration := HRTrainingNeeds.Duration1;
+                        Validate(Duration);
+                    end;
+                end;
+            end;
         }
         field(3; "Start Date"; Date)
         {

@@ -34,7 +34,7 @@ page 52185636 "HR Employee Target Assgns List"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Perspective Description"; Rec."Perspective Description")
+                field("Perspective Name"; Rec."Perspective Name")
                 {
                     ApplicationArea = Basic;
                 }

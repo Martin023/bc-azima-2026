@@ -653,7 +653,6 @@ table 52185586 "HR Individual Targets Header"
                 TargetLine."Appraisal No" := "Appraisal No";
                 TargetLine."Perspective Code" := Assignment."Perspective Code";
                 TargetLine.Validate("Perspective Code");
-                TargetLine."Perspective Type" := Assignment."Perspective Type";
                 TargetLine.Objective := Assignment.Objective;
                 TargetLine.Strategy := Assignment.Strategy;
                 TargetLine.Measures := Assignment.Measures;

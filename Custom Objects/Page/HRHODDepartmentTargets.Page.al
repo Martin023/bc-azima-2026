@@ -45,22 +45,6 @@ page 52185505 "HRHOD Department Targets"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Financial Targeted Score"; Rec."Financial Targeted Score")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Customer Target Score"; Rec."Customer Target Score")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Training Target Score"; Rec."Training Target Score")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Service Delivery Target Score"; Rec."Service Delivery Target Score")
-                {
-                    ApplicationArea = Basic;
-                }
             }
         }
     }
