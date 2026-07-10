@@ -20,7 +20,7 @@ report 52185964 "Fixed Asset Register"
     {
         dataitem(FixedAsset; "Fixed Asset")
         {
-            RequestFilterFields = "No.", "FA Class Code", "Acquisition Date", "Location Code", "Responsible Employee", "Responsibility Center";
+            RequestFilterFields = "No.", "FA Class Code", "Acquisition Date", "Location Code", "Responsible Employee", "Responsibility Center", "Global Dimension 1 Code", "Global Dimension 2 Code";
             CalcFields = "Acquisition Date";
             column(AssetNo; "No.") { }
             column(FADescription; Description) { }

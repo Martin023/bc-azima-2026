@@ -185,6 +185,25 @@ page 52186565 "HR Company Activities Card"
                     Visible = true;
 
                     trigger OnAction()
+                    var
+                        myInt: Integer;
+                        email: codeunit Email;
+                        userset: Record "User Setup";
+                        Filename: Text;
+                        usermail: Text;
+                        username: text;
+                        instr: InStream;
+                        emailbody: Label 'Dear <b>%1</b>, <br> <P>find Documents to be approved</P> <h>';
+                        EmailMsg: Codeunit "Email Message";
+                        EmailRecipientList: List of [Text];
+                        AttachmentInstream: InStream;
+                        Application: Record "HR Job Applications";
+                        AttachmentOutstream: OutStream;
+                        Temp: Codeunit "Temp Blob";
+                        msg: text;
+                        subject: text;
+                        HREmployees: Record "HR Employees";
+
                     begin
                         Rec.TestField("Acitivity Description");
                         Rec.TestField("Start Date");
@@ -193,6 +212,8 @@ page 52186565 "HR Company Activities Card"
                         Rec.TestField(Venue);
                         Rec.TestField("Email Message");
                         Rec.TestField("Activity Status", Rec."Activity Status"::Planning);
+                        IF rec.Status = rec.Status::New THEN
+                            ERROR('You Cannot notify a participant when the application status is not approved');
 
                         HRActPart.Reset;
                         HRActPart.SetRange(HRActPart."Document No.", Rec.Code);
@@ -200,16 +221,31 @@ page 52186565 "HR Company Activities Card"
                             //Check if lines filled
                             if HRActPart.Count = 0 then Error('Please suggest participants on Lines');
                             repeat
+                                Usermail := ' ';
+                                Usermail := HRActPart."Participant E-Mail";
 
-                            // IF rec.Status = rec.Status::New THEN
-                            //     ERROR('You Cannot notify a participant when the application is not approved');
+                                HREmployees.Reset();
+                                HREmployees.SetRange(HREmployees."No.", HRActPart."Participant");
+                                if HREmployees.Find('-') then begin
+                                    if Usermail = '' then
+                                        Usermail := HREmployees."Company E-Mail";
+                                    msg := 'Dear' + ' ' + HRActPart."Participant Name" + ', ' + 'You are hereby notified that the above mentioned subject will he held on,' + Format(rec.Date) + '  ' + 'at ' + rec.Venue + '. ' + 'Please plan to attend.';
+                                end;
 
-                            //  SMTP.CreateMessage(HRActPart."Participant E-Mail", HRActPart."Participant E-Mail",
-                            //     rec."Acitivity Description", 'Dear' + ' ' + HRActPart."Participant Name", 'You are hereby notified that the above mentioned subject will he held on,' + Format(rec.Date) + '  ' + 'at' + rec.Venue + '. ' + 'Please plan to attend', true);
+                                subject := rec."Acitivity Description";
+                                ;
+                                EmailMsg.Create(usermail, subject, msg, true);
+                                EmailMsg.AppendToBody(StrSubstNo(emailbody, username));
+                                Email.Send(EmailMsg, Enum::"Email Scenario"::Default);
+
+                            //SendEmails(HRActPart."Participant E-Mail", "Acitivity Description",);
+
+                            // SMTP.CreateMessage(HRActPart."Participant E-Mail", HRActPart."Participant E-Mail",
+                            //    rec."Acitivity Description", 'Dear' + ' ' + HRActPart."Participant Name", 'You are hereby notified that the above mentioned subject will he held on,' + Format(rec.Date) + '  ' + 'at' + rec.Venue + '. ' + 'Please plan to attend', true);
                             // SMTP.Send;
                             until HRActPart.Next = 0;
                             Message(HRActPart."Participant E-Mail");
-                            Message('notified')
+                            message('Email Sent Participans.');
 
                         end;
                     end;
@@ -586,6 +622,4 @@ page 52186565 "HR Company Activities Card"
         DepType: Boolean;
         Dimension: Boolean;
         MKS: Boolean;
-
 }
-
