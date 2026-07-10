@@ -75,11 +75,11 @@ table 52185742 "Loans Top up"
 
                     "Outstanding Bill" := Loans."Outstanding Bills";
                     "Outstanding Balance" := Loans."Outstanding Balance";
-                    if (Rec."Source Unit" <> Rec."Source Unit"::BOSA) and
-      (Rec."Source Unit" <> Rec."Source Unit"::FOSA) then begin
-                        Rec."Source Unit" := Loans."Source Unit";
-                        Rec.Modify();
-                    end;
+                    //                 if (Rec."Source Unit" <> Rec."Source Unit"::BOSA) and
+                    //   (Rec."Source Unit" <> Rec."Source Unit"::FOSA) then begin
+                    //                     Rec."Source Unit" := Loans."Source Unit";
+                    //                     Rec.Modify();
+                    //                 end;
 
 
                     Loans.CalcFields("Loan Span");
@@ -87,19 +87,19 @@ table 52185742 "Loans Top up"
 
 
                     //Check re-application period
-                    if Format(Loantypes."Min. Re-application Period") <> '' then
-                        EndDate := CalcDate(Loantypes."Min. Re-application Period", Loans."Repayment Start Date");
-                    RepaymentSchedule.Reset;
-                    RepaymentSchedule.SetRange(RepaymentSchedule."Loan No.", "Loan Top Up");
-                    RepaymentSchedule.SetRange(RepaymentSchedule."Repayment Date", 0D, EndDate);
-                    if RepaymentSchedule.Find('-') then begin
-                        RepaymentSchedule.CalcSums(RepaymentSchedule."Principal Repayment");
-                    end;
+                    // if Format(Loantypes."Min. Re-application Period") <> '' then
+                    //     EndDate := CalcDate(Loantypes."Min. Re-application Period", Loans."Repayment Start Date");
+                    // RepaymentSchedule.Reset;
+                    // RepaymentSchedule.SetRange(RepaymentSchedule."Loan No.", "Loan Top Up");
+                    // RepaymentSchedule.SetRange(RepaymentSchedule."Repayment Date", 0D, EndDate);
+                    // if RepaymentSchedule.Find('-') then begin
+                    //     RepaymentSchedule.CalcSums(RepaymentSchedule."Principal Repayment");
+                    // end;
 
-                    //Get the difference if past schedule
-                    RepaymentMade := Loans."Approved Amount" - Loans."Outstanding Balance";
-                    if RepaymentMade < RepaymentSchedule."Principal Repayment" then
-                        "Additional Top Up Commission" := true;
+                    // //Get the difference if past schedule
+                    // RepaymentMade := Loans."Approved Amount" - Loans."Outstanding Balance";
+                    // if RepaymentMade < RepaymentSchedule."Principal Repayment" then
+                    //     "Additional Top Up Commission" := true;
 
                     Validate("Principle Top Up");
 

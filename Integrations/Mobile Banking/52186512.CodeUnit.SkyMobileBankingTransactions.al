@@ -2054,27 +2054,27 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     repeat begin
                         InterestRepayment := 0;
                         LoanRepayment := 0;
-                        LoanRepayment := ExistingFOSAMLoan.Repayment;
+                        // LoanRepayment := ExistingFOSAMLoan.Repayment;
 
-                        IF ExistingFOSAMLoan."Outstanding Interest" > 0 THEN BEGIN
-                            LoanRepayment := ExistingFOSAMLoan.Repayment;
+                        // IF ExistingFOSAMLoan."Outstanding Interest" > 0 THEN BEGIN
+                        //     LoanRepayment := ExistingFOSAMLoan.Repayment;
 
-                            IF ExistingFOSAMLoan.Installments = 1 THEN
-                                LoanRepayment := ExistingFOSAMLoan."Outstanding Balance";
-                            IF LoanRepayment < 0 THEN
-                                LoanRepayment := 0;
-                        END;
-                        IF LoanRepayment > ExistingFOSAMLoan."Total Balance" THEN
-                            LoanRepayment := ExistingFOSAMLoan."Total Balance";
+                        //     IF ExistingFOSAMLoan.Installments = 1 THEN
+                        //         LoanRepayment := ExistingFOSAMLoan."Outstanding Balance";
+                        //     IF LoanRepayment < 0 THEN
+                        //         LoanRepayment := 0;
+                        // END;
+                        // IF LoanRepayment > ExistingFOSAMLoan."Total Balance" THEN
+                        LoanRepayment := ExistingFOSAMLoan."Total Balance";
                         TLoanRepayment += LoanRepayment;
                     end until ExistingFOSAMLoan.Next = 0;
 
-                    if ProdFac."Repay Mode" in [
-                        ProdFac."Repay Mode"::Salary,
-                        ProdFac."Repay Mode"::"Mobile Money"
-                    ] then begin
-                        LoanRec -= TLoanRepayment;
-                    end;
+                    // if ProdFac."Repay Mode" in [
+                    //     ProdFac."Repay Mode"::Salary,
+                    //     ProdFac."Repay Mode"::"Mobile Money"
+                    // ] then begin
+                    LoanRec -= TLoanRepayment;
+                    // end;
                 end;
 
                 //confirm if loan exist of same type

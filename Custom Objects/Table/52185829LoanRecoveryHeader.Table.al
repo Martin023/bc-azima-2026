@@ -939,11 +939,11 @@ table 52185829 "Loan Recovery Header"
                     end;
 
                     if Counter <> AvailableGuarantorsCount then begin
-                        if Rec."Source Unit" <> Rec."Source Unit"::FOSA then begin
-                            AmountToTransaferToGuarantor := Round(AmountToTransaferToGuarantor, 0.01);
-                            PrincipleToTransaferToGuarantor := Round(PrincipleToTransaferToGuarantor, 0.01);
-                            InterestToTransaferToGuarantor := Round(InterestToTransaferToGuarantor, 0.01);
-                        end;
+                        // if Rec."Source Unit" <> Rec."Source Unit"::FOSA then begin
+                        AmountToTransaferToGuarantor := Round(AmountToTransaferToGuarantor, 0.01);
+                        PrincipleToTransaferToGuarantor := Round(PrincipleToTransaferToGuarantor, 0.01);
+                        InterestToTransaferToGuarantor := Round(InterestToTransaferToGuarantor, 0.01);
+                        // end;
                     end;
 
                     if (PrincipleToTransaferToGuarantor > 0) or (InterestToTransaferToGuarantor > 0) then

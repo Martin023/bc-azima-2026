@@ -1786,7 +1786,7 @@ table 52185729 Loans
             begin
                 if rec."Employer Code" <> '' then begin
                     Mem.Reset();
-                    mem.SetRange("Employer Code", rec."Staff No");
+                    mem.SetRange("Employer Code", rec."Employer Code");
                     Mem.SetRange("Payroll/Staff No.", rec."Staff No");
                     if Mem.FindFirst() then
                         rec.Validate("Member No.", Mem."No.")
@@ -2239,7 +2239,7 @@ table 52185729 Loans
                     if "Retirement/Expiry Date" < Today then
                         // Error('This date cannot be less than today');
                         Message('This member is already retired');
-                    "Months to Retire" := round(("Retirement/Expiry Date" - Today) /365, 1);
+                    "Months to Retire" := round(("Retirement/Expiry Date" - Today) / 365, 1);
                 end;
 
 
