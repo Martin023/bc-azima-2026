@@ -118,6 +118,7 @@ PageExtension 52186447 pageextension52186447 extends "Fixed Asset Card"
         {
             field(Disposed; Rec.Disposed) { ApplicationArea = basic; }
         }
+
         modify("FA Class Code")
         {
             trigger OnAfterValidate()
@@ -127,11 +128,18 @@ PageExtension 52186447 pageextension52186447 extends "Fixed Asset Card"
                 FACard: Page "Fixed Asset Card";
             begin
                 FAClasses.Reset();
-                if FAClasses.Get(Rec."FA Class Code") then begin
+                FAClasses.SetRange("Code", Rec."FA Class Code");
+                if FAClasses.FindFirst() then begin
+                    ///if FAClasses.Get(Rec."FA Class Code") then begin
+                    FAClasses.TestField(FAClasses."Depreciation Book Code");
+                    Message('Depreciation Book Code: %1, Depreciation Method: %2, Straight-Line %: %3', FAClasses."Depreciation Book Code", FAClasses."Depreciation Method", FAClasses."Straight-Line %");
                     if FAClasses."Depreciation Book Code" <> '' then begin
+
+                        DepreciationBook.Reset();
                         DepreciationBook.SetRange("FA No.", Rec."No.");
                         if DepreciationBook.FindSet() then
                             DepreciationBook.DeleteAll();
+
                         DepreciationBook.Reset();
                         DepreciationBook.Init();
                         DepreciationBook."FA No." := Rec."No.";
@@ -164,6 +172,29 @@ PageExtension 52186447 pageextension52186447 extends "Fixed Asset Card"
                 Rec.Validate(Description);
             end;
         }
+        /*
+        modify("Depreciation Book Code")
+        {
+            trigger OnAfterValidate()
+            var
+                DepreciationBook: Record "FA Depreciation Book";
+                FACard: Page "Fixed Asset Card";
+            begin
+                if Rec."Depreciation Book Code" <> '' then begin
+                    DepreciationBook.SetRange("FA No.", Rec."No.");
+                    if DepreciationBook.FindSet() then
+                        DepreciationBook.DeleteAll();
+                    DepreciationBook.Reset();
+                    DepreciationBook.Init();
+                    DepreciationBook."FA No." := Rec."No.";
+                    DepreciationBook."Depreciation Book Code" := Rec."Depreciation Book Code";
+                    DepreciationBook.Insert(true);
+                    FACard.UpdateDepreciationBook(Rec."No.");
+                    FACard.Update();
+                end;
+            end;
+        }
+        */
     }
 
     actions
