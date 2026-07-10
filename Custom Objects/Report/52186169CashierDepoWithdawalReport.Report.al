@@ -4,6 +4,7 @@ Report 52186169 "Cashier Deposits Withdrawals"
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/Cashier Deposits Withdrawals Report.rdl';
     UsageCategory = ReportsAndAnalysis;
+    caption = 'Tellers Journal';
 
     dataset
     {
