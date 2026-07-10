@@ -1560,17 +1560,17 @@
         <Field Name="MPesaCashWithdrawFormat">
           <DataField>MPesaCashWithdrawFormat</DataField>
         </Field>
-        <Field Name="GrandTotalPayments">
-          <DataField>GrandTotalPayments</DataField>
-        </Field>
-        <Field Name="GrandTotalPaymentsFormat">
-          <DataField>GrandTotalPaymentsFormat</DataField>
-        </Field>
         <Field Name="PettyCashAmt">
           <DataField>PettyCashAmt</DataField>
         </Field>
         <Field Name="PettyCashAmtFormat">
           <DataField>PettyCashAmtFormat</DataField>
+        </Field>
+        <Field Name="GrandTotalPayments">
+          <DataField>GrandTotalPayments</DataField>
+        </Field>
+        <Field Name="GrandTotalPaymentsFormat">
+          <DataField>GrandTotalPaymentsFormat</DataField>
         </Field>
         <Field Name="AccuracyLevel">
           <DataField>AccuracyLevel</DataField>
