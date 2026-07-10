@@ -456,6 +456,10 @@ table 52185778 "Treasury Cashier Transactions"
         field(50; "Treasury Balance"; decimal)
         {
         }
+        field(51; "Coinage Difference"; decimal)
+        {
+            editable = false;
+        }
     }
 
     keys
@@ -559,6 +563,13 @@ table 52185778 "Treasury Cashier Transactions"
 
         if Posted then
             Error('you cannot modify this transaction');
+    end;
+
+    procedure UpdateCoinageDifference()
+    begin
+        CalcFields("Total Cash on Treasury Coinage");
+        "Coinage Difference" := Amount - "Total Cash on Treasury Coinage";
+        Modify();
     end;
 
     var

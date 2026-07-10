@@ -471,6 +471,22 @@ page 52187320 AdvancedHumanResources
 
                         }
                     }
+                    group(DisciplinaryReports)
+                    {
+                        Caption = 'Disciplinary Reports';
+                        action(HrDiscCasesReport)
+                        {
+                            Caption = 'Disciplinary Cases Report';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = report "HR Disciplinary Cases List";
+                        }
+                        action(HrDiscAppealReport)
+                        {
+                            Caption = 'HR Disciplinary Cases';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = report "HR Disciplinary Cases";
+                        }
+                    }
                 }
                 group("Performance Management")
                 {
