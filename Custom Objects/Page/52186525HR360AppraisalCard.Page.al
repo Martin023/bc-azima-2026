@@ -113,11 +113,6 @@ page 52186525 "HR 360 Appraisal Card"
                     Importance = Promoted;
                     ApplicationArea=all;
                 }
-                field("Appraisal Quarters"; Rec."Appraisal Quarters")
-                {
-                    Editable = false;
-                    ApplicationArea=all;
-                }
                 field(Status; Rec.Status)
                 {
                     Editable = false;

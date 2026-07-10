@@ -112,11 +112,6 @@ page 52185973 "Mid Year Review"
                     Editable = SupervisorRating;
                     Enabled = SupervisorRating;
                 }
-                field("Perspective Type"; Rec."Perspective Type")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = false;
-                }
             }
         }
     }
@@ -138,15 +133,11 @@ page 52185973 "Mid Year Review"
     trigger OnInsertRecord(BelowxRec: Boolean): Boolean
     begin
         FnEdittableUnedittable;
-
-        Rec."Perspective Type" := Rec."Perspective Type"::"Training and Development";
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
         FnEdittableUnedittable;
-
-        Rec."Perspective Type" := Rec."Perspective Type"::"Training and Development";
     end;
 
     trigger OnOpenPage()
@@ -162,13 +153,13 @@ page 52185973 "Mid Year Review"
         SelfRating: Boolean;
         ChangeScore: Boolean;
         BaselineScore: Boolean;
+        HeaderRec: Record "HR Individual Targets Header";
 
-    //[Scope('OnPrem')]
-    procedure FnEdittableUnedittable()
+    local procedure FnEdittableUnedittable()
     begin
-        Rec.CalcFields("Appraisal Type", Status);
+        if HeaderRec.Get(Rec."Appraisal No") then;
 
-        if (Rec."Appraisal Type" = Rec."Appraisal Type"::"Target Setting") then begin
+        if (HeaderRec."Appraisal Cycle Stage" = HeaderRec."Appraisal Cycle Stage"::"Target Setting") then begin
             TargetSettingStatus := true;
             AppraisalStatus := false;
             SupervisorRating := false;
@@ -176,7 +167,7 @@ page 52185973 "Mid Year Review"
             SelfRating := false;
 
         end else
-            if (Rec."Appraisal Type" = Rec."Appraisal Type"::"Quarter 1") then begin
+            if (HeaderRec."Appraisal Cycle Stage" = HeaderRec."Appraisal Cycle Stage"::"Evaluation Review") then begin
                 TargetSettingStatus := false;
                 AppraisalStatus := false;
                 SupervisorRating := true;
@@ -185,7 +176,7 @@ page 52185973 "Mid Year Review"
                 BaselineScore := false;
                 ChangeScore := false;
             end else
-                if (Rec."Appraisal Type" = Rec."Appraisal Type"::"Appraisal Review") then begin
+                if (HeaderRec."Appraisal Cycle Stage" = HeaderRec."Appraisal Cycle Stage"::"Year-End Review") then begin
                     TargetSettingStatus := false;
                     AppraisalStatus := true;
                     SupervisorRating := true;

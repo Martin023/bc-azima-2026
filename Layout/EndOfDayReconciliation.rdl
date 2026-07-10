@@ -15,7 +15,6 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <!-- COMPANY LOGO -->
           <Image Name="CompanyLogo">
             <Source>Database</Source>
             <Value>=First(Fields!CompanyInformation_Picture.Value, "DataSet_Result")</Value>
@@ -27,7 +26,6 @@
             <Width>3.0cm</Width>
             <ZIndex>1</ZIndex>
           </Image>
-          <!-- COMPANY DETAILS -->
           <Textbox Name="CompanyDetails">
             <CanGrow>true</CanGrow>
             <Paragraphs>
@@ -61,7 +59,6 @@
             <Height>1.5cm</Height>
             <Width>9.5cm</Width>
           </Textbox>
-          <!-- COMPANY CONTACTS -->
           <Textbox Name="CompanyContacts">
             <CanGrow>true</CanGrow>
             <Paragraphs>
@@ -97,7 +94,6 @@
             <Height>1.0cm</Height>
             <Width>9.5cm</Width>
           </Textbox>
-          <!-- PRINT DETAILS (RIGHT SIDE) -->
           <Textbox Name="PrintDetails">
             <CanGrow>true</CanGrow>
             <Paragraphs>
@@ -155,7 +151,6 @@
             <Height>1.5cm</Height>
             <Width>6.5cm</Width>
           </Textbox>
-          <!-- HEADER DIVIDER LINE -->
           <Line Name="HeaderLine">
             <Top>2.7cm</Top>
             <Left>0.0cm</Left>
@@ -167,7 +162,6 @@
               </Border>
             </Style>
           </Line>
-          <!-- REPORT TITLE -->
           <Textbox Name="ReportTitleBox">
             <CanGrow>true</CanGrow>
             <Paragraphs>
@@ -206,7 +200,6 @@
             <Height>1.2cm</Height>
             <Width>18.5cm</Width>
           </Textbox>
-          <!-- TOP LEFT INFO -->
           <Textbox Name="MetaLeftLabels">
             <CanGrow>true</CanGrow>
             <Paragraphs>
@@ -306,7 +299,6 @@
             <Height>2.0cm</Height>
             <Width>5.0cm</Width>
           </Textbox>
-          <!-- TOP RIGHT INFO -->
           <Textbox Name="MetaRightLabels">
             <CanGrow>true</CanGrow>
             <Paragraphs>
@@ -405,7 +397,6 @@
             <Height>2.0cm</Height>
             <Width>5.8cm</Width>
           </Textbox>
-          <!-- MIDDLE LEFT (BALANCES) -->
           <Textbox Name="BalLeftLabels">
             <CanGrow>true</CanGrow>
             <Paragraphs>
@@ -520,7 +511,6 @@
             <Height>2.0cm</Height>
             <Width>4.2cm</Width>
           </Textbox>
-          <!-- MIDDLE RIGHT (SYSTEM CASH) -->
           <Textbox Name="BalRightLabels">
             <CanGrow>true</CanGrow>
             <Paragraphs>
@@ -611,7 +601,6 @@
             <Height>1.5cm</Height>
             <Width>5.0cm</Width>
           </Textbox>
-          <!-- RECEIPTS IN TOTALS TABLE -->
           <Textbox Name="ReceiptsTitle">
             <CanGrow>true</CanGrow>
             <Paragraphs>
@@ -868,10 +857,20 @@
                   </TextRun>
                 </TextRuns>
               </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Petty Cash</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+              </Paragraph>
             </Paragraphs>
             <Top>10.1cm</Top>
             <Left>10.0cm</Left>
-            <Height>2.0cm</Height>
+            <Height>2.5cm</Height>
             <Width>4.5cm</Width>
           </Textbox>
           <Textbox Name="PaymentAmounts">
@@ -936,6 +935,20 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
+                    <Value>=First(Fields!PettyCashAmt.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
                     <Value>=First(Fields!GrandTotalPayments.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
@@ -950,11 +963,11 @@
             </Paragraphs>
             <Top>10.1cm</Top>
             <Left>14.5cm</Left>
-            <Height>2.5cm</Height>
+            <Height>3.0cm</Height>
             <Width>5.0cm</Width>
           </Textbox>
           <Line Name="PaymentLine">
-            <Top>12.1cm</Top>
+            <Top>12.6cm</Top>
             <Left>14.5cm</Left>
             <Height>0cm</Height>
             <Width>5.0cm</Width>
@@ -1246,7 +1259,6 @@
               </Border>
             </Style>
           </Line>
-          <!-- SIGNATURES SECTION -->
           <Textbox Name="SignatureLabels">
             <CanGrow>true</CanGrow>
             <Paragraphs>
@@ -1553,6 +1565,12 @@
         </Field>
         <Field Name="GrandTotalPaymentsFormat">
           <DataField>GrandTotalPaymentsFormat</DataField>
+        </Field>
+        <Field Name="PettyCashAmt">
+          <DataField>PettyCashAmt</DataField>
+        </Field>
+        <Field Name="PettyCashAmtFormat">
+          <DataField>PettyCashAmtFormat</DataField>
         </Field>
         <Field Name="AccuracyLevel">
           <DataField>AccuracyLevel</DataField>

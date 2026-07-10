@@ -19,8 +19,7 @@ table 52185516 "HR Company Targets Header"
         }
         field(5; "Financial Targeted Score"; Decimal)
         {
-            CalcFormula = Sum("HR Individual Target Line"."Targeted Score" WHERE("Perspective Type" = FILTER("Financial Stewardship")));
-            FieldClass = FlowField;
+            FieldClass = Normal;
         }
         field(7; "Achieved Financial  Score"; Decimal)
         {
@@ -34,18 +33,15 @@ table 52185516 "HR Company Targets Header"
         }
         field(10; "Training Targeted Score"; Decimal)
         {
-            CalcFormula = Sum("HR Individual Target Line"."Targeted Score" WHERE("Perspective Type" = FILTER("Training and Development")));
-            FieldClass = FlowField;
+            FieldClass = Normal;
         }
         field(11; "Service Delivery Target Score"; Decimal)
         {
-            CalcFormula = Sum("HR Individual Target Line"."Targeted Score" WHERE("Perspective Type" = FILTER("Service Delivery")));
-            FieldClass = FlowField;
+            FieldClass = Normal;
         }
         field(12; "Customer Target Score"; Decimal)
         {
-            CalcFormula = Sum("HR Individual Target Line"."Targeted Score" WHERE("Perspective Type" = FILTER("Customer and Sales")));
-            FieldClass = FlowField;
+            FieldClass = Normal;
         }
         field(13; "Customer Achieved  Score"; Decimal)
         {

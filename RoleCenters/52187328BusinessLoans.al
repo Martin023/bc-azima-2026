@@ -1146,24 +1146,25 @@ page 52187328 "Business Loans"
                     Caption = 'Hr Perfomance Management';
                     group("HR BSC Appraisal")
                     {
-                        action("HR BSC List Target Setting ")
-                        {
-                            Caption = 'HR List Target Setting';
-                            ApplicationArea = Basic, suite;
-                            RunObject = page "HR 360 Appraisals List - TS1";
-                        }
-                        action("HR BSC List Target Approval")
-                        {
-                            Caption = 'HR List Target Approval';
-                            ApplicationArea = Basic, suite;
-                            RunObject = page "HR 360 Appraisals List - TA1";
-                        }
-                        action("HR BSC List Evaluation Areas")
-                        {
-                            Caption = 'HR List Evaluation';
-                            ApplicationArea = Basic, suite;
-                            RunObject = page "HR 360 Appraisals List - EV1";
-                        }
+                        // HIDDEN: OLD 360 APPRAISAL SYSTEM
+                        // action("HR BSC List Target Setting ")
+                        // {
+                        //     Caption = 'HR List Target Setting';
+                        //     ApplicationArea = Basic, suite;
+                        //     RunObject = page "HR 360 Appraisals List - TS1";
+                        // }
+                        // action("HR BSC List Target Approval")
+                        // {
+                        //     Caption = 'HR List Target Approval';
+                        //     ApplicationArea = Basic, suite;
+                        //     RunObject = page "HR 360 Appraisals List - TA1";
+                        // }
+                        // action("HR BSC List Evaluation Areas")
+                        // {
+                        //     Caption = 'HR List Evaluation';
+                        //     ApplicationArea = Basic, suite;
+                        //     RunObject = page "HR 360 Appraisals List - EV1";
+                        // }
                         action("HR Appraisal Appeal List")
                         {
                             Caption = 'HR Appraisal Appeal List';

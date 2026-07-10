@@ -13,6 +13,7 @@ table 52185526 "HR Individual Target Line"
         }
         field(3; "Perspective Code"; Integer)
         {
+            TableRelation = "HR Perspectives Setup"."Perspective No";
 
             trigger OnValidate()
             begin
@@ -32,11 +33,6 @@ table 52185526 "HR Individual Target Line"
                 "Unachieved Targets" := "Targeted Score" - "Achieved Score";
                 Change := "Targeted Score" - Baseline;
             end;
-        }
-        field(6; "Perspective Type"; Option)
-        {
-            OptionCaption = ' ,Service Delivery,Financial Stewardship,Training and Development,Customer and Sales';
-            OptionMembers = " ","Service Delivery","Financial Stewardship","Training and Development","Customer and Sales";
         }
         field(7; "Achieved Score"; Decimal)
         {
@@ -81,33 +77,18 @@ table 52185526 "HR Individual Target Line"
 
             trigger OnValidate()
             begin
-                BSCHead.Reset;
-                BSCHead.SetRange(BSCHead."Appraisal No", "Appraisal No");
-                if BSCHead.Find('-') then begin
-                    BSCHead.CalcFields("Finance Rating", "Customer Rating", "Training Rating", "Service Rating", Customer, Training, Service, Finance);
-                    if (BSCHead."Finance Rating" <> 0) and (BSCHead.Finance <> 0) then
-                        BSCHead."Finance Perc Score" := (BSCHead."Finance Rating" * 25) / (BSCHead.Finance * 5);
-                    if (BSCHead."Customer Rating" <> 0) and (BSCHead.Customer <> 0) then
-                        BSCHead."Customer Perc Score" := (BSCHead."Customer Rating" * 25) / (BSCHead.Customer * 5);
-                    if (BSCHead."Training Rating" <> 0) and (BSCHead.Training <> 0) then
-                        BSCHead."Training Perc Score" := (BSCHead."Training Rating" * 25) / (BSCHead.Training * 5);
-                    if (BSCHead."Service Rating" <> 0) and (BSCHead.Service <> 0) then
-                        BSCHead."Service Perc Score" := (BSCHead."Service Rating" * 25) / (BSCHead.Service * 5);
-                    //MESSAGE('%1,%2,%3,%4',"Finance Perc Score","Customer Perc Score","Training Perc Score","Service Perc Score");
-                    BSCHead."Overall Perc Score" := BSCHead."Finance Perc Score" + BSCHead."Customer Perc Score" + BSCHead."Training Perc Score" + BSCHead."Service Perc Score";
-                    BSCHead.Modify;
-                end
+                //SCORES NOW CALCULATED DYNAMICALLY VIA PERSPECTIVES
             end;
         }
         field(17; "Appraisal Period"; Code[20])
         {
         }
-        field(18; "Appraisal Type"; Option)
+        field(18; "Appraisal Cycle Stage"; Option)
         {
-            CalcFormula = Lookup("HR Individual Targets Header"."Appraisal Type" WHERE("Appraisal No" = FIELD("Appraisal No")));
+            CalcFormula = Lookup("HR Individual Targets Header"."Appraisal Cycle Stage" WHERE("Appraisal No" = FIELD("Appraisal No")));
             FieldClass = FlowField;
-            OptionCaption = 'Target Setting,Quarter 1,Appraisal Review,Quarter 3,End Year Appraisal';
-            OptionMembers = "Target Setting","Quarter 1","Appraisal Review","Quarter 3","End Year Appraisal";
+            OptionCaption = 'Target Setting,Evaluation Review,Year-End Review';
+            OptionMembers = "Target Setting","Evaluation Review","Year-End Review";
         }
         field(19; Status; Option)
         {

@@ -7,6 +7,8 @@ page 52186155 "My Assigned Targets"
     ApplicationArea = Basic;
     UsageCategory = Lists;
     Editable = true;
+    InsertAllowed = false;
+    DeleteAllowed = false;
 
     layout
     {
@@ -161,13 +163,13 @@ page 52186155 "My Assigned Targets"
                     IndivTargetHeader.Init;
                     IndivTargetHeader.Insert(true);
                     IndivTargetHeader."Appraisal Year" := AppraisalYear;
-                    IndivTargetHeader."Appraisal Type" := IndivTargetHeader."Appraisal Type"::"Target Setting";
+                    IndivTargetHeader."Appraisal Cycle Stage" := IndivTargetHeader."Appraisal Cycle Stage"::"Target Setting";
                     IndivTargetHeader.Modify;
 
                     IndivTargetHeader.ImportFromAssignedTargets(DeptTargetNo);
 
                     if Confirm('Appraisal %1 created successfully. Do you want to open it?', true, IndivTargetHeader."Appraisal No") then
-                        PAGE.Run(PAGE::"HR BSC Appraisal Header-Q1", IndivTargetHeader);
+                        PAGE.Run(PAGE::"HR Individual Appraisal Card", IndivTargetHeader);
 
                     CurrPage.Update(false);
                 end;

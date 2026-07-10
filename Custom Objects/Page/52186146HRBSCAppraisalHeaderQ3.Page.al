@@ -1,4 +1,4 @@
-page 52186146 "HR BSC Appraisal Header-Q3"
+page 52186146 "HR Indiv Appraisal Card-Q3"
 {
     DeleteAllowed = false;
     PageType = Card;
@@ -21,7 +21,7 @@ page 52186146 "HR BSC Appraisal Header-Q3"
                         AppraisalPeriod.Reset;
                         AppraisalPeriod.SetRange(AppraisalPeriod.Closed, false);
                         if AppraisalPeriod.Find('-') then begin
-                            OpenPeriod := AppraisalPeriod."Appraisal Month"
+                            OpenPeriod := AppraisalPeriod."Appraisal Period Description"
                         end;
 
                         HRIndividualTargetsHeader.Reset;
@@ -35,10 +35,15 @@ page 52186146 "HR BSC Appraisal Header-Q3"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Appraisal Type"; Rec."Appraisal Type")
+                field("Appraisal Cycle Stage"; Rec."Appraisal Cycle Stage")
                 {
                     ApplicationArea = Basic;
-                    Editable = false;
+                    Importance = Promoted;
+                    Style = Strong;
+                }
+                field("Review Sequence No"; Rec."Review Sequence No")
+                {
+                    ApplicationArea = Basic;
                 }
                 field("Employee No"; Rec."Employee No")
                 {
@@ -64,144 +69,17 @@ page 52186146 "HR BSC Appraisal Header-Q3"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Financial Targeted Score"; Rec."Financial Targeted Score")
+                field("Total Targeted Score"; Rec."Total Targeted Score")
                 {
                     ApplicationArea = Basic;
-                    Editable = false;
                 }
-                field("Achieved Financial  Score"; Rec."Achieved Financial  Score")
+                field("Total Achieved Score"; Rec."Total Achieved Score")
                 {
                     ApplicationArea = Basic;
-                    Editable = false;
                 }
-                field("Unachieved Targets"; Rec."Unachieved Targets")
+                field("Total Agreed Rating"; Rec."Total Agreed Rating")
                 {
                     ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Training Targeted Score"; Rec."Training Targeted Score")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Training Achieved  Score"; Rec."Training Achieved  Score")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Service Delivery Target Score"; Rec."Service Delivery Target Score")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Service Delivery Achieved"; Rec."Service Delivery Achieved")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Customer Target Score"; Rec."Customer Target Score")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Customer Achieved  Score"; Rec."Customer Achieved  Score")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                }
-                field("Finance Rating"; Rec."Finance Rating")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-
-                    trigger OnValidate()
-                    begin
-                        /*CALCFIELDS("Finance Rating","Customer Rating","Training Rating","Service Rating",Customer,Training,Service,Finance);
-                        IF ("Finance Rating"<>0) AND (Finance<>0)  THEN
-                        "Finance Perc Score":=("Finance Rating"*25)/(Finance*5);
-                        IF ("Customer Rating"<>0)AND(Customer<>0)THEN
-                        "Customer Perc Score":=("Customer Rating"*25)/(Customer*5);
-                        IF ("Training Rating"<>0) AND(Training<>0) THEN
-                        "Training Perc Score":=("Training Rating"*25)/(Training*5);
-                        IF ("Service Rating"<>0) AND (Service<>0)THEN
-                        "Service Perc Score":=("Service Rating"*25)/(Service*5);
-                        //MESSAGE('%1,%2,%3,%4',"Finance Perc Score","Customer Perc Score","Training Perc Score","Service Perc Score");
-                        "Overall Perc Score":="Finance Perc Score"+"Customer Perc Score"+"Training Perc Score"+"Service Perc Score";
-                        MODIFY; */
-
-                    end;
-                }
-                field("Customer Rating"; Rec."Customer Rating")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-
-                    trigger OnValidate()
-                    begin
-                        /*CALCFIELDS("Finance Rating","Customer Rating","Training Rating","Service Rating",Customer,Training,Service,Finance);
-                        IF ("Finance Rating"<>0) AND (Finance<>0)  THEN
-                        "Finance Perc Score":=("Finance Rating"*25)/(Finance*5);
-                        IF ("Customer Rating"<>0)AND(Customer<>0)THEN
-                        "Customer Perc Score":=("Customer Rating"*25)/(Customer*5);
-                        IF ("Training Rating"<>0) AND(Training<>0) THEN
-                        "Training Perc Score":=("Training Rating"*25)/(Training*5);
-                        IF ("Service Rating"<>0) AND (Service<>0)THEN
-                        "Service Perc Score":=("Service Rating"*25)/(Service*5);
-                        //MESSAGE('%1,%2,%3,%4',"Finance Perc Score","Customer Perc Score","Training Perc Score","Service Perc Score");
-                        "Overall Perc Score":="Finance Perc Score"+"Customer Perc Score"+"Training Perc Score"+"Service Perc Score";
-                        MODIFY;*/
-
-                    end;
-                }
-                field("Training Rating"; Rec."Training Rating")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-
-                    trigger OnValidate()
-                    begin
-                        /*CALCFIELDS("Finance Rating","Customer Rating","Training Rating","Service Rating",Customer,Training,Service,Finance);
-                        IF ("Finance Rating"<>0) AND (Finance<>0)  THEN
-                        "Finance Perc Score":=("Finance Rating"*25)/(Finance*5);
-                        IF ("Customer Rating"<>0)AND(Customer<>0)THEN
-                        "Customer Perc Score":=("Customer Rating"*25)/(Customer*5);
-                        IF ("Training Rating"<>0) AND(Training<>0) THEN
-                        "Training Perc Score":=("Training Rating"*25)/(Training*5);
-                        IF ("Service Rating"<>0) AND (Service<>0)THEN
-                        "Service Perc Score":=("Service Rating"*25)/(Service*5);
-                        //MESSAGE('%1,%2,%3,%4',"Finance Perc Score","Customer Perc Score","Training Perc Score","Service Perc Score");
-                        "Overall Perc Score":="Finance Perc Score"+"Customer Perc Score"+"Training Perc Score"+"Service Perc Score";
-                        MODIFY;*/
-
-                    end;
-                }
-                field("Service Rating"; Rec."Service Rating")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-
-                    trigger OnValidate()
-                    begin
-                        /*CALCFIELDS("Finance Rating","Customer Rating","Training Rating","Service Rating",Customer,Training,Service,Finance);
-                        IF ("Finance Rating"<>0) AND (Finance<>0)  THEN
-                        "Finance Perc Score":=("Finance Rating"*25)/(Finance*5);
-                        IF ("Customer Rating"<>0)AND(Customer<>0)THEN
-                        "Customer Perc Score":=("Customer Rating"*25)/(Customer*5);
-                        IF ("Training Rating"<>0) AND(Training<>0) THEN
-                        "Training Perc Score":=("Training Rating"*25)/(Training*5);
-                        IF ("Service Rating"<>0) AND (Service<>0)THEN
-                        "Service Perc Score":=("Service Rating"*25)/(Service*5);
-                        //MESSAGE('%1,%2,%3,%4',"Finance Perc Score","Customer Perc Score","Training Perc Score","Service Perc Score");
-                        "Overall Perc Score":="Finance Perc Score"+"Customer Perc Score"+"Training Perc Score"+"Service Perc Score";
-                        MODIFY;*/
-
-                    end;
-                }
-                field("Overall Perc Score"; Rec."Overall Perc Score")
-                {
-                    ApplicationArea = Basic;
-                    Editable = false;
-                    Visible = false;
                 }
                 field("Responsibility Center"; Rec."Responsibility Center")
                 {
@@ -222,29 +100,10 @@ page 52186146 "HR BSC Appraisal Header-Q3"
                     Editable = false;
                 }
             }
-            part("Financial Targets"; "HR Financial BSC Lines")
+            part("Individual Targets"; "End Year Review")
             {
-                Caption = 'Financial Targets';
-                SubPageLink = "Appraisal No" = FIELD("Appraisal No"),
-                              "Perspective Code" = CONST(1);
-            }
-            part("Internal Processes Targets"; "HR Service BSC Lines")
-            {
-                Caption = 'Internal Processes Targets';
-                SubPageLink = "Appraisal No" = FIELD("Appraisal No"),
-                              "Perspective Code" = CONST(4);
-            }
-            part("Customer Targets"; "HR Customer BSC Lines")
-            {
-                Caption = 'Customer Targets';
-                SubPageLink = "Appraisal No" = FIELD("Appraisal No"),
-                              "Perspective Code" = CONST(2);
-            }
-            part("Learning and Growth Targets"; "HR Training Target Lines")
-            {
-                Caption = 'Learning and Growth Targets';
-                SubPageLink = "Appraisal No" = FIELD("Appraisal No"),
-                              "Perspective Code" = CONST(3);
+                ApplicationArea = All;
+                SubPageLink = "Appraisal No" = FIELD("Appraisal No");
             }
             part(Control4; "Performance Attributes Sheet")
             {
@@ -264,7 +123,7 @@ page 52186146 "HR BSC Appraisal Header-Q3"
                 Promoted = true;
                 PromotedCategory = Category5;
                 PromotedIsBig = true;
-                Enabled = (Rec.Status = Rec.Status::Open) and (Rec."Appraisal Type" = Rec."Appraisal Type"::"Target Setting");
+                Enabled = (Rec.Status = Rec.Status::Open) and (Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Target Setting");
 
                 trigger OnAction()
                 var
@@ -272,8 +131,8 @@ page 52186146 "HR BSC Appraisal Header-Q3"
                     DeptTargetNo: Code[20];
                     DeptTargetList: Page "HR Employee Target Assgns List";
                 begin
-                    if Rec."Appraisal Type" <> Rec."Appraisal Type"::"Target Setting" then
-                        Error('Can only import assigned targets into Target Setting appraisals.');
+                    if Rec."Appraisal Cycle Stage" <> Rec."Appraisal Cycle Stage"::"Target Setting" then
+                        Error('Can only import assigned targets during Target Setting stage.');
 
                     if Rec.Status <> Rec.Status::Open then
                         Error('Can only import targets when appraisal status is Open.');
@@ -340,7 +199,7 @@ page 52186146 "HR BSC Appraisal Header-Q3"
 
                     if Confirm('Send this Appraisal back to Target Setting?', true) = false then exit;
 
-                    Rec."Appraisal Type" := Rec."Appraisal Type"::"Target Setting";
+                    Rec."Appraisal Cycle Stage" := Rec."Appraisal Cycle Stage"::"Target Setting";
                     Rec.Modify;
                 end;
             }
@@ -361,17 +220,16 @@ page 52186146 "HR BSC Appraisal Header-Q3"
 
                 trigger OnAction()
                 begin
-                    if Rec."Appraisal Type" = Rec."Appraisal Type"::"Quarter 1" then begin
+                    if Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Evaluation Review" then begin
                         Rec.TestField(Status, Rec.Status::Discussed);
                     end;
 
-                    if Rec."Appraisal Type" = Rec."Appraisal Type"::"Target Setting" then begin
+                    if Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Target Setting" then begin
                         Rec.TestField(Status, Rec.Status::Approved);
                     end;
 
                     if Confirm('Are you sure you want to post?', false) = true then begin
                         Testfields;
-                        //post
                         HRIndividualTargetsHeader.Reset;
                         HRIndividualTargetsHeader.SetRange(HRIndividualTargetsHeader."Appraisal No", Rec."Appraisal No");
                         if HRIndividualTargetsHeader.Find('-') then begin
@@ -453,9 +311,8 @@ page 52186146 "HR BSC Appraisal Header-Q3"
     end;
 
     var
-        //// //ApprovalEntries: Page "Approval Entries";
         HRIndividualTargetsHeader: Record "HR Individual Targets Header";
-        OpenPeriod: Integer;
+        OpenPeriod: Text[100];
         AppraisalPeriod: Record "HR Appraisal Period";
         Editpage: Boolean;
 
