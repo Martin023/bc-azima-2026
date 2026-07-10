@@ -170,6 +170,8 @@ page 52185439 "Mobile Loan Eligibility"
         CalculatingMsg: Label 'Calculating eligibility...';
 
     local procedure CalculateEligibility()
+    var
+        ProductFactory: Record "Product Factory";
     begin
         if MemberNo = '' then
             Error(MemberNotSetErr);
@@ -181,7 +183,10 @@ page 52185439 "Mobile Loan Eligibility"
         ShowResults := false;
 
         EligibilityFailReason := '';
-        QualifiedAmount := SkyMbankingTrans.GetLoansQualifyAmount(MemberNo, LoanTypeCode, 0, EligibilityFailReason);
+        if ProductFactory.Get(LoanTypeCode) and ProductFactory."Allow Topup" then
+            QualifiedAmount := SkyMbankingTrans.GetLoansQualifyAmount2(MemberNo, LoanTypeCode, 0, EligibilityFailReason)
+        else
+            QualifiedAmount := SkyMbankingTrans.GetLoansQualifyAmount(MemberNo, LoanTypeCode, 0, EligibilityFailReason);
 
         UpdateEligibilityStatus();
         ShowResults := true;
