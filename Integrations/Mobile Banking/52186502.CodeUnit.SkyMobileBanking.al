@@ -2800,6 +2800,21 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         );
 
         IF SearchMember.FindFirst then begin
+            /*
+                Block Mmber from applying Mobile loans
+            */
+
+            if SearchMember."Block Div Advance" then begin
+                ResponseObject.Add('request_status', 'ERROR');
+                Datum.Add('error_message', 'You are currently blocked from applying for member loans. Please contact the SACCO for assistance.');
+                EligibilityFailReason := 'You are currently blocked from applying for member loans. Please contact the SACCO for assistance.';
+                Datum.Add('eligibility_fail_reason', EligibilityFailReason);
+                ResponseObject.Add('response_payload', Datum);
+                AddDateTimeToResponse(ResponseObject);
+                ResponseObject.WriteTo(Response);
+                exit(Response);
+            end;
+
             ExistingLoanAmount := 0;
             // memberclass filter
             MemberClass.Reset();
@@ -2976,6 +2991,19 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         );
 
         IF SearchMember.FindFirst then begin
+            if SearchMember."Block Div Advance" then begin
+                ResponseObject.Add('request_status', 'BLOCKED');
+                Datum.Add('error_message', 'You are currently blocked from applying for member loans. Please contact the SACCO for assistance.');
+                EligibilityFailReason := 'You are currently blocked from applying for member loans. Please contact the SACCO for assistance.';
+                Datum.Add('eligibility_fail_reason', EligibilityFailReason);
+                ResponseObject.Add('response_payload', Datum);
+
+                AddDateTimeToResponse(ResponseObject);
+
+                ResponseObject.WriteTo(Response);
+                exit(Response);
+            end;
+
             if CheckFOSASavingsAccountBlocked(SearchMember, 'CREDIT') then begin
                 ResponseObject.Add('request_status', 'BLOCKED');
                 Datum.Add('error_message', 'Account is blocked from credit transactions.');
@@ -3084,28 +3112,47 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                     exit(Response);
                 end;
                 // if Conditions are met then create loan application
+                // if MobileLoanProduct."Allow Topup" then begin
+                //     if not IsFosaMLoanProduct then begin
+                //         IsFosaMLoanProduct := false;
+                //     end else begin
+                //         if installments.AsValue.IsNull then begin
+                //             IsFosaMLoanProduct := false;
+                //         end;
+                //     end;
+                // end else begin
+                //     IsFosaMLoanProduct := false;
+                // end;
+
+                // Allow Topup products must always go through the topup (FOSA M-Loan) flow,
+                // otherwise the existing loan on this product is never cleared during posting.
                 if MobileLoanProduct."Allow Topup" then begin
-                    if installments.AsValue.IsNull then begin
-                        IsFosaMLoanProduct := false;
-                    end;
-                end else begin
-                    IsFosaMLoanProduct := false;
-                end;
+                    //     if not IsFosaMLoanProduct then begin
+                    //         ResponseObject.Add('request_status', 'ERROR');
+                    //         Datum.Add('error_message', 'Installments MUST be greater than 0!');
+                    //         ResponseObject.Add('response_payload', Datum);
 
-                if IsFosaMLoanProduct then begin
-                    if installments.AsValue.AsInteger <= 0 then begin
-                        ResponseObject.Add('request_status', 'ERROR');
-                        Datum.Add('error_message', 'Installments MUST be greater than 0!');
-                        ResponseObject.Add('response_payload', Datum);
+                    //         AddDateTimeToResponse(ResponseObject);
 
-                        AddDateTimeToResponse(ResponseObject);
+                    //         ResponseObject.WriteTo(Response);
+                    //         exit(Response);
+                    //     end;
+                    // end;
 
-                        ResponseObject.WriteTo(Response);
-                        exit(Response);
-                    end;
-                end;
+                    // if IsFosaMLoanProduct then begin
+                    //     if installments.AsValue.AsInteger <= 0 then begin
+                    //         ResponseObject.Add('request_status', 'ERROR');
+                    //         Datum.Add('error_message', 'Installments MUST be greater than 0!');
+                    //         ResponseObject.Add('response_payload', Datum);
 
-                if IsFosaMLoanProduct then begin
+                    //         AddDateTimeToResponse(ResponseObject);
+
+                    //         ResponseObject.WriteTo(Response);
+                    //         exit(Response);
+                    //     end;
+                    // end;
+
+                    // if IsFosaMLoanProduct then begin
                     if SkyMbankingTrans.BufferLoanApplication2(
                         SearchMember."No.", MobileLoanProduct."Product ID",
                         amount.AsValue.AsDecimal,
@@ -8010,6 +8057,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         ResponseDescription: Text;
 
         FailReason: Text;
+        EligibilityFailReason: Text;
     begin
         Payload.Get('identifier_type', identifier_type);
         Payload.Get('identifier', identifier);
@@ -8026,6 +8074,19 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         KeyExists := Payload.Get('files', files);
 
         if MemberExists(identifier_type.AsValue.AsText, identifier.AsValue.AsText, SearchMember, ResponseText, ResponseDescription) then begin
+            if SearchMember."Block Div Advance" then begin
+                ResponseObject.Add('request_status', 'ERROR');
+                Datum.Add('error_message', 'You are currently blocked from applying for member loans. Please contact the SACCO for assistance.');
+                EligibilityFailReason := 'You are currently blocked from applying for member loans. Please contact the SACCO for assistance.';
+                Datum.Add('eligibility_fail_reason', EligibilityFailReason);
+                ResponseObject.Add('response_payload', Datum);
+
+                AddDateTimeToResponse(ResponseObject);
+                ResponseObject.WriteTo(Response);
+
+                exit(Response);
+            end;
+
             ExistingLoanApplications.Reset;
             ExistingLoanApplications.SetRange("Member No.", SearchMember."No.");
             ExistingLoanApplications.SetFilter(Status,

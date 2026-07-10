@@ -2221,7 +2221,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
                         EXIT(QualifiedAmount);
                     end;
 
-                    QualifiedAmount -= ExistingFOSAMLoanAmount;
+                    // QualifiedAmount -= ExistingFOSAMLoanAmount;
                     EXIT(QualifiedAmount);
                 end;
             END ELSE BEGIN

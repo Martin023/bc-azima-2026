@@ -421,6 +421,12 @@ page 52185726 "Member Single"
                     ApplicationArea = Basic, Suite;
                     Caption = 'Allow retiree access to mobile loans?';
                 }
+                field("Block Div Advance"; Rec."Block Div Advance")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = true;
+                    Caption = 'Block Mobile Loan';
+                }
                 // field("TSC Number"; Rec."TSC Number")
                 // {
                 //     ApplicationArea = Basic, Suite;
@@ -494,10 +500,6 @@ page 52185726 "Member Single"
             group("Dividend Advance")
             {
                 Editable = true;
-                field("Block Div Advance"; Rec."Block Div Advance")
-                {
-                    Caption = 'Block From Dividend Advance Loan';
-                }
                 field("Div Advance %"; Rec."Div Advance %")
                 {
                 }
