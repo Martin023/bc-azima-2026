@@ -1922,6 +1922,11 @@ page 52187329 "Records"
                         ApplicationArea = Basic, Suite;
                         RunObject = Report "Incomplete Application Report";
                     }
+                    action("Next of kin Allocation Report")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        RunObject = Report "Next of kin Allocation Report";
+                    }
                     action(AutocreateProducts)
                     {
                         ApplicationArea = Basic, Suite;
