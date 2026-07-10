@@ -4254,12 +4254,12 @@ page 52186778 "Finance Role Center"
                         RunObject = report "prAllowances Report";
                         ApplicationArea = Basic, Suite;
                     }
-                    // action(prGrossNetPay)
-                    // {
-                    //     Caption = 'Gross NetPay';
-                    //     ApplicationArea = Basic, Suite;
-                    //     RunObject = report prGrossNetPay;
-                    // }
+                    action(prGrossNetPay)
+                    {
+                        Caption = 'Gross NetPay';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = report prGrossNetPay;
+                    }
                     // action("prGrossNetPay FxedTC")
                     // {
                     //     Caption = 'prGrossNetPay FxedTC';
