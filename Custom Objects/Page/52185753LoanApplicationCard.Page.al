@@ -922,7 +922,7 @@ page 52185753 "Loan Application Card"
             action("Other Commitments Clearance")
             {
                 ApplicationArea = Basic, Suite;
-                Caption = 'Other Commitments/Loan Takeoff.';
+                Caption = 'Other Comms/Loan Arrears Recovery.';
                 Image = Cost;
                 Promoted = true;
                 PromotedCategory = Process;
@@ -1562,12 +1562,12 @@ page 52185753 "Loan Application Card"
                     end;
 
 
-                    if Rec."Loan Product Type" = '142' then begin
-                        Rec.TestField("Land Valuation Done", true);
-                        Rec.TestField("Sale Agreement", true);
-                        Rec.TestField("20% Payment Slip", true);
-                        Rec.TestField("Title Deed");
-                    end;
+                    // if Rec."Loan Product Type" = '142' then begin
+                    //     Rec.TestField("Land Valuation Done", true);
+                    //     Rec.TestField("Sale Agreement", true);
+                    //     Rec.TestField("20% Payment Slip", true);
+                    //     Rec.TestField("Title Deed");
+                    // end;
                     //Repayment schedule
                     RSchedule.RESET;
                     RSchedule.SETRANGE(RSchedule."Loan No.", rec."Loan No.");

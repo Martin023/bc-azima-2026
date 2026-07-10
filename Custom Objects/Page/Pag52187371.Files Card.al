@@ -124,7 +124,7 @@ page 52187371 "Files Card"
                 }
 
             }
-            part(Control1; "Member Form List")
+            part(Control1; "Member Form Lines")
             {
                 ApplicationArea = Basic, Suite;
                 SubPageLink = "Member No." = field("File/Member No.");
