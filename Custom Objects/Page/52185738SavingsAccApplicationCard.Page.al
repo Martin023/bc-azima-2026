@@ -503,22 +503,26 @@ page 52185738 "Savings Acc. Application Card"
                         ApplicationDocuments: Record "Application Documents";
                         SignApplication: Record "Signatory Application";
                         ProdFac: record "Product Factory";
+                        Gensetup: record "General Set-Up";
                     begin
+                        Gensetup.Get();
                         if rec."Recruited by Type" = rec."Recruited by Type"::"None" then
                             Error('Recruiter Type and Recruited by must have a value');
 
                         if rec."Application Type" = rec."Application Type"::"Group Account" then begin
+                            Gensetup.TestField("Minimum No of Group Members");
                             SignApplication.Reset();
                             SignApplication.SetRange("Account No", rec."No.");
-                            if SignApplication.Count < 3 then
-                                Error('A Group Account must have atleast three Signatories.');
+                            if SignApplication.Count < Gensetup."Minimum No of Group Members" then
+                                Error('A Group Account must have atleast %1 Signatories.', Gensetup."Minimum No of Group Members");
                         end;
 
                         if rec."Application Type" = rec."Application Type"::"Joint Account" then begin
+                            Gensetup.TestField("Minimum No of Joint Members");
                             SignApplication.Reset();
                             SignApplication.SetRange("Account No", rec."No.");
-                            if SignApplication.Count < 2 then
-                                Error('A Joint Account can only have two signatories.');
+                            if SignApplication.Count < Gensetup."Minimum No of Joint Members" then
+                                Error('A Joint Account must have atleast %1 signatories.', Gensetup."Minimum No of Joint Members");
                         end;
 
                         if (rec."Application Type" = rec."Application Type"::"Joint Account") OR

@@ -406,6 +406,10 @@ page 52186182 "General Setup"
                 {
                     ApplicationArea = Basic;
                 }
+                field("Minimum No of Joint Members"; rec."Minimum No of Joint Members")
+                {
+                    ApplicationArea = Basic;
+                }
                 field("Surety Notice Period"; Rec."Surety Notice Period")
                 {
                     ApplicationArea = Basic;
