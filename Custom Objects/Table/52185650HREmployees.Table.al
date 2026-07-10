@@ -17,7 +17,7 @@ table 52185650 "HR Employees"
                     HrSetup.Get;
                     NoSeriesMgt.TestManual(HrSetup."Employee Nos.");
                     "No. Series" := '';
-                    
+
                     //CHECK FOR DUPLICATE EMPLOYEE NUMBER
                     if "No." <> '' then begin
                         HREmpCheck.Reset();
@@ -130,7 +130,7 @@ table 52185650 "HR Employees"
             SubType = Bitmap;
         }
         field(21; "ID Number"; code[20])
-         {
+        {
         }
 
         field(22; "Union Code"; Code[10])
@@ -800,7 +800,7 @@ table 52185650 "HR Employees"
                     if HREmp.FindFirst() then
                         Error('KRA PIN NUMBER [%1] ALREADY EXISTS FOR EMPLOYEE [%2] - [%3]. DUPLICATE KRA PIN NUMBERS ARE NOT ALLOWED. PLEASE VERIFY THE PIN NUMBER.', "PIN No.", HREmp."No.", HREmp."Full Name");
                 end;
-                
+
                 //CHECK IF PIN MATCHES MEMBER RECORD
                 if "No." <> '' then begin
                     Members.Reset();
@@ -810,28 +810,28 @@ table 52185650 "HR Employees"
                             Message('KRA PIN MISMATCH DETECTED:' + '\' + '\' +
                                 'Employee Card PIN: %1' + '\' +
                                 'Member Register PIN: %2' + '\' + '\' +
-                                'The KRA PIN number on the Employee Card differs from the Member Register. Please verify which PIN is correct and update the Member Register accordingly to maintain data consistency.', 
+                                'The KRA PIN number on the Employee Card differs from the Member Register. Please verify which PIN is correct and update the Member Register accordingly to maintain data consistency.',
                                 "PIN No.", Members."P.I.N Number");
                     end;
                 end;
-                
+
                 //VALIDATE PIN FORMAT
                 // if StrPos("PIN No.", 'A') <> 1 then
                 //     Error('First letter must be an A');
                 // end;
 
-                if StrLen("PIN No.") <> 11 then 
+                if StrLen("PIN No.") <> 11 then
                     Error('P.I.N Number length must be 11 characters');
 
                 Characters := '1234567890!@#$%^&*()_~{}[];:"|\ ,./<>?-= ''';
-                if not MemberApplication.ValidateShouldNotHaves(CopyStr("PIN No.", 1, 1), Characters) then 
+                if not MemberApplication.ValidateShouldNotHaves(CopyStr("PIN No.", 1, 1), Characters) then
                     Error('First character must be a letter');
 
-                if not MemberApplication.ValidateShouldNotHaves(CopyStr("PIN No.", 11, 1), Characters) then 
+                if not MemberApplication.ValidateShouldNotHaves(CopyStr("PIN No.", 11, 1), Characters) then
                     Error('Last character must be a letter');
 
                 Characters := '1234567890';
-                if MemberApplication.ValidateShouldNotHaves(CopyStr("PIN No.", 2, 8), Characters) then 
+                if MemberApplication.ValidateShouldNotHaves(CopyStr("PIN No.", 2, 8), Characters) then
                     Error('Pin number must be alphanumeric');
             end;
         }
@@ -1410,7 +1410,7 @@ table 52185650 "HR Employees"
                         PrSalInfo."Days Worked" := DaysWorked;
                         PrSalInfo.Modify(true);
                     end;
-                    
+
                     //CALCULATE YEARS OF SERVICE
                     CalculateYearsOfService();
                 end;
@@ -1742,7 +1742,7 @@ table 52185650 "HR Employees"
             //NEW FIELD - NOT EDITABLE, 2 DECIMAL PLACES
             Editable = false;
             DecimalPlaces = 2 : 2;
-            
+
             trigger OnValidate()
             var
                 myInt: Integer;
@@ -1837,7 +1837,7 @@ table 52185650 "HR Employees"
 
     fieldgroups
     {
-        fieldgroup(DropDown; "No.", "Member No.","ID Number", "First Name", "Middle Name", "Last Name")
+        fieldgroup(DropDown; "No.", "Member No.", "ID Number", "First Name", "Middle Name", "Last Name")
         {
         }
     }
@@ -1885,7 +1885,7 @@ table 52185650 "HR Employees"
         SalespersonPurchaser: Record "Salesperson/Purchaser";
         //NoSeriesMgt: Codeunit "No. Series - Batch";
         NoSeriesMgt: Codeunit "No. Series";
-   
+
         HrSetup: Record "HR Setup";
         SalCard: Record "PR Salary Card";
         PRPayrollPeriod: Record "PR Payroll Periods";
@@ -1998,17 +1998,17 @@ table 52185650 "HR Employees"
             "Years of service" := 0;
             exit;
         end;
-        
+
         //CALCULATE YEARS AND MONTHS BETWEEN DATE OF JOIN AND TODAY
         YearsDiff := Date2DMY(Today, 3) - Date2DMY("Date Of Join", 3);
         MonthsDiff := Date2DMY(Today, 2) - Date2DMY("Date Of Join", 2);
-        
+
         //ADJUST IF MONTHS ARE NEGATIVE
         if MonthsDiff < 0 then begin
             YearsDiff := YearsDiff - 1;
             MonthsDiff := MonthsDiff + 12;
         end;
-        
+
         //CONVERT TO DECIMAL (YEARS.MONTHS)
         TotalMonths := (YearsDiff * 12) + MonthsDiff;
         "Years of service" := Round(TotalMonths / 12, 0.01);

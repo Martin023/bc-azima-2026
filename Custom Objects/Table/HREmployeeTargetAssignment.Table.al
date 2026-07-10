@@ -324,9 +324,9 @@ table 52185513 "HR Employee Target Assignment"
         if not HREmp.Get("Employee No") then
             Error('Employee %1 does not exist.', "Employee No");
 
-        if HREmp."Department Code" <> "Responsibility Center" then
+        if HREmp."Responsibility Center" <> "Responsibility Center" then
             Error('Employee %1 (%2) does not belong to department %3. Employee department is %4.',
-                "Employee No", "Employee Name", "Department Name", HREmp."Department Code");
+                "Employee No", "Employee Name", "Department Name", HREmp."Responsibility Center");
     end;
 
     procedure CheckDuplicateAssignment()

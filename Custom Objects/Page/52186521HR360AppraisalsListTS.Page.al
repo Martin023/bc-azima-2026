@@ -4,7 +4,7 @@ page 52186521 "HR 360 Appraisals List - TS1"
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Functions,Appraisal';
     SourceTable = "HR Appraisal Header";
-    SourceTableView = WHERE("Appraisal Quarters" = filter("Target Setting"|"Quarter 1"|"Quarter 2"|"Quarter 3"|"End Year Evalauation"));
+    SourceTableView = WHERE("Appraisal Stage" = CONST("Target Setting"));
     ApplicationArea = Basic;
     UsageCategory = Lists;
 

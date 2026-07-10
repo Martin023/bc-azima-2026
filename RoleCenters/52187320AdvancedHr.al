@@ -493,25 +493,25 @@ page 52187320 AdvancedHumanResources
                     Caption = 'Performance Management';
                     group("BSC Appraisal")
                     {
-                        action("HR BSC List Target Setting ")
-                        {
-                            Caption = 'List Target Setting';
-                            ApplicationArea = Basic, suite;
-                            RunObject = page "HR 360 Appraisals List - TS1";
-                        }
-                        action("HR BSC List Target Approval")
-                        {
-                            Caption = 'List Target Approval';
-                            ApplicationArea = Basic, suite;
-                            RunObject = page "HR 360 Appraisals List - TA1";
-                        }
-                        action("HR BSC List Evaluation Areas")
-                        {
-                            Caption = 'List Evaluation';
-                            ApplicationArea = Basic, suite;
-                            RunObject = page "HR 360 Appraisals List - EV1";
-
-                        }
+                        // HIDDEN: OLD 360 APPRAISAL SYSTEM - REPLACED BY NEW DYNAMIC PERSPECTIVE SYSTEM
+                        // action("HR BSC List Target Setting ")
+                        // {
+                        //     Caption = 'List Target Setting';
+                        //     ApplicationArea = Basic, suite;
+                        //     RunObject = page "HR 360 Appraisals List - TS1";
+                        // }
+                        // action("HR BSC List Target Approval")
+                        // {
+                        //     Caption = 'List Target Approval';
+                        //     ApplicationArea = Basic, suite;
+                        //     RunObject = page "HR 360 Appraisals List - TA1";
+                        // }
+                        // action("HR BSC List Evaluation Areas")
+                        // {
+                        //     Caption = 'List Evaluation';
+                        //     ApplicationArea = Basic, suite;
+                        //     RunObject = page "HR 360 Appraisals List - EV1";
+                        // }
 
                         // action("HR BSC List Target Setting")
                         // {
@@ -543,14 +543,14 @@ page 52187320 AdvancedHumanResources
                         //     ApplicationArea = Basic, suite;
                         //     RunObject = page "HR BSC List Qaurter 3";
                         // }
-                        action("HR BSC List Approved")
-                        {
-
-                            Caption = 'HR List Target Setting';
-                            ApplicationArea = Basic, suite;
-                            RunObject = page "HR 360 Appraisals List - TS1";
-                            RunPageLink = Status = CONST(Approved);
-                        }
+                        // HIDDEN: OLD 360 APPRAISAL SYSTEM
+                        // action("HR BSC List Approved")
+                        // {
+                        //     Caption = 'HR List Target Setting';
+                        //     ApplicationArea = Basic, suite;
+                        //     RunObject = page "HR 360 Appraisals List - TS1";
+                        //     RunPageLink = Status = CONST(Approved);
+                        // }
 
                         // action("HR BSC List End Year")
                         // {
@@ -603,28 +603,48 @@ page 52187320 AdvancedHumanResources
                     group(randanalysis)
                     {
                         Caption = 'Reports and Analysis';
-                        // action(PerfomanceReport)
-                        // {
-                        //     Caption = 'Perfomance Report';
-                        //     ApplicationArea = Basic, Suite;
-                        //     RunObject = report "Performance Report";
-
-                        // }
+                        action(DepartmentTargetsReport)
+                        {
+                            Caption = 'Department Targets Report';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = report "Department Targets Report";
+                        }
+                        action(EmployeeTargetAssignmentReport)
+                        {
+                            Caption = 'Employee Target Assignment Report';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = report "Employee Target Assignment Rpt";
+                        }
+                        action(IndividualTargetsReport)
+                        {
+                            Caption = 'Individual Targets Report';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = report "Individual Targets Report";
+                        }
+                        action(AppraisalSummaryReport)
+                        {
+                            Caption = 'Appraisal Summary Report';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = report "Appraisal Summary Report";
+                        }
+                        action(AppraisalAppealReport)
+                        {
+                            Caption = 'Appraisal Appeal Report';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = report "Appraisal Appeal Report";
+                        }
+                        action(PerspectiveAnalysisReport)
+                        {
+                            Caption = 'Perspective Analysis Report';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = report "Perspective Analysis Report";
+                        }
                         action(Perfomance)
                         {
-                            Caption = 'Perfomance Report';
+                            Caption = 'Performance Report';
                             ApplicationArea = Basic, Suite;
                             RunObject = report "Performance";
-                            ;
-
                         }
-                        // action(AppraisalReport)
-                        // {
-                        //     Caption = 'Appraisal Report';
-                        //     ApplicationArea = Basic, Suite;
-                        //     RunObject = report "Appraisal Report";
-
-                        // }
                     }
                 }
                 group("Leave Management")
@@ -1936,12 +1956,13 @@ page 52187320 AdvancedHumanResources
                     Caption = 'Training Need Request';
                     RunObject = page "HR Training Need Request List";
                 }
-                action("Appraisal")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'My Appraisals';
-                    RunObject = page "HR 360 Appraisals List - TS1";
-                }
+                // HIDDEN: OLD 360 APPRAISAL - USE "MY ASSIGNED TARGETS" INSTEAD
+                // action("Appraisal")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'My Appraisals';
+                //     RunObject = page "HR 360 Appraisals List - TS1";
+                // }
                 action("My Assigned Targets")
                 {
                     ApplicationArea = Basic, Suite;

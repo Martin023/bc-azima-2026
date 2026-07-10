@@ -24,7 +24,7 @@ Page 52185448 "HR Department Targets Card"
                 {
                     ApplicationArea = Basic;
                     Caption = 'Department';
-                    Editable = IsEditable;
+                    Editable = Rec.Status = Rec.Status::Open;
                     ShowMandatory = true;
                 }
                 field("Department Name"; Rec."Department Name")
@@ -35,13 +35,13 @@ Page 52185448 "HR Department Targets Card"
                 field("Appraisal Period"; Rec."Appraisal Period")
                 {
                     ApplicationArea = Basic;
-                    Editable = IsEditable;
+                    Editable = Rec.Status = Rec.Status::Open;
                     ShowMandatory = true;
                 }
                 field("Appraisal Year"; Rec."Appraisal Year")
                 {
                     ApplicationArea = Basic;
-                    Editable = IsEditable;
+                    Editable = Rec.Status = Rec.Status::Open;
                     ShowMandatory = true;
                 }
                 field("Target Date"; Rec."Target Date")
@@ -52,7 +52,7 @@ Page 52185448 "HR Department Targets Card"
                 field("HOD Employee No"; Rec."HOD Employee No")
                 {
                     ApplicationArea = Basic;
-                    Editable = IsEditable;
+                    Editable = Rec.Status = Rec.Status::Open;
                     ShowMandatory = true;
                 }
                 field("HOD Name"; Rec."HOD Name")
@@ -99,7 +99,7 @@ Page 52185448 "HR Department Targets Card"
                     ApplicationArea = Basic;
                     SubPageLink = "Department Target No" = FIELD("Target No");
                     UpdatePropagation = Both;
-                    Editable = IsEditable;
+                    Enabled = Rec.Status = Rec.Status::Open;
                 }
             }
             
@@ -142,46 +142,58 @@ Page 52185448 "HR Department Targets Card"
                 }
             }
             
-            group("Assignment Actions")
+            action("Assign All Goals to Employee")
             {
-                Caption = 'Assignment';
-                
-                action("Assign All Goals to Employee")
-                {
-                    Caption = 'Assign All Goals to Employee';
-                    Image = Allocate;
-                    Promoted = true;
-                    PromotedCategory = Category4;
-                    PromotedIsBig = true;
-                    Enabled = IsEditable;
-                    ToolTip = 'Assign all department goals to a selected employee';
+                Caption = 'Assign All Goals to Employee';
+                Image = Allocate;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                Enabled = Rec.Status = Rec.Status::Open;
+                ToolTip = 'Assign all department goals to a selected employee';
 
-                    trigger OnAction()
-                    var
-                        Employee: Record "HR Employees";
-                    begin
-                        Employee.Reset;
-                        Employee.SetRange("Department Code", Rec."Responsibility Center");
-                        Employee.SetRange(Status, Employee.Status::Active);
-                        if not Employee.FindFirst then
-                            Error('No active employees found in department %1', Rec."Department Name");
+                trigger OnAction()
+                var
+                    Employee: Record "HR Employees";
+                    TempEmployee: Record "HR Employees" temporary;
+                    EmployeeSelection: Page "Employee Selection List";
+                begin
+                    Employee.Reset;
+                    Employee.SetRange("Responsibility Center", Rec."Responsibility Center");
+                    Employee.SetRange(Status, Employee.Status::Active);
+                    if not Employee.FindFirst then
+                        Error('No active employees found in department %1', Rec."Department Name");
 
-                        if PAGE.RunModal(PAGE::"HR Employee List - Active", Employee) = ACTION::LookupOK then begin
-                            Rec.AssignAllLinesToEmployee(Employee."No.");
+                    Employee.Reset;
+                    Employee.SetRange("Responsibility Center", Rec."Responsibility Center");
+                    Employee.SetRange(Status, Employee.Status::Active);
+                    EmployeeSelection.SetTableView(Employee);
+                    EmployeeSelection.LookupMode(true);
+
+                    if EmployeeSelection.RunModal = ACTION::LookupOK then begin
+                        EmployeeSelection.GetSelectedEmployees(TempEmployee);
+                        
+                        if TempEmployee.FindFirst then begin
+                            if TempEmployee.Count > 1 then
+                                Error('Please select only ONE employee for this action. Use "Assign to Employees" on individual goals to assign to multiple employees.');
+                            
+                            Rec.AssignAllLinesToEmployee(TempEmployee."No.");
                             CurrPage.Update(false);
-                        end;
+                        end else
+                            Error('No employee selected. Please click on an employee row to select.');
                     end;
-                }
-                action("View All Assignments")
-                {
-                    Caption = 'View All Assignments';
-                    Image = ViewDetails;
-                    Promoted = true;
-                    PromotedCategory = Category4;
-                    RunObject = Page "HR Employee Target Assgns List";
-                    RunPageLink = "Department Target No" = FIELD("Target No");
-                    ToolTip = 'View all employee target assignments for this department';
-                }
+                end;
+            }
+            
+            action("View All Assignments")
+            {
+                Caption = 'View All Assignments';
+                Image = ViewDetails;
+                Promoted = true;
+                PromotedCategory = Process;
+                RunObject = Page "HR Employee Target Assgns List";
+                RunPageLink = "Department Target No" = FIELD("Target No");
+                ToolTip = 'View all employee target assignments for this department';
             }
             
             group("Status Management")
@@ -194,7 +206,7 @@ Page 52185448 "HR Department Targets Card"
                     Image = SendApprovalRequest;
                     Promoted = true;
                     PromotedCategory = Process;
-                    Enabled = (Rec.Status = Rec.Status::Open) AND IsEditable;
+                    Enabled = Rec.Status = Rec.Status::Open;
 
                     trigger OnAction()
                     begin
@@ -246,6 +258,21 @@ Page 52185448 "HR Department Targets Card"
                         Message('Department targets reopened');
                     end;
                 }
+                action("Print Department Targets")
+                {
+                    Caption = 'Print Department Targets';
+                    Image = Print;
+                    Promoted = true;
+                    PromotedCategory = Report;
+
+                    trigger OnAction()
+                    var
+                        DeptHeader: Record "HR Department Targets Header";
+                    begin
+                        DeptHeader.SetRange("Target No", Rec."Target No");
+                        Report.Run(Report::"Department Targets Report", true, false, DeptHeader);
+                    end;
+                }
                 action("Close")
                 {
                     Caption = 'Close';
@@ -275,23 +302,4 @@ Page 52185448 "HR Department Targets Card"
             }
         }
     }
-    
-    trigger OnOpenPage()
-    var
-        HREmp: Record "HR Employees";
-    begin
-        HREmp.Reset;
-        HREmp.SetRange("User ID", UserId);
-        if HREmp.FindFirst then begin
-            if HREmp."Department Code" = Rec."Responsibility Center" then
-                IsEditable := true
-            else
-                IsEditable := false;
-        end else begin
-            IsEditable := false;
-        end;
-    end;
-    
-    var
-        IsEditable: Boolean;
 }

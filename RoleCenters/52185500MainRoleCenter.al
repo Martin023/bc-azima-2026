@@ -3778,44 +3778,25 @@ page 52185500 "Main Role Center"
                         Caption = 'Hr Perfomance Management';
                         group("HR BSC Appraisal")
                         {
-                            action("HR BSC List Target Setting")
-                            {
-                                Caption = 'HR BSC List Target Setting';
-                                ApplicationArea = Basic, suite;
-                                RunObject = page "HR BSC List Targets1";
-                            }
-
-                            action("HR BSC List Quater1")
-                            {
-                                Caption = 'HR BSC List Quater1';
-                                ApplicationArea = Basic, suite;
-                                RunObject = page "HR BSC List Qaurter 1";
-                            }
-
-                            action("HR BSC List Quater 3")
-                            {
-                                Caption = 'HR BSC List Quater 3';
-                                ApplicationArea = Basic, suite;
-                                RunObject = page "HR BSC List Qaurter 3";
-                            }
-                            action("HR BSC List Approved")
-                            {
-                                Caption = 'HR BSC List Approved';
-                                ApplicationArea = Basic, suite;
-                                RunObject = page "HR BSC List Approved";
-                            }
-                            action("HR BSC List End Year")
-                            {
-                                Caption = 'HR BSC List End Year';
-                                ApplicationArea = Basic, suite;
-                                RunObject = page "HR BSC List End Year1";
-                            }
-                            action("HR BSC List Closed")
-                            {
-                                Caption = 'HR BSC List Closed';
-                                ApplicationArea = Basic, suite;
-                                RunObject = page "HR BSC List Closed";
-                            }
+                            // HIDDEN: OLD 360 APPRAISAL SYSTEM
+                            // action("HR BSC List Target Setting ")
+                            // {
+                            //     Caption = 'List Target Setting';
+                            //     ApplicationArea = Basic, suite;
+                            //     RunObject = page "HR 360 Appraisals List - TS1";
+                            // }
+                            // action("HR BSC List Target Approval")
+                            // {
+                            //     Caption = 'List Target Approval';
+                            //     ApplicationArea = Basic, suite;
+                            //     RunObject = page "HR 360 Appraisals List - TA1";
+                            // }
+                            // action("HR BSC List Evaluation Areas")
+                            // {
+                            //     Caption = 'List Evaluation';
+                            //     ApplicationArea = Basic, suite;
+                            //     RunObject = page "HR 360 Appraisals List - EV1";
+                            // }
                             action("HR Appraisal Appeal List")
                             {
                                 Caption = 'HR Appraisal Appeal List';
@@ -3833,7 +3814,6 @@ page 52185500 "Main Role Center"
                                 RunObject = page "HR Appraisal Period Setup";
 
                             }
-                            //ADDED DEPARTMENT TARGETS MENU ITEMS FOR HOD AND HR ADMIN ACCESS
                             action("HR Department Targets List")
                             {
                                 Caption = 'HR Department Targets';
@@ -3845,24 +3825,6 @@ page 52185500 "Main Role Center"
                                 Caption = 'My Department Targets (HOD)';
                                 ApplicationArea = Basic, Suite;
                                 RunObject = page "HRHOD Department Targets";
-                            }
-                        }
-                        group(randanalysis)
-                        {
-                            Caption = 'Reports and Analysis';
-                            action(PerfomanceReport)
-                            {
-                                Caption = 'Perfomance Report';
-                                ApplicationArea = Basic, Suite;
-                                RunObject = report "Performance Report";
-
-                            }
-                            action(AppraisalReport)
-                            {
-                                Caption = 'Appraisal Report';
-                                ApplicationArea = Basic, Suite;
-                                RunObject = report "Appraisal Report";
-
                             }
                         }
                     }

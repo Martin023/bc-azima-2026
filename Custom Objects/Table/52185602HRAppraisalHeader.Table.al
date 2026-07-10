@@ -386,12 +386,6 @@ table 52185602 "HR Appraisal Header"
             Caption = 'Performance Coaching Agreed Score';
             FieldClass = Normal;
         }
-        field(50033; "Appraisal Quarters"; Option)
-        {
-
-            OptionCaption = 'Target Setting,Quarter 1, Quarter 2,Quarter 3,End Year Evalauation';
-            OptionMembers = "Target Setting","Quarter 1","Quarter 2","Quarter 3",,"End Year Evalauation";
-        }
         field(50034; "Active"; boolean)
         {
 

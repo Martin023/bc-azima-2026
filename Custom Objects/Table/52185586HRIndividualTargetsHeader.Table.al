@@ -27,8 +27,9 @@ table 52185586 "HR Individual Targets Header"
         }
         field(2; "Appraisal Period"; Code[20])
         {
+            Caption = 'Appraisal Period';
             Editable = true;
-            TableRelation = "HR Lookup Values".Code WHERE(Type = FILTER("Appraisal Period"));
+            TableRelation = "HR Appraisal Period"."Appraisal Period Description";
         }
         field(3; "Appraisal Date"; Date)
         {
@@ -46,17 +47,17 @@ table 52185586 "HR Individual Targets Header"
                 
             end;
         }
-        field(5; "Financial Targeted Score"; Decimal)
+        field(5; "Total Targeted Score"; Decimal)
         {
-            CalcFormula = Sum("HR Individual Target Line"."Targeted Score" WHERE("Perspective Type" = FILTER("Financial Stewardship"),
-                                                                                  "Appraisal No" = FIELD("Appraisal No")));
+            CalcFormula = Sum("HR Individual Target Line"."Targeted Score" WHERE("Appraisal No" = FIELD("Appraisal No")));
             FieldClass = FlowField;
+            Editable = false;
         }
-        field(7; "Achieved Financial  Score"; Decimal)
+        field(7; "Total Achieved Score"; Decimal)
         {
-            CalcFormula = Sum("HR Individual Target Line"."Achieved Score" WHERE("Perspective Type" = FILTER("Financial Stewardship"),
-                                                                                  "Appraisal No" = FIELD("Appraisal No")));
+            CalcFormula = Sum("HR Individual Target Line"."Achieved Score" WHERE("Appraisal No" = FIELD("Appraisal No")));
             FieldClass = FlowField;
+            Editable = false;
         }
         field(8; "Unachieved Targets"; Decimal)
         {
@@ -66,42 +67,6 @@ table 52185586 "HR Individual Targets Header"
         field(9; "Employee Name"; Text[200])
         {
             Editable = false;
-        }
-        field(10; "Training Targeted Score"; Decimal)
-        {
-            CalcFormula = Sum("HR Individual Target Line"."Targeted Score" WHERE("Perspective Type" = FILTER("Training and Development"),
-                                                                                  "Appraisal No" = FIELD("Appraisal No")));
-            FieldClass = FlowField;
-        }
-        field(11; "Service Delivery Target Score"; Decimal)
-        {
-            CalcFormula = Sum("HR Individual Target Line"."Targeted Score" WHERE("Perspective Type" = FILTER("Service Delivery"),
-                                                                                  "Appraisal No" = FIELD("Appraisal No")));
-            FieldClass = FlowField;
-        }
-        field(12; "Customer Target Score"; Decimal)
-        {
-            CalcFormula = Sum("HR Individual Target Line"."Targeted Score" WHERE("Perspective Type" = FILTER("Customer and Sales"),
-                                                                                  "Appraisal No" = FIELD("Appraisal No")));
-            FieldClass = FlowField;
-        }
-        field(13; "Customer Achieved  Score"; Decimal)
-        {
-            CalcFormula = Sum("HR Individual Target Line"."Achieved Score" WHERE("Perspective Type" = FILTER("Customer and Sales"),
-                                                                                  "Appraisal No" = FIELD("Appraisal No")));
-            FieldClass = FlowField;
-        }
-        field(14; "Service Delivery Achieved"; Decimal)
-        {
-            CalcFormula = Sum("HR Individual Target Line"."Achieved Score" WHERE("Perspective Type" = FILTER("Service Delivery"),
-                                                                                  "Appraisal No" = FIELD("Appraisal No")));
-            FieldClass = FlowField;
-        }
-        field(15; "Training Achieved  Score"; Decimal)
-        {
-            CalcFormula = Sum("HR Individual Target Line"."Achieved Score" WHERE("Perspective Type" = FILTER("Training and Development"),
-                                                                                  "Appraisal No" = FIELD("Appraisal No")));
-            FieldClass = FlowField;
         }
         field(16; Status; Option)
         {
@@ -139,11 +104,11 @@ table 52185586 "HR Individual Targets Header"
             Description = 'Stores the reference of the Third global dimension in the database';
             TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(4));
         }
-        field(22; "Appraisal Type"; Option)
+        field(22; "Appraisal Cycle Stage"; Option)
         {
-            Editable = true;
-            OptionCaption = 'Target Setting,Quarter 1,Appraisal Review,Quarter 3,End Year Appraisal';
-            OptionMembers = "Target Setting","Quarter 1","Appraisal Review","Quarter 3","End Year Appraisal";
+            Editable = false;
+            OptionCaption = 'Target Setting,Evaluation Review,Year-End Review';
+            OptionMembers = "Target Setting","Evaluation Review","Year-End Review";
         }
         field(23; "No series"; Code[30])
         {
@@ -152,80 +117,23 @@ table 52185586 "HR Individual Targets Header"
         {
             Editable = true;
         }
-        field(25; "Finance Rating"; Decimal)
+        field(54; "Review Sequence No"; Integer)
         {
-            CalcFormula = Sum("HR Individual Target Line"."Agreed Rating" WHERE("Appraisal No" = FIELD("Appraisal No"),
-                                                                                 "Perspective Code" = CONST(1)));
-            FieldClass = FlowField;
-            MaxValue = 25;
-
-            trigger OnValidate()
-            begin
-                // test:=HRIndividualTargetLine.COUNT;
-                // MESSAGE('%1',test);
-            end;
+            Editable = false;
         }
-        field(26; "Customer Rating"; Decimal)
+        field(55; "Period Start Date"; Date)
         {
-            CalcFormula = Sum("HR Individual Target Line"."Agreed Rating" WHERE("Appraisal No" = FIELD("Appraisal No"),
-                                                                                 "Perspective Code" = CONST(2)));
-            FieldClass = FlowField;
+            Editable = false;
         }
-        field(27; "Training Rating"; Decimal)
+        field(56; "Period End Date"; Date)
         {
-            CalcFormula = Sum("HR Individual Target Line"."Agreed Rating" WHERE("Appraisal No" = FIELD("Appraisal No"),
-                                                                                 "Perspective Code" = CONST(3)));
-            FieldClass = FlowField;
+            Editable = false;
         }
-        field(28; "Service Rating"; Decimal)
-        {
-            CalcFormula = Sum("HR Individual Target Line"."Agreed Rating" WHERE("Appraisal No" = FIELD("Appraisal No"),
-                                                                                 "Perspective Code" = CONST(4)));
-            FieldClass = FlowField;
-        }
-        field(29; "Overall Rating"; Decimal)
+        field(29; "Total Agreed Rating"; Decimal)
         {
             CalcFormula = Sum("HR Individual Target Line"."Agreed Rating" WHERE("Appraisal No" = FIELD("Appraisal No")));
             FieldClass = FlowField;
-        }
-        field(30; "Finance Perc Score"; Decimal)
-        {
-        }
-        field(31; "Customer Perc Score"; Decimal)
-        {
-        }
-        field(32; "Training Perc Score"; Decimal)
-        {
-        }
-        field(33; "Service Perc Score"; Decimal)
-        {
-        }
-        field(34; "Overall Perc Score"; Decimal)
-        {
-        }
-        field(36; Finance; Integer)
-        {
-            CalcFormula = Count("HR Individual Target Line" WHERE("Appraisal No" = FIELD("Appraisal No"),
-                                                                   "Perspective Code" = CONST(1)));
-            FieldClass = FlowField;
-        }
-        field(37; Customer; Integer)
-        {
-            CalcFormula = Count("HR Individual Target Line" WHERE("Appraisal No" = FIELD("Appraisal No"),
-                                                                   "Perspective Code" = CONST(2)));
-            FieldClass = FlowField;
-        }
-        field(38; Training; Integer)
-        {
-            CalcFormula = Count("HR Individual Target Line" WHERE("Appraisal No" = FIELD("Appraisal No"),
-                                                                   "Perspective Code" = CONST(3)));
-            FieldClass = FlowField;
-        }
-        field(39; Service; Integer)
-        {
-            CalcFormula = Count("HR Individual Target Line" WHERE("Appraisal No" = FIELD("Appraisal No"),
-                                                                   "Perspective Code" = CONST(4)));
-            FieldClass = FlowField;
+            Editable = false;
         }
         field(40; "User ID"; Code[100])
         {
@@ -319,14 +227,7 @@ table 52185586 "HR Individual Targets Header"
             "Appraisal No" := NoSeriesMgt.GetNextNo(HRSetup."Appraisal Nos");
             // NoSeriesMgt.InitSeries(HRSetup."Appraisal Nos", xRec."No series", 0D, "Appraisal No", "No series");
         end;
-        /*
-         //check if period is for capturing target setting or achievement then fill the necessary fields----
-         HRSetup.RESET;
-         HRSetup.GET;
-        "Appraisal Type":=fnAppraisalType;
-        "Appraisal Period":=fnAppraisalDate;
-        */
-
+        
         "Appraisal Date" := Today;
 
         // NEW: VALIDATE USER IS CREATING APPRAISAL FOR THEMSELVES ONLY
@@ -349,12 +250,6 @@ table 52185586 "HR Individual Targets Header"
         "Employee Name" := EmployeeNames;
         "Supervisor ID" := SupervisorCode;
         "Supervisor Name" := SupervisorName;
-
-        //Status:=Status::Open;
-        //"Appraisal Year":="Appraisal YR";
-
-        //Get the set target for the year and load them----
-        //IF "Appraisal Type" <> "Appraisal Type"::"Appraisal Review" THEN loadtheyearsTarget;
 
     end;
 
@@ -396,7 +291,7 @@ table 52185586 "HR Individual Targets Header"
     // [Scope('OnPrem')]
     procedure CreateLedgerEntries()
     begin
-        if (Status = Status::Approved) and ("Appraisal Type" = "Appraisal Type"::"Quarter 1") then Error('Appraisal has already been posted');
+        //LEDGER ENTRIES NOW DYNAMIC PER PERSPECTIVE
 
 
         HRSetup.Reset;
@@ -435,8 +330,7 @@ table 52185586 "HR Individual Targets Header"
                     HRAppraisalJournalLine."Posting Date" := Today;
                     HRAppraisalJournalLine."Appraisal Approval Date" := Today;
                     HRAppraisalJournalLine.Description := 'BSC';
-                    //HRIndividualTargetLine.CALCFIELDS(HRIndividualTargetLine."Perspective Type");
-                    HRAppraisalJournalLine."Appraisal Type" := HRIndividualTargetLine."Perspective Type";
+                    //DYNAMIC PERSPECTIVE LOGIC HERE
                     HRAppraisalJournalLine."Appraisal Period Start Date" := HRSetup."Appraisal Posting Period[FROM]";
                     HRAppraisalJournalLine."Appraisal Period End Date" := HRSetup."Appraisal Posting Period[TO]";
                     HRAppraisalJournalLine.Score := HRIndividualTargetLine."Targeted Score";
@@ -463,19 +357,14 @@ table 52185586 "HR Individual Targets Header"
     // [Scope('OnPrem')]
     procedure fnAppraisalDate() dtBSCdate: Date
     begin
-    
-        dtBSCdate:=0D;
-        //"Appraisal YR":=0;
-        AppraisalPeriod.RESET;
-        AppraisalPeriod.SETRANGE(AppraisalPeriod.Closed,FALSE);
-        IF AppraisalPeriod.FIND('-') THEN
-        BEGIN
-            dtBSCdate:=AppraisalPeriod."Appraisal Period" ;
-            "Appraisal YR":=AppraisalPeriod."Appraisal Year";
-        END
-        ELSE ERROR('no open period is available please Contact the administrator');
-        
-
+        dtBSCdate := 0D;
+        AppraisalPeriod.Reset;
+        AppraisalPeriod.SetRange(AppraisalPeriod.Closed, false);
+        if AppraisalPeriod.Find('-') then begin
+            dtBSCdate := AppraisalPeriod."Appraisal Period";
+            "Appraisal YR" := Format(AppraisalPeriod."Appraisal Year");
+        end else
+            Error('No open period is available. Please contact the administrator');
     end;
 
     // [Scope('OnPrem')]
@@ -506,7 +395,7 @@ table 52185586 "HR Individual Targets Header"
         HRIndividualTargetsHeader.Reset;
         HRIndividualTargetsHeader.SetRange(HRIndividualTargetsHeader."Appraisal Year", "Appraisal Year");
         HRIndividualTargetsHeader.SetRange(HRIndividualTargetsHeader."Employee No", "Employee No");
-        HRIndividualTargetsHeader.SetRange(HRIndividualTargetsHeader."Appraisal Type", HRIndividualTargetsHeader."Appraisal Type"::"Quarter 1");
+        HRIndividualTargetsHeader.SetRange(HRIndividualTargetsHeader."Appraisal Cycle Stage", HRIndividualTargetsHeader."Appraisal Cycle Stage"::"Target Setting");
         if HRIndividualTargetsHeader.Find('-') then begin
             HRIndividualTargetLine.Reset;
             HRIndividualTargetLine.SetRange(HRIndividualTargetLine."Appraisal No", HRIndividualTargetsHeader."Appraisal No");
@@ -524,7 +413,7 @@ table 52185586 "HR Individual Targets Header"
                     HRIndividualTargetLine_2."End Date" := HRIndividualTargetLine."End Date";
                     //HRIndividualTargetLine_2."Appraisal Period":="Appraisal Period";
                     HRIndividualTargetLine_2."Perspective Description" := HRIndividualTargetLine."Perspective Description";
-                    HRIndividualTargetLine_2."Perspective Type" := HRIndividualTargetLine."Perspective Type";
+                    HRIndividualTargetLine_2."Perspective Code" := HRIndividualTargetLine."Perspective Code";
                     HRIndividualTargetLine_2.Insert;
                     i := i + 1;
                 until HRIndividualTargetLine.Next = 0
@@ -533,20 +422,15 @@ table 52185586 "HR Individual Targets Header"
     end;
 
     // [Scope('OnPrem')]
-    procedure fnAppraisalType() AppraisalType: Integer
+    procedure fnAppraisalType() AppraisalCycleStage: Text[50]
     begin
-        
-        AppraisalPeriod.RESET;
-        AppraisalPeriod.SETRANGE(AppraisalPeriod.Closed,FALSE);
-        IF AppraisalPeriod.FIND('-') THEN
-        BEGIN
-            AppraisalType:=AppraisalPeriod."Appraisal Type";
-        END ELSE
-        BEGIN
-            ERROR('NO Open Appraisal Period is available please Contact the administrator');
-        END;
-        
-
+        AppraisalPeriod.Reset;
+        AppraisalPeriod.SetRange(AppraisalPeriod.Closed, false);
+        if AppraisalPeriod.Find('-') then begin
+            AppraisalCycleStage := Format(AppraisalPeriod."Appraisal Cycle Stage");
+        end else begin
+            Error('NO Open Appraisal Period is available. Please contact the administrator.');
+        end;
     end;
 
     procedure SubmitToSupervisor()
@@ -631,7 +515,7 @@ table 52185586 "HR Individual Targets Header"
         ImportCount: Integer;
     begin
         TestField(Status, Status::Open);
-        TestField("Appraisal Type", "Appraisal Type"::"Target Setting");
+        TestField("Appraisal Cycle Stage", "Appraisal Cycle Stage"::"Target Setting");
 
         TargetLine.Reset;
         TargetLine.SetRange("Appraisal No", "Appraisal No");

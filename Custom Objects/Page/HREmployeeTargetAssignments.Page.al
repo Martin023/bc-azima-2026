@@ -5,6 +5,8 @@ page 52185644 "HR Employee Target Assignments"
     SourceTable = "HR Employee Target Assignment";
     ApplicationArea = Basic;
     UsageCategory = None;
+    InsertAllowed = false;
+    DeleteAllowed = false;
 
     layout
     {

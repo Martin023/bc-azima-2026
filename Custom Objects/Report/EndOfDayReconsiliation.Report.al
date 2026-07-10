@@ -12,7 +12,6 @@ Report 52185446 "End of Day Reconciliation"
 
             column(CompanyInfo_Name; CompanyInformation.Name) { }
             column(CompanyInformation_Picture; CompanyInformation.Picture) { }
-            
             column(CompanyName; CompanyName) { }
             column(BuldingName; BuldingName) { }
             column(CompanyAddress; CompanyAddress) { }
@@ -21,38 +20,32 @@ Report 52185446 "End of Day Reconciliation"
             column(PrintingDate; PrintingDate) { }
             column(PrintingTime; PrintingTime) { }
             column(PrintedBy_Header; PrintedBy) { }
-            
-            column(CompanyBranch_Name; CompanyInformation.Name + ' SASA Section') { } 
-            
+            column(CompanyBranch_Name; CompanyInformation.Name + ' SASA Section') { }
             column(PrintDate; Format(CurrentDateTime, 0, '<Day,2>/<Month,2>/<Year4>')) { }
-            column(TellerName; "From Account") { } 
+            column(TellerName; "From Account") { }
             column(EndOfDayDate; Format("Transaction Date", 0, '<Day,2>/<Month,2>/<Year4>')) { }
             column(EODPostedStatus; EODPostedStatusTxt) { }
-            column(TellerAccount; "From Bank") { } 
+            column(TellerAccount; "From Bank") { }
             column(PostedBy; "Posted By") { }
             column(ShortageAcc; ShortageAccCode) { }
             column(SurplusAcc; SurplusAccCode) { }
-
             column(BalBroughtForward; BalBroughtForwardAmt) { }
             column(TotalReceipts; TotalReceiptsAmt) { }
             column(TotalPayments; TotalPaymentsAmt) { }
             column(BalCarriedDown; BalCarriedDownAmt) { }
-
             column(SystemCashAtHand; "Till Balance") { }
             column(ActualCashAtHand; "Actual Cash At Hand") { }
             column(Difference; DifferenceAmt) { }
-
             column(CashDeposit; CashDepositAmt) { }
             column(MPesaCashDeposit; MPesaCashDepositAmt) { }
             column(ReceiveFromTreasury; ReceiveFromTreasuryAmt) { }
             column(SpecialReceipt; SpecialReceiptAmt) { }
-            column(GrandTotalReceipts; GrandTotalReceiptsAmt) { } 
-
+            column(GrandTotalReceipts; GrandTotalReceiptsAmt) { }
             column(CashWithdrawal; CashWithdrawalAmt) { }
             column(EndOfDay; EndOfDayAmt) { }
             column(MPesaCashWithdraw; MPesaCashWithdrawAmt) { }
-            column(GrandTotalPayments; GrandTotalPaymentsAmt) { } 
-
+            column(PettyCashAmt; PettyCashAmt) { }
+            column(GrandTotalPayments; GrandTotalPaymentsAmt) { }
             column(AccuracyLevel; AccuracyLevelTxt) { }
 
             dataitem(Coinage; Coinage)
@@ -70,9 +63,9 @@ Report 52185446 "End of Day Reconciliation"
                     SurplusAccCode := BankingUserTemp."Excess Account";
                 end;
 
-                if Posted then 
-                    EODPostedStatusTxt := 'YES' 
-                else 
+                if Posted then
+                    EODPostedStatusTxt := 'YES'
+                else
                     EODPostedStatusTxt := 'NO';
 
                 DifferenceAmt := "Excess/Shortage Amount";
@@ -87,9 +80,16 @@ Report 52185446 "End of Day Reconciliation"
                 end else
                     AccuracyLevelTxt := '100%';
 
-                TotalReceiptsAmt := 0; TotalPaymentsAmt := 0;
-                CashDepositAmt := 0; MPesaCashDepositAmt := 0; ReceiveFromTreasuryAmt := 0; SpecialReceiptAmt := 0;
-                CashWithdrawalAmt := 0; EndOfDayAmt := 0; MPesaCashWithdrawAmt := 0;
+                TotalReceiptsAmt := 0;
+                TotalPaymentsAmt := 0;
+                CashDepositAmt := 0;
+                MPesaCashDepositAmt := 0;
+                ReceiveFromTreasuryAmt := 0;
+                SpecialReceiptAmt := 0;
+                CashWithdrawalAmt := 0;
+                EndOfDayAmt := 0;
+                MPesaCashWithdrawAmt := 0;
+                PettyCashAmt := 0;
 
                 CashierTrans.Reset();
                 CashierTrans.SetRange(Cashier, "From Account");
@@ -119,14 +119,28 @@ Report 52185446 "End of Day Reconciliation"
                     until TreasuryTransIn.Next() = 0;
                 end;
 
+                PaymentsHeader.Reset();
+                PaymentsHeader.SetRange("Payment Type", PaymentsHeader."Payment Type"::"Petty Cash");
+                PaymentsHeader.SetRange("Paying Bank Account", "From Bank");
+                PaymentsHeader.SetRange("Date Posted", "Transaction Date");
+                PaymentsHeader.SetRange(Posted, true);
+                if PaymentsHeader.FindSet() then begin
+                    repeat
+                        PaymentsHeader.CalcFields("Total Net Amount");
+                        PettyCashAmt += PaymentsHeader."Total Net Amount";
+                    until PaymentsHeader.Next() = 0;
+                end;
+
                 EndOfDayAmt := Amount;
 
                 GrandTotalReceiptsAmt := CashDepositAmt + MPesaCashDepositAmt + ReceiveFromTreasuryAmt + SpecialReceiptAmt;
-                GrandTotalPaymentsAmt := CashWithdrawalAmt + EndOfDayAmt + MPesaCashWithdrawAmt;
-                
+
+                GrandTotalPaymentsAmt := CashWithdrawalAmt + EndOfDayAmt + MPesaCashWithdrawAmt + PettyCashAmt;
+
                 TotalReceiptsAmt := GrandTotalReceiptsAmt;
-                TotalPaymentsAmt := CashWithdrawalAmt + MPesaCashWithdrawAmt; 
-                BalBroughtForwardAmt := 0.00; 
+
+                TotalPaymentsAmt := CashWithdrawalAmt + MPesaCashWithdrawAmt;
+                BalBroughtForwardAmt := 0.00;
                 BalCarriedDownAmt := BalBroughtForwardAmt + TotalReceiptsAmt - TotalPaymentsAmt;
             end;
         }
@@ -158,7 +172,8 @@ Report 52185446 "End of Day Reconciliation"
         BankingUserTemp: Record "Banking User Template";
         CashierTrans: Record "Cashier Transactions";
         TreasuryTransIn: Record "Treasury Cashier Transactions";
-        
+        PaymentsHeader: Record "Payments Header";
+
         EODPostedStatusTxt: Text[10];
         ShortageAccCode: Code[20];
         SurplusAccCode: Code[20];
@@ -179,7 +194,9 @@ Report 52185446 "End of Day Reconciliation"
         CashWithdrawalAmt: Decimal;
         EndOfDayAmt: Decimal;
         MPesaCashWithdrawAmt: Decimal;
+        PettyCashAmt: Decimal;
         GrandTotalPaymentsAmt: Decimal;
+
         CompanyInformation: Record "Company Information";
         CompanyName: Text;
         BuldingName: Text;
