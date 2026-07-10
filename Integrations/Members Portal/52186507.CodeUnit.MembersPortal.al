@@ -5815,6 +5815,17 @@ codeunit 52186507 "Members Portal Integration"
         Payload.Get('loan_type_id', loan_type_id);
 
         IF MemberExists(identifier_type.AsValue.AsText, identifier.AsValue.AsText, SearchMember, ResponseText, ResponseDescription) then begin
+            if SearchMember."Block Div Advance" then begin
+                ResponseObject.Add('request_status', 'ERROR');
+                Datum.Add('error_message', 'You are currently blocked from applying for member loans. Please contact the SACCO for assistance.');
+                EligibilityFailReason := 'You are currently blocked from applying for member loans. Please contact the SACCO for assistance.';
+                Datum.Add('eligibility_fail_reason', EligibilityFailReason);
+                ResponseObject.Add('response_payload', Datum);
+                AddDateTimeToResponse(ResponseObject);
+                ResponseObject.WriteTo(Response);
+                exit(Response);
+            end;
+
             MobileLoanProduct.Reset;
             MobileLoanProduct.SetRange("Product ID", loan_type_id.AsValue.AsText);
 
@@ -6206,6 +6217,7 @@ codeunit 52186507 "Members Portal Integration"
         SavAcc: record "Savings Accounts";
         GenSetup: record "General Set-Up";
         MaxSelfGuar: Decimal;
+        EligibilityFailReason: Text;
     begin
         Payload.Get('identifier_type', identifier_type);
         Payload.Get('identifier', identifier);
@@ -6223,6 +6235,19 @@ codeunit 52186507 "Members Portal Integration"
         KeyExists := Payload.Get('files', files);
 
         if MemberExists(identifier_type.AsValue.AsText, identifier.AsValue.AsText, SearchMember, ResponseText, ResponseDescription) then begin
+            if SearchMember."Block Div Advance" then begin
+                ResponseObject.Add('status', 'ERROR');
+                Datum.Add('error_message', 'You are currently blocked from applying for member loans. Please contact the SACCO for assistance.');
+                EligibilityFailReason := 'You are currently blocked from applying for member loans. Please contact the SACCO for assistance.';
+                Datum.Add('eligibility_fail_reason', EligibilityFailReason);
+                ResponseObject.Add('data', Datum);
+
+                AddDateTimeToResponse(ResponseObject);
+
+                ResponseObject.WriteTo(Response);
+                exit(Response);
+            end;
+
             // Create Mobile Loan Application request
             MobileLoanProduct.Reset;
             MobileLoanProduct.SetRange("Product ID", loan_product.AsValue.AsText);
