@@ -240,6 +240,20 @@ report 52186218 "Calculate Depreciation Custom"
                                 Error(Text006);
                         end;
                     }
+                    field(DepreciationMonths; DepreciationMonths)
+                    {
+                        ApplicationArea = FixedAssets;
+                        Caption = 'Depreciation Months';
+                        Importance = Additional;
+                        ToolTip = 'Specifies the number of months over which the asset should be depreciated.';
+
+                        trigger OnValidate()
+                        var
+                            myInt: Integer;
+                        begin
+                            DaysInPeriod := DepreciationMonths * 30;
+                        end;
+                    }
                     field(PostingDate; PostingDate)
                     {
                         ApplicationArea = FixedAssets;
@@ -284,6 +298,8 @@ report 52186218 "Calculate Depreciation Custom"
             ClientTypeManagement: Codeunit "Client Type Management";
         begin
             BalAccount := true;
+            UseForceNoOfDays := True;
+            
             if ClientTypeManagement.GetCurrentClientType() <> CLIENTTYPE::Background then begin
                 PostingDate := WorkDate();
                 DeprUntilDate := WorkDate();
@@ -434,6 +450,7 @@ report 52186218 "Calculate Depreciation Custom"
         DocumentNo: Code[20];
         PostingDescription: Text[100];
         BalAccount: Boolean;
+        DepreciationMonths : Integer;
 
     procedure InitializeRequest(DeprBookCodeFrom: Code[10]; DeprUntilDateFrom: Date; UseForceNoOfDaysFrom: Boolean; DaysInPeriodFrom: Integer; PostingDateFrom: Date; DocumentNoFrom: Code[20]; PostingDescriptionFrom: Text[100]; BalAccountFrom: Boolean)
     begin

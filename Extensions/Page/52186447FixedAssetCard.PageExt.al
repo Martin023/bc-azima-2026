@@ -132,7 +132,7 @@ PageExtension 52186447 pageextension52186447 extends "Fixed Asset Card"
                 if FAClasses.FindFirst() then begin
                     ///if FAClasses.Get(Rec."FA Class Code") then begin
                     FAClasses.TestField(FAClasses."Depreciation Book Code");
-                    Message('Depreciation Book Code: %1, Depreciation Method: %2, Straight-Line %: %3', FAClasses."Depreciation Book Code", FAClasses."Depreciation Method", FAClasses."Straight-Line %");
+                    //Message('Depreciation Book Code: %1, Depreciation Method: %2, Straight-Line %: %3', FAClasses."Depreciation Book Code", FAClasses."Depreciation Method", FAClasses."Straight-Line %");
                     if FAClasses."Depreciation Book Code" <> '' then begin
 
                         DepreciationBook.Reset();
@@ -144,7 +144,6 @@ PageExtension 52186447 pageextension52186447 extends "Fixed Asset Card"
                         DepreciationBook.Init();
                         DepreciationBook."FA No." := Rec."No.";
                         DepreciationBook."Depreciation Book Code" := FAClasses."Depreciation Book Code";
-                        //DepreciationBook."FA Posting Group" := FAClasses.
                         DepreciationBook.Validate("Depreciation Method", FAClasses."Depreciation Method");
 
                         case FAClasses."Depreciation Method" of
