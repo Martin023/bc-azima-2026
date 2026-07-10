@@ -34,8 +34,10 @@ Report 52185446 "End of Day Reconciliation"
             column(TotalPayments; TotalPaymentsAmt) { }
             column(BalCarriedDown; BalCarriedDownAmt) { }
             column(SystemCashAtHand; "Till Balance") { }
-            column(ActualCashAtHand; "Actual Cash At Hand") { }
+
+            column(ActualCashAtHand; ActualCashAtHandAmt) { }
             column(Difference; DifferenceAmt) { }
+
             column(CashDeposit; CashDepositAmt) { }
             column(MPesaCashDeposit; MPesaCashDepositAmt) { }
             column(ReceiveFromTreasury; ReceiveFromTreasuryAmt) { }
@@ -58,6 +60,15 @@ Report 52185446 "End of Day Reconciliation"
 
             trigger OnAfterGetRecord()
             begin
+                ActualCashAtHandAmt := 0;
+                CoinageRec.Reset();
+                CoinageRec.SetRange(No, No);
+                if CoinageRec.FindSet() then begin
+                    repeat
+                        ActualCashAtHandAmt += CoinageRec."Total Amount";
+                    until CoinageRec.Next() = 0;
+                end;
+
                 if BankingUserTemp.Get("From Account") then begin
                     ShortageAccCode := BankingUserTemp."Shortage Account";
                     SurplusAccCode := BankingUserTemp."Excess Account";
@@ -68,15 +79,13 @@ Report 52185446 "End of Day Reconciliation"
                 else
                     EODPostedStatusTxt := 'NO';
 
-                DifferenceAmt := "Excess/Shortage Amount";
-                if Type = Type::Shortage then
-                    DifferenceAmt := -DifferenceAmt;
+                DifferenceAmt := ActualCashAtHandAmt - "Till Balance";
 
                 if "Till Balance" <> 0 then begin
                     if DifferenceAmt = 0 then
                         AccuracyLevelTxt := '100%'
                     else
-                        AccuracyLevelTxt := Format(Round((("Actual Cash At Hand" / "Till Balance") * 100), 0.01)) + '%';
+                        AccuracyLevelTxt := Format(Round(((ActualCashAtHandAmt / "Till Balance") * 100), 0.01)) + '%';
                 end else
                     AccuracyLevelTxt := '100%';
 
@@ -138,7 +147,6 @@ Report 52185446 "End of Day Reconciliation"
                 GrandTotalPaymentsAmt := CashWithdrawalAmt + EndOfDayAmt + MPesaCashWithdrawAmt + PettyCashAmt;
 
                 TotalReceiptsAmt := GrandTotalReceiptsAmt;
-
                 TotalPaymentsAmt := CashWithdrawalAmt + MPesaCashWithdrawAmt;
                 BalBroughtForwardAmt := 0.00;
                 BalCarriedDownAmt := BalBroughtForwardAmt + TotalReceiptsAmt - TotalPaymentsAmt;
@@ -173,6 +181,9 @@ Report 52185446 "End of Day Reconciliation"
         CashierTrans: Record "Cashier Transactions";
         TreasuryTransIn: Record "Treasury Cashier Transactions";
         PaymentsHeader: Record "Payments Header";
+
+        CoinageRec: Record Coinage;
+        ActualCashAtHandAmt: Decimal;
 
         EODPostedStatusTxt: Text[10];
         ShortageAccCode: Code[20];

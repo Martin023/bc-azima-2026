@@ -11,190 +11,6 @@
       <rd:DataSourceID>92d1c407-278b-4f36-85b8-4e76f1708da0</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="CompanyInfo_Name">
-          <DataField>CompanyInfo_Name</DataField>
-        </Field>
-        <Field Name="CompanyInformation_Picture">
-          <DataField>CompanyInformation_Picture</DataField>
-        </Field>
-        <Field Name="CompanyName">
-          <DataField>CompanyName</DataField>
-        </Field>
-        <Field Name="BuldingName">
-          <DataField>BuldingName</DataField>
-        </Field>
-        <Field Name="CompanyAddress">
-          <DataField>CompanyAddress</DataField>
-        </Field>
-        <Field Name="CompanyTelephone">
-          <DataField>CompanyTelephone</DataField>
-        </Field>
-        <Field Name="CompanyEmail">
-          <DataField>CompanyEmail</DataField>
-        </Field>
-        <Field Name="PrintingDate">
-          <DataField>PrintingDate</DataField>
-        </Field>
-        <Field Name="PrintingTime">
-          <DataField>PrintingTime</DataField>
-        </Field>
-        <Field Name="PrintedBy_Header">
-          <DataField>PrintedBy_Header</DataField>
-        </Field>
-        <Field Name="CompanyBranch_Name">
-          <DataField>CompanyBranch_Name</DataField>
-        </Field>
-        <Field Name="PrintDate">
-          <DataField>PrintDate</DataField>
-        </Field>
-        <Field Name="TellerName">
-          <DataField>TellerName</DataField>
-        </Field>
-        <Field Name="EndOfDayDate">
-          <DataField>EndOfDayDate</DataField>
-        </Field>
-        <Field Name="EODPostedStatus">
-          <DataField>EODPostedStatus</DataField>
-        </Field>
-        <Field Name="TellerAccount">
-          <DataField>TellerAccount</DataField>
-        </Field>
-        <Field Name="PostedBy">
-          <DataField>PostedBy</DataField>
-        </Field>
-        <Field Name="ShortageAcc">
-          <DataField>ShortageAcc</DataField>
-        </Field>
-        <Field Name="SurplusAcc">
-          <DataField>SurplusAcc</DataField>
-        </Field>
-        <Field Name="BalBroughtForward">
-          <DataField>BalBroughtForward</DataField>
-        </Field>
-        <Field Name="BalBroughtForwardFormat">
-          <DataField>BalBroughtForwardFormat</DataField>
-        </Field>
-        <Field Name="TotalReceipts">
-          <DataField>TotalReceipts</DataField>
-        </Field>
-        <Field Name="TotalReceiptsFormat">
-          <DataField>TotalReceiptsFormat</DataField>
-        </Field>
-        <Field Name="TotalPayments">
-          <DataField>TotalPayments</DataField>
-        </Field>
-        <Field Name="TotalPaymentsFormat">
-          <DataField>TotalPaymentsFormat</DataField>
-        </Field>
-        <Field Name="BalCarriedDown">
-          <DataField>BalCarriedDown</DataField>
-        </Field>
-        <Field Name="BalCarriedDownFormat">
-          <DataField>BalCarriedDownFormat</DataField>
-        </Field>
-        <Field Name="SystemCashAtHand">
-          <DataField>SystemCashAtHand</DataField>
-        </Field>
-        <Field Name="SystemCashAtHandFormat">
-          <DataField>SystemCashAtHandFormat</DataField>
-        </Field>
-        <Field Name="ActualCashAtHand">
-          <DataField>ActualCashAtHand</DataField>
-        </Field>
-        <Field Name="ActualCashAtHandFormat">
-          <DataField>ActualCashAtHandFormat</DataField>
-        </Field>
-        <Field Name="Difference">
-          <DataField>Difference</DataField>
-        </Field>
-        <Field Name="DifferenceFormat">
-          <DataField>DifferenceFormat</DataField>
-        </Field>
-        <Field Name="CashDeposit">
-          <DataField>CashDeposit</DataField>
-        </Field>
-        <Field Name="CashDepositFormat">
-          <DataField>CashDepositFormat</DataField>
-        </Field>
-        <Field Name="MPesaCashDeposit">
-          <DataField>MPesaCashDeposit</DataField>
-        </Field>
-        <Field Name="MPesaCashDepositFormat">
-          <DataField>MPesaCashDepositFormat</DataField>
-        </Field>
-        <Field Name="ReceiveFromTreasury">
-          <DataField>ReceiveFromTreasury</DataField>
-        </Field>
-        <Field Name="ReceiveFromTreasuryFormat">
-          <DataField>ReceiveFromTreasuryFormat</DataField>
-        </Field>
-        <Field Name="SpecialReceipt">
-          <DataField>SpecialReceipt</DataField>
-        </Field>
-        <Field Name="SpecialReceiptFormat">
-          <DataField>SpecialReceiptFormat</DataField>
-        </Field>
-        <Field Name="GrandTotalReceipts">
-          <DataField>GrandTotalReceipts</DataField>
-        </Field>
-        <Field Name="GrandTotalReceiptsFormat">
-          <DataField>GrandTotalReceiptsFormat</DataField>
-        </Field>
-        <Field Name="CashWithdrawal">
-          <DataField>CashWithdrawal</DataField>
-        </Field>
-        <Field Name="CashWithdrawalFormat">
-          <DataField>CashWithdrawalFormat</DataField>
-        </Field>
-        <Field Name="EndOfDay">
-          <DataField>EndOfDay</DataField>
-        </Field>
-        <Field Name="EndOfDayFormat">
-          <DataField>EndOfDayFormat</DataField>
-        </Field>
-        <Field Name="MPesaCashWithdraw">
-          <DataField>MPesaCashWithdraw</DataField>
-        </Field>
-        <Field Name="MPesaCashWithdrawFormat">
-          <DataField>MPesaCashWithdrawFormat</DataField>
-        </Field>
-        <Field Name="PettyCashAmt">
-          <DataField>PettyCashAmt</DataField>
-        </Field>
-        <Field Name="PettyCashAmtFormat">
-          <DataField>PettyCashAmtFormat</DataField>
-        </Field>
-        <Field Name="GrandTotalPayments">
-          <DataField>GrandTotalPayments</DataField>
-        </Field>
-        <Field Name="GrandTotalPaymentsFormat">
-          <DataField>GrandTotalPaymentsFormat</DataField>
-        </Field>
-        <Field Name="AccuracyLevel">
-          <DataField>AccuracyLevel</DataField>
-        </Field>
-        <Field Name="DenomCode">
-          <DataField>DenomCode</DataField>
-        </Field>
-        <Field Name="DenomCount">
-          <DataField>DenomCount</DataField>
-        </Field>
-        <Field Name="DenomAmount">
-          <DataField>DenomAmount</DataField>
-        </Field>
-        <Field Name="DenomAmountFormat">
-          <DataField>DenomAmountFormat</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -294,7 +110,7 @@
             <Style />
           </Textbox>
           <Line Name="SigLine2">
-            <Top>15.3cm</Top>
+            <Top>16cm</Top>
             <Left>13.2cm</Left>
             <Height>0cm</Height>
             <Width>6.3cm</Width>
@@ -306,7 +122,7 @@
             </Style>
           </Line>
           <Line Name="SigLine1">
-            <Top>14.8cm</Top>
+            <Top>15.1175cm</Top>
             <Left>13.2cm</Left>
             <Height>0cm</Height>
             <Width>6.3cm</Width>
@@ -367,7 +183,29 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
+                    <Value />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
                     <Value>Teller's</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
@@ -389,7 +227,29 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
+                    <Value />
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
                     <Value>Audit Clerk</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
@@ -411,7 +271,7 @@
             </Paragraphs>
             <Top>13.5cm</Top>
             <Left>10cm</Left>
-            <Height>3.5cm</Height>
+            <Height>4.21438cm</Height>
             <Width>3cm</Width>
             <ZIndex>4</ZIndex>
             <Style />
@@ -924,7 +784,7 @@
             </Style>
           </Line>
           <Line Name="SigLine3">
-            <Top>15.8cm</Top>
+            <Top>16.6cm</Top>
             <Left>13.2cm</Left>
             <Height>0cm</Height>
             <Width>6.3cm</Width>
@@ -936,7 +796,7 @@
             </Style>
           </Line>
           <Line Name="SigLine4">
-            <Top>16.3cm</Top>
+            <Top>17.46417cm</Top>
             <Left>13.2cm</Left>
             <Height>0cm</Height>
             <Width>6.3cm</Width>
@@ -1700,12 +1560,190 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>603d801f-4155-4a8a-94c0-d2596b3ad8a3</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompanyInfo_Name">
+          <DataField>CompanyInfo_Name</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Picture">
+          <DataField>CompanyInformation_Picture</DataField>
+        </Field>
+        <Field Name="CompanyName">
+          <DataField>CompanyName</DataField>
+        </Field>
+        <Field Name="BuldingName">
+          <DataField>BuldingName</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CompanyEmail">
+          <DataField>CompanyEmail</DataField>
+        </Field>
+        <Field Name="PrintingDate">
+          <DataField>PrintingDate</DataField>
+        </Field>
+        <Field Name="PrintingTime">
+          <DataField>PrintingTime</DataField>
+        </Field>
+        <Field Name="PrintedBy_Header">
+          <DataField>PrintedBy_Header</DataField>
+        </Field>
+        <Field Name="CompanyBranch_Name">
+          <DataField>CompanyBranch_Name</DataField>
+        </Field>
+        <Field Name="PrintDate">
+          <DataField>PrintDate</DataField>
+        </Field>
+        <Field Name="TellerName">
+          <DataField>TellerName</DataField>
+        </Field>
+        <Field Name="EndOfDayDate">
+          <DataField>EndOfDayDate</DataField>
+        </Field>
+        <Field Name="EODPostedStatus">
+          <DataField>EODPostedStatus</DataField>
+        </Field>
+        <Field Name="TellerAccount">
+          <DataField>TellerAccount</DataField>
+        </Field>
+        <Field Name="PostedBy">
+          <DataField>PostedBy</DataField>
+        </Field>
+        <Field Name="ShortageAcc">
+          <DataField>ShortageAcc</DataField>
+        </Field>
+        <Field Name="SurplusAcc">
+          <DataField>SurplusAcc</DataField>
+        </Field>
+        <Field Name="BalBroughtForward">
+          <DataField>BalBroughtForward</DataField>
+        </Field>
+        <Field Name="BalBroughtForwardFormat">
+          <DataField>BalBroughtForwardFormat</DataField>
+        </Field>
+        <Field Name="TotalReceipts">
+          <DataField>TotalReceipts</DataField>
+        </Field>
+        <Field Name="TotalReceiptsFormat">
+          <DataField>TotalReceiptsFormat</DataField>
+        </Field>
+        <Field Name="TotalPayments">
+          <DataField>TotalPayments</DataField>
+        </Field>
+        <Field Name="TotalPaymentsFormat">
+          <DataField>TotalPaymentsFormat</DataField>
+        </Field>
+        <Field Name="BalCarriedDown">
+          <DataField>BalCarriedDown</DataField>
+        </Field>
+        <Field Name="BalCarriedDownFormat">
+          <DataField>BalCarriedDownFormat</DataField>
+        </Field>
+        <Field Name="SystemCashAtHand">
+          <DataField>SystemCashAtHand</DataField>
+        </Field>
+        <Field Name="SystemCashAtHandFormat">
+          <DataField>SystemCashAtHandFormat</DataField>
+        </Field>
+        <Field Name="ActualCashAtHand">
+          <DataField>ActualCashAtHand</DataField>
+        </Field>
+        <Field Name="ActualCashAtHandFormat">
+          <DataField>ActualCashAtHandFormat</DataField>
+        </Field>
+        <Field Name="Difference">
+          <DataField>Difference</DataField>
+        </Field>
+        <Field Name="DifferenceFormat">
+          <DataField>DifferenceFormat</DataField>
+        </Field>
+        <Field Name="CashDeposit">
+          <DataField>CashDeposit</DataField>
+        </Field>
+        <Field Name="CashDepositFormat">
+          <DataField>CashDepositFormat</DataField>
+        </Field>
+        <Field Name="MPesaCashDeposit">
+          <DataField>MPesaCashDeposit</DataField>
+        </Field>
+        <Field Name="MPesaCashDepositFormat">
+          <DataField>MPesaCashDepositFormat</DataField>
+        </Field>
+        <Field Name="ReceiveFromTreasury">
+          <DataField>ReceiveFromTreasury</DataField>
+        </Field>
+        <Field Name="ReceiveFromTreasuryFormat">
+          <DataField>ReceiveFromTreasuryFormat</DataField>
+        </Field>
+        <Field Name="SpecialReceipt">
+          <DataField>SpecialReceipt</DataField>
+        </Field>
+        <Field Name="SpecialReceiptFormat">
+          <DataField>SpecialReceiptFormat</DataField>
+        </Field>
+        <Field Name="GrandTotalReceipts">
+          <DataField>GrandTotalReceipts</DataField>
+        </Field>
+        <Field Name="GrandTotalReceiptsFormat">
+          <DataField>GrandTotalReceiptsFormat</DataField>
+        </Field>
+        <Field Name="CashWithdrawal">
+          <DataField>CashWithdrawal</DataField>
+        </Field>
+        <Field Name="CashWithdrawalFormat">
+          <DataField>CashWithdrawalFormat</DataField>
+        </Field>
+        <Field Name="EndOfDay">
+          <DataField>EndOfDay</DataField>
+        </Field>
+        <Field Name="EndOfDayFormat">
+          <DataField>EndOfDayFormat</DataField>
+        </Field>
+        <Field Name="MPesaCashWithdraw">
+          <DataField>MPesaCashWithdraw</DataField>
+        </Field>
+        <Field Name="MPesaCashWithdrawFormat">
+          <DataField>MPesaCashWithdrawFormat</DataField>
+        </Field>
+        <Field Name="PettyCashAmt">
+          <DataField>PettyCashAmt</DataField>
+        </Field>
+        <Field Name="PettyCashAmtFormat">
+          <DataField>PettyCashAmtFormat</DataField>
+        </Field>
+        <Field Name="GrandTotalPayments">
+          <DataField>GrandTotalPayments</DataField>
+        </Field>
+        <Field Name="GrandTotalPaymentsFormat">
+          <DataField>GrandTotalPaymentsFormat</DataField>
+        </Field>
+        <Field Name="AccuracyLevel">
+          <DataField>AccuracyLevel</DataField>
+        </Field>
+        <Field Name="DenomCode">
+          <DataField>DenomCode</DataField>
+        </Field>
+        <Field Name="DenomCount">
+          <DataField>DenomCount</DataField>
+        </Field>
+        <Field Name="DenomAmount">
+          <DataField>DenomAmount</DataField>
+        </Field>
+        <Field Name="DenomAmountFormat">
+          <DataField>DenomAmountFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>

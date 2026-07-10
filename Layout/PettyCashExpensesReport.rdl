@@ -11,73 +11,6 @@
       <rd:DataSourceID>6c3e9813-f8a1-432d-8692-a9b0c2742918</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="CompanyInfo_Name">
-          <DataField>CompanyInfo_Name</DataField>
-        </Field>
-        <Field Name="CompanyInfo_Address">
-          <DataField>CompanyInfo_Address</DataField>
-        </Field>
-        <Field Name="CompanyInfo_Picture">
-          <DataField>CompanyInfo_Picture</DataField>
-        </Field>
-        <Field Name="PrintingDate">
-          <DataField>PrintingDate</DataField>
-        </Field>
-        <Field Name="PrintingTime">
-          <DataField>PrintingTime</DataField>
-        </Field>
-        <Field Name="PrintedBy">
-          <DataField>PrintedBy</DataField>
-        </Field>
-        <Field Name="No_PaymentsHeader">
-          <DataField>No_PaymentsHeader</DataField>
-        </Field>
-        <Field Name="Date_PaymentsHeader">
-          <DataField>Date_PaymentsHeader</DataField>
-        </Field>
-        <Field Name="Payee_PaymentsHeader">
-          <DataField>Payee_PaymentsHeader</DataField>
-        </Field>
-        <Field Name="PaymentNarration_PaymentsHeader">
-          <DataField>PaymentNarration_PaymentsHeader</DataField>
-        </Field>
-        <Field Name="Cashier_PaymentsHeader">
-          <DataField>Cashier_PaymentsHeader</DataField>
-        </Field>
-        <Field Name="PayingBankAccount_PaymentsHeader">
-          <DataField>PayingBankAccount_PaymentsHeader</DataField>
-        </Field>
-        <Field Name="TotalNetAmount_PaymentsHeader">
-          <DataField>TotalNetAmount_PaymentsHeader</DataField>
-        </Field>
-        <Field Name="TotalNetAmount_PaymentsHeaderFormat">
-          <DataField>TotalNetAmount_PaymentsHeaderFormat</DataField>
-        </Field>
-        <Field Name="AccountType_PaymentLine">
-          <DataField>AccountType_PaymentLine</DataField>
-        </Field>
-        <Field Name="AccountNo_PaymentLine">
-          <DataField>AccountNo_PaymentLine</DataField>
-        </Field>
-        <Field Name="AccountName_PaymentLine">
-          <DataField>AccountName_PaymentLine</DataField>
-        </Field>
-        <Field Name="NetAmount_PaymentLine">
-          <DataField>NetAmount_PaymentLine</DataField>
-        </Field>
-        <Field Name="NetAmount_PaymentLineFormat">
-          <DataField>NetAmount_PaymentLineFormat</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -979,12 +912,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -995,4 +922,71 @@ End Function</Code>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>090b4bc7-492b-4768-be25-a8c02fd2ce70</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompanyInfo_Name">
+          <DataField>CompanyInfo_Name</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Address">
+          <DataField>CompanyInfo_Address</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Picture">
+          <DataField>CompanyInfo_Picture</DataField>
+        </Field>
+        <Field Name="PrintingDate">
+          <DataField>PrintingDate</DataField>
+        </Field>
+        <Field Name="PrintingTime">
+          <DataField>PrintingTime</DataField>
+        </Field>
+        <Field Name="PrintedBy">
+          <DataField>PrintedBy</DataField>
+        </Field>
+        <Field Name="No_PaymentsHeader">
+          <DataField>No_PaymentsHeader</DataField>
+        </Field>
+        <Field Name="Date_PaymentsHeader">
+          <DataField>Date_PaymentsHeader</DataField>
+        </Field>
+        <Field Name="Payee_PaymentsHeader">
+          <DataField>Payee_PaymentsHeader</DataField>
+        </Field>
+        <Field Name="PaymentNarration_PaymentsHeader">
+          <DataField>PaymentNarration_PaymentsHeader</DataField>
+        </Field>
+        <Field Name="Cashier_PaymentsHeader">
+          <DataField>Cashier_PaymentsHeader</DataField>
+        </Field>
+        <Field Name="PayingBankAccount_PaymentsHeader">
+          <DataField>PayingBankAccount_PaymentsHeader</DataField>
+        </Field>
+        <Field Name="TotalNetAmount_PaymentsHeader">
+          <DataField>TotalNetAmount_PaymentsHeader</DataField>
+        </Field>
+        <Field Name="TotalNetAmount_PaymentsHeaderFormat">
+          <DataField>TotalNetAmount_PaymentsHeaderFormat</DataField>
+        </Field>
+        <Field Name="AccountType_PaymentLine">
+          <DataField>AccountType_PaymentLine</DataField>
+        </Field>
+        <Field Name="AccountNo_PaymentLine">
+          <DataField>AccountNo_PaymentLine</DataField>
+        </Field>
+        <Field Name="AccountName_PaymentLine">
+          <DataField>AccountName_PaymentLine</DataField>
+        </Field>
+        <Field Name="NetAmount_PaymentLine">
+          <DataField>NetAmount_PaymentLine</DataField>
+        </Field>
+        <Field Name="NetAmount_PaymentLineFormat">
+          <DataField>NetAmount_PaymentLineFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>
