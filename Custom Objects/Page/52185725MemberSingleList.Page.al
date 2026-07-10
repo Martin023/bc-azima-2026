@@ -1,6 +1,6 @@
 page 52185725 "Member Single List"
 {
-    Caption = 'Member List';
+    Caption = 'Member Single List';
     CardPageID = "Member Single";
     DeleteAllowed = false;
     Editable = false;
@@ -8,7 +8,7 @@ page 52185725 "Member Single List"
     ModifyAllowed = false;
     PageType = List;
     SourceTable = Members;
-    //SourceTableView = WHERE("Account Type" = const("Single Member Account"));
+    SourceTableView = WHERE("Account Type" = const("Single Member Account"));
     UsageCategory = Lists;
     ApplicationArea = All;
     PromotedActionCategories = 'New,Process,Reports,Information, ,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
@@ -279,15 +279,15 @@ page 52185725 "Member Single List"
             separator(Action48)
             {
             }
-            action("Social Listening Sites")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = Alerts;
-                Promoted = true;
-                PromotedCategory = Category4;
-                RunObject = Page "Social Listening Sites";
-                RunPageLink = "Account No." = FIELD("No.");
-            }
+            // action("Social Listening Sites")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = Alerts;
+            //     Promoted = true;
+            //     PromotedCategory = Category4;
+            //     RunObject = Page "Social Listening Sites";
+            //     RunPageLink = "Account No." = FIELD("No.");
+            // }
             separator(Action44)
             {
             }
