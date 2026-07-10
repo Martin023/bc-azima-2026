@@ -144,6 +144,7 @@ PageExtension 52186447 pageextension52186447 extends "Fixed Asset Card"
                         DepreciationBook.Init();
                         DepreciationBook."FA No." := Rec."No.";
                         DepreciationBook."Depreciation Book Code" := FAClasses."Depreciation Book Code";
+                        //DepreciationBook."FA Posting Group" := FAClasses.
                         DepreciationBook.Validate("Depreciation Method", FAClasses."Depreciation Method");
 
                         case FAClasses."Depreciation Method" of
