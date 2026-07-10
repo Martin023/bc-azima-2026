@@ -192,10 +192,9 @@ table 52185496 "HR Department Targets Header"
     var
         DeptLine: Record "HR Department Target Line";
         Employee: Record "HR Employees";
+        TempEmployee: Record "HR Employees" temporary;
+        EmployeeSelection: Page "Employee Selection List";
         Assignment: Record "HR Employee Target Assignment";
-        SelectedEmps: Text;
-        EmpNo: Code[20];
-        CommaPos: Integer;
         AssignmentCount: Integer;
     begin
         TestField("Target No");
@@ -208,36 +207,43 @@ table 52185496 "HR Department Targets Header"
             Error('Department target line %1 not found.', LineNo);
 
         Employee.Reset;
-        Employee.SetRange("Department Code", "Responsibility Center");
+        Employee.SetRange("Responsibility Center", "Responsibility Center");
         Employee.SetRange(Status, Employee.Status::Active);
         if not Employee.FindFirst then
             Error('No active employees found in department %1', "Department Name");
 
-        if PAGE.RunModal(PAGE::"Employee Selection List", Employee) = ACTION::LookupOK then begin
-            Employee.Reset;
-            Employee.SetRange("Department Code", "Responsibility Center");
-            Employee.SetRange(Status, Employee.Status::Active);
-            Employee.MarkedOnly(true);
-            if Employee.FindSet then begin
+        Employee.Reset;
+        Employee.SetRange("Responsibility Center", "Responsibility Center");
+        Employee.SetRange(Status, Employee.Status::Active);
+        EmployeeSelection.SetTableView(Employee);
+        EmployeeSelection.LookupMode(true);
+        
+        if EmployeeSelection.RunModal = ACTION::LookupOK then begin
+            EmployeeSelection.GetSelectedEmployees(TempEmployee);
+            
+            if TempEmployee.FindSet then begin
                 AssignmentCount := 0;
                 repeat
-                    if not AssignmentExists(DeptLine, Employee."No.") then begin
+                    if not AssignmentExists(DeptLine, TempEmployee."No.") then begin
+                        Clear(Assignment);
                         Assignment.Init;
                         Assignment."Department Target No" := "Target No";
                         Assignment.Validate("Department Target No");
                         Assignment."Target Line No" := DeptLine."Line No";
                         Assignment.Validate("Target Line No");
-                        Assignment."Employee No" := Employee."No.";
+                        Assignment."Employee No" := TempEmployee."No.";
                         Assignment.Validate("Employee No");
                         Assignment.Insert(true);
                         AssignmentCount += 1;
                     end;
-                until Employee.Next = 0;
+                until TempEmployee.Next = 0;
 
                 if AssignmentCount > 0 then
                     Message('%1 employee(s) assigned successfully.', AssignmentCount)
                 else
                     Message('No new assignments created. Selected employees may already have this target assigned.');
+            end else begin
+                Error('No employees selected. Please select employees by clicking on rows (Ctrl+Click for multiple).');
             end;
         end;
     end;

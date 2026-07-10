@@ -7,7 +7,7 @@ page 52186524 "HR 360 Appraisals List - EV1"
     PageType = List;
     PromotedActionCategories = 'New,Process,Reports,Functions,Appraisal';
     SourceTable = "HR Appraisal Header";
-    SourceTableView = WHERE(status = CONST("Approved"));
+    SourceTableView = WHERE("Appraisal Stage" = CONST("End Year Evalauation"));
     ApplicationArea = Basic;
     UsageCategory = Lists;
 

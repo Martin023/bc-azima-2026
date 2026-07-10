@@ -8,7 +8,7 @@ Report 52185496 "Counter Summary Report"
     {
         dataitem(Treasury_transaction; "Cashier Transactions")
         {
-            RequestFilterFields = "Transaction Date", Cashier;
+            RequestFilterFields = "Transaction Date";
 
             column(CompanyInfo_Name; CompanyInfo.Name) { }
             column(CompanyInfo_Address; CompanyAddress) { }
@@ -23,7 +23,6 @@ Report 52185496 "Counter Summary Report"
             column(DateFilterTxt; DateFilterTxt) { }
             column(PrintDateTime; Format(CurrentDateTime, 0, '<Day,2>/<Month,2>/<Year4> <Hours24,2>:<Minutes,2>')) { }
 
-            // INTEGER LOOP: Splits the record into Main Transaction and Charges
             dataitem(TransLines; Integer)
             {
                 DataItemTableView = sorting(Number) where(Number = filter(1 .. 2));
@@ -40,7 +39,6 @@ Report 52185496 "Counter Summary Report"
                 trigger OnAfterGetRecord()
                 begin
                     if Number = 1 then begin
-                        // 1. THE MAIN TRANSACTION ROW
                         if Treasury_transaction."Transaction Description" <> '' then
                             GroupDetails := Treasury_transaction."Transaction Description"
                         else
@@ -63,7 +61,6 @@ Report 52185496 "Counter Summary Report"
                         if Treasury_transaction."Charge Amount" <= 0 then
                             CurrReport.Skip();
 
-                        // This automatically forces the RDLC to create a new grouping!
                         GroupDetails := 'Withdrawal Charges';
                         TransType := 'Charge';
                         TrxDate := Format(Treasury_transaction."Transaction Date", 0, '<Day,2>/<Month,2>/<Year4>');
@@ -73,11 +70,18 @@ Report 52185496 "Counter Summary Report"
                         LineDebitAmt := 0;
                         LineCreditAmt := Treasury_transaction."Charge Amount";
                     end;
+                    if GroupFilter <> '' then begin
+                        if StrPos(UpperCase(GroupDetails), UpperCase(GroupFilter)) = 0 then
+                            CurrReport.Skip();
+                    end;
                 end;
             }
 
             trigger OnPreDataItem()
             begin
+                if CashierCode <> '' then
+                    Treasury_transaction.SetRange(Cashier, CashierCode);
+
                 CompanyInfo.Get();
                 CompanyInfo.CalcFields(Picture);
 
@@ -98,7 +102,30 @@ Report 52185496 "Counter Summary Report"
     requestpage
     {
         SaveValues = true;
-        layout { }
+        layout
+        {
+            area(content)
+            {
+                group(Filters)
+                {
+                    Caption = 'Custom Filters';
+                    
+                    field(CashierCode; CashierCode)
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Cashier';
+                        TableRelation = "User Setup"."User ID";
+                        ToolTip = 'Select the cashier from the dropdown list.';
+                    }
+                    field(GroupFilter; GroupFilter)
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Grouping Filter';
+                        ToolTip = 'Type a keyword to filter by group (e.g. "Cash Withdrawal", "Deposit", "Withdrawal Charges"). Leave blank for all.';
+                    }
+                }
+            }
+        }
         actions { }
     }
 
@@ -129,4 +156,6 @@ Report 52185496 "Counter Summary Report"
         LineAmount: Decimal;
         LineDebitAmt: Decimal;
         LineCreditAmt: Decimal;
+        CashierCode: Code[50];
+        GroupFilter: Text;
 }

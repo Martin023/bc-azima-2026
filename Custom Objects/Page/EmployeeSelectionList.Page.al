@@ -5,6 +5,7 @@ page 52186154 "Employee Selection List"
     SourceTable = "HR Employees";
     ApplicationArea = Basic;
     Editable = false;
+    MultipleNewLines = false;
 
     layout
     {
@@ -12,17 +13,6 @@ page 52186154 "Employee Selection List"
         {
             repeater(Group)
             {
-                field(Mark; Rec.Mark)
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Select';
-                    Editable = true;
-
-                    trigger OnValidate()
-                    begin
-                        Rec.Mark(Rec.Mark);
-                    end;
-                }
                 field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic;
@@ -35,7 +25,7 @@ page 52186154 "Employee Selection List"
                 {
                     ApplicationArea = Basic;
                 }
-                field("Department Code"; Rec."Department Code")
+                field("Responsibility Center"; Rec."Responsibility Center")
                 {
                     ApplicationArea = Basic;
                 }
@@ -55,7 +45,7 @@ page 52186154 "Employee Selection List"
             {
                 ApplicationArea = Basic;
                 Caption = 'Select All';
-                // Image = selectall;
+                Image = SelectMore;
                 Promoted = true;
                 PromotedCategory = Process;
 
@@ -63,10 +53,9 @@ page 52186154 "Employee Selection List"
                 begin
                     if Rec.FindSet then
                         repeat
-                            Rec.Mark := true;
                             Rec.Mark(true);
                         until Rec.Next = 0;
-                    CurrPage.Update(false);
+                    Message('%1 employee(s) selected. Click OK to continue.', Rec.Count);
                 end;
             }
             action("Clear Selection")
@@ -80,13 +69,36 @@ page 52186154 "Employee Selection List"
                 trigger OnAction()
                 begin
                     Rec.ClearMarks;
-                    if Rec.FindSet then
-                        repeat
-                            Rec.Mark := false;
-                        until Rec.Next = 0;
-                    CurrPage.Update(false);
+                    Message('All selections cleared.');
                 end;
             }
         }
     }
+
+    trigger OnQueryClosePage(CloseAction: Action): Boolean
+    var
+        TempEmp: Record "HR Employees" temporary;
+    begin
+        if CloseAction = ACTION::LookupOK then begin
+            CurrPage.SetSelectionFilter(Rec);
+            if Rec.FindSet then begin
+                repeat
+                    Rec.Mark(true);
+                until Rec.Next = 0;
+            end;
+        end;
+        exit(true);
+    end;
+
+    procedure GetSelectedEmployees(var TempEmployee: Record "HR Employees" temporary)
+    begin
+        TempEmployee.DeleteAll;
+        Rec.MarkedOnly(true);
+        if Rec.FindSet then
+            repeat
+                TempEmployee := Rec;
+                TempEmployee.Insert;
+            until Rec.Next = 0;
+        Rec.MarkedOnly(false);
+    end;
 }

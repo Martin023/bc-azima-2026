@@ -9,25 +9,31 @@ table 52185515 "HR Appraisal Period"
         field(2; "Appraisal Period Description"; Text[100])
         {
         }
-        field(3; "Appraisal Type"; Option)
+        field(3; "Appraisal Cycle Stage"; Option)
         {
-             OptionCaption = 'Target Setting,Quarter 1, Quarter 2,Quarter 3,End Year Evalauation';
-            OptionMembers = "Target Setting","Quarter 1","Quarter 2","Quarter 3",,"End Year Evalauation";
+            OptionCaption = 'Target Setting,Evaluation Review,Year-End Review';
+            OptionMembers = "Target Setting","Evaluation Review","Year-End Review";
         }
         field(4; Closed; Boolean)
         {
-            editable=false;
+            editable = false;
         }
-        field(5; "Date opened"; Date)
+        field(5; "Date Opened"; Date)
         {
         }
-        field(6; "Date closed"; Date)
+        field(6; "Date Closed"; Date)
         {
         }
-        field(7; "Appraisal Month"; Integer)
+        field(7; "Appraisal Year"; Integer)
         {
         }
-        field(8; "Appraisal Year"; Text[30])
+        field(8; "Review Sequence No"; Integer)
+        {
+        }
+        field(9; "Period Start Date"; Date)
+        {
+        }
+        field(10; "Period End Date"; Date)
         {
         }
     }

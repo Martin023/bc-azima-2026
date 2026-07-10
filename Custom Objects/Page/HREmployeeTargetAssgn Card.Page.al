@@ -199,6 +199,11 @@ page 52185643 "HR Employee Target Assgn Card"
             EmployeeCanEdit := false;
     end;
 
+    trigger OnAfterGetRecord()
+    begin
+        Rec.CalcFields("Perspective Name", "Scoring Method", "Result Label");
+    end;
+
     var
         EmployeeCanEdit: Boolean;
 }
