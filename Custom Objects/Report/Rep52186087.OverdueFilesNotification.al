@@ -34,7 +34,7 @@ report 52186087 "Overdue Files Notification"
                 if FileTracker."File Request Status" = FileTracker."File Request Status"::Requested then
                     exit
                 else begin
-                    FileDueDate := CalcDate('+4WD', FileTracker."File Request Date");
+                    FileDueDate := CalcDate('+2W', FileTracker."File Request Date");
                     if FileDueDate <= TODAY then begin
                         // begin
                         //     UserSetup.GET(UserId);
@@ -55,7 +55,7 @@ report 52186087 "Overdue Files Notification"
                 // if FileRequests.Status = FileRequests.Status::Rejected then exit;
                 // if FileRequests.Status = FileRequests.Status::Requested then
                 //     if FileRequests.Overdue = false then begin
-                //         FileDueDate := CalcDate('+4WD', FileRequests."File Request Date");
+                //         FileDueDate := CalcDate('+2W', FileRequests."File Request Date");
                 //         if FileDueDate <= TODAY then begin
                 //             // begin
                 //             //     UserSetup.GET(UserId);

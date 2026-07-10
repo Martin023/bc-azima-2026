@@ -169,8 +169,20 @@ page 52186882 "Account Activation"
                         CustomApprovals: Codeunit "Custom Approvals Codeunit";
                     begin
                         VarVariant := Rec;
+                        GlobalFunctions.CommentsManagement(Rec."No");
                         CustomApprovals.OnCancelDocApprovalRequest(VarVariant);
                     end;
+                }
+                action(Comments)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Image = ViewComments;
+                    Promoted = true;
+                    PromotedCategory = Category5;
+
+                    RunObject = page "Comments List";
+                    RunPageLink = "Header No." = field("No");
+                    RunPageView = where(Types = CONST(comment));
                 }
             }
             group(Navigate)
@@ -210,6 +222,7 @@ page 52186882 "Account Activation"
                     // ApprovalsMgmt: Codeunit 1535;
                     begin
                         Rec.TestField(Activated, false);
+                        GlobalFunctions.CommentsManagement(Rec."No");
                         if not Confirm('Are you sure you want to reopen this document?') then
                             exit;
                         Rec.Status := Rec.Status::Open;
@@ -247,6 +260,7 @@ page 52186882 "Account Activation"
                     var
                         ApprovalsMgmt: Codeunit 1535;
                     begin
+                        GlobalFunctions.CommentsManagement(Rec."No");
                         ApprovalsMgmt.RejectRecordApprovalRequest(Rec.RecordId)
                     end;
                 }
@@ -430,6 +444,7 @@ page 52186882 "Account Activation"
         Source: Enum "SMS Source";
         msg: Text;
         VBlock: Boolean;
+        GlobalFunctions : Codeunit "Global Functions";
 
     //[Scope('OnPrem')]
 

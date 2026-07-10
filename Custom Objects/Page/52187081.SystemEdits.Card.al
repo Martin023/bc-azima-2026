@@ -761,13 +761,13 @@ page 52187081 "System Edits Card"
                 until SystemFilterFields.Next() = 0;
             end;
 
-            // if Members.Get(UpperCase(SystemEditsFilters.Filter)) then begin
-            //     GlobalFunctions.GetMemberData(Members."No.", FirstName, PhoneNumber);
-            //     sms := CopyStr('Dear ' + FirstName + ', your member register data has been effected as follows: ' + WholeText + 'Reference code ' + Rec."No.", 1, 250);
+            if Members.Get(UpperCase(SystemEditsFilters.Filter)) then begin
+                GlobalFunctions.GetMemberData(Members."No.", FirstName, PhoneNumber);
+                sms := CopyStr('Dear ' + FirstName + ', your member register data has been effected as follows: ' + WholeText + 'Reference code ' + Rec."No.", 1, 250);
 
-            //     SendSms.SendSms(Source::MEMBER_CHANGES, PhoneNumber, sms, Rec."No.", UpperCase(SystemEditsFilters.Filter), false, 250, false, 'CBS', '', 'CBS');
+                SendSms.SendSms(Source::MEMBER_CHANGES, PhoneNumber, sms, Rec."No.", UpperCase(SystemEditsFilters.Filter), false, 250, false, 'CBS', '', 'CBS');
 
-            // end;
+            end;
 
         end;
     end;
