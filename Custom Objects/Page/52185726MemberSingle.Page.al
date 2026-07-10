@@ -2103,6 +2103,10 @@ page 52185726 "Member Single"
     var
         GlobalFunctions: Codeunit "Global Functions";
     begin
+        if (Rec.Age = 0) and (Rec."Date of Birth" <> 0D) then begin
+            Rec.Age := Round(((Today - Rec."Date of Birth") / 365), 1, '<');
+            Rec.Modify();
+        end;    
         GlobalFunctions.FlagAccounts(Rec."No.");
         GlobalFunctions.DisplayLienMessage(Rec."No.");
         //*check if delegate

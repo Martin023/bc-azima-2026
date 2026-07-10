@@ -537,6 +537,9 @@ table 52185689 "General Set-Up"
         {
             Caption = 'Transfers Excise Duty (%)';
         }
+        field(50025; "Minimum No of Joint Members"; Integer)
+        {
+        }
     }
 
     keys
