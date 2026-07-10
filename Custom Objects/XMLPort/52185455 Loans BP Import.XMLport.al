@@ -72,7 +72,7 @@ XmlPort 52185555 "Loans BP"
             {
                 group("No|CheckoffNo|UploadNo(payroll/Mno/ID)|Amount|EmployerCode|ProductID|Remarks")
                 {
-                    field(No; "Checkoff Buffer".No)
+                    field(No; "Checkoff Buffer"."Checkoff No")
                     {
                     }
                 }

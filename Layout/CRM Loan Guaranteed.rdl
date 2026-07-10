@@ -1749,20 +1749,11 @@ End Function
         <Field Name="AvailableShares_LoanGuarantorsFormat">
           <DataField>AvailableShares_LoanGuarantorsFormat</DataField>
         </Field>
-        <Field Name="Signature_LoanGuarantors">
-          <DataField>Signature_LoanGuarantors</DataField>
-        </Field>
         <Field Name="MemberNo_LoanGuarantors">
           <DataField>MemberNo_LoanGuarantors</DataField>
         </Field>
         <Field Name="LoanType_LoanGuarantors">
           <DataField>LoanType_LoanGuarantors</DataField>
-        </Field>
-        <Field Name="GuaranteedBalance_LoanGuarantors">
-          <DataField>GuaranteedBalance_LoanGuarantors</DataField>
-        </Field>
-        <Field Name="GuaranteedBalance_LoanGuarantorsFormat">
-          <DataField>GuaranteedBalance_LoanGuarantorsFormat</DataField>
         </Field>
         <Field Name="LoaneeName_LoanGuarantors">
           <DataField>LoaneeName_LoanGuarantors</DataField>

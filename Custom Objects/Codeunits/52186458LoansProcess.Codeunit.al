@@ -7362,6 +7362,7 @@ Codeunit 52186458 "Loans Process"
         CreateSchedule: Boolean;
         Dateformula: DateFormula;
         NewDepoCont: Decimal;
+        PeriodInterest: Decimal;
     begin
         if RecreateSchedule then begin
             RSchedule.Reset();
@@ -7383,16 +7384,20 @@ Codeunit 52186458 "Loans Process"
         if CreateSchedule then begin
             if Prodfac.Get(LoansR."Loan Product Type") then begin
                 //LoansR.TestField("Disbursement Date");
-
                 LoanAmount := LoansR."Approved Amount";
                 if LoansR."Loan Rescheduled" then begin
-                    InterestRate := LoansR.Interest;
+                    InterestRate := LoansR."New Interest Rate";
                 end else
                     InterestRate := LoansR.Interest;
-
+                if Prodfac."Nature of Loan Type" = Prodfac."Nature of Loan Type"::"Emergency Loan" then begin
+                    PeriodInterest := ((LoansR.Interest / 100) * LoansR."Approved Amount" * (LoansR.Installments / 12));
+                    LoansR."Approved Amount" := PeriodInterest;
+                end;
+                LoanAmount := LoansR."Approved Amount";
+                LBalance := LoansR."Approved Amount";
                 RepayPeriod := LoansR.Installments;
                 InitialInstal := LoansR.Installments;
-                LBalance := LoansR."Approved Amount";
+
 
                 // RunDate := Today;
                 // if LoansR."Grace Period" <> Dateformula then begin
