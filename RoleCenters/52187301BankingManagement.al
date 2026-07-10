@@ -255,6 +255,12 @@ page 52187301 "Banking Management Role Center"
                                 Caption = 'Counter Summary Report';
                                 RunObject = report "Counter Summary Report";
                             }
+                            action("Petty Cash Expenses Report")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Petty Cash Expenses Report';
+                                RunObject = report "Petty Cash Expenses Report";
+                            }
                         }
                     }
                     group(Receipt)
@@ -905,7 +911,7 @@ page 52187301 "Banking Management Role Center"
                             ApplicationArea = Basic, Suite;
                             Caption = 'Pending Bankers Cheque Applications';
                             RunObject = page "Bankers Application List";
-                            RunPageView = where(Status = const("Pending Approval"),"Cheque Register Generated" = const(false));
+                            RunPageView = where(Status = const("Pending Approval"), "Cheque Register Generated" = const(false));
                         }
                         action("Approved Bankers Cheque Application")
                         {
@@ -1790,6 +1796,19 @@ page 52187301 "Banking Management Role Center"
                         //     // RUNS THE REPORT, 'true' OPENS THE REQUEST PAGE FOR THE DATE FILTER
                         //     Report.Run(Report::"All Tellers Cash Report", true, false);
                         // end;
+                    }
+                    action("Petty Cash Expense Report")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Petty Cash Expense Report';
+                        RunObject = report "Petty Cash Expenses Report";
+                    }
+                    action("End of Day Reconciliation reports")
+                    {
+                        ApplicationArea = Basic;
+                        Image = PrintReport;
+                        Caption = 'End of Day Reconciliation Report';
+                        RunObject = codeunit "Run EOD Reconciliation Report";
                     }
                 }
 
