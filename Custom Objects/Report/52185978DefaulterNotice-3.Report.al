@@ -135,18 +135,18 @@ Report 52185978 "Defaulter Notice-3"
                     column(AvailableShares_LoanGuarantorsandSecurity; "Loan Guarantors and Security"."Available Shares")
                     {
                     }
-                    column(Signature_LoanGuarantorsandSecurity; "Loan Guarantors and Security".Signature)
-                    {
-                    }
+                    // column(Signature_LoanGuarantorsandSecurity; "Loan Guarantors and Security".Signature)
+                    // {
+                    // }
                     column(MemberNo_LoanGuarantorsandSecurity; "Loan Guarantors and Security"."Member No")
                     {
                     }
                     column(LoanType_LoanGuarantorsandSecurity; "Loan Guarantors and Security"."Loan Type")
                     {
                     }
-                    column(GuaranteedBalance_LoanGuarantorsandSecurity; "Loan Guarantors and Security"."Guaranteed Balance")
-                    {
-                    }
+                    // column(GuaranteedBalance_LoanGuarantorsandSecurity; "Loan Guarantors and Security"."Guaranteed Balance")
+                    // {
+                    // }
                     column(LoaneeName_LoanGuarantorsandSecurity; "Loan Guarantors and Security"."Loanee Name")
                     {
                     }

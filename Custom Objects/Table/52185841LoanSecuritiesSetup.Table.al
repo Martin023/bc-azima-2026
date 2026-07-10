@@ -82,12 +82,12 @@ table 52185841 "Loan Securities Set-up"
         // }
     }
 
-    // fieldgroups
-    // {
-    //     fieldgroup(DropDown; "Code", "Security Description")
-    //     {
-    //     }
-    // }
+    fieldgroups
+    {
+        fieldgroup(DropDown; "Setup Code", Type, "Collateral Multiplier", "Security Description")
+        {
+        }
+    }
     // trigger OnInsert()
     // begin
     //         if "No." = '' then begin

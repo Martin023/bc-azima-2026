@@ -26,6 +26,15 @@ page 52185761 "Loan Guarantors and Security"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Employer Code"; Rec."Employer Code")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Staff/Payroll No."; Rec."Staff/Payroll No.")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+
                 field("Savings Account No./Member No."; Rec."Savings Account No./Member No.")
                 {
                     ApplicationArea = Basic, Suite;
@@ -66,22 +75,22 @@ page 52185761 "Loan Guarantors and Security"
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
-                field("Loan Type"; Rec."Loan Type")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Staff/Payroll No."; Rec."Staff/Payroll No.")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Loan Type"; Rec."Loan Type")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("Staff/Payroll No."; Rec."Staff/Payroll No.")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("Phone No."; Rec."Phone No.")
                 {
                     ApplicationArea = all;
                 }
-                field("Guarantor ID No."; Rec."ID No.")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Guarantor ID No."; Rec."ID No.")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
 
                 // field("Amount Guaranteed"; Rec."Amount Guaranteed")
                 // {
@@ -163,7 +172,7 @@ page 52185761 "Loan Guarantors and Security"
                         field("ID No."; Rec."ID No.")
                         {
                             ApplicationArea = Basic, Suite;
-                            Caption = 'Bal. Account Name';
+                            // Caption = 'Bal. Account Name';
                             Editable = false;
                         }
                     }
@@ -203,19 +212,19 @@ page 52185761 "Loan Guarantors and Security"
                             Visible = true;
                         }
                     }
-                    group("Security Level")
-                    {
-                        Caption = 'Security Level';
-                        Visible = false;
-                        field("Coverage Variance"; Rec."Total Sum" + Rec."Amount Guaranteed")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            AutoFormatType = 1;
-                            Caption = 'Coverage Variance';
-                            Editable = false;
-                            Visible = false;
-                        }
-                    }
+                    // group("Security Level")
+                    // {
+                    //     Caption = 'Security Level';
+                    //     Visible = false;
+                    //     field("Coverage Variance"; Rec."Total Sum" + Rec."Amount Guaranteed")
+                    //     {
+                    //         ApplicationArea = Basic, Suite;
+                    //         AutoFormatType = 1;
+                    //         Caption = 'Coverage Variance';
+                    //         Editable = false;
+                    //         Visible = false;
+                    //     }
+                    // }
                 }
             }
         }

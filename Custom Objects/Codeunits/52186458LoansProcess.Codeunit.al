@@ -4032,7 +4032,7 @@ Codeunit 52186458 "Loans Process"
                             LoanGuar."Date Substituted" := LoanGuarOld."Date Substituted";
                             LoanGuar.Deceased := LoanGuarOld.Deceased;
                             LoanGuar."Deposits/Shares" := LoanGuarOld."Deposits/Shares";
-                            LoanGuar."Guaranteed Balance" := LoanGuarOld."Guaranteed Balance";
+                            //LoanGuar."Guaranteed Balance" := LoanGuarOld."Guaranteed Balance";
                             LoanGuar."Guarantor Status" := LoanGuarOld."Guarantor Status";
                             LoanGuar."Guarantor Type" := LoanGuarOld."Guarantor Type";
                             LoanGuar."ID No." := LoanGuarOld."ID No.";
