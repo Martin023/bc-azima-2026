@@ -729,8 +729,10 @@ table 52185729 Loans
                     if SavProducts.Get(ShareCapAcc."Product Type") then begin
                         ShareCapAcc.CALCFIELDS(ShareCapAcc."Balance (LCY)");
                         IF ShareCapAcc."Balance (LCY)" < SavProducts."Minimum Balance" THEN begin
-                            MESSAGE('Member no. %1 has share capital of %2 and minimum required share capital is %3 This will be boosted on the loan.', LoanApp."Member No.", ShareCapAcc."Balance (LCY)", SavProducts."Minimum Balance");
-                            "Share Boosted Amount" := SavProducts."Minimum Balance" - ShareCapAcc."Balance (LCY)";
+                            if "Mobile Loan" <> true then begin
+                                MESSAGE('Member no. %1 has share capital of %2 and minimum required share capital is %3 This will be boosted on the loan.', LoanApp."Member No.", ShareCapAcc."Balance (LCY)", SavProducts."Minimum Balance");
+                                "Share Boosted Amount" := SavProducts."Minimum Balance" - ShareCapAcc."Balance (LCY)";
+                            end;
                         end;
                     end;
                 END ELSE
@@ -1055,10 +1057,12 @@ table 52185729 Loans
                 ProdFac.SetRange("Product ID", Rec."Loan Product Type");
                 if ProdFac.FindFirst then begin
                     //  IF "Picked Mobile Loan"=FALSE THEN BEGIN
-                    if (ProdFac."Nature of Loan Type" = ProdFac."Nature of Loan Type"::Normal) or (ProdFac."Nature of Loan Type" = ProdFac."Nature of Loan Type"::" ") or (ProdFac."Nature of Loan Type" = ProdFac."Nature of Loan Type"::"Karibu Loan") then begin
-                        if ("Requested Amount" > ProdFac."Maximum Loan Amount") or ("Requested Amount" < ProdFac."Minimum Loan Amount") then begin
-                            if "Dummy Appraisal" = false then Error(LoanAmountErr, ProdFac."Minimum Loan Amount", ProdFac."Maximum Loan Amount") else Message(LoanAmountErr, ProdFac."Minimum Loan Amount", ProdFac."Maximum Loan Amount");
-                            //  END;
+                    if "Mobile Loan" <> true then begin
+                        if (ProdFac."Nature of Loan Type" = ProdFac."Nature of Loan Type"::Normal) or (ProdFac."Nature of Loan Type" = ProdFac."Nature of Loan Type"::" ") or (ProdFac."Nature of Loan Type" = ProdFac."Nature of Loan Type"::"Karibu Loan") then begin
+                            if ("Requested Amount" > ProdFac."Maximum Loan Amount") or ("Requested Amount" < ProdFac."Minimum Loan Amount") then begin
+                                if "Dummy Appraisal" = false then Error(LoanAmountErr, ProdFac."Minimum Loan Amount", ProdFac."Maximum Loan Amount") else Message(LoanAmountErr, ProdFac."Minimum Loan Amount", ProdFac."Maximum Loan Amount");
+                                //  END;
+                            end;
                         end;
                     end;
                 end;

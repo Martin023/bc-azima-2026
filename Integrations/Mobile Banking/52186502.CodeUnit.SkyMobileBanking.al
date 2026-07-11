@@ -2978,6 +2978,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         Payload.Get('transaction_date_time', transaction_date_time);
         KeyExists := Payload.Get('mobile_loan_purpose', mobile_loan_purpose);
         IsFosaMLoanProduct := Payload.Get('installments', installments);
+        if IsFosaMLoanProduct then
+            InstallmentsValue := installments.AsValue.AsInteger;
 
         MobileLoanPurpose := '';
         if KeyExists then begin
@@ -3159,7 +3161,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                         amount.AsValue.AsDecimal,
                         source_reference.AsValue.AsText,
                         MobileLoanPurpose,
-                        installments.AsValue.AsInteger
+                        // installments.AsValue.AsInteger
+                        InstallmentsValue
                     ) then begin
 
                         Datum.Add('transaction_reference', GlobalFunctions.CleanGuid);
@@ -4340,7 +4343,9 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                 Commit;
 
                                 if MobileLoanBuffer.Posted = false then begin
-                                    if MobileLoanBuffer.Installments = 0 then begin
+                                    // if MobileLoanBuffer.Installments = 0 then begin
+                                    pfac.Get(MobileLoanBuffer."Loan Product Type");
+                                    if not pfac."Allow Topup" then begin
                                         if SkyMbankingTrans.PostLoan(MobileLoanBuffer."Loan No.", LoanTemp, LoanBatch, MobileLoanBuffer."Session ID", HasChargeType) then begin
                                             MobileLoanBuffer.Posted := true;
                                             MobileLoanBuffer."Date Posted" := CurrentDateTime;
