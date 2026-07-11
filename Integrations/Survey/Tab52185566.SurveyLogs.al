@@ -163,7 +163,10 @@ table 52185566 "Survey Logs"
             Editable = false;
         }
 
-        field(23; SurveyParticipantIdentifierType; Code[50])
+        /* 
+            Shortened field name to comply with Business Central's 30-character limit and avoid future compiler errors.
+        */
+        field(23; ParticipantIdentifierType; Code[50])
         {
             InitValue = 'MSISDN';
             Caption = 'Survey Participant Identifier Type';
