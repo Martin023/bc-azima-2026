@@ -1189,23 +1189,41 @@ page 52185726 "Member Single"
                 end;
 
             }
-            action("Mobile Loan Eligibility")
+            group(Mbanking)
             {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Check Mobile Loan Eligibility';
+                Caption = 'Mbanking';
                 Image = CheckList;
-                Promoted = true;
-                PromotedCategory = Category4;
-                PromotedIsBig = true;
-                ToolTip = 'Calculate mobile loan eligibility for this member.';
 
-                trigger OnAction()
-                var
-                    MobileLoanEligibilityPage: Page "Mobile Loan Eligibility";
-                begin
-                    MobileLoanEligibilityPage.SetMemberNo(Rec."No.");
-                    MobileLoanEligibilityPage.RunModal();
-                end;
+                action("Mobile Loan Eligibility")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Check Mobile Loan Eligibility';
+                    Image = CheckList;
+                    Promoted = true;
+                    PromotedCategory = Category4;
+                    PromotedIsBig = true;
+                    ToolTip = 'Calculate mobile loan eligibility for this member.';
+
+                    trigger OnAction()
+                    var
+                        MobileLoanEligibilityPage: Page "Mobile Loan Eligibility";
+                    begin
+                        MobileLoanEligibilityPage.SetMemberNo(Rec."No.");
+                        MobileLoanEligibilityPage.RunModal();
+                    end;
+                }
+                action("Blocked Loan Products")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Blocked Loan Products';
+                    Image = CheckList;
+                    Promoted = true;
+                    PromotedCategory = Category4;
+                    ToolTip = 'View or manage the mobile loan products this member is blocked from applying for.';
+
+                    RunObject = Page "Mobile Loan Restrictions";
+                    RunPageLink = "Member No." = FIELD("No.");
+                }
             }
             action("Activate Member")
             {

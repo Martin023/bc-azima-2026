@@ -2777,6 +2777,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         MemberClass: Record "Member Classes";
         BlockedEmployers: Record "Blocked Employers";
         MblLoanException: Record "Mobile Loan Exceptions";
+        MblLoanRestriction: Record "Mobile Loan Restrictions";
         TopUpLoan: Record Loans;
         TotalTopUp: Decimal;
         ExistingLoanAmount: Decimal;
@@ -2800,20 +2801,6 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         );
 
         IF SearchMember.FindFirst then begin
-            /*
-                Block Mmber from applying Mobile loans
-            */
-
-            if SearchMember."Block Div Advance" then begin
-                ResponseObject.Add('request_status', 'ERROR');
-                Datum.Add('error_message', 'You are currently blocked from applying for member loans. Please contact the SACCO for assistance.');
-                EligibilityFailReason := 'You are currently blocked from applying for member loans. Please contact the SACCO for assistance.';
-                Datum.Add('eligibility_fail_reason', EligibilityFailReason);
-                ResponseObject.Add('response_payload', Datum);
-                AddDateTimeToResponse(ResponseObject);
-                ResponseObject.WriteTo(Response);
-                exit(Response);
-            end;
 
             ExistingLoanAmount := 0;
             // memberclass filter
@@ -2837,6 +2824,20 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 if ProductSupportedClasses.IsEmpty() then begin
                     ResponseObject.Add('request_status', 'ERROR');
                     Datum.Add('error_message', StrSubstNo('This loan product is not available to %1 members.', SearchMember."Member Class"));
+                    ResponseObject.Add('response_payload', Datum);
+                    AddDateTimeToResponse(ResponseObject);
+                    ResponseObject.WriteTo(Response);
+                    exit(Response);
+                end;
+
+                // MblLoanRestriction member filter
+                MblLoanRestriction.Reset();
+                MblLoanRestriction.SetRange("Member No.", SearchMember."No.");
+                MblLoanRestriction.SetRange("Product ID", MobileLoanProduct."Product ID");
+                MblLoanRestriction.SetRange(Status, MblLoanRestriction.Status::Active);
+                if not MblLoanRestriction.IsEmpty() then begin
+                    ResponseObject.Add('request_status', 'ERROR');
+                    Datum.Add('error_message', 'You are currently blocked from applying for this loan product. Please contact the SACCO for assistance.');
                     ResponseObject.Add('response_payload', Datum);
                     AddDateTimeToResponse(ResponseObject);
                     ResponseObject.WriteTo(Response);

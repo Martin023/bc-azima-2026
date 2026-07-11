@@ -5796,6 +5796,7 @@ codeunit 52186507 "Members Portal Integration"
         ProductSupportedClasses: Record "Product Supported Classes";
         BlockedEmployers: Record "Blocked Employers";
         MblLoanException: Record "Mobile Loan Exceptions";
+        MblLoanRestriction: Record "Mobile Loan Restrictions";
         TopUpLoan: Record Loans;
         TotalTopUp: Decimal;
 
@@ -5815,16 +5816,6 @@ codeunit 52186507 "Members Portal Integration"
         Payload.Get('loan_type_id', loan_type_id);
 
         IF MemberExists(identifier_type.AsValue.AsText, identifier.AsValue.AsText, SearchMember, ResponseText, ResponseDescription) then begin
-            if SearchMember."Block Div Advance" then begin
-                ResponseObject.Add('request_status', 'ERROR');
-                Datum.Add('error_message', 'You are currently blocked from applying for member loans. Please contact the SACCO for assistance.');
-                EligibilityFailReason := 'You are currently blocked from applying for member loans. Please contact the SACCO for assistance.';
-                Datum.Add('eligibility_fail_reason', EligibilityFailReason);
-                ResponseObject.Add('response_payload', Datum);
-                AddDateTimeToResponse(ResponseObject);
-                ResponseObject.WriteTo(Response);
-                exit(Response);
-            end;
 
             MobileLoanProduct.Reset;
             MobileLoanProduct.SetRange("Product ID", loan_type_id.AsValue.AsText);
@@ -5841,6 +5832,19 @@ codeunit 52186507 "Members Portal Integration"
                 if ProductSupportedClasses.IsEmpty() then begin
                     ResponseObject.Add('request_status', 'ERROR');
                     Datum.Add('error_message', StrSubstNo('This loan product is not available to %1 members.', SearchMember."Member Class"));
+                    ResponseObject.Add('response_payload', Datum);
+                    AddDateTimeToResponse(ResponseObject);
+                    ResponseObject.WriteTo(Response);
+                    exit(Response);
+                end;
+
+                MblLoanRestriction.Reset();
+                MblLoanRestriction.SetRange("Member No.", SearchMember."No.");
+                MblLoanRestriction.SetRange("Product ID", MobileLoanProduct."Product ID");
+                MblLoanRestriction.SetRange(Status, MblLoanRestriction.Status::Active);
+                if not MblLoanRestriction.IsEmpty() then begin
+                    ResponseObject.Add('request_status', 'ERROR');
+                    Datum.Add('error_message', 'You are currently blocked from applying for this loan product. Please contact the SACCO for assistance.');
                     ResponseObject.Add('response_payload', Datum);
                     AddDateTimeToResponse(ResponseObject);
                     ResponseObject.WriteTo(Response);
