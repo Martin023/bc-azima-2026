@@ -5858,6 +5858,7 @@ codeunit 52186507 "Members Portal Integration"
                     MblLoanException.Reset();
                     MblLoanException.SetRange("Member No.", SearchMember."No.");
                     MblLoanException.SetRange("Product ID", MobileLoanProduct."Product ID");
+                    MblLoanException.SetRange("Status", MblLoanException.Status::Active);
                     if MblLoanException.IsEmpty() then begin
                         ResponseObject.Add('request_status', 'ERROR');
                         Datum.Add('error_message', 'This loan product is not available to members of your employer.');
@@ -6553,6 +6554,9 @@ codeunit 52186507 "Members Portal Integration"
         SearchMember: Record Members;
         MobileLoanProduct: Record "Product Factory";
         TheLoan: Record Loans;
+        MblLoanException: Record "Mobile Loan Exceptions";
+        MblLoanRestriction: Record "Mobile Loan Restrictions";
+        BlockedEmployers: Record "Blocked Employers";
         MobileLoanPurpose: Text;
         theSMS: Text;
         theReference: Text;
@@ -6596,6 +6600,37 @@ codeunit 52186507 "Members Portal Integration"
             );
 
             if MobileLoanProduct.FindFirst then begin
+                MblLoanRestriction.Reset();
+                MblLoanRestriction.SetRange("Member No.", SearchMember."No.");
+                MblLoanRestriction.SetRange("Product ID", MobileLoanProduct."Product ID");
+                MblLoanRestriction.SetRange(Status, MblLoanRestriction.Status::Active);
+                if not MblLoanRestriction.IsEmpty() then begin
+                    ResponseObject.Add('status', 'ERROR');
+                    Datum.Add('error_message', 'You are currently blocked from applying for this loan product. Please contact the SACCO for assistance.');
+                    ResponseObject.Add('data', Datum);
+                    AddDateTimeToResponse(ResponseObject);
+                    ResponseObject.WriteTo(Response);
+                    exit(Response);
+                end;
+
+                BlockedEmployers.Reset();
+                BlockedEmployers.SetRange("Product ID", MobileLoanProduct."Product ID");
+                BlockedEmployers.SetRange("Employer Code", SearchMember."Employer Code");
+                if not BlockedEmployers.IsEmpty() then begin
+                    MblLoanException.Reset();
+                    MblLoanException.SetRange("Member No.", SearchMember."No.");
+                    MblLoanException.SetRange("Product ID", MobileLoanProduct."Product ID");
+                    MblLoanException.SetRange("Status", MblLoanException.Status::Active);
+                    if MblLoanException.IsEmpty() then begin
+                        ResponseObject.Add('status', 'ERROR');
+                        Datum.Add('error_message', 'This loan product is not available to members of your employer.');
+                        ResponseObject.Add('data', Datum);
+                        AddDateTimeToResponse(ResponseObject);
+                        ResponseObject.WriteTo(Response);
+                        exit(Response);
+                    end;
+                end;
+
                 // Check loan Limit
                 if MobileLoanProduct."Allow Topup" then begin
                     if SkyMbankingTrans.GetLoansQualifyAmount2(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason) < requested_amount.AsValue.AsDecimal then begin
