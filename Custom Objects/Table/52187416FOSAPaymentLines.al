@@ -1126,6 +1126,12 @@ table 52187416 "FOSA Payment Line"
         {
             // TableRelation = "Fosa Payments Header"."Payment Narration";
         }
+        field(482; "Housing Levy"; Decimal)
+        {
+        }
+        field(483; "Housing Levy Rate"; Decimal)
+        {
+        }
     }
 
     keys

@@ -23,7 +23,7 @@ table 52185876 "Tariff Code s"
         }
         field(5; Type; Option)
         {
-            OptionMembers = " ","W/Tax",VAT,Excise,Others,Retention;
+            OptionMembers = " ","W/Tax",VAT,Excise,Others,Retention, "Housing Levy";
         }
         field(12; "Account Type"; Enum "Gen. Journal Account Type")
         {
