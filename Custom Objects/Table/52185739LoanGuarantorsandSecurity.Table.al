@@ -305,7 +305,17 @@ table 52185739 "Loan Guarantors and Security"
                 //     "Savings Account No./Member No." := '';
                 //     Error('Member deposits account not found.');
                 // end;
-
+                "Member Guaranteed" := '';
+                "Loanee Name" := '';
+                Name := '';
+                "Staff/Payroll No." := '';
+                "Deposits/Shares" := 0;
+                "ID No." := '';
+                "Member No" := '';
+                Name := '';
+                "Phone No." := '';
+                "Savings Account No./Member No." := '';
+                
                 if rec."Employer Code" <> '' then begin
                     Members.Reset();
                     Members.SetRange(Members."Payroll/Staff No.", Rec."Staff/Payroll No.");
