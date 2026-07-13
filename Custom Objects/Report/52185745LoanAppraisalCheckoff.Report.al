@@ -879,7 +879,8 @@ Report 52185745 "Loan Appraisal Checkoff"
                                 ExcemptProductCharges.setrange(Excempt, true);
                                 if not ExcemptProductCharges.Find('-') then begin
                                     IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Approved Amount") THEN BEGIN
-                                        TopUp.Commision := Loans."Approved Amount" * (PCharges.Percentage / 100);
+                                        // TopUp.Commision := Loans."Approved Amount" * (PCharges.Percentage / 100);
+                                        TopUp.Commision := TopUp."Principle Top Up" * (PCharges.Percentage / 100);
                                     END ELSE
                                         IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Net Amount") THEN BEGIN
                                             TopUp.Commision := TopUp."Outstanding Balance" * (PCharges.Percentage / 100);
@@ -1142,20 +1143,24 @@ Report 52185745 "Loan Appraisal Checkoff"
                     Loans."Amount To Disburse" := Loans."Recommended Amount";
                 end;
                 if Loans."Self Guarantee" = true then begin
-                    QualifyingAmount := LoanAppCodeunit.GetmaxSelfGuaranteeAmt(SavAcc."No.", Loans."Loan No.");
-
-                    if Loans."Requested Amount" > QualifyingAmount then begin
-                        Loans."Recommended Amount" := QualifyingAmount;
-                        Loans."Approved Amount" := QualifyingAmount;
-                        Loans."Amount To Disburse" := QualifyingAmount;
-                    end
-                    else begin
-                        Loans."Recommended Amount" := Loans."Requested Amount";
-                        Loans."Approved Amount" := Loans."Requested Amount";
-                        Loans."Amount To Disburse" := Loans."Requested Amount";
+                    SavingsAccounts.Reset;
+                    SavingsAccounts.SetRange(SavingsAccounts."Member No.", Loans."Member No.");
+                    SavingsAccounts.SetRange(SavingsAccounts."Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
+                    if SavingsAccounts.FindFirst() then begin
+                        QualifyingAmount := LoanAppCodeunit.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.", Loans."Loan No.");
+                        Message('Self Guarantee Qualifying Amt %1', QualifyingAmount);
+                        if Loans."Requested Amount" > QualifyingAmount then begin
+                            Loans."Recommended Amount" := QualifyingAmount;
+                            Loans."Approved Amount" := QualifyingAmount;
+                            Loans."Amount To Disburse" := QualifyingAmount;
+                        end
+                        else begin
+                            Loans."Recommended Amount" := Loans."Requested Amount";
+                            Loans."Approved Amount" := Loans."Requested Amount";
+                            Loans."Amount To Disburse" := Loans."Requested Amount";
+                        end;
                     end;
                 end;
-
 
                 // Loans.Validate(Loans."Approved Amount");
                 Loans.Modify();
