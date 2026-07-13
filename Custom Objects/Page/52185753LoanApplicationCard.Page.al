@@ -833,7 +833,7 @@ page 52185753 "Loan Application Card"
             action("Guarantors & Security")
             {
                 ApplicationArea = Basic, Suite;
-                Caption = 'Guarantors& Security';
+                Caption = 'Guarantors & Security';
                 Image = ItemGroup;
                 Promoted = true;
                 PromotedCategory = Process;

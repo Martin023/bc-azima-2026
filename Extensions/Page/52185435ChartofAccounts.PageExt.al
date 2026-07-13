@@ -49,6 +49,18 @@ PageExtension 52185435 pageextension52185435 extends "Chart of Accounts"
         {
             ApplicationArea = Basic;
         }
+               modify("Debit Amount")
+        {
+            ApplicationArea = Basic;
+        }
+        modify("Credit Amount")
+        {
+            ApplicationArea = Basic;
+        }
+        modify("Balance at Date")
+        {
+            ApplicationArea = Basic;
+        }
         modify("Gen. Posting Type")
         {
             ApplicationArea = Basic;
@@ -69,22 +81,7 @@ PageExtension 52185435 pageextension52185435 extends "Chart of Accounts"
         {
             ApplicationArea = Basic;
         }
-        modify("Debit Amount")
-        {
-            ApplicationArea = Basic;
-
-
-        }
-        modify("Credit Amount")
-        {
-            ApplicationArea = Basic;
-
-
-        }
-        modify("Balance at Date")
-        {
-            ApplicationArea = Basic;
-        }
+ 
         modify("Additional-Currency Net Change")
         {
             ApplicationArea = Basic;
