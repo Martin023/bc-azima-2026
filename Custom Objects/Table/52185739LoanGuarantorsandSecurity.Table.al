@@ -315,7 +315,7 @@ table 52185739 "Loan Guarantors and Security"
                 Name := '';
                 "Phone No." := '';
                 "Savings Account No./Member No." := '';
-                
+
                 if rec."Employer Code" <> '' then begin
                     Members.Reset();
                     Members.SetRange(Members."Payroll/Staff No.", Rec."Staff/Payroll No.");
@@ -325,8 +325,10 @@ table 52185739 "Loan Guarantors and Security"
                         Cust.SetRange(Cust."Member No.", Members."No.");
                         Cust.setrange("Product Category", Cust."Product Category"::"BOSA Deposits");
                         if Cust.FindFirst() then begin
-                            "Savings Account No./Member No." := Cust."No.";
-                            Validate("Savings Account No./Member No.");
+                            Rec."Savings Account No./Member No." := Cust."No.";
+                            Rec.Modify(true);
+                            if Rec."Savings Account No./Member No." <> '' then
+                                Validate(Rec."Savings Account No./Member No.");
                         end
                         else begin
                             "Savings Account No./Member No." := '';
