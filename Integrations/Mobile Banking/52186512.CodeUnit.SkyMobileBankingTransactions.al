@@ -1441,27 +1441,29 @@ codeunit 52186512 "Sky M-Banking Transactions"
             end;
 
             // Get and check Member deposit balance
-            OrdinaryAccounts.RESET;
-            OrdinaryAccounts.SETRANGE("Member No.", Members."No.");
-            OrdinaryAccounts.SETRANGE("Product Category", OrdinaryAccounts."Product Category"::"BOSA Deposits");
-            OrdinaryAccounts.SetLoadFields(Balance);
-            if OrdinaryAccounts.FINDFIRST() then begin
-                OrdinaryAccounts.CALCFIELDS(Balance);
-                Message('Ordinary Accounts Balance: %1', Format(OrdinaryAccounts.Balance));
+            if ProdFac."Type of Discounting" <> ProdFac."Type of Discounting"::"Dividend Discounting" then begin
+                OrdinaryAccounts.RESET;
+                OrdinaryAccounts.SETRANGE("Member No.", Members."No.");
+                OrdinaryAccounts.SETRANGE("Product Category", OrdinaryAccounts."Product Category"::"BOSA Deposits");
+                OrdinaryAccounts.SetLoadFields(Balance);
+                if OrdinaryAccounts.FINDFIRST() then begin
+                    OrdinaryAccounts.CALCFIELDS(Balance);
+                    Message('Ordinary Accounts Balance: %1', Format(OrdinaryAccounts.Balance));
 
-                if OrdinaryAccounts.Balance = 0 then begin
-                    EligibilityFailReason := 'You are not eligible because you have no deposit balance.';
-                    QualifiedAmount := 0;
-                    EXIT(QualifiedAmount);
-                end;
+                    if OrdinaryAccounts.Balance = 0 then begin
+                        EligibilityFailReason := 'You are not eligible because you have no deposit balance.';
+                        QualifiedAmount := 0;
+                        EXIT(QualifiedAmount);
+                    end;
 
-                if OrdinaryAccounts.Balance < ProdFac."Minimum Deposit Balance" then begin
-                    EligibilityFailReason := StrSubstNo(
-                        'You are not eligible. Minimum deposit required is KES %1.',
-                        Format(ProdFac."Minimum Deposit Balance")
-                    );
-                    QualifiedAmount := 0;
-                    EXIT(QualifiedAmount);
+                    if OrdinaryAccounts.Balance < ProdFac."Minimum Deposit Balance" then begin
+                        EligibilityFailReason := StrSubstNo(
+                            'You are not eligible. Minimum deposit required is KES %1.',
+                            Format(ProdFac."Minimum Deposit Balance")
+                        );
+                        QualifiedAmount := 0;
+                        EXIT(QualifiedAmount);
+                    end;
                 end;
             end;
             // Find FOSA transactional account
@@ -1617,22 +1619,6 @@ codeunit 52186512 "Sky M-Banking Transactions"
                             msg := 'Dear ' + Members."First Name" + ', your loan qualification amount is KES.' + Format(QualifiedAmount) + ' and your total loan arrears is. ' + format(round(TotArrears, 1, '>')) +
                             '. The net amount to be disbursed is ' + Format(round(QualifiedAmount - TotArrears));
                             SendSMS.SendSms(SMSSource::MBANKING, Members."Phone No.", msg, Format(Members."No."), '', true, 220, false, 'CBS', Members."No.", 'CBS');
-                        end;
-                    end;
-
-                    // Deposit cap 
-                    if ProdFac."Deposit Qualifier %" > 0 then begin
-                        OrdinaryAccounts.Reset();
-                        OrdinaryAccounts.SetRange("Member No.", Members."No.");
-                        OrdinaryAccounts.SetRange("Product Category", OrdinaryAccounts."Product Category"::"BOSA Deposits");
-                        OrdinaryAccounts.SetLoadFields(Balance);
-                        if OrdinaryAccounts.FindFirst() then begin
-                            OrdinaryAccounts.CalcFields(Balance);
-                            DepositCap := Round(OrdinaryAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1);
-                            if DepositCap > ProdFac."Maximum Loan Amount" then
-                                DepositCap := ProdFac."Maximum Loan Amount";
-                            if DepositCap < QualifiedAmount then
-                                QualifiedAmount := DepositCap;
                         end;
                     end;
 
