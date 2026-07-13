@@ -85,7 +85,6 @@ XmlPort 52185555 "Loans BP"
     }
     trigger OninitXmlPort()
     begin
-        ExcelLayout := 'AccountNo|EmployerCode|StaffNo|MemberNo|Amount|DocumentNo';
     end;
 
     trigger OnPostXmlPort()
@@ -115,8 +114,6 @@ XmlPort 52185555 "Loans BP"
         Response: Integer;
         Error001: label 'Invalid option, please respond with 2,3 OR 4.';
         Text01: label 'Upload done successfully';
-        ExcelLayout: Text;
-
 
 }
 
