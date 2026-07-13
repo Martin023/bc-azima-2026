@@ -31,6 +31,7 @@ Codeunit 52185484 "Loan Appraisal Codeunit"
         GenSetup.TestField("Self Guarantee %");
         GenSetup.testField("Withdrawal Fee");
         SavBal := SavingsAcc.GetAvailableBalance(Accno);
+        Message('Available Balance: %1', SavBal);
         if SavBal > 0 then begin
             SavingsAcc.Reset();
             SavingsAcc.Setrange("No.", Accno);
@@ -43,7 +44,7 @@ Codeunit 52185484 "Loan Appraisal Codeunit"
                 if Loans.Find('-') then begin
                     repeat
                         TotalLoanBalance += Loans."Total Loan Balance";
-                        TotalThreeMonthInterest := TotalThreeMonthInterest + (Loans."Outstanding Balance" * 0.01 * 3 * Loans."Interest");
+                        TotalThreeMonthInterest += (Loans."Outstanding Balance" * 0.01 * 3 * Loans."Interest");
                     until Loans.Next() = 0;
                 end;
                 Message('Total Loan Balance: %1, Total Three Month Interest: %2', TotalLoanBalance, TotalThreeMonthInterest);
