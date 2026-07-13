@@ -2190,8 +2190,9 @@ table 52185729 Loans
                         GenSetup.testfield("Withdrawal Fee");
                         MaxSelfGuar := 0;
                         MaxSelfGuar := LoanAppCodeunit.GetmaxSelfGuaranteeAmt(SavAcc."No.", Rec."Loan No.");
+                        Message('The maximum self guarantee amount is %1', MaxSelfGuar);
                         if "Requested Amount" > MaxSelfGuar then
-                            Error(Text015 + ' of %1. Kindly apply for a lower amount.', MaxSelfGuar);
+                            Error(Text015 + ' of %1. Kindly apply for a lower amount.', MaxSelfGuar, "Requested Amount", "Member Deposits");
                         //"Recommended Amount":=SavAcc."Balance (LCY)"*GenSetup."Self Guarantee %"*0.01;
                         //"Approved Amount":=SavAcc."Balance (LCY)"*GenSetup."Self Guarantee %"*0.01;
                         LoanGuara.Init;
@@ -3850,7 +3851,7 @@ table 52185729 Loans
         CheckOffLines: Record "Checkoff Buffer";
         Text014: Label 'The member must be remmitting checkoff to the organization to qualify';
         Loan: Record Loans;
-        Text015: Label 'The requested amount is more than availabe deposit balance for self guarantee';
+        Text015: Label 'The requested amount %2 is more than available deposit balance %3 for self guarantee';
         MaxSelfGuar: Decimal;
         Text016: Label 'Maximum discounting percentage allowable must be defined';
         Text017: Label 'The loan must be approved before assigning a batch';
