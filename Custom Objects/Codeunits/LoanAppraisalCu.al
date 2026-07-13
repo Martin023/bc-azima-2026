@@ -44,7 +44,7 @@ Codeunit 52185484 "Loan Appraisal Codeunit"
                 if Loans.Find('-') then begin
                     repeat
                         TotalLoanBalance += Loans."Total Loan Balance";
-                        TotalThreeMonthInterest += (Loans."Outstanding Balance" * 0.01 * 3 * Loans."Interest");
+                        TotalThreeMonthInterest += (Loans."Outstanding Balance" * 3 * (Loans."Interest" / 12 * 0.01));
                     until Loans.Next() = 0;
                 end;
                 Message('Total Loan Balance: %1, Total Three Month Interest: %2', TotalLoanBalance, TotalThreeMonthInterest);
