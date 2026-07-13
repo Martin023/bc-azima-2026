@@ -139,8 +139,8 @@ table 52185739 "Loan Guarantors and Security"
                         if SavingsAccounts.Find('-') then begin
                             if SavingsAccounts."No." = "Savings Account No./Member No." then begin
                                 "Self Guarantee" := true;
-                                "Available Shares" := LoanAppraisal.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.") - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.");
-                                "Amount Guaranteed" := LoanAppraisal.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.") - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.");
+                                "Available Shares" := LoanAppraisal.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.");
+                                "Amount Guaranteed" := LoanAppraisal.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.");
                                 "Original Amount Guaranteed" := "Amount Guaranteed";
                                 LoansR."Self Guarantee" := true;
                             end
