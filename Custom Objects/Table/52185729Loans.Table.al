@@ -2189,7 +2189,7 @@ table 52185729 Loans
                         GenSetup.Get;
                         GenSetup.testfield("Withdrawal Fee");
                         MaxSelfGuar := 0;
-                        MaxSelfGuar := LoanAppCodeunit.GetmaxSelfGuaranteeAmt(SavAcc."No.");
+                        MaxSelfGuar := LoanAppCodeunit.GetmaxSelfGuaranteeAmt(SavAcc."No.", Rec."Loan No.");
                         if "Requested Amount" > MaxSelfGuar then
                             Error(Text015 + ' of %1. Kindly apply for a lower amount.', MaxSelfGuar);
                         //"Recommended Amount":=SavAcc."Balance (LCY)"*GenSetup."Self Guarantee %"*0.01;
