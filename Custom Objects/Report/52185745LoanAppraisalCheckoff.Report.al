@@ -1141,6 +1141,20 @@ Report 52185745 "Loan Appraisal Checkoff"
                     Loans."Approved Amount" := Loans."Recommended Amount";
                     Loans."Amount To Disburse" := Loans."Recommended Amount";
                 end;
+                if Loans."Self Guarantee" = true then begin
+                    QualifyingAmount := LoanAppCodeunit.GetmaxSelfGuaranteeAmt(SavAcc."No.", Loans."Loan No.");
+
+                    if Loans."Requested Amount" > QualifyingAmount then begin
+                        Loans."Recommended Amount" := QualifyingAmount;
+                        Loans."Approved Amount" := QualifyingAmount;
+                        Loans."Amount To Disburse" := QualifyingAmount;
+                    end
+                    else begin
+                        Loans."Recommended Amount" := Loans."Requested Amount";
+                        Loans."Approved Amount" := Loans."Requested Amount";
+                        Loans."Amount To Disburse" := Loans."Requested Amount";
+                    end;
+                end;
 
 
                 // Loans.Validate(Loans."Approved Amount");
@@ -1585,5 +1599,6 @@ Report 52185745 "Loan Appraisal Checkoff"
         LBalance: Decimal;
         ExcemptProductCharges: record "Excempted Product Charges";
         TwoThirdGross: Decimal;
+        LoanAppCodeunit: Codeunit "Loan Appraisal Codeunit";
 
 }
