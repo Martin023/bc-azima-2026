@@ -2011,13 +2011,16 @@ codeunit 52186512 "Sky M-Banking Transactions"
                 END;
 
                 STOAmount := ComputeSTODeductions(saccoAccount."No.");
+                Message('DEBUG: STOAmount = %1', STOAmount);
                 /*
-                To qualify for this loan, member must have channeled the salary at FOSA for at least one month 
-                and the average net salary of subsequent month up to the 12th month after the 12th, 
+                To qualify for this loan, member must have channeled the salary at FOSA for at least one month
+                and the average net salary of subsequent month up to the 12th month after the 12th,
                 the last salary is not considered
                 */
                 SalAvg := Globalfunc.GetAzimaSMSLoanSalaryAverage(saccoAccount."No.", Incomsal::Salary);
+                Message('DEBUG: Raw SalAvg from GetAzimaSMSLoanSalaryAverage = %1', SalAvg);
                 LoanRec := ComputeLoanDeductions(saccoAccount."Member No.");
+                Message('DEBUG: LoanRec (before existing FOSA loan deduction) = %1', LoanRec);
 
                 // Handle existing fosa mloan to be cleared after topup
                 ExistingFOSAMLoan.Reset;
@@ -2056,6 +2059,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     //     ProdFac."Repay Mode"::"Mobile Money"
                     // ] then begin
                     LoanRec -= TLoanRepayment;
+                    Message('DEBUG: TLoanRepayment (existing FOSA loans) = %1, LoanRec after deduction = %2', TLoanRepayment, LoanRec);
                     // end;
                 end;
 
@@ -2118,6 +2122,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     //     EXIT(QualifiedAmount);
                     // END;
                     if ProdFac."Requires Salary Processing" = false then begin
+                        Message('DEBUG: Deposit-based path. QualifiedAmount (from deposit contribution) = %1, Maximum Loan Amount = %2', QualifiedAmount, ProdFac."Maximum Loan Amount");
                         if QualifiedAmount > ProdFac."Maximum Loan Amount" then begin
                             QualifiedAmount := ProdFac."Maximum Loan Amount";
                         end;
@@ -2126,13 +2131,16 @@ codeunit 52186512 "Sky M-Banking Transactions"
                             MemberNo,
                             ProductID
                         );
+                        Message('DEBUG: QualifiedAmount after cap = %1, ExistingFOSAMLoanAmount = %2', QualifiedAmount, ExistingFOSAMLoanAmount);
 
                         if ExistingFOSAMLoanAmount >= QualifiedAmount then begin
                             EligibilityFailReason := 'Your maximum eligibility has already been used up by your existing loan balance';
                             QualifiedAmount := 0;
+                            Message('DEBUG: FAIL - %1', EligibilityFailReason);
                             exit(QualifiedAmount);
                         end;
 
+                        Message('DEBUG: Final QualifiedAmount (deposit-based) = %1', QualifiedAmount - ExistingFOSAMLoanAmount);
                         exit(QualifiedAmount - ExistingFOSAMLoanAmount);
                     end;
                     /*
@@ -2152,6 +2160,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
 
                     SalAvg := SalAvg - (STOAmount + LoanRec);
                     SalaryAmount := SalAvg;
+                    Message('DEBUG: Net SalaryAmount (SalAvg - STOAmount - LoanRec) = %1', SalaryAmount);
 
                     // if MLoanSetup.Get(ProdFac."Product ID", Installments) then begin
                     //     // Temporary Variable
@@ -2161,10 +2170,12 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     amtQualified := SalaryAmount * (ProdFac."Net Salary Multiplier %" / 100);
                     IF amtQualified < 0 THEN amtQualified := 0;
                     QualifiedAmount := amtQualified;
+                    Message('DEBUG: amtQualified (SalaryAmount x Net Salary Multiplier %1 pct) = %2', ProdFac."Net Salary Multiplier %", QualifiedAmount);
 
                     if QualifiedAmount > ProdFac."Maximum Loan Amount" then begin
                         QualifiedAmount := ProdFac."Maximum Loan Amount";
                     end;
+                    Message('DEBUG: QualifiedAmount after Maximum Loan Amount cap (%1) = %2', ProdFac."Maximum Loan Amount", QualifiedAmount);
 
                     /*
                     The loan shall be secured by own deposits up to 80% with minimum of Ksh 3,000
@@ -2181,6 +2192,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
                                 DepositCap := ProdFac."Maximum Loan Amount";
                             if DepositCap < QualifiedAmount then
                                 QualifiedAmount := DepositCap;
+                            Message('DEBUG: DepositCap = %1, QualifiedAmount after deposit qualifier cap = %2', DepositCap, QualifiedAmount);
                         end;
                     end;
 
@@ -2192,6 +2204,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
                         MemberNo,
                         ProductID
                     );
+                    Message('DEBUG: ExistingFOSAMLoanAmount = %1, QualifiedAmount before top-up check = %2', ExistingFOSAMLoanAmount, QualifiedAmount);
 
                     if ExistingFOSAMLoanAmount >= QualifiedAmount then begin
                         EligibilityFailReason := StrSubstNo(
@@ -2200,10 +2213,12 @@ codeunit 52186512 "Sky M-Banking Transactions"
                             Format(ExistingFOSAMLoanAmount, 0, '<Precision,2:2><Standard Format,0>')
                         );
                         QualifiedAmount := 0;
+                        Message('DEBUG: FAIL - %1', EligibilityFailReason);
                         EXIT(QualifiedAmount);
                     end;
 
                     // QualifiedAmount -= ExistingFOSAMLoanAmount;
+                    Message('DEBUG: Final QualifiedAmount (salary-based) = %1', QualifiedAmount);
                     EXIT(QualifiedAmount);
                 end;
             END ELSE BEGIN

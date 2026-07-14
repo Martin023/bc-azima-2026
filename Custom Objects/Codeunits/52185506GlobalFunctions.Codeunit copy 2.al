@@ -929,17 +929,32 @@ Codeunit 52185506 "Global Functions"
         MonthEnd: Date;
         MonthAmount: Decimal;
         TotalSalary: Decimal;
+        Last12Total: Decimal;
         MonthsWithSalary: Integer;
         MaxMonths: Integer;
+        EarliestDate: Date;
         i: Integer;
-        LastMonthAmount: Decimal;
-        LastMonthIndex: Integer;
     begin
         TotalSalary := 0;
+        Last12Total := 0;
         MonthsWithSalary := 0;
-        MaxMonths := 12;
-        LastMonthAmount := 0;
-        LastMonthIndex := 0;
+
+        SalBuffer.Reset();
+        SalBuffer.SetRange("Account No.", FOSAAccountNo);
+        SalBuffer.SetRange("Income Type", IncomeTy);
+        SalBuffer.SetRange(Posted, true);
+        SalBuffer.SetRange(Reversed, false);
+        SalBuffer.SetCurrentKey("Account No.", "Posting Date");
+        SalBuffer.Ascending(true);
+        SalBuffer.SetLoadFields("Posting Date");
+        if not SalBuffer.FindFirst() then
+            exit(0);
+        EarliestDate := SalBuffer."Posting Date";
+
+        MaxMonths := (Date2DMY(Today(), 3) - Date2DMY(EarliestDate, 3)) * 12
+            + (Date2DMY(Today(), 2) - Date2DMY(EarliestDate, 2)) + 1;
+        if MaxMonths < 1 then
+            MaxMonths := 1;
 
         for i := 1 to MaxMonths do begin
             MonthStart := DMY2Date(1,
@@ -947,7 +962,6 @@ Codeunit 52185506 "Global Functions"
                 Date2DMY(CalcDate('<-' + Format(i) + 'M>', Today()), 3)
             );
             MonthEnd := CalcDate('<CM>', MonthStart);
-            Message('Month %1: Start %2, End %3', i, MonthStart, MonthEnd);
 
             SalBuffer.Reset();
             SalBuffer.SetRange("Account No.", FOSAAccountNo);
@@ -955,37 +969,26 @@ Codeunit 52185506 "Global Functions"
             SalBuffer.SetRange(Posted, true);
             SalBuffer.SetRange(Reversed, false);
             SalBuffer.SetRange("Posting Date", MonthStart, MonthEnd);
-            SalBuffer.SetLoadFields(Amount, "Posting Date");
+            SalBuffer.SetLoadFields(Amount);
             SalBuffer.CalcSums(Amount);
             MonthAmount := SalBuffer.Amount;
 
-            Message('Month Amount: %1', MonthAmount);
+            if i <= 12 then
+                Last12Total += MonthAmount;
 
             if MonthAmount > 0 then begin
                 MonthsWithSalary += 1;
                 TotalSalary += MonthAmount;
-
-                if LastMonthIndex = 0 then begin
-                    LastMonthAmount := MonthAmount;
-                    LastMonthIndex := i;
-                end;
-                Message('Month %1: Start %2, End %3, Amount %4 (Salary Found)', i, MonthStart, MonthEnd, MonthAmount);
             end;
         end;
 
         if MonthsWithSalary = 0 then
             exit(0);
 
-        Message('Total Salary: %1, Months with Salary: %2, Last Month Amount: %3', TotalSalary, MonthsWithSalary, LastMonthAmount);
-
-
-        if MonthsWithSalary <= MaxMonths then
+        if MonthsWithSalary <= 12 then
             exit(Round(TotalSalary / MonthsWithSalary, 1));
 
-        TotalSalary -= LastMonthAmount;
-
-        Message('More than 12 months rule: Last 12 months total minus current month salary %1 = %2', LastMonthAmount, TotalSalary);
-        exit(Round(TotalSalary, 1));
+        exit(Round(Last12Total / 12, 1));
     end;
 
     procedure ValidateBusinessLoansOnproductInput(Loans: Record Loans; MemberNo: code[30])
