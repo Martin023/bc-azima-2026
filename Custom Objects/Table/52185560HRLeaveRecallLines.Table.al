@@ -67,10 +67,10 @@ table 52185560 "HR Leave Recall Lines"
 
                 // Calculate RecallEndDate by counting actual leave days from calendar (not calendar days)
                 RecallEndDate := CalculateRecallEndDate("Recall Date", "Days Recalled", LeaveApp);
-                
+
                 // Validate recall end date is within leave period
                 if RecallEndDate > LeaveApp."End Date" then
-                    Error('Days Recalled (%1) extends beyond the leave end date (%2). The recall period would end on %3.', 
+                    Error('Days Recalled (%1) extends beyond the leave end date (%2). The recall period would end on %3.',
                         "Days Recalled", LeaveApp."End Date", RecallEndDate);
 
                 // Check for overlaps with existing recalls
@@ -111,7 +111,7 @@ table 52185560 "HR Leave Recall Lines"
                 // CALCULATE DAYS REMAINING AFTER RECALL
                 if "Leave Application Code" <> '' then begin
                     LeaveApp.Get("Leave Application Code");
-                    
+
                     // TOTAL PREVIOUS RECALLS EXCLUDING CURRENT
                     TotalPreviousRecalls := 0;
                     ExistingRecalls.Reset();
@@ -192,12 +192,6 @@ table 52185560 "HR Leave Recall Lines"
             TableRelation = "HR Leave Types".Code;
             Editable = false;
         }
-        field(20; "Recall End Date"; Date)
-        {
-            Caption = 'Recall End Date';
-            Editable = false;
-            ToolTip = 'Last working day of the recall period';
-        }
         field(17; "Leave Start Time"; Text[20])
         {
             Caption = 'Leave Starts';
@@ -223,6 +217,12 @@ table 52185560 "HR Leave Recall Lines"
             Editable = false;
             DecimalPlaces = 0 : 1;
             FieldClass = Normal;
+        }
+        field(21; "Recall End Date"; Date)
+        {
+            Caption = 'Recall End Date';
+            Editable = false;
+            ToolTip = 'Last working day of the recall period';
         }
     }
 
@@ -365,7 +365,7 @@ table 52185560 "HR Leave Recall Lines"
 
         // CALCULATE AND STORE RECALL END DATE BEFORE POSTING
         "Recall End Date" := CalculateRecallEndDate("Recall Date", "Days Recalled", LeaveApp);
-        
+
         HRLeaveCal.Reset();
         HRLeaveCal.SetRange("Current Leave Calendar", true);
         if not HRLeaveCal.Find('-') then
@@ -429,7 +429,7 @@ table 52185560 "HR Leave Recall Lines"
             Modify();
 
             SendRecallNotificationEmail();
-            Message('Leave recall posted successfully. %1 day(s) reimbursed to %2. Recall period: %3 to %4', 
+            Message('Leave recall posted successfully. %1 day(s) reimbursed to %2. Recall period: %3 to %4',
                 "Days Recalled", "Employee Name", "Recall Date", "Recall End Date");
         end else
             Error('Failed to post recall. Please check leave journal posting.');
@@ -481,18 +481,18 @@ table 52185560 "HR Leave Recall Lines"
         while DaysAccumulated < DaysToRecall do begin
             // Get day value from calendar (0.0 = non-working, 0.5 = half-day, 1.0 = full day)
             DayValue := LeaveApp.GetDayLeaveValue(CurrentDate);
-            
+
             // Only count working days
             if DayValue > 0 then begin
                 DaysAccumulated += DayValue;
-                
+
                 // If we've reached or exceeded target, this is the end date
                 if DaysAccumulated >= DaysToRecall then
                     exit(CurrentDate);
             end;
 
             CurrentDate := CalcDate('1D', CurrentDate);
-            
+
             // Safety check: don't go beyond leave end date
             if CurrentDate > LeaveApp."End Date" then
                 exit(CurrentDate);
