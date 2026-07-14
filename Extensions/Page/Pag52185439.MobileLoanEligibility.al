@@ -172,6 +172,11 @@ page 52185439 "Mobile Loan Eligibility"
     local procedure CalculateEligibility()
     var
         ProductFactory: Record "Product Factory";
+        Member: Record Members;
+        ProductSupportedClasses: Record "Product Supported Classes";
+        MblLoanRestriction: Record "Mobile Loan Restrictions";
+        BlockedEmployers: Record "Blocked Employers";
+        MblLoanException: Record "Mobile Loan Exceptions";
     begin
         if MemberNo = '' then
             Error(MemberNotSetErr);
@@ -183,10 +188,44 @@ page 52185439 "Mobile Loan Eligibility"
         ShowResults := false;
 
         EligibilityFailReason := '';
-        if ProductFactory.Get(LoanTypeCode) and ProductFactory."Allow Topup" then
-            QualifiedAmount := SkyMbankingTrans.GetLoansQualifyAmount2(MemberNo, LoanTypeCode, 0, EligibilityFailReason)
-        else
-            QualifiedAmount := SkyMbankingTrans.GetLoansQualifyAmount(MemberNo, LoanTypeCode, 0, EligibilityFailReason);
+
+        if ProductFactory.Get(LoanTypeCode) and Member.Get(MemberNo) then begin
+            ProductSupportedClasses.Reset();
+            ProductSupportedClasses.SetRange("Product ID", ProductFactory."Product ID");
+            ProductSupportedClasses.SetRange("Class Category", Member."Member Class");
+            if ProductSupportedClasses.IsEmpty() then
+                EligibilityFailReason := StrSubstNo('This loan product is not available to %1 members.', Member."Member Class");
+
+            if EligibilityFailReason = '' then begin
+                MblLoanRestriction.Reset();
+                MblLoanRestriction.SetRange("Member No.", MemberNo);
+                MblLoanRestriction.SetRange("Product ID", ProductFactory."Product ID");
+                MblLoanRestriction.SetRange(Status, MblLoanRestriction.Status::Active);
+                if not MblLoanRestriction.IsEmpty() then
+                    EligibilityFailReason := 'You are currently blocked from applying for this loan product. Please contact the SACCO for assistance.';
+            end;
+
+            if EligibilityFailReason = '' then begin
+                BlockedEmployers.Reset();
+                BlockedEmployers.SetRange("Product ID", ProductFactory."Product ID");
+                BlockedEmployers.SetRange("Employer Code", Member."Employer Code");
+                if not BlockedEmployers.IsEmpty() then begin
+                    MblLoanException.Reset();
+                    MblLoanException.SetRange("Member No.", MemberNo);
+                    MblLoanException.SetRange("Product ID", ProductFactory."Product ID");
+                    MblLoanException.SetRange(Status, MblLoanException.Status::Active);
+                    if MblLoanException.IsEmpty() then
+                        EligibilityFailReason := 'This loan product is not available to members of your employer.';
+                end;
+            end;
+        end;
+
+        if EligibilityFailReason = '' then begin
+            if ProductFactory."Allow Topup" then
+                QualifiedAmount := SkyMbankingTrans.GetLoansQualifyAmount2(MemberNo, LoanTypeCode, 0, EligibilityFailReason)
+            else
+                QualifiedAmount := SkyMbankingTrans.GetLoansQualifyAmount(MemberNo, LoanTypeCode, 0, EligibilityFailReason);
+        end;
 
         UpdateEligibilityStatus();
         ShowResults := true;
