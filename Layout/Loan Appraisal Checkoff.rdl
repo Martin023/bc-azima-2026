@@ -11,7 +11,7 @@
       <am:Name>PBIRB</am:Name>
       <am:Version>15.7.1813.16</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-07-14T13:49:22.7640776Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-07-14T15:35:53.9488382Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -24,712 +24,6 @@
       <rd:DataSourceID>2d2405a1-986c-43e0-a3bd-0d97316b9eeb</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="CompanyTelephone">
-          <DataField>CompanyTelephone</DataField>
-        </Field>
-        <Field Name="CompanyNam">
-          <DataField>CompanyNam</DataField>
-        </Field>
-        <Field Name="CPicture">
-          <DataField>CPicture</DataField>
-        </Field>
-        <Field Name="CommunicationOnline">
-          <DataField>CommunicationOnline</DataField>
-        </Field>
-        <Field Name="TotalProcessingAmt">
-          <DataField>TotalProcessingAmt</DataField>
-        </Field>
-        <Field Name="TotalProcessingAmtFormat">
-          <DataField>TotalProcessingAmtFormat</DataField>
-        </Field>
-        <Field Name="LoanFormFees">
-          <DataField>LoanFormFees</DataField>
-        </Field>
-        <Field Name="LoanFormFeesFormat">
-          <DataField>LoanFormFeesFormat</DataField>
-        </Field>
-        <Field Name="LoanFormFeesExc">
-          <DataField>LoanFormFeesExc</DataField>
-        </Field>
-        <Field Name="LoanFormFeesExcFormat">
-          <DataField>LoanFormFeesExcFormat</DataField>
-        </Field>
-        <Field Name="InsuranceFee">
-          <DataField>InsuranceFee</DataField>
-        </Field>
-        <Field Name="InsuranceFeeFormat">
-          <DataField>InsuranceFeeFormat</DataField>
-        </Field>
-        <Field Name="InsuranceFeeExc">
-          <DataField>InsuranceFeeExc</DataField>
-        </Field>
-        <Field Name="InsuranceFeeExcFormat">
-          <DataField>InsuranceFeeExcFormat</DataField>
-        </Field>
-        <Field Name="OneMonthInterest">
-          <DataField>OneMonthInterest</DataField>
-        </Field>
-        <Field Name="OneMonthInterestFormat">
-          <DataField>OneMonthInterestFormat</DataField>
-        </Field>
-        <Field Name="OnethirdGross">
-          <DataField>OnethirdGross</DataField>
-        </Field>
-        <Field Name="OnethirdGrossFormat">
-          <DataField>OnethirdGrossFormat</DataField>
-        </Field>
-        <Field Name="TwoThirdGross">
-          <DataField>TwoThirdGross</DataField>
-        </Field>
-        <Field Name="TwoThirdGrossFormat">
-          <DataField>TwoThirdGrossFormat</DataField>
-        </Field>
-        <Field Name="TotalGuaranteed">
-          <DataField>TotalGuaranteed</DataField>
-        </Field>
-        <Field Name="TotalGuaranteedFormat">
-          <DataField>TotalGuaranteedFormat</DataField>
-        </Field>
-        <Field Name="GuarantorMax">
-          <DataField>GuarantorMax</DataField>
-        </Field>
-        <Field Name="SecurityTotal">
-          <DataField>SecurityTotal</DataField>
-        </Field>
-        <Field Name="SecurityTotalFormat">
-          <DataField>SecurityTotalFormat</DataField>
-        </Field>
-        <Field Name="Dim1">
-          <DataField>Dim1</DataField>
-        </Field>
-        <Field Name="TrEarni">
-          <DataField>TrEarni</DataField>
-        </Field>
-        <Field Name="TrEarniFormat">
-          <DataField>TrEarniFormat</DataField>
-        </Field>
-        <Field Name="THouseAllow">
-          <DataField>THouseAllow</DataField>
-        </Field>
-        <Field Name="THouseAllowFormat">
-          <DataField>THouseAllowFormat</DataField>
-        </Field>
-        <Field Name="DisposableInc">
-          <DataField>DisposableInc</DataField>
-        </Field>
-        <Field Name="DisposableIncFormat">
-          <DataField>DisposableIncFormat</DataField>
-        </Field>
-        <Field Name="GrossPay">
-          <DataField>GrossPay</DataField>
-        </Field>
-        <Field Name="GrossPayFormat">
-          <DataField>GrossPayFormat</DataField>
-        </Field>
-        <Field Name="Dim2">
-          <DataField>Dim2</DataField>
-        </Field>
-        <Field Name="AdjNet">
-          <DataField>AdjNet</DataField>
-        </Field>
-        <Field Name="AdjNetFormat">
-          <DataField>AdjNetFormat</DataField>
-        </Field>
-        <Field Name="SalNotThroughSacco">
-          <DataField>SalNotThroughSacco</DataField>
-        </Field>
-        <Field Name="TwoThird">
-          <DataField>TwoThird</DataField>
-        </Field>
-        <Field Name="Mult">
-          <DataField>Mult</DataField>
-        </Field>
-        <Field Name="MultFormat">
-          <DataField>MultFormat</DataField>
-        </Field>
-        <Field Name="TotaLFosaIn">
-          <DataField>TotaLFosaIn</DataField>
-        </Field>
-        <Field Name="TotaLFosaInFormat">
-          <DataField>TotaLFosaInFormat</DataField>
-        </Field>
-        <Field Name="MemberDueRetire">
-          <DataField>MemberDueRetire</DataField>
-        </Field>
-        <Field Name="MonthsToRetire">
-          <DataField>MonthsToRetire</DataField>
-        </Field>
-        <Field Name="TopUpComms">
-          <DataField>TopUpComms</DataField>
-        </Field>
-        <Field Name="TopUpCommsFormat">
-          <DataField>TopUpCommsFormat</DataField>
-        </Field>
-        <Field Name="NofGuar">
-          <DataField>NofGuar</DataField>
-        </Field>
-        <Field Name="OffsetTotal">
-          <DataField>OffsetTotal</DataField>
-        </Field>
-        <Field Name="OffsetTotalFormat">
-          <DataField>OffsetTotalFormat</DataField>
-        </Field>
-        <Field Name="ReapplicationPeriod">
-          <DataField>ReapplicationPeriod</DataField>
-        </Field>
-        <Field Name="LoanRecoverd">
-          <DataField>LoanRecoverd</DataField>
-        </Field>
-        <Field Name="TotalRepay">
-          <DataField>TotalRepay</DataField>
-        </Field>
-        <Field Name="TotalRepayFormat">
-          <DataField>TotalRepayFormat</DataField>
-        </Field>
-        <Field Name="TotalLoanBal">
-          <DataField>TotalLoanBal</DataField>
-        </Field>
-        <Field Name="TotalLoanBalFormat">
-          <DataField>TotalLoanBalFormat</DataField>
-        </Field>
-        <Field Name="MinFosaBal">
-          <DataField>MinFosaBal</DataField>
-        </Field>
-        <Field Name="MinFosaBalFormat">
-          <DataField>MinFosaBalFormat</DataField>
-        </Field>
-        <Field Name="GuarLoanBal">
-          <DataField>GuarLoanBal</DataField>
-        </Field>
-        <Field Name="GuarLoanBalFormat">
-          <DataField>GuarLoanBalFormat</DataField>
-        </Field>
-        <Field Name="DepPurchaseCommExc">
-          <DataField>DepPurchaseCommExc</DataField>
-        </Field>
-        <Field Name="DepPurchaseCommExcFormat">
-          <DataField>DepPurchaseCommExcFormat</DataField>
-        </Field>
-        <Field Name="TopUpCommExc">
-          <DataField>TopUpCommExc</DataField>
-        </Field>
-        <Field Name="TopUpCommExcFormat">
-          <DataField>TopUpCommExcFormat</DataField>
-        </Field>
-        <Field Name="MaxDeposit">
-          <DataField>MaxDeposit</DataField>
-        </Field>
-        <Field Name="MaxDepositFormat">
-          <DataField>MaxDepositFormat</DataField>
-        </Field>
-        <Field Name="NetOnSalary">
-          <DataField>NetOnSalary</DataField>
-        </Field>
-        <Field Name="NetOnSalaryFormat">
-          <DataField>NetOnSalaryFormat</DataField>
-        </Field>
-        <Field Name="TExternalEffects">
-          <DataField>TExternalEffects</DataField>
-        </Field>
-        <Field Name="TExternalEffectsFormat">
-          <DataField>TExternalEffectsFormat</DataField>
-        </Field>
-        <Field Name="AthirdDisplay">
-          <DataField>AthirdDisplay</DataField>
-        </Field>
-        <Field Name="SecurityRisk">
-          <DataField>SecurityRisk</DataField>
-        </Field>
-        <Field Name="NetTakeHome">
-          <DataField>NetTakeHome</DataField>
-        </Field>
-        <Field Name="NetTakeHomeFormat">
-          <DataField>NetTakeHomeFormat</DataField>
-        </Field>
-        <Field Name="MemberDeposits">
-          <DataField>MemberDeposits</DataField>
-        </Field>
-        <Field Name="MemberDepositsFormat">
-          <DataField>MemberDepositsFormat</DataField>
-        </Field>
-        <Field Name="ShareCapital">
-          <DataField>ShareCapital</DataField>
-        </Field>
-        <Field Name="ShareCapitalFormat">
-          <DataField>ShareCapitalFormat</DataField>
-        </Field>
-        <Field Name="QualificationOnDeposits">
-          <DataField>QualificationOnDeposits</DataField>
-        </Field>
-        <Field Name="QualificationOnDepositsFormat">
-          <DataField>QualificationOnDepositsFormat</DataField>
-        </Field>
-        <Field Name="LoanDepositRation">
-          <DataField>LoanDepositRation</DataField>
-        </Field>
-        <Field Name="TopupRepayments">
-          <DataField>TopupRepayments</DataField>
-        </Field>
-        <Field Name="TopupRepaymentsFormat">
-          <DataField>TopupRepaymentsFormat</DataField>
-        </Field>
-        <Field Name="AthirdAmt">
-          <DataField>AthirdAmt</DataField>
-        </Field>
-        <Field Name="AthirdAmtFormat">
-          <DataField>AthirdAmtFormat</DataField>
-        </Field>
-        <Field Name="NetSalary">
-          <DataField>NetSalary</DataField>
-        </Field>
-        <Field Name="NetSalaryFormat">
-          <DataField>NetSalaryFormat</DataField>
-        </Field>
-        <Field Name="ExternalRecovered">
-          <DataField>ExternalRecovered</DataField>
-        </Field>
-        <Field Name="ExternalRecoveredFormat">
-          <DataField>ExternalRecoveredFormat</DataField>
-        </Field>
-        <Field Name="DiffSec">
-          <DataField>DiffSec</DataField>
-        </Field>
-        <Field Name="DiffSecFormat">
-          <DataField>DiffSecFormat</DataField>
-        </Field>
-        <Field Name="CName">
-          <DataField>CName</DataField>
-        </Field>
-        <Field Name="CompanyAddress">
-          <DataField>CompanyAddress</DataField>
-        </Field>
-        <Field Name="DepositMult">
-          <DataField>DepositMult</DataField>
-        </Field>
-        <Field Name="DepositMultFormat">
-          <DataField>DepositMultFormat</DataField>
-        </Field>
-        <Field Name="AverageInt">
-          <DataField>AverageInt</DataField>
-        </Field>
-        <Field Name="AverageIntFormat">
-          <DataField>AverageIntFormat</DataField>
-        </Field>
-        <Field Name="Inactive">
-          <DataField>Inactive</DataField>
-        </Field>
-        <Field Name="TotalAllowance">
-          <DataField>TotalAllowance</DataField>
-        </Field>
-        <Field Name="TotalAllowanceFormat">
-          <DataField>TotalAllowanceFormat</DataField>
-        </Field>
-        <Field Name="DirectorWarning">
-          <DataField>DirectorWarning</DataField>
-        </Field>
-        <Field Name="TotalBasic">
-          <DataField>TotalBasic</DataField>
-        </Field>
-        <Field Name="TotalBasicFormat">
-          <DataField>TotalBasicFormat</DataField>
-        </Field>
-        <Field Name="LoanNo">
-          <DataField>LoanNo</DataField>
-        </Field>
-        <Field Name="TDeductions">
-          <DataField>TDeductions</DataField>
-        </Field>
-        <Field Name="TDeductionsFormat">
-          <DataField>TDeductionsFormat</DataField>
-        </Field>
-        <Field Name="MemberNo">
-          <DataField>MemberNo</DataField>
-        </Field>
-        <Field Name="MemberName">
-          <DataField>MemberName</DataField>
-        </Field>
-        <Field Name="LoanProduct">
-          <DataField>LoanProduct</DataField>
-        </Field>
-        <Field Name="LoanProductName">
-          <DataField>LoanProductName</DataField>
-        </Field>
-        <Field Name="ApplicationDate">
-          <DataField>ApplicationDate</DataField>
-        </Field>
-        <Field Name="LoanRequestedAmount">
-          <DataField>LoanRequestedAmount</DataField>
-        </Field>
-        <Field Name="LoanRequestedAmountFormat">
-          <DataField>LoanRequestedAmountFormat</DataField>
-        </Field>
-        <Field Name="TotalDeductions">
-          <DataField>TotalDeductions</DataField>
-        </Field>
-        <Field Name="TotalDeductionsFormat">
-          <DataField>TotalDeductionsFormat</DataField>
-        </Field>
-        <Field Name="Installment">
-          <DataField>Installment</DataField>
-        </Field>
-        <Field Name="LoanRepayment">
-          <DataField>LoanRepayment</DataField>
-        </Field>
-        <Field Name="LoanRepaymentFormat">
-          <DataField>LoanRepaymentFormat</DataField>
-        </Field>
-        <Field Name="CapturedBy_Loans">
-          <DataField>CapturedBy_Loans</DataField>
-        </Field>
-        <Field Name="ApplicationDate_Loans">
-          <DataField>ApplicationDate_Loans</DataField>
-        </Field>
-        <Field Name="ApprovalDate_Loans">
-          <DataField>ApprovalDate_Loans</DataField>
-        </Field>
-        <Field Name="LoanAppraisedBy_Loans">
-          <DataField>LoanAppraisedBy_Loans</DataField>
-        </Field>
-        <Field Name="LoanApproveddBy">
-          <DataField>LoanApproveddBy</DataField>
-        </Field>
-        <Field Name="LoanAppraiseddBy">
-          <DataField>LoanAppraiseddBy</DataField>
-        </Field>
-        <Field Name="TotalExciseDuty">
-          <DataField>TotalExciseDuty</DataField>
-        </Field>
-        <Field Name="TotalExciseDutyFormat">
-          <DataField>TotalExciseDutyFormat</DataField>
-        </Field>
-        <Field Name="ShareCommExc">
-          <DataField>ShareCommExc</DataField>
-        </Field>
-        <Field Name="ShareCommExcFormat">
-          <DataField>ShareCommExcFormat</DataField>
-        </Field>
-        <Field Name="ShareComm">
-          <DataField>ShareComm</DataField>
-        </Field>
-        <Field Name="ShareCommFormat">
-          <DataField>ShareCommFormat</DataField>
-        </Field>
-        <Field Name="UpfrontInterest">
-          <DataField>UpfrontInterest</DataField>
-        </Field>
-        <Field Name="UpfrontInterestFormat">
-          <DataField>UpfrontInterestFormat</DataField>
-        </Field>
-        <Field Name="DisbursementDate_Loans">
-          <DataField>DisbursementDate_Loans</DataField>
-        </Field>
-        <Field Name="RecommendedAmt">
-          <DataField>RecommendedAmt</DataField>
-        </Field>
-        <Field Name="RecommendedAmtFormat">
-          <DataField>RecommendedAmtFormat</DataField>
-        </Field>
-        <Field Name="StaffNo">
-          <DataField>StaffNo</DataField>
-        </Field>
-        <Field Name="DepositPurchase">
-          <DataField>DepositPurchase</DataField>
-        </Field>
-        <Field Name="DepositPurchaseFormat">
-          <DataField>DepositPurchaseFormat</DataField>
-        </Field>
-        <Field Name="SelfGua">
-          <DataField>SelfGua</DataField>
-        </Field>
-        <Field Name="ShareBoost">
-          <DataField>ShareBoost</DataField>
-        </Field>
-        <Field Name="ShareBoostFormat">
-          <DataField>ShareBoostFormat</DataField>
-        </Field>
-        <Field Name="OtherCharges">
-          <DataField>OtherCharges</DataField>
-        </Field>
-        <Field Name="OtherChargesFormat">
-          <DataField>OtherChargesFormat</DataField>
-        </Field>
-        <Field Name="Loan_IN_Repayment">
-          <DataField>Loan_IN_Repayment</DataField>
-        </Field>
-        <Field Name="Loan_IN_RepaymentFormat">
-          <DataField>Loan_IN_RepaymentFormat</DataField>
-        </Field>
-        <Field Name="DepPurchaseComm">
-          <DataField>DepPurchaseComm</DataField>
-        </Field>
-        <Field Name="DepPurchaseCommFormat">
-          <DataField>DepPurchaseCommFormat</DataField>
-        </Field>
-        <Field Name="ShareBoostComm">
-          <DataField>ShareBoostComm</DataField>
-        </Field>
-        <Field Name="ShareBoostCommFormat">
-          <DataField>ShareBoostCommFormat</DataField>
-        </Field>
-        <Field Name="Loan_Pr_Repayment">
-          <DataField>Loan_Pr_Repayment</DataField>
-        </Field>
-        <Field Name="Loan_Pr_RepaymentFormat">
-          <DataField>Loan_Pr_RepaymentFormat</DataField>
-        </Field>
-        <Field Name="STOAmount">
-          <DataField>STOAmount</DataField>
-        </Field>
-        <Field Name="STOAmountFormat">
-          <DataField>STOAmountFormat</DataField>
-        </Field>
-        <Field Name="LoansLoanNo">
-          <DataField>LoansLoanNo</DataField>
-        </Field>
-        <Field Name="RemPeriod">
-          <DataField>RemPeriod</DataField>
-        </Field>
-        <Field Name="RemPeriodFormat">
-          <DataField>RemPeriodFormat</DataField>
-        </Field>
-        <Field Name="LoansProductType">
-          <DataField>LoansProductType</DataField>
-        </Field>
-        <Field Name="LoansProductName">
-          <DataField>LoansProductName</DataField>
-        </Field>
-        <Field Name="ApprovedAmount">
-          <DataField>ApprovedAmount</DataField>
-        </Field>
-        <Field Name="ApprovedAmountFormat">
-          <DataField>ApprovedAmountFormat</DataField>
-        </Field>
-        <Field Name="PrincipalRepayment">
-          <DataField>PrincipalRepayment</DataField>
-        </Field>
-        <Field Name="PrincipalRepaymentFormat">
-          <DataField>PrincipalRepaymentFormat</DataField>
-        </Field>
-        <Field Name="OutstandingInterest">
-          <DataField>OutstandingInterest</DataField>
-        </Field>
-        <Field Name="OutstandingInterestFormat">
-          <DataField>OutstandingInterestFormat</DataField>
-        </Field>
-        <Field Name="Allloanrepayment">
-          <DataField>Allloanrepayment</DataField>
-        </Field>
-        <Field Name="AllloanrepaymentFormat">
-          <DataField>AllloanrepaymentFormat</DataField>
-        </Field>
-        <Field Name="OutStandingBalance">
-          <DataField>OutStandingBalance</DataField>
-        </Field>
-        <Field Name="OutStandingBalanceFormat">
-          <DataField>OutStandingBalanceFormat</DataField>
-        </Field>
-        <Field Name="Defaulted">
-          <DataField>Defaulted</DataField>
-        </Field>
-        <Field Name="Repayment">
-          <DataField>Repayment</DataField>
-        </Field>
-        <Field Name="RepaymentFormat">
-          <DataField>RepaymentFormat</DataField>
-        </Field>
-        <Field Name="ReportForNavId_14">
-          <DataField>ReportForNavId_14</DataField>
-        </Field>
-        <Field Name="AccountNo">
-          <DataField>AccountNo</DataField>
-        </Field>
-        <Field Name="GuarantorName">
-          <DataField>GuarantorName</DataField>
-        </Field>
-        <Field Name="PayrollNo">
-          <DataField>PayrollNo</DataField>
-        </Field>
-        <Field Name="LoanBalance">
-          <DataField>LoanBalance</DataField>
-        </Field>
-        <Field Name="LoanBalanceFormat">
-          <DataField>LoanBalanceFormat</DataField>
-        </Field>
-        <Field Name="Deposits">
-          <DataField>Deposits</DataField>
-        </Field>
-        <Field Name="DepositsFormat">
-          <DataField>DepositsFormat</DataField>
-        </Field>
-        <Field Name="NoOfLoanGuranteed">
-          <DataField>NoOfLoanGuranteed</DataField>
-        </Field>
-        <Field Name="GuarantorType">
-          <DataField>GuarantorType</DataField>
-        </Field>
-        <Field Name="AmtGuaranteed">
-          <DataField>AmtGuaranteed</DataField>
-        </Field>
-        <Field Name="AmtGuaranteedFormat">
-          <DataField>AmtGuaranteedFormat</DataField>
-        </Field>
-        <Field Name="CollateralValue">
-          <DataField>CollateralValue</DataField>
-        </Field>
-        <Field Name="CollateralValueFormat">
-          <DataField>CollateralValueFormat</DataField>
-        </Field>
-        <Field Name="ReportForNavId_36">
-          <DataField>ReportForNavId_36</DataField>
-        </Field>
-        <Field Name="DocumentType">
-          <DataField>DocumentType</DataField>
-        </Field>
-        <Field Name="DocumentNo">
-          <DataField>DocumentNo</DataField>
-        </Field>
-        <Field Name="Description">
-          <DataField>Description</DataField>
-        </Field>
-        <Field Name="SingleMultiple">
-          <DataField>SingleMultiple</DataField>
-        </Field>
-        <Field Name="Provided">
-          <DataField>Provided</DataField>
-        </Field>
-        <Field Name="LicenseExpiryDate">
-          <DataField>LicenseExpiryDate</DataField>
-        </Field>
-        <Field Name="LoanNo_LoansTopup">
-          <DataField>LoanNo_LoansTopup</DataField>
-        </Field>
-        <Field Name="OffsetTotalz">
-          <DataField>OffsetTotalz</DataField>
-        </Field>
-        <Field Name="OffsetTotalzFormat">
-          <DataField>OffsetTotalzFormat</DataField>
-        </Field>
-        <Field Name="TotalEarning">
-          <DataField>TotalEarning</DataField>
-        </Field>
-        <Field Name="TotalEarningFormat">
-          <DataField>TotalEarningFormat</DataField>
-        </Field>
-        <Field Name="LoanTopUp_LoansTopup">
-          <DataField>LoanTopUp_LoansTopup</DataField>
-        </Field>
-        <Field Name="ClientCode_LoansTopup">
-          <DataField>ClientCode_LoansTopup</DataField>
-        </Field>
-        <Field Name="ExerciseDuty">
-          <DataField>ExerciseDuty</DataField>
-        </Field>
-        <Field Name="ExerciseDutyFormat">
-          <DataField>ExerciseDutyFormat</DataField>
-        </Field>
-        <Field Name="LoanType_LoansTopup">
-          <DataField>LoanType_LoansTopup</DataField>
-        </Field>
-        <Field Name="PrincipleTopUp_LoansTopup">
-          <DataField>PrincipleTopUp_LoansTopup</DataField>
-        </Field>
-        <Field Name="PrincipleTopUp_LoansTopupFormat">
-          <DataField>PrincipleTopUp_LoansTopupFormat</DataField>
-        </Field>
-        <Field Name="InterestTopUp_LoansTopup">
-          <DataField>InterestTopUp_LoansTopup</DataField>
-        </Field>
-        <Field Name="InterestTopUp_LoansTopupFormat">
-          <DataField>InterestTopUp_LoansTopupFormat</DataField>
-        </Field>
-        <Field Name="TotalTopUp_LoansTopup">
-          <DataField>TotalTopUp_LoansTopup</DataField>
-        </Field>
-        <Field Name="TotalTopUp_LoansTopupFormat">
-          <DataField>TotalTopUp_LoansTopupFormat</DataField>
-        </Field>
-        <Field Name="MonthlyRepayment_LoansTopup">
-          <DataField>MonthlyRepayment_LoansTopup</DataField>
-        </Field>
-        <Field Name="MonthlyRepayment_LoansTopupFormat">
-          <DataField>MonthlyRepayment_LoansTopupFormat</DataField>
-        </Field>
-        <Field Name="MonthlyContr">
-          <DataField>MonthlyContr</DataField>
-        </Field>
-        <Field Name="MonthlyContrFormat">
-          <DataField>MonthlyContrFormat</DataField>
-        </Field>
-        <Field Name="InterestPaid_LoansTopup">
-          <DataField>InterestPaid_LoansTopup</DataField>
-        </Field>
-        <Field Name="InterestPaid_LoansTopupFormat">
-          <DataField>InterestPaid_LoansTopupFormat</DataField>
-        </Field>
-        <Field Name="OutstandingBalance_LoansTopup">
-          <DataField>OutstandingBalance_LoansTopup</DataField>
-        </Field>
-        <Field Name="OutstandingBalance_LoansTopupFormat">
-          <DataField>OutstandingBalance_LoansTopupFormat</DataField>
-        </Field>
-        <Field Name="IDNO_LoansTopup">
-          <DataField>IDNO_LoansTopup</DataField>
-        </Field>
-        <Field Name="Commision">
-          <DataField>Commision</DataField>
-        </Field>
-        <Field Name="CommisionFormat">
-          <DataField>CommisionFormat</DataField>
-        </Field>
-        <Field Name="OneMonthIn">
-          <DataField>OneMonthIn</DataField>
-        </Field>
-        <Field Name="OneMonthInFormat">
-          <DataField>OneMonthInFormat</DataField>
-        </Field>
-        <Field Name="ReportForNavId_109">
-          <DataField>ReportForNavId_109</DataField>
-        </Field>
-        <Field Name="Description_OtherCommitementsClearance">
-          <DataField>Description_OtherCommitementsClearance</DataField>
-        </Field>
-        <Field Name="ExternalCharges2">
-          <DataField>ExternalCharges2</DataField>
-        </Field>
-        <Field Name="ExternalCharges2Format">
-          <DataField>ExternalCharges2Format</DataField>
-        </Field>
-        <Field Name="Payee_OtherCommitementsClearance">
-          <DataField>Payee_OtherCommitementsClearance</DataField>
-        </Field>
-        <Field Name="Amount_OtherCommitementsClearance">
-          <DataField>Amount_OtherCommitementsClearance</DataField>
-        </Field>
-        <Field Name="Amount_OtherCommitementsClearanceFormat">
-          <DataField>Amount_OtherCommitementsClearanceFormat</DataField>
-        </Field>
-        <Field Name="BatchNo_OtherCommitementsClearance">
-          <DataField>BatchNo_OtherCommitementsClearance</DataField>
-        </Field>
-        <Field Name="VendorNo_OtherCommitementsClearance">
-          <DataField>VendorNo_OtherCommitementsClearance</DataField>
-        </Field>
-        <Field Name="VendorName_OtherCommitementsClearance">
-          <DataField>VendorName_OtherCommitementsClearance</DataField>
-        </Field>
-        <Field Name="Destination_Loan_No_">
-          <DataField>Destination_Loan_No_</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -2442,831 +1736,6 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Tablix Name="Tablix1">
-            <TablixBody>
-              <TablixColumns>
-                <TablixColumn>
-                  <Width>1.25303in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1.36379in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1.2647in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1.76903in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1.12012in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1.01807in</Width>
-                </TablixColumn>
-              </TablixColumns>
-              <TablixRows>
-                <TablixRow>
-                  <Height>0.25in</Height>
-                  <TablixCells>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox55">
-                          <rd:DefaultName>Textbox52</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Loan No.</Value>
-                                  <Style>
-                                    <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <TextDecoration>Underline</TextDecoration>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <TopBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <LeftBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </LeftBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox133">
-                          <rd:DefaultName>Textbox132</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Loan Type</Value>
-                                  <Style>
-                                    <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <TextDecoration>Underline</TextDecoration>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <TopBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox135">
-                          <rd:DefaultName>Textbox135</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Principle Top Up </Value>
-                                  <Style>
-                                    <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <TextDecoration>Underline</TextDecoration>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <TopBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox139">
-                          <rd:DefaultName>Textbox139</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Interest Top Up</Value>
-                                  <Style>
-                                    <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <TextDecoration>Underline</TextDecoration>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <TopBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <RightBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </RightBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox31">
-                          <rd:DefaultName>Textbox31</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>One Month In</Value>
-                                  <Style>
-                                    <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <TextDecoration>Underline</TextDecoration>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <TopBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <RightBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </RightBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox4">
-                          <rd:DefaultName>Textbox4</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Total Top</Value>
-                                  <Style>
-                                    <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <TextDecoration>Underline</TextDecoration>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <TopBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <RightBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </RightBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                  </TablixCells>
-                </TablixRow>
-                <TablixRow>
-                  <Height>0.25in</Height>
-                  <TablixCells>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="LoanTopUp_LoansTopup">
-                          <rd:DefaultName>LoanTopUp_LoansTopup</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!LoanTopUp_LoansTopup.Value</Value>
-                                  <Style>
-                                    <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <LeftBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </LeftBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="LoanType_LoansTopup">
-                          <rd:DefaultName>LoanType_LoansTopup</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!LoanType_LoansTopup.Value</Value>
-                                  <Style>
-                                    <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="PrincipleTopUp_LoansTopup">
-                          <rd:DefaultName>PrincipleTopUp_LoansTopup</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!PrincipleTopUp_LoansTopup.Value</Value>
-                                  <Style>
-                                    <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <Format>n2</Format>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="InterestTopUp_LoansTopup">
-                          <rd:DefaultName>InterestTopUp_LoansTopup</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!InterestTopUp_LoansTopup.Value</Value>
-                                  <Style>
-                                    <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <Format>n2</Format>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <RightBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </RightBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="OneMonthIn">
-                          <rd:DefaultName>OneMonthIn</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!OneMonthIn.Value</Value>
-                                  <Style>
-                                    <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <RightBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </RightBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="TotalTopUp_LoansTopup">
-                          <rd:DefaultName>TotalTopUp_LoansTopup</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!TotalTopUp_LoansTopup.Value</Value>
-                                  <Style>
-                                    <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <RightBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </RightBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                  </TablixCells>
-                </TablixRow>
-                <TablixRow>
-                  <Height>0.23622in</Height>
-                  <TablixCells>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox50">
-                          <rd:DefaultName>Textbox50</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Total Topup</Value>
-                                  <Style>
-                                    <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Format>#,0.00;(#,0.00)</Format>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                            </BottomBorder>
-                            <LeftBorder>
-                              <Color>Black</Color>
-                            </LeftBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                        <ColSpan>2</ColSpan>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell />
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox78">
-                          <rd:DefaultName>Textbox78</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Sum(Fields!PrincipleTopUp_LoansTopup.Value)</Value>
-                                  <Style>
-                                    <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <Format>n2</Format>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox82">
-                          <rd:DefaultName>Textbox82</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Sum(Fields!InterestTopUp_LoansTopup.Value)</Value>
-                                  <Style>
-                                    <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <Format>n2</Format>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <RightBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </RightBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox46">
-                          <rd:DefaultName>Textbox46</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Sum(Fields!OneMonthIn.Value)</Value>
-                                  <Style>
-                                    <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <RightBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </RightBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox51">
-                          <rd:DefaultName>Textbox51</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Sum(Fields!TotalTopUp_LoansTopup.Value)</Value>
-                                  <Style>
-                                    <FontFamily>Times New Roman</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BottomBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <RightBorder>
-                              <Color>Black</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </RightBorder>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                  </TablixCells>
-                </TablixRow>
-              </TablixRows>
-            </TablixBody>
-            <TablixColumnHierarchy>
-              <TablixMembers>
-                <TablixMember />
-                <TablixMember />
-                <TablixMember />
-                <TablixMember />
-                <TablixMember />
-                <TablixMember />
-              </TablixMembers>
-            </TablixColumnHierarchy>
-            <TablixRowHierarchy>
-              <TablixMembers>
-                <TablixMember />
-                <TablixMember />
-                <TablixMember />
-              </TablixMembers>
-            </TablixRowHierarchy>
-            <DataSetName>DataSet_Result</DataSetName>
-            <Filters>
-              <Filter>
-                <FilterExpression>=Fields!LoanTopUp_LoansTopup.Value</FilterExpression>
-                <Operator>GreaterThan</Operator>
-                <FilterValues>
-                  <FilterValue>00000000000000000</FilterValue>
-                </FilterValues>
-              </Filter>
-            </Filters>
-            <Top>7.3237in</Top>
-            <Left>0.06007in</Left>
-            <Height>0.73622in</Height>
-            <Width>7.78874in</Width>
-            <ZIndex>5</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Tablix>
           <Textbox Name="Textbox62">
             <rd:DefaultName>Textbox37</rd:DefaultName>
             <CanGrow>true</CanGrow>
@@ -3291,7 +1760,7 @@
             <Left>0.22844in</Left>
             <Height>0.2257in</Height>
             <Width>4.04888in</Width>
-            <ZIndex>6</ZIndex>
+            <ZIndex>5</ZIndex>
             <Visibility>
               <Hidden>=Last(Fields!GuarantorMax.Value, "DataSet_Result") = False</Hidden>
             </Visibility>
@@ -3329,7 +1798,7 @@
             <Left>0.22844in</Left>
             <Height>0.2257in</Height>
             <Width>4.04888in</Width>
-            <ZIndex>7</ZIndex>
+            <ZIndex>6</ZIndex>
             <Visibility>
               <Hidden>=Last(Fields!LoanRecoverd.Value, "DataSet_Result") = False</Hidden>
             </Visibility>
@@ -3367,7 +1836,7 @@
             <Left>0.22844in</Left>
             <Height>0.2257in</Height>
             <Width>4.04888in</Width>
-            <ZIndex>8</ZIndex>
+            <ZIndex>7</ZIndex>
             <Visibility>
               <Hidden>=Last(Fields!MemberDueRetire.Value, "DataSet_Result") = False</Hidden>
             </Visibility>
@@ -3405,7 +1874,7 @@
             <Left>0.23545in</Left>
             <Height>0.2257in</Height>
             <Width>4.04888in</Width>
-            <ZIndex>9</ZIndex>
+            <ZIndex>8</ZIndex>
             <Visibility>
               <Hidden>=Last(Fields!ReapplicationPeriod.Value, "DataSet_Result") = False</Hidden>
             </Visibility>
@@ -3443,7 +1912,7 @@
             <Left>0.23169in</Left>
             <Height>0.2257in</Height>
             <Width>1.55503in</Width>
-            <ZIndex>10</ZIndex>
+            <ZIndex>9</ZIndex>
             <Visibility>
               <Hidden>=Last(Fields!SecurityRisk.Value, "DataSet_Result") = False</Hidden>
             </Visibility>
@@ -3481,7 +1950,7 @@
             <Left>0.22844in</Left>
             <Height>0.2257in</Height>
             <Width>4.04888in</Width>
-            <ZIndex>11</ZIndex>
+            <ZIndex>10</ZIndex>
             <Visibility>
               <Hidden>=Last(Fields!LoanDepositRation.Value, "DataSet_Result") = False</Hidden>
             </Visibility>
@@ -3519,7 +1988,7 @@
             <Left>0.22844in</Left>
             <Height>0.2257in</Height>
             <Width>4.04888in</Width>
-            <ZIndex>12</ZIndex>
+            <ZIndex>11</ZIndex>
             <Visibility>
               <Hidden>=Last(Fields!DirectorWarning.Value, "DataSet_Result") = False</Hidden>
             </Visibility>
@@ -3557,7 +2026,7 @@
             <Left>0.22844in</Left>
             <Height>0.2257in</Height>
             <Width>4.04888in</Width>
-            <ZIndex>13</ZIndex>
+            <ZIndex>12</ZIndex>
             <Visibility>
               <Hidden>true</Hidden>
             </Visibility>
@@ -3595,7 +2064,7 @@
             <Left>0.22844in</Left>
             <Height>0.2257in</Height>
             <Width>4.04888in</Width>
-            <ZIndex>14</ZIndex>
+            <ZIndex>13</ZIndex>
             <Visibility>
               <Hidden>=Last(Fields!Inactive.Value, "DataSet_Result") = False</Hidden>
             </Visibility>
@@ -3634,7 +2103,7 @@
             <Left>0.23545in</Left>
             <Height>0.21598in</Height>
             <Width>2.40039in</Width>
-            <ZIndex>15</ZIndex>
+            <ZIndex>14</ZIndex>
             <Visibility>
               <Hidden>=Last(Fields!SecurityRisk.Value, "DataSet_Result") = False</Hidden>
             </Visibility>
@@ -3672,7 +2141,7 @@
             <Left>0.22844in</Left>
             <Height>0.2257in</Height>
             <Width>4.04888in</Width>
-            <ZIndex>16</ZIndex>
+            <ZIndex>15</ZIndex>
             <Visibility>
               <Hidden>=Last(Fields!SalNotThroughSacco.Value, "DataSet_Result") = False</Hidden>
             </Visibility>
@@ -3709,7 +2178,7 @@
             <Left>0.07739in</Left>
             <Height>0.25in</Height>
             <Width>3.4375in</Width>
-            <ZIndex>17</ZIndex>
+            <ZIndex>16</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3744,7 +2213,7 @@
             <Left>0.06161in</Left>
             <Height>0.25in</Height>
             <Width>3.4375in</Width>
-            <ZIndex>18</ZIndex>
+            <ZIndex>17</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3781,7 +2250,7 @@
             <Left>0.07568in</Left>
             <Height>2.11676in</Height>
             <Width>7.79183in</Width>
-            <ZIndex>19</ZIndex>
+            <ZIndex>18</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -3833,7 +2302,7 @@
             <Left>0.41419in</Left>
             <Height>0.20833in</Height>
             <Width>1.16735in</Width>
-            <ZIndex>20</ZIndex>
+            <ZIndex>19</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3865,7 +2334,7 @@
             <Left>0.41419in</Left>
             <Height>0.20833in</Height>
             <Width>1.1743in</Width>
-            <ZIndex>21</ZIndex>
+            <ZIndex>20</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3899,7 +2368,7 @@
             <Left>0.41419in</Left>
             <Height>0.20833in</Height>
             <Width>1.1743in</Width>
-            <ZIndex>22</ZIndex>
+            <ZIndex>21</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3931,7 +2400,7 @@
             <Left>0.41419in</Left>
             <Height>0.20833in</Height>
             <Width>1.1743in</Width>
-            <ZIndex>23</ZIndex>
+            <ZIndex>22</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3965,7 +2434,7 @@
             <Left>1.80655in</Left>
             <Height>0.20833in</Height>
             <Width>2.81607in</Width>
-            <ZIndex>24</ZIndex>
+            <ZIndex>23</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4011,7 +2480,7 @@
             <Left>1.80655in</Left>
             <Height>0.20833in</Height>
             <Width>2.80359in</Width>
-            <ZIndex>25</ZIndex>
+            <ZIndex>24</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4046,7 +2515,7 @@
             <Left>1.80655in</Left>
             <Height>0.20833in</Height>
             <Width>2.80359in</Width>
-            <ZIndex>26</ZIndex>
+            <ZIndex>25</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4081,7 +2550,7 @@
             <Left>1.80655in</Left>
             <Height>0.20833in</Height>
             <Width>2.80359in</Width>
-            <ZIndex>27</ZIndex>
+            <ZIndex>26</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4113,7 +2582,7 @@
             <Left>0.41419in</Left>
             <Height>0.20833in</Height>
             <Width>1.16735in</Width>
-            <ZIndex>28</ZIndex>
+            <ZIndex>27</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4147,7 +2616,7 @@
             <Left>1.80655in</Left>
             <Height>0.20833in</Height>
             <Width>2.80359in</Width>
-            <ZIndex>29</ZIndex>
+            <ZIndex>28</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4179,7 +2648,7 @@
             <Left>4.74416in</Left>
             <Height>0.20833in</Height>
             <Width>1.05903in</Width>
-            <ZIndex>30</ZIndex>
+            <ZIndex>29</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4214,7 +2683,7 @@
             <Left>5.96673in</Left>
             <Height>0.20833in</Height>
             <Width>1.43799in</Width>
-            <ZIndex>31</ZIndex>
+            <ZIndex>30</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4246,7 +2715,7 @@
             <Left>4.74416in</Left>
             <Height>0.20833in</Height>
             <Width>1.05903in</Width>
-            <ZIndex>32</ZIndex>
+            <ZIndex>31</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4281,7 +2750,7 @@
             <Left>5.96673in</Left>
             <Height>0.20833in</Height>
             <Width>1.43793in</Width>
-            <ZIndex>33</ZIndex>
+            <ZIndex>32</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4313,7 +2782,7 @@
             <Left>4.74416in</Left>
             <Height>0.20833in</Height>
             <Width>1.05903in</Width>
-            <ZIndex>34</ZIndex>
+            <ZIndex>33</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4348,7 +2817,7 @@
             <Left>5.96673in</Left>
             <Height>0.20833in</Height>
             <Width>1.43793in</Width>
-            <ZIndex>35</ZIndex>
+            <ZIndex>34</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4380,7 +2849,7 @@
             <Left>4.74416in</Left>
             <Height>0.20833in</Height>
             <Width>1.05903in</Width>
-            <ZIndex>36</ZIndex>
+            <ZIndex>35</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4415,7 +2884,7 @@
             <Left>5.96673in</Left>
             <Height>0.20833in</Height>
             <Width>1.43793in</Width>
-            <ZIndex>37</ZIndex>
+            <ZIndex>36</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4448,7 +2917,7 @@
             <Left>5.47702in</Left>
             <Height>0.2257in</Height>
             <Width>1.25062in</Width>
-            <ZIndex>38</ZIndex>
+            <ZIndex>37</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4481,7 +2950,7 @@
             <Left>5.47564in</Left>
             <Height>0.2257in</Height>
             <Width>1.25062in</Width>
-            <ZIndex>39</ZIndex>
+            <ZIndex>38</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4514,7 +2983,7 @@
             <Left>5.47702in</Left>
             <Height>0.2257in</Height>
             <Width>1.25062in</Width>
-            <ZIndex>40</ZIndex>
+            <ZIndex>39</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4547,7 +3016,7 @@
             <Left>0.27214in</Left>
             <Height>0.23158in</Height>
             <Width>1.39362in</Width>
-            <ZIndex>41</ZIndex>
+            <ZIndex>40</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4580,7 +3049,7 @@
             <Left>1.68766in</Left>
             <Height>0.22223in</Height>
             <Width>1.04983in</Width>
-            <ZIndex>42</ZIndex>
+            <ZIndex>41</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4613,7 +3082,7 @@
             <Left>0.27214in</Left>
             <Height>0.21394in</Height>
             <Width>1.39419in</Width>
-            <ZIndex>43</ZIndex>
+            <ZIndex>42</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4647,7 +3116,7 @@
             <Left>1.68766in</Left>
             <Height>0.22223in</Height>
             <Width>1.04983in</Width>
-            <ZIndex>44</ZIndex>
+            <ZIndex>43</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4686,7 +3155,7 @@
             <Left>0.27901in</Left>
             <Height>0.25in</Height>
             <Width>2.46535in</Width>
-            <ZIndex>45</ZIndex>
+            <ZIndex>44</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4719,7 +3188,7 @@
             <Left>3.01309in</Left>
             <Height>0.19149in</Height>
             <Width>1.19112in</Width>
-            <ZIndex>46</ZIndex>
+            <ZIndex>45</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4752,7 +3221,7 @@
             <Left>4.28223in</Left>
             <Height>0.20191in</Height>
             <Width>0.98216in</Width>
-            <ZIndex>47</ZIndex>
+            <ZIndex>46</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4785,7 +3254,7 @@
             <Left>3.01309in</Left>
             <Height>0.20139in</Height>
             <Width>1.19112in</Width>
-            <ZIndex>48</ZIndex>
+            <ZIndex>47</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4818,7 +3287,7 @@
             <Left>4.28223in</Left>
             <Height>0.20191in</Height>
             <Width>0.98216in</Width>
-            <ZIndex>49</ZIndex>
+            <ZIndex>48</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4851,7 +3320,7 @@
             <Left>4.74416in</Left>
             <Height>0.20191in</Height>
             <Width>0.97569in</Width>
-            <ZIndex>50</ZIndex>
+            <ZIndex>49</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4891,7 +3360,7 @@
             <Left>5.96673in</Left>
             <Height>0.20191in</Height>
             <Width>1.43799in</Width>
-            <ZIndex>51</ZIndex>
+            <ZIndex>50</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4924,7 +3393,7 @@
             <Left>0.71013cm</Left>
             <Height>0.6cm</Height>
             <Width>6.26055cm</Width>
-            <ZIndex>52</ZIndex>
+            <ZIndex>51</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4956,7 +3425,7 @@
             <Left>7.65325cm</Left>
             <Height>0.57354cm</Height>
             <Width>3.02544cm</Width>
-            <ZIndex>53</ZIndex>
+            <ZIndex>52</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -4989,7 +3458,7 @@
             <Left>10.87686cm</Left>
             <Height>0.51285cm</Height>
             <Width>2.49469cm</Width>
-            <ZIndex>54</ZIndex>
+            <ZIndex>53</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5022,7 +3491,7 @@
             <Left>5.47702in</Left>
             <Height>0.2257in</Height>
             <Width>1.25062in</Width>
-            <ZIndex>55</ZIndex>
+            <ZIndex>54</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5055,7 +3524,7 @@
             <Left>0.27901in</Left>
             <Height>0.21983in</Height>
             <Width>1.39419in</Width>
-            <ZIndex>56</ZIndex>
+            <ZIndex>55</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5089,7 +3558,7 @@
             <Left>1.69453in</Left>
             <Height>0.22223in</Height>
             <Width>1.04983in</Width>
-            <ZIndex>57</ZIndex>
+            <ZIndex>56</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5122,7 +3591,7 @@
             <Left>0.27958in</Left>
             <Height>0.21983in</Height>
             <Width>1.39362in</Width>
-            <ZIndex>58</ZIndex>
+            <ZIndex>57</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5156,7 +3625,7 @@
             <Left>1.71423in</Left>
             <Height>0.22223in</Height>
             <Width>1.03757in</Width>
-            <ZIndex>59</ZIndex>
+            <ZIndex>58</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5189,7 +3658,7 @@
             <Left>0.27958in</Left>
             <Height>0.21983in</Height>
             <Width>1.39419in</Width>
-            <ZIndex>60</ZIndex>
+            <ZIndex>59</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5223,7 +3692,7 @@
             <Left>1.71423in</Left>
             <Height>0.22223in</Height>
             <Width>1.03757in</Width>
-            <ZIndex>61</ZIndex>
+            <ZIndex>60</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5256,7 +3725,7 @@
             <Left>0.27958in</Left>
             <Height>0.21983in</Height>
             <Width>1.39419in</Width>
-            <ZIndex>62</ZIndex>
+            <ZIndex>61</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5290,7 +3759,7 @@
             <Left>1.71423in</Left>
             <Height>0.22223in</Height>
             <Width>1.03757in</Width>
-            <ZIndex>63</ZIndex>
+            <ZIndex>62</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5323,7 +3792,7 @@
             <Left>0.27958in</Left>
             <Height>0.21983in</Height>
             <Width>1.39419in</Width>
-            <ZIndex>64</ZIndex>
+            <ZIndex>63</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5357,7 +3826,7 @@
             <Left>1.71423in</Left>
             <Height>0.22223in</Height>
             <Width>1.03757in</Width>
-            <ZIndex>65</ZIndex>
+            <ZIndex>64</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5390,7 +3859,7 @@
             <Left>0.27214in</Left>
             <Height>0.21394in</Height>
             <Width>1.39419in</Width>
-            <ZIndex>66</ZIndex>
+            <ZIndex>65</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5424,7 +3893,7 @@
             <Left>1.68766in</Left>
             <Height>0.22223in</Height>
             <Width>1.04983in</Width>
-            <ZIndex>67</ZIndex>
+            <ZIndex>66</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5457,7 +3926,7 @@
             <Left>3.01309in</Left>
             <Height>0.19149in</Height>
             <Width>1.19112in</Width>
-            <ZIndex>68</ZIndex>
+            <ZIndex>67</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5490,7 +3959,7 @@
             <Left>4.29081in</Left>
             <Height>0.20191in</Height>
             <Width>0.98255in</Width>
-            <ZIndex>69</ZIndex>
+            <ZIndex>68</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5522,7 +3991,7 @@
             <Left>4.74416in</Left>
             <Height>0.20833in</Height>
             <Width>1.05903in</Width>
-            <ZIndex>70</ZIndex>
+            <ZIndex>69</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5557,7 +4026,7 @@
             <Left>5.96673in</Left>
             <Height>0.20833in</Height>
             <Width>1.43793in</Width>
-            <ZIndex>71</ZIndex>
+            <ZIndex>70</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5590,7 +4059,7 @@
             <Left>3.01309in</Left>
             <Height>0.19149in</Height>
             <Width>1.19112in</Width>
-            <ZIndex>72</ZIndex>
+            <ZIndex>71</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5623,7 +4092,7 @@
             <Left>4.28262in</Left>
             <Height>0.20191in</Height>
             <Width>0.98216in</Width>
-            <ZIndex>73</ZIndex>
+            <ZIndex>72</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5656,7 +4125,7 @@
             <Left>7.65325cm</Left>
             <Height>0.6cm</Height>
             <Width>5.71929cm</Width>
-            <ZIndex>74</ZIndex>
+            <ZIndex>73</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5689,7 +4158,7 @@
             <Left>13.91162cm</Left>
             <Height>0.6cm</Height>
             <Width>6.02784cm</Width>
-            <ZIndex>75</ZIndex>
+            <ZIndex>74</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5722,7 +4191,7 @@
             <Left>3.01309in</Left>
             <Height>0.19149in</Height>
             <Width>2.2513in</Width>
-            <ZIndex>76</ZIndex>
+            <ZIndex>75</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5759,7 +4228,7 @@
             <Left>0.07739in</Left>
             <Height>4.62955in</Height>
             <Width>7.79183in</Width>
-            <ZIndex>77</ZIndex>
+            <ZIndex>76</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -5813,7 +4282,7 @@
             <Left>1.38306in</Left>
             <Height>0.2257in</Height>
             <Width>1.86631in</Width>
-            <ZIndex>78</ZIndex>
+            <ZIndex>77</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5847,7 +4316,7 @@
             <Left>0.26197in</Left>
             <Height>0.2257in</Height>
             <Width>1.0611in</Width>
-            <ZIndex>79</ZIndex>
+            <ZIndex>78</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5881,7 +4350,7 @@
             <Left>0.26197in</Left>
             <Height>0.2257in</Height>
             <Width>1.07627in</Width>
-            <ZIndex>80</ZIndex>
+            <ZIndex>79</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5915,7 +4384,7 @@
             <Left>1.38306in</Left>
             <Height>0.2257in</Height>
             <Width>1.86631in</Width>
-            <ZIndex>81</ZIndex>
+            <ZIndex>80</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5949,7 +4418,7 @@
             <Left>3.30492in</Left>
             <Height>0.2257in</Height>
             <Width>1.86631in</Width>
-            <ZIndex>82</ZIndex>
+            <ZIndex>81</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -5983,7 +4452,7 @@
             <Left>3.30492in</Left>
             <Height>0.2257in</Height>
             <Width>1.86631in</Width>
-            <ZIndex>83</ZIndex>
+            <ZIndex>82</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6017,7 +4486,7 @@
             <Left>5.21637in</Left>
             <Height>0.2257in</Height>
             <Width>2.06327in</Width>
-            <ZIndex>84</ZIndex>
+            <ZIndex>83</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6051,7 +4520,7 @@
             <Left>5.22679in</Left>
             <Height>0.2257in</Height>
             <Width>2.06327in</Width>
-            <ZIndex>85</ZIndex>
+            <ZIndex>84</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6088,7 +4557,7 @@
             <Left>0.04132in</Left>
             <Height>1.3805in</Height>
             <Width>7.76783in</Width>
-            <ZIndex>86</ZIndex>
+            <ZIndex>85</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -6142,7 +4611,7 @@
             <Left>0.26197in</Left>
             <Height>0.2257in</Height>
             <Width>2.97036in</Width>
-            <ZIndex>87</ZIndex>
+            <ZIndex>86</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6176,7 +4645,7 @@
             <Left>3.28946in</Left>
             <Height>0.2257in</Height>
             <Width>1.86631in</Width>
-            <ZIndex>88</ZIndex>
+            <ZIndex>87</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6210,7 +4679,7 @@
             <Left>5.21637in</Left>
             <Height>0.2257in</Height>
             <Width>2.06327in</Width>
-            <ZIndex>89</ZIndex>
+            <ZIndex>88</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6245,7 +4714,7 @@
             <Left>0.41419in</Left>
             <Height>0.20833in</Height>
             <Width>1.1743in</Width>
-            <ZIndex>90</ZIndex>
+            <ZIndex>89</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6281,7 +4750,7 @@
             <Left>1.80655in</Left>
             <Height>0.20833in</Height>
             <Width>2.80094in</Width>
-            <ZIndex>91</ZIndex>
+            <ZIndex>90</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6314,7 +4783,7 @@
             <Left>0.69123cm</Left>
             <Height>0.6cm</Height>
             <Width>6.262cm</Width>
-            <ZIndex>92</ZIndex>
+            <ZIndex>91</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6347,7 +4816,7 @@
             <Left>0.27958in</Left>
             <Height>0.21983in</Height>
             <Width>1.39419in</Width>
-            <ZIndex>93</ZIndex>
+            <ZIndex>92</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6381,7 +4850,7 @@
             <Left>1.71423in</Left>
             <Height>0.22223in</Height>
             <Width>1.03757in</Width>
-            <ZIndex>94</ZIndex>
+            <ZIndex>93</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6414,7 +4883,7 @@
             <Left>3.01309in</Left>
             <Height>0.19149in</Height>
             <Width>1.19112in</Width>
-            <ZIndex>95</ZIndex>
+            <ZIndex>94</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6447,7 +4916,7 @@
             <Left>4.28223in</Left>
             <Height>0.20191in</Height>
             <Width>0.98216in</Width>
-            <ZIndex>96</ZIndex>
+            <ZIndex>95</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6480,7 +4949,7 @@
             <Left>3.01309in</Left>
             <Height>0.19149in</Height>
             <Width>1.19112in</Width>
-            <ZIndex>97</ZIndex>
+            <ZIndex>96</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6513,7 +4982,7 @@
             <Left>4.2912in</Left>
             <Height>0.20191in</Height>
             <Width>0.98216in</Width>
-            <ZIndex>98</ZIndex>
+            <ZIndex>97</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6545,7 +5014,7 @@
             <Left>7.65325cm</Left>
             <Height>0.6cm</Height>
             <Width>3.00569cm</Width>
-            <ZIndex>99</ZIndex>
+            <ZIndex>98</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6578,7 +5047,7 @@
             <Left>10.87782cm</Left>
             <Height>0.6cm</Height>
             <Width>2.53627cm</Width>
-            <ZIndex>100</ZIndex>
+            <ZIndex>99</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6611,7 +5080,7 @@
             <Left>0.27958in</Left>
             <Height>0.21983in</Height>
             <Width>1.39419in</Width>
-            <ZIndex>101</ZIndex>
+            <ZIndex>100</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6645,7 +5114,7 @@
             <Left>1.71423in</Left>
             <Height>0.22223in</Height>
             <Width>1.03757in</Width>
-            <ZIndex>102</ZIndex>
+            <ZIndex>101</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6678,7 +5147,7 @@
             <Left>0.70868cm</Left>
             <Height>0.6cm</Height>
             <Width>2.5cm</Width>
-            <ZIndex>103</ZIndex>
+            <ZIndex>102</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6710,7 +5179,7 @@
             <Left>7.65325cm</Left>
             <Height>0.57354cm</Height>
             <Width>3.02544cm</Width>
-            <ZIndex>104</ZIndex>
+            <ZIndex>103</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6743,7 +5212,7 @@
             <Left>10.87686cm</Left>
             <Height>0.51285cm</Height>
             <Width>2.49469cm</Width>
-            <ZIndex>105</ZIndex>
+            <ZIndex>104</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6776,7 +5245,7 @@
             <Left>3.01309in</Left>
             <Height>0.19149in</Height>
             <Width>1.19112in</Width>
-            <ZIndex>106</ZIndex>
+            <ZIndex>105</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6809,7 +5278,7 @@
             <Left>4.28262in</Left>
             <Height>0.20191in</Height>
             <Width>0.98216in</Width>
-            <ZIndex>107</ZIndex>
+            <ZIndex>106</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6842,7 +5311,7 @@
             <Left>3.01309in</Left>
             <Height>0.19149in</Height>
             <Width>1.19112in</Width>
-            <ZIndex>108</ZIndex>
+            <ZIndex>107</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6875,7 +5344,7 @@
             <Left>4.29898in</Left>
             <Height>0.20191in</Height>
             <Width>0.98216in</Width>
-            <ZIndex>109</ZIndex>
+            <ZIndex>108</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6907,7 +5376,7 @@
             <Left>7.65325cm</Left>
             <Height>0.57354cm</Height>
             <Width>3.02544cm</Width>
-            <ZIndex>110</ZIndex>
+            <ZIndex>109</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6940,7 +5409,7 @@
             <Left>10.87686cm</Left>
             <Height>0.51285cm</Height>
             <Width>2.49469cm</Width>
-            <ZIndex>111</ZIndex>
+            <ZIndex>110</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -6973,7 +5442,7 @@
             <Left>6.83074in</Left>
             <Height>0.2257in</Height>
             <Width>0.98216in</Width>
-            <ZIndex>112</ZIndex>
+            <ZIndex>111</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -7006,7 +5475,7 @@
             <Left>17.35008cm</Left>
             <Height>0.57328cm</Height>
             <Width>2.49469cm</Width>
-            <ZIndex>113</ZIndex>
+            <ZIndex>112</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -7040,7 +5509,7 @@
             <Left>6.83074in</Left>
             <Height>0.2257in</Height>
             <Width>0.98216in</Width>
-            <ZIndex>114</ZIndex>
+            <ZIndex>113</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -7074,7 +5543,7 @@
             <Left>17.35008cm</Left>
             <Height>0.57328cm</Height>
             <Width>2.49469cm</Width>
-            <ZIndex>115</ZIndex>
+            <ZIndex>114</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -7108,7 +5577,7 @@
             <Left>17.35008cm</Left>
             <Height>0.57328cm</Height>
             <Width>2.49469cm</Width>
-            <ZIndex>116</ZIndex>
+            <ZIndex>115</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -7119,6 +5588,747 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Tablix Name="Tablix4">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>3.29854cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.29854cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.29854cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.29854cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.29854cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>3.29854cm</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox98">
+                          <rd:DefaultName>Textbox52</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Loan No.</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <TextDecoration>Underline</TextDecoration>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox137">
+                          <rd:DefaultName>Textbox132</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Loan Type</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <TextDecoration>Underline</TextDecoration>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox141">
+                          <rd:DefaultName>Textbox135</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Principle Top Up </Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <TextDecoration>Underline</TextDecoration>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox142">
+                          <rd:DefaultName>Textbox139</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Accrued Interest</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <TextDecoration>Underline</TextDecoration>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox40">
+                          <rd:DefaultName>Textbox31</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>One Month In</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <TextDecoration>Underline</TextDecoration>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox84">
+                          <rd:DefaultName>Textbox4</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Total Top</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <TextDecoration>Underline</TextDecoration>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox83">
+                          <rd:DefaultName>Textbox83</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!LoanTopUp_LoansTopup.Value</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox85">
+                          <rd:DefaultName>Textbox85</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!LoanType_LoansTopup.Value</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox96">
+                          <rd:DefaultName>Textbox96</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!PrincipleTopUp_LoansTopup.Value</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <Format>n2</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox111">
+                          <rd:DefaultName>Textbox111</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!InterestTopUp_LoansTopup.Value</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <Format>n2</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox120">
+                          <rd:DefaultName>Textbox120</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!OneMonthIn.Value</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox125">
+                          <rd:DefaultName>Textbox125</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!TotalTopUp_LoansTopup.Value</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.6cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox101">
+                          <rd:DefaultName>Textbox50</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Total Amounts</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>#,0.00;(#,0.00)</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                            </LeftBorder>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>2</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox100">
+                          <rd:DefaultName>Textbox100</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Sum(Fields!PrincipleTopUp_LoansTopup.Value)</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <Format>n2</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox112">
+                          <rd:DefaultName>Textbox112</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Sum(Fields!InterestTopUp_LoansTopup.Value)</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                    <Format>n2</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox122">
+                          <rd:DefaultName>Textbox122</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Sum(Fields!OneMonthIn.Value)</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox127">
+                          <rd:DefaultName>Textbox127</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Sum(Fields!TotalTopUp_LoansTopup.Value)</Value>
+                                  <Style>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="Details" />
+                </TablixMember>
+                <TablixMember>
+                  <KeepWithGroup>Before</KeepWithGroup>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <Top>18.59336cm</Top>
+            <Left>0.19657cm</Left>
+            <Height>1.8cm</Height>
+            <Width>19.79125cm</Width>
+            <ZIndex>116</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
         </ReportItems>
         <Height>38.61409cm</Height>
         <Style>
@@ -7376,12 +6586,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -7419,4 +6623,710 @@ End Function
 </Code>
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CompanyNam">
+          <DataField>CompanyNam</DataField>
+        </Field>
+        <Field Name="CPicture">
+          <DataField>CPicture</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="TotalProcessingAmt">
+          <DataField>TotalProcessingAmt</DataField>
+        </Field>
+        <Field Name="TotalProcessingAmtFormat">
+          <DataField>TotalProcessingAmtFormat</DataField>
+        </Field>
+        <Field Name="LoanFormFees">
+          <DataField>LoanFormFees</DataField>
+        </Field>
+        <Field Name="LoanFormFeesFormat">
+          <DataField>LoanFormFeesFormat</DataField>
+        </Field>
+        <Field Name="LoanFormFeesExc">
+          <DataField>LoanFormFeesExc</DataField>
+        </Field>
+        <Field Name="LoanFormFeesExcFormat">
+          <DataField>LoanFormFeesExcFormat</DataField>
+        </Field>
+        <Field Name="InsuranceFee">
+          <DataField>InsuranceFee</DataField>
+        </Field>
+        <Field Name="InsuranceFeeFormat">
+          <DataField>InsuranceFeeFormat</DataField>
+        </Field>
+        <Field Name="InsuranceFeeExc">
+          <DataField>InsuranceFeeExc</DataField>
+        </Field>
+        <Field Name="InsuranceFeeExcFormat">
+          <DataField>InsuranceFeeExcFormat</DataField>
+        </Field>
+        <Field Name="OneMonthInterest">
+          <DataField>OneMonthInterest</DataField>
+        </Field>
+        <Field Name="OneMonthInterestFormat">
+          <DataField>OneMonthInterestFormat</DataField>
+        </Field>
+        <Field Name="OnethirdGross">
+          <DataField>OnethirdGross</DataField>
+        </Field>
+        <Field Name="OnethirdGrossFormat">
+          <DataField>OnethirdGrossFormat</DataField>
+        </Field>
+        <Field Name="TwoThirdGross">
+          <DataField>TwoThirdGross</DataField>
+        </Field>
+        <Field Name="TwoThirdGrossFormat">
+          <DataField>TwoThirdGrossFormat</DataField>
+        </Field>
+        <Field Name="TotalGuaranteed">
+          <DataField>TotalGuaranteed</DataField>
+        </Field>
+        <Field Name="TotalGuaranteedFormat">
+          <DataField>TotalGuaranteedFormat</DataField>
+        </Field>
+        <Field Name="GuarantorMax">
+          <DataField>GuarantorMax</DataField>
+        </Field>
+        <Field Name="SecurityTotal">
+          <DataField>SecurityTotal</DataField>
+        </Field>
+        <Field Name="SecurityTotalFormat">
+          <DataField>SecurityTotalFormat</DataField>
+        </Field>
+        <Field Name="Dim1">
+          <DataField>Dim1</DataField>
+        </Field>
+        <Field Name="TrEarni">
+          <DataField>TrEarni</DataField>
+        </Field>
+        <Field Name="TrEarniFormat">
+          <DataField>TrEarniFormat</DataField>
+        </Field>
+        <Field Name="THouseAllow">
+          <DataField>THouseAllow</DataField>
+        </Field>
+        <Field Name="THouseAllowFormat">
+          <DataField>THouseAllowFormat</DataField>
+        </Field>
+        <Field Name="DisposableInc">
+          <DataField>DisposableInc</DataField>
+        </Field>
+        <Field Name="DisposableIncFormat">
+          <DataField>DisposableIncFormat</DataField>
+        </Field>
+        <Field Name="GrossPay">
+          <DataField>GrossPay</DataField>
+        </Field>
+        <Field Name="GrossPayFormat">
+          <DataField>GrossPayFormat</DataField>
+        </Field>
+        <Field Name="Dim2">
+          <DataField>Dim2</DataField>
+        </Field>
+        <Field Name="AdjNet">
+          <DataField>AdjNet</DataField>
+        </Field>
+        <Field Name="AdjNetFormat">
+          <DataField>AdjNetFormat</DataField>
+        </Field>
+        <Field Name="SalNotThroughSacco">
+          <DataField>SalNotThroughSacco</DataField>
+        </Field>
+        <Field Name="TwoThird">
+          <DataField>TwoThird</DataField>
+        </Field>
+        <Field Name="Mult">
+          <DataField>Mult</DataField>
+        </Field>
+        <Field Name="MultFormat">
+          <DataField>MultFormat</DataField>
+        </Field>
+        <Field Name="TotaLFosaIn">
+          <DataField>TotaLFosaIn</DataField>
+        </Field>
+        <Field Name="TotaLFosaInFormat">
+          <DataField>TotaLFosaInFormat</DataField>
+        </Field>
+        <Field Name="MemberDueRetire">
+          <DataField>MemberDueRetire</DataField>
+        </Field>
+        <Field Name="MonthsToRetire">
+          <DataField>MonthsToRetire</DataField>
+        </Field>
+        <Field Name="TopUpComms">
+          <DataField>TopUpComms</DataField>
+        </Field>
+        <Field Name="TopUpCommsFormat">
+          <DataField>TopUpCommsFormat</DataField>
+        </Field>
+        <Field Name="NofGuar">
+          <DataField>NofGuar</DataField>
+        </Field>
+        <Field Name="OffsetTotal">
+          <DataField>OffsetTotal</DataField>
+        </Field>
+        <Field Name="OffsetTotalFormat">
+          <DataField>OffsetTotalFormat</DataField>
+        </Field>
+        <Field Name="ReapplicationPeriod">
+          <DataField>ReapplicationPeriod</DataField>
+        </Field>
+        <Field Name="LoanRecoverd">
+          <DataField>LoanRecoverd</DataField>
+        </Field>
+        <Field Name="TotalRepay">
+          <DataField>TotalRepay</DataField>
+        </Field>
+        <Field Name="TotalRepayFormat">
+          <DataField>TotalRepayFormat</DataField>
+        </Field>
+        <Field Name="TotalLoanBal">
+          <DataField>TotalLoanBal</DataField>
+        </Field>
+        <Field Name="TotalLoanBalFormat">
+          <DataField>TotalLoanBalFormat</DataField>
+        </Field>
+        <Field Name="MinFosaBal">
+          <DataField>MinFosaBal</DataField>
+        </Field>
+        <Field Name="MinFosaBalFormat">
+          <DataField>MinFosaBalFormat</DataField>
+        </Field>
+        <Field Name="GuarLoanBal">
+          <DataField>GuarLoanBal</DataField>
+        </Field>
+        <Field Name="GuarLoanBalFormat">
+          <DataField>GuarLoanBalFormat</DataField>
+        </Field>
+        <Field Name="DepPurchaseCommExc">
+          <DataField>DepPurchaseCommExc</DataField>
+        </Field>
+        <Field Name="DepPurchaseCommExcFormat">
+          <DataField>DepPurchaseCommExcFormat</DataField>
+        </Field>
+        <Field Name="TopUpCommExc">
+          <DataField>TopUpCommExc</DataField>
+        </Field>
+        <Field Name="TopUpCommExcFormat">
+          <DataField>TopUpCommExcFormat</DataField>
+        </Field>
+        <Field Name="MaxDeposit">
+          <DataField>MaxDeposit</DataField>
+        </Field>
+        <Field Name="MaxDepositFormat">
+          <DataField>MaxDepositFormat</DataField>
+        </Field>
+        <Field Name="NetOnSalary">
+          <DataField>NetOnSalary</DataField>
+        </Field>
+        <Field Name="NetOnSalaryFormat">
+          <DataField>NetOnSalaryFormat</DataField>
+        </Field>
+        <Field Name="TExternalEffects">
+          <DataField>TExternalEffects</DataField>
+        </Field>
+        <Field Name="TExternalEffectsFormat">
+          <DataField>TExternalEffectsFormat</DataField>
+        </Field>
+        <Field Name="AthirdDisplay">
+          <DataField>AthirdDisplay</DataField>
+        </Field>
+        <Field Name="SecurityRisk">
+          <DataField>SecurityRisk</DataField>
+        </Field>
+        <Field Name="NetTakeHome">
+          <DataField>NetTakeHome</DataField>
+        </Field>
+        <Field Name="NetTakeHomeFormat">
+          <DataField>NetTakeHomeFormat</DataField>
+        </Field>
+        <Field Name="MemberDeposits">
+          <DataField>MemberDeposits</DataField>
+        </Field>
+        <Field Name="MemberDepositsFormat">
+          <DataField>MemberDepositsFormat</DataField>
+        </Field>
+        <Field Name="ShareCapital">
+          <DataField>ShareCapital</DataField>
+        </Field>
+        <Field Name="ShareCapitalFormat">
+          <DataField>ShareCapitalFormat</DataField>
+        </Field>
+        <Field Name="QualificationOnDeposits">
+          <DataField>QualificationOnDeposits</DataField>
+        </Field>
+        <Field Name="QualificationOnDepositsFormat">
+          <DataField>QualificationOnDepositsFormat</DataField>
+        </Field>
+        <Field Name="LoanDepositRation">
+          <DataField>LoanDepositRation</DataField>
+        </Field>
+        <Field Name="TopupRepayments">
+          <DataField>TopupRepayments</DataField>
+        </Field>
+        <Field Name="TopupRepaymentsFormat">
+          <DataField>TopupRepaymentsFormat</DataField>
+        </Field>
+        <Field Name="AthirdAmt">
+          <DataField>AthirdAmt</DataField>
+        </Field>
+        <Field Name="AthirdAmtFormat">
+          <DataField>AthirdAmtFormat</DataField>
+        </Field>
+        <Field Name="NetSalary">
+          <DataField>NetSalary</DataField>
+        </Field>
+        <Field Name="NetSalaryFormat">
+          <DataField>NetSalaryFormat</DataField>
+        </Field>
+        <Field Name="ExternalRecovered">
+          <DataField>ExternalRecovered</DataField>
+        </Field>
+        <Field Name="ExternalRecoveredFormat">
+          <DataField>ExternalRecoveredFormat</DataField>
+        </Field>
+        <Field Name="DiffSec">
+          <DataField>DiffSec</DataField>
+        </Field>
+        <Field Name="DiffSecFormat">
+          <DataField>DiffSecFormat</DataField>
+        </Field>
+        <Field Name="CName">
+          <DataField>CName</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="DepositMult">
+          <DataField>DepositMult</DataField>
+        </Field>
+        <Field Name="DepositMultFormat">
+          <DataField>DepositMultFormat</DataField>
+        </Field>
+        <Field Name="AverageInt">
+          <DataField>AverageInt</DataField>
+        </Field>
+        <Field Name="AverageIntFormat">
+          <DataField>AverageIntFormat</DataField>
+        </Field>
+        <Field Name="Inactive">
+          <DataField>Inactive</DataField>
+        </Field>
+        <Field Name="TotalAllowance">
+          <DataField>TotalAllowance</DataField>
+        </Field>
+        <Field Name="TotalAllowanceFormat">
+          <DataField>TotalAllowanceFormat</DataField>
+        </Field>
+        <Field Name="DirectorWarning">
+          <DataField>DirectorWarning</DataField>
+        </Field>
+        <Field Name="TotalBasic">
+          <DataField>TotalBasic</DataField>
+        </Field>
+        <Field Name="TotalBasicFormat">
+          <DataField>TotalBasicFormat</DataField>
+        </Field>
+        <Field Name="LoanNo">
+          <DataField>LoanNo</DataField>
+        </Field>
+        <Field Name="TDeductions">
+          <DataField>TDeductions</DataField>
+        </Field>
+        <Field Name="TDeductionsFormat">
+          <DataField>TDeductionsFormat</DataField>
+        </Field>
+        <Field Name="MemberNo">
+          <DataField>MemberNo</DataField>
+        </Field>
+        <Field Name="MemberName">
+          <DataField>MemberName</DataField>
+        </Field>
+        <Field Name="LoanProduct">
+          <DataField>LoanProduct</DataField>
+        </Field>
+        <Field Name="LoanProductName">
+          <DataField>LoanProductName</DataField>
+        </Field>
+        <Field Name="ApplicationDate">
+          <DataField>ApplicationDate</DataField>
+        </Field>
+        <Field Name="LoanRequestedAmount">
+          <DataField>LoanRequestedAmount</DataField>
+        </Field>
+        <Field Name="LoanRequestedAmountFormat">
+          <DataField>LoanRequestedAmountFormat</DataField>
+        </Field>
+        <Field Name="TotalDeductions">
+          <DataField>TotalDeductions</DataField>
+        </Field>
+        <Field Name="TotalDeductionsFormat">
+          <DataField>TotalDeductionsFormat</DataField>
+        </Field>
+        <Field Name="Installment">
+          <DataField>Installment</DataField>
+        </Field>
+        <Field Name="LoanRepayment">
+          <DataField>LoanRepayment</DataField>
+        </Field>
+        <Field Name="LoanRepaymentFormat">
+          <DataField>LoanRepaymentFormat</DataField>
+        </Field>
+        <Field Name="CapturedBy_Loans">
+          <DataField>CapturedBy_Loans</DataField>
+        </Field>
+        <Field Name="ApplicationDate_Loans">
+          <DataField>ApplicationDate_Loans</DataField>
+        </Field>
+        <Field Name="ApprovalDate_Loans">
+          <DataField>ApprovalDate_Loans</DataField>
+        </Field>
+        <Field Name="LoanAppraisedBy_Loans">
+          <DataField>LoanAppraisedBy_Loans</DataField>
+        </Field>
+        <Field Name="LoanApproveddBy">
+          <DataField>LoanApproveddBy</DataField>
+        </Field>
+        <Field Name="LoanAppraiseddBy">
+          <DataField>LoanAppraiseddBy</DataField>
+        </Field>
+        <Field Name="TotalExciseDuty">
+          <DataField>TotalExciseDuty</DataField>
+        </Field>
+        <Field Name="TotalExciseDutyFormat">
+          <DataField>TotalExciseDutyFormat</DataField>
+        </Field>
+        <Field Name="ShareCommExc">
+          <DataField>ShareCommExc</DataField>
+        </Field>
+        <Field Name="ShareCommExcFormat">
+          <DataField>ShareCommExcFormat</DataField>
+        </Field>
+        <Field Name="ShareComm">
+          <DataField>ShareComm</DataField>
+        </Field>
+        <Field Name="ShareCommFormat">
+          <DataField>ShareCommFormat</DataField>
+        </Field>
+        <Field Name="UpfrontInterest">
+          <DataField>UpfrontInterest</DataField>
+        </Field>
+        <Field Name="UpfrontInterestFormat">
+          <DataField>UpfrontInterestFormat</DataField>
+        </Field>
+        <Field Name="DisbursementDate_Loans">
+          <DataField>DisbursementDate_Loans</DataField>
+        </Field>
+        <Field Name="RecommendedAmt">
+          <DataField>RecommendedAmt</DataField>
+        </Field>
+        <Field Name="RecommendedAmtFormat">
+          <DataField>RecommendedAmtFormat</DataField>
+        </Field>
+        <Field Name="StaffNo">
+          <DataField>StaffNo</DataField>
+        </Field>
+        <Field Name="DepositPurchase">
+          <DataField>DepositPurchase</DataField>
+        </Field>
+        <Field Name="DepositPurchaseFormat">
+          <DataField>DepositPurchaseFormat</DataField>
+        </Field>
+        <Field Name="SelfGua">
+          <DataField>SelfGua</DataField>
+        </Field>
+        <Field Name="ShareBoost">
+          <DataField>ShareBoost</DataField>
+        </Field>
+        <Field Name="ShareBoostFormat">
+          <DataField>ShareBoostFormat</DataField>
+        </Field>
+        <Field Name="OtherCharges">
+          <DataField>OtherCharges</DataField>
+        </Field>
+        <Field Name="OtherChargesFormat">
+          <DataField>OtherChargesFormat</DataField>
+        </Field>
+        <Field Name="Loan_IN_Repayment">
+          <DataField>Loan_IN_Repayment</DataField>
+        </Field>
+        <Field Name="Loan_IN_RepaymentFormat">
+          <DataField>Loan_IN_RepaymentFormat</DataField>
+        </Field>
+        <Field Name="DepPurchaseComm">
+          <DataField>DepPurchaseComm</DataField>
+        </Field>
+        <Field Name="DepPurchaseCommFormat">
+          <DataField>DepPurchaseCommFormat</DataField>
+        </Field>
+        <Field Name="ShareBoostComm">
+          <DataField>ShareBoostComm</DataField>
+        </Field>
+        <Field Name="ShareBoostCommFormat">
+          <DataField>ShareBoostCommFormat</DataField>
+        </Field>
+        <Field Name="Loan_Pr_Repayment">
+          <DataField>Loan_Pr_Repayment</DataField>
+        </Field>
+        <Field Name="Loan_Pr_RepaymentFormat">
+          <DataField>Loan_Pr_RepaymentFormat</DataField>
+        </Field>
+        <Field Name="STOAmount">
+          <DataField>STOAmount</DataField>
+        </Field>
+        <Field Name="STOAmountFormat">
+          <DataField>STOAmountFormat</DataField>
+        </Field>
+        <Field Name="LoansLoanNo">
+          <DataField>LoansLoanNo</DataField>
+        </Field>
+        <Field Name="RemPeriod">
+          <DataField>RemPeriod</DataField>
+        </Field>
+        <Field Name="RemPeriodFormat">
+          <DataField>RemPeriodFormat</DataField>
+        </Field>
+        <Field Name="LoansProductType">
+          <DataField>LoansProductType</DataField>
+        </Field>
+        <Field Name="LoansProductName">
+          <DataField>LoansProductName</DataField>
+        </Field>
+        <Field Name="ApprovedAmount">
+          <DataField>ApprovedAmount</DataField>
+        </Field>
+        <Field Name="ApprovedAmountFormat">
+          <DataField>ApprovedAmountFormat</DataField>
+        </Field>
+        <Field Name="PrincipalRepayment">
+          <DataField>PrincipalRepayment</DataField>
+        </Field>
+        <Field Name="PrincipalRepaymentFormat">
+          <DataField>PrincipalRepaymentFormat</DataField>
+        </Field>
+        <Field Name="OutstandingInterest">
+          <DataField>OutstandingInterest</DataField>
+        </Field>
+        <Field Name="OutstandingInterestFormat">
+          <DataField>OutstandingInterestFormat</DataField>
+        </Field>
+        <Field Name="Allloanrepayment">
+          <DataField>Allloanrepayment</DataField>
+        </Field>
+        <Field Name="AllloanrepaymentFormat">
+          <DataField>AllloanrepaymentFormat</DataField>
+        </Field>
+        <Field Name="OutStandingBalance">
+          <DataField>OutStandingBalance</DataField>
+        </Field>
+        <Field Name="OutStandingBalanceFormat">
+          <DataField>OutStandingBalanceFormat</DataField>
+        </Field>
+        <Field Name="Defaulted">
+          <DataField>Defaulted</DataField>
+        </Field>
+        <Field Name="Repayment">
+          <DataField>Repayment</DataField>
+        </Field>
+        <Field Name="RepaymentFormat">
+          <DataField>RepaymentFormat</DataField>
+        </Field>
+        <Field Name="ReportForNavId_14">
+          <DataField>ReportForNavId_14</DataField>
+        </Field>
+        <Field Name="AccountNo">
+          <DataField>AccountNo</DataField>
+        </Field>
+        <Field Name="GuarantorName">
+          <DataField>GuarantorName</DataField>
+        </Field>
+        <Field Name="PayrollNo">
+          <DataField>PayrollNo</DataField>
+        </Field>
+        <Field Name="LoanBalance">
+          <DataField>LoanBalance</DataField>
+        </Field>
+        <Field Name="LoanBalanceFormat">
+          <DataField>LoanBalanceFormat</DataField>
+        </Field>
+        <Field Name="Deposits">
+          <DataField>Deposits</DataField>
+        </Field>
+        <Field Name="DepositsFormat">
+          <DataField>DepositsFormat</DataField>
+        </Field>
+        <Field Name="NoOfLoanGuranteed">
+          <DataField>NoOfLoanGuranteed</DataField>
+        </Field>
+        <Field Name="GuarantorType">
+          <DataField>GuarantorType</DataField>
+        </Field>
+        <Field Name="AmtGuaranteed">
+          <DataField>AmtGuaranteed</DataField>
+        </Field>
+        <Field Name="AmtGuaranteedFormat">
+          <DataField>AmtGuaranteedFormat</DataField>
+        </Field>
+        <Field Name="CollateralValue">
+          <DataField>CollateralValue</DataField>
+        </Field>
+        <Field Name="CollateralValueFormat">
+          <DataField>CollateralValueFormat</DataField>
+        </Field>
+        <Field Name="ReportForNavId_36">
+          <DataField>ReportForNavId_36</DataField>
+        </Field>
+        <Field Name="DocumentType">
+          <DataField>DocumentType</DataField>
+        </Field>
+        <Field Name="DocumentNo">
+          <DataField>DocumentNo</DataField>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+        </Field>
+        <Field Name="SingleMultiple">
+          <DataField>SingleMultiple</DataField>
+        </Field>
+        <Field Name="Provided">
+          <DataField>Provided</DataField>
+        </Field>
+        <Field Name="LicenseExpiryDate">
+          <DataField>LicenseExpiryDate</DataField>
+        </Field>
+        <Field Name="LoanNo_LoansTopup">
+          <DataField>LoanNo_LoansTopup</DataField>
+        </Field>
+        <Field Name="OffsetTotalz">
+          <DataField>OffsetTotalz</DataField>
+        </Field>
+        <Field Name="OffsetTotalzFormat">
+          <DataField>OffsetTotalzFormat</DataField>
+        </Field>
+        <Field Name="TotalEarning">
+          <DataField>TotalEarning</DataField>
+        </Field>
+        <Field Name="TotalEarningFormat">
+          <DataField>TotalEarningFormat</DataField>
+        </Field>
+        <Field Name="LoanTopUp_LoansTopup">
+          <DataField>LoanTopUp_LoansTopup</DataField>
+        </Field>
+        <Field Name="ClientCode_LoansTopup">
+          <DataField>ClientCode_LoansTopup</DataField>
+        </Field>
+        <Field Name="ExerciseDuty">
+          <DataField>ExerciseDuty</DataField>
+        </Field>
+        <Field Name="ExerciseDutyFormat">
+          <DataField>ExerciseDutyFormat</DataField>
+        </Field>
+        <Field Name="LoanType_LoansTopup">
+          <DataField>LoanType_LoansTopup</DataField>
+        </Field>
+        <Field Name="PrincipleTopUp_LoansTopup">
+          <DataField>PrincipleTopUp_LoansTopup</DataField>
+        </Field>
+        <Field Name="PrincipleTopUp_LoansTopupFormat">
+          <DataField>PrincipleTopUp_LoansTopupFormat</DataField>
+        </Field>
+        <Field Name="InterestTopUp_LoansTopup">
+          <DataField>InterestTopUp_LoansTopup</DataField>
+        </Field>
+        <Field Name="InterestTopUp_LoansTopupFormat">
+          <DataField>InterestTopUp_LoansTopupFormat</DataField>
+        </Field>
+        <Field Name="TotalTopUp_LoansTopup">
+          <DataField>TotalTopUp_LoansTopup</DataField>
+        </Field>
+        <Field Name="TotalTopUp_LoansTopupFormat">
+          <DataField>TotalTopUp_LoansTopupFormat</DataField>
+        </Field>
+        <Field Name="MonthlyRepayment_LoansTopup">
+          <DataField>MonthlyRepayment_LoansTopup</DataField>
+        </Field>
+        <Field Name="MonthlyRepayment_LoansTopupFormat">
+          <DataField>MonthlyRepayment_LoansTopupFormat</DataField>
+        </Field>
+        <Field Name="MonthlyContr">
+          <DataField>MonthlyContr</DataField>
+        </Field>
+        <Field Name="MonthlyContrFormat">
+          <DataField>MonthlyContrFormat</DataField>
+        </Field>
+        <Field Name="InterestPaid_LoansTopup">
+          <DataField>InterestPaid_LoansTopup</DataField>
+        </Field>
+        <Field Name="InterestPaid_LoansTopupFormat">
+          <DataField>InterestPaid_LoansTopupFormat</DataField>
+        </Field>
+        <Field Name="OutstandingBalance_LoansTopup">
+          <DataField>OutstandingBalance_LoansTopup</DataField>
+        </Field>
+        <Field Name="OutstandingBalance_LoansTopupFormat">
+          <DataField>OutstandingBalance_LoansTopupFormat</DataField>
+        </Field>
+        <Field Name="IDNO_LoansTopup">
+          <DataField>IDNO_LoansTopup</DataField>
+        </Field>
+        <Field Name="Commision">
+          <DataField>Commision</DataField>
+        </Field>
+        <Field Name="CommisionFormat">
+          <DataField>CommisionFormat</DataField>
+        </Field>
+        <Field Name="OneMonthIn">
+          <DataField>OneMonthIn</DataField>
+        </Field>
+        <Field Name="OneMonthInFormat">
+          <DataField>OneMonthInFormat</DataField>
+        </Field>
+        <Field Name="ReportForNavId_109">
+          <DataField>ReportForNavId_109</DataField>
+        </Field>
+        <Field Name="Description_OtherCommitementsClearance">
+          <DataField>Description_OtherCommitementsClearance</DataField>
+        </Field>
+        <Field Name="ExternalCharges2">
+          <DataField>ExternalCharges2</DataField>
+        </Field>
+        <Field Name="ExternalCharges2Format">
+          <DataField>ExternalCharges2Format</DataField>
+        </Field>
+        <Field Name="Payee_OtherCommitementsClearance">
+          <DataField>Payee_OtherCommitementsClearance</DataField>
+        </Field>
+        <Field Name="Amount_OtherCommitementsClearance">
+          <DataField>Amount_OtherCommitementsClearance</DataField>
+        </Field>
+        <Field Name="Amount_OtherCommitementsClearanceFormat">
+          <DataField>Amount_OtherCommitementsClearanceFormat</DataField>
+        </Field>
+        <Field Name="BatchNo_OtherCommitementsClearance">
+          <DataField>BatchNo_OtherCommitementsClearance</DataField>
+        </Field>
+        <Field Name="VendorNo_OtherCommitementsClearance">
+          <DataField>VendorNo_OtherCommitementsClearance</DataField>
+        </Field>
+        <Field Name="VendorName_OtherCommitementsClearance">
+          <DataField>VendorName_OtherCommitementsClearance</DataField>
+        </Field>
+        <Field Name="Destination_Loan_No_">
+          <DataField>Destination_Loan_No_</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>

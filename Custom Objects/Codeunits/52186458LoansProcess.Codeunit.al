@@ -4425,10 +4425,10 @@ Codeunit 52186458 "Loans Process"
                                             end;
                                         end;
 
-                               if (Amt < PCharges.Minimum) and (PCharges.Minimum > 0) then
-                                Amt := PCharges.Minimum;
-                            if (Amt > PCharges.Maximum) and (PCharges.Maximum >0) then
-                                Amt := PCharges.Maximum;
+                                if (Amt < PCharges.Minimum) and (PCharges.Minimum > 0) then
+                                    Amt := PCharges.Minimum;
+                                if (Amt > PCharges.Maximum) and (PCharges.Maximum > 0) then
+                                    Amt := PCharges.Maximum;
 
                                 Amt := Amt * -1;
 
@@ -4492,10 +4492,10 @@ Codeunit 52186458 "Loans Process"
                                             end;
 
 
-                                     if (Amt < PCharges.Minimum) and (PCharges.Minimum > 0) then
-                                Amt := PCharges.Minimum;
-                            if (Amt > PCharges.Maximum) and (PCharges.Maximum >0) then
-                                Amt := PCharges.Maximum;
+                                    if (Amt < PCharges.Minimum) and (PCharges.Minimum > 0) then
+                                        Amt := PCharges.Minimum;
+                                    if (Amt > PCharges.Maximum) and (PCharges.Maximum > 0) then
+                                        Amt := PCharges.Maximum;
 
                                     if ExcemptCharges = true then
                                         Amt := 0;
@@ -4576,10 +4576,10 @@ Codeunit 52186458 "Loans Process"
                                             end;
                                         end;
 
-                                 if (Amt < PCharges.Minimum) and (PCharges.Minimum > 0) then
-                                Amt := PCharges.Minimum;
-                            if (Amt > PCharges.Maximum) and (PCharges.Maximum >0) then
-                                Amt := PCharges.Maximum;
+                                if (Amt < PCharges.Minimum) and (PCharges.Minimum > 0) then
+                                    Amt := PCharges.Minimum;
+                                if (Amt > PCharges.Maximum) and (PCharges.Maximum > 0) then
+                                    Amt := PCharges.Maximum;
 
                                 Amt := Amt * -1;
 
@@ -4643,10 +4643,10 @@ Codeunit 52186458 "Loans Process"
                                             end;
 
 
-                                   if (Amt < PCharges.Minimum) and (PCharges.Minimum > 0) then
-                                Amt := PCharges.Minimum;
-                            if (Amt > PCharges.Maximum) and (PCharges.Maximum >0) then
-                                Amt := PCharges.Maximum;
+                                    if (Amt < PCharges.Minimum) and (PCharges.Minimum > 0) then
+                                        Amt := PCharges.Minimum;
+                                    if (Amt > PCharges.Maximum) and (PCharges.Maximum > 0) then
+                                        Amt := PCharges.Maximum;
 
                                     if ExcemptCharges = true then
                                         Amt := 0;
@@ -4728,9 +4728,9 @@ Codeunit 52186458 "Loans Process"
                                         end;
 
                                 if (Amt < PCharges.Minimum) and (PCharges.Minimum > 0) then
-                                Amt := PCharges.Minimum;
-                            if (Amt > PCharges.Maximum) and (PCharges.Maximum >0) then
-                                Amt := PCharges.Maximum;
+                                    Amt := PCharges.Minimum;
+                                if (Amt > PCharges.Maximum) and (PCharges.Maximum > 0) then
+                                    Amt := PCharges.Maximum;
 
                                 Amt := Amt * -1;
 
@@ -4795,9 +4795,9 @@ Codeunit 52186458 "Loans Process"
 
 
                                     if (Amt < PCharges.Minimum) and (PCharges.Minimum > 0) then
-                                Amt := PCharges.Minimum;
-                            if (Amt > PCharges.Maximum) and (PCharges.Maximum >0) then
-                                Amt := PCharges.Maximum;
+                                        Amt := PCharges.Minimum;
+                                    if (Amt > PCharges.Maximum) and (PCharges.Maximum > 0) then
+                                        Amt := PCharges.Maximum;
 
                                     if ExcemptCharges = true then
                                         Amt := 0;
@@ -4997,10 +4997,10 @@ Codeunit 52186458 "Loans Process"
                                         end;
 
 
-                                 if (Amt < PCharges.Minimum) and (PCharges.Minimum > 0) then
-                                Amt := PCharges.Minimum;
-                            if (Amt > PCharges.Maximum) and (PCharges.Maximum >0) then
-                                Amt := PCharges.Maximum;
+                                if (Amt < PCharges.Minimum) and (PCharges.Minimum > 0) then
+                                    Amt := PCharges.Minimum;
+                                if (Amt > PCharges.Maximum) and (PCharges.Maximum > 0) then
+                                    Amt := PCharges.Maximum;
 
                                 Amt := Amt * -1;
 
@@ -5219,9 +5219,9 @@ Codeunit 52186458 "Loans Process"
 
 
                                     if (Amt < PCharges.Minimum) and (PCharges.Minimum > 0) then
-                                Amt := PCharges.Minimum;
-                            if (Amt > PCharges.Maximum) and (PCharges.Maximum >0) then
-                                Amt := PCharges.Maximum;
+                                        Amt := PCharges.Minimum;
+                                    if (Amt > PCharges.Maximum) and (PCharges.Maximum > 0) then
+                                        Amt := PCharges.Maximum;
 
                                     Amt := Amt * -1;
 
@@ -7392,7 +7392,15 @@ Codeunit 52186458 "Loans Process"
                     PeriodInterest := ((LoansR.Interest / 100) * LoansR."Approved Amount" * (LoansR.Installments / 12));
                     LoansR."Approved Amount" := PeriodInterest;
                 end;
-                LoanAmount := LoansR."Approved Amount";
+
+                if Prodfac."Nature of Loan Type" = ProdFac."Nature of Loan Type"::"Emergency Loan" then begin
+                    if prodFac."Compute Interest Due on Postin" = Prodfac."Compute Interest Due on Postin"::"Full Period Interest" then begin
+                        LoanAmount := LoansR."Approved Amount" + round((LoansR."Approved Amount" * LoansR.Interest / 12 * 0.01 * LoansR.Installments), 1, '>');
+                        LoansR.Interest := 0;
+                    end;
+                end
+                else
+                    LoanAmount := LoansR."Approved Amount";
                 LBalance := LoansR."Approved Amount";
                 RepayPeriod := LoansR.Installments;
                 InitialInstal := LoansR.Installments;

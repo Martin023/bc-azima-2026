@@ -157,7 +157,7 @@ table 52185742 "Loans Top up"
         }
         field(6; "Interest Top Up"; Decimal)
         {
-
+            Caption = 'Accrued Interest';
             trigger OnValidate()
             begin
                 "Total Top Up" := "Principle Top Up" + "Interest Top Up";
