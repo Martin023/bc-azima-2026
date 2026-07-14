@@ -137,8 +137,10 @@ table 52185739 "Loan Guarantors and Security"
                         SavingsAccounts.SetRange("Member No.", SELFLOAN."Member No.");
                         SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
                         if SavingsAccounts.Find('-') then begin
-                            if SavingsAccounts."No." = "Savings Account No./Member No." then begin
+                            if (SavingsAccounts."No." = "Savings Account No./Member No.") then
                                 "Self Guarantee" := true;
+                            if "Self Guarantee" or (Membersrec."Member Class" = 'CLASSB') then begin
+                                // "Self Guarantee" := true;
                                 "Available Shares" := LoanAppraisal.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.");
                                 "Amount Guaranteed" := LoanAppraisal.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.");
                                 "Original Amount Guaranteed" := "Amount Guaranteed";
