@@ -543,7 +543,6 @@ table 52185586 "HR Individual Targets Header"
         ImportCount: Integer;
     begin
         TestField(Status, Status::Open);
-        TestField("Appraisal Cycle Stage", "Appraisal Cycle Stage"::"Target Setting");
 
         TargetLine.Reset;
         TargetLine.SetRange("Appraisal No", "Appraisal No");
