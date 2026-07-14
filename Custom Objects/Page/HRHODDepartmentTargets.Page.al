@@ -33,6 +33,16 @@ page 52185505 "HRHOD Department Targets"
                 {
                     ApplicationArea = Basic;
                 }
+                field("Review Sequence No"; Rec."Review Sequence No")
+                {
+                    ApplicationArea = Basic;
+                    Style = Unfavorable;
+                    StyleExpr = Rec."Review Sequence No" = 0;
+                }
+                field("Appraisal Cycle Stage"; Rec."Appraisal Cycle Stage")
+                {
+                    ApplicationArea = Basic;
+                }
                 field("HOD Employee No"; Rec."HOD Employee No")
                 {
                     ApplicationArea = Basic;
@@ -51,6 +61,56 @@ page 52185505 "HRHOD Department Targets"
 
     actions
     {
+        area(processing)
+        {
+            action("Refresh Period Info")
+            {
+                ApplicationArea = Basic;
+                Caption = 'Refresh Period Info';
+                Image = RefreshLines;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+
+                trigger OnAction()
+                var
+                    DeptTarget: Record "HR Department Targets Header";
+                    AppraisalPeriodRec: Record "HR Appraisal Period";
+                    UpdateCount: Integer;
+                begin
+                    if not Confirm('This will refresh Review Sequence No and Period dates for all Department Targets with missing information. Continue?', false) then
+                        exit;
+
+                    UpdateCount := 0;
+                    DeptTarget.Reset;
+                    DeptTarget.CopyFilters(Rec);
+                    if DeptTarget.FindSet then begin
+                        repeat
+                            if (DeptTarget."Appraisal Period" <> 0D) then begin
+                                if AppraisalPeriodRec.Get(DeptTarget."Appraisal Period") then begin
+                                    // ALWAYS UPDATE IF YEAR IS WRONG (26 INSTEAD OF 2026) OR REVIEW SEQ IS 0
+                                    if (DeptTarget."Review Sequence No" = 0) or 
+                                       (DeptTarget."Appraisal Year" < 1000) or
+                                       (DeptTarget."Appraisal Year" <> AppraisalPeriodRec."Appraisal Year") then begin
+                                        DeptTarget."Appraisal Year" := AppraisalPeriodRec."Appraisal Year";
+                                        DeptTarget."Review Sequence No" := AppraisalPeriodRec."Review Sequence No";
+                                        DeptTarget."Appraisal Cycle Stage" := AppraisalPeriodRec."Appraisal Cycle Stage";
+                                        DeptTarget."Period Start Date" := AppraisalPeriodRec."Period Start Date";
+                                        DeptTarget."Period End Date" := AppraisalPeriodRec."Period End Date";
+                                        DeptTarget."Appraisal Period Description" := AppraisalPeriodRec."Appraisal Period Description";
+                                        DeptTarget.Modify(true);
+                                        UpdateCount += 1;
+                                    end;
+                                end;
+                            end;
+                        until DeptTarget.Next = 0;
+                    end;
+
+                    Message('%1 Department Target(s) updated with period information.', UpdateCount);
+                    CurrPage.Update(false);
+                end;
+            }
+        }
     }
 
     trigger OnOpenPage()

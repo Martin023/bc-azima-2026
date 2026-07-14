@@ -103,6 +103,7 @@ page 52185973 "Mid Year Review"
                 field("Appraisee Comments"; Rec."Appraisee Comments")
                 {
                     ApplicationArea = Basic, Suite;
+                    caption = 'Appraisee Comments(Achievements/Challenges/Recommendations)';
                     Editable = SelfRating;
                     Enabled = SelfRating;
                 }

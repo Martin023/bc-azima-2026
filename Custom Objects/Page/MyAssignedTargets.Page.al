@@ -116,13 +116,8 @@ page 52186155 "My Assigned Targets"
 
                 trigger OnAction()
                 begin
-                    if Rec.FindSet then
-                        repeat
-                            if Rec.Mark then begin
-                                if Rec.Status = Rec.Status::Assigned then
-                                    Rec.MarkAsAccepted();
-                            end;
-                        until Rec.Next = 0;
+                    if Rec.Status = Rec.Status::Assigned then
+                        Rec.MarkAsAccepted();
                     CurrPage.Update(false);
                 end;
             }
@@ -165,12 +160,19 @@ page 52186155 "My Assigned Targets"
                     ReviewSeqNo := Assignment."Review Sequence No";
                     AppraisalCycleStage := Assignment."Appraisal Cycle Stage";
                     
+                    // VALIDATE ASSIGNMENT HAS CORRECT PERIOD INFO
+                    if ReviewSeqNo = 0 then
+                        Error('Department Target %1 does not have appraisal period information. Please contact your HOD or HR Administrator.', DeptTargetNo);
+                    
+                    if AppraisalYear < 1000 then
+                        Error('Department Target %1 has invalid appraisal year. Please contact your HOD or HR Administrator.', DeptTargetNo);
+                    
                     // VALIDATE DEPARTMENT TARGET HAS CORRECT PERIOD INFO
                     if not DeptHeader.Get(DeptTargetNo) then
                         Error('Department Target %1 not found.', DeptTargetNo);
                     
                     if DeptHeader."Review Sequence No" = 0 then
-                        Error('Department Target %1 does not have a Review Sequence No set. Please contact HOD to update the target with the correct appraisal period.', DeptTargetNo);
+                        Error('Department Target %1 does not have appraisal period information. Please contact your HOD or HR Administrator.', DeptTargetNo);
 
                     // CHECK IF TARGETS ALREADY IMPORTED
                     Assignment.Reset;

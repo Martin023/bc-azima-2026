@@ -59,6 +59,7 @@ table 52185496 "HR Department Targets Header"
                         "Appraisal Cycle Stage" := AppraisalPeriodRec."Appraisal Cycle Stage";
                         "Period Start Date" := AppraisalPeriodRec."Period Start Date";
                         "Period End Date" := AppraisalPeriodRec."Period End Date";
+                        "Appraisal Period Description" := AppraisalPeriodRec."Appraisal Period Description";
                     end;
                 end;
             end;
@@ -88,6 +89,11 @@ table 52185496 "HR Department Targets Header"
         field(32; "Period End Date"; Date)
         {
             Caption = 'Period End Date';
+            Editable = false;
+        }
+        field(35; "Appraisal Period Description"; Text[100])
+        {
+            Caption = 'Appraisal Period Description';
             Editable = false;
         }
         field(6; "Target Date"; Date)

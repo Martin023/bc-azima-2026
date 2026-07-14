@@ -38,11 +38,42 @@ Page 52185448 "HR Department Targets Card"
                     ApplicationArea = Basic;
                     Editable = (Rec.Status = Rec.Status::Open) and CanEditDepartmentTarget;
                     ShowMandatory = true;
+                    
+                    trigger OnLookup(var Text: Text): Boolean
+                    var
+                        AppraisalPeriodRec: Record "HR Appraisal Period";
+                        AppraisalPeriodPage: Page "HR Appraisal Period Setup";
+                    begin
+                        AppraisalPeriodRec.Reset;
+                        AppraisalPeriodPage.SetTableView(AppraisalPeriodRec);
+                        AppraisalPeriodPage.LookupMode(true);
+                        if AppraisalPeriodPage.RunModal = ACTION::LookupOK then begin
+                            AppraisalPeriodPage.GetRecord(AppraisalPeriodRec);
+                            Rec.Validate("Appraisal Period", AppraisalPeriodRec."Appraisal Period");
+                            CurrPage.Update(true);
+                        end;
+                    end;
+                }
+                field("Appraisal Period Description"; Rec."Appraisal Period Description")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Caption = 'Period Description';
+                    Style = Subordinate;
+                    StyleExpr = TRUE;
+                }
+                field("Review Sequence No"; Rec."Review Sequence No")
+                {
+                    ApplicationArea = Basic;
+                    Editable = false;
+                    Caption = 'Review Sequence';
+                    Importance = Promoted;
+                    ToolTip = 'Q1=1, Q2=2, Q3=3, Q4=4';
                 }
                 field("Appraisal Year"; Rec."Appraisal Year")
                 {
                     ApplicationArea = Basic;
-                    Editable = (Rec.Status = Rec.Status::Open) and CanEditDepartmentTarget;
+                    Editable = false;
                     ShowMandatory = true;
                 }
                 field("Target Date"; Rec."Target Date")
