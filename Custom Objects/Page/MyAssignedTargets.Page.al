@@ -142,29 +142,13 @@ page 52186155 "My Assigned Targets"
                     Assignment: Record "HR Employee Target Assignment";
                     AppraisalPeriod: Record "HR Appraisal Period";
                     DeptTargetNo: Code[20];
+                    DeptHeader: Record "HR Department Targets Header";
                     AppraisalYear: Integer;
+                    ReviewSeqNo: Integer;
+                    AppraisalCycleStage: Option "Target Setting","Evaluation Review","Year-End Review";
                     ExistingAppraisal: Record "HR Individual Targets Header";
                     FoundExisting: Boolean;
                 begin
-                    AppraisalPeriod.Reset;
-                    AppraisalPeriod.SetRange(Closed, false);
-                    if AppraisalPeriod.FindFirst then begin
-                        if AppraisalPeriod."Appraisal Cycle Stage" <> AppraisalPeriod."Appraisal Cycle Stage"::"Target Setting" then
-                            Error('Can only import assigned targets during Target Setting cycle stage. Current stage is: %1. Please contact HR to adjust the appraisal cycle stage.', 
-                                  Format(AppraisalPeriod."Appraisal Cycle Stage"));
-                    end else begin
-                        Error('No open appraisal period found. Please contact HR Administrator to create an appraisal period.');
-                    end;
-
-                    Assignment.Reset;
-                    Assignment.CopyFilters(Rec);
-                    Assignment.SetRange(Status, Assignment.Status::Incorporated);
-                    if not Assignment.IsEmpty then begin
-                        if Assignment.FindFirst then
-                            Error('These targets have already been imported into Appraisal %1. Open that appraisal to view your targets.', 
-                                  Assignment."Incorporated Into Appraisal No");
-                    end;
-
                     Assignment.Reset;
                     Assignment.CopyFilters(Rec);
                     Assignment.SetRange("Employee Accepted", true);
@@ -178,32 +162,68 @@ page 52186155 "My Assigned Targets"
 
                     DeptTargetNo := Assignment."Department Target No";
                     AppraisalYear := Assignment."Appraisal Year";
+                    ReviewSeqNo := Assignment."Review Sequence No";
+                    AppraisalCycleStage := Assignment."Appraisal Cycle Stage";
+                    
+                    // VALIDATE DEPARTMENT TARGET HAS CORRECT PERIOD INFO
+                    if not DeptHeader.Get(DeptTargetNo) then
+                        Error('Department Target %1 not found.', DeptTargetNo);
+                    
+                    if DeptHeader."Review Sequence No" = 0 then
+                        Error('Department Target %1 does not have a Review Sequence No set. Please contact HOD to update the target with the correct appraisal period.', DeptTargetNo);
 
+                    // CHECK IF TARGETS ALREADY IMPORTED
+                    Assignment.Reset;
+                    Assignment.CopyFilters(Rec);
+                    Assignment.SetRange(Status, Assignment.Status::Incorporated);
+                    if not Assignment.IsEmpty then begin
+                        if Assignment.FindFirst then
+                            Error('These targets have already been imported into Appraisal %1. Open that appraisal to view your targets.', 
+                                  Assignment."Incorporated Into Appraisal No");
+                    end;
+
+                    // FIND OR CREATE MATCHING APPRAISAL (BY YEAR + REVIEW SEQUENCE)
                     ExistingAppraisal.Reset;
                     ExistingAppraisal.SetRange("Employee No", CurrentEmployeeNo);
                     ExistingAppraisal.SetRange("Appraisal Year", AppraisalYear);
-                    ExistingAppraisal.SetRange("Appraisal Period", AppraisalPeriod."Appraisal Period Description");
+                    ExistingAppraisal.SetRange("Review Sequence No", ReviewSeqNo);
                     ExistingAppraisal.SetFilter(Status, '<>%1', ExistingAppraisal.Status::Posted);
                     FoundExisting := ExistingAppraisal.FindFirst;
 
                     if FoundExisting then begin
-                        if not Confirm('You already have an appraisal (%1) for this period. Import these targets into the EXISTING appraisal?', 
-                            true, ExistingAppraisal."Appraisal No") then
+                        if not Confirm('You already have an appraisal (%1) for Year %2 - Review %3 (%4). Import these targets into the EXISTING appraisal?', 
+                            true, ExistingAppraisal."Appraisal No", AppraisalYear, ReviewSeqNo, Format(AppraisalCycleStage)) then
                             exit;
 
                         IndivTargetHeader := ExistingAppraisal;
                     end else begin
-                        if not Confirm('This will create a NEW Individual Targets appraisal and import ACCEPTED targets from Department Target %1 for year %2. Continue?', 
-                            true, DeptTargetNo, AppraisalYear) then
+                        if not Confirm('This will create a NEW Individual Targets appraisal for Year %1 - Review %2 (%3) and import ACCEPTED targets from Department Target %4. Continue?', 
+                            true, AppraisalYear, ReviewSeqNo, Format(AppraisalCycleStage), DeptTargetNo) then
                             exit;
 
                         IndivTargetHeader.Init;
+                        IndivTargetHeader."Appraisal Year" := AppraisalYear;
+                        IndivTargetHeader."Review Sequence No" := ReviewSeqNo;
+                        IndivTargetHeader."Appraisal Cycle Stage" := AppraisalCycleStage;
+                        IndivTargetHeader."Period Start Date" := DeptHeader."Period Start Date";
+                        IndivTargetHeader."Period End Date" := DeptHeader."Period End Date";
+                        
+                        // FIND MATCHING APPRAISAL PERIOD DESCRIPTION
+                        AppraisalPeriod.Reset;
+                        AppraisalPeriod.SetRange("Appraisal Year", AppraisalYear);
+                        AppraisalPeriod.SetRange("Review Sequence No", ReviewSeqNo);
+                        if AppraisalPeriod.FindFirst then
+                            IndivTargetHeader."Appraisal Period" := AppraisalPeriod."Appraisal Period Description"
+                        else
+                            Error('No matching Appraisal Period found for Year %1, Review Sequence %2. Please contact HR Administrator.', AppraisalYear, ReviewSeqNo);
+                        
                         IndivTargetHeader.Insert(true);
                     end;
 
                     IndivTargetHeader.ImportFromAssignedTargets(DeptTargetNo);
 
-                    if Confirm('Targets imported successfully into Appraisal %1. Do you want to open it?', true, IndivTargetHeader."Appraisal No") then
+                    if Confirm('Targets imported successfully into Appraisal %1 (Year %2 - Review %3). Do you want to open it?', 
+                        true, IndivTargetHeader."Appraisal No", AppraisalYear, ReviewSeqNo) then
                         PAGE.Run(PAGE::"HR Individual Appraisal Card", IndivTargetHeader);
 
                     CurrPage.Update(false);

@@ -7,6 +7,7 @@ page 52185644 "HR Employee Target Assignments"
     UsageCategory = None;
     InsertAllowed = false;
     DeleteAllowed = false;
+    Editable = false;
 
     layout
     {

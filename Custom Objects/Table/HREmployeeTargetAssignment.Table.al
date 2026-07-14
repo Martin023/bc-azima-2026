@@ -35,6 +35,8 @@ table 52185513 "HR Employee Target Assignment"
                         Validate("Responsibility Center");
                         "Appraisal Period" := DeptHeader."Appraisal Period";
                         "Appraisal Year" := DeptHeader."Appraisal Year";
+                        "Review Sequence No" := DeptHeader."Review Sequence No";
+                        "Appraisal Cycle Stage" := DeptHeader."Appraisal Cycle Stage";
                         "HOD Employee No" := DeptHeader."HOD Employee No";
                         "HOD Name" := DeptHeader."HOD Name";
                     end;
@@ -190,6 +192,18 @@ table 52185513 "HR Employee Target Assignment"
         field(19; "Appraisal Year"; Integer)
         {
             Caption = 'Appraisal Year';
+            Editable = false;
+        }
+        field(33; "Review Sequence No"; Integer)
+        {
+            Caption = 'Review Sequence No';
+            Editable = false;
+        }
+        field(34; "Appraisal Cycle Stage"; Option)
+        {
+            Caption = 'Appraisal Cycle Stage';
+            OptionCaption = 'Target Setting,Evaluation Review,Year-End Review';
+            OptionMembers = "Target Setting","Evaluation Review","Year-End Review";
             Editable = false;
         }
         field(20; Status; Option)

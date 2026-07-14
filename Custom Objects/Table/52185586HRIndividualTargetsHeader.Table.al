@@ -245,17 +245,20 @@ table 52185586 "HR Individual Targets Header"
         "Supervisor ID" := SupervisorCode;
         "Supervisor Name" := SupervisorName;
 
-        OpenPeriod.Reset;
-        OpenPeriod.SetRange(Closed, false);
-        if OpenPeriod.FindFirst then begin
-            "Appraisal Period" := OpenPeriod."Appraisal Period Description";
-            "Appraisal Cycle Stage" := OpenPeriod."Appraisal Cycle Stage";
-            "Appraisal Year" := OpenPeriod."Appraisal Year";
-            "Period Start Date" := OpenPeriod."Period Start Date";
-            "Period End Date" := OpenPeriod."Period End Date";
-            "Review Sequence No" := OpenPeriod."Review Sequence No";
-        end else begin
-            Error('No open appraisal period found. Please contact HR to create an appraisal period before creating appraisals.');
+        // ONLY AUTO-ASSIGN PERIOD IF NOT ALREADY SET (FOR MANUAL CREATION)
+        if ("Appraisal Period" = '') and ("Review Sequence No" = 0) then begin
+            OpenPeriod.Reset;
+            OpenPeriod.SetRange(Closed, false);
+            if OpenPeriod.FindFirst then begin
+                "Appraisal Period" := OpenPeriod."Appraisal Period Description";
+                "Appraisal Cycle Stage" := OpenPeriod."Appraisal Cycle Stage";
+                "Appraisal Year" := OpenPeriod."Appraisal Year";
+                "Period Start Date" := OpenPeriod."Period Start Date";
+                "Period End Date" := OpenPeriod."Period End Date";
+                "Review Sequence No" := OpenPeriod."Review Sequence No";
+            end else begin
+                Error('No open appraisal period found. Please contact HR to create an appraisal period before creating appraisals.');
+            end;
         end;
     end;
 
@@ -511,6 +514,25 @@ table 52185586 "HR Individual Targets Header"
         DiscussionLog.SetRange("Appraisal No", "Appraisal No");
         DiscussionLog.SetRange(Resolved, false);
         exit(not DiscussionLog.IsEmpty);
+    end;
+
+    procedure SyncWithAppraisalPeriod()
+    var
+        AppraisalPeriodRec: Record "HR Appraisal Period";
+    begin
+        // SYNC CYCLE STAGE AND DATES FROM MASTER APPRAISAL PERIOD
+        AppraisalPeriodRec.Reset;
+        AppraisalPeriodRec.SetRange("Appraisal Year", "Appraisal Year");
+        AppraisalPeriodRec.SetRange("Review Sequence No", "Review Sequence No");
+        if AppraisalPeriodRec.FindFirst then begin
+            if "Appraisal Cycle Stage" <> AppraisalPeriodRec."Appraisal Cycle Stage" then begin
+                "Appraisal Cycle Stage" := AppraisalPeriodRec."Appraisal Cycle Stage";
+                "Period Start Date" := AppraisalPeriodRec."Period Start Date";
+                "Period End Date" := AppraisalPeriodRec."Period End Date";
+                "Appraisal Period" := AppraisalPeriodRec."Appraisal Period Description";
+                Modify;
+            end;
+        end;
     end;
 
     procedure ImportFromAssignedTargets(DepartmentTargetNo: Code[20])

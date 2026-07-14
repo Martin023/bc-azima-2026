@@ -108,11 +108,11 @@ table 52185560 "HR Leave Recall Lines"
                 if "Days Recalled" <= 0 then
                     Error('Days Recalled must be greater than 0');
 
-                // Update Days Remaining After Recall
+                // CALCULATE DAYS REMAINING AFTER RECALL
                 if "Leave Application Code" <> '' then begin
                     LeaveApp.Get("Leave Application Code");
                     
-                    // Calculate total previous recalls (excluding this one)
+                    // TOTAL PREVIOUS RECALLS EXCLUDING CURRENT
                     TotalPreviousRecalls := 0;
                     ExistingRecalls.Reset();
                     ExistingRecalls.SetRange("Leave Application Code", "Leave Application Code");
@@ -124,7 +124,7 @@ table 52185560 "HR Leave Recall Lines"
                         until ExistingRecalls.Next() = 0;
                     end;
 
-                    "Days Remaining After Recall" := LeaveApp."Days Applied" - TotalPreviousRecalls - "Days Recalled";
+                    "Days Remaining After Recall" := LeaveApp."Days Applied" - "Days Spent Before Recall" - TotalPreviousRecalls - "Days Recalled";
                 end;
 
                 if "Recall Date" <> 0D then
