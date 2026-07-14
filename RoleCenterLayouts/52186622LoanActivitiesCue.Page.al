@@ -107,7 +107,7 @@ page 52186622 "Loan Processing Activities"
                 //         CustomCuesCodeunit.DrillDownLoansDisbursedCurrentMonth();
                 //     end;
                 // }
-                field("Loan PAR"; PAR)
+                field("Loan PAR"; Rec."Loan PAR")
                 {
                     ApplicationArea = Basic, Suite;
                     DrillDownPageID = "Credit Ledger Entries";
@@ -115,124 +115,125 @@ page 52186622 "Loan Processing Activities"
                     ToolTip = 'Specifies the PAR';
                     trigger OnDrillDown()
                     var
+                        CustomCuesCodeunit: Codeunit CustomCuesCodeunit;
                     begin
                         PAGE.Run(PAGE::"Loan Posted List");
                     end;
-
                 }
-                cuegroup("Loan Processing")
+
+            }
+            cuegroup("Loan Processing")
+            {
+                //CuegroupLayout = Wide;
+                field("Applied Loans"; Rec."Applied Loans")
                 {
-                    //CuegroupLayout = Wide;
-                    field("Applied Loans"; Rec."Applied Loans")
-                    {
-                        ApplicationArea = Basic;
-                        AutoFormatType = 11;
-                    }
-                    field("Appraised Loans"; Rec."Appraised Loans")
-                    {
-                        ApplicationArea = Basic;
-                        AutoFormatType = 11;
-                        Caption = 'Pending Approvals';
-                    }
-                    field("Loan Approvals"; Rec."Approved Loans")
-                    {
-
-                    }
-                    field("Rejected Loans"; Rec."Rejected Loans")
-                    {
-                        ApplicationArea = Basic;
-
-                    }
-                    field("Deffered Loans"; Rec."Deffered Loans")
-                    {
-                        ApplicationArea = Basic;
-                        Image = Document;
-                    }
+                    ApplicationArea = Basic;
+                    AutoFormatType = 11;
                 }
-
-
-
-                cuegroup("Loan Processed")
+                field("Appraised Loans"; Rec."Appraised Loans")
                 {
-                    ShowCaption = true;
-                    field("Disbursed Loans"; Rec."Disbursed Loans")
-                    {
-                        ApplicationArea = Basic;
-                        image = none;
-                        LookupPageId = "Loan Posted List";
-                        DrillDownPageId = "Loan Posted list";
-                    }
-                    field("Overdue Loans"; Rec."Overdue Loans")
-                    {
-                        Image = Document;
-                        Style = Unfavorable;
-                        ApplicationArea = Basic;
-                    }
-
+                    ApplicationArea = Basic;
+                    AutoFormatType = 11;
+                    Caption = 'Pending Approvals';
                 }
-                cuegroup(Membership)
+                field("Loan Approvals"; Rec."Approved Loans")
                 {
-                    ShowCaption = true;
-                    field("Active Members"; Rec."Active Members")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        image = none;
-                    }
-                    field("Dormant Members"; Rec."Dormant Members")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        image = none;
-                    }
+
                 }
-                cuegroup("Withdrawal Notices")
+                field("Rejected Loans"; Rec."Rejected Loans")
                 {
-                    ShowCaption = true;
-                    field("Withdrawals Notices"; Rec."Withdrawals Notices")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        AutoFormatType = 11;
-                    }
+                    ApplicationArea = Basic;
+
                 }
-                cuegroup("Channels")
+                field("Deffered Loans"; Rec."Deffered Loans")
                 {
-                    ShowCaption = true;
-
-                    field("Open Loans from Portal"; Rec."Loans from Portal")
-                    {
-                        ApplicationArea = Basic;
-                        ToolTip = 'Displays the total number of open loan applications submitted through the Members Portal.';
-                    }
-
-                    field("Open Loans from APP"; Rec."Loans from APP")
-                    {
-                        ApplicationArea = Basic;
-                        ToolTip = 'Displays the total number of open loan applications submitted via the Mobile App.';
-                    }
-
-                    field("Pending Approval"; Rec."Channels Pending Approval")
-                    {
-                        ApplicationArea = Basic;
-                        Caption = 'Pending Approvals';
-                    }
-                    field("Approved Loans"; Rec."Channels Approved Loans")
-                    {
-                        ApplicationArea = Basic;
-                    }
-                    field("Open Loan Variations"; Rec."Open Loan Variation")
-                    {
-                        ApplicationArea = Basic;
-                        ToolTip = 'Shows the count of loan variation requests submitted by members.';
-                        DrillDownPageId = "Variations List";
-                    }
-
-                    field("Open Deposit Variations"; Rec."Open Deposit Variation")
-                    {
-                        ApplicationArea = Basic;
-                        ToolTip = 'Shows the count of deposit variation requests submitted by members.';
-                        DrillDownPageId = "Savings Variations List";
-                    }
-
+                    ApplicationArea = Basic;
+                    Image = Document;
                 }
+            }
+
+
+
+            cuegroup("Loan Processed")
+            {
+                ShowCaption = true;
+                field("Disbursed Loans"; Rec."Disbursed Loans")
+                {
+                    ApplicationArea = Basic;
+                    image = none;
+                    LookupPageId = "Loan Posted List";
+                    DrillDownPageId = "Loan Posted list";
+                }
+                field("Overdue Loans"; Rec."Overdue Loans")
+                {
+                    Image = Document;
+                    Style = Unfavorable;
+                    ApplicationArea = Basic;
+                }
+
+            }
+            cuegroup(Membership)
+            {
+                ShowCaption = true;
+                field("Active Members"; Rec."Active Members")
+                {
+                    ApplicationArea = Basic, Suite;
+                    image = none;
+                }
+                field("Dormant Members"; Rec."Dormant Members")
+                {
+                    ApplicationArea = Basic, Suite;
+                    image = none;
+                }
+            }
+            cuegroup("Withdrawal Notices")
+            {
+                ShowCaption = true;
+                field("Withdrawals Notices"; Rec."Withdrawals Notices")
+                {
+                    ApplicationArea = Basic, Suite;
+                    AutoFormatType = 11;
+                }
+            }
+            cuegroup("Channels")
+            {
+                ShowCaption = true;
+
+                field("Open Loans from Portal"; Rec."Loans from Portal")
+                {
+                    ApplicationArea = Basic;
+                    ToolTip = 'Displays the total number of open loan applications submitted through the Members Portal.';
+                }
+
+                field("Open Loans from APP"; Rec."Loans from APP")
+                {
+                    ApplicationArea = Basic;
+                    ToolTip = 'Displays the total number of open loan applications submitted via the Mobile App.';
+                }
+
+                field("Pending Approval"; Rec."Channels Pending Approval")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Pending Approvals';
+                }
+                field("Approved Loans"; Rec."Channels Approved Loans")
+                {
+                    ApplicationArea = Basic;
+                }
+                field("Open Loan Variations"; Rec."Open Loan Variation")
+                {
+                    ApplicationArea = Basic;
+                    ToolTip = 'Shows the count of loan variation requests submitted by members.';
+                    DrillDownPageId = "Variations List";
+                }
+
+                field("Open Deposit Variations"; Rec."Open Deposit Variation")
+                {
+                    ApplicationArea = Basic;
+                    ToolTip = 'Shows the count of deposit variation requests submitted by members.';
+                    DrillDownPageId = "Savings Variations List";
+                }
+
             }
         }
     }
@@ -287,7 +288,7 @@ page 52186622 "Loan Processing Activities"
         Rec."Total Loans Disb. This Month" := CustomCuesCodeunit.GetLoansDisbursedCurrentMonth;
         rec."Total Loans paid this month" := CustomCuesCodeunit.TotalLoansPaidThisMonth();
         rec."Total Interest paid this month" := CustomCuesCodeunit.TotalInterestPaidThisMonth();
-        PAR := CustomCuesCodeunit.TotalPAR();
+        rec."Loan PAR" := CustomCuesCodeunit.TotalPAR();
 
     end;
 
