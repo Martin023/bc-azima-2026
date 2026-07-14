@@ -28,6 +28,11 @@ page 52185822 "Account Transfer"
                     Editable = HeaderA;
                     ApplicationArea = Basic, Suite;
                 }
+                field("Member Name"; Rec."Member Name")
+                {
+                    Editable = false;
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Transfer Type"; Rec."Transfer Type")
                 {
                     Editable = HeaderA;
