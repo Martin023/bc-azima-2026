@@ -291,8 +291,6 @@ table 52185739 "Loan Guarantors and Security"
         }
         field(12; "Staff/Payroll No."; Code[20])
         {
-            TableRelation = members."Payroll/Staff No." where("Employer Code" = field("Employer Code"));
-
             trigger OnValidate()
             begin
                 // Cust.Reset;
@@ -633,10 +631,6 @@ table 52185739 "Loan Guarantors and Security"
         Guarantor: Record "Loan Guarantors and Security";
         TotalGuarantors: Integer;
     begin
-        if LoansR.Get("Loan No") then begin
-
-
-        end;
         if LoanApp.Get("Loan No") then begin
             if (LoanApp.Status = LoanApp.Status::Pending) or (LoanApp.Status = LoanApp.Status::Approved) or (LoanApp.Status = LoanApp.Status::Posted) then
                 Error(Text003, LoanApp.Status);
