@@ -4215,7 +4215,7 @@ page 52186778 "Finance Role Center"
                 group("PR Reports")
                 {
                     Caption = 'Reports';
-                   
+
                     action("Pr Variance Report")
                     {
                         Caption = 'PR Monthly Variance';
@@ -4247,7 +4247,7 @@ page 52186778 "Finance Role Center"
                         RunObject = report "prDeductions Report";
                         ApplicationArea = Basic, Suite;
                     }
-                  
+
                     action("prAllowances Report")
                     {
                         Caption = 'prAllowances Report';
@@ -5594,7 +5594,7 @@ page 52186778 "Finance Role Center"
                         ApplicationArea = Basic, Suite;
                         Caption = '&G/L Trial Balance';
                         Image = "Report";
-                        RunObject = Report "Trial Balance";
+                        RunObject = Report "Trial Balance Custom";
                         ToolTip = 'View, print, or send a report that shows the balances for the general ledger accounts, including the debits and credits. You can use this report to ensure accurate accounting practices.';
                     }
                     action("&Bank Detail Trial Balance.")

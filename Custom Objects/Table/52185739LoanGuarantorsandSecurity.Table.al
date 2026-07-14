@@ -291,7 +291,6 @@ table 52185739 "Loan Guarantors and Security"
         }
         field(12; "Staff/Payroll No."; Code[20])
         {
-
             trigger OnValidate()
             begin
                 // Cust.Reset;
@@ -305,40 +304,42 @@ table 52185739 "Loan Guarantors and Security"
                 //     "Savings Account No./Member No." := '';
                 //     Error('Member deposits account not found.');
                 // end;
-            //     "Member Guaranteed" := '';
-            //     "Loanee Name" := '';
-            //     Name := '';
-            //    /// "Staff/Payroll No." := '';
-            //     "Deposits/Shares" := 0;
-            //     "ID No." := '';
-            //     "Member No" := '';
-            //     Name := '';
-            //     "Phone No." := '';
-            //     "Savings Account No./Member No." := '';
+                //     "Member Guaranteed" := '';
+                //     "Loanee Name" := '';
+                //     Name := '';
+                //    /// "Staff/Payroll No." := '';
+                //     "Deposits/Shares" := 0;
+                //     "ID No." := '';
+                //     "Member No" := '';
+                //     Name := '';
+                //     "Phone No." := '';
+                //     "Savings Account No./Member No." := '';
 
                 if rec."Employer Code" <> '' then begin
                     Members.Reset();
                     Members.SetRange(Members."Payroll/Staff No.", Rec."Staff/Payroll No.");
                     Members.SetRange(Members."Employer Code", Rec."Employer Code");
                     if Members.FindFirst() then begin
-                        Cust.reset();
-                        Cust.SetRange(Cust."Member No.", Members."No.");
-                        Cust.setrange("Product Category", Cust."Product Category"::"BOSA Deposits");
-                        if Cust.FindFirst() then begin
-                            Rec."Savings Account No./Member No." := Cust."No.";
-                            Rec.Modify(true);
-                            if Rec."Savings Account No./Member No." <> '' then
-                                Validate(Rec."Savings Account No./Member No.");
-                        end
-                        else begin
-                            "Savings Account No./Member No." := '';
-                            Error('Member deposits account not found.');
+                        if rec."Guarantor Type" = rec."Guarantor Type"::Guarantor then begin
+                            Cust.reset();
+                            Cust.SetRange(Cust."Member No.", Members."No.");
+                            Cust.setrange("Product Category", Cust."Product Category"::"BOSA Deposits");
+                            if Cust.FindFirst() then begin
+                                Rec."Savings Account No./Member No." := Cust."No.";
+                                //Rec.Modify(true);
+                                if Rec."Savings Account No./Member No." <> '' then
+                                    Validate(Rec."Savings Account No./Member No.");
+                            end
+                            else begin
+                                "Savings Account No./Member No." := '';
+                                Error('Member deposits account not found.');
+                            end;
                         end;
                     end
                     else
                         Message('Member deposits account not found for the specified employer code %1 and staff/payroll number %2', Rec."Employer Code", Rec."Staff/Payroll No.");
 
-                end;
+                end
             end;
         }
         field(13; "Account No."; Code[20])
@@ -630,10 +631,6 @@ table 52185739 "Loan Guarantors and Security"
         Guarantor: Record "Loan Guarantors and Security";
         TotalGuarantors: Integer;
     begin
-        if LoansR.Get("Loan No") then begin
-
-
-        end;
         if LoanApp.Get("Loan No") then begin
             if (LoanApp.Status = LoanApp.Status::Pending) or (LoanApp.Status = LoanApp.Status::Approved) or (LoanApp.Status = LoanApp.Status::Posted) then
                 Error(Text003, LoanApp.Status);
