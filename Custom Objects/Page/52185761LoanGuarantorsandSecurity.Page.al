@@ -8,6 +8,7 @@ page 52185761 "Loan Guarantors and Security"
     PromotedActionCategories = 'New,Process,Process,Refresh';
     UsageCategory = Lists;
     DataCaptionFields = "Savings Account No./Member No.", Name;
+    DelayedInsert = true;
 
     layout
     {
