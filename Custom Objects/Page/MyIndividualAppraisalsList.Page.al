@@ -82,6 +82,38 @@ page 52185655 "My Individual Appraisals List"
     {
         area(processing)
         {
+            action("Refresh Period Info")
+            {
+                ApplicationArea = Basic;
+                Caption = 'Refresh Period Info';
+                Image = RefreshLines;
+                Promoted = true;
+                PromotedCategory = Process;
+
+                trigger OnAction()
+                var
+                    Appraisal: Record "HR Individual Targets Header";
+                    UpdateCount: Integer;
+                begin
+                    if not Confirm('Refresh Review Sequence and Period Info for appraisals with missing data?', false) then
+                        exit;
+
+                    UpdateCount := 0;
+                    Appraisal.Reset;
+                    Appraisal.CopyFilters(Rec);
+                    if Appraisal.FindSet then begin
+                        repeat
+                            if (Appraisal."Review Sequence No" = 0) and (Appraisal."Appraisal Period" <> '') then begin
+                                Appraisal.SyncWithAppraisalPeriod();
+                                UpdateCount += 1;
+                            end;
+                        until Appraisal.Next = 0;
+                    end;
+
+                    Message('%1 appraisal(s) updated.', UpdateCount);
+                    CurrPage.Update(false);
+                end;
+            }
             action("Open Appraisal")
             {
                 ApplicationArea = Basic;
