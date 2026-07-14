@@ -8,7 +8,7 @@ report 52186139 "Normal/Petty Payment Voucher"
         dataitem("Payments Header"; "Payments Header")
         {
             DataItemTableView = sorting("No.");
-            RequestFilterFields = "No.";
+            RequestFilterFields = "No.",Date,Cashier,"Global Dimension 1 Code";
 
             column(DOCNAME; DOCNAME)
             {

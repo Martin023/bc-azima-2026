@@ -7,6 +7,23 @@ Report 52186789 "FOSA Account Change Logs"
 
     dataset
     {
+        dataitem(CompanyHeader; "Company Information")
+        {
+            DataItemTableView = sorting("Primary Key");
+            MaxIteration = 1;
+ 
+            column(CompanyInformation_Name; Name)
+            {
+            }
+            column(CompanyInformation_Picture; Picture)
+            {
+            }
+ 
+            trigger OnPreDataItem()
+            begin
+                CalcFields(Picture);  // load BLOB here, once
+            end;
+        }
         dataitem("Change Log Entry"; "Change Log Entry")
         {
             // DataItemTableView = where("Table No." = filter(52185730));
@@ -51,13 +68,6 @@ Report 52186789 "FOSA Account Change Logs"
             {
             }
             column(Primary_Key_Field_1_No_; "Primary Key Field 1 No.")
-            {
-            }
-
-            column(CompanyInformation_Name; CompanyInformation.Name)
-            {
-            }
-            column(CompanyInformation_Picture; CompanyInformation.Picture)
             {
             }
             column(CompanyAddress; CompanyAddress)
@@ -125,11 +135,11 @@ Report 52186789 "FOSA Account Change Logs"
     }
     trigger OnPreReport()
     begin
-        if CompanyInformation.Get then
-            CompanyInformation.CalcFields(CompanyInformation.Picture);
-        CompanyAddress := CompanyInformation.Address + ' -Post Code: ' + CompanyInformation."Post Code" + ' -City:' + CompanyInformation.City + ' Region: ' + CompanyInformation."Country/Region Code";
-        CompanyTelephone := 'Tel: ' + CompanyInformation."Phone No." + ' -Office Tel: ' + CompanyInformation."Phone No. 2";
-        CommunicationOnline := 'E-mail: ' + CompanyInformation."E-Mail" + '- Website: ' + CompanyInformation."Home Page";
+        if CompanyInformation.Get then begin
+            CompanyAddress := CompanyInformation.Address + ' -Post Code: ' + CompanyInformation."Post Code" + ' -City:' + CompanyInformation.City + ' Region: ' + CompanyInformation."Country/Region Code";
+            CompanyTelephone := 'Tel: ' + CompanyInformation."Phone No." + ' -Office Tel: ' + CompanyInformation."Phone No. 2";
+            CommunicationOnline := 'E-mail: ' + CompanyInformation."E-Mail" + '- Website: ' + CompanyInformation."Home Page";
+        end;
     end;
 
     var

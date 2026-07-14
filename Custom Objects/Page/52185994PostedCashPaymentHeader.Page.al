@@ -231,56 +231,56 @@ page 52185994 "Posted Cash Payment Header"
                 }
             }
 
-            group("EDMS Integration")
-            {
-                action("Import")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Import File';
-                    Promoted = true;
-                    PromotedCategory = Category11;
-                    Image = Import;
+            // group("EDMS Integration")
+            // {
+            //     action("Import")
+            //     {
+            //         ApplicationArea = All;
+            //         Caption = 'Import File';
+            //         Promoted = true;
+            //         PromotedCategory = Category11;
+            //         Image = Import;
 
-                    trigger OnAction()
-                    var
-                        Base64Convert: Codeunit "Base64 Convert";
-                        TempBlob: Codeunit "Temp Blob";
-                        InStr: InStream;
+            //         trigger OnAction()
+            //         var
+            //             Base64Convert: Codeunit "Base64 Convert";
+            //             TempBlob: Codeunit "Temp Blob";
+            //             InStr: InStream;
 
-                        EDMSFunctions: Codeunit "EDMS Functions";
-                        FileName: Text;
-                        FileContentsB64: Text;
+            //             EDMSFunctions: Codeunit "EDMS Functions";
+            //             FileName: Text;
+            //             FileContentsB64: Text;
 
-                        IDNumber: Text;
-                        ApplicationType: Label 'MA'; // Member Application
-                        PFNumber: Text;
-                    begin
-                        if Rec."No." <> '' then begin
-                            FileName := EDMSFunctions.PickEDMSFile(TempBlob);
+            //             IDNumber: Text;
+            //             ApplicationType: Label 'MA'; // Member Application
+            //             PFNumber: Text;
+            //         begin
+            //             if Rec."No." <> '' then begin
+            //                 FileName := EDMSFunctions.PickEDMSFile(TempBlob);
 
-                            TempBlob.CreateInStream(InStr);
-                            FileContentsB64 := Base64Convert.ToBase64(InStr);
+            //                 TempBlob.CreateInStream(InStr);
+            //                 FileContentsB64 := Base64Convert.ToBase64(InStr);
 
-                            if FileContentsB64 <> '' then begin
-                                // UploadToEDMS(Rec, FileName, FileContentsB64);
-                            end;
-                        end else begin
-                            Error('Application No. is required for EDMS document upload');
-                        end;
-                    end;
-                }
-                action("EDMS File List")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Image = Documents;
-                    Promoted = true;
-                    PromotedCategory = Category11;
+            //                 if FileContentsB64 <> '' then begin
+            //                     // UploadToEDMS(Rec, FileName, FileContentsB64);
+            //                 end;
+            //             end else begin
+            //                 Error('Application No. is required for EDMS document upload');
+            //             end;
+            //         end;
+            //     }
+            //     action("EDMS File List")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         Image = Documents;
+            //         Promoted = true;
+            //         PromotedCategory = Category11;
 
-                    RunObject = page "EDMS Files List";
-                    RunPageLink = "Application No." = field("No.");
-                    // RunPageMode = Create;
-                }
-            }
+            //         RunObject = page "EDMS Files List";
+            //         RunPageLink = "Application No." = field("No.");
+            //         // RunPageMode = Create;
+            //     }
+            // }
         }
     }
 

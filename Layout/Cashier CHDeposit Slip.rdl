@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
+  <am:AuthoringMetadata>
+    <am:CreatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.0.20283.0</am:Version>
+    </am:CreatedBy>
+    <am:UpdatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.0.20283.0</am:Version>
+    </am:UpdatedBy>
+    <am:LastModifiedTimestamp>2026-07-14T14:16:59.0763958Z</am:LastModifiedTimestamp>
+  </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource">
@@ -119,14 +130,14 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>A/C NAME:   </Value>
+                    <Value>Payer:   </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Fields!AccountName.Value</Value>
+                    <Value>=Fields!Payer_Transactions.Value</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -161,14 +172,14 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>A/C No:         </Value>
+                    <Value>Cheque No:   </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Fields!MaskedAccountNo.Value</Value>
+                    <Value>=Fields!Transactions__Cheque_No_.Value</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -216,8 +227,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>ProductTypeBox</rd:DefaultName>
-            <Top>7.30257cm</Top>
-            <Left>0.57354cm</Left>
+            <Top>8.43784cm</Top>
+            <Left>0.60583cm</Left>
             <Height>0.44722cm</Height>
             <Width>6.8cm</Width>
             <ZIndex>4</ZIndex>
@@ -259,8 +270,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox27</rd:DefaultName>
-            <Top>7.92618cm</Top>
-            <Left>0.1cm</Left>
+            <Top>9.06145cm</Top>
+            <Left>0.13229cm</Left>
             <Height>0.5cm</Height>
             <Width>7.7cm</Width>
             <ZIndex>5</ZIndex>
@@ -363,7 +374,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Reprint.Value, "DataSet_Result")</Value>
+                    <Value>Cheque Deposit Slip</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -412,8 +423,8 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>8.52618cm</Top>
-            <Left>0.1cm</Left>
+            <Top>9.66145cm</Top>
+            <Left>0.13229cm</Left>
             <Height>0.9cm</Height>
             <Width>7.7cm</Width>
             <ZIndex>9</ZIndex>
@@ -468,8 +479,8 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>9.62618cm</Top>
-            <Left>0.1cm</Left>
+            <Top>10.76145cm</Top>
+            <Left>0.13229cm</Left>
             <Height>1.4cm</Height>
             <Width>7.7cm</Width>
             <ZIndex>10</ZIndex>
@@ -508,8 +519,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox32</rd:DefaultName>
-            <Top>11.22618cm</Top>
-            <Left>0.1cm</Left>
+            <Top>12.36145cm</Top>
+            <Left>0.13229cm</Left>
             <Height>0.5cm</Height>
             <Width>7.7cm</Width>
             <ZIndex>11</ZIndex>
@@ -553,8 +564,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox32</rd:DefaultName>
-            <Top>12.13215cm</Top>
-            <Left>0.1cm</Left>
+            <Top>13.26742cm</Top>
+            <Left>0.13229cm</Left>
             <Height>1.06458cm</Height>
             <Width>7.7cm</Width>
             <ZIndex>12</ZIndex>
@@ -586,8 +597,8 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>13.37312cm</Top>
-            <Left>0.1cm</Left>
+            <Top>14.50839cm</Top>
+            <Left>0.13229cm</Left>
             <Height>0.5cm</Height>
             <Width>7.7cm</Width>
             <ZIndex>13</ZIndex>
@@ -620,11 +631,95 @@
               </Border>
             </Style>
           </Image>
+          <Textbox Name="Textbox30">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>A/C NAME:   </Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!AccountName.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox25</rd:DefaultName>
+            <Top>7.23201cm</Top>
+            <Left>0.13229cm</Left>
+            <Height>0.5cm</Height>
+            <Width>7.7cm</Width>
+            <ZIndex>15</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox31">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>A/C No:         </Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Fields!MaskedAccountNo.Value</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox26</rd:DefaultName>
+            <Top>7.83201cm</Top>
+            <Left>0.13229cm</Left>
+            <Height>0.5cm</Height>
+            <Width>7.7cm</Width>
+            <ZIndex>16</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>14.54271cm</Height>
+        <Height>15.2109cm</Height>
         <Style />
       </Body>
-      <Width>7.97938cm</Width>
+      <Width>8.30583cm</Width>
       <Page>
         <PageHeader>
           <Height>0cm</Height>
@@ -759,7 +854,7 @@
             </Border>
           </Style>
         </PageFooter>
-        <PageHeight>13cm</PageHeight>
+        <PageHeight>15cm</PageHeight>
         <PageWidth>8cm</PageWidth>
         <LeftMargin>0.05cm</LeftMargin>
         <RightMargin>0.05cm</RightMargin>
@@ -1159,6 +1254,9 @@ ZZWuQqAQKAQKgUKgECgECoFCYJMjsMEUp9pAtsnLU4lfCPQKgkKgEBgGgQ06UbhBxRoG0fJTCBQChcCo
         </Field>
         <Field Name="Payee_Transactions">
           <DataField>Payee_Transactions</DataField>
+        </Field>
+        <Field Name="Payer_Transactions">
+          <DataField>Payer_Transactions</DataField>
         </Field>
         <Field Name="ChequeIssuingBank_Transactions">
           <DataField>ChequeIssuingBank_Transactions</DataField>

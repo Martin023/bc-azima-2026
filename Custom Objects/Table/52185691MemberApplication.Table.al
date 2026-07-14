@@ -110,7 +110,7 @@ table 52185691 "Member Application"
         }
         field(4; "Middle Name"; Text[30])
         {
-            Caption = 'Last Name';
+            Caption = 'Middle Name';
 
             trigger OnValidate()
             var
@@ -118,7 +118,7 @@ table 52185691 "Member Application"
             begin
                 Characters := '1234567890!@#$%^&*()_~{}[];:"|\ ,./<>?-= ';
 
-                if not ValidateShouldNotHaves("Middle Name", Characters) then Error('Last Name has invalid characters');
+                if not ValidateShouldNotHaves("Middle Name", Characters) then Error('Middle Name has invalid characters');
                 "Middle Name" := UPPERCASE("Middle Name");
 
                 "Middle Name" := UpperCase("Middle Name");

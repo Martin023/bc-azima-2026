@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
+  <am:AuthoringMetadata>
+    <am:CreatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.0.20283.0</am:Version>
+    </am:CreatedBy>
+    <am:UpdatedBy>
+      <am:Name>MSRB</am:Name>
+      <am:Version>15.0.20283.0</am:Version>
+    </am:UpdatedBy>
+    <am:LastModifiedTimestamp>2026-07-14T16:09:29.5548716Z</am:LastModifiedTimestamp>
+  </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource">
@@ -62,7 +73,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>DATE:       </Value>
+                    <Value>TRANS DATE:       </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -406,10 +417,12 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!Reprint.Value, "DataSet_Result")</Value>
+                    <Value>Cash Deposit Slip</Value>
                     <Style>
+                      <FontStyle>Normal</FontStyle>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -622,7 +635,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>="Reprinted On: " &amp; Format(First(Fields!ReprintDate.Value, "DataSet_Result"), "dd/MM/yyyy") &amp; " at " &amp; Format(First(Fields!ReprintTime.Value, "DataSet_Result"), "HH:mm")</Value>
+                    <Value>="Printed On: " &amp; Format(First(Fields!ReprintDate.Value, "DataSet_Result"), "dd/MM/yyyy") &amp; " at " &amp; Format(First(Fields!ReprintTime.Value, "DataSet_Result"), "HH:mm")</Value>
                     <Style>
                       <FontStyle>Italic</FontStyle>
                       <FontSize>8pt</FontSize>
