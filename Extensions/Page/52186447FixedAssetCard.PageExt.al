@@ -121,6 +121,13 @@ PageExtension 52186447 pageextension52186447 extends "Fixed Asset Card"
 
         modify("FA Class Code")
         {
+            ApplicationArea = Basic;
+            trigger OnAfterValidate()
+            begin
+                CurrPage.Update();
+            end;
+
+            /*
             trigger OnAfterValidate()
             var
                 FAClasses: Record "FA Class";
@@ -171,6 +178,7 @@ PageExtension 52186447 pageextension52186447 extends "Fixed Asset Card"
                 end;
                 Rec.Validate(Description);
             end;
+            */
         }
         /*
         modify("Depreciation Book Code")
