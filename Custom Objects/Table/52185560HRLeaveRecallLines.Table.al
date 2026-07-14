@@ -443,7 +443,7 @@ table 52185560 "HR Leave Recall Lines"
         end;
     end;
 
-    local procedure CalculateRecallEndDate(StartDate: Date; DaysToRecall: Decimal; LeaveApp: Record "HR Leave Application"): Date
+    procedure CalculateRecallEndDate(StartDate: Date; DaysToRecall: Decimal; LeaveApp: Record "HR Leave Application"): Date
     var
         CurrentDate: Date;
         DaysAccumulated: Decimal;
