@@ -438,6 +438,7 @@ table 52185828 "Guarantors Substitution"
         Lguarantx.Reset;
         Lguarantx.SetRange(Lguarantx."Loan No", Rec."Loan No.");
         Lguarantx.SetRange(Lguarantx.Substituted, false);
+        Lguarantx.setfilter("Savings Account No./Member No.", '<>%1', '');
         if Lguarantx.Find('-') then
             repeat
 
