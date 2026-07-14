@@ -53,6 +53,43 @@ page 52186542 "HR Appraisal Period Setup"
     {
         area(creation)
         {
+            action("Sync All Appraisals")
+            {
+                Caption = 'Sync All Appraisals';
+                Image = RefreshLines;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                ToolTip = 'Update all individual appraisals to match the current cycle stage and dates of this period';
+
+                trigger OnAction()
+                var
+                    IndivTargetHeader: Record "HR Individual Targets Header";
+                    UpdatedCount: Integer;
+                begin
+                    if not Confirm('This will update ALL individual appraisals for Year %1 - Review %2 to match the current Cycle Stage (%3). Continue?', 
+                        true, Rec."Appraisal Year", Rec."Review Sequence No", Format(Rec."Appraisal Cycle Stage")) then
+                        exit;
+
+                    UpdatedCount := 0;
+                    IndivTargetHeader.Reset;
+                    IndivTargetHeader.SetRange("Appraisal Year", Rec."Appraisal Year");
+                    IndivTargetHeader.SetRange("Review Sequence No", Rec."Review Sequence No");
+                    IndivTargetHeader.SetFilter(Status, '<>%1', IndivTargetHeader.Status::Posted);
+                    if IndivTargetHeader.FindSet(true) then begin
+                        repeat
+                            IndivTargetHeader."Appraisal Cycle Stage" := Rec."Appraisal Cycle Stage";
+                            IndivTargetHeader."Period Start Date" := Rec."Period Start Date";
+                            IndivTargetHeader."Period End Date" := Rec."Period End Date";
+                            IndivTargetHeader."Appraisal Period" := Rec."Appraisal Period Description";
+                            IndivTargetHeader.Modify;
+                            UpdatedCount += 1;
+                        until IndivTargetHeader.Next = 0;
+                    end;
+
+                    Message('%1 individual appraisal(s) synchronized successfully.', UpdatedCount);
+                end;
+            }
             action("Close Period")
             {
                 Caption = 'Close Period';

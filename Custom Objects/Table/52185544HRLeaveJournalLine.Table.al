@@ -123,7 +123,7 @@ table 52185544 "HR Leave Journal Line"
                 //     error('Leave days Should Not be less than the Minimum Leave Days in Hr Setup');
             end;
         }
-        field(14; Description; Text[50])
+        field(14; Description; Text[100])
         {
             Caption = 'Description';
         }
@@ -289,13 +289,13 @@ table 52185544 "HR Leave Journal Line"
         {
 
         }
-        field(34;"Leave Type Enum";enum "Leave Type Enum")
+        field(34; "Leave Type Enum"; enum "Leave Type Enum")
         {
-             FieldClass = FlowField;
-           
+            FieldClass = FlowField;
+
             Editable = false;
             CalcFormula = lookup("HR Leave Types"."Leave type Enum" where(Code = field("Leave Type")));
-            
+
         }
     }
 
