@@ -946,14 +946,14 @@ Codeunit 52185506 "Global Functions"
                 Date2DMY(CalcDate('<-' + Format(i) + 'M>', Today()), 2),
                 Date2DMY(CalcDate('<-' + Format(i) + 'M>', Today()), 3)
             );
-            Message('Month %1: Start %2, End %3', i, MonthStart, MonthEnd);
-
             MonthEnd := CalcDate('<CM>', MonthStart);
+            Message('Month %1: Start %2, End %3', i, MonthStart, MonthEnd);
 
             SalBuffer.Reset();
             SalBuffer.SetRange("Account No.", FOSAAccountNo);
             SalBuffer.SetRange("Income Type", IncomeTy);
             SalBuffer.SetRange(Posted, true);
+            SalBuffer.SetRange(Reversed, false);
             SalBuffer.SetRange("Posting Date", MonthStart, MonthEnd);
             SalBuffer.SetLoadFields(Amount, "Posting Date");
             SalBuffer.CalcSums(Amount);
@@ -965,27 +965,27 @@ Codeunit 52185506 "Global Functions"
                 MonthsWithSalary += 1;
                 TotalSalary += MonthAmount;
 
-                LastMonthAmount := MonthAmount;
-                LastMonthIndex := i;
+                if LastMonthIndex = 0 then begin
+                    LastMonthAmount := MonthAmount;
+                    LastMonthIndex := i;
+                end;
                 Message('Month %1: Start %2, End %3, Amount %4 (Salary Found)', i, MonthStart, MonthEnd, MonthAmount);
             end;
         end;
 
-        // salary in at least 1 month
         if MonthsWithSalary = 0 then
             exit(0);
 
         Message('Total Salary: %1, Months with Salary: %2, Last Month Amount: %3', TotalSalary, MonthsWithSalary, LastMonthAmount);
 
 
-        if MonthsWithSalary = MaxMonths then begin
-            TotalSalary -= LastMonthAmount;
-            MonthsWithSalary -= 1;
-            Message('After 12 months rule: Excluding last month amount %1, New Total Salary: %2, New Months with Salary: %3', LastMonthAmount, TotalSalary, MonthsWithSalary);
-        end;
+        if MonthsWithSalary <= MaxMonths then
+            exit(Round(TotalSalary / MonthsWithSalary, 1));
 
-        exit(Round(TotalSalary / MonthsWithSalary, 1));
-        Message('Average Salary: %1', Round(TotalSalary / MonthsWithSalary, 1));
+        TotalSalary -= LastMonthAmount;
+
+        Message('More than 12 months rule: Last 12 months total minus current month salary %1 = %2', LastMonthAmount, TotalSalary);
+        exit(Round(TotalSalary, 1));
     end;
 
     procedure ValidateBusinessLoansOnproductInput(Loans: Record Loans; MemberNo: code[30])

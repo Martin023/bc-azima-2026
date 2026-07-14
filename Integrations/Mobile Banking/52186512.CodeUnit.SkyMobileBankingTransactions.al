@@ -4507,7 +4507,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         MonthLabels: array[3] of Text;
         MonthCreditsValues: array[3] of Decimal;
         BOSACreditsValues: array[3] of Decimal;
-        FOSACreditsValues: array[3] of Decimal;
+    // FOSACreditsValues: array[3] of Decimal;
     begin
         QualifiedAmount := 0;
         TotalCredits := 0;
@@ -4516,10 +4516,10 @@ codeunit 52186512 "Sky M-Banking Transactions"
 
         ProdFac.GET(ProductID);
 
-        if FOSAAccountNo = '' then begin
-            EligibilityFailReason := 'FOSA account is required to assess eligibility';
-            exit(0);
-        end;
+        // if FOSAAccountNo = '' then begin
+        //     EligibilityFailReason := 'FOSA account is required to assess eligibility';
+        //     exit(0);
+        // end;
 
         Members.Reset();
         Members.SetRange("No.", MemberNo);
@@ -4570,35 +4570,32 @@ codeunit 52186512 "Sky M-Banking Transactions"
             MonthLabels[i] := MonthLabel;
             MonthCreditsValues[i] := MonthCredits;
             BOSACreditsValues[i] := BOSACredits;
-            FOSACreditsValues[i] := FOSACredits;
+            // FOSACreditsValues[i] := FOSACredits;
             TotalCredits += MonthCredits;
 
-            if (BOSACredits > 0) and (FOSACredits > 0) then
+            if BOSACredits > 0 then
                 ActiveMonths += 1
             else begin
-                if BOSACredits = 0 then
-                    EligibilityFailReason := StrSubstNo('No deposits were received into your savings account in %1.', MonthLabel)
-                else
-                    EligibilityFailReason := StrSubstNo('No FOSA activity was recorded in %1.', MonthLabel);
+                EligibilityFailReason := StrSubstNo('No deposits were received into your Deposit account in %1.', MonthLabel);
 
-                Message('Debug Failure:\Month 1 (%1): BOSA=%2, FOSA=%3\Month 2 (%4): BOSA=%5, FOSA=%6\Month 3 (%7): BOSA=%8, FOSA=%9\\Total Credits: %10\Status: Failed at %11 (%12)',
-                    MonthLabels[1], BOSACreditsValues[1], FOSACreditsValues[1],
-                    MonthLabels[2], BOSACreditsValues[2], FOSACreditsValues[2],
-                    MonthLabels[3], BOSACreditsValues[3], FOSACreditsValues[3],
+                Message('Debug Failure:\Month 1 (%1): BOSA=%2\Month 2 (%3): BOSA=%4\Month 3 (%5): BOSA=%6\\Total Credits: %7\Status: Failed at %8 (%9)',
+                    MonthLabels[1], BOSACreditsValues[1],
+                    MonthLabels[2], BOSACreditsValues[2],
+                    MonthLabels[3], BOSACreditsValues[3],
                     TotalCredits, MonthLabel, EligibilityFailReason);
                 exit(0);
             end;
         end;
 
-        Message('Debug Credit Summary:\Month 1 (%1): BOSA=%2, FOSA=%3\Month 2 (%4): BOSA=%5, FOSA=%6\Month 3 (%7): BOSA=%8, FOSA=%9\\Total Credits: %10',
-            MonthLabels[1], BOSACreditsValues[1], FOSACreditsValues[1],
-            MonthLabels[2], BOSACreditsValues[2], FOSACreditsValues[2],
-            MonthLabels[3], BOSACreditsValues[3], FOSACreditsValues[3],
+        Message('Debug Credit Summary:\Month 1 (%1): BOSA=%2\Month 2 (%3): BOSA=%4\Month 3 (%5): BOSA=%6\\Total Credits: %7',
+            MonthLabels[1], BOSACreditsValues[1],
+            MonthLabels[2], BOSACreditsValues[2],
+            MonthLabels[3], BOSACreditsValues[3],
             TotalCredits);
 
         if ActiveMonths < 3 then begin
             EligibilityFailReason :=
-                'You are not eligible. Both deposits and FOSA activity are required for 3 consecutive months';
+                'You are not eligible. Deposits are required for 3 consecutive months';
             exit(0);
         end;
 
