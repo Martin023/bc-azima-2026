@@ -71,7 +71,7 @@ codeunit 52186505 "BC Portal"
             //check for leave overlap
             if HRLeaveApp.Find('-') then begin
                 REPEAT
-                    IF (today > HRLeaveApp."Start Date") and (today < HRLeaveApp."Return Date") THEN begin
+                    IF (today > HRLeaveApp."Start Date") and (today < HRLeaveApp."Return Date") and (not IsEmployeeRecalledToday(HRLeaveApp)) THEN begin
                         // ERROR('The staff is on leave. Return Date is %1!', HRLeaveApp."Return Date");
                         ResponseObject.Add('request_status', 'SUCCESS');
                         Datum.Add('can_login', false);
@@ -138,6 +138,22 @@ codeunit 52186505 "BC Portal"
         ResponseObject.WriteTo(Response);
 
         exit(Response);
+    end;
+
+    local procedure IsEmployeeRecalledToday(HRLeaveApp: Record "HR Leave Application"): Boolean
+    var
+        RecallLine: Record "HR Leave Recall Lines";
+    begin
+        RecallLine.Reset;
+        RecallLine.SetRange("Leave Application Code", HRLeaveApp."Application Code");
+        RecallLine.SetRange(Posted, true);
+        if RecallLine.FindSet then
+            repeat
+                if (Today >= RecallLine."Recall Date") and (Today <= RecallLine.CalculateRecallEndDate(RecallLine."Recall Date", RecallLine."Days Recalled", HRLeaveApp)) then
+                    exit(true);
+            until RecallLine.Next = 0;
+
+        exit(false);
     end;
 
     local procedure GetEmployees(): Text
