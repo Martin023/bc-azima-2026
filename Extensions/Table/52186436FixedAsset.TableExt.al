@@ -352,8 +352,39 @@ TableExtension 52186436 tableextension52186436 extends "Fixed Asset"
             MinValue = 0.1;
             MaxValue = 100;
         }
+        modify("FA Class Code")
+        {
+            trigger Onaftervalidate()
+            begin
+                FAClasses.RESET;
+                if FAClasses.get("FA Class Code") then begin
+                    if FAClasses."Depreciation Book Code" <> '' then begin
+                        DepreciationBook.SetRange("FA No.", Rec."No.");
+                        if DepreciationBook.FindSet() then
+                            DepreciationBook.DELETEALL;
+
+                        DepreciationBook.reset;
+                        DepreciationBook.init;
+                        DepreciationBook."FA No." := Rec."No.";
+                        DepreciationBook."Depreciation Book Code" := FAClasses."Depreciation Book Code";
+                        DepreciationBook.validate("Depreciation Method", FAClasses."Depreciation Method");
+                        DepreciationBook."Straight-Line %" := FAClasses."Straight-Line %";
+                        DepreciationBook.INSERT(true);
+
+                        FACard.UpdateDepreciationBook(rec."No.");
+                        FACard.Update();
+
+                    end;
+
+                end;
+                rec.Validate("Description");
+            end;
+        }
     }
 
     var
         Vendor: Record Vendor;
+        DepreciationBook: Record "FA Depreciation Book";
+        FAClasses: Record "FA Class";
+        FACard: page "Fixed Asset Card";
 }
