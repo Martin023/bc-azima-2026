@@ -1,5 +1,6 @@
 table 52185734 "Loan Product Charges"
 {
+    DrillDownPageId = "Loan Product Charges";
 
     fields
     {

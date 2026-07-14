@@ -941,10 +941,11 @@ Report 52185745 "Loan Appraisal Checkoff"
                         if AppraisalSal.Type = AppraisalSal.Type::Basic then
                             TotalBasic := TotalBasic + AppraisalSal.Amount
                         else
-                            if AppraisalSal.Type = AppraisalSal.Type::Earnings then
+                            if (AppraisalSal.Type = AppraisalSal.Type::Earnings) or (AppraisalSal.Type = AppraisalSal.Type::"Other Allowances") then
                                 TrEarni := TrEarni + AppraisalSal.Amount
                             else
-                                if AppraisalSal.Type = AppraisalSal.Type::Deductions then
+                                if (AppraisalSal.Type = AppraisalSal.Type::Deductions) or (AppraisalSal.Type = AppraisalSal.Type::PAYE) or (AppraisalSal.Type = AppraisalSal.Type::NSSF)
+                                or (AppraisalSal.Type = AppraisalSal.Type::SHIF) or (AppraisalSal.Type = AppraisalSal.Type::HLEVY) then
                                     TDeductions := TDeductions + AppraisalSal.Amount
                                 else
                                     if AppraisalSal.Type = AppraisalSal.Type::Pension then
@@ -952,13 +953,15 @@ Report 52185745 "Loan Appraisal Checkoff"
                                     else if AppraisalSal.type = AppraisalSal.type::"House Allowance" then
                                         THouseAllow := THouseAllow + AppraisalSal.Amount
                     until AppraisalSal.Next = 0;
+
                 end;
                 GrossPay := round(((TotalBasic + TrEarni + THouseAllow)), 0.01);
                 NetSalary := round(((TotalBasic + TrEarni + THouseAllow) - TDeductions), 0.01);
-                OneThirdGross := round((NetSalary * 0.33), 0.01);
-                TwoThirdGross := round((NetSalary * 0.66), 0.01);
+                OneThirdGross := round((GrossPay * 0.33), 0.01);
+                TwoThirdGross := round((GrossPay * 0.66), 0.01);
 
-                DisposableInc := TwoThirdGross;
+                DisposableInc := TwoThirdGross - TDeductions;
+
                 if DisposableInc < 0 then
                     DisposableInc := 0
                 else begin

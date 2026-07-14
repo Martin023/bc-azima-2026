@@ -107,6 +107,19 @@ page 52186622 "Loan Processing Activities"
                 //         CustomCuesCodeunit.DrillDownLoansDisbursedCurrentMonth();
                 //     end;
                 // }
+                field("Loan PAR"; Rec."Loan PAR")
+                {
+                    ApplicationArea = Basic, Suite;
+                    DrillDownPageID = "Credit Ledger Entries";
+                    Image = Cash;
+                    ToolTip = 'Specifies the PAR';
+                    trigger OnDrillDown()
+                    var
+                        CustomCuesCodeunit: Codeunit CustomCuesCodeunit;
+                    begin
+                        PAGE.Run(PAGE::"Loan Posted List");
+                    end;
+                }
 
             }
             cuegroup("Loan Processing")
@@ -266,6 +279,7 @@ page 52186622 "Loan Processing Activities"
 
     var
         CustomCuesCodeunit: Codeunit CustomCuesCodeunit;
+        PAR: Decimal;
 
     local procedure CalculateCues()
     begin
@@ -274,6 +288,8 @@ page 52186622 "Loan Processing Activities"
         Rec."Total Loans Disb. This Month" := CustomCuesCodeunit.GetLoansDisbursedCurrentMonth;
         rec."Total Loans paid this month" := CustomCuesCodeunit.TotalLoansPaidThisMonth();
         rec."Total Interest paid this month" := CustomCuesCodeunit.TotalInterestPaidThisMonth();
+        rec."Loan PAR" := CustomCuesCodeunit.TotalPAR();
+
     end;
 
 }
