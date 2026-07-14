@@ -444,13 +444,13 @@ table 52185778 "Treasury Cashier Transactions"
             var
                 TreasuryCt: record "Treasury Cashier Transactions";
             begin
-                if (rec."Transaction Type" = rec."Transaction Type"::"Issue To Teller") or
-                    (rec."Transaction Type" = rec."Transaction Type"::"End of Day Return to Treasury") then begin
-                    TreasuryCt.Reset();
-                    TreasuryCt.SetRange("Cash Requisition Number", "Cash Requisition Number");
-                    if TreasuryCt.FindFirst() then
-                        Error('Cash Requisition Number %1 already exists for transaction No. %2', "Cash Requisition Number", TreasuryCt.No);
-                end;
+                // if (rec."Transaction Type" = rec."Transaction Type"::"Issue To Teller") or
+                //     (rec."Transaction Type" = rec."Transaction Type"::"End of Day Return to Treasury") then begin
+                //     TreasuryCt.Reset();
+                //     TreasuryCt.SetRange("Cash Requisition Number", "Cash Requisition Number");
+                //     if TreasuryCt.FindFirst() then
+                //         Error('Cash Requisition Number %1 already exists for transaction No. %2', "Cash Requisition Number", TreasuryCt.No);
+                // end;
             end;
         }
         field(50; "Treasury Balance"; decimal)
