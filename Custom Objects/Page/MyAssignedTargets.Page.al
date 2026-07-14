@@ -2,6 +2,7 @@ page 52186155 "My Assigned Targets"
 {
     Caption = 'My Assigned Targets';
     PageType = List;
+    PromotedActionCategories = 'New,Actions,Report,Views,Filters';
     SourceTable = "HR Employee Target Assignment";
     CardPageID = "HR Employee Target Assgn Card";
     ApplicationArea = Basic;
@@ -125,10 +126,10 @@ page 52186155 "My Assigned Targets"
                     CurrPage.Update(false);
                 end;
             }
-            action("Import to New Appraisal")
+            action("Import to Appraisal")
             {
                 ApplicationArea = Basic;
-                Caption = 'Import to New Appraisal';
+                Caption = 'Import to Appraisal';
                 Image = MakeOrder;
                 Promoted = true;
                 PromotedCategory = Process;
@@ -139,15 +140,37 @@ page 52186155 "My Assigned Targets"
                 var
                     IndivTargetHeader: Record "HR Individual Targets Header";
                     Assignment: Record "HR Employee Target Assignment";
-                    SelectedCount: Integer;
+                    AppraisalPeriod: Record "HR Appraisal Period";
                     DeptTargetNo: Code[20];
                     AppraisalYear: Integer;
+                    ExistingAppraisal: Record "HR Individual Targets Header";
+                    FoundExisting: Boolean;
                 begin
+                    AppraisalPeriod.Reset;
+                    AppraisalPeriod.SetRange(Closed, false);
+                    if AppraisalPeriod.FindFirst then begin
+                        if AppraisalPeriod."Appraisal Cycle Stage" <> AppraisalPeriod."Appraisal Cycle Stage"::"Target Setting" then
+                            Error('Can only import assigned targets during Target Setting cycle stage. Current stage is: %1. Please contact HR to adjust the appraisal cycle stage.', 
+                                  Format(AppraisalPeriod."Appraisal Cycle Stage"));
+                    end else begin
+                        Error('No open appraisal period found. Please contact HR Administrator to create an appraisal period.');
+                    end;
+
                     Assignment.Reset;
                     Assignment.CopyFilters(Rec);
-                    Assignment.SetRange(Status, Assignment.Status::Assigned);
+                    Assignment.SetRange(Status, Assignment.Status::Incorporated);
+                    if not Assignment.IsEmpty then begin
+                        if Assignment.FindFirst then
+                            Error('These targets have already been imported into Appraisal %1. Open that appraisal to view your targets.', 
+                                  Assignment."Incorporated Into Appraisal No");
+                    end;
+
+                    Assignment.Reset;
+                    Assignment.CopyFilters(Rec);
+                    Assignment.SetRange("Employee Accepted", true);
+                    Assignment.SetFilter(Status, '%1|%2', Assignment.Status::Assigned, Assignment.Status::Accepted);
                     if Assignment.IsEmpty then begin
-                        Error('No assigned targets available to import. Please select targets with status "Assigned".');
+                        Error('No ACCEPTED targets available to import. Please use "Accept Assignment" button on targets you agree with, then try again.');
                     end;
 
                     if not Assignment.FindFirst then
@@ -156,19 +179,31 @@ page 52186155 "My Assigned Targets"
                     DeptTargetNo := Assignment."Department Target No";
                     AppraisalYear := Assignment."Appraisal Year";
 
-                    if not Confirm('This will create a new Individual Targets appraisal and import all assigned targets from Department Target %1 for year %2. Continue?', 
-                        true, DeptTargetNo, AppraisalYear) then
-                        exit;
+                    ExistingAppraisal.Reset;
+                    ExistingAppraisal.SetRange("Employee No", CurrentEmployeeNo);
+                    ExistingAppraisal.SetRange("Appraisal Year", AppraisalYear);
+                    ExistingAppraisal.SetRange("Appraisal Period", AppraisalPeriod."Appraisal Period Description");
+                    ExistingAppraisal.SetFilter(Status, '<>%1', ExistingAppraisal.Status::Posted);
+                    FoundExisting := ExistingAppraisal.FindFirst;
 
-                    IndivTargetHeader.Init;
-                    IndivTargetHeader.Insert(true);
-                    IndivTargetHeader."Appraisal Year" := AppraisalYear;
-                    IndivTargetHeader."Appraisal Cycle Stage" := IndivTargetHeader."Appraisal Cycle Stage"::"Target Setting";
-                    IndivTargetHeader.Modify;
+                    if FoundExisting then begin
+                        if not Confirm('You already have an appraisal (%1) for this period. Import these targets into the EXISTING appraisal?', 
+                            true, ExistingAppraisal."Appraisal No") then
+                            exit;
+
+                        IndivTargetHeader := ExistingAppraisal;
+                    end else begin
+                        if not Confirm('This will create a NEW Individual Targets appraisal and import ACCEPTED targets from Department Target %1 for year %2. Continue?', 
+                            true, DeptTargetNo, AppraisalYear) then
+                            exit;
+
+                        IndivTargetHeader.Init;
+                        IndivTargetHeader.Insert(true);
+                    end;
 
                     IndivTargetHeader.ImportFromAssignedTargets(DeptTargetNo);
 
-                    if Confirm('Appraisal %1 created successfully. Do you want to open it?', true, IndivTargetHeader."Appraisal No") then
+                    if Confirm('Targets imported successfully into Appraisal %1. Do you want to open it?', true, IndivTargetHeader."Appraisal No") then
                         PAGE.Run(PAGE::"HR Individual Appraisal Card", IndivTargetHeader);
 
                     CurrPage.Update(false);

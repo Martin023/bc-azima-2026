@@ -1,7 +1,7 @@
 report 52186603 "Appraisal Summary Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = 'Layout\AppraisalSummaryReport.rdl';
+    RDLCLayout = './bc-azima-2026/Layout\AppraisalSummaryReport.rdl';
     Caption = 'Appraisal Summary Report';
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;

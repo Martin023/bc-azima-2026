@@ -1,7 +1,7 @@
 report 52186601 "Employee Target Assignment Rpt"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = 'Layout\EmployeeTargetAssignmentRpt.rdl';
+    RDLCLayout = './bc-azima-2026/Layout\EmployeeTargetAssignmentRpt.rdl';
     Caption = 'Employee Target Assignment Report';
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;

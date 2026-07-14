@@ -28,7 +28,7 @@ table 52185586 "HR Individual Targets Header"
         field(2; "Appraisal Period"; Code[20])
         {
             Caption = 'Appraisal Period';
-            Editable = true;
+            Editable = false;
             TableRelation = "HR Appraisal Period"."Appraisal Period Description";
         }
         field(3; "Appraisal Date"; Date)
@@ -220,37 +220,43 @@ table 52185586 "HR Individual Targets Header"
     trigger OnInsert()
     var
         CurrentEmpNo: Code[50];
+        OpenPeriod: Record "HR Appraisal Period";
     begin
         if "Appraisal No" = '' then begin
             HRSetup.Get;
             HRSetup.TestField(HRSetup."Appraisal Nos");
             "Appraisal No" := NoSeriesMgt.GetNextNo(HRSetup."Appraisal Nos");
-            // NoSeriesMgt.InitSeries(HRSetup."Appraisal Nos", xRec."No series", 0D, "Appraisal No", "No series");
         end;
         
         "Appraisal Date" := Today;
 
-        // NEW: VALIDATE USER IS CREATING APPRAISAL FOR THEMSELVES ONLY
         CurrentEmpNo := CurrentEmployee();
 
-        // IF EMPLOYEE NO IS BLANK, AUTO-POPULATE WITH CURRENT USER'S EMPLOYEE NO
         if "Employee No" = '' then
             "Employee No" := CurrentEmpNo;
 
-        // VALIDATE EMPLOYEE NO MATCHES CURRENT USER - BLOCK IF MISMATCH
         if "Employee No" <> CurrentEmpNo then
             Error('ACCESS DENIED: You can only create appraisals for yourself. Current User Employee No: %1, Attempted Employee No: %2', CurrentEmpNo, "Employee No");
 
-        // RECORD WHO INITIATED THE APPRAISAL
         "Initiated By User ID" := UserId;
         "Initiated By Employee No" := CurrentEmpNo;
-
-        // "Employee No" :=/ CurrentEmployee;
         "User ID" := UserId;
         "Employee Name" := EmployeeNames;
         "Supervisor ID" := SupervisorCode;
         "Supervisor Name" := SupervisorName;
 
+        OpenPeriod.Reset;
+        OpenPeriod.SetRange(Closed, false);
+        if OpenPeriod.FindFirst then begin
+            "Appraisal Period" := OpenPeriod."Appraisal Period Description";
+            "Appraisal Cycle Stage" := OpenPeriod."Appraisal Cycle Stage";
+            "Appraisal Year" := OpenPeriod."Appraisal Year";
+            "Period Start Date" := OpenPeriod."Period Start Date";
+            "Period End Date" := OpenPeriod."Period End Date";
+            "Review Sequence No" := OpenPeriod."Review Sequence No";
+        end else begin
+            Error('No open appraisal period found. Please contact HR to create an appraisal period before creating appraisals.');
+        end;
     end;
 
     trigger OnModify()
@@ -527,7 +533,8 @@ table 52185586 "HR Individual Targets Header"
         Assignment.Reset;
         Assignment.SetRange("Department Target No", DepartmentTargetNo);
         Assignment.SetRange("Employee No", "Employee No");
-        Assignment.SetFilter(Status, '%1|%2', Assignment.Status::Assigned, Assignment.Status::Accepted);
+        Assignment.SetRange("Employee Accepted", true);
+        Assignment.SetFilter(Status, '<>%1', Assignment.Status::Incorporated);
         if Assignment.FindSet then begin
             ImportCount := 0;
             repeat
@@ -560,7 +567,7 @@ table 52185586 "HR Individual Targets Header"
 
             Message('%1 target(s) imported successfully from Department Target %2.', ImportCount, DepartmentTargetNo);
         end else begin
-            Error('No assigned targets found for you from Department Target %1. Please contact your HOD.', DepartmentTargetNo);
+            Error('No accepted targets found for you from Department Target %1. Please use "Accept Assignment" button on assigned targets first.', DepartmentTargetNo);
         end;
     end;
 }

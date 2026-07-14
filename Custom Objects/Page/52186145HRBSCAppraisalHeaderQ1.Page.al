@@ -2,7 +2,7 @@ page 52186145 "HR Individual Appraisal Card"
 {
     DeleteAllowed = false;
     PageType = Card;
-    PromotedActionCategories = 'Manage,Process,Report,Approvals,Functions,Training';
+    PromotedActionCategories = 'Manage,Process,Report,Approvals,Appraisal Actions,Training';
     SourceTable = "HR Individual Targets Header";
     ApplicationArea = Basic;
     UsageCategory = Documents;
@@ -196,22 +196,19 @@ page 52186145 "HR Individual Appraisal Card"
                     end;
                 end;
             }
-            action("Send to supervisor")
+            action("Submit to Supervisor")
             {
                 Caption = 'Submit to Supervisor';
                 Image = SendTo;
                 Promoted = true;
                 PromotedCategory = Category5;
-                Enabled = Rec.Status = Rec.Status::Open;
+                Enabled = (Rec.Status = Rec.Status::Open) and ((Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Evaluation Review") or (Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Year-End Review"));
 
                 trigger OnAction()
                 begin
-                    //OLD CODE - SIMPLE STATUS CHANGE WITHOUT VALIDATION
-                    //if Confirm('Send this Appraisal to Supervisor?', true) = false then exit;
-                    //Rec.Status := Rec.Status::"Pending Approval";
-                    //Rec.Modify;
+                    if Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Target Setting" then
+                        Error('Cannot submit appraisal during Target Setting stage. Appraisals can only be submitted during Evaluation Review or Year-End Review.');
 
-                    //NEW: USE PROCEDURE WITH SELF-RATING VALIDATION
                     if Confirm('Submit this appraisal to your supervisor for review?', true) = false then exit;
                     Rec.SubmitToSupervisor();
                     CurrPage.Update();
@@ -219,29 +216,30 @@ page 52186145 "HR Individual Appraisal Card"
             }
             action("Move to Discussion")
             {
-                Caption = 'Move to Discussion';
+                Caption = 'Disagree - Move to Discussion';
                 Image = Interaction;
                 Promoted = true;
                 PromotedCategory = Category5;
-                Enabled = Rec.Status = Rec.Status::"Pending Approval";
+                PromotedIsBig = true;
+                Enabled = (Rec.Status = Rec.Status::"Pending Approval") and ((Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Evaluation Review") or (Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Year-End Review"));
 
                 trigger OnAction()
                 begin
                     if Rec.Status <> Rec.Status::"Pending Approval" then
                         Error('Can only move to Discussion from Pending Approval status.');
 
-                    if Confirm('Move this appraisal to Discussion status? This indicates there are disagreements that need to be resolved.', true) = false then exit;
+                    if Confirm('Move this appraisal to Discussion status? Use this when there are disagreements that need to be resolved between employee and supervisor.', true) = false then exit;
 
                     Rec.Status := Rec.Status::Discussed;
                     Rec.Modify();
                     CurrPage.Update();
 
-                    Message('Appraisal moved to Discussion status. Both parties can now record discussion points in the Discussion Log tab.');
+                    Message('Appraisal moved to Discussion status. Both parties can now record discussion points in the Discussion Log tab below.');
                 end;
             }
             action("Record Discussion Point")
             {
-                Caption = 'Record Discussion Point';
+                Caption = 'Add Discussion Point';
                 Image = Comment;
                 Promoted = true;
                 PromotedCategory = Category5;
@@ -252,29 +250,32 @@ page 52186145 "HR Individual Appraisal Card"
                     if Rec.Status <> Rec.Status::Discussed then
                         Error('Discussion points can only be recorded when appraisal status is "Discussed".');
 
-                    Message('Please navigate to the Discussion Log tab to add discussion points.');
+                    Message('Navigate to the "Discussion Log" tab below to add discussion points, responses, and mark items as resolved.');
                     CurrPage.Update();
                 end;
             }
             action("Resolve and Approve")
             {
-                Caption = 'Resolve and Approve';
+                Caption = 'Approve Appraisal';
                 Image = Approve;
                 Promoted = true;
                 PromotedCategory = Category5;
-                Enabled = Rec.Status = Rec.Status::Discussed;
+                PromotedIsBig = true;
+                Enabled = ((Rec.Status = Rec.Status::"Pending Approval") or (Rec.Status = Rec.Status::Discussed)) and ((Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Evaluation Review") or (Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Year-End Review"));
 
                 trigger OnAction()
                 begin
-                    if Rec.Status <> Rec.Status::Discussed then
-                        Error('Can only approve from Discussed status.');
+                    if not (Rec.Status in [Rec.Status::"Pending Approval", Rec.Status::Discussed]) then
+                        Error('Can only approve from Pending Approval or Discussed status.');
 
-                    if Rec.CheckUnresolvedDiscussions() then begin
-                        if not Confirm('There are still unresolved discussion points. Do you want to proceed with approval anyway?', false) then
-                            exit;
+                    if Rec.Status = Rec.Status::Discussed then begin
+                        if Rec.CheckUnresolvedDiscussions() then begin
+                            if not Confirm('There are still unresolved discussion points. Do you want to proceed with approval anyway?', false) then
+                                exit;
+                        end;
                     end;
 
-                    if Confirm('Approve this appraisal? This confirms all discussions have been resolved.', true) = false then exit;
+                    if Confirm('Approve this appraisal? This confirms agreement between employee and supervisor on performance ratings.', true) = false then exit;
 
                     Rec.Status := Rec.Status::Approved;
                     Rec.Modify();

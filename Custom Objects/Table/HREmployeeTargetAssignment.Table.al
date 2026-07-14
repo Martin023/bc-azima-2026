@@ -284,6 +284,9 @@ table 52185513 "HR Employee Target Assignment"
     }
 
     trigger OnInsert()
+    var
+        EmployeeNotification: Notification;
+        HREmp: Record "HR Employees";
     begin
         if "Assignment No" = '' then begin
             HRSetup.Get;
@@ -302,6 +305,9 @@ table 52185513 "HR Employee Target Assignment"
         "Created By" := UserId;
         "Created Date" := Today;
         Status := Status::Assigned;
+
+        Message('Target "%1" assigned to employee %2 (%3)', 
+            Objective, "Employee Name", "Employee No");
     end;
 
     trigger OnDelete()

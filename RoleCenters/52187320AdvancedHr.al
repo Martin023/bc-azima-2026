@@ -493,77 +493,29 @@ page 52187320 AdvancedHumanResources
                     Caption = 'Performance Management';
                     group("BSC Appraisal")
                     {
-                        // HIDDEN: OLD 360 APPRAISAL SYSTEM - REPLACED BY NEW DYNAMIC PERSPECTIVE SYSTEM
-                        // action("HR BSC List Target Setting ")
-                        // {
-                        //     Caption = 'List Target Setting';
-                        //     ApplicationArea = Basic, suite;
-                        //     RunObject = page "HR 360 Appraisals List - TS1";
-                        // }
-                        // action("HR BSC List Target Approval")
-                        // {
-                        //     Caption = 'List Target Approval';
-                        //     ApplicationArea = Basic, suite;
-                        //     RunObject = page "HR 360 Appraisals List - TA1";
-                        // }
-                        // action("HR BSC List Evaluation Areas")
-                        // {
-                        //     Caption = 'List Evaluation';
-                        //     ApplicationArea = Basic, suite;
-                        //     RunObject = page "HR 360 Appraisals List - EV1";
-                        // }
-
-                        // action("HR BSC List Target Setting")
-                        // {
-                        //     Caption = 'HR BSC List Target Setting';
-                        //     ApplicationArea = Basic, suite;
-                        //     RunObject = page "HR BSC List Targets1";
-                        // }
-                        // action("HR BSC List Targets-Supervisor")
-                        // {
-                        //     Caption = 'HR BSC List Targets-Supervisor';
-                        //     ApplicationArea = Basic, suite;
-                        //     RunObject = page "HR BSC List Targets-Supervisor";
-                        // }
-                        // action("HR BSC List Quater1")
-                        // {
-                        //     Caption = 'HR BSC List Quater1';
-                        //     ApplicationArea = Basic, suite;
-                        //     RunObject = page "HR BSC List Qaurter 1";
-                        // }
-                        // action("HR BSC List Review")
-                        // {
-                        //     Caption = 'HR BSC List Review';
-                        //     ApplicationArea = Basic, suite;
-                        //     RunObject = page "HR BSC List Review1";
-                        // }
-                        // action("HR BSC List Quater 3")
-                        // {
-                        //     Caption = 'HR BSC List Quater 3';
-                        //     ApplicationArea = Basic, suite;
-                        //     RunObject = page "HR BSC List Qaurter 3";
-                        // }
-                        // HIDDEN: OLD 360 APPRAISAL SYSTEM
-                        // action("HR BSC List Approved")
-                        // {
-                        //     Caption = 'HR List Target Setting';
-                        //     ApplicationArea = Basic, suite;
-                        //     RunObject = page "HR 360 Appraisals List - TS1";
-                        //     RunPageLink = Status = CONST(Approved);
-                        // }
-
-                        // action("HR BSC List End Year")
-                        // {
-                        //     Caption = 'HR BSC List End Year';
-                        //     ApplicationArea = Basic, suite;
-                        //     RunObject = page "HR BSC List End Year1";
-                        // }
-                        // action("HR BSC List Closed")
-                        // {
-                        //     Caption = 'HR BSC List Closed';
-                        //     ApplicationArea = Basic, suite;
-                        //     RunObject = page "HR BSC List Closed";
-                        // }
+                        Caption = 'BSC Appraisal';
+                        
+                        action("My Individual Appraisals Performance")
+                        {
+                            Caption = 'My Individual Appraisals';
+                            ApplicationArea = Basic, suite;
+                            RunObject = page "My Individual Appraisals List";
+                            ToolTip = 'View and manage my performance appraisals';
+                        }
+                        action("All Individual Appraisals List")
+                        {
+                            Caption = 'All Individual Appraisals';
+                            ApplicationArea = Basic, suite;
+                            RunObject = page "HR Individual Appraisals List";
+                            ToolTip = 'View all employee performance appraisals (HR Admin)';
+                        }
+                        action("My Assigned Targets Performance")
+                        {
+                            Caption = 'My Assigned Targets';
+                            ApplicationArea = Basic, suite;
+                            RunObject = page "My Assigned Targets";
+                            ToolTip = 'View targets assigned to me by my HOD';
+                        }
                         action("HR Appraisal Appeal List")
                         {
                             Caption = 'HR Appraisal Appeal List';
@@ -1963,11 +1915,33 @@ page 52187320 AdvancedHumanResources
                 //     Caption = 'My Appraisals';
                 //     RunObject = page "HR 360 Appraisals List - TS1";
                 // }
-                action("My Assigned Targets")
+                action("My Individual Appraisals ESS")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'My Individual Appraisals';
+                    RunObject = page "My Individual Appraisals List";
+                    ToolTip = 'View and manage my performance appraisals';
+                }
+                action("My Team Appraisals ESS")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'My Team Appraisals (Supervisor)';
+                    RunObject = page "Supervisor Appraisals List";
+                    ToolTip = 'View and review appraisals for employees I supervise';
+                }
+                action("My Assigned Targets ESS")
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'My Assigned Targets';
                     RunObject = page "My Assigned Targets";
+                    ToolTip = 'View targets assigned to me by my HOD';
+                }
+                action("My Department Targets (HOD)")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'My Department Targets (HOD)';
+                    RunObject = page "HRHOD Department Targets";
+                    ToolTip = 'Set and manage targets for my department (HOD only)';
                 }
                 group("Self Loan Application")
                 {

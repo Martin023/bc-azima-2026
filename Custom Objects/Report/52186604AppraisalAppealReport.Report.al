@@ -1,7 +1,7 @@
 report 52186604 "Appraisal Appeal Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = 'Layout\AppraisalAppealReport.rdl';
+    RDLCLayout = './bc-azima-2026/Layout\AppraisalAppealReport.rdl';
     Caption = 'Appraisal Appeal Report';
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;

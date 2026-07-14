@@ -54,6 +54,8 @@ page 52185505 "HRHOD Department Targets"
     }
 
     trigger OnOpenPage()
+    var
+        DeptFilter: Text;
     begin
         HREmp.Reset;
         HREmp.SetRange(HREmp."User ID", UserId);
@@ -61,7 +63,15 @@ page 52185505 "HRHOD Department Targets"
             HRHOD.Reset;
             HRHOD.SetRange(HRHOD."Employee No.", HREmp."No.");
             if HRHOD.Find('-') then begin
-                Rec.SetFilter("Responsibility Center", HRHOD."Responsibility center");
+                DeptFilter := '';
+                repeat
+                    if DeptFilter = '' then
+                        DeptFilter := HRHOD."Responsibility center"
+                    else
+                        DeptFilter := DeptFilter + '|' + HRHOD."Responsibility center";
+                until HRHOD.Next = 0;
+                
+                Rec.SetFilter("Responsibility Center", DeptFilter);
             end else begin
                 Error('You are not assigned as a Head of Department. Please contact HR Administrator.');
             end;
