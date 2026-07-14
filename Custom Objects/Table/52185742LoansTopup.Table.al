@@ -123,6 +123,7 @@ table 52185742 "Loans Top up"
             trigger OnValidate()
             var
                 AmountToSend: Decimal;
+                ProdFact: record "Product Factory";
             begin
                 AmountToSend := 0;
                 if "Loan No." <> '' then begin
@@ -144,8 +145,14 @@ table 52185742 "Loans Top up"
                 end;
                 if "Principle Top Up" < 0 then "Principle Top Up" := 0;
                 // "Total Top Up" := "Principle Top Up" + "Interest Top Up";
-                if Loans.get("Loan Top Up") then
-                    "One Month Interest" := round(("Principle Top Up" * Loans.Interest * 0.01 / 12), 1, '<');
+                if Loans.get("Loan Top Up") then begin
+                    if ProdFact.get(Loans."Loan Product Type") then begin
+                        If ProdFact."Charge 1 month Interest" then begin
+                            "One Month Interest" := round(("Principle Top Up" * Loans.Interest * 0.01 / 12), 1, '<');
+                        end;
+                    end;
+                end;
+
             end;
         }
         field(6; "Interest Top Up"; Decimal)
