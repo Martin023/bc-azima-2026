@@ -271,4 +271,30 @@ codeunit 52187339 CustomCuesCodeunit
             MemberCount := Members.Count();
         end;
     end;
+
+    procedure TotalPAR(): Decimal
+    var
+        LoansTable: Record Loans;
+        TotalOut: Decimal;
+        DefaultedBal: Decimal;
+    begin
+        TotalOut := 0;
+        DefaultedBal := 0;
+        LoansTable.Reset();
+        LoansTable.SetLoadFields("Outstanding Balance", "Outstanding Interest", "Loans Category-SASRA");
+        LoansTable.SetAutoCalcFields("Outstanding Balance", "Outstanding Interest", "Loans Category-SASRA");
+        LoansTable.Setfilter("Outstanding Balance", '>0');
+        if LoansTable.FindSet() then begin
+            repeat
+                case
+                    LoansTable."Loans Category-SASRA" of
+                    LoansTable."Loans Category-SASRA"::Substandard, LoansTable."Loans Category-SASRA"::Doubtful, LoansTable."Loans Category-SASRA"::Loss:
+                        DefaultedBal += LoansTable."Outstanding Balance";
+                end;
+                TotalOut += LoansTable."Outstanding Balance";
+            until LoansTable.next() = 0;
+        end;
+        exit(DefaultedBal / TotalOut);
+    end;
+
 }
