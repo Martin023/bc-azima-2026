@@ -174,7 +174,7 @@ table 52185739 "Loan Guarantors and Security"
                         Members.Get(Cust."Member No.");
                         Cust.CalcFields(Cust."Balance (LCY)");
                         Name := Cust.Name;
-                        "Staff/Payroll No." := Cust."Payroll/Staff No.";
+                        //"Staff/Payroll No." := Cust."Payroll/Staff No.";
                         "Deposits/Shares" := Cust.GetAvailableBalance(Cust."No.");
                         "ID No." := Members."Primary Identification";
                         "Member No" := Cust."Member No.";
@@ -188,7 +188,7 @@ table 52185739 "Loan Guarantors and Security"
                         if FixedDeposit.get(rec."Savings Account No./Member No.") then begin
                             Members.Get(FixedDeposit."Member No.");
                             Name := Members.Name;
-                            "Staff/Payroll No." := Members."Payroll/Staff No.";
+                            // "Staff/Payroll No." := Members."Payroll/Staff No.";
                             // "Loan Balance":=Cust."Balance (LCY)";
                             "Deposits/Shares" := FixedDeposit."Fixed Deposit Amount";
                             // "Amount Guaranteed" := cust.GetAvailableBalance(cust."No.");
