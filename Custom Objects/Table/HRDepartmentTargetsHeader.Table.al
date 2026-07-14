@@ -169,6 +169,10 @@ table 52185496 "HR Department Targets Header"
     }
 
     trigger OnInsert()
+    var
+        HREmp: Record "HR Employees";
+        HRHOD: Record "HR Heads of Departments";
+        RespCenter: Record "Responsibility CenterBR";
     begin
         if "Target No" = '' then begin
             HRSetup.Get;
@@ -180,6 +184,23 @@ table 52185496 "HR Department Targets Header"
         "Created By" := UserId;
         "Created Date" := Today;
         Status := Status::Open;
+
+        HREmp.Reset;
+        HREmp.SetRange("User ID", UserId);
+        if HREmp.FindFirst then begin
+            HRHOD.Reset;
+            HRHOD.SetRange("Employee No.", HREmp."No.");
+            if HRHOD.FindFirst then begin
+                "Responsibility Center" := HRHOD."Responsibility center";
+                if RespCenter.Get("Responsibility Center") then
+                    "Department Name" := RespCenter.Name;
+                
+                "HOD Employee No" := HREmp."No.";
+                "HOD Name" := HREmp."First Name" + ' ' + HREmp."Middle Name" + ' ' + HREmp."Last Name";
+            end else
+                Error('You are not registered as a Head of Department. Only HODs can create department targets.');
+        end else
+            Error('No employee record found for user %1', UserId);
     end;
 
     var

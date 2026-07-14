@@ -2,6 +2,7 @@ Page 52185448 "HR Department Targets Card"
 {
     Caption = 'Department Targets';
     PageType = Card;
+    PromotedActionCategories = 'New,Process,Report,Approval,Setup';
     SourceTable = "HR Department Targets Header";
     ApplicationArea = Basic;
     UsageCategory = None;
@@ -24,7 +25,7 @@ Page 52185448 "HR Department Targets Card"
                 {
                     ApplicationArea = Basic;
                     Caption = 'Department';
-                    Editable = Rec.Status = Rec.Status::Open;
+                    Editable = false;
                     ShowMandatory = true;
                 }
                 field("Department Name"; Rec."Department Name")
@@ -35,13 +36,13 @@ Page 52185448 "HR Department Targets Card"
                 field("Appraisal Period"; Rec."Appraisal Period")
                 {
                     ApplicationArea = Basic;
-                    Editable = Rec.Status = Rec.Status::Open;
+                    Editable = (Rec.Status = Rec.Status::Open) and CanEditDepartmentTarget;
                     ShowMandatory = true;
                 }
                 field("Appraisal Year"; Rec."Appraisal Year")
                 {
                     ApplicationArea = Basic;
-                    Editable = Rec.Status = Rec.Status::Open;
+                    Editable = (Rec.Status = Rec.Status::Open) and CanEditDepartmentTarget;
                     ShowMandatory = true;
                 }
                 field("Target Date"; Rec."Target Date")
@@ -52,7 +53,7 @@ Page 52185448 "HR Department Targets Card"
                 field("HOD Employee No"; Rec."HOD Employee No")
                 {
                     ApplicationArea = Basic;
-                    Editable = Rec.Status = Rec.Status::Open;
+                    Editable = false;
                     ShowMandatory = true;
                 }
                 field("HOD Name"; Rec."HOD Name")
@@ -99,7 +100,7 @@ Page 52185448 "HR Department Targets Card"
                     ApplicationArea = Basic;
                     SubPageLink = "Department Target No" = FIELD("Target No");
                     UpdatePropagation = Both;
-                    Enabled = Rec.Status = Rec.Status::Open;
+                    Enabled = (Rec.Status = Rec.Status::Open) and CanEditDepartmentTarget;
                 }
             }
             
@@ -122,16 +123,101 @@ Page 52185448 "HR Department Targets Card"
     {
         area(processing)
         {
-            group("Goal Management")
+            action("Approve Department Targets")
             {
-                Caption = 'Goal Management';
+                Caption = 'Approve';
+                Image = Approve;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                Enabled = (Rec.Status = Rec.Status::Open) and CanEditDepartmentTarget;
+                ToolTip = 'Approve department targets to enable employee assignment';
+
+                trigger OnAction()
+                begin
+                    if not Confirm('Approve these Department Targets? Once approved, targets can be assigned to employees.', true) then exit;
+
+                    Rec.TestField("Target No");
+                    Rec.TestField("Responsibility Center");
+                    Rec.TestField("HOD Employee No");
+                    Rec.Status := Rec.Status::Approved;
+                    Rec."Approved By" := UserId;
+                    Rec."Approved Date" := Today;
+                    Rec.Modify;
+                    Message('Department targets approved successfully and can now be assigned to employees');
+                    CurrPage.Update(false);
+                end;
+            }
+            
+            group("Employee Assignment")
+            {
+                Caption = 'Employee Assignment';
+                
+                action("Assign All Goals to ONE Employee")
+                {
+                    Caption = 'Assign All Goals to ONE Employee';
+                    Image = Allocate;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedIsBig = true;
+                    Enabled = (Rec.Status = Rec.Status::Approved) and CanEditDepartmentTarget;
+                    ToolTip = 'Assign ALL department goals to ONE selected employee';
+
+                    trigger OnAction()
+                    var
+                        Employee: Record "HR Employees";
+                        TempEmployee: Record "HR Employees" temporary;
+                        EmployeeSelection: Page "Employee Selection List";
+                    begin
+                        Employee.Reset;
+                        Employee.SetRange("Responsibility Center", Rec."Responsibility Center");
+                        Employee.SetRange(Status, Employee.Status::Active);
+                        if not Employee.FindFirst then
+                            Error('No active employees found in department %1', Rec."Department Name");
+
+                        Employee.Reset;
+                        Employee.SetRange("Responsibility Center", Rec."Responsibility Center");
+                        Employee.SetRange(Status, Employee.Status::Active);
+                        EmployeeSelection.SetTableView(Employee);
+                        EmployeeSelection.LookupMode(true);
+
+                        if EmployeeSelection.RunModal = ACTION::LookupOK then begin
+                            EmployeeSelection.GetSelectedEmployees(TempEmployee);
+                            
+                            if TempEmployee.FindFirst then begin
+                                if TempEmployee.Count > 1 then
+                                    Error('Please select only ONE employee for this action. Use "Assign to Employees" on individual goals to assign to multiple employees.');
+                                
+                                Rec.AssignAllLinesToEmployee(TempEmployee."No.");
+                                CurrPage.Update(false);
+                            end else
+                                Error('No employee selected. Please click on an employee row to select.');
+                        end;
+                    end;
+                }
+            
+                action("View All Assignments")
+                {
+                    Caption = 'View All Assignments';
+                    Image = ViewDetails;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    RunObject = Page "HR Employee Target Assgns List";
+                    RunPageLink = "Department Target No" = FIELD("Target No");
+                    ToolTip = 'View all employee target assignments for this department';
+                }
+            }
+            
+            group("Setup & Tools")
+            {
+                Caption = 'Setup & Tools';
                 
                 action("Manage Perspectives")
                 {
                     Caption = 'Manage Perspectives';
                     Image = SetupColumns;
                     Promoted = true;
-                    PromotedCategory = Process;
+                    PromotedCategory = Category5;
                     PromotedIsBig = true;
                     ToolTip = 'Create and manage performance perspective categories';
                     
@@ -140,112 +226,14 @@ Page 52185448 "HR Department Targets Card"
                         PAGE.Run(PAGE::"HR Perspective Setup List");
                     end;
                 }
-            }
-            
-            action("Assign All Goals to Employee")
-            {
-                Caption = 'Assign All Goals to Employee';
-                Image = Allocate;
-                Promoted = true;
-                PromotedCategory = Process;
-                PromotedIsBig = true;
-                Enabled = Rec.Status = Rec.Status::Open;
-                ToolTip = 'Assign all department goals to a selected employee';
-
-                trigger OnAction()
-                var
-                    Employee: Record "HR Employees";
-                    TempEmployee: Record "HR Employees" temporary;
-                    EmployeeSelection: Page "Employee Selection List";
-                begin
-                    Employee.Reset;
-                    Employee.SetRange("Responsibility Center", Rec."Responsibility Center");
-                    Employee.SetRange(Status, Employee.Status::Active);
-                    if not Employee.FindFirst then
-                        Error('No active employees found in department %1', Rec."Department Name");
-
-                    Employee.Reset;
-                    Employee.SetRange("Responsibility Center", Rec."Responsibility Center");
-                    Employee.SetRange(Status, Employee.Status::Active);
-                    EmployeeSelection.SetTableView(Employee);
-                    EmployeeSelection.LookupMode(true);
-
-                    if EmployeeSelection.RunModal = ACTION::LookupOK then begin
-                        EmployeeSelection.GetSelectedEmployees(TempEmployee);
-                        
-                        if TempEmployee.FindFirst then begin
-                            if TempEmployee.Count > 1 then
-                                Error('Please select only ONE employee for this action. Use "Assign to Employees" on individual goals to assign to multiple employees.');
-                            
-                            Rec.AssignAllLinesToEmployee(TempEmployee."No.");
-                            CurrPage.Update(false);
-                        end else
-                            Error('No employee selected. Please click on an employee row to select.');
-                    end;
-                end;
-            }
-            
-            action("View All Assignments")
-            {
-                Caption = 'View All Assignments';
-                Image = ViewDetails;
-                Promoted = true;
-                PromotedCategory = Process;
-                RunObject = Page "HR Employee Target Assgns List";
-                RunPageLink = "Department Target No" = FIELD("Target No");
-                ToolTip = 'View all employee target assignments for this department';
-            }
-            
-            group("Status Management")
-            {
-                Caption = 'Status';
                 
-                action("Send for Approval")
-                {
-                    Caption = 'Send for Approval';
-                    Image = SendApprovalRequest;
-                    Promoted = true;
-                    PromotedCategory = Process;
-                    Enabled = Rec.Status = Rec.Status::Open;
-
-                    trigger OnAction()
-                    begin
-                        if Confirm('Send these Department Targets for Approval?', true) = false then exit;
-
-                        Rec.TestField("Target No");
-                        Rec.TestField("Responsibility Center");
-                        Rec.TestField("HOD Employee No");
-                        Rec.Status := Rec.Status::"Pending Approval";
-                        Rec.Modify;
-                        Message('Department targets sent for approval');
-                    end;
-                }
-                action("Approve")
-                {
-                    Caption = 'Approve';
-                    Image = Approve;
-                    Promoted = true;
-                    PromotedCategory = Process;
-                    Enabled = Rec.Status = Rec.Status::"Pending Approval";
-
-                    trigger OnAction()
-                    begin
-                        if Confirm('Approve these Department Targets?', true) = false then exit;
-
-                        Rec.Status := Rec.Status::Approved;
-                        Rec."Approved By" := UserId;
-                        Rec."Approved Date" := Today;
-                        Rec.Modify;
-                        Message('Department targets approved successfully');
-                    end;
-                }
                 action("Reopen")
                 {
                     Caption = 'Reopen';
                     Image = ReOpen;
                     Promoted = true;
                     PromotedCategory = Process;
-                    Enabled = (Rec.Status = Rec.Status::Approved) OR (Rec.Status = Rec.Status::"Pending Approval");
+                    Enabled = ((Rec.Status = Rec.Status::Approved) OR (Rec.Status = Rec.Status::Closed)) and CanEditDepartmentTarget;
 
                     trigger OnAction()
                     begin
@@ -256,8 +244,15 @@ Page 52185448 "HR Department Targets Card"
                         Rec."Approved Date" := 0D;
                         Rec.Modify;
                         Message('Department targets reopened');
+                        CurrPage.Update(false);
                     end;
                 }
+            }
+            
+            group("Reports")
+            {
+                Caption = 'Reports';
+                
                 action("Print Department Targets")
                 {
                     Caption = 'Print Department Targets';
@@ -273,33 +268,38 @@ Page 52185448 "HR Department Targets Card"
                         Report.Run(Report::"Department Targets Report", true, false, DeptHeader);
                     end;
                 }
-                action("Close")
-                {
-                    Caption = 'Close';
-                    Image = Close;
-                    Promoted = true;
-                    PromotedCategory = Process;
-                    Enabled = Rec.Status = Rec.Status::Approved;
-
-                    trigger OnAction()
-                    begin
-                        if Confirm('Close these Department Targets? This cannot be undone.', false) = false then exit;
-
-                        Rec.TestField(Status, Rec.Status::Approved);
-                        Rec.Status := Rec.Status::Closed;
-                        Rec.Modify;
-                        Message('Department targets closed');
-                    end;
-                }
-            }
-            
-            action("Print")
-            {
-                Caption = 'Print';
-                Image = PrintForm;
-                Promoted = true;
-                PromotedCategory = Report;
             }
         }
     }
+
+    trigger OnOpenPage()
+    begin
+        CanEditDepartmentTarget := CheckEditAccess();
+    end;
+
+    trigger OnAfterGetRecord()
+    begin
+        CanEditDepartmentTarget := CheckEditAccess();
+    end;
+
+    local procedure CheckEditAccess(): Boolean
+    var
+        HREmp: Record "HR Employees";
+        HRHOD: Record "HR Heads of Departments";
+    begin
+        HREmp.Reset;
+        HREmp.SetRange("User ID", UserId);
+        if HREmp.FindFirst then begin
+            HRHOD.Reset;
+            HRHOD.SetRange("Employee No.", HREmp."No.");
+            HRHOD.SetRange("Responsibility center", Rec."Responsibility Center");
+            if HRHOD.FindFirst then
+                exit(true);
+        end;
+
+        exit(false);
+    end;
+
+    var
+        CanEditDepartmentTarget: Boolean;
 }

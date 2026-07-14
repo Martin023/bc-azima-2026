@@ -1,7 +1,7 @@
 report 52186602 "Individual Targets Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = 'Layout\IndividualTargetsReport.rdl';
+    RDLCLayout = './bc-azima-2026/Layout\IndividualTargetsReport.rdl';
     Caption = 'Individual Targets Report';
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;

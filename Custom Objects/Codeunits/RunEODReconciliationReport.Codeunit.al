@@ -1,7 +1,5 @@
 codeunit 52185437 "Run EOD Reconciliation Report"
 {
-    TableNo = Integer;
-
     trigger OnRun()
     var
         TreasuryTrans: Record "Treasury Cashier Transactions";

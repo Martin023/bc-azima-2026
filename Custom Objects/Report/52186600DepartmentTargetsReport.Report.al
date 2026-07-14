@@ -1,7 +1,7 @@
 report 52186600 "Department Targets Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = 'Layout\DepartmentTargetsReport.rdl';
+    RDLCLayout = './bc-azima-2026/Layout\DepartmentTargetsReport.rdl';
     Caption = 'Department Targets Report';
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;
