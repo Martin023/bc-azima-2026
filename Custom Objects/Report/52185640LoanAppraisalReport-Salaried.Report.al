@@ -964,8 +964,9 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 Loan.SetRange(Loan."Member No.", Loans."Member No.");
                 Loan.SetRange(Loan.Posted, true);
                 Loan.SetRange(Loan."Source Unit", Loan."Source Unit"::FOSA);
+                Loan.SetRange("Mobile Loan", false);
                 //exclude BGL and FGL
-                Loan.SetFilter("Loan Product Type", '<>BGL&<>FGL&<>12');
+                Loan.SetFilter("Loan Product Type", '<>BGL&<>FGL&<>012');
                 Loan.SetAutoCalcFields("Total Balance");
                 Loan.SetFilter("Total Balance", '>%1', 0);
                 if Loan.FindSet() then begin
