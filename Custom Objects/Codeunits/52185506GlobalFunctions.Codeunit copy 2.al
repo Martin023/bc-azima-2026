@@ -927,6 +927,7 @@ Codeunit 52185506 "Global Functions"
         SalBuffer: Record "Salary Lines";
         MonthStart: Date;
         MonthEnd: Date;
+        MonthRefDate: Date;
         MonthAmount: Decimal;
         TotalSalary: Decimal;
         Last12Total: Decimal;
@@ -957,10 +958,12 @@ Codeunit 52185506 "Global Functions"
             MaxMonths := 1;
 
         for i := 1 to MaxMonths do begin
-            MonthStart := DMY2Date(1,
-                Date2DMY(CalcDate('<-' + Format(i) + 'M>', Today()), 2),
-                Date2DMY(CalcDate('<-' + Format(i) + 'M>', Today()), 3)
-            );
+            if i = 1 then
+                MonthRefDate := Today()
+            else
+                MonthRefDate := CalcDate('<-' + Format(i - 1) + 'M>', Today());
+
+            MonthStart := DMY2Date(1, Date2DMY(MonthRefDate, 2), Date2DMY(MonthRefDate, 3));
             MonthEnd := CalcDate('<CM>', MonthStart);
 
             SalBuffer.Reset();
