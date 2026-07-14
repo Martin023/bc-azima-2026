@@ -957,10 +957,11 @@ Report 52185745 "Loan Appraisal Checkoff"
                 end;
                 GrossPay := round(((TotalBasic + TrEarni + THouseAllow)), 0.01);
                 NetSalary := round(((TotalBasic + TrEarni + THouseAllow) - TDeductions), 0.01);
-                OneThirdGross := round((NetSalary * 0.33), 0.01);
-                TwoThirdGross := round((NetSalary * 0.66), 0.01);
+                OneThirdGross := round((GrossPay * 0.33), 0.01);
+                TwoThirdGross := round((GrossPay * 0.66), 0.01);
 
-                DisposableInc := TwoThirdGross;
+                DisposableInc := TwoThirdGross - TDeductions;
+
                 if DisposableInc < 0 then
                     DisposableInc := 0
                 else begin
