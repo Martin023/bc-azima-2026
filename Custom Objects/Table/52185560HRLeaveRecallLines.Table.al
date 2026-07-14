@@ -386,7 +386,7 @@ table 52185560 "HR Leave Recall Lines"
         LeaveGjline."Leave Type" := "Leave Type";
         LeaveGjline."Leave Entry Type" := LeaveGjline."Leave Entry Type"::Reimbursement;
         LeaveGjline."No. of Days" := "Days Recalled";
-        LeaveGjline.Description := 'Leave Recall Reimbursement: ' + Format("Recall Date") + ' - ' + "Leave Application Code" + ' - ' + Reason;
+        LeaveGjline.Description := 'Recall' + Format("Recall Date") + ' - ' + "Leave Application Code" + ' - ' + Reason;
         LeaveGjline."Document No." := "Employee No.";
         LeaveGjline."Posting Date" := Today;
         LeaveGjline."Global Dimension 1 Code" := "Global Dimension 1 Code";
