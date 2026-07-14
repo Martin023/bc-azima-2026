@@ -67,10 +67,10 @@ table 52185560 "HR Leave Recall Lines"
 
                 // Calculate RecallEndDate by counting actual leave days from calendar (not calendar days)
                 RecallEndDate := CalculateRecallEndDate("Recall Date", "Days Recalled", LeaveApp);
-                
+
                 // Validate recall end date is within leave period
                 if RecallEndDate > LeaveApp."End Date" then
-                    Error('Days Recalled (%1) extends beyond the leave end date (%2). The recall period would end on %3.', 
+                    Error('Days Recalled (%1) extends beyond the leave end date (%2). The recall period would end on %3.',
                         "Days Recalled", LeaveApp."End Date", RecallEndDate);
 
                 // Check for overlaps with existing recalls
@@ -111,7 +111,7 @@ table 52185560 "HR Leave Recall Lines"
                 // Update Days Remaining After Recall
                 if "Leave Application Code" <> '' then begin
                     LeaveApp.Get("Leave Application Code");
-                    
+
                     // Calculate total previous recalls (excluding this one)
                     TotalPreviousRecalls := 0;
                     ExistingRecalls.Reset();
@@ -456,18 +456,18 @@ table 52185560 "HR Leave Recall Lines"
         while DaysAccumulated < DaysToRecall do begin
             // Get day value from calendar (0.0 = non-working, 0.5 = half-day, 1.0 = full day)
             DayValue := LeaveApp.GetDayLeaveValue(CurrentDate);
-            
+
             // Only count working days
             if DayValue > 0 then begin
                 DaysAccumulated += DayValue;
-                
+
                 // If we've reached or exceeded target, this is the end date
                 if DaysAccumulated >= DaysToRecall then
                     exit(CurrentDate);
             end;
 
             CurrentDate := CalcDate('1D', CurrentDate);
-            
+
             // Safety check: don't go beyond leave end date
             if CurrentDate > LeaveApp."End Date" then
                 exit(CurrentDate);
