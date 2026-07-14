@@ -256,11 +256,9 @@ Report 52185689 "CashierCredit Deposit Slip"
                     CL_MaskedAccountNo := '';
 
                     //Mask transaction line account number
-                    if StrLen("Cashier Transaction Lines"."Account No") > 4 then begin
-                        CL_MaskedAccountNo := CopyStr("Cashier Transaction Lines"."Account No", 1, 2) + 
-                                              PadStr('', StrLen("Cashier Transaction Lines"."Account No") - 4, '*') + 
-                                              CopyStr("Cashier Transaction Lines"."Account No", 
-                                                    StrLen("Cashier Transaction Lines"."Account No") - 1, 2);
+                    if StrLen("Cashier Transaction Lines"."Account No") > 3 then begin
+                        CL_MaskedAccountNo := CopyStr("Cashier Transaction Lines"."Account No", 1, 3) + 
+                                            PadStr('', StrLen("Cashier Transaction Lines"."Account No") - 3, '*');
                     end else
                         CL_MaskedAccountNo := "Cashier Transaction Lines"."Account No";
 
