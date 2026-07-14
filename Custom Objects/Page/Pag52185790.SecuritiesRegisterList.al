@@ -7,6 +7,7 @@ page 52185790 "Securities Register - List"
     PageType = List;
     SourceTable = "Securities Register";
     UsageCategory = Lists;
+    cardpageid = "Collateral Register Card";
 
     layout
     {
@@ -27,7 +28,7 @@ page 52185790 "Securities Register - List"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-  
+
                 field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic, Suite;
@@ -49,7 +50,7 @@ page 52185790 "Securities Register - List"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                
+
                 field("Date Captured"; Rec."Date Captured")
                 {
                     ApplicationArea = Basic, Suite;

@@ -112,21 +112,25 @@ Report 52185862 "prGrossNetPay FxedTC"
                 PeriodTrans.Reset;
                 PeriodTrans.SetRange(PeriodTrans."Employee Code", "Employee Code");
                 PeriodTrans.SetRange(PeriodTrans."Payroll Period", SelectedPeriod);
-                PeriodTrans.SetFilter(PeriodTrans."Group Order", '=1|=4|=9');
-                PeriodTrans.SetFilter(PeriodTrans."Sub Group Order", '<=1');
+                PeriodTrans.SetFilter(PeriodTrans."Transaction Code", '=BPAY|=GPAY|=NPAY');
+                // PeriodTrans.SetFilter(PeriodTrans."Group Order", '=1|=4|=9');
+                // PeriodTrans.SetFilter(PeriodTrans."Sub Group Order", '<=1');
                 PeriodTrans.SetCurrentkey(PeriodTrans."Employee Code", PeriodTrans."Period Month", PeriodTrans."Period Year",
                 PeriodTrans."Group Order", PeriodTrans."Sub Group Order");
                 if PeriodTrans.Find('-') then
                     repeat
-                        if PeriodTrans."Group Order" = 1 then begin
+                        //if PeriodTrans."Group Order" = 1 then begin
+                        if PeriodTrans."Transaction Code" = 'BPAY' then begin
                             BasicPay := PeriodTrans.Amount;
                         end;
 
-                        if PeriodTrans."Group Order" = 4 then begin
+                        //if PeriodTrans."Group Order" = 4 then begin
+                        if PeriodTrans."Transaction Code" = 'GPAY' then begin
                             GrossPay := PeriodTrans.Amount; //Gross pay
                         end;
 
-                        if PeriodTrans."Group Order" = 9 then begin
+                        //if PeriodTrans."Group Order" = 9 then begin
+                        if PeriodTrans."Transaction Code" = 'NPAY' then begin
                             NetPay := PeriodTrans.Amount; //Net pay
                         end;
                     until PeriodTrans.Next = 0;

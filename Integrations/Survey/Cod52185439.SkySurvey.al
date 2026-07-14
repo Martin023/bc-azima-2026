@@ -104,7 +104,7 @@ codeunit 52185439 "Sky Survey"
             SkySurvey.Validate(SystemUserIdentifier);
             SkySurvey.SystemUserOtherDetails := '';
 
-            SkySurvey.SurveyParticipantIdentifierType := 'MSISDN';
+            SkySurvey.ParticipantIdentifierType := 'MSISDN';
             SkySurvey.SurveyParticipantIdentifier := SurveyParticipantPhoneNo;
             SkySurvey.SurveyParticipantFullName := SurveyParticipantFullNames;
             SkySurvey.SurveyParticipantOtherDetails := '';
@@ -152,7 +152,7 @@ codeunit 52185439 "Sky Survey"
         '</DESCRIPTION><OTHER_DETAILS/></SYSTEM_PROCESS><SYSTEM_USER><IDENTIFIER TYPE="SYSTEM_USER_ID">' + Format(SkySurvey.SystemUserIdentifier) +
         '</IDENTIFIER><FULL_NAME>' + Format(SkySurvey.SystemUserName) +
         '</FULL_NAME><DEPARTMENT>' + Format(SkySurvey.SystemUserDepartment) +
-        '</DEPARTMENT><OTHER_DETAILS></OTHER_DETAILS></SYSTEM_USER><OTHER_DETAILS/></TRIGGER><PARTICIPANT><IDENTIFIER TYPE="' + Format(SkySurvey.SurveyParticipantIdentifierType) +
+        '</DEPARTMENT><OTHER_DETAILS></OTHER_DETAILS></SYSTEM_USER><OTHER_DETAILS/></TRIGGER><PARTICIPANT><IDENTIFIER TYPE="' + Format(SkySurvey.ParticipantIdentifierType) +
         '">' + Format(SkySurvey.SurveyParticipantIdentifier) +
         '</IDENTIFIER><FULL_NAME>' + Format(SkySurvey.SurveyParticipantFullName) +
         '</FULL_NAME><OTHER_DETAILS/></PARTICIPANT><BATCH_REFERENCE>' + Format(SkySurvey.SurveyBatchReference) +

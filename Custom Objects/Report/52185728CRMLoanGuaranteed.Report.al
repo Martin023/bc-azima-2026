@@ -97,18 +97,18 @@ Report 52185885 "CRM Loan Guaranteed"
                 column(AvailableShares_LoanGuarantors; "Loan Guarantors and Security"."Available Shares")
                 {
                 }
-                column(Signature_LoanGuarantors; "Loan Guarantors and Security".Signature)
-                {
-                }
+                // column(Signature_LoanGuarantors; "Loan Guarantors and Security".Signature)
+                // {
+                // }
                 column(MemberNo_LoanGuarantors; "Loan Guarantors and Security"."Member No")
                 {
                 }
                 column(LoanType_LoanGuarantors; "Loan Guarantors and Security"."Loan Type")
                 {
                 }
-                column(GuaranteedBalance_LoanGuarantors; "Loan Guarantors and Security"."Guaranteed Balance")
-                {
-                }
+                // column(GuaranteedBalance_LoanGuarantors; "Loan Guarantors and Security"."Guaranteed Balance")
+                // {
+                // }
                 column(LoaneeName_LoanGuarantors; "Loan Guarantors and Security"."Loanee Name")
                 {
                 }

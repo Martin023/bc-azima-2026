@@ -127,7 +127,7 @@ table 52185697 "Signatory Application"
                         Members.TestField(Name);
                         Members.TestField("Date of Birth");
                         // Members.TestField("Payroll/Staff No.");
-                        Members.TestField("Phone No.");
+                        //Members.TestField("Phone No.");
                         // Members.TestField("P.I.N Number");
                         "First Name" := Members."First Name";
                         "Second Name" := Members."Middle Name";
@@ -135,7 +135,8 @@ table 52185697 "Signatory Application"
                         "ID Number" := Members."Primary Identification";
                         "Date Of Birth" := Members."Date of Birth";
                         "Staff/Payroll" := Members."Payroll/Staff No.";
-                        "Phone No." := Members."Phone No.";
+                        if Members."Phone No." = '' then
+                         "Phone No." := Members."Transactional Mobile Number" else "Phone No." := Members."Phone No.";
                         "PIN Number" := Members."P.I.N Number";
 
                         ImageData.Reset;

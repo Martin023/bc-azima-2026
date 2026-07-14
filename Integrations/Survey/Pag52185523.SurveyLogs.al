@@ -126,7 +126,7 @@ page 52185523 "Survey Logs"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the System User Other Details field.', Comment = '%';
                 }
-                field(SurveyParticipantIdentifierType; Rec.SurveyParticipantIdentifierType)
+                field(ParticipantIdentifierType; Rec.ParticipantIdentifierType)
                 {
                     ApplicationArea = All;
                     ToolTip = 'Specifies the value of the Survey Participant Identifier Type field.', Comment = '%';

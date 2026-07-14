@@ -57,10 +57,10 @@ page 52186596 "CRM Loan Guarantors API"
                 {
                     Caption = 'Date Substituted';
                 }
-                field(guaranteedBalance; Rec."Guaranteed Balance")
-                {
-                    Caption = 'Guaranteed Balance';
-                }
+                // field(guaranteedBalance; Rec."Guaranteed Balance")
+                // {
+                //     Caption = 'Guaranteed Balance';
+                // }
                 field(systemId; Rec.SystemId)
                 {
                     Caption = 'SystemId';

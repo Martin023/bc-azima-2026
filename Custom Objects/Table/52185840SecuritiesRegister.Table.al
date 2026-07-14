@@ -59,7 +59,7 @@ table 52185840 "Securities Register"
 
                     "Collateral Name" := SecurityRegSetUp."Security Description";
                     "Collateral Multiplier" := SecurityRegSetUp."Collateral Multiplier";
-                    "Collateral Limit" := "Collateral Value" * ("Collateral Multiplier" / 100);
+
                 end;
             end;
         }
@@ -148,8 +148,7 @@ table 52185840 "Securities Register"
             var
                 Text001: Label 'Forced sale value cannot be more than collateral limit';
             begin
-                if "Forced Sale Value" > "Collateral Limit" then
-                    Error(Text005, "Collateral Limit");
+                "Collateral Limit" := "Forced Sale Value" * ("Collateral Multiplier" / 100);
             end;
         }
         field(33; "Collateral Perfected"; Boolean)
@@ -680,7 +679,7 @@ table 52185840 "Securities Register"
             CFPage.InsertTracker("No.", "Originating Department", true, UserId, CurrentDateTime);
         end;
     end;
-    
+
 
     trigger OnModify()
     begin

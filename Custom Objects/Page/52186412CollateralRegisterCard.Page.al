@@ -172,12 +172,7 @@ page 52186412 "Collateral Register Card"
                     //Editable = NotCashCollateral;
                     ShowMandatory = true;
                 }
-                field("Collateral Limit"; Rec."Collateral Limit")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ShowMandatory = true;
-                    //Editable = NotCashCollateral;
-                }
+
                 field("Amount to be Charged"; Rec."Amount to be Charged")
                 {
                     ApplicationArea = Basic, Suite;
@@ -211,6 +206,12 @@ page 52186412 "Collateral Register Card"
                 {
                     ApplicationArea = Basic, Suite;
                     Editable = NotCashCollateral;
+                }
+                field("Collateral Limit"; Rec."Collateral Limit")
+                {
+                    ApplicationArea = Basic, Suite;
+                    ShowMandatory = true;
+                    //Editable = NotCashCollateral;
                 }
                 field("Market Value"; Rec."Market Value")
                 {

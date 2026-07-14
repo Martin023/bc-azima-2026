@@ -33,7 +33,7 @@ Codeunit 52185490 "Tax Calculation"
         end;
     end;
 
-    procedure FOSAPVCalculateTax(Rec: Record "FOSA Payment Line"; CalculationType: Option VAT,"W/Tax",Retention,"W/VAT") Amount: Decimal
+    procedure FOSAPVCalculateTax(Rec: Record "FOSA Payment Line"; CalculationType: Option VAT,"W/Tax",Retention,"W/VAT","Housing Levy") Amount: Decimal
     begin
         case CalculationType of
             Calculationtype::VAT:
@@ -52,6 +52,10 @@ Codeunit 52185490 "Tax Calculation"
             Calculationtype::"W/VAT":
                 begin
                     Amount := (Rec.Amount * Rec."VAT Withholding Rate" / (100 + Rec."VAT Rate"));
+                end;
+            CalculationType::"Housing Levy":
+                begin
+                    Amount := (Rec.Amount) * (Rec."Housing Levy Rate" / 100);
                 end;
         end;
     end;

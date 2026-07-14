@@ -729,8 +729,10 @@ table 52185729 Loans
                     if SavProducts.Get(ShareCapAcc."Product Type") then begin
                         ShareCapAcc.CALCFIELDS(ShareCapAcc."Balance (LCY)");
                         IF ShareCapAcc."Balance (LCY)" < SavProducts."Minimum Balance" THEN begin
-                            MESSAGE('Member no. %1 has share capital of %2 and minimum required share capital is %3 This will be boosted on the loan.', LoanApp."Member No.", ShareCapAcc."Balance (LCY)", SavProducts."Minimum Balance");
-                            "Share Boosted Amount" := SavProducts."Minimum Balance" - ShareCapAcc."Balance (LCY)";
+                            if "Mobile Loan" <> true then begin
+                                MESSAGE('Member no. %1 has share capital of %2 and minimum required share capital is %3 This will be boosted on the loan.', LoanApp."Member No.", ShareCapAcc."Balance (LCY)", SavProducts."Minimum Balance");
+                                "Share Boosted Amount" := SavProducts."Minimum Balance" - ShareCapAcc."Balance (LCY)";
+                            end;
                         end;
                     end;
                 END ELSE
@@ -1055,10 +1057,12 @@ table 52185729 Loans
                 ProdFac.SetRange("Product ID", Rec."Loan Product Type");
                 if ProdFac.FindFirst then begin
                     //  IF "Picked Mobile Loan"=FALSE THEN BEGIN
-                    if (ProdFac."Nature of Loan Type" = ProdFac."Nature of Loan Type"::Normal) or (ProdFac."Nature of Loan Type" = ProdFac."Nature of Loan Type"::" ") or (ProdFac."Nature of Loan Type" = ProdFac."Nature of Loan Type"::"Karibu Loan") then begin
-                        if ("Requested Amount" > ProdFac."Maximum Loan Amount") or ("Requested Amount" < ProdFac."Minimum Loan Amount") then begin
-                            if "Dummy Appraisal" = false then Error(LoanAmountErr, ProdFac."Minimum Loan Amount", ProdFac."Maximum Loan Amount") else Message(LoanAmountErr, ProdFac."Minimum Loan Amount", ProdFac."Maximum Loan Amount");
-                            //  END;
+                    if "Mobile Loan" <> true then begin
+                        if (ProdFac."Nature of Loan Type" = ProdFac."Nature of Loan Type"::Normal) or (ProdFac."Nature of Loan Type" = ProdFac."Nature of Loan Type"::" ") or (ProdFac."Nature of Loan Type" = ProdFac."Nature of Loan Type"::"Karibu Loan") then begin
+                            if ("Requested Amount" > ProdFac."Maximum Loan Amount") or ("Requested Amount" < ProdFac."Minimum Loan Amount") then begin
+                                if "Dummy Appraisal" = false then Error(LoanAmountErr, ProdFac."Minimum Loan Amount", ProdFac."Maximum Loan Amount") else Message(LoanAmountErr, ProdFac."Minimum Loan Amount", ProdFac."Maximum Loan Amount");
+                                //  END;
+                            end;
                         end;
                     end;
                 end;
@@ -2185,9 +2189,10 @@ table 52185729 Loans
                         GenSetup.Get;
                         GenSetup.testfield("Withdrawal Fee");
                         MaxSelfGuar := 0;
-                        MaxSelfGuar := LoanAppCodeunit.GetmaxSelfGuaranteeAmt(SavAcc."No.");
+                        MaxSelfGuar := LoanAppCodeunit.GetmaxSelfGuaranteeAmt(SavAcc."No.", Rec."Loan No.");
+                        Message('The maximum self guarantee amount is %1', MaxSelfGuar);
                         if "Requested Amount" > MaxSelfGuar then
-                            Error(Text015 + ' of %1. Kindly apply for a lower amount.', MaxSelfGuar);
+                            Error(Text015 + ' of %1. Kindly apply for a lower amount.', MaxSelfGuar, "Requested Amount", "Member Deposits");
                         //"Recommended Amount":=SavAcc."Balance (LCY)"*GenSetup."Self Guarantee %"*0.01;
                         //"Approved Amount":=SavAcc."Balance (LCY)"*GenSetup."Self Guarantee %"*0.01;
                         LoanGuara.Init;
@@ -3846,7 +3851,7 @@ table 52185729 Loans
         CheckOffLines: Record "Checkoff Buffer";
         Text014: Label 'The member must be remmitting checkoff to the organization to qualify';
         Loan: Record Loans;
-        Text015: Label 'The requested amount is more than availabe deposit balance for self guarantee';
+        Text015: Label 'The requested amount %2 is more than available deposit balance %3 for self guarantee';
         MaxSelfGuar: Decimal;
         Text016: Label 'Maximum discounting percentage allowable must be defined';
         Text017: Label 'The loan must be approved before assigning a batch';

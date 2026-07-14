@@ -139,8 +139,8 @@ table 52185739 "Loan Guarantors and Security"
                         if SavingsAccounts.Find('-') then begin
                             if SavingsAccounts."No." = "Savings Account No./Member No." then begin
                                 "Self Guarantee" := true;
-                                "Available Shares" := LoanAppraisal.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.") - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.");
-                                "Amount Guaranteed" := LoanAppraisal.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.") - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.");
+                                "Available Shares" := LoanAppraisal.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.");
+                                "Amount Guaranteed" := LoanAppraisal.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.");
                                 "Original Amount Guaranteed" := "Amount Guaranteed";
                                 LoansR."Self Guarantee" := true;
                             end
@@ -277,6 +277,7 @@ table 52185739 "Loan Guarantors and Security"
         }
         field(11; "Amount Guaranteed"; Decimal)
         {
+            Caption = 'Pledged Deposits';
 
             trigger OnValidate()
             begin
@@ -293,16 +294,50 @@ table 52185739 "Loan Guarantors and Security"
 
             trigger OnValidate()
             begin
-                Cust.Reset;
-                Cust.SetRange(Cust."Payroll/Staff No.", "Staff/Payroll No.");
-                Cust.SetRange(Cust."Loan Security Inclination", Cust."Loan Security Inclination"::"Long Term Loan Security");
-                if Cust.Find('-') then begin
-                    "Savings Account No./Member No." := Cust."No.";
-                    Validate("Savings Account No./Member No.");
-                end
-                else begin
-                    "Savings Account No./Member No." := '';
-                    Error('Member deposits account not found.');
+                // Cust.Reset;
+                // Cust.SetRange(Cust."Payroll/Staff No.", "Staff/Payroll No.");
+                // Cust.SetRange(Cust."Loan Security Inclination", Cust."Loan Security Inclination"::"Long Term Loan Security");
+                // if Cust.Find('-') then begin
+                //     "Savings Account No./Member No." := Cust."No.";
+                //     Validate("Savings Account No./Member No.");
+                // end
+                // else begin
+                //     "Savings Account No./Member No." := '';
+                //     Error('Member deposits account not found.');
+                // end;
+            //     "Member Guaranteed" := '';
+            //     "Loanee Name" := '';
+            //     Name := '';
+            //    /// "Staff/Payroll No." := '';
+            //     "Deposits/Shares" := 0;
+            //     "ID No." := '';
+            //     "Member No" := '';
+            //     Name := '';
+            //     "Phone No." := '';
+            //     "Savings Account No./Member No." := '';
+
+                if rec."Employer Code" <> '' then begin
+                    Members.Reset();
+                    Members.SetRange(Members."Payroll/Staff No.", Rec."Staff/Payroll No.");
+                    Members.SetRange(Members."Employer Code", Rec."Employer Code");
+                    if Members.FindFirst() then begin
+                        Cust.reset();
+                        Cust.SetRange(Cust."Member No.", Members."No.");
+                        Cust.setrange("Product Category", Cust."Product Category"::"BOSA Deposits");
+                        if Cust.FindFirst() then begin
+                            Rec."Savings Account No./Member No." := Cust."No.";
+                            Rec.Modify(true);
+                            if Rec."Savings Account No./Member No." <> '' then
+                                Validate(Rec."Savings Account No./Member No.");
+                        end
+                        else begin
+                            "Savings Account No./Member No." := '';
+                            Error('Member deposits account not found.');
+                        end;
+                    end
+                    else
+                        Message('Member deposits account not found for the specified employer code %1 and staff/payroll number %2', Rec."Employer Code", Rec."Staff/Payroll No.");
+
                 end;
             end;
         }
@@ -345,9 +380,9 @@ table 52185739 "Loan Guarantors and Security"
         {
             Editable = false;
         }
-        field(21; Signature; BLOB)
-        {
-        }
+        // field(21; Signature; BLOB)
+        // {
+        // }
         field(22; "Member No"; Code[20])
         {
         }
@@ -361,17 +396,15 @@ table 52185739 "Loan Guarantors and Security"
             CalcFormula = Lookup(Loans."Loan Product Type Name" WHERE("Loan No." = FIELD("Loan No")));
             FieldClass = FlowField;
         }
-        field(24; "Guaranteed Balance"; Decimal)
-        {
-        }
+        // field(24; "Guaranteed Balance"; Decimal)
+        // {
+        // }
         field(25; "Loanee Name"; Text[150])
         {
             Editable = false;
         }
         field(26; "Guarantor Type"; Enum "Loan Guarantor Types Enum")
         {
-            // OptionCaption = 'Guarantor,Collateral,Lien,Fixed Deposit';
-            // OptionMembers = Guarantor,Collateral,Lien,"Fixed Deposit";
 
             trigger OnValidate()
             begin
@@ -447,9 +480,9 @@ table 52185739 "Loan Guarantors and Security"
             TableRelation = "Savings Accounts"."No." WHERE("Product Category" = filter("BOSA Deposits"),
                                                             Balance = FILTER(> 0));
         }
-        field(32; test; Integer)
-        {
-        }
+        // field(32; test; Integer)
+        // {
+        // }
         field(33; "Total Loan Balance"; Decimal)
         {
             CalcFormula = Sum("Credit Ledger Entry".Amount WHERE("Loan No" = FIELD("Loan No"),
@@ -569,6 +602,11 @@ table 52185739 "Loan Guarantors and Security"
         {
             DataClassification = ToBeClassified;
             Editable = false;
+        }
+        field(67; "Employer Code"; Code[20])
+        {
+            Tablerelation = Customer."No." WHERE("Account Type" = const("Employer Code"));
+            DataClassification = ToBeClassified;
         }
     }
 
