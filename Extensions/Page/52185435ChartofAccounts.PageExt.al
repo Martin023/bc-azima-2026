@@ -49,13 +49,15 @@ PageExtension 52185435 pageextension52185435 extends "Chart of Accounts"
         {
             ApplicationArea = Basic;
         }
-               modify("Debit Amount")
+        modify("Debit Amount")
         {
             ApplicationArea = Basic;
+            Visible = false;
         }
         modify("Credit Amount")
         {
             ApplicationArea = Basic;
+            Visible = false;
         }
         modify("Balance at Date")
         {
@@ -64,27 +66,33 @@ PageExtension 52185435 pageextension52185435 extends "Chart of Accounts"
         modify("Gen. Posting Type")
         {
             ApplicationArea = Basic;
+            visible = false;
         }
         modify("Gen. Bus. Posting Group")
         {
             ApplicationArea = Basic;
+            visible = false;
         }
         modify("Gen. Prod. Posting Group")
         {
             ApplicationArea = Basic;
+            visible = false;
         }
         modify("VAT Bus. Posting Group")
         {
             ApplicationArea = Basic;
+            visible = false;
         }
         modify("VAT Prod. Posting Group")
         {
             ApplicationArea = Basic;
+            visible = false;
         }
- 
+
         modify("Additional-Currency Net Change")
         {
             ApplicationArea = Basic;
+            visible = false;
         }
         modify("Add.-Currency Balance at Date")
         {
@@ -116,6 +124,11 @@ PageExtension 52185435 pageextension52185435 extends "Chart of Accounts"
             ApplicationArea = Basic;
         }
         modify("Default Deferral Template Code")
+        {
+            ApplicationArea = Basic;
+            Visible = false;
+        }
+        modify("Source Currency Code")
         {
             ApplicationArea = Basic;
             Visible = false;
