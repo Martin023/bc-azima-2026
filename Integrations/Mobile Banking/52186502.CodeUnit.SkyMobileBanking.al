@@ -7021,12 +7021,12 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                      your available balance is Ksh [AMOUNT] on [TIMESTAMP].
                                                                     */
                                                                     theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
-                                                                    ', REF: ' + theReference +
-                                                                    ', you have successfully transferred Kshs. ' +
-                                                                    Format(MpesaTransBuffer."Transaction Amount") +
-                                                                     ' to ' + TheDestinationSavings."Name" +
-                                                                    ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccounts, true)) +
-                                                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
+                                                                                // ', REF: ' + theReference +
+                                                                                ', you have successfully transferred Kshs. ' +
+                                                                                Format(MpesaTransBuffer."Transaction Amount") +
+                                                                                ' to ' + TheDestinationSavings."Name" +
+                                                                                ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccounts, true)) +
+                                                                                ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
                                                                 end;
 
                                                                 SkySMS.SendSms(
@@ -7057,7 +7057,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
                                                                 theSMS := 'Jambo  ' + TheSourceMember."First Name".ToUpper() +
                                                                     ', your internal loan repayment request of KES ' +
-                                                                    Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
+                                                                    Format(MpesaTransBuffer."Transaction Amount") +
                                                                     ' from ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Savings Account" +
                                                                     ' to ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Loan Account" +
                                                                     ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
@@ -7087,11 +7087,11 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             if TheSourceMember."No." <> TheDestinationSavings."Member No." then begin
                                                                 if TheDestinationMember.Get(TheDestinationSavings."Member No.") then begin
                                                                     theSMS := 'Jambo ' + TheDestinationMember."First Name".ToUpper() +
-                                                                        ', ' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
-                                                                        Format(MpesaTransBuffer."Transaction Amount") +
-                                                                        ' to your ' + TheDestinationSavings."Product Name" + ' account no. ' + TheDestinationSavings."No." +
-                                                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                        '. Ref: ' + theReference;
+                                                                                ', ' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
+                                                                                Format(MpesaTransBuffer."Transaction Amount") +
+                                                                                ' to your ' + TheDestinationSavings."Product Name" + ' account no. ' + TheDestinationSavings."No." +
+                                                                                ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
+                                                                    // '. Ref: ' + theReference;
 
                                                                     SkySMS.SendSms(
                                                                         SMSSource::IFT_ACCOUNT,
@@ -7116,13 +7116,13 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             if TheSourceMember."No." <> TheDestinationLoan."Member No." then begin
                                                                 if TheDestinationMember.Get(TheDestinationSavings."Member No.") then begin
                                                                     theSMS := 'Jambo ' + TheDestinationMember."First Name".ToUpper() +
-                                                            ',' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
-                                                            Format(MpesaTransBuffer."Transaction Amount") +
-                                                            ' for repayment of your loan no. ' + TheDestinationLoan."Loan No." +
-                                                            ' on ' +
-                                                            GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                            '. Principal paid: KES ' + Format(RepaymentPaidAmount) + ', Interest paid: KES ' + Format(InterestPaidAmount) +
-                                                            '. Ref: ' + theReference;
+                                                                            ',' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
+                                                                            Format(MpesaTransBuffer."Transaction Amount") +
+                                                                            ' for repayment of your loan no. ' + TheDestinationLoan."Loan No." +
+                                                                            ' on ' +
+                                                                            GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                            '. Principal paid: KES ' + Format(RepaymentPaidAmount) + ', Interest paid: KES ' + Format(InterestPaidAmount);
+                                                                    // '. Ref: ' + theReference;
 
                                                                     SkySMS.SendSms(
                                                                         SMSSource::IFT_LOAN,
@@ -7404,12 +7404,12 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                     end;
 
                                                                                     theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
-                                                                                   ', REF: ' + theReference +
-                                                                                   ', you have successfully transferred Kshs. ' +
-                                                                                   Format(MpesaTransBuffer."Transaction Amount") +
-                                                                                   ' to ' + TheDestinationSavings."Name" +
-                                                                                   ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccounts, true)) +
-                                                                                   ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
+                                                                                                ', REF: ' + theReference +
+                                                                                                ', you have successfully transferred Kshs. ' +
+                                                                                                Format(MpesaTransBuffer."Transaction Amount") +
+                                                                                                ' to ' + TheDestinationSavings."Name" +
+                                                                                                ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccounts, true)) +
+                                                                                                ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
 
                                                                                     SkySMS.SendSms(
                                                                                         SMSSource::IFT_ACCOUNT,
@@ -7430,13 +7430,13 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                     if MpesaTransBuffer."Loan No." <> '' then begin
                                                                                         if TheDestinationLoan.Get(MpesaTransBuffer."Loan No.") then begin
                                                                                             theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
-                                                                                            ', your internal loan repayment request of KES ' +
-                                                                                                Format(MpesaTransBuffer."Transaction Amount") +
-                                                                                                ' from ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Savings Account" +
-                                                                                                ' to ' + TheDestinationLoan."Loan Product Type Name" + ' ' + MpesaTransBuffer."Loan No." +
-                                                                                                ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                                                ' has been completed successfully. Principal paid: KES ' + Format(RepaymentPaidAmount) + ', Interest paid: KES ' + Format(InterestPaidAmount) +
-                                                                                                '. Ref: ' + theReference;
+                                                                                                        ', your internal loan repayment request of KES ' +
+                                                                                                        Format(MpesaTransBuffer."Transaction Amount") +
+                                                                                                        ' from ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Savings Account" +
+                                                                                                        ' to ' + TheDestinationLoan."Loan Product Type Name" + ' ' + MpesaTransBuffer."Loan No." +
+                                                                                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                                                        ' has been completed successfully. Principal paid: KES ' + Format(RepaymentPaidAmount) + ', Interest paid: KES ' + Format(InterestPaidAmount);
+                                                                                            // '. Ref: ' + theReference;
 
                                                                                             SkySMS.SendSms(
                                                                                                 SMSSource::IFT_LOAN,
@@ -7463,11 +7463,11 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                 if TheSourceMember."No." <> TheDestinationSavings."Member No." then begin
                                                                                     if TheDestinationMember.Get(TheDestinationSavings."Member No.") then begin
                                                                                         theSMS := 'Jambo ' + TheDestinationMember."First Name".ToUpper() +
-                                                                                         ', ' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
-                                                                                         Format(MpesaTransBuffer."Transaction Amount") +
-                                                                                         ' to your ' + TheDestinationSavings."Product Name" + ' ' + TheDestinationSavings."No." +
-                                                                                         ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                                         '. Ref: ' + theReference;
+                                                                                                    ', ' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
+                                                                                                    Format(MpesaTransBuffer."Transaction Amount") +
+                                                                                                    ' to your ' + TheDestinationSavings."Product Name" + ' ' + TheDestinationSavings."No." +
+                                                                                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
+                                                                                        //  '. Ref: ' + theReference;
 
                                                                                         SkySMS.SendSms(
                                                                                             SMSSource::IFT_ACCOUNT,
@@ -7492,13 +7492,13 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                 if TheSourceMember."No." <> TheDestinationLoan."Member No." then begin
                                                                                     if TheDestinationMember.Get(TheDestinationSavings."Member No.") then begin
                                                                                         theSMS := 'Jambo ' + TheDestinationMember."First Name".ToUpper() +
-                                                                                ',' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
-                                                                                Format(MpesaTransBuffer."Transaction Amount") +
-                                                                                ' for repayment of your loan no. ' + TheDestinationLoan."Loan No." +
-                                                                                ' on ' +
-                                                                                GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                                '. Principal paid: KES ' + Format(RepaymentPaidAmount) + ', Interest paid: KES ' + Format(InterestPaidAmount) +
-                                                                                '. Ref: ' + theReference;
+                                                                                                    ',' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
+                                                                                                    Format(MpesaTransBuffer."Transaction Amount") +
+                                                                                                    ' for repayment of your loan no. ' + TheDestinationLoan."Loan No." +
+                                                                                                    ' on ' +
+                                                                                                    GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                                                    '. Principal paid: KES ' + Format(RepaymentPaidAmount) + ', Interest paid: KES ' + Format(InterestPaidAmount);
+                                                                                        // '. Ref: ' + theReference;
 
                                                                                         SkySMS.SendSms(
                                                                                             SMSSource::IFT_LOAN,
@@ -7541,13 +7541,12 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                 MpesaTransBuffer."Transaction Type"::"Account Transfer",
                                                                                 MpesaTransBuffer."Transaction Type"::"Kesasa Account Transfer":
                                                                                     begin
-                                                                                        theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() + ', REF: '
-                                                                                            + theReference +
-                                                                                            ', you have successfully transferred Kshs. ' +
-                                                                                            Format(MpesaTransBuffer."Transaction Amount") +
-                                                                                            ' to ' + TheDestinationSavings."Name" +
-                                                                                            ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccounts, true)) +
-                                                                                            ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
+                                                                                        theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
+                                                                                                        ', you have successfully transferred Kshs. ' +
+                                                                                                        Format(MpesaTransBuffer."Transaction Amount") +
+                                                                                                        ' to ' + TheDestinationSavings."Name" +
+                                                                                                        ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccounts, true)) +
+                                                                                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
                                                                                         SkySMS.SendSms(
                                                                                             SMSSource::IFT_ACCOUNT,
                                                                                             TheSourceMember."Transactional Mobile Number",
@@ -7577,13 +7576,13 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                                 RepaymentPaidAmount := CredLedgEntry.Amount;
 
                                                                                                 theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
-                                                                                                ', your internal loan repayment request of KES ' +
-                                                                                                    Format(MpesaTransBuffer."Transaction Amount") +
-                                                                                                    ' from ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Savings Account" +
-                                                                                                    ' to ' + TheDestinationLoan."Loan Product Type Name" + ' ' + MpesaTransBuffer."Loan No." +
-                                                                                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                                                    ' has been completed successfully. Principal paid: KES ' + Format(RepaymentPaidAmount) + ', Interest paid: KES ' + Format(InterestPaidAmount) +
-                                                                                                    '. Ref: ' + theReference;
+                                                                                                                ', your internal loan repayment request of KES ' +
+                                                                                                                Format(MpesaTransBuffer."Transaction Amount") +
+                                                                                                                ' from ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Savings Account" +
+                                                                                                                ' to ' + TheDestinationLoan."Loan Product Type Name" + ' ' + MpesaTransBuffer."Loan No." +
+                                                                                                                ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                                                                ' has been completed successfully. Principal paid: KES ' + Format(RepaymentPaidAmount) + ', Interest paid: KES ' + Format(InterestPaidAmount);
+                                                                                                // '. Ref: ' + theReference;
 
                                                                                                 SkySMS.SendSms(
                                                                                                     SMSSource::IFT_LOAN,
@@ -7610,11 +7609,11 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                     if TheSourceMember."No." <> TheDestinationSavings."Member No." then begin
                                                                                         if TheDestinationMember.Get(TheDestinationSavings."Member No.") then begin
                                                                                             theSMS := 'Jambo ' + TheDestinationMember."First Name".ToUpper() +
-                                                                                    ', ' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
-                                                                                    Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
-                                                                                    ' to your account no. ' + TheDestinationSavings."No." +
-                                                                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                                    '. Ref: ' + theReference;
+                                                                                                        ', ' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
+                                                                                                        Format(MpesaTransBuffer."Transaction Amount") +
+                                                                                                        ' to your account no. ' + TheDestinationSavings."No." +
+                                                                                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
+                                                                                            // '. Ref: ' + theReference;
 
                                                                                             SkySMS.SendSms(
                                                                                                 SMSSource::IFT_ACCOUNT,
@@ -7639,13 +7638,13 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                     if TheSourceMember."No." <> TheDestinationLoan."Member No." then begin
                                                                                         if TheDestinationMember.Get(TheDestinationSavings."Member No.") then begin
                                                                                             theSMS := 'Jambo ' + TheDestinationMember."First Name".ToUpper() +
-                                                                                    ',' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
-                                                                                    Format(MpesaTransBuffer."Transaction Amount" - MpesaTransBuffer."Total Charges") +
-                                                                                    ' for repayment of your loan no. ' + TheDestinationLoan."Loan No." +
-                                                                                    ' on ' +
-                                                                                    GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                                    '. Principal paid: KES ' + Format(RepaymentPaidAmount) + ', Interest paid: KES ' + Format(InterestPaidAmount) +
-                                                                                    '. Ref: ' + theReference;
+                                                                                                        ',' + TheSourceMember.Name.ToUpper() + ' has transferred KES ' +
+                                                                                                        Format(MpesaTransBuffer."Transaction Amount") +
+                                                                                                        ' for repayment of your loan no. ' + TheDestinationLoan."Loan No." +
+                                                                                                        ' on ' +
+                                                                                                        GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
+                                                                                                        '. Principal paid: KES ' + Format(RepaymentPaidAmount) + ', Interest paid: KES ' + Format(InterestPaidAmount);
+                                                                                            // '. Ref: ' + theReference;
 
                                                                                             SkySMS.SendSms(
                                                                                                 SMSSource::IFT_LOAN,
