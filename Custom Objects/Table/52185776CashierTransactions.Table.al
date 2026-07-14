@@ -179,6 +179,8 @@ table 52185776 "Cashier Transactions"
                         if BankAccount."Balance (LCY)" <= 0 then begin
                             if (Type <> type::"Cash Deposit") and (Type <> Type::"Cheque Deposit") and (Type <> Type::"Credit Receipt") then
                                 Error('You need to request money from treasury first before proceeding!');
+                        end else if BankAccount."Balance (LCY)" <= BankAccount."Replenishment Balance" then begin
+                                Message('Your cash balance has reached the replenishment level. Please request replenishment from treasury.');
                         end;
 
 

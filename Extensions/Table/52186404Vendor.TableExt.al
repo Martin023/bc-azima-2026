@@ -79,21 +79,43 @@ TableExtension 52186404 tableextension52186404 extends Vendor
         }
         field(500157; "Created At"; DateTime)
         {
-            
+
         }
-        field(500158;Comments;Text[200])
+        field(500158; Comments; Text[200])
         {
-            
+
         }
-        field(500159;"Vendor Categories";Code[250])
+        field(500159; "Vendor Categories"; Code[250])
         {
-            TableRelation="Vendor Categories";
+            TableRelation = "Vendor Categories";
+
+            trigger OnValidate()
+            begin
+                if "Vendor Categories" <> xRec."Vendor Categories" then
+                    Validate("Vendor SubCategory", '');
+            end;
         }
-        field(500160;Archived;Boolean)
+        field(500160; Archived; Boolean)
         {
-            
+
         }
-        
+        field(500161; "Vendor SubCategory"; Code[250])
+        {
+            Caption = 'Vendor SubCategory';
+            TableRelation = "Vendor SubCategories"."Vendor SubCategory" WHERE("Vendor Category" = field("Vendor Categories"));
+
+            trigger OnValidate()
+            begin
+                if "Vendor SubCategory" <> '' then
+                    TestField("Vendor Categories");
+            end;
+        }
+
+        field(500162; "Company Registration No."; Code[250])
+        {
+            DataClassification = ToBeClassified;
+        }
+
     }
 
     trigger OnInsert()

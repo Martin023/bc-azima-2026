@@ -101,7 +101,11 @@ table 52185797 "Account Transfer Header"
             TableRelation = Members;
 
             trigger OnValidate()
+            var
+                Cust : Record Members;
             begin
+                if Cust.Get("Member No") then
+                    "Member Name" := Cust.Name;
                 AccountTransferHeader.Reset;
                 AccountTransferHeader.SetRange("Member No", "Member No");
                 AccountTransferHeader.SetRange(Posted, false);
@@ -129,6 +133,7 @@ table 52185797 "Account Transfer Header"
                     SavingsREC.Reset;
                     SavingsREC.SetRange(SavingsREC."Member No.", "Member No");
                     SavingsREC.setfilter("Product Category", '<>%1', SavingsREC."Product Category"::"Entrance Fee");
+                    SavingsREC.SetLoadFields("Balance (LCY)");
                     if SavingsREC.Find('-') then begin
                         repeat
                             TransSource.Init;
@@ -177,6 +182,7 @@ table 52185797 "Account Transfer Header"
                     SavingsREC.Reset;
                     SavingsREC.SetRange(SavingsREC."Member No.", "Member No");
                     SavingsREC.setfilter("Product Category", '<>%1', SavingsREC."Product Category"::"Entrance Fee");
+                    SavingsREC.SetLoadFields("Balance (LCY)");
                     if SavingsREC.Find('-') then begin
                         repeat
                             TransSource.Init;
@@ -484,6 +490,10 @@ table 52185797 "Account Transfer Header"
             Editable = false;
         }
         field(22; "Recover Arrears"; Boolean)
+        {
+
+        }
+        field(23; "Member Name"; Text[100])
         {
 
         }

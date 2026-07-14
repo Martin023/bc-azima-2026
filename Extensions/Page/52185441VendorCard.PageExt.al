@@ -172,10 +172,11 @@ PageExtension 52185441 pageextension52185441 extends "Vendor Card"
         }
         modify("Home Page")
         {
-
+            Caption = 'Website';
             //Unsupported feature: Property Modification (Level) on ""Home Page"(Control 86)".
 
             ApplicationArea = Basic;
+
         }
         modify("Language Code")
         {
@@ -194,6 +195,7 @@ PageExtension 52185441 pageextension52185441 extends "Vendor Card"
         modify(GLN)
         {
             ApplicationArea = Basic;
+            visible = false;
 
             //Unsupported feature: Property Insertion (Visible) on "GLN(Control 25)".
 
@@ -209,6 +211,7 @@ PageExtension 52185441 pageextension52185441 extends "Vendor Card"
         modify("Prices Including VAT")
         {
             ApplicationArea = Basic;
+            Visible = false;
         }
 
 
@@ -253,6 +256,7 @@ PageExtension 52185441 pageextension52185441 extends "Vendor Card"
         }
         modify(Payments)
         {
+            Visible = false;
             Editable = DocumentIsEditable;
         }
 
@@ -304,6 +308,7 @@ PageExtension 52185441 pageextension52185441 extends "Vendor Card"
         }
         modify(Receiving)
         {
+            visible = false;
             Editable = DocumentIsEditable;
         }
         modify("Location Code")
@@ -348,6 +353,7 @@ PageExtension 52185441 pageextension52185441 extends "Vendor Card"
         {
             Visible = true;
             Editable = true;
+            ShowMandatory = true;
         }
 
         //Unsupported feature: Property Deletion (ToolTipML) on "Name(Control 4)".
@@ -487,7 +493,30 @@ PageExtension 52185441 pageextension52185441 extends "Vendor Card"
             Visible = false;
         }
 
+        modify("Company Size Code")
+        {
+            Visible = false;
+        }
 
+        modify("Tax Area Code")
+        {
+            Visible = false;
+        }
+
+        modify("Tax Liable")
+        {
+            Visible = false;
+        }
+
+        modify("Foreign Trade")
+        {
+            Visible = false;
+        }
+
+        modify("Contact")
+        {
+            Visible = false;
+        }
 
         addafter("Cash Flow Payment Terms Code")
         {
@@ -523,8 +552,21 @@ PageExtension 52185441 pageextension52185441 extends "Vendor Card"
         {
             field("Vendor Type"; rec."Vendor Type")
             {
+                visible = false;
                 ApplicationArea = Basic;
                 Editable = true;
+            }
+            field("Vendor Category"; Rec."Vendor Categories")
+            {
+                ApplicationArea = Basic;
+                Editable = true;
+                ShowMandatory = true;
+            }
+            field("Vendor SubCategory"; Rec."Vendor SubCategory")
+            {
+                ApplicationArea = Basic;
+                Editable = true;
+                ShowMandatory = true;
             }
         }
         addafter("VAT Registration No.")
@@ -533,10 +575,14 @@ PageExtension 52185441 pageextension52185441 extends "Vendor Card"
             {
                 ApplicationArea = Basic;
                 Editable = true;
+                ShowMandatory = true;
             }
-            field("Vendor Category"; Rec."Vendor Categories")
-            {
 
+            field("Company Registration No."; rec."Company Registration No.")
+            {
+                ApplicationArea = Basic;
+                Editable = true;
+                ShowMandatory = true;
             }
         }
         addafter("Company Size Code")
@@ -552,7 +598,7 @@ PageExtension 52185441 pageextension52185441 extends "Vendor Card"
             }
             field(Archived; Rec.Archived)
             {
-
+                visible = false;
             }
 
         }
