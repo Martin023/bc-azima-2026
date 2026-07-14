@@ -31,7 +31,7 @@ Codeunit 52185484 "Loan Appraisal Codeunit"
         GenSetup.TestField("Self Guarantee %");
         GenSetup.testField("Withdrawal Fee");
         SavBal := SavingsAcc.GetAvailableBalance(Accno);
-        Message('Available Balance: %1', SavBal);
+        //Message('Available Balance: %1', SavBal);
         if SavBal > 0 then begin
             SavingsAcc.Reset();
             SavingsAcc.Setrange("No.", Accno);
@@ -47,12 +47,12 @@ Codeunit 52185484 "Loan Appraisal Codeunit"
                         TotalThreeMonthInterest += (Loans."Outstanding Balance" * 3 * (Loans."Interest" / 12 * 0.01));
                     until Loans.Next() = 0;
                 end;
-                Message('Total Loan Balance: %1, Total Three Month Interest: %2', TotalLoanBalance, TotalThreeMonthInterest);
+                //Message('Total Loan Balance: %1, Total Three Month Interest: %2', TotalLoanBalance, TotalThreeMonthInterest);
                 TotalLoanCommittment := TotalLoanBalance + TotalThreeMonthInterest;
-                Message('Total Loan Committment: %1', TotalLoanCommittment);
+                //Message('Total Loan Committment: %1', TotalLoanCommittment);
             end;
             Deductions := TotalLoanCommittment + GenSetup."Withdrawal Fee" + GetTotalGuaranteedAmt(Accno) - GetTotalTopUpLoans(LoanNo);
-            Message('Deductions: %1, Available Balance: %2', Deductions, SavBal);
+           // Message('Deductions: %1, Available Balance: %2', Deductions, SavBal);
             //Deductions := (GenSetup."Self Guarantee %" * 0.01 * SavBal * 3) + GenSetup."Withdrawal Fee" + GetTotalSelfGuarantee(Accno) + GetTotalGuaranteedAmt(Accno);
             //Deductions := 
             //(90 * 0.01 *1,158,790.42 * 3) +  3000 + 53,857.00 + 53,857.00 = 1,059,790.42

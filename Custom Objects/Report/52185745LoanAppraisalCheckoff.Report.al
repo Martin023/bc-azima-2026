@@ -1248,7 +1248,7 @@ Report 52185745 "Loan Appraisal Checkoff"
                 //TotalExciseDuty := Round(TotalExciseDuty, 1, '>');
 
                 // NetTakeHome := NetTakeHome - TotalExciseDuty;
-                NetTakeHome := NetTakeHome - (DepPurchaseComm + Loans."Loans - Deposit Purchase" + Loans."Share Boosted Amount" + OneMonthInterest + TopUpComms);
+                NetTakeHome := NetTakeHome - (DepPurchaseComm + Loans."Loans - Deposit Purchase" + Loans."Share Boosted Amount" + OneMonthInterest + TopUpComms + OffsetTotal);
                 if NetTakeHome < 0 then
                     NetTakeHome := 0;
                 // NetTakeHome := NetTakeHome;
