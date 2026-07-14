@@ -574,12 +574,12 @@ page 52185555 "HR Leave Application Card"
                             exit;
 
                         Rec.TestField(Status);
-                        
+
                         if Rec.Status = Rec.Status::Approved then
                             Error('Cannot reopen Approved leave applications. Use the Recall functionality instead to adjust approved leave.');
 
                         if (Rec.Status <> Rec.Status::Rejected) and (Rec.Status <> Rec.Status::Cancelled) and (Rec.Status <> Rec.Status::"Pending Approval") then
-                            Error('You can only reopen Rejected, Cancelled, or Pending Approval applications.');
+                            Error('You can only reopen Rejected, Cancelled, and Pending Approval applications .');
 
                         Rec.Status := Rec.Status::New;
                         Rec.Modify(true);
