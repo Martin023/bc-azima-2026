@@ -47,11 +47,48 @@ table 52185496 "HR Department Targets Header"
         {
             Caption = 'Appraisal Period';
             TableRelation = "HR Appraisal Period"."Appraisal Period";
+            
+            trigger OnValidate()
+            var
+                AppraisalPeriodRec: Record "HR Appraisal Period";
+            begin
+                if "Appraisal Period" <> 0D then begin
+                    if AppraisalPeriodRec.Get("Appraisal Period") then begin
+                        "Appraisal Year" := AppraisalPeriodRec."Appraisal Year";
+                        "Review Sequence No" := AppraisalPeriodRec."Review Sequence No";
+                        "Appraisal Cycle Stage" := AppraisalPeriodRec."Appraisal Cycle Stage";
+                        "Period Start Date" := AppraisalPeriodRec."Period Start Date";
+                        "Period End Date" := AppraisalPeriodRec."Period End Date";
+                    end;
+                end;
+            end;
         }
         field(5; "Appraisal Year"; Integer)
         {
             Caption = 'Appraisal Year';
-            Editable = true;
+            Editable = false;
+        }
+        field(29; "Review Sequence No"; Integer)
+        {
+            Caption = 'Review Sequence No';
+            Editable = false;
+        }
+        field(30; "Appraisal Cycle Stage"; Option)
+        {
+            Caption = 'Appraisal Cycle Stage';
+            OptionCaption = 'Target Setting,Evaluation Review,Year-End Review';
+            OptionMembers = "Target Setting","Evaluation Review","Year-End Review";
+            Editable = false;
+        }
+        field(31; "Period Start Date"; Date)
+        {
+            Caption = 'Period Start Date';
+            Editable = false;
+        }
+        field(32; "Period End Date"; Date)
+        {
+            Caption = 'Period End Date';
+            Editable = false;
         }
         field(6; "Target Date"; Date)
         {

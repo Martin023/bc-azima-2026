@@ -49,5 +49,30 @@ table 52185515 "HR Appraisal Period"
     fieldgroups
     {
     }
+
+    trigger OnModify()
+    var
+        IndivTargetHeader: Record "HR Individual Targets Header";
+    begin
+        // CASCADE CYCLE STAGE CHANGES TO INDIVIDUAL APPRAISALS
+        if (xRec."Appraisal Cycle Stage" <> "Appraisal Cycle Stage") or 
+           (xRec."Period Start Date" <> "Period Start Date") or 
+           (xRec."Period End Date" <> "Period End Date") then begin
+            
+            IndivTargetHeader.Reset;
+            IndivTargetHeader.SetRange("Appraisal Year", "Appraisal Year");
+            IndivTargetHeader.SetRange("Review Sequence No", "Review Sequence No");
+            IndivTargetHeader.SetFilter(Status, '<>%1', IndivTargetHeader.Status::Posted);
+            if IndivTargetHeader.FindSet(true) then begin
+                repeat
+                    IndivTargetHeader."Appraisal Cycle Stage" := "Appraisal Cycle Stage";
+                    IndivTargetHeader."Period Start Date" := "Period Start Date";
+                    IndivTargetHeader."Period End Date" := "Period End Date";
+                    IndivTargetHeader."Appraisal Period" := "Appraisal Period Description";
+                    IndivTargetHeader.Modify;
+                until IndivTargetHeader.Next = 0;
+            end;
+        end;
+    end;
 }
 
