@@ -192,6 +192,12 @@ table 52185560 "HR Leave Recall Lines"
             TableRelation = "HR Leave Types".Code;
             Editable = false;
         }
+        field(20; "Recall End Date"; Date)
+        {
+            Caption = 'Recall End Date';
+            Editable = false;
+            ToolTip = 'Last working day of the recall period';
+        }
         field(17; "Leave Start Time"; Text[20])
         {
             Caption = 'Leave Starts';
@@ -264,6 +270,10 @@ table 52185560 "HR Leave Recall Lines"
         "Leave Start Time" := LeaveApp."Leave Start Time Calc";
         "Leave Return Time" := LeaveApp."Return Time";
 
+        // AUTO-POPULATE RECALL DATE FROM PARENT LEAVE APPLICATION CARD
+        if LeaveApp."Recall Date" <> 0D then
+            "Recall Date" := LeaveApp."Recall Date";
+
         // Calculate days spent and remaining
         // Days spent = time from start to today (or start to recall date if not yet started)
         if Today < LeaveApp."Start Date" then
@@ -330,6 +340,7 @@ table 52185560 "HR Leave Recall Lines"
         LeaveGjline: Record "HR Leave Journal Line";
         HRLeaveCal: Record "HR Leave Calendar";
         StatusChangePermission: Record "Status Change Permissions.";
+        HRLeaveLedger: Record "HR Leave Ledger Entries";
         JBatch: Code[10];
         JTemplate: Code[10];
         EntryNo: Integer;
@@ -352,6 +363,9 @@ table 52185560 "HR Leave Recall Lines"
         if LeaveApp.Status <> LeaveApp.Status::Approved then
             Error('Leave status must be Approved to post recall');
 
+        // CALCULATE AND STORE RECALL END DATE BEFORE POSTING
+        "Recall End Date" := CalculateRecallEndDate("Recall Date", "Days Recalled", LeaveApp);
+        
         HRLeaveCal.Reset();
         HRLeaveCal.SetRange("Current Leave Calendar", true);
         if not HRLeaveCal.Find('-') then
@@ -399,13 +413,24 @@ table 52185560 "HR Leave Recall Lines"
         if LeaveGjline.Find('-') then begin
             Codeunit.Run(Codeunit::"HR Leave Jnl.-Post", LeaveGjline);
 
+            // CAPTURE LEDGER ENTRY NO. AFTER POSTING
+            HRLeaveLedger.Reset();
+            HRLeaveLedger.SetRange("Staff No.", "Employee No.");
+            HRLeaveLedger.SetRange("Document No.", "Employee No.");
+            HRLeaveLedger.SetRange("Leave Entry Type", HRLeaveLedger."Leave Entry Type"::Reimbursement);
+            HRLeaveLedger.SetRange("Posting Date", Today);
+            HRLeaveLedger.SetRange("Leave Type", "Leave Type");
+            if HRLeaveLedger.FindLast() then
+                "Ledger Entry No." := HRLeaveLedger."Entry No.";
+
             Posted := true;
             "Posted By" := UserId;
             "Posted Date" := Today;
             Modify();
 
             SendRecallNotificationEmail();
-            Message('Leave recall posted successfully. %1 day(s) reimbursed to %2', "Days Recalled", "Employee Name");
+            Message('Leave recall posted successfully. %1 day(s) reimbursed to %2. Recall period: %3 to %4', 
+                "Days Recalled", "Employee Name", "Recall Date", "Recall End Date");
         end else
             Error('Failed to post recall. Please check leave journal posting.');
     end;
