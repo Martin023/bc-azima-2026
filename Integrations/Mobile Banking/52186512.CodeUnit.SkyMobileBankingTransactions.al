@@ -4507,7 +4507,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         MonthLabels: array[3] of Text;
         MonthCreditsValues: array[3] of Decimal;
         BOSACreditsValues: array[3] of Decimal;
-        FOSACreditsValues: array[3] of Decimal;
+    // FOSACreditsValues: array[3] of Decimal;
     begin
         QualifiedAmount := 0;
         TotalCredits := 0;
@@ -4576,7 +4576,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
             if BOSACredits > 0 then
                 ActiveMonths += 1
             else begin
-                EligibilityFailReason := StrSubstNo('No deposits were received into your savings account in %1.', MonthLabel);
+                EligibilityFailReason := StrSubstNo('No deposits were received into your Deposit account in %1.', MonthLabel);
 
                 Message('Debug Failure:\Month 1 (%1): BOSA=%2\Month 2 (%3): BOSA=%4\Month 3 (%5): BOSA=%6\\Total Credits: %7\Status: Failed at %8 (%9)',
                     MonthLabels[1], BOSACreditsValues[1],
