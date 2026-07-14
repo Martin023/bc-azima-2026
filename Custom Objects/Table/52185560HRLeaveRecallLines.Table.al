@@ -67,10 +67,10 @@ table 52185560 "HR Leave Recall Lines"
 
                 // Calculate RecallEndDate by counting actual leave days from calendar (not calendar days)
                 RecallEndDate := CalculateRecallEndDate("Recall Date", "Days Recalled", LeaveApp);
-                
+
                 // Validate recall end date is within leave period
                 if RecallEndDate > LeaveApp."End Date" then
-                    Error('Days Recalled (%1) extends beyond the leave end date (%2). The recall period would end on %3.', 
+                    Error('Days Recalled (%1) extends beyond the leave end date (%2). The recall period would end on %3.',
                         "Days Recalled", LeaveApp."End Date", RecallEndDate);
 
                 // Check for overlaps with existing recalls
@@ -108,11 +108,11 @@ table 52185560 "HR Leave Recall Lines"
                 if "Days Recalled" <= 0 then
                     Error('Days Recalled must be greater than 0');
 
-                // Update Days Remaining After Recall
+                // CALCULATE DAYS REMAINING AFTER RECALL
                 if "Leave Application Code" <> '' then begin
                     LeaveApp.Get("Leave Application Code");
-                    
-                    // Calculate total previous recalls (excluding this one)
+
+                    // TOTAL PREVIOUS RECALLS EXCLUDING CURRENT
                     TotalPreviousRecalls := 0;
                     ExistingRecalls.Reset();
                     ExistingRecalls.SetRange("Leave Application Code", "Leave Application Code");
@@ -124,7 +124,7 @@ table 52185560 "HR Leave Recall Lines"
                         until ExistingRecalls.Next() = 0;
                     end;
 
-                    "Days Remaining After Recall" := LeaveApp."Days Applied" - TotalPreviousRecalls - "Days Recalled";
+                    "Days Remaining After Recall" := LeaveApp."Days Applied" - "Days Spent Before Recall" - TotalPreviousRecalls - "Days Recalled";
                 end;
 
                 if "Recall Date" <> 0D then
@@ -218,6 +218,12 @@ table 52185560 "HR Leave Recall Lines"
             DecimalPlaces = 0 : 1;
             FieldClass = Normal;
         }
+        field(21; "Recall End Date"; Date)
+        {
+            Caption = 'Recall End Date';
+            Editable = false;
+            ToolTip = 'Last working day of the recall period';
+        }
     }
 
     keys
@@ -263,6 +269,10 @@ table 52185560 "HR Leave Recall Lines"
         // Populate narrative fields
         "Leave Start Time" := LeaveApp."Leave Start Time Calc";
         "Leave Return Time" := LeaveApp."Return Time";
+
+        // AUTO-POPULATE RECALL DATE FROM PARENT LEAVE APPLICATION CARD
+        if LeaveApp."Recall Date" <> 0D then
+            "Recall Date" := LeaveApp."Recall Date";
 
         // Calculate days spent and remaining
         // Days spent = time from start to today (or start to recall date if not yet started)
@@ -330,6 +340,7 @@ table 52185560 "HR Leave Recall Lines"
         LeaveGjline: Record "HR Leave Journal Line";
         HRLeaveCal: Record "HR Leave Calendar";
         StatusChangePermission: Record "Status Change Permissions.";
+        HRLeaveLedger: Record "HR Leave Ledger Entries";
         JBatch: Code[10];
         JTemplate: Code[10];
         EntryNo: Integer;
@@ -351,6 +362,9 @@ table 52185560 "HR Leave Recall Lines"
 
         if LeaveApp.Status <> LeaveApp.Status::Approved then
             Error('Leave status must be Approved to post recall');
+
+        // CALCULATE AND STORE RECALL END DATE BEFORE POSTING
+        "Recall End Date" := CalculateRecallEndDate("Recall Date", "Days Recalled", LeaveApp);
 
         HRLeaveCal.Reset();
         HRLeaveCal.SetRange("Current Leave Calendar", true);
@@ -399,13 +413,24 @@ table 52185560 "HR Leave Recall Lines"
         if LeaveGjline.Find('-') then begin
             Codeunit.Run(Codeunit::"HR Leave Jnl.-Post", LeaveGjline);
 
+            // CAPTURE LEDGER ENTRY NO. AFTER POSTING
+            HRLeaveLedger.Reset();
+            HRLeaveLedger.SetRange("Staff No.", "Employee No.");
+            HRLeaveLedger.SetRange("Document No.", "Employee No.");
+            HRLeaveLedger.SetRange("Leave Entry Type", HRLeaveLedger."Leave Entry Type"::Reimbursement);
+            HRLeaveLedger.SetRange("Posting Date", Today);
+            HRLeaveLedger.SetRange("Leave Type", "Leave Type");
+            if HRLeaveLedger.FindLast() then
+                "Ledger Entry No." := HRLeaveLedger."Entry No.";
+
             Posted := true;
             "Posted By" := UserId;
             "Posted Date" := Today;
             Modify();
 
             SendRecallNotificationEmail();
-            Message('Leave recall posted successfully. %1 day(s) reimbursed to %2', "Days Recalled", "Employee Name");
+            Message('Leave recall posted successfully. %1 day(s) reimbursed to %2. Recall period: %3 to %4',
+                "Days Recalled", "Employee Name", "Recall Date", "Recall End Date");
         end else
             Error('Failed to post recall. Please check leave journal posting.');
     end;
@@ -443,7 +468,7 @@ table 52185560 "HR Leave Recall Lines"
         end;
     end;
 
-    local procedure CalculateRecallEndDate(StartDate: Date; DaysToRecall: Decimal; LeaveApp: Record "HR Leave Application"): Date
+    procedure CalculateRecallEndDate(StartDate: Date; DaysToRecall: Decimal; LeaveApp: Record "HR Leave Application"): Date
     var
         CurrentDate: Date;
         DaysAccumulated: Decimal;
@@ -456,18 +481,18 @@ table 52185560 "HR Leave Recall Lines"
         while DaysAccumulated < DaysToRecall do begin
             // Get day value from calendar (0.0 = non-working, 0.5 = half-day, 1.0 = full day)
             DayValue := LeaveApp.GetDayLeaveValue(CurrentDate);
-            
+
             // Only count working days
             if DayValue > 0 then begin
                 DaysAccumulated += DayValue;
-                
+
                 // If we've reached or exceeded target, this is the end date
                 if DaysAccumulated >= DaysToRecall then
                     exit(CurrentDate);
             end;
 
             CurrentDate := CalcDate('1D', CurrentDate);
-            
+
             // Safety check: don't go beyond leave end date
             if CurrentDate > LeaveApp."End Date" then
                 exit(CurrentDate);

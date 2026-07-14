@@ -11,7 +11,7 @@
       <am:Name>PBIRB</am:Name>
       <am:Version>15.7.1813.16</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-06-29T09:02:25.6472394Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-07-14T12:42:52.8201944Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -5734,7 +5734,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!TotalDeductions.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!TDeductions.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <Format>#,0.00;(#,0.00)</Format>
@@ -5767,7 +5767,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>2/3 Of Net Pay</Value>
+                    <Value>2/3 Of  Gross</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontWeight>Normal</FontWeight>
@@ -6096,10 +6096,10 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!TwoThirdGross.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!DisposableInc.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
-                      <Format>#,0.00;(#,0.00)</Format>
+                      <Format>#,0.00</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>

@@ -48,6 +48,14 @@ page 52185614 "HR Leave Recall Lines"
                     ShowMandatory = true;
                     Editable = not Rec.Posted;
                 }
+                field("Recall End Date"; Rec."Recall End Date")
+                {
+                    ApplicationArea = All;
+                    Editable = false;
+                    Style = Favorable;
+                    StyleExpr = TRUE;
+                    ToolTip = 'Last working day of the recall period (calculated automatically)';
+                }
                 field("Days Recalled"; Rec."Days Recalled")
                 {
                     ApplicationArea = All;

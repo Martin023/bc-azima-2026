@@ -59,10 +59,12 @@ page 52185758 "Loan Product Charges"
                 }
                 field(Minimum; Rec.Minimum)
                 {
+                    ShowMandatory = True;
                     ApplicationArea = Basic, Suite;
                 }
                 field(Maximum; Rec.Maximum)
                 {
+                    ShowMandatory = True;
                     ApplicationArea = Basic, Suite;
                 }
                 field("Additional Charge %"; Rec."Additional Charge %")
