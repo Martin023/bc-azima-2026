@@ -1904,7 +1904,7 @@ page 52186778 "Finance Role Center"
 
                 // }
 
-                group(Interbank)
+                group(Interbanktfr)
                 {
                     Caption = 'InterBank Transfers';
                     action("Open Interbank Transfer")
@@ -1923,14 +1923,14 @@ page 52186778 "Finance Role Center"
                         RunPageView = WHERE(Status = Const("pending approval"));
                     }
 
-                    action("Approved Interbank Transfer")
+                    action("Approved Interbank Transfers")
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Approved InterBank Transfer';
                         RunObject = page "InterBank Transfers List";
                         RunPageView = WHERE(Status = Const("approved"), Posted = const(false));
                     }
-                    action("Posted Interbank Transfer")
+                    action("Posted Interbank Transfers")
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Posted InterBank Transfer';
@@ -1938,7 +1938,7 @@ page 52186778 "Finance Role Center"
                         //RunPageView = WHERE(Status = Const("posted"));
                     }
 
-                    action("Cancelled Interbank Transfer")
+                    action("Cancelled Interbank Transfers")
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Rejected InterBank Transfer';
@@ -2637,157 +2637,923 @@ page 52186778 "Finance Role Center"
             group(BankingMgt)
             {
                 // group("Banking Management")
-                // {
                 group("Accounts")
                 {
                     Caption = 'Accounts';
-                    action("B Savings Accounts")
+                    // action("Saving Account Application")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Saving Account Application';
+                    //     RunObject = page "Savings Account Application";
+                    // }
+
+                    action("Savings Accounts Register List")
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Savings Accounts List';
+                        Caption = 'Savings Accounts Register List';
                         RunObject = page "Savings Accounts";
-                        ;
                     }
-                    action("Banking Closure List")
+                    // action("Member Listing Report")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Member Listing - List';
+                    //     RunObject = page "Member Listing Report";
+                    // }
+
+                    action("Account Closure List")
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Banking Closure List';
+                        Caption = 'Account Closure List';
                         RunObject = page "Banking Closure List";
                     }
-
+                    action("Account Activation List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Account Activation List';
+                        RunObject = page "Account Activation List";
+                    }
+                    action("Account Changes")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'FOSA Account Change Logs';
+                        RunObject = report "FOSA Account Change Logs";
+                    }
+                    action(MemberList)
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Member List';
+                        RunObject = page "Member List";
+                    }
+                    action("Member Detailed Bal. List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Member Detailed Balances';
+                        RunObject = Page "Detailed Member Balance List";
+                    }
+                    action(BankAccounts)
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Bank Accounts List';
+                        RunObject = page "Bank Account List";
+                    }
                 }
+
+
                 group("Banking Operations")
                 {
                     Caption = 'Banking Operations';
                     group("Cashier")
                     {
-                        Caption = 'Cashier';
-                        action("Cashier Transactions")
+                        Caption = 'Cashier And Treasury Transactions';
+                        group(Cashiers)
                         {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Cashier Transactions';
-                            RunObject = page "Cashier Transactions List";
+                            action("Cashier Transactions")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Open Cashier Transactions';
+                                RunObject = page "Cashier Transactions List";
+                                RunPageView = where(Status = filter(Open), posted = filter(false));
+                            }
+                            action("Pending Cashier Transactions")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Pending Cashier Transactions';
+                                RunObject = page "Cashier Transactions List";
+                                RunPageView = where(Status = filter("Pending Approval"), posted = filter(false));
+                            }
+                            action("Approved Cashier Transactions")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Approved Cashier Transactions';
+                                RunObject = page "Cashier Transactions List";
+                                RunPageView = where(Status = filter(Approved), posted = filter(false));
+                            }
+                            action("Rejected Cashier Transactions")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Rejected Cashier Transactions';
+                                RunObject = page "Cashier Transactions List";
+                                RunPageView = where(Status = filter(Rejected), posted = filter(false));
+                            }
+                            action("Posted Cashier Transactions")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Posted Cashier Transactions';
+                                RunObject = page "Posted Cashier Transactions";
+                            }
+                            group(CashierReports)
+                            {
+                                Caption = 'Cashier Reports';
+
+                                action("Cashier Daily Report")
+                                {
+                                    ApplicationArea = Basic, Suite;
+                                    Caption = 'Daily Cashier Report';
+                                    RunObject = report "Cashier Deposits Withdrawals";
+                                }
+                                action("Cashier Cheque Deposits")
+                                {
+                                    ApplicationArea = Basic, Suite;
+                                    Caption = 'Cashier Cheque Deposits Report';
+                                    RunObject = report "Cashier Cheque Deposits";
+                                }
+                                // action()
+                                action("Bankers Cheque Register")
+                                {
+                                    ApplicationArea = Basic, Suite;
+                                    Caption = 'Bankers Cheque Register Report';
+                                    RunObject = report "Sacco Cheque Register";
+                                }
+                                action("End of Day Reconciliation")
+                                {
+                                    ApplicationArea = Basic;
+                                    Image = PrintReport;
+                                    Caption = 'End of Day Reconciliation Report';
+                                    RunObject = codeunit "Run EOD Reconciliation Report";
+                                }
+                                action("Counter Summary Report")
+                                {
+                                    ApplicationArea = Basic, Suite;
+                                    Caption = 'Counter Summary Report';
+                                    RunObject = report "Counter Summary Report";
+                                }
+                                action("Petty Cash Expenses Report")
+                                {
+                                    ApplicationArea = Basic, Suite;
+                                    Caption = 'Petty Cash Expenses Report';
+                                    RunObject = report "Petty Cash Expenses Report";
+                                }
+                            }
                         }
-                        action("Treasury & Cashier Transactions")
+                        group(BOSAReceipt)
                         {
-                            ApplicationArea = Basic, Suite;
+                            Caption = 'Receipts';
+                            action("BOSA Receipt List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Receipts';
+                                RunObject = page "Receipts List";
+                            }
+                            action(" Posted Receipt List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = ' Posted Receipts';
+                                RunObject = page "Posted Receipt List";
+                            }
+
+                        }
+                        group("LienTransactions")
+                        {
+                            Caption = 'Lien Transactions.';
+                            action("Lien Transactions List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                caption = 'Lien Transactions List';
+                                RunObject = page "Lien Transactions List";
+                                RunPageView = where(Posted = const(false), "Type" = Const(Lien));
+                            }
+                            action("Posted Lien Transactions List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                caption = 'Posted Lien Transactions List';
+                                RunObject = page "Lien Transactions List";
+                                RunPageView = where(Posted = const(true), "Type" = Const(Lien));
+                            }
+                        }
+                        group(TreasuryCashierTransaction)
+                        {
                             Caption = 'Treasury & Cashier Transactions';
-                            RunObject = page "Treasury Cashier List";
+
+                            action("Open Treasury & Cashier Transactions")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Open Treasury & Cashier Transactions';
+                                RunObject = page "Treasury Cashier List";
+                                RunPageView = where(Posted = const(false), status = const(open), Issued = const(no));
+                            }
+                            action("Pending Treasury & Cashier Transactions")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Pending Treasury & Cashier Transactions';
+                                RunObject = page "Treasury Cashier List";
+                                RunPageView = where(Posted = const(false), status = const(pending), Issued = const(no));
+                            }
+                            action("Archived Treasury & Cashier Transactions")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Archived Treasury & Cashier Transactions';
+                                RunObject = page "Treasury Cashier List";
+                                RunPageView = where(Posted = const(false), status = const(Archived), Issued = const(no));
+                            }
+                            action("Approved Treasury & Cashier Transactions")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Approved Treasury & Cashier Transactions';
+                                RunObject = page "Treasury Cashier List";
+                                RunPageView = where(Posted = const(false), status = const(Approved), Issued = const(no));
+                            }
+                            action("Issued Cashier Transactions")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Issued Treasury & Cashier Transactions';
+                                RunObject = page "Treasury Cashier List";
+                                RunPageView = where(Posted = const(false), issued = const(yes));
+                            }
+
+                            action("Treasury Cashier Transactions")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Posted Treasury & Cashier Transactions';
+                                RunObject = page "Treasury Cashier List";
+                                RunPageView = where(Posted = const(true));
+                            }
+                            action("Rejected Treasury & Cashier Transactions")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Rejected Treasury & Cashier Transactions';
+                                RunObject = page "Treasury Cashier List";
+                                RunPageView = where(Posted = const(false), status = const(Rejected));
+                            }
+                            action("Treasury  Cashier Transactions")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Treasury Report';
+                                RunObject = report "Cashier Deposits Withdrawals";
+                            }
+
+                        }
+                        // action(DailyTrans)
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Daily FOSA Transaction Report';
+                        //     RunObject = report "Daily Transactions Report";
+                        // }
+                    }
+                    group("Transfers")
+                    {
+                        Caption = 'Transfers';
+                        group(Account)
+                        {
+                            Caption = 'Account Transfer';
+                            action("ACT Trasfer")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Account Transfer';
+                                RunObject = page "Account Transfer List";
+                            }
+                            action("P. Account Transfer")
+                            {
+                                ApplicationArea = Suite, FixedAssets;
+                                Caption = 'Posted Account Transfer';
+                                RunObject = page "Posted Account Transfer List";
+                            }
+                        }
+                        group(Interbank)
+                        {
+                            Caption = 'InterBank Transfers';
+                            action("Interbank Transfer")
+                            {
+                                ApplicationArea = Suite, FixedAssets;
+                                Caption = 'Pending InterBank Transfer';
+                                RunObject = page "InterBank Transfers List";
+                                RunPageView = where(Posted = const(false), status = filter(Pending));
+                            }
+
+                            action("Approved Interbank Transfer")
+                            {
+                                ApplicationArea = Suite, FixedAssets;
+                                Caption = 'Approved InterBank Transfer';
+                                RunObject = page "InterBank Transfers List";
+                                RunPageView = where(Posted = const(false), status = filter(Approved));
+                            }
+                            action("Cancelled Interbank Transfer")
+                            {
+                                ApplicationArea = Suite, FixedAssets;
+                                Caption = 'Cancelled InterBank Transfer';
+                                RunObject = page "InterBank Transfers List";
+                                RunPageView = where(Posted = const(false), status = filter(Cancelled));
+                            }
+                            action("Posted Interbank Transfer")
+                            {
+                                ApplicationArea = Suite, FixedAssets;
+                                Caption = 'Posted InterBank Transfer';
+                                RunObject = page "Posted Bank & Cash Transfers";
+                            }
+                            action("Rejected Interbank Transfer")
+                            {
+                                ApplicationArea = Suite, FixedAssets;
+                                Caption = 'Rejected InterBank Transfer';
+                                RunObject = page "InterBank Transfers List";
+                                RunPageView = where(Posted = const(false), status = filter(Rejected));
+                            }
+
                         }
                     }
+                    group(Payments)
+                    {
+                        Caption = 'Payments';
+                        group("Petty Cash List")
+                        {
+                            Caption = 'Petty Cash';
+                            action(PettyCashL)
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Petty Cash List';
+                                RunObject = page "Petty Cash Vouchers List";
+                            }
+                            action(PPettyCash)
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Posted Petty Cash List';
+                                RunObject = page "Posted Petty Cash Vouchers";
+                            }
+                        }
+
+                    }
+
 
                     group("Standing Orders")
                     {
-                        Caption = 'Standing Order';
-                        action("Standing Order List")
+                        group(Processing)
+                        {
+                            action("Open Standing Order List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                RunObject = page "Standing Order List";
+                                RunPageView = where(Status = const(Open));
+                            }
+                            action("Pending Standing Order List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                RunObject = page "Standing Order List";
+                                RunPageView = where(Status = const(Pending));
+                            }
+
+                        }
+                        group("Active STOs")
+                        {
+                            action("Approved Standing Order List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                RunObject = page "Standing Order List";
+                                RunPageView = where(Status = const(Approved));
+                            }
+                            action("Standing Order Register List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Standing Order Register List';
+                                RunObject = page "Standing Order Register List";
+                            }
+                        }
+                        group(Achives)
+                        {
+                            action("Rejected Standing Order List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                RunObject = page "Standing Order List";
+                                RunPageView = where(Status = const(Rejected));
+                            }
+                            action("Stopped Standing Order List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                RunObject = page "Standing Order List";
+                                RunPageView = where(Status = const(Stopped));
+                            }
+                        }
+                        action("Standing Order")
                         {
                             ApplicationArea = Basic, Suite;
-                            Caption = 'Standing Order List';
-                            RunObject = page "Standing Order List";
+                            Caption = 'Standing Order Report';
+                            RunObject = report "Standing Order";
                         }
-                        action("Standing Order Register List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Standing Order Register List';
-                            RunObject = page "Standing Order Register List";
-                        }
-                        action("Standing Order Control List")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Standing Order Control List';
-                            RunObject = page "Standing Order Control List";
-                        }
+
+
                     }
+
                     group("Cheque Management")
                     {
                         Caption = 'Cheque Management';
-                        action("Cheque Types")
+                        group("Bankers Cheque Applications")
                         {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Cheque Types';
-                            RunObject = page "Cheque Types";
-                        }
+                            action("Open Bankers Cheque Application")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Open Bankers Cheque Applications';
+                                RunObject = page "Bankers Application List";
+                                RunPageView = where(Status = const(Open), "Cheque Register Generated" = const(false));
+                            }
+                            action("Pending Bankers Cheque Application")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Pending Bankers Cheque Applications';
+                                RunObject = page "Bankers Application List";
+                                RunPageView = where(Status = const("Pending Approval"), "Cheque Register Generated" = const(false));
+                            }
+                            action("Approved Bankers Cheque Application")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Approved Bankers Cheque Applications';
+                                RunObject = page "Bankers Application List";
+                                RunPageView = where(Status = const("Approved"), "Cheque Register Generated" = const(false));
+                            }
+                            action("Registered Bankers Cheque Application")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Registered Bankers Cheque Applications';
+                                RunObject = page "Bankers Application List";
+                                RunPageView = where(Status = const("Approved"), "Cheque Register Generated" = const(true));
+                            }
 
-                        action("Cheque Book Application")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Cheque Book Application';
-                            RunObject = page "Cheque Book Application List";
                         }
-                        action("Cheque Receipts")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Cheque Receipts';
-                            RunObject = page "Cheque Receipts List";
-                        }
-                        action("Bankers Cheque Application")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Bankers Cheque Application';
-                            RunObject = page "Bankers Cheque Application";
-                        }
-
+                        // action("Treasury Cheque Application")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Treasury Control Cheque Application';
+                        //     RunObject = page "Treasury Application List";
+                        // }
+                        // action("Treasury Cheque Inventory")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Treasury Control Cheque Inventory';
+                        //     RunObject = page "Treasury Cheque Inventory";
+                        // }
                         action("Cheque Clearance")
                         {
                             ApplicationArea = Basic, Suite;
                             Caption = 'Cheque Clearance';
                             RunObject = page "Cheque Clearance";
                         }
+                        // action("Cheque Book Application")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Cheque Book Application';
+                        //     RunObject = page "Cheque Book Application List";
+                        // }
+                        action("Cheque Types")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Cheque Types';
+                            RunObject = page "Cheque Types";
+                        }
+                        // action("Cheque Receipts")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Cheque Receipts';
+                        //     RunObject = page "Cheque Receipts List";
+                        // }
+
                     }
-                    group("ATM Management List")
+                    group("ATM Management")
                     {
                         Caption = 'ATM Management';
-                        action("ATM Applications List")
+
+                        group("ATM Applications")
                         {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'ATM Applications List';
-                            RunObject = page "ATM Application List";
+                            action("ATM Applications List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'ATM Applications List';
+                                RunObject = page "ATM Application List";
+                            }
+                            action("Approved ATM Applications List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Approved ATM Applications List';
+                                RunObject = page "Approved ATM Application List";
+                            }
+
+                            // action("ATM Inventory List")
+                            // {
+                            //     ApplicationArea = Basic, Suite;
+                            //     Caption = 'ATM Inventory List';
+                            //     RunObject = page "ATM Inventory List";
+                            // }
+                            // action("Dispatch ATM List")
+                            // {
+                            //     ApplicationArea = Basic, Suite;
+                            //     Caption = 'Dispatch ATM List';
+                            //     RunObject = page "Dispatch ATM Lists";
+                            // }
+                            action("Uncollected Cards From Bank")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Visible = false;
+                                Caption = 'Uncollected Cards From Bank';
+                                RunPageLink = "Received From Bank" = CONST(false);
+                                RunObject = page "Approved ATM Application List";
+                            }
+                            action("Collected Cards From Bank")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Collected Cards From Bank';
+                                RunPageLink = "Received From Bank" = CONST(true);
+                                RunObject = page "Approved ATM Application List";
+                            }
+                            action("Rejected ATM Applications List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Rejected ATM Applications List';
+                                RunObject = page "ATM Application List";
+                                RunPageLink = "Status" = CONST(Rejected);
+                            }
+
                         }
-                        action("Approved ATM Applications List")
+                        action("ATM Return List")
                         {
+                            Visible = false;
                             ApplicationArea = Basic, Suite;
-                            Caption = 'Approved ATM Applications List';
-                            RunObject = page "Approved ATM Application List";
+                            Caption = 'ATM Return List';
+                            RunObject = page "ATM Returned List";
                         }
-                        action("ATM Linking Application List")
+                        group("Atm Linking")
                         {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'ATM Linking Application List';
-                            RunObject = page "ATM Linking Application List";
+                            action("ATM Linking Application List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'ATM Linking Application List';
+                                RunObject = page "ATM Linking Application List";
+                            }
+                            action("Approved ATM Linking Charge List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Approved ATM Linking Charge and Collection List';
+                                //RunPageLink = "ATM Charges Applied" = const(false);
+                                RunPageLink = "Collected" = const(false);
+
+                                RunObject = page "Approved ATM Linking List";
+                            }
+                            // action("Approved ATM Linking Collection List")
+                            // {
+                            //     ApplicationArea = Basic, Suite;
+                            //     Caption = 'Approved ATM Linking Collection List';
+                            //     RunPageLink = "Collected" = const(false), "ATM Charges Applied" = const(true);
+                            //     RunObject = page "Approved ATM Linking List";
+                            // }
+                            action("Approved ATM Linking List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Approved ATM Linking List';
+                                RunPageLink = "Collected" = const(true), "ATM Charges Applied" = const(true), "ATM Linked" = const(false), "ATM Delinked" = const(false);
+                                RunObject = page "Approved ATM Linking List";
+                            }
+                            action("Linked ATM List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Linked ATM List';
+                                RunPageLink = "Collected" = const(true), "ATM Charges Applied" = const(true), "ATM Linked" = const(true);
+                                RunObject = page "Approved ATM Linking List";
+                            }
+                            action("Delinked ATM List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Delinked ATM List';
+                                RunPageLink = "ATM Delinked" = const(true);
+                                RunObject = page "Approved ATM Linking List";
+                            }
+                            // action("Bulk ATM Linking List")
+                            // {
+                            //     ApplicationArea = Basic, Suite;
+                            //     Caption = 'Bulk ATM Linking List';
+                            //     RunObject = page "ATM Bulk Linking List";
+                            // }
                         }
-                        action("Approved ATM Linking List")
+                        group(ATMRepin)
                         {
-                            ApplicationArea = Basic, Suite;
-                            Caption = 'Approved ATM Linking List';
-                            RunObject = page "Approved ATM Linking List";
+                            Caption = 'ATM Repin';
+                            Visible = true;
+                            action("ATM Repin Application List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'ATM Repin Application List';
+                                RunObject = page "ATM Repin Application List";
+                            }
+                            action("ATM Repin Processed List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'ATM Repin Procssed List';
+                                RunObject = page "ATM Repin Procssed List";
+                            }
                         }
+
+                        group(MobileBank)
+                        {
+                            Caption = 'M-Banking PIN Resets';
+                            Visible = true;
+                            action("Mobile Banking List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Mobile Banking PIN Reset Application List';
+                                RunObject = page "Mobile Banking App List";
+                            }
+                            action("Mobile Processed List")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Mobile Banking PIN Reset Processed List';
+                                RunObject = page "Mobile Banking Procssed List";
+                            }
+                        }
+                        // action("ATM Card List")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'ATM Card List';
+                        //     RunObject = page "ATM Card List";
+                        // }
                         action("ATM Transactions")
                         {
                             ApplicationArea = Basic, Suite;
                             Caption = 'ATM Transactions';
                             RunObject = page "Sky ATM Transactions Buffer";
                         }
-                        action("ATM Charge")
+                        // action("ATM Applicant List")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'ATM Applicant List';
+                        //     RunObject = page "Member List";
+                        //     RunPageView = where("Request for ATM" = const(true));
+                        // }
+
+                        // action("Mobile Banking Applicant List")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Mobile Banking Applicant List';
+                        //     RunObject = page "Member List";
+                        //     RunPageView = where("Request Mobile Banking" = const(true));
+                        // }
+
+                    }
+
+
+                    group(SystemEdits)
+                    {
+                        Caption = 'System Edits';
+                        action(SystemEdit)
                         {
                             ApplicationArea = Basic, Suite;
-                            Caption = 'ATM Charge';
-                            RunObject = page "ATM Charge List";
+                            Caption = 'System Edits';
+                            RunObject = page "System Edits List";
+                        }
+
+                    }
+
+                    group("Reversal")
+                    {
+                        Caption = 'Reversals';
+
+                        action(AutoReversal)
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Auto Reversal';
+                            RunObject = page "System Reversal List";
+                        }
+                        action(PostedAutoReversal)
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Posted Auto Reversal';
+                            RunObject = page "Posted Reversal List";
+                        }
+                    }
+
+                    group(GLRegister)
+                    {
+                        Caption = 'General Journal And Register';
+                        group(GLRegisters)
+                        {
+                            Caption = 'General Journal And Register';
+                            action(Register)
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'G/L Register';
+                                RunObject = page "G/L Registers";
+                            }
+                            action(GeneralJournal)
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'General Journal';
+                                RunObject = page "General Journal";
+                            }
+                        }
+                        group(BankDeposits)
+                        {
+                            Caption = 'Bank Deposits';
+                            action("Bank Deposits")
+                            {
+                                ApplicationArea = Basic, Suite;
+                                Caption = 'Bank Deposit List';
+                                RunObject = page "Bank Deposit List";
+                            }
+                            // action("Posted Bank Deposits")
+                            // {
+                            //     ApplicationArea = Basic, Suite;
+                            //     Caption = 'Posted Bank Deposit list';
+                            //     RunObject = codeunit posted
+                            // }
                         }
 
                     }
 
                 }
+                group("Banking Reports")
+                {
+                    Caption = 'Reports and Analysis';
+                    group("Account Reports")
+                    {
+                        Caption = 'Account Management';
+                        action("Accounts Application Register")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Accounts Application Register';
+                            RunObject = report "Accounts Application Register";
+                        }
+                        action("Savings Accounts Register")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Savings Accounts Register';
+                            RunObject = report "Savings Accounts Register";
+                        }
+                        action("FOSA Savings Register")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'FOSA Savings Register';
+                            RunObject = report "FOSA Savings Register";
+                        }
+                        action("Savings Account Types")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Savings Accounts Types Report';
+                            RunObject = report "Savings Account Types Report";
+                        }
+                        // action("Posted Salary Reports")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Posted Salary Report';
+                        //     RunObject = query "Salary Lines";
+                        // }
+                        action("Account Balance")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'FOSA Loan Register';
+                            RunObject = report "FOSA Loan Register";
+                        }
+                        action("Salary Accounts List Report")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Salaries received though FOSA';
+                            RunObject = report "Salary Accounts List Report";
+                        }
+                        // action("Salary Through FOSA Report")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Salary Through FOSA Report';
+                        //     RunObject = report "Salary Through FOSA Report";
+                        // }
+                        action("Salary Not Thru FOSA")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Salary Not Thru FOSA';
+                            RunObject = report "Salary Not Through FOSA";
+                        }
+
+                        // action("Savings Contribution Variance")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Savings Contribution Variance';
+                        //     //RunObject = report "Savings Contribution Variance";
+                        // }
+                        action("Generate Dormant Accounts")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Generate Dormant Accounts';
+                            RunObject = report "Generate Dormant Accounts";
+                        }
+
+                    }
+                    group("Cashier Reports")
+                    {
+                        Caption = 'Cashier Reports';
+                        action("Cashier Transactions Report")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Cashier Transactions';
+                            RunObject = report "Cashier Transactions";
+                        }
+
+
+                        action("Daily Transactions Cashiers")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Daily Transactions Cashiers Report';
+                            RunObject = report "Daily Transaction Report";
+                        }
+                        action("Bankers Cheque Report")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Bankers Cheque Report';
+                            RunObject = report "Bankers Cheque Report";
+                        }
+                        action("Treasury Report")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Treasury Report';
+                            RunObject = report "Treasury Report";
+                        }
+                        action("AML Report")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Anti-Money Laundering Report';
+                            RunObject = report "Anti-Money Laundering Report";
+                        }
+                        action("All Tellers Cash Report")
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'All Tellers Cash Report';
+                            Image = PrintReport;
+                            // Promoted = true;
+                            // PromotedCategory = "Report";
+                            ToolTip = 'View the consolidated cash summary for all tellers.';
+                            RunObject = report "All Tellers Cash Report";
+
+                            // trigger OnAction()
+                            // begin
+                            //     // RUNS THE REPORT, 'true' OPENS THE REQUEST PAGE FOR THE DATE FILTER
+                            //     Report.Run(Report::"All Tellers Cash Report", true, false);
+                            // end;
+                        }
+                        action("Petty Cash Expense Report")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Petty Cash Expense Report';
+                            RunObject = report "Petty Cash Expenses Report";
+                        }
+                        action("End of Day Reconciliation reports")
+                        {
+                            ApplicationArea = Basic;
+                            Image = PrintReport;
+                            Caption = 'End of Day Reconciliation Report';
+                            RunObject = codeunit "Run EOD Reconciliation Report";
+                        }
+                    }
+
+
+
+                    group("ATM Reports")
+                    {
+                        Caption = 'ATM Reports';
+                        action("ATM Report")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'ATM Activation Report';
+                            RunObject = report "ATM Activation Report";
+                        }
+                        // action("ATM card no's account balances")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'ATM card nos account balances';
+                        //     // RunObject = report "ATM card no's account balances";
+                        // }
+                        action("ATM Upload Report")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'ATM Upload Report';
+                            RunObject = report "ATM Upload Report";
+                        }
+                    }
+                    group("Standing Order Reports")
+                    {
+                        Caption = 'Standing Order Reports';
+
+                        action("Standing Orders Register")
+                        {
+                            ApplicationArea = SalesReturnOrder, PurchReturnOrder;
+                            Caption = 'Standing Orders Register';
+                            RunObject = report "Standing Orders Register";
+                        }
+                        action("Standing Order Report")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Standing Order Report';
+                            RunObject = report "Standing Order";
+                        }
+                        // action("Standing Order Register")
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Standing Order Register';
+                        //     RunObject = report "Standing Order Register";
+                        // }
+                    }
+
+                }
+
                 group("Banking Setup")
                 {
                     Caption = 'Banking Setups';
                     group("Transaction Setup")
                     {
                         Caption = 'Transactions Setup';
-                        action("Transaction Types List")
+                        action("Transaction Type list")
                         {
                             ApplicationArea = Basic, Suite;
-                            Caption = 'Transaction Types';
-                            RunObject = page "Transaction Types";
+                            Caption = 'Transaction Types List';
+                            RunObject = page "Transaction Types List";
                         }
                         action("Tiered Charges")
                         {
@@ -2801,12 +3567,24 @@ page 52186778 "Finance Role Center"
                             Caption = 'Denominition Setup';
                             RunObject = page "Denomination Setup";
                         }
+                        action("ATM Setup")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'ATM Card Types Setup';
+                            RunObject = page "ATM Card Types";
+                        }
+                        // action(ProductSetup)
+                        // {
+                        //     ApplicationArea = Basic, Suite;
+                        //     Caption = 'Product Setup';
+                        //     RunObject = page "Product Factory List";
+                        // }
 
                     }
 
-                    group("Banking No. Setup")
+                    group("Banking Setups")
                     {
-                        Caption = 'Banking No Setup';
+                        Caption = 'Banking Setups.';
                         action("Banking No Setup")
                         {
                             ApplicationArea = Basic, Suite;
@@ -2819,11 +3597,14 @@ page 52186778 "Finance Role Center"
                             Caption = 'Banking User Setup';
                             RunObject = page "Banking User Setup";
                         }
+                        action("Cash Office User Template")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Cash Office User Template';
+                            RunObject = page "Cash Office User Template";
+                        }
                     }
-
-
                 }
-                // }
 
             }
 
