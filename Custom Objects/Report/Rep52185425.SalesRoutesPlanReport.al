@@ -30,16 +30,14 @@ report 52185425 "Sales Routes Plan Report"
         }
         dataitem(SalesRoutePlans; "Sales Route Plans")
         {
-            RequestFilterFields = Status, "Sales Representative", day, "Route Date";
+            RequestFilterFields = Status, "Sales Representative", "Route Date";
             column(No; No)
             {
             }
             column(RouteDate; "Route Date")
             {
             }
-            column(Day; Day)
-            {
-            }
+
             column(Target; Target)
             {
             }
