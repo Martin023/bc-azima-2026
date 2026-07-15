@@ -1138,7 +1138,7 @@ Codeunit 52186456 "Sacco Transactions"
                 GenJournalLine."Posting Date" := CashierTrans."Transaction Date";
                 If (CashierTrans.Type = CashierTrans.Type::"MPESA Deposit") or (CashierTrans.Type = CashierTrans.Type::"MPESA Withdrawal") then
                     GenJournalLine.Description := CashierTrans."Transaction Description" + '-' + CashierTrans."Reference Name" else
-                GenJournalLine.Description := CopyStr(CashierTrans."Transaction Description" + '-' + CashierTrans."Account Name" + '-' + CashierTrans."Member No.", 1, 50);
+                    GenJournalLine.Description := CopyStr(CashierTrans."Transaction Description" + '-' + CashierTrans."Account Name" + '-' + CashierTrans."Member No.", 1, 50);
                 GenJournalLine."Currency Code" := CashierTrans."Currency Code";
                 GenJournalLine.Validate(GenJournalLine."Currency Code");
                 if CashierTrans.Type = CashierTrans.Type::"MPESA Withdrawal" then
@@ -1168,7 +1168,7 @@ Codeunit 52186456 "Sacco Transactions"
                 GenJournalLine."Posting Date" := CashierTrans."Transaction Date";
                 If (CashierTrans.Type = CashierTrans.Type::"MPESA Deposit") or (CashierTrans.Type = CashierTrans.Type::"MPESA Withdrawal") then
                     GenJournalLine.Description := CashierTrans."Transaction Description" + '-' + CashierTrans."Reference Name" else
-                GenJournalLine.Description := CashierTrans."Transaction Description" + '-' + CashierTrans.Remarks;
+                    GenJournalLine.Description := CashierTrans."Transaction Description" + '-' + CashierTrans.Remarks;
                 GenJournalLine."Currency Code" := CashierTrans."Currency Code";
                 GenJournalLine.VALIDATE(GenJournalLine."Currency Code");
 
@@ -13113,7 +13113,7 @@ Codeunit 52186456 "Sacco Transactions"
         GenJournalLine."Account Type" := AcctType;
         GenJournalLine."Account No." := AcctNo;
         GenJournalLine.Validate(GenJournalLine."Account No.");
-        GenJournalLine.Description := CopyStr(Desc, 1, 50);
+        GenJournalLine.Description := CopyStr(Desc, 1, 150);
         GenJournalLine."Bal. Account Type" := BalAcctType;
         GenJournalLine."Bal. Account No." := BalAcctNo;
         GenJournalLine.Validate(GenJournalLine."Bal. Account No.");

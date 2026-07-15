@@ -29,7 +29,7 @@ table 52185732 "Savings Ledger Entry"
         {
             Caption = 'Document No.';
         }
-        field(7; Description; Text[50])
+        field(7; Description; Text[150])
         {
             Caption = 'Description';
         }
