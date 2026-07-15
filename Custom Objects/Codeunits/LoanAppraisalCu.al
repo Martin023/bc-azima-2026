@@ -51,7 +51,7 @@ Codeunit 52185484 "Loan Appraisal Codeunit"
                 TotalLoanCommittment := TotalLoanBalance + TotalThreeMonthInterest;
                 //Message('Total Loan Committment: %1', TotalLoanCommittment);
             end;
-            Deductions := TotalLoanCommittment + GenSetup."Withdrawal Fee" + GetTotalGuaranteedAmt(Accno) - GetTotalTopUpLoans(LoanNo);
+            Deductions := TotalLoanCommittment + GenSetup."Withdrawal Fee" + GetTotalGuaranteedAmt(Accno);
            // Message('Deductions: %1, Available Balance: %2', Deductions, SavBal);
             //Deductions := (GenSetup."Self Guarantee %" * 0.01 * SavBal * 3) + GenSetup."Withdrawal Fee" + GetTotalSelfGuarantee(Accno) + GetTotalGuaranteedAmt(Accno);
             //Deductions := 
@@ -114,7 +114,7 @@ Codeunit 52185484 "Loan Appraisal Codeunit"
         TotalTopUp.SetLoadFields("Total Top Up");
         IF TotalTopUp.FindSet() THEN BEGIN
             TotalTopUp.CalcSums("Total Top Up");
-            Message('Total Top Up: %1', TotalTopUp."Total Top Up");
+            //Message('Total Top Up: %1', TotalTopUp."Total Top Up");
             exit(TotalTopUp."Total Top Up");
         END;
     end;

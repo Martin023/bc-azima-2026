@@ -542,6 +542,7 @@ Codeunit 52185506 "Global Functions"
         UpdateBoardMembers: Boolean;
         UpdateStaff: Boolean;
         Customer: Record Customer;
+        HREmployees: record "HR Employees";
     begin
         if Confirm('Do you want to update delegates and board members?') then begin
             UpdateBoardMembers := true;
@@ -550,47 +551,71 @@ Codeunit 52185506 "Global Functions"
             UpdateStaff := true;
         end;
 
-        Members.Reset();
-        if Members.Find('-') then begin
-            intProgressTotal := Members.COUNT;
+        if UpdateStaff then begin
+            Members.Reset();
+            Members.SetLoadFields("No.");
+            Members.SetRange("Account Category", Members."Account Category"::"Staff Member");
+            if Members.FindSet(true) then begin
+                // Members."Account Category" := Members."Account Category"::Member;
+                Members.ModifyAll("Account Category", "Account Category"::Member);
+            end;
 
-            intProgressI := 0;
-            TimeProgress := TIME;
-            NoOfRecsProgress := intProgressTotal DIV 100;
-            NoOfProgressed := 0;
-
-            diaProgress.OPEN(Generating + '@1@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', intProgress);
-            repeat
-                intProgressI += 1;
-                if (intProgressI >= NoOfRecsProgress) OR (TIME - TimeProgress > 1000) then begin
-                    NoOfProgressed := NoOfProgressed + intProgressI;
-                    diaProgress.UPDATE(1, ROUND(NoOfProgressed / intProgressTotal * 10000, 1));
-                    intProgressI := 0;
-                    TimeProgress := TIME;
-                end;
-
-                if UpdateBoardMembers then begin
-                    Officials.Reset();
-                    Officials.SetRange(Retired, false);
-                    Officials.SetRange(Status, Officials.Status::Approved);
-                    Officials.SetRange("Member Number", Members."No.");
-                    if Officials.FindFirst() then begin
-                        if Members."Account Category" <> Members."Account Category"::"Board Member" then
-                            Members."Account Category" := Members."Account Category"::Delegate;
-                    end else begin
-                        Members."Account Category" := Members."Account Category"::Member;
-                    end;
-                end;
-
-                if UpdateStaff then begin
-                    if Members."Employer Code" = '00100' then begin
+            HREmployees.reset;
+            HREmployees.SetRange(Status, HREmployees.Status::Active);
+            if HREmployees.FindSet() then begin
+                repeat
+                    Members.Reset();
+                    Members.SetLoadFields("No.");
+                    Members.SetRange("No.", HREmployees."Member No.");
+                    if Members.FindFirst() then begin
                         Members."Account Category" := Members."Account Category"::"Staff Member";
+                        Members.modify;
                     end;
-                end;
-                Members.Modify();
-            until Members.Next() = 0;
-            diaProgress.CLOSE;
+                until HREmployees.next() = 0;
+            end;
         end;
+
+        // Members.Reset();
+        // if Members.Find('-') then begin
+        //     intProgressTotal := Members.COUNT;
+
+        //     intProgressI := 0;
+        //     TimeProgress := TIME;
+        //     NoOfRecsProgress := intProgressTotal DIV 100;
+        //     NoOfProgressed := 0;
+
+        //     diaProgress.OPEN(Generating + '@1@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', intProgress);
+        //     repeat
+        //         intProgressI += 1;
+        //         if (intProgressI >= NoOfRecsProgress) OR (TIME - TimeProgress > 1000) then begin
+        //             NoOfProgressed := NoOfProgressed + intProgressI;
+        //             diaProgress.UPDATE(1, ROUND(NoOfProgressed / intProgressTotal * 10000, 1));
+        //             intProgressI := 0;
+        //             TimeProgress := TIME;
+        //         end;
+
+        //         if UpdateBoardMembers then begin
+        //             Officials.Reset();
+        //             Officials.SetRange(Retired, false);
+        //             Officials.SetRange(Status, Officials.Status::Approved);
+        //             Officials.SetRange("Member Number", Members."No.");
+        //             if Officials.FindFirst() then begin
+        //                 if Members."Account Category" <> Members."Account Category"::"Board Member" then
+        //                     Members."Account Category" := Members."Account Category"::Delegate;
+        //             end else begin
+        //                 Members."Account Category" := Members."Account Category"::Member;
+        //             end;
+        //         end;
+
+        //         if UpdateStaff then begin
+        //             if Members."Employer Code" = '00100' then begin
+        //                 Members."Account Category" := Members."Account Category"::"Staff Member";
+        //             end;
+        //         end;
+        //         Members.Modify();
+        //     until Members.Next() = 0;
+        //     diaProgress.CLOSE;
+        // end;
 
     end;
 
