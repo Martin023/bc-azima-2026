@@ -3825,7 +3825,7 @@ page 52186778 "Finance Role Center"
                         group("5. Payments")
                         {
                             Caption = 'Payments';
-                            Visible = false;
+                            ///Visible = false;
                             action("Open Purchase Invoices")
                             {
                                 ApplicationArea = Basic, Suite;
