@@ -940,9 +940,6 @@ End Function
         <Field Name="RouteDate">
           <DataField>RouteDate</DataField>
         </Field>
-        <Field Name="Day">
-          <DataField>Day</DataField>
-        </Field>
         <Field Name="Target">
           <DataField>Target</DataField>
         </Field>
