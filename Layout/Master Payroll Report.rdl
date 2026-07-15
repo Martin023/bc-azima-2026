@@ -291,14 +291,14 @@
                   <TablixHeader>
                     <Size>0.23622in</Size>
                     <CellContents>
-                      <Textbox Name="Transaction_Code1">
+                      <Textbox Name="Transaction_Name">
                         <CanGrow>true</CanGrow>
                         <KeepTogether>true</KeepTogether>
                         <Paragraphs>
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>=Fields!Transaction_Code.Value</Value>
+                                <Value>=Fields!Transaction_Name.Value</Value>
                                 <Style>
                                   <FontFamily>Book Antiqua</FontFamily>
                                   <FontWeight>Bold</FontWeight>
@@ -308,7 +308,7 @@
                             <Style />
                           </Paragraph>
                         </Paragraphs>
-                        <rd:DefaultName>Transaction_Code1</rd:DefaultName>
+                        <rd:DefaultName>Transaction_Name</rd:DefaultName>
                         <Style>
                           <Border>
                             <Color>LightGrey</Color>
@@ -750,7 +750,7 @@
           </Style>
         </PageFooter>
         <PageHeight>21.59cm</PageHeight>
-        <PageWidth>27.94cm</PageWidth>
+        <PageWidth>100cm</PageWidth>
         <LeftMargin>1cm</LeftMargin>
         <RightMargin>1cm</RightMargin>
         <TopMargin>1cm</TopMargin>
