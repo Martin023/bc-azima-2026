@@ -1,7 +1,7 @@
 namespace AzimaBC.AzimaBC;
 using Microsoft.Foundation.Company;
 
-report 52185510 "Master Payroll Report"
+report 52185511 "Master Payroll Report"
 {
     ApplicationArea = All;
     Caption = 'Master Payroll Report';
