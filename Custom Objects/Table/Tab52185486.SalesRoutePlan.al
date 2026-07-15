@@ -16,14 +16,10 @@ table 52185486 "Sales Route Plans"
             Caption = 'Activities/Target';
 
         }
-        field(3; "Place to visit"; Code[50])
-        {
-            Caption = 'Place to visit';
-        }
+
         field(4; Achievements; Text[1000])
         {
             Caption = 'Achievements';
-            Editable = false;
             // FieldClass = flowfield;
             // CalcFormula = count("Route Achievements" where("Header No" = field(No)));
         }
@@ -47,11 +43,7 @@ table 52185486 "Sales Route Plans"
         {
             Caption = 'Route Date';
         }
-        field(9; Day; Text[30])
-        {
-            Editable = false;
-            Caption = 'Day';
-        }
+
         field(10; "BDE Comments"; Text[1000])
         {
             Caption = 'BM/MO Comments';
@@ -80,6 +72,33 @@ table 52185486 "Sales Route Plans"
         field(15; "Route End Date"; Date)
         {
             Caption = 'Route End Date';
+
+            trigger OnValidate()
+            begin
+
+                if "Route Date" <> 0D then begin
+                    if "Route End Date" <> 0D then begin
+                        if "Route End Date" < "Route Date" then Error('Route End Date cannot be earlier than start date!');
+
+                        //Gen Lines
+                        SalesRouteLine.reset;
+                        SalesRouteLine.SetRange("Header No", rec.No);
+                        if SalesRouteLine.FindSet() then
+                            SalesRouteLine.DeleteAll();
+
+                        Days := ("Route End Date" - "Route Date") + 1;
+                        RouteDate := "Route Date";
+                        repeat
+                            SalesRouteLine.Init();
+                            SalesRouteLine."Header No" := rec.No;
+                            SalesRouteLine.validate("Route Date", RouteDate);
+                            SalesRouteLine.insert;
+                            Days -= 1;
+                            RouteDate := rec."Route Date" + 1;
+                        until Days = 0;
+                    end;
+                end;
+            end;
         }
 
     }
@@ -109,4 +128,7 @@ table 52185486 "Sales Route Plans"
     var
         MembNoSeries: Record "Credit Nos. Series";
         NoSeries: Codeunit "No. Series";
+        SalesRouteLine: record "Sales Route Lines";
+        Days: Integer;
+        RouteDate: Date;
 }

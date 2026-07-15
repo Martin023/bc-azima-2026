@@ -7,7 +7,7 @@ table 52187009 "Member Form List"
     {
         field(1; "Reference No"; Code[20])
         {
-            Caption = 'Loan No.';
+            Caption = 'Loan No./Ref No.';
         }
         field(2; "Date"; Date)
         {

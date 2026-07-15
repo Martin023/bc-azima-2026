@@ -34,22 +34,17 @@ page 52185457 "Sales Route Plan Card"
                 {
                     ToolTip = 'Specifies the value of the Route End Date field.', Comment = '%';
                 }
-                field(Day; Rec.Day)
-                {
-                    ToolTip = 'Specifies the value of the Day field.', Comment = '%';
-                }
+
                 field(Target; Rec.Target)
                 {
                     Multiline = true;
                     ToolTip = 'Specifies the value of the Target field.', Comment = '%';
                 }
-                field("Place to visit"; Rec."Place to visit")
-                {
-                    ToolTip = 'Specifies the value of the Place to visit field.', Comment = '%';
-                }
+
                 field(Achievements; Rec.Achievements)
                 {
                     ToolTip = 'Specifies the value of the Achievements field.', Comment = '%';
+                    Multiline = true;
                 }
                 field(Leads; Rec.Leads)
                 {
