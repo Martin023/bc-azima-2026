@@ -15,6 +15,8 @@ report 52185507 "Deductions With Employer Contr"
             DataItemTableView = where("Employer Deduction" = const(true));
             column(TransactionCode; "Transaction Code") { }
             column(TransactionName; "Transaction Name") { }
+            column(EmployeeCode; EmployeeCode) { }
+            column(EmployeeName; EmployeeName) { }
             column(EmployeeAmt; EmployeeAmt) { }
             column(EmployerAmt; EmployerAmt) { }
             column(TotalAmt; TotalAmt) { }
@@ -46,11 +48,19 @@ report 52185507 "Deductions With Employer Contr"
             begin
                 EmployeeAmt := 0;
                 EmployerAmt := 0;
+                EmployeeCode := '';
+                EmployeeName := '';
+
                 PRPeriodTransactions.Reset;
                 PRPeriodTransactions.SetRange("Transaction Code", "Transaction Code");
                 PRPeriodTransactions.SetRange("Payroll Period", SelectedPeriod);
                 if PRPeriodTransactions.FindSet() then begin
                     EmployeeAmt := PRPeriodTransactions.Amount;
+                    EmployeeCode := PRPeriodTransactions."Employee Code";
+                    Employees.Reset();
+                    Employees.SetRange("No.", EmployeeCode);
+                    if Employees.Find() then
+                        EmployeeName := Employees."Full Name";
                 end;
 
                 prEmployerDeductions.Reset;
@@ -130,6 +140,7 @@ report 52185507 "Deductions With Employer Contr"
         EmployerAmt: Decimal;
         EmployeeAmt: Decimal;
         TotalAmt: Decimal;
+        EmployeeCode: Code[20];
 }
 
 
