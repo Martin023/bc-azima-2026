@@ -13113,7 +13113,7 @@ Codeunit 52186456 "Sacco Transactions"
         GenJournalLine."Account Type" := AcctType;
         GenJournalLine."Account No." := AcctNo;
         GenJournalLine.Validate(GenJournalLine."Account No.");
-        GenJournalLine.Description := CopyStr(Desc, 1, 150);
+        GenJournalLine.Description := CopyStr(Desc, 1, 100);
         GenJournalLine."Bal. Account Type" := BalAcctType;
         GenJournalLine."Bal. Account No." := BalAcctNo;
         GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
