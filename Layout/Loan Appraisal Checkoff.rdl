@@ -11,7 +11,7 @@
       <am:Name>PBIRB</am:Name>
       <am:Version>15.7.1813.16</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-07-14T15:35:53.9488382Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-07-15T08:14:27.2967007Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -6318,10 +6318,19 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
+            <Filters>
+              <Filter>
+                <FilterExpression>=First(Fields!LoanTopUp_LoansTopup.Value, "DataSet_Result")</FilterExpression>
+                <Operator>GreaterThan</Operator>
+                <FilterValues>
+                  <FilterValue>0</FilterValue>
+                </FilterValues>
+              </Filter>
+            </Filters>
             <Top>18.59336cm</Top>
             <Left>0.19657cm</Left>
             <Height>1.8cm</Height>
-            <Width>19.79125cm</Width>
+            <Width>19.79124cm</Width>
             <ZIndex>116</ZIndex>
             <Style>
               <Border>
