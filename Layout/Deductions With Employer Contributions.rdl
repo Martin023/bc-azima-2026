@@ -11,64 +11,6 @@
       <rd:DataSourceID>920bedf0-a5d2-4e50-813f-e491c0217839</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="TransactionCode">
-          <DataField>TransactionCode</DataField>
-        </Field>
-        <Field Name="TransactionName">
-          <DataField>TransactionName</DataField>
-        </Field>
-        <Field Name="EmployeeCode">
-          <DataField>EmployeeCode</DataField>
-        </Field>
-        <Field Name="EmployeeName">
-          <DataField>EmployeeName</DataField>
-        </Field>
-        <Field Name="EmployeeAmt">
-          <DataField>EmployeeAmt</DataField>
-        </Field>
-        <Field Name="EmployeeAmtFormat">
-          <DataField>EmployeeAmtFormat</DataField>
-        </Field>
-        <Field Name="EmployerAmt">
-          <DataField>EmployerAmt</DataField>
-        </Field>
-        <Field Name="EmployerAmtFormat">
-          <DataField>EmployerAmtFormat</DataField>
-        </Field>
-        <Field Name="TotalAmt">
-          <DataField>TotalAmt</DataField>
-        </Field>
-        <Field Name="TotalAmtFormat">
-          <DataField>TotalAmtFormat</DataField>
-        </Field>
-        <Field Name="CI_Name">
-          <DataField>CI_Name</DataField>
-        </Field>
-        <Field Name="CI_Address">
-          <DataField>CI_Address</DataField>
-        </Field>
-        <Field Name="CI_Address2">
-          <DataField>CI_Address2</DataField>
-        </Field>
-        <Field Name="CI_PhoneNo">
-          <DataField>CI_PhoneNo</DataField>
-        </Field>
-        <Field Name="CI_Picture">
-          <DataField>CI_Picture</DataField>
-        </Field>
-        <Field Name="CI_City">
-          <DataField>CI_City</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -1128,100 +1070,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParameters>
-    <ReportParameter Name="CI_NameCaption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>CI_NameCaption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>CI_NameCaption</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="CI_AddressCaption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>CI_AddressCaption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>CI_AddressCaption</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="CI_Address2Caption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>CI_Address2Caption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>CI_Address2Caption</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="CI_PhoneNoCaption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>CI_PhoneNoCaption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>CI_PhoneNoCaption</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="CI_PictureCaption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>CI_PictureCaption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>CI_PictureCaption</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="CI_CityCaption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>CI_CityCaption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>CI_CityCaption</Prompt>
-    </ReportParameter>
-  </ReportParameters>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>1</NumberOfColumns>
-      <NumberOfRows>6</NumberOfRows>
-      <CellDefinitions>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>CI_NameCaption</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>1</RowIndex>
-          <ParameterName>CI_AddressCaption</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>2</RowIndex>
-          <ParameterName>CI_Address2Caption</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>3</RowIndex>
-          <ParameterName>CI_PhoneNoCaption</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>4</RowIndex>
-          <ParameterName>CI_PictureCaption</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>5</RowIndex>
-          <ParameterName>CI_CityCaption</ParameterName>
-        </CellDefinition>
-      </CellDefinitions>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -1261,4 +1109,59 @@ End Function
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="TransactionCode">
+          <DataField>TransactionCode</DataField>
+        </Field>
+        <Field Name="TransactionName">
+          <DataField>TransactionName</DataField>
+        </Field>
+        <Field Name="EmployeeCode">
+          <DataField>EmployeeCode</DataField>
+        </Field>
+        <Field Name="EmployeeName">
+          <DataField>EmployeeName</DataField>
+        </Field>
+        <Field Name="EmployeeAmt">
+          <DataField>EmployeeAmt</DataField>
+        </Field>
+        <Field Name="EmployeeAmtFormat">
+          <DataField>EmployeeAmtFormat</DataField>
+        </Field>
+        <Field Name="EmployerAmt">
+          <DataField>EmployerAmt</DataField>
+        </Field>
+        <Field Name="EmployerAmtFormat">
+          <DataField>EmployerAmtFormat</DataField>
+        </Field>
+        <Field Name="TotalAmt">
+          <DataField>TotalAmt</DataField>
+        </Field>
+        <Field Name="TotalAmtFormat">
+          <DataField>TotalAmtFormat</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Name">
+          <DataField>CompanyInformation_Name</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Picture">
+          <DataField>CompanyInformation_Picture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>

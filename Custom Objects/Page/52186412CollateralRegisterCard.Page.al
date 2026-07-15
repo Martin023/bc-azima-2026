@@ -205,7 +205,7 @@ page 52186412 "Collateral Register Card"
                 field("Forced Sale Value"; Rec."Forced Sale Value")
                 {
                     ApplicationArea = Basic, Suite;
-                    Editable = NotCashCollateral;
+                    // Editable = NotCashCollateral;
                 }
                 field("Collateral Limit"; Rec."Collateral Limit")
                 {
