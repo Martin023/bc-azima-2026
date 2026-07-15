@@ -540,9 +540,10 @@ page 52185804 "Treasury Cashier Transactions"
                             TCTransactions.SetRange("Transaction Type", TCTransactions."Transaction Type"::"End of Day Return to Treasury");
                             TCTransactions.SetRange(Issued, TCTransactions.Issued::Yes);
                             TCTransactions.SetRange(Received, TCTransactions.Received::No);
+                            TCTransactions.SetRange("From Account", rec."From Account");
 
                             // exclude current record
-                            TCTransactions.SetFilter("No", '<>%1', Rec.No);
+                            // TCTransactions.SetFilter("No", '<>%1', Rec.No);
                             if not TCTransactions.IsEmpty() then
                                 Error('You already have a pending EOD return to treasury request. Kindly close that one first before proceeding.');
                         end;
