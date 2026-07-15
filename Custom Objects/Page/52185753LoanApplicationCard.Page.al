@@ -924,7 +924,7 @@ page 52185753 "Loan Application Card"
             separator(Action44)
             {
             }
-            action("Partial Loan Disbursement Schedule")s
+            action("Partial Loan Disbursement Schedule")
             {
                 ApplicationArea = Basic, Suite;
                 Caption = 'Partial Loan Disbursement Schedule';
@@ -2103,7 +2103,7 @@ page 52185753 "Loan Application Card"
                         //********************Creation of STOs***********************************************************************************************//
                         Rec.TestField("Recovery Mode");
                         Rec.TestField("Member No.");
-                        if Rec."Recovery Mode" = Rec."Recovery Mode"::Hybrid then begin
+                        if Rec."Member Class" = 'CLASSB' then begin
                             StandingOrderHeader.Reset;
                             // StandingOrderHeader.SetRange("Member No.", Rec."Member No.");
                             // if StandingOrderHeader.FindFirst then begin
@@ -2126,7 +2126,7 @@ page 52185753 "Loan Application Card"
                             StandingOrderHeader.Description := rec."Loan No." + ' Monthly STO';
                             StandingOrderHeader."Allocated Amount" := Rec."Salary Amount";
                             StandingOrderHeader.Amount := Rec."Salary Amount";
-                            StandingOrderHeader."Income Type" := StandingOrderHeader."Income Type"::Salary;
+                            StandingOrderHeader."Income Type" := StandingOrderHeader."Income Type"::Periodic;
                             // StandingOrderHeader."Global Dimension 1 Code" := '';
                             // StandingOrderHeader."Global Dimension 2 Code" := '';
                             StandingOrderHeader.Status := StandingOrderHeader.Status::Approved;
@@ -2161,7 +2161,7 @@ page 52185753 "Loan Application Card"
                             StandingOrderLines."Destination Account No." := Rec."Loan Account";
                             StandingOrderLines."Destination Account Name" := Rec."Member Name";
                             StandingOrderLines."Loan No." := rec."Loan No.";
-                            StandingOrderLines.Amount := round(Rec."Salary Amount", 0.01, '=');
+                            StandingOrderLines.Amount := round(Rec.Repayment, 0.01, '=');
                             StandingOrderLines."Transaction Type" := StandingOrderLines."Transaction Type"::Armotised;
                             StandingOrderLines."Member No" := Rec."Member No.";
                             StandingOrderLines.Insert();
@@ -2196,38 +2196,36 @@ page 52185753 "Loan Application Card"
                         end;
                         //exit;
                         //remove guarator sms on loan topup for staff members- ticket 
-                        UserSetup.reset;
-                        UserSetup.setrange("Member No.", rec."Member No.");
-                        if not UserSetup.findfirst then begin
-                            LoansTopup.Reset;
-                            LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
-                            if LoansTopup.FindFirst then begin
-                                repeat
-                                    LoanGuar.Reset;
-                                    LoanGuar.SetRange("Loan No", LoansTopup."Loan Top Up");
-                                    LoanGuar.SetRange("Self Guarantee", false);
-                                    if LoanGuar.FindFirst then begin
-                                        if Loans2.Get(LoanGuar."Loan No") then begin
-                                            ProductType := Loans2."Loan Product Type Name";
-                                            AppAmount := Loans2."Approved Amount";
-                                        end;
-                                        repeat
-                                            if Members.Get(LoanGuar."Member No") then
-                                                CompInfo.Get;
+                        // UserSetup.reset;
+                        // UserSetup.setrange("Member No.", rec."Member No.");
+                        // if not UserSetup.findfirst then begin
+                        //     LoansTopup.Reset;
+                        //     LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
+                        //     if LoansTopup.FindFirst then begin
+                        //         repeat
+                        //             LoanGuar.Reset;
+                        //             LoanGuar.SetRange("Loan No", LoansTopup."Loan Top Up");
+                        //             LoanGuar.SetRange("Self Guarantee", false);
+                        //             if LoanGuar.FindFirst then begin
+                        //                 if Loans2.Get(LoanGuar."Loan No") then begin
+                        //                     ProductType := Loans2."Loan Product Type Name";
+                        //                     AppAmount := Loans2."Approved Amount";
+                        //                 end;
+                        //                 repeat
+                        //                     if Members.Get(LoanGuar."Member No") then
+                        //                         CompInfo.Get;
 
-                                            msg := 'Dear ' + LoanGuar.Name + ', The ' + ProductType + ' of Ksh. ' + Format(AppAmount) + ', you had guaranteed ' + LoanGuar."Loanee Name" + ' is now fully repaid.';
-                                            SendSMS.SendSms(Source::LOAN_GUARANTORS, Members."Phone No.", msg, Format(Loans2."Disbursement Account No"), '', true, 0, false, 'CBS', Loans2."Disbursement Account No", 'CBS');
+                        //                     msg := 'Dear ' + LoanGuar.Name + ', The ' + ProductType + ' of Ksh. ' + Format(AppAmount) + ', you had guaranteed ' + LoanGuar."Loanee Name" + ' is now fully repaid.';
+                        //                     SendSMS.SendSms(Source::LOAN_GUARANTORS, Members."Phone No.", msg, Format(Loans2."Disbursement Account No"), '', true, 0, false, 'CBS', Loans2."Disbursement Account No", 'CBS');
 
-                                        until LoanGuar.Next = 0;
-                                    end;
-                                until LoansTopup.Next = 0;
-                            end;
-                        end;
+                        //                 until LoanGuar.Next = 0;
+                        //             end;
+                        //         until LoansTopup.Next = 0;
+                        //     end;
+                        // end;
 
-                        //AutoCreateFile
-
-                        //GlobalFunctions.CreateFile(Rec."Member No.", Enum::"File Types"::"Member File");
-
+                        //AutoCreateForm
+                        GlobalFunctions.CreateFile(Rec."Member No.", Enum::"Member Form Types"::"Loan Form", rec."Loan No.");
                         Message('Loan Posted Successfully');
                         CurrPage.Close();
                     end;

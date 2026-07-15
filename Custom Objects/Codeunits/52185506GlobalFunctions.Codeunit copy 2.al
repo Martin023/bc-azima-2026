@@ -5,14 +5,22 @@ Codeunit 52185506 "Global Functions"
     begin
     end;
 
-    procedure CreateFile(MemberNo: Code[100]; FileType: Enum "File Types")
+    procedure CreateFile(MemberNo: Code[100]; FileType: Enum "Member Form Types"; RefNo: code[30])
     var
-        FilesRec: Record "Files Table";
+        FilesRec: Record "Member Form List";
     begin
+        FilesRec.reset();
+        FilesRec.SetRange("Reference No", RefNo);
+        FilesRec.SetRange("Member No.", MemberNo);
+        FilesRec.SetRange("Member Form Types", FileType);
+        if FilesRec.FindSet() then FilesRec.DeleteAll();
+
         FilesRec.Init();
-        FilesRec.Validate("File Type", FileType);
-        FilesRec.Validate("File/Member No.", MemberNo);
-        FilesRec.Insert(true);
+        FilesRec."Member Form Types" := FileType;
+        FilesRec."Reference No" := RefNo;
+        FilesRec."Member No." := MemberNo;
+        FIlesRec.Date := Today;
+        FilesRec.insert();
     end;
 
     procedure FormatDate(Realdate: date) dateText: Text;
