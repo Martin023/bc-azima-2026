@@ -22,11 +22,34 @@ report 52185510 "Master Payroll Report"
                 RequestFilterFields = "Payroll Period";
                 column(Employee_Code; "Employee Code") { }
                 column(strEmpName; strEmpName) { }
-                column(Transaction_Code;"Transaction Code") {}
-                column(Transaction_Name;"Transaction Name") {}
+                column(Transaction_Code; "Transaction Code") { }
+                column(Transaction_Name; "Transaction Name") { }
                 column(Amount; Amount) { }
                 column(Employer_Amount; "Employer Amount") { }
-
+                column(CI_Name; CI.Name)
+                {
+                    IncludeCaption = true;
+                }
+                column(CI_Address; CI.Address)
+                {
+                    IncludeCaption = true;
+                }
+                column(CI_Address2; CI."Address 2")
+                {
+                    IncludeCaption = true;
+                }
+                column(CI_PhoneNo; CI."Phone No.")
+                {
+                    IncludeCaption = true;
+                }
+                column(CI_Picture; CI.Picture)
+                {
+                    IncludeCaption = true;
+                }
+                column(CI_City; CI.City)
+                {
+                    IncludeCaption = true;
+                }
                 trigger OnAfterGetRecord()
                 var
                     myInt: Integer;
@@ -71,8 +94,8 @@ report 52185510 "Master Payroll Report"
         end;
 
 
-        if CompanyInfo.Get() then
-            CompanyInfo.CalcFields(CompanyInfo.Picture);
+        if CI.Get() then
+            CI.CalcFields(CI.Picture)
     end;
 
     var
@@ -96,6 +119,7 @@ report 52185510 "Master Payroll Report"
         HREmployee: Record "HR Employees";
         CompanyInfo: Record "Company Information";
         PayrollMode: Option " ","Bank Transfer",Cheque,Cash,SACCO;
+        CI: Record "Company Information";
 
     procedure OnViewCurrRec()
     var

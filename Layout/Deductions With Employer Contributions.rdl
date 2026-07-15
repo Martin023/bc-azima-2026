@@ -11,6 +11,64 @@
       <rd:DataSourceID>920bedf0-a5d2-4e50-813f-e491c0217839</rd:DataSourceID>
     </DataSource>
   </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+      <Fields>
+        <Field Name="TransactionCode">
+          <DataField>TransactionCode</DataField>
+        </Field>
+        <Field Name="TransactionName">
+          <DataField>TransactionName</DataField>
+        </Field>
+        <Field Name="EmployeeCode">
+          <DataField>EmployeeCode</DataField>
+        </Field>
+        <Field Name="EmployeeName">
+          <DataField>EmployeeName</DataField>
+        </Field>
+        <Field Name="EmployeeAmt">
+          <DataField>EmployeeAmt</DataField>
+        </Field>
+        <Field Name="EmployeeAmtFormat">
+          <DataField>EmployeeAmtFormat</DataField>
+        </Field>
+        <Field Name="EmployerAmt">
+          <DataField>EmployerAmt</DataField>
+        </Field>
+        <Field Name="EmployerAmtFormat">
+          <DataField>EmployerAmtFormat</DataField>
+        </Field>
+        <Field Name="TotalAmt">
+          <DataField>TotalAmt</DataField>
+        </Field>
+        <Field Name="TotalAmtFormat">
+          <DataField>TotalAmtFormat</DataField>
+        </Field>
+        <Field Name="CI_Name">
+          <DataField>CI_Name</DataField>
+        </Field>
+        <Field Name="CI_Address">
+          <DataField>CI_Address</DataField>
+        </Field>
+        <Field Name="CI_Address2">
+          <DataField>CI_Address2</DataField>
+        </Field>
+        <Field Name="CI_PhoneNo">
+          <DataField>CI_PhoneNo</DataField>
+        </Field>
+        <Field Name="CI_Picture">
+          <DataField>CI_Picture</DataField>
+        </Field>
+        <Field Name="CI_City">
+          <DataField>CI_City</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -521,7 +579,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Count(Fields!EmployeeCode.Value)</Value>
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
                                   </Style>
@@ -785,163 +843,10 @@
       <Width>21.38826cm</Width>
       <Page>
         <PageHeader>
-          <Height>3.12208cm</Height>
+          <Height>4.51555cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
-            <Image Name="CI_Picture1">
-              <Source>Database</Source>
-              <Value>=First(Fields!CI_Picture.Value, "DataSet_Result")</Value>
-              <MIMEType>image/bmp</MIMEType>
-              <Sizing>Fit</Sizing>
-              <Top>0.01372cm</Top>
-              <Left>0.28159cm</Left>
-              <Height>2.51256cm</Height>
-              <Width>3.01744cm</Width>
-              <Style>
-                <Border />
-              </Style>
-            </Image>
-            <Textbox Name="Textbox69">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=First(Fields!CI_Name.Value, "DataSet_Result")</Value>
-                      <Style>
-                        <FontFamily>Book Antiqua</FontFamily>
-                        <FontSize>7pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox49</rd:DefaultName>
-              <Top>0.0054in</Top>
-              <Left>0.00001in</Left>
-              <Height>0.15986in</Height>
-              <Width>7.84769in</Width>
-              <ZIndex>1</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox118">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=First(Fields!CI_Address.Value, "DataSet_Result")</Value>
-                      <Style>
-                        <FontFamily>Book Antiqua</FontFamily>
-                        <FontSize>7pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox49</rd:DefaultName>
-              <Top>0.16526in</Top>
-              <Left>0in</Left>
-              <Height>0.15986in</Height>
-              <Width>7.84769in</Width>
-              <ZIndex>2</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox119">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=First(Fields!CI_Address2.Value, "DataSet_Result") &amp; First(Fields!CI_City.Value, "DataSet_Result")</Value>
-                      <Style>
-                        <FontFamily>Book Antiqua</FontFamily>
-                        <FontSize>7pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox49</rd:DefaultName>
-              <Top>0.32512in</Top>
-              <Left>0.00001in</Left>
-              <Height>0.15986in</Height>
-              <Width>7.84769in</Width>
-              <ZIndex>3</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox120">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=First(Fields!CI_PhoneNo.Value, "DataSet_Result")</Value>
-                      <Style>
-                        <FontFamily>Book Antiqua</FontFamily>
-                        <FontSize>7pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox49</rd:DefaultName>
-              <Top>0.48498in</Top>
-              <Left>0in</Left>
-              <Height>0.15986in</Height>
-              <Width>7.84769in</Width>
-              <ZIndex>4</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
             <Textbox Name="Textbox7">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
@@ -962,11 +867,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox7</rd:DefaultName>
-              <Top>1.92628cm</Top>
-              <Left>0.28159cm</Left>
+              <Top>3.54906cm</Top>
+              <Left>0.4858cm</Left>
               <Height>0.6cm</Height>
-              <Width>19.65155cm</Width>
-              <ZIndex>5</ZIndex>
+              <Width>20.33802cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -977,6 +881,162 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
+            <Textbox Name="Textbox534">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CompanyInformation_Name.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontFamily>Book Antiqua</FontFamily>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox528</rd:DefaultName>
+              <Top>0.0052in</Top>
+              <Left>2.57054in</Left>
+              <Height>0.26042in</Height>
+              <Width>4.91355in</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox535">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CompanyAddress.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontFamily>Book Antiqua</FontFamily>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox528</rd:DefaultName>
+              <Top>0.2934in</Top>
+              <Left>2.57054in</Left>
+              <Height>0.24306in</Height>
+              <Width>4.91355in</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox536">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CompanyTelephone.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontFamily>Book Antiqua</FontFamily>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox528</rd:DefaultName>
+              <Top>0.56424in</Top>
+              <Left>2.57054in</Left>
+              <Height>0.23959in</Height>
+              <Width>4.91355in</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox537">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CommunicationOnline.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontFamily>Book Antiqua</FontFamily>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox528</rd:DefaultName>
+              <Top>0.85938in</Top>
+              <Left>2.57054in</Left>
+              <Height>0.2257in</Height>
+              <Width>4.91355in</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Image Name="CompanyLogo2">
+              <Source>Database</Source>
+              <Value>=First(Fields!CompanyInformation_Picture.Value, "DataSet_Result")</Value>
+              <MIMEType>image/jpeg</MIMEType>
+              <Sizing>FitProportional</Sizing>
+              <Top>0.0052in</Top>
+              <Left>0.19126in</Left>
+              <Height>1.23264in</Height>
+              <Width>2.37928in</Width>
+              <ZIndex>5</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Image>
           </ReportItems>
           <Style>
             <Border>
@@ -1201,62 +1261,4 @@ End Function
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Fields>
-        <Field Name="TransactionCode">
-          <DataField>TransactionCode</DataField>
-        </Field>
-        <Field Name="TransactionName">
-          <DataField>TransactionName</DataField>
-        </Field>
-        <Field Name="EmployeeCode">
-          <DataField>EmployeeCode</DataField>
-        </Field>
-        <Field Name="EmployeeName">
-          <DataField>EmployeeName</DataField>
-        </Field>
-        <Field Name="EmployeeAmt">
-          <DataField>EmployeeAmt</DataField>
-        </Field>
-        <Field Name="EmployeeAmtFormat">
-          <DataField>EmployeeAmtFormat</DataField>
-        </Field>
-        <Field Name="EmployerAmt">
-          <DataField>EmployerAmt</DataField>
-        </Field>
-        <Field Name="EmployerAmtFormat">
-          <DataField>EmployerAmtFormat</DataField>
-        </Field>
-        <Field Name="TotalAmt">
-          <DataField>TotalAmt</DataField>
-        </Field>
-        <Field Name="TotalAmtFormat">
-          <DataField>TotalAmtFormat</DataField>
-        </Field>
-        <Field Name="CI_Name">
-          <DataField>CI_Name</DataField>
-        </Field>
-        <Field Name="CI_Address">
-          <DataField>CI_Address</DataField>
-        </Field>
-        <Field Name="CI_Address2">
-          <DataField>CI_Address2</DataField>
-        </Field>
-        <Field Name="CI_PhoneNo">
-          <DataField>CI_PhoneNo</DataField>
-        </Field>
-        <Field Name="CI_Picture">
-          <DataField>CI_Picture</DataField>
-        </Field>
-        <Field Name="CI_City">
-          <DataField>CI_City</DataField>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-    </DataSet>
-  </DataSets>
 </Report>

@@ -412,7 +412,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>1.6787in</Size>
+                        <Size>2.08842in</Size>
                         <CellContents>
                           <Textbox Name="strEmpName">
                             <CanGrow>true</CanGrow>
@@ -484,7 +484,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <TablixHeader>
-                        <Size>1.6787in</Size>
+                        <Size>2.08842in</Size>
                         <CellContents>
                           <Textbox Name="Textbox9">
                             <CanGrow>true</CanGrow>
@@ -524,9 +524,9 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
             <Top>0.31473in</Top>
-            <Left>0.48834in</Left>
+            <Left>0.32886in</Left>
             <Height>0.97244in</Height>
-            <Width>4.35231in</Width>
+            <Width>4.76203in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -537,12 +537,202 @@
         <Height>3.70417cm</Height>
         <Style />
       </Body>
-      <Width>16.51cm</Width>
+      <Width>19.93316cm</Width>
       <Page>
         <PageHeader>
-          <Height>2.25778cm</Height>
+          <Height>2.51257cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Image Name="CI_Picture1">
+              <Source>Database</Source>
+              <Value>=First(Fields!CI_Picture.Value, "DataSet_Result")</Value>
+              <MIMEType>image/bmp</MIMEType>
+              <Sizing>Fit</Sizing>
+              <Top>0.00001cm</Top>
+              <Left>0.28159cm</Left>
+              <Height>2.51256cm</Height>
+              <Width>3.01744cm</Width>
+              <Style>
+                <Border />
+              </Style>
+            </Image>
+            <Textbox Name="Textbox69">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CI_Name.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontFamily>Book Antiqua</FontFamily>
+                        <FontSize>7pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox49</rd:DefaultName>
+              <Top>0in</Top>
+              <Left>0.00001in</Left>
+              <Height>0.15986in</Height>
+              <Width>7.84769in</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox118">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CI_Address.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontFamily>Book Antiqua</FontFamily>
+                        <FontSize>7pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox49</rd:DefaultName>
+              <Top>0.15986in</Top>
+              <Left>0in</Left>
+              <Height>0.15986in</Height>
+              <Width>7.84769in</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox119">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CI_Address2.Value, "DataSet_Result") &amp; First(Fields!CI_City.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontFamily>Book Antiqua</FontFamily>
+                        <FontSize>7pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox49</rd:DefaultName>
+              <Top>0.31972in</Top>
+              <Left>0.00001in</Left>
+              <Height>0.15986in</Height>
+              <Width>7.84769in</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox120">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CI_PhoneNo.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontFamily>Book Antiqua</FontFamily>
+                        <FontSize>7pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox49</rd:DefaultName>
+              <Top>0.47958in</Top>
+              <Left>0in</Left>
+              <Height>0.15986in</Height>
+              <Width>7.84769in</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox7">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Master Payroll Report</Value>
+                      <Style>
+                        <FontFamily>Book Antiqua</FontFamily>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox7</rd:DefaultName>
+              <Top>1.91257cm</Top>
+              <Left>0.28159cm</Left>
+              <Height>0.6cm</Height>
+              <Width>19.65155cm</Width>
+              <ZIndex>5</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
           <Style>
             <Border>
               <Style>None</Style>

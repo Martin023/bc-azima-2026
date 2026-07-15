@@ -20,29 +20,20 @@ report 52185507 "Deductions With Employer Contr"
             column(EmployeeAmt; EmployeeAmt) { }
             column(EmployerAmt; EmployerAmt) { }
             column(TotalAmt; TotalAmt) { }
-            column(CI_Name; CI.Name)
+            column(CompanyInformation_Name; CompanyInformation.Name)
             {
-                IncludeCaption = true;
             }
-            column(CI_Address; CI.Address)
+            column(CompanyInformation_Picture; CompanyInformation.Picture)
             {
-                IncludeCaption = true;
             }
-            column(CI_Address2; CI."Address 2")
+            column(CompanyAddress; CompanyAddress)
             {
-                IncludeCaption = true;
             }
-            column(CI_PhoneNo; CI."Phone No.")
+            column(CompanyTelephone; CompanyTelephone)
             {
-                IncludeCaption = true;
             }
-            column(CI_Picture; CI.Picture)
+            column(CommunicationOnline; CommunicationOnline)
             {
-                IncludeCaption = true;
-            }
-            column(CI_City; CI.City)
-            {
-                IncludeCaption = true;
             }
             trigger OnAfterGetRecord()
             begin
@@ -60,7 +51,7 @@ report 52185507 "Deductions With Employer Contr"
                     Employees.Reset();
                     Employees.SetRange("No.", EmployeeCode);
                     if Employees.Find() then
-                        EmployeeName := Employees."Full Name";
+                        EmployeeName := Employees."First Name" + ' ' + Employees."Middle Name" + ' ' + Employees."Last Name";
                 end;
 
                 prEmployerDeductions.Reset;
@@ -83,6 +74,12 @@ report 52185507 "Deductions With Employer Contr"
             //         //LastFieldNo := "PR Period Transactions".FieldNo("Period Year");
             //     end;
             // }
+            trigger OnPreDataItem()
+            begin
+                CompanyInformation.Get;
+                CompanyInformation.CalcFields(Picture);
+
+            end;
 
         }
     }
@@ -116,7 +113,11 @@ report 52185507 "Deductions With Employer Contr"
         if objPeriod.Find('-') then begin
             PeriodName := objPeriod."Period Name";
         end;
-
+        if CompanyInformation.Get then
+            CompanyInformation.CalcFields(CompanyInformation.Picture);
+        CompanyAddress := CompanyInformation.Address + ' -Post Code: ' + CompanyInformation."Post Code" + ' -City:' + CompanyInformation.City + ' Region: ' + CompanyInformation."Country/Region Code";
+        CompanyTelephone := 'Tel: ' + CompanyInformation."Phone No." + ' -Office Tel: ' + CompanyInformation."Phone No. 2";
+        CommunicationOnline := 'E-mail: ' + CompanyInformation."E-Mail" + '- Website: ' + CompanyInformation."Home Page";
 
         // if CI.Get() then
         //     CI.CalcFields(CI.Picture);
@@ -127,6 +128,10 @@ report 52185507 "Deductions With Employer Contr"
         objPeriod: Record "PR Payroll Periods";
         SelectedPeriod: Date;
         PeriodName: Text[30];
+        CompanyInformation: Record "Company Information";
+        CompanyAddress: Text;
+        CompanyTelephone: Text;
+        CommunicationOnline: Text;
         CompanyInfo: Record "Company Information";
         Employees: Record "HR Employees";
         EmployeeName: Text[100];
