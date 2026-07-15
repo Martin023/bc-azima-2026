@@ -203,6 +203,9 @@ Report 52185685 "Cashier CHDeposit Slip"
             column(Payee_Transactions; Transactions.Payee)
             {
             }
+            column(Payer_Transactions; Transactions."Payer")
+            {
+            }
             column(ChequeIssuingBank_Transactions; Transactions."Cheque Issueing Bank")
             {
             }

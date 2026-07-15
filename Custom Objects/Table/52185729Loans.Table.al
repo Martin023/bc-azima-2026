@@ -578,14 +578,14 @@ table 52185729 Loans
                 end;
                 // To accomodate portal loans
 
-                if "Source Aplication" = "Source Aplication"::BC then begin
-                    if "Source Unit" = Rec."Source Unit"::BOSA then begin
-                        UserSetup.get(USERID);
-                        if UserSetup."Member No." = '' then Error('Member number for %1 must have a value in the user setup', UserId);
-                        IF (UserSetup."Member No." = "Member No.") and (UserSetup."Member No." <> '') then
-                            Error('You cannot capture your own loan application.');
-                    end;
-                end;
+                // if "Source Aplication" = "Source Aplication"::BC then begin
+                    // if "Source Unit" = Rec."Source Unit"::BOSA then begin
+                    UserSetup.get(USERID);
+                    if UserSetup."Member No." = '' then Error('Member number for %1 must have a value in the user setup', UserId);
+                    IF (UserSetup."Member No." = "Member No.") and (UserSetup."Member No." <> '') then
+                        Error('You cannot capture your own loan application.');
+                    // end;
+                // end;
 
                 "Loans - Deposit Purchase" := 0;
                 "Share Boosted Amount" := 0;
@@ -1876,56 +1876,57 @@ table 52185729 Loans
                         Error('You cannot Approve or Reject your own loan application.');
                     end;
                 end;
-                //Send guarantor sms
-                LoanGua.Reset;
-                LoanGua.SetRange(LoanGua."Loan No", Rec."Loan No.");
-                LoanGua.SetRange("SMS Sent", false);
-                if LoanGua.FindFirst then begin
-                    //Message('Some Messages have not been sent to the guarantors');
-                    SendM := true;
-                end;
-                if SendM = true then begin
-                    if Confirm('Do you wish to Send Guarantor SMS?', false) then begin
-                        if Loan.Get(Rec."Loan No.") then begin
-                            LoanGua.Reset;
-                            LoanGua.SetRange(LoanGua."Loan No", Rec."Loan No.");
-                            LoanGua.SetRange("SMS Sent", false);
-                            if LoanGua.Find('-') then begin
-                                repeat
-                                    // MESSAGE(FORMAT(LoanGua."Member No"));
-                                    if Members.Get(LoanGua."Member No") then begin
-                                        if Members."Phone No." <> '' then begin
-                                            if Loan.Posted = true then
-                                                exit;
-                                            CompInfo.Get;
-                                            MemberGuarantor.Get(LoanGua."Member Guaranteed");
+                if (rec.Status = rec.Status::Approved) then begin
+                    //Send guarantor sms
+                    LoanGua.Reset;
+                    LoanGua.SetRange(LoanGua."Loan No", Rec."Loan No.");
+                    LoanGua.SetRange("SMS Sent", false);
+                    if LoanGua.FindFirst then begin
+                        //Message('Some Messages have not been sent to the guarantors');
+                        SendM := true;
+                    end;
+                    if SendM = true then begin
+                        if Confirm('Do you wish to Send Guarantor SMS?', false) then begin
+                            if Loan.Get(Rec."Loan No.") then begin
+                                LoanGua.Reset;
+                                LoanGua.SetRange(LoanGua."Loan No", Rec."Loan No.");
+                                LoanGua.SetRange("SMS Sent", false);
+                                if LoanGua.Find('-') then begin
+                                    repeat
+                                        // MESSAGE(FORMAT(LoanGua."Member No"));
+                                        if Members.Get(LoanGua."Member No") then begin
+                                            if Members."Phone No." <> '' then begin
+                                                if Loan.Posted = true then
+                                                    exit;
+                                                CompInfo.Get;
+                                                MemberGuarantor.Get(LoanGua."Member Guaranteed");
 
-                                            msg := 'Dear ' + MemberGuarantor."First Name" + ', You have guaranteed MNo: '
-                                            + LoanGua."Member Guaranteed" + '-' + MemberGuarantor.Name + ' ' + Loan."Loan Product Type Name" + ' of KES ' +
-                                            Format(Loan."Approved Amount") + '. If in dispute call' + ' ' + CompInfo."Phone No.";
+                                                msg := 'Dear ' + MemberGuarantor."First Name" + ', You have guaranteed MNo: '
+                                                + LoanGua."Member Guaranteed" + '-' + MemberGuarantor.Name + ' ' + Loan."Loan Product Type Name" + ' of KES ' +
+                                                Format(Loan."Approved Amount") + '. If in dispute call' + ' ' + CompInfo."Phone No.";
 
-                                            SendSMS.SendSms(Source::LOAN_GUARANTORS, Members."Phone No.", msg, Format(Loan."Disbursement Account No"), '', true, 0, false, 'CBS', Loan."Disbursement Account No", 'CBS');
+                                                SendSMS.SendSms(Source::LOAN_GUARANTORS, Members."Phone No.", msg, Format(Loan."Disbursement Account No"), '', true, 0, false, 'CBS', Loan."Disbursement Account No", 'CBS');
 
-                                            LoanGua."SMS Sent" := true;
-                                            LoanGua.Modify;
+                                                LoanGua."SMS Sent" := true;
+                                                LoanGua.Modify;
+                                            end;
                                         end;
-                                    end;
-                                until LoanGua.Next = 0;
+                                    until LoanGua.Next = 0;
 
-                                //END;
+                                    //END;
+                                end;
+                                // if Members.Get(Loan."Member No.") then begin
+                                //     if Loan."SMS Sent" = false then begin
+
+                                //         msg := 'You loan application of ' + ' ' + Loan."Loan Product Type Name" + ' of ' + ' Kes' + Format(Loan."Approved Amount") + ' ' + 'is being processed';
+
+                                //         SendSMS.SendSms(Source::MBANKING, Members."Phone No.", msg, Format(Loan."Disbursement Account No"), '', true, 0, false, 'CBS', Loan."Disbursement Account No", 'CBS');
+                                //     end;
+                                // end;
                             end;
-                            // if Members.Get(Loan."Member No.") then begin
-                            //     if Loan."SMS Sent" = false then begin
-
-                            //         msg := 'You loan application of ' + ' ' + Loan."Loan Product Type Name" + ' of ' + ' Kes' + Format(Loan."Approved Amount") + ' ' + 'is being processed';
-
-                            //         SendSMS.SendSms(Source::MBANKING, Members."Phone No.", msg, Format(Loan."Disbursement Account No"), '', true, 0, false, 'CBS', Loan."Disbursement Account No", 'CBS');
-                            //     end;
-                            // end;
                         end;
                     end;
                 end;
-
             end;
 
         }

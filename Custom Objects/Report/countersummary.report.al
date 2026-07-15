@@ -52,7 +52,8 @@ Report 52185496 "Counter Summary Report"
                         LineDebitAmt := 0;
                         LineCreditAmt := 0;
                         
-                        if Treasury_transaction.Type in[Treasury_transaction.Type::"Cash Withdrawal", Treasury_transaction.Type::"MPESA Withdrawal", Treasury_transaction.Type::"Cheque Withdrawal", Treasury_transaction.Type::"Bankers Cheque"] then
+                        //if Treasury_transaction.Type in[Treasury_transaction.Type::"Cash Withdrawal", Treasury_transaction.Type::"MPESA Withdrawal", Treasury_transaction.Type::"Cheque Withdrawal", Treasury_transaction.Type::"Bankers Cheque"] then
+                        if Treasury_transaction.Type in[Treasury_transaction.Type::"Cash Withdrawal"] then
                             LineDebitAmt := Treasury_transaction.Amount
                         else
                             LineCreditAmt := Treasury_transaction.Amount;

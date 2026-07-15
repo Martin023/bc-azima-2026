@@ -179,8 +179,6 @@ table 52185776 "Cashier Transactions"
                         if BankAccount."Balance (LCY)" <= 0 then begin
                             if (Type <> type::"Cash Deposit") and (Type <> Type::"Cheque Deposit") and (Type <> Type::"Credit Receipt") then
                                 Error('You need to request money from treasury first before proceeding!');
-                        end else if BankAccount."Balance (LCY)" <= BankAccount."Replenishment Balance" then begin
-                                Message('Your cash balance has reached the replenishment level. Please request replenishment from treasury.');
                         end;
 
 
@@ -311,7 +309,7 @@ table 52185776 "Cashier Transactions"
                     BankersCheque.SetCurrentKey("Cheque No.");
                     BankersCheque.SetAscending("Cheque No.", true);
                     BankersCheque.SetRange(Status, BankersCheque.Status::Pending);
-                    BankersCheque.SetRange("Global Dimension 2 Code", Rec."Global Dimension 2 Code"); // <-- add this
+                    BankersCheque.SetRange("Global Dimension 1 Code", Rec."Global Dimension 1 Code"); // <-- add this
                     if BankersCheque.FindFirst() then
                         rec."Bankers Cheque No" := BankersCheque."Cheque No."
                     else
@@ -634,6 +632,9 @@ table 52185776 "Cashier Transactions"
                             bankacc.CalcFields(bankacc.Balance, bankacc."Balance (LCY)");
                             "Account No" := bankacc."No.";
                             "Till Name" := PadStr(BUserSetup."Default  Bank" + ' ' + bankacc.Name, 50);
+                            if bankacc."Balance (LCY)" <= bankacc."Replenishment Balance" then begin
+                                Message('Your cash balance has reached the replenishment level. Please request replenishment from treasury.');
+                            end;
                         end;
                     end;
                 end;
@@ -750,6 +751,9 @@ table 52185776 "Cashier Transactions"
         {
             Editable = false;
         }
+        field(50036; "Payer"; Code[100])
+        {
+        }
     }
 
     keys
@@ -826,6 +830,7 @@ table 52185776 "Cashier Transactions"
             "Till Code" := BUserSetup."Default  Bank";
             bankacc.Reset;
             bankacc.SetRange("No.", BUserSetup."Default  Bank");
+            bankacc.calcfields(bankacc."Balance (LCY)");
             if bankacc.Find('-') then begin
                 "Till Code" := BUserSetup."Default  Bank";
                 "Till Name" := PadStr(BUserSetup."Default  Bank" + ' ' + bankacc.Name, 50);

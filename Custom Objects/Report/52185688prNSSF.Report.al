@@ -2,6 +2,7 @@
 Report 52185688 prNSSF
 {
     DefaultLayout = RDLC;
+    Caption = 'NSSF Tier 1';
     RDLCLayout = './bc-azima-2026/Layout/prNSSF.rdl';
 
 
@@ -79,8 +80,8 @@ Report 52185688 prNSSF
                 if prNSSF.FindFirst then begin
                     Tier1Cont := prNSSF."Tier 1 Employee Deduction";
                 end;
-                Tier2Cont := "PR Period Transactions".Amount - Tier1Cont;
-                TotalCont := "PR Period Transactions".Amount * 2;
+                //Tier2Cont := "PR Period Transactions".Amount - Tier1Cont;
+                TotalCont := Tier1Cont * 2;
             end;
 
             trigger OnPreDataItem()

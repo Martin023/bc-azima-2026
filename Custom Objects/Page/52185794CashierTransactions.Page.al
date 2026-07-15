@@ -328,17 +328,7 @@ page 52185794 "Cashier Transactions"
                         Caption = 'Bankers Cheque No';
                         Editable = (rec.Type = rec.Type::"Cancel Bankers Cheque") or (rec.Type = rec.Type::"Bankers Cheque");
                     }
-                    field("Bank Code"; Rec."Bank Code")
-                    {
-                        ApplicationArea = Basic;
-
-                    }
-                    field("Bank Name"; Rec."Bank Name")
-                    {
-                        ApplicationArea = Basic;
-                        editable = false;
-
-                    }
+                    
                 }
                 group(MPESATYPE)
                 {
@@ -427,10 +417,29 @@ page 52185794 "Cashier Transactions"
                         ShowMandatory = true;
 
                     }
+                    field("Bank Code"; Rec."Bank Code")
+                    {
+                        ApplicationArea = Basic;
+                        
+                    }
+
+                    field("Bank Name"; Rec."Bank Name")
+                    {
+                        ApplicationArea = Basic;
+                        Editable = false;
+                    }
                     field(BchequeNo; Rec."Cheque No")
                     {
                         ApplicationArea = Basic;
-                        Caption = ' Cheque No';
+                        Caption = 'Cheque No';
+                        ShowMandatory = true;
+
+                    }
+
+                    field(Payer; Rec."Payer")
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'Payer';
                         ShowMandatory = true;
 
                     }
@@ -1372,10 +1381,13 @@ page 52185794 "Cashier Transactions"
             MPESATYPEVisible := true;
         end;
 
+        // SetBankCodeVisibility;
+
         SetControlAppearance;
         UpdateControl;
     end;
 
+    
     trigger OnInit()
     begin
 
@@ -1526,6 +1538,9 @@ page 52185794 "Cashier Transactions"
         LoanNumbers: Code[200];
         ReprintSlip: Boolean;
         MPESATYPEVisible: Boolean;
+        BankCodeVisible : Boolean;
+
+
 
     // TransLien: Boolean;
 
@@ -1659,5 +1674,11 @@ page 52185794 "Cashier Transactions"
         end;
 
     end;
+    // procedure SetBankCodeVisibility()
+    // var
+    //     ChequeTypes: Record "Cheque Types";
+    // begin
+    //     BankCodeVisible := ChequeTypes.Get(Rec."Cheque Type") and (ChequeTypes.Type = ChequeTypes.Type::Local);
+    // end;
 }
 

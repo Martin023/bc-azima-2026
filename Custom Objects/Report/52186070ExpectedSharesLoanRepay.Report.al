@@ -27,6 +27,7 @@ Report 52186070 "Expected Loan Repayment"
 
         dataitem(Loans; Loans)
         {
+            CalcFields = "Total Balance";
             DataItemTableView = where(Posted = filter(true));
             column(Loan_No_; "Loan No.")
             {
@@ -121,6 +122,8 @@ Report 52186070 "Expected Loan Repayment"
                 MobileIntRece := 0;
                 MobilePriRece := 0;
 
+                Loans.CalcFields("Total Balance");
+
                 if Loans.Repayment > Loans."Total Balance" then
                     Loans.Repayment := Loans."Total Balance";
 
@@ -158,6 +161,7 @@ Report 52186070 "Expected Loan Repayment"
                                         STOInt := STOInt + CreditLedgerEntr."Credit Amount";
 
                                     MobileTransBuff.reset();
+                                    MobileTransBuff.SetLoadFields("Loan No.", "Originator ID", "Loan No.");
                                     MobileTransBuff.SetRange("Loan No.", Loans."Loan No.");
                                     MobileTransBuff.SetRange("Originator ID", CreditLedgerEntr."Document No.");
                                     if MobileTransBuff.findfirst then

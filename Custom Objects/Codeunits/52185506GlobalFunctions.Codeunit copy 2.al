@@ -5,14 +5,22 @@ Codeunit 52185506 "Global Functions"
     begin
     end;
 
-    procedure CreateFile(MemberNo: Code[100]; FileType: Enum "File Types")
+    procedure CreateFile(MemberNo: Code[100]; FileType: Enum "Member Form Types"; RefNo: code[30])
     var
-        FilesRec: Record "Files Table";
+        FilesRec: Record "Member Form List";
     begin
+        FilesRec.reset();
+        FilesRec.SetRange("Reference No", RefNo);
+        FilesRec.SetRange("Member No.", MemberNo);
+        FilesRec.SetRange("Member Form Types", FileType);
+        if FilesRec.FindSet() then FilesRec.DeleteAll();
+
         FilesRec.Init();
-        FilesRec.Validate("File Type", FileType);
-        FilesRec.Validate("File/Member No.", MemberNo);
-        FilesRec.Insert(true);
+        FilesRec."Member Form Types" := FileType;
+        FilesRec."Reference No" := RefNo;
+        FilesRec."Member No." := MemberNo;
+        FIlesRec.Date := Today;
+        FilesRec.insert();
     end;
 
     procedure FormatDate(Realdate: date) dateText: Text;
@@ -542,6 +550,7 @@ Codeunit 52185506 "Global Functions"
         UpdateBoardMembers: Boolean;
         UpdateStaff: Boolean;
         Customer: Record Customer;
+        HREmployees: record "HR Employees";
     begin
         if Confirm('Do you want to update delegates and board members?') then begin
             UpdateBoardMembers := true;
@@ -550,49 +559,98 @@ Codeunit 52185506 "Global Functions"
             UpdateStaff := true;
         end;
 
-        Members.Reset();
-        if Members.Find('-') then begin
-            intProgressTotal := Members.COUNT;
-
-            intProgressI := 0;
-            TimeProgress := TIME;
-            NoOfRecsProgress := intProgressTotal DIV 100;
-            NoOfProgressed := 0;
-
-            diaProgress.OPEN(Generating + '@1@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', intProgress);
-            repeat
-                intProgressI += 1;
-                if (intProgressI >= NoOfRecsProgress) OR (TIME - TimeProgress > 1000) then begin
-                    NoOfProgressed := NoOfProgressed + intProgressI;
-                    diaProgress.UPDATE(1, ROUND(NoOfProgressed / intProgressTotal * 10000, 1));
-                    intProgressI := 0;
-                    TimeProgress := TIME;
-                end;
-
-                if UpdateBoardMembers then begin
-                    Officials.Reset();
-                    Officials.SetRange(Retired, false);
-                    Officials.SetRange(Status, Officials.Status::Approved);
-                    Officials.SetRange("Member Number", Members."No.");
-                    if Officials.FindFirst() then begin
-                        if Members."Account Category" <> Members."Account Category"::"Board Member" then
-                            Members."Account Category" := Members."Account Category"::Delegate;
-                    end else begin
-                        Members."Account Category" := Members."Account Category"::Member;
-                    end;
-                end;
-
-                if UpdateStaff then begin
-                    if Members."Employer Code" = '00100' then begin
+        if UpdateBoardMembers then begin
+            Members.Reset();
+            Members.SetLoadFields("No.");
+            Members.SetRange("Account Category", Members."Account Category"::"Board Member");
+            if Members.FindSet(true) then begin
+                // Members."Account Category" := Members."Account Category"::Member;
+                Members.ModifyAll("Account Category", "Account Category"::Delegate);
+            end;
+            Officials.Reset();
+            Officials.SetRange(Retired, false);
+            Officials.SetRange(Status, Officials.Status::Approved);
+            if Officials.findset() then begin
+                repeat
+                    Members.Reset();
+                    Members.SetLoadFields("No.");
+                    Members.SetRange("No.", HREmployees."Member No.");
+                    if Members.FindFirst() then begin
                         Members."Account Category" := Members."Account Category"::"Staff Member";
+                        Members.modify;
                     end;
-                end;
-                Members.Modify();
-            until Members.Next() = 0;
-            diaProgress.CLOSE;
-        end;
+                until Members.Next() = 0;
+            end;
 
+            if UpdateStaff then begin
+                Members.Reset();
+                Members.SetLoadFields("No.");
+                Members.SetRange("Account Category", Members."Account Category"::"Staff Member");
+                if Members.FindSet(true) then begin
+                    // Members."Account Category" := Members."Account Category"::Member;
+                    Members.ModifyAll("Account Category", "Account Category"::Member);
+                end;
+
+                HREmployees.reset;
+                HREmployees.SetRange(Status, HREmployees.Status::Active);
+                if HREmployees.FindSet() then begin
+                    repeat
+                        Members.Reset();
+                        Members.SetLoadFields("No.");
+                        Members.SetRange("No.", HREmployees."Member No.");
+                        if Members.FindFirst() then begin
+                            Members."Account Category" := Members."Account Category"::"Staff Member";
+                            Members.modify;
+                        end;
+                    until HREmployees.next() = 0;
+                end;
+            end;
+
+            // Members.Reset();
+            // if Members.Find('-') then begin
+            //     intProgressTotal := Members.COUNT;
+
+            //     intProgressI := 0;
+            //     TimeProgress := TIME;
+            //     NoOfRecsProgress := intProgressTotal DIV 100;
+            //     NoOfProgressed := 0;
+
+            //     diaProgress.OPEN(Generating + '@1@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', intProgress);
+            //     repeat
+            //         intProgressI += 1;
+            //         if (intProgressI >= NoOfRecsProgress) OR (TIME - TimeProgress > 1000) then begin
+            //             NoOfProgressed := NoOfProgressed + intProgressI;
+            //             diaProgress.UPDATE(1, ROUND(NoOfProgressed / intProgressTotal * 10000, 1));
+            //             intProgressI := 0;
+            //             TimeProgress := TIME;
+            //         end;
+
+            //         if UpdateBoardMembers then begin
+            //             Officials.Reset();
+            //             Officials.SetRange(Retired, false);
+            //             Officials.SetRange(Status, Officials.Status::Approved);
+            //             Officials.SetRange("Member Number", Members."No.");
+            //             if Officials.FindFirst() then begin
+            //                 if Members."Account Category" <> Members."Account Category"::"Board Member" then
+            //                     Members."Account Category" := Members."Account Category"::Delegate;
+            //             end else begin
+            //                 Members."Account Category" := Members."Account Category"::Member;
+            //             end;
+            //         end;
+
+            //         if UpdateStaff then begin
+            //             if Members."Employer Code" = '00100' then begin
+            //                 Members."Account Category" := Members."Account Category"::"Staff Member";
+            //             end;
+            //         end;
+            //         Members.Modify();
+            //     until Members.Next() = 0;
+            //     diaProgress.CLOSE;
+            // end;
+
+        end;
     end;
+
 
     procedure InsertUserTasks(DepartMent: enum "Responsibility Center Enum"; SubDepartment: Enum "Sub Module"; RecordID: Code[30]; UserIDValue: code[50]) Inserted: Boolean
     var
@@ -927,27 +985,44 @@ Codeunit 52185506 "Global Functions"
         SalBuffer: Record "Salary Lines";
         MonthStart: Date;
         MonthEnd: Date;
+        MonthRefDate: Date;
         MonthAmount: Decimal;
         TotalSalary: Decimal;
+        Last12Total: Decimal;
         MonthsWithSalary: Integer;
         MaxMonths: Integer;
+        EarliestDate: Date;
         i: Integer;
-        LastMonthAmount: Decimal;
-        LastMonthIndex: Integer;
     begin
         TotalSalary := 0;
+        Last12Total := 0;
         MonthsWithSalary := 0;
-        MaxMonths := 12;
-        LastMonthAmount := 0;
-        LastMonthIndex := 0;
+
+        SalBuffer.Reset();
+        SalBuffer.SetRange("Account No.", FOSAAccountNo);
+        SalBuffer.SetRange("Income Type", IncomeTy);
+        SalBuffer.SetRange(Posted, true);
+        SalBuffer.SetRange(Reversed, false);
+        SalBuffer.SetCurrentKey("Account No.", "Posting Date");
+        SalBuffer.Ascending(true);
+        SalBuffer.SetLoadFields("Posting Date");
+        if not SalBuffer.FindFirst() then
+            exit(0);
+        EarliestDate := SalBuffer."Posting Date";
+
+        MaxMonths := (Date2DMY(Today(), 3) - Date2DMY(EarliestDate, 3)) * 12
+            + (Date2DMY(Today(), 2) - Date2DMY(EarliestDate, 2)) + 1;
+        if MaxMonths < 1 then
+            MaxMonths := 1;
 
         for i := 1 to MaxMonths do begin
-            MonthStart := DMY2Date(1,
-                Date2DMY(CalcDate('<-' + Format(i) + 'M>', Today()), 2),
-                Date2DMY(CalcDate('<-' + Format(i) + 'M>', Today()), 3)
-            );
+            if i = 1 then
+                MonthRefDate := Today()
+            else
+                MonthRefDate := CalcDate('<-' + Format(i - 1) + 'M>', Today());
+
+            MonthStart := DMY2Date(1, Date2DMY(MonthRefDate, 2), Date2DMY(MonthRefDate, 3));
             MonthEnd := CalcDate('<CM>', MonthStart);
-            Message('Month %1: Start %2, End %3', i, MonthStart, MonthEnd);
 
             SalBuffer.Reset();
             SalBuffer.SetRange("Account No.", FOSAAccountNo);
@@ -955,37 +1030,26 @@ Codeunit 52185506 "Global Functions"
             SalBuffer.SetRange(Posted, true);
             SalBuffer.SetRange(Reversed, false);
             SalBuffer.SetRange("Posting Date", MonthStart, MonthEnd);
-            SalBuffer.SetLoadFields(Amount, "Posting Date");
+            SalBuffer.SetLoadFields(Amount);
             SalBuffer.CalcSums(Amount);
             MonthAmount := SalBuffer.Amount;
 
-            Message('Month Amount: %1', MonthAmount);
+            if i <= 12 then
+                Last12Total += MonthAmount;
 
             if MonthAmount > 0 then begin
                 MonthsWithSalary += 1;
                 TotalSalary += MonthAmount;
-
-                if LastMonthIndex = 0 then begin
-                    LastMonthAmount := MonthAmount;
-                    LastMonthIndex := i;
-                end;
-                Message('Month %1: Start %2, End %3, Amount %4 (Salary Found)', i, MonthStart, MonthEnd, MonthAmount);
             end;
         end;
 
         if MonthsWithSalary = 0 then
             exit(0);
 
-        Message('Total Salary: %1, Months with Salary: %2, Last Month Amount: %3', TotalSalary, MonthsWithSalary, LastMonthAmount);
-
-
-        if MonthsWithSalary <= MaxMonths then
+        if MonthsWithSalary <= 12 then
             exit(Round(TotalSalary / MonthsWithSalary, 1));
 
-        TotalSalary -= LastMonthAmount;
-
-        Message('More than 12 months rule: Last 12 months total minus current month salary %1 = %2', LastMonthAmount, TotalSalary);
-        exit(Round(TotalSalary, 1));
+        exit(Round(Last12Total / 12, 1));
     end;
 
     procedure ValidateBusinessLoansOnproductInput(Loans: Record Loans; MemberNo: code[30])

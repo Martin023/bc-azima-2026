@@ -27,17 +27,14 @@ page 52185458 "Sales Routes Plan List"
                 {
                     ToolTip = 'Specifies the value of the Route Date field.', Comment = '%';
                 }
-                field(Day; Rec.Day)
+                field("Route End Date"; Rec."Route End Date")
                 {
-                    ToolTip = 'Specifies the value of the Day field.', Comment = '%';
+                    ApplicationArea = Basic;
                 }
+
                 field(Target; Rec.Target)
                 {
                     ToolTip = 'Specifies the value of the Target field.', Comment = '%';
-                }
-                field("Place to visit"; Rec."Place to visit")
-                {
-                    ToolTip = 'Specifies the value of the Place to visit field.', Comment = '%';
                 }
                 field(Achievements; Rec.Achievements)
                 {

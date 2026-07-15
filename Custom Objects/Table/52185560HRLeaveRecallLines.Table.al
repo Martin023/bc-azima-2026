@@ -222,7 +222,7 @@ table 52185560 "HR Leave Recall Lines"
         {
             Caption = 'Recall End Date';
             Editable = false;
-            ToolTip = 'Last working day of the recall period';
+           // ToolTip = 'Last working day of the recall period';
         }
     }
 
