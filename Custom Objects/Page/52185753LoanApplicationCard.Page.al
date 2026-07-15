@@ -818,6 +818,108 @@ page 52185753 "Loan Application Card"
                 RunObject = Page "Loan Guarantors and Security";
                 RunPageLink = "Loan No" = FIELD("Loan No.");
             }
+            action("Loan Appraisal Report")
+            {
+                ApplicationArea = Basic, Suite;
+                Image = "Report";
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+
+                trigger OnAction()
+                begin
+                    ProdFac.Get(Rec."Loan Product Type");
+                    Rec.TestField("Recovery Mode");
+
+
+                    LoanApp.Reset;
+                    LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
+                    LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");
+                    LoanApp.SetFilter(LoanApp."Outstanding Balance", '>0');
+                    if LoanApp.Find('-') then begin
+                        LoansTopup.Reset;
+                        LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
+                        LoansTopup.SetRange("Loan Top Up", LoanApp."Loan No.");
+                        if not LoansTopup.Find('-') then
+                            Error('Member has an existing %1 Loan No. %2, Kindly TopUp', Rec."Loan Product Type", LoanApp."Loan No.");
+                    end;
+
+                    LoanApp.Reset;
+                    LoanApp.SetRange(LoanApp."Loan No.", Rec."Loan No.");
+                    if LoanApp.Find('-') then begin
+                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Check Off" then begin
+                            if (ProdFac."Mortgage Loan" = false) then begin
+                                REPORT.Run(Report::"Loan Appraisal Checkoff", true, false, LoanApp);
+                                LoansR.reset;
+                                LoansR.SetRange("Loan No.", Rec."Loan No.");
+                                LoansR.SetRange(status, LoansR.status::Open);
+                                if LoansR.Find('-') then begin
+                                    LoansR."Loan Appraised By" := UserId;
+                                    LoansR.Modify;
+                                end;
+                                CreateAppraisalBackup(LoanApp."Loan No.", 52185745);
+                            end else
+                                if ProdFac."Mortgage Loan" = true then begin
+                                    IF rec."Mortgage Insurance Amount" <= 0 THEN ERROR('Kindly specify Mortgage Insurance amount');
+                                    REPORT.Run(Report::"Loan Appraisal Haramb-Mortgage", true, false, LoanApp);
+                                    LoansR.reset;
+                                    LoansR.SetRange("Loan No.", Rec."Loan No.");
+                                    LoansR.SetRange(status, LoansR.status::Open);
+                                    if LoansR.Find('-') then begin
+                                        LoansR."Loan Appraised By" := UserId;
+                                        LoansR.Modify;
+                                    end;
+                                    CreateAppraisalBackup(LoanApp."Loan No.", 52185957);
+                                end;
+                        end;
+                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::Salary then begin
+                            REPORT.Run(Report::"Loan Appraisal Report-Salaried", true, false, LoanApp);
+                            LoansR.reset;
+                            LoansR.SetRange("Loan No.", Rec."Loan No.");
+                            LoansR.SetRange(status, LoansR.status::Open);
+                            if LoansR.Find('-') then begin
+                                LoansR."Loan Appraised By" := UserId;
+                                LoansR.Modify;
+                            end;
+                            CreateAppraisalBackup(LoanApp."Loan No.", 52185640);
+                        end;
+                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Corporate or Business" then begin
+                            REPORT.Run(Report::"Loan Appraisal Bus-Special", true, false, LoanApp);
+                            LoansR.reset;
+                            LoansR.SetRange("Loan No.", Rec."Loan No.");
+                            LoansR.SetRange(status, LoansR.status::Open);
+                            if LoansR.Find('-') then begin
+                                LoansR."Loan Appraised By" := UserId;
+                                LoansR.Modify;
+                            end;
+                            CreateAppraisalBackup(LoanApp."Loan No.", 52185747);
+                        end;
+                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Staff Loans" then begin
+                            REPORT.Run(Report::"Loan Appraisal Staff", true, false, LoanApp);
+                            LoansR.reset;
+                            LoansR.SetRange("Loan No.", Rec."Loan No.");
+                            LoansR.SetRange(status, LoansR.status::Open);
+                            if LoansR.Find('-') then begin
+                                LoansR."Loan Appraised By" := UserId;
+                                LoansR.Modify;
+                            end;
+                            CreateAppraisalBackup(LoanApp."Loan No.", 52186719);
+                        end;
+                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::Hybrid then begin
+                            REPORT.Run(Report::"Loan Appraisal Hybrid", true, false, LoanApp);
+                            LoansR.reset;
+                            LoansR.SetRange("Loan No.", Rec."Loan No.");
+                            LoansR.SetRange(status, LoansR.status::Open);
+                            if LoansR.Find('-') then begin
+                                LoansR."Loan Appraised By" := UserId;
+                                LoansR.Modify;
+                            end;
+                            CreateAppraisalBackup(LoanApp."Loan No.", 52186204);
+                        end;
+                    end;
+
+                end;
+            }
 
             action("Loan Top Ups")
             {
@@ -1168,108 +1270,7 @@ page 52185753 "Loan Application Card"
             {
             }
 
-            action("Loan Appraisal Report")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = "Report";
-                Promoted = true;
-                PromotedCategory = "Report";
-                PromotedIsBig = true;
 
-                trigger OnAction()
-                begin
-                    ProdFac.Get(Rec."Loan Product Type");
-                    Rec.TestField("Recovery Mode");
-
-
-                    LoanApp.Reset;
-                    LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
-                    LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");
-                    LoanApp.SetFilter(LoanApp."Outstanding Balance", '>0');
-                    if LoanApp.Find('-') then begin
-                        LoansTopup.Reset;
-                        LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
-                        LoansTopup.SetRange("Loan Top Up", LoanApp."Loan No.");
-                        if not LoansTopup.Find('-') then
-                            Error('Member has an existing %1 Loan No. %2, Kindly TopUp', Rec."Loan Product Type", LoanApp."Loan No.");
-                    end;
-
-                    LoanApp.Reset;
-                    LoanApp.SetRange(LoanApp."Loan No.", Rec."Loan No.");
-                    if LoanApp.Find('-') then begin
-                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Check Off" then begin
-                            if (ProdFac."Mortgage Loan" = false) then begin
-                                REPORT.Run(Report::"Loan Appraisal Checkoff", true, false, LoanApp);
-                                LoansR.reset;
-                                LoansR.SetRange("Loan No.", Rec."Loan No.");
-                                LoansR.SetRange(status, LoansR.status::Open);
-                                if LoansR.Find('-') then begin
-                                    LoansR."Loan Appraised By" := UserId;
-                                    LoansR.Modify;
-                                end;
-                                CreateAppraisalBackup(LoanApp."Loan No.", 52185745);
-                            end else
-                                if ProdFac."Mortgage Loan" = true then begin
-                                    IF rec."Mortgage Insurance Amount" <= 0 THEN ERROR('Kindly specify Mortgage Insurance amount');
-                                    REPORT.Run(Report::"Loan Appraisal Haramb-Mortgage", true, false, LoanApp);
-                                    LoansR.reset;
-                                    LoansR.SetRange("Loan No.", Rec."Loan No.");
-                                    LoansR.SetRange(status, LoansR.status::Open);
-                                    if LoansR.Find('-') then begin
-                                        LoansR."Loan Appraised By" := UserId;
-                                        LoansR.Modify;
-                                    end;
-                                    CreateAppraisalBackup(LoanApp."Loan No.", 52185957);
-                                end;
-                        end;
-                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::Salary then begin
-                            REPORT.Run(Report::"Loan Appraisal Report-Salaried", true, false, LoanApp);
-                            LoansR.reset;
-                            LoansR.SetRange("Loan No.", Rec."Loan No.");
-                            LoansR.SetRange(status, LoansR.status::Open);
-                            if LoansR.Find('-') then begin
-                                LoansR."Loan Appraised By" := UserId;
-                                LoansR.Modify;
-                            end;
-                            CreateAppraisalBackup(LoanApp."Loan No.", 52185640);
-                        end;
-                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Corporate or Business" then begin
-                            REPORT.Run(Report::"Loan Appraisal Bus-Special", true, false, LoanApp);
-                            LoansR.reset;
-                            LoansR.SetRange("Loan No.", Rec."Loan No.");
-                            LoansR.SetRange(status, LoansR.status::Open);
-                            if LoansR.Find('-') then begin
-                                LoansR."Loan Appraised By" := UserId;
-                                LoansR.Modify;
-                            end;
-                            CreateAppraisalBackup(LoanApp."Loan No.", 52185747);
-                        end;
-                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Staff Loans" then begin
-                            REPORT.Run(Report::"Loan Appraisal Staff", true, false, LoanApp);
-                            LoansR.reset;
-                            LoansR.SetRange("Loan No.", Rec."Loan No.");
-                            LoansR.SetRange(status, LoansR.status::Open);
-                            if LoansR.Find('-') then begin
-                                LoansR."Loan Appraised By" := UserId;
-                                LoansR.Modify;
-                            end;
-                            CreateAppraisalBackup(LoanApp."Loan No.", 52186719);
-                        end;
-                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::Hybrid then begin
-                            REPORT.Run(Report::"Loan Appraisal Hybrid", true, false, LoanApp);
-                            LoansR.reset;
-                            LoansR.SetRange("Loan No.", Rec."Loan No.");
-                            LoansR.SetRange(status, LoansR.status::Open);
-                            if LoansR.Find('-') then begin
-                                LoansR."Loan Appraised By" := UserId;
-                                LoansR.Modify;
-                            end;
-                            CreateAppraisalBackup(LoanApp."Loan No.", 52186204);
-                        end;
-                    end;
-
-                end;
-            }
             separator(Action53)
             {
             }

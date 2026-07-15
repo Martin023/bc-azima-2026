@@ -90,13 +90,7 @@ table 52185840 "Securities Register"
             trigger OnValidate()
             begin
 
-                if ("Collateral Multiplier" > 100) or
-                 ("Collateral Multiplier" < 0)
-                 then
-                    "Collateral Multiplier" := 0 else
-                    "Collateral Multiplier" := "Collateral Multiplier";
-                "Collateral Limit" := "Collateral Value" * ("Collateral Multiplier" / 100);
-                Validate("Collateral Limit");
+
             end;
         }
         field(17; "Collateral Limit"; Decimal)
@@ -106,8 +100,8 @@ table 52185840 "Securities Register"
 
             trigger OnValidate()
             begin
-                "Forced Sale Value" := "Collateral Limit";
-                Validate("Forced Sale Value");
+                //"Forced Sale Value" := "Collateral Limit";
+                //Validate("Forced Sale Value");
             end;
         }
         field(29; Status; Option)
@@ -148,7 +142,13 @@ table 52185840 "Securities Register"
             var
                 Text001: Label 'Forced sale value cannot be more than collateral limit';
             begin
+                if ("Collateral Multiplier" > 100) or
+                ("Collateral Multiplier" < 0)
+                then
+                    "Collateral Multiplier" := 0 else
+                    "Collateral Multiplier" := "Collateral Multiplier";
                 "Collateral Limit" := "Forced Sale Value" * ("Collateral Multiplier" / 100);
+                Validate("Collateral Limit");
             end;
         }
         field(33; "Collateral Perfected"; Boolean)

@@ -115,6 +115,12 @@ Report 52185448 "Ideal Repayment Schedule"
                 column(PPlusIBalance; ROUND(PPlusIBalance))
                 {
                 }
+                column(Sno; Sno)
+                {
+                }
+                column(BOSADepoAmt; BOSADepoAmt)
+                {
+                }
 
                 trigger OnAfterGetRecord()
                 begin
@@ -144,6 +150,22 @@ Report 52185448 "Ideal Repayment Schedule"
                     //     // else
                     //         IdealLoanBalance := "Ideal Repayment Schedule"."Loan Amount" - TotalPrincipalRepayment ;//+ "Ideal Repayment Schedule"."Principal Repayment";
                     // end;
+                    Sno += 1;
+                    if Pfac.get(Loans."Loan Product Type") then begin
+                        if Pfac."Minimum Dep. Contribution %" <> 0 then begin
+                            BOSADepoAcc.Reset();
+                            BOSADepoAcc.SetRange("Member No.", loans."Member No.");
+                            BOSADepoAcc.SetRange("Product Category", BOSADepoAcc."Product Category"::"BOSA Deposits");
+                            if BOSADepoAcc.FindFirst() then begin
+                                BOSADepoAmt := Loans."Approved Amount" * Pfac."Minimum Dep. Contribution %";
+                            end;
+                            if BOSADepoAmt < BOSADepoAcc."Monthly Contribution" then
+                                BOSADepoAmt := BOSADepoAcc."Monthly Contribution";
+                        end
+                        else
+                            BOSADepoAmt := pfac."Minimum Deposit Contribution";
+
+                    end;
 
                     InterestBal -= "Ideal Repayment Schedule"."Monthly Interest";
                     PPlusIBalance -= "Ideal Repayment Schedule"."Principal Repayment" + "Ideal Repayment Schedule"."Monthly Interest";
@@ -228,5 +250,9 @@ Report 52185448 "Ideal Repayment Schedule"
         CompanyInformation: Record "Company Information";
         GlobalFunctions: Codeunit "Global Functions";
         Rshedule: Record "Ideal Repayment Schedule";
+        Sno: Integer;
+        Pfac: record "Product Factory";
+        BOSADepoAcc: record "Savings Accounts";
+        BOSADepoAmt: decimal;
 
 }

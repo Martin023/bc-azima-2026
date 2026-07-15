@@ -142,8 +142,8 @@ table 52185739 "Loan Guarantors and Security"
                                 "Self Guarantee" := true;
                             if "Self Guarantee" then begin
                                 // "Self Guarantee" := true;
-                                "Available Shares" := LoanAppraisal.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.") - LoanAppraisal.GetTotalTopUpLoans(LoanNo);
-                                "Amount Guaranteed" := LoanAppraisal.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.") - LoanAppraisal.GetTotalTopUpLoans(LoanNo);
+                                "Available Shares" := LoanAppraisal.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.") + LoanAppraisal.GetTotalTopUpLoans("Loan No");
+                                "Amount Guaranteed" := LoanAppraisal.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.") + LoanAppraisal.GetTotalTopUpLoans("Loan No");
                                 "Original Amount Guaranteed" := "Amount Guaranteed";
                                 LoansR."Self Guarantee" := true;
                             end
@@ -327,7 +327,7 @@ table 52185739 "Loan Guarantors and Security"
                 //     "Phone No." := '';
                 //     "Savings Account No./Member No." := '';
 
-                if rec."Employer Code" <> '' then begin
+                if (rec."Employer Code" <> '') and (rec."Staff/Payroll No." <> '') then begin
                     Members.Reset();
                     Members.SetRange(Members."Payroll/Staff No.", Rec."Staff/Payroll No.");
                     Members.SetRange(Members."Employer Code", Rec."Employer Code");
