@@ -1056,7 +1056,7 @@ Report 52185745 "Loan Appraisal Checkoff"
                 //get no of guarantors
                 LoanGua.Reset;
                 LoanGua.SetRange("Loan No", Loans."Loan No.");
-                LoanGua.SetRange("Guarantor Type", LoanGua."guarantor type"::Guarantor);
+                //LoanGua.SetRange("Guarantor Type", LoanGua."guarantor type"::Guarantor);
                 LoanGua.SetRange(Substituted, false);
                 if LoanGua.Findset() then begin
                     NofGuar := LoanGua.Count;
