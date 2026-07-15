@@ -11,7 +11,6 @@ Report 52185508 "Petty Cash Expenses Report"
     {
         dataitem(PaymentsHeader; "Payments Header")
         {
-            // We only want Posted Petty Cash transactions
             DataItemTableView = sorting("No.") where("Payment Type" = const("Petty Cash"), Posted = const(true));
             RequestFilterFields = "No.", Date, "Paying Bank Account", Cashier;
 
@@ -37,6 +36,7 @@ Report 52185508 "Petty Cash Expenses Report"
                 column(AccountType_PaymentLine; Format("Account Type")) { }
                 column(AccountNo_PaymentLine; "Account No.") { }
                 column(AccountName_PaymentLine; "Account Name") { }
+                // column(Description_PaymentLine; Description) { } 
                 column(NetAmount_PaymentLine; "Net Amount") { }
             }
         }
@@ -47,6 +47,13 @@ Report 52185508 "Petty Cash Expenses Report"
         SaveValues = true;
         layout { }
         actions { }
+
+        trigger OnOpenPage()
+        begin
+            // Automatically default the Cashier filter to the current logged in user
+            if PaymentsHeader.GetFilter(Cashier) = '' then
+                PaymentsHeader.SetRange(Cashier, UserId);
+        end;
     }
 
     trigger OnPreReport()
@@ -55,7 +62,7 @@ Report 52185508 "Petty Cash Expenses Report"
         CompanyInfo.CalcFields(Picture);
         CompanyAddress := CompanyInfo.Address + ' - ' + CompanyInfo.City;
         PrintingDate := Format(Today, 0, '<Day,2>/<Month,2>/<Year4>');
-        PrintingTime := Format(Time);
+        PrintingTime := Format(Time, 0, '<Hours24,2>:<Minutes,2>:<Seconds,2>');
         PrintedBy := UserId;
     end;
 
