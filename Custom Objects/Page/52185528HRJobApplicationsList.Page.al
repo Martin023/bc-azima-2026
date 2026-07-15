@@ -74,14 +74,57 @@ page 52185528 "HR Job Applications List"
     {
         area(Processing)
         {
-            action("Import Job Applications")
+            group("Import/Export")
             {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Import Job Applications';
-                Image = Import;
-                Promoted = true;
-                PromotedCategory = Process;
-                RunObject = XMLport "Job Application";
+                Caption = 'Import/Export';
+                action("Download Template")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Download Template';
+                    Image = ExportFile;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedIsBig = true;
+                    ToolTip = 'Download the CSV template for importing job applications';
+
+                    trigger OnAction()
+                    var
+                        TempBlob: Codeunit "Temp Blob";
+                        OutStr: OutStream;
+                        InStr: InStream;
+                        FileName: Text;
+                    begin
+                        FileName := 'JobApplicationsTemplate.csv';
+                        
+                        TempBlob.CreateOutStream(OutStr, TextEncoding::UTF8);
+                        
+                        OutStr.WriteText('JobApplicationNo,DateApplied,ApplicantType,EmployeeRequisitionNo,JobAppliedFor,JobAppliedforDescription,');
+                        OutStr.WriteText('FirstName,MiddleName,LastName,FirstLanguageRWS,FirstLanguageRead,FirstLanguageSpeak,FirstLanguageWrite,');
+                        OutStr.WriteText('SecondLanguageRWS,SecondLanguageRead,SecondLanguageSpeak,SecondLanguageWrite,IDNumber,AdditionalLanguage,');
+                        OutStr.WriteText('Gender,PostCode,PostalAddress,ResidentialAddress,HomePhoneNumber,CellPhoneNumber,WorkPhoneNumber,EMail,');
+                        OutStr.WriteText('MaritalStatus,Disabled,DateOfBirth,Ag,Citizenship,CitizenshipDetails,Status,ProposedSalary,RejectionReason');
+                        OutStr.WriteText();
+                        
+                        OutStr.WriteText('APP-SAMPLE-001,2026-07-15,External,REQ001,JOB001,Software Developer,John,Michael,Doe,English,Yes,Yes,Yes,');
+                        OutStr.WriteText('Swahili,Yes,Yes,Yes,12345678,French,Male,00100,P.O. Box 123,123 Main Street,0201234567,0712345678,');
+                        OutStr.WriteText('0201234568,john.doe@example.com,Single,No,1990-01-15,36,Kenyan,,Unqualified,50000,');
+                        OutStr.WriteText();
+                        
+                        TempBlob.CreateInStream(InStr, TextEncoding::UTF8);
+                        DownloadFromStream(InStr, 'Download Template', '', 'CSV Files (*.csv)|*.csv', FileName);
+                    end;
+                }
+                action("Import Job Applications")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Import Job Applications';
+                    Image = Import;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedIsBig = true;
+                    RunObject = XMLport "Job Application";
+                    ToolTip = 'Import job applications from CSV file using the template';
+                }
             }
         }
         area(Navigation)
