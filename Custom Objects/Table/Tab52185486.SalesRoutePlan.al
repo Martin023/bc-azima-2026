@@ -86,14 +86,15 @@ table 52185486 "Sales Route Plans"
                         if SalesRouteLine.FindSet() then
                             SalesRouteLine.DeleteAll();
 
-                        Days := "Route End Date" - "Route Date";
+                        Days := ("Route End Date" - "Route Date") + 1;
+                        RouteDate := "Route Date";
                         repeat
                             SalesRouteLine.Init();
                             SalesRouteLine."Header No" := rec.No;
-                            SalesRouteLine.validate("Route Date", rec."Route Date");
+                            SalesRouteLine.validate("Route Date", RouteDate);
                             SalesRouteLine.insert;
                             Days -= 1;
-                            rec."Route Date" := rec."Route Date" - 1;
+                            RouteDate := rec."Route Date" + 1;
                         until Days = 0;
                     end;
                 end;
@@ -129,4 +130,5 @@ table 52185486 "Sales Route Plans"
         NoSeries: Codeunit "No. Series";
         SalesRouteLine: record "Sales Route Lines";
         Days: Integer;
+        RouteDate: Date;
 }

@@ -11,9 +11,7 @@ Report 52185659 "SASRA Loan Categorization"
             CalcFields = "Outstanding Balance", "Outstanding Interest";
             DataItemTableView = sorting("Loan No.") where("Dummy Appraisal" = filter(false), "Loan Product Type" = filter(<> ''));
             RequestFilterFields = "Loan No.", "Employer Code", "Date Filter", "Staff No", "Member No.", "Application Date";
-            column(ReportForNavId_1; 1)
-            {
-            }
+
 
             trigger OnAfterGetRecord()
             var
@@ -28,6 +26,31 @@ Report 52185659 "SASRA Loan Categorization"
                     intProgressI := 0;
                     TimeProgress := TIME;
                 END;
+
+                if Loans."Total Balance" <= 0 then begin
+                    if not SASRACategory.Get(Loans."Loan No.") then begin
+                        SASRACategory.INIT;
+                        SASRACategory."Loan No." := Loans."Loan No.";
+                        SASRACategory."Loans Category-SASRA" := Loans."Loans Category-SASRA"::Perfoming;
+                        SASRACategory."Loan Age" := 0;
+                        SASRACategory."Days In Arreas" := 0;
+                        SASRACategory."Amount In Arears SACCO" := 0;
+                        SASRACategory."Amount In Arears SASRA" := 0;
+                        SASRACategory."Installments In Arrears" := 0;
+                        SASRACategory."Installments In Fall Off" := round(0, 1, '=');
+                        SASRACategory.INSERT;
+                    end else begin
+                        SASRACategory."Loans Category-SASRA" := Loans."Loans Category-SASRA"::Perfoming;
+                        SASRACategory."Loan Age" := 0;
+                        SASRACategory."Days In Arreas" := 0;
+                        SASRACategory."Amount In Arears SACCO" := 0;
+                        SASRACategory."Amount In Arears SASRA" := 0;
+                        SASRACategory."Installments In Arrears" := 0;
+                        SASRACategory."Installments In Fall Off" := round(0, 1, '>');
+                        SASRACategory.Modify();
+                    end;
+                    CurrReport.Skip();
+                end;
 
                 DaysInArrears := LoansProcess.CalculateLoanArrears(Loans, AmountInArrearsSACCO, AmountInArrearsSASRA, AsAt, True);
 

@@ -6754,13 +6754,13 @@ Codeunit 52186458 "Loans Process"
 
 
         // Guarantor loans to always be in loss - FINANCE Kenneth.
-        if (Loans."Loan Product Type" = 'BGL') or (Loans."Loan Product Type" = 'FGL') then begin
-            AmountInArrearsSACCO := Loans."Outstanding Balance" + Loans."Outstanding Interest";
-            AmountInArrearsSASRA := AmountInArrearsSACCO;
-            DaysInArrears := AsAt - Loans."Disbursement Date";
-            // One off loans not recovered in the year;
-            InstallInArrears := 12.1;
-        end;
+        // if (Loans."Loan Product Type" = 'BGL') or (Loans."Loan Product Type" = 'FGL') then begin
+        //     AmountInArrearsSACCO := Loans."Outstanding Balance" + Loans."Outstanding Interest";
+        //     AmountInArrearsSASRA := AmountInArrearsSACCO;
+        //     DaysInArrears := AsAt - Loans."Disbursement Date";
+        //     // One off loans not recovered in the year;
+        //     InstallInArrears := 12.1;
+        // end;
 
         // DaysInArrears := LoansProcess.CalculateLoanArrears(Loans, AmountInArrearsSACCO, AmountInArrearsSASRA, AsAt);
 
@@ -6768,9 +6768,9 @@ Codeunit 52186458 "Loans Process"
 
             Loans."Loans Category-SASRA" := LoanCategoryStage(InstallInArrears);
             if Loans."Loans Category-SASRA" = Loans."Loans Category-SASRA"::Perfoming then begin
-                // DaysInArrears := 0;
-                // AmountInArrearsSACCO := 0;
-                // AmountInArrearsSASRA := 0;
+                DaysInArrears := 0;
+                AmountInArrearsSACCO := 0;
+                AmountInArrearsSASRA := 0;
                 InstallInArrears := 0;
             end;
             AmountInArrearsSACCO := round(AmountInArrearsSACCO, 0.01, '=');
