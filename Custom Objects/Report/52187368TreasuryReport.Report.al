@@ -2,7 +2,7 @@
 Report 52187368 "Treasury Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-azima-2026/Layout/TreasuryReport.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Treasury Report.rdl';
     UsageCategory = ReportsAndAnalysis;
     Caption = 'Treasury Report';
     ApplicationArea = Basic, Suite;
