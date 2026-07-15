@@ -26,8 +26,8 @@ TableExtension 52186436 tableextension52186436 extends "Fixed Asset"
 
         field(50003; "Acquisition Type"; Option)
         {
-            OptionMembers = " ",Purchased,Constructed,Leased;
-            OptionCaption = ' ,Purchased,Constructed,Leased';
+            OptionMembers = " ",Purchased,Constructed,Leased,Reclassified;
+            OptionCaption = ' ,Purchased,Constructed,Leased, Reclassified';
         }
         field(50010; "Budget Controlled"; Boolean)
         {
