@@ -327,7 +327,7 @@ table 52185739 "Loan Guarantors and Security"
                 //     "Phone No." := '';
                 //     "Savings Account No./Member No." := '';
 
-                if rec."Employer Code" <> '' then begin
+                if (rec."Employer Code" <> '') and (rec."Staff/Payroll No." <>'' )then begin
                     Members.Reset();
                     Members.SetRange(Members."Payroll/Staff No.", Rec."Staff/Payroll No.");
                     Members.SetRange(Members."Employer Code", Rec."Employer Code");
