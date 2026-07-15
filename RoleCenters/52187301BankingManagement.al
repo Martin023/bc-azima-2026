@@ -227,7 +227,7 @@ page 52187301 "Banking Management Role Center"
                             {
                                 ApplicationArea = Basic, Suite;
                                 Caption = 'Daily Cashier Report';
-                                RunObject = report "Cashier Deposits Withdrawals";
+                                RunObject = report "Tellers Journal";
                             }
                             action("Cashier Cheque Deposits")
                             {
@@ -356,7 +356,7 @@ page 52187301 "Banking Management Role Center"
                         {
                             ApplicationArea = Basic, Suite;
                             Caption = 'Treasury Report';
-                            RunObject = report "Cashier Deposits Withdrawals";
+                            RunObject = report "Treasury Report";
                         }
 
                     }
@@ -1420,6 +1420,47 @@ page 52187301 "Banking Management Role Center"
                     ApplicationArea = Basic, Suite;
                     RunObject = page "HR Leave Applications List1";
 
+                }
+                action("Training Need Request")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Training Need Request';
+                    RunObject = page "HR Training Need Request List";
+                }
+                // HIDDEN: OLD 360 APPRAISAL - USE "MY ASSIGNED TARGETS" INSTEAD
+                // action("Appraisal")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'My Appraisals';
+                //     RunObject = page "HR 360 Appraisals List - TS1";
+                // }
+                action("My Individual Appraisals ESS")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'My Individual Appraisals';
+                    RunObject = page "My Individual Appraisals List";
+                    ToolTip = 'View and manage my performance appraisals';
+                }
+                action("My Team Appraisals ESS")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'My Team Appraisals (Supervisor)';
+                    RunObject = page "Supervisor Appraisals List";
+                    ToolTip = 'View and review appraisals for employees I supervise';
+                }
+                action("My Assigned Targets ESS")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'My Assigned Targets';
+                    RunObject = page "My Assigned Targets";
+                    ToolTip = 'View targets assigned to me by my HOD';
+                }
+                action("My Department Targets (HOD)")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'My Department Targets (HOD)';
+                    RunObject = page "HRHOD Department Targets";
+                    ToolTip = 'Set and manage targets for my department (HOD only)';
                 }
                 // action("Overtime Claim List")
                 // {

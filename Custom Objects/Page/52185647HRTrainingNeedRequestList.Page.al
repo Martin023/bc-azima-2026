@@ -101,13 +101,17 @@ page 52185647 "HR Training Need Request List"
     trigger OnOpenPage()
     var
         Employee: Record "HR Employees";
+        HRHOD: Record "HR Heads of Departments";
     begin
-        Employee.Reset;
+        HRHOD.SetRange("User ID", UserId);
+
+        if not HRHOD.FindFirst() then
+            Error('You are not assigned as a Head of Department. Please contact HR Administrator.');
+
         Employee.SetRange("User ID", UserId);
-        if Employee.FindFirst then begin
-            if Employee."Department Code" <> '' then begin
+
+        if Employee.FindFirst() then
+            if Employee."Department Code" <> '' then
                 Rec.SetRange("Department Code", Employee."Department Code");
-            end;
-        end;
     end;
 }
