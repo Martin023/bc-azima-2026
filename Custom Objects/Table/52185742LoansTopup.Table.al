@@ -128,6 +128,17 @@ table 52185742 "Loans Top up"
                 AmountToSend := 0;
                 if "Loan No." <> '' then begin
                     if LoanApp.Get("Loan No.") then begin
+                        if ProdFact.get(LoanApp."Loan Product Type") then begin
+                            if not ProdFact."Exclude One Month Interest" then begin
+                                if Loans.get("Loan Top Up") then begin
+                                    if ProdFact.get(Loans."Loan Product Type") then begin
+                                        If ProdFact."Charge 1 month Interest" then begin
+                                            "One Month Interest" := round(("Principle Top Up" * Loans.Interest * 0.01 / 12), 1, '<');
+                                        end;
+                                    end;
+                                end;
+                            end;
+                        end;
                         "Total Top Up" := "Principle Top Up" + "Interest Top Up";
                         if LoanApp.Status <> LoanApp.Status::Approved then begin
                             NetAmt := 0;
@@ -145,13 +156,7 @@ table 52185742 "Loans Top up"
                 end;
                 if "Principle Top Up" < 0 then "Principle Top Up" := 0;
                 // "Total Top Up" := "Principle Top Up" + "Interest Top Up";
-                if Loans.get("Loan Top Up") then begin
-                    if ProdFact.get(Loans."Loan Product Type") then begin
-                        If ProdFact."Charge 1 month Interest" then begin
-                            "One Month Interest" := round(("Principle Top Up" * Loans.Interest * 0.01 / 12), 1, '<');
-                        end;
-                    end;
-                end;
+
 
             end;
         }

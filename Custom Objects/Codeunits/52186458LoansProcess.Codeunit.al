@@ -5279,31 +5279,35 @@ Codeunit 52186458 "Loans Process"
                 until TopUp.Next = 0;
             end;
 
-            TopUp.Reset;
-            TopUp.SetRange(TopUp."Loan No.", LoanApps."Loan No.");
-            Topup.setfilter(TopUp."Principle Top Up", '>0');
-            if TopUp.findset() then begin
-                repeat
-                    if ProdFac.get(TopUp."Loan Type") then begin
-                        //if (TopUp."Principle Top Up" + TopUp."Interest Top Up" + TopUp."Untransfered Interest") > 0 then begin
-                        if ProdFac."Charge 1 month Interest" then begin
-                            ProdFac.TestField("One Month Interest G/L");
-                            //One month interest
-                            LineNo := LineNo + 10000;
-                            AccType := Acctype::"G/L Account";
-                            AccNo := ProdFac."One Month Interest G/L";
-                            TransType := Transtype::" ";
-                            BalAccType := Balacctype::Savings;
-                            BalAccNo := LoanApps."Disbursement Account No";
-                            Amt := -(TopUp."One Month Interest");
+            if not ProdFac."Exclude One Month Interest" then begin
+                TopUp.Reset;
+                TopUp.SetRange(TopUp."Loan No.", LoanApps."Loan No.");
+                Topup.setfilter(TopUp."Principle Top Up", '>0');
+                if TopUp.findset() then begin
+                    repeat
+                        if ProdFac.get(TopUp."Loan Type") then begin
+                            //if (TopUp."Principle Top Up" + TopUp."Interest Top Up" + TopUp."Untransfered Interest") > 0 then begin
+                            if ProdFac."Charge 1 month Interest" then begin
+                                ProdFac.TestField("One Month Interest G/L");
+                                //One month interest
+                                LineNo := LineNo + 10000;
+                                AccType := Acctype::"G/L Account";
+                                AccNo := ProdFac."One Month Interest G/L";
+                                TransType := Transtype::" ";
+                                BalAccType := Balacctype::Savings;
+                                BalAccNo := LoanApps."Disbursement Account No";
+                                Amt := -(TopUp."One Month Interest");
 
-                            JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AccType, LoanNo, 'One month interest on ' + ': ' + TopUp."Loan Top Up", Amt, AccNo, PDate, BalAccType,
-                              BalAccNo, LoanApps."Loan No.", Dim1, Dim2, TransType, LoanApps."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                                JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AccType, LoanNo, 'One month interest on ' + ': ' + TopUp."Loan Top Up", Amt, AccNo, PDate, BalAccType,
+                                  BalAccNo, LoanApps."Loan No.", Dim1, Dim2, TransType, LoanApps."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                            end;
+                            //end;
                         end;
-                        //end;
-                    end;
-                until TopUp.Next() = 0;
+                    until TopUp.Next() = 0;
+                end;
             end;
+
+
 
             //Balancing entry if disbursed via Savings
             //IF LoanApps."All Posting through Savings Ac"=TRUE THEN BEGIN
