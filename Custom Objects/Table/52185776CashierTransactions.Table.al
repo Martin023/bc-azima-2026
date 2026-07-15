@@ -309,7 +309,7 @@ table 52185776 "Cashier Transactions"
                     BankersCheque.SetCurrentKey("Cheque No.");
                     BankersCheque.SetAscending("Cheque No.", true);
                     BankersCheque.SetRange(Status, BankersCheque.Status::Pending);
-                    BankersCheque.SetRange("Global Dimension 2 Code", Rec."Global Dimension 2 Code"); // <-- add this
+                    BankersCheque.SetRange("Global Dimension 1 Code", Rec."Global Dimension 1 Code"); // <-- add this
                     if BankersCheque.FindFirst() then
                         rec."Bankers Cheque No" := BankersCheque."Cheque No."
                     else

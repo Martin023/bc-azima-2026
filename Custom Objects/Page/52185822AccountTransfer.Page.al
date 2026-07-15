@@ -766,19 +766,19 @@ page 52185822 "Account Transfer"
                                                         if not (Member."No." = Memb."No.") then begin
                                                             if Member."First Name" <> '' then begin
                                                                 if Memb."First Name" <> '' then
-                                                                    msg := 'Dear ' + Memb."First Name" + ', ' + Member."First Name" + ' has transferred ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
-                                                                                                                                                                                           BSchedDestin."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
+                                                                    msg := 'Dear ' + Memb."First Name" + ', you have received KES ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
+                                                                            BSchedDestin."Product Name" + ' from ' + Member."First Name" + ' on ' + Format(Today) + ' ' + Format(Time)
                                                                 else
-                                                                    msg := 'Dear ' + Memb.Name + ', ' + Member."First Name" + ' has transferred ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
-                                                                                                                                                                                               BSchedDestin."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
+                                                                    msg := 'Dear ' + Memb.Name + ', you have received KES ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
+                                                                            BSchedDestin."Product Name" + ' from ' + Member."First Name" + ' on ' + Format(Today) + ' ' + Format(Time)
                                                             end
                                                             else begin
                                                                 if Memb."First Name" <> '' then
-                                                                    msg := 'Dear ' + Memb."First Name" + ', ' + Member.Name + ' has transferred ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
-                                                                                                                                                                                           BSchedDestin."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
+                                                                    msg := 'Dear ' + Memb."First Name" + ', you have received KES ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
+                                                                            BSchedDestin."Product Name" + ' from ' + Member."First Name" + ' on ' + Format(Today) + ' ' + Format(Time)
                                                                 else
-                                                                    msg := 'Dear ' + Memb.Name + ', ' + Member.Name + ' has transferred ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
-                                                                                                                                                                                               BSchedDestin."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
+                                                                    msg := 'Dear ' + Memb.Name + ', you have received KES ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
+                                                                            BSchedDestin."Product Name" + ' from ' + Member."First Name" + ' on ' + Format(Today) + ' ' + Format(Time)
 
                                                                 // msg := 'Dear ' + Memb."First Name" + ', ' + Member.Name + ' has transferred ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
                                                                 //                                                            BSchedDestin."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
@@ -809,11 +809,11 @@ page 52185822 "Account Transfer"
                                                                         BSchedDestin."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time);
                                                             end else begin
                                                                 if Member."First Name" <> '' then
-                                                                    msg := 'Dear ' + Memb."First Name" + ', ' + Member."First Name" + ' has transferred ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
-                                                                        BSchedDestin."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
+                                                                    msg := 'Dear ' + Memb."First Name" + ', you have received KES ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
+                                                                            BSchedDestin."Product Name" + ' from ' + Member."First Name" + ' on ' + Format(Today) + ' ' + Format(Time)
                                                                 else
-                                                                    msg := 'Dear ' + Memb."First Name" + ', ' + Member.Name + ' has transferred ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
-                                                                        BSchedDestin."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time);
+                                                                    msg := 'Dear ' + Memb."First Name" + ', you have received KES ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
+                                                                            BSchedDestin."Product Name" + ' from ' + Member.Name + ' on ' + Format(Today) + ' ' + Format(Time);
                                                             end;
 
                                                             SendSMS.SendSms(Source::INTERACCOUNT_TRANSFER, Memb."Phone No.", msg, Format(Memb."No."), '', true, 0, false, 'CBS', Memb."No.", 'CBS');
@@ -831,14 +831,14 @@ page 52185822 "Account Transfer"
                                             msg := 'Dear ' + Member."First Name" + ', arrears of ' + format(BSchedDestin."Destination Amount") + ' has been recovered for ' + BSchedDestin."Product Name" + ': ' + BSchedDestin."Destination Loan No." + ' on ' + Format(Today) + ' ' + Format(Time)
                                         // msg := 'Dear ' + Member."First Name" + ', you have recovered arrears: ' + MembAccounts + ' from ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
                                         else
-                                            msg := 'Dear ' + Member."First Name" + ', you have successfully transferred ' + MembAccounts + ' from ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
+                                            msg := 'Dear ' + Member."First Name" + ', you have successfully transferred ' + MembAccounts + ' from your' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
                                     end
                                     else begin
                                         if Rec."Recover Arrears" then
                                             msg := 'Dear ' + Member."First Name" + ', arrears of ' + format(BSchedDestin."Destination Amount") + ' has been recovered for ' + BSchedDestin."Product Name" + ': ' + BSchedDestin."Destination Loan No." + ' on ' + Format(rec."Date Posted") + ' ' + Format(rec."Time Posted")
                                         // msg := 'Dear ' + Member.Name + ', you have recovered arrears: ' + MembAccounts + ' from ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
                                         else
-                                            msg := 'Dear ' + Member.Name + ', you have successfully transferred ' + MembAccounts + ' from ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time);
+                                            msg := 'Dear ' + Member.Name + ', you have successfully transferred ' + MembAccounts + ' from your ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time);
                                     end;
                                     SendSMS.SendSms(Source::INTERACCOUNT_TRANSFER, Member."Phone No.", msg, Format(Member."No."), '', true, 0, false, 'CBS', Member."No.", 'CBS');
                                 end;
