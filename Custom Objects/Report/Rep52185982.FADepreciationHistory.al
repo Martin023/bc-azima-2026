@@ -26,7 +26,7 @@ report 52185996 "FA Depreciation History"
             column(AssetDescription; AssetDescription) { }
             column(Posting_Date; "Posting Date") { }
             column(FA_Posting_Type; "FA Posting Type") { }
-            column(Amount; Amount * -1) { }
+            column(Amount; DepAmt) { }
             column(AssetCategory; AssetCategory) { }
             column(StartDate; StartDate) { }
             column(EndDate; EndDate) { }
@@ -55,6 +55,12 @@ report 52185996 "FA Depreciation History"
             begin
                 AssetCategory := ' ';
                 AssetDescription := ' ';
+                DepAmt := 0;
+
+
+                DepAmt := "FA Ledger Entry".Amount;
+                if DepAmt < 0 then
+                    DepAmt := DepAmt * -1;
 
                 FA.Reset();
                 FA.SETRANGE("No.", "FA Ledger Entry"."FA No.");
@@ -119,6 +125,7 @@ report 52185996 "FA Depreciation History"
         StartDate: Date;
         EndDate: Date;
         AssetDescription: Text[100];
+        DepAmt: Decimal;
 }
 //         dataitem(FixedAsset; "Fixed Asset")
 //         {
