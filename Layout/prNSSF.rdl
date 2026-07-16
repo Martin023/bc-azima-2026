@@ -379,14 +379,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="tier2Cont">
+                        <Textbox Name="tier1Cont">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!tier2Cont.Value</Value>
+                                  <Value>=Fields!tier1Cont.Value</Value>
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
                                     <Format>#,0.00</Format>
@@ -396,7 +396,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>tier2Cont</rd:DefaultName>
+                          <rd:DefaultName>tier1Cont</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -554,7 +554,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!tier2Cont.Value)</Value>
+                                  <Value>=Sum(Fields!tier1Cont.Value)</Value>
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
                                     <Format>#,0.00</Format>
