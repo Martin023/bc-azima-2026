@@ -803,15 +803,15 @@ table 52185650 "HR Employees"
 
                 //CHECK IF PIN MATCHES MEMBER RECORD
                 if "No." <> '' then begin
-                    Members.Reset();
-                    Members.SetRange("Payroll/Staff No.", "No.");
-                    if Members.FindFirst() then begin
-                        if UpperCase(DelChr("PIN No.", '=', ' ')) <> UpperCase(DelChr(Members."P.I.N Number", '=', ' ')) then
-                            Message('KRA PIN MISMATCH DETECTED:' + '\' + '\' +
-                                'Employee Card PIN: %1' + '\' +
-                                'Member Register PIN: %2' + '\' + '\' +
-                                'The KRA PIN number on the Employee Card differs from the Member Register. Please verify which PIN is correct and update the Member Register accordingly to maintain data consistency.',
-                                "PIN No.", Members."P.I.N Number");
+                    if "Member No." <> '' then begin
+                        if Members.Get("Member No.") then begin
+                            if UpperCase(DelChr("PIN No.", '=', ' ')) <> UpperCase(DelChr(Members."P.I.N Number", '=', ' ')) then
+                                Message('KRA PIN MISMATCH DETECTED:' + '\' + '\' +
+                                    'Employee Card PIN: %1' + '\' +
+                                    'Member Register PIN: %2' + '\' + '\' +
+                                    'The KRA PIN number on the Employee Card differs from the Member Register. Please verify which PIN is correct and update the Member Register accordingly to maintain data consistency.',
+                                    "PIN No.", Members."P.I.N Number");
+                        end;
                     end;
                 end;
 

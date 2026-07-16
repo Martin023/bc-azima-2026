@@ -1222,7 +1222,7 @@ page 52185631 "HR Employee Card"
                 action(SendApprovalRequest)
                 {
                     ApplicationArea = Basic;
-                    Caption = 'Send A&pproval Request';
+                    Caption = 'Send Approval Request';
                     //Enabled = NOT OpenApprovalEntriesExist;
                     Image = SendApprovalRequest;
                     Promoted = true;
@@ -1332,15 +1332,15 @@ page 52185631 "HR Employee Card"
     begin
         //VALIDATE KRA PIN MATCHES MEMBER REGISTER - FIXED TO REMOVE FORMATTING ISSUES
         if rec."No." <> '' then begin
-            Members.reset();
-            Members.setrange("Payroll/Staff No.", Rec."No.");
-            if Members.FindFirst() then begin
-                if UpperCase(DelChr(Rec."PIN No.", '=', ' ')) <> UpperCase(DelChr(Members."P.I.N Number", '=', ' ')) then
-                    Message('KRA PIN MISMATCH DETECTED:' + '\' + '\' +
-                        'Employee Card PIN: %1' + '\' +
-                        'Member Register PIN: %2' + '\' + '\' +
-                        'The KRA PIN number on the Employee Card differs from the Member Register. Please verify which PIN is correct and update the Member Register accordingly to maintain data consistency.',
-                        Rec."PIN No.", Members."P.I.N Number");
+            if rec."Member No." <> '' then begin
+                if Members.Get(rec."Member No.") then begin
+                    if UpperCase(DelChr(Rec."PIN No.", '=', ' ')) <> UpperCase(DelChr(Members."P.I.N Number", '=', ' ')) then
+                        Message('KRA PIN MISMATCH DETECTED:' + '\' + '\' +
+                            'Employee Card PIN: %1' + '\' +
+                            'Member Register PIN: %2' + '\' + '\' +
+                            'The KRA PIN number on the Employee Card differs from the Member Register. Please verify which PIN is correct and update the Member Register accordingly to maintain data consistency.',
+                            Rec."PIN No.", Members."P.I.N Number");
+                end;
             end;
         end;
 
@@ -1422,6 +1422,7 @@ page 52185631 "HR Employee Card"
 
 
                             Rec.Modify(true);
+                            Commit;
                         end;
                     end;
                 end;
@@ -1473,7 +1474,6 @@ page 52185631 "HR Employee Card"
                         DPension := HRCodeunit.DetermineAge(Rec."Pension Scheme Join Date", Today);
                 if (Rec."Medical Scheme Join Date" <> 0D) then
                     DMedical := HRCodeunit.DetermineAge(Rec."Medical Scheme Join Date", Today);
-                rec.MODIFY;
             end else begin
                 /*
                 IF  ("Date Of Birth" <> 0D) THEN
@@ -1510,6 +1510,7 @@ page 52185631 "HR Employee Card"
 
 
                         Rec.Modify(true);
+                        Commit;
                     end;
                 end;
             end;
