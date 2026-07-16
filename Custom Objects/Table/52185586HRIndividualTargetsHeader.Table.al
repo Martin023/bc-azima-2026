@@ -443,9 +443,26 @@ table 52185586 "HR Individual Targets Header"
     end;
 
     procedure SubmitToSupervisor()
+    var
+        Employee: Record "HR Employees";
     begin
         TestField(Status, Status::Open);
         TestField("Appraisee Submitted", false);
+        TestField("Employee No");
+
+        if not Employee.Get("Employee No") then
+            Error('Employee %1 not found in HR Employees.', "Employee No");
+
+        if Employee."Supervisor Code" = '' then
+            Error('You are not mapped to a supervisor. Please contact HR or ICT to assign a supervisor to your employee record.');
+
+        if "Supervisor ID" = '' then begin
+            "Supervisor ID" := Employee."Supervisor Code";
+            "Supervisor Name" := Employee."Supervisor Name";
+        end;
+
+        TestField("Supervisor ID");
+        TestField("Supervisor Name");
 
         ValidateSelfRatingsCompleted();
 
@@ -454,7 +471,71 @@ table 52185586 "HR Individual Targets Header"
         Status := Status::"Pending Approval";
         Modify;
 
-        Message('Appraisal submitted to supervisor: %1', "Supervisor Name");
+        Message('Appraisal submitted to supervisor: %1 (%2)', "Supervisor Name", "Supervisor ID");
+    end;
+
+    procedure ReturnToAppraisee()
+    begin
+        TestField(Status, Status::"Pending Approval");
+
+        if "Supervisor ID" = '' then
+            Error('Cannot return appraisal. Supervisor ID not set.');
+
+        if UserId <> "Supervisor ID" then
+            Error('Only the assigned supervisor (%1) can return this appraisal to the appraisee.', "Supervisor Name");
+
+        if not Confirm('Return this appraisal to %1 for revision? The employee will be able to edit their self-ratings again.', true, "Employee Name") then
+            exit;
+
+        "Appraisee Submitted" := false;
+        "Appraisee Submission Date" := 0D;
+        Status := Status::Open;
+        Modify;
+
+        Message('Appraisal returned to %1 for revision.', "Employee Name");
+    end;
+
+    procedure SupervisorApprove()
+    var
+        TargetLine: Record "HR Individual Target Line";
+        MissingCount: Integer;
+    begin
+        if not (Status in [Status::"Pending Approval", Status::Discussed]) then
+            Error('Can only approve from Pending Approval or Discussed status.');
+
+        if "Supervisor ID" = '' then
+            Error('Cannot approve appraisal. Supervisor ID not set.');
+
+        if UserId <> "Supervisor ID" then
+            Error('Only the assigned supervisor (%1) can approve this appraisal.', "Supervisor Name");
+
+        MissingCount := 0;
+        TargetLine.Reset;
+        TargetLine.SetRange("Appraisal No", "Appraisal No");
+        if TargetLine.FindSet then begin
+            repeat
+                if TargetLine."Supervisor Rating" = 0 then
+                    MissingCount += 1;
+            until TargetLine.Next = 0;
+        end;
+
+        if MissingCount > 0 then
+            Error('Cannot approve appraisal. %1 target line(s) are missing supervisor ratings. Please complete all supervisor ratings before approving.', MissingCount);
+
+        if Status = Status::Discussed then begin
+            if CheckUnresolvedDiscussions() then begin
+                if not Confirm('There are still unresolved discussion points. Do you want to proceed with approval anyway?', false) then
+                    exit;
+            end;
+        end;
+
+        if Confirm('Approve this appraisal? This confirms agreement on performance ratings between you and %1.', true, "Employee Name") = false then
+            exit;
+
+        Status := Status::Approved;
+        Modify();
+
+        Message('Appraisal approved successfully for %1.', "Employee Name");
     end;
 
     procedure RecordDiscussionPoint(PointText: Text[250]; Category: Integer)

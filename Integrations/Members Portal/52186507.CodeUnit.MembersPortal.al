@@ -5322,6 +5322,11 @@ codeunit 52186507 "Members Portal Integration"
         VarVariant: Variant;
         CustomApprovals: Codeunit "Custom Approvals Codeunit";
 
+        StartDate: Date;
+        DaysApplied: Decimal;
+        ReturnDate: Date;
+        EndDate: Date;
+
         ResponseObject: JsonObject;
         Data: JsonArray;
         Datum: JsonObject;
@@ -5360,9 +5365,14 @@ codeunit 52186507 "Members Portal Integration"
                 theLeaveApplication.Validate("Leave Type");
                 theLeaveApplication."Start Date" := start_date.AsValue.AsDate;
                 theLeaveApplication.Validate("Start Date");
-                Evaluate(theLeaveApplication."Days Applied", days_applied.AsValue.AsText);
-                //theLeaveApplication."Days Applied" := days_applied.AsValue.AsInteger;
-                theLeaveApplication.Validate("Days Applied");
+
+                StartDate := theLeaveApplication."Start Date";
+                Evaluate(DaysApplied, days_applied.AsValue.AsText);
+                ReturnDate := theLeaveApplication.DetermineLeaveReturnDate(StartDate, DaysApplied);
+                EndDate := theLeaveApplication.DeterminethisLeaveEndDate(ReturnDate);
+
+                theLeaveApplication."End Date" := EndDate;
+                theLeaveApplication.Validate("End Date");
                 theLeaveApplication.Reliever := reliever.AsValue.AsText;
                 theLeaveApplication."Global Dimension 1 Code" := Employee."Global Dimension 1 Code";
                 theLeaveApplication."Global Dimension 2 Code" := Employee."Global Dimension 2 Code";
@@ -5577,6 +5587,7 @@ codeunit 52186507 "Members Portal Integration"
                 Employee.FindFirst;
 
                 Evaluate(StartDate, start_date.AsValue.AsText);
+                TheLeaveApplication."Leave Type" := leave_type_code.AsValue.AsText;
 
                 if TheLeaveApplication.DetermineIfIsNonWorking(StartDate) then begin
                     ResponseObject.Add('status', 'ERROR');

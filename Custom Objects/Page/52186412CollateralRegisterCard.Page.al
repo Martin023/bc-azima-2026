@@ -166,19 +166,7 @@ page 52186412 "Collateral Register Card"
                         CurrPage.Update;
                     end;
                 }
-                field("Collateral Value"; Rec."Collateral Value")
-                {
-                    ApplicationArea = Basic, Suite;
-                    //Editable = NotCashCollateral;
-                    ShowMandatory = true;
-                }
 
-                field("Amount to be Charged"; Rec."Amount to be Charged")
-                {
-                    ApplicationArea = Basic, Suite;
-                    //Editable = NotCashCollateral;
-                    //Editable = PageEditable;
-                }
                 field("Inward/Outward"; Rec."Inward/Outward")
                 {
                     Editable = false;
@@ -202,6 +190,31 @@ page 52186412 "Collateral Register Card"
                     ToolTip = 'Specifies the value of the Charge Type field.';
                     //Editable = NotCashCollateral;
                 }
+                field("Market Value"; Rec."Market Value")
+                {
+                    ApplicationArea = Basic, Suite;
+                    //Editable = NotCashCollateral;
+                }
+
+                field("Insured Value"; Rec."Insured Value")
+                {
+                    ApplicationArea = Basic, Suite;
+                    //Editable = NotCashCollateral;
+                    ShowMandatory = true;
+                }
+                field("Total Market Value"; Rec."Total Market Value")
+                {
+                    ApplicationArea = Basic, Suite;
+                    //Editable = PageEditable;
+                }
+
+                field("Amount to be Charged"; Rec."Amount to be Charged")
+                {
+                    ApplicationArea = Basic, Suite;
+                    //Editable = NotCashCollateral;
+                    //Editable = PageEditable;
+                }
+
                 field("Forced Sale Value"; Rec."Forced Sale Value")
                 {
                     ApplicationArea = Basic, Suite;
@@ -213,11 +226,7 @@ page 52186412 "Collateral Register Card"
                     ShowMandatory = true;
                     //Editable = NotCashCollateral;
                 }
-                field("Market Value"; Rec."Market Value")
-                {
-                    ApplicationArea = Basic, Suite;
-                    //Editable = NotCashCollateral;
-                }
+
                 field("Personal Guarantee Provided"; Rec."Personal Guarantee Provided")
                 {
                     Editable = PageEditable;
@@ -450,11 +459,7 @@ page 52186412 "Collateral Register Card"
                     ApplicationArea = Basic, Suite;
                     //Editable = PageEditable;
                 }
-                field("Estimated Market Value"; Rec."Estimated Market Value")
-                {
-                    ApplicationArea = Basic, Suite;
-                    //Editable = PageEditable;
-                }
+
             }
             group(OtherDetails)
             {
@@ -595,10 +600,10 @@ page 52186412 "Collateral Register Card"
                     Rec.TestField("Collateral");
                     Rec.Testfield("Collateral Name");
                     Rec.TestField("Collateral Multiplier");
-                    Rec.TestField("Collateral Value");
+                    // Rec.TestField("Collateral Value");
                     Rec.TestField("Collateral Limit");
                     Rec.TestField("Last Valuation Date");
-                    //Rec.TestField("Forced Sale Value");
+                    Rec.TestField("Forced Sale Value");
                     //Rec.TestField("Valuer Name");
                     Rec.TestField("Charge Type");
                     Rec.testfield("Market Value");

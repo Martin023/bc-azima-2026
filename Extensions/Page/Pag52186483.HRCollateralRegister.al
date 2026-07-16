@@ -165,7 +165,7 @@ page 52186483 "HR Collateral Register"
                         CurrPage.Update;
                     end;
                 }
-                field("Collateral Value"; Rec."Collateral Value")
+                field("Collateral Value"; Rec."Market Value")
                 {
                     ApplicationArea = Basic, Suite;
                     //Editable = NotCashCollateral;
@@ -319,9 +319,9 @@ page 52186483 "HR Collateral Register"
                 {
 
                 }
-                field("Due Date";Rec."Due Date")
+                field("Due Date"; Rec."Due Date")
                 {
-                    Caption='Land Rate Notice ';
+                    Caption = 'Land Rate Notice ';
                 }
 
                 field("Spousal Consent"; Rec."Spousal Consent")
@@ -429,10 +429,10 @@ page 52186483 "HR Collateral Register"
                 {
                     //Editable = PageEditable;
                 }
-                field("Estimated Market Value"; Rec."Estimated Market Value")
-                {
-                    //Editable = PageEditable;
-                }
+                // field("Estimated Market Value"; Rec."Estimated Market Value")
+                // {
+                //     //Editable = PageEditable;
+                // }
             }
             group(OtherDetails)
             {
@@ -487,7 +487,7 @@ page 52186483 "HR Collateral Register"
                 SubPageLink = "Table ID" = const(Database::"Document Attachment"), "No." = field("No."), "Document Type" = Filter(Contract);
                 //SubPageLink = "No." = field("Contract No"), "Document Type" = Filter(Contract);
             }
-           
+
             part(IncomingDocAttachFactBox; "Incoming Doc. Attach. FactBox")
             {
                 ApplicationArea = Basic, Suite;
@@ -569,7 +569,7 @@ page 52186483 "HR Collateral Register"
                     Rec.TestField("Collateral");
                     Rec.Testfield("Collateral Name");
                     Rec.TestField("Collateral Multiplier");
-                    Rec.TestField("Collateral Value");
+                    Rec.TestField("Market Value");
                     Rec.TestField("Collateral Limit");
                     Rec.TestField("Last Valuation Date");
                     Rec.TestField("Forced Sale Value");

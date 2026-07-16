@@ -74,6 +74,7 @@ Report 52185448 "Ideal Repayment Schedule"
             {
 
             }
+            column(Staff_No; "Staff No") { }
 
 
             dataitem("Ideal Repayment Schedule"; "Ideal Repayment Schedule")
@@ -85,7 +86,7 @@ Report 52185448 "Ideal Repayment Schedule"
                 column(Monthly_Repayment; ROUND("Monthly Repayment"))
                 {
                 }
-                column(Repayment_Date; Format("Repayment Date", 0, 4))
+                column(Repayment_Date; CopyStr(Format("Repayment Date", 0, 4), 4))
                 {
                 }
                 column(Principal_Repayment; ROUND("Principal Repayment"))
@@ -121,6 +122,7 @@ Report 52185448 "Ideal Repayment Schedule"
                 column(BOSADepoAmt; BOSADepoAmt)
                 {
                 }
+                column(TotalMonthly; TotalMonthly) { }
 
                 trigger OnAfterGetRecord()
                 begin
@@ -150,6 +152,8 @@ Report 52185448 "Ideal Repayment Schedule"
                     //     // else
                     //         IdealLoanBalance := "Ideal Repayment Schedule"."Loan Amount" - TotalPrincipalRepayment ;//+ "Ideal Repayment Schedule"."Principal Repayment";
                     // end;
+                    TotalMonthly := 0;
+                    BOSADepoAmt := 0;
                     Sno += 1;
                     if Pfac.get(Loans."Loan Product Type") then begin
                         if Pfac."Minimum Dep. Contribution %" <> 0 then begin
@@ -157,15 +161,17 @@ Report 52185448 "Ideal Repayment Schedule"
                             BOSADepoAcc.SetRange("Member No.", loans."Member No.");
                             BOSADepoAcc.SetRange("Product Category", BOSADepoAcc."Product Category"::"BOSA Deposits");
                             if BOSADepoAcc.FindFirst() then begin
-                                BOSADepoAmt := Loans."Approved Amount" * Pfac."Minimum Dep. Contribution %";
+                                BOSADepoAmt := Loans."Approved Amount" * (Pfac."Minimum Dep. Contribution %" / 100);
                             end;
                             if BOSADepoAmt < BOSADepoAcc."Monthly Contribution" then
                                 BOSADepoAmt := BOSADepoAcc."Monthly Contribution";
                         end
                         else
                             BOSADepoAmt := pfac."Minimum Deposit Contribution";
-
-                    end;
+                    end
+                    else
+                        BOSADepoAmt := pfac."Minimum Deposit Contribution";
+                    TotalMonthly := BOSADepoAmt + "Monthly Repayment";
 
                     InterestBal -= "Ideal Repayment Schedule"."Monthly Interest";
                     PPlusIBalance -= "Ideal Repayment Schedule"."Principal Repayment" + "Ideal Repayment Schedule"."Monthly Interest";
@@ -254,5 +260,6 @@ Report 52185448 "Ideal Repayment Schedule"
         Pfac: record "Product Factory";
         BOSADepoAcc: record "Savings Accounts";
         BOSADepoAmt: decimal;
+        TotalMonthly: Decimal;
 
 }

@@ -1697,8 +1697,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
                                 DepositCap := Round(OrdinaryAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1);
                                 if DepositCap > ProdFac."Maximum Loan Amount" then
                                     DepositCap := ProdFac."Maximum Loan Amount";
-                                if DepositCap < QualifiedAmount then
-                                    QualifiedAmount := DepositCap;
+                                // if DepositCap < QualifiedAmount then
+                                //     QualifiedAmount := DepositCap;
                             end;
                         end;
 
@@ -1794,8 +1794,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
                             if DepositCap > ProdFac."Maximum Loan Amount" then
                                 DepositCap := ProdFac."Maximum Loan Amount";
                             Message('Deposit Cap after applying maximum loan amount: %1', Format(DepositCap));
-                            if DepositCap < amtQualified then
-                                amtQualified := DepositCap;
+                            // if DepositCap < amtQualified then
+                            //     amtQualified := DepositCap;
                             Message('Qualified Amount after applying deposit cap: %1', Format(amtQualified));
                         end;
                     end;
@@ -2190,8 +2190,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
                             DepositCap := Round(OrdinaryAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1);
                             if DepositCap > ProdFac."Maximum Loan Amount" then
                                 DepositCap := ProdFac."Maximum Loan Amount";
-                            if DepositCap < QualifiedAmount then
-                                QualifiedAmount := DepositCap;
+                            // if DepositCap < QualifiedAmount then
+                            //     QualifiedAmount := DepositCap;
                             Message('DEBUG: DepositCap = %1, QualifiedAmount after deposit qualifier cap = %2', DepositCap, QualifiedAmount);
                         end;
                     end;
@@ -4511,7 +4511,6 @@ codeunit 52186512 "Sky M-Banking Transactions"
         MonthStart: Date;
         MonthEnd: Date;
         BOSACredits: Decimal;
-        FOSACredits: Decimal;
         MonthCredits: Decimal;
         TotalCredits: Decimal;
         QualifiedAmount: Decimal;
@@ -4522,7 +4521,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         MonthLabels: array[3] of Text;
         MonthCreditsValues: array[3] of Decimal;
         BOSACreditsValues: array[3] of Decimal;
-    // FOSACreditsValues: array[3] of Decimal;
+        MonthSummaries: array[3] of Text;
     begin
         QualifiedAmount := 0;
         TotalCredits := 0;
@@ -4553,7 +4552,6 @@ codeunit 52186512 "Sky M-Banking Transactions"
             MonthEnd := CalcDate('<CM>', MonthStart);
             MonthLabel := Format(MonthStart, 0, '<Month Text> <Year4>');
             BOSACredits := 0;
-            FOSACredits := 0;
 
             // BOSA Deposit credits
             SavAccounts.Reset();
@@ -4571,21 +4569,12 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     BOSACredits += SavLedger."Credit Amount";
                 until SavAccounts.Next() = 0;
 
-            // FOSA credits
-            SavLedger.Reset();
-            SavLedger.SetRange("Customer No.", FOSAAccountNo);
-            SavLedger.SetRange("Posting Date", MonthStart, MonthEnd);
-            SavLedger.SetRange(Reversed, false);
-            SavLedger.SetFilter("Credit Amount", '>0');
-            SavLedger.CalcSums("Credit Amount");
-            FOSACredits := SavLedger."Credit Amount";
-
-            MonthCredits := BOSACredits + FOSACredits;
+            MonthCredits := BOSACredits;
 
             MonthLabels[i] := MonthLabel;
             MonthCreditsValues[i] := MonthCredits;
             BOSACreditsValues[i] := BOSACredits;
-            // FOSACreditsValues[i] := FOSACredits;
+            MonthSummaries[i] := StrSubstNo('%1: BOSA=%2', MonthLabel, BOSACredits);
             TotalCredits += MonthCredits;
 
             if BOSACredits > 0 then
@@ -4593,20 +4582,15 @@ codeunit 52186512 "Sky M-Banking Transactions"
             else begin
                 EligibilityFailReason := StrSubstNo('No deposits were received into your Deposit account in %1.', MonthLabel);
 
-                Message('Debug Failure:\Month 1 (%1): BOSA=%2\Month 2 (%3): BOSA=%4\Month 3 (%5): BOSA=%6\\Total Credits: %7\Status: Failed at %8 (%9)',
-                    MonthLabels[1], BOSACreditsValues[1],
-                    MonthLabels[2], BOSACreditsValues[2],
-                    MonthLabels[3], BOSACreditsValues[3],
+                Message('Debug Failure:\Month 1 (%1)\Month 2 (%2)\Month 3 (%3)\\Total Credits: %4\Status: Failed at %5 (%6)',
+                    MonthSummaries[1], MonthSummaries[2], MonthSummaries[3],
                     TotalCredits, MonthLabel, EligibilityFailReason);
                 exit(0);
             end;
         end;
 
-        Message('Debug Credit Summary:\Month 1 (%1): BOSA=%2\Month 2 (%3): BOSA=%4\Month 3 (%5): BOSA=%6\\Total Credits: %7',
-            MonthLabels[1], BOSACreditsValues[1],
-            MonthLabels[2], BOSACreditsValues[2],
-            MonthLabels[3], BOSACreditsValues[3],
-            TotalCredits);
+        Message('Debug Credit Summary:\Month 1 (%1)\Month 2 (%2)\Month 3 (%3)\\Total Credits: %4',
+            MonthSummaries[1], MonthSummaries[2], MonthSummaries[3], TotalCredits);
 
         if ActiveMonths < 3 then begin
             EligibilityFailReason :=
@@ -4614,7 +4598,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
             exit(0);
         end;
 
-        QualifiedAmount := Round(TotalCredits / 3, 1);
+        QualifiedAmount := Round(TotalCredits, 1);
 
         if QualifiedAmount > ProdFac."Maximum Loan Amount" then begin
             QualifiedAmount := ProdFac."Maximum Loan Amount";
@@ -4634,10 +4618,10 @@ codeunit 52186512 "Sky M-Banking Transactions"
                 if DepositCap > ProdFac."Maximum Loan Amount" then
                     DepositCap := ProdFac."Maximum Loan Amount";
 
-                if DepositCap < QualifiedAmount then begin
-                    QualifiedAmount := DepositCap;
-                    Message('Debug: Qualified Amount reduced by Deposit Cap to %1', QualifiedAmount);
-                end;
+                // if DepositCap < QualifiedAmount then begin
+                //     QualifiedAmount := DepositCap;
+                //     Message('Debug: Qualified Amount reduced by Deposit Cap to %1', QualifiedAmount);
+                // end;
             end;
         end;
 
@@ -4766,8 +4750,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
                 if DepositCap > ProdFac."Maximum Loan Amount" then
                     DepositCap := ProdFac."Maximum Loan Amount";
 
-                if DepositCap < QualifiedAmount then
-                    QualifiedAmount := DepositCap;
+                // if DepositCap < QualifiedAmount then
+                //     QualifiedAmount := DepositCap;
             end else begin
                 EligibilityFailReason := 'You are not eligible. FOSA account NOT found';
                 exit(0);

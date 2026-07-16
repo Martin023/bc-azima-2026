@@ -11,7 +11,7 @@
       <am:Name>PBIRB</am:Name>
       <am:Version>15.7.1813.16</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-07-15T14:43:57.0945781Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-07-16T10:55:47.4693051Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -50,7 +50,7 @@
                   <Width>2.27394cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.39553cm</Width>
+                  <Width>2.5cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.5cm</Width>
@@ -58,7 +58,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.17708in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -73,7 +73,7 @@
                                   <Value>Sno.</Value>
                                   <Style>
                                     <FontFamily>Cambria</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>White</Color>
                                   </Style>
@@ -129,7 +129,7 @@
                                   <Value>Repayment Date</Value>
                                   <Style>
                                     <FontFamily>Cambria</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>White</Color>
                                   </Style>
@@ -185,7 +185,7 @@
                                   <Value>Principal Repayment</Value>
                                   <Style>
                                     <FontFamily>Cambria</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>White</Color>
                                   </Style>
@@ -241,7 +241,7 @@
                                   <Value>Monthly Interest</Value>
                                   <Style>
                                     <FontFamily>Cambria</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>White</Color>
                                   </Style>
@@ -297,7 +297,7 @@
                                   <Value>Monthly Repayment</Value>
                                   <Style>
                                     <FontFamily>Cambria</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>White</Color>
                                   </Style>
@@ -353,63 +353,7 @@
                                   <Value>Principle Balance</Value>
                                   <Style>
                                     <FontFamily>Cambria</FontFamily>
-                                    <FontSize>9pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>White</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>Lime</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <TopBorder>
-                              <Color>Lime</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Color>Lime</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </BottomBorder>
-                            <LeftBorder>
-                              <Color>Lime</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>Lime</Color>
-                              <Style>Solid</Style>
-                              <Width>1pt</Width>
-                            </RightBorder>
-                            <BackgroundColor>LightGreen</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox68">
-                          <rd:DefaultName>Textbox68</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>P+I Balance</Value>
-                                  <Style>
-                                    <FontFamily>Cambria</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>White</Color>
                                   </Style>
@@ -465,7 +409,63 @@
                                   <Value>Deposits</Value>
                                   <Style>
                                     <FontFamily>Cambria</FontFamily>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>Lime</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <TopBorder>
+                              <Color>Lime</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Lime</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Lime</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Lime</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
+                            <BackgroundColor>LightGreen</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox21">
+                          <rd:DefaultName>Textbox21</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Totals</Value>
+                                  <Style>
+                                    <FontFamily>Cambria</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>White</Color>
                                   </Style>
@@ -511,7 +511,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.19792in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -525,7 +525,7 @@
                                 <TextRun>
                                   <Value>=Fields!Sno.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -558,7 +558,7 @@
                                 <TextRun>
                                   <Value>=Fields!Repayment_Date.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -591,7 +591,7 @@
                                 <TextRun>
                                   <Value>=Fields!Principal_Repayment_10.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <Format>n2</Format>
                                   </Style>
                                 </TextRun>
@@ -625,7 +625,7 @@
                                 <TextRun>
                                   <Value>=Fields!Monthly_Interest_10.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <Format>n2</Format>
                                   </Style>
                                 </TextRun>
@@ -659,7 +659,7 @@
                                 <TextRun>
                                   <Value>=Fields!Monthly_Repayment_10.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <Format>n2</Format>
                                   </Style>
                                 </TextRun>
@@ -693,41 +693,7 @@
                                 <TextRun>
                                   <Value>=Fields!LoanBalance.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
-                                    <Format>n2</Format>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>AliceBlue</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="PPlusIBalance">
-                          <rd:DefaultName>PPlusIBalance</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!PPlusIBalance.Value</Value>
-                                  <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
                                     <Format>n2</Format>
                                   </Style>
                                 </TextRun>
@@ -761,7 +727,41 @@
                                 <TextRun>
                                   <Value>=Fields!BOSADepoAmt.Value</Value>
                                   <Style>
-                                    <FontSize>9pt</FontSize>
+                                    <FontSize>8pt</FontSize>
+                                    <Format>#,0.00</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>AliceBlue</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="TotalMonthly">
+                          <rd:DefaultName>TotalMonthly</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!TotalMonthly.Value</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
                                     <Format>#,0.00</Format>
                                   </Style>
                                 </TextRun>
@@ -786,7 +786,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.23622in</Height>
+                  <Height>0.17372in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -801,6 +801,7 @@
                                   <Value />
                                   <Style>
                                     <FontFamily>Cambria</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -835,6 +836,7 @@
                                   <Value>Totals</Value>
                                   <Style>
                                     <FontFamily>Cambria</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -869,6 +871,7 @@
                                   <Value>=Sum(Fields!Principal_Repayment_10.Value)</Value>
                                   <Style>
                                     <FontFamily>Cambria</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>n2</Format>
                                   </Style>
@@ -904,6 +907,7 @@
                                   <Value>=Sum(Fields!Monthly_Interest_10.Value)</Value>
                                   <Style>
                                     <FontFamily>Cambria</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>n2</Format>
                                   </Style>
@@ -939,6 +943,7 @@
                                   <Value>=Sum(Fields!Monthly_Repayment_10.Value)</Value>
                                   <Style>
                                     <FontFamily>Cambria</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>n2</Format>
                                   </Style>
@@ -974,40 +979,7 @@
                                   <Value />
                                   <Style>
                                     <FontFamily>Cambria</FontFamily>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>AliceBlue</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox70">
-                          <rd:DefaultName>Textbox70</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style>
-                                    <FontFamily>Cambria</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1042,6 +1014,42 @@
                                   <Value />
                                   <Style>
                                     <FontFamily>Cambria</FontFamily>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>AliceBlue</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox26">
+                          <rd:DefaultName>Textbox26</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontFamily>Cambria</FontFamily>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -1098,10 +1106,10 @@
             <FixedColumnHeaders>true</FixedColumnHeaders>
             <FixedRowHeaders>true</FixedRowHeaders>
             <DataSetName>DataSet_Result</DataSetName>
-            <Top>2.95056in</Top>
+            <Top>2.01741in</Top>
             <Left>0.00003cm</Left>
-            <Height>0.73622in</Height>
-            <Width>19.74161cm</Width>
+            <Height>0.54872in</Height>
+            <Width>19.84608cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1109,7 +1117,8 @@
             </Style>
           </Tablix>
           <Line Name="Line1">
-            <Top>2.895in</Top>
+            <Top>1.96185in</Top>
+            <Left>0in</Left>
             <Height>0in</Height>
             <Width>19.74083cm</Width>
             <ZIndex>1</ZIndex>
@@ -1138,8 +1147,8 @@
             <Value>=First(Fields!CompanyInformation_Picture.Value, "DataSet_Result")</Value>
             <MIMEType>image/jpeg</MIMEType>
             <Sizing>FitProportional</Sizing>
-            <Left>0.07028cm</Left>
-            <Height>1.23206in</Height>
+            <Left>0.21085cm</Left>
+            <Height>0.74356in</Height>
             <Width>2.02209in</Width>
             <ZIndex>2</ZIndex>
             <Style>
@@ -1148,38 +1157,6 @@
               </Border>
             </Style>
           </Image>
-          <Textbox Name="BuldingName">
-            <rd:DefaultName>BuldingName</rd:DefaultName>
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!BuldingName.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontFamily>Cambria</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>0.6181cm</Top>
-            <Left>5.34248cm</Left>
-            <Height>0.6cm</Height>
-            <Width>8.47077cm</Width>
-            <ZIndex>3</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
           <Textbox Name="CompanyName">
             <rd:DefaultName>CompanyName</rd:DefaultName>
             <CanGrow>true</CanGrow>
@@ -1198,42 +1175,10 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Left>5.34248cm</Left>
+            <Left>5.48305cm</Left>
             <Height>0.6cm</Height>
             <Width>8.47077cm</Width>
-            <ZIndex>4</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="CompanyAddress">
-            <rd:DefaultName>CompanyAddress</rd:DefaultName>
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!CompanyAddress.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontFamily>Cambria</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>1.25337cm</Top>
-            <Left>5.34248cm</Left>
-            <Height>0.6cm</Height>
-            <Width>8.47077cm</Width>
-            <ZIndex>5</ZIndex>
+            <ZIndex>3</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1267,11 +1212,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>1.88865cm</Top>
-            <Left>6.8547cm</Left>
+            <Top>0.70583cm</Top>
+            <Left>6.99527cm</Left>
             <Height>0.6cm</Height>
             <Width>6.95855cm</Width>
-            <ZIndex>6</ZIndex>
+            <ZIndex>4</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1305,11 +1250,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>2.51253cm</Top>
-            <Left>6.8547cm</Left>
+            <Top>1.41167cm</Top>
+            <Left>6.99527cm</Left>
             <Height>0.6cm</Height>
             <Width>6.95855cm</Width>
-            <ZIndex>7</ZIndex>
+            <ZIndex>5</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1337,11 +1282,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>1.88865cm</Top>
-            <Left>5.34248cm</Left>
+            <Top>0.70583cm</Top>
+            <Left>5.48305cm</Left>
             <Height>0.6cm</Height>
             <Width>1.40639cm</Width>
-            <ZIndex>8</ZIndex>
+            <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1369,11 +1314,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>2.51253cm</Top>
-            <Left>5.34248cm</Left>
+            <Top>1.41167cm</Top>
+            <Left>5.48305cm</Left>
             <Height>0.6cm</Height>
             <Width>1.40639cm</Width>
-            <ZIndex>9</ZIndex>
+            <ZIndex>7</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1410,10 +1355,10 @@
               </Paragraph>
             </Paragraphs>
             <Top>0.03527cm</Top>
-            <Left>14.09002cm</Left>
+            <Left>14.23059cm</Left>
             <Height>0.6cm</Height>
             <Width>5.65081cm</Width>
-            <ZIndex>10</ZIndex>
+            <ZIndex>8</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1450,10 +1395,10 @@
               </Paragraph>
             </Paragraphs>
             <Top>0.65365cm</Top>
-            <Left>14.09002cm</Left>
+            <Left>14.23059cm</Left>
             <Height>0.6cm</Height>
             <Width>5.65081cm</Width>
-            <ZIndex>11</ZIndex>
+            <ZIndex>9</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1490,10 +1435,10 @@
               </Paragraph>
             </Paragraphs>
             <Top>1.28865cm</Top>
-            <Left>14.09002cm</Left>
+            <Left>14.23059cm</Left>
             <Height>0.6cm</Height>
             <Width>5.65081cm</Width>
-            <ZIndex>12</ZIndex>
+            <ZIndex>10</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1515,7 +1460,6 @@
                     <Value>LOAN REPAYMENT SCHEDULE</Value>
                     <Style>
                       <FontFamily>Cambria</FontFamily>
-                      <FontSize>12pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1525,11 +1469,11 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>3.39189cm</Top>
-            <Left>0.07028cm</Left>
-            <Height>0.6cm</Height>
+            <Top>2.09175cm</Top>
+            <Left>0.00003cm</Left>
+            <Height>0.52947cm</Height>
             <Width>19.67055cm</Width>
-            <ZIndex>13</ZIndex>
+            <ZIndex>11</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1551,6 +1495,7 @@
                     <Value>Member No</Value>
                     <Style>
                       <FontFamily>Cambria</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1558,11 +1503,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>1.64241in</Top>
-            <Left>0.18056cm</Left>
-            <Height>0.25in</Height>
+            <Top>1.10142in</Top>
+            <Left>0.27981cm</Left>
+            <Height>0.17708in</Height>
             <Width>1.15625in</Width>
-            <ZIndex>14</ZIndex>
+            <ZIndex>12</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1584,6 +1529,7 @@
                     <Value>Member Name</Value>
                     <Style>
                       <FontFamily>Cambria</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1591,44 +1537,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>1.90359in</Top>
-            <Left>0.18056cm</Left>
-            <Height>0.25in</Height>
+            <Top>1.3626in</Top>
+            <Left>0.27981cm</Left>
+            <Height>0.17708in</Height>
             <Width>1.15625in</Width>
-            <ZIndex>15</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox3">
-            <rd:DefaultName>Textbox1</rd:DefaultName>
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Loan Number</Value>
-                    <Style>
-                      <FontFamily>Cambria</FontFamily>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>2.16748in</Top>
-            <Left>0.18056cm</Left>
-            <Height>0.25in</Height>
-            <Width>1.15625in</Width>
-            <ZIndex>16</ZIndex>
+            <ZIndex>13</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1650,6 +1563,7 @@
                     <Value>Disbursement Date</Value>
                     <Style>
                       <FontFamily>Cambria</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1657,11 +1571,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>1.65494in</Top>
-            <Left>3.5118in</Left>
-            <Height>0.25in</Height>
+            <Top>1.11395in</Top>
+            <Left>3.52569in</Left>
+            <Height>0.17708in</Height>
             <Width>1.4373in</Width>
-            <ZIndex>17</ZIndex>
+            <ZIndex>14</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1683,6 +1597,7 @@
                     <Value>Loan Product  Name</Value>
                     <Style>
                       <FontFamily>Cambria</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1690,11 +1605,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>1.91883in</Top>
-            <Left>3.5118in</Left>
-            <Height>0.25in</Height>
+            <Top>1.37784in</Top>
+            <Left>3.52569in</Left>
+            <Height>0.17708in</Height>
             <Width>1.4373in</Width>
-            <ZIndex>18</ZIndex>
+            <ZIndex>15</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1716,6 +1631,7 @@
                     <Value>Approved Amount</Value>
                     <Style>
                       <FontFamily>Cambria</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1723,11 +1639,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>2.18272in</Top>
-            <Left>3.5118in</Left>
-            <Height>0.25in</Height>
+            <Top>1.62784in</Top>
+            <Left>3.52569in</Left>
+            <Height>0.17708in</Height>
             <Width>1.4373in</Width>
-            <ZIndex>19</ZIndex>
+            <ZIndex>16</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1749,6 +1665,7 @@
                     <Value>: </Value>
                     <Style>
                       <FontFamily>Cambria</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1756,6 +1673,7 @@
                     <Value>=First(Fields!Member_No.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Cambria</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1763,11 +1681,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>1.65629in</Top>
-            <Left>1.25022in</Left>
-            <Height>0.25in</Height>
+            <Top>1.1153in</Top>
+            <Left>1.28929in</Left>
+            <Height>0.17708in</Height>
             <Width>2.09317in</Width>
-            <ZIndex>20</ZIndex>
+            <ZIndex>17</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1789,6 +1707,7 @@
                     <Value>: </Value>
                     <Style>
                       <FontFamily>Cambria</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1796,6 +1715,7 @@
                     <Value>=First(Fields!Member_Name.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Cambria</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1803,51 +1723,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>1.90426in</Top>
-            <Left>1.25022in</Left>
-            <Height>0.25in</Height>
+            <Top>1.36327in</Top>
+            <Left>1.28929in</Left>
+            <Height>0.17708in</Height>
             <Width>2.09317in</Width>
-            <ZIndex>21</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox10">
-            <rd:DefaultName>Textbox1</rd:DefaultName>
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>: </Value>
-                    <Style>
-                      <FontFamily>Cambria</FontFamily>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=First(Fields!Loan_No.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontFamily>Cambria</FontFamily>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>2.18204in</Top>
-            <Left>1.25022in</Left>
-            <Height>0.25in</Height>
-            <Width>2.09317in</Width>
-            <ZIndex>22</ZIndex>
+            <ZIndex>18</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1869,6 +1749,7 @@
                     <Value>: </Value>
                     <Style>
                       <FontFamily>Cambria</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1876,6 +1757,7 @@
                     <Value>=First(Fields!Disbursement_Date.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Cambria</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1883,11 +1765,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>1.65562in</Top>
-            <Left>5.10067in</Left>
-            <Height>0.25in</Height>
+            <Top>1.11463in</Top>
+            <Left>5.11456in</Left>
+            <Height>0.17708in</Height>
             <Width>2.67133in</Width>
-            <ZIndex>23</ZIndex>
+            <ZIndex>19</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1909,6 +1791,7 @@
                     <Value>: </Value>
                     <Style>
                       <FontFamily>Cambria</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1916,6 +1799,7 @@
                     <Value>=First(Fields!Loan_Product_Type_Name.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Cambria</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1923,11 +1807,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>1.91951in</Top>
-            <Left>5.10067in</Left>
-            <Height>0.25in</Height>
+            <Top>1.37852in</Top>
+            <Left>5.11456in</Left>
+            <Height>0.17708in</Height>
             <Width>2.67133in</Width>
-            <ZIndex>24</ZIndex>
+            <ZIndex>20</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1949,6 +1833,7 @@
                     <Value>: </Value>
                     <Style>
                       <FontFamily>Cambria</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <Format>n2</Format>
                     </Style>
@@ -1957,6 +1842,7 @@
                     <Value>=First(Fields!Approved_Amount.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Cambria</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                       <Format>n2</Format>
                     </Style>
@@ -1967,10 +1853,144 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>2.1834in</Top>
-            <Left>5.10067in</Left>
-            <Height>0.25in</Height>
+            <Top>1.64241in</Top>
+            <Left>5.11456in</Left>
+            <Height>0.17708in</Height>
             <Width>2.67133in</Width>
+            <ZIndex>21</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Line Name="Line4">
+            <Top>2.79761cm</Top>
+            <Left>0.24453cm</Left>
+            <Height>1.82391cm</Height>
+            <Width>0cm</Width>
+            <ZIndex>22</ZIndex>
+            <Style>
+              <Border>
+                <Color>LightGreen</Color>
+                <Style>Solid</Style>
+                <Width>1.5pt</Width>
+              </Border>
+              <TopBorder>
+                <Color>LightGreen</Color>
+              </TopBorder>
+              <BottomBorder>
+                <Color>LightGreen</Color>
+              </BottomBorder>
+              <LeftBorder>
+                <Color>LightGreen</Color>
+              </LeftBorder>
+              <RightBorder>
+                <Color>LightGreen</Color>
+              </RightBorder>
+            </Style>
+          </Line>
+          <Textbox Name="Textbox3">
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Staff No.</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>1.62784in</Top>
+            <Left>0.27981cm</Left>
+            <Height>0.17708in</Height>
+            <Width>1.15625in</Width>
+            <ZIndex>23</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox10">
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>: </Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!Staff_No.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>1.61327in</Top>
+            <Left>1.28929in</Left>
+            <Height>0.17708in</Height>
+            <Width>2.09317in</Width>
+            <ZIndex>24</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox14">
+            <rd:DefaultName>Textbox14</rd:DefaultName>
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>  NB: Repayment is due on …15TH……...of every month and late payment will attract a penalty of 5%	</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>6.65908cm</Top>
+            <Left>0.00003cm</Left>
+            <Height>0.49417cm</Height>
+            <Width>19.6353cm</Width>
             <ZIndex>25</ZIndex>
             <Style>
               <Border>
@@ -1982,114 +2002,35 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Line Name="Line3">
-            <Top>4.16654cm</Top>
-            <Left>8.88614cm</Left>
-            <Height>2.64412cm</Height>
-            <Width>0cm</Width>
-            <ZIndex>26</ZIndex>
-            <Style>
-              <Border>
-                <Color>LightGreen</Color>
-                <Style>Solid</Style>
-                <Width>1.5pt</Width>
-              </Border>
-              <TopBorder>
-                <Color>LightGreen</Color>
-              </TopBorder>
-              <BottomBorder>
-                <Color>LightGreen</Color>
-              </BottomBorder>
-              <LeftBorder>
-                <Color>LightGreen</Color>
-              </LeftBorder>
-              <RightBorder>
-                <Color>LightGreen</Color>
-              </RightBorder>
-            </Style>
-          </Line>
-          <Line Name="Line4">
-            <Top>4.16484cm</Top>
-            <Left>0.10396cm</Left>
-            <Height>2.68282cm</Height>
-            <Width>0cm</Width>
-            <ZIndex>27</ZIndex>
-            <Style>
-              <Border>
-                <Color>LightGreen</Color>
-                <Style>Solid</Style>
-                <Width>1.5pt</Width>
-              </Border>
-              <TopBorder>
-                <Color>LightGreen</Color>
-              </TopBorder>
-              <BottomBorder>
-                <Color>LightGreen</Color>
-              </BottomBorder>
-              <LeftBorder>
-                <Color>LightGreen</Color>
-              </LeftBorder>
-              <RightBorder>
-                <Color>LightGreen</Color>
-              </RightBorder>
-            </Style>
-          </Line>
-          <Textbox Name="Textbox14">
-            <rd:DefaultName>Textbox1</rd:DefaultName>
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Interest Amount</Value>
-                    <Style>
-                      <FontFamily>Cambria</FontFamily>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>2.41748in</Top>
-            <Left>0.16357cm</Left>
-            <Height>0.27845in</Height>
-            <Width>1.16294in</Width>
-            <ZIndex>28</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
           <Textbox Name="Textbox15">
-            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <rd:DefaultName>Textbox14</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>P + I Amount</Value>
+                    <Value>DECLARATION:				</Value>
                     <Style>
-                      <FontFamily>Cambria</FontFamily>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value xml:space="preserve">	</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>2.44661in</Top>
-            <Left>3.51237in</Left>
-            <Height>0.25in</Height>
-            <Width>1.4373in</Width>
-            <ZIndex>29</ZIndex>
+            <Top>7.2238cm</Top>
+            <Left>0.00003cm</Left>
+            <Height>0.46771cm</Height>
+            <Width>19.6353cm</Width>
+            <ZIndex>26</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2101,37 +2042,27 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox16">
-            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <rd:DefaultName>Textbox14</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>: </Value>
+                    <Value>I…………………………………………….ID NO…………………………Do hereby acknowledge the  receipt of a loan		of </Value>
                     <Style>
-                      <FontFamily>Cambria</FontFamily>
-                      <FontWeight>Bold</FontWeight>
-                      <Format>n2</Format>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=First(Fields!TotalInterest.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontFamily>Cambria</FontFamily>
-                      <FontWeight>Bold</FontWeight>
-                      <Format>n2</Format>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>2.43204in</Top>
-            <Left>1.25022in</Left>
-            <Height>0.26389in</Height>
-            <Width>2.09317in</Width>
-            <ZIndex>30</ZIndex>
+            <Top>7.79735cm</Top>
+            <Left>0cm</Left>
+            <Height>0.46771cm</Height>
+            <Width>19.6353cm</Width>
+            <ZIndex>27</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2143,38 +2074,136 @@
             </Style>
           </Textbox>
           <Textbox Name="Textbox17">
-            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <rd:DefaultName>Textbox14</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>: </Value>
+                    <Value>  Ksh…………………………..granted to me by Azima Sacco and its above repayment schedule of which I do agree to abide</Value>
                     <Style>
-                      <FontFamily>Cambria</FontFamily>
-                      <FontWeight>Bold</FontWeight>
-                      <Format>n2</Format>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=First(Fields!PPlusIAmount.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontFamily>Cambria</FontFamily>
-                      <FontWeight>Bold</FontWeight>
-                      <Format>n2</Format>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
+                <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>2.44661in</Top>
-            <Left>5.10067in</Left>
-            <Height>0.25in</Height>
-            <Width>2.67133in</Width>
+            <Top>8.37089cm</Top>
+            <Left>0cm</Left>
+            <Height>0.46771cm</Height>
+            <Width>19.6353cm</Width>
+            <ZIndex>28</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox24">
+            <rd:DefaultName>Textbox14</rd:DefaultName>
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>  by until  end of the period.</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>8.94444cm</Top>
+            <Left>0cm</Left>
+            <Height>0.46771cm</Height>
+            <Width>19.6353cm</Width>
+            <ZIndex>29</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox27">
+            <rd:DefaultName>Textbox14</rd:DefaultName>
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value xml:space="preserve"> 		</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>PAYMENT DETAILS</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>.	</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>9.64827cm</Top>
+            <Left>0.12305cm</Left>
+            <Height>0.46771cm</Height>
+            <Width>19.6353cm</Width>
+            <ZIndex>30</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox29">
+            <rd:DefaultName>Textbox14</rd:DefaultName>
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>PAYBILL:531 231</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>10.29237cm</Top>
+            <Left>0.12305cm</Left>
+            <Height>0.46771cm</Height>
+            <Width>19.6353cm</Width>
             <ZIndex>31</ZIndex>
             <Style>
               <Border>
@@ -2186,192 +2215,27 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox18">
-            <rd:DefaultName>Textbox18</rd:DefaultName>
+          <Textbox Name="Textbox30">
+            <rd:DefaultName>Textbox14</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>  NB: Repayment is due on …15TH……...of every month and late payment will attract a penalty of 5%	</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value xml:space="preserve">						
-  </Value>
-                    <Style />
-                  </TextRun>
-                  <TextRun>
-                    <Value>DECLARATION:				</Value>
+                    <Value>SIGNATURE…..………...…….DATE………….........................	A/C NO:  ID No:	......................... Mobile No		…………………  EMAIL...................................</Value>
                     <Style>
-                      <FontWeight>Bold</FontWeight>
+                      <FontSize>8pt</FontSize>
                     </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>			
-  I…………………………………………….ID NO…………………………Do hereby acknowledge the  receipt of a loan		of </Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value />
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>  Ksh…………………………..granted to me by Azima Sacco and its above repayment schedule of which I do agree to abide</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value xml:space="preserve"> </Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>  by until  end of the period.		</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value />
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value xml:space="preserve">		</Value>
-                    <Style />
-                  </TextRun>
-                  <TextRun>
-                    <Value>PAYMENT DETAILS</Value>
-                    <Style>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>.	</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>
-		PAYBILL:531 231</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>
-  SIGNATURE…..…………….DATE…………						A/C NO:  ID No:	
-							
-  Mobile No		………………………..		</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value />
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>  EMAIL ADDRESS……………………………………………………………	</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value />
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>  CO-OP BANK:	</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>	
-		A/C NAME:	AZIMA SACCO LTD	
-		A/C NO:	01120073010100	
-							
-		ABSA BANK</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>		
-		A/C NAME:	AZIMA SACCO LTD	
-		A/C NO:	0311068121	
-</Value>
-                    <Style />
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>9.50553cm</Top>
-            <Height>12.14384cm</Height>
-            <Width>19.74083cm</Width>
+            <Top>10.83064cm</Top>
+            <Left>0.12305cm</Left>
+            <Height>0.46771cm</Height>
+            <Width>19.6353cm</Width>
             <ZIndex>32</ZIndex>
             <Style>
               <Border>
@@ -2383,11 +2247,205 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox33">
+            <rd:DefaultName>Textbox14</rd:DefaultName>
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>  CO-OP BANK:	</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>11.47474cm</Top>
+            <Left>0.12305cm</Left>
+            <Height>0.46771cm</Height>
+            <Width>19.6353cm</Width>
+            <ZIndex>33</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox34">
+            <rd:DefaultName>Textbox14</rd:DefaultName>
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>		A/C NAME:	AZIMA SACCO LTD</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>12.04828cm</Top>
+            <Left>0.12305cm</Left>
+            <Height>0.46771cm</Height>
+            <Width>19.6353cm</Width>
+            <ZIndex>34</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox35">
+            <rd:DefaultName>Textbox14</rd:DefaultName>
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>A/C NO:	01120073010100	</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>12.6571cm</Top>
+            <Left>0.12305cm</Left>
+            <Height>0.46771cm</Height>
+            <Width>19.6353cm</Width>
+            <ZIndex>35</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox36">
+            <rd:DefaultName>Textbox14</rd:DefaultName>
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>ABSA BANK</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>13.3012cm</Top>
+            <Left>0.12305cm</Left>
+            <Height>0.46771cm</Height>
+            <Width>19.6353cm</Width>
+            <ZIndex>36</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox37">
+            <rd:DefaultName>Textbox14</rd:DefaultName>
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>		A/C NAME:	AZIMA SACCO LTD</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>13.83946cm</Top>
+            <Left>0.12305cm</Left>
+            <Height>0.46771cm</Height>
+            <Width>19.6353cm</Width>
+            <ZIndex>37</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox38">
+            <rd:DefaultName>Textbox14</rd:DefaultName>
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>	A/C NO:	0311068121</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>14.44829cm</Top>
+            <Left>0.12305cm</Left>
+            <Height>0.46771cm</Height>
+            <Width>19.6353cm</Width>
+            <ZIndex>38</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>21.73757cm</Height>
+        <Height>15.21342cm</Height>
         <Style />
       </Body>
-      <Width>19.9cm</Width>
+      <Width>19.8814cm</Width>
       <Page>
         <PageFooter>
           <Height>0.70556cm</Height>
@@ -2416,6 +2474,7 @@
                 </Paragraph>
               </Paragraphs>
               <Top>0.07056cm</Top>
+              <Left>0.05534in</Left>
               <Height>0.25in</Height>
               <Width>19.74083cm</Width>
               <Style>
@@ -2549,6 +2608,9 @@ End Function
         <Field Name="Disbursement_Date">
           <DataField>Disbursement_Date</DataField>
         </Field>
+        <Field Name="Staff_No">
+          <DataField>Staff_No</DataField>
+        </Field>
         <Field Name="Monthly_Repayment">
           <DataField>Monthly_Repayment</DataField>
         </Field>
@@ -2617,6 +2679,12 @@ End Function
         </Field>
         <Field Name="BOSADepoAmtFormat">
           <DataField>BOSADepoAmtFormat</DataField>
+        </Field>
+        <Field Name="TotalMonthly">
+          <DataField>TotalMonthly</DataField>
+        </Field>
+        <Field Name="TotalMonthlyFormat">
+          <DataField>TotalMonthlyFormat</DataField>
         </Field>
       </Fields>
       <Query>
