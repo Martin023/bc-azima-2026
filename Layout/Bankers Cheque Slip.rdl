@@ -9,7 +9,7 @@
       <am:Name>MSRB</am:Name>
       <am:Version>15.0.20283.0</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-07-02T09:50:21.8257580Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-07-16T15:22:30.2736707Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -196,7 +196,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>BANKERS CHEQUE SLIP</Value>
+                    <Value>=First(Fields!SlipName.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>16pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -314,16 +314,21 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Bankers Cheque No: </Value>
+                    <Value>=First(Fields!ChequeNoNarration.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>=Fields!BankersChequeNo_Transactions.Value</Value>
+                    <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
-                      <Color>#018900</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!FinalChequeNo.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1080,6 +1085,15 @@ End Function
         </Field>
         <Field Name="ProductTypeDescription">
           <DataField>ProductTypeDescription</DataField>
+        </Field>
+        <Field Name="SlipName">
+          <DataField>SlipName</DataField>
+        </Field>
+        <Field Name="ChequeNoNarration">
+          <DataField>ChequeNoNarration</DataField>
+        </Field>
+        <Field Name="FinalChequeNo">
+          <DataField>FinalChequeNo</DataField>
         </Field>
         <Field Name="ReportForNavId_8541">
           <DataField>ReportForNavId_8541</DataField>

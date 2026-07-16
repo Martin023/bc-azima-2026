@@ -108,6 +108,7 @@ page 52185794 "Cashier Transactions"
                         DiscCH := false;
                         RCheque := false;
                         CLien := false;
+                        NormalChequeVisible := false;
 
                         if Rec.Type = Rec.Type::"Cheque Deposit" then begin
                             FChequeVisible := true;
@@ -120,7 +121,7 @@ page 52185794 "Cashier Transactions"
                         if rec.Type = rec.Type::"Cancel Bankers Cheque" then
                             BChequeVisible := true;
                         if rec.Type = rec.Type::"Cheque Withdrawal" then
-                            BChequeVisible := true;
+                            NormalChequeVisible := true;
 
                         if rec.Type = rec.Type::Lien then
                             CLien := true;
@@ -478,6 +479,68 @@ page 52185794 "Cashier Transactions"
                         Visible = BOSAReceiptChequeVisible;
                     }
                 }
+                group(NormCheque)
+                {
+                    Caption = 'Normal Cheque Information';
+                    Visible = NormalChequeVisible;
+                    field("Cheque Type2"; Rec."Cheque Type")
+                    {
+                        ApplicationArea = Basic;
+                        ShowMandatory = true;
+                        Caption = 'Cheque Type';
+
+                    }
+                    field(BchequeNo2; Rec."Cheque No")
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'Cheque No';
+                        ShowMandatory = true;
+
+                    }
+
+                    field(Payee2; Rec."Payee")
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'Payee';
+                        ShowMandatory = true;
+
+                    }
+                    field("Bank Accoun2"; Rec."Bank Account")
+                    {
+                        ApplicationArea = Basic;
+
+                        Caption = 'Bank';
+                        Visible = true;
+                        Editable = BankBankEdit;
+                    }
+                    field("Cheque Issueing Bank2"; Rec."Cheque Issueing Bank")
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'Cheque Issueing Bank';
+                    }
+                    field("Cheque Date2"; Rec."Cheque Date")
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'Cheque Date';
+                    }
+                    field("Cheque Status2"; Rec."Cheque Status")
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'Cheque Status';
+                        Editable = false;
+                    }
+                    field("Expected Maturity Date2"; Rec."Expected Maturity Date")
+                    {
+                        ApplicationArea = Basic;
+                        Editable = false;
+                        Caption = 'Expected Maturity Date';
+                    }
+                    group(BOSAReceiptChequ2)
+                    {
+                        Caption = '.';
+                        Visible = BOSAReceiptChequeVisible;
+                    }
+                }
                 field("Book Balance"; Rec."Book Balance")
                 {
                     ApplicationArea = Basic;
@@ -770,7 +833,7 @@ page 52185794 "Cashier Transactions"
                                         if rec.Type = rec.Type::"Credit Cheque" then
                                             REPORT.Run(Report::"CashierCredit Deposit Slip", true, true, Trans)
                                         else
-                                            if rec.Type = rec.Type::"Bankers Cheque" then
+                                            if (rec.Type = rec.Type::"Bankers Cheque") or (rec.Type = rec.Type::"Cheque Withdrawal") then
                                                 REPORT.Run(Report::"Bankers Cheque Slip", true, true, Trans)
 
                     end;
@@ -913,7 +976,7 @@ page 52185794 "Cashier Transactions"
                                         if rec.Type = rec.Type::"Credit Cheque" then
                                             REPORT.Run(Report::"CashierCredit Deposit Slip", true, true, Trans)
                                         else
-                                            if rec.Type = rec.Type::"Bankers Cheque" then
+                                            if (rec.Type = rec.Type::"Bankers Cheque") or (rec.Type = rec.Type::"Cheque Withdrawal") then
                                                 REPORT.Run(Report::"Bankers Cheque Slip", true, true, Trans)
 
                     end;
@@ -1341,6 +1404,7 @@ page 52185794 "Cashier Transactions"
         BOSAReceiptChequeVisible := false;
         AllAmount := false;
         DiscCH := false;
+        NormalChequeVisible := false;
 
 
         if Rec.Type = Rec.Type::"Cheque Deposit" then begin
@@ -1358,7 +1422,7 @@ page 52185794 "Cashier Transactions"
         if rec.Type = Rec.Type::"Cancel Bankers Cheque" then
             BChequeVisible := true;
         if rec.Type = Rec.Type::"Cheque Withdrawal" then
-            BChequeVisible := true;
+            NormalChequeVisible := true;
 
         if rec.Type = Rec.Type::Lien then
             CLien := true;
@@ -1539,6 +1603,8 @@ page 52185794 "Cashier Transactions"
         ReprintSlip: Boolean;
         MPESATYPEVisible: Boolean;
         BankCodeVisible : Boolean;
+
+        NormalChequeVisible: Boolean;
 
 
 

@@ -304,7 +304,7 @@ table 52185776 "Cashier Transactions"
             var
                 BankersCheque: Record "Bankers Cheques Register";
             begin
-                if Rec.type = rec.type::"Bankers Cheque" then begin
+                if (Rec.type = rec.type::"Bankers Cheque") then begin
                     BankersCheque.reset;
                     BankersCheque.SetCurrentKey("Cheque No.");
                     BankersCheque.SetAscending("Cheque No.", true);
@@ -316,6 +316,7 @@ table 52185776 "Cashier Transactions"
                         Error('No pending Bankers Cheque found for your branch. Kindly generate a new one.');
                 end else
                     rec."Bankers Cheque No" := '';
+
             end;
         }
         field(18; "Transaction Description"; Text[100])
