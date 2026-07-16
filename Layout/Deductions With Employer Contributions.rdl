@@ -521,7 +521,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Count(Fields!EmployeeCode.Value)</Value>
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
                                   </Style>
@@ -785,163 +785,10 @@
       <Width>21.38826cm</Width>
       <Page>
         <PageHeader>
-          <Height>3.12208cm</Height>
+          <Height>4.51555cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
-            <Image Name="CI_Picture1">
-              <Source>Database</Source>
-              <Value>=First(Fields!CI_Picture.Value, "DataSet_Result")</Value>
-              <MIMEType>image/bmp</MIMEType>
-              <Sizing>Fit</Sizing>
-              <Top>0.01372cm</Top>
-              <Left>0.28159cm</Left>
-              <Height>2.51256cm</Height>
-              <Width>3.01744cm</Width>
-              <Style>
-                <Border />
-              </Style>
-            </Image>
-            <Textbox Name="Textbox69">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=First(Fields!CI_Name.Value, "DataSet_Result")</Value>
-                      <Style>
-                        <FontFamily>Book Antiqua</FontFamily>
-                        <FontSize>7pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox49</rd:DefaultName>
-              <Top>0.0054in</Top>
-              <Left>0.00001in</Left>
-              <Height>0.15986in</Height>
-              <Width>7.84769in</Width>
-              <ZIndex>1</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox118">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=First(Fields!CI_Address.Value, "DataSet_Result")</Value>
-                      <Style>
-                        <FontFamily>Book Antiqua</FontFamily>
-                        <FontSize>7pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox49</rd:DefaultName>
-              <Top>0.16526in</Top>
-              <Left>0in</Left>
-              <Height>0.15986in</Height>
-              <Width>7.84769in</Width>
-              <ZIndex>2</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox119">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=First(Fields!CI_Address2.Value, "DataSet_Result") &amp; First(Fields!CI_City.Value, "DataSet_Result")</Value>
-                      <Style>
-                        <FontFamily>Book Antiqua</FontFamily>
-                        <FontSize>7pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox49</rd:DefaultName>
-              <Top>0.32512in</Top>
-              <Left>0.00001in</Left>
-              <Height>0.15986in</Height>
-              <Width>7.84769in</Width>
-              <ZIndex>3</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox120">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=First(Fields!CI_PhoneNo.Value, "DataSet_Result")</Value>
-                      <Style>
-                        <FontFamily>Book Antiqua</FontFamily>
-                        <FontSize>7pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox49</rd:DefaultName>
-              <Top>0.48498in</Top>
-              <Left>0in</Left>
-              <Height>0.15986in</Height>
-              <Width>7.84769in</Width>
-              <ZIndex>4</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
             <Textbox Name="Textbox7">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
@@ -962,11 +809,10 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox7</rd:DefaultName>
-              <Top>1.92628cm</Top>
-              <Left>0.28159cm</Left>
+              <Top>3.54906cm</Top>
+              <Left>0.4858cm</Left>
               <Height>0.6cm</Height>
-              <Width>19.65155cm</Width>
-              <ZIndex>5</ZIndex>
+              <Width>20.33802cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -977,6 +823,162 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
+            <Textbox Name="Textbox534">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CompanyInformation_Name.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontFamily>Book Antiqua</FontFamily>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox528</rd:DefaultName>
+              <Top>0.0052in</Top>
+              <Left>2.57054in</Left>
+              <Height>0.26042in</Height>
+              <Width>4.91355in</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox535">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CompanyAddress.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontFamily>Book Antiqua</FontFamily>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox528</rd:DefaultName>
+              <Top>0.2934in</Top>
+              <Left>2.57054in</Left>
+              <Height>0.24306in</Height>
+              <Width>4.91355in</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox536">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CompanyTelephone.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontFamily>Book Antiqua</FontFamily>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox528</rd:DefaultName>
+              <Top>0.56424in</Top>
+              <Left>2.57054in</Left>
+              <Height>0.23959in</Height>
+              <Width>4.91355in</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox537">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CommunicationOnline.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontFamily>Book Antiqua</FontFamily>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox528</rd:DefaultName>
+              <Top>0.85938in</Top>
+              <Left>2.57054in</Left>
+              <Height>0.2257in</Height>
+              <Width>4.91355in</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Image Name="CompanyLogo2">
+              <Source>Database</Source>
+              <Value>=First(Fields!CompanyInformation_Picture.Value, "DataSet_Result")</Value>
+              <MIMEType>image/jpeg</MIMEType>
+              <Sizing>FitProportional</Sizing>
+              <Top>0.0052in</Top>
+              <Left>0.19126in</Left>
+              <Height>1.23264in</Height>
+              <Width>2.37928in</Width>
+              <ZIndex>5</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Image>
           </ReportItems>
           <Style>
             <Border>
@@ -1068,100 +1070,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParameters>
-    <ReportParameter Name="CI_NameCaption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>CI_NameCaption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>CI_NameCaption</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="CI_AddressCaption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>CI_AddressCaption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>CI_AddressCaption</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="CI_Address2Caption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>CI_Address2Caption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>CI_Address2Caption</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="CI_PhoneNoCaption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>CI_PhoneNoCaption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>CI_PhoneNoCaption</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="CI_PictureCaption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>CI_PictureCaption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>CI_PictureCaption</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="CI_CityCaption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>CI_CityCaption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>CI_CityCaption</Prompt>
-    </ReportParameter>
-  </ReportParameters>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>1</NumberOfColumns>
-      <NumberOfRows>6</NumberOfRows>
-      <CellDefinitions>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>CI_NameCaption</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>1</RowIndex>
-          <ParameterName>CI_AddressCaption</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>2</RowIndex>
-          <ParameterName>CI_Address2Caption</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>3</RowIndex>
-          <ParameterName>CI_PhoneNoCaption</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>4</RowIndex>
-          <ParameterName>CI_PictureCaption</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>5</RowIndex>
-          <ParameterName>CI_CityCaption</ParameterName>
-        </CellDefinition>
-      </CellDefinitions>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -1234,23 +1142,20 @@ End Function
         <Field Name="TotalAmtFormat">
           <DataField>TotalAmtFormat</DataField>
         </Field>
-        <Field Name="CI_Name">
-          <DataField>CI_Name</DataField>
+        <Field Name="CompanyInformation_Name">
+          <DataField>CompanyInformation_Name</DataField>
         </Field>
-        <Field Name="CI_Address">
-          <DataField>CI_Address</DataField>
+        <Field Name="CompanyInformation_Picture">
+          <DataField>CompanyInformation_Picture</DataField>
         </Field>
-        <Field Name="CI_Address2">
-          <DataField>CI_Address2</DataField>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
         </Field>
-        <Field Name="CI_PhoneNo">
-          <DataField>CI_PhoneNo</DataField>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
         </Field>
-        <Field Name="CI_Picture">
-          <DataField>CI_Picture</DataField>
-        </Field>
-        <Field Name="CI_City">
-          <DataField>CI_City</DataField>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
         </Field>
       </Fields>
       <Query>

@@ -18,6 +18,7 @@ Codeunit 52185484 "Loan Appraisal Codeunit"
         TotalThreeMonthInterest: Decimal;
         TotalTopUp: Decimal;
         TotalLoanCommittment: Decimal;
+        Toups: record "Loans Top up";
     begin
 
         Deductions := 0;
@@ -44,7 +45,11 @@ Codeunit 52185484 "Loan Appraisal Codeunit"
                 if Loans.Find('-') then begin
                     repeat
                         TotalLoanBalance += Loans."Total Loan Balance";
-                        TotalThreeMonthInterest += (Loans."Outstanding Balance" * 3 * (Loans."Interest" / 12 * 0.01));
+                        Toups.reset;
+                        Toups.setrange("Loan No.", LoanNo);
+                        Toups.SetRange("Loan Top Up", Loans."Loan No.");
+                        if not Toups.IsEmpty() then
+                            TotalThreeMonthInterest += (Loans."Outstanding Balance" * 3 * (Loans."Interest" / 12 * 0.01));
                     until Loans.Next() = 0;
                 end;
                 //Message('Total Loan Balance: %1, Total Three Month Interest: %2', TotalLoanBalance, TotalThreeMonthInterest);
@@ -52,7 +57,7 @@ Codeunit 52185484 "Loan Appraisal Codeunit"
                 //Message('Total Loan Committment: %1', TotalLoanCommittment);
             end;
             Deductions := TotalLoanCommittment + GenSetup."Withdrawal Fee" + GetTotalGuaranteedAmt(Accno);
-           // Message('Deductions: %1, Available Balance: %2', Deductions, SavBal);
+            // Message('Deductions: %1, Available Balance: %2', Deductions, SavBal);
             //Deductions := (GenSetup."Self Guarantee %" * 0.01 * SavBal * 3) + GenSetup."Withdrawal Fee" + GetTotalSelfGuarantee(Accno) + GetTotalGuaranteedAmt(Accno);
             //Deductions := 
             //(90 * 0.01 *1,158,790.42 * 3) +  3000 + 53,857.00 + 53,857.00 = 1,059,790.42

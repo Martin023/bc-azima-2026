@@ -153,7 +153,7 @@ page 52185804 "Treasury Cashier Transactions"
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
-                
+
                 field(Type; Rec.Type)
                 {
                     ApplicationArea = Basic, Suite;
@@ -536,13 +536,16 @@ page 52185804 "Treasury Cashier Transactions"
                         end;
 
                         if rec."Transaction Type" = rec."Transaction Type"::"End of Day Return to Treasury" then begin
-                            TCTransactions.reset;
-                            TCTransactions.setrange("Transaction Type", TCTransactions."Transaction Type"::"End of Day Return to Treasury");
+                            TCTransactions.Reset();
+                            TCTransactions.SetRange("Transaction Type", TCTransactions."Transaction Type"::"End of Day Return to Treasury");
                             TCTransactions.SetRange(Issued, TCTransactions.Issued::Yes);
                             TCTransactions.SetRange(Received, TCTransactions.Received::No);
-                            if TCTransactions.Find('-') then begin
-                                Error('You already have a pending EOD return to treasury request. kindly close that one first before proceeding');
-                            end;
+                            TCTransactions.SetRange("From Account", rec."From Account");
+
+                            // exclude current record
+                            // TCTransactions.SetFilter("No", '<>%1', Rec.No);
+                            if not TCTransactions.IsEmpty() then
+                                Error('You already have a pending EOD return to treasury request. Kindly close that one first before proceeding.');
                         end;
 
                         VarVariant := Rec;

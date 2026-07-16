@@ -157,85 +157,80 @@ page 52185973 "Mid Year Review"
         HeaderRec: Record "HR Individual Targets Header";
 
     local procedure FnEdittableUnedittable()
+    var
+        IsAppraisee: Boolean;
+        IsSupervisor: Boolean;
     begin
         if HeaderRec.Get(Rec."Appraisal No") then;
 
-        if (HeaderRec."Appraisal Cycle Stage" = HeaderRec."Appraisal Cycle Stage"::"Target Setting") then begin
+        IsAppraisee := (UserId = HeaderRec."User ID");
+        IsSupervisor := (UserId = HeaderRec."Supervisor ID");
+
+        // TARGET SETTING STAGE - Only editable when Status = Open
+        if (HeaderRec."Appraisal Cycle Stage" = HeaderRec."Appraisal Cycle Stage"::"Target Setting") and (HeaderRec.Status = HeaderRec.Status::Open) then begin
             TargetSettingStatus := true;
             AppraisalStatus := false;
             SupervisorRating := false;
             AgreedRating := false;
             SelfRating := false;
+            BaselineScore := false;
+            ChangeScore := false;
 
         end else
+            // EVALUATION REVIEW STAGE
             if (HeaderRec."Appraisal Cycle Stage" = HeaderRec."Appraisal Cycle Stage"::"Evaluation Review") then begin
                 TargetSettingStatus := false;
-                AppraisalStatus := false;
-                SupervisorRating := true;
-                AgreedRating := false;
-                SelfRating := true;
                 BaselineScore := false;
                 ChangeScore := false;
+                AppraisalStatus := false;
+
+                // Status = Open: Employee can edit Self Rating
+                if HeaderRec.Status = HeaderRec.Status::Open then begin
+                    SelfRating := IsAppraisee;
+                    SupervisorRating := false;
+                    AgreedRating := false;
+                end else
+                    // Status = Pending Approval or Discussed: Supervisor can edit Supervisor Rating and Achieved Score
+                    if HeaderRec.Status in [HeaderRec.Status::"Pending Approval", HeaderRec.Status::Discussed] then begin
+                        SelfRating := false;
+                        SupervisorRating := IsSupervisor;
+                        AgreedRating := false;
+                        AppraisalStatus := IsSupervisor; // Achieved Score
+                    end else begin
+                        // Status = Approved or Posted: All locked
+                        SelfRating := false;
+                        SupervisorRating := false;
+                        AgreedRating := false;
+                    end;
+
             end else
+                // YEAR-END REVIEW STAGE
                 if (HeaderRec."Appraisal Cycle Stage" = HeaderRec."Appraisal Cycle Stage"::"Year-End Review") then begin
                     TargetSettingStatus := false;
-                    AppraisalStatus := true;
-                    SupervisorRating := true;
-                    AgreedRating := true;
-                    SelfRating := true;
                     BaselineScore := false;
                     ChangeScore := false;
+
+                    // Status = Open: Employee can edit Self Rating
+                    if HeaderRec.Status = HeaderRec.Status::Open then begin
+                        SelfRating := IsAppraisee;
+                        SupervisorRating := false;
+                        AgreedRating := false;
+                        AppraisalStatus := false;
+                    end else
+                        // Status = Pending Approval or Discussed: Supervisor can edit all rating fields
+                        if HeaderRec.Status in [HeaderRec.Status::"Pending Approval", HeaderRec.Status::Discussed] then begin
+                            SelfRating := false;
+                            SupervisorRating := IsSupervisor;
+                            AgreedRating := IsSupervisor;
+                            AppraisalStatus := IsSupervisor; // Achieved Score
+                        end else begin
+                            // Status = Approved or Posted: All locked
+                            SelfRating := false;
+                            SupervisorRating := false;
+                            AgreedRating := false;
+                            AppraisalStatus := false;
+                        end;
                 end;
-
-
-        /*
-         IF ("Appraisal Type"="Appraisal Type"::"Appraisal Review") AND (Status=Status::Open) THEN BEGIN
-         TargetSettingStatus:=TRUE;
-         AppraisalStatus:=FALSE;
-         SupervisorRating:=FALSE;
-         AgreedRating:=FALSE;
-         SelfRating:=FALSE;
-         END ELSE
-         IF ("Appraisal Type"="Appraisal Type"::"Appraisal Review") AND (Status<>Status::Open) THEN BEGIN
-         TargetSettingStatus:=FALSE;
-         AppraisalStatus:=FALSE;
-         SupervisorRating:=FALSE;
-         AgreedRating:=FALSE;
-         SelfRating:=FALSE;
-         END ELSE
-         IF (("Appraisal Type"="Appraisal Type"::"Target Setting") OR ("Appraisal Type"="Appraisal Type"::"End Year Appraisal"))
-          AND (Status=Status::Open) THEN BEGIN
-         TargetSettingStatus:=FALSE;
-         AppraisalStatus:=TRUE;
-         SupervisorRating:=FALSE;
-         AgreedRating:=FALSE;
-         SelfRating:=TRUE;
-         END ELSE
-         IF (("Appraisal Type"="Appraisal Type"::"Target Setting") OR ("Appraisal Type"="Appraisal Type"::"End Year Appraisal"))
-         AND (Status=Status::"Pending Approval") THEN BEGIN
-         TargetSettingStatus:=FALSE;
-         AppraisalStatus:=FALSE;
-         SupervisorRating:=TRUE;
-         AgreedRating:=TRUE;
-         SelfRating:=FALSE;
-         END ELSE
-         IF (("Appraisal Type"="Appraisal Type"::"Target Setting") OR ("Appraisal Type"="Appraisal Type"::"End Year Appraisal"))
-         AND (Status=Status::Approved) THEN BEGIN
-         TargetSettingStatus:=FALSE;
-         AppraisalStatus:=FALSE;
-         SupervisorRating:=FALSE;
-         AgreedRating:=FALSE;
-         SelfRating:=FALSE;
-         END;
-         IF (Status=Status::Posted) THEN BEGIN
-         TargetSettingStatus:=FALSE;
-         AppraisalStatus:=FALSE;
-         SupervisorRating:=FALSE;
-         AgreedRating:=FALSE;
-         SelfRating:=FALSE;
-         END
-        */
-
     end;
 }
 

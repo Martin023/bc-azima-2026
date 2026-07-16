@@ -252,9 +252,9 @@ table 52185690 "Product Factory"
             Caption = 'One Month Interest Charge G/L';
             TableRelation = "G/L Account"."No.";
         }
-        field(50; "Penalty Calculation Method"; Option)
+        field(50; "Exclude One Month Interest"; Boolean)
         {
-            OptionMembers = "No Penalty","Principal in Arrears","Principal in Arrears+Interest in Arrears","Principal in Arrears+Interest in Arrears+Penalty in Arrears";
+            //OptionMembers = "No Penalty","Principal in Arrears","Principal in Arrears+Interest in Arrears","Principal in Arrears+Interest in Arrears+Penalty in Arrears";
         }
         field(51; "Penalty Paid Account"; Code[15])
         {

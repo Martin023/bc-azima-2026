@@ -409,6 +409,10 @@ page 52185712 "Product Factory"
                     ApplicationArea = Basic, Suite;
 
                 }
+                field("Exclude One Month Interest"; rec."Exclude One Month Interest")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("One Month Interest G/L"; Rec."One Month Interest G/L")
                 {
                     ApplicationArea = Basic, Suite;

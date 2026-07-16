@@ -72,7 +72,7 @@ report 52185825 "Exit Clearance"
             column(ExitInterviewNo; "Exit Interview No")
             {
             }
-            column(Closed; Closed)
+            column(Closed; ClosedText)
             {
             }
             column(CompanyInformation_Name; CompanyInformation.Name)
@@ -94,7 +94,7 @@ report 52185825 "Exit Clearance"
             {
 
             }
-            column(Gender; Gender)
+            column(Gender; GenderText)
             {
 
             }
@@ -106,14 +106,27 @@ report 52185825 "Exit Clearance"
             begin
                 Age := 0;
                 Grade := '';
+                GenderText := '';
+                ClosedText := '';
+                
                 Hremp.Reset();
                 Hremp.SetRange("No.", hremployeeexitInterviews."Employee No.");
                 if HrEmp.find('-') then begin
                     Age := Hremp.Age;
-                    Gender := Hremp.Gender;
                     Grade := HrEmp."Salary Grade";
-
+                    
+                    case Hremp.Gender of
+                        Hremp.Gender::Male:
+                            GenderText := 'Male';
+                        Hremp.Gender::Female:
+                            GenderText := 'Female';
+                    end;
                 end;
+                
+                if hremployeeexitInterviews.Closed then
+                    ClosedText := 'Yes'
+                else
+                    ClosedText := 'No';
             end;
         }
     }
@@ -152,8 +165,9 @@ report 52185825 "Exit Clearance"
         CompanyTelephone: Text;
         CommunicationOnline: Text;
         HrEmp: record "HR Employees";
-        Gender: option Male,Female;
+        GenderText: Text[10];
         Age: Integer;
         Grade: code[40];
+        ClosedText: Text[3];
 
 }

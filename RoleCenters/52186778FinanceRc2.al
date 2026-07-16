@@ -31,6 +31,7 @@ using Microsoft.Finance.Dimension;
 using Microsoft.Finance.FinancialReports;
 using Microsoft.Finance.GeneralLedger.Account;
 using Microsoft.Finance.GeneralLedger.Budget;
+using AzimaBC.AzimaBC;
 using Microsoft.Finance.GeneralLedger.Journal;
 using azima.azima;
 using Microsoft.Finance.GeneralLedger.Ledger;
@@ -4996,7 +4997,12 @@ page 52186778 "Finance Role Center"
                 group("PR Reports")
                 {
                     Caption = 'Reports';
-
+                    action("Master Payroll Report")
+                    {
+                        RunObject = Report "Master Payroll Report";
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Master Payroll Report';
+                    }
                     action("Pr Variance Report")
                     {
                         Caption = 'PR Monthly Variance';
@@ -5021,6 +5027,18 @@ page 52186778 "Finance Role Center"
                         Caption = 'PR NSSF report';
                         RunObject = report prNSSF;
                         ApplicationArea = Basic, Suite;
+                    }
+                    action("NSSF Tier II")
+                    {
+                        Caption = 'NSSF Tier II';
+                        RunObject = report "NSSF Tier II";
+                        ApplicationArea = Basic, Suite;
+                    }
+                    action("Deductions With Employer Contr")
+                    {
+                        RunObject = Report "Deductions With Employer Contr";
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Deductions With Employer Contr';
                     }
                     action("prDeductions Report")
                     {
@@ -6481,6 +6499,47 @@ page 52186778 "Finance Role Center"
                     ApplicationArea = Basic, Suite;
                     RunObject = page "HR Leave Applications List1";
 
+                }
+                action("Training Need Request")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Training Need Request';
+                    RunObject = page "HR Training Need Request List";
+                }
+                // HIDDEN: OLD 360 APPRAISAL - USE "MY ASSIGNED TARGETS" INSTEAD
+                // action("Appraisal")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'My Appraisals';
+                //     RunObject = page "HR 360 Appraisals List - TS1";
+                // }
+                action("My Individual Appraisals ESS")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'My Individual Appraisals';
+                    RunObject = page "My Individual Appraisals List";
+                    ToolTip = 'View and manage my performance appraisals';
+                }
+                action("My Team Appraisals ESS")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'My Team Appraisals (Supervisor)';
+                    RunObject = page "Supervisor Appraisals List";
+                    ToolTip = 'View and review appraisals for employees I supervise';
+                }
+                action("My Assigned Targets ESS")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'My Assigned Targets';
+                    RunObject = page "My Assigned Targets";
+                    ToolTip = 'View targets assigned to me by my HOD';
+                }
+                action("My Department Targets (HOD)")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'My Department Targets (HOD)';
+                    RunObject = page "HRHOD Department Targets";
+                    ToolTip = 'Set and manage targets for my department (HOD only)';
                 }
                 // action("Overtime Claim List")
                 // {
