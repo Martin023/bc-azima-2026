@@ -2269,7 +2269,11 @@ codeunit 52186512 "Sky M-Banking Transactions"
         MobileLoanBuffer."Member No." := MemberNo;
         MobileLoanBuffer."Loan Product Type" := LoanProductID;
         MobileLoanBuffer.Amount := RequestedAmount;
-        MobileLoanBuffer."Approved Amount" := RequestedAmount + ExistingFOSAMLoanAmount;
+        /*
+         Top-up: Approved Amount is the requested amount only - "Loans Top up" clears the existing balance separately. Confirmed by Paul.
+        */
+        // MobileLoanBuffer."Approved Amount" := RequestedAmount + ExistingFOSAMLoanAmount;
+        MobileLoanBuffer."Approved Amount" := RequestedAmount;
         MobileLoanBuffer."Session ID" := SourceReference;
         MobileLoanBuffer.Status := MobileLoanBuffer.Status::Approved;
         MobileLoanBuffer.Posted := false;
@@ -3578,6 +3582,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
             end;
 
             if SaccoTrans.PostJournal(Template, Batch) then begin
+                // Refresh: PostLoanNormal already modified this record.
+                Loans.Get(LoanNo);
                 Loans.Posted := true;
                 Loans.Modify;
                 exit(true);
@@ -3586,6 +3592,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
                 GLEntry.SetRange("Document No.", DocNo);
                 GLEntry.SetLoadFields("Entry No.");
                 if GLEntry.FindFirst then begin
+                    Loans.Get(LoanNo);
                     Loans.Posted := true;
                     Loans.Modify;
                     exit(true);

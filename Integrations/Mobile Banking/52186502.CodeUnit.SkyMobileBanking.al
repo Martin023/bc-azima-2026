@@ -4077,6 +4077,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         SavingsAccounts: Record "Savings Accounts";
         LoanApplicant: Record Members;
         HasChargeType: Boolean;
+        GlobalFunctions: Codeunit "Global Functions";
 
         // IFT
         TheSourceMember: Record Members;
@@ -4239,7 +4240,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                 SearchMember.SetLoadFields(
                                                     "Phone No.", "Transactional Mobile Number"
                                                 );
-                                                if SearchMember.FindFirst then begin
+                                                if SearchMember.FindFirst and (not GlobalFunctions.SkipApiMsg()) then begin
                                                     if SearchMember."Phone No." <> '' then begin
                                                         SkySMS.SendSms(
                                                             SMSSource::LOAN_APPLICATION,
@@ -4439,10 +4440,21 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                 if (Loan.Interest <> 0) and (Loan.Installments <> 0) then
                                                     DisbursementInterestAmt := SkyMbankingTrans.CalculateUpfrontInterest(Loan."Loan No.");
 
+                                                // NetDisbursedAmount := MobileLoanBuffer."Approved Amount";
+                                                // LoansToBeCleared.Reset;
+                                                // LoansToBeCleared.SetRange("Loan No.", MobileLoanBuffer."Loan No.");
+                                                // LoansToBeCleared.SetLoadFields("Principle Top Up", "Interest Top Up");
+                                                // if LoansToBeCleared.FindSet then begin
+                                                //     repeat
+                                                //         NetDisbursedAmount -= (LoansToBeCleared."Principle Top Up" + LoansToBeCleared."Interest Top Up");
+                                                //     until LoansToBeCleared.Next = 0;
+                                                // end;
+
                                                 theSMS := 'Dear ' + LoanApplicant."First Name" + ', Your ' +
                                                 Loan."Loan Product Type Name" +
                                                 ' has been disbursed, principal of Kshs ' +
                                                 Format(MobileLoanBuffer."Approved Amount", 0, '<Precision,2:2><Standard Format,0>') +
+                                                // Format(NetDisbursedAmount, 0, '<Precision,2:2><Standard Format,0>') +
                                                 ' and interest of Kshs ' +
                                                 Format(DisbursementInterestAmt, 0, '<Precision,2:2><Standard Format,0>') +
                                                 '. You can now withdraw from your account. Thank you';
