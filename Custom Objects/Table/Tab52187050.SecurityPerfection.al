@@ -558,7 +558,7 @@ table 52187050 "Security Perfection"
                     PerfectionLines."Loan Name" := SecurityRegister."Loan Name";
                     PerfectionLines."Security No." := SecurityRegister."No.";
                     PerfectionLines."Property No." := SecurityRegister."Collateral Ref No.";
-                    PerfectionLines."Collateral Value Sum" := SecurityRegister."Collateral Value";
+                    PerfectionLines."Collateral Value Sum" := SecurityRegister."Total Market Value";
                     PerfectionLines."Spousal Consent" := SecurityRegister."Spousal Consent";
                     PerfectionLines."Land Control Board Consent" := SecurityRegister."Land Control Board Consent";
                     PerfectionLines."Fees Payable to the firm" := SecurityRegister."Fees Payable to the Firm";
