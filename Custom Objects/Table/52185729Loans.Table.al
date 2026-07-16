@@ -732,10 +732,10 @@ table 52185729 Loans
                 IF ShareCapAcc.FIND('-') THEN BEGIN
                     if SavProducts.Get(ShareCapAcc."Product Type") then begin
                         ShareCapAcc.CALCFIELDS(ShareCapAcc."Balance (LCY)");
-                        IF ShareCapAcc."Balance (LCY)" < SavProducts."Minimum Balance" THEN begin
+                        IF ShareCapAcc."Balance (LCY)" < SavProducts."Minimum Contribution" THEN begin
                             if not "Mobile Loan" then begin
                                 MESSAGE('Member no. %1 has share capital of %2 and minimum required share capital is %3 This will be boosted on the loan.', LoanApp."Member No.", ShareCapAcc."Balance (LCY)", SavProducts."Minimum Balance");
-                                "Share Boosted Amount" := SavProducts."Minimum Balance" - ShareCapAcc."Balance (LCY)";
+                                "Share Boosted Amount" := SavProducts."Minimum Contribution" - ShareCapAcc."Balance (LCY)";
                             end;
                         end;
                     end;
@@ -3987,7 +3987,7 @@ table 52185729 Loans
                                 Guarantors.Init;
                                 Guarantors."Loan No" := "Loan No.";
                                 Guarantors.Name := GroupMembers.Name;
-                                Guarantors."Loan Group" := rec."Loan Group"::"Group Loan";
+                                Guarantors."Loan Groups" := rec."Loan Group"::"Group Loan";
                                 Guarantors."Staff/Payroll No." := GroupMembers."Payroll/Staff No.";
                                 Guarantors."Phone No." := GroupMembers."Phone No.";
                                 Guarantors."ID No." := GroupMembers."Primary Identification";
@@ -3995,6 +3995,8 @@ table 52185729 Loans
                                 Guarantors."Savings Account No./Member No." := BusinesDepositsAcc."No.";
                                 Guarantors."Guarantor Type" := Guarantors."Guarantor Type"::Guarantor;
                                 Guarantors.Insert;
+
+                                Guarantors.validate("Savings Account No./Member No.");
                             end;
                         end;
                     until GroupMembers.Next() = 0;
