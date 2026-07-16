@@ -5309,26 +5309,25 @@ codeunit 52186507 "Members Portal Integration"
         identifier_type: JsonToken;
         identifier: JsonToken;
         leave_type: JsonToken;
-        days_applied: JsonToken;
         start_date: JsonToken;
+        end_date: JsonToken;
         reliever: JsonToken;
+        is_morning_half_day: JsonToken;
+        is_afternoon_half_day: JsonToken;
 
         SearchMember: record Members;
         Employee: record "HR Employees";
         theLeaveApplication: Record "HR Leave Application";
         HRSetup: Record "HR Setup";
-        // NoSeriesMgt: Codeunit NoSeriesManagement;
         NoSeriesMgt: Codeunit "No. Series";
         VarVariant: Variant;
         CustomApprovals: Codeunit "Custom Approvals Codeunit";
 
-        StartDate: Date;
-        DaysApplied: Decimal;
-        ReturnDate: Date;
         EndDate: Date;
+        MorningHalfDay: Boolean;
+        AfternoonHalfDay: Boolean;
 
         ResponseObject: JsonObject;
-        Data: JsonArray;
         Datum: JsonObject;
         Response: Text;
         ResponseText: Text;
@@ -5338,8 +5337,14 @@ codeunit 52186507 "Members Portal Integration"
         Payload.Get('identifier', identifier);
         Payload.Get('leave_type', leave_type);
         Payload.Get('start_date', start_date);
-        Payload.Get('days_applied', days_applied);
+        Payload.Get('end_date', end_date);
         Payload.Get('reliever', reliever);
+        if Payload.Get('is_morning_half_day', is_morning_half_day) then
+            MorningHalfDay := is_morning_half_day.AsValue.AsBoolean;
+        if Payload.Get('is_afternoon_half_day', is_afternoon_half_day) then
+            AfternoonHalfDay := is_afternoon_half_day.AsValue.AsBoolean;
+
+        Evaluate(EndDate, end_date.AsValue.AsText);
 
         if MemberExists(identifier_type.AsValue.AsText, identifier.AsValue.AsText, SearchMember, ResponseText, ResponseDescription) then begin
             if not IsMemberAStaff(SearchMember) then begin
@@ -5355,7 +5360,6 @@ codeunit 52186507 "Members Portal Integration"
                 HRSetup.Get;
                 HRSetup.TestField(HRSetup."Leave Application Nos.");
                 theLeaveApplication."Application Code" := NoSeriesMgt.GetNextNo(HRSetup."Leave Application Nos.");
-                // NoSeriesMgt.InitSeries(HRSetup."Leave Application Nos.", '', 0D, theLeaveApplication."Application Code", theLeaveApplication."No series");
 
                 theLeaveApplication."Source of Application" := theLeaveApplication."Source of Application"::"Staff Portal";
                 theLeaveApplication."Applicant Staff No." := Employee."No.";
@@ -5363,13 +5367,13 @@ codeunit 52186507 "Members Portal Integration"
 
                 theLeaveApplication."Leave Type" := leave_type.AsValue.AsText;
                 theLeaveApplication.Validate("Leave Type");
+                PopulateLeaveBalance(theLeaveApplication);
+
                 theLeaveApplication."Start Date" := start_date.AsValue.AsDate;
                 theLeaveApplication.Validate("Start Date");
 
-                StartDate := theLeaveApplication."Start Date";
-                Evaluate(DaysApplied, days_applied.AsValue.AsText);
-                ReturnDate := theLeaveApplication.DetermineLeaveReturnDate(StartDate, DaysApplied);
-                EndDate := theLeaveApplication.DeterminethisLeaveEndDate(ReturnDate);
+                theLeaveApplication."Is Morning Half Day" := MorningHalfDay;
+                theLeaveApplication."Is Afternoon Half Day" := AfternoonHalfDay;
 
                 theLeaveApplication."End Date" := EndDate;
                 theLeaveApplication.Validate("End Date");
@@ -5378,12 +5382,8 @@ codeunit 52186507 "Members Portal Integration"
                 theLeaveApplication."Global Dimension 2 Code" := Employee."Global Dimension 2 Code";
                 theLeaveApplication.Validate(Reliever);
 
-                // theLeaveApplication.Status := theLeaveApplication.Status::"Pending Approval";
-                // theLeaveApplication.Validate(Status);
-
                 if theLeaveApplication.Insert(true) then begin
                     VarVariant := theLeaveApplication;
-                    // if CustomApprovals.CheckApprovalsWorkflowEnabled(VarVariant) then
                     CustomApprovals.OnSendDocForApproval(VarVariant);
 
                     Datum.Add('application_no', theLeaveApplication."Application Code");
@@ -5548,18 +5548,68 @@ codeunit 52186507 "Members Portal Integration"
         exit(Response);
     end;
 
+    local procedure PopulateLeaveBalance(var TheLeaveApplication: Record "HR Leave Application")
+    var
+        HREmp: Record "HR Employees";
+        HRLeaveCal: Record "HR Leave Calendar";
+        HRLeaveLedgerEntries: Record "HR Leave Ledger Entries";
+    begin
+        if not HREmp.Get(TheLeaveApplication."Applicant Staff No.") then
+            exit;
+
+        HRLeaveCal.Reset();
+        HRLeaveCal.SetRange("Current Leave Calendar", true);
+        if not HRLeaveCal.FindFirst() then
+            Error('Leave Calendar not setup');
+
+        HRLeaveLedgerEntries.Reset();
+        HRLeaveLedgerEntries.SetRange("Staff No.", TheLeaveApplication."Applicant Staff No.");
+        HRLeaveLedgerEntries.SetRange("Leave Entry Type", HRLeaveLedgerEntries."Leave Entry Type"::Reimbursement);
+        HRLeaveLedgerEntries.SetRange("Leave Calendar Code", HRLeaveCal."Calendar Code");
+        HRLeaveLedgerEntries.SetRange("Leave Type", TheLeaveApplication."Leave Type");
+        HRLeaveLedgerEntries.CalcSums("No. of days");
+        TheLeaveApplication."Days Reimbursed" := HRLeaveLedgerEntries."No. of days";
+
+        HRLeaveLedgerEntries.Reset();
+        HRLeaveLedgerEntries.SetRange("Staff No.", TheLeaveApplication."Applicant Staff No.");
+        HRLeaveLedgerEntries.SetRange("Leave Entry Type", HRLeaveLedgerEntries."Leave Entry Type"::Negative);
+        HRLeaveLedgerEntries.SetRange("Leave Calendar Code", HRLeaveCal."Calendar Code");
+        HRLeaveLedgerEntries.SetRange("Leave Type", TheLeaveApplication."Leave Type");
+        HRLeaveLedgerEntries.CalcSums("No. of days");
+        TheLeaveApplication."Total Leave Taken" := HRLeaveLedgerEntries."No. of days";
+
+        HRLeaveLedgerEntries.Reset();
+        HRLeaveLedgerEntries.SetRange("Staff No.", TheLeaveApplication."Applicant Staff No.");
+        HRLeaveLedgerEntries.SetRange("Leave Entry Type", HRLeaveLedgerEntries."Leave Entry Type"::Positive);
+        HRLeaveLedgerEntries.SetRange("Leave Calendar Code", HRLeaveCal."Calendar Code");
+        HRLeaveLedgerEntries.SetRange("Leave Type", TheLeaveApplication."Leave Type");
+        HRLeaveLedgerEntries.CalcSums("No. of days");
+        TheLeaveApplication."Allocated Leave Days" := HRLeaveLedgerEntries."No. of days";
+
+        HRLeaveLedgerEntries.Reset();
+        HRLeaveLedgerEntries.SetRange("Staff No.", TheLeaveApplication."Applicant Staff No.");
+        HRLeaveLedgerEntries.SetRange("Leave Calendar Code", HRLeaveCal."Calendar Code");
+        HRLeaveLedgerEntries.SetRange("Leave Type", TheLeaveApplication."Leave Type");
+        HRLeaveLedgerEntries.CalcSums("No. of days");
+        TheLeaveApplication."Leave Days Balance" := HRLeaveLedgerEntries."No. of days";
+
+        TheLeaveApplication."Total Leave Days" := TheLeaveApplication."Allocated Leave Days" + TheLeaveApplication."Days Reimbursed";
+    end;
+
     local procedure GetStaffLeaveCalculationRequest(Payload: JsonObject): Text
     var
         identifier_type: JsonToken;
         identifier: JsonToken;
         leave_type_code: JsonToken;
         start_date: JsonToken;
-        days_applied: JsonToken;
+        end_date: JsonToken;
+        is_morning_half_day: JsonToken;
+        is_afternoon_half_day: JsonToken;
 
         StartDate: Date;
         EndDate: Date;
-        ReturnDate: Date;
-        DaysApplied: Decimal;
+        MorningHalfDay: Boolean;
+        AfternoonHalfDay: Boolean;
 
         SearchMember: record Members;
         Employee: record "HR Employees";
@@ -5575,7 +5625,14 @@ codeunit 52186507 "Members Portal Integration"
         Payload.Get('identifier', identifier);
         Payload.Get('leave_type_code', leave_type_code);
         Payload.Get('start_date', start_date);
-        Payload.Get('days_applied', days_applied);
+        Payload.Get('end_date', end_date);
+        if Payload.Get('is_morning_half_day', is_morning_half_day) then
+            MorningHalfDay := is_morning_half_day.AsValue.AsBoolean;
+        if Payload.Get('is_afternoon_half_day', is_afternoon_half_day) then
+            AfternoonHalfDay := is_afternoon_half_day.AsValue.AsBoolean;
+
+        Evaluate(StartDate, start_date.AsValue.AsText);
+        Evaluate(EndDate, end_date.AsValue.AsText);
 
         if MemberExists(identifier_type.AsValue.AsText, identifier.AsValue.AsText, SearchMember, ResponseText, ResponseDescription) then begin
             if not IsMemberAStaff(SearchMember) then begin
@@ -5586,32 +5643,30 @@ codeunit 52186507 "Members Portal Integration"
                 Employee.SetRange("Member No.", SearchMember."No.");
                 Employee.FindFirst;
 
-                Evaluate(StartDate, start_date.AsValue.AsText);
+                TheLeaveApplication."Applicant Staff No." := Employee."No.";
+                TheLeaveApplication.Validate("Applicant Staff No.");
+
                 TheLeaveApplication."Leave Type" := leave_type_code.AsValue.AsText;
+                PopulateLeaveBalance(TheLeaveApplication);
 
-                if TheLeaveApplication.DetermineIfIsNonWorking(StartDate) then begin
-                    ResponseObject.Add('status', 'ERROR');
-                    ResponseObject.Add('status_description', 'The leave start date MUST be a working day.');
-                end else begin
-                    DaysApplied := days_applied.AsValue.AsDecimal;
-                    ReturnDate := TheLeaveApplication.DetermineLeaveReturnDate(StartDate, DaysApplied);
-                    EndDate := TheLeaveApplication.DeterminethisLeaveEndDate(ReturnDate);
+                TheLeaveApplication."Start Date" := StartDate;
+                TheLeaveApplication.Validate("Start Date");
 
-                    // if Date2DMY(Today, 3) < Date2DMY(ReturnDate, 3) then begin
-                    //     ResponseObject.Add('status', 'ERROR');
-                    //     ResponseObject.Add('status_description', 'Leave application must be done within the current year ' + Format(Date2DMY(Today, 3)));
-                    // end else begin
-                    Datum.Add('leave_type_code', leave_type_code);
-                    Datum.Add('start_date', start_date);
-                    Datum.Add('days_applied', days_applied);
-                    Datum.Add('end_date', GlobalFunctions.FormatISODate(EndDate));
-                    Datum.Add('return_date', GlobalFunctions.FormatISODate(ReturnDate));
+                TheLeaveApplication."Is Morning Half Day" := MorningHalfDay;
+                TheLeaveApplication."Is Afternoon Half Day" := AfternoonHalfDay;
 
-                    ResponseObject.Add('status', 'SUCCESS');
-                    ResponseObject.Add('status_description', 'Request is successful');
-                    ResponseObject.Add('data', Datum);
-                    // end;
-                end;
+                TheLeaveApplication."End Date" := EndDate;
+                TheLeaveApplication.Validate("End Date");
+
+                Datum.Add('leave_type_code', leave_type_code);
+                Datum.Add('start_date', start_date);
+                Datum.Add('days_applied', TheLeaveApplication."Days Applied");
+                Datum.Add('end_date', GlobalFunctions.FormatISODate(TheLeaveApplication."End Date"));
+                Datum.Add('return_date', GlobalFunctions.FormatISODate(TheLeaveApplication."Return Date"));
+
+                ResponseObject.Add('status', 'SUCCESS');
+                ResponseObject.Add('status_description', 'Request is successful');
+                ResponseObject.Add('data', Datum);
             end;
         end else begin
             ResponseObject.Add('status', ResponseText);
