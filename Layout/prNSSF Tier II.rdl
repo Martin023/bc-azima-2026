@@ -11,70 +11,6 @@
       <rd:DataSourceID>ec96a041-3bc8-4a13-8fea-e9f5e45a7319</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="CI_Name">
-          <DataField>CI_Name</DataField>
-        </Field>
-        <Field Name="CI_Address">
-          <DataField>CI_Address</DataField>
-        </Field>
-        <Field Name="CI_Address2">
-          <DataField>CI_Address2</DataField>
-        </Field>
-        <Field Name="CI_PhoneNo">
-          <DataField>CI_PhoneNo</DataField>
-        </Field>
-        <Field Name="CI_Picture">
-          <DataField>CI_Picture</DataField>
-        </Field>
-        <Field Name="CI_City">
-          <DataField>CI_City</DataField>
-        </Field>
-        <Field Name="USERID">
-          <DataField>USERID</DataField>
-        </Field>
-        <Field Name="TODAY">
-          <DataField>TODAY</DataField>
-        </Field>
-        <Field Name="PeriodName">
-          <DataField>PeriodName</DataField>
-        </Field>
-        <Field Name="CompanyInfo_Picture">
-          <DataField>CompanyInfo_Picture</DataField>
-        </Field>
-        <Field Name="tier1Cont">
-          <DataField>tier1Cont</DataField>
-        </Field>
-        <Field Name="tier1ContFormat">
-          <DataField>tier1ContFormat</DataField>
-        </Field>
-        <Field Name="tier2Cont">
-          <DataField>tier2Cont</DataField>
-        </Field>
-        <Field Name="tier2ContFormat">
-          <DataField>tier2ContFormat</DataField>
-        </Field>
-        <Field Name="totalCont">
-          <DataField>totalCont</DataField>
-        </Field>
-        <Field Name="totalContFormat">
-          <DataField>totalContFormat</DataField>
-        </Field>
-        <Field Name="prPeriod_Transactions__Group_Text_">
-          <DataField>prPeriod_Transactions__Group_Text_</DataField>
-        </Field>
-        <Field Name="EmployeeName">
-          <DataField>EmployeeName</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -857,8 +793,40 @@
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
+      <NumberOfColumns>1</NumberOfColumns>
+      <NumberOfRows>6</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>CI_NameCaption</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>CI_AddressCaption</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>CI_Address2Caption</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>CI_PhoneNoCaption</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>4</RowIndex>
+          <ParameterName>CI_PictureCaption</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>5</RowIndex>
+          <ParameterName>CI_CityCaption</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
@@ -900,4 +868,68 @@ End Function
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CI_Name">
+          <DataField>CI_Name</DataField>
+        </Field>
+        <Field Name="CI_Address">
+          <DataField>CI_Address</DataField>
+        </Field>
+        <Field Name="CI_Address2">
+          <DataField>CI_Address2</DataField>
+        </Field>
+        <Field Name="CI_PhoneNo">
+          <DataField>CI_PhoneNo</DataField>
+        </Field>
+        <Field Name="CI_Picture">
+          <DataField>CI_Picture</DataField>
+        </Field>
+        <Field Name="CI_City">
+          <DataField>CI_City</DataField>
+        </Field>
+        <Field Name="USERID">
+          <DataField>USERID</DataField>
+        </Field>
+        <Field Name="TODAY">
+          <DataField>TODAY</DataField>
+        </Field>
+        <Field Name="PeriodName">
+          <DataField>PeriodName</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Picture">
+          <DataField>CompanyInfo_Picture</DataField>
+        </Field>
+        <Field Name="tier1Cont">
+          <DataField>tier1Cont</DataField>
+        </Field>
+        <Field Name="tier1ContFormat">
+          <DataField>tier1ContFormat</DataField>
+        </Field>
+        <Field Name="tier2Cont">
+          <DataField>tier2Cont</DataField>
+        </Field>
+        <Field Name="tier2ContFormat">
+          <DataField>tier2ContFormat</DataField>
+        </Field>
+        <Field Name="totalCont">
+          <DataField>totalCont</DataField>
+        </Field>
+        <Field Name="totalContFormat">
+          <DataField>totalContFormat</DataField>
+        </Field>
+        <Field Name="prPeriod_Transactions__Group_Text_">
+          <DataField>prPeriod_Transactions__Group_Text_</DataField>
+        </Field>
+        <Field Name="EmployeeName">
+          <DataField>EmployeeName</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>
