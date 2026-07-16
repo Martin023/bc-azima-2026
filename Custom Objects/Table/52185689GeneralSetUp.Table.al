@@ -539,6 +539,7 @@ table 52185689 "General Set-Up"
         }
         field(50025; "Minimum No of Joint Members"; Integer)
         {
+            Caption = 'Minimum no. of Joint Sigantories';
         }
     }
 
