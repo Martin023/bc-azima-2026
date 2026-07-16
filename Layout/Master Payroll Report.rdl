@@ -1326,6 +1326,12 @@ End Function
         <Field Name="NPAYFormat">
           <DataField>NPAYFormat</DataField>
         </Field>
+        <Field Name="PAYE">
+          <DataField>PAYE</DataField>
+        </Field>
+        <Field Name="PAYEFormat">
+          <DataField>PAYEFormat</DataField>
+        </Field>
         <Field Name="TotDed">
           <DataField>TotDed</DataField>
         </Field>
