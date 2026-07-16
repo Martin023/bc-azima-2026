@@ -369,6 +369,7 @@ TableExtension 52186436 tableextension52186436 extends "Fixed Asset"
                         DepreciationBook."Depreciation Book Code" := FAClasses."Depreciation Book Code";
                         DepreciationBook.validate("Depreciation Method", FAClasses."Depreciation Method");
                         DepreciationBook."Straight-Line %" := FAClasses."Straight-Line %";
+                        DepreciationBook."Declining-Balance %" := FAClasses."Straight-Line %";
                         DepreciationBook.INSERT(true);
 
                         FACard.UpdateDepreciationBook(rec."No.");
