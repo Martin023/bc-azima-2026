@@ -3,6 +3,7 @@ namespace MNS.MNS;
 using Microsoft.FixedAssets.FixedAsset;
 using Microsoft.FixedAssets.Ledger;
 using Microsoft.Finance.GeneralLedger.Account;
+using Microsoft.FixedAssets.Setup;
 using Microsoft.FixedAssets.Depreciation;
 using Microsoft.Foundation.Company;
 
@@ -82,6 +83,11 @@ report 52185986 "Fixed Asset Movement Schedule"
                 // end;
                 //if FALedgerEntries.get("Fixed Asset"."No.") then Straight_Line__ := FALedgerEntries."Straight-Line %";
 
+                FAClass.Reset();
+                FAClass.SetRange(Code, "Fixed Asset"."FA Class Code");
+                if FAClass.Find('-') then begin
+                    Straight_Line__ := FAClass."Straight-Line %";
+                end;
                 FALedgerEntries.RESET;
                 FALedgerEntries.SetRange("FA Class Code", "Fixed Asset"."FA Class Code");
                 FALedgerEntries.SetFilter("Posting Date", StartDateFilter);
@@ -90,7 +96,7 @@ report 52185986 "Fixed Asset Movement Schedule"
                 if FALedgerEntries.Find('-') then begin
                     FALedgerEntries.CalcSums(Amount);
                     BalanceBF := FALedgerEntries.Amount;
-                    Straight_Line__ := FALedgerEntries."Straight-Line %";
+                    //Straight_Line__ := FALedgerEntries."Straight-Line %";
                 end;
 
                 FALedgerEntries.RESET;
@@ -101,7 +107,7 @@ report 52185986 "Fixed Asset Movement Schedule"
                 if FALedgerEntries.Find('-') then begin
                     FALedgerEntries.CalcSums(Amount);
                     ChargeForTheYearBeforeStartDate := FALedgerEntries.Amount;
-                    Straight_Line__ := FALedgerEntries."Straight-Line %";
+                    //Straight_Line__ := FALedgerEntries."Straight-Line %";
                 end;
 
                 FALedgerEntries.Reset();
@@ -112,7 +118,7 @@ report 52185986 "Fixed Asset Movement Schedule"
                 if FALedgerEntries.Find('-') then begin
                     FALedgerEntries.CalcSums(Amount);
                     AssetAdditions := FALedgerEntries.Amount;
-                    Straight_Line__ := FALedgerEntries."Straight-Line %";
+                    //Straight_Line__ := FALedgerEntries."Straight-Line %";
                 end;
 
                 FALedgerEntries.Reset();
@@ -123,7 +129,7 @@ report 52185986 "Fixed Asset Movement Schedule"
                 if FALedgerEntries.Find('-') then begin
                     FALedgerEntries.CalcSums(Amount);
                     ChargeForTheYearWithinTheYear := FALedgerEntries.Amount;
-                    Straight_Line__ := FALedgerEntries."Straight-Line %";
+                    //Straight_Line__ := FALedgerEntries."Straight-Line %";
                 end;
 
                 FALEDGERENTRIES.RESET;
@@ -134,7 +140,7 @@ report 52185986 "Fixed Asset Movement Schedule"
                 IF FALedgerEntries.FIND('-') THEN begin
                     FALedgerEntries.CalcSums(Amount);
                     DepreciationForDisposalTotal := FALedgerEntries.Amount;
-                    Straight_Line__ := FALedgerEntries."Straight-Line %";
+                    //Straight_Line__ := FALedgerEntries."Straight-Line %";
                 end;
 
                 FALedgerEntries.Reset();
@@ -145,7 +151,7 @@ report 52185986 "Fixed Asset Movement Schedule"
                 IF FALedgerEntries.FIND('-') THEN begin
                     FALedgerEntries.CalcSums(Amount);
                     Disposals := FALedgerEntries.Amount;
-                    Straight_Line__ := FALedgerEntries."Straight-Line %";
+                    //Straight_Line__ := FALedgerEntries."Straight-Line %";
                 end;
 
 
@@ -420,6 +426,7 @@ report 52185986 "Fixed Asset Movement Schedule"
         TotalBalAstEndDate: Decimal;
         AccDepAsAtEndDateTotal: Decimal;
         TotalNBV: Decimal;
+        FAClass: Record "FA Class";
 
 
 }
