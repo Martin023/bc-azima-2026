@@ -11,7 +11,7 @@
       <am:Name>PBIRB</am:Name>
       <am:Version>15.7.1813.16</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-07-16T08:55:40.3314206Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-07-16T09:24:08.9278913Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -751,15 +751,15 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Monthly_Repayment_101">
-                          <rd:DefaultName>Monthly_Repayment_101</rd:DefaultName>
+                        <Textbox Name="TotalMonthly">
+                          <rd:DefaultName>TotalMonthly</rd:DefaultName>
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=First(Fields!Monthly_Repayment.Value, "DataSet_Result")+First(Fields!BOSADepoAmt.Value, "DataSet_Result")</Value>
+                                  <Value>=Fields!TotalMonthly.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <Format>#,0.00</Format>
@@ -2443,6 +2443,12 @@ End Function
         </Field>
         <Field Name="BOSADepoAmtFormat">
           <DataField>BOSADepoAmtFormat</DataField>
+        </Field>
+        <Field Name="TotalMonthly">
+          <DataField>TotalMonthly</DataField>
+        </Field>
+        <Field Name="TotalMonthlyFormat">
+          <DataField>TotalMonthlyFormat</DataField>
         </Field>
       </Fields>
       <Query>
