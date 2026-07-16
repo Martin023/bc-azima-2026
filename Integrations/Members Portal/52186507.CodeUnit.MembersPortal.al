@@ -6289,6 +6289,11 @@ codeunit 52186507 "Members Portal Integration"
         GenSetup: record "General Set-Up";
         MaxSelfGuar: Decimal;
         EligibilityFailReason: Text;
+        QualifiedAmount: Decimal;
+        ApplicantFOSAAccountNo: Text;
+        TotalGuarantorCapacity: Decimal;
+        IsProduct062: Boolean;
+        SeenGuarantorNos: List of [Code[20]];
     begin
         Payload.Get('identifier_type', identifier_type);
         Payload.Get('identifier', identifier);
@@ -6350,6 +6355,29 @@ codeunit 52186507 "Members Portal Integration"
                 TheLoanApplication."Is Self Guarantee" := false;
             end;
 
+            IsProduct062 := loan_product.AsValue.AsText = '062';
+
+            if IsProduct062 then begin
+                ApplicantFOSAAccountNo := SkyMbankingTrans.GetMemberFosaAcc(SearchMember);
+                QualifiedAmount := SkyMbankingTrans.GetEmergencyLoanQualifiedAmount(SearchMember."No.", loan_product.AsValue.AsText, ApplicantFOSAAccountNo, EligibilityFailReason);
+
+                if TheLoanApplication."Requested Amount" > QualifiedAmount then begin
+                    ResponseObject.Add('status', 'ERROR');
+                    if EligibilityFailReason <> '' then begin
+                        Datum.Add('error_message', EligibilityFailReason);
+                        Datum.Add('eligibility_fail_reason', EligibilityFailReason);
+                    end else begin
+                        Datum.Add('error_message', StrSubstNo('The requested amount of KES %1 exceeds your ability to pay of KES %2', Format(TheLoanApplication."Requested Amount"), Format(QualifiedAmount)));
+                    end;
+                    ResponseObject.Add('data', Datum);
+
+                    AddDateTimeToResponse(ResponseObject);
+
+                    ResponseObject.WriteTo(Response);
+                    exit(Response);
+                end;
+            end;
+
             // Validate loan guarantors
             foreach guarantor in guarantors.AsArray do begin
                 if TheLoanApplication."Is Self Guarantee" then begin
@@ -6364,6 +6392,18 @@ codeunit 52186507 "Members Portal Integration"
                 end;
 
                 guarantor.AsObject.Get('member_number', guarantor_member_number);
+
+                if SeenGuarantorNos.Contains(guarantor_member_number.AsValue.AsText) then begin
+                    ResponseObject.Add('status', 'ERROR');
+                    Datum.Add('error_message', 'Member with no. ' + guarantor_member_number.AsValue.AsText + ' was listed more than once as a guarantor');
+                    ResponseObject.Add('data', Datum);
+
+                    AddDateTimeToResponse(ResponseObject);
+
+                    ResponseObject.WriteTo(Response);
+                    exit(Response);
+                end;
+                SeenGuarantorNos.Add(guarantor_member_number.AsValue.AsText);
 
                 SalaryAmount := 0;
 
@@ -6382,7 +6422,29 @@ codeunit 52186507 "Members Portal Integration"
                         ResponseObject.WriteTo(Response);
                         exit(Response);
                     end;
+
+                    TotalGuarantorCapacity += SalaryAmount;
+                end else begin
+                    ResponseObject.Add('status', 'ERROR');
+                    Datum.Add('error_message', 'Guarantor member no. ' + guarantor_member_number.AsValue.AsText + ' NOT found!');
+                    ResponseObject.Add('data', Datum);
+
+                    AddDateTimeToResponse(ResponseObject);
+
+                    ResponseObject.WriteTo(Response);
+                    exit(Response);
                 end;
+            end;
+
+            if IsProduct062 and (not TheLoanApplication."Is Self Guarantee") and (TotalGuarantorCapacity < TheLoanApplication."Requested Amount") then begin
+                ResponseObject.Add('status', 'ERROR');
+                Datum.Add('error_message', StrSubstNo('Guarantors must cover the full requested amount. Total guarantor capacity is KES %1, requested amount is KES %2', Format(TotalGuarantorCapacity), Format(TheLoanApplication."Requested Amount")));
+                ResponseObject.Add('data', Datum);
+
+                AddDateTimeToResponse(ResponseObject);
+
+                ResponseObject.WriteTo(Response);
+                exit(Response);
             end;
 
 

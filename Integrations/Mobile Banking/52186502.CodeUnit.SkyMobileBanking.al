@@ -4227,12 +4227,12 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
                                             if TheLoan.FindFirst then begin
 
-                                                theSMS := 'Dear member, your ' +
-                                                TheLoan."Loan Product Type Name"
-                                                + ' loan application request of KES ' +
-                                                Format(TheLoan."Requested Amount") +
-                                                ' has been received successfully. Kindly wait shortly as we process this request. Transaction ID: ' +
-                                                TheLoan."Loan No.";
+                                                // theSMS := 'Dear member, your ' +
+                                                // TheLoan."Loan Product Type Name"
+                                                // + ' loan application request of KES ' +
+                                                // Format(TheLoan."Requested Amount") +
+                                                // ' has been received successfully. Kindly wait shortly as we process this request. Transaction ID: ' +
+                                                // TheLoan."Loan No.";
 
                                                 SearchMember.Reset;
                                                 SearchMember.SetRange("No.", TheLoan."Member No.");
@@ -7000,18 +7000,13 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 if (TheDestinationSavings."No." <> '') and (TheSourceMember."No." = TheDestinationSavings."Member No.") then begin
                                                                     /*
                                                                     INTERNAL_FUNDS_TRANSFER
-                                                                    Dear [FIRST_NAME],
-                                                                    Your Funds Transfer request of KES [AMOUNT] from {source account name e.g fosa} [SOURCE_ACCOUNT]
-                                                                    to {destination account name eg Deposit} [DESTINATION_ACCOUNT] on [DATE] has been completed successfully.
-                                                                    Ref: [REFERENCE]
+                                                                    Jambo [FIRST_NAME], you have successfully funded your [PRODUCT_NAME],
+                                                                    your available balance is Ksh [AMOUNT] on [TIMESTAMP].
                                                                     */
-                                                                    theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() +
-                                                                    ', Your Funds Transfer request of KES ' +
-                                                                    Format(MpesaTransBuffer."Transaction Amount") +
-                                                                    ' from ' + SavingsAccounts."Product Name" + ' ' + MpesaTransBuffer."Savings Account" +
-                                                                    ' to ' + TheDestinationSavings."Product Name" + ' ' + TheDestinationSavings."No." +
-                                                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                    ' has been completed successfully. Ref: ' + theReference;
+                                                                    theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
+                                                                    ', you have successfully funded your ' + TheDestinationSavings."Product Name" +
+                                                                    ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(TheDestinationSavings, true)) +
+                                                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
                                                                 end else begin
                                                                     /*
                                                                     INTERNAL_FUNDS_TRANSFER_OTHER_MEMBER
