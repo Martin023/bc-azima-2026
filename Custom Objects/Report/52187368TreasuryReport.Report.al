@@ -1,4 +1,4 @@
-#pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
+#pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006
 Report 52187368 "Treasury Report"
 {
     DefaultLayout = RDLC;
@@ -26,7 +26,7 @@ Report 52187368 "Treasury Report"
             column(CompanyAddress; CompanyAddress) { }
             column(CompanyTelephone; CompanyTelephone) { }
             column(CommunicationOnline; CommunicationOnline) { }
-            column(ReportTitle; 'Treasury Report') { } // Dynamic title for the layout
+            column(ReportTitle; 'Treasury Report') { }
 
             column(AccountName; AccountName) { }
             column(AccountNo; AccountNo) { }
@@ -36,24 +36,31 @@ Report 52187368 "Treasury Report"
 
             trigger OnAfterGetRecord()
             begin
+                if not BankAcc.Get("Bank Account Ledger Entry"."Bank Account No.") then
+                    CurrReport.Skip();
+
+                if BankAcc."Bank Type" <> BankAcc."Bank Type"::Treasury then
+                    CurrReport.Skip();
+
                 Recount += 1;
                 if Recount = 1 then begin
-                    if "Bank Account Ledger Entry".GetFilters <> '' then begin
-                        if "Bank Account Ledger Entry".GetFilters.Contains('Bank Account No.') then begin
-                            if BankAcc.Get("Bank Account Ledger Entry"."Bank Account No.") then begin
-                                BankLedgerEntryII.Reset();
-                                BankLedgerEntryII.SetRange("Bank Account No.", BankAcc."No.");
-                                BankLedgerEntryII.SetFilter("Posting Date", '<%1', "Bank Account Ledger Entry"."Posting Date");
-                                if BankLedgerEntryII.FindFirst() then begin
-                                    BankLedgerEntryII.CalcSums("Amount (LCY)");
-                                    OpenBal := BankLedgerEntryII."Amount (LCY)";
-                                end else
-                                    OpenBal := 0;
-                            end;
-                        end else
-                            Error('Kindly filter with a Treasury Account');
-                    end else
-                        Message('Kindly filter with a Treasury Account');
+                    OpenBal := 0;
+                    BankAccRec.Reset();
+
+                    if "Bank Account Ledger Entry".GetFilter("Bank Account No.") <> '' then
+                        BankAccRec.SetFilter("No.", "Bank Account Ledger Entry".GetFilter("Bank Account No."))
+                    else
+                        BankAccRec.SetRange("Bank Type", BankAccRec."Bank Type"::Treasury);
+
+                    if BankAccRec.FindSet() then begin
+                        repeat
+                            BankLedgerEntryII.Reset();
+                            BankLedgerEntryII.SetRange("Bank Account No.", BankAccRec."No.");
+                            BankLedgerEntryII.SetFilter("Posting Date", '<%1', "Bank Account Ledger Entry"."Posting Date");
+                            BankLedgerEntryII.CalcSums("Amount (LCY)");
+                            OpenBal += BankLedgerEntryII."Amount (LCY)";
+                        until BankAccRec.Next() = 0;
+                    end;
                 end;
 
                 CashierTrans.Reset();
@@ -67,7 +74,6 @@ Report 52187368 "Treasury Report"
                     AccountName := '';
                 end;
 
-                // Handle Reversals and Negative Values Logic
                 ReportDescription := "Bank Account Ledger Entry".Description;
                 ReportDebitAmt := "Bank Account Ledger Entry"."Debit Amount";
                 ReportCreditAmt := "Bank Account Ledger Entry"."Credit Amount";
@@ -124,6 +130,7 @@ Report 52187368 "Treasury Report"
         CompanyTelephone: Text;
         CommunicationOnline: Text;
         BankAcc: Record "Bank Account";
+        BankAccRec: Record "Bank Account";
         CashierTrans: Record "Cashier Transactions";
         BankingSetup: Record "Banking User Template";
         AccountNo: Code[100];
