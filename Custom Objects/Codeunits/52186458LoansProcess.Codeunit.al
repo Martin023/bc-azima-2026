@@ -7393,17 +7393,17 @@ Codeunit 52186458 "Loans Process"
                 end else
                     InterestRate := LoansR.Interest;
 
-                if Prodfac."Nature of Loan Type" = ProdFac."Nature of Loan Type"::"Emergency Loan" then begin
-                    if prodFac."Compute Interest Due on Postin" = Prodfac."Compute Interest Due on Postin"::"Full Period Interest" then begin
-                        LoanAmount := LoansR."Approved Amount" + round((LoansR."Approved Amount" * LoansR.Interest / 12 * 0.01 * LoansR.Installments), 1, '>');
-                        LoansR.Interest := 0;
-                    end;
-                end
-                else
-                    LoanAmount := LoansR."Approved Amount";
+                LoanAmount := LoansR."Approved Amount";
                 LBalance := LoansR."Approved Amount";
                 RepayPeriod := LoansR.Installments;
                 InitialInstal := LoansR.Installments;
+
+                if Prodfac."Nature of Loan Type" = ProdFac."Nature of Loan Type"::"Emergency Loan" then begin
+                    if prodFac."Compute Interest Due on Postin" = Prodfac."Compute Interest Due on Postin"::"Full Period Interest" then begin
+                        LoanAmount := LoansR."Approved Amount" + round((LoansR."Approved Amount" * LoansR.Interest / 12 * 0.01 * LoansR.Installments), 1, '>');
+                        LBalance := LoansR."Approved Amount";
+                    end;
+                end;
 
 
                 // RunDate := Today;
@@ -7442,12 +7442,12 @@ Codeunit 52186458 "Loans Process"
                 //Repayment Frequency
                 repeat
                     InstalNo := InstalNo + 1;
-                    if Prodfac."Interest Recovered Upfront" then begin
+                    if (Prodfac."Interest Recovered Upfront") or (ProdFac."Compute Interest Due on Postin" = ProdFac."Compute Interest Due on Postin"::"Full Period Interest") then begin
                         LPrincipal := LoanAmount / RepayPeriod;
                         LInterest := 0;
                     end
                     else begin
-                        if LoansR.Interest = 0 then LoansR."Interest Calculation Method" := LoansR."Interest Calculation Method"::"Straight Line";
+                        if (LoansR.Interest = 0) or (LInterest = 0) then LoansR."Interest Calculation Method" := LoansR."Interest Calculation Method"::"Straight Line";
 
                         if LoansR."Interest Calculation Method" = LoansR."Interest Calculation Method"::Amortised then begin
 
