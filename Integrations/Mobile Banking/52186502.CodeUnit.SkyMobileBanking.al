@@ -5900,7 +5900,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             if Loan."Daily Interest" > 0 then begin
                                                 if pfac.get(Loan."Loan Product Type") then
                                                     if pfac."Loan Interest Account [G/L]" <> '' then begin
-                                                        SaccoTrans.JournalInsert(LoanTemp, LoanBatch, theReference, Today, AccType::Credit, MpesaTransBuffer."Loan Account", 'Daily Loan Interest Capitalized. ' + Loan."Loan No.", AccType::"G/L Account", pfac."Loan Interest Account [G/L]", loan."Daily Interest", theReference, Loan."Loan No.", TransactionType::"Interest Due", Dim1, Dim2, true);
+                                                        SaccoTrans.JournalInsert(LoanTemp, LoanBatch, theReference, Today, AccType::Credit, MpesaTransBuffer."Loan Account", CopyStr('Daily Loan Interest Capitalized. ' + Loan."Loan No.", 1, 50), AccType::"G/L Account", pfac."Loan Interest Account [G/L]", loan."Daily Interest", theReference, Loan."Loan No.", TransactionType::"Interest Due", Dim1, Dim2, true);
                                                         LoansProcess.ClearDailyInterest(Loan."Loan No.");
                                                     end;
                                             end;
@@ -7327,7 +7327,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                             if Loan."Daily Interest" > 0 then begin
                                                                                 if pfac.get(Loan."Loan Product Type") then
                                                                                     if pfac."Loan Interest Account [G/L]" <> '' then begin
-                                                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Credit, MpesaTransBuffer."Loan Account", 'Daily Loan Interest Capitalized. ' + Loan."Loan No.", AccType::"G/L Account", pfac."Loan Interest Account [G/L]", loan."Daily Interest", theReference, Loan."Loan No.", TransactionType::"Interest Due", Dim1, Dim2, true);
+                                                                                        SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Credit, MpesaTransBuffer."Loan Account", CopyStr('Daily Loan Interest Capitalized. ' + Loan."Loan No.", 1, 50), AccType::"G/L Account", pfac."Loan Interest Account [G/L]", loan."Daily Interest", theReference, Loan."Loan No.", TransactionType::"Interest Due", Dim1, Dim2, true);
                                                                                         LoansProcess.ClearDailyInterest(Loan."Loan No.");
                                                                                     end;
                                                                             end;
@@ -7335,13 +7335,13 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                             if loan."Outstanding Interest" > TotalCreditAmount then
                                                                                 Loan."Outstanding Interest" := TotalCreditAmount;
 
-                                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Credit, MpesaTransBuffer."Loan Account", 'Interest. Internal loan repayment from acc. ' + MpesaTransBuffer."Savings Account", AccType::"G/L Account", '', -Loan."Outstanding Interest", theReference, Loan."Loan No.", TransactionType::"Interest Paid", Dim1, Dim2, true);
+                                                                            SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Credit, MpesaTransBuffer."Loan Account", CopyStr('Interest. Internal loan repayment from acc. ' + MpesaTransBuffer."Savings Account", 1, 50), AccType::"G/L Account", '', -Loan."Outstanding Interest", theReference, Loan."Loan No.", TransactionType::"Interest Paid", Dim1, Dim2, true);
                                                                             InterestPaidAmount := Loan."Outstanding Interest";
                                                                             TotalCreditAmount -= Loan."Outstanding Interest";
                                                                             if TotalCreditAmount > 0 then begin
                                                                                 if Loan."Outstanding Balance" > TotalCreditAmount then
                                                                                     Loan."Outstanding Balance" := TotalCreditAmount;
-                                                                                SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Credit, MpesaTransBuffer."Loan Account", 'Outstanding Balance. Internal loan repayment from acc. ' + MpesaTransBuffer."Savings Account", AccType::"G/L Account", '', -Loan."Outstanding Balance", theReference, Loan."Loan No.", TransactionType::Repayment, Dim1, Dim2, true);
+                                                                                SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, AccType::Credit, MpesaTransBuffer."Loan Account", CopyStr('Outstanding Balance. Internal loan repayment from acc. ' + MpesaTransBuffer."Savings Account", 1, 50), AccType::"G/L Account", '', -Loan."Outstanding Balance", theReference, Loan."Loan No.", TransactionType::Repayment, Dim1, Dim2, true);
                                                                                 RepaymentPaidAmount := Loan."Outstanding Balance";
                                                                                 TotalCreditAmount -= Loan."Outstanding Balance";
                                                                             end;
