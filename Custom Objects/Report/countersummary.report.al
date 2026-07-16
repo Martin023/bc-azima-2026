@@ -59,6 +59,8 @@ Report 52185496 "Counter Summary Report"
                             LineCreditAmt := Treasury_transaction.Amount;
 
                     end else if Number = 2 then begin
+                        if Treasury_transaction.Type <> Treasury_transaction.Type::"Cash Withdrawal" then
+                            CurrReport.Skip();
                         if Treasury_transaction."Charge Amount" <= 0 then
                             CurrReport.Skip();
 
