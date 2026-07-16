@@ -16,7 +16,7 @@ table 52185739 "Loan Guarantors and Security"
             TableRelation =
             IF ("Guarantor Type" = CONST(Guarantor), "Loan Groups" = FILTER(Normal)) "Savings Accounts"."No." WHERE("Product Category" = filter("Business Deposits" | "BOSA Deposits"))
             ELSE
-            IF ("Guarantor Type" = CONST(Guarantor), "Loan Groups" = FILTER("Group Loan")) "Savings Accounts"."No." WHERE("Product Category" = filter("Business Deposits"), "Group Account No" = FIELD("Group Account Nos"))
+            IF ("Guarantor Type" = CONST(Guarantor), "Loan Groups" = FILTER("Group Loan")) "Savings Accounts"."No." WHERE("Product Category" = filter("Chama Investment Account"))
             else
             IF ("Guarantor Type" = CONST(Collateral)) Members."No." where(Status = filter(Active))
             ELSE
