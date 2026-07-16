@@ -1372,7 +1372,7 @@ Codeunit 52185455 "Registration Process"
         ProductFactory."Installment Repayment Interval" := ProductFactoryApplication."Installment Repayment Interval";
         ProductFactory."Compute Interest Due on Postin" := ProductFactoryApplication."Compute Interest Due on Postin";
         ProductFactory."Fixed Loan Term" := ProductFactoryApplication."Fixed Loan Term";
-        ProductFactory."Preferential Dep. Multiplier" := ProductFactoryApplication."Preferential Share Multiplier";
+        ProductFactory."Dep. Multiplier On Collateral" := ProductFactoryApplication."Preferential Share Multiplier";
         ProductFactory."Ordinary Deposits Multiplier" := ProductFactoryApplication."Ordinary Share Multiplier";
         ProductFactory."Loan Span" := ProductFactoryApplication."Loan Span";
         ProductFactory."Recovery Priority" := ProductFactoryApplication."Recovery Priority";

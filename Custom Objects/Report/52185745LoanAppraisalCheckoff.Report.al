@@ -995,6 +995,16 @@ Report 52185745 "Loan Appraisal Checkoff"
                 end;
 
                 //Qualification on deposits
+                //Multiplie changes if its on collateral
+                LoanGua.Reset;
+                LoanGua.SetRange("Loan No", Loans."Loan No.");
+                LoanGua.SetRange("Guarantor Type", LoanGua."guarantor type"::Collateral);
+                LoanGua.SetRange(Substituted, false);
+                if LoanGua.findfirst() then begin
+                    if ProductFactory."Dep. Multiplier On Collateral" <> 0 then
+                        Mult := ProductFactory."Dep. Multiplier On Collateral";
+                end;
+
                 MemberDeposits := 0;
                 Mult := ProductFactory."Ordinary Deposits Multiplier";
                 SavingsAccounts.Reset;

@@ -527,7 +527,7 @@ page 52185712 "Product Factory"
                 {
                     ApplicationArea = all;
                 }
-                field("Preferential Dep. Multiplier"; Rec."Preferential Dep. Multiplier")
+                field("Dep. Multiplier On Collateral"; Rec."Dep. Multiplier On Collateral")
                 {
                     ApplicationArea = Basic, Suite;
                 }
