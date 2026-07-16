@@ -163,8 +163,9 @@ page 52185973 "Mid Year Review"
     begin
         if HeaderRec.Get(Rec."Appraisal No") then;
 
-        IsAppraisee := (UserId = HeaderRec."User ID");
-        IsSupervisor := (UserId = HeaderRec."Supervisor ID");
+        // Safety check: Ensure User ID and Supervisor ID are not empty
+        IsAppraisee := (HeaderRec."User ID" <> '') and (UserId = HeaderRec."User ID");
+        IsSupervisor := (HeaderRec."Supervisor ID" <> '') and (UserId = HeaderRec."Supervisor ID");
 
         // TARGET SETTING STAGE - Only editable when Status = Open
         if (HeaderRec."Appraisal Cycle Stage" = HeaderRec."Appraisal Cycle Stage"::"Target Setting") and (HeaderRec.Status = HeaderRec.Status::Open) then begin
