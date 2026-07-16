@@ -19,7 +19,7 @@ report 52185511 "Master Payroll Report"
             dataitem("PR Employee Transactions"; "PR Employee Transactions")
             {
                 DataItemLink = "Transaction Code" = field("Transaction Code");
-                RequestFilterFields = "Payroll Period";
+                //RequestFilterFields = "Payroll Period";
                 column(Employee_Code; "Employee Code") { }
                 column(strEmpName; strEmpName) { }
                 column(Transaction_Code; "Transaction Code") { }
@@ -27,6 +27,7 @@ report 52185511 "Master Payroll Report"
                 column(BPAY; BPAY) { }
                 column(GPAY; GPAY) { }
                 column(NPAY; NPAY) { }
+                column(PAYE; PAYE) { }
                 column(TotDed; TotDed) { }
                 column(TotAllow; TotAllow) { }
                 column(Amount; Amount) { }
@@ -64,6 +65,7 @@ report 52185511 "Master Payroll Report"
                     BPAY := 0;
                     GPAY := 0;
                     NPAY := 0;
+                    PAYE := 0;
 
                     if HREmployee.Get("PR Employee Transactions"."Employee Code") then
                         strEmpName := HREmployee."First Name" + ' ' + HREmployee."Middle Name" + ' ' + HREmployee."Last Name";
@@ -72,7 +74,7 @@ report 52185511 "Master Payroll Report"
                     PeriodTrans.Reset();
                     PeriodTrans.Setrange("Employee Code", "PR Employee Transactions"."Employee Code");
                     PeriodTrans.Setrange("Payroll Period", SelectedPeriod);
-                    PeriodTrans.Setfilter(PeriodTrans."Transaction Code", '=%1|%2|%3|%4', 'BPAY', 'GPAY', 'NPAY', 'TOT-DED');
+                    PeriodTrans.Setfilter(PeriodTrans."Transaction Code", '=%1|%2|%3|%4|%5', 'BPAY', 'GPAY', 'NPAY', 'TOT-DED', 'PAYE');
                     if PeriodTrans.Find('-') then begin
                         repeat
                             if PeriodTrans."Transaction Code" = 'BPAY' then begin
@@ -86,6 +88,8 @@ report 52185511 "Master Payroll Report"
                             end;
                             if PeriodTrans."Transaction Code" = 'TOT-DED' then
                                 TotDed := PeriodTrans.Amount;
+                            IF PeriodTrans."Transaction Code" = 'PAYE' then
+                                PAYE := PeriodTrans.Amount;
                         until PeriodTrans.Next() = 0;
                     end;
                 end;
@@ -173,7 +177,7 @@ report 52185511 "Master Payroll Report"
         TotDed: Decimal;
         TotAllow: Decimal;
         Allow: Decimal;
-        
+        PAYE: Decimal;
 
     procedure OnViewCurrRec()
     var
