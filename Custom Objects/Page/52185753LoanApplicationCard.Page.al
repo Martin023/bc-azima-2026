@@ -40,6 +40,12 @@ page 52185753 "Loan Application Card"
                     Caption = 'Staff No';
                     Editable = ApplicationDetailsEdit;
                 }
+                field("Group Account No."; Rec."Group Account No.")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'MFI Account No.';
+                    Editable = ApplicationDetailsEdit;
+                }
 
                 field("Member No."; Rec."Member No.")
                 {

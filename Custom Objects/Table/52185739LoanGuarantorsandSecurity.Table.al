@@ -337,13 +337,12 @@ table 52185739 "Loan Guarantors and Security"
                             Cust.SetRange(Cust."Member No.", Members."No.");
                             Cust.setrange("Product Category", Cust."Product Category"::"BOSA Deposits");
                             if Cust.FindFirst() then begin
-                                Rec."Savings Account No./Member No." := Cust."No.";
+                                //Rec."Savings Account No./Member No." := Cust."No.";
                                 //Rec.Modify(true);
-                                if Rec."Savings Account No./Member No." <> '' then
-                                    Validate(Rec."Savings Account No./Member No.");
+                                Validate(Rec."Savings Account No./Member No.", Cust."No.");
                             end
                             else begin
-                                "Savings Account No./Member No." := '';
+                                //"Savings Account No./Member No." := '';
                                 Error('Member deposits account not found.');
                             end;
                         end;
@@ -453,9 +452,9 @@ table 52185739 "Loan Guarantors and Security"
                     LoanGuar.SetFilter("Outstanding Balance", '>0');
                     LoanGuar.SetRange(LoanGuar."Collateral Reg. No.", rec."Collateral Reg. No.");
                     LoanGuar.SetFilter(LoanGuar."Loan No", '<>%1', Rec."Loan No");
+                    LoanGuar.SetRange(Substituted, false);
                     if LoanGuar.Find('-') then begin
-                        LoanGuar.CalcSums("Amount Guaranteed");
-                        GuaranteedAmt := LoanGuar."Amount Guaranteed";
+                        Error('This Collateral is being used in another loan %1 - %2', LoanGuar."Loan No", LoanGuar."Loan Product Name");
                     end;
                 end
                 else
@@ -471,7 +470,7 @@ table 52185739 "Loan Guarantors and Security"
         field(28; "Collateral Value"; Decimal)
         {
             FieldClass = FlowField;
-            CalcFormula = lookup("Securities Register"."Market Value" where("Account No." = field("Savings Account No./Member No.")));
+            CalcFormula = lookup("Securities Register"."Forced Sale Value" where("Account No." = field("Savings Account No./Member No.")));
         }
         field(280; "Collateral Name"; Text[300])
         {

@@ -113,7 +113,7 @@ Query 52185427 "Product Types"
             column(Ordinary_Deposits_Multiplier; "Ordinary Deposits Multiplier")
             {
             }
-            column(Preferential_Dep_Multiplier; "Preferential Dep. Multiplier")
+            column(Preferential_Dep_Multiplier; "Dep. Multiplier On Collateral")
             {
             }
             column(Allow_Multiple_Running_Loans; "Allow Multiple Running Loans")
