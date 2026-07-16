@@ -476,8 +476,6 @@ table 52185586 "HR Individual Targets Header"
     end;
 
     procedure ReturnToAppraisee()
-    var
-        UserSetupRec: Record "User Setup";
     begin
         TestField(Status, Status::"Pending Approval");
 
