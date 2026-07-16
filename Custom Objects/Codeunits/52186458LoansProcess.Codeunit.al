@@ -4212,6 +4212,7 @@ Codeunit 52186458 "Loans Process"
         OtherLiabilitiesII: record "Other Commitements Clearance";
         LoanGuar: record "Loan Guarantors and Security";
         GuarCount: Integer;
+        GlobalFunctions: Codeunit "Global Functions";
     begin
 
         Temp.Get(UserId);
@@ -5743,7 +5744,8 @@ Codeunit 52186458 "Loans Process"
             end;
             GenSetup.Get;
             Members.Get(LoanApps."Member No.");
-            if GenSetup."Disable Loan SMS" = false then begin
+            // Skip for API as channels already sends its own disbursement SMS.
+            if (GenSetup."Disable Loan SMS" = false) and (not GlobalFunctions.SkipApiMsg()) then begin
                 msg := 'Your Loan of KES ' + Format(LoanApps."Approved Amount") + ' ' + 'has been disbursed to your FOSA account. ' +
                                                 GenSetup."Loan SMS Suffix";
                 SendSMS.SendSms(Source::LOAN_POSTED, Members."Phone No.", msg, Format(LoanApps."Approved Amount"), '', true, 0, false, 'CBS', LoanApps."Disbursement Account No", 'CBS');
