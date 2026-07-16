@@ -5024,13 +5024,13 @@ page 52186778 "Finance Role Center"
                     }
                     action("PR NSSF")
                     {
-                        Caption = 'PR NSSF report';
+                        Caption = 'PR NSSF Tier I Report';
                         RunObject = report prNSSF;
                         ApplicationArea = Basic, Suite;
                     }
                     action("NSSF Tier II")
                     {
-                        Caption = 'NSSF Tier II';
+                        Caption = 'NSSF Tier II Report';
                         RunObject = report "NSSF Tier II";
                         ApplicationArea = Basic, Suite;
                     }
@@ -5038,7 +5038,7 @@ page 52186778 "Finance Role Center"
                     {
                         RunObject = Report "Deductions With Employer Contr";
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Deductions With Employer Contr';
+                        Caption = 'Deductions With Employer Contributions';
                     }
                     action("prDeductions Report")
                     {
