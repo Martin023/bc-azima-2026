@@ -454,8 +454,7 @@ table 52185586 "HR Individual Targets Header"
             Error('Employee %1 not found in HR Employees.', "Employee No");
 
         if Employee."Supervisor Code" = '' then
-            Error('Cannot submit appraisal. No supervisor assigned to employee %1 (%2). Please contact HR to assign a supervisor in your employee record.',
-                "Employee No", "Employee Name");
+            Error('You are not mapped to a supervisor. Please contact HR or ICT to assign a supervisor to your employee record.');
 
         if "Supervisor ID" = '' then begin
             "Supervisor ID" := Employee."Supervisor Code";

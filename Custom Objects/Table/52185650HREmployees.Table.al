@@ -1538,10 +1538,38 @@ table 52185650 "HR Employees"
             trigger OnValidate()
             var
                 UserSetup: Record "User Setup";
+                IndividualAppraisal: Record "HR Individual Targets Header";
+                OldSupervisorID: Code[50];
+                UpdateCount: Integer;
             begin
-                UserSetup.Get("Supervisor Code");
-                "Supervisor Name" := UserSetup."Full Name";
+                if "Supervisor Code" <> '' then begin
+                    UserSetup.Get("Supervisor Code");
+                    "Supervisor Name" := UserSetup."Full Name";
+                end else
+                    "Supervisor Name" := '';
 
+                // Update all open appraisals when supervisor changes
+                if (xRec."Supervisor Code" <> "Supervisor Code") and (xRec."Supervisor Code" <> '') then begin
+                    OldSupervisorID := xRec."Supervisor Code";
+                    UpdateCount := 0;
+
+                    IndividualAppraisal.Reset();
+                    IndividualAppraisal.SetRange("Employee No", "No.");
+                    IndividualAppraisal.SetRange("Supervisor ID", OldSupervisorID);
+                    IndividualAppraisal.SetFilter(Status, '<%1', IndividualAppraisal.Status::Approved);
+                    
+                    if IndividualAppraisal.FindSet(true) then begin
+                        repeat
+                            IndividualAppraisal."Supervisor ID" := "Supervisor Code";
+                            IndividualAppraisal."Supervisor Name" := "Supervisor Name";
+                            IndividualAppraisal.Modify();
+                            UpdateCount += 1;
+                        until IndividualAppraisal.Next() = 0;
+
+                        if UpdateCount > 0 then
+                            Message('%1 appraisal(s) updated with new supervisor: %2', UpdateCount, "Supervisor Name");
+                    end;
+                end;
             end;
         }
         field(39003936; "Supervisor Name"; Text[50])
