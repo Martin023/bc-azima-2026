@@ -734,7 +734,7 @@ table 52185729 Loans
                         ShareCapAcc.CALCFIELDS(ShareCapAcc."Balance (LCY)");
                         IF ShareCapAcc."Balance (LCY)" < SavProducts."Minimum Contribution" THEN begin
                             if not "Mobile Loan" then begin
-                                MESSAGE('Member no. %1 has share capital of %2 and minimum required share capital is %3 This will be boosted on the loan.', LoanApp."Member No.", ShareCapAcc."Balance (LCY)", SavProducts."Minimum Balance");
+                                MESSAGE('Member no. %1 has share capital of %2 and minimum required share capital is %3 This will be boosted on the loan.', LoanApp."Member No.", ShareCapAcc."Balance (LCY)", SavProducts."Minimum Contribution");
                                 "Share Boosted Amount" := SavProducts."Minimum Contribution" - ShareCapAcc."Balance (LCY)";
                             end;
                         end;
