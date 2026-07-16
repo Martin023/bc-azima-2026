@@ -2056,6 +2056,11 @@ table 52185729 Loans
         field(64; "Employer Code"; Code[100])
         {
             TableRelation = Customer WHERE("Account Type" = CONST("Employer Code"));
+
+            trigger OnValidate()
+            begin
+                "Staff No" := '';
+            end;
         }
         field(65; "Compute Interest Due on Postin"; Option)
         {
@@ -3965,6 +3970,7 @@ table 52185729 Loans
             if Members.Get("Member No.") then begin
                 //if (Members."Has Joined Business Loans") and (ProductFactory."Source Unit" = ProductFactory."Source Unit"::"BUSINESS LOANS") and (Members."Group Account No." <> '') then begin
                 GroupMembers.Reset;
+                GroupMembers.SetAutoCalcFields("Group Account No.");
                 GroupMembers.SetRange("Group Account No.", rec."Group Account No.");
                 // GroupMembers.SetRange("Has Joined Business Loans", true);
                 // GroupMembers.SetFilter("No.", '<>%1', Members."No.");
@@ -3981,6 +3987,7 @@ table 52185729 Loans
                                 Guarantors.Init;
                                 Guarantors."Loan No" := "Loan No.";
                                 Guarantors.Name := GroupMembers.Name;
+                                Guarantors."Loan Group" := rec."Loan Group"::"Group Loan";
                                 Guarantors."Staff/Payroll No." := GroupMembers."Payroll/Staff No.";
                                 Guarantors."Phone No." := GroupMembers."Phone No.";
                                 Guarantors."ID No." := GroupMembers."Primary Identification";
