@@ -11,160 +11,6 @@
       <rd:DataSourceID>399ce208-3926-4ae7-97bc-762f010a7e87</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="CompanyInfo_Name">
-          <DataField>CompanyInfo_Name</DataField>
-        </Field>
-        <Field Name="CompanyInfo_Picture">
-          <DataField>CompanyInfo_Picture</DataField>
-        </Field>
-        <Field Name="CompanyName">
-          <DataField>CompanyName</DataField>
-        </Field>
-        <Field Name="BuldingName">
-          <DataField>BuldingName</DataField>
-        </Field>
-        <Field Name="CompanyAddress">
-          <DataField>CompanyAddress</DataField>
-        </Field>
-        <Field Name="CompanyTelephone">
-          <DataField>CompanyTelephone</DataField>
-        </Field>
-        <Field Name="CompanyEmail">
-          <DataField>CompanyEmail</DataField>
-        </Field>
-        <Field Name="PrintingDate">
-          <DataField>PrintingDate</DataField>
-        </Field>
-        <Field Name="PrintingTime">
-          <DataField>PrintingTime</DataField>
-        </Field>
-        <Field Name="PrintedBy">
-          <DataField>PrintedBy</DataField>
-        </Field>
-        <Field Name="PrintDateTime">
-          <DataField>PrintDateTime</DataField>
-        </Field>
-        <Field Name="Employee_No">
-          <DataField>Employee_No</DataField>
-        </Field>
-        <Field Name="First_Name">
-          <DataField>First_Name</DataField>
-        </Field>
-        <Field Name="Middle_Name">
-          <DataField>Middle_Name</DataField>
-        </Field>
-        <Field Name="Last_Name">
-          <DataField>Last_Name</DataField>
-        </Field>
-        <Field Name="Full_Name">
-          <DataField>Full_Name</DataField>
-        </Field>
-        <Field Name="Gender">
-          <DataField>Gender</DataField>
-        </Field>
-        <Field Name="Date_Of_Birth">
-          <DataField>Date_Of_Birth</DataField>
-        </Field>
-        <Field Name="Age">
-          <DataField>Age</DataField>
-        </Field>
-        <Field Name="ID_Number">
-          <DataField>ID_Number</DataField>
-        </Field>
-        <Field Name="PIN_Number">
-          <DataField>PIN_Number</DataField>
-        </Field>
-        <Field Name="NSSF_No">
-          <DataField>NSSF_No</DataField>
-        </Field>
-        <Field Name="NHIF_No">
-          <DataField>NHIF_No</DataField>
-        </Field>
-        <Field Name="Status">
-          <DataField>Status</DataField>
-        </Field>
-        <Field Name="Cellular_Phone_Number">
-          <DataField>Cellular_Phone_Number</DataField>
-        </Field>
-        <Field Name="E_Mail">
-          <DataField>E_Mail</DataField>
-        </Field>
-        <Field Name="Postal_Address">
-          <DataField>Postal_Address</DataField>
-        </Field>
-        <Field Name="City">
-          <DataField>City</DataField>
-        </Field>
-        <Field Name="County">
-          <DataField>County</DataField>
-        </Field>
-        <Field Name="Job_Title">
-          <DataField>Job_Title</DataField>
-        </Field>
-        <Field Name="Job_ID">
-          <DataField>Job_ID</DataField>
-        </Field>
-        <Field Name="Department_Code">
-          <DataField>Department_Code</DataField>
-        </Field>
-        <Field Name="Responsibility_Center">
-          <DataField>Responsibility_Center</DataField>
-        </Field>
-        <Field Name="Date_Of_Join">
-          <DataField>Date_Of_Join</DataField>
-        </Field>
-        <Field Name="Contract_End_Date">
-          <DataField>Contract_End_Date</DataField>
-        </Field>
-        <Field Name="Grade">
-          <DataField>Grade</DataField>
-        </Field>
-        <Field Name="Salary_Grade">
-          <DataField>Salary_Grade</DataField>
-        </Field>
-        <Field Name="Bank_Name">
-          <DataField>Bank_Name</DataField>
-        </Field>
-        <Field Name="Bank_Branch">
-          <DataField>Bank_Branch</DataField>
-        </Field>
-        <Field Name="Bank_Account_Number">
-          <DataField>Bank_Account_Number</DataField>
-        </Field>
-        <Field Name="Marital_Status">
-          <DataField>Marital_Status</DataField>
-        </Field>
-        <Field Name="Ethnic_Origin">
-          <DataField>Ethnic_Origin</DataField>
-        </Field>
-        <Field Name="Religion">
-          <DataField>Religion</DataField>
-        </Field>
-        <Field Name="Supervisor_Code">
-          <DataField>Supervisor_Code</DataField>
-        </Field>
-        <Field Name="Supervisor_Name">
-          <DataField>Supervisor_Name</DataField>
-        </Field>
-        <Field Name="Employee_Group">
-          <DataField>Employee_Group</DataField>
-        </Field>
-        <Field Name="Terms_Of_Service">
-          <DataField>Terms_Of_Service</DataField>
-        </Field>
-        <Field Name="Employee_Picture">
-          <DataField>Employee_Picture</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -1844,12 +1690,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -1861,4 +1701,158 @@ End Function
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>30ca3951-19f5-4afa-a001-00a154cc611c</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompanyInfo_Name">
+          <DataField>CompanyInfo_Name</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Picture">
+          <DataField>CompanyInfo_Picture</DataField>
+        </Field>
+        <Field Name="CompanyName">
+          <DataField>CompanyName</DataField>
+        </Field>
+        <Field Name="BuldingName">
+          <DataField>BuldingName</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CompanyEmail">
+          <DataField>CompanyEmail</DataField>
+        </Field>
+        <Field Name="PrintingDate">
+          <DataField>PrintingDate</DataField>
+        </Field>
+        <Field Name="PrintingTime">
+          <DataField>PrintingTime</DataField>
+        </Field>
+        <Field Name="PrintedBy">
+          <DataField>PrintedBy</DataField>
+        </Field>
+        <Field Name="PrintDateTime">
+          <DataField>PrintDateTime</DataField>
+        </Field>
+        <Field Name="Employee_No">
+          <DataField>Employee_No</DataField>
+        </Field>
+        <Field Name="First_Name">
+          <DataField>First_Name</DataField>
+        </Field>
+        <Field Name="Middle_Name">
+          <DataField>Middle_Name</DataField>
+        </Field>
+        <Field Name="Last_Name">
+          <DataField>Last_Name</DataField>
+        </Field>
+        <Field Name="Full_Name">
+          <DataField>Full_Name</DataField>
+        </Field>
+        <Field Name="Gender">
+          <DataField>Gender</DataField>
+        </Field>
+        <Field Name="Date_Of_Birth">
+          <DataField>Date_Of_Birth</DataField>
+        </Field>
+        <Field Name="Age">
+          <DataField>Age</DataField>
+        </Field>
+        <Field Name="ID_Number">
+          <DataField>ID_Number</DataField>
+        </Field>
+        <Field Name="PIN_Number">
+          <DataField>PIN_Number</DataField>
+        </Field>
+        <Field Name="NSSF_No">
+          <DataField>NSSF_No</DataField>
+        </Field>
+        <Field Name="NHIF_No">
+          <DataField>NHIF_No</DataField>
+        </Field>
+        <Field Name="Status">
+          <DataField>Status</DataField>
+        </Field>
+        <Field Name="Cellular_Phone_Number">
+          <DataField>Cellular_Phone_Number</DataField>
+        </Field>
+        <Field Name="E_Mail">
+          <DataField>E_Mail</DataField>
+        </Field>
+        <Field Name="Postal_Address">
+          <DataField>Postal_Address</DataField>
+        </Field>
+        <Field Name="City">
+          <DataField>City</DataField>
+        </Field>
+        <Field Name="County">
+          <DataField>County</DataField>
+        </Field>
+        <Field Name="Job_Title">
+          <DataField>Job_Title</DataField>
+        </Field>
+        <Field Name="Job_ID">
+          <DataField>Job_ID</DataField>
+        </Field>
+        <Field Name="Department_Code">
+          <DataField>Department_Code</DataField>
+        </Field>
+        <Field Name="Responsibility_Center">
+          <DataField>Responsibility_Center</DataField>
+        </Field>
+        <Field Name="Date_Of_Join">
+          <DataField>Date_Of_Join</DataField>
+        </Field>
+        <Field Name="Contract_End_Date">
+          <DataField>Contract_End_Date</DataField>
+        </Field>
+        <Field Name="Grade">
+          <DataField>Grade</DataField>
+        </Field>
+        <Field Name="Salary_Grade">
+          <DataField>Salary_Grade</DataField>
+        </Field>
+        <Field Name="Bank_Name">
+          <DataField>Bank_Name</DataField>
+        </Field>
+        <Field Name="Bank_Branch">
+          <DataField>Bank_Branch</DataField>
+        </Field>
+        <Field Name="Bank_Account_Number">
+          <DataField>Bank_Account_Number</DataField>
+        </Field>
+        <Field Name="Marital_Status">
+          <DataField>Marital_Status</DataField>
+        </Field>
+        <Field Name="Ethnic_Origin">
+          <DataField>Ethnic_Origin</DataField>
+        </Field>
+        <Field Name="Religion">
+          <DataField>Religion</DataField>
+        </Field>
+        <Field Name="Supervisor_Code">
+          <DataField>Supervisor_Code</DataField>
+        </Field>
+        <Field Name="Supervisor_Name">
+          <DataField>Supervisor_Name</DataField>
+        </Field>
+        <Field Name="Employee_Group">
+          <DataField>Employee_Group</DataField>
+        </Field>
+        <Field Name="Terms_Of_Service">
+          <DataField>Terms_Of_Service</DataField>
+        </Field>
+        <Field Name="Employee_Picture">
+          <DataField>Employee_Picture</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>

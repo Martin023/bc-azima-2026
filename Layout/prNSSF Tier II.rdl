@@ -612,7 +612,15 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>NSSF Tier II Report</Value>
+                      <Value>NSSF Tier II Report for the Payroll Period : </Value>
+                      <Style>
+                        <FontFamily>Book Antiqua</FontFamily>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Label>PayrollPeriod</Label>
+                      <Value>=First(Fields!PeriodName.Value, "DataSet_Result")</Value>
                       <Style>
                         <FontFamily>Book Antiqua</FontFamily>
                         <FontWeight>Bold</FontWeight>

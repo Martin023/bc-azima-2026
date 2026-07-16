@@ -579,12 +579,12 @@ table 52185729 Loans
                 // To accomodate portal loans
 
                 // if "Source Aplication" = "Source Aplication"::BC then begin
-                    // if "Source Unit" = Rec."Source Unit"::BOSA then begin
-                    UserSetup.get(USERID);
-                    if UserSetup."Member No." = '' then Error('Member number for %1 must have a value in the user setup', UserId);
-                    IF (UserSetup."Member No." = "Member No.") and (UserSetup."Member No." <> '') then
-                        Error('You cannot capture your own loan application.');
-                    // end;
+                // if "Source Unit" = Rec."Source Unit"::BOSA then begin
+                UserSetup.get(USERID);
+                if UserSetup."Member No." = '' then Error('Member number for %1 must have a value in the user setup', UserId);
+                IF (UserSetup."Member No." = "Member No.") and (UserSetup."Member No." <> '') then
+                    Error('You cannot capture your own loan application.');
+                // end;
                 // end;
 
                 "Loans - Deposit Purchase" := 0;
@@ -2245,7 +2245,7 @@ table 52185729 Loans
                     if "Retirement/Expiry Date" < Today then
                         // Error('This date cannot be less than today');
                         Message('This member is already retired');
-                    "Months to Retire" := round(("Retirement/Expiry Date" - Today) / 365, 1);
+                    "Months to Retire" := round(("Retirement/Expiry Date" - Today) / 30, 1);
                 end;
 
 

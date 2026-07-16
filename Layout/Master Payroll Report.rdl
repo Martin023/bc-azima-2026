@@ -670,7 +670,15 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Master Payroll Report</Value>
+                      <Value>Master Payroll Report for the Payroll Period : </Value>
+                      <Style>
+                        <FontFamily>Book Antiqua</FontFamily>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Label>PayrollPeriod</Label>
+                      <Value>=First(Fields!PeriodName.Value, "DataSet_Result")</Value>
                       <Style>
                         <FontFamily>Book Antiqua</FontFamily>
                         <FontWeight>Bold</FontWeight>
@@ -678,7 +686,7 @@
                     </TextRun>
                   </TextRuns>
                   <Style>
-                    <TextAlign>Center</TextAlign>
+                    <TextAlign>Left</TextAlign>
                   </Style>
                 </Paragraph>
               </Paragraphs>
@@ -716,7 +724,7 @@
           </Style>
         </PageFooter>
         <PageHeight>21.59cm</PageHeight>
-        <PageWidth>100cm</PageWidth>
+        <PageWidth>150cm</PageWidth>
         <LeftMargin>1cm</LeftMargin>
         <RightMargin>1cm</RightMargin>
         <TopMargin>1cm</TopMargin>
@@ -885,6 +893,9 @@ End Function
         </Field>
         <Field Name="Employer_AmountFormat">
           <DataField>Employer_AmountFormat</DataField>
+        </Field>
+        <Field Name="PeriodName">
+          <DataField>PeriodName</DataField>
         </Field>
         <Field Name="CI_Name">
           <DataField>CI_Name</DataField>

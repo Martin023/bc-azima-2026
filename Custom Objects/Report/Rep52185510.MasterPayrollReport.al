@@ -26,6 +26,7 @@ report 52185511 "Master Payroll Report"
                 column(Transaction_Name; "Transaction Name") { }
                 column(Amount; Amount) { }
                 column(Employer_Amount; "Employer Amount") { }
+                column(PeriodName; PeriodName) {}
                 column(CI_Name; CI.Name)
                 {
                     IncludeCaption = true;
@@ -66,11 +67,18 @@ report 52185511 "Master Payroll Report"
     requestpage
     {
         SaveValues = true;
-
         layout
         {
+            area(content)
+            {
+                field(SelectedPeriod; SelectedPeriod)
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Selected Period';
+                    TableRelation = "PR Payroll Periods";
+                }
+            }
         }
-
         actions
         {
         }
