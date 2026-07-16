@@ -11,169 +11,6 @@
       <rd:DataSourceID>e16e64b1-6b97-4be4-9fc6-82d16ea2c847</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="AssetNo">
-          <DataField>AssetNo</DataField>
-        </Field>
-        <Field Name="FADescription">
-          <DataField>FADescription</DataField>
-        </Field>
-        <Field Name="MemorandumNotes">
-          <DataField>MemorandumNotes</DataField>
-        </Field>
-        <Field Name="DepreciationType">
-          <DataField>DepreciationType</DataField>
-        </Field>
-        <Field Name="AdditionDate">
-          <DataField>AdditionDate</DataField>
-        </Field>
-        <Field Name="AcquisitionDate">
-          <DataField>AcquisitionDate</DataField>
-        </Field>
-        <Field Name="DepreciationStartDate">
-          <DataField>DepreciationStartDate</DataField>
-        </Field>
-        <Field Name="DepreciationEndDate">
-          <DataField>DepreciationEndDate</DataField>
-        </Field>
-        <Field Name="BarCode">
-          <DataField>BarCode</DataField>
-        </Field>
-        <Field Name="OldBarCode">
-          <DataField>OldBarCode</DataField>
-        </Field>
-        <Field Name="AssetFloor">
-          <DataField>AssetFloor</DataField>
-        </Field>
-        <Field Name="ActivityCode">
-          <DataField>ActivityCode</DataField>
-        </Field>
-        <Field Name="BranchCode">
-          <DataField>BranchCode</DataField>
-        </Field>
-        <Field Name="Status">
-          <DataField>Status</DataField>
-        </Field>
-        <Field Name="MainAssetComponent">
-          <DataField>MainAssetComponent</DataField>
-        </Field>
-        <Field Name="DisposalDate">
-          <DataField>DisposalDate</DataField>
-        </Field>
-        <Field Name="AssetCategory">
-          <DataField>AssetCategory</DataField>
-        </Field>
-        <Field Name="AssetSubCategory">
-          <DataField>AssetSubCategory</DataField>
-        </Field>
-        <Field Name="AssetLife">
-          <DataField>AssetLife</DataField>
-        </Field>
-        <Field Name="RemainingLife">
-          <DataField>RemainingLife</DataField>
-        </Field>
-        <Field Name="Marked_for_Disposal">
-          <DataField>Marked_for_Disposal</DataField>
-        </Field>
-        <Field Name="DisposalValue">
-          <DataField>DisposalValue</DataField>
-        </Field>
-        <Field Name="DisposalValueFormat">
-          <DataField>DisposalValueFormat</DataField>
-        </Field>
-        <Field Name="Purchase_Price">
-          <DataField>Purchase_Price</DataField>
-        </Field>
-        <Field Name="Purchase_PriceFormat">
-          <DataField>Purchase_PriceFormat</DataField>
-        </Field>
-        <Field Name="WriteDownValue">
-          <DataField>WriteDownValue</DataField>
-        </Field>
-        <Field Name="WriteDownValueFormat">
-          <DataField>WriteDownValueFormat</DataField>
-        </Field>
-        <Field Name="AccumulatedDepreciation">
-          <DataField>AccumulatedDepreciation</DataField>
-        </Field>
-        <Field Name="AccumulatedDepreciationFormat">
-          <DataField>AccumulatedDepreciationFormat</DataField>
-        </Field>
-        <Field Name="Adjustments">
-          <DataField>Adjustments</DataField>
-        </Field>
-        <Field Name="AdjustmentsFormat">
-          <DataField>AdjustmentsFormat</DataField>
-        </Field>
-        <Field Name="InsuranceValue">
-          <DataField>InsuranceValue</DataField>
-        </Field>
-        <Field Name="InsuranceValueFormat">
-          <DataField>InsuranceValueFormat</DataField>
-        </Field>
-        <Field Name="DisposalProceeds">
-          <DataField>DisposalProceeds</DataField>
-        </Field>
-        <Field Name="DisposalProceedsFormat">
-          <DataField>DisposalProceedsFormat</DataField>
-        </Field>
-        <Field Name="Purchase_Vendor_Company">
-          <DataField>Purchase_Vendor_Company</DataField>
-        </Field>
-        <Field Name="InvoiceNumber">
-          <DataField>InvoiceNumber</DataField>
-        </Field>
-        <Field Name="InvoiceDate">
-          <DataField>InvoiceDate</DataField>
-        </Field>
-        <Field Name="VendorReference">
-          <DataField>VendorReference</DataField>
-        </Field>
-        <Field Name="FALocation">
-          <DataField>FALocation</DataField>
-        </Field>
-        <Field Name="Department">
-          <DataField>Department</DataField>
-        </Field>
-        <Field Name="SerialNumber">
-          <DataField>SerialNumber</DataField>
-        </Field>
-        <Field Name="NetBookValue">
-          <DataField>NetBookValue</DataField>
-        </Field>
-        <Field Name="NetBookValueFormat">
-          <DataField>NetBookValueFormat</DataField>
-        </Field>
-        <Field Name="ResponsibleEmployeePFNo">
-          <DataField>ResponsibleEmployeePFNo</DataField>
-        </Field>
-        <Field Name="ResponsibleEmployeeName">
-          <DataField>ResponsibleEmployeeName</DataField>
-        </Field>
-        <Field Name="CompanyInformation_Name">
-          <DataField>CompanyInformation_Name</DataField>
-        </Field>
-        <Field Name="CompanyInformation_Picture">
-          <DataField>CompanyInformation_Picture</DataField>
-        </Field>
-        <Field Name="CompanyAddress">
-          <DataField>CompanyAddress</DataField>
-        </Field>
-        <Field Name="CompanyTelephone">
-          <DataField>CompanyTelephone</DataField>
-        </Field>
-        <Field Name="CommunicationOnline">
-          <DataField>CommunicationOnline</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -2245,12 +2082,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -2290,4 +2121,167 @@ End Function
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="AssetNo">
+          <DataField>AssetNo</DataField>
+        </Field>
+        <Field Name="FADescription">
+          <DataField>FADescription</DataField>
+        </Field>
+        <Field Name="MemorandumNotes">
+          <DataField>MemorandumNotes</DataField>
+        </Field>
+        <Field Name="DepreciationType">
+          <DataField>DepreciationType</DataField>
+        </Field>
+        <Field Name="AdditionDate">
+          <DataField>AdditionDate</DataField>
+        </Field>
+        <Field Name="AcquisitionDate">
+          <DataField>AcquisitionDate</DataField>
+        </Field>
+        <Field Name="DepreciationStartDate">
+          <DataField>DepreciationStartDate</DataField>
+        </Field>
+        <Field Name="DepreciationEndDate">
+          <DataField>DepreciationEndDate</DataField>
+        </Field>
+        <Field Name="BarCode">
+          <DataField>BarCode</DataField>
+        </Field>
+        <Field Name="OldBarCode">
+          <DataField>OldBarCode</DataField>
+        </Field>
+        <Field Name="AssetFloor">
+          <DataField>AssetFloor</DataField>
+        </Field>
+        <Field Name="ActivityCode">
+          <DataField>ActivityCode</DataField>
+        </Field>
+        <Field Name="BranchCode">
+          <DataField>BranchCode</DataField>
+        </Field>
+        <Field Name="Status">
+          <DataField>Status</DataField>
+        </Field>
+        <Field Name="MainAssetComponent">
+          <DataField>MainAssetComponent</DataField>
+        </Field>
+        <Field Name="DisposalDate">
+          <DataField>DisposalDate</DataField>
+        </Field>
+        <Field Name="AssetCategory">
+          <DataField>AssetCategory</DataField>
+        </Field>
+        <Field Name="AssetSubCategory">
+          <DataField>AssetSubCategory</DataField>
+        </Field>
+        <Field Name="AssetLife">
+          <DataField>AssetLife</DataField>
+        </Field>
+        <Field Name="RemainingLife">
+          <DataField>RemainingLife</DataField>
+        </Field>
+        <Field Name="Marked_for_Disposal">
+          <DataField>Marked_for_Disposal</DataField>
+        </Field>
+        <Field Name="DisposalValue">
+          <DataField>DisposalValue</DataField>
+        </Field>
+        <Field Name="DisposalValueFormat">
+          <DataField>DisposalValueFormat</DataField>
+        </Field>
+        <Field Name="Purchase_Price">
+          <DataField>Purchase_Price</DataField>
+        </Field>
+        <Field Name="Purchase_PriceFormat">
+          <DataField>Purchase_PriceFormat</DataField>
+        </Field>
+        <Field Name="WriteDownValue">
+          <DataField>WriteDownValue</DataField>
+        </Field>
+        <Field Name="WriteDownValueFormat">
+          <DataField>WriteDownValueFormat</DataField>
+        </Field>
+        <Field Name="AccumulatedDepreciation">
+          <DataField>AccumulatedDepreciation</DataField>
+        </Field>
+        <Field Name="AccumulatedDepreciationFormat">
+          <DataField>AccumulatedDepreciationFormat</DataField>
+        </Field>
+        <Field Name="Adjustments">
+          <DataField>Adjustments</DataField>
+        </Field>
+        <Field Name="AdjustmentsFormat">
+          <DataField>AdjustmentsFormat</DataField>
+        </Field>
+        <Field Name="InsuranceValue">
+          <DataField>InsuranceValue</DataField>
+        </Field>
+        <Field Name="InsuranceValueFormat">
+          <DataField>InsuranceValueFormat</DataField>
+        </Field>
+        <Field Name="DisposalProceeds">
+          <DataField>DisposalProceeds</DataField>
+        </Field>
+        <Field Name="DisposalProceedsFormat">
+          <DataField>DisposalProceedsFormat</DataField>
+        </Field>
+        <Field Name="Purchase_Vendor_Company">
+          <DataField>Purchase_Vendor_Company</DataField>
+        </Field>
+        <Field Name="InvoiceNumber">
+          <DataField>InvoiceNumber</DataField>
+        </Field>
+        <Field Name="InvoiceDate">
+          <DataField>InvoiceDate</DataField>
+        </Field>
+        <Field Name="VendorReference">
+          <DataField>VendorReference</DataField>
+        </Field>
+        <Field Name="FALocation">
+          <DataField>FALocation</DataField>
+        </Field>
+        <Field Name="Department">
+          <DataField>Department</DataField>
+        </Field>
+        <Field Name="SerialNumber">
+          <DataField>SerialNumber</DataField>
+        </Field>
+        <Field Name="NetBookValue">
+          <DataField>NetBookValue</DataField>
+        </Field>
+        <Field Name="NetBookValueFormat">
+          <DataField>NetBookValueFormat</DataField>
+        </Field>
+        <Field Name="ResponsibleEmployeePFNo">
+          <DataField>ResponsibleEmployeePFNo</DataField>
+        </Field>
+        <Field Name="ResponsibleEmployeeName">
+          <DataField>ResponsibleEmployeeName</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Name">
+          <DataField>CompanyInformation_Name</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Picture">
+          <DataField>CompanyInformation_Picture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>
