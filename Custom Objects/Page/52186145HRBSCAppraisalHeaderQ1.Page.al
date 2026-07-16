@@ -203,7 +203,7 @@ page 52186145 "HR Individual Appraisal Card"
                 Promoted = true;
                 PromotedCategory = Category5;
                 PromotedIsBig = true;
-                Enabled = (Rec.Status = Rec.Status::Open) and ((Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Evaluation Review") or (Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Year-End Review")) and (UserId = Rec."User ID");
+                Enabled = (Rec.Status = Rec.Status::Open) and ((Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Evaluation Review") or (Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Year-End Review"));
 
                 trigger OnAction()
                 begin
@@ -221,7 +221,7 @@ page 52186145 "HR Individual Appraisal Card"
                 Promoted = true;
                 PromotedCategory = Category5;
                 PromotedIsBig = true;
-                Enabled = (Rec.Status = Rec.Status::"Pending Approval") and (UserId = Rec."Supervisor ID");
+                Enabled = (Rec.Status = Rec.Status::"Pending Approval");
                 ToolTip = 'Return this appraisal to the employee for revision. The employee will be able to edit their self-ratings again.';
 
                 trigger OnAction()
@@ -277,7 +277,7 @@ page 52186145 "HR Individual Appraisal Card"
                 Promoted = true;
                 PromotedCategory = Category5;
                 PromotedIsBig = true;
-                Enabled = ((Rec.Status = Rec.Status::"Pending Approval") or (Rec.Status = Rec.Status::Discussed)) and ((Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Evaluation Review") or (Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Year-End Review")) and (UserId = Rec."Supervisor ID");
+                Enabled = ((Rec.Status = Rec.Status::"Pending Approval") or (Rec.Status = Rec.Status::Discussed)) and ((Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Evaluation Review") or (Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Year-End Review"));
 
                 trigger OnAction()
                 begin
@@ -291,7 +291,7 @@ page 52186145 "HR Individual Appraisal Card"
                 Image = Redo;
                 Promoted = true;
                 PromotedCategory = Category5;
-                Enabled = (Rec.Status = Rec.Status::Open) and (Rec."Appraisee Submitted" = true) and (UserId = Rec."User ID");
+                Enabled = (Rec.Status = Rec.Status::Open) and (Rec."Appraisee Submitted" = true);
                 ToolTip = 'Resubmit this appraisal to supervisor after making revisions';
 
                 trigger OnAction()
