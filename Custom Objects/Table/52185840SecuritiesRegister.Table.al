@@ -488,6 +488,10 @@ table 52185840 "Securities Register"
                 Rec."Serial No." := '';
                 Rec."Year of Purchase" := 0;
                 Rec."Total Market Value" := 0;
+                rec."Market Value" := 0;
+                rec."Insured Value" := 0;
+                rec."Forced Sale Value" := 0;
+                rec."Collateral Limit" := 0;
                 Rec."PF No." := '';
                 Rec."Collateral Hold Types" := Rec."Collateral Hold Types"::" ";
                 Rec."Personal Guarantee Provided" := false;
