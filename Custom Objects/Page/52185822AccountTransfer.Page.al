@@ -657,30 +657,87 @@ page 52185822 "Account Transfer"
                 //         Message('Source loan Accounts Updated Successfully');
                 //     end;
                 // }
-            }
-            group("Clear lines")
+                action("Suggest Group Member Accounts")
             {
-                action("Clear Source Accounts")
-                {
-                    Caption = 'Clear Source Accounts';
-                    Image = Account;
-                    Promoted = true;
-                    PromotedCategory = Category6;
-                    ApplicationArea = Basic, Suite;
+                ApplicationArea = Basic, Suite;
+                Caption = 'Suggest Group Member Destinations';
+                Image = Account;
+                Promoted = true;
+                PromotedCategory = Category5;
 
-                    trigger OnAction()
-                    var
-                        TransSource: Record "Account Transfer Source";
-                    begin
-                        rec.TestField(posted, false);
-                        rec.testfield(status, rec.status::open);
-                        TransSource.reset;
-                        TransSource.setrange("No.", rec.No);
-                        if TransSource.find('-') then
-                            TransSource.deleteall;
-                        Message('Source Accounts Cleared');
+                trigger OnAction()
+                var
+                    Signatories: record "Account Signatories";
+                    SavingsREC: Record "Savings Accounts";
+                    TransSource: Record "Account Transfer Source";
+                    TransDestin: Record "Account Transfer Destination";
+                begin
+
+                    rec.TestField(posted, false);
+                    rec.testfield(status, rec.status::open);
+                    //Clear any line
+                    TransDestin.reset;
+                    TransDestin.setrange("No.", rec.No);
+                    if TransDestin.find('-') then
+                        TransDestin.deleteall;
+
+                    //Insert new accounts
+                    Signatories.Reset();
+                    Signatories.SetRange("Account No", Rec."Member No");
+                    if Signatories.findset() then begin
+                        repeat
+                            SavingsREC.Reset;
+                            SavingsREC.SetRange(SavingsREC."Member No.", Signatories."Member No.");
+                            SavingsREC.SetRange(SavingsREC."Product Category", SavingsREC."Product Category"::"Chama Investment Account");
+                            if SavingsREC.Find('-') then begin
+                                repeat
+                                    TransDestin.Init;
+                                    TransDestin."Entry No." := TransDestin."Entry No." + 1;
+                                    TransDestin."No." := Rec.No;
+                                    TransDestin."Destination Account Type" := TransDestin."Destination Account Type"::Savings;
+                                    TransDestin."Destination Account No." := SavingsREC."No.";
+                                    TransDestin."Destination Account Name" := SavingsREC.Name;
+                                    TransDestin."Product Name" := SavingsREC."Product Name";
+                                    TransDestin."Product Code" := SavingsREC."Product Type";
+                                    TransDestin."Transfer Type" := Rec."Transfer Type";
+                                    TransDestin."Member No." := SavingsREC."Member No.";
+                                    TransDestin.Insert(true);
+                                    TransDestin.Validate(TransDestin."Destination Account No.");
+                                until SavingsREC.Next = 0;
+                            end;
+                        until Signatories.next = 0;
                     end;
-                }
+                    Message('Destination Accounts Updated Successfully');
+                end;
+            }
+
+            }
+
+                       
+                group("Clear lines")
+                {
+                    action("Clear Source Accounts")
+                    {
+                        Caption = 'Clear Source Accounts';
+                        Image = Account;
+                        Promoted = true;
+                        PromotedCategory = Category6;
+                        ApplicationArea = Basic, Suite;
+
+                        trigger OnAction()
+                        var
+                            TransSource: Record "Account Transfer Source";
+                        begin
+                            rec.TestField(posted, false);
+                            rec.testfield(status, rec.status::open);
+                            TransSource.reset;
+                            TransSource.setrange("No.", rec.No);
+                            if TransSource.find('-') then
+                                TransSource.deleteall;
+                            Message('Source Accounts Cleared');
+                        end;
+                    }
+                
                 action("Clear Destination Accounts")
                 {
                     Caption = 'Clear Destination Accounts';
