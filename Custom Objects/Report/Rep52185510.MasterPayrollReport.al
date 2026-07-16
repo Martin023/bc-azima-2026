@@ -173,6 +173,7 @@ report 52185511 "Master Payroll Report"
         TotDed: Decimal;
         TotAllow: Decimal;
         Allow: Decimal;
+        
 
     procedure OnViewCurrRec()
     var

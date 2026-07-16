@@ -910,12 +910,12 @@ table 52185700 Members
 
         field(44; "Group Account No."; Code[20])
         {
-            Description = 'LookUp to Member.No. WHERE Group Account=Yes';
-
-            trigger OnValidate()
-            begin
-                CanEditSensitiveData();
-            end;
+            FieldClass = FlowField;
+            // trigger OnValidate()
+            // begin
+            //     CanEditSensitiveData();
+            // end;
+            CalcFormula = lookup("Account Signatories"."Account No" where("Member No." = field("No."), "Account Type" = filter(Member)));
         }
 
 

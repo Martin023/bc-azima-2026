@@ -74,7 +74,7 @@ table 52185729 Loans
                 MemberAge: Integer;
                 LoansProcessing: codeunit "Loans process";
             begin
-                InsertLoanGuarantorsForBusinessLoans();
+
 
                 NoofMonths := 0;
                 "Loan Group" := "Loan Group"::Normal;
@@ -84,6 +84,10 @@ table 52185729 Loans
 
                 ProdFac.Get("Loan Product Type");
                 "Loan Group" := ProdFac."Loan Group";
+
+                if "Loan Group" = "Loan Group"::"Group Loan" then begin
+                    InsertLoanGuarantorsForBusinessLoans();
+                end;
                 Otherdeposits := 0;
                 if ProductFactory.Get(rec."Loan Product Type") then begin
                     OtherAppraisals.Reset();
@@ -107,7 +111,6 @@ table 52185729 Loans
                     SavAcc.CalcFields(SavAcc."Balance (LCY)");
                     //Check Minimum savings per product
                     "Member Deposits" := SavAcc."Balance (LCY)" + Otherdeposits;
-
                 end;
                 Rec."Source Unit" := ProductFa."Source Unit";
                 if rec."Source Unit" = Rec."Source Unit"::"HR LOANS" then begin
@@ -485,14 +488,15 @@ table 52185729 Loans
                             Message('The loan repayment period exceeds the member’s maximum retirement age.The installment duration is adjusted to %1 months.', Installments);
                     end;
                 end;
-
-
             end;
         }
         field(4; "Member No."; Code[20])
         {
-            TableRelation = Members."No.";
-
+            //TableRelation = Members."No.";
+            TableRelation =
+            IF ("Group Account No." = filter(<> '')) Members."No." WHERE("Group Account No." = field("Group Account No."))
+            ELSE
+            Members."No.";
             trigger OnValidate()
             var
                 // Apprasail: record "Loan Appraisal Comments";
@@ -715,8 +719,8 @@ table 52185729 Loans
                         "Disbursement Account No" := SavAcc."No."
                     else begin
                         if "Dummy Appraisal" = false then
-                            Error('Member No.' + SavAcc."Member No." + ' does not have an Ordinary savings account') else
-                            Message('Member No.' + SavAcc."Member No." + ' does not have an Ordinary savings account');
+                            Error('Member No.' + SavAcc."Member No." + ' does not have an FOSA savings account') else
+                            Message('Member No.' + SavAcc."Member No." + ' does not have an FOSA savings account');
                     end;
                 end;
 
@@ -729,7 +733,7 @@ table 52185729 Loans
                     if SavProducts.Get(ShareCapAcc."Product Type") then begin
                         ShareCapAcc.CALCFIELDS(ShareCapAcc."Balance (LCY)");
                         IF ShareCapAcc."Balance (LCY)" < SavProducts."Minimum Balance" THEN begin
-                            if "Mobile Loan" <> true then begin
+                            if not "Mobile Loan" then begin
                                 MESSAGE('Member no. %1 has share capital of %2 and minimum required share capital is %3 This will be boosted on the loan.', LoanApp."Member No.", ShareCapAcc."Balance (LCY)", SavProducts."Minimum Balance");
                                 "Share Boosted Amount" := SavProducts."Minimum Balance" - ShareCapAcc."Balance (LCY)";
                             end;
@@ -3341,6 +3345,10 @@ table 52185729 Loans
             DataClassification = ToBeClassified;
             Editable = false;
         }
+        field(211; "Group Account No."; Code[30])
+        {
+            TableRelation = Members."No." where("Account Type" = filter("Group Account"));
+        }
 
     }
 
@@ -3955,36 +3963,36 @@ table 52185729 Loans
         if (Rec."Member No." <> '') and (Rec."Loan Product Type" <> '') then begin
             ProductFactory.Get("Loan Product Type");
             if Members.Get("Member No.") then begin
-                if (Members."Has Joined Business Loans") and (ProductFactory."Source Unit" = ProductFactory."Source Unit"::"BUSINESS LOANS") and (Members."Group Account No." <> '') then begin
-                    GroupMembers.Reset;
-                    GroupMembers.SetRange("Group Account No.", Members."Group Account No.");
-                    GroupMembers.SetRange("Has Joined Business Loans", true);
-                    GroupMembers.SetFilter("No.", '<>%1', Members."No.");
-                    if GroupMembers.Find('-') then begin
-                        repeat
-                            BusinesDepositsAcc.Reset;
-                            BusinesDepositsAcc.SetRange("Member No.", GroupMembers."No.");
-                            BusinesDepositsAcc.SetRange("Product Category", BusinesDepositsAcc."Product Category"::"Business Deposits");
-                            if BusinesDepositsAcc.FindFirst() then begin
-                                Guarantors.Reset;
-                                Guarantors.SetRange("Loan No", Rec."Loan No.");
-                                Guarantors.SetRange("Savings Account No./Member No.", BusinesDepositsAcc."No.");
-                                if not Guarantors.FindFirst() then begin
-                                    Guarantors.Init;
-                                    Guarantors."Loan No" := "Loan No.";
-                                    Guarantors.Name := GroupMembers.Name;
-                                    Guarantors."Staff/Payroll No." := GroupMembers."Payroll/Staff No.";
-                                    Guarantors."Phone No." := GroupMembers."Phone No.";
-                                    Guarantors."ID No." := GroupMembers."Primary Identification";
-                                    Guarantors."Amount Guaranteed" := 0;
-                                    Guarantors."Savings Account No./Member No." := BusinesDepositsAcc."No.";
-                                    Guarantors."Guarantor Type" := Guarantors."Guarantor Type"::Guarantor;
-                                    Guarantors.Insert;
-                                end;
+                //if (Members."Has Joined Business Loans") and (ProductFactory."Source Unit" = ProductFactory."Source Unit"::"BUSINESS LOANS") and (Members."Group Account No." <> '') then begin
+                GroupMembers.Reset;
+                GroupMembers.SetRange("Group Account No.", rec."Group Account No.");
+                // GroupMembers.SetRange("Has Joined Business Loans", true);
+                // GroupMembers.SetFilter("No.", '<>%1', Members."No.");
+                if GroupMembers.findset() then begin
+                    repeat
+                        BusinesDepositsAcc.Reset;
+                        BusinesDepositsAcc.SetRange("Member No.", GroupMembers."No.");
+                        BusinesDepositsAcc.SetRange("Product Category", BusinesDepositsAcc."Product Category"::"Chama Investment Account");
+                        if BusinesDepositsAcc.FindFirst() then begin
+                            Guarantors.Reset;
+                            Guarantors.SetRange("Loan No", Rec."Loan No.");
+                            Guarantors.SetRange("Savings Account No./Member No.", BusinesDepositsAcc."No.");
+                            if not Guarantors.FindFirst() then begin
+                                Guarantors.Init;
+                                Guarantors."Loan No" := "Loan No.";
+                                Guarantors.Name := GroupMembers.Name;
+                                Guarantors."Staff/Payroll No." := GroupMembers."Payroll/Staff No.";
+                                Guarantors."Phone No." := GroupMembers."Phone No.";
+                                Guarantors."ID No." := GroupMembers."Primary Identification";
+                                Guarantors."Amount Guaranteed" := 0;
+                                Guarantors."Savings Account No./Member No." := BusinesDepositsAcc."No.";
+                                Guarantors."Guarantor Type" := Guarantors."Guarantor Type"::Guarantor;
+                                Guarantors.Insert;
                             end;
-                        until GroupMembers.Next() = 0;
-                    end;
+                        end;
+                    until GroupMembers.Next() = 0;
                 end;
+                //end;
             end;
         end;
     end;

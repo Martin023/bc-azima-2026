@@ -263,7 +263,7 @@ table 52185690 "Product Factory"
         field(52; "Ordinary Deposits Multiplier"; Decimal)
         {
         }
-        field(53; "Preferential Dep. Multiplier"; Decimal)
+        field(53; "Dep. Multiplier On Collateral"; Decimal)
         {
         }
         field(54; "Allow Multiple Running Loans"; Boolean)

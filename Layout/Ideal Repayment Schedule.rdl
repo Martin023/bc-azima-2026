@@ -11,7 +11,7 @@
       <am:Name>PBIRB</am:Name>
       <am:Version>15.7.1813.16</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-07-16T10:55:47.4693051Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-07-16T12:06:22.5273579Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -1118,7 +1118,6 @@
           </Tablix>
           <Line Name="Line1">
             <Top>1.96185in</Top>
-            <Left>0in</Left>
             <Height>0in</Height>
             <Width>19.74083cm</Width>
             <ZIndex>1</ZIndex>
@@ -2049,7 +2048,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>I…………………………………………….ID NO…………………………Do hereby acknowledge the  receipt of a loan		of </Value>
+                    <Value>I…………………………………………'….ID NO…………………………Do hereby acknowledge the  receipt of a loan		of Ksh……………………granted </Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -2058,7 +2057,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>7.79735cm</Top>
+            <Top>7.83262cm</Top>
             <Left>0cm</Left>
             <Height>0.46771cm</Height>
             <Width>19.6353cm</Width>
@@ -2081,7 +2080,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>  Ksh…………………………..granted to me by Azima Sacco and its above repayment schedule of which I do agree to abide</Value>
+                    <Value> to me by Azima Sacco and its above repayment schedule of which I do agree to abide by until  end of the period.</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -2105,38 +2104,6 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox24">
-            <rd:DefaultName>Textbox14</rd:DefaultName>
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>  by until  end of the period.</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>8.94444cm</Top>
-            <Left>0cm</Left>
-            <Height>0.46771cm</Height>
-            <Width>19.6353cm</Width>
-            <ZIndex>29</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
           <Textbox Name="Textbox27">
             <rd:DefaultName>Textbox14</rd:DefaultName>
             <CanGrow>true</CanGrow>
@@ -2144,12 +2111,6 @@
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
-                  <TextRun>
-                    <Value xml:space="preserve"> 		</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
                   <TextRun>
                     <Value>PAYMENT DETAILS</Value>
                     <Style>
@@ -2167,11 +2128,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>9.64827cm</Top>
-            <Left>0.12305cm</Left>
+            <Top>9.07473cm</Top>
+            <Left>0.03528cm</Left>
             <Height>0.46771cm</Height>
             <Width>19.6353cm</Width>
-            <ZIndex>30</ZIndex>
+            <ZIndex>29</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2200,11 +2161,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>10.29237cm</Top>
-            <Left>0.12305cm</Left>
+            <Top>9.71883cm</Top>
+            <Left>0.03528cm</Left>
             <Height>0.46771cm</Height>
             <Width>19.6353cm</Width>
-            <ZIndex>31</ZIndex>
+            <ZIndex>30</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2232,11 +2193,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>10.83064cm</Top>
-            <Left>0.12305cm</Left>
+            <Top>10.2571cm</Top>
+            <Left>0.03528cm</Left>
             <Height>0.46771cm</Height>
             <Width>19.6353cm</Width>
-            <ZIndex>32</ZIndex>
+            <ZIndex>31</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2255,7 +2216,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>  CO-OP BANK:	</Value>
+                    <Value>CO-OP BANK:	</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -2265,11 +2226,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>11.47474cm</Top>
-            <Left>0.12305cm</Left>
+            <Top>10.9012cm</Top>
+            <Left>0.03528cm</Left>
             <Height>0.46771cm</Height>
             <Width>19.6353cm</Width>
-            <ZIndex>33</ZIndex>
+            <ZIndex>32</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2288,7 +2249,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>		A/C NAME:	AZIMA SACCO LTD</Value>
+                    <Value>A/C NAME:	AZIMA SACCO LTD</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -2297,11 +2258,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>12.04828cm</Top>
-            <Left>0.12305cm</Left>
+            <Top>11.47474cm</Top>
+            <Left>0.03528cm</Left>
             <Height>0.46771cm</Height>
             <Width>19.6353cm</Width>
-            <ZIndex>34</ZIndex>
+            <ZIndex>33</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2329,11 +2290,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>12.6571cm</Top>
-            <Left>0.12305cm</Left>
+            <Top>12.08356cm</Top>
+            <Left>0.03528cm</Left>
             <Height>0.46771cm</Height>
             <Width>19.6353cm</Width>
-            <ZIndex>35</ZIndex>
+            <ZIndex>34</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2362,11 +2323,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>13.3012cm</Top>
-            <Left>0.12305cm</Left>
+            <Top>12.72766cm</Top>
+            <Left>0.03528cm</Left>
             <Height>0.46771cm</Height>
             <Width>19.6353cm</Width>
-            <ZIndex>36</ZIndex>
+            <ZIndex>35</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2385,7 +2346,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>		A/C NAME:	AZIMA SACCO LTD</Value>
+                    <Value>A/C NAME:	AZIMA SACCO LTD</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -2394,11 +2355,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>13.83946cm</Top>
-            <Left>0.12305cm</Left>
+            <Top>13.26592cm</Top>
+            <Left>0.03528cm</Left>
             <Height>0.46771cm</Height>
             <Width>19.6353cm</Width>
-            <ZIndex>37</ZIndex>
+            <ZIndex>36</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2426,11 +2387,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>14.44829cm</Top>
-            <Left>0.12305cm</Left>
+            <Top>13.87475cm</Top>
+            <Left>0.03528cm</Left>
             <Height>0.46771cm</Height>
             <Width>19.6353cm</Width>
-            <ZIndex>38</ZIndex>
+            <ZIndex>37</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2442,7 +2403,7 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>15.21342cm</Height>
+        <Height>14.34246cm</Height>
         <Style />
       </Body>
       <Width>19.8814cm</Width>
