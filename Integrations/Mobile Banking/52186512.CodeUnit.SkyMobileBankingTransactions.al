@@ -4598,7 +4598,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
             exit(0);
         end;
 
-        QualifiedAmount := Round(TotalCredits / 3, 1);
+        QualifiedAmount := Round(TotalCredits, 1);
 
         if QualifiedAmount > ProdFac."Maximum Loan Amount" then begin
             QualifiedAmount := ProdFac."Maximum Loan Amount";
