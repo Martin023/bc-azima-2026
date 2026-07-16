@@ -77,20 +77,18 @@ table 52185840 "Securities Register"
 
             trigger OnValidate()
             begin
-                Validate("Collateral Value");
+                Validate("Forced Sale Value");
                 if ("Collateral Multiplier" > 100) or
                   ("Collateral Multiplier" < 0)
                   then
                     "Collateral Multiplier" := 0
             end;
         }
-        field(16; "Collateral Value"; Decimal)
+        field(16; "Insured Value"; Decimal)
         {
-
             trigger OnValidate()
             begin
-
-
+                rec."Total Market Value" := "Market Value" + "Insured Value";
             end;
         }
         field(17; "Collateral Limit"; Decimal)
@@ -281,11 +279,16 @@ table 52185840 "Securities Register"
         }
         field(120; "Amount to be Charged"; Decimal)
         {
-            Caption = 'Amount to be Charged';
+            Caption = 'Charged Amount';
         }
         field(121; "Market Value"; Decimal)
         {
             Caption = 'Market Value';
+
+            trigger OnValidate()
+            begin
+                rec."Total Market Value" := "Market Value" + "Insured Value";
+            end;
         }
         field(122; "Loan Name"; Text[100])
         {
@@ -484,7 +487,7 @@ table 52185840 "Securities Register"
                 Rec."Model No." := '';
                 Rec."Serial No." := '';
                 Rec."Year of Purchase" := 0;
-                Rec."Estimated Market Value" := 0;
+                Rec."Total Market Value" := 0;
                 Rec."PF No." := '';
                 Rec."Collateral Hold Types" := Rec."Collateral Hold Types"::" ";
                 Rec."Personal Guarantee Provided" := false;
@@ -513,9 +516,9 @@ table 52185840 "Securities Register"
         {
             Caption = 'Chattel Make';
         }
-        field(153; "Estimated Market Value"; Decimal)
+        field(153; "Total Market Value"; Decimal)
         {
-            Caption = 'Estimated Market Value';
+            Caption = 'Total Market Value';
         }
         field(154; "Year of Purchase"; Integer)
         {

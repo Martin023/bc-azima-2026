@@ -10,7 +10,7 @@ page 52186484 "HR Collateral List"
     SourceTable = "Securities Register";
     ApplicationArea = Basic, Suite;
     UsageCategory = Lists;
-    
+
 
     layout
     {
@@ -27,7 +27,7 @@ page 52186484 "HR Collateral List"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-  
+
                 field("Account No."; Rec."Account No.")
                 {
                     ApplicationArea = Basic, Suite;
@@ -45,7 +45,7 @@ page 52186484 "HR Collateral List"
                     ApplicationArea = Basic, Suite;
                     Visible = false;
                 }
-                field("Collateral Value"; Rec."Collateral Value")
+                field("Market Value"; Rec."Market Value")
                 {
                     ApplicationArea = Basic, Suite;
                 }
@@ -102,11 +102,11 @@ page 52186484 "HR Collateral List"
     }
     trigger OnOpenPage()
     var
-    UserSetup: Record "User Setup";
+        UserSetup: Record "User Setup";
     begin
         if UserSetup.Get(UserId) then begin
             UserSetup.TestField("Responsibility Centre");
-            Rec.SetFilter("Current Departmrnt",UserSetup."Responsibility Centre");
+            Rec.SetFilter("Current Departmrnt", UserSetup."Responsibility Centre");
         end else
             Error('You must be set up in user setup');
     end;

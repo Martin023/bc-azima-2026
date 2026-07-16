@@ -116,7 +116,7 @@ report 52185737 "Security Report"
             column(CollateralType; "Collateral Type")
             {
             }
-            column(CollateralValue; "Collateral Value")
+            column(CollateralValue; "Market Value")
             {
             }
             column(LawFirmHanldingtheMatter; "Law Firm Hanlding the Matter")

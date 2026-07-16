@@ -48,7 +48,7 @@ page 52186413 "Collateral Register - List"
                     ApplicationArea = Basic, Suite;
                     Visible = false;
                 }
-                field("Collateral Value"; Rec."Collateral Value")
+                field("Market Value"; Rec."Market Value")
                 {
                     ApplicationArea = Basic, Suite;
                 }

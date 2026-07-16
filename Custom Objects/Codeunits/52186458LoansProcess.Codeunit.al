@@ -7392,10 +7392,6 @@ Codeunit 52186458 "Loans Process"
                     InterestRate := LoansR."New Interest Rate";
                 end else
                     InterestRate := LoansR.Interest;
-                if Prodfac."Nature of Loan Type" = Prodfac."Nature of Loan Type"::"Emergency Loan" then begin
-                    PeriodInterest := ((LoansR.Interest / 100) * LoansR."Approved Amount" * (LoansR.Installments / 12));
-                    LoansR."Approved Amount" := PeriodInterest;
-                end;
 
                 if Prodfac."Nature of Loan Type" = ProdFac."Nature of Loan Type"::"Emergency Loan" then begin
                     if prodFac."Compute Interest Due on Postin" = Prodfac."Compute Interest Due on Postin"::"Full Period Interest" then begin

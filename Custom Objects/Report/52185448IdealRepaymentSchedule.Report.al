@@ -74,6 +74,7 @@ Report 52185448 "Ideal Repayment Schedule"
             {
 
             }
+            column(Staff_No; "Staff No") { }
 
 
             dataitem("Ideal Repayment Schedule"; "Ideal Repayment Schedule")
@@ -85,7 +86,7 @@ Report 52185448 "Ideal Repayment Schedule"
                 column(Monthly_Repayment; ROUND("Monthly Repayment"))
                 {
                 }
-                column(Repayment_Date; Format("Repayment Date", 0, 4))
+                column(Repayment_Date; CopyStr(Format("Repayment Date", 0, 4), 4))
                 {
                 }
                 column(Principal_Repayment; ROUND("Principal Repayment"))

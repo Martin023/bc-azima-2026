@@ -51,7 +51,7 @@ XmlPort 52185441 "Securities register"
                     FieldValidate = No;
                     //8
                 }
-                fieldelement(i; Collateral."Collateral Value")
+                fieldelement(i; Collateral."Market Value")
                 {
                     FieldValidate = No;
                     //9
@@ -103,35 +103,35 @@ XmlPort 52185441 "Securities register"
                     MinOccurs = zero;
                     //13
                 }
-               
+
                 fieldelement(t; Collateral."Loan Product")
                 {
                     FieldValidate = No;
-                    MinOccurs=zero;
+                    MinOccurs = zero;
                     //15
                 }
                 fieldelement(u; Collateral."Loan Amount")
                 {
                     FieldValidate = No;
-                    MinOccurs=zero;
+                    MinOccurs = zero;
                     //16
                 }
                 fieldelement(v; Collateral."Loan No.")
                 {
                     FieldValidate = No;
-                    MinOccurs=zero;
+                    MinOccurs = zero;
                     //17
                 }
-                 fieldelement(s; Collateral."Loan Name")
+                fieldelement(s; Collateral."Loan Name")
                 {
                     FieldValidate = No;
-                    MinOccurs=zero;
+                    MinOccurs = zero;
                     //14
                 }
-                 fieldelement(w; Collateral."Collateral Name")
+                fieldelement(w; Collateral."Collateral Name")
                 {
                     FieldValidate = No;
-                    MinOccurs=zero;
+                    MinOccurs = zero;
                     //8
                 }
 
