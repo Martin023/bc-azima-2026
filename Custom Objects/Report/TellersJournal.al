@@ -12,7 +12,7 @@ Report 52185510 "Tellers Journal"
         dataitem("Bank Account Ledger Entry"; "Bank Account Ledger Entry")
         {
             RequestFilterFields = "Posting Date", "Bank Account No.";
-            
+
             column(Bank_Account_No_; "Bank Account No.") { }
             column(Posting_Date; "Posting Date") { }
             column(Document_No_; "Document No.") { }
@@ -20,14 +20,14 @@ Report 52185510 "Tellers Journal"
             column(Debit_Amount; ReportDebitAmt) { }
             column(Credit_Amount; ReportCreditAmt) { }
             column(RunningBalance; CustomerRunningbalalnce.CustomBankAccRunnBal("Bank Account Ledger Entry")) { }
-            
+
             column(CompanyInformation_Name; CompanyInformation.Name) { }
             column(CompanyInformation_Picture; CompanyInformation.Picture) { }
             column(CompanyAddress; CompanyAddress) { }
             column(CompanyTelephone; CompanyTelephone) { }
             column(CommunicationOnline; CommunicationOnline) { }
-            column(ReportTitle; 'Tellers Journal') { } // Dynamic title for the layout
-            
+            column(ReportTitle; 'Tellers Journal') { }
+
             column(AccountName; AccountName) { }
             column(AccountNo; AccountNo) { }
             column(TransType; TransType) { }
@@ -36,24 +36,30 @@ Report 52185510 "Tellers Journal"
 
             trigger OnAfterGetRecord()
             begin
+                if not BankAcc.Get("Bank Account Ledger Entry"."Bank Account No.") then
+                    CurrReport.Skip();
+
+                if BankAcc."Bank Type" <> BankAcc."Bank Type"::Cashier then
+                    CurrReport.Skip();
                 Recount += 1;
                 if Recount = 1 then begin
-                    if "Bank Account Ledger Entry".GetFilters <> '' then begin
-                        if "Bank Account Ledger Entry".GetFilters.Contains('Bank Account No.') then begin
-                            if BankAcc.Get("Bank Account Ledger Entry"."Bank Account No.") then begin
-                                BankLedgerEntryII.Reset();
-                                BankLedgerEntryII.SetRange("Bank Account No.", BankAcc."No.");
-                                BankLedgerEntryII.SetFilter("Posting Date", '<%1', "Bank Account Ledger Entry"."Posting Date");
-                                if BankLedgerEntryII.FindFirst() then begin
-                                    BankLedgerEntryII.CalcSums("Amount (LCY)");
-                                    OpenBal := BankLedgerEntryII."Amount (LCY)";
-                                end else
-                                    OpenBal := 0;
-                            end;
-                        end else
-                            Error('Kindly filter with a Teller Account');
-                    end else
-                        Message('Kindly filter with a Teller Account');
+                    OpenBal := 0;
+                    BankAccRec.Reset();
+
+                    if "Bank Account Ledger Entry".GetFilter("Bank Account No.") <> '' then
+                        BankAccRec.SetFilter("No.", "Bank Account Ledger Entry".GetFilter("Bank Account No."))
+                    else
+                        BankAccRec.SetRange("Bank Type", BankAccRec."Bank Type"::Cashier);
+
+                    if BankAccRec.FindSet() then begin
+                        repeat
+                            BankLedgerEntryII.Reset();
+                            BankLedgerEntryII.SetRange("Bank Account No.", BankAccRec."No.");
+                            BankLedgerEntryII.SetFilter("Posting Date", '<%1', "Bank Account Ledger Entry"."Posting Date");
+                            BankLedgerEntryII.CalcSums("Amount (LCY)");
+                            OpenBal += BankLedgerEntryII."Amount (LCY)";
+                        until BankAccRec.Next() = 0;
+                    end;
                 end;
 
                 CashierTrans.Reset();
@@ -67,7 +73,6 @@ Report 52185510 "Tellers Journal"
                     AccountName := '';
                 end;
 
-                // Handle Reversals and Negative Values Logic
                 ReportDescription := "Bank Account Ledger Entry".Description;
                 ReportDebitAmt := "Bank Account Ledger Entry"."Debit Amount";
                 ReportCreditAmt := "Bank Account Ledger Entry"."Credit Amount";
@@ -124,6 +129,7 @@ Report 52185510 "Tellers Journal"
         CompanyTelephone: Text;
         CommunicationOnline: Text;
         BankAcc: Record "Bank Account";
+        BankAccRec: Record "Bank Account";
         CashierTrans: Record "Cashier Transactions";
         BankingSetup: Record "Banking User Template";
         AccountNo: Code[100];
