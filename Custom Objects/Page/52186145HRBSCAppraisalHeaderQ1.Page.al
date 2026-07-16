@@ -202,15 +202,31 @@ page 52186145 "HR Individual Appraisal Card"
                 Image = SendTo;
                 Promoted = true;
                 PromotedCategory = Category5;
-                Enabled = (Rec.Status = Rec.Status::Open) and ((Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Evaluation Review") or (Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Year-End Review"));
+                PromotedIsBig = true;
+                Enabled = (Rec.Status = Rec.Status::Open) and ((Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Evaluation Review") or (Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Year-End Review")) and (UserId = Rec."User ID");
 
                 trigger OnAction()
                 begin
                     if Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Target Setting" then
                         Error('Cannot submit appraisal during Target Setting stage. Appraisals can only be submitted during Evaluation Review or Year-End Review.');
 
-                    if Confirm('Submit this appraisal to your supervisor for review?', true) = false then exit;
                     Rec.SubmitToSupervisor();
+                    CurrPage.Update();
+                end;
+            }
+            action("Return to Appraisee")
+            {
+                Caption = 'Return to Appraisee for Revision';
+                Image = Return;
+                Promoted = true;
+                PromotedCategory = Category5;
+                PromotedIsBig = true;
+                Enabled = (Rec.Status = Rec.Status::"Pending Approval") and (UserId = Rec."Supervisor ID");
+                ToolTip = 'Return this appraisal to the employee for revision. The employee will be able to edit their self-ratings again.';
+
+                trigger OnAction()
+                begin
+                    Rec.ReturnToAppraisee();
                     CurrPage.Update();
                 end;
             }
@@ -261,42 +277,27 @@ page 52186145 "HR Individual Appraisal Card"
                 Promoted = true;
                 PromotedCategory = Category5;
                 PromotedIsBig = true;
-                Enabled = ((Rec.Status = Rec.Status::"Pending Approval") or (Rec.Status = Rec.Status::Discussed)) and ((Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Evaluation Review") or (Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Year-End Review"));
+                Enabled = ((Rec.Status = Rec.Status::"Pending Approval") or (Rec.Status = Rec.Status::Discussed)) and ((Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Evaluation Review") or (Rec."Appraisal Cycle Stage" = Rec."Appraisal Cycle Stage"::"Year-End Review")) and (UserId = Rec."Supervisor ID");
 
                 trigger OnAction()
                 begin
-                    if not (Rec.Status in [Rec.Status::"Pending Approval", Rec.Status::Discussed]) then
-                        Error('Can only approve from Pending Approval or Discussed status.');
-
-                    if Rec.Status = Rec.Status::Discussed then begin
-                        if Rec.CheckUnresolvedDiscussions() then begin
-                            if not Confirm('There are still unresolved discussion points. Do you want to proceed with approval anyway?', false) then
-                                exit;
-                        end;
-                    end;
-
-                    if Confirm('Approve this appraisal? This confirms agreement between employee and supervisor on performance ratings.', true) = false then exit;
-
-                    Rec.Status := Rec.Status::Approved;
-                    Rec.Modify();
+                    Rec.SupervisorApprove();
                     CurrPage.Update();
-
-                    Message('Appraisal approved successfully.');
                 end;
             }
             action("Return to Supervisor")
             {
-                Caption = 'Return to Supervisor';
-                Image = Pause;
+                Caption = 'Resubmit to Supervisor';
+                Image = Redo;
                 Promoted = true;
                 PromotedCategory = Category5;
+                Enabled = (Rec.Status = Rec.Status::Open) and (Rec."Appraisee Submitted" = true) and (UserId = Rec."User ID");
+                ToolTip = 'Resubmit this appraisal to supervisor after making revisions';
 
                 trigger OnAction()
                 begin
-                    if Confirm('Do you want to return this Appraisal to Supervisor?', true) = false then exit;
-
-                    Rec.Status := Rec.Status::"Pending Approval";
-                    Rec.Modify;
+                    Rec.SubmitToSupervisor();
+                    CurrPage.Update();
                 end;
             }
             action("Send back to Target Setting")

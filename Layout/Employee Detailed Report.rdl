@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:cl="http://schemas.microsoft.com/sqlserver/reporting/2010/01/componentdefinition" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition">
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource">
@@ -45,10 +45,11 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
                               <Top>0.1in</Top>
-                              <Left>0.0in</Left>
+                              <Left>0in</Left>
                               <Height>0.3in</Height>
                               <Width>5.5in</Width>
                               <Style>
@@ -63,615 +64,6 @@
                                 <PaddingBottom>2pt</PaddingBottom>
                               </Style>
                             </Textbox>
-                            <Image Name="EmpPhoto">
-                              <Source>Database</Source>
-                              <Value>=Fields!Employee_Picture.Value</Value>
-                              <MIMEType>image/jpeg</MIMEType>
-                              <Sizing>FitProportional</Sizing>
-                              <Top>0.1in</Top>
-                              <Left>5.8in</Left>
-                              <Height>1.5in</Height>
-                              <Width>1.5in</Width>
-                              <Style>
-                                <Border>
-                                  <Color>Black</Color>
-                                  <Style>Solid</Style>
-                                </Border>
-                              </Style>
-                            </Image>
-                            <Textbox Name="HeaderPersonal">
-                              <KeepTogether>true</KeepTogether>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>PERSONAL INFORMATION</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>10pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                        <TextDecoration>Underline</TextDecoration>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>0.5in</Top>
-                              <Left>0.0in</Left>
-                              <Height>0.2in</Height>
-                              <Width>5.5in</Width>
-                            </Textbox>
-                            <Textbox Name="Lbl_Gender">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>Gender :</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>0.8in</Top>
-                              <Left>0.0in</Left>
-                              <Height>0.2in</Height>
-                              <Width>1.2in</Width>
-                            </Textbox>
-                            <Textbox Name="Val_Gender">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>=Fields!Gender.Value</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>0.8in</Top>
-                              <Left>1.2in</Left>
-                              <Height>0.2in</Height>
-                              <Width>1.5in</Width>
-                            </Textbox>
-                            <Textbox Name="Lbl_DOB">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>Date of Birth :</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>0.8in</Top>
-                              <Left>2.8in</Left>
-                              <Height>0.2in</Height>
-                              <Width>1.2in</Width>
-                            </Textbox>
-                            <Textbox Name="Val_DOB">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>=Fields!Date_Of_Birth.Value</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>0.8in</Top>
-                              <Left>4.0in</Left>
-                              <Height>0.2in</Height>
-                              <Width>1.5in</Width>
-                            </Textbox>
-                            <Textbox Name="Lbl_Age">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>Age :</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>1.1in</Top>
-                              <Left>0.0in</Left>
-                              <Height>0.2in</Height>
-                              <Width>1.2in</Width>
-                            </Textbox>
-                            <Textbox Name="Val_Age">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>=Fields!Age.Value</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>1.1in</Top>
-                              <Left>1.2in</Left>
-                              <Height>0.2in</Height>
-                              <Width>1.5in</Width>
-                            </Textbox>
-                            <Textbox Name="Lbl_Marital">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>Marital Status :</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>1.1in</Top>
-                              <Left>2.8in</Left>
-                              <Height>0.2in</Height>
-                              <Width>1.2in</Width>
-                            </Textbox>
-                            <Textbox Name="Val_Marital">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>=Fields!Marital_Status.Value</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>1.1in</Top>
-                              <Left>4.0in</Left>
-                              <Height>0.2in</Height>
-                              <Width>1.5in</Width>
-                            </Textbox>
-                            <Textbox Name="Lbl_Religion">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>Religion :</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>1.4in</Top>
-                              <Left>0.0in</Left>
-                              <Height>0.2in</Height>
-                              <Width>1.2in</Width>
-                            </Textbox>
-                            <Textbox Name="Val_Religion">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>=Fields!Religion.Value</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>1.4in</Top>
-                              <Left>1.2in</Left>
-                              <Height>0.2in</Height>
-                              <Width>1.5in</Width>
-                            </Textbox>
-                            <Textbox Name="Lbl_Ethnic">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>Ethnic Origin :</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>1.4in</Top>
-                              <Left>2.8in</Left>
-                              <Height>0.2in</Height>
-                              <Width>1.2in</Width>
-                            </Textbox>
-                            <Textbox Name="Val_Ethnic">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>=Fields!Ethnic_Origin.Value</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>1.4in</Top>
-                              <Left>4.0in</Left>
-                              <Height>0.2in</Height>
-                              <Width>1.5in</Width>
-                            </Textbox>
-                            <Textbox Name="HeaderContact">
-                              <KeepTogether>true</KeepTogether>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>CONTACT INFORMATION</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>10pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                        <TextDecoration>Underline</TextDecoration>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>1.8in</Top>
-                              <Left>0.0in</Left>
-                              <Height>0.2in</Height>
-                              <Width>7.5in</Width>
-                            </Textbox>
-                            <Textbox Name="Lbl_Phone">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>Cellular Phone :</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>2.1in</Top>
-                              <Left>0.0in</Left>
-                              <Height>0.2in</Height>
-                              <Width>1.2in</Width>
-                            </Textbox>
-                            <Textbox Name="Val_Phone">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>=Fields!Cellular_Phone_Number.Value</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>2.1in</Top>
-                              <Left>1.2in</Left>
-                              <Height>0.2in</Height>
-                              <Width>2.5in</Width>
-                            </Textbox>
-                            <Textbox Name="Lbl_Email">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>E-Mail :</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>2.1in</Top>
-                              <Left>3.8in</Left>
-                              <Height>0.2in</Height>
-                              <Width>1.0in</Width>
-                            </Textbox>
-                            <Textbox Name="Val_Email">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>=Fields!E_Mail.Value</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>2.1in</Top>
-                              <Left>4.8in</Left>
-                              <Height>0.2in</Height>
-                              <Width>2.7in</Width>
-                            </Textbox>
-                            <Textbox Name="Lbl_Address">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>Postal Address :</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>2.4in</Top>
-                              <Left>0.0in</Left>
-                              <Height>0.2in</Height>
-                              <Width>1.2in</Width>
-                            </Textbox>
-                            <Textbox Name="Val_Address">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>=Fields!Postal_Address.Value</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>2.4in</Top>
-                              <Left>1.2in</Left>
-                              <Height>0.2in</Height>
-                              <Width>2.5in</Width>
-                            </Textbox>
-                            <Textbox Name="Lbl_City">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>City / County :</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>2.4in</Top>
-                              <Left>3.8in</Left>
-                              <Height>0.2in</Height>
-                              <Width>1.0in</Width>
-                            </Textbox>
-                            <Textbox Name="Val_City">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>=Fields!City.Value &amp; IIf(IsNothing(Fields!County.Value), "", " / " &amp; Fields!County.Value)</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>2.4in</Top>
-                              <Left>4.8in</Left>
-                              <Height>0.2in</Height>
-                              <Width>2.7in</Width>
-                            </Textbox>
-                            <Textbox Name="HeaderStatutory">
-                              <KeepTogether>true</KeepTogether>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>STATUTORY INFORMATION</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>10pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                        <TextDecoration>Underline</TextDecoration>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>2.8in</Top>
-                              <Left>0.0in</Left>
-                              <Height>0.2in</Height>
-                              <Width>7.5in</Width>
-                            </Textbox>
-                            <Textbox Name="Lbl_ID">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>ID Number :</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>3.1in</Top>
-                              <Left>0.0in</Left>
-                              <Height>0.2in</Height>
-                              <Width>1.2in</Width>
-                            </Textbox>
-                            <Textbox Name="Val_ID">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>=Fields!ID_Number.Value</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>3.1in</Top>
-                              <Left>1.2in</Left>
-                              <Height>0.2in</Height>
-                              <Width>2.5in</Width>
-                            </Textbox>
-                            <Textbox Name="Lbl_PIN">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>PIN Number :</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>3.1in</Top>
-                              <Left>3.8in</Left>
-                              <Height>0.2in</Height>
-                              <Width>1.0in</Width>
-                            </Textbox>
-                            <Textbox Name="Val_PIN">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>=Fields!PIN_Number.Value</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>3.1in</Top>
-                              <Left>4.8in</Left>
-                              <Height>0.2in</Height>
-                              <Width>2.7in</Width>
-                            </Textbox>
-                            <Textbox Name="Lbl_NSSF">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>NSSF No :</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>3.4in</Top>
-                              <Left>0.0in</Left>
-                              <Height>0.2in</Height>
-                              <Width>1.2in</Width>
-                            </Textbox>
-                            <Textbox Name="Val_NSSF">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>=Fields!NSSF_No.Value</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>3.4in</Top>
-                              <Left>1.2in</Left>
-                              <Height>0.2in</Height>
-                              <Width>2.5in</Width>
-                            </Textbox>
-                            <Textbox Name="Lbl_NHIF">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>NHIF No :</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>3.4in</Top>
-                              <Left>3.8in</Left>
-                              <Height>0.2in</Height>
-                              <Width>1.0in</Width>
-                            </Textbox>
                             <Textbox Name="Val_NHIF">
                               <Paragraphs>
                                 <Paragraph>
@@ -684,12 +76,15 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
                               <Top>3.4in</Top>
                               <Left>4.8in</Left>
                               <Height>0.2in</Height>
                               <Width>2.7in</Width>
+                              <ZIndex>1</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="HeaderEmployment">
                               <KeepTogether>true</KeepTogether>
@@ -700,18 +95,20 @@
                                       <Value>EMPLOYMENT INFORMATION</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontSize>10pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                         <TextDecoration>Underline</TextDecoration>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
                               <Top>3.8in</Top>
-                              <Left>0.0in</Left>
+                              <Left>0in</Left>
                               <Height>0.2in</Height>
                               <Width>7.5in</Width>
+                              <ZIndex>2</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="Lbl_Job">
                               <Paragraphs>
@@ -726,12 +123,15 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
                               <Top>4.1in</Top>
-                              <Left>0.0in</Left>
+                              <Left>0in</Left>
                               <Height>0.2in</Height>
                               <Width>1.2in</Width>
+                              <ZIndex>3</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="Val_Job">
                               <Paragraphs>
@@ -745,12 +145,15 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
                               <Top>4.1in</Top>
                               <Left>1.2in</Left>
                               <Height>0.2in</Height>
                               <Width>2.5in</Width>
+                              <ZIndex>4</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="Lbl_Dept">
                               <Paragraphs>
@@ -765,12 +168,15 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
                               <Top>4.1in</Top>
                               <Left>3.8in</Left>
                               <Height>0.2in</Height>
-                              <Width>1.0in</Width>
+                              <Width>1in</Width>
+                              <ZIndex>5</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="Val_Dept">
                               <Paragraphs>
@@ -784,12 +190,15 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
                               <Top>4.1in</Top>
                               <Left>4.8in</Left>
                               <Height>0.2in</Height>
                               <Width>2.7in</Width>
+                              <ZIndex>6</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="Lbl_Join">
                               <Paragraphs>
@@ -804,12 +213,15 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
                               <Top>4.4in</Top>
-                              <Left>0.0in</Left>
+                              <Left>0in</Left>
                               <Height>0.2in</Height>
                               <Width>1.2in</Width>
+                              <ZIndex>7</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="Val_Join">
                               <Paragraphs>
@@ -823,12 +235,15 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
                               <Top>4.4in</Top>
                               <Left>1.2in</Left>
                               <Height>0.2in</Height>
                               <Width>2.5in</Width>
+                              <ZIndex>8</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="Lbl_Contract">
                               <Paragraphs>
@@ -843,12 +258,15 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
                               <Top>4.4in</Top>
                               <Left>3.8in</Left>
                               <Height>0.2in</Height>
-                              <Width>1.0in</Width>
+                              <Width>1in</Width>
+                              <ZIndex>9</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="Val_Contract">
                               <Paragraphs>
@@ -862,12 +280,15 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
                               <Top>4.4in</Top>
                               <Left>4.8in</Left>
                               <Height>0.2in</Height>
                               <Width>2.7in</Width>
+                              <ZIndex>10</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="Lbl_Status">
                               <Paragraphs>
@@ -882,12 +303,15 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
                               <Top>4.7in</Top>
-                              <Left>0.0in</Left>
+                              <Left>0in</Left>
                               <Height>0.2in</Height>
                               <Width>1.2in</Width>
+                              <ZIndex>11</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="Val_Status">
                               <Paragraphs>
@@ -901,12 +325,38 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
                               <Top>4.7in</Top>
                               <Left>1.2in</Left>
                               <Height>0.2in</Height>
                               <Width>2.5in</Width>
+                              <ZIndex>12</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Lbl_NHIF">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>NHIF No :</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>3.4in</Top>
+                              <Left>3.8in</Left>
+                              <Height>0.2in</Height>
+                              <Width>1in</Width>
+                              <ZIndex>13</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="Lbl_Sup">
                               <Paragraphs>
@@ -921,31 +371,15 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
                               <Top>4.7in</Top>
                               <Left>3.8in</Left>
                               <Height>0.2in</Height>
-                              <Width>1.0in</Width>
-                            </Textbox>
-                            <Textbox Name="Val_Sup">
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>=Fields!Supervisor_Name.Value</Value>
-                                      <Style>
-                                        <FontFamily>Calibri</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>4.7in</Top>
-                              <Left>4.8in</Left>
-                              <Height>0.2in</Height>
-                              <Width>2.7in</Width>
+                              <Width>1in</Width>
+                              <ZIndex>14</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="Lbl_Group">
                               <Paragraphs>
@@ -960,12 +394,15 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>5.0in</Top>
-                              <Left>0.0in</Left>
+                              <Top>5in</Top>
+                              <Left>0in</Left>
                               <Height>0.2in</Height>
                               <Width>1.2in</Width>
+                              <ZIndex>15</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="Val_Group">
                               <Paragraphs>
@@ -979,12 +416,15 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>5.0in</Top>
+                              <Top>5in</Top>
                               <Left>1.2in</Left>
                               <Height>0.2in</Height>
                               <Width>2.5in</Width>
+                              <ZIndex>16</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="Lbl_Terms">
                               <Paragraphs>
@@ -999,12 +439,15 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>5.0in</Top>
+                              <Top>5in</Top>
                               <Left>3.8in</Left>
                               <Height>0.2in</Height>
-                              <Width>1.0in</Width>
+                              <Width>1in</Width>
+                              <ZIndex>17</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="Val_Terms">
                               <Paragraphs>
@@ -1018,12 +461,15 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>5.0in</Top>
+                              <Top>5in</Top>
                               <Left>4.8in</Left>
                               <Height>0.2in</Height>
                               <Width>2.7in</Width>
+                              <ZIndex>18</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="HeaderBanking">
                               <KeepTogether>true</KeepTogether>
@@ -1034,18 +480,20 @@
                                       <Value>BANKING DETAILS</Value>
                                       <Style>
                                         <FontFamily>Calibri</FontFamily>
-                                        <FontSize>10pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                         <TextDecoration>Underline</TextDecoration>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
                               <Top>5.4in</Top>
-                              <Left>0.0in</Left>
+                              <Left>0in</Left>
                               <Height>0.2in</Height>
                               <Width>7.5in</Width>
+                              <ZIndex>19</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="Lbl_Bank">
                               <Paragraphs>
@@ -1060,12 +508,15 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
                               <Top>5.7in</Top>
-                              <Left>0.0in</Left>
+                              <Left>0in</Left>
                               <Height>0.2in</Height>
                               <Width>1.2in</Width>
+                              <ZIndex>20</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="Val_Bank">
                               <Paragraphs>
@@ -1079,12 +530,15 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
                               <Top>5.7in</Top>
                               <Left>1.2in</Left>
                               <Height>0.2in</Height>
                               <Width>2.5in</Width>
+                              <ZIndex>21</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="Lbl_Branch">
                               <Paragraphs>
@@ -1099,12 +553,15 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
                               <Top>5.7in</Top>
                               <Left>3.8in</Left>
                               <Height>0.2in</Height>
-                              <Width>1.0in</Width>
+                              <Width>1in</Width>
+                              <ZIndex>22</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="Val_Branch">
                               <Paragraphs>
@@ -1118,12 +575,15 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
                               <Top>5.7in</Top>
                               <Left>4.8in</Left>
                               <Height>0.2in</Height>
                               <Width>2.7in</Width>
+                              <ZIndex>23</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="Lbl_Acc">
                               <Paragraphs>
@@ -1138,12 +598,15 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>6.0in</Top>
-                              <Left>0.0in</Left>
+                              <Top>6in</Top>
+                              <Left>0in</Left>
                               <Height>0.2in</Height>
                               <Width>1.2in</Width>
+                              <ZIndex>24</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="Val_Acc">
                               <Paragraphs>
@@ -1157,12 +620,15 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>6.0in</Top>
+                              <Top>6in</Top>
                               <Left>1.2in</Left>
                               <Height>0.2in</Height>
                               <Width>2.5in</Width>
+                              <ZIndex>25</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="Lbl_Grade">
                               <Paragraphs>
@@ -1177,12 +643,710 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>6.0in</Top>
+                              <Top>6in</Top>
                               <Left>3.8in</Left>
                               <Height>0.2in</Height>
-                              <Width>1.0in</Width>
+                              <Width>1in</Width>
+                              <ZIndex>26</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Val_Sup">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Supervisor_Name.Value</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>4.7in</Top>
+                              <Left>4.8in</Left>
+                              <Height>0.2in</Height>
+                              <Width>2.7in</Width>
+                              <ZIndex>27</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Val_NSSF">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!NSSF_No.Value</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>3.4in</Top>
+                              <Left>1.2in</Left>
+                              <Height>0.2in</Height>
+                              <Width>2.5in</Width>
+                              <ZIndex>28</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Lbl_NSSF">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>NSSF No :</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>3.4in</Top>
+                              <Left>0in</Left>
+                              <Height>0.2in</Height>
+                              <Width>1.2in</Width>
+                              <ZIndex>29</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Val_PIN">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!PIN_Number.Value</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>3.1in</Top>
+                              <Left>4.8in</Left>
+                              <Height>0.2in</Height>
+                              <Width>2.7in</Width>
+                              <ZIndex>30</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Image Name="EmpPhoto">
+                              <Source>Database</Source>
+                              <Value>=Fields!Employee_Picture.Value</Value>
+                              <MIMEType>image/jpeg</MIMEType>
+                              <Sizing>FitProportional</Sizing>
+                              <Top>0.1in</Top>
+                              <Left>5.8in</Left>
+                              <Height>1.5in</Height>
+                              <Width>1.5in</Width>
+                              <ZIndex>31</ZIndex>
+                              <Style>
+                                <Border>
+                                  <Style>Solid</Style>
+                                </Border>
+                              </Style>
+                            </Image>
+                            <Textbox Name="HeaderPersonal">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>PERSONAL INFORMATION</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontWeight>Bold</FontWeight>
+                                        <TextDecoration>Underline</TextDecoration>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>0.5in</Top>
+                              <Left>0in</Left>
+                              <Height>0.2in</Height>
+                              <Width>5.5in</Width>
+                              <ZIndex>32</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Lbl_Gender">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Gender :</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>0.8in</Top>
+                              <Left>0in</Left>
+                              <Height>0.2in</Height>
+                              <Width>1.2in</Width>
+                              <ZIndex>33</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Val_Gender">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Gender.Value</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>0.8in</Top>
+                              <Left>1.2in</Left>
+                              <Height>0.2in</Height>
+                              <Width>1.5in</Width>
+                              <ZIndex>34</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Lbl_DOB">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Date of Birth :</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>0.8in</Top>
+                              <Left>2.8in</Left>
+                              <Height>0.2in</Height>
+                              <Width>1.2in</Width>
+                              <ZIndex>35</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Val_DOB">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Date_Of_Birth.Value</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>0.8in</Top>
+                              <Left>4in</Left>
+                              <Height>0.2in</Height>
+                              <Width>1.5in</Width>
+                              <ZIndex>36</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Lbl_Age">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Age :</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>1.1in</Top>
+                              <Left>0in</Left>
+                              <Height>0.2in</Height>
+                              <Width>1.2in</Width>
+                              <ZIndex>37</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Val_Age">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Age.Value</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>1.1in</Top>
+                              <Left>1.2in</Left>
+                              <Height>0.2in</Height>
+                              <Width>0.30208in</Width>
+                              <ZIndex>38</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Lbl_Marital">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Marital Status :</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>1.1in</Top>
+                              <Left>2.8in</Left>
+                              <Height>0.2in</Height>
+                              <Width>1.2in</Width>
+                              <ZIndex>39</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Val_Marital">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Marital_Status.Value</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>1.1in</Top>
+                              <Left>4in</Left>
+                              <Height>0.2in</Height>
+                              <Width>1.5in</Width>
+                              <ZIndex>40</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Lbl_Religion">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Religion :</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>1.4in</Top>
+                              <Left>0in</Left>
+                              <Height>0.2in</Height>
+                              <Width>1.2in</Width>
+                              <ZIndex>41</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Val_Religion">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Religion.Value</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>1.4in</Top>
+                              <Left>1.2in</Left>
+                              <Height>0.2in</Height>
+                              <Width>1.5in</Width>
+                              <ZIndex>42</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Lbl_Ethnic">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Ethnic Origin :</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>1.4in</Top>
+                              <Left>2.8in</Left>
+                              <Height>0.2in</Height>
+                              <Width>1.2in</Width>
+                              <ZIndex>43</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Val_Ethnic">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Ethnic_Origin.Value</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>1.4in</Top>
+                              <Left>4in</Left>
+                              <Height>0.2in</Height>
+                              <Width>1.5in</Width>
+                              <ZIndex>44</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="HeaderContact">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>CONTACT INFORMATION</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontWeight>Bold</FontWeight>
+                                        <TextDecoration>Underline</TextDecoration>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>1.8in</Top>
+                              <Left>0in</Left>
+                              <Height>0.2in</Height>
+                              <Width>7.5in</Width>
+                              <ZIndex>45</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Lbl_Phone">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Cellular Phone :</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>2.1in</Top>
+                              <Left>0in</Left>
+                              <Height>0.2in</Height>
+                              <Width>1.2in</Width>
+                              <ZIndex>46</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Val_Phone">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Cellular_Phone_Number.Value</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>2.1in</Top>
+                              <Left>1.2in</Left>
+                              <Height>0.2in</Height>
+                              <Width>2.5in</Width>
+                              <ZIndex>47</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Lbl_Email">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>E-Mail :</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>2.1in</Top>
+                              <Left>3.8in</Left>
+                              <Height>0.2in</Height>
+                              <Width>1in</Width>
+                              <ZIndex>48</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Val_Email">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!E_Mail.Value</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>2.1in</Top>
+                              <Left>4.8in</Left>
+                              <Height>0.2in</Height>
+                              <Width>2.7in</Width>
+                              <ZIndex>49</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Lbl_Address">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Postal Address :</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>2.4in</Top>
+                              <Left>0in</Left>
+                              <Height>0.2in</Height>
+                              <Width>1.2in</Width>
+                              <ZIndex>50</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Val_Address">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!Postal_Address.Value</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>2.4in</Top>
+                              <Left>1.2in</Left>
+                              <Height>0.2in</Height>
+                              <Width>2.5in</Width>
+                              <ZIndex>51</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Lbl_City">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>City / County :</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>2.4in</Top>
+                              <Left>3.8in</Left>
+                              <Height>0.2in</Height>
+                              <Width>1in</Width>
+                              <ZIndex>52</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Val_City">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!City.Value &amp; IIf(IsNothing(Fields!County.Value), "", " / " &amp; Fields!County.Value)</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>2.4in</Top>
+                              <Left>4.8in</Left>
+                              <Height>0.2in</Height>
+                              <Width>2.7in</Width>
+                              <ZIndex>53</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="HeaderStatutory">
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>STATUTORY INFORMATION</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontWeight>Bold</FontWeight>
+                                        <TextDecoration>Underline</TextDecoration>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>2.8in</Top>
+                              <Left>0in</Left>
+                              <Height>0.2in</Height>
+                              <Width>7.5in</Width>
+                              <ZIndex>54</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Lbl_ID">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>ID Number :</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>3.1in</Top>
+                              <Left>0in</Left>
+                              <Height>0.2in</Height>
+                              <Width>1.2in</Width>
+                              <ZIndex>55</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Val_ID">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!ID_Number.Value</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>3.1in</Top>
+                              <Left>1.2in</Left>
+                              <Height>0.2in</Height>
+                              <Width>2.5in</Width>
+                              <ZIndex>56</ZIndex>
+                              <Style />
+                            </Textbox>
+                            <Textbox Name="Lbl_PIN">
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>PIN Number :</Value>
+                                      <Style>
+                                        <FontFamily>Calibri</FontFamily>
+                                        <FontSize>9pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Top>3.1in</Top>
+                              <Left>3.8in</Left>
+                              <Height>0.2in</Height>
+                              <Width>1in</Width>
+                              <ZIndex>57</ZIndex>
+                              <Style />
                             </Textbox>
                             <Textbox Name="Val_Grade">
                               <Paragraphs>
@@ -1196,18 +1360,22 @@
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
+                                  <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>6.0in</Top>
+                              <Top>6in</Top>
                               <Left>4.8in</Left>
                               <Height>0.2in</Height>
                               <Width>2.7in</Width>
+                              <ZIndex>58</ZIndex>
+                              <Style />
                             </Textbox>
                             <Line Name="BottomLine">
                               <Top>6.4in</Top>
-                              <Left>0.0in</Left>
+                              <Left>0in</Left>
                               <Height>0in</Height>
                               <Width>7.5in</Width>
+                              <ZIndex>59</ZIndex>
                               <Style>
                                 <Border>
                                   <Style>Dashed</Style>
@@ -1215,6 +1383,7 @@
                               </Style>
                             </Line>
                           </ReportItems>
+                          <Style />
                         </Rectangle>
                       </CellContents>
                     </TablixCell>
@@ -1247,13 +1416,15 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
-            <Top>0.0in</Top>
-            <Left>0.0in</Left>
+            <Top>0in</Top>
+            <Left>0in</Left>
             <Height>6.6in</Height>
             <Width>7.5in</Width>
+            <Style />
           </Tablix>
         </ReportItems>
         <Height>6.8in</Height>
+        <Style />
       </Body>
       <Width>7.5in</Width>
       <Page>
@@ -1267,10 +1438,11 @@
               <Value>=First(Fields!CompanyInfo_Picture.Value, "DataSet_Result")</Value>
               <MIMEType>image/png</MIMEType>
               <Sizing>FitProportional</Sizing>
-              <Top>0.0in</Top>
-              <Left>0.0in</Left>
-              <Height>1.0in</Height>
+              <Top>0in</Top>
+              <Left>0in</Left>
+              <Height>1in</Height>
               <Width>1.2in</Width>
+              <Style />
             </Image>
             <Textbox Name="CompanyDetails">
               <CanGrow>true</CanGrow>
@@ -1282,11 +1454,11 @@
                       <Value>=First(Fields!CompanyName.Value, "DataSet_Result")</Value>
                       <Style>
                         <FontFamily>Calibri</FontFamily>
-                        <FontSize>10pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                       </Style>
                     </TextRun>
                   </TextRuns>
+                  <Style />
                 </Paragraph>
                 <Paragraph>
                   <TextRuns>
@@ -1298,6 +1470,7 @@
                       </Style>
                     </TextRun>
                   </TextRuns>
+                  <Style />
                 </Paragraph>
                 <Paragraph>
                   <TextRuns>
@@ -1309,12 +1482,15 @@
                       </Style>
                     </TextRun>
                   </TextRuns>
+                  <Style />
                 </Paragraph>
               </Paragraphs>
-              <Top>0.0in</Top>
+              <Top>0in</Top>
               <Left>1.3in</Left>
               <Height>0.6in</Height>
               <Width>3.7in</Width>
+              <ZIndex>1</ZIndex>
+              <Style />
             </Textbox>
             <Textbox Name="CompanyContacts">
               <CanGrow>true</CanGrow>
@@ -1338,6 +1514,7 @@
                       </Style>
                     </TextRun>
                   </TextRuns>
+                  <Style />
                 </Paragraph>
                 <Paragraph>
                   <TextRuns>
@@ -1357,12 +1534,15 @@
                       </Style>
                     </TextRun>
                   </TextRuns>
+                  <Style />
                 </Paragraph>
               </Paragraphs>
               <Top>0.6in</Top>
               <Left>1.3in</Left>
               <Height>0.4in</Height>
               <Width>3.7in</Width>
+              <ZIndex>2</ZIndex>
+              <Style />
             </Textbox>
             <Textbox Name="PrintDetails">
               <CanGrow>true</CanGrow>
@@ -1450,16 +1630,19 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>0.0in</Top>
-              <Left>5.0in</Left>
+              <Top>0in</Top>
+              <Left>5in</Left>
               <Height>0.8in</Height>
               <Width>2.5in</Width>
+              <ZIndex>3</ZIndex>
+              <Style />
             </Textbox>
             <Line Name="HeaderLine">
               <Top>1.05in</Top>
-              <Left>0.0in</Left>
+              <Left>0in</Left>
               <Height>0in</Height>
               <Width>7.5in</Width>
+              <ZIndex>4</ZIndex>
               <Style>
                 <Border>
                   <Style>Solid</Style>
@@ -1488,11 +1671,14 @@
                 </Paragraph>
               </Paragraphs>
               <Top>1.15in</Top>
-              <Left>0.0in</Left>
+              <Left>0in</Left>
               <Height>0.3in</Height>
               <Width>7.5in</Width>
+              <ZIndex>5</ZIndex>
+              <Style />
             </Textbox>
           </ReportItems>
+          <Style />
         </PageHeader>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>
@@ -1500,6 +1686,7 @@
         <RightMargin>0.3in</RightMargin>
         <TopMargin>0.3in</TopMargin>
         <BottomMargin>0.3in</BottomMargin>
+        <Style />
       </Page>
     </ReportSection>
   </ReportSections>
@@ -1513,6 +1700,7 @@ End Function
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>30ca3951-19f5-4afa-a001-00a154cc611c</rd:ReportID>
   <DataSets>
     <DataSet Name="DataSet_Result">
       <Fields>
