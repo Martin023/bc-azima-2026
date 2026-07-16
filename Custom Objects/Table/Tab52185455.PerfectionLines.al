@@ -45,6 +45,7 @@ table 52185455 "Perfection Lines"
         field(10; "Market Value"; Decimal)
         {
             Caption = 'Market Value';
+
         }
         field(11; "Forced Sale Value"; Decimal)
         {

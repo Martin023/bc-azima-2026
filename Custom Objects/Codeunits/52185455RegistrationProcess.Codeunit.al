@@ -102,6 +102,7 @@ Codeunit 52185455 "Registration Process"
         RecRef: RecordRef;
         FileRecRef: RecordRef;
         W: Record "Workflow Response";
+        GlobalFunc: Codeunit "Global Functions";
     begin
         // Validate if the member application has already created the member
         Members.Reset;
@@ -520,60 +521,60 @@ Codeunit 52185455 "Registration Process"
                             // end;
 
                             //Accrue Registration Fee
-                            CompanyInformation.Get();
-                            if CompanyInformation."Accrue Registration Fee" = true then begin
-                                if ProductFactory."Product Category" = ProductFactory."product category"::"Entrance Fee" then begin
-                                    GeneralSetUp.Get();
-                                    Temp.Get(UserId);
-                                    AccountNo := '';
-                                    Jtemplate := Temp."Accrual. Fee.Journal Template";
-                                    JBatch := Temp."Accrual. Fee. Journal Batch";
+                            // CompanyInformation.Get();
+                            // if CompanyInformation."Accrue Registration Fee" = true then begin
+                            //     if ProductFactory."Product Category" = ProductFactory."product category"::"Entrance Fee" then begin
+                            //         GeneralSetUp.Get();
+                            //         Temp.Get(UserId);
+                            //         AccountNo := '';
+                            //         Jtemplate := Temp."Accrual. Fee.Journal Template";
+                            //         JBatch := Temp."Accrual. Fee. Journal Batch";
 
-                                    if Jtemplate = '' then begin
-                                        Error(Text0001);
-                                    end;
-                                    if JBatch = '' then begin
-                                        Error(Text0002);
-                                    end;
+                            //         if Jtemplate = '' then begin
+                            //             Error(Text0001);
+                            //         end;
+                            //         if JBatch = '' then begin
+                            //             Error(Text0002);
+                            //         end;
 
 
-                                    GenJournalLine.Reset;
-                                    GenJournalLine.SetRange("Journal Template Name", Jtemplate);
-                                    GenJournalLine.SetRange("Journal Batch Name", JBatch);
-                                    GenJournalLine.DeleteAll;
-                                    AccountNo := SavingsAcc."No.";
-                                    LineNo := LineNo + 10000;
-                                    GenJournalLine.Init;
-                                    GenJournalLine."Journal Template Name" := Jtemplate;
-                                    GenJournalLine."Journal Batch Name" := JBatch;
-                                    GenJournalLine."Line No." := LineNo;
-                                    GenJournalLine."Document No." := AccountNo;
-                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
-                                    GenJournalLine."Account No." := AccountNo;
-                                    GenJournalLine."External Document No." := AccountNo;
-                                    GenJournalLine.Validate(GenJournalLine."Account No.");
-                                    GenJournalLine."Posting Date" := Today;
-                                    GenJournalLine.Description := 'Registration Fee' + AccountNo;
-                                    GenJournalLine.Amount := GeneralSetUp."Registration Fee";
-                                    GenJournalLine.Validate(GenJournalLine.Amount);
-                                    GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
-                                    GenJournalLine."Bal. Account No." := ProductFactory."Accrual Fee Acc. (Income)";
-                                    GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
-                                    GenJournalLine."Shortcut Dimension 1 Code" := MemberApplication."Global Dimension 1 Code";
-                                    GenJournalLine."Shortcut Dimension 2 Code" := MemberApplication."Global Dimension 2 Code";
-                                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
-                                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
-                                    if GenJournalLine.Amount <> 0 then
-                                        GenJournalLine.Insert;
-                                    //Post
-                                    GenJournalLine.Reset;
-                                    GenJournalLine.SetRange("Journal Template Name", Jtemplate);
-                                    GenJournalLine.SetRange("Journal Batch Name", JBatch);
-                                    if GenJournalLine.Find('-') then begin
-                                        Codeunit.Run(Codeunit::"Gen. Jnl.-Post New", GenJournalLine);
-                                    end;
-                                end;    //Post
-                            end;
+                            //         GenJournalLine.Reset;
+                            //         GenJournalLine.SetRange("Journal Template Name", Jtemplate);
+                            //         GenJournalLine.SetRange("Journal Batch Name", JBatch);
+                            //         GenJournalLine.DeleteAll;
+                            //         AccountNo := SavingsAcc."No.";
+                            //         LineNo := LineNo + 10000;
+                            //         GenJournalLine.Init;
+                            //         GenJournalLine."Journal Template Name" := Jtemplate;
+                            //         GenJournalLine."Journal Batch Name" := JBatch;
+                            //         GenJournalLine."Line No." := LineNo;
+                            //         GenJournalLine."Document No." := AccountNo;
+                            //         GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
+                            //         GenJournalLine."Account No." := AccountNo;
+                            //         GenJournalLine."External Document No." := AccountNo;
+                            //         GenJournalLine.Validate(GenJournalLine."Account No.");
+                            //         GenJournalLine."Posting Date" := Today;
+                            //         GenJournalLine.Description := 'Registration Fee' + AccountNo;
+                            //         GenJournalLine.Amount := GeneralSetUp."Registration Fee";
+                            //         GenJournalLine.Validate(GenJournalLine.Amount);
+                            //         GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
+                            //         GenJournalLine."Bal. Account No." := ProductFactory."Accrual Fee Acc. (Income)";
+                            //         GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
+                            //         GenJournalLine."Shortcut Dimension 1 Code" := MemberApplication."Global Dimension 1 Code";
+                            //         GenJournalLine."Shortcut Dimension 2 Code" := MemberApplication."Global Dimension 2 Code";
+                            //         GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                            //         GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                            //         if GenJournalLine.Amount <> 0 then
+                            //             GenJournalLine.Insert;
+                            //         //Post
+                            //         GenJournalLine.Reset;
+                            //         GenJournalLine.SetRange("Journal Template Name", Jtemplate);
+                            //         GenJournalLine.SetRange("Journal Batch Name", JBatch);
+                            //         if GenJournalLine.Find('-') then begin
+                            //             Codeunit.Run(Codeunit::"Gen. Jnl.-Post New", GenJournalLine);
+                            //         end;
+                            //     end;    //Post
+                            // end;
                         end;
                     until DefaultSavAccReg.Next = 0;
                 end;
@@ -624,6 +625,9 @@ Codeunit 52185455 "Registration Process"
         MemberApplication."Date Approved" := today;
         MemberApplication.Modify(true);
         Commit();
+
+        //AutoCreateForm
+        GlobalFunc.CreateFile(Cust."No.", Enum::"Member Form Types"::Registration, MemberApplication."No.");
 
         //Email Employer
         // if DisplayConfirm then begin

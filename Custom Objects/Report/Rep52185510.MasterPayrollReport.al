@@ -24,9 +24,14 @@ report 52185511 "Master Payroll Report"
                 column(strEmpName; strEmpName) { }
                 column(Transaction_Code; "Transaction Code") { }
                 column(Transaction_Name; "Transaction Name") { }
+                column(BPAY; BPAY) { }
+                column(GPAY; GPAY) { }
+                column(NPAY; NPAY) { }
+                column(TotDed; TotDed) { }
+                column(TotAllow; TotAllow) { }
                 column(Amount; Amount) { }
                 column(Employer_Amount; "Employer Amount") { }
-                column(PeriodName; PeriodName) {}
+                column(PeriodName; PeriodName) { }
                 column(CI_Name; CI.Name)
                 {
                     IncludeCaption = true;
@@ -56,11 +61,50 @@ report 52185511 "Master Payroll Report"
                     myInt: Integer;
                 begin
                     strEmpName := '';
+                    BPAY := 0;
+                    GPAY := 0;
+                    NPAY := 0;
 
                     if HREmployee.Get("PR Employee Transactions"."Employee Code") then
                         strEmpName := HREmployee."First Name" + ' ' + HREmployee."Middle Name" + ' ' + HREmployee."Last Name";
+
+
+                    PeriodTrans.Reset();
+                    PeriodTrans.Setrange("Employee Code", "PR Employee Transactions"."Employee Code");
+                    PeriodTrans.Setrange("Payroll Period", SelectedPeriod);
+                    PeriodTrans.Setfilter(PeriodTrans."Transaction Code", '=%1|%2|%3|%4', 'BPAY', 'GPAY', 'NPAY', 'TOT-DED');
+                    if PeriodTrans.Find('-') then begin
+                        repeat
+                            if PeriodTrans."Transaction Code" = 'BPAY' then begin
+                                BPAY := PeriodTrans.Amount;
+                            end;
+                            if PeriodTrans."Transaction Code" = 'GPAY' then begin
+                                GPAY := PeriodTrans.Amount;
+                            end;
+                            if PeriodTrans."Transaction Code" = 'NPAY' then begin
+                                NPAY := PeriodTrans.Amount;
+                            end;
+                            if PeriodTrans."Transaction Code" = 'TOT-DED' then
+                                TotDed := PeriodTrans.Amount;
+                        until PeriodTrans.Next() = 0;
+                    end;
                 end;
             }
+            trigger OnAfterGetRecord()
+            var
+                myInt: Integer;
+            begin
+                if "PR Transaction Codes"."Transaction Type" = "PR Transaction Codes"."Transaction Type"::Income then begin
+                    PeriodTrans.Reset();
+                    PeriodTrans.Setrange("Employee Code", "PR Employee Transactions"."Employee Code");
+                    PeriodTrans.Setrange("Payroll Period", SelectedPeriod);
+                    PeriodTrans.Setfilter(PeriodTrans."Transaction Code", "PR Transaction Codes"."Transaction Code");
+                    if PeriodTrans.Find('-') then begin
+                        Allow := PeriodTrans.Amount;
+                    end;
+                    TotAllow := TotAllow + Allow;
+                end;
+            end;
         }
     }
 
@@ -108,15 +152,10 @@ report 52185511 "Master Payroll Report"
 
     var
         strEmpName: Text[100];
-        BasicPay: Decimal;
-        Allow: Decimal;
         Grosspay: Decimal;
         PenGrat: Decimal;
         Nssf: Decimal;
         subTotNssf: Decimal;
-        TotBasicPay: Decimal;
-        TotAllow: Decimal;
-        TotGrosspay: Decimal;
         TotPenGrat: Decimal;
         TotNssf: Decimal;
         PeriodTrans: Record "PR Period Transactions";
@@ -128,6 +167,12 @@ report 52185511 "Master Payroll Report"
         CompanyInfo: Record "Company Information";
         PayrollMode: Option " ","Bank Transfer",Cheque,Cash,SACCO;
         CI: Record "Company Information";
+        BPAY: Decimal;
+        GPAY: Decimal;
+        NPAY: Decimal;
+        TotDed: Decimal;
+        TotAllow: Decimal;
+        Allow: Decimal;
 
     procedure OnViewCurrRec()
     var

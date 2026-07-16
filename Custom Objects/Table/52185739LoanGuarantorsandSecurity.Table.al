@@ -471,7 +471,7 @@ table 52185739 "Loan Guarantors and Security"
         field(28; "Collateral Value"; Decimal)
         {
             FieldClass = FlowField;
-            CalcFormula = lookup("Securities Register"."Collateral Value" where("Account No." = field("Savings Account No./Member No.")));
+            CalcFormula = lookup("Securities Register"."Market Value" where("Account No." = field("Savings Account No./Member No.")));
         }
         field(280; "Collateral Name"; Text[300])
         {

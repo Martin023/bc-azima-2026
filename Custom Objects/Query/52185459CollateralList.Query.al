@@ -23,7 +23,7 @@ Query 52185459 "Collateral List"
             column(Collateral_Multiplier; "Collateral Multiplier")
             {
             }
-            column(Collateral_Value; "Collateral Value")
+            column(Collateral_Value; "Market Value")
             {
             }
             column(Collateral_Limit; "Collateral Limit")

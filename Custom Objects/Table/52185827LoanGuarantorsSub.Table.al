@@ -538,7 +538,7 @@ table 52185827 "Loan Guarantors Sub"
                     SecReg.SetRange("No.", "Collateral Reg. No.");
                     if SecReg.FindFirst() then begin
                         "Amount Guaranteed" := SecReg."Collateral Limit";
-                        "Collateral Value" := SecReg."Collateral Value";
+                        "Collateral Value" := SecReg."Market Value";
                         Rec.Name := SecReg."Collateral Name";
                         "Member No" := SecReg."Account No.";
                     end;
@@ -551,7 +551,7 @@ table 52185827 "Loan Guarantors Sub"
                         SecReg.Reset;
                         SecReg.SetRange("No.", LoanGuar."Collateral Reg. No.");
                         if SecReg.FindFirst() then begin
-                            ColAmount := SecReg."Collateral Value";
+                            ColAmount := SecReg."Market Value";
                         end;
                         if ColAllocaAmount > ColAmount then
                             Error('you cannot exceed the collateral Limit');
