@@ -2190,8 +2190,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
                             DepositCap := Round(OrdinaryAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1);
                             if DepositCap > ProdFac."Maximum Loan Amount" then
                                 DepositCap := ProdFac."Maximum Loan Amount";
-                            if DepositCap < QualifiedAmount then
-                                QualifiedAmount := DepositCap;
+                            QualifiedAmount := DepositCap;
                             Message('DEBUG: DepositCap = %1, QualifiedAmount after deposit qualifier cap = %2', DepositCap, QualifiedAmount);
                         end;
                     end;
@@ -4618,10 +4617,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
                 if DepositCap > ProdFac."Maximum Loan Amount" then
                     DepositCap := ProdFac."Maximum Loan Amount";
 
-                if DepositCap < QualifiedAmount then begin
-                    QualifiedAmount := DepositCap;
-                    Message('Debug: Qualified Amount reduced by Deposit Cap to %1', QualifiedAmount);
-                end;
+                QualifiedAmount := DepositCap;
+                Message('Debug: Qualified Amount set to Deposit Cap = %1', QualifiedAmount);
             end;
         end;
 
