@@ -1366,6 +1366,8 @@ Codeunit 52186456 "Sacco Transactions"
         AccountTypes: Record "Product Factory";
         ChBank: Code[20];
         Trans: Record "Cashier Transactions";
+        SavingsACC : record "Savings Accounts";
+        Employer : record "Customer";
     begin
         //with CashierTrans do
         begin
@@ -1427,6 +1429,8 @@ Codeunit 52186456 "Sacco Transactions"
             if GenJournalLine.Amount <> 0 then
                 GenJournalLine.Insert;
 
+
+
             //Charges
             TCharges := 0;
 
@@ -1465,6 +1469,12 @@ Codeunit 52186456 "Sacco Transactions"
                             end;
                         end;
 
+                        if SavingsACC.Get(CashierTrans."Account No") then begin
+                            if Employer.Get(SavingsACC."Employer Code") then begin
+                                if Employer."Internal Staff Employer" then
+                                    ChargeAmount := 0;
+                            end;
+                        end;
 
 
                         GenJournalLine.Init;
@@ -1578,6 +1588,8 @@ Codeunit 52186456 "Sacco Transactions"
         AccountTypes: Record "Product Factory";
         ChBank: Code[20];
         Trans: Record "Cashier Transactions";
+        SavingsACC : record "Savings Accounts";
+        Employer : record Customer;
     begin
         //with CashierTrans do
         begin
@@ -1674,6 +1686,13 @@ Codeunit 52186456 "Sacco Transactions"
                                         end;
                                     end;
                                 until TariffDetails.Next = 0;
+                            end;
+                        end;
+
+                        if SavingsACC.Get(CashierTrans."Account No") then begin
+                            if Employer.Get(SavingsACC."Employer Code") then begin
+                                if Employer."Internal Staff Employer" then
+                                    ChargeAmount := 0;
                             end;
                         end;
 
@@ -1812,6 +1831,8 @@ Codeunit 52186456 "Sacco Transactions"
         // CustomApprovals: Codeunit "Custom Approvals Codeunit";
         Text0019: label 'You cannot draw banker cheque more than your allowed limit of %1 unless authorised.';
         SMSChargeAmt: Decimal;
+        Employer : Record "Customer";
+        SavingsACC : Record "Savings Accounts";
     begin
 
         // with CashierTrans do
@@ -1946,7 +1967,14 @@ Codeunit 52186456 "Sacco Transactions"
                         end;
                     end;
 
-
+                    //Dont charge Transactional Charges
+                        if SavingsACC.Get(CashierTrans."Account No") then begin
+                            if Employer.Get(SavingsACC."Employer Code") then begin
+                                if Employer."Internal Staff Employer" then
+                                    ChargeAmount := 0;
+                            end;
+                        end;
+                    //Dont charge Transactional Charges
 
                     GenJournalLine.Init;
                     GenJournalLine."Journal Template Name" := JTemplate;
@@ -4413,7 +4441,7 @@ Codeunit 52186456 "Sacco Transactions"
                                                         if Member."First Name" <> '' then begin
                                                             if Memb."First Name" <> '' then
                                                                 msg := 'Dear ' + Memb."First Name" + ', you have received KES ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
-                                                                        BSchedDestin."Product Name" + ' from ' + Member."First Name" + ' on ' + Format(Today) + ' ' + Format(Time)
+                                                                        BSchedDestin."Product Name" + ' from ' + Member."First Name" + ' on ' + Format(Today) + ' ' + Format(Time)                                                                                     
                                                             else
                                                                 msg := 'Dear ' + Memb.Name + ', you have received KES ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
                                                                         BSchedDestin."Product Name" + ' from ' + Member."First Name" + ' on ' + Format(Today) + ' ' + Format(Time)
@@ -4421,10 +4449,11 @@ Codeunit 52186456 "Sacco Transactions"
                                                         else begin
                                                             if Memb."First Name" <> '' then
                                                                 msg := 'Dear ' + Memb."First Name" + ', you have received KES ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
-                                                                        BSchedDestin."Product Name" + ' from ' + Member."First Name" + ' on ' + Format(Today) + ' ' + Format(Time)
+                                                                        BSchedDestin."Product Name" + ' from ' + Member.Name + ' on ' + Format(Today) + ' ' + Format(Time)
                                                             else
                                                                 msg := 'Dear ' + Memb.Name + ', you have received KES ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
                                                                         BSchedDestin."Product Name" + ' from ' + Member.Name + ' on ' + Format(Today) + ' ' + Format(Time)
+
 
                                                             // msg := 'Dear ' + Memb."First Name" + ', ' + Member.Name + ' has transferred ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
                                                             //                                                            BSchedDestin."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
@@ -4448,10 +4477,10 @@ Codeunit 52186456 "Sacco Transactions"
                                                     if not (Member."No." = Memb."No.") then begin
                                                         if ACTransfer."Recover Arrears" then begin
                                                             if Member."First Name" <> '' then
-                                                                msg := 'Dear ' + Memb."First Name" + ', arrears of ' + Format(BSchedDestin."Destination Amount") + ' has been recovered from your ' +
+                                                                msg := 'Dear ' + Memb."First Name" + ', arrears of KES ' + Format(BSchedDestin."Destination Amount") + ' has been recovered from your ' +
                                                                     BSchedDestin."Product Name" + ' by ' + Member."First Name" + ' on ' + Format(Today) + ' ' + Format(Time)
                                                             else
-                                                                msg := 'Dear ' + Memb."First Name" + ', arrears of ' + Format(BSchedDestin."Destination Amount") + ' has been recovered from your ' +
+                                                                msg := 'Dear ' + Memb."First Name" + ', arrears of KES ' + Format(BSchedDestin."Destination Amount") + ' has been recovered from your ' +
                                                                     BSchedDestin."Product Name" + ' by ' + Member.Name + ' on ' + Format(Today) + ' ' + Format(Time);
                                                         end else begin
                                                             if Member."First Name" <> '' then
@@ -4474,23 +4503,24 @@ Codeunit 52186456 "Sacco Transactions"
                                 until BSchedDestin.next = 0;
                                 if Member."First Name" <> '' then begin
                                     if ACTransfer."Recover Arrears" then
-                                        msg := 'Dear ' + Member."First Name" + ', arrears of KES ' + format(BSchedDestin."Destination Amount") + ' has been recovered for ' + BSchedDestin."Product Name" + ': ' + BSchedDestin."Destination Loan No." + ' on ' + Format(Today) + ' ' + Format(Time)
+                                        msg := 'Dear ' + Member."First Name" + ', arrears of KES ' + Format(BSchedDestin."Destination Amount") + ' has been recovered for ' + BSchedDestin."Product Name" + ': ' + BSchedDestin."Destination Loan No." + ' on ' + Format(Today) + ' ' + Format(Time)
                                     // msg := 'Dear ' + Member."First Name" + ', you have recovered arrears: ' + MembAccounts + ' from ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
                                     else
-                                        msg := 'Dear ' + Member."First Name" + ', you have successfully transferred ' + MembAccounts + ' from ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
+                                        msg := 'Dear ' + Member."First Name" + ', you have successfully transferred KES ' + Format(BSchedDestin."Destination Amount") + ' from ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
                                 end
                                 else begin
                                     if ACTransfer."Recover Arrears" then
-                                        msg := 'Dear ' + Member."First Name" + ', arrears of ' + format(BSchedDestin."Destination Amount") + ' has been recovered for ' + BSchedDestin."Product Name" + ': ' + BSchedDestin."Destination Loan No." + ' on ' + Format(Today) + ' ' + Format(Time)
+                                        msg := 'Dear ' + Member."First Name" + ', arrears of KES ' + Format(BSchedDestin."Destination Amount") + ' has been recovered for ' + BSchedDestin."Product Name" + ': ' + BSchedDestin."Destination Loan No." + ' on ' + Format(Today) + ' ' + Format(Time)
                                     // msg := 'Dear ' + Member.Name + ', you have recovered arrears: ' + MembAccounts + ' from ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
                                     else
-                                        msg := 'Dear ' + Member.Name + ', you have successfully transferred ' + MembAccounts + ' from ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time);
+                                        msg := 'Dear ' + Member.Name + ', you have successfully transferred KES ' + Format(BSchedDestin."Destination Amount") + ' from ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time);
                                 end;
                                 SendSMS.SendSms(Source::INTERACCOUNT_TRANSFER, Member."Phone No.", msg, Format(Member."No."), '', true, 0, false, 'CBS', Member."No.", 'CBS');
                             end;
                         end;
                     until BSched.next = 0;
                 end;
+
 
             end;
         end;
