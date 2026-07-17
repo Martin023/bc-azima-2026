@@ -3,12 +3,15 @@ Report 52185439 "All Tellers Cash Report"
 {
     DefaultLayout = RDLC;
     RDLCLayout = './bc-azima-2026/Layout/AllTellersCashReport.rdl';
+    Caption = 'All Tellers Cash Report';
+    UsageCategory = ReportsAndAnalysis;
+    ApplicationArea = All;
 
     dataset
     {
         dataitem(Treasury_transaction; "Treasury Cashier Transactions")
         {
-            RequestFilterFields = "Transaction Date";
+            RequestFilterFields = "Date Posted";
 
             // COMPANY INFO
             column(CompanyName; CompanyName) { }
@@ -16,6 +19,7 @@ Report 52185439 "All Tellers Cash Report"
             column(CompanyAddress; CompanyAddress) { }
             column(CompanyTelephone; CompanyTelephone) { }
             column(CompanyEmail; CompanyEmail) { }
+            column(CompanyPicture; CompanyInformation.Picture) { } 
             column(PrintingDate; PrintingDate) { }
             column(PrintingTime; PrintingTime) { }
             column(PrintedBy_Header; PrintedBy) { }
@@ -34,6 +38,7 @@ Report 52185439 "All Tellers Cash Report"
             // PAYMENTS SUMMARY
             column(CashWithdrawalAmt; CashWithdrawalAmt) { }
             column(EndOfDayAmt; EndOfDayAmt) { }
+            column(ReturnToTreasuryAmt; ReturnToTreasuryAmt) { } // New Variable
             column(JournalVoucherPaymentsAmt; JournalVoucherPaymentsAmt) { }
             column(MPesaCashWithdrawAmt; MPesaCashWithdrawAmt) { }
             column(GrandTotalPaymentsAmt; GrandTotalPaymentsAmt) { }
@@ -49,10 +54,10 @@ Report 52185439 "All Tellers Cash Report"
 
             trigger OnPreDataItem()
             begin
-                // GET DATE FILTER
-                if Treasury_transaction.GetFilter("Transaction Date") = '' then
-                    Treasury_transaction.SetRange("Transaction Date", Today);
-                DateFilterTxt := Treasury_transaction.GetFilter("Transaction Date");
+                // GET DATE FILTER (Using "Date Posted")
+                if Treasury_transaction.GetFilter("Date Posted") = '' then
+                    Treasury_transaction.SetRange("Date Posted", Today);
+                DateFilterTxt := Treasury_transaction.GetFilter("Date Posted");
 
                 // INITIALIZE TOTALS
                 CashDepositAmt := 0;
@@ -60,14 +65,16 @@ Report 52185439 "All Tellers Cash Report"
                 MPesaCashDepositAmt := 0;
                 ReceiveFromTreasuryAmt := 0;
                 SpecialReceiptAmt := 0;
+                
                 CashWithdrawalAmt := 0;
                 EndOfDayAmt := 0;
+                ReturnToTreasuryAmt := 0;
                 JournalVoucherPaymentsAmt := 0;
                 MPesaCashWithdrawAmt := 0;
 
                 // AGGREGATE CASHIER TRANSACTIONS FOR RECEIPTS AND PAYMENTS
                 CashierTrans.Reset();
-                CashierTrans.SetFilter("Transaction Date", DateFilterTxt);
+                CashierTrans.SetFilter("Date Posted", DateFilterTxt);
                 CashierTrans.SetRange(Posted, true);
                 if CashierTrans.FindSet() then begin
                     repeat
@@ -93,22 +100,25 @@ Report 52185439 "All Tellers Cash Report"
 
                 // AGGREGATE TREASURY TRANSACTIONS FOR ISSUES AND EOD
                 TreasuryTransIn.Reset();
-                TreasuryTransIn.SetFilter("Transaction Date", DateFilterTxt);
+                TreasuryTransIn.SetFilter("Date Posted", DateFilterTxt);
                 TreasuryTransIn.SetRange(Posted, true);
                 if TreasuryTransIn.FindSet() then begin
                     repeat
                         if TreasuryTransIn."Transaction Type" = TreasuryTransIn."Transaction Type"::"Issue To Teller" then
                             ReceiveFromTreasuryAmt += TreasuryTransIn.Amount
                         else if TreasuryTransIn."Transaction Type" = TreasuryTransIn."Transaction Type"::"End of Day Return to Treasury" then
-                            EndOfDayAmt += TreasuryTransIn.Amount;
+                            EndOfDayAmt += TreasuryTransIn.Amount
+                        // ADDED MISSING RETURN TO TREASURY LOGIC
+                        else if TreasuryTransIn."Transaction Type" = TreasuryTransIn."Transaction Type"::"Return To Treasury" then
+                            ReturnToTreasuryAmt += TreasuryTransIn.Amount;
                     until TreasuryTransIn.Next() = 0;
                 end;
 
                 // CALCULATE GRAND TOTALS
                 GrandTotalReceiptsAmt := CashDepositAmt + JournalVoucherReceiptsAmt + MPesaCashDepositAmt + ReceiveFromTreasuryAmt + SpecialReceiptAmt;
-                GrandTotalPaymentsAmt := CashWithdrawalAmt + EndOfDayAmt + JournalVoucherPaymentsAmt + MPesaCashWithdrawAmt;
+                GrandTotalPaymentsAmt := CashWithdrawalAmt + EndOfDayAmt + ReturnToTreasuryAmt + JournalVoucherPaymentsAmt + MPesaCashWithdrawAmt;
 
-                // DUMMY BALANCES FOR DEMONSTRATION BASED ON YOUR IMAGE
+                // DUMMY BALANCES FOR DEMONSTRATION 
                 TellersOpeningBalancesAmt := 0.00;
                 TellersClosingBalancesAmt := 0.00;
                 TreasuryOpeningBalanceAmt := 25192336.00;
@@ -143,7 +153,7 @@ Report 52185439 "All Tellers Cash Report"
                 TempCoinage.DeleteAll();
 
                 TreasuryTransIn.Reset();
-                TreasuryTransIn.SetFilter("Transaction Date", DateFilterTxt);
+                TreasuryTransIn.SetFilter("Date Posted", DateFilterTxt);
                 TreasuryTransIn.SetRange(Posted, true);
                 if TreasuryTransIn.FindSet() then begin
                     repeat
@@ -235,6 +245,7 @@ Report 52185439 "All Tellers Cash Report"
 
         CashWithdrawalAmt: Decimal;
         EndOfDayAmt: Decimal;
+        ReturnToTreasuryAmt: Decimal;
         JournalVoucherPaymentsAmt: Decimal;
         MPesaCashWithdrawAmt: Decimal;
         GrandTotalPaymentsAmt: Decimal;
