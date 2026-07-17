@@ -823,7 +823,7 @@ table 52185690 "Product Factory"
         {
 
         }
-        field(713; "Require Deposits"; Boolean)
+        field(713; "Exclude Deposit Qual"; Boolean)
         {
 
         }

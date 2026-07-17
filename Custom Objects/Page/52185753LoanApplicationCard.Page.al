@@ -1489,24 +1489,24 @@ page 52185753 "Loan Application Card"
                     Cust.Reset;
                     Cust.SetRange("No.", Members."Employer Code");
                     if Cust.Find('-') then begin
-                        if (Cust."Loan Qualification" = Cust."Loan Qualification"::"Basic Pay") or (Cust."Loan Qualification" = Cust."Loan Qualification"::"Gross Pay") then
-                            if (Rec."Appraisal Parameter Type" = Rec."Appraisal Parameter Type"::"Check Off") or (Rec."Appraisal Parameter Type" = Rec."Appraisal Parameter Type"::Salary) then begin
-                                AppraisalSalDetails.Reset;
-                                AppraisalSalDetails.SetRange("Loan No", Rec."Loan No.");
-                                if not AppraisalSalDetails.Find('-') then
-                                    Error(Text009);
-                                if (AppraisalSalDetails.Type = AppraisalSalDetails.Type::"Gross Pay") and (AppraisalSalDetails.Amount = 0) then
-                                    Error('Kindly capture Basic Salary information');
-                            end else begin
-                                RepMethods.Reset;
-                                RepMethods.SetRange("Loan No.", Rec."Loan No.");
-                                RepMethods.setfilter(amount, '>%1', 0);
-                                if RepMethods.Find('-') then begin
-                                    if (RepMethods."Payment Method" = RepMethods."Payment Method"::"Standing Order(External)") or
-                                      (RepMethods."Payment Method" = RepMethods."Payment Method"::"Standing Order(Internal)") then
-                                        Error(Text013);
-                                end;
-                            end;
+                        // if (Cust."Loan Qualification" = Cust."Loan Qualification"::"Basic Pay") or (Cust."Loan Qualification" = Cust."Loan Qualification"::"Gross Pay") then
+                        //     if (Rec."Appraisal Parameter Type" = Rec."Appraisal Parameter Type"::"Check Off") or (Rec."Appraisal Parameter Type" = Rec."Appraisal Parameter Type"::Salary) then begin
+                        //         AppraisalSalDetails.Reset;
+                        //         AppraisalSalDetails.SetRange("Loan No", Rec."Loan No.");
+                        //         if not AppraisalSalDetails.Find('-') then
+                        //             Error(Text009);
+                        //         if (AppraisalSalDetails.Type = AppraisalSalDetails.Type::"Gross Pay") and (AppraisalSalDetails.Amount = 0) then
+                        //             Error('Kindly capture Basic Salary information');
+                        //     end else begin
+                        //         RepMethods.Reset;
+                        //         RepMethods.SetRange("Loan No.", Rec."Loan No.");
+                        //         RepMethods.setfilter(amount, '>%1', 0);
+                        //         if RepMethods.Find('-') then begin
+                        //             if (RepMethods."Payment Method" = RepMethods."Payment Method"::"Standing Order(External)") or
+                        //               (RepMethods."Payment Method" = RepMethods."Payment Method"::"Standing Order(Internal)") then
+                        //                 Error(Text013);
+                        //         end;
+                        //     end;
                     end else
                         Error(Text012);
 
