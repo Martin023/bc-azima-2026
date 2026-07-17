@@ -11,6 +11,61 @@
       <rd:DataSourceID>920bedf0-a5d2-4e50-813f-e491c0217839</rd:DataSourceID>
     </DataSource>
   </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+      <Fields>
+        <Field Name="TransactionCode">
+          <DataField>TransactionCode</DataField>
+        </Field>
+        <Field Name="TransactionName">
+          <DataField>TransactionName</DataField>
+        </Field>
+        <Field Name="EmployeeCode">
+          <DataField>EmployeeCode</DataField>
+        </Field>
+        <Field Name="EmployeeName">
+          <DataField>EmployeeName</DataField>
+        </Field>
+        <Field Name="EmployeeAmt">
+          <DataField>EmployeeAmt</DataField>
+        </Field>
+        <Field Name="EmployeeAmtFormat">
+          <DataField>EmployeeAmtFormat</DataField>
+        </Field>
+        <Field Name="EmployerAmt">
+          <DataField>EmployerAmt</DataField>
+        </Field>
+        <Field Name="EmployerAmtFormat">
+          <DataField>EmployerAmtFormat</DataField>
+        </Field>
+        <Field Name="TotalAmt">
+          <DataField>TotalAmt</DataField>
+        </Field>
+        <Field Name="TotalAmtFormat">
+          <DataField>TotalAmtFormat</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Name">
+          <DataField>CompanyInformation_Name</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Picture">
+          <DataField>CompanyInformation_Picture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -1091,6 +1146,12 @@
       </Page>
     </ReportSection>
   </ReportSections>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -1130,59 +1191,4 @@ End Function
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Fields>
-        <Field Name="TransactionCode">
-          <DataField>TransactionCode</DataField>
-        </Field>
-        <Field Name="TransactionName">
-          <DataField>TransactionName</DataField>
-        </Field>
-        <Field Name="EmployeeCode">
-          <DataField>EmployeeCode</DataField>
-        </Field>
-        <Field Name="EmployeeName">
-          <DataField>EmployeeName</DataField>
-        </Field>
-        <Field Name="EmployeeAmt">
-          <DataField>EmployeeAmt</DataField>
-        </Field>
-        <Field Name="EmployeeAmtFormat">
-          <DataField>EmployeeAmtFormat</DataField>
-        </Field>
-        <Field Name="EmployerAmt">
-          <DataField>EmployerAmt</DataField>
-        </Field>
-        <Field Name="EmployerAmtFormat">
-          <DataField>EmployerAmtFormat</DataField>
-        </Field>
-        <Field Name="TotalAmt">
-          <DataField>TotalAmt</DataField>
-        </Field>
-        <Field Name="TotalAmtFormat">
-          <DataField>TotalAmtFormat</DataField>
-        </Field>
-        <Field Name="CompanyInformation_Name">
-          <DataField>CompanyInformation_Name</DataField>
-        </Field>
-        <Field Name="CompanyInformation_Picture">
-          <DataField>CompanyInformation_Picture</DataField>
-        </Field>
-        <Field Name="CompanyAddress">
-          <DataField>CompanyAddress</DataField>
-        </Field>
-        <Field Name="CompanyTelephone">
-          <DataField>CompanyTelephone</DataField>
-        </Field>
-        <Field Name="CommunicationOnline">
-          <DataField>CommunicationOnline</DataField>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-    </DataSet>
-  </DataSets>
 </Report>
