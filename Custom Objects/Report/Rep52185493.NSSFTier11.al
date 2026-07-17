@@ -74,8 +74,6 @@ report 52185493 "NSSF Tier II"
                 Tier2Cont := 0;
                 TotalCont := 0;
 
-                "PR Period Transactions".SetRange("Payroll Period", SelectedPeriod);
-
                 Employees.Reset;
                 Employees.SetRange("No.", "PR Period Transactions"."Employee Code");
                 if Employees.find('-') then
@@ -96,7 +94,7 @@ report 52185493 "NSSF Tier II"
             trigger OnPreDataItem()
             begin
                 //OnViewCurrRec();
-                LastFieldNo := "PR Period Transactions".FieldNo("Period Year");
+               // LastFieldNo := "PR Period Transactions".FieldNo("Period Year");
             end;
         }
     }
@@ -130,6 +128,7 @@ report 52185493 "NSSF Tier II"
     trigger OnPreReport()
     begin
         if SelectedPeriod = 0D then Error('You must specify the period filter');
+        "PR Period Transactions".SetRange("Payroll Period", SelectedPeriod);
 
         objPeriod.Reset;
         objPeriod.SetRange(objPeriod."Date Opened", SelectedPeriod);
