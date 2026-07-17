@@ -708,18 +708,18 @@ page 52187320 AdvancedHumanResources
                             ApplicationArea = Basic, Suite;
                             RunObject = report "HR Leave Balance";
                         }
-                        action(HrleaveBal2)
-                        {
-                            Caption = 'Leave Balance 2 Report';
-                            ApplicationArea = Basic, Suite;
-                            RunObject = report "HR Leave Balance2";
-                        }
-                        action(HrLeaveBalSummary)
-                        {
-                            Caption = 'Leave Balance Summary Report';
-                            ApplicationArea = Basic, Suite;
-                            RunObject = report "HR Leave Balance Summary";
-                        }
+                        // action(HrleaveBal2)
+                        // {
+                        //     Caption = 'Leave Balance 2 Report';
+                        //     ApplicationArea = Basic, Suite;
+                        //     RunObject = report "HR Leave Balance2";
+                        // }
+                        // action(HrLeaveBalSummary)
+                        // {
+                        //     Caption = 'Leave Balance Summary Report';
+                        //     ApplicationArea = Basic, Suite;
+                        //     RunObject = report "HR Leave Balance Summary";
+                        // }
                         action(StaffOnLeave)
                         {
                             Caption = 'Staff On Leave Report';

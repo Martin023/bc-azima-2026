@@ -174,9 +174,9 @@ Report 52185491 "Leave Balance"
         CommunicationOnline: Text;
         LeaveLedger: record "HR Leave Ledger Entries";
         LeaveType: code[50];
-        TotalTaken: Integer;
-        TotalAllocated: Integer;
-        TotalReimbursed: Integer;
+        TotalTaken: Decimal;
+        TotalAllocated: Decimal;
+        TotalReimbursed: Decimal;
         LeaveTypeEnum: enum "Leave Type Enum";
         DepartmentName: Text[100];
         DaysUtilized: Decimal;
