@@ -733,7 +733,7 @@ table 52185729 Loans
                     if SavProducts.Get(ShareCapAcc."Product Type") then begin
                         ShareCapAcc.CALCFIELDS(ShareCapAcc."Balance (LCY)");
                         IF ShareCapAcc."Balance (LCY)" < SavProducts."Minimum Contribution" THEN begin
-                            if not "Mobile Loan" then begin
+                            if not ("Mobile Loan") and ("Loan Group" <> "Loan Group"::"Group Loan") then begin
                                 MESSAGE('Member no. %1 has share capital of %2 and minimum required share capital is %3 This will be boosted on the loan.', LoanApp."Member No.", ShareCapAcc."Balance (LCY)", SavProducts."Minimum Contribution");
                                 "Share Boosted Amount" := SavProducts."Minimum Contribution" - ShareCapAcc."Balance (LCY)";
                             end;
@@ -3997,10 +3997,18 @@ table 52185729 Loans
                                 Guarantors."Savings Account No./Member No." := BusinesDepositsAcc."No.";
                                 Guarantors."Guarantor Type" := Guarantors."Guarantor Type"::Guarantor;
                                 Guarantors.Insert;
-                                Guarantors.validate("Savings Account No./Member No.");
+
                             end;
                         end;
                     until GroupMembers.Next() = 0;
+                end;
+
+                Guarantors.reset();
+                Guarantors.SetRange("Loan No", rec."Loan No.");
+                if Guarantors.findset() then begin
+                    repeat
+                        Guarantors.validate("Savings Account No./Member No.");
+                    until Guarantors.next = 0;
                 end;
                 //end;
             end;

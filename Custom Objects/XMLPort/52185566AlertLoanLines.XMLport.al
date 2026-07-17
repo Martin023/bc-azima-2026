@@ -23,11 +23,32 @@ xmlport 52185568 "Alerts Loan Lines"
                 {
 
                 }
-                fieldelement(d; "Alerts Loan Lines"."Process Case")
-                {
+                // fieldelement(d; "Alerts Loan Lines"."Process Case")
+                // {
 
+                // }
+            }
+        }
+    }
+    requestpage
+    {
+        SaveValues = true;
+
+        layout
+        {
+            area(content)
+            {
+                group("Header No|Loan No|Period")
+                {
+                    field(No; "Alerts Loan Lines"."Header No.")
+                    {
+                    }
                 }
             }
+        }
+
+        actions
+        {
         }
     }
     trigger OnPostXmlPort()
@@ -36,4 +57,8 @@ xmlport 52185568 "Alerts Loan Lines"
     begin
         Message('Upload of loans successful');
     end;
+
+
+
+
 }

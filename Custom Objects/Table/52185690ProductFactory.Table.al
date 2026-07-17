@@ -827,7 +827,7 @@ table 52185690 "Product Factory"
         {
 
         }
-        field(714; "Security Muliplier"; Decimal)
+        field(714; "Exclude From Salary"; Boolean)
         {
 
         }

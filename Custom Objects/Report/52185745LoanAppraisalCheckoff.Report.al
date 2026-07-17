@@ -934,45 +934,51 @@ Report 52185745 "Loan Appraisal Checkoff"
                 end;
 
                 //Qualification on salary
-                AppraisalSal.Reset;
-                AppraisalSal.SetRange("Loan No", "Loan No.");
-                if AppraisalSal.Find('-') then begin
-                    repeat
-                        if AppraisalSal.Type = AppraisalSal.Type::Basic then
-                            TotalBasic := TotalBasic + AppraisalSal.Amount
-                        else
-                            if (AppraisalSal.Type = AppraisalSal.Type::Earnings) or (AppraisalSal.Type = AppraisalSal.Type::"Other Allowances") then
-                                TrEarni := TrEarni + AppraisalSal.Amount
-                            else
-                                if (AppraisalSal.Type = AppraisalSal.Type::Deductions) or (AppraisalSal.Type = AppraisalSal.Type::PAYE) or (AppraisalSal.Type = AppraisalSal.Type::NSSF)
-                                or (AppraisalSal.Type = AppraisalSal.Type::SHIF) or (AppraisalSal.Type = AppraisalSal.Type::HLEVY) then
-                                    TDeductions := TDeductions + AppraisalSal.Amount
+                if ProductFactory.get(loans."Loan Product Type") then begin
+                    if ProductFactory."Exclude From Salary" then begin
+                        AppraisalSal.Reset;
+                        AppraisalSal.SetRange("Loan No", "Loan No.");
+                        if AppraisalSal.Find('-') then begin
+                            repeat
+                                if AppraisalSal.Type = AppraisalSal.Type::Basic then
+                                    TotalBasic := TotalBasic + AppraisalSal.Amount
                                 else
-                                    if AppraisalSal.Type = AppraisalSal.Type::Pension then
-                                        TPension := TPension + AppraisalSal.Amount
-                                    else if AppraisalSal.type = AppraisalSal.type::"House Allowance" then
-                                        THouseAllow := THouseAllow + AppraisalSal.Amount
-                    until AppraisalSal.Next = 0;
+                                    if (AppraisalSal.Type = AppraisalSal.Type::Earnings) or (AppraisalSal.Type = AppraisalSal.Type::"Other Allowances") then
+                                        TrEarni := TrEarni + AppraisalSal.Amount
+                                    else
+                                        if (AppraisalSal.Type = AppraisalSal.Type::Deductions) or (AppraisalSal.Type = AppraisalSal.Type::PAYE) or (AppraisalSal.Type = AppraisalSal.Type::NSSF)
+                                        or (AppraisalSal.Type = AppraisalSal.Type::SHIF) or (AppraisalSal.Type = AppraisalSal.Type::HLEVY) then
+                                            TDeductions := TDeductions + AppraisalSal.Amount
+                                        else
+                                            if AppraisalSal.Type = AppraisalSal.Type::Pension then
+                                                TPension := TPension + AppraisalSal.Amount
+                                            else if AppraisalSal.type = AppraisalSal.type::"House Allowance" then
+                                                THouseAllow := THouseAllow + AppraisalSal.Amount
+                            until AppraisalSal.Next = 0;
 
+                        end;
+                        GrossPay := round(((TotalBasic + TrEarni + THouseAllow)), 0.01);
+                        NetSalary := round(((TotalBasic + TrEarni + THouseAllow) - TDeductions), 0.01);
+                        OneThirdGross := round((GrossPay * 0.33), 0.01);
+                        TwoThirdGross := round((GrossPay * 0.66), 0.01);
+
+                        DisposableInc := TwoThirdGross - TDeductions;
+
+                        if DisposableInc < 0 then
+                            DisposableInc := 0
+                        else begin
+                            IF Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::Amortised THEN BEGIN
+                                PresentVAF := ((1 - POWER((1 + (Loans.Interest / 1200)), -Loans.Installments)) / (Loans.Interest / 1200));
+                            END ELSE BEGIN
+                                PresentVAF := (Loans.Installments * 100) / ((Loans.Installments * (Loans.Interest / 12)) + 100);
+                            END;
+                            NetOnSalary := DisposableInc * PresentVAF;
+                        end;
+                    end
+                    else begin
+                        NetOnSalary := ProductFactory."Maximum Loan Amount";
+                    end;
                 end;
-                GrossPay := round(((TotalBasic + TrEarni + THouseAllow)), 0.01);
-                NetSalary := round(((TotalBasic + TrEarni + THouseAllow) - TDeductions), 0.01);
-                OneThirdGross := round((GrossPay * 0.33), 0.01);
-                TwoThirdGross := round((GrossPay * 0.66), 0.01);
-
-                DisposableInc := TwoThirdGross - TDeductions;
-
-                if DisposableInc < 0 then
-                    DisposableInc := 0
-                else begin
-                    IF Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::Amortised THEN BEGIN
-                        PresentVAF := ((1 - POWER((1 + (Loans.Interest / 1200)), -Loans.Installments)) / (Loans.Interest / 1200));
-                    END ELSE BEGIN
-                        PresentVAF := (Loans.Installments * 100) / ((Loans.Installments * (Loans.Interest / 12)) + 100);
-                    END;
-                    NetOnSalary := DisposableInc * PresentVAF;
-                end;
-
                 //check to limit the maximum loan amount of the product
                 if NetOnSalary > ProductFactory."Maximum Loan Amount" then begin
                     NetOnSalary := ProductFactory."Maximum Loan Amount";
