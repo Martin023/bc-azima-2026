@@ -92,14 +92,12 @@ Report 52185510 "Tellers Journal"
                 if ReportCreditAmt < 0 then begin
                     ReportDebitAmt := Abs(ReportCreditAmt);
                     ReportCreditAmt := 0;
-                    if StrPos(ReportDescription, 'Reversed - ') = 0 then
-                        ReportDescription := 'Reversed - ' + ReportDescription;
                 end else if ReportDebitAmt < 0 then begin
                     ReportCreditAmt := Abs(ReportDebitAmt);
                     ReportDebitAmt := 0;
-                    if StrPos(ReportDescription, 'Reversed - ') = 0 then
-                        ReportDescription := 'Reversed - ' + ReportDescription;
-                end else if "Bank Account Ledger Entry".Reversed then begin
+                end;
+
+                if "Bank Account Ledger Entry".Reversed and ("Bank Account Ledger Entry"."Reversed Entry No." <> 0) then begin
                     if StrPos(ReportDescription, 'Reversed - ') = 0 then
                         ReportDescription := 'Reversed - ' + ReportDescription;
                 end;
@@ -172,6 +170,5 @@ Report 52185510 "Tellers Journal"
         ReportCreditAmt: Decimal;
         ReportDescription: Text[150];
 
-        // NEW VARIABLE
         TellerUserIDFilter: Code[50];
 }
