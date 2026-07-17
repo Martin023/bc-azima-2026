@@ -1492,12 +1492,6 @@ End Function
         <Field Name="AmountFormat">
           <DataField>AmountFormat</DataField>
         </Field>
-        <Field Name="Employer_Amount">
-          <DataField>Employer_Amount</DataField>
-        </Field>
-        <Field Name="Employer_AmountFormat">
-          <DataField>Employer_AmountFormat</DataField>
-        </Field>
         <Field Name="PeriodName">
           <DataField>PeriodName</DataField>
         </Field>

@@ -14,9 +14,7 @@ report 52185511 "Master Payroll Report"
         dataitem("PR Transaction Codes"; "PR Transaction Codes")
         {
             RequestFilterFields = "Transaction Code";
-            // dataitem("PR Period Transactions"; "PR Period Transactions")
-            //"PR Employee Transactions"
-            dataitem("PR Employee Transactions"; "PR Employee Transactions")
+            dataitem("PR Period Transactions"; "PR Period Transactions")
             {
                 DataItemLink = "Transaction Code" = field("Transaction Code");
                 //RequestFilterFields = "Payroll Period";
@@ -31,7 +29,7 @@ report 52185511 "Master Payroll Report"
                 column(TotDed; TotDed) { }
                 column(TotAllow; TotAllow) { }
                 column(Amount; Amount) { }
-                column(Employer_Amount; "Employer Amount") { }
+                //column(Employer_Amount; "Employer Amount") { }
                 column(PeriodName; PeriodName) { }
                 column(CI_Name; CI.Name)
                 {
@@ -67,12 +65,12 @@ report 52185511 "Master Payroll Report"
                     NPAY := 0;
                     PAYE := 0;
 
-                    if HREmployee.Get("PR Employee Transactions"."Employee Code") then
+                    if HREmployee.Get("PR Period Transactions"."Employee Code") then
                         strEmpName := HREmployee."First Name" + ' ' + HREmployee."Middle Name" + ' ' + HREmployee."Last Name";
 
 
                     PeriodTrans.Reset();
-                    PeriodTrans.Setrange("Employee Code", "PR Employee Transactions"."Employee Code");
+                    PeriodTrans.Setrange("Employee Code", "PR Period Transactions"."Employee Code");
                     PeriodTrans.Setrange("Payroll Period", SelectedPeriod);
                     PeriodTrans.Setfilter(PeriodTrans."Transaction Code", '=%1|%2|%3|%4|%5', 'BPAY', 'GPAY', 'NPAY', 'TOT-DED', 'PAYE');
                     if PeriodTrans.Find('-') then begin
@@ -100,7 +98,7 @@ report 52185511 "Master Payroll Report"
             begin
                 if "PR Transaction Codes"."Transaction Type" = "PR Transaction Codes"."Transaction Type"::Income then begin
                     PeriodTrans.Reset();
-                    PeriodTrans.Setrange("Employee Code", "PR Employee Transactions"."Employee Code");
+                    PeriodTrans.Setrange("Employee Code", "PR Period Transactions"."Employee Code");
                     PeriodTrans.Setrange("Payroll Period", SelectedPeriod);
                     PeriodTrans.Setfilter(PeriodTrans."Transaction Code", "PR Transaction Codes"."Transaction Code");
                     if PeriodTrans.Find('-') then begin
@@ -141,7 +139,7 @@ report 52185511 "Master Payroll Report"
 
         //SelectedPeriod:=objPeriod.GETFILTER("Date Opened");
         //SelectedPeriod := "PR Period Transactions".GetRangeMin("Payroll Period");
-        SelectedPeriod := "PR Employee Transactions".GetRangeMin("Payroll Period");
+        SelectedPeriod := "PR Period Transactions".GetRangeMin("Payroll Period");
         Message('Selected Period: %1', SelectedPeriod);
         objPeriod.Reset;
         objPeriod.SetRange(objPeriod."Date Opened", SelectedPeriod);

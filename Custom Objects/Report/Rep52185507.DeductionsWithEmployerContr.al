@@ -9,10 +9,10 @@ report 52185507 "Deductions With Employer Contr"
     UsageCategory = ReportsAndAnalysis;
     dataset
     {
-        dataitem(PRTransactionCodes; "PR Transaction Codes")
+        dataitem("PR Period Transactions"; "PR Period Transactions")
         {
-            RequestFilterFields = "Transaction Code";
-            DataItemTableView = where("Employer Deduction" = const(true));
+            //RequestFilterFields = "Transaction Code";
+            //DataItemTableView = where("Employer Deduction" = const(true));
             column(TransactionCode; "Transaction Code") { }
             column(TransactionName; "Transaction Name") { }
             column(EmployeeCode; EmployeeCode) { }
@@ -43,28 +43,36 @@ report 52185507 "Deductions With Employer Contr"
                 EmployeeName := '';
                 TotalAmt := 0;
 
-                PRPeriodTransactions.Reset;
-                PRPeriodTransactions.SetRange("Transaction Code", PRTransactionCodes."Transaction Code");
-                PRPeriodTransactions.SetRange("Payroll Period", SelectedPeriod);
-                if PRPeriodTransactions.FindSet() then begin
-                    EmployeeAmt := PRPeriodTransactions.Amount;
-                    EmployeeCode := PRPeriodTransactions."Employee Code";
-                    Employees.Reset();
-                    Employees.SetRange("No.", EmployeeCode);
-                    if Employees.Find() then
-                        EmployeeName := Employees."First Name" + ' ' + Employees."Middle Name" + ' ' + Employees."Last Name";
-                end;
+                PRTransactionCodes.Reset();
+                PRTransactionCodes.SetRange("Employer Deduction", TRUE);
+                PRTransactionCodes.SetRange("Transaction Code", "PR Period Transactions"."Transaction Code");
+                if PRTransactionCodes.Find('-') then begin
 
-                prEmployerDeductions.Reset;
-                prEmployerDeductions.SetRange("Transaction Code", PRTransactionCodes."Transaction Code");
-                prEmployerDeductions.SetRange("Payroll Period", SelectedPeriod);
-                if prEmployerDeductions.FindSet() then begin
-                    EmployerAmt := prEmployerDeductions.Amount;
-                end;
+                    PRPeriodTransactions.Reset;
+                    PRPeriodTransactions.SetRange("Transaction Code", PRTransactionCodes."Transaction Code");
+                    PRPeriodTransactions.SetRange("Payroll Period", SelectedPeriod);
+                    if PRPeriodTransactions.FindSet() then begin
+                        EmployeeAmt := PRPeriodTransactions.Amount;
+                        EmployeeCode := PRPeriodTransactions."Employee Code";
+                        Employees.Reset();
+                        Employees.SetRange("No.", EmployeeCode);
+                        if Employees.Find() then
+                            EmployeeName := Employees."First Name" + ' ' + Employees."Middle Name" + ' ' + Employees."Last Name";
+                    end;
 
-                TotalAmt := EmployeeAmt + EmployerAmt;
+                    prEmployerDeductions.Reset;
+                    prEmployerDeductions.SetRange("Transaction Code", PRTransactionCodes."Transaction Code");
+                    prEmployerDeductions.SetRange("Payroll Period", SelectedPeriod);
+                    if prEmployerDeductions.FindSet() then begin
+                        EmployerAmt := prEmployerDeductions.Amount;
+                    end;
+
+                    TotalAmt := EmployeeAmt + EmployerAmt;
+                end
+                ELSE
+                    CurrReport.Skip();
             end;
-           
+
             trigger OnPreDataItem()
             begin
                 CompanyInformation.Get;
@@ -133,6 +141,7 @@ report 52185507 "Deductions With Employer Contr"
         TotalCont: Decimal;
         PRPeriodTransactions: Record "PR Period Transactions";
         prEmployerDeductions: Record "prEmployer Deductions";
+        PRTransactionCodes: Record "PR Transaction Codes";
         EmployerAmt: Decimal;
         EmployeeAmt: Decimal;
         TotalAmt: Decimal;
