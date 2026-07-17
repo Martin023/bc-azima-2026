@@ -44,23 +44,15 @@ report 52185507 "Deductions With Employer Contr"
                 TotalAmt := 0;
                 SNO += 1;
 
+                Employees.Reset();
+                Employees.SetRange("No.", "PR Period Transactions"."Employee Code");
+                if Employees.Find('-') then
+                    EmployeeName := Employees."First Name" + ' ' + Employees."Middle Name" + ' ' + Employees."Last Name";
+
                 PRTransactionCodes.Reset();
                 PRTransactionCodes.SetRange("Employer Deduction", TRUE);
                 PRTransactionCodes.SetRange("Transaction Code", "PR Period Transactions"."Transaction Code");
                 if PRTransactionCodes.Find('-') then begin
-
-                    PRPeriodTransactions.Reset;
-                    PRPeriodTransactions.SetRange("Transaction Code", PRTransactionCodes."Transaction Code");
-                    PRPeriodTransactions.SetRange("Employee Code", "PR Period Transactions"."Employee Code");
-                    PRPeriodTransactions.SetRange("Payroll Period", SelectedPeriod);
-                    if PRPeriodTransactions.FindSet() then begin
-                        //EmployeeAmt := PRPeriodTransactions.Amount;
-                        //EmployeeCode := PRPeriodTransactions."Employee Code";
-                        Employees.Reset();
-                        Employees.SetRange("No.", EmployeeCode);
-                        if Employees.Find() then
-                            EmployeeName := Employees."First Name" + ' ' + Employees."Middle Name" + ' ' + Employees."Last Name";
-                    end;
 
                     prEmployerDeductions.Reset;
                     prEmployerDeductions.SetRange("Transaction Code", PRTransactionCodes."Transaction Code");
@@ -71,7 +63,7 @@ report 52185507 "Deductions With Employer Contr"
 
                     TotalAmt := EmployeeAmt + EmployerAmt;
                 end
-                ELSE
+                else
                     CurrReport.Skip();
             end;
 
@@ -79,6 +71,9 @@ report 52185507 "Deductions With Employer Contr"
             begin
                 CompanyInformation.Get;
                 CompanyInformation.CalcFields(Picture);
+
+
+                "PR Period Transactions".Setrange("Payroll Period", SelectedPeriod);
 
             end;
 
