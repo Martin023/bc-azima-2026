@@ -136,7 +136,7 @@ report 52185511 "Master Payroll Report"
 
     trigger OnPreReport()
     begin
-
+        "PR Period Transactions".SetRange("Payroll Period", SelectedPeriod);
         //SelectedPeriod:=objPeriod.GETFILTER("Date Opened");
         //SelectedPeriod := "PR Period Transactions".GetRangeMin("Payroll Period");
         SelectedPeriod := "PR Period Transactions".GetRangeMin("Payroll Period");
