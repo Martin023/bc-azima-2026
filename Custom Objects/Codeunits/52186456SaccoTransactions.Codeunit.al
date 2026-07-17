@@ -1063,9 +1063,14 @@ Codeunit 52186456 "Sacco Transactions"
                         if Memb.Get(SavingsACC."Member No.") then begin
                             MobileNo := Memb."Phone No.";
                         end;
+                
+                if CashierTrans.Type = CashierTrans.Type::"Cash Withdrawal" then
+                    msg := 'Dear Member, you have done a transaction of Ksh. ' + Format(CashierTrans.Amount) + ' on your ' + SavingsACC."Product Name" + ' account' + Text0010 + Format(CashierTrans.Type) + Text0011
+                     + Format(Today) + ' ' + Format(Time) + Text0012 + Text0013 + COMPANYNAME
+                else
+                msg := 'Dear Member, ' + CashierTrans.Remarks + ' has done a transation of Ksh. ' + Format(CashierTrans.Amount) + ' on your ' + SavingsACC."Product Name" + ' account' + Text0010 + Format(CashierTrans.Type) +
+                 Text0011 + Format(Today) + ' ' + Format(Time) + Text0012 + Text0013 + COMPANYNAME;
                 end;
-
-                msg := 'Dear Member, ' + CashierTrans.Remarks + ' has done a transation of Ksh. ' + Format(CashierTrans.Amount) + Text0010 + Format(CashierTrans.Type) + Text0011 + Format(Today) + ' ' + Format(Time) + Text0012 + Text0013 + COMPANYNAME;
 
                 if CashierTrans.Type = CashierTrans.Type::"Cash Withdrawal" then
                     SendSMS.SendSms(Source::CASH_WITHDRAWAL_CONFIRM, MobileNo, msg, Format(CashierTrans."Account No"), '', true, 0, false, 'CBS', CashierTrans."Account No", 'CBS')
@@ -1894,7 +1899,7 @@ Codeunit 52186456 "Sacco Transactions"
             GenJournalLine."Account No." := CashierTrans."Account No";
             GenJournalLine.Validate(GenJournalLine."Account No.");
             GenJournalLine."Posting Date" := CashierTrans."Transaction Date";
-            GenJournalLine.Description := PadStr('Cheque Sale - ChqNo.' + CashierTrans."Cheque No" + '-' + CashierTrans.Payee, 50);
+            GenJournalLine.Description := PadStr('Cheque Sale - ChqNo. ' + CashierTrans."Bankers Cheque No" + ' -' + CashierTrans.Payee, 50);
             GenJournalLine."Currency Code" := CashierTrans."Currency Code";
             GenJournalLine.Validate(GenJournalLine."Currency Code");
             GenJournalLine.Amount := CashierTrans.Amount;
@@ -1918,7 +1923,7 @@ Codeunit 52186456 "Sacco Transactions"
             GenJournalLine."Account No." := ChBank;
             GenJournalLine.Validate(GenJournalLine."Account No.");
             GenJournalLine."Posting Date" := CashierTrans."Transaction Date";
-            GenJournalLine.Description := PadStr('Cheque Sale - ChqNo.' + CashierTrans."Cheque No" + '-' + CashierTrans.Payee, 50);
+            GenJournalLine.Description := PadStr('Cheque Sale - ChqNo. ' + CashierTrans."Bankers Cheque No" + ' -' + CashierTrans.Payee, 50);
             GenJournalLine."Currency Code" := CashierTrans."Currency Code";
             GenJournalLine.Validate(GenJournalLine."Currency Code");
             GenJournalLine.Amount := -(CashierTrans.Amount);
@@ -4516,14 +4521,14 @@ Codeunit 52186456 "Sacco Transactions"
                                         msg := 'Dear ' + Member."First Name" + ', arrears of KES ' + Format(BSchedDestin."Destination Amount") + ' has been recovered for ' + BSchedDestin."Product Name" + ': ' + BSchedDestin."Destination Loan No." + ' on ' + Format(Today) + ' ' + Format(Time)
                                     // msg := 'Dear ' + Member."First Name" + ', you have recovered arrears: ' + MembAccounts + ' from ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
                                     else
-                                        msg := 'Dear ' + Member."First Name" + ', you have successfully transferred KES ' + Format(BSchedDestin."Destination Amount") + ' from ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
+                                        msg := 'Dear ' + Member."First Name" + ', you have successfully transferred ' + MembAccounts + ' from your ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
                                 end
                                 else begin
                                     if ACTransfer."Recover Arrears" then
                                         msg := 'Dear ' + Member."First Name" + ', arrears of KES ' + Format(BSchedDestin."Destination Amount") + ' has been recovered for ' + BSchedDestin."Product Name" + ': ' + BSchedDestin."Destination Loan No." + ' on ' + Format(Today) + ' ' + Format(Time)
                                     // msg := 'Dear ' + Member.Name + ', you have recovered arrears: ' + MembAccounts + ' from ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
                                     else
-                                        msg := 'Dear ' + Member.Name + ', you have successfully transferred KES ' + Format(BSchedDestin."Destination Amount") + ' from ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time);
+                                        msg := 'Dear ' + Member.Name + ', you have successfully transferred ' + MembAccounts + ' from your ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time);
                                 end;
                                 SendSMS.SendSms(Source::INTERACCOUNT_TRANSFER, Member."Phone No.", msg, Format(Member."No."), '', true, 0, false, 'CBS', Member."No.", 'CBS');
                             end;
