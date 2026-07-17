@@ -53,7 +53,6 @@ report 52185507 "Deductions With Employer Contr"
                 PRTransactionCodes.SetRange("Employer Deduction", TRUE);
                 PRTransactionCodes.SetRange("Transaction Code", "PR Period Transactions"."Transaction Code");
                 if PRTransactionCodes.Find('-') then begin
-
                     prEmployerDeductions.Reset;
                     prEmployerDeductions.SetRange("Transaction Code", PRTransactionCodes."Transaction Code");
                     prEmployerDeductions.SetRange("Payroll Period", SelectedPeriod);

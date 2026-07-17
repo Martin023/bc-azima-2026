@@ -1137,7 +1137,7 @@ Codeunit 52185472 "PR Payroll Processing"
                                         JournalAc := SavingsAccounts."No.";
                                         JournalPostingType := Journalpostingtype::Savings;
                                     end else begin
-                                        error('Saving Account Not Found');
+                                        error('Saving Account Not Found for Employee %1', strEmpCode);
                                     end;
                                 end;
                             end
