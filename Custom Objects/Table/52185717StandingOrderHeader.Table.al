@@ -193,7 +193,9 @@ table 52185717 "Standing Order Header"
                 IF "Effective/Start Date" < TODAY THEN
                     ERROR('Date must be in Today or in future');
                 //IF "Income Type" <> Rec."Income Type"::Periodic THEN
-                "Next Run Date" := CALCDATE("Frequency (Months)", "Effective/Start Date");
+                "Next Run Date" := "Effective/Start Date"; //
+                //Below is the former value of the 'Next Run Date' field 
+                //CALCDATE("Frequency (Months)", "Effective/Start Date");
             end;
         }
         field(27; "Frequency (Months)"; DateFormula)
