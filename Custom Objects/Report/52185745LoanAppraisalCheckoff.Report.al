@@ -771,7 +771,7 @@ Report 52185745 "Loan Appraisal Checkoff"
                             LoanProcessingAmtEx := LoanProcessingAmt * GenSetup."Excise Duty (%)" * 0.01;
                         end;
                     until PCharges.Next = 0;
-                    TotalProcessingAmt := LoanProcessingAmt + LoanProcessingAmtEx;
+                    TotalProcessingAmt += LoanProcessingAmt + LoanProcessingAmtEx;
                 end;
 
                 //3. Insurance fees
@@ -935,7 +935,7 @@ Report 52185745 "Loan Appraisal Checkoff"
 
                 //Qualification on salary
                 if ProductFactory.get(loans."Loan Product Type") then begin
-                    if ProductFactory."Exclude From Salary" then begin
+                    if not ProductFactory."Exclude From Salary" then begin
                         AppraisalSal.Reset;
                         AppraisalSal.SetRange("Loan No", "Loan No.");
                         if AppraisalSal.Find('-') then begin
@@ -1011,58 +1011,71 @@ Report 52185745 "Loan Appraisal Checkoff"
                         Mult := ProductFactory."Dep. Multiplier On Collateral";
                 end;
 
-                MemberDeposits := 0;
-                Mult := ProductFactory."Ordinary Deposits Multiplier";
-                SavingsAccounts.Reset;
-                SavingsAccounts.SetRange(SavingsAccounts."Member No.", Loans."Member No.");
-                SavingsAccounts.SetRange(SavingsAccounts."Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
-                if SavingsAccounts.Find('-') then begin
-                    SavingsAccounts.CalcFields(SavingsAccounts."Balance (LCY)");
-                    MemberDeposits := SavingsAccounts."Balance (LCY)";//+Loans."Loans - Deposit Purchase";
-                end;
-                QualificationOnDeposits := (MemberDeposits + loans."Loans - Deposit Purchase") * Mult;
-                DepositMult := QualificationOnDeposits;
-
-                if ProductFactory."Minimum Deposit Balance" <> 0 then begin
-                    if (MemberDeposits + loans."Loans - Deposit Purchase") < ProductFactory."Minimum Deposit Balance" then begin
-                        Message('Thus Member has not met the minimun deposit of %1', format((MemberDeposits + loans."Loans - Deposit Purchase")));
-                        QualificationOnDeposits := 0;
+                if ProductFactory."Loan Group" = ProductFactory."Loan Group"::"Group Loan" then begin
+                    MemberDeposits := 0;
+                    Mult := ProductFactory."Ordinary Deposits Multiplier";
+                    SavingsAccounts.Reset;
+                    SavingsAccounts.SetRange(SavingsAccounts."Member No.", Loans."Member No.");
+                    SavingsAccounts.SetRange(SavingsAccounts."Product Type", ProductFactory."Loan Appraisal Account Code");
+                    if SavingsAccounts.Find('-') then begin
+                        SavingsAccounts.CalcFields(SavingsAccounts."Balance (LCY)");
+                        MemberDeposits := SavingsAccounts."Balance (LCY)";//+Loans."Loans - Deposit Purchase";
                     end;
-                end;
+                    QualificationOnDeposits := (MemberDeposits) * Mult;
+                    DepositMult := QualificationOnDeposits;
+                end
+                else begin
+                    MemberDeposits := 0;
+                    Mult := ProductFactory."Ordinary Deposits Multiplier";
+                    SavingsAccounts.Reset;
+                    SavingsAccounts.SetRange(SavingsAccounts."Member No.", Loans."Member No.");
+                    SavingsAccounts.SetRange(SavingsAccounts."Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
+                    if SavingsAccounts.Find('-') then begin
+                        SavingsAccounts.CalcFields(SavingsAccounts."Balance (LCY)");
+                        MemberDeposits := SavingsAccounts."Balance (LCY)";//+Loans."Loans - Deposit Purchase";
+                    end;
+                    QualificationOnDeposits := (MemberDeposits + loans."Loans - Deposit Purchase") * Mult;
+                    DepositMult := QualificationOnDeposits;
 
-                //Existing Loans
-                TotalRepay := 0;
-                Loan.Reset;
-                Loan.SetRange(Loan."Member No.", Loans."Member No.");
-                Loan.SetRange(Loan.Posted, true);
-                //Loan.SetRange(Loan."Source Unit", Loan."Source Unit"::BOSA);
-                //exclude BGL and FGL
-                Loan.SetFilter("Loan Product Type", '<>BGL&<>FGL');
-                Loan.SetAutoCalcFields("Total Balance");
-                Loan.SetFilter("Total Balance", '>%1', 0);
-                if Loan.FindSet() then begin
-                    repeat
-                        LoanTopup.reset();
-                        LoanTopup.SetRange("Loan No.", Loans."Loan No.");
-                        LoanTopup.setrange("Loan Top Up", Loan."Loan No.");
-                        if LoanTopup.FindFirst() then begin
-                            if (LoanTopup."Total Top Up" < Loan."Total Balance") then begin
-                                // Message(Format(Loan."Loan No."));
-                                // Message(format(LoanTopup."Total Top Up"));
-                                // Message(Format(Loan."Total Balance"));
+                    if ProductFactory."Minimum Deposit Balance" <> 0 then begin
+                        if (MemberDeposits + loans."Loans - Deposit Purchase") < ProductFactory."Minimum Deposit Balance" then begin
+                            Message('Thus Member has not met the minimun deposit of %1', format((MemberDeposits + loans."Loans - Deposit Purchase")));
+                            QualificationOnDeposits := 0;
+                        end;
+                    end;
+
+                    //Existing Loans
+                    TotalRepay := 0;
+                    Loan.Reset;
+                    Loan.SetRange(Loan."Member No.", Loans."Member No.");
+                    Loan.SetRange(Loan.Posted, true);
+                    //Loan.SetRange(Loan."Source Unit", Loan."Source Unit"::BOSA);
+                    //exclude BGL and FGL
+                    Loan.SetFilter("Loan Product Type", '<>BGL&<>FGL');
+                    Loan.SetAutoCalcFields("Total Balance");
+                    Loan.SetFilter("Total Balance", '>%1', 0);
+                    if Loan.FindSet() then begin
+                        repeat
+                            LoanTopup.reset();
+                            LoanTopup.SetRange("Loan No.", Loans."Loan No.");
+                            LoanTopup.setrange("Loan Top Up", Loan."Loan No.");
+                            if LoanTopup.FindFirst() then begin
+                                if (LoanTopup."Total Top Up" < Loan."Total Balance") then begin
+                                    // Message(Format(Loan."Loan No."));
+                                    // Message(format(LoanTopup."Total Top Up"));
+                                    // Message(Format(Loan."Total Balance"));
+                                    TotalRepay += Loan.Repayment;
+                                    TotalLoanBal += Loan."Total Balance";
+                                end;
+                            end
+                            else begin
                                 TotalRepay += Loan.Repayment;
                                 TotalLoanBal += Loan."Total Balance";
                             end;
-                        end
-                        else begin
-                            TotalRepay += Loan.Repayment;
-                            TotalLoanBal += Loan."Total Balance";
-                        end;
-                    until Loan.Next = 0;
+                        until Loan.Next = 0;
+                    end;
+                    QualificationOnDeposits -= TotalLoanBal;
                 end;
-
-
-                QualificationOnDeposits -= TotalLoanBal;
 
                 if ProductFactory.Get(Loans."Loan Product Type") then begin
                     if QualificationOnDeposits > ProductFactory."Maximum Loan Amount" then

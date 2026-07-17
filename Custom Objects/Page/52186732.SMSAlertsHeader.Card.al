@@ -1361,111 +1361,34 @@ page 52186732 "SMS Alerts Header Card"
         AlertsLines: Record "SMS Alerts Lines";
         AlertsLine: Record "SMS Alerts Lines";
     begin
-        Zip.CreateZipArchive();
-
+        // Zip.CreateZipArchive();
         Clear(AlertsLines);
         AlertsLines.Reset();
         AlertsLines.SetRange("Header No", Rec."No.");
         AlertsLines.SetRange("Notice Type", AlertsLines."Notice Type"::Letter);
         //AlertsLines.SetRange("Notice Category", AlertsLines."Notice Category"::"First Notice");
         if AlertsLines.Find('-') then begin
-            repeat
+            // repeat
+            //     LoanNo := AlertsLines."Loan No";
+            //     //##############3
+            //     TempBlob.CreateOutStream(OutStr);
+            //     Report.SaveAs(
+            //         Report::"Appraisal Loan Report",
+            //         '',
+            //         ReportFormat::Pdf,
+            //         OutStr,
+            //         recRef);
+            //     FileName := LoanNo + ' Appraisal_Report_' + '.pdf';
+            //     // download the report
+            //     PdfMimeType := 'application/pdf';
+            //     TempBlob.CreateInStream(InStreamVar);
+            //     DownloadFromStream(InStreamVar, '', '', FileName, FileName);
+            //         // ##############################33
 
-                // if AlertsLines."Notice Category" = AlertsLines."Notice Category"::"First Notice" then begin
-                Clear(AlertsLine);
-                AlertsLine.Reset();
-                AlertsLine.SetRange("Entry No", AlertsLines."Entry No");
-                AlertsLine.SetRange(Recepient, AlertsLines.Recepient);
-                AlertsLine.SetRange("Notice Category", AlertsLines."Notice Category");
-                AlertsLine.SetRange("Loan No", AlertsLines."Loan No");
-                AlertsLine.SetRange("Notice Type", AlertsLines."Notice Type"::Letter);
-                if AlertsLine.FindFirst() then begin
-
-                    TempBlob.CreateOutStream(OutS);
-                    RecRef.GetTable(AlertsLine);
-
-                    Report.SaveAs(Report::"First Notice", '', ReportFormat::Pdf, OutS, RecRef);
-
-                    FileName := AlertsLine."Member No" + '_' + AlertsLine."Loan No" + '_' + Format(AlertsLine.Recepient) + '_' + Format(AlertsLine."Notice Category") + '.pdf';
-
-                    TempBlob.CreateInStream(InS);
-                    Zip.AddEntry(InS, FileName);
-                end;
-            // end;
-            until AlertsLines.Next() = 0;
+            //     end;
+            // // end;
+            // until AlertsLines.Next() = 0;
         end;
-
-        Clear(AlertsLines);
-        AlertsLines.Reset();
-        AlertsLines.SetRange("Header No", Rec."No.");
-        AlertsLines.SetRange("Notice Type", AlertsLines."Notice Type"::Letter);
-        AlertsLines.SetRange("Notice Category", AlertsLines."Notice Category"::"Second Notice");
-        AlertsLines.SetRange(Recepient, AlertsLines.Recepient::Lonee);
-        if AlertsLines.Find('-') then begin
-            repeat
-                // if (AlertsLines."Notice Category" = AlertsLines."Notice Category"::"Second Notice") and (AlertsLines.Recepient = AlertsLines.Recepient::Lonee) then begin
-                Clear(AlertsLine);
-                AlertsLine.Reset();
-                AlertsLine.SetRange("Entry No", AlertsLines."Entry No");
-                AlertsLine.SetRange(Recepient, AlertsLines.Recepient);
-                AlertsLine.SetRange("Notice Category", AlertsLines."Notice Category");
-                AlertsLine.SetRange("Loan No", AlertsLines."Loan No");
-                AlertsLine.SetRange("Notice Type", AlertsLines."Notice Type"::Letter);
-                if AlertsLine.FindFirst() then begin
-
-                    TempBlob.CreateOutStream(OutS);
-                    RecRef.GetTable(AlertsLine);
-
-                    Report.SaveAs(Report::"Second Notice", '', ReportFormat::Pdf, OutS, RecRef);
-
-                    FileName := AlertsLine."Member No" + '_' + AlertsLine."Loan No" + '_' + Format(AlertsLine.Recepient) + '_' + Format(AlertsLine."Notice Category") + '.pdf';
-
-                    TempBlob.CreateInStream(InS);
-                    Zip.AddEntry(InS, FileName);
-                end;
-            // end;
-            until AlertsLines.Next() = 0;
-        end;
-
-        Clear(AlertsLines);
-        AlertsLines.Reset();
-        AlertsLines.SetRange("Header No", Rec."No.");
-        AlertsLines.SetRange("Notice Type", AlertsLines."Notice Type"::Letter);
-        AlertsLines.SetRange("Notice Category", AlertsLines."Notice Category"::"Second Notice");
-        AlertsLines.SetRange(Recepient, AlertsLines.Recepient::Guarantor);
-        if AlertsLines.Find('-') then begin
-            repeat
-                // if (AlertsLines."Notice Category" = AlertsLines."Notice Category"::"Second Notice") and (AlertsLines.Recepient = AlertsLines.Recepient::Guarantor) then begin
-                Clear(AlertsLine);
-                AlertsLine.Reset();
-                AlertsLine.SetRange("Entry No", AlertsLines."Entry No");
-                AlertsLine.SetRange(Recepient, AlertsLines.Recepient);
-                AlertsLine.SetRange("Notice Category", AlertsLines."Notice Category");
-                AlertsLine.SetRange("Loan No", AlertsLines."Loan No");
-                AlertsLine.SetRange("Notice Type", AlertsLine."Notice Type"::Letter);
-                if AlertsLine.FindFirst() then begin
-
-                    TempBlob.CreateOutStream(OutS);
-                    RecRef.GetTable(AlertsLine);
-
-                    Report.SaveAs(Report::"Guarantor Notice", '', ReportFormat::Pdf, OutS, RecRef);
-
-                    FileName := AlertsLine."Member No" + '_' + AlertsLine."Loan No" + '_' + Format(AlertsLine.Recepient) + '_' + Format(AlertsLine."Notice Category") + '.pdf';
-
-                    TempBlob.CreateInStream(InS);
-                    Zip.AddEntry(InS, FileName);
-                end;
-            // end;
-            until AlertsLines.Next() = 0;
-        end;
-
-
-        TempBlob.CreateOutStream(OutS);
-        Zip.SaveZipArchive(OutS);
-
-        TempBlob.CreateInStream(InS);
-        FileNameArchive := Rec."No." + ' Recovery Letters.zip';
-        DownloadFromStream(InS, '', '', '', FileNameArchive);
     end;
 
     local procedure AreThereLetters(): Boolean
