@@ -5,7 +5,6 @@ Report 52185688 prNSSF
     Caption = 'NSSF Tier 1';
     RDLCLayout = './bc-azima-2026/Layout/prNSSF.rdl';
 
-
     dataset
     {
         dataitem("PR Period Transactions"; "PR Period Transactions")
@@ -72,6 +71,7 @@ Report 52185688 prNSSF
                 TotalCont := 0;
 
                 
+                "PR Period Transactions".SetRange("Payroll Period", SelectedPeriod);
 
                 Employees.Reset;
                 Employees.SetRange("No.", "PR Period Transactions"."Employee Code");
@@ -92,7 +92,7 @@ Report 52185688 prNSSF
             trigger OnPreDataItem()
             begin
                 //OnViewCurrRec();
-                //LastFieldNo := "PR Period Transactions".FieldNo("Period Year");
+                LastFieldNo := "PR Period Transactions".FieldNo("Period Year");
             end;
         }
     }
