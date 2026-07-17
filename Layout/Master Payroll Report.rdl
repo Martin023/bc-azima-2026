@@ -184,6 +184,39 @@
                       </Textbox>
                     </CellContents>
                   </TablixCornerCell>
+                  <TablixCornerCell>
+                    <CellContents>
+                      <Textbox Name="Textbox2">
+                        <CanGrow>true</CanGrow>
+                        <KeepTogether>true</KeepTogether>
+                        <Paragraphs>
+                          <Paragraph>
+                            <TextRuns>
+                              <TextRun>
+                                <Value />
+                                <Style>
+                                  <FontFamily>Book Antiqua</FontFamily>
+                                  <FontWeight>Bold</FontWeight>
+                                </Style>
+                              </TextRun>
+                            </TextRuns>
+                            <Style />
+                          </Paragraph>
+                        </Paragraphs>
+                        <rd:DefaultName>Textbox2</rd:DefaultName>
+                        <Style>
+                          <Border>
+                            <Color>LightGrey</Color>
+                            <Style>Solid</Style>
+                          </Border>
+                          <PaddingLeft>2pt</PaddingLeft>
+                          <PaddingRight>2pt</PaddingRight>
+                          <PaddingTop>2pt</PaddingTop>
+                          <PaddingBottom>2pt</PaddingBottom>
+                        </Style>
+                      </Textbox>
+                    </CellContents>
+                  </TablixCornerCell>
                 </TablixCornerRow>
                 <TablixCornerRow>
                   <TablixCornerCell>
@@ -338,6 +371,39 @@
                           </Paragraph>
                         </Paragraphs>
                         <rd:DefaultName>Textbox22</rd:DefaultName>
+                        <Style>
+                          <Border>
+                            <Color>LightGrey</Color>
+                            <Style>Solid</Style>
+                          </Border>
+                          <PaddingLeft>2pt</PaddingLeft>
+                          <PaddingRight>2pt</PaddingRight>
+                          <PaddingTop>2pt</PaddingTop>
+                          <PaddingBottom>2pt</PaddingBottom>
+                        </Style>
+                      </Textbox>
+                    </CellContents>
+                  </TablixCornerCell>
+                  <TablixCornerCell>
+                    <CellContents>
+                      <Textbox Name="Textbox3">
+                        <CanGrow>true</CanGrow>
+                        <KeepTogether>true</KeepTogether>
+                        <Paragraphs>
+                          <Paragraph>
+                            <TextRuns>
+                              <TextRun>
+                                <Value>PAYE</Value>
+                                <Style>
+                                  <FontFamily>Book Antiqua</FontFamily>
+                                  <FontWeight>Bold</FontWeight>
+                                </Style>
+                              </TextRun>
+                            </TextRuns>
+                            <Style />
+                          </Paragraph>
+                        </Paragraphs>
+                        <rd:DefaultName>Textbox3</rd:DefaultName>
                         <Style>
                           <Border>
                             <Color>LightGrey</Color>
@@ -716,6 +782,44 @@
                                       </Textbox>
                                     </CellContents>
                                   </TablixHeader>
+                                  <TablixMembers>
+                                    <TablixMember>
+                                      <TablixHeader>
+                                        <Size>0.98425in</Size>
+                                        <CellContents>
+                                          <Textbox Name="PAYE">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>=Fields!PAYE.Value</Value>
+                                                    <Style>
+                                                      <FontFamily>Book Antiqua</FontFamily>
+                                                      <Format>#,0.00</Format>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>PAYE</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixHeader>
+                                    </TablixMember>
+                                  </TablixMembers>
                                 </TablixMember>
                               </TablixMembers>
                             </TablixMember>
@@ -902,6 +1006,44 @@
                                       </Textbox>
                                     </CellContents>
                                   </TablixHeader>
+                                  <TablixMembers>
+                                    <TablixMember>
+                                      <TablixHeader>
+                                        <Size>0.98425in</Size>
+                                        <CellContents>
+                                          <Textbox Name="Textbox12">
+                                            <CanGrow>true</CanGrow>
+                                            <KeepTogether>true</KeepTogether>
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>=Sum(Fields!PAYE.Value)</Value>
+                                                    <Style>
+                                                      <FontFamily>Book Antiqua</FontFamily>
+                                                      <Format>#,0.00</Format>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <rd:DefaultName>Textbox12</rd:DefaultName>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingRight>2pt</PaddingRight>
+                                              <PaddingTop>2pt</PaddingTop>
+                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixHeader>
+                                    </TablixMember>
+                                  </TablixMembers>
                                 </TablixMember>
                               </TablixMembers>
                             </TablixMember>
@@ -918,7 +1060,7 @@
             <Top>0.31473in</Top>
             <Left>0.32886in</Left>
             <Height>0.97244in</Height>
-            <Width>7.71478in</Width>
+            <Width>8.69903in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -929,7 +1071,7 @@
         <Height>3.70417cm</Height>
         <Style />
       </Body>
-      <Width>22.33586cm</Width>
+      <Width>23.27072cm</Width>
       <Page>
         <PageHeader>
           <Height>3.30632cm</Height>
@@ -1118,9 +1260,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox7</rd:DefaultName>
               <Top>2.65368cm</Top>
-              <Left>1.57614cm</Left>
+              <Left>0.8353cm</Left>
               <Height>0.6cm</Height>
-              <Width>20.75972cm</Width>
+              <Width>22.43542cm</Width>
               <ZIndex>5</ZIndex>
               <Style>
                 <Border>
@@ -1349,12 +1491,6 @@ End Function
         </Field>
         <Field Name="AmountFormat">
           <DataField>AmountFormat</DataField>
-        </Field>
-        <Field Name="Employer_Amount">
-          <DataField>Employer_Amount</DataField>
-        </Field>
-        <Field Name="Employer_AmountFormat">
-          <DataField>Employer_AmountFormat</DataField>
         </Field>
         <Field Name="PeriodName">
           <DataField>PeriodName</DataField>

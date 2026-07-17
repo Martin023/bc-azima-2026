@@ -329,6 +329,7 @@ page 52186732 "SMS Alerts Header Card"
                         Message('Operation aborted!');
                 end;
             }
+
             // action(AssinedUser)
             // {
             //     ApplicationArea = all;
@@ -1071,6 +1072,28 @@ page 52186732 "SMS Alerts Header Card"
             end;
         end else
             Message('Attachment headers have already been created');
+    end;
+
+    procedure SendEmailWithAttachment(var emailadress: Text[50])
+    var
+        ReportExample: Report "Member Detailed Statement";
+        Email: Codeunit Email;
+        EmailMsg: Codeunit "Email Message";
+        TempBlob: Codeunit "Temp Blob";
+        InStr: Instream;
+        OutStr: OutStream;
+        ReportParameters: Text;
+        TxtRecipientsList: List of [Text];
+    begin
+        //ReportParameters := ReportExample.RunRequestPage();
+        TempBlob.CreateOutStream(OutStr);
+        Report.SaveAs(Report::"RFQ Printout", ReportParameters, ReportFormat::Pdf, OutStr);
+        TempBlob.CreateInStream(InStr);
+
+        // TxtRecipientsList.Add(emailadress);
+        EmailMsg.Create(emailadress, 'Subject-Request For Quotation', 'Please Provide Prices for the Items Specified');
+        EmailMsg.AddAttachment('RFQ.pdf', 'PDF', InStr);
+        Email.Send(EmailMsg, Enum::"Email Scenario"::Default);
     end;
 
     local procedure PostNotifications()

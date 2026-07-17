@@ -2626,6 +2626,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
             ''
         );
 
+        SearchMember.SetLoadFields("Member Class");
         IF SearchMember.FindFirst() then begin
             MobileLoanProducts.Reset;
             MobileLoanProducts.SetRange("Product Class Type", MobileLoanProducts."Product Class Type"::Loan);
@@ -2667,27 +2668,31 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                         until ProductSupportedClasses.Next() = 0;
                     end;
 
-                    Datum.Add('loan_type_id', MobileLoanProducts."Product ID");
-                    Datum.Add('loan_type_name', MobileLoanProducts."Product Description");
-                    Datum.Add('loan_type_min_amount', MobileLoanProducts."Minimum Loan Amount");
+                    ProductSupportedClasses.Reset(); // filter products by member class
+                    ProductSupportedClasses.SetRange("Product ID", MobileLoanProducts."Product ID");
+                    ProductSupportedClasses.SetRange("Class Category", SearchMember."Member Class");
+                    if not ProductSupportedClasses.IsEmpty() then begin
+                        Datum.Add('loan_type_id', MobileLoanProducts."Product ID");
+                        Datum.Add('loan_type_name', MobileLoanProducts."Product Description");
+                        Datum.Add('loan_type_min_amount', MobileLoanProducts."Minimum Loan Amount");
 
-                    if MobileLoanProducts."Mobile Max. Loan Amount" <> 0 then begin
-                        Datum.Add('loan_type_max_amount', MobileLoanProducts."Mobile Max. Loan Amount");
-                    end else
-                        if MobileLoanProducts."Maximum Loan Amount" <> 0 then begin
-                            Datum.Add('loan_type_max_amount', MobileLoanProducts."Maximum Loan Amount");
-                        end else begin
-                            Datum.Add('loan_type_max_amount', 0);
-                        end;
+                        if MobileLoanProducts."Mobile Max. Loan Amount" <> 0 then begin
+                            Datum.Add('loan_type_max_amount', MobileLoanProducts."Mobile Max. Loan Amount");
+                        end else
+                            if MobileLoanProducts."Maximum Loan Amount" <> 0 then begin
+                                Datum.Add('loan_type_max_amount', MobileLoanProducts."Maximum Loan Amount");
+                            end else begin
+                                Datum.Add('loan_type_max_amount', 0);
+                            end;
 
-                    Datum.Add('loan_type_max_installments', MobileLoanProducts."Ordinary Default Intallments");
-                    Datum.Add('requires_installments', MobileLoanProducts."Allow Topup");
-                    // Datum.Add('eligible_member_class', EligibleClass);
+                        Datum.Add('loan_type_max_installments', MobileLoanProducts."Ordinary Default Intallments");
+                        Datum.Add('requires_installments', MobileLoanProducts."Allow Topup");
 
-                    Data.Add(Datum);
+                        Data.Add(Datum);
 
-                    // Reset
-                    Datum.ReadFrom('{}');
+                        // Reset
+                        Datum.ReadFrom('{}');
+                    end; // filter products by member class
                 end until MobileLoanProducts.Next = 0;
             end;
 
@@ -7414,12 +7419,18 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                         TheDestinationMember.Get(TheDestinationSavings."Member No.");
                                                                                     end;
 
-                                                                                    theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
-                                                                                                ', you have successfully transferred Kshs. ' +
-                                                                                                Format(MpesaTransBuffer."Transaction Amount") +
-                                                                                                ' to ' + TheDestinationMember."First Name" + ' ' + TheDestinationMember."Middle Name" +
-                                                                                                ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccounts, true)) +
-                                                                                                ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
+                                                                                    if (TheDestinationSavings."No." <> '') and (TheSourceMember."No." = TheDestinationSavings."Member No.") then
+                                                                                        theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
+                                                                                                    ', you have successfully funded your ' + TheDestinationSavings."Product Name" +
+                                                                                                    ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(TheDestinationSavings, true)) +
+                                                                                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time")
+                                                                                    else
+                                                                                        theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
+                                                                                                    ', you have successfully transferred Kshs. ' +
+                                                                                                    Format(MpesaTransBuffer."Transaction Amount" - TotalCharges) +
+                                                                                                    ' to ' + TheDestinationMember."First Name" + ' ' + TheDestinationMember."Middle Name" +
+                                                                                                    ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccounts, true)) +
+                                                                                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
 
                                                                                     SkySMS.SendSms(
                                                                                         SMSSource::IFT_ACCOUNT,
@@ -7551,12 +7562,22 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                 MpesaTransBuffer."Transaction Type"::"Account Transfer",
                                                                                 MpesaTransBuffer."Transaction Type"::"Kesasa Account Transfer":
                                                                                     begin
-                                                                                        theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
-                                                                                                        ', you have successfully transferred Kshs. ' +
-                                                                                                        Format(MpesaTransBuffer."Transaction Amount") +
-                                                                                                        ' to ' + TheDestinationSavings."Name" +
-                                                                                                        ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccounts, true)) +
-                                                                                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
+                                                                                        Clear(TheDestinationSavings);
+                                                                                        if MpesaTransBuffer."Destination Account" <> '' then
+                                                                                            TheDestinationSavings.Get(MpesaTransBuffer."Destination Account");
+
+                                                                                        if (TheDestinationSavings."No." <> '') and (TheSourceMember."No." = TheDestinationSavings."Member No.") then
+                                                                                            theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
+                                                                                                            ', you have successfully funded your ' + TheDestinationSavings."Product Name" +
+                                                                                                            ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(TheDestinationSavings, true)) +
+                                                                                                            ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time")
+                                                                                        else
+                                                                                            theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
+                                                                                                            ', you have successfully transferred Kshs. ' +
+                                                                                                            Format(MpesaTransBuffer."Transaction Amount" - TotalCharges) +
+                                                                                                            ' to ' + TheDestinationSavings."Name" +
+                                                                                                            ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccounts, true)) +
+                                                                                                            ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
                                                                                         SkySMS.SendSms(
                                                                                             SMSSource::IFT_ACCOUNT,
                                                                                             TheSourceMember."Transactional Mobile Number",
