@@ -6292,7 +6292,8 @@ codeunit 52186507 "Members Portal Integration"
         QualifiedAmount: Decimal;
         ApplicantFOSAAccountNo: Text;
         TotalGuarantorCapacity: Decimal;
-        IsProduct062: Boolean;
+        IsEmergencyLoan: Boolean;
+        EmergencyLoanProdFac: Record "Product Factory";
         SeenGuarantorNos: List of [Code[20]];
     begin
         Payload.Get('identifier_type', identifier_type);
@@ -6355,20 +6356,19 @@ codeunit 52186507 "Members Portal Integration"
                 TheLoanApplication."Is Self Guarantee" := false;
             end;
 
-            IsProduct062 := loan_product.AsValue.AsText = '062';
+            IsEmergencyLoan := EmergencyLoanProdFac.Get(loan_product.AsValue.AsText) and EmergencyLoanProdFac."Emergency Loan";
 
-            if IsProduct062 then begin
+            if IsEmergencyLoan then begin
                 ApplicantFOSAAccountNo := SkyMbankingTrans.GetMemberFosaAcc(SearchMember);
                 QualifiedAmount := SkyMbankingTrans.GetEmergencyLoanQualifiedAmount(SearchMember."No.", loan_product.AsValue.AsText, ApplicantFOSAAccountNo, EligibilityFailReason);
 
                 if TheLoanApplication."Requested Amount" > QualifiedAmount then begin
                     ResponseObject.Add('status', 'ERROR');
-                    if EligibilityFailReason <> '' then begin
-                        Datum.Add('error_message', EligibilityFailReason);
-                        Datum.Add('eligibility_fail_reason', EligibilityFailReason);
-                    end else begin
-                        Datum.Add('error_message', StrSubstNo('The requested amount of KES %1 exceeds your ability to pay of KES %2', Format(TheLoanApplication."Requested Amount"), Format(QualifiedAmount)));
-                    end;
+                    if EligibilityFailReason <> '' then
+                        Datum.Add('eligibility_fail_reason', EligibilityFailReason)
+                    else
+                        EligibilityFailReason := StrSubstNo('The requested amount of KES %1 exceeds your ability to pay of KES %2', Format(TheLoanApplication."Requested Amount"), Format(QualifiedAmount));
+                    Datum.Add('error_message', EligibilityFailReason);
                     ResponseObject.Add('data', Datum);
 
                     AddDateTimeToResponse(ResponseObject);
@@ -6436,7 +6436,7 @@ codeunit 52186507 "Members Portal Integration"
                 end;
             end;
 
-            if IsProduct062 and (not TheLoanApplication."Is Self Guarantee") and (TotalGuarantorCapacity < TheLoanApplication."Requested Amount") then begin
+            if IsEmergencyLoan and (not TheLoanApplication."Is Self Guarantee") and (TotalGuarantorCapacity < TheLoanApplication."Requested Amount") then begin
                 ResponseObject.Add('status', 'ERROR');
                 Datum.Add('error_message', StrSubstNo('Guarantors must cover the full requested amount. Total guarantor capacity is KES %1, requested amount is KES %2', Format(TotalGuarantorCapacity), Format(TheLoanApplication."Requested Amount")));
                 ResponseObject.Add('data', Datum);

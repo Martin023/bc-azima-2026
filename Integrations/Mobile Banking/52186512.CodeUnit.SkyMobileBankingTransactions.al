@@ -1669,15 +1669,15 @@ codeunit 52186512 "Sky M-Banking Transactions"
                         exit(QualifiedAmount);
                     end;
 
-                    if ProdFac."Product ID" = '062' then begin
-                        QualifiedAmount := GetEmergencyLoanQualifiedAmount(
-                            MemberNo,
-                            ProductID,
-                            saccoAccount."No.",
-                            EligibilityFailReason
-                        );
-                        exit(QualifiedAmount);
-                    end;
+                    // if ProdFac."Product ID" = '062' then begin
+                    //     QualifiedAmount := GetEmergencyLoanQualifiedAmount(
+                    //         MemberNo,
+                    //         ProductID,
+                    //         saccoAccount."No.",
+                    //         EligibilityFailReason
+                    //     );
+                    //     exit(QualifiedAmount);
+                    // end;
 
                     Message('Requires Salary Processing: %1', Format(ProdFac."Requires Salary Processing"));
                     if ProdFac."Requires Salary Processing" = false then begin
