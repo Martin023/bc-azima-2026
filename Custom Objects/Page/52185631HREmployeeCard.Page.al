@@ -1419,8 +1419,30 @@ page 52185631 "HR Employee Card"
                             rec."Member No." := member."No.";
                             rec."Member Status" := member.Status;
 
+                            if not rec.Picture.HasValue then begin
+                                ImageData.Reset();
+                                ImageData.SetRange("Member No", member."No.");
+                                if ImageData.FindFirst() then begin
+                                    ImageData.CalcFields(Picture);
+                                    if ImageData.Picture.HasValue then begin
+                                        rec.Picture := ImageData.Picture;
+                                    end;
+                                end;
+                            end;
 
+                            Rec.Modify(true);
+                            Commit;
+                        end;
+                    end;
+                end;
 
+                if (rec."Member No." <> '') and (not rec.Picture.HasValue) then begin
+                    ImageData.Reset();
+                    ImageData.SetRange("Member No", rec."Member No.");
+                    if ImageData.FindFirst() then begin
+                        ImageData.CalcFields(Picture);
+                        if ImageData.Picture.HasValue then begin
+                            rec.Picture := ImageData.Picture;
                             Rec.Modify(true);
                             Commit;
                         end;
@@ -1508,7 +1530,30 @@ page 52185631 "HR Employee Card"
                         rec."Member No." := member."No.";
                         rec."Member Status" := member.Status;
 
+                        if not rec.Picture.HasValue then begin
+                            ImageData.Reset();
+                            ImageData.SetRange("Member No", member."No.");
+                            if ImageData.FindFirst() then begin
+                                ImageData.CalcFields(Picture);
+                                if ImageData.Picture.HasValue then begin
+                                    rec.Picture := ImageData.Picture;
+                                end;
+                            end;
+                        end;
 
+                        Rec.Modify(true);
+                        Commit;
+                    end;
+                end;
+            end;
+
+            if (rec."Member No." <> '') and (not rec.Picture.HasValue) then begin
+                ImageData.Reset();
+                ImageData.SetRange("Member No", rec."Member No.");
+                if ImageData.FindFirst() then begin
+                    ImageData.CalcFields(Picture);
+                    if ImageData.Picture.HasValue then begin
+                        rec.Picture := ImageData.Picture;
                         Rec.Modify(true);
                         Commit;
                     end;
@@ -1583,6 +1628,7 @@ page 52185631 "HR Employee Card"
         Inst: Boolean;
         DepType: Boolean;
         member: record Members;
+        ImageData: Record "Image Data";
         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
         IntMode: Boolean;
         CurrCode: Boolean;
