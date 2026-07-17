@@ -621,7 +621,7 @@ page 52186191 Lease
                         Tenants.RESET;
                         Tenants.SETRANGE("No.", Rec."Tenant No.");
                         IF tenants.Find('-') then begin
-                            msg := 'Dear ' + Tenants."Name" + ', Your Lease with Kenpipe DT SACCO of Lease Reference No.' + Rec."No." + 'The Office assigned to you is' + Rec."Unit Code" + 'situated on ' + Rec."Floor Name" + 'in ' + Rec."Property Name" + 'of Land Reference No. ' + Rec."L.R. No." + ' has been finalized and the Lease has been Commenced. Thank You for choosing Kenpipe DT SACCO as your preferred Landlord.';
+                            msg := 'Dear ' + Tenants."Name" + ', Your Lease with AZIMA DT SACCO of Lease Reference No.' + Rec."No." + 'The Office assigned to you is' + Rec."Unit Code" + 'situated on ' + Rec."Floor Name" + 'in ' + Rec."Property Name" + 'of Land Reference No. ' + Rec."L.R. No." + ' has been finalized and the Lease has been Commenced. Thank You for choosing AZIMA DT SACCO as your preferred Landlord.';
                             SendSMS.SendSms(Source::"LEASE", Tenants."Phone No.", msg, ' ', ' ', false, 0, false, 'CBS', Lease."No.", 'CBS', Today);
                         end;
                         Message('Selected Unit has been Allocated, the Lease has been Commenced and SMS sent to Tenant!');

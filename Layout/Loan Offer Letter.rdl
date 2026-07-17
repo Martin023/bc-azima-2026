@@ -973,7 +973,7 @@ We, </Value>
                                   </Style>
                                 </TextRun>
                                 <TextRun>
-                                  <Value>and between Kenpipe Sacco &amp; borrower </Value>
+                                  <Value>and between AZIMA Sacco &amp; borrower </Value>
                                   <Style>
                                     <FontStyle>Normal</FontStyle>
                                     <FontFamily>Times New Roman</FontFamily>
@@ -3300,7 +3300,7 @@ NOTE</Value>
                     </Style>
                   </TextRun>
                   <TextRun>
-                    <Value>and between Kenpipe SACCO &amp; borrower </Value>
+                    <Value>and between AZIMA SACCO &amp; borrower </Value>
                     <Style>
                       <FontStyle>Normal</FontStyle>
                       <FontFamily>Times New Roman</FontFamily>
