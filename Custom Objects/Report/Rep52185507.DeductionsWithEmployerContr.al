@@ -13,11 +13,11 @@ report 52185507 "Deductions With Employer Contr"
         {
             //RequestFilterFields = "Transaction Code";
             //DataItemTableView = where("Employer Deduction" = const(true));
-            column(TransactionCode; "Transaction Code") { }
-            column(TransactionName; "Transaction Name") { }
-            column(EmployeeCode; EmployeeCode) { }
+            column(TransactionCode; "PR Period Transactions"."Transaction Code") { }
+            column(TransactionName; "PR Period Transactions"."Transaction Name") { }
+            column(EmployeeCode; "PR Period Transactions"."Employee Code") { }
             column(EmployeeName; EmployeeName) { }
-            column(EmployeeAmt; EmployeeAmt) { }
+            column(EmployeeAmt; "PR Period Transactions".Amount) { }
             column(EmployerAmt; EmployerAmt) { }
             column(TotalAmt; TotalAmt) { }
             column(CompanyInformation_Name; CompanyInformation.Name)
@@ -42,6 +42,7 @@ report 52185507 "Deductions With Employer Contr"
                 EmployeeCode := '';
                 EmployeeName := '';
                 TotalAmt := 0;
+                SNO += 1;
 
                 PRTransactionCodes.Reset();
                 PRTransactionCodes.SetRange("Employer Deduction", TRUE);
@@ -50,10 +51,11 @@ report 52185507 "Deductions With Employer Contr"
 
                     PRPeriodTransactions.Reset;
                     PRPeriodTransactions.SetRange("Transaction Code", PRTransactionCodes."Transaction Code");
+                    PRPeriodTransactions.SetRange("Employee Code", "PR Period Transactions"."Employee Code");
                     PRPeriodTransactions.SetRange("Payroll Period", SelectedPeriod);
                     if PRPeriodTransactions.FindSet() then begin
-                        EmployeeAmt := PRPeriodTransactions.Amount;
-                        EmployeeCode := PRPeriodTransactions."Employee Code";
+                        //EmployeeAmt := PRPeriodTransactions.Amount;
+                        //EmployeeCode := PRPeriodTransactions."Employee Code";
                         Employees.Reset();
                         Employees.SetRange("No.", EmployeeCode);
                         if Employees.Find() then
@@ -146,6 +148,7 @@ report 52185507 "Deductions With Employer Contr"
         EmployeeAmt: Decimal;
         TotalAmt: Decimal;
         EmployeeCode: Code[20];
+        SNo: Integer;
 }
 
 

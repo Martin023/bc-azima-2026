@@ -17,7 +17,7 @@ report 52185511 "Master Payroll Report"
             dataitem("PR Period Transactions"; "PR Period Transactions")
             {
                 DataItemLink = "Transaction Code" = field("Transaction Code");
-                //RequestFilterFields = "Payroll Period";
+                RequestFilterFields = "Payroll Period";
                 column(Employee_Code; "Employee Code") { }
                 column(strEmpName; strEmpName) { }
                 column(Transaction_Code; "Transaction Code") { }
