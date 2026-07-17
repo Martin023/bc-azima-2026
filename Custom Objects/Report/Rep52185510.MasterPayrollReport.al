@@ -64,6 +64,9 @@ report 52185511 "Master Payroll Report"
                     GPAY := 0;
                     NPAY := 0;
                     PAYE := 0;
+                    TotAllow := 0;
+                    Allow := 0;
+                    TotDed := 0;
 
                     if HREmployee.Get("PR Period Transactions"."Employee Code") then
                         strEmpName := HREmployee."First Name" + ' ' + HREmployee."Middle Name" + ' ' + HREmployee."Last Name";
@@ -90,22 +93,34 @@ report 52185511 "Master Payroll Report"
                                 PAYE := PeriodTrans.Amount;
                         until PeriodTrans.Next() = 0;
                     end;
+
+                    if "PR Transaction Codes"."Transaction Type" = "PR Transaction Codes"."Transaction Type"::Income then begin
+                        PeriodTrans.Reset();
+                        PeriodTrans.Setrange("Employee Code", "PR Period Transactions"."Employee Code");
+                        PeriodTrans.Setrange("Payroll Period", SelectedPeriod);
+                        PeriodTrans.Setfilter(PeriodTrans."Transaction Code", "PR Transaction Codes"."Transaction Code");
+                        if PeriodTrans.Find('-') then begin
+                            Allow := PeriodTrans.Amount;
+                        end;
+                        TotAllow := TotAllow + Allow;
+                    end;
+
                 end;
             }
             trigger OnAfterGetRecord()
             var
                 myInt: Integer;
             begin
-                if "PR Transaction Codes"."Transaction Type" = "PR Transaction Codes"."Transaction Type"::Income then begin
-                    PeriodTrans.Reset();
-                    PeriodTrans.Setrange("Employee Code", "PR Period Transactions"."Employee Code");
-                    PeriodTrans.Setrange("Payroll Period", SelectedPeriod);
-                    PeriodTrans.Setfilter(PeriodTrans."Transaction Code", "PR Transaction Codes"."Transaction Code");
-                    if PeriodTrans.Find('-') then begin
-                        Allow := PeriodTrans.Amount;
-                    end;
-                    TotAllow := TotAllow + Allow;
-                end;
+                // if "PR Transaction Codes"."Transaction Type" = "PR Transaction Codes"."Transaction Type"::Income then begin
+                //     PeriodTrans.Reset();
+                //     PeriodTrans.Setrange("Employee Code", "PR Period Transactions"."Employee Code");
+                //     PeriodTrans.Setrange("Payroll Period", SelectedPeriod);
+                //     PeriodTrans.Setfilter(PeriodTrans."Transaction Code", "PR Transaction Codes"."Transaction Code");
+                //     if PeriodTrans.Find('-') then begin
+                //         Allow := PeriodTrans.Amount;
+                //     end;
+                //     TotAllow := TotAllow + Allow;
+                // end;
             end;
         }
     }

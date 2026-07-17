@@ -67,10 +67,15 @@ Report 52185688 prNSSF
             }
             trigger OnAfterGetRecord()
             begin
+                EmployeeName := '';
+                Tier1Cont := 0;
+                TotalCont := 0;
+
                 "PR Period Transactions".SetRange("Payroll Period", SelectedPeriod);
 
                 Employees.Reset;
-                if Employees.Get("PR Period Transactions"."Employee Code") then
+                Employees.SetRange("No.", "PR Period Transactions"."Employee Code");
+                if Employees.find('-') then
                     EmployeeName := Employees."First Name" + ' ' + Employees."Middle Name" + ' ' + Employees."Last Name"
                 else
                     EmployeeName := '';

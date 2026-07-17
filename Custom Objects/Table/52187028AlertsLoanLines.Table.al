@@ -171,8 +171,8 @@ table 52187028 "Alerts Loan Lines"
     var
         myInt: Integer;
     begin
-        if "System Generated" then
-            Error('You can not delete this entry because its system generated');
+        // if "System Generated" then
+        //     Error('You can not delete this entry because its system generated');
     end;
 
 

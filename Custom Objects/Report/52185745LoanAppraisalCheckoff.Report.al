@@ -771,7 +771,7 @@ Report 52185745 "Loan Appraisal Checkoff"
                             LoanProcessingAmtEx := LoanProcessingAmt * GenSetup."Excise Duty (%)" * 0.01;
                         end;
                     until PCharges.Next = 0;
-                    TotalProcessingAmt := LoanProcessingAmt + LoanProcessingAmtEx;
+                    TotalProcessingAmt += LoanProcessingAmt + LoanProcessingAmtEx;
                 end;
 
                 //3. Insurance fees
@@ -934,45 +934,51 @@ Report 52185745 "Loan Appraisal Checkoff"
                 end;
 
                 //Qualification on salary
-                AppraisalSal.Reset;
-                AppraisalSal.SetRange("Loan No", "Loan No.");
-                if AppraisalSal.Find('-') then begin
-                    repeat
-                        if AppraisalSal.Type = AppraisalSal.Type::Basic then
-                            TotalBasic := TotalBasic + AppraisalSal.Amount
-                        else
-                            if (AppraisalSal.Type = AppraisalSal.Type::Earnings) or (AppraisalSal.Type = AppraisalSal.Type::"Other Allowances") then
-                                TrEarni := TrEarni + AppraisalSal.Amount
-                            else
-                                if (AppraisalSal.Type = AppraisalSal.Type::Deductions) or (AppraisalSal.Type = AppraisalSal.Type::PAYE) or (AppraisalSal.Type = AppraisalSal.Type::NSSF)
-                                or (AppraisalSal.Type = AppraisalSal.Type::SHIF) or (AppraisalSal.Type = AppraisalSal.Type::HLEVY) then
-                                    TDeductions := TDeductions + AppraisalSal.Amount
+                if ProductFactory.get(loans."Loan Product Type") then begin
+                    if not ProductFactory."Exclude From Salary" then begin
+                        AppraisalSal.Reset;
+                        AppraisalSal.SetRange("Loan No", "Loan No.");
+                        if AppraisalSal.Find('-') then begin
+                            repeat
+                                if AppraisalSal.Type = AppraisalSal.Type::Basic then
+                                    TotalBasic := TotalBasic + AppraisalSal.Amount
                                 else
-                                    if AppraisalSal.Type = AppraisalSal.Type::Pension then
-                                        TPension := TPension + AppraisalSal.Amount
-                                    else if AppraisalSal.type = AppraisalSal.type::"House Allowance" then
-                                        THouseAllow := THouseAllow + AppraisalSal.Amount
-                    until AppraisalSal.Next = 0;
+                                    if (AppraisalSal.Type = AppraisalSal.Type::Earnings) or (AppraisalSal.Type = AppraisalSal.Type::"Other Allowances") then
+                                        TrEarni := TrEarni + AppraisalSal.Amount
+                                    else
+                                        if (AppraisalSal.Type = AppraisalSal.Type::Deductions) or (AppraisalSal.Type = AppraisalSal.Type::PAYE) or (AppraisalSal.Type = AppraisalSal.Type::NSSF)
+                                        or (AppraisalSal.Type = AppraisalSal.Type::SHIF) or (AppraisalSal.Type = AppraisalSal.Type::HLEVY) then
+                                            TDeductions := TDeductions + AppraisalSal.Amount
+                                        else
+                                            if AppraisalSal.Type = AppraisalSal.Type::Pension then
+                                                TPension := TPension + AppraisalSal.Amount
+                                            else if AppraisalSal.type = AppraisalSal.type::"House Allowance" then
+                                                THouseAllow := THouseAllow + AppraisalSal.Amount
+                            until AppraisalSal.Next = 0;
 
+                        end;
+                        GrossPay := round(((TotalBasic + TrEarni + THouseAllow)), 0.01);
+                        NetSalary := round(((TotalBasic + TrEarni + THouseAllow) - TDeductions), 0.01);
+                        OneThirdGross := round((GrossPay * 0.33), 0.01);
+                        TwoThirdGross := round((GrossPay * 0.66), 0.01);
+
+                        DisposableInc := TwoThirdGross - TDeductions;
+
+                        if DisposableInc < 0 then
+                            DisposableInc := 0
+                        else begin
+                            IF Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::Amortised THEN BEGIN
+                                PresentVAF := ((1 - POWER((1 + (Loans.Interest / 1200)), -Loans.Installments)) / (Loans.Interest / 1200));
+                            END ELSE BEGIN
+                                PresentVAF := (Loans.Installments * 100) / ((Loans.Installments * (Loans.Interest / 12)) + 100);
+                            END;
+                            NetOnSalary := DisposableInc * PresentVAF;
+                        end;
+                    end
+                    else begin
+                        NetOnSalary := ProductFactory."Maximum Loan Amount";
+                    end;
                 end;
-                GrossPay := round(((TotalBasic + TrEarni + THouseAllow)), 0.01);
-                NetSalary := round(((TotalBasic + TrEarni + THouseAllow) - TDeductions), 0.01);
-                OneThirdGross := round((GrossPay * 0.33), 0.01);
-                TwoThirdGross := round((GrossPay * 0.66), 0.01);
-
-                DisposableInc := TwoThirdGross - TDeductions;
-
-                if DisposableInc < 0 then
-                    DisposableInc := 0
-                else begin
-                    IF Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::Amortised THEN BEGIN
-                        PresentVAF := ((1 - POWER((1 + (Loans.Interest / 1200)), -Loans.Installments)) / (Loans.Interest / 1200));
-                    END ELSE BEGIN
-                        PresentVAF := (Loans.Installments * 100) / ((Loans.Installments * (Loans.Interest / 12)) + 100);
-                    END;
-                    NetOnSalary := DisposableInc * PresentVAF;
-                end;
-
                 //check to limit the maximum loan amount of the product
                 if NetOnSalary > ProductFactory."Maximum Loan Amount" then begin
                     NetOnSalary := ProductFactory."Maximum Loan Amount";
@@ -1005,58 +1011,71 @@ Report 52185745 "Loan Appraisal Checkoff"
                         Mult := ProductFactory."Dep. Multiplier On Collateral";
                 end;
 
-                MemberDeposits := 0;
-                Mult := ProductFactory."Ordinary Deposits Multiplier";
-                SavingsAccounts.Reset;
-                SavingsAccounts.SetRange(SavingsAccounts."Member No.", Loans."Member No.");
-                SavingsAccounts.SetRange(SavingsAccounts."Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
-                if SavingsAccounts.Find('-') then begin
-                    SavingsAccounts.CalcFields(SavingsAccounts."Balance (LCY)");
-                    MemberDeposits := SavingsAccounts."Balance (LCY)";//+Loans."Loans - Deposit Purchase";
-                end;
-                QualificationOnDeposits := (MemberDeposits + loans."Loans - Deposit Purchase") * Mult;
-                DepositMult := QualificationOnDeposits;
-
-                if ProductFactory."Minimum Deposit Balance" <> 0 then begin
-                    if (MemberDeposits + loans."Loans - Deposit Purchase") < ProductFactory."Minimum Deposit Balance" then begin
-                        Message('Thus Member has not met the minimun deposit of %1', format((MemberDeposits + loans."Loans - Deposit Purchase")));
-                        QualificationOnDeposits := 0;
+                if ProductFactory."Loan Group" = ProductFactory."Loan Group"::"Group Loan" then begin
+                    MemberDeposits := 0;
+                    Mult := ProductFactory."Ordinary Deposits Multiplier";
+                    SavingsAccounts.Reset;
+                    SavingsAccounts.SetRange(SavingsAccounts."Member No.", Loans."Member No.");
+                    SavingsAccounts.SetRange(SavingsAccounts."Product Type", ProductFactory."Loan Appraisal Account Code");
+                    if SavingsAccounts.Find('-') then begin
+                        SavingsAccounts.CalcFields(SavingsAccounts."Balance (LCY)");
+                        MemberDeposits := SavingsAccounts."Balance (LCY)";//+Loans."Loans - Deposit Purchase";
                     end;
-                end;
+                    QualificationOnDeposits := (MemberDeposits) * Mult;
+                    DepositMult := QualificationOnDeposits;
+                end
+                else begin
+                    MemberDeposits := 0;
+                    Mult := ProductFactory."Ordinary Deposits Multiplier";
+                    SavingsAccounts.Reset;
+                    SavingsAccounts.SetRange(SavingsAccounts."Member No.", Loans."Member No.");
+                    SavingsAccounts.SetRange(SavingsAccounts."Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
+                    if SavingsAccounts.Find('-') then begin
+                        SavingsAccounts.CalcFields(SavingsAccounts."Balance (LCY)");
+                        MemberDeposits := SavingsAccounts."Balance (LCY)";//+Loans."Loans - Deposit Purchase";
+                    end;
+                    QualificationOnDeposits := (MemberDeposits + loans."Loans - Deposit Purchase") * Mult;
+                    DepositMult := QualificationOnDeposits;
 
-                //Existing Loans
-                TotalRepay := 0;
-                Loan.Reset;
-                Loan.SetRange(Loan."Member No.", Loans."Member No.");
-                Loan.SetRange(Loan.Posted, true);
-                //Loan.SetRange(Loan."Source Unit", Loan."Source Unit"::BOSA);
-                //exclude BGL and FGL
-                Loan.SetFilter("Loan Product Type", '<>BGL&<>FGL');
-                Loan.SetAutoCalcFields("Total Balance");
-                Loan.SetFilter("Total Balance", '>%1', 0);
-                if Loan.FindSet() then begin
-                    repeat
-                        LoanTopup.reset();
-                        LoanTopup.SetRange("Loan No.", Loans."Loan No.");
-                        LoanTopup.setrange("Loan Top Up", Loan."Loan No.");
-                        if LoanTopup.FindFirst() then begin
-                            if (LoanTopup."Total Top Up" < Loan."Total Balance") then begin
-                                // Message(Format(Loan."Loan No."));
-                                // Message(format(LoanTopup."Total Top Up"));
-                                // Message(Format(Loan."Total Balance"));
+                    if ProductFactory."Minimum Deposit Balance" <> 0 then begin
+                        if (MemberDeposits + loans."Loans - Deposit Purchase") < ProductFactory."Minimum Deposit Balance" then begin
+                            Message('Thus Member has not met the minimun deposit of %1', format((MemberDeposits + loans."Loans - Deposit Purchase")));
+                            QualificationOnDeposits := 0;
+                        end;
+                    end;
+
+                    //Existing Loans
+                    TotalRepay := 0;
+                    Loan.Reset;
+                    Loan.SetRange(Loan."Member No.", Loans."Member No.");
+                    Loan.SetRange(Loan.Posted, true);
+                    //Loan.SetRange(Loan."Source Unit", Loan."Source Unit"::BOSA);
+                    //exclude BGL and FGL
+                    Loan.SetFilter("Loan Product Type", '<>BGL&<>FGL');
+                    Loan.SetAutoCalcFields("Total Balance");
+                    Loan.SetFilter("Total Balance", '>%1', 0);
+                    if Loan.FindSet() then begin
+                        repeat
+                            LoanTopup.reset();
+                            LoanTopup.SetRange("Loan No.", Loans."Loan No.");
+                            LoanTopup.setrange("Loan Top Up", Loan."Loan No.");
+                            if LoanTopup.FindFirst() then begin
+                                if (LoanTopup."Total Top Up" < Loan."Total Balance") then begin
+                                    // Message(Format(Loan."Loan No."));
+                                    // Message(format(LoanTopup."Total Top Up"));
+                                    // Message(Format(Loan."Total Balance"));
+                                    TotalRepay += Loan.Repayment;
+                                    TotalLoanBal += Loan."Total Balance";
+                                end;
+                            end
+                            else begin
                                 TotalRepay += Loan.Repayment;
                                 TotalLoanBal += Loan."Total Balance";
                             end;
-                        end
-                        else begin
-                            TotalRepay += Loan.Repayment;
-                            TotalLoanBal += Loan."Total Balance";
-                        end;
-                    until Loan.Next = 0;
+                        until Loan.Next = 0;
+                    end;
+                    QualificationOnDeposits -= TotalLoanBal;
                 end;
-
-
-                QualificationOnDeposits -= TotalLoanBal;
 
                 if ProductFactory.Get(Loans."Loan Product Type") then begin
                     if QualificationOnDeposits > ProductFactory."Maximum Loan Amount" then
