@@ -242,7 +242,7 @@ Report 52185690 "Bankers Cheque Slip"
                 user.Reset;
                 user.SetRange("User Name", UserId);
                 if user.Find('-') then begin
-                    CashierName := user."Full Name";
+                    CashierName := User."User Name";
                 end;
 
                 if StrLen("Account No") > 5 then begin
