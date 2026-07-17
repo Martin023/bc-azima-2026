@@ -114,6 +114,7 @@ table 52185799 "Account Transfer Destination"
                     Loans.calcfields(Loans."Total Balance");
                     rec."Destination Account Balance" := loans."Total Balance";
                     rec."Destination Account No." := loans."Loan Account";
+                    rec."Product Name" := loans."Loan Product Type Name";
                     rec.Modify();
                 end;
             end;
