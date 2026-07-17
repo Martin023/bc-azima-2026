@@ -11,8 +11,6 @@ report 52186603 "Appraisal Summary Report"
         dataitem("HR Individual Targets Header"; "HR Individual Targets Header")
         {
             RequestFilterFields = "Appraisal Year", "Appraisal Cycle Stage", Status, "Responsibility Center", "Supervisor ID";
-            
-            // Professional Company Info Layout additions
             column(CompanyInfo_Name; CompanyInfo.Name) { }
             column(CompanyInfo_Address; CompanyInfo.Address) { }
             column(CompanyInfo_Picture; CompanyInfo.Picture) { }
@@ -45,7 +43,6 @@ report 52186603 "Appraisal Summary Report"
             column(Has_Disagreements; "Has Disagreements") { }
             column(Unresolved_Discussions; "Unresolved Discussions") { }
 
-            // Detailed Appraisal Lines for Comments & Individual Scores
             dataitem("HR Individual Target Line"; "HR Individual Target Line")
             {
                 DataItemLink = "Appraisal No" = FIELD("Appraisal No");
