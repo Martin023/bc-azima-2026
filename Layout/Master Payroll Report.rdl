@@ -11,97 +11,6 @@
       <rd:DataSourceID>79a19435-1237-4f36-a76c-477b9cc7c9b6</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="Employee_Code">
-          <DataField>Employee_Code</DataField>
-        </Field>
-        <Field Name="strEmpName">
-          <DataField>strEmpName</DataField>
-        </Field>
-        <Field Name="Transaction_Code">
-          <DataField>Transaction_Code</DataField>
-        </Field>
-        <Field Name="Transaction_Name">
-          <DataField>Transaction_Name</DataField>
-        </Field>
-        <Field Name="BPAY">
-          <DataField>BPAY</DataField>
-        </Field>
-        <Field Name="BPAYFormat">
-          <DataField>BPAYFormat</DataField>
-        </Field>
-        <Field Name="GPAY">
-          <DataField>GPAY</DataField>
-        </Field>
-        <Field Name="GPAYFormat">
-          <DataField>GPAYFormat</DataField>
-        </Field>
-        <Field Name="NPAY">
-          <DataField>NPAY</DataField>
-        </Field>
-        <Field Name="NPAYFormat">
-          <DataField>NPAYFormat</DataField>
-        </Field>
-        <Field Name="PAYE">
-          <DataField>PAYE</DataField>
-        </Field>
-        <Field Name="PAYEFormat">
-          <DataField>PAYEFormat</DataField>
-        </Field>
-        <Field Name="TotDed">
-          <DataField>TotDed</DataField>
-        </Field>
-        <Field Name="TotDedFormat">
-          <DataField>TotDedFormat</DataField>
-        </Field>
-        <Field Name="TotAllow">
-          <DataField>TotAllow</DataField>
-        </Field>
-        <Field Name="TotAllowFormat">
-          <DataField>TotAllowFormat</DataField>
-        </Field>
-        <Field Name="Amount">
-          <DataField>Amount</DataField>
-        </Field>
-        <Field Name="AmountFormat">
-          <DataField>AmountFormat</DataField>
-        </Field>
-        <Field Name="Employer_Amount">
-          <DataField>Employer_Amount</DataField>
-        </Field>
-        <Field Name="Employer_AmountFormat">
-          <DataField>Employer_AmountFormat</DataField>
-        </Field>
-        <Field Name="PeriodName">
-          <DataField>PeriodName</DataField>
-        </Field>
-        <Field Name="CI_Name">
-          <DataField>CI_Name</DataField>
-        </Field>
-        <Field Name="CI_Address">
-          <DataField>CI_Address</DataField>
-        </Field>
-        <Field Name="CI_Address2">
-          <DataField>CI_Address2</DataField>
-        </Field>
-        <Field Name="CI_PhoneNo">
-          <DataField>CI_PhoneNo</DataField>
-        </Field>
-        <Field Name="CI_Picture">
-          <DataField>CI_Picture</DataField>
-        </Field>
-        <Field Name="CI_City">
-          <DataField>CI_City</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -1526,4 +1435,89 @@ End Function
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Employee_Code">
+          <DataField>Employee_Code</DataField>
+        </Field>
+        <Field Name="strEmpName">
+          <DataField>strEmpName</DataField>
+        </Field>
+        <Field Name="Transaction_Code">
+          <DataField>Transaction_Code</DataField>
+        </Field>
+        <Field Name="Transaction_Name">
+          <DataField>Transaction_Name</DataField>
+        </Field>
+        <Field Name="BPAY">
+          <DataField>BPAY</DataField>
+        </Field>
+        <Field Name="BPAYFormat">
+          <DataField>BPAYFormat</DataField>
+        </Field>
+        <Field Name="GPAY">
+          <DataField>GPAY</DataField>
+        </Field>
+        <Field Name="GPAYFormat">
+          <DataField>GPAYFormat</DataField>
+        </Field>
+        <Field Name="NPAY">
+          <DataField>NPAY</DataField>
+        </Field>
+        <Field Name="NPAYFormat">
+          <DataField>NPAYFormat</DataField>
+        </Field>
+        <Field Name="PAYE">
+          <DataField>PAYE</DataField>
+        </Field>
+        <Field Name="PAYEFormat">
+          <DataField>PAYEFormat</DataField>
+        </Field>
+        <Field Name="TotDed">
+          <DataField>TotDed</DataField>
+        </Field>
+        <Field Name="TotDedFormat">
+          <DataField>TotDedFormat</DataField>
+        </Field>
+        <Field Name="TotAllow">
+          <DataField>TotAllow</DataField>
+        </Field>
+        <Field Name="TotAllowFormat">
+          <DataField>TotAllowFormat</DataField>
+        </Field>
+        <Field Name="Amount">
+          <DataField>Amount</DataField>
+        </Field>
+        <Field Name="AmountFormat">
+          <DataField>AmountFormat</DataField>
+        </Field>
+        <Field Name="PeriodName">
+          <DataField>PeriodName</DataField>
+        </Field>
+        <Field Name="CI_Name">
+          <DataField>CI_Name</DataField>
+        </Field>
+        <Field Name="CI_Address">
+          <DataField>CI_Address</DataField>
+        </Field>
+        <Field Name="CI_Address2">
+          <DataField>CI_Address2</DataField>
+        </Field>
+        <Field Name="CI_PhoneNo">
+          <DataField>CI_PhoneNo</DataField>
+        </Field>
+        <Field Name="CI_Picture">
+          <DataField>CI_Picture</DataField>
+        </Field>
+        <Field Name="CI_City">
+          <DataField>CI_City</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>
