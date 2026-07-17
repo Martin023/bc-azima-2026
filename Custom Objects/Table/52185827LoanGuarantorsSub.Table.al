@@ -373,7 +373,7 @@ table 52185827 "Loan Guarantors Sub"
                     end;
                     GenSetUp.Get;
                     if LoanApp.Get(Rec."Loan No") then begin
-                        //to do:kenpipe policy
+                        //to do: policy
                         maxamountguarantee := GenSetUp."Maximum Amount to Guarantee";
                         LoanGua.CalcFields(LoanGua."Total Guaranteed");
                         Totalguarantee := "Amount Guaranteed" + LoanGua."Total Guaranteed";

@@ -50,7 +50,7 @@ Report 52185973 "ATM Upload Report"
                 BrancName := 'Tom Mboya BRANCH';
                 BinCode := '42993304';
                 BranchCode := '011';
-                SaccoName := 'Kenpipe SACCO';
+                SaccoName := 'AZIMA SACCO';
 
                 if CopyStr("ATM Applications"."Phone No.", 1, 1) = '+' then
                     Phone := '0' + DelStr("ATM Applications"."Phone No.", 1, 3)

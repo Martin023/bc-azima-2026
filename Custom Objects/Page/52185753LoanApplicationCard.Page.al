@@ -359,8 +359,7 @@ page 52185753 "Loan Application Card"
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Approved Amount';
-                    // Editable = ApplicationDetailsEdit;
-                    Editable = false;// wonder why?kenpipe requested thats why
+                    Editable = false;// 
                 }
                 field("Amount To Disburse"; Rec."Amount To Disburse")
                 {

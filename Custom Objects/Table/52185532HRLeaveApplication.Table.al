@@ -678,7 +678,6 @@ table 52185532 "HR Leave Application"
         end;
 
         if "Source of Application" = "Source of Application"::BC then begin
-            // if UserId <> 'KENPIPE' then begin
             HREmp.Reset;
             HREmp.SetRange(HREmp."User ID", UserId);
             if HREmp.Find('-') then begin

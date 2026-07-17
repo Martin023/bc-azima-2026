@@ -163,7 +163,7 @@ report 52187321 "Generate Loans"
         myInt: Integer;
         SMSMessage: Text[100];
         Sent_At: DateTime;
-        DefaultSMS: label 'Dear %1, We have notified your guarantor of your %2-%3 Current status and our intention to attach. Should we not hear from you within a period of 30 days, then our assumption shall be that you have conceded to the attachment of the loan to guarantors without any further reference to you. For more info call 0710600999. Kenpipe SACCO.';
+        DefaultSMS: label 'Dear %1, We have notified your guarantor of your %2-%3 Current status and our intention to attach. Should we not hear from you within a period of 30 days, then our assumption shall be that you have conceded to the attachment of the loan to guarantors without any further reference to you.';
         SMS_Alerts_Lines: Record "SMS Alerts Lines";
         DefaultFrom: Integer;
         DefaultTo: Integer;

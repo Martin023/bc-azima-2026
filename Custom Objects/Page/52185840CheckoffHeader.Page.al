@@ -569,9 +569,9 @@ page 52185840 "Checkoff Header"
                                 if Loans.get(CheckoffLines."Loan No.") then begin
                                     if Members.get(Loans."Member No.") then begin
                                         if Members."First Name" <> '' then
-                                            Msg := 'Dear ' + Members."First Name" + ', We have received your checkoff and your ' + Loans."Loan Product Type Name" + ' has been underpaid by KES ' + Format(CheckoffLines."Loan Underpayment amount") + 'KENPIPE SACCO.'
+                                            Msg := 'Dear ' + Members."First Name" + ', We have received your checkoff and your ' + Loans."Loan Product Type Name" + ' has been underpaid by KES ' + Format(round(CheckoffLines."Loan Underpayment amount"), 1)
                                         else
-                                            Msg := 'Dear ' + Members.Name + ', We have received your checkoff and your ' + Loans."Loan Product Type Name" + ' has been underpaid by KES ' + Format(CheckoffLines."Loan Underpayment amount") + 'KENPIPE SACCO.';
+                                            Msg := 'Dear ' + Members.Name + ', We have received your checkoff and your ' + Loans."Loan Product Type Name" + ' has been underpaid by KES ' + Format(round(CheckoffLines."Loan Underpayment amount"), 1);
 
                                         SendSMS.SendSms(SMSSource::LOAN_DEFAULTED, Members."Phone No.", msg, Loans."Loan Account", '', true, 0, false, 'CBS', Members."No.", 'CBS')
                                     end;
@@ -587,9 +587,9 @@ page 52185840 "Checkoff Header"
                                         if Loans."Outstanding Interest" > 0 then begin
                                             if Members.get(Loans."Member No.") then begin
                                                 if Members."First Name" <> '' then
-                                                    Msg := 'Dear ' + Members."First Name" + ', We have received your checkoff and your ' + Loans."Loan Product Type Name" + ' has been underpaid by KES ' + Format(Loans."Outstanding Interest") + 'KENPIPE SACCO.'
+                                                    Msg := 'Dear ' + Members."First Name" + ', We have received your checkoff and your ' + Loans."Loan Product Type Name" + ' has been underpaid by KES ' + Format(Loans."Outstanding Interest")
                                                 else
-                                                    Msg := 'Dear ' + Members.Name + ', We have received your checkoff and your ' + Loans."Loan Product Type Name" + ' has been underpaid by KES ' + Format(Loans."Outstanding Interest") + 'KENPIPE SACCO.';
+                                                    Msg := 'Dear ' + Members.Name + ', We have received your checkoff and your ' + Loans."Loan Product Type Name" + ' has been underpaid by KES ' + Format(Loans."Outstanding Interest");
 
                                                 SendSMS.SendSms(SMSSource::LOAN_DEFAULTED, Members."Phone No.", msg, Loans."Loan Account", '', true, 0, false, 'CBS', Members."No.", 'CBS')
                                             end;

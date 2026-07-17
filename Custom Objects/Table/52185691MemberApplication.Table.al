@@ -1050,7 +1050,7 @@ table 52185691 "Member Application"
         }
         field(77; "Source Aplication"; Option)
         {
-            OptionMembers = "N/A",CRM,"Kenpipe SM","CRM - Sales","Members Portal";
+            OptionMembers = "N/A",CRM,"AZIMA SM","CRM - Sales","Members Portal";
         }
 
         //GROUP ACCOUNT DETAILS START HERE

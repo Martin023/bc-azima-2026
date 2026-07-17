@@ -131,7 +131,7 @@ report 52186884 HremployeesJobQueues
                 if (hremp."Date Of Birth" <> 0D) then begin
                     if ((Date2dmy(hremp."Date of Birth", 1)) = (Date2dmy(Today, 1)))
                                    and ((Date2dmy(hremp."Date of Birth", 2)) = (Date2dmy(Today, 2))) THEN begin
-                        msg := 'We as Kenpipe Sacco wish you a happy Birthday';
+                        msg := 'We as AZIMA Sacco wish you a happy Birthday';
                         Subject := 'Happy birthday';
                         userset.reset();
                         userset.setrange("Employee No.", hremp."No.");
@@ -151,7 +151,7 @@ report 52186884 HremployeesJobQueues
                 if (hremp."Wedding Anniversary" <> 0D) then BEGIN
                     IF ((Date2dmy(hremp."Wedding Anniversary", 1)) = (Date2dmy(Today, 1)))
                     and ((Date2dmy(hremp."Wedding Anniversary", 2)) = (Date2dmy(Today, 2))) THEN begin
-                        msg := 'We as Kenpipe DT Sacco wish you a happy Anniversary';
+                        msg := 'We as AZIMA DT Sacco wish you a happy Anniversary';
                         Subject := 'Happy Anniversary';
 
                         userset.reset();

@@ -1385,51 +1385,6 @@ table 52185729 Loans
                     end;
                 end;
 
-                //kenpipe policy
-                //version 2
-                // if ProdFac.Get("Loan Product Type") then begin
-                //     // Determine the adjusted application date based on grace period
-                //     if Format(ProdFac."Grace Period - Principle") <> '' then
-                //         AdjustedAppDate := CalcDate(ProdFac."Grace Period - Principle", "Application Date")
-                //     else
-                //         AdjustedAppDate := "Application Date";
-
-                //     // Apply FOSA/BOSA rules based on the adjusted application date
-                //     if "Source Unit" = "Source Unit"::FOSA then begin
-                //         // For FOSA: if the day of AdjustedAppDate is between 1 and 20, repayment starts on the 20th of that month,
-                //         // otherwise on the 20th of the following month.
-                //         if Date2DMY(AdjustedAppDate, 2) <= 20 then
-                //             "Repayment Start Date" := DMY2Date(20, Date2DMY(AdjustedAppDate, 1), Date2DMY(AdjustedAppDate, 3))
-                //         else begin
-                //             AdjustedDate := CalcDate('1M', AdjustedAppDate);
-                //             Month := Date2DMY(AdjustedDate, 1);
-                //             Year := Date2DMY(AdjustedDate, 3);
-                //             if Month > 12 then begin
-                //                 Month := 1;
-                //                 Year += 1;
-                //             end;
-                //             "Repayment Start Date" := DMY2Date(20, Month, Year);
-                //         end;
-                //     end
-                //     else if "Source Unit" = "Source Unit"::BOSA then begin
-                //         // For BOSA: if the day of AdjustedAppDate is between 1 and 10, repayment starts at the end of that month,
-                //         // otherwise at the end of the following month.
-                //         if Date2DMY(AdjustedAppDate, 2) <= 10 then
-                //             "Repayment Start Date" := CALCDATE('CM', AdjustedAppDate)
-                //         else
-                //             "Repayment Start Date" := CALCDATE('CM+1M', AdjustedAppDate);
-                //     end;
-
-                //     IntstallMentPeriodText := Format(Installments) + 'M';
-                //     Evaluate(InstalmentPeriods, IntstallMentPeriodText);
-                //     "Expected Date of Completion" := CalcDate(InstalmentPeriods, "Repayment Start Date");
-                // end;
-
-                //version2
-
-
-                //kenpipe policy
-
 
                 GenSetup.Get;
                 ProdFac.Get("Loan Product Type");
@@ -1631,7 +1586,6 @@ table 52185729 Loans
                 //version2
 
 
-                //kenpipe policy
             end;
         }
         field(1022; "disbursement time"; time)
