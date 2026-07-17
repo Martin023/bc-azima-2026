@@ -67,21 +67,23 @@ Report 52185596 "prPaye Report"
                 TaxablePay := 0;
 
 
-
-
                 prPeriodTrans.Reset;
                 prPeriodTrans.SetRange("Employee Code", "PR Salary Card"."Employee Code");
                 prPeriodTrans.SetRange("Payroll Period", PayrollPeriod);
                 prPeriodTrans.SetFilter("Transaction Code", '=%1|%2|%3|%4', 'BPAY', 'PAYE', 'TXBP', 'PENS');
                 if prPeriodTrans.FindSet then begin
-                    //if prPeriodTrans."Employee Code" <> '200543' then begin
+
                     repeat
-                        if prPeriodTrans."Transaction Code" = 'BPAY' then BasicPay := prPeriodTrans.Amount;
-                        if prPeriodTrans."Transaction Code" = 'PAYE' then Paye := prPeriodTrans.Amount;
-                        if prPeriodTrans."Transaction Code" = 'TXBP' then TaxablePay := prPeriodTrans.Amount;
-                        if prPeriodTrans."Transaction Code" = 'PENS' then Pension := prPeriodTrans.Amount;
+                        if prPeriodTrans."Transaction Code" = 'BPAY' then
+                            BasicPay := prPeriodTrans.Amount;
+                        if prPeriodTrans."Transaction Code" = 'PAYE' then
+                            Paye := prPeriodTrans.Amount;
+                        if prPeriodTrans."Transaction Code" = 'TXBP' then
+                            TaxablePay := prPeriodTrans.Amount;
+                        if prPeriodTrans."Transaction Code" = 'PENS' then
+                            Pension := prPeriodTrans.Amount;
                     until prPeriodTrans.Next = 0;
-                    //end
+
                 end;
             end;
 
