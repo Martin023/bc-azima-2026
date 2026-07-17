@@ -201,6 +201,15 @@ Report 52185690 "Bankers Cheque Slip"
             column(ProductTypeDescription; ProductTypeDescription)
             {
             }
+            column(SlipName; SlipName)
+            {
+            }
+            column(ChequeNoNarration; ChequeNoNarration)
+            {
+            }
+            column(FinalChequeNo; FinalChequeNo)
+            {
+            }
             dataitem("Transaction Charges"; "Transaction Charges")
             {
                 DataItemLink = "Transaction Type" = field("Transaction Type");
@@ -271,6 +280,19 @@ Report 52185690 "Bankers Cheque Slip"
                 if Savings.Find('-') then begin
                     StaffNo := Savings."Payroll/Staff No.";
                     ProductName := Savings."Product Name";
+                end;
+                
+                clear(SlipName);
+                clear(ChequeNoNarration);
+                clear(FinalChequeNo);
+                if Transactions.Type = Transactions.Type::"Cheque Withdrawal" then begin
+                    SlipName := 'NORMAL CHEQUE SLIP';
+                    ChequeNoNarration := 'Cheque No:';
+                    FinalChequeNo := Transactions."Cheque No";
+                end else if Transactions.Type = Transactions.Type::"Bankers Cheque" then begin
+                    SlipName := 'BANKERS CHEQUE SLIP';
+                    ChequeNoNarration := 'Bankers Cheque No:';
+                    FinalChequeNo := Transactions."Bankers Cheque No";
                 end;
 
 
@@ -354,4 +376,7 @@ Report 52185690 "Bankers Cheque Slip"
         CommunicationOnline: Text;
         ProductFactory: Record "Product Factory";
         ProductTypeDescription: Text[100];
+        SlipName : Text[100];
+        ChequeNoNarration: Text[100];
+        FinalChequeNo: Text[50];
 }

@@ -39,6 +39,8 @@ Report 52185496 "Counter Summary Report"
                 trigger OnAfterGetRecord()
                 begin
                     if Number = 1 then begin
+                        if not Treasury_transaction.Posted then
+                            CurrReport.Skip();
                         if Treasury_transaction."Transaction Description" <> '' then
                             GroupDetails := Treasury_transaction."Transaction Description"
                         else
@@ -59,6 +61,8 @@ Report 52185496 "Counter Summary Report"
                             LineCreditAmt := Treasury_transaction.Amount;
 
                     end else if Number = 2 then begin
+                        if not Treasury_transaction.Posted then
+                            CurrReport.Skip();
                         if Treasury_transaction.Type <> Treasury_transaction.Type::"Cash Withdrawal" then
                             CurrReport.Skip();
                         if Treasury_transaction."Charge Amount" <= 0 then

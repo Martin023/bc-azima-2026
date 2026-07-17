@@ -15,11 +15,11 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <Tablix Name="Tablix1">
+          <Tablix Name="Tablix2">
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>2.81323cm</Width>
+                  <Width>2.47521cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>3.98167cm</Width>
@@ -46,16 +46,17 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox17">
+                        <Textbox Name="Textbox1">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Employer Code</Value>
+                                  <Value>Employee Code</Value>
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -63,7 +64,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox17</rd:DefaultName>
+                          <rd:DefaultName>Textbox1</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -79,16 +80,17 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox15">
+                        <Textbox Name="Textbox3">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Employer Name</Value>
+                                  <Value>Employee Name</Value>
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -96,7 +98,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox15</rd:DefaultName>
+                          <rd:DefaultName>Textbox3</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -112,7 +114,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox9">
+                        <Textbox Name="Textbox5">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -122,6 +124,7 @@
                                   <Value>Transaction Code</Value>
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -129,7 +132,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox9</rd:DefaultName>
+                          <rd:DefaultName>Textbox5</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -145,7 +148,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox11">
+                        <Textbox Name="Textbox8">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -155,6 +158,7 @@
                                   <Value>Transaction Name</Value>
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -162,7 +166,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox11</rd:DefaultName>
+                          <rd:DefaultName>Textbox8</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -178,7 +182,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox13">
+                        <Textbox Name="Textbox12">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -188,6 +192,7 @@
                                   <Value>Employee Amt</Value>
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -195,7 +200,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox13</rd:DefaultName>
+                          <rd:DefaultName>Textbox12</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -211,7 +216,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox19">
+                        <Textbox Name="Textbox16">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -221,6 +226,7 @@
                                   <Value>Employer Amt</Value>
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -228,7 +234,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox19</rd:DefaultName>
+                          <rd:DefaultName>Textbox16</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -244,7 +250,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox21">
+                        <Textbox Name="Textbox20">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -254,6 +260,7 @@
                                   <Value>Total Amt</Value>
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -261,7 +268,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox21</rd:DefaultName>
+                          <rd:DefaultName>Textbox20</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -282,7 +289,7 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="EmployeeCode">
+                        <Textbox Name="EmployeeCode1">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -292,13 +299,14 @@
                                   <Value>=Fields!EmployeeCode.Value</Value>
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>EmployeeCode</rd:DefaultName>
+                          <rd:DefaultName>EmployeeCode1</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -314,7 +322,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="EmployeeName">
+                        <Textbox Name="EmployeeName1">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -324,13 +332,14 @@
                                   <Value>=Fields!EmployeeName.Value</Value>
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>EmployeeName</rd:DefaultName>
+                          <rd:DefaultName>EmployeeName1</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -346,7 +355,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="TransactionCode">
+                        <Textbox Name="TransactionCode1">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -356,13 +365,14 @@
                                   <Value>=Fields!TransactionCode.Value</Value>
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>TransactionCode</rd:DefaultName>
+                          <rd:DefaultName>TransactionCode1</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -378,7 +388,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="TransactionName">
+                        <Textbox Name="TransactionName1">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -388,13 +398,14 @@
                                   <Value>=Fields!TransactionName.Value</Value>
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>TransactionName</rd:DefaultName>
+                          <rd:DefaultName>TransactionName1</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -410,7 +421,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="EmployeeAmt">
+                        <Textbox Name="EmployeeAmt1">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -420,6 +431,7 @@
                                   <Value>=Fields!EmployeeAmt.Value</Value>
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                     <Format>#,0.00</Format>
                                   </Style>
                                 </TextRun>
@@ -427,7 +439,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>EmployeeAmt</rd:DefaultName>
+                          <rd:DefaultName>EmployeeAmt1</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -443,7 +455,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="EmployerAmt">
+                        <Textbox Name="EmployerAmt1">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -453,6 +465,7 @@
                                   <Value>=Fields!EmployerAmt.Value</Value>
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                     <Format>#,0.00</Format>
                                   </Style>
                                 </TextRun>
@@ -460,7 +473,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>EmployerAmt</rd:DefaultName>
+                          <rd:DefaultName>EmployerAmt1</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -476,7 +489,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="TotalAmt">
+                        <Textbox Name="TotalAmt1">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -486,6 +499,7 @@
                                   <Value>=Fields!TotalAmt.Value</Value>
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                     <Format>#,0.00</Format>
                                   </Style>
                                 </TextRun>
@@ -493,7 +507,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>TotalAmt</rd:DefaultName>
+                          <rd:DefaultName>TotalAmt1</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -521,9 +535,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Count(Fields!EmployeeCode.Value)</Value>
+                                  <Value />
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -556,6 +571,7 @@
                                   <Value />
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -588,6 +604,7 @@
                                   <Value />
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -620,6 +637,7 @@
                                   <Value />
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -652,6 +670,7 @@
                                   <Value>=Sum(Fields!EmployeeAmt.Value)</Value>
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                     <Format>#,0.00</Format>
                                   </Style>
                                 </TextRun>
@@ -685,6 +704,7 @@
                                   <Value>=Sum(Fields!EmployerAmt.Value)</Value>
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                     <Format>#,0.00</Format>
                                   </Style>
                                 </TextRun>
@@ -718,6 +738,7 @@
                                   <Value>=Sum(Fields!TotalAmt.Value)</Value>
                                   <Style>
                                     <FontFamily>Book Antiqua</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                     <Format>#,0.00</Format>
                                   </Style>
                                 </TextRun>
@@ -760,7 +781,7 @@
                   <KeepWithGroup>After</KeepWithGroup>
                 </TablixMember>
                 <TablixMember>
-                  <Group Name="Details" />
+                  <Group Name="Details1" />
                 </TablixMember>
                 <TablixMember>
                   <KeepWithGroup>Before</KeepWithGroup>
@@ -768,10 +789,10 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
-            <Top>0.76412cm</Top>
+            <Top>0.99343cm</Top>
             <Left>0.4858cm</Left>
             <Height>1.8cm</Height>
-            <Width>20.33802cm</Width>
+            <Width>20cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -779,10 +800,10 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>3.13972cm</Height>
+        <Height>3.0868cm</Height>
         <Style />
       </Body>
-      <Width>21.38826cm</Width>
+      <Width>21.01784cm</Width>
       <Page>
         <PageHeader>
           <Height>4.51555cm</Height>

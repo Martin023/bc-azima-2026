@@ -222,6 +222,16 @@ Codeunit 52186456 "Sacco Transactions"
                 exit;
             end;
 
+            if CashierTrans.Type = CashierTrans.Type::"Cheque Withdrawal" then begin
+                CashierTrans.TestField("Cheque Type");
+                CashierTrans.TestField("Cheque No");
+                CashierTrans.TestField("Cheque Date");
+
+                PostNormalCheque(CashierTrans, Jtemplate, JBatch, DBranch, DActivity);
+
+                exit;
+            end;
+
             //prevent withdrawal from dormant
             if CashierTrans.Type = CashierTrans.Type::"Cash Withdrawal" then begin
                 if SavingsACC.Get(CashierTrans."Account No") then begin
@@ -1356,6 +1366,8 @@ Codeunit 52186456 "Sacco Transactions"
         AccountTypes: Record "Product Factory";
         ChBank: Code[20];
         Trans: Record "Cashier Transactions";
+        SavingsACC : record "Savings Accounts";
+        Employer : record "Customer";
     begin
         //with CashierTrans do
         begin
@@ -1381,7 +1393,7 @@ Codeunit 52186456 "Sacco Transactions"
             GenJournalLine."Account No." := CashierTrans."Account No";
             GenJournalLine.Validate(GenJournalLine."Account No.");
             GenJournalLine."Posting Date" := CashierTrans."Transaction Date";
-            GenJournalLine.Description := PadStr('Cheque Deposit ChqNo. ' + CashierTrans."Account No" + '-' + CashierTrans.Remarks, 50);
+            GenJournalLine.Description := PadStr('Cheque Deposit - ChqNo.' + CashierTrans."Cheque No" + '-' + CashierTrans.Payer, 50);
             GenJournalLine."Currency Code" := CashierTrans."Currency Code";
             GenJournalLine.Validate(GenJournalLine."Currency Code");
             GenJournalLine.Amount := -(CashierTrans.Amount);
@@ -1405,10 +1417,232 @@ Codeunit 52186456 "Sacco Transactions"
             GenJournalLine."Account No." := ChBank;
             GenJournalLine.Validate(GenJournalLine."Account No.");
             GenJournalLine."Posting Date" := CashierTrans."Transaction Date";
-            GenJournalLine.Description := PadStr('Cheque Deposit - ChqNo.' + CashierTrans."Account No" + '-' + CashierTrans.Remarks, 50);
+            GenJournalLine.Description := PadStr('Cheque Deposit - ChqNo.' + CashierTrans."Cheque No" + '-' + CashierTrans.Payer, 50);
             GenJournalLine."Currency Code" := CashierTrans."Currency Code";
             GenJournalLine.Validate(GenJournalLine."Currency Code");
             GenJournalLine.Amount := CashierTrans.Amount;
+            GenJournalLine.Validate(GenJournalLine.Amount);
+            GenJournalLine."Shortcut Dimension 1 Code" := DActivity;
+            GenJournalLine."Shortcut Dimension 2 Code" := DBranch;
+            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+            if GenJournalLine.Amount <> 0 then
+                GenJournalLine.Insert;
+
+
+
+            //Charges
+            TCharges := 0;
+
+            TransactionCharges.Reset;
+            TransactionCharges.SetRange(TransactionCharges."Transaction Type", CashierTrans."Transaction Type");
+            if TransactionCharges.FindSet() then begin
+                repeat
+
+                    if (TransactionCharges."Transaction Charge Category" = TransactionCharges."transaction charge category"::Normal) or
+                    (TransactionCharges."Transaction Charge Category" = TransactionCharges."transaction charge category"::"Stamp Duty") then begin
+
+                        LineNo := LineNo + 10000;
+
+                        ChargeAmount := 0;
+                        if TransactionCharges."Charge Type" = TransactionCharges."charge type"::"% of Amount" = true then
+                            ChargeAmount := (CashierTrans.Amount * TransactionCharges."Percentage of Amount") * 0.01
+                        else
+                            ChargeAmount := TransactionCharges."Charge Amount";
+
+                        if TransactionCharges."Charge Type" = TransactionCharges."charge type"::Staggered then begin
+
+                            TransactionCharges.TestField(TransactionCharges."Staggered Charge Code");
+
+                            TariffDetails.Reset;
+                            TariffDetails.SetRange(TariffDetails.Code, TransactionCharges."Staggered Charge Code");
+                            if TariffDetails.FindSet() then begin
+                                repeat
+                                    if (CashierTrans.Amount >= TariffDetails."Lower Limit") and (CashierTrans.Amount <= TariffDetails."Upper Limit") then begin
+                                        if TariffDetails."Use Percentage" = true then begin
+                                            ChargeAmount := CashierTrans.Amount * TariffDetails.Percentage * 0.01;
+                                        end else begin
+                                            ChargeAmount := TariffDetails."Charge Amount";
+                                        end;
+                                    end;
+                                until TariffDetails.Next = 0;
+                            end;
+                        end;
+
+                        if SavingsACC.Get(CashierTrans."Account No") then begin
+                            if Employer.Get(SavingsACC."Employer Code") then begin
+                                if Employer."Internal Staff Employer" then
+                                    ChargeAmount := 0;
+                            end;
+                        end;
+
+
+                        GenJournalLine.Init;
+                        GenJournalLine."Journal Template Name" := JTemplate;
+                        GenJournalLine."Journal Batch Name" := JBatch;
+                        GenJournalLine."Document No." := CashierTrans.No;
+                        GenJournalLine."Line No." := LineNo;
+                        GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
+                        GenJournalLine."Account No." := CashierTrans."Account No";
+                        GenJournalLine."External Document No." := CashierTrans."ID No";
+                        GenJournalLine.Validate(GenJournalLine."Account No.");
+                        GenJournalLine."Posting Date" := CashierTrans."Transaction Date";
+                        GenJournalLine.Description := TransactionCharges.Description;
+                        GenJournalLine."Currency Code" := CashierTrans."Currency Code";
+                        GenJournalLine.Validate(GenJournalLine."Currency Code");
+                        GenJournalLine.Amount := ChargeAmount;
+                        GenJournalLine.Validate(GenJournalLine.Amount);
+                        GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
+                        GenJournalLine."Bal. Account No." := TransactionCharges."G/L Account";
+                        GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
+                        GenJournalLine."Shortcut Dimension 1 Code" := DActivity;
+                        GenJournalLine."Shortcut Dimension 2 Code" := DBranch;
+                        GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                        GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                        if GenJournalLine.Amount <> 0 then
+                            GenJournalLine.Insert;
+
+
+                        //IF NOT TransactionCharges."Transaction Charge Category" THEN  BEGIN
+
+                        if (TransactionCharges."Transaction Charge Category" <> TransactionCharges."transaction charge category"::"Stamp Duty") and
+                          (TransactionCharges."Recover Excise Duty" = true) then begin
+
+
+                            //Excise Duty
+
+                            LineNo := LineNo + 10000;
+
+                            GenJournalLine.Init;
+                            GenJournalLine."Journal Template Name" := JTemplate;
+                            GenJournalLine."Journal Batch Name" := JBatch;
+                            GenJournalLine."Document No." := CashierTrans.No;
+                            GenJournalLine."Line No." := LineNo;
+                            GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
+                            GenJournalLine."Account No." := CashierTrans."Account No";
+                            GenJournalLine.Validate(GenJournalLine."Account No.");
+                            GenJournalLine."Posting Date" := CashierTrans."Transaction Date";
+                            GenJournalLine.Description := 'Excise Duty';
+                            GenJournalLine."Currency Code" := CashierTrans."Currency Code";
+                            GenJournalLine.Validate(GenJournalLine."Currency Code");
+                            GenJournalLine.Amount := (ChargeAmount * GenSetup."Excise Duty (%)") * 0.01;
+                            GenJournalLine.Validate(GenJournalLine.Amount);
+                            GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
+                            GenJournalLine."Bal. Account No." := GenSetup."Excise Duty G/L";
+                            GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
+                            GenJournalLine."Shortcut Dimension 1 Code" := DActivity;
+                            GenJournalLine."Shortcut Dimension 2 Code" := DBranch;
+                            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                            if GenJournalLine.Amount <> 0 then
+                                GenJournalLine.Insert;
+
+                            TChargeAmount := TChargeAmount + ChargeAmount;
+                        end;
+                    end;
+                until TransactionCharges.Next = 0;
+            end;
+
+
+
+
+            //Post New
+            GenJournalLine.Reset;
+            GenJournalLine.SetRange("Journal Template Name", JTemplate);
+            GenJournalLine.SetRange("Journal Batch Name", JBatch);
+            if GenJournalLine.Find('-') then begin
+                Codeunit.Run(Codeunit::"Gen. Jnl.-Post New", GenJournalLine);
+            end;
+
+            //Post New
+
+            Post := false;
+            Post := JournlPosted.PostedSuccessfully();
+            if Post then begin
+
+                Posted := true;
+                CashierTrans."Date Posted" := Today;
+                CashierTrans."Time Posted" := Time;
+                CashierTrans."Posted By" := UserId;
+                CashierTrans.Modify;
+                Commit;
+            end;
+        end;
+    end;
+
+    local procedure PostNormalCheque(CashierTrans: Record "Cashier Transactions"; JTemplate: Code[20]; JBatch: Code[20]; DBranch: Code[20]; DActivity: Code[20])
+    var
+        GenSetup: Record "General Set-Up";
+        Acc: Record "Savings Accounts";
+        BankSetup: Record "Banking User Template";
+        BankAccount: Record "Bank Account";
+        CurrentTellerAmount: Decimal;
+        GenJournalLine: Record "Gen. Journal Line";
+        LineNo: Integer;
+        TCharges: Decimal;
+        TransactionCharges: Record "Transaction Charges";
+        ChargeAmount: Decimal;
+        TariffDetails: Record "Tiered Charges Lines";
+        TChargeAmount: Decimal;
+        Account: Record "Savings Accounts";
+        AccountTypes: Record "Product Factory";
+        ChBank: Code[20];
+        Trans: Record "Cashier Transactions";
+        SavingsACC : record "Savings Accounts";
+        Employer : record Customer;
+    begin
+        //with CashierTrans do
+        begin
+
+            GenSetup.Get;
+
+            ChBank := CashierTrans."Bank Account";
+
+            GenJournalLine.Reset;
+            GenJournalLine.SetRange("Journal Template Name", JTemplate);
+            GenJournalLine.SetRange("Journal Batch Name", JBatch);
+            GenJournalLine.DeleteAll;
+
+            LineNo := LineNo + 10000;
+
+            GenJournalLine.Init;
+            GenJournalLine."Journal Template Name" := JTemplate;
+            GenJournalLine."Journal Batch Name" := JBatch;
+            GenJournalLine."Document No." := CashierTrans.No;
+            GenJournalLine."External Document No." := CashierTrans."Cheque No";
+            GenJournalLine."Line No." := LineNo;
+            GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
+            GenJournalLine."Account No." := CashierTrans."Account No";
+            GenJournalLine.Validate(GenJournalLine."Account No.");
+            GenJournalLine."Posting Date" := CashierTrans."Transaction Date";
+            GenJournalLine.Description := PadStr('Normal Cheque ChqNo. ' + CashierTrans."Cheque No" + '-' + CashierTrans.Payee, 50);
+            GenJournalLine."Currency Code" := CashierTrans."Currency Code";
+            GenJournalLine.Validate(GenJournalLine."Currency Code");
+            GenJournalLine.Amount := (CashierTrans.Amount);
+            GenJournalLine.Validate(GenJournalLine.Amount);
+            GenJournalLine."Shortcut Dimension 1 Code" := DActivity;
+            GenJournalLine."Shortcut Dimension 2 Code" := DBranch;
+            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+            if GenJournalLine.Amount <> 0 then
+                GenJournalLine.Insert;
+
+            LineNo := LineNo + 10000;
+
+            GenJournalLine.Init;
+            GenJournalLine."Journal Template Name" := JTemplate;
+            GenJournalLine."Journal Batch Name" := JBatch;
+            GenJournalLine."Document No." := CashierTrans.No;
+            GenJournalLine."External Document No." := CashierTrans."Cheque No";
+            GenJournalLine."Line No." := LineNo;
+            GenJournalLine."Account Type" := GenJournalLine."account type"::"Bank Account";
+            GenJournalLine."Account No." := ChBank;
+            GenJournalLine.Validate(GenJournalLine."Account No.");
+            GenJournalLine."Posting Date" := CashierTrans."Transaction Date";
+            GenJournalLine.Description := PadStr('Normal Cheque - ChqNo.' + CashierTrans."Cheque No" + '-' + CashierTrans.Payee, 50);
+            GenJournalLine."Currency Code" := CashierTrans."Currency Code";
+            GenJournalLine.Validate(GenJournalLine."Currency Code");
+            GenJournalLine.Amount := -CashierTrans.Amount;
             GenJournalLine.Validate(GenJournalLine.Amount);
             GenJournalLine."Shortcut Dimension 1 Code" := DActivity;
             GenJournalLine."Shortcut Dimension 2 Code" := DBranch;
@@ -1452,6 +1686,13 @@ Codeunit 52186456 "Sacco Transactions"
                                         end;
                                     end;
                                 until TariffDetails.Next = 0;
+                            end;
+                        end;
+
+                        if SavingsACC.Get(CashierTrans."Account No") then begin
+                            if Employer.Get(SavingsACC."Employer Code") then begin
+                                if Employer."Internal Staff Employer" then
+                                    ChargeAmount := 0;
                             end;
                         end;
 
@@ -1550,6 +1791,9 @@ Codeunit 52186456 "Sacco Transactions"
         end;
     end;
 
+
+
+
     local procedure PostBankersCheq(CashierTrans: Record "Cashier Transactions"; JTemplate: Code[20]; JBatch: Code[20]; DBranch: Code[20]; DActivity: Code[20])
     var
         Acc: Record "Savings Accounts";
@@ -1587,6 +1831,8 @@ Codeunit 52186456 "Sacco Transactions"
         // CustomApprovals: Codeunit "Custom Approvals Codeunit";
         Text0019: label 'You cannot draw banker cheque more than your allowed limit of %1 unless authorised.';
         SMSChargeAmt: Decimal;
+        Employer : Record "Customer";
+        SavingsACC : Record "Savings Accounts";
     begin
 
         // with CashierTrans do
@@ -1648,7 +1894,7 @@ Codeunit 52186456 "Sacco Transactions"
             GenJournalLine."Account No." := CashierTrans."Account No";
             GenJournalLine.Validate(GenJournalLine."Account No.");
             GenJournalLine."Posting Date" := CashierTrans."Transaction Date";
-            GenJournalLine.Description := CashierTrans."Transaction Description" + '-' + CashierTrans.Payee;
+            GenJournalLine.Description := PadStr('Cheque Sale - ChqNo.' + CashierTrans."Cheque No" + '-' + CashierTrans.Payee, 50);
             GenJournalLine."Currency Code" := CashierTrans."Currency Code";
             GenJournalLine.Validate(GenJournalLine."Currency Code");
             GenJournalLine.Amount := CashierTrans.Amount;
@@ -1672,7 +1918,7 @@ Codeunit 52186456 "Sacco Transactions"
             GenJournalLine."Account No." := ChBank;
             GenJournalLine.Validate(GenJournalLine."Account No.");
             GenJournalLine."Posting Date" := CashierTrans."Transaction Date";
-            GenJournalLine.Description := CashierTrans.Payee + '-' + CashierTrans."Cheque No";
+            GenJournalLine.Description := PadStr('Cheque Sale - ChqNo.' + CashierTrans."Cheque No" + '-' + CashierTrans.Payee, 50);
             GenJournalLine."Currency Code" := CashierTrans."Currency Code";
             GenJournalLine.Validate(GenJournalLine."Currency Code");
             GenJournalLine.Amount := -(CashierTrans.Amount);
@@ -1721,7 +1967,14 @@ Codeunit 52186456 "Sacco Transactions"
                         end;
                     end;
 
-
+                    //Dont charge Transactional Charges
+                        if SavingsACC.Get(CashierTrans."Account No") then begin
+                            if Employer.Get(SavingsACC."Employer Code") then begin
+                                if Employer."Internal Staff Employer" then
+                                    ChargeAmount := 0;
+                            end;
+                        end;
+                    //Dont charge Transactional Charges
 
                     GenJournalLine.Init;
                     GenJournalLine."Journal Template Name" := JTemplate;
@@ -4187,19 +4440,20 @@ Codeunit 52186456 "Sacco Transactions"
                                                     if not (Member."No." = Memb."No.") then begin
                                                         if Member."First Name" <> '' then begin
                                                             if Memb."First Name" <> '' then
-                                                                msg := 'Dear ' + Memb."First Name" + ', ' + Member."First Name" + ' has transferred ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
-                                                                                                                                                                                       BSchedDestin."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
+                                                                msg := 'Dear ' + Memb."First Name" + ', you have received KES ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
+                                                                        BSchedDestin."Product Name" + ' from ' + Member."First Name" + ' on ' + Format(Today) + ' ' + Format(Time)                                                                                     
                                                             else
-                                                                msg := 'Dear ' + Memb.Name + ', ' + Member."First Name" + ' has transferred ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
-                                                                                                                                                                                           BSchedDestin."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
+                                                                msg := 'Dear ' + Memb.Name + ', you have received KES ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
+                                                                        BSchedDestin."Product Name" + ' from ' + Member."First Name" + ' on ' + Format(Today) + ' ' + Format(Time)
                                                         end
                                                         else begin
                                                             if Memb."First Name" <> '' then
-                                                                msg := 'Dear ' + Memb."First Name" + ', ' + Member.Name + ' has transferred ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
-                                                                                                                                                                                       BSchedDestin."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
+                                                                msg := 'Dear ' + Memb."First Name" + ', you have received KES ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
+                                                                        BSchedDestin."Product Name" + ' from ' + Member.Name + ' on ' + Format(Today) + ' ' + Format(Time)
                                                             else
-                                                                msg := 'Dear ' + Memb.Name + ', ' + Member.Name + ' has transferred ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
-                                                                                                                                                                                           BSchedDestin."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
+                                                                msg := 'Dear ' + Memb.Name + ', you have received KES ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
+                                                                        BSchedDestin."Product Name" + ' from ' + Member.Name + ' on ' + Format(Today) + ' ' + Format(Time)
+
 
                                                             // msg := 'Dear ' + Memb."First Name" + ', ' + Member.Name + ' has transferred ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
                                                             //                                                            BSchedDestin."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
@@ -4208,10 +4462,15 @@ Codeunit 52186456 "Sacco Transactions"
 
                                                         SendSMS.SendSms(Source::INTERACCOUNT_TRANSFER, Memb."Phone No.", msg, Format(Memb."No."), '', true, 0, false, 'CBS', Memb."No.", 'CBS');
 
-                                                        MembAccounts += format(BSchedDestin."Destination Amount") + ', to ' + Memb."First Name" + ' ' + BSchedDestin."Product Name";
+                                                        if MembAccounts <> '' then
+                                                            MembAccounts += ', ';
+                                                        MembAccounts += Format(BSchedDestin."Destination Amount") + ' to ' + Memb."First Name" + ' ' + BSchedDestin."Product Name";
                                                     end
-                                                    else
-                                                        MembAccounts += ', ' + format(BSchedDestin."Destination Amount") + ' to ' + BSchedDestin."Product Name";
+                                                    else begin
+                                                        if MembAccounts <> '' then
+                                                            MembAccounts += ', ';
+                                                        MembAccounts += Format(BSchedDestin."Destination Amount") + ' to your ' + BSchedDestin."Product Name";
+                                                    end;
                                                 end;
                                             end;
                                         end;
@@ -4223,49 +4482,55 @@ Codeunit 52186456 "Sacco Transactions"
                                                     if not (Member."No." = Memb."No.") then begin
                                                         if ACTransfer."Recover Arrears" then begin
                                                             if Member."First Name" <> '' then
-                                                                msg := 'Dear ' + Memb."First Name" + ', ' + Member."First Name" + ' has recovered arrears of ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
-                                                                    BSchedDestin."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
+                                                                msg := 'Dear ' + Memb."First Name" + ', arrears of KES ' + Format(BSchedDestin."Destination Amount") + ' has been recovered from your ' +
+                                                                    BSchedDestin."Product Name" + ' by ' + Member."First Name" + ' on ' + Format(Today) + ' ' + Format(Time)
                                                             else
-                                                                msg := 'Dear ' + Memb."First Name" + ', ' + Member.Name + ' has recovered arrears of ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
-                                                                    BSchedDestin."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time);
+                                                                msg := 'Dear ' + Memb."First Name" + ', arrears of KES ' + Format(BSchedDestin."Destination Amount") + ' has been recovered from your ' +
+                                                                    BSchedDestin."Product Name" + ' by ' + Member.Name + ' on ' + Format(Today) + ' ' + Format(Time);
                                                         end else begin
                                                             if Member."First Name" <> '' then
-                                                                msg := 'Dear ' + Memb."First Name" + ', ' + Member."First Name" + ' has transferred ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
-                                                                    BSchedDestin."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
+                                                                msg := 'Dear ' + Memb."First Name" + ', you have received KES ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
+                                                                        BSchedDestin."Product Name" + ' from ' + Member."First Name" + ' on ' + Format(Today) + ' ' + Format(Time)
                                                             else
-                                                                msg := 'Dear ' + Memb."First Name" + ', ' + Member.Name + ' has transferred ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
-                                                                    BSchedDestin."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time);
+                                                                msg := 'Dear ' + Memb."First Name" + ', you have received KES ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
+                                                                        BSchedDestin."Product Name" + ' from ' + Member.Name + ' on ' + Format(Today) + ' ' + Format(Time);
                                                         end;
 
                                                         SendSMS.SendSms(Source::INTERACCOUNT_TRANSFER, Memb."Phone No.", msg, Format(Memb."No."), '', true, 0, false, 'CBS', Memb."No.", 'CBS');
 
-                                                        MembAccounts += format(BSchedDestin."Destination Amount") + ', to ' + Memb."First Name" + ' ' + BSchedDestin."Product Name";
+                                                        if MembAccounts <> '' then
+                                                            MembAccounts += ', ';
+                                                        MembAccounts += Format(BSchedDestin."Destination Amount") + ' to ' + Memb."First Name" + ' ' + BSchedDestin."Product Name";
                                                     end
-                                                    else
-                                                        MembAccounts += ' ' + format(BSchedDestin."Destination Amount") + ' to ' + BSchedDestin."Product Name";
+                                                    else begin
+                                                        if MembAccounts <> '' then
+                                                            MembAccounts += ', ';
+                                                        MembAccounts += Format(BSchedDestin."Destination Amount") + ' to your ' + BSchedDestin."Product Name";
+                                                    end;
                                         end;
                                     end;
 
                                 until BSchedDestin.next = 0;
                                 if Member."First Name" <> '' then begin
                                     if ACTransfer."Recover Arrears" then
-                                        msg := 'Dear ' + Member."First Name" + ', arrears of ' + format(BSchedDestin."Destination Amount") + ' has been recovered for ' + BSchedDestin."Product Name" + ': ' + BSchedDestin."Destination Loan No." + ' on ' + Format(Today) + ' ' + Format(Time)
+                                        msg := 'Dear ' + Member."First Name" + ', arrears of KES ' + Format(BSchedDestin."Destination Amount") + ' has been recovered for ' + BSchedDestin."Product Name" + ': ' + BSchedDestin."Destination Loan No." + ' on ' + Format(Today) + ' ' + Format(Time)
                                     // msg := 'Dear ' + Member."First Name" + ', you have recovered arrears: ' + MembAccounts + ' from ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
                                     else
-                                        msg := 'Dear ' + Member."First Name" + ', you have successfully transferred ' + MembAccounts + ' from ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
+                                        msg := 'Dear ' + Member."First Name" + ', you have successfully transferred KES ' + Format(BSchedDestin."Destination Amount") + ' from ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
                                 end
                                 else begin
                                     if ACTransfer."Recover Arrears" then
-                                        msg := 'Dear ' + Member."First Name" + ', arrears of ' + format(BSchedDestin."Destination Amount") + ' has been recovered for ' + BSchedDestin."Product Name" + ': ' + BSchedDestin."Destination Loan No." + ' on ' + Format(Today) + ' ' + Format(Time)
+                                        msg := 'Dear ' + Member."First Name" + ', arrears of KES ' + Format(BSchedDestin."Destination Amount") + ' has been recovered for ' + BSchedDestin."Product Name" + ': ' + BSchedDestin."Destination Loan No." + ' on ' + Format(Today) + ' ' + Format(Time)
                                     // msg := 'Dear ' + Member.Name + ', you have recovered arrears: ' + MembAccounts + ' from ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
                                     else
-                                        msg := 'Dear ' + Member.Name + ', you have successfully transferred ' + MembAccounts + ' from ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time);
+                                        msg := 'Dear ' + Member.Name + ', you have successfully transferred KES ' + Format(BSchedDestin."Destination Amount") + ' from ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time);
                                 end;
                                 SendSMS.SendSms(Source::INTERACCOUNT_TRANSFER, Member."Phone No.", msg, Format(Member."No."), '', true, 0, false, 'CBS', Member."No.", 'CBS');
                             end;
                         end;
                     until BSched.next = 0;
                 end;
+
 
             end;
         end;
@@ -13113,7 +13378,7 @@ Codeunit 52186456 "Sacco Transactions"
         GenJournalLine."Account Type" := AcctType;
         GenJournalLine."Account No." := AcctNo;
         GenJournalLine.Validate(GenJournalLine."Account No.");
-        GenJournalLine.Description := CopyStr(Desc, 1, 150);
+        GenJournalLine.Description := CopyStr(Desc, 1, 100);
         GenJournalLine."Bal. Account Type" := BalAcctType;
         GenJournalLine."Bal. Account No." := BalAcctNo;
         GenJournalLine.Validate(GenJournalLine."Bal. Account No.");

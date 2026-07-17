@@ -459,9 +459,14 @@ Codeunit 52185472 "PR Payroll Processing"
                                 customer.SetRange("No.", SavingsAccounts."Employer Code");
                                 customer.SetRange("Internal Staff Employer", true);
                                 if Customer.Find('-') then begin
-                                    JournalAc := SavingsAccounts."No.";
-                                    JournalPostingType := Journalpostingtype::Savings;
-                                end;
+                                    if (SavingsAccounts.Status = SavingsAccounts.Status::Closed) then
+                                        Error('The Account Status is %1', SavingsAccounts.Status::Closed) else begin
+                                        JournalAc := SavingsAccounts."No.";
+                                        JournalPostingType := Journalpostingtype::Savings;
+                                    end;
+                                end
+                                else
+                                    Error('Kindly Note that Internal Staff Employer has not been selected on the Customer List.')
                             end;
                         end;
 

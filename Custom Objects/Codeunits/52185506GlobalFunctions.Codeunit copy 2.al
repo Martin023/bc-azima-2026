@@ -3447,6 +3447,22 @@ Codeunit 52185506 "Global Functions"
 
         exit(TotalBalance);
     end;
+
+    procedure SkipApiMsg(): Boolean
+    var
+        UserSetup: record "User Setup";
+    begin
+        UserSetup.Reset();
+        UserSetup.SetRange("User ID", UserId);
+        UserSetup.SetRange("User Type", UserSetup."User Type"::"Service Account");
+
+        if UserSetup.FindFirst then begin
+            exit(true);
+        end else begin
+            exit(false);
+        end;
+
+    end;
 }
 
 
