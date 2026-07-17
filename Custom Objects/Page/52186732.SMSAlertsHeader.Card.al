@@ -1373,7 +1373,6 @@ page 52186732 "SMS Alerts Header Card"
         if AlertsLines.Find('-') then begin
             repeat
                 LoanNo := AlertsLines."Loan No";
-                //##############3
                 TempBlob.CreateOutStream(OutStr);
                 Report.SaveAs(
                     Report::"Guarantor Notice",

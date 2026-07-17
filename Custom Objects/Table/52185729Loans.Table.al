@@ -87,6 +87,7 @@ table 52185729 Loans
 
                 if "Loan Group" = "Loan Group"::"Group Loan" then begin
                     InsertLoanGuarantorsForBusinessLoans();
+                    rec."Share Boosted Amount" := 0;
                 end;
                 Otherdeposits := 0;
                 if ProductFactory.Get(rec."Loan Product Type") then begin

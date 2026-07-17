@@ -1024,16 +1024,21 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 end;
 
                 //Qualification on deposits
-                MemberDeposits := 0;
-                Mult := ProductFactory."Ordinary Deposits Multiplier";
-                SavingsAccounts.Reset;
-                SavingsAccounts.SetRange(SavingsAccounts."Member No.", Loans."Member No.");
-                SavingsAccounts.SetRange(SavingsAccounts."Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
-                if SavingsAccounts.Find('-') then begin
-                    SavingsAccounts.CalcFields(SavingsAccounts."Balance (LCY)");
-                    MemberDeposits := SavingsAccounts."Balance (LCY)";//+Loans."Loans - Deposit Purchase";
-                end;
-                QualificationOnDeposits := (MemberDeposits + loans."Loans - Deposit Purchase") * Mult;
+                if not ProductFactory."Exclude Deposit Qual" then begin
+                    MemberDeposits := 0;
+                    Mult := ProductFactory."Ordinary Deposits Multiplier";
+                    SavingsAccounts.Reset;
+                    SavingsAccounts.SetRange(SavingsAccounts."Member No.", Loans."Member No.");
+                    SavingsAccounts.SetRange(SavingsAccounts."Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
+                    if SavingsAccounts.Find('-') then begin
+                        SavingsAccounts.CalcFields(SavingsAccounts."Balance (LCY)");
+                        MemberDeposits := SavingsAccounts."Balance (LCY)";//+Loans."Loans - Deposit Purchase";
+                    end;
+                    QualificationOnDeposits := (MemberDeposits + loans."Loans - Deposit Purchase") * Mult;
+                end
+                else
+                    QualificationOnDeposits := ProductFactory."Maximum Loan Amount";
+
 
                 if ProductFactory.Get(Loans."Loan Product Type") then begin
                     if QualificationOnDeposits > ProductFactory."Maximum Loan Amount" then

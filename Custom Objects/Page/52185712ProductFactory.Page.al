@@ -848,7 +848,11 @@ page 52185712 "Product Factory"
                 }
                 field("Exclude From Salary"; Rec."Exclude From Salary")
                 {
-                    Caption = 'Exclued Sal Qualification.';
+                    Caption = 'Exclude Sal Qualification.';
+                }
+                field("Exclude Deposit Qual"; Rec."Exclude Deposit Qual")
+                {
+                    Caption = 'Exclude Deposit Qualification.';
                 }
             }
             group("Staff Lending")
@@ -856,10 +860,7 @@ page 52185712 "Product Factory"
                 Caption = 'Staff Lending';
                 Visible = CreditProductVisible;
                 Editable = CurrPageEditable;
-                field("Require Deposits"; Rec."Require Deposits")
-                {
 
-                }
                 field("Minimum Service"; Rec."Minimum Service")
                 {
 
