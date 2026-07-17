@@ -143,14 +143,18 @@
             </TablixBody>
             <TablixColumnHierarchy>
               <TablixMembers>
-                <TablixMember />
+                <TablixMember>
+                  <Visibility>
+                    <Hidden>true</Hidden>
+                  </Visibility>
+                </TablixMember>
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>2.70732cm</Size>
+                    <Size>2.67891cm</Size>
                     <CellContents>
                       <Textbox Name="Textbox12">
                         <CanGrow>true</CanGrow>
@@ -226,7 +230,7 @@
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>3.09267cm</Size>
+                            <Size>2.73989cm</Size>
                             <CellContents>
                               <Textbox Name="Textbox22">
                                 <CanGrow>true</CanGrow>
@@ -264,7 +268,7 @@
                           <TablixMembers>
                             <TablixMember>
                               <TablixHeader>
-                                <Size>3.09973cm</Size>
+                                <Size>2.57056cm</Size>
                                 <CellContents>
                                   <Textbox Name="Textbox15">
                                     <CanGrow>true</CanGrow>
@@ -300,7 +304,47 @@
                                 </CellContents>
                               </TablixHeader>
                               <TablixMembers>
-                                <TablixMember />
+                                <TablixMember>
+                                  <TablixHeader>
+                                    <Size>2.5cm</Size>
+                                    <CellContents>
+                                      <Textbox Name="Textbox1">
+                                        <CanGrow>true</CanGrow>
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>Total Contribution</Value>
+                                                <Style>
+                                                  <FontFamily>Book Antiqua</FontFamily>
+                                                  <FontSize>9pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
+                                                  <TextDecoration>None</TextDecoration>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style />
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Textbox1</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Color>LightGrey</Color>
+                                            <Style>Solid</Style>
+                                          </Border>
+                                          <PaddingLeft>2pt</PaddingLeft>
+                                          <PaddingRight>2pt</PaddingRight>
+                                          <PaddingTop>2pt</PaddingTop>
+                                          <PaddingBottom>2pt</PaddingBottom>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixHeader>
+                                  <TablixMembers>
+                                    <TablixMember />
+                                  </TablixMembers>
+                                </TablixMember>
                               </TablixMembers>
                             </TablixMember>
                           </TablixMembers>
@@ -322,7 +366,7 @@
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>2.70732cm</Size>
+                    <Size>2.67891cm</Size>
                     <CellContents>
                       <Textbox Name="prPeriod_Transactions__Group_Text_2">
                         <CanGrow>true</CanGrow>
@@ -392,7 +436,7 @@
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>3.09267cm</Size>
+                            <Size>2.73989cm</Size>
                             <CellContents>
                               <Textbox Name="tier1Cont1">
                                 <CanGrow>true</CanGrow>
@@ -428,7 +472,7 @@
                           <TablixMembers>
                             <TablixMember>
                               <TablixHeader>
-                                <Size>3.09973cm</Size>
+                                <Size>2.57056cm</Size>
                                 <CellContents>
                                   <Textbox Name="tier1Cont3">
                                     <CanGrow>true</CanGrow>
@@ -463,7 +507,45 @@
                               </TablixHeader>
                               <TablixMembers>
                                 <TablixMember>
-                                  <Group Name="Details1" />
+                                  <TablixHeader>
+                                    <Size>2.5cm</Size>
+                                    <CellContents>
+                                      <Textbox Name="totalCont1">
+                                        <CanGrow>true</CanGrow>
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>=Fields!totalCont.Value</Value>
+                                                <Style>
+                                                  <FontFamily>Book Antiqua</FontFamily>
+                                                  <Format>#,0.00</Format>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style />
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>totalCont1</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Color>LightGrey</Color>
+                                            <Style>Solid</Style>
+                                          </Border>
+                                          <PaddingLeft>2pt</PaddingLeft>
+                                          <PaddingRight>2pt</PaddingRight>
+                                          <PaddingTop>2pt</PaddingTop>
+                                          <PaddingBottom>2pt</PaddingBottom>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixHeader>
+                                  <TablixMembers>
+                                    <TablixMember>
+                                      <Group Name="Details1" />
+                                    </TablixMember>
+                                  </TablixMembers>
                                 </TablixMember>
                               </TablixMembers>
                             </TablixMember>
@@ -475,7 +557,7 @@
                 </TablixMember>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>2.70732cm</Size>
+                    <Size>2.67891cm</Size>
                     <CellContents>
                       <Textbox Name="Textbox41">
                         <CanGrow>true</CanGrow>
@@ -545,7 +627,7 @@
                       <TablixMembers>
                         <TablixMember>
                           <TablixHeader>
-                            <Size>3.09267cm</Size>
+                            <Size>2.73989cm</Size>
                             <CellContents>
                               <Textbox Name="Textbox43">
                                 <CanGrow>true</CanGrow>
@@ -581,7 +663,7 @@
                           <TablixMembers>
                             <TablixMember>
                               <TablixHeader>
-                                <Size>3.09973cm</Size>
+                                <Size>2.57056cm</Size>
                                 <CellContents>
                                   <Textbox Name="Textbox44">
                                     <CanGrow>true</CanGrow>
@@ -614,6 +696,44 @@
                                   </Textbox>
                                 </CellContents>
                               </TablixHeader>
+                              <TablixMembers>
+                                <TablixMember>
+                                  <TablixHeader>
+                                    <Size>2.5cm</Size>
+                                    <CellContents>
+                                      <Textbox Name="Textbox3">
+                                        <CanGrow>true</CanGrow>
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>=Sum(Fields!totalCont.Value)</Value>
+                                                <Style>
+                                                  <FontFamily>Book Antiqua</FontFamily>
+                                                  <Format>#,0.00</Format>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style />
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Textbox3</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Color>LightGrey</Color>
+                                            <Style>Solid</Style>
+                                          </Border>
+                                          <PaddingLeft>2pt</PaddingLeft>
+                                          <PaddingRight>2pt</PaddingRight>
+                                          <PaddingTop>2pt</PaddingTop>
+                                          <PaddingBottom>2pt</PaddingBottom>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixHeader>
+                                </TablixMember>
+                              </TablixMembers>
                             </TablixMember>
                           </TablixMembers>
                         </TablixMember>
@@ -628,7 +748,7 @@
             <Top>0.66118cm</Top>
             <Left>0.62012cm</Left>
             <Height>1.8cm</Height>
-            <Width>18.20537cm</Width>
+            <Width>19.79503cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -639,7 +759,7 @@
         <Height>2.99007cm</Height>
         <Style />
       </Body>
-      <Width>19.99496cm</Width>
+      <Width>22.24272cm</Width>
       <Page>
         <PageHeader>
           <Height>3.70127cm</Height>

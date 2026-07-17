@@ -35,6 +35,21 @@ Report 52185510 "Tellers Journal"
             column(BankBalance; BankBalance) { }
             column(OpenBal; OpenBal) { }
 
+            trigger OnPreDataItem()
+            begin
+                // NEW LOGIC: If a Treasurer selected a specific User ID, find their Till and apply the filter
+                if TellerUserIDFilter <> '' then begin
+                    if BankingSetup.Get(TellerUserIDFilter) then begin
+                        if BankingSetup."Default  Bank" <> '' then
+                            "Bank Account Ledger Entry".SetRange("Bank Account No.", BankingSetup."Default  Bank")
+                        else
+                            Error('The selected user %1 does not have a Default Bank/Till setup.', TellerUserIDFilter);
+                    end else begin
+                        Error('The user %1 is not set up in the Banking User Template.', TellerUserIDFilter);
+                    end;
+                end;
+            end;
+
             trigger OnAfterGetRecord()
             begin
                 if not BankAcc.Get("Bank Account Ledger Entry"."Bank Account No.") then
@@ -49,13 +64,13 @@ Report 52185510 "Tellers Journal"
                         BankLedgerEntryII.Reset();
                         BankLedgerEntryII.SetRange("Bank Account No.", "Bank Account Ledger Entry"."Bank Account No.");
                         BankLedgerEntryII.SetFilter("Posting Date", '<%1', "Bank Account Ledger Entry".GetRangeMin("Posting Date"));
-                        
+
                         BankLedgerEntryII.CalcSums("Amount (LCY)");
                         OpenBal := BankLedgerEntryII."Amount (LCY)";
                     end else begin
                         OpenBal := 0;
                     end;
-                    
+
                     LastBankAccNo := "Bank Account Ledger Entry"."Bank Account No.";
                 end;
 
@@ -95,7 +110,24 @@ Report 52185510 "Tellers Journal"
     requestpage
     {
         SaveValues = true;
-        layout { }
+        layout
+        {
+            area(content)
+            {
+                group(Options)
+                {
+                    Caption = 'Options';
+                    // NEW ADDITION: Allow Treasurers to filter by User ID
+                    field(TellerUserIDFilter; TellerUserIDFilter)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Filter by Teller (User ID)';
+                        TableRelation = "Banking User Template".UserID where(Type = const(Cashier));
+                        ToolTip = 'Select a Teller to view their specific journal. Leave blank to view all (or use Bank Account filter).';
+                    }
+                }
+            }
+        }
         actions { }
 
         trigger OnOpenPage()
@@ -139,4 +171,7 @@ Report 52185510 "Tellers Journal"
         ReportDebitAmt: Decimal;
         ReportCreditAmt: Decimal;
         ReportDescription: Text[150];
+
+        // NEW VARIABLE
+        TellerUserIDFilter: Code[50];
 }
