@@ -984,7 +984,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                             end;
                         end
                         else begin
-                            TotalRepay += Loan."Loan Principle Repayment" + (Loans.Interest / 12 / 100) * Loans."Outstanding Balance";
+                            TotalRepay += Loan."Loan Principle Repayment" + (Loan.Interest / 12 / 100) * Loan."Outstanding Balance";
                             TotalLoanBal += Loan."Total Balance";
                         end;
                     until Loan.Next = 0;
