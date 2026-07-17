@@ -979,13 +979,12 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                                 Message(Format(Loan."Loan No."));
                                 Message(format(LoanTopup."Total Top Up"));
                                 Message(Format(Loan."Total Balance"));
-                                TotalRepay += Loan."Loan Principle Repayment" + (Loans.Interest / 12 / 100) * Loans."Outstanding Balance";
-                                ;
+                                TotalRepay += Loan.Repayment;
                                 TotalLoanBal += Loan."Total Balance";
                             end;
                         end
                         else begin
-                            TotalRepay += Loan.Repayment;
+                            TotalRepay += Loan."Loan Principle Repayment" + (Loans.Interest / 12 / 100) * Loans."Outstanding Balance";
                             TotalLoanBal += Loan."Total Balance";
                         end;
                     until Loan.Next = 0;
