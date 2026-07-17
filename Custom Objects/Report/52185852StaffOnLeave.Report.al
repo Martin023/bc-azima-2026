@@ -36,15 +36,16 @@ Report 52185852 "Staff On Leave"
             column(ApplicationCode_HRLeaveApplication; "HR Leave Application"."Application Code")
             {
             }
-            column(CName; Company.Name)
-            {
-            }
-            column(CAdress; Company.Address)
-            {
-            }
-            column(CPicture; Company.Picture)
-            {
-            }
+            
+            // Expanded Company Information
+            column(CName; Company.Name) { }
+            column(CAdress; Company.Address) { }
+            column(CPicture; Company.Picture) { }
+            column(CPhone; Company."Phone No." + ' ' + Company."Phone No. 2") { }
+            column(CEmail; Company."E-Mail") { }
+            column(CCity; Company.City) { }
+            column(CPostCode; Company."Post Code") { }
+            
             column(LeaveType; LeaveType)
             {
             }
@@ -55,9 +56,10 @@ Report 52185852 "Staff On Leave"
 
                 if Today > "HR Leave Application"."End Date" then CurrReport.Skip;
 
-                HRLeaveTypes.Get("HR Leave Application"."Leave Type");
-                LeaveType := HRLeaveTypes.Description;
-                //MESSAGE(FORMAT("HR Leave Application"."Start Date")+'-----'+FORMAT("HR Leave Application"."End Date"));
+                if HRLeaveTypes.Get("HR Leave Application"."Leave Type") then
+                    LeaveType := HRLeaveTypes.Description
+                else
+                    LeaveType := "HR Leave Application"."Leave Type";
             end;
         }
     }
@@ -65,23 +67,14 @@ Report 52185852 "Staff On Leave"
     requestpage
     {
         SaveValues = true;
-
-        layout
-        {
-        }
-
-        actions
-        {
-        }
-    }
-
-    labels
-    {
+        layout { }
+        actions { }
     }
 
     trigger OnInitReport()
     begin
-        Company.Get();
+        if Company.Get() then
+            Company.CalcFields(Picture);
     end;
 
     var
