@@ -3979,6 +3979,8 @@ table 52185729 Loans
                         BusinesDepositsAcc.Reset;
                         BusinesDepositsAcc.SetRange("Member No.", GroupMembers."No.");
                         BusinesDepositsAcc.SetRange("Product Category", BusinesDepositsAcc."Product Category"::"Chama Investment Account");
+                        BusinesDepositsAcc.SetAutoCalcFields(BusinesDepositsAcc."Balance (LCY)");
+                        BusinesDepositsAcc.setfilter("Balance (LCY)", '>0');
                         if BusinesDepositsAcc.FindFirst() then begin
                             Guarantors.Reset;
                             Guarantors.SetRange("Loan No", Rec."Loan No.");
@@ -3995,7 +3997,6 @@ table 52185729 Loans
                                 Guarantors."Savings Account No./Member No." := BusinesDepositsAcc."No.";
                                 Guarantors."Guarantor Type" := Guarantors."Guarantor Type"::Guarantor;
                                 Guarantors.Insert;
-
                                 Guarantors.validate("Savings Account No./Member No.");
                             end;
                         end;
