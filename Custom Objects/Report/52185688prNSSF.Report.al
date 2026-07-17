@@ -5,7 +5,6 @@ Report 52185688 prNSSF
     Caption = 'NSSF Tier 1';
     RDLCLayout = './bc-azima-2026/Layout/prNSSF.rdl';
 
-
     dataset
     {
         dataitem("PR Period Transactions"; "PR Period Transactions")
@@ -71,6 +70,7 @@ Report 52185688 prNSSF
                 Tier1Cont := 0;
                 TotalCont := 0;
 
+                
                 "PR Period Transactions".SetRange("Payroll Period", SelectedPeriod);
 
                 Employees.Reset;
@@ -126,7 +126,7 @@ Report 52185688 prNSSF
     trigger OnPreReport()
     begin
         if SelectedPeriod = 0D then Error('You must specify the period filter');
-
+        "PR Period Transactions".SetRange("Payroll Period", SelectedPeriod);
         objPeriod.Reset;
         objPeriod.SetRange(objPeriod."Date Opened", SelectedPeriod);
         if objPeriod.Find('-') then begin

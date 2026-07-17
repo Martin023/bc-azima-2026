@@ -790,72 +790,72 @@ page 52186732 "SMS Alerts Header Card"
         IF NoticeType = NoticeType::"2nd Notice" then begin
             if AlertLoanLines."Installments FallOff" >= 2 then begin
                 ReceipientsName := LoaneeFirstName;
-                IF (Rec."Send SMS") or (Rec."Send Email") then begin
-                    if Rec."Send SMS" then begin
-                        sms := StrSubstNo(Notices.Get('LoaneeSMSSecondNotice'), ReceipientsName, LoanDescription, AmountInArrears, TotalBal,
+                // IF (Rec."Send SMS") or (Rec."Send Email") then begin
+                if Rec."Send SMS" then begin
+                    sms := StrSubstNo(Notices.Get('LoaneeSMSSecondNotice'), ReceipientsName, LoanDescription, AmountInArrears, TotalBal,
+                                    LoaneeFirstName, LoaneeMemberNumber, MonthlRepayment, LastRepaymentDate, LoaneeLoanNo,
+                                    OutBal, OutInt, AmountInArrears, Loans."Disbursement Date", Prorata);
+
+                    Rec.InsertNoticeLines(Rec."No.", Loans."Loan No.", sms, PhoneNumber, Email, '', Loans."Member No.",
+                                                                SMSLines."Notice Type"::SMS, DaysInArreas, Receipient::Lonee, NoticeCategory::"Second Notice");
+                end;
+
+                if Rec."Create Letters" then begin
+                    Rec.InsertNoticeLines(Rec."No.", Loans."Loan No.", 'Defaulter Letter, Second Notice', PhoneNumber, Email, '', Loans."Member No.",
+                                                                SMSLines."Notice Type"::Letter, DaysInArreas, Receipient::Lonee, NoticeCategory::"Second Notice");
+                end;
+
+                if Rec."Send Email" then begin
+                    sms := StrSubstNo(Notices.Get('LoaneeEmailSecondNotice'), ReceipientsName, LoanDescription, AmountInArrears, TotalBal,
+                                    LoaneeFirstName, LoaneeMemberNumber, MonthlRepayment, LastRepaymentDate, LoaneeLoanNo,
+                                    OutBal, OutInt, AmountInArrears, Loans."Disbursement Date", Prorata);
+                    Rec.InsertNoticeLines(Rec."No.", Loans."Loan No.", sms, PhoneNumber, Email, '', Loans."Member No.",
+                                                                SMSLines."Notice Type"::Email, DaysInArreas, Receipient::Lonee, NoticeCategory::"Second Notice");
+                end;
+                LoanGuarantors.Reset();
+                LoanGuarantors.SetRange(Substituted, false);
+                LoanGuarantors.SetRange("Guarantor Type", LoanGuarantors."Guarantor Type"::Guarantor);
+                LoanGuarantors.SetRange("Loan No", Loans."Loan No.");
+                LoanGuarantors.SetRange("Self Guarantee", false);
+                if LoanGuarantors.Find('-') then begin
+                    repeat
+                        if SavingsAccounts.Get(LoanGuarantors."Savings Account No./Member No.") then begin
+                            if Members.Get(SavingsAccounts."Member No.") then begin
+                                if Members.Status <> Members.Status::Deceased then begin
+                                    ReceipientsName := '';
+                                    PhoneNumber := '';
+                                    PhoneNumber := Members."Phone No.";
+                                    if StrPos(SavingsAccounts.Name, ' ') > 0 then
+                                        ReceipientsName := CopyStr(SavingsAccounts.Name, 1, StrPos(SavingsAccounts.Name, ' ') - 1)
+                                    else
+                                        ReceipientsName := SavingsAccounts.Name + ' ';
+
+                                    if Rec."Send SMS" then begin
+                                        sms := StrSubstNo(Notices.Get('GuarantorSMSSecondNotice'), ReceipientsName, LoanDescription, AmountInArrears, TotalBal,
                                         LoaneeFirstName, LoaneeMemberNumber, MonthlRepayment, LastRepaymentDate, LoaneeLoanNo,
                                         OutBal, OutInt, AmountInArrears, Loans."Disbursement Date", Prorata);
+                                        Rec.InsertNoticeLines(Rec."No.", Loans."Loan No.", sms, PhoneNumber, Email, '', Members."No.",
+                                                                        SMSLines."Notice Type"::SMS, DaysInArreas, Receipient::Guarantor, NoticeCategory::"Second Notice");
+                                    end;
 
-                        Rec.InsertNoticeLines(Rec."No.", Loans."Loan No.", sms, PhoneNumber, Email, '', Loans."Member No.",
-                                                                    SMSLines."Notice Type"::SMS, DaysInArreas, Receipient::Lonee, NoticeCategory::"Second Notice");
-                    end;
+                                    if Rec."Create Letters" then begin
+                                        Rec.InsertNoticeLines(Rec."No.", Loans."Loan No.", 'Guarantor Letter, Second Notice', PhoneNumber, Email, '', Members."No.",
+                                                                        SMSLines."Notice Type"::Letter, DaysInArreas, Receipient::Guarantor, NoticeCategory::"Second Notice");
+                                    end;
 
-                    if Rec."Create Letters" then begin
-                        Rec.InsertNoticeLines(Rec."No.", Loans."Loan No.", 'Defaulter Letter, Second Notice', PhoneNumber, Email, '', Loans."Member No.",
-                                                                    SMSLines."Notice Type"::Letter, DaysInArreas, Receipient::Lonee, NoticeCategory::"Second Notice");
-                    end;
-
-                    if Rec."Send Email" then begin
-                        sms := StrSubstNo(Notices.Get('LoaneeEmailSecondNotice'), ReceipientsName, LoanDescription, AmountInArrears, TotalBal,
+                                    if Rec."Send Email" then begin
+                                        sms := StrSubstNo(Notices.Get('GuarantorEmailSecondNotice'), ReceipientsName, LoanDescription, AmountInArrears, TotalBal,
                                         LoaneeFirstName, LoaneeMemberNumber, MonthlRepayment, LastRepaymentDate, LoaneeLoanNo,
                                         OutBal, OutInt, AmountInArrears, Loans."Disbursement Date", Prorata);
-                        Rec.InsertNoticeLines(Rec."No.", Loans."Loan No.", sms, PhoneNumber, Email, '', Loans."Member No.",
-                                                                    SMSLines."Notice Type"::Email, DaysInArreas, Receipient::Lonee, NoticeCategory::"Second Notice");
-                    end;
-                    LoanGuarantors.Reset();
-                    LoanGuarantors.SetRange(Substituted, false);
-                    LoanGuarantors.SetRange("Guarantor Type", LoanGuarantors."Guarantor Type"::Guarantor);
-                    LoanGuarantors.SetRange("Loan No", Loans."Loan No.");
-                    LoanGuarantors.SetRange("Self Guarantee", false);
-                    if LoanGuarantors.Find('-') then begin
-                        repeat
-                            if SavingsAccounts.Get(LoanGuarantors."Savings Account No./Member No.") then begin
-                                if Members.Get(SavingsAccounts."Member No.") then begin
-                                    if Members.Status <> Members.Status::Deceased then begin
-                                        ReceipientsName := '';
-                                        PhoneNumber := '';
-                                        PhoneNumber := Members."Phone No.";
-                                        if StrPos(SavingsAccounts.Name, ' ') > 0 then
-                                            ReceipientsName := CopyStr(SavingsAccounts.Name, 1, StrPos(SavingsAccounts.Name, ' ') - 1)
-                                        else
-                                            ReceipientsName := SavingsAccounts.Name + ' ';
-
-                                        if Rec."Send SMS" then begin
-                                            sms := StrSubstNo(Notices.Get('GuarantorSMSSecondNotice'), ReceipientsName, LoanDescription, AmountInArrears, TotalBal,
-                                            LoaneeFirstName, LoaneeMemberNumber, MonthlRepayment, LastRepaymentDate, LoaneeLoanNo,
-                                            OutBal, OutInt, AmountInArrears, Loans."Disbursement Date", Prorata);
-                                            Rec.InsertNoticeLines(Rec."No.", Loans."Loan No.", sms, PhoneNumber, Email, '', Members."No.",
-                                                                            SMSLines."Notice Type"::SMS, DaysInArreas, Receipient::Guarantor, NoticeCategory::"Second Notice");
-                                        end;
-
-                                        if Rec."Create Letters" then begin
-                                            Rec.InsertNoticeLines(Rec."No.", Loans."Loan No.", 'Guarantor Letter, Second Notice', PhoneNumber, Email, '', Members."No.",
-                                                                            SMSLines."Notice Type"::Letter, DaysInArreas, Receipient::Guarantor, NoticeCategory::"Second Notice");
-                                        end;
-
-                                        if Rec."Send Email" then begin
-                                            sms := StrSubstNo(Notices.Get('GuarantorEmailSecondNotice'), ReceipientsName, LoanDescription, AmountInArrears, TotalBal,
-                                            LoaneeFirstName, LoaneeMemberNumber, MonthlRepayment, LastRepaymentDate, LoaneeLoanNo,
-                                            OutBal, OutInt, AmountInArrears, Loans."Disbursement Date", Prorata);
-                                            Rec.InsertNoticeLines(Rec."No.", Loans."Loan No.", sms, PhoneNumber, Email, '', Members."No.",
-                                                                            SMSLines."Notice Type"::Email, DaysInArreas, Receipient::Guarantor, NoticeCategory::"Second Notice");
-                                        end;
+                                        Rec.InsertNoticeLines(Rec."No.", Loans."Loan No.", sms, PhoneNumber, Email, '', Members."No.",
+                                                                        SMSLines."Notice Type"::Email, DaysInArreas, Receipient::Guarantor, NoticeCategory::"Second Notice");
                                     end;
                                 end;
                             end;
-                        until LoanGuarantors.Next() = 0;
-                    end;
+                        end;
+                    until LoanGuarantors.Next() = 0;
                 end;
+                // end;
             end;
         end;
 
@@ -1360,6 +1360,9 @@ page 52186732 "SMS Alerts Header Card"
         FilePath: Text;
         AlertsLines: Record "SMS Alerts Lines";
         AlertsLine: Record "SMS Alerts Lines";
+        OutStr: OutStream;
+        PdfMimeType: Text[30];
+        InStreamVar: InStream;
     begin
         // Zip.CreateZipArchive();
         Clear(AlertsLines);
@@ -1368,26 +1371,22 @@ page 52186732 "SMS Alerts Header Card"
         AlertsLines.SetRange("Notice Type", AlertsLines."Notice Type"::Letter);
         //AlertsLines.SetRange("Notice Category", AlertsLines."Notice Category"::"First Notice");
         if AlertsLines.Find('-') then begin
-            // repeat
-            //     LoanNo := AlertsLines."Loan No";
-            //     //##############3
-            //     TempBlob.CreateOutStream(OutStr);
-            //     Report.SaveAs(
-            //         Report::"Appraisal Loan Report",
-            //         '',
-            //         ReportFormat::Pdf,
-            //         OutStr,
-            //         recRef);
-            //     FileName := LoanNo + ' Appraisal_Report_' + '.pdf';
-            //     // download the report
-            //     PdfMimeType := 'application/pdf';
-            //     TempBlob.CreateInStream(InStreamVar);
-            //     DownloadFromStream(InStreamVar, '', '', FileName, FileName);
-            //         // ##############################33
+            repeat
+                LoanNo := AlertsLines."Loan No";
+                TempBlob.CreateOutStream(OutStr);
+                Report.SaveAs(
+                    Report::"Guarantor Notice",
+                    '',
+                    ReportFormat::Pdf,
+                    OutStr,
+                    recRef);
+                FileName := AlertsLines."Member No" + '_' + Format(AlertsLines.Recepient) + '_' + Format(AlertsLines."Notice Category") + '.pdf';
 
-            //     end;
-            // // end;
-            // until AlertsLines.Next() = 0;
+                // download the report
+                PdfMimeType := 'application/pdf';
+                TempBlob.CreateInStream(InStreamVar);
+                DownloadFromStream(InStreamVar, '', '', FileName, FileName);
+            until AlertsLines.Next() = 0;
         end;
     end;
 
