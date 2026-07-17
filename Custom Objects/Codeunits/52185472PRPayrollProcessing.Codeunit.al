@@ -1874,7 +1874,7 @@ Codeunit 52185472 "PR Payroll Processing"
         prNewPayrollPeriods.Init;
         prNewPayrollPeriods."Period Month" := intMonth + 1;
         prNewPayrollPeriods."Period Year" := intNewYear;
-        prNewPayrollPeriods."Period Name" := Format(dtNewPeriod, 0, '<Month Text>') + '' + Format(intNewYear);
+        prNewPayrollPeriods."Period Name" := Format(dtNewPeriod, 0, '<Month Text>') + ' ' + Format(intNewYear);
         prNewPayrollPeriods."Date Opened" := dtNewPeriod;
         prNewPayrollPeriods."Opened By" := UserId;
         prNewPayrollPeriods.Closed := false;

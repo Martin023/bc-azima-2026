@@ -146,23 +146,23 @@ page 52185659 "PR Salary List (ALL)"
                         if HREmployeePR.Find('-') then begin
                             ProgressWindow.Open('Processing Salary #1#################################################################');
                             repeat
-                                Members.Reset();
-                                Members.SetRange("NO.", HREmployeePR."Member No.");
-                                if Members.Find('-') then begin
-                                    if (Members.Status = Members.Status::Withdrawn) or (Members.Blocked = Members.Blocked::All) then
-                                        error('The Staff Number %1 %2 has withdrawn from the SACCO. The Member Personal Accounts cannot transact.', HREmployeePR."No.", Members."First Name")
-                                    else begin
-                                        ProgressWindow.Update(1, HREmployeePR."No." + ':' + HREmployeePR."Full Name");
-                                        if PRSalaryCard.Get(HREmployeePR."No.") then begin
-                                            ProcessPayroll.fnProcesspayroll(HREmployeePR."No.", HREmployeePR."Date Of Join"
-                                            , PRSalaryCard."Basic Pay", PRSalaryCard."Pays PAYE", PRSalaryCard."Pays NSSF", PRSalaryCard."Pays NHIF"
-                                            , SelectedPeriod, SelectedPeriod, '', '', HREmployeePR."Date Of Leaving", true,
-                                            HREmployeePR."Department Code", PRSalaryCard."Insurance Certificate?", PRSalaryCard."Pays New NSSF (%)");
-                                        end else begin
-                                            //ERROR('Employee not found in PR Salary Card table, please capture Basic PY information');
-                                        end;
-                                    end;
+                                // Members.Reset();
+                                // Members.SetRange("NO.", HREmployeePR."Member No.");
+                                // if Members.Find('-') then begin
+                                //     if (Members.Status = Members.Status::Withdrawn) or (Members.Blocked = Members.Blocked::All) then
+                                //         error('The Staff Number %1 %2 has withdrawn from the SACCO. The Member Personal Accounts cannot transact.', HREmployeePR."No.", Members."First Name")
+                                //     else begin
+                                ProgressWindow.Update(1, HREmployeePR."No." + ':' + HREmployeePR."Full Name");
+                                if PRSalaryCard.Get(HREmployeePR."No.") then begin
+                                    ProcessPayroll.fnProcesspayroll(HREmployeePR."No.", HREmployeePR."Date Of Join"
+                                    , PRSalaryCard."Basic Pay", PRSalaryCard."Pays PAYE", PRSalaryCard."Pays NSSF", PRSalaryCard."Pays NHIF"
+                                    , SelectedPeriod, SelectedPeriod, '', '', HREmployeePR."Date Of Leaving", true,
+                                    HREmployeePR."Department Code", PRSalaryCard."Insurance Certificate?", PRSalaryCard."Pays New NSSF (%)");
+                                end else begin
+                                    //ERROR('Employee not found in PR Salary Card table, please capture Basic PY information');
                                 end;
+                            //     end;
+                            // end;
                             until HREmployeePR.Next = 0;
                             ProgressWindow.Close;
                         end;
@@ -234,23 +234,23 @@ page 52185659 "PR Salary List (ALL)"
                         if HREmployeePR.Find('-') then begin
                             ProgressWindow.Open('Processing Salary #1#################################################################');
                             repeat
-                                Members.Reset();
-                                Members.SetRange("NO.", HREmployeePR."Member No.");
-                                if Members.Find('-') then begin
-                                    if (Members.Status = Members.Status::Withdrawn) or (Members.Blocked = Members.Blocked::All) then
-                                        error('The staff member %1 %2 has withdrawn from the SACCO. The Member Personal Accounts cannot transact.', HREmployeePR."No.", HREmployeePR."First Name")
-                                    else begin
-                                        ProgressWindow.Update(1, HREmployeePR."No." + ':' + HREmployeePR."Full Name");
-                                        if PRSalaryCard.Get(HREmployeePR."No.") then begin
-                                            ProcessPayroll.fnProcesspayroll(HREmployeePR."No.", HREmployeePR."Date Of Join"
-                                             , PRSalaryCard."Basic Pay", PRSalaryCard."Pays PAYE", PRSalaryCard."Pays NSSF", PRSalaryCard."Pays NHIF"
-                                             , SelectedPeriod, SelectedPeriod, '', '', HREmployeePR."Date Of Leaving", true,
-                                             HREmployeePR."Department Code", PRSalaryCard."Insurance Certificate?", PRSalaryCard."Pays New NSSF (%)");
-                                        end else begin
-                                            //ERROR('Employee not found in PR Salary Card table, please capture Basic PY information');
-                                        end;
-                                    end;
+                                // Members.Reset();
+                                // Members.SetRange("NO.", HREmployeePR."Member No.");
+                                // if Members.Find('-') then begin
+                                //     if (Members.Status = Members.Status::Withdrawn) or (Members.Blocked = Members.Blocked::All) then
+                                //         error('The staff member %1 %2 has withdrawn from the SACCO. The Member Personal Accounts cannot transact.', HREmployeePR."No.", HREmployeePR."First Name")
+                                //     else begin
+                                ProgressWindow.Update(1, HREmployeePR."No." + ':' + HREmployeePR."Full Name");
+                                if PRSalaryCard.Get(HREmployeePR."No.") then begin
+                                    ProcessPayroll.fnProcesspayroll(HREmployeePR."No.", HREmployeePR."Date Of Join"
+                                     , PRSalaryCard."Basic Pay", PRSalaryCard."Pays PAYE", PRSalaryCard."Pays NSSF", PRSalaryCard."Pays NHIF"
+                                     , SelectedPeriod, SelectedPeriod, '', '', HREmployeePR."Date Of Leaving", true,
+                                     HREmployeePR."Department Code", PRSalaryCard."Insurance Certificate?", PRSalaryCard."Pays New NSSF (%)");
+                                end else begin
+                                    //ERROR('Employee not found in PR Salary Card table, please capture Basic PY information');
                                 end;
+                            //end;
+                            // end;
                             until HREmployeePR.Next = 0;
                             ProgressWindow.Close;
                         end;
