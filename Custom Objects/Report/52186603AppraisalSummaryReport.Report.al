@@ -1,7 +1,7 @@
 report 52186603 "Appraisal Summary Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-azima-2026/Layout\AppraisalSummaryReport.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/AppraisalSummaryReport.rdl';
     Caption = 'Appraisal Summary Report';
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;
@@ -11,68 +11,54 @@ report 52186603 "Appraisal Summary Report"
         dataitem("HR Individual Targets Header"; "HR Individual Targets Header")
         {
             RequestFilterFields = "Appraisal Year", "Appraisal Cycle Stage", Status, "Responsibility Center", "Supervisor ID";
-            column(CompanyInfo_Name; CompanyInfo.Name)
+            
+            // Professional Company Info Layout additions
+            column(CompanyInfo_Name; CompanyInfo.Name) { }
+            column(CompanyInfo_Address; CompanyInfo.Address) { }
+            column(CompanyInfo_Picture; CompanyInfo.Picture) { }
+            column(CompanyInfo_City; CompanyInfo.City) { }
+            column(CompanyInfo_PostCode; CompanyInfo."Post Code") { }
+            column(CompanyInfo_Phone; CompanyInfo."Phone No." + ' ' + CompanyInfo."Phone No. 2") { }
+            column(CompanyInfo_Email; CompanyInfo."E-Mail") { }
+
+            // Filters
+            column(Filter_Appraisal_Year; FilterAppraisalYear) { }
+            column(Filter_Cycle_Stage; FilterCycleStage) { }
+            column(Filter_Status; FilterStatus) { }
+
+            // Header fields
+            column(Appraisal_No; "Appraisal No") { }
+            column(Employee_No; "Employee No") { }
+            column(Employee_Name; "Employee Name") { }
+            column(Appraisal_Year; "Appraisal Year") { }
+            column(Appraisal_Cycle_Stage; "Appraisal Cycle Stage") { }
+            column(Status; Status) { }
+            column(Responsibility_Center; "Responsibility Center") { }
+            column(Supervisor_Name; "Supervisor Name") { }
+            
+            // Score Summary
+            column(Total_Targeted_Score; "Total Targeted Score") { }
+            column(Total_Achieved_Score; "Total Achieved Score") { }
+            column(Total_Agreed_Rating; "Total Agreed Rating") { }
+            column(Achievement_Percentage; AchievementPercentage) { }
+            column(Appraisee_Submitted; "Appraisee Submitted") { }
+            column(Has_Disagreements; "Has Disagreements") { }
+            column(Unresolved_Discussions; "Unresolved Discussions") { }
+
+            // Detailed Appraisal Lines for Comments & Individual Scores
+            dataitem("HR Individual Target Line"; "HR Individual Target Line")
             {
-            }
-            column(CompanyInfo_Address; CompanyInfo.Address)
-            {
-            }
-            column(CompanyInfo_Picture; CompanyInfo.Picture)
-            {
-            }
-            column(Filter_Appraisal_Year; FilterAppraisalYear)
-            {
-            }
-            column(Filter_Cycle_Stage; FilterCycleStage)
-            {
-            }
-            column(Filter_Status; FilterStatus)
-            {
-            }
-            column(Appraisal_No; "Appraisal No")
-            {
-            }
-            column(Employee_No; "Employee No")
-            {
-            }
-            column(Employee_Name; "Employee Name")
-            {
-            }
-            column(Appraisal_Year; "Appraisal Year")
-            {
-            }
-            column(Appraisal_Cycle_Stage; "Appraisal Cycle Stage")
-            {
-            }
-            column(Status; Status)
-            {
-            }
-            column(Responsibility_Center; "Responsibility Center")
-            {
-            }
-            column(Supervisor_Name; "Supervisor Name")
-            {
-            }
-            column(Total_Targeted_Score; "Total Targeted Score")
-            {
-            }
-            column(Total_Achieved_Score; "Total Achieved Score")
-            {
-            }
-            column(Total_Agreed_Rating; "Total Agreed Rating")
-            {
-            }
-            column(Achievement_Percentage; AchievementPercentage)
-            {
-            }
-            column(Appraisee_Submitted; "Appraisee Submitted")
-            {
-            }
-            column(Has_Disagreements; "Has Disagreements")
-            {
-            }
-            column(Unresolved_Discussions; "Unresolved Discussions")
-            {
+                DataItemLink = "Appraisal No" = FIELD("Appraisal No");
+                
+                column(Line_No; "Line No") { }
+                column(Perspective_Code; "Perspective Code") { }
+                column(Perspective_Description; "Perspective Description") { }
+                column(Objective; Objective) { }
+                column(Line_Targeted_Score; "Targeted Score") { }
+                column(Line_Achieved_Score; "Achieved Score") { }
+                column(Agreed_Rating; "Agreed Rating") { }
+                column(Appraisee_Comments; "Appraisee Comments") { }
+                column(Appraiser_Comments; "Appraiser Comments") { }
             }
 
             trigger OnAfterGetRecord()

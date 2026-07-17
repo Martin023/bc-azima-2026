@@ -49,13 +49,13 @@ Report 52187368 "Treasury Report"
                         BankLedgerEntryII.Reset();
                         BankLedgerEntryII.SetRange("Bank Account No.", "Bank Account Ledger Entry"."Bank Account No.");
                         BankLedgerEntryII.SetFilter("Posting Date", '<%1', "Bank Account Ledger Entry".GetRangeMin("Posting Date"));
-                        
+
                         BankLedgerEntryII.CalcSums("Amount (LCY)");
                         OpenBal := BankLedgerEntryII."Amount (LCY)";
                     end else begin
-                        OpenBal := 0; 
+                        OpenBal := 0;
                     end;
-                    
+
                     LastBankAccNo := "Bank Account Ledger Entry"."Bank Account No.";
                 end;
 
@@ -77,14 +77,11 @@ Report 52187368 "Treasury Report"
                 if ReportCreditAmt < 0 then begin
                     ReportDebitAmt := Abs(ReportCreditAmt);
                     ReportCreditAmt := 0;
-                    if StrPos(ReportDescription, 'Reversed - ') = 0 then
-                        ReportDescription := 'Reversed - ' + ReportDescription;
                 end else if ReportDebitAmt < 0 then begin
                     ReportCreditAmt := Abs(ReportDebitAmt);
                     ReportDebitAmt := 0;
-                    if StrPos(ReportDescription, 'Reversed - ') = 0 then
-                        ReportDescription := 'Reversed - ' + ReportDescription;
-                end else if "Bank Account Ledger Entry".Reversed then begin
+                end;
+                if "Bank Account Ledger Entry".Reversed and ("Bank Account Ledger Entry"."Reversed Entry No." <> 0) then begin
                     if StrPos(ReportDescription, 'Reversed - ') = 0 then
                         ReportDescription := 'Reversed - ' + ReportDescription;
                 end;

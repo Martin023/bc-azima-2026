@@ -8,98 +8,14 @@
         <ConnectString />
       </ConnectionProperties>
       <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>d26b0fc1-98c5-4a83-aae1-c40dbc5e6546</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <ReportSections>
     <ReportSection>
       <Body>
         <ReportItems>
-          <Textbox Name="ReportTitle">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>APPRAISAL SUMMARY REPORT</Value>
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontSize>14pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <Height>0.6cm</Height>
-            <Width>19cm</Width>
-            <Top>3.5cm</Top>
-            <Style>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Image Name="CompanyLogo">
-            <Source>Database</Source>
-            <Value>=Fields!CompanyInfo_Picture.Value</Value>
-            <MIMEType>image/bmp</MIMEType>
-            <Sizing>FitProportional</Sizing>
-            <Top>0.3cm</Top>
-            <Left>0.3cm</Left>
-            <Height>2cm</Height>
-            <Width>2cm</Width>
-          </Image>
-          <Textbox Name="CompanyName">
-            <CanGrow>true</CanGrow>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=Fields!CompanyInfo_Name.Value</Value>
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontSize>12pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <Top>0.5cm</Top>
-            <Left>4cm</Left>
-            <Height>0.6cm</Height>
-            <Width>15cm</Width>
-          </Textbox>
-          <Textbox Name="CompanyAddress">
-            <CanGrow>true</CanGrow>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=Fields!CompanyInfo_Address.Value</Value>
-                    <Style>
-                      <FontFamily>Times New Roman</FontFamily>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <Top>1.2cm</Top>
-            <Left>4cm</Left>
-            <Height>0.5cm</Height>
-            <Width>15cm</Width>
-          </Textbox>
-          <Tablix Name="AppraisalSummaryTable">
+          <Tablix Name="MasterList">
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
@@ -108,180 +24,91 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>1cm</Height>
+                  <Height>3.5cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Rectangle Name="EmployeeDetailsRect">
+                        <Rectangle Name="ListRectangle">
                           <ReportItems>
-                            <Textbox Name="EmployeeName">
-                              <CanGrow>true</CanGrow>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>=Fields!Employee_Name.Value</Value>
-                                      <Style>
-                                        <FontFamily>Times New Roman</FontFamily>
-                                        <FontSize>11pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>0cm</Top>
-                              <Left>0cm</Left>
-                              <Height>0.6cm</Height>
-                              <Width>9cm</Width>
+                            <Rectangle Name="DocHeaderRect">
+                              <ReportItems>
+                                <Textbox Name="EmployeeInfo">
+                                  <CanGrow>true</CanGrow>
+                                  <Paragraphs>
+                                    <Paragraph>
+                                      <TextRuns>
+                                        <TextRun>
+                                          <Value>="Appraisal No: " &amp; Fields!Appraisal_No.Value &amp; vbCrLf &amp; "Employee: " &amp; Fields!Employee_Name.Value &amp; " (" &amp; Fields!Employee_No.Value &amp; ")" &amp; vbCrLf &amp; "Department: " &amp; Fields!Responsibility_Center.Value</Value>
+                                          <Style>
+                                            <FontFamily>Segoe UI</FontFamily>
+                                            <FontSize>9pt</FontSize>
+                                            <FontWeight>Bold</FontWeight>
+                                          </Style>
+                                        </TextRun>
+                                      </TextRuns>
+                                      <Style />
+                                    </Paragraph>
+                                  </Paragraphs>
+                                  <Top>0.2cm</Top>
+                                  <Left>0.2cm</Left>
+                                  <Height>1.5cm</Height>
+                                  <Width>8.5cm</Width>
+                                  <Style />
+                                </Textbox>
+                                <Textbox Name="StatusAndScoresInfo">
+                                  <CanGrow>true</CanGrow>
+                                  <Paragraphs>
+                                    <Paragraph>
+                                      <TextRuns>
+                                        <TextRun>
+                                          <Value>="Year: " &amp; Fields!Appraisal_Year.Value &amp; " | Status: " &amp; Fields!Status.Value &amp; vbCrLf &amp; "Supervisor: " &amp; Fields!Supervisor_Name.Value &amp; vbCrLf &amp; "Target Score: " &amp; Fields!Total_Targeted_Score.Value &amp; " | Achieved: " &amp; Fields!Total_Achieved_Score.Value &amp; " (" &amp; Fields!Achievement_Percentage.Value &amp; "%)"</Value>
+                                          <Style>
+                                            <FontFamily>Segoe UI</FontFamily>
+                                            <FontSize>9pt</FontSize>
+                                          </Style>
+                                        </TextRun>
+                                      </TextRuns>
+                                      <Style />
+                                    </Paragraph>
+                                  </Paragraphs>
+                                  <Top>0.2cm</Top>
+                                  <Left>9cm</Left>
+                                  <Height>1.5cm</Height>
+                                  <Width>9.8cm</Width>
+                                  <ZIndex>1</ZIndex>
+                                  <Style />
+                                </Textbox>
+                              </ReportItems>
+                              <Height>1.8cm</Height>
+                              <Width>19cm</Width>
                               <Style>
-                                <PaddingLeft>2pt</PaddingLeft>
-                                <PaddingRight>2pt</PaddingRight>
-                                <PaddingTop>2pt</PaddingTop>
-                                <PaddingBottom>2pt</PaddingBottom>
+                                <Border>
+                                  <Color>LightGrey</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f9f9f9</BackgroundColor>
                               </Style>
-                            </Textbox>
-                            <Textbox Name="EmployeeNo">
-                              <CanGrow>true</CanGrow>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>="Employee No: " &amp; Fields!Employee_No.Value</Value>
-                                      <Style>
-                                        <FontFamily>Times New Roman</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>0cm</Top>
-                              <Left>9.5cm</Left>
-                              <Height>0.5cm</Height>
-                              <Width>9.5cm</Width>
-                              <Style>
-                                <PaddingLeft>2pt</PaddingLeft>
-                                <PaddingRight>2pt</PaddingRight>
-                                <PaddingTop>2pt</PaddingTop>
-                                <PaddingBottom>2pt</PaddingBottom>
-                              </Style>
-                            </Textbox>
-                            <Textbox Name="Department">
-                              <CanGrow>true</CanGrow>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>="Department: " &amp; Fields!Responsibility_Center.Value</Value>
-                                      <Style>
-                                        <FontFamily>Times New Roman</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>0.6cm</Top>
-                              <Left>0cm</Left>
-                              <Height>0.5cm</Height>
-                              <Width>9cm</Width>
-                              <Style>
-                                <PaddingLeft>2pt</PaddingLeft>
-                                <PaddingRight>2pt</PaddingRight>
-                                <PaddingTop>2pt</PaddingTop>
-                                <PaddingBottom>2pt</PaddingBottom>
-                              </Style>
-                            </Textbox>
-                            <Textbox Name="Supervisor">
-                              <CanGrow>true</CanGrow>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>="Supervisor: " &amp; Fields!Supervisor_Name.Value</Value>
-                                      <Style>
-                                        <FontFamily>Times New Roman</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>0.6cm</Top>
-                              <Left>9.5cm</Left>
-                              <Height>0.5cm</Height>
-                              <Width>9.5cm</Width>
-                              <Style>
-                                <PaddingLeft>2pt</PaddingLeft>
-                                <PaddingRight>2pt</PaddingRight>
-                                <PaddingTop>2pt</PaddingTop>
-                                <PaddingBottom>2pt</PaddingBottom>
-                              </Style>
-                            </Textbox>
-                            <Textbox Name="AppraisalYear">
-                              <CanGrow>true</CanGrow>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>="Year: " &amp; Fields!Appraisal_Year.Value &amp; " | Cycle: " &amp; Fields!Appraisal_Cycle_Stage.Value</Value>
-                                      <Style>
-                                        <FontFamily>Times New Roman</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>1.2cm</Top>
-                              <Left>0cm</Left>
-                              <Height>0.5cm</Height>
-                              <Width>9cm</Width>
-                              <Style>
-                                <PaddingLeft>2pt</PaddingLeft>
-                                <PaddingRight>2pt</PaddingRight>
-                                <PaddingTop>2pt</PaddingTop>
-                                <PaddingBottom>2pt</PaddingBottom>
-                              </Style>
-                            </Textbox>
-                            <Textbox Name="Status">
-                              <CanGrow>true</CanGrow>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>="Status: " &amp; Fields!Status.Value</Value>
-                                      <Style>
-                                        <FontFamily>Times New Roman</FontFamily>
-                                        <FontSize>9pt</FontSize>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Top>1.2cm</Top>
-                              <Left>9.5cm</Left>
-                              <Height>0.5cm</Height>
-                              <Width>9.5cm</Width>
-                              <Style>
-                                <PaddingLeft>2pt</PaddingLeft>
-                                <PaddingRight>2pt</PaddingRight>
-                                <PaddingTop>2pt</PaddingTop>
-                                <PaddingBottom>2pt</PaddingBottom>
-                              </Style>
-                            </Textbox>
-                            <Tablix Name="ScoresTable">
+                            </Rectangle>
+                            <Tablix Name="DetailsTablix">
                               <TablixBody>
                                 <TablixColumns>
                                   <TablixColumn>
-                                    <Width>6.33cm</Width>
+                                    <Width>3.5cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>6.33cm</Width>
+                                    <Width>3.5cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>6.34cm</Width>
+                                    <Width>1.5cm</Width>
+                                  </TablixColumn>
+                                  <TablixColumn>
+                                    <Width>1.5cm</Width>
+                                  </TablixColumn>
+                                  <TablixColumn>
+                                    <Width>4.5cm</Width>
+                                  </TablixColumn>
+                                  <TablixColumn>
+                                    <Width>4.5cm</Width>
                                   </TablixColumn>
                                 </TablixColumns>
                                 <TablixRows>
@@ -290,27 +117,27 @@
                                     <TablixCells>
                                       <TablixCell>
                                         <CellContents>
-                                          <Textbox Name="HeaderTargetScore">
-                                            <CanGrow>true</CanGrow>
+                                          <Textbox Name="HeaderPerspective">
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>Target Score</Value>
+                                                    <Value>Perspective</Value>
                                                     <Style>
-                                                      <FontFamily>Times New Roman</FontFamily>
-                                                      <FontSize>9pt</FontSize>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
                                                       <FontWeight>Bold</FontWeight>
                                                       <Color>White</Color>
                                                     </Style>
                                                   </TextRun>
                                                 </TextRuns>
+                                                <Style />
                                               </Paragraph>
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Style>Solid</Style>
                                                 <Color>LightGrey</Color>
+                                                <Style>Solid</Style>
                                               </Border>
                                               <BackgroundColor>#8dc541</BackgroundColor>
                                               <PaddingLeft>2pt</PaddingLeft>
@@ -323,27 +150,27 @@
                                       </TablixCell>
                                       <TablixCell>
                                         <CellContents>
-                                          <Textbox Name="HeaderAchievedScore">
-                                            <CanGrow>true</CanGrow>
+                                          <Textbox Name="HeaderObjective">
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>Achieved Score</Value>
+                                                    <Value>Objective</Value>
                                                     <Style>
-                                                      <FontFamily>Times New Roman</FontFamily>
-                                                      <FontSize>9pt</FontSize>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
                                                       <FontWeight>Bold</FontWeight>
                                                       <Color>White</Color>
                                                     </Style>
                                                   </TextRun>
                                                 </TextRuns>
+                                                <Style />
                                               </Paragraph>
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Style>Solid</Style>
                                                 <Color>LightGrey</Color>
+                                                <Style>Solid</Style>
                                               </Border>
                                               <BackgroundColor>#8dc541</BackgroundColor>
                                               <PaddingLeft>2pt</PaddingLeft>
@@ -356,33 +183,120 @@
                                       </TablixCell>
                                       <TablixCell>
                                         <CellContents>
-                                          <Textbox Name="HeaderPercentage">
-                                            <CanGrow>true</CanGrow>
+                                          <Textbox Name="HeaderTarget">
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>Achievement %</Value>
+                                                    <Value>Target</Value>
                                                     <Style>
-                                                      <FontFamily>Times New Roman</FontFamily>
-                                                      <FontSize>9pt</FontSize>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
                                                       <FontWeight>Bold</FontWeight>
                                                       <Color>White</Color>
                                                     </Style>
                                                   </TextRun>
                                                 </TextRuns>
+                                                <Style />
                                               </Paragraph>
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Style>Solid</Style>
                                                 <Color>LightGrey</Color>
+                                                <Style>Solid</Style>
                                               </Border>
                                               <BackgroundColor>#8dc541</BackgroundColor>
                                               <PaddingLeft>2pt</PaddingLeft>
-                                              <PaddingRight>2pt</PaddingRight>
-                                              <PaddingTop>2pt</PaddingTop>
-                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="HeaderAchieved">
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>Achieved</Value>
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
+                                                      <FontWeight>Bold</FontWeight>
+                                                      <Color>White</Color>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <BackgroundColor>#8dc541</BackgroundColor>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="HeaderAppraisee">
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>Appraisee Comments</Value>
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
+                                                      <FontWeight>Bold</FontWeight>
+                                                      <Color>White</Color>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <BackgroundColor>#8dc541</BackgroundColor>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="HeaderAppraiser">
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>Appraiser Comments</Value>
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
+                                                      <FontWeight>Bold</FontWeight>
+                                                      <Color>White</Color>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <BackgroundColor>#8dc541</BackgroundColor>
+                                              <PaddingLeft>2pt</PaddingLeft>
                                             </Style>
                                           </Textbox>
                                         </CellContents>
@@ -390,94 +304,166 @@
                                     </TablixCells>
                                   </TablixRow>
                                   <TablixRow>
-                                    <Height>0.5cm</Height>
+                                    <Height>0.6cm</Height>
                                     <TablixCells>
                                       <TablixCell>
                                         <CellContents>
-                                          <Textbox Name="Total_Targeted_Score">
-                                            <CanGrow>true</CanGrow>
+                                          <Textbox Name="Perspective_Description">
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>=Fields!Total_Targeted_Score.Value</Value>
+                                                    <Value>=Fields!Perspective_Description.Value</Value>
                                                     <Style>
-                                                      <FontFamily>Times New Roman</FontFamily>
-                                                      <FontSize>9pt</FontSize>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
                                                     </Style>
                                                   </TextRun>
                                                 </TextRuns>
+                                                <Style />
                                               </Paragraph>
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Style>Solid</Style>
                                                 <Color>LightGrey</Color>
+                                                <Style>Solid</Style>
                                               </Border>
                                               <PaddingLeft>2pt</PaddingLeft>
-                                              <PaddingRight>2pt</PaddingRight>
-                                              <PaddingTop>2pt</PaddingTop>
-                                              <PaddingBottom>2pt</PaddingBottom>
                                             </Style>
                                           </Textbox>
                                         </CellContents>
                                       </TablixCell>
                                       <TablixCell>
                                         <CellContents>
-                                          <Textbox Name="Total_Achieved_Score">
-                                            <CanGrow>true</CanGrow>
+                                          <Textbox Name="Objective">
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>=Fields!Total_Achieved_Score.Value</Value>
+                                                    <Value>=Fields!Objective.Value</Value>
                                                     <Style>
-                                                      <FontFamily>Times New Roman</FontFamily>
-                                                      <FontSize>9pt</FontSize>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
                                                     </Style>
                                                   </TextRun>
                                                 </TextRuns>
+                                                <Style />
                                               </Paragraph>
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Style>Solid</Style>
                                                 <Color>LightGrey</Color>
+                                                <Style>Solid</Style>
                                               </Border>
                                               <PaddingLeft>2pt</PaddingLeft>
-                                              <PaddingRight>2pt</PaddingRight>
-                                              <PaddingTop>2pt</PaddingTop>
-                                              <PaddingBottom>2pt</PaddingBottom>
                                             </Style>
                                           </Textbox>
                                         </CellContents>
                                       </TablixCell>
                                       <TablixCell>
                                         <CellContents>
-                                          <Textbox Name="Achievement_Percentage">
-                                            <CanGrow>true</CanGrow>
+                                          <Textbox Name="Line_Targeted_Score">
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>=Fields!Achievement_Percentage.Value &amp; "%"</Value>
+                                                    <Value>=Fields!Line_Targeted_Score.Value</Value>
                                                     <Style>
-                                                      <FontFamily>Times New Roman</FontFamily>
-                                                      <FontSize>9pt</FontSize>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
                                                     </Style>
                                                   </TextRun>
                                                 </TextRuns>
+                                                <Style />
                                               </Paragraph>
                                             </Paragraphs>
                                             <Style>
                                               <Border>
-                                                <Style>Solid</Style>
                                                 <Color>LightGrey</Color>
+                                                <Style>Solid</Style>
                                               </Border>
                                               <PaddingLeft>2pt</PaddingLeft>
-                                              <PaddingRight>2pt</PaddingRight>
-                                              <PaddingTop>2pt</PaddingTop>
-                                              <PaddingBottom>2pt</PaddingBottom>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Line_Achieved_Score">
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>=Fields!Line_Achieved_Score.Value</Value>
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Appraisee_Comments">
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>=Fields!Appraisee_Comments.Value</Value>
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <PaddingLeft>2pt</PaddingLeft>
+                                            </Style>
+                                          </Textbox>
+                                        </CellContents>
+                                      </TablixCell>
+                                      <TablixCell>
+                                        <CellContents>
+                                          <Textbox Name="Appraiser_Comments">
+                                            <Paragraphs>
+                                              <Paragraph>
+                                                <TextRuns>
+                                                  <TextRun>
+                                                    <Value>=Fields!Appraiser_Comments.Value</Value>
+                                                    <Style>
+                                                      <FontFamily>Segoe UI</FontFamily>
+                                                      <FontSize>8pt</FontSize>
+                                                    </Style>
+                                                  </TextRun>
+                                                </TextRuns>
+                                                <Style />
+                                              </Paragraph>
+                                            </Paragraphs>
+                                            <Style>
+                                              <Border>
+                                                <Color>LightGrey</Color>
+                                                <Style>Solid</Style>
+                                              </Border>
+                                              <PaddingLeft>2pt</PaddingLeft>
                                             </Style>
                                           </Textbox>
                                         </CellContents>
@@ -491,40 +477,30 @@
                                   <TablixMember />
                                   <TablixMember />
                                   <TablixMember />
+                                  <TablixMember />
+                                  <TablixMember />
+                                  <TablixMember />
                                 </TablixMembers>
                               </TablixColumnHierarchy>
                               <TablixRowHierarchy>
                                 <TablixMembers>
                                   <TablixMember>
                                     <KeepWithGroup>After</KeepWithGroup>
+                                    <RepeatOnNewPage>true</RepeatOnNewPage>
                                   </TablixMember>
-                                  <TablixMember />
+                                  <TablixMember>
+                                    <Group Name="Details" />
+                                  </TablixMember>
                                 </TablixMembers>
                               </TablixRowHierarchy>
                               <Top>2cm</Top>
-                              <Left>0cm</Left>
-                              <Height>1.1cm</Height>
+                              <Height>1.2cm</Height>
                               <Width>19cm</Width>
-                              <Style>
-                                <Border>
-                                  <Style>Solid</Style>
-                                </Border>
-                              </Style>
+                              <ZIndex>1</ZIndex>
+                              <Style />
                             </Tablix>
                           </ReportItems>
-                          <KeepTogether>true</KeepTogether>
-                          <Height>3.2cm</Height>
-                          <Width>19cm</Width>
-                          <Style>
-                            <Border>
-                              <Style>Solid</Style>
-                              <Color>LightGrey</Color>
-                            </Border>
-                            <PaddingLeft>5pt</PaddingLeft>
-                            <PaddingRight>5pt</PaddingRight>
-                            <PaddingTop>5pt</PaddingTop>
-                            <PaddingBottom>5pt</PaddingBottom>
-                          </Style>
+                          <Style />
                         </Rectangle>
                       </CellContents>
                     </TablixCell>
@@ -540,7 +516,7 @@
             <TablixRowHierarchy>
               <TablixMembers>
                 <TablixMember>
-                  <Group Name="EmployeeGroup">
+                  <Group Name="AppraisalGroup">
                     <GroupExpressions>
                       <GroupExpression>=Fields!Appraisal_No.Value</GroupExpression>
                     </GroupExpressions>
@@ -552,21 +528,137 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
-            <Top>4.5cm</Top>
-            <Height>4.2cm</Height>
+            <Height>3.5cm</Height>
             <Width>19cm</Width>
-            <Style>
-              <Border>
-                <Style>Solid</Style>
-              </Border>
-            </Style>
+            <Style />
           </Tablix>
         </ReportItems>
-        <Height>10cm</Height>
+        <Height>4cm</Height>
         <Style />
       </Body>
       <Width>19cm</Width>
       <Page>
+        <PageHeader>
+          <Height>3.6cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="CompanyName">
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CompanyInfo_Name.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontSize>12pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.2cm</Top>
+              <Left>8cm</Left>
+              <Height>0.6cm</Height>
+              <Width>11cm</Width>
+              <Style />
+            </Textbox>
+            <Textbox Name="CompanyAddress">
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CompanyInfo_Address.Value, "DataSet_Result") &amp; " - " &amp; First(Fields!CompanyInfo_City.Value, "DataSet_Result") &amp; " " &amp; First(Fields!CompanyInfo_PostCode.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>="Tel: " &amp; First(Fields!CompanyInfo_Phone.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>="Email: " &amp; First(Fields!CompanyInfo_Email.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontSize>9pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.8cm</Top>
+              <Left>8cm</Left>
+              <Height>1.5cm</Height>
+              <Width>11cm</Width>
+              <ZIndex>1</ZIndex>
+              <Style />
+            </Textbox>
+            <Textbox Name="ReportTitle">
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>APPRAISAL SUMMARY REPORT</Value>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontSize>14pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                        <TextDecoration>Underline</TextDecoration>
+                        <Color>#333333</Color>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>2.6cm</Top>
+              <Height>0.8cm</Height>
+              <Width>19cm</Width>
+              <ZIndex>2</ZIndex>
+              <Style />
+            </Textbox>
+            <Image Name="CompanyLogo">
+              <Source>Database</Source>
+              <Value>=First(Fields!CompanyInfo_Picture.Value, "DataSet_Result")</Value>
+              <MIMEType>image/png</MIMEType>
+              <Sizing>FitProportional</Sizing>
+              <Top>0.2cm</Top>
+              <Height>2.8cm</Height>
+              <Width>4cm</Width>
+              <ZIndex>3</ZIndex>
+              <Style />
+            </Image>
+          </ReportItems>
+          <Style />
+        </PageHeader>
         <PageFooter>
           <Height>1cm</Height>
           <ReportItems>
@@ -577,7 +669,7 @@
                     <TextRun>
                       <Value>=Globals!PageNumber &amp; " of " &amp; Globals!TotalPages</Value>
                       <Style>
-                        <FontFamily>Times New Roman</FontFamily>
+                        <FontFamily>Segoe UI</FontFamily>
                         <FontSize>9pt</FontSize>
                       </Style>
                     </TextRun>
@@ -587,12 +679,14 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <Top>0.3cm</Top>
+              <Top>0.2cm</Top>
               <Left>14cm</Left>
               <Height>0.5cm</Height>
               <Width>5cm</Width>
+              <Style />
             </Textbox>
           </ReportItems>
+          <Style />
         </PageFooter>
         <PageHeight>29.7cm</PageHeight>
         <PageWidth>21cm</PageWidth>
@@ -605,6 +699,7 @@
     </ReportSection>
   </ReportSections>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>7c54a36d-6220-4646-8223-1f28b6cc5908</rd:ReportID>
   <DataSets>
     <DataSet Name="DataSet_Result">
       <Fields>
@@ -616,6 +711,18 @@
         </Field>
         <Field Name="CompanyInfo_Picture">
           <DataField>CompanyInfo_Picture</DataField>
+        </Field>
+        <Field Name="CompanyInfo_City">
+          <DataField>CompanyInfo_City</DataField>
+        </Field>
+        <Field Name="CompanyInfo_PostCode">
+          <DataField>CompanyInfo_PostCode</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Phone">
+          <DataField>CompanyInfo_Phone</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Email">
+          <DataField>CompanyInfo_Email</DataField>
         </Field>
         <Field Name="Filter_Appraisal_Year">
           <DataField>Filter_Appraisal_Year</DataField>
@@ -682,6 +789,42 @@
         </Field>
         <Field Name="Unresolved_Discussions">
           <DataField>Unresolved_Discussions</DataField>
+        </Field>
+        <Field Name="Line_No">
+          <DataField>Line_No</DataField>
+        </Field>
+        <Field Name="Perspective_Code">
+          <DataField>Perspective_Code</DataField>
+        </Field>
+        <Field Name="Perspective_Description">
+          <DataField>Perspective_Description</DataField>
+        </Field>
+        <Field Name="Objective">
+          <DataField>Objective</DataField>
+        </Field>
+        <Field Name="Line_Targeted_Score">
+          <DataField>Line_Targeted_Score</DataField>
+        </Field>
+        <Field Name="Line_Targeted_ScoreFormat">
+          <DataField>Line_Targeted_ScoreFormat</DataField>
+        </Field>
+        <Field Name="Line_Achieved_Score">
+          <DataField>Line_Achieved_Score</DataField>
+        </Field>
+        <Field Name="Line_Achieved_ScoreFormat">
+          <DataField>Line_Achieved_ScoreFormat</DataField>
+        </Field>
+        <Field Name="Agreed_Rating">
+          <DataField>Agreed_Rating</DataField>
+        </Field>
+        <Field Name="Agreed_RatingFormat">
+          <DataField>Agreed_RatingFormat</DataField>
+        </Field>
+        <Field Name="Appraisee_Comments">
+          <DataField>Appraisee_Comments</DataField>
+        </Field>
+        <Field Name="Appraiser_Comments">
+          <DataField>Appraiser_Comments</DataField>
         </Field>
       </Fields>
       <Query>
