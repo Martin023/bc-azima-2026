@@ -967,7 +967,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 Loan.SetRange("Mobile Loan", false);
                 //exclude BGL and FGL
                 Loan.SetFilter("Loan Product Type", '<>BGL&<>FGL&<>012');
-                Loan.SetAutoCalcFields("Total Balance");
+                Loan.SetAutoCalcFields("Total Balance", "Outstanding Balance");
                 Loan.SetFilter("Total Balance", '>%1', 0);
                 if Loan.FindSet() then begin
                     repeat
@@ -979,7 +979,8 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                                 Message(Format(Loan."Loan No."));
                                 Message(format(LoanTopup."Total Top Up"));
                                 Message(Format(Loan."Total Balance"));
-                                TotalRepay += Loan.Repayment;
+                                TotalRepay += Loan."Loan Principle Repayment" + (Loans.Interest / 12 / 100) * Loans."Outstanding Balance";
+                                ;
                                 TotalLoanBal += Loan."Total Balance";
                             end;
                         end
