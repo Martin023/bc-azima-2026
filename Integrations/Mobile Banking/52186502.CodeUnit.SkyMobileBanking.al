@@ -7419,12 +7419,18 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                         TheDestinationMember.Get(TheDestinationSavings."Member No.");
                                                                                     end;
 
-                                                                                    theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
-                                                                                                ', you have successfully transferred Kshs. ' +
-                                                                                                Format(MpesaTransBuffer."Transaction Amount") +
-                                                                                                ' to ' + TheDestinationMember."First Name" + ' ' + TheDestinationMember."Middle Name" +
-                                                                                                ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccounts, true)) +
-                                                                                                ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
+                                                                                    if (TheDestinationSavings."No." <> '') and (TheSourceMember."No." = TheDestinationSavings."Member No.") then
+                                                                                        theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
+                                                                                                    ', you have successfully funded your ' + TheDestinationSavings."Product Name" +
+                                                                                                    ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(TheDestinationSavings, true)) +
+                                                                                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time")
+                                                                                    else
+                                                                                        theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
+                                                                                                    ', you have successfully transferred Kshs. ' +
+                                                                                                    Format(MpesaTransBuffer."Transaction Amount" - TotalCharges) +
+                                                                                                    ' to ' + TheDestinationMember."First Name" + ' ' + TheDestinationMember."Middle Name" +
+                                                                                                    ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccounts, true)) +
+                                                                                                    ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
 
                                                                                     SkySMS.SendSms(
                                                                                         SMSSource::IFT_ACCOUNT,
@@ -7556,12 +7562,22 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                 MpesaTransBuffer."Transaction Type"::"Account Transfer",
                                                                                 MpesaTransBuffer."Transaction Type"::"Kesasa Account Transfer":
                                                                                     begin
-                                                                                        theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
-                                                                                                        ', you have successfully transferred Kshs. ' +
-                                                                                                        Format(MpesaTransBuffer."Transaction Amount") +
-                                                                                                        ' to ' + TheDestinationSavings."Name" +
-                                                                                                        ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccounts, true)) +
-                                                                                                        ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
+                                                                                        Clear(TheDestinationSavings);
+                                                                                        if MpesaTransBuffer."Destination Account" <> '' then
+                                                                                            TheDestinationSavings.Get(MpesaTransBuffer."Destination Account");
+
+                                                                                        if (TheDestinationSavings."No." <> '') and (TheSourceMember."No." = TheDestinationSavings."Member No.") then
+                                                                                            theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
+                                                                                                            ', you have successfully funded your ' + TheDestinationSavings."Product Name" +
+                                                                                                            ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(TheDestinationSavings, true)) +
+                                                                                                            ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time")
+                                                                                        else
+                                                                                            theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
+                                                                                                            ', you have successfully transferred Kshs. ' +
+                                                                                                            Format(MpesaTransBuffer."Transaction Amount" - TotalCharges) +
+                                                                                                            ' to ' + TheDestinationSavings."Name" +
+                                                                                                            ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccounts, true)) +
+                                                                                                            ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
                                                                                         SkySMS.SendSms(
                                                                                             SMSSource::IFT_ACCOUNT,
                                                                                             TheSourceMember."Transactional Mobile Number",
