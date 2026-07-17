@@ -974,6 +974,10 @@ page 52185712 "Product Factory"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Emergency Loan"; Rec."Emergency Loan")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 group(Channels)
                 {
                     Caption = 'Sky Channels';

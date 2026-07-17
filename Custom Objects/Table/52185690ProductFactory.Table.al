@@ -1071,6 +1071,11 @@ table 52185690 "Product Factory"
             Caption = 'Use Salary Average';
             DataClassification = CustomerContent;
         }
+        field(10044; "Emergency Loan"; Boolean)
+        {
+            Caption = 'Emergency Loan';
+            DataClassification = CustomerContent;
+        }
         field(10045; "Over The Counter Transaction"; Boolean)
         {
             Caption = 'Over The Counter Transaction';
