@@ -274,7 +274,7 @@ Codeunit 52185472 "PR Payroll Processing"
 
 
         //check if the period selected=current period. If not, do NOT run this function
-        if SelectedPeriod <> dtOpenPeriod then error('select the current open payroll period for this processing!');
+        if SelectedPeriod <> dtOpenPeriod then error('Select the current open payroll period for this processing!');
         intYear := Date2dmy(SelectedPeriod, 3);
         intMonth := Date2dmy(SelectedPeriod, 2);
 
@@ -460,7 +460,7 @@ Codeunit 52185472 "PR Payroll Processing"
                                 customer.SetRange("Internal Staff Employer", true);
                                 if Customer.Find('-') then begin
                                     if (SavingsAccounts.Status = SavingsAccounts.Status::Closed) then
-                                        Error('The Account Status is %1', SavingsAccounts.Status::Closed) else begin
+                                        Error('The Account Status for staff Member : %1 is %2', strEmpCode, SavingsAccounts.Status::Closed) else begin
                                         JournalAc := SavingsAccounts."No.";
                                         JournalPostingType := Journalpostingtype::Savings;
                                     end;
@@ -1137,7 +1137,7 @@ Codeunit 52185472 "PR Payroll Processing"
                                         JournalAc := SavingsAccounts."No.";
                                         JournalPostingType := Journalpostingtype::Savings;
                                     end else begin
-                                        error('Saving Account Not Found for Employee %1', strEmpCode);
+                                        error('Saving Account Not Found for Employee %1 for the Transaction %2', strEmpCode, prTransactionCodes."Transaction Name");
                                     end;
                                 end;
                             end
