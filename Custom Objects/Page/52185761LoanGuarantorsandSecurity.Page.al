@@ -359,6 +359,21 @@ page 52185761 "Loan Guarantors and Security"
                         end;
                 end;
             }
+            action("Suggest Group Members")
+            {
+                ApplicationArea = Basic, Suite;
+                Image = View;
+                Promoted = true;
+                PromotedCategory = New;
+                PromotedIsBig = true;
+
+                //                 trigger OnAction()
+                //                 begin
+                // if "Loan Group" = "Loan Group"::"Group Loan" then begin
+                //                     InsertLoanGuarantorsForBusinessLoans();
+                //                 end;
+                //                 end;
+            }
             action(Refresh)
             {
                 ApplicationArea = all;
