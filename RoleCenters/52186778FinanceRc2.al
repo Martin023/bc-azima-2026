@@ -2750,7 +2750,7 @@ page 52186778 "Finance Role Center"
                                 {
                                     ApplicationArea = Basic, Suite;
                                     Caption = 'Daily Cashier Report';
-                                    RunObject = report "Cashier Deposits Withdrawals";
+                                    RunObject = report "Tellers Journal";
                                 }
                                 action("Cashier Cheque Deposits")
                                 {
@@ -2879,7 +2879,7 @@ page 52186778 "Finance Role Center"
                             {
                                 ApplicationArea = Basic, Suite;
                                 Caption = 'Treasury Report';
-                                RunObject = report "Cashier Deposits Withdrawals";
+                                RunObject = report "Treasury Report";
                             }
 
                         }

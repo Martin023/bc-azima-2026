@@ -10,6 +10,8 @@ Report 52185446 "End of Day Reconciliation"
         {
             RequestFilterFields = No, "From Account", "From Bank", "Transaction Date";
 
+            column(No_TreasuryTrans; No) { }
+
             column(CompanyInfo_Name; CompanyInformation.Name) { }
             column(CompanyInformation_Picture; CompanyInformation.Picture) { }
             column(CompanyName; CompanyName) { }
@@ -29,12 +31,13 @@ Report 52185446 "End of Day Reconciliation"
             column(PostedBy; "Posted By") { }
             column(ShortageAcc; ShortageAccCode) { }
             column(SurplusAcc; SurplusAccCode) { }
+
             column(BalBroughtForward; BalBroughtForwardAmt) { }
             column(TotalReceipts; TotalReceiptsAmt) { }
             column(TotalPayments; TotalPaymentsAmt) { }
             column(BalCarriedDown; BalCarriedDownAmt) { }
-            column(SystemCashAtHand; "Till Balance") { }
 
+            column(SystemCashAtHand; "Till Balance") { }
             column(ActualCashAtHand; ActualCashAtHandAmt) { }
             column(Difference; DifferenceAmt) { }
 
@@ -43,20 +46,32 @@ Report 52185446 "End of Day Reconciliation"
             column(ReceiveFromTreasury; ReceiveFromTreasuryAmt) { }
             column(SpecialReceipt; SpecialReceiptAmt) { }
             column(GrandTotalReceipts; GrandTotalReceiptsAmt) { }
+
             column(CashWithdrawal; CashWithdrawalAmt) { }
             column(EndOfDay; EndOfDayAmt) { }
             column(MPesaCashWithdraw; MPesaCashWithdrawAmt) { }
             column(PettyCashAmt; PettyCashAmt) { }
+            column(ReturnToTreasuryOut; ReturnToTreasuryAmt) { }
             column(GrandTotalPayments; GrandTotalPaymentsAmt) { }
             column(AccuracyLevel; AccuracyLevelTxt) { }
 
             dataitem(Coinage; Coinage)
             {
                 DataItemLink = No = field(No);
+                DataItemTableView = sorting(No, Code) where(Quantity = filter(> 0));
+
                 column(DenomCode; Code) { }
                 column(DenomCount; Quantity) { }
                 column(DenomAmount; "Total Amount") { }
             }
+
+            trigger OnPreDataItem()
+            begin
+                if BankingUserTemp.Get(UserId) then begin
+                    if BankingUserTemp.Type = BankingUserTemp.Type::Cashier then
+                        SetRange("From Account", UserId);
+                end;
+            end;
 
             trigger OnAfterGetRecord()
             begin
@@ -99,6 +114,7 @@ Report 52185446 "End of Day Reconciliation"
                 EndOfDayAmt := 0;
                 MPesaCashWithdrawAmt := 0;
                 PettyCashAmt := 0;
+                ReturnToTreasuryAmt := 0;
 
                 CashierTrans.Reset();
                 CashierTrans.SetRange(Cashier, "From Account");
@@ -140,16 +156,35 @@ Report 52185446 "End of Day Reconciliation"
                     until PaymentsHeader.Next() = 0;
                 end;
 
+                TreasuryTransOut.Reset();
+                TreasuryTransOut.SetRange("From Account", "From Account");
+                TreasuryTransOut.SetRange("Transaction Date", "Transaction Date");
+                TreasuryTransOut.SetRange("Transaction Type", TreasuryTransOut."Transaction Type"::"Return To Treasury");
+                TreasuryTransOut.SetRange(Posted, true);
+                if TreasuryTransOut.FindSet() then begin
+                    repeat
+                        ReturnToTreasuryAmt += TreasuryTransOut.Amount;
+                    until TreasuryTransOut.Next() = 0;
+                end;
+
+                // The EOD Amount physically returned
                 EndOfDayAmt := Amount;
 
+                // GRAND TOTALS
                 GrandTotalReceiptsAmt := CashDepositAmt + MPesaCashDepositAmt + ReceiveFromTreasuryAmt + SpecialReceiptAmt;
+                GrandTotalPaymentsAmt := CashWithdrawalAmt + EndOfDayAmt + MPesaCashWithdrawAmt + PettyCashAmt + ReturnToTreasuryAmt;
 
-                GrandTotalPaymentsAmt := CashWithdrawalAmt + EndOfDayAmt + MPesaCashWithdrawAmt + PettyCashAmt;
-
+                // 1. Total Receipts equals Grand Total Receipts
                 TotalReceiptsAmt := GrandTotalReceiptsAmt;
-                TotalPaymentsAmt := CashWithdrawalAmt + MPesaCashWithdrawAmt;
+
+                // 2. Total Payments EXCLUDES End Of Day Amount
+                TotalPaymentsAmt := CashWithdrawalAmt + MPesaCashWithdrawAmt + PettyCashAmt + ReturnToTreasuryAmt;
+
                 BalBroughtForwardAmt := 0.00;
-                BalCarriedDownAmt := BalBroughtForwardAmt + TotalReceiptsAmt - TotalPaymentsAmt;
+
+                // 3. Balance Carried Down factors in the Grand Totals.
+                // If GrandTotalReceipts == GrandTotalPayments (including the EOD money returned), this zeros out.
+                BalCarriedDownAmt := BalBroughtForwardAmt + GrandTotalReceiptsAmt - GrandTotalPaymentsAmt;
             end;
         }
     }
@@ -180,6 +215,7 @@ Report 52185446 "End of Day Reconciliation"
         BankingUserTemp: Record "Banking User Template";
         CashierTrans: Record "Cashier Transactions";
         TreasuryTransIn: Record "Treasury Cashier Transactions";
+        TreasuryTransOut: Record "Treasury Cashier Transactions";
         PaymentsHeader: Record "Payments Header";
 
         CoinageRec: Record Coinage;
@@ -206,6 +242,7 @@ Report 52185446 "End of Day Reconciliation"
         EndOfDayAmt: Decimal;
         MPesaCashWithdrawAmt: Decimal;
         PettyCashAmt: Decimal;
+        ReturnToTreasuryAmt: Decimal;
         GrandTotalPaymentsAmt: Decimal;
 
         CompanyInformation: Record "Company Information";

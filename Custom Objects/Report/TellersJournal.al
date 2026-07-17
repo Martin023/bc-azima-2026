@@ -11,6 +11,7 @@ Report 52185510 "Tellers Journal"
     {
         dataitem("Bank Account Ledger Entry"; "Bank Account Ledger Entry")
         {
+            DataItemTableView = sorting("Bank Account No.", "Posting Date");
             RequestFilterFields = "Posting Date", "Bank Account No.";
 
             column(Bank_Account_No_; "Bank Account No.") { }
@@ -41,25 +42,21 @@ Report 52185510 "Tellers Journal"
 
                 if BankAcc."Bank Type" <> BankAcc."Bank Type"::Cashier then
                     CurrReport.Skip();
-                Recount += 1;
-                if Recount = 1 then begin
+
+                if LastBankAccNo <> "Bank Account Ledger Entry"."Bank Account No." then begin
                     OpenBal := 0;
-                    BankAccRec.Reset();
-
-                    if "Bank Account Ledger Entry".GetFilter("Bank Account No.") <> '' then
-                        BankAccRec.SetFilter("No.", "Bank Account Ledger Entry".GetFilter("Bank Account No."))
-                    else
-                        BankAccRec.SetRange("Bank Type", BankAccRec."Bank Type"::Cashier);
-
-                    if BankAccRec.FindSet() then begin
-                        repeat
-                            BankLedgerEntryII.Reset();
-                            BankLedgerEntryII.SetRange("Bank Account No.", BankAccRec."No.");
-                            BankLedgerEntryII.SetFilter("Posting Date", '<%1', "Bank Account Ledger Entry"."Posting Date");
-                            BankLedgerEntryII.CalcSums("Amount (LCY)");
-                            OpenBal += BankLedgerEntryII."Amount (LCY)";
-                        until BankAccRec.Next() = 0;
+                    if "Bank Account Ledger Entry".GetFilter("Posting Date") <> '' then begin
+                        BankLedgerEntryII.Reset();
+                        BankLedgerEntryII.SetRange("Bank Account No.", "Bank Account Ledger Entry"."Bank Account No.");
+                        BankLedgerEntryII.SetFilter("Posting Date", '<%1', "Bank Account Ledger Entry".GetRangeMin("Posting Date"));
+                        
+                        BankLedgerEntryII.CalcSums("Amount (LCY)");
+                        OpenBal := BankLedgerEntryII."Amount (LCY)";
+                    end else begin
+                        OpenBal := 0;
                     end;
+                    
+                    LastBankAccNo := "Bank Account Ledger Entry"."Bank Account No.";
                 end;
 
                 CashierTrans.Reset();
@@ -120,7 +117,6 @@ Report 52185510 "Tellers Journal"
         CompanyAddress := CompanyInformation.Address + ' -Post Code: ' + CompanyInformation."Post Code" + ' -City:' + CompanyInformation.City + ' Region: ' + CompanyInformation."Country/Region Code";
         CompanyTelephone := 'Tel: ' + CompanyInformation."Phone No." + ' -Office Tel: ' + CompanyInformation."Phone No. 2";
         CommunicationOnline := 'E-mail: ' + CompanyInformation."E-Mail" + '- Website: ' + CompanyInformation."Home Page";
-        Recount := 0;
     end;
 
     var
@@ -138,7 +134,7 @@ Report 52185510 "Tellers Journal"
         CustomerRunningbalalnce: Codeunit "Customer Running balalnce";
         BankBalance: Decimal;
         OpenBal: Decimal;
-        Recount: Integer;
+        LastBankAccNo: Code[20];
         BankLedgerEntryII: Record "Bank Account Ledger Entry";
         ReportDebitAmt: Decimal;
         ReportCreditAmt: Decimal;

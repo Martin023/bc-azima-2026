@@ -45,6 +45,47 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
+                  <Height>0.8cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="BankGroupHeader">
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>="Bank Account No: " &amp; Fields!Bank_Account_No_.Value &amp; "                                                                                                                              Date Filter: " &amp; Format(First(Fields!Posting_Date.Value, "BankAccountGroup"), "M/d/yyyy")</Value>
+                                  <Style>
+                                    <FontSize>9pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>4pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <ColSpan>8</ColSpan>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
                   <Height>0.6cm</Height>
                   <TablixCells>
                     <TablixCell>
@@ -323,7 +364,7 @@
                                   </Style>
                                 </TextRun>
                                 <TextRun>
-                                  <Value>=First(Fields!OpenBal.Value, "DataSet_Result")</Value>
+                                  <Value>=First(Fields!OpenBal.Value, "BankAccountGroup")</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -364,7 +405,6 @@
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Posting_Date">
-                          <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
@@ -395,7 +435,6 @@
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Document_No_">
-                          <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
@@ -425,7 +464,6 @@
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="AccountNo">
-                          <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
@@ -455,7 +493,6 @@
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="AccountName">
-                          <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
@@ -485,7 +522,6 @@
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Description">
-                          <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
@@ -515,7 +551,6 @@
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Debit_Amount">
-                          <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
@@ -549,7 +584,6 @@
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Credit_Amount">
-                          <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
@@ -583,7 +617,6 @@
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="RunningBalance">
-                          <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
@@ -627,23 +660,10 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value />
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
                                 </TextRun>
                               </TextRuns>
                             </Paragraph>
                           </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -655,23 +675,10 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value />
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
                                 </TextRun>
                               </TextRuns>
                             </Paragraph>
                           </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -683,23 +690,10 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value />
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
                                 </TextRun>
                               </TextRuns>
                             </Paragraph>
                           </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -711,23 +705,10 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value />
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
                                 </TextRun>
                               </TextRuns>
                             </Paragraph>
                           </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -739,23 +720,10 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value />
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
                                 </TextRun>
                               </TextRuns>
                             </Paragraph>
                           </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -779,15 +747,6 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -811,15 +770,6 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
                         </Textbox>
                       </CellContents>
                     </TablixCell>
@@ -831,18 +781,61 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value />
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                          </Paragraphs>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>2.0cm</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Signatures">
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Teller / Officer (Sign/Date)  </Value>
                                   <Style>
-                                    <FontStyle>Normal</FontStyle>
-                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Format>#,0.00</Format>
-                                    <TextDecoration>None</TextDecoration>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value xml:space="preserve">                                                                                                                                                                          </Value>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>                                   Manager (Sign/Date)</Value>
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                </TextRun>
+                              </TextRuns>
+                            </Paragraph>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>......................................                                                                                                                                                                             ........................................................</Value>
+                                </TextRun>
+                              </TextRuns>
                             </Paragraph>
                           </Paragraphs>
                           <Style>
@@ -851,12 +844,20 @@
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingTop>10pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <ColSpan>8</ColSpan>
                       </CellContents>
                     </TablixCell>
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
+                    <TablixCell />
                   </TablixCells>
                 </TablixRow>
               </TablixRows>
@@ -876,23 +877,42 @@
             <TablixRowHierarchy>
               <TablixMembers>
                 <TablixMember>
-                  <KeepWithGroup>After</KeepWithGroup>
-                </TablixMember>
-                <TablixMember>
-                  <KeepWithGroup>After</KeepWithGroup>
-                </TablixMember>
-                <TablixMember>
-                  <Group Name="Details" />
-                </TablixMember>
-                <TablixMember>
-                  <KeepWithGroup>Before</KeepWithGroup>
+                  <Group Name="BankAccountGroup">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!Bank_Account_No_.Value</GroupExpression>
+                    </GroupExpressions>
+                    <PageBreak>
+                      <BreakLocation>Between</BreakLocation>
+                    </PageBreak>
+                  </Group>
+                  <TablixMembers>
+                    <TablixMember>
+                      <KeepWithGroup>After</KeepWithGroup>
+                    </TablixMember>
+                    <TablixMember>
+                      <KeepWithGroup>After</KeepWithGroup>
+                      <RepeatOnNewPage>true</RepeatOnNewPage>
+                    </TablixMember>
+                    <TablixMember>
+                      <KeepWithGroup>After</KeepWithGroup>
+                    </TablixMember>
+                    <TablixMember>
+                      <Group Name="Details" />
+                    </TablixMember>
+                    <TablixMember>
+                      <KeepWithGroup>Before</KeepWithGroup>
+                    </TablixMember>
+                    <TablixMember>
+                      <KeepWithGroup>Before</KeepWithGroup>
+                    </TablixMember>
+                  </TablixMembers>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
-            <Top>0.84377cm</Top>
-            <Left>0.00003cm</Left>
-            <Height>2.42646cm</Height>
+            <Top>0cm</Top>
+            <Left>0cm</Left>
+            <Height>5.22646cm</Height>
             <Width>28.5cm</Width>
             <Style>
               <Border>
@@ -900,125 +920,8 @@
               </Border>
             </Style>
           </Tablix>
-          <Textbox Name="Textbox7">
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value />
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value xml:space="preserve"> </Value>
-                    <Style />
-                  </TextRun>
-                  <TextRun>
-                    <Value>Teller / Officer (Sign/Date)  </Value>
-                    <Style>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value xml:space="preserve">                                                                                                                                                                          </Value>
-                    <Style />
-                  </TextRun>
-                  <TextRun>
-                    <Value>                                   Manager (Sign/Date)</Value>
-                    <Style>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value />
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>......................................                                                                                                                                                                             ........................................................</Value>
-                    <Style />
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>3.44662cm</Top>
-            <Height>1.743cm</Height>
-            <Width>28.5cm</Width>
-            <ZIndex>1</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox8">
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Bank Account No: </Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Fields!Bank_Account_No_.Value</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>                                                                                                                                                                                            Date Filter: </Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Fields!Posting_Date.Value</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                      <Format>M/d/yyyy</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>0.02646cm</Top>
-            <Left>0.00007cm</Left>
-            <Height>0.6cm</Height>
-            <Width>28.5cm</Width>
-            <ZIndex>2</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
         </ReportItems>
-        <Height>5.6568cm</Height>
+        <Height>5.5cm</Height>
         <Style />
       </Body>
       <Width>28.5cm</Width>
@@ -1229,15 +1132,6 @@
               <Top>0.03585in</Top>
               <Height>0.1875in</Height>
               <Width>0.67708in</Width>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
             </Textbox>
             <Textbox Name="Textbox529">
               <Paragraphs>
@@ -1247,29 +1141,15 @@
                       <Value>=Globals!ExecutionTime</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
-                        <FontWeight>Normal</FontWeight>
                       </Style>
                     </TextRun>
                   </TextRuns>
-                  <Style>
-                    <TextAlign>Left</TextAlign>
-                  </Style>
                 </Paragraph>
               </Paragraphs>
               <Top>0.02778in</Top>
               <Left>12.0cm</Left>
               <Height>0.1875in</Height>
               <Width>5.0cm</Width>
-              <ZIndex>1</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
             </Textbox>
             <Textbox Name="Textbox530">
               <Paragraphs>
@@ -1292,16 +1172,6 @@
               <Left>24.5cm</Left>
               <Height>0.1875in</Height>
               <Width>2.0cm</Width>
-              <ZIndex>2</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
             </Textbox>
             <Textbox Name="Textbox531">
               <Paragraphs>
@@ -1311,7 +1181,6 @@
                       <Value>=Globals!PageNumber &amp; " of " &amp; Globals!TotalPages</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
-                        <FontWeight>Normal</FontWeight>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -1324,16 +1193,6 @@
               <Left>26.5cm</Left>
               <Height>0.1875in</Height>
               <Width>2.0cm</Width>
-              <ZIndex>3</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
             </Textbox>
             <Textbox Name="Textbox532">
               <Paragraphs>
@@ -1353,16 +1212,6 @@
               <Left>9.5cm</Left>
               <Height>0.1875in</Height>
               <Width>2.5cm</Width>
-              <ZIndex>4</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
             </Textbox>
             <Textbox Name="Textbox533">
               <Paragraphs>
@@ -1372,7 +1221,6 @@
                       <Value>=User!UserID</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
-                        <FontWeight>Normal</FontWeight>
                       </Style>
                     </TextRun>
                   </TextRuns>
@@ -1382,23 +1230,8 @@
               <Left>1.8cm</Left>
               <Height>0.1875in</Height>
               <Width>7.0cm</Width>
-              <ZIndex>5</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
             </Textbox>
           </ReportItems>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-          </Style>
         </PageFooter>
         <PageHeight>21cm</PageHeight>
         <PageWidth>29.7cm</PageWidth>
@@ -1406,41 +1239,11 @@
         <RightMargin>0.5cm</RightMargin>
         <TopMargin>0.5cm</TopMargin>
         <BottomMargin>0.5cm</BottomMargin>
-        <ColumnSpacing>1.27cm</ColumnSpacing>
-        <Style />
       </Page>
     </ReportSection>
   </ReportSections>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
-        Return ""
-    end if
-    Return Value
-End Function
-
-Public Function BlankPos(ByVal Value As Decimal)
-    if Value &gt; 0 then
-        Return ""
-    end if
-    Return Value
-End Function
-
-Public Function BlankZeroAndPos(ByVal Value As Decimal)
-    if Value &gt;= 0 then
-        Return ""
-    end if
-    Return Value
-End Function
-
-Public Function BlankNeg(ByVal Value As Decimal)
-    if Value &lt; 0 then
-        Return ""
-    end if
-    Return Value
-End Function
-
-Public Function BlankNegAndZero(ByVal Value As Decimal)
-    if Value &lt;= 0 then
         Return ""
     end if
     Return Value
