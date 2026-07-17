@@ -71,7 +71,7 @@ Report 52185688 prNSSF
                 Tier1Cont := 0;
                 TotalCont := 0;
 
-                "PR Period Transactions".SetRange("Payroll Period", SelectedPeriod);
+                
 
                 Employees.Reset;
                 Employees.SetRange("No.", "PR Period Transactions"."Employee Code");
@@ -92,7 +92,7 @@ Report 52185688 prNSSF
             trigger OnPreDataItem()
             begin
                 //OnViewCurrRec();
-                LastFieldNo := "PR Period Transactions".FieldNo("Period Year");
+                //LastFieldNo := "PR Period Transactions".FieldNo("Period Year");
             end;
         }
     }
@@ -126,7 +126,7 @@ Report 52185688 prNSSF
     trigger OnPreReport()
     begin
         if SelectedPeriod = 0D then Error('You must specify the period filter');
-
+        "PR Period Transactions".SetRange("Payroll Period", SelectedPeriod);
         objPeriod.Reset;
         objPeriod.SetRange(objPeriod."Date Opened", SelectedPeriod);
         if objPeriod.Find('-') then begin
