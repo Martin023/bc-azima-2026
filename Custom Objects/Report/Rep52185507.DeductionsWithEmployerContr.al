@@ -41,9 +41,10 @@ report 52185507 "Deductions With Employer Contr"
                 EmployerAmt := 0;
                 EmployeeCode := '';
                 EmployeeName := '';
+                TotalAmt := 0;
 
                 PRPeriodTransactions.Reset;
-                PRPeriodTransactions.SetRange("Transaction Code", "Transaction Code");
+                PRPeriodTransactions.SetRange("Transaction Code", PRTransactionCodes."Transaction Code");
                 PRPeriodTransactions.SetRange("Payroll Period", SelectedPeriod);
                 if PRPeriodTransactions.FindSet() then begin
                     EmployeeAmt := PRPeriodTransactions.Amount;
@@ -55,7 +56,7 @@ report 52185507 "Deductions With Employer Contr"
                 end;
 
                 prEmployerDeductions.Reset;
-                prEmployerDeductions.SetRange("Transaction Code", "Transaction Code");
+                prEmployerDeductions.SetRange("Transaction Code", PRTransactionCodes."Transaction Code");
                 prEmployerDeductions.SetRange("Payroll Period", SelectedPeriod);
                 if prEmployerDeductions.FindSet() then begin
                     EmployerAmt := prEmployerDeductions.Amount;
@@ -63,17 +64,7 @@ report 52185507 "Deductions With Employer Contr"
 
                 TotalAmt := EmployeeAmt + EmployerAmt;
             end;
-            // dataitem(PRPeriodTransactions; "PR Period Transactions")
-            // {
-            //     DataItemLink = "Transaction Code" = field("Transaction Code");
-            //     column(EmployeeCode; "Employee Code") { }
-            //     column(Amount; Amount) { }
-            //     trigger OnPreDataItem()
-            //     begin
-            //         //OnViewCurrRec();
-            //         //LastFieldNo := "PR Period Transactions".FieldNo("Period Year");
-            //     end;
-            // }
+           
             trigger OnPreDataItem()
             begin
                 CompanyInformation.Get;
