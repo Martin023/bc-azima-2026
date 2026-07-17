@@ -131,41 +131,45 @@ table 52185739 "Loan Guarantors and Security"
                 end;
 
                 if "Guarantor Type" = "Guarantor Type"::Guarantor then begin
-                    SELFLOAN.Reset;
-                    SELFLOAN.SetRange("Loan No.", "Loan No");
-                    if SELFLOAN.Find('-') then begin
-                        SavingsAccounts.Reset;
-                        SavingsAccounts.SetRange("Member No.", SELFLOAN."Member No.");
-                        SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
-                        if SavingsAccounts.Find('-') then begin
-                            if (SavingsAccounts."No." = "Savings Account No./Member No.") then
-                                "Self Guarantee" := true;
-                            if "Self Guarantee" then begin
-                                // "Self Guarantee" := true;
-                                "Available Shares" := LoanAppraisal.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.") + LoanAppraisal.GetTotalTopUpLoans("Loan No");
-                                "Amount Guaranteed" := LoanAppraisal.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.") + LoanAppraisal.GetTotalTopUpLoans("Loan No");
-                                "Original Amount Guaranteed" := "Amount Guaranteed";
-                                LoansR."Self Guarantee" := true;
-                            end
-                            else begin
-                                if (Membersrec."Member Class" = 'CLASSB') then begin
-                                    "Self Guarantee" := false;
-                                    "Available Shares" := LoanAppraisal.GetmaxSelfGuaranteeAmt("Savings Account No./Member No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(rec."Member No");
-                                    "Amount Guaranteed" := LoanAppraisal.GetmaxSelfGuaranteeAmt("Savings Account No./Member No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(rec."Member No");
+                    if rec."Loan Groups" <> rec."Loan Groups"::"Group Loan" then begin
+                        SELFLOAN.Reset;
+                        SELFLOAN.SetRange("Loan No.", "Loan No");
+                        if SELFLOAN.Find('-') then begin
+                            SavingsAccounts.Reset;
+                            SavingsAccounts.SetRange("Member No.", SELFLOAN."Member No.");
+                            SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
+                            if SavingsAccounts.Find('-') then begin
+                                if (SavingsAccounts."No." = "Savings Account No./Member No.") then
+                                    "Self Guarantee" := true;
+                                if "Self Guarantee" then begin
+                                    // "Self Guarantee" := true;
+                                    "Available Shares" := LoanAppraisal.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.") + LoanAppraisal.GetTotalTopUpLoans("Loan No");
+                                    "Amount Guaranteed" := LoanAppraisal.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(SavingsAccounts."Member No.") + LoanAppraisal.GetTotalTopUpLoans("Loan No");
                                     "Original Amount Guaranteed" := "Amount Guaranteed";
+                                    LoansR."Self Guarantee" := true;
                                 end
                                 else begin
-                                    "Self Guarantee" := false;
-                                    "Available Shares" := SavingsAccounts.GetAvailableBalance("Savings Account No./Member No.");
-                                    "Amount Guaranteed" := "Available Shares";
-                                    "Original Amount Guaranteed" := "Amount Guaranteed";
+                                    if (Membersrec."Member Class" = 'CLASSB') then begin
+                                        "Self Guarantee" := false;
+                                        "Available Shares" := LoanAppraisal.GetmaxSelfGuaranteeAmt("Savings Account No./Member No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(rec."Member No");
+                                        "Amount Guaranteed" := LoanAppraisal.GetmaxSelfGuaranteeAmt("Savings Account No./Member No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(rec."Member No");
+                                        "Original Amount Guaranteed" := "Amount Guaranteed";
+                                    end
+                                    else begin
+                                        "Self Guarantee" := false;
+                                        "Available Shares" := SavingsAccounts.GetAvailableBalance("Savings Account No./Member No.");
+                                        "Amount Guaranteed" := "Available Shares";
+                                        "Original Amount Guaranteed" := "Amount Guaranteed";
+                                    end;
                                 end;
                             end;
                         end;
+                    end
+                    else begin
+                        "Available Shares" := SavingsAccounts.GetAvailableBalance("Savings Account No./Member No.");
+                        "Amount Guaranteed" := "Available Shares";
+                        "Original Amount Guaranteed" := "Amount Guaranteed";
                     end;
-
-
-
                     //Evaluate guarantor basic info
                     if Cust.Get("Savings Account No./Member No.") then begin
                         if Members.Get(Cust."Member No.") then begin
