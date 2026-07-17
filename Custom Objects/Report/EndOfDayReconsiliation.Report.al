@@ -160,7 +160,8 @@ Report 52185446 "End of Day Reconciliation"
                 TotalPaymentsAmt := GrandTotalPaymentsAmt - EndOfDayAmt;
                 BalBroughtForwardAmt := 0.00;
 
-                BalCarriedDownAmt := BalBroughtForwardAmt + TotalReceiptsAmt - TotalPaymentsAmt;
+                BalCarriedDownAmt := BalBroughtForwardAmt + GrandTotalReceiptsAmt - GrandTotalPaymentsAmt;
+                BalCarriedDownAmt := abs(Round(BalCarriedDownAmt, 0.01));
             end;
         }
     }
