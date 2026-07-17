@@ -6072,28 +6072,33 @@ codeunit 52186507 "Members Portal Integration"
                         until ProductSupportedClasses.Next() = 0;
                     end;
 
-                    Clear(Datum);
+                    ProductSupportedClasses.Reset(); // filter products by member class
+                    ProductSupportedClasses.SetRange("Product ID", ProductFactory."Product ID");
+                    ProductSupportedClasses.SetRange("Class Category", SearchMember."Member Class");
+                    if not ProductSupportedClasses.IsEmpty() then begin // filter products by member class
+                        Clear(Datum);
 
-                    Datum.Add('loan_code', ProductFactory."Product ID");
-                    Datum.Add('product_id', ProductFactory."Product ID");
-                    Datum.Add('product_name', ProductFactory."Product Description");
-                    Datum.Add('minimum_guarantors', ProductFactory."Minimum Guarantors");
-                    Datum.Add('maximum_guarantors', ProductFactory."Maximum Guarantors");
-                    Datum.Add('minimum_amount', ProductFactory."Minimum Loan Amount");
-                    Datum.Add('maximum_amount', ProductFactory."Maximum Loan Amount");
-                    Datum.Add('repayment_frequency', Format(ProductFactory."Repayment Frequency"));
-                    Datum.Add('min_interest_rate', Format(ProductFactory."Interest Rate (Min.)"));
-                    Datum.Add('min_interest_rate_monthly', Format(ProductFactory."Interest Rate (Min.)" / 12));
-                    Datum.Add('maximum_installments', ProductFactory."Ordinary Default Intallments");
-                    Datum.Add('interest_calculation_method', Format(ProductFactory."Interest Calculation Method"));
-                    Datum.Add('is_mobile_loan', ProductFactory."Mobile Loan");
-                    Datum.Add('repayment_mode', Format(ProductFactory."Repay Mode"));
-                    Datum.Add('source', ProductFactory."Source of Funds");
-                    Datum.Add('source_unit', Format(ProductFactory."Source Unit"));
-                    Datum.Add('requires_installments', ProductFactory."Allow Topup");
-                    // Datum.Add('eligible_member_class', EligibleClass);
+                        Datum.Add('loan_code', ProductFactory."Product ID");
+                        Datum.Add('product_id', ProductFactory."Product ID");
+                        Datum.Add('product_name', ProductFactory."Product Description");
+                        Datum.Add('minimum_guarantors', ProductFactory."Minimum Guarantors");
+                        Datum.Add('maximum_guarantors', ProductFactory."Maximum Guarantors");
+                        Datum.Add('minimum_amount', ProductFactory."Minimum Loan Amount");
+                        Datum.Add('maximum_amount', ProductFactory."Maximum Loan Amount");
+                        Datum.Add('repayment_frequency', Format(ProductFactory."Repayment Frequency"));
+                        Datum.Add('min_interest_rate', Format(ProductFactory."Interest Rate (Min.)"));
+                        Datum.Add('min_interest_rate_monthly', Format(ProductFactory."Interest Rate (Min.)" / 12));
+                        Datum.Add('maximum_installments', ProductFactory."Ordinary Default Intallments");
+                        Datum.Add('interest_calculation_method', Format(ProductFactory."Interest Calculation Method"));
+                        Datum.Add('is_mobile_loan', ProductFactory."Mobile Loan");
+                        Datum.Add('repayment_mode', Format(ProductFactory."Repay Mode"));
+                        Datum.Add('source', ProductFactory."Source of Funds");
+                        Datum.Add('source_unit', Format(ProductFactory."Source Unit"));
+                        Datum.Add('requires_installments', ProductFactory."Allow Topup");
+                        // Datum.Add('eligible_member_class', EligibleClass);
 
-                    Data.Add(Datum);
+                        Data.Add(Datum);
+                    end; // filter products by member class
                 end until ProductFactory.Next = 0;
             end;
 
