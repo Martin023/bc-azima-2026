@@ -844,10 +844,15 @@ page 52185822 "Account Transfer"
 
                                                             SendSMS.SendSms(Source::INTERACCOUNT_TRANSFER, Memb."Phone No.", msg, Format(Memb."No."), '', true, 0, false, 'CBS', Memb."No.", 'CBS');
 
-                                                            MembAccounts += format(BSchedDestin."Destination Amount") + ', to ' + Memb."First Name" + ' ' + BSchedDestin."Product Name";
+                                                            if MembAccounts <> '' then
+                                                                MembAccounts += ', ';
+                                                            MembAccounts += Format(BSchedDestin."Destination Amount") + ' to ' + Memb."First Name" + ' ' + BSchedDestin."Product Name";
                                                         end
-                                                        else
-                                                            MembAccounts += ', ' + format(BSchedDestin."Destination Amount") + ' to ' + BSchedDestin."Product Name";
+                                                        else begin
+                                                            if MembAccounts <> '' then
+                                                                MembAccounts += ', ';
+                                                            MembAccounts += Format(BSchedDestin."Destination Amount") + ' to your ' + BSchedDestin."Product Name";
+                                                        end;
                                                     end;
                                                 end;
                                             end;
@@ -875,10 +880,15 @@ page 52185822 "Account Transfer"
 
                                                             SendSMS.SendSms(Source::INTERACCOUNT_TRANSFER, Memb."Phone No.", msg, Format(Memb."No."), '', true, 0, false, 'CBS', Memb."No.", 'CBS');
 
-                                                            MembAccounts += format(BSchedDestin."Destination Amount") + ', to ' + Memb."First Name" + ' ' + BSchedDestin."Product Name";
+                                                            if MembAccounts <> '' then
+                                                                MembAccounts += ', ';
+                                                            MembAccounts += Format(BSchedDestin."Destination Amount") + ' to ' + Memb."First Name" + ' ' + BSchedDestin."Product Name";
                                                         end
-                                                        else
-                                                            MembAccounts += ' ' + format(BSchedDestin."Destination Amount") + ' to ' + BSchedDestin."Product Name";
+                                                        else begin
+                                                            if MembAccounts <> '' then
+                                                                MembAccounts += ', ';
+                                                            MembAccounts += Format(BSchedDestin."Destination Amount") + ' to your ' + BSchedDestin."Product Name";
+                                                        end;
                                             end;
                                         end;
 
@@ -888,7 +898,7 @@ page 52185822 "Account Transfer"
                                             msg := 'Dear ' + Member."First Name" + ', arrears of ' + format(BSchedDestin."Destination Amount") + ' has been recovered for ' + BSchedDestin."Product Name" + ': ' + BSchedDestin."Destination Loan No." + ' on ' + Format(Today) + ' ' + Format(Time)
                                         // msg := 'Dear ' + Member."First Name" + ', you have recovered arrears: ' + MembAccounts + ' from ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
                                         else
-                                            msg := 'Dear ' + Member."First Name" + ', you have successfully transferred ' + MembAccounts + ' from your' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
+                                            msg := 'Dear ' + Member."First Name" + ', you have successfully transferred ' + MembAccounts + ' from your ' + BSched."Product Name" + ' on ' + Format(Today) + ' ' + Format(Time)
                                     end
                                     else begin
                                         if Rec."Recover Arrears" then
@@ -902,6 +912,7 @@ page 52185822 "Account Transfer"
                             end;
                         until BSched.next = 0;
                     end;
+                    Message('SMS Notifications Sent Successfully');
                 end;
             }
 

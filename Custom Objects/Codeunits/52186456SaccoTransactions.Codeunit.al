@@ -4462,10 +4462,15 @@ Codeunit 52186456 "Sacco Transactions"
 
                                                         SendSMS.SendSms(Source::INTERACCOUNT_TRANSFER, Memb."Phone No.", msg, Format(Memb."No."), '', true, 0, false, 'CBS', Memb."No.", 'CBS');
 
-                                                        MembAccounts += format(BSchedDestin."Destination Amount") + ', to ' + Memb."First Name" + ' ' + BSchedDestin."Product Name";
+                                                        if MembAccounts <> '' then
+                                                            MembAccounts += ', ';
+                                                        MembAccounts += Format(BSchedDestin."Destination Amount") + ' to ' + Memb."First Name" + ' ' + BSchedDestin."Product Name";
                                                     end
-                                                    else
-                                                        MembAccounts += ', ' + format(BSchedDestin."Destination Amount") + ' to ' + BSchedDestin."Product Name";
+                                                    else begin
+                                                        if MembAccounts <> '' then
+                                                            MembAccounts += ', ';
+                                                        MembAccounts += Format(BSchedDestin."Destination Amount") + ' to your ' + BSchedDestin."Product Name";
+                                                    end;
                                                 end;
                                             end;
                                         end;
@@ -4493,10 +4498,15 @@ Codeunit 52186456 "Sacco Transactions"
 
                                                         SendSMS.SendSms(Source::INTERACCOUNT_TRANSFER, Memb."Phone No.", msg, Format(Memb."No."), '', true, 0, false, 'CBS', Memb."No.", 'CBS');
 
-                                                        MembAccounts += format(BSchedDestin."Destination Amount") + ', to ' + Memb."First Name" + ' ' + BSchedDestin."Product Name";
+                                                        if MembAccounts <> '' then
+                                                            MembAccounts += ', ';
+                                                        MembAccounts += Format(BSchedDestin."Destination Amount") + ' to ' + Memb."First Name" + ' ' + BSchedDestin."Product Name";
                                                     end
-                                                    else
-                                                        MembAccounts += ' ' + format(BSchedDestin."Destination Amount") + ' to ' + BSchedDestin."Product Name";
+                                                    else begin
+                                                        if MembAccounts <> '' then
+                                                            MembAccounts += ', ';
+                                                        MembAccounts += Format(BSchedDestin."Destination Amount") + ' to your ' + BSchedDestin."Product Name";
+                                                    end;
                                         end;
                                     end;
 
