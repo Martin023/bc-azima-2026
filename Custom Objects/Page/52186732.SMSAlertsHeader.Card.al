@@ -612,39 +612,39 @@ page 52186732 "SMS Alerts Header Card"
 
     end;
 
-    local procedure AddSingleDocument(SmsAlertLine: Record "SMS Alerts Lines"; Zip: Codeunit "Data Compression")
-    var
-        TempBlob: Codeunit "Temp Blob";
-        RecRef: RecordRef;
-        FileMgt: Codeunit "File Management";
-        FileName: Text;
-        FileManagement: Codeunit "File Management";
-        FileNameArchive: Text;
-        OutS: OutStream;
-        InS: InStream;
+    // local procedure AddSingleDocument(SmsAlertLine: Record "SMS Alerts Lines"; Zip: Codeunit "Data Compression")
+    // var
+    //     TempBlob: Codeunit "Temp Blob";
+    //     RecRef: RecordRef;
+    //     FileMgt: Codeunit "File Management";
+    //     FileName: Text;
+    //     FileManagement: Codeunit "File Management";
+    //     FileNameArchive: Text;
+    //     OutS: OutStream;
+    //     InS: InStream;
 
-        FilePath: Text;
-    begin
-        FilePath := 'C:\Users\Administrator\Downloads\Files\';
-        FileName := SmsAlertLine."Member No" + Format(SmsAlertLine."Notice Type") + '.pdf';
+    //     FilePath: Text;
+    // begin
+    //     FilePath := 'C:\Users\Administrator\Downloads\Files\';
+    //     FileName := SmsAlertLine."Member No" + Format(SmsAlertLine."Notice Type") + '.pdf';
 
 
 
-        TempBlob.CreateOutStream(OutS);
-        RecRef.GetTable(SmsAlertLine);
+    //     TempBlob.CreateOutStream(OutS);
+    //     RecRef.GetTable(SmsAlertLine);
 
-        if SmsAlertLine."Notice Category" = SmsAlertLine."Notice Category"::"First Notice" then
-            Report.SaveAs(Report::"First Notice", '', ReportFormat::Pdf, OutS, RecRef);
-        if (SmsAlertLine."Notice Category" = SmsAlertLine."Notice Category"::"Second Notice") and (SmsAlertLine.Recepient = SmsAlertLine.Recepient::Lonee) then
-            Report.SaveAs(52186796, '', ReportFormat::Pdf, OutS, RecRef);
-        if (SmsAlertLine."Notice Category" = SmsAlertLine."Notice Category"::"Second Notice") and (SmsAlertLine.Recepient = SmsAlertLine.Recepient::Guarantor) then
-            Report.SaveAs(52186797, '', ReportFormat::Pdf, OutS, RecRef);
+    //     if SmsAlertLine."Notice Category" = SmsAlertLine."Notice Category"::"First Notice" then
+    //         Report.SaveAs(Report::"First Notice", '', ReportFormat::Pdf, OutS, RecRef);
+    //     if (SmsAlertLine."Notice Category" = SmsAlertLine."Notice Category"::"Second Notice") and (SmsAlertLine.Recepient = SmsAlertLine.Recepient::Lonee) then
+    //         Report.SaveAs(52186796, '', ReportFormat::Pdf, OutS, RecRef);
+    //     if (SmsAlertLine."Notice Category" = SmsAlertLine."Notice Category"::"Second Notice") and (SmsAlertLine.Recepient = SmsAlertLine.Recepient::Guarantor) then
+    //         Report.SaveAs(52186797, '', ReportFormat::Pdf, OutS, RecRef);
 
-        FileName := SmsAlertLine."Member No" + Format(SmsAlertLine."Notice Type") + '.pdf';
+    //     FileName := SmsAlertLine."Member No" + Format(SmsAlertLine."Notice Type") + '.pdf';
 
-        TempBlob.CreateInStream(InS);
-        Zip.AddEntry(InS, FileName);
-    end;
+    //     TempBlob.CreateInStream(InS);
+    //     Zip.AddEntry(InS, FileName);
+    // end;
 
     local procedure CreateNotices(AlertLoanLines: Record "Alerts Loan Lines"; NoticeType: Option "1st Notice","2nd Notice","Arrears Alert","CRB Notice","CRB Listing","Defaulter Notice")
     var
@@ -1367,7 +1367,7 @@ page 52186732 "SMS Alerts Header Card"
         AlertsLines.Reset();
         AlertsLines.SetRange("Header No", Rec."No.");
         AlertsLines.SetRange("Notice Type", AlertsLines."Notice Type"::Letter);
-        AlertsLines.SetRange("Notice Category", AlertsLines."Notice Category"::"First Notice");
+        //AlertsLines.SetRange("Notice Category", AlertsLines."Notice Category"::"First Notice");
         if AlertsLines.Find('-') then begin
             repeat
 

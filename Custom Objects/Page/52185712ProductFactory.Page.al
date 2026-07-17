@@ -846,6 +846,10 @@ page 52185712 "Product Factory"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Exclude From Salary"; Rec."Exclude From Salary")
+                {
+                    Caption = 'Exclued Sal Qualification.';
+                }
             }
             group("Staff Lending")
             {
@@ -860,10 +864,7 @@ page 52185712 "Product Factory"
                 {
 
                 }
-                field("Security Muliplier"; Rec."Security Muliplier")
-                {
 
-                }
                 field("Staff Salary Multiplier"; Rec."Staff Salary Multiplier")
                 {
                     ApplicationArea = Basic, Suite;
