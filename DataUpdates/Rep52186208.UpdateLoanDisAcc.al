@@ -1,28 +1,4 @@
-// namespace KenpipeCBS.KenpipeCBS;
 
-// report 52186208 UpdateSavingAcc
-// {
-//     ApplicationArea = All;
-//     Caption = 'Delete Loan Calculator';
-//     UsageCategory = ReportsAndAnalysis;
-//     ProcessingOnly = true;
-
-//     dataset
-//     {
-//         dataitem(Loans; Loans)
-//         {
-//             DataItemTableView = where("Loan No." = const('KENPIPE\LILIAN.OLUOCH'));
-//             trigger OnAfterGetRecord()
-//             begin
-//                 Loans.Delete();
-//             end;
-
-//         }
-//     }
-// }
-
-
-//******************Update expected date of completion******************//
 report 52186230 UpdateData
 {
     ApplicationArea = All;

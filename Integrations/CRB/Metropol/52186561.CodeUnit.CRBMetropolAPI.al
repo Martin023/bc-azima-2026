@@ -712,7 +712,7 @@ codeunit 52186561 "CRB Metropol API"
             PayloadObject.Add('submission_date', GFunc.FormatCRBDate(Today));
             PayloadObject.Add('submission_type', 'D');
             PayloadObject.Add('template_version', '4');
-            PayloadObject.Add('callback_url', 'https://www.kenpipesacco.com');
+            PayloadObject.Add('callback_url', 'https://www.azimasacco.com');
 
             Datum.Add('account_number', CRBDPIInformation."Account Number");
             Datum.Add('account_status', CRBDPIInformation."Account Status");
@@ -1048,7 +1048,7 @@ codeunit 52186561 "CRB Metropol API"
             PayloadObject.Add('submission_date', GFunc.FormatCRBDate(Today));
             PayloadObject.Add('submission_type', 'M');
             PayloadObject.Add('template_version', '4');
-            PayloadObject.Add('callback_url', 'https://test.kenpipesacco.coop');
+            PayloadObject.Add('callback_url', 'https://test.azimasacco.coop');
 
             Datum.Add('account_closure_reason', CRBMonthlyICEInformation."Account Closure Reason");
             Datum.Add('account_indicator', CRBMonthlyICEInformation."Account Joint/Single Indicator");
@@ -1425,7 +1425,7 @@ codeunit 52186561 "CRB Metropol API"
             PayloadObject.Add('submission_date', GFunc.FormatCRBDate(Today));
             PayloadObject.Add('submission_type', 'M');
             PayloadObject.Add('template_version', '4');
-            PayloadObject.Add('callback_url', 'https://test.kenpipesacco.coop');
+            PayloadObject.Add('callback_url', 'https://test.azimasacco.coop');
 
             Datum.Add('account_closure_reason', CRBMonthlyICEInformation."Account Closure Reason");
             Datum.Add('account_holder_type', CRBMonthlyICEInformation."Account Product Type");
@@ -2392,7 +2392,7 @@ codeunit 52186561 "CRB Metropol API"
                 end;
 
                 if TheCRBSubmission."Consumer E-Mail" = '' then begin
-                    TheCRBSubmission."Consumer E-Mail" := 'info@kenpipesacco.coop';
+                    TheCRBSubmission."Consumer E-Mail" := 'info@azimasacco.coop';
                 end;
 
                 TheCRBSubmission."Employer Name" := CopyStr(TheLoanee."Employer Name", 1, 50);
@@ -2783,7 +2783,7 @@ codeunit 52186561 "CRB Metropol API"
         VendorName: Label 'CRB Metropol';
         GFunc: Codeunit "Global Functions";
         theCRBInstitution: Label 'METROPOL';
-        theCompanyName: Label 'KENPIPE SACCO SOCIETY LIMITED';
-        theLocationTown: Label 'NAIROBI';
+        theCompanyName: Label 'AZIMA SACCO SOCIETY LIMITED';
+        theLocationTown: Label 'THIKA';
         theLenderBranchCode: Label 'N173001';
 }

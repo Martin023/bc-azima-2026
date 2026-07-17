@@ -525,9 +525,9 @@ Report 52185462 "CRB Monthly Attached"
                 LocationCoutry := 'KE';
                 OccupationalIndustryType := '011';
                 IncomeAmount := 12000000;
-                LendersRegisteredName := 'Kenpipe DT SACCO LTD';
-                LendersTradingName := 'Kenpipe DT SACCO LTD';
-                LendersBrachName := 'Kenpipe DT SACCO LTD';
+                LendersRegisteredName := 'AZIMA DT SACCO LTD';
+                LendersTradingName := 'AZIMA DT SACCO LTD';
+                LendersBrachName := 'AZIMA DT SACCO LTD';
                 LendersBrachCode := 'N084001';
 
                 if CopyStr(Loans."Loan Product Type", 1, 1) = 'D' then

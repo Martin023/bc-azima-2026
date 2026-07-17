@@ -937,13 +937,11 @@ page 52186761 "Security Perfection Card"
                             if Members.Find('-') then begin
                                 if Members."Phone No." <> '' then begin
                                     if Confirm('Do you want to send an SMS to the Loanee?') then
-                                        //msg := 'Dear, ' + Rec."Member Name" + ', This is to formally inform you that the ' + Format(Rec."Charge Type") + ' over ' + 'Property Number - ' + Rec."Property Number" + ' ' + 'which you offered as collateral for' + ' ' + Rec."Loan Name" + ' ' + 'was successfully registered in favour of Kenpipe SACCO on the' + ' ' + FORMAT(Rec."Date Perfected") + '. ' + 'The same was charged at Kshs. ' + Format(Rec."Amount To Charge") + '.';
-                                        msg := 'Dear, ' + Rec."Member Name" + ', this is to formally inform you that the ' + Rec."Concatenated Property" + ' ' + 'which you offered as collateral for' + ' ' + Rec."Loan Name" + ' ' + 'was successfully registered in favour of Kenpipe SACCO on' + ' ' + FORMAT(Rec."Date of External Registration") + '. ';
+                                        msg := 'Dear, ' + Rec."Member Name" + ', this is to formally inform you that the ' + Rec."Concatenated Property" + ' ' + 'which you offered as collateral for' + ' ' + Rec."Loan Name" + ' ' + 'was successfully registered in favour of AZIMA SACCO on' + ' ' + FORMAT(Rec."Date of External Registration") + '. ';
                                     SendSMS.SendSms(Source::"Security Perfection", Members."Phone No.", msg, ' ', ' ', false, 0, false, 'CBS', Rec."Security No.", 'CBS', Rec."Date Perfected");
                                 end
                                 else if Members."Transactional Mobile Number" <> ' ' then begin
-                                    //msg := 'Dear, ' + Rec."Member Name" + ', \This is to formally inform you that the ' + Format(Rec."Charge Type") + ' over ' + 'Property Number - ' + Rec."Property Number" + ' ' + 'which you offered as collateral for' + ' ' + Rec."Loan Name" + ' ' + 'was successfully registered in favour of Kenpipe SACCO on the' + ' ' + FORMAT(Rec."Date Perfected") + '. ' + 'The same was charged at Kshs. ' + Format(Rec."Amount To Charge") + '.';
-                                    msg := 'Dear, ' + Rec."Member Name" + ', this is to formally inform you that the ' + Rec."Concatenated Property" + ' ' + 'which you offered as collateral for' + ' ' + Rec."Loan Name" + ' ' + 'was successfully registered in favour of Kenpipe SACCO on' + ' ' + FORMAT(Rec."Date of External Registration") + '. ';
+                                    msg := 'Dear, ' + Rec."Member Name" + ', this is to formally inform you that the ' + Rec."Concatenated Property" + ' ' + 'which you offered as collateral for' + ' ' + Rec."Loan Name" + ' ' + 'was successfully registered in favour of AZIMA SACCO on' + ' ' + FORMAT(Rec."Date of External Registration") + '. ';
                                     SendSMS.SendSms(Source::"Security Perfection", Members."Transactional Mobile Number", msg, ' ', ' ', false, 0, false, 'CBS', Rec."Security No.", 'CBS', Rec."Date Perfected");
                                 end
                                 else
@@ -954,7 +952,7 @@ page 52186761 "Security Perfection Card"
                             if Rec."Collateral Owner" = Rec."Collateral Owner"::Chargor then begin
                                 if Rec."Chargor Phone No." <> ' ' then begin
                                     if Confirm('Do you want to send SMS to the Chargor') then
-                                        msg := 'Dear ' + Rec."Chargor/Owner Name" + ',\' + ' please note that the ' + FORMAT(Rec."Charge Type") + 'over Property No. ' + Rec."Property Number" + 'which you offered as collateral for' + ' ' + Rec."Loan Name" + ' ' + 'for ' + Rec."Member Name" + ' was successfully registered in favour of Kenpipe SACCO on the' + ' ' + FORMAT(Rec."Date Perfected") + '. ' + 'The same was charged at Kshs. ' + Format(Rec."Amount To Charge") + '.';
+                                        msg := 'Dear ' + Rec."Chargor/Owner Name" + ',\' + ' please note that the ' + FORMAT(Rec."Charge Type") + 'over Property No. ' + Rec."Property Number" + 'which you offered as collateral for' + ' ' + Rec."Loan Name" + ' ' + 'for ' + Rec."Member Name" + ' was successfully registered in favour of AZIMA SACCO on the' + ' ' + FORMAT(Rec."Date Perfected") + '. ' + 'The same was charged at Kshs. ' + Format(Rec."Amount To Charge") + '.';
                                     SendSMS.SendSms(Source::"Security Perfection", Rec."Chargor Phone No.", msg, ' ', ' ', false, 0, false, 'CBS', Rec."Security No.", 'CBS', Rec."Date Perfected");
                                 end
                                 else
@@ -1032,7 +1030,6 @@ page 52186761 "Security Perfection Card"
             //         if Members.Find('-') then begin
             //             if Members."Phone No." <> '' then begin
             //                 if Confirm('Do you want to send an SMS to the member?') then
-            //                     msg := 'Dear, ' + Rec."Member Name" + ', this is to formally inform you that the ' + Format(Rec."Charge Type") + ' over ' + 'Property Number - ' + Rec."Property Number" + ' ' + 'which you offered as collateral for' + ' ' + Rec."Loan Name" + ' ' + 'was successfully registered in favour of Kenpipe SACCO on the' + ' ' + FORMAT(Rec."Date of Registration") + '. ' + 'The same was charged at Kshs. ' + Format(Rec."Amount To Charge") + '.';
             //                 SendSMS.SendSms(Source::"Security Perfection", Members."Phone No.", msg, ' ', ' ', false, 0, false, 'CBS', Rec."Security No.", 'CBS', Rec."Date of Registration");
             //             end
             //             else begin

@@ -1742,24 +1742,6 @@ codeunit 52186512 "Sky M-Banking Transactions"
                         SalAvg := ProdFac."Maximum Loan Amount";
                     end;
 
-                    // Remove last salary Qualification(Not checked for kenpipe)
-
-                    // Get last salary amount
-                    // SalaryLines.RESET;
-                    // SalaryLines.SETRANGE("Member No.", saccoAccount."Member No.");
-                    // SalaryLines.SETRANGE(Posted, TRUE);
-                    // SalaryLines.SETRANGE("Posting Date", CALCDATE(('-' + format(ProdFac."Salary Period")), TODAY), TODAY);
-                    // SalaryLines.SetLoadFields(Amount);
-                    // SalaryLines.SetCurrentKey(Amount);
-                    // IF SalaryLines.FINDLAST THEN BEGIN
-                    //     SalaryAmount := SalaryLines.Amount - (STOAmount + LoanRec);
-                    // END;
-
-                    // IF SalaryAmount > SalAvg THEN
-                    //     SalaryAmount := SalAvg;
-
-                    // amtQualified := SalaryAmount * (ProdFac."Net Salary Multiplier %" / 100);
-
                     SalAvg := SalAvg - (STOAmount + LoanRec);
                     Message('Salary Average after deductions: %1', Format(SalAvg));
 
@@ -1768,14 +1750,6 @@ codeunit 52186512 "Sky M-Banking Transactions"
 
                     IF amtQualified < 0 THEN
                         amtQualified := 0;
-
-
-
-                    // Weekend Njema Loan
-
-                    // if Installments <> 0 then begin
-                    //     QualifiedAmount := QualifiedAmount * Installments;
-                    // end;
 
                     if QualifiedAmount > ProdFac."Maximum Loan Amount" then begin
                         QualifiedAmount := ProdFac."Maximum Loan Amount";
