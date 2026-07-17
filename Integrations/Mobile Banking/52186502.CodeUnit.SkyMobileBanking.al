@@ -7022,6 +7022,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                     */
                                                                     theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
                                                                     ', you have successfully funded your ' + TheDestinationSavings."Product Name" +
+                                                                    ' with Ksh ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                                     ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(TheDestinationSavings, true)) +
                                                                     ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
                                                                 end else begin
@@ -7422,6 +7423,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                     if (TheDestinationSavings."No." <> '') and (TheSourceMember."No." = TheDestinationSavings."Member No.") then
                                                                                         theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
                                                                                                     ', you have successfully funded your ' + TheDestinationSavings."Product Name" +
+                                                                                                    ' with Ksh ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                                                                     ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(TheDestinationSavings, true)) +
                                                                                                     ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time")
                                                                                     else
@@ -7569,6 +7571,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                         if (TheDestinationSavings."No." <> '') and (TheSourceMember."No." = TheDestinationSavings."Member No.") then
                                                                                             theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
                                                                                                             ', you have successfully funded your ' + TheDestinationSavings."Product Name" +
+                                                                                                            ' with Ksh ' + Format(MpesaTransBuffer."Transaction Amount") +
                                                                                                             ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(TheDestinationSavings, true)) +
                                                                                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time")
                                                                                         else
