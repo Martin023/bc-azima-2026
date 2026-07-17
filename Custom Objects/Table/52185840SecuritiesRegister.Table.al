@@ -280,6 +280,11 @@ table 52185840 "Securities Register"
         field(120; "Amount to be Charged"; Decimal)
         {
             Caption = 'Charged Amount';
+            trigger OnValidate()
+            begin
+                if "Amount to be Charged" > rec."Forced Sale Value" then Error('Amount to be charged cannot be more than forced Sale value!');
+            end;
+
         }
         field(121; "Market Value"; Decimal)
         {

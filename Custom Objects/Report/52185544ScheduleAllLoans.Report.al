@@ -39,15 +39,10 @@ Report 52185544 "Schedule All Loans"
                         LoanRescheduling.SetRange(LoanRescheduling."Rescheduled", true);
                         if LoanRescheduling.Find('-') then begin
                             PeriodicActivities.RescheduleLoanII(LoanRescheduling);
-                        end else
+                        end
+                         else
                             LoanProcess.GenerateSchedule(Loans, RecreateSchedule);
                     end else
-                        LoanProcess.GenerateSchedule(Loans, RecreateSchedule);
-                end
-                else begin
-                    LRepaymentSchedule.Reset;
-                    LRepaymentSchedule.SetRange(LRepaymentSchedule."Loan No.", Loans."Loan No.");
-                    if not LRepaymentSchedule.Find('-') then
                         LoanProcess.GenerateSchedule(Loans, RecreateSchedule);
                 end;
 
@@ -87,12 +82,12 @@ Report 52185544 "Schedule All Loans"
 
                         end;
                     end;
+                    Loans.Repayment := Loans."Loan Principle Repayment" + Loans."Loan Interest Repayment";
+                    //Loans."Repayment Start Date" := "Disbursement Date" + 45;
+                    loans."Repayment Start Date" := CalcDate('CM+1M', loans."Disbursement Date");
+                    Loans.Modify();
                 end;
 
-                Loans.Repayment := Loans."Loan Principle Repayment" + Loans."Loan Interest Repayment";
-                
-                loans."Repayment Start Date" := CalcDate('CM+1M', loans."Disbursement Date");
-                Loans.Modify();
             end;
 
             trigger OnPreDataItem()
