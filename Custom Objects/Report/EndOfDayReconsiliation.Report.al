@@ -9,7 +9,7 @@ Report 52185446 "End of Day Reconciliation"
         dataitem(TreasuryTrans; "Treasury Cashier Transactions")
         {
             DataItemTableView = sorting(No) where("Transaction Type" = const("End of Day Return to Treasury"));
-            RequestFilterFields = No, "From Account", "From Bank", "Transaction Date";
+            RequestFilterFields = No, "From Account", "Date Posted"; // Changed to Date Posted for filtering
 
             column(CompanyInfo_Name; CompanyInformation.Name) { }
             column(CompanyInformation_Picture; CompanyInformation.Picture) { }
@@ -24,7 +24,7 @@ Report 52185446 "End of Day Reconciliation"
             column(CompanyBranch_Name; CompanyInformation.Name + ' SASA Section') { }
             column(PrintDate; Format(CurrentDateTime, 0, '<Day,2>/<Month,2>/<Year4>')) { }
             column(TellerName; "From Account") { }
-            column(EndOfDayDate; Format("Transaction Date", 0, '<Day,2>/<Month,2>/<Year4>')) { }
+            column(EndOfDayDate; Format("Date Posted", 0, '<Day,2>/<Month,2>/<Year4>')) { }
             column(EODPostedStatus; EODPostedStatusTxt) { }
             column(TellerAccount; "From Bank") { }
             column(PostedBy; "Posted By") { }
@@ -91,38 +91,34 @@ Report 52185446 "End of Day Reconciliation"
                 end else
                     AccuracyLevelTxt := '100%';
 
-                TotalReceiptsAmt := 0;
-                TotalPaymentsAmt := 0;
-                CashDepositAmt := 0;
-                MPesaCashDepositAmt := 0;
-                ReceiveFromTreasuryAmt := 0;
-                SpecialReceiptAmt := 0;
-                CashWithdrawalAmt := 0;
-                EndOfDayAmt := 0;
-                MPesaCashWithdrawAmt := 0;
-                PettyCashAmt := 0;
-                ReturnToTreasuryAmt := 0;
+                // Initialize all Amounts to Zero
+                ClearAllAmounts();
+
+                // Set filter date from the main record being processed
+                FilterDate := TreasuryTrans."Date Posted";
 
                 CashierTrans.Reset();
                 CashierTrans.SetRange(Cashier, "From Account");
-                CashierTrans.SetRange("Transaction Date", "Transaction Date");
+                CashierTrans.SetRange("Date Posted", FilterDate);
                 CashierTrans.SetRange(Posted, true);
                 if CashierTrans.FindSet() then begin
                     repeat
-                        if CashierTrans.Type = CashierTrans.Type::"Cash Deposit" then
-                            CashDepositAmt += CashierTrans.Amount
-                        else if CashierTrans.Type = CashierTrans.Type::"MPESA Deposit" then
-                            MPesaCashDepositAmt += CashierTrans.Amount
-                        else if CashierTrans.Type = CashierTrans.Type::"Cash Withdrawal" then
-                            CashWithdrawalAmt += CashierTrans.Amount
-                        else if CashierTrans.Type = CashierTrans.Type::"MPESA Withdrawal" then
-                            MPesaCashWithdrawAmt += CashierTrans.Amount;
+                        case CashierTrans.Type of
+                            CashierTrans.Type::"Cash Deposit":
+                                CashDepositAmt += CashierTrans.Amount;
+                            CashierTrans.Type::"MPESA Deposit":
+                                MPesaCashDepositAmt += CashierTrans.Amount;
+                            CashierTrans.Type::"Cash Withdrawal":
+                                CashWithdrawalAmt += CashierTrans.Amount;
+                            CashierTrans.Type::"MPESA Withdrawal":
+                                MPesaCashWithdrawAmt += CashierTrans.Amount;
+                        end;
                     until CashierTrans.Next() = 0;
                 end;
 
                 TreasuryTransIn.Reset();
                 TreasuryTransIn.SetRange("To Account", "From Account");
-                TreasuryTransIn.SetRange("Transaction Date", "Transaction Date");
+                TreasuryTransIn.SetRange("Date Posted", FilterDate);
                 TreasuryTransIn.SetRange("Transaction Type", TreasuryTransIn."Transaction Type"::"Issue To Teller");
                 TreasuryTransIn.SetRange(Posted, true);
                 if TreasuryTransIn.FindSet() then begin
@@ -133,7 +129,7 @@ Report 52185446 "End of Day Reconciliation"
 
                 TreasuryTransOut.Reset();
                 TreasuryTransOut.SetRange("From Account", "From Account");
-                TreasuryTransOut.SetRange("Transaction Date", "Transaction Date");
+                TreasuryTransOut.SetRange("Date Posted", FilterDate);
                 TreasuryTransOut.SetRange("Transaction Type", TreasuryTransOut."Transaction Type"::"Return To Treasury");
                 TreasuryTransOut.SetRange(Posted, true);
                 if TreasuryTransOut.FindSet() then begin
@@ -145,7 +141,7 @@ Report 52185446 "End of Day Reconciliation"
                 PaymentsHeader.Reset();
                 PaymentsHeader.SetRange("Payment Type", PaymentsHeader."Payment Type"::"Petty Cash");
                 PaymentsHeader.SetRange("Paying Bank Account", "From Bank");
-                PaymentsHeader.SetRange("Date Posted", "Transaction Date");
+                PaymentsHeader.SetRange("Date Posted", FilterDate);
                 PaymentsHeader.SetRange(Posted, true);
                 if PaymentsHeader.FindSet() then begin
                     repeat
@@ -157,14 +153,14 @@ Report 52185446 "End of Day Reconciliation"
                 EndOfDayAmt := Amount;
 
                 GrandTotalReceiptsAmt := CashDepositAmt + MPesaCashDepositAmt + ReceiveFromTreasuryAmt + SpecialReceiptAmt;
-
                 GrandTotalPaymentsAmt := CashWithdrawalAmt + EndOfDayAmt + MPesaCashWithdrawAmt + PettyCashAmt + ReturnToTreasuryAmt;
 
                 TotalReceiptsAmt := GrandTotalReceiptsAmt;
-                TotalPaymentsAmt := GrandTotalPaymentsAmt;
+
+                TotalPaymentsAmt := GrandTotalPaymentsAmt - EndOfDayAmt;
                 BalBroughtForwardAmt := 0.00;
 
-                BalCarriedDownAmt := ABS(BalBroughtForwardAmt + TotalReceiptsAmt - TotalPaymentsAmt);
+                BalCarriedDownAmt := BalBroughtForwardAmt + TotalReceiptsAmt - TotalPaymentsAmt;
             end;
         }
     }
@@ -197,35 +193,31 @@ Report 52185446 "End of Day Reconciliation"
         TreasuryTransIn: Record "Treasury Cashier Transactions";
         TreasuryTransOut: Record "Treasury Cashier Transactions";
         PaymentsHeader: Record "Payments Header";
-
         CoinageRec: Record Coinage;
-        ActualCashAtHandAmt: Decimal;
+        CompanyInformation: Record "Company Information";
+        GlobalFunctions: Codeunit "Global Functions";
 
+        ActualCashAtHandAmt: Decimal;
         EODPostedStatusTxt: Text[10];
         ShortageAccCode: Code[20];
         SurplusAccCode: Code[20];
         DifferenceAmt: Decimal;
         AccuracyLevelTxt: Text[20];
-
         BalBroughtForwardAmt: Decimal;
         BalCarriedDownAmt: Decimal;
         TotalReceiptsAmt: Decimal;
         TotalPaymentsAmt: Decimal;
-
         CashDepositAmt: Decimal;
         MPesaCashDepositAmt: Decimal;
         ReceiveFromTreasuryAmt: Decimal;
         SpecialReceiptAmt: Decimal;
         GrandTotalReceiptsAmt: Decimal;
-
         CashWithdrawalAmt: Decimal;
         EndOfDayAmt: Decimal;
         MPesaCashWithdrawAmt: Decimal;
         PettyCashAmt: Decimal;
         ReturnToTreasuryAmt: Decimal;
         GrandTotalPaymentsAmt: Decimal;
-
-        CompanyInformation: Record "Company Information";
         CompanyName: Text;
         BuldingName: Text;
         CompanyAddress: Text;
@@ -234,5 +226,24 @@ Report 52185446 "End of Day Reconciliation"
         PrintingDate: Text;
         PrintingTime: Text;
         PrintedBy: Text;
-        GlobalFunctions: Codeunit "Global Functions";
+        FilterDate: Date;
+
+    procedure ClearAllAmounts()
+    begin
+        BalBroughtForwardAmt := 0;
+        TotalReceiptsAmt := 0;
+        TotalPaymentsAmt := 0;
+        CashDepositAmt := 0;
+        MPesaCashDepositAmt := 0;
+        ReceiveFromTreasuryAmt := 0;
+        SpecialReceiptAmt := 0;
+        GrandTotalReceiptsAmt := 0;
+        CashWithdrawalAmt := 0;
+        EndOfDayAmt := 0;
+        MPesaCashWithdrawAmt := 0;
+        PettyCashAmt := 0;
+        ReturnToTreasuryAmt := 0;
+        GrandTotalPaymentsAmt := 0;
+        BalCarriedDownAmt := 0;
+    end;
 }
