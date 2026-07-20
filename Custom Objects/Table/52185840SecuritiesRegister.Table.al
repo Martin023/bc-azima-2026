@@ -77,11 +77,12 @@ table 52185840 "Securities Register"
 
             trigger OnValidate()
             begin
-                Validate("Forced Sale Value");
                 if ("Collateral Multiplier" > 100) or
                   ("Collateral Multiplier" < 0)
                   then
-                    "Collateral Multiplier" := 0
+                    "Collateral Multiplier" := 0;
+
+                Validate("Forced Sale Value");
             end;
         }
         field(16; "Insured Value"; Decimal)

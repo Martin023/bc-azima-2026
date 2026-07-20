@@ -1830,7 +1830,7 @@ page 52185753 "Loan Application Card"
                             LoanGua.SetRange("Self Guarantee", false);
                             if LoanGua.count < 6 then begin
                                 if (rec."Approved Amount" > 100000) then begin
-                                    Error('Minimum guarantors should be 6 for loans above 100000');
+                                    if not Confirm('Minimum guarantors should be 6 for loans above 100000 and this loan has only %1 Do you wish to proceed?', true) then error('Aborted!');
                                 end;
                             end;
                         end;
