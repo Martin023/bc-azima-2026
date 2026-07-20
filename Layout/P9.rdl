@@ -5846,9 +5846,6 @@ End Function
   <DataSets>
     <DataSet Name="DataSet_Result">
       <Fields>
-        <Field Name="ReportForNavId_1000000000">
-          <DataField>ReportForNavId_1000000000</DataField>
-        </Field>
         <Field Name="HREmpPR_ContType">
           <DataField>HREmpPR_ContType</DataField>
         </Field>
@@ -5917,9 +5914,6 @@ End Function
         </Field>
         <Field Name="TotPensionContrFormat">
           <DataField>TotPensionContrFormat</DataField>
-        </Field>
-        <Field Name="ReportForNavId_1000000001">
-          <DataField>ReportForNavId_1000000001</DataField>
         </Field>
         <Field Name="EmployeeCode_PREmployeeP9Info">
           <DataField>EmployeeCode_PREmployeeP9Info</DataField>

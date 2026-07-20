@@ -97,8 +97,8 @@ report 52185511 "Master Payroll Report"
 
                 if HREmployee.Get("PR Salary Card"."Employee Code") then
                     strEmpName := HREmployee."First Name" + ' ' + HREmployee."Middle Name" + ' ' + HREmployee."Last Name";
-
-                NSSFSELFI := 540;
+                if "Basic Pay" > 0 then
+                    NSSFSELFI := 540;
                 PeriodTrans.Reset();
                 PeriodTrans.Setrange("Employee Code", "PR Salary Card"."Employee Code");
                 PeriodTrans.Setrange("Payroll Period", SelectedPeriod);
@@ -123,9 +123,9 @@ report 52185511 "Master Payroll Report"
                                 NSSFSEFLII := PeriodTrans.Amount - NSSFSELFI;
                             'D048':
                                 PensSELF := PeriodTrans.Amount;
-                            'SHIF':
+                            'D049':
                                 SHIF := PeriodTrans.Amount;
-                            'HLEVY':
+                            'D080':
                                 HLEVY := PeriodTrans.Amount;
                             'D003':
                                 SHARECAP := PeriodTrans.Amount;
@@ -147,6 +147,8 @@ report 52185511 "Master Payroll Report"
                                 MORGAGE := PeriodTrans.Amount;
                             'D012':
                                 MORTINT := PeriodTrans.Amount;
+                            'D002':
+                                MEMDEPOSIT := PeriodTrans.Amount;
 
                         end;
 
