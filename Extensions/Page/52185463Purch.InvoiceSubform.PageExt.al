@@ -1,17 +1,59 @@
 // #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-PageExtension 52185463 pageextension52185463 extends "Purch. Invoice Subform" 
+PageExtension 52185463 pageextension52185463 extends "Purch. Invoice Subform"
 {
     layout
     {
-         modify("Gen. Bus. Posting Group")
+        modify("Gen. Bus. Posting Group")
         {
-            Visible=true;
+            Visible = true;
         }
         modify("Gen. Prod. Posting Group")
         {
             ApplicationArea = Basic;
-            Visible=true;
+            Visible = true;
         }
+
+        modify("Location Code")
+        {
+            Visible = true;
+            ShowMandatory = true;
+        }
+
+        modify("Unit of Measure Code")
+        {
+            Visible = false;
+        }
+
+        modify("Matched Order Lines")
+        {
+            Visible = false;
+        }
+
+        modify("Tax Area Code")
+        {
+            Visible = false;
+        }
+
+        modify("Tax Group Code")
+        {
+            Visible = false;
+        }
+
+        modify("Qty. to Assign")
+        {
+            Visible = false;
+        }
+
+        modify("line Discount Amount")
+        {
+            Visible = false;
+        }
+
+        modify("Line Discount %")
+        {
+            Visible = false;
+        }
+
     }
 }
 
