@@ -49,7 +49,7 @@ report 52185507 "Deductions With Employer Contr"
                     EmployeeName := Employees."First Name" + ' ' + Employees."Middle Name" + ' ' + Employees."Last Name";
 
                 PRTransactionCodes.Reset();
-                PRTransactionCodes.SetRange("Employer Deduction", TRUE);
+                PRTransactionCodes.SetRange("Include Employer Deduction", TRUE);
                 PRTransactionCodes.SetRange("Transaction Code", "PR Period Transactions"."Transaction Code");
                 if PRTransactionCodes.Find('-') then begin
                     prEmployerDeductions.Reset;
@@ -59,7 +59,7 @@ report 52185507 "Deductions With Employer Contr"
                         EmployerAmt := prEmployerDeductions.Amount;
                     end;
 
-                    TotalAmt := EmployeeAmt + EmployerAmt;
+                    TotalAmt := "PR Period Transactions".Amount + EmployerAmt;
                 end
                 else
                     CurrReport.Skip();
