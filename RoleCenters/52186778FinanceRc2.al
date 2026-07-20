@@ -2749,7 +2749,7 @@ page 52186778 "Finance Role Center"
                                 action("Cashier Daily Report")
                                 {
                                     ApplicationArea = Basic, Suite;
-                                    Caption = 'Daily Cashier Report';
+                                    Caption = 'Tellers Journal';
                                     RunObject = report "Tellers Journal";
                                 }
                                 action("Cashier Cheque Deposits")

@@ -35,7 +35,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!CashDeposit.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CashDepositAmt.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <Format>#,0.00</Format>
@@ -49,7 +49,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!MPesaCashDeposit.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!MPesaCashDepositAmt.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <Format>#,0.00</Format>
@@ -63,7 +63,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!ReceiveFromTreasury.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!ReceiveFromTreasuryAmt.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <Format>#,0.00</Format>
@@ -77,7 +77,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!SpecialReceipt.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!SpecialReceiptAmt.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <Format>#,0.00</Format>
@@ -91,7 +91,21 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!GrandTotalReceipts.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!JournalVoucherReceiptsAmt.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!GrandTotalReceiptsAmt.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <Format>#,0.00</Format>
@@ -105,7 +119,7 @@
             </Paragraphs>
             <Top>10.1cm</Top>
             <Left>5.2cm</Left>
-            <Height>3cm</Height>
+            <Height>3.5cm</Height>
             <Width>4cm</Width>
             <Style />
           </Textbox>
@@ -124,7 +138,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>13.5cm</Top>
+            <Top>14cm</Top>
             <Left>10cm</Left>
             <Height>0.6cm</Height>
             <Width>3.5cm</Width>
@@ -145,7 +159,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>13.5cm</Top>
+            <Top>14cm</Top>
             <Left>13.5cm</Left>
             <Height>0.6cm</Height>
             <Width>6cm</Width>
@@ -166,7 +180,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>14.5cm</Top>
+            <Top>15cm</Top>
             <Left>10cm</Left>
             <Height>0.6cm</Height>
             <Width>3.5cm</Width>
@@ -185,7 +199,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>14.5cm</Top>
+            <Top>15cm</Top>
             <Left>13.5cm</Left>
             <Height>0.6cm</Height>
             <Width>6cm</Width>
@@ -198,7 +212,7 @@
             </Style>
           </Textbox>
           <Line Name="CenterDividerLine">
-            <Top>13.5cm</Top>
+            <Top>14cm</Top>
             <Left>9.5cm</Left>
             <Height>6cm</Height>
             <Width>0cm</Width>
@@ -228,7 +242,7 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>16.1cm</Top>
+            <Top>16.6cm</Top>
             <Left>5.5cm</Left>
             <Height>0.5cm</Height>
             <Width>3cm</Width>
@@ -441,7 +455,7 @@
                 </FilterValues>
               </Filter>
             </Filters>
-            <Top>14.7cm</Top>
+            <Top>15.2cm</Top>
             <Left>0.5cm</Left>
             <Height>1.3cm</Height>
             <Width>8cm</Width>
@@ -463,7 +477,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>14.1cm</Top>
+            <Top>14.6cm</Top>
             <Left>0.5cm</Left>
             <Height>0.5cm</Height>
             <Width>5cm</Width>
@@ -485,7 +499,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>13.5cm</Top>
+            <Top>14cm</Top>
             <Left>0.5cm</Left>
             <Height>0.5cm</Height>
             <Width>5cm</Width>
@@ -493,7 +507,7 @@
             <Style />
           </Textbox>
           <Line Name="PaymentLine">
-            <Top>12.6cm</Top>
+            <Top>13.1cm</Top>
             <Left>14.5cm</Left>
             <Height>0cm</Height>
             <Width>5cm</Width>
@@ -524,7 +538,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!CashWithdrawal.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!CashWithdrawalAmt.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <Format>#,0.00</Format>
@@ -538,7 +552,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!EndOfDay.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!EndOfDayAmt.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <Format>#,0.00</Format>
@@ -552,7 +566,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!MPesaCashWithdraw.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!MPesaCashWithdrawAmt.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <Format>#,0.00</Format>
@@ -566,7 +580,21 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!PettyCashAmt.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!TotalVoucherPaymentsAmt.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!JournalVoucherPaymentsAmt.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <Format>#,0.00</Format>
@@ -594,7 +622,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!GrandTotalPayments.Value, "DataSet_Result")</Value>
+                    <Value>=First(Fields!GrandTotalPaymentsAmt.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                       <Format>#,0.00</Format>
@@ -608,7 +636,7 @@
             </Paragraphs>
             <Top>10.1cm</Top>
             <Left>14.5cm</Left>
-            <Height>3cm</Height>
+            <Height>3.5cm</Height>
             <Width>5cm</Width>
             <ZIndex>11</ZIndex>
             <Style />
@@ -664,7 +692,18 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Petty Cash</Value>
+                    <Value>Voucher Payments</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Payments</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
                     </Style>
@@ -686,7 +725,7 @@
             </Paragraphs>
             <Top>10.1cm</Top>
             <Left>10cm</Left>
-            <Height>3cm</Height>
+            <Height>3.5cm</Height>
             <Width>4.5cm</Width>
             <ZIndex>12</ZIndex>
             <Style />
@@ -718,7 +757,7 @@
             </Style>
           </Textbox>
           <Line Name="ReceiptLine">
-            <Top>12.6cm</Top>
+            <Top>13.1cm</Top>
             <Left>5.2cm</Left>
             <Height>0cm</Height>
             <Width>4cm</Width>
@@ -1444,10 +1483,21 @@
                 </TextRuns>
                 <Style />
               </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Journal Voucher Receipts</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
             </Paragraphs>
             <Top>10.1cm</Top>
             <Left>0.5cm</Left>
-            <Height>2.5cm</Height>
+            <Height>3.5cm</Height>
             <Width>4.5cm</Width>
             <ZIndex>29</ZIndex>
             <Style />
@@ -1476,7 +1526,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>15.3cm</Top>
+            <Top>15.8cm</Top>
             <Left>10cm</Left>
             <Height>0.6cm</Height>
             <Width>3.5cm</Width>
@@ -1495,7 +1545,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>15.3cm</Top>
+            <Top>15.8cm</Top>
             <Left>13.5cm</Left>
             <Height>0.6cm</Height>
             <Width>6cm</Width>
@@ -1521,7 +1571,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>16.1cm</Top>
+            <Top>16.6cm</Top>
             <Left>10cm</Left>
             <Height>0.6cm</Height>
             <Width>3.5cm</Width>
@@ -1540,7 +1590,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>16.1cm</Top>
+            <Top>16.6cm</Top>
             <Left>13.5cm</Left>
             <Height>0.6cm</Height>
             <Width>6cm</Width>
@@ -1566,7 +1616,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>16.9cm</Top>
+            <Top>17.4cm</Top>
             <Left>10cm</Left>
             <Height>0.6cm</Height>
             <Width>3.5cm</Width>
@@ -1585,7 +1635,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>16.9cm</Top>
+            <Top>17.4cm</Top>
             <Left>13.5cm</Left>
             <Height>0.6cm</Height>
             <Width>6cm</Width>
@@ -1598,7 +1648,7 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>20.5cm</Height>
+        <Height>21cm</Height>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1721,59 +1771,68 @@
         <Field Name="DifferenceFormat">
           <DataField>DifferenceFormat</DataField>
         </Field>
-        <Field Name="CashDeposit">
-          <DataField>CashDeposit</DataField>
+        <Field Name="AccuracyLevel">
+          <DataField>AccuracyLevel</DataField>
         </Field>
-        <Field Name="CashDepositFormat">
-          <DataField>CashDepositFormat</DataField>
+        <Field Name="CashDepositAmt">
+          <DataField>CashDepositAmt</DataField>
         </Field>
-        <Field Name="MPesaCashDeposit">
-          <DataField>MPesaCashDeposit</DataField>
+        <Field Name="CashDepositAmtFormat">
+          <DataField>CashDepositAmtFormat</DataField>
         </Field>
-        <Field Name="MPesaCashDepositFormat">
-          <DataField>MPesaCashDepositFormat</DataField>
+        <Field Name="MPesaCashDepositAmt">
+          <DataField>MPesaCashDepositAmt</DataField>
         </Field>
-        <Field Name="ReceiveFromTreasury">
-          <DataField>ReceiveFromTreasury</DataField>
+        <Field Name="MPesaCashDepositAmtFormat">
+          <DataField>MPesaCashDepositAmtFormat</DataField>
         </Field>
-        <Field Name="ReceiveFromTreasuryFormat">
-          <DataField>ReceiveFromTreasuryFormat</DataField>
+        <Field Name="ReceiveFromTreasuryAmt">
+          <DataField>ReceiveFromTreasuryAmt</DataField>
         </Field>
-        <Field Name="SpecialReceipt">
-          <DataField>SpecialReceipt</DataField>
+        <Field Name="ReceiveFromTreasuryAmtFormat">
+          <DataField>ReceiveFromTreasuryAmtFormat</DataField>
         </Field>
-        <Field Name="SpecialReceiptFormat">
-          <DataField>SpecialReceiptFormat</DataField>
+        <Field Name="SpecialReceiptAmt">
+          <DataField>SpecialReceiptAmt</DataField>
         </Field>
-        <Field Name="GrandTotalReceipts">
-          <DataField>GrandTotalReceipts</DataField>
+        <Field Name="SpecialReceiptAmtFormat">
+          <DataField>SpecialReceiptAmtFormat</DataField>
         </Field>
-        <Field Name="GrandTotalReceiptsFormat">
-          <DataField>GrandTotalReceiptsFormat</DataField>
+        <Field Name="JournalVoucherReceiptsAmt">
+          <DataField>JournalVoucherReceiptsAmt</DataField>
         </Field>
-        <Field Name="CashWithdrawal">
-          <DataField>CashWithdrawal</DataField>
+        <Field Name="JournalVoucherReceiptsAmtFormat">
+          <DataField>JournalVoucherReceiptsAmtFormat</DataField>
         </Field>
-        <Field Name="CashWithdrawalFormat">
-          <DataField>CashWithdrawalFormat</DataField>
+        <Field Name="GrandTotalReceiptsAmt">
+          <DataField>GrandTotalReceiptsAmt</DataField>
         </Field>
-        <Field Name="EndOfDay">
-          <DataField>EndOfDay</DataField>
+        <Field Name="GrandTotalReceiptsAmtFormat">
+          <DataField>GrandTotalReceiptsAmtFormat</DataField>
         </Field>
-        <Field Name="EndOfDayFormat">
-          <DataField>EndOfDayFormat</DataField>
+        <Field Name="CashWithdrawalAmt">
+          <DataField>CashWithdrawalAmt</DataField>
         </Field>
-        <Field Name="MPesaCashWithdraw">
-          <DataField>MPesaCashWithdraw</DataField>
+        <Field Name="CashWithdrawalAmtFormat">
+          <DataField>CashWithdrawalAmtFormat</DataField>
         </Field>
-        <Field Name="MPesaCashWithdrawFormat">
-          <DataField>MPesaCashWithdrawFormat</DataField>
+        <Field Name="MPesaCashWithdrawAmt">
+          <DataField>MPesaCashWithdrawAmt</DataField>
         </Field>
-        <Field Name="PettyCashAmt">
-          <DataField>PettyCashAmt</DataField>
+        <Field Name="MPesaCashWithdrawAmtFormat">
+          <DataField>MPesaCashWithdrawAmtFormat</DataField>
         </Field>
-        <Field Name="PettyCashAmtFormat">
-          <DataField>PettyCashAmtFormat</DataField>
+        <Field Name="TotalVoucherPaymentsAmt">
+          <DataField>TotalVoucherPaymentsAmt</DataField>
+        </Field>
+        <Field Name="TotalVoucherPaymentsAmtFormat">
+          <DataField>TotalVoucherPaymentsAmtFormat</DataField>
+        </Field>
+        <Field Name="JournalVoucherPaymentsAmt">
+          <DataField>JournalVoucherPaymentsAmt</DataField>
+        </Field>
+        <Field Name="JournalVoucherPaymentsAmtFormat">
+          <DataField>JournalVoucherPaymentsAmtFormat</DataField>
         </Field>
         <Field Name="ReturnToTreasuryAmt">
           <DataField>ReturnToTreasuryAmt</DataField>
@@ -1781,14 +1840,17 @@
         <Field Name="ReturnToTreasuryAmtFormat">
           <DataField>ReturnToTreasuryAmtFormat</DataField>
         </Field>
-        <Field Name="GrandTotalPayments">
-          <DataField>GrandTotalPayments</DataField>
+        <Field Name="EndOfDayAmt">
+          <DataField>EndOfDayAmt</DataField>
         </Field>
-        <Field Name="GrandTotalPaymentsFormat">
-          <DataField>GrandTotalPaymentsFormat</DataField>
+        <Field Name="EndOfDayAmtFormat">
+          <DataField>EndOfDayAmtFormat</DataField>
         </Field>
-        <Field Name="AccuracyLevel">
-          <DataField>AccuracyLevel</DataField>
+        <Field Name="GrandTotalPaymentsAmt">
+          <DataField>GrandTotalPaymentsAmt</DataField>
+        </Field>
+        <Field Name="GrandTotalPaymentsAmtFormat">
+          <DataField>GrandTotalPaymentsAmtFormat</DataField>
         </Field>
         <Field Name="DenomCode">
           <DataField>DenomCode</DataField>

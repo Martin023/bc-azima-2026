@@ -37,7 +37,6 @@ Report 52185510 "Tellers Journal"
 
             trigger OnPreDataItem()
             begin
-                // NEW LOGIC: If a Treasurer selected a specific User ID, find their Till and apply the filter
                 if TellerUserIDFilter <> '' then begin
                     if BankingSetup.Get(TellerUserIDFilter) then begin
                         if BankingSetup."Default  Bank" <> '' then
