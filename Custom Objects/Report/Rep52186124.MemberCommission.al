@@ -15,14 +15,14 @@ report 52186124 "Member Commission"
         {
             DataItemTableView = sorting("Primary Key");
             MaxIteration = 1;
- 
+
             column(CompanyInformation_Name; Name)
             {
             }
             column(CompanyInformation_Picture; Picture)
             {
             }
- 
+
             trigger OnPreDataItem()
             begin
                 CalcFields(Picture);  // load BLOB here, once
@@ -98,7 +98,6 @@ report 52186124 "Member Commission"
                 CommsionOnJunior := 0;
                 HolidayTotal := 0;
                 CommsionOnHoliday := 0;
-                Retainer := 0;
                 AggregateCommission := 0;
                 Members.reset;
                 Members.SetLoadFields("No.", "Phone No.", Name, "Recruited By", "Member Class", "Registration Date", "Rejoinig Date");
@@ -141,17 +140,19 @@ report 52186124 "Member Commission"
                 CommsionSetup.Reset();
                 CommsionSetup.SetRange(Type, CommsionSetup.type::Commission);
                 CommsionSetup.SetRange("Commission Type", CommsionSetup."Commission Type"::"Member Recruitment");
-                if CommsionSetup.FindSet() then begin
+                if CommsionSetup.findfirst() then begin
                     commsionlines.reset;
                     commsionlines.setrange("Transaction Type", CommsionSetup.Code);
                     if commsionlines.findset() then begin
                         repeat
                             if RecrutedMembers in [commsionlines."Minimum Amount" .. commsionlines."Maximum Amount"] then begin
-                                CommissionOnNewMembers := commsionlines."Charge Amount" * RecrutedMembers;
+                                CommissionOnNewMembers += commsionlines."Charge Amount" * RecrutedMembers;
                             end;
                         until commsionlines.Next() = 0;
                     end;
                 end;
+
+                AggregateCommission := CommissionOnNewMembers;
             end;
         }
 

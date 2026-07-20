@@ -11,9 +11,6 @@ Report 52185519 P9
         {
             DataItemTableView = sorting("No.");
             RequestFilterFields = "No.", Status;
-            column(ReportForNavId_1000000000; 1000000000)
-            {
-            }
             column(HREmpPR_ContType; "HR Employees"."Contract Type")
             {
             }
@@ -76,9 +73,6 @@ Report 52185519 P9
                 DataItemLink = "Employee Code" = field("No.");
                 DataItemTableView = sorting("Employee Code", "Payroll Period") order(ascending);
                 PrintOnlyIfDetail = false;
-                column(ReportForNavId_1000000001; 1000000001)
-                {
-                }
                 column(EmployeeCode_PREmployeeP9Info; "PR Employee P9 Info"."Employee Code")
                 {
                 }
