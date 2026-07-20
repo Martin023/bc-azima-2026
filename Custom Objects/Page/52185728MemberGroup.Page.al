@@ -57,6 +57,10 @@ page 52185728 "Member Group"
                 {
 
                 }
+                field("Group Type"; Rec."Group Type")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Created By"; Rec."Created By")
                 {
 

@@ -265,6 +265,7 @@ Codeunit 52185455 "Registration Process"
         Cust."Type of Application" := MemberApplication."Type of Application";
         Cust."Old Member No." := MemberApplication."Old Member No.";
         Cust."Account Type" := MemberApplication."Account Type";
+        Cust."Group Type" := MemberApplication."Group Type";
         Cust."From Another Sacco" := MemberApplication."From Another Sacco";
         Cust."Bank Account No." := MemberApplication."Bank Account No.";
         Cust."Delegates Zone" := MemberApplication."Delegates Zone";

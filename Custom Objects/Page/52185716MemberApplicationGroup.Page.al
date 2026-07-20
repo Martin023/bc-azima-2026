@@ -50,6 +50,12 @@ page 52185716 "Member Application Group"
                         end;
                     end;
                 }
+                field("Group Type"; Rec."Group Type")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = GroupTypeEdit;
+                    ShowMandatory = true;
+                }   
                 field(Name; Rec.Name)
                 {
                     Caption = 'Group Account Name';
@@ -292,6 +298,7 @@ page 52185716 "Member Application Group"
                     begin
                         Rec.TestField(Status, Rec.Status::Open);
                         Rec.TestField(Name);
+                        Rec.TestField("Group Type");
                         //Rec.TestField("Relationship Manager");
 
                         SignatoriesApplication.Reset;
