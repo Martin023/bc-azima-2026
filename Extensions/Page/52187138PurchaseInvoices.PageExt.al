@@ -15,6 +15,7 @@ PageExtension 52187138 pageextension52187138 extends "Purchase Invoice"
         modify("Order Address Code")
         {
             ApplicationArea = Basic;
+            visible = false;
         }
         modify("Buy-from Vendor Name")
         {
@@ -35,6 +36,7 @@ PageExtension 52187138 pageextension52187138 extends "Purchase Invoice"
         modify("Buy-from Contact")
         {
             ApplicationArea = Basic;
+            Visible = false;
         }
         // modify("Pay-to Vendor No.")
         // {
@@ -98,10 +100,13 @@ PageExtension 52187138 pageextension52187138 extends "Purchase Invoice"
         modify("Purchaser Code")
         {
             ApplicationArea = Basic;
+            Visible = false;
         }
         modify("Assigned User ID")
         {
             ApplicationArea = Basic;
+            Caption = 'User ID';
+            Editable = false;
         }
         // modify("Currency Code")
         // {
@@ -120,6 +125,7 @@ PageExtension 52187138 pageextension52187138 extends "Purchase Invoice"
         modify("Payment Terms Code")
         {
             ApplicationArea = Basic;
+            Visible = false;
         }
         modify("Due Date")
         {
@@ -128,14 +134,12 @@ PageExtension 52187138 pageextension52187138 extends "Purchase Invoice"
         modify("Payment Discount %")
         {
             ApplicationArea = Basic;
-        }
-        modify("Payment Method Code")
-        {
-            ApplicationArea = Basic;
+            Visible = false;
         }
         modify("Shipment Method Code")
         {
             ApplicationArea = Basic;
+            Visible = false;
         }
         // modify("Requested Receipt Date")
         // {
@@ -155,6 +159,72 @@ PageExtension 52187138 pageextension52187138 extends "Purchase Invoice"
         {
             Visible = true;
         }
+
+        modify("expected receipt date")
+        {
+            Visible = false;
+        }
+
+        modify("payment method code")
+        {
+            Visible = false;
+        }
+
+        modify("Pmt. Discount Date")
+        {
+            Visible = false;
+        }
+
+        modify("Tax Liable")
+        {
+            Visible = false;
+        }
+
+        modify("Tax Area Code")
+        {
+            Visible = false;
+        }
+
+        modify("Payment reference")
+        {
+            Visible = false;
+        }
+
+        modify("On Hold")
+        {
+            Visible = false;
+        }
+
+        modify("Shipping and Payment")
+        {
+            Visible = false;
+        }
+
+        modify("Foreign Trade")
+        {
+            Visible = false;
+        }
+
+        modify("Buy-from address 2")
+        {
+            Visible = false;
+        }
+
+        modify("Buy-from Contact No.")
+        {
+            Visible = false;
+        }
+
+        modify("Campaign No.")
+        {
+            Visible = false;
+        }
+
+        modify("currency code")
+        {
+            Visible = false;
+        }
+
         // addafter("Vendor Invoice No.")
         // {
         //     field("Posting Description."; Rec."Posting Description")
