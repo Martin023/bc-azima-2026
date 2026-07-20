@@ -1299,6 +1299,11 @@ table 52185691 "Member Application"
         {
             Editable = true;
         }
+        field(4023; "Group Type"; Option)
+        {
+            OptionCaption = ' ,Corporate,Company,Welfare';
+            OptionMembers = " ",Corporate,Company,Welfare;
+        }
     }
 
     keys

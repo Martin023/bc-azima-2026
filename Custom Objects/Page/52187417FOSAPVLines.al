@@ -86,6 +86,15 @@ page 52187417 "FOSA Payment Lines"
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
+                field("Housing Levy"; Rec."Housing Levy")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Housing Levy Rate"; Rec."Housing Levy Rate")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = false;
+                }
                 field("Retention Code"; Rec."Retention Code")
                 {
                     ApplicationArea = Basic, Suite;

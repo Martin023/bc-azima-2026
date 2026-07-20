@@ -5003,18 +5003,18 @@ page 52186778 "Finance Role Center"
                         ApplicationArea = Basic, Suite;
                         Caption = 'Master Payroll Report';
                     }
-                    action("Pr Variance Report")
-                    {
-                        Caption = 'PR Monthly Variance';
-                        RunObject = report "Pr Variance Report";
-                        ApplicationArea = Basic, Suite;
-                    }
-                    action("Payroll Variance Report")
-                    {
-                        Caption = 'Payroll Monthly Variance Report (BPAY & NPAY & GPAY)';
-                        RunObject = report "Payroll Variance Report";
-                        ApplicationArea = Basic, Suite;
-                    }
+                    // action("Pr Variance Report")
+                    // {
+                    //     Caption = 'PR Monthly Variance';
+                    //     RunObject = report "Pr Variance Report";
+                    //     ApplicationArea = Basic, Suite;
+                    // }
+                    // action("Payroll Variance Report")
+                    // {
+                    //     Caption = 'Payroll Monthly Variance Report (BPAY & NPAY & GPAY)';
+                    //     RunObject = report "Payroll Variance Report";
+                    //     ApplicationArea = Basic, Suite;
+                    // }
 
                     action("prPaye Report")
                     {
@@ -5055,7 +5055,7 @@ page 52186778 "Finance Role Center"
                     }
                     action(prGrossNetPay)
                     {
-                        Caption = 'Gross NetPay';
+                        Caption = 'Gross & NetPay Report';
                         ApplicationArea = Basic, Suite;
                         RunObject = report prGrossNetPay;
                     }
