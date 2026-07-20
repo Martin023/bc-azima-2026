@@ -1842,6 +1842,11 @@ table 52185700 Members
             Caption = 'Recruitment Location';
             Editable = true;
         }
+        field(1057; "Group Type"; Option)
+        {
+            OptionCaption = ' ,Corporate,Company,Welfare';
+            OptionMembers = " ",Corporate,Company,Welfare;
+        }
     }
 
     keys
