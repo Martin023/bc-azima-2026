@@ -356,7 +356,8 @@
                                 <TextRun>
                                   <Value>=Fields!CL_MaskedAccountNo.Value</Value>
                                   <Style>
-                                    <FontSize>8pt</FontSize>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -381,7 +382,8 @@
                                 <TextRun>
                                   <Value>=Fields!CSName.Value</Value>
                                   <Style>
-                                    <FontSize>8pt</FontSize>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -406,7 +408,8 @@
                                 <TextRun>
                                   <Value>=Fields!CL_Amount.Value</Value>
                                   <Style>
-                                    <FontSize>8pt</FontSize>
+                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontSize>9pt</FontSize>
                                     <Format>#,0.00</Format>
                                   </Style>
                                 </TextRun>
@@ -458,7 +461,7 @@
             </Filters>
             <Top>7.1cm</Top>
             <Height>0.9cm</Height>
-            <Width>6.83229cm</Width>
+            <Width>6.8323cm</Width>
             <ZIndex>8</ZIndex>
             <Style />
           </Tablix>
