@@ -11,7 +11,7 @@ report 52185507 "Deductions With Employer Contr"
     {
         dataitem("PR Period Transactions"; "PR Period Transactions")
         {
-            RequestFilterFields = "Transaction Code";
+            // RequestFilterFields = "Transaction Code";
             column(TransactionCode; "PR Period Transactions"."Transaction Code") { }
             column(TransactionName; "PR Period Transactions"."Transaction Name") { }
             column(EmployeeCode; "PR Period Transactions"."Employee Code") { }

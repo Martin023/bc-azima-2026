@@ -123,9 +123,9 @@ report 52185511 "Master Payroll Report"
                                 NSSFSEFLII := PeriodTrans.Amount - NSSFSELFI;
                             'D048':
                                 PensSELF := PeriodTrans.Amount;
-                            'SHIF':
+                            'D049':
                                 SHIF := PeriodTrans.Amount;
-                            'HLEVY':
+                            'D080':
                                 HLEVY := PeriodTrans.Amount;
                             'D003':
                                 SHARECAP := PeriodTrans.Amount;
