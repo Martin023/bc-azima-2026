@@ -13,7 +13,6 @@ Report 52185439 "All Tellers Cash Report"
         {
             RequestFilterFields = "Date Posted";
 
-            // COMPANY INFO
             column(CompanyName; CompanyName) { }
             column(BuldingName; BuldingName) { }
             column(CompanyAddress; CompanyAddress) { }
@@ -24,10 +23,8 @@ Report 52185439 "All Tellers Cash Report"
             column(PrintingTime; PrintingTime) { }
             column(PrintedBy_Header; PrintedBy) { }
 
-            // REPORT META DATA
             column(DateFilterTxt; DateFilterTxt) { }
 
-            // RECEIPTS SUMMARY
             column(CashDepositAmt; CashDepositAmt) { }
             column(JournalVoucherReceiptsAmt; JournalVoucherReceiptsAmt) { }
             column(MPesaCashDepositAmt; MPesaCashDepositAmt) { }
@@ -35,31 +32,27 @@ Report 52185439 "All Tellers Cash Report"
             column(SpecialReceiptAmt; SpecialReceiptAmt) { }
             column(GrandTotalReceiptsAmt; GrandTotalReceiptsAmt) { }
 
-            // PAYMENTS SUMMARY
             column(CashWithdrawalAmt; CashWithdrawalAmt) { }
             column(EndOfDayAmt; EndOfDayAmt) { }
-            column(ReturnToTreasuryAmt; ReturnToTreasuryAmt) { } // New Variable
+            column(ReturnToTreasuryAmt; ReturnToTreasuryAmt) { }
             column(JournalVoucherPaymentsAmt; JournalVoucherPaymentsAmt) { }
             column(MPesaCashWithdrawAmt; MPesaCashWithdrawAmt) { }
+            column(TotalVoucherPaymentsAmt; TotalVoucherPaymentsAmt) { } 
             column(GrandTotalPaymentsAmt; GrandTotalPaymentsAmt) { }
 
-            // BALANCES
             column(TellersOpeningBalancesAmt; TellersOpeningBalancesAmt) { }
             column(TellersClosingBalancesAmt; TellersClosingBalancesAmt) { }
             column(TreasuryOpeningBalanceAmt; TreasuryOpeningBalanceAmt) { }
             column(TreasuryClosingBalanceAmt; TreasuryClosingBalanceAmt) { }
 
-            // AMOUNT IN WORDS
             column(AmountInWords; AmountInWords[1]) { }
 
             trigger OnPreDataItem()
             begin
-                // GET DATE FILTER (Using "Date Posted")
                 if Treasury_transaction.GetFilter("Date Posted") = '' then
                     Treasury_transaction.SetRange("Date Posted", Today);
                 DateFilterTxt := Treasury_transaction.GetFilter("Date Posted");
 
-                // INITIALIZE TOTALS
                 CashDepositAmt := 0;
                 JournalVoucherReceiptsAmt := 0;
                 MPesaCashDepositAmt := 0;
@@ -71,14 +64,13 @@ Report 52185439 "All Tellers Cash Report"
                 ReturnToTreasuryAmt := 0;
                 JournalVoucherPaymentsAmt := 0;
                 MPesaCashWithdrawAmt := 0;
+                TotalVoucherPaymentsAmt := 0;
 
-                // AGGREGATE CASHIER TRANSACTIONS FOR RECEIPTS AND PAYMENTS
                 CashierTrans.Reset();
                 CashierTrans.SetFilter("Date Posted", DateFilterTxt);
                 CashierTrans.SetRange(Posted, true);
                 if CashierTrans.FindSet() then begin
                     repeat
-                        // RECEIPTS
                         if CashierTrans.Type = CashierTrans.Type::"Cash Deposit" then
                             CashDepositAmt += CashierTrans.Amount
                         else if CashierTrans.Type = CashierTrans.Type::"MPESA Deposit" then
@@ -87,8 +79,6 @@ Report 52185439 "All Tellers Cash Report"
                             SpecialReceiptAmt += CashierTrans.Amount
                         else if (StrPos(UpperCase(CashierTrans."Transaction Description"), 'JOURNAL') > 0) and (CashierTrans.Type = CashierTrans.Type::"Credit Receipt") then
                             JournalVoucherReceiptsAmt += CashierTrans.Amount
-
-                        // PAYMENTS
                         else if CashierTrans.Type = CashierTrans.Type::"Cash Withdrawal" then
                             CashWithdrawalAmt += CashierTrans.Amount
                         else if CashierTrans.Type = CashierTrans.Type::"MPESA Withdrawal" then
@@ -98,7 +88,6 @@ Report 52185439 "All Tellers Cash Report"
                     until CashierTrans.Next() = 0;
                 end;
 
-                // AGGREGATE TREASURY TRANSACTIONS FOR ISSUES AND EOD
                 TreasuryTransIn.Reset();
                 TreasuryTransIn.SetFilter("Date Posted", DateFilterTxt);
                 TreasuryTransIn.SetRange(Posted, true);
@@ -108,29 +97,38 @@ Report 52185439 "All Tellers Cash Report"
                             ReceiveFromTreasuryAmt += TreasuryTransIn.Amount
                         else if TreasuryTransIn."Transaction Type" = TreasuryTransIn."Transaction Type"::"End of Day Return to Treasury" then
                             EndOfDayAmt += TreasuryTransIn.Amount
-                        // ADDED MISSING RETURN TO TREASURY LOGIC
                         else if TreasuryTransIn."Transaction Type" = TreasuryTransIn."Transaction Type"::"Return To Treasury" then
                             ReturnToTreasuryAmt += TreasuryTransIn.Amount;
                     until TreasuryTransIn.Next() = 0;
                 end;
 
-                // CALCULATE GRAND TOTALS
-                GrandTotalReceiptsAmt := CashDepositAmt + JournalVoucherReceiptsAmt + MPesaCashDepositAmt + ReceiveFromTreasuryAmt + SpecialReceiptAmt;
-                GrandTotalPaymentsAmt := CashWithdrawalAmt + EndOfDayAmt + ReturnToTreasuryAmt + JournalVoucherPaymentsAmt + MPesaCashWithdrawAmt;
+                PaymentsHeader.Reset();
+                PaymentsHeader.SetFilter("Date Posted", DateFilterTxt);
+                PaymentsHeader.SetRange(Posted, true);
+                if PaymentsHeader.FindSet() then begin
+                    repeat
+                        if BankAcc.Get(PaymentsHeader."Paying Bank Account") then begin
+                            if BankAcc."Bank Type" = BankAcc."Bank Type"::Cashier then begin
+                                PaymentsHeader.CalcFields("Total Net Amount");
+                                TotalVoucherPaymentsAmt += PaymentsHeader."Total Net Amount";
+                            end;
+                        end;
+                    until PaymentsHeader.Next() = 0;
+                end;
 
-                // DUMMY BALANCES FOR DEMONSTRATION 
+                GrandTotalReceiptsAmt := CashDepositAmt + JournalVoucherReceiptsAmt + MPesaCashDepositAmt + ReceiveFromTreasuryAmt + SpecialReceiptAmt;
+                GrandTotalPaymentsAmt := CashWithdrawalAmt + EndOfDayAmt + ReturnToTreasuryAmt + JournalVoucherPaymentsAmt + MPesaCashWithdrawAmt + TotalVoucherPaymentsAmt;
+
                 TellersOpeningBalancesAmt := 0.00;
                 TellersClosingBalancesAmt := 0.00;
                 TreasuryOpeningBalanceAmt := 25192336.00;
                 TreasuryClosingBalanceAmt := 24142204.00;
 
-                // CALCULATE AMOUNT IN WORDS FOR RECEIPTS
                 AmountInWords[1] := ConvertAmountToWords(GrandTotalReceiptsAmt);
             end;
 
             trigger OnAfterGetRecord()
             begin
-                // PREVENT MULTIPLE PRINTING PAGES BY BREAKING AFTER FIRST RECORD
                 if HasPrinted then
                     CurrReport.Break();
                 HasPrinted := true;
@@ -148,7 +146,6 @@ Report 52185439 "All Tellers Cash Report"
 
             trigger OnPreDataItem()
             begin
-                // PREPARE TEMPORARY COINAGE AGGREGATION
                 TempCoinage.Reset();
                 TempCoinage.DeleteAll();
 
@@ -185,7 +182,6 @@ Report 52185439 "All Tellers Cash Report"
 
             trigger OnAfterGetRecord()
             begin
-                // LOOP THROUGH TEMPORARY COINAGE TABLE
                 if Number = 1 then
                     TempCoinage.FindFirst()
                 else
@@ -203,7 +199,6 @@ Report 52185439 "All Tellers Cash Report"
 
     trigger OnPreReport()
     begin
-        // HEADER GENERATION
         if CompanyInformation.Get then
             CompanyInformation.CalcFields(CompanyInformation.Picture);
         CompanyName := CompanyInformation.Name;
@@ -233,6 +228,8 @@ Report 52185439 "All Tellers Cash Report"
 
         CashierTrans: Record "Cashier Transactions";
         TreasuryTransIn: Record "Treasury Cashier Transactions";
+        PaymentsHeader: Record "Payments Header";
+        BankAcc: Record "Bank Account";
         CoinageRec: Record Coinage;
         TempCoinage: Record Coinage temporary;
 
@@ -248,6 +245,7 @@ Report 52185439 "All Tellers Cash Report"
         ReturnToTreasuryAmt: Decimal;
         JournalVoucherPaymentsAmt: Decimal;
         MPesaCashWithdrawAmt: Decimal;
+        TotalVoucherPaymentsAmt: Decimal;
         GrandTotalPaymentsAmt: Decimal;
 
         TellersOpeningBalancesAmt: Decimal;

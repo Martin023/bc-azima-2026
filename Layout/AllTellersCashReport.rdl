@@ -14,7 +14,6 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <!-- COMPANY HEADER START -->
           <Image Name="CompanyLogo">
             <Source>Database</Source>
             <Value>=First(Fields!CompanyPicture.Value, "DataSet_Result")</Value>
@@ -75,7 +74,6 @@
             <Height>2cm</Height>
             <Width>15.2cm</Width>
           </Textbox>
-          <!-- COMPANY HEADER END -->
           <Textbox Name="ReportTitle">
             <CanGrow>true</CanGrow>
             <Paragraphs>
@@ -123,7 +121,6 @@
             <Height>0.5cm</Height>
             <Width>6.5cm</Width>
           </Textbox>
-          <!-- RECEIPTS SECTION -->
           <Textbox Name="ReceiptsHeaderLeft">
             <CanGrow>true</CanGrow>
             <Paragraphs>
@@ -258,7 +255,7 @@
             </Paragraphs>
             <Top>5.5cm</Top>
             <Left>0.5cm</Left>
-            <Height>3.8cm</Height>
+            <Height>4.4cm</Height>
             <Width>4.5cm</Width>
           </Textbox>
           <Textbox Name="ReceiptAmountsText">
@@ -352,10 +349,9 @@
             </Paragraphs>
             <Top>5.5cm</Top>
             <Left>5cm</Left>
-            <Height>3.8cm</Height>
+            <Height>4.4cm</Height>
             <Width>4cm</Width>
           </Textbox>
-          <!-- PAYMENTS SECTION -->
           <Textbox Name="PaymentsHeaderRight">
             <CanGrow>true</CanGrow>
             <Paragraphs>
@@ -447,7 +443,6 @@
                   </TextRun>
                 </TextRuns>
               </Paragraph>
-              <!-- ADDED RETURN TO TREASURY HERE -->
               <Paragraph>
                 <TextRuns>
                   <TextRun>
@@ -481,6 +476,16 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
+                    <Value>General Payments / PVs</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
                     <Value xml:space="preserve"> </Value>
                     <Style>
                       <FontSize>9pt</FontSize>
@@ -491,7 +496,7 @@
             </Paragraphs>
             <Top>5.5cm</Top>
             <Left>10cm</Left>
-            <Height>3.8cm</Height>
+            <Height>4.4cm</Height>
             <Width>4.5cm</Width>
           </Textbox>
           <Textbox Name="PaymentAmountsText">
@@ -525,7 +530,6 @@
                   <TextAlign>Right</TextAlign>
                 </Style>
               </Paragraph>
-              <!-- ADDED RETURN TO TREASURY VALUE HERE -->
               <Paragraph>
                 <TextRuns>
                   <TextRun>
@@ -571,6 +575,20 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
+                    <Value>=First(Fields!TotalVoucherPaymentsAmt.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
                     <Value>=First(Fields!GrandTotalPaymentsAmt.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
@@ -586,10 +604,9 @@
             </Paragraphs>
             <Top>5.5cm</Top>
             <Left>14.5cm</Left>
-            <Height>3.8cm</Height>
+            <Height>4.4cm</Height>
             <Width>4cm</Width>
           </Textbox>
-          <!-- COINAGE TABLIX SECTION -->
           <Tablix Name="DenominationsTablix">
             <TablixBody>
               <TablixColumns>
@@ -821,7 +838,7 @@
                 </FilterValues>
               </Filter>
             </Filters>
-            <Top>9.5cm</Top>
+            <Top>10cm</Top>
             <Left>0.5cm</Left>
             <Height>1.1cm</Height>
             <Width>15cm</Width>
@@ -844,7 +861,7 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>10.7cm</Top>
+            <Top>11.2cm</Top>
             <Left>11.5cm</Left>
             <Height>0.6cm</Height>
             <Width>4cm</Width>
@@ -854,7 +871,6 @@
               </TopBorder>
             </Style>
           </Textbox>
-          <!-- BALANCES SECTION -->
           <Textbox Name="BalancesTextLeft">
             <CanGrow>true</CanGrow>
             <Paragraphs>
@@ -879,7 +895,7 @@
                 </TextRuns>
               </Paragraph>
             </Paragraphs>
-            <Top>11.8cm</Top>
+            <Top>12.2cm</Top>
             <Left>0.5cm</Left>
             <Height>1.2cm</Height>
             <Width>5.5cm</Width>
@@ -916,7 +932,7 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>11.8cm</Top>
+            <Top>12.2cm</Top>
             <Left>6cm</Left>
             <Height>1.2cm</Height>
             <Width>3cm</Width>
@@ -945,7 +961,7 @@
                 </TextRuns>
               </Paragraph>
             </Paragraphs>
-            <Top>11.8cm</Top>
+            <Top>12.2cm</Top>
             <Left>10cm</Left>
             <Height>1.2cm</Height>
             <Width>5.5cm</Width>
@@ -982,12 +998,11 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>11.8cm</Top>
+            <Top>12.2cm</Top>
             <Left>15.5cm</Left>
             <Height>1.2cm</Height>
             <Width>3.5cm</Width>
           </Textbox>
-          <!-- SIGNATURES AND WORDS -->
           <Textbox Name="AmountInWordsHeader">
             <CanGrow>true</CanGrow>
             <Paragraphs>
@@ -1003,7 +1018,7 @@
                 </TextRuns>
               </Paragraph>
             </Paragraphs>
-            <Top>13.5cm</Top>
+            <Top>14cm</Top>
             <Left>0.5cm</Left>
             <Height>0.6cm</Height>
             <Width>5.5cm</Width>
@@ -1022,7 +1037,7 @@
                 </TextRuns>
               </Paragraph>
             </Paragraphs>
-            <Top>13.5cm</Top>
+            <Top>14cm</Top>
             <Left>6cm</Left>
             <Height>1cm</Height>
             <Width>13cm</Width>
@@ -1064,13 +1079,13 @@
                 </TextRuns>
               </Paragraph>
             </Paragraphs>
-            <Top>15cm</Top>
+            <Top>15.5cm</Top>
             <Left>10cm</Left>
             <Height>1.5cm</Height>
             <Width>9cm</Width>
           </Textbox>
         </ReportItems>
-        <Height>17.5cm</Height>
+        <Height>18cm</Height>
       </Body>
       <Width>19.5cm</Width>
       <Page>
@@ -1182,6 +1197,12 @@
         </Field>
         <Field Name="MPesaCashWithdrawAmtFormat">
           <DataField>MPesaCashWithdrawAmtFormat</DataField>
+        </Field>
+        <Field Name="TotalVoucherPaymentsAmt">
+          <DataField>TotalVoucherPaymentsAmt</DataField>
+        </Field>
+        <Field Name="TotalVoucherPaymentsAmtFormat">
+          <DataField>TotalVoucherPaymentsAmtFormat</DataField>
         </Field>
         <Field Name="GrandTotalPaymentsAmt">
           <DataField>GrandTotalPaymentsAmt</DataField>
