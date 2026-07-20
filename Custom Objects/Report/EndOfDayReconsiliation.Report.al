@@ -112,6 +112,8 @@ Report 52185446 "End of Day Reconciliation"
                                 CashWithdrawalAmt += CashierTrans.Amount;
                             CashierTrans.Type::"MPESA Withdrawal":
                                 MPesaCashWithdrawAmt += CashierTrans.Amount;
+                            CashierTrans.Type::"Credit Receipt":
+                                SpecialReceiptAmt += CashierTrans.Amount;
                         end;
                     until CashierTrans.Next() = 0;
                 end;

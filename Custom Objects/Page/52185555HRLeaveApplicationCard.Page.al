@@ -605,6 +605,25 @@ page 52185555 "HR Leave Application Card"
                     end;
                 }
             }
+            // group(Functions)
+            // {
+            //     Caption = 'Functions';
+            action(Refresh)
+            {
+                ApplicationArea = Basic;
+                Caption = 'Refresh';
+                Image = Refresh;
+                Promoted = true;
+                PromotedCategory = Category4;
+                PromotedIsBig = true;
+                ToolTip = 'Refresh the page to reload current data';
+
+                trigger OnAction()
+                begin
+                    CurrPage.Update(false);
+                end;
+            }
+            // }
             group(Reliver)
             {
                 Caption = 'Reliver';
