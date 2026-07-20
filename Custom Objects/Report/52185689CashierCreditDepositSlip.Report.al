@@ -257,7 +257,7 @@ Report 52185689 "CashierCredit Deposit Slip"
 
                     //Mask transaction line account number
                     if StrLen("Cashier Transaction Lines"."Account No") > 3 then begin
-                        CL_MaskedAccountNo := CopyStr("Cashier Transaction Lines"."Account No", 1, 3) + 
+                        CL_MaskedAccountNo := CopyStr("Cashier Transaction Lines"."Account No", 1, 3) +
                                             PadStr('', StrLen("Cashier Transaction Lines"."Account No") - 3, '*');
                     end else
                         CL_MaskedAccountNo := "Cashier Transaction Lines"."Account No";
@@ -290,7 +290,7 @@ Report 52185689 "CashierCredit Deposit Slip"
                 MaskedAccountNo := '';
                 CashierNameOnly := '';
 
-                //FIXED: Use transaction cashier instead of current logged-in user
+                // Use transaction cashier instead of current logged-in user
                 user.Reset;
                 user.SetRange("User Name", Transactions.Cashier);
                 if user.Find('-') then begin
@@ -302,10 +302,10 @@ Report 52185689 "CashierCredit Deposit Slip"
                         CashierNameOnly := CashierName;
                 end;
 
-                //Mask account number: show first 2 and last 2 digits
-                if StrLen("Account No") > 4 then begin
-                    MaskedAccountNo := CopyStr("Account No", 1, 2) + 
-                                      PadStr('', StrLen("Account No") - 4, '*') + 
+                //Mask account number: show first 3 and last 2 digits
+                if StrLen("Account No") > 5 then begin
+                    MaskedAccountNo := CopyStr("Account No", 1, 3) +
+                                      PadStr('', StrLen("Account No") - 5, '*') +
                                       CopyStr("Account No", StrLen("Account No") - 1, 2);
                 end else
                     MaskedAccountNo := "Account No";
@@ -316,7 +316,6 @@ Report 52185689 "CashierCredit Deposit Slip"
                 if SavingsLedgerEntry.FindSet then begin
                     SavingsLedgerEntry.CalcSums(Amount);
                     SumTransactionCharges := SavingsLedgerEntry.Amount - Amount;
-                    //MESSAGE('the trans charges are %1',SumTransactionCharges);
                 end;
 
                 Savings.Reset;
@@ -325,21 +324,18 @@ Report 52185689 "CashierCredit Deposit Slip"
                     StaffNo := Savings."Payroll/Staff No.";
                     ProductName := Savings."Product Name";
                 end;
-
-                // ADDED REPRINT LOGIC
-                Reprint := '';
-                if "Transaction Date" < Today then
+                if Transactions.Printed then
                     Reprint := 'REPRINT'
-                else if ("Transaction Date" = Today) and ("Transaction Time" <> 0T) then begin
-                    if Time > "Transaction Time" then begin
-                        if (Time - "Transaction Time") > 60000 then 
-                            Reprint := 'REPRINT';
-                    end;
-                end;
+                else
+                    Reprint := '';
+
                 ReprintDate := Today;
                 ReprintTime := Time;
 
-                // GENERATE AMOUNT IN WORDS NATIVELY
+                if not CurrReport.Preview then begin
+                    Transactions.Printed := true;
+                    Transactions.Modify();
+                end;
                 NumberText[1] := ConvertAmountToWords(Amount);
             end;
 
@@ -413,15 +409,13 @@ Report 52185689 "CashierCredit Deposit Slip"
         CL_MaskedAccountNo: Text; //Masked account for transaction lines
         Copy: Boolean;
         CashierName: Text;
-        MaskedAccountNo: Text; //Masked account number (first 2 + stars + last 2)
+        MaskedAccountNo: Text; //Masked account number (first 3 + stars + last 2)
         CashierNameOnly: Text; //Cashier name without domain prefix
         user: Record User;
         CompanyInformation: Record "Company Information";
         CompanyAddress: Text;
         CompanyTelephone: Text;
         CommunicationOnline: Text;
-        
-        // ADDED REPRINT AND WORD VARS
         Reprint: Text;
         ReprintDate: Date;
         ReprintTime: Time;
@@ -430,13 +424,33 @@ Report 52185689 "CashierCredit Deposit Slip"
 
     local procedure InitTextVariable()
     begin
-        OnesText[1] := 'One'; OnesText[2] := 'Two'; OnesText[3] := 'Three'; OnesText[4] := 'Four';
-        OnesText[5] := 'Five'; OnesText[6] := 'Six'; OnesText[7] := 'Seven'; OnesText[8] := 'Eight';
-        OnesText[9] := 'Nine'; OnesText[10] := 'Ten'; OnesText[11] := 'Eleven'; OnesText[12] := 'Twelve';
-        OnesText[13] := 'Thirteen'; OnesText[14] := 'Fourteen'; OnesText[15] := 'Fifteen'; OnesText[16] := 'Sixteen';
-        OnesText[17] := 'Seventeen'; OnesText[18] := 'Eighteen'; OnesText[19] := 'Nineteen';
-        TensText[1] := ''; TensText[2] := 'Twenty'; TensText[3] := 'Thirty'; TensText[4] := 'Forty';
-        TensText[5] := 'Fifty'; TensText[6] := 'Sixty'; TensText[7] := 'Seventy'; TensText[8] := 'Eighty';
+        OnesText[1] := 'One';
+        OnesText[2] := 'Two';
+        OnesText[3] := 'Three';
+        OnesText[4] := 'Four';
+        OnesText[5] := 'Five';
+        OnesText[6] := 'Six';
+        OnesText[7] := 'Seven';
+        OnesText[8] := 'Eight';
+        OnesText[9] := 'Nine';
+        OnesText[10] := 'Ten';
+        OnesText[11] := 'Eleven';
+        OnesText[12] := 'Twelve';
+        OnesText[13] := 'Thirteen';
+        OnesText[14] := 'Fourteen';
+        OnesText[15] := 'Fifteen';
+        OnesText[16] := 'Sixteen';
+        OnesText[17] := 'Seventeen';
+        OnesText[18] := 'Eighteen';
+        OnesText[19] := 'Nineteen';
+        TensText[1] := '';
+        TensText[2] := 'Twenty';
+        TensText[3] := 'Thirty';
+        TensText[4] := 'Forty';
+        TensText[5] := 'Fifty';
+        TensText[6] := 'Sixty';
+        TensText[7] := 'Seventy';
+        TensText[8] := 'Eighty';
         TensText[9] := 'Ninety';
     end;
 
@@ -497,14 +511,17 @@ Report 52185689 "CashierCredit Deposit Slip"
             ResultText := OnesText[Hundreds] + ' Hundred';
             if TensAndOnes > 0 then ResultText += ' and ' + ConvertTens(TensAndOnes);
             exit(ResultText);
-        end else exit(ConvertTens(TensAndOnes));
+        end else
+            exit(ConvertTens(TensAndOnes));
     end;
 
     local procedure ConvertTens(Number: Integer): Text
     begin
         if Number = 0 then exit('');
         if Number < 20 then exit(OnesText[Number]);
-        if (Number mod 10) = 0 then exit(TensText[Number div 10])
-        else exit(TensText[Number div 10] + ' ' + OnesText[Number mod 10]);
+        if (Number mod 10) = 0 then
+            exit(TensText[Number div 10])
+        else
+            exit(TensText[Number div 10] + ' ' + OnesText[Number mod 10]);
     end;
 }
