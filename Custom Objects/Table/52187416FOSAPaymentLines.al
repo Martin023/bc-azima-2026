@@ -342,6 +342,7 @@ table 52187416 "FOSA Payment Line"
         }
         field(26; "Withholding Tax Amount"; Decimal)
         {
+            Caption = 'WTAX/PAYE';
 
             trigger OnLookup()
             begin
@@ -1128,6 +1129,7 @@ table 52187416 "FOSA Payment Line"
         }
         field(482; "Housing Levy"; Decimal)
         {
+            TableRelation = "Tariff Code s".Code WHERE(Type = CONST("Housing Levy"));
         }
         field(483; "Housing Levy Rate"; Decimal)
         {
@@ -1322,6 +1324,9 @@ table 52187416 "FOSA Payment Line"
                 "VAT Withholding Amount" := Round(TaxCalc.FOSAPVCalculateTax(Rec, CalculationType::"W/VAT"), 0.01, '>');
                 TotalTax := Round(TotalTax + "VAT Withholding Amount", 0.01, '>');
             end;
+            // if "Housing Levy Amt" <> 0 then begin
+            //     TotalTax := Round(TotalTax + "VAT Withholding Amount", 0.01, '>')+
+            // end;
 
         end;
 

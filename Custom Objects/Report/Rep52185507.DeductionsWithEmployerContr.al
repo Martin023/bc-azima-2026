@@ -11,8 +11,7 @@ report 52185507 "Deductions With Employer Contr"
     {
         dataitem("PR Period Transactions"; "PR Period Transactions")
         {
-            //RequestFilterFields = "Transaction Code";
-            //DataItemTableView = where("Employer Deduction" = const(true));
+            RequestFilterFields = "Transaction Code";
             column(TransactionCode; "PR Period Transactions"."Transaction Code") { }
             column(TransactionName; "PR Period Transactions"."Transaction Name") { }
             column(EmployeeCode; "PR Period Transactions"."Employee Code") { }
@@ -73,6 +72,7 @@ report 52185507 "Deductions With Employer Contr"
 
 
                 "PR Period Transactions".Setrange("Payroll Period", SelectedPeriod);
+                "PR Period Transactions".SetRange("Transaction Code", TransactionCode);
 
             end;
 
@@ -92,6 +92,12 @@ report 52185507 "Deductions With Employer Contr"
                     Caption = 'Selected Period';
                     TableRelation = "PR Payroll Periods";
                 }
+                field(TransCode; TransactionCode)
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Transaction Code';
+                    TableRelation = "PR Transaction Codes"."Transaction Code" where("Employer Deduction" = filter(true));
+                }
             }
         }
 
@@ -102,6 +108,7 @@ report 52185507 "Deductions With Employer Contr"
     trigger OnPreReport()
     begin
         if SelectedPeriod = 0D then Error('You must specify the period filter');
+        if TransactionCode = '' then Error('You must specify Transaction Code');
 
         objPeriod.Reset;
         objPeriod.SetRange(objPeriod."Date Opened", SelectedPeriod);
@@ -119,7 +126,6 @@ report 52185507 "Deductions With Employer Contr"
     end;
 
     var
-        LastFieldNo: Integer;
         objPeriod: Record "PR Payroll Periods";
         SelectedPeriod: Date;
         PeriodName: Text[30];
@@ -143,6 +149,7 @@ report 52185507 "Deductions With Employer Contr"
         TotalAmt: Decimal;
         EmployeeCode: Code[20];
         SNo: Integer;
+        TransactionCode: code[30];
 }
 
 
