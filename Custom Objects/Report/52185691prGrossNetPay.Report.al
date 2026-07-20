@@ -8,11 +8,7 @@ Report 52185691 prGrossNetPay
     {
         dataitem("PR Salary Card"; "PR Salary Card")
         {
-            DataItemTableView = where("Basic Pay" = filter(<> 0));
             RequestFilterFields = "Period Filter", "Employee Code";
-            column(ReportForNavId_6207; 6207)
-            {
-            }
             column(USERID; UserId)
             {
             }
@@ -22,9 +18,6 @@ Report 52185691 prGrossNetPay
             column(PeriodName; PeriodName)
             {
             }
-            //column(CurrReport_PAGENO; CurrReport.PageNo)
-            //{
-            //}
             column(companyinfo_Picture; companyinfo.Picture)
             {
             }
@@ -102,13 +95,6 @@ Report 52185691 prGrossNetPay
             trigger OnAfterGetRecord()
             begin
                 EmployeeName := '';
-                objEmp.Reset;
-                objEmp.SetRange(objEmp."No.", "Employee Code");
-                //objEmp.SETRANGE(objEmp.Status,objEmp.Status::Active);
-                if objEmp.Find('-') then begin
-                    EmployeeName := objEmp."First Name" + ' ' + objEmp."Middle Name" + ' ' + objEmp."Last Name";
-                    if objEmp."Contract Type" = 'FIXEDTC' then CurrReport.Skip;
-                end;
                 BasicPay := 0;
                 GrossPay := 0;
                 NetPay := 0;
@@ -116,37 +102,17 @@ Report 52185691 prGrossNetPay
                 PeriodTrans.Reset;
                 PeriodTrans.SetRange(PeriodTrans."Employee Code", "Employee Code");
                 PeriodTrans.SetRange(PeriodTrans."Payroll Period", SelectedPeriod);
-                //PeriodTrans.SetFilter(PeriodTrans."Group Order", '=1|=4|=9');
-                //PeriodTrans.SetFilter(PeriodTrans."Sub Group Order", '<=1');
-                PeriodTrans.SetCurrentkey(PeriodTrans."Employee Code", PeriodTrans."Period Month", PeriodTrans."Period Year",
-                PeriodTrans."Group Order", PeriodTrans."Sub Group Order");
                 if PeriodTrans.Find('-') then
                     repeat
-                        if PeriodTrans."Group Order" = 1 then begin
-                            BasicPay := PeriodTrans.Amount;
-                        end;
-
-                        if PeriodTrans."Group Order" = 7 then begin
-                            GrossPay := PeriodTrans.Amount; //Gross pay
-                        end;
-
-                        if PeriodTrans."Group Order" = 0 then begin
-                            NetPay := PeriodTrans.Amount; //Net pay
-                        end;
-
+                        if PeriodTrans."Transaction Code" = 'NPAY' then
+                            NetPay := PeriodTrans.Amount;
+                        if PeriodTrans."Transaction Code" = 'GPAY' then
+                            GrossPay := PeriodTrans.Amount;
                     until PeriodTrans.Next = 0;
-
-                if BasicPay <= 0 then
-                    CurrReport.Skip;
-                TotBasicPay := TotBasicPay + BasicPay;
-                TotGrossPay := TotGrossPay + GrossPay;
-                TotNetPay := TotNetPay + NetPay;
-                TotalDeductions := TotGrossPay - TotNetPay;
             end;
 
             trigger OnPreDataItem()
             begin
-                //   OnViewCurrRec();
             end;
         }
     }

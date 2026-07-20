@@ -18,26 +18,7 @@ table 52185637 "PR Salary Card"
                 Text0002: Label 'Employee %1 does not exist in HR Employees list. Please liase with HR Officer to Create this Employee';
             begin
                 "1/3 Basic" := 1 / 3 * "Basic Pay";
-                /*
-    //*************************DW******************************************
-    // TO ENSURE PR SALARY CARD BASIC PAY AND HR EMPLOYEES BASIC
-    // PAY ARE SAME WHEN CHANGED
-       IF HREmp.GET("Employee Code") THEN
-       BEGIN
-          HREmp."New Basic Pay":="Rate Per Day";
-          HREmp."Basic Pay":="Basic Pay";
-          HREmp.MODIFY;
-       END ELSE
-       BEGIN
-          ERROR(Text0002,"Employee Code");
-       END;
-
-    // For NIB MWEA :: Function to check if Employee is Paid Daily
-    // and place a check mark on the field is "Is Paid Daily" on this table
-                //  fnIsEmployeePaidDaily;
-    //*********************************************************************
-                 */
-
+            
             end;
         }
         field(3; "Payment Mode"; Option)
