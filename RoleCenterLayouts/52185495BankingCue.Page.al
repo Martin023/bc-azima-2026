@@ -21,12 +21,12 @@ page 52185495 "Banking Activities"
                 field("Total Cashier Transactions"; Rec."T/Cashier Transactions")
                 {
                     ApplicationArea = Basic;
-                    Image = None;
+                    Image = Checklist;
                 }
                 field("Cashier Transactions"; Rec."Cashier Transactions")
                 {
                     ApplicationArea = Basic;
-                    Image = None;
+                    Image = Checklist;
                 }
                 // field("Total Processed Salaries"; Rec."Total Processed Salaries")
                 // {
@@ -44,7 +44,7 @@ page 52185495 "Banking Activities"
                 field("Savings Accounts"; Rec."Savings Accounts")
                 {
                     ApplicationArea = Basic;
-                    Image = None;
+                    Image = Document;
                 }
                 field("EFT Trasfers"; Rec."EFT Transfer List")
                 {
@@ -94,7 +94,7 @@ page 52185495 "Banking Activities"
                 {
                     Caption = 'Azima Chapaa';
                     ApplicationArea = Basic;
-                    Image = None;
+                    Image = Cash;
                 }
 
             }
@@ -129,19 +129,19 @@ page 52185495 "Banking Activities"
                 field("SStanding Order"; Rec."Successful Standing Orders")
                 {
                     ApplicationArea = Basic;
-                    Image = None;
+                    Image = Calculator;
 
                 }
                 field("Standing Order"; Rec."Partial Deduction STO")
                 {
                     ApplicationArea = Basic;
-                    Image = None;
+                    Image = Checklist;
 
                 }
                 field("Standing Orders"; Rec."Unsuccessful Standing Order")
                 {
                     ApplicationArea = Basic;
-                    Image = None;
+                    Image = Calculator;
                 }
             }
             cuegroup("Members Portal")
