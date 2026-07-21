@@ -11,7 +11,7 @@
       <am:Name>PBIRB</am:Name>
       <am:Version>15.7.1813.16</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-07-03T07:25:53.7556464Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-07-21T13:54:17.2148593Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -24,6 +24,142 @@
       <rd:DataSourceID>f8261073-5b5e-4d35-8628-4174554898fb</rd:DataSourceID>
     </DataSource>
   </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+      <Fields>
+        <Field Name="CompanyInformation_Name">
+          <DataField>CompanyInformation_Name</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Picture">
+          <DataField>CompanyInformation_Picture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="BankAccountNo">
+          <DataField>BankAccountNo</DataField>
+        </Field>
+        <Field Name="BankAccountName">
+          <DataField>BankAccountName</DataField>
+        </Field>
+        <Field Name="BankAccountBalanceLCY">
+          <DataField>BankAccountBalanceLCY</DataField>
+        </Field>
+        <Field Name="BankAccountBalanceLCYFormat">
+          <DataField>BankAccountBalanceLCYFormat</DataField>
+        </Field>
+        <Field Name="BalanceLastStatement">
+          <DataField>BalanceLastStatement</DataField>
+        </Field>
+        <Field Name="BalanceLastStatementFormat">
+          <DataField>BalanceLastStatementFormat</DataField>
+        </Field>
+        <Field Name="StatementNo">
+          <DataField>StatementNo</DataField>
+        </Field>
+        <Field Name="StatementDate">
+          <DataField>StatementDate</DataField>
+        </Field>
+        <Field Name="StatementEndingBalance">
+          <DataField>StatementEndingBalance</DataField>
+        </Field>
+        <Field Name="StatementEndingBalanceFormat">
+          <DataField>StatementEndingBalanceFormat</DataField>
+        </Field>
+        <Field Name="TotalAppliedAmount">
+          <DataField>TotalAppliedAmount</DataField>
+        </Field>
+        <Field Name="TotalAppliedAmountFormat">
+          <DataField>TotalAppliedAmountFormat</DataField>
+        </Field>
+        <Field Name="TotalDifference">
+          <DataField>TotalDifference</DataField>
+        </Field>
+        <Field Name="TotalDifferenceFormat">
+          <DataField>TotalDifferenceFormat</DataField>
+        </Field>
+        <Field Name="TotalBalanceonBankAccount">
+          <DataField>TotalBalanceonBankAccount</DataField>
+        </Field>
+        <Field Name="TotalBalanceonBankAccountFormat">
+          <DataField>TotalBalanceonBankAccountFormat</DataField>
+        </Field>
+        <Field Name="Document_No_">
+          <DataField>Document_No_</DataField>
+        </Field>
+        <Field Name="Applied_Amount">
+          <DataField>Applied_Amount</DataField>
+        </Field>
+        <Field Name="Applied_AmountFormat">
+          <DataField>Applied_AmountFormat</DataField>
+        </Field>
+        <Field Name="Applied_Entries">
+          <DataField>Applied_Entries</DataField>
+        </Field>
+        <Field Name="External_Document_No">
+          <DataField>External_Document_No</DataField>
+        </Field>
+        <Field Name="Transaction_Date">
+          <DataField>Transaction_Date</DataField>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+        </Field>
+        <Field Name="Debit_Amount">
+          <DataField>Debit_Amount</DataField>
+        </Field>
+        <Field Name="Debit_AmountFormat">
+          <DataField>Debit_AmountFormat</DataField>
+        </Field>
+        <Field Name="Credit_Amount">
+          <DataField>Credit_Amount</DataField>
+        </Field>
+        <Field Name="Credit_AmountFormat">
+          <DataField>Credit_AmountFormat</DataField>
+        </Field>
+        <Field Name="AppliedDocument_No_">
+          <DataField>AppliedDocument_No_</DataField>
+        </Field>
+        <Field Name="AppliedExternal_Document_No">
+          <DataField>AppliedExternal_Document_No</DataField>
+        </Field>
+        <Field Name="AppliedTransaction_Date">
+          <DataField>AppliedTransaction_Date</DataField>
+        </Field>
+        <Field Name="AppliedDescription">
+          <DataField>AppliedDescription</DataField>
+        </Field>
+        <Field Name="AppliedDebit_Amount">
+          <DataField>AppliedDebit_Amount</DataField>
+        </Field>
+        <Field Name="AppliedDebit_AmountFormat">
+          <DataField>AppliedDebit_AmountFormat</DataField>
+        </Field>
+        <Field Name="AppliedCredit_Amount">
+          <DataField>AppliedCredit_Amount</DataField>
+        </Field>
+        <Field Name="AppliedCredit_AmountFormat">
+          <DataField>AppliedCredit_AmountFormat</DataField>
+        </Field>
+        <Field Name="StatementStatus">
+          <DataField>StatementStatus</DataField>
+        </Field>
+        <Field Name="IsApplied">
+          <DataField>IsApplied</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -46,8 +182,8 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>19.74541cm</Top>
-            <Left>0.30275cm</Left>
+            <Top>11.96666cm</Top>
+            <Left>0.32859cm</Left>
             <Height>0.52062cm</Height>
             <Width>2.83092cm</Width>
             <Style>
@@ -68,7 +204,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Approved By:</Value>
+                    <Value>Verified By</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -78,8 +214,8 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>22.40943cm</Top>
-            <Left>0.271cm</Left>
+            <Top>14.63068cm</Top>
+            <Left>0.29684cm</Left>
             <Height>0.52062cm</Height>
             <Width>2.83092cm</Width>
             <ZIndex>1</ZIndex>
@@ -111,8 +247,8 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>21.07742cm</Top>
-            <Left>0.271cm</Left>
+            <Top>13.29867cm</Top>
+            <Left>0.29684cm</Left>
             <Height>0.52062cm</Height>
             <Width>2.83092cm</Width>
             <ZIndex>2</ZIndex>
@@ -144,8 +280,8 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>19.74541cm</Top>
-            <Left>12.50095cm</Left>
+            <Top>11.96666cm</Top>
+            <Left>12.52679cm</Left>
             <Height>0.52062cm</Height>
             <Width>1.02632cm</Width>
             <ZIndex>3</ZIndex>
@@ -177,8 +313,8 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>22.40943cm</Top>
-            <Left>12.53299cm</Left>
+            <Top>14.63068cm</Top>
+            <Left>12.55883cm</Left>
             <Height>0.52062cm</Height>
             <Width>1.02632cm</Width>
             <ZIndex>4</ZIndex>
@@ -210,8 +346,8 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>21.07741cm</Top>
-            <Left>12.50095cm</Left>
+            <Top>13.29866cm</Top>
+            <Left>12.52679cm</Left>
             <Height>0.52062cm</Height>
             <Width>1.02632cm</Width>
             <ZIndex>5</ZIndex>
@@ -243,8 +379,8 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>19.74541cm</Top>
-            <Left>3.36005cm</Left>
+            <Top>11.96666cm</Top>
+            <Left>3.38589cm</Left>
             <Height>0.52062cm</Height>
             <Width>4.97308cm</Width>
             <ZIndex>6</ZIndex>
@@ -276,8 +412,8 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>22.40943cm</Top>
-            <Left>3.39208cm</Left>
+            <Top>14.63068cm</Top>
+            <Left>3.41792cm</Left>
             <Height>0.52062cm</Height>
             <Width>4.97308cm</Width>
             <ZIndex>7</ZIndex>
@@ -309,8 +445,8 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>21.07741cm</Top>
-            <Left>3.36004cm</Left>
+            <Top>13.29866cm</Top>
+            <Left>3.38588cm</Left>
             <Height>0.52062cm</Height>
             <Width>4.97308cm</Width>
             <ZIndex>8</ZIndex>
@@ -341,8 +477,8 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>19.7454cm</Top>
-            <Left>8.50952cm</Left>
+            <Top>11.96665cm</Top>
+            <Left>8.53536cm</Left>
             <Height>0.52062cm</Height>
             <Width>3.81504cm</Width>
             <ZIndex>9</ZIndex>
@@ -373,8 +509,8 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>22.40943cm</Top>
-            <Left>8.54156cm</Left>
+            <Top>14.63068cm</Top>
+            <Left>8.5674cm</Left>
             <Height>0.52062cm</Height>
             <Width>3.81504cm</Width>
             <ZIndex>10</ZIndex>
@@ -405,8 +541,8 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>22.40943cm</Top>
-            <Left>13.8614cm</Left>
+            <Top>14.63068cm</Top>
+            <Left>13.88724cm</Left>
             <Height>0.52062cm</Height>
             <Width>3.81504cm</Width>
             <ZIndex>11</ZIndex>
@@ -437,8 +573,8 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>21.07741cm</Top>
-            <Left>13.82936cm</Left>
+            <Top>13.29866cm</Top>
+            <Left>13.8552cm</Left>
             <Height>0.52062cm</Height>
             <Width>3.81504cm</Width>
             <ZIndex>12</ZIndex>
@@ -469,8 +605,8 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>19.74541cm</Top>
-            <Left>13.82936cm</Left>
+            <Top>11.96666cm</Top>
+            <Left>13.8552cm</Left>
             <Height>0.52062cm</Height>
             <Width>3.81504cm</Width>
             <ZIndex>13</ZIndex>
@@ -501,8 +637,8 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>21.07741cm</Top>
-            <Left>8.50952cm</Left>
+            <Top>13.29866cm</Top>
+            <Left>8.53536cm</Left>
             <Height>0.52062cm</Height>
             <Width>3.81504cm</Width>
             <ZIndex>14</ZIndex>
@@ -516,371 +652,9 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox6">
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Bank Code</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>0.17639cm</Top>
-            <Left>0.10771in</Left>
-            <Height>0.17708in</Height>
-            <Width>1.16667in</Width>
-            <ZIndex>15</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox7">
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Bank Account No</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>0.31597in</Top>
-            <Left>0.10771in</Left>
-            <Height>0.17708in</Height>
-            <Width>1.16667in</Width>
-            <ZIndex>16</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox8">
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Bank Name</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>0.56249in</Top>
-            <Left>0.10771in</Left>
-            <Height>0.16667in</Height>
-            <Width>1.16667in</Width>
-            <ZIndex>17</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox9">
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!BankAccountNo.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>0.1764cm</Top>
-            <Left>1.32398in</Left>
-            <Height>0.17708in</Height>
-            <Width>1.16667in</Width>
-            <ZIndex>18</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox10">
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!BankAccountNo.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>0.31597in</Top>
-            <Left>1.33546in</Left>
-            <Height>0.17708in</Height>
-            <Width>1.16667in</Width>
-            <ZIndex>19</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox11">
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!BankAccountName.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>0.56249in</Top>
-            <Left>1.32398in</Left>
-            <Height>0.16667in</Height>
-            <Width>1.16667in</Width>
-            <ZIndex>20</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox12">
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Reconcilliation Summary</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <Top>1.02083in</Top>
-            <Left>3.03095in</Left>
-            <Height>0.19167in</Height>
-            <Width>1.887in</Width>
-            <ZIndex>21</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox14">
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Current Cash Book Balance</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>1.75561in</Top>
-            <Left>0.13671in</Left>
-            <Height>0.17917in</Height>
-            <Width>1.82292in</Width>
-            <ZIndex>22</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox22">
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Balance as per bank statement:</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>2.01959in</Top>
-            <Left>0.13671in</Left>
-            <Height>0.17917in</Height>
-            <Width>1.82292in</Width>
-            <ZIndex>23</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox52">
-            <rd:DefaultName>Textbox5</rd:DefaultName>
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Add: Differences in Bank:</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>2.27654in</Top>
-            <Left>0.13044in</Left>
-            <Height>0.17917in</Height>
-            <Width>1.82292in</Width>
-            <ZIndex>24</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="StatementEndingBalance_BankAccountStatement">
-            <rd:DefaultName>StatementEndingBalance_BankAccountStatement</rd:DefaultName>
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Statement Ending balance.</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                      <Format>n2</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>2.58904in</Top>
-            <Left>0.13671in</Left>
-            <Height>0.17917in</Height>
-            <Width>1.82292in</Width>
-            <ZIndex>25</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
           <Tablix Name="Tablix4">
             <TablixBody>
               <TablixColumns>
-                <TablixColumn>
-                  <Width>3.06718cm</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>2.51358cm</Width>
-                </TablixColumn>
                 <TablixColumn>
                   <Width>2.92208cm</Width>
                 </TablixColumn>
@@ -898,72 +672,6 @@
                 <TablixRow>
                   <Height>0.6cm</Height>
                   <TablixCells>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox58">
-                          <rd:DefaultName>Textbox58</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Document No </Value>
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox36">
-                          <rd:DefaultName>Textbox36</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Cheque No.</Value>
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Textbox60">
@@ -1111,70 +819,6 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Document_No_">
-                          <rd:DefaultName>Document_No_</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!Document_No_.Value</Value>
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="External_Document_No">
-                          <rd:DefaultName>External_Document_No</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!External_Document_No.Value</Value>
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="Transaction_Date">
                           <rd:DefaultName>Transaction_Date</rd:DefaultName>
                           <CanGrow>true</CanGrow>
@@ -1317,15 +961,15 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox66">
-                          <rd:DefaultName>Textbox66</rd:DefaultName>
+                        <Textbox Name="Textbox56">
+                          <rd:DefaultName>Textbox56</rd:DefaultName>
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Total</Value>
+                                  <Value />
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -1346,13 +990,74 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <ColSpan>5</ColSpan>
                       </CellContents>
                     </TablixCell>
-                    <TablixCell />
-                    <TablixCell />
-                    <TablixCell />
-                    <TablixCell />
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox57">
+                          <rd:DefaultName>Textbox57</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox67">
+                          <rd:DefaultName>Textbox67</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="StatementAmount_BankAccountLedgerEntry2">
@@ -1397,8 +1102,6 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
-                <TablixMember />
-                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -1427,11 +1130,11 @@
                 </FilterValues>
               </Filter>
             </Filters>
-            <Top>8.24537cm</Top>
-            <Left>0.32491cm</Left>
+            <Top>6.94106cm</Top>
+            <Left>0.24905cm</Left>
             <Height>1.8cm</Height>
-            <Width>20.31364cm</Width>
-            <ZIndex>26</ZIndex>
+            <Width>14.73288cm</Width>
+            <ZIndex>15</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1456,11 +1159,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>6.3615in</Top>
-            <Left>0.12021in</Left>
+            <Top>3.49692in</Top>
+            <Left>0.10889in</Left>
             <Height>0.18041in</Height>
             <Width>3.09126in</Width>
-            <ZIndex>27</ZIndex>
+            <ZIndex>16</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1480,94 +1183,19 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>2.85117cm</Width>
+                  <Width>2.85433cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.61141cm</Width>
+                  <Width>13.33995cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.64266cm</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>6.0251cm</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>2.54175cm</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>3.64155cm</Width>
+                  <Width>3.71115cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
                   <Height>0.6cm</Height>
                   <TablixCells>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox59">
-                          <rd:DefaultName>Textbox58</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Document No </Value>
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox44">
-                          <rd:DefaultName>Textbox36</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Cheque No.</Value>
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Textbox61">
@@ -1673,110 +1301,11 @@
                         </Textbox>
                       </CellContents>
                     </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox63">
-                          <rd:DefaultName>Textbox62</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Credit Amount</Value>
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
                   <Height>0.6cm</Height>
                   <TablixCells>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Document_No_1">
-                          <rd:DefaultName>Document_No_1</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!Document_No_.Value</Value>
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="External_Document_No1">
-                          <rd:DefaultName>External_Document_No1</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!External_Document_No.Value</Value>
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Transaction_Date1">
@@ -1879,41 +1408,6 @@
                         </Textbox>
                       </CellContents>
                     </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Credit_Amount1">
-                          <rd:DefaultName>Credit_Amount1</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!Credit_Amount.Value</Value>
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <Format>#,0.00</Format>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
@@ -1921,8 +1415,8 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox33">
-                          <rd:DefaultName>Textbox33</rd:DefaultName>
+                        <Textbox Name="Textbox70">
+                          <rd:DefaultName>Textbox70</rd:DefaultName>
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -1950,17 +1444,45 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <ColSpan>5</ColSpan>
                       </CellContents>
                     </TablixCell>
-                    <TablixCell />
-                    <TablixCell />
-                    <TablixCell />
-                    <TablixCell />
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="StatementAmount_BankAccountLedgerEntry3">
-                          <rd:DefaultName>StatementAmount_BankAccountLedgerEntry1</rd:DefaultName>
+                        <Textbox Name="Textbox73">
+                          <rd:DefaultName>Textbox73</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox74">
+                          <rd:DefaultName>Textbox74</rd:DefaultName>
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -2000,9 +1522,6 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
-                <TablixMember />
-                <TablixMember />
-                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -2031,11 +1550,11 @@
                 </FilterValues>
               </Filter>
             </Filters>
-            <Top>10.91239cm</Top>
-            <Left>0.30534cm</Left>
+            <Top>4.10626cm</Top>
+            <Left>0.32491cm</Left>
             <Height>1.8cm</Height>
-            <Width>20.31364cm</Width>
-            <ZIndex>28</ZIndex>
+            <Width>19.90543cm</Width>
+            <ZIndex>17</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2046,22 +1565,13 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>3.32458cm</Width>
+                  <Width>3.31116cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.96191cm</Width>
+                  <Width>12.88312cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.79712cm</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>5.3288cm</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>2.79039cm</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>3.13958cm</Width>
+                  <Width>3.71115cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -2078,70 +1588,6 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Document No </Value>
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox39">
-                          <rd:DefaultName>Textbox36</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Cheque No.</Value>
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox70">
-                          <rd:DefaultName>Textbox60</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
                                   <Value>Transaction Date</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
@@ -2149,9 +1595,7 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
+                              <Style />
                             </Paragraph>
                           </Paragraphs>
                           <Style>
@@ -2185,40 +1629,6 @@
                               </TextRuns>
                               <Style>
                                 <TextAlign>Left</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox165">
-                          <rd:DefaultName>Textbox165</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Debit Amount</Value>
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
@@ -2283,68 +1693,6 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!AppliedDocument_No_.Value</Value>
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="AppliedExternal_Document_No">
-                          <rd:DefaultName>AppliedExternal_Document_No</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!AppliedExternal_Document_No.Value</Value>
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="AppliedTransaction_Date">
-                          <rd:DefaultName>AppliedTransaction_Date</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
                                   <Value>=Fields!AppliedTransaction_Date.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
@@ -2352,9 +1700,7 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
+                              <Style />
                             </Paragraph>
                           </Paragraphs>
                           <Style>
@@ -2386,40 +1732,6 @@
                                 </TextRun>
                               </TextRuns>
                               <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Style>None</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="AppliedDebit_Amount">
-                          <rd:DefaultName>AppliedDebit_Amount</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!AppliedDebit_Amount.Value</Value>
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <Format>#,0.00</Format>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Right</TextAlign>
-                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <Style>
@@ -2503,12 +1815,9 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <ColSpan>5</ColSpan>
+                        <ColSpan>2</ColSpan>
                       </CellContents>
                     </TablixCell>
-                    <TablixCell />
-                    <TablixCell />
-                    <TablixCell />
                     <TablixCell />
                     <TablixCell>
                       <CellContents>
@@ -2552,9 +1861,6 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
-                <TablixMember />
-                <TablixMember />
-                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -2587,11 +1893,11 @@
                 </FilterValues>
               </Filter>
             </Filters>
-            <Top>13.94876cm</Top>
-            <Left>0.27659cm</Left>
+            <Top>1.44616cm</Top>
+            <Left>0.32491cm</Left>
             <Height>1.8cm</Height>
-            <Width>20.34238cm</Width>
-            <ZIndex>29</ZIndex>
+            <Width>19.90543cm</Width>
+            <ZIndex>18</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3143,11 +2449,11 @@
                 </FilterValues>
               </Filter>
             </Filters>
-            <Top>16.79283cm</Top>
-            <Left>0.27358cm</Left>
+            <Top>9.51679cm</Top>
+            <Left>0.24484cm</Left>
             <Height>1.8cm</Height>
             <Width>20.34538cm</Width>
-            <ZIndex>30</ZIndex>
+            <ZIndex>19</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3162,21 +2468,24 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Debits in Bank Statement not in Cash Book</Value>
+                    <Value>Add:Entries Cr in Bank not Dr in Cash book</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontStyle>Normal</FontStyle>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
+                      <TextDecoration>Underline</TextDecoration>
+                      <Color>#000000</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>4.07414in</Top>
-            <Left>0.12649in</Left>
-            <Height>0.18041in</Height>
-            <Width>3.1163in</Width>
-            <ZIndex>31</ZIndex>
+            <Top>1.34746in</Top>
+            <Left>0.13419in</Left>
+            <Height>0.22751in</Height>
+            <Width>3.6163in</Width>
+            <ZIndex>20</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3186,136 +2495,6 @@
                 <Style>Solid</Style>
                 <Width>1pt</Width>
               </BottomBorder>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox171">
-            <rd:DefaultName>Textbox171</rd:DefaultName>
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!BankAccountBalanceLCY.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                      <Format>#,0.00</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>4.47323cm</Top>
-            <Left>5.2909cm</Left>
-            <Height>0.46229cm</Height>
-            <Width>2.6333cm</Width>
-            <ZIndex>32</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox174">
-            <rd:DefaultName>Textbox171</rd:DefaultName>
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!TotalDifference.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontWeight>Bold</FontWeight>
-                      <Format>#,0.00</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>5.78241cm</Top>
-            <Left>5.27515cm</Left>
-            <Height>0.4623cm</Height>
-            <Width>2.6333cm</Width>
-            <ZIndex>33</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox175">
-            <rd:DefaultName>Textbox171</rd:DefaultName>
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!StatementEndingBalance.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <Format>#,0.00</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>5.14373cm</Top>
-            <Left>5.2909cm</Left>
-            <Height>0.46229cm</Height>
-            <Width>2.6333cm</Width>
-            <ZIndex>34</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox177">
-            <rd:DefaultName>Textbox171</rd:DefaultName>
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!StatementEndingBalance.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <Format>#,0.00</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <Top>6.57616cm</Top>
-            <Left>5.2909cm</Left>
-            <Height>0.46229cm</Height>
-            <Width>2.6333cm</Width>
-            <ZIndex>35</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -3340,11 +2519,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>2.99635in</Top>
-            <Left>0.13044in</Left>
+            <Top>2.51062in</Top>
+            <Left>0.11683in</Left>
             <Height>0.18041in</Height>
             <Width>3.1163in</Width>
-            <ZIndex>36</ZIndex>
+            <ZIndex>21</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3368,9 +2547,9 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Uncleaared Cheques - Credits in Cash book not in Bank</Value>
+                    <Value>Add: Credits in Cash book not in Bank</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -3378,11 +2557,11 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>5.21406in</Top>
-            <Left>0.12649in</Left>
-            <Height>0.18041in</Height>
+            <Top>0.30566in</Top>
+            <Left>0.13419in</Left>
+            <Height>0.20813in</Height>
             <Width>3.349in</Width>
-            <ZIndex>37</ZIndex>
+            <ZIndex>22</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3398,28 +2577,35 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox15">
-            <rd:DefaultName>Textbox5</rd:DefaultName>
+          <Textbox Name="Textbox1">
+            <rd:DefaultName>Textbox1</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Last Statement Balance</Value>
+                    <Value>Cash Book Balance as at </Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=First(Fields!StatementDate.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>dd/MM/yyyy</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>1.45955in</Top>
-            <Left>0.13671in</Left>
-            <Height>0.17917in</Height>
-            <Width>1.82292in</Width>
-            <ZIndex>38</ZIndex>
+            <Top>0.14111cm</Top>
+            <Left>0.32491cm</Left>
+            <Height>0.6cm</Height>
+            <Width>16.91208cm</Width>
+            <ZIndex>23</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3430,29 +2616,26 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox172">
-            <rd:DefaultName>Textbox171</rd:DefaultName>
+          <Textbox Name="Textbox55">
+            <rd:DefaultName>Textbox55</rd:DefaultName>
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!BalanceLastStatement.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                      <Format>#,0.00</Format>
-                    </Style>
+                    <Value />
+                    <Style />
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>3.70007cm</Top>
-            <Left>5.2909cm</Left>
-            <Height>0.46229cm</Height>
-            <Width>2.6333cm</Width>
-            <ZIndex>39</ZIndex>
+            <Top>0.14111cm</Top>
+            <Left>17.27226cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.97524cm</Width>
+            <ZIndex>24</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3464,13 +2647,13 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>23.26837cm</Height>
+        <Height>17.55337cm</Height>
         <Style />
       </Body>
-      <Width>20.76451cm</Width>
+      <Width>42.91031cm</Width>
       <Page>
         <PageHeader>
-          <Height>4.72546cm</Height>
+          <Height>4.11692cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -3654,9 +2837,9 @@
                 </Paragraph>
               </Paragraphs>
               <Top>3.2512cm</Top>
-              <Left>5.62187cm</Left>
+              <Left>0.24173cm</Left>
               <Height>0.6cm</Height>
-              <Width>9.14633cm</Width>
+              <Width>20.00578cm</Width>
               <ZIndex>5</ZIndex>
               <Style>
                 <Border>
@@ -3756,6 +2939,12 @@
       </Page>
     </ReportSection>
   </ReportSections>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -3793,140 +2982,4 @@ End Function
 </Code>
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Fields>
-        <Field Name="CompanyInformation_Name">
-          <DataField>CompanyInformation_Name</DataField>
-        </Field>
-        <Field Name="CompanyInformation_Picture">
-          <DataField>CompanyInformation_Picture</DataField>
-        </Field>
-        <Field Name="CompanyAddress">
-          <DataField>CompanyAddress</DataField>
-        </Field>
-        <Field Name="CompanyTelephone">
-          <DataField>CompanyTelephone</DataField>
-        </Field>
-        <Field Name="CommunicationOnline">
-          <DataField>CommunicationOnline</DataField>
-        </Field>
-        <Field Name="BankAccountNo">
-          <DataField>BankAccountNo</DataField>
-        </Field>
-        <Field Name="BankAccountName">
-          <DataField>BankAccountName</DataField>
-        </Field>
-        <Field Name="BankAccountBalanceLCY">
-          <DataField>BankAccountBalanceLCY</DataField>
-        </Field>
-        <Field Name="BankAccountBalanceLCYFormat">
-          <DataField>BankAccountBalanceLCYFormat</DataField>
-        </Field>
-        <Field Name="BalanceLastStatement">
-          <DataField>BalanceLastStatement</DataField>
-        </Field>
-        <Field Name="BalanceLastStatementFormat">
-          <DataField>BalanceLastStatementFormat</DataField>
-        </Field>
-        <Field Name="StatementNo">
-          <DataField>StatementNo</DataField>
-        </Field>
-        <Field Name="StatementDate">
-          <DataField>StatementDate</DataField>
-        </Field>
-        <Field Name="StatementEndingBalance">
-          <DataField>StatementEndingBalance</DataField>
-        </Field>
-        <Field Name="StatementEndingBalanceFormat">
-          <DataField>StatementEndingBalanceFormat</DataField>
-        </Field>
-        <Field Name="TotalAppliedAmount">
-          <DataField>TotalAppliedAmount</DataField>
-        </Field>
-        <Field Name="TotalAppliedAmountFormat">
-          <DataField>TotalAppliedAmountFormat</DataField>
-        </Field>
-        <Field Name="TotalDifference">
-          <DataField>TotalDifference</DataField>
-        </Field>
-        <Field Name="TotalDifferenceFormat">
-          <DataField>TotalDifferenceFormat</DataField>
-        </Field>
-        <Field Name="TotalBalanceonBankAccount">
-          <DataField>TotalBalanceonBankAccount</DataField>
-        </Field>
-        <Field Name="TotalBalanceonBankAccountFormat">
-          <DataField>TotalBalanceonBankAccountFormat</DataField>
-        </Field>
-        <Field Name="Document_No_">
-          <DataField>Document_No_</DataField>
-        </Field>
-        <Field Name="Applied_Amount">
-          <DataField>Applied_Amount</DataField>
-        </Field>
-        <Field Name="Applied_AmountFormat">
-          <DataField>Applied_AmountFormat</DataField>
-        </Field>
-        <Field Name="Applied_Entries">
-          <DataField>Applied_Entries</DataField>
-        </Field>
-        <Field Name="External_Document_No">
-          <DataField>External_Document_No</DataField>
-        </Field>
-        <Field Name="Transaction_Date">
-          <DataField>Transaction_Date</DataField>
-        </Field>
-        <Field Name="Description">
-          <DataField>Description</DataField>
-        </Field>
-        <Field Name="Debit_Amount">
-          <DataField>Debit_Amount</DataField>
-        </Field>
-        <Field Name="Debit_AmountFormat">
-          <DataField>Debit_AmountFormat</DataField>
-        </Field>
-        <Field Name="Credit_Amount">
-          <DataField>Credit_Amount</DataField>
-        </Field>
-        <Field Name="Credit_AmountFormat">
-          <DataField>Credit_AmountFormat</DataField>
-        </Field>
-        <Field Name="AppliedDocument_No_">
-          <DataField>AppliedDocument_No_</DataField>
-        </Field>
-        <Field Name="AppliedExternal_Document_No">
-          <DataField>AppliedExternal_Document_No</DataField>
-        </Field>
-        <Field Name="AppliedTransaction_Date">
-          <DataField>AppliedTransaction_Date</DataField>
-        </Field>
-        <Field Name="AppliedDescription">
-          <DataField>AppliedDescription</DataField>
-        </Field>
-        <Field Name="AppliedDebit_Amount">
-          <DataField>AppliedDebit_Amount</DataField>
-        </Field>
-        <Field Name="AppliedDebit_AmountFormat">
-          <DataField>AppliedDebit_AmountFormat</DataField>
-        </Field>
-        <Field Name="AppliedCredit_Amount">
-          <DataField>AppliedCredit_Amount</DataField>
-        </Field>
-        <Field Name="AppliedCredit_AmountFormat">
-          <DataField>AppliedCredit_AmountFormat</DataField>
-        </Field>
-        <Field Name="StatementStatus">
-          <DataField>StatementStatus</DataField>
-        </Field>
-        <Field Name="IsApplied">
-          <DataField>IsApplied</DataField>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-    </DataSet>
-  </DataSets>
 </Report>
