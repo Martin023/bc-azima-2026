@@ -155,6 +155,10 @@ page 52185808 "Salary Header"
                     editable = false;
 
                 }
+                field("SMS Sent"; Rec."SMS Sent")
+                {
+                    editable = false;
+                }
 
             }
             part(Control17; "Salary Lines")
@@ -680,6 +684,7 @@ page 52185808 "Salary Header"
                         if not rec.Posted then Error('This Salary Batch is not posted');
                         if Confirm('Are you sure you want to send Salary SMS?', false) = false then
                             exit;
+                        if rec."SMS Sent" then Error('The Salary SMS has already been sent!');
                         SalaryLines.Reset;
                         SalaryLines.SetRange(SalaryLines."Salary Header No.", Rec.No);
                         if SalaryLines.FindSet() then begin
@@ -695,11 +700,12 @@ page 52185808 "Salary Header"
                                         SendSMS.SendSms(Source::SALARY_PROCESSING, MobileNo, msg, Format(SalaryLines."Account No."), '', true, 0, false, 'CBS', SalaryLines."Account No.", 'CBS');
                                     end;
                                 end;
-
                             // end;
                             // end;
                             until
                             SalaryLines.Next = 0;
+                            rec."SMS Sent" := true;
+                            rec.Modify();
                         end;
 
                     end;
