@@ -11,55 +11,6 @@
       <rd:DataSourceID>00e08c3a-02de-41d1-9c09-1a0475a17b97</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="CompanyInfo_Name">
-          <DataField>CompanyInfo_Name</DataField>
-        </Field>
-        <Field Name="CompanyInfo_Picture">
-          <DataField>CompanyInfo_Picture</DataField>
-        </Field>
-        <Field Name="Requisition_No">
-          <DataField>Requisition_No</DataField>
-        </Field>
-        <Field Name="Job_ID">
-          <DataField>Job_ID</DataField>
-        </Field>
-        <Field Name="Job_Description">
-          <DataField>Job_Description</DataField>
-        </Field>
-        <Field Name="Requisition_Date">
-          <DataField>Requisition_Date</DataField>
-        </Field>
-        <Field Name="Approval_Status">
-          <DataField>Approval_Status</DataField>
-        </Field>
-        <Field Name="Total_Recruitment_Cost">
-          <DataField>Total_Recruitment_Cost</DataField>
-        </Field>
-        <Field Name="Total_Recruitment_CostFormat">
-          <DataField>Total_Recruitment_CostFormat</DataField>
-        </Field>
-        <Field Name="Cost_Item">
-          <DataField>Cost_Item</DataField>
-        </Field>
-        <Field Name="Cost_Item_Description">
-          <DataField>Cost_Item_Description</DataField>
-        </Field>
-        <Field Name="Cost">
-          <DataField>Cost</DataField>
-        </Field>
-        <Field Name="CostFormat">
-          <DataField>CostFormat</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -589,12 +540,55 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>a291f4aa-f28e-43c0-b447-581f6f731cf3</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompanyInfo_Name">
+          <DataField>CompanyInfo_Name</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Picture">
+          <DataField>CompanyInfo_Picture</DataField>
+        </Field>
+        <Field Name="Requisition_No">
+          <DataField>Requisition_No</DataField>
+        </Field>
+        <Field Name="Job_ID">
+          <DataField>Job_ID</DataField>
+        </Field>
+        <Field Name="Job_Description">
+          <DataField>Job_Description</DataField>
+        </Field>
+        <Field Name="Requisition_Date">
+          <DataField>Requisition_Date</DataField>
+        </Field>
+        <Field Name="Approval_Status">
+          <DataField>Approval_Status</DataField>
+        </Field>
+        <Field Name="Total_Recruitment_Cost">
+          <DataField>Total_Recruitment_Cost</DataField>
+        </Field>
+        <Field Name="Total_Recruitment_CostFormat">
+          <DataField>Total_Recruitment_CostFormat</DataField>
+        </Field>
+        <Field Name="Cost_Item">
+          <DataField>Cost_Item</DataField>
+        </Field>
+        <Field Name="Cost_Item_Description">
+          <DataField>Cost_Item_Description</DataField>
+        </Field>
+        <Field Name="Cost">
+          <DataField>Cost</DataField>
+        </Field>
+        <Field Name="CostFormat">
+          <DataField>CostFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>
