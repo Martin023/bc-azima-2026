@@ -24,10 +24,10 @@ PageExtension 52185463 pageextension52185463 extends "Purch. Invoice Subform"
             Visible = false;
         }
 
-        modify("Matched Order Lines")
-        {
-            Visible = false;
-        }
+        // modify("Matched Order Lines")
+        // {
+        //     Visible = false;
+        // }
 
         modify("Tax Area Code")
         {
