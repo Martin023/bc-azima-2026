@@ -64,6 +64,7 @@ table 52185718 "Standing Order Lines"
                         "Destination Account Name" := Account.Name;
                         Account.CalcFields("Balance (LCY)");
                         "Destination Account Balance" := Account."Balance (LCY)";
+                        "Product Description" := Account."Product Name";
                     end;
                 end;
 
@@ -71,6 +72,7 @@ table 52185718 "Standing Order Lines"
                     if BankAcc.Get("Destination Account No.") then begin
                         "Destination Account Name" := BankAcc.Name;
                         "Bank Code" := BankAcc."Bank No.";
+                        "Product Description" := BankAcc.Name;
 
 
 
@@ -127,6 +129,7 @@ table 52185718 "Standing Order Lines"
                     "Destination Account No." := Loans."Loan Account";
                     "Destination Account Name" := Loans."Member No.";
                     "Destination Account Balance" := Loans."Total Balance";
+                    "Product Description" := Loans."Loan Product Type Name";
                 end;
                 if "Loan No." <> '' then begin
                     STOHeader.reset;
@@ -284,6 +287,10 @@ table 52185718 "Standing Order Lines"
             OptionMembers = Open,Pending,Approved,Rejected,Stopped,Cancelled;
             FieldClass = FlowField;
             Calcformula = Lookup("Standing Order Header".Status WHERE("No." = FIELD("Document No.")));
+        }
+        field(35; "Product Description"; Text[50])
+        {
+            Editable = false;
         }
     }
 
