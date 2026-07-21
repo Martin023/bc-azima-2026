@@ -36,6 +36,7 @@ table 52187078 "System Reversal"
                 CreditEntry: Record "Credit Ledger Entry";
                 GlRegister: Record "G/L Register";
                 Loansrec: Record Loans;
+                BankledgerEntry: Record "Bank Account Ledger Entry";
             begin
                 "Transaction Description" := '';
                 "Document No" := '';
@@ -59,6 +60,12 @@ table 52187078 "System Reversal"
                         if ("Entry No." >= GlRegister."From Entry No.") and ("Entry No." <= GlRegister."To Entry No.") then begin
 
                             "Transaction Number" := GlRegister."No.";
+                            BankledgerEntry.Reset;
+                            BankledgerEntry.SetRange("Entry No.", GlRegister."From Entry No.", GlRegister."To Entry No.");
+                            if BankledgerEntry.FindFirst then begin
+                                if BankLedgerEntry.Open = false then
+                                    Error('You cannot reverse this bank account ledger entry because it has already been reconciled.');
+                            end;
                         end;
                     until GlRegister.Next = 0;
                 end;
@@ -204,7 +211,7 @@ table 52187078 "System Reversal"
     begin
         if "No." = '' then
             "No." := NoSeriesMgt.GetNextNo('EDITS');
-            // NoSeriesMgt.InitSeries('EDITS', xRec."No. Series", 0D, "No.", "No. Series");
+        // NoSeriesMgt.InitSeries('EDITS', xRec."No. Series", 0D, "No.", "No. Series");
 
         "Created by User ID" := UserId;
         "Created By" := UserId;
