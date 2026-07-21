@@ -94,11 +94,12 @@ report 52185511 "Master Payroll Report"
                 MORGAGE := 0;
                 MORTINT := 0;
                 EML := 0;
+                TRAVELANDSUB := 0;
+                MRKTINGALL := 0;
 
                 if HREmployee.Get("PR Salary Card"."Employee Code") then
                     strEmpName := HREmployee."First Name" + ' ' + HREmployee."Middle Name" + ' ' + HREmployee."Last Name";
-                if "Basic Pay" > 0 then
-                    NSSFSELFI := 540;
+
                 PeriodTrans.Reset();
                 PeriodTrans.Setrange("Employee Code", "PR Salary Card"."Employee Code");
                 PeriodTrans.Setrange("Payroll Period", SelectedPeriod);
@@ -155,8 +156,9 @@ report 52185511 "Master Payroll Report"
                     until PeriodTrans.Next() = 0;
                     BHC := BPAY + HALLOW + COMMALL;
                     MKTSUBACT := MRKTINGALL + TRAVELANDSUB;
-                    TOTNSSF := PeriodTrans.Amount;
+                    TOTNSSF := NSSFSEFLII + NSSFSELFI;
                 end;
+                if BPAY = 0 then CurrReport.skip;
             end;
         }
 
