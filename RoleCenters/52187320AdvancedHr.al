@@ -139,6 +139,13 @@ page 52187320 AdvancedHumanResources
 
                             RunObject = report "Employee Requisiton Report";
                         }
+                        action("Recruitment Cost Report")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Recruitment Cost Report';
+
+                            RunObject = report "Recruitment Cost Report";
+                        }
                     }
                     group(Archive)
                     {
