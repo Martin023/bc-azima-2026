@@ -63,8 +63,8 @@ table 52187078 "System Reversal"
                             BankledgerEntry.Reset;
                             BankledgerEntry.SetRange("Entry No.", GlRegister."From Entry No.", GlRegister."To Entry No.");
                             if BankledgerEntry.FindFirst then begin
-                                if BankLedgerEntry.Open = false then
-                                    Error('You cannot reverse this bank account ledger entry because it has already been reconciled.');
+                                if not BankLedgerEntry.Open then
+                                    Error('Reversal is not permitted because the related bank account ledger entry has already been reconciled.');
                             end;
                         end;
                     until GlRegister.Next = 0;
