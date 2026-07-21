@@ -7429,7 +7429,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                     else
                                                                                         theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
                                                                                                     ', you have successfully transferred Kshs. ' +
-                                                                                                    Format(MpesaTransBuffer."Transaction Amount" - TotalCharges) +
+                                                                                                    Format(MpesaTransBuffer."Transaction Amount") +
                                                                                                     ' to ' + TheDestinationMember."First Name" + ' ' + TheDestinationMember."Middle Name" +
                                                                                                     ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccounts, true)) +
                                                                                                     ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
@@ -7577,7 +7577,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                         else
                                                                                             theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
                                                                                                             ', you have successfully transferred Kshs. ' +
-                                                                                                            Format(MpesaTransBuffer."Transaction Amount" - TotalCharges) +
+                                                                                                            Format(MpesaTransBuffer."Transaction Amount") +
                                                                                                             ' to ' + TheDestinationSavings."Name" +
                                                                                                             ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccounts, true)) +
                                                                                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
