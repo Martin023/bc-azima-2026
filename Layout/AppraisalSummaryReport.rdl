@@ -99,16 +99,16 @@
                                     <Width>3.5cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>1.5cm</Width>
+                                    <Width>2.5cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>1.5cm</Width>
+                                    <Width>2.5cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>4.5cm</Width>
+                                    <Width>3.5cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>4.5cm</Width>
+                                    <Width>3.5cm</Width>
                                   </TablixColumn>
                                 </TablixColumns>
                                 <TablixRows>
@@ -309,6 +309,7 @@
                                       <TablixCell>
                                         <CellContents>
                                           <Textbox Name="Perspective_Description">
+                                            <CanGrow>true</CanGrow>
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
@@ -336,6 +337,7 @@
                                       <TablixCell>
                                         <CellContents>
                                           <Textbox Name="Objective">
+                                            <CanGrow>true</CanGrow>
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
@@ -363,6 +365,7 @@
                                       <TablixCell>
                                         <CellContents>
                                           <Textbox Name="Line_Targeted_Score">
+                                            <CanGrow>true</CanGrow>
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
@@ -390,6 +393,7 @@
                                       <TablixCell>
                                         <CellContents>
                                           <Textbox Name="Line_Achieved_Score">
+                                            <CanGrow>true</CanGrow>
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
@@ -417,6 +421,7 @@
                                       <TablixCell>
                                         <CellContents>
                                           <Textbox Name="Appraisee_Comments">
+                                            <CanGrow>true</CanGrow>
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
@@ -444,6 +449,7 @@
                                       <TablixCell>
                                         <CellContents>
                                           <Textbox Name="Appraiser_Comments">
+                                            <CanGrow>true</CanGrow>
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
@@ -651,8 +657,8 @@
               <MIMEType>image/png</MIMEType>
               <Sizing>FitProportional</Sizing>
               <Top>0.2cm</Top>
-              <Height>2.8cm</Height>
-              <Width>4cm</Width>
+              <Height>3.2cm</Height>
+              <Width>6cm</Width>
               <ZIndex>3</ZIndex>
               <Style />
             </Image>

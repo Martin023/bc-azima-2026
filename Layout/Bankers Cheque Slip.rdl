@@ -1,16 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
-  <am:AuthoringMetadata>
-    <am:CreatedBy>
-      <am:Name>MSRB</am:Name>
-      <am:Version>15.0.20283.0</am:Version>
-    </am:CreatedBy>
-    <am:UpdatedBy>
-      <am:Name>MSRB</am:Name>
-      <am:Version>15.0.20283.0</am:Version>
-    </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-07-17T09:49:46.5238911Z</am:LastModifiedTimestamp>
-  </am:AuthoringMetadata>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DataSource">
@@ -373,7 +362,7 @@
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Center</TextAlign>
+                  <TextAlign>Left</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
@@ -410,7 +399,7 @@
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Center</TextAlign>
+                  <TextAlign>Left</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
@@ -447,7 +436,7 @@
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Center</TextAlign>
+                  <TextAlign>Left</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
@@ -481,7 +470,7 @@
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Center</TextAlign>
+                  <TextAlign>Left</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
@@ -524,7 +513,7 @@
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Center</TextAlign>
+                  <TextAlign>Left</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
@@ -565,7 +554,7 @@
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Center</TextAlign>
+                  <TextAlign>Left</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
@@ -623,9 +612,9 @@
               </Paragraph>
             </Paragraphs>
             <Top>10.55875cm</Top>
-            <Left>1cm</Left>
+            <Left>0.5cm</Left>
             <Height>0.6cm</Height>
-            <Width>18cm</Width>
+            <Width>19cm</Width>
             <ZIndex>17</ZIndex>
             <Style>
               <Border>
@@ -654,9 +643,9 @@
               </Paragraph>
             </Paragraphs>
             <Top>11.35875cm</Top>
-            <Left>1cm</Left>
+            <Left>0.5cm</Left>
             <Height>0.6cm</Height>
-            <Width>18cm</Width>
+            <Width>19cm</Width>
             <ZIndex>18</ZIndex>
             <Style>
               <Border>
@@ -685,9 +674,9 @@
               </Paragraph>
             </Paragraphs>
             <Top>12.15875cm</Top>
-            <Left>1cm</Left>
+            <Left>0.5cm</Left>
             <Height>0.6cm</Height>
-            <Width>18cm</Width>
+            <Width>19cm</Width>
             <ZIndex>19</ZIndex>
             <Style>
               <Border>
@@ -716,9 +705,9 @@
               </Paragraph>
             </Paragraphs>
             <Top>12.95875cm</Top>
-            <Left>1cm</Left>
+            <Left>0.5cm</Left>
             <Height>0.6cm</Height>
-            <Width>18cm</Width>
+            <Width>19cm</Width>
             <ZIndex>20</ZIndex>
             <Style>
               <Border>
@@ -756,9 +745,9 @@
               </Paragraph>
             </Paragraphs>
             <Top>13.85875cm</Top>
-            <Left>1cm</Left>
+            <Left>0.5cm</Left>
             <Height>0.6cm</Height>
-            <Width>18cm</Width>
+            <Width>19cm</Width>
             <ZIndex>21</ZIndex>
             <Style>
               <Border>
@@ -822,7 +811,7 @@
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>2.01084cm</Height>
+          <Height>1.21709cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <Style>

@@ -1223,7 +1223,7 @@ page 52185631 "HR Employee Card"
                 {
                     ApplicationArea = Basic;
                     Caption = 'Send Approval Request';
-                    //Enabled = NOT OpenApprovalEntriesExist;
+                    Enabled = Rec.Status = Rec.Status::New;
                     Image = SendApprovalRequest;
                     Promoted = true;
                     PromotedCategory = Category9;
