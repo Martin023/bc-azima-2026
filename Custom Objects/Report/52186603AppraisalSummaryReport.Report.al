@@ -32,6 +32,7 @@ report 52186603 "Appraisal Summary Report"
             column(Appraisal_Cycle_Stage; "Appraisal Cycle Stage") { }
             column(Status; Status) { }
             column(Responsibility_Center; "Responsibility Center") { }
+            column(Department_Name; DepartmentName) { } // <--- Added Department Name
             column(Supervisor_Name; "Supervisor Name") { }
             
             // Score Summary
@@ -59,6 +60,8 @@ report 52186603 "Appraisal Summary Report"
             }
 
             trigger OnAfterGetRecord()
+            var
+                RespCenter: Record "Responsibility Center";
             begin
                 CalcFields("Total Targeted Score", "Total Achieved Score", "Total Agreed Rating", "Has Disagreements", "Unresolved Discussions");
                 
@@ -66,6 +69,11 @@ report 52186603 "Appraisal Summary Report"
                     AchievementPercentage := ("Total Achieved Score" / "Total Targeted Score") * 100
                 else
                     AchievementPercentage := 0;
+
+                // Lookup actual Department Name instead of just printing the Code
+                DepartmentName := "Responsibility Center"; 
+                if RespCenter.Get("Responsibility Center") then
+                    DepartmentName := RespCenter.Name;
             end;
         }
     }
@@ -113,6 +121,7 @@ report 52186603 "Appraisal Summary Report"
     var
         CompanyInfo: Record "Company Information";
         AchievementPercentage: Decimal;
+        DepartmentName: Text[100];
         FilterAppraisalYear: Text;
         FilterCycleStage: Text;
         FilterStatus: Text;

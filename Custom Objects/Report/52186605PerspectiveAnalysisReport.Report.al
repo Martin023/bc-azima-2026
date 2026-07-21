@@ -1,7 +1,7 @@
 report 52186605 "Perspective Analysis Report"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = 'Layout\PerspectiveAnalysisReport.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/PerspectiveAnalysisReport.rdl';
     Caption = 'Perspective Analysis Report';
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;
@@ -10,57 +10,42 @@ report 52186605 "Perspective Analysis Report"
     {
         dataitem("HR Perspectives Setup"; "HR Perspectives Setup")
         {
-            RequestFilterFields = "Perspective No", Description, "Scoring Method";
-            column(CompanyInfo_Name; CompanyInfo.Name)
-            {
-            }
-            column(CompanyInfo_Address; CompanyInfo.Address)
-            {
-            }
-            column(CompanyInfo_Picture; CompanyInfo.Picture)
-            {
-            }
-            column(Perspective_No; "Perspective No")
-            {
-            }
-            column(Description; Description)
-            {
-            }
-            column(Scoring_Method; "Scoring Method")
-            {
-            }
-            column(Result_Label; "Result Label")
-            {
-            }
+            RequestFilterFields = "Perspective No", "Perspective Name", "Scoring Method";
+            
+            // Full Company Information
+            column(CompanyInfo_Name; CompanyInfo.Name) { }
+            column(CompanyInfo_Address; CompanyInfo.Address) { }
+            column(CompanyInfo_Picture; CompanyInfo.Picture) { }
+            column(CompanyInfo_City; CompanyInfo.City) { }
+            column(CompanyInfo_PostCode; CompanyInfo."Post Code") { }
+            column(CompanyInfo_Phone; CompanyInfo."Phone No." + ' ' + CompanyInfo."Phone No. 2") { }
+            column(CompanyInfo_Email; CompanyInfo."E-Mail") { }
+
+            // Perspective Header Fields
+            column(Perspective_No; "Perspective No") { }
+            column(Perspective_Name; "Perspective Name") { }
+            column(Description; Description) { }
+            column(Scoring_Method; "Scoring Method") { }
+            column(Result_Label; "Result Label") { }
+            
+            // Perspective Summary Averages
+            column(Average_Targeted; AverageTargeted) { }
+            column(Average_Achieved; AverageAchieved) { }
+            column(Average_Rating; AverageRating) { }
 
             dataitem("HR Individual Target Line"; "HR Individual Target Line")
             {
                 DataItemLink = "Perspective Code" = FIELD("Perspective No");
                 DataItemTableView = WHERE(Status = FILTER(Approved | Posted));
-                column(Target_Line_No; "Line No")
-                {
-                }
-                column(Target_Appraisal_No; "Appraisal No")
-                {
-                }
-                column(Target_Objective; Objective)
-                {
-                }
-                column(Target_Targeted_Score; "Targeted Score")
-                {
-                }
-                column(Target_Achieved_Score; "Achieved Score")
-                {
-                }
-                column(Target_Agreed_Rating; "Agreed Rating")
-                {
-                }
-                column(Target_Employee_Name; EmployeeName)
-                {
-                }
-                column(Target_Achievement_Percentage; AchievementPercentage)
-                {
-                }
+                
+                column(Target_Line_No; "Line No") { }
+                column(Target_Appraisal_No; "Appraisal No") { }
+                column(Target_Objective; Objective) { }
+                column(Target_Targeted_Score; "Targeted Score") { }
+                column(Target_Achieved_Score; "Achieved Score") { }
+                column(Target_Agreed_Rating; "Agreed Rating") { }
+                column(Target_Employee_Name; EmployeeName) { }
+                column(Target_Achievement_Percentage; AchievementPercentage) { }
 
                 trigger OnAfterGetRecord()
                 var
@@ -108,7 +93,7 @@ report 52186605 "Perspective Analysis Report"
 
     trigger OnPreReport()
     begin
-        CompanyInfo.Get;
+        CompanyInfo.Get();
         CompanyInfo.CalcFields(Picture);
     end;
 
