@@ -77,7 +77,7 @@ report 52185511 "Master Payroll Report"
                 PAYE := 0;
                 HALLOW := 0;
                 BHC := 0;
-                NSSFSELFI := 0;
+                NSSFSELFI := 540;
                 NSSFSEFLII := 0;
                 TOTNSSF := 0;
                 PensSELF := 0;
@@ -96,6 +96,7 @@ report 52185511 "Master Payroll Report"
                 EML := 0;
                 TRAVELANDSUB := 0;
                 MRKTINGALL := 0;
+
 
                 if HREmployee.Get("PR Salary Card"."Employee Code") then
                     strEmpName := HREmployee."First Name" + ' ' + HREmployee."Middle Name" + ' ' + HREmployee."Last Name";

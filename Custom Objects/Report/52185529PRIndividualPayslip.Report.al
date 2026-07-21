@@ -837,16 +837,16 @@ Report 52185529 "PR Individual Payslip"
                     */
 
                     //Index+=1;
-                    HREmailParam.Reset;
-                    if HREmailParam.Get(HREmailParam."associate with"::"Send Payslip Email") then begin
-                        //Index+=1;
-                        //Trans[ColumnNo,Index]
-                        PayslipMessage := HREmailParam."Payslip Message";
-                        //error(format(Index));
-                        // error(format(Index));
-                        //EVALUATE(TransAmt[ColumnNo,Index],HREmailParam."payslip message");
+                    // HREmailParam.Reset;
+                    // if HREmailParam.Get(HREmailParam."associate with"::"Send Payslip Email") then begin
+                    //     //Index+=1;
+                    //     //Trans[ColumnNo,Index]
+                    //     PayslipMessage := HREmailParam."Payslip Message";
+                    //     //error(format(Index));
+                    //     // error(format(Index));
+                    //     //EVALUATE(TransAmt[ColumnNo,Index],HREmailParam."payslip message");
 
-                    end;
+                    // end;
                     //******************************************************************************
 
 
