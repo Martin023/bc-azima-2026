@@ -48,7 +48,7 @@ report 52187076 "Registration Fee Recovery"
                             // - SavingsAccounts.GetAvailableBalance(SavingsAccounts."No.");
                             BosaAccountNo := SaccoTrans.GetMemberDepositAccount(Members);
                             if BosaAccountNo = '' then begin
-                                Message('BOSA Account not found for member %1', Members."No.");
+                                //Message('BOSA Account not found for member %1', Members."No.");
                                 currReport.Skip;
                             end;
 
@@ -186,7 +186,7 @@ report 52187076 "Registration Fee Recovery"
                                 // - SavingsAccounts.GetAvailableBalance(SavingsAccounts."No.");
                                 BosaAccountNo := SaccoTrans.GetMemberDepositAccount(Members);
                                 if BosaAccountNo = '' then begin
-                                    Error('BOSA Account not found for member %1', Members."No.");
+                                    //Error('BOSA Account not found for member %1', Members."No.");
                                     currReport.Skip;
                                 end;
                                 Clear(RegFeeBal);
