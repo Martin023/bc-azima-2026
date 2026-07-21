@@ -980,6 +980,18 @@ page 52185712 "Product Factory"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Main Sector"; Rec."Main Sector")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Sub Sector Level1"; Rec."Sub Sector Level1")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Sub Sector Level2"; Rec."Sub Sector Level2")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 group(Channels)
                 {
                     Caption = 'Sky Channels';

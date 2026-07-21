@@ -1084,6 +1084,21 @@ table 52185690 "Product Factory"
         {
             DataClassification = ToBeClassified;
         }
+        field(10047; "Main Sector"; Code[20])
+        {
+            Caption = 'Main Sector';
+            TableRelation = "Sectoral Classification"."Sector Code" where("Sector Level" = const("Main Sector"));
+        }
+        field(10048; "Sub Sector Level1"; Code[20])
+        {
+            Caption = 'Sub Sector Level1';
+            TableRelation = "Sectoral Classification"."Sector Code" where("Sector Level" = const("Sub Sector Level 1"), "Parent Sector" = field("Main Sector"));
+        }
+        field(10049; "Sub Sector Level2"; Code[20])
+        {
+            Caption = 'Sub Sector Level2';
+            TableRelation = "Sectoral Classification"."Sector Code" where("Sector Level" = const("Sub Sector Level 2"), "Parent Sector" = field("Sub Sector Level1"));
+        }
     }
 
     keys
