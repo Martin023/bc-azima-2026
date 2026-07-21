@@ -109,11 +109,11 @@ page 52185659 "PR Salary List (ALL)"
                     end;
 
                     //Display payslip report
-                    PRSalaryCard.reset;
-                    PRSalaryCard.SetRange("Employee Code", Rec."No.");
-                    PRSalaryCard.SetRange(PRSalaryCard."Period Filter", SelectedPeriod);
-                    if PRSalaryCard.FindFirst() then
-                        REPORT.Run(REPORT::"PR Individual Payslip", true, false, PRSalaryCard);
+                    // PRSalaryCard.reset;
+                    // PRSalaryCard.SetRange("Employee Code", Rec."No.");
+                    // PRSalaryCard.SetRange(PRSalaryCard."Period Filter", SelectedPeriod);
+                    // if PRSalaryCard.FindFirst() then
+                    REPORT.Run(REPORT::"PR Individual Payslip");
                 end;
             }
             action(ProcessPayroll)
@@ -276,6 +276,7 @@ page 52185659 "PR Salary List (ALL)"
                 Promoted = true;
                 PromotedIsBig = true;
                 PromotedCategory = Process;
+                Visible = false;
 
 
                 trigger OnAction()
