@@ -6247,9 +6247,9 @@ codeunit 52186507 "Members Portal Integration"
         loan_purpose: JsonToken;
         installments: JsonToken;
         requested_amount: JsonToken;
-        sasra_main_sector: JsonToken;
-        sasra_sub_sector_1: JsonToken;
-        sasra_sub_sector_2: JsonToken;
+        // sasra_main_sector: JsonToken;
+        // sasra_sub_sector_1: JsonToken;
+        // sasra_sub_sector_2: JsonToken;
         is_self_guarantee: JsonToken;
 
         // // id_front_file: JsonToken;
@@ -6281,6 +6281,7 @@ codeunit 52186507 "Members Portal Integration"
         SalaryAmount: decimal;
         GuarantorMember: Record Members;
         MobileLoanProduct: Record "Product Factory";
+        ApplicationLoanProduct: Record "Product Factory";
         LoansToBeCleared: Record Loans;
         TopupAmount: Decimal;
 
@@ -6324,9 +6325,9 @@ codeunit 52186507 "Members Portal Integration"
         Payload.Get('installments', installments);
         Payload.Get('requested_amount', requested_amount);
         Payload.Get('guarantors', guarantors);
-        Payload.Get('sasra_main_sector', sasra_main_sector);
-        Payload.Get('sasra_sub_sector_1', sasra_sub_sector_1);
-        Payload.Get('sasra_sub_sector_2', sasra_sub_sector_2);
+        // Payload.Get('sasra_main_sector', sasra_main_sector);
+        // Payload.Get('sasra_sub_sector_1', sasra_sub_sector_1);
+        // Payload.Get('sasra_sub_sector_2', sasra_sub_sector_2);
         Payload.Get('is_self_guarantee', is_self_guarantee);
         Payload.Get('loans_to_be_cleared', loans_to_be_cleared);
 
@@ -6365,9 +6366,13 @@ codeunit 52186507 "Members Portal Integration"
             TheLoanApplication.Installments := installments.AsValue.AsInteger;
             TheLoanApplication."Requested Amount" := requested_amount.AsValue.AsDecimal;
             TheLoanApplication."Source Application" := TheLoanApplication."Source Application"::"Member Portal";
-            TheLoanApplication."Main Sector" := sasra_main_sector.AsValue.AsText;
-            TheLoanApplication."Sub Sector Level1" := sasra_sub_sector_1.AsValue.AsText;
-            TheLoanApplication."Sub Sector Level2" := sasra_sub_sector_2.AsValue.AsText;
+
+            // SASRA sector classification is prefilled from the product, not chosen by the member
+            if ApplicationLoanProduct.Get(loan_product.AsValue.AsText) then begin
+                TheLoanApplication."Main Sector" := ApplicationLoanProduct."Main Sector";
+                TheLoanApplication."Sub Sector Level1" := ApplicationLoanProduct."Sub Sector Level1";
+                TheLoanApplication."Sub Sector Level2" := ApplicationLoanProduct."Sub Sector Level2";
+            end;
 
             if is_self_guarantee.IsValue then begin
                 TheLoanApplication."Is Self Guarantee" := is_self_guarantee.AsValue.AsBoolean;
