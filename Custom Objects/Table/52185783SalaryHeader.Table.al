@@ -269,6 +269,10 @@ table 52185783 "Salary Header"
         field(76; "Deposit Deduction"; Decimal)
         {
         }
+        field(77; "SMS Sent"; Boolean)
+        {
+            Editable = false;
+        }
 
     }
 

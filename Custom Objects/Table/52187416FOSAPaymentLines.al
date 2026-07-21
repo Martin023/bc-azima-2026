@@ -1127,7 +1127,7 @@ table 52187416 "FOSA Payment Line"
         {
             // TableRelation = "Fosa Payments Header"."Payment Narration";
         }
-        field(482; "Housing Levy"; Decimal)
+        field(482; "Housing Levy"; Code[10])
         {
             TableRelation = "Tariff Code s".Code WHERE(Type = CONST("Housing Levy"));
         }
