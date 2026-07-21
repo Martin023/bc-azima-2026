@@ -18,13 +18,14 @@ Report 52185439 "All Tellers Cash Report"
             column(CompanyAddress; CompanyAddress) { }
             column(CompanyTelephone; CompanyTelephone) { }
             column(CompanyEmail; CompanyEmail) { }
-            column(CompanyPicture; CompanyInformation.Picture) { } 
+            column(CompanyPicture; CompanyInformation.Picture) { }
             column(PrintingDate; PrintingDate) { }
             column(PrintingTime; PrintingTime) { }
             column(PrintedBy_Header; PrintedBy) { }
 
             column(DateFilterTxt; DateFilterTxt) { }
 
+            // RECEIPTS
             column(CashDepositAmt; CashDepositAmt) { }
             column(JournalVoucherReceiptsAmt; JournalVoucherReceiptsAmt) { }
             column(MPesaCashDepositAmt; MPesaCashDepositAmt) { }
@@ -32,14 +33,16 @@ Report 52185439 "All Tellers Cash Report"
             column(SpecialReceiptAmt; SpecialReceiptAmt) { }
             column(GrandTotalReceiptsAmt; GrandTotalReceiptsAmt) { }
 
+            // PAYMENTS
             column(CashWithdrawalAmt; CashWithdrawalAmt) { }
             column(EndOfDayAmt; EndOfDayAmt) { }
             column(ReturnToTreasuryAmt; ReturnToTreasuryAmt) { }
             column(JournalVoucherPaymentsAmt; JournalVoucherPaymentsAmt) { }
             column(MPesaCashWithdrawAmt; MPesaCashWithdrawAmt) { }
-            column(TotalVoucherPaymentsAmt; TotalVoucherPaymentsAmt) { } 
+            column(TotalVoucherPaymentsAmt; TotalVoucherPaymentsAmt) { }
             column(GrandTotalPaymentsAmt; GrandTotalPaymentsAmt) { }
 
+            // BALANCES
             column(TellersOpeningBalancesAmt; TellersOpeningBalancesAmt) { }
             column(TellersClosingBalancesAmt; TellersClosingBalancesAmt) { }
             column(TreasuryOpeningBalanceAmt; TreasuryOpeningBalanceAmt) { }
@@ -48,81 +51,145 @@ Report 52185439 "All Tellers Cash Report"
             column(AmountInWords; AmountInWords[1]) { }
 
             trigger OnPreDataItem()
+            var
+                Matched: Boolean;
+                IsReceipt: Boolean;
+                AbsAmt: Decimal;
             begin
                 if Treasury_transaction.GetFilter("Date Posted") = '' then
                     Treasury_transaction.SetRange("Date Posted", Today);
-                DateFilterTxt := Treasury_transaction.GetFilter("Date Posted");
 
+                DateFilterTxt := Treasury_transaction.GetFilter("Date Posted");
+                MinFilterDate := Treasury_transaction.GetRangeMin("Date Posted");
+                MaxFilterDate := Treasury_transaction.GetRangeMax("Date Posted");
+
+                // Initialize variables
                 CashDepositAmt := 0;
                 JournalVoucherReceiptsAmt := 0;
                 MPesaCashDepositAmt := 0;
                 ReceiveFromTreasuryAmt := 0;
                 SpecialReceiptAmt := 0;
-                
                 CashWithdrawalAmt := 0;
                 EndOfDayAmt := 0;
                 ReturnToTreasuryAmt := 0;
                 JournalVoucherPaymentsAmt := 0;
                 MPesaCashWithdrawAmt := 0;
                 TotalVoucherPaymentsAmt := 0;
+                TellersOpeningBalancesAmt := 0;
+                TellersClosingBalancesAmt := 0;
+                TreasuryOpeningBalanceAmt := 0;
+                TreasuryClosingBalanceAmt := 0;
 
-                CashierTrans.Reset();
-                CashierTrans.SetFilter("Date Posted", DateFilterTxt);
-                CashierTrans.SetRange(Posted, true);
-                if CashierTrans.FindSet() then begin
+                BankAcc.Reset();
+                BankAcc.SetRange("Bank Type", BankAcc."Bank Type"::Cashier);
+                if BankAcc.FindSet() then begin
                     repeat
-                        if CashierTrans.Type = CashierTrans.Type::"Cash Deposit" then
-                            CashDepositAmt += CashierTrans.Amount
-                        else if CashierTrans.Type = CashierTrans.Type::"MPESA Deposit" then
-                            MPesaCashDepositAmt += CashierTrans.Amount
-                        else if CashierTrans.Type = CashierTrans.Type::"Credit Receipt" then
-                            SpecialReceiptAmt += CashierTrans.Amount
-                        else if (StrPos(UpperCase(CashierTrans."Transaction Description"), 'JOURNAL') > 0) and (CashierTrans.Type = CashierTrans.Type::"Credit Receipt") then
-                            JournalVoucherReceiptsAmt += CashierTrans.Amount
-                        else if CashierTrans.Type = CashierTrans.Type::"Cash Withdrawal" then
-                            CashWithdrawalAmt += CashierTrans.Amount
-                        else if CashierTrans.Type = CashierTrans.Type::"MPESA Withdrawal" then
-                            MPesaCashWithdrawAmt += CashierTrans.Amount
-                        else if (StrPos(UpperCase(CashierTrans."Transaction Description"), 'JOURNAL') > 0) and (CashierTrans.Type = CashierTrans.Type::"Cash Withdrawal") then
-                            JournalVoucherPaymentsAmt += CashierTrans.Amount;
-                    until CashierTrans.Next() = 0;
-                end;
+                        // A. Tellers' Opening Balance
+                        BankLedgEntry.Reset();
+                        BankLedgEntry.SetRange("Bank Account No.", BankAcc."No.");
+                        BankLedgEntry.SetFilter("Posting Date", '<%1', MinFilterDate);
+                        BankLedgEntry.CalcSums("Amount (LCY)");
+                        TellersOpeningBalancesAmt += BankLedgEntry."Amount (LCY)";
 
-                TreasuryTransIn.Reset();
-                TreasuryTransIn.SetFilter("Date Posted", DateFilterTxt);
-                TreasuryTransIn.SetRange(Posted, true);
-                if TreasuryTransIn.FindSet() then begin
-                    repeat
-                        if TreasuryTransIn."Transaction Type" = TreasuryTransIn."Transaction Type"::"Issue To Teller" then
-                            ReceiveFromTreasuryAmt += TreasuryTransIn.Amount
-                        else if TreasuryTransIn."Transaction Type" = TreasuryTransIn."Transaction Type"::"End of Day Return to Treasury" then
-                            EndOfDayAmt += TreasuryTransIn.Amount
-                        else if TreasuryTransIn."Transaction Type" = TreasuryTransIn."Transaction Type"::"Return To Treasury" then
-                            ReturnToTreasuryAmt += TreasuryTransIn.Amount;
-                    until TreasuryTransIn.Next() = 0;
-                end;
+                        // B. Tellers' Closing Balance
+                        BankLedgEntry.Reset();
+                        BankLedgEntry.SetRange("Bank Account No.", BankAcc."No.");
+                        BankLedgEntry.SetFilter("Posting Date", '<=%1', MaxFilterDate);
+                        BankLedgEntry.CalcSums("Amount (LCY)");
+                        TellersClosingBalancesAmt += BankLedgEntry."Amount (LCY)";
 
-                PaymentsHeader.Reset();
-                PaymentsHeader.SetFilter("Date Posted", DateFilterTxt);
-                PaymentsHeader.SetRange(Posted, true);
-                if PaymentsHeader.FindSet() then begin
-                    repeat
-                        if BankAcc.Get(PaymentsHeader."Paying Bank Account") then begin
-                            if BankAcc."Bank Type" = BankAcc."Bank Type"::Cashier then begin
-                                PaymentsHeader.CalcFields("Total Net Amount");
-                                TotalVoucherPaymentsAmt += PaymentsHeader."Total Net Amount";
-                            end;
+                        // C. Loop Tellers' Transactions for the filtered period
+                        BankLedgEntry.Reset();
+                        BankLedgEntry.SetRange("Bank Account No.", BankAcc."No.");
+                        BankLedgEntry.SetFilter("Posting Date", DateFilterTxt);
+                        if BankLedgEntry.FindSet() then begin
+                            repeat
+                                // IGNORING REVERSED TRANSACTIONS
+                                if not BankLedgEntry.Reversed then begin
+
+                                    AbsAmt := Abs(BankLedgEntry."Amount (LCY)");
+                                    IsReceipt := BankLedgEntry."Amount (LCY)" > 0;
+                                    Matched := false;
+
+                                    // Check Cashier Transactions
+                                    if CashierTrans.Get(BankLedgEntry."Document No.") then begin
+                                        Matched := true;
+                                        case CashierTrans.Type of
+                                            CashierTrans.Type::"Cash Deposit":
+                                                CashDepositAmt += AbsAmt;
+                                            CashierTrans.Type::"MPESA Deposit":
+                                                MPesaCashDepositAmt += AbsAmt;
+                                            CashierTrans.Type::"Cash Withdrawal":
+                                                CashWithdrawalAmt += AbsAmt;
+                                            CashierTrans.Type::"MPESA Withdrawal":
+                                                MPesaCashWithdrawAmt += AbsAmt;
+                                            CashierTrans.Type::"Credit Receipt":
+                                                SpecialReceiptAmt += AbsAmt;
+                                            else begin
+                                                if IsReceipt then
+                                                    SpecialReceiptAmt += AbsAmt
+                                                else
+                                                    JournalVoucherPaymentsAmt += AbsAmt;
+                                            end;
+                                        end;
+                                    end
+
+                                    // Check Payment Vouchers (All PVs)
+                                    else if PaymentsHeader.Get(BankLedgEntry."Document No.") then begin
+                                        Matched := true;
+                                        TotalVoucherPaymentsAmt += AbsAmt;
+                                    end
+
+                                    // Check Treasury Transactions
+                                    else if TreasuryTransLog.Get(BankLedgEntry."Document No.") then begin
+                                        Matched := true;
+                                        if TreasuryTransLog."Transaction Type" = TreasuryTransLog."Transaction Type"::"Issue To Teller" then
+                                            ReceiveFromTreasuryAmt += AbsAmt
+                                        else if TreasuryTransLog."Transaction Type" = TreasuryTransLog."Transaction Type"::"Return To Treasury" then
+                                            ReturnToTreasuryAmt += AbsAmt
+                                        else if TreasuryTransLog."Transaction Type" = TreasuryTransLog."Transaction Type"::"End of Day Return to Treasury" then
+                                            EndOfDayAmt += AbsAmt
+                                        else begin
+                                            if IsReceipt then
+                                                ReceiveFromTreasuryAmt += AbsAmt
+                                            else
+                                                ReturnToTreasuryAmt += AbsAmt;
+                                        end;
+                                    end;
+
+                                    // If no match, treat as generic Journal Voucher entry
+                                    if not Matched then begin
+                                        if IsReceipt then
+                                            JournalVoucherReceiptsAmt += AbsAmt
+                                        else
+                                            JournalVoucherPaymentsAmt += AbsAmt;
+                                    end;
+                                end;
+                            until BankLedgEntry.Next() = 0;
                         end;
-                    until PaymentsHeader.Next() = 0;
+                    until BankAcc.Next() = 0;
                 end;
+                BankAcc.Reset();
+                BankAcc.SetRange("Bank Type", BankAcc."Bank Type"::Treasury);
+                if BankAcc.FindSet() then begin
+                    repeat
+                        // A. Treasury Opening Balance
+                        BankLedgEntry.Reset();
+                        BankLedgEntry.SetRange("Bank Account No.", BankAcc."No.");
+                        BankLedgEntry.SetFilter("Posting Date", '<%1', MinFilterDate);
+                        BankLedgEntry.CalcSums("Amount (LCY)");
+                        TreasuryOpeningBalanceAmt += BankLedgEntry."Amount (LCY)";
 
+                        // B. Treasury Closing Balance
+                        BankLedgEntry.Reset();
+                        BankLedgEntry.SetRange("Bank Account No.", BankAcc."No.");
+                        BankLedgEntry.SetFilter("Posting Date", '<=%1', MaxFilterDate);
+                        BankLedgEntry.CalcSums("Amount (LCY)");
+                        TreasuryClosingBalanceAmt += BankLedgEntry."Amount (LCY)";
+                    until BankAcc.Next() = 0;
+                end;
                 GrandTotalReceiptsAmt := CashDepositAmt + JournalVoucherReceiptsAmt + MPesaCashDepositAmt + ReceiveFromTreasuryAmt + SpecialReceiptAmt;
                 GrandTotalPaymentsAmt := CashWithdrawalAmt + EndOfDayAmt + ReturnToTreasuryAmt + JournalVoucherPaymentsAmt + MPesaCashWithdrawAmt + TotalVoucherPaymentsAmt;
-
-                TellersOpeningBalancesAmt := 0.00;
-                TellersClosingBalancesAmt := 0.00;
-                TreasuryOpeningBalanceAmt := 25192336.00;
-                TreasuryClosingBalanceAmt := 24142204.00;
 
                 AmountInWords[1] := ConvertAmountToWords(GrandTotalReceiptsAmt);
             end;
@@ -149,31 +216,34 @@ Report 52185439 "All Tellers Cash Report"
                 TempCoinage.Reset();
                 TempCoinage.DeleteAll();
 
-                TreasuryTransIn.Reset();
-                TreasuryTransIn.SetFilter("Date Posted", DateFilterTxt);
-                TreasuryTransIn.SetRange(Posted, true);
-                if TreasuryTransIn.FindSet() then begin
+                TreasuryTransLog.Reset();
+                TreasuryTransLog.SetFilter("Date Posted", DateFilterTxt);
+                TreasuryTransLog.SetRange(Posted, true);
+                if TreasuryTransLog.FindSet() then begin
                     repeat
                         CoinageRec.Reset();
-                        CoinageRec.SetRange(No, TreasuryTransIn.No);
+                        CoinageRec.SetRange(No, TreasuryTransLog.No);
                         if CoinageRec.FindSet() then begin
                             repeat
-                                TempCoinage.Reset();
-                                TempCoinage.SetRange(Code, CoinageRec.Code);
-                                if TempCoinage.FindFirst() then begin
-                                    TempCoinage.Quantity += CoinageRec.Quantity;
-                                    TempCoinage."Total Amount" += CoinageRec."Total Amount";
-                                    TempCoinage.Modify();
-                                end else begin
-                                    TempCoinage.Init();
-                                    TempCoinage.Code := CoinageRec.Code;
-                                    TempCoinage.Quantity := CoinageRec.Quantity;
-                                    TempCoinage."Total Amount" := CoinageRec."Total Amount";
-                                    TempCoinage.Insert();
+                                // ONLY WRITE IF DENOMINATION > 0
+                                if CoinageRec.Quantity > 0 then begin
+                                    TempCoinage.Reset();
+                                    TempCoinage.SetRange(Code, CoinageRec.Code);
+                                    if TempCoinage.FindFirst() then begin
+                                        TempCoinage.Quantity += CoinageRec.Quantity;
+                                        TempCoinage."Total Amount" += CoinageRec."Total Amount";
+                                        TempCoinage.Modify();
+                                    end else begin
+                                        TempCoinage.Init();
+                                        TempCoinage.Code := CoinageRec.Code;
+                                        TempCoinage.Quantity := CoinageRec.Quantity;
+                                        TempCoinage."Total Amount" := CoinageRec."Total Amount";
+                                        TempCoinage.Insert();
+                                    end;
                                 end;
                             until CoinageRec.Next() = 0;
                         end;
-                    until TreasuryTransIn.Next() = 0;
+                    until TreasuryTransLog.Next() = 0;
                 end;
 
                 TempCoinage.Reset();
@@ -226,12 +296,15 @@ Report 52185439 "All Tellers Cash Report"
         DateFilterTxt: Text;
         HasPrinted: Boolean;
 
+        BankLedgEntry: Record "Bank Account Ledger Entry";
         CashierTrans: Record "Cashier Transactions";
-        TreasuryTransIn: Record "Treasury Cashier Transactions";
+        TreasuryTransLog: Record "Treasury Cashier Transactions";
         PaymentsHeader: Record "Payments Header";
         BankAcc: Record "Bank Account";
         CoinageRec: Record Coinage;
         TempCoinage: Record Coinage temporary;
+        MinFilterDate: Date;
+        MaxFilterDate: Date;
 
         CashDepositAmt: Decimal;
         JournalVoucherReceiptsAmt: Decimal;

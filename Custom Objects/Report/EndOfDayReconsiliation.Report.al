@@ -30,27 +30,33 @@ Report 52185446 "End of Day Reconciliation"
             column(PostedBy; "Posted By") { }
             column(ShortageAcc; ShortageAccCode) { }
             column(SurplusAcc; SurplusAccCode) { }
+            
+            // SUMMARY BALANCES
             column(BalBroughtForward; BalBroughtForwardAmt) { }
             column(TotalReceipts; TotalReceiptsAmt) { }
             column(TotalPayments; TotalPaymentsAmt) { }
             column(BalCarriedDown; BalCarriedDownAmt) { }
-            column(SystemCashAtHand; "Till Balance") { }
-
+            column(SystemCashAtHand; SystemCashAtHandAmt) { }
             column(ActualCashAtHand; ActualCashAtHandAmt) { }
             column(Difference; DifferenceAmt) { }
-
-            column(CashDeposit; CashDepositAmt) { }
-            column(MPesaCashDeposit; MPesaCashDepositAmt) { }
-            column(ReceiveFromTreasury; ReceiveFromTreasuryAmt) { }
-            column(SpecialReceipt; SpecialReceiptAmt) { }
-            column(GrandTotalReceipts; GrandTotalReceiptsAmt) { }
-            column(CashWithdrawal; CashWithdrawalAmt) { }
-            column(EndOfDay; EndOfDayAmt) { }
-            column(MPesaCashWithdraw; MPesaCashWithdrawAmt) { }
-            column(PettyCashAmt; PettyCashAmt) { }
-            column(ReturnToTreasuryAmt; ReturnToTreasuryAmt) { }
-            column(GrandTotalPayments; GrandTotalPaymentsAmt) { }
             column(AccuracyLevel; AccuracyLevelTxt) { }
+
+            // DETAILED RECEIPTS
+            column(CashDepositAmt; CashDepositAmt) { }
+            column(MPesaCashDepositAmt; MPesaCashDepositAmt) { }
+            column(ReceiveFromTreasuryAmt; ReceiveFromTreasuryAmt) { }
+            column(SpecialReceiptAmt; SpecialReceiptAmt) { }
+            column(JournalVoucherReceiptsAmt; JournalVoucherReceiptsAmt) { }
+            column(GrandTotalReceiptsAmt; GrandTotalReceiptsAmt) { }
+            
+            // DETAILED PAYMENTS
+            column(CashWithdrawalAmt; CashWithdrawalAmt) { }
+            column(MPesaCashWithdrawAmt; MPesaCashWithdrawAmt) { }
+            column(TotalVoucherPaymentsAmt; TotalVoucherPaymentsAmt) { } // Replaced PettyCash
+            column(JournalVoucherPaymentsAmt; JournalVoucherPaymentsAmt) { }
+            column(ReturnToTreasuryAmt; ReturnToTreasuryAmt) { }
+            column(EndOfDayAmt; EndOfDayAmt) { }
+            column(GrandTotalPaymentsAmt; GrandTotalPaymentsAmt) { }
 
             dataitem(Coinage; Coinage)
             {
@@ -61,6 +67,10 @@ Report 52185446 "End of Day Reconciliation"
             }
 
             trigger OnAfterGetRecord()
+            var
+                Matched: Boolean;
+                IsReceipt: Boolean;
+                AbsAmt: Decimal;
             begin
                 ActualCashAtHandAmt := 0;
                 CoinageRec.Reset();
@@ -81,88 +91,100 @@ Report 52185446 "End of Day Reconciliation"
                 else
                     EODPostedStatusTxt := 'NO';
 
-                DifferenceAmt := ActualCashAtHandAmt - "Till Balance";
-
-                if "Till Balance" <> 0 then begin
-                    if DifferenceAmt = 0 then
-                        AccuracyLevelTxt := '100%'
-                    else
-                        AccuracyLevelTxt := Format(Round(((ActualCashAtHandAmt / "Till Balance") * 100), 0.01)) + '%';
-                end else
-                    AccuracyLevelTxt := '100%';
-
                 // Initialize all Amounts to Zero
                 ClearAllAmounts();
 
-                // Set filter date from the main record being processed
                 FilterDate := TreasuryTrans."Date Posted";
 
-                CashierTrans.Reset();
-                CashierTrans.SetRange(Cashier, "From Account");
-                CashierTrans.SetRange("Date Posted", FilterDate);
-                CashierTrans.SetRange(Posted, true);
-                if CashierTrans.FindSet() then begin
+                // 1. CALCULATE BALANCE BROUGHT FORWARD
+                BankLedgEntry.Reset();
+                BankLedgEntry.SetRange("Bank Account No.", "From Bank");
+                BankLedgEntry.SetFilter("Posting Date", '<%1', FilterDate);
+                BankLedgEntry.CalcSums("Amount (LCY)");
+                BalBroughtForwardAmt := BankLedgEntry."Amount (LCY)";
+
+                // 2. LOOP TODAY'S BANK ACCOUNT LEDGER ENTRIES
+                BankLedgEntry.Reset();
+                BankLedgEntry.SetRange("Bank Account No.", "From Bank");
+                BankLedgEntry.SetRange("Posting Date", FilterDate);
+                if BankLedgEntry.FindSet() then begin
                     repeat
-                        case CashierTrans.Type of
-                            CashierTrans.Type::"Cash Deposit":
-                                CashDepositAmt += CashierTrans.Amount;
-                            CashierTrans.Type::"MPESA Deposit":
-                                MPesaCashDepositAmt += CashierTrans.Amount;
-                            CashierTrans.Type::"Cash Withdrawal":
-                                CashWithdrawalAmt += CashierTrans.Amount;
-                            CashierTrans.Type::"MPESA Withdrawal":
-                                MPesaCashWithdrawAmt += CashierTrans.Amount;
-                            CashierTrans.Type::"Credit Receipt":
-                                SpecialReceiptAmt += CashierTrans.Amount;
+                        // IGNORING REVERSED TRANSACTIONS NATIVELY
+                        if not BankLedgEntry.Reversed then begin 
+                            
+                            AbsAmt := Abs(BankLedgEntry."Amount (LCY)");
+                            IsReceipt := BankLedgEntry."Amount (LCY)" > 0;
+                            Matched := false;
+
+                            // A. Check Cashier Transactions
+                            if CashierTrans.Get(BankLedgEntry."Document No.") then begin
+                                Matched := true;
+                                case CashierTrans.Type of
+                                    CashierTrans.Type::"Cash Deposit": CashDepositAmt += AbsAmt;
+                                    CashierTrans.Type::"MPESA Deposit": MPesaCashDepositAmt += AbsAmt;
+                                    CashierTrans.Type::"Cash Withdrawal": CashWithdrawalAmt += AbsAmt;
+                                    CashierTrans.Type::"MPESA Withdrawal": MPesaCashWithdrawAmt += AbsAmt;
+                                    CashierTrans.Type::"Credit Receipt": SpecialReceiptAmt += AbsAmt;
+                                    else begin
+                                        if IsReceipt then SpecialReceiptAmt += AbsAmt
+                                        else JournalVoucherPaymentsAmt += AbsAmt;
+                                    end;
+                                end;
+                            end 
+                            
+                            // B. Check Payment Vouchers (All PVs)
+                            else if PaymentsHeader.Get(BankLedgEntry."Document No.") then begin
+                                Matched := true;
+                                TotalVoucherPaymentsAmt += AbsAmt; 
+                            end 
+                            
+                            // C. Check Treasury Transactions
+                            else if TreasuryTransLog.Get(BankLedgEntry."Document No.") then begin
+                                Matched := true;
+                                if TreasuryTransLog."Transaction Type" = TreasuryTransLog."Transaction Type"::"Issue To Teller" then
+                                    ReceiveFromTreasuryAmt += AbsAmt
+                                else if TreasuryTransLog."Transaction Type" = TreasuryTransLog."Transaction Type"::"Return To Treasury" then
+                                    ReturnToTreasuryAmt += AbsAmt
+                                else if TreasuryTransLog."Transaction Type" = TreasuryTransLog."Transaction Type"::"End of Day Return to Treasury" then
+                                    EndOfDayAmt += AbsAmt
+                                else begin
+                                    if IsReceipt then ReceiveFromTreasuryAmt += AbsAmt
+                                    else ReturnToTreasuryAmt += AbsAmt;
+                                end;
+                            end;
+
+                            // D. If no match, treat as generic Journal Voucher entry
+                            if not Matched then begin
+                                if IsReceipt then
+                                    JournalVoucherReceiptsAmt += AbsAmt
+                                else
+                                    JournalVoucherPaymentsAmt += AbsAmt;
+                            end;
                         end;
-                    until CashierTrans.Next() = 0;
+                    until BankLedgEntry.Next() = 0;
                 end;
 
-                TreasuryTransIn.Reset();
-                TreasuryTransIn.SetRange("To Account", "From Account");
-                TreasuryTransIn.SetRange("Date Posted", FilterDate);
-                TreasuryTransIn.SetRange("Transaction Type", TreasuryTransIn."Transaction Type"::"Issue To Teller");
-                TreasuryTransIn.SetRange(Posted, true);
-                if TreasuryTransIn.FindSet() then begin
-                    repeat
-                        ReceiveFromTreasuryAmt += TreasuryTransIn.Amount;
-                    until TreasuryTransIn.Next() = 0;
-                end;
-
-                TreasuryTransOut.Reset();
-                TreasuryTransOut.SetRange("From Account", "From Account");
-                TreasuryTransOut.SetRange("Date Posted", FilterDate);
-                TreasuryTransOut.SetRange("Transaction Type", TreasuryTransOut."Transaction Type"::"Return To Treasury");
-                TreasuryTransOut.SetRange(Posted, true);
-                if TreasuryTransOut.FindSet() then begin
-                    repeat
-                        ReturnToTreasuryAmt += TreasuryTransOut.Amount;
-                    until TreasuryTransOut.Next() = 0;
-                end;
-
-                PaymentsHeader.Reset();
-                PaymentsHeader.SetRange("Payment Type", PaymentsHeader."Payment Type"::"Petty Cash");
-                PaymentsHeader.SetRange("Paying Bank Account", "From Bank");
-                PaymentsHeader.SetRange("Date Posted", FilterDate);
-                PaymentsHeader.SetRange(Posted, true);
-                if PaymentsHeader.FindSet() then begin
-                    repeat
-                        PaymentsHeader.CalcFields("Total Net Amount");
-                        PettyCashAmt += PaymentsHeader."Total Net Amount";
-                    until PaymentsHeader.Next() = 0;
-                end;
-
-                EndOfDayAmt := Amount;
-
-                GrandTotalReceiptsAmt := CashDepositAmt + MPesaCashDepositAmt + ReceiveFromTreasuryAmt + SpecialReceiptAmt;
-                GrandTotalPaymentsAmt := CashWithdrawalAmt + EndOfDayAmt + MPesaCashWithdrawAmt + PettyCashAmt + ReturnToTreasuryAmt;
+                // 3. AGGREGATE TOTALS
+                GrandTotalReceiptsAmt := CashDepositAmt + MPesaCashDepositAmt + ReceiveFromTreasuryAmt + SpecialReceiptAmt + JournalVoucherReceiptsAmt;
+                GrandTotalPaymentsAmt := CashWithdrawalAmt + MPesaCashWithdrawAmt + TotalVoucherPaymentsAmt + ReturnToTreasuryAmt + EndOfDayAmt + JournalVoucherPaymentsAmt;
 
                 TotalReceiptsAmt := GrandTotalReceiptsAmt;
-
+                // Exclude End Of Day from "Total Payments"
                 TotalPaymentsAmt := GrandTotalPaymentsAmt - EndOfDayAmt;
-                BalBroughtForwardAmt := 0.00;
 
-                BalCarriedDownAmt := BalBroughtForwardAmt + GrandTotalReceiptsAmt - GrandTotalPaymentsAmt;
+                // 4. CALCULATE EXPECTED CASH & DIFFERENCES
+                SystemCashAtHandAmt := BalBroughtForwardAmt + TotalReceiptsAmt - TotalPaymentsAmt;
+                DifferenceAmt := ActualCashAtHandAmt - SystemCashAtHandAmt;
+
+                if SystemCashAtHandAmt <> 0 then begin
+                    if DifferenceAmt = 0 then
+                        AccuracyLevelTxt := '100%'
+                    else
+                        AccuracyLevelTxt := Format(Round(((ActualCashAtHandAmt / SystemCashAtHandAmt) * 100), 0.01)) + '%';
+                end else
+                    AccuracyLevelTxt := '100%';
+
+                BalCarriedDownAmt := SystemCashAtHandAmt - EndOfDayAmt;
                 BalCarriedDownAmt := abs(Round(BalCarriedDownAmt, 0.01));
             end;
         }
@@ -192,15 +214,16 @@ Report 52185446 "End of Day Reconciliation"
     var
         CompanyInfo: Record "Company Information";
         BankingUserTemp: Record "Banking User Template";
+        BankLedgEntry: Record "Bank Account Ledger Entry";
         CashierTrans: Record "Cashier Transactions";
-        TreasuryTransIn: Record "Treasury Cashier Transactions";
-        TreasuryTransOut: Record "Treasury Cashier Transactions";
+        TreasuryTransLog: Record "Treasury Cashier Transactions";
         PaymentsHeader: Record "Payments Header";
         CoinageRec: Record Coinage;
         CompanyInformation: Record "Company Information";
         GlobalFunctions: Codeunit "Global Functions";
 
         ActualCashAtHandAmt: Decimal;
+        SystemCashAtHandAmt: Decimal;
         EODPostedStatusTxt: Text[10];
         ShortageAccCode: Code[20];
         SurplusAccCode: Code[20];
@@ -214,12 +237,14 @@ Report 52185446 "End of Day Reconciliation"
         MPesaCashDepositAmt: Decimal;
         ReceiveFromTreasuryAmt: Decimal;
         SpecialReceiptAmt: Decimal;
+        JournalVoucherReceiptsAmt: Decimal;
         GrandTotalReceiptsAmt: Decimal;
         CashWithdrawalAmt: Decimal;
         EndOfDayAmt: Decimal;
         MPesaCashWithdrawAmt: Decimal;
-        PettyCashAmt: Decimal;
+        TotalVoucherPaymentsAmt: Decimal;
         ReturnToTreasuryAmt: Decimal;
+        JournalVoucherPaymentsAmt: Decimal;
         GrandTotalPaymentsAmt: Decimal;
         CompanyName: Text;
         BuldingName: Text;
@@ -240,13 +265,18 @@ Report 52185446 "End of Day Reconciliation"
         MPesaCashDepositAmt := 0;
         ReceiveFromTreasuryAmt := 0;
         SpecialReceiptAmt := 0;
+        JournalVoucherReceiptsAmt := 0;
         GrandTotalReceiptsAmt := 0;
+        
         CashWithdrawalAmt := 0;
         EndOfDayAmt := 0;
         MPesaCashWithdrawAmt := 0;
-        PettyCashAmt := 0;
+        TotalVoucherPaymentsAmt := 0;
         ReturnToTreasuryAmt := 0;
+        JournalVoucherPaymentsAmt := 0;
         GrandTotalPaymentsAmt := 0;
+        
+        SystemCashAtHandAmt := 0;
         BalCarriedDownAmt := 0;
     end;
 }
