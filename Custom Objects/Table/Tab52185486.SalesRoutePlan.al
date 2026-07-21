@@ -94,7 +94,8 @@ table 52185486 "Sales Route Plans"
                             SalesRouteLine.validate("Route Date", RouteDate);
                             SalesRouteLine.insert;
                             Days -= 1;
-                            RouteDate := rec."Route Date" + 1;
+                            //RouteDate := rec."Route Date" + 1;
+                            RouteDate += 1;
                         until Days = 0;
                     end;
                 end;

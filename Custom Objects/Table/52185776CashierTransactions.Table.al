@@ -633,9 +633,6 @@ table 52185776 "Cashier Transactions"
                             bankacc.CalcFields(bankacc.Balance, bankacc."Balance (LCY)");
                             "Account No" := bankacc."No.";
                             "Till Name" := PadStr(BUserSetup."Default  Bank" + ' ' + bankacc.Name, 50);
-                            if bankacc."Balance (LCY)" <= bankacc."Replenishment Balance" then begin
-                                Message('Your cash balance has reached the replenishment level. Please request replenishment from treasury.');
-                            end;
                         end;
                     end;
                 end;
@@ -828,6 +825,17 @@ table 52185776 "Cashier Transactions"
         BUserSetup.Reset;
         BUserSetup.SetRange(BUserSetup.UserID, UserId);
         if BUserSetup.Find('-') then begin
+            clear(BalBroughtForwardAmt);
+            BankLedgEntry.Reset();
+            BankLedgEntry.SetRange("Bank Account No.", BUserSetup."Default  Bank");
+            BankLedgEntry.SetFilter("Posting Date", '<%1', Today);
+            BankLedgEntry.CalcSums("Amount (LCY)");
+            BalBroughtForwardAmt := BankLedgEntry."Amount (LCY)";
+            if BankLedgEntry.FindFirst() then begin
+                Message('Brought forward amount of %1 ', BalBroughtForwardAmt);
+                if BalBroughtForwardAmt <> 0 then
+                    Error('End of Day has not been performed for the previous business day.');
+            end;
             "Till Code" := BUserSetup."Default  Bank";
             bankacc.Reset;
             bankacc.SetRange("No.", BUserSetup."Default  Bank");
@@ -835,6 +843,9 @@ table 52185776 "Cashier Transactions"
             if bankacc.Find('-') then begin
                 "Till Code" := BUserSetup."Default  Bank";
                 "Till Name" := PadStr(BUserSetup."Default  Bank" + ' ' + bankacc.Name, 50);
+                if bankacc."Balance (LCY)" <= bankacc."Replenishment Balance" then begin
+                    Message('Your cash balance has reached the replenishment level. Please request replenishment from treasury.');
+                end;
             end;
         end;
 
@@ -915,7 +926,9 @@ table 52185776 "Cashier Transactions"
         Temp: Record "Banking User Template";
         Text0004: Label 'Ensure the Cashier Member no is set up in Banking User Setup';
         Jtemplate: Code[20];
-        Jbatch: Code[20];
+        Jbatch: Code[20];   
+        BankLedgEntry : Record "Bank Account Ledger Entry";
+        BalBroughtForwardAmt: Decimal;
 
     local procedure CalcAvailableBal()
     var

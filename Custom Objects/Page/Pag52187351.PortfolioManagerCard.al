@@ -124,6 +124,7 @@ page 52187351 "Portfolio Manager Card"
                             repeat
                                 if Members.get(PortFolioMgtLines."Member No") then begin
                                     Members."Recruited By" := rec."Incoming Sales Rep";
+                                    Members."Recruited By Name" := rec."Incoming Rep Name";
                                     Members.Modify();
                                 end;
                             until PortFolioMgtLines.next() = 0;

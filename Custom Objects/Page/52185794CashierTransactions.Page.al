@@ -1380,6 +1380,17 @@ page 52185794 "Cashier Transactions"
     trigger OnAfterGetRecord()
     begin
         RecoveryAccent;
+        clear(BalBroughtForwardAmt);
+        BankLedger.Reset();
+        BankLedger.SetRange("Bank Account No.", Rec."Till Code");
+        BankLedger.SetFilter("Posting Date", '<%1', Today);
+        BankLedger.CalcSums("Amount (LCY)");
+        BalBroughtForwardAmt := BankLedger."Amount (LCY)";
+        if BankLedger.FindFirst() then begin
+            if BalBroughtForwardAmt <> 0 then
+                Error('End of Day has not been performed for the previous business day.');
+        end;
+        
         if Trans.Get(Rec.No) then begin
             BankLedger.Reset;
             BankLedger.SetRange(BankLedger."Document No.", Trans.No);
@@ -1606,6 +1617,7 @@ page 52185794 "Cashier Transactions"
         BankCodeVisible: Boolean;
 
         NormalChequeVisible: Boolean;
+        BalBroughtForwardAmt : Decimal;
 
 
 

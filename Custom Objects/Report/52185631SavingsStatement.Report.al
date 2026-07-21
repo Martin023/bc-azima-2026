@@ -192,62 +192,7 @@ Report 52185631 "Savings Statement"
                                     ProductFac."Minimum Balance" + SavingsAccounts."Lien Placed");
                 end;
                 if StatementCharge then begin
-                    AvailableBal := 0;
-                    SavingsAccounts.SetFilter(SavingsAccounts.Blocked, '%1', SavingsAccounts.Blocked::" ");
-                    SavingsAccounts.CalcFields(SavingsAccounts."Balance (LCY)", SavingsAccounts."Authorised Over Draft",
-                                               SavingsAccounts."Uncleared Cheques", SavingsAccounts."ATM Transactions", SavingsAccounts."Lien Placed");
 
-                    if ProductFactory.Get(SavingsAccounts."Product Type") then begin
-                        if StatementType = StatementType::Certified then
-                            ProductFactory.TestField(ProductFactory."Certified Statement Charge")
-                        else
-                            ProductFactory.TestField(ProductFactory."Statement Charge");
-                        AvailableBal := (SavingsAccounts1."Balance (LCY)" + SavingsAccounts."Authorised Over Draft") -
-                                       (SavingsAccounts."Uncleared Cheques" + SavingsAccounts."ATM Transactions" +
-                                        ProductFactory."Minimum Balance");
-
-
-                        AccountBal := (BalanceBF + SavingsAccounts."Authorised Over Draft") -
-                                       (SavingsAccounts."Uncleared Cheques" + SavingsAccounts."ATM Transactions" +
-                                        ProductFactory."Minimum Balance" + SavingsAccounts."Lien Placed");
-                    end;
-
-                    TCharges := 0;
-                    TransactionCharges.Reset;
-                    if StatementType = StatementType::Certified then
-                        TransactionCharges.SetRange(TransactionCharges."Transaction Type", ProductFactory."Certified Statement Charge")
-                    else
-                        TransactionCharges.SetRange(TransactionCharges."Transaction Type", ProductFactory."Statement Charge");
-                    if TransactionCharges.Find('-') then begin
-                        repeat
-                            ChargeAmount := 0;
-                            if TransactionCharges."Charge Type" = TransactionCharges."charge type"::"% of Amount" then
-                                ChargeAmount := (AvailableBal * TransactionCharges."Percentage of Amount") * 0.01
-                            else
-                                ChargeAmount := TransactionCharges."Charge Amount";
-
-                            if TransactionCharges."Charge Type" = TransactionCharges."charge type"::Staggered then begin
-                                TransactionCharges.TestField(TransactionCharges."Staggered Charge Code");
-
-                                TariffDetails.Reset;
-                                TariffDetails.SetRange(TariffDetails.Code, TransactionCharges."Staggered Charge Code");
-                                if TariffDetails.Find('-') then begin
-                                    repeat
-                                        if (AvailableBal >= TariffDetails."Lower Limit") and
-                                           (AvailableBal <= TariffDetails."Upper Limit") then begin
-                                            if TariffDetails."Use Percentage" then
-                                                ChargeAmount := AvailableBal * TariffDetails.Percentage * 0.01
-                                            else
-                                                ChargeAmount := TariffDetails."Charge Amount";
-                                        end;
-                                    until TariffDetails.Next = 0;
-                                end;
-                            end;
-
-                            TChargeAmount += ChargeAmount;
-                        until TransactionCharges.Next = 0;
-                    end;
-                    TCharges := TChargeAmount;
                     Temp.Get(UserId);
                     Temp.TestField(Temp."Cashier Journal Template");
                     Temp.TestField(Temp."Cashier Journal Batch");
@@ -259,60 +204,148 @@ Report 52185631 "Savings Statement"
                     GenJLine.SetRange(GenJLine."Journal Batch Name", Temp."Cashier Journal Batch");
                     GenJLine.DeleteAll;
 
-                    if AvailableBal >= TCharges then begin
+                    AvailableBal := 0;
+                    SavingsAccounts.SetFilter(SavingsAccounts.Blocked, '%1', SavingsAccounts.Blocked::" ");
+                    SavingsAccounts.CalcFields(SavingsAccounts."Balance (LCY)", SavingsAccounts."Authorised Over Draft",
+                                               SavingsAccounts."Uncleared Cheques", SavingsAccounts."ATM Transactions", SavingsAccounts."Lien Placed");
+
+                    FosaAcc.reset;
+                    FosaAcc.setrange("Member No.", SavingsAccounts."Member No.");
+                    FosaAcc.SetRange("Product Type", '191');
+                    if FosaAcc.FindFirst() then begin
+                        FosaAccNo := FosaAcc."No.";
+                        AvailableBal := FosaAcc.GetAvailableBalance(FosaAcc."No.");
+                    
+
+                        if ProductFactory.Get(FosaAcc."Product Type") then begin
+                            if StatementType = StatementType::Certified then
+                                ProductFactory.TestField(ProductFactory."Certified Statement Charge")
+                            else
+                                ProductFactory.TestField(ProductFactory."Statement Charge");
+                            // AvailableBal := (SavingsAccounts1."Balance (LCY)" + SavingsAccounts."Authorised Over Draft") -
+                            //                (SavingsAccounts."Uncleared Cheques" + SavingsAccounts."ATM Transactions" +
+                            //                 ProductFactory."Minimum Balance");
+
+
+                            AccountBal := (BalanceBF + SavingsAccounts."Authorised Over Draft") -
+                                        (SavingsAccounts."Uncleared Cheques" + SavingsAccounts."ATM Transactions" +
+                                            ProductFactory."Minimum Balance" + SavingsAccounts."Lien Placed");
+                        end;
+                    end;
+
+                    
+
+                    TCharges := 0;
+                    TransactionCharges.Reset;
+                    if StatementType = StatementType::Certified then
+                        TransactionCharges.SetRange(TransactionCharges."Transaction Type", ProductFactory."Certified Statement Charge")
+                    else
+                        TransactionCharges.SetRange(TransactionCharges."Transaction Type", ProductFactory."Statement Charge");
+                    if TransactionCharges.Find('-') then begin
+                    repeat
+                        ChargeAmount := 0;
+                        if TransactionCharges."Charge Type" = TransactionCharges."charge type"::"% of Amount" then
+                            ChargeAmount := (AvailableBal * TransactionCharges."Percentage of Amount") * 0.01
+                        else
+                            ChargeAmount := TransactionCharges."Charge Amount";
+
+                        if TransactionCharges."Charge Type" = TransactionCharges."charge type"::Staggered then begin
+                            TransactionCharges.TestField(TransactionCharges."Staggered Charge Code");
+
+                            TariffDetails.Reset;
+                            TariffDetails.SetRange(TariffDetails.Code, TransactionCharges."Staggered Charge Code");
+                            if TariffDetails.Find('-') then begin
+                                repeat
+                                    if (AvailableBal >= TariffDetails."Lower Limit") and
+                                    (AvailableBal <= TariffDetails."Upper Limit") then begin
+                                        if TariffDetails."Use Percentage" then
+                                            ChargeAmount := AvailableBal * TariffDetails.Percentage * 0.01
+                                        else
+                                            ChargeAmount := TariffDetails."Charge Amount";
+                                    end;
+                                until TariffDetails.Next = 0;
+                            end;
+                        end;
+
+                        if NumberOfPages > 0 then
+                        ChargeAmount := (ChargeAmount * NumberOfPages);                   
+                        
                         LineN += 1;
                         GenJLine.Init;
                         GenJLine."Journal Template Name" := Temp."Cashier Journal Template";
                         GenJLine."Journal Batch Name" := Temp."Cashier Journal Batch";
                         GenJLine."Line No." := LineN;
                         GenJLine."Posting Date" := Today;
-                        GenJLine."Document No." := CopyStr(('S-FEE_' + Format(time)), 1, 20);
-                        GenJLine."External Document No." := SavingsAccounts."Member No.";
+                        GenJLine."Document No." := CopyStr(('S-FEE_' + SavingsAccounts."No."), 1, 50);
+                        GenJLine."External Document No." := SavingsAccounts."No.";
                         GenJLine."Account Type" := GenJLine."account type"::Savings;
-                        GenJLine.Validate(GenJLine."Account No.", SavingsAccounts."No.");
+                        GenJLine.Validate(GenJLine."Account No.", FosaAccNo);
                         GenJLine.Description := TransactionCharges.Description;
-                        GenJLine.Validate(GenJLine.Amount, TCharges);
+                        GenJLine.Validate(GenJLine.Amount, ChargeAmount);
                         GenJLine."Bal. Account Type" := GenJLine."bal. account type"::"G/L Account";
-                        GenJLine.Validate(GenJLine."Bal. Account No.", TransactionCharges."G/L Account");
+                        GenJLine.Validate(GenJLine."Bal. Account No.", '');
+                        GenJLine.Validate(GenJLine."Shortcut Dimension 1 Code", SavingsAccounts."Global Dimension 1 Code");
+                        GenJLine.Validate(GenJLine."Shortcut Dimension 2 Code", SavingsAccounts."Global Dimension 2 Code");
+                        if GenJLine.Amount <> 0 then
+                            GenJLine.Insert;
+                        
+                        LineN += 1;
+                        GenJLine.Init;
+                        GenJLine."Journal Template Name" := Temp."Cashier Journal Template";
+                        GenJLine."Journal Batch Name" := Temp."Cashier Journal Batch";
+                        GenJLine."Line No." := LineN;
+                        GenJLine."Posting Date" := Today;
+                        GenJLine."Document No." := CopyStr(('S-FEE_' + SavingsAccounts."No."), 1, 50);
+                        GenJLine."External Document No." := SavingsAccounts."No.";
+                        GenJLine."Account Type" := GenJLine."account type"::"G/L Account";
+                        GenJLine.Validate(GenJLine."Account No.", TransactionCharges."G/L Account");
+                        GenJLine.Description := TransactionCharges.Description;
+                        GenJLine.Validate(GenJLine.Amount, -(ChargeAmount));
+                        GenJLine."Bal. Account Type" := GenJLine."bal. account type"::"G/L Account";
+                        GenJLine.Validate(GenJLine."Bal. Account No.", '');
                         GenJLine.Validate(GenJLine."Shortcut Dimension 1 Code", SavingsAccounts."Global Dimension 1 Code");
                         GenJLine.Validate(GenJLine."Shortcut Dimension 2 Code", SavingsAccounts."Global Dimension 2 Code");
                         if GenJLine.Amount <> 0 then
                             GenJLine.Insert;
 
-                        //To be rechecked based on the existing setups
+                        TCharges+=ChargeAmount;
 
-                        //Excise Duty
-                        GenSetup.Get();
                         if (TransactionCharges."Transaction Charge Category" <> TransactionCharges."transaction charge category"::"Stamp Duty") and
                             (TransactionCharges."Recover Excise Duty" = true) then begin
                             //Excise
                             LineN += 1;
-                            GenJLine.Init;
-                            GenJLine."Journal Template Name" := Temp."Cashier Journal Template";
-                            GenJLine."Journal Batch Name" := Temp."Cashier Journal Batch";
-                            GenJLine."Line No." := LineN;
-                            GenJLine."Posting Date" := Today;
-                            GenJLine."Document No." := CopyStr(('S-FEE_' + Format(time)), 1, 20);
-                            GenJLine."External Document No." := SavingsAccounts."Member No.";
-                            GenJLine."Account Type" := GenJLine."account type"::Savings;
-                            GenJLine.Validate(GenJLine."Account No.", SavingsAccounts."No.");
-                            GenJLine.Description := TransactionCharges.Description + ' Excise Duty';
-                            GenJLine.Validate(GenJLine.Amount, (TCharges * GenSetup."Excise Duty (%)") * 0.01);
-                            GenJLine."Bal. Account Type" := GenJLine."bal. account type"::"G/L Account";
-                            GenJLine.Validate(GenJLine."Bal. Account No.", GenSetup."Excise Duty G/L");
-                            GenJLine.Validate(GenJLine."Shortcut Dimension 1 Code", SavingsAccounts."Global Dimension 1 Code");
-                            GenJLine.Validate(GenJLine."Shortcut Dimension 2 Code", SavingsAccounts."Global Dimension 2 Code");
-                            if GenJLine.Amount <> 0 then
-                                GenJLine.Insert;
-                            //Excise
-                        end;
+                                GenJLine.Init;
+                                GenJLine."Journal Template Name" := Temp."Cashier Journal Template";
+                                GenJLine."Journal Batch Name" := Temp."Cashier Journal Batch";
+                                GenJLine."Line No." := LineN;
+                                GenJLine."Posting Date" := Today;
+                                GenJLine."Document No." := CopyStr(('S-FEE_' + SavingsAccounts."No."), 1, 50);
+                                GenJLine."External Document No." := SavingsAccounts."No.";
+                                GenJLine."Account Type" := GenJLine."account type"::Savings;
+                                GenJLine.Validate(GenJLine."Account No.", FosaAccNo);
+                                GenJLine.Description := TransactionCharges.Description + ' Excise Duty';
+                                GenJLine.Validate(GenJLine.Amount, (TCharges * GenSetup."Excise Duty (%)") * 0.01);
+                                GenJLine."Bal. Account Type" := GenJLine."bal. account type"::"G/L Account";
+                                GenJLine.Validate(GenJLine."Bal. Account No.", GenSetup."Excise Duty G/L");
+                                GenJLine.Validate(GenJLine."Shortcut Dimension 1 Code", SavingsAccounts."Global Dimension 1 Code");
+                                GenJLine.Validate(GenJLine."Shortcut Dimension 2 Code", SavingsAccounts."Global Dimension 2 Code");
+                                if GenJLine.Amount <> 0 then
+                                    GenJLine.Insert;
+                                end;
+                            
+                    until TransactionCharges.Next = 0;
+                end;
+                    
+                    if AvailableBal >= TCharges then begin
+                        
 
                         GenJLine.Reset;
                         GenJLine.SetRange(GenJLine."Journal Template Name", Temp."Cashier Journal Template");
                         GenJLine.SetRange(GenJLine."Journal Batch Name", Temp."Cashier Journal Batch");
                         Codeunit.Run(Codeunit::"Gen. Jnl.-Post New", GenJLine);
 
-                    end;
+                    end else
+                        error('Member has insufficient Balance hence charges Cannot be applied!');
 
                 end;
             end;
@@ -354,6 +387,11 @@ Report 52185631 "Savings Statement"
                     {
                         ApplicationArea = basic;
                     }
+                    field(NumberOfPages; NumberOfPages)
+                    {
+                        Caption = 'Number of Pages To charge';
+                        ApplicationArea = Basic;
+                    }
                     field("Lien Printing"; AccountwithLien)
                     {
                         ApplicationArea = Basic;
@@ -373,6 +411,10 @@ Report 52185631 "Savings Statement"
 
     trigger OnPreReport()
     begin
+        if (StatementCharge = true) and (StatementType = StatementType::Certified) then begin
+            if NumberOfPages <= 0 then
+                Error('Number of pages to charge must be greater than zero');
+        end;
         if CompanyInformation.Get then
             CompanyInformation.CalcFields(CompanyInformation.Picture);
         CompanyAddress := CompanyInformation.Address + ' -Post Code: ' + CompanyInformation."Post Code" + ' -City:' + CompanyInformation.City + ' Region: ' + CompanyInformation."Country/Region Code";
@@ -405,6 +447,9 @@ Report 52185631 "Savings Statement"
         ProductFac: Record "Product Factory";
         SavingsAccounts1: Record "Savings Accounts";
         DFilter: Text;
+        NumberOfPages : Integer;
+        FosaAcc : Record "Savings Accounts";
+        FosaAccNo : Code[100];
 
 
     procedure PostStatementCharge()
