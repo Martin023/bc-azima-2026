@@ -1045,10 +1045,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         if MobileTransLines."Recover Excise Duty" then begin
             genSetUp.Get();
             // ExciseDuty := round(((ChargeAmount - SkyRevenue) * genSetUp."Excise Duty (%)" * 0.01) / (1 + (genSetUp."Excise Duty (%)" * 0.01)), 0.01, '>');
-            /*
-            Paul said Excise duty to round off to the nearest 10
-            */
-            ExciseDuty := round(ChargeAmount * genSetUp."Transfer Excise Duty (%)" * 0.01, 10);
+            ExciseDuty := round(ChargeAmount * genSetUp."Transfer Excise Duty (%)" * 0.01);
         end;
         TotalCharges.Add(ChargeAmount + ExciseDuty + SkyRevenue);
         TotalCharges.Add(ExciseDuty);
