@@ -11,6 +11,139 @@
       <rd:DataSourceID>d26b0fc1-98c5-4a83-aae1-c40dbc5e6546</rd:DataSourceID>
     </DataSource>
   </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+      <Fields>
+        <Field Name="CompanyInfo_Name">
+          <DataField>CompanyInfo_Name</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Address">
+          <DataField>CompanyInfo_Address</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Picture">
+          <DataField>CompanyInfo_Picture</DataField>
+        </Field>
+        <Field Name="CompanyInfo_City">
+          <DataField>CompanyInfo_City</DataField>
+        </Field>
+        <Field Name="CompanyInfo_PostCode">
+          <DataField>CompanyInfo_PostCode</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Phone">
+          <DataField>CompanyInfo_Phone</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Email">
+          <DataField>CompanyInfo_Email</DataField>
+        </Field>
+        <Field Name="Filter_Appraisal_Year">
+          <DataField>Filter_Appraisal_Year</DataField>
+        </Field>
+        <Field Name="Filter_Cycle_Stage">
+          <DataField>Filter_Cycle_Stage</DataField>
+        </Field>
+        <Field Name="Filter_Status">
+          <DataField>Filter_Status</DataField>
+        </Field>
+        <Field Name="Appraisal_No">
+          <DataField>Appraisal_No</DataField>
+        </Field>
+        <Field Name="Employee_No">
+          <DataField>Employee_No</DataField>
+        </Field>
+        <Field Name="Employee_Name">
+          <DataField>Employee_Name</DataField>
+        </Field>
+        <Field Name="Appraisal_Year">
+          <DataField>Appraisal_Year</DataField>
+        </Field>
+        <Field Name="Appraisal_Cycle_Stage">
+          <DataField>Appraisal_Cycle_Stage</DataField>
+        </Field>
+        <Field Name="Status">
+          <DataField>Status</DataField>
+        </Field>
+        <Field Name="Responsibility_Center">
+          <DataField>Responsibility_Center</DataField>
+        </Field>
+        <Field Name="Supervisor_Name">
+          <DataField>Supervisor_Name</DataField>
+        </Field>
+        <Field Name="Total_Targeted_Score">
+          <DataField>Total_Targeted_Score</DataField>
+        </Field>
+        <Field Name="Total_Targeted_ScoreFormat">
+          <DataField>Total_Targeted_ScoreFormat</DataField>
+        </Field>
+        <Field Name="Total_Achieved_Score">
+          <DataField>Total_Achieved_Score</DataField>
+        </Field>
+        <Field Name="Total_Achieved_ScoreFormat">
+          <DataField>Total_Achieved_ScoreFormat</DataField>
+        </Field>
+        <Field Name="Total_Agreed_Rating">
+          <DataField>Total_Agreed_Rating</DataField>
+        </Field>
+        <Field Name="Total_Agreed_RatingFormat">
+          <DataField>Total_Agreed_RatingFormat</DataField>
+        </Field>
+        <Field Name="Achievement_Percentage">
+          <DataField>Achievement_Percentage</DataField>
+        </Field>
+        <Field Name="Achievement_PercentageFormat">
+          <DataField>Achievement_PercentageFormat</DataField>
+        </Field>
+        <Field Name="Appraisee_Submitted">
+          <DataField>Appraisee_Submitted</DataField>
+        </Field>
+        <Field Name="Has_Disagreements">
+          <DataField>Has_Disagreements</DataField>
+        </Field>
+        <Field Name="Unresolved_Discussions">
+          <DataField>Unresolved_Discussions</DataField>
+        </Field>
+        <Field Name="Line_No">
+          <DataField>Line_No</DataField>
+        </Field>
+        <Field Name="Perspective_Code">
+          <DataField>Perspective_Code</DataField>
+        </Field>
+        <Field Name="Perspective_Description">
+          <DataField>Perspective_Description</DataField>
+        </Field>
+        <Field Name="Objective">
+          <DataField>Objective</DataField>
+        </Field>
+        <Field Name="Line_Targeted_Score">
+          <DataField>Line_Targeted_Score</DataField>
+        </Field>
+        <Field Name="Line_Targeted_ScoreFormat">
+          <DataField>Line_Targeted_ScoreFormat</DataField>
+        </Field>
+        <Field Name="Line_Achieved_Score">
+          <DataField>Line_Achieved_Score</DataField>
+        </Field>
+        <Field Name="Line_Achieved_ScoreFormat">
+          <DataField>Line_Achieved_ScoreFormat</DataField>
+        </Field>
+        <Field Name="Agreed_Rating">
+          <DataField>Agreed_Rating</DataField>
+        </Field>
+        <Field Name="Agreed_RatingFormat">
+          <DataField>Agreed_RatingFormat</DataField>
+        </Field>
+        <Field Name="Appraisee_Comments">
+          <DataField>Appraisee_Comments</DataField>
+        </Field>
+        <Field Name="Appraiser_Comments">
+          <DataField>Appraiser_Comments</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -99,16 +232,16 @@
                                     <Width>3.5cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>1.5cm</Width>
+                                    <Width>2.5cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>1.5cm</Width>
+                                    <Width>2.5cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>4.5cm</Width>
+                                    <Width>3.5cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>4.5cm</Width>
+                                    <Width>3.5cm</Width>
                                   </TablixColumn>
                                 </TablixColumns>
                                 <TablixRows>
@@ -309,6 +442,7 @@
                                       <TablixCell>
                                         <CellContents>
                                           <Textbox Name="Perspective_Description">
+                                            <CanGrow>true</CanGrow>
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
@@ -336,6 +470,7 @@
                                       <TablixCell>
                                         <CellContents>
                                           <Textbox Name="Objective">
+                                            <CanGrow>true</CanGrow>
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
@@ -363,6 +498,7 @@
                                       <TablixCell>
                                         <CellContents>
                                           <Textbox Name="Line_Targeted_Score">
+                                            <CanGrow>true</CanGrow>
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
@@ -390,6 +526,7 @@
                                       <TablixCell>
                                         <CellContents>
                                           <Textbox Name="Line_Achieved_Score">
+                                            <CanGrow>true</CanGrow>
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
@@ -417,6 +554,7 @@
                                       <TablixCell>
                                         <CellContents>
                                           <Textbox Name="Appraisee_Comments">
+                                            <CanGrow>true</CanGrow>
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
@@ -444,6 +582,7 @@
                                       <TablixCell>
                                         <CellContents>
                                           <Textbox Name="Appraiser_Comments">
+                                            <CanGrow>true</CanGrow>
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
@@ -651,8 +790,8 @@
               <MIMEType>image/png</MIMEType>
               <Sizing>FitProportional</Sizing>
               <Top>0.2cm</Top>
-              <Height>2.8cm</Height>
-              <Width>4cm</Width>
+              <Height>3.2cm</Height>
+              <Width>6cm</Width>
               <ZIndex>3</ZIndex>
               <Style />
             </Image>
@@ -698,139 +837,12 @@
       </Page>
     </ReportSection>
   </ReportSections>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>7c54a36d-6220-4646-8223-1f28b6cc5908</rd:ReportID>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Fields>
-        <Field Name="CompanyInfo_Name">
-          <DataField>CompanyInfo_Name</DataField>
-        </Field>
-        <Field Name="CompanyInfo_Address">
-          <DataField>CompanyInfo_Address</DataField>
-        </Field>
-        <Field Name="CompanyInfo_Picture">
-          <DataField>CompanyInfo_Picture</DataField>
-        </Field>
-        <Field Name="CompanyInfo_City">
-          <DataField>CompanyInfo_City</DataField>
-        </Field>
-        <Field Name="CompanyInfo_PostCode">
-          <DataField>CompanyInfo_PostCode</DataField>
-        </Field>
-        <Field Name="CompanyInfo_Phone">
-          <DataField>CompanyInfo_Phone</DataField>
-        </Field>
-        <Field Name="CompanyInfo_Email">
-          <DataField>CompanyInfo_Email</DataField>
-        </Field>
-        <Field Name="Filter_Appraisal_Year">
-          <DataField>Filter_Appraisal_Year</DataField>
-        </Field>
-        <Field Name="Filter_Cycle_Stage">
-          <DataField>Filter_Cycle_Stage</DataField>
-        </Field>
-        <Field Name="Filter_Status">
-          <DataField>Filter_Status</DataField>
-        </Field>
-        <Field Name="Appraisal_No">
-          <DataField>Appraisal_No</DataField>
-        </Field>
-        <Field Name="Employee_No">
-          <DataField>Employee_No</DataField>
-        </Field>
-        <Field Name="Employee_Name">
-          <DataField>Employee_Name</DataField>
-        </Field>
-        <Field Name="Appraisal_Year">
-          <DataField>Appraisal_Year</DataField>
-        </Field>
-        <Field Name="Appraisal_Cycle_Stage">
-          <DataField>Appraisal_Cycle_Stage</DataField>
-        </Field>
-        <Field Name="Status">
-          <DataField>Status</DataField>
-        </Field>
-        <Field Name="Responsibility_Center">
-          <DataField>Responsibility_Center</DataField>
-        </Field>
-        <Field Name="Supervisor_Name">
-          <DataField>Supervisor_Name</DataField>
-        </Field>
-        <Field Name="Total_Targeted_Score">
-          <DataField>Total_Targeted_Score</DataField>
-        </Field>
-        <Field Name="Total_Targeted_ScoreFormat">
-          <DataField>Total_Targeted_ScoreFormat</DataField>
-        </Field>
-        <Field Name="Total_Achieved_Score">
-          <DataField>Total_Achieved_Score</DataField>
-        </Field>
-        <Field Name="Total_Achieved_ScoreFormat">
-          <DataField>Total_Achieved_ScoreFormat</DataField>
-        </Field>
-        <Field Name="Total_Agreed_Rating">
-          <DataField>Total_Agreed_Rating</DataField>
-        </Field>
-        <Field Name="Total_Agreed_RatingFormat">
-          <DataField>Total_Agreed_RatingFormat</DataField>
-        </Field>
-        <Field Name="Achievement_Percentage">
-          <DataField>Achievement_Percentage</DataField>
-        </Field>
-        <Field Name="Achievement_PercentageFormat">
-          <DataField>Achievement_PercentageFormat</DataField>
-        </Field>
-        <Field Name="Appraisee_Submitted">
-          <DataField>Appraisee_Submitted</DataField>
-        </Field>
-        <Field Name="Has_Disagreements">
-          <DataField>Has_Disagreements</DataField>
-        </Field>
-        <Field Name="Unresolved_Discussions">
-          <DataField>Unresolved_Discussions</DataField>
-        </Field>
-        <Field Name="Line_No">
-          <DataField>Line_No</DataField>
-        </Field>
-        <Field Name="Perspective_Code">
-          <DataField>Perspective_Code</DataField>
-        </Field>
-        <Field Name="Perspective_Description">
-          <DataField>Perspective_Description</DataField>
-        </Field>
-        <Field Name="Objective">
-          <DataField>Objective</DataField>
-        </Field>
-        <Field Name="Line_Targeted_Score">
-          <DataField>Line_Targeted_Score</DataField>
-        </Field>
-        <Field Name="Line_Targeted_ScoreFormat">
-          <DataField>Line_Targeted_ScoreFormat</DataField>
-        </Field>
-        <Field Name="Line_Achieved_Score">
-          <DataField>Line_Achieved_Score</DataField>
-        </Field>
-        <Field Name="Line_Achieved_ScoreFormat">
-          <DataField>Line_Achieved_ScoreFormat</DataField>
-        </Field>
-        <Field Name="Agreed_Rating">
-          <DataField>Agreed_Rating</DataField>
-        </Field>
-        <Field Name="Agreed_RatingFormat">
-          <DataField>Agreed_RatingFormat</DataField>
-        </Field>
-        <Field Name="Appraisee_Comments">
-          <DataField>Appraisee_Comments</DataField>
-        </Field>
-        <Field Name="Appraiser_Comments">
-          <DataField>Appraiser_Comments</DataField>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-    </DataSet>
-  </DataSets>
 </Report>

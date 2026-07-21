@@ -55,8 +55,6 @@ table 52186259 "Recruitment Costs"
     fieldgroups
     {
     }
-    
-    // ADDED TRIGGER TO VALIDATE COST ITEM IS SELECTED
     trigger OnInsert()
     begin
         TestField("Cost Item");
