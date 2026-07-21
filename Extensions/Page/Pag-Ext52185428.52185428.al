@@ -1627,6 +1627,7 @@ pageextension 52185428 "Purchase Quote EXT" extends "Purchase Quote"
     [TryFunction]
     local procedure TrySendRFQEmail(PurchHeader: Record "Purchase Header"; EmailAddress: Text; SubjectTxt: Text; BodyTxt: Text; FileName: Text)
     var
+        ReportSelections: Record Microsoft.Foundation.Reporting."Report Selections";
         EmailMsg: Codeunit System.Email."Email Message";
         Email: Codeunit System.Email."Email";
         TempBlob: Codeunit System.Utilities."Temp Blob";
@@ -1635,16 +1636,22 @@ pageextension 52185428 "Purchase Quote EXT" extends "Purchase Quote"
         InStr: InStream;
     begin
         PurchHeader.SetRecFilter();
-        TempBlob.CreateOutStream(OutStr);
 
+        // Use the same report configured for Purchase Quote email (Report Selections - Purchases)
+        ReportSelections.SetRange(Usage, ReportSelections.Usage::"P.Quote");
+        ReportSelections.SetFilter("Report ID", '<>0');
+        if not ReportSelections.FindFirst() then
+            Error('No report is set up in Report Selections - Purchases for Quote. Please configure one and try again.');
+
+        TempBlob.CreateOutStream(OutStr);
         PurchHeaderRef.GetTable(PurchHeader);
-        Report.SaveAs(Report::"Request for Quotation", '', ReportFormat::Pdf, OutStr, PurchHeaderRef);
+        Report.SaveAs(ReportSelections."Report ID", '', ReportFormat::Pdf, OutStr, PurchHeaderRef);
 
         TempBlob.CreateInStream(InStr);
 
         EmailMsg.Create(EmailAddress, SubjectTxt, BodyTxt, true);
         EmailMsg.AddAttachment(FileName, 'application/pdf', InStr);
-        Email.Send(EmailMsg);
+        Email.Send(EmailMsg, Enum::System.Email."Email Scenario"::Default);
     end;
 }
 
