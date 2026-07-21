@@ -8,7 +8,7 @@
         <ConnectString />
       </ConnectionProperties>
       <rd:SecurityType>None</rd:SecurityType>
-      <rd:DataSourceID>d26b0fc1-98c5-4a83-aae1-c40dbc5e6546</rd:DataSourceID>
+      <rd:DataSourceID>e60ce03a-22c0-4093-b6ab-8857fe01923a</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <ReportSections>
@@ -24,7 +24,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>3.5cm</Height>
+                  <Height>3.8cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -38,7 +38,7 @@
                                     <Paragraph>
                                       <TextRuns>
                                         <TextRun>
-                                          <Value>="Appraisal No: " &amp; Fields!Appraisal_No.Value &amp; vbCrLf &amp; "Employee: " &amp; Fields!Employee_Name.Value &amp; " (" &amp; Fields!Employee_No.Value &amp; ")" &amp; vbCrLf &amp; "Department: " &amp; Fields!Responsibility_Center.Value</Value>
+                                          <Value>="Appraisal No: " &amp; Fields!Appraisal_No.Value &amp; vbCrLf &amp; "Employee: " &amp; Fields!Employee_Name.Value &amp; " (" &amp; Fields!Employee_No.Value &amp; ")" &amp; vbCrLf &amp; "Department: " &amp; Fields!Department_Name.Value</Value>
                                           <Style>
                                             <FontFamily>Segoe UI</FontFamily>
                                             <FontSize>9pt</FontSize>
@@ -93,10 +93,7 @@
                               <TablixBody>
                                 <TablixColumns>
                                   <TablixColumn>
-                                    <Width>3.5cm</Width>
-                                  </TablixColumn>
-                                  <TablixColumn>
-                                    <Width>3.5cm</Width>
+                                    <Width>5cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
                                     <Width>2.5cm</Width>
@@ -105,49 +102,16 @@
                                     <Width>2.5cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>3.5cm</Width>
+                                    <Width>4.5cm</Width>
                                   </TablixColumn>
                                   <TablixColumn>
-                                    <Width>3.5cm</Width>
+                                    <Width>4.5cm</Width>
                                   </TablixColumn>
                                 </TablixColumns>
                                 <TablixRows>
                                   <TablixRow>
                                     <Height>0.6cm</Height>
                                     <TablixCells>
-                                      <TablixCell>
-                                        <CellContents>
-                                          <Textbox Name="HeaderPerspective">
-                                            <Paragraphs>
-                                              <Paragraph>
-                                                <TextRuns>
-                                                  <TextRun>
-                                                    <Value>Perspective</Value>
-                                                    <Style>
-                                                      <FontFamily>Segoe UI</FontFamily>
-                                                      <FontSize>8pt</FontSize>
-                                                      <FontWeight>Bold</FontWeight>
-                                                      <Color>White</Color>
-                                                    </Style>
-                                                  </TextRun>
-                                                </TextRuns>
-                                                <Style />
-                                              </Paragraph>
-                                            </Paragraphs>
-                                            <Style>
-                                              <Border>
-                                                <Color>LightGrey</Color>
-                                                <Style>Solid</Style>
-                                              </Border>
-                                              <BackgroundColor>#8dc541</BackgroundColor>
-                                              <PaddingLeft>2pt</PaddingLeft>
-                                              <PaddingRight>2pt</PaddingRight>
-                                              <PaddingTop>2pt</PaddingTop>
-                                              <PaddingBottom>2pt</PaddingBottom>
-                                            </Style>
-                                          </Textbox>
-                                        </CellContents>
-                                      </TablixCell>
                                       <TablixCell>
                                         <CellContents>
                                           <Textbox Name="HeaderObjective">
@@ -308,16 +272,17 @@
                                     <TablixCells>
                                       <TablixCell>
                                         <CellContents>
-                                          <Textbox Name="Perspective_Description">
-                                            <CanGrow>true</CanGrow>
+                                          <Textbox Name="GroupPerspective">
                                             <Paragraphs>
                                               <Paragraph>
                                                 <TextRuns>
                                                   <TextRun>
-                                                    <Value>=Fields!Perspective_Description.Value</Value>
+                                                    <Value>="Perspective: " &amp; Fields!Perspective_Description.Value</Value>
                                                     <Style>
                                                       <FontFamily>Segoe UI</FontFamily>
                                                       <FontSize>8pt</FontSize>
+                                                      <FontWeight>Bold</FontWeight>
+                                                      <Color>#333333</Color>
                                                     </Style>
                                                   </TextRun>
                                                 </TextRuns>
@@ -329,11 +294,23 @@
                                                 <Color>LightGrey</Color>
                                                 <Style>Solid</Style>
                                               </Border>
+                                              <BackgroundColor>#f0f0f0</BackgroundColor>
                                               <PaddingLeft>2pt</PaddingLeft>
+                                              <PaddingTop>2pt</PaddingTop>
                                             </Style>
                                           </Textbox>
+                                          <ColSpan>5</ColSpan>
                                         </CellContents>
                                       </TablixCell>
+                                      <TablixCell />
+                                      <TablixCell />
+                                      <TablixCell />
+                                      <TablixCell />
+                                    </TablixCells>
+                                  </TablixRow>
+                                  <TablixRow>
+                                    <Height>0.6cm</Height>
+                                    <TablixCells>
                                       <TablixCell>
                                         <CellContents>
                                           <Textbox Name="Objective">
@@ -485,7 +462,6 @@
                                   <TablixMember />
                                   <TablixMember />
                                   <TablixMember />
-                                  <TablixMember />
                                 </TablixMembers>
                               </TablixColumnHierarchy>
                               <TablixRowHierarchy>
@@ -495,12 +471,24 @@
                                     <RepeatOnNewPage>true</RepeatOnNewPage>
                                   </TablixMember>
                                   <TablixMember>
-                                    <Group Name="Details" />
+                                    <Group Name="PerspectiveGroup">
+                                      <GroupExpressions>
+                                        <GroupExpression>=Fields!Perspective_Description.Value</GroupExpression>
+                                      </GroupExpressions>
+                                    </Group>
+                                    <TablixMembers>
+                                      <TablixMember>
+                                        <KeepWithGroup>After</KeepWithGroup>
+                                      </TablixMember>
+                                      <TablixMember>
+                                        <Group Name="Details" />
+                                      </TablixMember>
+                                    </TablixMembers>
                                   </TablixMember>
                                 </TablixMembers>
                               </TablixRowHierarchy>
                               <Top>2cm</Top>
-                              <Height>1.2cm</Height>
+                              <Height>1.8cm</Height>
                               <Width>19cm</Width>
                               <ZIndex>1</ZIndex>
                               <Style />
@@ -534,7 +522,7 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
-            <Height>3.5cm</Height>
+            <Height>3.8cm</Height>
             <Width>19cm</Width>
             <Style />
           </Tablix>
@@ -705,7 +693,7 @@
     </ReportSection>
   </ReportSections>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
-  <rd:ReportID>7c54a36d-6220-4646-8223-1f28b6cc5908</rd:ReportID>
+  <rd:ReportID>225e7299-5abf-4242-ac67-d37ab4960e48</rd:ReportID>
   <DataSets>
     <DataSet Name="DataSet_Result">
       <Fields>
@@ -759,6 +747,9 @@
         </Field>
         <Field Name="Responsibility_Center">
           <DataField>Responsibility_Center</DataField>
+        </Field>
+        <Field Name="Department_Name">
+          <DataField>Department_Name</DataField>
         </Field>
         <Field Name="Supervisor_Name">
           <DataField>Supervisor_Name</DataField>
