@@ -7429,7 +7429,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                     else
                                                                                         theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
                                                                                                     ', you have successfully transferred Kshs. ' +
-                                                                                                    Format(MpesaTransBuffer."Transaction Amount" - TotalCharges) +
+                                                                                                    Format(MpesaTransBuffer."Transaction Amount") +
                                                                                                     ' to ' + TheDestinationMember."First Name" + ' ' + TheDestinationMember."Middle Name" +
                                                                                                     ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccounts, true)) +
                                                                                                     ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
@@ -7577,7 +7577,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                                         else
                                                                                             theSMS := 'Jambo ' + TheSourceMember."First Name".ToUpper() +
                                                                                                             ', you have successfully transferred Kshs. ' +
-                                                                                                            Format(MpesaTransBuffer."Transaction Amount" - TotalCharges) +
+                                                                                                            Format(MpesaTransBuffer."Transaction Amount") +
                                                                                                             ' to ' + TheDestinationSavings."Name" +
                                                                                                             ', your available balance is Ksh ' + Format(GlobalFunctions.GetSavingsAccountAvailableBalance(SavingsAccounts, true)) +
                                                                                                             ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time");
@@ -8077,9 +8077,6 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         loan_purpose: JsonToken;
         installments: JsonToken;
         requested_amount: JsonToken;
-        sasra_main_sector: JsonToken;
-        sasra_sub_sector_1: JsonToken;
-        sasra_sub_sector_2: JsonToken;
         is_self_guarantee: JsonToken;
 
         loans_to_be_cleared: JsonToken;
@@ -8101,6 +8098,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         SalaryAmount: decimal;
         GuarantorMember: Record Members;
         MobileLoanProduct: Record "Product Factory";
+        ApplicationLoanProduct: Record "Product Factory";
         LoansToBeCleared: Record Loans;
         TopupAmount: Decimal;
 
@@ -8118,7 +8116,6 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         StoreImageRef: FieldRef;
         StoreRecRef: RecordRef;
 
-        KeyExists1: Boolean;
         KeyExists2: Boolean;
         KeyExists3: Boolean;
 
@@ -8139,9 +8136,6 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         Payload.Get('installments', installments);
         Payload.Get('requested_amount', requested_amount);
         Payload.Get('guarantors', guarantors);
-        KeyExists1 := Payload.Get('sasra_main_sector', sasra_main_sector);
-        KeyExists1 := Payload.Get('sasra_sub_sector_1', sasra_sub_sector_1);
-        KeyExists1 := Payload.Get('sasra_sub_sector_2', sasra_sub_sector_2);
         KeyExists2 := Payload.Get('is_self_guarantee', is_self_guarantee);
         KeyExists3 := Payload.Get('loans_to_be_cleared', loans_to_be_cleared);
         KeyExists := Payload.Get('files', files);
@@ -8186,10 +8180,11 @@ codeunit 52186502 "Sky Mobile Banking Integration"
             TheLoanApplication."Requested Amount" := requested_amount.AsValue.AsDecimal;
             TheLoanApplication."Source Application" := TheLoanApplication."Source Application"::"Member Portal";
 
-            if KeyExists1 then begin
-                TheLoanApplication."Main Sector" := sasra_main_sector.AsValue.AsText;
-                TheLoanApplication."Sub Sector Level1" := sasra_sub_sector_1.AsValue.AsText;
-                TheLoanApplication."Sub Sector Level2" := sasra_sub_sector_2.AsValue.AsText;
+            // SASRA sector classification is prefilled from the product, not chosen by the member
+            if ApplicationLoanProduct.Get(loan_product.AsValue.AsText) then begin
+                TheLoanApplication."Main Sector" := ApplicationLoanProduct."Main Sector";
+                TheLoanApplication."Sub Sector Level1" := ApplicationLoanProduct."Sub Sector Level1";
+                TheLoanApplication."Sub Sector Level2" := ApplicationLoanProduct."Sub Sector Level2";
             end;
 
             if KeyExists2 then begin

@@ -329,7 +329,7 @@ page 52185794 "Cashier Transactions"
                         Caption = 'Bankers Cheque No';
                         Editable = (rec.Type = rec.Type::"Cancel Bankers Cheque") or (rec.Type = rec.Type::"Bankers Cheque");
                     }
-                    
+
                 }
                 group(MPESATYPE)
                 {
@@ -421,7 +421,7 @@ page 52185794 "Cashier Transactions"
                     field("Bank Code"; Rec."Bank Code")
                     {
                         ApplicationArea = Basic;
-                        
+
                     }
 
                     field("Bank Name"; Rec."Bank Name")
@@ -746,6 +746,7 @@ page 52185794 "Cashier Transactions"
                     PromotedCategory = Category7;
                     RunObject = Page "Signatories List";
                     RunPageLink = "Account No" = FIELD("Member No.");
+                    RunPageView = WHERE(Signatory = CONST(true));
                 }
             }
         }
@@ -1360,10 +1361,10 @@ page 52185794 "Cashier Transactions"
                     trigger OnAction()
                     var
                         Err00001: Label 'Document must be posted ';
-                        CT : Record "Cashier Transactions";
+                        CT: Record "Cashier Transactions";
                     begin
                         if Rec.Posted = true then begin
-                            
+
                             CT.Reset;
                             CT.SetFilter(No, Rec.No);
                             if CT.Find then
@@ -1379,6 +1380,17 @@ page 52185794 "Cashier Transactions"
     trigger OnAfterGetRecord()
     begin
         RecoveryAccent;
+        clear(BalBroughtForwardAmt);
+        BankLedger.Reset();
+        BankLedger.SetRange("Bank Account No.", Rec."Till Code");
+        BankLedger.SetFilter("Posting Date", '<%1', Today);
+        BankLedger.CalcSums("Amount (LCY)");
+        BalBroughtForwardAmt := BankLedger."Amount (LCY)";
+        if BankLedger.FindFirst() then begin
+            if BalBroughtForwardAmt <> 0 then
+                Error('End of Day has not been performed for the previous business day.');
+        end;
+        
         if Trans.Get(Rec.No) then begin
             BankLedger.Reset;
             BankLedger.SetRange(BankLedger."Document No.", Trans.No);
@@ -1451,7 +1463,7 @@ page 52185794 "Cashier Transactions"
         UpdateControl;
     end;
 
-    
+
     trigger OnInit()
     begin
 
@@ -1602,9 +1614,10 @@ page 52185794 "Cashier Transactions"
         LoanNumbers: Code[200];
         ReprintSlip: Boolean;
         MPESATYPEVisible: Boolean;
-        BankCodeVisible : Boolean;
+        BankCodeVisible: Boolean;
 
         NormalChequeVisible: Boolean;
+        BalBroughtForwardAmt : Decimal;
 
 
 
@@ -1733,7 +1746,8 @@ page 52185794 "Cashier Transactions"
     begin
         StyleExprTxt := '';
         if TransType.Get(Rec."Transaction Type") then begin
-            if (TransType.Type = TransType.Type::"Cash Deposit") or (TransType.Type = TransType.Type::"Cheque Deposit") or (TransType.Type = TransType.Type::"Credit Receipt") then
+            if (TransType.Type = TransType.Type::"Cash Deposit") or (TransType.Type = TransType.Type::"Cheque Deposit") or
+            (TransType.Type = TransType.Type::"Credit Receipt") or (TransType.Type = TransType.Type::"Cancel Bankers Cheque") then
                 StyleExprTxt := 'Favorable'
             else
                 StyleExprTxt := 'Unfavorable';

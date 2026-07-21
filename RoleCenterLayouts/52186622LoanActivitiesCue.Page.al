@@ -160,7 +160,7 @@ page 52186622 "Loan Processing Activities"
                 field("Disbursed Loans"; Rec."Disbursed Loans")
                 {
                     ApplicationArea = Basic;
-                    image = none;
+                    image = Cash;
                     LookupPageId = "Loan Posted List";
                     DrillDownPageId = "Loan Posted list";
                 }
@@ -178,12 +178,12 @@ page 52186622 "Loan Processing Activities"
                 field("Active Members"; Rec."Active Members")
                 {
                     ApplicationArea = Basic, Suite;
-                    image = none;
+                    image = Funnel;
                 }
                 field("Dormant Members"; Rec."Dormant Members")
                 {
                     ApplicationArea = Basic, Suite;
-                    image = none;
+                    image = Folder;
                 }
             }
             cuegroup("Withdrawal Notices")

@@ -29,6 +29,11 @@ page 52185747 "Standing Order Lines"
                     ApplicationArea = Basic;
                     Editable = true;
                 }
+                field("Product Description"; Rec."Product Description")
+                {
+                    ApplicationArea = Basic;
+                    Editable = true;
+                }
                 field("Transaction Type"; Rec."Transaction Type")
                 {
                     ApplicationArea = Basic;

@@ -34,12 +34,12 @@ page 52186055 "All Users Activities"
                 field(Members; Rec.Members)
                 {
                     Caption = 'Active Members';
-                    image = none;
+                    image = Funnel;
                     ApplicationArea = Basic, Suite;
                 }
                 field("Member Withdrawal"; Rec."Member Withdrawal")
                 {
-                    image = none;
+                    image = Cash;
                     trigger OnDrillDown()
                     var
                         MemberWithdrawal: Record "Member withdrawal Notice";
@@ -74,7 +74,7 @@ page 52186055 "All Users Activities"
                 // }
                 field(Loans; Rec.Loans)
                 {
-                    image = none;
+                    image = Checklist;
                     ApplicationArea = Basic, Suite;
                 }
                 // field("My Staff Advance Surrender"; Rec."My Staff Advance Surrender")

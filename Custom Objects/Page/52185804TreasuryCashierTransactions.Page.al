@@ -519,9 +519,9 @@ page 52185804 "Treasury Cashier Transactions"
                         if rec.Amount <= 0 then
                             Error('Kindly Enter Amount');
 
-                        if (rec."Transaction Type" = rec."Transaction Type"::"Issue To Teller") or
-                            (rec."Transaction Type" = rec."Transaction Type"::"End of Day Return to Treasury") then
-                            rec.Testfield("Cash Requisition Number");
+                        // if (rec."Transaction Type" = rec."Transaction Type"::"Issue To Teller") or
+                        //     (rec."Transaction Type" = rec."Transaction Type"::"End of Day Return to Treasury") then
+                        //     rec.Testfield("Cash Requisition Number");
 
                         //if rec.Status = Status::Approved then begin
                         if rec."Transaction Type" = rec."Transaction Type"::"Issue To Teller" then begin
