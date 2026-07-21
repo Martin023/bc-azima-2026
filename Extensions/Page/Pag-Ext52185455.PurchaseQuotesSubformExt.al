@@ -9,7 +9,8 @@ pageextension 52185455 "Purchase Quotes Subform Ext" extends "Purchase Quote Sub
         modify("Line Amount")
         {
             ApplicationArea = Basic;
-            visible = false;
+            visible = true;
+            Caption = 'Line Amount Incl. VAT';
         }
 
         modify("Tax Group Code")
@@ -60,5 +61,28 @@ pageextension 52185455 "Purchase Quotes Subform Ext" extends "Purchase Quote Sub
             showmandatory = true;
         }
 
+        modify("Total Amount Excl. VAT")
+        {
+            ApplicationArea = Basic;
+            visible = false;
+        }
+
+        modify("AmountBeforeDiscount")
+        {
+            ApplicationArea = Basic;
+            visible = false;
+        }
+
+        modify("Invoice Discount Amount")
+        {
+            ApplicationArea = Basic;
+            visible = false;
+        }
+
+        modify("Invoice Disc. Pct.")
+        {
+            ApplicationArea = Basic;
+            visible = false;
+        }
     }
 }
