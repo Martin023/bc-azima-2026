@@ -37,7 +37,7 @@ table 52185532 "HR Leave Application"
                         exit
                     else
                         if HRLeaveTypes.Gender <> HRLeaveTypes.Gender::Both then
-                            Error('This leave type is restricted to the ' + Format(HRLeaveTypes.Gender) + ' gender');
+                            Error('This leave type is restricted to the %1 gender', Format(HRLeaveTypes.Gender));
 
                 end;
                 "Days Applied" := 0;
@@ -280,7 +280,7 @@ table 52185532 "HR Leave Application"
 
                 IF HRLeaveTypes.get("Leave Type") THEN BEGIN
                     IF HRLeaveTypes.Gender = HRLeaveTypes.Gender::Female then
-                        IF "Days Applied" < HRLeaveTypes.Days THEN Error('Days Applied Cannot be less than' + ' ' + Format(HRLeaveTypes.Days));
+                        IF "Days Applied" < HRLeaveTypes.Days THEN Error('Days Applied cannot be less than %1', Format(HRLeaveTypes.Days));
                 END;
 
                 if "Days Applied" >= 15 then
@@ -712,7 +712,7 @@ table 52185532 "HR Leave Application"
                 // GetApplicantSupervisor(UserId);
 
             end else begin
-                ERROR('UserID' + ' ' + '[' + USERID + ']' + ' has not been assigned to any employee. Please consult the HR officer for assistance')
+                ERROR('UserID [%1] has not been assigned to any employee. Please consult the HR officer for assistance', USERID)
             end;
             // end;
 
@@ -776,7 +776,7 @@ table 52185532 "HR Leave Application"
             LeaveApplication.SetFilter(LeaveApplication."Application Code", '<>%1', Rec."Application Code");
             LeaveApplication.SetFilter(LeaveApplication.Status, '=%1|%2', LeaveApplication.Status::"Pending Approval", LeaveApplication.Status::New);
             if LeaveApplication.Find('-') then begin
-                ERROR('Your leave application no' + ' ' + LeaveApplication."Application Code" + ' is still  pending Approval. Kindy Contact the HR department to have it approved first');
+                ERROR('Your leave application no %1 is still pending Approval. Kindly contact the HR department to have it approved first.', LeaveApplication."Application Code");
                 REPEAT
                     IF "Start Date" < HRLeaveApp."Return Date" THEN
                         ERROR('You already have an active leave application!');
