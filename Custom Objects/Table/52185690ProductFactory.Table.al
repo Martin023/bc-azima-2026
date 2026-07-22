@@ -1089,15 +1089,37 @@ table 52185690 "Product Factory"
             Caption = 'Main Sector';
             TableRelation = "Sectoral Classification"."Sector Code" where("Sector Level" = const("Main Sector"));
         }
-        field(10048; "Sub Sector Level1"; Code[20])
+        field(10048; "Main Sector Description"; Text[100])
+        {
+            Caption = 'Main Sector Description';
+            CalcFormula = lookup("Sectoral Classification"."Sector Description" where("Sector Code" = field("Main Sector")));
+            Editable = false;
+            FieldClass = FlowField;
+        }
+
+        field(10049; "Sub Sector Level1"; Code[20])
         {
             Caption = 'Sub Sector Level1';
             TableRelation = "Sectoral Classification"."Sector Code" where("Sector Level" = const("Sub Sector Level 1"), "Parent Sector" = field("Main Sector"));
         }
-        field(10049; "Sub Sector Level2"; Code[20])
+        field(10050; "Sub Sector Level1 Description"; Text[100])
+        {
+            Caption = 'Sub Sector Level1 Description';
+            CalcFormula = lookup("Sectoral Classification"."Sector Description" where("Sector Code" = field("Sub Sector Level1")));
+            Editable = false;
+            FieldClass = FlowField;
+        }
+        field(10051; "Sub Sector Level2"; Code[20])
         {
             Caption = 'Sub Sector Level2';
             TableRelation = "Sectoral Classification"."Sector Code" where("Sector Level" = const("Sub Sector Level 2"), "Parent Sector" = field("Sub Sector Level1"));
+        }
+        field(10052; "Sub Sector Level2 Description"; Text[100])
+        {
+            Caption = 'Sub Sector Level2 Description';
+            CalcFormula = lookup("Sectoral Classification"."Sector Description" where("Sector Code" = field("Sub Sector Level2")));
+            Editable = false;
+            FieldClass = FlowField;
         }
     }
 

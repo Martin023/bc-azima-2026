@@ -984,11 +984,23 @@ page 52185712 "Product Factory"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Main Sector Description"; Rec."Main Sector Description")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Sub Sector Level1"; Rec."Sub Sector Level1")
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Sub Sector Level1 Description"; Rec."Sub Sector Level1 Description")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Sub Sector Level2"; Rec."Sub Sector Level2")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Sub Sector Level2 Description"; Rec."Sub Sector Level2 Description")
                 {
                     ApplicationArea = Basic, Suite;
                 }
