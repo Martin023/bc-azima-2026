@@ -131,6 +131,7 @@ page 52185904 "Internal Requisitions"
             }
             group("Foreign Trade")
             {
+                visible = false;
                 Caption = 'Foreign Trade';
                 field("Currency Code"; Rec."Currency Code")
                 {
@@ -544,7 +545,7 @@ page 52185904 "Internal Requisitions"
                     trigger OnAction()
                     var
                         SalesHeader: Record "Sales Header";
-                    ApprovalMgt: Codeunit "Approvals Mgmt.";
+                        ApprovalMgt: Codeunit "Approvals Mgmt.";
                     begin
                         // IF ApprovalMgt.PrePostApprovalCheckPurch(SalesHeader,Rec) THEN
                         //  CODEUNIT.RUN(CODEUNIT::"Purch.-Quote to Order (Yes/No)",Rec);
@@ -576,7 +577,7 @@ page 52185904 "Internal Requisitions"
 
                         // //Ensure No Items That should be committed that are not
                         IF LinesCommitted THEN
-                            if not Confirm('Do you wish to proceed without a budget Check ?',true,rec."No.") then exit;
+                            if not Confirm('Do you wish to proceed without a budget Check ?', true, rec."No.") then exit;
 
                         if ApprovalsMgmt.CheckPurchaseApprovalPossible(Rec) then
                             ApprovalsMgmt.OnSendPurchaseDocForApproval(Rec);
