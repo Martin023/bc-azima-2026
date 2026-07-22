@@ -84,6 +84,7 @@ page 52186182 "General Setup"
                 }
                 field("Transfer Excise Duty (%)"; rec."Transfer Excise Duty (%)")
                 {
+                    Caption = 'Money Transfer Excise %';
                     ApplicationArea = Basic;
                 }
                 field("Excise Duty G/L"; rec."Excise Duty G/L")

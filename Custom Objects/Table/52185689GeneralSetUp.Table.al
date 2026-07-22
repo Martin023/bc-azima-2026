@@ -35,6 +35,7 @@ table 52185689 "General Set-Up"
         }
         field(11; "Excise Duty (%)"; Decimal)
         {
+            Caption = 'Financial Charges Excise %';
         }
         field(12; "Max Loans To Guarantee"; Integer)
         {
