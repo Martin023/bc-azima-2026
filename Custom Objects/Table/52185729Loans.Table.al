@@ -1015,9 +1015,9 @@ table 52185729 Loans
                 CreditLedger: Record "Credit Ledger Entry";
                 DivDiscRem: DECIMAL;
             begin
-                //IF ProdFac.GET("Loan Product Type") THEN BEGI
-                if rec."Approved Amount" <> xRec."Approved Amount" then
-                    Rec."Loan Appraised By" := '';
+                // //IF ProdFac.GET("Loan Product Type") THEN BEGI
+                // if rec."Approved Amount" <> xRec."Approved Amount" then
+                //     Rec."Loan Appraised By" := '';
                 if rec."Approved Amount" <= 0 then begin
                     LoanApp.Reset;
                     LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
@@ -1037,27 +1037,7 @@ table 52185729 Loans
                         end;
                     end;
                 end;
-                // LoanApp.Reset;
-                // LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
-                // LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");
-                // LoanApp.SetRange(LoanApp."Source Unit", LoanApp."Source Unit"::BOSA);
-                // LoanApp.SetFilter(LoanApp."Total Loan Balance", '>0');
-                // if LoanApp.Find('-') then begin
-                //     LoanApp.CalcFields("Total Loan Balance");
-                //     if LoanApp."Total Loan Balance" > 0 then begin
-                //         LoansTopup.Reset;
-                //         LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
-                //         LoansTopup.SetRange("Loan Top Up", LoanApp."Loan No.");
-                //         if not LoansTopup.Find('-') then begin
-                //             LoansTopup.init;
-                //             LoansTopup."Loan No." := Rec."Loan No.";
-                //             LoansTopup."Client Code" := rec."Member No.";
-                //             LoansTopup."Loan Top Up" := LoanApp."Loan No.";
-                //             LoansTopup.insert;
-                //         end;
-
-                //     end;
-                // end;
+               
                 ProdFac.Reset;
                 ProdFac.SetRange("Product ID", Rec."Loan Product Type");
                 if ProdFac.FindFirst then begin
@@ -1433,33 +1413,18 @@ table 52185729 Loans
                         GenSetup.Get();
                         if Mem.Get("Member No.") then begin
                             RetirementDate := CalcDate(Format(GenSetup."Max. Member Age"), Mem."Date of Birth");
-                            if Mem."Employer Code" <> '99' then begin
-                                // if Mem.Type <> Mem.Type::"From Other Sacco" then begin
-                                //     if Mem."Group Account" = false then begin
-                                //         ClientAge := HRDates.DetermineAge(Mem."Date of Birth", Today);
-                                //         ClientAgePart := CopyStr(ClientAge, 1, 2);
-                                //         ClientAgePart := CopyStr(ClientAge, 1, 2);
-                                //         Evaluate(ClientAgeValue, ClientAgePart);
-                                //         adj := Round((((RetirementDate - "Repayment Start Date") / 365) * 12), 1, '<');
-                                //         if Installments > adj then
-                                //             Installments := adj
-                                //         else
-                                //             Installments := Installments;
-                                //     end;
-                                // end;
-                            end else begin
-                                if Mem."Account Type" = Mem."Account Type"::"Single Member Account" then begin
-                                    /*ClientAge:=HRDates.DetermineAge("Retirement/Expiry Date",TODAY);
-                                    ClientAgePart:=COPYSTR(ClientAge,1,2);
-                                    ClientAgePart:=COPYSTR(ClientAge,1,2);
-                                    EVALUATE(ClientAgeValue,ClientAgePart);*/
-                                    RetirementDate := "Retirement/Expiry Date";
-                                    adj := Round((((RetirementDate - "Repayment Start Date") / 365) * 12), 1, '<');
-                                    if Installments > adj then
-                                        Installments := adj
-                                    else
-                                        Installments := Installments;
-                                end;
+
+                            if Mem."Account Type" = Mem."Account Type"::"Single Member Account" then begin
+                                /*ClientAge:=HRDates.DetermineAge("Retirement/Expiry Date",TODAY);
+                                ClientAgePart:=COPYSTR(ClientAge,1,2);
+                                ClientAgePart:=COPYSTR(ClientAge,1,2);
+                                EVALUATE(ClientAgeValue,ClientAgePart);*/
+                                RetirementDate := "Retirement/Expiry Date";
+                                adj := Round((((RetirementDate - "Repayment Start Date") / 365) * 12), 1, '<');
+                                if Installments > adj then
+                                    Installments := adj
+                                else
+                                    Installments := Installments;
                             end;
                         end;
                         Validate("Loan Product Type");
@@ -1472,11 +1437,6 @@ table 52185729 Loans
                     if Installments > ProdFac."Ordinary Default Intallments" then
                         Error(Text006, ProdFac."Ordinary Default Intallments");
                 end;
-
-
-
-                //if "Approved Amount" > 0 then
-                // Validate("Approved Amount");
 
             end;
         }
@@ -1491,26 +1451,7 @@ table 52185729 Loans
                 Year: integer;
                 AdjustedDate: Date;
             begin
-
-                //IF "Disbursement Date"<TODAY THEN
-                // ERROR(DateErr);
                 "disbursement time" := time;
-                // if ProdFac.Get("Loan Product Type") then begin
-                //     if Format(ProdFac."Grace Period - Principle") <> '' then begin
-                //         "Repayment Start Date" := CalcDate(ProdFac."Grace Period - Principle", "Disbursement Date");
-                //         "Repayment Start Date" := CalcDate('CM', "Repayment Start Date");
-                //         IntstallMentPeriodText := Format(Installments) + 'M';
-                //         Evaluate(InstalmentPeriods, IntstallMentPeriodText);
-                //         "Expected Date of Completion" := CalcDate(InstalmentPeriods, "Repayment Start Date");
-                //     end else begin
-                //         "Repayment Start Date" := CalcDate('CM', "Disbursement Date");
-                //         IntstallMentPeriodText := Format(Installments) + 'M';
-                //         Evaluate(InstalmentPeriods, IntstallMentPeriodText);
-                //         "Expected Date of Completion" := CalcDate(InstalmentPeriods, "Repayment Start Date");
-                //     end;
-
-                // end;
-                //V3
                 if ProdFac.Get("Loan Product Type") then begin
                     if Format(ProdFac."Grace Period - Principle") <> '' then begin
                         // Apply grace period
@@ -1538,54 +1479,6 @@ table 52185729 Loans
                         "Expected Date of Completion" := CalcDate(InstalmentPeriods, "Repayment Start Date");
                     end;
                 end;
-
-                //V3
-                // if ProdFac.Get("Loan Product Type") then begin
-                //     // Determine the adjusted application date based on grace period
-                //     if Format(ProdFac."Grace Period - Principle") <> '' then
-                //         AdjustedAppDate := CalcDate(ProdFac."Grace Period - Principle", "Disbursement Date")
-                //     else
-                //         AdjustedAppDate := "Disbursement Date";
-
-                //     // Apply FOSA/BOSA rules based on the adjusted application date
-                //     if "Source Unit" = "Source Unit"::FOSA then begin
-                //         // For FOSA: if the day of AdjustedAppDate is between 1 and 20, repayment starts on the 20th of that month,
-                //         // otherwise on the 20th of the following month.
-                //         if Date2DMY(AdjustedAppDate, 2) <= 20 then
-                //             "Repayment Start Date" := DMY2Date(20, Date2DMY(AdjustedAppDate, 1), Date2DMY(AdjustedAppDate, 3))
-                //         else begin
-                //             AdjustedDate := CalcDate('1M', AdjustedAppDate); // Move to the next month
-                //             Month := Date2DMY(AdjustedDate, 1);
-                //             Year := Date2DMY(AdjustedDate, 3);
-
-                //             // Handle if month exceeds 12
-                //             if Month > 12 then begin
-                //                 Month := 1; // Set to January
-                //                 Year += 1; // Increment the year
-                //             end;
-
-                //             // Ensure repayment starts on the 20th of the next month
-                //             "Repayment Start Date" := DMY2Date(20, Month, Year);
-                //         end;
-                //     end
-
-                //     else if "Source Unit" = "Source Unit"::BOSA then begin
-                //         // For BOSA: if the day of AdjustedAppDate is between 1 and 10, repayment starts at the end of that month,
-                //         // otherwise at the end of the following month.
-                //         if Date2DMY(AdjustedAppDate, 2) <= 10 then
-                //             "Repayment Start Date" := CALCDATE('CM', AdjustedAppDate)
-                //         else
-                //             "Repayment Start Date" := CALCDATE('CM+1M', AdjustedAppDate);
-                //     end;
-
-                //     IntstallMentPeriodText := Format(Installments) + 'M';
-                //     Evaluate(InstalmentPeriods, IntstallMentPeriodText);
-                //     "Expected Date of Completion" := CalcDate(InstalmentPeriods, "Repayment Start Date");
-                // end;
-
-                //version2
-
-
             end;
         }
         field(1022; "disbursement time"; time)
