@@ -2503,6 +2503,13 @@ codeunit 52186507 "Members Portal Integration"
                     Datum.Add('source_unit', Format(ProductFactory."Source Unit"));
                     Datum.Add('maximum_amount', Format(ProductFactory."Maximum Loan Amount"));
                     Datum.Add('minimum_amount', Format(ProductFactory."Minimum Loan Amount"));
+                    if ProductFactory."Allow Topup" then begin
+                        ProductFactory."Minimum Loan Amount" += GlobalFunctions.GetMemberLoanProductTotalBalance(
+                                SearchMember."No.",
+                                ProductFactory."Product ID"
+                            );
+                        Datum.Replace('loan_type_min_amount', ProductFactory."Minimum Loan Amount");
+                    end;
                     Datum.Add('maximum_installments', ProductFactory."Ordinary Default Intallments");
                     Datum.Add('is_mobile_loan', ProductFactory."Mobile Loan");
                     Datum.Add('repayment_mode', Format(ProductFactory."Repay Mode"));

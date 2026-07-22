@@ -2675,6 +2675,13 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                         Datum.Add('loan_type_id', MobileLoanProducts."Product ID");
                         Datum.Add('loan_type_name', MobileLoanProducts."Product Description");
                         Datum.Add('loan_type_min_amount', MobileLoanProducts."Minimum Loan Amount");
+                        if MobileLoanProducts."Allow Topup" then begin
+                            MobileLoanProducts."Minimum Loan Amount" += GlobalFunctions.GetMemberLoanProductTotalBalance(
+                                    SearchMember."No.",
+                                    MobileLoanProducts."Product ID"
+                                );
+                            Datum.Replace('loan_type_min_amount', MobileLoanProducts."Minimum Loan Amount");
+                        end;
 
                         if MobileLoanProducts."Mobile Max. Loan Amount" <> 0 then begin
                             Datum.Add('loan_type_max_amount', MobileLoanProducts."Mobile Max. Loan Amount");

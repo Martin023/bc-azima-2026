@@ -356,7 +356,7 @@ table 52185744 "Appraisal Salary Details"
 
             HousingLevyAmount := ROUND((curTransAmount * (1.5 / 100)), 0.01, '<');
             Relief := 1408;
-            TaxablePay := (curTransAmount + OtherAllowances) - curNSSF - ShifAmount - HousingLevyAmount - curPensionAmount;
+            TaxablePay := (curTransAmount) - curNSSF - ShifAmount - HousingLevyAmount - curPensionAmount;
             if TaxablePay < 0 then
                 TaxablePay := 0;
             curPayeAmount := prPayrollProcessing.fnGetEmployeePaye(TaxablePay);
