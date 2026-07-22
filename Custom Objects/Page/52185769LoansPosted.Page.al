@@ -22,6 +22,11 @@ page 52185769 "Loans Posted"
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
+                field("Loan Product Type Name"; Rec."Loan Product Type Name")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = false;
+                }
                 field("Member No."; Rec."Member No.")
                 {
                     ApplicationArea = Basic, Suite;
@@ -310,23 +315,23 @@ page 52185769 "Loans Posted"
             }
 
 
-            group("Hybrid Details")
-            {
-                Caption = 'Hybrid Details';
-                Editable = False;
+            // group("Hybrid Details")
+            // {
+            //     Caption = 'Hybrid Details';
+            //     Editable = False;
 
 
-                field("Salary Amount"; Rec."Salary Amount")
-                {
-                    ApplicationArea = Basic, Suite;
+            //     field("Salary Amount"; Rec."Salary Amount")
+            //     {
+            //         ApplicationArea = Basic, Suite;
 
-                }
-                field("Checkoff Amount"; Rec."Checkoff Amount")
-                {
-                    ApplicationArea = Basic, Suite;
+            //     }
+            //     field("Checkoff Amount"; Rec."Checkoff Amount")
+            //     {
+            //         ApplicationArea = Basic, Suite;
 
-                }
-            }
+            //     }
+            // }
             group("Trail Information")
             {
                 Caption = 'Trail Information';
@@ -362,60 +367,60 @@ page 52185769 "Loans Posted"
                     ShowMandatory = true;
                 }
             }
-            group("External STO Details")
-            {
-                Caption = 'External STO Details';
-                Editable = false;
-                field("Client Bank Code"; Rec."Client Bank Code")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = true;
-                    ShowMandatory = true;
-                }
-                field("Client Bank Name"; Rec."Client Bank Name")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ShowMandatory = true;
-                }
-                field("Client Account No"; Rec."Client Account No")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = true;
-                    ShowMandatory = true;
-                }
-                field("External STO  Amount"; Rec."External STO  Amount")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("External STO Effective Date"; Rec."External STO Effective Date")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = true;
-                    ShowMandatory = true;
-                }
-            }
-            group("Shamba Loan Mandatory Requirements")
-            {
-                Caption = 'Shamba Loan Mandatory Requirements';
-                Editable = false;
-                Visible = IsShambaLoan;
-                field("Sale Agreement"; Rec."Sale Agreement")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("20% Payment Slip"; Rec."20% Payment Slip")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Land Valuation Done"; Rec."Land Valuation Done")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Title Deed"; Rec."Title Deed")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-            }
+            // group("External STO Details")
+            // {
+            //     Caption = 'External STO Details';
+            //     Editable = false;
+            //     field("Client Bank Code"; Rec."Client Bank Code")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         Editable = true;
+            //         ShowMandatory = true;
+            //     }
+            //     field("Client Bank Name"; Rec."Client Bank Name")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         ShowMandatory = true;
+            //     }
+            //     field("Client Account No"; Rec."Client Account No")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         Editable = true;
+            //         ShowMandatory = true;
+            //     }
+            //     field("External STO  Amount"; Rec."External STO  Amount")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //     }
+            //     field("External STO Effective Date"; Rec."External STO Effective Date")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         Editable = true;
+            //         ShowMandatory = true;
+            //     }
+            // }
+            // group("Shamba Loan Mandatory Requirements")
+            // {
+            //     Caption = 'Shamba Loan Mandatory Requirements';
+            //     Editable = false;
+            //     Visible = IsShambaLoan;
+            //     field("Sale Agreement"; Rec."Sale Agreement")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //     }
+            //     field("20% Payment Slip"; Rec."20% Payment Slip")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //     }
+            //     field("Land Valuation Done"; Rec."Land Valuation Done")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //     }
+            //     field("Title Deed"; Rec."Title Deed")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //     }
+            // }
             group("Default and Recovery")
             {
                 Caption = 'Default and Recovery';

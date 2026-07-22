@@ -5172,9 +5172,9 @@ Codeunit 52186458 "Loans Process"
                                 ExcemptProductCharges.setrange("Charge Code", PCharges."Charge Code");
                                 ExcemptProductCharges.setrange(Excempt, true);
                                 if not ExcemptProductCharges.Find('-') then begin
-                                    if PCharges."Charging Option" = PCharges."Charging Option"::"On Approved Amount" then
-                                        BaseAmount := LoanApp."Approved Amount" else
-                                        BaseAmount := TopUp."Principle Top Up";
+                                    // if PCharges."Charging Option" = PCharges."Charging Option"::"On Approved Amount" then
+                                    //     BaseAmount := LoanApp."Approved Amount" else
+                                    BaseAmount := TopUp."Principle Top Up";
                                     //Non Prorate
                                     LineNo := LineNo + 10000;
                                     AccType := Acctype::"G/L Account";
