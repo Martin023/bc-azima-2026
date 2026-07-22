@@ -9,11 +9,11 @@
       <am:Name>MSRB</am:Name>
       <am:Version>15.0.20283.0</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-07-22T07:10:05.7836562Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-07-22T09:45:29.1654104Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="DataSource1">
+    <DataSource Name="DataSource">
       <ConnectionProperties>
         <DataProvider>SQL</DataProvider>
         <ConnectString>Data Source=.</ConnectString>
@@ -22,6 +22,84 @@
       <rd:DataSourceID>e93c66cc-bdff-401c-bd9c-a070fe1b52c8</rd:DataSourceID>
     </DataSource>
   </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText>SELECT * FROM DataSet_Result</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="PurchaseReqNo">
+          <DataField>PurchaseReqNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Department">
+          <DataField>Department</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RequestorName">
+          <DataField>RequestorName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Date">
+          <DataField>Date</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="RemarksDeptHead">
+          <DataField>RemarksDeptHead</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyInformation_Name">
+          <DataField>CompanyInformation_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyInformation_Picture">
+          <DataField>CompanyInformation_Picture</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SNo">
+          <DataField>SNo</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Document_No_">
+          <DataField>Document_No_</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Specification">
+          <DataField>Specification</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Quantity">
+          <DataField>Quantity</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Direct_Unit_Cost">
+          <DataField>Direct_Unit_Cost</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Line_Amount">
+          <DataField>Line_Amount</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -45,6 +123,7 @@
                     <Value>FOR OFFICIAL USE</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
+                      <Color>White</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -68,6 +147,7 @@
                       <FontStyle>Italic</FontStyle>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>9pt</FontSize>
+                      <Color>#1f6f8b</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -122,8 +202,9 @@
             <ZIndex>4</ZIndex>
             <Style>
               <BottomBorder>
+                <Color>#c8962c</Color>
                 <Style>Solid</Style>
-                <Width>0.75pt</Width>
+                <Width>1pt</Width>
               </BottomBorder>
             </Style>
           </Textbox>
@@ -168,8 +249,9 @@
             <ZIndex>6</ZIndex>
             <Style>
               <BottomBorder>
+                <Color>#c8962c</Color>
                 <Style>Solid</Style>
-                <Width>0.75pt</Width>
+                <Width>1pt</Width>
               </BottomBorder>
             </Style>
           </Textbox>
@@ -182,6 +264,7 @@
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontWeight>Bold</FontWeight>
+                      <Color>#1f6f8b</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -236,8 +319,9 @@
             <ZIndex>9</ZIndex>
             <Style>
               <BottomBorder>
+                <Color>#c8962c</Color>
                 <Style>Solid</Style>
-                <Width>0.75pt</Width>
+                <Width>1pt</Width>
               </BottomBorder>
             </Style>
           </Textbox>
@@ -282,8 +366,9 @@
             <ZIndex>11</ZIndex>
             <Style>
               <BottomBorder>
+                <Color>#c8962c</Color>
                 <Style>Solid</Style>
-                <Width>0.75pt</Width>
+                <Width>1pt</Width>
               </BottomBorder>
             </Style>
           </Textbox>
@@ -328,8 +413,9 @@
             <ZIndex>13</ZIndex>
             <Style>
               <BottomBorder>
+                <Color>#c8962c</Color>
                 <Style>Solid</Style>
-                <Width>0.75pt</Width>
+                <Width>1pt</Width>
               </BottomBorder>
             </Style>
           </Textbox>
@@ -340,7 +426,9 @@
             <Width>7.2in</Width>
             <ZIndex>14</ZIndex>
             <Style>
-              <BackgroundColor>LightGrey</BackgroundColor>
+              <BackgroundColor>#1f6f8b</BackgroundColor>
+              <BackgroundGradientType>LeftRight</BackgroundGradientType>
+              <BackgroundGradientEndColor>#4e93ac</BackgroundGradientEndColor>
             </Style>
           </Rectangle>
           <Rectangle Name="AuthBar">
@@ -350,7 +438,9 @@
             <Width>7.2in</Width>
             <ZIndex>15</ZIndex>
             <Style>
-              <BackgroundColor>LightGrey</BackgroundColor>
+              <BackgroundColor>#1f6f8b</BackgroundColor>
+              <BackgroundGradientType>LeftRight</BackgroundGradientType>
+              <BackgroundGradientEndColor>#4e93ac</BackgroundGradientEndColor>
             </Style>
           </Rectangle>
           <Textbox Name="FinManagerLabel">
@@ -362,6 +452,8 @@
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>9.5pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>#1f6f8b</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -486,8 +578,9 @@
             <ZIndex>22</ZIndex>
             <Style>
               <BottomBorder>
+                <Color>#c8962c</Color>
                 <Style>Solid</Style>
-                <Width>0.75pt</Width>
+                <Width>1pt</Width>
               </BottomBorder>
             </Style>
           </Textbox>
@@ -532,8 +625,9 @@
             <ZIndex>24</ZIndex>
             <Style>
               <BottomBorder>
+                <Color>#c8962c</Color>
                 <Style>Solid</Style>
-                <Width>0.75pt</Width>
+                <Width>1pt</Width>
               </BottomBorder>
             </Style>
           </Textbox>
@@ -578,8 +672,9 @@
             <ZIndex>26</ZIndex>
             <Style>
               <BottomBorder>
+                <Color>#c8962c</Color>
                 <Style>Solid</Style>
-                <Width>0.75pt</Width>
+                <Width>1pt</Width>
               </BottomBorder>
             </Style>
           </Textbox>
@@ -592,6 +687,8 @@
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>9.5pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>#1f6f8b</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -626,6 +723,7 @@
                     <Value>AUTHORIZATION FOR PURCHASE</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
+                      <Color>White</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -707,6 +805,7 @@
                       <FontStyle>Italic</FontStyle>
                       <FontFamily>Segoe Script</FontFamily>
                       <FontSize>22pt</FontSize>
+                      <Color>#1f6f8b</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -729,7 +828,9 @@
                     <Value>YOUR GROWTH. OUR COMMITMENT</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                       <TextDecoration>Underline</TextDecoration>
+                      <Color>#c8962c</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -751,7 +852,9 @@
                   <TextRun>
                     <Value>=Fields!CompanyAddress.Value</Value>
                     <Style>
-                      <FontSize>7.5pt</FontSize>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>8pt</FontSize>
+                      <Color>#5a6b7b</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -761,12 +864,22 @@
               </Paragraph>
             </Paragraphs>
             <Top>0.05in</Top>
-            <Left>4.95in</Left>
-            <Height>0.35in</Height>
-            <Width>2.7in</Width>
+            <Left>4.9in</Left>
+            <Height>0.34in</Height>
+            <Width>3.05in</Width>
             <ZIndex>35</ZIndex>
             <Style />
           </Textbox>
+          <Rectangle Name="ContactDivider">
+            <Top>0.42in</Top>
+            <Left>4.9in</Left>
+            <Height>0.02in</Height>
+            <Width>3.05in</Width>
+            <ZIndex>36</ZIndex>
+            <Style>
+              <BackgroundColor>#c8962c</BackgroundColor>
+            </Style>
+          </Rectangle>
           <Textbox Name="CompanyTelephoneBox">
             <CanGrow>true</CanGrow>
             <Paragraphs>
@@ -775,7 +888,9 @@
                   <TextRun>
                     <Value>=Fields!CompanyTelephone.Value</Value>
                     <Style>
-                      <FontSize>7.5pt</FontSize>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>8pt</FontSize>
+                      <Color>#5a6b7b</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -784,11 +899,11 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>0.4in</Top>
-            <Left>4.95in</Left>
-            <Height>0.35in</Height>
-            <Width>2.7in</Width>
-            <ZIndex>36</ZIndex>
+            <Top>0.48in</Top>
+            <Left>4.9in</Left>
+            <Height>0.22in</Height>
+            <Width>3.05in</Width>
+            <ZIndex>37</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="CompanyOnlineBox">
@@ -799,7 +914,9 @@
                   <TextRun>
                     <Value>=Fields!CommunicationOnline.Value</Value>
                     <Style>
-                      <FontSize>7.5pt</FontSize>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>8pt</FontSize>
+                      <Color>#5a6b7b</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -808,11 +925,11 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>0.75in</Top>
-            <Left>4.95in</Left>
+            <Top>0.74in</Top>
+            <Left>4.9in</Left>
             <Height>0.3in</Height>
-            <Width>2.7in</Width>
-            <ZIndex>37</ZIndex>
+            <Width>3.05in</Width>
+            <ZIndex>38</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="TitleBox">
@@ -825,7 +942,7 @@
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>13pt</FontSize>
                       <FontWeight>Bold</FontWeight>
-                      <TextDecoration>Underline</TextDecoration>
+                      <Color>White</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -838,8 +955,12 @@
             <Left>0.5in</Left>
             <Height>0.3in</Height>
             <Width>5.7in</Width>
-            <ZIndex>38</ZIndex>
-            <Style />
+            <ZIndex>39</ZIndex>
+            <Style>
+              <BackgroundColor>#1f6f8b</BackgroundColor>
+              <BackgroundGradientType>LeftRight</BackgroundGradientType>
+              <BackgroundGradientEndColor>#4e93ac</BackgroundGradientEndColor>
+            </Style>
           </Textbox>
           <Textbox Name="SNoLabelBox">
             <Paragraphs>
@@ -850,6 +971,7 @@
                     <Style>
                       <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
+                      <Color>#1f6f8b</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -860,7 +982,7 @@
             <Left>6.3in</Left>
             <Height>0.3in</Height>
             <Width>0.3in</Width>
-            <ZIndex>39</ZIndex>
+            <ZIndex>40</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="SNoValueBox">
@@ -872,19 +994,27 @@
                     <Style>
                       <FontSize>13pt</FontSize>
                       <FontWeight>Bold</FontWeight>
-                      <Color>Red</Color>
+                      <Color>#1f6f8b</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <Top>1.1in</Top>
             <Left>6.65in</Left>
             <Height>0.35in</Height>
             <Width>1in</Width>
-            <ZIndex>40</ZIndex>
-            <Style />
+            <ZIndex>41</ZIndex>
+            <Style>
+              <Border>
+                <Color>#c8962c</Color>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>#fbeed9</BackgroundColor>
+            </Style>
           </Textbox>
           <Textbox Name="InstructionsBox">
             <CanGrow>true</CanGrow>
@@ -897,6 +1027,7 @@
                       <FontStyle>Italic</FontStyle>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>9pt</FontSize>
+                      <Color>#5a6b7b</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -907,7 +1038,7 @@
             <Left>0.5in</Left>
             <Height>0.4in</Height>
             <Width>7.2in</Width>
-            <ZIndex>41</ZIndex>
+            <ZIndex>42</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="OrderLabelBox">
@@ -920,6 +1051,7 @@
                       <FontStyle>Italic</FontStyle>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontWeight>Bold</FontWeight>
+                      <Color>#1f6f8b</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -930,7 +1062,7 @@
             <Left>0.5in</Left>
             <Height>0.25in</Height>
             <Width>4in</Width>
-            <ZIndex>42</ZIndex>
+            <ZIndex>43</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="DeptLabel">
@@ -941,6 +1073,8 @@
                     <Value>Department...</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>#1f6f8b</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -951,7 +1085,7 @@
             <Left>0.5in</Left>
             <Height>0.25in</Height>
             <Width>1.1in</Width>
-            <ZIndex>43</ZIndex>
+            <ZIndex>44</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="DeptValue">
@@ -972,7 +1106,7 @@
             <Left>1.6in</Left>
             <Height>0.25in</Height>
             <Width>5.6in</Width>
-            <ZIndex>44</ZIndex>
+            <ZIndex>45</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -991,6 +1125,8 @@
                     <Value>Name...</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>#1f6f8b</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1001,7 +1137,7 @@
             <Left>0.5in</Left>
             <Height>0.25in</Height>
             <Width>0.7in</Width>
-            <ZIndex>45</ZIndex>
+            <ZIndex>46</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="NameValue">
@@ -1022,11 +1158,12 @@
             <Left>1.2in</Left>
             <Height>0.25in</Height>
             <Width>4.3in</Width>
-            <ZIndex>46</ZIndex>
+            <ZIndex>47</ZIndex>
             <Style>
               <BottomBorder>
+                <Color>#c8962c</Color>
                 <Style>Solid</Style>
-                <Width>0.75pt</Width>
+                <Width>1pt</Width>
               </BottomBorder>
             </Style>
           </Textbox>
@@ -1038,6 +1175,8 @@
                     <Value>Date</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>#1f6f8b</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1048,7 +1187,7 @@
             <Left>5.55in</Left>
             <Height>0.25in</Height>
             <Width>0.4in</Width>
-            <ZIndex>47</ZIndex>
+            <ZIndex>48</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="DateValue1">
@@ -1069,11 +1208,12 @@
             <Left>5.95in</Left>
             <Height>0.25in</Height>
             <Width>1.25in</Width>
-            <ZIndex>48</ZIndex>
+            <ZIndex>49</ZIndex>
             <Style>
               <BottomBorder>
+                <Color>#c8962c</Color>
                 <Style>Solid</Style>
-                <Width>0.75pt</Width>
+                <Width>1pt</Width>
               </BottomBorder>
             </Style>
           </Textbox>
@@ -1095,7 +1235,7 @@
             <Left>0.5in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
-            <ZIndex>49</ZIndex>
+            <ZIndex>50</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="SignBlank1">
@@ -1114,11 +1254,12 @@
             <Left>1.5in</Left>
             <Height>0.25in</Height>
             <Width>2in</Width>
-            <ZIndex>50</ZIndex>
+            <ZIndex>51</ZIndex>
             <Style>
               <BottomBorder>
+                <Color>#c8962c</Color>
                 <Style>Solid</Style>
-                <Width>0.75pt</Width>
+                <Width>1pt</Width>
               </BottomBorder>
             </Style>
           </Textbox>
@@ -1130,6 +1271,8 @@
                     <Value>Remarks Department Head...</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>#1f6f8b</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1140,7 +1283,7 @@
             <Left>0.5in</Left>
             <Height>0.25in</Height>
             <Width>2in</Width>
-            <ZIndex>51</ZIndex>
+            <ZIndex>52</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="RemarksHeadValue">
@@ -1161,11 +1304,12 @@
             <Left>2.5in</Left>
             <Height>0.25in</Height>
             <Width>4.7in</Width>
-            <ZIndex>52</ZIndex>
+            <ZIndex>53</ZIndex>
             <Style>
               <BottomBorder>
+                <Color>#c8962c</Color>
                 <Style>Solid</Style>
-                <Width>0.75pt</Width>
+                <Width>1pt</Width>
               </BottomBorder>
             </Style>
           </Textbox>
@@ -1187,7 +1331,7 @@
             <Left>0.5in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
-            <ZIndex>53</ZIndex>
+            <ZIndex>54</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="SignBlank2">
@@ -1206,11 +1350,12 @@
             <Left>1.5in</Left>
             <Height>0.25in</Height>
             <Width>2in</Width>
-            <ZIndex>54</ZIndex>
+            <ZIndex>55</ZIndex>
             <Style>
               <BottomBorder>
+                <Color>#c8962c</Color>
                 <Style>Solid</Style>
-                <Width>0.75pt</Width>
+                <Width>1pt</Width>
               </BottomBorder>
             </Style>
           </Textbox>
@@ -1232,7 +1377,7 @@
             <Left>3.7in</Left>
             <Height>0.25in</Height>
             <Width>0.4in</Width>
-            <ZIndex>55</ZIndex>
+            <ZIndex>56</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="DateBlank2">
@@ -1251,11 +1396,12 @@
             <Left>4.1in</Left>
             <Height>0.25in</Height>
             <Width>1.5in</Width>
-            <ZIndex>56</ZIndex>
+            <ZIndex>57</ZIndex>
             <Style>
               <BottomBorder>
+                <Color>#c8962c</Color>
                 <Style>Solid</Style>
-                <Width>0.75pt</Width>
+                <Width>1pt</Width>
               </BottomBorder>
             </Style>
           </Textbox>
@@ -1283,7 +1429,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.22in</Height>
+                  <Height>0.32in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -1360,14 +1506,16 @@
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="hdrProcOnly">
+                          <CanGrow>true</CanGrow>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
                                   <Value>FOR PROCUREMENT ONLY</Value>
                                   <Style>
-                                    <FontSize>7.5pt</FontSize>
+                                    <FontSize>6.5pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>#1f6f8b</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1378,31 +1526,18 @@
                           </Paragraphs>
                           <Style>
                             <Border>
+                              <Color>#1f6f8b</Color>
                               <Style>Solid</Style>
                               <Width>0.5pt</Width>
                             </Border>
+                            <BackgroundColor>#fbeed9</BackgroundColor>
                           </Style>
                         </Textbox>
+                        <ColSpan>2</ColSpan>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="hdr5a">
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style />
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style />
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
+                    <TablixCell />
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
@@ -1419,6 +1554,7 @@
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1429,9 +1565,11 @@
                           </Paragraphs>
                           <Style>
                             <Border>
+                              <Color>#1f6f8b</Color>
                               <Style>Solid</Style>
                               <Width>0.5pt</Width>
                             </Border>
+                            <BackgroundColor>#1f6f8b</BackgroundColor>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -1447,6 +1585,7 @@
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1457,9 +1596,11 @@
                           </Paragraphs>
                           <Style>
                             <Border>
+                              <Color>#1f6f8b</Color>
                               <Style>Solid</Style>
                               <Width>0.5pt</Width>
                             </Border>
+                            <BackgroundColor>#1f6f8b</BackgroundColor>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -1475,6 +1616,7 @@
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1485,9 +1627,11 @@
                           </Paragraphs>
                           <Style>
                             <Border>
+                              <Color>#1f6f8b</Color>
                               <Style>Solid</Style>
                               <Width>0.5pt</Width>
                             </Border>
+                            <BackgroundColor>#1f6f8b</BackgroundColor>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -1503,6 +1647,7 @@
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1513,9 +1658,11 @@
                           </Paragraphs>
                           <Style>
                             <Border>
+                              <Color>#1f6f8b</Color>
                               <Style>Solid</Style>
                               <Width>0.5pt</Width>
                             </Border>
+                            <BackgroundColor>#1f6f8b</BackgroundColor>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -1531,6 +1678,7 @@
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1541,9 +1689,11 @@
                           </Paragraphs>
                           <Style>
                             <Border>
+                              <Color>#1f6f8b</Color>
                               <Style>Solid</Style>
                               <Width>0.5pt</Width>
                             </Border>
+                            <BackgroundColor>#1f6f8b</BackgroundColor>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -1559,6 +1709,7 @@
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1569,9 +1720,11 @@
                           </Paragraphs>
                           <Style>
                             <Border>
+                              <Color>#1f6f8b</Color>
                               <Style>Solid</Style>
                               <Width>0.5pt</Width>
                             </Border>
+                            <BackgroundColor>#1f6f8b</BackgroundColor>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -1601,6 +1754,7 @@
                           </Paragraphs>
                           <Style>
                             <Border>
+                              <Color>#1f6f8b</Color>
                               <Style>Solid</Style>
                               <Width>0.5pt</Width>
                             </Border>
@@ -1627,6 +1781,7 @@
                           </Paragraphs>
                           <Style>
                             <Border>
+                              <Color>#1f6f8b</Color>
                               <Style>Solid</Style>
                               <Width>0.5pt</Width>
                             </Border>
@@ -1642,7 +1797,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Description.Value</Value>
+                                  <Value>=Fields!Specification.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                   </Style>
@@ -1653,6 +1808,7 @@
                           </Paragraphs>
                           <Style>
                             <Border>
+                              <Color>#1f6f8b</Color>
                               <Style>Solid</Style>
                               <Width>0.5pt</Width>
                             </Border>
@@ -1680,6 +1836,7 @@
                           </Paragraphs>
                           <Style>
                             <Border>
+                              <Color>#1f6f8b</Color>
                               <Style>Solid</Style>
                               <Width>0.5pt</Width>
                             </Border>
@@ -1707,6 +1864,7 @@
                           </Paragraphs>
                           <Style>
                             <Border>
+                              <Color>#1f6f8b</Color>
                               <Style>Solid</Style>
                               <Width>0.5pt</Width>
                             </Border>
@@ -1734,6 +1892,7 @@
                           </Paragraphs>
                           <Style>
                             <Border>
+                              <Color>#1f6f8b</Color>
                               <Style>Solid</Style>
                               <Width>0.5pt</Width>
                             </Border>
@@ -1762,9 +1921,11 @@
                           </Paragraphs>
                           <Style>
                             <Border>
+                              <Color>#1f6f8b</Color>
                               <Style>Solid</Style>
                               <Width>0.5pt</Width>
                             </Border>
+                            <BackgroundColor>#fbeed9</BackgroundColor>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -1785,9 +1946,11 @@
                           </Paragraphs>
                           <Style>
                             <Border>
+                              <Color>#1f6f8b</Color>
                               <Style>Solid</Style>
                               <Width>0.5pt</Width>
                             </Border>
+                            <BackgroundColor>#fbeed9</BackgroundColor>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -1808,9 +1971,11 @@
                           </Paragraphs>
                           <Style>
                             <Border>
+                              <Color>#1f6f8b</Color>
                               <Style>Solid</Style>
                               <Width>0.5pt</Width>
                             </Border>
+                            <BackgroundColor>#fbeed9</BackgroundColor>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -1831,9 +1996,11 @@
                           </Paragraphs>
                           <Style>
                             <Border>
+                              <Color>#1f6f8b</Color>
                               <Style>Solid</Style>
                               <Width>0.5pt</Width>
                             </Border>
+                            <BackgroundColor>#fbeed9</BackgroundColor>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -1854,9 +2021,11 @@
                           </Paragraphs>
                           <Style>
                             <Border>
+                              <Color>#1f6f8b</Color>
                               <Style>Solid</Style>
                               <Width>0.5pt</Width>
                             </Border>
+                            <BackgroundColor>#fbeed9</BackgroundColor>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -1872,6 +2041,7 @@
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1882,9 +2052,11 @@
                           </Paragraphs>
                           <Style>
                             <Border>
+                              <Color>#1f6f8b</Color>
                               <Style>Solid</Style>
                               <Width>0.5pt</Width>
                             </Border>
+                            <BackgroundColor>#1f6f8b</BackgroundColor>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -1920,9 +2092,9 @@
             <DataSetName>DataSet_Result</DataSetName>
             <Top>4in</Top>
             <Left>0.5in</Left>
-            <Height>1.18in</Height>
+            <Height>1.28in</Height>
             <Width>7in</Width>
-            <ZIndex>57</ZIndex>
+            <ZIndex>58</ZIndex>
             <Style />
           </Tablix>
           <Textbox Name="DateReqLabel">
@@ -1944,7 +2116,7 @@
             <Left>0.5in</Left>
             <Height>0.25in</Height>
             <Width>1.5in</Width>
-            <ZIndex>58</ZIndex>
+            <ZIndex>59</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="DateRecvLabel">
@@ -1968,7 +2140,7 @@
             <Left>3.6in</Left>
             <Height>0.25in</Height>
             <Width>1.5in</Width>
-            <ZIndex>59</ZIndex>
+            <ZIndex>60</ZIndex>
             <Style />
           </Textbox>
           <Textbox Name="BudgetQLabel">
@@ -1990,7 +2162,7 @@
             <Left>0.5in</Left>
             <Height>0.25in</Height>
             <Width>2.6in</Width>
-            <ZIndex>60</ZIndex>
+            <ZIndex>61</ZIndex>
             <Style />
           </Textbox>
           <Rectangle Name="YesBox1">
@@ -1998,7 +2170,7 @@
             <Left>3.3in</Left>
             <Height>0.2in</Height>
             <Width>0.2in</Width>
-            <ZIndex>61</ZIndex>
+            <ZIndex>62</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -2025,7 +2197,7 @@
             <Left>3.15in</Left>
             <Height>0.25in</Height>
             <Width>0.3in</Width>
-            <ZIndex>62</ZIndex>
+            <ZIndex>63</ZIndex>
             <Style />
           </Textbox>
           <Rectangle Name="CEONoBox">
@@ -2033,7 +2205,7 @@
             <Left>3.45in</Left>
             <Height>0.2in</Height>
             <Width>0.2in</Width>
-            <ZIndex>63</ZIndex>
+            <ZIndex>64</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
@@ -2041,12 +2213,169 @@
               </Border>
             </Style>
           </Rectangle>
+          <Textbox Name="CEORemarksLabel">
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Remarks</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>9.4in</Top>
+            <Left>0.5in</Left>
+            <Height>0.25in</Height>
+            <Width>0.7in</Width>
+            <ZIndex>65</ZIndex>
+            <Style />
+          </Textbox>
+          <Textbox Name="CEORemarksBlank">
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>9.4in</Top>
+            <Left>1.2in</Left>
+            <Height>0.25in</Height>
+            <Width>6.5in</Width>
+            <ZIndex>66</ZIndex>
+            <Style>
+              <BottomBorder>
+                <Color>#c8962c</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
+            </Style>
+          </Textbox>
+          <Textbox Name="CEOSignatureLabel">
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Signature:</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>9.65in</Top>
+            <Left>0.5in</Left>
+            <Height>0.25in</Height>
+            <Width>0.7in</Width>
+            <ZIndex>67</ZIndex>
+            <Style />
+          </Textbox>
+          <Textbox Name="CEOSignatureBlank">
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>9.65in</Top>
+            <Left>1.2in</Left>
+            <Height>0.25in</Height>
+            <Width>3in</Width>
+            <ZIndex>68</ZIndex>
+            <Style>
+              <BottomBorder>
+                <Color>#c8962c</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
+            </Style>
+          </Textbox>
+          <Textbox Name="CEODateLabel">
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Date</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>9.65in</Top>
+            <Left>4.5in</Left>
+            <Height>0.25in</Height>
+            <Width>0.4in</Width>
+            <ZIndex>69</ZIndex>
+            <Style />
+          </Textbox>
+          <Textbox Name="CEODateBlank">
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>9.65in</Top>
+            <Left>4.9in</Left>
+            <Height>0.25in</Height>
+            <Width>1.5in</Width>
+            <ZIndex>70</ZIndex>
+            <Style>
+              <BottomBorder>
+                <Color>#c8962c</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
+            </Style>
+          </Textbox>
+          <Rectangle Name="FormBorder">
+            <Top>2.2in</Top>
+            <Left>0.4in</Left>
+            <Height>7.95in</Height>
+            <Width>7.3in</Width>
+            <ZIndex>71</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+                <Width>0.75pt</Width>
+                <Color>#1F6F8B</Color>
+              </Border>
+            </Style>
+          </Rectangle>
         </ReportItems>
-        <Height>9.5in</Height>
+        <Height>10.35in</Height>
         <Style />
       </Body>
       <Width>8.2in</Width>
       <Page>
+        <PageHeight>11in</PageHeight>
+        <PageWidth>8.5in</PageWidth>
         <LeftMargin>0.15in</LeftMargin>
         <RightMargin>0.15in</RightMargin>
         <TopMargin>0.2in</TopMargin>
@@ -2056,76 +2385,12 @@
       </Page>
     </ReportSection>
   </ReportSections>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>b1a2c3d4-e5f6-4711-9a12-000000000001</rd:ReportID>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Fields>
-        <Field Name="PurchaseReqNo">
-          <DataField>PurchaseReqNo</DataField>
-        </Field>
-        <Field Name="Department">
-          <DataField>Department</DataField>
-        </Field>
-        <Field Name="RequestorName">
-          <DataField>RequestorName</DataField>
-        </Field>
-        <Field Name="Date">
-          <DataField>Date</DataField>
-        </Field>
-        <Field Name="RemarksDeptHead">
-          <DataField>RemarksDeptHead</DataField>
-        </Field>
-        <Field Name="CompanyInformation_Name">
-          <DataField>CompanyInformation_Name</DataField>
-        </Field>
-        <Field Name="CompanyInformation_Picture">
-          <DataField>CompanyInformation_Picture</DataField>
-        </Field>
-        <Field Name="CompanyAddress">
-          <DataField>CompanyAddress</DataField>
-        </Field>
-        <Field Name="CompanyTelephone">
-          <DataField>CompanyTelephone</DataField>
-        </Field>
-        <Field Name="CommunicationOnline">
-          <DataField>CommunicationOnline</DataField>
-        </Field>
-        <Field Name="SNo">
-          <DataField>SNo</DataField>
-        </Field>
-        <Field Name="Document_No_">
-          <DataField>Document_No_</DataField>
-        </Field>
-        <Field Name="Description">
-          <DataField>Description</DataField>
-        </Field>
-        <Field Name="Specification">
-          <DataField>Specification</DataField>
-        </Field>
-        <Field Name="Quantity">
-          <DataField>Quantity</DataField>
-        </Field>
-        <Field Name="QuantityFormat">
-          <DataField>QuantityFormat</DataField>
-        </Field>
-        <Field Name="Direct_Unit_Cost">
-          <DataField>Direct_Unit_Cost</DataField>
-        </Field>
-        <Field Name="Direct_Unit_CostFormat">
-          <DataField>Direct_Unit_CostFormat</DataField>
-        </Field>
-        <Field Name="Line_Amount">
-          <DataField>Line_Amount</DataField>
-        </Field>
-        <Field Name="Line_AmountFormat">
-          <DataField>Line_AmountFormat</DataField>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-    </DataSet>
-  </DataSets>
 </Report>
