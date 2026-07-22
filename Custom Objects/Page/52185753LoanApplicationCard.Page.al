@@ -359,7 +359,7 @@ page 52185753 "Loan Application Card"
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Approved Amount';
-                    Editable = false;// 
+                    // Editable = false;// 
                 }
                 field("Amount To Disburse"; Rec."Amount To Disburse")
                 {
