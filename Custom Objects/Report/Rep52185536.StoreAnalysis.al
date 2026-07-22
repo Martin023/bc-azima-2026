@@ -2,7 +2,7 @@ namespace AzimaBC.AzimaBC;
 
 using Microsoft.Inventory.Item;
 
-report 52185524 "Store Analysis"
+report 52185536 "Store Analysis"
 {
     ApplicationArea = All;
     Caption = 'Store Analysis';
