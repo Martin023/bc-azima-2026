@@ -9,7 +9,7 @@ pageextension 52185455 "Purchase Quotes Subform Ext" extends "Purchase Quote Sub
         modify("Line Amount")
         {
             ApplicationArea = Basic;
-            visible = true;
+            visible = false;
             Caption = 'Line Amount Incl. VAT';
         }
 
@@ -50,8 +50,8 @@ pageextension 52185455 "Purchase Quotes Subform Ext" extends "Purchase Quote Sub
 
         modify("Direct Unit Cost")
         {
+            Visible = false;
             ApplicationArea = Basic;
-            showmandatory = true;
             caption = 'Direct Unit Cost Incl. VAT';
         }
 
