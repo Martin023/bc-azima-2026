@@ -5318,8 +5318,10 @@ codeunit 52186507 "Members Portal Integration"
         SearchMember: record Members;
         Employee: record "HR Employees";
         theLeaveApplication: Record "HR Leave Application";
-        CustomApprovals: Codeunit "Custom Approvals Codeunit";
+        HRSetup: Record "HR Setup";
+        NoSeriesMgt: Codeunit "No. Series";
         VarVariant: Variant;
+        CustomApprovals: Codeunit "Custom Approvals Codeunit";
 
         EndDate: Date;
         MorningHalfDay: Boolean;
@@ -5355,7 +5357,32 @@ codeunit 52186507 "Members Portal Integration"
 
                 theLeaveApplication.Init;
 
-                if TryCreateStaffLeaveApplication(theLeaveApplication, Employee, CopyStr(leave_type.AsValue.AsText, 1, MaxStrLen(theLeaveApplication."Leave Type")), start_date.AsValue.AsDate, EndDate, MorningHalfDay, AfternoonHalfDay, CopyStr(reliever.AsValue.AsText, 1, MaxStrLen(theLeaveApplication.Reliever))) then begin
+                HRSetup.Get;
+                HRSetup.TestField(HRSetup."Leave Application Nos.");
+                theLeaveApplication."Application Code" := NoSeriesMgt.GetNextNo(HRSetup."Leave Application Nos.");
+
+                theLeaveApplication."Source of Application" := theLeaveApplication."Source of Application"::"Staff Portal";
+                theLeaveApplication."Applicant Staff No." := Employee."No.";
+                theLeaveApplication.Validate("Applicant Staff No.");
+
+                theLeaveApplication."Leave Type" := leave_type.AsValue.AsText;
+                theLeaveApplication.Validate("Leave Type");
+                PopulateLeaveBalance(theLeaveApplication);
+
+                theLeaveApplication."Start Date" := start_date.AsValue.AsDate;
+                theLeaveApplication.Validate("Start Date");
+
+                theLeaveApplication."Is Morning Half Day" := MorningHalfDay;
+                theLeaveApplication."Is Afternoon Half Day" := AfternoonHalfDay;
+
+                theLeaveApplication."End Date" := EndDate;
+                theLeaveApplication.Validate("End Date");
+                theLeaveApplication.Reliever := reliever.AsValue.AsText;
+                theLeaveApplication."Global Dimension 1 Code" := Employee."Global Dimension 1 Code";
+                theLeaveApplication."Global Dimension 2 Code" := Employee."Global Dimension 2 Code";
+                theLeaveApplication.Validate(Reliever);
+
+                if theLeaveApplication.Insert(true) then begin
                     VarVariant := theLeaveApplication;
                     CustomApprovals.OnSendDocForApproval(VarVariant);
 
@@ -5382,40 +5409,6 @@ codeunit 52186507 "Members Portal Integration"
         ResponseObject.WriteTo(Response);
 
         exit(Response);
-    end;
-
-    [TryFunction]
-    local procedure TryCreateStaffLeaveApplication(var theLeaveApplication: Record "HR Leave Application"; Employee: Record "HR Employees"; LeaveTypeCode: Code[30]; StartDateValue: Date; EndDateValue: Date; MorningHalfDay: Boolean; AfternoonHalfDay: Boolean; RelieverNo: Code[50])
-    var
-        HRSetup: Record "HR Setup";
-        NoSeriesMgt: Codeunit "No. Series";
-    begin
-        HRSetup.Get;
-        HRSetup.TestField(HRSetup."Leave Application Nos.");
-        theLeaveApplication."Application Code" := NoSeriesMgt.GetNextNo(HRSetup."Leave Application Nos.");
-
-        theLeaveApplication."Source of Application" := theLeaveApplication."Source of Application"::"Staff Portal";
-        theLeaveApplication."Applicant Staff No." := Employee."No.";
-        theLeaveApplication.Validate("Applicant Staff No.");
-
-        theLeaveApplication."Leave Type" := LeaveTypeCode;
-        theLeaveApplication.Validate("Leave Type");
-        PopulateLeaveBalance(theLeaveApplication);
-
-        theLeaveApplication."Start Date" := StartDateValue;
-        theLeaveApplication.Validate("Start Date");
-
-        theLeaveApplication."Is Morning Half Day" := MorningHalfDay;
-        theLeaveApplication."Is Afternoon Half Day" := AfternoonHalfDay;
-
-        theLeaveApplication."End Date" := EndDateValue;
-        theLeaveApplication.Validate("End Date");
-        theLeaveApplication.Reliever := RelieverNo;
-        theLeaveApplication."Global Dimension 1 Code" := Employee."Global Dimension 1 Code";
-        theLeaveApplication."Global Dimension 2 Code" := Employee."Global Dimension 2 Code";
-        theLeaveApplication.Validate(Reliever);
-
-        theLeaveApplication.Insert(true);
     end;
 
     local procedure GetStaffLeaveApplicationRequests(Payload: JsonObject): Text
@@ -5562,7 +5555,7 @@ codeunit 52186507 "Members Portal Integration"
         HRLeaveLedgerEntries: Record "HR Leave Ledger Entries";
     begin
         if not HREmp.Get(TheLeaveApplication."Applicant Staff No.") then
-            Error('Employee %1 was not found while calculating leave balance', TheLeaveApplication."Applicant Staff No.");
+            exit;
 
         HRLeaveCal.Reset();
         HRLeaveCal.SetRange("Current Leave Calendar", true);
@@ -5662,7 +5655,7 @@ codeunit 52186507 "Members Portal Integration"
                     ResponseObject.Add('data', Datum);
                 end else begin
                     ResponseObject.Add('status', 'ERROR');
-                    ResponseObject.Add('status_description', GetLastErrorText(true));
+                    ResponseObject.Add('status_description', GetLastErrorText(false));
                 end;
             end;
         end else begin
