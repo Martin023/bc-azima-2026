@@ -157,15 +157,19 @@ page 52185821 "Cashier Transaction Lines"
                     Ctrans.Reset;
                     Ctrans.SetRange(Ctrans.No, Rec."Transaction No");
                     if Ctrans.Find('-') then begin
+                        CtransLines.Reset();
+                        CtransLines.setrange("Transaction No",Ctrans.No);
+                        if CtransLines.FindSet then
+                            CtransLines.DeleteAll();
 
                         Loans.Reset;
                         Loans.SetRange(Loans."Member No.", Ctrans."Member No.");
                         if Loans.Find('-') then begin
                             repeat
 
-                                Loans.CalcFields(Loans."Total Balance", Loans."Outstanding Interest");
+                                Loans.CalcFields(Loans."Total Balance", Loans."Outstanding Interest","Outstanding Balance");
 
-                                if (Loans."Total Balance") > 0 then begin
+                                if (Loans."Outstanding Balance") > 0 then begin
 
                                     CtransLines.Init;
                                     CtransLines."Member No" := Ctrans."Member No.";
@@ -176,16 +180,16 @@ page 52185821 "Cashier Transaction Lines"
                                     CtransLines.Amount := Loans.Repayment;//"Outstanding Bills";
                                     CtransLines.Type := CtransLines.Type::Credit;
                                     CtransLines.Insert;
+                                end;
 
+                                if (Loans."Outstanding Interest") > 0 then begin
                                     CtransLines.Init;
                                     CtransLines."Member No" := Ctrans."Member No.";
                                     CtransLines."Transaction No" := Ctrans.No;
                                     CtransLines."Account No" := Loans."Loan Account";
                                     CtransLines."Transaction Type" := CtransLines."Transaction Type"::"Interest Paid";
                                     CtransLines."Loan No" := Loans."Loan No.";
-                                    if Loans."Outstanding Interest" > 0 then begin
-                                        CtransLines.Amount := Loans."Outstanding Interest";
-                                    end;
+                                    CtransLines.Amount := Loans."Outstanding Interest";
                                     CtransLines.Type := CtransLines.Type::Credit;
                                     CtransLines.Insert;
 
