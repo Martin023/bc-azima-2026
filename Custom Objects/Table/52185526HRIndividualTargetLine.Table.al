@@ -65,15 +65,15 @@ table 52185526 "HR Individual Target Line"
         }
         field(14; "Self Rating"; Decimal)
         {
-            MaxValue = 5;
+            MaxValue = 100;
         }
         field(15; "Supervisor Rating"; Decimal)
         {
-            MaxValue = 5;
+            MaxValue = 100;
         }
         field(16; "Agreed Rating"; Decimal)
         {
-            MaxValue = 5;
+            MaxValue = 100;
 
             trigger OnValidate()
             begin

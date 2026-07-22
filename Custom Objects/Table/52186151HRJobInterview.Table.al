@@ -32,7 +32,7 @@ table 52186151 "HR Job Interview"
         }
         field(6; Score; Decimal)
         {
-            MaxValue = 5;
+            MaxValue = 100;
 
             trigger OnValidate()
             begin
@@ -88,9 +88,9 @@ table 52186151 "HR Job Interview"
         field(17; "Interviewer Name"; Text[100])
         {
         }
-        field(18;"Requisition No.";code[50])
+        field(18; "Requisition No."; code[50])
         {
-            TableRelation= "HR Employee Requisitions"."Requisition No.";
+            TableRelation = "HR Employee Requisitions"."Requisition No.";
         }
     }
 
