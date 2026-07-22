@@ -11,7 +11,7 @@
       <am:Name>PBIRB</am:Name>
       <am:Version>15.7.1813.16</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-07-21T13:58:13.8448271Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-07-22T08:34:27.5392074Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -24,142 +24,6 @@
       <rd:DataSourceID>e6b120dd-7177-49e7-a90d-a6678a155a94</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="CompanyInformation_Name">
-          <DataField>CompanyInformation_Name</DataField>
-        </Field>
-        <Field Name="CompanyInformation_Picture">
-          <DataField>CompanyInformation_Picture</DataField>
-        </Field>
-        <Field Name="CompanyAddress">
-          <DataField>CompanyAddress</DataField>
-        </Field>
-        <Field Name="CompanyTelephone">
-          <DataField>CompanyTelephone</DataField>
-        </Field>
-        <Field Name="CommunicationOnline">
-          <DataField>CommunicationOnline</DataField>
-        </Field>
-        <Field Name="BankAccountNo">
-          <DataField>BankAccountNo</DataField>
-        </Field>
-        <Field Name="BankAccountName">
-          <DataField>BankAccountName</DataField>
-        </Field>
-        <Field Name="BankAccountBalanceLCY">
-          <DataField>BankAccountBalanceLCY</DataField>
-        </Field>
-        <Field Name="BankAccountBalanceLCYFormat">
-          <DataField>BankAccountBalanceLCYFormat</DataField>
-        </Field>
-        <Field Name="BalanceLastStatement">
-          <DataField>BalanceLastStatement</DataField>
-        </Field>
-        <Field Name="BalanceLastStatementFormat">
-          <DataField>BalanceLastStatementFormat</DataField>
-        </Field>
-        <Field Name="StatementNo">
-          <DataField>StatementNo</DataField>
-        </Field>
-        <Field Name="StatementDate">
-          <DataField>StatementDate</DataField>
-        </Field>
-        <Field Name="StatementEndingBalance">
-          <DataField>StatementEndingBalance</DataField>
-        </Field>
-        <Field Name="StatementEndingBalanceFormat">
-          <DataField>StatementEndingBalanceFormat</DataField>
-        </Field>
-        <Field Name="TotalAppliedAmount">
-          <DataField>TotalAppliedAmount</DataField>
-        </Field>
-        <Field Name="TotalAppliedAmountFormat">
-          <DataField>TotalAppliedAmountFormat</DataField>
-        </Field>
-        <Field Name="TotalDifference">
-          <DataField>TotalDifference</DataField>
-        </Field>
-        <Field Name="TotalDifferenceFormat">
-          <DataField>TotalDifferenceFormat</DataField>
-        </Field>
-        <Field Name="TotalBalanceonBankAccount">
-          <DataField>TotalBalanceonBankAccount</DataField>
-        </Field>
-        <Field Name="TotalBalanceonBankAccountFormat">
-          <DataField>TotalBalanceonBankAccountFormat</DataField>
-        </Field>
-        <Field Name="Document_No_">
-          <DataField>Document_No_</DataField>
-        </Field>
-        <Field Name="Applied_Amount">
-          <DataField>Applied_Amount</DataField>
-        </Field>
-        <Field Name="Applied_AmountFormat">
-          <DataField>Applied_AmountFormat</DataField>
-        </Field>
-        <Field Name="Applied_Entries">
-          <DataField>Applied_Entries</DataField>
-        </Field>
-        <Field Name="External_Document_No">
-          <DataField>External_Document_No</DataField>
-        </Field>
-        <Field Name="Transaction_Date">
-          <DataField>Transaction_Date</DataField>
-        </Field>
-        <Field Name="Description">
-          <DataField>Description</DataField>
-        </Field>
-        <Field Name="Debit_Amount">
-          <DataField>Debit_Amount</DataField>
-        </Field>
-        <Field Name="Debit_AmountFormat">
-          <DataField>Debit_AmountFormat</DataField>
-        </Field>
-        <Field Name="Credit_Amount">
-          <DataField>Credit_Amount</DataField>
-        </Field>
-        <Field Name="Credit_AmountFormat">
-          <DataField>Credit_AmountFormat</DataField>
-        </Field>
-        <Field Name="AppliedDocument_No_">
-          <DataField>AppliedDocument_No_</DataField>
-        </Field>
-        <Field Name="AppliedExternal_Document_No">
-          <DataField>AppliedExternal_Document_No</DataField>
-        </Field>
-        <Field Name="AppliedTransaction_Date">
-          <DataField>AppliedTransaction_Date</DataField>
-        </Field>
-        <Field Name="AppliedDescription">
-          <DataField>AppliedDescription</DataField>
-        </Field>
-        <Field Name="AppliedDebit_Amount">
-          <DataField>AppliedDebit_Amount</DataField>
-        </Field>
-        <Field Name="AppliedDebit_AmountFormat">
-          <DataField>AppliedDebit_AmountFormat</DataField>
-        </Field>
-        <Field Name="AppliedCredit_Amount">
-          <DataField>AppliedCredit_Amount</DataField>
-        </Field>
-        <Field Name="AppliedCredit_AmountFormat">
-          <DataField>AppliedCredit_AmountFormat</DataField>
-        </Field>
-        <Field Name="StatementStatus">
-          <DataField>StatementStatus</DataField>
-        </Field>
-        <Field Name="IsApplied">
-          <DataField>IsApplied</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -385,12 +249,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -428,4 +286,140 @@ End Function
 </Code>
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompanyInformation_Name">
+          <DataField>CompanyInformation_Name</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Picture">
+          <DataField>CompanyInformation_Picture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="BankAccountNo">
+          <DataField>BankAccountNo</DataField>
+        </Field>
+        <Field Name="BankAccountName">
+          <DataField>BankAccountName</DataField>
+        </Field>
+        <Field Name="BankAccountBalanceLCY">
+          <DataField>BankAccountBalanceLCY</DataField>
+        </Field>
+        <Field Name="BankAccountBalanceLCYFormat">
+          <DataField>BankAccountBalanceLCYFormat</DataField>
+        </Field>
+        <Field Name="BalanceLastStatement">
+          <DataField>BalanceLastStatement</DataField>
+        </Field>
+        <Field Name="BalanceLastStatementFormat">
+          <DataField>BalanceLastStatementFormat</DataField>
+        </Field>
+        <Field Name="StatementNo">
+          <DataField>StatementNo</DataField>
+        </Field>
+        <Field Name="StatementDate">
+          <DataField>StatementDate</DataField>
+        </Field>
+        <Field Name="StatementEndingBalance">
+          <DataField>StatementEndingBalance</DataField>
+        </Field>
+        <Field Name="StatementEndingBalanceFormat">
+          <DataField>StatementEndingBalanceFormat</DataField>
+        </Field>
+        <Field Name="TotalAppliedAmount">
+          <DataField>TotalAppliedAmount</DataField>
+        </Field>
+        <Field Name="TotalAppliedAmountFormat">
+          <DataField>TotalAppliedAmountFormat</DataField>
+        </Field>
+        <Field Name="TotalDifference">
+          <DataField>TotalDifference</DataField>
+        </Field>
+        <Field Name="TotalDifferenceFormat">
+          <DataField>TotalDifferenceFormat</DataField>
+        </Field>
+        <Field Name="TotalBalanceonBankAccount">
+          <DataField>TotalBalanceonBankAccount</DataField>
+        </Field>
+        <Field Name="TotalBalanceonBankAccountFormat">
+          <DataField>TotalBalanceonBankAccountFormat</DataField>
+        </Field>
+        <Field Name="Document_No_">
+          <DataField>Document_No_</DataField>
+        </Field>
+        <Field Name="Applied_Amount">
+          <DataField>Applied_Amount</DataField>
+        </Field>
+        <Field Name="Applied_AmountFormat">
+          <DataField>Applied_AmountFormat</DataField>
+        </Field>
+        <Field Name="Applied_Entries">
+          <DataField>Applied_Entries</DataField>
+        </Field>
+        <Field Name="External_Document_No">
+          <DataField>External_Document_No</DataField>
+        </Field>
+        <Field Name="Transaction_Date">
+          <DataField>Transaction_Date</DataField>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+        </Field>
+        <Field Name="Debit_Amount">
+          <DataField>Debit_Amount</DataField>
+        </Field>
+        <Field Name="Debit_AmountFormat">
+          <DataField>Debit_AmountFormat</DataField>
+        </Field>
+        <Field Name="Credit_Amount">
+          <DataField>Credit_Amount</DataField>
+        </Field>
+        <Field Name="Credit_AmountFormat">
+          <DataField>Credit_AmountFormat</DataField>
+        </Field>
+        <Field Name="AppliedDocument_No_">
+          <DataField>AppliedDocument_No_</DataField>
+        </Field>
+        <Field Name="AppliedExternal_Document_No">
+          <DataField>AppliedExternal_Document_No</DataField>
+        </Field>
+        <Field Name="AppliedTransaction_Date">
+          <DataField>AppliedTransaction_Date</DataField>
+        </Field>
+        <Field Name="AppliedDescription">
+          <DataField>AppliedDescription</DataField>
+        </Field>
+        <Field Name="AppliedDebit_Amount">
+          <DataField>AppliedDebit_Amount</DataField>
+        </Field>
+        <Field Name="AppliedDebit_AmountFormat">
+          <DataField>AppliedDebit_AmountFormat</DataField>
+        </Field>
+        <Field Name="AppliedCredit_Amount">
+          <DataField>AppliedCredit_Amount</DataField>
+        </Field>
+        <Field Name="AppliedCredit_AmountFormat">
+          <DataField>AppliedCredit_AmountFormat</DataField>
+        </Field>
+        <Field Name="StatementStatus">
+          <DataField>StatementStatus</DataField>
+        </Field>
+        <Field Name="IsApplied">
+          <DataField>IsApplied</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>
