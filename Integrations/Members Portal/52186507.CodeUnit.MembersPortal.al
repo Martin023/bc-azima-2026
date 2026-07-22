@@ -6308,7 +6308,6 @@ codeunit 52186507 "Members Portal Integration"
         ApplicantFOSAAccountNo: Text;
         TotalGuarantorCapacity: Decimal;
         IsEmergencyLoan: Boolean;
-        EmergencyLoanProdFac: Record "Product Factory";
         SeenGuarantorNos: List of [Code[20]];
     begin
         Payload.Get('identifier_type', identifier_type);
@@ -6375,9 +6374,9 @@ codeunit 52186507 "Members Portal Integration"
                 TheLoanApplication."Is Self Guarantee" := false;
             end;
 
-            IsEmergencyLoan := EmergencyLoanProdFac.Get(loan_product.AsValue.AsText) and EmergencyLoanProdFac."Emergency Loan";
+            IsEmergencyLoan := ApplicationLoanProduct."Emergency Loan";
 
-            if IsEmergencyLoan then begin
+            if IsEmergencyLoan and TheLoanApplication."Is Self Guarantee" then begin
                 ApplicantFOSAAccountNo := SkyMbankingTrans.GetMemberFosaAcc(SearchMember);
                 QualifiedAmount := SkyMbankingTrans.GetEmergencyLoanQualifiedAmount(SearchMember."No.", loan_product.AsValue.AsText, ApplicantFOSAAccountNo, EligibilityFailReason);
 
