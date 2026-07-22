@@ -228,10 +228,10 @@ table 52185796 "Cashier Transaction Lines"
                     end;
             end;
         }
-        field(8; Type; Option)
+        field(8; Type; Enum "Gen. Journal Account Type")
         {
-            OptionCaption = 'Savings,Credit,G/L Account';
-            OptionMembers = Savings,Credit,"G/L Account";
+            // = 'Savings,Credit,G/L Account';
+            ValuesAllowed = Savings,Credit,"G/L Account";
         }
         field(9; "Product Type"; Code[80])
         {

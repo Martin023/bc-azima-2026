@@ -2503,6 +2503,13 @@ codeunit 52186507 "Members Portal Integration"
                     Datum.Add('source_unit', Format(ProductFactory."Source Unit"));
                     Datum.Add('maximum_amount', Format(ProductFactory."Maximum Loan Amount"));
                     Datum.Add('minimum_amount', Format(ProductFactory."Minimum Loan Amount"));
+                    if ProductFactory."Allow Topup" then begin
+                        ProductFactory."Minimum Loan Amount" += GlobalFunctions.GetMemberLoanProductTotalBalance(
+                                SearchMember."No.",
+                                ProductFactory."Product ID"
+                            );
+                        Datum.Replace('loan_type_min_amount', ProductFactory."Minimum Loan Amount");
+                    end;
                     Datum.Add('maximum_installments', ProductFactory."Ordinary Default Intallments");
                     Datum.Add('is_mobile_loan', ProductFactory."Mobile Loan");
                     Datum.Add('repayment_mode', Format(ProductFactory."Repay Mode"));
@@ -6308,7 +6315,6 @@ codeunit 52186507 "Members Portal Integration"
         ApplicantFOSAAccountNo: Text;
         TotalGuarantorCapacity: Decimal;
         IsEmergencyLoan: Boolean;
-        EmergencyLoanProdFac: Record "Product Factory";
         SeenGuarantorNos: List of [Code[20]];
     begin
         Payload.Get('identifier_type', identifier_type);
@@ -6375,9 +6381,9 @@ codeunit 52186507 "Members Portal Integration"
                 TheLoanApplication."Is Self Guarantee" := false;
             end;
 
-            IsEmergencyLoan := EmergencyLoanProdFac.Get(loan_product.AsValue.AsText) and EmergencyLoanProdFac."Emergency Loan";
+            IsEmergencyLoan := ApplicationLoanProduct."Emergency Loan";
 
-            if IsEmergencyLoan then begin
+            if IsEmergencyLoan and TheLoanApplication."Is Self Guarantee" then begin
                 ApplicantFOSAAccountNo := SkyMbankingTrans.GetMemberFosaAcc(SearchMember);
                 QualifiedAmount := SkyMbankingTrans.GetEmergencyLoanQualifiedAmount(SearchMember."No.", loan_product.AsValue.AsText, ApplicantFOSAAccountNo, EligibilityFailReason);
 

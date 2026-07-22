@@ -962,10 +962,6 @@ page 52185753 "Loan Application Card"
                     ProdFac: record "Product Factory";
                     LRepaymentSchedule: record "Ideal Repayment Schedule";
                 begin
-
-                    LRepaymentSchedule.Reset;
-                    LRepaymentSchedule.SetRange(LRepaymentSchedule."Loan No.", Rec."Loan No.");
-                    LRepaymentSchedule.DeleteAll();
                     LoanProcess.GenerateSchedule(Rec, True);
 
                     Commit;

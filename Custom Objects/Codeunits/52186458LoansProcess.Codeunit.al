@@ -2060,7 +2060,7 @@ Codeunit 52186458 "Loans Process"
         InterestDate := PostingDate;
         //Noofdays := (CalcDate('CM', PostingDate)) - (CalcDate('-CM', PostingDate)) + 1;
         GeneralSetUp.Get();
-      
+
         LoansRec.reset;
         LoansRec.SetRange("Loan No.", LoanCode);
         LoansRec.SetFilter("Date Filter", '..%1', PostingDate);
@@ -5172,9 +5172,9 @@ Codeunit 52186458 "Loans Process"
                                 ExcemptProductCharges.setrange("Charge Code", PCharges."Charge Code");
                                 ExcemptProductCharges.setrange(Excempt, true);
                                 if not ExcemptProductCharges.Find('-') then begin
-                                    if PCharges."Charging Option" = PCharges."Charging Option"::"On Approved Amount" then
-                                        BaseAmount := LoanApp."Approved Amount" else
-                                        BaseAmount := TopUp."Principle Top Up";
+                                    // if PCharges."Charging Option" = PCharges."Charging Option"::"On Approved Amount" then
+                                    //     BaseAmount := LoanApp."Approved Amount" else
+                                    BaseAmount := TopUp."Principle Top Up";
                                     //Non Prorate
                                     LineNo := LineNo + 10000;
                                     AccType := Acctype::"G/L Account";
@@ -7098,7 +7098,8 @@ Codeunit 52186458 "Loans Process"
                 if Prodfac."Nature of Loan Type" = ProdFac."Nature of Loan Type"::"Emergency Loan" then begin
                     if prodFac."Compute Interest Due on Postin" = Prodfac."Compute Interest Due on Postin"::"Full Period Interest" then begin
                         LoanAmount := LoansR."Approved Amount" + round((LoansR."Approved Amount" * LoansR.Interest / 12 * 0.01 * LoansR.Installments), 1, '>');
-                        LBalance := LoansR."Approved Amount";
+                        LBalance := LoanAmount;
+                        LPrincipal := LoanAmount / LoansR.Installments;
                     end;
                 end;
                 if LoansR."Grace Period" <> Dateformula then begin
@@ -7123,7 +7124,7 @@ Codeunit 52186458 "Loans Process"
                     InstalNo := InstalNo + 1;
                     if (Prodfac."Interest Recovered Upfront") or (ProdFac."Compute Interest Due on Postin" = ProdFac."Compute Interest Due on Postin"::"Full Period Interest") or (LoansR.Interest = 0) or (ProdFac."Interest Rate (Max.)" = 0) then begin
                         LInterest := 0;
-                        LPrincipal := TotalMRepay - LInterest;
+
                     end
                     else begin
                         if LoansR."Interest Calculation Method" = LoansR."Interest Calculation Method"::Amortised then begin
@@ -7185,7 +7186,7 @@ Codeunit 52186458 "Loans Process"
                             RunDate := CalcDate('1W', RunDate)
                         else
                             if LoansR."Repayment Frequency" = LoansR."Repayment Frequency"::Monthly then
-                                RunDate := CalcDate('1M+CM', RunDate)
+                                RunDate := CalcDate('1M', RunDate)
                             else
                                 if LoansR."Repayment Frequency" = LoansR."Repayment Frequency"::Quarterly then
                                     RunDate := CalcDate('1Q', RunDate)

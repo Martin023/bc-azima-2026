@@ -8,7 +8,7 @@ Report 52185659 "SASRA Loan Categorization"
     {
         dataitem(Loans; Loans)
         {
-            CalcFields = "Outstanding Balance", "Outstanding Interest";
+            CalcFields = "Outstanding Balance", "Outstanding Interest", "Total Balance";
             DataItemTableView = sorting("Loan No.") where("Dummy Appraisal" = filter(false), "Loan Product Type" = filter(<> ''));
             RequestFilterFields = "Loan No.", "Employer Code", "Date Filter", "Staff No", "Member No.", "Application Date";
 
@@ -26,6 +26,7 @@ Report 52185659 "SASRA Loan Categorization"
                     intProgressI := 0;
                     TimeProgress := TIME;
                 END;
+                Loans.CalcFields("Total Balance");
 
                 if Loans."Total Balance" <= 0 then begin
                     if not SASRACategory.Get(Loans."Loan No.") then begin
