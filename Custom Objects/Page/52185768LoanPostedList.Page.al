@@ -644,7 +644,7 @@ page 52185768 "Loan Posted List"
                 trigger OnAction()
 
                 begin
-                    REPORT.Run(Report::"SASRA Loan Categorization", true, true, Rec);
+                    REPORT.Run(Report::"SASRA Loan Categorization", true, true);
                 end;
             }
         }
