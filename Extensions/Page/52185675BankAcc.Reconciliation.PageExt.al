@@ -2,10 +2,6 @@
 PageExtension 52185675 pageextension52185675 extends "Bank Acc. Reconciliation"
 {
 
-    //Unsupported feature: Property Modification (PromotedActionCategoriesML) on ""Bank Acc. Reconciliation"(Page 379)".
-
-
-    //Unsupported feature: Property Insertion (DeleteAllowed) on ""Bank Acc. Reconciliation"(Page 379)".
     PromotedActionCategories = ',,,,EDMS';
 
     layout
@@ -141,6 +137,27 @@ PageExtension 52185675 pageextension52185675 extends "Bank Acc. Reconciliation"
         }
         addafter(SuggestLines)
         {
+            action(BankReconReport)
+            {
+                ApplicationArea = Basic;
+                Caption = 'Bank Acc .Reconcilliation ReportII';
+                Image = Report2;
+                promoted = true;
+                PromotedIsBig = true;
+                PromotedCategory = process;
+
+                trigger OnAction()
+                var
+                    BankRecon: record "Bank Acc. Reconciliation";
+                begin
+                    BankRecon.Reset();
+                    BankRecon.SetRange("Bank Account No.", rec."Bank Account No.");
+                    BankRecon.SetRange("Statement No.", rec."Statement No.");
+                    if BankRecon.Find('-') then
+                        Report.run(Report::"Bank Reconcilliation Report II", true, false, BankRecon);
+                end;
+            }
+
             action(BankReconRep)
             {
                 ApplicationArea = Basic;
