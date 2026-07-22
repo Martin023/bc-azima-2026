@@ -508,6 +508,7 @@ table 52185704 "Savings Account Application"
         }
         field(50; "Loan Disbursement Account"; Boolean)
         {
+            Caption = 'Default Account';
         }
         field(51; "Loan Security Inclination"; Option)
         {
