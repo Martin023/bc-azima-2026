@@ -317,11 +317,26 @@ table 52185889 "Receipts Header"
             IF ("Account Type" = CONST(Credit)) "Credit Accounts";
 
             trigger OnValidate()
+            var
+                BalBroughtForwardAmt : Decimal;
+                BankLedgEntry : Record "Bank Account Ledger Entry";
             begin
                 if bank.Get("Account No.") then begin
                     bank.CalcFields("Balance (LCY)");
                     "Bank Name" := bank.Name;
                     "SinkFund Account  Balance" := bank."Balance (LCY)";
+                    if bank."Bank Type" = bank."Bank Type"::Cashier then begin
+                        clear(BalBroughtForwardAmt);
+                        BankLedgEntry.Reset();
+                        BankLedgEntry.SetRange("Bank Account No.", "Account No.");
+                        BankLedgEntry.SetFilter("Posting Date", '<%1', Today);
+                        BankLedgEntry.CalcSums("Amount (LCY)");
+                        BalBroughtForwardAmt := BankLedgEntry."Amount (LCY)";
+                        if BankLedgEntry.FindFirst() then begin
+                            if BalBroughtForwardAmt <> 0 then
+                                Error('End of Day has not been performed for the previous business day.');
+                        end;
+                    end;
                 end;
             end;
         }

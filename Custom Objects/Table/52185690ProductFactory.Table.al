@@ -216,6 +216,7 @@ table 52185690 "Product Factory"
         }
         field(41; "Loan Disbursement Account"; Boolean)
         {
+            Caption = 'Default Account';
         }
         field(42; "Charge Closure Before Maturity"; Decimal)
         {

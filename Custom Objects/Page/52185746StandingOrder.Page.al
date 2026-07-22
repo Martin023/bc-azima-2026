@@ -508,6 +508,7 @@ page 52185746 "Standing Order"
                         StoLines.Reset();
                         SavingsREC.Reset;
                         SavingsREC.SetRange(SavingsREC."Member No.", rec."Member No.");
+                        SavingsREC.SetFilter(SavingsREC."No.",'<>%1',Rec."Source Account No.");
                         SavingsREC.setfilter("Product Category", '<>%1&<>%2', SavingsREC."Product Category"::"Unallocated Fund", SavingsREC."Product Category"::"Entrance Fee");
                         if SavingsREC.Find('-') then begin
                             repeat

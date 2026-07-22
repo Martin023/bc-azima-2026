@@ -1476,7 +1476,7 @@ Codeunit 52186456 "Sacco Transactions"
 
                         if SavingsACC.Get(CashierTrans."Account No") then begin
                             if Employer.Get(SavingsACC."Employer Code") then begin
-                                if Employer."Internal Staff Employer" then
+                                if Employer."Dont Charge Transactions" then
                                     ChargeAmount := 0;
                             end;
                         end;
@@ -1696,7 +1696,7 @@ Codeunit 52186456 "Sacco Transactions"
 
                         if SavingsACC.Get(CashierTrans."Account No") then begin
                             if Employer.Get(SavingsACC."Employer Code") then begin
-                                if Employer."Internal Staff Employer" then
+                                if Employer."Dont Charge Transactions" then
                                     ChargeAmount := 0;
                             end;
                         end;
@@ -1975,7 +1975,7 @@ Codeunit 52186456 "Sacco Transactions"
                     //Dont charge Transactional Charges
                         if SavingsACC.Get(CashierTrans."Account No") then begin
                             if Employer.Get(SavingsACC."Employer Code") then begin
-                                if Employer."Internal Staff Employer" then
+                                if Employer."Dont Charge Transactions" then
                                     ChargeAmount := 0;
                             end;
                         end;
@@ -3404,6 +3404,7 @@ Codeunit 52186456 "Sacco Transactions"
         TariffDetails: Record "Tiered Charges Lines";
         TChargeAmount: Decimal;
         TransType: Record "Transaction Types";
+        SMSChargeAmt : Decimal;
     begin
         // with CashierTrans do
         begin
@@ -3600,6 +3601,112 @@ Codeunit 52186456 "Sacco Transactions"
                     end;
                 end;
 
+
+                SMSChargeAmt := 0;
+                GenSetup.get;
+                TransactionCharges.Reset;
+                TransactionCharges.SetRange(TransactionCharges."Transaction Type", GenSetup."Loan SMS Charge");
+                if TransactionCharges.FindSet then begin
+                    repeat
+                        if (TransactionCharges."Transaction Charge Category" = TransactionCharges."transaction charge category"::Normal) or
+                        (TransactionCharges."Transaction Charge Category" = TransactionCharges."transaction charge category"::"Stamp Duty") then begin
+
+                            LineNo := LineNo + 10000;
+
+                            SMSChargeAmt := 0;
+                            if TransactionCharges."Charge Type" = TransactionCharges."charge type"::"% of Amount" = true then
+                                SMSChargeAmt := (CashierTrans.Amount * TransactionCharges."Percentage of Amount") * 0.01
+                            else
+                                SMSChargeAmt := TransactionCharges."Charge Amount";
+
+                            if TransactionCharges."Charge Type" = TransactionCharges."charge type"::Staggered then begin
+
+                                TransactionCharges.TestField(TransactionCharges."Staggered Charge Code");
+
+                                TariffDetails.Reset;
+                                TariffDetails.SetRange(TariffDetails.Code, TransactionCharges."Staggered Charge Code");
+                                if TariffDetails.FindSet then begin
+                                    repeat
+                                        if (CashierTrans.Amount >= TariffDetails."Lower Limit") and (CashierTrans.Amount <= TariffDetails."Upper Limit") then begin
+                                            if TariffDetails."Use Percentage" = true then begin
+                                                SMSChargeAmt := CashierTrans.Amount * TariffDetails.Percentage * 0.01;
+                                            end else begin
+                                                SMSChargeAmt := TariffDetails."Charge Amount";
+                                            end;
+                                        end;
+                                    until TariffDetails.Next = 0;
+                                end;
+                            end;
+
+                            //Dont charge Transactional Charges
+                            // if SavingsACC.Get(CashierTrans."Account No") then begin
+                            //     if Employer.Get(SavingsACC."Employer Code") then begin
+                            //         if Employer."Dont Charge Transactions" then
+                            //             ChargeAmount := 0;
+                            //     end;
+                            // end;
+                            //Dont charge Transactional Charges
+
+                            GenJournalLine.Init;
+                            GenJournalLine."Journal Template Name" := JTemplate;
+                            GenJournalLine."Journal Batch Name" := JBatch;
+                            GenJournalLine."Document No." := CashierTrans.No;
+                            GenJournalLine."Line No." := LineNo;
+                            GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
+                            GenJournalLine."Account No." := CashierTrans."Account No";
+                            GenJournalLine."External Document No." := CashierTrans."ID No";
+                            GenJournalLine.Validate(GenJournalLine."Account No.");
+                            GenJournalLine."Posting Date" := CashierTrans."Transaction Date";
+                            GenJournalLine.Description := TransactionCharges.Description;
+                            GenJournalLine."Currency Code" := CashierTrans."Currency Code";
+                            GenJournalLine.Validate(GenJournalLine."Currency Code");
+                            GenJournalLine.Amount := SMSChargeAmt;
+                            GenJournalLine.Validate(GenJournalLine.Amount);
+                            GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
+                            GenJournalLine."Bal. Account No." := TransactionCharges."G/L Account";
+                            GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
+                            GenJournalLine."Shortcut Dimension 1 Code" := CashierTrans."Global Dimension 1 Code";
+                            GenJournalLine."Shortcut Dimension 2 Code" := CashierTrans."Global Dimension 2 Code";
+                            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                            if GenJournalLine.Amount <> 0 then
+                                GenJournalLine.Insert;
+
+
+                            //IF NOT TransactionCharges."Transaction Charge Category" THEN  BEGIN
+
+                            if (TransactionCharges."Transaction Charge Category" <> TransactionCharges."transaction charge category"::"Stamp Duty") and
+                            (TransactionCharges."Recover Excise Duty" = true) then begin
+                                //Excise Duty
+                                LineNo := LineNo + 10000;
+
+                                GenJournalLine.Init;
+                                GenJournalLine."Journal Template Name" := JTemplate;
+                                GenJournalLine."Journal Batch Name" := JBatch;
+                                GenJournalLine."Document No." := CashierTrans.No;
+                                GenJournalLine."Line No." := LineNo;
+                                GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
+                                GenJournalLine."Account No." := CashierTrans."Account No";
+                                GenJournalLine.Validate(GenJournalLine."Account No.");
+                                GenJournalLine."Posting Date" := CashierTrans."Transaction Date";
+                                GenJournalLine.Description := TransactionCharges.Description + ' excise duty.';
+                                GenJournalLine."Currency Code" := CashierTrans."Currency Code";
+                                GenJournalLine.Validate(GenJournalLine."Currency Code");
+                                GenJournalLine.Amount := (SMSChargeAmt * GenSetup."Excise Duty (%)") * 0.01;
+                                GenJournalLine.Validate(GenJournalLine.Amount);
+                                GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
+                                GenJournalLine."Bal. Account No." := GenSetup."Excise Duty G/L";
+                                GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
+                                GenJournalLine."Shortcut Dimension 1 Code" := CashierTrans."Global Dimension 1 Code";
+                                GenJournalLine."Shortcut Dimension 2 Code" := CashierTrans."Global Dimension 2 Code";
+                                GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                                GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                                if GenJournalLine.Amount <> 0 then
+                                    GenJournalLine.Insert;
+                            end;
+                        end;
+                    until TransactionCharges.Next = 0;
+                end;
 
 
 
