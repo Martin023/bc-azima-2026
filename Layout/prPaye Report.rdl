@@ -11,67 +11,6 @@
       <rd:DataSourceID>88e869ad-45cb-4353-bb1f-54f98c746b6f</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="ReportForNavId_1000000008">
-          <DataField>ReportForNavId_1000000008</DataField>
-        </Field>
-        <Field Name="EmployeeCode_prSalaryCard">
-          <DataField>EmployeeCode_prSalaryCard</DataField>
-        </Field>
-        <Field Name="CompanyInfoName">
-          <DataField>CompanyInfoName</DataField>
-        </Field>
-        <Field Name="EmpName">
-          <DataField>EmpName</DataField>
-        </Field>
-        <Field Name="SNo">
-          <DataField>SNo</DataField>
-        </Field>
-        <Field Name="Pension">
-          <DataField>Pension</DataField>
-        </Field>
-        <Field Name="PensionFormat">
-          <DataField>PensionFormat</DataField>
-        </Field>
-        <Field Name="Paye">
-          <DataField>Paye</DataField>
-        </Field>
-        <Field Name="PayeFormat">
-          <DataField>PayeFormat</DataField>
-        </Field>
-        <Field Name="TotalAllowances">
-          <DataField>TotalAllowances</DataField>
-        </Field>
-        <Field Name="TotalAllowancesFormat">
-          <DataField>TotalAllowancesFormat</DataField>
-        </Field>
-        <Field Name="BasicPay">
-          <DataField>BasicPay</DataField>
-        </Field>
-        <Field Name="BasicPayFormat">
-          <DataField>BasicPayFormat</DataField>
-        </Field>
-        <Field Name="PayrollPeriod">
-          <DataField>PayrollPeriod</DataField>
-        </Field>
-        <Field Name="TaxablePay">
-          <DataField>TaxablePay</DataField>
-        </Field>
-        <Field Name="TaxablePayFormat">
-          <DataField>TaxablePayFormat</DataField>
-        </Field>
-        <Field Name="pinNo">
-          <DataField>pinNo</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -1379,12 +1318,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -1424,4 +1357,65 @@ End Function
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="ReportForNavId_1000000008">
+          <DataField>ReportForNavId_1000000008</DataField>
+        </Field>
+        <Field Name="EmployeeCode_prSalaryCard">
+          <DataField>EmployeeCode_prSalaryCard</DataField>
+        </Field>
+        <Field Name="CompanyInfoName">
+          <DataField>CompanyInfoName</DataField>
+        </Field>
+        <Field Name="EmpName">
+          <DataField>EmpName</DataField>
+        </Field>
+        <Field Name="SNo">
+          <DataField>SNo</DataField>
+        </Field>
+        <Field Name="Pension">
+          <DataField>Pension</DataField>
+        </Field>
+        <Field Name="PensionFormat">
+          <DataField>PensionFormat</DataField>
+        </Field>
+        <Field Name="Paye">
+          <DataField>Paye</DataField>
+        </Field>
+        <Field Name="PayeFormat">
+          <DataField>PayeFormat</DataField>
+        </Field>
+        <Field Name="TotalAllowances">
+          <DataField>TotalAllowances</DataField>
+        </Field>
+        <Field Name="TotalAllowancesFormat">
+          <DataField>TotalAllowancesFormat</DataField>
+        </Field>
+        <Field Name="BasicPay">
+          <DataField>BasicPay</DataField>
+        </Field>
+        <Field Name="BasicPayFormat">
+          <DataField>BasicPayFormat</DataField>
+        </Field>
+        <Field Name="PayrollPeriod">
+          <DataField>PayrollPeriod</DataField>
+        </Field>
+        <Field Name="TaxablePay">
+          <DataField>TaxablePay</DataField>
+        </Field>
+        <Field Name="TaxablePayFormat">
+          <DataField>TaxablePayFormat</DataField>
+        </Field>
+        <Field Name="pinNo">
+          <DataField>pinNo</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>
