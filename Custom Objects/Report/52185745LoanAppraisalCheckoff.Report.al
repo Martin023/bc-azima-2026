@@ -950,8 +950,11 @@ Report 52185745 "Loan Appraisal Checkoff"
                                         or (AppraisalSal.Type = AppraisalSal.Type::SHIF) or (AppraisalSal.Type = AppraisalSal.Type::HLEVY) then
                                             TDeductions := TDeductions + AppraisalSal.Amount
                                         else
-                                            if AppraisalSal.Type = AppraisalSal.Type::Pension then
-                                                TPension := TPension + AppraisalSal.Amount
+                                            if AppraisalSal.Type = AppraisalSal.Type::Pension then begin
+                                                TPension := TPension + AppraisalSal.Amount;
+                                                TDeductions := TDeductions + TPension;
+                                            end
+
                                             else if AppraisalSal.type = AppraisalSal.type::"House Allowance" then
                                                 THouseAllow := THouseAllow + AppraisalSal.Amount
                             until AppraisalSal.Next = 0;
@@ -1111,9 +1114,9 @@ Report 52185745 "Loan Appraisal Checkoff"
                     if QualifyingAmount > TotalGuaranteed then
                         QualifyingAmount := TotalGuaranteed;
 
-                    Loans."Recommended Amount" := ROUND(QualifyingAmount, 1, '<');
-                    Loans."Approved Amount" := ROUND(QualifyingAmount, 1, '<');
-                    Loans."Amount To Disburse" := ROUND(QualifyingAmount, 1, '<');
+                    Loans."Recommended Amount" := ROUND(QualifyingAmount, 100, '<');
+                    Loans."Approved Amount" := ROUND(QualifyingAmount, 100, '<');
+                    Loans."Amount To Disburse" := ROUND(QualifyingAmount, 100, '<');
                 end else begin
                     QualifyingAmount := Loans."Requested Amount";
                     // if ProductFactory."Secured Loan" then begin
@@ -1125,9 +1128,9 @@ Report 52185745 "Loan Appraisal Checkoff"
                     if QualifyingAmount > TotalGuaranteed then
                         QualifyingAmount := TotalGuaranteed;
                     // end;
-                    Loans."Recommended Amount" := ROUND(QualifyingAmount, 1, '<');
-                    Loans."Approved Amount" := ROUND(QualifyingAmount, 1, '<');
-                    Loans."Amount To Disburse" := ROUND(QualifyingAmount, 1, '<');
+                    Loans."Recommended Amount" := ROUND(QualifyingAmount, 100, '<');
+                    Loans."Approved Amount" := ROUND(QualifyingAmount, 100, '<');
+                    Loans."Amount To Disburse" := ROUND(QualifyingAmount, 100, '<');
                 end;
 
 
