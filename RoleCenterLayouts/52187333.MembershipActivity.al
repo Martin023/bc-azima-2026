@@ -49,11 +49,13 @@ page 52187333 "Membership Activity cue"
                             CustomCuesCodeunit.DrillDownMembersCreatedToday();
                         end;
                     }
-                    field("Total Members"; Rec."Total Members")
+                    field("Total Members"; AllMembers)
                     {
                         Caption = 'Active Members';
                         Image = Funnel;
+                        DecimalPlaces = 0 : 0;
                         ApplicationArea = All;
+                        Style = Favorable;
                         ToolTip = 'Specifies the value of Active Members.';
                         trigger OnDrillDown()
                         var
@@ -209,6 +211,9 @@ page 52187333 "Membership Activity cue"
     begin
         // CalculateCues();
         MemberRec.Reset();
+        MemberRec.SetRange(Status, MemberRec.Status::Active);
+        AllMembers := MemberRec.Count();
+        MemberRec.Reset();
         MemberRec.SetCurrentKey(Status);
         MemberRec.SetRange(Status, MemberRec.Status::Dormant);
         DormantMembers := MemberRec.Count();
@@ -234,5 +239,6 @@ page 52187333 "Membership Activity cue"
         DormantMembers: Decimal;
         DeceasedMembers: Decimal;
         WithdrawnMembers: Decimal;
+        AllMembers: Decimal;
 
 }
