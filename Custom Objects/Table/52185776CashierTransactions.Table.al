@@ -832,8 +832,8 @@ table 52185776 "Cashier Transactions"
             BankLedgEntry.CalcSums("Amount (LCY)");
             BalBroughtForwardAmt := BankLedgEntry."Amount (LCY)";
             if BankLedgEntry.FindFirst() then begin
-                if BalBroughtForwardAmt <> 0 then
-                    Error('End of Day has not been performed for the previous business day.');
+                // if BalBroughtForwardAmt <> 0 then
+                //     Error('End of Day has not been performed for the previous business day.');
             end;
             "Till Code" := BUserSetup."Default  Bank";
             bankacc.Reset;

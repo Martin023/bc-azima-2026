@@ -1387,8 +1387,8 @@ page 52185794 "Cashier Transactions"
         BankLedger.CalcSums("Amount (LCY)");
         BalBroughtForwardAmt := BankLedger."Amount (LCY)";
         if BankLedger.FindFirst() then begin
-            if BalBroughtForwardAmt <> 0 then
-                Error('End of Day has not been performed for the previous business day.');
+            // if BalBroughtForwardAmt <> 0 then
+            //     Error('End of Day has not been performed for the previous business day.');
         end;
         
         if Trans.Get(Rec.No) then begin
