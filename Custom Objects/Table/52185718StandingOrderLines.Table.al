@@ -127,7 +127,7 @@ table 52185718 "Standing Order Lines"
 
                     if Loans."Loan Account" = '' then error('Kindly specify all Loan accounts before proceeding');
                     "Destination Account No." := Loans."Loan Account";
-                    "Destination Account Name" := Loans."Member No.";
+                    "Destination Account Name" := Loans."Member Name";
                     "Destination Account Balance" := Loans."Total Balance";
                     "Product Description" := Loans."Loan Product Type Name";
                 end;

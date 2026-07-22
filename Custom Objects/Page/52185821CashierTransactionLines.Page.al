@@ -110,6 +110,21 @@ page 52185821 "Cashier Transaction Lines"
                             Visible = true;
                         }
                     }
+                    group(Differences)
+                    {
+                        Caption = 'Unallocated Amount';
+                        field(UnAllocatedAmount; UnAllocatedAmount)
+                        {
+                            ApplicationArea = Basic, Suite;
+                            AutoFormatType = 1;
+                            Caption = 'Unallocated Amount';
+                            Editable = false;
+                            Visible = true;
+                            Style = Unfavorable;
+                            StyleExpr = UnAllocatedAmount <> 0;
+                        }
+
+                    }
                 }
             }
         }
@@ -221,11 +236,15 @@ page 52185821 "Cashier Transaction Lines"
         CashierTransactionLines: Record "Cashier Transaction Lines";
         TotalAmount: Decimal;
         CashTrans: Record "Cashier Transactions";
+        UnAllocatedAmount : Decimal;
 
     //[Scope('OnPrem')]
     procedure CalcBal()
+    var 
+        Header : record "Cashier Transactions";
     begin
         TotalAmount := 0;
+        clear(UnAllocatedAmount);
         CashierTransactionLines.Reset;
         CashierTransactionLines.SetRange("Transaction No", Rec."Transaction No");
         CashierTransactionLines.CalcSums(Amount);
@@ -233,6 +252,9 @@ page 52185821 "Cashier Transaction Lines"
         if CashTrans.Get(Rec."Transaction No") then begin
             Rec."Member No" := CashTrans."Member No.";
         end;
+        if not Header.Get(Rec."Transaction No") then
+            exit;
+        UnAllocatedAmount := Header.Amount - TotalAmount;
     end;
 }
 

@@ -6385,8 +6385,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                 ' - ' + MpesaTransBuffer."Receiver Name" +
                                                 ' ' + MpesaTransBuffer."Receiver Account" +
                                                 ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                ' has been completed successfully. M-PESA Ref: ' + MpesaTransBuffer."Beneficiary Reference" +
-                                                '. Ref: ' + theReference;
+                                                ' has been completed successfully. M-PESA Ref: ' + MpesaTransBuffer."Beneficiary Reference";
                                             end;
 
                                             if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Utility Payment" then begin
@@ -6615,8 +6614,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                     ' - ' + MpesaTransBuffer."Receiver Name" +
                                                                     ' ' + MpesaTransBuffer."Receiver Account" +
                                                                     ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                    ' has been completed successfully. M-PESA Ref: ' + MpesaTransBuffer."Beneficiary Reference" +
-                                                                    '. Ref: ' + theReference;
+                                                                    ' has been completed successfully. M-PESA Ref: ' + MpesaTransBuffer."Beneficiary Reference";
 
                                                                     SkySMS.SendSms(
                                                                         SMSSource::BANK_TRANSFER,
@@ -6779,8 +6777,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                         ' - ' + MpesaTransBuffer."Receiver Name" +
                                                                         ' ' + MpesaTransBuffer."Receiver Account" +
                                                                         ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                                                        ' has been completed successfully. M-PESA Ref: ' + MpesaTransBuffer."Beneficiary Reference" +
-                                                                        '. Ref: ' + theReference;
+                                                                        ' has been completed successfully. M-PESA Ref: ' + MpesaTransBuffer."Beneficiary Reference";
 
                                                                         SkySMS.SendSms(
                                                                             SMSSource::BANK_TRANSFER,

@@ -67,6 +67,13 @@ page 52185864 "Signatories List"
         }
         area(factboxes)
         {
+            part("Approved Images"; "Member Picture & Signature")
+            {
+                ApplicationArea = Basic;
+
+                Caption = 'Approved Images';
+                SubPageLink = "Member No" = FIELD("Member No.");
+            }
             part("Member FactBox"; "Member FactBox")
             {
                 ApplicationArea = Basic;

@@ -3,7 +3,7 @@ page 52185822 "Account Transfer"
     //DeleteAllowed = false;
     PageType = Card;
     SourceTable = "Account Transfer Header";
-    PromotedActionCategories = 'New,Process,Reports,Workflow Actions,Suggest Member Accounts,Clear Destination Accounts,Refresh,Send SMS';
+    PromotedActionCategories = 'New,Process,Reports,Workflow Actions,Member Accounts,Clear Destination Accounts,Refresh,Send SMS';
     DeleteAllowed = FALSE;
     layout
     {
@@ -657,7 +657,7 @@ page 52185822 "Account Transfer"
                 //         Message('Source loan Accounts Updated Successfully');
                 //     end;
                 // }
-                action("Suggest Group Member Accounts")
+            action("Suggest Group Member Accounts")
             {
                 ApplicationArea = Basic, Suite;
                 Caption = 'Suggest Group Member Destinations';
@@ -671,6 +671,7 @@ page 52185822 "Account Transfer"
                     SavingsREC: Record "Savings Accounts";
                     TransSource: Record "Account Transfer Source";
                     TransDestin: Record "Account Transfer Destination";
+                    CreditREC : Record "Loans";
                 begin
 
                     rec.TestField(posted, false);
@@ -692,7 +693,7 @@ page 52185822 "Account Transfer"
                             if SavingsREC.Find('-') then begin
                                 repeat
                                     TransDestin.Init;
-                                    TransDestin."Entry No." := TransDestin."Entry No." + 1;
+                                    TransDestin."Entry No." := GetNextEntryNo(Rec.No);
                                     TransDestin."No." := Rec.No;
                                     TransDestin."Destination Account Type" := TransDestin."Destination Account Type"::Savings;
                                     TransDestin."Destination Account No." := SavingsREC."No.";
@@ -704,6 +705,30 @@ page 52185822 "Account Transfer"
                                     TransDestin.Insert(true);
                                     TransDestin.Validate(TransDestin."Destination Account No.");
                                 until SavingsREC.Next = 0;
+                            end;
+
+                            CreditREC.Reset;
+                            CreditREC.SetRange(CreditREC."Member No.", Signatories."Member No.");
+                            if CreditREC.Find('-') then begin
+                                repeat
+                                    CreditREC.CalcFields(CreditREC."Total Balance");
+                                    if CreditREC."Total Balance" > 0 then begin
+                                        TransDestin.Init;
+                                        TransDestin."Entry No." := GetNextEntryNo(Rec.No);
+                                        TransDestin."No." := Rec.No;
+                                        TransDestin."Destination Account Type" := TransDestin."Destination Account Type"::Credit;
+                                        TransDestin."Destination Account No." := CreditREC."Loan Account";
+                                        TransDestin."Destination Account Name" := CreditREC."Member No.";
+                                        TransDestin."Product Name" := CreditREC."Loan Product Type Name";
+                                        TransDestin."Product Code" := CreditREC."Loan Product Type";
+                                        TransDestin."Transfer Type" := Rec."Transfer Type";
+                                        TransDestin."Destination Transaction Type" := TransDestin."Destination Transaction Type"::Armotised;
+                                        TransDestin."Member No." := CreditREC."Member No.";
+                                        TransDestin.Insert(true);
+                                        TransDestin.Validate(TransDestin."Destination Loan No.", Creditrec."Loan No.");
+                                        TransDestin.Modify;
+                                    end;
+                                until CreditREC.Next = 0;
                             end;
                         until Signatories.next = 0;
                     end;
@@ -994,6 +1019,17 @@ page 52185822 "Account Transfer"
             RejectApproved := true
         else
             RejectApproved := false;
+    end;
+
+    procedure GetNextEntryNo(DocNo: Code[100]): Integer
+    var
+        TD: Record "Account Transfer Destination";
+    begin
+        TD.Reset();
+        TD.SetRange("No.", DocNo);
+        if TD.FindLast() then
+            exit(TD."Entry No." + 1);
+        exit(1);
     end;
 }
 

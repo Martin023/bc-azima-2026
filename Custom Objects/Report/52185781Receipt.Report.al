@@ -215,7 +215,7 @@ Report 52185781 Receipt
                 column(Amount_ReceiptLine; "Receipt Line".Amount)
                 {
                 }
-                column(Remarks_ReceiptLine; "Receipt Line".Remarks)
+                column(Remarks_ReceiptLine; "Receipt Line".Description)
                 {
                 }
                 column(TransactionName_ReceiptLine; "Receipt Line"."Transaction Name")

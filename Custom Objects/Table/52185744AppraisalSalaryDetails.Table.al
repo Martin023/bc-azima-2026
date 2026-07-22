@@ -348,14 +348,14 @@ table 52185744 "Appraisal Salary Details"
 
         CurGrossPay := curBasicPay + OtherAllowances;
         // curBasicPay := ApprDetails.Amount;
-        curTransAmount := ROUND(curBasicPay, 0.01, '<');
+        curTransAmount := ROUND(CurGrossPay, 0.01, '<');
         if curTransAmount > 0 then begin
             curNSSF := prPayrollProcessing.fnGetEmployerNSSF(curTransAmount);
             //Message('NSSF: %1', curNSSF);
             ShifAmount := ROUND((curTransAmount * (2.75 / 100)), 0.01, '<');
 
             HousingLevyAmount := ROUND((curTransAmount * (1.5 / 100)), 0.01, '<');
-            Relief := 2400;
+            Relief := 1408;
             TaxablePay := (curTransAmount + OtherAllowances) - curNSSF - ShifAmount - HousingLevyAmount - curPensionAmount;
             if TaxablePay < 0 then
                 TaxablePay := 0;

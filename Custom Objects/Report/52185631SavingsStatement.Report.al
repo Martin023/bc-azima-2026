@@ -192,7 +192,7 @@ Report 52185631 "Savings Statement"
                                     ProductFac."Minimum Balance" + SavingsAccounts."Lien Placed");
                 end;
                 if StatementCharge then begin
-
+                    GenSetup.Get();
                     Temp.Get(UserId);
                     Temp.TestField(Temp."Cashier Journal Template");
                     Temp.TestField(Temp."Cashier Journal Batch");
