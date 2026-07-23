@@ -1809,6 +1809,13 @@ page 52187320 AdvancedHumanResources
                     ApplicationArea = Basic, Suite;
                     RunObject = page "HR Setup";
                 }
+                action("CEO Setup")
+                {
+                    Caption = 'CEO Setup';
+                    ApplicationArea = Basic, Suite;
+                    RunObject = page "HR CEO Setup";
+                    ToolTip = 'Configure the CEO employee record for goal creation and validation';
+                }
                 action("HR Notification Log")
                 {
                     Caption = 'HR Notification Log';

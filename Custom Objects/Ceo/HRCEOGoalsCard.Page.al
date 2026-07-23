@@ -434,13 +434,11 @@ page 52185781 "HR CEO Goals Card"
 
     local procedure CheckEditAccess(): Boolean
     var
-        HREmp: Record "HR Employees";
+        CEOSetup: Record "HR CEO Setup";
     begin
-        // CEO IS THE CREATOR — ONLY THEY CAN EDIT
-        HREmp.Reset();
-        HREmp.SetRange("User ID", UserId);
-        if HREmp.FindFirst() then
-            exit(HREmp."No." = Rec."CEO Employee No.");
+        // ONLY THE CONFIGURED CEO CAN EDIT
+        if CEOSetup.Get('CEO') then
+            exit(CEOSetup."CEO User ID" = UserId);
         exit(false);
     end;
 

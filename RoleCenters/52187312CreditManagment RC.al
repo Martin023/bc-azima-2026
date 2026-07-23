@@ -1779,6 +1779,41 @@ page 52187312 "Credit Management Role Center"
                     RunObject = page "HR Leave Applications List1";
 
                 }
+                action("My Individual Appraisals ESS CRM")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'My Individual Appraisals';
+                    RunObject = page "My Individual Appraisals List";
+                    ToolTip = 'View and manage my performance appraisals';
+                }
+                action("My Team Appraisals ESS CRM")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'My Team Appraisals (Supervisor)';
+                    RunObject = page "Supervisor Appraisals List";
+                    ToolTip = 'View and review appraisals for employees I supervise';
+                }
+                action("My Assigned Targets ESS CRM")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'My Assigned Targets';
+                    RunObject = page "My Assigned Targets";
+                    ToolTip = 'View targets assigned to me by my HOD';
+                }
+                action("My Department Targets HOD CRM")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'My Department Targets (HOD)';
+                    RunObject = page "HRHOD Department Targets";
+                    ToolTip = 'Set and manage targets for my department (HOD only)';
+                }
+                action("My CEO Goal Assignments ESS CRM")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'My CEO Goal Assignments';
+                    RunObject = page "My CEO Goal Assignments";
+                    ToolTip = 'View and acknowledge CEO goals assigned to me as HOD';
+                }
                 action("Store Requisition")
                 {
                     ApplicationArea = Basic, Suite;

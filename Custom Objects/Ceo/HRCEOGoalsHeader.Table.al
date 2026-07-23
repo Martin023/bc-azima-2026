@@ -150,6 +150,7 @@ table 52185673 "HR CEO Goals Header"
     trigger OnInsert()
     var
         HREmp: Record "HR Employees";
+        CEOSetup: Record "HR CEO Setup";
     begin
         if "Goal No." = '' then begin
             HRSetup.Get();
@@ -162,12 +163,11 @@ table 52185673 "HR CEO Goals Header"
         "Created Date" := Today;
         Status := Status::Open;
 
-        HREmp.Reset();
-        HREmp.SetRange("User ID", UserId);
-        if HREmp.FindFirst() then begin
-            "CEO Employee No." := HREmp."No.";
+        // VALIDATE AND POPULATE FROM CEO SETUP
+        CEOSetup.ValidateIsCEO();
+        "CEO Employee No." := CEOSetup.GetCEOEmployeeNo();
+        if HREmp.Get("CEO Employee No.") then
             "CEO Name" := HREmp."First Name" + ' ' + HREmp."Middle Name" + ' ' + HREmp."Last Name";
-        end;
     end;
 
     var

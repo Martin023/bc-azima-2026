@@ -141,6 +141,14 @@ page 52185743 "CEO Role Center"
                         RunObject = Page "HR Head of Departments List";
                         ToolTip = 'Manage HOD assignments';
                     }
+                    action("CEO Setup")
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'CEO Setup';
+                        RunObject = Page "HR CEO Setup";
+                        Image = Setup;
+                        ToolTip = 'Configure the CEO employee record for goal creation';
+                    }
                 }
 
                 group("Performance Reports")
