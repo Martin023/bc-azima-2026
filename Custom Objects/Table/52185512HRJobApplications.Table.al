@@ -121,7 +121,7 @@ table 52185512 "HR Job Applications"
             begin
                 if rec.status = rec.Status::Unqualified then
                     rec.TestField("Rejection Reason");
-                
+
                 //SEND AUTOMATIC EMAIL RESPONSE BASED ON STATUS CHANGE
                 if xRec.Status <> Rec.Status then begin
                     case Rec.Status of
@@ -392,7 +392,7 @@ table 52185512 "HR Job Applications"
         }
         field(83; "Responsibility Center"; Code[20])
         {
-            TableRelation = "Responsibility Center B".Code;
+            TableRelation = "Responsibility CenterBR".Code;
         }
         field(84; "Approval Status"; Option)
         {
@@ -591,12 +591,12 @@ table 52185512 "HR Job Applications"
     begin
         if "E-Mail" = '' then
             exit;
-        
+
         if "Email Sent" then
             exit;
-        
+
         CompInfo.Get();
-        
+
         EmailBody := '<html><body>';
         EmailBody += '<p>Dear <b>' + "Full Name" + '</b>,</p>';
         EmailBody += '<p>Thank you for your application for the position of <b>' + "Job Applied for Description" + '</b>.</p>';
@@ -604,9 +604,9 @@ table 52185512 "HR Job Applications"
         EmailBody += '<p>We will contact you if your qualifications match our requirements.</p>';
         EmailBody += '<br><p>Best Regards,<br>' + CompInfo.Name + '</p>';
         EmailBody += '</body></html>';
-        
+
         EmailMsg.Create("E-Mail", 'Application Received - ' + "Job Applied for Description", EmailBody, true);
-        
+
         if Email.Send(EmailMsg, Enum::"Email Scenario"::Default) then begin
             "Email Sent" := true;
             "Sent Email" := true;
@@ -623,9 +623,9 @@ table 52185512 "HR Job Applications"
     begin
         if "E-Mail" = '' then
             exit;
-        
+
         CompInfo.Get();
-        
+
         EmailBody := '<html><body>';
         EmailBody += '<p>Dear <b>' + "Full Name" + '</b>,</p>';
         EmailBody += '<p>Congratulations! You have been shortlisted for the position of <b>' + "Job Applied for Description" + '</b>.</p>';
@@ -633,9 +633,9 @@ table 52185512 "HR Job Applications"
         EmailBody += '<p>We will contact you shortly with further details regarding the next steps in the recruitment process.</p>';
         EmailBody += '<br><p>Best Regards,<br>' + CompInfo.Name + '</p>';
         EmailBody += '</body></html>';
-        
+
         EmailMsg.Create("E-Mail", 'Shortlisted - ' + "Job Applied for Description", EmailBody, true);
-        
+
         if Email.Send(EmailMsg, Enum::"Email Scenario"::Default) then begin
             "Sent Email" := true;
             Modify();
@@ -651,9 +651,9 @@ table 52185512 "HR Job Applications"
     begin
         if "E-Mail" = '' then
             exit;
-        
+
         CompInfo.Get();
-        
+
         EmailBody := '<html><body>';
         EmailBody += '<p>Dear <b>' + "Full Name" + '</b>,</p>';
         EmailBody += '<p>Congratulations! Your application for the position of <b>' + "Job Applied for Description" + '</b> has been approved.</p>';
@@ -661,9 +661,9 @@ table 52185512 "HR Job Applications"
         EmailBody += '<p>We will contact you shortly with further details regarding your employment.</p>';
         EmailBody += '<br><p>Best Regards,<br>' + CompInfo.Name + '</p>';
         EmailBody += '</body></html>';
-        
+
         EmailMsg.Create("E-Mail", 'Application Approved - ' + "Job Applied for Description", EmailBody, true);
-        
+
         if Email.Send(EmailMsg, Enum::"Email Scenario"::Default) then begin
             "Sent Email" := true;
             Modify();
@@ -679,9 +679,9 @@ table 52185512 "HR Job Applications"
     begin
         if "E-Mail" = '' then
             exit;
-        
+
         CompInfo.Get();
-        
+
         EmailBody := '<html><body>';
         EmailBody += '<p>Dear <b>' + "Full Name" + '</b>,</p>';
         EmailBody += '<p>Thank you for your interest in the position of <b>' + "Job Applied for Description" + '</b>.</p>';
@@ -692,9 +692,9 @@ table 52185512 "HR Job Applications"
         EmailBody += '<p>We appreciate your interest in our organization and wish you success in your future endeavors.</p>';
         EmailBody += '<br><p>Best Regards,<br>' + CompInfo.Name + '</p>';
         EmailBody += '</body></html>';
-        
+
         EmailMsg.Create("E-Mail", 'Application Status - ' + "Job Applied for Description", EmailBody, true);
-        
+
         if Email.Send(EmailMsg, Enum::"Email Scenario"::Default) then begin
             "Sent Email" := true;
             Modify();
