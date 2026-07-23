@@ -754,7 +754,6 @@ report 52186104 "Self Service Slip"
 
                     PREmployerContr.Reset;
                     PREmployerContr.SetRange(PREmployerContr."Payroll Period", SelectedPeriod);
-                    //PREmployerContr.SETRANGE(PREmployerContr."Transaction Code",'NSSF');
                     PREmployerContr.SetRange(PREmployerContr."Employee Code", strEmpCode);
                     if PREmployerContr.Find('-') then begin
                         repeat
@@ -974,24 +973,24 @@ report 52186104 "Self Service Slip"
         if PeriodFilter = '' then Error('You must specify the period filter');
         SelectedPeriod := "PR Salary Card".GetRangeMin("Period Filter");
 
-        Customers.Reset;
-        Customers.Setrange("Internal Staff Employer", True);
-        if Customers.FindFirst() then begin
-            SalaryHeader.Reset;
-            SalaryHeader.SetRange("Account No", Customers."No.");
-            SalaryHeader.SetRange(Posted, true);
-            SalaryHeader.SetRange("Start Date", SelectedPeriod);
-            if SalaryHeader.FindFirst() then begin
-                PRPayrollPeriods.Reset;
-                PRPayrollPeriods.SetRange(Closed, True);
-                // PRPayrollPeriods.SetRange("Date Opened", SelectedPeriod);
-                if PRPayrollPeriods.FIND('-') then begin
-                    PeriodName := PRPayrollPeriods."Period Name";
-                end else
-                    Message('This Payroll Period is still Running for the month of %1', SelectedPeriod);
-            end else
-                Message('Payroll Period is yet to be Posted for the month of %1', SelectedPeriod);
-        end;
+        // Customers.Reset;
+        // Customers.Setrange("Internal Staff Employer", True);
+        // if Customers.FindFirst() then begin
+        //     SalaryHeader.Reset;
+        //     SalaryHeader.SetRange("Account No", Customers."No.");
+        //     SalaryHeader.SetRange(Posted, true);
+        //     SalaryHeader.SetRange("Start Date", SelectedPeriod);
+        //     if SalaryHeader.FindFirst() then begin
+        PRPayrollPeriods.Reset;
+        PRPayrollPeriods.SetRange(Closed, True);
+        // PRPayrollPeriods.SetRange("Date Opened", SelectedPeriod);
+        if PRPayrollPeriods.FIND('-') then begin
+            PeriodName := PRPayrollPeriods."Period Name";
+        end else
+            Message('This Payroll Period is still Running for the month of %1', SelectedPeriod);
+        //     end else
+        //         Message('Payroll Period is yet to be Posted for the month of %1', SelectedPeriod);
+        // end;
 
 
         if CompanyInfo.Get() then
