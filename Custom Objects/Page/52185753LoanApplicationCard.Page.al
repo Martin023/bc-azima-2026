@@ -311,11 +311,12 @@ page 52185753 "Loan Application Card"
                                 if SalProc.Count < ProdFac."No. of Salary Times" then
                                     Error(Text010);
 
-                            end else
-                                if (Rec."Loan Product Type" = '140') and (Rec.Installments > 72) then begin
-                                    Rec.Installments := 72;
-                                    Message('Installments must less than or equal to 72');
-                                end;
+                            end;
+                            //  else
+                            //     if (Rec."Loan Product Type" = '140') and (Rec.Installments > 72) then begin
+                            //         Rec.Installments := 72;
+                            //         Message('Installments must less than or equal to 72');
+                            //     end;
                             //END;
                         end;
                     end;
@@ -514,18 +515,18 @@ page 52185753 "Loan Application Card"
                     ApplicationArea = Basic, Suite;
                     Editable = ApprovedEdit;
                 }
-                field("Amount In Arreas SACCO"; Rec."Amount In Arreas SACCO")
-                {
-                    ApplicationArea = all;
-                }
-                field("Amount In Arreas SASRA"; Rec."Amount In Arreas SASRA")
-                {
-                    ApplicationArea = all;
-                }
-                field("Days In Arrears"; Rec."Days In Arrears")
-                {
-                    ApplicationArea = all;
-                }
+                // field("Amount In Arreas SACCO"; Rec."Amount In Arreas SACCO")
+                // {
+                //     ApplicationArea = all;
+                // }
+                // field("Amount In Arreas SASRA"; Rec."Amount In Arreas SASRA")
+                // {
+                //     ApplicationArea = all;
+                // }
+                // field("Days In Arrears"; Rec."Days In Arrears")
+                // {
+                //     ApplicationArea = all;
+                // }
                 field("Mode of Disbursement"; Rec."Mode of Disbursement")
                 {
                     ApplicationArea = Basic, Suite;
@@ -625,11 +626,11 @@ page 52185753 "Loan Application Card"
                 {
 
                 }
-                field("Moratorium Loan"; Rec."Moratorium Loan")
-                {
-                    ApplicationArea = ALL;
-                    Editable = false;
-                }
+                // field("Moratorium Loan"; Rec."Moratorium Loan")
+                // {
+                //     ApplicationArea = ALL;
+                //     Editable = false;
+                // }
 
             }
 
@@ -670,54 +671,54 @@ page 52185753 "Loan Application Card"
 
                 }
             }
-            group("External STO Details")
-            {
-                Caption = 'External STO Details';
-                Editable = (Rec."Recovery Mode" = Rec."Recovery Mode"::"External STO");
-                field("Client Bank Code"; Rec."Client Bank Code")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ShowMandatory = true;
-                }
-                field("Client Bank Name"; Rec."Client Bank Name")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ShowMandatory = true;
-                }
-                field("Client Account No"; Rec."Client Account No")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ShowMandatory = true;
-                }
-                field("External STO  Amount"; Rec."External STO  Amount")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("External STO Effective Date"; Rec."External STO Effective Date")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ShowMandatory = true;
-                }
-            }
-            group("Hybrid Details")
-            {
-                Caption = 'Hybrid Details';
-                Editable = Rec."Recovery Mode" = Rec."Recovery Mode"::Hybrid;
+            // group("External STO Details")
+            // {
+            //     Caption = 'External STO Details';
+            //     Editable = (Rec."Recovery Mode" = Rec."Recovery Mode"::"External STO");
+            //     field("Client Bank Code"; Rec."Client Bank Code")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         ShowMandatory = true;
+            //     }
+            //     field("Client Bank Name"; Rec."Client Bank Name")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         ShowMandatory = true;
+            //     }
+            //     field("Client Account No"; Rec."Client Account No")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         ShowMandatory = true;
+            //     }
+            //     field("External STO  Amount"; Rec."External STO  Amount")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //     }
+            //     field("External STO Effective Date"; Rec."External STO Effective Date")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         ShowMandatory = true;
+            //     }
+            // }
+            // group("Hybrid Details")
+            // {
+            //     Caption = 'Hybrid Details';
+            //     Editable = Rec."Recovery Mode" = Rec."Recovery Mode"::Hybrid;
 
 
-                field("Salary Amount"; Rec."Salary Amount")
-                {
-                    ApplicationArea = Basic, Suite;
-                    // Editable = ApplicationDetailsEdit;
-                    ShowMandatory = true;
-                }
-                field("Checkoff Amount"; Rec."Checkoff Amount")
-                {
-                    ApplicationArea = Basic, Suite;
-                    // Editable = ApplicationDetailsEdit;
-                    Editable = false;
-                }
-            }
+            //     field("Salary Amount"; Rec."Salary Amount")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         // Editable = ApplicationDetailsEdit;
+            //         ShowMandatory = true;
+            //     }
+            //     field("Checkoff Amount"; Rec."Checkoff Amount")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         // Editable = ApplicationDetailsEdit;
+            //         Editable = false;
+            //     }
+            // }
 
         }
         area(factboxes)
@@ -1275,64 +1276,64 @@ page 52185753 "Loan Application Card"
             separator(Action53)
             {
             }
-            action("Loan Appraisal Breakdown")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = "Report";
-                Promoted = true;
-                PromotedCategory = "Report";
-                PromotedIsBig = true;
+            // action("Loan Appraisal Breakdown")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = "Report";
+            //     Promoted = true;
+            //     PromotedCategory = "Report";
+            //     PromotedIsBig = true;
 
-                trigger OnAction()
-                begin
-                    ProdFac.Get(Rec."Loan Product Type");
-                    Rec.TestField("Recovery Mode");
-                    LoanApp.Reset;
-                    LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
-                    LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");
-                    LoanApp.SetFilter(LoanApp."Total Loan Balance", '>0');
-                    if LoanApp.Find('-') then begin
-                        LoanApp.CalcFields("Total Loan Balance");
-                        if LoanApp."Total Loan Balance" > LoanApp.Repayment then begin
-                            LoansTopup.Reset;
-                            LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
-                            LoansTopup.SetRange("Loan Top Up", LoanApp."Loan No.");
-                            if not LoansTopup.Find('-') then
-                                Error('Member has an existing %1 Loan No. %2, Kindly TopUp', Rec."Loan Product Type Name", LoanApp."Loan No.");
-                        end;
-                    end;
-                    LoanApp.Reset;
-                    LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
-                    LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");
-                    LoanApp.SetFilter(LoanApp."Outstanding Balance", '>0');
-                    if LoanApp.Find('-') then begin
-                        LoansTopup.Reset;
-                        LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
-                        LoansTopup.SetRange("Loan Top Up", LoanApp."Loan No.");
-                        if not LoansTopup.Find('-') then
-                            Error('Member has an existing %1 Loan No. %2, Kindly TopUp', Rec."Loan Product Type", LoanApp."Loan No.");
-                    end;
+            //     trigger OnAction()
+            //     begin
+            //         ProdFac.Get(Rec."Loan Product Type");
+            //         Rec.TestField("Recovery Mode");
+            //         LoanApp.Reset;
+            //         LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
+            //         LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");
+            //         LoanApp.SetFilter(LoanApp."Total Loan Balance", '>0');
+            //         if LoanApp.Find('-') then begin
+            //             LoanApp.CalcFields("Total Loan Balance");
+            //             if LoanApp."Total Loan Balance" > LoanApp.Repayment then begin
+            //                 LoansTopup.Reset;
+            //                 LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
+            //                 LoansTopup.SetRange("Loan Top Up", LoanApp."Loan No.");
+            //                 if not LoansTopup.Find('-') then
+            //                     Error('Member has an existing %1 Loan No. %2, Kindly TopUp', Rec."Loan Product Type Name", LoanApp."Loan No.");
+            //             end;
+            //         end;
+            //         LoanApp.Reset;
+            //         LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
+            //         LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");
+            //         LoanApp.SetFilter(LoanApp."Outstanding Balance", '>0');
+            //         if LoanApp.Find('-') then begin
+            //             LoansTopup.Reset;
+            //             LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
+            //             LoansTopup.SetRange("Loan Top Up", LoanApp."Loan No.");
+            //             if not LoansTopup.Find('-') then
+            //                 Error('Member has an existing %1 Loan No. %2, Kindly TopUp', Rec."Loan Product Type", LoanApp."Loan No.");
+            //         end;
 
-                    LoanApp.Reset;
-                    LoanApp.SetRange(LoanApp."Loan No.", Rec."Loan No.");
-                    if LoanApp.Find('-') then begin
-                        // if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Check Off" then begin
-                        if (ProdFac."Mortgage Loan" = false) then begin
-                            REPORT.Run(Report::"Eligibilty Check", true, false, LoanApp);
-                            LoansR.reset;
-                            LoansR.SetRange("Loan No.", Rec."Loan No.");
-                            if LoansR.Find('-') then begin
-                                LoansR."Loan Appraised By" := UserId;
-                                LoansR.Modify;
-                            end;
-                            // CreateAppraisalBackup(LoanApp."Loan No.", 52185745);
-                            // end
-                        end;
+            //         LoanApp.Reset;
+            //         LoanApp.SetRange(LoanApp."Loan No.", Rec."Loan No.");
+            //         if LoanApp.Find('-') then begin
+            //             // if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Check Off" then begin
+            //             if (ProdFac."Mortgage Loan" = false) then begin
+            //                 REPORT.Run(Report::"Eligibilty Check", true, false, LoanApp);
+            //                 LoansR.reset;
+            //                 LoansR.SetRange("Loan No.", Rec."Loan No.");
+            //                 if LoansR.Find('-') then begin
+            //                     LoansR."Loan Appraised By" := UserId;
+            //                     LoansR.Modify;
+            //                 end;
+            //                 // CreateAppraisalBackup(LoanApp."Loan No.", 52185745);
+            //                 // end
+            //             end;
 
-                    end;
+            //         end;
 
-                end;
-            }
+            //     end;
+            // }
             // action("Post Advance")
             // {
             //     ApplicationArea = Basic, Suite;

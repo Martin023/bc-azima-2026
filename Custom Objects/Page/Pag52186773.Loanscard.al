@@ -36,6 +36,11 @@ page 52186773 "Loans card"
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
+                field("Loan Product Type Name"; Rec."Loan Product Type Name")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = false;
+                }
                 field("Member No."; Rec."Member No.")
                 {
                     ApplicationArea = Basic, Suite;
@@ -46,12 +51,33 @@ page 52186773 "Loans card"
                     ApplicationArea = Basic, Suite;
                     Enabled = false;
                 }
+                field(Interest; Rec.Interest)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = false;
+                }
+                field(Installments; Rec.Installments)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = false;
+                }
+                field("Requested Amount"; Rec."Requested Amount")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Enabled = false;
+                }
                 field("Approved Amount"; Rec."Approved Amount")
                 {
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
-                field(Interest; Rec.Interest)
+                field("Total TopUp"; Rec."Total TopUp")
+                {
+                    Caption = 'Total Refinancing';
+                    ApplicationArea = Basic, Suite;
+                    Editable = false;
+                }
+                field("Net Amount"; Rec."Net Amount")
                 {
                     ApplicationArea = Basic, Suite;
                     Editable = false;
@@ -66,15 +92,11 @@ page 52186773 "Loans card"
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
-                field("Loan Span"; Rec."Loan Span")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field(Installments; Rec.Installments)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = false;
-                }
+                // field("Loan Span"; Rec."Loan Span")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+
                 field("Disbursement Date"; Rec."Disbursement Date")
                 {
                     ApplicationArea = Basic, Suite;
@@ -91,26 +113,30 @@ page 52186773 "Loans card"
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
-                field("New Interest Rate"; Rec."New Interest Rate")
+                group("Rescheduled Loan")
                 {
-                    ApplicationArea = Basic, Suite;
-                    Editable = false;
+                    field("Loan Rescheduled"; Rec."Loan Rescheduled")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Editable = false;
+                    }
+                    field("New Interest Rate"; Rec."New Interest Rate")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Editable = false;
+                    }
+                    field("New No. of Installment"; Rec."New No. of Installment")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Editable = false;
+                    }
                 }
-                field("New No. of Installment"; Rec."New No. of Installment")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = false;
-                }
-                field("Loan Rescheduled"; Rec."Loan Rescheduled")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = false;
-                }
-                field("Amount To Disburse"; Rec."Amount To Disburse")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = false;
-                }
+
+                // field("Amount To Disburse"; Rec."Amount To Disburse")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Editable = false;
+                // }
                 field("Interest Calculation Method"; Rec."Interest Calculation Method")
                 {
                     ApplicationArea = Basic, Suite;
@@ -126,11 +152,11 @@ page 52186773 "Loans card"
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
-                field("CRM Captured by"; Rec."CRM Captured by")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = false;
-                }
+                // field("CRM Captured by"; Rec."CRM Captured by")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Editable = false;
+                // }
                 field("Captured By"; Rec."Captured By")
                 {
                     ApplicationArea = Basic, Suite;
@@ -182,11 +208,11 @@ page 52186773 "Loans card"
                     Editable = false;
                     ApplicationArea = all;
                 }
-                field("Amount In Arreas SACCO"; Rec."Amount In Arreas SACCO")
-                {
-                    ApplicationArea = all;
-                    Editable = false;
-                }
+                // field("Amount In Arreas SACCO"; Rec."Amount In Arreas SACCO")
+                // {
+                //     ApplicationArea = all;
+                //     Editable = false;
+                // }
                 field("Amount In Arreas SASRA"; Rec."Amount In Arreas SASRA")
                 {
                     ApplicationArea = all;
@@ -207,11 +233,7 @@ page 52186773 "Loans card"
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
-                field("Loan Transferred"; Rec."Loan Transferred")
-                {
-                    ApplicationArea = all;
-                    Editable = false;
-                }
+
                 field("Loan Principle Repayment"; Rec."Loan Principle Repayment")
                 {
                     ApplicationArea = Basic, Suite;
@@ -251,15 +273,15 @@ page 52186773 "Loans card"
                 {
                     Editable = false;
                 }
-                field("Employer Loan No."; Rec."Employer Loan No.")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Employer Balance"; Rec."Employer Balance")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = false;
-                }
+                // field("Employer Loan No."; Rec."Employer Loan No.")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("Employer Balance"; Rec."Employer Balance")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Editable = false;
+                // }
                 field("Sub Sector Level2"; Rec."Sub Sector Level2")
                 {
                     ApplicationArea = Basic, Suite;
@@ -267,23 +289,23 @@ page 52186773 "Loans card"
                     Editable = false;
                     ShowMandatory = true;
                 }
-                field("Moratorium Loan"; Rec."Moratorium Loan")
-                {
-                    ApplicationArea = all;
-                    Editable = false;
+                // field("Moratorium Loan"; Rec."Moratorium Loan")
+                // {
+                //     ApplicationArea = all;
+                //     Editable = false;
 
-                }
+                // }
 
-                field("Moratorium Start Date"; Rec."Moratorium Start Date")
-                {
-                    ApplicationArea = all;
-                    Editable = false;
-                }
-                field("Moratorium Date date"; Rec."Moratorium End date")
-                {
-                    ApplicationArea = all;
-                    Editable = false;
-                }
+                // field("Moratorium Start Date"; Rec."Moratorium Start Date")
+                // {
+                //     ApplicationArea = all;
+                //     Editable = false;
+                // }
+                // field("Moratorium Date date"; Rec."Moratorium End date")
+                // {
+                //     ApplicationArea = all;
+                //     Editable = false;
+                // }
                 field("Loan Account"; Rec."Loan Account")
                 {
                     Editable = false;
@@ -326,23 +348,23 @@ page 52186773 "Loans card"
             }
 
 
-            group("Hybrid Details")
-            {
-                Caption = 'Hybrid Details';
-                Editable = False;
+            // group("Hybrid Details")
+            // {
+            //     Caption = 'Hybrid Details';
+            //     Editable = False;
 
 
-                field("Salary Amount"; Rec."Salary Amount")
-                {
-                    ApplicationArea = Basic, Suite;
+            //     field("Salary Amount"; Rec."Salary Amount")
+            //     {
+            //         ApplicationArea = Basic, Suite;
 
-                }
-                field("Checkoff Amount"; Rec."Checkoff Amount")
-                {
-                    ApplicationArea = Basic, Suite;
+            //     }
+            //     field("Checkoff Amount"; Rec."Checkoff Amount")
+            //     {
+            //         ApplicationArea = Basic, Suite;
 
-                }
-            }
+            //     }
+            // }
             group("Trail Information")
             {
                 Caption = 'Trail Information';
@@ -378,60 +400,60 @@ page 52186773 "Loans card"
                     ShowMandatory = true;
                 }
             }
-            group("External STO Details")
-            {
-                Caption = 'External STO Details';
-                Editable = false;
-                field("Client Bank Code"; Rec."Client Bank Code")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = true;
-                    ShowMandatory = true;
-                }
-                field("Client Bank Name"; Rec."Client Bank Name")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ShowMandatory = true;
-                }
-                field("Client Account No"; Rec."Client Account No")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = true;
-                    ShowMandatory = true;
-                }
-                field("External STO  Amount"; Rec."External STO  Amount")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("External STO Effective Date"; Rec."External STO Effective Date")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = true;
-                    ShowMandatory = true;
-                }
-            }
-            group("Shamba Loan Mandatory Requirements")
-            {
-                Caption = 'Shamba Loan Mandatory Requirements';
-                Editable = false;
-                Visible = IsShambaLoan;
-                field("Sale Agreement"; Rec."Sale Agreement")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("20% Payment Slip"; Rec."20% Payment Slip")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Land Valuation Done"; Rec."Land Valuation Done")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Title Deed"; Rec."Title Deed")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-            }
+            // group("External STO Details")
+            // {
+            //     Caption = 'External STO Details';
+            //     Editable = false;
+            //     field("Client Bank Code"; Rec."Client Bank Code")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         Editable = true;
+            //         ShowMandatory = true;
+            //     }
+            //     field("Client Bank Name"; Rec."Client Bank Name")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         ShowMandatory = true;
+            //     }
+            //     field("Client Account No"; Rec."Client Account No")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         Editable = true;
+            //         ShowMandatory = true;
+            //     }
+            //     field("External STO  Amount"; Rec."External STO  Amount")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //     }
+            //     field("External STO Effective Date"; Rec."External STO Effective Date")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         Editable = true;
+            //         ShowMandatory = true;
+            //     }
+            // }
+            // group("Shamba Loan Mandatory Requirements")
+            // {
+            //     Caption = 'Shamba Loan Mandatory Requirements';
+            //     Editable = false;
+            //     Visible = IsShambaLoan;
+            //     field("Sale Agreement"; Rec."Sale Agreement")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //     }
+            //     field("20% Payment Slip"; Rec."20% Payment Slip")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //     }
+            //     field("Land Valuation Done"; Rec."Land Valuation Done")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //     }
+            //     field("Title Deed"; Rec."Title Deed")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //     }
+            // }
             group("Default and Recovery")
             {
                 Caption = 'Default and Recovery';
@@ -440,6 +462,10 @@ page 52186773 "Loans card"
                 {
                     ApplicationArea = Basic, Suite;
                     ToolTip = 'Specifies the loan where this loan came from, i.e if this loan is a guarantor defaulter loan';
+                }
+                field("Recovered Product Type"; Rec."Recovered Product Type")
+                {
+                    ApplicationArea = Basic, Suite;
                 }
                 field("Recovery Level"; Rec."Recovery Level")
                 {
@@ -481,6 +507,66 @@ page 52186773 "Loans card"
     {
         area(creation)
         {
+            action("Loan Appraisal Report")
+            {
+                ApplicationArea = Basic, Suite;
+                Image = "Report";
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+
+                trigger OnAction()
+                begin
+                    ProdFac.Get(Rec."Loan Product Type");
+                    Rec.TestField("Recovery Mode");
+
+
+                    LoanApp.Reset;
+                    LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
+                    LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");
+                    LoanApp.SetFilter(LoanApp."Outstanding Balance", '>0');
+                    if LoanApp.Find('-') then begin
+                        LoansTopup.Reset;
+                        LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
+                        LoansTopup.SetRange("Loan Top Up", LoanApp."Loan No.");
+                        if not LoansTopup.Find('-') then
+                            Error('Member has an existing %1 Loan No. %2, Kindly TopUp', Rec."Loan Product Type", LoanApp."Loan No.");
+                    end;
+
+                    LoanApp.Reset;
+                    LoanApp.SetRange(LoanApp."Loan No.", Rec."Loan No.");
+                    if LoanApp.Find('-') then begin
+                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Check Off" then begin
+                            if (ProdFac."Mortgage Loan" = false) then begin
+                                REPORT.Run(Report::"Loan Appraisal Checkoff", true, false, LoanApp);
+
+                            end else
+                                if ProdFac."Mortgage Loan" = true then begin
+                                    IF rec."Mortgage Insurance Amount" <= 0 THEN ERROR('Kindly specify Mortgage Insurance amount');
+                                    REPORT.Run(Report::"Loan Appraisal Haramb-Mortgage", true, false, LoanApp);
+
+                                end;
+                        end;
+                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::Salary then begin
+                            REPORT.Run(Report::"Loan Appraisal Report-Salaried", true, false, LoanApp);
+
+                        end;
+                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Corporate or Business" then begin
+                            REPORT.Run(Report::"Loan Appraisal Bus-Special", true, false, LoanApp);
+
+                        end;
+                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Staff Loans" then begin
+                            REPORT.Run(Report::"Loan Appraisal Staff", true, false, LoanApp);
+
+                        end;
+                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::Hybrid then begin
+                            REPORT.Run(Report::"Loan Appraisal Hybrid", true, false, LoanApp);
+
+                        end;
+                    end;
+
+                end;
+            }
             action("Generate Repayment  Schedule")
             {
                 ApplicationArea = Basic, Suite;
@@ -549,42 +635,42 @@ page 52186773 "Loans card"
                         REPORT.Run(Report::"Ideal Repayment Schedule", true, true, LoanApp);
                 end;
             }
-            action("Update Actual Schedule")
-            {
-                ApplicationArea = all;
-                Image = UpdateUnitCost;
-                Promoted = true;
-                PromotedCategory = Report;
-                PromotedIsBig = true;
-                trigger OnAction()
-                var
-                    ActualSchedule: Codeunit ActualLoanSchedule;
-                begin
-                    ActualSchedule.GenerateLoanSchedule(Rec);
-                    Message('Actual Schedule updated successfully');
-                    // LoanApp.Reset;
-                    // LoanApp.SetRange(LoanApp."Loan No.", Rec."Loan No.");
-                    // if LoanApp.Find('-') then
-                    //     REPORT.Run(Report::"Actual Loan Schedule", true, true, LoanApp);
-                end;
-            }
-            action("View Actual Schedule")
-            {
-                ApplicationArea = all;
-                Image = ViewPage;
-                Promoted = true;
-                PromotedCategory = Report;
-                PromotedIsBig = true;
-                trigger OnAction()
-                var
-                    ActualSchedule: Codeunit ActualLoanSchedule;
-                begin
-                    LoanApp.Reset;
-                    LoanApp.SetRange(LoanApp."Loan No.", Rec."Loan No.");
-                    if LoanApp.Find('-') then
-                        REPORT.Run(Report::"Actual Loan Schedule", true, true, LoanApp);
-                end;
-            }
+            // action("Update Actual Schedule")
+            // {
+            //     ApplicationArea = all;
+            //     Image = UpdateUnitCost;
+            //     Promoted = true;
+            //     PromotedCategory = Report;
+            //     PromotedIsBig = true;
+            //     trigger OnAction()
+            //     var
+            //         ActualSchedule: Codeunit ActualLoanSchedule;
+            //     begin
+            //         ActualSchedule.GenerateLoanSchedule(Rec);
+            //         Message('Actual Schedule updated successfully');
+            //         // LoanApp.Reset;
+            //         // LoanApp.SetRange(LoanApp."Loan No.", Rec."Loan No.");
+            //         // if LoanApp.Find('-') then
+            //         //     REPORT.Run(Report::"Actual Loan Schedule", true, true, LoanApp);
+            //     end;
+            // }
+            // action("View Actual Schedule")
+            // {
+            //     ApplicationArea = all;
+            //     Image = ViewPage;
+            //     Promoted = true;
+            //     PromotedCategory = Report;
+            //     PromotedIsBig = true;
+            //     trigger OnAction()
+            //     var
+            //         ActualSchedule: Codeunit ActualLoanSchedule;
+            //     begin
+            //         LoanApp.Reset;
+            //         LoanApp.SetRange(LoanApp."Loan No.", Rec."Loan No.");
+            //         if LoanApp.Find('-') then
+            //             REPORT.Run(Report::"Actual Loan Schedule", true, true, LoanApp);
+            //     end;
+            // }
             // action("Capitalize Interest")
             // {
             //     ApplicationArea = all;
@@ -629,23 +715,6 @@ page 52186773 "Loans card"
                 RunPageLink = "Loan No." = FIELD("Loan No."),
                               "Member No." = FIELD("Member No.");
 
-                trigger OnAction()
-                begin
-                    /*
-                    IF "Appraisal Parameter Type"="Appraisal Parameter Type"::"Check Off" THEN BEGIN
-                      RepMethods.RESET;
-                      RepMethods.SETRANGE("Loan No.","Loan No.");
-                        IF NOT RepMethods.FIND('-') THEN BEGIN
-                           RepMethods."Loan No.":="Loan No.";
-                           RepMethods.Amount:=Repayment;
-                           RepMethods."Member No.":="Member No.";
-                           RepMethods."Payment Method":=RepMethods."Payment Method"::Checkoff;
-                           RepMethods.INSERT;
-                        END;
-                    END;
-                    */
-
-                end;
             }
             separator(Action29)
             {
@@ -660,6 +729,8 @@ page 52186773 "Loans card"
                 PromotedIsBig = true;
                 RunObject = Page "Loan Guarantors and Security";
                 RunPageLink = "Loan No" = FIELD("Loan No.");
+                RunPageMode = view;
+
             }
             action("Other Commitments Clearance")
             {
@@ -671,26 +742,27 @@ page 52186773 "Loans card"
                 PromotedIsBig = true;
                 RunObject = Page "Other Commitments Clearance";
                 RunPageLink = "Loan No." = FIELD("Loan No.");
+                RunPageMode = view;
             }
 
-            action("Loan [File]")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = Document;
-                Promoted = true;
-                PromotedCategory = New;
+            // action("Loan [File]")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = Document;
+            //     Promoted = true;
+            //     PromotedCategory = New;
 
-                trigger OnAction()
-                var
-                    DMS: Record EDMS;
-                begin
-                    DMS.Reset;
-                    DMS.SetRange(DMS.Key, DMS.Key::"Loan File");
-                    if DMS.Find('-') then begin
-                        HyperLink(DMS."url path" + Rec."Loan No.");
-                    end;
-                end;
-            }
+            //     trigger OnAction()
+            //     var
+            //         DMS: Record EDMS;
+            //     begin
+            //         DMS.Reset;
+            //         DMS.SetRange(DMS.Key, DMS.Key::"Loan File");
+            //         if DMS.Find('-') then begin
+            //             HyperLink(DMS."url path" + Rec."Loan No.");
+            //         end;
+            //     end;
+            // }
             // action("Prorata")
             // {
             //     ApplicationArea = Basic, Suite;
@@ -731,23 +803,15 @@ page 52186773 "Loans card"
             }
             action("Loans Topped Up")
             {
+                Caption = 'Refinanced Loans';
                 ApplicationArea = Basic, Suite;
                 Image = Archive;
                 Promoted = true;
                 PromotedCategory = Process;
                 RunObject = page "Loan Top Up";
+                RunPageMode = view;
                 RunPageLink = "Loan No." = FIELD("Loan No."),
                               "Client Code" = FIELD("Member No.");
-
-                trigger OnAction()
-                var
-                    LoanApp: Record Loans;
-                begin
-                    LoanApp.Reset;
-                    LoanApp.SetRange(LoanApp."Loan No.", Rec."Loan No.");
-                    //if LoanApp.Find('-') then
-                    //REPORT.Run(52185995, true, true, LoanApp);
-                end;
             }
             action("Loan Appraisal Comments")
             {
@@ -820,31 +884,7 @@ page 52186773 "Loans card"
                               "Client Code" = FIELD("Member No.");
                 RunPageMode = View;
 
-                trigger OnAction()
-                begin
-                    /*//Load defaults
-                    AppraisalDetailsSetup.RESET;
-                    IF AppraisalDetailsSetup.FIND('-') THEN BEGIN
-                      REPEAT
-                        AppraisalSalDetails.RESET;
-                        AppraisalSalDetails.SETRANGE(AppraisalSalDetails."Loan No","Loan No.");
-                        AppraisalSalDetails.SETRANGE(AppraisalSalDetails.Type,AppraisalDetailsSetup.Type);
-                        AppraisalSalDetails.SETRANGE(Code,AppraisalDetailsSetup.Code);
-                    
-                        IF AppraisalSalDetails.FIND('-') THEN
-                          EXIT;
-                        AppraisalSalDetails.INIT;
-                        AppraisalSalDetails."Loan No":="Loan No.";
-                        AppraisalSalDetails."Client Code":="Member No.";
-                        AppraisalSalDetails.Code:=AppraisalDetailsSetup.Code;
-                        AppraisalSalDetails.Description:=AppraisalDetailsSetup.Description;
-                        AppraisalSalDetails.Type:=AppraisalDetailsSetup.Type;
-                        AppraisalSalDetails.INSERT;
-                      UNTIL AppraisalDetailsSetup.NEXT=0;
-                    END;
-                    */
 
-                end;
             }
             separator(Action56)
             {
@@ -1077,126 +1117,6 @@ page 52186773 "Loans card"
         GenSetup: Record "General Set-Up";
         IsShambaLoan: Boolean;
 
-
-    local procedure GetNewRepayment(ReScheduleNo: Text)
-    var
-        ReschedulingList: Record "Loan Rescheduling";
-        Loans: Record Loans;
-        GeneralSetUp: Record "General Set-Up";
-        LoanRepaymentSchedule: Record "Ideal Repayment Schedule";
-        CreditAccounts: Record "Credit Accounts";
-        ProdF: Record "Product Factory";
-        Text0003: Label 'You can not reschedule more than the initial insatllment';
-        LoanAmount: Decimal;
-        InterestRate: Decimal;
-        RepayPeriod: Integer;
-        LBalance: Decimal;
-        RunDate: Date;
-        InstalNo: Decimal;
-        TotalMRepay: Decimal;
-        LInterest: Decimal;
-        LPrincipal: Decimal;
-        RepayCode: Code[40];
-    begin
-        //Check if Ever Rescheduled.
-        ReschedulingList.Reset;
-        ReschedulingList.SetRange(ReschedulingList."No.", ReScheduleNo);
-        ReschedulingList.SetRange(ReschedulingList.Rescheduled, true);
-        if ReschedulingList.Find('-') then begin
-            Loans.Reset;
-            Loans.SetRange(Loans."Loan No.", ReschedulingList."Loan No.");
-            if Loans.Find('-') then begin
-                GeneralSetUp.Get;
-
-                LoanRepaymentSchedule.Reset;
-                LoanRepaymentSchedule.SetRange("Loan No.", Loans."Loan No.");
-                LoanRepaymentSchedule.SetRange("Repayment Date", CalcDate('<CM-1M+1D>', ReschedulingList."Rescheduling Date"), 99991230D);
-                if LoanRepaymentSchedule.Find('-') then LoanRepaymentSchedule.DeleteAll;
-
-                //Loans.CALCFIELDS("Outstanding Balance","Outstanding Interest");
-
-                InterestRate := Loans.Interest;
-
-                RepayPeriod := ReschedulingList."New Installments";
-                LoanAmount := ReschedulingList."Outstanding Balance";
-                LBalance := ReschedulingList."Outstanding Balance";
-                RunDate := CalcDate('<CM>', ReschedulingList."Rescheduling Date");
-
-                repeat
-                    InstalNo := InstalNo + 1;
-
-                    if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::Amortised then begin
-                        TotalMRepay := Round((InterestRate / 1200) / (1 - Power((1 + (InterestRate / 1200)), -(RepayPeriod))) * (LoanAmount), 0.0001, '>');
-                        LInterest := Round(LBalance / 1200 * InterestRate, 0.0001, '>');
-                        LPrincipal := TotalMRepay - LInterest;
-                        Loans.Repayment := LInterest + LPrincipal;
-                    end;
-
-                    if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Straight Line" then begin
-                        LPrincipal := LoanAmount / RepayPeriod;
-                        LInterest := (InterestRate / 1200) * LoanAmount;
-                        Loans.Repayment := LPrincipal;
-                    end;
-
-                    if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Balance" then begin
-                        LPrincipal := LoanAmount / RepayPeriod;
-                        LInterest := (InterestRate / 1200) * LBalance;
-                        Loans.Repayment := LPrincipal;
-                    end;
-
-                    if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Flat" then begin
-                        LPrincipal := Round(LoanAmount / RepayPeriod, 1.0, '>');
-                        LInterest := Round(((LoanAmount * InterestRate / 12 / 100) + (LPrincipal * InterestRate / 12 / 100)) / 2, 1.0, '>');
-                        Loans.Repayment := LPrincipal + LInterest;
-
-                    end;
-                    //Decrement the Balance
-                    LBalance := LBalance - LPrincipal;
-
-                    Evaluate(RepayCode, Format(InstalNo));
-
-                    LoanRepaymentSchedule.Init;
-                    LoanRepaymentSchedule."Repayment Code" := RepayCode;
-                    LoanRepaymentSchedule."Loan No." := Loans."Loan No.";
-                    LoanRepaymentSchedule."Loan Amount" := ReschedulingList."Outstanding Balance";
-                    LoanRepaymentSchedule."Instalment No" := InstalNo;
-                    LoanRepaymentSchedule."Repayment Date" := RunDate;
-                    LoanRepaymentSchedule."Member No." := Rec."Member No.";
-                    LoanRepaymentSchedule."Loan Category" := Loans."Loan Product Type";
-                    LoanRepaymentSchedule."Monthly Repayment" := Round((LInterest + LPrincipal), 1, '>');
-                    ;
-                    LoanRepaymentSchedule."Monthly Interest" := LInterest;
-                    LoanRepaymentSchedule."Principal Repayment" := LPrincipal;
-                    LoanRepaymentSchedule."Reset Doc No." := ReschedulingList."No.";
-                    LoanRepaymentSchedule."Reset Schedule" := true;
-                    LoanRepaymentSchedule.Insert;
-
-                    //Repayment Frequency
-                    if Loans."Repayment Frequency" = Loans."Repayment Frequency"::Daily then
-                        RunDate := CalcDate('1D', RunDate)
-                    else
-                        if Loans."Repayment Frequency" = Loans."Repayment Frequency"::Weekly then
-                            RunDate := CalcDate('1W', RunDate)
-                        else
-                            if Loans."Repayment Frequency" = Loans."Repayment Frequency"::Monthly then
-                                RunDate := CalcDate('1M', RunDate)
-                            else
-                                if Loans."Repayment Frequency" = Loans."Repayment Frequency"::Quarterly then
-                                    RunDate := CalcDate('1Q', RunDate);
-                //Repayment Frequency
-
-                until InstalNo = ReschedulingList."New Installments";
-
-                if CreditAccounts.Get(Loans."Loan Account") then begin
-                    if ProdF.Get(CreditAccounts."Product Type") then begin
-                        if (ProdF."Nature of Loan Type" <> ProdF."Nature of Loan Type"::Defaulter) and
-                           (ReschedulingList."Original Installments" < InstalNo) then
-                            Error(Text0003);
-                    end;
-                end;
-            end;
-        end;
-    end;
 
     local procedure CalculateLoanWithGuarantors()
     var

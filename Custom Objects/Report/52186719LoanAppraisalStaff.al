@@ -1192,14 +1192,14 @@ Report 52186719 "Loan Appraisal Staff"
         LoanRec."Basic Income" := TBasic;
         LoanRec.Earnings := TEarning;
         LoanRec.Deductions := TDeductions;
-        LoanRec."1/3 of Basic" := AthirdAmt;
+        // LoanRec."1/3 of Basic" := AthirdAmt;
         LoanRec."Net Salary" := NetSalary;
         LoanRec."Amt to Loan" := NetSalary - AthirdAmt;
         LoanRec."External Effects" := TotalExteralRec;
         LoanRec."New Net Salary" := NetSalary - Loans.Repayment;
         LoanRec."Cleared Loans Installment" := TopupRepayments;
         LoanRec."Adjusted Net" := AdjustedNet;
-        LoanRec."New Repayment" := Loans.Repayment;
+        // LoanRec."New Repayment" := Loans.Repayment;
         LoanRec."Take Home Amount" := NetTakeAwayHome;
         LoanRec.Insert();
     end;

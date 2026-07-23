@@ -18,7 +18,14 @@ page 52185783 "Loans Factbox"
             {
                 field("Loan No."; Rec."Loan No.")
                 {
-                    ToolTip = 'Specifies the value of the Loan No. field.', Comment = '%';
+                    ApplicationArea = Basic, Suite;
+
+                    trigger OnDrillDown()
+                    var
+                        myInt: Integer;
+                    begin
+                        Page.Run(Page::"Loans Posted", Rec);
+                    end;
                 }
                 field("Loan Product Type Name"; Rec."Loan Product Type Name")
                 {
@@ -32,10 +39,10 @@ page 52185783 "Loans Factbox"
                 {
                     ToolTip = 'Specifies the value of the Loan Principle Repayment field.', Comment = '%';
                 }
-                field("Loan Interest Repayment"; Rec."Loan Interest Repayment")
-                {
-                    ToolTip = 'Specifies the value of the Loan Interest Repayment field.', Comment = '%';
-                }
+                // field("Loan Interest Repayment"; Rec."Loan Interest Repayment")
+                // {
+                //     ToolTip = 'Specifies the value of the Loan Interest Repayment field.', Comment = '%';
+                // }
                 field("Outstanding Balance"; Rec."Outstanding Balance")
                 {
                     ToolTip = 'Specifies the value of the Outstanding Balance field.', Comment = '%';
@@ -47,6 +54,14 @@ page 52185783 "Loans Factbox"
                 field("Total Balance"; Rec."Total Balance")
                 {
                     ToolTip = 'Specifies the value of the Total Balance field.', Comment = '%';
+                }
+                field("Amount In Arreas SASRA"; Rec."Amount In Arreas SASRA")
+                {
+                    StyleExpr = 'Unfavorable';
+                }
+                field("Installments FallOff"; Rec."Installments FallOff")
+                {
+                    StyleExpr = 'Unfavorable';
                 }
             }
         }

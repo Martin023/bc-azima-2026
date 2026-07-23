@@ -1139,14 +1139,14 @@ Report 52185747 "Loan Appraisal Bus-Special"
         LoanRec."Basic Income" := TotalBasic;
         LoanRec.Earnings := TotalEarning;
         LoanRec.Deductions := TotalDeductions;
-        LoanRec."1/3 of Basic" := AthirdAmt;
+        // LoanRec."1/3 of Basic" := AthirdAmt;
         LoanRec."Net Salary" := NetSalary;
         LoanRec."Amt to Loan" := NetSalary - AthirdAmt;
         LoanRec."External Effects" := ExternalRecovered;
         LoanRec."New Net Salary" := NetSalary - Loans.Repayment;
         LoanRec."Cleared Loans Installment" := TopupRepayments;
         LoanRec."Adjusted Net" := AdjNet;
-        LoanRec."New Repayment" := Loans.Repayment;
+        // LoanRec."New Repayment" := Loans.Repayment;
         LoanRec."Take Home Amount" := NetTakeHome;
         LoanRec.Insert();
     end;

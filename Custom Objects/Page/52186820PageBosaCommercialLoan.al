@@ -1134,28 +1134,28 @@ page 52186820 "Bosa Commecial Loan"
 
                 end;
             }
-            action("Loan Appraisal Summary")
-            {
-                Image = Document;
-                ApplicationArea = Basic, Suite;
-                Promoted = true;
-                Visible = false;
-                PromotedCategory = Process;
-                Caption = 'Loan Appraisal Summary';
-                PromotedIsBig = true;
-                RunObject = Page "Loan Appraisals";
-                RunPageLink = "Loan No." = FIELD("Loan No.");
+            // action("Loan Appraisal Summary")
+            // {
+            //     Image = Document;
+            //     ApplicationArea = Basic, Suite;
+            //     Promoted = true;
+            //     Visible = false;
+            //     PromotedCategory = Process;
+            //     Caption = 'Loan Appraisal Summary';
+            //     PromotedIsBig = true;
+            //     RunObject = Page "Loan Appraisals";
+            //     RunPageLink = "Loan No." = FIELD("Loan No.");
 
-                trigger OnAction()
-                var
-                    myInt: Integer;
-                    GlobalFunc: Codeunit "Global Functions";
-                begin
-                    //Message('testSummary');
-                    GlobalFunc.InsertAppraisalSummary(Rec."Loan No.");
-                end;
+            //     trigger OnAction()
+            //     var
+            //         myInt: Integer;
+            //         GlobalFunc: Codeunit "Global Functions";
+            //     begin
+            //         //Message('testSummary');
+            //         GlobalFunc.InsertAppraisalSummary(Rec."Loan No.");
+            //     end;
 
-            }
+            // }
 
             action("Mandatory Requirements")
             {

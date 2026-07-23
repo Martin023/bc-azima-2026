@@ -880,13 +880,13 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                                 ExcemptProductCharges.setrange("Charge Code", PCharges."Charge Code");
                                 ExcemptProductCharges.setrange(Excempt, true);
                                 if not ExcemptProductCharges.Find('-') then begin
-                                    IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Approved Amount") THEN BEGIN
-                                        TopUp.Commision := Loans."Approved Amount" * (PCharges.Percentage / 100);
+                                    // IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Approved Amount") THEN BEGIN
+                                    //     TopUp.Commision := Loans."Approved Amount" * (PCharges.Percentage / 100);
+                                    // END ELSE
+                                    IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Net Amount") THEN BEGIN
+                                        TopUp.Commision := TopUp."Outstanding Balance" * (PCharges.Percentage / 100);
                                     END ELSE
-                                        IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Net Amount") THEN BEGIN
-                                            TopUp.Commision := TopUp."Outstanding Balance" * (PCharges.Percentage / 100);
-                                        END ELSE
-                                            TopUp.Commision := PCharges."Charge Amount";
+                                        TopUp.Commision := PCharges."Charge Amount";
                                     //MESSAGE('Running Charge topup %1',TotalComputedCharges);
                                 end;
                                 TopUpComms += TopUp.Commision;
@@ -959,6 +959,35 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 TwoThirdNet := round((OneThirdGross * 0.66), 0.01);
 
                 //Existing Loans
+                TotalLoanBal := 0;
+                Loan.Reset;
+                Loan.SetRange(Loan."Member No.", Loans."Member No.");
+                Loan.SetRange(Loan.Posted, true);
+                Loan.SetRange("Mobile Loan", false);
+                //exclude BGL and FGL
+                Loan.SetFilter("Loan Product Type", '<>BGL&<>FGL&<>012');
+                Loan.SetAutoCalcFields("Total Balance", "Outstanding Balance");
+                Loan.SetFilter("Outstanding Balance", '>%1', 0);
+                if Loan.FindSet() then begin
+                    repeat
+                        TotalLoanBal += Loan."Outstanding Balance";
+                    until Loan.Next = 0;
+                end;
+                //Exclude total balance from loans being topped up.
+                LoanTopup.reset();
+                LoanTopup.SetRange("Loan No.", Loans."Loan No.");
+                LoanTopup.setfilter("Loan Type", '<>%1', '012');
+                if LoanTopup.FindFirst() then begin
+                    repeat
+                        // if Loan.get(LoanTopup."Loan Top Up") then begin
+                        //     Loan.CalcFields("Outstanding Balance");
+                        //     if Loan."Total Balance" >= LoanTopup."Total Top Up" then begin
+                        TotalLoanBal -= LoanTopup."Principle Top Up";
+                    //     end;
+                    // end;
+                    until LoanTopup.Next() = 0;
+                end;
+                //Total FOSA loan Repaymnts//existing repayments
                 TotalRepay := 0;
                 Loan.Reset;
                 Loan.SetRange(Loan."Member No.", Loans."Member No.");
@@ -976,16 +1005,11 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                         LoanTopup.setrange("Loan Top Up", Loan."Loan No.");
                         if LoanTopup.FindFirst() then begin
                             if (LoanTopup."Total Top Up" < Loan."Total Balance") then begin
-                                Message(Format(Loan."Loan No."));
-                                Message(format(LoanTopup."Total Top Up"));
-                                Message(Format(Loan."Total Balance"));
-                                TotalRepay += Loan.Repayment;
-                                TotalLoanBal += Loan."Total Balance";
+                                TotalRepay += Loan."Loan Principle Repayment" + (Loan.Interest / 12 / 100) * Loan."Outstanding Balance";
                             end;
                         end
                         else begin
                             TotalRepay += Loan."Loan Principle Repayment" + (Loan.Interest / 12 / 100) * Loan."Outstanding Balance";
-                            TotalLoanBal += Loan."Total Balance";
                         end;
                     until Loan.Next = 0;
                 end;
@@ -1038,7 +1062,8 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 end
                 else
                     QualificationOnDeposits := ProductFactory."Maximum Loan Amount";
-
+                //Exclude existing loans from deposits
+                QualificationOnDeposits -= TotalLoanBal;
 
                 if ProductFactory.Get(Loans."Loan Product Type") then begin
                     if QualificationOnDeposits > ProductFactory."Maximum Loan Amount" then
@@ -1359,7 +1384,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
         LoanRec.Installments := Loans.Installments;
         LoanRec."Member Deposits" := MemberDeposits;
         LoanRec."Share Capital" := ShareCapital;
-        LoanRec.Dimension := Dim1;
+        // LoanRec.Dimension := Dim1;
         //End of General
 
         LoanRec."Deposit Boosting" := Loans."Loans - Deposit Purchase";
@@ -1386,7 +1411,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
         LoanRec."Basic Income" := TotalBasic;
         LoanRec.Earnings := TrEarni;
         LoanRec.Deductions := TDeductions;
-        LoanRec."1/3 of Basic" := AthirdAmt;
+        // LoanRec."1/3 of Basic" := AthirdAmt;
         LoanRec."1/3 Display" := AthirdDisplay;
         LoanRec."Net Salary" := NetSalary;
         LoanRec."Amt to Loan" := NetSalary - AthirdAmt;
@@ -1402,12 +1427,12 @@ Report 52185640 "Loan Appraisal Report-Salaried"
 
         LoanRec."External Effects" := TotalExteralRec;
         LoanRec."New Net Salary" := NetSalary - Loans.Repayment;
-        LoanRec.Interest := LInterest;
-        LoanRec.Principle := LPrincipal;
-        LoanRec."Recommended Amount" := Loans."Recommended Amount";
-        LoanRec."Cleared Loans Installment" := TopupRepayments;
-        // LoanRec."Adjusted Net" := AdjustedNet;
-        LoanRec."New Repayment" := Loans.Repayment;
+        // LoanRec.Interest := LInterest;
+        // LoanRec.Principle := LPrincipal;
+        // LoanRec."Recommended Amount" := Loans."Recommended Amount";
+        // LoanRec."Cleared Loans Installment" := TopupRepayments;
+        // // LoanRec."Adjusted Net" := AdjustedNet;
+        // LoanRec."New Repayment" := Loans.Repayment;
         LoanRec."Take Home Amount" := NetTakeHome;
         // end of repayment
         LoanRec.Insert();

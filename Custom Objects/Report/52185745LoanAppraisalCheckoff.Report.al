@@ -1404,68 +1404,60 @@ Report 52185745 "Loan Appraisal Checkoff"
         LoanRec."Staff No" := Loans."Staff No";
         LoanRec."Loan Product Type" := LoansProductTyp;
         LoanRec."Loan Product Name" := Loans."Loan Product Type Name";
-        LoanRec."Application Date" := Loans."Application Date";
-        LoanRec."Requested Amount" := Loans."Requested Amount";
-        LoanRec."Approved Amount" := Loans."Approved Amount";
-        LoanRec."Recommended Amount" := Loans."Recommended Amount";
         LoanRec."Months to Retire" := MonthsToRetire;
-        LoanRec."No. of Gurantors" := NofGuar;
-        LoanRec."Employer Code" := Loans."Employer Code";
-        // LoanRec."Employer Name" := EmployerName;
+        LoanRec."Member Deposits" := Loans."Member Deposits";
+        LoanRec."Share Capital" := ShareCapital;
         LoanRec."Existing Loans" := TotalLoanBal;
         LoanRec.Installments := Loans.Installments;
-        LoanRec."Member Deposits" := MemberDeposits;
-        LoanRec."Share Capital" := ShareCapital;
-        LoanRec.Dimension := Dim1;
-        //End of General
+        LoanRec."Global Dimension 1" := Loans."Global Dimension 1 Code";
+        //header end
 
+        //Deductions
+        Loanrec."General Charges" := TotalProcessingAmt;
+        Loanrec."Form Fee" := LoanFormFees;
+        Loanrec."Insurance Fee" := InsuranceFee;
         LoanRec."Deposit Boosting" := Loans."Loans - Deposit Purchase";
-        // LoanRec."Current Contribution" := NewContr;
-        LoanRec."Deposit Mult" := QualificationOnDeposits;
         LoanRec."Processing Fee" := TotalProcessingAmt;
         LoanRec."Dep Purchase Comm" := DepPurchaseComm;
         LoanRec."Dep Purchase Excise" := DepPurchaseCommExc;
         LoanRec."Share Boost" := Loans."Share Boosted Amount";
+
+        // Refinancing
         LoanRec."Offset Total" := OffsetTotal;
         LoanRec."Top-up Comm" := TopUpComms;
         LoanRec."Top-Excise" := TopUpCommExc;
-        LoanRec."Existing Loans" := TotalLoanBal;
-        LoanRec."Deposit multiplier" := Mult;
-        LoanRec."Qualification on Guarantors" := SecurityTotal;
-        LoanRec."Possible Deposit Boost" := PossibleBoost;
-        // LoanRec."No. of Gurantors" := CountNo;
-        LoanRec."Other Clearence" := TExternalEffects;
-        LoanRec."Other Clearence Fee" := ExternalCharges;
-        LoanRec."Other Clearence Duty" := TotalExciseDuty;
-        LoanRec."Total excise Duty" := ExerciseDuty;
-        //end of deductions
-
-        LoanRec."Basic Income" := TotalBasic;
-        LoanRec.Earnings := TrEarni;
-        LoanRec.Deductions := TDeductions;
-        LoanRec."1/3 of Basic" := AthirdAmt;
-        LoanRec."1/3 Display" := AthirdDisplay;
-        LoanRec."Net Salary" := NetSalary;
-        LoanRec."Amt to Loan" := NetSalary - AthirdAmt;
-        LoanRec."Qualification on Deposits" := qualificationOnDeposits;
-        LoanRec."Qualification on Salary" := NetOnSalary;
-        LoanRec."STO Amount" := STOAmount;
-        LoanRec."Fosa Commitments" := TotalRepay;
-        LoanRec."Fosa Minimum" := MinFosaBal;
-        LoanRec."Amount to Loan" := TotaLFosaIn;
+        LoanRec."One month Interest" := OneMonthInterest;
+        //Other chrges
         LoanRec."Upfront int" := UpfrontInterest;
-        LoanRec."TopUp Excise" := TopUpCommExc;
-        //end of salar details
+        LoanRec."Total excise Duty" := TotalExciseDuty;
 
-        LoanRec."External Effects" := TotalExteralRec;
-        LoanRec."New Net Salary" := NetSalary - Loans.Repayment;
-        LoanRec.Interest := LInterest;
-        LoanRec.Principle := LPrincipal;
+        //SalaryDetails
+        //Checkoff
+        LoanRec."Basic Income" := TotalBasic;
+        LoanRec."House Allowance" := THouseAllow;
+        LoanRec.Earnings := TrEarni;
+        LoanRec."Gross Pay" := GrossPay;
+        LoanRec.Deductions := TDeductions;
+        LoanRec."Net Salary" := NetSalary;
+        LoanRec."2/3 of Gross" := TwoThirdGross;
+        LoanRec."Disposable Income" := DisposableInc;
+        LoanRec."Qualification on Salary" := NetOnSalary;
+        //Salary
+
+
+        //Deposit & Guar Qualification
+        Loanrec."Deposit multiplier" := DepositMult;
+        Loanrec."Qualification on Deposits" := QualificationOnDeposits;
+        loanrec."Qualification on Guarantors" := TotalGuaranteed;
+
+        //Other Details
+        LoanRec."Repayment" := Loans.Repayment;
+        Loanrec."Loan Interest Repayement" := Loans."Loan Interest Repayment";
+        LoanRec."Loan Principle Repayment" := Loans."Loan Principle Repayment";
         LoanRec."Recommended Amount" := Loans."Recommended Amount";
-        LoanRec."Cleared Loans Installment" := TopupRepayments;
-        // LoanRec."Adjusted Net" := AdjustedNet;
-        LoanRec."New Repayment" := Loans.Repayment;
-        LoanRec."Take Home Amount" := NetTakeHome;
+        LoanRec."Take Home Amount" := Loans."Net Amount";
+
+        LoanRec."Deposit multiplier" := Mult;
         // end of repayment
         LoanRec.Insert();
     end;
