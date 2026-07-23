@@ -880,13 +880,13 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                                 ExcemptProductCharges.setrange("Charge Code", PCharges."Charge Code");
                                 ExcemptProductCharges.setrange(Excempt, true);
                                 if not ExcemptProductCharges.Find('-') then begin
-                                    IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Approved Amount") THEN BEGIN
-                                        TopUp.Commision := Loans."Approved Amount" * (PCharges.Percentage / 100);
+                                    // IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Approved Amount") THEN BEGIN
+                                    //     TopUp.Commision := Loans."Approved Amount" * (PCharges.Percentage / 100);
+                                    // END ELSE
+                                    IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Net Amount") THEN BEGIN
+                                        TopUp.Commision := TopUp."Outstanding Balance" * (PCharges.Percentage / 100);
                                     END ELSE
-                                        IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Net Amount") THEN BEGIN
-                                            TopUp.Commision := TopUp."Outstanding Balance" * (PCharges.Percentage / 100);
-                                        END ELSE
-                                            TopUp.Commision := PCharges."Charge Amount";
+                                        TopUp.Commision := PCharges."Charge Amount";
                                     //MESSAGE('Running Charge topup %1',TotalComputedCharges);
                                 end;
                                 TopUpComms += TopUp.Commision;
@@ -967,23 +967,24 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 //exclude BGL and FGL
                 Loan.SetFilter("Loan Product Type", '<>BGL&<>FGL&<>012');
                 Loan.SetAutoCalcFields("Total Balance", "Outstanding Balance");
-                Loan.SetFilter("Total Balance", '>%1', 0);
+                Loan.SetFilter("Outstanding Balance", '>%1', 0);
                 if Loan.FindSet() then begin
                     repeat
-                        TotalLoanBal += Loan."Total Balance";
+                        TotalLoanBal += Loan."Outstanding Balance";
                     until Loan.Next = 0;
                 end;
                 //Exclude total balance from loans being topped up.
                 LoanTopup.reset();
                 LoanTopup.SetRange("Loan No.", Loans."Loan No.");
+                LoanTopup.setfilter("Loan Type", '<>%1', '012');
                 if LoanTopup.FindFirst() then begin
                     repeat
-                        if Loan.get(LoanTopup."Loan Top Up") then begin
-                            Loan.CalcFields("Total Balance");
-                            if Loan."Total Balance" >= LoanTopup."Total Top Up" then begin
-                                TotalLoanBal -= LoanTopup."Total Top Up";
-                            end;
-                        end;
+                        // if Loan.get(LoanTopup."Loan Top Up") then begin
+                        //     Loan.CalcFields("Outstanding Balance");
+                        //     if Loan."Total Balance" >= LoanTopup."Total Top Up" then begin
+                        TotalLoanBal -= LoanTopup."Principle Top Up";
+                    //     end;
+                    // end;
                     until LoanTopup.Next() = 0;
                 end;
                 //Total FOSA loan Repaymnts//existing repayments

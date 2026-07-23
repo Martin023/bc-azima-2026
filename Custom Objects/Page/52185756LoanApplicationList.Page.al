@@ -42,6 +42,11 @@ page 52185756 "Loan Application List"
                     ApplicationArea = Basic, Suite;
                     StyleExpr = StyleExprTxt;
                 }
+                field("Loan Product Type Name"; Rec."Loan Product Type Name")
+                {
+                    ApplicationArea = Basic, Suite;
+                    StyleExpr = StyleExprTxt;
+                }
                 field("Staff No"; Rec."Staff No")
                 {
                     ApplicationArea = Basic, Suite;

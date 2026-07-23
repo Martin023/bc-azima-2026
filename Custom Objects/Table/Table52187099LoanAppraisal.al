@@ -26,7 +26,7 @@ table 52187099 "Loan Appraisal"
         {
             DataClassification = ToBeClassified;
         }
-        field(6; "Deposit multiplier"; Integer)
+        field(6; "Deposit multiplier"; Decimal)
         {
             DataClassification = ToBeClassified;
         }
@@ -301,7 +301,7 @@ table 52187099 "Loan Appraisal"
         {
             DataClassification = ToBeClassified;
         }
-         field(75; "Loan Approved By"; Code[30])
+        field(75; "Loan Approved By"; Code[30])
         {
             DataClassification = ToBeClassified;
         }
