@@ -11,7 +11,7 @@
       <am:Name>PBIRB</am:Name>
       <am:Version>15.7.1813.16</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-06-18T13:09:33.3280185Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-07-23T14:00:23.4572202Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -51,6 +51,12 @@
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.03908cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.5cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.5cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.03908cm</Width>
@@ -284,6 +290,70 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Int Received</Value>
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox1">
+                          <rd:DefaultName>Textbox1</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Cashier Pri</Value>
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox6">
+                          <rd:DefaultName>Textbox6</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>cashier Int</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -784,6 +854,70 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <Textbox Name="CashierPri">
+                          <rd:DefaultName>CashierPri</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!CashierPri.Value</Value>
+                                  <Style>
+                                    <Format>#,0.00</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="cashierInt">
+                          <rd:DefaultName>cashierInt</rd:DefaultName>
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!cashierInt.Value</Value>
+                                  <Style>
+                                    <Format>#,0.00</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
                         <Textbox Name="MobilePriRece">
                           <rd:DefaultName>MobilePriRece</rd:DefaultName>
                           <CanGrow>true</CanGrow>
@@ -1059,6 +1193,8 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
+                <TablixMember />
+                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -1074,7 +1210,7 @@
             <DataSetName>DataSet_Result</DataSetName>
             <Top>0.3055cm</Top>
             <Height>1.2cm</Height>
-            <Width>33.75026cm</Width>
+            <Width>38.75022cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1085,7 +1221,7 @@
         <Height>1.64661cm</Height>
         <Style />
       </Body>
-      <Width>33.75026cm</Width>
+      <Width>38.75023cm</Width>
       <Page>
         <PageHeader>
           <Height>3.38667cm</Height>
@@ -1128,9 +1264,8 @@
                 </Paragraph>
               </Paragraphs>
               <Top>0.09787in</Top>
-              <Left>0in</Left>
               <Height>0.23264in</Height>
-              <Width>13.2875in</Width>
+              <Width>15.25599in</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -1163,9 +1298,8 @@
                 </Paragraph>
               </Paragraphs>
               <Top>0.33051in</Top>
-              <Left>0in</Left>
               <Height>0.21528in</Height>
-              <Width>13.2875in</Width>
+              <Width>15.25599in</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -1198,9 +1332,8 @@
                 </Paragraph>
               </Paragraphs>
               <Top>0.54578in</Top>
-              <Left>0in</Left>
               <Height>0.18403in</Height>
-              <Width>13.2875in</Width>
+              <Width>15.25599in</Width>
               <ZIndex>3</ZIndex>
               <Style>
                 <Border>
@@ -1233,9 +1366,8 @@
                 </Paragraph>
               </Paragraphs>
               <Top>0.75759in</Top>
-              <Left>0in</Left>
               <Height>0.18403in</Height>
-              <Width>13.2875in</Width>
+              <Width>15.25599in</Width>
               <ZIndex>4</ZIndex>
               <Style>
                 <Border>
@@ -1269,7 +1401,7 @@
               </Paragraphs>
               <Top>2.64749cm</Top>
               <Height>0.6cm</Height>
-              <Width>33.75026cm</Width>
+              <Width>38.75023cm</Width>
               <ZIndex>5</ZIndex>
               <Style>
                 <Border>
@@ -1438,9 +1570,11 @@
           </Style>
         </PageFooter>
         <PageHeight>21cm</PageHeight>
-        <PageWidth>35cm</PageWidth>
+        <PageWidth>40cm</PageWidth>
         <LeftMargin>0.5cm</LeftMargin>
         <RightMargin>0.5cm</RightMargin>
+        <TopMargin>0cm</TopMargin>
+        <BottomMargin>0cm</BottomMargin>
         <ColumnSpacing>1.27cm</ColumnSpacing>
         <Style />
       </Page>
@@ -1584,6 +1718,18 @@ End Function
         </Field>
         <Field Name="MobilePriReceFormat">
           <DataField>MobilePriReceFormat</DataField>
+        </Field>
+        <Field Name="CashierPri">
+          <DataField>CashierPri</DataField>
+        </Field>
+        <Field Name="CashierPriFormat">
+          <DataField>CashierPriFormat</DataField>
+        </Field>
+        <Field Name="cashierInt">
+          <DataField>cashierInt</DataField>
+        </Field>
+        <Field Name="cashierIntFormat">
+          <DataField>cashierIntFormat</DataField>
         </Field>
         <Field Name="Variance">
           <DataField>Variance</DataField>

@@ -100,6 +100,12 @@ Report 52186070 "Expected Loan Repayment"
             column(MobilePriRece; MobilePriRece)
             {
             }
+            column(CashierPri; CashierPri)
+            {
+            }
+            column(cashierInt; cashierInt)
+            {
+            }
             column(Variance; Variance)
             {
             }
@@ -121,6 +127,8 @@ Report 52186070 "Expected Loan Repayment"
                 Variance := 0;
                 MobileIntRece := 0;
                 MobilePriRece := 0;
+                CashierPri := 0;
+                cashierInt := 0;
 
                 Loans.CalcFields("Total Balance");
 
@@ -146,10 +154,17 @@ Report 52186070 "Expected Loan Repayment"
                                     if STO.get(CreditLedgerEntr."Loan No") then
                                         STOPri := STOPri + CreditLedgerEntr."Credit Amount";
                                     MobileTransBuff.reset();
+                                    MobileTranSBuff.setloadfields("Loan No.", "Originator ID", "Loan No.");
                                     MobileTransBuff.SetRange("Loan No.", Loans."Loan No.");
                                     MobileTransBuff.SetRange("Originator ID", CreditLedgerEntr."Document No.");
                                     if MobileTransBuff.findfirst then
                                         MobileIntRece := MobilePriRece + CreditLedgerEntr."Credit Amount";
+
+                                    CashierReceipt.reset();
+                                    CashierReceipt.SetLoadFields(No);
+                                    CashierReceipt.SetRange(No, CreditLedgerEntr."Document No.");
+                                    if CashierReceipt.findfirst then
+                                        CashierPri := CashierPri + CreditLedgerEntr."Credit Amount";
 
                                 end;
                             CreditLedgerEntr."Transaction Type"::"Interest Paid":
@@ -166,6 +181,14 @@ Report 52186070 "Expected Loan Repayment"
                                     MobileTransBuff.SetRange("Originator ID", CreditLedgerEntr."Document No.");
                                     if MobileTransBuff.findfirst then
                                         MobileIntRece := MobileIntRece + CreditLedgerEntr."Credit Amount";
+
+
+                                    CashierReceipt.reset();
+                                    CashierReceipt.SetLoadFields(No);
+                                    CashierReceipt.SetRange(No, CreditLedgerEntr."Document No.");
+                                    if CashierReceipt.findfirst then
+                                        cashierInt := cashierInt + CreditLedgerEntr."Credit Amount";
+
                                 end;
                         end;
                     until CreditLedgerEntr.Next() = 0;
@@ -234,4 +257,7 @@ Report 52186070 "Expected Loan Repayment"
         STOPri: Decimal;
         STO: record "Standing Order Header";
         Variance: Decimal;
+        CashierReceipt: record "Cashier Transactions";
+        CashierPri: Decimal;
+        cashierInt: Decimal;
 }
