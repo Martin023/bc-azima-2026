@@ -2503,13 +2503,6 @@ codeunit 52186507 "Members Portal Integration"
                     Datum.Add('source_unit', Format(ProductFactory."Source Unit"));
                     Datum.Add('maximum_amount', Format(ProductFactory."Maximum Loan Amount"));
                     Datum.Add('minimum_amount', Format(ProductFactory."Minimum Loan Amount"));
-                    if ProductFactory."Allow Topup" then begin
-                        ProductFactory."Minimum Loan Amount" += GlobalFunctions.GetMemberLoanProductTotalBalance(
-                                SearchMember."No.",
-                                ProductFactory."Product ID"
-                            );
-                        Datum.Replace('loan_type_min_amount', ProductFactory."Minimum Loan Amount");
-                    end;
                     Datum.Add('maximum_installments', ProductFactory."Ordinary Default Intallments");
                     Datum.Add('is_mobile_loan', ProductFactory."Mobile Loan");
                     Datum.Add('repayment_mode', Format(ProductFactory."Repay Mode"));
@@ -6281,7 +6274,6 @@ codeunit 52186507 "Members Portal Integration"
         SalaryAmount: decimal;
         GuarantorMember: Record Members;
         MobileLoanProduct: Record "Product Factory";
-        ApplicationLoanProduct: Record "Product Factory";
         LoansToBeCleared: Record Loans;
         TopupAmount: Decimal;
 
@@ -6310,12 +6302,9 @@ codeunit 52186507 "Members Portal Integration"
         SavAcc: record "Savings Accounts";
         GenSetup: record "General Set-Up";
         MaxSelfGuar: Decimal;
-        EligibilityFailReason: Text;
-        QualifiedAmount: Decimal;
-        ApplicantFOSAAccountNo: Text;
-        TotalGuarantorCapacity: Decimal;
-        IsEmergencyLoan: Boolean;
-        SeenGuarantorNos: List of [Code[20]];
+
+        ExistingLoanApplications: Record "Sky Channels Loan Applications";
+        ApplicationLoanProduct: Record "Product Factory";
     begin
         Payload.Get('identifier_type', identifier_type);
         Payload.Get('identifier', identifier);
@@ -6333,19 +6322,6 @@ codeunit 52186507 "Members Portal Integration"
         KeyExists := Payload.Get('files', files);
 
         if MemberExists(identifier_type.AsValue.AsText, identifier.AsValue.AsText, SearchMember, ResponseText, ResponseDescription) then begin
-            if SearchMember."Block Div Advance" then begin
-                ResponseObject.Add('status', 'ERROR');
-                Datum.Add('error_message', 'You are currently blocked from applying for member loans. Please contact the SACCO for assistance.');
-                EligibilityFailReason := 'You are currently blocked from applying for member loans. Please contact the SACCO for assistance.';
-                Datum.Add('eligibility_fail_reason', EligibilityFailReason);
-                ResponseObject.Add('data', Datum);
-
-                AddDateTimeToResponse(ResponseObject);
-
-                ResponseObject.WriteTo(Response);
-                exit(Response);
-            end;
-
             // Create Mobile Loan Application request
             MobileLoanProduct.Reset;
             MobileLoanProduct.SetRange("Product ID", loan_product.AsValue.AsText);
@@ -6365,7 +6341,9 @@ codeunit 52186507 "Members Portal Integration"
             TheLoanApplication.Installments := installments.AsValue.AsInteger;
             TheLoanApplication."Requested Amount" := requested_amount.AsValue.AsDecimal;
             TheLoanApplication."Source Application" := TheLoanApplication."Source Application"::"Member Portal";
-
+            // TheLoanApplication."Main Sector" := sasra_main_sector.AsValue.AsText;
+            // TheLoanApplication."Sub Sector Level1" := sasra_sub_sector_1.AsValue.AsText;
+            // TheLoanApplication."Sub Sector Level2" := sasra_sub_sector_2.AsValue.AsText;
             // SASRA sector classification is prefilled from the product, not chosen by the member
             if ApplicationLoanProduct.Get(loan_product.AsValue.AsText) then begin
                 TheLoanApplication."Main Sector" := ApplicationLoanProduct."Main Sector";
@@ -6379,28 +6357,6 @@ codeunit 52186507 "Members Portal Integration"
 
             if GlobalFunctions.IsFOSALoanProduct(loan_product.AsValue.AsText) then begin
                 TheLoanApplication."Is Self Guarantee" := false;
-            end;
-
-            IsEmergencyLoan := ApplicationLoanProduct."Emergency Loan";
-
-            if IsEmergencyLoan and TheLoanApplication."Is Self Guarantee" then begin
-                ApplicantFOSAAccountNo := SkyMbankingTrans.GetMemberFosaAcc(SearchMember);
-                QualifiedAmount := SkyMbankingTrans.GetEmergencyLoanQualifiedAmount(SearchMember."No.", loan_product.AsValue.AsText, ApplicantFOSAAccountNo, EligibilityFailReason);
-
-                if TheLoanApplication."Requested Amount" > QualifiedAmount then begin
-                    ResponseObject.Add('status', 'ERROR');
-                    if EligibilityFailReason <> '' then
-                        Datum.Add('eligibility_fail_reason', EligibilityFailReason)
-                    else
-                        EligibilityFailReason := StrSubstNo('The requested amount of KES %1 exceeds your ability to pay of KES %2', Format(TheLoanApplication."Requested Amount"), Format(QualifiedAmount));
-                    Datum.Add('error_message', EligibilityFailReason);
-                    ResponseObject.Add('data', Datum);
-
-                    AddDateTimeToResponse(ResponseObject);
-
-                    ResponseObject.WriteTo(Response);
-                    exit(Response);
-                end;
             end;
 
             // Validate loan guarantors
@@ -6417,18 +6373,6 @@ codeunit 52186507 "Members Portal Integration"
                 end;
 
                 guarantor.AsObject.Get('member_number', guarantor_member_number);
-
-                if SeenGuarantorNos.Contains(guarantor_member_number.AsValue.AsText) then begin
-                    ResponseObject.Add('status', 'ERROR');
-                    Datum.Add('error_message', 'Member with no. ' + guarantor_member_number.AsValue.AsText + ' was listed more than once as a guarantor');
-                    ResponseObject.Add('data', Datum);
-
-                    AddDateTimeToResponse(ResponseObject);
-
-                    ResponseObject.WriteTo(Response);
-                    exit(Response);
-                end;
-                SeenGuarantorNos.Add(guarantor_member_number.AsValue.AsText);
 
                 SalaryAmount := 0;
 
@@ -6447,29 +6391,7 @@ codeunit 52186507 "Members Portal Integration"
                         ResponseObject.WriteTo(Response);
                         exit(Response);
                     end;
-
-                    TotalGuarantorCapacity += SalaryAmount;
-                end else begin
-                    ResponseObject.Add('status', 'ERROR');
-                    Datum.Add('error_message', 'Guarantor member no. ' + guarantor_member_number.AsValue.AsText + ' NOT found!');
-                    ResponseObject.Add('data', Datum);
-
-                    AddDateTimeToResponse(ResponseObject);
-
-                    ResponseObject.WriteTo(Response);
-                    exit(Response);
                 end;
-            end;
-
-            if IsEmergencyLoan and (not TheLoanApplication."Is Self Guarantee") and (TotalGuarantorCapacity < TheLoanApplication."Requested Amount") then begin
-                ResponseObject.Add('status', 'ERROR');
-                Datum.Add('error_message', StrSubstNo('Guarantors must cover the full requested amount. Total guarantor capacity is KES %1, requested amount is KES %2', Format(TotalGuarantorCapacity), Format(TheLoanApplication."Requested Amount")));
-                ResponseObject.Add('data', Datum);
-
-                AddDateTimeToResponse(ResponseObject);
-
-                ResponseObject.WriteTo(Response);
-                exit(Response);
             end;
 
 
@@ -6504,6 +6426,26 @@ codeunit 52186507 "Members Portal Integration"
             if GlobalFunctions.IsFOSALoanProduct(loan_product.AsValue.AsText) then begin
                 TheLoanApplication."Is Self Guarantee" := false;
             end;
+
+            // Check for ongoing loan application
+            ExistingLoanApplications.Reset;
+            ExistingLoanApplications.SetRange("Member No.", SearchMember."No.");
+            ExistingLoanApplications.SetFilter(Status,
+                '%1|%2',
+                ExistingLoanApplications.Status::Open,
+                ExistingLoanApplications.Status::"Pending Approval"
+            );
+            if ExistingLoanApplications.FindFirst then begin
+                ResponseObject.Add('status', 'ERROR');
+                Datum.Add('error_message', StrSubstNo('There is an ongoing loan application %2 at status = %1', ExistingLoanApplications.Status, ExistingLoanApplications."Application No."));
+                ResponseObject.Add('data', Datum);
+
+                AddDateTimeToResponse(ResponseObject);
+
+                ResponseObject.WriteTo(Response);
+                exit(Response);
+            end;
+
 
             if TheLoanApplication.Insert(true) then begin
                 // Guarantor requests
@@ -6544,7 +6486,7 @@ codeunit 52186507 "Members Portal Integration"
                     //SelfGuaBal:=0;
                     SavAcc.Reset;
                     SavAcc.SetRange(SavAcc."Member No.", SearchMember."No.");
-                    SavAcc.SetRange(SavAcc."Product Type", '1');
+                    SavAcc.SetRange(SavAcc."Product Type", '191');
                     if SavAcc.Find('-') then begin
                         SavAcc.CalcFields(SavAcc."Balance (LCY)");
                         GenSetup.Get;
