@@ -80,7 +80,7 @@ table 52185739 "Loan Guarantors and Security"
                         if (Membersrec.Subflag <> Membersrec.Subflag::Rejoined) and (Membersrec.Subflag <> Membersrec.Subflag::"First time") and (Membersrec.Subflag <> Membersrec.Subflag::"Partial withdrawn") then
                             Error('The member ' + Membersrec.Name + ' with subflag  %1 is not allowed to Guarantee', Membersrec.Subflag);
                         //check if defaulter
-                        GlobalFunctions.FlagAccounts(Membersrec."No.");
+                        // GlobalFunctions.FlagAccounts(Membersrec."No.");
                     end;
 
                 end;
@@ -166,9 +166,11 @@ table 52185739 "Loan Guarantors and Security"
                         end;
                     end
                     else begin
+                        "Deposits/Shares" := SavingsAccounts.GetAvailableBalance("Savings Account No./Member No.");
                         "Available Shares" := SavingsAccounts.GetAvailableBalance("Savings Account No./Member No.");
                         "Amount Guaranteed" := "Available Shares";
                         "Original Amount Guaranteed" := "Amount Guaranteed";
+                        Modify;
                     end;
                     //Evaluate guarantor basic info
                     if Cust.Get("Savings Account No./Member No.") then begin
@@ -350,6 +352,10 @@ table 52185739 "Loan Guarantors and Security"
                                 Error('Member deposits account not found.');
                             end;
                         end;
+                        if rec."Guarantor Type" = rec."Guarantor Type"::Collateral then begin
+                            validate(Rec."Savings Account No./Member No.", Members."No.")
+                        end;
+
                     end
                     else
                         Message('Member deposits account not found for the specified employer code %1 and staff/payroll number %2', Rec."Employer Code", Rec."Staff/Payroll No.");

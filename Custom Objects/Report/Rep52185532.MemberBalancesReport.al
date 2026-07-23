@@ -12,6 +12,7 @@ report 52185532 "Member Balances Report"
     {
         dataitem(Members; Members)
         {
+            RequestFilterFields = "Employer Code", "Payroll/Staff No.", "Global Dimension 1 Code";
             column(No; "No.")
             {
             }
@@ -46,6 +47,7 @@ report 52185532 "Member Balances Report"
             column(JHZ2; JHZ2) { }
             column(SDL; SDL) { }
             column(Sno; Sno) { }
+            column(CL; CL) { }
 
             trigger OnafterGetRecord()
             begin
@@ -70,6 +72,7 @@ report 52185532 "Member Balances Report"
                 JHL := 0;
                 JHZ2 := 0;
                 SDL := 0;
+                CL := 0;
 
                 Sno += 1;
                 SavingsAccounts.reset;
@@ -126,6 +129,8 @@ report 52185532 "Member Balances Report"
                                 SDL += Loans."Outstanding Balance";
                             '062':
                                 EL += Loans."Outstanding Balance";
+                            '072':
+                                CL += Loans."Outstanding Balance";
 
                         end;
                     until Loans.next() = 0;
@@ -182,6 +187,7 @@ report 52185532 "Member Balances Report"
         JHZ2: Decimal;
         SDL: Decimal;
         Sno: Integer;
+        CL: decimal;
 
         SavingsAccounts: record "Savings Accounts";
         Loans: record Loans;

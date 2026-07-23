@@ -3825,6 +3825,12 @@ table 52185729 Loans
         GroupMembers: Record Members;
         BusinesDepositsAcc: Record "Savings Accounts";
     begin
+        Guarantors.Reset();
+        Guarantors.SetRange(Guarantors."Loan No", Rec."Loan No.");
+        if Guarantors.FindFirst() then begin
+            Guarantors.DeleteAll();
+        end;
+
         if (Rec."Member No." <> '') and (Rec."Loan Product Type" <> '') then begin
             ProductFactory.Get("Loan Product Type");
             if Members.Get("Member No.") then begin
@@ -3832,6 +3838,7 @@ table 52185729 Loans
                 GroupMembers.Reset;
                 GroupMembers.SetAutoCalcFields("Group Account No.");
                 GroupMembers.SetRange("Group Account No.", rec."Group Account No.");
+                Groupmembers.setfilter(Groupmembers.Subflag, '%1|%2|%3', Groupmembers.Subflag::Rejoined, Groupmembers.Subflag::"First time", Groupmembers.Subflag::"Partial withdrawn");
                 // GroupMembers.SetRange("Has Joined Business Loans", true);
                 // GroupMembers.SetFilter("No.", '<>%1', Members."No.");
                 if GroupMembers.findset() then begin
