@@ -1,249 +1,147 @@
-
-
 report 52186062 "Purchase Order"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './bc-azima-2026/Layout/Purchase Order.rdl';
-
-
+    RDLCLayout = './Layout/Purchase Order.rdl';
+    Caption = 'Purchase Order (Azima LPO)';
+    UsageCategory = ReportsAndAnalysis;
+    ApplicationArea = All;
 
     dataset
     {
         dataitem("Purchase Header"; "Purchase Header")
         {
             DataItemTableView = sorting("Document Type", "No.") where("Document Type" = const(Order));
-            RequestFilterFields = "No.", "Buy-from Vendor No.", "No. Printed";
+            RequestFilterFields = "No.", "Buy-from Vendor No.";
             RequestFilterHeading = 'Purchase Order';
-            column(PurchaseOrderNo_; "No.")
-            {
 
-            }
-            column(CompanyInformation_Name; CompanyInformation.Name)
+            column(No_; "No.")
             {
             }
-            column(CompanyInformation_Picture; CompanyInformation.Picture)
+            column(DocumentDate; Format("Document Date", 0, 4))
             {
             }
-            column(CompanyAddress; CompanyAddress)
+            column(PaymentTermsCode; "Payment Terms Code")
             {
             }
-            column(CompanyTelephone; CompanyTelephone)
+            column(ShipmentMethodCode; "Shipment Method Code")
             {
             }
-            column(CommunicationOnline; CommunicationOnline)
+            column(BuyFromVendorName; "Buy-from Vendor Name")
             {
             }
-            column(ItemNo; ItemNo)
+            column(VendorAddress_; VendorAddress)
             {
-
             }
-            column(Description; Description)
+            column(VendorEmail_; VendorEmail)
             {
-
             }
-            column(Quantity; Quantity)
+            column(VendorPhoneNo_; VendorPhoneNo)
             {
-
             }
-            column(LineAmount; LineAmount)
+            column(VendorKRAPin_; VendorKRAPin)
             {
-
             }
-            column(Unittotal; Unittotal)
+            column(CompanyName_; CompanyInformation.Name)
             {
-
             }
-            column(TotInc; TotInc)
+            column(CompanyPicture_; CompanyInformation.Picture)
             {
-
             }
-            column(Amount_Including_VAT; "Amount Including VAT")
+            column(CompanyAddress_; CompanyAddress)
             {
-
             }
-            column(Buy_from_Vendor_No_; "Buy-from Vendor No.")
+            column(CompanyTelephone_; CompanyTelephone)
             {
-
             }
-            column(Buy_from_Vendor_Name; "Buy-from Vendor Name")
+            column(CompanyMobile_; CompanyMobile)
             {
-
             }
-            column(Email; Email)
+            column(CompanyEmailWeb_; CompanyEmailWeb)
             {
-
             }
-            column(VATAMount; VATAMount)
-            {
-
-            }
-
-            column(PhoneNo; PhoneNo)
-            {
-
-            }
-            column(VatRegNo; VatRegNo)
-            {
-
-            }
-            column(bank; bank)
-            {
-
-            }
-            column(AccountNo; AccountNo)
-            {
-
-            }
-            column(Prices_Including_VAT; "Prices Including VAT")
-            {
-
-            }
-            column(Shipment_Method_Code; "Shipment Method Code")
-            {
-
-            }
-            column(Payment_Terms_Code; "Payment Terms Code")
-            {
-
-            }
-            column(DocumentDate; "Purchase Header"."Document Date")
-            {
-
-            }
-
-
 
             dataitem("Purchase Line"; "Purchase Line")
             {
                 DataItemLink = "Document No." = field("No.");
+                DataItemTableView = sorting("Document No.", "Line No.") where(Type = filter(<> " "));
+
+                column(LineNo_; LineNoCounter)
+                {
+                }
                 column(ItemNo_; "No.")
                 {
-
                 }
-                column(Descrption; Description)
+                column(Description_; Description)
                 {
-
                 }
-                column(Description_2; "Description 2")
+                column(Description2_; "Description 2")
                 {
-
                 }
-                column(Quanty; Quantity)
+                column(Quantity_; Quantity)
                 {
-
                 }
-                column(Unit_Cost; "Unit Cost")
+                column(UnitCost_; "Unit Cost")
                 {
-
                 }
-                column(Line_Amount; "Line Amount")
+                column(LineAmount_; "Line Amount")
                 {
-
                 }
-
+                column(LineDiscountAmount_; "Line Discount Amount")
+                {
+                }
+                column(AmountInclVAT_; "Amount Including VAT")
+                {
+                }
+                column(VATAmount_; VATAmount)
+                {
+                }
 
                 trigger OnAfterGetRecord()
                 begin
+                    // Skip empty/comment lines instead of printing blank rows
+                    if ("Line Amount" = 0) and (Quantity = 0) then
+                        CurrReport.Skip();
+
+                    LineNoCounter += 1;
+                    VATAmount := "Amount Including VAT" - "Line Amount";
                 end;
 
+                trigger OnPreDataItem()
+                begin
+                    LineNoCounter := 0;
+                end;
             }
 
             trigger OnAfterGetRecord()
-            var
-                myInt: Integer;
             begin
-                Tots := 0;
-                LineAmounts := 0;
-                VATAMount := 0;
-                //"Purchase Header".reset();
-                "Purchase Header".SetFilter("No.", OrderNo);
-                //"Purchase Header".setfilter("Document Date", '%1..%2', startDate, Enddate);
-                if "Purchase Header".find('-') then begin
-                    PurchLine.reset();
-                    PurchLine.setrange("Document No.", "Purchase Header"."No.");
-                    if PurchLine.find('-') then begin
-                        repeat
-                            Unittotal := 0;
-                            LineAmount := 0;
-                            TotInc := 0;
-                            ItemNo := PurchLine."No.";
-                            Description := PurchLine.Description;
-                            Quantity := PurchLine.Quantity;
-                            Unittotal := PurchLine."Unit Cost";
-                            LineAmount := PurchLine."Line Amount";
-                            TotInc := PurchLine."Amount Including VAT";
+                Clear(VendorAddress);
+                Clear(VendorEmail);
+                Clear(VendorPhoneNo);
+                Clear(VendorKRAPin);
 
-                            Tots += TotInc;
-                            LineAmounts += LineAmount;
-
-                        Until PurchLine.next = 0;
-
-                        VATAMount := Tots - LineAmounts;
-                    end;
-                    vendor.reset();
-                    Vendor.SetRange("No.", "Purchase Header"."Buy-from Vendor No.");
-                    if Vendor.FindFirst() then begin
-                        Email := vendor."E-Mail";
-                        PhoneNo := vendor."Phone No.";
-                        VatRegNo := vendor."KRA Pin No.";
-                        bank := Vendor."Preferred Bank Account Code";
-                        if bankaccount.get(Vendor."No.") then
-                            AccountNo := bankaccount."No.";
-
-
-                    end;
-
-
+                if Vendor.Get("Buy-from Vendor No.") then begin
+                    VendorEmail := Vendor."E-Mail";
+                    VendorPhoneNo := Vendor."Phone No.";
+                    VendorKRAPin := Vendor."KRA Pin No.";
+                    VendorAddress := DelChr(
+                        Vendor.Address + ' ' + Vendor."Address 2" + ', ' + Vendor.City,
+                        '>', ' ,');
                 end;
-
             end;
-
-
-            trigger OnPreDataItem()
-            var
-                myInt: Integer;
-            begin
-                //"Purchase Header".SetFilter("No.", OrderNo);
-            end;
-
-
-
-
         }
-
     }
+
     requestpage
     {
         SaveValues = true;
+
         layout
         {
             area(content)
             {
-                field(OrderNo; OrderNo)
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'No';
-                    TableRelation = "Purchase Header"."No." where("Document Type" = const(Order));
-                }
-                // group("Date Filter")
-                // {
-
-                //     field(startDate; startDate)
-                //     {
-
-                //         Caption = 'Start Date';
-                //         ShowMandatory = true;
-
-                //     }
-                //     field(Enddate; Enddate)
-                //     {
-                //         Caption = 'End Date';
-                //         ShowMandatory = true;
-                //     }
-                // }
+                // "No." and "Buy-from Vendor No." are auto-added via RequestFilterFields
             }
         }
-
 
         actions
         {
@@ -252,42 +150,31 @@ report 52186062 "Purchase Order"
             }
         }
     }
+
     trigger OnPreReport()
     begin
-        //if OrderNo = '' then Error('Please specify Purchase Order No');
+        CompanyInformation.Get();
+        CompanyInformation.CalcFields(Picture);
 
-        if CompanyInformation.Get then
-            CompanyInformation.CalcFields(CompanyInformation.Picture);
-        CompanyAddress := CompanyInformation.Address + ' -Post Code: ' + CompanyInformation."Post Code" + ' -City:' + CompanyInformation.City + ' Region: ' + CompanyInformation."Country/Region Code";
-        CompanyTelephone := 'Tel: ' + CompanyInformation."Phone No." + ' -Office Tel: ' + CompanyInformation."Phone No. 2";
-        CommunicationOnline := 'E-mail: ' + CompanyInformation."E-Mail" + '- Website: ' + CompanyInformation."Home Page";
+        CompanyAddress := DelChr(
+            CompanyInformation.Address + ', ' + CompanyInformation."Post Code" + ' ' + CompanyInformation.City,
+            '>', ' ,');
+        CompanyTelephone := 'Tel: ' + CompanyInformation."Phone No.";
+        CompanyMobile := CompanyInformation."Phone No. 2";
+        CompanyEmailWeb := 'Email: ' + CompanyInformation."E-Mail" + '   Web: ' + CompanyInformation."Home Page";
     end;
 
     var
-        CompanyInformation: record "Company Information";
+        CompanyInformation: Record "Company Information";
+        Vendor: Record Vendor;
         CompanyAddress: Text;
         CompanyTelephone: Text;
-        CommunicationOnline: Text;
-        VATAMount: decimal;
-        LineAmount: decimal;
-        Unittotal: decimal;
-        OrderNo: code[40];
-        LineAmounts: decimal;
-        ItemNo: code[30];
-        Description: text[50];
-        Quantity: Integer;
-        TotInc: decimal;
-        PurchLine: record "Purchase Line";
-        Vendor: record Vendor;
-        Email: text[20];
-        PhoneNo: text[20];
-        VatRegNo: code[100];
-        bank: code[100];
-        bankaccount: record "Bank Account";
-        AccountNo: code[40];
-        Tots: decimal;
-        startDate: date;
-        Enddate: date;
-
-
+        CompanyMobile: Text;
+        CompanyEmailWeb: Text;
+        VendorAddress: Text;
+        VendorEmail: Text;
+        VendorPhoneNo: Text;
+        VendorKRAPin: Text;
+        VATAmount: Decimal;
+        LineNoCounter: Integer;
 }
