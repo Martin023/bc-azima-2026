@@ -100,27 +100,27 @@ page 52185743 "CEO Role Center"
                         RunObject = Page "HR Individual Appraisals List";
                         ToolTip = 'View all employee appraisals';
                     }
-                    action("My Individual Appraisals")
-                    {
-                        ApplicationArea = Basic;
-                        Caption = 'My Appraisals';
-                        RunObject = Page "My Individual Appraisals List";
-                        ToolTip = 'View my own performance appraisals';
-                    }
-                    action("My Assigned Targets")
-                    {
-                        ApplicationArea = Basic;
-                        Caption = 'My Assigned Targets';
-                        RunObject = Page "My Assigned Targets";
-                        ToolTip = 'View targets assigned to me';
-                    }
-                    action("My Team Appraisals")
-                    {
-                        ApplicationArea = Basic;
-                        Caption = 'My Team Appraisals (Supervisor)';
-                        RunObject = Page "Supervisor Appraisals List";
-                        ToolTip = 'Review appraisals for employees I supervise';
-                    }
+                    // action("My Individual Appraisals")
+                    // {
+                    //     ApplicationArea = Basic;
+                    //     Caption = 'My Appraisals';
+                    //     RunObject = Page "My Individual Appraisals List";
+                    //     ToolTip = 'View my own performance appraisals';
+                    // }
+                    // action("My Assigned Targets")
+                    // {
+                    //     ApplicationArea = Basic;
+                    //     Caption = 'My Assigned Targets';
+                    //     RunObject = Page "My Assigned Targets";
+                    //     ToolTip = 'View targets assigned to me';
+                    // }
+                    // action("My Team Appraisals")
+                    // {
+                    //     ApplicationArea = Basic;
+                    //     Caption = 'My Team Appraisals (Supervisor)';
+                    //     RunObject = Page "Supervisor Appraisals List";
+                    //     ToolTip = 'Review appraisals for employees I supervise';
+                    // }
                 }
 
                 group("Appraisal Setup")
@@ -240,17 +240,17 @@ page 52185743 "CEO Role Center"
                     RunObject = Page 52186778;
                     Image = CashReceiptJournal;
                 }
-                action("Audit RC")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Audit Department';
-                    RunObject = Page 52186583;
-                    Image = CheckLedger;
-                }
+                // action("Audit RC")
+                // {
+                //     ApplicationArea = All;
+                //     Caption = 'Audit Department';
+                //     RunObject = Page 52186583;
+                //     Image = CheckLedger;
+                // }
                 action("DMU RC")
                 {
                     ApplicationArea = All;
-                    Caption = 'Debt Management Unit';
+                    Caption = 'Loan Management';
                     RunObject = Page 52185502;
                     Image = JobLedger;
                 }
@@ -271,7 +271,7 @@ page 52185743 "CEO Role Center"
                 action("Business Loans RC")
                 {
                     ApplicationArea = All;
-                    Caption = 'Business Loans';
+                    Caption = 'Loans';
                     RunObject = Page 52187328;
                     Image = Agreement;
                 }
