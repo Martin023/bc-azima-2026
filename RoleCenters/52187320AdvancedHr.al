@@ -1950,6 +1950,13 @@ page 52187320 AdvancedHumanResources
                     RunObject = page "HRHOD Department Targets";
                     ToolTip = 'Set and manage targets for my department (HOD only)';
                 }
+                action("My CEO Goal Assignments")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'My CEO Goal Assignments';
+                    RunObject = page "My CEO Goal Assignments";
+                    ToolTip = 'View and acknowledge CEO goals assigned to me as HOD, and import them into department targets';
+                }
                 group("Self Loan Application")
                 {
 

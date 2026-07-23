@@ -2,6 +2,7 @@ table 52185496 "HR Department Targets Header"
 {
     Caption = 'HR Department Targets Header';
     DataClassification = CustomerContent;
+    // SOURCE: CEO GOALS INTEGRATION FIELDS ADDED (36, 37)
 
     fields
     {
@@ -195,6 +196,18 @@ table 52185496 "HR Department Targets Header"
             Caption = 'Total Assignments';
             CalcFormula = Count("HR Employee Target Assignment" WHERE("Department Target No" = FIELD("Target No")));
             FieldClass = FlowField;
+            Editable = false;
+        }
+        field(36; "Source Type"; Option)
+        {
+            Caption = 'Source Type';
+            OptionCaption = 'Manual Entry,Imported from CEO Goals';
+            OptionMembers = "Manual Entry","Imported from CEO Goals";
+            Editable = false;
+        }
+        field(37; "Source CEO Goal No."; Code[20])
+        {
+            Caption = 'Source CEO Goal No.';
             Editable = false;
         }
     }

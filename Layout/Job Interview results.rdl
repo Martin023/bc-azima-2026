@@ -11,64 +11,6 @@
       <rd:DataSourceID>e132287d-607d-4652-acea-e84d8079cb7f</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="CompanyInfo_Name">
-          <DataField>CompanyInfo_Name</DataField>
-        </Field>
-        <Field Name="CompanyInfo_Address">
-          <DataField>CompanyInfo_Address</DataField>
-        </Field>
-        <Field Name="CompanyInfo_Picture">
-          <DataField>CompanyInfo_Picture</DataField>
-        </Field>
-        <Field Name="CompanyInfo_City">
-          <DataField>CompanyInfo_City</DataField>
-        </Field>
-        <Field Name="CompanyInfo_PostCode">
-          <DataField>CompanyInfo_PostCode</DataField>
-        </Field>
-        <Field Name="CompanyInfo_Phone">
-          <DataField>CompanyInfo_Phone</DataField>
-        </Field>
-        <Field Name="CompanyInfo_Email">
-          <DataField>CompanyInfo_Email</DataField>
-        </Field>
-        <Field Name="EmployeeRequisitionNo">
-          <DataField>EmployeeRequisitionNo</DataField>
-        </Field>
-        <Field Name="JobTitle">
-          <DataField>JobTitle</DataField>
-        </Field>
-        <Field Name="JobApplicationNo">
-          <DataField>JobApplicationNo</DataField>
-        </Field>
-        <Field Name="FullName">
-          <DataField>FullName</DataField>
-        </Field>
-        <Field Name="IDNo">
-          <DataField>IDNo</DataField>
-        </Field>
-        <Field Name="StageScore">
-          <DataField>StageScore</DataField>
-        </Field>
-        <Field Name="StageScoreFormat">
-          <DataField>StageScoreFormat</DataField>
-        </Field>
-        <Field Name="Qualified">
-          <DataField>Qualified</DataField>
-        </Field>
-        <Field Name="CandidateRank">
-          <DataField>CandidateRank</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -736,12 +678,64 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>c7c0455f-7a21-49ce-ae13-8a42c832970e</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="CompanyInfo_Name">
+          <DataField>CompanyInfo_Name</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Address">
+          <DataField>CompanyInfo_Address</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Picture">
+          <DataField>CompanyInfo_Picture</DataField>
+        </Field>
+        <Field Name="CompanyInfo_City">
+          <DataField>CompanyInfo_City</DataField>
+        </Field>
+        <Field Name="CompanyInfo_PostCode">
+          <DataField>CompanyInfo_PostCode</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Phone">
+          <DataField>CompanyInfo_Phone</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Email">
+          <DataField>CompanyInfo_Email</DataField>
+        </Field>
+        <Field Name="EmployeeRequisitionNo">
+          <DataField>EmployeeRequisitionNo</DataField>
+        </Field>
+        <Field Name="JobTitle">
+          <DataField>JobTitle</DataField>
+        </Field>
+        <Field Name="JobApplicationNo">
+          <DataField>JobApplicationNo</DataField>
+        </Field>
+        <Field Name="FullName">
+          <DataField>FullName</DataField>
+        </Field>
+        <Field Name="IDNo">
+          <DataField>IDNo</DataField>
+        </Field>
+        <Field Name="StageScore">
+          <DataField>StageScore</DataField>
+        </Field>
+        <Field Name="StageScoreFormat">
+          <DataField>StageScoreFormat</DataField>
+        </Field>
+        <Field Name="Qualified">
+          <DataField>Qualified</DataField>
+        </Field>
+        <Field Name="CandidateRank">
+          <DataField>CandidateRank</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>

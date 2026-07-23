@@ -86,6 +86,11 @@ page 52185592 "HR Setup"
                     ApplicationArea = Basic;
                     Caption = 'Employee Target Assignment Nos.';
                 }
+                field("CEO Goals Nos."; Rec."CEO Goals Nos.")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'CEO Goals Nos.';
+                }
                 field("Training Application Nos."; Rec."Training Application Nos.")
                 {
                     ApplicationArea = Basic;
