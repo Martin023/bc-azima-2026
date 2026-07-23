@@ -2087,11 +2087,12 @@ page 52187312 "Credit Management Role Center"
                 {
                     Caption = 'Member';
 
-                    // action("Activate BOSA Accounts")
-                    // {
-                    //     ApplicationArea = Basic, Suite;
-                    //     RunObject = report "Activate BOSA Accounts";
-                    // }
+                    action("Member Balances Report")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Member Balances Report';
+                        RunObject = report "Member Balances Report";
+                    }
                     action("Application")
                     {
                         ApplicationArea = Basic, Suite;

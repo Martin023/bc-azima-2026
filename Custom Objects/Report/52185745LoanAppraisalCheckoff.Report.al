@@ -1048,34 +1048,33 @@ Report 52185745 "Loan Appraisal Checkoff"
                     end;
 
                     //Existing Loans
-                    TotalRepay := 0;
+                    TotalLoanBal := 0;
                     Loan.Reset;
                     Loan.SetRange(Loan."Member No.", Loans."Member No.");
                     Loan.SetRange(Loan.Posted, true);
-                    //Loan.SetRange(Loan."Source Unit", Loan."Source Unit"::BOSA);
+                    Loan.SetRange("Mobile Loan", false);
                     //exclude BGL and FGL
-                    Loan.SetFilter("Loan Product Type", '<>BGL&<>FGL');
-                    Loan.SetAutoCalcFields("Total Balance");
-                    Loan.SetFilter("Total Balance", '>%1', 0);
+                    Loan.SetFilter("Loan Product Type", '<>BGL&<>FGL&<>012');
+                    Loan.SetAutoCalcFields("Total Balance", "Outstanding Balance");
+                    Loan.SetFilter("Outstanding Balance", '>%1', 0);
                     if Loan.FindSet() then begin
                         repeat
-                            LoanTopup.reset();
-                            LoanTopup.SetRange("Loan No.", Loans."Loan No.");
-                            LoanTopup.setrange("Loan Top Up", Loan."Loan No.");
-                            if LoanTopup.FindFirst() then begin
-                                if (LoanTopup."Total Top Up" < Loan."Total Balance") then begin
-                                    // Message(Format(Loan."Loan No."));
-                                    // Message(format(LoanTopup."Total Top Up"));
-                                    // Message(Format(Loan."Total Balance"));
-                                    TotalRepay += Loan.Repayment;
-                                    TotalLoanBal += Loan."Total Balance";
-                                end;
-                            end
-                            else begin
-                                TotalRepay += Loan.Repayment;
-                                TotalLoanBal += Loan."Total Balance";
-                            end;
+                            TotalLoanBal += Loan."Outstanding Balance";
                         until Loan.Next = 0;
+                    end;
+                    //Exclude total balance from loans being topped up.
+                    LoanTopup.reset();
+                    LoanTopup.SetRange("Loan No.", Loans."Loan No.");
+                    LoanTopup.setfilter("Loan Type", '<>%1', '012');
+                    if LoanTopup.FindFirst() then begin
+                        repeat
+                            // if Loan.get(LoanTopup."Loan Top Up") then begin
+                            //     Loan.CalcFields("Outstanding Balance");
+                            //     if Loan."Total Balance" >= LoanTopup."Total Top Up" then begin
+                            TotalLoanBal -= LoanTopup."Principle Top Up";
+                        //     end;
+                        // end;
+                        until LoanTopup.Next() = 0;
                     end;
                     QualificationOnDeposits -= TotalLoanBal;
                 end;
@@ -1182,7 +1181,7 @@ Report 52185745 "Loan Appraisal Checkoff"
                     SavingsAccounts.SetRange(SavingsAccounts."Member No.", Loans."Member No.");
                     SavingsAccounts.SetRange(SavingsAccounts."Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
                     if SavingsAccounts.FindFirst() then begin
-                        QualifyingAmount := LoanAppCodeunit.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.", Loans."Loan No.");
+                        QualifyingAmount := LoanAppCodeunit.GetmaxSelfGuaranteeAmt(SavingsAccounts."No.", Loans."Loan No.") + LoanAppCodeunit.GetTotalTopUpLoans(Loans."Loan No.");
                         Message('Self Guarantee Qualifying Amt %1', QualifyingAmount);
                         if Loans."Requested Amount" > QualifyingAmount then begin
                             Loans."Recommended Amount" := QualifyingAmount;
@@ -1632,5 +1631,4 @@ Report 52185745 "Loan Appraisal Checkoff"
         ExcemptProductCharges: record "Excempted Product Charges";
         TwoThirdGross: Decimal;
         LoanAppCodeunit: Codeunit "Loan Appraisal Codeunit";
-
 }

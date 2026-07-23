@@ -917,13 +917,13 @@ table 52185829 "Loan Recovery Header"
                 if AttachGuarantor then begin
                     Counter += 1;
                     AmountToTransaferToGuarantor := 0;
-                    if Rec."Source Unit" = Rec."Source Unit"::FOSA then begin
-                        PrincipleToTransaferToGuarantor := PrShare;
-                        InterestToTransaferToGuarantor := IntShare;
-                    end else begin
-                        PrincipleToTransaferToGuarantor := round((LoanGuarantors."Amount Guaranteed" / TotalGuaranteedAmount) * (PrincipleToGuarantors), 0.01);//Incase no balance calculated
-                        InterestToTransaferToGuarantor := round((LoanGuarantors."Amount Guaranteed" / TotalGuaranteedAmount) * (InterestToGuarantors), 0.01);
-                    end;
+                    // if Rec."Source Unit" = Rec."Source Unit"::FOSA then begin
+                    //     PrincipleToTransaferToGuarantor := PrShare;
+                    //     InterestToTransaferToGuarantor := IntShare;
+                    // end else begin
+                    PrincipleToTransaferToGuarantor := round((LoanGuarantors."Amount Guaranteed" / TotalGuaranteedAmount) * (PrincipleToGuarantors), 0.01);//Incase no balance calculated
+                    InterestToTransaferToGuarantor := round((LoanGuarantors."Amount Guaranteed" / TotalGuaranteedAmount) * (InterestToGuarantors), 0.01);
+                    // end;
 
                     AmountToTransaferToGuarantor := PrincipleToTransaferToGuarantor + InterestToTransaferToGuarantor;
                     // To handle out of balance by 0.01

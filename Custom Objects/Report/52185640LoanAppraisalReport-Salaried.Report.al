@@ -772,8 +772,9 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                             GenSetup.Get();//TESTFIELD("Excise Duty G/L");
                             LoanProcessingAmtEx := LoanProcessingAmt * GenSetup."Excise Duty (%)" * 0.01;
                         end;
+                        TotalProcessingAmt += (LoanProcessingAmt + LoanProcessingAmtEx);
                     until PCharges.Next = 0;
-                    TotalProcessingAmt := LoanProcessingAmt + LoanProcessingAmtEx;
+                    
                 end;
 
                 //3. Insurance fees
@@ -884,7 +885,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                                     //     TopUp.Commision := Loans."Approved Amount" * (PCharges.Percentage / 100);
                                     // END ELSE
                                     IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Net Amount") THEN BEGIN
-                                        TopUp.Commision := TopUp."Outstanding Balance" * (PCharges.Percentage / 100);
+                                        TopUp.Commision := TopUp."Principle Top Up" * (PCharges.Percentage / 100);
                                     END ELSE
                                         TopUp.Commision := PCharges."Charge Amount";
                                     //MESSAGE('Running Charge topup %1',TotalComputedCharges);
