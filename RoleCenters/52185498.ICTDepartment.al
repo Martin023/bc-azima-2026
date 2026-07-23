@@ -5592,6 +5592,13 @@ page 52187058 "ICT Department"
                     RunObject = page "HRHOD Department Targets";
                     ToolTip = 'Set and manage targets for my department (HOD only)';
                 }
+                action("My CEO Goal Assignments ESS")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'My CEO Goal Assignments';
+                    RunObject = page "My CEO Goal Assignments";
+                    ToolTip = 'View and acknowledge CEO goals assigned to me as HOD';
+                }
                 action("Overtime Claim List")
                 {
                     ApplicationArea = Basic, Suite;
