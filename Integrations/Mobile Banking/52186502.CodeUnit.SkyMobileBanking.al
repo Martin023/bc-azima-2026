@@ -2608,6 +2608,9 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         SearchMember: Record Members;
         MobileLoanProducts: Record "Product Factory";
         ProductSupportedClasses: Record "Product Supported Classes";
+        LoansProcess: Codeunit "Loans Process";
+        TotalChargesOnMin: Decimal;
+        MobileChargesInfo: List of [decimal];
 
         ResponseObject: JsonObject;
         Data: JsonArray;
@@ -2680,6 +2683,24 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                     SearchMember."No.",
                                     MobileLoanProducts."Product ID"
                                 );
+
+                            TotalChargesOnMin := MobileLoanProducts."Minimum Loan Amount" - LoansProcess.ComputeCharges(
+                                    MobileLoanProducts."Minimum Loan Amount",
+                                    MobileLoanProducts."Product ID",
+                                    '',
+                                    0
+                                );
+                            MobileLoanProducts."Minimum Loan Amount" += TotalChargesOnMin;
+
+                            MobileChargesInfo := SkyMbankingTrans.GetTransChargesPreview(
+                                    'LOAN_APPLICATION',
+                                    MobileLoanProducts."Minimum Loan Amount",
+                                    '',
+                                    SearchMember,
+                                    ''
+                                );
+                            MobileLoanProducts."Minimum Loan Amount" += MobileChargesInfo.Get(1);
+
                             Datum.Replace('loan_type_min_amount', MobileLoanProducts."Minimum Loan Amount");
                         end;
 
