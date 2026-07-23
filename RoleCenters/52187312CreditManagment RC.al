@@ -205,6 +205,7 @@ page 52187312 "Credit Management Role Center"
                         ApplicationArea = Basic, Suite;
                         caption = 'Loan Application List All';
                         RunObject = page "Loan Application List";
+                        //RunPageView=where("Global Dimension 1 Code"=filter())
                     }
                     // action("Loan Application List_BOSA")
                     // {

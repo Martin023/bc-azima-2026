@@ -1,6 +1,7 @@
 table 52187099 "Loan Appraisal"
 {
     DataClassification = ToBeClassified;
+    DrillDownPageId = "Loan Appraisals";
 
     fields
     {
@@ -77,7 +78,7 @@ table 52187099 "Loan Appraisal"
         {
             DataClassification = ToBeClassified;
         }
-        field(19; "Allowances"; Decimal)
+        field(19; "House Allowance"; Decimal)
         {
             DataClassification = ToBeClassified;
         }
@@ -89,7 +90,7 @@ table 52187099 "Loan Appraisal"
         {
             DataClassification = ToBeClassified;
         }
-        field(22; "1/3 of Basic"; Decimal)
+        field(22; "2/3 of Gross"; Decimal)
         {
             DataClassification = ToBeClassified;
         }
@@ -117,7 +118,7 @@ table 52187099 "Loan Appraisal"
         {
             DataClassification = ToBeClassified;
         }
-        field(29; "New Repayment"; Decimal)
+        field(29; "Repayment"; Decimal)
         {
             DataClassification = ToBeClassified;
         }
@@ -198,7 +199,7 @@ table 52187099 "Loan Appraisal"
         {
             DataClassification = ToBeClassified;
         }
-        field(49; "Dimension"; Code[20])
+        field(49; "Global Dimension 1"; Code[20])
         {
             DataClassification = ToBeClassified;
         }
@@ -246,11 +247,11 @@ table 52187099 "Loan Appraisal"
         {
             DataClassification = ToBeClassified;
         }
-        field(61; "Interest"; Decimal)
+        field(61; "Loan Interest Repayement"; Decimal)
         {
             DataClassification = ToBeClassified;
         }
-        field(62; "Principle"; Decimal)
+        field(62; "Loan Principle Repayment"; Decimal)
         {
             DataClassification = ToBeClassified;
         }
@@ -271,15 +272,39 @@ table 52187099 "Loan Appraisal"
             DataClassification = ToBeClassified;
         }
 
-        //    field(67; "Amount to Loan"; Decimal)
-        //         {
-        //             DataClassification = ToBeClassified;
-        //         }
+
         field(67; "Application Date"; Date)
         {
             DataClassification = ToBeClassified;
         }
-
+        field(68; "General Charges"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(70; "Form Fee"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(71; "Insurance Fee"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(72; "One month Interest"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(73; "Disposable Income"; Decimal)
+        {
+            DataClassification = ToBeClassified;
+        }
+        field(74; "Loan Appraised By"; Code[30])
+        {
+            DataClassification = ToBeClassified;
+        }
+         field(75; "Loan Approved By"; Code[30])
+        {
+            DataClassification = ToBeClassified;
+        }
 
 
 

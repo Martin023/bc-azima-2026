@@ -311,11 +311,12 @@ page 52185753 "Loan Application Card"
                                 if SalProc.Count < ProdFac."No. of Salary Times" then
                                     Error(Text010);
 
-                            end else
-                                if (Rec."Loan Product Type" = '140') and (Rec.Installments > 72) then begin
-                                    Rec.Installments := 72;
-                                    Message('Installments must less than or equal to 72');
-                                end;
+                            end;
+                            //  else
+                            //     if (Rec."Loan Product Type" = '140') and (Rec.Installments > 72) then begin
+                            //         Rec.Installments := 72;
+                            //         Message('Installments must less than or equal to 72');
+                            //     end;
                             //END;
                         end;
                     end;
@@ -514,18 +515,18 @@ page 52185753 "Loan Application Card"
                     ApplicationArea = Basic, Suite;
                     Editable = ApprovedEdit;
                 }
-                field("Amount In Arreas SACCO"; Rec."Amount In Arreas SACCO")
-                {
-                    ApplicationArea = all;
-                }
-                field("Amount In Arreas SASRA"; Rec."Amount In Arreas SASRA")
-                {
-                    ApplicationArea = all;
-                }
-                field("Days In Arrears"; Rec."Days In Arrears")
-                {
-                    ApplicationArea = all;
-                }
+                // field("Amount In Arreas SACCO"; Rec."Amount In Arreas SACCO")
+                // {
+                //     ApplicationArea = all;
+                // }
+                // field("Amount In Arreas SASRA"; Rec."Amount In Arreas SASRA")
+                // {
+                //     ApplicationArea = all;
+                // }
+                // field("Days In Arrears"; Rec."Days In Arrears")
+                // {
+                //     ApplicationArea = all;
+                // }
                 field("Mode of Disbursement"; Rec."Mode of Disbursement")
                 {
                     ApplicationArea = Basic, Suite;
@@ -625,11 +626,11 @@ page 52185753 "Loan Application Card"
                 {
 
                 }
-                field("Moratorium Loan"; Rec."Moratorium Loan")
-                {
-                    ApplicationArea = ALL;
-                    Editable = false;
-                }
+                // field("Moratorium Loan"; Rec."Moratorium Loan")
+                // {
+                //     ApplicationArea = ALL;
+                //     Editable = false;
+                // }
 
             }
 
@@ -670,54 +671,54 @@ page 52185753 "Loan Application Card"
 
                 }
             }
-            group("External STO Details")
-            {
-                Caption = 'External STO Details';
-                Editable = (Rec."Recovery Mode" = Rec."Recovery Mode"::"External STO");
-                field("Client Bank Code"; Rec."Client Bank Code")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ShowMandatory = true;
-                }
-                field("Client Bank Name"; Rec."Client Bank Name")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ShowMandatory = true;
-                }
-                field("Client Account No"; Rec."Client Account No")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ShowMandatory = true;
-                }
-                field("External STO  Amount"; Rec."External STO  Amount")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("External STO Effective Date"; Rec."External STO Effective Date")
-                {
-                    ApplicationArea = Basic, Suite;
-                    ShowMandatory = true;
-                }
-            }
-            group("Hybrid Details")
-            {
-                Caption = 'Hybrid Details';
-                Editable = Rec."Recovery Mode" = Rec."Recovery Mode"::Hybrid;
+            // group("External STO Details")
+            // {
+            //     Caption = 'External STO Details';
+            //     Editable = (Rec."Recovery Mode" = Rec."Recovery Mode"::"External STO");
+            //     field("Client Bank Code"; Rec."Client Bank Code")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         ShowMandatory = true;
+            //     }
+            //     field("Client Bank Name"; Rec."Client Bank Name")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         ShowMandatory = true;
+            //     }
+            //     field("Client Account No"; Rec."Client Account No")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         ShowMandatory = true;
+            //     }
+            //     field("External STO  Amount"; Rec."External STO  Amount")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //     }
+            //     field("External STO Effective Date"; Rec."External STO Effective Date")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         ShowMandatory = true;
+            //     }
+            // }
+            // group("Hybrid Details")
+            // {
+            //     Caption = 'Hybrid Details';
+            //     Editable = Rec."Recovery Mode" = Rec."Recovery Mode"::Hybrid;
 
 
-                field("Salary Amount"; Rec."Salary Amount")
-                {
-                    ApplicationArea = Basic, Suite;
-                    // Editable = ApplicationDetailsEdit;
-                    ShowMandatory = true;
-                }
-                field("Checkoff Amount"; Rec."Checkoff Amount")
-                {
-                    ApplicationArea = Basic, Suite;
-                    // Editable = ApplicationDetailsEdit;
-                    Editable = false;
-                }
-            }
+            //     field("Salary Amount"; Rec."Salary Amount")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         // Editable = ApplicationDetailsEdit;
+            //         ShowMandatory = true;
+            //     }
+            //     field("Checkoff Amount"; Rec."Checkoff Amount")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         // Editable = ApplicationDetailsEdit;
+            //         Editable = false;
+            //     }
+            // }
 
         }
         area(factboxes)

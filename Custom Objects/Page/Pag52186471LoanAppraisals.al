@@ -98,11 +98,11 @@ page 52186471 "Loan Appraisals"
                 {
                     ApplicationArea = all;
                 }
-                field(Allowances; Rec.Allowances)
-                {
-                    ApplicationArea = all;
+                // field(Allowances; Rec.Allowances)
+                // {
+                //     ApplicationArea = all;
 
-                }
+                // }
                 field("Gross Pay"; Rec."Gross Pay")
                 {
                     ApplicationArea = all;
@@ -111,10 +111,10 @@ page 52186471 "Loan Appraisals"
                 {
                     ApplicationArea = all;
                 }
-                field("1/3 of Basic"; rec."1/3 of Basic")
-                {
-                    ApplicationArea = all;
-                }
+                // field("1/3 of Basic"; rec."1/3 of Basic")
+                // {
+                //     ApplicationArea = all;
+                // }
                 field("Net Salary"; Rec."Net Salary")
                 {
                     ApplicationArea = all;
@@ -144,11 +144,11 @@ page 52186471 "Loan Appraisals"
                 {
                     ApplicationArea = all;
                 }
-                field("New Repayment"; Rec."New Repayment")
-                {
-                    ApplicationArea = all;
+                // field("New Repayment"; Rec."New Repayment")
+                // {
+                //     ApplicationArea = all;
 
-                }
+                // }
                 field("Average Interest"; Rec."Average Interest")
                 {
                     ApplicationArea = all;
