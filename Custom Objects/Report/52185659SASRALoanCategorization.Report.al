@@ -28,7 +28,7 @@ Report 52185659 "SASRA Loan Categorization"
                 END;
                 Loans.CalcFields("Total Balance");
 
-                if Loans."Total Balance" <= 0 then begin
+                if (Loans."Total Balance" <= 0) or (Loans."Repayment Start Date" < AsAt) then begin
                     if not SASRACategory.Get(Loans."Loan No.") then begin
                         SASRACategory.INIT;
                         SASRACategory."Loan No." := Loans."Loan No.";
