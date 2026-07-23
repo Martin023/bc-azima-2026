@@ -487,10 +487,10 @@ page 52186552 Loan
                 {
                     Caption = 'Max. Loan Amount';
                 }
-                field(maximumLimit; Rec."Maximum Limit")
-                {
-                    Caption = 'Maximum Limit';
-                }
+                // field(maximumLimit; Rec."Maximum Limit")
+                // {
+                //     Caption = 'Maximum Limit';
+                // }
                 field(memberAge; Rec."Member Age")
                 {
                     Caption = 'Member Age';

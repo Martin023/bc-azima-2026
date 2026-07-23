@@ -133,7 +133,7 @@ table 52185742 "Loans Top up"
                                 if Loans.get("Loan Top Up") then begin
                                     if ProdFact.get(Loans."Loan Product Type") then begin
                                         If ProdFact."Charge 1 month Interest" then begin
-                                            "One Month Interest" := round(("Principle Top Up" * Loans.Interest * 0.01 / 12), 1, '<');
+                                            "One Month Interest" := round(("Principle Top Up" * ((Loans.Interest * 0.01) / 12)), 1, '<');
                                         end;
                                     end;
                                 end;
@@ -156,6 +156,13 @@ table 52185742 "Loans Top up"
                 end;
                 if "Principle Top Up" < 0 then "Principle Top Up" := 0;
                 // "Total Top Up" := "Principle Top Up" + "Interest Top Up";
+                Loans.Reset;
+                Loans.SetRange(Loans."Loan No.", "Loan Top Up");
+                if Loans.Find('-') then begin
+                    Loans.CalcFields(Loans."Outstanding Balance");
+                    if "Principle Top Up" > Loans."Outstanding Balance" then
+                        Error('Amount cannot be greater than the principle balance!');
+                end;
 
 
             end;
@@ -165,14 +172,14 @@ table 52185742 "Loans Top up"
             Caption = 'Accrued Interest';
             trigger OnValidate()
             begin
-                "Total Top Up" := "Principle Top Up" + "Interest Top Up";
+                //"Total Top Up" := "Principle Top Up" + "Interest Top Up";
 
                 Loans.Reset;
                 Loans.SetRange(Loans."Loan No.", "Loan Top Up");
                 if Loans.Find('-') then begin
                     Loans.CalcFields(Loans."Outstanding Interest");
-                    if "Principle Top Up" < Loans."Outstanding Balance" then
-                        Error('Amount cannot be greater than the interest due.');
+                    if "Interest Top Up" > Loans."Outstanding Balance" then
+                        Error('Amount cannot be greater than the outstanding interest!');
                 end;
                 if "Interest Top Up" < 0 then "Interest Top Up" := 0;
                 "Total Top Up" := "Principle Top Up" + "Interest Top Up";

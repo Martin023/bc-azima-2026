@@ -551,7 +551,9 @@ table 52185729 Loans
                         Rec."Member Age" := (ROUND((TODAY - memebrrec."Date of Birth") / 365.2364, 1, '<'));
                         Rec."ID No." := memebrrec."Primary Identification";
                     end;
+                    "Member Class" := memebrrec."Member Class";
                     //Rec."Employer Code" := memebrrec."Employer Code";
+                    if "Member Class" = '' then message('Kindly note that the Member Class is not indicated on the member')
                 end;
                 // Apprasail.Reset();
                 // Apprasail.SetRange(Apprasail."Loan No.", Rec."Loan No.");
@@ -1037,7 +1039,7 @@ table 52185729 Loans
                         end;
                     end;
                 end;
-               
+
                 ProdFac.Reset;
                 ProdFac.SetRange("Product ID", Rec."Loan Product Type");
                 if ProdFac.FindFirst then begin
@@ -1353,12 +1355,15 @@ table 52185729 Loans
                 if ProdFac.Get("Loan Product Type") then begin
                     if Format(ProdFac."Grace Period - Principle") <> '' then begin
                         "Repayment Start Date" := CalcDate(ProdFac."Grace Period - Principle", "Application Date");
-                        "Repayment Start Date" := CalcDate('CM', "Repayment Start Date");
+                        //"Repayment Start Date" := CalcDate('CM', "Repayment Start Date");
                         IntstallMentPeriodText := Format(Installments) + 'M';
                         Evaluate(InstalmentPeriods, IntstallMentPeriodText);
                         "Expected Date of Completion" := CalcDate(InstalmentPeriods, "Repayment Start Date");
                     end else begin
-                        "Repayment Start Date" := CalcDate('CM', "Application Date");
+                        if rec."Member Class" = 'CLASSA' then
+                            "Repayment Start Date" := CalcDate('45D', "Application Date")
+                        else
+                            "Repayment Start Date" := CalcDate('1M', "Application Date");
                         IntstallMentPeriodText := Format(Installments) + 'M';
                         Evaluate(InstalmentPeriods, IntstallMentPeriodText);
                         "Expected Date of Completion" := CalcDate(InstalmentPeriods, "Repayment Start Date");
@@ -1458,21 +1463,23 @@ table 52185729 Loans
                         "Repayment Start Date" := CalcDate(ProdFac."Grace Period - Principle", "Disbursement Date");
 
                         // Apply repayment start date logic based on loan application date
-                        if Date2DMY("Repayment Start Date", 1) <= 15 then
-                            "Repayment Start Date" := CalcDate('CM', "Repayment Start Date") // End of current month
-                        else
-                            "Repayment Start Date" := CalcDate('CM+1M', "Repayment Start Date"); // End of following month
+                        // if Date2DMY("Repayment Start Date", 1) <= 15 then
+                        //     "Repayment Start Date" := CalcDate('CM', "Repayment Start Date") // End of current month
+                        // else
+                        //     "Repayment Start Date" := CalcDate('CM+1M', "Repayment Start Date"); // End of following month
 
                         IntstallMentPeriodText := Format(Installments) + 'M';
                         Evaluate(InstalmentPeriods, IntstallMentPeriodText);
                         "Expected Date of Completion" := CalcDate(InstalmentPeriods, "Repayment Start Date");
 
                     end else begin
+                        if rec."Member Class" = 'CLASSA' then
+                            "Repayment Start Date" := CalcDate('45D', "Disbursement Date")
                         // No grace period, apply repayment start date logic
-                        if Date2DMY("Disbursement Date", 1) <= 15 then
-                            "Repayment Start Date" := CalcDate('CM', "Disbursement Date") // End of current month
+                        // if Date2DMY("Disbursement Date", 1) <= 15 then
+                        //     "Repayment Start Date" := CalcDate('CM', "Disbursement Date") // End of current month
                         else
-                            "Repayment Start Date" := CalcDate('CM+1M', "Disbursement Date"); // End of following month
+                            "Repayment Start Date" := CalcDate('1M', "Disbursement Date"); // End of following month
 
                         IntstallMentPeriodText := Format(Installments) + 'M';
                         Evaluate(InstalmentPeriods, IntstallMentPeriodText);
@@ -2314,8 +2321,8 @@ table 52185729 Loans
         }
         field(50012; "Member Class"; Code[10])
         {
-            CalcFormula = Lookup(Members."Member Class" WHERE("No." = FIELD("Member No.")));
-            FieldClass = FlowField;
+            // CalcFormula = Lookup(Members."Member Class" WHERE("No." = FIELD("Member No.")));
+            // FieldClass = FlowField;
             TableRelation = "Member Classes";
         }
         field(50050; "Mobile Loan"; Boolean)
@@ -2341,8 +2348,9 @@ table 52185729 Loans
             Editable = false;
             FieldClass = FlowField;
         }
-        field(50057; "Maximum Limit"; Decimal)
+        field(50057; "Recovered Product Type"; Code[20])
         {
+            Description = 'To link loan type recovered to Guarantors';
         }
         field(50058; "Fosa Balance (LCY)"; Decimal)
         {
