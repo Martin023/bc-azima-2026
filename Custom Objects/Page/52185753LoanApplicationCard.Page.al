@@ -1276,64 +1276,64 @@ page 52185753 "Loan Application Card"
             separator(Action53)
             {
             }
-            action("Loan Appraisal Breakdown")
-            {
-                ApplicationArea = Basic, Suite;
-                Image = "Report";
-                Promoted = true;
-                PromotedCategory = "Report";
-                PromotedIsBig = true;
+            // action("Loan Appraisal Breakdown")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Image = "Report";
+            //     Promoted = true;
+            //     PromotedCategory = "Report";
+            //     PromotedIsBig = true;
 
-                trigger OnAction()
-                begin
-                    ProdFac.Get(Rec."Loan Product Type");
-                    Rec.TestField("Recovery Mode");
-                    LoanApp.Reset;
-                    LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
-                    LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");
-                    LoanApp.SetFilter(LoanApp."Total Loan Balance", '>0');
-                    if LoanApp.Find('-') then begin
-                        LoanApp.CalcFields("Total Loan Balance");
-                        if LoanApp."Total Loan Balance" > LoanApp.Repayment then begin
-                            LoansTopup.Reset;
-                            LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
-                            LoansTopup.SetRange("Loan Top Up", LoanApp."Loan No.");
-                            if not LoansTopup.Find('-') then
-                                Error('Member has an existing %1 Loan No. %2, Kindly TopUp', Rec."Loan Product Type Name", LoanApp."Loan No.");
-                        end;
-                    end;
-                    LoanApp.Reset;
-                    LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
-                    LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");
-                    LoanApp.SetFilter(LoanApp."Outstanding Balance", '>0');
-                    if LoanApp.Find('-') then begin
-                        LoansTopup.Reset;
-                        LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
-                        LoansTopup.SetRange("Loan Top Up", LoanApp."Loan No.");
-                        if not LoansTopup.Find('-') then
-                            Error('Member has an existing %1 Loan No. %2, Kindly TopUp', Rec."Loan Product Type", LoanApp."Loan No.");
-                    end;
+            //     trigger OnAction()
+            //     begin
+            //         ProdFac.Get(Rec."Loan Product Type");
+            //         Rec.TestField("Recovery Mode");
+            //         LoanApp.Reset;
+            //         LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
+            //         LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");
+            //         LoanApp.SetFilter(LoanApp."Total Loan Balance", '>0');
+            //         if LoanApp.Find('-') then begin
+            //             LoanApp.CalcFields("Total Loan Balance");
+            //             if LoanApp."Total Loan Balance" > LoanApp.Repayment then begin
+            //                 LoansTopup.Reset;
+            //                 LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
+            //                 LoansTopup.SetRange("Loan Top Up", LoanApp."Loan No.");
+            //                 if not LoansTopup.Find('-') then
+            //                     Error('Member has an existing %1 Loan No. %2, Kindly TopUp', Rec."Loan Product Type Name", LoanApp."Loan No.");
+            //             end;
+            //         end;
+            //         LoanApp.Reset;
+            //         LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
+            //         LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");
+            //         LoanApp.SetFilter(LoanApp."Outstanding Balance", '>0');
+            //         if LoanApp.Find('-') then begin
+            //             LoansTopup.Reset;
+            //             LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
+            //             LoansTopup.SetRange("Loan Top Up", LoanApp."Loan No.");
+            //             if not LoansTopup.Find('-') then
+            //                 Error('Member has an existing %1 Loan No. %2, Kindly TopUp', Rec."Loan Product Type", LoanApp."Loan No.");
+            //         end;
 
-                    LoanApp.Reset;
-                    LoanApp.SetRange(LoanApp."Loan No.", Rec."Loan No.");
-                    if LoanApp.Find('-') then begin
-                        // if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Check Off" then begin
-                        if (ProdFac."Mortgage Loan" = false) then begin
-                            REPORT.Run(Report::"Eligibilty Check", true, false, LoanApp);
-                            LoansR.reset;
-                            LoansR.SetRange("Loan No.", Rec."Loan No.");
-                            if LoansR.Find('-') then begin
-                                LoansR."Loan Appraised By" := UserId;
-                                LoansR.Modify;
-                            end;
-                            // CreateAppraisalBackup(LoanApp."Loan No.", 52185745);
-                            // end
-                        end;
+            //         LoanApp.Reset;
+            //         LoanApp.SetRange(LoanApp."Loan No.", Rec."Loan No.");
+            //         if LoanApp.Find('-') then begin
+            //             // if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Check Off" then begin
+            //             if (ProdFac."Mortgage Loan" = false) then begin
+            //                 REPORT.Run(Report::"Eligibilty Check", true, false, LoanApp);
+            //                 LoansR.reset;
+            //                 LoansR.SetRange("Loan No.", Rec."Loan No.");
+            //                 if LoansR.Find('-') then begin
+            //                     LoansR."Loan Appraised By" := UserId;
+            //                     LoansR.Modify;
+            //                 end;
+            //                 // CreateAppraisalBackup(LoanApp."Loan No.", 52185745);
+            //                 // end
+            //             end;
 
-                    end;
+            //         end;
 
-                end;
-            }
+            //     end;
+            // }
             // action("Post Advance")
             // {
             //     ApplicationArea = Basic, Suite;

@@ -507,6 +507,66 @@ page 52186773 "Loans card"
     {
         area(creation)
         {
+            action("Loan Appraisal Report")
+            {
+                ApplicationArea = Basic, Suite;
+                Image = "Report";
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+
+                trigger OnAction()
+                begin
+                    ProdFac.Get(Rec."Loan Product Type");
+                    Rec.TestField("Recovery Mode");
+
+
+                    LoanApp.Reset;
+                    LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
+                    LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");
+                    LoanApp.SetFilter(LoanApp."Outstanding Balance", '>0');
+                    if LoanApp.Find('-') then begin
+                        LoansTopup.Reset;
+                        LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
+                        LoansTopup.SetRange("Loan Top Up", LoanApp."Loan No.");
+                        if not LoansTopup.Find('-') then
+                            Error('Member has an existing %1 Loan No. %2, Kindly TopUp', Rec."Loan Product Type", LoanApp."Loan No.");
+                    end;
+
+                    LoanApp.Reset;
+                    LoanApp.SetRange(LoanApp."Loan No.", Rec."Loan No.");
+                    if LoanApp.Find('-') then begin
+                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Check Off" then begin
+                            if (ProdFac."Mortgage Loan" = false) then begin
+                                REPORT.Run(Report::"Loan Appraisal Checkoff", true, false, LoanApp);
+
+                            end else
+                                if ProdFac."Mortgage Loan" = true then begin
+                                    IF rec."Mortgage Insurance Amount" <= 0 THEN ERROR('Kindly specify Mortgage Insurance amount');
+                                    REPORT.Run(Report::"Loan Appraisal Haramb-Mortgage", true, false, LoanApp);
+
+                                end;
+                        end;
+                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::Salary then begin
+                            REPORT.Run(Report::"Loan Appraisal Report-Salaried", true, false, LoanApp);
+
+                        end;
+                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Corporate or Business" then begin
+                            REPORT.Run(Report::"Loan Appraisal Bus-Special", true, false, LoanApp);
+
+                        end;
+                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::"Staff Loans" then begin
+                            REPORT.Run(Report::"Loan Appraisal Staff", true, false, LoanApp);
+
+                        end;
+                        if LoanApp."Appraisal Parameter Type" = LoanApp."Appraisal Parameter Type"::Hybrid then begin
+                            REPORT.Run(Report::"Loan Appraisal Hybrid", true, false, LoanApp);
+
+                        end;
+                    end;
+
+                end;
+            }
             action("Generate Repayment  Schedule")
             {
                 ApplicationArea = Basic, Suite;
