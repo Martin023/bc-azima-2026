@@ -1557,7 +1557,7 @@ table 52185650 "HR Employees"
                     IndividualAppraisal.SetRange("Employee No", "No.");
                     IndividualAppraisal.SetRange("Supervisor ID", OldSupervisorID);
                     IndividualAppraisal.SetFilter(Status, '<%1', IndividualAppraisal.Status::Approved);
-                    
+
                     if IndividualAppraisal.FindSet(true) then begin
                         repeat
                             IndividualAppraisal."Supervisor ID" := "Supervisor Code";

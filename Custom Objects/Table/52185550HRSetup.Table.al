@@ -441,6 +441,11 @@ table 52185550 "HR Setup"
             DataClassification = CustomerContent;
             InitValue = true;
         }
+        field(39004291; "CEO Goals Nos."; Code[10])
+        {
+            Caption = 'CEO Goals Nos.';
+            TableRelation = "No. Series".Code;
+        }
     }
 
     keys
