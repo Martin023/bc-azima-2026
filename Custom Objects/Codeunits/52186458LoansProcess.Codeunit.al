@@ -7080,8 +7080,14 @@ Codeunit 52186458 "Loans Process"
 
         CreateSchedule := true;
         //or (LoansR.Interest = 0)
-        if (LoansR."Disbursement Date" = 0D) or (LoansR.Installments = 0) then
-            CreateSchedule := false;
+        if not LoansR."Loan Rescheduled" then begin
+            if (LoansR."Disbursement Date" = 0D) or (LoansR.Installments = 0) then
+                CreateSchedule := false;
+        end else begin
+            if (LoansR."Date Rescheduled" = 0D) or (LoansR."New No. of Installment" = 0) then
+                CreateSchedule := false;
+        end;
+
         if CreateSchedule then begin
             if Prodfac.Get(LoansR."Loan Product Type") then begin
                 LoanAmount := LoansR."Approved Amount";
@@ -7106,17 +7112,26 @@ Codeunit 52186458 "Loans Process"
                     // Apply grace period
                     RunDate := CalcDate(Format(LoansR."Grace Period"), LoansR."Disbursement Date");
                     // Apply repayment start date logic based on loan application date
-                    if Date2DMY(RunDate, 1) <= 10 then
-                        RunDate := CalcDate('CM', LoansR."Disbursement Date") // End of current month
-                    else
-                        RunDate := CalcDate('CM+1M', LoansR."Disbursement Date"); // End of following month
+                    // if Date2DMY(RunDate, 1) <= 10 then
+                    //     RunDate := CalcDate('CM', LoansR."Disbursement Date") // End of current month
+                    // else
+                    //     RunDate := CalcDate('CM+1M', LoansR."Disbursement Date"); // End of following month
 
                 end else begin
                     // No grace period, apply repayment start date logic
-                    if Date2DMY(LoansR."Disbursement Date", 1) <= 10 then
-                        RunDate := CalcDate('CM', LoansR."Disbursement Date") // End of current month
-                    else
-                        RunDate := CalcDate('CM+1M', LoansR."Disbursement Date"); // End of following month
+                    // if Date2DMY(LoansR."Disbursement Date", 1) <= 10 then
+                    //     RunDate := CalcDate('CM', LoansR."Disbursement Date") // End of current month
+                    // else
+                    //RunDate := CalcDate('CM+1M', LoansR."Disbursement Date"); // End of following month
+                    RunDate := LoansR."Repayment Start Date";
+                end;
+                if (LoansR."Loan Rescheduled") then begin
+                    if (LoansR."Date Rescheduled" <> 0D) then
+                        RunDate := CalcDate('1M', LoansR."Date Rescheduled");
+                    if LoansR."New No. of Installment" <> 0 then
+                        RepayPeriod := LoansR."New No. of Installment";
+                    if LoansR."Loan Balance at Rescheduling" > 0 then
+                        LoanAmount := LoansR."Loan Balance at Rescheduling";
                 end;
 
                 InstalNo := 0;
