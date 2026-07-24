@@ -8220,6 +8220,17 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
                 guarantor.AsObject.Get('member_number', guarantor_member_number);
 
+                if guarantor_member_number.AsValue.AsText = SearchMember."No." then begin
+                    ResponseObject.Add('request_status', 'ERROR');
+                    Datum.Add('error_message', 'You may NOT list yourself as a guarantor for this loan application');
+                    ResponseObject.Add('response_payload', Datum);
+
+                    AddDateTimeToResponse(ResponseObject);
+
+                    ResponseObject.WriteTo(Response);
+                    exit(Response);
+                end;
+
                 SalaryAmount := 0;
 
                 GuarantorMember.Reset;
@@ -8673,6 +8684,17 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 case action.AsValue.AsText of
                     'ADD':
                         begin
+                            if guarantor_member_number.AsValue.AsText = SearchMember."No." then begin
+                                ResponseObject.Add('request_status', 'ERROR');
+                                Datum.Add('error_message', 'You may NOT list yourself as a guarantor for this loan application');
+                                ResponseObject.Add('response_payload', Datum);
+
+                                AddDateTimeToResponse(ResponseObject);
+
+                                ResponseObject.WriteTo(Response);
+                                exit(Response);
+                            end;
+
                             TheLoanGuarantorshipRequest.Init;
 
                             TheLoanGuarantorshipRequest."Member No." := guarantor_member_number.AsValue.AsText;

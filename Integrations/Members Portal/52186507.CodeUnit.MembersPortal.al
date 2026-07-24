@@ -6403,6 +6403,17 @@ codeunit 52186507 "Members Portal Integration"
 
                 guarantor.AsObject.Get('member_number', guarantor_member_number);
 
+                if guarantor_member_number.AsValue.AsText = SearchMember."No." then begin
+                    ResponseObject.Add('status', 'ERROR');
+                    Datum.Add('error_message', 'You may NOT list yourself as a guarantor for this loan application');
+                    ResponseObject.Add('data', Datum);
+
+                    AddDateTimeToResponse(ResponseObject);
+
+                    ResponseObject.WriteTo(Response);
+                    exit(Response);
+                end;
+
                 SalaryAmount := 0;
 
                 GuarantorMember.Reset;
@@ -7443,6 +7454,17 @@ codeunit 52186507 "Members Portal Integration"
                     'ADD':
                         begin
                             // Validate loan guarantors
+
+                            if guarantor_member_number.AsValue.AsText = SearchMember."No." then begin
+                                ResponseObject.Add('status', 'ERROR');
+                                Datum.Add('error_message', 'You may NOT list yourself as a guarantor for this loan application');
+                                ResponseObject.Add('data', Datum);
+
+                                AddDateTimeToResponse(ResponseObject);
+
+                                ResponseObject.WriteTo(Response);
+                                exit(Response);
+                            end;
 
                             SalaryAmount := 0;
 
