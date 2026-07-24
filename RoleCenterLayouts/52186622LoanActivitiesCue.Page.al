@@ -107,7 +107,7 @@ page 52186622 "Loan Processing Activities"
                 //         CustomCuesCodeunit.DrillDownLoansDisbursedCurrentMonth();
                 //     end;
                 // }
-                field("Loan PAR"; Rec."Loan PAR")
+                field("Loan PAR"; PAR)
                 {
                     ApplicationArea = Basic, Suite;
                     DrillDownPageID = "Credit Ledger Entries";
@@ -288,7 +288,7 @@ page 52186622 "Loan Processing Activities"
         Rec."Total Loans Disb. This Month" := CustomCuesCodeunit.GetLoansDisbursedCurrentMonth;
         rec."Total Loans paid this month" := CustomCuesCodeunit.TotalLoansPaidThisMonth();
         rec."Total Interest paid this month" := CustomCuesCodeunit.TotalInterestPaidThisMonth();
-        rec."Loan PAR" := CustomCuesCodeunit.TotalPAR();
+        PAR := CustomCuesCodeunit.TotalPAR();
 
     end;
 
