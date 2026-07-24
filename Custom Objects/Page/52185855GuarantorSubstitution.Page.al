@@ -181,7 +181,7 @@ page 52185855 "Guarantor Substitution"
 
                         Lguarant.Reset;
                         Lguarant.SetRange(Lguarant."No.", Rec."No.");
-                        Lguarant.SetRange(Lguarant."Loan No", Rec."Loan No.");
+                        //Lguarant.SetRange(Lguarant."Loan No", Rec."Loan No.");
                         if Lguarant.Find('-') then begin
                             repeat
 
