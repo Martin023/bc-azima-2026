@@ -230,7 +230,7 @@ table 52185823 "Loan Rescheduling"
                     TotalBal := loansRec."Outstanding Balance" + loansRec."Outstanding Interest" + loansRec."Outstanding Bills";
                     if "New Amortised" > TotalBal then Error('You cannot reschedule more than the outstanding balance');
                     "New Installments" := Round((TotalBal / Rec."New Amortised"), 1, '>');
-                    if rec."New Installments" > Rec."Remaining Installments" then Error('You cannot reschedule more than the remaining number of installments');
+                    //if rec."New Installments" > Rec."Remaining Installments" then Error('You cannot reschedule more than the remaining number of installments');
                 end;
             end;
         }
@@ -440,33 +440,37 @@ table 52185823 "Loan Rescheduling"
             LBalance := Loans."Outstanding Balance";
             // RunDate := CalcDate('<CM>', "Rescheduling Date");
 
-            if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::Amortised then begin
-                TotalMRepay := Round((InterestRate / 1200) / (1 - Power((1 + (InterestRate / 1200)), -(RepayPeriod))) * (LoanAmount), 0.0001, '>');
-                LInterest := Round(LBalance / 1200 * InterestRate, 0.0001, '>');
-                LPrincipal := TotalMRepay - LInterest;
-                Loans.Repayment := LInterest + LPrincipal;
-            end;
+            if rec."New Interest Rate" > 0 then begin
+                if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::Amortised then begin
+                    TotalMRepay := Round((InterestRate / 1200) / (1 - Power((1 + (InterestRate / 1200)), -(RepayPeriod))) * (LoanAmount), 0.0001, '>');
+                    LInterest := Round(LBalance / 1200 * InterestRate, 0.0001, '>');
+                    LPrincipal := TotalMRepay - LInterest;
+                    Loans.Repayment := LInterest + LPrincipal;
+                end;
 
-            if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Straight Line" then begin
-                TestField("New Interest Rate");
-                LPrincipal := LoanAmount / RepayPeriod;
-                LInterest := (InterestRate / 1200) * LoanAmount;
-                Loans.Repayment := LPrincipal;
-            end;
+                if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Straight Line" then begin
+                    TestField("New Interest Rate");
+                    LPrincipal := LoanAmount / RepayPeriod;
+                    LInterest := (InterestRate / 1200) * LoanAmount;
+                    Loans.Repayment := LPrincipal;
+                end;
 
-            if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Balance" then begin
-                TestField("New Interest Rate");
-                LPrincipal := LoanAmount / RepayPeriod;
-                LInterest := (InterestRate / 1200) * LBalance;
-                Loans.Repayment := LPrincipal;
-            end;
+                if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Balance" then begin
+                    TestField("New Interest Rate");
+                    LPrincipal := LoanAmount / RepayPeriod;
+                    LInterest := (InterestRate / 1200) * LBalance;
+                    Loans.Repayment := LPrincipal;
+                end;
 
-            if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Flat" then begin
-                TestField("New Interest Rate");
-                LPrincipal := Round(LoanAmount / RepayPeriod, 1.0, '>');
-                LInterest := Round(((LoanAmount * InterestRate / 12 / 100) + (LPrincipal * InterestRate / 12 / 100)) / 2, 1.0, '>');
-                Loans.Repayment := LPrincipal;
-            end;
+                if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Flat" then begin
+                    TestField("New Interest Rate");
+                    LPrincipal := Round(LoanAmount / RepayPeriod, 1.0, '>');
+                    LInterest := Round(((LoanAmount * InterestRate / 12 / 100) + (LPrincipal * InterestRate / 12 / 100)) / 2, 1.0, '>');
+                    Loans.Repayment := LPrincipal;
+                end;
+            end
+            else
+                LInterest := 0;
 
             if CreditAccounts.Get(Loans."Loan Account") then begin
                 if ProdF.Get(CreditAccounts."Product Type") then begin

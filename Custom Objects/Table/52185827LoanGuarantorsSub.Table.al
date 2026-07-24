@@ -420,13 +420,17 @@ table 52185827 "Loan Guarantors Sub"
         }
         field(24; "Member Substituted"; Code[20])
         {
-            //TableRelation = "Savings Accounts" WHERE("Can Guarantee Loan" = FILTER(true));
-            TableRelation = IF ("Incoming Guar Type" = CONST(Guarantor)) "Loan Guarantors and Security"."Savings Account No./Member No."
+            TableRelation =
+            IF ("Guarantor Type" = CONST(Guarantor)) "Savings Accounts"."No." WHERE("Product Category" = filter("Business Deposits" | "BOSA Deposits"))
+            ELSE
+            IF ("Guarantor Type" = CONST(Guarantor)) "Savings Accounts"."No." WHERE("Product Category" = filter("Chama Investment Account"))
+            else
+            IF ("Guarantor Type" = CONST(Collateral)) Members."No." where(Status = filter(Active))
+            ELSE
+            IF ("Guarantor Type" = FILTER(Lien)) "Savings Accounts"."No." WHERE("Lien Placed" = FILTER(<> 0))
+            ELSE
+            IF ("Guarantor Type" = FILTER("Fixed Deposit")) "Fixed Deposit Contract"."No." WHERE("Fixed Deposit Status" = FILTER(Active));
 
-            ELSE
-            IF ("Incoming Guar Type" = CONST(Collateral)) "Loan Guarantors and Security"."Collateral Reg. No."
-            ELSE
-            IF ("Incoming Guar Type" = FILTER(Lien)) "Loan Guarantors and Security"."Savings Account No./Member No.";
 
             trigger OnValidate()
             var
