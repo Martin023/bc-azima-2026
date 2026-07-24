@@ -7132,12 +7132,14 @@ Codeunit 52186458 "Loans Process"
                         RepayPeriod := LoansR."New No. of Installment";
                     if LoansR."Loan Balance at Rescheduling" > 0 then
                         LoanAmount := LoansR."Loan Balance at Rescheduling";
+                    LBalance := LoansR."Loan Balance at Rescheduling"; //=> this was not there.....
                 end;
 
                 InstalNo := 0;
                 repeat
                     InstalNo := InstalNo + 1;
-                    if (Prodfac."Interest Recovered Upfront") or (ProdFac."Compute Interest Due on Postin" = ProdFac."Compute Interest Due on Postin"::"Full Period Interest") or (LoansR.Interest = 0) or (ProdFac."Interest Rate (Max.)" = 0) then begin
+                    // if (Prodfac."Interest Recovered Upfront") or (ProdFac."Compute Interest Due on Postin" = ProdFac."Compute Interest Due on Postin"::"Full Period Interest") or (LoansR.Interest = 0) or (ProdFac."Interest Rate (Max.)" = 0) then begin
+                    if (Prodfac."Interest Recovered Upfront") or (ProdFac."Compute Interest Due on Postin" = ProdFac."Compute Interest Due on Postin"::"Full Period Interest") or (InterestRate = 0) or (ProdFac."Interest Rate (Max.)" = 0) then begin
                         LInterest := 0;
 
                     end

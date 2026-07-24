@@ -72,6 +72,14 @@ XmlPort 52185555 "Loans BP"
             {
                 group("No|CheckoffNo|UploadNo(payroll/Mno/ID)|Amount|EmployerCode|ProductID|Remarks")
                 {
+                    field(HeaderTemplate; HeaderTemplate)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Copy this header';
+                        Editable = false;
+                        ToolTip = 'Copy this text and paste it into the first row of your Excel file.';
+                    }
+
                     field(No; "Checkoff Buffer"."Checkoff No")
                     {
                     }
@@ -83,8 +91,10 @@ XmlPort 52185555 "Loans BP"
         {
         }
     }
+
     trigger OninitXmlPort()
     begin
+        HeaderTemplate := 'No|CheckoffNo|UploadNo(payroll/Mno/ID)|Amount|EmployerCode|ProductID|Remarks';
     end;
 
     trigger OnPostXmlPort()
@@ -111,10 +121,9 @@ XmlPort 52185555 "Loans BP"
         // [RunOnClient]
         // Window: dotnet Interaction;
         MyComment: Text;
+        HeaderTemplate: Text[250];
         Response: Integer;
         Error001: label 'Invalid option, please respond with 2,3 OR 4.';
         Text01: label 'Upload done successfully';
 
 }
-
-
