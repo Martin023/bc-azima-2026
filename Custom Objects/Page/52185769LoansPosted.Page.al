@@ -82,20 +82,35 @@ page 52185769 "Loans Posted"
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
-                field("New Interest Rate"; Rec."New Interest Rate")
+
+                group(RescheduledLoan)
                 {
-                    ApplicationArea = Basic, Suite;
-                    Editable = false;
-                }
-                field("New No. of Installment"; Rec."New No. of Installment")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = false;
-                }
-                field("Loan Rescheduled"; Rec."Loan Rescheduled")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = false;
+                    field("Loan Rescheduled"; Rec."Loan Rescheduled")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Editable = false;
+                    }
+                    field("Date Rescheduled"; Rec."Date Rescheduled")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Editable = false;
+                    }
+                    field("Loan Balance at Rescheduling"; Rec."Loan Balance at Rescheduling")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Editable = false;
+                    }
+                    field("New Interest Rate"; Rec."New Interest Rate")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Editable = false;
+                    }
+                    field("New No. of Installment"; Rec."New No. of Installment")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Editable = false;
+                    }
+
                 }
                 field("Amount To Disburse"; Rec."Amount To Disburse")
                 {
@@ -490,25 +505,25 @@ page 52185769 "Loans Posted"
                     // LoanRescheduling.SetRange(LoanRescheduling."Loan No.", Rec."Loan No.");
                     // LoanRescheduling.SetRange(LoanRescheduling.Rescheduled, true);
                     // if not LoanRescheduling.Find('-') then begin
-                    LRepaymentSchedule.Reset;
-                    LRepaymentSchedule.SetRange(LRepaymentSchedule."Loan No.", Rec."Loan No.");
-                    if LRepaymentSchedule.Find('-') then LRepaymentSchedule.DeleteAll;
+                    // LRepaymentSchedule.Reset;
+                    // LRepaymentSchedule.SetRange(LRepaymentSchedule."Loan No.", Rec."Loan No.");
+                    // if LRepaymentSchedule.Find('-') then LRepaymentSchedule.DeleteAll;
                     LoanProcess.GenerateSchedule(Rec, True);
                     // end;
                     //Check if Ever Rescheduled.
-                    LoanRescheduling.Reset;
-                    LoanRescheduling.SetRange(LoanRescheduling."Loan No.", Rec."Loan No.");
-                    LoanRescheduling.SetRange(LoanRescheduling.Rescheduled, true);
-                    if LoanRescheduling.Find('-') then begin
-                        LRepaymentSchedule.Reset;
-                        LRepaymentSchedule.SetRange(LRepaymentSchedule."Loan No.", LoanRescheduling."Loan No.");
-                        LRepaymentSchedule.SetRange("Repayment Date", CalcDate('<CM-1M+1D>', LoanRescheduling."Rescheduling Date"), 99991230D);
-                        if LRepaymentSchedule.Find('-') then LRepaymentSchedule.DeleteAll;
-                        repeat
-                            LoanProcess.GenerateSchedule(Rec, True);
-                        // GetNewRepayment(LoanRescheduling."No.");
-                        until LoanRescheduling.Next = 0;
-                    end;
+                    // LoanRescheduling.Reset;
+                    // LoanRescheduling.SetRange(LoanRescheduling."Loan No.", Rec."Loan No.");
+                    // LoanRescheduling.SetRange(LoanRescheduling.Rescheduled, true);
+                    // if LoanRescheduling.Find('-') then begin
+                    //     LRepaymentSchedule.Reset;
+                    //     LRepaymentSchedule.SetRange(LRepaymentSchedule."Loan No.", LoanRescheduling."Loan No.");
+                    //     LRepaymentSchedule.SetRange("Repayment Date", CalcDate('<CM-1M+1D>', LoanRescheduling."Rescheduling Date"), 99991230D);
+                    //     if LRepaymentSchedule.Find('-') then LRepaymentSchedule.DeleteAll;
+                    //     repeat
+                    //         LoanProcess.GenerateSchedule(Rec, True);
+                    //     // GetNewRepayment(LoanRescheduling."No.");
+                    //     until LoanRescheduling.Next = 0;
+                    // end;
 
                     Commit;
 
