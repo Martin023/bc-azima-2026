@@ -60,6 +60,11 @@ page 52185849 "Loan Rescheduling"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Maximun Installments"; Rec."Maximun Installments")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+
                 field("New Installments"; Rec."New Installments")
                 {
                     ApplicationArea = Basic, Suite;
@@ -102,10 +107,7 @@ page 52185849 "Loan Rescheduling"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Maximun Installments"; Rec."Maximun Installments")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+
                 field("Responsibility Center"; Rec."Responsibility Center")
                 {
                     ApplicationArea = Basic, Suite;
