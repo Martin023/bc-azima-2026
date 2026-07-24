@@ -2534,7 +2534,7 @@ codeunit 52186507 "Members Portal Integration"
 
                             ProductFactory."Minimum Loan Amount" :=
                                 OutstandingBalance +
-                                TotalChargesOnMin +
+                                /*TotalChargesOnMin +*/
                                 MobileChargesInfo.Get(1);
 
                         until ProductFactory."Minimum Loan Amount" = PreviousMinimum;
