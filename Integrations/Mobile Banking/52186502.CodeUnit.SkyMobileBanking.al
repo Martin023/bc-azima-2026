@@ -2705,7 +2705,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
                                 MobileLoanProducts."Minimum Loan Amount" :=
                                     OutstandingBalance +
-                                    TotalChargesOnMin +
+                                    /*TotalChargesOnMin +*/
                                     MobileChargesInfo.Get(1);
 
                             until MobileLoanProducts."Minimum Loan Amount" = PreviousMinimum;
