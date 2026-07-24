@@ -2710,6 +2710,9 @@ codeunit 52186512 "Sky M-Banking Transactions"
                 MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Self PIN Reset");
             'GAMING_UTILITY_PAYMENT':
                 MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Gaming Utility Payment");
+            // "Loan Disbursement"
+            'LOAN_DISBURSEMENT':
+                MobileTransTypes.SetRange(Type, MobileTransTypes.Type::"Loan Disbursement");
         end;
 
         MobileTransTypes.SetLoadFields(Code);

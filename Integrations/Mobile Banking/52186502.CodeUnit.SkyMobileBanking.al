@@ -2618,6 +2618,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         Response: Text;
 
         EligibleClass: JsonArray;
+        OutstandingBalance: Decimal;
+        PreviousMinimum: Decimal;
     begin
         Payload.Get('identifier_type', identifier_type); // MSISDN, CUSTOMER_NO
         Payload.Get('identifier', identifier);
@@ -2679,27 +2681,34 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                         Datum.Add('loan_type_name', MobileLoanProducts."Product Description");
                         Datum.Add('loan_type_min_amount', MobileLoanProducts."Minimum Loan Amount");
                         if MobileLoanProducts."Allow Topup" then begin
-                            MobileLoanProducts."Minimum Loan Amount" += GlobalFunctions.GetMemberLoanProductTotalBalance(
-                                    SearchMember."No.",
-                                    MobileLoanProducts."Product ID"
-                                );
+                            OutstandingBalance := GlobalFunctions.GetMemberLoanProductTotalBalance(
+                                SearchMember."No.",
+                                MobileLoanProducts."Product ID");
 
-                            TotalChargesOnMin := MobileLoanProducts."Minimum Loan Amount" - LoansProcess.ComputeCharges(
-                                    MobileLoanProducts."Minimum Loan Amount",
-                                    MobileLoanProducts."Product ID",
-                                    '',
-                                    0
-                                );
-                            MobileLoanProducts."Minimum Loan Amount" += TotalChargesOnMin;
+                            MobileLoanProducts."Minimum Loan Amount" := OutstandingBalance;
 
-                            MobileChargesInfo := SkyMbankingTrans.GetTransChargesPreview(
-                                    'LOAN_APPLICATION',
-                                    MobileLoanProducts."Minimum Loan Amount",
+                            repeat
+                                PreviousMinimum := MobileLoanProducts."Minimum Loan Amount";
+
+                                // TotalChargesOnMin := PreviousMinimum - LoansProcess.ComputeCharges(
+                                //     PreviousMinimum,
+                                //     MobileLoanProducts."Product ID",
+                                //     '',
+                                //     0);
+
+                                MobileChargesInfo := SkyMbankingTrans.GetTransChargesPreview(
+                                    'LOAN_DISBURSEMENT',
+                                    PreviousMinimum,
                                     '',
                                     SearchMember,
-                                    ''
-                                );
-                            MobileLoanProducts."Minimum Loan Amount" += MobileChargesInfo.Get(1);
+                                    '');
+
+                                MobileLoanProducts."Minimum Loan Amount" :=
+                                    OutstandingBalance +
+                                    TotalChargesOnMin +
+                                    MobileChargesInfo.Get(1);
+
+                            until MobileLoanProducts."Minimum Loan Amount" = PreviousMinimum;
 
                             Datum.Replace('loan_type_min_amount', MobileLoanProducts."Minimum Loan Amount");
                         end;
