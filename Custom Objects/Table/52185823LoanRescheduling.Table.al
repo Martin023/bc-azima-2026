@@ -116,26 +116,27 @@ table 52185823 "Loan Rescheduling"
                     end;
                     LoanSched.Reset;
                     LoanSched.SetRange(LoanSched."Loan No.", Rec."Loan No.");
-                    LoanSched.SetRange(Paid, true);
+                    LoanSched.SetFilter("Repayment Date", '>%1', rec."Rescheduling Date");
                     paidInstallments := LoanSched.Count;
-                    "Remaining Installments" := OriginalIns - paidInstallments;
+                    "Remaining Installments" := paidInstallments;
 
                     //Delete schedule if any.
-                    LoanSched.Reset;
-                    LoanSched.SetRange(LoanSched."Loan No.", "Loan No.");
-                    if LoanSched.Find('-') then LoanSched.DeleteAll;
+                    // LoanSched.Reset;
+                    // LoanSched.SetRange(LoanSched."Loan No.", "Loan No.");
+                    // if LoanSched.Find('-') then LoanSched.DeleteAll;
 
-                    //Generate schedule.
-                    GenerateSchedule();
+                    // //Generate schedule.
+                    // GenerateSchedule();
 
-                    //Check if Ever Rescheduled.
+                    // //Check if Ever Rescheduled.
                     LoanRescheduling.Reset;
                     LoanRescheduling.SetRange(LoanRescheduling."Loan No.", "Loan No.");
                     LoanRescheduling.SetRange(LoanRescheduling.Rescheduled, true);
                     if LoanRescheduling.FindFirst then begin
-                        repeat
-                            RecreateOldSchedules(LoanRescheduling."No.");
-                        until LoanRescheduling.Next = 0;
+                        Error('This loan has already been reschedule!')
+                        // repeat
+                        //     RecreateOldSchedules(LoanRescheduling."No.");
+                        // until LoanRescheduling.Next = 0;
                     end;
                     //Check schedule details
 
@@ -171,12 +172,13 @@ table 52185823 "Loan Rescheduling"
 
                 PastInstallments := 0;
                 if "Schedule Type" <> "Schedule Type"::Restructure then begin
-                    if "Original Installments" = "Maximun Installments" then begin
-                        if "New Installments" > "Remaining Installments" then Error(Txt0001);
-                    end else begin
-                        PastInstallments := "Original Installments" - "Remaining Installments";
-                        if "New Installments" + PastInstallments > "Maximun Installments" then Error(Txt0002);
-                    end;
+                    // if "Original Installments" = "Maximun Installments" then begin
+                    //     if "New Installments" > "Remaining Installments" then Error(Txt0001);
+                    // end else begin
+                    //     PastInstallments := "Original Installments" - "Remaining Installments";
+                    //     if "New Installments" + PastInstallments > "Maximun Installments" then Error(Txt0002);
+                    // end;
+                    if "New Installments" > "Maximun Installments" then Error(Txt0002);
                 end;
                 if "Schedule Type" = "Schedule Type"::Restructure then begin
                     Loansre.Reset();
@@ -191,8 +193,8 @@ table 52185823 "Loan Rescheduling"
                                 Message('The member will be required to add new guarantors');
                             if "New Installments" > LoanPro."Ordinary Default Intallments" then
                                 Error(Txt0002);
-                            if "New Installments" + paidInstallments > LoanPro."Ordinary Default Intallments" then
-                                Error(Txt0002);
+                            // if "New Installments" + paidInstallments > LoanPro."Ordinary Default Intallments" then
+                            //     Error(Txt0002);
                         end;
                     end;
 
@@ -228,7 +230,7 @@ table 52185823 "Loan Rescheduling"
                     TotalBal := loansRec."Outstanding Balance" + loansRec."Outstanding Interest" + loansRec."Outstanding Bills";
                     if "New Amortised" > TotalBal then Error('You cannot reschedule more than the outstanding balance');
                     "New Installments" := Round((TotalBal / Rec."New Amortised"), 1, '>');
-                    if rec."New Installments" > Rec."Remaining Installments" then Error('You cannot reschedule more than the remaining number of installments');
+                    //if rec."New Installments" > Rec."Remaining Installments" then Error('You cannot reschedule more than the remaining number of installments');
                 end;
             end;
         }
@@ -243,6 +245,7 @@ table 52185823 "Loan Rescheduling"
         field(15; "Maximun Installments"; Integer)
         {
             Editable = false;
+            Caption = 'Maximum Installments';
         }
         field(16; "Rescheduling Date"; Date)
         {
@@ -269,11 +272,11 @@ table 52185823 "Loan Rescheduling"
             // OptionCaption = ' ,Checkoff,Salary,Dividend,Fixed Deposit,Internal STO, External STO';
             //  OptionMembers = " ",Checkoff,Salary,Dividend,"Fixed Deposit","Internal STO"," External STO";
         }
-        field(50; "Defaulter Status"; Option)
-        {
-            OptionCaption = 'Active Loan,Loan at Debt Collector,Loan at Lawyer, Loan at CRB';
-            OptionMembers = "Active Loan","Loan at Debt Collector","Loan at Lawyer"," Loan at CRB";
-        }
+        // field(50; "Defaulter Status"; Option)
+        // {
+        //     OptionCaption = 'Active Loan,Loan at Debt Collector,Loan at Lawyer, Loan at CRB';
+        //     OptionMembers = "Active Loan","Loan at Debt Collector","Loan at Lawyer"," Loan at CRB";
+        // }
         field(51; "Current Interest Rate"; Decimal)
         {
             Editable = false;
@@ -422,40 +425,22 @@ table 52185823 "Loan Rescheduling"
         Loans.SetRange("Loan No.", Rec."Loan No.");
         if Loans.Find('-') then begin
 
-            GeneralSetUp.Get;
-
-            LoanRepaymentSchedule.Reset;
-            LoanRepaymentSchedule.SetRange("Repayment Date", CalcDate('<CM-1M+1D>', "Rescheduling Date"), 99991230D);
-            LoanRepaymentSchedule.SetRange("Loan No.", Loans."Loan No.");
-            if LoanRepaymentSchedule.Find('-') then LoanRepaymentSchedule.DeleteAll;
+            GeneralSetUp.Get();
 
             Loans.CalcFields("Outstanding Balance", "Outstanding Interest");
 
-            if "Schedule Type" = "Schedule Type"::Reschedule then begin
-                InterestRate := Loans.Interest;
-            end else
-                if "Schedule Type" = "Schedule Type"::"Interest Change" then begin
-                    InterestRate := "New Interest Rate";
-                end
-                else
-                    if "Schedule Type" = "Schedule Type"::Restructure then begin
-                        InterestRate := "New Interest Rate";
-                    end;
             if "New Installments" > 0 then
                 RepayPeriod := "New Installments"
             else
                 RepayPeriod := "Original Installments";
-            if "New Installments" > 0 then
-                "New Installments" := Rec."New Installments"
-            else
-                "New Installments" := "Original Installments";
+
+
+            InterestRate := "New Interest Rate";
             LoanAmount := Loans."Outstanding Balance";
             LBalance := Loans."Outstanding Balance";
-            RunDate := CalcDate('<CM>', "Rescheduling Date");
+            // RunDate := CalcDate('<CM>', "Rescheduling Date");
 
-            repeat
-                InstalNo := InstalNo + 1;
-
+            if rec."New Interest Rate" > 0 then begin
                 if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::Amortised then begin
                     TotalMRepay := Round((InterestRate / 1200) / (1 - Power((1 + (InterestRate / 1200)), -(RepayPeriod))) * (LoanAmount), 0.0001, '>');
                     LInterest := Round(LBalance / 1200 * InterestRate, 0.0001, '>');
@@ -483,43 +468,9 @@ table 52185823 "Loan Rescheduling"
                     LInterest := Round(((LoanAmount * InterestRate / 12 / 100) + (LPrincipal * InterestRate / 12 / 100)) / 2, 1.0, '>');
                     Loans.Repayment := LPrincipal;
                 end;
-
-                //Decrement the Balance
-                LBalance := LBalance - LPrincipal;
-
-                Evaluate(RepayCode, Format(InstalNo));
-
-                LoanRepaymentSchedule.Init;
-                LoanRepaymentSchedule."Repayment Code" := RepayCode;
-                LoanRepaymentSchedule."Loan No." := Loans."Loan No.";
-                LoanRepaymentSchedule."Loan Amount" := "Outstanding Balance";
-                LoanRepaymentSchedule."Instalment No" := InstalNo;
-                LoanRepaymentSchedule."Repayment Date" := RunDate;
-                LoanRepaymentSchedule."Member No." := "Member No.";
-                LoanRepaymentSchedule."Loan Category" := Loans."Loan Product Type";
-                LoanRepaymentSchedule."Monthly Repayment" := LInterest + LPrincipal + GeneralSetUp."BDE Loan Above Target";
-                LoanRepaymentSchedule."Monthly Interest" := LInterest;
-                LoanRepaymentSchedule."Principal Repayment" := LPrincipal;
-                // LoanRepaymentSchedule."Administartion Amount":=GeneralSetUp."BDE Loan Above Target";
-                LoanRepaymentSchedule."Reset Doc No." := "No.";
-                LoanRepaymentSchedule."Reset Schedule" := true;
-                LoanRepaymentSchedule.Insert;
-
-                //Repayment Frequency
-                if Loans."Repayment Frequency" = Loans."Repayment Frequency"::Daily then
-                    RunDate := CalcDate('1D', RunDate)
-                else
-                    if Loans."Repayment Frequency" = Loans."Repayment Frequency"::Weekly then
-                        RunDate := CalcDate('1W', RunDate)
-                    else
-                        if Loans."Repayment Frequency" = Loans."Repayment Frequency"::Monthly then
-                            RunDate := CalcDate('1M', RunDate)
-                        else
-                            if Loans."Repayment Frequency" = Loans."Repayment Frequency"::Quarterly then
-                                RunDate := CalcDate('1Q', RunDate);
-            //Repayment Frequency
-
-            until InstalNo = "New Installments";
+            end
+            else
+                LInterest := 0;
 
             if CreditAccounts.Get(Loans."Loan Account") then begin
                 if ProdF.Get(CreditAccounts."Product Type") then begin
@@ -530,130 +481,127 @@ table 52185823 "Loan Rescheduling"
             end;
 
             "New Amortised" := LInterest + LPrincipal + GeneralSetUp."BDE Loan Above Target";
-            "Outstanding Interest" := LInterest;
-
-
             Modify;
         end;
     end;
 
-    local procedure GenerateSchedule()
-    begin
-        GrPrinciple := 0;
-        GrInterest := 0;
-        QCounter := 0;
-        QCounter := 3;
+    // local procedure GenerateSchedule()
+    // begin
+    //     GrPrinciple := 0;
+    //     GrInterest := 0;
+    //     QCounter := 0;
+    //     QCounter := 3;
 
-        GeneralSetUp.Get;
-
-
-        LoansR.Reset;
-        LoansR.SetRange(LoansR."Loan No.", "Loan No.");
-        if LoansR.Find('-') then begin
-
-            LoanAmount := LoansR."Approved Amount";
-            if LoansR."Loan Rescheduled" then begin
-                if LoansR."New Interest Rate" <> 0 then InterestRate := LoansR."New Interest Rate";
-            end else begin
-                InterestRate := LoansR.Interest;
-            end;
-            if Rec."New Interest Rate" > 0 then
-                InterestRate := "New Interest Rate"
-            else
-                InterestRate := InterestRate;
-            RepayPeriod := LoansR.Installments;
-            InitialInstal := LoansR.Installments;
-            LBalance := LoansR."Approved Amount";
-            if LoansR."Repayment Start Date" <> 0D then begin
-                RunDate := LoansR."Repayment Start Date";
-            end else
-                if LoansR."Disbursement Date" <> 0D then begin
-                    RunDate := LoansR."Disbursement Date";
-                end else begin
-                    RunDate := LoansR."Application Date";
-                end;
-
-            InstalNo := 0;
-
-            //Repayment Frequency
-            repeat
-                InstalNo := InstalNo + 1;
-                //Amortised
-                if LoansR."Interest Calculation Method" = LoansR."Interest Calculation Method"::Amortised then begin
-                    TotalMRepay := Round((InterestRate / 12 / 100) / (1 - Power((1 + (InterestRate / 12 / 100)), -(RepayPeriod))) * (LoanAmount), 0.0001, '>');
-                    LInterest := Round(LBalance / 100 / 12 * InterestRate, 0.0001, '>');
-                    LPrincipal := TotalMRepay - LInterest;
-                end;
-
-                //Straight Line
-                if LoansR."Interest Calculation Method" = LoansR."Interest Calculation Method"::"Straight Line" then begin
-                    LPrincipal := LoanAmount / RepayPeriod;
-                    LInterest := (InterestRate / 12 / 100) * LoanAmount;
-                end;
-
-                //Reducing Balance OR Reducing Flat
-                if (LoansR."Interest Calculation Method" = LoansR."Interest Calculation Method"::"Reducing Balance") or
-                  (LoansR."Interest Calculation Method" = LoansR."Interest Calculation Method"::"Reducing Flat") then begin
-                    LPrincipal := LoanAmount / RepayPeriod;
-                    LInterest := (InterestRate / 12 / 100) * LBalance;
-                end;
-
-                if LoansR."Interest Calculation Method" = LoansR."Interest Calculation Method"::"Reducing Flat" then begin
-                    LPrincipal := Round(LoanAmount / RepayPeriod, 1.0, '>');
-                    LInterest := Round(((LoanAmount * InterestRate / 12 / 100) + (LPrincipal * InterestRate / 12 / 100)) / 2, 1.0, '>');
-                end;
+    //     GeneralSetUp.Get;
 
 
-                //Grace Period
-                if GrPrinciple > 0 then begin
-                    LPrincipal := 0
-                end else begin
-                    LBalance := LBalance - LPrincipal;
-                end;
+    //     LoansR.Reset;
+    //     LoansR.SetRange(LoansR."Loan No.", "Loan No.");
+    //     if LoansR.Find('-') then begin
 
-                if GrInterest > 0 then LInterest := 0;
+    //         LoanAmount := LoansR."Approved Amount";
+    //         if LoansR."Loan Rescheduled" then begin
+    //             if LoansR."New Interest Rate" <> 0 then InterestRate := LoansR."New Interest Rate";
+    //         end else begin
+    //             InterestRate := LoansR.Interest;
+    //         end;
+    //         if Rec."New Interest Rate" > 0 then
+    //             InterestRate := "New Interest Rate"
+    //         else
+    //             InterestRate := InterestRate;
+    //         RepayPeriod := LoansR.Installments;
+    //         InitialInstal := LoansR.Installments;
+    //         LBalance := LoansR."Approved Amount";
+    //         if LoansR."Repayment Start Date" <> 0D then begin
+    //             RunDate := LoansR."Repayment Start Date";
+    //         end else
+    //             if LoansR."Disbursement Date" <> 0D then begin
+    //                 RunDate := LoansR."Disbursement Date";
+    //             end else begin
+    //                 RunDate := LoansR."Application Date";
+    //             end;
 
-                GrPrinciple := GrPrinciple - 1;
-                GrInterest := GrInterest - 1;
+    //         InstalNo := 0;
 
-                Evaluate(RepayCode, Format(InstalNo));
+    //         //Repayment Frequency
+    //         repeat
+    //             InstalNo := InstalNo + 1;
+    //             //Amortised
+    //             if LoansR."Interest Calculation Method" = LoansR."Interest Calculation Method"::Amortised then begin
+    //                 TotalMRepay := Round((InterestRate / 12 / 100) / (1 - Power((1 + (InterestRate / 12 / 100)), -(RepayPeriod))) * (LoanAmount), 0.0001, '>');
+    //                 LInterest := Round(LBalance / 100 / 12 * InterestRate, 0.0001, '>');
+    //                 LPrincipal := TotalMRepay - LInterest;
+    //             end;
 
-                LoanSched.Init;
-                LoanSched."Repayment Code" := RepayCode;
-                LoanSched."Loan No." := LoansR."Loan No.";
-                LoanSched."Loan Amount" := LoanAmount;
-                LoanSched."Instalment No" := InstalNo;
-                LoanSched."Repayment Date" := RunDate;
-                LoanSched."Member No." := LoansR."Member No.";
-                LoanSched."Loan Category" := LoansR."Loan Product Type";
-                LoanSched."Monthly Repayment" := LInterest + LPrincipal + GeneralSetUp."BDE Loan Above Target";
-                LoanSched."Monthly Interest" := LInterest;
-                // LoanSched."Administartion Amount":=GeneralSetUp."BDE Loan Above Target";
-                LoanSched."Principal Repayment" := LPrincipal;
-                LoanSched.Insert;
+    //             //Straight Line
+    //             if LoansR."Interest Calculation Method" = LoansR."Interest Calculation Method"::"Straight Line" then begin
+    //                 LPrincipal := LoanAmount / RepayPeriod;
+    //                 LInterest := (InterestRate / 12 / 100) * LoanAmount;
+    //             end;
 
-                //Repayment Frequency
-                if LoansR."Repayment Frequency" = LoansR."Repayment Frequency"::Daily then
-                    RunDate := CalcDate('1D', RunDate)
-                else
-                    if LoansR."Repayment Frequency" = LoansR."Repayment Frequency"::Weekly then
-                        RunDate := CalcDate('1W', RunDate)
-                    else
-                        if LoansR."Repayment Frequency" = LoansR."Repayment Frequency"::Monthly then
-                            RunDate := CalcDate('1M', RunDate)
-                        else
-                            if LoansR."Repayment Frequency" = LoansR."Repayment Frequency"::Quarterly then
-                                RunDate := CalcDate('1Q', RunDate)
-                            else
-                                if LoansR."Repayment Frequency" = LoansR."Repayment Frequency"::"Bi-Annual" then
-                                    RunDate := CalcDate('6M', RunDate)
-                                else
-                                    if LoansR."Repayment Frequency" = LoansR."Repayment Frequency"::Yearly then
-                                        RunDate := CalcDate('1Y', RunDate);
+    //             //Reducing Balance OR Reducing Flat
+    //             if (LoansR."Interest Calculation Method" = LoansR."Interest Calculation Method"::"Reducing Balance") or
+    //               (LoansR."Interest Calculation Method" = LoansR."Interest Calculation Method"::"Reducing Flat") then begin
+    //                 LPrincipal := LoanAmount / RepayPeriod;
+    //                 LInterest := (InterestRate / 12 / 100) * LBalance;
+    //             end;
 
-            until LBalance < 1
-        end;
-    end;
+    //             if LoansR."Interest Calculation Method" = LoansR."Interest Calculation Method"::"Reducing Flat" then begin
+    //                 LPrincipal := Round(LoanAmount / RepayPeriod, 1.0, '>');
+    //                 LInterest := Round(((LoanAmount * InterestRate / 12 / 100) + (LPrincipal * InterestRate / 12 / 100)) / 2, 1.0, '>');
+    //             end;
+
+
+    //             //Grace Period
+    //             if GrPrinciple > 0 then begin
+    //                 LPrincipal := 0
+    //             end else begin
+    //                 LBalance := LBalance - LPrincipal;
+    //             end;
+
+    //             if GrInterest > 0 then LInterest := 0;
+
+    //             GrPrinciple := GrPrinciple - 1;
+    //             GrInterest := GrInterest - 1;
+
+    //             Evaluate(RepayCode, Format(InstalNo));
+
+    //             LoanSched.Init;
+    //             LoanSched."Repayment Code" := RepayCode;
+    //             LoanSched."Loan No." := LoansR."Loan No.";
+    //             LoanSched."Loan Amount" := LoanAmount;
+    //             LoanSched."Instalment No" := InstalNo;
+    //             LoanSched."Repayment Date" := RunDate;
+    //             LoanSched."Member No." := LoansR."Member No.";
+    //             LoanSched."Loan Category" := LoansR."Loan Product Type";
+    //             LoanSched."Monthly Repayment" := LInterest + LPrincipal + GeneralSetUp."BDE Loan Above Target";
+    //             LoanSched."Monthly Interest" := LInterest;
+    //             // LoanSched."Administartion Amount":=GeneralSetUp."BDE Loan Above Target";
+    //             LoanSched."Principal Repayment" := LPrincipal;
+    //             LoanSched.Insert;
+
+    //             //Repayment Frequency
+    //             if LoansR."Repayment Frequency" = LoansR."Repayment Frequency"::Daily then
+    //                 RunDate := CalcDate('1D', RunDate)
+    //             else
+    //                 if LoansR."Repayment Frequency" = LoansR."Repayment Frequency"::Weekly then
+    //                     RunDate := CalcDate('1W', RunDate)
+    //                 else
+    //                     if LoansR."Repayment Frequency" = LoansR."Repayment Frequency"::Monthly then
+    //                         RunDate := CalcDate('1M', RunDate)
+    //                     else
+    //                         if LoansR."Repayment Frequency" = LoansR."Repayment Frequency"::Quarterly then
+    //                             RunDate := CalcDate('1Q', RunDate)
+    //                         else
+    //                             if LoansR."Repayment Frequency" = LoansR."Repayment Frequency"::"Bi-Annual" then
+    //                                 RunDate := CalcDate('6M', RunDate)
+    //                             else
+    //                                 if LoansR."Repayment Frequency" = LoansR."Repayment Frequency"::Yearly then
+    //                                     RunDate := CalcDate('1Y', RunDate);
+
+    //         until LBalance < 1
+    //     end;
+    // end;
 
     local procedure RecreateOldSchedules(ReScheduleNo: Text)
     var

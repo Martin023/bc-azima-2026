@@ -21,20 +21,20 @@ page 52186055 "All Users Activities"
                     Caption = 'Petty Cash Vouchers';
                     ApplicationArea = Basic, Suite;
                 }
-                field("My Staff Advance"; Rec."My Staff Advance")
-                {
-                    Caption = 'Staff Advance';
-                    ApplicationArea = Basic, Suite;
-                }
-                field("My Imprest Request"; Rec."My Imprest Request")
-                {
-                    Caption = 'Travel Advance Requisition';
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("My Staff Advance"; Rec."My Staff Advance")
+                // {
+                //     Caption = 'Staff Advance';
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("My Imprest Request"; Rec."My Imprest Request")
+                // {
+                //     Caption = 'Travel Advance Requisition';
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field(Members; Rec.Members)
                 {
                     Caption = 'Active Members';
-                    image = Funnel;
+                    image = none;
                     ApplicationArea = Basic, Suite;
                 }
                 field("Member Withdrawal"; Rec."Member Withdrawal")
@@ -74,7 +74,7 @@ page 52186055 "All Users Activities"
                 // }
                 field(Loans; Rec.Loans)
                 {
-                    image = Checklist;
+                    image = none;
                     ApplicationArea = Basic, Suite;
                 }
                 // field("My Staff Advance Surrender"; Rec."My Staff Advance Surrender")

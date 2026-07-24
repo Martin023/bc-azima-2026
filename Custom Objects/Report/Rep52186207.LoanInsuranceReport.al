@@ -108,6 +108,8 @@ report 52186207 "Loan Insurance Report"
             column(Disbursement_Date; "Disbursement Date")
             {
             }
+            column(DepositBal; DepositBal) { }
+            column(RemainingPeriod; RemainingPeriod) { }
             trigger OnpreDataItem()
             begin
                 Loans.reset();
@@ -116,6 +118,7 @@ report 52186207 "Loan Insurance Report"
 
             trigger OnAfterGetRecord()
             begin
+                RemainingPeriod := 0;
                 if Memb.get(Loans."Member No.") then begin
                     MemberDOB := Memb."Date of Birth";
                     if "ID No." = '' then
@@ -123,13 +126,27 @@ report 52186207 "Loan Insurance Report"
                 end
                 else
                     MemberDOB := 0D;
+                // SavAcc.reset();
+                // SavAcc.setrange("Member No.", Loans."Member No.");
+                // SavAcc.setrange(SavAcc."Product Type", '191');
+                // if SavAcc.FindFirst() then
+                //     FosaAcc := SavAcc."No."
+                // else
+                //     FosaAcc := '';
                 SavAcc.reset();
                 SavAcc.setrange("Member No.", Loans."Member No.");
-                SavAcc.setrange(SavAcc."Product Type", '191');
-                if SavAcc.FindFirst() then
-                    FosaAcc := SavAcc."No."
-                else
-                    FosaAcc := '';
+                SavAcc.setrange(SavAcc."Product Category", SavAcc."Product Category"::"BOSA Deposits");
+                if SavAcc.FindFirst() then begin
+                    savAcc.CalcFields(Balance);
+                    DepositBal := SavAcc.Balance;
+                end;
+
+                LoanRepaySched.reset();
+                LoanRepaySched.SetRange("Loan No.", Loans."Loan No.");
+                LoanRepaySched.setfilter("Repayment Date", '>%1', EndDate);
+                if LoanRepaySched.findset() then
+                    RemainingPeriod := LoanRepaySched.count();
+
             end;
         }
     }
@@ -195,4 +212,7 @@ report 52186207 "Loan Insurance Report"
         FosaAcc: Code[30];
         StartDate: Date;
         EndDate: Date;
+        DepositBal: Decimal;
+        RemainingPeriod: Integer;
+        LoanRepaySched: record "Ideal Repayment Schedule";
 }

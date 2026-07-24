@@ -2618,6 +2618,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         Response: Text;
 
         EligibleClass: JsonArray;
+        OutstandingBalance: Decimal;
+        PreviousMinimum: Decimal;
     begin
         Payload.Get('identifier_type', identifier_type); // MSISDN, CUSTOMER_NO
         Payload.Get('identifier', identifier);
@@ -2679,27 +2681,34 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                         Datum.Add('loan_type_name', MobileLoanProducts."Product Description");
                         Datum.Add('loan_type_min_amount', MobileLoanProducts."Minimum Loan Amount");
                         if MobileLoanProducts."Allow Topup" then begin
-                            MobileLoanProducts."Minimum Loan Amount" += GlobalFunctions.GetMemberLoanProductTotalBalance(
-                                    SearchMember."No.",
-                                    MobileLoanProducts."Product ID"
-                                );
+                            OutstandingBalance := GlobalFunctions.GetMemberLoanProductTotalBalance(
+                                SearchMember."No.",
+                                MobileLoanProducts."Product ID");
 
-                            TotalChargesOnMin := MobileLoanProducts."Minimum Loan Amount" - LoansProcess.ComputeCharges(
-                                    MobileLoanProducts."Minimum Loan Amount",
-                                    MobileLoanProducts."Product ID",
-                                    '',
-                                    0
-                                );
-                            MobileLoanProducts."Minimum Loan Amount" += TotalChargesOnMin;
+                            MobileLoanProducts."Minimum Loan Amount" := OutstandingBalance;
 
-                            MobileChargesInfo := SkyMbankingTrans.GetTransChargesPreview(
-                                    'LOAN_APPLICATION',
-                                    MobileLoanProducts."Minimum Loan Amount",
+                            repeat
+                                PreviousMinimum := MobileLoanProducts."Minimum Loan Amount";
+
+                                // TotalChargesOnMin := PreviousMinimum - LoansProcess.ComputeCharges(
+                                //     PreviousMinimum,
+                                //     MobileLoanProducts."Product ID",
+                                //     '',
+                                //     0);
+
+                                MobileChargesInfo := SkyMbankingTrans.GetTransChargesPreview(
+                                    'LOAN_DISBURSEMENT',
+                                    PreviousMinimum,
                                     '',
                                     SearchMember,
-                                    ''
-                                );
-                            MobileLoanProducts."Minimum Loan Amount" += MobileChargesInfo.Get(1);
+                                    '');
+
+                                MobileLoanProducts."Minimum Loan Amount" :=
+                                    OutstandingBalance +
+                                    /*TotalChargesOnMin +*/
+                                    MobileChargesInfo.Get(1);
+
+                            until MobileLoanProducts."Minimum Loan Amount" = PreviousMinimum;
 
                             Datum.Replace('loan_type_min_amount', MobileLoanProducts."Minimum Loan Amount");
                         end;
@@ -8220,6 +8229,17 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
                 guarantor.AsObject.Get('member_number', guarantor_member_number);
 
+                if guarantor_member_number.AsValue.AsText = SearchMember."No." then begin
+                    ResponseObject.Add('request_status', 'ERROR');
+                    Datum.Add('error_message', 'You may NOT list yourself as a guarantor for this loan application');
+                    ResponseObject.Add('response_payload', Datum);
+
+                    AddDateTimeToResponse(ResponseObject);
+
+                    ResponseObject.WriteTo(Response);
+                    exit(Response);
+                end;
+
                 SalaryAmount := 0;
 
                 GuarantorMember.Reset;
@@ -8673,6 +8693,17 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 case action.AsValue.AsText of
                     'ADD':
                         begin
+                            if guarantor_member_number.AsValue.AsText = SearchMember."No." then begin
+                                ResponseObject.Add('request_status', 'ERROR');
+                                Datum.Add('error_message', 'You may NOT list yourself as a guarantor for this loan application');
+                                ResponseObject.Add('response_payload', Datum);
+
+                                AddDateTimeToResponse(ResponseObject);
+
+                                ResponseObject.WriteTo(Response);
+                                exit(Response);
+                            end;
+
                             TheLoanGuarantorshipRequest.Init;
 
                             TheLoanGuarantorshipRequest."Member No." := guarantor_member_number.AsValue.AsText;

@@ -774,7 +774,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                         end;
                         TotalProcessingAmt += (LoanProcessingAmt + LoanProcessingAmtEx);
                     until PCharges.Next = 0;
-                    
+
                 end;
 
                 //3. Insurance fees
@@ -884,7 +884,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                                     // IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Approved Amount") THEN BEGIN
                                     //     TopUp.Commision := Loans."Approved Amount" * (PCharges.Percentage / 100);
                                     // END ELSE
-                                    IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Net Amount") THEN BEGIN
+                                    IF (PCharges."Use Percentage" = TRUE) THEN BEGIN
                                         TopUp.Commision := TopUp."Principle Top Up" * (PCharges.Percentage / 100);
                                     END ELSE
                                         TopUp.Commision := PCharges."Charge Amount";

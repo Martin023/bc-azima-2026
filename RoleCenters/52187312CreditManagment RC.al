@@ -551,146 +551,7 @@ page 52187312 "Credit Management Role Center"
                     // }
                 }
 
-                // group("Loan Activity")
-                // {
 
-                //     Caption = 'Loan Activity';
-                //     group("Loan rescheduling")
-                //     {
-
-                //         action("Open Rescheduling List")
-                //         {
-
-                //             ApplicationArea = Basic, Suite;
-                //             caption = 'Open Rescheduling List';
-                //             RunObject = page "Loan Rescheduling List";
-                //             RunPageLink = "Schedule Type" = filter(Reschedule), Status = filter(Open);
-
-                //         }
-                //         action("Pending Recheduling")
-                //         {
-
-                //             ApplicationArea = all;
-                //             Caption = 'Pending Rescheduling List';
-                //             RunObject = page "Loan Rescheduling List";
-                //             RunPageLink = "Schedule Type" = filter(Reschedule), Status = filter(Pending);
-                //         }
-                //         action("Approved Reshedulling List")
-                //         {
-                //             ApplicationArea = all;
-                //             Caption = 'Approved Rescheduling List';
-                //             RunObject = page "Loan Rescheduling List";
-                //             RunPageLink = "Schedule Type" = filter(Reschedule), Status = filter(Approved), Rescheduled = const(false);
-                //         }
-                //         action("Rescheduled Loans List")
-                //         {
-                //             ApplicationArea = all;
-                //             Caption = 'Rescheduled Loans List';
-                //             RunObject = page "Loan Rescheduling List";
-                //             RunPageLink = "Schedule Type" = filter(Reschedule), Rescheduled = const(true);
-                //         }
-                //     }
-                //     group("Loan Restructuring")
-                //     {
-                //         action("Open Loan Restructring List")
-                //         {
-                //             ApplicationArea = Basic, Suite;
-                //             caption = 'Open Loan Restructuring List';
-                //             RunObject = page "Loan Restructure List";
-                //             RunPageLink = "Schedule Type" = filter(Restructure), Status = filter(Open);
-                //         }
-                //         action("Pending Loan Restructring List")
-                //         {
-                //             ApplicationArea = Basic, Suite;
-                //             caption = 'Pending Loan Restructuring List';
-                //             RunObject = page "Loan Restructure List";
-                //             RunPageLink = "Schedule Type" = filter(Restructure), Status = filter(Pending);
-                //         }
-                //         action("Approved Loan Restructring List")
-                //         {
-                //             ApplicationArea = Basic, Suite;
-                //             caption = 'Approved Loan Restructuring List';
-                //             RunObject = page "Loan Restructure List";
-                //             RunPageLink = "Schedule Type" = filter(Restructure), Status = filter(Approved), Rescheduled = const(false);
-                //         }
-                //         action("Restructured Loan Restructring List")
-                //         {
-                //             ApplicationArea = Basic, Suite;
-                //             caption = 'Restructured Loan List';
-                //             RunObject = page "Loan Restructure List";
-                //             RunPageLink = "Schedule Type" = filter(Restructure), Status = filter(Approved), Rescheduled = const(true);
-                //         }
-                //     }
-                //     group("Guarantor Substitution")
-                //     {
-                //         action("Open Guarantor Substitution")
-                //         {
-
-                //             ApplicationArea = Basic, Suite;
-                //             caption = 'Open Guarantor Substitution List';
-                //             RunObject = page "Guarantor Subsitution List";
-                //             RunPageLink = Status = filter(Open);//, "Sent Back to CRM" = const(false); Show all but provided a filter
-                //         }
-                //         action("Pending Guarantor Substitution")
-                //         {
-
-                //             ApplicationArea = Basic, Suite;
-                //             caption = 'Pending Guarantor Substitution List';
-                //             RunObject = page "Guarantor Subsitution List";
-                //             RunPageLink = Status = filter(Pending), "Sent Back to CRM" = const(false);
-                //         }
-                //         action("Approved Guarantor Substitution")
-                //         {
-
-                //             ApplicationArea = Basic, Suite;
-                //             caption = 'Approved Guarantor Substitution List';
-                //             RunObject = page "Guarantor Subsitution List";
-                //             RunPageLink = Status = filter(Approved), Posted = const(false), "Sent Back to CRM" = const(false);
-                //         }
-                //         action("Posted Guarantor Substitution")
-                //         {
-
-                //             ApplicationArea = Basic, Suite;
-                //             caption = 'Posted Guarantor Substitution List';
-                //             RunObject = page "Guarantor Subsitution List";
-                //             RunPageLink = Status = filter(Posted), Posted = const(true), "Sent Back to CRM" = const(false);
-                //         }
-                //         action("Deffred Guantor Substitution")
-                //         {
-                //             ApplicationArea = all;
-                //             Caption = 'Deffered Guarantor Substitution';
-                //             RunObject = page "Guarantor Subsitution List";
-                //             RunPageLink = Status = filter(Deffered), "Sent Back to CRM" = const(false);
-                //         }
-                //         action("Rejected Guarantor Substitution")
-                //         {
-                //             ApplicationArea = all;
-                //             Caption = 'Rejected Guarantor Substitution';
-                //             RunObject = page "Guarantor Subsitution List";
-                //             RunPageLink = Status = filter(Rejected), "Sent Back to CRM" = const(false);
-                //         }
-                //         action("Guarantor Substitution Sent Send Back to CRM")
-                //         {
-                //             ApplicationArea = all;
-                //             Caption = 'Guarantor Substitution Sent Send Back to CRM';
-                //             RunObject = page "Guarantor Subsitution List";
-                //             RunPageLink = "Sent Back to CRM" = const(true);
-                //         }
-                //     }
-                //     group("Loan Guarantors List")
-                //     {
-                //         action("Guarantors List")
-                //         {
-                //             ApplicationArea = all;
-                //             Caption = 'Guarantors Lists';
-                //             RunObject = page "Guarantors List";
-
-                //         }
-                //     }
-
-
-
-                // }
                 // 
                 group("Loan Categorization")
                 {
@@ -2093,12 +1954,18 @@ page 52187312 "Credit Management Role Center"
                         Caption = 'Member Balances Report';
                         RunObject = report "Member Balances Report";
                     }
-                    action("Application")
+                    action("Insurance Deposit Report")
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Member Application Register';
-                        RunObject = report "Member Application Register";
+                        Caption = 'Insurance Deposit Report';
+                        RunObject = report "Insurance Deposit Report";
                     }
+                    // action("Application")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Member Application Register';
+                    //     RunObject = report "Member Application Register";
+                    // }
 
                     action("Member Listing Report")
                     {

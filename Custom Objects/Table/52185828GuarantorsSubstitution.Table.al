@@ -170,7 +170,8 @@ table 52185828 "Guarantors Substitution"
             var
                 myInt: Integer;
                 MemberRec: Record Members;
-
+                GuarantorSub: record "Guarantors Substitution";
+                SubCount: Integer;
             begin
                 "Loan No." := '';
                 "Loan Account No." := '';
@@ -183,6 +184,24 @@ table 52185828 "Guarantors Substitution"
                 if MemberRec.FindFirst() then begin
                     Rec.Name := MemberRec.Name;
                 end;
+
+                GuarantorSub.Reset();
+                GuarantorSub.SetRange("Member No.", Rec."Member No.");
+                GuarantorSub.SetRange(Posted, false);
+                GuarantorSub.SetRange("Rejected By", '');
+                if GuarantorSub.Find('-') then begin
+                    SubCount := GuarantorSub.Count;
+                    if SubCount > 1 then
+                        Error('Member  %1 has a Loan Guarantor substitution that has not been posted', rec."Member No.");
+                end;
+                // if Loan.Get("Loan No.") then begin
+                //     Loan.CalcFields(Loan."Outstanding Balance");
+                //     if Loan."Outstanding Balance" <= 0 then
+                //         Error(Txt001);
+                //     "Loan Account No." := Loan."Loan Account";
+                //     Name := Loan."Member Name";
+                GenerateGuarantors();
+                // end;
 
 
 
@@ -430,14 +449,16 @@ table 52185828 "Guarantors Substitution"
     // [Scope('OnPrem')]
     procedure GenerateGuarantors()
     begin
-        if Rec."Loan No." <> '' then begin
-            LGuarant.Reset();
-            LGuarant.SetRange(LGuarant."No.", Rec."No.");
-            LGuarant.DeleteAll();
-        end;
+        // if Rec."Loan No." <> '' then begin
+        LGuarant.Reset();
+        LGuarant.SetRange(LGuarant."No.", Rec."No.");
+        LGuarant.DeleteAll();
+        // end;
         Lguarantx.Reset;
-        Lguarantx.SetRange(Lguarantx."Loan No", Rec."Loan No.");
+        Lguarantx.SetRange(Lguarantx."Member No", Rec."Member No.");
         Lguarantx.SetRange(Lguarantx.Substituted, false);
+        Lguarantx.SetAutoCalcFields("Outstanding Balance");
+        Lguarantx.SetFilter("Outstanding Balance", '>0');
         Lguarantx.setfilter("Savings Account No./Member No.", '<>%1', '');
         if Lguarantx.Find('-') then
             repeat
@@ -449,6 +470,7 @@ table 52185828 "Guarantors Substitution"
                 LGuarant."Collateral Reg. No." := Lguarantx."Collateral Reg. No.";
                 LGuarant."Loan No" := Lguarantx."Loan No";
                 LGuarant."Member No" := Lguarantx."Member No";
+                LGuarant."Loan Product Type" := Lguarantx."Loan Type";
                 //get deposit contribution no
                 // SaVingAc.Get(LGuarant."Member No"); 
                 // SaVingAc.Reset;

@@ -140,6 +140,8 @@ table 52185829 "Loan Recovery Header"
                 "Amount To Use" := 0;
                 "Total Attached Recoverable" := 0;
                 "Prorate Deposits" := false;
+                "Equal Guarantor Disribution" := false;
+
 
                 Loans.Get("Loan No.");
 
@@ -266,7 +268,7 @@ table 52185829 "Loan Recovery Header"
                         end;
 
                         if ProductFactory."Recovery Creteria" <> ProductFactory."Recovery Creteria"::"Shares Only" then
-                            AppotionGuarantors();
+                            AppotionGuarantors(rec."Equal Guarantor Disribution");
                     end;
                 end;
 
@@ -411,7 +413,7 @@ table 52185829 "Loan Recovery Header"
                     end;
 
                     if ProductFactory."Recovery Creteria" <> ProductFactory."Recovery Creteria"::"Shares Only" then
-                        AppotionGuarantors();
+                        AppotionGuarantors(rec."Equal Guarantor Disribution");
                 end;
 
                 if Rec."Recovery Type" = Rec."Recovery Type"::Reappotionment then begin
@@ -680,6 +682,13 @@ table 52185829 "Loan Recovery Header"
                 end;
             end;
         }
+        field(50; "Equal Guarantor Disribution"; Boolean)
+        {
+            trigger OnValidate()
+            begin
+                "Loan No." := '';
+            end;
+        }
 
     }
     keys
@@ -797,7 +806,7 @@ table 52185829 "Loan Recovery Header"
     end;
 
 
-    local procedure AppotionGuarantors()
+    local procedure AppotionGuarantors(SplitEqualToGuars: Boolean)
     var
         LoanGuarantors: Record "Loan Guarantors and Security";
         AvailableGuarantorsCount: Integer;
@@ -921,20 +930,27 @@ table 52185829 "Loan Recovery Header"
                     //     PrincipleToTransaferToGuarantor := PrShare;
                     //     InterestToTransaferToGuarantor := IntShare;
                     // end else begin
-                    PrincipleToTransaferToGuarantor := round((LoanGuarantors."Amount Guaranteed" / TotalGuaranteedAmount) * (PrincipleToGuarantors), 0.01);//Incase no balance calculated
-                    InterestToTransaferToGuarantor := round((LoanGuarantors."Amount Guaranteed" / TotalGuaranteedAmount) * (InterestToGuarantors), 0.01);
+                    if SplitEqualToGuars then begin
+                        PrincipleToTransaferToGuarantor := round((PrincipleToGuarantors / AvailableGuarantorsCount), 0.01);//Incase no balance calculated
+                        InterestToTransaferToGuarantor := round((InterestToGuarantors / AvailableGuarantorsCount), 0.01);
+                    end
+                    else begin
+                        PrincipleToTransaferToGuarantor := round((LoanGuarantors."Amount Guaranteed" / TotalGuaranteedAmount) * (PrincipleToGuarantors), 0.01);//Incase no balance calculated
+                        InterestToTransaferToGuarantor := round((LoanGuarantors."Amount Guaranteed" / TotalGuaranteedAmount) * (InterestToGuarantors), 0.01);
+                    end;
+
                     // end;
 
                     AmountToTransaferToGuarantor := PrincipleToTransaferToGuarantor + InterestToTransaferToGuarantor;
                     // To handle out of balance by 0.01
                     if Counter = AvailableGuarantorsCount then begin
-                        if Rec."Source Unit" = Rec."Source Unit"::FOSA then begin
-                            PrincipleToTransaferToGuarantor := PrShare + PrModRemainder;
-                            InterestToTransaferToGuarantor := IntShare + IntModRemainder;
-                        end else begin
-                            PrincipleToTransaferToGuarantor := PrincipleRemainder;
-                            InterestToTransaferToGuarantor := InterestRemainder;
-                        end;
+                        // if Rec."Source Unit" = Rec."Source Unit"::FOSA then begin
+                        //     PrincipleToTransaferToGuarantor := PrShare + PrModRemainder;
+                        //     InterestToTransaferToGuarantor := IntShare + IntModRemainder;
+                        // end else begin
+                        PrincipleToTransaferToGuarantor := PrincipleRemainder;
+                        InterestToTransaferToGuarantor := InterestRemainder;
+                        // end;
                         AmountToTransaferToGuarantor := PrincipleToTransaferToGuarantor + InterestToTransaferToGuarantor;
                     end;
 

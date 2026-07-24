@@ -54,10 +54,10 @@ page 52185855 "Guarantor Substitution"
                 {
                     ApplicationArea = all;
                 }
-                field("Loan No."; Rec."Loan No.")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Loan No."; Rec."Loan No.")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 // field("Loan Account No."; Rec."Loan Account No.")
                 // {
                 //     ApplicationArea = Basic, Suite;
@@ -134,10 +134,10 @@ page 52185855 "Guarantor Substitution"
                     Editable = false;
                 }
             }
-            part("Loan Guarantors Substitution"; "Loan Guarantors List")
+            part("Loan Guarantors substition Ln"; "Loan Guarantors substition Ln")
             {
                 ApplicationArea = Basic, Suite;
-                Caption = 'Loan Guarantors Substitution';
+                Caption = 'Loan Guarantors Substitution lines';
                 Editable = LinesEdit;
                 SubPageLink = "No." = FIELD("No.");
             }

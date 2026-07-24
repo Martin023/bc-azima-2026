@@ -67,7 +67,7 @@ table 52186519 "Sky Loan Guarantor Requests"
         end;
 
         TheLoanApplication.Get("Loan Application No.");
-        if TheLoanApplication."Member No." = "Member No." then begin
+        if (TheLoanApplication."Member No." = "Member No.") and TheLoanApplication."Is Self Guarantee" then begin
             Status := Status::Accepted;
             TheGuarantor.Get("Member No.");
 

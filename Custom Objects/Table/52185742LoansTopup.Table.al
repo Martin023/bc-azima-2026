@@ -178,7 +178,7 @@ table 52185742 "Loans Top up"
                 Loans.SetRange(Loans."Loan No.", "Loan Top Up");
                 if Loans.Find('-') then begin
                     Loans.CalcFields(Loans."Outstanding Interest");
-                    if "Interest Top Up" > Loans."Outstanding Balance" then
+                    if "Interest Top Up" > Loans."Outstanding Interest" then
                         Error('Amount cannot be greater than the outstanding interest!');
                 end;
                 if "Interest Top Up" < 0 then "Interest Top Up" := 0;
