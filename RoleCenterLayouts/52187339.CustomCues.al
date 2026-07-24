@@ -294,7 +294,7 @@ codeunit 52187339 CustomCuesCodeunit
                 TotalOut += LoansTable."Outstanding Balance";
             until LoansTable.next() = 0;
         end;
-        exit(DefaultedBal / TotalOut);
+        exit(Round(((DefaultedBal / TotalOut) * 100), 0.01));
     end;
 
 }

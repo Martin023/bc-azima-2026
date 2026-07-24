@@ -160,11 +160,11 @@ table 52187300 "Loan Cue"
             CalcFormula = COUNT("Loans" WHERE("Source Aplication" = filter("Member Portal" | "Mbanking - APP"), Status = const(Approved), Posted = filter(false)));
             FieldClass = FlowField;
         }
-        field(27; "Loan PAR"; Decimal)
-        {
-            // AutoFormatExpression = '1,KSh ';
-            DecimalPlaces = 2;
-        }
+        // field(27; "Loan PAR"; Decimal)
+        // {
+        //     // AutoFormatExpression = '1,KSh ';
+        //     DecimalPlaces = 2;
+        // }
     }
 
     keys
