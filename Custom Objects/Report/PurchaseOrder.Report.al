@@ -1,7 +1,7 @@
 report 52186062 "Purchase Order"
 {
     DefaultLayout = RDLC;
-    RDLCLayout = './Layout/Purchase Order.rdl';
+    RDLCLayout = './bc-azima-2026/Layout/Purchase Order.rdl';
     Caption = 'Purchase Order (Azima LPO)';
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;
