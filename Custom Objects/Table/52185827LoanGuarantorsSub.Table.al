@@ -442,33 +442,36 @@ table 52185827 "Loan Guarantors Sub"
                 Gdepos: Decimal;
 
             begin
-
+                rec.Substituted := true;
                 GsubLines.Reset();
                 GsubLines.SetRange(GsubLines."Loan No", Rec."Loan No");
-                GsubLines.SetRange(GsubLines."No.", Rec."No.");
+                // GsubLines.SetRange(GsubLines."No.", Rec."No.");
                 GsubLines.SetRange(GsubLines."Savings Account No.", Rec."Member Substituted");
-                if GsubLines.Find('-') then
-                    Gdepos := GsubLines.Shares;
-                if Rec."Savings Account No." = Rec."Member Substituted" then
-                    Error('you cannot do self Substitution');
-                if "Guarantor Type" = "Guarantor Type"::Collateral then begin
-                    if Rec."Collateral Reg. No." = "Member Substituted" then
-                        Error('you cannot substitute the same collateral');
-                end;
-                GsubLines.Reset();
-                GsubLines.SetRange(GsubLines."Loan No", Rec."Loan No");
-                GsubLines.SetRange(GsubLines."No.", Rec."No.");
-                GsubLines.SetRange(GsubLines."Member Substituted", Rec."Member Substituted");
+                GsubLines.SetRange(Substituted, false);
                 if GsubLines.Find('-') then begin
-                    repeat
-                        SavingsAccounts.Reset();
-                        SavingsAccounts.SetRange("No.", GsubLines."Savings Account No.");
-                        if SavingsAccounts.FindFirst() then begin
-                            SavingsAccounts.CalcFields(Balance);
-                            TotaDeps := TotaDeps + SavingsAccounts.Balance;
-                        end;
-                    until GsubLines.Next() = 0;
+                    Error('This member Already Exists in the guarantors list')
                 end;
+                //     Gdepos := GsubLines.Shares;
+                // if Rec."Savings Account No." = Rec."Member Substituted" then
+                //     Error('you cannot do self Substitution');
+                // if "Guarantor Type" = "Guarantor Type"::Collateral then begin
+                //     if Rec."Collateral Reg. No." = "Member Substituted" then
+                //         Error('you cannot substitute the same collateral');
+                // end;
+                // GsubLines.Reset();
+                // GsubLines.SetRange(GsubLines."Loan No", Rec."Loan No");
+                // GsubLines.SetRange(GsubLines."No.", Rec."No.");
+                // GsubLines.SetRange(GsubLines."Member Substituted", Rec."Member Substituted");
+                // if GsubLines.Find('-') then begin
+                //     repeat
+                //         SavingsAccounts.Reset();
+                //         SavingsAccounts.SetRange("No.", GsubLines."Savings Account No.");
+                //         if SavingsAccounts.FindFirst() then begin
+                //             SavingsAccounts.CalcFields(Balance);
+                //             TotaDeps := TotaDeps + SavingsAccounts.Balance;
+                //         end;
+                //     until GsubLines.Next() = 0;
+                // end;
                 // if TotaDeps < Gdepos then
                 //     // Message('Kindly add more Guarantors');
                 // GenSetUp.Get();
@@ -484,30 +487,30 @@ table 52185827 "Loan Guarantors Sub"
                 //             Message(Text012, LoanApp."Loans Category-SASRA");
                 //     end;
                 // end;
-                GsubLines.Reset();
-                GsubLines.SetRange(GsubLines."Loan No", Rec."Loan No");
-                GsubLines.SetRange(GsubLines."No.", Rec."No.");
-                GsubLines.SetRange(GsubLines."Guarantor Type", GsubLines."Guarantor Type"::Guarantor);
-                GsubLines.SetRange(GsubLines."Savings Account No.", Rec."Member Substituted");
-                if GsubLines.Find('-') then begin
-                    GsubLines."Amount Guaranteed" := 0;
-                    GsubLines."Proportion Guaranteed" := 0;
-                    GsubLines.PercentageGur := 0;
-                    GsubLines.Substituted := true;
-                    GsubLines.Modify();
-                end;
-                GsubLines.Reset();
-                GsubLines.SetRange(GsubLines."Loan No", Rec."Loan No");
-                GsubLines.SetRange(GsubLines."No.", Rec."No.");
-                GsubLines.SetRange(GsubLines."Guarantor Type", GsubLines."Guarantor Type"::Collateral);
-                GsubLines.SetRange(GsubLines."Collateral Reg. No.", Rec."Member Substituted");
-                if GsubLines.Find('-') then begin
-                    GsubLines.Substituted := true;
-                    GsubLines."Amount Guaranteed" := 0;
-                    GsubLines."Proportion Guaranteed" := 0;
-                    GsubLines.PercentageGur := 0;
-                    GsubLines.Modify();
-                end;
+                // GsubLines.Reset();
+                // GsubLines.SetRange(GsubLines."Loan No", Rec."Loan No");
+                // GsubLines.SetRange(GsubLines."No.", Rec."No.");
+                // GsubLines.SetRange(GsubLines."Guarantor Type", GsubLines."Guarantor Type"::Guarantor);
+                // GsubLines.SetRange(GsubLines."Savings Account No.", Rec."Member Substituted");
+                // if GsubLines.Find('-') then begin
+                //     GsubLines."Amount Guaranteed" := 0;
+                //     GsubLines."Proportion Guaranteed" := 0;
+                //     GsubLines.PercentageGur := 0;
+                //     GsubLines.Substituted := true;
+                //     GsubLines.Modify();
+                // end;
+                // GsubLines.Reset();
+                // GsubLines.SetRange(GsubLines."Loan No", Rec."Loan No");
+                // GsubLines.SetRange(GsubLines."No.", Rec."No.");
+                // GsubLines.SetRange(GsubLines."Guarantor Type", GsubLines."Guarantor Type"::Collateral);
+                // GsubLines.SetRange(GsubLines."Collateral Reg. No.", Rec."Member Substituted");
+                // if GsubLines.Find('-') then begin
+                //     GsubLines.Substituted := true;
+                //     GsubLines."Amount Guaranteed" := 0;
+                //     GsubLines."Proportion Guaranteed" := 0;
+                //     GsubLines.PercentageGur := 0;
+                //     GsubLines.Modify();
+                // end;
             end;
         }
         field(26; "Guarantor Type"; Enum "Loan Guarantor Types Enum")

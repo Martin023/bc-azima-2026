@@ -24,40 +24,6 @@
       <rd:DataSourceID>353d9e1f-4c00-41aa-a8ac-03db2b4f1f84</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="No">
-          <DataField>No</DataField>
-        </Field>
-        <Field Name="Name">
-          <DataField>Name</DataField>
-        </Field>
-        <Field Name="PrimaryIdentification">
-          <DataField>PrimaryIdentification</DataField>
-        </Field>
-        <Field Name="PayrollStaffNo">
-          <DataField>PayrollStaffNo</DataField>
-        </Field>
-        <Field Name="DOB">
-          <DataField>DOB</DataField>
-        </Field>
-        <Field Name="Sno">
-          <DataField>Sno</DataField>
-        </Field>
-        <Field Name="DepositsCont">
-          <DataField>DepositsCont</DataField>
-        </Field>
-        <Field Name="DepositsContFormat">
-          <DataField>DepositsContFormat</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -477,12 +443,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -520,4 +480,38 @@ End Function
 </Code>
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="No">
+          <DataField>No</DataField>
+        </Field>
+        <Field Name="Name">
+          <DataField>Name</DataField>
+        </Field>
+        <Field Name="PrimaryIdentification">
+          <DataField>PrimaryIdentification</DataField>
+        </Field>
+        <Field Name="PayrollStaffNo">
+          <DataField>PayrollStaffNo</DataField>
+        </Field>
+        <Field Name="DOB">
+          <DataField>DOB</DataField>
+        </Field>
+        <Field Name="Sno">
+          <DataField>Sno</DataField>
+        </Field>
+        <Field Name="DepositsCont">
+          <DataField>DepositsCont</DataField>
+        </Field>
+        <Field Name="DepositsContFormat">
+          <DataField>DepositsContFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>
