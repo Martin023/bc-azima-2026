@@ -421,12 +421,13 @@ table 52185827 "Loan Guarantors Sub"
         field(24; "Member Substituted"; Code[20])
         {
             //TableRelation = "Savings Accounts" WHERE("Can Guarantee Loan" = FILTER(true));
-            TableRelation = IF ("Guarantor Type" = CONST(Guarantor)) "Loan Guarantors and Security"."Savings Account No./Member No." where("Loan No" = field("Loan No"), "Guarantor Type" = filter(Guarantor))
+            TableRelation = IF ("Incoming Guar Type" = CONST(Guarantor)) "Loan Guarantors and Security"."Savings Account No./Member No."
 
             ELSE
-            IF ("Guarantor Type" = CONST(Collateral)) "Loan Guarantors and Security"."Collateral Reg. No." where("Loan No" = field("Loan No"), "Guarantor Type" = filter(Collateral))
+            IF ("Incoming Guar Type" = CONST(Collateral)) "Loan Guarantors and Security"."Collateral Reg. No."
             ELSE
-            IF ("Guarantor Type" = FILTER(Lien)) "Loan Guarantors and Security"."Savings Account No./Member No." where("Loan No" = field("Loan No"), "Guarantor Type" = filter(Lien));
+            IF ("Incoming Guar Type" = FILTER(Lien)) "Loan Guarantors and Security"."Savings Account No./Member No.";
+
             trigger OnValidate()
             var
                 IncomingGs: Record "Loan Guarantors Sub";
@@ -583,6 +584,10 @@ table 52185827 "Loan Guarantors Sub"
         {
             DataClassification = ToBeClassified;
             Caption = 'Total Guaranteed';
+        }
+        field(34; "Incoming Guar Type"; Enum "Loan Guarantor Types Enum")
+        {
+
         }
     }
 
