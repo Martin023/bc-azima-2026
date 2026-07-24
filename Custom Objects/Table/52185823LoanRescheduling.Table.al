@@ -116,26 +116,27 @@ table 52185823 "Loan Rescheduling"
                     end;
                     LoanSched.Reset;
                     LoanSched.SetRange(LoanSched."Loan No.", Rec."Loan No.");
-                    LoanSched.SetFilter("Repayment Date", '%1<', rec."Rescheduling Date");
+                    LoanSched.SetFilter("Repayment Date", '>%1', rec."Rescheduling Date");
                     paidInstallments := LoanSched.Count;
                     "Remaining Installments" := paidInstallments;
 
                     //Delete schedule if any.
-                    LoanSched.Reset;
-                    LoanSched.SetRange(LoanSched."Loan No.", "Loan No.");
-                    if LoanSched.Find('-') then LoanSched.DeleteAll;
+                    // LoanSched.Reset;
+                    // LoanSched.SetRange(LoanSched."Loan No.", "Loan No.");
+                    // if LoanSched.Find('-') then LoanSched.DeleteAll;
 
-                    //Generate schedule.
-                    GenerateSchedule();
+                    // //Generate schedule.
+                    // GenerateSchedule();
 
-                    //Check if Ever Rescheduled.
+                    // //Check if Ever Rescheduled.
                     LoanRescheduling.Reset;
                     LoanRescheduling.SetRange(LoanRescheduling."Loan No.", "Loan No.");
                     LoanRescheduling.SetRange(LoanRescheduling.Rescheduled, true);
                     if LoanRescheduling.FindFirst then begin
-                        repeat
-                            RecreateOldSchedules(LoanRescheduling."No.");
-                        until LoanRescheduling.Next = 0;
+                        Error('This loan has already been reschedule!')
+                        // repeat
+                        //     RecreateOldSchedules(LoanRescheduling."No.");
+                        // until LoanRescheduling.Next = 0;
                     end;
                     //Check schedule details
 
