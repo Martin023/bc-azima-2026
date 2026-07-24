@@ -116,7 +116,7 @@ table 52185823 "Loan Rescheduling"
                     end;
                     LoanSched.Reset;
                     LoanSched.SetRange(LoanSched."Loan No.", Rec."Loan No.");
-                    LoanSched.SetRange(Paid, true);
+                    LoanSched.SetFilter("Repayment Date", '>%1', rec."Rescheduling Date");
                     paidInstallments := LoanSched.Count;
                     "Remaining Installments" := OriginalIns - paidInstallments;
 
@@ -243,6 +243,7 @@ table 52185823 "Loan Rescheduling"
         field(15; "Maximun Installments"; Integer)
         {
             Editable = false;
+            Caption = 'Maximum Installments';
         }
         field(16; "Rescheduling Date"; Date)
         {

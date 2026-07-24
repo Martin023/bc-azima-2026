@@ -6473,20 +6473,20 @@ page 52186778 "Finance Role Center"
             group(EmployeeSelfService)
             {
                 Caption = 'Employee Self Service';
-                action("Employee Fixed Asset Transfer List")
-                {
-                    ApplicationArea = FixedAssets;
-                    Caption = 'Fixed Assets Transfer List';
-                    RunObject = Page "Asset Transfer List";
-                    ToolTip = 'This module facilitates Transfer of FA location and responsible employee';
-                }
-                action("Employee Transferred Fixed Assets")
-                {
-                    ApplicationArea = FixedAssets;
-                    Caption = 'Transferred Fixed Assets';
-                    RunObject = Page "Asset Transfer List Effected";
-                    ToolTip = 'View the list of fixed assets that have been transferred.';
-                }
+                // action("Employee Fixed Asset Transfer List")
+                // {
+                //     ApplicationArea = FixedAssets;
+                //     Caption = 'Fixed Assets Transfer List';
+                //     RunObject = Page "Asset Transfer List";
+                //     ToolTip = 'This module facilitates Transfer of FA location and responsible employee';
+                // }
+                // action("Employee Transferred Fixed Assets")
+                // {
+                //     ApplicationArea = FixedAssets;
+                //     Caption = 'Transferred Fixed Assets';
+                //     RunObject = Page "Asset Transfer List Effected";
+                //     ToolTip = 'View the list of fixed assets that have been transferred.';
+                // }
                 // action(StaffWelfare)
                 // {
                 //     Caption = 'Staff Welfare Claim';
