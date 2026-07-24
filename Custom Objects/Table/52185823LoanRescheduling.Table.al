@@ -171,12 +171,13 @@ table 52185823 "Loan Rescheduling"
 
                 PastInstallments := 0;
                 if "Schedule Type" <> "Schedule Type"::Restructure then begin
-                    if "Original Installments" = "Maximun Installments" then begin
-                        if "New Installments" > "Remaining Installments" then Error(Txt0001);
-                    end else begin
-                        PastInstallments := "Original Installments" - "Remaining Installments";
-                        if "New Installments" + PastInstallments > "Maximun Installments" then Error(Txt0002);
-                    end;
+                    // if "Original Installments" = "Maximun Installments" then begin
+                    //     if "New Installments" > "Remaining Installments" then Error(Txt0001);
+                    // end else begin
+                    //     PastInstallments := "Original Installments" - "Remaining Installments";
+                    //     if "New Installments" + PastInstallments > "Maximun Installments" then Error(Txt0002);
+                    // end;
+                    if "New Installments" > "Maximun Installments" then Error(Txt0002);
                 end;
                 if "Schedule Type" = "Schedule Type"::Restructure then begin
                     Loansre.Reset();
