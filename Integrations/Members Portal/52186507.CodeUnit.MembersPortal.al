@@ -2472,6 +2472,8 @@ codeunit 52186507 "Members Portal Integration"
         TotalChargesOnMin: Decimal;
         MobileChargesInfo: List of [decimal];
         LoansProcess: Codeunit "Loans Process";
+        outstandingBalance: Decimal;
+        previousMinimum: Decimal;
     begin
         Clear(Datum);
         Clear(ResponseObject);
@@ -2508,27 +2510,34 @@ codeunit 52186507 "Members Portal Integration"
                     Datum.Add('maximum_amount', Format(ProductFactory."Maximum Loan Amount"));
                     Datum.Add('minimum_amount', Format(ProductFactory."Minimum Loan Amount"));
                     if ProductFactory."Allow Topup" then begin
-                        ProductFactory."Minimum Loan Amount" += GlobalFunctions.GetMemberLoanProductTotalBalance(
-                                SearchMember."No.",
-                                ProductFactory."Product ID"
-                            );
+                        OutstandingBalance := GlobalFunctions.GetMemberLoanProductTotalBalance(
+                            SearchMember."No.",
+                            ProductFactory."Product ID");
 
-                        TotalChargesOnMin := ProductFactory."Minimum Loan Amount" - LoansProcess.ComputeCharges(
-                                ProductFactory."Minimum Loan Amount",
-                                ProductFactory."Product ID",
-                                '',
-                                0
-                            );
-                        ProductFactory."Minimum Loan Amount" += TotalChargesOnMin;
+                        ProductFactory."Minimum Loan Amount" := OutstandingBalance;
 
-                        MobileChargesInfo := SkyMbankingTrans.GetTransChargesPreview(
-                                'LOAN_APPLICATION',
-                                ProductFactory."Minimum Loan Amount",
+                        repeat
+                            PreviousMinimum := ProductFactory."Minimum Loan Amount";
+
+                            // TotalChargesOnMin := PreviousMinimum - LoansProcess.ComputeCharges(
+                            //     PreviousMinimum,
+                            //     ProductFactory."Product ID",
+                            //     '',
+                            //     0);
+
+                            MobileChargesInfo := SkyMbankingTrans.GetTransChargesPreview(
+                                'LOAN_DISBURSEMENT',
+                                PreviousMinimum,
                                 '',
                                 SearchMember,
-                                ''
-                            );
-                        ProductFactory."Minimum Loan Amount" += MobileChargesInfo.Get(1);
+                                '');
+
+                            ProductFactory."Minimum Loan Amount" :=
+                                OutstandingBalance +
+                                TotalChargesOnMin +
+                                MobileChargesInfo.Get(1);
+
+                        until ProductFactory."Minimum Loan Amount" = PreviousMinimum;
 
                         Datum.Replace('minimum_amount', ProductFactory."Minimum Loan Amount");
                     end;
