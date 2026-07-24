@@ -116,9 +116,9 @@ table 52185823 "Loan Rescheduling"
                     end;
                     LoanSched.Reset;
                     LoanSched.SetRange(LoanSched."Loan No.", Rec."Loan No.");
-                    LoanSched.SetFilter("Repayment Date", '>%1', rec."Rescheduling Date");
+                    LoanSched.SetFilter("Repayment Date", '%1<', rec."Rescheduling Date");
                     paidInstallments := LoanSched.Count;
-                    "Remaining Installments" := OriginalIns - paidInstallments;
+                    "Remaining Installments" := paidInstallments;
 
                     //Delete schedule if any.
                     LoanSched.Reset;
@@ -192,8 +192,8 @@ table 52185823 "Loan Rescheduling"
                                 Message('The member will be required to add new guarantors');
                             if "New Installments" > LoanPro."Ordinary Default Intallments" then
                                 Error(Txt0002);
-                            if "New Installments" + paidInstallments > LoanPro."Ordinary Default Intallments" then
-                                Error(Txt0002);
+                            // if "New Installments" + paidInstallments > LoanPro."Ordinary Default Intallments" then
+                            //     Error(Txt0002);
                         end;
                     end;
 

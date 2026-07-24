@@ -170,7 +170,7 @@ table 52185828 "Guarantors Substitution"
             var
                 myInt: Integer;
                 MemberRec: Record Members;
-
+                GuarantorSub: record "Guarantors Substitution";
             begin
                 "Loan No." := '';
                 "Loan Account No." := '';
@@ -183,6 +183,24 @@ table 52185828 "Guarantors Substitution"
                 if MemberRec.FindFirst() then begin
                     Rec.Name := MemberRec.Name;
                 end;
+
+                // GuarantorSub.Reset();
+                // GuarantorSub.SetRange(Member, Rec.Member);
+                // GuarantorSub.SetRange(Posted, false);
+                // GuarantorSub.SetRange("Rejected By", '');
+                // if GuarantorSub.Find('-') then begin
+                //     SubCount := GuaranotrSub.Count;
+                //     if SubCount > 1 then
+                //         Error('Member  %1 has a Loan Guarantor substitution that has not been posted', rec."Member No.");
+                // end;
+                // if Loan.Get("Loan No.") then begin
+                //     Loan.CalcFields(Loan."Outstanding Balance");
+                //     if Loan."Outstanding Balance" <= 0 then
+                //         Error(Txt001);
+                //     "Loan Account No." := Loan."Loan Account";
+                //     Name := Loan."Member Name";
+                //     GenerateGuarantors();
+                // end;
 
 
 
