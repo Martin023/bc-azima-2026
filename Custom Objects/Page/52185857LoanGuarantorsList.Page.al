@@ -44,6 +44,10 @@ page 52185857 "Loan Guarantors substition Ln"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Incoming Guar Type"; rec."Incoming Guar Type")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Member Substituted"; Rec."Member Substituted")
                 {
                     ApplicationArea = Basic, Suite;
@@ -72,26 +76,27 @@ page 52185857 "Loan Guarantors substition Ln"
                 field("Savings Account No."; Rec."Savings Account No.")
                 {
                     ApplicationArea = Basic, Suite;
+                    editable = false;
                 }
                 field("Collateral Reg. No."; Rec."Collateral Reg. No.")
                 {
                     ApplicationArea = all;
                     Editable = Colledit;
                 }
-                field(Name; Rec.Name)
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field(Shares; Rec.Shares)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Visible = false;
-                }
+                // field(Name; Rec.Name)
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field(Shares; Rec.Shares)
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Visible = false;
+                // }
 
-                field("No Of Loans Guaranteed"; Rec."No Of Loans Guaranteed")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("No Of Loans Guaranteed"; Rec."No Of Loans Guaranteed")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("Amount Guaranteed"; Rec."Amount Guaranteed")
                 {
                     ApplicationArea = Basic, Suite;
@@ -103,11 +108,11 @@ page 52185857 "Loan Guarantors substition Ln"
                     Editable = false;
                     Visible = false;
                 }
-                field("Proportion Guaranteed"; Rec."Proportion Guaranteed")
-                {
-                    ApplicationArea = all;
-                    Editable = false;
-                }
+                // field("Proportion Guaranteed"; Rec."Proportion Guaranteed")
+                // {
+                //     ApplicationArea = all;
+                //     Editable = false;
+                // }
                 field("Staff/Payroll No."; Rec."Staff/Payroll No.")
                 {
                     ApplicationArea = Basic, Suite;

@@ -1,4 +1,5 @@
 namespace AZIMA.AZIMA;
+using Microsoft.Sales.Customer;
 
 report 52185532 "Member Balances Report"
 {
@@ -48,9 +49,16 @@ report 52185532 "Member Balances Report"
             column(SDL; SDL) { }
             column(Sno; Sno) { }
             column(CL; CL) { }
+            column(TotalLoans; TotalLoans) { }
+            column(Gender; Gender) { }
+            column(Primary_Identification; "Primary Identification") { }
+            column(Date_of_Birth; "Date of Birth") { }
+            Column(CustomerName; CustomerName) { }
+
 
             trigger OnafterGetRecord()
             begin
+                CustomerName := '';
                 ShareCapital := 0;
                 MemberDeposits := 0;
                 MFIDeposits := 0;
@@ -73,7 +81,6 @@ report 52185532 "Member Balances Report"
                 JHZ2 := 0;
                 SDL := 0;
                 CL := 0;
-
                 Sno += 1;
                 SavingsAccounts.reset;
                 SavingsAccounts.setrange("Member No.", Members."No.");
@@ -92,6 +99,11 @@ report 52185532 "Member Balances Report"
                         End;
                     until SavingsAccounts.next() = 0;
                 end;
+
+                Customer.Reset();
+                Customer.SetRange("No.", Members."Employer Code");
+                if Customer.FindFirst() then
+                    CustomerName := Customer.Name;
 
                 Loans.Reset();
                 loans.SetRange("Member No.", Members."No.");
@@ -133,6 +145,7 @@ report 52185532 "Member Balances Report"
                                 CL += Loans."Outstanding Balance";
 
                         end;
+                        TotalLoans += Loans."Outstanding Balance";
                     until Loans.next() = 0;
                 end;
             end;
@@ -193,6 +206,9 @@ report 52185532 "Member Balances Report"
         Loans: record Loans;
         StartDate: Date;
         EndDate: Date;
+        Customer: record Customer;
+        TotalLoans: Decimal;
+        CustomerName: text[100];
 
 
     trigger OnPreReport()

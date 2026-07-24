@@ -1954,12 +1954,18 @@ page 52187312 "Credit Management Role Center"
                         Caption = 'Member Balances Report';
                         RunObject = report "Member Balances Report";
                     }
-                    action("Application")
+                    action("Insurance Deposit Report")
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Member Application Register';
-                        RunObject = report "Member Application Register";
+                        Caption = 'Insurance Deposit Report';
+                        RunObject = report "Insurance Deposit Report";
                     }
+                    // action("Application")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Member Application Register';
+                    //     RunObject = report "Member Application Register";
+                    // }
 
                     action("Member Listing Report")
                     {

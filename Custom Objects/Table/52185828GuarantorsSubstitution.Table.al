@@ -457,6 +457,8 @@ table 52185828 "Guarantors Substitution"
         Lguarantx.Reset;
         Lguarantx.SetRange(Lguarantx."Member No", Rec."Member No.");
         Lguarantx.SetRange(Lguarantx.Substituted, false);
+        Lguarantx.SetAutoCalcFields("Outstanding Balance");
+        Lguarantx.SetFilter("Outstanding Balance", '>0');
         Lguarantx.setfilter("Savings Account No./Member No.", '<>%1', '');
         if Lguarantx.Find('-') then
             repeat
@@ -468,6 +470,7 @@ table 52185828 "Guarantors Substitution"
                 LGuarant."Collateral Reg. No." := Lguarantx."Collateral Reg. No.";
                 LGuarant."Loan No" := Lguarantx."Loan No";
                 LGuarant."Member No" := Lguarantx."Member No";
+                LGuarant."Loan Product Type" := Lguarantx."Loan Type";
                 //get deposit contribution no
                 // SaVingAc.Get(LGuarant."Member No"); 
                 // SaVingAc.Reset;

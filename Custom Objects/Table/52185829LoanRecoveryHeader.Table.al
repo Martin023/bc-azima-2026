@@ -684,7 +684,10 @@ table 52185829 "Loan Recovery Header"
         }
         field(50; "Equal Guarantor Disribution"; Boolean)
         {
-
+            trigger OnValidate()
+            begin
+                "Loan No." := '';
+            end;
         }
 
     }
