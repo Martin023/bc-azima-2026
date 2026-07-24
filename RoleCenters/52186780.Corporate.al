@@ -119,7 +119,8 @@ page 52186780 "Corporate Department"
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Member Accounts';
-                        RunObject = page"Savings Accounts";;
+                        RunObject = page "Savings Accounts";
+                        ;
                     }
                 }
                 Group("Deposit Listings")
@@ -186,12 +187,7 @@ page 52186780 "Corporate Department"
                         caption = 'Loan Disbursement List';
                         RunObject = page "Loan Disbursement List";
                     }
-                    action("Loan Guarantors List")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Loan Guarantors List';
-                        RunObject = page "Loan Guarantors List";
-                    }
+
                 }
             }
             group(EmployeeSelfService)

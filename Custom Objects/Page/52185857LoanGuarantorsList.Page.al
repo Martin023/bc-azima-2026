@@ -1,4 +1,4 @@
-page 52185857 "Loan Guarantors List"
+page 52185857 "Loan Guarantors substition Ln"
 {
     Caption = 'Loan Guarantor Substitution Lines';
     PageType = ListPart;
@@ -24,39 +24,32 @@ page 52185857 "Loan Guarantors List"
                             Colledit := false;
                     end;
                 }
-                field("Savings Account No."; Rec."Savings Account No.")
+                field("Member Guaranteed"; Rec."Member Guaranteed")
                 {
                     ApplicationArea = Basic, Suite;
+                    Caption = 'Member Guaranteed';
                 }
-                field("Collateral Reg. No."; Rec."Collateral Reg. No.")
-                {
-                    ApplicationArea = all;
-                    Editable = Colledit;
-                }
-                field(Name; Rec.Name)
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+
                 field("Loan No"; Rec."Loan No")
                 {
                     ApplicationArea = Basic, Suite;
                     Editable = false;
-                    Visible = false;
+                }
+                field("Loan Product Type"; Rec."Loan Product Type")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = false;
                 }
                 field("Loan Balance"; Rec."Loan Balance")
                 {
                     ApplicationArea = Basic, Suite;
-                }
-                field(Shares; Rec.Shares)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Visible = false;
                 }
                 field("Member Substituted"; Rec."Member Substituted")
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Substituted Guarantor';
                 }
+
                 field(Substituted; Rec.Substituted)
                 {
                     ApplicationArea = Basic, Suite;
@@ -75,6 +68,26 @@ page 52185857 "Loan Guarantors List"
 
                     end;
                 }
+
+                field("Savings Account No."; Rec."Savings Account No.")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Collateral Reg. No."; Rec."Collateral Reg. No.")
+                {
+                    ApplicationArea = all;
+                    Editable = Colledit;
+                }
+                field(Name; Rec.Name)
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field(Shares; Rec.Shares)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Visible = false;
+                }
+
                 field("No Of Loans Guaranteed"; Rec."No Of Loans Guaranteed")
                 {
                     ApplicationArea = Basic, Suite;
@@ -100,16 +113,11 @@ page 52185857 "Loan Guarantors List"
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
-                field("Self Guarantee"; Rec."Self Guarantee")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = false;
-                }
-                field("Member Guaranteed"; Rec."Member Guaranteed")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Member Guaranteed';
-                }
+                // field("Self Guarantee"; Rec."Self Guarantee")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Editable = false;
+                // }
                 field("Outstanding Balance"; Rec."Outstanding Balance")
                 {
                     ApplicationArea = Basic, Suite;
@@ -120,11 +128,7 @@ page 52185857 "Loan Guarantors List"
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
-                field("Loan Product Type"; Rec."Loan Product Type")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = false;
-                }
+
                 field("No."; Rec."No.")
                 {
                     ApplicationArea = Basic, Suite;

@@ -1,5 +1,6 @@
 table 52185827 "Loan Guarantors Sub"
 {
+    DrilldownPageid = "Loan Guarantors substition Ln";
 
     fields
     {
