@@ -223,7 +223,7 @@ Report 52185439 "All Tellers Cash Report"
             DataItemTableView = sorting(Number);
 
             column(DenomRecordNumber; Number) { }
-            column(DenomCode; TempCoinage.Code) { }
+            column(DenomCode; TempCoinage.Value) { }
             column(DenomCount; TempCoinage.Quantity) { }
             column(DenomAmount; TempCoinage."Total Amount") { }
 
@@ -235,6 +235,7 @@ Report 52185439 "All Tellers Cash Report"
                 TreasuryTransLog.Reset();
                 TreasuryTransLog.SetFilter("Date Posted", DateFilterTxt);
                 TreasuryTransLog.SetRange(Posted, true);
+                TreasuryTransLog.SetRange("Transaction Type", TreasuryTransLog."Transaction Type"::"End of Day Return to Treasury");
                 if TreasuryTransLog.FindSet() then begin
                     repeat
                         CoinageRec.Reset();
@@ -252,6 +253,7 @@ Report 52185439 "All Tellers Cash Report"
                                     end else begin
                                         TempCoinage.Init();
                                         TempCoinage.Code := CoinageRec.Code;
+                                        TempCoinage.Value := CoinageRec.Value; // Store the actual denomination value
                                         TempCoinage.Quantity := CoinageRec.Quantity;
                                         TempCoinage."Total Amount" := CoinageRec."Total Amount";
                                         TempCoinage.Insert();

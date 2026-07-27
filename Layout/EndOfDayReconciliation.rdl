@@ -1911,6 +1911,9 @@
         <Field Name="DenomCode">
           <DataField>DenomCode</DataField>
         </Field>
+        <Field Name="DenomCodeFormat">
+          <DataField>DenomCodeFormat</DataField>
+        </Field>
         <Field Name="DenomCount">
           <DataField>DenomCount</DataField>
         </Field>

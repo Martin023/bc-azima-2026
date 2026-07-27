@@ -61,7 +61,7 @@ Report 52185446 "End of Day Reconciliation"
             dataitem(Coinage; Coinage)
             {
                 DataItemLink = No = field(No);
-                column(DenomCode; Code) { }
+                column(DenomCode; Value) { } // Reused DenomCode to pass the Value field to RDLC
                 column(DenomCount; Quantity) { }
                 column(DenomAmount; "Total Amount") { }
             }
@@ -173,13 +173,12 @@ Report 52185446 "End of Day Reconciliation"
                     until BankLedgEntry.Next() = 0;
                 end;
 
-                // 3. AGGREGATE TOTALS
-                GrandTotalReceiptsAmt := CashDepositAmt + MPesaCashDepositAmt + ReceiveFromTreasuryAmt + SpecialReceiptAmt + JournalVoucherReceiptsAmt + BalBroughtForwardAmt;
-                GrandTotalPaymentsAmt := CashWithdrawalAmt + MPesaCashWithdrawAmt + TotalVoucherPaymentsAmt + ReturnToTreasuryAmt + EndOfDayAmt + JournalVoucherPaymentsAmt;
+                // 3. AGGREGATE TOTALS (FIXED DOUBLE COUNTING HERE)
+                TotalReceiptsAmt := CashDepositAmt + MPesaCashDepositAmt + ReceiveFromTreasuryAmt + SpecialReceiptAmt + JournalVoucherReceiptsAmt;
+                GrandTotalReceiptsAmt := TotalReceiptsAmt + BalBroughtForwardAmt;
 
-                TotalReceiptsAmt := GrandTotalReceiptsAmt;
-                // Exclude End Of Day from "Total Payments"
-                TotalPaymentsAmt := GrandTotalPaymentsAmt - EndOfDayAmt;
+                TotalPaymentsAmt := CashWithdrawalAmt + MPesaCashWithdrawAmt + TotalVoucherPaymentsAmt + ReturnToTreasuryAmt + JournalVoucherPaymentsAmt;
+                GrandTotalPaymentsAmt := TotalPaymentsAmt + EndOfDayAmt;
 
                 // 4. CALCULATE EXPECTED CASH & DIFFERENCES
                 SystemCashAtHandAmt := BalBroughtForwardAmt + TotalReceiptsAmt - TotalPaymentsAmt;
