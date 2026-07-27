@@ -242,20 +242,10 @@
                   </TextRun>
                 </TextRuns>
               </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value xml:space="preserve"> </Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-              </Paragraph>
             </Paragraphs>
             <Top>5.5cm</Top>
             <Left>0.5cm</Left>
-            <Height>4.4cm</Height>
+            <Height>3.8cm</Height>
             <Width>4.5cm</Width>
           </Textbox>
           <Textbox Name="ReceiptAmountsText">
@@ -331,6 +321,44 @@
                   <TextAlign>Right</TextAlign>
                 </Style>
               </Paragraph>
+            </Paragraphs>
+            <Top>5.5cm</Top>
+            <Left>5cm</Left>
+            <Height>3.8cm</Height>
+            <Width>4cm</Width>
+          </Textbox>
+          <Line Name="DottedLineReceipts">
+            <Top>9.3cm</Top>
+            <Left>0.5cm</Left>
+            <Height>0cm</Height>
+            <Width>8.5cm</Width>
+            <Style>
+              <Border>
+                <Style>Dotted</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Textbox Name="GrandTotalReceiptsLbl">
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Grand Total Receipts</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+              </Paragraph>
+            </Paragraphs>
+            <Top>9.4cm</Top>
+            <Left>0.5cm</Left>
+            <Height>0.6cm</Height>
+            <Width>4.5cm</Width>
+          </Textbox>
+          <Textbox Name="GrandTotalReceiptsVal">
+            <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
@@ -347,9 +375,9 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>5.5cm</Top>
+            <Top>9.4cm</Top>
             <Left>5cm</Left>
-            <Height>4.4cm</Height>
+            <Height>0.6cm</Height>
             <Width>4cm</Width>
           </Textbox>
           <Textbox Name="PaymentsHeaderRight">
@@ -483,20 +511,10 @@
                   </TextRun>
                 </TextRuns>
               </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value xml:space="preserve"> </Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-              </Paragraph>
             </Paragraphs>
             <Top>5.5cm</Top>
             <Left>10cm</Left>
-            <Height>4.4cm</Height>
+            <Height>3.8cm</Height>
             <Width>4.5cm</Width>
           </Textbox>
           <Textbox Name="PaymentAmountsText">
@@ -586,6 +604,44 @@
                   <TextAlign>Right</TextAlign>
                 </Style>
               </Paragraph>
+            </Paragraphs>
+            <Top>5.5cm</Top>
+            <Left>14.5cm</Left>
+            <Height>3.8cm</Height>
+            <Width>4cm</Width>
+          </Textbox>
+          <Line Name="DottedLinePayments">
+            <Top>9.3cm</Top>
+            <Left>10cm</Left>
+            <Height>0cm</Height>
+            <Width>8.5cm</Width>
+            <Style>
+              <Border>
+                <Style>Dotted</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Textbox Name="GrandTotalPaymentsLbl">
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Grand Total Payments</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+              </Paragraph>
+            </Paragraphs>
+            <Top>9.4cm</Top>
+            <Left>10cm</Left>
+            <Height>0.6cm</Height>
+            <Width>4.5cm</Width>
+          </Textbox>
+          <Textbox Name="GrandTotalPaymentsVal">
+            <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
@@ -602,9 +658,9 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>5.5cm</Top>
+            <Top>9.4cm</Top>
             <Left>14.5cm</Left>
-            <Height>4.4cm</Height>
+            <Height>0.6cm</Height>
             <Width>4cm</Width>
           </Textbox>
           <Tablix Name="DenominationsTablix">
@@ -838,7 +894,7 @@
                 </FilterValues>
               </Filter>
             </Filters>
-            <Top>10cm</Top>
+            <Top>10.3cm</Top>
             <Left>0.5cm</Left>
             <Height>1.1cm</Height>
             <Width>15cm</Width>
@@ -861,7 +917,7 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>11.2cm</Top>
+            <Top>11.5cm</Top>
             <Left>11.5cm</Left>
             <Height>0.6cm</Height>
             <Width>4cm</Width>
@@ -895,7 +951,7 @@
                 </TextRuns>
               </Paragraph>
             </Paragraphs>
-            <Top>12.2cm</Top>
+            <Top>12.5cm</Top>
             <Left>0.5cm</Left>
             <Height>1.2cm</Height>
             <Width>5.5cm</Width>
@@ -932,7 +988,7 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>12.2cm</Top>
+            <Top>12.5cm</Top>
             <Left>6cm</Left>
             <Height>1.2cm</Height>
             <Width>3cm</Width>
@@ -961,7 +1017,7 @@
                 </TextRuns>
               </Paragraph>
             </Paragraphs>
-            <Top>12.2cm</Top>
+            <Top>12.5cm</Top>
             <Left>10cm</Left>
             <Height>1.2cm</Height>
             <Width>5.5cm</Width>
@@ -998,7 +1054,7 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>12.2cm</Top>
+            <Top>12.5cm</Top>
             <Left>15.5cm</Left>
             <Height>1.2cm</Height>
             <Width>3.5cm</Width>
@@ -1018,7 +1074,7 @@
                 </TextRuns>
               </Paragraph>
             </Paragraphs>
-            <Top>14cm</Top>
+            <Top>14.3cm</Top>
             <Left>0.5cm</Left>
             <Height>0.6cm</Height>
             <Width>5.5cm</Width>
@@ -1037,7 +1093,7 @@
                 </TextRuns>
               </Paragraph>
             </Paragraphs>
-            <Top>14cm</Top>
+            <Top>14.3cm</Top>
             <Left>6cm</Left>
             <Height>1cm</Height>
             <Width>13cm</Width>
@@ -1079,7 +1135,7 @@
                 </TextRuns>
               </Paragraph>
             </Paragraphs>
-            <Top>15.5cm</Top>
+            <Top>15.8cm</Top>
             <Left>10cm</Left>
             <Height>1.5cm</Height>
             <Width>9cm</Width>

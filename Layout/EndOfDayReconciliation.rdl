@@ -102,24 +102,10 @@
                   <TextAlign>Right</TextAlign>
                 </Style>
               </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!GrandTotalReceiptsAmt.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                      <Format>#,0.00</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
             </Paragraphs>
             <Top>10.1cm</Top>
             <Left>5.2cm</Left>
-            <Height>3.5cm</Height>
+            <Height>3.0cm</Height>
             <Width>4cm</Width>
             <Style />
           </Textbox>
@@ -508,13 +494,13 @@
           </Textbox>
           <Line Name="PaymentLine">
             <Top>13.1cm</Top>
-            <Left>14.5cm</Left>
+            <Left>10cm</Left>
             <Height>0cm</Height>
-            <Width>5cm</Width>
+            <Width>9.5cm</Width>
             <ZIndex>10</ZIndex>
             <Style>
               <Border>
-                <Style>Solid</Style>
+                <Style>Dotted</Style>
               </Border>
             </Style>
           </Line>
@@ -619,24 +605,10 @@
                   <TextAlign>Right</TextAlign>
                 </Style>
               </Paragraph>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!GrandTotalPaymentsAmt.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                      <Format>#,0.00</Format>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
             </Paragraphs>
             <Top>10.1cm</Top>
             <Left>14.5cm</Left>
-            <Height>3.5cm</Height>
+            <Height>3.0cm</Height>
             <Width>5cm</Width>
             <ZIndex>11</ZIndex>
             <Style />
@@ -725,7 +697,7 @@
             </Paragraphs>
             <Top>10.1cm</Top>
             <Left>10cm</Left>
-            <Height>3.5cm</Height>
+            <Height>3.0cm</Height>
             <Width>4.5cm</Width>
             <ZIndex>12</ZIndex>
             <Style />
@@ -758,13 +730,13 @@
           </Textbox>
           <Line Name="ReceiptLine">
             <Top>13.1cm</Top>
-            <Left>5.2cm</Left>
+            <Left>0.5cm</Left>
             <Height>0cm</Height>
-            <Width>4cm</Width>
+            <Width>8.7cm</Width>
             <ZIndex>14</ZIndex>
             <Style>
               <Border>
-                <Style>Solid</Style>
+                <Style>Dotted</Style>
               </Border>
             </Style>
           </Line>
@@ -1497,7 +1469,7 @@
             </Paragraphs>
             <Top>10.1cm</Top>
             <Left>0.5cm</Left>
-            <Height>3.5cm</Height>
+            <Height>3.0cm</Height>
             <Width>4.5cm</Width>
             <ZIndex>29</ZIndex>
             <Style />
@@ -1646,6 +1618,90 @@
                 <Width>1pt</Width>
               </BottomBorder>
             </Style>
+          </Textbox>
+          <Textbox Name="GrandTotalReceiptsLbl">
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Grand Total Receipts</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+              </Paragraph>
+            </Paragraphs>
+            <Top>13.2cm</Top>
+            <Left>0.5cm</Left>
+            <Height>0.5cm</Height>
+            <Width>4.5cm</Width>
+            <ZIndex>101</ZIndex>
+          </Textbox>
+          <Textbox Name="GrandTotalReceiptsVal">
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!GrandTotalReceiptsAmt.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>13.2cm</Top>
+            <Left>5.2cm</Left>
+            <Height>0.5cm</Height>
+            <Width>4cm</Width>
+            <ZIndex>102</ZIndex>
+          </Textbox>
+          <Textbox Name="GrandTotalPaymentsLbl">
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Grand Total Payments</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+              </Paragraph>
+            </Paragraphs>
+            <Top>13.2cm</Top>
+            <Left>10cm</Left>
+            <Height>0.5cm</Height>
+            <Width>4.5cm</Width>
+            <ZIndex>103</ZIndex>
+          </Textbox>
+          <Textbox Name="GrandTotalPaymentsVal">
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!GrandTotalPaymentsAmt.Value, "DataSet_Result")</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <Format>#,0.00</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>13.2cm</Top>
+            <Left>14.5cm</Left>
+            <Height>0.5cm</Height>
+            <Width>5cm</Width>
+            <ZIndex>104</ZIndex>
           </Textbox>
         </ReportItems>
         <Height>21cm</Height>

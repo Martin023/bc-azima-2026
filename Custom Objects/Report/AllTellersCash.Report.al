@@ -55,6 +55,7 @@ Report 52185439 "All Tellers Cash Report"
                 Matched: Boolean;
                 IsReceipt: Boolean;
                 AbsAmt: Decimal;
+                HasDoneEODCheck: Boolean;
             begin
                 if Treasury_transaction.GetFilter("Date Posted") = '' then
                     Treasury_transaction.SetRange("Date Posted", Today);
@@ -84,88 +85,101 @@ Report 52185439 "All Tellers Cash Report"
                 BankAcc.SetRange("Bank Type", BankAcc."Bank Type"::Cashier);
                 if BankAcc.FindSet() then begin
                     repeat
-                        // A. Tellers' Opening Balance
-                        BankLedgEntry.Reset();
-                        BankLedgEntry.SetRange("Bank Account No.", BankAcc."No.");
-                        BankLedgEntry.SetFilter("Posting Date", '<%1', MinFilterDate);
-                        BankLedgEntry.CalcSums("Amount (LCY)");
-                        TellersOpeningBalancesAmt += BankLedgEntry."Amount (LCY)";
+                        // CHECK IF TELLER HAS DONE EOD
+                        HasDoneEODCheck := false;
+                        TreasuryTransLog.Reset();
+                        TreasuryTransLog.SetRange("From Bank", BankAcc."No.");
+                        TreasuryTransLog.SetFilter("Date Posted", DateFilterTxt);
+                        TreasuryTransLog.SetRange("Transaction Type", TreasuryTransLog."Transaction Type"::"End of Day Return to Treasury");
+                        TreasuryTransLog.SetRange(Posted, true);
+                        if TreasuryTransLog.FindFirst() then
+                            HasDoneEODCheck := true;
 
-                        // B. Tellers' Closing Balance
-                        BankLedgEntry.Reset();
-                        BankLedgEntry.SetRange("Bank Account No.", BankAcc."No.");
-                        BankLedgEntry.SetFilter("Posting Date", '<=%1', MaxFilterDate);
-                        BankLedgEntry.CalcSums("Amount (LCY)");
-                        TellersClosingBalancesAmt += BankLedgEntry."Amount (LCY)";
+                        // ONLY PROCESS IF EOD IS COMPLETED
+                        if HasDoneEODCheck then begin
+                            // A. Tellers' Opening Balance
+                            BankLedgEntry.Reset();
+                            BankLedgEntry.SetRange("Bank Account No.", BankAcc."No.");
+                            BankLedgEntry.SetFilter("Posting Date", '<%1', MinFilterDate);
+                            BankLedgEntry.CalcSums("Amount (LCY)");
+                            TellersOpeningBalancesAmt += BankLedgEntry."Amount (LCY)";
 
-                        // C. Loop Tellers' Transactions for the filtered period
-                        BankLedgEntry.Reset();
-                        BankLedgEntry.SetRange("Bank Account No.", BankAcc."No.");
-                        BankLedgEntry.SetFilter("Posting Date", DateFilterTxt);
-                        if BankLedgEntry.FindSet() then begin
-                            repeat
-                                // IGNORING REVERSED TRANSACTIONS
-                                if not BankLedgEntry.Reversed then begin
+                            // B. Tellers' Closing Balance
+                            BankLedgEntry.Reset();
+                            BankLedgEntry.SetRange("Bank Account No.", BankAcc."No.");
+                            BankLedgEntry.SetFilter("Posting Date", '<=%1', MaxFilterDate);
+                            BankLedgEntry.CalcSums("Amount (LCY)");
+                            TellersClosingBalancesAmt += BankLedgEntry."Amount (LCY)";
 
-                                    AbsAmt := Abs(BankLedgEntry."Amount (LCY)");
-                                    IsReceipt := BankLedgEntry."Amount (LCY)" > 0;
-                                    Matched := false;
+                            // C. Loop Tellers' Transactions for the filtered period
+                            BankLedgEntry.Reset();
+                            BankLedgEntry.SetRange("Bank Account No.", BankAcc."No.");
+                            BankLedgEntry.SetFilter("Posting Date", DateFilterTxt);
+                            if BankLedgEntry.FindSet() then begin
+                                repeat
+                                    // IGNORING REVERSED TRANSACTIONS
+                                    if not BankLedgEntry.Reversed then begin
 
-                                    // Check Cashier Transactions
-                                    if CashierTrans.Get(BankLedgEntry."Document No.") then begin
-                                        Matched := true;
-                                        case CashierTrans.Type of
-                                            CashierTrans.Type::"Cash Deposit":
-                                                CashDepositAmt += AbsAmt;
-                                            CashierTrans.Type::"MPESA Deposit":
-                                                MPesaCashDepositAmt += AbsAmt;
-                                            CashierTrans.Type::"Cash Withdrawal":
-                                                CashWithdrawalAmt += AbsAmt;
-                                            CashierTrans.Type::"MPESA Withdrawal":
-                                                MPesaCashWithdrawAmt += AbsAmt;
-                                            CashierTrans.Type::"Credit Receipt":
-                                                SpecialReceiptAmt += AbsAmt;
+                                        AbsAmt := Abs(BankLedgEntry."Amount (LCY)");
+                                        IsReceipt := BankLedgEntry."Amount (LCY)" > 0;
+                                        Matched := false;
+
+                                        // Check Cashier Transactions
+                                        if CashierTrans.Get(BankLedgEntry."Document No.") then begin
+                                            Matched := true;
+                                            case CashierTrans.Type of
+                                                CashierTrans.Type::"Cash Deposit":
+                                                    CashDepositAmt += AbsAmt;
+                                                CashierTrans.Type::"MPESA Deposit":
+                                                    MPesaCashDepositAmt += AbsAmt;
+                                                CashierTrans.Type::"Cash Withdrawal":
+                                                    CashWithdrawalAmt += AbsAmt;
+                                                CashierTrans.Type::"MPESA Withdrawal":
+                                                    MPesaCashWithdrawAmt += AbsAmt;
+                                                CashierTrans.Type::"Credit Receipt":
+                                                    SpecialReceiptAmt += AbsAmt;
+                                                else begin
+                                                    if IsReceipt then
+                                                        SpecialReceiptAmt += AbsAmt
+                                                    else
+                                                        JournalVoucherPaymentsAmt += AbsAmt;
+                                                end;
+                                            end;
+                                        end
+
+                                        // Check Payment Vouchers (All PVs)
+                                        else if PaymentsHeader.Get(BankLedgEntry."Document No.") then begin
+                                            Matched := true;
+                                            TotalVoucherPaymentsAmt += AbsAmt;
+                                        end
+
+                                        // Check Treasury Transactions
+                                        else if TreasuryTransLog.Get(BankLedgEntry."Document No.") then begin
+                                            Matched := true;
+                                            if TreasuryTransLog."Transaction Type" = TreasuryTransLog."Transaction Type"::"Issue To Teller" then
+                                                ReceiveFromTreasuryAmt += AbsAmt
+                                            else if TreasuryTransLog."Transaction Type" = TreasuryTransLog."Transaction Type"::"Return To Treasury" then
+                                                ReturnToTreasuryAmt += AbsAmt
+                                            else if TreasuryTransLog."Transaction Type" = TreasuryTransLog."Transaction Type"::"End of Day Return to Treasury" then
+                                                EndOfDayAmt += AbsAmt
                                             else begin
                                                 if IsReceipt then
-                                                    SpecialReceiptAmt += AbsAmt
+                                                    ReceiveFromTreasuryAmt += AbsAmt
                                                 else
-                                                    JournalVoucherPaymentsAmt += AbsAmt;
+                                                    ReturnToTreasuryAmt += AbsAmt;
                                             end;
                                         end;
-                                    end
 
-                                    // Check Payment Vouchers (All PVs)
-                                    else if PaymentsHeader.Get(BankLedgEntry."Document No.") then begin
-                                        Matched := true;
-                                        TotalVoucherPaymentsAmt += AbsAmt;
-                                    end
-
-                                    // Check Treasury Transactions
-                                    else if TreasuryTransLog.Get(BankLedgEntry."Document No.") then begin
-                                        Matched := true;
-                                        if TreasuryTransLog."Transaction Type" = TreasuryTransLog."Transaction Type"::"Issue To Teller" then
-                                            ReceiveFromTreasuryAmt += AbsAmt
-                                        else if TreasuryTransLog."Transaction Type" = TreasuryTransLog."Transaction Type"::"Return To Treasury" then
-                                            ReturnToTreasuryAmt += AbsAmt
-                                        else if TreasuryTransLog."Transaction Type" = TreasuryTransLog."Transaction Type"::"End of Day Return to Treasury" then
-                                            EndOfDayAmt += AbsAmt
-                                        else begin
+                                        // If no match, treat as generic Journal Voucher entry
+                                        if not Matched then begin
                                             if IsReceipt then
-                                                ReceiveFromTreasuryAmt += AbsAmt
+                                                JournalVoucherReceiptsAmt += AbsAmt
                                             else
-                                                ReturnToTreasuryAmt += AbsAmt;
+                                                JournalVoucherPaymentsAmt += AbsAmt;
                                         end;
                                     end;
-
-                                    // If no match, treat as generic Journal Voucher entry
-                                    if not Matched then begin
-                                        if IsReceipt then
-                                            JournalVoucherReceiptsAmt += AbsAmt
-                                        else
-                                            JournalVoucherPaymentsAmt += AbsAmt;
-                                    end;
-                                end;
-                            until BankLedgEntry.Next() = 0;
+                                until BankLedgEntry.Next() = 0;
+                            end;
                         end;
                     until BankAcc.Next() = 0;
                 end;
@@ -188,7 +202,9 @@ Report 52185439 "All Tellers Cash Report"
                         TreasuryClosingBalanceAmt += BankLedgEntry."Amount (LCY)";
                     until BankAcc.Next() = 0;
                 end;
-                GrandTotalReceiptsAmt := CashDepositAmt + JournalVoucherReceiptsAmt + MPesaCashDepositAmt + ReceiveFromTreasuryAmt + SpecialReceiptAmt;
+
+                // INCLUDED TellersOpeningBalancesAmt FOR RECEIPTS
+                GrandTotalReceiptsAmt := CashDepositAmt + JournalVoucherReceiptsAmt + MPesaCashDepositAmt + ReceiveFromTreasuryAmt + SpecialReceiptAmt + TellersOpeningBalancesAmt;
                 GrandTotalPaymentsAmt := CashWithdrawalAmt + EndOfDayAmt + ReturnToTreasuryAmt + JournalVoucherPaymentsAmt + MPesaCashWithdrawAmt + TotalVoucherPaymentsAmt;
 
                 AmountInWords[1] := ConvertAmountToWords(GrandTotalReceiptsAmt);
