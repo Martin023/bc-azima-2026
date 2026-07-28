@@ -1013,15 +1013,15 @@ page 52185753 "Loan Application Card"
                         if Loan."Member No." = '' then error('Kindly Enter member number before performing this action');
                         SavAcc.Reset;
                         SavAcc.SetRange(SavAcc."Member No.", loan."Member No.");
-                        //SavAcc.SetRange(SavAcc."Loan Disbursement Account", true);
-                        SavAcc.SetRange("Product Type", '191');
+                        SavAcc.SetRange(SavAcc."Loan Disbursement Account", true);
+                        // SavAcc.SetRange("Product Type", '191');
                         if SavAcc.Find('-') then begin
                             loan."Disbursement Account No" := SavAcc."No.";
                             Loan.modify;
                             Message('Loan disbursement account updated successfully');
                         end
                         else
-                            Error('Member does not have a ordinary account');
+                            Error('Member does not have a default account');
                     end;
                 end;
             }
@@ -1525,7 +1525,6 @@ page 52185753 "Loan Application Card"
                     Rec.TestField("Loan Account");
                     //TESTFIELD("Global Dimension 2 Code");
                     Rec.TestField("Approved Amount");
-                    Rec.TestField("Disbursement Account No");
                     //Rec.TestField("Sub Sector Level2");
                     Rec.TestField("Main Sector");
                     Rec.TestField("Sub Sector Level1");

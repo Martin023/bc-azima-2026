@@ -41,7 +41,11 @@ page 52185795 "Transactions Type"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Exclude Salary Deductions"; Rec."Exclude Salary Deductions")
+                field("Exclude Salary Loan Deductions"; Rec."Exclude Salary Loan Deductions")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Exclude STO Deductions"; Rec."Exclude STO Deductions")
                 {
                     ApplicationArea = Basic, Suite;
                 }
@@ -49,7 +53,7 @@ page 52185795 "Transactions Type"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Commission Type"; Rec."Commission Type")
+                field("Salary Income Types"; Rec."Salary Income Type")
                 {
                     ApplicationArea = Basic, Suite;
                 }

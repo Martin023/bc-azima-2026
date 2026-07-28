@@ -542,6 +542,10 @@ table 52185689 "General Set-Up"
         {
             Caption = 'Minimum no. of Joint Sigantories';
         }
+        field(50026; "USSD Code"; Text[10])
+        {
+            Caption = 'USSD Code';
+        }
     }
 
     keys

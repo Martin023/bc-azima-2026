@@ -144,11 +144,11 @@ table 52185729 Loans
 
                     SavAcc.Reset;
                     SavAcc.SetRange(SavAcc."Member No.", "Member No.");
-                    //SavAcc.SetRange(SavAcc."Loan Disbursement Account", true);
                     if ProdFac."Loan Disbt Account Code" <> '' then
                         SavAcc.SetRange("Product Type", ProdFac."Loan Disbt Account Code")
                     else
-                        SavAcc.SetRange("Product Type", '191');
+                        // SavAcc.SetRange("Product Type", '191');
+                          SavAcc.SetRange(SavAcc."Loan Disbursement Account", true);
                     if SavAcc.Find('-') then
                         "Disbursement Account No" := SavAcc."No."
                     else
@@ -719,8 +719,8 @@ table 52185729 Loans
                 else begin
                     SavAcc.Reset;
                     SavAcc.SetRange(SavAcc."Member No.", "Member No.");
-                    // SavAcc.SetRange(SavAcc."Loan Disbursement Account", true);
-                    SavAcc.SetRange("Product Type", '191');
+                    SavAcc.SetRange(SavAcc."Loan Disbursement Account", true);
+                    // SavAcc.SetRange("Product Type", '191');
                     // SavAcc.SetRange(SavAcc."Product Category", SavAcc."Product Category"::"FOSA Account");
                     if SavAcc.Find('-') then
                         "Disbursement Account No" := SavAcc."No."
@@ -941,39 +941,39 @@ table 52185729 Loans
 
 
 
-                if ProdFac."No. Of Months for Appr. Saving" > 0 then begin
-                    BusinessIncome.Reset;
-                    BusinessIncome.SetRange(BusinessIncome."Loan No.", "Loan No.");
-                    if BusinessIncome.Find('-') then
-                        BusinessIncome.DeleteAll;
+                // if ProdFac."No. Of Months for Appr. Saving" > 0 then begin
+                //     BusinessIncome.Reset;
+                //     BusinessIncome.SetRange(BusinessIncome."Loan No.", "Loan No.");
+                //     if BusinessIncome.Find('-') then
+                //         BusinessIncome.DeleteAll;
 
 
 
-                    LastMonthDate := CalcDate('<-1M>', Today);
+                //     LastMonthDate := CalcDate('<-1M>', Today);
 
-                    for i := 1 to ProdFac."No. Of Months for Appr. Saving" do begin
-                        LowerDateLimit := CalcDate('<-CM>', LastMonthDate);
-                        UpperDateLimit := CalcDate('<CM>', LastMonthDate);
+                //     for i := 1 to ProdFac."No. Of Months for Appr. Saving" do begin
+                //         LowerDateLimit := CalcDate('<-CM>', LastMonthDate);
+                //         UpperDateLimit := CalcDate('<CM>', LastMonthDate);
 
-                        SavLedger.SetCurrentKey(SavLedger."Customer No.", SavLedger."Posting Date");
-                        SavLedger.SetRange(SavLedger."Customer No.", "Disbursement Account No");
-                        SavLedger.SetFilter("Document No.", '<>*BC0');
-                        SavLedger.SetRange(SavLedger."Posting Date", LowerDateLimit, UpperDateLimit);
-                        SavLedger.CalcSums(SavLedger."Amount (LCY)");
-                        SavLedger.CalcSums(SavLedger."Debit Amount (LCY)");
-                        SavLedger.CalcSums(SavLedger."Credit Amount (LCY)");
-                        //MESSAGE('%1',SavLedger.Amount);
-                        BusinessIncome.Init;
-                        BusinessIncome."Loan No." := "Loan No.";
-                        BusinessIncome."Average Amount (Internal)" := SavLedger."Credit Amount (LCY)" * (ProdFac."Net Salary Multiplier %" / 100);//-SavLedger."Debit Amount (LCY)";//SavLedger.Amount*-1;
-                        BusinessIncome."First Day of Current Month" := LowerDateLimit;
-                        BusinessIncome."Entry No." := BusinessIncome."Entry No." + 1;
-                        BusinessIncome."Total Credits (Internal)" := SavLedger."Credit Amount (LCY)";
-                        BusinessIncome."Total Debits (Internal)" := 0;//SavLedger."Debit Amount (LCY)";
-                        BusinessIncome.Insert;
-                        LastMonthDate := CalcDate('<-1M>', UpperDateLimit);
-                    end;
-                end;
+                //         SavLedger.SetCurrentKey(SavLedger."Customer No.", SavLedger."Posting Date");
+                //         SavLedger.SetRange(SavLedger."Customer No.", "Disbursement Account No");
+                //         SavLedger.SetFilter("Document No.", '<>*BC0');
+                //         SavLedger.SetRange(SavLedger."Posting Date", LowerDateLimit, UpperDateLimit);
+                //         SavLedger.CalcSums(SavLedger."Amount (LCY)");
+                //         SavLedger.CalcSums(SavLedger."Debit Amount (LCY)");
+                //         SavLedger.CalcSums(SavLedger."Credit Amount (LCY)");
+                //         //MESSAGE('%1',SavLedger.Amount);
+                //         BusinessIncome.Init;
+                //         BusinessIncome."Loan No." := "Loan No.";
+                //         BusinessIncome."Average Amount (Internal)" := SavLedger."Credit Amount (LCY)" * (ProdFac."Net Salary Multiplier %" / 100);//-SavLedger."Debit Amount (LCY)";//SavLedger.Amount*-1;
+                //         BusinessIncome."First Day of Current Month" := LowerDateLimit;
+                //         BusinessIncome."Entry No." := BusinessIncome."Entry No." + 1;
+                //         BusinessIncome."Total Credits (Internal)" := SavLedger."Credit Amount (LCY)";
+                //         BusinessIncome."Total Debits (Internal)" := 0;//SavLedger."Debit Amount (LCY)";
+                //         BusinessIncome.Insert;
+                //         LastMonthDate := CalcDate('<-1M>', UpperDateLimit);
+                //     end;
+                // end;
 
                 // //Fixed DepositType
                 // if ProdFac."Repay Mode" = ProdFac."Repay Mode"::"Fixed Deposit" then begin
