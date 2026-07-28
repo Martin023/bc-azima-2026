@@ -996,7 +996,7 @@ table 52185700 Members
         field(54; "Bank Account No."; Code[20])
         {
         }
-        field(55; "P.I.N Number"; Code[20])
+        field(55; "P.I.N Number"; Code[100])
         {
             trigger OnValidate()
             begin
