@@ -17,6 +17,11 @@ XmlPort 52185554 "Savings BP"
                 {
                     FieldValidate = Yes;
                 }
+                fieldelement(EmployerCode; "Checkoff Buffer"."Employer Code")
+                {
+                    FieldValidate = yes;
+                    MinOccurs = Once;
+                }
                 fieldelement(UploadNo; "Checkoff Buffer"."Upload No.")
                 {
                     FieldValidate = yes;
@@ -27,11 +32,7 @@ XmlPort 52185554 "Savings BP"
                     FieldValidate = yes;
                     MinOccurs = Once;
                 }
-                fieldelement(EmployerCode; "Checkoff Buffer"."Employer Code")
-                {
-                    FieldValidate = yes;
-                    MinOccurs = Once;
-                }
+
                 fieldelement(ProductID; "Checkoff Buffer"."Product Code")
                 {
                     fieldvalidate = yes;
@@ -72,12 +73,30 @@ XmlPort 52185554 "Savings BP"
 
         layout
         {
+            area(content)
+            {
+                group("No|CheckoffNo|EmployerCode|payrollNo|Amount|ProductID|Remarks")
+                {
+                    field(HeaderTemplate; HeaderTemplate)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Copy this header';
+                        Editable = false;
+                        ToolTip = 'Copy this text and paste it into the first row of your Excel file.';
+                    }
+                }
+            }
         }
 
         actions
         {
         }
     }
+    trigger OninitXmlPort()
+    begin
+        HeaderTemplate := 'No|CheckoffNo|EmployerCode|PayrollNo|Amount|ProductID|Remarks';
+    end;
+
 
     trigger OnPostXmlPort()
     begin
@@ -107,5 +126,7 @@ XmlPort 52185554 "Savings BP"
         Error001: label 'Invalid option, please respond with 2,3 OR 4.';
         Text01: label 'Upload done successfully';
         window: Dialog;
+        HeaderTemplate: Text[250];
+
 }
 
