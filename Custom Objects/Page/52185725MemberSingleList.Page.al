@@ -11,6 +11,7 @@ page 52185725 "Member Single List"
     SourceTableView = WHERE("Account Type" = const("Single Member Account"));
     UsageCategory = Lists;
     ApplicationArea = All;
+    ShowFilter = true;
     PromotedActionCategories = 'New,Process,Reports,Information, ,Category7_caption,Category8_caption,Category9_caption,Category10_caption';
 
 
@@ -151,15 +152,15 @@ page 52185725 "Member Single List"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Request for ATM"; Rec."Request for ATM")
-                {
-                    ApplicationArea = all;
-                }
-                field("Request Mobile Banking"; Rec."Request Mobile Banking")
-                {
-                    ApplicationArea = all;
-                }
-                field("BOSA Deposit"; Rec."BOSA Deposit")
+                // field("Request for ATM"; Rec."Request for ATM")
+                // {
+                //     ApplicationArea = all;
+                // }
+                // field("Request Mobile Banking"; Rec."Request Mobile Banking")
+                // {
+                //     ApplicationArea = all;
+                // }
+                field("FOSA Account"; Rec."FOSA Account")
                 {
                     ApplicationArea = all;
                 }

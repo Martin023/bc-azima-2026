@@ -673,7 +673,7 @@ table 52185700 Members
         }
         field(31; "Employer Code"; Code[100])
         {
-            Caption = 'Employer';
+            Caption = 'Employer Code';
             Description = 'LookUp to Customer Table';
             TableRelation = Customer WHERE("Account Type" = CONST("Employer Code"));
 
@@ -769,7 +769,7 @@ table 52185700 Members
 
         field(34; "Work Station"; Code[20])
         {
-            Caption = 'Employer Code/Work Station';
+            Caption = 'Work Station';
             TableRelation = Customer."No." WHERE("Account Type" = filter("Employer Code"));
         }
 
@@ -1713,7 +1713,8 @@ table 52185700 Members
         }
         field(1035; "FOSA Account"; Code[50])
         {
-            TableRelation = "Savings Accounts"."No." where("Member No." = field("No."), "Product Type" = filter('191'));
+            Caption = 'Default Account';
+            TableRelation = "Savings Accounts"."No." where("Member No." = field("No."), "Loan Disbursement Account" = filter(true));
         }
         field(1036; "FOSA Account Status"; Option)
         {
@@ -1752,7 +1753,7 @@ table 52185700 Members
         {
             Editable = false;
             FieldClass = FlowField;
-            CalcFormula = - sum("Savings Ledger Entry".Amount where("Member No." = field("No."), "Product Category" = filter("FOSA Account"), "Posting Date" = FIELD("Date Filter")));
+            CalcFormula = - sum("Savings Ledger Entry".Amount where("Customer No." = field("Fosa Account"), "Product Category" = filter("FOSA Account"), "Posting Date" = FIELD("Date Filter")));
         }
 
         field(1044; "BOSA Deposit"; Decimal)
