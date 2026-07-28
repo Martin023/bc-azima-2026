@@ -23,12 +23,8 @@ table 52185729 Loans
                     "Application Date" := Today;
                     Advice := true;
                     "All Posting through Savings Ac" := true;
-                    if (CalcDate('-CM+15D', Today)) > Today then
-                        "Disbursement Date" := Today
 
-                    // (CalcDate('-CM+15D', Today)) 
-                    else
-                        "Disbursement Date" := Today;// (CalcDate('CM', Today));
+                    "Disbursement Date" := Today;// (CalcDate('CM', Today));
                     "disbursement time" := time;
                     "Captured By" := UpperCase(UserId);
 

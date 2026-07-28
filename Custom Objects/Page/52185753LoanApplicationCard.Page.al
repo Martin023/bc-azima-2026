@@ -1537,10 +1537,10 @@ page 52185753 "Loan Application Card"
 
                     //test recommended amount
                     IF Rec."Approved Amount" > Rec."Recommended Amount" THEN
-                        ERROR('You cannot apply more than the recommended amount of %1 .', Rec."Recommended Amount");
+                        ERROR('You cannot Approve more than the recommended amount of %1 .', Rec."Recommended Amount");
 
                     IF Rec."Amount To Disburse" > Rec."Recommended Amount" THEN
-                        ERROR('You cannot apply more than the recommended amount of %1 .', Rec."Recommended Amount");
+                        ERROR('You cannot Approve more than the recommended amount of %1 .', Rec."Recommended Amount");
 
                     //test recommendedamount
                     ProdFac.Get(Rec."Loan Product Type");
