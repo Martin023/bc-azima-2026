@@ -124,7 +124,7 @@ table 52186519 "Sky Loan Guarantor Requests"
             theSMS := 'Dear ' + TheGuarantor."First Name" +
             ', you have been included as a guarantor for the loan application request of ' + TheLoanApplicant.Name +
             //'. For further information, log into the member portal or dial ' + TheUSSD + ' to accept or reject this request.';
-            '. For further information, log into the member portal or iPesa app to accept or reject this request. Ref: ' + "Loan Application No.";
+            '. For further information, log into the member portal to accept or reject this request. Ref: ' + "Loan Application No.";
             SkySMS.SendSms(
                 SMSSource::LOAN_APPLICATION,
                 TheGuarantor."Phone No.",
@@ -253,7 +253,7 @@ table 52186519 "Sky Loan Guarantor Requests"
 
                         if TheLoanApplication."Eligible Amount" >= TheLoanApplication."Requested Amount" then begin
                             Rec.Modify;
-                            
+
                             TheLoanApplication.CreateLoanApplication(true);
                         end;
                     end;

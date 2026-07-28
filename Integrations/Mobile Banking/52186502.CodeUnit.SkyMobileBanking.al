@@ -2685,32 +2685,27 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                 SearchMember."No.",
                                 MobileLoanProducts."Product ID");
 
-                            MobileLoanProducts."Minimum Loan Amount" := OutstandingBalance;
+                            if OutstandingBalance <> 0 then begin
+                                MobileLoanProducts."Minimum Loan Amount" := OutstandingBalance;
 
-                            repeat
-                                PreviousMinimum := MobileLoanProducts."Minimum Loan Amount";
+                                repeat
+                                    PreviousMinimum := MobileLoanProducts."Minimum Loan Amount";
 
-                                // TotalChargesOnMin := PreviousMinimum - LoansProcess.ComputeCharges(
-                                //     PreviousMinimum,
-                                //     MobileLoanProducts."Product ID",
-                                //     '',
-                                //     0);
+                                    MobileChargesInfo := SkyMbankingTrans.GetTransChargesPreview(
+                                        'LOAN_DISBURSEMENT',
+                                        PreviousMinimum,
+                                        '',
+                                        SearchMember,
+                                        '');
 
-                                MobileChargesInfo := SkyMbankingTrans.GetTransChargesPreview(
-                                    'LOAN_DISBURSEMENT',
-                                    PreviousMinimum,
-                                    '',
-                                    SearchMember,
-                                    '');
+                                    MobileLoanProducts."Minimum Loan Amount" :=
+                                        OutstandingBalance +
+                                        MobileChargesInfo.Get(1);
 
-                                MobileLoanProducts."Minimum Loan Amount" :=
-                                    OutstandingBalance +
-                                    /*TotalChargesOnMin +*/
-                                    MobileChargesInfo.Get(1);
+                                until MobileLoanProducts."Minimum Loan Amount" = PreviousMinimum;
 
-                            until MobileLoanProducts."Minimum Loan Amount" = PreviousMinimum;
-
-                            Datum.Replace('loan_type_min_amount', MobileLoanProducts."Minimum Loan Amount");
+                                Datum.Replace('loan_type_min_amount', MobileLoanProducts."Minimum Loan Amount");
+                            end;
                         end;
 
                         if MobileLoanProducts."Mobile Max. Loan Amount" <> 0 then begin
@@ -2723,7 +2718,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                             end;
 
                         Datum.Add('loan_type_max_installments', MobileLoanProducts."Ordinary Default Intallments");
-                        Datum.Add('requires_installments', MobileLoanProducts."Allow Topup");
+                        Datum.Add('requires_topup', MobileLoanProducts."Allow Topup");
 
                         Data.Add(Datum);
 
@@ -6247,7 +6242,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                     if SavingsAccounts.Get(MpesaTransBuffer."Savings Account") then
                                         TheSourceMember.Get(SavingsAccounts."Member No.");
 
-                                    theSMS := 'Mobile Money Reversal transaction Ref: ' + MpesaTransBuffer."Beneficiary Reference" +
+                                    theSMS := 'Mobile Money Reversal transaction '/*Ref: ' + MpesaTransBuffer."Originator ID" */+
                                      ' Date: ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                      ' has been performed';
 
@@ -6257,7 +6252,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                         ' to ' + MpesaTransBuffer."Receiver Identifier" +
                                         ' - ' + MpesaTransBuffer."Receiver Name" +
                                         ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                        ' has been REVERSED. Dial ' + TheUSSD + ' to check your balance. Ref: ' + MpesaTransBuffer."Beneficiary Reference";
+                                        ' has been REVERSED. Dial ' + TheUSSD + ' to check your balance. Ref: ' + MpesaTransBuffer."Originator ID";
                                     end;
 
                                     if (MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Gaming Utility Payment") and (MpesaTransBuffer."Receiver Name" <> '') then begin
@@ -6268,7 +6263,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                         ' to ' + MpesaTransBuffer."Receiver Identifier" +
                                         ' - ' + MpesaTransBuffer."Receiver Name" +
                                         ' on ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
-                                        ' has been REVERSED. Dial ' + TheUSSD + ' to check your balance. Ref: ' + MpesaTransBuffer."Beneficiary Reference";
+                                        ' has been REVERSED. Dial ' + TheUSSD + ' to check your balance. Ref: ' + MpesaTransBuffer."Originator ID";
                                     end;
 
                                     if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Bank Transfer" then begin
@@ -6884,7 +6879,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                         if SavingsAccounts.Get(MpesaTransBuffer."Savings Account") then
                                                             TheSourceMember.Get(SavingsAccounts."Member No.");
 
-                                                        theSMS := 'Mobile Money Reversal transaction Ref: ' + MpesaTransBuffer."Beneficiary Reference" +
+                                                        theSMS := 'Mobile Money Reversal transaction '/*Ref: ' + MpesaTransBuffer."Beneficiary Reference" */+
                                                         ' Date: ' + GlobalFunctions.FormatISODateTime(MpesaTransBuffer."Transaction Date Time") +
                                                         ' has been performed';
 
