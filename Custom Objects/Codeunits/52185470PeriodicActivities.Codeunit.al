@@ -2807,6 +2807,7 @@ Codeunit 52185470 "Periodic Activities"
                                             PFactory.SetRange(PFactory."Loan Term Type", PFactory."Loan Term Type"::"Short term")
                                         else
                                             PFactory.SetRange(PFactory."Loan Term Type", PFactory."Loan Term Type"::"Long Term");
+                                        PFactory.setrange("Source Unit", PFactory."Source Unit"::BOSA);
                                         PFactory.SetCurrentKey("Recovery Priority");
                                         PFactory.SetAscending("Recovery Priority", true);
                                         if PFactory.findset() then begin
