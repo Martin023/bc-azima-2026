@@ -202,8 +202,8 @@ page 52185840 "Checkoff Header"
                     else
                         if Rec."CheckOff Type" = Rec."CheckOff Type"::Loans then
                             Xmlport.Run(xmlport::"Loans BP", true, true) else
-                            if Rec."CheckOff Type" = Rec."CheckOff Type"::Lumpsum then
-                                Xmlport.Run(52185556, true, true) else
+                            if (Rec."CheckOff Type" = Rec."CheckOff Type"::"Short term Loans") or (Rec."CheckOff Type" = Rec."CheckOff Type"::"Long term Loans") then
+                                Xmlport.Run(xmlport::"Lumpsum BP", true, true) else
                                 Xmlport.Run(52185499, true, true)
 
                 end;
@@ -278,7 +278,7 @@ page 52185840 "Checkoff Header"
                     if Rec."Posted Records" > 0 then
                         Error(Err002);
 
-                    if rec."CheckOff Type" = rec."CheckOff Type"::Loans then
+                    if rec."CheckOff Type" <> rec."CheckOff Type"::Savings then
                         rec.TestField("Loan Cutoff Date");
 
                     PeriodicActy.GenerateCheckoff(Rec);
