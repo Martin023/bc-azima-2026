@@ -1063,13 +1063,13 @@ Codeunit 52186456 "Sacco Transactions"
                         if Memb.Get(SavingsACC."Member No.") then begin
                             MobileNo := Memb."Phone No.";
                         end;
-                
-                if CashierTrans.Type = CashierTrans.Type::"Cash Withdrawal" then
-                    msg := 'Dear Member, you have done a transaction of Ksh. ' + Format(CashierTrans.Amount) + ' on your ' + SavingsACC."Product Name" + ' account' + Text0010 + Format(CashierTrans.Type) + Text0011
-                     + Format(Today) + ' ' + Format(Time) + Text0012 + Text0013 + COMPANYNAME
-                else
-                msg := 'Dear Member, ' + CashierTrans.Remarks + ' has done a transation of Ksh. ' + Format(CashierTrans.Amount) + ' on your ' + SavingsACC."Product Name" + ' account' + Text0010 + Format(CashierTrans.Type) +
-                 Text0011 + Format(Today) + ' ' + Format(Time) + Text0012 + Text0013 + COMPANYNAME;
+
+                    if CashierTrans.Type = CashierTrans.Type::"Cash Withdrawal" then
+                        msg := 'Dear Member, you have done a transaction of Ksh. ' + Format(CashierTrans.Amount) + ' on your ' + SavingsACC."Product Name" + ' account' + Text0010 + Format(CashierTrans.Type) + Text0011
+                         + Format(Today) + ' ' + Format(Time) + Text0012 + Text0013 + COMPANYNAME
+                    else
+                        msg := 'Dear Member, ' + CashierTrans.Remarks + ' has done a transation of Ksh. ' + Format(CashierTrans.Amount) + ' on your ' + SavingsACC."Product Name" + ' account' + Text0010 + Format(CashierTrans.Type) +
+                         Text0011 + Format(Today) + ' ' + Format(Time) + Text0012 + Text0013 + COMPANYNAME;
                 end;
 
                 if CashierTrans.Type = CashierTrans.Type::"Cash Withdrawal" then
@@ -1371,8 +1371,8 @@ Codeunit 52186456 "Sacco Transactions"
         AccountTypes: Record "Product Factory";
         ChBank: Code[20];
         Trans: Record "Cashier Transactions";
-        SavingsACC : record "Savings Accounts";
-        Employer : record "Customer";
+        SavingsACC: record "Savings Accounts";
+        Employer: record "Customer";
     begin
         //with CashierTrans do
         begin
@@ -1593,8 +1593,8 @@ Codeunit 52186456 "Sacco Transactions"
         AccountTypes: Record "Product Factory";
         ChBank: Code[20];
         Trans: Record "Cashier Transactions";
-        SavingsACC : record "Savings Accounts";
-        Employer : record Customer;
+        SavingsACC: record "Savings Accounts";
+        Employer: record Customer;
     begin
         //with CashierTrans do
         begin
@@ -1836,8 +1836,8 @@ Codeunit 52186456 "Sacco Transactions"
         // CustomApprovals: Codeunit "Custom Approvals Codeunit";
         Text0019: label 'You cannot draw banker cheque more than your allowed limit of %1 unless authorised.';
         SMSChargeAmt: Decimal;
-        Employer : Record "Customer";
-        SavingsACC : Record "Savings Accounts";
+        Employer: Record "Customer";
+        SavingsACC: Record "Savings Accounts";
     begin
 
         // with CashierTrans do
@@ -1973,12 +1973,12 @@ Codeunit 52186456 "Sacco Transactions"
                     end;
 
                     //Dont charge Transactional Charges
-                        if SavingsACC.Get(CashierTrans."Account No") then begin
-                            if Employer.Get(SavingsACC."Employer Code") then begin
-                                if Employer."Dont Charge Transactions" then
-                                    ChargeAmount := 0;
-                            end;
+                    if SavingsACC.Get(CashierTrans."Account No") then begin
+                        if Employer.Get(SavingsACC."Employer Code") then begin
+                            if Employer."Dont Charge Transactions" then
+                                ChargeAmount := 0;
                         end;
+                    end;
                     //Dont charge Transactional Charges
 
                     GenJournalLine.Init;
@@ -3404,7 +3404,7 @@ Codeunit 52186456 "Sacco Transactions"
         TariffDetails: Record "Tiered Charges Lines";
         TChargeAmount: Decimal;
         TransType: Record "Transaction Types";
-        SMSChargeAmt : Decimal;
+        SMSChargeAmt: Decimal;
     begin
         // with CashierTrans do
         begin
@@ -4553,7 +4553,7 @@ Codeunit 52186456 "Sacco Transactions"
                                                         if Member."First Name" <> '' then begin
                                                             if Memb."First Name" <> '' then
                                                                 msg := 'Dear ' + Memb."First Name" + ', you have received KES ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
-                                                                        BSchedDestin."Product Name" + ' from ' + Member."First Name" + ' on ' + Format(Today) + ' ' + Format(Time)                                                                                     
+                                                                        BSchedDestin."Product Name" + ' from ' + Member."First Name" + ' on ' + Format(Today) + ' ' + Format(Time)
                                                             else
                                                                 msg := 'Dear ' + Memb.Name + ', you have received KES ' + Format(BSchedDestin."Destination Amount") + ' to your ' +
                                                                         BSchedDestin."Product Name" + ' from ' + Member."First Name" + ' on ' + Format(Today) + ' ' + Format(Time)
@@ -5659,8 +5659,8 @@ Codeunit 52186456 "Sacco Transactions"
                             end;
 
 
-                            if not SalHeaD."Donnot Recover" then
-                                PostSalaryLoans(SalHeaD, DocNo, PDate, DActivity2, DBranch2, Jtemplate, JBatch, RunBal, MemberNo, LineNo, Salaccno);
+                            // if not SalHeaD."Donnot Recover" then
+                            PostSalaryLoans(SalHeaD, DocNo, PDate, DActivity2, DBranch2, Jtemplate, JBatch, RunBal, MemberNo, LineNo, Salaccno);
 
                             // if Account.Get(SalLines."Account No.") then begin
                             //     if Account."Loan Disbursement Account" = false then begin
@@ -6552,121 +6552,35 @@ Codeunit 52186456 "Sacco Transactions"
         //3. SavingAccounts STOS
 
         //BOSA loan STOs-
-        remainingBal := PostLoanSTO(SalHeaD, DocNo, PDate, DActivity2, DBranch2, Jtemplate, Jbatch, RunBal, MemberNo, LineNo, Salaccno);
+        if not SalHead."Donot Recover STO" then
+            remainingBal := PostLoanSTO(SalHeaD, DocNo, PDate, DActivity2, DBranch2, Jtemplate, Jbatch, RunBal, MemberNo, LineNo, Salaccno);
 
-        GenJournalLine.SetRange("Journal Template Name", Jtemplate);
-        GenJournalLine.SetRange("Journal Batch Name", JBatch);
-        if GenJournalLine.findlast then begin
-            LineNo := GenJournalLine."Line No.";
-        end;
+        if not SalHead."Donnot Recover" then begin
+            GenJournalLine.SetRange("Journal Template Name", Jtemplate);
+            GenJournalLine.SetRange("Journal Batch Name", JBatch);
+            if GenJournalLine.findlast then begin
+                LineNo := GenJournalLine."Line No.";
+            end;
 
-        RunBal -= remainingBal;
+            RunBal -= remainingBal;
 
-        Loans.Reset;
-        Loans.SetRange(Loans."Member No.", MemberNo);
-        Loans.SetRange(Loans."Disbursement Date", 0D, SalHeaD."Last Loan Issue Date");
-        Loans.SetRange("Source Unit", Loans."Source Unit"::FOSA);
-        // if SalHeaD."Income Type" = SalHeaD."Income Type"::Payments THEN
-        //     Loans.SetRange(Loans."Recovery Mode", Loans."recovery mode"::"Board Allowance")
-        // ELSE
-        // Loans.SetRange(Loans."Recovery Mode", Loans."recovery mode"::Salary);
-        Loans.SetFilter("Recovery Mode", '%1', Loans."Recovery Mode"::Salary);
-        Loans.SetAutoCalcFields(Loans."Outstanding Balance", Loans."Outstanding Interest");
-        if Loans.FindSet() then begin
-            repeat
-                if RunBal > 0 then begin
-                    if (Loans."Outstanding Interest" + Loans."Daily Interest") > 0 then begin
-                        Interest := 0;
-                        Interest := Loans."Outstanding Interest" + Loans."Daily Interest";
-                        if Interest > 0 then begin
-                            LineNo := LineNo + 10000;
-                            GenJournalLine.Init;
-                            GenJournalLine."Journal Template Name" := Jtemplate;
-                            GenJournalLine."Journal Batch Name" := Jbatch;
-                            GenJournalLine."Line No." := LineNo;
-                            GenJournalLine."Account Type" := GenJournalLine."account type"::Credit;
-                            GenJournalLine."Account No." := Loans."Loan Account";
-                            GenJournalLine.Validate(GenJournalLine."Account No.");
-                            GenJournalLine."Document No." := CopyStr(DocNo, 1, 14);
-                            GenJournalLine."Posting Date" := PDate;
-                            GenJournalLine.Description := 'Interest Paid';
-                            if RunBal > Interest then
-                                GenJournalLine.Amount := Interest * -1
-                            else
-                                GenJournalLine.Amount := RunBal * -1;
-                            GenJournalLine.Validate(GenJournalLine.Amount);
-                            GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Interest Paid";
-                            GenJournalLine."Loan No" := Loans."Loan No.";
-                            GenJournalLine."Shortcut Dimension 1 Code" := DActivity2;
-                            GenJournalLine."Shortcut Dimension 2 Code" := DBranch2;
-                            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
-                            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
-                            if GenJournalLine.Amount <> 0 then
-                                GenJournalLine.Insert;
-
-                            LineNo := LineNo + 10000;
-                            GenJournalLine.Init;
-                            GenJournalLine."Journal Template Name" := Jtemplate;
-                            GenJournalLine."Journal Batch Name" := Jbatch;
-                            GenJournalLine."Line No." := LineNo;
-                            GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
-                            GenJournalLine."Account No." := Salaccno;
-                            GenJournalLine.Validate(GenJournalLine."Account No.");
-                            GenJournalLine."Document No." := CopyStr(DocNo, 1, 14);
-                            GenJournalLine."Posting Date" := PDate;
-                            GenJournalLine.Description := PadStr('Interest Paid - ' + Loans."Loan Product Type Name", 50);
-                            if RunBal > Interest then
-                                GenJournalLine.Amount := Interest
-                            else
-                                GenJournalLine.Amount := RunBal;
-                            GenJournalLine.Validate(GenJournalLine.Amount);
-                            GenJournalLine."Loan No" := Loans."Loan No.";
-                            GenJournalLine."Shortcut Dimension 1 Code" := DActivity2;
-                            GenJournalLine."Shortcut Dimension 2 Code" := DBranch2;
-                            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
-                            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
-                            if GenJournalLine.Amount <> 0 then
-                                GenJournalLine.Insert;
-                            RunBal := RunBal - Abs(GenJournalLine.Amount);
-                        end;
-                    end;
-
+            Loans.Reset;
+            Loans.SetRange(Loans."Member No.", MemberNo);
+            Loans.SetRange(Loans."Disbursement Date", 0D, SalHeaD."Last Loan Issue Date");
+            Loans.SetRange("Source Unit", Loans."Source Unit"::FOSA);
+            // if SalHeaD."Income Type" = SalHeaD."Income Type"::Payments THEN
+            //     Loans.SetRange(Loans."Recovery Mode", Loans."recovery mode"::"Board Allowance")
+            // ELSE
+            // Loans.SetRange(Loans."Recovery Mode", Loans."recovery mode"::Salary);
+            Loans.SetFilter("Recovery Mode", '%1', Loans."Recovery Mode"::Salary);
+            Loans.SetAutoCalcFields(Loans."Outstanding Balance", Loans."Outstanding Interest");
+            if Loans.FindSet() then begin
+                repeat
                     if RunBal > 0 then begin
-                        if Loans."Outstanding Balance" > 0 then begin
-
-                            LRepayment := 0;
-                            // if Loans."Recovery Mode" = Loans."Recovery Mode"::Hybrid then
-                            //     LRepayment := Loans."Salary Amount"
-                            // else
-                            if (Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::Amortised) then begin
-                                LRepayment := Loans.Repayment - Interest;
-                                if Loans."Variated Amount" <> 0 then
-                                    LRepayment := Loans."Variated Amount" - Interest;
-                            end
-                            else begin
-                                LRepayment := Loans."Loan Principle Repayment";
-                                if Loans."Variated Amount" <> 0 then
-                                    LRepayment := Loans."Variated Amount";
-                            end;
-
-                            if LRepayment = 0 then LRepayment := Loans.Repayment;
-                            IF LRepayment <= 0 THEN BEGIN
-                                if Loans.Installments <= 0 then Loans.Installments := 1;
-                                // LRepayment := ROUND((Loans."Approved Amount" / Loans.Installments), 0.01, '>');
-                                //hybrid repayment
-                                // if Loans."Recovery Mode" = Loans."Recovery Mode" then begin
-                                //     LRepayment := Loans."Salary Amount";
-                                // end else begin
-                                LRepayment := ROUND((Loans."Approved Amount" / Loans.Installments), 0.01, '>');
-                                // end;
-
-                            end;
-
-
-                            if LRepayment > 0 then begin
-                                if LRepayment > Loans."Outstanding Balance" then
-                                    LRepayment := Loans."Outstanding Balance";
-
+                        if (Loans."Outstanding Interest" + Loans."Daily Interest") > 0 then begin
+                            Interest := 0;
+                            Interest := Loans."Outstanding Interest" + Loans."Daily Interest";
+                            if Interest > 0 then begin
                                 LineNo := LineNo + 10000;
                                 GenJournalLine.Init;
                                 GenJournalLine."Journal Template Name" := Jtemplate;
@@ -6677,13 +6591,13 @@ Codeunit 52186456 "Sacco Transactions"
                                 GenJournalLine.Validate(GenJournalLine."Account No.");
                                 GenJournalLine."Document No." := CopyStr(DocNo, 1, 14);
                                 GenJournalLine."Posting Date" := PDate;
-                                GenJournalLine.Description := 'Loan Repayment';
-                                if RunBal > LRepayment then
-                                    GenJournalLine.Amount := LRepayment * -1
+                                GenJournalLine.Description := 'Interest Paid';
+                                if RunBal > Interest then
+                                    GenJournalLine.Amount := Interest * -1
                                 else
                                     GenJournalLine.Amount := RunBal * -1;
                                 GenJournalLine.Validate(GenJournalLine.Amount);
-                                GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::Repayment;
+                                GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::"Interest Paid";
                                 GenJournalLine."Loan No" := Loans."Loan No.";
                                 GenJournalLine."Shortcut Dimension 1 Code" := DActivity2;
                                 GenJournalLine."Shortcut Dimension 2 Code" := DBranch2;
@@ -6702,9 +6616,9 @@ Codeunit 52186456 "Sacco Transactions"
                                 GenJournalLine.Validate(GenJournalLine."Account No.");
                                 GenJournalLine."Document No." := CopyStr(DocNo, 1, 14);
                                 GenJournalLine."Posting Date" := PDate;
-                                GenJournalLine.Description := PadStr('Loan Repayment - ' + Loans."Loan Product Type Name", 50);
-                                if RunBal > LRepayment then
-                                    GenJournalLine.Amount := LRepayment
+                                GenJournalLine.Description := PadStr('Interest Paid - ' + Loans."Loan Product Type Name", 50);
+                                if RunBal > Interest then
+                                    GenJournalLine.Amount := Interest
                                 else
                                     GenJournalLine.Amount := RunBal;
                                 GenJournalLine.Validate(GenJournalLine.Amount);
@@ -6715,18 +6629,111 @@ Codeunit 52186456 "Sacco Transactions"
                                 GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
                                 if GenJournalLine.Amount <> 0 then
                                     GenJournalLine.Insert;
-                                RunBal := RunBal - GenJournalLine.Amount;
-                                //ERROR('Interst %1',Interest);
+                                RunBal := RunBal - Abs(GenJournalLine.Amount);
+                            end;
+                        end;
+
+                        if RunBal > 0 then begin
+                            if Loans."Outstanding Balance" > 0 then begin
+
+                                LRepayment := 0;
+                                // if Loans."Recovery Mode" = Loans."Recovery Mode"::Hybrid then
+                                //     LRepayment := Loans."Salary Amount"
+                                // else
+                                if (Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::Amortised) then begin
+                                    LRepayment := Loans.Repayment - Interest;
+                                    if Loans."Variated Amount" <> 0 then
+                                        LRepayment := Loans."Variated Amount" - Interest;
+                                end
+                                else begin
+                                    LRepayment := Loans."Loan Principle Repayment";
+                                    if Loans."Variated Amount" <> 0 then
+                                        LRepayment := Loans."Variated Amount";
+                                end;
+
+                                if LRepayment = 0 then LRepayment := Loans.Repayment;
+                                IF LRepayment <= 0 THEN BEGIN
+                                    if Loans.Installments <= 0 then Loans.Installments := 1;
+                                    // LRepayment := ROUND((Loans."Approved Amount" / Loans.Installments), 0.01, '>');
+                                    //hybrid repayment
+                                    // if Loans."Recovery Mode" = Loans."Recovery Mode" then begin
+                                    //     LRepayment := Loans."Salary Amount";
+                                    // end else begin
+                                    LRepayment := ROUND((Loans."Approved Amount" / Loans.Installments), 0.01, '>');
+                                    // end;
+
+                                end;
+
+
+                                if LRepayment > 0 then begin
+                                    if LRepayment > Loans."Outstanding Balance" then
+                                        LRepayment := Loans."Outstanding Balance";
+
+                                    LineNo := LineNo + 10000;
+                                    GenJournalLine.Init;
+                                    GenJournalLine."Journal Template Name" := Jtemplate;
+                                    GenJournalLine."Journal Batch Name" := Jbatch;
+                                    GenJournalLine."Line No." := LineNo;
+                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Credit;
+                                    GenJournalLine."Account No." := Loans."Loan Account";
+                                    GenJournalLine.Validate(GenJournalLine."Account No.");
+                                    GenJournalLine."Document No." := CopyStr(DocNo, 1, 14);
+                                    GenJournalLine."Posting Date" := PDate;
+                                    GenJournalLine.Description := 'Loan Repayment';
+                                    if RunBal > LRepayment then
+                                        GenJournalLine.Amount := LRepayment * -1
+                                    else
+                                        GenJournalLine.Amount := RunBal * -1;
+                                    GenJournalLine.Validate(GenJournalLine.Amount);
+                                    GenJournalLine."Transaction Type" := GenJournalLine."transaction type"::Repayment;
+                                    GenJournalLine."Loan No" := Loans."Loan No.";
+                                    GenJournalLine."Shortcut Dimension 1 Code" := DActivity2;
+                                    GenJournalLine."Shortcut Dimension 2 Code" := DBranch2;
+                                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                                    if GenJournalLine.Amount <> 0 then
+                                        GenJournalLine.Insert;
+
+                                    LineNo := LineNo + 10000;
+                                    GenJournalLine.Init;
+                                    GenJournalLine."Journal Template Name" := Jtemplate;
+                                    GenJournalLine."Journal Batch Name" := Jbatch;
+                                    GenJournalLine."Line No." := LineNo;
+                                    GenJournalLine."Account Type" := GenJournalLine."account type"::Savings;
+                                    GenJournalLine."Account No." := Salaccno;
+                                    GenJournalLine.Validate(GenJournalLine."Account No.");
+                                    GenJournalLine."Document No." := CopyStr(DocNo, 1, 14);
+                                    GenJournalLine."Posting Date" := PDate;
+                                    GenJournalLine.Description := PadStr('Loan Repayment - ' + Loans."Loan Product Type Name", 50);
+                                    if RunBal > LRepayment then
+                                        GenJournalLine.Amount := LRepayment
+                                    else
+                                        GenJournalLine.Amount := RunBal;
+                                    GenJournalLine.Validate(GenJournalLine.Amount);
+                                    GenJournalLine."Loan No" := Loans."Loan No.";
+                                    GenJournalLine."Shortcut Dimension 1 Code" := DActivity2;
+                                    GenJournalLine."Shortcut Dimension 2 Code" := DBranch2;
+                                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                                    GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                                    if GenJournalLine.Amount <> 0 then
+                                        GenJournalLine.Insert;
+                                    RunBal := RunBal - GenJournalLine.Amount;
+                                    //ERROR('Interst %1',Interest);
+                                end;
                             end;
                         end;
                     end;
-                end;
-            //LineNo += 1;
-            until Loans.Next = 0;
+                //LineNo += 1;
+                until Loans.Next = 0;
+            end;
         end;
 
-        if RunBal > 0 then
-            PostSavingSTO(SalHeaD, DocNo, PDate, DActivity2, DBranch2, Jtemplate, Jbatch, RunBal, MemberNo, LineNo, Salaccno);
+
+        if not SalHead."Donot Recover STO" then begin
+            if RunBal > 0 then
+                PostSavingSTO(SalHeaD, DocNo, PDate, DActivity2, DBranch2, Jtemplate, Jbatch, RunBal, MemberNo, LineNo, Salaccno);
+        end;
+
 
     end;
 

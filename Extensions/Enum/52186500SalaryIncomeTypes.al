@@ -5,7 +5,7 @@ enum 52186500 "Salary Income Types"
     value(0; Salary)
     {
     }
-    value(1; "Direct Debit")
+    value(1; "Donation")
     {
 
     }
@@ -34,4 +34,13 @@ enum 52186500 "Salary Income Types"
     {
         Caption = 'Dividend';
     }
+    value(8; Advance)
+    {
+        Caption = 'Advance';
+    }
+    value(9; "Leave Allowance")
+    {
+        Caption = 'Leave Allowance';
+    }
+
 }

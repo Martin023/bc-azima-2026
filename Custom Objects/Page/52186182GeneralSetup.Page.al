@@ -557,6 +557,10 @@ page 52186182 "General Setup"
                 {
                     ApplicationArea = Basic;
                 }
+                field("USSD Code"; Rec."USSD Code")
+                {
+                    ApplicationArea = Basic;
+                }
             }
             group("NCBA Setup")
             {
