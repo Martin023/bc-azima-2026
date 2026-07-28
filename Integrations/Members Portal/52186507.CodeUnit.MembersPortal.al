@@ -5062,6 +5062,7 @@ codeunit 52186507 "Members Portal Integration"
                 ResponseObject.Add('status_description', 'Member with identification ' + identifier_type.AsValue.AsText + ' = ' + identifier.AsValue.AsText + ' is not a staff employee!');
             end else begin
                 StaffLeaveTypes.Reset;
+                StaffLeaveTypes.SetRange(Active, true);
 
                 if SearchMember.Gender = SearchMember.Gender::Male then begin
                     StaffLeaveTypes.SetFilter(
@@ -5351,6 +5352,7 @@ codeunit 52186507 "Members Portal Integration"
         SearchMember: record Members;
         Employee: record "HR Employees";
         theLeaveApplication: Record "HR Leave Application";
+        HRLeaveTypes: Record "HR Leave Types";
         HRSetup: Record "HR Setup";
         NoSeriesMgt: Codeunit "No. Series";
         VarVariant: Variant;
@@ -5399,6 +5401,19 @@ codeunit 52186507 "Members Portal Integration"
                 theLeaveApplication.Validate("Applicant Staff No.");
 
                 theLeaveApplication."Leave Type" := leave_type.AsValue.AsText;
+
+                HRLeaveTypes.Reset;
+                HRLeaveTypes.SetRange(Code, theLeaveApplication."Leave Type");
+                HRLeaveTypes.SetRange(Active, true);
+                if not HRLeaveTypes.FindFirst then begin
+                    ResponseObject.Add('status', 'ERROR');
+                    ResponseObject.Add('status_description', 'Leave type ' + theLeaveApplication."Leave Type" + ' is not a valid active leave type');
+                    AddDateTimeToResponse(ResponseObject);
+                    ResponseObject.WriteTo(Response);
+
+                    exit(Response);
+                end;
+
                 theLeaveApplication.Validate("Leave Type");
                 PopulateLeaveBalance(theLeaveApplication);
 
@@ -5416,8 +5431,8 @@ codeunit 52186507 "Members Portal Integration"
                 theLeaveApplication.Validate(Reliever);
 
                 if theLeaveApplication.Insert(true) then begin
-                    VarVariant := theLeaveApplication;
-                    CustomApprovals.OnSendDocForApproval(VarVariant);
+                    // VarVariant := theLeaveApplication;
+                    // CustomApprovals.OnSendDocForApproval(VarVariant);
 
                     Datum.Add('application_no', theLeaveApplication."Application Code");
 
