@@ -484,7 +484,7 @@ table 52185729 Loans
                     IF Installments > RetirementInstallments then begin
                         Installments := RetirementInstallments;
                         if Installments <= 0 then
-                            Error('Member already retired. Loan cannot be processed.')
+                            Message('Member already retired. Loan cannot be processed.')
                         else
                             Message('The loan repayment period exceeds the member’s maximum retirement age.The installment duration is adjusted to %1 months.', Installments);
                     end;
