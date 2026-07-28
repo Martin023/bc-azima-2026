@@ -64,6 +64,11 @@ Report 52185446 "End of Day Reconciliation"
                 column(DenomCode; Value) { } // Reused DenomCode to pass the Value field to RDLC
                 column(DenomCount; Quantity) { }
                 column(DenomAmount; "Total Amount") { }
+                trigger OnAfterGetRecord()
+                begin
+                    if Quantity = 0 then
+                        CurrReport.Skip();
+                end;
             }
 
             trigger OnAfterGetRecord()

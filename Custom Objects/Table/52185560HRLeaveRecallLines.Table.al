@@ -65,6 +65,10 @@ table 52185560 "HR Leave Recall Lines"
                     end;
                 end;
 
+                // 1PM WARNING: DAY NOT YET SPENT BUT CLOSE — PROMPT HR TO VERIFY
+                if ("Recall Date" = Today) and (Time >= 130000T) and (Time < 170000T) then
+                    Message('WARNING: IT IS PAST 1:00 PM. VERIFY WHETHER THE EMPLOYEE WORKED THIS MORNING BEFORE SETTING TODAY AS THE RECALL DATE.');
+
                 // Calculate RecallEndDate by counting actual leave days from calendar (not calendar days)
                 RecallEndDate := CalculateRecallEndDate("Recall Date", "Days Recalled", LeaveApp);
 
@@ -90,6 +94,8 @@ table 52185560 "HR Leave Recall Lines"
                     CheckDate := CalcDate('1D', CheckDate);
                 end;
 
+                // RECALCULATE SUMMARY — DRIVES DAYS SPENT AND DAYS REMAINING INSTANTLY
+                RecalculateRecallSummary();
                 ValidateTotalRecalledDays();
             end;
         }
@@ -108,24 +114,8 @@ table 52185560 "HR Leave Recall Lines"
                 if "Days Recalled" <= 0 then
                     Error('Days Recalled must be greater than 0');
 
-                // CALCULATE DAYS REMAINING AFTER RECALL
-                if "Leave Application Code" <> '' then begin
-                    LeaveApp.Get("Leave Application Code");
-
-                    // TOTAL PREVIOUS RECALLS EXCLUDING CURRENT
-                    TotalPreviousRecalls := 0;
-                    ExistingRecalls.Reset();
-                    ExistingRecalls.SetRange("Leave Application Code", "Leave Application Code");
-                    ExistingRecalls.SetFilter("Entry No.", '<>%1', "Entry No.");
-                    ExistingRecalls.SetRange(Posted, true);
-                    if ExistingRecalls.FindSet() then begin
-                        repeat
-                            TotalPreviousRecalls += ExistingRecalls."Days Recalled";
-                        until ExistingRecalls.Next() = 0;
-                    end;
-
-                    "Days Remaining After Recall" := LeaveApp."Days Applied" - "Days Spent Before Recall" - TotalPreviousRecalls - "Days Recalled";
-                end;
+                // CENTRALISED MATH — REPLACES INLINE BLOCK
+                RecalculateRecallSummary();
 
                 if "Recall Date" <> 0D then
                     Validate("Recall Date");
@@ -222,7 +212,7 @@ table 52185560 "HR Leave Recall Lines"
         {
             Caption = 'Recall End Date';
             Editable = false;
-           // ToolTip = 'Last working day of the recall period';
+            // ToolTip = 'Last working day of the recall period';
         }
     }
 
@@ -274,28 +264,8 @@ table 52185560 "HR Leave Recall Lines"
         if LeaveApp."Recall Date" <> 0D then
             "Recall Date" := LeaveApp."Recall Date";
 
-        // Calculate days spent and remaining
-        // Days spent = time from start to today (or start to recall date if not yet started)
-        if Today < LeaveApp."Start Date" then
-            "Days Spent Before Recall" := 0
-        else if Today > LeaveApp."End Date" then
-            "Days Spent Before Recall" := LeaveApp."Days Applied"
-        else
-            "Days Spent Before Recall" := LeaveApp.CalculateDaysFromDateRange(LeaveApp."Start Date", Today);
-
-        // Calculate total previous recalls
-        TotalPreviousRecalls := 0;
-        ExistingRecalls.Reset();
-        ExistingRecalls.SetRange("Leave Application Code", "Leave Application Code");
-        ExistingRecalls.SetRange(Posted, true);
-        if ExistingRecalls.FindSet() then begin
-            repeat
-                TotalPreviousRecalls += ExistingRecalls."Days Recalled";
-            until ExistingRecalls.Next() = 0;
-        end;
-
-        // Days remaining = Original days - days recalled previously - current recall (will be updated on validate)
-        "Days Remaining After Recall" := LeaveApp."Days Applied" - TotalPreviousRecalls;
+        // INSTANTLY SHOWS CORRECT DAYS SPENT AND REMAINING
+        RecalculateRecallSummary();
     end;
 
     trigger OnModify()
@@ -466,6 +436,52 @@ table 52185560 "HR Leave Recall Lines"
                 Email.Send(EmailMsg, Enum::"Email Scenario"::Default);
             end;
         end;
+    end;
+
+    procedure RecalculateRecallSummary()
+    var
+        LeaveApp: Record "HR Leave Application";
+        ExistingRecalls: Record "HR Leave Recall Lines";
+        TotalPreviousRecalls: Decimal;
+        SpendUpTo: Date;
+    begin
+        if "Leave Application Code" = '' then
+            exit;
+
+        LeaveApp.Get("Leave Application Code");
+
+        // DAYS SPENT STOPS THE DAY BEFORE RECALL DATE
+        // EXCEPTION: PAST 5PM ON RECALL DAY — THAT DAY IS FULLY SPENT
+        if "Recall Date" <> 0D then begin
+            if ("Recall Date" = Today) and (Time >= 170000T) then
+                // 5PM PASSED — EMPLOYEE SPENT TODAY, COUNT IT
+                SpendUpTo := Today
+            else
+                // STOP COUNTING THE DAY BEFORE RECALL DATE
+                SpendUpTo := CalcDate('-1D', "Recall Date");
+
+            if SpendUpTo < LeaveApp."Start Date" then
+                "Days Spent Before Recall" := 0
+            else if SpendUpTo > LeaveApp."End Date" then
+                "Days Spent Before Recall" := LeaveApp."Days Applied"
+            else
+                "Days Spent Before Recall" := LeaveApp.CalculateDaysFromDateRange(LeaveApp."Start Date", SpendUpTo);
+        end else
+            "Days Spent Before Recall" := 0;
+
+        // SUM POSTED RECALLS EXCLUDING CURRENT LINE
+        TotalPreviousRecalls := 0;
+        ExistingRecalls.Reset();
+        ExistingRecalls.SetRange("Leave Application Code", "Leave Application Code");
+        ExistingRecalls.SetFilter("Entry No.", '<>%1', "Entry No.");
+        ExistingRecalls.SetRange(Posted, true);
+        if ExistingRecalls.FindSet() then
+            repeat
+                TotalPreviousRecalls += ExistingRecalls."Days Recalled";
+            until ExistingRecalls.Next() = 0;
+
+        //DAYS REMAINING = TOTAL - SPENT - PREV RECALLS - CURRENT RECALLED
+        "Days Remaining After Recall" := LeaveApp."Days Applied" - "Days Spent Before Recall" - TotalPreviousRecalls - "Days Recalled";
     end;
 
     procedure CalculateRecallEndDate(StartDate: Date; DaysToRecall: Decimal; LeaveApp: Record "HR Leave Application"): Date
