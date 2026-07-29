@@ -2602,7 +2602,7 @@ codeunit 52186507 "Members Portal Integration"
                 Datum.Add('product_name', ProductFactory."Product Description");
                 Datum.Add('repayment_frequency', Format(ProductFactory."Repayment Frequency"));
                 Datum.Add('maximum_loan_amount', ProductFactory."Maximum Loan Amount");
-                Datum.Add('interest_rate', ProductFactory."Interest Rate (Min.)");
+                Datum.Add('interest_rate', ProductFactory."Interest Rate (Max.)");
                 Datum.Add('interest_rate_monthly', ProductFactory."Interest Rate (Min.)" / 12);
                 Datum.Add('maximum_installments', ProductFactory."Ordinary Default Intallments");
                 Datum.Add('minimum_number_of_guarantors', ProductFactory."Minimum Guarantors");

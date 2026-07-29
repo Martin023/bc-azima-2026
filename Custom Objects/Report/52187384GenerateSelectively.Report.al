@@ -73,7 +73,7 @@ Report 52187384 "Generate Selectively"
                     //RIntDays := IntDays;
                     if Productfactory.get(SavingsAccounts."Product Type") then begin
                         LowestBal := 0;
-                        InterestRate := ProductFactory."Interest Rate (Min.)";
+                        InterestRate := ProductFactory."Interest Rate (max.)";
                         PayableAccount := ProductFactory."Interest Payable Account";
                         ExpenseAccount := ProductFactory."Interest Expense Account";
                         repeat

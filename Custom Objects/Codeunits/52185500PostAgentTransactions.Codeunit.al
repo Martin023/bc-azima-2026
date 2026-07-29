@@ -610,7 +610,7 @@ Codeunit 52185500 "Post Agent Transactions"
                 //Accrue Interest
                 Amt := 0;
                 LineNo := LineNo + 10000;
-                Amt := AgentTransactions.Amount * (ProdFac."Interest Rate (Min.)" / 12) * 0.01 * NewLoanRec.Installments;
+                Amt := AgentTransactions.Amount * (ProdFac."Interest Rate (Max.)" / 12) * 0.01 * NewLoanRec.Installments;
                 JournalPosting.PostJournal(JTemplate, JBatch, LineNo, Optionsaccounts::Credit, AgentTransactions."Document No.", AgentTransactionDescription, Amt, AcctNo, Today, Optionsaccounts::"G/L Account",
                 ProdFac."Loan Interest Account [G/L]", AgentTransactions."Document No.", NewLoanRec."Global Dimension 1 Code", NewLoanRec."Global Dimension 2 Code", Loantransactiontype::"Interest Due", NewLoanRec."Loan No.", '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
 

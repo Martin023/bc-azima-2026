@@ -660,7 +660,7 @@ Codeunit 52186456 "Sacco Transactions"
                                 GenJournalLine.Description := 'Excise Duty';
                                 GenJournalLine."Currency Code" := CashierTrans."Currency Code";
                                 GenJournalLine.Validate(GenJournalLine."Currency Code");
-                                GenJournalLine.Amount := (ChargeAmount * GenSetup."Excise Duty (%)") * 0.01;
+                                GenJournalLine.Amount := (ChargeAmount * GenSetup."Transfer Excise Duty (%)") * 0.01;
                                 GenJournalLine.Validate(GenJournalLine.Amount);
                                 GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
                                 GenJournalLine."Bal. Account No." := GenSetup."Excise Duty G/L";
@@ -4737,7 +4737,7 @@ Codeunit 52186456 "Sacco Transactions"
             end else
                 Loans."Loan Account" := AcctsNo;
             Loans."Application Date" := Today;
-            Loans.Interest := ProdF."Interest Rate (Min.)";
+            Loans.Interest := ProdF."Interest Rate (Max.)";
             Loans."Requested Amount" := CashierTrans."Discounting Amount";
             Loans."Approved Amount" := CashierTrans."Discounting Amount";
             Loans.Status := Loans.Status::Approved;

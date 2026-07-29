@@ -273,7 +273,7 @@ table 52186072 "Loan Calculator"
                 end;
                 "Loan Product Type Name" := ProdFac."Product Description";
                 "Grace Period" := ProdFac."Grace Period - Interest";
-                Interest := ProdFac."Interest Rate (Min.)";
+                Interest := ProdFac."Interest Rate (Max.)";
                 "Global Dimension 2 Code" := ProdFac."Global Dimension 2 Code";
                 "Grace Period" := ProdFac."Grace Period - Interest";
                 "Interest Calculation Method" := ProdFac."Interest Calculation Method";
@@ -404,7 +404,7 @@ table 52186072 "Loan Calculator"
                                 Rec.Installments := ProdFac."Ordinary Default Intallments";
                             Rec.Interest := EmployerProducts.Interest;
                             if Interest = 0 then
-                                Rec.Interest := ProdFac."Interest Rate (Min.)";
+                                Rec.Interest := ProdFac."Interest Rate (Max.)";
                             Rec."Max. Loan Amount" := EmployerProducts."Max Amount";
                             Rec."Recovery Mode" := EmployerProducts."Recovery Mode";
                             Rec."Grace Period" := EmployerProducts."Grace Period";
