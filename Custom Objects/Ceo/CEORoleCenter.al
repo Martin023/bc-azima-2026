@@ -205,11 +205,38 @@ page 52185743 "CEO Role Center"
                     Caption = 'Active Employees';
                     RunObject = Page "HR Employee List - Active";
                 }
+                action("Inactive Employees")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Inactive Employees';
+                    RunObject = Page "HR Employee List - Inactive";
+                }
                 action("Leave Applications")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Leave Applications';
                     RunObject = Page "HR Leave Applications List1";
+                }
+                group("Training")
+                {
+                    Caption = 'Training';
+
+                    action("Training Calendar")
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'Training Calendar';
+                        RunObject = Page "Hr Training Planner List";
+                        ToolTip = 'View the scheduled training plan — courses, dates, participants and status';
+                        Image = Planning;
+                    }
+                    action("Training Needs")
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'Training Needs';
+                        RunObject = Page "HR Training Needs List";
+                        ToolTip = 'View approved and pending official training needs';
+                        Image = List;
+                    }
                 }
             }
 

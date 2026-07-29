@@ -74,6 +74,20 @@ page 52186801 "Training Planner"
                     Editable = false;
 
                 }
+                field("CPD Points"; Rec."CPD Points")
+                {
+                    ToolTip = 'Specifies CPD points awarded for this training.';
+                    Editable = InvTcode;
+                }
+                field("Estimated Cost"; Rec."Estimated Cost")
+                {
+                    ApplicationArea = All;
+                    Caption = 'Estimated Cost';
+                    Editable = false;
+                    Style = Strong;
+                    StyleExpr = true;
+                    ToolTip = 'Total cost from the linked training need. Update costs on the Training Need record.';
+                }
             }
         }
     }
@@ -231,10 +245,10 @@ page 52186801 "Training Planner"
                         ApprovalsMgmt.OpenApprovalEntriesPage(rec.RecordId);
                     end;
                 }
-                action("Reopen Job Card")
+                action("Reopen")
                 {
                     ApplicationArea = Basic;
-                    Caption = 'Reopen Job Card';
+                    Caption = 'Reopen';
                     Image = OpenJournal;
                     Promoted = true;
                     PromotedCategory = Process;

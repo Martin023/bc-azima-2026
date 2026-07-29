@@ -1110,7 +1110,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
             Database::"Payments Header Board":
                 exit(CheckApprovalsWorkflowEnabledCode(Variant, RunWorkflowOnSendBoardPaymentForApprovalCode));
 
-           
+
             Database::"InterBank Transfers":
                 exit(CheckApprovalsWorkflowEnabledCode(Variant, RunWorkflowOnSendInterbankForApprovalCode));
             Database::"Staff Claims Header":
@@ -1281,7 +1281,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                                                                                                                          //AGM Delegate Payment
             Database::"AGM Delegates Payment":
                 exit(CheckApprovalsWorkflowEnabledCode(Variant, RunWorkflowOAGMDelegatePaymentForApprovalCode));
-                                                                                                                    //Delegate Groups Applicationss
+            //Delegate Groups Applicationss
             Database::"Delegate Region Applicationss":
                 exit(CheckApprovalsWorkflowEnabledCode(Variant, RunWorkflowOnSendDelegateGroupsApplicationssForApprovalCode)); //
                                                                                                                                //Delegate Group Mem Retirements
@@ -2422,7 +2422,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
             Database::"Payments Header":
                 WorkflowManagement.HandleEvent(RunWorkflowOnSendPaymentForApprovalCode, Variant);
             Database::"Payments Header Board":
-                WorkflowManagement.HandleEvent(RunWorkflowOnSendBoardPaymentForApprovalCode, Variant);           
+                WorkflowManagement.HandleEvent(RunWorkflowOnSendBoardPaymentForApprovalCode, Variant);
             Database::"InterBank Transfers":
                 WorkflowManagement.HandleEvent(RunWorkflowOnSendInterbankForApprovalCode, Variant);
             Database::"Staff Claims Header":
@@ -2441,7 +2441,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                 WorkflowManagement.HandleEvent(RunWorkflowOnSendOvertimeForApprovalCode, Variant);
             Database::"G/L Budget Name":
                 WorkflowManagement.HandleEvent(RunWorkflowOnSendBudgetForApprovalCode, Variant);
-           
+
             Database::"Vote Transfer":
                 WorkflowManagement.HandleEvent(RunWorkflowOnSendVoteForApprovalCode, Variant);
             Database::"Asset Transfer":
@@ -2900,7 +2900,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                 WorkflowManagement.HandleEvent(RunWorkflowOnCancelPaymentForApprovalCode, Variant);
             Database::"Payments Header Board":
                 WorkflowManagement.HandleEvent(RunWorkflowOnCancelBoardPaymentForApprovalCode, Variant);
-           
+
             Database::"Guarantors Substitution":
                 WorkflowManagement.HandleEvent(RunWorkflowOnCancelGuarantorSubstitutionAppForApprovalCode, Variant);
 
@@ -7293,14 +7293,14 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                             if BankingSetup.get(TCashier."From Account") then begin
                                 if BankingSetup."Default  Bank" = '' then
                                     error('Default treasury bank has to be set.');
-                                    if BankAcc.get(BankingSetup."Default  Bank") then
-                                        BankAcc.CalcFields("Balance (LCY)");
-                                        if BankAcc."Balance (LCY)" > BankingSetup."Maximum Withholding" then
-                                            Message('The treasury has exceeded the maximum withholding of %1', BankingSetup."Maximum Withholding");
-                                            if BankAcc."Balance (LCY)" < BankingSetup."Minimum Balance" then
-                                                Message('The treasury account has gone below minimum required balance of %1', BankingSetup."Minimum Balance");
+                                if BankAcc.get(BankingSetup."Default  Bank") then
+                                    BankAcc.CalcFields("Balance (LCY)");
+                                if BankAcc."Balance (LCY)" > BankingSetup."Maximum Withholding" then
+                                    Message('The treasury has exceeded the maximum withholding of %1', BankingSetup."Maximum Withholding");
+                                if BankAcc."Balance (LCY)" < BankingSetup."Minimum Balance" then
+                                    Message('The treasury account has gone below minimum required balance of %1', BankingSetup."Minimum Balance");
                             end;
-                        end;  
+                        end;
                         SaccoT.PostTCIssue(TCashier);
                     end;
                 end;
@@ -9348,7 +9348,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                     Budget.modify(true);
                     Variant := Budget;
                 end;
-           
+
             Database::"Vote Transfer":
                 begin
                     RecRef.SetTable(Vote);
@@ -9370,7 +9370,7 @@ Codeunit 52186463 "Custom Approvals Codeunit"
                     PaymentsHeaderBoard.modify(true);
                     Variant := PaymentsHeaderBoard;
                 end;
-            
+
             Database::Vendor:
                 begin
                     RecRef.SetTable(Vendor);

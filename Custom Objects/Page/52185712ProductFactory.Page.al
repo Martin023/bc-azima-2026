@@ -129,6 +129,12 @@ page 52185712 "Product Factory"
                 {
                     Caption = 'Income Type';
                 }
+                field("Over The Counter Transaction"; Rec."Over The Counter Transaction")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Over The Counter Transaction';
+                    ToolTip = 'Enables accounts on this product to appear in the cashier teller lookup. Replaces hardcoded product ID filters.';
+                }
 
                 field("Last Updated By"; Rec."Last Updated By")
                 {
