@@ -596,6 +596,10 @@ table 52185827 "Loan Guarantors Sub"
         {
 
         }
+        field(35; Released; Boolean)
+        {
+            DataClassification = ToBeClassified;
+        }
     }
 
     keys

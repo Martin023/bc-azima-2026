@@ -608,7 +608,7 @@ table 52185739 "Loan Guarantors and Security"
 
         field(63; "Source Application"; Option)
         {
-            OptionMembers = "BC",CRM,"Mwalimu Smart","Member Portal","Mbanking - APP","Mbanking - USSD";
+            OptionMembers = "BC",CRM,"Member Portal","Mbanking - APP","Mbanking - USSD";
             Editable = false;
         }
         field(64; "NumberOfGuarantors"; Integer)
@@ -630,6 +630,36 @@ table 52185739 "Loan Guarantors and Security"
             Tablerelation = Customer."No." WHERE("Account Type" = const("Employer Code"));
             DataClassification = ToBeClassified;
         }
+        field(59; Released; boolean)
+        {
+            Description = 'Released Guarantor';
+            FieldClass = Normal;
+            Editable = false;
+            trigger OnValidate()
+            begin
+                // if rec.Released then rec.TestField(Substituted, false);
+            end;
+        }
+        field(60; "Released By"; Code[20])
+        {
+            Description = 'Released By';
+            FieldClass = Normal;
+            Editable = false;
+        }
+        field(61; "Released Date"; Date)
+        {
+            Description = 'Released Date';
+            FieldClass = Normal;
+            Editable = false;
+        }
+        field(62; "Added Later"; Boolean)
+        {
+            FieldClass = Normal;
+            Editable = false;
+        }
+
+
+       
     }
 
     keys

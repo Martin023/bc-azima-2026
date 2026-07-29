@@ -58,6 +58,7 @@ page 52185857 "Loan Guarantors substition Ln"
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Substituted';
+                    Editable = false;
 
                     trigger OnValidate()
                     begin
@@ -70,6 +71,16 @@ page 52185857 "Loan Guarantors substition Ln"
                         END;
                          */
 
+                    end;
+                }
+                field(Released; Rec.Released)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Released';
+
+                    trigger OnValidate()
+                    begin
+                        if rec."Member Substituted" <> '' then error('Releasing a guarantor does not require a substitute')
                     end;
                 }
 
