@@ -17,37 +17,37 @@ table 52185695 "Savings Account Registration"
 
             trigger OnValidate()
             begin
-                if ProductFactory.Get("Product Type") then
+                if ProductFactory.Get("Product Type") then begin
                     "Product Name" := ProductFactory."Product Description";
-                // "Monthly Contribution":=ProductFactory."Minimum Contribution";
-                "Product Category" := ProductFactory."Product Category";
+                    // "Monthly Contribution":=ProductFactory."Minimum Contribution";
+                    "Product Category" := ProductFactory."Product Category";
+                    "Default Account" := ProductFactory."Loan Disbursement Account";
+                    ProductDocuments.Reset;
+                    ProductDocuments.SetRange("Product ID", "Product Type");
+                    if ProductDocuments.Find('-') then begin
+                        repeat
+                            ApplicationDocuments.Reset;
+                            if ApplicationDocuments.Find('-') then
+                                EntryNo := ApplicationDocuments."Entry No." + 1
+                            else
+                                EntryNo := 1;
 
-                ProductDocuments.Reset;
-                ProductDocuments.SetRange("Product ID", "Product Type");
-                if ProductDocuments.Find('-') then begin
-                    repeat
-                        ApplicationDocuments.Reset;
-                        if ApplicationDocuments.Find('-') then
-                            EntryNo := ApplicationDocuments."Entry No." + 1
-                        else
-                            EntryNo := 1;
+                            ApplicationDocuments.Reset;
+                            ApplicationDocuments.SetRange("Document No.", ProductDocuments."Document No.");
+                            ApplicationDocuments.SetRange("Reference No.", "No.");
+                            if not ApplicationDocuments.Find('-') then begin
 
-                        ApplicationDocuments.Reset;
-                        ApplicationDocuments.SetRange("Document No.", ProductDocuments."Document No.");
-                        ApplicationDocuments.SetRange("Reference No.", "No.");
-                        if not ApplicationDocuments.Find('-') then begin
-
-                            ApplicationDocuments.Init;
-                            ApplicationDocuments."Entry No." := EntryNo;
-                            ApplicationDocuments."Product ID" := ProductDocuments."Product ID";
-                            ApplicationDocuments.Description := ProductDocuments.Description;
-                            ApplicationDocuments."Reference No." := "No.";
-                            ApplicationDocuments."Document No." := ProductDocuments."Document No.";
-                            ApplicationDocuments."Product Name" := ProductFactory."Product Description";
-                            ApplicationDocuments.Insert;
-                        end;
-                    until ProductDocuments.Next = 0;
-
+                                ApplicationDocuments.Init;
+                                ApplicationDocuments."Entry No." := EntryNo;
+                                ApplicationDocuments."Product ID" := ProductDocuments."Product ID";
+                                ApplicationDocuments.Description := ProductDocuments.Description;
+                                ApplicationDocuments."Reference No." := "No.";
+                                ApplicationDocuments."Document No." := ProductDocuments."Document No.";
+                                ApplicationDocuments."Product Name" := ProductFactory."Product Description";
+                                ApplicationDocuments.Insert;
+                            end;
+                        until ProductDocuments.Next = 0;
+                    end;
                 end;
             end;
         }
@@ -66,7 +66,11 @@ table 52185695 "Savings Account Registration"
         }
         field(5; "Product Category"; Enum "Product Categories")
         {
-            
+
+        }
+        field(6; "Default Account"; Boolean)
+        {
+
         }
     }
 

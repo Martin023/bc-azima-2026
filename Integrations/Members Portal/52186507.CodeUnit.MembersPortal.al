@@ -2514,32 +2514,27 @@ codeunit 52186507 "Members Portal Integration"
                             SearchMember."No.",
                             ProductFactory."Product ID");
 
-                        ProductFactory."Minimum Loan Amount" := OutstandingBalance;
+                        if OutstandingBalance <> 0 then begin
+                            ProductFactory."Minimum Loan Amount" := OutstandingBalance;
 
-                        repeat
-                            PreviousMinimum := ProductFactory."Minimum Loan Amount";
+                            repeat
+                                PreviousMinimum := ProductFactory."Minimum Loan Amount";
 
-                            // TotalChargesOnMin := PreviousMinimum - LoansProcess.ComputeCharges(
-                            //     PreviousMinimum,
-                            //     ProductFactory."Product ID",
-                            //     '',
-                            //     0);
+                                MobileChargesInfo := SkyMbankingTrans.GetTransChargesPreview(
+                                    'LOAN_DISBURSEMENT',
+                                    PreviousMinimum,
+                                    '',
+                                    SearchMember,
+                                    '');
 
-                            MobileChargesInfo := SkyMbankingTrans.GetTransChargesPreview(
-                                'LOAN_DISBURSEMENT',
-                                PreviousMinimum,
-                                '',
-                                SearchMember,
-                                '');
+                                ProductFactory."Minimum Loan Amount" :=
+                                    OutstandingBalance +
+                                    MobileChargesInfo.Get(1);
 
-                            ProductFactory."Minimum Loan Amount" :=
-                                OutstandingBalance +
-                                /*TotalChargesOnMin +*/
-                                MobileChargesInfo.Get(1);
+                            until ProductFactory."Minimum Loan Amount" = PreviousMinimum;
 
-                        until ProductFactory."Minimum Loan Amount" = PreviousMinimum;
-
-                        Datum.Replace('minimum_amount', ProductFactory."Minimum Loan Amount");
+                            Datum.Replace('minimum_amount', ProductFactory."Minimum Loan Amount");
+                        end;
                     end;
                     Datum.Add('maximum_installments', ProductFactory."Ordinary Default Intallments");
                     Datum.Add('is_mobile_loan', ProductFactory."Mobile Loan");
@@ -2607,7 +2602,7 @@ codeunit 52186507 "Members Portal Integration"
                 Datum.Add('product_name', ProductFactory."Product Description");
                 Datum.Add('repayment_frequency', Format(ProductFactory."Repayment Frequency"));
                 Datum.Add('maximum_loan_amount', ProductFactory."Maximum Loan Amount");
-                Datum.Add('interest_rate', ProductFactory."Interest Rate (Min.)");
+                Datum.Add('interest_rate', ProductFactory."Interest Rate (Max.)");
                 Datum.Add('interest_rate_monthly', ProductFactory."Interest Rate (Min.)" / 12);
                 Datum.Add('maximum_installments', ProductFactory."Ordinary Default Intallments");
                 Datum.Add('minimum_number_of_guarantors', ProductFactory."Minimum Guarantors");
@@ -5067,6 +5062,7 @@ codeunit 52186507 "Members Portal Integration"
                 ResponseObject.Add('status_description', 'Member with identification ' + identifier_type.AsValue.AsText + ' = ' + identifier.AsValue.AsText + ' is not a staff employee!');
             end else begin
                 StaffLeaveTypes.Reset;
+                StaffLeaveTypes.SetRange(Active, true);
 
                 if SearchMember.Gender = SearchMember.Gender::Male then begin
                     StaffLeaveTypes.SetFilter(
@@ -5356,6 +5352,7 @@ codeunit 52186507 "Members Portal Integration"
         SearchMember: record Members;
         Employee: record "HR Employees";
         theLeaveApplication: Record "HR Leave Application";
+        HRLeaveTypes: Record "HR Leave Types";
         HRSetup: Record "HR Setup";
         NoSeriesMgt: Codeunit "No. Series";
         VarVariant: Variant;
@@ -5404,6 +5401,19 @@ codeunit 52186507 "Members Portal Integration"
                 theLeaveApplication.Validate("Applicant Staff No.");
 
                 theLeaveApplication."Leave Type" := leave_type.AsValue.AsText;
+
+                HRLeaveTypes.Reset;
+                HRLeaveTypes.SetRange(Code, theLeaveApplication."Leave Type");
+                HRLeaveTypes.SetRange(Active, true);
+                if not HRLeaveTypes.FindFirst then begin
+                    ResponseObject.Add('status', 'ERROR');
+                    ResponseObject.Add('status_description', 'Leave type ' + theLeaveApplication."Leave Type" + ' is not a valid active leave type');
+                    AddDateTimeToResponse(ResponseObject);
+                    ResponseObject.WriteTo(Response);
+
+                    exit(Response);
+                end;
+
                 theLeaveApplication.Validate("Leave Type");
                 PopulateLeaveBalance(theLeaveApplication);
 
@@ -5421,8 +5431,8 @@ codeunit 52186507 "Members Portal Integration"
                 theLeaveApplication.Validate(Reliever);
 
                 if theLeaveApplication.Insert(true) then begin
-                    VarVariant := theLeaveApplication;
-                    CustomApprovals.OnSendDocForApproval(VarVariant);
+                    // VarVariant := theLeaveApplication;
+                    // CustomApprovals.OnSendDocForApproval(VarVariant);
 
                     Datum.Add('application_no', theLeaveApplication."Application Code");
 
@@ -11604,7 +11614,7 @@ codeunit 52186507 "Members Portal Integration"
                             offseBa := true;
                         end;
                     end;
-                until RelatedProduct.Next = 0;
+                until ProductsToBridge.Next = 0;
             end;
 
             // foreach loan_top_up in top_ups.AsArray do begin
@@ -11641,9 +11651,9 @@ codeunit 52186507 "Members Portal Integration"
             else
                 DepositQualification := DepositQualification - SelfGuaranteedBal;
 
-            // if DepositQualification < 0 then begin
-            //     DepositQualification := 0;
-            // end;
+            if DepositQualification < 0 then begin
+                DepositQualification := 0;
+            end;
 
             DisposableIncome += TotalMonthlyRepayment;
 
@@ -11756,7 +11766,8 @@ codeunit 52186507 "Members Portal Integration"
                             until LoansTopupTmp.Next = 0;
                         end;
                     end;
-                until RelatedProduct.Next = 0;
+
+                until ProductsToBridge.Next = 0;
             end;
 
             // foreach loan_top_up in top_ups.AsArray do begin

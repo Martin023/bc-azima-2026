@@ -183,8 +183,9 @@ table 52185783 "Salary Header"
             begin
                 "Document No" := No;
                 if TransTypes.get("Transaction Type") then begin
-                    "Donnot Recover" := TransTypes."Exclude Salary Deductions";
+                    "Donnot Recover" := TransTypes."Exclude Salary Loan Deductions";
                     "Deposit Deduction" := TransTypes."Sal. Deposit Deduction";
+                    "Income Type" := TransTypes."Salary Income Type";
                     rec.Modify()
                 end;
             end;
@@ -270,6 +271,10 @@ table 52185783 "Salary Header"
         {
         }
         field(77; "SMS Sent"; Boolean)
+        {
+            Editable = false;
+        }
+        field(78; "Donot Recover STO"; Boolean)
         {
             Editable = false;
         }

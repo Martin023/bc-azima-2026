@@ -47,7 +47,7 @@ table 52185773 "Transaction Types"
             OptionCaption = ' ,Cashier';
             OptionMembers = " ",Cashier;
         }
-        field(16; "Exclude Salary Deductions"; Boolean)
+        field(16; "Exclude Salary Loan Deductions"; Boolean)
         {
         }
         field(17; "Sal. Deposit Deduction"; Decimal)
@@ -58,7 +58,12 @@ table 52185773 "Transaction Types"
         field(18; "Commission Type"; Enum "Commission Types")
         {
         }
-
+        field(19; "Salary Income Type"; Enum "Salary Income Types")
+        {
+        }
+        field(20; "Exclude STO Deductions"; Boolean)
+        {
+        }
     }
 
     keys

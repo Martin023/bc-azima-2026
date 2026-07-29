@@ -45,10 +45,10 @@ page 52185711 "Product Factory List"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Product SLA"; Rec."Product SLA")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Product SLA"; Rec."Product SLA")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("Loan Interest Account [G/L]"; Rec."Loan Interest Account [G/L]")
                 {
                     ApplicationArea = Basic, Suite;
@@ -73,15 +73,15 @@ page 52185711 "Product Factory List"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Nature of Loan Type"; Rec."Nature of Loan Type")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Nature of Loan Type"; Rec."Nature of Loan Type")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("Product Class Type"; Rec."Product Class Type")
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Loan Span"; Rec."Loan Span")
+                field("Loan Term Type"; Rec."Loan Term Type")
                 {
                     ApplicationArea = Basic, Suite;
                 }
@@ -89,10 +89,14 @@ page 52185711 "Product Factory List"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Sort Order"; Rec."Sort Order")
+                field("Recovery Priority"; Rec."Recovery Priority")
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                // field("Sprt Order"; Rec."Sort Order")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("Last Updated By"; Rec."Last Updated By")
                 {
                     Editable = false;

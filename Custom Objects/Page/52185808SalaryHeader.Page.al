@@ -119,7 +119,7 @@ page 52185808 "Salary Header"
                 {
                     ApplicationArea = Basic, Suite;
                     Editable = IncType;
-                    ValuesAllowed = Salary, Pension;
+                    ValuesAllowed = Salary, Pension, Donation, Advance, "Leave Allowance", Claims;
                 }
                 field("Posting date"; Rec."Posting date")
                 {
@@ -139,6 +139,10 @@ page 52185808 "Salary Header"
                     ApplicationArea = Basic, Suite;
                 }
                 field("Donnot Recover"; Rec."Donnot Recover")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Donot Recover STO"; Rec."Donot Recover STO")
                 {
                     ApplicationArea = Basic, Suite;
                 }
@@ -296,8 +300,9 @@ page 52185808 "Salary Header"
                                         SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"FOSA Account");
                                         SavingsAccounts.SetFilter(SavingsAccounts."Employer Code", SalaryLines."Employer Code");
                                         SavingsAccounts.SetRange(SavingsAccounts."Payroll/Staff No.", SalaryLines."Staff No.");
-                                        SavingsAccounts.SetCurrentKey("Product Type");
-                                        SavingsAccounts.SetFilter(SavingsAccounts."Product Type", '191');
+                                        SavingsAccounts.SetCurrentKey("Loan Disbursement Account");
+                                        //SavingsAccounts.SetFilter(SavingsAccounts."Product Type", '191');
+                                        SavingsAccounts.SetRange("Loan Disbursement Account", true);
                                         if SavingsAccounts.Find('-') then begin
 
                                             SalaryLines."Account Not Found" := false;
@@ -362,7 +367,8 @@ page 52185808 "Salary Header"
                                     // if Rec."Donnot Recover" = false then
                                     // SavingsAccounts.SetFilter(SavingsAccounts."Employer Code", Rec."Employer Code");
                                     SavingsAccounts.SetRange(SavingsAccounts."No.", SalaryLines."Account No.");
-                                    SavingsAccounts.SetFilter(SavingsAccounts."Product Type", '191');
+                                    SavingsAccounts.SetRange("Loan Disbursement Account", true);
+                                    // SavingsAccounts.SetFilter(SavingsAccounts."Product Type", '191');
                                     SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"FOSA Account");
                                     if SavingsAccounts.Find('-') then begin
                                         SalaryLines."Account Not Found" := false;
@@ -400,7 +406,8 @@ page 52185808 "Salary Header"
                                 repeat
                                     SavingsAccounts.Reset;
                                     SavingsAccounts.SetRange(SavingsAccounts."Member No.", SalaryLines."Member No.");
-                                    SavingsAccounts.SetFilter(SavingsAccounts."Product Type", '191');
+                                    SavingsAccounts.SetRange("Loan Disbursement Account", true);
+                                    // SavingsAccounts.SetFilter(SavingsAccounts."Product Type", '191');
                                     SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"FOSA Account");
                                     if SavingsAccounts.Find('-') then begin
 
@@ -452,7 +459,8 @@ page 52185808 "Salary Header"
                                     if Members.FindFirst() then begin
                                         SavingsAccounts.Reset;
                                         SavingsAccounts.SetRange(SavingsAccounts."Member No.", Members."No.");
-                                        SavingsAccounts.SetFilter(SavingsAccounts."Product Type", '191');
+                                        // SavingsAccounts.SetFilter(SavingsAccounts."Product Type", '191');
+                                        SavingsAccounts.SetRange("Loan Disbursement Account", true);
                                         // SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"FOSA Account");
                                         if SavingsAccounts.Find('-') then begin
 
@@ -661,7 +669,6 @@ page 52185808 "Salary Header"
                     Image = SendMail;
                     Promoted = true;
                     PromotedCategory = Process;
-                    //Enabled = false;
 
                     trigger OnAction()
                     var
@@ -695,7 +702,7 @@ page 52185808 "Salary Header"
                                     if Memb.get(Account."Member No.") then begin
                                         MobileNo := Memb."Phone No.";
                                         Text0008 := Gensetup."Salary SMS Suffix";
-                                        msg := 'Dear ' + memb."First Name" + ' your ' + rec.Remarks + ' has been credited to your FOSA account. Thank You, Dial *477# for more information.';
+                                        msg := 'Dear ' + memb."First Name" + ' your ' + rec.Remarks + ' has been credited to your FOSA account. Thank You, Dial ' + format(Gensetup."USSD Code") + ' for more information.';
 
                                         SendSMS.SendSms(Source::SALARY_PROCESSING, MobileNo, msg, Format(SalaryLines."Account No."), '', true, 0, false, 'CBS', SalaryLines."Account No.", 'CBS');
                                     end;
@@ -738,6 +745,7 @@ page 52185808 "Salary Header"
                                 SavingsLedgerEntry.SetRange("Posting Date", SalHeaD."Posting date");
                                 SavingsLedgerEntry.SetRange("Customer No.", SalLines."Account No.");
                                 if SavingsLedgerEntry.Find('-') then begin
+                                    SalLines."Income Type" := SalHeaD."Income Type";
                                     SalLines."Posting Date" := SalHeaD."Posting date";
                                     SalLines.Posted := true;
                                     SalLines.Modify;
@@ -759,6 +767,7 @@ page 52185808 "Salary Header"
                         SalLines.SetRange(Posted, false);
                         if SalLines.findfirst then begin
                             repeat
+                                SalLines."Income Type" := SalHeaD."Income Type";
                                 SalLines."Posting Date" := SalHeaD."Posting date";
                                 SalLines.Posted := true;
                                 SalLines.Modify;

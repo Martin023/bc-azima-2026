@@ -318,6 +318,15 @@ page 52187092 "System Reversal Card"
         ValidateReq;
     end;
 
+    trigger OnNewRecord(BelowxRec: Boolean)
+    begin
+        ExistingReversals.reset();
+        ExistingReversals.SetRange("Created by User ID", UserId);
+        ExistingReversals.setrange(Status, ExistingReversals.Status::Open);
+        if not ExistingReversals.IsEmpty then
+            if ExistingReversals.Count > 2 then Error('kindly note you have an existing open reversal %1 Kindly use it before creating a new one!', ExistingReversals."No.");
+    end;
+
     var
         CustomApprovals: Codeunit "Custom Approvals Codeunit";
         VarVariant: Variant;
@@ -327,4 +336,5 @@ page 52187092 "System Reversal Card"
         AllowPost: Boolean;
 
         AllowViewRegister: Boolean;
+        ExistingReversals: record "System Reversal";
 }

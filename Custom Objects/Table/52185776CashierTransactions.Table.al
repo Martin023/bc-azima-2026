@@ -542,7 +542,7 @@ table 52185776 "Cashier Transactions"
                 ProdF.SetRange(ProdF."Product Class Type", ProdF."Product Class Type"::Loan);
                 if ProdF.Find('-') then begin
                     ProdF.TestField(ProdF."Discounting %");
-                    ProdF.TestField(ProdF."Interest Rate (Min.)");
+                    ProdF.TestField(ProdF."Interest Rate (Max.)");
                     ProdF.TestField(ProdF."Maximum Loan Amount");
 
                     if "Discounting Amount" > ProdF."Maximum Loan Amount" then

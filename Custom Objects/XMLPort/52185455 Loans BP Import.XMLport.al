@@ -18,6 +18,10 @@ XmlPort 52185555 "Loans BP"
                     FieldValidate = yes;
 
                 }
+                fieldelement(EmployerCode; "Checkoff Buffer"."Employer Code")
+                {
+                    FieldValidate = yes;
+                }
                 fieldelement(UploadNo; "Checkoff Buffer"."Upload No.")
                 {
                     FieldValidate = yes;
@@ -28,10 +32,7 @@ XmlPort 52185555 "Loans BP"
                     FieldValidate = yes;
                     MinOccurs = Once;
                 }
-                fieldelement(EmployerCode; "Checkoff Buffer"."Employer Code")
-                {
-                    FieldValidate = yes;
-                }
+
                 fieldelement(ProductID; "Checkoff Buffer"."Product Code")
                 {
                     FieldValidate = yes;
@@ -70,7 +71,7 @@ XmlPort 52185555 "Loans BP"
         {
             area(content)
             {
-                group("No|CheckoffNo|UploadNo(payroll/Mno/ID)|Amount|EmployerCode|ProductID|Remarks")
+                group("No|CheckoffNo|EmployerCode|PayrollNo|Amount|ProductID|Remarks")
                 {
                     field(HeaderTemplate; HeaderTemplate)
                     {
@@ -80,9 +81,7 @@ XmlPort 52185555 "Loans BP"
                         ToolTip = 'Copy this text and paste it into the first row of your Excel file.';
                     }
 
-                    field(No; "Checkoff Buffer"."Checkoff No")
-                    {
-                    }
+
                 }
             }
         }
@@ -94,7 +93,7 @@ XmlPort 52185555 "Loans BP"
 
     trigger OninitXmlPort()
     begin
-        HeaderTemplate := 'No|CheckoffNo|UploadNo(payroll/Mno/ID)|Amount|EmployerCode|ProductID|Remarks';
+        HeaderTemplate := 'No|CheckoffNo|EmployerCode|PayrollNo|Amount|ProductID|Remarks';
     end;
 
     trigger OnPostXmlPort()

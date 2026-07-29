@@ -17,6 +17,10 @@ XmlPort 52185556 "Lumpsum BP"
                 {
                     FieldValidate = yes;
                 }
+                fieldelement(Amount; "Checkoff Buffer"."Employer Code")
+                {
+                    FieldValidate = yes;
+                }
                 fieldelement(UploadNo; "Checkoff Buffer"."Upload No.")
                 {
                     FieldValidate = yes;
@@ -25,10 +29,7 @@ XmlPort 52185556 "Lumpsum BP"
                 {
                     FieldValidate = yes;
                 }
-                fieldelement(Amount; "Checkoff Buffer"."Employer Code")
-                {
-                    FieldValidate = yes;
-                }
+
 
                 trigger OnAfterInitRecord()
                 begin
@@ -45,12 +46,31 @@ XmlPort 52185556 "Lumpsum BP"
 
         layout
         {
+            area(content)
+            {
+                group("No|CheckoffNo|EmployerCode|payrollNo|Amount|Remarks")
+                {
+                    field(HeaderTemplate; HeaderTemplate)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Copy this header';
+                        Editable = false;
+                        ToolTip = 'Copy this text and paste it into the first row of your Excel file.';
+                    }
+
+                }
+            }
         }
 
         actions
         {
         }
     }
+
+    trigger OninitXmlPort()
+    begin
+        HeaderTemplate := 'No|CheckoffNo|EmployerCode|Payroll No|Amount|Remarks';
+    end;
 
     trigger OnPostXmlPort()
     begin
@@ -80,5 +100,6 @@ XmlPort 52185556 "Lumpsum BP"
         Error001: label 'Invalid option, please respond with 2,3 OR 4.';
         Text01: label 'Upload done successfully';
         window: Dialog;
+        HeaderTemplate: Text[100];
 }
 

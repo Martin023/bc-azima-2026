@@ -194,8 +194,8 @@ table 52185819 "Checkoff Header"
         field(23; "CheckOff Type"; Option)
         {
 
-            OptionMembers = " ",Savings,Loans,Lumpsum;
-            ValuesAllowed = Savings, Loans;
+            OptionMembers = " ",Savings,Loans,Lumpsum,"Short term Loans","Long Term Loans";
+            ValuesAllowed = Savings, Loans, "Short term Loans", "Long Term Loans";
         }
         field(24; "Total Count Not Validated"; Integer)
         {

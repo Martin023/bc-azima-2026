@@ -942,7 +942,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                         if AppraisalSal.Type = AppraisalSal.Type::Basic then
                             TotalBasic := TotalBasic + AppraisalSal.Amount
                         else
-                            if AppraisalSal.Type = AppraisalSal.Type::Earnings then
+                            if (AppraisalSal.Type = AppraisalSal.Type::Earnings) or (AppraisalSal.Type = AppraisalSal.Type::"Other Allowances") then
                                 TrEarni := TrEarni + AppraisalSal.Amount
                             else
                                 if AppraisalSal.Type = AppraisalSal.Type::Deductions then

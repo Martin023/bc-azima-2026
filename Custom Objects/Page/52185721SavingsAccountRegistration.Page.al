@@ -19,6 +19,10 @@ page 52185721 "Savings Account Registration"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Default Account"; Rec."Default Account")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Monthly Contribution"; Rec."Monthly Contribution")
                 {
                     ApplicationArea = Basic, Suite;

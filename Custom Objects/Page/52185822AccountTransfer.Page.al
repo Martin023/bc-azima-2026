@@ -718,7 +718,7 @@ page 52185822 "Account Transfer"
                                         TransDestin."No." := Rec.No;
                                         TransDestin."Destination Account Type" := TransDestin."Destination Account Type"::Credit;
                                         TransDestin."Destination Account No." := CreditREC."Loan Account";
-                                        TransDestin."Destination Account Name" := CreditREC."Member No.";
+                                        TransDestin."Destination Account Name" := CreditREC."Member Name";
                                         TransDestin."Product Name" := CreditREC."Loan Product Type Name";
                                         TransDestin."Product Code" := CreditREC."Loan Product Type";
                                         TransDestin."Transfer Type" := Rec."Transfer Type";
