@@ -2327,7 +2327,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         Loans."Loan Product Type Name" := ProductFactory."Product Description";
         Loans."Purpose of Loan" := MobileLoanBuffer."Loan Purpose";
         Loans."Loan Account" := LoansProcess.CreateLoanAccount(MobileLoanBuffer."Member No.", LoanProdID);
-        Loans.Interest := ProductFactory."Interest Rate (Min.)";
+        Loans.Interest := ProductFactory."Interest Rate (Max.)";
         Loans."Loan Span" := ProductFactory."Loan Span";
         Loans."Application Date" := Today;
         Loans."Disbursement Date" := Today;

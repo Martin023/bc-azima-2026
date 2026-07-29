@@ -1860,7 +1860,7 @@ Codeunit 52186458 "Loans Process"
             NewLoans."Loan Product Type" := ProductFactory."Product ID";
             NewLoans."Loan Product Type Name" := ProductFactory."Product Description";
             NewLoans."Grace Period" := ProductFactory."Grace Period - Interest";
-            NewLoans.Interest := ProductFactory."Interest Rate (Min.)";
+            NewLoans.Interest := ProductFactory."Interest Rate (Max.)";
             NewLoans."Grace Period" := ProductFactory."Grace Period - Interest";
             NewLoans."Interest Calculation Method" := ProductFactory."Interest Calculation Method";
             NewLoans."Loan Span" := ProductFactory."Loan Span";
