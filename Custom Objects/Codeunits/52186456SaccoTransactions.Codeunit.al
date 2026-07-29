@@ -1530,7 +1530,7 @@ Codeunit 52186456 "Sacco Transactions"
                             GenJournalLine.Description := 'Excise Duty';
                             GenJournalLine."Currency Code" := CashierTrans."Currency Code";
                             GenJournalLine.Validate(GenJournalLine."Currency Code");
-                            GenJournalLine.Amount := (ChargeAmount * GenSetup."Excise Duty (%)") * 0.01;
+                            GenJournalLine.Amount := (ChargeAmount * GenSetup."Transfer Excise Duty (%)") * 0.01;
                             GenJournalLine.Validate(GenJournalLine.Amount);
                             GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
                             GenJournalLine."Bal. Account No." := GenSetup."Excise Duty G/L";
@@ -4414,6 +4414,12 @@ Codeunit 52186456 "Sacco Transactions"
                                                                 end;
                                                             end;
 
+                                                            
+                                                            if Employer.Get(SavingsACC."Employer Code") then begin
+                                                                if Employer."Dont Charge Transactions" then
+                                                                    ChargeAmount := 0;
+                                                            end;
+
 
                                                             GenJournalLine.Init;
                                                             GenJournalLine."Journal Template Name" := Jtemplate;
@@ -4462,7 +4468,7 @@ Codeunit 52186456 "Sacco Transactions"
                                                                 GenJournalLine.Description := (TransactionCharges.Description + ' Excise Duty');
                                                                 //GenJournalLine."Currency Code":="Currency Code";
                                                                 GenJournalLine.Validate(GenJournalLine."Currency Code");
-                                                                GenJournalLine.Amount := (ChargeAmount * GenSetup."Excise Duty (%)") * 0.01;
+                                                                GenJournalLine.Amount := (ChargeAmount * GenSetup."Transfer Excise Duty (%)") * 0.01;
                                                                 GenJournalLine.Validate(GenJournalLine.Amount);
                                                                 GenJournalLine."Bal. Account Type" := GenJournalLine."bal. account type"::"G/L Account";
                                                                 GenJournalLine."Bal. Account No." := GenSetup."Excise Duty G/L";
