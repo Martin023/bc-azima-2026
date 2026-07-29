@@ -50,6 +50,8 @@ report 52185435 "Guarantor Substitution Report"
             column(Status; Status)
             {
             }
+            column(OutGoingGuarName; OutGoingGuarName) { }
+            column(PostedBy; "Posted By") { }
 
             dataitem("Loan Guarantors Sub"; "Loan Guarantors Sub")
             {
@@ -60,11 +62,27 @@ report 52185435 "Guarantor Substitution Report"
                 column(Substituted; Substituted) { }
                 column(Member_Substituted; "Member Substituted") { }
                 column(Amount_Guaranteed; "Amount Guaranteed") { }
+                column(IncGuarname; IncGuarname) { }
+
+                trigger OnAfterGetRecord()
+                begin
+                    if SavAcc.get("Loan Guarantors Sub"."Member Substituted") then
+                        IncGuarname := SavAcc."Name";
+                end;
             }
+
+            trigger OnAfterGetRecord()
+            begin
+                IncGuarname := '';
+                OutGoingGuarName := '';
+                if Members.Get(GuarantorsSubstitution."No.") then
+                    OutGoingGuarName := Members.name;
+            end;
 
         }
 
     }
+
     requestpage
     {
         layout
@@ -82,8 +100,14 @@ report 52185435 "Guarantor Substitution Report"
             {
             }
         }
+
+
     }
 
     var
         CI: Record "Company Information";
+        Members: record Members;
+        OutGoingGuarName: Text[200];
+        IncGuarname: Text[200];
+        SavAcc: record "Savings Accounts";
 }

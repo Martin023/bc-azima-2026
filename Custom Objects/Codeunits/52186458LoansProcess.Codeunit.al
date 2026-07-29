@@ -5782,52 +5782,52 @@ Codeunit 52186458 "Loans Process"
             //Update Monthly contribution based on the product
             //contractual shares
             //Check if tiered
-            IF ProdFac.Get(LoanApps."Loan Product Type") then begin
-                if ProdFac."Minimum Deposit Tiered" then begin
-                    //oldloans
-                    LoansREc.Reset();
-                    LoansREc.SetRange(LoansREc."Member No.", LoanApps."Member No.");
-                    LoansREc.SetRange(Posted, true);
-                    LoansREc.SetRange(LoansREc."Source Unit", LoansREc."Source Unit"::BOSA);
-                    LoansREc.SetFilter(LoansREc."Outstanding Balance", '>%1', 0);
-                    if LoansREc.FindFirst() then begin
-                        //sharks
-                        CheoffAdd.Reset();
-                        CheoffAdd.SetRange(CheoffAdd."Member No.", LoansREc."Member No.");
-                        CheoffAdd.SetRange(CheoffAdd.Type, CheoffAdd.Type::Savings);
-                        CheoffAdd.SetCurrentKey("Amount On");
-                        if CheoffAdd.FindLast() then
-                            NewContr := CheoffAdd."Amount On";
-                    end
-                    else begin
-                        DepCont := 0;
-                        SavAcc.Reset;
-                        SavAcc.SetRange("Member No.", LoanApps."Member No.");
-                        SavAcc.SetRange("Product Category", SavAcc."Product Category"::"BOSA Deposits");
-                        if SavAcc.Find('-') then begin
-                            DepCont := SavAcc.GetAvailableBalance(SavAcc."No.");
-                            if LoanApps."Loans - Deposit Purchase" > 0 then
-                                DepCont := DepCont + LoanApps."Loans - Deposit Purchase";
-                            ProdFac.TestField("Minimum Deposit Tiered Code");
-                            TariffDetails.Reset;
-                            TariffDetails.SetRange(TariffDetails.Code, ProdFac."Minimum Deposit Tiered Code");
-                            if TariffDetails.Find('-') then begin
-                                repeat
-                                    if (DepCont >= TariffDetails."Lower Limit") and (DepCont <= TariffDetails."Upper Limit") then begin
-                                        if TariffDetails."Use Percentage" = true then begin
-                                            NewContr := LoanApps."Approved Amount" * TariffDetails.Percentage * 0.01;
-                                        end else begin
-                                            NewContr := TariffDetails."Charge Amount";
-                                        end;
-                                    end;
-                                until TariffDetails.Next = 0;
-                            end;
-                            if NewContr < CustomCuesCodeunit.Prorata(SavAcc."Member No.", '1') then
-                                NewContr := CustomCuesCodeunit.Prorata(SavAcc."Member No.", '1');
-                        end;
-                    end;
-                end;
-            end;
+            // IF ProdFac.Get(LoanApps."Loan Product Type") then begin
+            //     if ProdFac."Minimum Deposit Tiered" then begin
+            //         //oldloans
+            //         LoansREc.Reset();
+            //         LoansREc.SetRange(LoansREc."Member No.", LoanApps."Member No.");
+            //         LoansREc.SetRange(Posted, true);
+            //         LoansREc.SetRange(LoansREc."Source Unit", LoansREc."Source Unit"::BOSA);
+            //         LoansREc.SetFilter(LoansREc."Outstanding Balance", '>%1', 0);
+            //         if LoansREc.FindFirst() then begin
+            //             //sharks
+            //             CheoffAdd.Reset();
+            //             CheoffAdd.SetRange(CheoffAdd."Member No.", LoansREc."Member No.");
+            //             CheoffAdd.SetRange(CheoffAdd.Type, CheoffAdd.Type::Savings);
+            //             CheoffAdd.SetCurrentKey("Amount On");
+            //             if CheoffAdd.FindLast() then
+            //                 NewContr := CheoffAdd."Amount On";
+            //         end
+            //         else begin
+            //             DepCont := 0;
+            //             SavAcc.Reset;
+            //             SavAcc.SetRange("Member No.", LoanApps."Member No.");
+            //             SavAcc.SetRange("Product Category", SavAcc."Product Category"::"BOSA Deposits");
+            //             if SavAcc.Find('-') then begin
+            //                 DepCont := SavAcc.GetAvailableBalance(SavAcc."No.");
+            //                 if LoanApps."Loans - Deposit Purchase" > 0 then
+            //                     DepCont := DepCont + LoanApps."Loans - Deposit Purchase";
+            //                 ProdFac.TestField("Minimum Deposit Tiered Code");
+            //                 TariffDetails.Reset;
+            //                 TariffDetails.SetRange(TariffDetails.Code, ProdFac."Minimum Deposit Tiered Code");
+            //                 if TariffDetails.Find('-') then begin
+            //                     repeat
+            //                         if (DepCont >= TariffDetails."Lower Limit") and (DepCont <= TariffDetails."Upper Limit") then begin
+            //                             if TariffDetails."Use Percentage" = true then begin
+            //                                 NewContr := LoanApps."Approved Amount" * TariffDetails.Percentage * 0.01;
+            //                             end else begin
+            //                                 NewContr := TariffDetails."Charge Amount";
+            //                             end;
+            //                         end;
+            //                     until TariffDetails.Next = 0;
+            //                 end;
+            //                 if NewContr < CustomCuesCodeunit.Prorata(SavAcc."Member No.", '1') then
+            //                     NewContr := CustomCuesCodeunit.Prorata(SavAcc."Member No.", '1');
+            //             end;
+            //         end;
+            //     end;
+            // end;
         end;
 
 
