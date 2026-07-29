@@ -5722,20 +5722,20 @@ page 52186778 "Finance Role Center"
                     }
 
 
-                    action("Loans Datasheet Employer")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Loans Datasheet Employer';
-                        RunObject = report "Loans Datasheet Employer";
+                    // action("Loans Datasheet Employer")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Loans Datasheet Employer';
+                    //     RunObject = report "Loans Datasheet Employer";
 
-                    }
-                    action("Savings Datasheet Employer")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Savings Datasheet Employer';
-                        RunObject = report "Savings Datasheet Employer";
+                    // }
+                    // action("Savings Datasheet Employer")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Savings Datasheet Employer';
+                    //     RunObject = report "Savings Datasheet Employer";
 
-                    }
+                    // }
                     action("Loan Registered By Category")
                     {
                         ApplicationArea = Basic, Suite;
@@ -5898,17 +5898,17 @@ page 52186778 "Finance Role Center"
                         Caption = 'Loan Recovery Report';
                         RunObject = report "Loan Attachment";
                     }
-                    action("Past Due Accounts")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = report "Past Due Accounts";
-                    }
+                    // action("Past Due Accounts")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     RunObject = report "Past Due Accounts";
+                    // }
 
-                    action("DMU Case Forwarded")
-                    {
-                        ApplicationArea = All;
-                        RunObject = report "DMU Case Forwarded";
-                    }
+                    // action("DMU Case Forwarded")
+                    // {
+                    //     ApplicationArea = All;
+                    //     RunObject = report "DMU Case Forwarded";
+                    // }
                     action("Loan Variation Report")
                     {
                         ApplicationArea = all;

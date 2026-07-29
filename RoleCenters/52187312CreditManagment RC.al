@@ -919,6 +919,12 @@ page 52187312 "Credit Management Role Center"
                     //     RunObject = page "Guarantor Subsitution List";
                     //     RunPageLink = "Sent Back to CRM" = const(true);
                     // }
+                     action("Guarantor Substitution Report")
+                    {
+                        ApplicationArea = all;
+                        Caption = 'Guarantor Substitution Report';
+                        RunObject = report "Guarantor Substitution Report";
+                    }
                 }
                 group("Loan Guarantors List")
                 {
