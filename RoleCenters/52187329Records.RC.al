@@ -747,9 +747,18 @@ page 52187329 "Records"
                     action("Member Form List")
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Member Form List';
+                        Caption = 'Open Member Form List';
                         RunObject = page "Member Form List";
+                        RunPageView = where(Filed = filter(false));
                     }
+                    action("Filed Member Form List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Filed member Form List';
+                        RunObject = page "Member Form List";
+                        RunPageView = where(Filed = filter(true));
+                    }
+
                     action("File Volumes List")
                     {
                         ApplicationArea = Basic, Suite;

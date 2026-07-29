@@ -2200,17 +2200,40 @@ page 52186778 "Finance Role Center"
                 group(SystemReversals)
                 {
                     Caption = 'System Reversal';
-                    action(SystemReversal)
+                    action(OSystemReversal)
                     {
-                        Caption = 'System Reversal';
+                        Caption = 'Open System Reversal';
                         ApplicationArea = Basic, Suite;
                         RunObject = page "System Reversal List";
+                        RunPageView = where(Status = filter(Open), Reversed = const(false));
                     }
+                    action(PSystemReversal)
+                    {
+                        Caption = 'Pending System Reversal';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = page "System Reversal List";
+                        RunPageView = where(Status = filter(Pending), Reversed = const(false));
+                    }
+                    action(ASystemReversal)
+                    {
+                        Caption = 'Approved System Reversal';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = page "System Reversal List";
+                        RunPageView = where(Status = filter(Approved), Reversed = const(false));
+                    }
+
                     action(PostedSystemReversal)
                     {
                         Caption = 'Posted System Reversal';
                         ApplicationArea = Basic, Suite;
                         RunObject = page "Reversed System Reversal List";
+                    }
+                    action(RejectedSysReversal)
+                    {
+                        Caption = 'Rejected System Reversal';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = page "System Reversal List";
+                        RunPageView = where(Status = filter(Rejected), Reversed = const(false));
                     }
                 }
                 action(Currencies)
@@ -5699,20 +5722,20 @@ page 52186778 "Finance Role Center"
                     }
 
 
-                    action("Loans Datasheet Employer")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Loans Datasheet Employer';
-                        RunObject = report "Loans Datasheet Employer";
+                    // action("Loans Datasheet Employer")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Loans Datasheet Employer';
+                    //     RunObject = report "Loans Datasheet Employer";
 
-                    }
-                    action("Savings Datasheet Employer")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        Caption = 'Savings Datasheet Employer';
-                        RunObject = report "Savings Datasheet Employer";
+                    // }
+                    // action("Savings Datasheet Employer")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Savings Datasheet Employer';
+                    //     RunObject = report "Savings Datasheet Employer";
 
-                    }
+                    // }
                     action("Loan Registered By Category")
                     {
                         ApplicationArea = Basic, Suite;
@@ -5875,17 +5898,17 @@ page 52186778 "Finance Role Center"
                         Caption = 'Loan Recovery Report';
                         RunObject = report "Loan Attachment";
                     }
-                    action("Past Due Accounts")
-                    {
-                        ApplicationArea = Basic, Suite;
-                        RunObject = report "Past Due Accounts";
-                    }
+                    // action("Past Due Accounts")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     RunObject = report "Past Due Accounts";
+                    // }
 
-                    action("DMU Case Forwarded")
-                    {
-                        ApplicationArea = All;
-                        RunObject = report "DMU Case Forwarded";
-                    }
+                    // action("DMU Case Forwarded")
+                    // {
+                    //     ApplicationArea = All;
+                    //     RunObject = report "DMU Case Forwarded";
+                    // }
                     action("Loan Variation Report")
                     {
                         ApplicationArea = all;
