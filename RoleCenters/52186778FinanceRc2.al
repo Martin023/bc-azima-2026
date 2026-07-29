@@ -2200,17 +2200,40 @@ page 52186778 "Finance Role Center"
                 group(SystemReversals)
                 {
                     Caption = 'System Reversal';
-                    action(SystemReversal)
+                    action(OSystemReversal)
                     {
-                        Caption = 'System Reversal';
+                        Caption = 'Open System Reversal';
                         ApplicationArea = Basic, Suite;
                         RunObject = page "System Reversal List";
+                        RunPageView = where(Status = filter(Open), Reversed = const(false));
                     }
+                    action(PSystemReversal)
+                    {
+                        Caption = 'Pending System Reversal';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = page "System Reversal List";
+                        RunPageView = where(Status = filter(Pending), Reversed = const(false));
+                    }
+                    action(ASystemReversal)
+                    {
+                        Caption = 'Approved System Reversal';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = page "System Reversal List";
+                        RunPageView = where(Status = filter(Approved), Reversed = const(false));
+                    }
+
                     action(PostedSystemReversal)
                     {
                         Caption = 'Posted System Reversal';
                         ApplicationArea = Basic, Suite;
                         RunObject = page "Reversed System Reversal List";
+                    }
+                    action(RejectedSysReversal)
+                    {
+                        Caption = 'Rejected System Reversal';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = page "System Reversal List";
+                        RunPageView = where(Status = filter(Rejected), Reversed = const(false));
                     }
                 }
                 action(Currencies)

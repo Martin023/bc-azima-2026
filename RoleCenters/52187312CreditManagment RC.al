@@ -567,227 +567,43 @@ page 52187312 "Credit Management Role Center"
                 group(SystemReversals)
                 {
                     Caption = 'System Reversal';
-                    action(SystemReversal)
+                    action(OSystemReversal)
                     {
-                        Caption = 'System Reversal';
+                        Caption = 'Open System Reversal';
                         ApplicationArea = Basic, Suite;
                         RunObject = page "System Reversal List";
+                        RunPageView = where(Status = filter(Open), Reversed = const(false));
                     }
+                    action(PSystemReversal)
+                    {
+                        Caption = 'Pending System Reversal';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = page "System Reversal List";
+                        RunPageView = where(Status = filter(Pending), Reversed = const(false));
+                    }
+                    action(ASystemReversal)
+                    {
+                        Caption = 'Approved System Reversal';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = page "System Reversal List";
+                        RunPageView = where(Status = filter(Approved), Reversed = const(false));
+                    }
+
                     action(PostedSystemReversal)
                     {
                         Caption = 'Posted System Reversal';
                         ApplicationArea = Basic, Suite;
                         RunObject = page "Reversed System Reversal List";
                     }
+                    action(RejectedSysReversal)
+                    {
+                        Caption = 'Rejected System Reversal';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = page "System Reversal List";
+                        RunPageView = where(Status = filter(Rejected), Reversed = const(false));
+                    }
                 }
-                // group("Product Variations")
-                // {
-                //     group("Loans Variations")
-                //     {
-                //         action("Open Variations List")
-                //         {
-                //             ApplicationArea = Basic, Suite;
-                //             Caption = 'Open Loans Variations List';
-                //             RunObject = Page "Variations List";
-                //             RunPageLink = Status = filter(Open), "Sent Back to CRM" = const(false), "Variation Type" = filter(Loan);
-                //         }
-                //         action("Pending Variations List")
-                //         {
-                //             ApplicationArea = Basic, Suite;
-                //             Caption = 'Pending Loans Variations List';
-                //             RunObject = Page "Variations List";
-                //             RunPageLink = Status = filter("Pending"), "Variation Type" = filter(Loan);
-                //         }
-                //         action("Approved Variations List")
-                //         {
-                //             ApplicationArea = Basic, Suite;
-                //             Caption = 'Approved Loans Variations List';
-                //             RunObject = Page "Variations List";
-                //             RunPageLink = Status = filter(Approved), posted = const(false), "Variation Type" = filter(Loan);
-                //         }
-                //         action("Posted Variations List")
-                //         {
-                //             ApplicationArea = Basic, Suite;
-                //             Caption = 'Posted Loans Variations List';
-                //             RunObject = Page "Variations List";
-                //             RunPageLink = Status = filter(Approved), posted = const(true), "Variation Type" = filter(Loan);
-                //         }
-                //         // action("Variations Send Back To CRM")
-                //         // {
-                //         //     ApplicationArea = Basic, Suite;
-                //         //     Caption = 'Variations Send Back To CRM';
-                //         //     RunObject = Page "Variations List";
-                //         //     RunPageLink = Status = filter(Open), "Sent Back to CRM" = const(true), "Variation Type" = filter(Loan);
-                //         // }
-                //     }
-                //     group("Savings Variations")
-                //     {
-                //         action("Open  Savings Variations List")
-                //         {
-                //             ApplicationArea = Basic, Suite;
-                //             Caption = 'Open Savings Variations List';
-                //             RunObject = Page "Savings Variations List";
-                //             RunPageLink = Status = filter(Open), "Sent Back to CRM" = const(false), "Variation Type" = filter(savings);
-                //         }
-                //         action("Savings PendVariations List")
-                //         {
-                //             ApplicationArea = Basic, Suite;
-                //             Caption = 'Pending Savings Variations List';
-                //             RunObject = Page "Savings Variations List";
-                //             RunPageLink = Status = filter("Pending"), "Variation Type" = filter(savings);
-                //         }
-                //         action("Savings  AppVariations List")
-                //         {
-                //             ApplicationArea = Basic, Suite;
-                //             Caption = 'Approved Savings Variations List';
-                //             RunObject = Page "Savings Variations List";
-                //             RunPageLink = Status = filter(Approved), posted = const(false), "Variation Type" = filter(savings);
-                //         }
-                //         action("Posted sav Variations List")
-                //         {
-                //             ApplicationArea = Basic, Suite;
-                //             Caption = 'Posted  Savings Variations List';
-                //             RunObject = Page "Savings Variations List";
-                //             RunPageLink = Status = filter(Approved), posted = const(true), "Variation Type" = filter(savings);
-                //         }
-                //         // action("Sav' Variations Send Back To CRM")
-                //         // {
-                //         //     ApplicationArea = Basic, Suite;
-                //         //     Caption = ' Savings Variations Send Back To CRM';
-                //         //     RunObject = Page "Savings Variations List";
-                //         //     RunPageLink = Status = filter(Open), "Sent Back to CRM" = const(true), "Variation Type" = filter(savings);
-                //         // }
-                //     }
-
-                // }
-                // group("Member Withdrawal")
-                // {
-                //     Caption = 'Member Withdrawal Notices';
-                //     group("Member Withdrawal Notice")
-                //     {
-                //         Caption = 'Member Withdrawal Notice';
-                //         action("Open Withdrawal Notice")
-                //         {
-                //             ApplicationArea = Basic, Suite;
-                //             caption = 'Open Withdrawal Notice';
-                //             RunObject = page "Open Withdrawal Notice";
-                //             RunPageLink = "Sent Back to CRM" = const(false);
-                //         }
-                //         action("Pending Withdrawal Notice")
-                //         {
-                //             ApplicationArea = Basic, Suite;
-                //             caption = 'Pending Withdrawal Notice';
-                //             RunObject = page "Pending Withdrawal Notice";
-                //         }
-                //         action("Approved Withdrawal Notice")
-                //         {
-                //             ApplicationArea = Basic, Suite;
-                //             caption = 'Approved Withdrawal Notice';
-                //             RunObject = page "Approved Withdrawal Notice";
-                //         }
-                //         action("Processed Withdrawal Notice")
-                //         {
-                //             ApplicationArea = Basic, Suite;
-                //             caption = 'Processed Withdrawal Notice';
-                //             RunObject = page "Processed WithDrawal Notices";
-                //         }
-                //         action("Rejected Withdrawal Notice")
-                //         {
-                //             ApplicationArea = Basic, Suite;
-                //             caption = 'Rejected Withdrawal Notice';
-                //             RunObject = page "Rejected Withdrawal Notice";
-                //         }
-                //         action("Cancelled/Archived Notices")
-                //         {
-                //             ApplicationArea = Basic, Suite;
-                //             Caption = 'Cancelled/Archived Withdrawal List';
-                //             RunObject = Page "Cancelled/Archived withdrawal";
-                //         }
-                //         // action("Notices Sent Back To CRM")
-                //         // {
-                //         //     ApplicationArea = Basic, Suite;
-                //         //     Caption = 'Notices Sent Back To CRM';
-                //         //     RunObject = Page "Open withdrawal Notice";
-                //         //     RunPageView = where(Status = const(open), "Sent Back to CRM" = const(true));
-                //         // }
-
-                //         action("Notices Return to CRM")
-                //         {
-                //             ApplicationArea = all;
-                //             Caption = 'Notices Return To CRM';
-                //             RunObject = page "Member withdrawals Return";
-                //             RunPageLink = "Sent Back to CRM" = const(true);
-                //         }
-                //         action("Withdrawal Notice List All")
-                //         {
-                //             ApplicationArea = all;
-                //             RunObject = page "Member Withdrawal Notices ALL";
-                //             //Run
-                //         }
-
-                //     }
-                // }
-                // group("Member CLosure")
-                // {
-
-                //     Caption = 'Member Closure';
-                //     action("Open Closure List")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         caption = 'Open Closure List';
-                //         RunObject = page "Open Closure List";
-                //     }
-                //     action(ClosureListAll)
-                //     {
-                //         ApplicationArea = all;
-                //         Caption = 'Member Closure List All';
-                //         RunObject = page "Member Closure List All";
-                //     }
-                // }
-                // group("Risk Claims")
-                // {
-                //     action("Risk Claim List")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         Caption = 'Risk Claim List';
-                //         RunObject = Page "Risk Claim List";
-
-                //     }
-                // }
-
-                // group("Moratorium Loan")
-                // {
-                //     Caption = 'Moratorium Loan';
-                //     action("Open Moratorim Loan List")
-                //     {
-                //         ApplicationArea = all;
-                //         Caption = 'Open Moratorium Loan List';
-                //         RunObject = page "Moratorium Loan List";
-                //         RunPageLink = Status = filter(Open);
-                //     }
-                //     action("Pending Moratorim Loan List")
-                //     {
-                //         ApplicationArea = all;
-                //         Caption = 'Pending Moratorium Loan List';
-                //         RunObject = page "Moratorium Loan List";
-                //         RunPageLink = Status = filter(Pending);
-                //     }
-                //     action("Approved Moratorium Loan List")
-                //     {
-                //         ApplicationArea = all;
-                //         Caption = 'Approved Moratorium Loan List';
-                //         RunObject = page "Moratorium Loan List";
-                //         RunPageLink = Status = filter(Approved), Processed = const(false);
-                //     }
-                //     action("Processed Moratorium Loans")
-                //     {
-                //         ApplicationArea = all;
-                //         Caption = 'Processed Moratorium Loans';
-                //         RunObject = page "Moratorium Loan List";
-                //         RunPageLink = Status = filter(Approved), Processed = const(true);
-                //     }
-                // }
-
+                
 
                 group("Standing Orders")
                 {
@@ -881,47 +697,7 @@ page 52187312 "Credit Management Role Center"
                         }
                     }
                 }
-                // group("DMU Case Forwarding;")
-                // {
-                //     action("Unforwarded Cases")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         RunObject = page "Unforwarded Cases";
-                //     }
-                //     action("Forwarded Cases")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         RunObject = page "Forwarded Cases";
-                //     }
-                //     action("Received Cases")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         RunObject = page "Received Cases";
-                //     }
-                //     action("Actioned Cases")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         RunObject = page "Actioned Cases";
-                //     }
-                // }
-
-                // group("MKey Case Forwarding;")
-                // {
-
-                //     action("Mkey Received Cases")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         RunObject = page "MKey Received Cases";
-                //         RunPageView = where("Case Closed" = const(false));
-                //     }
-                //     action("Mkey Actioned Cases")
-                //     {
-                //         ApplicationArea = Basic, Suite;
-                //         RunObject = page "MKey Received Cases";
-                //         RunPageView = where("Case Closed" = const(true));
-
-                //     }
-                // }
+              
                 group("Withheld Funds")
                 {
 
@@ -2855,13 +2631,13 @@ page 52187312 "Credit Management Role Center"
                         Caption = 'Rejection Reasons';
                         RunObject = page "Exceptions/ Rejection Reason";
                     }
-                    action("Present Officers")
-                    {
-                        ApplicationArea = All;
-                        Caption = 'Present Officers Setups';
-                        RunObject = page "Present Users";
+                    // action("Present Officers")
+                    // {
+                    //     ApplicationArea = All;
+                    //     Caption = 'Present Officers Setups';
+                    //     RunObject = page "Present Users";
 
-                    }
+                    // }
 
                 }
                 group("Credit Mngt.")
