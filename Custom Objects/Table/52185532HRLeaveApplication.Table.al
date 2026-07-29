@@ -141,6 +141,9 @@ table 52185532 "HR Leave Application"
                     "Time Posted" := Time;
                     Rec.Modify(true);
 
+                    SendApprovalEmailToApplicant();
+                    SendApprovalEmailToReliever();
+
                 end;
 
 
@@ -1147,6 +1150,69 @@ table 52185532 "HR Leave Application"
     begin
         CalcFields("Days Reimbursed");
         Modify();
+    end;
+
+    local procedure SendApprovalEmailToApplicant()
+    var
+        HREmp: Record "HR Employees";
+        EmailMsg: Codeunit "Email Message";
+        Email: Codeunit Email;
+        EmailBody: Text;
+    begin
+        if not HREmp.Get("Applicant Staff No.") then
+            exit;
+        if HREmp."E-Mail" = '' then
+            exit;
+
+        EmailBody := '<html><body>';
+        EmailBody += '<p>Dear <b>' + Names + '</b>,</p>';
+        EmailBody += '<p>Your leave application has been approved.</p>';
+        EmailBody += '<ul>';
+        EmailBody += '<li><b>Application No:</b> ' + "Application Code" + '</li>';
+        EmailBody += '<li><b>Leave Type:</b> ' + "Leave Type" + '</li>';
+        EmailBody += '<li><b>Start Date:</b> ' + Format("Start Date") + '</li>';
+        EmailBody += '<li><b>End Date:</b> ' + Format("End Date") + '</li>';
+        EmailBody += '<li><b>Days Approved:</b> ' + Format("Days Applied") + '</li>';
+        EmailBody += '<li><b>Return Date:</b> ' + Format("Return Date") + '</li>';
+        EmailBody += '</ul>';
+        EmailBody += '<p>Please ensure your reliever is informed and work is handed over before your leave commences.</p>';
+        EmailBody += '<p><i>This is an automated notification from HR Leave Management System.</i></p>';
+        EmailBody += '</body></html>';
+
+        EmailMsg.Create(HREmp."E-Mail", 'Leave Application Approved', EmailBody, true);
+        Email.Send(EmailMsg, Enum::"Email Scenario"::Default);
+    end;
+
+    local procedure SendApprovalEmailToReliever()
+    var
+        HREmp: Record "HR Employees";
+        EmailMsg: Codeunit "Email Message";
+        Email: Codeunit Email;
+        EmailBody: Text;
+    begin
+        if Reliever = '' then
+            exit;
+        if not HREmp.Get(Reliever) then
+            exit;
+        if HREmp."E-Mail" = '' then
+            exit;
+
+        EmailBody := '<html><body>';
+        EmailBody += '<p>Dear <b>' + "Reliever Name" + '</b>,</p>';
+        EmailBody += '<p>You have been assigned as a reliever for <b>' + Names + '</b> during their approved leave.</p>';
+        EmailBody += '<ul>';
+        EmailBody += '<li><b>Employee:</b> ' + Names + '</li>';
+        EmailBody += '<li><b>Leave Type:</b> ' + "Leave Type" + '</li>';
+        EmailBody += '<li><b>Start Date:</b> ' + Format("Start Date") + '</li>';
+        EmailBody += '<li><b>End Date:</b> ' + Format("End Date") + '</li>';
+        EmailBody += '<li><b>Return Date:</b> ' + Format("Return Date") + '</li>';
+        EmailBody += '</ul>';
+        EmailBody += '<p>Please ensure you are available to cover the responsibilities during this period.</p>';
+        EmailBody += '<p><i>This is an automated notification from HR Leave Management System.</i></p>';
+        EmailBody += '</body></html>';
+
+        EmailMsg.Create(HREmp."E-Mail", 'Leave Reliever Assignment', EmailBody, true);
+        Email.Send(EmailMsg, Enum::"Email Scenario"::Default);
     end;
 
 }
