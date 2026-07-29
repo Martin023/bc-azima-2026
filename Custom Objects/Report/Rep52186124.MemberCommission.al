@@ -137,6 +137,28 @@ report 52186124 "Member Commission"
 
                     until Members.Next() = 0;
                 end;
+
+                Loans.Reset();
+                Loans.SetRange("Sales Agent", "Marketing Teams Header"."Payroll No.");
+                Loans.SetRange(Posted, true);
+                if Loans.findset() then begin
+                    repeat
+                        CreditLedgerEntr.reset();
+                        CreditLedgerEntr.SetRange("Loan No", Loans."Loan No.");
+                        CreditLedgerEntr.SetRange(Reversed, false);
+                        CreditLedgerEntr.setrange("Posting Date", StartDate, Enddate);
+                        CreditLedgerEntr.SetFilter("Transaction Type", '%1|%2', CreditLedgerEntr."Transaction Type"::Repayment, CreditLedgerEntr."Transaction Type"::"Interest Paid");
+                        if CreditLedgerEntr.findset()
+                        then begin
+                            repeat
+                            // case
+
+                            // end;
+                            until CreditLedgerEntr.Next() = 0;
+                        end;
+                    until Loans.Next() = 0;
+                end;
+
                 CommsionSetup.Reset();
                 CommsionSetup.SetRange(Type, CommsionSetup.type::Commission);
                 CommsionSetup.SetRange("Commission Type", CommsionSetup."Commission Type"::"Member Recruitment");
@@ -238,5 +260,6 @@ report 52186124 "Member Commission"
         Loans: record Loans;
         CommsionSetup: record "Transaction Types";
         commsionlines: record "Transaction Charges";
+        CreditLedgerEntr: record "Credit Ledger Entry";
 
 }

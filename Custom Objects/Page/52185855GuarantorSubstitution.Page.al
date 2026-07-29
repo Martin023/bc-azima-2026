@@ -172,6 +172,7 @@ page 52185855 "Guarantor Substitution"
                         LNGr: Record "Loan Guarantors and Security";
                         LoanRec: Record Loans;
                         AppraisaComme: Record "Loan Appraisal Comments";
+                        SavAcc: record "Savings Accounts";
                     begin
                         if Rec.Status <> Rec.Status::Approved then
                             Error(DocMustbeApproved);
@@ -213,55 +214,58 @@ page 52185855 "Guarantor Substitution"
                                 Lguarantors.SetRange(Lguarantors."Loan No", Lguarant."Loan No");
                                 Lguarantors.SetRange(Lguarantors."Savings Account No./Member No.", Lguarant."Member Substituted");
                                 if not Lguarantors.Find('-') then begin
-                                    Lguarantors.Init;
-                                    Lguarantors."Loan No" := Lguarant."Loan No";
-                                    Lguarantors."Guarantor Type" := Lguarant."Guarantor Type";
-                                    Lguarantors."Staff/Payroll No." := Lguarant."Staff/Payroll No.";
-                                    Lguarantors."Collateral Reg. No." := Lguarant."Collateral Reg. No.";
-                                    Lguarantors."Collateral Value" := Lguarant."Collateral Value";
-                                    Lguarantors."Member No" := Lguarant."Member No";
-                                    Lguarantors."Amount Guaranteed" := Lguarant."Proportion Guaranteed";
-                                    Lguarantors."Savings Account No./Member No." := Lguarant."Savings Account No.";
-                                    Lguarantors.Name := Lguarant.Name;
-                                    Lguarantors."Amount Guaranteed" := Lguarant."Amount Guaranteed";
-                                    Lguarantors."Loan Balance" := Lguarant."Loan Balance";
-                                    Lguarantors."Deposits/Shares" := Lguarant.Shares;
-                                    Lguarantors."Account No." := Lguarant."Member No";
-                                    Lguarantors.Substituted := false;
-                                    Lguarantors.PercentageGur := Lguarant.PercentageGur;
-                                    Lguarantors."ID No." := Lguarant."ID No.";
-                                    Lguarantors."Member Substituted" := Lguarant."Member Substituted";
-                                    Lguarantors."Loanee Name" := Rec.Name;
+                                    if SavAcc.get(Lguarant."Member Substituted") then begin
+                                        SavAcc.CalcFields(Balance);
+                                        Lguarantors.Init;
+                                        Lguarantors."Loan No" := Lguarant."Loan No";
+                                        Lguarantors."Guarantor Type" := Lguarant."Incoming Guar Type";
+                                        Lguarantors."Staff/Payroll No." := SavAcc."Payroll/Staff No.";
+                                        Lguarantors."Collateral Reg. No." := Lguarant."Collateral Reg. No.";
+                                        Lguarantors."Collateral Value" := Lguarant."Collateral Value";
+                                        Lguarantors."Member No" := SavAcc."Member No.";
+                                        Lguarantors."Amount Guaranteed" := Lguarant."Proportion Guaranteed";
+                                        Lguarantors."Savings Account No./Member No." := Lguarant."Member Substituted";
+                                        Lguarantors.Name := SavAcc.Name;
+                                        Lguarantors."Amount Guaranteed" := Lguarant."Amount Guaranteed";
+                                        Lguarantors."Loan Balance" := Lguarant."Loan Balance";
+                                        Lguarantors."Deposits/Shares" := SavAcc.Balance;
+                                        Lguarantors."Account No." := SavAcc."Member No.";
+                                        Lguarantors.Substituted := false;
+                                        Lguarantors.PercentageGur := Lguarant.PercentageGur;
+                                        Lguarantors."ID No." := SavAcc."ID No.";
+                                        Lguarantors."Member Substituted" := Lguarant."Savings Account No.";
+                                        Lguarantors."Loanee Name" := Lguarant.Name;
 
-                                    SecuritiesRegister.RESET;
-                                    SecuritiesRegister.SetRange("Loan No.", Lguarant."Loan No");
-                                    if SecuritiesRegister.Find('-') then begin
-                                        repeat
-                                            SecuritiesRegister."Collateral Substituted" := Lguarant.Substituted;
-                                            SecuritiesRegister.MODIFY;
-                                        until SecuritiesRegister.NEXT = 0;
+                                        SecuritiesRegister.RESET;
+                                        SecuritiesRegister.SetRange("Loan No.", Lguarant."Loan No");
+                                        if SecuritiesRegister.Find('-') then begin
+                                            repeat
+                                                SecuritiesRegister."Collateral Substituted" := Lguarant.Substituted;
+                                                SecuritiesRegister.MODIFY;
+                                            until SecuritiesRegister.NEXT = 0;
+                                        end;
+
+                                        //^^SMS
+
+                                        // if Members.Get(Lguarant."Member No") then begin
+                                        //     if Loan.Get(Rec."Loan No.") then
+                                        //         Loan.CalcFields("Outstanding Balance");
+                                        //     CompInfo.Get;
+
+                                        //     // msg := 'Dear Member, You have guaranteed  ' + Rec.Name + ' ' + Loan."Loan Product Type Name" + ' Loan of ' + Format(Loan."Outstanding Balance") +
+                                        //     // // '. If in dispute call';
+                                        //     //                                     msg := 'Dear Member, You are a guarantor for ' + Rec.Name + ' on a ' + Loan."Loan Product Type Name" + '  with an outstanding balance of ' + Format(Loan."Outstanding Balance") +
+                                        //     //    '. If you have any concerns, please contact us.';
+
+
+                                        //     //                                     SendSMS.SendSms(Source::LOAN_GUARANTORS, Members."Phone No.", msg, Format(Loan."Disbursement Account No"), '', true, 0, false, 'CBS', Loan."Disbursement Account No", 'CBS');
+                                        // end;
+                                        //SMS
+                                        Lguarantors."SMS Sent" := true;
+                                        ;
+
+                                        Lguarantors.Insert;
                                     end;
-
-                                    //^^SMS
-
-                                    if Members.Get(Lguarant."Member No") then begin
-                                        if Loan.Get(Rec."Loan No.") then
-                                            Loan.CalcFields("Outstanding Balance");
-                                        CompInfo.Get;
-
-                                        // msg := 'Dear Member, You have guaranteed  ' + Rec.Name + ' ' + Loan."Loan Product Type Name" + ' Loan of ' + Format(Loan."Outstanding Balance") +
-                                        // // '. If in dispute call';
-                                        //                                     msg := 'Dear Member, You are a guarantor for ' + Rec.Name + ' on a ' + Loan."Loan Product Type Name" + '  with an outstanding balance of ' + Format(Loan."Outstanding Balance") +
-                                        //    '. If you have any concerns, please contact us.';
-
-
-                                        //                                     SendSMS.SendSms(Source::LOAN_GUARANTORS, Members."Phone No.", msg, Format(Loan."Disbursement Account No"), '', true, 0, false, 'CBS', Loan."Disbursement Account No", 'CBS');
-                                    end;
-                                    //SMS
-                                    Lguarantors."SMS Sent" := true;
-                                    ;
-
-                                    Lguarantors.Insert;
                                 end;
 
                             until Lguarant.Next = 0;
