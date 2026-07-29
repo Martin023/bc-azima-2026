@@ -95,10 +95,10 @@ page 52186182 "General Setup"
                 {
                     ApplicationArea = all;
                 }
-                field("Board Salaries Account"; Rec."Board Salaries Account")
-                {
-                    ApplicationArea = all;
-                }
+                // field("Board Salaries Account"; Rec."Board Salaries Account")
+                // {
+                //     ApplicationArea = all;
+                // }
                 field("External STO Account No."; rec."External STO Account No.")
                 {
                     ApplicationArea = Basic;
@@ -391,22 +391,22 @@ page 52186182 "General Setup"
                 {
                     ApplicationArea = Basic;
                 }
-                field("KMRC Rate"; rec."KMRC Rate")
-                {
-                    ApplicationArea = Basic;
-                }
+                // field("KMRC Rate"; rec."KMRC Rate")
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field("FOSA Minimum"; Rec."FOSA Minimum")
                 {
                     ApplicationArea = Basic;
                 }
-                field("Mortgage Loan Vendor A/C"; rec."Mortgage Loan Vendor A/C")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Shamba Loan Vendor A/C"; rec."Shamba Loan Vendor A/C")
-                {
-                    ApplicationArea = Basic;
-                }
+                // field("Mortgage Loan Vendor A/C"; rec."Mortgage Loan Vendor A/C")
+                // {
+                //     ApplicationArea = Basic;
+                // }
+                // field("Shamba Loan Vendor A/C"; rec."Shamba Loan Vendor A/C")
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field("Mortgage FOSA Min Balance"; rec."Mortgage FOSA Min Balance")
                 {
                     ApplicationArea = Basic;
@@ -454,84 +454,84 @@ page 52186182 "General Setup"
                 {
                     ApplicationArea = Basic;
                 }
-                field("ATM Card No Characters"; rec."ATM Card No Characters")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("POS Bank Account"; rec."POS Bank Account")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("ATM Settlement Account"; rec."ATM Settlement Account")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("VISA Settlement Account"; rec."VISA Settlement Account")
-                {
-                    ApplicationArea = Basic;
-                }
+                // field("ATM Card No Characters"; rec."ATM Card No Characters")
+                // {
+                //     ApplicationArea = Basic;
+                // }
+                // field("POS Bank Account"; rec."POS Bank Account")
+                // {
+                //     ApplicationArea = Basic;
+                // }
+                // field("ATM Settlement Account"; rec."ATM Settlement Account")
+                // {
+                //     ApplicationArea = Basic;
+                // }
+                // field("VISA Settlement Account"; rec."VISA Settlement Account")
+                // {
+                //     ApplicationArea = Basic;
+                // }
                 field("Minimum Leaf Limit"; rec."Minimum Leaf Limit")
                 {
                     ApplicationArea = Basic;
                     Caption = 'Minimum Leaf Limit Bankers Cheque';
                 }
             }
-            group("BDE Setup")
-            {
-                Caption = 'BDE Setup';
-                field("BDE Loan Comission"; rec."BDE Loan Comission")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("BDE Loan Above Target"; rec."BDE Loan Above Target")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("BDE ATM Comission"; rec."BDE ATM Comission")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("BDE New Member Comission"; rec."BDE New Member Comission")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("BDE Salary Account Commision"; rec."BDE Salary Account Commision")
-                {
-                    ApplicationArea = Basic;
-                }
-            }
-            group("Ageny Banking")
-            {
-                Caption = 'Ageny Banking';
-                field("Agency No Series"; rec."Agency No Series")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Agency Control Account"; rec."Agency Control Account")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Agency Expense Account"; rec."Agency Expense Account")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Agency Posting Template"; rec."Agency Posting Template")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Agency Posting Batch"; rec."Agency Posting Batch")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Sacco Commission Account"; rec."Sacco Commission Account")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("Vendor Commission Account"; rec."Vendor Commission Account")
-                {
-                    ApplicationArea = Basic;
-                }
-            }
+            // group("BDE Setup")
+            // {
+            //     Caption = 'BDE Setup';
+            //     field("BDE Loan Comission"; rec."BDE Loan Comission")
+            //     {
+            //         ApplicationArea = Basic;
+            //     }
+            //     field("BDE Loan Above Target"; rec."BDE Loan Above Target")
+            //     {
+            //         ApplicationArea = Basic;
+            //     }
+            //     field("BDE ATM Comission"; rec."BDE ATM Comission")
+            //     {
+            //         ApplicationArea = Basic;
+            //     }
+            //     field("BDE New Member Comission"; rec."BDE New Member Comission")
+            //     {
+            //         ApplicationArea = Basic;
+            //     }
+            //     field("BDE Salary Account Commision"; rec."BDE Salary Account Commision")
+            //     {
+            //         ApplicationArea = Basic;
+            //     }
+            // }
+            // group("Ageny Banking")
+            // {
+            //     Caption = 'Ageny Banking';
+            //     field("Agency No Series"; rec."Agency No Series")
+            //     {
+            //         ApplicationArea = Basic;
+            //     }
+            //     field("Agency Control Account"; rec."Agency Control Account")
+            //     {
+            //         ApplicationArea = Basic;
+            //     }
+            //     field("Agency Expense Account"; rec."Agency Expense Account")
+            //     {
+            //         ApplicationArea = Basic;
+            //     }
+            //     field("Agency Posting Template"; rec."Agency Posting Template")
+            //     {
+            //         ApplicationArea = Basic;
+            //     }
+            //     field("Agency Posting Batch"; rec."Agency Posting Batch")
+            //     {
+            //         ApplicationArea = Basic;
+            //     }
+            //     field("Sacco Commission Account"; rec."Sacco Commission Account")
+            //     {
+            //         ApplicationArea = Basic;
+            //     }
+            //     field("Vendor Commission Account"; rec."Vendor Commission Account")
+            //     {
+            //         ApplicationArea = Basic;
+            //     }
+            // }
             group("Store Requisition")
             {
                 Caption = 'Store Requisition';
@@ -562,26 +562,26 @@ page 52186182 "General Setup"
                     ApplicationArea = Basic;
                 }
             }
-            group("NCBA Setup")
-            {
-                field("NCBA Account Type"; Rec."NCBA Account Type")
-                {
-                    ApplicationArea = Basic;
-                }
-                field("NCBA Account No"; Rec."NCBA Account No")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("NCBA Account Name"; Rec."NCBA Account Name")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = false;
-                }
-                field("NCBA Transaction Type"; Rec."NCBA Transaction Type")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-            }
+            // group("NCBA Setup")
+            // {
+            //     field("NCBA Account Type"; Rec."NCBA Account Type")
+            //     {
+            //         ApplicationArea = Basic;
+            //     }
+            //     field("NCBA Account No"; Rec."NCBA Account No")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //     }
+            //     field("NCBA Account Name"; Rec."NCBA Account Name")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //         Editable = false;
+            //     }
+            //     field("NCBA Transaction Type"; Rec."NCBA Transaction Type")
+            //     {
+            //         ApplicationArea = Basic, Suite;
+            //     }
+            // }
 
         }
     }

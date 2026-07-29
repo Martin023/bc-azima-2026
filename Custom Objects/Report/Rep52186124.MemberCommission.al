@@ -108,6 +108,20 @@ report 52186124 "Member Commission"
                 Members.SetRange("Recruited By", "Marketing Teams Header"."Payroll No.");
                 if Members.FindSet() then begin
                     repeat
+                    Members.CalcFields("FOSA Savings","BOSA Deposit","Share Capital");
+                    if MemberClass.get(Members."Member Class") then begin
+                        ProductSetUp.reset;
+                        ProductSetUp.SetRange("Product ID",'191');
+                        if ProductSetUp.FindFirst() then
+                            FosaMinBal := ProductSetUp."Minimum Balance";
+
+                        if (Members."BOSA Deposit" < MemberClass."Default BOSA Deposit")
+                            and (Members."Share Capital" < MemberClass."Default Share Capital")
+                                and (Members."FOSA Savings" < FosaMinBal) then
+                                    CurrReport.skip;
+
+                    end else CurrReport.skip;
+                        
                         RecrutedMembers += 1;
 
                         SavingsAccount.Reset();
@@ -141,21 +155,48 @@ report 52186124 "Member Commission"
                 Loans.Reset();
                 Loans.SetRange("Sales Agent", "Marketing Teams Header"."Payroll No.");
                 Loans.SetRange(Posted, true);
-                if Loans.findset() then begin
+                if Loans.FindSet() then begin
                     repeat
-                        CreditLedgerEntr.reset();
+                        CreditLedgerEntr.Reset();
                         CreditLedgerEntr.SetRange("Loan No", Loans."Loan No.");
                         CreditLedgerEntr.SetRange(Reversed, false);
-                        CreditLedgerEntr.setrange("Posting Date", StartDate, Enddate);
-                        CreditLedgerEntr.SetFilter("Transaction Type", '%1|%2', CreditLedgerEntr."Transaction Type"::Repayment, CreditLedgerEntr."Transaction Type"::"Interest Paid");
-                        if CreditLedgerEntr.findset()
-                        then begin
-                            repeat
-                            // case
+                        CreditLedgerEntr.setrange("Transaction Type", CreditLedgerEntr."Transaction Type"::"Interest Paid");
+                        CreditLedgerEntr.SetCurrentKey("Entry No.");
+                        creditledgerEntr.SetAscending("Entry No.",true);
+                        if CreditLedgerEntr.findfirst() then
+                            begin
+                                if CreditLedgerEntr."Posting Date" in [Startdate..Enddate] then
+                                    begin
+                                        CreditLedgerEntr2.reset;
+                                        CreditLedgerEntr2.SetRange("Document No.",CreditLedgerEntr."Document No.");
+                                        if CreditLedgerEntr2.FindSet() then begin
+                                            Clear(TotalRepaymentAmount);
+                                            Clear(InterestPaidOnLoans);
+                                            repeat
+                                                case CreditLedgerEntr2."Transaction Type" of
+                                                    CreditLedgerEntr2."Transaction Type"::Repayment:
+                                                        TotalRepaymentAmount += CreditLedgerEntr2.Amount;
+                                                    CreditLedgerEntr2."Transaction Type"::"Interest Paid":
+                                                        InterestPaidOnLoans += CreditLedgerEntr2.Amount;
+                                                end;
+                                            until CreditLedgerEntr2.Next() = 0;
 
-                            // end;
-                            until CreditLedgerEntr.Next() = 0;
-                        end;
+                                            if (TotalRepaymentAmount + InterestPaidOnLoans) >= Loans.Repayment then begin
+                                                CommsionSetup.Reset();
+                                                CommsionSetup.SetRange(Type, CommsionSetup.Type::Commission);
+                                                CommsionSetup.SetRange("Commission Type", CommsionSetup."Commission Type"::"Interest Paid");
+                                                if CommsionSetup.FindFirst() then begin
+                                                    CommsionLines.Reset();
+                                                    CommsionLines.SetRange("Transaction Type", CommsionSetup.Code);
+                                                    if CommsionLines.FindFirst() then
+                                                        CommissionOnIntPaid += CommsionLines."Percentage of Amount" * InterestPaidOnLoans / 100;
+                                                end;
+                                            end;
+                                        end;
+                                    end;
+                                                     
+                                end;
+                       
                     until Loans.Next() = 0;
                 end;
 
@@ -174,7 +215,7 @@ report 52186124 "Member Commission"
                     end;
                 end;
 
-                AggregateCommission := CommissionOnNewMembers;
+                AggregateCommission := CommissionOnNewMembers+CommissionOnIntPaid+retainer;;
             end;
         }
 
@@ -261,5 +302,9 @@ report 52186124 "Member Commission"
         CommsionSetup: record "Transaction Types";
         commsionlines: record "Transaction Charges";
         CreditLedgerEntr: record "Credit Ledger Entry";
-
+        MemberClass: record "Member Classes";
+        ProductSetUp: record "Product Factory";
+        FosaMinBal : Decimal;
+        TotalRepaymentAmount : Decimal;
+        CreditLedgerEntr2: record "Credit Ledger Entry";
 }

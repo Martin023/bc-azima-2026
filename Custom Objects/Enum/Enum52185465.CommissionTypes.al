@@ -20,4 +20,8 @@ enum 52185465 "Commission Types"
     {
         Caption = 'Loans Disbursed';
     }
+    value(4; "Interest Paid")
+    {
+        Caption = 'Interest Paid';
+    }
 }
