@@ -1,5 +1,6 @@
 namespace MNS.MNS;
 using Microsoft.Foundation.Company;
+using Microsoft.Sales.Customer;
 
 report 52186124 "Member Commission"
 {
@@ -71,6 +72,7 @@ report 52186124 "Member Commission"
             column(CommsionOnHoliday; CommsionOnHoliday) { }
             column(Retainer; "Marketing Teams Header".Retainer) { }
             column(AggregateCommission; AggregateCommission) { }
+            column(CommissionOnCheckOff; CommissionOnCheckOff) { }
             trigger OnAfterGetRecord()
             begin
                 RecrutedMembers := 0;
@@ -99,6 +101,9 @@ report 52186124 "Member Commission"
                 HolidayTotal := 0;
                 CommsionOnHoliday := 0;
                 AggregateCommission := 0;
+                EmployersRecruited := 0;
+                CommissionOnCheckOff := 0;
+
                 Members.reset;
                 Members.SetLoadFields("No.", "Phone No.", Name, "Recruited By", "Member Class", "Registration Date", "Rejoinig Date");
                 // if (StartDate <> 0D) then
@@ -153,7 +158,7 @@ report 52186124 "Member Commission"
                 end;
 
                 Loans.Reset();
-                Loans.SetRange("Sales Agent", "Marketing Teams Header"."Payroll No.");
+                Loans.SetRange("Relation Officer", "Marketing Teams Header"."Payroll No.");
                 Loans.SetRange(Posted, true);
                 if Loans.FindSet() then begin
                     repeat
@@ -214,8 +219,27 @@ report 52186124 "Member Commission"
                         until commsionlines.Next() = 0;
                     end;
                 end;
-
-                AggregateCommission := CommissionOnNewMembers+CommissionOnIntPaid+retainer;
+                
+                Customers.reset;
+                Customers.SetRange("Responsible Employee Name","Marketing Teams Header"."Payroll No.");
+                Customers.SetLoadFields(Name,"Account Type");
+                Customers.SetRange("Account Type",Customers."Account Type"::Employer);
+                if Customers.FindSet() then begin
+                    repeat
+                        EmployersRecruited +=1;
+                    until Customers.Next() = 0;
+                end;
+                CommsionSetup.Reset();
+                CommsionSetup.SetRange(Type, CommsionSetup.type::Commission);
+                CommsionSetup.SetRange("Commission Type", CommsionSetup."Commission Type"::CheckOff);
+                if CommsionSetup.findfirst() then begin
+                    commsionlines.reset;
+                    commsionlines.setrange("Transaction Type", CommsionSetup.Code);
+                    if commsionlines.FindFirst() then begin
+                        CommissionOnCheckOff += commsionlines."Charge Amount" * EmployersRecruited;
+                    end;
+                end;
+                AggregateCommission := CommissionOnNewMembers+CommissionOnIntPaid+retainer+CommissionOnCheckOff;
             end;
         }
 
@@ -307,4 +331,7 @@ report 52186124 "Member Commission"
         FosaMinBal : Decimal;
         TotalRepaymentAmount : Decimal;
         CreditLedgerEntr2: record "Credit Ledger Entry";
+        Customers : Record Customer;
+        EmployersRecruited : Integer; 
+        CommissionOnCheckOff : Decimal;
 }
