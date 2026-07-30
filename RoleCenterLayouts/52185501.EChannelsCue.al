@@ -49,20 +49,20 @@ page 52185501 "E-Channels Cue"
                     }
                 }
 
-                cuegroup(ATM)
-                {
-                    Caption = 'ATM';
-                    field("Pending ATM Transactions"; Rec."Pending ATM Transactions")
-                    {
-                        ApplicationArea = All;
-                        ToolTip = 'Specifies the value of the Pending ATM Transactions field.';
-                    }
-                    field("Posted ATM Transactions"; Rec."Posted ATM Transactions")
-                    {
-                        ApplicationArea = All;
-                        ToolTip = 'Specifies the value of the Posted ATM Transactions';
-                    }
-                }
+                // cuegroup(ATM)
+                // {
+                //     Caption = 'ATM';
+                //     field("Pending ATM Transactions"; Rec."Pending ATM Transactions")
+                //     {
+                //         ApplicationArea = All;
+                //         ToolTip = 'Specifies the value of the Pending ATM Transactions field.';
+                //     }
+                //     field("Posted ATM Transactions"; Rec."Posted ATM Transactions")
+                //     {
+                //         ApplicationArea = All;
+                //         ToolTip = 'Specifies the value of the Posted ATM Transactions';
+                //     }
+                // }
             }
             cuegroup("Loans")
             {

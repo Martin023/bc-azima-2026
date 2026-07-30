@@ -66,6 +66,7 @@ report 52185435 "Guarantor Substitution Report"
 
                 trigger OnAfterGetRecord()
                 begin
+                    IncGuarname := '';
                     if SavAcc.get("Loan Guarantors Sub"."Member Substituted") then
                         IncGuarname := SavAcc."Name";
                 end;
@@ -73,9 +74,8 @@ report 52185435 "Guarantor Substitution Report"
 
             trigger OnAfterGetRecord()
             begin
-                IncGuarname := '';
                 OutGoingGuarName := '';
-                if Members.Get(GuarantorsSubstitution."No.") then
+                if Members.Get(GuarantorsSubstitution."Member No.") then
                     OutGoingGuarName := Members.name;
             end;
 

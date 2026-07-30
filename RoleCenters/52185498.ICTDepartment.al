@@ -6015,12 +6015,12 @@ page 52187058 "ICT Department"
                 Caption = 'Customer Management Portal';
                 RunObject = codeunit "Customer Management Portal Url";
             }
-            action("NCBA Pension List")
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'NCBA Pension List';
-                RunObject = page "NCBA Pension List";
-            }
+            // action("NCBA Pension List")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Caption = 'NCBA Pension List';
+            //     RunObject = page "NCBA Pension List";
+            // }
         }
     }
 }

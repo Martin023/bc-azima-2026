@@ -5076,8 +5076,8 @@ Codeunit 52185470 "Periodic Activities"
             Loans.Validate(Loans.Repayment);
             Loans.Modify;
 
-            LoanRescheduling."New Amortised" := LInterest + LPrincipal;
-            LoanRescheduling.Modify;
+            // LoanRescheduling."New Amortised" := LInterest + LPrincipal;
+            // LoanRescheduling.Modify;
             Commit;
 
             LoansProcess.GenerateSchedule(Loans, true);
@@ -5092,6 +5092,7 @@ Codeunit 52185470 "Periodic Activities"
             Loans."Loan Rescheduled" := true;
             Loans.Repayment := LoanRescheduling."New Amortised";
             Loans.Modify;
+            LoanRescheduling."Rescheduled By" := userID;
             LoanRescheduling.Rescheduled := true;
             LoanRescheduling."Date Commited" := Today;
             LoanRescheduling.Modify;
