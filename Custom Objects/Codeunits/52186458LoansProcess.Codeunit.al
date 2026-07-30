@@ -6693,7 +6693,7 @@ Codeunit 52186458 "Loans Process"
 
                 // DaysInArrears += Round((round((AmountInArrearsSASRA / MonthlyPrinciple), 1, '<')) * 30, 1, '<');
             end else begin
-                AmountInArrearsSASRA := ActualTotalBal - IdealTotalBal - CurrMonthInt;
+                AmountInArrearsSASRA := ActualTotalBal - (IdealTotalBal + CurrMonthInt);
                 AmountInArrearsSACCO := AmountInArrearsSASRA;
                 //if MonthlyRepayment <> 0 then
                 //DaysInArrears += Round((AmountInArrearsSASRA / MonthlyRepayment) * 30, 1, '<'); Cyprian, commented to catch the divide by zero
@@ -6763,9 +6763,9 @@ Codeunit 52186458 "Loans Process"
 
             Loans."Loans Category-SASRA" := LoanCategoryStage(InstallInArrears);
             if Loans."Loans Category-SASRA" = Loans."Loans Category-SASRA"::Perfoming then begin
-                DaysInArrears := 0;
-                AmountInArrearsSACCO := 0;
-                AmountInArrearsSASRA := 0;
+                // DaysInArrears := 0;
+                // AmountInArrearsSACCO := 0;
+                // AmountInArrearsSASRA := 0;
                 InstallInArrears := 0;
             end;
             AmountInArrearsSACCO := round(AmountInArrearsSACCO, 0.01, '=');
