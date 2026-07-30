@@ -24,4 +24,8 @@ enum 52185465 "Commission Types"
     {
         Caption = 'Interest Paid';
     }
+    value(5; "CheckOff")
+    {
+        Caption = 'Checkoff';
+    }
 }
