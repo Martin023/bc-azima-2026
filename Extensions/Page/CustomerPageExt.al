@@ -96,25 +96,26 @@ pageextension 52187301 CustomerCardExtension extends "Customer Card"
                 ApplicationArea = All;
                 Caption = 'Digit Custodian';
             }
-            field("Responsible Employee"; Rec."Responsible Employee")
+            // field("Responsible Employee"; Rec."Responsible Employee")
+            // {
+            //     ApplicationArea = All;
+            //     Caption = 'Responsible Employee';
+            //     ToolTip = 'Responsible Employee';
+            //     Editable = not Rec."Digit Custodian";
+            // }
+            field("Responsible Employee Extension"; Rec."Responsible Employee Extension")
             {
                 ApplicationArea = All;
-                Caption = 'Responsible Employee';
-                ToolTip = 'Responsible Employee';
-                Editable = not Rec."Digit Custodian";
+                Caption = 'Relation Officer Type';
+                ToolTip = 'Relation Officer Type';
             }
             field("Responsible Employee Name"; Rec."Responsible Employee Name")
             {
                 ApplicationArea = All;
-                Caption = 'Responsible Employee Name';
-                ToolTip = 'Responsible Employee Name';
+                Caption = 'Relation Officer';
+                ToolTip = 'Relation Officer';
             }
-            field("Responsible Employee Extension"; Rec."Responsible Employee Extension")
-            {
-                ApplicationArea = All;
-                Caption = 'Responsible Employee Extension';
-                ToolTip = 'Responsible Employee Extension';
-            }
+            
 
         }
         addlast("Address & Contact")

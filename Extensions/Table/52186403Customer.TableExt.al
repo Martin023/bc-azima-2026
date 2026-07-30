@@ -230,29 +230,36 @@ TableExtension 52186403 tableextension52186403 extends Customer
         {
             Subtype = Bitmap;
         }
-        field(50045; "Responsible Employee"; Code[50])
+        // {field(50045; "Responsible Employee"; Code[50])
+        // {
+        //     TableRelation = "User Setup"."User ID";
+        //     // ValidateTableRelation = false;
+        //     trigger OnValidate()
+        //     var
+        //         myInt: Integer;
+        //     begin
+        //         UserSetup.Reset;
+        //         UserSetup.SetRange("User ID", Rec."Responsible Employee");
+        //         if UserSetup.FindFirst then begin
+        //             Rec."Responsible Employee Name" := UserSetup."Full Name";
+        //             Rec."Responsible Employee Extension" := UserSetup."Employee Extension No.";
+        //         end;
+        //     end;
+        // }
+        field(50046; "Responsible Employee Name"; Code[50])
         {
-            TableRelation = "User Setup"."User ID";
-            // ValidateTableRelation = false;
-            trigger OnValidate()
-            var
-                myInt: Integer;
-            begin
-                UserSetup.Reset;
-                UserSetup.SetRange("User ID", Rec."Responsible Employee");
-                if UserSetup.FindFirst then begin
-                    Rec."Responsible Employee Name" := UserSetup."Full Name";
-                    Rec."Responsible Employee Extension" := UserSetup."Employee Extension No.";
-                end;
-            end;
+            Editable = true;
+            NotBlank = true;
+            Caption = 'Relation Officer';
+            TableRelation = IF ("Responsible Employee Extension" = FILTER(BDE)) "Marketing Teams Header"."Payroll No."
+            ELSE
+            "HR Employees"."No.";
         }
-        field(50046; "Responsible Employee Name"; Text[250])
+        field(50047; "Responsible Employee Extension";Option)
         {
-            Editable = false;
-        }
-        field(50047; "Responsible Employee Extension"; Code[50])
-        {
-            Editable = false;
+            Caption = 'Relation Officer Type';
+            OptionCaption = 'Sales Representative,Others';
+            OptionMembers = BDE,Others;
         }
         field(50048; "No of Memmbers (Employer)"; Integer)
         {
@@ -277,8 +284,8 @@ TableExtension 52186403 tableextension52186403 extends Customer
             trigger OnValidate()
             begin
                 if Rec."Digit Custodian" then begin
-                    Rec."Responsible Employee Name" := '';
-                    Rec."Responsible Employee Extension" := '';
+                    // Rec."Responsible Employee Name" := '';
+                    // Rec."Responsible Employee Extension" := '';
                     rec.Modify();
                 end;
             end;
@@ -314,8 +321,6 @@ TableExtension 52186403 tableextension52186403 extends Customer
                 end;
             end;
         }
-
-
     }
 
     trigger OnBeforeInsert()
@@ -353,4 +358,5 @@ TableExtension 52186403 tableextension52186403 extends Customer
         CFStations: Record "CF Station Actions";
         Comments: Record Comments;
         Cust: Record Customer;
+        SalesPerson : Record "Salesperson/Purchaser";
 }
