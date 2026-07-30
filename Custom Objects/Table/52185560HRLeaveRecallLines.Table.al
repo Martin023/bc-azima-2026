@@ -407,35 +407,17 @@ table 52185560 "HR Leave Recall Lines"
 
     local procedure SendRecallNotificationEmail()
     var
-        HREmp: Record "HR Employees";
-        EmailMsg: Codeunit "Email Message";
-        Email: Codeunit Email;
-        EmailBody: Text;
-        Subject: Text;
+        Dispatcher: Codeunit "HR Email Dispatcher";
+        Vars: array[10] of Text;
     begin
-        if HREmp.Get("Employee No.") then begin
-            if HREmp."E-Mail" <> '' then begin
-                Subject := 'Leave Recall Notification';
-                EmailBody := '<html><body>';
-                EmailBody += '<p>Dear <b>' + "Employee Name" + '</b>,</p>';
-                EmailBody += '<p>You are hereby notified that you have been recalled from your approved leave.</p>';
-                EmailBody += '<p><b>Recall Details:</b></p>';
-                EmailBody += '<ul>';
-                EmailBody += '<li><b>Leave Application Code:</b> ' + "Leave Application Code" + '</li>';
-                EmailBody += '<li><b>Recall Date:</b> ' + Format("Recall Date") + '</li>';
-                EmailBody += '<li><b>Days Recalled:</b> ' + Format("Days Recalled") + '</li>';
-                EmailBody += '<li><b>Reason:</b> ' + Reason + '</li>';
-                EmailBody += '<li><b>Days Reimbursed:</b> ' + Format("Days Recalled") + ' day(s) have been added back to your leave balance</li>';
-                EmailBody += '</ul>';
-                EmailBody += '<p>Please ensure you report to work on the recall date(s).</p>';
-                EmailBody += '<p>Thank you.</p>';
-                EmailBody += '<p><i>This is an automated notification from HR Leave Management System.</i></p>';
-                EmailBody += '</body></html>';
-
-                EmailMsg.Create(HREmp."E-Mail", Subject, EmailBody, true);
-                Email.Send(EmailMsg, Enum::"Email Scenario"::Default);
-            end;
-        end;
+        // %1=EMPLOYEE NAME %2=LEAVE APP CODE %3=RECALL DATE %4=DAYS RECALLED %5=REASON %6=RECALL END DATE
+        Vars[1] := "Employee Name";
+        Vars[2] := "Leave Application Code";
+        Vars[3] := Format("Recall Date");
+        Vars[4] := Format("Days Recalled");
+        Vars[5] := Reason;
+        Vars[6] := Format("Recall End Date");
+        Dispatcher.Send('LEAVE-RECALL', 0, "Employee No.", "Leave Application Code", Vars);
     end;
 
     procedure RecalculateRecallSummary()
