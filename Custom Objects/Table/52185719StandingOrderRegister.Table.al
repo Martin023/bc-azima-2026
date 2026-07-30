@@ -5,7 +5,7 @@ table 52185719 "Standing Order Register"
 
     fields
     {
-        field(2; "No."; Code[10])
+        field(2; "No."; Code[20])
         {
 
             trigger OnValidate()

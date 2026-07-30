@@ -1880,11 +1880,11 @@ Codeunit 52185472 "PR Payroll Processing"
         prNewPayrollPeriods.Closed := false;
         prNewPayrollPeriods.Insert;
 
-        //Effect the transactions for the P9
-        fnP9PeriodClosure(intMonth, intYear, dtOpenPeriod);
+        // //Effect the transactions for the P9
+        // fnP9PeriodClosure(intMonth, intYear, dtOpenPeriod);
 
-        //Take all the Negative pay (Net) for the current month & treat it as a deduction in the new period
-        fnGetNegativePay(intMonth, intYear, dtOpenPeriod);
+        // //Take all the Negative pay (Net) for the current month & treat it as a deduction in the new period
+        // fnGetNegativePay(intMonth, intYear, dtOpenPeriod);
 
     end;
 

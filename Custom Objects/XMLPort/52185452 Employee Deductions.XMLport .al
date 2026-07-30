@@ -41,48 +41,48 @@ xmlport 52185552 earningsdeductions
                 {
                     FieldValidate = no;
                 }
-                fieldelement(h; "PR Employee Transactions".Balance)
-                {
-                    FieldValidate = no;
-                }
-                fieldelement(i; "PR Employee Transactions"."Original Amount")
-                {
-                    FieldValidate = no;
-                }
-                fieldelement(j; "PR Employee Transactions"."Stop for Next Period")
-                {
-                    FieldValidate = no;
-                }
-                fieldelement(k; "PR Employee Transactions"."Start Date")
-                {
-                    FieldValidate = no;
-                }
-                fieldelement(l; "PR Employee Transactions"."End Date")
-                {
-                    FieldValidate = no;
-                }
+                // fieldelement(h; "PR Employee Transactions".Balance)
+                // {
+                //     FieldValidate = no;
+                // }
+                // fieldelement(i; "PR Employee Transactions"."Original Amount")
+                // {
+                //     FieldValidate = no;
+                // }
+                // fieldelement(j; "PR Employee Transactions"."Stop for Next Period")
+                // {
+                //     FieldValidate = no;
+                // }
+                // fieldelement(k; "PR Employee Transactions"."Start Date")
+                // {
+                //     FieldValidate = no;
+                // }
+                // fieldelement(l; "PR Employee Transactions"."End Date")
+                // {
+                //     FieldValidate = no;
+                // }
 
-                fieldelement(m; "PR Employee Transactions"."Loan Number")
-                {
-                    FieldValidate = no;
-                }
-                fieldelement(n; "PR Employee Transactions"."Loan Interest Rate")
-                {
-                    FieldValidate = no;
-                }
-                fieldelement(o; "PR Employee Transactions"."Variated")
-                {
-                    FieldValidate = no;
-                }
-                fieldelement(p; "PR Employee Transactions"."Salary Grade")
-                {
-                    FieldValidate = no;
-                    MinOccurs=zero;
-                }
+                // fieldelement(m; "PR Employee Transactions"."Loan Number")
+                // {
+                //     FieldValidate = no;
+                // }
+                // fieldelement(n; "PR Employee Transactions"."Loan Interest Rate")
+                // {
+                //     FieldValidate = no;
+                // }
+                // fieldelement(o; "PR Employee Transactions"."Variated")
+                // {
+                //     FieldValidate = no;
+                // }
+                // fieldelement(p; "PR Employee Transactions"."Salary Grade")
+                // {
+                //     FieldValidate = no;
+                //     MinOccurs=zero;
+                // }
                 fieldelement(q; "PR Employee Transactions".Frequency)
                 {
                     FieldValidate = no;
-                    MinOccurs=zero;
+                    MinOccurs = zero;
                 }
 
 
