@@ -215,7 +215,7 @@ report 52186124 "Member Commission"
                     end;
                 end;
 
-                AggregateCommission := CommissionOnNewMembers+CommissionOnIntPaid+retainer;;
+                AggregateCommission := CommissionOnNewMembers+CommissionOnIntPaid+retainer;
             end;
         }
 
