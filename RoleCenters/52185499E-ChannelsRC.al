@@ -243,47 +243,47 @@ page 52185499 "E-Channels Role Center"
                 }
 
             }
-            group("ATM Banking")
-            {
-                Caption = 'ATM Banking';
+            // group("ATM Banking")
+            // {
+            //     Caption = 'ATM Banking';
 
-                action(AllATMTransactions)
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'All ATM Transactions';
-                    RunObject = Page "Sky ATM Transactions Buffer";
-                    RunPageView = where(
-                        "Posted" = const(true)
-                    );
-                }
-                action(PostedATM)
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Posted ATM Transactions';
-                    RunObject = Page "Sky ATM Transactions Buffer";
-                    RunPageView = where(
-                        "Posted" = const(true)
-                    );
-                }
-                action(UnpostedATM)
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Unposted ATM Transactions';
-                    RunObject = Page "Sky ATM Transactions Buffer";
-                    RunPageView = where(
-                        "Posted" = const(false)
-                    );
-                }
-                action(ReversalATM)
-                {
-                    ApplicationArea = Basic;
-                    Caption = 'Reversal ATM Transactions';
-                    RunObject = Page "Sky ATM Transactions Buffer";
-                    RunPageView = where(
-                        Reversed = Const(true)
-                    );
-                }
-            }
+            //     action(AllATMTransactions)
+            //     {
+            //         ApplicationArea = Basic;
+            //         Caption = 'All ATM Transactions';
+            //         RunObject = Page "Sky ATM Transactions Buffer";
+            //         RunPageView = where(
+            //             "Posted" = const(true)
+            //         );
+            //     }
+            //     action(PostedATM)
+            //     {
+            //         ApplicationArea = Basic;
+            //         Caption = 'Posted ATM Transactions';
+            //         RunObject = Page "Sky ATM Transactions Buffer";
+            //         RunPageView = where(
+            //             "Posted" = const(true)
+            //         );
+            //     }
+            //     action(UnpostedATM)
+            //     {
+            //         ApplicationArea = Basic;
+            //         Caption = 'Unposted ATM Transactions';
+            //         RunObject = Page "Sky ATM Transactions Buffer";
+            //         RunPageView = where(
+            //             "Posted" = const(false)
+            //         );
+            //     }
+            //     action(ReversalATM)
+            //     {
+            //         ApplicationArea = Basic;
+            //         Caption = 'Reversal ATM Transactions';
+            //         RunObject = Page "Sky ATM Transactions Buffer";
+            //         RunPageView = where(
+            //             Reversed = Const(true)
+            //         );
+            //     }
+            // }
             group(SMS)
             {
                 Caption = 'SMS';
@@ -344,12 +344,12 @@ page 52185499 "E-Channels Role Center"
                 Caption = 'Customer Management Portal';
                 RunObject = codeunit "Customer Management Portal Url";
             }
-            action("NCBA Pension List")
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'NCBA Pension List';
-                RunObject = page "NCBA Pension List";
-            }
+            // action("NCBA Pension List")
+            // {
+            //     ApplicationArea = Basic, Suite;
+            //     Caption = 'NCBA Pension List';
+            //     RunObject = page "NCBA Pension List";
+            // }
         }
     }
 
