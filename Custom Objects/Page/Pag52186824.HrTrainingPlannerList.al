@@ -48,6 +48,13 @@ page 52186824 "Hr Training Planner List"
                 {
                     
                 }
+                field("Estimated Cost"; Rec."Estimated Cost")
+                {
+                    ApplicationArea = All;
+                    Editable = false;
+                    Style = Strong;
+                    StyleExpr = true;
+                }
             }
         }
     }

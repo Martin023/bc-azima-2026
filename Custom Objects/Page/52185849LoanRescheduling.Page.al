@@ -175,7 +175,7 @@ page 52185849 "Loan Rescheduling"
                         //     REPORT.Run(Report::"Ideal Repayment Schedule", true, false, LoanSch);
                     end;
                 }
-                action("Preview Schedule")
+                action("Preview Old Schedule")
                 {
                     ApplicationArea = Basic, Suite;
                     Image = ReceivableBill;
@@ -213,7 +213,7 @@ page 52185849 "Loan Rescheduling"
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Send A&pproval Request';
-                    Enabled = SendAppEdi;
+                    // Enabled = SendAppEdi;
                     Image = SendApprovalRequest;
                     Promoted = true;
                     PromotedCategory = Category4;
@@ -257,6 +257,25 @@ page 52185849 "Loan Rescheduling"
                         CustomApprovals.OnCancelDocApprovalRequest(VarVariant);
                     end;
                 }
+                action(ReopenDocument)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Reopen Document';
+                    Enabled = CancelApp;
+                    Image = Cancel;
+                    Promoted = true;
+                    PromotedCategory = Category4;
+                    PromotedIsBig = true;
+
+                    trigger OnAction()
+                    var
+                    // // ApprovalsMgmt: Codeunit "Approvals Mgmt.";
+                    begin
+                        rec.TestField(Rescheduled, false);
+                        rec.Status := rec.Status::Open;
+                        rec.Modify;
+                    end;
+                }
                 action(Approvals)
                 {
                     ApplicationArea = Basic, Suite;
@@ -269,7 +288,6 @@ page 52185849 "Loan Rescheduling"
 
                     trigger OnAction()
                     var
-                        //// //ApprovalEntries: Page "Approval Entries";
                         ApprovalsMgmt: Codeunit "Approvals Mgmt.";
                     begin
                         ApprovalsMgmt.OpenApprovalEntriesPage(rec.RecordId);

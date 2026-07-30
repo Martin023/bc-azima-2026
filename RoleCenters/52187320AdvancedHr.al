@@ -318,113 +318,70 @@ page 52187320 AdvancedHumanResources
                 group("Training Management")
                 {
                     Caption = 'Training Management';
-                    group(HrTrainingMgt)
+
+                    action(HRTrainingNeeds)
                     {
-                        Caption = 'Training Management';
-                        action(HRTrainingNeeds)
-                        {
-                            Caption = 'Open Training Needs List';
-                            ApplicationArea = Basic, Suite;
-                            RunObject = Page "HR Training Needs List";
-                        }
-                        action(HRTrainingNeedRequests)
-                        {
-                            Caption = 'Training Need Requests - All';
-                            ApplicationArea = Basic, Suite;
-                            RunObject = Page "Training Need Requests - All";
-                        }
-
-                        action(HrTrainingApplications)
-                        {
-                            Caption = 'Training Applications List';
-                            ApplicationArea = Basic, Suite;
-                            RunObject = Page "HR Training ApplicationList";
-                        }
-                        group(Taskss)
-                        {
-                            Caption = 'Tasks';
-                            action(HRTrainingFeedBack)
-                            {
-                                Caption = 'Training FeedBack';
-                                ApplicationArea = Basic, Suite;
-                                RunObject = Page "Training Evaluation";
-                            }
-                            action(HRTrainingPlanner)
-                            {
-                                Caption = 'Training Planner List';
-                                ApplicationArea = Basic, Suite;
-                                RunObject = Page "Hr Training Planner List";
-                            }
-
-                        }
-                        // group(Archve)
-                        // {
-                        //     Caption = 'Archives';
-                        //     action(HrTrainingApplicationsArchive)
-                        //     {
-                        //         Caption = 'HR Training Applications Archive';
-                        //         ApplicationArea = Basic, Suite;
-                        //         RunObject = Page "HR Training Application Lines";
-                        //     }
-                        // }
-                        group(reports)
-                        {
-                            Caption = 'Reports';
-                            action(HrTraining)
-                            {
-                                Caption = 'Training Needs Report';
-                                ApplicationArea = Basic, Suite;
-                                RunObject = Report "HR Training Needs";
-                            }
-
-                            action(HrTrainingPlan)
-                            {
-                                Caption = 'Training Planner Report';
-                                ApplicationArea = Basic, Suite;
-                                RunObject = Report "Training Planner";
-                            }
-                            action(HrTrainingAttendees)
-                            {
-                                Caption = 'Training Attendees Report';
-                                ApplicationArea = Basic, Suite;
-                                RunObject = Report TrainingAttendees;
-                            }
-                            action("Training Evaluation Report")
-                            {
-                                Caption = 'Training Evaluation';
-                                ApplicationArea = Basic, Suite;
-                                RunObject = Report "Training Evaluation";
-                            }
-
-                            // action(jobqueue)
-                            // {
-                            //     Caption = 'Queue';
-                            //     ApplicationArea = Basic, Suite;
-                            //     RunObject = Report HremployeesJobQueues;
-                            // }
-
-
-
-                        }
-
+                        Caption = 'Training Needs';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = Page "HR Training Needs List";
+                        ToolTip = 'View and manage official training needs (New and Pending)';
                     }
-                    // group(HrInternsMgt)
-                    // {
-                    //     Caption = 'HR Interns Management';
-                    //     action(HrInterns)
-                    //     {
-                    //         Caption = 'HR Interns';
-                    //         ApplicationArea = Basic, Suite;
-                    //         RunObject = Page "HR Interns List";
-                    //     }
-                    //     action(HrInternsRequisitions)
-                    //     {
-                    //         Caption = 'HR Interns Requisitions';
-                    //         ApplicationArea = Basic, Suite;
-                    //         RunObject = Page "HR Intern Requisition List";
-                    //     }
-                    // }
-
+                    action(HRTrainingNeedRequests)
+                    {
+                        Caption = 'Training Need Requests';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = Page "Training Need Requests - All";
+                        ToolTip = 'Review all department training requests and convert to official needs';
+                    }
+                    action(HrTrainingApplications)
+                    {
+                        Caption = 'Training Applications';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = Page "HR Training ApplicationList";
+                        ToolTip = 'Manage training applications and participants';
+                    }
+                    action(HRTrainingPlanner)
+                    {
+                        Caption = 'Training Planner';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = Page "Hr Training Planner List";
+                        ToolTip = 'View and manage the annual training plan';
+                    }
+                    action(HRTrainingFeedBack)
+                    {
+                        Caption = 'Training Evaluation';
+                        ApplicationArea = Basic, Suite;
+                        RunObject = Page "Training Evaluation";
+                        ToolTip = 'Post-training feedback and evaluation';
+                    }
+                    group(TrainingReports)
+                    {
+                        Caption = 'Reports';
+                        action(HrTraining)
+                        {
+                            Caption = 'Training Needs Report';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = Report "HR Training Needs";
+                        }
+                        action(HrTrainingPlan)
+                        {
+                            Caption = 'Training Planner Report';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = Report "Training Planner";
+                        }
+                        action(HrTrainingAttendees)
+                        {
+                            Caption = 'Training Attendees Report';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = Report TrainingAttendees;
+                        }
+                        action("Training Evaluation Report")
+                        {
+                            Caption = 'Training Evaluation Report';
+                            ApplicationArea = Basic, Suite;
+                            RunObject = Report "Training Evaluation";
+                        }
+                    }
                 }
                 group("Disciplinary Management")
                 {
@@ -1960,7 +1917,7 @@ page 52187320 AdvancedHumanResources
                 action("My CEO Goal Assignments")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'My CEO Goal Assignments';
+                    Caption = 'Goals Assigned by CEO (HOD)';
                     RunObject = page "My CEO Goal Assignments";
                     ToolTip = 'View and acknowledge CEO goals assigned to me as HOD, and import them into department targets';
                 }

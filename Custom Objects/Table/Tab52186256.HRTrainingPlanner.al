@@ -1,7 +1,7 @@
 table 52186256 "HR Training Planner"
 {
-
     DataClassification = ToBeClassified;
+    // ESTIMATED COST ADDED (FIELD 33) — PULLED FROM HR TRAINING NEEDS ON COURSE SELECTION
 
     fields
     {
@@ -35,8 +35,12 @@ table 52186256 "HR Training Planner"
                         "Start Date" := HRTrainingNeeds."Start Date";
                         Duration := HRTrainingNeeds.Duration1;
                         Validate(Duration);
+                        // PULL COST FROM TRAINING NEED
+                        HRTrainingNeeds.CalcFields("Total Costs");
+                        "Estimated Cost" := HRTrainingNeeds."Total Costs";
                     end;
-                end;
+                end else
+                    "Estimated Cost" := 0;
             end;
         }
         field(3; "Start Date"; Date)
@@ -107,6 +111,11 @@ table 52186256 "HR Training Planner"
         field(32; "CPD Points"; integer)
         {
 
+        }
+        field(33; "Estimated Cost"; Decimal)
+        {
+            Caption = 'Estimated Cost';
+            Editable = false;
         }
 
     }
