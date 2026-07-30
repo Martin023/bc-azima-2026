@@ -1759,6 +1759,20 @@ page 52187320 AdvancedHumanResources
                     ApplicationArea = Basic, Suite;
                     RunObject = page "HR E-Mail Parameters List";
                 }
+                action("Email Templates")
+                {
+                    Caption = 'Email Templates';
+                    ApplicationArea = Basic, Suite;
+                    RunObject = page "HR Email Template List";
+                    ToolTip = 'Set up event-driven email templates with rich HTML editor and placeholder variables';
+                }
+                action("Email Notification Log")
+                {
+                    Caption = 'Email Notification Log';
+                    ApplicationArea = Basic, Suite;
+                    RunObject = page "HR Email Notification Log";
+                    ToolTip = 'View all automated email send attempts and failures';
+                }
 
                 action("HR Setup")
                 {
