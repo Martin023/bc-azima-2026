@@ -9,7 +9,7 @@
       <am:Name>MSRB</am:Name>
       <am:Version>15.0.20283.0</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-07-30T17:21:02.7815385Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-07-30T18:53:01.5048280Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -91,9 +91,6 @@
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.96296cm</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>2.5cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.96296cm</Width>
@@ -755,37 +752,6 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox12</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <BackgroundColor>Lime</BackgroundColor>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox4">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Commission On Checkoff</Value>
-                                  <Style />
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox4</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -1645,38 +1611,6 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="CommissionOnCheckOff">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!CommissionOnCheckOff.Value</Value>
-                                  <Style>
-                                    <Format>#,0.00</Format>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>CommissionOnCheckOff</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="FDTotal">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
@@ -1900,7 +1834,6 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
-                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -1915,8 +1848,9 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
             <Top>0.17639cm</Top>
+            <Left>0.98166in</Left>
             <Height>1.2cm</Height>
-            <Width>82.49992cm</Width>
+            <Width>79.99992cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1927,10 +1861,10 @@
         <Height>1.77862cm</Height>
         <Style />
       </Body>
-      <Width>82.49992cm</Width>
+      <Width>82.71792cm</Width>
       <Page>
         <PageHeader>
-          <Height>3.73089cm</Height>
+          <Height>3.76617cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1955,9 +1889,9 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox5</rd:DefaultName>
-              <Top>1.16331in</Top>
+              <Top>1.19108in</Top>
               <Height>0.29166in</Height>
-              <Width>80.00649cm</Width>
+              <Width>82.49992cm</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1989,8 +1923,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
-              <Top>0.19432cm</Top>
-              <Left>14.58249in</Left>
+              <Top>0.26486cm</Top>
+              <Left>15.56671in</Left>
               <Height>0.25347in</Height>
               <Width>16.91357in</Width>
               <ZIndex>1</ZIndex>
@@ -2025,8 +1959,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
-              <Top>0.36471in</Top>
-              <Left>14.58249in</Left>
+              <Top>0.39248in</Top>
+              <Left>15.56671in</Left>
               <Height>0.23611in</Height>
               <Width>16.91357in</Width>
               <ZIndex>2</ZIndex>
@@ -2061,8 +1995,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
-              <Top>0.64942in</Top>
-              <Left>14.58249in</Left>
+              <Top>0.67719in</Top>
+              <Left>15.56671in</Left>
               <Height>0.20486in</Height>
               <Width>16.91357in</Width>
               <ZIndex>3</ZIndex>
@@ -2081,6 +2015,7 @@
               <Value>=First(Fields!CompanyInformation_Picture.Value, "DataSet_Result")</Value>
               <MIMEType>image/jpeg</MIMEType>
               <Sizing>Fit</Sizing>
+              <Left>0.98166in</Left>
               <Height>1.46885in</Height>
               <Width>2.22834in</Width>
               <ZIndex>4</ZIndex>
@@ -2111,8 +2046,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
-              <Top>0.88901in</Top>
-              <Left>14.58249in</Left>
+              <Top>0.91678in</Top>
+              <Left>15.56671in</Left>
               <Height>0.20486in</Height>
               <Width>16.91357in</Width>
               <ZIndex>5</ZIndex>
@@ -2170,7 +2105,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
               <Top>0.4605in</Top>
-              <Left>7.97857in</Left>
+              <Left>8.96023in</Left>
               <Height>0.20833in</Height>
               <Width>23.52005in</Width>
               <Style>
@@ -2215,6 +2150,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
               <Top>0.72439in</Top>
+              <Left>0.98166in</Left>
               <Height>0.23611in</Height>
               <Width>31.49606in</Width>
               <ZIndex>1</ZIndex>
@@ -2260,7 +2196,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox528</rd:DefaultName>
               <Top>0.16884in</Top>
-              <Left>7.97857in</Left>
+              <Left>8.96023in</Left>
               <Height>0.22222in</Height>
               <Width>23.51749in</Width>
               <ZIndex>2</ZIndex>
@@ -2282,7 +2218,7 @@
           </Style>
         </PageFooter>
         <PageHeight>21.59cm</PageHeight>
-        <PageWidth>80.5cm</PageWidth>
+        <PageWidth>83cm</PageWidth>
         <LeftMargin>0cm</LeftMargin>
         <RightMargin>0cm</RightMargin>
         <TopMargin>1cm</TopMargin>
@@ -2510,12 +2446,6 @@ End Function
         </Field>
         <Field Name="AggregateCommissionFormat">
           <DataField>AggregateCommissionFormat</DataField>
-        </Field>
-        <Field Name="CommissionOnCheckOff">
-          <DataField>CommissionOnCheckOff</DataField>
-        </Field>
-        <Field Name="CommissionOnCheckOffFormat">
-          <DataField>CommissionOnCheckOffFormat</DataField>
         </Field>
       </Fields>
       <Query>
