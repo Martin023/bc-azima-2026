@@ -1044,8 +1044,18 @@ codeunit 52186512 "Sky M-Banking Transactions"
         end;
         if MobileTransLines."Recover Excise Duty" then begin
             genSetUp.Get();
+            if MobileTransLines.useFinancialChargesExciseDuty then begin
+                if genSetUp."Excise Duty (%)" > 0 then begin
+                    ExciseDuty := round(ChargeAmount * genSetUp."Excise Duty (%)" * 0.01);
+                end;
+            end else begin
+                if genSetUp."Transfer Excise Duty (%)" > 0 then begin
+                    ExciseDuty := round(ChargeAmount * genSetUp."Transfer Excise Duty (%)" * 0.01);
+                end;
+            end;
+
             // ExciseDuty := round(((ChargeAmount - SkyRevenue) * genSetUp."Excise Duty (%)" * 0.01) / (1 + (genSetUp."Excise Duty (%)" * 0.01)), 0.01, '>');
-            ExciseDuty := round(ChargeAmount * genSetUp."Transfer Excise Duty (%)" * 0.01);
+
         end;
         TotalCharges.Add(ChargeAmount + ExciseDuty + SkyRevenue);
         TotalCharges.Add(ExciseDuty);
