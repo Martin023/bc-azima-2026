@@ -445,6 +445,14 @@ page 52185769 "Loans Posted"
                     ApplicationArea = Basic, Suite;
                     ToolTip = 'Specifies the loan where this loan came from, i.e if this loan is a guarantor defaulter loan';
                 }
+                field("Recovered Product Type"; Rec."Recovered Product Type")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Recovered Product Name"; Rec."Recovered Product Name")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Recovery Level"; Rec."Recovery Level")
                 {
                     ApplicationArea = Basic, Suite;
