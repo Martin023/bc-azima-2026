@@ -1,33 +1,28 @@
-codeunit 52185459 "HR Email Dispatcher"
+codeunit 52185459  "HR Email Dispatcher"
 {
+
     procedure Send(
         EventCode: Code[50];
         RecipientRole: Option;
         RecipientEmployeeNo: Code[20];
         SourceDocNo: Code[50];
-        Vars: array[10] of Text
+        TokenVals: Text
     )
     var
         Template: Record "HR Email Template";
         HREmp: Record "HR Employees";
         RecipientEmail: Text;
-        ResolvedSubject: Text;
-        ResolvedBody: Text;
     begin
-        // NO TEMPLATE — SILENT EXIT
         if not Template.Get(EventCode, RecipientRole) then
             exit;
 
-        // DISABLED — SILENT EXIT
         if not Template.Enabled then
             exit;
 
-        // RESOLVE RECIPIENT EMAIL
         RecipientEmail := '';
-        if RecipientEmployeeNo <> '' then begin
+        if RecipientEmployeeNo <> '' then
             if HREmp.Get(RecipientEmployeeNo) then
                 RecipientEmail := HREmp."E-Mail";
-        end;
 
         if RecipientEmail = '' then begin
             LogEntry(EventCode, RecipientRole, '', SourceDocNo, Template.Subject, 1,
@@ -35,20 +30,7 @@ codeunit 52185459 "HR Email Dispatcher"
             exit;
         end;
 
-        // RESOLVE SUBJECT AND BODY — USE REPLACE NOT STRSUB TO AVOID HTML CONFLICTS
-        ResolvedSubject := ResolvePlaceholders(Template.Subject, Vars);
-        ResolvedBody := ResolvePlaceholders(Template.GetBody(), Vars);
-
-        // SEND
-        SendEmail(
-            RecipientEmail,
-            Template."CC Email",
-            ResolvedSubject,
-            ResolvedBody,
-            EventCode,
-            RecipientRole,
-            SourceDocNo
-        );
+        SendInternal(Template, RecipientEmail, SourceDocNo, TokenVals, EventCode, RecipientRole);
     end;
 
     procedure SendToAddress(
@@ -56,12 +38,10 @@ codeunit 52185459 "HR Email Dispatcher"
         RecipientRole: Option;
         RecipientEmail: Text;
         SourceDocNo: Code[50];
-        Vars: array[10] of Text
+        TokenVals: Text
     )
     var
         Template: Record "HR Email Template";
-        ResolvedSubject: Text;
-        ResolvedBody: Text;
     begin
         // VARIANT: CALLER SUPPLIES EMAIL DIRECTLY — NO EMPLOYEE LOOKUP
         if not Template.Get(EventCode, RecipientRole) then
@@ -76,37 +56,43 @@ codeunit 52185459 "HR Email Dispatcher"
             exit;
         end;
 
-        ResolvedSubject := ResolvePlaceholders(Template.Subject, Vars);
-        ResolvedBody := ResolvePlaceholders(Template.GetBody(), Vars);
-
-        SendEmail(
-            RecipientEmail,
-            Template."CC Email",
-            ResolvedSubject,
-            ResolvedBody,
-            EventCode,
-            RecipientRole,
-            SourceDocNo
-        );
+        SendInternal(Template, RecipientEmail, SourceDocNo, TokenVals, EventCode, RecipientRole);
     end;
 
-    local procedure SendEmail(
+    local procedure SendInternal(
+        Template: Record "HR Email Template";
         RecipientEmail: Text;
-        CCEmail: Text;
-        ResolvedSubject: Text;
-        ResolvedBody: Text;
+        SourceDocNo: Code[50];
+        TokenVals: Text;
         EventCode: Code[50];
-        RecipientRole: Option;
-        SourceDocNo: Code[50]
+        RecipientRole: Option
     )
     var
         EmailMsg: Codeunit "Email Message";
         Email: Codeunit Email;
+        ResolvedSubject: Text;
+        ResolvedBody: Text;
+        RawBody: Text;
+        CCList: List of [Text];
+        CCAddress: Text;
     begin
+        RawBody := Template.GetBody();
+
+        // RESOLVE ALL TOKENS
+        ResolvedSubject := ResolveAllTokens(Template.Subject, EventCode, TokenVals, SourceDocNo);
+        ResolvedBody := ResolveAllTokens(RawBody, EventCode, TokenVals, SourceDocNo);
+
         EmailMsg.Create(RecipientEmail, ResolvedSubject, ResolvedBody, true);
 
-        if CCEmail <> '' then
-            EmailMsg.AddRecipient(Enum::"Email Recipient Type"::Cc, CCEmail);
+        if Template."CC Email" <> '' then begin
+            // SEMICOLON-SEPARATED LIST — LOOP AND ADD EACH CC ADDRESS
+            CCList := Template."CC Email".Split(';');
+            foreach CCAddress in CCList do begin
+                CCAddress := CCAddress.Trim();
+                if CCAddress <> '' then
+                    EmailMsg.AddRecipient(Enum::"Email Recipient Type"::Cc, CCAddress);
+            end;
+        end;
 
         if Email.Send(EmailMsg, Enum::"Email Scenario"::Default) then
             LogEntry(EventCode, RecipientRole, RecipientEmail, SourceDocNo, ResolvedSubject, 0, '')
@@ -115,17 +101,116 @@ codeunit 52185459 "HR Email Dispatcher"
                 GetLastErrorText());
     end;
 
-    local procedure ResolvePlaceholders(RawText: Text; Vars: array[10] of Text): Text
+    local procedure ResolveAllTokens(
+        RawText: Text;
+        EventCode: Code[50];
+        TokenVals: Text;
+        SourceDocNo: Code[50]
+    ): Text
     var
         Resolved: Text;
-        i: Integer;
+        Vars: Record "HR Email Template Variables";
+        TokenValue: Text;
     begin
         Resolved := RawText;
-        for i := 1 to 10 do begin
-            if Vars[i] <> '' then
-                Resolved := Resolved.Replace('%' + Format(i), Vars[i]);
-        end;
+
+        Vars.Reset();
+        Vars.SetRange("Event Code", EventCode);
+        if not Vars.FindSet() then
+            exit(Resolved);
+
+        repeat
+            TokenValue := '';
+
+            if Vars."System Defined" then
+                // CATEGORY A — VALUE COMES FROM TokenVals KEY=VALUE STRING
+                TokenValue := GetTokenValue(TokenVals, Vars.Token)
+            else begin
+                // CATEGORY B — VALUE RESOLVED FROM SOURCE TABLE/FIELD VIA RECORDREF
+                if (Vars."Source Table No." <> 0) and (Vars."Source Field No." <> 0) then
+                    TokenValue := ResolveFromRecord(Vars."Source Table No.", Vars."Source Field No.", SourceDocNo);
+            end;
+
+            if TokenValue <> '' then
+                Resolved := Resolved.Replace(Vars.Token, TokenValue);
+
+        until Vars.Next() = 0;
+
         exit(Resolved);
+    end;
+
+    local procedure GetTokenValue(TokenVals: Text; Token: Code[50]): Text
+    var
+        Pairs: List of [Text];
+        Pair: Text;
+        KeyName: Text;
+        EqPos: Integer;
+        PairKey: Text;
+        PairVal: Text;
+    begin
+        if TokenVals = '' then
+            exit('');
+
+        // STRIP BRACKETS FROM TOKEN TO GET PLAIN KEY
+        KeyName := Token;
+        KeyName := KeyName.Replace('[', '');
+        KeyName := KeyName.Replace(']', '');
+
+        // USE || AS DELIMITER — SAFE AGAINST SEMICOLONS IN VALUES (E.G. REASONS, NAMES)
+        Pairs := TokenVals.Split('||');
+        foreach Pair in Pairs do begin
+            EqPos := StrPos(Pair, '=');
+            if EqPos > 0 then begin
+                PairKey := CopyStr(Pair, 1, EqPos - 1);
+                PairVal := CopyStr(Pair, EqPos + 1);
+                if UpperCase(PairKey) = UpperCase(KeyName) then
+                    exit(PairVal);
+            end;
+        end;
+
+        exit('');
+    end;
+
+    local procedure ResolveFromRecord(TableNo: Integer; FieldNo: Integer; SourceDocNo: Code[50]): Text
+    var
+        RecRef: RecordRef;
+        FldRef: FieldRef;
+        KeyRef: KeyRef;
+        KeyFldRef: FieldRef;
+        AllObjRec: Record AllObj;
+    begin
+        if SourceDocNo = '' then
+            exit('');
+
+        if TableNo <= 0 then
+            exit('');
+
+        // CHECK TABLE EXISTS BEFORE OPENING
+        AllObjRec.Reset();
+        AllObjRec.SetRange("Object Type", AllObjRec."Object Type"::Table);
+        AllObjRec.SetRange("Object ID", TableNo);
+        if not AllObjRec.FindFirst() then
+            exit('');
+
+        if not AllObjRec.FindFirst() then
+            exit('');
+
+        RecRef.Open(TableNo);
+
+        // FIND RECORD BY PRIMARY KEY FIRST FIELD = SourceDocNo
+        KeyRef := RecRef.KeyIndex(1);
+        if KeyRef.FieldCount >= 1 then begin
+            KeyFldRef := KeyRef.FieldIndex(1);
+            KeyFldRef.SetRange(SourceDocNo);
+            if RecRef.FindFirst() then begin
+                FldRef := RecRef.Field(FieldNo);
+                RecRef.Close();
+                exit(Format(FldRef.Value));
+            end;
+        end;
+
+        RecRef.Close();
+        exit('');
     end;
 
     local procedure LogEntry(
