@@ -1773,6 +1773,20 @@ page 52187320 AdvancedHumanResources
                     RunObject = page "HR Email Notification Log";
                     ToolTip = 'View all automated email send attempts and failures';
                 }
+                action("SMS Templates")
+                {
+                    Caption = 'SMS Templates';
+                    ApplicationArea = Basic, Suite;
+                    RunObject = page "HR SMS Template List";
+                    ToolTip = 'Set up event-driven SMS templates sent via the Sky SMS gateway';
+                }
+                action("SMS Notification Log")
+                {
+                    Caption = 'SMS Notification Log';
+                    ApplicationArea = Basic, Suite;
+                    RunObject = page "HR SMS Notification Log";
+                    ToolTip = 'View all automated SMS send attempts and failures';
+                }
 
                 action("HR Setup")
                 {

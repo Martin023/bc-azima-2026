@@ -143,6 +143,8 @@ table 52185532 "HR Leave Application"
 
                     SendApprovalEmailToApplicant();
                     SendApprovalEmailToReliever();
+                    SendApprovalSMSToApplicant();
+                    SendApprovalSMSToReliever();
 
                 end;
 
@@ -1155,35 +1157,68 @@ table 52185532 "HR Leave Application"
     local procedure SendApprovalEmailToApplicant()
     var
         Dispatcher: Codeunit "HR Email Dispatcher";
-        Vars: array[10] of Text;
+        TokenVals: Text;
     begin
-        // %1=EMPLOYEE NAME %2=LEAVE TYPE %3=START DATE %4=END DATE %5=DAYS APPROVED %6=RETURN DATE
-        Vars[1] := Names;
-        Vars[2] := "Leave Type";
-        Vars[3] := Format("Start Date");
-        Vars[4] := Format("End Date");
-        Vars[5] := Format("Days Applied");
-        Vars[6] := Format("Return Date");
-        Vars[7] := "Application Code";
-        Dispatcher.Send('LEAVE-APPROVAL', 0, "Applicant Staff No.", "Application Code", Vars);
+        // TOKENS: EMPLOYEE_NAME, LEAVE_TYPE, START_DATE, END_DATE, DAYS_APPROVED, RETURN_DATE, APPLICATION_CODE
+        TokenVals := 'EMPLOYEE_NAME=' + Names + '||' +
+                     'LEAVE_TYPE=' + "Leave Type" + '||' +
+                     'START_DATE=' + Format("Start Date") + '||' +
+                     'END_DATE=' + Format("End Date") + '||' +
+                     'DAYS_APPROVED=' + Format("Days Applied") + '||' +
+                     'RETURN_DATE=' + Format("Return Date") + '||' +
+                     'APPLICATION_CODE=' + "Application Code";
+        Dispatcher.Send('LEAVE-APPROVAL', 0, "Applicant Staff No.", "Application Code", TokenVals);
+    end;
+
+    local procedure SendApprovalSMSToApplicant()
+    var
+        SMSDispatcher: Codeunit "HR SMS Dispatcher";
+        TokenVals: Text;
+    begin
+        // TOKENS: EMPLOYEE_NAME, LEAVE_TYPE, START_DATE, END_DATE, DAYS_APPROVED, RETURN_DATE, APPLICATION_CODE
+        TokenVals := 'EMPLOYEE_NAME=' + Names + '||' +
+                     'LEAVE_TYPE=' + "Leave Type" + '||' +
+                     'START_DATE=' + Format("Start Date") + '||' +
+                     'END_DATE=' + Format("End Date") + '||' +
+                     'DAYS_APPROVED=' + Format("Days Applied") + '||' +
+                     'RETURN_DATE=' + Format("Return Date") + '||' +
+                     'APPLICATION_CODE=' + "Application Code";
+        SMSDispatcher.Send('LEAVE-APPROVAL', 0, "Applicant Staff No.", "Application Code", TokenVals);
     end;
 
     local procedure SendApprovalEmailToReliever()
     var
         Dispatcher: Codeunit "HR Email Dispatcher";
-        Vars: array[10] of Text;
+        TokenVals: Text;
     begin
         if Reliever = '' then
             exit;
-        // %1=RELIEVER NAME %2=EMPLOYEE NAME %3=LEAVE TYPE %4=START DATE %5=END DATE %6=RETURN DATE
-        Vars[1] := "Reliever Name";
-        Vars[2] := Names;
-        Vars[3] := "Leave Type";
-        Vars[4] := Format("Start Date");
-        Vars[5] := Format("End Date");
-        Vars[6] := Format("Return Date");
-        Vars[7] := "Application Code";
-        Dispatcher.Send('LEAVE-RELIEVER', 1, Reliever, "Application Code", Vars);
+        // TOKENS: RELIEVER_NAME, EMPLOYEE_NAME, LEAVE_TYPE, START_DATE, END_DATE, RETURN_DATE, APPLICATION_CODE
+        TokenVals := 'RELIEVER_NAME=' + "Reliever Name" + '||' +
+                     'EMPLOYEE_NAME=' + Names + '||' +
+                     'LEAVE_TYPE=' + "Leave Type" + '||' +
+                     'START_DATE=' + Format("Start Date") + '||' +
+                     'END_DATE=' + Format("End Date") + '||' +
+                     'RETURN_DATE=' + Format("Return Date") + '||' +
+                     'APPLICATION_CODE=' + "Application Code";
+        Dispatcher.Send('LEAVE-RELIEVER', 1, Reliever, "Application Code", TokenVals);
+    end;
+
+    local procedure SendApprovalSMSToReliever()
+    var
+        SMSDispatcher: Codeunit "HR SMS Dispatcher";
+        TokenVals: Text;
+    begin
+        if Reliever = '' then
+            exit;
+        // TOKENS: RELIEVER_NAME, EMPLOYEE_NAME, LEAVE_TYPE, START_DATE, END_DATE, RETURN_DATE
+        TokenVals := 'RELIEVER_NAME=' + "Reliever Name" + '||' +
+                     'EMPLOYEE_NAME=' + Names + '||' +
+                     'LEAVE_TYPE=' + "Leave Type" + '||' +
+                     'START_DATE=' + Format("Start Date") + '||' +
+                     'END_DATE=' + Format("End Date") + '||' +
+                     'RETURN_DATE=' + Format("Return Date");
+        SMSDispatcher.Send('LEAVE-RELIEVER', 1, Reliever, "Application Code", TokenVals);
     end;
 
 }

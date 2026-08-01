@@ -21,6 +21,10 @@ page 52186870 "Savings Accounts"
                 {
                     ToolTip = 'Specifies the value of the No. field.';
                 }
+                field("Old Account Number"; Rec."Old Account No")
+                {
+
+                }
                 field("member No"; Rec."Member No.")
                 {
 
@@ -78,7 +82,7 @@ page 52186870 "Savings Accounts"
                 field("Member Status"; Rec."Member Status") { }
                 field("Member Sub Status"; Rec."Member Sub Status") { }
                 field("Source Unit"; rec."Source Unit") { }
-            
+
             }
         }
     }
