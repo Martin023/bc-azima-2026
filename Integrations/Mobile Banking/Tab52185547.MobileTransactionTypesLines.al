@@ -114,6 +114,11 @@ table 52185547 "Mobile Transaction Types Lines"
                 TestField("Sky Revenue Share %");
             end;
         }
+        // useFinancialChargesExciseDuty
+        field(18; "useFinancialChargesExciseDuty"; Boolean)
+        {
+
+        }
 
     }
 

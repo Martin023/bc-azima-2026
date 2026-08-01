@@ -1,55 +1,55 @@
-#pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
-XmlPort 52185474 "Import employee transactions"
-{
-    Format = VariableText;
+// #pragma warning disable AA0005, AA0008, AA0018, AA0021, AA0072, AA0137, AA0201, AA0206, AA0218, AA0228, AL0254, AL0424, AS0011, AW0006 // ForNAV settings
+// XmlPort 52185474 "Import employee transactions"
+// {
+//     Format = VariableText;
 
-    schema
-    {
-        textelement(Root)
-        {
-            tableelement("PR Employee Transactions"; "PR Employee Transactions")
-            {
-                AutoReplace = false;
-                AutoUpdate = true;
-                XmlName = 'SalaryLines';
-                fieldelement(e; "PR Employee Transactions"."Employee Code")
-                {
-                }
-                fieldelement(HNo; "PR Employee Transactions"."Transaction Code")
-                {
-                    FieldValidate = no;
-                }
-                fieldelement(er; "PR Employee Transactions".Amount)
-                {
-                }
-                fieldelement(g; "PR Employee Transactions"."Period Month")
-                {
-                }
-                fieldelement(n; "PR Employee Transactions"."Period Year")
-                {
-                }
-                fieldelement(d; "PR Employee Transactions"."Payroll Period")
-                {
-                }
-            }
-        }
-    }
+//     schema
+//     {
+//         textelement(Root)
+//         {
+//             tableelement("PR Employee Transactions"; "PR Employee Transactions")
+//             {
+//                 AutoReplace = false;
+//                 AutoUpdate = true;
+//                 XmlName = 'SalaryLines';
+//                 fieldelement(e; "PR Employee Transactions"."Employee Code")
+//                 {
+//                 }
+//                 fieldelement(HNo; "PR Employee Transactions"."Transaction Code")
+//                 {
+//                     FieldValidate = no;
+//                 }
+//                 fieldelement(er; "PR Employee Transactions".Amount)
+//                 {
+//                 }
+//                 fieldelement(g; "PR Employee Transactions"."Period Month")
+//                 {
+//                 }
+//                 fieldelement(n; "PR Employee Transactions"."Period Year")
+//                 {
+//                 }
+//                 fieldelement(d; "PR Employee Transactions"."Payroll Period")
+//                 {
+//                 }
+//             }
+//         }
+//     }
 
-    requestpage
-    {
-        SaveValues = true;
+//     requestpage
+//     {
+//         SaveValues = true;
 
-        layout
-        {
-        }
+//         layout
+//         {
+//         }
 
-        actions
-        {
-        }
-    }
+//         actions
+//         {
+//         }
+//     }
 
-    trigger OnPostXmlPort()
-    begin
-        Message('Salary Uploaded Successfuly');
-    end;
-}
+//     trigger OnPostXmlPort()
+//     begin
+//         Message('Salary Uploaded Successfuly');
+//     end;
+// }

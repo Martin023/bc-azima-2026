@@ -6375,6 +6375,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             "Product Category"
                                         );
                                         if BeneficiarySavingsAccount.FindFirst then begin
+                                            TheSourceMember.Get(BeneficiarySavingsAccount."Member No.");
+
                                             //    Dear [FIRST_NAME], Mobile banking cash withdrawal ID [MPESA REF] of KSHs [AMOUNT] to [FULL_NAME] from your FOSA account [AC NUMBER] on [TIMESTAMP]
 
                                             theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() +
@@ -6748,6 +6750,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                                 );
 
                                                                 if BeneficiarySavingsAccount.FindFirst then begin
+                                                                    TheSourceMember.Get(BeneficiarySavingsAccount."Member No.");
 
                                                                     theSMS := 'Dear ' + TheSourceMember."First Name".ToUpper() +
                                                                     ', Mobile banking cash withdrawal ID ' + MpesaTransBuffer."Beneficiary Reference" +

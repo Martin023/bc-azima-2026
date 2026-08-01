@@ -89,6 +89,11 @@ page 52185581 "Mobile Transaction types Lines"
                     ApplicationArea = Basic, Suite;
                     Editable = SkyRevenueShareEnabled;
                 }
+                // useFinancialChargesExciseDuty
+                field("useFinancialChargesExciseDuty"; Rec."useFinancialChargesExciseDuty")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
             }
         }
     }

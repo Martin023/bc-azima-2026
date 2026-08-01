@@ -72,7 +72,6 @@ report 52186124 "Member Commission"
             column(CommsionOnHoliday; CommsionOnHoliday) { }
             column(Retainer; "Marketing Teams Header".Retainer) { }
             column(AggregateCommission; AggregateCommission) { }
-            column(CommissionOnCheckOff; CommissionOnCheckOff) { }
             trigger OnAfterGetRecord()
             begin
                 RecrutedMembers := 0;
@@ -102,7 +101,6 @@ report 52186124 "Member Commission"
                 CommsionOnHoliday := 0;
                 AggregateCommission := 0;
                 EmployersRecruited := 0;
-                CommissionOnCheckOff := 0;
 
                 Members.reset;
                 Members.SetLoadFields("No.", "Phone No.", Name, "Recruited By", "Member Class", "Registration Date", "Rejoinig Date");
@@ -128,6 +126,60 @@ report 52186124 "Member Commission"
                     end else CurrReport.skip;
                         
                         RecrutedMembers += 1;
+
+                        SavingsAccount.Reset();
+                        SavingsAccount.SetRange("Member No.", Members."No.");
+                        SavingsAccount.SetAutoCalcFields("Balance (LCY)");
+                        if SavingsAccount.FindSet() then begin
+                            repeat
+                                case
+                                    SavingsAccount."Product Category" of
+                                    SavingsAccount."Product Category"::"BOSA Deposits":
+                                        Deposist += SavingsAccount."Balance (LCY)";
+                                    SavingsAccount."Product Category"::"Fixed Deposit":
+                                        FDTotal += SavingsAccount."Balance (LCY)";
+                                    SavingsAccount."Product Category"::"Share Capital":
+                                        ShareCapital += SavingsAccount."Balance (LCY)";
+                                    SavingsAccount."Product Category"::SAYE:
+                                        SAYETotal += SavingsAccount."Balance (LCY)";
+                                    SavingsAccount."Product Category"::"Junior Account":
+                                        JuniorTotal += SavingsAccount."Balance (LCY)";
+                                    SavingsAccount."Product Category"::Holiday:
+                                        HolidayTotal += SavingsAccount."Balance (LCY)";
+                                    SavingsAccount."Product Category"::"Entrance Fee":
+                                        EntranceFee += SavingsAccount."Balance (LCY)";
+                                end;
+                            until SavingsAccount.Next() = 0;
+                        end;
+
+                    until Members.Next() = 0;
+                end;
+
+                //rejoined
+                Members.reset;
+                Members.SetLoadFields("No.", "Phone No.", Name, "Recruited By", "Member Class", "Registration Date", "Rejoinig Date");
+                // if (StartDate <> 0D) then
+                //     if Enddate <> 0D then
+                Members.SetRange("Rejoinig Date", StartDate, Enddate);
+                // else Members.SetRange("Registration Date", StartDate);
+                Members.SetRange("Recruited By", "Marketing Teams Header"."Payroll No.");
+                if Members.FindSet() then begin
+                    repeat
+                    Members.CalcFields("FOSA Savings","BOSA Deposit","Share Capital");
+                    if MemberClass.get(Members."Member Class") then begin
+                        ProductSetUp.reset;
+                        ProductSetUp.SetRange("Product ID",'191');
+                        if ProductSetUp.FindFirst() then
+                            FosaMinBal := ProductSetUp."Minimum Balance";
+
+                        if (Members."BOSA Deposit" < MemberClass."Default BOSA Deposit")
+                            and (Members."Share Capital" < MemberClass."Default Share Capital")
+                                and (Members."FOSA Savings" < FosaMinBal) then
+                                    CurrReport.skip;
+
+                    end else CurrReport.skip;
+                        
+                        MembersRejoined += 1;
 
                         SavingsAccount.Reset();
                         SavingsAccount.SetRange("Member No.", Members."No.");
@@ -215,6 +267,7 @@ report 52186124 "Member Commission"
                         repeat
                             if RecrutedMembers in [commsionlines."Minimum Amount" .. commsionlines."Maximum Amount"] then begin
                                 CommissionOnNewMembers += commsionlines."Charge Amount" * RecrutedMembers;
+                                RejoinedCommsion += commsionlines."Charge Amount" * MembersRejoined;
                             end;
                         until commsionlines.Next() = 0;
                     end;
@@ -236,10 +289,10 @@ report 52186124 "Member Commission"
                     commsionlines.reset;
                     commsionlines.setrange("Transaction Type", CommsionSetup.Code);
                     if commsionlines.FindFirst() then begin
-                        CommissionOnCheckOff += commsionlines."Charge Amount" * EmployersRecruited;
+                        CheckoffCommsion += commsionlines."Charge Amount" * EmployersRecruited;
                     end;
                 end;
-                AggregateCommission := CommissionOnNewMembers+CommissionOnIntPaid+retainer+CommissionOnCheckOff;
+                AggregateCommission := CommissionOnNewMembers+CommissionOnIntPaid+retainer+CheckoffCommsion;
             end;
         }
 
@@ -333,5 +386,4 @@ report 52186124 "Member Commission"
         CreditLedgerEntr2: record "Credit Ledger Entry";
         Customers : Record Customer;
         EmployersRecruited : Integer; 
-        CommissionOnCheckOff : Decimal;
 }
