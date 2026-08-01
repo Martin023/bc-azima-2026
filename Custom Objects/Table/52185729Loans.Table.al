@@ -3135,11 +3135,11 @@ table 52185729 Loans
         }
 
 
-        field(194; "Account Profile"; Option)
+        field(194; "Member Gender"; Enum Gender)
         {
-            OptionMembers = "Normal Member","High Profile","Politically Exposed";
+            // OptionMembers = "Normal Member","High Profile","Politically Exposed";
             Fieldclass = flowfield;
-            CalcFormula = lookup(Members."Account Profile" where("No." = field("Member No.")));
+            CalcFormula = lookup(Members.Gender where("No." = field("Member No.")));
         }
         field(195; "Repayment Advised"; Decimal)
         {
@@ -3196,7 +3196,7 @@ table 52185729 Loans
         {
             Caption = 'Current BOSA Deposits';
             AutoFormatType = 1;
-            CalcFormula = - Sum("Savings Ledger Entry"."Amount (LCY)" WHERE("Posting Date" = FIELD("Date Filter"), "Product Type" = const('1'), "Member No." = field("Member No.")));
+            CalcFormula = - Sum("Savings Ledger Entry"."Amount (LCY)" WHERE("Posting Date" = FIELD("Date Filter"), "Product Category" = const("Bosa Deposits"), "Member No." = field("Member No.")));
             //Caption = 'Balance (LCY)';
             Editable = false;
             FieldClass = FlowField;
@@ -3209,6 +3209,16 @@ table 52185729 Loans
         field(211; "Group Account No."; Code[30])
         {
             TableRelation = Members."No." where("Account Type" = filter("Group Account"));
+        }
+        field(212; "Date of Birth"; Date)
+        {
+            Fieldclass = flowfield;
+            Editable = false;
+            CalcFormula = lookup(Members."Date of Birth" where("No." = field("Member No.")));
+        }
+        field(213; "Recovered Product Name"; Text[50])
+        {
+            Editable = false;
         }
 
     }

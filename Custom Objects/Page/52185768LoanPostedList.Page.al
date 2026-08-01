@@ -39,12 +39,12 @@ page 52185768 "Loan Posted List"
                     ApplicationArea = Basic, Suite;
                     StyleExpr = StyleExprTxt;
                 }
-                field("Loan Account"; Rec."Loan Account")
+                field(Gender; Rec."Member Gender")
                 {
                     ApplicationArea = Basic, Suite;
                     StyleExpr = StyleExprTxt;
                 }
-                field("Staff No"; Rec."Staff No")
+                field("Date of Birth"; Rec."Date of Birth")
                 {
                     ApplicationArea = Basic, Suite;
                     StyleExpr = StyleExprTxt;
@@ -54,6 +54,17 @@ page 52185768 "Loan Posted List"
                     ApplicationArea = Basic, Suite;
                     StyleExpr = StyleExprTxt;
                 }
+                // field("Loan Account"; Rec."Loan Account")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     StyleExpr = StyleExprTxt;
+                // }
+                field("Staff No"; Rec."Staff No")
+                {
+                    ApplicationArea = Basic, Suite;
+                    StyleExpr = StyleExprTxt;
+                }
+
 
                 field("Loan Product Type"; Rec."Loan Product Type")
                 {
@@ -100,12 +111,12 @@ page 52185768 "Loan Posted List"
                     ApplicationArea = all;
                     StyleExpr = StyleExprTxt;
                 }
-                field("Amount In Arreas SACCO"; Rec."Amount In Arreas SACCO")
-                {
-                    ApplicationArea = all;
-                    Editable = false;
-                    StyleExpr = StyleExprTxt;
-                }
+                // field("Amount In Arreas SACCO"; Rec."Amount In Arreas SACCO")
+                // {
+                //     ApplicationArea = all;
+                //     Editable = false;
+                //     StyleExpr = StyleExprTxt;
+                // }
                 field("Amount In Arreas SASRA"; Rec."Amount In Arreas SASRA")
                 {
                     ApplicationArea = all;
@@ -128,11 +139,11 @@ page 52185768 "Loan Posted List"
                     StyleExpr = StyleExprTxt;
 
                 }
-                field("Actively Attached II"; Rec."Actively Attached II")
-                {
-                    Editable = false;
-                    StyleExpr = StyleExprTxt;
-                }
+                // field("Actively Attached II"; Rec."Actively Attached II")
+                // {
+                //     Editable = false;
+                //     StyleExpr = StyleExprTxt;
+                // }
                 field("Recovery Mode"; Rec."Recovery Mode")
                 {
                     ApplicationArea = Basic, Suite;
@@ -235,11 +246,11 @@ page 52185768 "Loan Posted List"
                     StyleExpr = StyleExprTxt;
                 }
 
-                field("CRB Rating"; Rec."CRB Rating")
-                {
-                    ApplicationArea = Basic, Suite;
-                    StyleExpr = StyleExprTxt;
-                }
+                // field("CRB Rating"; Rec."CRB Rating")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     StyleExpr = StyleExprTxt;
+                // }
                 field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic, Suite;
@@ -303,12 +314,12 @@ page 52185768 "Loan Posted List"
                 //     Caption = 'Current User';
                 //     StyleExpr = StyleExprTxt;
                 // }
-                field("Responsible Officer"; Rec."Responsible Officer")
-                {
-                    ApplicationArea = all;
-                    StyleExpr = StyleExprTxt;
+                // field("Responsible Officer"; Rec."Responsible Officer")
+                // {
+                //     ApplicationArea = all;
+                //     StyleExpr = StyleExprTxt;
 
-                }
+                // }
                 // field("Moratorium Loan"; Rec."Moratorium Loan")
                 // {
                 //     ApplicationArea = all;

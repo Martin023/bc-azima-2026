@@ -918,6 +918,11 @@ Report 52185529 "PR Individual Payslip"
                         Department := "HR EMPLOYEES"."Responsibility Center" else
                         Department := EmployeeTransfer.Department
                 end;
+
+                clear(TransAmt);
+                clear(TransBal);
+                clear(Trans);
+                clear(Addr);
             end;
         }
     }
