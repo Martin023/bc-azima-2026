@@ -21,12 +21,12 @@ page 52185495 "Banking Activities"
                 field("Total Cashier Transactions"; Rec."T/Cashier Transactions")
                 {
                     ApplicationArea = Basic;
-                    Image = Checklist;
+                    Image = none;
                 }
                 field("Cashier Transactions"; Rec."Cashier Transactions")
                 {
                     ApplicationArea = Basic;
-                    Image = Checklist;
+                    Image = none;
                 }
                 // field("Total Processed Salaries"; Rec."Total Processed Salaries")
                 // {
@@ -44,7 +44,7 @@ page 52185495 "Banking Activities"
                 field("Savings Accounts"; Rec."Savings Accounts")
                 {
                     ApplicationArea = Basic;
-                    Image = Document;
+                    Image = none;
                 }
                 field("EFT Trasfers"; Rec."EFT Transfer List")
                 {
@@ -129,7 +129,7 @@ page 52185495 "Banking Activities"
                 field("SStanding Order"; Rec."Successful Standing Orders")
                 {
                     ApplicationArea = Basic;
-                    Image = Calculator;
+                    Image = none;
 
                 }
                 field("Standing Order"; Rec."Partial Deduction STO")

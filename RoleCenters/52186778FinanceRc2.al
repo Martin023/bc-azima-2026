@@ -566,12 +566,19 @@ page 52186778 "Finance Role Center"
 
                     Caption = 'Loans Processing';
 
-                    action("Approved Loans List")
+                    action("Loan Appraisal List")
                     {
                         ApplicationArea = Basic, Suite;
-                        caption = 'Approved Loans List';
-                        RunObject = page "Loan Application List";
-                        RunPageView = where(status = filter(Approved), Posted = const(false));
+                        caption = 'Loan Appraisal List';
+                        RunObject = page "Appraisal Loans List";
+                        // RunPageView = where("Source Unit" = const(BOSA));
+                    }
+                    action("Loan Approved List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        caption = 'Loan Approved List';
+                        RunObject = page "Approved Loans List";
+                        // RunPageView = where("Source Unit" = const(BOSA));
                     }
                     action("Loan Posted List")
                     {
