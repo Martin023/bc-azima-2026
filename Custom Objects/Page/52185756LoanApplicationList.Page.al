@@ -12,6 +12,7 @@ page 52185756 "Loan Application List"
                             "Sent Online" = FILTER(false),
                             "Sent Back to CRM" = CONST(false),
                             Status = FILTER(Open));
+                                            
 
     ApplicationArea = Basic, Suite;
     UsageCategory = Lists;

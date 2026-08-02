@@ -84,4 +84,16 @@ enum 52185463 "Salary Type"
     {
         Caption = 'Other Non-Taxable Benefits';
     }
+    value(20; "Voluntary NSSF")
+    {
+        Caption = 'Voluntary NSSF';
+    }
+    value(21; "Voluntary Pension")
+    {
+        Caption = 'Voluntary Pension';
+    }
+    value(22; "Reli")
+    {
+        Caption = 'Facillitative Allowance';
+    }
 }
