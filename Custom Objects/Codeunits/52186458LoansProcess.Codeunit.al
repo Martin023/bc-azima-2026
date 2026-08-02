@@ -4683,6 +4683,8 @@ Codeunit 52186458 "Loans Process"
                 PCharges.Reset;
                 PCharges.SetRange(PCharges."Product Code", LoanApps."Loan Product Type");
                 PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::General);
+                if (LoanApps."Member Class" = 'CLASSA') then
+                    PCharges.setfilter("Charge Code", '<>%1', 'C008');
                 if PCharges.Find('-') then begin
                     repeat
                         ExcemptProductCharges.Reset();
