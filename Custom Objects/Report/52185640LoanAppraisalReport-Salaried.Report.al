@@ -738,6 +738,8 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 //2. Processing fees - this is applicable to all loan applications
                 PCharges.Reset;
                 PCharges.SetRange(PCharges."Product Code", Loans."Loan Product Type");
+                if (Loans."Member Class" = 'CLASSA') then
+                    PCharges.setfilter("Charge Code", '<>%1', 'C008');
                 PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::General);
                 if PCharges.Find('-') then begin
                     repeat
