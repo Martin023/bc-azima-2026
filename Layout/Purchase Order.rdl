@@ -17,7 +17,7 @@
         <ReportItems>
           <Image Name="Image_Logo">
             <Source>Database</Source>
-            <Value>=Fields!CompanyPicture_.Value</Value>
+            <Value>=First(Fields!CompanyPicture_.Value, "DataSet_Result")</Value>
             <MIMEType>image/bmp</MIMEType>
             <Sizing>FitProportional</Sizing>
             <Top>0.15in</Top>
@@ -919,7 +919,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>="Date: " &amp; Fields!DocumentDate.Value &amp; "     Payment Terms: " &amp; Fields!PaymentTermsCode.Value &amp; "     Shipment Method: " &amp; Fields!ShipmentMethodCode.Value</Value>
+                    <Value>="Date: " &amp; First(Fields!DocumentDate.Value, "DataSet_Result") &amp; "     Payment Terms: " &amp; First(Fields!PaymentTermsCode.Value, "DataSet_Result") &amp; "     Shipment Method: " &amp; First(Fields!ShipmentMethodCode.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>8pt</FontSize>
@@ -942,7 +942,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Fields!VendorAddress_.Value &amp; "   |   Tel: " &amp; Fields!VendorPhoneNo_.Value &amp; "   |   Email: " &amp; Fields!VendorEmail_.Value</Value>
+                    <Value>=First(Fields!VendorAddress_.Value, "DataSet_Result") &amp; "   |   Tel: " &amp; First(Fields!VendorPhoneNo_.Value, "DataSet_Result") &amp; "   |   Email: " &amp; First(Fields!VendorEmail_.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>8pt</FontSize>
@@ -970,7 +970,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Fields!BuyFromVendorName.Value</Value>
+                    <Value>=First(Fields!BuyFromVendorName.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontWeight>Bold</FontWeight>
@@ -1076,7 +1076,7 @@
                   <Paragraph>
                     <TextRuns>
                       <TextRun>
-                        <Value>=Fields!No_.Value</Value>
+                        <Value>=First(Fields!No_.Value, "DataSet_Result")</Value>
                         <Style>
                           <FontFamily>Segoe UI</FontFamily>
                           <FontSize>11pt</FontSize>
@@ -1116,7 +1116,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Fields!CompanyEmailWeb_.Value</Value>
+                    <Value>=First(Fields!CompanyEmailWeb_.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>8pt</FontSize>
@@ -1141,7 +1141,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Fields!CompanyTelephone_.Value &amp; "   Mobile: " &amp; Fields!CompanyMobile_.Value</Value>
+                    <Value>=First(Fields!CompanyTelephone_.Value, "DataSet_Result") &amp; "   Mobile: " &amp; First(Fields!CompanyMobile_.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>8pt</FontSize>
@@ -1166,7 +1166,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Fields!CompanyAddress_.Value</Value>
+                    <Value>=First(Fields!CompanyAddress_.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>8pt</FontSize>
@@ -1191,7 +1191,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Fields!CompanyName_.Value</Value>
+                    <Value>=First(Fields!CompanyName_.Value, "DataSet_Result")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                       <FontSize>14pt</FontSize>
