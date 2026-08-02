@@ -4530,7 +4530,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
 
         Members.Reset();
         Members.SetRange("No.", MemberNo);
-        Members.SetLoadFields("No.", "Employer Code", "Account Type");
+        Members.SetLoadFields("No.", "Employer Code", "Account Type", "Deposit Contribution Met");
         if not Members.FindFirst() then begin
             EligibilityFailReason := 'Member NOT found';
             Message('Debug: Member %1 not found.', MemberNo);
@@ -4575,17 +4575,19 @@ codeunit 52186512 "Sky M-Banking Transactions"
             else begin
                 EligibilityFailReason := StrSubstNo('No deposits were received into your Deposit account in %1.', MonthLabel);
 
-                Message('Debug Failure:\Month 1 (%1)\Month 2 (%2)\Month 3 (%3)\\Total Credits: %4\Status: Failed at %5 (%6)',
-                    MonthSummaries[1], MonthSummaries[2], MonthSummaries[3],
-                    TotalCredits, MonthLabel, EligibilityFailReason);
-                exit(0);
+                if not Members."Deposit Contribution Met" then begin
+                    Message('Debug Failure:\Month 1 (%1)\Month 2 (%2)\Month 3 (%3)\\Total Credits: %4\Status: Failed at %5 (%6)',
+                        MonthSummaries[1], MonthSummaries[2], MonthSummaries[3],
+                        TotalCredits, MonthLabel, EligibilityFailReason);
+                    exit(0);
+                end;
             end;
         end;
 
         Message('Debug Credit Summary:\Month 1 (%1)\Month 2 (%2)\Month 3 (%3)\\Total Credits: %4',
             MonthSummaries[1], MonthSummaries[2], MonthSummaries[3], TotalCredits);
 
-        if ActiveMonths < 3 then begin
+        if (ActiveMonths < 3) and not Members."Deposit Contribution Met" then begin
             EligibilityFailReason :=
                 'You are not eligible. Deposits are required for 3 consecutive months';
             exit(0);
