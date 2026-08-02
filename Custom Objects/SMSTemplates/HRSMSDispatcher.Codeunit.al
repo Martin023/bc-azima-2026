@@ -20,12 +20,24 @@ codeunit 52185460 "HR SMS Dispatcher"
 
         PhoneNo := '';
         if RecipientEmployeeNo <> '' then
-            if HREmp.Get(RecipientEmployeeNo) then
+            if HREmp.Get(RecipientEmployeeNo) then begin
+                // PRIMARY: CELL PHONE NUMBER (FIELD 39003907)
                 PhoneNo := HREmp."Cell Phone Number";
+                // FALLBACK 1: CELLULAR PHONE NUMBER (FIELD 14)
+                if PhoneNo = '' then
+                    PhoneNo := HREmp."Cellular Phone Number";
+                // FALLBACK 2: WORK PHONE NUMBER (FIELD 15)
+                if PhoneNo = '' then
+                    PhoneNo := HREmp."Work Phone Number";
+                // FALLBACK 3: HOME PHONE NUMBER (FIELD 13)
+                if PhoneNo = '' then
+                    PhoneNo := HREmp."Home Phone Number";
+            end;
 
         if PhoneNo = '' then begin
             LogEntry(EventCode, RecipientRole, '', SourceDocNo, '', 1,
-                'NO PHONE NUMBER ON EMPLOYEE RECORD ' + RecipientEmployeeNo);
+                'NO PHONE NUMBER FOUND ON EMPLOYEE ' + RecipientEmployeeNo +
+                '. SET Cell Phone Number, Cellular Phone Number, Work Phone Number OR Home Phone Number ON THE EMPLOYEE CARD.');
             exit;
         end;
 
