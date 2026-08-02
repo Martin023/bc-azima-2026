@@ -1848,6 +1848,11 @@ table 52185700 Members
             OptionCaption = ' ,Corporate,Company,Welfare';
             OptionMembers = " ",Corporate,Company,Welfare;
         }
+        field(1058; "Deposit Contribution Met"; Boolean)
+        {
+            Caption = 'Deposit Contribution Met';
+            Editable = false;
+        }
     }
 
     keys
