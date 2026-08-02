@@ -275,8 +275,13 @@ page 52185753 "Loan Application Card"
 
                 field("Appraisal Parameter Type"; Rec."Appraisal Parameter Type")
                 {
-                    ApplicationArea = Basic, Suite;
+
                     // Editable = ApplicationDetailsEdit;
+                }
+                field("Date of Birth"; Rec."Date of Birth")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = false;
                 }
                 field("Member Age"; Rec."Member Age")
                 {
