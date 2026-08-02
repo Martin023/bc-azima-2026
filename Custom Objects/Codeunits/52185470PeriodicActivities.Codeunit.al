@@ -6152,6 +6152,8 @@ Codeunit 52185470 "Periodic Activities"
             NewLoans."Loan Recovery No." := DocNo;
             NewLoans."Recovered Loan" := Loans."Loan No.";
             NewLoans."Source Unit" := ProductFactory."Source Unit";
+            Newloans."Recovered Product Type" := Loans."Loan Product Type";
+            NewLoans."Recovered Product Name" := loans."Loan Product Type Name";
             NewLoans.Insert(true);
 
             NewLoans.Reset;

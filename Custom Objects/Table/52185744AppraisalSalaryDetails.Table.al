@@ -271,6 +271,8 @@ table 52185744 "Appraisal Salary Details"
         OtherAllowances: Decimal;
         TotalDeductions: Decimal;
         OtherDeductions: Decimal;
+        curvolPenAmount: Decimal;
+        curvolNSSfAmount: Decimal;
     begin
         curBasicPay := 0;
         curTransAmount := 0;
@@ -287,6 +289,8 @@ table 52185744 "Appraisal Salary Details"
         TotalOutstanding := 0;
         PensionRelief := 0;
         OtherDeductions := 0;
+        curVolPenAmount := 0;
+        curvolNSSfAmount := 0;
         // dtOpenPeriod := prPayrollProcessing.fnGetOpenPeriod();
         // intMonth := Date2dmy(dtOpenPeriod, 2);
         // intYear := Date2dmy(dtOpenPeriod, 3);
@@ -356,7 +360,7 @@ table 52185744 "Appraisal Salary Details"
 
             HousingLevyAmount := ROUND((curTransAmount * (1.5 / 100)), 0.01, '<');
             Relief := 1408;
-            TaxablePay := (curTransAmount) - curNSSF - ShifAmount - HousingLevyAmount - curPensionAmount;
+            TaxablePay := (curTransAmount) - (curNSSF + ShifAmount + HousingLevyAmount + curPensionAmount + curvolNSSfAmount + curvolPenAmount);
             if TaxablePay < 0 then
                 TaxablePay := 0;
             curPayeAmount := prPayrollProcessing.fnGetEmployeePaye(TaxablePay);
@@ -365,7 +369,7 @@ table 52185744 "Appraisal Salary Details"
                 curPayeAmount := 0;
             curPayeAmount := ROUND(curPayeAmount, 0.01, '>');
 
-            TotalDeductions := curPayeAmount + ShifAmount + curNSSF + curPensionAmount + HousingLevyAmount + OtherDeductions;
+            TotalDeductions := curPayeAmount + ShifAmount + curNSSF + curPensionAmount + HousingLevyAmount + OtherDeductions + curvolNSSfAmount + curvolPenAmount;
         end;
 
         // STEP 3: Update using Appraisal Setup
@@ -404,7 +408,6 @@ table 52185744 "Appraisal Salary Details"
 
                     ApprDetails.Type::Relief:
                         ApprDetails.Amount := Relief;
-
                     ApprDetails.Type::Loans:
                         ApprDetails.Amount := TotalOutstanding;
                     ApprDetails.Type::"Total Deduction":

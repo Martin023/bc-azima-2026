@@ -1606,31 +1606,31 @@ codeunit 52186512 "Sky M-Banking Transactions"
 
                     // Check arrears amt existing
                     // The arrears not to restrict qualification but recover all arrears.
-                    if QualifiedAmount > 0 then begin
-                        TotArrears := 0;
-                        Netamt := 0;
-                        LoanArr.Reset();
-                        LoanArr.setRange("Member No.", Members."No.");
-                        LoanArr.SetFilter("Loan Product Type", '<>FGL&<>BGL'); // Todo 
-                        Message('Loan product type filter: %1', Format(LoanArr.GetFilter("Loan Product Type")));
-                        LoanArr.CalcFields("Total Balance", "Amount In Arreas SASRA", "Loans Category-SASRA");
-                        //LoanArr.SetFilter("Loans Category-SASRA", '<>%1', loans."Loans Category-SASRA"::Perfoming);
-                        LoanArr.SetFilter("Total Balance", '>0');
-                        //LoanArr.setfilter("Amount In Arreas SASRA", '>500');
-                        if LoanArr.findset() then begin
-                            repeat
-                                LoanArr.CalcFields("Amount In Arreas SASRA");
-                                TotArrears += LoanArr."Amount In Arreas SASRA";
-                            until LoanArr.next() = 0;
-                        end;
-                        if TotArrears > 0 then begin
-                            Netamt := QualifiedAmount - TotArrears;
-                            if Netamt < 0 then Netamt := 0;
-                            msg := 'Dear ' + Members."First Name" + ', your loan qualification amount is KES.' + Format(QualifiedAmount) + ' and your total loan arrears is. ' + format(round(TotArrears, 1, '>')) +
-                            '. The net amount to be disbursed is ' + Format(round(QualifiedAmount - TotArrears));
-                            SendSMS.SendSms(SMSSource::MBANKING, Members."Phone No.", msg, Format(Members."No."), '', true, 220, false, 'CBS', Members."No.", 'CBS');
-                        end;
-                    end;
+                    // if QualifiedAmount > 0 then begin
+                    //     TotArrears := 0;
+                    //     Netamt := 0;
+                    //     LoanArr.Reset();
+                    //     LoanArr.setRange("Member No.", Members."No.");
+                    //     LoanArr.SetFilter("Loan Product Type", '<>FGL&<>BGL'); // Todo 
+                    //     Message('Loan product type filter: %1', Format(LoanArr.GetFilter("Loan Product Type")));
+                    //     LoanArr.CalcFields("Total Balance", "Amount In Arreas SASRA", "Loans Category-SASRA");
+                    //     //LoanArr.SetFilter("Loans Category-SASRA", '<>%1', loans."Loans Category-SASRA"::Perfoming);
+                    //     LoanArr.SetFilter("Total Balance", '>0');
+                    //     //LoanArr.setfilter("Amount In Arreas SASRA", '>500');
+                    //     if LoanArr.findset() then begin
+                    //         repeat
+                    //             LoanArr.CalcFields("Amount In Arreas SASRA");
+                    //             TotArrears += LoanArr."Amount In Arreas SASRA";
+                    //         until LoanArr.next() = 0;
+                    //     end;
+                    //     if TotArrears > 0 then begin
+                    //         Netamt := QualifiedAmount - TotArrears;
+                    //         if Netamt < 0 then Netamt := 0;
+                    //         msg := 'Dear ' + Members."First Name" + ', your loan qualification amount is KES.' + Format(QualifiedAmount) + ' and your total loan arrears is. ' + format(round(TotArrears, 1, '>')) +
+                    //         '. The net amount to be disbursed is ' + Format(round(QualifiedAmount - TotArrears));
+                    //         SendSMS.SendSms(SMSSource::MBANKING, Members."Phone No.", msg, Format(Members."No."), '', true, 220, false, 'CBS', Members."No.", 'CBS');
+                    //     end;
+                    // end;
 
                     if QualifiedAmount > ProdFac."Maximum Loan Amount" then
                         QualifiedAmount := ProdFac."Maximum Loan Amount";

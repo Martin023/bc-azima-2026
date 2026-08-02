@@ -528,21 +528,21 @@ page 52186773 "Loans card"
 
                 trigger OnAction()
                 begin
-                    ProdFac.Get(Rec."Loan Product Type");
-                    Rec.TestField("Recovery Mode");
+                    // ProdFac.Get(Rec."Loan Product Type");
+                    // Rec.TestField("Recovery Mode");
 
 
-                    LoanApp.Reset;
-                    LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
-                    LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");
-                    LoanApp.SetFilter(LoanApp."Outstanding Balance", '>0');
-                    if LoanApp.Find('-') then begin
-                        LoansTopup.Reset;
-                        LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
-                        LoansTopup.SetRange("Loan Top Up", LoanApp."Loan No.");
-                        if not LoansTopup.Find('-') then
-                            Error('Member has an existing %1 Loan No. %2, Kindly TopUp', Rec."Loan Product Type", LoanApp."Loan No.");
-                    end;
+                    // LoanApp.Reset;
+                    // LoanApp.SetRange(LoanApp."Member No.", Rec."Member No.");
+                    // LoanApp.SetRange(LoanApp."Loan Product Type", Rec."Loan Product Type");
+                    // LoanApp.SetFilter(LoanApp."Outstanding Balance", '>0');
+                    // if LoanApp.Find('-') then begin
+                    //     LoansTopup.Reset;
+                    //     LoansTopup.SetRange(LoansTopup."Loan No.", Rec."Loan No.");
+                    //     LoansTopup.SetRange("Loan Top Up", LoanApp."Loan No.");
+                    //     if not LoansTopup.Find('-') then
+                    //         Error('Member has an existing %1 Loan No. %2, Kindly TopUp', Rec."Loan Product Type", LoanApp."Loan No.");
+                    // end;
 
                     LoanApp.Reset;
                     LoanApp.SetRange(LoanApp."Loan No.", Rec."Loan No.");
