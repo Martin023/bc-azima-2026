@@ -737,6 +737,8 @@ Report 52185745 "Loan Appraisal Checkoff"
                 PCharges.Reset;
                 PCharges.SetRange(PCharges."Product Code", Loans."Loan Product Type");
                 PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::General);
+                if (Loans."Member Class" = 'CLASSA') then
+                    PCharges.setfilter("Charge Code", '<>%1', 'C008');
                 if PCharges.Find('-') then begin
                     repeat
 
