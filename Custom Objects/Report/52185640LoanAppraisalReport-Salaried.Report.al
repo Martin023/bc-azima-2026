@@ -692,6 +692,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 TotalBasic := 0;
                 TDeductions := 0;
                 TPension := 0;
+                Topupdeducted := 0;
 
                 ProductFactory.get(Loans."Loan Product Type");
                 //Get Charges and commissions
@@ -1247,6 +1248,18 @@ Report 52185640 "Loan Appraisal Report-Salaried"
                 NetTakeHome := LoanProcess.ComputeCharges(Loans."Approved Amount", Loans."Loan Product Type", Loans."Loan No.", 0);
                 TotalExciseDuty := DepPurchaseCommExc + TopUpCommExc + LoanProcessingAmtEx + LoanFormFeesExc + InsuranceFeeExc;
                 //TotalExciseDuty := Round(TotalExciseDuty, 1, '>');
+                LoanTopup.reset();
+                LoanTopup.SetRange("Loan No.", Loans."Loan No.");
+                if LoanTopup.FindFirst() then begin
+                    // LoanTopup.calcsums("Total Top Up");
+                    repeat
+                        Topupdeducted += LoanTopup."Total Top Up";
+                    until LoanTopup.Next() = 0;
+                end;
+                NettakeHome := NetTakeHome - Topupdeducted;
+
+                if NetTakeHome < 0 then
+                    NetTakeHome := 0;
 
                 // NetTakeHome := NetTakeHome - TotalExciseDuty;
                 NetTakeHome := NetTakeHome - (DepPurchaseComm + Loans."Loans - Deposit Purchase" + Loans."Share Boosted Amount" + OneMonthInterest + TopUpComms);
@@ -1436,6 +1449,7 @@ Report 52185640 "Loan Appraisal Report-Salaried"
         // LoanRec."Cleared Loans Installment" := TopupRepayments;
         // // LoanRec."Adjusted Net" := AdjustedNet;
         // LoanRec."New Repayment" := Loans.Repayment;
+        LoanRec."Total Topup Deduction" := Topupdeducted;
         LoanRec."Take Home Amount" := NetTakeHome;
         // end of repayment
         LoanRec.Insert();
@@ -1610,4 +1624,5 @@ Report 52185640 "Loan Appraisal Report-Salaried"
         RepayPeriod: Decimal;
         LBalance: Decimal;
         ExcemptProductCharges: record "Excempted Product Charges";
+        Topupdeducted: Decimal;
 }
