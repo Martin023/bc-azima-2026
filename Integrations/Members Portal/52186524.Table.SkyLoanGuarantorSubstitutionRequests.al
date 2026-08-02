@@ -235,6 +235,6 @@ table 52186524 "Sky Guarantor Sub Requests"
     var
         SkySMS: Codeunit SendSms;
         SMSSource: Enum "SMS Source";
-        TheUSSD: Label '*882#';
+        TheUSSD: Label '*816#';
         GlobalFunctions: Codeunit "Global Functions";
 }
