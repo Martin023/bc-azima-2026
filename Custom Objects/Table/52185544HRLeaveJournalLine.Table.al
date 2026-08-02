@@ -174,19 +174,19 @@ table 52185544 "HR Leave Journal Line"
         field(22; "Leave Type"; Code[20])
         {
             Editable = true;
-            TableRelation = "HR Leave Types".Code;
+            TableRelation = "HR Leave Types".Code WHERE(Active = const(true));
 
             trigger OnValidate()
             var
                 HrEmployee: record "HR Employees";
                 SalaryGrades: record "Salary Grades";
-
-
             begin
 
                 HrLeaveTypes.reset();
                 HrLeaveTypes.SetRange(Code, rec."Leave Type");
+
                 if HrLeaveTypes.FindFirst() then begin
+
 
                     // PREVENT ALLOCATING LEAVE TO WRONG GENDER
                     if "Staff No." <> '' then begin
