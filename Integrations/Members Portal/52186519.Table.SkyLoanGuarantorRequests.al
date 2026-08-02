@@ -266,6 +266,6 @@ table 52186519 "Sky Loan Guarantor Requests"
     var
         SkySMS: Codeunit SendSms;
         SMSSource: Enum "SMS Source";
-        TheUSSD: Label '*882#';
+        TheUSSD: Label '*816#';
         GlobalFunctions: Codeunit "Global Functions";
 }

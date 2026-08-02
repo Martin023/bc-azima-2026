@@ -4647,7 +4647,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
                                     if TheDestinationMember.FindFirst then begin
                                         /*
-                                        Dear [FIRST_NAME], Confirmed [MPESA REF] of KSHs [AMOUNT] Credited to [AC NUMBER]  [NAME OF THE HOLDER] on [TIMESTAMP]. Thank you . Dial *882# to get more.
+                                        Dear [FIRST_NAME], Confirmed [MPESA REF] of KSHs [AMOUNT] Credited to [AC NUMBER]  [NAME OF THE HOLDER] on [TIMESTAMP]. Thank you . Dial *816# to get more.
                                         */
 
                                         if (
@@ -10375,5 +10375,5 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         SkyMbankingTrans: Codeunit "Sky M-Banking Transactions";
         SkySMS: Codeunit SendSms;
         SMSSource: enum "SMS Source";
-        TheUSSD: Label '*882#';
+        TheUSSD: Label '*816#';
 }
