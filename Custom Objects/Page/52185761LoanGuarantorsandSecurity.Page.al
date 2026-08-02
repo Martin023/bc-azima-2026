@@ -41,6 +41,10 @@ page 52185761 "Loan Guarantors and Security"
                     ApplicationArea = Basic, Suite;
                     Visible = true;
                 }
+                field(Name; Rec.Name)
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = all;
@@ -62,10 +66,7 @@ page 52185761 "Loan Guarantors and Security"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field(Name; Rec.Name)
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+
                 field("Guarantor Status"; Rec."Guarantor Status")
                 {
                     ApplicationArea = Basic, Suite;
