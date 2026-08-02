@@ -421,6 +421,12 @@ page 52185726 "Member Single"
                     ApplicationArea = Basic, Suite;
                     Caption = 'Allow retiree access to mobile loans?';
                 }
+                field("Deposit Contribution Met"; Rec."Deposit Contribution Met")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Deposit Contribution Met';
+                    ToolTip = 'Member satisfied the 3-consecutive-month deposit activity requirement.';
+                }
                 field("Block Div Advance"; Rec."Block Div Advance")
                 {
                     ApplicationArea = Basic, Suite;
@@ -2126,7 +2132,7 @@ page 52185726 "Member Single"
         if (Rec.Age = 0) and (Rec."Date of Birth" <> 0D) then begin
             Rec.Age := Round(((Today - Rec."Date of Birth") / 365), 1, '<');
             Rec.Modify();
-        end;    
+        end;
         GlobalFunctions.FlagAccounts(Rec."No.");
         GlobalFunctions.DisplayLienMessage(Rec."No.");
         //*check if delegate

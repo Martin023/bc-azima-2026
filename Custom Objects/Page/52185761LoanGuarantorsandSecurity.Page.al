@@ -433,26 +433,26 @@ page 52185761 "Loan Guarantors and Security"
                                         TotaAmtGUR := LoanGua."Amount Guaranteed";
                                     end;
 
-                                    LONGU.Reset();
-                                    LONGU.SetRange(LONGU."Loan No", Rec."Loan No");
-                                    if LONGU.Find('-') then begin
-                                        LONGU.PercentageGur := 0;
-                                        LONGU."Amount Guaranteed" := 0;
-                                        repeat
-                                            if TotaAmtGUR <> 0 then begin
-                                                LONGU.PercentageGur := Round((((LONGU."Amount Guaranteed" / TotaAmtGUR) * 100)), 0.01, '=');
-                                                if LoanR."Source Unit" = LoanR."Source Unit"::FOSA then begin
-                                                    if GuarNo > 0 then begin
-                                                        LONGU.PercentageGur := Round((((1 / GuarNo) * 100)), 0.01, '=');
+                                    // LONGU.Reset();
+                                    // LONGU.SetRange(LONGU."Loan No", Rec."Loan No");
+                                    // if LONGU.Find('-') then begin
+                                    //     LONGU.PercentageGur := 0;
+                                    //     LONGU."Amount Guaranteed" := 0;
+                                    //     repeat
+                                    //         if TotaAmtGUR <> 0 then begin
+                                    //             LONGU.PercentageGur := Round((((LONGU."Amount Guaranteed" / TotaAmtGUR) * 100)), 0.01, '=');
+                                    //             // if LoanR."Source Unit" = LoanR."Source Unit"::FOSA then begin
+                                    //                 if GuarNo > 0 then begin
+                                    //                     LONGU.PercentageGur := Round((((1 / GuarNo) * 100)), 0.01, '=');
 
-                                                    end;
-                                                end;
+                                    //                 end;
+                                    //             // end;
 
-                                                LONGU."Amount Guaranteed" := Round(((REqAmt * LONGU.PercentageGur / 100)), 0.01, '=');
-                                                LONGU.Modify();
-                                            end;
-                                        until LONGU.Next() = 0;
-                                    end;
+                                    //             // LONGU."Amount Guaranteed" := Round(((REqAmt * LONGU.PercentageGur / 100)), 0.01, '=');
+                                    //             // LONGU.Modify();
+                                    //         end;
+                                    //     until LONGU.Next() = 0;
+                                    // end;
                                 end;
                                 Message('Calculations Updated');
                             end;

@@ -1736,6 +1736,7 @@ table 52185729 Loans
                     end;
                 end;
                 if (rec.Status = rec.Status::Approved) then begin
+
                     //Send guarantor sms
                     LoanGua.Reset;
                     LoanGua.SetRange(LoanGua."Loan No", Rec."Loan No.");
@@ -1760,9 +1761,9 @@ table 52185729 Loans
                                                 CompInfo.Get;
                                                 MemberGuarantor.Get(LoanGua."Member Guaranteed");
 
-                                                msg := 'Dear ' + MemberGuarantor."First Name" + ', You have guaranteed MNo: '
-                                                + LoanGua."Member Guaranteed" + '-' + MemberGuarantor.Name + ' ' + Loan."Loan Product Type Name" + ' of KES ' +
-                                                Format(Loan."Approved Amount") + '. If in dispute call' + ' ' + CompInfo."Phone No.";
+                                                msg := 'Dear ' + Members."First Name" + ', You have guaranteed MNo: '
+                                                + LoanGua."Member Guaranteed" + '-' + MemberGuarantor.Name + ' ' + Loan."Loan Product Type Name" + ' and pledged amount of ' +
+                                                Format(LoanGua."Amount Guaranteed") + '. If in dispute call' + ' ' + CompInfo."Phone No.";
 
                                                 SendSMS.SendSms(Source::LOAN_GUARANTORS, Members."Phone No.", msg, Format(Loan."Disbursement Account No"), '', true, 0, false, 'CBS', Loan."Disbursement Account No", 'CBS');
 

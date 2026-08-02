@@ -143,6 +143,7 @@ Codeunit 52186458 "Loans Process"
         TotalExciseDuty: Decimal;
         ExciseDuty: Decimal;
         Balance: Decimal;
+        Loans: record Loans;
     begin
         ExciseDuty := 0;
         TotalExciseDuty := 0;
@@ -263,6 +264,10 @@ Codeunit 52186458 "Loans Process"
         PCharges.Reset;
         PCharges.SetRange(PCharges."Product Code", ProdType);
         PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::General);
+        if Loans.get(LoanNo) then begin
+            if (Loans."Member Class" = 'CLASSA') then
+                PCharges.setfilter("Charge Code", '<>%1', 'C008');
+        end;
         if PCharges.Find('-') then begin
             repeat
                 ExcemptProductCharges.Reset();
