@@ -702,6 +702,7 @@ page 52185808 "Salary Header"
                                     if Memb.get(Account."Member No.") then begin
                                         MobileNo := Memb."Phone No.";
                                         Text0008 := Gensetup."Salary SMS Suffix";
+                                        Gensetup.get();
                                         msg := 'Dear ' + memb."First Name" + ' your ' + rec.Remarks + ' has been credited to your FOSA account. Thank You, Dial ' + format(Gensetup."USSD Code") + ' for more information.';
 
                                         SendSMS.SendSms(Source::SALARY_PROCESSING, MobileNo, msg, Format(SalaryLines."Account No."), '', true, 0, false, 'CBS', SalaryLines."Account No.", 'CBS');
