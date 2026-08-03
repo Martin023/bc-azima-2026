@@ -2514,24 +2514,24 @@ codeunit 52186507 "Members Portal Integration"
                             SearchMember."No.",
                             ProductFactory."Product ID");
 
-                        if OutstandingBalance <> 0 then begin
+                        if OutstandingBalance > 0 then begin
                             ProductFactory."Minimum Loan Amount" := OutstandingBalance;
 
-                            repeat
-                                PreviousMinimum := ProductFactory."Minimum Loan Amount";
+                            // repeat
+                            //     PreviousMinimum := ProductFactory."Minimum Loan Amount";
 
-                                MobileChargesInfo := SkyMbankingTrans.GetTransChargesPreview(
-                                    'LOAN_DISBURSEMENT',
-                                    PreviousMinimum,
-                                    '',
-                                    SearchMember,
-                                    '');
+                            //     MobileChargesInfo := SkyMbankingTrans.GetTransChargesPreview(
+                            //         'LOAN_DISBURSEMENT',
+                            //         PreviousMinimum,
+                            //         '',
+                            //         SearchMember,
+                            //         '');
 
-                                ProductFactory."Minimum Loan Amount" :=
-                                    OutstandingBalance +
-                                    MobileChargesInfo.Get(1);
+                            //     ProductFactory."Minimum Loan Amount" :=
+                            //         OutstandingBalance +
+                            //         MobileChargesInfo.Get(1);
 
-                            until ProductFactory."Minimum Loan Amount" = PreviousMinimum;
+                            // until ProductFactory."Minimum Loan Amount" = PreviousMinimum;
 
                             Datum.Replace('minimum_amount', ProductFactory."Minimum Loan Amount");
                         end;
