@@ -305,6 +305,7 @@ Codeunit 52186458 "Loans Process"
 
                         //If excise duty involved
                         if PCharges."Effect Excise Duty" = PCharges."effect excise duty"::Yes then begin
+                            GenSetup.get();
                             GenSetup.TestField("Excise Duty G/L");
                             GenSetup.TestField("Excise Duty (%)");
                             ExciseDuty := ChargeAmount * GenSetup."Excise Duty (%)" * 0.01;
