@@ -36,6 +36,7 @@ Codeunit 52185484 "Loan Appraisal Codeunit"
         if SavBal > 0 then begin
             SavingsAcc.Reset();
             SavingsAcc.Setrange("No.", Accno);
+            SavingsAcc.SetAutoCalcFields(balance);
             if SavingsAcc.FindFirst() then begin
                 Loans.Reset();
                 Loans.SetRange("Member No.", SavingsAcc."Member No.");
@@ -51,6 +52,9 @@ Codeunit 52185484 "Loan Appraisal Codeunit"
                         if not Toups.IsEmpty() then
                             TotalThreeMonthInterest += (Loans."Outstanding Balance" * 3 * (Loans."Interest" / 12 * 0.01));
                     until Loans.Next() = 0;
+                end
+                else begin
+                    TotalThreeMonthInterest := SavingsAcc.Balance * 3 * (Loans."Interest" / 12 * 0.01);
                 end;
                 //Message('Total Loan Balance: %1, Total Three Month Interest: %2', TotalLoanBalance, TotalThreeMonthInterest);
                 TotalLoanCommittment := TotalLoanBalance + TotalThreeMonthInterest;
