@@ -2685,24 +2685,24 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                 SearchMember."No.",
                                 MobileLoanProducts."Product ID");
 
-                            if OutstandingBalance <> 0 then begin
+                            if OutstandingBalance > 0 then begin
                                 MobileLoanProducts."Minimum Loan Amount" := OutstandingBalance;
 
-                                repeat
-                                    PreviousMinimum := MobileLoanProducts."Minimum Loan Amount";
+                                // repeat
+                                //     PreviousMinimum := MobileLoanProducts."Minimum Loan Amount";
 
-                                    MobileChargesInfo := SkyMbankingTrans.GetTransChargesPreview(
-                                        'LOAN_DISBURSEMENT',
-                                        PreviousMinimum,
-                                        '',
-                                        SearchMember,
-                                        '');
+                                //     MobileChargesInfo := SkyMbankingTrans.GetTransChargesPreview(
+                                //         'LOAN_DISBURSEMENT',
+                                //         PreviousMinimum,
+                                //         '',
+                                //         SearchMember,
+                                //         '');
 
-                                    MobileLoanProducts."Minimum Loan Amount" :=
-                                        OutstandingBalance +
-                                        MobileChargesInfo.Get(1);
+                                //     MobileLoanProducts."Minimum Loan Amount" :=
+                                //         OutstandingBalance +
+                                //         MobileChargesInfo.Get(1);
 
-                                until MobileLoanProducts."Minimum Loan Amount" = PreviousMinimum;
+                                // until MobileLoanProducts."Minimum Loan Amount" = PreviousMinimum;
 
                                 Datum.Replace('loan_type_min_amount', MobileLoanProducts."Minimum Loan Amount");
                             end;
