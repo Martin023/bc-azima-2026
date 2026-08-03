@@ -2043,6 +2043,10 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     //     ProdFac."Repay Mode"::"Mobile Money"
                     // ] then begin
                     LoanRec -= TLoanRepayment;
+
+                    if LoanRec < 0 then
+                        LoanRec := 0;
+
                     Message('DEBUG: TLoanRepayment (existing FOSA loans) = %1, LoanRec after deduction = %2', TLoanRepayment, LoanRec);
                     // end;
                 end;
