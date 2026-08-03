@@ -5584,13 +5584,17 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             // Update FOSA
                                             DepositMember.Reset;
                                             DepositMember.SetRange("Primary Identification", MpesaTransBuffer."Savings Account");
-                                            DepositMember.setRange("Primary Identification Type", DepositMember."Primary Identification Type"::"ID Number");
-                                            DepositMember.SetLoadFields("No.", "Primary Identification");
-                                            if DepositMember.FindFirst then begin
-                                                MpesaTransBuffer."Savings Account" := SkyMbankingTrans.GetMemberFosaAcc(DepositMember);
-                                                MpesaTransBuffer."Needs Change" := false;
-                                                MpesaTransBuffer."Needs Change Reason" := '';
+                                            DepositMember.SetRange("Primary Identification Type", DepositMember."Primary Identification Type"::"ID Number");
+                                            if not DepositMember.FindFirst then begin
+                                                DepositMember.Reset;
+                                                DepositMember.SetRange("Old Member No.", MpesaTransBuffer."Savings Account");
+                                                if not DepositMember.FindFirst then
+                                                    exit;
                                             end;
+
+                                            MpesaTransBuffer."Savings Account" := SkyMbankingTrans.GetMemberFosaAcc(DepositMember);
+                                            MpesaTransBuffer."Needs Change" := false;
+                                            MpesaTransBuffer."Needs Change Reason" := '';
 
                                             // theSMS := 'The account number ' + MpesaTransBuffer."Savings Account" +
                                             // ' for your deposit transaction of Ksh ' + Format(MpesaTransBuffer."Transaction Amount") +
