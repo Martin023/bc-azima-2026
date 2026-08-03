@@ -13,7 +13,7 @@ table 52185784 "Salary Lines"
         field(2; "Account No."; Code[20])
         {
             // TableRelation = "Savings Accounts"."No." where("Product Category" = filter("FOSA Account" | SAYE), "Loan Disbursement Account" = filter(true));
-            TableRelation = "Savings Accounts"."No." where("Product Category" = filter("FOSA Account"), "Product Type" = const('191'));
+            TableRelation = "Savings Accounts"."No." where("Product Category" = filter("FOSA Account"), "Product Type" = filter('191|195'));
             ValidateTableRelation = false;
 
             trigger OnValidate()
@@ -30,7 +30,7 @@ table 52185784 "Salary Lines"
 
             trigger OnValidate()
             begin
-       
+
             end;
         }
         field(4; Name; Text[50])
