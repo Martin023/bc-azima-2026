@@ -150,10 +150,14 @@ table 52185739 "Loan Guarantors and Security"
                                 end
                                 else begin
                                     if (Membersrec."Member Class" = 'CLASSB') then begin
-                                        "Self Guarantee" := false;
-                                        "Available Shares" := LoanAppraisal.GetmaxSelfGuaranteeAmt("Savings Account No./Member No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(rec."Member No");
-                                        "Amount Guaranteed" := LoanAppraisal.GetmaxSelfGuaranteeAmt("Savings Account No./Member No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(rec."Member No");
-                                        "Original Amount Guaranteed" := "Amount Guaranteed";
+                                        if classBEmployer.get(Membersrec."Employer Code") then begin
+                                            if not classBEmployer."Full deposit Guarantee" then begin
+                                                "Self Guarantee" := false;
+                                                "Available Shares" := LoanAppraisal.GetmaxSelfGuaranteeAmt("Savings Account No./Member No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(rec."Member No");
+                                                "Amount Guaranteed" := LoanAppraisal.GetmaxSelfGuaranteeAmt("Savings Account No./Member No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(rec."Member No");
+                                                "Original Amount Guaranteed" := "Amount Guaranteed";
+                                            end;
+                                        end;
                                     end
                                     else begin
                                         "Self Guarantee" := false;
@@ -659,7 +663,7 @@ table 52185739 "Loan Guarantors and Security"
         }
 
 
-       
+
     }
 
     keys
@@ -801,6 +805,7 @@ table 52185739 "Loan Guarantors and Security"
         maxamountguarantee: Decimal;
         Totalguarantee: Decimal;
         LoanAppraisal: Codeunit "Loan Appraisal Codeunit";
+        classBEmployer: record Customer;
 
 
 

@@ -112,7 +112,9 @@ Report 52185756 "Generate Monthly Interest"
                                                                 LoansRecInterest."Interest Date" := "Interest Header"."Interest Due Date";
                                                                 LoansRecInterest."Issued Date" := LoansRec."Disbursement Date";
                                                                 LoansRecInterest.Posted := false;
-
+                                                                LoansRecInterest."Staff No" := LoansRec."Staff No";
+                                                                Members.CalcFields("Employer Name");
+                                                                LoansRecInterest."Employer Name" := Members."Employer Name";
                                                                 // Grace Period Interest Handling
                                                                 if Format(ProductFactory."Grace Period - Interest") <> '' then begin
                                                                     if CalcDate(ProductFactory."Grace Period - Interest", LoansRec."Disbursement Date") <= PostingDate then
@@ -202,4 +204,5 @@ Report 52185756 "Generate Monthly Interest"
         Members: Record Members;
         LoanRepayments: record "Credit Ledger Entry";
         LoansRec: record Loans;
+        Customers: record Customer;
 }

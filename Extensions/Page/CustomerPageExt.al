@@ -46,6 +46,12 @@ pageextension 52187301 CustomerCardExtension extends "Customer Card"
             {
 
             }
+            field("Full deposit Guarantee"; Rec."Full deposit Guarantee")
+            {
+                ApplicationArea = All;
+                Caption = 'Full Deposit Guarantee';
+                ToolTip = 'Full Deposit Guarantee';
+            }
             field("Employee Job Group"; Rec."Employee Job Group")
             {
                 ApplicationArea = All;
