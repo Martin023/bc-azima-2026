@@ -1481,7 +1481,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
             saccoAccount.SETRANGE(saccoAccount."Member No.", Members."No.");
             saccoAccount.SetRange("Product Category", saccoAccount."Product Category"::"FOSA Account");
             saccoAccount.SetCurrentKey(Blocked);
-            saccoAccount.SetRange("Product Type", '191');
+            saccoAccount.setrange("Loan Disbursement Account", true);
+            // saccoAccount.SetRange("Product Type", '191');
             Message('Searching for FOSA transactional account for Member: %1', Members."No.");
 
             saccoAccount.SetLoadFields(
@@ -1982,7 +1983,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
             saccoAccount.SETRANGE(saccoAccount."Member No.", Members."No.");
             saccoAccount.SetRange("Product Category", saccoAccount."Product Category"::"FOSA Account");
             saccoAccount.SetCurrentKey(Blocked);
-            saccoAccount.SetRange("Product Type", '191');
+            saccoAccount.setrange("Loan Disbursement Account", true);
+            // saccoAccount.SetRange("Product Type", '191');
 
             saccoAccount.SetLoadFields(
                 "No.", "Member No.", Status, Blocked
