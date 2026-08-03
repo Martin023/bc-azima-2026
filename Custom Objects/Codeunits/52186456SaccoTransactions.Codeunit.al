@@ -4414,7 +4414,7 @@ Codeunit 52186456 "Sacco Transactions"
                                                                 end;
                                                             end;
 
-                                                            
+
                                                             if Employer.Get(SavingsACC."Employer Code") then begin
                                                                 if Employer."Dont Charge Transactions" then
                                                                     ChargeAmount := 0;
