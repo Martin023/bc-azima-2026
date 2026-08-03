@@ -383,23 +383,24 @@ table 52185776 "Cashier Transactions"
 
                 end;
                 //System should notify teller if a member has multiple times in other branches.
-                CT.Reset();
-                CT.SetRange("Member No.", rec."Member No.");
-                CT.SetRange("Transaction Date", Today);
-                CT.SetRange(Posted, true);
-                CT.SetFilter("Global Dimension 1 Code", '<>%1', rec."Global Dimension 1 Code");
-                if CT.FindSet() then begin
-                    repeat
-                        CT.calcFields("Branch Name");
-                        Message(
-                              'This member has done other transactions today in another branch. Transaction Type: %1, Amount: %2, Branch: %3',
-                              Format(CT.Type),
-                              CT.Amount,
-                              CT."Branch Name"
-                              );
-                    until CT.Next() = 0;
+                if rec."Member No." <> '' then begin
+                    CT.Reset();
+                    CT.SetRange("Member No.", rec."Member No.");
+                    CT.SetRange("Transaction Date", Today);
+                    CT.SetRange(Posted, true);
+                    CT.SetFilter("Global Dimension 1 Code", '<>%1', rec."Global Dimension 1 Code");
+                    if CT.FindSet() then begin
+                        repeat
+                            CT.calcFields("Branch Name");
+                            Message(
+                                  'This member has done other transactions today in another branch. Transaction Type: %1, Amount: %2, Branch: %3',
+                                  Format(CT.Type),
+                                  CT.Amount,
+                                  CT."Branch Name"
+                                  );
+                        until CT.Next() = 0;
+                    end;
                 end;
-
             end;
         }
         field(30; "Banked By"; Code[50])
