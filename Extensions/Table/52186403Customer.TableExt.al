@@ -170,7 +170,7 @@ TableExtension 52186403 tableextension52186403 extends Customer
         {
             DataClassification = ToBeClassified;
         }
-        field(50031; "Escalation Frequency"; DateFormula)
+        field(50031; "Full deposit Guarantee"; boolean)
         {
             DataClassification = ToBeClassified;
         }

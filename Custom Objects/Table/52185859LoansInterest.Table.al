@@ -185,6 +185,15 @@ table 52185859 "Loans Interest"
         {
             Editable = false;
         }
+        field(44; "Staff No"; Code[20])
+        {
+            Editable = false;
+        }
+        field(45; "Employer Name"; Text[100])
+        {
+            Editable = false;
+        }
+
     }
 
     keys

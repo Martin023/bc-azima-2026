@@ -27,14 +27,27 @@ page 52185878 "Loans Interest"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Account Type"; Rec."Account Type")
+                field("Emp code"; Rec."Emp code")
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Account No"; Rec."Account No")
+                field("Employer Name"; Rec."Employer Name")
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Staff No"; Rec."Staff No")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+
+                // field("Account Type"; Rec."Account Type")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("Account No"; Rec."Account No")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("Interest Amount"; Rec."Interest Amount")
                 {
                     ApplicationArea = all;
@@ -46,10 +59,10 @@ page 52185878 "Loans Interest"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Appraisal Amount"; Rec."Appraisal Amount")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field("Appraisal Amount"; Rec."Appraisal Amount")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field("Issued Date"; Rec."Issued Date")
                 {
                     ApplicationArea = Basic, Suite;
@@ -71,10 +84,10 @@ page 52185878 "Loans Interest"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field(Transferred; Rec.Transferred)
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+                // field(Transferred; Rec.Transferred)
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
                 field(Status; Rec.Status)
                 {
                     ApplicationArea = Basic, Suite;
