@@ -10,7 +10,7 @@ report 52185683 "Cashier Withdrawal Slip"
             DataItemTableView = sorting(No);
             RequestFilterFields = No;
 
-            column(Transactions_Transactions__Book_Balance_; "Book Balance") { }
+            column(Transactions_Transactions__Book_Balance_; Transactions."Book Balance") { }
             column(Transactions_No; No) { }
             column(AccountNo; "Account No") { }
             column(AccountName; "Account Name") { }
@@ -23,16 +23,16 @@ report 52185683 "Cashier Withdrawal Slip"
             column(PayrollNo; StaffNo) { }
             column(Prod_Name; ProductName) { }
             column(Transactions__Transaction_Date_; "Transaction Date") { }
-            column(Transactions_Transactions__Transaction_Time_; "Transaction Time") { }
+            column(Transactions_Transactions__Transaction_Time_; Transactions."Transaction Time") { }
             column(Transactions__Cheque_No_; "Cheque No") { }
             column(Transactions_Type; Type) { }
-            column(BranchCode; "Global Dimension 2 Code") { }
+            column(BranchCode; Transactions."Global Dimension 2 Code") { }
             column(CompanyInfo_Name; CompanyInfo.Name) { }
             column(Company_Address; CompanyInfo.Address) { }
             column(Co_phone; CompanyInfo."Phone No.") { }
             column(Company_Pic; CompanyInfo.Picture) { }
             column(NumberText; NumberText[1]) { }
-            column(Transactions_Transactions_Cashier; Cashier) { }
+            column(Transactions_Transactions_Cashier; Transactions.Cashier) { }
             column(Amount_WithdrawnCaption; Amount_WithdrawnCaptionLbl) { }
             column(Book_Balance_Caption; Book_Balance_CaptionLbl) { }
             column(Transaction_No_Caption; Transaction_No_CaptionLbl) { }
@@ -40,7 +40,7 @@ report 52185683 "Cashier Withdrawal Slip"
             column(Account_Name_Caption; Account_Name_CaptionLbl) { }
             column(Date_Caption; Date_CaptionLbl) { }
             column(Time_Caption; Time_CaptionLbl) { }
-            column(Transactions__Cheque_No_Caption; FieldCaption("Cheque No")) { }
+            column(Transactions__Cheque_No_Caption; Transactions.FieldCaption("Cheque No")) { }
             column(Member_No_Caption; Member_No_CaptionLbl) { }
             column(EmptyStringCaption; EmptyStringCaptionLbl) { }
             column(Signature_Caption; Signature_CaptionLbl) { }
@@ -57,19 +57,19 @@ report 52185683 "Cashier Withdrawal Slip"
             column(Better_life_for_our_members_globallyCaption; Better_life_for_our_members_globallyCaptionLbl) { }
             column(Transactions_Transaction_Type; "Transaction Type") { }
             column(ExpectedMaturityDate; "Expected Maturity Date") { }
-            column(ChequeNo_Transactions; "Cheque No") { }
-            column(TransactionDescription_Transactions; "Transaction Description") { }
-            column(Cashier_Transactions; Cashier) { }
+            column(ChequeNo_Transactions; Transactions."Cheque No") { }
+            column(TransactionDescription_Transactions; Transactions."Transaction Description") { }
+            column(Cashier_Transactions; Transactions.Cashier) { }
             column(NumberText_1_; NumberText[1]) { }
             column(SumTransactionCharges; SumTransactionCharges) { }
             column(AvailableBalance; "Available Balance") { }
-            column(NewAvailable; NewAvailableBalance) { } // REDIRECTED TO CALCULATED VARIABLE
-            column(Dublicate; Dublicate) { }
+            column(NewAvailable; NewAvailableBalance) { }
+            column(Dublicate; Transactions.Dublicate) { }
             column(CashierName; CashierName) { }
             column(MaskedAccountNo; MaskedAccountNo) { }
             column(CashierNameOnly; CashierNameOnly) { }
             column(Till_Name; "Till Name") { }
-            column(Branch_code; "Global Dimension 1 Code") { }
+            column(Branch_code; Transactions."Global Dimension 1 Code") { }
             column(Branch_Name; BranchName) { }
             column(ProductTypeDescription; ProductTypeDescription) { }
             column(Reprint; Reprint) { }
@@ -121,7 +121,7 @@ report 52185683 "Cashier Withdrawal Slip"
 
             trigger OnAfterGetRecord()
             begin
-                // INITIALIZE VARIABLES
+                // INITIALIZE
                 StaffNo := '';
                 ProductName := '';
                 CashierName := '';
@@ -129,7 +129,7 @@ report 52185683 "Cashier Withdrawal Slip"
                 CashierNameOnly := '';
                 ProductTypeDescription := '';
 
-                // USER DETAILS
+                // USER INFO
                 user.Reset();
                 user.SetRange("User Name", Transactions.Cashier);
                 if user.Find('-') then begin
@@ -140,7 +140,7 @@ report 52185683 "Cashier Withdrawal Slip"
                         CashierNameOnly := CashierName;
                 end;
 
-                // MASK ACCOUNT NUMBER
+                // MASK ACCOUNT
                 if StrLen("Account No") > 5 then begin
                     MaskedAccountNo := CopyStr("Account No", 1, 3) +
                                       PadStr('', StrLen("Account No") - 5, '*') +
@@ -148,19 +148,20 @@ report 52185683 "Cashier Withdrawal Slip"
                 end else
                     MaskedAccountNo := "Account No";
 
-                // PRODUCT DETAILS
+                // PRODUCT
                 ProductFactory.Reset();
                 ProductFactory.SetRange("Product ID", "Product Type");
                 if ProductFactory.FindFirst() then
                     ProductTypeDescription := ProductFactory."Product Description";
 
-                // CALCULATE TOTAL CHARGES FROM LEDGER
+                // TOTAL CHARGES CALCULATION
+                SumTransactionCharges := 0;
                 SavingsLedgerEntry.Reset();
                 SavingsLedgerEntry.SetRange("Customer No.", "Account No");
                 SavingsLedgerEntry.SetRange("Document No.", No);
                 if SavingsLedgerEntry.FindSet() then begin
                     SavingsLedgerEntry.CalcSums(Amount);
-                    SumTransactionCharges := SavingsLedgerEntry.Amount - Amount;
+                    SumTransactionCharges := Abs(SavingsLedgerEntry.Amount + Amount);
                 end;
 
                 // MEMBER DATA
@@ -179,13 +180,13 @@ report 52185683 "Cashier Withdrawal Slip"
                 if DimensionValue.FindFirst() then
                     BranchName := DimensionValue.Name;
 
-                // HANDLE REPRINT STATUS
+                // REPRINT LOGIC
                 Reprint := '';
                 if "Transaction Date" < Today then
                     Reprint := 'REPRINT'
-                else if ("Transaction Date" = Today) and ("Transaction Time" <> 0T) then begin
-                    if Time > "Transaction Time" then begin
-                        if (Time - "Transaction Time") > 60000 then
+                else if ("Transaction Date" = Today) and (Transactions."Transaction Time" <> 0T) then begin
+                    if Time > Transactions."Transaction Time" then begin
+                        if (Time - Transactions."Transaction Time") > 60000 then
                             Reprint := 'REPRINT';
                     end;
                 end;
@@ -193,9 +194,9 @@ report 52185683 "Cashier Withdrawal Slip"
                 ReprintDate := Today;
                 ReprintTime := Time;
 
-                // PREVENT NEGATIVE NEW BALANCE ON SLIP
+                // PREVENT DOUBLE CHARGE SUBTRACTION
                 if Transactions.Posted then
-                    NewAvailableBalance := Transactions."Available Balance"
+                    NewAvailableBalance := Transactions."Available Balance" + SumTransactionCharges
                 else
                     NewAvailableBalance := Transactions."Available Balance" - Transactions.Amount;
 
@@ -221,9 +222,9 @@ report 52185683 "Cashier Withdrawal Slip"
     begin
         if CompanyInformation.Get() then
             CompanyInformation.CalcFields(CompanyInformation.Picture);
-        CompanyAddress := CompanyInformation.Address + ' -Post Code: ' + CompanyInformation."Post Code" + ' -City:' + CompanyInformation.City;
-        CompanyTelephone := 'Tel: ' + CompanyInformation."Phone No.";
-        CommunicationOnline := 'E-mail: ' + CompanyInformation."E-Mail";
+        CompanyAddress := CompanyInformation.Address + ' -Post Code: ' + CompanyInformation."Post Code" + ' -City:' + CompanyInformation.City + ' Region: ' + CompanyInformation."Country/Region Code";
+        CompanyTelephone := 'Tel: ' + CompanyInformation."Phone No." + ' -Office Tel: ' + CompanyInformation."Phone No. 2";
+        CommunicationOnline := 'E-mail: ' + CompanyInformation."E-Mail" + '- Website: ' + CompanyInformation."Home Page";
     end;
 
     var
@@ -279,15 +280,33 @@ report 52185683 "Cashier Withdrawal Slip"
 
     local procedure InitTextVariable()
     begin
-        OnesText[1] := 'One'; OnesText[2] := 'Two'; OnesText[3] := 'Three';
-        OnesText[4] := 'Four'; OnesText[5] := 'Five'; OnesText[6] := 'Six';
-        OnesText[7] := 'Seven'; OnesText[8] := 'Eight'; OnesText[9] := 'Nine';
-        OnesText[10] := 'Ten'; OnesText[11] := 'Eleven'; OnesText[12] := 'Twelve';
-        OnesText[13] := 'Thirteen'; OnesText[14] := 'Fourteen'; OnesText[15] := 'Fifteen';
-        OnesText[16] := 'Sixteen'; OnesText[17] := 'Seventeen'; OnesText[18] := 'Eighteen';
-        OnesText[19] := 'Nineteen'; TensText[1] := ''; TensText[2] := 'Twenty';
-        TensText[3] := 'Thirty'; TensText[4] := 'Forty'; TensText[5] := 'Fifty';
-        TensText[6] := 'Sixty'; TensText[7] := 'Seventy'; TensText[8] := 'Eighty';
+        OnesText[1] := 'One';
+        OnesText[2] := 'Two';
+        OnesText[3] := 'Three';
+        OnesText[4] := 'Four';
+        OnesText[5] := 'Five';
+        OnesText[6] := 'Six';
+        OnesText[7] := 'Seven';
+        OnesText[8] := 'Eight';
+        OnesText[9] := 'Nine';
+        OnesText[10] := 'Ten';
+        OnesText[11] := 'Eleven';
+        OnesText[12] := 'Twelve';
+        OnesText[13] := 'Thirteen';
+        OnesText[14] := 'Fourteen';
+        OnesText[15] := 'Fifteen';
+        OnesText[16] := 'Sixteen';
+        OnesText[17] := 'Seventeen';
+        OnesText[18] := 'Eighteen';
+        OnesText[19] := 'Nineteen';
+        TensText[1] := '';
+        TensText[2] := 'Twenty';
+        TensText[3] := 'Thirty';
+        TensText[4] := 'Forty';
+        TensText[5] := 'Fifty';
+        TensText[6] := 'Sixty';
+        TensText[7] := 'Seventy';
+        TensText[8] := 'Eighty';
         TensText[9] := 'Ninety';
     end;
 
@@ -356,7 +375,9 @@ report 52185683 "Cashier Withdrawal Slip"
     begin
         if Number = 0 then exit('');
         if Number < 20 then exit(OnesText[Number]);
-        if (Number mod 10) = 0 then exit(TensText[Number div 10])
-        else exit(TensText[Number div 10] + ' ' + OnesText[Number mod 10]);
+        if (Number mod 10) = 0 then
+            exit(TensText[Number div 10])
+        else
+            exit(TensText[Number div 10] + ' ' + OnesText[Number mod 10]);
     end;
 }
