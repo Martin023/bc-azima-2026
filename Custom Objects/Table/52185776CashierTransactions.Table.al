@@ -388,7 +388,6 @@ table 52185776 "Cashier Transactions"
 
                 end;
 
-                if (Rec."Account Type" = Rec."Account Type"::Account) and (Rec."Member No." <> '') then begin
                 //System should notify teller if a member has multiple times in other branches.
                 if rec."Member No." <> '' then begin
                     CT.Reset();
@@ -405,11 +404,6 @@ table 52185776 "Cashier Transactions"
                                 CT.Amount,
                                 CT."Branch Name"
                                 );
-                                  'This member has done other transactions today in another branch. Transaction Type: %1, Amount: %2, Branch: %3',
-                                  Format(CT.Type),
-                                  CT.Amount,
-                                  CT."Branch Name"
-                                  );
                         until CT.Next() = 0;
                     end;
                 end;
