@@ -2910,17 +2910,14 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                         SearchMember."No.",
                         MobileLoanProduct."Product ID"
                     );
-                    if MobileLoanProduct."Minimum Loan Amount" < ExistingLoanAmount then begin
-                        Datum.Replace('loan_type_min_amount', ExistingLoanAmount + 70); // add 70 for processing fee
-                    end else begin
-                        Datum.Add('loan_type_min_amount', MobileLoanProduct."Minimum Loan Amount");
+                    if (MobileLoanProduct."Minimum Loan Amount" < ExistingLoanAmount + 70) AND (ExistingLoanAmount > 0) then begin
+                        MobileLoanProduct."Minimum Loan Amount" := ExistingLoanAmount + 70;
                     end;
-                    Datum.Add('existing_loan_amount', ExistingLoanAmount);
                 end else begin
                     Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason));
                     Datum.Add('existing_loan_amount', ExistingLoanAmount);
                 end;
-                Datum.Add('loan_type_min_amount', MobileLoanProduct."Minimum Loan Amount");
+                Datum.add('loan_type_min_amount', MobileLoanProduct."Minimum Loan Amount");
                 // end;
 
                 if MobileLoanProduct."Mobile Max. Loan Amount" <> 0 then begin
