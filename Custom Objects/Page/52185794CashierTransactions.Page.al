@@ -1619,8 +1619,6 @@ page 52185794 "Cashier Transactions"
         NormalChequeVisible: Boolean;
         BalBroughtForwardAmt : Decimal;
 
-
-
     // TransLien: Boolean;
 
     local procedure SetControlAppearance()
