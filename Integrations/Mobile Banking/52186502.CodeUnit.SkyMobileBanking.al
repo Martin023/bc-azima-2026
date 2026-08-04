@@ -2687,23 +2687,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                 MobileLoanProducts."Product ID");
 
                             if OutstandingBalance > 0 then begin
-                                MobileLoanProducts."Minimum Loan Amount" := OutstandingBalance;
-
-                                // repeat
-                                //     PreviousMinimum := MobileLoanProducts."Minimum Loan Amount";
-
-                                //     MobileChargesInfo := SkyMbankingTrans.GetTransChargesPreview(
-                                //         'LOAN_DISBURSEMENT',
-                                //         PreviousMinimum,
-                                //         '',
-                                //         SearchMember,
-                                //         '');
-
-                                //     MobileLoanProducts."Minimum Loan Amount" :=
-                                //         OutstandingBalance +
-                                //         MobileChargesInfo.Get(1);
-
-                                // until MobileLoanProducts."Minimum Loan Amount" = PreviousMinimum;
+                                TotalChargesOnMin := SkyMbankingTrans.GetTransChargesPreview('LOAN_DISBURSEMENT', 0, '', SearchMember, '').Get(1);
+                                MobileLoanProducts."Minimum Loan Amount" := OutstandingBalance + TotalChargesOnMin;
 
                                 Datum.Replace('loan_type_min_amount', MobileLoanProducts."Minimum Loan Amount");
                             end;
@@ -2825,6 +2810,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         Datum: JsonObject;
         Response: Text;
         EligibilityFailReason: Text;
+        TotalCharges: Decimal;
     begin
         Payload.Get('originator_id', originator_id);
         Payload.Get('identifier_type', identifier_type); // MSISDN, CUSTOMER_NO
@@ -2910,8 +2896,9 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                         SearchMember."No.",
                         MobileLoanProduct."Product ID"
                     );
-                    if (MobileLoanProduct."Minimum Loan Amount" < ExistingLoanAmount + 70) AND (ExistingLoanAmount > 0) then begin
-                        MobileLoanProduct."Minimum Loan Amount" := ExistingLoanAmount + 70;
+                    TotalCharges := SkyMbankingTrans.GetTransChargesPreview('LOAN_DISBURSEMENT', 0, '', SearchMember, '').Get(1);
+                    if (MobileLoanProduct."Minimum Loan Amount" < ExistingLoanAmount + TotalCharges) AND (ExistingLoanAmount > 0) then begin
+                        MobileLoanProduct."Minimum Loan Amount" := ExistingLoanAmount + TotalCharges;
                     end;
                 end else begin
                     Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason));
@@ -2984,6 +2971,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         Response: Text;
         EligibilityFailReason: Text;
         OutstandingBalance: Decimal;
+        TotalCharges: Decimal;
     begin
         Payload.Get('originator_id', originator_id);
         Payload.Get('identifier_type', identifier_type); // MSISDN, CUSTOMER_NO
@@ -3052,6 +3040,8 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                     MobileLoanProduct."Product ID");
 
                 if OutstandingBalance > 0 then begin
+                    TotalCharges := SkyMbankingTrans.GetTransChargesPreview('LOAN_DISBURSEMENT', 0, '', SearchMember, '').Get(1);
+                    OutstandingBalance += TotalCharges;
                     MobileLoanProduct."Minimum Loan Amount" := OutstandingBalance;
                     if amount.AsValue.AsDecimal < OutstandingBalance then begin
                         ResponseObject.Add('request_status', 'ERROR');
