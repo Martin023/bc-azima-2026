@@ -857,10 +857,10 @@
     Return Value
 End Function
 </Code>
-    <EmbeddedImages>
-      <EmbeddedImage Name="azimaa">
-        <MIMEType>image/png</MIMEType>
-        <ImageData>iVBORw0KGgoAAAANSUhEUgAAA04AAAEnCAYAAACexBM6AAAQAElEQVR4AeydB5xsRZX/b/fENy8TBBTBRFJURP4qyqprDoiYQVfFjFlAAQPiqmtExRUEETFHFBOIikgwIqY1JxTFnHi8PG/S//s9b6rpmdcz0z3TPdM9U/OpM1W3wqlTvzp1qurWvbfLRf7LCGQEMgIZgYxARiAjkBHICGQEMgIZgWkRyBunaeHJiZ2BQJYyI5ARyAhkBOpDoFRftpwrI5ARyAhkBHZAIG+cdoAkR2QEMgIZgQVAIFeZEZgXBMbmpZZcSUYgI5ARWIwI5I1T3b3a3nfp2lu6ukHOGTMCGYGMQEaggxHIomcEmonA2NhYXt40E9DMa84I5I1T3RC291269pYugZztX0Ii+xmBjEBGICOQEcgITI9AqVRaiOXN9ELl1NkhsEiWgHnjNLvuz6VmhUC2f7OCLRfKCGQEMgIZgYxARiAj0MkILJIlYOdsnDpZWVokez7CbhGwC812kdyVWWgYc/0ZgYzAfCGQjdZ8IZ3ryQhkBBYWgbxxWlj851R7PsKeE3wLUriuShfJXZmZ25oXWzNjlHNkBOYPgdnfjFsyRmv+OiPXlBGYRwRmP/bnUcg2qSpvnNqkIxabGHlJvNh6tBXtafViK2thK3qtKIrMdpEikG/GLdKOzc3KCMyAQB77MwBUlZw3TlVg5GDzEGj1krh5kmZOixeBrIWLt2/boGV5X94GnTAXEXLZjEDnIJDNTfv0Vd44tU9fZEkyAhmBjEBGoFMQyPvyTumpLOciRGCpbSSmNDeLsG/bvUl549TuPZTlywhkBDICGYGMQEYgI5ARqCCQNxIVKHJgnhHIG6fmA545ZgQyAhmBjEBGICOQEcgIZAQyAosMgbxxWmQdmpvTJgh0/HMEbYJjFiMjkBHICGQEMgIdikD+Wl2Hdtw0YueN0zTg5KSMwKwRyM8RzBq6XDAj0DQEMqOMQEYgI7CACOSv
+  <EmbeddedImages>
+    <EmbeddedImage Name="azimaa">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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
@@ -996,9 +996,262 @@ End Function
   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</ImageData>
-      </EmbeddedImage>
-    </EmbeddedImages>
+    </EmbeddedImage>
+  </EmbeddedImages>
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Transactions_Transactions__Book_Balance_">
+          <DataField>Transactions_Transactions__Book_Balance_</DataField>
+        </Field>
+        <Field Name="Transactions_Transactions__Book_Balance_Format">
+          <DataField>Transactions_Transactions__Book_Balance_Format</DataField>
+        </Field>
+        <Field Name="Transactions_No">
+          <DataField>Transactions_No</DataField>
+        </Field>
+        <Field Name="AccountNo">
+          <DataField>AccountNo</DataField>
+        </Field>
+        <Field Name="AccountName">
+          <DataField>AccountName</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Name">
+          <DataField>CompanyInformation_Name</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Picture">
+          <DataField>CompanyInformation_Picture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="Amount">
+          <DataField>Amount</DataField>
+        </Field>
+        <Field Name="AmountFormat">
+          <DataField>AmountFormat</DataField>
+        </Field>
+        <Field Name="PayrollNo">
+          <DataField>PayrollNo</DataField>
+        </Field>
+        <Field Name="Prod_Name">
+          <DataField>Prod_Name</DataField>
+        </Field>
+        <Field Name="Transactions__Transaction_Date_">
+          <DataField>Transactions__Transaction_Date_</DataField>
+        </Field>
+        <Field Name="Transactions_Transactions__Transaction_Time_">
+          <DataField>Transactions_Transactions__Transaction_Time_</DataField>
+        </Field>
+        <Field Name="Transactions__Cheque_No_">
+          <DataField>Transactions__Cheque_No_</DataField>
+        </Field>
+        <Field Name="Transactions_Type">
+          <DataField>Transactions_Type</DataField>
+        </Field>
+        <Field Name="BranchCode">
+          <DataField>BranchCode</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Name">
+          <DataField>CompanyInfo_Name</DataField>
+        </Field>
+        <Field Name="Company_Address">
+          <DataField>Company_Address</DataField>
+        </Field>
+        <Field Name="Co_phone">
+          <DataField>Co_phone</DataField>
+        </Field>
+        <Field Name="Company_Pic">
+          <DataField>Company_Pic</DataField>
+        </Field>
+        <Field Name="NumberText">
+          <DataField>NumberText</DataField>
+        </Field>
+        <Field Name="Transactions_Transactions_Cashier">
+          <DataField>Transactions_Transactions_Cashier</DataField>
+        </Field>
+        <Field Name="Amount_WithdrawnCaption">
+          <DataField>Amount_WithdrawnCaption</DataField>
+        </Field>
+        <Field Name="Book_Balance_Caption">
+          <DataField>Book_Balance_Caption</DataField>
+        </Field>
+        <Field Name="Transaction_No_Caption">
+          <DataField>Transaction_No_Caption</DataField>
+        </Field>
+        <Field Name="Account_No_Caption">
+          <DataField>Account_No_Caption</DataField>
+        </Field>
+        <Field Name="Account_Name_Caption">
+          <DataField>Account_Name_Caption</DataField>
+        </Field>
+        <Field Name="Date_Caption">
+          <DataField>Date_Caption</DataField>
+        </Field>
+        <Field Name="Time_Caption">
+          <DataField>Time_Caption</DataField>
+        </Field>
+        <Field Name="Transactions__Cheque_No_Caption">
+          <DataField>Transactions__Cheque_No_Caption</DataField>
+        </Field>
+        <Field Name="Member_No_Caption">
+          <DataField>Member_No_Caption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption">
+          <DataField>EmptyStringCaption</DataField>
+        </Field>
+        <Field Name="Signature_Caption">
+          <DataField>Signature_Caption</DataField>
+        </Field>
+        <Field Name="I_acknowledge_receipt_of_the_above_amountCaption">
+          <DataField>I_acknowledge_receipt_of_the_above_amountCaption</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control1000000048">
+          <DataField>EmptyStringCaption_Control1000000048</DataField>
+        </Field>
+        <Field Name="I_D_No_Caption">
+          <DataField>I_D_No_Caption</DataField>
+        </Field>
+        <Field Name="Availbal">
+          <DataField>Availbal</DataField>
+        </Field>
+        <Field Name="BookBal_">
+          <DataField>BookBal_</DataField>
+        </Field>
+        <Field Name="EmptyStringCaption_Control1102756001">
+          <DataField>EmptyStringCaption_Control1102756001</DataField>
+        </Field>
+        <Field Name="al">
+          <DataField>al</DataField>
+        </Field>
+        <Field Name="Withdrawn_By_______________________________________Caption">
+          <DataField>Withdrawn_By_______________________________________Caption</DataField>
+        </Field>
+        <Field Name="You_were_served_by__Caption">
+          <DataField>You_were_served_by__Caption</DataField>
+        </Field>
+        <Field Name="THANK_YOUCaption">
+          <DataField>THANK_YOUCaption</DataField>
+        </Field>
+        <Field Name="Better_life_for_our_members_globallyCaption">
+          <DataField>Better_life_for_our_members_globallyCaption</DataField>
+        </Field>
+        <Field Name="Transactions_Transaction_Type">
+          <DataField>Transactions_Transaction_Type</DataField>
+        </Field>
+        <Field Name="ExpectedMaturityDate">
+          <DataField>ExpectedMaturityDate</DataField>
+        </Field>
+        <Field Name="ChequeNo_Transactions">
+          <DataField>ChequeNo_Transactions</DataField>
+        </Field>
+        <Field Name="TransactionDescription_Transactions">
+          <DataField>TransactionDescription_Transactions</DataField>
+        </Field>
+        <Field Name="Cashier_Transactions">
+          <DataField>Cashier_Transactions</DataField>
+        </Field>
+        <Field Name="NumberText_1_">
+          <DataField>NumberText_1_</DataField>
+        </Field>
+        <Field Name="SumTransactionCharges">
+          <DataField>SumTransactionCharges</DataField>
+        </Field>
+        <Field Name="SumTransactionChargesFormat">
+          <DataField>SumTransactionChargesFormat</DataField>
+        </Field>
+        <Field Name="AvailableBalance">
+          <DataField>AvailableBalance</DataField>
+        </Field>
+        <Field Name="AvailableBalanceFormat">
+          <DataField>AvailableBalanceFormat</DataField>
+        </Field>
+        <Field Name="NewAvailable">
+          <DataField>NewAvailable</DataField>
+        </Field>
+        <Field Name="NewAvailableFormat">
+          <DataField>NewAvailableFormat</DataField>
+        </Field>
+        <Field Name="Dublicate">
+          <DataField>Dublicate</DataField>
+        </Field>
+        <Field Name="CashierName">
+          <DataField>CashierName</DataField>
+        </Field>
+        <Field Name="MaskedAccountNo">
+          <DataField>MaskedAccountNo</DataField>
+        </Field>
+        <Field Name="CashierNameOnly">
+          <DataField>CashierNameOnly</DataField>
+        </Field>
+        <Field Name="Till_Name">
+          <DataField>Till_Name</DataField>
+        </Field>
+        <Field Name="Branch_code">
+          <DataField>Branch_code</DataField>
+        </Field>
+        <Field Name="Branch_Name">
+          <DataField>Branch_Name</DataField>
+        </Field>
+        <Field Name="ProductTypeDescription">
+          <DataField>ProductTypeDescription</DataField>
+        </Field>
+        <Field Name="Reprint">
+          <DataField>Reprint</DataField>
+        </Field>
+        <Field Name="ReprintDate">
+          <DataField>ReprintDate</DataField>
+        </Field>
+        <Field Name="ReprintTime">
+          <DataField>ReprintTime</DataField>
+        </Field>
+        <Field Name="ReportForNavId_8541">
+          <DataField>ReportForNavId_8541</DataField>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+        </Field>
+        <Field Name="ChargeAmount_TransactionCharges">
+          <DataField>ChargeAmount_TransactionCharges</DataField>
+        </Field>
+        <Field Name="ChargeAmount_TransactionChargesFormat">
+          <DataField>ChargeAmount_TransactionChargesFormat</DataField>
+        </Field>
+        <Field Name="Transaction_Charges_Transaction_Type">
+          <DataField>Transaction_Charges_Transaction_Type</DataField>
+        </Field>
+        <Field Name="Transaction_Charges_Charge_Code">
+          <DataField>Transaction_Charges_Charge_Code</DataField>
+        </Field>
+        <Field Name="RecoverExciseDuty_TransactionCharges">
+          <DataField>RecoverExciseDuty_TransactionCharges</DataField>
+        </Field>
+        <Field Name="ExciseDutyAmount">
+          <DataField>ExciseDutyAmount</DataField>
+        </Field>
+        <Field Name="ExciseDutyAmountFormat">
+          <DataField>ExciseDutyAmountFormat</DataField>
+        </Field>
+        <Field Name="ExciseDutyPercentage">
+          <DataField>ExciseDutyPercentage</DataField>
+        </Field>
+        <Field Name="ExciseDutyPercentageFormat">
+          <DataField>ExciseDutyPercentageFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>
