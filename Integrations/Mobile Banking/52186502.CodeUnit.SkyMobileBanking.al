@@ -2681,6 +2681,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                         Datum.Add('loan_type_name', MobileLoanProducts."Product Description");
                         Datum.Add('loan_type_min_amount', MobileLoanProducts."Minimum Loan Amount");
                         if MobileLoanProducts."Allow Topup" then begin
+                            OutstandingBalance := 0;
                             OutstandingBalance := GlobalFunctions.GetMemberLoanProductTotalBalance(
                                 SearchMember."No.",
                                 MobileLoanProducts."Product ID");
@@ -2708,10 +2709,10 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                             end;
                         end;
 
-                        if MobileLoanProducts."Mobile Max. Loan Amount" <> 0 then begin
+                        if MobileLoanProducts."Mobile Max. Loan Amount" > 0 then begin
                             Datum.Add('loan_type_max_amount', MobileLoanProducts."Mobile Max. Loan Amount");
                         end else
-                            if MobileLoanProducts."Maximum Loan Amount" <> 0 then begin
+                            if MobileLoanProducts."Maximum Loan Amount" > 0 then begin
                                 Datum.Add('loan_type_max_amount', MobileLoanProducts."Maximum Loan Amount");
                             end else begin
                                 Datum.Add('loan_type_max_amount', 0);
@@ -3007,6 +3008,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         Datum: JsonObject;
         Response: Text;
         EligibilityFailReason: Text;
+        OutstandingBalance: Decimal;
     begin
         Payload.Get('originator_id', originator_id);
         Payload.Get('identifier_type', identifier_type); // MSISDN, CUSTOMER_NO
@@ -3068,6 +3070,26 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 "Product ID", "Mobile Max. Loan Amount", "Minimum Loan Amount",
                 "Allow Topup"
             );
+            OutstandingBalance := 0;
+            if MobileLoanProduct."Allow Topup" then begin
+                OutstandingBalance := GlobalFunctions.GetMemberLoanProductTotalBalance(
+                    SearchMember."No.",
+                    MobileLoanProduct."Product ID");
+
+                if OutstandingBalance > 0 then begin
+                    MobileLoanProduct."Minimum Loan Amount" := OutstandingBalance;
+                    if amount.AsValue.AsDecimal < OutstandingBalance then begin
+                        ResponseObject.Add('request_status', 'ERROR');
+                        Datum.Add('error_message', 'Loan amount must be above the minimum amount of KES ' + Format(OutstandingBalance));
+                        ResponseObject.Add('response_payload', Datum);
+
+                        AddDateTimeToResponse(ResponseObject);
+
+                        ResponseObject.WriteTo(Response);
+                        exit(Response);
+                    end;
+                end;
+            end;
 
             if MobileLoanProduct.FindFirst then begin
                 MblLoanRestriction.Reset();
