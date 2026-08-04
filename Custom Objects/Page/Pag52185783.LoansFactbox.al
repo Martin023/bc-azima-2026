@@ -39,6 +39,10 @@ page 52185783 "Loans Factbox"
                 {
                     ToolTip = 'Specifies the value of the Loan Principle Repayment field.', Comment = '%';
                 }
+                field("Total Balance"; Rec."Total Balance")
+                {
+                    ToolTip = 'Specifies the value of the Total Balance field.', Comment = '%';
+                }
                 // field("Loan Interest Repayment"; Rec."Loan Interest Repayment")
                 // {
                 //     ToolTip = 'Specifies the value of the Loan Interest Repayment field.', Comment = '%';
@@ -51,10 +55,7 @@ page 52185783 "Loans Factbox"
                 {
                     ToolTip = 'Specifies the value of the Outstanding Interest field.', Comment = '%';
                 }
-                field("Total Balance"; Rec."Total Balance")
-                {
-                    ToolTip = 'Specifies the value of the Total Balance field.', Comment = '%';
-                }
+
                 field("Amount In Arreas SASRA"; Rec."Amount In Arreas SASRA")
                 {
                     StyleExpr = 'Unfavorable';

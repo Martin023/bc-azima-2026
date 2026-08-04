@@ -2069,8 +2069,8 @@ table 52185729 Loans
                         MaxSelfGuar := 0;
                         MaxSelfGuar := LoanAppCodeunit.GetmaxSelfGuaranteeAmt(SavAcc."No.", Rec."Loan No.");
                         Message('The maximum self guarantee amount is %1', MaxSelfGuar);
-                        if "Requested Amount" > MaxSelfGuar then
-                            Error(Text015 + ' of %1. Kindly apply for a lower amount.', MaxSelfGuar, "Requested Amount", "Member Deposits");
+                        // if "Requested Amount" > MaxSelfGuar then
+                        //     Error(Text015 + ' of %1. Kindly apply for a lower amount.', MaxSelfGuar, "Requested Amount", "Member Deposits");
                         //"Recommended Amount":=SavAcc."Balance (LCY)"*GenSetup."Self Guarantee %"*0.01;
                         //"Approved Amount":=SavAcc."Balance (LCY)"*GenSetup."Self Guarantee %"*0.01;
                         LoanGuara.Init;
