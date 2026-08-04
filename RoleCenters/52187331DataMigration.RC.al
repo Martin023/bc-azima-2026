@@ -246,6 +246,12 @@ page 52187331 "Data Migration"
                         runobject = report AutocreateProducts;
                         Caption = 'Create Default products';
                     }
+                    // action(MpesaManualUpload)
+                    // {
+                    //     ApplicationArea = All;
+                    //     runobject = xmlport "M-PESA Manul Upload";
+                    //     Caption = 'M-PESA Manual Upload';
+                    // }
                 }
 
             }

@@ -15,30 +15,44 @@ XmlPort 52185539 "M-PESA Manul Upload"
                 }
                 fieldelement(b; "M-PESA Manual Upload"."Originator ID")
                 {
+                    FieldValidate = No;
                 }
                 fieldelement(c; "M-PESA Manual Upload"."Transaction Type")
                 {
+                    FieldValidate = No;
                 }
                 fieldelement(d; "M-PESA Manual Upload"."Transaction Status")
                 {
+                    FieldValidate = No;
                 }
                 fieldelement(e; "M-PESA Manual Upload"."Beneficiary Reference")
                 {
+                    FieldValidate = No;
                 }
                 fieldelement(f; "M-PESA Manual Upload"."Savings Account")
                 {
+                    FieldValidate = No;
                 }
                 fieldelement(g; "M-PESA Manual Upload"."Transaction Amount")
                 {
+                    FieldValidate = No;
                 }
                 fieldelement(h; "M-PESA Manual Upload"."Transaction Description")
                 {
+                    FieldValidate = No;
                 }
-                fieldelement(h; "M-PESA Manual Upload"."PESA Type")
+                fieldelement(i; "M-PESA Manual Upload"."PESA Type")
                 {
+                    FieldValidate = No;
                 }
-                fieldelement(h; "M-PESA Manual Upload"."Transaction Category")
+                fieldelement(j; "M-PESA Manual Upload"."Transaction Category")
                 {
+                    FieldValidate = No;
+                }
+                // "Transaction ID"
+                fieldelement(k; "M-PESA Manual Upload"."Transaction ID")
+                {
+                    FieldValidate = No;
                 }
             }
         }
