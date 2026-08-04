@@ -2685,24 +2685,24 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                 SearchMember."No.",
                                 MobileLoanProducts."Product ID");
 
-                            if OutstandingBalance <> 0 then begin
+                            if OutstandingBalance > 0 then begin
                                 MobileLoanProducts."Minimum Loan Amount" := OutstandingBalance;
 
-                                repeat
-                                    PreviousMinimum := MobileLoanProducts."Minimum Loan Amount";
+                                // repeat
+                                //     PreviousMinimum := MobileLoanProducts."Minimum Loan Amount";
 
-                                    MobileChargesInfo := SkyMbankingTrans.GetTransChargesPreview(
-                                        'LOAN_DISBURSEMENT',
-                                        PreviousMinimum,
-                                        '',
-                                        SearchMember,
-                                        '');
+                                //     MobileChargesInfo := SkyMbankingTrans.GetTransChargesPreview(
+                                //         'LOAN_DISBURSEMENT',
+                                //         PreviousMinimum,
+                                //         '',
+                                //         SearchMember,
+                                //         '');
 
-                                    MobileLoanProducts."Minimum Loan Amount" :=
-                                        OutstandingBalance +
-                                        MobileChargesInfo.Get(1);
+                                //     MobileLoanProducts."Minimum Loan Amount" :=
+                                //         OutstandingBalance +
+                                //         MobileChargesInfo.Get(1);
 
-                                until MobileLoanProducts."Minimum Loan Amount" = PreviousMinimum;
+                                // until MobileLoanProducts."Minimum Loan Amount" = PreviousMinimum;
 
                                 Datum.Replace('loan_type_min_amount', MobileLoanProducts."Minimum Loan Amount");
                             end;
@@ -5163,6 +5163,18 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                         MpesaTransBuffer."Try Posting Count" := MpesaTransBuffer."Try Posting Count" + 1;
                                         MpesaTransBuffer."Needs Change" := true;
                                         MpesaTransBuffer."Needs Change Reason" := 'The beneficiary account was not found in Savings Accounts list';
+
+                                        // Update FOSA
+                                        DepositMember.Reset;
+                                        DepositMember.SetRange("Primary Identification", MpesaTransBuffer."Savings Account");
+                                        DepositMember.setRange("Primary Identification Type", DepositMember."Primary Identification Type"::"ID Number");
+                                        DepositMember.SetLoadFields("No.", "Primary Identification");
+                                        if DepositMember.FindFirst then begin
+                                            MpesaTransBuffer."Savings Account" := SkyMbankingTrans.GetMemberFosaAcc(DepositMember);
+                                            MpesaTransBuffer."Needs Change" := false;
+                                            MpesaTransBuffer."Needs Change Reason" := '';
+                                        end;
+
                                         MpesaTransBuffer.Modify();
                                     end;
                                 end else begin
@@ -5569,46 +5581,41 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             MpesaTransBuffer."Needs Change" := true;
                                             MpesaTransBuffer."Needs Change Reason" := 'The beneficiary account was not found in Savings Accounts list';
 
-                                            // Update BOSA
+                                            // Update FOSA
                                             DepositMember.Reset;
                                             DepositMember.SetRange("Primary Identification", MpesaTransBuffer."Savings Account");
-                                            DepositMember.SetLoadFields("No.", "Primary Identification");
-                                            if DepositMember.FindFirst then begin
-                                                MpesaTransBuffer."Savings Account" := SkyMbankingTrans.GetMemberDepositsAcc(DepositMember);
-                                                MpesaTransBuffer."Needs Change" := false;
-                                                MpesaTransBuffer."Needs Change Reason" := '';
+                                            DepositMember.SetRange("Primary Identification Type", DepositMember."Primary Identification Type"::"ID Number");
+                                            if not DepositMember.FindFirst then begin
+                                                DepositMember.Reset;
+                                                DepositMember.SetRange("Old Member No.", MpesaTransBuffer."Savings Account");
+                                                if not DepositMember.FindFirst then
+                                                    exit;
                                             end;
 
-                                            // Update BOSA
-                                            DepositMember.Reset;
-                                            DepositMember.SetRange("Payroll/Staff No.", MpesaTransBuffer."Savings Account");
-                                            DepositMember.SetLoadFields("No.", "Primary Identification");
-                                            if DepositMember.FindFirst then begin
-                                                MpesaTransBuffer."Savings Account" := SkyMbankingTrans.GetMemberDepositsAcc(DepositMember);
-                                                MpesaTransBuffer."Needs Change" := false;
-                                                MpesaTransBuffer."Needs Change Reason" := '';
-                                            end;
+                                            MpesaTransBuffer."Savings Account" := SkyMbankingTrans.GetMemberFosaAcc(DepositMember);
+                                            MpesaTransBuffer."Needs Change" := false;
+                                            MpesaTransBuffer."Needs Change Reason" := '';
 
-                                            theSMS := 'The account number ' + MpesaTransBuffer."Savings Account" +
-                                            ' for your deposit transaction of Ksh ' + Format(MpesaTransBuffer."Transaction Amount") +
-                                            ' with ref ' + MpesaTransBuffer."Transaction Source Reference" +
-                                            ' does not exist.';
+                                            // theSMS := 'The account number ' + MpesaTransBuffer."Savings Account" +
+                                            // ' for your deposit transaction of Ksh ' + Format(MpesaTransBuffer."Transaction Amount") +
+                                            // ' with ref ' + MpesaTransBuffer."Transaction Source Reference" +
+                                            // ' does not exist.';
 
-                                            if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Mpesa Deposit" then begin
-                                                SkySMS.SendSms(
-                                                    SMSSource::DEPOSIT_CONFIRMATION,
-                                                    MpesaTransBuffer."Initiator Identifier",
-                                                    theSMS,
-                                                    MpesaTransBuffer."Transaction Source Reference",
-                                                    '',
-                                                    true,
-                                                    0,
-                                                    true,
-                                                    'MBANKING',
-                                                    MpesaTransBuffer."Originator ID",
-                                                    'CBS'
-                                                );
-                                            end;
+                                            // if MpesaTransBuffer."Transaction Type" = MpesaTransBuffer."Transaction Type"::"Mpesa Deposit" then begin
+                                            //     SkySMS.SendSms(
+                                            //         SMSSource::DEPOSIT_CONFIRMATION,
+                                            //         MpesaTransBuffer."Initiator Identifier",
+                                            //         theSMS,
+                                            //         MpesaTransBuffer."Transaction Source Reference",
+                                            //         '',
+                                            //         true,
+                                            //         0,
+                                            //         true,
+                                            //         'MBANKING',
+                                            //         MpesaTransBuffer."Originator ID",
+                                            //         'CBS'
+                                            //     );
+                                            // end;
 
                                             MpesaTransBuffer.Modify;
                                         end;

@@ -550,6 +550,56 @@ page 52187312 "Credit Management Role Center"
                     //     RunObject = page "Dailly Interest Buffer";
                     // }
                 }
+                group("Account Activation")
+                {
+                    group("BOSA Account Activation")
+                    {
+                        Caption = 'BOSA Account Activation';
+                        action("Open Account Activaion")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Open BOSA Account Activation';
+                            RunObject = Page "BOSA Account Activation List";
+                            RunPageView = where(Status = filter(Open));
+                        }
+                        action("Account Activaion Pending Approval")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'BOSA Account Activation Pending Approval';
+                            RunObject = Page "BOSA Account Activation List";
+                            RunPageView = where(Status = filter(Pending));
+                        }
+                        action("Rejected Account Activaion")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Rejected BOSA Account Activation';
+                            RunObject = Page "BOSA Account Activation List";
+                            RunPageView = where(Status = filter(Rejected));
+                        }
+                        action("Approved Account Activaion")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Approved BOSA Account Activation';
+                            RunObject = Page "BOSA Account Activation List";
+                            RunPageView = where(Status = filter(Approved));
+                        }
+                        action("Posted Account Activation")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Posted BOSA Account Activation';
+                            RunObject = Page "Posted BOSA Account Activation";
+                        }
+                    }
+                    group("FOSA Account Activation")
+                    {
+                        action("FOSA Account Activation List")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Account Activation List';
+                            RunObject = page "Account Activation List";
+                        }
+                    }
+                }
 
 
                 // 
@@ -603,7 +653,7 @@ page 52187312 "Credit Management Role Center"
                         RunPageView = where(Status = filter(Rejected), Reversed = const(false));
                     }
                 }
-                
+
 
                 group("Standing Orders")
                 {
@@ -697,7 +747,7 @@ page 52187312 "Credit Management Role Center"
                         }
                     }
                 }
-              
+
                 group("Withheld Funds")
                 {
 
@@ -919,7 +969,7 @@ page 52187312 "Credit Management Role Center"
                     //     RunObject = page "Guarantor Subsitution List";
                     //     RunPageLink = "Sent Back to CRM" = const(true);
                     // }
-                     action("Guarantor Substitution Report")
+                    action("Guarantor Substitution Report")
                     {
                         ApplicationArea = all;
                         Caption = 'Guarantor Substitution Report';

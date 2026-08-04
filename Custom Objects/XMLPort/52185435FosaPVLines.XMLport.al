@@ -50,15 +50,37 @@ XmlPort 52185970 "FOSA PV Lines"
 
         layout
         {
+            area(content)
+            {
+                group("No|CheckoffNo|EmployerCode|payrollNo|Amount|ProductID|Remarks")
+                {
+                    field(HeaderTemplate; HeaderTemplate)
+                    {
+                        ApplicationArea = All;
+                        Caption = 'Copy this header';
+                        Editable = false;
+                        ToolTip = 'Copy this text and paste it into the first row of your Excel file.';
+                    }
+                }
+            }
         }
 
         actions
         {
         }
     }
+    trigger OninitXmlPort()
+    begin
+        HeaderTemplate := 'No|CheckoffNo|EmployerCode|PayrollNo|Amount|ProductID|Remarks';
+    end;
+
+
 
     trigger OnPostXmlPort()
     begin
         Message('Uploaded Successfuly');
     end;
+
+    var
+        HeaderTemplate: Text[100];
 }

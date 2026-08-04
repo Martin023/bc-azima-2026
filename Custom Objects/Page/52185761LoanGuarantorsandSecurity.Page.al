@@ -41,6 +41,10 @@ page 52185761 "Loan Guarantors and Security"
                     ApplicationArea = Basic, Suite;
                     Visible = true;
                 }
+                field(Name; Rec.Name)
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Member No"; Rec."Member No")
                 {
                     ApplicationArea = all;
@@ -62,10 +66,7 @@ page 52185761 "Loan Guarantors and Security"
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field(Name; Rec.Name)
-                {
-                    ApplicationArea = Basic, Suite;
-                }
+
                 field("Guarantor Status"; Rec."Guarantor Status")
                 {
                     ApplicationArea = Basic, Suite;
@@ -398,6 +399,7 @@ page 52185761 "Loan Guarantors and Security"
                         if Membersrec.Get(Rec."Member No") then
                             if (Membersrec.Status <> Membersrec.Status::Deceased) and (Membersrec.Status <> Membersrec.Status::Closed) then begin
                                 if LoanR.Posted = false then begin
+                                    CurrPage.Update();
                                     // REqAmt := LoanR."Approved Amount";
                                     // LoanGua.Reset;
                                     // LoanGua.SetRange("Loan No", Rec."Loan No");
@@ -420,18 +422,18 @@ page 52185761 "Loan Guarantors and Security"
                                     //     until LONGU.Next() = 0;
                                     // end;
 
-                                    REqAmt := LoanR."Approved Amount";
-                                    GuarNo := 0;
-                                    LoanGua.Reset;
-                                    LoanGua.SetRange("Loan No", Rec."Loan No");
-                                    //LoanGua.SetRange("Guarantor Type", LoanGua."guarantor type"::Guarantor);
-                                    if LoanR."Source Unit" = LoanR."Source Unit"::FOSA then
-                                        GuarNo := LoanGua.Count;
-                                    if LoanGua.Find('-') then begin
-                                        LoanGua.CalcSums("Amount Guaranteed");
+                                    // REqAmt := LoanR."Approved Amount";
+                                    // GuarNo := 0;
+                                    // LoanGua.Reset;
+                                    // LoanGua.SetRange("Loan No", Rec."Loan No");
+                                    // //LoanGua.SetRange("Guarantor Type", LoanGua."guarantor type"::Guarantor);
+                                    // if LoanR."Source Unit" = LoanR."Source Unit"::FOSA then
+                                    //     GuarNo := LoanGua.Count;
+                                    // if LoanGua.Find('-') then begin
+                                    //     LoanGua.CalcSums("Amount Guaranteed");
 
-                                        TotaAmtGUR := LoanGua."Amount Guaranteed";
-                                    end;
+                                    //     TotaAmtGUR := LoanGua."Amount Guaranteed";
+                                    // end;
 
                                     // LONGU.Reset();
                                     // LONGU.SetRange(LONGU."Loan No", Rec."Loan No");

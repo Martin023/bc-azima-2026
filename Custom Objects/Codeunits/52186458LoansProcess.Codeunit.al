@@ -305,6 +305,7 @@ Codeunit 52186458 "Loans Process"
 
                         //If excise duty involved
                         if PCharges."Effect Excise Duty" = PCharges."effect excise duty"::Yes then begin
+                            GenSetup.get();
                             GenSetup.TestField("Excise Duty G/L");
                             GenSetup.TestField("Excise Duty (%)");
                             ExciseDuty := ChargeAmount * GenSetup."Excise Duty (%)" * 0.01;
@@ -4683,6 +4684,8 @@ Codeunit 52186458 "Loans Process"
                 PCharges.Reset;
                 PCharges.SetRange(PCharges."Product Code", LoanApps."Loan Product Type");
                 PCharges.SetRange(PCharges."Charge Type", PCharges."charge type"::General);
+                if (LoanApps."Member Class" = 'CLASSA') then
+                    PCharges.setfilter("Charge Code", '<>%1', 'C008');
                 if PCharges.Find('-') then begin
                     repeat
                         ExcemptProductCharges.Reset();
@@ -6172,9 +6175,9 @@ Codeunit 52186458 "Loans Process"
                             END ELSE
                                 IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Net Amount") THEN BEGIN
                                     IF ChargeExtraComms = TRUE THEN
-                                        TotalComputedCharges := TotalComputedCharges + ((TopUp."Principle Top Up" + TopUp."Interest Top Up") * ((PCharges.Percentage + PCharges."Additional Charge %") / 100))
+                                        TotalComputedCharges := TotalComputedCharges + ((TopUp."Principle Top Up" ) * ((PCharges.Percentage + PCharges."Additional Charge %") / 100))
                                     ELSE
-                                        TotalComputedCharges := TotalComputedCharges + ((TopUp."Principle Top Up" + TopUp."Interest Top Up") * (PCharges.Percentage / 100))
+                                        TotalComputedCharges := TotalComputedCharges + ((TopUp."Principle Top Up") * (PCharges.Percentage / 100))
                                 END ELSE
                                     TotalComputedCharges := TotalComputedCharges + PCharges."Charge Amount";
                             //MESSAGE('Running Charge topup %1',TotalComputedCharges);

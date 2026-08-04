@@ -609,160 +609,161 @@ page 52185822 "Account Transfer"
 
                     end;
                 }
-                // action("Suggest Loans")
-                // {
-                //     Caption = 'Suggest Source Loans';
-                //     Image = Account;
-                //     Promoted = true;
-                //     PromotedCategory = Category5;
-                //     ApplicationArea = Basic, Suite;
+                action("Suggest Loans")
+                {
+                    Caption = 'Suggest Source Loans';
+                    Image = Account;
+                    Promoted = true;
+                    PromotedCategory = Category5;
+                    ApplicationArea = Basic, Suite;
 
-                //     trigger OnAction()
-                //     var
-                //         CreditAcc: Record Loans;
-                //         TransSource: Record "Account Transfer Source";
-                //     begin
-                //         rec.TestField(posted, false);
-                //         rec.testfield(status, rec.status::open);
-                //         TransSource.reset;
-                //         TransSource.setrange("No.", rec.No);
-                //         if TransSource.find('-') then
-                //             TransSource.deleteall;
+                    trigger OnAction()
+                    var
+                        CreditAcc: Record Loans;
+                        TransSource: Record "Account Transfer Source";
+                    begin
+                        rec.TestField(posted, false);
+                        rec.testfield(status, rec.status::open);
+                        TransSource.reset;
+                        TransSource.setrange("No.", rec.No);
+                        if TransSource.find('-') then
+                            TransSource.deleteall;
 
 
-                //         CreditAcc.Reset;
-                //         CreditAcc.SetRange(CreditAcc."Member No.", rec."Member No");
-                //         //CreditAcc.setfilter("Product Category", '<>%1&<>%2', SavingsREC."Product Category"::"Unallocated Fund", SavingsREC."Product Category"::"Entrance Fee");
-                //         if CreditAcc.Find('-') then begin
-                //             repeat
-                //                 CreditAcc.CalcFields("Total Balance");
-                //                 if CreditAcc."Total Balance" > 0 then begin
-                //                     TransSource.Init;
-                //                     TransSource."Entry No." := TransSource."Entry No." + 1;
-                //                     TransSource."No." := rec.No;
-                //                     TransSource."Source Account Type" := TransSource."Source Account Type"::Credit;
-                //                     TransSource."Source Account No." := CreditAcc."Loan Account";
-                //                     TransSource."Source Account Name" := CreditAcc."Member Name";
-                //                     TransSource."Product Name" := CreditAcc."Loan Product Type Name";
-                //                     TransSource."Product Code" := CreditAcc."Loan Product Type";
-                //                     TransSource."Transfer Type" := rec."Transfer Type";
-                //                     TransSource."Member No." := CreditAcc."Member No.";
-                //                     TransSource."Source Transaction Type" := TransSource."Source Transaction Type"::Loan;
-                //                     TransSource.Validate(TransSource."Source Loan No.", CreditAcc."Loan No.");
-                //                     TransSource.Insert(true);
-                //                     TransSource.Modify;
-                //                 end;
-                //             until CreditAcc.Next = 0;
-                //         end;
-                //         Message('Source loan Accounts Updated Successfully');
-                //     end;
-                // }
-            action("Suggest Group Member Accounts")
-            {
-                ApplicationArea = Basic, Suite;
-                Caption = 'Suggest Group Member Destinations';
-                Image = Account;
-                Promoted = true;
-                PromotedCategory = Category5;
+                        CreditAcc.Reset;
+                        CreditAcc.SetRange(CreditAcc."Member No.", rec."Member No");
+                        CreditAcc.SetRange(posted, true);
+                        //CreditAcc.setfilter("Product Category", '<>%1&<>%2', SavingsREC."Product Category"::"Unallocated Fund", SavingsREC."Product Category"::"Entrance Fee");
+                        if CreditAcc.Find('-') then begin
+                            repeat
+                                CreditAcc.CalcFields("Total Balance");
+                                if CreditAcc."Total Balance" > 0 then begin
+                                    TransSource.Init;
+                                    TransSource."Entry No." := TransSource."Entry No." + 1;
+                                    TransSource."No." := rec.No;
+                                    TransSource."Source Account Type" := TransSource."Source Account Type"::Credit;
+                                    TransSource."Source Account No." := CreditAcc."Loan Account";
+                                    TransSource."Source Account Name" := CreditAcc."Member Name";
+                                    TransSource."Product Name" := CreditAcc."Loan Product Type Name";
+                                    TransSource."Product Code" := CreditAcc."Loan Product Type";
+                                    TransSource."Transfer Type" := rec."Transfer Type";
+                                    TransSource."Member No." := CreditAcc."Member No.";
+                                    TransSource."Source Transaction Type" := TransSource."Source Transaction Type"::Loan;
+                                    TransSource.Validate(TransSource."Source Loan No.", CreditAcc."Loan No.");
+                                    TransSource.Insert(true);
+                                    TransSource.Modify;
+                                end;
+                            until CreditAcc.Next = 0;
+                        end;
+                        Message('Source loan Accounts Updated Successfully');
+                    end;
+                }
+                action("Suggest Group Member Accounts")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Suggest Group Member Destinations';
+                    Image = Account;
+                    Promoted = true;
+                    PromotedCategory = Category5;
 
-                trigger OnAction()
-                var
-                    Signatories: record "Account Signatories";
-                    SavingsREC: Record "Savings Accounts";
-                    TransSource: Record "Account Transfer Source";
-                    TransDestin: Record "Account Transfer Destination";
-                    CreditREC : Record "Loans";
-                begin
+                    trigger OnAction()
+                    var
+                        Signatories: record "Account Signatories";
+                        SavingsREC: Record "Savings Accounts";
+                        TransSource: Record "Account Transfer Source";
+                        TransDestin: Record "Account Transfer Destination";
+                        CreditREC: Record "Loans";
+                    begin
 
-                    rec.TestField(posted, false);
-                    rec.testfield(status, rec.status::open);
-                    //Clear any line
-                    TransDestin.reset;
-                    TransDestin.setrange("No.", rec.No);
-                    if TransDestin.find('-') then
-                        TransDestin.deleteall;
+                        rec.TestField(posted, false);
+                        rec.testfield(status, rec.status::open);
+                        //Clear any line
+                        TransDestin.reset;
+                        TransDestin.setrange("No.", rec.No);
+                        if TransDestin.find('-') then
+                            TransDestin.deleteall;
 
-                    //Insert new accounts
-                    Signatories.Reset();
-                    Signatories.SetRange("Account No", Rec."Member No");
-                    if Signatories.findset() then begin
-                        repeat
-                            SavingsREC.Reset;
-                            SavingsREC.SetRange(SavingsREC."Member No.", Signatories."Member No.");
-                            SavingsREC.SetRange(SavingsREC."Product Category", SavingsREC."Product Category"::"Chama Investment Account");
-                            if SavingsREC.Find('-') then begin
-                                repeat
-                                    TransDestin.Init;
-                                    TransDestin."Entry No." := GetNextEntryNo(Rec.No);
-                                    TransDestin."No." := Rec.No;
-                                    TransDestin."Destination Account Type" := TransDestin."Destination Account Type"::Savings;
-                                    TransDestin."Destination Account No." := SavingsREC."No.";
-                                    TransDestin."Destination Account Name" := SavingsREC.Name;
-                                    TransDestin."Product Name" := SavingsREC."Product Name";
-                                    TransDestin."Product Code" := SavingsREC."Product Type";
-                                    TransDestin."Transfer Type" := Rec."Transfer Type";
-                                    TransDestin."Member No." := SavingsREC."Member No.";
-                                    TransDestin.Insert(true);
-                                    TransDestin.Validate(TransDestin."Destination Account No.");
-                                until SavingsREC.Next = 0;
-                            end;
-
-                            CreditREC.Reset;
-                            CreditREC.SetRange(CreditREC."Member No.", Signatories."Member No.");
-                            if CreditREC.Find('-') then begin
-                                repeat
-                                    CreditREC.CalcFields(CreditREC."Total Balance");
-                                    if CreditREC."Total Balance" > 0 then begin
+                        //Insert new accounts
+                        Signatories.Reset();
+                        Signatories.SetRange("Account No", Rec."Member No");
+                        if Signatories.findset() then begin
+                            repeat
+                                SavingsREC.Reset;
+                                SavingsREC.SetRange(SavingsREC."Member No.", Signatories."Member No.");
+                                SavingsREC.SetRange(SavingsREC."Product Category", SavingsREC."Product Category"::"Chama Investment Account");
+                                if SavingsREC.Find('-') then begin
+                                    repeat
                                         TransDestin.Init;
                                         TransDestin."Entry No." := GetNextEntryNo(Rec.No);
                                         TransDestin."No." := Rec.No;
-                                        TransDestin."Destination Account Type" := TransDestin."Destination Account Type"::Credit;
-                                        TransDestin."Destination Account No." := CreditREC."Loan Account";
-                                        TransDestin."Destination Account Name" := CreditREC."Member Name";
-                                        TransDestin."Product Name" := CreditREC."Loan Product Type Name";
-                                        TransDestin."Product Code" := CreditREC."Loan Product Type";
+                                        TransDestin."Destination Account Type" := TransDestin."Destination Account Type"::Savings;
+                                        TransDestin."Destination Account No." := SavingsREC."No.";
+                                        TransDestin."Destination Account Name" := SavingsREC.Name;
+                                        TransDestin."Product Name" := SavingsREC."Product Name";
+                                        TransDestin."Product Code" := SavingsREC."Product Type";
                                         TransDestin."Transfer Type" := Rec."Transfer Type";
-                                        TransDestin."Destination Transaction Type" := TransDestin."Destination Transaction Type"::Armotised;
-                                        TransDestin."Member No." := CreditREC."Member No.";
+                                        TransDestin."Member No." := SavingsREC."Member No.";
                                         TransDestin.Insert(true);
-                                        TransDestin.Validate(TransDestin."Destination Loan No.", Creditrec."Loan No.");
-                                        TransDestin.Modify;
-                                    end;
-                                until CreditREC.Next = 0;
-                            end;
-                        until Signatories.next = 0;
-                    end;
-                    Message('Destination Accounts Updated Successfully');
-                end;
-            }
+                                        TransDestin.Validate(TransDestin."Destination Account No.");
+                                    until SavingsREC.Next = 0;
+                                end;
 
-            }
-
-                       
-                group("Clear lines")
-                {
-                    action("Clear Source Accounts")
-                    {
-                        Caption = 'Clear Source Accounts';
-                        Image = Account;
-                        Promoted = true;
-                        PromotedCategory = Category6;
-                        ApplicationArea = Basic, Suite;
-
-                        trigger OnAction()
-                        var
-                            TransSource: Record "Account Transfer Source";
-                        begin
-                            rec.TestField(posted, false);
-                            rec.testfield(status, rec.status::open);
-                            TransSource.reset;
-                            TransSource.setrange("No.", rec.No);
-                            if TransSource.find('-') then
-                                TransSource.deleteall;
-                            Message('Source Accounts Cleared');
+                                CreditREC.Reset;
+                                CreditREC.SetRange(CreditREC."Member No.", Signatories."Member No.");
+                                if CreditREC.Find('-') then begin
+                                    repeat
+                                        CreditREC.CalcFields(CreditREC."Total Balance");
+                                        if CreditREC."Total Balance" > 0 then begin
+                                            TransDestin.Init;
+                                            TransDestin."Entry No." := GetNextEntryNo(Rec.No);
+                                            TransDestin."No." := Rec.No;
+                                            TransDestin."Destination Account Type" := TransDestin."Destination Account Type"::Credit;
+                                            TransDestin."Destination Account No." := CreditREC."Loan Account";
+                                            TransDestin."Destination Account Name" := CreditREC."Member Name";
+                                            TransDestin."Product Name" := CreditREC."Loan Product Type Name";
+                                            TransDestin."Product Code" := CreditREC."Loan Product Type";
+                                            TransDestin."Transfer Type" := Rec."Transfer Type";
+                                            TransDestin."Destination Transaction Type" := TransDestin."Destination Transaction Type"::Armotised;
+                                            TransDestin."Member No." := CreditREC."Member No.";
+                                            TransDestin.Insert(true);
+                                            TransDestin.Validate(TransDestin."Destination Loan No.", Creditrec."Loan No.");
+                                            TransDestin.Modify;
+                                        end;
+                                    until CreditREC.Next = 0;
+                                end;
+                            until Signatories.next = 0;
                         end;
-                    }
-                
+                        Message('Destination Accounts Updated Successfully');
+                    end;
+                }
+
+            }
+
+
+            group("Clear lines")
+            {
+                action("Clear Source Accounts")
+                {
+                    Caption = 'Clear Source Accounts';
+                    Image = Account;
+                    Promoted = true;
+                    PromotedCategory = Category6;
+                    ApplicationArea = Basic, Suite;
+
+                    trigger OnAction()
+                    var
+                        TransSource: Record "Account Transfer Source";
+                    begin
+                        rec.TestField(posted, false);
+                        rec.testfield(status, rec.status::open);
+                        TransSource.reset;
+                        TransSource.setrange("No.", rec.No);
+                        if TransSource.find('-') then
+                            TransSource.deleteall;
+                        Message('Source Accounts Cleared');
+                    end;
+                }
+
                 action("Clear Destination Accounts")
                 {
                     Caption = 'Clear Destination Accounts';

@@ -1481,7 +1481,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
             saccoAccount.SETRANGE(saccoAccount."Member No.", Members."No.");
             saccoAccount.SetRange("Product Category", saccoAccount."Product Category"::"FOSA Account");
             saccoAccount.SetCurrentKey(Blocked);
-            saccoAccount.SetRange("Product Type", '191');
+            saccoAccount.setrange("Loan Disbursement Account", true);
+            // saccoAccount.SetRange("Product Type", '191');
             Message('Searching for FOSA transactional account for Member: %1', Members."No.");
 
             saccoAccount.SetLoadFields(
@@ -1982,7 +1983,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
             saccoAccount.SETRANGE(saccoAccount."Member No.", Members."No.");
             saccoAccount.SetRange("Product Category", saccoAccount."Product Category"::"FOSA Account");
             saccoAccount.SetCurrentKey(Blocked);
-            saccoAccount.SetRange("Product Type", '191');
+            saccoAccount.setrange("Loan Disbursement Account", true);
+            // saccoAccount.SetRange("Product Type", '191');
 
             saccoAccount.SetLoadFields(
                 "No.", "Member No.", Status, Blocked
@@ -1994,7 +1996,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     EXIT(QualifiedAmount);
                 END;
 
-                STOAmount := ComputeSTODeductions(saccoAccount."No.");
+                STOAmount := 0;// ComputeSTODeductions(saccoAccount."No.");
                 Message('DEBUG: STOAmount = %1', STOAmount);
                 /*
                 To qualify for this loan, member must have channeled the salary at FOSA for at least one month
@@ -2003,7 +2005,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
                 */
                 SalAvg := Globalfunc.GetAzimaSMSLoanSalaryAverage(saccoAccount."No.", Incomsal::Salary);
                 Message('DEBUG: Raw SalAvg from GetAzimaSMSLoanSalaryAverage = %1', SalAvg);
-                LoanRec := ComputeLoanDeductions(saccoAccount."Member No.");
+                LoanRec := 0;// ComputeLoanDeductions(saccoAccount."Member No.");
                 Message('DEBUG: LoanRec (before existing FOSA loan deduction) = %1', LoanRec);
 
                 // Handle existing fosa mloan to be cleared after topup
@@ -2043,6 +2045,10 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     //     ProdFac."Repay Mode"::"Mobile Money"
                     // ] then begin
                     LoanRec -= TLoanRepayment;
+
+                    if LoanRec < 0 then
+                        LoanRec := 0;
+
                     Message('DEBUG: TLoanRepayment (existing FOSA loans) = %1, LoanRec after deduction = %2', TLoanRepayment, LoanRec);
                     // end;
                 end;
@@ -2174,7 +2180,9 @@ codeunit 52186512 "Sky M-Banking Transactions"
                             DepositCap := Round(OrdinaryAccounts.Balance * (ProdFac."Deposit Qualifier %" / 100), 1);
                             if DepositCap > ProdFac."Maximum Loan Amount" then
                                 DepositCap := ProdFac."Maximum Loan Amount";
-                            QualifiedAmount := DepositCap;
+
+                            if QualifiedAmount > DepositCap then
+                                QualifiedAmount := DepositCap;
                             Message('DEBUG: DepositCap = %1, QualifiedAmount after deposit qualifier cap = %2', DepositCap, QualifiedAmount);
                         end;
                     end;

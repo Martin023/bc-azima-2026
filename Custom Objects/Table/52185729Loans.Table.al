@@ -1737,6 +1737,18 @@ table 52185729 Loans
                 end;
                 if (rec.Status = rec.Status::Approved) then begin
 
+                    if not rec."SMS Sent" then begin
+                        if Confirm('Do you wish to Send SMS notification to the member?', false) then begin
+                            if Mem.Get(Rec."Member No.") then begin
+                                CompInfo.Get;
+                                msg := 'Dear ' + Mem."First Name" + ', Your Loan application of ' + ' ' + Rec."Loan Product Type Name" + ' of ' + ' Kes' + Format(Rec."Approved Amount") + ' ' + 'has been approved.';
+                                SendSMS.SendSms(Source::LOAN_APPLICATION, Mem."Phone No.", msg, Format(Rec."Disbursement Account No"), '', true, 0, false, 'CBS', Rec."Disbursement Account No", 'CBS');
+                                Rec."SMS Sent" := true;
+                                Rec.Modify;
+                            end;
+                        end;
+                    end;
+
                     //Send guarantor sms
                     LoanGua.Reset;
                     LoanGua.SetRange(LoanGua."Loan No", Rec."Loan No.");
@@ -2057,8 +2069,8 @@ table 52185729 Loans
                         MaxSelfGuar := 0;
                         MaxSelfGuar := LoanAppCodeunit.GetmaxSelfGuaranteeAmt(SavAcc."No.", Rec."Loan No.");
                         Message('The maximum self guarantee amount is %1', MaxSelfGuar);
-                        if "Requested Amount" > MaxSelfGuar then
-                            Error(Text015 + ' of %1. Kindly apply for a lower amount.', MaxSelfGuar, "Requested Amount", "Member Deposits");
+                        // if "Requested Amount" > MaxSelfGuar then
+                        //     Error(Text015 + ' of %1. Kindly apply for a lower amount.', MaxSelfGuar, "Requested Amount", "Member Deposits");
                         //"Recommended Amount":=SavAcc."Balance (LCY)"*GenSetup."Self Guarantee %"*0.01;
                         //"Approved Amount":=SavAcc."Balance (LCY)"*GenSetup."Self Guarantee %"*0.01;
                         LoanGuara.Init;

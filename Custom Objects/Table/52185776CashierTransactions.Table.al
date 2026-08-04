@@ -184,8 +184,7 @@ table 52185776 "Cashier Transactions"
 
                 end;
                 if TransType.Get(Rec."Transaction Type") then begin
-                    if (TransType.Type <> TransType.Type::"Cash Deposit") and (TransType.Type <> TransType.Type::"Cheque Deposit") and (TransType.Type <> TransType.Type::"Credit Receipt") and (TransType.Type <> TransType.Type::"Bankers Cheque") and (TransType.Type <> TransType.Type::"Cancel Bankers Cheque") then begin
-
+                    if (TransType.Type <> TransType.Type::"Cash Deposit") and (TransType.Type <> TransType.Type::"Cheque Deposit") and (TransType.Type <> TransType.Type::"Credit Receipt") and (TransType.Type <> TransType.Type::"Bankers Cheque") and (TransType.Type <> TransType.Type::"Cancel Bankers Cheque") and (TransType.Type <> TransType.Type::"Mpesa Deposit") then begin
                         //T0DO -Check clearing bank balance
                         // if TransType.Type = TransType.Type::"Bankers Cheque" then begin
                         //     BankAccount.Get(BUserSetup."Bankers Cheque Account");
@@ -384,23 +383,24 @@ table 52185776 "Cashier Transactions"
 
                 end;
                 //System should notify teller if a member has multiple times in other branches.
-                CT.Reset();
-                CT.SetRange("Member No.", rec."Member No.");
-                CT.SetRange("Transaction Date", Today);
-                CT.SetRange(Posted, true);
-                CT.SetFilter("Global Dimension 1 Code", '<>%1', rec."Global Dimension 1 Code");
-                if CT.FindSet() then begin
-                    repeat
-                        CT.calcFields("Branch Name");
-                        Message(
-                              'This member has done other transactions today in another branch. Transaction Type: %1, Amount: %2, Branch: %3',
-                              Format(CT.Type),
-                              CT.Amount,
-                              CT."Branch Name"
-                              );
-                    until CT.Next() = 0;
+                if rec."Member No." <> '' then begin
+                    CT.Reset();
+                    CT.SetRange("Member No.", rec."Member No.");
+                    CT.SetRange("Transaction Date", Today);
+                    CT.SetRange(Posted, true);
+                    CT.SetFilter("Global Dimension 1 Code", '<>%1', rec."Global Dimension 1 Code");
+                    if CT.FindSet() then begin
+                        repeat
+                            CT.calcFields("Branch Name");
+                            Message(
+                                  'This member has done other transactions today in another branch. Transaction Type: %1, Amount: %2, Branch: %3',
+                                  Format(CT.Type),
+                                  CT.Amount,
+                                  CT."Branch Name"
+                                  );
+                        until CT.Next() = 0;
+                    end;
                 end;
-
             end;
         }
         field(30; "Banked By"; Code[50])
@@ -616,7 +616,7 @@ table 52185776 "Cashier Transactions"
                 "Product Type" := '';
                 "Project Member" := '';
                 "Project Vendor" := '';
-                
+
                 "Charge Amount" := 0;
                 "Excise Duty Amount" := 0;
                 "SMS Charge Amount" := 0;
@@ -668,7 +668,7 @@ table 52185776 "Cashier Transactions"
         field(50020; "Mpesa Reference"; Code[10])
         {
             trigger OnValidate()
-            
+
             begin
                 ValidateMpesaReference("Mpesa Reference");
             end;
@@ -703,7 +703,7 @@ table 52185776 "Cashier Transactions"
         }
         field(50027; "Reference Name"; Text[100])
         {
-        
+
         }
         field(50028; "MPESA Float Balance"; Decimal)
         {
@@ -925,8 +925,8 @@ table 52185776 "Cashier Transactions"
         Temp: Record "Banking User Template";
         Text0004: Label 'Ensure the Cashier Member no is set up in Banking User Setup';
         Jtemplate: Code[20];
-        Jbatch: Code[20];   
-        BankLedgEntry : Record "Bank Account Ledger Entry";
+        Jbatch: Code[20];
+        BankLedgEntry: Record "Bank Account Ledger Entry";
         BalBroughtForwardAmt: Decimal;
 
     local procedure CalcAvailableBal()
@@ -974,7 +974,7 @@ table 52185776 "Cashier Transactions"
         GenSetup.Get;
 
         TChargeAmount := 0;
-        
+
         "Charge Amount" := 0;
         "Excise Duty Amount" := 0;
         "SMS Charge Amount" := 0;
@@ -987,9 +987,9 @@ table 52185776 "Cashier Transactions"
 
                 ChargeAmount := 0;
                 IsSMS := false;
-                
+
                 // Identify if the loop has encountered the SMS Charge dynamically 
-                if (StrPos(UpperCase(TransactionCharges.Description), 'SMS') > 0) or 
+                if (StrPos(UpperCase(TransactionCharges.Description), 'SMS') > 0) or
                    (StrPos(UpperCase(TransactionCharges."Charge Code"), 'SMS') > 0) then
                     IsSMS := true;
 
@@ -1025,12 +1025,12 @@ table 52185776 "Cashier Transactions"
                     // Segregate the SMS Charge vs the Base Withdrawal Fee
                     if IsSMS then begin
                         "SMS Charge Amount" += ChargeAmount;
-                        
+
                         if (TransactionCharges."Transaction Charge Category" <> TransactionCharges."Transaction Charge Category"::"Stamp Duty") and (TransactionCharges."Recover Excise Duty") then
                             "SMS Excise Duty" += (ChargeAmount * GenSetup."Excise Duty (%)") * 0.01;
                     end else begin
                         "Charge Amount" += ChargeAmount;
-                        
+
                         if (TransactionCharges."Transaction Charge Category" <> TransactionCharges."Transaction Charge Category"::"Stamp Duty") and (TransactionCharges."Recover Excise Duty") then
                             "Excise Duty Amount" += (ChargeAmount * GenSetup."Excise Duty (%)") * 0.01;
                     end;
@@ -1064,7 +1064,7 @@ table 52185776 "Cashier Transactions"
                                 repeat
 
                                     IsSMS := false;
-                                    if (StrPos(UpperCase(TransactionCharges.Description), 'SMS') > 0) or 
+                                    if (StrPos(UpperCase(TransactionCharges.Description), 'SMS') > 0) or
                                        (StrPos(UpperCase(TransactionCharges."Charge Code"), 'SMS') > 0) then
                                         IsSMS := true;
 
@@ -1162,12 +1162,12 @@ table 52185776 "Cashier Transactions"
                     repeat
 
                         IsSMS := false;
-                        if (StrPos(UpperCase(TransactionCharges.Description), 'SMS') > 0) or 
+                        if (StrPos(UpperCase(TransactionCharges.Description), 'SMS') > 0) or
                            (StrPos(UpperCase(TransactionCharges."Charge Code"), 'SMS') > 0) then
                             IsSMS := true;
 
                         if (TransactionCharges."Transaction Charge Category" = TransactionCharges."Transaction Charge Category"::"Withdrawn Amount") then begin
-                        
+
 
                             ChargeAmount := 0;
                             if TransactionCharges."Charge Type" = TransactionCharges."Charge Type"::"% of Amount" = true then
@@ -1209,7 +1209,7 @@ table 52185776 "Cashier Transactions"
 
                             if (TransactionCharges."Transaction Charge Category" <> TransactionCharges."Transaction Charge Category"::"Stamp Duty") and (TransactionCharges."Recover Excise Duty") then begin
 
-                        
+
                                 TChargeAmount := TChargeAmount + (ChargeAmount * GenSetup."Excise Duty (%)") * 0.01;
                             end;
                         end;
@@ -1222,16 +1222,16 @@ table 52185776 "Cashier Transactions"
     end;
 
     local procedure ValidateMpesaReference(MpesaRef: Code[10])
-    var 
-         CT: record "Cashier Transactions";
-         MpesaRefCode : Code[10];          
+    var
+        CT: record "Cashier Transactions";
+        MpesaRefCode: Code[10];
     begin
         clear(MpesaRefCode);
 
         MpesaRefCode := UpperCase(DelChr(MpesaRef, '<>', ' '));
 
         if StrLen(MpesaRefCode) <> 10 then
-        Error('M-Pesa reference must be exactly 10 characters long.');
+            Error('M-Pesa reference must be exactly 10 characters long.');
 
         if "Account Type" = "Account Type"::MPESA then begin
             CT.Reset();
@@ -1241,7 +1241,7 @@ table 52185776 "Cashier Transactions"
                 Error('MPESA Reference Code %1 already exists for transaction No. %2', MpesaRefCode, CT.No);
         end;
     end;
-    
+
     local procedure CLEARALL()
     begin
         "Account No" := '';
@@ -1259,7 +1259,7 @@ table 52185776 "Cashier Transactions"
         "Cheque Date" := 0D;
         "Cheque No" := '';
         "Product Type" := '';
-        
+
         "Charge Amount" := 0;
         "Excise Duty Amount" := 0;
         "SMS Charge Amount" := 0;

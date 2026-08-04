@@ -46,6 +46,12 @@ pageextension 52187301 CustomerCardExtension extends "Customer Card"
             {
 
             }
+            field("Full deposit Guarantee"; Rec."Full deposit Guarantee")
+            {
+                ApplicationArea = All;
+                Caption = 'Full Deposit Guarantee';
+                ToolTip = 'Full Deposit Guarantee';
+            }
             field("Employee Job Group"; Rec."Employee Job Group")
             {
                 ApplicationArea = All;
@@ -76,9 +82,11 @@ pageextension 52187301 CustomerCardExtension extends "Customer Card"
                 Caption = 'Internal Staff Employer';
                 ToolTip = 'Internal Staff Employer';
             }
-            field("Loan TPAY SMS Notification"; Rec."Loan TPAY SMS Notification")
-            {
 
+            field("Dont Charge Transactions"; Rec."Dont Charge Transactions")
+            {
+                ApplicationArea = All;
+                Caption = 'Dont Charge Transactions';
             }
             field("Self Employed"; Rec."Self Employed")
             {
@@ -115,7 +123,7 @@ pageextension 52187301 CustomerCardExtension extends "Customer Card"
                 Caption = 'Relation Officer';
                 ToolTip = 'Relation Officer';
             }
-            
+
 
         }
         addlast("Address & Contact")

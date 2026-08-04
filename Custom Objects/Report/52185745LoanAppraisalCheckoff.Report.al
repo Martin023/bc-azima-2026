@@ -885,7 +885,7 @@ Report 52185745 "Loan Appraisal Checkoff"
                                         TopUp.Commision := TopUp."Principle Top Up" * (PCharges.Percentage / 100);
                                     END ELSE
                                         IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Net Amount") THEN BEGIN
-                                            TopUp.Commision := TopUp."Outstanding Balance" * (PCharges.Percentage / 100);
+                                            TopUp.Commision := TopUp."Principle Top Up" * (PCharges.Percentage / 100);
                                         END ELSE
                                             TopUp.Commision := PCharges."Charge Amount";
                                     //MESSAGE('Running Charge topup %1',TotalComputedCharges);

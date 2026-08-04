@@ -186,6 +186,7 @@ table 52185783 "Salary Header"
                     "Donnot Recover" := TransTypes."Exclude Salary Loan Deductions";
                     "Deposit Deduction" := TransTypes."Sal. Deposit Deduction";
                     "Income Type" := TransTypes."Salary Income Type";
+                    "Donot Recover STO" := TransTypes."Exclude STO Deductions";
                     rec.Modify()
                 end;
             end;

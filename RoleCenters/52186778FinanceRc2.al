@@ -566,12 +566,19 @@ page 52186778 "Finance Role Center"
 
                     Caption = 'Loans Processing';
 
-                    action("Approved Loans List")
+                    action("Loan Appraisal List")
                     {
                         ApplicationArea = Basic, Suite;
-                        caption = 'Approved Loans List';
-                        RunObject = page "Loan Application List";
-                        RunPageView = where(status = filter(Approved), Posted = const(false));
+                        caption = 'Loan Appraisal List';
+                        RunObject = page "Appraisal Loans List";
+                        // RunPageView = where("Source Unit" = const(BOSA));
+                    }
+                    action("Loan Approved List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        caption = 'Loan Approved List';
+                        RunObject = page "Approved Loans List";
+                        // RunPageView = where("Source Unit" = const(BOSA));
                     }
                     action("Loan Posted List")
                     {
@@ -1955,28 +1962,28 @@ page 52186778 "Finance Role Center"
                         ApplicationArea = Basic, Suite;
                         Caption = 'Open Salary Lists';
                         RunObject = page "Salary Lists";
-                        RunPageView = where(Status = filter(Open), Posted = const(false), "Income Type" = filter(Salary | pension));
+                        RunPageView = where(Status = filter(Open), Posted = const(false));
                     }
                     action("Pending Salary Lists")
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Pending Salary Lists';
                         RunObject = page "Salary Lists";
-                        RunPageView = where(Status = filter(Pending), Posted = const(false), "Income Type" = filter(Salary | pension));
+                        RunPageView = where(Status = filter(Pending), Posted = const(false));
                     }
                     action("Approved Salary Lists")
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Approved Salary Lists';
                         RunObject = page "Salary Lists";
-                        RunPageView = where(Status = filter(Approved), Posted = const(false), "Income Type" = filter(Salary | pension));
+                        RunPageView = where(Status = filter(Approved), Posted = const(false));
                     }
                     action("Posted Salary Lists")
                     {
                         ApplicationArea = Basic, Suite;
                         Caption = 'Posted Salary Lists';
                         RunObject = page "Posted Salary List";
-                        RunPageView = where("Income Type" = filter(Salary | pension));
+                        //RunPageView = where("Income Type" = filter(Salary | pension));
 
                     }
                     action("Rejected Salary Lists")
@@ -1984,7 +1991,7 @@ page 52186778 "Finance Role Center"
                         ApplicationArea = Basic, Suite;
                         Caption = 'Rejected Salary Lists';
                         RunObject = page "Salary Lists";
-                        RunPageView = where(Status = filter(Rejected), Posted = const(false), "Income Type" = filter(Salary | pension));
+                        //RunPageView = where(Status = filter(Rejected), Posted = const(false), "Income Type" = filter(Salary | pension));
                     }
                     // action("Posted Salary Report")
                     // {
