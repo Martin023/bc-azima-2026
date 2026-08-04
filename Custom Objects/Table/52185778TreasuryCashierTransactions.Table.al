@@ -194,9 +194,7 @@ table 52185778 "Treasury Cashier Transactions"
                             bankacc.SetRange("No.", BankingSetup."Default  Bank");
                             if bankacc.Find('-') then begin
                                 bankacc.CalcFields(Balance);
-                                Balance := bankacc.Balance;
                                 "Till Balance" := bankacc.Balance;
-
                             end;
 
                             // end;:=

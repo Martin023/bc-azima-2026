@@ -7,31 +7,37 @@ XmlPort 52185539 "M-PESA Manul Upload"
     {
         textelement(Upload)
         {
-            tableelement("M-PESA Manual Upload"; "M-PESA Manual Upload")
+            tableelement("M-PESA Manual Upload"; "Sky M-Banking Trans. Buffer")
             {
                 XmlName = 'ManualUpload';
-                fieldelement(a; "M-PESA Manual Upload"."Entry Code")
+                fieldelement(a; "M-PESA Manual Upload"."No.")
                 {
                 }
-                fieldelement(b; "M-PESA Manual Upload"."Transaction ID")
+                fieldelement(b; "M-PESA Manual Upload"."Originator ID")
                 {
                 }
-                fieldelement(c; "M-PESA Manual Upload"."Transaction Date")
+                fieldelement(c; "M-PESA Manual Upload"."Transaction Type")
                 {
                 }
-                fieldelement(d; "M-PESA Manual Upload".Transaction)
+                fieldelement(d; "M-PESA Manual Upload"."Transaction Status")
                 {
                 }
-                fieldelement(e; "M-PESA Manual Upload".Description)
+                fieldelement(e; "M-PESA Manual Upload"."Beneficiary Reference")
                 {
                 }
-                fieldelement(f; "M-PESA Manual Upload"."Account No")
+                fieldelement(f; "M-PESA Manual Upload"."Savings Account")
                 {
                 }
-                fieldelement(g; "M-PESA Manual Upload".Amount)
+                fieldelement(g; "M-PESA Manual Upload"."Transaction Amount")
                 {
                 }
-                fieldelement(h; "M-PESA Manual Upload"."Phone No")
+                fieldelement(h; "M-PESA Manual Upload"."Transaction Description")
+                {
+                }
+                fieldelement(h; "M-PESA Manual Upload"."PESA Type")
+                {
+                }
+                fieldelement(h; "M-PESA Manual Upload"."Transaction Category")
                 {
                 }
             }
