@@ -196,9 +196,14 @@ table 52185776 "Cashier Transactions"
                         // else begin
                         BUserSetup.Get(Cashier);
                         BankAccount.Get(BUserSetup."Default  Bank");
-                        BankAccount.CalcFields("Balance (LCY)");
-                        if BankAccount."Balance (LCY)" < rec.Amount then begin
-                            Error('Transaction Denied: Insufficient funds in till. Current balance is %1', BankAccount."Balance (LCY)");
+                        if bankAccount.FindFirst() then begin
+                            BankAccount.CalcFields("Balance (LCY)");
+                            if BankAccount."Balance (LCY)" <= BankAccount."Replenishment Balance" then begin
+                                Message('Your cash balance has reached the replenishment level. Please request replenishment from treasury.');
+                            end;
+                            if BankAccount."Balance (LCY)" < rec.Amount then begin
+                                Error('Transaction Denied: Insufficient funds in till. Current balance is %1', BankAccount."Balance (LCY)");
+                            end;
                         end;
                         // end;
 
@@ -382,6 +387,7 @@ table 52185776 "Cashier Transactions"
                     end;
 
                 end;
+
                 //System should notify teller if a member has multiple times in other branches.
                 if rec."Member No." <> '' then begin
                     CT.Reset();
@@ -393,11 +399,11 @@ table 52185776 "Cashier Transactions"
                         repeat
                             CT.calcFields("Branch Name");
                             Message(
-                                  'This member has done other transactions today in another branch. Transaction Type: %1, Amount: %2, Branch: %3',
-                                  Format(CT.Type),
-                                  CT.Amount,
-                                  CT."Branch Name"
-                                  );
+                                'This member has done other transactions today in another branch. Transaction Type: %1, Amount: %2, Branch: %3',
+                                Format(CT.Type),
+                                CT.Amount,
+                                CT."Branch Name"
+                                );
                         until CT.Next() = 0;
                     end;
                 end;
@@ -838,13 +844,10 @@ table 52185776 "Cashier Transactions"
             "Till Code" := BUserSetup."Default  Bank";
             bankacc.Reset;
             bankacc.SetRange("No.", BUserSetup."Default  Bank");
-            bankacc.calcfields(bankacc."Balance (LCY)");
+            bankacc.CalcFields(Balance);
             if bankacc.Find('-') then begin
                 "Till Code" := BUserSetup."Default  Bank";
                 "Till Name" := PadStr(BUserSetup."Default  Bank" + ' ' + bankacc.Name, 50);
-                if bankacc."Balance (LCY)" <= bankacc."Replenishment Balance" then begin
-                    Message('Your cash balance has reached the replenishment level. Please request replenishment from treasury.');
-                end;
             end;
         end;
 
