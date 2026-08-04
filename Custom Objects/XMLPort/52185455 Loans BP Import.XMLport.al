@@ -48,7 +48,7 @@ XmlPort 52185555 "Loans BP"
                 begin
                     if "Checkoff Buffer".Amount <= 0 then
                         Error('Amount must be greater than zero.');
-                    //"Checkoff Buffer".TestField("Search Code");
+                    "Checkoff Buffer".TestField("Product Code");
                     "Checkoff Buffer".TestField("Employer Code");
                     "Checkoff Buffer".TestField("Upload No.");
 

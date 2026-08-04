@@ -949,7 +949,7 @@ Report 52185745 "Loan Appraisal Checkoff"
                                         TrEarni := TrEarni + AppraisalSal.Amount
                                     else
                                         if (AppraisalSal.Type = AppraisalSal.Type::Deductions) or (AppraisalSal.Type = AppraisalSal.Type::PAYE) or (AppraisalSal.Type = AppraisalSal.Type::NSSF)
-                                        or (AppraisalSal.Type = AppraisalSal.Type::SHIF) or (AppraisalSal.Type = AppraisalSal.Type::HLEVY) or (AppraisalSal.Type = AppraisalSal.Type::"Voluntary NSSF") then
+                                        or (AppraisalSal.Type = AppraisalSal.Type::SHIF) or (AppraisalSal.Type = AppraisalSal.Type::HLEVY) or (AppraisalSal.Type = AppraisalSal.Type::"Voluntary NSSF") or (AppraisalSal.Type = AppraisalSal.Type::Loans) then
                                             TDeductions := TDeductions + AppraisalSal.Amount
                                         else
                                             if (AppraisalSal.Type = AppraisalSal.Type::Pension) or (AppraisalSal.Type = AppraisalSal.Type::"Voluntary Pension") then begin
