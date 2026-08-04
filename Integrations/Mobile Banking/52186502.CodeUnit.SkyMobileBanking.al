@@ -2910,38 +2910,16 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                         SearchMember."No.",
                         MobileLoanProduct."Product ID"
                     );
+                    if MobileLoanProduct."Minimum Loan Amount" < ExistingLoanAmount then begin
+                        Datum.Replace('loan_type_min_amount', ExistingLoanAmount + 70); // add 70 for processing fee
+                    end else begin
+                        Datum.Add('loan_type_min_amount', MobileLoanProduct."Minimum Loan Amount");
+                    end;
                     Datum.Add('existing_loan_amount', ExistingLoanAmount);
                 end else begin
                     Datum.Add('eligible_amount', SkyMbankingTrans.GetLoansQualifyAmount(SearchMember."No.", MobileLoanProduct."Product ID", 0, EligibilityFailReason));
                     Datum.Add('existing_loan_amount', ExistingLoanAmount);
                 end;
-
-                // if MobileLoanProduct."Requires Installments on App." then begin
-                //     TotalTopUp := MobileLoanProduct."Minimum Loan Amount";
-
-                //     TopUpLoan.Reset;
-                //     TopUpLoan.SetRange("Member No.", SearchMember."No.");
-                //     TopUpLoan.SetRange("Loan Product Type", MobileLoanProduct."Product ID");
-                //     TopUpLoan.SetFilter("Outstanding Balance", '>0');
-                //     TopUpLoan.SetRange(Posted, true);
-
-                //     TopUpLoan.SetLoadFields("Loan No.", "Outstanding Balance", "Outstanding Interest", "Daily Interest");
-                //     TopUpLoan.SetAutoCalcFields("Outstanding Balance", "Outstanding Interest", "Daily Interest");
-
-                //     if TopUpLoan.FindSet then begin
-                //         TotalTopUp := 0;
-
-                //         repeat begin
-                //             TotalTopUp += TopUpLoan."Outstanding Balance" + TopUpLoan."Outstanding Interest" + TopUpLoan."Daily Interest";
-                //         end until TopUpLoan.Next = 0;
-
-                //         if TotalTopUp < MobileLoanProduct."Minimum Loan Amount" then begin
-                //             TotalTopUp := MobileLoanProduct."Minimum Loan Amount";
-                //         end;
-                //     end;
-
-                //     Datum.Add('loan_type_min_amount', TotalTopUp);
-                // end else begin
                 Datum.Add('loan_type_min_amount', MobileLoanProduct."Minimum Loan Amount");
                 // end;
 
