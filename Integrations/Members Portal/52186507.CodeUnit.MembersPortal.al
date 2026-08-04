@@ -2515,23 +2515,8 @@ codeunit 52186507 "Members Portal Integration"
                             ProductFactory."Product ID");
 
                         if OutstandingBalance > 0 then begin
-                            ProductFactory."Minimum Loan Amount" := OutstandingBalance;
-
-                            // repeat
-                            //     PreviousMinimum := ProductFactory."Minimum Loan Amount";
-
-                            //     MobileChargesInfo := SkyMbankingTrans.GetTransChargesPreview(
-                            //         'LOAN_DISBURSEMENT',
-                            //         PreviousMinimum,
-                            //         '',
-                            //         SearchMember,
-                            //         '');
-
-                            //     ProductFactory."Minimum Loan Amount" :=
-                            //         OutstandingBalance +
-                            //         MobileChargesInfo.Get(1);
-
-                            // until ProductFactory."Minimum Loan Amount" = PreviousMinimum;
+                            TotalChargesOnMin := SkyMbankingTrans.GetTransChargesPreview('LOAN_DISBURSEMENT', 0, '', SearchMember, '').Get(1);
+                            ProductFactory."Minimum Loan Amount" := OutstandingBalance + TotalChargesOnMin;
 
                             Datum.Replace('minimum_amount', ProductFactory."Minimum Loan Amount");
                         end;
@@ -6029,6 +6014,8 @@ codeunit 52186507 "Members Portal Integration"
                             TotalTopUp += TopUpLoan."Outstanding Balance" + TopUpLoan."Outstanding Interest" + TopUpLoan."Daily Interest";
                         end until TopUpLoan.Next = 0;
 
+                        TotalTopUp += SkyMbankingTrans.GetTransChargesPreview('LOAN_DISBURSEMENT', 0, '', SearchMember, '').Get(1);
+
                         if TotalTopUp < MobileLoanProduct."Minimum Loan Amount" then begin
                             TotalTopUp := MobileLoanProduct."Minimum Loan Amount";
                         end;
@@ -6814,6 +6801,8 @@ codeunit 52186507 "Members Portal Integration"
                         repeat begin
                             TotalTopUp += TopUpLoan."Outstanding Balance" + TopUpLoan."Outstanding Interest" + TopUpLoan."Daily Interest";
                         end until TopUpLoan.Next = 0;
+
+                        TotalTopUp += SkyMbankingTrans.GetTransChargesPreview('LOAN_DISBURSEMENT', 0, '', SearchMember, '').Get(1);
 
                         if TotalTopUp < MobileLoanProduct."Minimum Loan Amount" then begin
                             TotalTopUp := MobileLoanProduct."Minimum Loan Amount";
