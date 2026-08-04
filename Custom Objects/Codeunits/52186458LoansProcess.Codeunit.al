@@ -6175,9 +6175,9 @@ Codeunit 52186458 "Loans Process"
                             END ELSE
                                 IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Net Amount") THEN BEGIN
                                     IF ChargeExtraComms = TRUE THEN
-                                        TotalComputedCharges := TotalComputedCharges + ((TopUp."Principle Top Up" + TopUp."Interest Top Up") * ((PCharges.Percentage + PCharges."Additional Charge %") / 100))
+                                        TotalComputedCharges := TotalComputedCharges + ((TopUp."Principle Top Up" ) * ((PCharges.Percentage + PCharges."Additional Charge %") / 100))
                                     ELSE
-                                        TotalComputedCharges := TotalComputedCharges + ((TopUp."Principle Top Up" + TopUp."Interest Top Up") * (PCharges.Percentage / 100))
+                                        TotalComputedCharges := TotalComputedCharges + ((TopUp."Principle Top Up") * (PCharges.Percentage / 100))
                                 END ELSE
                                     TotalComputedCharges := TotalComputedCharges + PCharges."Charge Amount";
                             //MESSAGE('Running Charge topup %1',TotalComputedCharges);

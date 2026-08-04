@@ -408,8 +408,8 @@ table 52185744 "Appraisal Salary Details"
 
                     ApprDetails.Type::Relief:
                         ApprDetails.Amount := Relief;
-                    ApprDetails.Type::Loans:
-                        ApprDetails.Amount := TotalOutstanding;
+                    // ApprDetails.Type::Loans:
+                    //     ApprDetails.Amount := TotalOutstanding;
                     ApprDetails.Type::"Total Deduction":
                         begin
                             ApprDetails.Amount := TotalDeductions;
