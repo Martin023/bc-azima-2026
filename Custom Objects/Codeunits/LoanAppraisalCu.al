@@ -19,6 +19,7 @@ Codeunit 52185484 "Loan Appraisal Codeunit"
         TotalTopUp: Decimal;
         TotalLoanCommittment: Decimal;
         Toups: record "Loans Top up";
+        AppledLoan: record Loans;
     begin
 
         Deductions := 0;
@@ -54,7 +55,8 @@ Codeunit 52185484 "Loan Appraisal Codeunit"
                     until Loans.Next() = 0;
                 end
                 else begin
-                    TotalThreeMonthInterest := SavingsAcc.Balance * 3 * (Loans."Interest" / 12 * 0.01);
+                    AppledLoan.get(LoanNo);
+                    TotalThreeMonthInterest := SavingsAcc.Balance * 3 * (AppledLoan."Interest" / 12 * 0.01);
                 end;
                 //Message('Total Loan Balance: %1, Total Three Month Interest: %2', TotalLoanBalance, TotalThreeMonthInterest);
                 TotalLoanCommittment := TotalLoanBalance + TotalThreeMonthInterest;

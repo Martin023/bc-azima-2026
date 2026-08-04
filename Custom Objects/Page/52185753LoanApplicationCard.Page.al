@@ -1742,7 +1742,7 @@ page 52185753 "Loan Application Card"
 
                     Members.Get(Rec."Member No.");
                     if Members.Status <> Members.Status::Active then
-                        Error("InactiveErr:");
+                        message("InactiveErr:");
 
 
                     if Rec."Self Guarantee" = false then begin
