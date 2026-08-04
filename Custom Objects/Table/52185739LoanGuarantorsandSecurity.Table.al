@@ -156,6 +156,12 @@ table 52185739 "Loan Guarantors and Security"
                                                 "Available Shares" := LoanAppraisal.GetmaxSelfGuaranteeAmt("Savings Account No./Member No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(rec."Member No");
                                                 "Amount Guaranteed" := LoanAppraisal.GetmaxSelfGuaranteeAmt("Savings Account No./Member No.", "Loan No") - LoanAppraisal.GetTotalGuaranteedAmt(rec."Member No");
                                                 "Original Amount Guaranteed" := "Amount Guaranteed";
+                                            end
+                                            else begin
+                                                "Self Guarantee" := false;
+                                                "Available Shares" := SavingsAccounts.GetAvailableBalance("Savings Account No./Member No.");
+                                                "Amount Guaranteed" := "Available Shares";
+                                                "Original Amount Guaranteed" := "Amount Guaranteed";
                                             end;
                                         end;
                                     end

@@ -51,22 +51,27 @@ xmlport 52185558 BankImport
                 fieldelement(SWIFTCode; BankAccount."SWIFT Code")
                 {
                     FieldValidate = no;
+                    MinOccurs = Zero;
                 }
                 fieldelement(BankType; BankAccount."Bank Type")
                 {
                     FieldValidate = no;
+                    MinOccurs = Zero;
                 }
                 fieldelement(CurrencyCode; BankAccount."Currency Code")
                 {
                     FieldValidate = no;
+                    MinOccurs = Zero;
                 }
                 fieldelement(maxwith; BankAccount."Max. Witholding Balance")
                 {
                     FieldValidate = no;
+                    MinOccurs = Zero;
                 }
                 fieldelement(replenbal; BankAccount."Replenishment Balance")
                 {
                     FieldValidate = no;
+                    MinOccurs = Zero;
                 }
             }
         }

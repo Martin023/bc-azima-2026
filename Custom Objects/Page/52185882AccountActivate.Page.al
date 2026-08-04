@@ -178,7 +178,7 @@ page 52186882 "Account Activation"
                     ApplicationArea = Basic, Suite;
                     Image = ViewComments;
                     Promoted = true;
-                    PromotedCategory = Category5;
+                    PromotedCategory = Category4;
 
                     RunObject = page "Comments List";
                     RunPageLink = "Header No." = field("No");
@@ -444,7 +444,7 @@ page 52186882 "Account Activation"
         Source: Enum "SMS Source";
         msg: Text;
         VBlock: Boolean;
-        GlobalFunctions : Codeunit "Global Functions";
+        GlobalFunctions: Codeunit "Global Functions";
 
     //[Scope('OnPrem')]
 
