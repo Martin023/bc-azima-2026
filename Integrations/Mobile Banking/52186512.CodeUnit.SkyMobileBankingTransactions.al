@@ -1109,26 +1109,23 @@ codeunit 52186512 "Sky M-Banking Transactions"
     procedure GetMemberFosaAcc(Member: record Members): text
     var
         SavingsAccounts: record "Savings Accounts";
-        FosaProduct: Record "Product Factory";
     begin
-        FosaProduct.Reset;
-        FosaProduct.SetRange("Product Category", FosaProduct."Product Category"::"FOSA Account");
-        FosaProduct.SetRange("Auto Open Account", true); // Main Fosa Acc.
-
-        FosaProduct.SetLoadFields("Product ID");
-        if not FosaProduct.FindFirst then begin
-            exit('');
-        end;
 
         SavingsAccounts.RESET;
         SavingsAccounts.SETRANGE("Member No.", Member."No.");
-        SavingsAccounts.SETRANGE("Product Type", FosaProduct."Product ID");
-
+        SavingsAccounts.SetRange("Loan Disbursement Account", true);
         SavingsAccounts.SetLoadFields("No.");
-        if SavingsAccounts.FINDFIRST then
+        if SavingsAccounts.FINDFIRST then begin
             exit(SavingsAccounts."No.")
-        else
-            exit('');
+        end else begin
+            SavingsAccounts.RESET;
+            savingsAccounts.SETRANGE("Member No.", Member."No.");
+            SavingsAccounts.SetFilter("Product Type", '%1|%2', '191', '195');
+            savingsAccounts.SetCurrentKey(blocked, Status, "Product Type");
+            if SavingsAccounts.FINDFIRST then
+                exit(SavingsAccounts."No.");
+        end;
+
     end;
     // Get Member primary bosa acc
     procedure GetMemberDepositsAcc(Member: record Members): text
