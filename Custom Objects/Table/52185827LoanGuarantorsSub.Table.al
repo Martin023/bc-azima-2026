@@ -694,16 +694,16 @@ table 52185827 "Loan Guarantors Sub"
         GlobalFunctions: Codeunit "Global Functions";
     begin
         // Major - Minor loans validation
-        if "Guarantor Type" <> Rec."Guarantor Type"::Collateral then begin
-            //Check redudant incoming GS
-            IncomingGs.Reset();
-            IncomingGs.SetRange("Savings Account No.", Rec."Savings Account No.");
-            IncomingGs.SetRange("Loan No", Rec."Loan No");
-            IncomingGs.SetFilter("Entry No", '<>%1', Rec."Entry No");
-            if IncomingGs.Find('-') then
-                // if IncomingGs.Count > 0 then
-                Error('Member already exist');
-        end;
+        // if "Guarantor Type" <> Rec."Guarantor Type"::Collateral then begin
+        //     //Check redudant incoming GS
+        //     IncomingGs.Reset();
+        //     IncomingGs.SetRange("Savings Account No.", Rec."Savings Account No.");
+        //     IncomingGs.SetRange("Loan No", Rec."Loan No");
+        //     IncomingGs.SetFilter("Entry No", '<>%1', Rec."Entry No");
+        //     if IncomingGs.Find('-') then
+        //         // if IncomingGs.Count > 0 then
+        //         Error('Member already exist');
+        // end;
         TheLoan.Get(Rec."Loan No");
 
         TheLoanProduct.Reset;

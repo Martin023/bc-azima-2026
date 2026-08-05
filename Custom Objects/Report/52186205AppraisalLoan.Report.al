@@ -336,6 +336,10 @@ Report 52186205
             {
 
             }
+            column(TotalProcessingAmt; TotalProcessingAmt)
+            {
+
+            }
 
             dataitem(AllLoans; Loans)
             {
