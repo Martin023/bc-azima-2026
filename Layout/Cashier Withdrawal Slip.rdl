@@ -24,7 +24,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>16.5cm</Height>
+                  <Height>14.54208cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -152,9 +152,9 @@
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>3.1cm</Top>
+                              <Top>3.12361cm</Top>
                               <Left>0.2cm</Left>
-                              <Height>3.5cm</Height>
+                              <Height>2.62688cm</Height>
                               <Width>7.5cm</Width>
                               <ZIndex>2</ZIndex>
                               <Style />
@@ -546,7 +546,7 @@
                                   </TablixMember>
                                 </TablixMembers>
                               </TablixRowHierarchy>
-                              <Top>6.8cm</Top>
+                              <Top>5.85632cm</Top>
                               <Left>0.2cm</Left>
                               <Height>2.8cm</Height>
                               <Width>7.5cm</Width>
@@ -568,7 +568,7 @@
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>9.94979cm</Top>
+                              <Top>9.00611cm</Top>
                               <Left>0.2cm</Left>
                               <Height>0.55021cm</Height>
                               <Width>7.5cm</Width>
@@ -611,7 +611,7 @@
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>10.7cm</Top>
+                              <Top>9.75632cm</Top>
                               <Left>0.2cm</Left>
                               <Height>1.5cm</Height>
                               <Width>7.5cm</Width>
@@ -633,7 +633,7 @@
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>12.5cm</Top>
+                              <Top>11.55632cm</Top>
                               <Left>0.2cm</Left>
                               <Height>0.5cm</Height>
                               <Width>7.5cm</Width>
@@ -655,7 +655,7 @@
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>13.2cm</Top>
+                              <Top>12.25632cm</Top>
                               <Left>0.2cm</Left>
                               <Height>1cm</Height>
                               <Width>7.5cm</Width>
@@ -677,7 +677,7 @@
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>14.4cm</Top>
+                              <Top>13.45632cm</Top>
                               <Left>0.2cm</Left>
                               <Height>0.5cm</Height>
                               <Width>7.5cm</Width>
@@ -717,12 +717,12 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
             <Top>0.1cm</Top>
-            <Height>16.5cm</Height>
+            <Height>14.54208cm</Height>
             <Width>7.9cm</Width>
             <Style />
           </Tablix>
         </ReportItems>
-        <Height>17cm</Height>
+        <Height>15.40938cm</Height>
         <Style />
       </Body>
       <Width>7.9cm</Width>
@@ -949,9 +949,6 @@ ZZWuQqAQKAQKgUKgECgECoFCYJMjsMEUp9pAtsnLU4lfCPQKgkKgEBgGgQ06UbhBxRoG0fJTCBQChcCo
         <Field Name="Company_Pic">
           <DataField>Company_Pic</DataField>
         </Field>
-        <Field Name="NumberText">
-          <DataField>NumberText</DataField>
-        </Field>
         <Field Name="Transactions_Transactions_Cashier">
           <DataField>Transactions_Transactions_Cashier</DataField>
         </Field>
@@ -1026,6 +1023,12 @@ ZZWuQqAQKAQKgUKgECgECoFCYJMjsMEUp9pAtsnLU4lfCPQKgkKgEBgGgQ06UbhBxRoG0fJTCBQChcCo
         </Field>
         <Field Name="ExciseDutyAmountFormat">
           <DataField>ExciseDutyAmountFormat</DataField>
+        </Field>
+        <Field Name="ExciseDutyPercentage">
+          <DataField>ExciseDutyPercentage</DataField>
+        </Field>
+        <Field Name="ExciseDutyPercentageFormat">
+          <DataField>ExciseDutyPercentageFormat</DataField>
         </Field>
       </Fields>
       <Query>
