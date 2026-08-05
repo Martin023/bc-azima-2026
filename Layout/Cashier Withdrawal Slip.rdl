@@ -11,160 +11,6 @@
       <rd:DataSourceID>2668fc7f-ed2b-42f7-b3f5-830ce161f35e</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="Transactions_Transactions__Book_Balance_">
-          <DataField>Transactions_Transactions__Book_Balance_</DataField>
-        </Field>
-        <Field Name="Transactions_Transactions__Book_Balance_Format">
-          <DataField>Transactions_Transactions__Book_Balance_Format</DataField>
-        </Field>
-        <Field Name="Transactions_No">
-          <DataField>Transactions_No</DataField>
-        </Field>
-        <Field Name="AccountNo">
-          <DataField>AccountNo</DataField>
-        </Field>
-        <Field Name="AccountName">
-          <DataField>AccountName</DataField>
-        </Field>
-        <Field Name="CompanyInformation_Name">
-          <DataField>CompanyInformation_Name</DataField>
-        </Field>
-        <Field Name="CompanyInformation_Picture">
-          <DataField>CompanyInformation_Picture</DataField>
-        </Field>
-        <Field Name="CompanyAddress">
-          <DataField>CompanyAddress</DataField>
-        </Field>
-        <Field Name="CompanyTelephone">
-          <DataField>CompanyTelephone</DataField>
-        </Field>
-        <Field Name="CommunicationOnline">
-          <DataField>CommunicationOnline</DataField>
-        </Field>
-        <Field Name="Amount">
-          <DataField>Amount</DataField>
-        </Field>
-        <Field Name="AmountFormat">
-          <DataField>AmountFormat</DataField>
-        </Field>
-        <Field Name="PayrollNo">
-          <DataField>PayrollNo</DataField>
-        </Field>
-        <Field Name="Prod_Name">
-          <DataField>Prod_Name</DataField>
-        </Field>
-        <Field Name="Transactions__Transaction_Date_">
-          <DataField>Transactions__Transaction_Date_</DataField>
-        </Field>
-        <Field Name="Transactions_Transactions__Transaction_Time_">
-          <DataField>Transactions_Transactions__Transaction_Time_</DataField>
-        </Field>
-        <Field Name="Transactions__Cheque_No_">
-          <DataField>Transactions__Cheque_No_</DataField>
-        </Field>
-        <Field Name="Transactions_Type">
-          <DataField>Transactions_Type</DataField>
-        </Field>
-        <Field Name="BranchCode">
-          <DataField>BranchCode</DataField>
-        </Field>
-        <Field Name="CompanyInfo_Name">
-          <DataField>CompanyInfo_Name</DataField>
-        </Field>
-        <Field Name="Company_Address">
-          <DataField>Company_Address</DataField>
-        </Field>
-        <Field Name="Co_phone">
-          <DataField>Co_phone</DataField>
-        </Field>
-        <Field Name="Company_Pic">
-          <DataField>Company_Pic</DataField>
-        </Field>
-        <Field Name="NumberText">
-          <DataField>NumberText</DataField>
-        </Field>
-        <Field Name="Transactions_Transactions_Cashier">
-          <DataField>Transactions_Transactions_Cashier</DataField>
-        </Field>
-        <Field Name="AvailableBalance">
-          <DataField>AvailableBalance</DataField>
-        </Field>
-        <Field Name="AvailableBalanceFormat">
-          <DataField>AvailableBalanceFormat</DataField>
-        </Field>
-        <Field Name="SumTransactionCharges">
-          <DataField>SumTransactionCharges</DataField>
-        </Field>
-        <Field Name="SumTransactionChargesFormat">
-          <DataField>SumTransactionChargesFormat</DataField>
-        </Field>
-        <Field Name="NewAvailable">
-          <DataField>NewAvailable</DataField>
-        </Field>
-        <Field Name="NewAvailableFormat">
-          <DataField>NewAvailableFormat</DataField>
-        </Field>
-        <Field Name="Dublicate">
-          <DataField>Dublicate</DataField>
-        </Field>
-        <Field Name="CashierName">
-          <DataField>CashierName</DataField>
-        </Field>
-        <Field Name="MaskedAccountNo">
-          <DataField>MaskedAccountNo</DataField>
-        </Field>
-        <Field Name="CashierNameOnly">
-          <DataField>CashierNameOnly</DataField>
-        </Field>
-        <Field Name="Till_Name">
-          <DataField>Till_Name</DataField>
-        </Field>
-        <Field Name="Branch_code">
-          <DataField>Branch_code</DataField>
-        </Field>
-        <Field Name="Branch_Name">
-          <DataField>Branch_Name</DataField>
-        </Field>
-        <Field Name="ProductTypeDescription">
-          <DataField>ProductTypeDescription</DataField>
-        </Field>
-        <Field Name="Reprint">
-          <DataField>Reprint</DataField>
-        </Field>
-        <Field Name="ReprintDate">
-          <DataField>ReprintDate</DataField>
-        </Field>
-        <Field Name="ReprintTime">
-          <DataField>ReprintTime</DataField>
-        </Field>
-        <Field Name="ReportForNavId_8541">
-          <DataField>ReportForNavId_8541</DataField>
-        </Field>
-        <Field Name="Description">
-          <DataField>Description</DataField>
-        </Field>
-        <Field Name="ChargeAmount_TransactionCharges">
-          <DataField>ChargeAmount_TransactionCharges</DataField>
-        </Field>
-        <Field Name="ChargeAmount_TransactionChargesFormat">
-          <DataField>ChargeAmount_TransactionChargesFormat</DataField>
-        </Field>
-        <Field Name="ExciseDutyAmount">
-          <DataField>ExciseDutyAmount</DataField>
-        </Field>
-        <Field Name="ExciseDutyAmountFormat">
-          <DataField>ExciseDutyAmountFormat</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -887,12 +733,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <EmbeddedImages>
     <EmbeddedImage Name="azimaa">
       <MIMEType>image/png</MIMEType>
@@ -1037,4 +877,161 @@ ZZWuQqAQKAQKgUKgECgECoFCYJMjsMEUp9pAtsnLU4lfCPQKgkKgEBgGgQ06UbhBxRoG0fJTCBQChcCo
   <Language>=User!Language</Language>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>175b0f7d-18a0-4a2a-a257-6c3376b8dd9c</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Transactions_Transactions__Book_Balance_">
+          <DataField>Transactions_Transactions__Book_Balance_</DataField>
+        </Field>
+        <Field Name="Transactions_Transactions__Book_Balance_Format">
+          <DataField>Transactions_Transactions__Book_Balance_Format</DataField>
+        </Field>
+        <Field Name="Transactions_No">
+          <DataField>Transactions_No</DataField>
+        </Field>
+        <Field Name="AccountNo">
+          <DataField>AccountNo</DataField>
+        </Field>
+        <Field Name="AccountName">
+          <DataField>AccountName</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Name">
+          <DataField>CompanyInformation_Name</DataField>
+        </Field>
+        <Field Name="CompanyInformation_Picture">
+          <DataField>CompanyInformation_Picture</DataField>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+        </Field>
+        <Field Name="CompanyTelephone">
+          <DataField>CompanyTelephone</DataField>
+        </Field>
+        <Field Name="CommunicationOnline">
+          <DataField>CommunicationOnline</DataField>
+        </Field>
+        <Field Name="Amount">
+          <DataField>Amount</DataField>
+        </Field>
+        <Field Name="AmountFormat">
+          <DataField>AmountFormat</DataField>
+        </Field>
+        <Field Name="PayrollNo">
+          <DataField>PayrollNo</DataField>
+        </Field>
+        <Field Name="Prod_Name">
+          <DataField>Prod_Name</DataField>
+        </Field>
+        <Field Name="Transactions__Transaction_Date_">
+          <DataField>Transactions__Transaction_Date_</DataField>
+        </Field>
+        <Field Name="Transactions_Transactions__Transaction_Time_">
+          <DataField>Transactions_Transactions__Transaction_Time_</DataField>
+        </Field>
+        <Field Name="Transactions__Cheque_No_">
+          <DataField>Transactions__Cheque_No_</DataField>
+        </Field>
+        <Field Name="Transactions_Type">
+          <DataField>Transactions_Type</DataField>
+        </Field>
+        <Field Name="BranchCode">
+          <DataField>BranchCode</DataField>
+        </Field>
+        <Field Name="CompanyInfo_Name">
+          <DataField>CompanyInfo_Name</DataField>
+        </Field>
+        <Field Name="Company_Address">
+          <DataField>Company_Address</DataField>
+        </Field>
+        <Field Name="Co_phone">
+          <DataField>Co_phone</DataField>
+        </Field>
+        <Field Name="Company_Pic">
+          <DataField>Company_Pic</DataField>
+        </Field>
+        <Field Name="NumberText">
+          <DataField>NumberText</DataField>
+        </Field>
+        <Field Name="Transactions_Transactions_Cashier">
+          <DataField>Transactions_Transactions_Cashier</DataField>
+        </Field>
+        <Field Name="NumberText_1_">
+          <DataField>NumberText_1_</DataField>
+        </Field>
+        <Field Name="AvailableBalance">
+          <DataField>AvailableBalance</DataField>
+        </Field>
+        <Field Name="AvailableBalanceFormat">
+          <DataField>AvailableBalanceFormat</DataField>
+        </Field>
+        <Field Name="SumTransactionCharges">
+          <DataField>SumTransactionCharges</DataField>
+        </Field>
+        <Field Name="SumTransactionChargesFormat">
+          <DataField>SumTransactionChargesFormat</DataField>
+        </Field>
+        <Field Name="NewAvailable">
+          <DataField>NewAvailable</DataField>
+        </Field>
+        <Field Name="NewAvailableFormat">
+          <DataField>NewAvailableFormat</DataField>
+        </Field>
+        <Field Name="Dublicate">
+          <DataField>Dublicate</DataField>
+        </Field>
+        <Field Name="CashierName">
+          <DataField>CashierName</DataField>
+        </Field>
+        <Field Name="MaskedAccountNo">
+          <DataField>MaskedAccountNo</DataField>
+        </Field>
+        <Field Name="CashierNameOnly">
+          <DataField>CashierNameOnly</DataField>
+        </Field>
+        <Field Name="Till_Name">
+          <DataField>Till_Name</DataField>
+        </Field>
+        <Field Name="Branch_code">
+          <DataField>Branch_code</DataField>
+        </Field>
+        <Field Name="Branch_Name">
+          <DataField>Branch_Name</DataField>
+        </Field>
+        <Field Name="ProductTypeDescription">
+          <DataField>ProductTypeDescription</DataField>
+        </Field>
+        <Field Name="Reprint">
+          <DataField>Reprint</DataField>
+        </Field>
+        <Field Name="ReprintDate">
+          <DataField>ReprintDate</DataField>
+        </Field>
+        <Field Name="ReprintTime">
+          <DataField>ReprintTime</DataField>
+        </Field>
+        <Field Name="ReportForNavId_8541">
+          <DataField>ReportForNavId_8541</DataField>
+        </Field>
+        <Field Name="Description">
+          <DataField>Description</DataField>
+        </Field>
+        <Field Name="ChargeAmount_TransactionCharges">
+          <DataField>ChargeAmount_TransactionCharges</DataField>
+        </Field>
+        <Field Name="ChargeAmount_TransactionChargesFormat">
+          <DataField>ChargeAmount_TransactionChargesFormat</DataField>
+        </Field>
+        <Field Name="ExciseDutyAmount">
+          <DataField>ExciseDutyAmount</DataField>
+        </Field>
+        <Field Name="ExciseDutyAmountFormat">
+          <DataField>ExciseDutyAmountFormat</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>
