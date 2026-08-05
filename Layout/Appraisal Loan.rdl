@@ -7060,6 +7060,12 @@ End Function
         <Field Name="STOAmountFormat">
           <DataField>STOAmountFormat</DataField>
         </Field>
+        <Field Name="TotalProcessingAmt">
+          <DataField>TotalProcessingAmt</DataField>
+        </Field>
+        <Field Name="TotalProcessingAmtFormat">
+          <DataField>TotalProcessingAmtFormat</DataField>
+        </Field>
         <Field Name="LoansLoanNo">
           <DataField>LoansLoanNo</DataField>
         </Field>
