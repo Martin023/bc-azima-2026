@@ -1335,7 +1335,7 @@ Codeunit 52185506 "Global Functions"
         );
     end;
 
-       procedure GetSavingsAccountAvailableBalance(Rec: Record "Savings Accounts"; RecCalcFields: Boolean): decimal
+    procedure GetSavingsAccountAvailableBalance(Rec: Record "Savings Accounts"; RecCalcFields: Boolean): decimal
     var
         ProductFactory: Record "Product Factory";
         MinBalance: Decimal;
@@ -2045,6 +2045,36 @@ Codeunit 52185506 "Global Functions"
         SavingsAccount.SetRange("Product Type", 'KSS');
 
         exit(SavingsAccount.FindFirst);
+    end;
+
+    procedure IsStaffAccount(AccountNo: Text): Boolean;
+    var
+        Cust: Record Customer;
+        SavingsAccount: Record "Savings Accounts";
+        Employer: Record Customer;
+        EmployerCode: Code[20];
+        Member: Record Members;
+    begin
+        employerCode := '';
+        if SavingsAccount.Get(AccountNo) then begin
+            if savingsAccount."Employer Code" <> '' then
+                if cust.Get(savingsAccount."Employer Code") then
+                    employerCode := cust."No.";
+            if employercode = '' then
+                if member.Get(savingsAccount."Member No.") then
+                    if member."Employer Code" <> '' then
+                        if cust.Get(member."Employer Code") then
+                            employerCode := cust."No.";
+        end else
+            exit(false);
+
+        if EmployerCode = '' then
+            exit(false);
+
+        if Employer.Get(EmployerCode) then
+            exit(Employer."Dont Charge Transactions");
+
+        exit(false);
     end;
 
     procedure IsFOSALoanProduct(ProductID: Code[10]): Boolean;
