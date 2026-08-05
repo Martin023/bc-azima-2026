@@ -315,11 +315,24 @@ page 52187414 "FOSA Payment Voucher"
                 action("Import Fosa Lines")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'Import Fosa Lines';
+                    Caption = 'Import Fosa Lines: Account No.';
                     Image = Import;
                     Promoted = true;
                     PromotedCategory = Process;
                     RunObject = XMLport "FOSA PV Lines";
+                    trigger OnAction()
+                    begin
+                        rec.TestField(Posted, false);
+                    end;
+                }
+                action("Import Fosa Lines: ID No.")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Import Fosa Lines: ID No.';
+                    Image = Import;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    RunObject = XMLport "FOSA PV Lines ID";
                     trigger OnAction()
                     begin
                         rec.TestField(Posted, false);
