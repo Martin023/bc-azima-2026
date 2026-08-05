@@ -55,8 +55,8 @@ Report 52185544 "Schedule All Loans"
                         end
                         else begin
                             if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::Amortised then begin
-                                Loans.Repayment := Round((Loans.Interest / 12 / 100) / (1 - Power((1 + (Loans.Interest / 12 / 100)), -(Loans.Installments))) * (Loans."Approved Amount"), 0.01, '>');
-                                Loans."Loan Interest Repayment" := Round(Loans."Approved Amount" / 100 / 12 * Loans.Interest, 0.01, '>');
+                                Loans.Repayment := Round((Loans.Interest / 12 / 100) / (1 - Power((1 + (Loans.Interest / 12 / 100)), -(Loans.Installments))) * (Loans."Approved Amount"), 1, '>');
+                                Loans."Loan Interest Repayment" := Round(Loans."Approved Amount" / 100 / 12 * Loans.Interest, 1, '>');
                                 Loans."Loan Principle Repayment" := Loans.Repayment - Loans."Loan Interest Repayment";
                             end else begin
                                 if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Straight Line" then begin
@@ -69,8 +69,8 @@ Report 52185544 "Schedule All Loans"
 
                                     if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Balance" then begin
                                         //Loans.TestField(Interest);
-                                        Loans."Loan Principle Repayment" := Loans."Approved Amount" / Loans.Installments;
-                                        Loans."Loan Interest Repayment" := (Loans.Interest / 12 / 100) * Loans."Approved Amount";
+                                        Loans."Loan Principle Repayment" := Round((Loans."Approved Amount" / Loans.Installments), 1, '>');
+                                        Loans."Loan Interest Repayment" := Round(((Loans.Interest / 12 / 100) * Loans."Approved Amount"), 1, '>');
                                     end else
                                         if Loans."Interest Calculation Method" = Loans."Interest Calculation Method"::"Reducing Flat" then begin
                                             //Loans.TestField(Interest);
@@ -83,9 +83,11 @@ Report 52185544 "Schedule All Loans"
 
                             end;
                         end;
-                        Loans.Repayment := Loans."Loan Principle Repayment" + Loans."Loan Interest Repayment";
+                        Loans.Repayment := Round(((Loans."Loan Principle Repayment" + Loans."Loan Interest Repayment")), 1, '>');
                         //Loans."Repayment Start Date" := "Disbursement Date" + 45;
                         loans."Repayment Start Date" := CalcDate('CM+1M', loans."Disbursement Date");
+                        if Loans.installments > 1 then
+                            Loans."Expected Date of Completion" := CalcDate(FORMAT(loans.Installments) + 'M', loans."Repayment Start Date");
                         Loans.Modify();
                     end;
                 end;
