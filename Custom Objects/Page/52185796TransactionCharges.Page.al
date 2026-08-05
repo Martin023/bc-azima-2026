@@ -70,6 +70,11 @@ page 52185796 "Transaction Charges"
                 {
 
                 }
+                field("useMoneyTfrChargesExciseDuty"; Rec."useMoneyTfrChargesExciseDuty")
+                {
+                    Caption = 'Use Money Transfer Charges Excise Duty';
+                    ApplicationArea = Basic, Suite;
+                }
             }
         }
     }
