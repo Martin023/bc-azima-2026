@@ -4374,7 +4374,7 @@ Codeunit 52186458 "Loans Process"
                 Descr := ProdFac."Product Description" + ' ' + 'Loan';
                 Descr := CopyStr(Descr, 1, 50);
                 JournalPosting.PostJournal(Jtemplate, JBatch, LineNo, AccType, LoanNo, Descr, -LoanApps."Amount To Disburse", AccNo,
-                PDate, BalAccType, BalAccNo, '', Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+                PDate, BalAccType, BalAccNo, LoanNo, Dim1, Dim2, TransType, '', '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
                 ShambaLoanProcFee := 0;
                 ShambaLoanExcise := 0;
 
@@ -6175,7 +6175,7 @@ Codeunit 52186458 "Loans Process"
                             END ELSE
                                 IF (PCharges."Use Percentage" = TRUE) AND (PCharges."Charging Option" = PCharges."Charging Option"::"On Net Amount") THEN BEGIN
                                     IF ChargeExtraComms = TRUE THEN
-                                        TotalComputedCharges := TotalComputedCharges + ((TopUp."Principle Top Up" ) * ((PCharges.Percentage + PCharges."Additional Charge %") / 100))
+                                        TotalComputedCharges := TotalComputedCharges + ((TopUp."Principle Top Up") * ((PCharges.Percentage + PCharges."Additional Charge %") / 100))
                                     ELSE
                                         TotalComputedCharges := TotalComputedCharges + ((TopUp."Principle Top Up") * (PCharges.Percentage / 100))
                                 END ELSE

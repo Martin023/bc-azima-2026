@@ -31,39 +31,15 @@ report 52185683 "Cashier Withdrawal Slip"
             column(Company_Address; CompanyInfo.Address) { }
             column(Co_phone; CompanyInfo."Phone No.") { }
             column(Company_Pic; CompanyInfo.Picture) { }
-            column(NumberText; NumberText[1]) { }
             column(Transactions_Transactions_Cashier; Transactions.Cashier) { }
-            column(Amount_WithdrawnCaption; Amount_WithdrawnCaptionLbl) { }
-            column(Book_Balance_Caption; Book_Balance_CaptionLbl) { }
-            column(Transaction_No_Caption; Transaction_No_CaptionLbl) { }
-            column(Account_No_Caption; Account_No_CaptionLbl) { }
-            column(Account_Name_Caption; Account_Name_CaptionLbl) { }
-            column(Date_Caption; Date_CaptionLbl) { }
-            column(Time_Caption; Time_CaptionLbl) { }
-            column(Transactions__Cheque_No_Caption; Transactions.FieldCaption("Cheque No")) { }
-            column(Member_No_Caption; Member_No_CaptionLbl) { }
-            column(EmptyStringCaption; EmptyStringCaptionLbl) { }
-            column(Signature_Caption; Signature_CaptionLbl) { }
-            column(I_acknowledge_receipt_of_the_above_amountCaption; I_acknowledge_receipt_of_the_above_amountCaptionLbl) { }
-            column(EmptyStringCaption_Control1000000048; EmptyStringCaption_Control1000000048Lbl) { }
-            column(I_D_No_Caption; I_D_No_CaptionLbl) { }
-            column(Availbal; Available_Balance_CaptionLbl) { }
-            column(BookBal_; Book_Balance_Caption_Control1102760006Lbl) { }
-            column(EmptyStringCaption_Control1102756001; EmptyStringCaption_Control1102756001Lbl) { }
-            column(al; Name_CaptionLbl) { }
-            column(Withdrawn_By_______________________________________Caption; Withdrawn_By_______________________________________CaptionLbl) { }
-            column(You_were_served_by__Caption; You_were_served_by__CaptionLbl) { }
-            column(THANK_YOUCaption; THANK_YOUCaptionLbl) { }
-            column(Better_life_for_our_members_globallyCaption; Better_life_for_our_members_globallyCaptionLbl) { }
-            column(Transactions_Transaction_Type; "Transaction Type") { }
-            column(ExpectedMaturityDate; "Expected Maturity Date") { }
-            column(ChequeNo_Transactions; Transactions."Cheque No") { }
-            column(TransactionDescription_Transactions; Transactions."Transaction Description") { }
-            column(Cashier_Transactions; Transactions.Cashier) { }
-            column(NumberText_1_; NumberText[1]) { }
+            
+            column(NumberText_1_; NumberText[1]) { } 
+
+            // Re-mapped Balances for perfect historical math
+            column(AvailableBalance; AvailableBalanceAtStart) { }
             column(SumTransactionCharges; SumTransactionCharges) { }
-            column(AvailableBalance; "Available Balance") { }
-            column(NewAvailable; NewAvailableBalance) { }
+            column(NewAvailable; ActualClosingBalance) { } 
+            
             column(Dublicate; Transactions.Dublicate) { }
             column(CashierName; CashierName) { }
             column(MaskedAccountNo; MaskedAccountNo) { }
@@ -83,24 +59,18 @@ report 52185683 "Cashier Withdrawal Slip"
                 column(ReportForNavId_8541; 8541) { }
                 column(Description; Description) { }
                 column(ChargeAmount_TransactionCharges; ActualChargeAmount) { }
-                column(Transaction_Charges_Transaction_Type; "Transaction Type") { }
-                column(Transaction_Charges_Charge_Code; "Charge Code") { }
-                column(RecoverExciseDuty_TransactionCharges; "Recover Excise Duty") { }
                 column(ExciseDutyAmount; ExciseDutyAmount) { }
                 column(ExciseDutyPercentage; ExciseDutyPercentage) { }
 
                 trigger OnAfterGetRecord()
                 var
-                    GenSetup: Record "General Set-Up";
                     SavingsLedger: Record "Savings Ledger Entry";
                 begin
                     ActualChargeAmount := 0;
                     ExciseDutyAmount := 0;
                     ExciseDutyPercentage := 0;
 
-                    if GenSetup.Get() then
-                        ExciseDutyPercentage := GenSetup."Excise Duty (%)";
-
+                    // 1. Fetch the Actual Charge historically posted for this document
                     SavingsLedger.Reset();
                     SavingsLedger.SetRange("Customer No.", Transactions."Account No");
                     SavingsLedger.SetRange("Document No.", Transactions.No);
@@ -111,60 +81,66 @@ report 52185683 "Cashier Withdrawal Slip"
                     if ActualChargeAmount = 0 then
                         CurrReport.Skip();
 
-                    if ("Recover Excise Duty" = true) and
-                       ("Transaction Charge Category" <> "Transaction Charge Category"::"Stamp Duty") then begin
-                        if ActualChargeAmount > 0 then
-                            ExciseDutyAmount := (ActualChargeAmount * ExciseDutyPercentage) * 0.01;
+                    // 2. Mathematical Fingerprinting for Excise Duty (Finds 15% or 20% dynamically)
+                    if "Recover Excise Duty" then begin
+                        SavingsLedger.Reset();
+                        SavingsLedger.SetRange("Customer No.", Transactions."Account No");
+                        SavingsLedger.SetRange("Document No.", Transactions.No);
+                        SavingsLedger.SetFilter(Description, '@*Excise*');
+                        if SavingsLedger.FindSet() then begin
+                            repeat
+                                // Match the historical excise tax applied specifically to this charge
+                                if (Abs(SavingsLedger.Amount) = Round(ActualChargeAmount * 0.20, 0.01)) or 
+                                   (Abs(SavingsLedger.Amount) = Round(ActualChargeAmount * 0.15, 0.01)) then begin
+                                    ExciseDutyAmount := Abs(SavingsLedger.Amount);
+                                    
+                                    // Feed back the percentage to the RDLC for display purposes
+                                    if ActualChargeAmount <> 0 then
+                                        ExciseDutyPercentage := Round((ExciseDutyAmount / ActualChargeAmount) * 100, 1);
+                                end;
+                            until (SavingsLedger.Next() = 0) or (ExciseDutyAmount > 0);
+                        end;
                     end;
                 end;
             }
 
             trigger OnAfterGetRecord()
             begin
-                // INITIALIZE
-                StaffNo := '';
-                ProductName := '';
-                CashierName := '';
-                MaskedAccountNo := '';
-                CashierNameOnly := '';
-                ProductTypeDescription := '';
+                StaffNo := ''; ProductName := ''; CashierName := '';
+                MaskedAccountNo := ''; CashierNameOnly := ''; ProductTypeDescription := '';
 
-                // USER INFO
                 user.Reset();
                 user.SetRange("User Name", Transactions.Cashier);
                 if user.Find('-') then begin
-                    CashierName := user."User Name";
-                    if StrPos(CashierName, '\') > 0 then
-                        CashierNameOnly := CopyStr(CashierName, StrPos(CashierName, '\') + 1)
+                    if StrPos(user."User Name", '\') > 0 then
+                        CashierNameOnly := CopyStr(user."User Name", StrPos(user."User Name", '\') + 1)
                     else
-                        CashierNameOnly := CashierName;
+                        CashierNameOnly := user."User Name";
                 end;
 
-                // MASK ACCOUNT
                 if StrLen("Account No") > 5 then begin
                     MaskedAccountNo := CopyStr("Account No", 1, 3) +
                                       PadStr('', StrLen("Account No") - 5, '*') +
                                       CopyStr("Account No", StrLen("Account No") - 1, 2);
-                end else
-                    MaskedAccountNo := "Account No";
+                end else MaskedAccountNo := "Account No";
 
-                // PRODUCT
-                ProductFactory.Reset();
-                ProductFactory.SetRange("Product ID", "Product Type");
-                if ProductFactory.FindFirst() then
-                    ProductTypeDescription := ProductFactory."Product Description";
-
-                // TOTAL CHARGES CALCULATION
+                // 1. Calculate Exact Total Charges historically posted from immutable ledger
                 SumTransactionCharges := 0;
                 SavingsLedgerEntry.Reset();
                 SavingsLedgerEntry.SetRange("Customer No.", "Account No");
                 SavingsLedgerEntry.SetRange("Document No.", No);
                 if SavingsLedgerEntry.FindSet() then begin
                     SavingsLedgerEntry.CalcSums(Amount);
-                    SumTransactionCharges := Abs(SavingsLedgerEntry.Amount + Amount);
+                    SumTransactionCharges := Abs(SavingsLedgerEntry.Amount) - Abs(Transactions.Amount);
                 end;
 
-                // MEMBER DATA
+                // 2. Fetch the frozen snapshot of the New Available Balance at the time of posting
+                ActualClosingBalance := Transactions."New Account Balance";
+
+                // 3. Reconstruct the Previous Available Balance strictly using historical figures
+                AvailableBalanceAtStart := ActualClosingBalance + Abs(Transactions.Amount) + SumTransactionCharges;
+
+
                 Savings.Reset();
                 Savings.SetRange(Savings."No.", Transactions."Account No");
                 if Savings.Find('-') then begin
@@ -172,34 +148,27 @@ report 52185683 "Cashier Withdrawal Slip"
                     ProductName := Savings."Product Name";
                 end;
 
-                // BRANCH NAME
+                ProductFactory.Reset();
+                ProductFactory.SetRange("Product ID", "Product Type");
+                if ProductFactory.FindFirst() then
+                    ProductTypeDescription := ProductFactory."Product Description";
+
                 BranchName := '';
                 DimensionValue.Reset();
                 DimensionValue.SetRange("Global Dimension No.", 1);
                 DimensionValue.SetRange(Code, "Global Dimension 1 Code");
-                if DimensionValue.FindFirst() then
-                    BranchName := DimensionValue.Name;
+                if DimensionValue.FindFirst() then BranchName := DimensionValue.Name;
 
-                // REPRINT LOGIC
                 Reprint := '';
                 if "Transaction Date" < Today then
                     Reprint := 'REPRINT'
-                else if ("Transaction Date" = Today) and (Transactions."Transaction Time" <> 0T) then begin
-                    if Time > Transactions."Transaction Time" then begin
-                        if (Time - Transactions."Transaction Time") > 60000 then
-                            Reprint := 'REPRINT';
+                else if ("Transaction Date" = Today) and ("Transaction Time" <> 0T) then begin
+                    if Time > "Transaction Time" then begin
+                        if (Time - "Transaction Time") > 60000 then Reprint := 'REPRINT';
                     end;
                 end;
 
-                ReprintDate := Today;
-                ReprintTime := Time;
-
-                // PREVENT DOUBLE CHARGE SUBTRACTION
-                if Transactions.Posted then
-                    NewAvailableBalance := Transactions."Available Balance" + SumTransactionCharges
-                else
-                    NewAvailableBalance := Transactions."Available Balance" - Transactions.Amount;
-
+                ReprintDate := Today; ReprintTime := Time;
                 NumberText[1] := ConvertAmountToWords(Amount);
             end;
 
@@ -211,23 +180,19 @@ report 52185683 "Cashier Withdrawal Slip"
         }
     }
 
-    requestpage
-    {
-        SaveValues = true;
-        layout { }
-        actions { }
-    }
+    requestpage { SaveValues = true; layout { } actions { } }
 
     trigger OnPreReport()
     begin
-        if CompanyInformation.Get() then
-            CompanyInformation.CalcFields(CompanyInformation.Picture);
+        if CompanyInformation.Get() then CompanyInformation.CalcFields(CompanyInformation.Picture);
         CompanyAddress := CompanyInformation.Address + ' -Post Code: ' + CompanyInformation."Post Code" + ' -City:' + CompanyInformation.City + ' Region: ' + CompanyInformation."Country/Region Code";
         CompanyTelephone := 'Tel: ' + CompanyInformation."Phone No." + ' -Office Tel: ' + CompanyInformation."Phone No. 2";
         CommunicationOnline := 'E-mail: ' + CompanyInformation."E-Mail" + '- Website: ' + CompanyInformation."Home Page";
     end;
 
     var
+        AvailableBalanceAtStart: Decimal;
+        ActualClosingBalance: Decimal;
         Amount_WithdrawnCaptionLbl: label 'Amount Withdrawn';
         Book_Balance_CaptionLbl: label 'Book Balance:';
         Transaction_No_CaptionLbl: label 'Transaction No.';
@@ -250,12 +215,14 @@ report 52185683 "Cashier Withdrawal Slip"
         THANK_YOUCaptionLbl: label 'THANK YOU';
         Better_life_for_our_members_globallyCaptionLbl: label 'Better life for our members globally';
         CompanyInfo: Record "Company Information";
+        CheckReport: Report Check;
         SumTransactionCharges: Decimal;
-        NewAvailableBalance: Decimal;
+        AvailableBalance: Decimal;
         SavingsLedgerEntry: Record "Savings Ledger Entry";
         Savings: Record "Savings Accounts";
         StaffNo: Code[20];
         ProductName: Text[50];
+        AmountInWords: array[2] of Text;
         NumberText: array[2] of Text[80];
         user: Record User;
         CashierName: Text;
@@ -280,42 +247,18 @@ report 52185683 "Cashier Withdrawal Slip"
 
     local procedure InitTextVariable()
     begin
-        OnesText[1] := 'One';
-        OnesText[2] := 'Two';
-        OnesText[3] := 'Three';
-        OnesText[4] := 'Four';
-        OnesText[5] := 'Five';
-        OnesText[6] := 'Six';
-        OnesText[7] := 'Seven';
-        OnesText[8] := 'Eight';
-        OnesText[9] := 'Nine';
-        OnesText[10] := 'Ten';
-        OnesText[11] := 'Eleven';
-        OnesText[12] := 'Twelve';
-        OnesText[13] := 'Thirteen';
-        OnesText[14] := 'Fourteen';
-        OnesText[15] := 'Fifteen';
-        OnesText[16] := 'Sixteen';
-        OnesText[17] := 'Seventeen';
-        OnesText[18] := 'Eighteen';
+        OnesText[1] := 'One'; OnesText[2] := 'Two'; OnesText[3] := 'Three'; OnesText[4] := 'Four'; OnesText[5] := 'Five';
+        OnesText[6] := 'Six'; OnesText[7] := 'Seven'; OnesText[8] := 'Eight'; OnesText[9] := 'Nine'; OnesText[10] := 'Ten';
+        OnesText[11] := 'Eleven'; OnesText[12] := 'Twelve'; OnesText[13] := 'Thirteen'; OnesText[14] := 'Fourteen';
+        OnesText[15] := 'Fifteen'; OnesText[16] := 'Sixteen'; OnesText[17] := 'Seventeen'; OnesText[18] := 'Eighteen';
         OnesText[19] := 'Nineteen';
-        TensText[1] := '';
-        TensText[2] := 'Twenty';
-        TensText[3] := 'Thirty';
-        TensText[4] := 'Forty';
-        TensText[5] := 'Fifty';
-        TensText[6] := 'Sixty';
-        TensText[7] := 'Seventy';
-        TensText[8] := 'Eighty';
-        TensText[9] := 'Ninety';
+        TensText[1] := ''; TensText[2] := 'Twenty'; TensText[3] := 'Thirty'; TensText[4] := 'Forty'; TensText[5] := 'Fifty';
+        TensText[6] := 'Sixty'; TensText[7] := 'Seventy'; TensText[8] := 'Eighty'; TensText[9] := 'Ninety';
     end;
 
     local procedure ConvertAmountToWords(AmountToConvert: Decimal): Text
     var
-        WholeAmount: Decimal;
-        CentsAmount: Decimal;
-        Words: Text;
-        CentsWords: Text;
+        WholeAmount: Decimal; CentsAmount: Decimal; Words: Text; CentsWords: Text;
     begin
         if AmountToConvert = 0 then exit('Zero');
         WholeAmount := Round(AmountToConvert, 1, '<');
@@ -331,19 +274,12 @@ report 52185683 "Cashier Withdrawal Slip"
 
     local procedure ConvertNumberToText(Number: Decimal): Text
     var
-        ResultText: Text;
-        Millions: Integer;
-        Thousands: Integer;
-        Hundreds: Integer;
-        TensAndOnes: Integer;
+        ResultText: Text; Millions: Integer; Thousands: Integer; Hundreds: Integer; TensAndOnes: Integer;
     begin
         if Number = 0 then exit('');
-        Millions := Round(Number / 1000000, 1, '<');
-        Number := Number - (Millions * 1000000);
-        Thousands := Round(Number / 1000, 1, '<');
-        Number := Number - (Thousands * 1000);
-        Hundreds := Round(Number / 100, 1, '<');
-        TensAndOnes := Round(Number - (Hundreds * 100), 1, '<');
+        Millions := Round(Number / 1000000, 1, '<'); Number := Number - (Millions * 1000000);
+        Thousands := Round(Number / 1000, 1, '<'); Number := Number - (Thousands * 1000);
+        Hundreds := Round(Number / 100, 1, '<'); TensAndOnes := Round(Number - (Hundreds * 100), 1, '<');
         ResultText := '';
         if Millions > 0 then ResultText += ConvertHundreds(Millions) + ' Million ';
         if Thousands > 0 then ResultText += ConvertHundreds(Thousands) + ' Thousand ';
@@ -357,27 +293,21 @@ report 52185683 "Cashier Withdrawal Slip"
 
     local procedure ConvertHundreds(Number: Integer): Text
     var
-        Hundreds: Integer;
-        TensAndOnes: Integer;
-        ResultText: Text;
+        Hundreds: Integer; TensAndOnes: Integer; ResultText: Text;
     begin
-        Hundreds := Number div 100;
-        TensAndOnes := Number mod 100;
+        Hundreds := Number div 100; TensAndOnes := Number mod 100;
         if Hundreds > 0 then begin
             ResultText := OnesText[Hundreds] + ' Hundred';
             if TensAndOnes > 0 then ResultText += ' and ' + ConvertTens(TensAndOnes);
             exit(ResultText);
-        end else
-            exit(ConvertTens(TensAndOnes));
+        end else exit(ConvertTens(TensAndOnes));
     end;
 
     local procedure ConvertTens(Number: Integer): Text
     begin
         if Number = 0 then exit('');
         if Number < 20 then exit(OnesText[Number]);
-        if (Number mod 10) = 0 then
-            exit(TensText[Number div 10])
-        else
-            exit(TensText[Number div 10] + ' ' + OnesText[Number mod 10]);
+        if (Number mod 10) = 0 then exit(TensText[Number div 10])
+        else exit(TensText[Number div 10] + ' ' + OnesText[Number mod 10]);
     end;
 }
