@@ -332,7 +332,7 @@ table 52185744 "Appraisal Salary Details"
         ApprDetails.Reset();
         ApprDetails.SetRange("Loan No", LoanNo);
         ApprDetails.SetRange("Client Code", Mno);
-        ApprDetails.setfilter(Type, '%1|%2|%3|%4|%5', ApprDetails.Type::Basic, ApprDetails.Type::Pension, ApprDetails.Type::"Other Allowances", ApprDetails.Type::"House Allowance", ApprDetails.Type::Deductions);
+        ApprDetails.setfilter(Type, '%1|%2|%3|%4|%5|%6', ApprDetails.Type::Basic, ApprDetails.Type::Pension, ApprDetails.Type::"Other Allowances", ApprDetails.Type::"House Allowance", ApprDetails.Type::Deductions, ApprDetails.Type::Loans);
         if ApprDetails.FindFirst() then begin
             repeat
                 case
@@ -346,6 +346,8 @@ table 52185744 "Appraisal Salary Details"
                         OtherAllowances += ApprDetails.Amount;
                     ApprDetails.Type::Deductions:
                         OtherDeductions += ApprDetails.Amount;
+                    ApprDetails.Type::Loans:
+                        TotalOutstanding += ApprDetails.Amount;
                 end;
             until ApprDetails.Next() = 0;
         end;
@@ -369,7 +371,7 @@ table 52185744 "Appraisal Salary Details"
                 curPayeAmount := 0;
             curPayeAmount := ROUND(curPayeAmount, 0.01, '>');
 
-            TotalDeductions := curPayeAmount + ShifAmount + curNSSF + curPensionAmount + HousingLevyAmount + OtherDeductions + curvolNSSfAmount + curvolPenAmount;
+            TotalDeductions := curPayeAmount + ShifAmount + curNSSF + curPensionAmount + HousingLevyAmount + OtherDeductions + curvolNSSfAmount + curvolPenAmount + TotalOutstanding;
         end;
 
         // STEP 3: Update using Appraisal Setup
@@ -408,8 +410,7 @@ table 52185744 "Appraisal Salary Details"
 
                     ApprDetails.Type::Relief:
                         ApprDetails.Amount := Relief;
-                    // ApprDetails.Type::Loans:
-                    //     ApprDetails.Amount := TotalOutstanding;
+
                     ApprDetails.Type::"Total Deduction":
                         begin
                             ApprDetails.Amount := TotalDeductions;

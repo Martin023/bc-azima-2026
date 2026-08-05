@@ -17,7 +17,7 @@ XmlPort 52185556 "Lumpsum BP"
                 {
                     FieldValidate = yes;
                 }
-                fieldelement(Amount; "Checkoff Buffer"."Employer Code")
+                fieldelement(EmployerCode; "Checkoff Buffer"."Employer Code")
                 {
                     FieldValidate = yes;
                 }
@@ -25,7 +25,11 @@ XmlPort 52185556 "Lumpsum BP"
                 {
                     FieldValidate = yes;
                 }
-                fieldelement(EmployerCode; "Checkoff Buffer".Amount)
+                fieldelement(Amount; "Checkoff Buffer".Amount)
+                {
+                    FieldValidate = yes;
+                }
+                fieldelement(Remarks; "Checkoff Buffer"."Remarks")
                 {
                     FieldValidate = yes;
                 }
