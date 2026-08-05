@@ -56,7 +56,7 @@ Codeunit 52185484 "Loan Appraisal Codeunit"
                 end
                 else begin
                     AppledLoan.get(LoanNo);
-                    TotalThreeMonthInterest := SavingsAcc.Balance * 3 * (AppledLoan."Interest" / 12 * 0.01);
+                    TotalThreeMonthInterest := (SavingsAcc.Balance - GenSetup."Withdrawal Fee") * 3 * (AppledLoan."Interest" / 12 * 0.01);
                 end;
                 //Message('Total Loan Balance: %1, Total Three Month Interest: %2', TotalLoanBalance, TotalThreeMonthInterest);
                 TotalLoanCommittment := TotalLoanBalance + TotalThreeMonthInterest;

@@ -272,7 +272,7 @@ page 52187414 "FOSA Payment Voucher"
                         BankLed.Reset();
                         BankLed.SetRange("Document No.", Rec."No.");
                         if BankLed.FindFirst() then begin
-                            Rec.Status := rec.Status::Posted;
+                            Rec.Status := rec.Status::posted;
                             Rec.Posted := true;
                             Rec."Posted By" := UserId;
                             Rec."Date Posted" := Today;
@@ -315,11 +315,24 @@ page 52187414 "FOSA Payment Voucher"
                 action("Import Fosa Lines")
                 {
                     ApplicationArea = Basic, Suite;
-                    Caption = 'Import Fosa Lines';
+                    Caption = 'Import Fosa Lines: Account No.';
                     Image = Import;
                     Promoted = true;
                     PromotedCategory = Process;
                     RunObject = XMLport "FOSA PV Lines";
+                    trigger OnAction()
+                    begin
+                        rec.TestField(Posted, false);
+                    end;
+                }
+                action("Import Fosa Lines: ID No.")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Import Fosa Lines: ID No.';
+                    Image = Import;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    RunObject = XMLport "FOSA PV Lines ID";
                     trigger OnAction()
                     begin
                         rec.TestField(Posted, false);
@@ -439,11 +452,8 @@ page 52187414 "FOSA Payment Voucher"
                     var
                         PaymentHeader: Record "Payments Header";
                     begin
-                        IF rec.Status <> rec.Status::Approved THEN
+                        IF (rec.Status <> rec.Status::Approved) and (Rec.Status <> rec.Status::Posted) THEN
                             ERROR('You can only print a Payment Voucher after it is fully Approved');
-
-
-
                         //IF Status=Status::Pending THEN
                         //ERROR('You cannot Print until the document is released for approval');
 
@@ -503,7 +513,7 @@ page 52187414 "FOSA Payment Voucher"
 
                     end;
                 }
-               
+
                 separator(Action1102756005)
                 {
                 }

@@ -75,6 +75,10 @@ table 52185774 "Transaction Charges"
         {
 
         }
+        field(15; "useMoneyTfrChargesExciseDuty"; Boolean)
+        {
+        }
+
 
     }
 

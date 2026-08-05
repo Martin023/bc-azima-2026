@@ -686,6 +686,22 @@ table 52187416 "FOSA Payment Line"
         }
         field(72; "ID Number"; Code[8])
         {
+            trigger OnValidate()
+            var
+                savingsAcc: record "Savings Accounts";
+            begin
+                savingsAcc.Reset;
+                savingsAcc.SetRange(savingsAcc."ID No.", "ID Number");
+                savingsAcc.SetRange(savingsAcc.Status, savingsAcc.Status::Active);
+                savingsacc.SetRange(savingsAcc."Product Category", savingsAcc."Product Category"::"FOSA Account");
+                savingsAcc.SetFilter(Blocked, '%1', savingsAcc.Blocked::" ");
+                savingsacc.SetRange("Loan Disbursement Account", true);
+                if not savingsAcc.FindFirst then begin
+                    "Account Type" := "Account Type"::Savings;
+                    "Account no." := Savingsacc."No.";
+                    validate("Account No.");
+                end;
+            end;
         }
         field(73; "VAT Rate"; Decimal)
         {
@@ -1134,6 +1150,7 @@ table 52187416 "FOSA Payment Line"
         field(483; "Housing Levy Rate"; Decimal)
         {
         }
+
     }
 
     keys
