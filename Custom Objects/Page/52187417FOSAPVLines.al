@@ -22,6 +22,10 @@ page 52187417 "FOSA Payment Lines"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("ID No."; Rec."ID Number")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Account Name"; Rec."Account Name")
                 {
                     ApplicationArea = Basic, Suite;
