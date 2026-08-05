@@ -205,7 +205,8 @@ table 52185778 "Treasury Cashier Transactions"
                             "From Bank" := '';
                         end;
                     end;
-                end;
+                end
+                else error('Banking setup for user %1 does not exist. Kindly contact your system administrator.', "From Account");
             end;
         }
         field(5; "To Account"; Code[50])

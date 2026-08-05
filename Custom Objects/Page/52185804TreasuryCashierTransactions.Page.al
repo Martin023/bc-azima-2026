@@ -546,6 +546,8 @@ page 52185804 "Treasury Cashier Transactions"
                             // TCTransactions.SetFilter("No", '<>%1', Rec.No);
                             if not TCTransactions.IsEmpty() then
                                 Error('You already have a pending EOD return to treasury request. Kindly close that one first before proceeding.');
+                            if Rec."Till Balance" = 0 then
+                                Error('The till balance is zero. Kindly ensure that the till has cash before sending for approval.');
                         end;
 
                         VarVariant := Rec;
