@@ -1757,6 +1757,7 @@ Codeunit 52186456 "Sacco Transactions"
                             GenJournalLine."Account No." := CashierTrans."Account No";
                             GenJournalLine.Validate(GenJournalLine."Account No.");
                             GenJournalLine."Posting Date" := CashierTrans."Transaction Date";
+                            GenJournalLine."External Document No." := CashierTrans."ID No";
                             GenJournalLine.Description := 'Excise Duty';
                             GenJournalLine."Currency Code" := CashierTrans."Currency Code";
                             GenJournalLine.Validate(GenJournalLine."Currency Code");
@@ -2035,6 +2036,7 @@ Codeunit 52186456 "Sacco Transactions"
                         GenJournalLine."Account No." := CashierTrans."Account No";
                         GenJournalLine.Validate(GenJournalLine."Account No.");
                         GenJournalLine."Posting Date" := CashierTrans."Transaction Date";
+                        GenJournalLine."External Document No." := CashierTrans."ID No";
                         GenJournalLine.Description := 'Excise Duty';
                         GenJournalLine."Currency Code" := CashierTrans."Currency Code";
                         GenJournalLine.Validate(GenJournalLine."Currency Code");
@@ -3587,6 +3589,7 @@ Codeunit 52186456 "Sacco Transactions"
                                     GenJournalLine."Account No." := CashierTrans."Account No";
                                     GenJournalLine.Validate(GenJournalLine."Account No.");
                                     GenJournalLine."Posting Date" := CashierTrans."Transaction Date";
+                                    GenJournalLine."External Document No." := CashierTrans."ID No";
                                     GenJournalLine.Description := 'Excise Duty';
                                     GenJournalLine."Currency Code" := CashierTrans."Currency Code";
                                     GenJournalLine.Validate(GenJournalLine."Currency Code");
@@ -3976,6 +3979,7 @@ Codeunit 52186456 "Sacco Transactions"
                             GenJournalLine."Account No." := CashierTrans."Account No";
                             GenJournalLine.Validate(GenJournalLine."Account No.");
                             GenJournalLine."Posting Date" := Today;
+                            GenJournalLine."External Document No." := CashierTrans."ID No";
                             GenJournalLine.Description := 'Excise Duty';
                             GenJournalLine."Currency Code" := CashierTrans."Currency Code";
                             GenJournalLine.Validate(GenJournalLine."Currency Code");
