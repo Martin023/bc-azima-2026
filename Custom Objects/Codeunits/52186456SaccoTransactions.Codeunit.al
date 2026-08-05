@@ -10075,6 +10075,12 @@ Codeunit 52186456 "Sacco Transactions"
                     // end;
 
                     // until FDInterestCalc.Next = 0;
+                    if Account."Application Date" = 0D then begin
+                        if format(account."FD Duration") <> '' then
+                            Account."Application Date" := CalcDate('-' + format(Account."FD Duration"), Account."FD Maturity Date")
+                        else
+                            Account."Application Date" := CalcDate('-' + format(FixedDepType.Duration), Account."FD Maturity Date");
+                    end;
                     // end;
                     if Account."Application Date" = 0D then Account."Application Date" := today;
                     // if FixedDepType."Call Deposit" = false then
