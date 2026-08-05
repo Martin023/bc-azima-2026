@@ -322,7 +322,11 @@ Codeunit 52185470 "Periodic Activities"
         TransactionCharges: record "Transaction Charges";
         TariffDetails: Record "Tiered Charges Lines";
         ChargeAmount: decimal;
+        TheUSSD: code[10];
+        generalsetup: record "General Set-Up";
     begin
+        generalsetup.get();
+        theUSSD := generalsetup."USSD Code";
         if not Confirm('Do you want to post the journal lines?') = true then exit;
         begin
             BankLedger.Reset();
@@ -581,7 +585,7 @@ Codeunit 52185470 "Periodic Activities"
                     SavAcc.setrange("No.", FPVLines."Account No.");
                     if SavAcc.findfirst then begin
                         if Members.get(SavAcc."Member No.") then begin
-                            Msg := 'Dear ' + Members."First Name" + ', KES ' + format(FPVLines.Amount) + 'has been credited to your account. AZIMA SACCO';
+                            Msg := 'Dear ' + Members."First Name" + ', ' + FPVHeader."Payment Narration" + ' allowance of KES' + format(FPVLines.Amount) + ' has been credited to your account. Access your account via *' + theUSSD + '# .Thank you for banking with us.';
                             SendSMS.SendSms(Source::INTERACCOUNT_TRANSFER, Members."Phone No.", msg, Format(Members."No."), '', true, 0, false, 'CBS', Members."No.", 'CBS');
                         end;
                     end;
