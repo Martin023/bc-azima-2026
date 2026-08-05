@@ -19,14 +19,16 @@ report 52186168 "Create Member Files"
                 FilesTable.SetRange("File/Member No.", Members."No.");
                 if not FilesTable.Find('-') then begin
                     FilesTable.INIT;
-                    FilesTable."Entry No." := FilesTable."Entry No.";
+                    FilesTable."Entry No." := '';
                     FilesTable."File Type" := FilesTable."File Type"::"Member File";
                     FilesTable."File/Member No." := Members."No.";
                     FilesTable."File Name/Descrption" := Members.Name;
                     FilesTable."Staff PF No." := Members."Payroll/Staff No.";
                     FilesTable."Member Status" := Members.Status;
-                    FilesTable."File Custodian" := 'RECORDS';
+                    FilesTable."ID No." := Members."Primary Identification";
+                    FilesTable."File Custodian" := 'CC';
                     FilesTable."File Status" := FilesTable."File Status"::"In Store";
+                    FilesTable.Insert(true);
                 end;
             end;
         }
