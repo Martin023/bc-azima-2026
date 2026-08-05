@@ -272,7 +272,7 @@ page 52187414 "FOSA Payment Voucher"
                         BankLed.Reset();
                         BankLed.SetRange("Document No.", Rec."No.");
                         if BankLed.FindFirst() then begin
-                            Rec.Status := rec.Status::Posted;
+                            Rec.Status := rec.Status::posted;
                             Rec.Posted := true;
                             Rec."Posted By" := UserId;
                             Rec."Date Posted" := Today;
@@ -439,11 +439,8 @@ page 52187414 "FOSA Payment Voucher"
                     var
                         PaymentHeader: Record "Payments Header";
                     begin
-                        IF rec.Status <> rec.Status::Approved THEN
+                        IF (rec.Status <> rec.Status::Approved) and (Rec.Status <> rec.Status::Posted) THEN
                             ERROR('You can only print a Payment Voucher after it is fully Approved');
-
-
-
                         //IF Status=Status::Pending THEN
                         //ERROR('You cannot Print until the document is released for approval');
 
@@ -503,7 +500,7 @@ page 52187414 "FOSA Payment Voucher"
 
                     end;
                 }
-               
+
                 separator(Action1102756005)
                 {
                 }

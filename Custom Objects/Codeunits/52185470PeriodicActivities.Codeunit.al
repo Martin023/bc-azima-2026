@@ -572,6 +572,7 @@ Codeunit 52185470 "Periodic Activities"
                 FPVHeader.Posted := true;
                 FPVHeader."Posted By" := UserId;
                 FPVHeader."Date Posted" := Today;
+                FPVHeader.Status := FPVHeader.Status::Posted;
                 FPVHeader.Modify;
                 Message('FOSA PV Posted Successfully');
             end;
