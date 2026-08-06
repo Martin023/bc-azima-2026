@@ -50,6 +50,10 @@ page 52186870 "Savings Accounts"
                 {
                     ToolTip = 'Specifies the value of the Name field.';
                 }
+                field("Transactional Mobile No"; Rec."Transactional Mobile No")
+                {
+                    ToolTip = 'Specifies the value of the Name field.';
+                }
                 // field("Date of Birth"; Rec."Date of Birth") { }
                 field("Payroll/Staff No."; Rec."Payroll/Staff No.")
                 {

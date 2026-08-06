@@ -147,7 +147,7 @@ table 52185776 "Cashier Transactions"
                 CalcAvailableBal;
                 TransType.Get(rec."Transaction Type");
                 if (Amount > TransType."Upper Limit") and (TransType."Upper Limit" <> 0) then
-                    Error('Amount cannot exceed allowed limit of %1.', TransType."Upper Limit");
+                    Error('Amount cannot exceed allowed transaction type limit of %1.', TransType."Upper Limit");
 
                 if TransType.Type = TransType.Type::"Cash Deposit" then begin
                     SavAcc.Reset();
