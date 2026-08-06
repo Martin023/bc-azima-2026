@@ -793,6 +793,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         Payload.Get('identifier_type', identifier_type); // MSISDN, CUSTOMER_NO
         Payload.Get('identifier', identifier);
         Payload.Get('number_of_transactions', number_of_transactions);
+        Payload.Get('source_application', source_application);
 
         GetMemberRecordV2(SearchMember, identifier_type.AsValue.AsText, identifier.AsValue.AsText, '');
 
