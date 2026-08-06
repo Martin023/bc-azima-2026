@@ -6797,11 +6797,11 @@ Codeunit 52186456 "Sacco Transactions"
         StandingOrderHeader.SetRange(StandingOrderHeader."Member No.", MemberNo);
         StandingOrderHeader.SetRange(StandingOrderHeader.Status, StandingOrderHeader.Status::Approved);
         StandingOrderHeader.setrange(StandingOrderHeader."Source Account No.", Salaccno);
-        if SalHeaD."Income Type" = SalHeaD."Income Type"::Payments THEN
-            Loans.SetRange(Loans."Recovery Mode", Loans."recovery mode"::"Board Allowance")
-        ELSE
-            StandingOrderHeader.SetFilter(StandingOrderHeader."Income Type", '%1|%2|%3', StandingOrderHeader."income type"::Salary,
-                                          StandingOrderHeader."income type"::Pension, StandingOrderHeader."income type"::"Direct Debit");
+        // if SalHeaD."Income Type" = SalHeaD."Income Type"::Payments THEN
+        //     Loans.SetRange(Loans."Recovery Mode", Loans."recovery mode"::"Board Allowance")
+        // ELSE
+        //     StandingOrderHeader.SetFilter(StandingOrderHeader."Income Type", '%1|%2|%3', StandingOrderHeader."income type"::Salary,
+        // StandingOrderHeader."income type"::Pension, StandingOrderHeader."income type"::"Direct Debit");
         if StandingOrderHeader.findfirst() then begin
 
             GenJournalLine.SetRange("Journal Template Name", Jtemplate);
@@ -9673,7 +9673,7 @@ Codeunit 52186456 "Sacco Transactions"
     end;
 
 
-    procedure UpdateStandingOrderRegister(RNo: Code[10]; RDateProcessed: Date; RDocNo: Code[10]; RNoSeries: Code[10]; RSourceAccountNo: Code[20]; RSourceAccountName: Text; RMemberNo: Code[20]; RStaffNo: Code[11]; RPartialDeduction: Boolean; RDeductionStatus: Option " ",Successfull,"Partial Deduction",Failed; RDeductionAmount: Decimal; RAmountDeducted: Decimal; RStartDate: Date; RDuration: DateFormula; RFrequency: DateFormula; REndDate: Date; Rremarks: Code[50]; Reft: Boolean; RTransferEft: Boolean; STONo: Code[20])
+    procedure UpdateStandingOrderRegister(RNo: Code[10]; RDateProcessed: Date; RDocNo: Code[20]; RNoSeries: Code[10]; RSourceAccountNo: Code[20]; RSourceAccountName: Text; RMemberNo: Code[20]; RStaffNo: Code[11]; RPartialDeduction: Boolean; RDeductionStatus: Option " ",Successfull,"Partial Deduction",Failed; RDeductionAmount: Decimal; RAmountDeducted: Decimal; RStartDate: Date; RDuration: DateFormula; RFrequency: DateFormula; REndDate: Date; Rremarks: Code[50]; Reft: Boolean; RTransferEft: Boolean; STONo: Code[20])
     var
         LineNo: Code[10];
         StandingOrdSRegister: Record "Standing Order Register";
