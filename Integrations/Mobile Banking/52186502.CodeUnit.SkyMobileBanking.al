@@ -296,11 +296,13 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         Response: Text;
 
         GlobalFunctions: Codeunit "Global Functions";
+        source_application: JsonToken;
     begin
         Payload.Get('account_type', account_type); // FOSA, BOSA, WITHDRAWABLE, DEPOSIT, ALL, BUSINESS
         Payload.Get('identifier_type', identifier_type); // MSISDN, CUSTOMER_NO, ID_NUMBER
         Payload.Get('identifier', identifier);
         Payload.Get('apply_charges', apply_charges);
+        Payload.Get('source_application', source_application);
 
         GetMemberRecordV2(SearchMember, identifier_type.AsValue.AsText, identifier.AsValue.AsText, '');
 
@@ -452,7 +454,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
 
             // Apply charges
             if apply_charges.AsValue.AsBoolean then begin
-                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('SINGLE_ACCOUNT_BALANCE_ENQUIRY', 0, '', SearchMember, '').Get(1);
+                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('SINGLE_ACCOUNT_BALANCE_ENQUIRY', 0, '', SearchMember, source_application.AsValue.AsText, '').Get(1);
                 if TotalCharges > 0 then begin
                     if CheckFOSASavingsAccountBlocked(SearchMember, 'DEBIT') then begin
                         ResponseObject.Add('request_status', 'BLOCKED');
@@ -494,6 +496,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                             identifier_type.AsValue.AsText,
                             identifier.AsValue.AsText,
                             FosaAcc,
+                            source_application.AsValue.AsText,
                             SearchMember
                         );
                     end;
@@ -651,6 +654,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         account_number: JsonToken;
         identifier_type: JsonToken;
         identifier: JsonToken;
+        source_application: JsonToken;
 
         SearchMember: Record Members;
         SavingsAccount: Record "Savings Accounts";
@@ -668,6 +672,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         Payload.Get('account_number', account_number);
         Payload.Get('identifier_type', identifier_type); // MSISDN, CUSTOMER_NO
         Payload.Get('identifier', identifier);
+        Payload.Get('source_application', source_application);
 
         GetMemberRecordV2(SearchMember, identifier_type.AsValue.AsText, identifier.AsValue.AsText, '');
 
@@ -688,7 +693,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
             SavingsAccount.SetRange("Member No.", SearchMember."No.");
 
             if SavingsAccount.FindFirst then begin
-                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('SINGLE_ACCOUNT_BALANCE_ENQUIRY', 0, SavingsAccount."No.", SearchMember, '').Get(1);
+                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('SINGLE_ACCOUNT_BALANCE_ENQUIRY', 0, SavingsAccount."No.", SearchMember, '', source_application.AsValue.AsText).Get(1);
                 if TotalCharges > 0 then begin
                     // Log the transaction
                     FosaAcc := SkyMbankingTrans.GetMemberFosaAcc(SearchMember);
@@ -719,6 +724,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                             identifier_type.AsValue.AsText,
                             identifier.AsValue.AsText,
                             account_number.AsValue.AsText,
+                            source_application.AsValue.AsText,
                             SearchMember
                         );
                     end;
@@ -781,11 +787,13 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         Transaction: JsonObject;
         Datum: JsonObject;
         Response: Text;
+        source_application: JsonToken;
     begin
         Payload.Get('account_number', account_number);
         Payload.Get('identifier_type', identifier_type); // MSISDN, CUSTOMER_NO
         Payload.Get('identifier', identifier);
         Payload.Get('number_of_transactions', number_of_transactions);
+        Payload.Get('source_application', source_application);
 
         GetMemberRecordV2(SearchMember, identifier_type.AsValue.AsText, identifier.AsValue.AsText, '');
 
@@ -811,7 +819,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
             SavingsAccount.SetAutoCalcFields("Balance (LCY)", "Authorised Over Draft", "Uncleared Cheques", "ATM Transactions", "Lien Placed");
 
             if SavingsAccount.FindFirst then begin
-                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('ACCOUNT_MINI_STATEMENT', 0, SavingsAccount."No.", SearchMember, '').Get(1);
+                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('ACCOUNT_MINI_STATEMENT', 0, SavingsAccount."No.", SearchMember, source_application.AsValue.AsText, '').Get(1);
                 FosaAcc := SkyMbankingTrans.GetMemberFosaAcc(SearchMember);
                 if TotalCharges > 0 then begin
                     FOSAAccount.Reset;
@@ -927,6 +935,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         identifier: JsonToken;
         start_date: JsonToken;
         end_date: JsonToken;
+        source_application: JsonToken;
 
         SearchMember: Record Members;
         SavingsAccount: Record "Savings Accounts";
@@ -953,6 +962,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         Payload.Get('identifier', identifier);
         Payload.Get('start_date', start_date);
         Payload.Get('end_date', end_date);
+        Payload.Get('source_application', source_application);
 
         GetMemberRecordV2(SearchMember, identifier_type.AsValue.AsText, identifier.AsValue.AsText, '');
 
@@ -978,7 +988,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
             SavingsAccount.SetAutoCalcFields("Balance (LCY)", "Authorised Over Draft", "Uncleared Cheques", "ATM Transactions", "Lien Placed");
 
             if SavingsAccount.FindFirst then begin
-                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('ACCOUNT_FULL_STATEMENT', 0, SavingsAccount."No.", SearchMember, '').Get(1);
+                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('ACCOUNT_FULL_STATEMENT', 0, SavingsAccount."No.", SearchMember, '', source_application.AsValue.AsText).Get(1);
                 FosaAcc := SkyMbankingTrans.GetMemberFosaAcc(SearchMember);
 
                 if TotalCharges > 0 then begin
@@ -1070,6 +1080,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                         identifier_type.AsValue.AsText,
                         identifier.AsValue.AsText,
                         account_number.AsValue.AsText,
+                        source_application.AsValue.AsText,
                         SearchMember
                     );
                 end;
@@ -1886,7 +1897,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
             if MobileTransLines.Findset() then begin
                 TotalCharges := 0;
                 repeat
-                    currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, amount.AsValue.AsDecimal);
+                    currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, amount.AsValue.AsDecimal, SourceSavingsAccount."No.", '');
                     TotalCharges += currCharges.Get(1);
                 until MobileTransLines.next = 0;
             end;
@@ -2182,7 +2193,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
             if MobileTransLines.Findset() then begin
                 TotalCharges := 0;
                 repeat
-                    currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, amount.AsValue.AsDecimal);
+                    currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, amount.AsValue.AsDecimal, SourceSavingsAccount."No.", '');
                     TotalCharges += currCharges.Get(1);
                 until MobileTransLines.next = 0;
             end;
@@ -2687,7 +2698,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                 MobileLoanProducts."Product ID");
 
                             if OutstandingBalance > 0 then begin
-                                TotalChargesOnMin := SkyMbankingTrans.GetTransChargesPreview('LOAN_DISBURSEMENT', 0, '', SearchMember, '').Get(1);
+                                TotalChargesOnMin := SkyMbankingTrans.GetTransChargesPreview('LOAN_DISBURSEMENT', 0, '', SearchMember, '', '').Get(1);
                                 MobileLoanProducts."Minimum Loan Amount" := OutstandingBalance + TotalChargesOnMin;
 
                                 Datum.Replace('loan_type_min_amount', MobileLoanProducts."Minimum Loan Amount");
@@ -2896,7 +2907,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                         SearchMember."No.",
                         MobileLoanProduct."Product ID"
                     );
-                    TotalCharges := SkyMbankingTrans.GetTransChargesPreview('LOAN_DISBURSEMENT', 0, '', SearchMember, '').Get(1);
+                    TotalCharges := SkyMbankingTrans.GetTransChargesPreview('LOAN_DISBURSEMENT', 0, '', SearchMember, '', '').Get(1);
                     if (MobileLoanProduct."Minimum Loan Amount" < ExistingLoanAmount + TotalCharges) AND (ExistingLoanAmount > 0) then begin
                         MobileLoanProduct."Minimum Loan Amount" := ExistingLoanAmount + TotalCharges;
                     end;
@@ -3040,7 +3051,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                     MobileLoanProduct."Product ID");
 
                 if OutstandingBalance > 0 then begin
-                    TotalCharges := SkyMbankingTrans.GetTransChargesPreview('LOAN_DISBURSEMENT', 0, '', SearchMember, '').Get(1);
+                    TotalCharges := SkyMbankingTrans.GetTransChargesPreview('LOAN_DISBURSEMENT', 0, '', SearchMember, '', '').Get(1);
                     OutstandingBalance += TotalCharges;
                     MobileLoanProduct."Minimum Loan Amount" := OutstandingBalance;
                     if amount.AsValue.AsDecimal < OutstandingBalance then begin
@@ -3403,6 +3414,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
     var
         identifier_type: JsonToken;
         identifier: JsonToken;
+        source_application: JsonToken;
 
         SearchMember: Record Members;
         MemberLoans: Record Loans;
@@ -3419,6 +3431,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
     begin
         Payload.Get('identifier_type', identifier_type); // MSISDN, CUSTOMER_NO
         Payload.Get('identifier', identifier);
+        Payload.Get('source_application', source_application);
 
         GetMemberRecordV2(
             SearchMember,
@@ -3452,7 +3465,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                     if MobileTransLines.Findset() then begin
                         TotalCharges := 0;
                         repeat
-                            currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MemberLoans."Outstanding Balance");
+                            currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MemberLoans."Outstanding Balance", SkyMbankingTrans.GetMemberFosaAcc(SearchMember), source_application.AsValue.AsText);
                             TotalCharges += currCharges.Get(1);
                         until MobileTransLines.next = 0;
                     end;
@@ -3467,7 +3480,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                     if MobileTransLines.Findset() then begin
                         TotalChargesIFT := 0;
                         repeat
-                            currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MemberLoans."Outstanding Balance");
+                            currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MemberLoans."Outstanding Balance", SkyMbankingTrans.GetMemberFosaAcc(SearchMember), source_application.AsValue.AsText);
                             TotalChargesIFT += currCharges.Get(1);
                         until MobileTransLines.next = 0;
                     end;
@@ -3524,6 +3537,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         loan_serial_number: JsonToken;
         identifier_type: JsonToken;
         identifier: JsonToken;
+        source_application: JsonToken;
 
         SearchMember: Record Members;
         MemberLoan: Record Loans;
@@ -3540,6 +3554,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         Payload.Get('loan_serial_number', loan_serial_number);
         Payload.Get('identifier_type', identifier_type); // MSISDN, CUSTOMER_NO
         Payload.Get('identifier', identifier);
+        Payload.Get('source_application', source_application);
 
         GetMemberRecordV2(
             SearchMember,
@@ -3578,7 +3593,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 ResponseObject.Add('request_status', 'SUCCESS');
                 ResponseObject.Add('response_payload', Datum);
 
-                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('LOAN_BALANCE_ENQUIRY', 0, '', SearchMember, '').Get(1);
+                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('LOAN_BALANCE_ENQUIRY', 0, '', SearchMember, '', source_application.AsValue.AsText).Get(1);
                 if TotalCharges > 0 then begin
                     FosaAcc := SkyMbankingTrans.GetMemberFosaAcc(SearchMember);
 
@@ -3625,6 +3640,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                         identifier_type.AsValue.AsText,
                         identifier.AsValue.AsText,
                         loan_serial_number.AsValue.AsText,
+                        source_application.AsValue.AsText,
                         SearchMember
                     );
                 end;
@@ -3746,7 +3762,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 ResponseObject.Add('request_status', 'SUCCESS');
                 ResponseObject.Add('response_payload', Datum);
 
-                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('LOAN_MINI_STATEMENT', 0, '', SearchMember, '').Get(1);
+                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('LOAN_MINI_STATEMENT', 0, '', SearchMember, '', '').Get(1);
                 if TotalCharges > 0 then begin
                     FosaAcc := SkyMbankingTrans.GetMemberFosaAcc(SearchMember);
 
@@ -3841,12 +3857,14 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         Transaction: JsonObject;
         Datum: JsonObject;
         Response: Text;
+        source_application: JsonToken;
     begin
         Payload.Get('loan_serial_number', loan_serial_number);
         Payload.Get('identifier_type', identifier_type); // MSISDN, CUSTOMER_NO
         Payload.Get('identifier', identifier);
         Payload.Get('start_date', start_date);
         Payload.Get('end_date', end_date);
+        Payload.Get('source_application', source_application);
 
         GetMemberRecordV2(
             SearchMember,
@@ -3925,7 +3943,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                 ResponseObject.Add('request_status', 'SUCCESS');
                 ResponseObject.Add('response_payload', Datum);
 
-                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('LOAN_FULL_STATEMENT', 0, '', SearchMember, '').Get(1);
+                TotalCharges := SkyMbankingTrans.GetTransChargesPreview('LOAN_FULL_STATEMENT', 0, '', SearchMember, '', source_application.AsValue.AsText).Get(1);
                 if TotalCharges > 0 then begin
                     FosaAcc := SkyMbankingTrans.GetMemberFosaAcc(SearchMember);
 
@@ -3972,6 +3990,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                         identifier_type.AsValue.AsText,
                         identifier.AsValue.AsText,
                         loan_serial_number.AsValue.AsText,
+                        source_application.AsValue.AsText,
                         SearchMember
                     );
                 end;
@@ -4011,6 +4030,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         Response: Text;
 
         ReceiverIdentifierExists: Boolean;
+        source_application: JsonToken;
     begin
         Payload.Get('identifier_type', identifier_type); // MSISDN, CUSTOMER_NO
         Payload.Get('identifier', identifier);
@@ -4018,6 +4038,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         Payload.Get('charge_action', charge_action);
         Payload.Get('amount', amount);
         ReceiverIdentifierExists := Payload.Get('receiver_identifier', receiver_identifier);
+        payload.Get('source_application', source_application);
 
         GetMemberRecordV2(
             SearchMember,
@@ -4031,9 +4052,9 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         IF SearchMember.FindFirst then begin
             //ChargesInfo := SkyMbankingTrans.GetTransChargesPreview(charge_action.AsValue.AsText, amount.AsValue.AsDecimal, account_number.AsValue.AsText, SearchMember);
             if ReceiverIdentifierExists then begin
-                ChargesInfo := SkyMbankingTrans.GetTransChargesPreview(charge_action.AsValue.AsText, amount.AsValue.AsDecimal, account_number.AsValue.AsText, SearchMember, receiver_identifier.AsValue.AsText);
+                ChargesInfo := SkyMbankingTrans.GetTransChargesPreview(charge_action.AsValue.AsText, amount.AsValue.AsDecimal, account_number.AsValue.AsText, SearchMember, receiver_identifier.AsValue.AsText, source_application.AsValue.AsText);
             end else begin
-                ChargesInfo := SkyMbankingTrans.GetTransChargesPreview(charge_action.AsValue.AsText, amount.AsValue.AsDecimal, account_number.AsValue.AsText, SearchMember, '');
+                ChargesInfo := SkyMbankingTrans.GetTransChargesPreview(charge_action.AsValue.AsText, amount.AsValue.AsDecimal, account_number.AsValue.AsText, SearchMember, '', source_application.AsValue.AsText);
             end;
             Datum.Add('charge_amount', ChargesInfo.Get(1) - ChargesInfo.Get(2));
             Datum.Add('excise_duty', ChargesInfo.Get(2));
@@ -4127,6 +4148,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
         DepositMember: Record Members;
         TheLoan: Record loans;
         SearchMember: Record Members;
+        SkipMobileAppCharges: Boolean;
     begin
         // Database.SelectLatestVersion();
         PostingBatchSize := 25;
@@ -4774,7 +4796,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                         if MobileTransLines.Findset() then begin
                                             TotalCharges := 0;
                                             repeat
-                                                currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
+                                                currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount", MpesaTransBuffer."Savings Account", '');
                                                 TotalCharges += currCharges.Get(1);
                                             until MobileTransLines.next = 0;
                                         end;
@@ -4788,7 +4810,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             MobileTransLines.SetFilter("Account No.", '<>%1', '');
                                             if MobileTransLines.Findset() then begin
                                                 repeat
-                                                    currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
+                                                    currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount", MpesaTransBuffer."Savings Account", '');
                                                     if currCharges.Get(1) <= TotalCharges then begin
                                                         SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(currCharges.Get(1) - currCharges.Get(2)), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                         if MobileTransLines."Recover Excise Duty" then begin
@@ -4812,7 +4834,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             if MobileTransLines.Findset() then begin
                                                 TotalCharges := 0;
                                                 repeat
-                                                    currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
+                                                    currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount", MpesaTransBuffer."Savings Account", '');
                                                     if currCharges.Get(1) > 0 then begin
                                                         SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(currCharges.Get(1) - currCharges.Get(2)), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                         TotalCharges += currCharges.Get(1);
@@ -5195,7 +5217,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             if MobileTransLines.Findset() then begin
                                                 TotalCharges := 0;
                                                 repeat
-                                                    currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
+                                                    currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount", MpesaTransBuffer."Savings Account", '');
                                                     TotalCharges += currCharges.Get(1);
                                                 until MobileTransLines.next = 0;
                                             end;
@@ -5209,7 +5231,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                 MobileTransLines.SetFilter("Account No.", '<>%1', '');
                                                 if MobileTransLines.Findset() then begin
                                                     repeat
-                                                        currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
+                                                        currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount", MpesaTransBuffer."Savings Account", '');
                                                         if currCharges.Get(1) <= TotalCharges then begin
                                                             SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, MpesaTransBuffer."Transaction Date", MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(currCharges.Get(1) - currCharges.Get(2) - currCharges.Get(3)), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                             if MobileTransLines."Sky Revenue Share" then
@@ -5235,7 +5257,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                 if MobileTransLines.Findset() then begin
                                                     TotalCharges := 0;
                                                     repeat
-                                                        currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
+                                                        currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount", MpesaTransBuffer."Savings Account", '');
                                                         if currCharges.Get(1) > 0 then begin
                                                             SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, MpesaTransBuffer."Transaction Date", MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(currCharges.Get(1) - currCharges.Get(2) - currCharges.Get(3)), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                             if MobileTransLines."Sky Revenue Share" then
@@ -5622,7 +5644,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                         if MobileTransLines.Findset() then begin
                                             TotalCharges := 0;
                                             repeat
-                                                currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
+                                                currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount", MpesaTransBuffer."Savings Account", '');
                                                 if currCharges.Get(1) > 0 then begin
                                                     SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(currCharges.Get(1) - currCharges.Get(2) - currCharges.Get(3)), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                     if MobileTransLines."Sky Revenue Share" then
@@ -5851,6 +5873,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                             Description := Format(MpesaTransBuffer."Transaction Type");
                                     end;
                                     Loan.get(MpesaTransBuffer."Loan No.");
+                                    LoanApplicant.Get(Loan."Member No.");
                                     Dim1 := Loan."Global Dimension 1 Code";
                                     Dim2 := Loan."Global Dimension 2 Code";
                                     // Insert Journals and Post
@@ -5867,7 +5890,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                     if MobileTransLines.Findset() then begin
                                         TotalCharges := 0;
                                         repeat
-                                            currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
+                                            currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount", SkyMbankingTrans.GetMemberFosaAcc(LoanApplicant), '');
                                             TotalCharges += currCharges.Get(1);
                                         until MobileTransLines.next = 0;
                                     end;
@@ -5881,7 +5904,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                         MobileTransLines.SetFilter("Account No.", '<>%1', '');
                                         if MobileTransLines.Findset() then begin
                                             repeat
-                                                currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
+                                                currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount", SkyMbankingTrans.GetMemberFosaAcc(LoanApplicant), '');
                                                 if currCharges.Get(1) <= TotalCharges then begin
                                                     SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(currCharges.Get(1) - currCharges.Get(2) - currCharges.Get(3)), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                     if MobileTransLines."Sky Revenue Share" then
@@ -5911,7 +5934,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                 repeat
                                                     Clear(currCharges);
 
-                                                    currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
+                                                    currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount", SkyMbankingTrans.GetMemberFosaAcc(LoanApplicant), '');
                                                     if currCharges.Get(1) > 0 then begin
                                                         SaccoTrans.JournalInsert(LoanTemp, LoanBatch, theReference, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(currCharges.Get(1) - currCharges.Get(2) - currCharges.Get(3)), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                         if MobileTransLines."Sky Revenue Share" then
@@ -6508,7 +6531,7 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             repeat
                                                                 Clear(currCharges);
 
-                                                                currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
+                                                                currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount", MpesaTransBuffer."Source Account", '');
 
                                                                 if currCharges.Get(1) > 0 then begin
                                                                     SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(currCharges.Get(1) - currCharges.Get(2) - currCharges.Get(3)), theReference, '', TransactionType::" ", Dim1, Dim2, true);
@@ -7194,6 +7217,16 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             else
                                                                 Description := Format(MpesaTransBuffer."Transaction Type");
                                                         end;
+                                                        if MpesaTransBuffer."Transaction Type" in [
+                                                            MpesaTransBuffer."Transaction Type"::"Account balance enquiry",
+                                                            MpesaTransBuffer."Transaction Type"::"Account full-statement",
+                                                            // loan balance 
+                                                            MpesaTransBuffer."Transaction Type"::"Loan balance enquiry",
+                                                            MpesaTransBuffer."Transaction Type"::"Loan full-statement"
+
+                                                            ] then begin
+                                                            SkipMobileAppCharges := true;
+                                                        end;
 
                                                         // Check if credit amount is less than the charges
                                                         MobileTransLines.Reset();
@@ -7202,7 +7235,13 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                         if MobileTransLines.Findset() then begin
                                                             TotalCharges := 0;
                                                             repeat
-                                                                currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
+                                                                if SkipMobileAppCharges then begin
+                                                                    currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount", MpesaTransBuffer."Savings Account", MpesaTransBuffer."Source Application");
+
+                                                                end else begin
+                                                                    currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount", MpesaTransBuffer."Savings Account", '');
+
+                                                                end;
                                                                 TotalCharges += currCharges.Get(1);
                                                             until MobileTransLines.next = 0;
                                                         end;
@@ -7218,7 +7257,13 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             MobileTransLines.SetFilter("Account No.", '<>%1', '');
                                                             if MobileTransLines.Findset() then begin
                                                                 repeat
-                                                                    currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
+                                                                    if SkipMobileAppCharges then begin
+                                                                        currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount", MpesaTransBuffer."Savings Account", MpesaTransBuffer."Source Application");
+
+                                                                    end else begin
+                                                                        currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount", MpesaTransBuffer."Savings Account", '');
+
+                                                                    end;
                                                                     if currCharges.Get(1) <= TotalCharges then begin
                                                                         SaccoTrans.JournalInsert(JTemplate, JBatch, theReference, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(currCharges.Get(1) - currCharges.Get(2) - currCharges.Get(3)), theReference, '', TransactionType::" ", Dim1, Dim2, true);
                                                                         if MobileTransLines."Sky Revenue Share" then
@@ -7265,7 +7310,13 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             if MobileTransLines.Findset() then begin
                                                                 TotalCharges := 0;
                                                                 repeat
-                                                                    currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
+                                                                    if SkipMobileAppCharges then begin
+                                                                        currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount", MpesaTransBuffer."Savings Account", MpesaTransBuffer."Source Application");
+
+                                                                    end else begin
+                                                                        currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount", MpesaTransBuffer."Savings Account", '');
+
+                                                                    end;
                                                                     TotalCharges += currCharges.Get(1);
                                                                 until MobileTransLines.next = 0;
                                                             end;
@@ -7277,7 +7328,13 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                                             if MobileTransLines.Findset() then begin
                                                                 TotalCharges := 0;
                                                                 repeat
-                                                                    currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount");
+                                                                    if SkipMobileAppCharges then begin
+                                                                        currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount", MpesaTransBuffer."Savings Account", MpesaTransBuffer."Source Application");
+
+                                                                    end else begin
+                                                                        currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, MpesaTransBuffer."Transaction Amount", MpesaTransBuffer."Savings Account", '');
+
+                                                                    end;
                                                                     theCharge := currCharges.Get(1);
 
                                                                     if theCharge > 0 then begin

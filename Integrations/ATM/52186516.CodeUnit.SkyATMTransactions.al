@@ -439,7 +439,7 @@ codeunit 52186516 "Sky Coop ATM Transactions"
 
                             if MobileTransLines.FindSet then begin
                                 repeat
-                                    CurrCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, ATMTrans."Charge Amount");
+                                    CurrCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, ATMTrans."Charge Amount", ATMTrans."Member Savings Account", '');
                                     if CurrCharges.Get(1) > 0 then begin
                                         SaccoTransactions.JournalInsert(JTemplate, JBatch, DocNo, Today, MobileTransLines."Account Type",
                                         MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '',
@@ -454,7 +454,7 @@ codeunit 52186516 "Sky Coop ATM Transactions"
                                           -CurrCharges.Get(2), DocNo, '',
                                           TransType, SavingsAcc."Global Dimension 1 Code", SavingsAcc."Global Dimension 2 Code", true);
 
-                                          TotalExciseDuty += currCharges.Get(2);
+                                            TotalExciseDuty += currCharges.Get(2);
                                         end;
                                     end;
                                 until MobileTransLines.next = 0;
@@ -795,7 +795,7 @@ codeunit 52186516 "Sky Coop ATM Transactions"
                                 if MobileTransLines.FindSet then begin
                                     TotalCharges := 0;
                                     repeat
-                                        CurrCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, ReversedATMTrans."Charge Amount");
+                                        CurrCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, ReversedATMTrans."Charge Amount", ReversedATMTrans."Member Savings Account", '');
 
                                         if CurrCharges.Get(1) > 0 then begin
                                             SaccoTransactions.JournalInsert(JTemplate, JBatch, DocNo, Today, MobileTransLines."Account Type",
@@ -1187,7 +1187,7 @@ codeunit 52186516 "Sky Coop ATM Transactions"
 
             if MobileTransLines.FindSet then begin
                 repeat
-                    CurrCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, ChargeAmount);
+                    CurrCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, ChargeAmount, '', '');
                     if CurrCharges.Get(1) > 0 then begin
                         TotalCharges += CurrCharges.Get(1);
                     end;
