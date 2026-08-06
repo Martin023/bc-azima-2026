@@ -22,9 +22,9 @@ enum 52186500 "Salary Income Types"
     {
 
     }
-    value(5; Others)
+    value(5; " ")
     {
-        Caption = 'Others';
+        Caption = ' ';
     }
     value(6; Claims)
     {
@@ -41,6 +41,10 @@ enum 52186500 "Salary Income Types"
     value(9; "Leave Allowance")
     {
         Caption = 'Leave Allowance';
+    }
+    value(10; "Other Income")
+    {
+        Caption = 'Other Income';
     }
 
 }
