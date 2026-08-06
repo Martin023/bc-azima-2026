@@ -1019,6 +1019,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
             TotalCharges.Add(0);
             TotalCharges.Add(0);
             TotalCharges.Add(0);
+            totalCharges.Add(0);
             exit(TotalCharges);
         end;
 
@@ -1076,6 +1077,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         TotalCharges.Add(ChargeAmount + ExciseDuty + SkyRevenue);
         TotalCharges.Add(ExciseDuty);
         TotalCharges.Add(SkyRevenue);
+        totalCharges.Add(ChargeAmount);
 
         exit(TotalCharges);
     end;
@@ -3165,7 +3167,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     repeat begin
                         // LineNo += 1000;
 
-                        SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount", FosaAcc, '').Get(1), DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
+                        SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount", FosaAcc, '').Get(4), DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
                         TotalCharges += GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount", FosaAcc, '').Get(1);
                         if MobileTransLines."Recover Excise Duty" then
                             SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, AccType::"G/L Account", genSetUp."Excise Duty G/L", 'Excise duty on loan disbursement charges', MobileTransLines."Account Type", ''/*MobileTransLines."Account No."*/, -GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount", FosaAcc, '').Get(2), DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
