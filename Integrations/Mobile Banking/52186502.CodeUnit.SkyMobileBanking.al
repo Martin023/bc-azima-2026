@@ -5178,6 +5178,11 @@ codeunit 52186502 "Sky Mobile Banking Integration"
                                         DepositMember.SetRange("Primary Identification", MpesaTransBuffer."Savings Account");
                                         DepositMember.setRange("Primary Identification Type", DepositMember."Primary Identification Type"::"ID Number");
                                         DepositMember.SetLoadFields("No.", "Primary Identification");
+                                        if not DepositMember.FindFirst then begin
+                                            DepositMember.Reset;
+                                            DepositMember.SetRange("Old Member No.", MpesaTransBuffer."Savings Account");
+                                            DepositMember.SetLoadFields("No.", "Primary Identification");
+                                        end;
                                         if DepositMember.FindFirst then begin
                                             MpesaTransBuffer."Savings Account" := SkyMbankingTrans.GetMemberFosaAcc(DepositMember);
                                             MpesaTransBuffer."Needs Change" := false;
