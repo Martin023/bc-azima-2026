@@ -94,6 +94,11 @@ page 52185581 "Mobile Transaction types Lines"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                // Excempt From Charges
+                field("Excempt From Charges"; Rec."Excempt From Charges")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
             }
         }
     }

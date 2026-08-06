@@ -594,6 +594,7 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                     "Transaction Amount",
                     "Savings Account",
                     NullMember,
+                    '',
                     ''
                 ).Get(1);
             "Transaction Type"::Airtime:
@@ -602,6 +603,7 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                     "Transaction Amount",
                     "Savings Account",
                     NullMember,
+                    '',
                     ''
                 ).Get(1);
             "Transaction Type"::"Utility Payment":
@@ -610,6 +612,7 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                     "Transaction Amount",
                     "Savings Account",
                     NullMember,
+                    '',
                     ''
                 ).Get(1);
             "Transaction Type"::"Bank Transfer":
@@ -618,6 +621,7 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                     "Transaction Amount",
                     "Savings Account",
                     NullMember,
+                    '',
                     ''
                 ).Get(1);
             "Transaction Type"::"Account Transfer":
@@ -626,6 +630,7 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                     "Transaction Amount",
                     "Savings Account",
                     NullMember,
+                    '',
                     ''
                 ).Get(1);
             "Transaction Type"::"Kesasa Account Transfer":
@@ -634,6 +639,7 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                     "Transaction Amount",
                     "Savings Account",
                     NullMember,
+                    '',
                     ''
                 ).Get(1);
             "Transaction Type"::"Mpesa Deposit":
@@ -642,6 +648,7 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                     "Transaction Amount",
                     "Savings Account",
                     NullMember,
+                    '',
                     ''
                 ).Get(1);
             "Transaction Type"::"Account Balance Enquiry":
@@ -660,6 +667,7 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                                 "Transaction Amount",
                                 "Savings Account",
                                 NullMember,
+                                "Source Application",
                                 ''
                             ).Get(1);
                         end;
@@ -681,6 +689,7 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                                 "Transaction Amount",
                                 "Savings Account",
                                 NullMember,
+                                '',
                                 ''
                             ).Get(1);
                         end;
@@ -692,6 +701,7 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                     "Transaction Amount",
                     "Savings Account",
                     NullMember,
+                    "Source Application",
                     ''
                 ).Get(1);
             "Transaction Type"::"Loan Balance Enquiry":
@@ -700,6 +710,7 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                     "Transaction Amount",
                     "Savings Account",
                     NullMember,
+                    "Source Application",
                     ''
                 ).Get(1);
             "Transaction Type"::"Loan Mini-Statement":
@@ -708,6 +719,7 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                     "Transaction Amount",
                     "Savings Account",
                     NullMember,
+                    '',
                     ''
                 ).Get(1);
             "Transaction Type"::"Loan Full-Statement":
@@ -716,6 +728,7 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                     "Transaction Amount",
                     "Savings Account",
                     NullMember,
+                    "Source Application",
                     ''
                 ).Get(1);
             "Transaction Type"::"Loan Application":
@@ -724,6 +737,7 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                     "Transaction Amount",
                     "Savings Account",
                     NullMember,
+                    '',
                     ''
                 ).Get(1);
             "Transaction Type"::"Pay Loan From Account":
@@ -732,6 +746,7 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                     "Transaction Amount",
                     "Savings Account",
                     NullMember,
+                    '',
                     ''
                 ).Get(1);
             "Transaction Type"::"Loan Limit Check":
@@ -740,6 +755,7 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                     "Transaction Amount",
                     "Savings Account",
                     NullMember,
+                    '',
                     ''
                 ).Get(1);
             "Transaction Type"::"Guarantorship Ability Enquiry":
@@ -748,6 +764,7 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                     "Transaction Amount",
                     "Savings Account",
                     NullMember,
+                    '',
                     ''
                 ).Get(1);
             "Transaction Type"::"Coop B2B Deposit":
@@ -756,6 +773,7 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                     "Transaction Amount",
                     "Savings Account",
                     NullMember,
+                    '',
                     ''
                 ).Get(1);
 
@@ -765,6 +783,7 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                     "Transaction Amount",
                     "Savings Account",
                     NullMember,
+                    '',
                     ''
                 ).Get(1);
             "Transaction Type"::"Till Payment":
@@ -773,7 +792,8 @@ table 52186502 "Sky M-Banking Trans. Buffer"
                     "Transaction Amount",
                     "Savings Account",
                     NullMember,
-                    "Receiver Identifier"
+                    "Receiver Identifier",
+                    ''
                 ).Get(1);
             else
         end;

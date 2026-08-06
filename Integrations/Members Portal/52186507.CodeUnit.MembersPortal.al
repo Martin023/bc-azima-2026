@@ -1707,7 +1707,7 @@ codeunit 52186507 "Members Portal Integration"
                     if MobileTransLines.Findset() then begin
                         TotalCharges := 0;
                         repeat
-                            currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, LoanAccountsList."Outstanding Balance");
+                            currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, LoanAccountsList."Outstanding Balance", SkyMbankingTrans.GetMemberFosaAcc(SearchMember), '');
                             TotalCharges += currCharges.Get(1);
                         until MobileTransLines.next = 0;
                     end;
@@ -1722,7 +1722,7 @@ codeunit 52186507 "Members Portal Integration"
                     if MobileTransLines.Findset() then begin
                         TotalChargesIFT := 0;
                         repeat
-                            currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, LoanAccountsList."Outstanding Balance");
+                            currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, LoanAccountsList."Outstanding Balance", SkyMbankingTrans.GetMemberFosaAcc(SearchMember), '');
                             TotalChargesIFT += currCharges.Get(1);
                         until MobileTransLines.next = 0;
                     end;
@@ -2515,7 +2515,7 @@ codeunit 52186507 "Members Portal Integration"
                             ProductFactory."Product ID");
 
                         if OutstandingBalance > 0 then begin
-                            TotalChargesOnMin := SkyMbankingTrans.GetTransChargesPreview('LOAN_DISBURSEMENT', 0, '', SearchMember, '').Get(1);
+                            TotalChargesOnMin := SkyMbankingTrans.GetTransChargesPreview('LOAN_DISBURSEMENT', 0, '', SearchMember, '', '').Get(1);
                             ProductFactory."Minimum Loan Amount" := OutstandingBalance + TotalChargesOnMin;
 
                             Datum.Replace('minimum_amount', ProductFactory."Minimum Loan Amount");
@@ -2824,9 +2824,9 @@ codeunit 52186507 "Members Portal Integration"
         if MemberExists(identifier_type.AsValue.AsText, identifier.AsValue.AsText, SearchMember, ResponseText, ResponseDescription) then begin
             // ChargesInfo := SkyMbankingTrans.GetTransChargesPreview(charge_action.AsValue.AsText, amount.AsValue.AsDecimal, account_number.AsValue.AsText, SearchMember);
             if ReceiverIdentifierExists then begin
-                ChargesInfo := SkyMbankingTrans.GetTransChargesPreview(charge_action.AsValue.AsText, amount.AsValue.AsDecimal, account_number.AsValue.AsText, SearchMember, receiver_identifier.AsValue.AsText);
+                ChargesInfo := SkyMbankingTrans.GetTransChargesPreview(charge_action.AsValue.AsText, amount.AsValue.AsDecimal, account_number.AsValue.AsText, SearchMember, receiver_identifier.AsValue.AsText, '');
             end else begin
-                ChargesInfo := SkyMbankingTrans.GetTransChargesPreview(charge_action.AsValue.AsText, amount.AsValue.AsDecimal, account_number.AsValue.AsText, SearchMember, '');
+                ChargesInfo := SkyMbankingTrans.GetTransChargesPreview(charge_action.AsValue.AsText, amount.AsValue.AsDecimal, account_number.AsValue.AsText, SearchMember, '', '');
             end;
             Datum.Add('charge_amount', ChargesInfo.Get(1) - ChargesInfo.Get(2));
             Datum.Add('excise_duty', ChargesInfo.Get(2));
@@ -3169,7 +3169,7 @@ codeunit 52186507 "Members Portal Integration"
                     if MobileTransLines.Findset() then begin
                         TotalCharges := 0;
                         repeat
-                            currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, amount.AsValue.AsDecimal);
+                            currCharges := SkyMbankingTrans.GetMpesaTransCharges(MobileTransLines, amount.AsValue.AsDecimal, SourceSavingsAccount."No.", '');
                             TotalCharges += currCharges.Get(1);
                         until MobileTransLines.next = 0;
                     end;
@@ -6014,7 +6014,7 @@ codeunit 52186507 "Members Portal Integration"
                             TotalTopUp += TopUpLoan."Outstanding Balance" + TopUpLoan."Outstanding Interest" + TopUpLoan."Daily Interest";
                         end until TopUpLoan.Next = 0;
 
-                        TotalTopUp += SkyMbankingTrans.GetTransChargesPreview('LOAN_DISBURSEMENT', 0, '', SearchMember, '').Get(1);
+                        TotalTopUp += SkyMbankingTrans.GetTransChargesPreview('LOAN_DISBURSEMENT', 0, '', SearchMember, '', '').Get(1);
 
                         if TotalTopUp < MobileLoanProduct."Minimum Loan Amount" then begin
                             TotalTopUp := MobileLoanProduct."Minimum Loan Amount";
@@ -6802,7 +6802,7 @@ codeunit 52186507 "Members Portal Integration"
                             TotalTopUp += TopUpLoan."Outstanding Balance" + TopUpLoan."Outstanding Interest" + TopUpLoan."Daily Interest";
                         end until TopUpLoan.Next = 0;
 
-                        TotalTopUp += SkyMbankingTrans.GetTransChargesPreview('LOAN_DISBURSEMENT', 0, '', SearchMember, '').Get(1);
+                        TotalTopUp += SkyMbankingTrans.GetTransChargesPreview('LOAN_DISBURSEMENT', 0, '', SearchMember, '', '').Get(1);
 
                         if TotalTopUp < MobileLoanProduct."Minimum Loan Amount" then begin
                             TotalTopUp := MobileLoanProduct."Minimum Loan Amount";
