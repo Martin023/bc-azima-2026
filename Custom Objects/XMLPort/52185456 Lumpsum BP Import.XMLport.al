@@ -29,10 +29,10 @@ XmlPort 52185556 "Lumpsum BP"
                 {
                     FieldValidate = yes;
                 }
-                fieldelement(Remarks; "Checkoff Buffer"."Remarks")
-                {
-                    FieldValidate = yes;
-                }
+                // fieldelement(Remarks; "Checkoff Buffer"."Remarks")
+                // {
+                //     FieldValidate = yes;
+                // }
 
 
                 trigger OnAfterInitRecord()

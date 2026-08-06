@@ -133,8 +133,8 @@ page 52185834 "Cheque Clearance"
                     SendSMS: codeunit SendSms;
                     Source: enum "SMS Source";
                     SMSMessage: Text;
-                    MobileNo : code[20];
-                    SavingsACC : Record "Savings Accounts";
+                    MobileNo: code[20];
+                    SavingsACC: Record "Savings Accounts";
                 begin
                     if Confirm('Are you sure you want to process the selected transactions?', false) = true then begin
 
@@ -151,21 +151,21 @@ page 52185834 "Cheque Clearance"
                                 if not CreditLedger.Find('-') then begin
                                     SaccoT.ClearCheques;
                                 end;
-                                Transactions."Cheque Status" := Transactions."cheque status"::Cleared;
-                                Transactions."Date Cleared" := Today;
-                                Transactions."Cleared By" := UserId;
-                                Transactions.Modify(true);
+
+                                if SavingsACC.Get(Transactions."Account No") then begin
+                                    MobileNo := SavingsACC."Mobile Phone No";
+
+                                    SMSMessage := StrSubstNo('Dear %1, your cheque no. %2 for amount KES %3 has been cleared on %4.',
+                                        SavingsACC.Name, Transactions."Cheque No", Transactions.Amount, Format(Today) + ' ' + Format(Time));
+                                    if MobileNo <> '' then
+                                        SendSMS.SendSms(Source::CHEQUE_CLEARANCE, MobileNo, SMSMessage, Format(Transactions."Account No"), '', true, 0, false, 'CBS', Transactions."Account No", 'CBS');
+                                end;
+                            // Transactions."Cheque Status" := Transactions."cheque status"::Cleared;
+                            // Transactions."Date Cleared" := Today;
+                            // Transactions."Cleared By" := UserId;
+                            // Transactions.Modify(true);
 
                             until Transactions.Next = 0;
-
-                            if SavingsACC.Get(Transactions."Account No") then begin
-                                MobileNo := SavingsACC."Mobile Phone No";
-                            
-                                SMSMessage := StrSubstNo('Dear %1, your cheque no. %2 for amount KES %3 has been cleared on %4.',
-                                    SavingsACC.Name, Transactions."Cheque No", Transactions.Amount, Format(Today) + ' ' + Format(Time));
-                                if MobileNo <> '' then
-                                    SendSMS.SendSms(Source::CHEQUE_CLEARANCE, MobileNo, SMSMessage, Format(Transactions."Account No"), '', true, 0, false, 'CBS', Transactions."Account No", 'CBS');
-                            end;
                         end
                         else
                             Error('No transactions selected for Clearance');
