@@ -7116,7 +7116,7 @@ Codeunit 52186458 "Loans Process"
                         LPrincipal := LoanAmount / LoansR.Installments;
                     end;
                 end;
-                if LoansR."Grace Period" <> Dateformula then begin
+                if format(LoansR."Grace Period") <> format('') then begin
                     // Apply grace period
                     RunDate := CalcDate(Format(LoansR."Grace Period"), LoansR."Disbursement Date");
                     // Apply repayment start date logic based on loan application date
