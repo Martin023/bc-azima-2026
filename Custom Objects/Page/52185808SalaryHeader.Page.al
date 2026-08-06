@@ -119,7 +119,7 @@ page 52185808 "Salary Header"
                 {
                     ApplicationArea = Basic, Suite;
                     Editable = IncType;
-                    ValuesAllowed = Salary, Pension, Donation, Advance, "Leave Allowance", Claims;
+                    //ValuesAllowed = Salary, Pension, Donation, Advance, "Leave Allowance", Claims;
                 }
                 field("Posting date"; Rec."Posting date")
                 {

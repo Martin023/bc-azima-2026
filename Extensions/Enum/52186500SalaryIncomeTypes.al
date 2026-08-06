@@ -22,9 +22,9 @@ enum 52186500 "Salary Income Types"
     {
 
     }
-    value(5; " ")
+    value(5; Others)
     {
-        Caption = ' ';
+        Caption = 'Others';
     }
     value(6; Claims)
     {

@@ -171,7 +171,7 @@ table 52185783 "Salary Header"
         field(31; "Income Type"; Enum "Salary Income Types")
         {
             Caption = 'Income Type';
-            InitValue = " ";
+            // InitValue = " ";
         }
         field(32; "Transaction Type"; Code[20])
         {
