@@ -300,11 +300,15 @@ page 52185855 "Guarantor Substitution"
                                             //outgoing
                                             //incoming
                                             if Lguarant."Member Substituted" <> '' then begin
-                                                msg := 'Dear Member, You have been added as a guarantor for ' + Loan."Member Name" + ' on a ' + Loan."Loan Product Type Name" + ' loan with an outstanding balance of ' + Format(Loan."Outstanding Balance") +
-                                                     '. If you have any concerns, please contact us.';
+                                                Members.Reset();
+                                                Members.SetRange("No.", Lguarant."Member Substituted");
+                                                if Members.FindFirst() then begin
 
-                                                SendSMS.SendSms(Source::LOAN_GUARANTORS, Members."Phone No.", msg, Format(Loan."Disbursement Account No"), '', true, 0, false, 'CBS', Loan."Disbursement Account No", 'CBS');
+                                                    msg := 'Dear Member, You have been added as a guarantor for ' + Loan."Member Name" + ' on a ' + Loan."Loan Product Type Name" + ' loan with an outstanding balance of ' + Format(Loan."Outstanding Balance") +
+                                                         '. If you have any concerns, please contact us.';
 
+                                                    SendSMS.SendSms(Source::LOAN_GUARANTORS, Members."Phone No.", msg, Format(Loan."Disbursement Account No"), '', true, 0, false, 'CBS', Loan."Disbursement Account No", 'CBS');
+                                                end;
                                             end;
                                         end;
                                     end;

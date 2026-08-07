@@ -1389,36 +1389,107 @@ page 52186778 "Finance Role Center"
                         RunObject = Report "Recovered Registration Fees";
                     }
                 }
-                group("File Requests.")
+                group("Files")
                 {
-                    action("Request File")
+                    action("File Details List")
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Request File';
-                        RunObject = page "File Request List";
-                        RunPageView = where(Status = filter(open));
+                        Caption = 'File Details List';
+                        RunObject = page "Files List";
                     }
-                    action("File Request")
+                    action("Member Form List")
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Files Requested';
-                        RunObject = page "File Request List";
-                        RunPageView = where(Status = filter(requested));
+                        Caption = 'Open Member Form List';
+                        RunObject = page "Member Form List";
+                        RunPageView = where(Filed = filter(false));
                     }
-                    action("Closed File Request")
+                    action("Filed Member Form List")
                     {
                         ApplicationArea = Basic, Suite;
-                        Caption = 'Closed Files Requests.';
-                        RunObject = page "File Request List";
-                        RunPageView = where(Status = filter(closed));
+                        Caption = 'Filed member Form List';
+                        RunObject = page "Member Form List";
+                        RunPageView = where(Filed = filter(true));
+                    }
+
+                    action("File Volumes List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'File Volumes List';
+                        RunObject = page "File Volumes List";
+                    }
+                    action("File Locations")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'File Locations';
+                        RunObject = page "File Locations List";
+                    }
+                    action("Batch Number List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Batch No List';
+                        RunObject = page "Batch No List";
                     }
                 }
-                action("File List")
+
+                group("File Tracking")
                 {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'File Tracker List';
-                    RunObject = page "File Tracker List";
-                    RunPageView = where(Status = filter(<> archived));
+                    action("Open File Requests")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Open File Tracker List';
+                        RunObject = page "File Tracker List";
+                        RunPageView = where("File Request Status" = filter(Open));
+                    }
+                    action("File Requests")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'File Requests';
+                        RunObject = page "File Tracker List";
+                        RunPageView = where("File Request Status" = filter(Requested));
+                    }
+                    action("Issued Files")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Issued Files';
+                        RunObject = page "File Tracker List";
+                        RunPageView = where("File Request Status" = filter(Issued));
+                    }
+                    action("Received Files")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Received Files';
+                        RunObject = page "File Tracker List";
+                        RunPageView = where("File Request Status" = filter(Received));
+                    }
+                    // action("Forwarded Files")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Forwarded Files';
+                    //     RunObject = page "File Tracker List";
+                    //     RunPageView = where("File Request Status" = filter(Forwarded));
+                    // }
+                    action("Closed File Requests")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Closed File Request';
+                        RunObject = page "File Tracker List";
+                        RunPageView = where("File Request Status" = filter(Closed));
+                    }
+                    // action("Overdue File Requests")
+                    // {
+                    //     ApplicationArea = Basic, Suite;
+                    //     Caption = 'Overdue File Requests';
+                    //     RunObject = page "File Tracker List";
+                    //     RunPageView = where(Overdue = const(true));
+                    // }
+                    action("File List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        Caption = 'Archived File Tracker List';
+                        RunObject = page "File Tracker List";
+                        RunPageView = where(Status = filter(archived));
+                    }
                 }
 
             }

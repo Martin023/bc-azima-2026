@@ -119,6 +119,11 @@ table 52185547 "Mobile Transaction Types Lines"
         {
 
         }
+        // Excempt From Charges
+        field(19; "Excempt From Charges"; Boolean)
+        {
+
+        }
 
     }
 

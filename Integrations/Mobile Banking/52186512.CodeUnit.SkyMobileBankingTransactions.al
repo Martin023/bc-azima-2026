@@ -5,6 +5,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         IdentifierType: Text;
         Identifier: Text;
         SavingsAccountNumber: Text;
+        sourceApplication: Text;
         var theMember: Record Members
     )
     var
@@ -30,6 +31,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         SkyTrans."Transaction Date" := Today;
         SkyTrans."Transaction Time" := Time;
         SkyTrans."Transaction Status" := SkyTrans."Transaction Status"::CONFIRMED;
+        SkyTrans."Source Application" := sourceApplication;
         SkyTrans.Posted := false;
         // SkyTrans.Reversed := false;
 
@@ -77,6 +79,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         IdentifierType: Text;
         Identifier: Text;
         SavingsAccountNumber: Text;
+        SourceApplication: Text;
         var theMember: Record Members
     )
     var
@@ -102,6 +105,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         SkyTrans."Transaction Date" := Today;
         SkyTrans."Transaction Time" := Time;
         SkyTrans."Transaction Status" := SkyTrans."Transaction Status"::CONFIRMED;
+        SkyTrans."Source Application" := SourceApplication;
         SkyTrans.Posted := false;
         // SkyTrans.Reversed := false;
 
@@ -858,6 +862,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         IdentifierType: Text;
         Identifier: Text;
         LoanNumber: Text;
+        SourceApplication: Text;
         theMember: Record Members
     )
     var
@@ -893,6 +898,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         SkyTrans."Transaction Date" := Today;
         SkyTrans."Transaction Time" := Time;
         SkyTrans."Transaction Status" := SkyTrans."Transaction Status"::CONFIRMED;
+        SkyTrans."Source Application" := SourceApplication;
         SkyTrans.Posted := false;
         // SkyTrans.Reversed := false;
 
@@ -950,6 +956,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         IdentifierType: Text;
         Identifier: Text;
         LoanNumber: Text;
+        SourceApplication: Text;
         theMember: Record Members
     )
     var
@@ -986,6 +993,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         SkyTrans."Transaction Date" := Today;
         SkyTrans."Transaction Time" := Time;
         SkyTrans."Transaction Status" := SkyTrans."Transaction Status"::CONFIRMED;
+        SkyTrans."Source Application" := SourceApplication;
         SkyTrans.Posted := false;
         // SkyTrans.Reversed := false;
 
@@ -993,7 +1001,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
     end;
 
     // Get transactions Charges
-    procedure GetMpesaTransCharges(var MobileTransLines: Record "Mobile Transaction Types Lines"; TransactionAmount: Decimal): List of [decimal]
+    procedure GetMpesaTransCharges(var MobileTransLines: Record "Mobile Transaction Types Lines"; TransactionAmount: Decimal; AccountNo: Text; SourceApplication: Text): List of [decimal]
     var
         ChargeAmount: Decimal;
         TariffDetails: Record "Tiered Charges Lines";
@@ -1001,10 +1009,19 @@ codeunit 52186512 "Sky M-Banking Transactions"
         ExciseDuty: Decimal;
         TotalCharges: List of [decimal];
         SkyRevenue: Decimal;
+        GFunc: Codeunit "Global Functions";
     begin
         ChargeAmount := 0;
         ExciseDuty := 0;
         clear(TotalCharges);
+
+        if (MobileTransLines."Excempt From Charges" and GFunc.IsStaffAccount(AccountNo)) or (SourceApplication = 'MAPP') then begin
+            TotalCharges.Add(0);
+            TotalCharges.Add(0);
+            TotalCharges.Add(0);
+            totalCharges.Add(0);
+            exit(TotalCharges);
+        end;
 
         case MobileTransLines."Charge Type" of
             MobileTransLines."Charge Type"::"Flat Amount":
@@ -1060,6 +1077,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         TotalCharges.Add(ChargeAmount + ExciseDuty + SkyRevenue);
         TotalCharges.Add(ExciseDuty);
         TotalCharges.Add(SkyRevenue);
+        totalCharges.Add(ChargeAmount);
 
         exit(TotalCharges);
     end;
@@ -1109,26 +1127,23 @@ codeunit 52186512 "Sky M-Banking Transactions"
     procedure GetMemberFosaAcc(Member: record Members): text
     var
         SavingsAccounts: record "Savings Accounts";
-        FosaProduct: Record "Product Factory";
     begin
-        FosaProduct.Reset;
-        FosaProduct.SetRange("Product Category", FosaProduct."Product Category"::"FOSA Account");
-        FosaProduct.SetRange("Auto Open Account", true); // Main Fosa Acc.
-
-        FosaProduct.SetLoadFields("Product ID");
-        if not FosaProduct.FindFirst then begin
-            exit('');
-        end;
 
         SavingsAccounts.RESET;
         SavingsAccounts.SETRANGE("Member No.", Member."No.");
-        SavingsAccounts.SETRANGE("Product Type", FosaProduct."Product ID");
-
+        SavingsAccounts.SetRange("Loan Disbursement Account", true);
         SavingsAccounts.SetLoadFields("No.");
-        if SavingsAccounts.FINDFIRST then
+        if SavingsAccounts.FINDFIRST then begin
             exit(SavingsAccounts."No.")
-        else
-            exit('');
+        end else begin
+            SavingsAccounts.RESET;
+            savingsAccounts.SETRANGE("Member No.", Member."No.");
+            SavingsAccounts.SetFilter("Product Type", '%1|%2', '191', '195');
+            savingsAccounts.SetCurrentKey(blocked, Status, "Product Type");
+            if SavingsAccounts.FINDFIRST then
+                exit(SavingsAccounts."No.");
+        end;
+
     end;
     // Get Member primary bosa acc
     procedure GetMemberDepositsAcc(Member: record Members): text
@@ -2624,7 +2639,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
         EXIT(MonthI);
     end;
 
-    procedure GetTransChargesPreview(TransactionType: Text; TransactionAmount: Decimal; AccountNumber: Text; SearchMember: Record Members; ReceiverPaybillTill: Text): List of [decimal]
+    procedure GetTransChargesPreview(TransactionType: Text; TransactionAmount: Decimal; AccountNumber: Text; SearchMember: Record Members; ReceiverPaybillTill: Text; SourceApplication: Text): List of [decimal]
     var
         TotalCharges: List of [decimal];
         MobileTransLines: Record "Mobile Transaction Types Lines";
@@ -2745,7 +2760,7 @@ codeunit 52186512 "Sky M-Banking Transactions"
 
             if MobileTransLines.FindSet then begin
                 repeat
-                    CurrCharges := GetMpesaTransCharges(MobileTransLines, TransactionAmount);
+                    CurrCharges := GetMpesaTransCharges(MobileTransLines, TransactionAmount, AccountNumber, SourceApplication);
                     if CurrCharges.Get(1) > 0 then begin
                         SumOfCharge += CurrCharges.Get(1);
                     end;
@@ -3152,10 +3167,10 @@ codeunit 52186512 "Sky M-Banking Transactions"
                     repeat begin
                         // LineNo += 1000;
 
-                        SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount").Get(1), DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
-                        TotalCharges += GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount").Get(1);
+                        SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount", FosaAcc, '').Get(4), DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
+                        TotalCharges += GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount", FosaAcc, '').Get(1);
                         if MobileTransLines."Recover Excise Duty" then
-                            SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, AccType::"G/L Account", genSetUp."Excise Duty G/L", 'Excise duty on loan disbursement charges', MobileTransLines."Account Type", ''/*MobileTransLines."Account No."*/, -GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount").Get(2), DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
+                            SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, AccType::"G/L Account", genSetUp."Excise Duty G/L", 'Excise duty on loan disbursement charges', MobileTransLines."Account Type", ''/*MobileTransLines."Account No."*/, -GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount", FosaAcc, '').Get(2), DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
                     end until MobileTransLines.Next = 0;
 
                     if TotalCharges > 0 then begin
@@ -3563,10 +3578,10 @@ codeunit 52186512 "Sky M-Banking Transactions"
                         repeat begin
                             // LineNo += 1000;
 
-                            SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount").Get(1) - GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount").Get(2)), DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
-                            TotalCharges += GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount").Get(1);
+                            SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, MobileTransLines."Account Type", MobileTransLines."Account No.", MobileTransLines.Description, AccType::"G/L Account", '', -(GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount", FosaAcc, '').Get(1) - GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount", FosaAcc, '').Get(2)), DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
+                            TotalCharges += GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount", FosaAcc, '').Get(1);
                             if MobileTransLines."Recover Excise Duty" then
-                                SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, AccType::"G/L Account", genSetUp."Excise Duty G/L", 'Excise duty on loan disbursement charges', MobileTransLines."Account Type", ''/*MobileTransLines."Account No."*/, -GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount").Get(2), DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
+                                SaccoTrans.JournalInsert(Template, Batch, DocNo, Today, AccType::"G/L Account", genSetUp."Excise Duty G/L", 'Excise duty on loan disbursement charges', MobileTransLines."Account Type", ''/*MobileTransLines."Account No."*/, -GetMpesaTransCharges(MobileTransLines, Loans."Approved Amount", FosaAcc, '').Get(2), DocNo, '', TransType::" ", Loans."Global Dimension 1 Code", Loans."Global Dimension 2 Code", true);
                         end until MobileTransLines.Next = 0;
 
                         if TotalCharges > 0 then begin
@@ -4050,7 +4065,8 @@ codeunit 52186512 "Sky M-Banking Transactions"
             requestAmount,
             theSavingsAccount."No.",
             SearchMember,
-            ReceiverPaybillTill
+            ReceiverPaybillTill,
+            ''
         );
 
         totalCost := theCharges.Get(1) + requestAmount;

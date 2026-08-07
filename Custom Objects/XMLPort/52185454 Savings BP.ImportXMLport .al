@@ -43,11 +43,11 @@ XmlPort 52185554 "Savings BP"
                 //     FieldValidate = no;
                 //     //MinOccurs = Once;
                 // }
-                fieldelement(Remarks; "Checkoff Buffer".Remarks)
-                {
-                    fieldvalidate = yes;
-                    MinOccurs = Once;
-                }
+                // fieldelement(Remarks; "Checkoff Buffer".Remarks)
+                // {
+                //     fieldvalidate = yes;
+                //     MinOccurs = Once;
+                // }
                 trigger OnBeforeInsertRecord()
                 begin
                     if "Checkoff Buffer".Amount <= 0 then
@@ -75,7 +75,7 @@ XmlPort 52185554 "Savings BP"
         {
             area(content)
             {
-                group("No|CheckoffNo|EmployerCode|payrollNo|Amount|ProductID|Remarks")
+                group("No|CheckoffNo|EmployerCode|payrollNo|Amount|ProductID")
                 {
                     field(HeaderTemplate; HeaderTemplate)
                     {
@@ -94,7 +94,7 @@ XmlPort 52185554 "Savings BP"
     }
     trigger OninitXmlPort()
     begin
-        HeaderTemplate := 'No|CheckoffNo|EmployerCode|PayrollNo|Amount|ProductID|Remarks';
+        HeaderTemplate := 'No|CheckoffNo|EmployerCode|PayrollNo|Amount|ProductID';
     end;
 
 
