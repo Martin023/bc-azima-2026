@@ -2110,70 +2110,70 @@ page 52185753 "Loan Application Card"
                         //********************Creation of STOs***********************************************************************************************//
                         Rec.TestField("Recovery Mode");
                         Rec.TestField("Member No.");
-                        if Rec."Member Class" = 'CLASSB' then begin
-                            StandingOrderHeader.Reset;
-                            // StandingOrderHeader.SetRange("Member No.", Rec."Member No.");
-                            // if StandingOrderHeader.FindFirst then begin
-                            StandingOrderHeader.init;
-                            // Assign the number from the number series
-                            SeriesSetup.Get();
-                            DocNo := NoSeriesMgt.GetNextNo(SeriesSetup."Standing Order Nos.", Today, TRUE);
-                            StandingOrderHeader."No." := DocNo;
+                        // if Rec."Member Class" = 'CLASSB' then begin
+                        //     StandingOrderHeader.Reset;
+                        //     // StandingOrderHeader.SetRange("Member No.", Rec."Member No.");
+                        //     // if StandingOrderHeader.FindFirst then begin
+                        //     StandingOrderHeader.init;
+                        //     // Assign the number from the number series
+                        //     SeriesSetup.Get();
+                        //     DocNo := NoSeriesMgt.GetNextNo(SeriesSetup."Standing Order Nos.", Today, TRUE);
+                        //     StandingOrderHeader."No." := DocNo;
 
-                            // Populate other fields
-                            StandingOrderHeader."No." := StandingOrderHeader."No.";//number series implentation
-                            DocumentNo := StandingOrderHeader."No.";
-                            StandingOrderHeader."Application Date" := Today;
-                            StandingOrderHeader."Transaction Type" := 'STO';
-                            StandingOrderHeader."Source Account Type" := StandingOrderHeader."Source Account Type"::Savings;
-                            StandingOrderHeader."Source Account No." := FosaAcc;
-                            StandingOrderHeader."Source Account Name" := Rec."Member Name";
-                            StandingOrderHeader."Member No." := Rec."Member No.";
-                            StandingOrderHeader."ID Number" := idno;
-                            StandingOrderHeader.Description := rec."Loan No." + ' Monthly STO';
-                            StandingOrderHeader."Allocated Amount" := Rec."Salary Amount";
-                            StandingOrderHeader.Amount := Rec."Salary Amount";
-                            StandingOrderHeader."Income Type" := StandingOrderHeader."Income Type"::Periodic;
-                            // StandingOrderHeader."Global Dimension 1 Code" := '';
-                            // StandingOrderHeader."Global Dimension 2 Code" := '';
-                            StandingOrderHeader.Status := StandingOrderHeader.Status::Approved;
-                            //------------------------------------Date thingy
-                            DurationText := '1M';  // Ensure it's always '1M' for one month
-                            Evaluate(DurationText2, Format(DurationText));
-                            DurationText2 := DelChr(Format(DurationText), '=', '-|+|');
-                            Evaluate(StandingOrderHeader."Frequency (Months)", DurationText2);
-                            StandingOrderHeader."Effective/Start Date" := CALCDATE('<1M>', WORKDATE);
-                            //   --------------------date thingy
-                            // StandingOrderHeader."Duration (Months)" := Rec.Installments ;
-                            Install := Format(Rec.Installments);
-                            installtext := install + 'M';
-                            DurationText := '1M';  // Ensure it's always '1M' for one month
-                            Evaluate(installtext2, Format(installtext));
-                            installtext2 := DelChr(Format(installtext), '=', '-|+|');
-                            Evaluate(StandingOrderHeader."Duration (Months)", installtext2);
-                            StandingOrderHeader."End Date" := CalcDate(StandingOrderHeader."Duration (Months)", StandingOrderHeader."Effective/Start Date");//DURATION+EFFECTIVE DATE
-                            StandingOrderHeader.Insert();
+                        //     // Populate other fields
+                        //     StandingOrderHeader."No." := StandingOrderHeader."No.";//number series implentation
+                        //     DocumentNo := StandingOrderHeader."No.";
+                        //     StandingOrderHeader."Application Date" := Today;
+                        //     StandingOrderHeader."Transaction Type" := 'STO';
+                        //     StandingOrderHeader."Source Account Type" := StandingOrderHeader."Source Account Type"::Savings;
+                        //     StandingOrderHeader."Source Account No." := FosaAcc;
+                        //     StandingOrderHeader."Source Account Name" := Rec."Member Name";
+                        //     StandingOrderHeader."Member No." := Rec."Member No.";
+                        //     StandingOrderHeader."ID Number" := idno;
+                        //     StandingOrderHeader.Description := rec."Loan No." + ' Monthly STO';
+                        //     StandingOrderHeader."Allocated Amount" := Rec."Salary Amount";
+                        //     StandingOrderHeader.Amount := Rec."Salary Amount";
+                        //     StandingOrderHeader."Income Type" := StandingOrderHeader."Income Type"::Periodic;
+                        //     // StandingOrderHeader."Global Dimension 1 Code" := '';
+                        //     // StandingOrderHeader."Global Dimension 2 Code" := '';
+                        //     StandingOrderHeader.Status := StandingOrderHeader.Status::Approved;
+                        //     //------------------------------------Date thingy
+                        //     DurationText := '1M';  // Ensure it's always '1M' for one month
+                        //     Evaluate(DurationText2, Format(DurationText));
+                        //     DurationText2 := DelChr(Format(DurationText), '=', '-|+|');
+                        //     Evaluate(StandingOrderHeader."Frequency (Months)", DurationText2);
+                        //     StandingOrderHeader."Effective/Start Date" := CALCDATE('<1M>', WORKDATE);
+                        //     //   --------------------date thingy
+                        //     // StandingOrderHeader."Duration (Months)" := Rec.Installments ;
+                        //     Install := Format(Rec.Installments);
+                        //     installtext := install + 'M';
+                        //     DurationText := '1M';  // Ensure it's always '1M' for one month
+                        //     Evaluate(installtext2, Format(installtext));
+                        //     installtext2 := DelChr(Format(installtext), '=', '-|+|');
+                        //     Evaluate(StandingOrderHeader."Duration (Months)", installtext2);
+                        //     StandingOrderHeader."End Date" := CalcDate(StandingOrderHeader."Duration (Months)", StandingOrderHeader."Effective/Start Date");//DURATION+EFFECTIVE DATE
+                        //     StandingOrderHeader.Insert();
 
-                            // end;
-                            //insert on lines
-                            StandingOrderLines.Reset;
-                            // StandingOrderLines.SetRange("Document No.", StandingOrderHeader."No.");
-                            //StandingOrderLines.SetRange("Destination Account Type", StandingOrderLines."Destination Account Type"::Savings);
-                            // StandingOrderLines.SetRange("Loan No.", Rec."Loan No.");
-                            //if StandingOrderLines.FindFirst then begin
-                            StandingOrderLines.Init();
-                            StandingOrderLines."Document No." := DocumentNo;
-                            StandingOrderLines."Destination Account Type" := StandingOrderLines."Destination Account Type"::Credit;
-                            // StandingOrderLines."Destination Account No." := Rec."Loan Account";
-                            StandingOrderLines."Destination Account No." := Rec."Loan Account";
-                            StandingOrderLines."Destination Account Name" := Rec."Member Name";
-                            StandingOrderLines."Loan No." := rec."Loan No.";
-                            StandingOrderLines.Amount := round(Rec.Repayment, 0.01, '=');
-                            StandingOrderLines."Transaction Type" := StandingOrderLines."Transaction Type"::Armotised;
-                            StandingOrderLines."Member No" := Rec."Member No.";
-                            StandingOrderLines.Insert();
-                            //end;
-                        end;
+                        //     // end;
+                        //     //insert on lines
+                        //     StandingOrderLines.Reset;
+                        //     // StandingOrderLines.SetRange("Document No.", StandingOrderHeader."No.");
+                        //     //StandingOrderLines.SetRange("Destination Account Type", StandingOrderLines."Destination Account Type"::Savings);
+                        //     // StandingOrderLines.SetRange("Loan No.", Rec."Loan No.");
+                        //     //if StandingOrderLines.FindFirst then begin
+                        //     StandingOrderLines.Init();
+                        //     StandingOrderLines."Document No." := DocumentNo;
+                        //     StandingOrderLines."Destination Account Type" := StandingOrderLines."Destination Account Type"::Credit;
+                        //     // StandingOrderLines."Destination Account No." := Rec."Loan Account";
+                        //     StandingOrderLines."Destination Account No." := Rec."Loan Account";
+                        //     StandingOrderLines."Destination Account Name" := Rec."Member Name";
+                        //     StandingOrderLines."Loan No." := rec."Loan No.";
+                        //     StandingOrderLines.Amount := round(Rec.Repayment, 0.01, '=');
+                        //     StandingOrderLines."Transaction Type" := StandingOrderLines."Transaction Type"::Armotised;
+                        //     StandingOrderLines."Member No" := Rec."Member No.";
+                        //     StandingOrderLines.Insert();
+                        //     //end;
+                        // end;
 
 
                         //********************Creation of STOs***********************************************************************************************//

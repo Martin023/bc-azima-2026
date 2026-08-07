@@ -1176,6 +1176,14 @@ page 52185714 "Member Application Single"
                             until AutoOpenedSavingAccs.Next = 0;
                         end;
 
+                        //Check for default acc
+                        AutoOpenedSavingAccs.Reset();
+                        AutoOpenedSavingAccs.SetRange("No.", Rec."No.");
+                        AutoOpenedSavingAccs.SetRange("Default Account", true);
+                        if AutoOpenedSavingAccs.IsEmpty then begin
+                            Error('Kindly specify a default savings account in the automated savings accounts before proceeding');
+                        end;
+
                         ApprovalsMgmt.Run();
                         UserSetup.Reset;
                         UserSetup.SetRange("User ID", UserId);
