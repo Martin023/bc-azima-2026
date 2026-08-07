@@ -24,7 +24,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>14.54208cm</Height>
+                  <Height>15.49458cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -72,7 +72,8 @@
                                     <TextRun>
                                       <Value>="TRANS TYPE: " &amp; Fields!Transactions_Type.Value</Value>
                                       <Style>
-                                        <FontSize>8pt</FontSize>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>12pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
@@ -84,7 +85,8 @@
                                     <TextRun>
                                       <Value>="DATE: " &amp; Format(Fields!Transactions__Transaction_Date_.Value, "dd/MM/yyyy") &amp; "    " &amp; Format(Fields!Transactions_Transactions__Transaction_Time_.Value, "hh:mm tt")</Value>
                                       <Style>
-                                        <FontSize>8pt</FontSize>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>12pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
@@ -96,7 +98,8 @@
                                     <TextRun>
                                       <Value>="BRANCH: " &amp; IIF(Fields!Branch_Name.Value &lt;&gt; "", Fields!Branch_Name.Value, "") &amp; IIF(Fields!Branch_code.Value &lt;&gt; "", " (" &amp; Fields!Branch_code.Value &amp; ")", "")</Value>
                                       <Style>
-                                        <FontSize>8pt</FontSize>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>12pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
@@ -108,7 +111,8 @@
                                     <TextRun>
                                       <Value>="TRANS No: " &amp; Fields!Transactions_No.Value</Value>
                                       <Style>
-                                        <FontSize>8pt</FontSize>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>12pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
@@ -120,7 +124,8 @@
                                     <TextRun>
                                       <Value>="A/C NAME: " &amp; Fields!AccountName.Value</Value>
                                       <Style>
-                                        <FontSize>8pt</FontSize>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>12pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
@@ -132,7 +137,8 @@
                                     <TextRun>
                                       <Value>="A/C No: " &amp; Fields!MaskedAccountNo.Value</Value>
                                       <Style>
-                                        <FontSize>8pt</FontSize>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>12pt</FontSize>
                                         <FontWeight>Bold</FontWeight>
                                       </Style>
                                     </TextRun>
@@ -145,7 +151,8 @@
                                       <Value>=Fields!ProductTypeDescription.Value</Value>
                                       <Style>
                                         <FontStyle>Italic</FontStyle>
-                                        <FontSize>7pt</FontSize>
+                                        <FontFamily>Times New Roman</FontFamily>
+                                        <FontSize>12pt</FontSize>
                                       </Style>
                                     </TextRun>
                                   </TextRuns>
@@ -154,7 +161,7 @@
                               </Paragraphs>
                               <Top>3.12361cm</Top>
                               <Left>0.2cm</Left>
-                              <Height>2.62688cm</Height>
+                              <Height>3.68521cm</Height>
                               <Width>7.5cm</Width>
                               <ZIndex>2</ZIndex>
                               <Style />
@@ -253,6 +260,7 @@
                                                     <Value>="-" &amp; Format(Fields!Amount.Value, "#,0.00")</Value>
                                                     <Style>
                                                       <FontSize>8pt</FontSize>
+                                                      <FontWeight>Bold</FontWeight>
                                                     </Style>
                                                   </TextRun>
                                                 </TextRuns>
@@ -546,7 +554,7 @@
                                   </TablixMember>
                                 </TablixMembers>
                               </TablixRowHierarchy>
-                              <Top>5.85632cm</Top>
+                              <Top>6.87938cm</Top>
                               <Left>0.2cm</Left>
                               <Height>2.8cm</Height>
                               <Width>7.5cm</Width>
@@ -568,7 +576,7 @@
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>9.00611cm</Top>
+                              <Top>10.02917cm</Top>
                               <Left>0.2cm</Left>
                               <Height>0.55021cm</Height>
                               <Width>7.5cm</Width>
@@ -611,7 +619,7 @@
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>9.75632cm</Top>
+                              <Top>10.77938cm</Top>
                               <Left>0.2cm</Left>
                               <Height>1.5cm</Height>
                               <Width>7.5cm</Width>
@@ -633,7 +641,7 @@
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>11.55632cm</Top>
+                              <Top>12.57938cm</Top>
                               <Left>0.2cm</Left>
                               <Height>0.5cm</Height>
                               <Width>7.5cm</Width>
@@ -655,7 +663,7 @@
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>12.25632cm</Top>
+                              <Top>13.27938cm</Top>
                               <Left>0.2cm</Left>
                               <Height>1cm</Height>
                               <Width>7.5cm</Width>
@@ -677,7 +685,7 @@
                                   <Style />
                                 </Paragraph>
                               </Paragraphs>
-                              <Top>13.45632cm</Top>
+                              <Top>14.47938cm</Top>
                               <Left>0.2cm</Left>
                               <Height>0.5cm</Height>
                               <Width>7.5cm</Width>
@@ -717,12 +725,12 @@
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
             <Top>0.1cm</Top>
-            <Height>14.54208cm</Height>
+            <Height>15.49458cm</Height>
             <Width>7.9cm</Width>
             <Style />
           </Tablix>
         </ReportItems>
-        <Height>15.40938cm</Height>
+        <Height>16.38833cm</Height>
         <Style />
       </Body>
       <Width>7.9cm</Width>

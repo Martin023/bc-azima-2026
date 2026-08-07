@@ -21,61 +21,130 @@ codeunit 52185460 "HR SMS Dispatcher"
         PhoneNo := '';
         if RecipientEmployeeNo <> '' then
             if HREmp.Get(RecipientEmployeeNo) then begin
-                // PRIMARY: CELL PHONE NUMBER (FIELD 39003907)
                 PhoneNo := HREmp."Cell Phone Number";
-                // FALLBACK 1: CELLULAR PHONE NUMBER (FIELD 14)
                 if PhoneNo = '' then
                     PhoneNo := HREmp."Cellular Phone Number";
-                // FALLBACK 2: WORK PHONE NUMBER (FIELD 15)
                 if PhoneNo = '' then
                     PhoneNo := HREmp."Work Phone Number";
-                // FALLBACK 3: HOME PHONE NUMBER (FIELD 13)
                 if PhoneNo = '' then
                     PhoneNo := HREmp."Home Phone Number";
             end;
 
         if PhoneNo = '' then begin
-            LogEntry(EventCode, RecipientRole, '', SourceDocNo, '', 1,
+            LogEntry(EventCode, RecipientRole, '', SourceDocNo, '', TokenVals, 1,
                 'NO PHONE NUMBER FOUND ON EMPLOYEE ' + RecipientEmployeeNo +
-                '. SET Cell Phone Number, Cellular Phone Number, Work Phone Number OR Home Phone Number ON THE EMPLOYEE CARD.');
+                '. SET Cell Phone Number, Cellular Phone Number, Work Phone Number OR Home Phone Number ON THE EMPLOYEE CARD.',
+                0, false, false);
             exit;
         end;
 
-        SendInternal(Template, PhoneNo, SourceDocNo, TokenVals, EventCode, RecipientRole);
+        ExecuteSend(Template, PhoneNo, SourceDocNo, TokenVals, EventCode, RecipientRole, 0, false, false);
     end;
 
-    local procedure SendInternal(
+    procedure Retry(LogEntryNo: Integer)
+    var
+        LogEntry2: Record "HR SMS Notification Log";
+        Template: Record "HR SMS Template";
+    begin
+        if not LogEntry2.Get(LogEntryNo) then
+            Error('LOG ENTRY %1 NOT FOUND.', LogEntryNo);
+
+        if not (LogEntry2.Status in [LogEntry2.Status::Failed, LogEntry2.Status::"Retry Failed"]) then
+            Error('THIS ENTRY DID NOT FAIL. USE RESEND FOR ENTRIES THAT WERE SENT SUCCESSFULLY.');
+
+        if not Template.Get(LogEntry2."Event Code", LogEntry2."Recipient Role") then
+            Error('TEMPLATE NOT FOUND FOR EVENT "%1" / ROLE "%2". VERIFY THE TEMPLATE EXISTS.',
+                LogEntry2."Event Code", LogEntry2."Recipient Role");
+
+        if not Template.Enabled then
+            Error('TEMPLATE IS DISABLED. ENABLE THE TEMPLATE BEFORE RETRYING.');
+
+        if LogEntry2."Token Values" = '' then
+            Error('THIS ENTRY HAS NO STORED TOKEN VALUES — IT WAS CREATED BEFORE TOKEN STORAGE WAS INTRODUCED. USE RESEND INSTEAD, WHICH WILL SEND THE CURRENT TEMPLATE BODY AS-IS.');
+
+        ExecuteSend(Template, LogEntry2."Sent To", LogEntry2."Source Document No.",
+            LogEntry2."Token Values", LogEntry2."Event Code", LogEntry2."Recipient Role",
+            LogEntryNo, true, false);
+
+        LogEntry2."Retry Count" += 1;
+        LogEntry2."Last Retry DateTime" := CurrentDateTime;
+        LogEntry2.Modify();
+    end;
+
+    procedure Resend(LogEntryNo: Integer)
+    var
+        LogEntry2: Record "HR SMS Notification Log";
+        Template: Record "HR SMS Template";
+    begin
+        if not LogEntry2.Get(LogEntryNo) then
+            Error('LOG ENTRY %1 NOT FOUND.', LogEntryNo);
+
+        if not Template.Get(LogEntry2."Event Code", LogEntry2."Recipient Role") then
+            Error('TEMPLATE NOT FOUND FOR EVENT "%1" / ROLE "%2". VERIFY THE TEMPLATE EXISTS.',
+                LogEntry2."Event Code", LogEntry2."Recipient Role");
+
+        if not Template.Enabled then
+            if not Confirm('TEMPLATE IS DISABLED. RESEND ANYWAY?', false) then
+                exit;
+
+        if not Confirm('RESEND THIS SMS TO %1?', true, LogEntry2."Sent To") then
+            exit;
+
+        ExecuteSend(Template, LogEntry2."Sent To", LogEntry2."Source Document No.",
+            LogEntry2."Token Values", LogEntry2."Event Code", LogEntry2."Recipient Role",
+            LogEntryNo, false, true);
+
+        LogEntry2."Last Retry DateTime" := CurrentDateTime;
+        LogEntry2.Modify();
+    end;
+
+    local procedure ExecuteSend(
         Template: Record "HR SMS Template";
         PhoneNo: Text[20];
         SourceDocNo: Code[50];
         TokenVals: Text;
         EventCode: Code[50];
-        RecipientRole: Option
+        RecipientRole: Option;
+        ParentEntryNo: Integer;
+        IsRetry: Boolean;
+        IsResend: Boolean
     )
     var
         SmsCU: Codeunit SendSms;
         ResolvedBody: Text;
+        SuccessStatus: Option;
+        FailStatus: Option;
     begin
         ResolvedBody := ResolveTokens(Template.Body, EventCode, TokenVals);
 
-        // CALL THE EXISTING SKY SMS CODEUNIT — WRITES TO Sky SMS Messages QUEUE
-        // PARAMETERS: Source, Phone, Message, Reference, AccNo, Chargeable,
-        //             Priority, ChargeMember, RequestApp, CorrelationID, SourceApp
+        if IsRetry then begin
+            SuccessStatus := 2; // Retry Succeeded
+            FailStatus := 3;    // Retry Failed
+        end else if IsResend then begin
+            SuccessStatus := 4; // Resent
+            FailStatus := 1;    // Failed
+        end else begin
+            SuccessStatus := 0; // Sent
+            FailStatus := 1;    // Failed
+        end;
+
         SmsCU.SendSms(
             Template."SMS Source",
             PhoneNo,
             ResolvedBody,
             SourceDocNo,
-            '',         // NO ACCOUNT TO CHARGE
-            false,      // NOT CHARGEABLE
-            0,          // PRIORITY — SendSms MAPS UNKNOWN SOURCES TO 250
-            false,      // DO NOT CHARGE MEMBER
+            '',
+            false,
+            0,
+            false,
             'HR',
             SourceDocNo,
             'HR_MODULE'
         );
 
-        LogEntry(EventCode, RecipientRole, PhoneNo, SourceDocNo, ResolvedBody, 0, '');
+        // SENDMSS DOES NOT RETURN A BOOLEAN — LOG AS SENT SINCE IT WRITES TO THE QUEUE
+        LogEntry(EventCode, RecipientRole, PhoneNo, SourceDocNo, ResolvedBody,
+            TokenVals, SuccessStatus, '', ParentEntryNo, IsRetry, IsResend);
     end;
 
     local procedure ResolveTokens(RawBody: Text; EventCode: Code[50]; TokenVals: Text): Text
@@ -113,12 +182,10 @@ codeunit 52185460 "HR SMS Dispatcher"
         if TokenVals = '' then
             exit('');
 
-        // STRIP BRACKETS FROM TOKEN TO GET PLAIN KEY
         KeyName := Token;
         KeyName := KeyName.Replace('[', '');
         KeyName := KeyName.Replace(']', '');
 
-        // || DELIMITER — SAFE AGAINST SEMICOLONS IN VALUES
         Pairs := TokenVals.Split('||');
         foreach Pair in Pairs do begin
             EqPos := StrPos(Pair, '=');
@@ -139,8 +206,12 @@ codeunit 52185460 "HR SMS Dispatcher"
         SentTo: Text;
         SourceDocNo: Code[50];
         MessageSent: Text;
+        TokenVals: Text;
         StatusOpt: Option;
-        ErrorText: Text
+        ErrorText: Text;
+        ParentEntryNo: Integer;
+        IsRetry: Boolean;
+        IsResend: Boolean
     )
     var
         Log: Record "HR SMS Notification Log";
@@ -151,11 +222,15 @@ codeunit 52185460 "HR SMS Dispatcher"
         Log."Sent To" := CopyStr(SentTo, 1, MaxStrLen(Log."Sent To"));
         Log."Source Document No." := CopyStr(SourceDocNo, 1, MaxStrLen(Log."Source Document No."));
         Log."Message Sent" := CopyStr(MessageSent, 1, MaxStrLen(Log."Message Sent"));
+        Log."Token Values" := CopyStr(TokenVals, 1, MaxStrLen(Log."Token Values"));
         Log.Status := StatusOpt;
         Log."Error Text" := CopyStr(ErrorText, 1, MaxStrLen(Log."Error Text"));
         Log."Sent Date" := Today;
         Log."Sent Time" := Time;
         Log."Sent By" := UserId;
+        Log."Parent Entry No." := ParentEntryNo;
+        Log."Is Retry" := IsRetry;
+        Log."Is Resend" := IsResend;
         Log.Insert();
     end;
 }
