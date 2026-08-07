@@ -85,7 +85,7 @@ Report 52185544 "Schedule All Loans"
                         end;
                         Loans.Repayment := Round(((Loans."Loan Principle Repayment" + Loans."Loan Interest Repayment")), 1, '>');
                         //Loans."Repayment Start Date" := "Disbursement Date" + 45;
-                        loans."Repayment Start Date" := CalcDate('CM+1M', loans."Disbursement Date");
+                        loans."Repayment Start Date" := CalcDate('1M', loans."Disbursement Date");
                         if Loans.installments > 1 then
                             Loans."Expected Date of Completion" := CalcDate(FORMAT(loans.Installments) + 'M', loans."Repayment Start Date");
                         Loans.Modify();

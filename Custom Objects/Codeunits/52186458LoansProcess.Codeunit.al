@@ -7095,6 +7095,8 @@ Codeunit 52186458 "Loans Process"
             if (LoansR."Date Rescheduled" = 0D) or (LoansR."New No. of Installment" = 0) then
                 CreateSchedule := false;
         end;
+        if LoansR."Repayment Start Date" = 0D then
+            CreateSchedule := false;
 
         if CreateSchedule then begin
             if Prodfac.Get(LoansR."Loan Product Type") then begin
@@ -7149,7 +7151,7 @@ Codeunit 52186458 "Loans Process"
                     // if (Prodfac."Interest Recovered Upfront") or (ProdFac."Compute Interest Due on Postin" = ProdFac."Compute Interest Due on Postin"::"Full Period Interest") or (LoansR.Interest = 0) or (ProdFac."Interest Rate (Max.)" = 0) then begin
                     if (Prodfac."Interest Recovered Upfront") or (ProdFac."Compute Interest Due on Postin" = ProdFac."Compute Interest Due on Postin"::"Full Period Interest") or (InterestRate = 0) or (ProdFac."Interest Rate (Max.)" = 0) then begin
                         LInterest := 0;
-
+                        LPrincipal := LoanAmount / RepayPeriod;
                     end
                     else begin
                         if LoansR."Interest Calculation Method" = LoansR."Interest Calculation Method"::Amortised then begin
