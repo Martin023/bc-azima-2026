@@ -77,6 +77,16 @@ page 52185799 "Cashier Transactions List"
     {
         area(processing)
         {
+            action("Posted Cashier Transactions")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Posted Cashier Transactions';
+                Image = PostedOrder;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                RunObject = Page "Posted Cashier Transactions";
+            }
             action("Discount Cheque")
             {
                 ApplicationArea = Basic, Suite;
