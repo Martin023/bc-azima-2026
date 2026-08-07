@@ -26,14 +26,14 @@ Report 52185472 "Images Upload+"
                 PicFileName := StrSubstNo('%1%2.jpg', FilePath, "Pictures and Signtures"."Old Member No.");
                 // PicFileName := 'D:\000002.png';
                 // C:\ProgramData\Microsoft\Microsoft Dynamics NAV\280\Server\MicrosoftDynamicsNavServer$BC280\users\default\{choose from your list}\TEMP\Photos\
-                if FILE.Exists(PicFileName) then begin
-                    InputFile.Open(PicFileName);
-                    InputFile.CreateInstream(InStream1);
-                    "Pictures and Signtures".Picture.CreateOutstream(OutStream1);
-                    CopyStream(OutStream1, InStream1);
-                    "Pictures and Signtures".Modify;
-                    InputFile.Close;
-                end;
+                // if FILE.Exists(PicFileName) then begin
+                //     InputFile.Open(PicFileName);
+                //     InputFile.CreateInstream(InStream1);
+                //     "Pictures and Signtures".Picture.CreateOutstream(OutStream1);
+                //     CopyStream(OutStream1, InStream1);
+                //     "Pictures and Signtures".Modify;
+                //     InputFile.Close;
+                // end;
 
                 //Signature
                 if "Pictures and Signtures".Signature.Hasvalue then
@@ -41,14 +41,14 @@ Report 52185472 "Images Upload+"
 
                 PicFileName2 := StrSubstNo('%1%2.jpg', FilePath2, "Pictures and Signtures"."Old Member No.");
                 // C:\ProgramData\Microsoft\Microsoft Dynamics NAV\280\Server\MicrosoftDynamicsNavServer$BC280\users\default\{choose from your list}\TEMP\Signature\
-                if FILE.Exists(PicFileName2) then begin
-                    InputFile.Open(PicFileName2);
-                    InputFile.CreateInstream(InStream1);
-                    "Pictures and Signtures".Signature.CreateOutstream(OutStream1);
-                    CopyStream(OutStream1, InStream1);
-                    "Pictures and Signtures".Modify;
-                    InputFile.Close;
-                end;
+                // if FILE.Exists(PicFileName2) then begin
+                //     InputFile.Open(PicFileName2);
+                //     InputFile.CreateInstream(InStream1);
+                //     "Pictures and Signtures".Signature.CreateOutstream(OutStream1);
+                //     CopyStream(OutStream1, InStream1);
+                //     "Pictures and Signtures".Modify;
+                //     InputFile.Close;
+                // end;
 
             end;
 
