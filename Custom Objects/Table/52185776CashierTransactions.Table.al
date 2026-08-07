@@ -71,7 +71,7 @@ table 52185776 "Cashier Transactions"
                 Validate("Member No.");
             end;
         }
-        field(3; "Account Name"; Text[50])
+        field(3; "Account Name"; Text[100])
         {
         }
         field(4; "Transaction Type"; Code[20])
