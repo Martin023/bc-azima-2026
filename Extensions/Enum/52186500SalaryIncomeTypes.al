@@ -42,5 +42,9 @@ enum 52186500 "Salary Income Types"
     {
         Caption = 'Leave Allowance';
     }
+    value(10; "Other Income")
+    {
+        Caption = 'Other Income';
+    }
 
 }

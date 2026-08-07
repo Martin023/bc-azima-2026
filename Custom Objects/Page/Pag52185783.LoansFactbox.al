@@ -31,6 +31,15 @@ page 52185783 "Loans Factbox"
                 {
                     ToolTip = 'Specifies the value of the Loan Product Name field.', Comment = '%';
                 }
+                field("Outstanding Balance"; Rec."Outstanding Balance")
+                {
+                    ToolTip = 'Specifies the value of the Outstanding Balance field.', Comment = '%';
+                }
+                field("Outstanding Interest"; Rec."Outstanding Interest")
+                {
+                    ToolTip = 'Specifies the value of the Outstanding Interest field.', Comment = '%';
+                }
+
                 field(Repayment; Rec.Repayment)
                 {
                     ToolTip = 'Specifies the value of the Repayment field.', Comment = '%';
@@ -47,14 +56,6 @@ page 52185783 "Loans Factbox"
                 // {
                 //     ToolTip = 'Specifies the value of the Loan Interest Repayment field.', Comment = '%';
                 // }
-                field("Outstanding Balance"; Rec."Outstanding Balance")
-                {
-                    ToolTip = 'Specifies the value of the Outstanding Balance field.', Comment = '%';
-                }
-                field("Outstanding Interest"; Rec."Outstanding Interest")
-                {
-                    ToolTip = 'Specifies the value of the Outstanding Interest field.', Comment = '%';
-                }
 
                 field("Amount In Arreas SASRA"; Rec."Amount In Arreas SASRA")
                 {

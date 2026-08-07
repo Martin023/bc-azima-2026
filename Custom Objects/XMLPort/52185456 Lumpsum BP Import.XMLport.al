@@ -29,10 +29,10 @@ XmlPort 52185556 "Lumpsum BP"
                 {
                     FieldValidate = yes;
                 }
-                fieldelement(Remarks; "Checkoff Buffer"."Remarks")
-                {
-                    FieldValidate = yes;
-                }
+                // fieldelement(Remarks; "Checkoff Buffer"."Remarks")
+                // {
+                //     FieldValidate = yes;
+                // }
 
 
                 trigger OnAfterInitRecord()
@@ -52,7 +52,7 @@ XmlPort 52185556 "Lumpsum BP"
         {
             area(content)
             {
-                group("No|CheckoffNo|EmployerCode|payrollNo|Amount|Remarks")
+                group("No|CheckoffNo|EmployerCode|payrollNo|Amount")
                 {
                     field(HeaderTemplate; HeaderTemplate)
                     {
@@ -73,7 +73,7 @@ XmlPort 52185556 "Lumpsum BP"
 
     trigger OninitXmlPort()
     begin
-        HeaderTemplate := 'No|CheckoffNo|EmployerCode|Payroll No|Amount|Remarks';
+        HeaderTemplate := 'No|CheckoffNo|EmployerCode|Payroll No|Amount';
     end;
 
     trigger OnPostXmlPort()

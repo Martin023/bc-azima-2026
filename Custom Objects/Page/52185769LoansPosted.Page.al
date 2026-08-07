@@ -188,24 +188,28 @@ page 52185769 "Loans Posted"
                     Editable = false;
                     ApplicationArea = all;
                 }
-                field("Amount In Arreas SACCO"; Rec."Amount In Arreas SACCO")
-                {
-                    ApplicationArea = all;
-                    Editable = false;
-                }
+                // field("Amount In Arreas SACCO"; Rec."Amount In Arreas SACCO")
+                // {
+                //     ApplicationArea = all;
+                //     Editable = false;
+                //     StyleExpr = 'Unfavorable';
+                // }
                 field("Amount In Arreas SASRA"; Rec."Amount In Arreas SASRA")
                 {
                     ApplicationArea = all;
                     Editable = false;
+                    StyleExpr = 'Unfavorable';
                 }
                 field("Installments FallOff"; Rec."Installments FallOff")
                 {
                     Editable = false;
+                    StyleExpr = 'Unfavorable';
                 }
                 field("Loans Category-SASRA"; Rec."Loans Category-SASRA")
                 {
                     ApplicationArea = Basic, Suite;
                     Editable = false;
+                    StyleExpr = 'Unfavorable';
                 }
 
                 field("Expected Date of Completion"; Rec."Expected Date of Completion")
