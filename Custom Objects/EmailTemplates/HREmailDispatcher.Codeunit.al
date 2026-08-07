@@ -128,7 +128,6 @@ codeunit 52185459 "HR Email Dispatcher"
     )
     var
         EmailMsg: Codeunit "Email Message";
-        Email: Codeunit Email;
         ResolvedSubject: Text;
         ResolvedBody: Text;
         CCList: List of [Text];
@@ -163,15 +162,14 @@ codeunit 52185459 "HR Email Dispatcher"
             FailStatus := 1;
         end;
 
-        // TRAP EMAIL PLATFORM ERRORS — EMAIL FAILURE MUST NOT BLOCK APPROVAL OR OTHER TRANSACTIONS
-        SendOk := false;
-        ErrTxt := '';
-        if not Email.Send(EmailMsg, Enum::"Email Scenario"::Default) then begin
+        // EMAIL FAILURE MUST NOT BLOCK APPROVAL OR OTHER TRANSACTIONS
+        // TryFunction CATCHES BOTH false RETURNS AND THROWN RUNTIME ERRORS (E.G. NO ACCOUNT CONFIGURED)
+        SendOk := TrySendEmail(EmailMsg);
+        if not SendOk then begin
             ErrTxt := GetLastErrorText();
             if ErrTxt = '' then
-                ErrTxt := 'EMAIL SEND RETURNED FALSE. VERIFY BC EMAIL ACCOUNT IS CONFIGURED UNDER SETUP > EMAIL > EMAIL ACCOUNTS.';
-        end else
-            SendOk := true;
+                ErrTxt := 'EMAIL SEND FAILED. VERIFY BC EMAIL ACCOUNT IS CONFIGURED UNDER SETUP > EMAIL > EMAIL ACCOUNTS.';
+        end;
 
         if SendOk then
             LogEntry(EventCode, RecipientRole, RecipientEmail, SourceDocNo,
@@ -278,6 +276,15 @@ codeunit 52185459 "HR Email Dispatcher"
 
         RecRef.Close();
         exit('');
+    end;
+
+    [TryFunction]
+    local procedure TrySendEmail(var EmailMsg: Codeunit "Email Message")
+    var
+        Email: Codeunit Email;
+    begin
+        // INCLUDES GetEmailAccount THROWING WHEN NO ACCOUNT IS CONFIGURED
+        Email.Send(EmailMsg, Enum::"Email Scenario"::Default);
     end;
 
     local procedure LogEntry(
