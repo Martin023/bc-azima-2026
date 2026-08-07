@@ -39,8 +39,8 @@ table 52185857 "HR Email Notification Log"
         field(8; Status; Option)
         {
             Caption = 'Status';
-            OptionCaption = 'Sent,Failed';
-            OptionMembers = Sent,Failed;
+            OptionCaption = 'Sent,Failed,Retry Succeeded,Retry Failed,Resent';
+            OptionMembers = Sent,Failed,"Retry Succeeded","Retry Failed",Resent;
         }
         field(9; "Error Text"; Text[250])
         {
@@ -54,6 +54,32 @@ table 52185857 "HR Email Notification Log"
         {
             Caption = 'Sent By';
         }
+        field(12; "Token Values"; Text[2048])
+        {
+            Caption = 'Token Values';
+            // STORED AT SEND TIME — USED BY RETRY AND RESEND TO RE-RESOLVE THE BODY
+        }
+        field(13; "Retry Count"; Integer)
+        {
+            Caption = 'Retry Count';
+        }
+        field(14; "Last Retry DateTime"; DateTime)
+        {
+            Caption = 'Last Retry';
+        }
+        field(15; "Parent Entry No."; Integer)
+        {
+            Caption = 'Parent Entry No.';
+            // LINKS RETRY/RESEND ENTRIES BACK TO THE ORIGINATING ENTRY. 0 ON ORIGINALS.
+        }
+        field(16; "Is Retry"; Boolean)
+        {
+            Caption = 'Is Retry';
+        }
+        field(17; "Is Resend"; Boolean)
+        {
+            Caption = 'Is Resend';
+        }
     }
 
     keys
@@ -66,6 +92,9 @@ table 52185857 "HR Email Notification Log"
         {
         }
         key(Key3; "Source Document No.", "Sent Date")
+        {
+        }
+        key(Key4; "Parent Entry No.")
         {
         }
     }
