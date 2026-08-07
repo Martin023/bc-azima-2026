@@ -1851,6 +1851,34 @@ table 52185700 Members
         field(1058; "Deposit Contribution Met"; Boolean)
         {
             Caption = 'Deposit Contribution Met';
+            // Editable = false;
+
+            trigger Onvalidate()
+            var
+                ChangePermission: Record "Status Change Permissions.";
+                ErrorOnRestricViewTxt: Label 'You do not have Permissions to Edit Dividend Advance limit. Kindly contact system administrator for assistance.';
+            begin
+                ChangePermission.Reset;
+                ChangePermission.SetRange("User ID", UserId);
+                ChangePermission.SetRange("Edit Div Advance", true);
+                if not ChangePermission.Find('-') then
+                    Error(ErrorOnRestricViewTxt, UserId);
+
+                // if "Div Advance %" <> 0 then begin
+                "Deposit Contribution Met ModBy" := UserID;
+                "Deposit Contribution Mod At" := CURRENTDATETIME;
+                rec.Modify;
+                // end
+            end;
+        }
+        field(1059; "Deposit Contribution Met ModBy"; Code[100])
+        {
+            Caption = 'Deposit Contribution Met Modified By';
+            Editable = false;
+        }
+        field(1060; "Deposit Contribution Mod At"; DateTime)
+        {
+            Caption = 'Dividend Advance % Modified At';
             Editable = false;
         }
     }
