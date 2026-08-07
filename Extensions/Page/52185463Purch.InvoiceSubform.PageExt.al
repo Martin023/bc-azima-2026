@@ -54,6 +54,10 @@ PageExtension 52185463 pageextension52185463 extends "Purch. Invoice Subform"
             Visible = false;
         }
 
+        modify("Direct Unit Cost")
+        {
+            Caption = 'Unit Cost Incl. VAT';
+        }
     }
 }
 
