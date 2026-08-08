@@ -2485,7 +2485,7 @@ Codeunit 52185506 "Global Functions"
                 else begin
                     if TransactionCharges."Recover Excise Duty" = false then
                         ChargeAmount := TransactionCharges."Charge Amount" else begin
-                        ChargeAmount := (TransactionCharges."Charge Amount") + (TransactionCharges."Charge Amount" * (GeneralSetUp."Excise Duty (%)" * 0.01));
+                        ChargeAmount := (TransactionCharges."Charge Amount");
                         ExciseDuty := (TransactionCharges."Charge Amount" * (GeneralSetUp."Excise Duty (%)" * 0.01));
 
                     end;
