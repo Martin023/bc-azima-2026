@@ -1532,7 +1532,7 @@ table 52185878 "Payment Line"
             end;
 
             if "VAT Withholding Rate" <> 0 then begin
-                "VAT Withholding Amount" := Round(TaxCalc.CalculateTax(Rec, CalculationType::"W/VAT"), 0.01, '>');
+                "VAT Withholding Amount" := Round(TaxCalc.CalculateTax(Rec, CalculationType::"W/VAT"), 1, '>');
                 TotalTax := Round(TotalTax + "VAT Withholding Amount", 1, '>');
             end;
 
