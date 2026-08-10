@@ -69,12 +69,32 @@ xmlport 52185557 "Inter Account"
 
         layout
         {
-        }
-
-        actions
-        {
+            area(content)
+            {
+                group("Excel Layout")
+                {
+                    field(ExcelLayout; ExcelLayout)
+                    {
+                    }
+                }
+            }
         }
     }
+
+    var
+        SalaryHeaderNo: Code[50];
+        ExcelLayout: Text;
+
+    // trigger OninitXmlPort()
+    // begin
+    //     ExcelLayout := 'AccountNo|EmployerCode|StaffNo|MemberNo|Amount|DocumentNo';
+    // end;
+
+    trigger OninitXmlPort()
+    begin
+        ExcelLayout := 'HeaderNo|SourceAccount|SourceLoanNo|SourceLoanTransactionType|SourceDescription|DestinationAccount|LoanNo|Amount|DestinationDescription';
+    end;
+
     trigger OnPostXmlPort()
     begin
         Message(Text01);
@@ -101,6 +121,8 @@ xmlport 52185557 "Inter Account"
 
 
     end;
+
+
 
     var
         // [RunOnClient]

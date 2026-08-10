@@ -416,23 +416,19 @@ page 52185726 "Member Single"
                     Caption = 'Company No.';
                     ShowMandatory = true;
                 }
-                field("Allow Retiree M-Loans"; Rec."Allow Retiree M-Loans")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Allow retiree access to mobile loans?';
-                }
-                field("Deposit Contribution Met"; Rec."Deposit Contribution Met")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Deposit Contribution Met';
-                    ToolTip = 'Member satisfied the 3-consecutive-month deposit activity requirement.';
-                }
-                field("Block Div Advance"; Rec."Block Div Advance")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = true;
-                    Caption = 'Block Mobile Loan';
-                }
+                // field("Allow Retiree M-Loans"; Rec."Allow Retiree M-Loans")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Allow retiree access to mobile loans?';
+                // }
+                // field("Deposit Contribution Met"; Rec."Deposit Contribution Met")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Deposit Contribution Met';
+                //     ToolTip = 'Member satisfied the 3-consecutive-month deposit activity requirement.';
+                //     Editable = true;
+                // }
+
                 // field("TSC Number"; Rec."TSC Number")
                 // {
                 //     ApplicationArea = Basic, Suite;
@@ -487,25 +483,49 @@ page 52185726 "Member Single"
                     ApplicationArea = Basic, Suite;
                 }
             }
-            group("Bank Details")
+            group("Aizma Biashara")
             {
-                Editable = false;
-                field("Bank Code"; Rec."Bank Code")
+                field("Deposit Contribution Met"; Rec."Deposit Contribution Met")
                 {
                     ApplicationArea = Basic, Suite;
+                    Caption = 'Deposit Contribution Met';
+                    ToolTip = 'Member satisfied the 3-consecutive-month deposit activity requirement.';
+                    Editable = true;
                 }
-                field("Branch Code"; Rec."Branch Code")
+                field("Deposit Contribution Met ModBy"; Rec."Deposit Contribution Met ModBy")
                 {
                     ApplicationArea = Basic, Suite;
+                    Caption = 'Deposit Contribution Met Modified By';
+                    Editable = false;
                 }
-                field("Bank Account No."; Rec."Bank Account No.")
+                field("Deposit Contribution Mod At"; Rec."Deposit Contribution Mod At")
                 {
                     ApplicationArea = Basic, Suite;
+                    Caption = 'Deposit Contribution Met Modified At';
+                    Editable = false;
                 }
+                // field("Bank Code"; Rec."Bank Code")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("Branch Code"; Rec."Branch Code")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("Bank Account No."; Rec."Bank Account No.")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
             }
             group("Dividend Advance")
             {
                 Editable = true;
+                field("Block Div Advance"; Rec."Block Div Advance")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Editable = true;
+                    Caption = 'Block Dividend Advance Loan';
+                }
                 field("Div Advance %"; Rec."Div Advance %")
                 {
                 }

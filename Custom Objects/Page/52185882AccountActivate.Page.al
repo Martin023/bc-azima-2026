@@ -503,13 +503,8 @@ page 52186882 "Account Activation"
                 TransactionCharges.Reset;
                 TransactionCharges.SetRange("Transaction Type", TransactionTypes.Code);
                 if TransactionCharges.Find('-') then begin
-                    TransactionCharges.TestField("G/L Account");
-                    // SavAcc.TestField(Status, SavAcc.Status::Dormant);
-                    SavAcc.CalcFields("Balance (LCY)");
-                    SavBal := SavAcc."Balance (LCY)";
-                    if TransactionCharges."Recover Excise Duty" then
-                        Excise := TransactionCharges."Charge Amount" * GenSetup."Excise Duty (%)" * 0.01;
-                    if SavBal >= (TransactionCharges."Charge Amount" + Excise) then begin
+                    repeat
+                        TransactionCharges.TestField("G/L Account");
                         PDate := Today;
                         DocNo := rec.No;
                         DActivity2 := rec."Global Dimension 1 Code";
@@ -566,9 +561,74 @@ page 52186882 "Account Activation"
 
                         end;
 
-                    end
-                    else
-                        Error('There is no enough balance to charge activation fee.');
+                    // end
+                    until TransactionCharges.Next() = 0;
+
+                    // SavAcc.TestField(Status, SavAcc.Status::Dormant);
+                    // SavAcc.CalcFields("Balance (LCY)");
+                    // SavBal := SavAcc."Balance (LCY)";
+                    // if TransactionCharges."Recover Excise Duty" then
+                    //     Excise := TransactionCharges."Charge Amount" * GenSetup."Excise Duty (%)" * 0.01;
+                    // if SavBal >= (TransactionCharges."Charge Amount" + Excise) then begin
+                    //     PDate := Today;
+                    //     DocNo := rec.No;
+                    //     DActivity2 := rec."Global Dimension 1 Code";
+                    //     DBranch2 := rec."Global Dimension 2 Code";
+
+                    //     LineNo := LineNo + 10000;
+                    //     AccType := Acctype::"G/L Account";
+                    //     AccNo := TransactionCharges."G/L Account";
+                    //     TransType := Transtype::" ";
+                    //     BalAccType := Balacctype::"G/L Account";
+                    //     BalAccNo := '';
+                    //     Amt := TransactionCharges."Charge Amount";
+                    //     Amt := Amt * -1;
+                    //     JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, TransactionCharges.Description + SavAcc."No.", Amt, AccNo, PDate, BalAccType,
+                    //   BalAccNo, '', DActivity2, DBranch2, TransType, Rec.No, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+                    //     LineNo := LineNo + 10000;
+                    //     AccType := Acctype::Savings;
+                    //     AccNo := SavAcc."No.";
+                    //     TransType := Transtype::" ";
+                    //     BalAccType := Balacctype::"G/L Account";
+                    //     BalAccNo := '';
+                    //     Amt := TransactionCharges."Charge Amount";
+
+                    //     JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, TransactionCharges.Description + SavAcc."No.", Amt, AccNo, PDate, BalAccType,
+                    //   BalAccNo, '', DActivity2, DBranch2, TransType, Rec.No, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+                    //     if TransactionCharges."Recover Excise Duty" = true then begin
+                    //         GenSetup.TestField("Excise Duty G/L");
+                    //         GenSetup.TestField("Excise Duty (%)");
+                    //         LineNo := LineNo + 10000;
+                    //         AccType := Acctype::"G/L Account";
+                    //         Amt := TransactionCharges."Charge Amount";
+                    //         AccNo := GenSetup."Excise Duty G/L";
+                    //         TransType := Transtype::" ";
+                    //         BalAccType := Balacctype::"G/L Account";
+                    //         BalAccNo := '';
+                    //         Amt := Amt * GenSetup."Excise Duty (%)" * 0.01;
+                    //         JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, CopyStr((TransactionCharges.Description + SavAcc."No." + '-Excise Duty'), 1, 50), Amt * -1, AccNo, PDate, BalAccType,
+                    //         BalAccNo, '', DActivity2, DBranch2, TransType, Rec.No, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+                    //         LineNo := LineNo + 10000;
+                    //         GenSetup.TestField("Excise Duty G/L");
+                    //         GenSetup.TestField("Excise Duty (%)");
+                    //         Amt := TransactionCharges."Charge Amount";
+                    //         AccType := Acctype::Savings;
+                    //         AccNo := SavAcc."No.";
+                    //         TransType := Transtype::" ";
+                    //         BalAccType := Balacctype::Savings;
+                    //         BalAccNo := '';
+                    //         Amt := Amt * GenSetup."Excise Duty (%)" * 0.01;
+                    //         JournalPosting.PostJournal(Jtemplate, Jbatch, LineNo, AccType, DocNo, CopyStr((TransactionCharges.Description + SavAcc."No." + '-Excise Duty'), 1, 50), Amt, AccNo, PDate, BalAccType,
+                    //         BalAccNo, '', DActivity2, DBranch2, TransType, Rec.No, '', '', "Gen. Journal Account Type"::"G/L Account", '', "Gen. Journal Account Type"::"G/L Account");
+
+                    //     end;
+
+                    // end
+                    // else
+                    //     Error('There is no enough balance to charge activation fee.');
                     JournalPosting.CompletePosting(Jtemplate, JBatch);
                     // if SavAcc.Blocked <> SavAcc.Blocked::" " then begin
                     //     SavAcc.Blocked := SavAcc.Blocked::" ";
