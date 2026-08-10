@@ -8,6 +8,7 @@ Report 52185496 "Counter Summary Report"
     {
         dataitem(Treasury_transaction; "Cashier Transactions")
         {
+            PrintOnlyIfDetail = true;
             RequestFilterFields = "Transaction Date";
 
             column(CompanyInfo_Name; CompanyInfo.Name) { }
@@ -27,7 +28,7 @@ Report 52185496 "Counter Summary Report"
             {
                 DataItemTableView = sorting(Number) where(Number = filter(1 .. 2));
 
-                column(RowNo; RowNo) { }
+                // column(RowNo; RowNo) { } //- numbering is now handled in RDLC
                 column(GroupDetails; GroupDetails) { }
                 column(TransType; TransType) { }
                 column(UserName; Treasury_transaction.Cashier) { }
@@ -51,12 +52,12 @@ Report 52185496 "Counter Summary Report"
                         TrxDate := Format(Treasury_transaction."Transaction Date", 0, '<Day,2>/<Month,2>/<Year4>');
                         TrxTime := Format(Treasury_transaction."Transaction Time", 0, '<Hours24,2>:<Minutes,2>:<Seconds,2>');
                         LineAmount := Treasury_transaction.Amount;
-
+                        
                         LineDebitAmt := 0;
                         LineCreditAmt := 0;
-
+                        
                         //if Treasury_transaction.Type in[Treasury_transaction.Type::"Cash Withdrawal", Treasury_transaction.Type::"MPESA Withdrawal", Treasury_transaction.Type::"Cheque Withdrawal", Treasury_transaction.Type::"Bankers Cheque"] then
-                        if Treasury_transaction.Type in [Treasury_transaction.Type::"Cash Withdrawal"] then
+                        if Treasury_transaction.Type in[Treasury_transaction.Type::"Cash Withdrawal"] then
                             LineDebitAmt := Treasury_transaction.Amount
                         else
                             LineCreditAmt := Treasury_transaction.Amount;
@@ -73,7 +74,7 @@ Report 52185496 "Counter Summary Report"
                         TransType := 'Charge';
                         TrxDate := Format(Treasury_transaction."Transaction Date", 0, '<Day,2>/<Month,2>/<Year4>');
                         TrxTime := Format(Treasury_transaction."Transaction Time", 0, '<Hours24,2>:<Minutes,2>:<Seconds,2>');
-
+                        
                         LineAmount := Treasury_transaction."Charge Amount";
                         LineDebitAmt := 0;
                         LineCreditAmt := Treasury_transaction."Charge Amount";
@@ -83,7 +84,8 @@ Report 52185496 "Counter Summary Report"
                             CurrReport.Skip();
                     end;
 
-                    RowNo += 1;
+                    // Increment row number only after verifying the record is valid to print
+                    // RowNo += 1; // numbering is now handled in RDLC
                 end;
             }
 
@@ -119,7 +121,7 @@ Report 52185496 "Counter Summary Report"
                 group(Filters)
                 {
                     Caption = 'Custom Filters';
-
+                    
                     field(CashierCode; CashierCode)
                     {
                         ApplicationArea = Basic, Suite;
@@ -150,7 +152,7 @@ Report 52185496 "Counter Summary Report"
         CompanyInfo: Record "Company Information";
         CompanyAddress: Text;
         DateFilterTxt: Text;
-
+        
         CompanyName: Text;
         BuldingName: Text;
         CompanyTelephone: Text;
@@ -168,5 +170,5 @@ Report 52185496 "Counter Summary Report"
         LineCreditAmt: Decimal;
         CashierCode: Code[50];
         GroupFilter: Text;
-        RowNo: Integer;
+        // RowNo: Integer; // numbering is now handled in RDLC
 }

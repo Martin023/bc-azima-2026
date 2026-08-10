@@ -3185,6 +3185,20 @@ page 52186778 "Finance Role Center"
                             Caption = 'Cheque Clearance';
                             RunObject = page "Cheque Clearance";
                         }
+                        action("Cleared Cheques")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Cleared Cheques';
+                            RunObject = page "Cheque Clearance";
+                            RunPageView = where("Cheque Status" = filter(Cleared));
+                        }
+                        action("Cancelled Cheques")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Cancelled Cheques';
+                            RunObject = page "Cheque Clearance";
+                            RunPageView = where("Cheque Status" = filter(Stopped | Bounced));
+                        }
                         // action("Cheque Book Application")
                         // {
                         //     ApplicationArea = Basic, Suite;
@@ -6569,6 +6583,14 @@ page 52186778 "Finance Role Center"
                         RunObject = Report "Dimensions - Total";
                         ToolTip = 'View how dimensions or dimension sets are used on entries based on total amounts over a specified period and for a specified analysis view.';
                     }
+                }
+                action ("Control Summary Report")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Control Summary Report';
+                    Image = "Report";
+                    RunObject = Report "Control Summary Report";
+
                 }
             }
             group(EmployeeSelfService)
