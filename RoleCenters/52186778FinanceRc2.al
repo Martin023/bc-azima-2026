@@ -3185,6 +3185,20 @@ page 52186778 "Finance Role Center"
                             Caption = 'Cheque Clearance';
                             RunObject = page "Cheque Clearance";
                         }
+                        action("Cleared Cheques")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Cleared Cheques';
+                            RunObject = page "Cheque Clearance";
+                            RunPageView = where("Cheque Status" = filter(Cleared));
+                        }
+                        action("Cancelled Cheques")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Cancelled Cheques';
+                            RunObject = page "Cheque Clearance";
+                            RunPageView = where("Cheque Status" = filter(Stopped | Bounced));
+                        }
                         // action("Cheque Book Application")
                         // {
                         //     ApplicationArea = Basic, Suite;

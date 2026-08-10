@@ -107,6 +107,7 @@ Report 52185548 "Control Summary Report"
         TempControlBuffer.Reset();
         TempControlBuffer.DeleteAll();
 
+        // These run incredibly fast now because they only scan transactions within the Date Filter
         ProcessGLAccounts();
         ProcessSavingsAccounts();
         ProcessLoanAccounts();
@@ -117,40 +118,43 @@ Report 52185548 "Control Summary Report"
     var
         GLAcc: Record "G/L Account";
         GLEntry: Record "G/L Entry";
+        GLOpenEntry: Record "G/L Entry";
     begin
-        if GLAcc.FindSet() then begin
+        GLEntry.Reset();
+        GLEntry.SetRange("Posting Date", StartDate, EndDate);
+        if GLEntry.FindSet() then begin
             repeat
-                GLEntry.Reset();
-                GLEntry.SetRange("G/L Account No.", GLAcc."No.");
-                GLEntry.SetRange("Posting Date", StartDate, EndDate);
-                
-                if (GLEntry.Count > 0) or AccountHasOpening(0, GLAcc."No.") then begin
+                if not TempControlBuffer.Get(TempControlBuffer."Account Type"::"G/L Account", GLEntry."G/L Account No.") then begin
                     TempControlBuffer.Init();
                     TempControlBuffer."Account Type" := TempControlBuffer."Account Type"::"G/L Account";
-                    TempControlBuffer."Account No." := GLAcc."No.";
-                    TempControlBuffer."Account Name" := GLAcc.Name;
-                    TempControlBuffer."Short Code" := GLAcc."Search Name";
+                    TempControlBuffer."Account No." := GLEntry."G/L Account No.";
                     
-                    // Opening
-                    GLEntry.Reset();
-                    GLEntry.SetRange("G/L Account No.", GLAcc."No.");
-                    GLEntry.SetFilter("Posting Date", '<%1', StartDate);
-                    GLEntry.CalcSums(Amount);
-                    TempControlBuffer."Opening Balance" := GLEntry.Amount;
-
-                    // Period
-                    GLEntry.SetRange("Posting Date", StartDate, EndDate);
-                    GLEntry.CalcSums("Debit Amount", "Credit Amount");
-                    TempControlBuffer."Debit Amt" := GLEntry."Debit Amount";
-                    TempControlBuffer."Credit Amt" := GLEntry."Credit Amount";
-                    TempControlBuffer.Records := GLEntry.Count();
-
-                    TempControlBuffer."Closing Balance" := TempControlBuffer."Opening Balance" + TempControlBuffer."Debit Amt" - TempControlBuffer."Credit Amt";
+                    if GLAcc.Get(GLEntry."G/L Account No.") then begin
+                        TempControlBuffer."Account Name" := GLAcc.Name;
+                        TempControlBuffer."Short Code" := GLAcc."Search Name";
+                    end;
                     
-                    if (TempControlBuffer."Opening Balance" <> 0) or (TempControlBuffer.Records > 0) then
-                        TempControlBuffer.Insert();
+                    // Fetch opening balance ONLY for this active account
+                    GLOpenEntry.Reset();
+                    GLOpenEntry.SetRange("G/L Account No.", GLEntry."G/L Account No.");
+                    GLOpenEntry.SetFilter("Posting Date", '<%1', StartDate);
+                    GLOpenEntry.CalcSums(Amount);
+                    TempControlBuffer."Opening Balance" := GLOpenEntry.Amount;
+
+                    TempControlBuffer.Records := 0;
+                    TempControlBuffer."Debit Amt" := 0;
+                    TempControlBuffer."Credit Amt" := 0;
+                    TempControlBuffer.Insert();
                 end;
-            until GLAcc.Next() = 0;
+
+                // Update totals dynamically
+                TempControlBuffer.Records += 1;
+                TempControlBuffer."Debit Amt" += GLEntry."Debit Amount";
+                TempControlBuffer."Credit Amt" += GLEntry."Credit Amount";
+                TempControlBuffer."Closing Balance" := TempControlBuffer."Opening Balance" + TempControlBuffer."Debit Amt" - TempControlBuffer."Credit Amt";
+                TempControlBuffer.Modify();
+                
+            until GLEntry.Next() = 0;
         end;
     end;
 
@@ -159,40 +163,39 @@ Report 52185548 "Control Summary Report"
         SavAcc: Record "Savings Accounts";
         SavEntry: Record "Savings Ledger Entry";
     begin
-        if SavAcc.FindSet() then begin
+        SavEntry.Reset();
+        SavEntry.SetRange("Posting Date", StartDate, EndDate);
+        if SavEntry.FindSet() then begin
             repeat
-                SavEntry.Reset();
-                SavEntry.SetRange("Customer No.", SavAcc."No.");
-                SavEntry.SetRange("Posting Date", StartDate, EndDate);
-                
-                if (SavEntry.Count > 0) or AccountHasOpening(1, SavAcc."No.") then begin
+                if not TempControlBuffer.Get(TempControlBuffer."Account Type"::Savings, SavEntry."Customer No.") then begin
                     TempControlBuffer.Init();
                     TempControlBuffer."Account Type" := TempControlBuffer."Account Type"::Savings;
-                    TempControlBuffer."Account No." := SavAcc."No.";
-                    TempControlBuffer."Account Name" := SavAcc.Name;
-                    TempControlBuffer."Short Code" := SavAcc."Product Type"; // Mapping Acc column
+                    TempControlBuffer."Account No." := SavEntry."Customer No.";
                     
-                    // Opening
-                    SavEntry.Reset();
-                    SavEntry.SetRange("Customer No.", SavAcc."No.");
-                    SavEntry.SetFilter("Posting Date", '<%1', StartDate);
-                    SavEntry.CalcSums(Amount);
-                    TempControlBuffer."Opening Balance" := -SavEntry.Amount; // standard liability sign flip
-
-                    // Period
-                    SavEntry.SetRange("Posting Date", StartDate, EndDate);
-                    SavEntry.CalcSums("Debit Amount", "Credit Amount"); // LCY fields if preferred, assuming base is fine
-                    TempControlBuffer."Debit Amt" := SavEntry."Debit Amount";
-                    TempControlBuffer."Credit Amt" := SavEntry."Credit Amount";
-                    TempControlBuffer.Records := SavEntry.Count();
-
-                    // Savings: Closing = Opening - Debits(Withdrawals) + Credits(Deposits)
-                    TempControlBuffer."Closing Balance" := TempControlBuffer."Opening Balance" - TempControlBuffer."Debit Amt" + TempControlBuffer."Credit Amt";
+                    if SavAcc.Get(SavEntry."Customer No.") then begin
+                        TempControlBuffer."Account Name" := SavAcc.Name;
+                        TempControlBuffer."Short Code" := SavAcc."Product Type";
+                        
+                        // Utilize BC's fast FlowFields to get Opening Balance
+                        SavAcc.SetFilter("Date Filter", '<%1', StartDate);
+                        SavAcc.CalcFields(Balance);
+                        TempControlBuffer."Opening Balance" := SavAcc.Balance; 
+                    end;
                     
-                    if (TempControlBuffer."Opening Balance" <> 0) or (TempControlBuffer.Records > 0) then
-                        TempControlBuffer.Insert();
+                    TempControlBuffer.Records := 0;
+                    TempControlBuffer."Debit Amt" := 0;
+                    TempControlBuffer."Credit Amt" := 0;
+                    TempControlBuffer.Insert();
                 end;
-            until SavAcc.Next() = 0;
+
+                TempControlBuffer.Records += 1;
+                TempControlBuffer."Debit Amt" += SavEntry."Debit Amount";
+                TempControlBuffer."Credit Amt" += SavEntry."Credit Amount";
+                // Savings (Liability): Closing = Opening - Withdrawals(Debit) + Deposits(Credit)
+                TempControlBuffer."Closing Balance" := TempControlBuffer."Opening Balance" - TempControlBuffer."Debit Amt" + TempControlBuffer."Credit Amt";
+                TempControlBuffer.Modify();
+                
+            until SavEntry.Next() = 0;
         end;
     end;
 
@@ -200,40 +203,43 @@ Report 52185548 "Control Summary Report"
     var
         LoanAcc: Record Loans;
         CredEntry: Record "Credit Ledger Entry";
+        CredOpenEntry: Record "Credit Ledger Entry";
     begin
-        if LoanAcc.FindSet() then begin
+        CredEntry.Reset();
+        CredEntry.SetRange("Posting Date", StartDate, EndDate);
+        if CredEntry.FindSet() then begin
             repeat
-                CredEntry.Reset();
-                CredEntry.SetRange("Loan No", LoanAcc."Loan No.");
-                CredEntry.SetRange("Posting Date", StartDate, EndDate);
-                
-                if (CredEntry.Count > 0) or AccountHasOpening(2, LoanAcc."Loan No.") then begin
+                if not TempControlBuffer.Get(TempControlBuffer."Account Type"::Loan, CredEntry."Loan No") then begin
                     TempControlBuffer.Init();
                     TempControlBuffer."Account Type" := TempControlBuffer."Account Type"::Loan;
-                    TempControlBuffer."Account No." := LoanAcc."Loan No.";
-                    TempControlBuffer."Account Name" := LoanAcc."Member Name";
-                    TempControlBuffer."Short Code" := LoanAcc."Loan Product Type"; 
+                    TempControlBuffer."Account No." := CredEntry."Loan No";
                     
-                    // Opening
-                    CredEntry.Reset();
-                    CredEntry.SetRange("Loan No", LoanAcc."Loan No.");
-                    CredEntry.SetFilter("Posting Date", '<%1', StartDate);
-                    CredEntry.CalcSums(Amount);
-                    TempControlBuffer."Opening Balance" := CredEntry.Amount; 
-
-                    // Period
-                    CredEntry.SetRange("Posting Date", StartDate, EndDate);
-                    CredEntry.CalcSums("Debit Amount", "Credit Amount");
-                    TempControlBuffer."Debit Amt" := CredEntry."Debit Amount";
-                    TempControlBuffer."Credit Amt" := CredEntry."Credit Amount";
-                    TempControlBuffer.Records := CredEntry.Count();
-
-                    TempControlBuffer."Closing Balance" := TempControlBuffer."Opening Balance" + TempControlBuffer."Debit Amt" - TempControlBuffer."Credit Amt";
+                    if LoanAcc.Get(CredEntry."Loan No") then begin
+                        TempControlBuffer."Account Name" := LoanAcc."Member Name";
+                        TempControlBuffer."Short Code" := LoanAcc."Loan Product Type"; 
+                    end;
                     
-                    if (TempControlBuffer."Opening Balance" <> 0) or (TempControlBuffer.Records > 0) then
-                        TempControlBuffer.Insert();
+                    // Fetch opening balance ONLY for this active loan
+                    CredOpenEntry.Reset();
+                    CredOpenEntry.SetRange("Loan No", CredEntry."Loan No");
+                    CredOpenEntry.SetFilter("Posting Date", '<%1', StartDate);
+                    CredOpenEntry.CalcSums(Amount);
+                    TempControlBuffer."Opening Balance" := CredOpenEntry.Amount; 
+
+                    TempControlBuffer.Records := 0;
+                    TempControlBuffer."Debit Amt" := 0;
+                    TempControlBuffer."Credit Amt" := 0;
+                    TempControlBuffer.Insert();
                 end;
-            until LoanAcc.Next() = 0;
+
+                TempControlBuffer.Records += 1;
+                TempControlBuffer."Debit Amt" += CredEntry."Debit Amount";
+                TempControlBuffer."Credit Amt" += CredEntry."Credit Amount";
+                // Loan (Asset): Closing = Opening + Disbursements/Interest(Debit) - Repayments(Credit)
+                TempControlBuffer."Closing Balance" := TempControlBuffer."Opening Balance" + TempControlBuffer."Debit Amt" - TempControlBuffer."Credit Amt";
+                TempControlBuffer.Modify();
+                
+            until CredEntry.Next() = 0;
         end;
     end;
 
@@ -241,80 +247,42 @@ Report 52185548 "Control Summary Report"
     var
         BankAcc: Record "Bank Account";
         BankEntry: Record "Bank Account Ledger Entry";
+        BankOpenEntry: Record "Bank Account Ledger Entry";
     begin
-        if BankAcc.FindSet() then begin
+        BankEntry.Reset();
+        BankEntry.SetRange("Posting Date", StartDate, EndDate);
+        if BankEntry.FindSet() then begin
             repeat
-                BankEntry.Reset();
-                BankEntry.SetRange("Bank Account No.", BankAcc."No.");
-                BankEntry.SetRange("Posting Date", StartDate, EndDate);
-                
-                if (BankEntry.Count > 0) or AccountHasOpening(3, BankAcc."No.") then begin
+                if not TempControlBuffer.Get(TempControlBuffer."Account Type"::"Bank Account", BankEntry."Bank Account No.") then begin
                     TempControlBuffer.Init();
                     TempControlBuffer."Account Type" := TempControlBuffer."Account Type"::"Bank Account";
-                    TempControlBuffer."Account No." := BankAcc."No.";
-                    TempControlBuffer."Account Name" := BankAcc.Name;
-                    TempControlBuffer."Short Code" := BankAcc."Search Name";
+                    TempControlBuffer."Account No." := BankEntry."Bank Account No.";
                     
-                    // Opening
-                    BankEntry.Reset();
-                    BankEntry.SetRange("Bank Account No.", BankAcc."No.");
-                    BankEntry.SetFilter("Posting Date", '<%1', StartDate);
-                    BankEntry.CalcSums("Amount (LCY)");
-                    TempControlBuffer."Opening Balance" := BankEntry."Amount (LCY)";
-
-                    // Period
-                    BankEntry.SetRange("Posting Date", StartDate, EndDate);
-                    BankEntry.CalcSums("Debit Amount (LCY)", "Credit Amount (LCY)");
-                    TempControlBuffer."Debit Amt" := BankEntry."Debit Amount (LCY)";
-                    TempControlBuffer."Credit Amt" := BankEntry."Credit Amount (LCY)";
-                    TempControlBuffer.Records := BankEntry.Count();
-
-                    TempControlBuffer."Closing Balance" := TempControlBuffer."Opening Balance" + TempControlBuffer."Debit Amt" - TempControlBuffer."Credit Amt";
+                    if BankAcc.Get(BankEntry."Bank Account No.") then begin
+                        TempControlBuffer."Account Name" := BankAcc.Name;
+                        TempControlBuffer."Short Code" := BankAcc."Search Name";
+                    end;
                     
-                    if (TempControlBuffer."Opening Balance" <> 0) or (TempControlBuffer.Records > 0) then
-                        TempControlBuffer.Insert();
+                    BankOpenEntry.Reset();
+                    BankOpenEntry.SetRange("Bank Account No.", BankEntry."Bank Account No.");
+                    BankOpenEntry.SetFilter("Posting Date", '<%1', StartDate);
+                    BankOpenEntry.CalcSums("Amount (LCY)");
+                    TempControlBuffer."Opening Balance" := BankOpenEntry."Amount (LCY)";
+
+                    TempControlBuffer.Records := 0;
+                    TempControlBuffer."Debit Amt" := 0;
+                    TempControlBuffer."Credit Amt" := 0;
+                    TempControlBuffer.Insert();
                 end;
-            until BankAcc.Next() = 0;
-        end;
-    end;
 
-    local procedure AccountHasOpening(AccType: Integer; AccNo: Code[50]): Boolean
-    var
-        GLEntry: Record "G/L Entry";
-        SavEntry: Record "Savings Ledger Entry";
-        CredEntry: Record "Credit Ledger Entry";
-        BankEntry: Record "Bank Account Ledger Entry";
-    begin
-        case AccType of
-            0: 
-            begin
-                GLEntry.SetRange("G/L Account No.", AccNo);
-                GLEntry.SetFilter("Posting Date", '<%1', StartDate);
-                GLEntry.CalcSums(Amount);
-                exit(GLEntry.Amount <> 0);
-            end;
-            1:
-            begin
-                SavEntry.SetRange("Customer No.", AccNo);
-                SavEntry.SetFilter("Posting Date", '<%1', StartDate);
-                SavEntry.CalcSums(Amount);
-                exit(SavEntry.Amount <> 0);
-            end;
-            2:
-            begin
-                CredEntry.SetRange("Loan No", AccNo);
-                CredEntry.SetFilter("Posting Date", '<%1', StartDate);
-                CredEntry.CalcSums(Amount);
-                exit(CredEntry.Amount <> 0);
-            end;
-            3:
-            begin
-                BankEntry.SetRange("Bank Account No.", AccNo);
-                BankEntry.SetFilter("Posting Date", '<%1', StartDate);
-                BankEntry.CalcSums("Amount (LCY)");
-                exit(BankEntry."Amount (LCY)" <> 0);
-            end;
+                TempControlBuffer.Records += 1;
+                TempControlBuffer."Debit Amt" += BankEntry."Debit Amount (LCY)";
+                TempControlBuffer."Credit Amt" += BankEntry."Credit Amount (LCY)";
+                // Bank (Asset): Closing = Opening + Deposits(Debit) - Payments(Credit)
+                TempControlBuffer."Closing Balance" := TempControlBuffer."Opening Balance" + TempControlBuffer."Debit Amt" - TempControlBuffer."Credit Amt";
+                TempControlBuffer.Modify();
+                
+            until BankEntry.Next() = 0;
         end;
-        exit(false);
     end;
 }
