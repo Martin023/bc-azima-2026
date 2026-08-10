@@ -64,7 +64,7 @@ XmlPort 52185496 "Import Salaries"
             {
                 group("EmployerCode|StaffNo|AccountNo|Member No.|ID No.|Amount|DocumentNo")
                 {
-                    field(AccountNo; SalaryHeaderNo)
+                    field(ExcelLayout; ExcelLayout)
                     {
                     }
                 }
@@ -89,6 +89,11 @@ XmlPort 52185496 "Import Salaries"
     procedure SetHeaderNo(HeaderNo: Code[50])
     begin
         SalaryHeaderNo := HeaderNo;
+    end;
+
+    trigger OninitXmlPort()
+    begin
+        ExcelLayout := 'AccountNo|EmployerCode|StaffNo|MemberNo|IDno|Amount|DocumentNo';
     end;
 
 
