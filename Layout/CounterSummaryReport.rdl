@@ -377,7 +377,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!RowNo.Value</Value>
+                                  <Value>=RowNumber(Nothing)</Value>
                                   <Style>
                                     <FontFamily>Calibri</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1369,9 +1369,6 @@ End Function
         </Field>
         <Field Name="PrintDateTime">
           <DataField>PrintDateTime</DataField>
-        </Field>
-        <Field Name="RowNo">
-          <DataField>RowNo</DataField>
         </Field>
         <Field Name="GroupDetails">
           <DataField>GroupDetails</DataField>

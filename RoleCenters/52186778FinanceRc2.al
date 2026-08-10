@@ -6570,6 +6570,14 @@ page 52186778 "Finance Role Center"
                         ToolTip = 'View how dimensions or dimension sets are used on entries based on total amounts over a specified period and for a specified analysis view.';
                     }
                 }
+                action ("Control Summary Report")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Control Summary Report';
+                    Image = "Report";
+                    RunObject = Report "Control Summary Report";
+
+                }
             }
             group(EmployeeSelfService)
             {
