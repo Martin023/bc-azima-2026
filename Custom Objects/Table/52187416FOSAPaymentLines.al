@@ -436,6 +436,8 @@ table 52187416 "FOSA Payment Line"
                     "PAYE Rate" := TariffCode.Percentage
                 else
                     "PAYE Rate" := 0;
+
+                CalculateTax();
             end;
         }
         field(33; "Bank Account No"; Code[20])
@@ -1157,6 +1159,8 @@ table 52187416 "FOSA Payment Line"
                     "Housing Levy Rate" := TariffCode.Percentage
                 else
                     "Housing Levy Rate" := 0;
+
+                CalculateTax();
             end;
 
 
@@ -1328,7 +1332,7 @@ table 52187416 "FOSA Payment Line"
 
     procedure CalculateTax()
     var
-        CalculationType: Option VAT,"W/Tax",Retention,"W/VAT",PAYE,"Housing Levy";
+        CalculationType: Option VAT,"W/Tax",Retention,"W/VAT","Housing Levy",PAYE;
         TaxCalc: Codeunit "Tax Calculation";
         TotalTax: Decimal;
     begin

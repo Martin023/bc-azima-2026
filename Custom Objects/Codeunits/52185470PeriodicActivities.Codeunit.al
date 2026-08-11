@@ -498,7 +498,7 @@ Codeunit 52185470 "Periodic Activities"
                             GenJournalLine.Validate(GenJournalLine."VAT Bus. Posting Group");
                             GenJournalLine."VAT Prod. Posting Group" := '';
                             GenJournalLine.Validate(GenJournalLine."VAT Prod. Posting Group");
-                            GenJournalLine.Amount := FPVLines."Withholding Tax Amount";
+                            GenJournalLine.Amount := FPVLines.PAYE;
                             GenJournalLine.Validate(GenJournalLine.Amount);
                             GenJournalLine."Bal. Account Type" := TarriffCodes."Account Type";
                             GenJournalLine."Bal. Account No." := TarriffCodes."Account No.";
@@ -552,7 +552,7 @@ Codeunit 52185470 "Periodic Activities"
                             GenJournalLine.Validate(GenJournalLine."VAT Bus. Posting Group");
                             GenJournalLine."VAT Prod. Posting Group" := '';
                             GenJournalLine.Validate(GenJournalLine."VAT Prod. Posting Group");
-                            GenJournalLine.Amount := FPVLines."Withholding Tax Amount";
+                            GenJournalLine.Amount := FPVLines."Housing Levy";
                             GenJournalLine.Validate(GenJournalLine.Amount);
                             GenJournalLine."Bal. Account Type" := TarriffCodes."Account Type";
                             GenJournalLine."Bal. Account No." := TarriffCodes."Account No.";
