@@ -4,6 +4,7 @@ namespace Microsoft.Finance.RoleCenters;
 
 using Microsoft.Bank.BankAccount;
 using Microsoft.Bank.Deposit;
+using BCAZIMA.BCAZIMA;
 using Microsoft.Bank.DirectDebit;
 using Microsoft.Bank.Reconciliation;
 using Microsoft.Bank.Reports;
@@ -3999,12 +4000,12 @@ page 52186778 "Finance Role Center"
                         Caption = 'Transaction Limits';
                         RunObject = Page "E-Channels Transaction Setup";
                     }
-                    // action("Gaming Paybills Setup")
-                    // {
-                    //     ApplicationArea = Basic;
-                    //     Caption = 'Gaming Paybills Setup';
-                    //     RunObject = Page "Gaming Paybills Setup";
-                    // }
+                    action("Gaming Paybills Setup")
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'Gaming Paybills Setup';
+                        RunObject = Page "Gaming Paybills Setup";
+                    }
                 }
             }
 
