@@ -15,21 +15,28 @@ table 52185692 "Next of KIN Application"
 
             trigger OnValidate()
             var
-                PasswordHandler: Codeunit "Password Handler";
+                NextOfKinAppCheck: Record "Next of KIN Application";
                 MyUniqueID: Text;
-                secretText: SecretText;
+                IsUnique: Boolean;
             begin
                 if xRec."Identification Type" <> "Identification Type"::" " then begin
                     if "Identification Type" = "Identification Type"::"System UID" then begin
                         if "System UID" = '' then begin
 
-                            secretText := PasswordHandler.GenerateSecretPassword(10);
-                            MyUniqueID := UnwrapSecretPassword(secretText);
-                            "System UID" := MyUniqueID;
+                            IsUnique := false;
+                            repeat
+                                MyUniqueID := GenerateSystemUID(10);
+                                NextOfKinAppCheck.Reset();
+                                NextOfKinAppCheck.SetRange("System UID", CopyStr(MyUniqueID, 1, MaxStrLen("System UID")));
+                                if NextOfKinAppCheck.IsEmpty() then
+                                    IsUnique := true;
+                            until IsUnique;
+
+                            "System UID" := CopyStr(MyUniqueID, 1, MaxStrLen("System UID"));
                         end else
                             MyUniqueID := "System UID";
 
-                        Identification := MyUniqueID;
+                        Identification := CopyStr(MyUniqueID, 1, MaxStrLen(Identification));
                     end else
                         Identification := '';
 
@@ -340,10 +347,17 @@ table 52185692 "Next of KIN Application"
         end;
     end;
 
-    [NonDebuggable]
-    local procedure UnwrapSecretPassword(SecretPassword: SecretText): Text
+    local procedure GenerateSystemUID(Length: Integer): Text
+    var
+        AllowedChars: Text;
+        ResultUID: Text;
+        i: Integer;
     begin
-        exit(SecretPassword.Unwrap());
+        AllowedChars := 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        for i := 1 to Length do
+            ResultUID += CopyStr(AllowedChars, Random(StrLen(AllowedChars)), 1);
+
+        exit(ResultUID);
     end;
 }
 
