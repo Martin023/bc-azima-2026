@@ -133,6 +133,8 @@ page 52186882 "Account Activation"
                         SavAcc: record "Savings Accounts";
                         GlobalFunc: codeunit "Global Functions";
                     begin
+                        rec.TestField(Status, Rec.Status::Open);
+                        rec.Testfield(Activated, false);
                         Rec.TestField("Activation Date");
                         Rec.TestField("Account No");
                         Rec.TestField("Member No");
