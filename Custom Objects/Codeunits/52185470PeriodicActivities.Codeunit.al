@@ -270,8 +270,6 @@ Codeunit 52185470 "Periodic Activities"
 
 
 
-
-
                     InvestInterestLine.Posted := true;
                     InvestInterestLine.Modify();
                     Commit();
