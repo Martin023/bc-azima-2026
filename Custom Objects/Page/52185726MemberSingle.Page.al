@@ -483,6 +483,13 @@ page 52185726 "Member Single"
                     ApplicationArea = Basic, Suite;
                 }
             }
+            group("Default Account")
+            {
+                field("Default Product"; Rec."Default Product")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+            }
             group("Aizma Biashara")
             {
                 field("Deposit Contribution Met"; Rec."Deposit Contribution Met")
@@ -520,6 +527,7 @@ page 52185726 "Member Single"
             group("Dividend Advance")
             {
                 Editable = true;
+                Caption = 'Mazao Loan';
                 field("Block Div Advance"; Rec."Block Div Advance")
                 {
                     ApplicationArea = Basic, Suite;

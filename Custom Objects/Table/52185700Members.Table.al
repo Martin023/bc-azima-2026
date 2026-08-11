@@ -1364,8 +1364,27 @@ table 52185700 Members
         {
             Editable = false;
         }
-        field(85; "ID Card"; Text[10])
+        field(85; "Default Product"; Text[10])
         {
+            Tablerelation = "Product Factory"."Product ID" where("Loan Disbursement Account" = filter(true));
+            trigger OnValidate()
+            begin
+                //Unmark the default
+                SavingAccounts.Reset;
+                SavingAccounts.setrange("Member No.", "No.");
+                SavingAccounts.setrange("Loan Disbursement Account", true);
+                SavingAccounts.modifyAll("Loan Disbursement Account", false);
+                //mark the new record
+                SavingAccounts.Reset;
+                SavingAccounts.setrange("Member No.", "No.");
+                SavingAccounts.setrange("Product Type", rec."Default Product");
+                if SavingAccounts.findfirst then begin
+                    SavingAccounts."Loan Disbursement Account" := true;
+                    SavingAccounts.Modify;
+                end
+                else
+                    Error('Member does not have a saving account for the selected default product');
+            end;
         }
         field(86; "ID Card Back"; Text[10])
         {

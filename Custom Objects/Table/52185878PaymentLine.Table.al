@@ -1541,7 +1541,8 @@ table 52185878 "Payment Line"
         if "VAT Deductible" = true then
             "Net Amount" := Round(Amount - TotalTax, 0.01, '>')
         else
-            "Net Amount" := Round(Amount - TotalTax + "VAT Amount", 0.01, '>');
+            //"Net Amount" := Round(Amount - TotalTax + "VAT Amount", 0.01, '>');
+            "Net Amount" := Round((Amount - ("VAT Withholding Amount" + "Retention  Amount" + "Withholding Tax Amount")));
 
         Validate("Net Amount");
     end;
