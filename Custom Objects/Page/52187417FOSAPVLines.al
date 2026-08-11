@@ -59,8 +59,6 @@ page 52187417 "FOSA Payment Lines"
                         end;
 
                         Rec."Amount With VAT" := Rec.Amount;
-
-
                     end;
                 }
                 // field("VAT Code"; Rec."VAT Code")
@@ -90,26 +88,38 @@ page 52187417 "FOSA Payment Lines"
                     ApplicationArea = Basic, Suite;
                     Editable = false;
                 }
+                field("Housing Levy Code"; Rec."Housing Levy Code")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Housing Levy"; Rec."Housing Levy")
                 {
                     ApplicationArea = Basic, Suite;
                 }
-                field("Housing Levy Rate"; Rec."Housing Levy Rate")
+                field("PAYE code"; Rec."PAYE code")
                 {
                     ApplicationArea = Basic, Suite;
-                    Editable = false;
                 }
-                field("Retention Code"; Rec."Retention Code")
+                field("PAYE"; Rec."PAYE")
                 {
                     ApplicationArea = Basic, Suite;
-                    Visible = false;
                 }
-                field("Retention  Amount"; Rec."Retention  Amount")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = true;
-                    Visible = false;
-                }
+                // field("Housing Levy Rate"; Rec."Housing Levy Rate")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Editable = false;
+                // }
+                // field("Retention Code"; Rec."Retention Code")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Visible = false;
+                // }
+                // field("Retention  Amount"; Rec."Retention  Amount")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Editable = true;
+                //     Visible = false;
+                // }
                 field("Net Amount"; Rec."Net Amount")
                 {
                     ApplicationArea = Basic, Suite;

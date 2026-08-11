@@ -6,7 +6,7 @@ page 52187077 "User Creation Request List"
     SourceTable = "User Creation Requests";
     UsageCategory = Lists;
 
-    CardPageId = "User Creation Request Card";
+    //CardPageId = "User Creation Request Card";
 
     Editable = false;
 

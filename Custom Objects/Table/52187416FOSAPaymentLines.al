@@ -389,7 +389,7 @@ table 52187416 "FOSA Payment Line"
         {
             TableRelation = "Bank Account"."No.";
         }
-        field(29; Payee; Text[100])
+        field(29; "PAYE Rate"; Decimal)
         {
         }
         field(30; "Global Dimension 1 Code"; Code[20])
@@ -425,13 +425,18 @@ table 52187416 "FOSA Payment Line"
                 DimVal.SetRange(DimVal.Code, "Branch Code");
                 if DimVal.Find('-') then
                     "Budget Center Name" := DimVal.Name;
-
-                // ValidateShortcutDimCode(2, "Branch Code");
-                //s"Dimension Set ID" := DimMgt.GetDimSetFilter(2,"Shortcut Dimension 2 Code","Dimension Set ID");
             end;
         }
-        field(32; "PO/INV No"; Code[20])
+        field(32; "PAYE code"; Code[20])
         {
+            TableRelation = "Tariff Code s".Code WHERE(Type = CONST(PAYE));
+            trigger OnValidate()
+            begin
+                if TariffCode.Get("PAYE code") then
+                    "PAYE Rate" := TariffCode.Percentage
+                else
+                    "PAYE Rate" := 0;
+            end;
         }
         field(33; "Bank Account No"; Code[20])
         {
@@ -473,7 +478,7 @@ table 52187416 "FOSA Payment Line"
         field(42; "Apply to ID"; Code[20])
         {
         }
-        field(43; "No of Units"; Decimal)
+        field(43; PAYE; Decimal)
         {
         }
         field(44; "Surrender Date"; Date)
@@ -1143,12 +1148,26 @@ table 52187416 "FOSA Payment Line"
         {
             // TableRelation = "Fosa Payments Header"."Payment Narration";
         }
-        field(482; "Housing Levy"; Code[10])
+        field(482; "Housing Levy Code"; Code[10])
         {
             TableRelation = "Tariff Code s".Code WHERE(Type = CONST("Housing Levy"));
+            trigger OnValidate()
+            begin
+                if TariffCode.Get("Housing Levy Code") then
+                    "Housing Levy Rate" := TariffCode.Percentage
+                else
+                    "Housing Levy Rate" := 0;
+            end;
+
+
         }
         field(483; "Housing Levy Rate"; Decimal)
         {
+        }
+
+        field(484; "Housing Levy"; Decimal)
+        {
+
         }
 
     }
@@ -1309,7 +1328,7 @@ table 52187416 "FOSA Payment Line"
 
     procedure CalculateTax()
     var
-        CalculationType: Option VAT,"W/Tax",Retention,"W/VAT";
+        CalculationType: Option VAT,"W/Tax",Retention,"W/VAT",PAYE,"Housing Levy";
         TaxCalc: Codeunit "Tax Calculation";
         TotalTax: Decimal;
     begin
@@ -1341,16 +1360,21 @@ table 52187416 "FOSA Payment Line"
                 "VAT Withholding Amount" := Round(TaxCalc.FOSAPVCalculateTax(Rec, CalculationType::"W/VAT"), 0.01, '>');
                 TotalTax := Round(TotalTax + "VAT Withholding Amount", 0.01, '>');
             end;
-            // if "Housing Levy Amt" <> 0 then begin
-            //     TotalTax := Round(TotalTax + "VAT Withholding Amount", 0.01, '>')+
-            // end;
+            if "Housing Levy Rate" <> 0 then begin
+                "Housing Levy" := Round(TaxCalc.FOSAPVCalculateTax(Rec, CalculationType::"Housing Levy"), 0.01, '>');
+                TotalTax := Round(TotalTax + "Housing Levy", 0.01, '>');
+            end;
+            if "PAYE Rate" <> 0 then begin
+                PAYE := Round(TaxCalc.FOSAPVCalculateTax(Rec, CalculationType::PAYE), 0.01, '>');
+                TotalTax := Round(TotalTax + PAYE, 0.01, '>');
+            end;
 
         end;
 
         if "VAT Deductible" = true then
             "Net Amount" := Round(Amount - TotalTax, 0.01, '>')
         else
-            "Net Amount" := Round(Amount - TotalTax + "VAT Amount", 0.01, '>');
+            "Net Amount" := Round(Amount - ("Withholding Tax Amount" + "Retention  Amount" + "VAT Withholding Amount" + PAYE + "Housing Levy"), 0.01, '>');
 
         Validate("Net Amount");
     end;
