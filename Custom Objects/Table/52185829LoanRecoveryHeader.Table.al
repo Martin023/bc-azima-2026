@@ -673,12 +673,14 @@ table 52185829 "Loan Recovery Header"
                             "Prorated Funds" := "Total Balance";
 
                         "Amount To Use" := "Prorated Funds";
+                        rec.validate("Amount To Use", "Prorated Funds");
 
                     end
                     else begin
-                        "Amount To Use" := "Account Balance";
+                        //"Amount To Use" := "Account Balance";
+                        rec.Validate("Amount To Use", "Account Balance");
                     end;
-                    rec.Validate("Amount To Use");
+
                 end;
             end;
         }
