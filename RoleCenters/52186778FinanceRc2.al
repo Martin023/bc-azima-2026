@@ -721,11 +721,41 @@ page 52186778 "Finance Role Center"
                     }
                     group("FOSA Account Activation")
                     {
-                        action("FOSA Account Activation List")
+                        Caption = 'FOSA Account Activation';
+                        action("Open FOSA Account Activation")
                         {
                             ApplicationArea = Basic, Suite;
-                            Caption = 'Account Activation List';
+                            Caption = 'Open FOSA Account Activation';
                             RunObject = page "Account Activation List";
+                            RunPageView = where(Status = filter(Open));
+                        }
+                        action("FOSA Account Activation Pending Approval")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'FOSA Account Activation Pending Approval';
+                            RunObject = page "Account Activation List";
+                            RunPageView = where(Status = filter(Pending));
+                        }
+                        action("Rejected FOSA Account Activation")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Rejected FOSA Account Activation';
+                            RunObject = page "Account Activation List";
+                            RunPageView = where(Status = filter(Rejected));
+                        }
+                        action("Approved FOSA Account Activation")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Approved FOSA Account Activation';
+                            RunObject = page "Account Activation List";
+                            RunPageView = where(Status = filter(Approved));
+                        }
+                        action("Activated FOSA Accounts")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Activated FOSA Accounts';
+                            RunObject = page "Account Activation List";
+                            RunPageView = where(Status = filter(Activated));
                         }
                     }
                     group(ActivationReports)
@@ -3722,6 +3752,260 @@ page 52186778 "Finance Role Center"
                     }
                 }
 
+            }
+            group(Channels)
+            {
+                caption = 'Channels';
+                group("Mobile Banking")
+                {
+                    Caption = 'Mobile Banking';
+                    group("Posted Transactions")
+                    {
+                        Caption = 'Posted Transactions';
+
+                        action(AllWithdrawals)
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'All Withdrawals';
+                            RunObject = Page "Sky M-Banking Trans. Buffer";
+                            RunPageView = where(
+                                    "Posted" = const(true),
+                                    "Transaction Type" = Filter(
+                                        "Mpesa Withdrawal" |
+                                        "Utility Payment" |
+                                        Airtime |
+                                        "Bank Transfer" | "Till Payment" | "Gaming Utility Payment"
+                                    ),
+                                "Change Type" = filter(Post | Reverse)
+                                );
+                        }
+                        action(PostedWithdrawals)
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'Withdrawal Transactions';
+                            RunObject = Page "Sky M-Banking Trans. Buffer";
+                            RunPageView = where(
+                                    "Posted" = const(true),
+                                    "Transaction Type" = Filter(
+                                        "Mpesa Withdrawal" |
+                                        "Utility Payment" |
+                                        Airtime |
+                                        "Bank Transfer" | "Till Payment" | "Gaming Utility Payment"
+                                    ),
+                                    "Change Type" = const(Post)
+                                );
+                        }
+                        action(ReversedWithdrawals)
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'Reversed Withdrawal Transactions';
+                            RunObject = Page "Sky M-Banking Trans. Buffer";
+                            RunPageView = where(
+                                    "Posted" = const(true),
+                                    "Transaction Type" = Filter(
+                                        "Mpesa Withdrawal" |
+                                        "Utility Payment" |
+                                        Airtime |
+                                        "Bank Transfer" | "Till Payment" | "Gaming Utility Payment"
+                                    ),
+                                    "Change Type" = const(Reverse)
+                                );
+                        }
+                        action(PostedDeposits)
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'Deposit Transactions';
+                            RunObject = Page "Sky M-Banking Trans. Buffer";
+                            RunPageView = where(
+                                    "Posted" = const(true),
+                                    "Transaction Type" = Filter(
+                                        "Mpesa Deposit" |
+                                        "Loan Repayment" | "Coop B2B Deposit" | "Coop P2F Deposit"
+                                    ),
+                                    "Change Type" = const(Post)
+                                );
+                        }
+                        action(ReversedDeposits)
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'Reversed Deposit Transactions';
+                            RunObject = Page "Sky M-Banking Trans. Buffer";
+                            RunPageView = where(
+                                    "Posted" = const(true),
+                                    "Transaction Type" = Filter(
+                                        "Mpesa Deposit" |
+                                        "Loan Repayment" | "Coop B2B Deposit" | "Coop P2F Deposit"
+                                    ),
+                                    "Change Type" = const(Reverse)
+                                );
+                        }
+                    }
+
+                    group("Unposted Transactions")
+                    {
+                        Caption = 'Unposted Transactions';
+                        action(UnpostedWithdrawals)
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'Withdrawal Transactions';
+                            RunObject = Page "Sky M-Banking Trans. Buffer";
+                            RunPageView = where(
+                                    "Posted" = const(false),
+                                    "Transaction Type" = Filter(
+                                        "Mpesa Withdrawal" |
+                                        "Utility Payment" |
+                                        Airtime |
+                                        "Bank Transfer"
+                                    )
+                                );
+                        }
+                        action(UnpostedDeposits)
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'Deposit Transactions';
+                            RunObject = Page "Sky M-Banking Trans. Buffer";
+                            RunPageView = where(
+                                    "Posted" = const(false),
+                                    "Transaction Type" = Filter(
+                                        "Mpesa Deposit" |
+                                        "Loan Repayment" | "Coop B2B Deposit" | "Coop P2F Deposit"
+                                    )
+                                );
+                        }
+                        group("Tasks")
+                        {
+                            Caption = 'Tasks';
+
+                            action(DepositNeedsChange)
+                            {
+                                ApplicationArea = Basic;
+                                Caption = 'Deposit Needs Change';
+                                RunObject = Page "Sky M-Banking Trans. Buffer";
+                                RunPageView = where(
+                                    "Needs Change" = const(true)
+                                );
+                            }
+                        }
+                    }
+
+                    group("Reversal Transactions")
+                    {
+                        Caption = 'Reversal Transactions';
+                        action(PostedReversals)
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'Posted Reversals';
+                            RunObject = Page "Sky M-Banking Trans. Buffer";
+                            RunPageView = where(
+                                "Transaction Status" = const(REVERSE_CONFIRMED),
+                                Posted = const(true)
+                            );
+                        }
+                        action(UnpostedReversals)
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'Unposted Reversals';
+                            RunObject = Page "Sky M-Banking Trans. Buffer";
+                            RunPageView = where(
+                                "Transaction Status" = const(REVERSE_CONFIRMED),
+                                Posted = const(false)
+                            );
+                        }
+                    }
+
+                    group("MobileLoans")
+                    {
+                        Caption = 'Mobile Loans';
+                        action("Posted Mobile Loans")
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'Posted Mobile Loans';
+                            RunObject = Page "Sky Mobile Loans";
+                            RunPageView = where(
+                                    Posted = const(true)
+                                );
+                        }
+                        action("Unposted Mobile Loans")
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'Unposted Mobile Loans';
+                            RunObject = Page "Sky Mobile Loans";
+                            RunPageView = where(
+                                Posted = const(false)
+                            );
+                        }
+                        action("Mobile Loans - Loan Book")
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'Posted Mobile Loan Book';
+                            RunObject = Page "Loans List";
+                            RunPageView = where(
+                                Posted = const(true), "Mobile Loan" = filter(true)
+                            );
+                        }
+
+                    }
+                    group("Members Portal Loans")
+                    {
+                        action("Portal Loans")
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'Applied Portal Loans';
+                            RunObject = Page "Loans List";
+                            RunPageView = where(
+                                Posted = const(false), "Source Aplication" = filter("Member Portal")
+                            );
+                        }
+                        action("Posted Portal Loans")
+                        {
+                            ApplicationArea = Basic;
+                            Caption = 'Posted Portal Loans';
+                            RunObject = Page "Loans List";
+                            RunPageView = where(
+                                Posted = const(true), "Source Aplication" = filter("Member Portal")
+                            );
+                        }
+                    }
+
+                }
+                group(SMS)
+                {
+                    Caption = 'SMS';
+                    action(SMSMessages)
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'SMS Messages';
+                        RunObject = Page "Sky SMS Messages";
+                    }
+                }
+                group(Setups)
+                {
+                    Caption = 'Setups';
+                    action(MobileTransactionTypes)
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'Mobile Transaction Types';
+                        RunObject = Page "Mobile Transaction types List";
+                    }
+                    action(ATMTransactionTypes)
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'ATM Transaction Types';
+                        RunObject = Page "ATM Charge List";
+                    }
+                    action(TransactionLimits)
+                    {
+                        ApplicationArea = Basic;
+                        Caption = 'Transaction Limits';
+                        RunObject = Page "E-Channels Transaction Setup";
+                    }
+                    // action("Gaming Paybills Setup")
+                    // {
+                    //     ApplicationArea = Basic;
+                    //     Caption = 'Gaming Paybills Setup';
+                    //     RunObject = Page "Gaming Paybills Setup";
+                    // }
+                }
             }
 
             group("5. Purchase Invoicing1")
