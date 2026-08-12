@@ -11,7 +11,7 @@
       <am:Name>PBIRB</am:Name>
       <am:Version>15.7.1813.16</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-08-12T16:57:05.2571322Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-08-12T17:21:56.4394591Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -32,22 +32,19 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.56493in</Width>
+                  <Width>1.8282in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.19548in</Width>
+                  <Width>1.45875in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.23009in</Width>
+                  <Width>1.49336in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.31632in</Width>
+                  <Width>1.47242in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.20915in</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>1.56492in</Width>
+                  <Width>1.82819in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -140,39 +137,6 @@
                               <Style>
                                 <TextAlign>Right</TextAlign>
                               </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox11">
-                          <rd:DefaultName>Textbox11</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>Amount Off</Value>
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
                             </Paragraph>
                           </Paragraphs>
                           <Style>
@@ -360,39 +324,6 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="AmountOff">
-                          <rd:DefaultName>AmountOff</rd:DefaultName>
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!AmountOff.Value</Value>
-                                  <Style>
-                                    <FontSize>8pt</FontSize>
-                                    <Format>#,0.00;(#,0.00)</Format>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
                         <Textbox Name="BalanceOn">
                           <rd:DefaultName>BalanceOn</rd:DefaultName>
                           <CanGrow>true</CanGrow>
@@ -467,7 +398,6 @@
                 <TablixMember />
                 <TablixMember />
                 <TablixMember />
-                <TablixMember />
               </TablixMembers>
             </TablixColumnHierarchy>
             <TablixRowHierarchy>
@@ -489,7 +419,7 @@
             <Top>0.06944in</Top>
             <Left>0.13021in</Left>
             <Height>0.5in</Height>
-            <Width>8.08089in</Width>
+            <Width>8.0809in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -949,6 +879,18 @@ End Function
         </Field>
         <Field Name="Employer_Code">
           <DataField>Employer_Code</DataField>
+        </Field>
+        <Field Name="EmployerName">
+          <DataField>EmployerName</DataField>
+        </Field>
+        <Field Name="EmployerAccountNo">
+          <DataField>EmployerAccountNo</DataField>
+        </Field>
+        <Field Name="Narration">
+          <DataField>Narration</DataField>
+        </Field>
+        <Field Name="BookNo">
+          <DataField>BookNo</DataField>
         </Field>
         <Field Name="Reference">
           <DataField>Reference</DataField>
