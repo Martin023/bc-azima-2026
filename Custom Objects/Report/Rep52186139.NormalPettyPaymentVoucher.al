@@ -8,7 +8,7 @@ report 52186139 "Normal/Petty Payment Voucher"
         dataitem("Payments Header"; "Payments Header")
         {
             DataItemTableView = sorting("No.");
-            RequestFilterFields = "No.",Date,Cashier,"Global Dimension 1 Code";
+            RequestFilterFields = "No.", Date, Cashier, "Global Dimension 1 Code";
 
             column(DOCNAME; DOCNAME)
             {
@@ -449,7 +449,7 @@ report 52186139 "Normal/Petty Payment Voucher"
         CompanyInfo: Record "Company Information";
         BudgetLbl: label 'Budget';
         CreationDoc: Boolean;
-        ChequeNo: Code[10];
+        ChequeNo: Code[20];
         UserSetup: Record "User Setup";
         UserName: Text;
 }
