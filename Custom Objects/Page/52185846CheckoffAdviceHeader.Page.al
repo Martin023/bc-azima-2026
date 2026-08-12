@@ -124,15 +124,28 @@ page 52185846 "Checkoff Advice Header"
                 PromotedIsBig = true;
                 trigger OnAction()
                 begin
-                    Rec.TestField("Loan Interest Cut OFF Date");
-                    Rec.TestField("Loan Issue Cut OFF Date");
-                    if Rec.Processed = false then begin
-                        PeriodicActivities.MonthlyCheckoffAdviceSav(Rec)
-
-                    end else
+                    if Rec.Processed = false then
                         Error(Txt0001);
 
-                    Message(Txt0002);
+                    CheckoffAdviceHeader.reset;
+                    CheckoffAdviceHeader.SetRange("No.", Rec."No.");
+                    if CheckoffAdviceHeader.FindFirst then begin
+                        CheckoffAdviceHeader.TestField("Loan Interest Cut OFF Date");
+                        CheckoffAdviceHeader.TestField("Loan Issue Cut OFF Date");
+                        if CheckoffAdviceHeader.Processed = false then begin
+                            report.run(Report::"Generate Saving Advice", true, true, CheckoffAdviceHeader);
+                            //PeriodicActivities.MonthlyCheckoffAdviceLn(Rec)
+                        end else
+                            Error(Txt0001);
+                    end;
+
+                    //begin
+                        PeriodicActivities.MonthlyCheckoffAdviceSav(Rec)
+
+                    // end else
+
+
+                    // Message(Txt0002);
                 end;
             }
             action("Mark as Processed")

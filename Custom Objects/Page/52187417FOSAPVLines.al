@@ -79,15 +79,15 @@ page 52187417 "FOSA Payment Lines"
                 //     ApplicationArea = Basic, Suite;
                 //     Editable = false;
                 // }
-                field("Withholding Tax Code"; Rec."Withholding Tax Code")
-                {
-                    ApplicationArea = Basic, Suite;
-                }
-                field("Withholding Tax Amount"; Rec."Withholding Tax Amount")
-                {
-                    ApplicationArea = Basic, Suite;
-                    Editable = false;
-                }
+                // field("Withholding Tax Code"; Rec."Withholding Tax Code")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                // }
+                // field("Withholding Tax Amount"; Rec."Withholding Tax Amount")
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Editable = false;
+                // }
                 field("Housing Levy Code"; Rec."Housing Levy Code")
                 {
                     ApplicationArea = Basic, Suite;
