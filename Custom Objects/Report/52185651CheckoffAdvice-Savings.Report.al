@@ -53,12 +53,25 @@ Report 52185651 "Checkoff Advice - Savings"
                 column(Employer_Code; "Employer Code")
                 {
                 }
+                column(EmployerName; "Checkoff Advice Header"."Employer Name")
+                {
+                }
+                column(EmployerAccountNo; "Checkoff Advice Line"."Employer Account No.")
+                {
+                }
+                column(Narration; "Checkoff Advice Line"."Advice Type")
+                {
+                }
+                column(BookNo; BookNo)
+                {
+                }
                 column(Reference; Reference)
                 {
                 }
                 column(Remarks; "Variation Action")
                 {
                 }
+
 
                 trigger OnAfterGetRecord()
                 begin
@@ -68,9 +81,9 @@ Report 52185651 "Checkoff Advice - Savings"
                             CurrReport.Skip;
                         ProdName := ProductFactory."Product Description"
                     end;
-                    SavingsAccounts.get(checkoffAdviceLine."Account No.");
+                    SavingsAccounts.get("Checkoff Advice Line"."Account No.");
                     SavingsAccounts.CalcFields(Balance);
-                    Amount := SavingsAccounts.Balance + CheckoffAdviceLine."Amount On";
+                    Amount := SavingsAccounts.Balance + "Checkoff Advice Line"."Amount On";
 
                 end;
 
@@ -116,7 +129,6 @@ Report 52185651 "Checkoff Advice - Savings"
         Name: Text;
         Interest: Decimal;
         Amount: Decimal;
-        CheckoffAdviceLine: Record "Checkoff Advice Line";
         Turn: Integer;
         CulumnA: array[50] of Code[10];
         Company: Record "Company Information";
