@@ -647,59 +647,59 @@ table 52187421 "Product Variations"
         end;
 
         // SMS to applicant
-        theMember.Reset;
-        theMember.SetRange("No.", Rec."Member No.");
+        // theMember.Reset;
+        // theMember.SetRange("No.", Rec."Member No.");
 
-        if theMember.FindFirst then begin
-            case Rec."Variation Type" of
-                Rec."Variation Type"::Loan:
-                    theSMS := 'Dear member, your loan variation request has been received successfully and is being processed. REF ' + "No.";
-                Rec."Variation Type"::Savings:
-                    begin
-                        if ProductFactory.get(rec."Product Type") then begin
-                            theSMS := 'Dear member, your ' + ProductFactory."Product Description" + ' request has been received successfully and is being processed. REF ' + "No.";
-                        end;
-                    end;
-            end;
+        // if theMember.FindFirst then begin
+        //     case Rec."Variation Type" of
+        //         Rec."Variation Type"::Loan:
+        //             theSMS := 'Dear member, your loan variation request has been received successfully and is being processed. REF ' + "No.";
+        //         Rec."Variation Type"::Savings:
+        //             begin
+        //                 if ProductFactory.get(rec."Product Type") then begin
+        //                     theSMS := 'Dear member, your ' + ProductFactory."Product Description" + ' request has been received successfully and is being processed. REF ' + "No.";
+        //                 end;
+        //             end;
+        //     end;
 
-            if theSMS <> '' then begin
-                SkySMS.SendSms(
-                    SMSSource::CRM,
-                    theMember."Phone No.",
-                    theSMS,
-                    CreateGuid(),
-                    '',
-                    false,
-                    0,
-                    false,
-                    'CBS',
-                    "No.",
-                    'CBS'
-                );
+        //     if theSMS <> '' then begin
+        //         SkySMS.SendSms(
+        //             SMSSource::CRM,
+        //             theMember."Phone No.",
+        //             theSMS,
+        //             CreateGuid(),
+        //             '',
+        //             false,
+        //             0,
+        //             false,
+        //             'CBS',
+        //             "No.",
+        //             'CBS'
+        //         );
 
-                // EMAIL 
-                if Rec."Variation Type" = Rec."Variation Type"::Loan then begin
-                    SkySendEmail.QueueOutgoingEmail(
-                    theMember."E-Mail",
-                    'Loan Variation',
-                    theSMS,
-                    'TEXT',
-                    'LV APPLICATION',
-                    'CRM'
-                );
-                end;
-                if Rec."Variation Type" = Rec."Variation Type"::Savings then begin
-                    SkySendEmail.QueueOutgoingEmail(
-                    theMember."E-Mail",
-                    'Deposit Variation',
-                    theSMS,
-                    'TEXT',
-                    'DV APPLICATION',
-                    'CRM'
-                );
-                end;
-            end;
-        end;
+        //         // EMAIL 
+        //         if Rec."Variation Type" = Rec."Variation Type"::Loan then begin
+        //             SkySendEmail.QueueOutgoingEmail(
+        //             theMember."E-Mail",
+        //             'Loan Variation',
+        //             theSMS,
+        //             'TEXT',
+        //             'LV APPLICATION',
+        //             'CRM'
+        //         );
+        //         end;
+        //         if Rec."Variation Type" = Rec."Variation Type"::Savings then begin
+        //             SkySendEmail.QueueOutgoingEmail(
+        //             theMember."E-Mail",
+        //             'Deposit Variation',
+        //             theSMS,
+        //             'TEXT',
+        //             'DV APPLICATION',
+        //             'CRM'
+        //         );
+        //         end;
+        //     end;
+        // end;
     end;
 
     trigger OnModify()
