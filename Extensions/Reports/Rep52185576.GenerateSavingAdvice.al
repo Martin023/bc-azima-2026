@@ -39,6 +39,7 @@ report 52185576 "Generate Saving Advice"
                                 CheckoffAdvice.Init;
                                 CheckoffAdvice."Entry No" := iEntryNo;
                                 CheckoffAdvice."Advice Header No." := CheckoffAdviceHeader."No.";
+                                CheckoffAdvice.Type := CheckoffAdvice.Type::Savings;
                                 CheckoffAdvice."Account No." := "Savings Accounts"."No.";
                                 CheckoffAdvice."Member No." := "Savings Accounts"."Member No.";
                                 CheckoffAdvice.Validate(CheckoffAdvice."Member No.");
@@ -63,19 +64,17 @@ report 52185576 "Generate Saving Advice"
                 end;
 
             }
-
             trigger OnAfterGetRecord()
             begin
 
                 CheckoffAdvice.Reset;
                 CheckoffAdvice.SetRange(CheckoffAdvice."Advice Header No.", CheckoffAdviceHeader."No.");
-                CheckoffAdvice.SetRange(CheckoffAdvice.Type, CheckoffAdvice.Type::Credit);
+                CheckoffAdvice.SetRange(CheckoffAdvice.Type, CheckoffAdvice.Type::Savings);
                 if CheckoffAdvice.Find('-') then begin
                     CheckoffAdvice.DeleteAll;
                 end;
-
-
             end;
+
         }
     }
     requestpage
