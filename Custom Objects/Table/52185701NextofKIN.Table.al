@@ -173,16 +173,25 @@ table 52185701 "Next of KIN"
 
     trigger OnInsert()
     var
-        PasswordHandler: Codeunit "Password Handler";
-        plainuuid: text;
+        NextOfKinCheck: Record "Next of KIN";
+        MyUniqueID: Text;
+        IsUnique: Boolean;
     begin
         "Date Modified" := Today;
 
         if Identification = '' then begin
             if "System UID" = '' then begin
-                plainuuid := GenerateSystemUID(10);
-                Identification := plainuuid;
-                "System UID" := Identification;
+                IsUnique := false;
+                repeat
+                    MyUniqueID := GenerateSystemUID(10);
+                    NextOfKinCheck.Reset();
+                    NextOfKinCheck.SetRange("System UID", CopyStr(MyUniqueID, 1, MaxStrLen("System UID")));
+                    if NextOfKinCheck.IsEmpty() then
+                        IsUnique := true;
+                until IsUnique;
+
+                "System UID" := CopyStr(MyUniqueID, 1, MaxStrLen("System UID"));
+                Identification := "System UID";
             end else begin
                 Identification := "System UID";
             end;
