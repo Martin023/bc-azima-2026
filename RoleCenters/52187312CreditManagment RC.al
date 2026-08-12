@@ -566,6 +566,35 @@ page 52187312 "Credit Management Role Center"
                             ApplicationArea = Basic, Suite;
                             Caption = 'Account Activation List';
                             RunObject = page "Account Activation List";
+                            RunPageView = where(Status = filter(Open), Activated = filter(false));
+                        }
+                        action("FOSA Account Activation Pending Approval")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Account Activation Pending Approval';
+                            RunObject = page "Account Activation List";
+                            RunPageView = where(Status = filter(Pending), Activated = filter(false));
+                        }
+                        action("FOSA Account Activation Approved")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Account Activation Approved';
+                            RunObject = page "Account Activation List";
+                            RunPageView = where(Status = filter(Approved), Activated = filter(false));
+                        }
+                        action("FOSA Account Activation Rejected")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Account Activation Rejected';
+                            RunObject = page "Account Activation List";
+                            RunPageView = where(Status = filter(Rejected), Activated = filter(false));
+                        }
+                        action("FOSA Account Activation Posted")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Account Activation Posted';
+                            RunObject = page "Account Activation List";
+                            RunPageView = where(Activated = filter(true));
                         }
                     }
                 }
