@@ -1726,7 +1726,13 @@ page 52186778 "Finance Role Center"
                             RunObject = page "Payment Vouchers List";
                             RunPageLink = Status = CONST(Cancelled);
                         }
-
+                        action("Payments Posted Payment Voucher")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            Caption = 'Posted Payment Voucher';
+                            RunObject = Page "Posted Payment Vouchers List";
+                            ToolTip = 'Open the list of posted payment vouchers.';
+                        }
                     }
                     group("Fosa Payment Voucher")
                     {
@@ -6869,7 +6875,7 @@ page 52186778 "Finance Role Center"
                         ToolTip = 'View how dimensions or dimension sets are used on entries based on total amounts over a specified period and for a specified analysis view.';
                     }
                 }
-                action ("Control Summary Report")
+                action("Control Summary Report")
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Control Summary Report';

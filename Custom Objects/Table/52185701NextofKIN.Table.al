@@ -173,16 +173,25 @@ table 52185701 "Next of KIN"
 
     trigger OnInsert()
     var
-        PasswordHandler: Codeunit "Password Handler";
-        plainuuid: SecretText;
+        NextOfKinCheck: Record "Next of KIN";
+        MyUniqueID: Text;
+        IsUnique: Boolean;
     begin
         "Date Modified" := Today;
 
         if Identification = '' then begin
             if "System UID" = '' then begin
-                plainuuid := PasswordHandler.GenerateSecretPassword(10);
-                Identification := UnwrapSecretPassword(plainuuid);
-                "System UID" := Identification;
+                IsUnique := false;
+                repeat
+                    MyUniqueID := GenerateSystemUID(10);
+                    NextOfKinCheck.Reset();
+                    NextOfKinCheck.SetRange("System UID", CopyStr(MyUniqueID, 1, MaxStrLen("System UID")));
+                    if NextOfKinCheck.IsEmpty() then
+                        IsUnique := true;
+                until IsUnique;
+
+                "System UID" := CopyStr(MyUniqueID, 1, MaxStrLen("System UID"));
+                Identification := "System UID";
             end else begin
                 Identification := "System UID";
             end;
@@ -210,10 +219,17 @@ table 52185701 "Next of KIN"
             Error(FieldLengthError, FldLength);
     end;
 
-    [NonDebuggable]
-    local procedure UnwrapSecretPassword(SecretPassword: SecretText): Text
+    local procedure GenerateSystemUID(Length: Integer): Text
+    var
+        AllowedChars: Text;
+        ResultUID: Text;
+        i: Integer;
     begin
-        exit(SecretPassword.Unwrap());
+        AllowedChars := 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        for i := 1 to Length do
+            ResultUID += CopyStr(AllowedChars, Random(StrLen(AllowedChars)), 1);
+
+        exit(ResultUID);
     end;
 }
 

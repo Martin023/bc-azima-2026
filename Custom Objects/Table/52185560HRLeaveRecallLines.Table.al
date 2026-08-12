@@ -398,8 +398,7 @@ table 52185560 "HR Leave Recall Lines"
             "Posted Date" := Today;
             Modify();
 
-            SendRecallNotificationEmail();
-            SendRecallNotificationSMS();
+            TrySendRecallNotifications();
             Message('Leave recall posted successfully. %1 day(s) reimbursed to %2. Recall period: %3 to %4',
                 "Days Recalled", "Employee Name", "Recall Date", "Recall End Date");
         end else
@@ -412,13 +411,13 @@ table 52185560 "HR Leave Recall Lines"
         TokenVals: Text;
     begin
         // TOKENS: EMPLOYEE_NAME, LEAVE_APP_CODE, RECALL_DATE, DAYS_RECALLED, REASON, RECALL_END_DATE
-        TokenVals := 'EMPLOYEE_NAME=' + "Employee Name" + '||' +
-                     'LEAVE_APP_CODE=' + "Leave Application Code" + '||' +
-                     'RECALL_DATE=' + Format("Recall Date") + '||' +
-                     'DAYS_RECALLED=' + Format("Days Recalled") + '||' +
-                     'REASON=' + Reason + '||' +
-                     'RECALL_END_DATE=' + Format("Recall End Date");
-        Dispatcher.Send('LEAVE-RECALL', 0, "Employee No.", "Leave Application Code", TokenVals);
+        TokenVals := 'EMPLOYEE_NAME=' + Rec."Employee Name" + '||' +
+                     'LEAVE_APP_CODE=' + Rec."Leave Application Code" + '||' +
+                     'RECALL_DATE=' + Format(Rec."Recall Date") + '||' +
+                     'DAYS_RECALLED=' + Format(Rec."Days Recalled") + '||' +
+                     'REASON=' + Rec.Reason + '||' +
+                     'RECALL_END_DATE=' + Format(Rec."Recall End Date");
+        Dispatcher.Send('LEAVE-RECALL', 0, Rec."Employee No.", Rec."Leave Application Code", TokenVals);
     end;
 
     local procedure SendRecallNotificationSMS()
@@ -427,12 +426,12 @@ table 52185560 "HR Leave Recall Lines"
         TokenVals: Text;
     begin
         // TOKENS: EMPLOYEE_NAME, RECALL_DATE, DAYS_RECALLED, REASON, LEAVE_APP_CODE
-        TokenVals := 'EMPLOYEE_NAME=' + "Employee Name" + '||' +
-                     'RECALL_DATE=' + Format("Recall Date") + '||' +
-                     'DAYS_RECALLED=' + Format("Days Recalled") + '||' +
-                     'REASON=' + Reason + '||' +
-                     'LEAVE_APP_CODE=' + "Leave Application Code";
-        SMSDispatcher.Send('LEAVE-RECALL', 0, "Employee No.", "Leave Application Code", TokenVals);
+        TokenVals := 'EMPLOYEE_NAME=' + Rec."Employee Name" + '||' +
+                     'RECALL_DATE=' + Format(Rec."Recall Date") + '||' +
+                     'DAYS_RECALLED=' + Format(Rec."Days Recalled") + '||' +
+                     'REASON=' + Rec.Reason + '||' +
+                     'LEAVE_APP_CODE=' + Rec."Leave Application Code";
+        SMSDispatcher.Send('LEAVE-RECALL', 0, Rec."Employee No.", Rec."Leave Application Code", TokenVals);
     end;
 
     procedure RecalculateRecallSummary()
@@ -512,5 +511,22 @@ table 52185560 "HR Leave Recall Lines"
         end;
 
         exit(CurrentDate);
+    end;
+
+    local procedure TrySendRecallNotifications()
+    begin
+        // WRAPPER TO PREVENT EMAIL/SMS FAILURES FROM BLOCKING RECALL POSTING
+        if not TrySendRecallNotifs() then begin
+            // LOG ERROR BUT DO NOT BLOCK - NOTIFICATIONS ARE OPTIONAL
+            // Error details can be reviewed in Email/SMS Notification Log
+        end;
+    end;
+
+    [TryFunction]
+    local procedure TrySendRecallNotifs()
+    begin
+        // SMS FIRST — THEY'RE WORKING, SO SEND THEM BEFORE EMAIL CAN FAIL
+        SendRecallNotificationSMS();
+        SendRecallNotificationEmail();
     end;
 }
