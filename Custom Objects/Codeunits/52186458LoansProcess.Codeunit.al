@@ -6769,13 +6769,13 @@ Codeunit 52186458 "Loans Process"
 
         if CreateEntry then begin
 
-            Loans."Loans Category-SASRA" := LoanCategoryStage(InstallInArrears);
-            if Loans."Loans Category-SASRA" = Loans."Loans Category-SASRA"::Perfoming then begin
-                // DaysInArrears := 0;
-                // AmountInArrearsSACCO := 0;
-                // AmountInArrearsSASRA := 0;
-                InstallInArrears := 0;
-            end;
+            Loans."Loans Category-SASRA" := LoanCategoryStage(DaysInArrears);
+            // if Loans."Loans Category-SASRA" = Loans."Loans Category-SASRA"::Perfoming then begin
+            //     // DaysInArrears := 0;
+            //     // AmountInArrearsSACCO := 0;
+            //     // AmountInArrearsSASRA := 0;
+            //     // InstallInArrears := 0;
+            // end;
             AmountInArrearsSACCO := round(AmountInArrearsSACCO, 0.01, '=');
             AmountInArrearsSASRA := round(AmountInArrearsSACCO, 0.01, '=');
 

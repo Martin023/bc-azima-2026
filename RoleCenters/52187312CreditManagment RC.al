@@ -569,6 +569,24 @@ page 52187312 "Credit Management Role Center"
                         }
                     }
                 }
+                group("LienTransactions")
+                {
+                    Caption = 'Lien Transactions.';
+                    action("Lien Transactions List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        caption = 'Lien Transactions List';
+                        RunObject = page "Lien Transactions List";
+                        RunPageView = where(Posted = const(false), "Type" = Const(Lien));
+                    }
+                    action("Posted Lien Transactions List")
+                    {
+                        ApplicationArea = Basic, Suite;
+                        caption = 'Posted Lien Transactions List';
+                        RunObject = page "Lien Transactions List";
+                        RunPageView = where(Posted = const(true), "Type" = Const(Lien));
+                    }
+                }
 
 
                 // 

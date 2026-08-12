@@ -270,8 +270,6 @@ Codeunit 52185470 "Periodic Activities"
 
 
 
-
-
                     InvestInterestLine.Posted := true;
                     InvestInterestLine.Modify();
                     Commit();
@@ -447,6 +445,114 @@ Codeunit 52185470 "Periodic Activities"
                             GenJournalLine."VAT Prod. Posting Group" := '';
                             GenJournalLine.Validate(GenJournalLine."VAT Prod. Posting Group");
                             GenJournalLine.Amount := FPVLines."Withholding Tax Amount";
+                            GenJournalLine.Validate(GenJournalLine.Amount);
+                            GenJournalLine."Bal. Account Type" := TarriffCodes."Account Type";
+                            GenJournalLine."Bal. Account No." := TarriffCodes."Account No.";
+                            GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
+                            GenJournalLine.Description := CopyStr(TarriffCodes.Description + ' ' + Format(GenJournalLine."Account No.") + ' :: for ' + FPVLines."Account Name", 1, 50);
+                            GenJournalLine."Shortcut Dimension 1 Code" := FPVHeader."Global Dimension 1 Code";
+                            GenJournalLine."Shortcut Dimension 2 Code" := FPVHeader."Shortcut Dimension 2 Code";
+                            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                            GenJournalLine."Dimension Set ID" := FPVLines."Dimension Set ID";
+
+                            if GenJournalLine.Amount <> 0 then
+                                GenJournalLine.Insert;
+                            Commit();
+                        end;
+                        //PAYE
+                        TarriffCodes.Reset;
+                        TarriffCodes.SetRange(TarriffCodes.Code, FPVLines."PAYE code");
+                        if TarriffCodes.Find('-') then begin
+                            TarriffCodes.TestField(TarriffCodes."Account No.");
+                            TarriffCodes.TestField(TarriffCodes."Account Type", TarriffCodes."Account Type"::"G/L Account");
+
+                            LineNo := LineNo + 10000;
+                            GenJournalLine.Init;
+                            GenJournalLine."Journal Template Name" := JTemp;
+                            GenJournalLine."Journal Batch Name" := JBatch;
+                            GenJournalLine.Validate(GenJournalLine."Journal Template Name");
+                            GenJournalLine.Validate(GenJournalLine."Journal Batch Name");
+                            GenJournalLine."Source Code" := 'PAYMENTJNL';
+                            GenJournalLine."Line No." := LineNo;
+                            GenJournalLine."Posting Date" := FPVHeader."Payment Release Date";
+                            GenJournalLine."Document Type" := GenJournalLine."Document Type"::" ";
+                            GenJournalLine."Document No." := FPVLines.No;
+                            GenJournalLine."External Document No." := FPVHeader."Cheque No.";
+                            GenJournalLine."Account Type" := GenJournalLine."Account Type"::Savings;
+                            GenJournalLine."Account No." := FPVLines."Account No.";
+                            GenJournalLine.Validate(GenJournalLine."Account No.");
+                            GenJournalLine."Currency Code" := FPVHeader."Currency Code";
+                            GenJournalLine.Validate(GenJournalLine."Currency Code");
+                            //CurrFactor
+                            GenJournalLine."Currency Factor" := FPVHeader."Currency Factor";
+                            GenJournalLine.Validate("Currency Factor");
+
+                            GenJournalLine."Gen. Posting Type" := GenJournalLine."Gen. Posting Type"::" ";
+                            GenJournalLine.Validate(GenJournalLine."Gen. Posting Type");
+                            GenJournalLine."Gen. Bus. Posting Group" := '';
+                            GenJournalLine.Validate(GenJournalLine."Gen. Bus. Posting Group");
+                            GenJournalLine."Gen. Prod. Posting Group" := '';
+                            GenJournalLine.Validate(GenJournalLine."Gen. Prod. Posting Group");
+                            GenJournalLine."VAT Bus. Posting Group" := '';
+                            GenJournalLine.Validate(GenJournalLine."VAT Bus. Posting Group");
+                            GenJournalLine."VAT Prod. Posting Group" := '';
+                            GenJournalLine.Validate(GenJournalLine."VAT Prod. Posting Group");
+                            GenJournalLine.Amount := FPVLines.PAYE;
+                            GenJournalLine.Validate(GenJournalLine.Amount);
+                            GenJournalLine."Bal. Account Type" := TarriffCodes."Account Type";
+                            GenJournalLine."Bal. Account No." := TarriffCodes."Account No.";
+                            GenJournalLine.Validate(GenJournalLine."Bal. Account No.");
+                            GenJournalLine.Description := CopyStr(TarriffCodes.Description + ' ' + Format(GenJournalLine."Account No.") + ' :: for ' + FPVLines."Account Name", 1, 50);
+                            GenJournalLine."Shortcut Dimension 1 Code" := FPVHeader."Global Dimension 1 Code";
+                            GenJournalLine."Shortcut Dimension 2 Code" := FPVHeader."Shortcut Dimension 2 Code";
+                            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 2 Code");
+                            GenJournalLine.Validate(GenJournalLine."Shortcut Dimension 1 Code");
+                            GenJournalLine."Dimension Set ID" := FPVLines."Dimension Set ID";
+
+                            if GenJournalLine.Amount <> 0 then
+                                GenJournalLine.Insert;
+                            Commit();
+                        end;
+                        //HLEVY
+                        TarriffCodes.Reset;
+                        TarriffCodes.SetRange(TarriffCodes.Code, FPVLines."Housing Levy Code");
+                        if TarriffCodes.Find('-') then begin
+                            TarriffCodes.TestField(TarriffCodes."Account No.");
+                            TarriffCodes.TestField(TarriffCodes."Account Type", TarriffCodes."Account Type"::"G/L Account");
+
+                            LineNo := LineNo + 10000;
+                            GenJournalLine.Init;
+                            GenJournalLine."Journal Template Name" := JTemp;
+                            GenJournalLine."Journal Batch Name" := JBatch;
+                            GenJournalLine.Validate(GenJournalLine."Journal Template Name");
+                            GenJournalLine.Validate(GenJournalLine."Journal Batch Name");
+                            GenJournalLine."Source Code" := 'PAYMENTJNL';
+                            GenJournalLine."Line No." := LineNo;
+                            GenJournalLine."Posting Date" := FPVHeader."Payment Release Date";
+                            GenJournalLine."Document Type" := GenJournalLine."Document Type"::" ";
+                            GenJournalLine."Document No." := FPVLines.No;
+                            GenJournalLine."External Document No." := FPVHeader."Cheque No.";
+                            GenJournalLine."Account Type" := GenJournalLine."Account Type"::Savings;
+                            GenJournalLine."Account No." := FPVLines."Account No.";
+                            GenJournalLine.Validate(GenJournalLine."Account No.");
+                            GenJournalLine."Currency Code" := FPVHeader."Currency Code";
+                            GenJournalLine.Validate(GenJournalLine."Currency Code");
+                            //CurrFactor
+                            GenJournalLine."Currency Factor" := FPVHeader."Currency Factor";
+                            GenJournalLine.Validate("Currency Factor");
+
+                            GenJournalLine."Gen. Posting Type" := GenJournalLine."Gen. Posting Type"::" ";
+                            GenJournalLine.Validate(GenJournalLine."Gen. Posting Type");
+                            GenJournalLine."Gen. Bus. Posting Group" := '';
+                            GenJournalLine.Validate(GenJournalLine."Gen. Bus. Posting Group");
+                            GenJournalLine."Gen. Prod. Posting Group" := '';
+                            GenJournalLine.Validate(GenJournalLine."Gen. Prod. Posting Group");
+                            GenJournalLine."VAT Bus. Posting Group" := '';
+                            GenJournalLine.Validate(GenJournalLine."VAT Bus. Posting Group");
+                            GenJournalLine."VAT Prod. Posting Group" := '';
+                            GenJournalLine.Validate(GenJournalLine."VAT Prod. Posting Group");
+                            GenJournalLine.Amount := FPVLines."Housing Levy";
                             GenJournalLine.Validate(GenJournalLine.Amount);
                             GenJournalLine."Bal. Account Type" := TarriffCodes."Account Type";
                             GenJournalLine."Bal. Account No." := TarriffCodes."Account No.";
