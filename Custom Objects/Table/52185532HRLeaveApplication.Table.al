@@ -141,8 +141,8 @@ table 52185532 "HR Leave Application"
                     "Time Posted" := Time;
                     Rec.Modify(true);
 
-                    SendApprovalEmailToApplicant();
-                    SendApprovalEmailToReliever();
+                    // SendApprovalEmailToApplicant();
+                    // SendApprovalEmailToReliever();
                     SendApprovalSMSToApplicant();
                     SendApprovalSMSToReliever();
 
@@ -1222,4 +1222,3 @@ table 52185532 "HR Leave Application"
     end;
 
 }
-
