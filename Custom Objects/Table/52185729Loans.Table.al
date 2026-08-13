@@ -3519,68 +3519,68 @@ table 52185729 Loans
                     "Approval Time" := Time;
                 end;
 
-                theMember.Reset;
-                theMember.SetRange("No.", "Member No.");
+                // theMember.Reset;
+                // theMember.SetRange("No.", "Member No.");
 
-                if theMember.findfirst then begin
-                    if theSMS <> '' then begin
-                        SkySMS.SendSms(
-                            SMSSource::CRM,
-                            theMember."Phone No.",
-                            theSMS,
-                            CreateGuid(),
-                            '',
-                            false,
-                            0,
-                            false,
-                            'CBS',
-                            "Loan No.",
-                            'CBS'
-                        );
+                // if theMember.findfirst then begin
+                //     if theSMS <> '' then begin
+                //         SkySMS.SendSms(
+                //             SMSSource::CRM,
+                //             theMember."Phone No.",
+                //             theSMS,
+                //             CreateGuid(),
+                //             '',
+                //             false,
+                //             0,
+                //             false,
+                //             'CBS',
+                //             "Loan No.",
+                //             'CBS'
+                //         );
 
-                        // EMAIL 
-                        SkySendEmail.QueueOutgoingEmail(
-                            theMember."E-Mail",
-                            'Loan Application',
-                            theSMS,
-                            'TEXT',
-                            'LOAN APPLICATION',
-                            'CRM'
-                        );
-                    end;
-                end;
+                //         // EMAIL 
+                //         SkySendEmail.QueueOutgoingEmail(
+                //             theMember."E-Mail",
+                //             'Loan Application',
+                //             theSMS,
+                //             'TEXT',
+                //             'LOAN APPLICATION',
+                //             'CRM'
+                //         );
+                //     end;
+                // end;
 
-                if "Mwalimu Smart Callback URL" <> '' then begin
-                    MSmartFunctions.LoanStatusChange(Rec, MSmartCorrections, true);
-                end;
+                // if "Mwalimu Smart Callback URL" <> '' then begin
+                //     MSmartFunctions.LoanStatusChange(Rec, MSmartCorrections, true);
+                // end;
 
                 // Mwalimu Smart Document
                 // theMSmartDocument.SetRange("No.", Rec."Mwalimu Smart Document");
 
-                if theMSmartDocument.FindFirst then begin
-                    case Rec.Status of
-                        Rec.Status::Pending:
-                            begin
-                                theMSmartDocument.Status := theMSmartDocument.Status::Pending;
-                                theMSmartDocument.Modify(true);
-                            end;
-                        Rec.Status::Approved:
-                            begin
-                                theMSmartDocument.Status := theMSmartDocument.Status::Approved;
-                                theMSmartDocument.Modify(true);
-                            end;
-                        Rec.Status::Rejected:
-                            begin
-                                theMSmartDocument.Status := theMSmartDocument.Status::Rejected;
-                                theMSmartDocument.Modify(true);
-                            end;
-                        Rec.Status::Open:
-                            begin
-                                theMSmartDocument.Status := theMSmartDocument.Status::Open;
-                                theMSmartDocument.Modify(true);
-                            end;
-                    end;
-                end;
+                // if theMSmartDocument.FindFirst then begin
+                //     case Rec.Status of
+                //         Rec.Status::Pending:
+                //             begin
+                //                 theMSmartDocument.Status := theMSmartDocument.Status::Pending;
+                //                 theMSmartDocument.Modify(true);
+                //             end;
+                //         Rec.Status::Approved:
+                //             begin
+                //                 theMSmartDocument.Status := theMSmartDocument.Status::Approved;
+                //                 theMSmartDocument.Modify(true);
+                //             end;
+                //         Rec.Status::Rejected:
+                //             begin
+                //                 theMSmartDocument.Status := theMSmartDocument.Status::Rejected;
+                //                 theMSmartDocument.Modify(true);
+                //             end;
+                //         Rec.Status::Open:
+                //             begin
+                //                 theMSmartDocument.Status := theMSmartDocument.Status::Open;
+                //                 theMSmartDocument.Modify(true);
+                //             end;
+                //     end;
+                // end;
                 // Sky Channels
                 theSkyLoanApplication.Reset;
                 theSkyLoanApplication.SetRange("Application No.", Rec."Loan No.");

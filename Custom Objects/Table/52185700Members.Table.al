@@ -716,8 +716,8 @@ table 52185700 Members
                 LoanApps.SetRange("Member No.", "No.");
                 if LoanApps.Find('-') then begin
                     repeat
-                        LoanApps."Staff No" := Rec."Employer Code";
                         LoanApps.Validate("Employer Code", "Employer Code");
+                        LoanApps."Staff No" := Rec."Payroll/Staff No.";
                         LoanApps.Modify;
                     until LoanApps.Next = 0;
                 end;
