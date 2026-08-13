@@ -2232,7 +2232,7 @@ page 52185753 "Loan Application Card"
                         // end;
 
                         //AutoCreateForm
-                        GlobalFunctions.CreateFile(Rec."Member No.", Enum::"Member Form Types"::"Loan Form", rec."Loan No.");
+                        GlobalFunctions.CreateFile(Rec."Member No.", Enum::"Member Form Types"::"Loan Form", rec."Loan No.", rec."Global Dimension 1 Code");
                         Message('Loan Posted Successfully');
                         CurrPage.Close();
                     end;

@@ -628,7 +628,7 @@ Codeunit 52185455 "Registration Process"
         Commit();
 
         //AutoCreateForm
-        GlobalFunc.CreateFile(Cust."No.", Enum::"Member Form Types"::Registration, MemberApplication."No.");
+        GlobalFunc.CreateFile(Cust."No.", Enum::"Member Form Types"::Registration, MemberApplication."No.", MemberApplication."Global Dimension 1 Code");
 
         //Email Employer
         // if DisplayConfirm then begin

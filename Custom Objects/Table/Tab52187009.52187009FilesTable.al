@@ -45,6 +45,18 @@ table 52187009 "Member Form List"
         {
             Caption = 'Received Date';
         }
+        field(69; "Global Dimension 1 Code"; Code[20])
+        {
+            CaptionClass = '1,1,1';
+            Caption = 'Global Dimension 1 Code';
+            Editable = false;
+            TableRelation = "Dimension Value".Code WHERE("Global Dimension No." = CONST(1));
+
+            trigger OnValidate()
+            begin
+
+            end;
+        }
     }
     keys
     {
