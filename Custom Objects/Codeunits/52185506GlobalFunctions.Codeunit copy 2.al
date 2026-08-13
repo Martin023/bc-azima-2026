@@ -5,7 +5,7 @@ Codeunit 52185506 "Global Functions"
     begin
     end;
 
-    procedure CreateFile(MemberNo: Code[100]; FileType: Enum "Member Form Types"; RefNo: code[30])
+    procedure CreateFile(MemberNo: Code[100]; FileType: Enum "Member Form Types"; RefNo: code[30]; Branch: Code[20])
     var
         FilesRec: Record "Member Form List";
     begin
@@ -19,6 +19,7 @@ Codeunit 52185506 "Global Functions"
         FilesRec."Member Form Types" := FileType;
         FilesRec."Reference No" := RefNo;
         FilesRec."Member No." := MemberNo;
+        FilesRec."Global Dimension 1 Code" := Branch;
         FIlesRec.Date := Today;
         FilesRec.insert();
     end;
