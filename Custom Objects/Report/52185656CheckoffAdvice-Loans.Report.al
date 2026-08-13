@@ -28,7 +28,7 @@ Report 52185656 "Checkoff Advice - Loans"
                 {
                 }
 
-                column(BalanceOn; "Checkoff Advice Line"."Balance On")
+                column(BalanceOn; round("Checkoff Advice Line"."Balance On", 1, '>'))
                 {
                 }
 

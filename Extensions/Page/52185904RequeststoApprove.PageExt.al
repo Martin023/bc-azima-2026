@@ -40,6 +40,19 @@ PageExtension 52185904 pageextension52185904 extends "Requests to Approve"
         {
             Visible = false;
         }
+        addafter(ToApprove)
+        {
+            field(MemberNo; MemberNo)
+            {
+                ApplicationArea = Basic;
+                Editable = false;
+            }
+            field(MemberName; MemberName)
+            {
+                ApplicationArea = Basic;
+                Editable = false;
+            }
+        }
 
     }
     actions
@@ -142,5 +155,16 @@ PageExtension 52185904 pageextension52185904 extends "Requests to Approve"
 
     var
         ApprovalCommentLine: Record "Approval Comment Line";
+        MemberNo: Code[10];
+        MemberName: Text[100];
+        loans: record loans;
+
+    trigger OnOpenPage()
+    BEGIN
+        if Loans.get(rec."Record ID to Approve") then begin
+            MemberNo := Loans."Member No.";
+            MemberName := Loans."Member Name";
+        end;
+    END;
 
 }

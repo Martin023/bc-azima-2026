@@ -1366,8 +1366,10 @@ table 52185700 Members
         }
         field(85; "Default Product"; Text[10])
         {
-            Tablerelation = "Product Factory"."Product ID" where("Loan Disbursement Account" = filter(true));
+            Tablerelation = "Product Factory"."Product ID" where("Loan Disbursement Account" = filter(true), "Over The Counter Transaction" = filter(true), "Product Class Type" = filter(Savings));
             trigger OnValidate()
+            var
+                SalaryLines: record "Salary Lines";
             begin
                 //Unmark the default
                 SavingAccounts.Reset;
@@ -1381,6 +1383,15 @@ table 52185700 Members
                 if SavingAccounts.findfirst then begin
                     SavingAccounts."Loan Disbursement Account" := true;
                     SavingAccounts.Modify;
+
+                    SalaryLines.Reset();
+                    SalaryLines.SetRange("Member No.", "No.");
+                    if SalaryLines.FindSet() then begin
+                        repeat
+                            SalaryLines."Account No." := SavingAccounts."No.";
+                            SalaryLines.Modify();
+                        until SalaryLines.Next() = 0;
+                    end;
                 end
                 else
                     Error('Member does not have a saving account for the selected default product');
