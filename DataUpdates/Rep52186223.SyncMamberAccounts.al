@@ -3,7 +3,7 @@ namespace KenpipeCBS.KenpipeCBS;
 report 52186223 "Sync Member & Accounts"
 {
     ApplicationArea = All;
-    Caption = 'Sync Mamber & Accounts';
+    Caption = 'Sync Member & Accounts';
     UsageCategory = Lists;
     ProcessingOnly = true;
     dataset
@@ -17,9 +17,8 @@ report 52186223 "Sync Member & Accounts"
             trigger OnAfterGetRecord()
             begin
                 if Members."Employer Code" <> '' then
-                    Members.validate("Employer Code");
-                members.validate("First Name");
-                Members.modify;
+                    Members.validate("Employer Code")
+
             end;
         }
     }

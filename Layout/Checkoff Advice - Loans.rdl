@@ -11,7 +11,7 @@
       <am:Name>PBIRB</am:Name>
       <am:Version>15.7.1813.16</am:Version>
     </am:UpdatedBy>
-    <am:LastModifiedTimestamp>2026-08-12T14:22:37.9596018Z</am:LastModifiedTimestamp>
+    <am:LastModifiedTimestamp>2026-08-13T11:04:48.5200956Z</am:LastModifiedTimestamp>
   </am:AuthoringMetadata>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -260,6 +260,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
+                        <rd:Selected>true</rd:Selected>
                         <Textbox Name="PayrollNo">
                           <rd:DefaultName>PayrollNo</rd:DefaultName>
                           <CanGrow>true</CanGrow>
@@ -394,12 +395,12 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.75692cm</Height>
+                  <Height>0.6cm</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="VoteNo1">
-                          <rd:DefaultName>VoteNo1</rd:DefaultName>
+                        <Textbox Name="Textbox9">
+                          <rd:DefaultName>Textbox9</rd:DefaultName>
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -430,8 +431,8 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox5">
-                          <rd:DefaultName>Textbox5</rd:DefaultName>
+                        <Textbox Name="Textbox11">
+                          <rd:DefaultName>Textbox11</rd:DefaultName>
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -462,8 +463,8 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox6">
-                          <rd:DefaultName>Textbox6</rd:DefaultName>
+                        <Textbox Name="Textbox19">
+                          <rd:DefaultName>Textbox19</rd:DefaultName>
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -495,8 +496,8 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox7">
-                          <rd:DefaultName>Textbox7</rd:DefaultName>
+                        <Textbox Name="Textbox20">
+                          <rd:DefaultName>Textbox20</rd:DefaultName>
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -506,7 +507,7 @@
                                   <Value>=Sum(Fields!BalanceOn.Value)</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
-                                    <Format>#,0.00</Format>
+                                    <Format>#,0</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -528,8 +529,8 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox9">
-                          <rd:DefaultName>Textbox9</rd:DefaultName>
+                        <Textbox Name="Textbox21">
+                          <rd:DefaultName>Textbox21</rd:DefaultName>
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -578,14 +579,14 @@
               <TablixMembers>
                 <TablixMember />
                 <TablixMember>
-                  <Group Name="PayrollNo">
+                  <Group Name="MemberNo">
                     <GroupExpressions>
-                      <GroupExpression>=Fields!PayrollNo.Value</GroupExpression>
+                      <GroupExpression>=Fields!MemberNo.Value</GroupExpression>
                     </GroupExpressions>
                   </Group>
                   <SortExpressions>
                     <SortExpression>
-                      <Value>=Fields!PayrollNo.Value</Value>
+                      <Value>=Fields!MemberNo.Value</Value>
                     </SortExpression>
                   </SortExpressions>
                   <TablixMembers>
@@ -597,8 +598,13 @@
                             <Hidden>true</Hidden>
                           </Visibility>
                         </TablixMember>
-                        <TablixMember />
                       </TablixMembers>
+                      <Visibility>
+                        <Hidden>true</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <KeepWithGroup>Before</KeepWithGroup>
                     </TablixMember>
                   </TablixMembers>
                 </TablixMember>
@@ -607,7 +613,7 @@
             <DataSetName>DataSet_Result</DataSetName>
             <Top>0.31436cm</Top>
             <Left>0.24282cm</Left>
-            <Height>1.83344cm</Height>
+            <Height>1.67652cm</Height>
             <Width>19.67483cm</Width>
             <Style>
               <Border>
@@ -616,7 +622,7 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>2.43884cm</Height>
+        <Height>2.59088cm</Height>
         <Style />
       </Body>
       <Width>19.91765cm</Width>

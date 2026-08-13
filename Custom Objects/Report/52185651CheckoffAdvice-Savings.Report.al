@@ -83,7 +83,7 @@ Report 52185651 "Checkoff Advice - Savings"
                     end;
                     SavingsAccounts.get("Checkoff Advice Line"."Account No.");
                     SavingsAccounts.CalcFields(Balance);
-                    Amount := SavingsAccounts.Balance + "Checkoff Advice Line"."Amount On";
+                    Amount := SavingsAccounts.Balance;
 
                 end;
 
