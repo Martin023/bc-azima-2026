@@ -23,6 +23,14 @@ page 52185825 "Account Transfer List"
                 {
                     ApplicationArea = Basic, Suite;
                 }
+                field("Member No."; Rec."Member No")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
+                field("Member Name"; Rec."Member Name")
+                {
+                    ApplicationArea = Basic, Suite;
+                }
                 field("Transaction Date"; Rec."Transaction Date")
                 {
                     ApplicationArea = Basic, Suite;
