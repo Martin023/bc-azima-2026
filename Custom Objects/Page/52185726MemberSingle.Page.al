@@ -2196,9 +2196,19 @@ page 52185726 "Member Single"
         UserSetup.Reset();
         UserSetup.SetRange("User ID", UserId);
         if UserSetup.FindFirst() then begin
-            if not UserSetup."Show Hidden" then
-                if (Rec."Account Profile" = Rec."Account Profile"::"High Profile") or (Rec."Account Profile" = Rec."Account Profile"::"Politically Exposed") then
-                    Error('You are not allowed to view this account');
+            if UserSetup."Show Hidden" then begin
+                // Full access — Show Hidden overrides everything, including High Profile/PEP
+            end else begin
+                if UserSetup."Member No." <> '' then begin
+                    // Self-service member — always allowed to view own record, even if High Profile/PEP
+                    if Rec."No." <> UserSetup."Member No." then
+                        Error('You are only allowed to view your own account.');
+                end else begin
+                    // Staff without Show Hidden — blocked from High Profile/PEP accounts
+                    if (Rec."Account Profile" = Rec."Account Profile"::"High Profile") or (Rec."Account Profile" = Rec."Account Profile"::"Politically Exposed") then
+                        Error('You are not allowed to view this account');
+                end;
+            end;
         end else
             Error('You are not set up in user setup');
         GroupControls;

@@ -29,6 +29,10 @@ page 52185482 "Member Form List"
                 {
                     ToolTip = 'Specifies the value of the Date field.', Comment = '%';
                 }
+                field("Global Dimension 1 Code"; Rec."Global Dimension 1 Code")
+                {
+                    ToolTip = 'Specifies the value of the Global Dimension 1 Code field.', Comment = '%';
+                }
                 field(filed; Rec.filed)
                 {
 

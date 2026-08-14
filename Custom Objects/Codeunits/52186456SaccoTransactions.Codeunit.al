@@ -3505,7 +3505,10 @@ Codeunit 52186456 "Sacco Transactions"
                 TCharges := 0;
 
                 TransType.Reset;
-                TransType.SetRange(TransType.Type, TransType.Type::"Bounced Cheque");
+                if Confirm('Do you want to cancel this cheque at no cost?', false) then
+                    TransType.SetRange(TransType.Type, TransType.Type::"Cancel Cheque")
+                else
+                    TransType.SetRange(TransType.Type, TransType.Type::"Bounced Cheque");
                 if TransType.Find('-') then begin
 
                     TransactionCharges.Reset;

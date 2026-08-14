@@ -50,6 +50,9 @@ Report 52185651 "Checkoff Advice - Savings"
                 column(Period; "Checkoff Advice Header".Period)
                 {
                 }
+                column(Employer_Code; "Employer Code")
+                {
+                }
                 column(EmployerName; "Checkoff Advice Header"."Employer Name")
                 {
                 }
@@ -69,6 +72,7 @@ Report 52185651 "Checkoff Advice - Savings"
                 {
                 }
 
+
                 trigger OnAfterGetRecord()
                 begin
                     Amount := 0;
@@ -77,37 +81,9 @@ Report 52185651 "Checkoff Advice - Savings"
                             CurrReport.Skip;
                         ProdName := ProductFactory."Product Description"
                     end;
-                    if Members.Get("Checkoff Advice Line"."Member No.") then begin
-                        CheckoffAdviceLine.Reset;
-                        CheckoffAdviceLine.SetCurrentkey("Member No.");
-                        CheckoffAdviceLine.SetRange("Advice Header No.", "Checkoff Advice Header"."No.");
-                        CheckoffAdviceLine.SetRange("Member No.", Members."No.");
-                        if CheckoffAdviceLine.Find('-') then begin
-                            repeat
-                                MemberNo := CheckoffAdviceLine."Member No.";
-                                Name := CheckoffAdviceLine.Names;
-                                Amount := Amount + CheckoffAdviceLine."Amount On" + CheckoffAdviceLine.Interest;
-                            until CheckoffAdviceLine.Next = 0;
-                        end;
-                    end;
-
-                    SavingsAccounts.Reset;
-                    SavingsAccounts.SetRange("No.", "Checkoff Advice Line"."Account No.");
-                    SavingsAccounts.SetRange("Product Category", SavingsAccounts."Product Category"::"BOSA Deposits");
-                    if SavingsAccounts.Find('-') then begin
-
-                        SavingsAccounts2.Reset;
-                        SavingsAccounts2.SetRange("Member No.", SavingsAccounts."Member No.");
-                        SavingsAccounts2.SetRange("Product Category", SavingsAccounts2."product category"::"Share Capital");
-                        if SavingsAccounts2.Find('-') then begin
-
-                            SavingsAccounts2.CalcFields("Balance (LCY)");
-                            Amount +=/*SavingsAccounts2."Balance (LCY)"+*/"Checkoff Advice Line"."Balance On";
-                            //MESSAGE('t%1',Amount);
-                        end;
-                    end;
-                    //IF Turn=2 THEN CurrReport.SKIP
-                    BookNo := CopyStr("Checkoff Advice Line"."Payroll No", 10, 1);
+                    SavingsAccounts.get("Checkoff Advice Line"."Account No.");
+                    SavingsAccounts.CalcFields(Balance);
+                    Amount := SavingsAccounts.Balance;
 
                 end;
 
@@ -153,7 +129,6 @@ Report 52185651 "Checkoff Advice - Savings"
         Name: Text;
         Interest: Decimal;
         Amount: Decimal;
-        CheckoffAdviceLine: Record "Checkoff Advice Line";
         Turn: Integer;
         CulumnA: array[50] of Code[10];
         Company: Record "Company Information";

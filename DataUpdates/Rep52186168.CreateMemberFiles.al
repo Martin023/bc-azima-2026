@@ -19,7 +19,7 @@ report 52186168 "Create Member Files"
                 FilesTable.SetRange("File/Member No.", Members."No.");
                 if not FilesTable.Find('-') then begin
                     FilesTable.INIT;
-                    FilesTable."Entry No." := '';
+                    FilesTable."Entry No." := Members."No.";
                     FilesTable."File Type" := FilesTable."File Type"::"Member File";
                     FilesTable."File/Member No." := Members."No.";
                     FilesTable."File Name/Descrption" := Members.Name;

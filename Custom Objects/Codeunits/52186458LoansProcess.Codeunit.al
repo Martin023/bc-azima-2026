@@ -5924,6 +5924,7 @@ Codeunit 52186458 "Loans Process"
         LoanApps.SetRange("Loan No.", LoanNo);
         if LoanApps.Find('-') then begin
             repeat
+
                 LoanApps.Advice := true;
                 LoanApps."Advice Type" := LoanApps."advice type"::"Fresh Loan";
                 LoanApps."Disbursement Date" := Today;
@@ -5935,6 +5936,10 @@ Codeunit 52186458 "Loans Process"
                 LoanApps.Validate("Disbursement Date");
                 LoanApps."Posted By" := UserId;
                 LoanApps.Status := LoanApps.Status::Posted;
+                if Members.get(LoanApps."Member No.") then begin
+                    LoanApps."Employer Code" := Members."Employer Code";
+                    LoanApps."Staff No" := Members."Payroll/Staff No.";
+                end;
                 LoanApps.Modify(true);
                 Commit;
             until LoanApps.Next = 0;

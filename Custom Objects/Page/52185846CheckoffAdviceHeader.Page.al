@@ -124,7 +124,7 @@ page 52185846 "Checkoff Advice Header"
                 PromotedIsBig = true;
                 trigger OnAction()
                 begin
-                    if Rec.Processed = false then
+                    if Rec.Processed then
                         Error(Txt0001);
 
                     CheckoffAdviceHeader.reset;
@@ -140,7 +140,7 @@ page 52185846 "Checkoff Advice Header"
                     end;
 
                     //begin
-                        PeriodicActivities.MonthlyCheckoffAdviceSav(Rec)
+                    // PeriodicActivities.MonthlyCheckoffAdviceSav(Rec)
 
                     // end else
 

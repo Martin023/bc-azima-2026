@@ -44,6 +44,7 @@ table 52186080 "File Tracker"
 
             trigger OnValidate()
             begin
+                APPSET.reset;
                 APPSET.SetRange("Station Code", Rec."Move to");
                 if APPSET.Find('-') then begin
                     APPSET.TestField("Responsibility Centre");
@@ -62,7 +63,7 @@ table 52186080 "File Tracker"
                 UserStations.Reset;
                 UserStations.SetRange("User Id", UserId);
                 if UserStations.Find('-') then
-                    if UserStations."Station Code" = "Move to" then Error('You cannot move a file to your Section');
+                    if UserStations."Station Code" = "Move to" then Message('Kindly note you are forwarding to your own department');
 
             end;
         }
@@ -220,7 +221,7 @@ table 52186080 "File Tracker"
         }
         field(34; "File Type"; Enum "File Types")
         {
-          
+
             trigger OnValidate()
             begin
                 "File Number" := '';
