@@ -546,6 +546,10 @@ table 52185689 "General Set-Up"
         {
             Caption = 'USSD Code';
         }
+        field(50027; "Guarantor SMS Charge"; Text[250])
+        {
+            TableRelation = "Transaction Types".Code WHERE(Type = FILTER("SMS Charge"));
+        }
     }
 
     keys

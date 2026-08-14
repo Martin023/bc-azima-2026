@@ -249,6 +249,11 @@ page 52186182 "General Setup"
                     ApplicationArea = Basic;
                     Caption = 'Global SMS Charges';
                 }
+                field("Guarantor SMS Charge"; rec."Guarantor SMS Charge")
+                {
+                    ApplicationArea = Basic;
+                    Caption = 'Guarantor SMS Charges';
+                }
                 field("Days for Checkoff"; rec."Days for Checkoff")
                 {
                     ApplicationArea = Basic;
