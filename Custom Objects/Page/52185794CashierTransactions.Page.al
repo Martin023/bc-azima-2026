@@ -1306,7 +1306,7 @@ page 52185794 "Cashier Transactions"
                                   Type = CONST("Cheque Deposit");
                     Visible = DiscCH;
                 }
-                action("Stop Cheque")
+                action("Stop/Cancel Cheque")
                 {
                     ApplicationArea = Basic;
                     Image = VoidCheck;
@@ -1390,7 +1390,7 @@ page 52185794 "Cashier Transactions"
             // if BalBroughtForwardAmt <> 0 then
             //     Error('End of Day has not been performed for the previous business day.');
         end;
-        
+
         if Trans.Get(Rec.No) then begin
             BankLedger.Reset;
             BankLedger.SetRange(BankLedger."Document No.", Trans.No);
@@ -1617,7 +1617,7 @@ page 52185794 "Cashier Transactions"
         BankCodeVisible: Boolean;
 
         NormalChequeVisible: Boolean;
-        BalBroughtForwardAmt : Decimal;
+        BalBroughtForwardAmt: Decimal;
 
     // TransLien: Boolean;
 
