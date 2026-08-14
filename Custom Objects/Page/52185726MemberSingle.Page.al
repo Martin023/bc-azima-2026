@@ -947,6 +947,32 @@ page 52185726 "Member Single"
                 RunObject = Page "Dividend Instructions - Member";
                 RunPageLink = "Member No." = FIELD("No.");
             }
+            separator(Action1300)
+            {
+            }
+            action("Create Account")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Create Account';
+                Image = NewCustomer;
+                Promoted = true;
+                PromotedCategory = Process;
+                ToolTip = 'Create one or two accounts for this member';
+                Enabled = not HideAccount;
+
+                trigger OnAction()
+                var
+                    CreateAccountsReport: Report CreateAccountsProducts;
+                    MemberRec: Record Members;
+                begin
+                    // Validate member exists
+                    if not MemberRec.Get(Rec."No.") then
+                        Error('Member %1 not found', Rec."No.");
+
+                    CreateAccountsReport.SetMemberFilter(Rec."No.");
+                    CreateAccountsReport.RunModal();
+                end;
+            }
             separator(Action70)
             {
             }

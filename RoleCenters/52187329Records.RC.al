@@ -225,8 +225,61 @@ page 52187329 "Records"
                         RunObject = Page "Rejected Group App List";
                     }
                 }
+                group("Dependancies Application")
+                {
+                    group("On Going Dependancy Applications")
+                    {
+                        action("Open Dependancies Applications")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            RunObject = page "Dependancies Applications List";//open
+                            RunPageView = where(Status = const(Open));
 
+                        }
+                        action("Pending Dependancies Applications")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            RunObject = page "Pending Dependancies Apps";//<>open <>created
+                            RunPageView = where(Status = const(Pending));
 
+                        }
+                        action("Deffered Dependancies Applications")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            RunObject = page "Pending Dependancies Apps";
+                            RunPageView = where(Status = const(Deffered));
+
+                        }
+                        action("Approved Dependancies Applications")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            RunObject = page "Pending Dependancies Apps";
+                            RunPageView = where(Status = const(Approved));
+
+                        }
+                        action("Archived Dependancies Applications")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            RunObject = page "Pending Dependancies Apps";
+                            RunPageView = where(Status = const(Archived));
+                        }
+                    }
+                    group("Completed Dependancy Applications")
+                    {
+                        action("Created Dependancies Applications")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            RunObject = page "Created Dependancies Apps";//Approved Created
+                        }
+                        action("Rejected Dependancies Applications")
+                        {
+                            ApplicationArea = Basic, Suite;
+                            RunObject = page "Pending Dependancies Apps";//<>open <>created
+                            RunPageView = where(Status = const(Rejected));
+
+                        }
+                    }
+                }
             }
 
             group("Completed Applications")
@@ -1226,65 +1279,6 @@ page 52187329 "Records"
                         RunObject = page "Member Single List";
                         RunPageView = where("Marked For Edits" = const(true));
                     }
-                }
-
-                group("Dependancies Application")
-                {
-                    group("On Going Dependancy Applications")
-                    {
-                        action("Open Dependancies Applications")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            RunObject = page "Dependancies Applications List";//open
-                            RunPageView = where(Status = const(Open));
-
-                        }
-                        action("Pending Dependancies Applications")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            RunObject = page "Pending Dependancies Apps";//<>open <>created
-                            RunPageView = where(Status = const(Pending));
-
-                        }
-                        action("Deffered Dependancies Applications")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            RunObject = page "Pending Dependancies Apps";
-                            RunPageView = where(Status = const(Deffered));
-
-                        }
-                        action("Approved Dependancies Applications")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            RunObject = page "Pending Dependancies Apps";
-                            RunPageView = where(Status = const(Approved));
-
-                        }
-                        action("Archived Dependancies Applications")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            RunObject = page "Pending Dependancies Apps";
-                            RunPageView = where(Status = const(Archived));
-                        }
-                    }
-                    group("Completed Dependancy Applications")
-                    {
-                        action("Created Dependancies Applications")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            RunObject = page "Created Dependancies Apps";//Approved Created
-                        }
-                        action("Rejected Dependancies Applications")
-                        {
-                            ApplicationArea = Basic, Suite;
-                            RunObject = page "Pending Dependancies Apps";//<>open <>created
-                            RunPageView = where(Status = const(Rejected));
-
-                        }
-                    }
-
-
-
                 }
                 group("Member Withdrawal Notice")
                 {
