@@ -5416,8 +5416,10 @@ codeunit 52186507 "Members Portal Integration"
                 theLeaveApplication.Validate(Reliever);
 
                 if theLeaveApplication.Insert(true) then begin
-                    // VarVariant := theLeaveApplication;
-                    // CustomApprovals.OnSendDocForApproval(VarVariant);
+                    Commit();
+                    VarVariant := theLeaveApplication;
+                    if CustomApprovals.CheckApprovalsWorkFlowEnabled(VarVariant) then
+                        CustomApprovals.OnSendDocForApproval(VarVariant);
 
                     Datum.Add('application_no', theLeaveApplication."Application Code");
 
